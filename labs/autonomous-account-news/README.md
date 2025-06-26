@@ -224,10 +224,11 @@ In this lab, you will build an autonomous news assistant agent that:
   > Always use Agent author authentication for autonomous agents. This option allows tools to run without requiring user interaction.
 
   10. Under **Inputs**, click **Add input** and select **Filter Query**.
+  11. Select Custom Value and set `Amount gt 300000 and isClosed eq false`.
 
-  11. Click **Save** to finalize the tool configuration.
+  12. Click **Save** to finalize the tool configuration.
 
-  12. To test your tool is correctly configured, you can type `Get opportunities` in the test canvas. Your agent should retrieve high-value opportunities based on the configured threshold.
+  13. To test your tool is correctly configured, you can type `Get opportunities` in the test canvas. Your agent should retrieve high-value opportunities based on the configured threshold.
    ![alt text](images/test-get-opptys.png)
 
   ---
