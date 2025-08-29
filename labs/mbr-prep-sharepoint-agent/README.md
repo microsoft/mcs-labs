@@ -226,7 +226,7 @@ Create, configure, test, and deploy a conversational MBR agent that leverages Sh
 
 #### Create the agent in Copilot Studio
 
-1. Open a new browser tab and navigate to [copilotstudio.microsoft.com](copilotstudio.microsoft.com). Select **Create**
+1. Open a new browser tab and navigate to [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com). Select **Create**
 
 ![Select Create](./assets/create-agent.jpeg)
 
