@@ -141,20 +141,20 @@ Build the infrastructure for automated document processing including custom AI i
 
 1. Open <https://copilotstudio.microsoft.com> and navigate to **Solutions**
 
-1. Create a new solution or select an existing one for this lab
+2. Create a new solution or select an existing one for this lab
 
-1. Select **New › More › Connection reference**
+3. Select **New › More › Connection reference**
 
 > [!TIP]
 > Connection references provide a standardized way to manage connections across solution components and enable easier deployment across environments.
 
-1. Create a connection reference for SharePoint:
+4. Create a connection reference for SharePoint:
 
    - **Display name**: `SharePoint Connection Reference`
    - **Connector**: Select **SharePoint**
    - **Connection**: Create new or select existing SharePoint connection
 
-1. Repeat for Dataverse:
+5. Repeat for Dataverse:
    - **Display name**: `Dataverse Connection Reference`
    - **Connector**: Select **Microsoft Dataverse**
    - **Connection**: Create new or select existing Dataverse connection
@@ -166,14 +166,14 @@ Build the infrastructure for automated document processing including custom AI i
 
 1. In Copilot Studio, navigate to **Tools**
 
-1. Select **New tool › Custom connector**
+2. Select **New tool › Custom connector**
 
-1. Choose **Import from OpenAPI file**
+3. Choose **Import from OpenAPI file**
 
-1. Configure the connector name:
+4. Configure the connector name:
     - **Connector name**: `Mistral Document AI Connector`
 
-1. **Upload** the OpenAPI definition file with the provided content into **Import an OpenAPI file** (save the content below as `mistral-document-ai-swagger-v2.json` or download
+5. **Upload** the OpenAPI definition file with the provided content into **Import an OpenAPI file** (save the content below as `mistral-document-ai-swagger-v2.json` or download
   from [mistral-document-ai-swagger-v2.json](resources/mistral-document-ai-swagger-v2.json)):
 
     ```json
@@ -474,50 +474,50 @@ Build the infrastructure for automated document processing including custom AI i
 > [!TIP]
 > The swagger.json file describes the Mistral Document API endpoint, so that it can be consumed by our preprocessing workflow later on.
 
-1. **Continue**
+6. **Continue**
 
-1. In **1. General** replace the **Host** with the host url provided in the lab resources page.
+7. In **1. General** replace the **Host** with the host url provided in the lab resources page.
 
-1. Click on **✓ Create Connector** to save the connector.
+8. Click on **✓ Create Connector** to save the connector.
 
 #### Part 3: Test the Custom Connector
 
 1. Navigate to the **Test** tab and select **New connection**
 
-1. Enter the API key (provided on the lab resources page):
+2. Enter the API key (provided on the lab resources page):
 
     - **Authorization**: `[API_KEY_FROM_LAB_RESOURCES]`
 
-1. **Create connection** and verify it shows as connected
+3. **Create connection** and verify it shows as connected
 
 > [!TIP]
 > If you loose the window with your connector open, navigate back in your browser and click again on the **Edit** icon ✏️ next to the connector.
 > Then navigate to **5. Test** again.
 
-1. In the **Test** tab, select the **analyzeDocument** operation
+4. In the **Test** tab, select the **analyzeDocument** operation
 
-1. Switch to **Raw Body** and use the following sample request body for testing:
+5. Switch to **Raw Body** and use the following sample request body for testing:
 
-```json
-{
-  "model": "mistral-document-ai-2505",
-  "document": {
-    "type": "document_url",
-    "document_url": "data:application/pdf;base64,JVBERi0xLjMNCiXi48/TDQoNCjEgMCBvYmoNCjw8DQovVHlwZSAvQ2F0YWxvZw0KL091dGxpbmVzIDIgMCBSDQovUGFnZXMgMyAwIFINCj4+DQplbmRvYmoNCg0KMiAwIG9iag0KPDwNCi9UeXBlIC9PdXRsaW5lcw0KL0NvdW50IDANCj4+DQplbmRvYmoNCg0KMyAwIG9iag0KPDwNCi9UeXBlIC9QYWdlcw0KL0NvdW50IDINCi9LaWRzIFsgNCAwIFIgNiAwIFIgXSANCj4+DQplbmRvYmoNCg0KNCAwIG9iag0KPDwNCi9UeXBlIC9QYWdlDQovUGFyZW50IDMgMCBSDQovUmVzb3VyY2VzIDw8DQovRm9udCA8PA0KL0YxIDkgMCBSIA0KPj4NCi9Qcm9jU2V0IDggMCBSDQo+Pg0KL01lZGlhQm94IFswIDAgNjEyLjAwMDAgNzkyLjAwMDBdDQovQ29udGVudHMgNSAwIFINCj4+DQplbmRvYmoNCg0KNSAwIG9iag0KPDwgL0xlbmd0aCAxMDc0ID4+DQpzdHJlYW0NCjIgSg0KQlQNCjAgMCAwIHJnDQovRjEgMDAyNyBUZg0KNTcuMzc1MCA3MjIuMjgwMCBUZA0KKCBBIFNpbXBsZSBQREYgRmlsZSApIFRqDQpFVA0KQlQNCi9GMSAwMDEwIFRmDQo2OS4yNTAwIDY4OC42MDgwIFRkDQooIFRoaXMgaXMgYSBzbWFsbCBkZW1vbnN0cmF0aW9uIC5wZGYgZmlsZSAtICkgVGoNCkVUDQpCVA0KL0YxIDAwMTAgVGYNCjY5LjI1MDAgNjY0LjcwNDAgVGQNCigganVzdCBmb3IgdXNlIGluIHRoZSBWaXJ0dWFsIE1lY2hhbmljcyB0dXRvcmlhbHMuIE1vcmUgdGV4dC4gQW5kIG1vcmUgKSBUag0KRVQNCkJUDQovRjEgMDAxMCBUZg0KNjkuMjUwMCA2NTIuNzUyMCBUZA0KKCB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiApIFRqDQpFVA0KQlQNCi9GMSAwMDEwIFRmDQo2OS4yNTAwIDYyOC44NDgwIFRkDQooIEFuZCBtb3JlIHRleHQuIEFuZCBtb3JlIHRleHQuIEFuZCBtb3JlIHRleHQuIEFuZCBtb3JlIHRleHQuIEFuZCBtb3JlICkgVGoNCkVUDQpCVA0KL0YxIDAwMTAgVGYNCjY5LjI1MDAgNjE2Ljg5NjAgVGQNCiggdGV4dC4gQW5kIG1vcmUgdGV4dC4gQm9yaW5nLCB6enp6ei4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kICkgVGoNCkVUDQpCVA0KL0YxIDAwMTAgVGYNCjY5LjI1MDAgNjA0Ljk0NDAgVGQNCiggbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiApIFRqDQpFVA0KQlQNCi9GMSAwMDEwIFRmDQo2OS4yNTAwIDU5Mi45OTIwIFRkDQooIEFuZCBtb3JlIHRleHQuIEFuZCBtb3JlIHRleHQuICkgVGoNCkVUDQpCVA0KL0YxIDAwMTAgVGYNCjY5LjI1MDAgNTY5LjA4ODAgVGQNCiggQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgKSBUag0KRVQNCkJUDQovRjEgMDAxMCBUZg0KNjkuMjUwMCA1NTcuMTM2MCBUZA0KKCB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBFdmVuIG1vcmUuIENvbnRpbnVlZCBvbiBwYWdlIDIgLi4uKSBUag0KRVQNCmVuZHN0cmVhbQ0KZW5kb2JqDQoNCjYgMCBvYmoNCjw8DQovVHlwZSAvUGFnZQ0KL1BhcmVudCAzIDAgUg0KL1Jlc291cmNlcyA8PA0KL0ZvbnQgPDwNCi9GMSA5IDAgUiANCj4+DQovUHJvY1NldCA4IDAgUg0KPj4NCi9NZWRpYUJveCBbMCAwIDYxMi4wMDAwIDc5Mi4wMDAwXQ0KL0NvbnRlbnRzIDcgMCBSDQo+Pg0KZW5kb2JqDQoNCjcgMCBvYmoNCjw8IC9MZW5ndGggNjc2ID4+DQpzdHJlYW0NCjIgSg0KQlQNCjAgMCAwIHJnDQovRjEgMDAyNyBUZg0KNTcuMzc1MCA3MjIuMjgwMCBUZA0KKCBTaW1wbGUgUERGIEZpbGUgMiApIFRqDQpFVA0KQlQNCi9GMSAwMDEwIFRmDQo2OS4yNTAwIDY4OC42MDgwIFRkDQooIC4uLmNvbnRpbnVlZCBmcm9tIHBhZ2UgMS4gWWV0IG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gKSBUag0KRVQNCkJUDQovRjEgMDAxMCBUZg0KNjkuMjUwMCA2NzYuNjU2MCBUZA0KKCBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSApIFRqDQpFVA0KQlQNCi9GMSAwMDEwIFRmDQo2OS4yNTAwIDY2NC43MDQwIFRkDQooIHRleHQuIE9oLCBob3cgYm9yaW5nIHR5cGluZyB0aGlzIHN0dWZmLiBCdXQgbm90IGFzIGJvcmluZyBhcyB3YXRjaGluZyApIFRqDQpFVA0KQlQNCi9GMSAwMDEwIFRmDQo2OS4yNTAwIDY1Mi43NTIwIFRkDQooIHBhaW50IGRyeS4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gKSBUag0KRVQNCkJUDQovRjEgMDAxMCBUZg0KNjkuMjUwMCA2NDAuODAwMCBUZA0KKCBCb3JpbmcuICBNb3JlLCBhIGxpdHRsZSBtb3JlIHRleHQuIFRoZSBlbmQsIGFuZCBqdXN0IGFzIHdlbGwuICkgVGoNCkVUDQplbmRzdHJlYW0NCmVuZG9iag0KDQo4IDAgb2JqDQpbL1BERiAvVGV4dF0NCmVuZG9iag0KDQo5IDAgb2JqDQo8PA0KL1R5cGUgL0ZvbnQNCi9TdWJ0eXBlIC9UeXBlMQ0KL05hbWUgL0YxDQovQmFzZUZvbnQgL0hlbHZldGljYQ0KL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcNCj4+DQplbmRvYmoNCg0KMTAgMCBvYmoNCjw8DQovQ3JlYXRvciAoUmF2ZSBcKGh0dHA6Ly93d3cubmV2cm9uYS5jb20vcmF2ZVwpKQ0KL1Byb2R1Y2VyIChOZXZyb25hIERlc2lnbnMpDQovQ3JlYXRpb25EYXRlIChEOjIwMDYwMzAxMDcyODI2KQ0KPj4NCmVuZG9iag0KDQp4cmVmDQowIDExDQowMDAwMDAwMDAwIDY1NTM1IGYNCjAwMDAwMDAwMTkgMDAwMDAgbg0KMDAwMDAwMDA5MyAwMDAwMCBuDQowMDAwMDAwMTQ3IDAwMDAwIG4NCjAwMDAwMDAyMjIgMDAwMDAgbg0KMDAwMDAwMDM5MCAwMDAwMCBuDQowMDAwMDAxNTIyIDAwMDAwIG4NCjAwMDAwMDE2OTAgMDAwMDAgbg0KMDAwMDAwMjQyMyAwMDAwMCBuDQowMDAwMDAyNDU2IDAwMDAwIG4NCjAwMDAwMDI1NzQgMDAwMDAgbg0KDQp0cmFpbGVyDQo8PA0KL1NpemUgMTENCi9Sb290IDEgMCBSDQovSW5mbyAxMCAwIFINCj4+DQoNCnN0YXJ0eHJlZg0KMjcxNA0KJSVFT0YNCg=="
-  },
-  "include_image_base64": true
-}
-```
+    ```json
+    {
+    "model": "mistral-document-ai-2505",
+    "document": {
+        "type": "document_url",
+        "document_url": "data:application/pdf;base64,JVBERi0xLjMNCiXi48/TDQoNCjEgMCBvYmoNCjw8DQovVHlwZSAvQ2F0YWxvZw0KL091dGxpbmVzIDIgMCBSDQovUGFnZXMgMyAwIFINCj4+DQplbmRvYmoNCg0KMiAwIG9iag0KPDwNCi9UeXBlIC9PdXRsaW5lcw0KL0NvdW50IDANCj4+DQplbmRvYmoNCg0KMyAwIG9iag0KPDwNCi9UeXBlIC9QYWdlcw0KL0NvdW50IDINCi9LaWRzIFsgNCAwIFIgNiAwIFIgXSANCj4+DQplbmRvYmoNCg0KNCAwIG9iag0KPDwNCi9UeXBlIC9QYWdlDQovUGFyZW50IDMgMCBSDQovUmVzb3VyY2VzIDw8DQovRm9udCA8PA0KL0YxIDkgMCBSIA0KPj4NCi9Qcm9jU2V0IDggMCBSDQo+Pg0KL01lZGlhQm94IFswIDAgNjEyLjAwMDAgNzkyLjAwMDBdDQovQ29udGVudHMgNSAwIFINCj4+DQplbmRvYmoNCg0KNSAwIG9iag0KPDwgL0xlbmd0aCAxMDc0ID4+DQpzdHJlYW0NCjIgSg0KQlQNCjAgMCAwIHJnDQovRjEgMDAyNyBUZg0KNTcuMzc1MCA3MjIuMjgwMCBUZA0KKCBBIFNpbXBsZSBQREYgRmlsZSApIFRqDQpFVA0KQlQNCi9GMSAwMDEwIFRmDQo2OS4yNTAwIDY4OC42MDgwIFRkDQooIFRoaXMgaXMgYSBzbWFsbCBkZW1vbnN0cmF0aW9uIC5wZGYgZmlsZSAtICkgVGoNCkVUDQpCVA0KL0YxIDAwMTAgVGYNCjY5LjI1MDAgNjY0LjcwNDAgVGQNCigganVzdCBmb3IgdXNlIGluIHRoZSBWaXJ0dWFsIE1lY2hhbmljcyB0dXRvcmlhbHMuIE1vcmUgdGV4dC4gQW5kIG1vcmUgKSBUag0KRVQNCkJUDQovRjEgMDAxMCBUZg0KNjkuMjUwMCA2NTIuNzUyMCBUZA0KKCB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiApIFRqDQpFVA0KQlQNCi9GMSAwMDEwIFRmDQo2OS4yNTAwIDYyOC44NDgwIFRkDQooIEFuZCBtb3JlIHRleHQuIEFuZCBtb3JlIHRleHQuIEFuZCBtb3JlIHRleHQuIEFuZCBtb3JlIHRleHQuIEFuZCBtb3JlICkgVGoNCkVUDQpCVA0KL0YxIDAwMTAgVGYNCjY5LjI1MDAgNjE2Ljg5NjAgVGQNCiggdGV4dC4gQW5kIG1vcmUgdGV4dC4gQm9yaW5nLCB6enp6ei4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kICkgVGoNCkVUDQpCVA0KL0YxIDAwMTAgVGYNCjY5LjI1MDAgNjA0Ljk0NDAgVGQNCiggbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiApIFRqDQpFVA0KQlQNCi9GMSAwMDEwIFRmDQo2OS4yNTAwIDU5Mi45OTIwIFRkDQooIEFuZCBtb3JlIHRleHQuIEFuZCBtb3JlIHRleHQuICkgVGoNCkVUDQpCVA0KL0YxIDAwMTAgVGYNCjY5LjI1MDAgNTY5LjA4ODAgVGQNCiggQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgKSBUag0KRVQNCkJUDQovRjEgMDAxMCBUZg0KNjkuMjUwMCA1NTcuMTM2MCBUZA0KKCB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBFdmVuIG1vcmUuIENvbnRpbnVlZCBvbiBwYWdlIDIgLi4uKSBUag0KRVQNCmVuZHN0cmVhbQ0KZW5kb2JqDQoNCjYgMCBvYmoNCjw8DQovVHlwZSAvUGFnZQ0KL1BhcmVudCAzIDAgUg0KL1Jlc291cmNlcyA8PA0KL0ZvbnQgPDwNCi9GMSA5IDAgUiANCj4+DQovUHJvY1NldCA4IDAgUg0KPj4NCi9NZWRpYUJveCBbMCAwIDYxMi4wMDAwIDc5Mi4wMDAwXQ0KL0NvbnRlbnRzIDcgMCBSDQo+Pg0KZW5kb2JqDQoNCjcgMCBvYmoNCjw8IC9MZW5ndGggNjc2ID4+DQpzdHJlYW0NCjIgSg0KQlQNCjAgMCAwIHJnDQovRjEgMDAyNyBUZg0KNTcuMzc1MCA3MjIuMjgwMCBUZA0KKCBTaW1wbGUgUERGIEZpbGUgMiApIFRqDQpFVA0KQlQNCi9GMSAwMDEwIFRmDQo2OS4yNTAwIDY4OC42MDgwIFRkDQooIC4uLmNvbnRpbnVlZCBmcm9tIHBhZ2UgMS4gWWV0IG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gKSBUag0KRVQNCkJUDQovRjEgMDAxMCBUZg0KNjkuMjUwMCA2NzYuNjU2MCBUZA0KKCBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSB0ZXh0LiBBbmQgbW9yZSApIFRqDQpFVA0KQlQNCi9GMSAwMDEwIFRmDQo2OS4yNTAwIDY2NC43MDQwIFRkDQooIHRleHQuIE9oLCBob3cgYm9yaW5nIHR5cGluZyB0aGlzIHN0dWZmLiBCdXQgbm90IGFzIGJvcmluZyBhcyB3YXRjaGluZyApIFRqDQpFVA0KQlQNCi9GMSAwMDEwIFRmDQo2OS4yNTAwIDY1Mi43NTIwIFRkDQooIHBhaW50IGRyeS4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gQW5kIG1vcmUgdGV4dC4gKSBUag0KRVQNCkJUDQovRjEgMDAxMCBUZg0KNjkuMjUwMCA2NDAuODAwMCBUZA0KKCBCb3JpbmcuICBNb3JlLCBhIGxpdHRsZSBtb3JlIHRleHQuIFRoZSBlbmQsIGFuZCBqdXN0IGFzIHdlbGwuICkgVGoNCkVUDQplbmRzdHJlYW0NCmVuZG9iag0KDQo4IDAgb2JqDQpbL1BERiAvVGV4dF0NCmVuZG9iag0KDQo5IDAgb2JqDQo8PA0KL1R5cGUgL0ZvbnQNCi9TdWJ0eXBlIC9UeXBlMQ0KL05hbWUgL0YxDQovQmFzZUZvbnQgL0hlbHZldGljYQ0KL0VuY29kaW5nIC9XaW5BbnNpRW5jb2RpbmcNCj4+DQplbmRvYmoNCg0KMTAgMCBvYmoNCjw8DQovQ3JlYXRvciAoUmF2ZSBcKGh0dHA6Ly93d3cubmV2cm9uYS5jb20vcmF2ZVwpKQ0KL1Byb2R1Y2VyIChOZXZyb25hIERlc2lnbnMpDQovQ3JlYXRpb25EYXRlIChEOjIwMDYwMzAxMDcyODI2KQ0KPj4NCmVuZG9iag0KDQp4cmVmDQowIDExDQowMDAwMDAwMDAwIDY1NTM1IGYNCjAwMDAwMDAwMTkgMDAwMDAgbg0KMDAwMDAwMDA5MyAwMDAwMCBuDQowMDAwMDAwMTQ3IDAwMDAwIG4NCjAwMDAwMDAyMjIgMDAwMDAgbg0KMDAwMDAwMDM5MCAwMDAwMCBuDQowMDAwMDAxNTIyIDAwMDAwIG4NCjAwMDAwMDE2OTAgMDAwMDAgbg0KMDAwMDAwMjQyMyAwMDAwMCBuDQowMDAwMDAyNDU2IDAwMDAwIG4NCjAwMDAwMDI1NzQgMDAwMDAgbg0KDQp0cmFpbGVyDQo8PA0KL1NpemUgMTENCi9Sb290IDEgMCBSDQovSW5mbyAxMCAwIFINCj4+DQoNCnN0YXJ0eHJlZg0KMjcxNA0KJSVFT0YNCg=="
+    },
+    "include_image_base64": true
+    }
+    ```
 
-1. Click **Test operation** to send the request
+6. Click **Test operation** to send the request
 
-1. Verify you receive a successful response (200 status code) with:
+7. Verify you receive a successful response (200 status code) with:
 
     - **pages**: Array containing page objects with markdown content
     - **model**: Confirmation of the model used
     - **usage_info**: Processing statistics
 
-1. Click **Update connector** once testing is successful.
+8. Click **Update connector** once testing is successful.
 
 > [!IMPORTANT]
 > Testing with a real request validates that the authentication and API integration work properly before using it in the automation flow.
@@ -526,24 +526,24 @@ Build the infrastructure for automated document processing including custom AI i
 
 1. Open <https://copilotstudio.microsoft.com> and select your environment
 
-1. Navigate to **Agents** and select **New agent**
+2. Navigate to **Agents** and select **New agent**
 
-1. Configure the agent:
+3. Configure the agent:
 
     - **Name**: `Mistral Document AI Agent`
     - **Description**: `RAG Agent grounded on documents preprocessed with Mistral Document AI`
     - **Instructions**: `Answer questions truthfully based on your knowledge. Use the uploaded documents to provide accurate and contextual responses about the content within them.`
 
-1. In the knowledge section, **disable** **Web search** to ensure responses are grounded only in uploaded knowledge
+4. In the knowledge section, **disable** **Web search** to ensure responses are grounded only in uploaded knowledge
 
-1. Add the agent to your solution by selecting the **...** next to Create and select **Update advanced settings**.
+5. Add the agent to your solution by selecting the **...** next to Create and select **Update advanced settings**.
 
     - Note the **Schema Name** to a notebook for further use.
       It will have the a value like `prefix_mistralDocumentAiAgent`.
 
-1. **Create** the agent
+6. **Create** the agent
 
-1. Copy the agent ID from the URL for later use:
+7. Copy the agent ID from the URL for later use:
     - URL format: `https://copilotstudio.microsoft.com/environments/<environment-id>/bots/<bot-id>/overview`
     - Save the `<bot-id>` portion
 
@@ -551,13 +551,13 @@ Build the infrastructure for automated document processing including custom AI i
 
 1. In Copilot Studio, navigate to **Tools**
 
-1. Select **New tool › Prompt**
+2. Select **New tool › Prompt**
 
-1. Configure the prompt:
+3. Configure the prompt:
 
     - **Name**: `Create Knowledge Description`
 
-1. In the prompt instructions, paste:
+4. In the prompt instructions, paste:
 
     ````text
     You are tasked with creating a concise and informative name and description for a document based on its content.
@@ -584,32 +584,32 @@ Build the infrastructure for automated document processing including custom AI i
 > [!TIP]
 > Paste the text using `Ctrl + Shift + V`, so that line breaks will not be lost.
 
-1. Replace `[Document Content]` with an **Input** variable:
+5. Replace `[Document Content]` with an **Input** variable:
 
     - **Type**: **Text**
     - **Name**: `Document Content`
     - **Sample data**: `A Simple PDF File: This is a small demonstration .pdf file -  just for use in the AI tutorials.`
 
-1. Set **Output format** to **JSON**
+6. Set **Output format** to **JSON**
 
-1. **Test** the prompt with sample content to verify it generates proper JSON responses
+7. **Test** the prompt with sample content to verify it generates proper JSON responses
 
     ![Create Knowledge Description Prompt](resources/create_knowledge_description_prompt.png)
 
-1. **Save** the prompt
+8. **Save** the prompt
 
 #### Part 6: Build the Automated Ingestion Flow (Core Structure)
 
 1. In your solution, select **New › Automation › Cloud flow › Automated**
 
-1. Configure the flow:
+2. Configure the flow:
 
     - **Flow name**: `Document Ingestion Pipeline`
     - **Trigger**: **When a file is created or modified (properties only)** (SharePoint)
 
     ![Configure Cloud Flow](resources/configure_cloud_flow_1.png)
 
-1. Configure the trigger:
+3. Configure the trigger:
 
     - **Site Address**: Select your designated SharePoint site
     - **Library Name**: Choose the document library for uploads
@@ -618,7 +618,7 @@ Build the infrastructure for automated document processing including custom AI i
 > [!TIP]
 > Consult the lab resources page or consult your instructure, which site and folder to use.
 
-1. Add **Initialize variable** action:
+4. Add **Initialize variable** action:
 
     - **Name**: `varCopilotId`
     - **Type**: **String**
@@ -629,14 +629,14 @@ Build the infrastructure for automated document processing including custom AI i
 > or on **+ New Step** below the last step. Then search for the action and click on it. After it 
 > has been added, you can configure it.
 
-1. Add **Get file content** (SharePoint) action:
+5. Add **Get file content** (SharePoint) action:
 
     - **Site Address**: Select the same as in the trigger
     - **File Identifier**: Dynamic content **Identifier** from trigger
 
     ![Get File Content](resources/configure_cloud_flow_2.png)
 
-1. **Save** the flow
+6. **Save** the flow
 
 > [!TIP]
 > This establishes the core structure for document monitoring and content retrieval. The next use case will complete the AI processing and knowledge integration.
@@ -689,7 +689,7 @@ In this section, you'll learn how to integrate AI document processing, implement
 
 1. Open your **Document Ingestion Pipeline** flow from Use Case #1
 
-1. Add your custom connector action **Analyze document** after the **Get file content** action:
+2. Add your custom connector action **Analyze document** after the **Get file content** action:
 
    - **model**: `mistral-document-ai-2505`
    - **type**: `document_url`
@@ -702,11 +702,11 @@ In this section, you'll learn how to integrate AI document processing, implement
 > For the `document_url`, first paste the static text into the field. Then click on **Add dynamic content** > **Expression** and 
 > paste the expression. Click **OK**.
 
-1. Add **Apply to each** control:
+3. Add **Apply to each** control:
 
    - **Select an output**: Dynamic content **pages** from AI connector.
 
-1. Inside the **Apply to each**, add **Run a prompt** (AI Builder):
+4. Inside the **Apply to each**, add **Run a prompt** (AI Builder):
    - **Prompt**: Select **Create Knowledge Description**
    - **Document Content**: Dynamic content **markdown** from AI connector
 
@@ -728,7 +728,7 @@ In this section, you'll learn how to integrate AI document processing, implement
 > - Replace the `prefix_mistralDocumentAiAgent` with the schema name of the bot, that you noted earlier.
 > - If you don't see all the fields you need, click on **Show advanced options**.
 
-1. Add **Upload File or Image** (Dataverse) inside the **Apply to each**:
+2. Add **Upload File or Image** (Dataverse) inside the **Apply to each**:
    - **Table name**: **Copilot Components**
    - **Row ID**: Dynamic content **BotComponent** from previous action
    - **Column Name**: `filedata`
@@ -743,7 +743,7 @@ In this section, you'll learn how to integrate AI document processing, implement
    - **Action Name**: `PvaPublish`
    - **Row ID**: Variable **varCopilotId**
 
-1. **Save** the flow
+2. **Save** the flow
 
 > [!IMPORTANT]
 > The publish action ensures that newly added knowledge becomes immediately available to users interacting with your agent.
@@ -752,25 +752,25 @@ In this section, you'll learn how to integrate AI document processing, implement
 
 1. Upload a test PDF document to your configured SharePoint library
 
-1. Monitor the flow execution in <https://make.powerautomate.com>:
+2. Monitor the flow execution in <https://make.powerautomate.com>:
 
     - Check **Run history** for your flow
     - Verify each step completes successfully
     - Review any error messages if steps fail
 
-1. In Copilot Studio, verify the knowledge was added:
+3. In Copilot Studio, verify the knowledge was added:
 
     - Navigate to your agent
     - Check the **Knowledge** tab for new entries
     - Verify the **Status** shows as **Ready**
 
-1. Test the agent with questions about the uploaded document:
+4. Test the agent with questions about the uploaded document:
 
     - Use the **Test** panel in Copilot Studio
     - Ask specific questions about the document content
     - Verify the agent provides accurate responses based on the processed content
 
-1. Upload additional documents with different formats and content types to validate robustness
+5. Upload additional documents with different formats and content types to validate robustness
 
 > [!TIP]
 > Testing with various document types helps ensure your pipeline handles different content structures effectively.
