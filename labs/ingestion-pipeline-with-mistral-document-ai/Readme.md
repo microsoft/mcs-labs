@@ -145,8 +145,8 @@ Build the infrastructure for automated document processing including custom AI i
 
 1. Select **New › More › Connection reference**
 
-    > [!TIP]
-    > Connection references provide a standardized way to manage connections across solution components and enable easier deployment across environments.
+> [!TIP]
+> Connection references provide a standardized way to manage connections across solution components and enable easier deployment across environments.
 
 1. Create a connection reference for SharePoint:
 
@@ -471,8 +471,8 @@ Build the infrastructure for automated document processing including custom AI i
     }
     ```
 
-    > [!TIP]
-    > The swagger.json file describes the Mistral Document API endpoint, so that it can be consumed by our preprocessing workflow later on.
+> [!TIP]
+> The swagger.json file describes the Mistral Document API endpoint, so that it can be consumed by our preprocessing workflow later on.
 
 1. **Continue**
 
@@ -490,9 +490,9 @@ Build the infrastructure for automated document processing including custom AI i
 
 1. **Create connection** and verify it shows as connected
 
-    > [!TIP]
-    > If you loose the window with your connector open, navigate back in your browser and click again on the **Edit** icon ✏️ next to the connector.
-    > Then navigate to **5. Test** again.
+> [!TIP]
+> If you loose the window with your connector open, navigate back in your browser and click again on the **Edit** icon ✏️ next to the connector.
+> Then navigate to **5. Test** again.
 
 1. In the **Test** tab, select the **analyzeDocument** operation
 
@@ -581,8 +581,8 @@ Build the infrastructure for automated document processing including custom AI i
     Ensure the name is professional and descriptive, and the description captures the essence of the document's content and utility.
     ````
 
-    > [!TIP]
-    > Paste the text using `Ctrl + Shift + V`, so that line breaks will not be lost.
+> [!TIP]
+> Paste the text using `Ctrl + Shift + V`, so that line breaks will not be lost.
 
 1. Replace `[Document Content]` with an **Input** variable:
 
@@ -615,8 +615,8 @@ Build the infrastructure for automated document processing including custom AI i
     - **Library Name**: Choose the document library for uploads
     - **Folder**: Specify the target folder (if applicable)
 
-    > [!TIP]
-    > Consult the lab resources page or consult your instructure, which site and folder to use.
+> [!TIP]
+> Consult the lab resources page or consult your instructure, which site and folder to use.
 
 1. Add **Initialize variable** action:
 
@@ -624,10 +624,10 @@ Build the infrastructure for automated document processing including custom AI i
     - **Type**: **String**
     - **Value**: Paste the bot ID you copied earlier
 
-    > [!TIP]
-    > This and some following steps, add Power Automate actions to your flow. Click on the **+** sign
-    > or on **+ New Step** below the last step. Then search for the action and click on it. After it 
-    > has been added, you can configure it.
+> [!TIP]
+> This and some following steps, add Power Automate actions to your flow. Click on the **+** sign
+> or on **+ New Step** below the last step. Then search for the action and click on it. After it 
+> has been added, you can configure it.
 
 1. Add **Get file content** (SharePoint) action:
 
@@ -698,9 +698,9 @@ In this section, you'll learn how to integrate AI document processing, implement
      - Static text: `data:application/pdf;base64,`
      - Expression: `base64(body('Get_file_content'))`
 
-   > [!TIP]
-   > For the `document_url`, first paste the static text into the field. Then click on **Add dynamic content** > **Expression** and 
-   > paste the expression. Click **OK**.
+> [!TIP]
+> For the `document_url`, first paste the static text into the field. Then click on **Add dynamic content** > **Expression** and 
+> paste the expression. Click **OK**.
 
 1. Add **Apply to each** control:
 
@@ -710,8 +710,8 @@ In this section, you'll learn how to integrate AI document processing, implement
    - **Prompt**: Select **Create Knowledge Description**
    - **Document Content**: Dynamic content **markdown** from AI connector
 
-    > [!TIP]
-    > The Apply to each loop processes each page or section of the document individually, allowing for granular knowledge creation.
+> [!TIP]
+> The Apply to each loop processes each page or section of the document individually, allowing for granular knowledge creation.
 
 #### Part 2: Create Knowledge Entries
 
@@ -724,9 +724,9 @@ In this section, you'll learn how to integrate AI document processing, implement
    - **Content**: Dynamic content **description** from prompt response
    - **parentbotid**: Expression: `concat('/bots(', variables('varCopilotId'), ')')`
 
-   > [!TIP]
-   > - Replace the `prefix_mistralDocumentAiAgent` with the schema name of the bot, that you noted earlier.
-   > - If you don't see all the fields you need, click on **Show advanced options**.
+> [!TIP]
+> - Replace the `prefix_mistralDocumentAiAgent` with the schema name of the bot, that you noted earlier.
+> - If you don't see all the fields you need, click on **Show advanced options**.
 
 1. Add **Upload File or Image** (Dataverse) inside the **Apply to each**:
    - **Table name**: **Copilot Components**
