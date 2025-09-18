@@ -1,4 +1,4 @@
-# 🤖 Microsoft Copilot Studio Labs 🧪
+# 🤖 Microsoft Copilot Studio Labs 🧪 
 
 | Title | URL | Overview |
 |-------|-----|----------|
