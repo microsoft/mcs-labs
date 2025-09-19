@@ -151,7 +151,7 @@ Create a deployment pipeline that automates solution deployment across environme
 
 > [!IMPORTANT]
 > Access the workshop agent in the same location as when you created your training user account.  You will need the workshop code and your training user's email address if you previously closed 
-the agent. Tell the agent to "Provision a test environment".  You are limited to a single test environment for the duration workshop.
+the agent. Tell the agent to "Provision a PROD environment".  You are limited to a single PROD environment for the duration workshop.
 
 #### Access Power Platform pipelines
 
