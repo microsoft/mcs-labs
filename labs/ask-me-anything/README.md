@@ -324,10 +324,10 @@ Let's start by asking for the user country at the beginning of the conversation.
 
 #### Setting an office location in Entra ID
 
-1. Start by assigning an office location to your user. Use the **Employee Office Location Request Form** to select a **country** in the list. This will update your user's Office location property in Entra ID.
+1. Start by assigning an office location to your user. Use the **Workshop Agent** to select a **country** in the list. This will update your user's Office location property in Entra ID.
 
 > [!IMPORTANT]
-> To access this form, use the provided values in the **Lab Resources** (specific per training).
+> Access the workshop agent in the same location as when you created your training user account.  You will need the workshop code and your training user's email address if you previously closed the agent. Tell the agent to "Set office location", you can repeat this process as desired.
 
 #### Getting the office location of the logged-in user at the start of the conversation
 

@@ -378,10 +378,11 @@ For each individual question, do a separate **knowledge search** using the confi
 
 #### Testing Your Complete Agent
 
-31. **Send** a test email to your ficitious user email by using the **Send Support Email** form. 
+31. **Send** a test email to your ficitious user email by using the **Workshop Agent**. 
 
 > [!IMPORTANT]
-> To access this form, use the provided values in the **Lab Resources** (specific per training).
+> Access the workshop agent in the same location as when you created your training user account.  You will need the workshop code and your training user's email address if you previously closed 
+the agent. Tell the agent to "Send a support email", you can repeat this process as desired.
 >
 > The email should contain something like this:
 >   ```

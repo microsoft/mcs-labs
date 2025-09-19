@@ -89,9 +89,9 @@ With Power Platform pipelines, this becomes an automated, governed process with 
 ## ✅ Prerequisites
 
 * Completion of the [Set yourself up for success](https://github.com/microsoft/mcs-labs/tree/main/labs/setup-for-success) lab with a solution containing environment variables and connection references.
-* Access to multiple Power Platform environments (DEV, TEST, PROD). These are provided in the lab setup.
+* Access to multiple Power Platform environments (DEV, PROD). These are provided in the lab setup.
 * Azure DevOps project with Git integration already established.
-* TEST and PROD environments must be enabled as **Managed Environments** (enforced in lab setup).
+* PROD environments must be enabled as **Managed Environments** (enforced in lab setup).
 
 ---
 
@@ -100,7 +100,7 @@ With Power Platform pipelines, this becomes an automated, governed process with 
 In this lab, you'll implement a complete ALM deployment process for Microsoft Copilot Studio using Power Platform pipelines. By the end of the lab, you will:
 
 * Create and configure Power Platform pipelines for automated deployment across environments.
-* Deploy solutions from DEV to TEST and PROD environments using managed solutions.
+* Deploy solutions from DEV to PROD environments using managed solutions.
 * Identify and complete post-deployment configuration steps for non-solution-aware settings.
 * Experience the benefits of Managed Environment governance in preventing unauthorized customizations.
 * Commit changes to source control and understand the structure of unpacked solutions.
@@ -132,7 +132,7 @@ Set up automated deployment pipelines that democratize ALM while maintaining pro
 
 In this section, you'll learn how to create Power Platform pipelines, configure deployment stages, and set up automated deployments for controlled releases.
 
-**Scenario:** You have a solution ready in DEV and need to establish an automated process to deploy it through TEST to PROD environments with minimal effort and maximum consistency.
+**Scenario:** You have a solution ready in DEV and need to establish an automated process to deploy it to a PROD environment with minimal effort and maximum consistency.
 
 ### Objective
 
@@ -142,16 +142,16 @@ Create a deployment pipeline that automates solution deployment across environme
 
 ### Step-by-step instructions
 
-#### Get a TEST and PROD environments
+#### Get a PROD environment
 
 > [!TIP]
-> If you haven't done so already, you need to request TEST and PROD environments to be created for your user. This is a one-time setup step that will allow you to create pipelines for deployment.
+> If you haven't done so already, you need to request a PROD environment to be created for your user. This is a one-time setup step that will allow you to create pipelines for deployment.
 
-1. **Start** by requesting TEST and PROD envrionments to be created for your user. Use the **Environments Request Form** to request these environments to be automatically created for you. This will then take a couple of minutes to provision and to show up.
+1. **Start** by requesting a PROD envrionment to be created for your user. Use the **Workshop Agent** to request this environment, which will be automatically created for you. This will then take a couple of minutes to provision and to show up.
 
 > [!IMPORTANT]
-> - To access this form, use the provided URL in the **Lab Resources** (specific per training).
-> - This operation will fail if you already have more than 1 environment of type *developer*, as each user is limited to 3 environments of this type (to keep things simple for the labs, the test and production environment use a developer type, and not sandbox/production). 
+> Access the workshop agent in the same location as when you created your training user account.  You will need the workshop code and your training user's email address if you previously closed 
+the agent. Tell the agent to "Provision a PROD environment".  You are limited to a single PROD environment for the duration workshop.
 
 #### Access Power Platform pipelines
 
@@ -169,34 +169,28 @@ Create a deployment pipeline that automates solution deployment across environme
 
 6. Enter a **Name** for your pipeline, e.g., `<your user name> Pipeline`.
 
-7. Set a **Description** to explain the pipeline's purpose (e.g., `Automated deployment of agents from DEV through TEST to PROD`).
+7. Set a **Description** to explain the pipeline's purpose (e.g., `Automated deployment of agents from DEV to PROD`).
 
-8. **Select** the **TEST** environment as the **Target environment**. 
+#### Set up deployment stage
+
+8. **Select** the **PROD** environment as the **Target environment**. 
 
 9. **Save** the pipeline configuration.
-
-#### Set up deployment stages
-
-10. In the command bar, select **Add stage** to create the first stage.
-
-11. **Name** it `PROD` and select the **PROD** environment you requested earlier.
-
-12. **Save**
 
 ![alt text](images/pipeline.png)
 
 #### Test your pipeline
 
-13. In the TEST card, select **Deploy here**.
+13. In the PROD card, select **Deploy here**.
 
 > [!TIP]
 > - The wizard then makes sure that each environment variable has a value set in the target environment, and that all connection references are valid. If any of these checks fail, you will be prompted to fix them before proceeding.
 
 14. **Repeat** the operation for the PROD stage.
 
-15. In Copilot Studio, **switch** to either the TEST and PROD environment.
+15. In Copilot Studio, **switch** to the PROD environment.
 
-16. **See** what the agents look like in each environment. When entering a topic, see how customizations are locked because the solution is managed.
+16. **See** what the agents look like in the PROD environment. When entering a topic, see how customizations are locked because the solution is managed.
 
 ---
 
@@ -354,7 +348,7 @@ Commit deployment artifacts to Git and understand the structure of unpacked Powe
 
 > [!NOTE]
 > **Managed Environment governance in your lab:**
-> Your TEST and PROD environments use Managed Environment governance to enforce that solutions are managed and unmanaged customizations are blocked. This ensures deployment integrity and prevents unauthorized changes outside of the pipeline process.
+> Your PROD environment uses Managed Environment governance to enforce that solutions are managed and unmanaged customizations are blocked. This ensures deployment integrity and prevents unauthorized changes outside of the pipeline process.
 
 ---
 

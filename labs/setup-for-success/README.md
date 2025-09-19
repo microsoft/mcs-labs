@@ -284,13 +284,13 @@ In this section, you'll learn how to create environment variables and connection
 >  * For **ServiceNow** configuration values, use the provided values in the **Lab Resources** (specific per training).
 >  * For **ServiceNow**'s `Instance` configuration, be sure to scroll down in the connection screen.
 
-#### Get a TEST and PROD environments
+#### Get a PROD environments
 
-14. In anticipation of future labs where we will deploy  customizations from `DEV` to `TEST` to `PROD`, **request** TEST and PROD envrionments to be created for your user. Use the **Environments Request Form** to request these environments to be automatically created for you. This will then take a couple of minutes to provision and to show up.
+14. In anticipation of future labs where we will deploy  customizations from `DEV` to `PROD`, **request** a PROD envrionment to be created for your user. Use the **Environments Request Form** to request these environments to be automatically created for you. This will then take a couple of minutes to provision and to show up.
 
 > [!IMPORTANT]
-> - To access this form, use the provided URL in the **Lab Resources** (specific per training).
-> - This operation will fail if you already have more than 1 environment of type *developer*, as each user is limited to 3 environments of this type (to keep things simple for the labs, the test and production environment use a developer type, and not sandbox/production). 
+> Access the workshop agent in the same location as when you created your training user account.  You will need the workshop code and your training user's email address if you previously closed 
+the agent. Tell the agent to "Provision a PROD environment".  You are limited to a single PROD environment for the duration workshop.
 
 ---
 
