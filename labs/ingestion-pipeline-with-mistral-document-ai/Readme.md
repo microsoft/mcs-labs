@@ -626,7 +626,7 @@ Build the infrastructure for automated document processing including custom AI i
 
 > [!TIP]
 > This and some following steps, add Power Automate actions to your flow. Click on the **+** sign
-> or on **+ New Step** below the last step. Then search for the action and click on it. After it 
+> or on **+ New Step** below the last step. Then search for the action and click on it. After it
 > has been added, you can configure it.
 
 5. Add **Get file content** (SharePoint) action:
@@ -643,7 +643,7 @@ Build the infrastructure for automated document processing including custom AI i
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #1!
+### 🏅 Congratulations! You've completed Use Case #1
 
 ---
 
@@ -689,20 +689,29 @@ In this section, you'll learn how to integrate AI document processing, implement
 
 1. Open your **Document Ingestion Pipeline** flow from Use Case #1
 
-2. Add your custom connector action **Analyze document** after the **Get file content** action:
+   _Note: You might need to navigate back to your solution, to find the flow._
 
-   - **model**: `mistral-document-ai-2505`
-   - **type**: `document_url`
-   - **include_image_base64**: **Yes**
-   - **document_url**:
-     - Static text: `data:application/pdf;base64,`
-     - Expression: `base64(body('Get_file_content'))`
+2. To add your custom connector action after the **Get file content**, in the dialog to add a new action, first click on **Custom**. There you will see and select the **Mistral Document AI** connector and then the **Analyze a document (PDF or image)** action.
+
+    2.1. If you are prompted to provide a connection name and api key, enter the following information. _(If you have already created a connection, this will not be shown and you can continue with 2.2.):
+
+    - **Connection Name** e.g.: `Mistral Document AI Connection`
+    - **API Key**: _Paste the API Key provided in the Lab Resources_
+
+    2.2. Enter the following information to configure the action:
+
+    - **model**: `mistral-document-ai-2505`
+    - **type**: `document_url`
+    - **include_image_base64**: **Yes**
+    - **document_url**:
+        - Static text: `data:application/pdf;base64,`
+        - Expression: `base64(body('Get_file_content'))`
 
 > [!TIP]
-> For the `document_url`, first paste the static text into the field. Then click on **Add dynamic content** > **Expression** and 
+> For the `document_url`, first paste the static text into the field. Then click on **Add dynamic content** > **Expression** and
 > paste the expression. Click **OK**.
 
-3. Add **Apply to each** control:
+3. Add a new Action at the bottom of your flow: **Apply to each**:
 
    - **Select an output**: Dynamic content **pages** from AI connector.
 
@@ -725,6 +734,7 @@ In this section, you'll learn how to integrate AI document processing, implement
    - **parentbotid**: Expression: `concat('/bots(', variables('varCopilotId'), ')')`
 
 > [!TIP]
+>
 > - Replace the `prefix_mistralDocumentAiAgent` with the schema name of the bot, that you noted earlier.
 > - If you don't see all the fields you need, click on **Show advanced options**.
 
@@ -777,7 +787,7 @@ In this section, you'll learn how to integrate AI document processing, implement
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #2!
+### 🏅 Congratulations! You've completed Use Case #2
 
 ---
 
