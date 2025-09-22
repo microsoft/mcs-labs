@@ -152,8 +152,6 @@ Commented out; screenshots need update due to CPS updates.  Last minute change t
    - Add the **Word** file you had opened in the previous use case using the **Sharepoint** button
    - Add the **Excel** file from the previous use case using the **Upload File** dialog
 
-9. Head back to **Knowledge** section to upload the Excel file
-
 ---
 
 ## 🧪 Use Case #3: Test advanced AI capabilities
