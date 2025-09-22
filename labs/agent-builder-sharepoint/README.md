@@ -88,9 +88,12 @@ Prepare the SharePoint documents that will serve as knowledge sources for your S
    - **Sales Excel file**: A spreadsheet containing sales data with columns for dates, product lines, revenue, and quarters
    - **Sales policy document**: A Word document containing sales policies, procedures, and guidelines
 
-3. Open the **Excel file** and note the data structure:
+3. **Download** the **Excel file** to a memorable location.  Open downloaded the file and note the data structure:
    - Ensure it contains sales data across multiple quarters/years
    - Verify product line categorization
+
+> [!TIP]
+>  Check the document sensitivity while the Excel file is open and ensure it's set appropriately.
 
 4. Open the **Word policy document** and review:
    - Sales procedures and guidelines
@@ -119,32 +122,35 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
 
 4. **Confirm** the suggested agent name when prompted.
 
-#### Configure knowledge sources
-
-5. Now head over to the **Configure** tab
-   - Under **Knowledge**, navigate to **Files**
-   - Add each of the 2 files you had opened in the previous use case.
-
-    ![alt text](images/knowledge-files.png)
-
+<!--
+![alt text](images/knowledge-files.png)
+Commented out; screenshots need update due to CPS updates.  Last minute change to labs required so will do at a later date
 > [!TIP]
 > If you can't see the files you just opened, an alternative approach is just to **paste** and **add** the SharePoint URL of the Sales folder.
 > 
 >    ![alt text](images/sharepoint-url-fallback.png)
+-->
 
-6. Under **capabilities**, enable:
+5. Under **capabilities**, enable:
    - **Code interpreter** (for data analysis and chart generation)
    - **Image generator** (for creating visual content)
 
 #### Finalize configuration
 
-7. Navigate to the **Configure** tab to review and refine:
+6. Navigate to the **Configure** tab to review and refine:
    - Agent name and description
    - Instructions and tone
    - Knowledge sources
    - Starter prompts
 
-8. When satisfied with the configuration, select **Create**.
+7. When satisfied with the configuration, select **Create**.
+
+#### Configure knowledge sources
+
+8. Now head over to the **Configure** tab
+   - Under **Knowledge**, press **Add**
+   - Add the **Word** file you had opened in the previous use case using the **Sharepoint** button
+   - Add the **Excel** file from the previous use case using the **Upload File** dialog
 
 ---
 
@@ -182,7 +188,7 @@ Analyze sales data for the last 2 years with a breakdown per product line and qu
 
 
 6. **Observe** how the agent:
-   - Accesses your Excel data from SharePoint
+   - Accesses your Excel data
    - Uses code interpreter to process the data
    - Generates dynamic charts and visualizations
    - Provides insights based on the analysis
