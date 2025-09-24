@@ -1,4 +1,4 @@
-# Create your own web-based AI assistant with Microsoft Copilot Studio agent builder
+# Create your own web-based AI assistant with lite experience of Copilot Studio in Microsoft 365 Copilot (formerly Copilot Studio agent builder)
 
 Create an intelligent agent in Copilot that delivers contextual, multi-part answers using instructions and data from the Web.
 
@@ -29,7 +29,7 @@ Create an intelligent agent in Copilot that delivers contextual, multi-part answ
 
 ## 🌐 Introduction
 
-In this lab, you'll create a Copilot agent in Microsoft 365 Copilot Chat with Microsoft Copilot Studio agent builder. This agent will be designed to assist users with questions about Copilot agents. The agent will act as a learning companion or teacher, grounded in official Microsoft documentation.
+In this lab, you'll create a Copilot agent in Microsoft 365 Copilot Chat with Copilot Studio Lite. This agent will be designed to assist users with questions about Copilot agents. The agent will act as a learning companion or teacher, grounded in official Microsoft documentation.
 
 ---
 
@@ -41,7 +41,7 @@ In this lab, you'll create a Copilot agent in Microsoft 365 Copilot Chat with Mi
 | **Microsoft 365 Copilot** | An enterprise AI assistant integrated into Teams and Office applications. It uses organization data the employee has access to (emails, meetings, documents) and supports enhanced capabilities and agent extensibility ($30/user/month). |
 | **Copilot Chat** | A web-based AI experience included in Microsoft 365 that leverages large language models and generative AI to answer user questions using public web data and configured agents. Unlike Microsoft 365 Copilot, it is not grounded in organizational data by default, but it be through a pay-as-you-go model (pay per use). |
 | **Copilot agent** | An agent that is available as part of the Copilot experience (Microsoft 365 Copilot or Copilot Chat, so, employee-facing). |
-| **Declarative Agent** | A simple type of Copilot agent, typically built using the Copilot Studio agent builder. Declarative agents are configured through instructions, prompts, and knowledge sources. It runs on the Copilot platform and is ideal for scoped, instructional, or informational use cases. |
+| **Declarative Agent** | A simple type of Copilot agent, typically built using Copilot Studio Lite. Declarative agents are configured through instructions, prompts, and knowledge sources. It runs on the Copilot platform and is ideal for scoped, instructional, or informational use cases. |
 | **Custom Engine Agent** | An advanced type of Copilot agent, with its own orchestration, knowledge base, and execution engine. It doesn't rely on Copilot and can even run outside Microsoft 365, offering more control and customization. |
 | **Grounding** | The process of anchoring an agent's responses to specific data sources (like websites, SharePoint sites, or files) to ensure accuracy and minimize hallucinations. |
 | **Instruction** | A short configuration that defines how your agent behaves—tone, personality, priorities, and what it should or shouldn't do in certain scenarios. |
@@ -58,7 +58,7 @@ In this lab, you'll create a Copilot agent in Microsoft 365 Copilot Chat with Mi
 * [Overview of Microsoft 365 Copilot Chat](https://learn.microsoft.com/en-us/copilot/chat)
 * [What is Microsoft 365 Copilot?](https://learn.microsoft.com/en-us/microsoft-365-copilot)
 * [Declarative Agents for Microsoft 365 Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-declarative-agent)
-* [Use the Copilot Studio Agent Builder to Build Agents](https://learn.microsoft.com/en-us/copilot-studio/agent-builder)
+* [Use Copilot Studio Lite to Build Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/copilot-studio-lite-build)
 
 ---
 
@@ -94,7 +94,7 @@ By the end of the lab, your agent will be able to:
 
 ## 🤖 Use Case #1: Create and configure your Copilot agent
 
-Use Copilot Studio agent builder to create a declarative agent and obtain a shareable link.
+Use Copilot Studio Lite to create a declarative agent and obtain a shareable link.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
@@ -177,7 +177,7 @@ Upcoming features in Microsoft Copilot Studio roadmap
 7. Notice that you can explore existing **templates**. But for this lab, when prompted to **describe the agent**, reply with:
 
 ```
-I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use the Copilot Studio agent builder. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
+I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Copilot Studio Lite. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
 ```
 
 > [!TIP]  
