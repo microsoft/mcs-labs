@@ -1,0 +1,292 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Mistral Document Analysis API",
+    "version": "2.0",
+    "description": "Analyze PDF or image documents and extract structured markdown and metadata for each page."
+  },
+  "host": "your-azure-foundry-service-provided-in-lab-resources.services.ai.azure.com",
+  "basePath": "/providers/mistral/azure/ocr",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "securityDefinitions": {
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "in": "header",
+      "name": "Authorization",
+      "description": "Bearer token authentication. Use format: Bearer {token}"
+    }
+  },
+  "security": [
+    {
+      "ApiKeyAuth": []
+    }
+  ],
+  "paths": {
+    "/": {
+      "post": {
+        "summary": "Analyze a document (PDF or image)",
+        "description": "Analyze either a PDF document or an image document. Use the appropriate request schema based on your document type.",
+        "operationId": "analyzeDocument",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AnalyzeDocumentRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Analysis result with markdown and metadata for each page",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeDocumentResponse"
+            }
+          },
+          "400": {
+            "description": "Invalid request or unsupported file type",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "401": {
+            "description": "Unauthorized. Invalid or missing API key",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-visibility": "important"
+      }
+    }
+  },
+  "definitions": {
+    "AnalyzeDocumentRequest": {
+      "type": "object",
+      "required": ["model", "document", "include_image_base64"],
+      "properties": {
+        "model": {
+          "type": "string",
+          "example": "mistral-document-ai-2505",
+          "description": "The model to use for analysis"
+        },
+        "document": {
+          "$ref": "#/definitions/Document"
+        },
+        "include_image_base64": {
+          "type": "boolean",
+          "description": "Whether to include base64-encoded images in the response",
+          "example": true
+        }
+      }
+    },
+    "Document": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["document_url", "image_url"],
+          "description": "The type of document being analyzed. Use 'document_url' for PDFs and 'image_url' for images."
+        },
+        "document_url": {
+          "type": "string",
+          "description": "Data URL containing base64-encoded PDF content. Required when type='document_url'. Format: data:application/pdf;base64,{base64_content}",
+          "example": "data:application/pdf;base64,JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZw..."
+        },
+        "image_url": {
+          "type": "string",
+          "description": "Data URL containing base64-encoded image content. Required when type='image_url'. Supports JPEG, PNG, GIF, BMP formats. Format: data:image/{format};base64,{base64_content}",
+          "example": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAoHBwkHBgoJCAkLCwoMDxkQDw4ODx..."
+        }
+      }
+    },
+    "AnalyzePdfDocumentRequest": {
+      "type": "object",
+      "required": ["model", "document", "include_image_base64"],
+      "properties": {
+        "model": {
+          "type": "string",
+          "example": "mistral-document-ai-2505",
+          "description": "The model to use for analysis"
+        },
+        "document": {
+          "$ref": "#/definitions/PdfDocument"
+        },
+        "include_image_base64": {
+          "type": "boolean",
+          "description": "Whether to include base64-encoded images in the response",
+          "example": true
+        }
+      }
+    },
+    "AnalyzeImageDocumentRequest": {
+      "type": "object",
+      "required": ["model", "document", "include_image_base64"],
+      "properties": {
+        "model": {
+          "type": "string",
+          "example": "mistral-document-ai-2505",
+          "description": "The model to use for analysis"
+        },
+        "document": {
+          "$ref": "#/definitions/ImageDocument"
+        },
+        "include_image_base64": {
+          "type": "boolean",
+          "description": "Whether to include base64-encoded images in the response",
+          "example": true
+        }
+      }
+    },
+    "PdfDocument": {
+      "type": "object",
+      "required": ["type", "document_url"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["document_url"],
+          "description": "Must be 'document_url' for PDF documents"
+        },
+        "document_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Data URL containing base64-encoded PDF content. Format: data:application/pdf;base64,{base64_content}",
+          "example": "data:application/pdf;base64,JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PAovVHlwZSAvQ2F0YWxvZw..."
+        }
+      }
+    },
+    "ImageDocument": {
+      "type": "object",
+      "required": ["type", "image_url"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": ["image_url"],
+          "description": "Must be 'image_url' for image documents"
+        },
+        "image_url": {
+          "type": "string",
+          "format": "uri",
+          "description": "Data URL containing base64-encoded image content. Supports JPEG, PNG, GIF, BMP formats. Format: data:image/{format};base64,{base64_content}",
+          "example": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAoHBwkHBgoJCAkLCwoMDxkQDw4ODx..."
+        }
+      }
+    },
+    "AnalyzeDocumentResponse": {
+      "type": "object",
+      "properties": {
+        "pages": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Page"
+          },
+          "description": "Array of analyzed pages"
+        },
+        "model": {
+          "type": "string",
+          "description": "The model used for analysis",
+          "example": "mistral-document-ai-2505"
+        },
+        "document_annotation": {
+          "type": "object",
+          "description": "Document-level annotations (if any). This field may be null or omitted."
+        },
+        "usage_info": {
+          "$ref": "#/definitions/UsageInfo"
+        },
+        "content_filter_results": {
+          "type": "object",
+          "description": "Content filter results (if any). This field may be null or omitted."
+        }
+      }
+    },
+    "Page": {
+      "type": "object",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "description": "Page index (zero-based)",
+          "example": 0
+        },
+        "images": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of base64-encoded images (if requested)"
+        },
+        "markdown": {
+          "type": "string",
+          "description": "Markdown content for the page",
+          "example": "# Page Title\n\nPage content in markdown format..."
+        },
+        "dimensions": {
+          "$ref": "#/definitions/PageDimensions"
+        }
+      }
+    },
+    "PageDimensions": {
+      "type": "object",
+      "properties": {
+        "dpi": {
+          "type": "integer",
+          "description": "Dots per inch",
+          "example": 200
+        },
+        "height": {
+          "type": "integer",
+          "description": "Page height in pixels",
+          "example": 2339
+        },
+        "width": {
+          "type": "integer",
+          "description": "Page width in pixels",
+          "example": 1654
+        }
+      }
+    },
+    "UsageInfo": {
+      "type": "object",
+      "properties": {
+        "pages_processed": {
+          "type": "integer",
+          "description": "Number of pages processed",
+          "example": 5
+        },
+        "doc_size_bytes": {
+          "type": "integer",
+          "description": "Document size in bytes",
+          "example": 206313
+        },
+        "pages_processed_annotation": {
+          "type": "integer",
+          "description": "Number of pages processed for annotation",
+          "example": 0
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "type": "string",
+          "description": "Error message"
+        },
+        "code": {
+          "type": "integer",
+          "description": "Error code"
+        }
+      }
+    }
+  }
+}
