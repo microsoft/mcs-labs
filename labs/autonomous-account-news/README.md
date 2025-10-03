@@ -468,7 +468,7 @@ In this lab, you will build an autonomous news assistant agent that:
   ```
   Follow these steps to analyze opportunities:
 
-  1. Fetch opportunities using <Get Opportunity records> from Salesforce 
+  1. Fetch opportunities using <Get Opportunity records> from Sales App 
   2. Execute a separate knowledge search for news on each opportunity
   3. Log all search results for each opportunity using <Log Search Results>. Invoke <Log Search Results> only once.
   4. Determine relevance of search results for opportunities using deep reasoning
