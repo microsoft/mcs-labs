@@ -1,6 +1,6 @@
 # Build an Autonomous Account News Assistant Agent
 
-Empower sellers with timely insights – Build an autonomous Copilot Studio agent that periodically scans Salesforce for high-value opportunities, finds related news, and sends curated reports.
+Empower sellers with timely insights – Build an autonomous Copilot Studio agent that periodically scans your Sales App for high-value opportunities, finds related news, and sends curated reports.
 
 ---
 
@@ -8,7 +8,7 @@ Empower sellers with timely insights – Build an autonomous Copilot Studio agen
 
 | Level | Persona | Duration   | Purpose                                                                                                                                                                                                                                                                                                    |
 | ----- | ------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 200   | Maker   | 60 minutes | After completing this lab, participants will have created an autonomous agent that periodically scans for large opportunities in Salesforce, searches for relevant news, uses Copilot Studio's Deep Reasoning feature to assess relevance, and emails structured HTML reports using Microsoft 365 Outlook. |
+| 200   | Maker   | 60 minutes | After completing this lab, participants will have created an autonomous agent that periodically scans for large opportunities in a Sales App, searches for relevant news, uses Copilot Studio's Deep Reasoning feature to assess relevance, and emails structured HTML reports using Microsoft 365 Outlook. |
 
 ---
 
@@ -30,7 +30,7 @@ Empower sellers with timely insights – Build an autonomous Copilot Studio agen
 
 Imagine an agent that works *autonomously* behind the scenes:
 
-- Scans your Salesforce pipeline regularly
+- Scans your sales pipeline regularly
 - Finds relevant industry news
 - Matches articles to open opportunities
 - Sends tailored, branded reports by email
@@ -45,7 +45,7 @@ Copilot Studio now supports two types of agents: **conversational agents**, whic
 
 In this lab, you'll build an autonomous agent that:
 
-- Scans Salesforce for high-value opportunities
+- Scans a Sales App for high-value opportunities
 - Searches for related news across the web
 - Uses Copilot Studio's Deep Reasoning feature (powered by OpenAI o1) to determine relevance
 - Sends curated HTML summaries via Outlook email
@@ -71,14 +71,14 @@ This proactive approach helps account teams stay ahead of client developments an
 - [Generative Orchestration](https://learn.microsoft.com/en-us/microsoft-copilot-studio/faqs-generative-orchestration)
 - [Authoring Triggers](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-triggers-about)
 - [Using Tools in Custom Agents](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-plugin-actions)
-- [Salesforce Connector](https://learn.microsoft.com/en-us/connectors/salesforce/)
+- [Dataverse Connector](https://learn.microsoft.com/en-us/connectors/commondataserviceforapps/)
 
 ---
 
 ## ✅ Prerequisites
 
 - Access to Microsoft Copilot Studio
-- Salesforce instance with active opportunities
+- Sales App instance with active opportunities
 - Access to Microsoft 365 email connector (Outlook)
 - Familiarity with Power Automate for recurring triggers
 - Basic understanding of Generative Orchestration in Copilot Studio
@@ -90,7 +90,7 @@ This proactive approach helps account teams stay ahead of client developments an
 In this lab, you will build an autonomous news assistant agent that:
 
 - Is triggered periodically
-- Scans Salesforce for large (high-value) opportunities
+- Scans sales data for large (high-value) opportunities
 - Searches for related industry news articles
 - Uses deep reasoning in Copilot Studio (powered by Azure OpenAI o1) to assess relevance
 - Sends a structured HTML report via Microsoft 365 Outlook
@@ -100,7 +100,7 @@ In this lab, you will build an autonomous news assistant agent that:
 | Step | Use Case                                                                                                                                  | Value added                                                                    | Effort |
 | ---- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------ |
 | 1    | [Create and Configure an Autonomous Agent](#-use-case-1-create-and-configure-an-autonomous-agent)                                         | Establishes the agent framework and automated trigger for continuous operation | 10 min |
-| 2    | [Add a Tool to Fetch High-Value Opportunities from Salesforce](#-use-case-2-add-a-tool-to-fetch-high-value-opportunities-from-salesforce) | Enables data-driven insights by sourcing relevant CRM records                  | 10 min |
+| 2    | [Add a Tool to Fetch High-Value Opportunities from the Sales App](#-use-case-2-add-a-tool-to-fetch-high-value-opportunities-from-the-sales-app) | Enables data-driven insights by sourcing relevant CRM records                  | 10 min |
 | 3    | [Analyze Opportunities Using Web Search and Deep Reasoning](#-use-case-3-analyze-opportunities-using-web-search-and-deep-reasoning)       | Enriches understanding of each opportunity using external signals              | 10 min |
 | 4    | [Store Content Using Topics and Global Variables](#-use-case-4-store-content-using-topics-and-global-variables)                           | Maintains precise context for downstream steps and output accuracy             | 15 min |
 | 5    | [Create and Send a Structured HTML Report via Email](#-use-case-5-create-and-send-a-structured-html-report-via-email)                     | Delivers clear, actionable summaries to stakeholders                           | 15 min |
@@ -171,7 +171,7 @@ In this lab, you will build an autonomous news assistant agent that:
 
   ---
 
-  ### 🧱 Use Case #2: Add a Tool to Fetch High-Value Opportunities from Salesforce
+  ### 🧱 Use Case #2: Add a Tool to Fetch High-Value Opportunities from the Sales App
 
   Configure a Salesforce connector tool that retrieves large, open opportunities using a pre-defined filter query.
 
