@@ -608,8 +608,8 @@ Automate the final step: format relevant news into a clean, branded email for ac
       Microsoft has launched new AI infrastructure powered by NVIDIA H100 GPUs, PCIe Gen5, and DDR5 memory. The company has expanded Azure OpenAI Service to new global regions and shared enterprise use cases such as KPMG and Mercedes-Benz. The platform emphasizes responsible AI and performance at scale.
     </div>
     <div class=""relevance"">📌 This may indicate increased cloud infrastructure investment, creating opportunities for high-performance compute and service engagement.</div>
-    <div class=""section-title"">🔗 Salesforce Opportunity:</div>
-    <a class=""link"" href=""https://microsoft-1f4-dev-ed.develop.lightning.force.com/lightning/r/Opportunity/006WS00000BGOjFYAX/view"" target=""_blank"">View opportunity in Salesforce</a>
+    <div class=""section-title"">🔗 Sales App Opportunity:</div>
+    <a class=""link"" href=""https://workshop-hub.crm.dynamics.com/main.aspx?appid=aafe6e6a-6ca0-f011-b41c-000d3a5c95b7&pagetype=entityrecord&etn=cat_opportunity&id=5fae6fb3-6c43-4512-9af9-399953dff686"" target=""_blank"">View opportunity in Sales App</a>
     <div class=""section-title"">📰 News Articles:</div>
     <a class=""link"" href=""https://azure.microsoft.com/en-us/blog/scale-generative-ai-with-new-azure-ai-infrastructure-advancements-and-availability/"" target=""_blank"">Microsoft Blog: Scale Generative AI</a>
     <a class=""link"" href=""https://azure.microsoft.com/en-us/solutions/high-performance-computing/ai-infrastructure"" target=""_blank"">Azure AI Infrastructure Overview</a>
@@ -622,8 +622,8 @@ Automate the final step: format relevant news into a clean, branded email for ac
       Google is expanding its software-defined global network to improve reliability, speed, and AI-era scalability. The backbone promises up to 40% better performance than public internet and spans multiple continents, supporting services like Gmail, YouTube, and Google Cloud.
     </div>
     <div class=""relevance"">📌 Suggests infrastructure modernization that may align with proposed solutions in the opportunity.</div>
-    <div class=""section-title"">🔗 Salesforce Opportunity:</div>
-    <a class=""link"" href=""https://your-custom-domain.lightning.force.com/lightning/r/Opportunity/006WS00000BGSlCYAX/view"" target=""_blank"">View opportunity in Salesforce</a>
+    <div class=""section-title"">🔗 Sales App Opportunity:</div>
+    <a class=""link"" href=""https://workshop-hub.crm.dynamics.com/main.aspx?appid=aafe6e6a-6ca0-f011-b41c-000d3a5c95b7&pagetype=entityrecord&etn=cat_opportunity&id=deb06637-fe9b-4eeb-80de-1ad1f6ad2624"" target=""_blank"">View opportunity in Sales App</a>
     <div class=""section-title"">📰 News Articles:</div>
     <a class=""link"" href=""https://cloud.google.com/blog/products/networking/google-global-network-technology-deep-dive"" target=""_blank"">Google Blog: Global Network Deep Dive</a>
     <a class=""link"" href=""https://research.google/teams/global-networking/"" target=""_blank"">Google Research: Global Networking</a>
@@ -634,40 +634,34 @@ Automate the final step: format relevant news into a clean, branded email for ac
 </html>"
 ```
 
-8. Replace **your-custom-domain** in the HTML content with a custom domain pointing at your Salesforce org.
-
-  > [!IMPORTANT]
-  > Use the **Salesforce custom domain** value provided in the **Lab Resources** (specific per training).
-
   > [!IMPORTANT]  
   > The HTML template functions as a **one-shot example** that guides the agent's generation process. When the agent is asked to produce an HTML report, it will refer to this template to determine how to format the content, structure the sections, and organize links.
   >
-  > The agent will also extract useful signals from the template — for instance, it may use the Salesforce domain structure (e.g., `your-custom-domain.lightning.force.com`) to dynamically generate opportunity links for each retrieved opportunity
+  > The agent will also extract useful signals from the template — for instance, it may use the Sales App domain structure (e.g., `workshop-hub.crm.dynamics.com`) to dynamically generate opportunity links for each retrieved opportunity
+  
+7. Save the **Conversation start** topic
 
-9. Save the **Conversation start** topic
+8. Now that your agent has a preloaded HTML template, configure an Outlook email tool to deliver the report.
 
+9. Navigate to **Tools** in the top-level menu.
 
-10. Now that your agent has a preloaded HTML template, configure an Outlook email tool to deliver the report.
+10. Click **+ Add a tool**.
 
-11. Navigate to **Tools** in the top-level menu.
+11. In the search bar, type `Send an email`.
 
-12. Click **+ Add a tool**.
+12. Select **Send an email (V2)** from Office 365 Outlook.
 
-13. In the search bar, type `Outlook`.
+13. Choose an existing Outlook connection or add a new one.
 
-14. Select **Send an email (V2)** from Microsoft 365 Outlook.
+14. Click **Add and configure**.
 
-15. Choose an existing Outlook connection or add a new one.
-
-16. Click **Add and configure**.
-
-17. Configure the following settings:
+15. Configure the following settings:
    - **Name**: `Send a summary report`
    - **Description**: `Sends a summary report on account news.`
 
-18. Click **Additional details**.
+16. Click **Additional details**.
 
-19. Under **Authentication**, select **Maker-provided credentials**.
+17. Under **Authentication**, select **Maker-provided credentials**.
 
   > [!IMPORTANT]  
   > Always use Maker-provided credentials for autonomous agents. This allows tools to run without user interaction.
@@ -705,7 +699,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 27. Navigate to the **Triggers** section and click **Test trigger** on the `Analyze Opportunities` trigger.
 
 28. Once the agent finishes executing, verify:
-   - It retrieved opportunities from Salesforce
+   - It retrieved opportunities from the Sales App
    - It matched them to relevant news using Deep Reasoning
    - It populated the `Global.reportTemplate` with relevant content
    - It invoked the **Send a summary report** tool and sent an email to your test address
