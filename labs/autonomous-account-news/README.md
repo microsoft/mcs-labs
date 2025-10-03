@@ -119,7 +119,7 @@ In this lab, you will build an autonomous news assistant agent that:
 
   **Summary of tasks**
 
-  In this section, you'll create a new autonomous agent and configure a recurrence trigger that instructs the agent to periodically analyze Salesforce opportunities.
+  In this section, you'll create a new autonomous agent and configure a recurrence trigger that instructs the agent to periodically analyze Sales App opportunities.
 
   **Scenario:** Your account team wants to proactively identify external signals (such as news) that may affect large deals. Instead of manually launching the agent, you'll configure a recurring trigger that runs automatically.
 
@@ -173,19 +173,19 @@ In this lab, you will build an autonomous news assistant agent that:
 
   ### 🧱 Use Case #2: Add a Tool to Fetch High-Value Opportunities from the Sales App
 
-  Configure a Salesforce connector tool that retrieves large, open opportunities using a pre-defined filter query.
+  Configure a Dataverse connector tool that retrieves large, open opportunities using a pre-defined filter query.
 
   | Use case                                                     | Value added                                                                       | Estimated effort |
   | ------------------------------------------------------------ | --------------------------------------------------------------------------------- | ---------------- |
-  | Add a Tool to Fetch High-Value Opportunities from Salesforce | Enables the agent to access relevant CRM data for further reasoning and reporting | 10 minutes       |
+  | Add a Tool to Fetch High-Value Opportunities from your Sales App | Enables the agent to access relevant CRM data for further reasoning and reporting | 10 minutes       |
 
   **Summary of tasks**
 
-  In this section, you'll add a prebuilt Salesforce connector to your agent and configure it to retrieve opportunity records over a certain deal size that are still open.
+  In this section, you'll add a prebuilt Dataverse connector to your agent and configure it to retrieve opportunity records over a certain deal size that are still open.
 
-  **Scenario:** You want your autonomous agent to process Salesforce opportunities that are still active and exceed a revenue threshold. The agent will use this data to generate downstream insights and summaries.
+  **Scenario:** You want your autonomous agent to process Sales App opportunities that are still active and exceed a revenue threshold. The agent will use this data to generate downstream insights and summaries.
 
-  **Objective** Set up a Salesforce tool that can be invoked by the Orchestrator to pull high-value, open opportunities based on business-defined filters.
+  **Objective** Set up a Dataverse tool that can be invoked by the Orchestrator to pull high-value, open opportunities based on business-defined filters.
 
   #### Step-by-step instructions
 
@@ -193,12 +193,12 @@ In this lab, you will build an autonomous news assistant agent that:
 
   2. Select **+ Add a tool**.
 
-  3. Search and select `Get Opportunity records from Salesforce`.
+  3. Search and select `List rows from selected environment`.
 
-  4. Choose an existing Salesforce connection or add a new one.
+  4. Choose an existing Dataverse connection or add a new one ().
 
   > [!IMPORTANT]  
-  > Create the connection using a Salesforce user with a license and permission to access Opportunity records.
+  > Create the connection using OAuth and sign in with your workshop credentials. Your user requires permission to access Opportunity records, which is provided as part of the workshop.
 
   5. Select **Add and configure**.
 
@@ -216,21 +216,26 @@ In this lab, you will build an autonomous news assistant agent that:
   > [!IMPORTANT]  
   > Always use Maker-provided credentials for autonomous agents. This option allows tools to run without requiring user interaction.
 
-  9. Under **Inputs**, click **Add input** and select **Filter Query**.
+  9. Under **Inputs**, change **Environments** to the following:
+      - **Fill using**: `Custom value`
+      - **Value**: `Workshop Hub`
+  
+     Change **Table name** to:
+      - **Fill using**: `Custom value`
+      - **Value**: `Opportunities`
+  
+     Click **Add input** and select **Filter rows**.
      - **Fill using**: `Set a custom value`.
-     - **Value**:
+     - **Value**: 
 
         ```
-        Amount gt 300000 and IsClosed eq false
+        cat_amount gt 300000 and cat_isclosed eq false
         ```
 
   10. Click **Save** to finalize the tool configuration.
 
   12. To test your tool is correctly configured, you can type `Get opportunities` in the test canvas. Your agent should retrieve high-value opportunities based on the configured threshold.
    ![alt text](images/test-get-opptys.png)
-
- > [!IMPORTANT]  
-  > If you are getting an error messagen like `The connector 'Salesforce' returned an HTTP error with code 401`, **create a new connection** on the Tool, and re-use the same credentials provided in Lab Resources. This error indicates that the connection is not valid or has expired. **Select** the new connection in the dropdown, **Save** and **Test** again.
 
   ---
 
