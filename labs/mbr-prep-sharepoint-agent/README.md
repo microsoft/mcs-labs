@@ -2,8 +2,6 @@
 
 This guide provides step-by-step instructions for creating an MBR (Monthly Business Review) Agent, which is designed to streamline the preparation process for MBRs. By following the guide, users will learn how to query resources and obtain quick answers, ultimately enhancing efficiency and organization for business reviews. It's a valuable tool for anyone looking to optimize their workflow and ensure they are well-prepared for important business discussions. 
 
----
-
 ## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |

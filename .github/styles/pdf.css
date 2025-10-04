@@ -1,0 +1,261 @@
+/* PDF Styling for Lab Documentation */
+
+/* Page setup */
+@page {
+  margin: 1in;
+  size: letter;
+}
+
+/* Body and typography */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-size: 11pt;
+  line-height: 1.6;
+  color: #333;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+  color: #2c3e50;
+  margin-top: 24pt;
+  margin-bottom: 12pt;
+  page-break-after: avoid;
+  font-weight: 600;
+}
+
+h1 {
+  font-size: 24pt;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 8pt;
+  margin-bottom: 20pt;
+}
+
+h2 {
+  font-size: 18pt;
+  border-bottom: 2px solid #bdc3c7;
+  padding-bottom: 4pt;
+  margin-bottom: 16pt;
+}
+
+h3 {
+  font-size: 14pt;
+  color: #34495e;
+}
+
+h4 {
+  font-size: 12pt;
+  color: #34495e;
+}
+
+/* Paragraphs */
+p {
+  margin: 0 0 12pt 0;
+  text-align: justify;
+}
+
+/* Lists */
+ul, ol {
+  margin: 12pt 0;
+  padding-left: 24pt;
+}
+
+li {
+  margin: 6pt 0;
+}
+
+/* Code blocks and inline code */
+code {
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 9pt;
+  background-color: #f8f9fa;
+  padding: 2pt 4pt;
+  border-radius: 3pt;
+  border: 1px solid #e9ecef;
+}
+
+pre {
+  background-color: #f8f9fa;
+  border: 1px solid #e9ecef;
+  border-radius: 6pt;
+  padding: 12pt;
+  margin: 12pt 0;
+  overflow-x: auto;
+  page-break-inside: avoid;
+}
+
+pre code {
+  background: none;
+  border: none;
+  padding: 0;
+  font-size: 9pt;
+}
+
+/* Tables */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 12pt 0;
+  page-break-inside: avoid;
+}
+
+th, td {
+  border: 1px solid #dee2e6;
+  padding: 8pt 12pt;
+  text-align: left;
+}
+
+th {
+  background-color: #f8f9fa;
+  font-weight: 600;
+  color: #495057;
+}
+
+tr:nth-child(even) {
+  background-color: #f8f9fa;
+}
+
+/* Images */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+  margin: 16pt auto;
+  border: 1px solid #dee2e6;
+  border-radius: 4pt;
+  page-break-inside: avoid;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 4px solid #3498db;
+  margin: 12pt 0;
+  padding: 8pt 16pt;
+  background-color: #f8f9fa;
+  font-style: italic;
+  page-break-inside: avoid;
+}
+
+/* Links */
+a {
+  color: #3498db;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Print URLs after links */
+a[href]:after {
+  content: " (" attr(href) ")";
+  font-size: 9pt;
+  color: #666;
+}
+
+/* Don't print URLs for relative links or anchors */
+a[href^="#"]:after,
+a[href^="./"]:after,
+a[href^="../"]:after {
+  content: "";
+}
+
+/* Horizontal rules */
+hr {
+  border: none;
+  border-top: 2px solid #bdc3c7;
+  margin: 24pt 0;
+  page-break-after: avoid;
+}
+
+/* Page breaks */
+.page-break {
+  page-break-before: always;
+}
+
+/* Prevent page breaks inside important elements */
+.no-break {
+  page-break-inside: avoid;
+}
+
+/* Special formatting for lab content */
+.lab-title {
+  color: #2980b9;
+  border-bottom: 3px solid #3498db;
+  padding-bottom: 8pt;
+}
+
+.step-number {
+  background-color: #3498db;
+  color: white;
+  border-radius: 50%;
+  padding: 4pt 8pt;
+  font-weight: bold;
+  margin-right: 8pt;
+}
+
+/* GitHub-style callouts/admonitions for PDF */
+.note, .warning, .tip, .info {
+  padding: 12pt;
+  margin: 16pt 0;
+  border-radius: 4pt;
+  page-break-inside: avoid;
+  font-style: normal;
+}
+
+/* Handle blockquote callouts */
+blockquote .note, blockquote .warning, blockquote .tip, blockquote .info {
+  border-left: none;
+  margin: 0;
+  padding: 8pt;
+}
+
+blockquote:has(.note) {
+  background-color: #dbeafe;
+  border-left: 4pt solid #3b82f6;
+}
+
+blockquote:has(.tip) {
+  background-color: #dcfce7;
+  border-left: 4pt solid #22c55e;
+}
+
+blockquote:has(.warning) {
+  background-color: #fef3c7;
+  border-left: 4pt solid #f59e0b;
+}
+
+.note {
+  background-color: #dbeafe;
+  border-left: 4pt solid #3b82f6;
+  color: #1e40af;
+}
+
+.warning {
+  background-color: #fef3c7;
+  border-left: 4pt solid #f59e0b;
+  color: #92400e;
+}
+
+.tip {
+  background-color: #dcfce7;
+  border-left: 4pt solid #22c55e;
+  color: #166534;
+}
+
+.info {
+  background-color: #f0f9ff;
+  border-left: 4pt solid #0ea5e9;
+  color: #0c4a6e;
+}
+
+/* Footer with page numbers */
+@page {
+  @bottom-center {
+    content: "Page " counter(page) " of " counter(pages);
+    font-size: 9pt;
+    color: #666;
+  }
+}

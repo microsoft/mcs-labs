@@ -1,0 +1,411 @@
+# =============================================================================
+# MICROSOFT COPILOT STUDIO LABS - DOCUMENT GENERATION WORKFLOW
+# =============================================================================
+# This workflow converts lab markdown files to HTML and PDF formats with:
+# - Professional styling and layout
+# - Working PDF bookmarks and table of contents
+# - Clean internal link handling
+# - Consistent branding and navigation
+# =============================================================================
+
+name: 📚 Generate Lab Documentation (HTML & PDF)
+
+# =============================================================================
+# WORKFLOW TRIGGERS
+# =============================================================================
+on:
+  # Trigger on changes to lab content or styling
+  push:
+    branches:
+      - main
+    paths:
+      - "labs/*/*.md"           # Lab markdown content
+      - "labs/*/images/**"      # Lab images and assets
+      - ".github/styles/**"     # CSS styling files
+      - ".github/workflows/generate-documentation.yml"  # This workflow file
+  
+  # Allow manual execution from GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      debug:
+        description: 'Enable debug output'
+        required: false
+        default: false
+        type: boolean
+
+# =============================================================================
+# WORKFLOW JOBS
+# =============================================================================
+jobs:
+  generate-documentation:
+    name: 🔨 Generate Lab Documents
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    
+    steps:
+      # =================================================================
+      # STEP 1: REPOSITORY SETUP
+      # =================================================================
+      - name: 📂 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Full history for better git operations
+
+      # =================================================================
+      # STEP 2: INSTALL DOCUMENT CONVERSION TOOLS
+      # =================================================================
+      - name: 📄 Setup Pandoc (Markdown to HTML Converter)
+        uses: pandoc/actions/setup@v1.1.1
+        with:
+          version: 3.1.3
+
+      - name: 🔧 Setup Node.js and PDF Generation Tools
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+          
+      - name: 📄 Install Puppeteer for Reliable PDF Generation
+        run: |
+          echo "🔧 Installing Puppeteer for stable HTML to PDF conversion..."
+          
+          # Install Puppeteer locally for PDF generation
+          npm install puppeteer
+          echo "✅ Puppeteer installed successfully"
+          
+          # Install emoji and international fonts for better PDF rendering
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends fonts-noto-color-emoji fonts-noto-sans fonts-noto-serif || echo "⚠️ Warning: Could not install some fonts"
+          echo "✅ Font installation completed"
+
+          # Verify tool versions
+          echo "🔍 Verifying installations:"
+          pandoc --version | head -2
+          node --version
+          npm list -g puppeteer --depth=0 || echo "Puppeteer version check skipped"
+        timeout-minutes: 8
+
+      # =================================================================
+      # STEP 3: MARKDOWN TO HTML CONVERSION
+      # =================================================================
+      # Process each lab's README.md file and convert to styled HTML
+      # with proper navigation, clean headers, and web optimization
+      # =================================================================
+      - name: 🌐 Convert Lab Markdown to HTML
+        run: |
+          echo "🌐 Starting HTML conversion for all lab directories..."
+          
+          # Process each lab directory containing a README.md file
+          for lab_dir in labs/*/; do
+            if [ -d "$lab_dir" ] && [ -f "${lab_dir}README.md" ]; then
+              lab_name=$(basename "$lab_dir")
+              echo "📝 Processing lab: $lab_name"
+              
+              # Enter lab directory to ensure relative image paths work correctly
+              cd "$lab_dir"
+              
+              # ---------------------------------------------------------
+              # MARKDOWN PREPROCESSING
+              # Prepare markdown for conversion with enhanced features
+              # ---------------------------------------------------------
+              echo "  🔄 Preprocessing markdown content..."
+              cp "README.md" "${lab_name}_processed.md"
+              
+              # Convert GitHub-style callouts to styled HTML divs
+              # These will be styled by our CSS for better visual impact
+              sed -i 's/> \[!NOTE\]/> <div class="note">**Note:** /g' "${lab_name}_processed.md"
+              sed -i 's/> \[!TIP\]/> <div class="tip">**Tip:** /g' "${lab_name}_processed.md"
+              sed -i 's/> \[!IMPORTANT\]/> <div class="warning">**Important:** /g' "${lab_name}_processed.md"
+              sed -i 's/> \[!WARNING\]/> <div class="warning">**Warning:** /g' "${lab_name}_processed.md"
+              sed -i 's/> \[!CAUTION\]/> <div class="warning">**Caution:** /g' "${lab_name}_processed.md"
+              
+              # Close callout div tags (assumes single-line callouts)
+              sed -i 's/\(> <div class="[^"]*">.*\)$/\1<\/div>/g' "${lab_name}_processed.md"
+              
+              # ---------------------------------------------------------
+              # HEADER NORMALIZATION FOR CONSISTENT NAVIGATION
+              # Remove emojis from headers BEFORE Pandoc processing to 
+              # ensure consistent TOC links and anchor IDs
+              # ---------------------------------------------------------
+              echo "  🧹 Cleaning headers for consistent navigation..."
+              sed -i 's/^## [^a-zA-Z0-9]*\([a-zA-Z].*\)$/## \1/g' "${lab_name}_processed.md"
+              sed -i 's/^### [^a-zA-Z0-9]*\([a-zA-Z].*\)$/### \1/g' "${lab_name}_processed.md"
+              sed -i 's/^#### [^a-zA-Z0-9]*\([a-zA-Z].*\)$/#### \1/g' "${lab_name}_processed.md"
+              
+              # Fix internal anchor links to match cleaned headers
+              # Handle emoji-containing anchor links more carefully
+              sed -i 's|(#[^a-zA-Z]*\([a-zA-Z][^)]*\))|(#\1)|g' "${lab_name}_processed.md"
+              
+              # ---------------------------------------------------------
+              # EXTRACT DOCUMENT TITLE FROM H1 HEADER
+              # Use the actual lab title instead of directory name
+              # ---------------------------------------------------------
+              lab_title=$(grep -m 1 '^# ' "${lab_name}_processed.md" | sed 's/^# //' | sed 's/[*_`]//g' | head -1)
+              if [ -z "$lab_title" ]; then
+                lab_title="$lab_name - Microsoft Copilot Studio Labs"
+              fi
+              echo "  📋 Document title: $lab_title"
+              
+              # ---------------------------------------------------------
+              # PANDOC CONVERSION: MARKDOWN → HTML
+              # Convert with professional styling and web optimization
+              # ---------------------------------------------------------
+              echo "  🔄 Converting to HTML with Pandoc..."
+              
+              # Debug: Show processed markdown file stats for troubleshooting
+              if [ -f "${lab_name}_processed.md" ]; then
+                echo "  📊 Processed markdown stats: $(wc -l < "${lab_name}_processed.md") lines, $(wc -c < "${lab_name}_processed.md") bytes"
+              else
+                echo "  ❌ ERROR: Processed markdown file not found: ${lab_name}_processed.md"
+                ls -la "${lab_name}"*
+                continue
+              fi
+              
+              # ---------------------------------------------------------
+              # YAML PARSING CONFLICT DETECTION AND HANDLING
+              # Detect files with horizontal rules that cause YAML parsing issues
+              # ---------------------------------------------------------
+              yaml_disabled_format="markdown+auto_identifiers+gfm_auto_identifiers+emoji+header_attributes"
+              
+              # Check if file has horizontal rules that aren't proper YAML front matter
+              if grep -q '^---$' "${lab_name}_processed.md"; then
+                first_line=$(head -1 "${lab_name}_processed.md")
+                if [ "$first_line" != "---" ]; then
+                  echo "  ⚠️  Detected horizontal rules in content - disabling YAML front matter parsing"
+                  yaml_disabled_format="markdown-yaml_metadata_block+auto_identifiers+gfm_auto_identifiers+emoji+header_attributes"
+                fi
+              fi
+              
+              # Try Pandoc conversion with detailed error output for debugging
+              set +e  # Temporarily disable exit on error for better error handling
+              pandoc_output=$(pandoc "${lab_name}_processed.md" \
+                -o "${lab_name}.html" \
+                --standalone \
+                --self-contained \
+                --css="../../.github/styles/html.css" \
+                --html-q-tags \
+                --section-divs \
+                --id-prefix="" \
+                --metadata title="$lab_title" \
+                --metadata lang="en" \
+                -f "$yaml_disabled_format" \
+                -t html5 2>&1)
+              
+              pandoc_exit_code=$?
+              set -e  # Re-enable exit on error
+              
+              if [ $pandoc_exit_code -eq 0 ] && [ -f "${lab_name}.html" ]; then
+                echo "    ✅ HTML conversion successful"
+                
+                # ---------------------------------------------------------
+                # HTML POST-PROCESSING AND CLEANUP
+                # Clean up generated HTML for better web display
+                # ---------------------------------------------------------
+                echo "  🧹 Post-processing HTML for web optimization..."
+                
+                # Remove Pandoc's title block header (keep <title> in <head>)
+                sed -i '/<header id="title-block-header">/,/<\/header>/d' "${lab_name}.html"
+                
+                # Clean up empty or malformed IDs that break navigation
+                sed -i 's/id=""//g' "${lab_name}.html"
+                sed -i 's/id="[[:space:]]*"//g' "${lab_name}.html"
+                
+                # Fix anchor link formatting from conversion artifacts
+                sed -i 's/href="#[[:space:]]*\([^"[:space:]]*\)[[:space:]]*"/href="#\1"/g' "${lab_name}.html"
+                
+                # Add name attributes to headers for better anchor compatibility
+                # This ensures that both id="section" and name="section" work for navigation
+                sed -i 's/<h\([1-6]\) id="\([^"]*\)"/<h\1 id="\2" name="\2"/g' "${lab_name}.html"
+                
+                # Also add standalone anchor tags before headers as backup
+                sed -i 's/<h\([1-6]\) id="\([^"]*\)" name="\([^"]*\)"/<a name="\2"><\/a><h\1 id="\2" name="\3"/g' "${lab_name}.html"
+                
+                # Make external links open in new window
+                # Add target="_blank" and rel="noopener noreferrer" to external links (http/https)
+                # This regex matches links that start with http:// or https:// and adds the attributes
+                sed -i 's/<a href="\(https\?:\/\/[^"]*\)"/<a href="\1" target="_blank" rel="noopener noreferrer"/g' "${lab_name}.html"
+                
+                # Add simple favicon for consistent branding (blue circle with L)
+                sed -i 's|</head>|  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0NSIgZmlsbD0iIzJCNTc5QSIvPgogIDx0ZXh0IHg9IjUwIiB5PSI2NSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDUiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TDwvdGV4dD4KPC9zdmc+">\n</head>|' "${lab_name}.html"
+                
+                echo "✓ Successfully converted $lab_name to HTML with favicon"
+              else
+                # Main Pandoc conversion failed - show detailed error info
+                echo "  ❌ PANDOC CONVERSION FAILED for $lab_name"
+                echo "  🔍 Exit code: $pandoc_exit_code"
+                if [ -n "$pandoc_output" ]; then
+                  echo "  📝 Pandoc error output:"
+                  echo "$pandoc_output" | head -10
+                fi
+                
+                # Try fallback conversion without CSS and complex options
+                echo "  🔄 Trying fallback HTML method for $lab_name..."
+                set +e  # Disable exit on error for fallback
+                fallback_output=$(pandoc "${lab_name}_processed.md" -o "${lab_name}.html" \
+                  --standalone \
+                  --section-divs \
+                  --toc \
+                  --id-prefix="" \
+                  --metadata title="$lab_title" \
+                  --metadata lang="en" \
+                  -f markdown+auto_identifiers+gfm_auto_identifiers+emoji \
+                  -t html5 2>&1)
+                
+                fallback_exit_code=$?
+                set -e  # Re-enable exit on error
+                
+                if [ $fallback_exit_code -eq 0 ] && [ -f "${lab_name}.html" ]; then
+                  echo "  ✅ Fallback HTML conversion succeeded for $lab_name"
+                  
+                  # Remove the title block header for fallback conversion too
+                  sed -i '/<header id="title-block-header">/,/<\/header>/d' "${lab_name}.html"
+                else
+                  echo "  ❌ FALLBACK ALSO FAILED for $lab_name"
+                  echo "  🔍 Fallback exit code: $fallback_exit_code"
+                  if [ -n "$fallback_output" ]; then
+                    echo "  📝 Fallback error output:"
+                    echo "$fallback_output" | head -5
+                  fi
+                  
+                  # Show some context about the processed file
+                  echo "  📁 File debugging info:"
+                  ls -la "${lab_name}"*
+                  echo "  🔤 First 10 lines of processed markdown:"
+                  head -10 "${lab_name}_processed.md" || echo "Could not read processed file"
+                fi
+              fi
+              
+              # Cleanup processed file
+              rm -f "${lab_name}_processed.md"
+              
+              # Change back to root directory
+              cd - > /dev/null
+            fi
+          done
+
+          echo "Generated HTML count: $(find labs -name "*.html" -type f | wc -l)"
+
+      # =================================================================
+      # STEP 4: HTML TO PDF CONVERSION
+      # =================================================================
+      # Convert styled HTML files to professional PDFs with:
+      # - Table of Contents and bookmarks for navigation
+      # - Internal links preserved for PDF navigation
+      # - Page numbering and professional layout
+      # =================================================================
+      - name: 📄 Generate Professional PDFs
+        run: |
+          echo "📄 Starting PDF generation for all labs..."
+          
+          # Process each lab directory with an HTML file
+          for lab_dir in labs/*/; do
+            if [ -d "$lab_dir" ]; then
+              lab_name=$(basename "$lab_dir")
+              html_file="${lab_dir}${lab_name}.html"
+              
+              if [ -f "$html_file" ]; then
+                echo "🔄 Processing: $lab_name"
+                
+                # Enter lab directory for local file access
+                cd "$lab_dir"
+                
+                # Debug: Check HTML file before PDF conversion
+                echo "Checking HTML structure for $lab_name:"
+                
+                # Check if title-block-header still exists (should be removed)
+                if grep -q "title-block-header" "${lab_name}.html"; then
+                  echo "⚠️  WARNING: title-block-header still found in HTML before PDF conversion"
+                  echo "Attempting to remove it now..."
+                  sed -i '/<header id="title-block-header">/,/<\/header>/d' "${lab_name}.html"
+                else
+                  echo "✓ No title-block-header found in HTML - clean for PDF conversion"
+                fi
+                
+                # Optimize HTML for PDF bookmarks - ensure headers have proper structure
+                echo "Optimizing HTML for PDF bookmarks..."
+                
+                # Ensure all headers have both id and name attributes for better PDF navigation
+                sed -i 's/<h\([1-6]\) id="\([^"]*\)"[^>]*>/<h\1 id="\2" name="\2">/g' "${lab_name}.html"
+                
+                # Add anchor targets before headers for better PDF internal linking
+                sed -i 's/<h\([1-6]\) id="\([^"]*\)" name="\([^"]*\)">/<a id="\2" name="\2"><\/a><h\1 id="\2" name="\3">/g' "${lab_name}.html"
+                
+                # Debug: Show what internal links are available for PDF navigation
+                echo "Preserving internal links for PDF navigation..."
+                internal_link_count=$(grep -o '<a href="#[^"]*"[^>]*>[^<]*</a>' "${lab_name}.html" | wc -l)
+                if [ "$internal_link_count" -gt 0 ]; then
+                  echo "Found $internal_link_count internal links to preserve in PDF:"
+                  grep -o '<a href="#[^"]*"[^>]*>[^<]*</a>' "${lab_name}.html" | head -3
+                else
+                  echo "No HTML internal links found"
+                fi
+                
+                echo "✓ Internal links preserved for PDF navigation"
+                
+                # Convert HTML to PDF using Puppeteer with internal links preserved
+                echo "Generating PDF with Puppeteer (preserving internal navigation)..."
+                lab_title=$(grep -m 1 '<title>' "${lab_name}.html" | sed 's/<[^>]*>//g' | sed 's/^[ \t]*//;s/[ \t]*$//' || echo "$lab_name")
+                
+                if node "../../.github/scripts/generate-pdf.js" "${lab_name}.html" "${lab_name}.pdf" "$lab_title"; then
+                  echo "✓ Successfully converted $lab_name HTML to PDF with internal links"
+                else
+                  echo "✗ Failed to convert $lab_name HTML to PDF with Puppeteer"
+                  echo "  This might be due to internal link navigation issues in PDF generation"
+                fi
+                
+                # Change back to root directory
+                cd - > /dev/null
+              else
+                echo "✗ HTML file not found for $lab_name"
+              fi
+            fi
+          done
+
+          echo "Generated PDF count: $(find labs -name "*.pdf" -type f | wc -l)"
+
+      # =================================================================
+      # STEP 5: COMMIT GENERATED DOCUMENTS
+      # =================================================================
+      # Save generated HTML and PDF files back to the repository
+      # for distribution and GitHub Pages deployment
+      # =================================================================
+      - name: 💾 Commit Generated Documents to Repository
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+
+          echo "Current git status:"
+          git status
+
+          echo ""
+          echo "Checking for generated files to add:"
+          echo "PDF files:"
+          find labs -name "*.pdf" -type f
+          echo "HTML files:"
+          find labs -name "*.html" -type f
+
+          # Sync with latest remote changes to avoid push conflicts during long runs
+          git pull --rebase --autostash origin main
+
+          # Add all generated files
+          git add labs/
+
+          # Check if there are changes to commit
+          if git diff --staged --quiet; then
+            echo "No generated files to commit"
+          else
+            echo "Committing generated PDF and HTML files..."
+            git commit -m "Auto-generated PDFs and HTML files for lab documentation [skip ci]"
+            echo "Pushing changes..."
+            git push
+          fi
+
+# =============================================================================
+# END OF WORKFLOW: Generate Lab Documentation (HTML & PDF)
+# =============================================================================
+# This workflow successfully:
+# ✅ Converts all lab markdown files to professional HTML with styling
+# ✅ Generates PDF versions with TOC, bookmarks, and clean content
+# ✅ Handles internal links appropriately for each format
+# ✅ Commits generated files back to repository for distribution
+# ✅ Triggers the deployment workflow for GitHub Pages
+# =============================================================================

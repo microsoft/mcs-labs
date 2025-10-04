@@ -1,0 +1,1175 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>Measure success: Track conversation outcomes and user feedback on AI responses</title>
+  <style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+
+ul.task-list[class]{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+font-size: inherit;
+width: 0.8em;
+margin: 0 0.8em 0.2em -1.6em;
+vertical-align: middle;
+}
+q { quotes: "“" "”" "‘" "’"; }
+.display.math{display: block; text-align: center; margin: 0.5rem auto;}
+</style>
+  <style type="text/css">
+
+body {
+font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+font-size: 16px;
+line-height: 1.6;
+color: #333;
+max-width: 1200px;
+margin: 0 auto;
+padding: 20px;
+background-color: #ffffff;
+}
+
+@media (max-width: 768px) {
+body {
+padding: 15px;
+font-size: 14px;
+}
+}
+
+h1, h2, h3, h4, h5, h6 {
+color: #2c3e50;
+margin-top: 2em;
+margin-bottom: 0.5em;
+font-weight: 600;
+scroll-margin-top: 20px; 
+}
+h1 {
+font-size: 2.5em;
+border-bottom: 3px solid #3498db;
+padding-bottom: 0.3em;
+margin-bottom: 1em;
+margin-top: 0;
+}
+h2 {
+font-size: 2em;
+border-bottom: 2px solid #bdc3c7;
+padding-bottom: 0.2em;
+margin-bottom: 0.8em;
+}
+h3 {
+font-size: 1.5em;
+color: #34495e;
+}
+h4 {
+font-size: 1.2em;
+color: #34495e;
+}
+h5 {
+font-size: 1.1em;
+color: #34495e;
+}
+h6 {
+font-size: 1em;
+color: #34495e;
+font-weight: 600;
+}
+
+p {
+margin: 0 0 1em 0;
+text-align: left; 
+}
+
+ul, ol {
+margin: 1em 0;
+padding-left: 2em;
+}
+li {
+margin: 0.5em 0;
+}
+
+code {
+font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+font-size: 0.9em;
+background-color: #f8f9fa;
+padding: 0.2em 0.4em;
+border-radius: 4px;
+border: 1px solid #e9ecef;
+color: #e83e8c;
+}
+pre {
+background-color: #f8f9fa;
+border: 1px solid #e9ecef;
+border-radius: 8px;
+padding: 1.5em;
+margin: 1.5em 0;
+overflow-x: auto;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+pre code {
+background: none;
+border: none;
+padding: 0;
+color: #333;
+font-size: 0.9em;
+}
+
+table {
+border-collapse: collapse;
+width: 100%;
+margin: 1.5em 0;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+border-radius: 8px;
+overflow: hidden;
+table-layout: fixed;
+}
+th, td {
+border: 1px solid #dee2e6;
+padding: 12px 16px;
+text-align: left;
+word-wrap: break-word;
+overflow-wrap: break-word;
+}
+th {
+background-color: #f8f9fa;
+font-weight: 600;
+color: #495057;
+background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+}
+tr:nth-child(even) {
+background-color: #f8f9fa;
+}
+tr:hover {
+background-color: #e3f2fd;
+transition: background-color 0.2s ease;
+}
+
+
+table thead tr th:nth-child(1):nth-last-child(4),
+table thead tr th:nth-child(1):nth-last-child(4) ~ th:nth-child(2),
+table thead tr th:nth-child(1):nth-last-child(4) ~ th:nth-child(3),
+table thead tr th:nth-child(1):nth-last-child(4) ~ th:nth-child(4),
+table tbody tr td:nth-child(1):nth-last-child(4),
+table tbody tr td:nth-child(1):nth-last-child(4) ~ td:nth-child(2),
+table tbody tr td:nth-child(1):nth-last-child(4) ~ td:nth-child(3),
+table tbody tr td:nth-child(1):nth-last-child(4) ~ td:nth-child(4) {
+width: auto;
+}
+
+table thead tr th:nth-child(1):nth-last-child(4),
+table tbody tr td:nth-child(1):nth-last-child(4) {
+width: 10% !important;
+}
+
+table thead tr th:nth-child(1):nth-last-child(4) ~ th:nth-child(2),
+table tbody tr td:nth-child(1):nth-last-child(4) ~ td:nth-child(2) {
+width: 15% !important;
+}
+
+table thead tr th:nth-child(1):nth-last-child(4) ~ th:nth-child(3),
+table tbody tr td:nth-child(1):nth-last-child(4) ~ td:nth-child(3) {
+width: 15% !important;
+}
+
+table thead tr th:nth-child(1):nth-last-child(4) ~ th:nth-child(4),
+table tbody tr td:nth-child(1):nth-last-child(4) ~ td:nth-child(4) {
+width: 60% !important;
+}
+
+table.lab-table {
+table-layout: fixed !important;
+}
+table.lab-table th:nth-child(1), table.lab-table td:nth-child(1) {
+width: 65% !important;
+}
+table.lab-table th:nth-child(2), table.lab-table td:nth-child(2) {
+width: 10% !important;
+text-align: center;
+white-space: nowrap;
+}
+table.lab-table th:nth-child(3), table.lab-table td:nth-child(3) {
+width: 25% !important;
+}
+
+@media (max-width: 768px) {
+table {
+font-size: 0.9em;
+}
+th, td {
+padding: 8px 12px;
+}
+}
+
+img {
+max-width: 100%;
+height: auto;
+display: block;
+margin: 2em auto;
+border: 1px solid #dee2e6;
+border-radius: 8px;
+box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+img:hover {
+transform: scale(1.02);
+box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+}
+
+img + em {
+display: block;
+text-align: center;
+font-style: italic;
+color: #666;
+margin-top: 0.5em;
+font-size: 0.9em;
+}
+
+blockquote {
+border-left: 4px solid #3498db;
+margin: 1.5em 0;
+padding: 1em 2em;
+background-color: #f8f9fa;
+font-style: italic;
+border-radius: 0 8px 8px 0;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+a {
+color: #3498db;
+text-decoration: none;
+transition: color 0.2s ease;
+}
+a:hover {
+color: #2980b9;
+text-decoration: underline;
+}
+a:visited {
+color: #8e44ad;
+}
+
+a[href^="http"]:after {
+content: " ↗";
+font-size: 0.8em;
+color: #666;
+}
+
+a[href^="#"]:after,
+a[href^="./"]:after,
+a[href^="../"]:after {
+content: "";
+}
+
+hr {
+border: none;
+border-top: 2px solid #bdc3c7;
+margin: 3em 0;
+opacity: 0.5;
+}
+
+.toc {
+background-color: #f8f9fa;
+border: 1px solid #e9ecef;
+border-radius: 8px;
+padding: 1.5em;
+margin: 2em 0;
+box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.toc h2 {
+margin-top: 0;
+color: #2c3e50;
+border-bottom: 2px solid #3498db;
+padding-bottom: 0.5em;
+}
+.toc ul {
+list-style-type: none;
+padding-left: 0;
+}
+.toc ul ul {
+padding-left: 1.5em;
+}
+.toc li {
+margin: 0.3em 0;
+}
+.toc a {
+text-decoration: none;
+color: #34495e;
+display: block;
+padding: 0.2em 0;
+transition: color 0.2s ease;
+}
+.toc a:hover {
+color: #3498db;
+}
+
+.lab-title {
+color: #2980b9;
+border-bottom: 3px solid #3498db;
+padding-bottom: 0.3em;
+}
+.step-number {
+background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+color: white;
+border-radius: 50%;
+padding: 0.5em 0.8em;
+font-weight: bold;
+margin-right: 0.5em;
+display: inline-block;
+min-width: 1.5em;
+text-align: center;
+box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.note, .warning, .tip, .info {
+padding: 1.5em;
+margin: 2em 0;
+border-radius: 8px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+position: relative;
+font-style: normal;
+}
+
+blockquote .note, blockquote .warning, blockquote .tip, blockquote .info {
+border-left: none;
+margin: 0;
+padding: 1em;
+border-radius: 6px;
+}
+blockquote:has(.note) {
+background-color: #dbeafe;
+border-left: 4px solid #3b82f6;
+border-radius: 0 6px 6px 0;
+}
+blockquote:has(.tip) {
+background-color: #dcfce7;
+border-left: 4px solid #22c55e;
+border-radius: 0 6px 6px 0;
+}
+blockquote:has(.warning) {
+background-color: #fef3c7;
+border-left: 4px solid #f59e0b;
+border-radius: 0 6px 6px 0;
+}
+.note {
+background-color: #dbeafe;
+border-left: 4px solid #3b82f6;
+color: #1e40af;
+}
+.warning {
+background-color: #fef3c7;
+border-left: 4px solid #f59e0b;
+color: #92400e;
+}
+.tip {
+background-color: #dcfce7;
+border-left: 4px solid #22c55e;
+color: #166534;
+}
+.info {
+background-color: #f0f9ff;
+border-left: 4px solid #0ea5e9;
+color: #0c4a6e;
+}
+
+.note::before {
+content: "ℹ️ ";
+font-size: 1.1em;
+margin-right: 0.5em;
+}
+.warning::before {
+content: "⚠️ ";
+font-size: 1.1em;
+margin-right: 0.5em;
+}
+.tip::before {
+content: "💡 ";
+font-size: 1.1em;
+margin-right: 0.5em;
+}
+
+html {
+scroll-behavior: smooth;
+}
+
+a:focus, button:focus {
+outline: 2px solid #3498db;
+outline-offset: 2px;
+}
+
+@media print {
+body {
+max-width: none;
+padding: 0;
+font-size: 12pt;
+}
+.toc {
+page-break-after: always;
+}
+img {
+page-break-inside: avoid;
+}
+h1, h2, h3, h4, h5, h6 {
+page-break-after: avoid;
+}
+pre, blockquote, table {
+page-break-inside: avoid;
+}
+}
+
+@media (prefers-color-scheme: dark) {
+body {
+background-color: #1a1a1a;
+color: #e0e0e0;
+}
+h1, h2, h3, h4, h5, h6 {
+color: #ffffff;
+}
+code {
+background-color: #2d2d2d;
+border-color: #404040;
+color: #ff6b6b;
+}
+pre {
+background-color: #2d2d2d;
+border-color: #404040;
+}
+table th {
+background-color: #2d2d2d;
+color: #e0e0e0;
+}
+table tr:nth-child(even) {
+background-color: #2d2d2d;
+}
+.toc {
+background-color: #2d2d2d;
+border-color: #404040;
+}
+.note {
+background-color: #1a2332;
+border-color: #3498db;
+}
+.warning {
+background-color: #332519;
+border-color: #e67e22;
+}
+.tip {
+background-color: #1a3326;
+border-color: #27ae60;
+}
+}</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0NSIgZmlsbD0iIzJCNTc5QSIvPgogIDx0ZXh0IHg9IjUwIiB5PSI2NSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDUiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TDwvdGV4dD4KPC9zdmc+">
+</head>
+<body>
+<section id="measure-success-track-conversation-outcomes-and-user-feedback-on-ai-responses" class="level1">
+<h1>Measure success: Track conversation outcomes and user feedback on AI
+responses</h1>
+<p>You can’t improve what you can’t measure: design your agent to track
+successful and unsuccessful outcomes while collecting user feedback on
+AI-generated responses.</p>
+<hr />
+<section id="lab-details" class="level2">
+<h2>Lab Details</h2>
+<table>
+<colgroup>
+<col style="width: 18%" />
+<col style="width: 25%" />
+<col style="width: 29%" />
+<col style="width: 25%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th>Persona</th>
+<th>Duration</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>300</td>
+<td>Advanced Maker</td>
+<td>60 minutes</td>
+<td>After completing this lab, participants will be able to design an
+agent that tracks conversation outcomes and collects user feedback on
+AI-generated responses. They will gain meaningful analytics to identify
+which knowledge sources drive the highest satisfaction (CSAT) and
+understand patterns leading to abandoned or escalated
+conversations.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</section>
+<section id="table-of-contents" class="level2">
+<h2>Table of Contents</h2>
+<ul>
+<li><a href="#why-this-matters">Why This Matters</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#core-concepts-overview">Core Concepts Overview</a></li>
+<li><a href="#documentation-and-additional-training-links">Documentation
+and Additional Training Links</a></li>
+<li><a href="#prerequisites">Prerequisites</a></li>
+<li><a href="#summary-of-targets">Summary of Targets</a></li>
+<li><a href="#use-cases-covered">Use Cases Covered</a></li>
+<li><a href="#instructions-by-use-case">Instructions by Use Case</a>
+<ul>
+<li><a href="#use-case-1-the-end-of-conversation-topic">Use Case #1: The
+end of conversation topic</a></li>
+<li><a href="#use-case-2-create-a-smooth-and-intuitive-end-of-conversation-experience">Use
+Case #2: Create a smooth and intuitive end-of-conversation
+experience</a></li>
+</ul></li>
+</ul>
+<hr />
+</section>
+<section id="why-this-matters" class="level2">
+<h2>Why This Matters</h2>
+<p><strong>Advanced Makers</strong> - Many organizations struggle with
+understanding whether their AI agents are truly helping users or
+creating frustration through abandoned conversations.</p>
+<p>Think of running a retail store without knowing if customers leave
+satisfied or empty-handed: - <strong>Without conversation
+tracking</strong>: You see usage numbers but can’t identify why users
+abandon conversations or which responses cause dissatisfaction -
+<strong>With conversation tracking</strong>: You gain actionable
+insights into user satisfaction, identify problematic knowledge sources,
+and continuously improve response quality</p>
+<p><strong>Common challenges solved by this lab:</strong> - <q>Our
+analytics show high usage but we don’t know if users are actually
+getting help</q> - <q>Users seem to abandon conversations but we don’t
+understand why</q> - <q>We can’t identify which knowledge sources need
+improvement</q> - <q>There’s no way to capture user feedback on
+AI-generated responses</q></p>
+<p><strong>The 60 minutes you invest in this lab will transform your
+agent from a black box into a data-driven tool for continuous
+improvement.</strong></p>
+<hr />
+</section>
+<section id="introduction" class="level2">
+<h2>Introduction</h2>
+<p>In today’s AI-driven customer service landscape, simply having an
+agent that responds isn’t enough. Organizations need to understand
+whether their AI assistants are genuinely solving user problems or
+creating barriers to success.</p>
+<p><strong>Real-world example:</strong> A company deployed an AI
+assistant on their website to handle product inquiries. Initially, they
+celebrated high engagement metrics—thousands of conversations daily.
+However, customer satisfaction surveys revealed declining scores, and
+support tickets actually increased. The problem? Their AI was providing
+responses that looked helpful but weren’t actually resolving user
+queries. Without proper conversation outcome tracking and feedback
+collection, they were flying blind.</p>
+<p>After implementing the strategies in this lab, they discovered that
+40% of conversations were being abandoned after the first AI response,
+and users were providing consistent feedback about specific knowledge
+gaps. This insight allowed them to refine their content strategy,
+resulting in a 65% improvement in conversation resolution rates and
+significantly higher customer satisfaction scores.</p>
+<hr />
+</section>
+<section id="core-concepts-overview" class="level2">
+<h2>Core Concepts Overview</h2>
+<table>
+<colgroup>
+<col style="width: 36%" />
+<col style="width: 64%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Concept</th>
+<th>Why it matters</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>End of Conversation Topic</strong></td>
+<td>Provides structured tracking of conversation outcomes (resolved,
+abandoned, escalated) enabling accurate measurement of agent
+effectiveness and user satisfaction patterns.</td>
+</tr>
+<tr class="even">
+<td><strong>Conversation Resolution Tracking</strong></td>
+<td>Distinguishes between implicit and explicit resolution, allowing you
+to understand not just if users got answers, but whether they were
+satisfied with those answers.</td>
+</tr>
+<tr class="odd">
+<td><strong>Adaptive Card Feedback Collection</strong></td>
+<td>Creates unobtrusive, intuitive feedback mechanisms that capture user
+sentiment without disrupting conversation flow, increasing response
+rates and data quality.</td>
+</tr>
+<tr class="even">
+<td><strong>Session-based Analytics</strong></td>
+<td>Tracks individual user requests within conversations separately,
+providing granular insights into which types of queries succeed or fail
+most often.</td>
+</tr>
+<tr class="odd">
+<td><strong>CSAT Integration</strong></td>
+<td>Connects user satisfaction scores directly to specific knowledge
+sources and response patterns, enabling data-driven content improvement
+strategies.</td>
+</tr>
+<tr class="even">
+<td><strong>Generative AI Behavior Control</strong></td>
+<td>Ensures proper outcome tracking even when using dynamic AI
+responses, maintaining visibility into user interactions across
+different conversation modes.</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</section>
+<section id="documentation-and-additional-training-links" class="level2">
+<h2>Documentation and Additional Training Links</h2>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-engagement" target="_blank" rel="noopener noreferrer">Measuring
+agent engagement</a></li>
+<li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-outcomes" target="_blank" rel="noopener noreferrer">Measuring
+agent outcomes</a></li>
+<li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-deflection" target="_blank" rel="noopener noreferrer">Deflection
+overview</a></li>
+<li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-overview" target="_blank" rel="noopener noreferrer">Key
+concepts – Analytics</a></li>
+<li><a href="https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-analytics" target="_blank" rel="noopener noreferrer">Custom
+analytics strategy</a></li>
+</ul>
+<hr />
+</section>
+<section id="prerequisites" class="level2">
+<h2>Prerequisites</h2>
+<ul>
+<li>You need to have access to Microsoft Copilot Studio using
+https://copilotstudio.microsoft.com/.</li>
+<li>You can either customize the agent from LAB-10 Create a knowledge
+agent for your public website or create a new agent with at least one
+knowledge source.</li>
+<li>Basic understanding of Copilot Studio topics and conversation flow
+design.</li>
+</ul>
+<hr />
+</section>
+<section id="summary-of-targets" class="level2">
+<h2>Summary of Targets</h2>
+<p>In this lab, you’ll transform your AI agent from a simple
+question-answering tool into a sophisticated system that tracks success
+and learns from user feedback. By the end of the lab, you will:</p>
+<ul>
+<li><strong>Configure conversation outcome tracking</strong> using the
+End of Conversation topic to measure resolved, abandoned, and escalated
+interactions.</li>
+<li><strong>Implement intuitive feedback collection</strong> through
+thumbs-up/thumbs-down reactions that don’t disrupt conversation
+flow.</li>
+<li><strong>Create detailed feedback capture</strong> for negative
+reactions, allowing users to provide specific improvement
+suggestions.</li>
+<li><strong>Design smooth conversation endings</strong> that balance
+user experience with data collection needs.</li>
+<li><strong>Understand analytics insights</strong> to identify which
+knowledge sources drive highest satisfaction and recognize abandonment
+patterns.</li>
+</ul>
+<hr />
+</section>
+<section id="use-cases-covered" class="level2">
+<h2>Use Cases Covered</h2>
+<table>
+<colgroup>
+<col style="width: 16%" />
+<col style="width: 27%" />
+<col style="width: 35%" />
+<col style="width: 21%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>Use Case</th>
+<th>Value added</th>
+<th>Effort</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td><a href="#use-case-1-the-end-of-conversation-topic">The end of
+conversation topic</a></td>
+<td>Effectively manage user interactions by understanding when and how
+to seamlessly redirect users to the end-of-conversation topic, enabling
+accurate tracking of conversation outcomes.</td>
+<td>15 min</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td><a href="#use-case-2-create-a-smooth-and-intuitive-end-of-conversation-experience">Create
+a smooth and intuitive end-of-conversation experience</a></td>
+<td>Customize the default end-of-conversation topic to create a more
+seamless, conversational-friendly experience for users.</td>
+<td>15 min</td>
+</tr>
+</tbody>
+</table>
+<hr />
+</section>
+<section id="instructions-by-use-case" class="level2">
+<h2>Instructions by Use Case</h2>
+<hr />
+</section>
+<section id="use-case-1-the-end-of-conversation-topic" class="level2">
+<h2>Use Case #1: The end of conversation topic</h2>
+<p>Every conversation should have a conclusion – Design for clear
+outcomes.</p>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 31%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Use case</th>
+<th>Value added</th>
+<th>Estimated effort</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>The end of conversation topic</td>
+<td>Effectively manage user interactions by understanding when and how
+to seamlessly redirect users to the end-of-conversation topic, enabling
+accurate tracking of conversation outcomes.</td>
+<td>15 minutes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Summary of tasks</strong></p>
+<p>In this section, you’ll learn how the end of conversation topic works
+in Copilot Studio and how to use it effectively in your conversation
+design. By structuring conversations for clear outcomes, you’ll enable
+meaningful analytics and actionable insights to improve your agent’s
+performance.</p>
+<p><strong>Scenario:</strong> You’ve built an agent with the knowledge
+to answer user questions—but is it actually delivering? If your
+analytics dashboard isn’t showing meaningful data, it’s time to track
+successful conversation outcomes and CSAT scores. You can’t improve what
+you can’t measure.</p>
+<section id="objective" class="level3">
+<h3>Objective</h3>
+<p>Configure your agent to properly track conversation outcomes by
+implementing the End of Conversation topic and understanding how it
+integrates with both classic and generative orchestration modes.</p>
+<hr />
+</section>
+<section id="step-by-step-instructions" class="level3">
+<h3>Step-by-step instructions</h3>
+<section id="understanding-the-end-of-conversation-topic" class="level4">
+<h4>Understanding the End of Conversation Topic</h4>
+<ol type="1">
+<li><p>Navigate to the Copilot Studio agent you have created for this
+lab (e.g., LAB-10, or a new one). https://aka.ms/MCSStart</p></li>
+<li><p>Go to the <strong>Topics</strong> tab, display
+<strong>All</strong>, and select <strong>End of
+conversation</strong>.</p></li>
+<li><p>Explore what the topic is doing.</p></li>
+</ol>
+<blockquote>
+<div class="tip">
+<strong>Tip:</strong>
+</div>
+<p>The end of conversation topic is meant to be triggered when the agent
+has presumably fulfilled the user’s request. This can happen either
+after providing a direct answer, such as retrieving information from
+knowledge sources, or after completing a more complex multi-turn
+interaction where the user and agent exchange multiple messages to
+complete a task.</p>
+</blockquote>
+<p>By default, when the conversation reaches this stage, the agent asks,
+<q>Did this answer your question?</q> At this point, the resolution is
+considered implicit, meaning that if the user leaves without responding,
+it is assumed that their query was resolved. However, if the user
+confirms that their question was answered, the resolution becomes
+explicit, and they are then prompted to provide a Customer Satisfaction
+Score (CSAT) to rate their experience.</p>
+</section>
+<section id="configuring-classic-orchestration-mode" class="level4">
+<h4>Configuring Classic Orchestration Mode</h4>
+<ol start="4" type="1">
+<li><p>Explore other topics in your agent. By default, are they
+redirecting to the End of conversation topic?</p>
+<p>For newly created agents, that shouldn’t be the case. The End of
+conversation topic must be redirected to explicitly from the places
+where you feel the user request has been fulfilled.</p></li>
+<li><p>Assuming the Generative mode for orchestration is
+<strong>Disabled</strong> on your agent (you can see that option either
+in the Overview tab, or in Settings, under Generative AI).</p>
+<figure>
+<img src="images/generative-ai-disabled.png" alt="Generative AI disabled" />
+<figcaption aria-hidden="true">Generative AI disabled</figcaption>
+</figure></li>
+<li><p>Let’s add a redirect to the End of conversation topic from the
+<strong>Conversational boosting</strong> topic.</p>
+<p>Go to the <strong>Topics</strong> tab, display <strong>All</strong>,
+and select <strong>Conversational boosting</strong>.</p>
+<figure>
+<img src="images/conversational-boosting.png" alt="Conversational boosting topic" />
+<figcaption aria-hidden="true">Conversational boosting
+topic</figcaption>
+</figure>
+<p>Delete the <strong>End current topic</strong> node, and instead, add
+a new node: <strong>Topic management</strong> &gt; <strong>Go to another
+topic</strong> &gt; and select <strong>End of Conversation</strong>.</p>
+<p>Save the topic.</p></li>
+</ol>
+</section>
+<section id="testing-classic-mode-behavior" class="level4">
+<h4>Testing Classic Mode Behavior</h4>
+<ol start="7" type="1">
+<li><p>Now, test your agent in the test pane by asking a question that
+will trigger the Conversational boosting topic.</p>
+<p>For example, you may ask:</p>
+<pre><code>What are the key metrics offered by the analytics dashboard?</code></pre>
+<p>Answer the different questions until you can ask a new question. In
+the happy path, notice you must answer 3 questions before you can ask a
+new question.</p>
+<figure>
+<img src="images/classic-mode-flow.png" alt="Classic mode conversation flow" />
+<figcaption aria-hidden="true">Classic mode conversation
+flow</figcaption>
+</figure></li>
+</ol>
+</section>
+<section id="configuring-generative-mode" class="level4">
+<h4>Configuring Generative Mode</h4>
+<ol start="8" type="1">
+<li><p>Let’s now try what the experience is by toggling the
+<strong>Generative mode</strong> on. You can enable it either in the
+Overview tab, or in Settings, under Generative AI.</p>
+<figure>
+<img src="images/generative-ai-enabled.png" alt="Generative AI enabled" />
+<figcaption aria-hidden="true">Generative AI enabled</figcaption>
+</figure></li>
+<li><p>Refresh the test pane, and ask the same question.</p>
+<pre><code>What are the key metrics offered by the analytics dashboard?</code></pre>
+<p>Notice how the experience is different. The Activity map is displayed
+and shows you the agent’s reasoning based on the user query.</p></li>
+</ol>
+<blockquote>
+<div class="warning">
+<strong>Important:</strong>
+</div>
+<p>In the test pane, notice that you are no longer prompted with <q>Did
+this answer your question?</q>. Why isn’t End of conversation triggered?
+That is because the Conversational boosting topic wasn’t traversed with
+generative mode.</p>
+</blockquote>
+</section>
+<section id="creating-the-plan-complete-topic" class="level4">
+<h4>Creating the Plan Complete Topic</h4>
+<ol start="10" type="1">
+<li><p>Go to the <strong>Topics</strong> tab, select <strong>+ Add a
+topic</strong>, and choose <strong>From blank</strong>.</p>
+<p>Don’t leave it with the default <q>Untitled</q> label. Select
+<strong>Untitled</strong> and change the text to <strong>Plan
+complete</strong>.</p>
+<p>Then, change the trigger by hovering over the <q>Triggered by
+agent</q> box until the icon to swap the trigger for another type
+appears. Then scroll down and choose <strong>Plan complete</strong>.</p>
+<figure>
+<img src="images/plan-complete-trigger.png" alt="Plan complete trigger" />
+<figcaption aria-hidden="true">Plan complete trigger</figcaption>
+</figure>
+<p>Add a new node and select <strong>Topic management</strong> &gt;
+<strong>Go to another topic</strong> &gt; <strong>End of
+Conversation</strong>.</p>
+<p>Save the topic.</p></li>
+<li><p>Now, refresh the test pane, and test your agent again.
+<code>What are the key metrics offered by the analytics dashboard?</code></p>
+<p>Notice that after the answer is provided by the agent, the user is
+prompted for confirmation.</p>
+<figure>
+<img src="images/generative-mode-plan-complete.png" alt="Generative mode with plan complete" />
+<figcaption aria-hidden="true">Generative mode with plan
+complete</figcaption>
+</figure></li>
+</ol>
+</section>
+<section id="understanding-topic-behavior" class="level4">
+<h4>Understanding Topic Behavior</h4>
+<ol start="12" type="1">
+<li><p>Refresh the test pane and send a simple, everyday message, like
+<q>hello</q>. <code>Hi!</code></p>
+<p>Notice how the End of conversation topic isn’t triggered. Why is
+that?</p>
+<p>Open the <strong>Greeting</strong> topic by clicking the edit (✏️)
+icon.</p>
+<p>Notice how the <strong>End all topics</strong> node prevents this
+behavior. Any subsequent user messages remain within the same
+conversation session, as the agent assumes the user’s request hasn’t yet
+been resolved.</p>
+<figure>
+<img src="images/greeting-end-all-topics.png" alt="Greeting topic with end all topics" />
+<figcaption aria-hidden="true">Greeting topic with end all
+topics</figcaption>
+</figure></li>
+<li><p>For the rest of the lab, you may disable the generative mode.</p>
+<figure>
+<img src="images/disable-generative-mode.png" alt="Disable generative mode" />
+<figcaption aria-hidden="true">Disable generative mode</figcaption>
+</figure></li>
+</ol>
+<hr />
+</section>
+</section>
+<section id="congratulations-youve-completed-use-case-1" class="level3">
+<h3>Congratulations! You’ve completed Use Case #1!</h3>
+<hr />
+</section>
+<section id="test-your-understanding" class="level3">
+<h3>Test your understanding</h3>
+<p><strong>Key takeaways:</strong></p>
+<ul>
+<li><strong>Conversation resolution tracking</strong> – Redirecting to
+the end of conversation topic allows you to track successful, abandoned,
+and escalated interactions.</li>
+<li><strong>Session-based analytics</strong> – Conversations can contain
+multiple sessions, each with a distinct outcome (resolved, escalated,
+abandoned).</li>
+<li><strong>Customizing conversation endings</strong> – The end of
+conversation topic can be tailored to enhance user experience, ensuring
+smooth and meaningful conversation conclusions.</li>
+</ul>
+<p><strong>Lessons learned &amp; troubleshooting tips:</strong></p>
+<ul>
+<li>If your analytics dashboard is showing too many abandoned sessions,
+check if conversations properly redirect to the end of conversation
+topic.</li>
+<li>Analytics dashboards don’t show sessions from your own tests in the
+test pane. Only the interactions that happened over your deployed
+channels will show.</li>
+<li>When using conversational boosting, ensure the topic transitions
+correctly to the end of conversation topic to capture user
+feedback.</li>
+</ul>
+<p><strong>Challenge: Apply this to your own use case</strong></p>
+<ul>
+<li>How can you integrate clear conversation endings into your existing
+agent topics?</li>
+<li>Where should you collect user feedback to improve response
+quality?</li>
+<li>What patterns can you identify in abandoned vs. resolved
+conversations?</li>
+</ul>
+<hr />
+<hr />
+</section>
+</section>
+<section id="use-case-2-create-a-smooth-and-intuitive-end-of-conversation-experience" class="level2">
+<h2>Use Case #2: Create a smooth and intuitive end-of-conversation
+experience</h2>
+<p>End conversations without friction – create a smooth, unobtrusive way
+to gather feedback without disrupting the flow.</p>
+<table>
+<colgroup>
+<col style="width: 24%" />
+<col style="width: 31%" />
+<col style="width: 43%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Use case</th>
+<th>Value added</th>
+<th>Estimated effort</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Create a smooth and intuitive end-of-conversation experience</td>
+<td>Customize the default end-of-conversation topic to create a more
+seamless, conversational-friendly experience for users.</td>
+<td>15 minutes</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Summary of tasks</strong></p>
+<p>In this section, you’ll learn how the default End of conversation
+topic can unintentionally interrupt the user’s conversational flow,
+forcing unnecessary feedback prompts or confirmations. You’ll see how to
+modify this default behavior to create a smoother and more intuitive
+experience.</p>
+<p><strong>Scenario:</strong> Visitors on your website frequently have
+multiple related questions about products and solutions. The default End
+of conversation prompt can disrupt their experience by forcing them into
+providing feedback or acknowledgments prematurely. By customizing the
+End of conversation topic, you’ll enable a more fluid interaction,
+allowing users to naturally continue conversations without friction or
+interruption.</p>
+<section id="step-by-step-instructions-1" class="level3">
+<h3>Step-by-step instructions</h3>
+<ol type="1">
+<li><p>Let’s start with a test. Refresh the test pane and ask two
+questions consecutively.</p>
+<pre><code>What is Copilot Studio?</code></pre>
+<pre><code>What knowledge sources does it support?</code></pre>
+<p>Notice how the default End of conversation topic interrupts the
+interaction, preventing the second question from being answered until
+the user responds to the prompt, <q>Did that answer your
+question?</q></p>
+<figure>
+<img src="images/interrupted-flow.png" alt="Interrupted conversation flow" />
+<figcaption aria-hidden="true">Interrupted conversation
+flow</figcaption>
+</figure></li>
+<li><p>Go to the <strong>Topics</strong> tab, display
+<strong>All</strong>, and select <strong>End of
+conversation</strong>.</p>
+<p>On the question <q>Did that answer your question?</q>, select the
+ellipsis (…) and open properties.</p>
+<p>Go to <strong>Question behavior</strong>. Set <strong>How many
+reprompts</strong> to <strong>Don’t repeat</strong>.</p>
+<p>Return to the Question Properties, then select <strong>Entity
+recognition</strong>: For <strong>Action if no entity found</strong>,
+choose <strong>Set variable to empty (no value)</strong>.</p></li>
+<li><p>Below the <q>Did that answer your question?</q> question, notice
+the condition only tests if SurveyResponse is true. Let’s add another
+condition path, by clicking on the (➕) action above the various
+conditions.</p>
+<p>In <strong>Select a variable</strong>, choose
+<strong>SurveyResponse</strong>. For the test, leave it to <strong>is
+equal to</strong>, and set <strong>false</strong> for the value.</p>
+<p>Move everything that is under <strong>All other conditions</strong>
+under the new false branch by cutting and pasting the content.</p></li>
+<li><p>Add a redirect to the <strong>Conversational boosting</strong>
+topic under the <strong>All other conditions</strong> path.</p>
+<figure>
+<img src="images/end-conversation-structure.png" alt="End of conversation flow structure" />
+<figcaption aria-hidden="true">End of conversation flow
+structure</figcaption>
+</figure></li>
+<li><p>Save your topic.</p></li>
+<li><p>Let’s do a new test. Refresh the test pane and ask again two
+questions consecutively.</p>
+<pre><code>What is Copilot Studio?</code></pre>
+<pre><code>What knowledge sources does it support?</code></pre>
+<p>Notice how follow-up questions are no longer blocking the
+conversation flow.</p></li>
+</ol>
+<blockquote>
+<div class="tip">
+<strong>Tip:</strong>
+</div>
+<p>If you want the user’s follow-up questions to trigger existing topics
+rather than always defaulting to Conversational boosting, verify the
+Interruptions setting in the <q>Did that answer your question?</q>
+question properties. By default, they allow interruptions, meaning the
+agent can seamlessly switch to a recognized topic based on the user’s
+next input.</p>
+</blockquote>
+<ol start="7" type="1">
+<li><p>You can further simplify what happens after the user answers
+<strong>Yes</strong>.</p>
+<p>After the CSAT question, add a message node asking:</p>
+<pre><code>Thank you for your feedback!
+
+Feel free to ask me something else.</code></pre>
+<p>Then add a node <strong>Topic management</strong> &gt; <strong>End
+conversation</strong>.</p>
+<p>Delete everything further below that path.</p></li>
+<li><p>You can further simplify what happens after the user answers
+<strong>No</strong>.</p>
+<p>Under the <strong>SurveyResponse false</strong> condition path, add a
+new message node:</p>
+<pre><code>Sorry I wasn&#39;t able to help better.
+
+You may try reaching out to our [Microsoft Copilot Studio community](https://aka.ms/CopilotStudioCommunity) or submitting a [support request](https://learn.microsoft.com/en-us/power-platform/admin/get-help-support).
+
+Would you like to try again? Feel free to ask a new question.</code></pre>
+<p>Then add a node <strong>Topic management</strong> &gt; <strong>End
+conversation</strong>.</p>
+<p>Save topic.</p></li>
+</ol>
+<hr />
+</section>
+<section id="congratulations-youve-completed-use-case-2" class="level3">
+<h3>Congratulations! You’ve completed Use Case #2!</h3>
+<hr />
+</section>
+<section id="test-your-understanding-1" class="level3">
+<h3>Test your understanding</h3>
+<ul>
+<li>How does customizing the End of Conversation topic improve user
+experience without sacrificing data collection?</li>
+<li>What are the trade-offs between gathering comprehensive feedback and
+maintaining conversation flow?</li>
+<li>How can you apply these principles to create more natural
+conversation endings in your own agents?</li>
+</ul>
+<p><strong>Challenge: Apply this to your own use case</strong></p>
+<ul>
+<li>Where in your current agent can users experience unnecessary
+conversational friction?</li>
+<li>How can you apply these customization strategies to ensure smoother
+conversation endings?</li>
+<li>In what ways can user feedback be naturally integrated without
+interrupting conversational flow?</li>
+</ul>
+<hr />
+</section>
+</section>
+<section id="summary-of-learnings" class="level2">
+<h2>Summary of learnings</h2>
+<p>True learning comes from doing, questioning, and reflecting—so let’s
+put your skills to the test.</p>
+<p>To maximize the impact of conversation outcome tracking:</p>
+<ul>
+<li><strong>Structure conversations for clear outcomes</strong> – Every
+interaction should have a definitive end point that can be measured and
+analyzed for continuous improvement.</li>
+<li><strong>Balance user experience with data collection</strong> –
+Gather meaningful feedback without creating friction that drives users
+away from your agent.</li>
+<li><strong>Implement session-based tracking</strong> – Understand that
+individual queries within conversations have separate outcomes that
+provide granular insights.</li>
+<li><strong>Leverage both implicit and explicit resolution</strong> –
+Track when users are satisfied enough to leave (implicit) versus when
+they explicitly confirm satisfaction.</li>
+<li><strong>Design for different orchestration modes</strong> – Ensure
+your tracking works effectively whether using classic topics or
+generative AI responses.</li>
+</ul>
+<hr />
+<section id="conclusions-and-recommendations" class="level3">
+<h3>Conclusions and recommendations</h3>
+<p><strong>Conversation analytics golden rules:</strong></p>
+<ul>
+<li>Always redirect to the End of Conversation topic when user requests
+are fulfilled to ensure accurate outcome tracking.</li>
+<li>Customize feedback prompts to match your users’ communication style
+and reduce abandonment rates.</li>
+<li>Test conversation flows regularly to identify where users experience
+friction or confusion.</li>
+<li>Use analytics insights to identify knowledge gaps and refine content
+strategy continuously.</li>
+<li>Balance comprehensive data collection with user experience to
+maintain high engagement levels.</li>
+<li>Implement both lightweight feedback (thumbs up/down) and detailed
+feedback collection for comprehensive insights.</li>
+</ul>
+<p>By following these principles, you’ll transform your AI agent from a
+simple response tool into a data-driven system that continuously learns
+and improves, delivering measurably better user experiences and business
+outcomes.</p>
+<hr />
+</section>
+</section>
+</section>
+</body>
+</html>

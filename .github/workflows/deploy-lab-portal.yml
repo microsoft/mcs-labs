@@ -1,0 +1,269 @@
+# =============================================================================
+# MICROSOFT COPILOT STUDIO LABS - WEB DEPLOYMENT WORKFLOW
+# =============================================================================
+# This workflow deploys generated HTML files to GitHub Pages, creating a
+# professional web portal for accessing lab documentation with:
+# - Homepage with lab directory and download links
+# - Individual lab pages with styled content
+# - Responsive design and professional branding
+# =============================================================================
+
+name: 🌐 Deploy Lab Portal to GitHub Pages
+
+# =============================================================================
+# WORKFLOW TRIGGERS
+# =============================================================================
+on:
+  # Deploy when documentation generation workflow completes
+  workflow_run:
+    workflows: ["📚 Generate Lab Documentation (HTML & PDF)"]
+    types:
+      - completed
+    branches: ["main"]
+
+  # Deploy when styling changes (independent of document generation)
+  push:
+    branches: ["main"]
+    paths:
+      - ".github/styles/**"      # CSS styling updates
+      - ".github/workflows/deploy-lab-portal.yml"  # This workflow file
+
+  # Allow manual deployment from GitHub Actions UI
+  workflow_dispatch:
+    inputs:
+      force_rebuild:
+        description: 'Force complete rebuild of site'
+        required: false
+        default: false
+        type: boolean
+
+# =============================================================================
+# GITHUB PAGES PERMISSIONS
+# =============================================================================
+# Required permissions for deploying to GitHub Pages
+permissions:
+  contents: read    # Read repository content
+  pages: write      # Deploy to GitHub Pages
+  id-token: write   # GitHub Pages deployment token
+
+# =============================================================================
+# DEPLOYMENT CONCURRENCY CONTROL
+# =============================================================================
+# Ensure only one deployment runs at a time, but don't cancel in-progress 
+# deployments to avoid corrupted states
+concurrency:
+  group: "pages-deployment"
+  cancel-in-progress: false
+
+# =============================================================================
+# WORKFLOW JOBS
+# =============================================================================
+jobs:
+  # ---------------------------------------------------------------------------
+  # JOB 1: BUILD GITHUB PAGES SITE
+  # ---------------------------------------------------------------------------
+  build-site:
+    name: 🏗️ Build Lab Portal Site
+    runs-on: ubuntu-latest
+    # Only run if triggered manually, by style changes, or if documentation generation succeeded
+    if: >
+      github.event_name == 'workflow_dispatch' ||
+      github.event_name == 'push' ||
+      (github.event_name == 'workflow_run' && github.event.workflow_run.conclusion == 'success')
+    
+    steps:
+      # =================================================================
+      # STEP 1: REPOSITORY AND PAGES SETUP
+      # =================================================================
+      - name: 📂 Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: ⚙️ Configure GitHub Pages Settings
+        uses: actions/configure-pages@v4
+        with:
+          enablement: true
+        # Configure repository settings and permissions for GitHub Pages deployment
+      
+      - name: 📚 Install Pandoc Document Converter
+        run: |
+          # Install Pandoc for advanced Markdown to HTML conversion with styling support
+          sudo apt-get update
+          sudo apt-get install -y pandoc
+
+      - name: 🏗️ Create Website Directory Structure
+        run: |
+          # =============================================================================
+          # SITE STRUCTURE SETUP: Create directories and copy styling assets
+          # =============================================================================
+          
+          # Create the primary site directory for GitHub Pages deployment
+          echo "📁 Creating site directory structure..."
+          mkdir -p _site
+          
+          # Create styles subdirectory and copy CSS files for consistent formatting
+          echo "🎨 Copying CSS styling assets..."
+          mkdir -p _site/styles
+          cp -r .github/styles/* _site/styles/
+          
+          # =============================================================================
+          # HOMEPAGE GENERATION: Convert root README.md to professional homepage
+          # =============================================================================
+          
+          # Convert root README.md to HTML as the main page with enhanced formatting
+          echo "🏠 Converting root README.md to homepage..."
+          
+          # Create enhanced copy of README for web display processing
+          echo "📝 Processing README content for web display..."
+          cp README.md _site/README_processed.md
+          
+          # Transform the lab table headers for better web presentation
+          echo "📊 Updating table headers for download functionality..."
+          sed -i 's/| Title | URL | Overview |/| Title | Download | Overview |/g' _site/README_processed.md
+          sed -i 's/|-------|-----|----------|/|-------|----------|----------|/g' _site/README_processed.md
+          
+          # Transform lab table rows to create clickable titles and PDF download links
+          # Pattern: | Title | [link-text](./labs/lab-name) | Overview |
+          # Result:  | [Title](labs/lab-name/lab-name.html) | [📋 PDF](labs/lab-name/lab-name.pdf) | Overview |
+          echo "🔗 Creating clickable lab titles and PDF download links..."
+          sed -i -E 's/\| ([^|]+) \| \[([^]]+)\]\(\.\/labs\/([^/]+)\) \| ([^|]+) \|/| [\1](labs\/\3\/\3.html) | [📋 PDF](labs\/\3\/\3.pdf) | \4 |/g' _site/README_processed.md
+          
+          # Convert processed README to HTML with professional styling and formatting
+          echo "🎨 Converting Markdown to HTML with professional styling..."
+          pandoc _site/README_processed.md \
+            -o _site/index.html \
+            --standalone \
+            --embed-resources \
+            --css="styles/html.css" \
+            --html-q-tags \
+            --section-divs \
+            --metadata title="Microsoft Copilot Studio Labs" \
+            -f markdown+auto_identifiers+gfm_auto_identifiers+emoji \
+            -t html5
+          
+          # =============================================================================
+          # HTML POST-PROCESSING: Enhance generated HTML for professional appearance
+          # =============================================================================
+          
+          # Remove unwanted title block header while preserving <title> in <head>
+          echo "🧹 Cleaning up HTML structure..."
+          sed -i '/<header id="title-block-header">/,/<\/header>/d' _site/index.html
+          
+          # Apply professional table styling with consistent column widths
+          echo "📏 Applying table styling and column width normalization..."
+          perl -0pi -e 's/<table style="width:100%;">/<table class="lab-table" style="width:100%;">/' _site/index.html
+          perl -0pi -e 's|<colgroup>.*?</colgroup>|<colgroup><col style="width: 25%" /><col style="width: 10%" /><col style="width: 65%" /></colgroup>|s' _site/index.html
+
+          # Configure external links to open in new tabs for better user experience
+          echo "🔗 Configuring external links to open in new tabs..."
+          sed -i 's/<a href="\(https\?:\/\/[^"]*\)"/<a href="\1" target="_blank" rel="noopener noreferrer"/g' _site/index.html
+
+          # Add custom favicon with Microsoft Copilot Studio Labs branding
+          echo "🎯 Adding custom favicon for professional branding..."
+          sed -i 's|</head>|  <link rel="icon" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxMDAgMTAwIj4KICA8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSI0NSIgZmlsbD0iIzJCNTc5QSIvPgogIDx0ZXh0IHg9IjUwIiB5PSI2NSIgZm9udC1mYW1pbHk9IkFyaWFsLHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iNDUiIGZvbnQtd2VpZ2h0PSJib2xkIiBmaWxsPSJ3aGl0ZSIgdGV4dC1hbmNob3I9Im1pZGRsZSI+TDwvdGV4dD4KPC9zdmc+">\n</head>|' _site/index.html
+          
+          # =============================================================================
+          # LAB CONTENT DEPLOYMENT: Copy all lab files to website structure
+          # =============================================================================
+          
+          # Process each lab directory and copy HTML, PDF, and image assets
+          echo "📚 Copying lab content to website structure..."
+          for lab_dir in labs/*/; do
+            if [ -d "$lab_dir" ]; then
+              lab_name=$(basename "$lab_dir")
+              html_file="${lab_dir}${lab_name}.html"
+              pdf_file="${lab_dir}${lab_name}.pdf"
+              
+              echo "  🔍 Processing lab: $lab_name"
+              
+              if [ -f "$html_file" ]; then
+                # Create lab-specific directory and copy HTML file
+                mkdir -p "_site/labs/$lab_name"
+                cp "$html_file" "_site/labs/$lab_name/"
+                echo "    ✅ HTML copied: $lab_name.html"
+                
+                # Copy corresponding PDF file if it exists
+                if [ -f "$pdf_file" ]; then
+                  cp "$pdf_file" "_site/labs/$lab_name/"
+                  echo "    📄 PDF copied: $lab_name.pdf"
+                else
+                  echo "    ⚠️  PDF not found: $pdf_file"
+                fi
+                
+                # Copy associated images directory if it exists
+                if [ -d "${lab_dir}images" ]; then
+                  cp -r "${lab_dir}images" "_site/labs/$lab_name/"
+                  echo "    🖼️  Images copied: ${lab_dir}images"
+                fi
+                
+                echo "    ✅ Lab deployment complete: $lab_name"
+              else
+                echo "    ❌ HTML file not found: $html_file"
+              fi
+            fi
+          done
+          
+          # =============================================================================
+          # CLEANUP AND VERIFICATION: Final preparation for deployment
+          # =============================================================================
+          
+          # Remove temporary processing files
+          echo "🧹 Cleaning up temporary files..."
+          rm -f _site/README_processed.md
+          
+          # Generate comprehensive deployment summary
+          echo ""
+          echo "📊 Website Deployment Summary:"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "📄 HTML files: $(find _site -name "*.html" -type f | wc -l)"
+          echo "📋 PDF files: $(find _site -name "*.pdf" -type f | wc -l)"
+          echo "🎨 CSS files: $(find _site -name "*.css" -type f | wc -l)"
+          echo "🖼️  Image files: $(find _site -name "*.png" -o -name "*.jpg" -o -name "*.gif" -o -name "*.svg" | wc -l)"
+          echo "📂 Total files: $(find _site -type f | wc -l)"
+          echo ""
+          echo "📂 Website Structure Preview:"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          find _site -type f | head -15
+          if [ $(find _site -type f | wc -l) -gt 15 ]; then
+            echo "... and $(( $(find _site -type f | wc -l) - 15 )) more files"
+          fi
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+      # =================================================================
+      # STEP 2: ARTIFACT UPLOAD FOR GITHUB PAGES
+      # =================================================================
+      - name: 📦 Upload Website Artifact for GitHub Pages
+        uses: actions/upload-pages-artifact@v3
+        # Package the complete website for GitHub Pages deployment
+
+  # ---------------------------------------------------------------------------
+  # JOB 2: DEPLOY TO GITHUB PAGES
+  # ---------------------------------------------------------------------------
+  deploy-site:
+    name: 🚀 Deploy to GitHub Pages
+    runs-on: ubuntu-latest
+    needs: build-site
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    
+    steps:
+      # =================================================================
+      # STEP 1: DEPLOY WEBSITE TO GITHUB PAGES
+      # =================================================================
+      - name: 🌐 Deploy Lab Portal to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+        # Deploy the packaged website artifact to GitHub Pages hosting
+
+# =============================================================================
+# END OF WORKFLOW: Deploy Lab Portal to GitHub Pages
+# =============================================================================
+# This workflow successfully:
+# ✅ Creates a professional homepage with lab directory and downloads
+# ✅ Deploys all lab HTML files with consistent styling and navigation
+# ✅ Provides responsive design optimized for web viewing
+# ✅ Maintains proper linking between homepage and individual labs
+# ✅ Serves the complete lab portal at GitHub Pages URL
+# =============================================================================
