@@ -156,7 +156,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
   4.  Click **Next**.
 
-  5.  Set the trigger interval to once a day at 9am.
+  5.  Set the trigger interval to once a day (you can refine that trigger in Power Automate once you create it if needed).
 
   6.  Under **Additional instructions to the agent when it's invoked by this trigger**, clear any default content and replace it with: `Analyze Opportunities`.
 
