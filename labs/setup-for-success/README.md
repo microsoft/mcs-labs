@@ -252,12 +252,12 @@ In this section, you'll learn how to create environment variables and connection
 
 7. In the solution, select **New**, then go to **More** and choose **Connection reference**.
 
-8. Use the connector name (e.g., `MSN Weather`) as the name. Optionally, prefix with your project name.
+8. Use the connector name, `MSN Weather`, as the name. Optionally, prefix with your project name.
 
 > [!TIP]
 > In other locales, the connector name may be localized. For example, in French, it would be `MSN Météo`.
 
-9. Select the connector (e.g., **MSN Weather**).
+9. Select the connector **MSN Weather**.
 
 10. In the connection dropdown, choose **New connection** if none exists.
 
@@ -271,26 +271,25 @@ In this section, you'll learn how to create environment variables and connection
 13. Repeat steps for the following connectors:
 
     * `Microsoft Copilot Studio`
-    * `Microsoft Dataverse`
+    * `Microsoft Dataverse` (note: there are 2 connectors named Microsoft Dataverse, pick the 2nd one in the list. When creating the connection, it should have a green logo, not grey).
     * `Microsoft Entra ID`
     * `Microsoft Teams`
-    * `Office 365 Outlook`    
-    * `Salesforce`        
+    * `Office 365 Outlook`        
     * `ServiceNow`
     * `SharePoint`
 
 > [!IMPORTANT]
->  * For **Salesforce** configuration values, use the provided values in the **Lab Resources** (specific per training).
 >  * For **ServiceNow** configuration values, use the provided values in the **Lab Resources** (specific per training).
 >  * For **ServiceNow**'s `Instance` configuration, be sure to scroll down in the connection screen.
 
-#### Get a TEST and PROD environments
+#### Get a production environment
 
-14. In anticipation of future labs where we will deploy  customizations from `DEV` to `TEST` to `PROD`, **request** TEST and PROD envrionments to be created for your user. Use the **Environments Request Form** to request these environments to be automatically created for you. This will then take a couple of minutes to provision and to show up.
+14. In anticipation of a future ALM lab where we will deploy customizations from `DEV` to `PROD`, **request** a production envrionment to be created for your user. Simply use the **Workshop Agent** (the same that provided user credentials at the beginning of the training) and ask `Get a production environment`. The environment will be automatically created for you. This will take a few minutes to provision and to show up, but you will be notified in your training tenant Outlook mailbox when it is ready.
 
 > [!IMPORTANT]
-> - To access this form, use the provided URL in the **Lab Resources** (specific per training).
-> - This operation will fail if you already have more than 1 environment of type *developer*, as each user is limited to 3 environments of this type (to keep things simple for the labs, the test and production environment use a developer type, and not sandbox/production). 
+> - Access the workshop agent in the same location as when you created your training user account.
+> - You will need the workshop code and your training user's email address if you previously closed the agent.
+> - You are limited to a single PROD environment for the duration workshop.
 
 ---
 
@@ -413,7 +412,7 @@ In this section, you'll learn how to create a new project in Azure DevOps, how t
 > If you're landing into a **Something went wrong!** error, follow these steps:
 > 1. Go to [aex.dev.azure.com](https://aex.dev.azure.com/).
 > 2. If prompted, create new organization (you can leave the default name) if prompted
-> 3. Skip to step 10.
+> 3. Skip to step 6.
 
 6. Select **Azure DevOps** to open the Azure DevOps portal.
 
@@ -422,7 +421,6 @@ In this section, you'll learn how to create a new project in Azure DevOps, how t
 8. When prompted, select **Continue**.
 
 9. Name your organization (you can leave the default name) and select **Continue**.'
-
 
 10. Create a new project by setting a **project name**. For example `Agents`
 
@@ -464,7 +462,7 @@ In this section, you'll learn how to create a new project in Azure DevOps, how t
 
 24. **See** how the various components you have added to your solution are now ready to be committed to your source control. If don't see them all, select **Refresh** as they get detected and added.
 
-25. When ready, select **Commit**, add a comment describing the changes you're introducing (e.g., `New environment variables and connection references`).
+25. When ready, select **Commit**, add a comment describing the changes you're introducing (e.g., `New solution and environment variable`).
 
 ![alt text](images/commit.png)
 

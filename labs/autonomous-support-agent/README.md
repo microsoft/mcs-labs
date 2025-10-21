@@ -202,8 +202,6 @@ Create an autonomous agent that automatically triggers when new support emails a
 
 ---
 
----
-
 ## 🔄 Use Case #2: Add Knowledge and Tools
 
 Transform your basic agent into a comprehensive support system by adding knowledge sources and ServiceNow integration for complete automated responses.
@@ -226,7 +224,7 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 
 2. Choose **Public website** as your knowledge source type
 
-3. **Add** this URL: `https://support.servicenow.com/` and confirm ownership for better results
+3. **Add** this URL: `https://support.servicenow.com/` 
 
 > [!TIP]
 > You can add multiple knowledge sources including SharePoint sites, documents, and other websites relevant to your support topics.
@@ -237,23 +235,28 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 
 5. Search for `ServiceNow List records` and select **List records**
 
-6. Select **Add and configure**
+6. Ensure your connection is selected from the dropdown, or select `Create New Connection` and enter the details from the Lab Resources.
+
+7. Select **Add and configure**
 
 > [!TIP]
 > You may need to set the connection again for the buttons to be available.
 
-7. Rename the tool to `Get ServiceNow ticket details`
+8. Rename the tool to `Get ServiceNow ticket details`
 
-8. Update the description to: `Gets the details of an incident using its incident number`
+9. Update the description to: `Gets the details of an incident using its incident number`
 
 > [!TIP]
 > The description helps the AI know when to use this tool and what it does.
 
-10. Under **Additional details**, change **Authentication** to **Maker-provided credentials**
+10. Under **Additional details**, change **Credentials to use** to **Maker-provided credentials**
 
 11. For **Record Type**, set a **Custom value** and choose `Incident`
 
 12. Select **+ Add input** and choose **Query**
+
+> [!TIP]
+> If you see an error such as `Duplicate Item Detected`, select `Custom Value` from the dropdown and then select `Dynamically fill with AI` again.
 
 13. Select **Customize** and use this for **Description**:
 
@@ -282,7 +285,7 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 
 21. Update the description to: `Use this operation to reply to the email received`
 
-22. Under **Additional details**, set authentication to **Maker-provided credentials**
+22. Under **Additional details**, set **Credentials to use** to **Maker-provided credentials**
 
 23. For the **To** input, keep **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
 
@@ -290,81 +293,32 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
     Use the "from" email of the triggering received email.
     ```
 
-23. For the **Subject** input, keep **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
+24. For the **Subject** input, keep **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
 
     ```
     Use the original subject of the triggering received email.
     ```
 
-23. For the **Body** input, keep **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
+25. For the **Body** input, keep **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
 
     ```
     Write the email body using minimal HTML that renders well in Outlook. Use <p> for paragraphs, <br> for line breaks, <ul>/<ol> for bullet points, and <table> for simple tables if needed. All URLs must be formatted as HTML links using <a href="...">, not left as plain text. Do not use Markdown syntax like [1] or reference-style links. Do not include full HTML documents or tags like <html> or <head>. The HTML must be valid as a JSON string: escape double quotes (") and avoid unescaped special characters.
     ```
 
-24. Click **Save** to finalize the tool configuration
-
-#### Setting Up Teams Capabilities
-
-25. Return to the **Tools** tab, and select **+ Add a tool**
-
-26. Search for `Create a chat` from **Microsoft Teams** and select it
-
-27. Select **Add and configure**
-
-28. Update its name to `Create a Teams chat`
-
-29. Update the description to: `Create a Teams chat with the user who has sent the email.`
-
-30. Under **Additional details**, set authentication to **Maker-provided credentials**
-
-31. For the **Members to add** inputs, keep **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
-
-    ```
-    Only use the "from" email address of the received email. There should be only one user to add. E.g., henry.jammes@copilotstudiotraining.onmicrosoft.com
-    ```
-32. Click **Save** to finalize the tool configuration
-
-33. Return to the **Tools** tab, and select **+ Add a tool**
-
-34. Search for `Post message in a chat or channel` from **Microsoft Teams** and select it
-
-35. Select **Add and configure**
-
-36. Update its name to `Send a Teams message`
-
-37. Update the description to: `Send a Teams message in the chat conversation that was created with the user.`
-
-38. Under **Additional details**, set authentication to **Maker-provided credentials**
-
-31. For the **Inputs**:
-    - For **Post as**, select **Custom value** and set it to `User`
-    - For **Post in**, select **Custom value** and set it to `Group chat`
-    - For **Group chat**, leave **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
-        ```
-        Conversation ID of the Teams chat that was created.
-        The format should be similar to this: 19:3d4da799-6a66-4f70-9057-ada103025953_5f22554b-fd15-4676-8c82-dc6122af2a80@unq.gbl.spaces
-        ```    
-    - For **Message**, leave **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
-        ```
-        Polite message greeting the user and telling them you have replied to their email. Provide a one phrase summary of the response you provided to their query. Finish by offering to schedule a call if they to talk through it if they'd like.
-        ```     
-
-32. Click **Save** to finalize the tool configuration
+26. Click **Save** to finalize the tool configuration
 
 #### Configuring Agent Instructions and AI Settings
 
-28. Navigate to **Overview** and then **Instructions**
+27. Navigate to **Overview** and then click the **Edit** for **Instructions**
 
-29. **Paste** the following comprehensive instructions:
-```
-1. Understand and isolate each question from the received email body.
-For each individual question, do a separate **knowledge search** using the configured knowledge sources.
-2. If a ticket ID is mentioned, for example INC0000059, check if an update is available using the <Get ServiceNow ticket details> tool.
-3. Once you have gathered knowledge and ticket information, use the <Reply to email> tool to reply to the original email received. Your reply should use the same language as the initial user email (e.g., if the questions are in French, reply in French, etc.)`
-4. Use the <Create a Teams chat> tool to create a Teams conversation with the user
-5. Use the <Send a Teams message> tool to send a message to the user
-```
+28. **Paste** the following comprehensive instructions:
+
+    ```
+    1. Understand and isolate each question from the received email body.
+    For each individual question, do a separate **knowledge search** using the configured knowledge sources.
+    2. If a ticket ID is mentioned, for example INC0000059, check if an update is available using the <Get ServiceNow ticket details> tool.
+    3. Once you have gathered knowledge and ticket information, use the <Reply to email> tool to reply to the original email received. Your reply should use the same language as the initial user email (e.g., if the questions are in French, reply in French, etc.)
+    ```
 
 > [!IMPORTANT]
 > For each of the placeholder <...> in the description, use `/` to insert the tools you  just configured in your instructions.
@@ -374,14 +328,17 @@ For each individual question, do a separate **knowledge search** using the confi
 
 ![alt text](images/instructions-and-tools.png)
 
-30. **Publish** your agent to activate it
+29. Click on **Save** to save the instructions and **Publish** your agent to activate it
 
 #### Testing Your Complete Agent
 
-31. **Send** a test email to your ficitious user email by using the **Send Support Email** form. 
+30. **Send** a test email to your training user email by using the **Workshop Agent**. Simply ask `Send a support email`. You will then shortly receive the email in **Microsoft Outlook**.
 
 > [!IMPORTANT]
-> To access this form, use the provided values in the **Lab Resources** (specific per training).
+> - Access the workshop agent in the same location as when you created your training user account.
+> - You will need the workshop code and your training user's email address if you previously closed the agent.
+> - You can repeat this process as desired.
+
 >
 > The email should contain something like this:
 >   ```
@@ -396,16 +353,16 @@ For each individual question, do a separate **knowledge search** using the confi
 >   Thanks!
 >   ```
 
-32. Make sure you **receive** the email in your **inbox**, in [outlook.office.com](https://outlook.office.com/mail/)
+31. Make sure you **receive** the email in your **inbox**, in [outlook.office.com](https://outlook.office.com/mail/)
 
 > [!TIP]
 > You don't need to repeat the original trigger event to make more tests. In the **Test** pane, you can select `...`, choose **Test trigger** and then select the desired trigger and from there, decide to execute a past trigger again.
 > 
 > ![alt text](images/test-trigger.png)
 
-33. Check the execution of your  autonomus agent by going to the **Activity** tab. Select the **Refresh** icon until you see the execution.
+32. Check the execution of your  autonomous agent by going to the **Activity** tab. Select the **Refresh** icon until you see the execution.
 
-34. Check the emails in your **Sent** folder in Outlook to see the actual reply the user autonomously sent.
+33. Check the emails in your **Sent** folder in Outlook to see the actual reply the user autonomously sent.
 
 > [!TIP]
 > - Agents can be both conversational and autonomous. Meaning that they can be triggered by an email (such as an email received) or by an end-user simply using a chat or voice interface. 
@@ -443,6 +400,77 @@ For each individual question, do a separate **knowledge search** using the confi
 * Consider what additional knowledge sources would benefit your specific organization
 * Think about other ServiceNow operations (create tickets, update status) that could enhance the automation
 * Plan how you might extend this pattern to other communication channels like Teams or chat interfaces
+
+**Challenge Yourself: Add Teams communication**:
+
+---
+
+### Setting Up Teams Capabilities
+
+---
+
+1. Return to the **Tools** tab, and select **+ Add a tool**
+
+2. Search for `Create a chat` from **Microsoft Teams** and select it
+
+3. Select **Add and configure**
+
+4. Update its name to `Create a Teams chat`
+
+5. Update the description to: `Create a Teams chat with the user who has sent the email.`
+
+6. Under **Additional details**, set *Credentials to use* to **Maker-provided credentials**
+
+7. For the **Members to add** inputs, keep **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
+
+    ```
+    Only use the "from" email address of the received email. There should be only one user to add. E.g., henry.jammes@copilotstudiotraining.onmicrosoft.com
+    ```
+8. Click **Save** to finalize the tool configuration
+
+9. Return to the **Tools** tab, and select **+ Add a tool**
+
+10. Search for `Post message in a chat or channel` from **Microsoft Teams** and select it
+
+11. Select **Add and configure**
+
+12. Update its name to `Send a Teams message`
+
+13. Update the description to: `Send a Teams message in the chat conversation that was created with the user.`
+
+14. Under **Additional details**, set *Credentials to use* to **Maker-provided credentials**
+
+15. For the **Inputs**:
+    - For **Post as**, select **Custom value** and set it to `User`
+    - For **Post in**, select **Custom value** and set it to `Group chat`
+    - For **Group chat**, leave **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
+        ```
+        Conversation ID of the Teams chat that was created.
+        The format should be similar to this: 19:3d4da799-6a66-4f70-9057-ada103025953_5f22554b-fd15-4676-8c82-dc6122af2a80@unq.gbl.spaces
+        ```    
+    - For **Message**, leave **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
+        ```
+        Polite message greeting the user and telling them you have replied to their email. Provide a one phrase summary of the response you provided to their query. Finish by offering to schedule a call if they'd like to talk through it.
+        ```     
+
+16. Click **Save** to finalize the tool configuration
+
+17. Update your instructions in the **Overview** tab to look like the following:
+
+    ```
+    1. Understand and isolate each question from the received email body.
+    For each individual question, do a separate **knowledge search** using the configured knowledge sources.
+    2. If a ticket ID is mentioned, for example INC0000059, check if an update is available using the <Get ServiceNow ticket details> tool.
+    3. Once you have gathered knowledge and ticket information, use the <Reply to email> tool to reply to the original email received. Your reply should use the same language as the initial user email (e.g., if the questions are in French, reply in French, etc.)
+    4. Use the <Create a Teams chat> tool to create a Teams conversation with the user
+    5. Use the <Send a Teams message> tool to send a message to the user
+    ```
+
+18. Test your new and improved agent by sending a test trigger using the Test Pane.
+
+19. Ensure that you've sent a Teams chat at [teams.microsoft.com](https://teams.microsoft.com)
+
+20. Congratulations! You've gone above and beyond by adding Teams Chat capabilities to your autonomous agent!
 
 ---
 

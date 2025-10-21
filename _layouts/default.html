@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html
+  lang="en"
+  data-theme="{% if page.theme_mode %}{{ page.theme_mode }}{% else %}light{% endif %}"
+  data-theme-family="{% if page.theme_family %}{{ page.theme_family }}{% else %}rich{% endif %}"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}
+    </title>
+
+    <!-- Immediate theme script that runs before any rendering -->
+    <script>
+      // Set theme attributes immediately from localStorage, before any rendering
+      (function () {
+        const savedTheme = localStorage.getItem("theme-family") || "rich";
+        const savedMode = localStorage.getItem("theme-mode") || "light";
+
+        // Override HTML attributes with localStorage values immediately
+        document.documentElement.setAttribute("data-theme", savedMode);
+        document.documentElement.setAttribute("data-theme-family", savedTheme);
+      })();
+    </script>
+
+    <!-- Load both theme CSS files always to eliminate loading delays -->
+    <link
+      rel="stylesheet"
+      href="{{ '/assets/css/themes/theme-rich.css' | relative_url }}"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ '/assets/css/themes/theme-minimal.css' | relative_url }}"
+    />
+
+    <!-- Favicon -->
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="{{ '/favicon.svg' | relative_url }}"
+    />
+    <link rel="apple-touch-icon" href="{{ '/favicon.svg' | relative_url }}" />
+
+    <link
+      rel="stylesheet"
+      href="{{ '/assets/css/style.css' | relative_url }}"
+    />
+
+    {% seo %}
+  </head>
+  <body class="{% if page.layout == 'lab' %}lab-page{% endif %}">
+    <header class="site-header">
+      <div class="container">
+        <div class="header-content">
+          <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+          <div class="header-actions">
+            <nav class="main-nav">
+              <!-- NAVIGATION STRUCTURE:
+                   Home: Main homepage with journey cards (excludes bootcamp)
+                   All Labs: Complete lab listing page
+                   Bootcamp: Dedicated bootcamp page with special sequencing
+                   
+                   IMPORTANT: Bootcamp URL points to /labs/bootcamp/ dedicated page
+                   This provides consistent access to bootcamp content with special
+                   numbering system (1a, 1b, 2, 3a, 3b, etc.) while keeping it
+                   separate from homepage journey cards -->
+              <a href="{{ '/' | relative_url }}">Home</a>
+              <a href="{{ '/labs/' | relative_url }}">All Labs</a>
+              <a href="{{ '/labs/bootcamp/' | relative_url }}">Bootcamp</a>
+            </nav>
+            <div class="theme-controls">
+              <div class="theme-style-toggle">
+                <button
+                  class="theme-style-btn"
+                  data-theme="rich"
+                  aria-label="Rich theme style"
+                >
+                  <span class="theme-icon">🎨</span>
+                  <span class="theme-label">Rich</span>
+                </button>
+                <button
+                  class="theme-style-btn"
+                  data-theme="minimal"
+                  aria-label="Minimal theme style"
+                >
+                  <span class="theme-icon">📄</span>
+                  <span class="theme-label">Minimal</span>
+                </button>
+              </div>
+              <div class="mode-divider"></div>
+              <button
+                class="light-dark-toggle"
+                aria-label="Toggle light/dark mode"
+                title="Toggle light/dark mode"
+              >
+                <span class="light-dark-icon">🌙</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="site-content">
+      <div class="container">{{ content }}</div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>&copy; {{ 'now' | date: "%Y" }} Microsoft Copilot Studio Labs</p>
+      </div>
+    </footer>
+
+    <!-- Load theme manager -->
+    <script src="{{ '/assets/js/theme-manager.js' | relative_url }}"></script>
+
+    <script>
+      // Enhanced theme functionality with multiple theme support
+      (function () {
+        // Legacy theme object for backward compatibility
+        const theme = {
+          get: () => ThemeManager.getCurrentTheme(),
+          set: (value) => {
+            // Map old theme values to new theme IDs
+            const themeMap = {
+              light: "rich-light",
+              dark: "rich-dark",
+            };
+            const themeId = themeMap[value] || value;
+            ThemeManager.applyTheme(themeId);
+          },
+          toggle: () => ThemeManager.cycleTheme(),
+        };
+
+        // GitHub-Style Callouts Implementation for all pages
+        function initializeCallouts() {
+          // Find all blockquotes in the document (not just lab-body)
+          const blockquotes = document.querySelectorAll("blockquote");
+
+          blockquotes.forEach((blockquote) => {
+            // Get the text content to check for callout pattern
+            const textContent = blockquote.textContent.trim();
+
+            // Check if this blockquote starts with a callout pattern
+            const match = textContent.match(
+              /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i
+            );
+            if (!match) return;
+
+            const calloutType = match[1].toLowerCase();
+
+            // Get the content after the callout marker
+            const contentAfterMarker = textContent
+              .replace(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i, "")
+              .trim();
+
+            // Create callout container
+            const calloutDiv = document.createElement("div");
+            calloutDiv.className = `callout callout-${calloutType}`;
+
+            // Create title element
+            const titleDiv = document.createElement("div");
+            titleDiv.className = "callout-title";
+            titleDiv.textContent = calloutType.toUpperCase();
+
+            // Create content container
+            const contentDiv = document.createElement("div");
+            contentDiv.className = "callout-content";
+
+            // Clone the original blockquote content but remove the callout marker
+            const clonedBlockquote = blockquote.cloneNode(true);
+            const firstP = clonedBlockquote.querySelector("p:first-child");
+
+            if (firstP) {
+              // Remove the callout marker from the first paragraph
+              const firstPText = firstP.innerHTML;
+              const cleanedText = firstPText.replace(
+                /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i,
+                ""
+              );
+
+              if (cleanedText.trim()) {
+                firstP.innerHTML = cleanedText;
+              } else {
+                // If first paragraph only had the marker, remove it entirely
+                firstP.remove();
+              }
+            }
+
+            // Move all content from cloned blockquote to content div
+            Array.from(clonedBlockquote.children).forEach((child) => {
+              contentDiv.appendChild(child);
+            });
+
+            // Build final callout
+            calloutDiv.appendChild(titleDiv);
+            calloutDiv.appendChild(contentDiv);
+
+            // Replace the original blockquote with the callout
+            blockquote.parentNode.replaceChild(calloutDiv, blockquote);
+          });
+        }
+
+        function updateThemeControls(themeInfo) {
+          // Update theme style buttons
+          const themeStyleBtns = document.querySelectorAll(".theme-style-btn");
+          themeStyleBtns.forEach((btn) => {
+            const btnTheme = btn.getAttribute("data-theme");
+            if (btnTheme === themeInfo.family) {
+              btn.classList.add("active");
+            } else {
+              btn.classList.remove("active");
+            }
+          });
+
+          // Update light/dark toggle icon
+          const icon = document.querySelector(".light-dark-icon");
+          const button = document.querySelector(".light-dark-toggle");
+          if (icon && themeInfo) {
+            icon.textContent = themeInfo.mode === "light" ? "🌙" : "☀️";
+            if (button) {
+              const modeText = themeInfo.mode === "light" ? "dark" : "light";
+              button.setAttribute("aria-label", `Switch to ${modeText} mode`);
+              button.setAttribute("title", `Switch to ${modeText} mode`);
+            }
+          }
+        }
+
+        // Initialize theme system on page load (skip if already initialized)
+        document.addEventListener("DOMContentLoaded", function () {
+          // Check if ThemeManager is available
+          if (typeof ThemeManager === "undefined") {
+            console.error(
+              "ThemeManager not found! Script may not have loaded."
+            );
+            return;
+          }
+
+          // Only initialize if not already done in head
+          if (!window._themeInitialized) {
+            ThemeManager.init();
+          } else {
+            // Sync ThemeManager state with already applied theme
+            const currentFamily =
+              document.documentElement.getAttribute("data-theme-family") ||
+              "rich";
+            const currentMode =
+              document.documentElement.getAttribute("data-theme") || "light";
+            // Update ThemeManager internal state without re-applying
+            ThemeManager.syncState(currentFamily, currentMode);
+          }
+
+          // Initialize GitHub-style callouts for all pages
+          initializeCallouts();
+
+          // Update theme controls with current theme
+          updateThemeControls(ThemeManager.getCurrentThemeInfo());
+
+          // Add event listeners to theme style buttons
+          const themeStyleBtns = document.querySelectorAll(".theme-style-btn");
+          const lightDarkToggle = document.querySelector(".light-dark-toggle");
+
+          themeStyleBtns.forEach((btn) => {
+            btn.addEventListener("click", function (e) {
+              const selectedTheme = e.currentTarget.getAttribute("data-theme");
+              ThemeManager.changeThemeFamily(selectedTheme);
+            });
+          });
+
+          if (lightDarkToggle) {
+            lightDarkToggle.addEventListener("click", function (e) {
+              e.preventDefault();
+              ThemeManager.toggleMode();
+            });
+          } else {
+            console.error("Light/dark toggle not found!");
+          }
+
+          // Listen for theme changes
+          window.addEventListener("themeChanged", function (e) {
+            updateThemeControls(ThemeManager.getCurrentThemeInfo());
+          });
+        });
+
+        // Listen for system theme changes
+        window
+          .matchMedia("(prefers-color-scheme: dark)")
+          .addEventListener("change", (e) => {
+            if (!localStorage.getItem("theme")) {
+              ThemeManager.applyTheme(e.matches ? "rich-dark" : "rich-light");
+            }
+          });
+
+        // Make theme object globally available for backward compatibility
+        window.theme = theme;
+      })();
+
+      // Make external links open in new tab
+      document.addEventListener("DOMContentLoaded", function () {
+        const links = document.querySelectorAll("a[href]");
+        const currentDomain = window.location.hostname;
+
+        links.forEach(function (link) {
+          const href = link.getAttribute("href");
+
+          // Check if it's an external link (starts with http/https and not current domain)
+          if (
+            href &&
+            (href.startsWith("http://") || href.startsWith("https://"))
+          ) {
+            try {
+              const linkDomain = new URL(href).hostname;
+
+              // If it's external (different domain), add target="_blank" and security attributes
+              if (
+                linkDomain !== currentDomain &&
+                linkDomain !== "pratapladhani.github.io"
+              ) {
+                link.setAttribute("target", "_blank");
+                link.setAttribute("rel", "noopener noreferrer");
+
+                // Add visual indicator for external links if not already present
+                if (!link.querySelector(".external-link-icon")) {
+                  const icon = document.createElement("span");
+                  icon.className = "external-link-icon";
+                  icon.innerHTML = " ↗";
+                  icon.style.cssText =
+                    "font-size: 0.8em; opacity: 0.7; margin-left: 2px;";
+                  link.appendChild(icon);
+                }
+              }
+            } catch (e) {
+              // Invalid URL, skip
+              console.debug("Invalid URL:", href);
+            }
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

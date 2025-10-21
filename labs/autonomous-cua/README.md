@@ -22,9 +22,8 @@ Build an autonomous Copilot Studio agent that retrieves financial portfolio data
 - [Summary of Targets](#-summary-of-targets)
 - [Use Cases Covered](#-use-cases-covered)
 - [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Setup your hosted virtual machine and enable CUA](#-use-case-1-setup-your-hosted-virtual-machine-and-enable-cua)
-  - [Use Case #2: Create and Configure an Autonomous Agent](#-use-case-2-create-and-configure-an-autonomous-agent)
-  - [Use Case #3: Add Computer Use and Email Connector](#️-use-case-3-add-computer-use-and-email-connector)
+  - [Use Case #1: Create and Configure an Autonomous Agent](#-use-case-1-create-and-configure-an-autonomous-agent)
+  - [Use Case #2: Add Computer Use and Email Connector](#️-use-case-2-add-computer-use-and-email-connector)
 
 ---
 
@@ -58,7 +57,7 @@ By implementing a Copilot Studio agent, advisors can securely and instantly retr
 | **Triggers** | Events, as simple as "Email received", that trigger autonomous agents to then automatically detect and process the content and context initially provided. |
 | **Tools** | Tools are simple or sophisticated connectors that the Copilot Studio orchestrator can invoke in response to user queries or business events. |
 | **Computer use tool** | Enables the agent to interact with any system that has a graphical user interface. It works with websites and desktop apps by selecting buttons, choosing menus, and entering text into fields on the screen. It performs the task on a computer you set up using a virtual mouse and keyboard, enabling agents to complete tasks even when there isn't an API to connect to the system directly. If a person can use an app or website, Computer use can too. |
-| **Hosted machines** | Cloud-based virtual machines managed through Microsoft Power Automate that enable agents to trigger either Computer-Using Agents (CUAs) or Power Automate desktop flows. |
+| **Hosted browser** | The hosted browser runs in a Microsoft-managed environment and lets you get started with Computer use quickly without any machine setup. It provides both web automation using Microsoft Edge and access to built-in Windows applications. |
 
 ---
 
@@ -69,15 +68,12 @@ By implementing a Copilot Studio agent, advisors can securely and instantly retr
 * [Use connectors in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-connectors)
 * [Office 365 Outlook Connector](https://learn.microsoft.com/connectors/office365/)
 * [Automate web and desktop apps with computer use](https://learn.microsoft.com/microsoft-copilot-studio/computer-use)
-* [Power Automate Hosted machines](https://learn.microsoft.com/power-automate/desktop-flows/hosted-machines)
 
 ---
 
 ## ✅ Prerequisites
 
 * Access to Microsoft Copilot Studio with appropriate licensing
-* Access to Microsoft Power Automate with appropriate licensing
-* Access to an environment with CUA feature enabled
 * Office 365 environment with Outlook integration enabled
 
 ---
@@ -86,7 +82,6 @@ By implementing a Copilot Studio agent, advisors can securely and instantly retr
 
 In this lab, you'll build an autonomous portfolio lookup agent that retrieves portfolio information from an internal legacy system. By the end of the lab, you will:
 
-* Create a hosted machine in Power Automate and enable it for Computer use
 * Create and configure an autonomous agent with email triggers for automatic activation
 * Add a Computer use tool to simulate the process of a human user retrieving information from a website by logging into a computer, navigating through the website’s graphical user interface, performing searches, and extracting the required data
 * Configure email response tools that reply professionally with proper formatting
@@ -98,9 +93,8 @@ In this lab, you'll build an autonomous portfolio lookup agent that retrieves po
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Setup your Hosted Virtual Machine and Enable CUA](#-use-case-1-setup-your-hosted-virtual-machine-and-enable-cua) | Provides a consistent, isolated environment for Computer use tool to run on. | 10 min (+ 30 min waiting time) |
-| 2 | [Create and Configure an Autonomous Agent](#-use-case-2-create-and-configure-an-autonomous-agent) | Establishes the foundation for automated email processing with intelligent trigger configuration | 10 min |
-| 3 | [Add Computer Use and Email Connector](#️-use-case-3-add-computer-use-and-email-connector) | Enables automated data retrieval from a legacy internal system lacking API connectivity, without requiring backend access or system modifications, by implementing a non-intrusive integration layer. Delivers comprehensive, automated email responses containing only the specifically requested data. | 10 min |
+| 1 | [Create and Configure an Autonomous Agent](#-use-case-1-create-and-configure-an-autonomous-agent) | Establishes the foundation for automated email processing with intelligent trigger configuration | 10 min |
+| 2 | [Add Computer Use and Email Connector](#️-use-case-2-add-computer-use-and-email-connector) | Enables automated data retrieval from a legacy internal system lacking API connectivity, without requiring backend access or system modifications, by implementing a non-intrusive integration layer. Delivers comprehensive, automated email responses containing only the specifically requested data. | 10 min |
 
 ---
 
@@ -108,93 +102,13 @@ In this lab, you'll build an autonomous portfolio lookup agent that retrieves po
 
 ---
 
-## 🧱 Use Case #1: Setup your Hosted Virtual Machine and Enable CUA
-
-Configure a Microsoft-hosted virtual machine in Power Automate and enable it for Computer use, so that the agent can perform UI automation.
-
-| Use case | Value added | Estimated effort |
-|----------|-------------|------------------|
-| Setup your Hosted Virtual Machine and Enable CUA | Provides a consistent, isolated environment for Computer use tool to run on. | 10 min (+ 30 min waiting time) |
-
-**Summary of tasks**
-
-You will navigate to a Power Automate environment, create a hosted Windows 11 machine, configure it for remote access, and enable it for use with the Computer use tool.
-
-**Scenario:** To simulate human interaction with legacy systems, you need a secure, cloud-hosted machine that can run desktop automation tasks using the Computer-Using Agents (CUA) model in Microsoft Copilot Studio.
-
-### Objective
-
-Learn how to provision, configure, and activate a hosted machine in Power Automate to support GUI-based automation with the Computer use tool.
-
----
-
-### Step-by-step instructions
-
-#### Creating the hosted machine in the CUA-enabled environment
-
-1. Navigate to the Power Automate home page of the CUA-enabled environment at https://make.preview.powerautomate.com/environments/2e332bdb-b874-eb3d-b528-4e294d73671e/home
-
-2. Select **More** from the left-hand menu and then **Machines**
-
-3. Select **+New > Hosted machine**
-
-4. In the hosted machine creation wizard:
-
-    a. Enter the name `Hosted machine for CUA`
-
-    b. Select **Next**
-    
-    c. Select the **Default Windows 11 Image**
-    
-    d. Select **Next > Next > Create**
-
-> [!IMPORTANT]
-> The machine may take over 30 minutes to become accessible. You may choose to proceed with another lab in the meantime and return later.
-
-#### Configuring the machine to prepare it for Computer use
-
-5. On the newly created hosted machine, select **Open in browser**
-
-  ![alt text](images/hosted_machine.jpg)
-
-6. Sign in with your training user’s credentials
-
-7. In the **In Session Settings** window select **Connect**
-
-8. In the **Sign in to Cloud PC** window select **Sign In**
-
-9. In the **Allow remote desktop connection?** popup select **Yes**
-
-10. Wait for the machine to sign in, and open the **Microsoft Edge** browser to set it up and ensure the **New tab** window opens up
-
-> [!TIP]
-> This step is needed to ensure that when Computer use automatically opens the browser to perform web related tasks, it encounters the New tab window first.
-
-11. Sign out of the hosted machine
-
-#### Enabling the machine for Computer use
-
-12. Go back to the hosted machine in Power Automate and select **Settings**
-
-13. **Turn on** the **Enable for computer use** setting
-
-14. On the popup, select **Activate**
-
-15. Select **Save**
-
----
-
-###  🏅 Congratulations! You've completed Use Case #1!
-
----
-
-## 🔄 Use Case #2: Create and Configure an Autonomous Agent
+## 🔄 Use Case #1: Create and Configure an Autonomous Agent
 
 Set up the foundational autonomous agent with email triggers that automatically activates when email requests arrive.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create and Configure an Autonomous Agent | Establishes the foundation for automated email processing with intelligent trigger configuration | 10 min |
+| Create and Configure an Autonomous Agent | Establishes the foundation for automated email processing with intelligent trigger configuration | 5 min |
 
 **Summary of tasks**
 
@@ -212,43 +126,45 @@ Learn how to create and configure an autonomous agent that listens for specific 
 
 #### Creating the agent and trigger setup
 
-1. Navigate to the Copilot Studio home page of the CUA-enabled environment at https://copilotstudio.preview.microsoft.com/environments/2e332bdb-b874-eb3d-b528-4e294d73671e/
+1. Navigate to [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com)
 
-2. Select **Create > +New Agent**
+1. Make sure you're in the correct environment by looking at the top right corner. In these labs, the environment name should start with **'DEV - '**
 
-3. Select **Skip to configure** to bypass the initial setup wizard
+1. Go to the **Solutions** menu (located in the left-hand menu under the ellipsis `...`)
 
-4. Name your agent `Portfolio Lookup Agent`
+1. Select the solution you had created previously for your labs
 
-5. Select **Create**
+1. Select **New** and choose **Agent**
 
-#### Enabling generative orchestration
+1. Select **Configure** to bypass the initial setup wizard
 
-6. In the **Overview** tab, **Enable** the **Use generative AI to determine how best to respond to users and events.**
+1. Name your agent `Portfolio Lookup Agent`
+
+1. Select **Create**
 
 #### Configuring email triggers
 
-7. Scroll down to the triggers section and click **+Add trigger**
+9. Scroll down to the triggers section and click **+Add trigger**
 
-8. Search and select `When a new email arrives (V3) (Office 365 Outlook)`
+1. Search and select `When a new email arrives (V3) (Office 365 Outlook)`
 
-9. Select **Next**
+1. Select **Next**
 
-10. Rename the trigger to `When a portfolio lookup email arrives`
+1. Rename the trigger to `When a portfolio lookup email arrives`
 
-11. Select **Next**
+1. Select **Next**
 
-12. In the **Subject Filter (Optional)** field, enter `Portfolio` to filter emails that contain the word "Portfolio" in the subject line
+1. In the **Subject Filter (Optional)** field, enter `Portfolio` to filter emails that contain the word "Portfolio" in the subject line
 
-13. Finally **Create trigger**
-
----
-
-###  🏅 Congratulations! You've completed Use Case #2!
+1. Finally **Create trigger**
 
 ---
 
-## 🖥️ Use Case #3: Add Computer Use and Email Connector
+###  🏅 Congratulations! You've completed Use Case #1!
+
+---
+
+## 🖥️ Use Case #2: Add Computer Use and Email Connector
 
 Configure a Computer use tool that logs into a computer, navigates through a website, searches and retrieves financial portfolio data. Then use the Office 365 Outlook connector to reply with the requested data.
 
@@ -280,44 +196,28 @@ Learn how to integrate and configure tools for desktop automation and email comm
 
 1. Select **Computer use**
 
-> [!TIP]
-> If the Computer use tool doesn't appear, refresh the browser window and check again.
-
-5. Select **Create** to create a new connection to the agent machine and select:
-    
-    a. Agent machine: `Hosted machine for CUA`
-    
-    b. Domain and username: Enter the email address of your training account
-    
-    c. Password: Enter the password of your training account
-
-1. Select **Create**
-
-1. After you set up the connection, select **Add and configure**
-
-1. Configure the **Name** of the Computer use tool as `Look up portfolio data`
-    
-1. Set the **Description** as `Search and retrieve financial portfolio data`
-    
 1. Add the following **Instructions**:
     
     ```
-    1. Open the Microsoft Edge browser.
-    2. Go to [https://computerusedemos.blob.core.windows.net/web/Portfolio/index.html] (https://computerusedemos.blob.core.windows.net/web/Portfolio/index.html).
-    3. Enter the Portfolio ID in the "Enter Portfolio ID" search field and click on the "Search" button.
-    4. Retrieve the "Client Name", "Portfolio Value" and "Manager" values exactly as shown on the screen.
-    5. Return those values as the final output.
+    1. Go to https://computerusedemos.blob.core.windows.net/web/Portfolio/index.html.
+    2. Enter the Portfolio ID in the "Enter Portfolio ID" search field and click on the "Search" button.
+    3. Retrieve the "Client Name", "Portfolio Value" and "Manager" values exactly as shown.
+    4. Return those three values as the final output.
     
-    If no portfolio data is found, reply "No portfolio found with the specified ID."
+    If no portfolio data is found, reply that you couldn't find a portfolio with the specified ID.
     ```
-1. Ensure **Authentication** is set to **Maker-provided credentials**
 
-> [!IMPORTANT]
-> This setting specifies how Computer use authenticates on the machine during execution. Authenticating with the tool owner’s credentials is more suitable for autonomous agents. Be aware that if you share a conversational agent with this setting, anyone using it can act with the original author’s access to the configured machine.
+1. Keep the box **Use hosted browser** checked to create a connection to the hosted browser
 
-12. In the **Inputs** section select **+ Add input**
+1. Select **Add and configure**
 
-1. Enter name `Portfolio ID` and Description `The ID of the portfolio` and select **Done**
+1. Update the **Name** of the Computer use tool as `Look up portfolio data`
+
+1. Update the **Description** as `Search and retrieve financial portfolio data`
+
+1. In the **Inputs** section select **+ Add input**
+
+1. Enter name `Portfolio ID` and description `The ID of the portfolio` and select **Done**
 
 > [!TIP]
 > During execution, Computer use combines your instructions with the input values to complete the task.
@@ -330,7 +230,7 @@ Learn how to integrate and configure tools for desktop automation and email comm
 
 1. Add the sample value `44123BCD` and select **Test now**
 
-1. Observe the Computer use tool logging into the machine and performing the requested actions:
+1. Observe the Computer use tool logging into the computer and performing the requested actions:
     - The left panel shows your instructions and a step-by-step log of the tool’s reasoning and actions.
     - The right panel shows a preview of the actions on the machine you set up for computer use.
 
@@ -353,7 +253,7 @@ Learn how to integrate and configure tools for desktop automation and email comm
 
 1. Update the description to: `Use this operation to reply to the email received`
 
-1. Under **Additional details**, set authentication to **Maker-provided credentials**
+1. Under **Additional details**, set **Credentials to use** to **Maker-provided credentials**
 
 1. Customize the **To** input and set its **Description** to:
     `Use the "from" email of the triggering received email.`
@@ -397,7 +297,7 @@ Learn how to integrate and configure tools for desktop automation and email comm
     I'm looking for the portfolio manager and value of portfolio #44123BCD.
 
     Much appreciated.
-    Thaks!
+    Thanks!
     ```
 
 1. Make sure you receive the email in your training user’s inbox, in outlook.office.com
@@ -411,14 +311,15 @@ Learn how to integrate and configure tools for desktop automation and email comm
 38. Check your emails for the agent’s reply.
 
 > [!TIP]
-> If the Computer use tool seems to be stuck on a particular step, you may stop the running agent by manually signing into the remote hosted machine and signing out again.
+> - Monitor the Computer use tool's actions in the Test chat window or through the agent's **Activity** page.
+> - In the **Activity** page select the current run and switch from **Activity map** to **Transcript** to get a real-time view of all the steps of the Computer use tool along with their respective screenshots. This view is especially useful in autonomous agent runs.
 
 > [!NOTE]
 > Send an additional email request for another portfolio ID and observe the results.
 
 ---
 
-###  🏅 Congratulations! You've completed Use Case #3!
+###  🏅 Congratulations! You've completed Use Case #2!
 
 ---
 
@@ -428,7 +329,6 @@ True learning comes from doing, questioning, and reflecting - so let's put your 
 
 To maximize the impact of autonomous agents for legacy system integration:
 
-* **Leverage hosted machines** – Provide a secure, scalable environment for automation
 * **Use triggers effectively** – Automate business processes based on real-world events
 * **Simulate human actions with Computer use** – Enable automation even when APIs are unavailable
 * **Integrate communication tools** – Ensure timely, professional responses to user requests

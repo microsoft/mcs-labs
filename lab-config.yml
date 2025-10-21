@@ -1,0 +1,580 @@
+# Simplified Lab Configuration - Auto-Discovery Based
+# Only contains journey definitions and optional section customizations
+# Labs are automatically discovered from folders and README files
+#
+# IMPORTANT CONFIGURATION NOTES:
+# =================================
+# 
+# JOURNEY SYSTEM:
+# - The 'journeys' section defines journey cards displayed on the homepage
+# - Only journeys listed here will appear as cards on the main page
+# - Bootcamp is intentionally EXCLUDED from this section to prevent homepage display
+#
+# BOOTCAMP CONFIGURATION:
+# - Bootcamp has a dedicated page at /labs/bootcamp/ with special numbering (1a, 1b, 2, 3a, etc.)
+# - bootcamp_lab_orders section defines lab sequence for bootcamp page
+# - Bootcamp navigation link is hardcoded in _layouts/default.html header
+# - labs/?bootcamp=true parameter still works for dynamic filtering
+#
+# LAB ASSIGNMENT SYSTEM:
+# - lab_journeys section assigns individual labs to their respective journeys
+# - Labs can be assigned to multiple journeys for cross-journey visibility
+# - Bootcamp labs are NOT assigned here to prevent homepage appearance
+#
+# NAVIGATION ARCHITECTURE:
+# - Homepage: Shows journey cards (excludes bootcamp)
+# - Top Navigation: Home | All Labs | Bootcamp (hardcoded links)
+# - Bootcamp Page: Uses bootcamp_lab_orders for custom sequencing
+# - All Labs Page: Shows all labs regardless of journey assignment
+
+# =====================================================
+# JOURNEY DEFINITIONS - Learning paths with metadata
+# =====================================================
+journeys:
+  quick-start:
+    title: "Quick Start Journey"
+    description: "New to Copilot Studio? Start here with our essential labs to get up and running quickly."
+    icon: "🚀"
+    difficulty: "Beginner"
+    estimated_time: "3-4 hours"
+    labs: [1, 2, 3, 4]  # Essential foundation labs
+    
+  business-user:
+    title: "Business User Journey"
+    description: "Perfect for business professionals who want to create powerful AI assistants without deep technical knowledge."
+    icon: "💼"
+    difficulty: "Beginner to Intermediate"
+    estimated_time: "8-12 hours"
+    labs: [1, 2, 3, 11, 12, 13, 41]  # Business-focused labs with optional short version
+    
+  developer:
+    title: "Developer Journey"
+    description: "Technical deep-dive into advanced features, integrations, and development best practices."
+    icon: "🔧"
+    difficulty: "Intermediate to Advanced"
+    estimated_time: "10-15 hours"
+    labs: [3, 4, 11, 12, 13, 21, 22, 23, 31, 32, 33, 34, 51]  # Technical depth and DevOps
+    
+  autonomous-ai:
+    title: "Autonomous AI Journey"
+    description: "Cutting-edge autonomous agents that can perform complex tasks with minimal human intervention."
+    icon: "🤖"
+    difficulty: "Advanced"
+    estimated_time: "6-8 hours"
+    labs: [21, 22, 23]  # Advanced autonomous agent labs
+
+# =====================================================
+# SECTION DEFINITIONS - Optional display customization
+# =====================================================
+sections:
+  core_learning_path:
+    title: "Core Learning Path"
+    icon: "📚"
+    slug: "core"
+    type: "main"
+    description: "Essential foundation labs - start here first!"
+    
+  intermediate_labs:
+    title: "Intermediate Labs" 
+    icon: "🎯"
+    slug: "intermediate"
+    type: "main"
+    description: "Build on core concepts with practical applications"
+    
+  advanced_labs:
+    title: "Advanced Labs"
+    icon: "🚀"
+    slug: "advanced"
+    type: "main"
+    description: "Complex scenarios and autonomous agents"
+    
+  specialized_labs:
+    title: "Specialized Labs"
+    icon: "⚡"
+    slug: "specialized"
+    type: "main"
+    description: "Development tools and success measurement"
+    
+  optional_labs:
+    title: "Optional Labs"
+    icon: "🔧"
+    slug: "optional"
+    type: "optional"
+    description: "Alternative versions and shorter formats"
+    
+  external_labs:
+    title: "External Labs"
+    icon: "🌐"
+    slug: "external"
+    type: "external"
+    description: "Labs hosted in external repositories"
+
+# =====================================================
+# LAB METADATA - Complete lab information with numbers
+# =====================================================
+# This section provides a comprehensive view of all labs with their assigned
+# numbers, titles, and key metadata for easy reference and management.
+lab_metadata:
+  # === CORE LEARNING PATH (1-10) ===
+  1:
+    id: "agent-builder-web"
+    title: "Create your own web-based AI assistant with lite experience of Copilot Studio in Microsoft 365 Copilot"
+    difficulty: "Beginner (Level 100)"
+    duration: 15
+    section: "core_learning_path"
+    
+  2:
+    id: "public-website-agent"
+    title: "Give your public website chatbot a brain and make it an agent"
+    difficulty: "Beginner (Level 100)"
+    duration: 25
+    section: "core_learning_path"
+    
+  3:
+    id: "mbr-prep-sharepoint-agent"
+    title: "Create a Monthly Business Review (MBR) Agent"
+    difficulty: "Beginner (Level 100)"
+    duration: 20
+    section: "core_learning_path"
+    
+  4:
+    id: "standard-orchestrator"
+    title: "Create your own SharePoint-based AI assistant with the lite experience of Copilot Studio in Microsoft 365 Copilot"
+    difficulty: "Intermediate (Level 200)"
+    duration: 20
+    section: "core_learning_path"
+
+  # === INTERMEDIATE LABS (11-20) ===
+  11:
+    id: "setup-for-success"
+    title: "Set yourself up for success & discover ALM best practices"
+    difficulty: "Intermediate (Level 200)"
+    duration: 35
+    section: "intermediate_labs"
+    
+  12:
+    id: "agent-builder-sharepoint"
+    title: "Create your own SharePoint-based AI assistant with the lite experience of Copilot Studio in Microsoft 365 Copilot"
+    difficulty: "Intermediate (Level 200)"
+    duration: 20
+    section: "intermediate_labs"
+    
+  13:
+    id: "ask-me-anything"
+    title: "Create an 'Ask me anything' agent for your employees"
+    difficulty: "Intermediate (Level 200)"
+    duration: 40
+    section: "intermediate_labs"
+
+  # === ADVANCED LABS (21-30) ===
+  21:
+    id: "autonomous-cua"
+    title: "Build an autonomous agent that uses Computer Use to retrieve data from legacy systems that lack API connectivity"
+    difficulty: "Advanced (Level 300)"
+    duration: 60
+    section: "advanced_labs"
+    
+  22:
+    id: "autonomous-account-news"
+    title: "Build an Autonomous Account News Assistant Agent"
+    difficulty: "Advanced (Level 300)"
+    duration: 60
+    section: "advanced_labs"
+    
+  23:
+    id: "autonomous-support-agent"
+    title: "Create an autonomous support agent and unlock new levels of productivity with AI automation"
+    difficulty: "Advanced (Level 300)"
+    duration: 20
+    section: "advanced_labs"
+
+  # === SPECIALIZED LABS (31-40) ===
+  31:
+    id: "measure-success"
+    title: "Measure Success & Analytics"
+    difficulty: "Advanced (Level 300)"
+    duration: 30
+    section: "specialized_labs"
+    
+  32:
+    id: "pipelines-and-source-control"
+    title: "Source control and deploy your agents"
+    difficulty: "Advanced (Level 300)"
+    duration: 45
+    section: "specialized_labs"
+    
+  33:
+    id: "copilot-studio-kit"
+    title: "Copilot Studio Kit"
+    difficulty: "Advanced (Level 300)"
+    duration: 30
+    section: "specialized_labs"
+    
+  34:
+    id: "mcp-qualify-lead"
+    title: "MCP Qualify Lead"
+    difficulty: "Advanced (Level 300)"
+    duration: 45
+    section: "specialized_labs"
+
+  # === OPTIONAL LABS (41-50) ===
+  41:
+    id: "ask-me-anything-30-mins"
+    title: "Create an 'Ask me anything' agent for your employees (30 min version)"
+    difficulty: "Intermediate (Level 200)"
+    duration: 30
+    section: "optional_labs"
+
+  # === EXTERNAL LABS (51-60) ===
+  51:
+    id: "mcs-mcp-external"
+    title: "Model Context Protocol (MCP) & Copilot Studio"
+    difficulty: "Advanced (Level 300)"
+    duration: 90
+    section: "external_labs"
+
+# =====================================================
+# BOOTCAMP LAB ORDERING - Specific sequence for bootcamp journey
+# =====================================================
+# This section provides the specific lab numbering used in the bootcamp journey
+# which uses a different numbering scheme with sub-labs (1a, 1b, 3a, 3b, 5a, 5b)
+bootcamp_lab_orders:
+  # Lab 1: Declarative Agents
+  "1a": "agent-builder-web"              # M365 Copilot declarative agent
+  "1b": "agent-builder-sharepoint"       # SharePoint declarative agent
+  
+  # Lab 2: ALM Foundation
+  2: "setup-for-success"                 # Setup for success with ALM
+  
+  # Lab 3: Custom Agents
+  "3a": "public-website-agent"           # Custom Agent for web
+  "3b": "mbr-prep-sharepoint-agent"      # Custom Agent for SharePoint
+  
+  # Lab 4: Multi-Agent Systems
+  4: "ask-me-anything"                   # Ask me anything agent
+  
+  # Lab 5: Autonomous Agents
+  "5a": "autonomous-support-agent"       # Autonomous support agent
+  "5b": "autonomous-account-news"        # Autonomous sales opportunity agent
+  
+  # Lab 6: DevOps & Deployment
+  6: "pipelines-and-source-control"      # Pipelines & source control + ALM gotchas
+  
+  # Lab 7: Quality & Testing
+  7: "copilot-studio-kit"                # Copilot Studio Kit
+
+# =====================================================
+# LAB ORDERING - Explicit order values for navigation
+# =====================================================
+# This section provides explicit ordering for all labs. The numbers determine
+# the sequence in which labs appear in navigation and lab cards.
+# Lower numbers appear first, higher numbers appear later.
+lab_orders:
+  # Core Learning Path (1-10) - Foundation labs for everyone
+  agent-builder-web: 1
+  public-website-agent: 2
+  mbr-prep-sharepoint-agent: 3 
+  standard-orchestrator: 4
+  
+  # Intermediate Labs (11-20) - Building on basics
+  setup-for-success: 11
+  agent-builder-sharepoint: 12
+  ask-me-anything: 13
+  
+  # Advanced Labs (21-30) - Complex scenarios and autonomous agents
+  autonomous-cua: 21
+  autonomous-account-news: 22
+  autonomous-support-agent: 23
+  
+  # Specialized Labs (31-40) - Development tools and success measurement
+  measure-success: 31
+  pipelines-and-source-control: 32
+  copilot-studio-kit: 33
+  mcp-qualify-lead: 34
+  
+  # Optional Labs (41-50) - Alternative versions and shorter formats
+  ask-me-anything-30-mins: 41
+  
+  # External Labs (51-60) - Labs hosted in external repositories
+  mcs-mcp-external: 51
+
+# =====================================================
+# JOURNEY LAB SEQUENCES - Detailed lab progression for each journey
+# =====================================================
+# This section provides the explicit lab sequences for each journey with
+# detailed information about progression and learning objectives.
+journey_sequences:
+  quick-start:
+    description: "Essential foundation for newcomers to Copilot Studio"
+    sequence:
+      - lab_number: 1
+        lab_id: "agent-builder-web"
+        title: "Create your first web-based AI assistant"
+        why_included: "Introduction to basic agent building concepts"
+        
+      - lab_number: 2
+        lab_id: "public-website-agent"
+        title: "Give your website chatbot intelligence"
+        why_included: "Learn to enhance existing bots with AI capabilities"
+        
+      - lab_number: 3
+        lab_id: "mbr-prep-sharepoint-agent"
+        title: "Build a business-focused MBR agent"
+        why_included: "Apply skills to real business scenarios"
+        
+      - lab_number: 4
+        lab_id: "standard-orchestrator"
+        title: "Master SharePoint integration"
+        why_included: "Complete foundation with enterprise integration"
+
+  bootcamp:
+    description: "Comprehensive hands-on bootcamp training sequence"
+    sequence:
+      - lab_number: "1a"
+        lab_id: "agent-builder-web"
+        title: "M365 Copilot declarative agent: Create your own web-based AI assistant"
+        why_included: "Introduction to declarative agents in M365 Copilot"
+        
+      - lab_number: "1b"
+        lab_id: "agent-builder-sharepoint"
+        title: "SharePoint declarative agent: Create your own SharePoint-based AI assistant"
+        why_included: "Learn SharePoint integration with declarative agents"
+        
+      - lab_number: 2
+        lab_id: "setup-for-success"
+        title: "Setup for success with ALM: Set yourself up for success & discover ALM best practices"
+        why_included: "Essential ALM practices for professional development"
+        
+      - lab_number: "3a"
+        lab_id: "public-website-agent"
+        title: "Custom Agent for web: Give your public website chatbot a brain and make it an agent"
+        why_included: "Advanced custom agent development for web scenarios"
+        
+      - lab_number: "3b"
+        lab_id: "mbr-prep-sharepoint-agent"
+        title: "Custom Agent for SharePoint: Create a Monthly Business Review (MBR) Agent"
+        why_included: "Business-focused custom agent for SharePoint scenarios"
+        
+      - lab_number: 4
+        lab_id: "ask-me-anything"
+        title: "Ask me anything agent: Create an 'Ask me anything' agent for your employees"
+        why_included: "Complex multi-agent system with intelligent routing"
+        
+      - lab_number: "5a"
+        lab_id: "autonomous-support-agent"
+        title: "Autonomous support agent: Unlock new levels of productivity with AI automation"
+        why_included: "Introduction to autonomous agent capabilities"
+        
+      - lab_number: "5b"
+        lab_id: "autonomous-account-news"
+        title: "Autonomous sales opportunity agent: Build an Autonomous Account News Assistant Agent"
+        why_included: "Real-world autonomous agent for sales scenarios"
+        
+      - lab_number: 6
+        lab_id: "pipelines-and-source-control"
+        title: "Pipelines & source control + ALM gotchas: Deploy with confidence"
+        why_included: "Professional deployment practices and ALM best practices"
+        
+      - lab_number: 7
+        lab_id: "copilot-studio-kit"
+        title: "Copilot Studio Kit: Deliver high-quality, scalable agents"
+        why_included: "Quality assurance and testing framework for enterprise deployment"
+
+  business-user:
+    description: "Business-focused journey with minimal technical complexity"
+    sequence:
+      - lab_number: 1
+        lab_id: "agent-builder-web"
+        title: "Start Simple: Basic agent creation"
+        why_included: "Easy entry point for business users"
+        
+      - lab_number: 2
+        lab_id: "public-website-agent"
+        title: "Practical Application: Website enhancement"
+        why_included: "Immediate business value"
+        
+      - lab_number: 3
+        lab_id: "mbr-prep-sharepoint-agent"
+        title: "Business Process: MBR automation"
+        why_included: "Common business use case"
+        
+      - lab_number: 11
+        lab_id: "setup-for-success"
+        title: "Professional Practices: ALM basics"
+        why_included: "Essential professional habits"
+        
+      - lab_number: 12
+        lab_id: "agent-builder-sharepoint"
+        title: "Enterprise Tools: SharePoint integration"
+        why_included: "Common enterprise scenario"
+        
+      - lab_number: 13
+        lab_id: "ask-me-anything"
+        title: "Advanced Application: IT support agent"
+        why_included: "Complex but business-relevant scenario"
+        
+      - lab_number: 41
+        lab_id: "ask-me-anything-30-mins"
+        title: "Quick Alternative: Simplified IT support"
+        why_included: "Time-efficient alternative for busy users"
+
+  developer:
+    description: "Technical deep-dive with advanced integrations and DevOps"
+    sequence:
+      - lab_number: 3
+        lab_id: "mbr-prep-sharepoint-agent"
+        title: "Business Context: MBR agent"
+        why_included: "Understand business requirements"
+        
+      - lab_number: 4
+        lab_id: "standard-orchestrator"
+        title: "Technical Foundation: SharePoint orchestration"
+        why_included: "Core technical integration skills"
+        
+      - lab_number: 11
+        lab_id: "setup-for-success"
+        title: "DevOps Foundation: ALM best practices"
+        why_included: "Essential development practices"
+        
+      - lab_number: 12
+        lab_id: "agent-builder-sharepoint"
+        title: "Advanced Integration: SharePoint agents"
+        why_included: "Complex integration scenarios"
+        
+      - lab_number: 13
+        lab_id: "ask-me-anything"
+        title: "Multi-Agent Architecture: IT support system"
+        why_included: "Advanced architectural patterns"
+        
+      - lab_number: 21
+        lab_id: "autonomous-cua"
+        title: "Cutting-Edge: Computer Use automation"
+        why_included: "Latest autonomous AI capabilities"
+        
+      - lab_number: 22
+        lab_id: "autonomous-account-news"
+        title: "Production Autonomous: Account news system"
+        why_included: "Real-world autonomous deployment"
+        
+      - lab_number: 23
+        lab_id: "autonomous-support-agent"
+        title: "Enterprise Autonomous: Support automation"
+        why_included: "Enterprise-grade autonomous solutions"
+        
+      - lab_number: 31
+        lab_id: "measure-success"
+        title: "Analytics: Success measurement"
+        why_included: "Data-driven optimization"
+        
+      - lab_number: 32
+        lab_id: "pipelines-and-source-control"
+        title: "Advanced DevOps: CI/CD pipelines"
+        why_included: "Professional deployment automation"
+        
+      - lab_number: 33
+        lab_id: "copilot-studio-kit"
+        title: "Quality Engineering: Testing framework"
+        why_included: "Enterprise testing and governance"
+        
+      - lab_number: 34
+        lab_id: "mcp-qualify-lead"
+        title: "Specialized Integration: MCP lead qualification"
+        why_included: "Advanced integration patterns"
+        
+      - lab_number: 51
+        lab_id: "mcs-mcp-external"
+        title: "External Integration: Model Context Protocol"
+        why_included: "Advanced external system integration"
+
+  autonomous-ai:
+    description: "Focused on cutting-edge autonomous agent capabilities"
+    sequence:
+      - lab_number: 21
+        lab_id: "autonomous-cua"
+        title: "Computer Use: Legacy system automation"
+        why_included: "Revolutionary computer automation capabilities"
+        
+      - lab_number: 22
+        lab_id: "autonomous-account-news"
+        title: "Information Gathering: Automated news analysis"
+        why_included: "Autonomous information processing and analysis"
+        
+      - lab_number: 23
+        lab_id: "autonomous-support-agent"
+        title: "Support Automation: Fully autonomous help desk"
+        why_included: "Complete end-to-end autonomous workflows"
+
+# =====================================================
+# LAB JOURNEY ASSIGNMENTS - Explicit journey mapping
+# =====================================================
+# This section provides explicit control over which journeys each lab belongs to.
+# If a lab is listed here, it will use these exact journey assignments.
+# If a lab is NOT listed here, the script will auto-assign journeys based on
+# difficulty levels and content analysis (fallback behavior).
+#
+# Format: lab-folder-name: ["journey1", "journey2", ...]
+# Available journeys: quick-start, business-user, developer, autonomous-ai
+lab_journeys:
+  # Core Learning Path - Foundation labs for everyone
+  agent-builder-web: ["quick-start", "business-user"]
+  mbr-prep-sharepoint-agent: ["quick-start", "business-user", "developer"]
+  public-website-agent: ["quick-start", "business-user"]
+  standard-orchestrator: ["quick-start", "developer"]
+  
+  # Intermediate Labs - Building on basics
+  setup-for-success: ["business-user", "developer"]
+  agent-builder-sharepoint: ["business-user", "developer"]
+  ask-me-anything: ["business-user", "developer"]
+  
+  # Advanced Labs - Complex scenarios
+  autonomous-cua: ["autonomous-ai", "developer"]
+  autonomous-account-news: ["autonomous-ai", "developer"]
+  autonomous-support-agent: ["autonomous-ai", "developer"]
+  
+  # Specialized Labs - Technical depth
+  measure-success: ["developer"]
+  pipelines-and-source-control: ["developer"]
+  copilot-studio-kit: ["developer"]
+  mcp-qualify-lead: ["developer"]
+  
+  # Optional Labs - Alternative approaches
+  ask-me-anything-30-mins: ["business-user"]
+  
+  # External Labs - External repositories
+  mcs-mcp-external: ["developer"]
+
+# =====================================================
+# EXTERNAL LABS - Labs not hosted in this repository
+# =====================================================
+external_labs:
+  - id: mcs-mcp-external
+    title: "Model Context Protocol (MCP) & Copilot Studio"
+    duration: 90
+    difficulty: "Advanced"
+    description: "Learn to deploy an MCP Server and integrate it with Microsoft Copilot Studio"
+    url: "https://github.com/microsoft/mcsmcp"
+    repository: "microsoft/mcsmcp"
+    journeys: ["developer"]
+    section: "external_labs"
+
+# =====================================================
+# AUTO-DISCOVERY RULES (Optional - for documentation)
+# =====================================================
+# The system automatically:
+# 1. Scans labs/ folders for README.md files
+# 2. Extracts metadata from lab details tables
+# 3. Auto-assigns sections based on:
+#    - Difficulty levels (100=core, 200=intermediate, 300+=advanced)
+#    - Folder name patterns (autonomous=advanced, 30-mins=optional, etc.)
+# 4. Auto-assigns journeys based on:
+#    - Difficulty and content analysis
+#    - Keywords in titles and descriptions
+# 5. Uses intelligent defaults for missing metadata
+
+# To override auto-assignment, add YAML front matter to lab README files:
+# ---
+# journeys: ["custom-journey"]
+# section: "custom_section"
+# difficulty: 150
+# duration: 45
+# ---# Force trigger

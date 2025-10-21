@@ -1,0 +1,2802 @@
+/* ============================================================================
+   MCS Labs - Main Stylesheet
+   
+   This is the main CSS file that provides theme-agnostic base styles and 
+   component styling. All colors and theme-specific values are loaded from
+   separate theme CSS files that define CSS custom properties (variables).
+   
+   ARCHITECTURE OVERVIEW:
+   1. This file contains structural styles and layout
+   2. Theme files contain color schemes and visual styling
+   3. All components use CSS custom properties for theme flexibility
+   4. JavaScript theme manager dynamically loads theme CSS files
+   
+   THEME SYSTEM:
+   - Rich Theme: Colorful, engaging design with gradients (theme-rich.css)
+   - Minimal Theme: Clean, blog-style design (theme-minimal.css)  
+   - Each theme supports light and dark modes
+   - Easy to add new themes by creating new CSS files with same variables
+   
+   KEY FEATURES IMPLEMENTED:
+   - GitHub-style callouts (NOTE, TIP, IMPORTANT, WARNING, CAUTION)
+   - Copy-to-clipboard buttons for code blocks
+   - Image lightbox/zoom functionality
+   - Universal theme controls that work on any header background
+   - Responsive design and accessibility support
+   ============================================================================ */
+
+/* ============================================================================
+   RESET AND BASE STYLES
+   ============================================================================ */
+
+/* CSS Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* ============================================================================
+   FOUC (Flash of Unstyled Content) Prevention
+   
+   Simplified approach that relies on immediate theme attribute setting
+   in the HTML head. This ensures theme CSS variables are available
+   immediately when the page renders.
+   
+   APPROACH:
+   - Set data-theme and data-theme-family attributes immediately in head
+   - Let CSS custom properties handle theme styling without delays
+   - Avoid complex hiding/showing logic that interferes with navigation
+   ============================================================================ */
+
+/* Global Smooth Transitions - Applied to all theme changes */
+* {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease !important;
+}
+
+/* ============================================================================
+   CSS CUSTOM PROPERTIES USAGE
+   
+   All colors and theme-specific values are loaded from external theme files:
+   - assets/css/themes/theme-rich.css (Rich light & dark themes)
+   - assets/css/themes/theme-minimal.css (Minimal light & dark themes)
+   
+   Variables are organized by category:
+   - Base colors: --bg-primary, --text-primary, --border-color
+   - Component colors: --callout-*, --copy-button-*, --lightbox-*
+   - Interactive states: --hover-bg, --accent-primary-hover
+   - Mode overrides: [data-theme="dark"] selector for dark mode variants
+   ============================================================================ */
+
+/* ============================================================================
+   UTILITY CLASSES
+   ============================================================================ */
+
+.hidden {
+    display: none !important;
+}
+
+/* ============================================================================
+   GLOBAL TYPOGRAPHY AND LAYOUT
+   ============================================================================ */
+
+body {
+    font-family: var(--font-family-base, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif);
+    font-size: var(--font-size-base, 16px);
+    line-height: var(--line-height-base, 1.6);
+    color: var(--text-primary); /* Theme-specific text color */
+    background-color: var(--bg-primary); /* Theme-specific background */
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Override container for lab pages to allow full width - only for main content */
+body.lab-page .site-content .container {
+    max-width: none;
+    padding: 0;
+}
+
+/* Header */
+.site-header {
+    background: var(--header-bg) !important;
+    color: var(--header-text) !important;
+    padding: 1rem 0;
+    box-shadow: 0 2px 4px var(--shadow);
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.site-header h1 a {
+    color: var(--header-text); /* Uses theme-specific header text color */
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.site-header nav a {
+    color: var(--header-text-secondary); /* Uses theme-specific secondary text */
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.site-header nav a:hover {
+    color: var(--header-text); /* Uses theme-specific primary text on hover */
+    background: var(--header-hover); /* Uses theme-specific hover background */
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.site-header h1 a {
+    color: var(--header-text); /* Uses theme-specific header text color */
+    text-decoration: none;
+    font-size: 1.5rem;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.site-header nav {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.site-header nav a {
+    color: var(--header-text-secondary);
+    text-decoration: none;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.site-header nav a:hover {
+    background-color: var(--header-hover);
+    color: var(--header-text);
+}
+
+/* Bootcamp navigation button styles */
+.site-header nav .bootcamp-nav-btn {
+    background-color: var(--accent-color, #0066cc);
+    color: white !important;
+    font-weight: 600;
+    border: 2px solid var(--accent-color, #0066cc);
+}
+
+.site-header nav .bootcamp-nav-btn:hover {
+    background-color: var(--accent-color-hover, #0052a3);
+    border-color: var(--accent-color-hover, #0052a3);
+    color: white !important;
+}
+
+/* ============================================================================
+   THEME CONTROLS - Universal Styling System
+   
+   These controls allow users to switch between themes and light/dark modes.
+   
+   DESIGN PRINCIPLES:
+   - Theme-independent: Works on any header background color
+   - Semi-transparent dark containers for universal visibility
+   - Backdrop blur for modern glass morphism effect
+   - No conditional CSS - one style works everywhere
+   
+   COMPONENTS:
+   - .theme-style-toggle: Container for Rich/Minimal theme buttons
+   - .theme-style-btn: Individual theme selection buttons  
+   - .light-dark-toggle: Circular button for light/dark mode switching
+   - .mode-divider: Visual separator between theme and mode controls
+   
+   SCALABILITY:
+   - Adding new themes requires no changes to these styles
+   - Controls automatically work with any header color scheme
+   - JavaScript theme manager handles the actual theme switching logic
+   ============================================================================ */
+
+.theme-controls {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+/* Container for theme selection buttons (Rich/Minimal) */
+.theme-style-toggle {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    background: rgba(0, 0, 0, 0.6); /* Semi-transparent dark background */
+    border-radius: 16px;
+    padding: 2px;
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    -webkit-backdrop-filter: blur(8px); /* Safari compatibility */
+    backdrop-filter: blur(8px); /* Modern glass effect */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Individual theme selection buttons */
+.theme-style-btn {
+    background: transparent;
+    border: none;
+    padding: 6px 12px;
+    color: rgba(255, 255, 255, 0.9); /* Always white text for visibility */
+    font-size: 0.8rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    border-radius: 12px;
+    position: relative;
+    white-space: nowrap;
+}
+
+.theme-style-btn:hover {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+/* Active theme button styling */
+.theme-style-btn.active {
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.3);
+    font-weight: 600;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.theme-style-btn .theme-icon {
+    font-size: 0.9rem;
+    line-height: 1;
+}
+
+.theme-style-btn .theme-label {
+    font-size: 0.75rem;
+    font-weight: inherit;
+}
+
+/* Visual separator between theme selection and mode toggle */
+.mode-divider {
+    width: 1px;
+    height: 16px;
+    background: rgba(255, 255, 255, 0.3);
+    margin: 0 8px;
+}
+
+/* Circular light/dark mode toggle button */
+.light-dark-toggle {
+    background: rgba(0, 0, 0, 0.6); /* Matches theme toggle container */
+    border: 1px solid rgba(0, 0, 0, 0.3);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.9rem;
+    -webkit-backdrop-filter: blur(8px); /* Safari compatibility */
+    backdrop-filter: blur(8px); /* Glass effect */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.light-dark-toggle:hover {
+    background: rgba(0, 0, 0, 0.7);
+    color: #ffffff;
+    transform: scale(1.05);
+    border-color: rgba(0, 0, 0, 0.4);
+}
+
+.light-dark-toggle:active {
+    transform: scale(0.95);
+}
+
+/* Icon rotation animation on hover */
+.light-dark-icon {
+    transition: transform 0.2s ease;
+}
+
+.light-dark-toggle:hover .light-dark-icon {
+    transform: rotate(15deg);
+}
+
+/* Prevent horizontal scroll */
+body {
+    overflow-x: hidden;
+}
+
+/* Journey Navigation Bar */
+.journey-nav-bar {
+    background: var(--accent-secondary);
+    border-top: 1px solid rgba(255,255,255,0.1);
+    padding: 0.75rem 0;
+}
+
+.journey-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.journey-nav .nav-label {
+    color: rgba(255,255,255,0.8);
+    font-size: 0.9rem;
+    font-weight: 500;
+    margin-right: 0.5rem;
+}
+
+.journey-link {
+    color: rgba(255,255,255,0.9);
+    text-decoration: none;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: 1px solid transparent;
+}
+
+.journey-link:hover {
+    background-color: var(--overlay-hover);
+    color: white;
+}
+
+.journey-link.active {
+    background-color: var(--overlay-active);
+    color: white;
+    border-color: var(--overlay-border);
+}
+
+/* Lab Layout with Sidebar */
+.lab-layout {
+    display: flex;
+    width: 95%; /* Use percentage for full utilization */
+    max-width: none; /* Remove max-width constraint */
+    margin: 0 auto;
+    gap: 2rem;
+    padding: 0 2.5%; /* Percentage-based padding */
+    box-sizing: border-box;
+}
+
+.lab-sidebar {
+    width: 260px;
+    flex-shrink: 0;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    box-sizing: border-box;
+    box-shadow: 0 2px 8px var(--shadow);
+    max-height: calc(100vh - 4rem);
+    position: sticky;
+    top: 2rem;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar-content {
+    padding: 1.5rem;
+    padding-right: 1rem; /* Less right padding to account for scrollbar */
+    padding-bottom: 2rem; /* Extra padding at bottom for scroll fade */
+}
+
+/* Custom scrollbar for sidebar */
+.lab-sidebar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lab-sidebar::-webkit-scrollbar-track {
+    background: var(--scrollbar-track);
+    border-radius: 3px;
+}
+
+.lab-sidebar::-webkit-scrollbar-thumb {
+    background: var(--scrollbar-thumb);
+    border-radius: 3px;
+}
+
+.lab-sidebar::-webkit-scrollbar-thumb:hover {
+    background: var(--scrollbar-thumb-hover);
+}
+
+/* Subtle fade effect at bottom to indicate scrollable content */
+.lab-sidebar::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 6px; /* Account for scrollbar */
+    height: 15px;
+    background: linear-gradient(transparent, var(--fade-gradient));
+    pointer-events: none;
+    border-radius: 0 0 8px 8px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.lab-sidebar:hover::after {
+    opacity: 1;
+}
+
+.sidebar-content h3 {
+    color: var(--accent-primary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    transition: color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Sidebar context */
+.sidebar-journey-header {
+    margin-bottom: 1rem;
+}
+
+.journey-title {
+    color: var(--accent-primary);
+    font-weight: 600;
+    font-size: 1rem;
+    display: block;
+    padding: 0.75rem 1rem;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-primary);
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px var(--shadow);
+}
+
+.journey-labs {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+/* Journey and Section headers for main content area */
+.content-journey-header, .section-header {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--accent-primary);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: all 0.3s ease;
+}
+
+.content-journey-header h1, .section-header h1 {
+    color: var(--accent-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.75rem;
+}
+
+.content-journey-header p, .section-header p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+    line-height: 1.5;
+}
+
+.journey-stats, .section-stats {
+    background: var(--bg-tertiary);
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-light);
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.journey-stats strong, .section-stats strong {
+    color: var(--text-primary);
+}
+
+/* Dark mode adjustments */
+[data-theme="dark"] .content-journey-header, 
+[data-theme="dark"] .section-header {
+    border-left-color: var(--accent-secondary);
+}
+
+[data-theme="dark"] .content-journey-header h1, 
+[data-theme="dark"] .section-header h1 {
+    color: var(--accent-secondary);
+}
+
+.lab-nav-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.75rem;
+    padding: 0.75rem 0.5rem;
+    text-decoration: none;
+    color: var(--text-primary);
+    border-radius: 6px;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+    font-size: 0.9rem;
+    position: relative;
+}
+
+.lab-nav-item:hover {
+    background: var(--hover-bg);
+    border-left-color: var(--accent-primary);
+}
+
+.lab-nav-item.current {
+    background: var(--bg-tertiary);
+    border-left-color: var(--accent-primary);
+    font-weight: 600;
+}
+
+.lab-order {
+    background: var(--accent-primary);
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.lab-nav-item.current .lab-order {
+    background: var(--accent-secondary);
+}
+
+.lab-title {
+    flex: 1;
+    line-height: 1.3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    min-width: 0;
+}
+
+/* Show full title on hover using browser tooltip */
+.lab-nav-item .lab-title {
+    cursor: pointer;
+}
+
+.lab-duration {
+    color: var(--text-secondary);
+    font-size: 0.8rem;
+    background: var(--hover-bg);
+    padding: 0.2rem 0.5rem;
+    border-radius: 12px;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.other-journeys {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-color);
+    transition: border-color 0.3s ease;
+}
+
+.other-journeys h4 {
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+.other-journey {
+    display: inline-block;
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-size: 0.85rem;
+    padding: 0.3rem 0.6rem;
+    background: var(--bg-tertiary);
+    border-radius: 4px;
+    margin-right: 0.5rem;
+    margin-bottom: 0.25rem;
+    transition: all 0.3s ease;
+}
+
+.other-journey:hover {
+    background: var(--hover-bg);
+}
+
+.no-journey {
+    text-align: center;
+    color: var(--text-secondary);
+    padding: 2rem 1rem;
+    transition: color 0.3s ease;
+}
+
+.no-journey a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+/* Lab Content Adjustments */
+.lab-content {
+    flex: 1;
+    min-width: 0; /* Prevent flex item from overflowing */
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px var(--shadow);
+    padding: 2rem;
+    overflow-wrap: break-word;
+    margin-bottom: 2rem;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+/* Journey Navigation Buttons */
+.journey-nav-buttons {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    margin-top: 2rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--border-color);
+    transition: border-color 0.3s ease;
+}
+
+.nav-button {
+    padding: 0.75rem 1.5rem;
+    background: var(--accent-primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.nav-button:hover {
+    background: var(--accent-primary-hover);
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.nav-button.journey {
+    background: var(--bg-secondary);
+    color: var(--accent-primary);
+    border: 2px solid var(--accent-primary);
+    transition: all 0.3s ease;
+}
+
+.nav-button.journey:hover {
+    background: var(--accent-primary);
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Responsive Design for Navigation */
+@media (min-width: 1920px) {
+    .lab-layout {
+        width: 92%; /* Slightly less margin on ultra-wide */
+        padding: 0 4%; /* Percentage-based padding */
+        gap: 3rem; /* Larger gap for ultra-wide screens */
+    }
+    
+    .lab-sidebar {
+        width: 320px; /* Wider sidebar for ultra-wide screens */
+    }
+    
+    .sidebar-content {
+        padding: 2rem;
+        padding-right: 1.5rem;
+        padding-bottom: 2.5rem;
+    }
+    
+    .lab-content {
+        padding: 3rem; /* More generous padding for content */
+    }
+}
+
+@media (min-width: 1440px) and (max-width: 1919px) {
+    .lab-layout {
+        width: 94%; /* Use more width on wide screens */
+        padding: 0 3%; /* Percentage-based padding */
+    }
+    
+    .lab-sidebar {
+        width: 280px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .lab-layout {
+        flex-direction: column;
+        width: 95%;
+        padding: 0 2.5%; /* Consistent percentage-based padding */
+    }
+    
+    .lab-sidebar {
+        width: 100%;
+        position: static;
+        order: 2;
+    }
+    
+    .lab-content {
+        order: 1;
+    }
+}
+
+@media (max-width: 768px) {
+    .journey-nav {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .journey-nav .nav-label {
+        margin-bottom: 0.5rem;
+    }
+    
+    .journey-nav-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Main content */
+.site-content {
+    min-height: calc(100vh - 120px);
+    padding: 2rem 0;
+}
+
+/* Learning paths layout */
+.learning-paths {
+    margin: 2rem 0;
+}
+
+/* Lab grid */
+.labs-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.labs-grid.main-path {
+    margin-bottom: 3rem;
+}
+
+.lab-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s, background-color 0.3s ease;
+    border-left: 4px solid var(--accent-primary);
+    position: relative;
+    overflow: hidden;
+}
+
+.lab-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-hover);
+}
+
+/* Make entire card clickable */
+.lab-card-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    height: 100%;
+    cursor: pointer;
+}
+
+.lab-card-link:hover {
+    text-decoration: none;
+    color: inherit;
+}
+
+.lab-card-link:focus {
+    outline: 2px solid var(--accent-primary);
+    outline-offset: 2px;
+}
+
+/* Lab numbering and badges 
+   IMPORTANT: These styles control lab number visibility across the site
+   
+   Lab numbering displays in multiple contexts:
+   1. Lab Cards: Circular badges showing sequence numbers (1, 2, 3, etc.)
+   2. Sidebar Navigation: Sequential ordering indicators
+   3. Bootcamp Page: Special numbering (1a, 1b, 2, 3a, 3b, etc.)
+   
+   CRITICAL: Never add "display: none !important" to .lab-sequence or .lab-order
+   This would hide lab numbers globally and break the numbering system
+   
+   Lab numbers are essential for:
+   - User navigation and progress tracking
+   - Understanding lab sequence and dependencies
+   - Visual hierarchy and organization */
+.lab-sequence {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--accent-primary);
+    color: white;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 12px rgba(0,120,212,0.4);
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.sequence-number {
+    color: white;
+    font-weight: 700;
+    font-size: 1.2rem;
+    line-height: 1;
+}
+
+.lab-card:hover .lab-sequence {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0,120,212,0.5);
+}
+
+/* Legacy support for .lab-number if still used anywhere */
+.lab-number {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background: var(--accent-primary);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 1.1rem;
+    box-shadow: 0 2px 8px rgba(0,120,212,0.3);
+    transition: background-color 0.3s ease;
+}
+
+.difficulty-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+}
+
+.difficulty-badge.level-100 {
+    background: var(--badge-green-bg);
+    color: var(--badge-green-text);
+    transition: all 0.3s ease;
+}
+
+.difficulty-badge.level-200 {
+    background: var(--badge-orange-bg);
+    color: var(--badge-orange-text);
+    transition: all 0.3s ease;
+}
+
+.difficulty-badge.level-300 {
+    background: var(--badge-pink-bg);
+    color: var(--badge-pink-text);
+    transition: all 0.3s ease;
+}
+
+/* Legacy support for old naming */
+.difficulty-badge.beginner {
+    background: var(--badge-green-bg);
+    color: var(--badge-green-text);
+    transition: all 0.3s ease;
+}
+
+.difficulty-badge.intermediate {
+    background: var(--badge-orange-bg);
+    color: var(--badge-orange-text);
+    transition: all 0.3s ease;
+}
+
+.difficulty-badge.advanced {
+    background: var(--badge-pink-bg);
+    color: var(--badge-pink-text);
+    transition: all 0.3s ease;
+}
+
+.optional-badge {
+    background: var(--badge-purple-bg);
+    color: var(--badge-purple-text);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+/* Color coding for different lab types */
+.lab-card.beginner {
+    border-left-color: var(--border-green);
+}
+
+.lab-card.intermediate {
+    border-left-color: var(--border-orange);
+}
+
+.lab-card.advanced {
+    border-left-color: var(--border-pink);
+}
+
+.lab-card.optional {
+    border-left-color: var(--border-purple);
+    opacity: 0.9;
+}
+
+.lab-card.external {
+    border-left-color: var(--border-gray);
+    background: linear-gradient(135deg, var(--bg-secondary) 0%, var(--bg-primary) 100%);
+    transition: all 0.3s ease;
+}
+
+/* Hide PDF download buttons for external labs */
+.lab-card.external .download-pdf {
+    display: none;
+}
+
+/* Hide download sections for external labs in individual lab pages */
+body[data-lab-type="external"] .lab-downloads,
+[data-lab-type="external"] .lab-downloads,
+.external-lab .lab-downloads {
+    display: none !important;
+}
+
+.external-badge {
+    background: var(--bg-tertiary);
+    color: var(--accent-primary);
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+/* Quick start cards */
+.quick-start-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.quick-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.quick-card h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.2rem;
+}
+
+.quick-card p {
+    margin: 0 0 1.5rem 0;
+    opacity: 0.9;
+}
+
+.start-btn {
+    background: var(--overlay-active);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.2s;
+    border: 1px solid var(--overlay-border);
+}
+
+.start-btn:hover {
+    background: var(--overlay-border);
+    color: white;
+}
+
+.lab-card h3 {
+    color: var(--accent-primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.25rem;
+    margin-top: 0;
+    transition: color 0.3s ease;
+}
+
+.lab-card h3 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.lab-card h3 a:hover {
+    text-decoration: underline;
+}
+
+.lab-card p {
+    color: var(--text-secondary);
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.lab-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    transition: color 0.3s ease;
+}
+
+/* Lab header with PDF download button */
+.lab-meta-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: -2rem -2rem 1.5rem -2rem;
+    padding: 1rem 2rem 1rem 2rem;
+    background: var(--bg-tertiary);
+    border-bottom: 1px solid var(--border-color);
+    border-radius: 8px 8px 0 0;
+    transition: all 0.3s ease;
+}
+
+.lab-header-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.lab-header-actions .btn {
+    font-size: 0.85rem;
+    padding: 0.5rem 1rem;
+    white-space: nowrap;
+}
+
+/* Lab actions */
+.lab-actions {
+    display: flex;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    align-items: center;
+}
+
+/* Lab journeys section */
+.lab-journeys {
+    margin-top: 1rem;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--border-light);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.journey-tag {
+    display: inline-block;
+    padding: 3px 6px;
+    border-radius: 8px;
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: lowercase;
+    background: var(--badge-blue-bg);
+    color: var(--badge-blue-text);
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.journey-tag:hover {
+    opacity: 1;
+    transform: scale(1.05);
+}
+
+.btn-primary, .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-primary {
+    background: var(--accent-primary);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-primary:hover {
+    background: var(--accent-primary-hover);
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.btn-secondary {
+    background: var(--bg-secondary);
+    color: var(--accent-primary);
+    border: 2px solid var(--accent-primary);
+    transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--accent-primary);
+    color: white;
+    text-decoration: none;
+    transform: translateY(-1px);
+}
+
+/* Lab downloads section */
+.lab-downloads {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: var(--bg-tertiary);
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-primary);
+    transition: all 0.3s ease;
+    border: 1px solid var(--border-color);
+}
+
+/* Dark mode adjustments for lab downloads section */
+[data-theme="dark"] .lab-downloads {
+    background: var(--bg-secondary);
+    border-left: 4px solid var(--accent-secondary);
+}
+
+.lab-downloads h3 {
+    margin: 0 0 1rem 0;
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.download-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.pdf-download {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-secondary);
+    color: var(--accent-primary);
+    border: 2px solid var(--accent-primary);
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    width: fit-content;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.pdf-download:hover {
+    background: var(--accent-primary);
+    color: white;
+    border: 2px solid var(--accent-primary);
+    text-decoration: none;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Dark mode adjustments for download buttons */
+[data-theme="dark"] .pdf-download {
+    background: var(--accent-secondary);
+    color: var(--dark-button-text);
+    border: 2px solid var(--accent-secondary);
+}
+
+[data-theme="dark"] .pdf-download:hover {
+    background: var(--accent-primary);
+    color: white;
+    border: 2px solid var(--accent-primary);
+}
+
+/* Dark mode adjustments for secondary buttons */
+[data-theme="dark"] .btn-secondary {
+    background: var(--bg-secondary);
+    color: var(--accent-secondary);
+    border: 2px solid var(--accent-secondary);
+}
+
+[data-theme="dark"] .btn-secondary:hover {
+    background: var(--accent-secondary);
+    color: var(--dark-button-text);
+}
+
+/* Dark mode adjustments for navigation buttons */
+[data-theme="dark"] .nav-button {
+    background: var(--accent-secondary);
+    color: var(--dark-button-text);
+}
+
+[data-theme="dark"] .nav-button:hover {
+    background: var(--accent-primary);
+    color: white;
+}
+
+[data-theme="dark"] .nav-button.journey {
+    background: var(--bg-secondary);
+    color: var(--accent-secondary);
+    border: 2px solid var(--accent-secondary);
+}
+
+[data-theme="dark"] .nav-button.journey:hover {
+    background: var(--accent-secondary);
+    color: var(--dark-button-text);
+}
+
+/* Dark mode adjustments for prev/next navigation buttons */
+[data-theme="dark"] .nav-button.prev,
+[data-theme="dark"] .nav-button.next {
+    background: var(--bg-secondary);
+    color: var(--accent-secondary);
+    border: 2px solid var(--accent-secondary);
+}
+
+[data-theme="dark"] .nav-button.prev:hover,
+[data-theme="dark"] .nav-button.next:hover {
+    background: var(--accent-secondary);
+    color: var(--dark-button-text);
+}
+
+/* Compact PDF button for lab cards */
+.btn.pdf-btn {
+    font-size: 0.8rem;
+    padding: 0.4rem 0.8rem;
+    min-width: auto;
+    flex-shrink: 0;
+}
+
+.btn.pdf-btn:hover {
+    transform: translateY(-1px);
+    text-decoration: none;
+}
+
+.download-links small {
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-top: 0.5rem;
+    transition: color 0.3s ease;
+}
+
+/* Journey navigation cards */
+.journey-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin: 2rem 0;
+    /* Force refresh for bootcamp card visibility */
+}
+
+.journey-card {
+    background: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 12px var(--shadow);
+    transition: transform 0.2s, box-shadow 0.2s;
+    border-left: 4px solid;
+    border: 1px solid var(--border-color);
+}
+
+.journey-card.quick-start {
+    border-left-color: var(--border-blue);
+}
+
+.journey-card.business-user {
+    border-left-color: var(--border-purple);
+}
+
+.journey-card.developer {
+    border-left-color: var(--border-dark-green);
+}
+
+.journey-card.autonomous-ai {
+    border-left-color: var(--border-dark-orange);
+}
+
+.journey-card.bootcamp {
+    border-left-color: var(--border-red);
+}
+
+.journey-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--shadow-hover);
+}
+
+.journey-card h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--text-primary);
+    font-size: 1.25rem;
+}
+
+.journey-card p {
+    color: var(--text-secondary);
+    margin: 0 0 1rem 0;
+    font-size: 0.95rem;
+}
+
+.journey-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+}
+
+.journey-btn {
+    display: inline-block;
+    background: var(--accent-primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border: none;
+}
+
+.journey-btn:hover {
+    background: var(--accent-primary-hover);
+    text-decoration: none;
+    color: white;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+/* Journey sections */
+.journey-section {
+    margin-bottom: 3rem;
+}
+
+/* Filter and lab management styles */
+.current-filter-display {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+.filter-status {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.filter-label {
+    font-weight: 600;
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+}
+
+.current-filter {
+    background: var(--accent-primary);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.clear-filter-btn {
+    background: var(--danger-color);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    font-size: 0.875rem;
+    transition: background-color 0.3s ease;
+}
+
+.clear-filter-btn:hover {
+    background: var(--danger-color-hover);
+}
+
+.filter-section {
+    background: var(--bg-secondary);
+    border-radius: 0.75rem;
+    padding: 1.5rem;
+    margin: 1rem 0;
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+.filter-section h3 {
+    color: var(--text-primary);
+    margin-bottom: 0.75rem;
+    text-align: center;
+    transition: color 0.3s ease;
+    font-size: 1.1rem;
+}
+
+.filter-hint {
+    color: var(--text-secondary);
+    text-align: center;
+    margin-bottom: 1rem;
+    font-style: italic;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.lab-filters {
+    margin: 1rem 0;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.filter-btn {
+    padding: 0.6rem 1.2rem;
+    border: 2px solid var(--accent-primary);
+    background: var(--bg-secondary);
+    color: var(--accent-primary);
+    border-radius: 0.5rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.filter-btn:hover {
+    background: var(--accent-primary);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 120, 212, 0.3);
+}
+
+.filter-btn.active {
+    background: var(--accent-primary);
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 120, 212, 0.3);
+}
+
+/* Dark mode specific filter button improvements */
+[data-theme="dark"] .filter-btn {
+    border-color: var(--accent-secondary);
+    color: var(--accent-secondary);
+    background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .filter-btn:hover {
+    background: var(--accent-secondary);
+    color: var(--dark-button-text);
+    box-shadow: 0 4px 8px rgba(77, 171, 247, 0.4);
+}
+
+[data-theme="dark"] .filter-btn.active {
+    background: var(--accent-secondary);
+    color: var(--dark-button-text);
+    box-shadow: 0 2px 4px rgba(77, 171, 247, 0.4);
+}
+
+.section-btn {
+    border-color: var(--accent-tertiary);
+    color: var(--accent-tertiary);
+    background: var(--bg-secondary);
+}
+
+.section-btn:hover, .section-btn.active {
+    background: var(--accent-tertiary);
+    color: white;
+    border-color: var(--accent-tertiary);
+}
+
+/* Dark mode specific section button improvements */
+[data-theme="dark"] .section-btn {
+    border-color: var(--accent-tertiary-dark);
+    color: var(--accent-tertiary-dark);
+    background: var(--bg-secondary);
+}
+
+[data-theme="dark"] .section-btn:hover, 
+[data-theme="dark"] .section-btn.active {
+    background: var(--accent-tertiary-dark);
+    color: var(--dark-button-text);
+    border-color: var(--accent-tertiary-dark);
+}
+
+/* Responsive layout for filter sections */
+@media (min-width: 768px) {
+    .filter-sections-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    
+    .filter-section {
+        margin: 0.5rem 0;
+    }
+}
+
+@media (min-width: 1200px) {
+    .filter-btn {
+        font-size: 0.85rem;
+        padding: 0.5rem 1rem;
+    }
+    
+    .lab-filters {
+        gap: 0.5rem;
+    }
+}
+
+/* Journey badges */
+.journey-badges {
+    margin-bottom: 0.75rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.journey-badge {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+/* Core 4 Journey Badges */
+.journey-badge.journey-quick-start {
+    background: var(--badge-blue-bg);
+    color: var(--journey-quickstart-color);
+}
+
+.journey-badge.journey-business-user {
+    background: var(--badge-purple-bg);
+    color: var(--journey-businessuser-color);
+}
+
+.journey-badge.journey-developer {
+    background: var(--badge-green-bg);
+    color: var(--journey-developer-color);
+}
+
+.journey-badge.journey-autonomous-ai {
+    background: var(--badge-orange-bg);
+    color: var(--journey-autonomous-color);
+}
+
+.lab-header {
+    border-bottom: 2px solid var(--accent-primary);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+.lab-header h1 {
+    color: var(--accent-primary);
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.lab-header .lab-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* Lab meta badge styles for lab cards */
+.lab-meta span {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+}
+
+.lab-meta span.section {
+    background: var(--badge-blue-bg);
+    color: var(--badge-blue-text);
+}
+
+.lab-meta span.section.core_learning_path {
+    background: var(--badge-purple-bg);
+    color: var(--badge-purple-text);
+}
+
+.lab-meta span.section.intermediate_labs {
+    background: var(--badge-orange-bg);
+    color: var(--badge-orange-text);
+}
+
+.lab-meta span.section.advanced_labs {
+    background: var(--badge-pink-bg);
+    color: var(--badge-pink-text);
+}
+
+.lab-meta span.section.specialized_labs {
+    background: var(--badge-purple-bg);
+    color: var(--badge-purple-text);
+}
+
+.lab-meta span.section.optional_labs {
+    background: var(--badge-green-bg);
+    color: var(--badge-green-text);
+}
+
+.lab-meta span.difficulty {
+    background: var(--badge-green-bg);
+    color: var(--badge-green-text);
+}
+
+.lab-meta span.duration {
+    background: var(--badge-orange-bg);
+    color: var(--badge-orange-text);
+}
+
+.lab-body {
+    max-width: none;
+}
+
+.lab-body h1,
+.lab-body h2,
+.lab-body h3,
+.lab-body h4,
+.lab-body h5,
+.lab-body h6 {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.lab-body h2 {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+    transition: border-color 0.3s ease;
+}
+
+.lab-body p {
+    margin-bottom: 1rem;
+}
+
+.lab-body ul,
+.lab-body ol {
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+.lab-body li {
+    margin-bottom: 0.5rem;
+}
+
+.lab-body code {
+    background: var(--code-bg);
+    padding: 0.2rem 0.4rem;
+    border-radius: 3px;
+    font-family: var(--font-family-monospace, 'Consolas', 'Monaco', monospace);
+    font-size: var(--font-size-sm, 0.9em);
+}
+
+.lab-body pre {
+    background: var(--pre-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-bottom: 1rem;
+    font-family: var(--font-family-monospace, 'Consolas', 'Monaco', monospace);
+    font-size: var(--font-size-sm, 0.9em);
+}
+
+.lab-body pre code {
+    background: none;
+    padding: 0;
+}
+
+.lab-body blockquote {
+    border-left: 4px solid #0078d4;
+    margin: 1rem 0;
+    padding-left: 1rem;
+    color: #666;
+    font-style: italic;
+}
+
+.lab-body img {
+    max-width: 100%;
+    height: auto;
+    margin: 1rem 0;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+/* Lab footer */
+.lab-footer {
+    margin-top: 3rem;
+    border-top: 1px solid var(--border-color);
+    padding-top: 2rem;
+    background: transparent;
+    border-radius: 8px;
+    padding: 2rem;
+}
+
+/* Lab navigation */
+.lab-navigation {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 0;
+    padding-top: 0;
+    border-top: none;
+    transition: border-color 0.3s ease;
+}
+
+.journey-nav-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.nav-button.all-labs {
+    background: var(--accent-primary);
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.nav-button.all-labs:hover {
+    background: var(--accent-primary-hover);
+    color: white;
+}
+
+.prev-next-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    min-height: 3rem;
+    background: transparent;
+    padding: 1rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+}
+
+.nav-placeholder {
+    color: var(--text-secondary);
+    font-style: italic;
+    opacity: 0.7;
+    padding: 0.5rem;
+    background: transparent;
+}
+
+.nav-button.prev {
+    margin-right: auto;
+    background: var(--bg-secondary);
+    color: var(--accent-primary);
+    border: 2px solid var(--accent-primary);
+}
+
+.nav-button.prev:hover {
+    background: var(--accent-primary);
+    color: white;
+}
+
+.nav-button.next {
+    margin-left: auto;
+    background: var(--bg-secondary);
+    color: var(--accent-primary);
+    border: 2px solid var(--accent-primary);
+}
+
+.nav-button.next:hover {
+    background: var(--accent-primary);
+    color: white;
+}
+
+/* Footer */
+.site-footer {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    text-align: center;
+    padding: 1rem 0;
+    margin-top: auto;
+    border-top: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
+    
+    .labs-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .lab-content {
+        padding: 1.5rem;
+    }
+    
+    .lab-meta-header {
+        margin: -1.5rem -1.5rem 1.5rem -1.5rem;
+        padding: 1rem 1.5rem;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .lab-header-actions {
+        align-self: stretch;
+        justify-content: center;
+    }
+    
+    .lab-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .lab-navigation {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .prev-next-nav {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .journey-nav-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .nav-button {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    background: var(--bg-secondary);
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 8px var(--shadow);
+    transition: all 0.3s ease;
+}
+
+table th,
+table td {
+    padding: 12px 16px;
+    text-align: left;
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+table th {
+    background-color: var(--hover-bg);
+    font-weight: 600;
+    color: var(--text-primary);
+    border-bottom: 2px solid var(--border-color);
+}
+
+table tr:hover {
+    background-color: var(--hover-bg);
+}
+
+table tr:last-child td {
+    border-bottom: none;
+}
+
+/* Zebra striping for better readability */
+table tbody tr:nth-child(even) {
+    background-color: var(--hover-bg);
+}
+
+table tbody tr:nth-child(even):hover {
+    background-color: var(--border-color);
+}
+
+/* Special styling for lab details tables */
+.lab-content table {
+    font-size: 0.95rem;
+    margin: 1rem 0 2rem 0;
+    box-shadow: 0 4px 12px var(--shadow);
+    border: 1px solid var(--border-color);
+}
+
+.lab-content table th {
+    background-color: var(--accent-primary);
+    color: white; /* Ensure white text on blue background */
+    border: 1px solid var(--accent-secondary);
+    font-weight: 600;
+    text-align: center;
+    padding: 1rem;
+}
+
+.lab-content table td {
+    padding: 1rem;
+    vertical-align: top;
+    border: 1px solid var(--border-color);
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+.lab-content table tbody tr:nth-child(even) td {
+    background-color: var(--bg-tertiary);
+}
+
+.lab-content table tbody tr:nth-child(even):hover td {
+    background-color: var(--hover-bg);
+}
+
+.lab-content table tbody tr:hover td {
+    background-color: var(--hover-bg);
+}
+
+/* External link styling */
+.external-link-icon {
+    display: inline-block;
+    font-size: 0.8em;
+    opacity: var(--external-link-opacity);
+    margin-left: 2px;
+    transition: opacity 0.2s ease;
+    color: var(--accent-primary);
+    vertical-align: super;
+}
+
+a:hover .external-link-icon {
+    opacity: 1;
+}
+
+/* External links in lab content */
+.lab-content a[target="_blank"] {
+    position: relative;
+    color: var(--accent-primary);
+    transition: color 0.3s ease;
+}
+
+.lab-content a[target="_blank"]:hover {
+    text-decoration: underline;
+}
+
+.lab-content h1,
+.lab-content h2,
+.lab-content h3,
+.lab-content h4,
+.lab-content h5,
+.lab-content h6 {
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+    margin: 1.5em 0 1em 0;
+    padding: 0.5em 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+/* Special styling for emoji section headings */
+.lab-content h2[id^="lab-details"],
+.lab-content h2[id*="lab-details"],
+.lab-content h2:has(+ table),
+.lab-content h2 + h2,
+.lab-content h2 {
+    background: var(--bg-tertiary);
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin: 2rem 0 1rem 0;
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+.lab-content p {
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+    line-height: 1.6;
+    margin: 1em 0;
+}
+
+.lab-content li {
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+    margin: 0.5em 0;
+    line-height: 1.6;
+}
+
+.lab-content ul,
+.lab-content ol {
+    padding-left: 2em;
+    margin: 1em 0;
+}
+
+.lab-content blockquote {
+    border-left: 4px solid var(--accent-primary);
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+    padding: 1rem;
+    margin: 1.5rem 0;
+    border-radius: 4px;
+}
+
+.lab-content code {
+    background: var(--hover-bg);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+.lab-content pre {
+    background: var(--hover-bg);
+    border: 1px solid var(--border-color);
+    transition: all 0.3s ease;
+    padding: 1rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    font-family: var(--font-family-monospace, 'Consolas', 'Monaco', monospace);
+    font-size: var(--font-size-sm, 0.9em);
+}
+
+.lab-content pre code {
+    background: transparent;
+    border: none;
+    padding: 0;
+}
+
+/* Improve horizontal rule visibility */
+.lab-content hr {
+    border: none;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent-primary), transparent);
+    margin: 3rem 0 2rem 0;
+    border-radius: 2px;
+    opacity: 0.8;
+}
+
+/* Table of contents link styling */
+.lab-content a {
+    color: var(--accent-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.lab-content a:hover {
+    color: var(--accent-secondary);
+    text-decoration: underline;
+}
+
+/* Strong/bold text visibility */
+.lab-content strong,
+.lab-content b {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Emphasis/italic text */
+.lab-content em,
+.lab-content i {
+    color: var(--text-secondary);
+    font-style: italic;
+}
+
+/* Concept overview table specific styling */
+.lab-content table.concept-table,
+.lab-content table.why-it-matters-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid var(--accent-primary);
+}
+
+.lab-content table.concept-table th,
+.lab-content table.why-it-matters-table th {
+    background: linear-gradient(135deg, var(--accent-primary), var(--accent-secondary));
+    color: white;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 1.2rem;
+}
+
+.lab-content table.concept-table td,
+.lab-content table.why-it-matters-table td {
+    padding: 1.2rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.lab-content table.concept-table td:first-child,
+.lab-content table.why-it-matters-table td:first-child {
+    font-weight: 600;
+    color: var(--accent-primary);
+    background: var(--bg-tertiary);
+}
+
+/* Improve markdown list styling within tables */
+.lab-content table td ul,
+.lab-content table td ol {
+    margin: 0.5rem 0;
+    padding-left: 1.5rem;
+}
+
+.lab-content table td li {
+    margin: 0.3rem 0;
+    line-height: 1.5;
+}
+
+/* Section dividers and spacing */
+
+/* Improve navigation link visibility */
+.lab-content a[href^="#"] {
+    color: var(--accent-primary);
+    font-weight: 500;
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    transition: all 0.3s ease;
+}
+
+.lab-content a[href^="#"]:hover {
+    background: var(--hover-bg);
+    color: var(--accent-secondary);
+    text-decoration: none;
+}
+
+/* ============================================================================
+   GITHUB-STYLE CALLOUTS SYSTEM
+   
+   Provides informational boxes with icons and color coding for different
+   types of content. Supports 5 callout types inspired by GitHub's alerts.
+   
+   SUPPORTED CALLOUT TYPES:
+   1. NOTE (📘)     - Blue   - General information, tips, references
+   2. TIP (💡)      - Green  - Helpful suggestions, best practices  
+   3. IMPORTANT (❗) - Orange - Important information, key points
+   4. WARNING (⚠️)   - Yellow - Caution, potential issues to avoid
+   5. CAUTION (🚨)   - Red    - Critical warnings, dangerous actions
+   
+   USAGE IN MARKDOWN:
+   ```markdown
+   > [!NOTE]
+   > This is a note callout with helpful information.
+   
+   > [!TIP]
+   > Pro tip: This makes your workflow more efficient.
+   ```
+   
+   STYLING APPROACH:
+   - Uses CSS custom properties for theme flexibility
+   - Each callout type has 4 variables: bg, border, text, title colors
+   - Icons are added via CSS ::before pseudo-elements
+   - Responsive design with proper spacing and typography
+   ============================================================================ */
+
+/* Base callout container styles */
+.callout {
+    margin: 1.5rem 0;
+    padding: 1rem 1rem 1rem 3rem; /* Left padding for icon space */
+    border-left: 4px solid; /* Themed border color */
+    border-radius: 6px;
+    position: relative;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+/* Callout icons positioned absolutely in left margin */
+.callout::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 1.2rem;
+    width: 1.2rem;
+    height: 1.2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    line-height: 1;
+}
+
+/* Callout title styling */
+.callout .callout-title {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+/* Note callout */
+.callout.callout-note {
+    background: var(--callout-note-bg);
+    border-color: var(--callout-note-border);
+    color: var(--callout-note-text);
+}
+
+.callout.callout-note::before {
+    content: '🔵';
+}
+
+.callout.callout-note .callout-title {
+    color: var(--callout-note-title);
+}
+
+/* Tip callout */
+.callout.callout-tip {
+    background: var(--callout-tip-bg);
+    border-color: var(--callout-tip-border);
+    color: var(--callout-tip-text);
+}
+
+.callout.callout-tip::before {
+    content: '💡';
+}
+
+.callout.callout-tip .callout-title {
+    color: var(--callout-tip-title);
+}
+
+/* Important callout */
+.callout.callout-important {
+    background: var(--callout-important-bg);
+    border-color: var(--callout-important-border);
+    color: var(--callout-important-text);
+}
+
+.callout.callout-important::before {
+    content: '❗';
+}
+
+.callout.callout-important .callout-title {
+    color: var(--callout-important-title);
+}
+
+/* Warning callout */
+.callout.callout-warning {
+    background: var(--callout-warning-bg);
+    border-color: var(--callout-warning-border);
+    color: var(--callout-warning-text);
+}
+
+.callout.callout-warning::before {
+    content: '⚠️';
+}
+
+.callout.callout-warning .callout-title {
+    color: var(--callout-warning-title);
+}
+
+/* Caution callout */
+.callout.callout-caution {
+    background: var(--callout-caution-bg);
+    border-color: var(--callout-caution-border);
+    color: var(--callout-caution-text);
+}
+
+.callout.callout-caution::before {
+    content: '🔥';
+}
+
+.callout.callout-caution .callout-title {
+    color: var(--callout-caution-title);
+}
+
+/* ============================================================================
+   CODE BLOCK COPY FUNCTIONALITY
+   
+   Adds copy-to-clipboard buttons to code blocks for enhanced user experience.
+   
+   FEATURES:
+   - Positioned absolutely in top-right corner of code blocks
+   - Uses theme-specific styling via CSS custom properties
+   - Visual feedback on click (color change and "Copied!" text)
+   - Automatic reset after 2 seconds
+   - Accessible with proper ARIA labels and focus states
+   
+   JAVASCRIPT INTEGRATION:
+   - Button click triggers copy to clipboard functionality
+   - CSS classes handle visual state changes (.copied state)
+   - Works with both <pre> and <code> elements
+   
+   THEME VARIABLES USED:
+   - --copy-button-bg: Background color
+   - --copy-button-border: Border color  
+   - --copy-button-text: Text color
+   - --copy-button-hover-*: Hover state colors
+   ============================================================================ */
+
+/* Container wrapper for code blocks with copy functionality */
+.code-container {
+    position: relative;
+    margin: 1.5rem 0;
+}
+
+.code-container pre {
+    margin: 0;
+    padding-right: 3rem; /* Reserve space for copy button */
+    font-family: var(--font-family-monospace, 'Consolas', 'Monaco', monospace);
+    font-size: var(--font-size-sm, 0.9em);
+}
+
+/* Copy button positioned in top-right corner */
+.copy-button {
+    position: absolute;
+    top: 0.5rem;
+    right: 0.5rem;
+    background: var(--copy-button-bg);
+    border: 1px solid var(--copy-button-border);
+    border-radius: 6px;
+    color: var(--copy-button-text);
+    cursor: pointer;
+    font-size: 0.8rem;
+    padding: 0.4rem 0.6rem;
+    transition: all 0.2s ease;
+    z-index: 10;
+    opacity: 0.7;
+}
+
+.copy-button:hover {
+    opacity: 1;
+    background: var(--copy-button-hover-bg);
+    border-color: var(--copy-button-hover-border);
+    transform: translateY(-1px);
+}
+
+.copy-button:active {
+    transform: translateY(0);
+}
+
+.copy-button.copied {
+    background: var(--copy-success-bg);
+    border-color: var(--copy-success-border);
+    color: var(--copy-success-text);
+}
+
+.copy-button.copied::after {
+    content: ' ✓';
+}
+
+/* ============================================================================
+   IMAGE LIGHTBOX/ZOOM FUNCTIONALITY
+   
+   Provides click-to-zoom functionality for all images in lab content.
+   
+   FEATURES:
+   - Click any image to open in full-screen lightbox overlay
+   - Smooth animations and transitions
+   - Keyboard navigation (ESC to close)
+   - Click outside image to close
+   - Responsive design that scales to screen size
+   - Theme-aware styling using CSS custom properties
+   
+   JAVASCRIPT INTEGRATION:
+   - Auto-detects images and adds click listeners
+   - Creates overlay dynamically when image is clicked
+   - Handles keyboard and mouse events for closing
+   - Preserves original image aspect ratio
+   
+   ACCESSIBILITY:
+   - Focus management for keyboard users
+   - Proper ARIA labels and roles
+   - Escape key support for closing
+   
+   THEME VARIABLES USED:
+   - --lightbox-bg: Overlay background color
+   - --lightbox-close-*: Close button styling
+   - --shadow: Image drop shadows
+   ============================================================================ */
+
+/* Base styling for clickable images */
+.lab-content img {
+    cursor: pointer; /* Indicates images are clickable */
+    transition: all 0.3s ease;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px var(--shadow); /* Themed shadow */
+}
+
+/* Hover effect to indicate interactivity */
+.lab-content img:hover {
+    box-shadow: 0 4px 16px var(--shadow-hover); /* Enhanced shadow */
+    transform: translateY(-2px); /* Subtle lift effect */
+}
+
+/* Full-screen overlay container */
+.lightbox-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--lightbox-bg);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    cursor: pointer;
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.lightbox-overlay.active {
+    display: flex;
+}
+
+/* Lightbox container for the image */
+.lightbox-container {
+    position: relative;
+    width: 90vw;
+    height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    cursor: default;
+}
+
+/* Lightbox image */
+.lightbox-image {
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
+    border-radius: 8px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    cursor: default;
+    transition: transform 0.2s ease;
+    transform-origin: center center;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    -webkit-user-drag: none;
+    -khtml-user-drag: none;
+    -moz-user-drag: none;
+    -o-user-drag: none;
+    /* Ensure image can scale beyond container */
+    position: relative;
+    display: block;
+}
+
+.lightbox-image:hover {
+    cursor: grab;
+}
+
+/* Lightbox close button */
+.lightbox-close {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    background: var(--lightbox-close-bg);
+    border: none;
+    border-radius: 50%;
+    color: var(--lightbox-close-text);
+    width: 3rem;
+    height: 3rem;
+    font-size: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 10001;
+}
+
+.lightbox-close:hover {
+    background: var(--lightbox-close-hover-bg);
+    transform: scale(1.1);
+}
+
+/* Lightbox zoom controls */
+.lightbox-controls {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--lightbox-close-bg);
+    border-radius: 25px;
+    padding: 0.5rem 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 10001;
+}
+
+.lightbox-controls button {
+    background: transparent;
+    border: none;
+    color: var(--lightbox-close-text);
+    width: 2rem;
+    height: 2rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    transition: all 0.2s ease;
+}
+
+.lightbox-controls button:hover {
+    background: var(--lightbox-close-hover-bg);
+    transform: scale(1.1);
+}
+
+.zoom-level {
+    color: var(--lightbox-close-text);
+    font-size: 0.9rem;
+    font-weight: 500;
+    min-width: 3rem;
+    text-align: center;
+}
+
+/* Lightbox loading indicator */
+.lightbox-loading {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--text-primary);
+    font-size: 1.1rem;
+    z-index: 10000;
+}
+
+/* ============================================================================
+   END OF MAIN STYLESHEET
+   
+   📝 QUICK REFERENCE FOR NEW COLLABORATORS:
+   
+   🎨 ADDING NEW THEMES:
+   1. Create new CSS file in assets/css/themes/ (e.g., theme-corporate.css)
+   2. Define all required CSS custom properties (see existing themes as reference)
+   3. Add theme to THEME_FAMILIES object in assets/js/theme-manager.js
+   4. Test all components: callouts, copy buttons, lightbox, theme controls
+   
+   🎯 ADDING NEW CALLOUT TYPES:
+   1. Add CSS variables in both theme files: --callout-newtype-bg, -border, -text, -title
+   2. Add CSS rules in this file: .callout.callout-newtype styles
+   3. Add icon and detection logic in JavaScript callout initialization
+   
+   📋 ADDING NEW COMPONENTS:
+   1. Add structural CSS in this file using CSS custom properties
+   2. Define color variables in both theme files (rich and minimal)
+   3. Ensure component works in all 4 theme combinations
+   4. Test responsiveness and accessibility
+   
+   🔧 MODIFYING EXISTING STYLES:
+   1. Colors: Edit theme files (theme-rich.css, theme-minimal.css)
+   2. Layout/Structure: Edit this file (style.css)
+   3. Theme Controls: Universal styling in this file works across all themes
+   4. Always test changes in both light and dark modes
+   
+   📁 FILE STRUCTURE:
+   - style.css: Main stylesheet with structural styles and components
+   - themes/theme-rich.css: Rich colorful theme (light + dark modes)
+   - themes/theme-minimal.css: Clean minimal theme (light + dark modes)
+   - theme-manager.js: JavaScript for dynamic theme loading and switching
+   
+   🎪 THEME SYSTEM OVERVIEW:
+   - CSS Custom Properties enable theme flexibility
+   - JavaScript dynamically loads theme CSS files
+   - Universal theme controls work on any header background
+   - Modular architecture allows easy theme expansion
+   - All components use themed variables for automatic color adaptation
+   
+   Remember: Test thoroughly across all theme combinations! 🚀
+   ============================================================================ */
+
+/* ============================================================================
+   SCROLL TO TOP BUTTON
+   ============================================================================ */
+
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border: none;
+    border-radius: 50%;
+    background: var(--primary-color);
+    color: var(--bg-color);
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    font-size: 0; /* Hide any potential text content */
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.scroll-to-top:hover {
+    background: var(--primary-color-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-xl);
+}
+
+.scroll-to-top:active {
+    transform: translateY(0);
+    transition-duration: 0.1s;
+}
+
+.scroll-to-top.visible {
+    opacity: 1;
+    visibility: visible;
+}
+
+.scroll-to-top svg {
+    width: 20px;
+    height: 20px;
+    fill: currentColor;
+    transition: transform 0.2s ease;
+}
+
+.scroll-to-top:hover svg {
+    transform: translateY(-1px);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .scroll-to-top {
+        width: 44px;
+        height: 44px;
+        bottom: 1.5rem;
+        right: 1.5rem;
+    }
+    
+    .scroll-to-top svg {
+        width: 18px;
+        height: 18px;
+    }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .scroll-to-top {
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+    
+    .scroll-to-top:hover {
+        transform: none;
+    }
+    
+    .scroll-to-top svg {
+        transition: none;
+    }
+    
+    .scroll-to-top:hover svg {
+        transform: none;
+    }
+}
+
+/* ============================================================================
+   BOOTCAMP PAGE STYLES
+   
+   Styles specific to the bootcamp learning path page navigation and layout.
+   Lab cards use the standard .lab-card class for consistency.
+   ============================================================================ */
+
+.bootcamp-nav {
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.bootcamp-nav .nav-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.75rem 1.5rem;
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+    text-decoration: none;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-weight: 500;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    margin-top: 0.5rem;
+}
+
+.bootcamp-nav .nav-link:hover {
+    background: var(--bg-button-hover);
+    border-color: var(--border-hover);
+    transform: translateY(-1px);
+}
+
+.bootcamp-info h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.bootcamp-info p {
+    margin: 0 0 1rem 0;
+    color: var(--text-secondary);
+    font-size: 1.1rem;
+}
+
+.bootcamp-stats {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+}
+
+.bootcamp-stats span {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+}
+
+/* Responsive design for bootcamp page */
+@media (max-width: 768px) {
+    .bootcamp-nav {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .bootcamp-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+}

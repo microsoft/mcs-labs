@@ -1,0 +1,35 @@
+# MCS Labs Development Environment
+# Usage: docker-compose up -d jekyll-dev
+# Local site URL: http://localhost:4000/mcs-labs/
+
+services:
+  jekyll-dev:
+    build: .
+    container_name: mcs-labs-dev
+    ports:
+      - "4000:4000" # Jekyll server
+      - "35729:35729" # LiveReload
+    volumes:
+      - .:/workspace
+      - /workspace/node_modules # Anonymous volume for node_modules
+      - /workspace/_site # Anonymous volume for Jekyll build output
+    environment:
+      - JEKYLL_ENV=development
+    command: bundle exec jekyll serve --host 0.0.0.0 --livereload --livereload-port 35729 --incremental --force_polling
+
+  pdf-generator:
+    build: .
+    container_name: mcs-labs-pdf
+    volumes:
+      - .:/workspace
+      - /workspace/node_modules
+    environment:
+      - NODE_ENV=development
+    working_dir: /workspace
+    profiles:
+      - pdf # Only start this service when explicitly requested
+    command: pwsh -File scripts/Generate-PDFs-Local.ps1 -SkipInstall
+
+volumes:
+  node_modules:
+  jekyll_site:

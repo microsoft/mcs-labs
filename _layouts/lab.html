@@ -1,0 +1,1539 @@
+---
+layout: default
+---
+
+<div
+  class="lab-layout{% if page.lab_type == 'external' %} external-lab{% endif %}"
+>
+  <!-- Left Sidebar Navigation -->
+  <aside class="lab-sidebar">
+    <div class="sidebar-content">
+      {% comment %} Find which journeys this lab belongs to {% endcomment %} {%
+      assign current_journeys = page.journeys %} {% comment %} Default to
+      first/primary journey, will be overridden by JavaScript if URL param
+      exists {% endcomment %} {% if current_journeys and current_journeys.size >
+      0 %} {% assign primary_journey = current_journeys[0] %}
+
+      <div class="sidebar-journey-header">
+        <div class="journey-title">
+          <span id="journey-title-text">📚 Journey Navigation</span>
+        </div>
+      </div>
+
+      <nav class="journey-labs" id="journey-labs-nav">
+        {% comment %} Show all labs this lab belongs to, JavaScript will filter
+        based on URL params {% endcomment %} {% assign all_journey_labs =
+        site.labs | where_exp: "lab", "lab.journeys" | sort: "order" %} {% for
+        lab in all_journey_labs %} {% assign shared_journeys = "" %} {% for
+        lab_journey in lab.journeys %} {% for current_journey in
+        current_journeys %} {% if lab_journey == current_journey %} {% unless
+        shared_journeys contains lab_journey %} {% assign shared_journeys =
+        shared_journeys | append: lab_journey | append: "," %} {% endunless %}
+        {% endif %} {% endfor %} {% endfor %} {% if shared_journeys != "" %}
+        <a
+          href="{{ lab.url | relative_url }}"
+          class="lab-nav-item {% if lab.url == page.url %}current{% endif %}"
+          title="{{ lab.title }}"
+          data-journeys="{{ lab.journeys | join: ',' }}"
+          data-section="{{ lab.section }}"
+          data-order="{{ lab.order }}"
+          {%
+          if
+          lab.bootcamp_order
+          %}data-bootcamp-order="{{ lab.bootcamp_order }}"
+          {%
+          endif
+          %}
+        >
+          <span class="lab-order" data-lab-order></span>
+          <span class="lab-title">{{ lab.title }}</span>
+          <span class="lab-duration">{{ lab.duration }}min</span>
+        </a>
+        {% endif %} {% endfor %}
+      </nav>
+
+      {% comment %} Show other journeys this lab belongs to {% endcomment %} {%
+      if current_journeys.size > 1 %}
+      <div class="other-journeys">
+        <h4>Also in:</h4>
+        {% for journey in current_journeys %} {% unless journey ==
+        primary_journey %} {% case journey %} {% when 'quick-start' %}
+        <a
+          href="{{ '/labs/#quick-start' | relative_url }}"
+          class="other-journey"
+          >🚀 Quick Start</a
+        >
+        {% when 'business-user' %}
+        <a
+          href="{{ '/labs/#business-user' | relative_url }}"
+          class="other-journey"
+          >💼 Business User</a
+        >
+        {% when 'developer' %}
+        <a href="{{ '/labs/#developer' | relative_url }}" class="other-journey"
+          >🔧 Developer</a
+        >
+        {% when 'autonomous-ai' %}
+        <a
+          href="{{ '/labs/#autonomous-ai' | relative_url }}"
+          class="other-journey"
+          >🤖 Autonomous AI</a
+        >
+        {% when 'bootcamp' %}
+        <a href="{{ '/labs/#bootcamp' | relative_url }}" class="other-journey"
+          >⚔️ Bootcamp</a
+        >
+        {% endcase %} {% endunless %} {% endfor %}
+      </div>
+      {% endif %} {% else %}
+      <div class="no-journey">
+        <p>This lab is not part of a guided journey.</p>
+        <a href="{{ '/labs/' | relative_url }}">Browse All Labs</a>
+      </div>
+      {% endif %}
+    </div>
+  </aside>
+
+  <!-- Main Lab Content -->
+  <article
+    class="lab-content"
+    data-journeys="{{ page.journeys | jsonify | escape }}"
+    data-section="{{ page.section | escape }}"
+    {%
+    if
+    page.bootcamp_order
+    %}data-bootcamp-order="{{ page.bootcamp_order }}"
+    {%
+    endif
+    %}
+  >
+    {% if page.duration %}
+    <div class="lab-meta-header">
+      <div class="lab-meta">
+        <span class="duration">⏱️ {{ page.duration }} minutes</span>
+        {% if page.difficulty %}
+        <span class="difficulty">📊 Level {{ page.difficulty }}</span>
+        {% endif %} {% if page.lab_type %}
+        <span class="lab-type">🏷️ {{ page.lab_type | capitalize }}</span>
+        {% endif %}
+      </div>
+      {% if page.lab_type != 'external' %}
+      <div class="lab-header-actions">
+        <a
+          href="{{ '/assets/pdfs/' | relative_url }}{{ page.slug }}.pdf"
+          class="btn btn-secondary download-pdf-header"
+          target="_blank"
+        >
+          📄 Download PDF
+        </a>
+      </div>
+      {% endif %}
+    </div>
+    {% endif %}
+
+    <div class="lab-body">{{ content }}</div>
+
+    {% if page.lab_type != 'external' %}
+    <div class="lab-downloads">
+      <h3>📄 Download Options</h3>
+      <div class="download-links">
+        {% assign pdf_url = '/assets/pdfs/' | append: page.slug | append: '.pdf'
+        | relative_url %}
+        <a
+          href="{{ pdf_url }}"
+          class="pdf-download btn btn-secondary"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          📄 Download PDF Version
+        </a>
+        <small
+          >Professional PDF with table of contents and internal navigation.
+          Generated automatically from lab content.</small
+        >
+      </div>
+    </div>
+    {% endif %}
+
+    <footer class="lab-footer">
+      <div class="lab-navigation">
+        <!-- Previous/Next Navigation (will be updated by JavaScript based on journey filter) -->
+        <div class="prev-next-nav" id="prev-next-nav">
+          <span class="nav-placeholder">← Loading...</span>
+          <span class="nav-placeholder">Loading... →</span>
+        </div>
+
+        <!-- Hidden data for JavaScript to calculate prev/next -->
+        <div
+          id="lab-data"
+          class="hidden"
+          data-current-url="{{ page.url }}"
+          data-current-journeys="{{ page.journeys | join: ',' }}"
+          data-current-order="{{ page.order }}"
+          data-base-url="{{ '' | relative_url }}"
+        >
+          {% assign labs = site.labs | where_exp: "lab", "lab.lab_type !=
+          'external'" | sort: 'order' %} {% for lab in labs %}
+          <div
+            class="lab-item"
+            data-url="{{ lab.url }}"
+            data-title="{{ lab.title }}"
+            data-journeys="{{ lab.journeys | join: ',' }}"
+            data-order="{{ lab.order }}"
+            {%
+            if
+            lab.bootcamp_order
+            %}data-bootcamp-order="{{ lab.bootcamp_order }}"
+            {%
+            endif
+            %}
+          ></div>
+          {% endfor %}
+        </div>
+
+        <!-- Journey and All Labs Navigation -->
+        <div class="journey-nav-buttons">
+          {% if page.journeys and page.journeys.size > 0 %}
+          <a
+            href="{{ '/labs/#' | append: page.journeys[0] | relative_url }}"
+            class="nav-button journey"
+          >
+            📚 Back to {{ page.journeys[0] | replace: '-', ' ' | capitalize }}
+            Journey
+          </a>
+          {% endif %}
+          <a href="{{ '/labs/' | relative_url }}" class="nav-button all-labs">
+            📋 View All Labs
+          </a>
+        </div>
+      </div>
+    </footer>
+  </article>
+
+  <!-- Scroll to Top Button -->
+  <button
+    id="scroll-to-top"
+    class="scroll-to-top"
+    aria-label="Scroll to top"
+    title="Scroll to top"
+  >
+    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+      <path
+        d="M8 4.414L3.707 8.707a1 1 0 01-1.414-1.414L7.586 2a1 1 0 011.414 0l5.293 5.293a1 1 0 01-1.414 1.414L8 4.414z"
+      />
+    </svg>
+  </button>
+</div>
+<!-- End lab-layout -->
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    // Check for filter context in URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    let filterJourney = urlParams.get("journey");
+    const filterSection = urlParams.get("section");
+
+    // Check for bootcamp parameter (special case)
+    const isBootcamp = urlParams.get("bootcamp") === "true";
+    if (isBootcamp) {
+      filterJourney = "bootcamp";
+    }
+
+    // Get the current lab's journeys and section from data attributes
+    const labContent = document.querySelector(".lab-content");
+    const currentJourneys = JSON.parse(
+      labContent.getAttribute("data-journeys") || "[]"
+    );
+    const currentSection = labContent.getAttribute("data-section");
+
+    // Determine which filter context to use
+    let activeFilter = null;
+    let activeFilterType = null;
+
+    if (filterJourney === "bootcamp") {
+      // Special case for bootcamp - check if current lab has bootcamp_order
+      const currentBootcampOrder = labContent.getAttribute(
+        "data-bootcamp-order"
+      );
+      if (currentBootcampOrder) {
+        activeFilter = filterJourney;
+        activeFilterType = "journey";
+      }
+    } else if (
+      filterJourney &&
+      currentJourneys &&
+      currentJourneys.includes(filterJourney)
+    ) {
+      activeFilter = filterJourney;
+      activeFilterType = "journey";
+    } else if (filterSection && currentSection === filterSection) {
+      activeFilter = filterSection;
+      activeFilterType = "section";
+    } else if (currentJourneys && currentJourneys.length > 0) {
+      // Default to primary journey if no filter context
+      activeFilter = currentJourneys[0];
+      activeFilterType = "journey";
+    }
+
+    if (!activeFilter) return;
+
+    // Get all lab navigation items
+    const navItems = Array.from(document.querySelectorAll(".lab-nav-item"));
+
+    // First pass: filter items based on active filter
+    const filteredItems = [];
+    navItems.forEach(function (item) {
+      let shouldShow = false;
+
+      if (activeFilterType === "journey") {
+        if (activeFilter === "bootcamp") {
+          // For bootcamp, filter by labs that have bootcamp_order
+          shouldShow =
+            item.dataset.bootcampOrder && item.dataset.bootcampOrder !== "";
+        } else {
+          // For other journeys, filter by journey membership
+          const itemJourneys = item.dataset.journeys
+            ? item.dataset.journeys.split(",").map((j) => j.trim())
+            : [];
+          shouldShow = itemJourneys.includes(activeFilter);
+        }
+      } else if (activeFilterType === "section") {
+        shouldShow = item.dataset.section === activeFilter;
+      }
+
+      if (shouldShow) {
+        filteredItems.push(item);
+      }
+    });
+
+    // Sort filtered items numerically by order (or bootcamp_order for bootcamp journey)
+    filteredItems.sort((a, b) => {
+      if (activeFilterType === "journey" && activeFilter === "bootcamp") {
+        // For bootcamp, sort by bootcamp_order if available, otherwise by regular order
+        const getBootcampSortValue = (order) => {
+          if (!order) return 999;
+          // Convert "1a" to 1.1, "1b" to 1.2, "2" to 2.0, "3a" to 3.1, etc.
+          const match = order.match(/^(\d+)([ab]?)$/);
+          if (match) {
+            const num = parseInt(match[1]);
+            const suffix = match[2];
+            if (suffix === "a") return num + 0.1;
+            if (suffix === "b") return num + 0.2;
+            return num;
+          }
+          return 999;
+        };
+
+        const orderA = a.dataset.bootcampOrder
+          ? getBootcampSortValue(a.dataset.bootcampOrder)
+          : parseInt(a.dataset.order) || 999;
+        const orderB = b.dataset.bootcampOrder
+          ? getBootcampSortValue(b.dataset.bootcampOrder)
+          : parseInt(b.dataset.order) || 999;
+        return orderA - orderB;
+      } else {
+        // For other journeys, sort by regular order
+        const orderA = parseInt(a.dataset.order) || 999;
+        const orderB = parseInt(b.dataset.order) || 999;
+        return orderA - orderB;
+      }
+    });
+
+    // Hide all items first
+    navItems.forEach(function (item) {
+      item.style.display = "none";
+    });
+
+    // Get navigation container and clear it
+    const navContainer = document.getElementById("journey-labs-nav");
+    while (navContainer.firstChild) {
+      navContainer.removeChild(navContainer.firstChild);
+    }
+
+    // Add filtered items in sorted order with sequence numbers
+    let sequenceNumber = 1;
+    filteredItems.forEach(function (item) {
+      const orderSpan = item.querySelector("[data-lab-order]");
+      if (orderSpan) {
+        // Check if we're in bootcamp journey and this lab has bootcamp ordering
+        const bootcampOrder = item.dataset.bootcampOrder;
+        if (
+          activeFilterType === "journey" &&
+          activeFilter === "bootcamp" &&
+          bootcampOrder
+        ) {
+          orderSpan.textContent = bootcampOrder;
+        } else {
+          orderSpan.textContent = sequenceNumber;
+        }
+        sequenceNumber++;
+      }
+      item.style.display = "block";
+      navContainer.appendChild(item);
+    });
+
+    // Update all navigation links to preserve query string
+    const currentQueryString = window.location.search;
+    if (currentQueryString) {
+      // Update lab navigation links
+      const labNavItems = document.querySelectorAll(".lab-nav-item");
+      labNavItems.forEach(function (link) {
+        const baseUrl = link.href.split("?")[0];
+        link.href = baseUrl + currentQueryString;
+      });
+
+      // Update footer navigation links
+      const navButtons = document.querySelectorAll(".nav-button");
+      navButtons.forEach(function (link) {
+        if (link.href && !link.href.includes("?")) {
+          const baseUrl = link.href.split("#")[0];
+          const hash = link.href.includes("#")
+            ? "#" + link.href.split("#")[1]
+            : "";
+          link.href = baseUrl + currentQueryString + hash;
+        }
+      });
+    }
+
+    // Update the journey title based on active filter
+    const journeyTitleText = document.getElementById("journey-title-text");
+
+    if (activeFilterType === "journey" && activeFilter) {
+      let journeyTitle = "";
+
+      switch (activeFilter) {
+        case "quick-start":
+          journeyTitle = "🚀 Quick Start Journey";
+          break;
+        case "business-user":
+          journeyTitle = "💼 Business User Journey";
+          break;
+        case "developer":
+          journeyTitle = "🔧 Developer Journey";
+          break;
+        case "autonomous-ai":
+          journeyTitle = "🤖 Autonomous AI Journey";
+          break;
+        case "bootcamp":
+          journeyTitle = "⚔️ Bootcamp Journey";
+          break;
+      }
+
+      if (journeyTitleText && journeyTitle) {
+        journeyTitleText.textContent = journeyTitle;
+      }
+    } else if (activeFilterType === "section" && activeFilter) {
+      let sectionTitle = "";
+
+      switch (activeFilter) {
+        case "core_learning_path":
+          sectionTitle = "📚 Core Learning Path";
+          break;
+        case "intermediate_labs":
+          sectionTitle = "🎯 Intermediate Labs";
+          break;
+        case "advanced_labs":
+          sectionTitle = "🚀 Advanced Labs";
+          break;
+        case "specialized_labs":
+          sectionTitle = "⚙️ Specialized Labs";
+          break;
+        case "optional_labs":
+          sectionTitle = "📋 Optional Labs";
+          break;
+        case "external_labs":
+          sectionTitle = "🌐 External Labs";
+          break;
+        default:
+          sectionTitle =
+            "📂 " +
+            activeFilter
+              .replace(/_/g, " ")
+              .replace(/\b\w/g, (l) => l.toUpperCase());
+          break;
+      }
+
+      if (journeyTitleText && sectionTitle) {
+        journeyTitleText.textContent = sectionTitle;
+      }
+    } else if (currentJourneys && currentJourneys.length > 0) {
+      // Default to primary journey
+      const primaryJourney = currentJourneys[0];
+      let journeyTitle = "";
+
+      switch (primaryJourney) {
+        case "quick-start":
+          journeyTitle = "🚀 Quick Start Journey";
+          break;
+        case "business-user":
+          journeyTitle = "💼 Business User Journey";
+          break;
+        case "developer":
+          journeyTitle = "🔧 Developer Journey";
+          break;
+        case "autonomous-ai":
+          journeyTitle = "🤖 Autonomous AI Journey";
+          break;
+        case "bootcamp":
+          journeyTitle = "⚔️ Bootcamp Journey";
+          break;
+      }
+
+      if (journeyTitleText && journeyTitle) {
+        journeyTitleText.textContent = journeyTitle;
+      }
+    }
+
+    // ========================================================================
+    // BOOTCAMP NAVIGATION SYSTEM - Previous/Next Lab Navigation
+    // ========================================================================
+    // This function implements context-aware lab navigation that handles both
+    // regular journey filtering and special bootcamp sequencing.
+    //
+    // ARCHITECTURE OVERVIEW:
+    // - Labs have dual identity: regular journeys + optional bootcamp_order
+    // - Navigation respects the current filter context (journey vs bootcamp)
+    // - Bootcamp uses alphanumeric ordering (1a, 1b, 2, 3a, 3b, etc.)
+    // - Regular journeys use numeric ordering (1, 2, 3, etc.)
+    //
+    // DATA FLOW:
+    // 1. Get current lab context (URL, journeys, order)
+    // 2. Filter all labs based on active filter type
+    // 3. Sort filtered labs using appropriate ordering system
+    // 4. Find current lab position in filtered list
+    // 5. Generate Previous/Next links with proper URLs and context
+    //
+    // BOOTCAMP SPECIAL HANDLING:
+    // - activeFilter === "bootcamp" triggers bootcamp-specific logic
+    // - Filters labs by presence of data-bootcamp-order attribute
+    // - Uses custom alphanumeric sorting for bootcamp sequence
+    // - Preserves query parameters (?activeFilter=bootcamp) for context
+    //
+    // URL GENERATION:
+    // - Includes Jekyll base URL for GitHub Pages compatibility
+    // - Preserves query string for filter context maintenance
+    // - Handles both relative and absolute URL scenarios
+    function updatePrevNextNavigation() {
+      const labData = document.getElementById("lab-data");
+      const prevNextNav = document.getElementById("prev-next-nav");
+
+      if (!labData || !prevNextNav) return;
+
+      const currentUrl = labData.getAttribute("data-current-url");
+      const currentJourneys = labData
+        .getAttribute("data-current-journeys")
+        .split(",");
+      const currentOrder = parseInt(labData.getAttribute("data-current-order"));
+
+      // Get all lab items from hidden data container
+      const labItems = Array.from(labData.querySelectorAll(".lab-item"));
+
+      // FILTERING LOGIC: Context-aware lab filtering
+      // Priority order ensures bootcamp is handled before general journey logic
+      let filteredLabs = labItems;
+      if (activeFilter === "bootcamp") {
+        // BOOTCAMP FILTERING: Labs with bootcamp_order attribute only
+        // This ensures only bootcamp-assigned labs appear in bootcamp navigation
+        filteredLabs = labItems.filter((item) => {
+          const bootcampOrder = item.getAttribute("data-bootcamp-order");
+          return bootcampOrder && bootcampOrder.trim() !== "";
+        });
+      } else if (activeFilterType === "journey" && activeFilter) {
+        // JOURNEY FILTERING: Labs assigned to specific journey
+        // Uses journey array from lab frontmatter (e.g., ["quick-start", "business-user"])
+        filteredLabs = labItems.filter((item) => {
+          const labJourneys = item.getAttribute("data-journeys").split(",");
+          return labJourneys.includes(activeFilter);
+        });
+      }
+
+      // SORTING LOGIC: Different ordering systems for different contexts
+      if (activeFilter === "bootcamp") {
+        // BOOTCAMP SORTING: Alphanumeric ordering (1a, 1b, 2, 3a, 3b, 4, 5a, 5b, 6, 7)
+        filteredLabs.sort((a, b) => {
+          const aOrder = a.getAttribute("data-bootcamp-order");
+          const bOrder = b.getAttribute("data-bootcamp-order");
+
+          // ALPHANUMERIC PARSER: Handles "1a", "1b", "2", "3a" format
+          // Splits into numeric part (1, 2, 3) and letter part (a, b, empty)
+          const parseBootcampOrder = (order) => {
+            if (!order) return [0, ""];
+            const match = order.match(/^(\d+)([a-z]?)$/);
+            if (match) {
+              return [parseInt(match[1]), match[2] || ""];
+            }
+            return [0, order];
+          };
+
+          const [aNum, aLetter] = parseBootcampOrder(aOrder);
+          const [bNum, bLetter] = parseBootcampOrder(bOrder);
+
+          if (aNum !== bNum) return aNum - bNum;
+          return aLetter.localeCompare(bLetter);
+        });
+      } else {
+        // REGULAR JOURNEY SORTING: Simple numeric ordering
+        // Uses standard lab order field for sequential navigation
+        filteredLabs.sort((a, b) => {
+          return (
+            parseInt(a.getAttribute("data-order")) -
+            parseInt(b.getAttribute("data-order"))
+          );
+        });
+      }
+
+      // POSITION DETECTION: Find current lab in filtered and sorted list
+      const currentIndex = filteredLabs.findIndex(
+        (item) => item.getAttribute("data-url") === currentUrl
+      );
+
+      // DEFAULT NAVIGATION: Placeholder text for edge cases
+      let prevHtml = '<span class="nav-placeholder">← No previous lab</span>';
+      let nextHtml = '<span class="nav-placeholder">No next lab →</span>';
+
+      // CONTEXT PRESERVATION: Maintain filter state across navigation
+      // Query string preserves ?activeFilter=bootcamp or journey parameters
+      const currentQueryString = window.location.search;
+
+      // URL CONSTRUCTION: GitHub Pages compatible URL generation
+      // Base URL ensures proper routing in subdirectory deployments
+      const baseUrl = labData.getAttribute("data-base-url") || "";
+
+      // PREVIOUS LAB LINK GENERATION
+      if (currentIndex > 0) {
+        const prevLab = filteredLabs[currentIndex - 1];
+        const prevUrl = prevLab.getAttribute("data-url");
+        const prevTitle = prevLab.getAttribute("data-title");
+        prevHtml = `<a href="${baseUrl}${prevUrl}${currentQueryString}" class="nav-button prev">← ${prevTitle}</a>`;
+      }
+
+      // NEXT LAB LINK GENERATION
+      if (currentIndex < filteredLabs.length - 1) {
+        const nextLab = filteredLabs[currentIndex + 1];
+        const nextUrl = nextLab.getAttribute("data-url");
+        const nextTitle = nextLab.getAttribute("data-title");
+        nextHtml = `<a href="${baseUrl}${nextUrl}${currentQueryString}" class="nav-button next">${nextTitle} →</a>`;
+      }
+
+      // RENDER NAVIGATION: Update DOM with generated navigation links
+      prevNextNav.innerHTML = prevHtml + nextHtml;
+    }
+
+    // Update navigation on page load
+    updatePrevNextNavigation();
+
+    // ========================================================================
+    // Enhanced Lab Features - Callouts, Copy Buttons, and Image Lightbox
+    // ========================================================================
+
+    // Feature 1: Initialize GitHub-style callouts
+    initializeCallouts();
+
+    // Feature 2: Add copy buttons to code blocks
+    initializeCopyButtons();
+
+    // Feature 3: Initialize image lightbox functionality
+    initializeImageLightbox();
+
+    // ========================================================================
+    // Function Definitions
+    // ========================================================================
+
+    // GitHub-Style Callouts Implementation
+    function initializeCallouts() {
+      // Find all blockquotes within lab content
+      const labContent = document.querySelector(".lab-body");
+      if (!labContent) return;
+
+      const blockquotes = labContent.querySelectorAll("blockquote");
+
+      blockquotes.forEach((blockquote, index) => {
+        // Get the text content to check for callout pattern
+        const textContent = blockquote.textContent.trim();
+
+        // Check if this blockquote starts with a callout pattern
+        const match = textContent.match(
+          /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i
+        );
+        if (!match) return;
+
+        const calloutType = match[1].toLowerCase();
+
+        // Get the content after the callout marker
+        const contentAfterMarker = textContent
+          .replace(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i, "")
+          .trim();
+
+        // Create callout container
+        const calloutDiv = document.createElement("div");
+        calloutDiv.className = `callout callout-${calloutType}`;
+
+        // Create title element
+        const titleDiv = document.createElement("div");
+        titleDiv.className = "callout-title";
+        titleDiv.textContent = calloutType.toUpperCase();
+
+        // Create content container
+        const contentDiv = document.createElement("div");
+        contentDiv.className = "callout-content";
+
+        // Clone the original blockquote content but remove the callout marker
+        const clonedBlockquote = blockquote.cloneNode(true);
+        const firstP = clonedBlockquote.querySelector("p:first-child");
+
+        if (firstP) {
+          // Remove the callout marker from the first paragraph
+          const firstPText = firstP.innerHTML;
+          const cleanedText = firstPText.replace(
+            /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i,
+            ""
+          );
+
+          if (cleanedText.trim()) {
+            firstP.innerHTML = cleanedText;
+          } else {
+            // If first paragraph only had the marker, remove it entirely
+            firstP.remove();
+          }
+        }
+
+        // Move all content from cloned blockquote to content div
+        Array.from(clonedBlockquote.children).forEach((child) => {
+          contentDiv.appendChild(child);
+        });
+
+        // Build final callout
+        calloutDiv.appendChild(titleDiv);
+        calloutDiv.appendChild(contentDiv);
+
+        // Replace the blockquote
+        blockquote.parentNode.replaceChild(calloutDiv, blockquote);
+      });
+    }
+
+    // Copy Button Implementation
+    function initializeCopyButtons() {
+      // Find all pre elements with code
+      const preElements = document.querySelectorAll(".lab-content pre");
+
+      preElements.forEach((pre) => {
+        // Skip if already has a copy button
+        if (pre.parentNode.classList.contains("code-container")) return;
+
+        // Create container wrapper
+        const container = document.createElement("div");
+        container.className = "code-container";
+
+        // Create copy button
+        const copyButton = document.createElement("button");
+        copyButton.className = "copy-button";
+        copyButton.textContent = "Copy";
+        copyButton.title = "Copy code to clipboard";
+
+        // Add click handler
+        copyButton.addEventListener("click", async function () {
+          const code = pre.textContent || pre.innerText;
+
+          try {
+            await navigator.clipboard.writeText(code);
+
+            // Show success state
+            copyButton.classList.add("copied");
+            copyButton.textContent = "Copied";
+
+            // Reset after 2 seconds
+            setTimeout(() => {
+              copyButton.classList.remove("copied");
+              copyButton.textContent = "Copy";
+            }, 2000);
+          } catch (err) {
+            // Fallback for older browsers
+            const textArea = document.createElement("textarea");
+            textArea.value = code;
+            document.body.appendChild(textArea);
+            textArea.select();
+
+            try {
+              document.execCommand("copy");
+              copyButton.textContent = "Copied";
+              setTimeout(() => {
+                copyButton.textContent = "Copy";
+              }, 2000);
+            } catch (fallbackErr) {
+              copyButton.textContent = "Failed";
+              setTimeout(() => {
+                copyButton.textContent = "Copy";
+              }, 2000);
+            }
+
+            document.body.removeChild(textArea);
+          }
+        });
+
+        // Wrap pre element and add button
+        pre.parentNode.insertBefore(container, pre);
+        container.appendChild(pre);
+        container.appendChild(copyButton);
+      });
+    }
+
+    // Image Lightbox Implementation
+    function initializeImageLightbox() {
+      // Create lightbox overlay
+      const lightboxOverlay = document.createElement("div");
+      lightboxOverlay.className = "lightbox-overlay";
+      lightboxOverlay.innerHTML = `
+            <button class="lightbox-close" title="Close (ESC)">×</button>
+            <div class="lightbox-controls">
+                <button class="zoom-out" title="Zoom Out (-)">−</button>
+                <span class="zoom-level">100%</span>
+                <button class="zoom-in" title="Zoom In (+)">+</button>
+                <button class="zoom-reset" title="Reset Zoom (0)">⌂</button>
+            </div>
+            <div class="lightbox-loading">Loading...</div>
+            <div class="lightbox-container">
+                <img class="lightbox-image" alt="" style="display: none;">
+            </div>
+        `;
+      document.body.appendChild(lightboxOverlay);
+
+      const lightboxImage = lightboxOverlay.querySelector(".lightbox-image");
+      const lightboxLoading =
+        lightboxOverlay.querySelector(".lightbox-loading");
+      const lightboxContainer = lightboxOverlay.querySelector(
+        ".lightbox-container"
+      );
+      const closeButton = lightboxOverlay.querySelector(".lightbox-close");
+      const zoomInBtn = lightboxOverlay.querySelector(".zoom-in");
+      const zoomOutBtn = lightboxOverlay.querySelector(".zoom-out");
+      const zoomResetBtn = lightboxOverlay.querySelector(".zoom-reset");
+      const zoomLevel = lightboxOverlay.querySelector(".zoom-level");
+
+      let currentZoom = 1;
+      let isDragging = false;
+      let startX,
+        startY,
+        translateX = 0,
+        translateY = 0;
+
+      // Add click handlers to all images in lab content
+      const images = document.querySelectorAll(".lab-content img");
+
+      images.forEach((img) => {
+        img.addEventListener("click", function () {
+          openLightbox(img.src, img.alt);
+        });
+      });
+
+      // Open lightbox function
+      function openLightbox(src, alt) {
+        lightboxOverlay.classList.add("active");
+        lightboxImage.style.display = "none";
+        lightboxLoading.style.display = "block";
+
+        // Reset zoom and position
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
+
+        // Load image
+        const tempImage = new Image();
+        tempImage.onload = function () {
+          lightboxImage.src = src;
+          lightboxImage.alt = alt;
+
+          // Set initial size to fit container while maintaining aspect ratio
+          const container = lightboxOverlay.querySelector(
+            ".lightbox-container"
+          );
+          const containerWidth = container.clientWidth;
+          const containerHeight = container.clientHeight;
+
+          // Calculate scale to fit image in container
+          const scaleX = containerWidth / tempImage.width;
+          const scaleY = containerHeight / tempImage.height;
+          const initialScale = Math.min(scaleX, scaleY, 1); // Don't scale up beyond original size
+
+          // Set the image size directly
+          lightboxImage.style.width = tempImage.width * initialScale + "px";
+          lightboxImage.style.height = tempImage.height * initialScale + "px";
+
+          lightboxImage.style.display = "block";
+          lightboxLoading.style.display = "none";
+
+          updateImageTransform();
+          updateZoomLevel();
+        };
+        tempImage.onerror = function () {
+          lightboxLoading.textContent = "Failed to load image";
+        };
+        tempImage.src = src;
+
+        // Prevent body scroll
+        document.body.style.overflow = "hidden";
+      }
+
+      // Close lightbox function
+      function closeLightbox() {
+        lightboxOverlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      // Zoom functions
+      function zoomIn() {
+        currentZoom = Math.min(currentZoom * 1.5, 5);
+        updateImageTransform();
+        updateZoomLevel();
+        updateCursor();
+      }
+
+      function zoomOut() {
+        currentZoom = Math.max(currentZoom / 1.5, 0.5);
+        updateImageTransform();
+        updateZoomLevel();
+        updateCursor();
+      }
+
+      function resetZoom() {
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
+        updateImageTransform();
+        updateZoomLevel();
+        updateCursor();
+      }
+
+      function updateImageTransform() {
+        const transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
+        lightboxImage.style.transform = transform;
+        lightboxImage.style.transformOrigin = "center center";
+      }
+
+      function updateZoomLevel() {
+        const zoomPercent = Math.round(currentZoom * 100);
+        zoomLevel.textContent = zoomPercent + "%";
+      }
+
+      function updateCursor() {
+        if (currentZoom > 1) {
+          lightboxImage.style.cursor = isDragging ? "grabbing" : "grab";
+        } else {
+          lightboxImage.style.cursor = "default";
+        }
+      }
+
+      // Event listeners for zoom controls
+      zoomInBtn.addEventListener("click", zoomIn);
+      zoomOutBtn.addEventListener("click", zoomOut);
+      zoomResetBtn.addEventListener("click", resetZoom);
+
+      // Mouse wheel zoom
+      lightboxContainer.addEventListener("wheel", function (e) {
+        e.preventDefault();
+
+        if (e.deltaY < 0) {
+          zoomIn();
+        } else {
+          zoomOut();
+        }
+      });
+
+      // Touch/mouse drag to pan when zoomed
+      lightboxImage.addEventListener("mousedown", startDrag);
+      lightboxImage.addEventListener("touchstart", startDrag, {
+        passive: false,
+      });
+
+      function startDrag(e) {
+        if (currentZoom <= 1) return;
+
+        isDragging = true;
+        updateCursor();
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        startX = clientX - translateX;
+        startY = clientY - translateY;
+
+        e.preventDefault();
+      }
+
+      document.addEventListener("mousemove", drag, { passive: false });
+      document.addEventListener("touchmove", drag, { passive: false });
+
+      function drag(e) {
+        if (!isDragging || currentZoom <= 1) return;
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        translateX = clientX - startX;
+        translateY = clientY - startY;
+
+        updateImageTransform();
+        e.preventDefault();
+      }
+
+      document.addEventListener("mouseup", stopDrag);
+      document.addEventListener("touchend", stopDrag);
+
+      function stopDrag() {
+        if (isDragging) {
+          isDragging = false;
+          updateCursor();
+        }
+      }
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", function (e) {
+        if (!lightboxOverlay.classList.contains("active")) return;
+
+        switch (e.key) {
+          case "Escape":
+            closeLightbox();
+            break;
+          case "+":
+          case "=":
+            e.preventDefault();
+            zoomIn();
+            break;
+          case "-":
+            e.preventDefault();
+            zoomOut();
+            break;
+          case "0":
+            e.preventDefault();
+            resetZoom();
+            break;
+        }
+      });
+
+      // Event listeners for closing
+      closeButton.addEventListener("click", closeLightbox);
+
+      lightboxOverlay.addEventListener("click", function (e) {
+        if (e.target === lightboxOverlay) {
+          closeLightbox();
+        }
+      });
+
+      // Prevent image and container clicks from closing lightbox
+      lightboxImage.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+
+      lightboxContainer.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    }
+
+    // Scroll to Top Button Functionality
+    const scrollToTopButton = document.getElementById("scroll-to-top");
+
+    if (scrollToTopButton) {
+      // Show/hide button based on scroll position
+      function toggleScrollButton() {
+        const scrollThreshold = 300; // Show button after scrolling 300px
+        const scrollPosition =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollPosition > scrollThreshold) {
+          scrollToTopButton.classList.add("visible");
+        } else {
+          scrollToTopButton.classList.remove("visible");
+        }
+      }
+
+      // Smooth scroll to top function
+      function scrollToTop() {
+        // Check if browser supports smooth scrolling
+        if ("scrollBehavior" in document.documentElement.style) {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        } else {
+          // Fallback for older browsers with animated scroll
+          const scrollStep = -window.scrollY / (300 / 15);
+          const scrollInterval = setInterval(function () {
+            if (window.scrollY !== 0) {
+              window.scrollBy(0, scrollStep);
+            } else {
+              clearInterval(scrollInterval);
+            }
+          }, 15);
+        }
+      }
+
+      // Event listeners
+      window.addEventListener("scroll", toggleScrollButton, { passive: true });
+      scrollToTopButton.addEventListener("click", scrollToTop);
+
+      // Initialize button state
+      toggleScrollButton();
+    }
+  });
+</script>
+
+<script>
+  // ============================================================================
+  // Enhanced Lab Features - Callouts, Copy Buttons, and Image Lightbox
+  // ============================================================================
+
+  document.addEventListener("DOMContentLoaded", function () {
+    // Feature 1: Initialize GitHub-style callouts
+    initializeCallouts();
+
+    // Feature 2: Add copy buttons to code blocks
+    initializeCopyButtons();
+
+    // Feature 3: Initialize image lightbox functionality
+    initializeImageLightbox();
+
+    // ========================================================================
+    // GitHub-Style Callouts Implementation
+    // ========================================================================
+    function initializeCallouts() {
+      // Find all blockquotes within lab content
+      const labContent = document.querySelector(".lab-body");
+      if (!labContent) return;
+
+      const blockquotes = labContent.querySelectorAll("blockquote");
+
+      blockquotes.forEach((blockquote, index) => {
+        // Get the text content to check for callout pattern
+        const textContent = blockquote.textContent.trim();
+
+        // Check if this blockquote starts with a callout pattern
+        const match = textContent.match(
+          /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i
+        );
+        if (!match) return;
+
+        const calloutType = match[1].toLowerCase();
+
+        // Get the content after the callout marker
+        const contentAfterMarker = textContent
+          .replace(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i, "")
+          .trim();
+
+        // Create callout container
+        const calloutDiv = document.createElement("div");
+        calloutDiv.className = `callout callout-${calloutType}`;
+
+        // Create title element
+        const titleDiv = document.createElement("div");
+        titleDiv.className = "callout-title";
+        titleDiv.textContent = calloutType.toUpperCase();
+
+        // Create content container
+        const contentDiv = document.createElement("div");
+        contentDiv.className = "callout-content";
+
+        // Clone the original blockquote content but remove the callout marker
+        const clonedBlockquote = blockquote.cloneNode(true);
+        const firstP = clonedBlockquote.querySelector("p:first-child");
+
+        if (firstP) {
+          // Remove the callout marker from the first paragraph
+          const firstPText = firstP.innerHTML;
+          const cleanedText = firstPText.replace(
+            /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i,
+            ""
+          );
+
+          if (cleanedText.trim()) {
+            firstP.innerHTML = cleanedText;
+          } else {
+            // If first paragraph only had the marker, remove it entirely
+            firstP.remove();
+          }
+        }
+
+        // Move all content from cloned blockquote to content div
+        Array.from(clonedBlockquote.children).forEach((child) => {
+          contentDiv.appendChild(child);
+        });
+
+        // Build final callout
+        calloutDiv.appendChild(titleDiv);
+        calloutDiv.appendChild(contentDiv);
+
+        // Replace the blockquote
+        blockquote.parentNode.replaceChild(calloutDiv, blockquote);
+      });
+    }
+
+    // ========================================================================
+    // Copy Button Implementation
+    // ========================================================================
+    function initializeCopyButtons() {
+      // Find all pre elements with code
+      const preElements = document.querySelectorAll(".lab-content pre");
+
+      preElements.forEach((pre) => {
+        // Skip if already has a copy button
+        if (pre.parentNode.classList.contains("code-container")) return;
+
+        // Create container wrapper
+        const container = document.createElement("div");
+        container.className = "code-container";
+
+        // Create copy button
+        const copyButton = document.createElement("button");
+        copyButton.className = "copy-button";
+        copyButton.textContent = "Copy";
+        copyButton.title = "Copy code to clipboard";
+
+        // Add click handler
+        copyButton.addEventListener("click", async function () {
+          const code = pre.textContent || pre.innerText;
+
+          try {
+            await navigator.clipboard.writeText(code);
+
+            // Show success state
+            copyButton.classList.add("copied");
+            copyButton.textContent = "Copied";
+
+            // Reset after 2 seconds
+            setTimeout(() => {
+              copyButton.classList.remove("copied");
+              copyButton.textContent = "Copy";
+            }, 2000);
+          } catch (err) {
+            // Fallback for older browsers
+            const textArea = document.createElement("textarea");
+            textArea.value = code;
+            document.body.appendChild(textArea);
+            textArea.select();
+
+            try {
+              document.execCommand("copy");
+              copyButton.textContent = "Copied";
+              setTimeout(() => {
+                copyButton.textContent = "Copy";
+              }, 2000);
+            } catch (fallbackErr) {
+              copyButton.textContent = "Failed";
+              setTimeout(() => {
+                copyButton.textContent = "Copy";
+              }, 2000);
+            }
+
+            document.body.removeChild(textArea);
+          }
+        });
+
+        // Wrap pre element and add button
+        pre.parentNode.insertBefore(container, pre);
+        container.appendChild(pre);
+        container.appendChild(copyButton);
+      });
+    }
+
+    // ========================================================================
+    // Image Lightbox Implementation
+    // ========================================================================
+    function initializeImageLightbox() {
+      // Create lightbox overlay
+      const lightboxOverlay = document.createElement("div");
+      lightboxOverlay.className = "lightbox-overlay";
+      lightboxOverlay.innerHTML = `
+            <button class="lightbox-close" title="Close (ESC)">×</button>
+            <div class="lightbox-controls">
+                <button class="zoom-out" title="Zoom Out (-)">−</button>
+                <span class="zoom-level">100%</span>
+                <button class="zoom-in" title="Zoom In (+)">+</button>
+                <button class="zoom-reset" title="Reset Zoom (0)">⌂</button>
+            </div>
+            <div class="lightbox-loading">Loading...</div>
+            <div class="lightbox-container">
+                <img class="lightbox-image" alt="" style="display: none;">
+            </div>
+        `;
+      document.body.appendChild(lightboxOverlay);
+
+      const lightboxImage = lightboxOverlay.querySelector(".lightbox-image");
+      const lightboxLoading =
+        lightboxOverlay.querySelector(".lightbox-loading");
+      const lightboxContainer = lightboxOverlay.querySelector(
+        ".lightbox-container"
+      );
+      const closeButton = lightboxOverlay.querySelector(".lightbox-close");
+      const zoomInBtn = lightboxOverlay.querySelector(".zoom-in");
+      const zoomOutBtn = lightboxOverlay.querySelector(".zoom-out");
+      const zoomResetBtn = lightboxOverlay.querySelector(".zoom-reset");
+      const zoomLevel = lightboxOverlay.querySelector(".zoom-level");
+
+      let currentZoom = 1;
+      let isDragging = false;
+      let startX,
+        startY,
+        translateX = 0,
+        translateY = 0;
+
+      // Add click handlers to all images in lab content
+      const images = document.querySelectorAll(".lab-content img");
+
+      images.forEach((img) => {
+        img.addEventListener("click", function () {
+          openLightbox(img.src, img.alt);
+        });
+      });
+
+      // Open lightbox function
+      function openLightbox(src, alt) {
+        lightboxOverlay.classList.add("active");
+        lightboxImage.style.display = "none";
+        lightboxLoading.style.display = "block";
+
+        // Reset zoom and position
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
+
+        // Load image
+        const tempImage = new Image();
+        tempImage.onload = function () {
+          lightboxImage.src = src;
+          lightboxImage.alt = alt;
+
+          // Set initial size to fit container while maintaining aspect ratio
+          const container = lightboxOverlay.querySelector(
+            ".lightbox-container"
+          );
+          const containerWidth = container.clientWidth;
+          const containerHeight = container.clientHeight;
+
+          // Calculate scale to fit image in container
+          const scaleX = containerWidth / tempImage.width;
+          const scaleY = containerHeight / tempImage.height;
+          const initialScale = Math.min(scaleX, scaleY, 1); // Don't scale up beyond original size
+
+          // Set the image size directly
+          lightboxImage.style.width = tempImage.width * initialScale + "px";
+          lightboxImage.style.height = tempImage.height * initialScale + "px";
+
+          lightboxImage.style.display = "block";
+          lightboxLoading.style.display = "none";
+
+          updateImageTransform();
+          updateZoomLevel();
+        };
+        tempImage.onerror = function () {
+          lightboxLoading.textContent = "Failed to load image";
+        };
+        tempImage.src = src;
+
+        // Prevent body scroll
+        document.body.style.overflow = "hidden";
+      }
+
+      // Close lightbox function
+      function closeLightbox() {
+        lightboxOverlay.classList.remove("active");
+        document.body.style.overflow = "";
+      }
+
+      // Zoom functions
+      function zoomIn() {
+        currentZoom = Math.min(currentZoom * 1.5, 5);
+        updateImageTransform();
+        updateZoomLevel();
+        updateCursor();
+      }
+
+      function zoomOut() {
+        currentZoom = Math.max(currentZoom / 1.5, 0.5);
+        updateImageTransform();
+        updateZoomLevel();
+        updateCursor();
+      }
+
+      function resetZoom() {
+        currentZoom = 1;
+        translateX = 0;
+        translateY = 0;
+        updateImageTransform();
+        updateZoomLevel();
+        updateCursor();
+      }
+
+      function updateImageTransform() {
+        const transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
+        lightboxImage.style.transform = transform;
+        lightboxImage.style.transformOrigin = "center center";
+      }
+
+      function updateZoomLevel() {
+        const zoomPercent = Math.round(currentZoom * 100);
+        zoomLevel.textContent = zoomPercent + "%";
+      }
+
+      function updateCursor() {
+        if (currentZoom > 1) {
+          lightboxImage.style.cursor = isDragging ? "grabbing" : "grab";
+        } else {
+          lightboxImage.style.cursor = "default";
+        }
+      }
+
+      // Event listeners for zoom controls
+      zoomInBtn.addEventListener("click", zoomIn);
+      zoomOutBtn.addEventListener("click", zoomOut);
+      zoomResetBtn.addEventListener("click", resetZoom);
+
+      // Mouse wheel zoom
+      lightboxContainer.addEventListener("wheel", function (e) {
+        e.preventDefault();
+
+        if (e.deltaY < 0) {
+          zoomIn();
+        } else {
+          zoomOut();
+        }
+      });
+
+      // Touch/mouse drag to pan when zoomed
+      lightboxImage.addEventListener("mousedown", startDrag);
+      lightboxImage.addEventListener("touchstart", startDrag, {
+        passive: false,
+      });
+
+      function startDrag(e) {
+        if (currentZoom <= 1) return;
+
+        isDragging = true;
+        updateCursor();
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        startX = clientX - translateX;
+        startY = clientY - translateY;
+
+        e.preventDefault();
+      }
+
+      document.addEventListener("mousemove", drag, { passive: false });
+      document.addEventListener("touchmove", drag, { passive: false });
+
+      function drag(e) {
+        if (!isDragging || currentZoom <= 1) return;
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+
+        translateX = clientX - startX;
+        translateY = clientY - startY;
+
+        updateImageTransform();
+        e.preventDefault();
+      }
+
+      document.addEventListener("mouseup", stopDrag);
+      document.addEventListener("touchend", stopDrag);
+
+      function stopDrag() {
+        if (isDragging) {
+          isDragging = false;
+          updateCursor();
+        }
+      }
+
+      // Keyboard shortcuts
+      document.addEventListener("keydown", function (e) {
+        if (!lightboxOverlay.classList.contains("active")) return;
+
+        switch (e.key) {
+          case "Escape":
+            closeLightbox();
+            break;
+          case "+":
+          case "=":
+            e.preventDefault();
+            zoomIn();
+            break;
+          case "-":
+            e.preventDefault();
+            zoomOut();
+            break;
+          case "0":
+            e.preventDefault();
+            resetZoom();
+            break;
+        }
+      });
+
+      // Event listeners for closing
+      closeButton.addEventListener("click", closeLightbox);
+
+      lightboxOverlay.addEventListener("click", function (e) {
+        if (e.target === lightboxOverlay) {
+          closeLightbox();
+        }
+      });
+
+      // Prevent image and container clicks from closing lightbox
+      lightboxImage.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+
+      lightboxContainer.addEventListener("click", function (e) {
+        e.stopPropagation();
+      });
+    }
+
+    // =========================================================================
+    // SCROLL TO TOP BUTTON FUNCTIONALITY
+    // =========================================================================
+
+    // Get the scroll-to-top button
+    const scrollToTopButton = document.getElementById("scroll-to-top");
+
+    if (scrollToTopButton) {
+      // Show/hide button based on scroll position
+      function toggleScrollButton() {
+        const scrollThreshold = 300; // Show button after scrolling 300px
+        const scrollPosition =
+          window.pageYOffset || document.documentElement.scrollTop;
+
+        if (scrollPosition > scrollThreshold) {
+          scrollToTopButton.classList.add("visible");
+        } else {
+          scrollToTopButton.classList.remove("visible");
+        }
+      }
+
+      // Smooth scroll to top function
+      function scrollToTop() {
+        // Check if browser supports smooth scrolling
+        if ("scrollBehavior" in document.documentElement.style) {
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        } else {
+          // Fallback for older browsers with animated scroll
+          const scrollStep = -window.scrollY / (300 / 15);
+          const scrollInterval = setInterval(function () {
+            if (window.scrollY !== 0) {
+              window.scrollBy(0, scrollStep);
+            } else {
+              clearInterval(scrollInterval);
+            }
+          }, 15);
+        }
+      }
+
+      // Event listeners
+      window.addEventListener("scroll", toggleScrollButton, { passive: true });
+      scrollToTopButton.addEventListener("click", scrollToTop);
+
+      // Initialize button state
+      toggleScrollButton();
+    }
+  });
+</script>

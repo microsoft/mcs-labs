@@ -1,6 +1,6 @@
-# Create your own SharePoint-based AI assistant with Microsoft Copilot Studio agent builder
+# Create your own SharePoint-based AI assistant with the lite experience of Copilot Studio in Microsoft 365 Copilot (formerly Copilot Studio agent builder)
 
-Build an intelligent sales admin assistant that analyzes SharePoint data using code interpreter and image generation features in Microsoft Copilot Studio agent builder.
+Build an intelligent sales admin assistant that analyzes SharePoint data using code interpreter and image generation features in Copilot Studio Lite.
 
 ---
 
@@ -28,10 +28,10 @@ Build an intelligent sales admin assistant that analyzes SharePoint data using c
 
 ## 🌐 Introduction
 
-This lab builds on the Microsoft Copilot Studio agent builder experience by integrating SharePoint documents and enabling advanced AI capabilities. You'll create a Sales Admin Assistant that can analyze Excel data, reference policy documents, generate charts through code interpretation, and create visual content.
+This lab builds on the Copilot Studio Lite experience by integrating SharePoint documents and enabling advanced AI capabilities. You'll create a Sales Admin Assistant that can analyze Excel data, reference policy documents, generate charts through code interpretation, and create visual content.
 
 > [!NOTE]  
-> This lab assumes familiarity with the basic agent builder concepts covered in the [web-based agent builder lab](../agent-builder-web/README.md).
+> This lab assumes familiarity with the basic Copilot Studio lite concepts covered in the [web-based agent builder lab](../agent-builder-web/README.md).
 
 ---
 
@@ -88,7 +88,7 @@ Prepare the SharePoint documents that will serve as knowledge sources for your S
    - **Sales Excel file**: A spreadsheet containing sales data with columns for dates, product lines, revenue, and quarters
    - **Sales policy document**: A Word document containing sales policies, procedures, and guidelines
 
-3. Open the **Excel file** and note the data structure:
+3. Open the **Excel file**. Look at the data structure:
    - Ensure it contains sales data across multiple quarters/years
    - Verify product line categorization
 
@@ -119,18 +119,16 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
 
 4. **Confirm** the suggested agent name when prompted.
 
-#### Configure knowledge sources
+5. Go to the **Configure** tab
 
-5. Now head over to the **Configure** tab
-   - Under **Knowledge**, navigate to **Files**
-   - Add each of the 2 files you had opened in the previous use case.
-
-    ![alt text](images/knowledge-files.png)
-
+<!--
+![alt text](images/knowledge-files.png)
+Commented out; screenshots need update due to CPS updates.  Last minute change to labs required so will do at a later date
 > [!TIP]
 > If you can't see the files you just opened, an alternative approach is just to **paste** and **add** the SharePoint URL of the Sales folder.
 > 
 >    ![alt text](images/sharepoint-url-fallback.png)
+-->
 
 6. Under **capabilities**, enable:
    - **Code interpreter** (for data analysis and chart generation)
@@ -138,11 +136,22 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
 
 #### Finalize configuration
 
-7. Navigate to the **Configure** tab to review and refine:
+6. Navigate to the **Configure** tab to review and refine:
    - Agent name and description
-   - Instructions and tone
-   - Knowledge sources
+   - Instructions
    - Starter prompts
+
+#### Configure knowledge sources
+
+7. Now head over to the **Knowledge** section
+   - Under **Knowledge**, select the **Search bar**
+   - Go to the **Files** tab.
+   - Select both the **Sales Policy Document** and **Sales** documents
+   - You will see them being added as SharePoint documents
+  
+> [!TIP]
+> - If you can't see the files you just opened, an alternative approach is to **paste** and **add** the SharePoint URL of the Sales folder.
+> - Another alternative approach is to **download** the files locally and **upload** them to your agent.
 
 8. When satisfied with the configuration, select **Create**.
 
@@ -171,10 +180,10 @@ What are the key guidelines in our sales policy regarding customer discounts?
 4. **Start a new chat** and test the **code interpreter** capability with a data analysis request:
 
 ```
-Analyze sales data for the last 2 years with a breakdown per product line and quarter. Use data from Sales.xlsx.
+How are sales trending for home appliances?
 ```
 
-5. When offered to get a visual chart of this breakdown, **confirm**.
+5. *If* offered to get a visual chart of this breakdown, **confirm**.
 
 ![alt text](images/sales-data-analysis.png)
 
@@ -182,37 +191,36 @@ Analyze sales data for the last 2 years with a breakdown per product line and qu
 
 
 6. **Observe** how the agent:
-   - Accesses your Excel data from SharePoint
+   - Accesses your Excel data
    - Uses code interpreter to process the data
    - Generates dynamic charts and visualizations
    - Provides insights based on the analysis
 
 #### Test image generation
 
-6. **Start a new chat** and test the **image generation** capability with a relevantrequest:
+7. **Start a new chat** and test the **image generation** capability with a relevant request:
 
 ```
-Create a badge for the first place of our sales context for 2026
+Design a professional badge for the first place winner of our 2026 sales contest. It should look modern and premium, with gold colors, the text '1st Place – Sales Contest 2026', and a ribbon or trophy element.
 ```
 
 ![alt text](images/image-generator.png)
 
+> [!TIP]
+> Notice how you can also invoke a specific agent by using **@** in the standard **Chat** area.
 
 #### Update your agents and explore additional capabilities
 
-8. Go to **Create an agent**
+8. Select **...** next to your agent name in the side bar navigation, and choose **Edit**
 
-9. In the breadcrumb, select **My agents** 
+9. Select the Sales agent you created
 
-10. Select the **Sales Assistant** agent you created
-
-11. In the **Configure** tab, explore additional **knowledge** capabilities:
-   - All **Websites** (or specific websites) 
-   - All **Teams** data (or data from specific group chats, meetings, or channels)
+10. In the **Configure** tab, explore additional **knowledge** capabilities:
+   - All **Websites** (or specific websites)
    - All **SharePoint** data (or specific files or sites)
+   - All **Teams** data (or data from specific group chats, meetings, or channels)
    - Your **Emails**
-   - Knowledge sources enabled by your organization at the tenant level, through **Graph Connectors** (e.g., ServiceNow)
-
+   - Knowledge sources enabled by your organization at the tenant level, through **Copilot Connectors** (e.g., ServiceNow)
 
 ###  🏅 Congratulations! You've created an advanced SharePoint-integrated Copilot agent!
 

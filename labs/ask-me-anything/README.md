@@ -152,11 +152,11 @@ Create a new agent with SharePoint knowledge integration that provides grounded,
 
 4. Select **New**, and choose **Agent**
 
-5. Select **Skip to configure**
+5. Select the **Configure** tab
 
 6. Name your agent `Ask Me Anything`
 
-7. Click **Create**
+7. Select **Create**
 
 8. Go to **Knowledge**
 
@@ -277,9 +277,10 @@ Make the agent available in Microsoft 365 Copilot for your users.
 9. In the **Microsoft 365 Copilot** experience, the agent description will pop up. Select **Add**
 
 > [!TIP]
-> - You may need to give it a few tries/minutes the first time you deploy to Microsoft 365 Copilot so it deploys correctly. 
+> - You may need to give it a few tries/minutes the first time you deploy to Microsoft 365 Copilot so it deploys correctly.
+> - If encountering issues, try to publish your agent agent.
 > - If this doesn't work, try in Teams instead:
->   - Choose **See agents in Teams** instead. If you can
+>   - Choose **See agents in Teams** instead. 
 >   - In the new window, if prompted *This site is trying to open Microsoft Teams*, select **Cancel**, and the select **use the web app instead**
 
 10. Test the agent with the benefits prompt
@@ -324,12 +325,16 @@ Let's start by asking for the user country at the beginning of the conversation.
 
 #### Setting an office location in Entra ID
 
-1. Start by assigning an office location to your user. Use the **Employee Office Location Request Form** to select a **country** in the list. This will update your user's Office location property in Entra ID.
+1. Start by assigning an office location to your user. Use the **Workshop Agent**  and ask `Set location`. You will then be prompted to choose from a list of countries, and then hit **Submit**. This will update your user's Office Location property in Microsoft Entra.
 
 > [!IMPORTANT]
-> To access this form, use the provided values in the **Lab Resources** (specific per training).
+> - Access the workshop agent in the same location as when you created your training user account.
+> - You will need the workshop code and your training user's email address if you previously closed the agent.
+> - You can repeat this process as desired.
 
 #### Getting the office location of the logged-in user at the start of the conversation
+
+<!-- replacing with instrucftions on how to do this on message received, so it works in M365 channel too
 
 2. Now, in your 'Ask Me Anything' agent, go to the **Topics** tab, and then to the **System topics** tab.
 
@@ -360,25 +365,53 @@ Let's start by asking for the user country at the beginning of the conversation.
 
 10. **Save**
 
-11. Test if everything is working as expected by **refreshing** the conversation test pane. Because the Conversation Start topic automatically start at the beginning of every conversation, the **Get user** action of the **Microsoft Entra ID** connector gets triggered.
+ -->
 
-12. To see what values are returned from the connector, enter the **Variables** pane in the topic command bar. Go the **Test** to see the variable values at runtime (i.e., as you are testing in the conversation test pane).
+2. Now, in your 'Ask Me Anything' agent, go to the **Topics** tab, and then to the **System topics** tab.
+
+3. Open the **Conversation Start** topic
+
+4. At the beginning of the topic, right after the **Trigger**, add a new node **(+)** and choose **Add a tool**.
+
+5. Go the **Connector** tab, and search for `Microsoft Entra ID Get user`
+
+6. Select the **Get user** connector action and **Submit**.
+
+  ![alt text](images/add-tool-connector.png)
+
+7. In the **Get user** node, select `...` and **Properties** 
+
+8. Toggle the **End user authentication** to **Maker-provided credentials**.
+
+9. In the **Inputs** tab, for **User Id or Principal Name**, select `...`, go the the **System** tab, and select **User.Id**.
+
+![alt text](images/select-user-id.png)
+
+10. Test if everything is working as expected by **refreshing** the conversation test pane.
+   
+11. **Send** a message such as:
+
+```
+Hello!
+```
+
+15. Navigate to the **Topics** tab, open the **Conversation Starts** topic, and to see what values are returned from the connector, enter the **Variables** pane in the topic command bar. Go the **Test** to see the variable values at runtime (i.e., as you are testing in the conversation test pane).
   
   ![alt text](images/variables-pane.png)
 
-13. Select **Value** under the **GetUser** record, and **expand** it to see if the expected value was returned.
+16. Select **Value** under the **GetUser** record, and **expand** it to see if the expected value was returned.
 
 ![alt text](images/user-record-entra-id.png)
 
-14. Because we will need to use that variable value in other parts and topics of the agent, select the **GetUser** variable and make it **Global**.
+17. Because we will need to use that variable value in other parts and topics of the agent, select the **GetUser** variable and make it **Global**.
 
 ![alt text](images/set-global-variable.png)
 
-15. **Save**
+18. **Save**
 
 #### Dynamically filtering the searched SharePoint site with the office location
 
-16. Go to the **Topics** tab, select **+ Add a topic** and choose **From blank**
+19. Go to the **Topics** tab, select **+ Add a topic** and choose **From blank**
 
 17. Update the topic name from **Untitled** to `Leave policy`
 
@@ -404,11 +437,13 @@ Use this tool for questions about leave policy, time off, etc.
 > [!TIP]
 > This means that none of the knowledge sources that are configured at the top level of your agent will be used.
 
-23. Expand **Classic data**, for **SharePoint** (not Public websites!), toggle **Manual input** to **Formula**
+23. Toggle off **Allow the AI to use its own general knowledge (preview)**
 
-24. Select the `...` and go to the **formula** tab
+24. Expand **Classic data**, for **SharePoint** (not Public websites!), toggle **Manual input** to **Formula**
 
-25. Paste the **SharePoint classic data formula**
+25. Select the `...` and go to the **formula** tab
+
+26. Paste the **SharePoint classic data formula**
 
 > [!IMPORTANT]
 > - Use the formula provided in the **Lab Resources** (specific per training).
@@ -416,45 +451,45 @@ Use this tool for questions about leave policy, time off, etc.
 
   ![alt text](images/sharepoint-formulas.png)
 
-26. Select **Insert** once done, then **Save** your topic
+27. Select **Insert** once done, then **Save** your topic
 
-27. **Refresh** the test pane and ask:
+28. **Refresh** the test pane and ask:
 
 ```
 What's the leave policy?
 ```
 
-28. **Verify** that the leave policy used to generate this answer is the one matching the country you selected.
+29. **Verify** that the leave policy used to generate this answer is the one matching the country you selected.
 
 > [!TIP]
 > If formulas are too much code, you could also use condition nodes and configure different branches based on the selected country.
 
 #### Influence knowledge searches with instructions 
 
-29. You can also influence how knowledge searches are performed by updating your agent instructions. Go to the **Overview** tab and go to **Instructions**
+30. You can also influence how knowledge searches are performed by updating your agent instructions. Go to the **Overview** tab and go **Edit** the **Instructions**
 
-30. **Paste** the below line
+31. **Paste** the below line
 
 ```
-Include the user country () in knowledge search queries (e.g., "<question> in <country>?") that are HR related.
+Always start by triggering the  topic.
+Always append the user country () in knowledge search queries (e.g., "<question> in <country>?") that are HR related.
 ```
 
-31. We need to set the variable value in-between the parenthesis. **Type** `/` and select **Power Fx**.
-
-> [!TIP]
-> Note: the UX may differ. In that case, use the **{x}** dropdown to select **Global.GetUser.officeLocation**, and **Save** your instructions.
+32. We need to set the variable value in-between the parenthesis. **Type** `/` and select **Power Fx**.
 
   ![alt text](images/instructions-formula.png)
 
-31. **Type** `Global.GetUser.officeLocation` and select **Insert**
+33. **Type** `Global.GetUser.officeLocation` and select **Insert**
 
-32. **Test**
+34. **Save** the instructions
+
+35. **Test**
 
 ```
 What benefits do employees get?
 ```
 
-33. Notice how the query is **rewritten** to take into account the **variables** you provided, like country, **augmenting the chances** of returning the correct results for summarization.
+36. Notice how the query is **rewritten** to take into account the **variables** you provided, like country, **augmenting the chances** of returning the correct results for summarization.
 
 ![alt text](images/rewritten-search-query.png)
 
@@ -521,23 +556,22 @@ This use case demonstrates **agent scoping** principles:
 
 5. Select **ServiceNow**
 
-6. Choose the **ServiceNow** connection in **Created by my admin**
+6. Choose the **ServiceNow** connection under **Your connections**, and **Next**
+   
+8. Select **Knowledge** as the knowledge source.
 
-7. Select **Add**
+9. Select **Add to agent**
 
 #### Add ServiceNow ticket details as a Tool to the child agent
 
-1. Still within the **IT Support Agent** 
-
-2. Scroll down to **Tools** and **+ Add a tool**
+1. **Save** your child Agent
+  
+2. Still within the **IT Support Agent**, scroll down to **Tools** and **+ Add a tool**
 
 3. Search for  `ServiceNow List records`
 
-4. Select **Add to Agent**, then **Save** your child agent, and scroll down to the **Tools** section and select the **List records** tool you just added.
-
-> [!TIP]
-> In case of issues, refresh the page with CTRL + F5.
-
+4. Select **Add and configure**
+   
 5. **Rename** to `Get ServiceNow ticket details`
 
 6. Change **description** to `Gets the details of an incident using its incident number. Use this tool when users ask about ServiceNow tickets, incident status, or IT support requests.`
@@ -545,27 +579,28 @@ This use case demonstrates **agent scoping** principles:
 > [!TIP]
 > The description will help the AI know when to use that tool, so it's important to have clear instructions WHEN and WHEN NOT to use this tool. This is a key aspect of agent scoping - being specific about tool usage.
 
-7. Under **Additional details**, change **Authentication** to **Maker-provided credentials**
+7. Under **Additional details**, change **Credentials to use** to **Maker-provided credentials**
 
 > [!IMPORTANT]
 > In production scenarios, you may want to use the user context when making the connection to ServiceNow. Here, your context (as the author) is used by end-users of your agent when searching for incidents.
 
-8. For **Record Type**, set a **Custom value** and choose `Incident`
+8. For **Record Type**, under **Fill using**, choose **Custom value** and choose `Incident`
 
 9. Select **+ Add input** and choose **Query**
 
-10. Select **Customize** and use this for **Description**:
+10. Next to **Dynamically fill with AI**, select **Customize** and use this for **Description**:
 
     ```
     The output of this variable is the concatenation of numberCONTAINS and the incident number. E.g., 'numberCONTAINSINC0007001'. Only the incident number should be prompted and obtained from the user (e.g., INC0007001)
     ```
 
 > [!TIP]
-> Again, these instructions will be used by AI to understand how determine how to pass that information to the ServiceNow connector. In this case, how to use the very specific OData formatting of ServiceNow queries.
+> - Again, these instructions will be used by AI to understand how determine how to pass that information to the ServiceNow connector. In this case, how to use the very specific OData formatting of ServiceNow queries.
+> - If you get a "There is an error: 'DuplicateItem'" error, toggle to **Custom value**, then switch back to **Dynamically fill with AI** and set the customized **description** again.
 
 11. Select **+ Add input** and choose **Limit**
 
-12. Select **Custom Value** and set **1**
+12. Under **Fill using**, choose **Custom value** and  set **1**
 
 13. Select **Save**
 
@@ -579,6 +614,7 @@ This use case demonstrates **agent scoping** principles:
 
 > [!TIP]
 > Notice how the agent automatically:
+> - Asks the user to consent before running a search using ServiceNow knowledge. 
 > - Uses the appropriate ServiceNow tool based on the query type
 > - Handles multiple tickets in a single request (e.g., if you ask for both cases INC0000059 and INC0000060)
 > - Creates user-friendly responses with proper formatting
@@ -870,7 +906,7 @@ Use this tool to help users with meeting notes
     }
     ```
 
-20. Select **Save** and **Close**.
+20. Select **Save** and **Close** (IMPORTANT: if you don't save the adaptive card, the auto complete feature will not work in the next step)
 
 > [!TIP]
 > Notice how the Adaptive Card editor offers a visual editor to create your own Adaptive Card experience with a no-code/low-code editor.

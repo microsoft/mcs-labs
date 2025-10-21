@@ -1,0 +1,739 @@
+/* ============================================================================
+   MINIMAL THEME - Clean & Blog-Style Design
+   
+   A clean, minimal blog-style theme inspired by the Microsoft CAT blog.
+   Features subtle colors, clean typography, and minimal visual distractions
+   to focus attention on content.
+   
+   DESIGN CHARACTERISTICS:
+   - Clean white/light backgrounds with subtle grays
+   - Minimal color palette focused on readability
+   - Understated callouts that don't distract from content
+   - Clean typography with good spacing and hierarchy
+   - Subtle borders and shadows for definition without clutter
+   
+   INSPIRATION:
+   Based on modern blog designs like microsoft.github.io/mcscatblog/
+   that prioritize content readability and clean aesthetics.
+   
+   SUPPORTED MODES:
+   - Light Mode: Pure whites with subtle gray accents
+   - Dark Mode: Warm dark backgrounds with light text
+   
+   COLOR STRATEGY:
+   - Neutral palette: Grays, whites, and subtle blues
+   - Minimal accent colors that don't overwhelm
+   - High contrast for accessibility
+   - Consistent with modern blog design trends
+   
+   USAGE:
+   This file is loaded dynamically when "Minimal" theme is selected.
+   All variables defined here create a cohesive minimal aesthetic.
+   ============================================================================ */
+
+/* ============================================================================
+   MINIMAL THEME - LIGHT MODE VARIABLES (Chirpy Theme Colors)
+   ============================================================================ */
+
+:root {
+    /* ========================================
+       TYPOGRAPHY - CHIRPY THEME FONTS
+       ======================================== */
+    /* Chirpy font stack */
+    --font-family-base: 'Source Sans Pro', 'Microsoft Yahei', sans-serif;
+    --font-family-monospace: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Monaco, 'Courier New', monospace;
+    
+    /* Typography scale from Chirpy */
+    --font-size-base: 16px;
+    --font-size-sm: 14px;
+    --font-size-lg: 18px;
+    --line-height-base: 1.75;
+    --line-height-tight: 1.4;
+    
+    /* ========================================
+       CHIRPY LIGHT THEME COLORS - EXACT COPY
+       ======================================== */
+    /* Framework color */
+    --main-bg: white;
+    --mask-bg: #c1c3c5;
+    --main-border-color: #f3f3f3;
+
+    /* Common color */
+    --text-color: #34343c;
+    --text-muted-color: #757575;
+    --text-muted-highlight-color: inherit;
+    --heading-color: #2a2a2a;
+    --label-color: #585858;
+    --blockquote-border-color: #eeeeee;
+    --blockquote-text-color: #757575;
+    --link-color: #0056b2;
+    --link-underline-color: #dee2e6;
+    --button-bg: #ffffff;
+    --btn-border-color: #e9ecef;
+    --btn-backtotop-color: #686868;
+    --btn-backtotop-border-color: #f1f1f1;
+    --checkbox-color: #c5c5c5;
+    --checkbox-checked-color: #07a8f7;
+
+    /* Mapping to our existing structure - Enhanced Light Mode */
+    --bg-primary: var(--main-bg);
+    --bg-secondary: #fafbfc;  /* Slightly warmer secondary background */
+    --bg-tertiary: #f6f8fa;
+    --text-primary: var(--text-color);
+    --text-secondary: var(--text-muted-color);
+    --text-muted: var(--text-muted-color);
+    --border-color: #e1e4e8;  /* Slightly more defined borders */
+    --border-light: #f6f8fa;
+    --shadow: rgba(27,31,35,0.04);  /* More refined shadow */
+    --shadow-hover: rgba(27,31,35,0.08);  /* Enhanced hover shadow */
+    
+    /* ========================================
+       INTERACTIVE COLORS - CHIRPY STYLE
+       ======================================== */
+    --accent-primary: var(--link-color);
+    --accent-primary-hover: #003d82;
+    --accent-secondary: #003d82;
+    --hover-bg: #f6f8fa;
+    
+    /* ========================================
+       CHIRPY SCROLLBAR AND UTILITIES
+       ======================================== */
+    --scrollbar-track: #f6f8fa;
+    --scrollbar-thumb: #c5c5c5;
+    --scrollbar-thumb-hover: #a0a0a0;
+    --external-link-opacity: 0.7;
+    --fade-gradient: rgba(255,255,255,0.95);
+    
+    /* Chirpy header styles */
+    --header-bg: var(--main-bg);
+    --header-text: var(--text-color);
+    --header-text-secondary: var(--text-muted-color);
+    --header-hover: #f6f8fa;
+    
+    /* Chirpy-style minimal badges (all neutral) */
+    --badge-green-bg: #f6f8fa;
+    --badge-green-text: var(--text-muted-color);
+    --badge-orange-bg: #f6f8fa;
+    --badge-orange-text: var(--text-muted-color);
+    --badge-pink-bg: #f6f8fa;
+    --badge-pink-text: var(--text-muted-color);
+    --badge-purple-bg: #f6f8fa;
+    --badge-purple-text: var(--text-muted-color);
+    --badge-blue-bg: #f6f8fa;
+    --badge-blue-text: var(--text-muted-color);
+    
+    /* Chirpy-style minimal borders (all neutral) */
+    --border-green: var(--main-border-color);
+    --border-orange: var(--main-border-color);
+    --border-pink: var(--main-border-color);
+    --border-purple: var(--main-border-color);
+    --border-gray: var(--main-border-color);
+    --border-blue: var(--main-border-color);
+    --border-dark-green: var(--main-border-color);
+    --border-dark-orange: var(--main-border-color);
+    --border-red: var(--main-border-color);
+    
+    /* Journey colors - Chirpy neutral style */
+    --journey-quickstart-color: var(--text-muted-color);
+    --journey-businessuser-color: var(--text-muted-color);
+    --journey-developer-color: var(--text-muted-color);
+    --journey-autonomous-color: var(--text-muted-color);
+    --journey-bootcamp-color: var(--text-muted-color);
+    
+    /* Chirpy button colors */
+    --danger-color: #df3c30;
+    --danger-color-hover: #c33529;
+    --accent-tertiary: var(--link-color);
+    --accent-tertiary-dark: #003d82;
+    --dark-button-text: white;
+    
+    /* Chirpy code highlighting */
+    --code-bg: #f6f8fa;
+    --pre-bg: #f6f8fa;
+    
+    /* Chirpy callout colors - minimal and elegant */
+    --callout-note-bg: #e1f5fe;
+    --callout-note-border: var(--main-border-color);
+    --callout-note-text: var(--text-color);
+    --callout-note-title: var(--text-color);
+    
+    --callout-tip-bg: rgb(123,247,144,0.2);
+    --callout-tip-border: var(--main-border-color);
+    --callout-tip-text: var(--text-color);
+    --callout-tip-title: var(--text-color);
+    
+    --callout-important-bg: rgb(255,243,205);
+    --callout-important-border: var(--main-border-color);
+    --callout-important-text: var(--text-color);
+    --callout-important-title: var(--text-color);
+    
+    --callout-warning-bg: rgb(255,243,205);
+    --callout-warning-border: var(--main-border-color);
+    --callout-warning-text: var(--text-color);
+    --callout-warning-title: var(--text-color);
+    
+    --callout-caution-bg: rgb(248,215,218,0.56);
+    --callout-caution-border: var(--main-border-color);
+    --callout-caution-text: var(--text-color);
+    --callout-caution-title: var(--text-color);
+    
+    /* Chirpy copy button colors */
+    --copy-button-bg: var(--button-bg);
+    --copy-button-border: var(--btn-border-color);
+    --copy-button-text: var(--text-muted-color);
+    --copy-button-hover-bg: #f0f0f0;
+    --copy-button-hover-border: #d0d0d0;
+    --copy-success-bg: rgb(123,247,144,0.2);
+    --copy-success-border: #03b303;
+    --copy-success-text: #03b303;
+    
+    /* Chirpy lightbox colors */
+    --lightbox-bg: rgba(255, 255, 255, 0.95);
+    --lightbox-close-bg: var(--button-bg);
+    --lightbox-close-text: var(--text-color);
+    --lightbox-close-hover-bg: #f0f0f0;
+    
+    /* Chirpy overlay effects */
+    --overlay-hover: rgba(104,104,104,0.05);
+    --overlay-active: rgba(104,104,104,0.1);
+    --overlay-border: rgba(104,104,104,0.15);
+}
+
+/* Chirpy Dark Theme - Exact Colors */
+[data-theme="dark"] {
+    /* ========================================
+       TYPOGRAPHY - CONSISTENT WITH LIGHT MODE
+       ======================================== */
+    --font-family-base: 'Source Sans Pro', 'Microsoft Yahei', sans-serif;
+    --font-family-monospace: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Monaco, 'Courier New', monospace;
+    --font-size-base: 16px;
+    --font-size-sm: 14px;
+    --font-size-lg: 18px;
+    --line-height-base: 1.75;
+    --line-height-tight: 1.4;
+    
+    /* ========================================
+       CHIRPY DARK THEME COLORS - EXACT COPY
+       ======================================== */
+    color-scheme: dark;
+
+    /* Framework color */
+    --main-bg: rgb(27,27,30);
+    --mask-bg: rgb(68,69,70);
+    --main-border-color: rgb(44,45,45);
+
+    /* Common color */
+    --text-color: rgb(175,176,177);
+    --text-muted-color: #868686;
+    --text-muted-highlight-color: #aeaeae;
+    --heading-color: #cccccc;
+    --label-color: #a7a7a7;
+    --blockquote-border-color: rgb(66,66,66);
+    --blockquote-text-color: #868686;
+    --link-color: rgb(138,180,248);
+    --link-underline-color: rgb(82,108,150);
+    --button-bg: #1e1e1e;
+    --btn-border-color: #2e2f31;
+    --btn-backtotop-color: var(--text-color);
+    --btn-backtotop-border-color: #212122;
+    --card-header-bg: #292929;
+
+    /* Mapping to our existing structure */
+    --bg-primary: var(--main-bg);
+    --bg-secondary: var(--main-bg);
+    --bg-tertiary: #161b22;
+    --text-primary: var(--text-color);
+    --text-secondary: var(--text-muted-color);
+    --text-muted: var(--text-muted-color);
+    --border-color: var(--main-border-color);
+    --border-light: #21262d;
+    --shadow: rgba(1,4,9,0.8);
+    --shadow-hover: rgba(1,4,9,0.85);
+    --accent-primary: var(--link-color);
+    --accent-primary-hover: rgb(108,157,228);
+    --accent-secondary: rgb(108,157,228);
+    --hover-bg: #161b22;
+    --scrollbar-track: #161b22;
+    --scrollbar-thumb: #484f58;
+    --scrollbar-thumb-hover: #6e7681;
+    --external-link-opacity: 0.8;
+    --fade-gradient: rgba(27,27,30,0.95);
+    
+    /* Chirpy header - dark version */
+    --header-bg: var(--main-bg);
+    --header-text: var(--text-color);
+    --header-text-secondary: var(--text-muted-color);
+    --header-hover: #161b22;
+    
+    /* Chirpy-style minimal badges - dark mode (all neutral) */
+    --badge-green-bg: #161b22;
+    --badge-green-text: var(--text-muted-color);
+    --badge-orange-bg: #161b22;
+    --badge-orange-text: var(--text-muted-color);
+    --badge-pink-bg: #161b22;
+    --badge-pink-text: var(--text-muted-color);
+    --badge-purple-bg: #161b22;
+    --badge-purple-text: var(--text-muted-color);
+    --badge-blue-bg: #161b22;
+    --badge-blue-text: var(--text-muted-color);
+    
+    /* Chirpy-style minimal borders - dark mode (all neutral) */
+    --border-green: var(--main-border-color);
+    --border-orange: var(--main-border-color);
+    --border-pink: var(--main-border-color);
+    --border-purple: var(--main-border-color);
+    --border-gray: var(--main-border-color);
+    --border-blue: var(--main-border-color);
+    --border-dark-green: var(--main-border-color);
+    --border-dark-orange: var(--main-border-color);
+    --border-red: var(--main-border-color);
+    
+    /* Journey colors - Chirpy neutral dark mode */
+    --journey-quickstart-color: var(--text-muted-color);
+    --journey-businessuser-color: var(--text-muted-color);
+    --journey-developer-color: var(--text-muted-color);
+    --journey-autonomous-color: var(--text-muted-color);
+    --journey-bootcamp-color: var(--text-muted-color);
+    
+    /* Chirpy button colors - dark mode */
+    --danger-color: #cd0202;
+    --danger-color-hover: #ff3333;
+    --accent-tertiary: var(--link-color);
+    --accent-tertiary-dark: rgb(108,157,228);
+    --dark-button-text: var(--text-color);
+    
+    /* Chirpy code highlighting - dark style */
+    --code-bg: #151515;
+    --pre-bg: #151515;
+    
+    /* Chirpy callout colors - dark mode */
+    --callout-note-bg: rgb(7,59,104,0.8);
+    --callout-note-border: var(--main-border-color);
+    --callout-note-text: var(--text-color);
+    --callout-note-title: var(--text-color);
+    
+    --callout-tip-bg: rgb(22,60,36,0.64);
+    --callout-tip-border: var(--main-border-color);
+    --callout-tip-text: var(--text-color);
+    --callout-tip-title: var(--text-color);
+    
+    --callout-important-bg: rgb(90,69,3,0.88);
+    --callout-important-border: var(--main-border-color);
+    --callout-important-text: var(--text-color);
+    --callout-important-title: var(--text-color);
+    
+    --callout-warning-bg: rgb(90,69,3,0.88);
+    --callout-warning-border: var(--main-border-color);
+    --callout-warning-text: var(--text-color);
+    --callout-warning-title: var(--text-color);
+    
+    --callout-caution-bg: rgb(86,28,8,0.8);
+    --callout-caution-border: var(--main-border-color);
+    --callout-caution-text: var(--text-color);
+    --callout-caution-title: var(--text-color);
+    
+    /* Chirpy copy button colors - dark mode */
+    --copy-button-bg: var(--button-bg);
+    --copy-button-border: var(--btn-border-color);
+    --copy-button-text: var(--text-muted-color);
+    --copy-button-hover-bg: #2a2a2a;
+    --copy-button-hover-border: #404040;
+    --copy-success-bg: rgb(22,60,36,0.64);
+    --copy-success-border: rgb(15,164,15,0.81);
+    --copy-success-text: rgb(15,164,15,0.81);
+    
+    /* Chirpy lightbox colors - dark mode */
+    --lightbox-bg: rgba(27,27,30,0.95);
+    --lightbox-close-bg: var(--button-bg);
+    --lightbox-close-text: var(--text-color);
+    --lightbox-close-hover-bg: #2a2a2a;
+    
+    /* Chirpy overlay effects - dark mode */
+    --overlay-hover: rgba(175,176,177,0.04);
+    --overlay-active: rgba(175,176,177,0.08);
+    --overlay-border: rgba(175,176,177,0.12);
+}
+
+/* ============================================================================
+   Minimal Theme Specific Overrides
+   ============================================================================ */
+
+/* Minimal table headers - using correct theme selector */
+html[data-theme-family="minimal"] .lab-content table th {
+    background-color: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    font-weight: 600;
+}
+
+/* Elegant lab cards for minimal theme */
+html[data-theme-family="minimal"] .lab-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    box-shadow: 0 1px 3px var(--shadow), 0 1px 2px rgba(27,31,35,0.04);
+    transition: all 0.2s ease;
+    border-left: 3px solid var(--text-muted);
+}
+
+html[data-theme-family="minimal"] .lab-card:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px var(--shadow-hover), 0 2px 4px rgba(27,31,35,0.06);
+    border-left-color: var(--text-primary);
+    background: var(--bg-secondary);
+}
+
+/* Enhanced typography for light mode */
+html[data-theme-family="minimal"] .lab-card h3 {
+    color: var(--heading-color);
+    font-weight: 600;
+    font-size: 1.25rem;
+    margin-bottom: 0.75rem;
+    margin-top: 0;
+    line-height: 1.3;
+}
+
+html[data-theme-family="minimal"] .lab-card h3 a {
+    color: var(--heading-color);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+html[data-theme-family="minimal"] .lab-card h3 a:hover {
+    color: var(--text-primary);
+    text-decoration: none;
+}
+
+/* Enhanced description text */
+html[data-theme-family="minimal"] .lab-card p {
+    color: var(--text-muted-color);
+    line-height: 1.6;
+    margin-bottom: 1.25rem;
+    font-size: 0.95rem;
+}
+
+/* Premium button styling for light mode */
+html[data-theme-family="minimal"] .lab-card .btn-primary,
+html[data-theme-family="minimal"] .btn-primary {
+    background: var(--heading-color);
+    border: 1px solid var(--heading-color);
+    color: white;
+    padding: 0.65rem 1.3rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(27,31,35,0.1);
+}
+
+html[data-theme-family="minimal"] .lab-card .btn-primary:hover,
+html[data-theme-family="minimal"] .btn-primary:hover {
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 8px rgba(27,31,35,0.15);
+}
+
+/* Refined secondary buttons */
+html[data-theme-family="minimal"] .lab-card .btn-secondary,
+html[data-theme-family="minimal"] .btn-secondary {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-primary);
+    padding: 0.65rem 1.3rem;
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px rgba(27,31,35,0.04);
+}
+
+html[data-theme-family="minimal"] .lab-card .btn-secondary:hover,
+html[data-theme-family="minimal"] .btn-secondary:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--text-muted);
+    color: var(--heading-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(27,31,35,0.08);
+}
+
+/* Enhanced filter buttons for light mode */
+html[data-theme-family="minimal"] .filter-btn {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    background: var(--bg-primary);
+    color: var(--text-primary);
+    border-radius: 6px;
+    font-weight: 500;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 2px var(--shadow);
+}
+
+html[data-theme-family="minimal"] .filter-btn:hover {
+    background: var(--bg-tertiary);
+    border-color: var(--text-muted);
+    color: var(--heading-color);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px var(--shadow-hover);
+}
+
+html[data-theme-family="minimal"] .filter-btn.active {
+    background: var(--heading-color);
+    border-color: var(--heading-color);
+    color: white;
+    box-shadow: 0 2px 4px var(--shadow-hover);
+}
+
+/* Subtle lab sequence numbers - neutral colors */
+html[data-theme-family="minimal"] .lab-sequence {
+    background: var(--text-muted);
+    color: white;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+
+html[data-theme-family="minimal"] .lab-card:hover .lab-sequence {
+    background: var(--text-primary);
+}
+
+/* Enhanced filter sections for light mode */
+html[data-theme-family="minimal"] .filter-sections-container {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 1px 3px var(--shadow);
+}
+
+html[data-theme-family="minimal"] .filter-section h3 {
+    color: var(--heading-color);
+    font-weight: 600;
+    margin-bottom: 0.75rem;
+    font-size: 1.1rem;
+}
+
+html[data-theme-family="minimal"] .filter-hint {
+    color: var(--text-muted);
+    font-size: 0.875rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+    line-height: 1.5;
+}
+
+html[data-theme-family="minimal"] .current-filter-display {
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+html[data-theme-family="minimal"] .filter-label {
+    color: var(--text-muted);
+    font-weight: 500;
+    font-size: 0.875rem;
+}
+
+html[data-theme-family="minimal"] .current-filter {
+    background: var(--text-primary);
+    color: white;
+    padding: 0.25rem 0.75rem;
+    border-radius: 4px;
+    font-weight: 600;
+    font-size: 0.875rem;
+}
+
+html[data-theme-family="minimal"] .clear-filter-btn {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    color: var(--text-muted);
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.75rem;
+    margin-left: 0.5rem;
+    transition: all 0.2s ease;
+}
+
+html[data-theme-family="minimal"] .clear-filter-btn:hover {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+}
+
+/* Minimal page headers */
+html[data-theme-family="minimal"] .content-journey-header,
+html[data-theme-family="minimal"] .section-header,
+html[data-theme-family="minimal"] #all-labs-header {
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+
+html[data-theme-family="minimal"] .content-journey-header h1,
+html[data-theme-family="minimal"] .section-header h1,
+html[data-theme-family="minimal"] #all-labs-header h1 {
+    color: var(--text-primary);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+html[data-theme-family="minimal"] .content-journey-header p,
+html[data-theme-family="minimal"] .section-header p,
+html[data-theme-family="minimal"] #all-labs-header p {
+    color: var(--text-muted);
+    font-size: 1.1rem;
+    line-height: 1.6;
+}
+
+/* Simplify header styling */
+.site-header {
+    border-bottom: 1px solid var(--border-color);
+    box-shadow: none;
+}
+
+/* Reduce visual noise in cards */
+.lab-card,
+.journey-card {
+    box-shadow: 0 1px 3px var(--shadow);
+    border: 1px solid var(--border-light);
+}
+
+.lab-card:hover,
+.journey-card:hover {
+    box-shadow: 0 2px 6px var(--shadow-hover);
+    transform: none;
+}
+
+/* Simplify buttons */
+.btn-primary,
+.btn-secondary,
+.nav-button {
+    border-radius: 4px;
+    font-weight: 400;
+    box-shadow: none;
+}
+
+.btn-primary:hover,
+.btn-secondary:hover,
+.nav-button:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* Clean typography focus */
+.lab-body h1,
+.lab-body h2,
+.lab-body h3,
+.lab-body h4,
+.lab-body h5,
+.lab-body h6 {
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.lab-body h1 {
+    font-size: 2rem;
+    margin: 2rem 0 1rem 0;
+}
+
+.lab-body h2 {
+    font-size: 1.5rem;
+    margin: 1.5rem 0 0.75rem 0;
+}
+
+.lab-body h3 {
+    font-size: 1.25rem;
+    margin: 1.25rem 0 0.5rem 0;
+}
+
+/* Reduce visual complexity in navigation */
+.lab-nav-item {
+    border-left: 2px solid transparent;
+}
+
+.lab-nav-item.current {
+    border-left-color: var(--accent-primary);
+    background: var(--hover-bg);
+}
+
+/* Simplify callouts for minimal aesthetic */
+.callout {
+    border-left-width: 3px;
+    box-shadow: none;
+}
+
+.callout::before {
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+/* Clean code blocks */
+pre {
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+}
+
+code {
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+/* Minimal focus on badges */
+.badge {
+    font-weight: 400;
+    border-radius: 12px;
+    font-size: 0.75rem;
+}
+
+/* Subtle link styling */
+a {
+    text-decoration: none;
+    border-bottom: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Clean table styling */
+table {
+    border: 1px solid var(--border-light);
+}
+
+th,
+td {
+    border-color: var(--border-light);
+}
+
+/* Minimal search and form elements */
+input,
+select,
+textarea {
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background: var(--bg-primary);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px rgba(102, 102, 102, 0.1);
+}
+
+/* Clean progress indicators */
+.progress-step {
+    border-radius: 4px;
+}
+
+.progress-step.completed {
+    background: var(--accent-primary);
+}
+
+/* Simplified footer */
+.site-footer {
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-tertiary);
+}
