@@ -132,8 +132,10 @@ Create and configure a functional Copilot Agent with Dataverse MCP Server integr
 #### Navigate to Copilot Studio and Create Agent
 
 1. Browse to [Copilot Studio Homepage](https://copilotstudio.microsoft.com/). Ensure you are logged in using the credentials for the lab and are in the correct Environment for building your agent.
+![Step 1: Navigate to Copilot Studio](images/step1-copilot-studio-navigation.png)
 
 2. Click on **+ New Agent**.
+![Step 2: Create new agent](images/step2-create-agent.png)
 
 #### Configure Your Agent
 
@@ -152,42 +154,71 @@ Create and configure a functional Copilot Agent with Dataverse MCP Server integr
    Do not use outside knowledge. Only use the Dataverse MCP Tool to create, read, update and delete.
    ```
 
+   ![Agent Configuration](images/step3-agent-configuration.png)
+
 4. Create some prompts that will help guide users on how they can use the agent. Click on the **+ Add suggested prompts** for the Suggested prompts area.
 
-5. Add the following prompts and then click **Save**:
-   - **Title:** Account Search | **Prompt:** Can you search for a specific account or accounts location?
-   - **Title:** Contact Search | **Prompt:** Can you search for a specific person or get their contact information?
+   ![Add suggested prompts](images/step4a-suggested-prompts.png)
+
+   Add the following prompts and then click **Save**:
+   - **Title:** Account Search | **Prompt:** List all accounts in [Insert Location]
+   - **Title:** Contact Search | **Prompt:** List all contacts from [Insert Account Name]
+
+   ![Suggested prompts configuration](images/step4b-suggested-prompts-search.png)
 
 > [!TIP]
 > You can configure up to six suggested prompts customers can choose from to start a conversation. In Teams and in Copilot Chat, suggested prompts appear on the agent's welcome page, before you start a new chat. You can't see or use them when you test your agent in Copilot Studio.
 
-6. Click **Create**.
+5. Click **Create**.
+
+![Step 5: Create](images/step5-create.png)
 
 #### Add the Dataverse MCP Server as a Tool
 
 7. Scroll down to the **Tools** section and click **+ Add tool**.
 
-8. Click **Model Context Protocol** and then click **+ New tool** or **Dataverse MCP Server** if it shows up in the recommendations.
+   ![Add tool](images/step6-add-tool.png)
 
-9. If there is no Dataverse Connection yet, click on the dropdown to create a new connection using your lab credentials. Then click **Add to agent**.
+8. Click **Model Context Protocol** and then click **+ New tool** or **Dataverse MCP Server (Preview)** if it shows up in the recommendations.
+
+   ![Select MCP Dataverse](images/step7-mcp-dataverse.png)
+
+9. If there is no Dataverse Connection yet, click on the dropdown to create a new connection using "Authentication Type" as **OAuth** and using your lab credentials. Then click **Add** and **configure**.
+
+   ![Add authentication](images/step8-add-auth.png)
 
 > [!IMPORTANT]
 > The Dataverse MCP Server will allow you natural language access to your tables in Dataverse. We have sample data in the Accounts and Contacts tables that we will use. The tools available are: list tables, describe table, read data, create record, update record, list prompts, execute prompt, list knowledge sources, and retrieve knowledge.
 
-10. Review the tools available for the Dataverse MCP Server. Back in the Overview section, you can click on the **Dataverse MCP Server** and see the list of tools available to your agent. When the tool is executed, the list is dynamically updated from the MCP Server.
+10. Review the tools available for the Dataverse MCP Server. You can select and deselect which tools are available to the agent. When the tool is executed, the list is dynamically updated from the MCP Server. You cannot call an MCP Server from a Topic for this reason.
+
+    ![Review MCP tools](images/step9-review-mcp.png)
 
 #### Test Your Agent
 
 11. We are now ready to test our agent and see if it will give us information about our accounts. In the testing panel, ask the following question: `List the accounts in the state of WA.`
 
-> [!TIP]
-> Click on the Activity Map at the top of the agent testing panel to track what topics or tools the agent is using. You can see that the Dataverse MCP server is initiated and then which tools are being used – list_tables, describe_tables, read_query.
+12. For the first run, you would get a Consent dialog as by default the tool is configured to use "End user credentials". Please click **Allow** to continue.
 
-12. If you click on the tool that was used, you will see the Inputs and Outputs of the tool.
+    ![Allow MCP access](images/step11a-allow-mcp.png)
 
-13. Continue testing by asking: `Who are the contacts for City Power & Light (sample)?`
+    > [!NOTE]
+    > One can change this setting to "Maker-provided credentials" from Details section >> Additional details section >> Credentials to use, particularly if you are using Service Principals or Client Certification Auth to connect to Dataverse.
 
----
+    ![Test agent](images/step11b-test-agent.png)
+
+    > [!TIP]
+    > Click on the Activity Map at the top of the agent testing panel to track what topics or tools the agent is using. You can see that the Dataverse MCP server is initiated and then which tools are being used – list_tables, describe_tables, read_query.
+
+    ![Activity map tracking](images/step11c-activity-map.png)
+
+13. If you click on the tool that was used, you will see the Inputs and Outputs of the tool.
+
+    ![Tool inputs and outputs](images/step11d-inputs-outputs.png)
+
+14. Continue testing by asking: `Who are the contacts for City Power & Light (sample)?`
+
+    ![Test contacts query](images/step12-test-contacts.png)---
 
 ###  🏅 Congratulations! You've completed Create and Configure Copilot Agent!
 
@@ -231,25 +262,52 @@ In this section, you'll learn how to create custom prompts that structure agent 
 
 ### Step-by-step instructions
 
-1. If you tried some different testing in the Copilot, you may have noticed you will get different attributes for accounts and contacts. If you want a more structured response, you can create a prompt in the Tools. In the **Tools** tab, click **+ Add a tool** then **+ New tool**.
+15. If you tried some different testing in the Copilot, you may have noticed you will get different attributes for accounts and contacts. If you want a more structured response, you can create a prompt in the Tools. In the **Tools** tab, click **+ Add a tool** then **+ New tool**.
 
-2. Select **Prompt**.
+    ![Add new tool for prompt](images/step13-add-new-tool.png)
 
-3. Rename the prompt at the top to `Show Account Details`. Then in the instructions type: `Find account which contains` and then click **+ Add content** to pass in the name of the account we are searching for. Select **Text** for the Input and call it `Account Name`. Click **close**.
+16. Select **Prompt**.
 
-4. We can now grab specific fields from Dataverse to show to our end users in the chat. Click back in the instructions and type `and find relevant details like:` click **+ Add content**. This time we will select **Dataverse** and some of the fields in the Account table which we feel our end users would like to see about the account.
+    ![Select Prompt](images/step14-select-prompt.png)
 
-5. Let's select the following by clicking on the dropdown: **Account Name**, **Account Number**, **Address 1**, **Annual Revenue**, **Email** and **Main Phone**. Click **Add** and then **Save**.
+17. Rename the prompt at the top to `Show Account Details`. Then in the instructions type: `Find account which contains` and then click **+ Add content** to pass in the name of the account we are searching for. Select **Text** for the Input and call it `Account Name`. Click **close**.
 
-> [!TIP]
-> Custom prompts allow you to standardize the information presented to users, ensuring they always receive the most relevant business data in a consistent format.
+    ![Rename prompt](images/step15-rename-prompt.png)
 
-6. Now we can test out our prompt. Let's go back over to our Contoso Agent and test again. In our testing pane, type `List Prompts`. We will see information on our Show Account Details Prompt.
+18. We can now grab specific fields from Dataverse to show to our end users in the chat. Click back in the instructions and type `and find relevant details like:` click **+ Add content**. This time we will select **Dataverse** and some of the fields in the Account table which we feel our end users would like to see about the account.
 
-7. Let's execute this prompt to get information on an account. Type `Execute prompt Show Account Details for Fourth Coffee`.
+19. Let's select the following by clicking on the dropdown: **Account Name**, **Account Number**, **Address 1**, **Annual Revenue**, **Email** and **Main Phone**. Click **Add** and then **Save**.
 
-> [!IMPORTANT]
-> Make sure you have turned on activity tracking and ensure that the prompt is passing in the GUID of the account if you see an error.
+    ![Show Account Details configuration](images/step16-show-account-details.png)
+
+    ![Account Details fields](images/step16b-show-account-details.png)
+
+    > [!TIP]
+    > Custom prompts allow you to standardize the information presented to users, ensuring they always receive the most relevant business data in a consistent format.
+
+20. Now we can test out our prompt. Let's go back over to our Contoso Agent and test again. In our testing pane, type `List Prompts`. We will see information on our Show Account Details Prompt.
+
+    ![List Prompts](images/step17a-list-prompts.png)
+
+21. Let's execute this prompt to get information on an account. Type `Execute prompt Show Account Details for Fourth Coffee`.
+
+    Make sure you have turned on activity tracking and ensure that the prompt is passing in the GUID of the account if you see an error.
+
+    ![Execute prompt with MCP enabled](images/step17c-mcp-enabled.png)
+
+    > [!TIP]
+    > More information: [Use prompts to make your agent perform specific tasks - Microsoft Copilot Studio | Microsoft Learn](https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompts)
+
+    > [!IMPORTANT]  
+    > Make sure you have turned on activity tracking and ensure that the prompt is passing in the GUID of the account if you see an error.
+
+#### Troubleshooting: Dataverse MCP Issues
+
+If you are seeing an issue while running the above prompt, please make sure to enable the Dataverse MCP option under Power Platform Admin Center:
+
+![MCP disabled error](images/step17b-mcp-disabled.png)
+
+Navigate to the **Power Platform admin center** → **Environments** → **Settings** → **Product** → **Features** and check: Dataverse MCP is turned **On**.
 
 ---
 
