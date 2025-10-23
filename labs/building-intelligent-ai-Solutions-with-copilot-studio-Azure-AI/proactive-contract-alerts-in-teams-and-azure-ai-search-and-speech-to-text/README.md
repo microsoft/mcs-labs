@@ -154,7 +154,7 @@ Create and configure an event-driven flow that monitors Azure Blob Storage for n
    - **Connection name:** `ContractsBlobStorage`
    - **Authentication type:** `Access Key`
    - **Azure Storage Account Name:** `ppccontractblob`
-   - **Azure Storage Account Access Key:** `ta7wqinzDSQ9fGidbsKmrTdjKsSv0sngpKpyhAjkthGQG9gUOJdy5RGZIwHW0r+t0e3dUHn9p5sB+AStC4FB9w==`
+   - **Azure Storage Account Access Key:** `[PROVIDED IN LAB ENVIRONMENT]`
 
 6. Once the connection is setup, use the dropdown to select the **Storage account name** in the container.
 
@@ -266,8 +266,8 @@ In this section, you'll learn how to connect Azure AI Search as a knowledge sour
 3. Click on **Your connections** and select **Create new connection**.
 
 4. Use the provided Endpoint URL and Access Key to connect to Azure AI Search service:
-   - **Endpoint URL:** `https://ppcaisearch001.search.windows.net`
-   - **Azure AI Search Admin Key:** `y4cmxKLHJqtvYoz563oVdvtRKqPuCfLyD4uhwx6bJgAzSeCYqf8L`
+   - **Endpoint URL:** `[PROVIDED IN LAB ENVIRONMENT]`
+   - **Azure AI Search Admin Key:** `[PROVIDED IN LAB ENVIRONMENT]`
 
 5. Select the available index and select **Add to agent**.
 
@@ -309,13 +309,13 @@ In your test window, send a message like: `Contract terms and renewal details fo
 4. Create connection with provided details then click **Create new**:
    - **Connection name:** `SpeechtoTextConnection`
    - **Auth. Type:** `API Key`
-   - **Account Key:** `2nsqRSH40rLQqrzYf8gN4KPeTqwWW38GcjChtYOpOjjpr8qqGmrCJQQJ99BJAC4f1cMXJ3w3AAAEACOGMCfL`
+   - **Account Key:** `[PROVIDED IN LAB ENVIRONMENT]`
    - **Region:** `westus`
 
 5. Add the following Action parameters for **Create transcription (V3.1)**:
    - **Transcription/locale:** `en-US`
    - **Transcription/displayName:** `Call transcription`
-   - **transcription/contentUrls:** (Advanced Parameters) `https://ppccontractblob.blob.core.windows.net/callrecordings/2025-02-18_%5BA.%20Datum%5D_support.wav?sp=r&st=2025-10-17T19:07:30Z&se=2025-11-06T04:22:30Z&spr=https&sv=2024-11-04&sr=b&sig=lsoVZDYY3zpbcV%2FBSygNcsB8HYJvLmPJim65zRJ4n8g%3D`
+   - **transcription/contentUrls:** (Advanced Parameters) `[PROVIDED IN LAB ENVIRONMENT - Audio File URL]`
 
 6. Add an **Initialize variable** action with Parameters:
    - **Name:** `TranscriptionID`
