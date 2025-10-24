@@ -121,37 +121,37 @@ jobs:
               echo "  🔄 Preprocessing markdown content..."
               cp "README.md" "${lab_name}_processed.md"
               
-              # Handle callout blocks
+              # Handle callout blocks (including indented ones)
               awk '
                 BEGIN {
                   callout = 0;
                   callout_type = "";
+                  indent = "";
                 }
-                match($0, /^> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/, m) {
+                match($0, /^([[:space:]]*)> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/, m) {
                   callout = 1;
-                  callout_type = tolower(m[1]);
+                  indent = m[1];  # Capture leading whitespace
+                  callout_type = tolower(m[2]);
                   if (callout_type == "note") { class="note"; label="**Note:** "; }
                   else if (callout_type == "tip") { class="tip"; label="**Tip:** "; }
                   else { class="warning"; label="**" toupper(callout_type) ":** "; }
-                  sub(/^> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/, "> <div class=\"" class "\">" label);
+                  sub(/^[[:space:]]* *> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/, indent "> <div class=\"" class "\">" label);
                   print;
                   next;
                 }
-                callout && /^> / {
+                callout && /^[[:space:]]*> / {
                   print;
                   next;
                 }
-                callout && !/^> / {
-                  print "</div>";
+                callout && !/^[[:space:]]*> / {
+                  print indent "</div>";
                   callout = 0;
                   callout_type = "";
+                  indent = "";
                 }
                 { print; }
               ' "${lab_name}_processed.md" > "${lab_name}_callouts.md"
               mv "${lab_name}_callouts.md" "${lab_name}_processed.md"
-              
-              # Clean headers for consistent navigation
-              perl -i -pe 's/^(#{2,4})\s*[^\w\s]+\s*([a-zA-Z].*)$/$1 $2/g' "${lab_name}_processed.md"
               
               # Extract document title
               lab_title=$(grep -m 1 '^# ' "${lab_name}_processed.md" | sed 's/^# //' | sed 's/[*_`]//g' | head -1)
@@ -162,13 +162,13 @@ jobs:
               
               # Convert to HTML first
               echo "  🔄 Converting to HTML..."
-              yaml_disabled_format="markdown+auto_identifiers+gfm_auto_identifiers+emoji+header_attributes"
+              yaml_disabled_format="markdown+auto_identifiers+gfm_auto_identifiers+emoji+header_attributes+raw_html+raw_attribute"
               
               if grep -q '^---$' "${lab_name}_processed.md"; then
                 first_line=$(head -1 "${lab_name}_processed.md")
                 second_line=$(sed -n '2p' "${lab_name}_processed.md")
                 if [ "$first_line" != "---" ] || [ "$second_line" = "---" ]; then
-                  yaml_disabled_format="markdown-yaml_metadata_block+auto_identifiers+gfm_auto_identifiers+emoji+header_attributes"
+                  yaml_disabled_format="markdown-yaml_metadata_block+auto_identifiers+gfm_auto_identifiers+emoji+header_attributes+raw_html+raw_attribute"
                 fi
               fi
               

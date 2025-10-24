@@ -1,0 +1,15 @@
+# Jekyll/Liquid template files
+_layouts/
+_includes/
+_site/
+
+# Generated files
+_labs/
+local-dist/
+
+# Dependencies
+node_modules/
+vendor/
+
+# Ruby bundler
+.bundle/

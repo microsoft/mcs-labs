@@ -11,28 +11,48 @@
       {% if page.title %}{{ page.title }} | {% endif %}{{ site.title }}
     </title>
 
+    <!-- Prevent FOUC by hiding content until theme is ready -->
+    <style>
+      /* Hide body content until theme CSS is loaded */
+      html:not(.theme-ready) body {
+        visibility: hidden;
+      }
+      
+      /* Prevent layout shift during theme loading */
+      html:not(.theme-ready) body {
+        opacity: 0;
+      }
+      
+      /* Smooth transition when theme becomes ready */
+      html.theme-ready body {
+        visibility: visible;
+        opacity: 1;
+        transition: opacity 0.15s ease-in;
+      }
+    </style>
+
     <!-- Immediate theme script that runs before any rendering -->
     <script>
-      // Set theme attributes immediately from localStorage, before any rendering
+      // Set theme attributes and load correct CSS immediately from localStorage
       (function () {
         const savedTheme = localStorage.getItem("theme-family") || "rich";
         const savedMode = localStorage.getItem("theme-mode") || "light";
+        const baseUrl = window.location.pathname.includes('/mcs-labs') ? '/mcs-labs' : '';
 
         // Override HTML attributes with localStorage values immediately
         document.documentElement.setAttribute("data-theme", savedMode);
         document.documentElement.setAttribute("data-theme-family", savedTheme);
+
+        // Load only the active theme CSS synchronously
+        const themePath = baseUrl + '/assets/css/themes/theme-' + savedTheme + '.css';
+        document.write('<link rel="stylesheet" href="' + themePath + '" id="active-theme-css">');
+        
+        // Mark theme as ready after a brief moment to allow CSS to apply
+        setTimeout(function() {
+          document.documentElement.classList.add('theme-ready');
+        }, 50);
       })();
     </script>
-
-    <!-- Load both theme CSS files always to eliminate loading delays -->
-    <link
-      rel="stylesheet"
-      href="{{ '/assets/css/themes/theme-rich.css' | relative_url }}"
-    />
-    <link
-      rel="stylesheet"
-      href="{{ '/assets/css/themes/theme-minimal.css' | relative_url }}"
-    />
 
     <!-- Favicon -->
     <link
@@ -57,17 +77,20 @@
           <div class="header-actions">
             <nav class="main-nav">
               <!-- NAVIGATION STRUCTURE:
-                   Home: Main homepage with journey cards (excludes bootcamp)
+                   Home: Main homepage with journey cards (excludes bootcamp and workshops)
                    All Labs: Complete lab listing page
                    Bootcamp: Dedicated bootcamp page with special sequencing
+                   Azure AI Workshop: Dedicated workshop page for MCS + Azure AI integration
                    
-                   IMPORTANT: Bootcamp URL points to /labs/bootcamp/ dedicated page
-                   This provides consistent access to bootcamp content with special
-                   numbering system (1a, 1b, 2, 3a, 3b, etc.) while keeping it
-                   separate from homepage journey cards -->
+                   IMPORTANT: Bootcamp and Workshop URLs point to dedicated pages
+                   This provides consistent access to curated content with special
+                   numbering systems while keeping them separate from homepage journey cards -->
               <a href="{{ '/' | relative_url }}">Home</a>
               <a href="{{ '/labs/' | relative_url }}">All Labs</a>
               <a href="{{ '/labs/bootcamp/' | relative_url }}">Bootcamp</a>
+              <a href="{{ '/labs/azure-ai-workshop/' | relative_url }}"
+                >Azure AI Workshop</a
+              >
             </nav>
             <div class="theme-controls">
               <div class="theme-style-toggle">
@@ -335,6 +358,115 @@
               console.debug("Invalid URL:", href);
             }
           }
+        });
+      });
+    </script>
+
+    <!-- 
+      Jekyll Rouge Syntax Highlighting
+      =================================
+      Syntax highlighting is handled server-side by Jekyll's Rouge highlighter.
+      Rouge generates HTML with semantic class names (e.g., .kd for keywords, .nx for names).
+      The styling for these classes is defined in assets/css/style.css with light/dark theme support.
+    -->
+
+    <!-- 
+      Mermaid Diagram Support
+      ========================
+      Provides interactive diagram rendering with theme integration.
+      
+      Features:
+      - Dynamic theme switching (light/dark mode support)
+      - Auto re-rendering when theme changes
+      - Custom color palette matching site themes
+      - Preserves original diagram code for re-rendering
+      
+      Usage in markdown:
+      <div class="mermaid">
+      graph TD
+          A[Start] --> B[End]
+      </div>
+      
+      See labs/guildhall-custom-mcp/README.md for OAuth flow example.
+    -->
+    <script type="module">
+      import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs';
+      
+      // Initialize Mermaid with dynamic theme support
+      // Automatically detects current theme (light/dark) and configures colors accordingly
+      function initializeMermaid() {
+        const isDarkMode = document.documentElement.getAttribute('data-theme') === 'dark';
+        const theme = isDarkMode ? 'dark' : 'default';
+        
+        // Convert code blocks with language-mermaid to mermaid divs for rendering
+        document.querySelectorAll('pre > code.language-mermaid').forEach(code => {
+          const pre = code.closest('pre');
+          if (pre) {
+            const div = document.createElement('div');
+            div.className = 'mermaid';
+            div.innerHTML = code.innerHTML; // Use innerHTML to preserve <br/> tags
+            pre.parentNode.replaceChild(div, pre);
+          }
+        });
+        
+        mermaid.initialize({
+          startOnLoad: true,
+          theme: theme,
+          securityLevel: 'loose', // Allows full Mermaid feature set including click events
+          themeVariables: {
+            // Custom color palette that adapts to light/dark modes
+            // These values provide good contrast and readability in both themes
+            primaryColor: isDarkMode ? '#2b6cb0' : '#3182ce',
+            primaryTextColor: isDarkMode ? '#ffffff' : '#1a202c',
+            primaryBorderColor: isDarkMode ? '#4299e1' : '#2c5282',
+            lineColor: isDarkMode ? '#a0aec0' : '#4a5568',
+            secondaryColor: isDarkMode ? '#2d3748' : '#edf2f7',
+            tertiaryColor: isDarkMode ? '#1a202c' : '#f7fafc',
+            background: isDarkMode ? '#1a202c' : '#ffffff',
+            mainBkg: isDarkMode ? '#2d3748' : '#ffffff',
+            secondBkg: isDarkMode ? '#1a202c' : '#edf2f7',
+            labelBackground: isDarkMode ? '#2d3748' : '#edf2f7',
+            labelTextColor: isDarkMode ? '#ffffff' : '#1a202c',
+            edgeLabelBackground: isDarkMode ? '#2d3748' : '#ffffff',
+            noteTextColor: isDarkMode ? '#ffffff' : '#1a202c',
+            noteBkgColor: isDarkMode ? '#3d4852' : '#fef5e7',
+            noteBorderColor: isDarkMode ? '#4299e1' : '#f39c12',
+            actorBkg: isDarkMode ? '#2b6cb0' : '#3182ce',
+            actorBorder: isDarkMode ? '#4299e1' : '#2c5282',
+            actorTextColor: isDarkMode ? '#ffffff' : '#ffffff',
+            actorLineColor: isDarkMode ? '#a0aec0' : '#4a5568',
+            signalColor: isDarkMode ? '#ffffff' : '#1a202c',
+            signalTextColor: isDarkMode ? '#ffffff' : '#1a202c',
+            sequenceNumberColor: isDarkMode ? '#ffffff' : '#ffffff'
+          }
+        });
+      }
+      
+      // Initialize diagrams on page load
+      initializeMermaid();
+      
+      // Listen for theme changes and re-render all diagrams with new colors
+      // The 'themechange' event is fired by theme-manager.js when user switches themes
+      window.addEventListener('themechange', () => {
+        initializeMermaid();
+        
+        // Re-render all mermaid diagrams with updated theme
+        // We store the original code to allow clean re-rendering
+        document.querySelectorAll('.mermaid').forEach((element) => {
+          const code = element.getAttribute('data-original-code') || element.textContent;
+          element.setAttribute('data-original-code', code);
+          element.removeAttribute('data-processed'); // Clear Mermaid's processed flag
+          element.innerHTML = code; // Reset to original code
+        });
+        mermaid.run(); // Re-process all diagrams
+      });
+      
+      // Store original diagram code on page load for theme switching
+      // This preserves the source code before Mermaid transforms it into SVG
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.mermaid').forEach((element) => {
+          const code = element.textContent;
+          element.setAttribute('data-original-code', code);
         });
       });
     </script>

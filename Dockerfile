@@ -6,15 +6,19 @@ FROM node:18-bullseye AS node-base
 # Stage 1: Ruby and Jekyll setup
 FROM ruby:3.1-bullseye
 
-# Install system dependencies including Pandoc and Puppeteer requirements
+# Install system dependencies including Puppeteer requirements and emoji fonts
+# Note: Pandoc will be installed separately from GitHub releases to match CI version
 RUN apt-get update && apt-get install -y \
     build-essential \
     git \
     curl \
     wget \
-    pandoc \
     fonts-liberation \
     fonts-dejavu-core \
+    fonts-noto-color-emoji \
+    fonts-noto-core \
+    fonts-noto-ui-core \
+    fontconfig \
     ca-certificates \
     gnupg \
     lsb-release \
@@ -29,7 +33,13 @@ RUN apt-get update && apt-get install -y \
     libxss1 \
     libnss3 \
     libgtk-3-0 \
+    && fc-cache -f -v \
     && rm -rf /var/lib/apt/lists/*
+
+# Install Pandoc 3.1.3 (matching GitHub Actions version)
+RUN wget https://github.com/jgm/pandoc/releases/download/3.1.3/pandoc-3.1.3-1-amd64.deb \
+    && dpkg -i pandoc-3.1.3-1-amd64.deb \
+    && rm pandoc-3.1.3-1-amd64.deb
 
 # Copy Node.js from node-base stage
 COPY --from=node-base /usr/local/bin/node /usr/local/bin/

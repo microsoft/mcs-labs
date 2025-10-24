@@ -6,9 +6,6 @@
   "scripts": {
     "generate-pdf": "node .github/scripts/generate-pdf.js",
     "transform-homepage": "node .github/scripts/transform-homepage-links.js",
-    "build-pdfs": "pwsh -File scripts/Generate-PDFs-Local.ps1",
-    "build-pdfs-quick": "pwsh -File scripts/Generate-PDFs-Local.ps1 -SkipInstall",
-    "build-pdfs-docker": "pwsh -File scripts/Generate-PDFs-Docker.ps1",
     "dev": "docker-compose up jekyll-dev",
     "dev-build": "docker-compose up --build jekyll-dev"
   },
