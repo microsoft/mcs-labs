@@ -146,17 +146,25 @@ Create and configure an event-driven flow that monitors Azure Blob Storage for n
 
 2. Select the **Channels** tab and click on **Teams and Microsoft 365 Copilot**, then select **Add channel**.
 
+![alt text](images/2a2.png)
+
 #### Create Event-Driven Agent Flow
 
 3. Select **Flows** and click on **+ New agent flow** to add a new Agent Flow to notify users when new documents are uploaded to blob storage.
 
+![alt text](images/2a3.png)
+
 4. In the designer, select **Add a trigger node** and search for **blob**. Select **When a blob is added or modified (properties only) (V2)** trigger.
+
+![alt text](images/2a4.png)
 
 5. Select **change connection reference** to add a new connection. Provide the following details to connect to Azure Blob Storage account:
    - **Connection name:** `ContractsBlobStorage`
    - **Authentication type:** `Access Key`
    - **Azure Storage Account Name:** `ppccontractblob`
    - **Azure Storage Account Access Key:** `[Provided in LAB Environment]`
+
+![alt text](images/2a5.png)
 
 6. Once the connection is setup, use the dropdown to select the **Storage account name** in the container.
 
