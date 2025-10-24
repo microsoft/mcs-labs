@@ -205,7 +205,7 @@ lab_metadata:
   24:
     id: "data-fabric-agent"
     title: "Build a Data Fabric Agent"
-    difficulty: "Advanced (Level 300)"
+    difficulty: "Intermediate (Level 200)"
     duration: 20
     section: "advanced_labs"
 

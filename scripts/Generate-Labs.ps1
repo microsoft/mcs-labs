@@ -1201,6 +1201,11 @@ function Get-CleanLabContent {
         }
     }
     
+    # Escape pipes in markdown link text to prevent Kramdown from treating them as table separators
+    # Pattern: [text with | pipes](url) -> [text with \| pipes](url)
+    # Uses negative lookbehind to avoid double-escaping already escaped pipes
+    $cleanContent = $cleanContent -replace '\[([^\]]*(?<!\\))\|([^\]]*)\]\(', '[$1\|$2]('
+    
     return $cleanContent
 }
 

@@ -6,9 +6,9 @@ Create and configure a Copilot Agent in Copilot Studio with Dataverse MCP Server
 
 ## 🧭 Lab Details
 
-| Level | Persona | Duration | Purpose |
-| ----- | ------- | -------- | ------- |
-| 100 | Maker | 30 minutes | After completing this lab, participants will be able to create and configure a Copilot Agent in Copilot Studio, integrate the Dataverse MCP Server to read and update account information from the Account and Contact table, structure agent responses for clarity and business value, and apply these skills to solve common business challenges. |
+| Level | Persona | Duration   | Purpose                                                                                                                                                                                                                                                                                                                                             |
+| ----- | ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 100   | Maker   | 30 minutes | After completing this lab, participants will be able to create and configure a Copilot Agent in Copilot Studio, integrate the Dataverse MCP Server to read and update account information from the Account and Contact table, structure agent responses for clarity and business value, and apply these skills to solve common business challenges. |
 
 ---
 
@@ -57,11 +57,11 @@ By giving you hands-on experience on how the Dataverse MCP Server integrates wit
 
 ## 🎓 Core Concepts Overview
 
-| Concept | Why it matters |
-|---------|----------------|
-| **Copilot Agent Creation and Configuration** | Building and configuring a Copilot Agent empowers teams to automate repetitive tasks and interact with business data using natural language, boosting productivity and reducing manual effort. Technically, it provides a foundation for integrating enterprise data sources and customizing agent workflows to fit specific organizational needs. |
-| **Dataverse MCP Server Integration** | Connecting the Copilot Agent to the Dataverse MCP Server allows users to access and manage critical business data directly from their main workspace, streamlining operations and minimizing workflow interruptions. On the technical side, this integration enables secure, real-time read, create, and update actions on Dataverse tables, enhancing data accessibility and reliability. |
-| **Structured Agent Responses for Clarity and Value** | Designing prompts and formatting agent outputs ensures users receive clear, actionable information that supports better decision-making and customer engagement. Technically, this approach standardizes responses, making them consistent and relevant to business processes while reducing confusion and errors. |
+| Concept                                              | Why it matters                                                                                                                                                                                                                                                                                                                                                                             |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Copilot Agent Creation and Configuration**         | Building and configuring a Copilot Agent empowers teams to automate repetitive tasks and interact with business data using natural language, boosting productivity and reducing manual effort. Technically, it provides a foundation for integrating enterprise data sources and customizing agent workflows to fit specific organizational needs.                                         |
+| **Dataverse MCP Server Integration**                 | Connecting the Copilot Agent to the Dataverse MCP Server allows users to access and manage critical business data directly from their main workspace, streamlining operations and minimizing workflow interruptions. On the technical side, this integration enables secure, real-time read, create, and update actions on Dataverse tables, enhancing data accessibility and reliability. |
+| **Structured Agent Responses for Clarity and Value** | Designing prompts and formatting agent outputs ensures users receive clear, actionable information that supports better decision-making and customer engagement. Technically, this approach standardizes responses, making them consistent and relevant to business processes while reducing confusion and errors.                                                                         |
 
 ---
 
@@ -96,10 +96,10 @@ In this lab, you'll build and configure a Copilot Agent that integrates with Dat
 
 ## 🧩 Use Cases Covered
 
-| Step | Use Case | Value added | Effort |
-|------|----------|-------------|--------|
-| 1 | [Create and Configure Copilot Agent](#-use-case-1-create-and-configure-copilot-agent) | Enable natural language interaction with Dataverse data directly from Teams workspace | 20 min |
-| 2 | [Structure Agent Responses with Custom Prompts](#-use-case-2-structure-agent-responses-with-custom-prompts) | Ensure consistent, business-relevant outputs that support decision-making processes | 10 min |
+| Step | Use Case                                                                                                    | Value added                                                                           | Effort |
+| ---- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------ |
+| 1    | [Create and Configure Copilot Agent](#-use-case-1-create-and-configure-copilot-agent)                       | Enable natural language interaction with Dataverse data directly from Teams workspace | 20 min |
+| 2    | [Structure Agent Responses with Custom Prompts](#-use-case-2-structure-agent-responses-with-custom-prompts) | Ensure consistent, business-relevant outputs that support decision-making processes   | 10 min |
 
 ---
 
@@ -111,9 +111,9 @@ In this lab, you'll build and configure a Copilot Agent that integrates with Dat
 
 Build a Copilot Agent that connects to Dataverse through the MCP Server for seamless data access.
 
-| Use case | Value added | Estimated effort |
-|----------|-------------|------------------|
-| Create and Configure Copilot Agent | Enable natural language interaction with Dataverse data directly from Teams workspace | 20 minutes |
+| Use case                           | Value added                                                                           | Estimated effort |
+| ---------------------------------- | ------------------------------------------------------------------------------------- | ---------------- |
+| Create and Configure Copilot Agent | Enable natural language interaction with Dataverse data directly from Teams workspace | 20 minutes       |
 
 **Summary of tasks**
 
@@ -203,7 +203,7 @@ Create and configure a functional Copilot Agent with Dataverse MCP Server integr
     ![Allow MCP access](images/step11a-allow-mcp.png)
 
     > [!NOTE]
-    > One can change this setting to "Maker-provided credentials" from Details section >> Additional details section >> Credentials to use, particularly if you are using Service Principals or Client Certification Auth to connect to Dataverse.
+    > If you are using Service Principals or Client Certification Auth to connect to Dataverse then you may need to use "Marker-provided credentials". To change this in the Details section  » Additional details section » Credentials to use.
 
     ![Test agent](images/step11b-test-agent.png)
 
@@ -250,9 +250,9 @@ Create and configure a functional Copilot Agent with Dataverse MCP Server integr
 
 Create custom prompts to ensure consistent, structured responses from your agent that provide business-relevant information.
 
-| Use case | Value added | Estimated effort |
-|----------|-------------|------------------|
-| Structure Agent Responses with Custom Prompts | Ensure consistent, business-relevant outputs that support decision-making processes | 10 minutes |
+| Use case                                      | Value added                                                                         | Estimated effort |
+| --------------------------------------------- | ----------------------------------------------------------------------------------- | ---------------- |
+| Structure Agent Responses with Custom Prompts | Ensure consistent, business-relevant outputs that support decision-making processes | 10 minutes       |
 
 **Summary of tasks**
 
@@ -287,13 +287,11 @@ In this section, you'll learn how to create custom prompts that structure agent 
 
 20. Now we can test out our prompt. Let's go back over to our Contoso Agent and test again. In our testing pane, type `List Prompts`. We will see information on our Show Account Details Prompt.
 
-    ![List Prompts](images/step17a-list-prompts.png)
+    ![List Prompts](images/step17a1-list-prompts.png)
 
 21. Let's execute this prompt to get information on an account. Type `Execute prompt Show Account Details for Fourth Coffee`.
 
-    Make sure you have turned on activity tracking and ensure that the prompt is passing in the GUID of the account if you see an error.
-
-    ![Execute prompt with MCP enabled](images/step17c-mcp-enabled.png)
+    ![Execute prompt with MCP enabled](images/step17a2-execute-prompts.png)
 
     > [!TIP]
     > More information: [Use prompts to make your agent perform specific tasks - Microsoft Copilot Studio | Microsoft Learn](https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompts)
@@ -308,6 +306,8 @@ If you are seeing an issue while running the above prompt, please make sure to e
 ![MCP disabled error](images/step17b-mcp-disabled.png)
 
 Navigate to the **Power Platform admin center** → **Environments** → **Settings** → **Product** → **Features** and check: Dataverse MCP is turned **On**.
+
+![Activate Dataverse MCP setting](images/step17c-mcp-enabled.png)
 
 ---
 

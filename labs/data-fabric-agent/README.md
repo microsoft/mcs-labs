@@ -69,9 +69,10 @@ By mastering the techniques in this lab, you'll enable your organization to buil
 
 ## 📄 Documentation and Additional Training Links
 
+- [Microsoft Fabric documentation](https://learn.microsoft.com/en-us/fabric/)
 - [Microsoft Fabric data agent concepts (preview)](https://learn.microsoft.com/en-us/fabric/data-science/concept-data-agent)
 - [Copilot Studio Add Other Agents (preview)](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-add-other-agents)
-- [Microsoft Fabric documentation](https://learn.microsoft.com/en-us/fabric/)
+- [Consume a Fabric Data Agent in Microsoft Copilot Studio (preview)](https://learn.microsoft.com/en-us/fabric/data-science/data-agent-microsoft-copilot-studio)
 
 ---
 
