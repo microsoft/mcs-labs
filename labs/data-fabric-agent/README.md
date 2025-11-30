@@ -419,7 +419,7 @@ In this section, you'll learn how to create a Copilot Studio agent, establish co
 
 2. Click the blue **Add** button.
 
-3. Scroll down and select **Microsoft Fabric**.
+3. Click **Connect to an external agent** and select **Microsft Fabric (preview)**.
 
 4. If it say's *Connection : Not connected* then click the drop down next to *Not connected* and select **Create new connection**. Click **Create** and sign in using the same account used for this lab. Verify it's showing as the email for your account, then click **Next**.
 
