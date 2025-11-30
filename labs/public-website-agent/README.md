@@ -145,6 +145,9 @@ Create Nova AI with custom instructions and Wikipedia knowledge integration usin
 
 #### Start the agent creation process
 
+> [!IMPORTANT]
+> Please follow steps 1, 2 and 3 adding an agent to your own solution is critical to this use case.
+
 1. **Navigate** to [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com).
 
 2. Make sure you're in the correct environment by looking at the top right corner. In these labs, the environment name should start by **'DEV - '**.
@@ -159,6 +162,9 @@ Create Nova AI with custom instructions and Wikipedia knowledge integration usin
 > - You will be redirected to the conversational creation experience. It allows you to use natural language to help you configure your agent.
 > - Note that this conversational experience only helps build and curate the agent title, description, instruction, and knowledge sources. 
 > - The order or nature of questions may vary.
+
+> [!IMPORTANT]
+> It may take a few minutes for the setting to be fully disabled. You may need to refresh and retry several times.
 
 4. In the **Conversational creation experience** chat, paste the below answer to the initial question:
 
