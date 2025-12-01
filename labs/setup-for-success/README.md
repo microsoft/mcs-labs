@@ -99,7 +99,6 @@ In this lab, you'll configure your ALM foundation for working with Microsoft Cop
 * Create and configure a structured solution for your customizations.
 * Set up a custom publisher to track ownership and maintain ALM hygiene.
 * Add environment variables and connection references for better portability.
-* Understand which Microsoft Copilot Studio settings require manual post-deployment steps.
 
 ---
 
