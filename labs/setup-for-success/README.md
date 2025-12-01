@@ -246,7 +246,7 @@ In this section, you'll learn how to create environment variables and connection
 8. Use the connector name, `ServiceNow`, as the name. Optionally, prefix with your project name.
 
 > [!TIP]
-> In other locales, the connector name may be localized. For example, in French, it would be `MSN Météo`.
+> In other locales, the connector name may be localized.
 
 9. Select the connector **ServiceNow**.
 
