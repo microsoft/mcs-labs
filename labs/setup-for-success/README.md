@@ -227,7 +227,7 @@ In this section, you'll learn how to create environment variables and connection
 
 4. In **Data Type**, select **Text**.
 
-5. Leave **Default Value** blank, but under **Current Value**, select **+ New Value**. 
+5. Leave **Default Value** blank, but under **Current Value**, select **+ New Value**, and enter the endpoint URL found in the Lab Resources.
 
 > [!IMPORTANT]
 >  * For configuration, use the provided values in the **Lab Resources** (specific per training).
