@@ -585,7 +585,7 @@ This use case demonstrates **agent scoping** principles:
 > [!TIP]
 > In case of issues, refresh the page with CTRL + F5.
 
-5. Click on the Kebab menu (⋮) next to the `List Records` Tool, click **Edit**. Change the **Name** to `Get ServiceNow ticket details`
+5. Click on the `List Records` Tool. Change the **Name** to `Get ServiceNow ticket details`
 
 6. Change **Description** to: 
 
