@@ -8,7 +8,7 @@ Empower sellers with timely insights – Build an autonomous Copilot Studio agen
 
 | Level | Persona | Duration   | Purpose                                                                                                                                                                                                                                                                                                    |
 | ----- | ------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 200   | Maker   | 60 minutes | After completing this lab, participants will have created an autonomous agent that periodically scans for large opportunities in a Sales App, searches for relevant news, uses Copilot Studio's Deep Reasoning feature to assess relevance, and emails structured HTML reports using Microsoft 365 Outlook. |
+| 200   | Maker   | 30 minutes | After completing this lab, participants will have created an autonomous agent that periodically scans for large opportunities in a Sales App, searches for relevant news, uses Copilot Studio's Deep Reasoning feature to assess relevance, and emails structured HTML reports using Microsoft 365 Outlook. |
 
 ---
 
@@ -60,7 +60,7 @@ This proactive approach helps account teams stay ahead of client developments an
 | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Autonomous Agents**               | Run on a schedule or based on business events—no user prompt needed.                                                                                                                                                                |
 | **Tools**                           | Tools are simple or sophisticated connectors that the Copilot Studio orchestrator can invoke in response to user queries or business events.                                                                                        |
-| **Deep Reasoning**                  | Uses OpenAI o1 to extract, summarize, and evaluate unstructured content in context — not just for relevance, but for strategic value to the business event.                                                                         |
+| **Deep Reasoning**                  | Uses OpenAI o3 to extract, summarize, and evaluate unstructured content in context — not just for relevance, but for strategic value to the business event.                                                                         |
 | **HTML Report Generation**          | Structures results in a branded, readable format for email delivery.                                                                                                                                                                |
 | **Orchestrator Context Management** | Global variables help maintain consistent context across multi-step plans, allowing agents to reference specific data outputs (e.g., from knowledge searches) and reduce hallucinations during report generation or task execution. |
 
@@ -99,11 +99,11 @@ In this lab, you will build an autonomous news assistant agent that:
 
 | Step | Use Case                                                                                                                                  | Value added                                                                    | Effort |
 | ---- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------ |
-| 1    | [Create and Configure an Autonomous Agent](#-use-case-1-create-and-configure-an-autonomous-agent)                                         | Establishes the agent framework and automated trigger for continuous operation | 10 min |
-| 2    | [Add a Tool to Fetch High-Value Opportunities from the Sales App](#-use-case-2-add-a-tool-to-fetch-high-value-opportunities-from-the-sales-app) | Enables data-driven insights by sourcing relevant CRM records                  | 10 min |
-| 3    | [Analyze Opportunities Using Web Search and Deep Reasoning](#-use-case-3-analyze-opportunities-using-web-search-and-deep-reasoning)       | Enriches understanding of each opportunity using external signals              | 10 min |
-| 4    | [Store Content Using Topics and Global Variables](#-use-case-4-store-content-using-topics-and-global-variables)                           | Maintains precise context for downstream steps and output accuracy             | 15 min |
-| 5    | [Create and Send a Structured HTML Report via Email](#-use-case-5-create-and-send-a-structured-html-report-via-email)                     | Delivers clear, actionable summaries to stakeholders                           | 15 min |
+| 1    | [Create and Configure an Autonomous Agent](#-use-case-1-create-and-configure-an-autonomous-agent)                                         | Establishes the agent framework and automated trigger for continuous operation | 5 min |
+| 2    | [Add a Tool to Fetch High-Value Opportunities from the Sales App](#-use-case-2-add-a-tool-to-fetch-high-value-opportunities-from-the-sales-app) | Enables data-driven insights by sourcing relevant CRM records                  | 5 min |
+| 3    | [Analyze Opportunities Using Web Search and Deep Reasoning](#-use-case-3-analyze-opportunities-using-web-search-and-deep-reasoning)       | Enriches understanding of each opportunity using external signals              | 5 min |
+| 4    | [Store Content Using Topics and Global Variables](#-use-case-4-store-content-using-topics-and-global-variables)                           | Maintains precise context for downstream steps and output accuracy             | 10 min |
+| 5    | [Create and Send a Structured HTML Report via Email](#-use-case-5-create-and-send-a-structured-html-report-via-email)                     | Delivers clear, actionable summaries to stakeholders                           | 5 min |
 
 ---
 
@@ -115,7 +115,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
   | Use case                                 | Value added                                                                             | Estimated effort |
   | ---------------------------------------- | --------------------------------------------------------------------------------------- | ---------------- |
-  | Create and Configure an Autonomous Agent | Enables the agent to act autonomously by setting up its framework and automated trigger | 10 minutes       |
+  | Create and Configure an Autonomous Agent | Enables the agent to act autonomously by setting up its framework and automated trigger | 5 minutes       |
 
   **Summary of tasks**
 
@@ -188,7 +188,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
   | Use case                                                     | Value added                                                                       | Estimated effort |
   | ------------------------------------------------------------ | --------------------------------------------------------------------------------- | ---------------- |
-  | Add a Tool to Fetch High-Value Opportunities from your Sales App | Enables the agent to access relevant CRM data for further reasoning and reporting | 10 minutes       |
+  | Add a Tool to Fetch High-Value Opportunities from your Sales App | Enables the agent to access relevant CRM data for further reasoning and reporting | 5 minutes       |
 
   **Summary of tasks**
 
@@ -260,7 +260,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
   | Use case                                                  | Value added                                                       | Estimated effort |
   | --------------------------------------------------------- | ----------------------------------------------------------------- | ---------------- |
-  | Analyze opportunities using web search and Deep Reasoning | Enriches understanding of each opportunity using external signals | 10 minutes       |
+  | Analyze opportunities using web search and Deep Reasoning | Enriches understanding of each opportunity using external signals | 5 minutes       |
 
   **Summary of tasks**
 
@@ -296,7 +296,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
   | Use case                                        | Value added                                                        | Estimated effort |
   | ----------------------------------------------- | ------------------------------------------------------------------ | ---------------- |
-  | Store content using topics and global variables | Maintains precise context for downstream steps and output accuracy | 15 minutes       |
+  | Store content using topics and global variables | Maintains precise context for downstream steps and output accuracy | 10 minutes       |
 
   **Summary of tasks**
 
@@ -528,7 +528,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 | Use case                                           | Value added                                                     | Estimated effort |
 | -------------------------------------------------- | --------------------------------------------------------------- | ---------------- |
-| Create and send a structured HTML report via email | Ensures timely delivery of insights in a usable, branded format | 15 minutes       |
+| Create and send a structured HTML report via email | Ensures timely delivery of insights in a usable, branded format | 5 minutes       |
 
 ---
 
