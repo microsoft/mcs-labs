@@ -246,7 +246,7 @@ lab_metadata:
     id: "autonomous-account-news"
     title: "Build an Autonomous Account News Assistant Agent"
     difficulty: "Intermediate (Level 200)"
-    duration: 60
+    duration: 30
     section: "advanced_labs"
 
   23:
