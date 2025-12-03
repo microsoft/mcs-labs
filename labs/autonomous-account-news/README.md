@@ -275,12 +275,17 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 1. Open your agent and go to **Settings**.
 
   2. In the left-hand menu, select **Generative AI**.
+  
+  3. Turn **On** the toggle for **Deep Reasoning**.
 
-  3. Turn **On** the toggle for **Use information from the Web**. Then click **Save** to save this setting. Once saved, close the settings using the **X** on the top right.
+> [!TIP]
+> Deep reasoning is currently unavailable in the UI in certain regions.  If you do not see the Deep Reasoning toggle in the settings area, try accessing the agent via https://copilotstudio.preview.microsoft.com
 
-  4. To validate web search functionality, enter a test instruction such as: `Search for news on "Microsoft opens a new Datacenter"` in the test canvas. Your agent should retrieve relevant articles from the web.
+  4. Turn **On** the toggle for **Use information from the Web**. Then click **Save** to save this setting. Once saved, close the settings using the **X** on the top right.
 
-  5. To validate Deep Reasoning, enter a prompt such as: `Use deep reasoning to evaluate the importance of these news`. The agent should respond with a structured and detailed analysis of the content, demonstrating its ability to assess relevance and significance.
+  5. To validate web search functionality, enter a test instruction such as: `Search for news on "Microsoft opens a new Datacenter"` in the test canvas. Your agent should retrieve relevant articles from the web.
+
+  6. To validate Deep Reasoning, enter a prompt such as: `Use deep reasoning to evaluate the importance of these news`. The agent should respond with a structured and detailed analysis of the content, demonstrating its ability to assess relevance and significance.
    
       ![alt text](images/web-and-reasoning.png)
 
