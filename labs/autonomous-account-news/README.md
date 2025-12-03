@@ -47,7 +47,7 @@ In this lab, you'll build an autonomous agent that:
 
 - Scans a Sales App for high-value opportunities
 - Searches for related news across the web
-- Uses Copilot Studio's Deep Reasoning feature (powered by OpenAI o1) to determine relevance
+- Uses Copilot Studio's Deep Reasoning feature (powered by OpenAI o3) to determine relevance
 - Sends curated HTML summaries via Outlook email
 
 This proactive approach helps account teams stay ahead of client developments and tailor their engagement based on current events.
@@ -92,7 +92,7 @@ In this lab, you will build an autonomous news assistant agent that:
 - Is triggered periodically
 - Scans sales data for large (high-value) opportunities
 - Searches for related industry news articles
-- Uses deep reasoning in Copilot Studio (powered by Azure OpenAI o1) to assess relevance
+- Uses deep reasoning in Copilot Studio (powered by Azure OpenAI o3) to assess relevance
 - Sends a structured HTML report via Microsoft 365 Outlook
 
 ---
