@@ -229,7 +229,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
   9. Under **Inputs**, change **Environments** to the following:
       - **Fill using**: `Custom value`
-      - **Value**: `Workshop Hub (DEV)`
+      - **Value**: `Workshop Hub`
   
      Change **Table name** to:
       - **Fill using**: `Custom value`
@@ -276,13 +276,11 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
   2. In the left-hand menu, select **Generative AI**.
 
-  3. Turn **On** the toggle for **Deep Reasoning (preview)**.
+  3. Turn **On** the toggle for **Use information from the Web**. Then click **Save** to save this setting. Once saved, close the settings using the **X** on the top right.
 
-  4. Also turn **On** the toggle for **Use information from the Web**. Then click **Save** to save these settings. Once saved, close the settings using the **X** on the top right.
+  4. To validate web search functionality, enter a test instruction such as: `Search for news on "Microsoft opens a new Datacenter"` in the test canvas. Your agent should retrieve relevant articles from the web.
 
-  5. To validate web search functionality, enter a test instruction such as: `Search for news on "Microsoft opens a new Datacenter"` in the test canvas. Your agent should retrieve relevant articles from the web.
-
-  6. To validate Deep Reasoning, enter a prompt such as: `Use deep reasoning to evaluate the importance of these news`. The agent should respond with a structured and detailed analysis of the content, demonstrating its ability to assess relevance and significance.
+  5. To validate Deep Reasoning, enter a prompt such as: `Use deep reasoning to evaluate the importance of these news`. The agent should respond with a structured and detailed analysis of the content, demonstrating its ability to assess relevance and significance.
    
       ![alt text](images/web-and-reasoning.png)
 
