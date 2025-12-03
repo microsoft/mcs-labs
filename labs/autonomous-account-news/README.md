@@ -150,14 +150,25 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 1.  In the agent's **Overview** tab, scroll to the **Triggers** section.
 
+> [!TIP]
+> The triggers section may not be immediately available as it depends on background processes started when the agent is created.  This should take no more than a minute to complete.
+
   2.  Click **Add a new Trigger** and select **Recurrence**.
+
+> [!TIP]
+> Please be aware that the triggers wizard can take a few moments to move between screens.
 
   3.  Name the trigger: `Analyze Opportunities`.
 
   4.  Click **Next**.
 
-  5.  Set the trigger interval to once a day at 9am.
+  5.  Set the trigger interval to once a day
+      - **Triggering interval:** `1`
+      - **Triggering frequency:** `Day`
 
+> [!TIP]
+> The time of day can be configured post trigger creation if desired, but this is not available through the creation dialog.
+  
   6.  Under **Additional instructions to the agent when it's invoked by this trigger**, clear any default content and replace it with: `Analyze Opportunities`.
 
   7.  Click **Create trigger** to create the trigger.
