@@ -285,9 +285,11 @@ In this section, you'll learn how to create custom prompts that structure agent 
     > [!TIP]
     > Custom prompts allow you to standardize the information presented to users, ensuring they always receive the most relevant business data in a consistent format.
 
-20. Now we can test out our prompt. Let's go back over to our Contoso Agent and test again. Got to the test pane.
+20. Press **Add and configure** to finish adding your prompt to the agent's tools.
 
-21. Let's execute this prompt to get information on an account. Type `Show Account Details for Fourth Coffee`.
+21. Now we can test out our prompt. Let's go back over to our Contoso Agent and test again. Got to the test pane.
+
+22. Let's execute this prompt to get information on an account. Type `Show Account Details for Fourth Coffee`.
 
     ![Execute prompt with MCP enabled](images/step17a2-execute-prompts.png)
 
