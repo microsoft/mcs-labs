@@ -100,9 +100,9 @@ In this lab, you'll build an end-to-end expense claims process. By the end of th
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create an Agent Flow with a Multistage Approval](#-use-case-1-create-an-..) | Automates approvals using AI, conditions, and human review | 20 min |
-| 2 | [Create and Configure an Agent](#-use-case-2-create-an-expense-claims-agent) | Collects structured input and triggers backend processes conversationally | 10 min |
-| 3 | [Configure Email Tool and Agent Invocation](#-use-case-3-notify-the-requestor-of-the-outcome) | Notifies users of outcomes and completes the end-to-end process | 20 min |
+| 1 | [Create an Agent Flow with a Multistage Approval](#-use-case-1-create-an-agent-flow-with-a-multistage-approval) | Automates approvals using AI, conditions, and human review | 20 min |
+| 2 | [Create and Configure an Agent](#-use-case-2-create-and-configure-an-agent) | Collects structured input and triggers backend processes conversationally | 10 min |
+| 3 | [Configure Email Tool and Agent Invocation](#-use-case-3-configure-email-tool-and-agent-invocation) | Notifies users of outcomes and completes the end-to-end process | 20 min |
 
 ---
 
