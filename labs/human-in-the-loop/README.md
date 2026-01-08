@@ -116,7 +116,7 @@ Create an agent flow that receives expense details, loads a policy document, eva
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create an Agent Flow with a Multistage Approva | Automates approvals using AI, conditions, and human review | 20 minutes |
+| Create an Agent Flow with a Multistage Approval | Automates approvals using AI, conditions, and human review | 20 minutes |
 
 **Summary of tasks**  
 Build an agent flow with AI-based, conditional, and manual approval stages.
