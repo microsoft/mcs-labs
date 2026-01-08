@@ -491,11 +491,11 @@ True learning comes from doing, questioning, and reflecting - so let’s put you
 
 To maximize the impact of **agent flows with multistage approvals in Microsoft Copilot Studio**:
 
-- **Use agent flows for orchestration** – Centralize business logic, integrations, and approvals outside the agent for scalability and reuse.  
-- **Apply AI stages for fast decisions** – Let AI evaluate policies and inputs to handle the majority of cases automatically.  
-- **Use conditions to control escalation** – Route only exceptions or high-value cases to manual approval.  
-- **Add manual stages where judgment matters** – Ensure human oversight for compliance and
-
+* **Use agent flows for deterministic processes** – Implement predictable, rule-based logic, approvals, and integrations in agent flows for reliability and control.
+* **Separate conversational UX from orchestration logic** – Let the agent focus on collecting clean, structured inputs and guiding the user, while the agent flow handles approvals, integrations, branching logic, and long-running execution.
+* **Make AI decisions transparent and auditable** – Clearly define approval/rejection criteria in the AI approval stage and require a complete rationale for decisions, ensuring outcomes are explainable and compliant.
+* **Design for platform constraints and reliability** – Handle long-running approvals by responding early to the agent to avoid timeouts, then continue processing asynchronously and return outcomes later.
+* **Close the loop with outcome notifications** – The workflow is only complete when the requestor is informed of the final decision, using the agent and email tools to deliver clear, timely communication.
 
 ---
 
@@ -503,12 +503,12 @@ To maximize the impact of **agent flows with multistage approvals in Microsoft C
 
 **Agent flows and multistage approvals golden rules:**
 
-- **Use agent flows for deterministic processes** – Implement predictable, rule-based logic, approvals, and integrations in agent flows for reliability and control.
-- **Design agent flows as the system of record** – Centralize approvals, conditions, and business logic outside the agent for reuse and maintainability.
-- **Automate first, escalate second** – Apply AI stages to handle standard cases and involve humans only when needed.
-- **Use conditions to control cost and effort** – Gate manual approvals with clear thresholds to minimize unnecessary human review.
-- **Respond early, process asynchronously** – Send an early response to support long-running approval scenarios.
-- **Close the loop with notifications** – Always inform requestors of final outcomes to complete the process.
+* Collect structured, validated input upfront to reduce ambiguity and rework later.
+* Escalate to human review based on explicit signals such as cost thresholds or policy violations.
+* Always return a clear, machine-readable approval outcome (approved or rejected with rationale).
+* Intentionally manage credentials and connections to ensure flows run reliably across environments.
+* Treat notifications as part of the workflow, not an afterthought—include decision, amount, and next steps.
+* Test both automated and manual approval paths to ensure correct routing and end-to-end reliability.
 
 By following these principles, you’ll build scalable, trustworthy, and efficient approval workflows that combine AI speed with human judgment and deliver consistent end-to-end experiences.
 
