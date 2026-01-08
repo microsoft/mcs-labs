@@ -144,7 +144,7 @@ Implement a scalable approval flow that blends AI decisioning with human oversig
     - Type: **Text** | Name: `Name`
     - Type: **Text** | Name: `Email`
 
-[###image placeholder]
+   ![alt text](images/when-an-agent-calls-the-flow.png)
 
 7. Select **+** to add **Get file content** (SharePoint connector)
 
@@ -209,14 +209,14 @@ Reject if ANY of the criteria is met. In the rationale, ensure you state all the
 
 10c. Select **Save**
 
-[###image placeholder]
+   ![alt text](images/run-a-multistage-approval-ai-stage.png)
 
 10d. **Edit** the Approval Process and insert a **Condition** after the AI stage:
 - In the Condition field, add a new input of type **Number** named `Amount`
 - Set: **Is greater than** `300`
 - Select: **then Continue** | **if not End approval as ‘Approved’**
 
-[###image placeholder]
+   ![alt text](images/run-a-multistage-approval-condition.png)
 
 10e. Insert a **Manual stage** after the Condition:
 - Approval type: **Approve/Reject - First to respond**
@@ -240,7 +240,7 @@ Reject if ANY of the criteria is met. In the rationale, ensure you state all the
 
 10h. Select **Save**
 
-[###image placeholder]
+![alt text](images/run-a-multistage-approval-manual-stage.png)
 
 #### Wire up the flow inputs to the approval action
 
@@ -254,7 +254,7 @@ Reject if ANY of the criteria is met. In the rationale, ensure you state all the
 12. Select **Publish**
 13. In the **Overview** tab, select **Edit** (Details pane) and name the flow: `Expense Claims Approval Flow`
 
-[###image placeholder]
+![alt text](images/agent-flow-designer.png)
 
 ---
 
@@ -407,6 +407,8 @@ Complete the end-to-end process by automatically communicating final decisions.
 > [!IMPORTANT]
 > For each placeholder `{…}`, use **/** to insert the tool you configured.
 
+![alt text](images/agent-instructions.png)
+
 10. Select **Save**
 11. **Publish** the agent
 
@@ -430,7 +432,10 @@ Expense claim requestor: {Name}({Email})
 Expense claim amount: {Amount} EUR
 ```
 
-Replace values in `{}` using dynamic content (**/**).
+> [!IMPORTANT]
+> For each placeholder `{…}`, use **/** to insert dynamic content from previous actions.
+
+![alt text](images/execute-agent-action.png)
 
 8. **Publish** the agent flow
 
@@ -442,6 +447,8 @@ Replace values in `{}` using dynamic content (**/**).
 12. In the **Run-only user** pane, select **Edit**
 13. Update all **Connections Used** from “Provided by run-only user” to **Use this connection…**
 14. Select **Save**
+
+![alt text](images/run-only-user-connections-used.png)
 
 > [!TIP]
 > This config sets the agent flow to run with maker-provided credentials instead of end-user credentials.
