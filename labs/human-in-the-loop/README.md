@@ -240,7 +240,7 @@ Reject if ANY of the criteria is met. In the rationale, ensure you state all the
 
 10h. Select **Save**
 
-![alt text](images/run-a-multistage-approval-manual-stage.png)
+   ![alt text](images/run-a-multistage-approval-manual-stage.png)
 
 #### Wire up the flow inputs to the approval action
 
@@ -254,7 +254,7 @@ Reject if ANY of the criteria is met. In the rationale, ensure you state all the
 12. Select **Publish**
 13. In the **Overview** tab, select **Edit** (Details pane) and name the flow: `Expense Claims Approval Flow`
 
-![alt text](images/agent-flow-designer.png)
+   ![alt text](images/agent-flow-designer.png)
 
 ---
 
@@ -407,7 +407,7 @@ Complete the end-to-end process by automatically communicating final decisions.
 > [!IMPORTANT]
 > For each placeholder `{…}`, use **/** to insert the tool you configured.
 
-![alt text](images/agent-instructions.png)
+   ![alt text](images/agent-instructions.png)
 
 10. Select **Save**
 11. **Publish** the agent
@@ -435,7 +435,7 @@ Expense claim amount: {Amount} EUR
 > [!IMPORTANT]
 > For each placeholder `{…}`, use **/** to insert dynamic content from previous actions.
 
-![alt text](images/execute-agent-action.png)
+   ![alt text](images/execute-agent-action.png)
 
 8. **Publish** the agent flow
 
@@ -448,7 +448,7 @@ Expense claim amount: {Amount} EUR
 13. Update all **Connections Used** from “Provided by run-only user” to **Use this connection…**
 14. Select **Save**
 
-![alt text](images/run-only-user-connections-used.png)
+   ![alt text](images/run-only-user-connections-used.png)
 
 > [!TIP]
 > This config sets the agent flow to run with maker-provided credentials instead of end-user credentials.
