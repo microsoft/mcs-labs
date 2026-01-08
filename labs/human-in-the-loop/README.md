@@ -463,6 +463,9 @@ Replace values in `{}` using dynamic content (**/**).
 4. **Submit** the form
 5. Upload the sample receipt (from Lab Resources)
 
+> [!IMPORTANT]
+> Download the receipt provided in **Lab Resources** and upload it to your agent for testing.
+
 ### Review execution
 
 6. In your agent flow, open the **Activity** tab and review the run  
