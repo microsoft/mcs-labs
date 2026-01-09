@@ -133,7 +133,7 @@ Implement a scalable approval flow that blends AI decisioning with human oversig
 2. Confirm you’re in the correct environment (top-right). In these labs, the environment name should start with **'DEV - \<your current User Name\>'**
 3. Go to **Flows** in the left-hand navigation
 4. Select **+ New agent flow**
-5. Search for the trigger **When an agent calls the flow** under the **Skills** connector (filter by **Built-in** connectors)
+5. Search for the trigger **When an agent calls the flow** (**Skills** connector) (filter by **Built-in** connectors)
 
 6. Select **+ Add an input** and add these inputs:
     - Type: **Date** | Name: `Date`
@@ -146,12 +146,14 @@ Implement a scalable approval flow that blends AI decisioning with human oversig
 
    ![alt text](images/when-an-agent-calls-the-flow.png)
 
-7. Select **+** to add **Get file content** (SharePoint connector)
+7. Select **+** to add **Get file content** (**SharePoint** connector)
+
+8. **Sign in** with your training account to create a connection 
 
 > [!IMPORTANT]
 > For **Site Address** and **File Identifier**, use the provided values in **Lab Resources**.
 
-8. Select **+** to add **Parse JSON** (Data Operations)
+9. Select **+** to add **Parse JSON** (Data Operation)
    - In **Content**, insert dynamic content and add the **Receipt** parameter from the trigger (use **See more** on the trigger to find it).
    - In **Schema**, paste:
 
@@ -164,20 +166,26 @@ Implement a scalable approval flow that blends AI decisioning with human oversig
   }
 }
 ```
+> [!TIP]
+> This step aims to overcome the limitation of multistage approvals not supporting file attachments.
 
-9. Select **+** to add **Respond to the agent** (Skills connector)
+10. Select **+** to add **Respond to the agent** (Skills connector)
 
 > [!TIP]
 > Agent flows can fail if they take longer than 2 minutes to respond to the agent. Here, you send an empty reply to avoid timeouts while the flow continues executing.
 
-10. Select **+** to add **Run a multistage approval (preview)** (Human in the loop connector)
+11. Select **+** to add **Run a multistage approval (preview)** (Human in the loop connector)
+
+12. **Create new** connection with your training account
+
+13. Select **Set up the approval**
 
 > [!TIP]
 > If **Set up the approval / Edit** isn’t visible on the action card, save the flow as draft and refresh your browser.
 
 #### Configure the multistage approval
 
-10a. Select **Create > AI Stage** and set **Instructions** to:
+14a. Select **Create > AI Stage** and set **Instructions** to:
 
 ```
 Review the following inputs:
@@ -199,7 +207,7 @@ And the criteria for rejecting the expense claim are as follows:
 Reject if ANY of the criteria is met. In the rationale, ensure you state all the criteria for which you rejected. 
 ```
 
-10b. Replace the input values with input parameters (select **/** and create these inputs):
+14b. Replace the input values with input parameters (select **/** and create these inputs):
   - Type: **Image or Document** | Name: `Expense Reimbursement Policy`
   - Type: **Text** | Name: `Date`
   - Type: **Text** | Name: `AmountAsText`
@@ -207,18 +215,18 @@ Reject if ANY of the criteria is met. In the rationale, ensure you state all the
   - Type: **Text** | Name: `Reason`
   - Type: **Image or Document** | Name: `Receipt`
 
-10c. Select **Save**
+14c. Select **Save**
 
    ![alt text](images/run-a-multistage-approval-ai-stage.png)
 
-10d. **Edit** the Approval Process and insert a **Condition** after the AI stage:
+14d. **Edit** the Approval Process and insert a **Condition** after the AI stage:
 - In the Condition field, add a new input of type **Number** named `Amount`
 - Set: **Is greater than** `300`
 - Select: **then Continue** | **if not End approval as ‘Approved’**
 
-   ![alt text](images/run-a-multistage-approval-condition.png)
+   ![alt text](images/run-a-multistage-approval-condition.jpg)
 
-10e. Insert a **Manual stage** after the Condition:
+14e. Select **+** to insert a **Manual stage** after the Condition:
 - Approval type: **Approve/Reject - First to respond**
 - Title: `Expense Report Pending Approval: {AmountAsText} EUR`
 - Assigned to: `[your_training_user_email_address]`
@@ -231,30 +239,30 @@ Reject if ANY of the criteria is met. In the rationale, ensure you state all the
 **Reason:** {Reason}
 ```
 
-10f. Replace curly-brace values with input parameters:
-- Use existing inputs for **AmountAsText** and **Reason**
-- Create **Name** input parameter (type **String**)
-
-10g. Go back to the AI stage and update **Next step based on decision**:
-- If approved: **Continue**
-
-10h. Select **Save**
+14f. For each placeholder `{…}`, use **/** to add the following inputs:
+- Add existing inputs for **AmountAsText** and **Reason**
+- Create new **Name** input (type **String**)
 
    ![alt text](images/run-a-multistage-approval-manual-stage.png)
 
+14g. Go back to the AI stage and update **Next step based on decision**:
+- If approved: **Continue**
+
+14h. Select **Save**
+
 #### Wire up the flow inputs to the approval action
 
-11. Back in the main agent flow designer, set inputs on **Run a multistage approval**:
+15. Back in the main agent flow designer, set inputs on **Run a multistage approval**:
 - For **Date, Category, Reason, Amount, Name**: select **/** to insert dynamic content from **When an agent calls the flow**
 - For the remaining values, select **/** to insert expressions:
   - **Expense Reimbursement Policy** = `string(body('Get_file_content')?['$content'])`
   - **AmountAsText** = `string(triggerBody()?['number'])`
   - **Receipt** = `string(body('Parse_JSON')?['Content'])`
 
-12. Select **Publish**
-13. In the **Overview** tab, select **Edit** (Details pane) and name the flow: `Expense Claims Approval Flow`
-
    ![alt text](images/agent-flow-designer.png)
+
+16. Select **Publish**
+17. In the **Overview** tab, select **Edit** (Details pane) and name the flow: `Expense Claims Approval Flow`
 
 ---
 
