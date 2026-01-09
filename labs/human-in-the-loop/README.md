@@ -367,7 +367,7 @@ Enable a user-friendly front end that reliably initiates backend approval proces
    `Thanks for submitting your expense claims request! You’ll be notified by email once it’s approved or requires changes.`
 
 15. Select **+ Add node** > **Topic management** > **End all topics**
-16. Save the topic
+16. **Save** the topic
 
 ---
 
