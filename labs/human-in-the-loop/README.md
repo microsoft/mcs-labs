@@ -361,6 +361,8 @@ Enable a user-friendly front end that reliably initiates backend approval proces
    - Name: **Select variable** > **System**: `User.DisplayName`
    - Email: **Select variable** > **System**: `User.Email`
 
+   ![alt text](images/power_automate_inputs.png)
+
 14. Add **Send a message** node:  
    `Thanks for submitting your expense claims request! You’ll be notified by email once it’s approved or requires changes.`
 
