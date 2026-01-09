@@ -151,7 +151,7 @@ Implement a scalable approval flow that blends AI decisioning with human oversig
 8. **Sign in** with your training account to create a connection 
 
 > [!IMPORTANT]
-> For **Site Address** and **File Identifier**, use the provided values in **Lab Resources**.
+> For **Site Address** and **File Identifier**, use the provided values in **Lab Resources**
 
 9. Select **+** to add **Parse JSON** (Data Operation)
    - In **Content**, insert dynamic content and add the **Receipt** parameter from the trigger (use **See more** on the trigger to find it).
@@ -167,7 +167,7 @@ Implement a scalable approval flow that blends AI decisioning with human oversig
 }
 ```
 > [!TIP]
-> This step aims to overcome the limitation of multistage approvals not supporting file attachments.
+> This step overcomes the limitation of multistage approvals not supporting file attachments
 
 10. Select **+** to add **Respond to the agent** (Skills connector)
 
@@ -289,9 +289,9 @@ Enable a user-friendly front end that reliably initiates backend approval proces
 
 ### Step-by-step instructions
 
-1. Go to **Solutions** (under the `...` menu in the left-hand navigation).
-   - If you already have a solution, select it.
-   - If not, create a new solution with a new publisher.
+1. Go to **Solutions** (under the `...` menu in the left-hand navigation)
+   - If you already have a solution, select it
+   - If not, create a new solution with a new publisher
 
 2. In the solution, select **+ New** > **Agent** > **Agent**
 3. Turn on **Configure** (top-left) to manually configure the agent
@@ -301,7 +301,7 @@ Enable a user-friendly front end that reliably initiates backend approval proces
 #### Create the expense submission topic
 
 6. Go to **Topics** > **+ Add a topic** > **From blank**
-7. Rename the topic: **Expense report submission**
+7. Rename the topic: `Expense report submission`
 8. Set the topic **Trigger description** to:  
    `Use this tool to submit expense reports for reimbursement.`
 
@@ -340,24 +340,24 @@ Enable a user-friendly front end that reliably initiates backend approval proces
 }
 ```
 
-11. Select **Save and Close**
+11. Select **Save** and **Close**
 
 #### Collect receipt upload
 
 12. Select **+ Add node** > **Ask a question**
    - Message: `Please upload a copy of your receipt`
    - Identify: **File**
-   - Save user response as: rename variable to **Receipt**
+   - Save user response as: rename variable to `Receipt`
    - Select **…More** > **Properties** > **Entity recognition** and check **Include file metadata**
 
 #### Call the flow
 
 13. Select **+ Add node** > **Add a tool** > **Expense Claims Approval Flow** and set inputs:
    - Date: **Select variable** > **Formula**: `Text(Topic.Date,"yyyy-mm-dd")`
-   - Amount: `Amount`
-   - Category: `Category`
-   - Reason: `Reason`
-   - Receipt: `Receipt`
+   - Amount: **Select variable**: `Amount`
+   - Category: **Select variable**: `Category`
+   - Reason: **Select variable**: `Reason`
+   - Receipt: **Select variable**: `Receipt`
    - Name: **Select variable** > **System**: User.DisplayName`
    - Email: **Select variable** > **System**: User.Email`
 
