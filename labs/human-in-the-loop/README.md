@@ -8,7 +8,7 @@ Build an end-to-end expense claims solution where an employee submits an expense
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 200 | Maker | 50 minutes | After completing this lab, participants will be able to build an agent that invokes an agent flow with multi-stage, AI-driven approvals. The final approval outcome is routed back to the agent, which then notifies the employee. |
+| 200 | Maker | 45 minutes | After completing this lab, participants will be able to build an agent that invokes an agent flow with multi-stage, AI-driven approvals. The final approval outcome is routed back to the agent, which then notifies the employee. |
 
 ---
 
@@ -102,7 +102,7 @@ In this lab, you'll build an end-to-end expense claims process. By the end of th
 |------|----------|-------------|--------|
 | 1 | [Create an Agent Flow with a Multistage Approval](#-use-case-1-create-an-agent-flow-with-a-multistage-approval) | Automates approvals using AI, conditions, and human review | 20 min |
 | 2 | [Create and Configure an Agent](#-use-case-2-create-and-configure-an-agent) | Collects structured input and triggers backend processes conversationally | 10 min |
-| 3 | [Configure Email Tool and Agent Invocation](#-use-case-3-configure-email-tool-and-agent-invocation) | Notifies users of outcomes and completes the end-to-end process | 20 min |
+| 3 | [Configure Email Tool and Agent Invocation](#-use-case-3-configure-email-tool-and-agent-invocation) | Notifies users of outcomes and completes the end-to-end process | 15 min |
 
 ---
 
@@ -133,7 +133,7 @@ Implement a scalable approval flow that blends AI decisioning with human oversig
 2. Confirm you’re in the correct environment (top-right). In these labs, the environment name should start with **'DEV - \<your current User Name\>'**
 3. Go to **Flows** in the left-hand navigation
 4. Select **+ New agent flow**
-5. Search for the trigger **When an agent calls the flow** (**Skills** connector) (filter by **Built-in** connectors)
+5. Search for the trigger **When an agent calls the flow** (**Skills** connector; filter by **Built-in** connectors)
 
 6. Select **+ Add an input** and add these inputs:
     - Type: **Date** | Name: `Date`
@@ -358,8 +358,8 @@ Enable a user-friendly front end that reliably initiates backend approval proces
    - Category: **Select variable**: `Category`
    - Reason: **Select variable**: `Reason`
    - Receipt: **Select variable**: `Receipt`
-   - Name: **Select variable** > **System**: User.DisplayName`
-   - Email: **Select variable** > **System**: User.Email`
+   - Name: **Select variable** > **System**: `User.DisplayName`
+   - Email: **Select variable** > **System**: `User.Email`
 
 14. Add **Send a message** node:  
    `Thanks for submitting your expense claims request! You’ll be notified by email once it’s approved or requires changes.`
@@ -379,7 +379,7 @@ Add a tool to send the employee an email with the final approval outcome and int
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Configure Email Tool and Agent Invocation | Notifies users of outcomes and completes the end-to-end process | 20 min |
+| Configure Email Tool and Agent Invocation | Notifies users of outcomes and completes the end-to-end process | 15 min |
 
 **Summary of tasks**  
 Configure an email tool and invoke the agent from the agent flow to deliver outcomes.
@@ -394,7 +394,7 @@ Complete the end-to-end process by automatically communicating final decisions.
 
 1. Go to **Tools** > **+ Add a tool**
 2. Search for **Send an email (V2)** (Office 365 Outlook)
-3. Select **Create new connection**
+3. Select **Create new connection** and use your training account
 4. Select **Add and configure**
 5. Update **Description**:  
    `Use this tool to notify the expense claim requestor of the final approval outcome (approved or rejected).`
@@ -404,7 +404,7 @@ Complete the end-to-end process by automatically communicating final decisions.
    - **Subject**: *Custom value* → `Expense claim request outcome`
    - **Body**: *Dynamically fill with AI* → Customize description:  
      `Write an email in HTML format that states the final outcome (approved or rejected) and includes the total claim amount.`
-8. Save the tool
+8. **Save** the tool
 
 #### Update agent instructions
 
@@ -429,8 +429,8 @@ Now that the approval flow produces an outcome, call the agent to send the final
 1. Go to **Flows**
 2. Open **Expense Claims Approval Flow**
 3. Go to **Designer**
-4. At the end, add **Execute Agent** (Microsoft Copilot Studio connector; filter by **Standard connectors**)
-5. Sign in with your training user account to create a connection
+4. At the end, add **Execute Agent** (**Microsoft Copilot Studio** connector; filter by **Standard connectors**)
+5. **Sign in** with your training user account to create a connection
 6. Select the **Expense Claims Agent**
 7. Select **Show all** and set **Body/message** to:
 
@@ -441,7 +441,7 @@ Expense claim amount: {Amount} EUR
 ```
 
 > [!IMPORTANT]
-> For each placeholder `{…}`, use **/** to insert dynamic content from previous actions.
+> For each placeholder `{…}`, use **/** to insert dynamic content from previous actions
 
    ![alt text](images/execute-agent-action.png)
 
@@ -459,36 +459,36 @@ Expense claim amount: {Amount} EUR
    ![alt text](images/run-only-user-connections-used.png)
 
 > [!TIP]
-> This config sets the agent flow to run with maker-provided credentials instead of end-user credentials.
+> This config sets the agent flow to run with maker-provided credentials instead of end-user credentials
 
 > [!NOTE]
-> Optionally add your agent flow to your solution: Solution > Add existing > Automation > Cloud flow.
+> Optionally add your agent flow to your solution: Go to **Solutions > _your_solution_ > Add existing > Automation > Cloud flow > _your_agent_flow_**
 
 ---
 
 ## 🧪 Test the End-to-End Solution
 
-1. Go to **Agents** > **Expense Claims Agent**
-2. In **Test your agent**, send: `Submit expense report`
+1. In Copilot Studio, go to **Agents** > **Expense Claims Agent**
+2. In **Test your agent** window, send message: `Submit expense report`
 3. Fill the form:
    - Date: current date
    - Amount: `343`
    - Category: `Meals`
    - Reason: `Team bonding`
 4. **Submit** the form
-5. Upload the sample receipt (from Lab Resources)
+5. Upload a sample receipt
 
 > [!IMPORTANT]
-> Download the receipt provided in **Lab Resources** and upload it to your agent for testing.
+> Download the receipt provided in **Lab Resources** and upload it to your agent for testing
 
 ### Review execution
 
-6. In your agent flow, open the **Activity** tab and review the run  
+6. Go to your agent flow, open the **Activity** tab and review the run
 7. Open **Run a multistage approval (preview)** to review AI stage + Outcome  
 8. Open [outlook.office.com/mail](https://outlook.office.com/mail/)
 9. Review and Approve the approval request email you received  
 10. Return to the agent flow run and confirm it completes and triggers **Execute Agent**  
-11. Now go to your agent, open the **Activity** tab and note a second Automated run was initiated  
+11. Go to your agent, open the **Activity** tab and note a second Automated run was initiated  
 12. In Outlook, review the second email: **Expense claim request outcome**
 
 ---
