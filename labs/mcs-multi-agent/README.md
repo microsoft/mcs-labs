@@ -151,11 +151,11 @@ Create the parent agent base that will be needed to host all your tools / agents
 > [!IMPORTANT]
 > Do not click Enter or submit this text yet as we need to do the agent settings before we do that.
 
-![Home Creation Text](image.png)
+![Home Creation Text](images/image.png)
 
 3. Click the **Gear** on the description input area and edit schema name to include `salesassistant` and then click **Update**
 
-![Agent Settings](image-1.png)
+![Agent Settings](images/image-1.png)
 
 > [!TIP]
 > [Putting an agent into a dedicated solution and changing the schema name is always helpful for helping with application lifecycle management in the future]
@@ -170,7 +170,7 @@ Create the parent agent base that will be needed to host all your tools / agents
 
 7. Scroll to the bottom of the list of settings on the **Generative AI** settings screen and turn **Off** both **Use general knowledge** and **Use information from the Web**
 
-![Turn off Model and Web Knowledge](image-2.png)
+![Turn off Model and Web Knowledge](images/image-2.png)
 
 8. Click **Save** and then **Close** the settings page
 
@@ -183,23 +183,23 @@ Create the parent agent base that will be needed to host all your tools / agents
 
 10. Click **Add a Topic** and select **From blank**
 
-![Create blank topic](image-3.png)
+![Create blank topic](images/image-3.png)
 
 11. Hover your mouse over the box that says **The agent chooses** and click the **Double Arrows** to show the Change Trigger menu then select **It's redirected to**
 
-![Set Trigger on Topic](image-4.png)
+![Set Trigger on Topic](images/image-4.png)
 
 12. Change the name of the Topic to `Select Market` by clicking on the name in the upper left hand navigation
 
-![Set Topic Name](image-5.png)
+![Set Topic Name](images/image-5.png)
 
 13. Add a node after the Trigger by clicking the **+** and select **Ask a question**
 
-![Add Question](image-6.png)
+![Add Question](images/image-6.png)
 
 14. Enter `What market are you wanting information in?` and add to Options for user both `US` and `UK` by selecting **New option**
 
-![Create Question and Options](image-7.png)
+![Create Question and Options](images/image-7.png)
 
 15. Under **Save user response as** click on **Var1** and set the Variable name to `Market`
 
@@ -207,21 +207,21 @@ Create the parent agent base that will be needed to host all your tools / agents
 
 17. Enter `The market that the sales associate is requesting information about.` in the Variable description
 
-![Variable Settings](image-8.png)
+![Variable Settings](images/image-8.png)
 
 18. Delete all the **Condition** nodes by selecting **...** and then selecting **Delete** on each
 
-![Delete Conditions](image-9.png)
+![Delete Conditions](images/image-9.png)
 
 19. Click **Save** to save the topic
 
 20. Click the **V** next to the name of the topic "Select Market" and select **Conversation Start** to go to the Conversation Start Topic
 
-![Go To Conversation Start](image-10.png)
+![Go To Conversation Start](images/image-10.png)
 
 21. Add a new node at the end of the topic by selecting the **+** and the selecting **Topic Management > Go to another topic > Select Market**
 
-![Add Node to Conversation Start](image-11.png)
+![Add Node to Conversation Start](images/image-11.png)
 
 22. Click **Save**
 
@@ -229,7 +229,7 @@ Create the parent agent base that will be needed to host all your tools / agents
 
 24. Click the **+** in the Test chat to start a new test session and verify that you now are asked which market at the beginning of each new chat.
 
-![Test Chat Market Selection](image-12.png)
+![Test Chat Market Selection](images/image-12.png)
 
 ---
 
@@ -259,7 +259,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 3. Select **New child agent** 
 
-![Select Child Agent](image-13.png)
+![Select Child Agent](images/image-13.png)
 
 4. Set Agent Name to `US Product Information Agent`
 
@@ -267,14 +267,14 @@ In this section, you'll learn how to create child agents to logically group know
 
 6. Expand **Advanced** and set the Condition to the **Global.Market** variable **is equal to** `US`
 
-![Set Child Agent Details](image-14.png)
+![Set Child Agent Details](images/image-14.png)
 
 > [!TIP]
 > You can use a formula or variables to make conditions for when this agent should be available.
 
 7. In Instructions add `This agent should only answer questions about Microsoft Surface products in regards to the US-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United States.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.`
 
-![Add instructions](image-15.png)
+![Add instructions](images/image-15.png)
 
 8. Add Knowledge to the Child Agent by click **Add** in the Knowledge section of the Child Agent configuration
 
@@ -294,7 +294,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 3. Select **New child agent** 
 
-![Select Child Agent](image-13.png)
+![Select Child Agent](images/image-13.png)
 
 4. Set Agent Name to `UK Product Information Agent`
 
@@ -302,14 +302,14 @@ In this section, you'll learn how to create child agents to logically group know
 
 6. Expand **Advanced** and set the Condition to the **Global.Market** variable **is equal to** `UK`
 
-![Set Child Agent Details UK](image-16.png)
+![Set Child Agent Details UK](images/image-16.png)
 
 > [!TIP]
 > You can use a formula or variables to make conditions for when this agent should be available.
 
 7. In Instructions add `This agent should only answer questions about Microsoft Surface products in regards to the UK-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United Kingdom.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.`
 
-![Add Child Agent Instructions UK](image-17.png)
+![Add Child Agent Instructions UK](images/image-17.png)
 
 8. Add Knowledge to the Child Agent by click **Add** in the Knowledge section of the Child Agent configuration
 
@@ -331,7 +331,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 17. Verfiy that the correct Child agent was triggered and that your answer is appropriate for the UK market
 
-![Example Response UK question](image-18.png)
+![Example Response UK question](images/image-18.png)
 
 18. Reset the conversation and do again for US market
 
@@ -370,7 +370,7 @@ Connect existing agent to our Sales Associate Assitant agent to add ability to f
 
 1. In top left click the menu button with 9 dots in the shape of a box and select **Power Apps**
 
-![Open Power Apps](image-19.png)
+![Open Power Apps](images/image-19.png)
 
 2. In the left hand menu select **Tables**
 
@@ -387,14 +387,14 @@ Connect existing agent to our Sales Associate Assitant agent to add ability to f
 - Annual Revenue
 - Currency
 
-![Account View](image-20.png)
+![Account View](images/image-20.png)
 
 7. Add the ability to search on certain fields by adding the following items to the **Find by** on the bottom right clickin on **Edit find table columns** option
 - Address1: State or Providence
 - Address1: postal code
 - Address1: City
 
-![Add Account Searchable Columns](image-21.png)
+![Add Account Searchable Columns](images/image-21.png)
 
 8. Click **Save and publish** to update the index
 > [!IMPORTANT]
@@ -404,7 +404,7 @@ Connect existing agent to our Sales Associate Assitant agent to add ability to f
 
 10. Click on Tables in the Views screen to go back to the list of Tables
 
-![Navigate to Tables](image-22.png)
+![Navigate to Tables](images/image-22.png)
 
 11. Select **Contact** table from the list
 
@@ -418,7 +418,7 @@ Connect existing agent to our Sales Associate Assitant agent to add ability to f
 - Job Title
 - Marital Status
 
-![Colunm Add Contact](image-23.png)
+![Colunm Add Contact](images/image-23.png)
 
 15. Click **Save and publish** to update the index
 > [!IMPORTANT]
@@ -434,7 +434,7 @@ Connect existing agent to our Sales Associate Assitant agent to add ability to f
 
 19. Verify that you get a response showing that the agent is working and the data is indexed
 
-![Test Account Lookup](image-24.png)
+![Test Account Lookup](images/image-24.png)
 
 20. Click **Settings** in the upper right hand menu
 
@@ -456,13 +456,13 @@ Connect existing agent to our Sales Associate Assitant agent to add ability to f
 
 27. Select **Account Data Lookup Agent** out of the menu
 
-![Select Connected Agent](image-26.png)
+![Select Connected Agent](images/image-26.png)
 
 28. Notice that the Description provides details on when to use this agent
 
 29. Make sure that the **Pass conversation history to this agent** is **Checked**
 
-![Validate Setting Connected Agent](image-27.png)
+![Validate Setting Connected Agent](images/image-27.png)
 
 30. Click **Add and configure**
 
@@ -474,7 +474,7 @@ Connect existing agent to our Sales Associate Assitant agent to add ability to f
 
 34. Notice that the agent orchestrated to the connected agent which then called it's child agent that then called numerous tools to answer the question.
 
-![Account Info Results](image-25.png)
+![Account Info Results](images/image-25.png)
 
 ---
 
