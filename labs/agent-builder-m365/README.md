@@ -64,7 +64,7 @@ The progressive approach ensures you understand core concepts before adding comp
 | Concept                                    | Why it matters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Agent**                                  | A customized digital assistant that can answer questions, retrieve information, and guide users through tasks based on configured instructions, prompts, and knowledge sources. Understanding agents is fundamental to automating knowledge work.                                                                                                                                                                                                                                                                                                                      |
-| **Microsoft 365 Copilot vs. Copilot Chat** | Microsoft 365 Copilot ($30/user/month) is grounded in your organization's data (emails, meetings, documents) while Copilot Chat comes for free with select [Microsoft 365, Office 365, and Microsoft Teams plans](https://learn.microsoft.com/en-us/copilot/manage#microsoft-365--chat-eligibility) and uses public web data by default. Knowing which to use determines your agent's capabilities and data access. Copilot Chat can be extended with some premium capabilities with a pay-as-you-go subscription and/or with Copilot Credits (pre-purchased capacity) |
+| **Microsoft 365 Copilot vs. Copilot Chat** | Microsoft 365 Copilot is grounded in your organization's data (emails, meetings, documents) while Copilot Chat comes for free with select [Microsoft 365, Office 365, and Microsoft Teams plans](https://learn.microsoft.com/en-us/copilot/manage#microsoft-365--chat-eligibility) and uses public web data by default. Knowing which to use determines your agent's capabilities and data access. Copilot Chat can be extended with some premium capabilities with a pay-as-you-go subscription and/or with Copilot Credits (pre-purchased capacity) |
 | **Declarative Agent**                      | A simple type of Copilot agent built through instructions, prompts, and knowledge sources. Perfect for most business use cases where you need to scope behavior and ground responses in specific data.                                                                                                                                                                                                                                                                                                                                                                 |
 | **Grounding**                              | Anchoring agent responses to specific data sources (websites, SharePoint, files) to ensure accuracy and minimize hallucinations. This is what makes your agent trustworthy and business-ready.                                                                                                                                                                                                                                                                                                                                                                         |
 | **Code Interpreter**                       | An advanced feature that writes and executes code in real-time to analyze data, generate charts, and perform calculations. Transforms your agent from information retrieval to data analysis powerhouse.                                                                                                                                                                                                                                                                                                                                                               |
@@ -165,7 +165,7 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
  -->
 
-2. Go to the **Chat** tab.
+2. Select  **New chat** on the left navigation pane if not already selected.
 
 > [!TIP]  
 > Both Microsoft 365 Copilot and Copilot Chat are designed for internal, employee-facing (B2E) experiences.
@@ -175,7 +175,7 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 >
 > ![alt text](images/m365-copilot.png)
 >
-> **Microsoft 365 Copilot** is a per-user license ($30/user/mo.) with premium features:
+> **Microsoft 365 Copilot** is a per-user license with premium features:
 >
 > - Advanced agents like the research and analysts Frontier ones, grounded on enterprise data and using the latest reasoning models
 > - Knowledge sources (e.g., your enterprise data from Outlook, Teams, SharePoint, or Copilot connectors)
@@ -193,24 +193,22 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
 3. If you have Microsoft 365 Copilot license, make sure you are in the **Web** tab (if you don't see any tab for Work/Web, this means you only have access to Copilot Chat).
 
-4. Test the basic experience by typing:
+4. Test the basic experience by typing the following into the Message Copilot input area and then selecting send:
 
 ```
 What are new features in the Microsoft Copilot Studio roadmap?
 ```
 
-![alt text](images/simple-copilot-search.png)
+![Response from Copilot showing the roadmap](images/simple-copilot-search.png)
 
 5. Select **Start a new chat** (top right icon) to reset. Notice how your history of converations is saved on the left-hand side.
 
 #### Create your learning assistant agent
 
-6. On the side pane, expand **Agents** and select **Create agent**
+6. On the left side navigation pane, expand the **Agents** section and select **New agent**
 
-> [!TIP]  
-> If you don't see **Create agent**, try refreshing with Ctrl + F5.
 
-7. Notice that you can explore existing **templates**. But for this lab, when prompted to **describe the agent**, reply with:
+7. Notice that you can explore existing available templates. But for this lab, you want to select the  **Describe** tab at the top of the form and paste the following into the input area for the intial agent prompt input area, and then select Send.
 
 ```
 I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Agent Builder in Microsoft 365. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
@@ -219,7 +217,7 @@ I want to build a teacher-style agent that helps users learn about Copilot, incl
 > [!TIP]  
 > From here, you will find that the conversational creation experience might differ from the below step-by-step instructions, as it's using generative AI and it is by nature non-deterministic. The core concepts remain the same, but the UI may change slightly. Just adjust to the questions and options presented to you.
 
-8. _If_ asked for agent name and other details, you can **instruct** it this:
+8. _If_ the agent has a name other than Copilot Teacher input the following prompt to adjust the name and other details and press send:
 
 ```
 The name of the agent should be Copilot Teacher. Your tone should be friendly, personal, and emphatic. You can make jokes, use subtle irony and emojis when appropriate.
@@ -231,10 +229,10 @@ The name of the agent should be Copilot Teacher. Your tone should be friendly, p
 It shouldn't answer questions that are not related to Microsoft 365 Copilot, Copilot Chat, or Copilot Studio. Always guide users towards the correct solution based on your knowledge.
 ```
 
-10. When asked about **publicly accessible websites** as knowledge sources, **paste** these URLs:
+10. Agent Builder will attempt to identify knowledge sources but may attempt to use too specific of a URL for Learn. Input the following prompt to provide specific URLs:
 
 ```
-Yes, add https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.microsoft.com/en-us/microsoft-copilot-studio/
+Yes, use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.microsoft.com/en-us/microsoft-copilot-studio/ as knowledge sources
 ```
 
 > [!TIP]  
@@ -242,13 +240,13 @@ Yes, add https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://le
 
 #### Finalize configuration
 
-11. Now let's head over to the **Configure** tab. Notice how all of your previous interactions have led to the creation of your agent, its name, description, instructions, knowledge sources and starter prompts. Feel free to tweak them!
+11. Now let's head over to the **Configure** tab. Notice how all of your previous interactions have built the configuration of your agent, its name, description, instructions, knowledge sources and starter prompts. Feel free to tweak them!
 
-12. In the **Knowledge** section, toggle **Prioritize the knowledge sources you added for agent knowledge-based queries** so that the agent uses the configured websites when providing answers, and not its own large language model knowledge.
+12. In the **Knowledge** section, toggle **Only use specified sources** so that the agent uses the configured websites when providing answers, and not its own large language model knowledge.
 
 13. Fix any issue like max character limit for starter prompt titles.
 
-14. You can test your agent in the test pane. When ready, select **Create**.
+14. You can test your agent in the test pane. When ready, select **Create** in the upper right corner to finish creating your agent.
 
 ![alt text](images/agent-builder.png)
 
@@ -276,7 +274,7 @@ What are the differences between Microsoft 365 Copilot and Copilot Chat?
 ![alt text](images/declarative-agent-test.png)
 
 > [!IMPORTANT]  
-> If you need to update a declarative agent, select `...` next to the agent name and select **Edit**, or go to **Create agent** then navigate to **My agents** in the breadcrumbs.
+> If you need to update a declarative agent, select `...` next to the agent name and select **Edit**, or go to **New agent** then select **Agent Builder** in the breadcrumbs and then Copilot Teacher from the list of your agents.
 
 ---
 
