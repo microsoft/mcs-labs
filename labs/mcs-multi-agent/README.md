@@ -203,7 +203,7 @@ Create the parent agent base that will be needed to host all your tools / agents
 
 15. Under **Save user response as** click on **Var1** and set the Variable name to `Market`
 
-16. Select **Global** as the Usage of the Variable and select **External sources can recieve value**
+16. Select **Global** as the Usage of the Variable and select **External sources can receive value**
 
 17. Enter `The market that the sales associate is requesting information about.` in the Variable description
 
@@ -357,7 +357,7 @@ In this section, you'll learn how to connect a Copilot Studio agent to another C
 
 ### Objective
 
-Connect existing agent to our Sales Associate Assitant agent to add ability to find account and contact information from the sales system.
+Connect existing agent to our Sales Associate Assistant agent to add ability to find account and contact information from the sales system.
 
 ---
 
