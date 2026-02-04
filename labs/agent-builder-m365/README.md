@@ -173,7 +173,7 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 > - Users who have **only Copilot Chat** will **not see any toggle** in the interface – this is expected.
 > - Users who have **both** Microsoft 365 Copilot and Copilot Chat will see a **toggle** that lets them switch between the **Work** (Microsoft 365 Copilot) and **Web** (Copilot Chat) experiences.
 >
-> ![alt text](images/m365-copilot.png)
+> ![Microsoft 365 Copilot](images/m365-copilot.png)
 >
 > **Microsoft 365 Copilot** is a per-user license with premium features:
 >
@@ -248,7 +248,7 @@ Yes, use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://le
 
 14. You can test your agent in the test pane. When ready, select **Create** in the upper right corner to finish creating your agent.
 
-![alt text](images/agent-builder.png)
+![Agent Builder test pane](images/agent-builder.png)
 
 #### Share and test your agent
 
@@ -271,7 +271,7 @@ What are the differences between Microsoft 365 Copilot and Copilot Chat?
 
  -->
 
-![alt text](images/declarative-agent-test.png)
+![Results from testing your agent](images/declarative-agent-test.png)
 
 > [!IMPORTANT]  
 > If you need to update a declarative agent, select `...` next to the agent name and select **Edit**, or go to **New agent** then select **Agent Builder** in the breadcrumbs and then Copilot Teacher from the list of your agents.
@@ -337,7 +337,7 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 > [!IMPORTANT]
 > The URL of the SharePoint site is available in **Lab Resources** (specific per training).
 
-![alt text](images/sales-docs.png)
+![SharePoint documents](images/sales-docs.png)
 
 2. Locate the following sample files:
 
@@ -379,7 +379,7 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
     - Select both the **Sales Policy Document** and **Sales Excel** file
     - You will see them being added as SharePoint documents
 
-![alt text](images/add-files.png)
+![Files added to agent knowledge](images/add-files.png)
 
 > [!TIP]
 >
@@ -392,7 +392,7 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
     - **Code interpreter** (for data analysis and chart generation)
     - **Image generator** (for creating visual content)
 
-![alt text](images/configured-sources-and-settings.png)
+![SharePoint files configured as knowledge](images/configured-sources-and-settings.png)
 
 > [!TIP]  
 > You can explore additional **knowledge** capabilities:
@@ -428,7 +428,7 @@ What are the key guidelines in our sales policy regarding customer discounts?
 
 16. Verify the agent references your SharePoint policy document and provides accurate information.
 
-![alt text](images/sales-policy-question.png)
+![Results of your test prompt](images/sales-policy-question.png)
 
 #### Test code interpreter with data analysis
 
@@ -440,7 +440,7 @@ How are sales trending for home appliances?
 
 18. _If_ offered to get a visual chart of this breakdown, **confirm**.
 
-![alt text](images/sales-data-analysis.png)
+![Visual produced by agent](images/sales-data-analysis.png)
 
 19. **Observe** how the agent:
     - Accesses your Excel data
@@ -456,7 +456,7 @@ How are sales trending for home appliances?
 Design a professional badge for the first place winner of our sales contest. It should look modern and premium, with gold colors, the text '1st Place – Sales Contest', and a ribbon or trophy element.
 ```
 
-![alt text](images/image-generator.png)
+![Badge created by agent](images/image-generator.png)
 
 > [!TIP]
 > Notice how you can also invoke a specific agent by using **@** in the standard **Chat** area.
