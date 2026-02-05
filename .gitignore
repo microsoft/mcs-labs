@@ -13,6 +13,10 @@ _site/
 # Auto-synced config copy (source of truth is root lab-config.yml)
 _data/lab-config.yml
 
+# Claude Code
+.claude/
+nul
+
 # Jekyll generated journey pages (auto-generated from lab-config.yml)
 journeys/
 
