@@ -145,7 +145,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 3. In the left navigation (under the `...` menu), select **Solutions**
 
-    ![alt text](images/solutions.png)
+    ![Copilot Studio navigation menu with Solutions option highlighted, showing Power Platform apps below](images/solutions.png)
 
 4. Select **New solution**.
 
@@ -221,13 +221,13 @@ In this section, you'll learn how to create environment variables and connection
 
 2. Select **+ New**, then go to **More** and choose **Environment variable**.
 
-![alt text](images/environment-variable-connection-reference.png)
+![Copilot Studio showing "New" menu expanded with "Environment variable" option highlighted](images/environment-variable-connection-reference.png)
 
 3. In **Name**, enter: `Custom Knowledge Endpoint`
 
 4. In **Data Type**, select **Text**.
 
-5. Leave **Default Value** blank, but under **Current Value**, select **+ New Value**, and enter the endpoint URL found in the Lab Resources.
+5. Leave **Default Value** blank, but under **Current Value**, select **+ New Value**, and enter the Custom Knowledge endpoint URL found in the Lab Resources.
 
 > [!IMPORTANT]
 >  * For configuration, use the provided values in the **Lab Resources** (specific per training).
