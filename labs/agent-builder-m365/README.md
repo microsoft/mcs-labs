@@ -217,7 +217,7 @@ I want to build a teacher-style agent that helps users learn about Copilot, incl
 > [!TIP]  
 > From here, you will find that the conversational creation experience might differ from the below step-by-step instructions, as it's using generative AI and it is by nature non-deterministic. The core concepts remain the same, but the UI may change slightly. Just adjust to the questions and options presented to you.
 
-8. _If_ the agent has a name other than Copilot Teacher input the following prompt to adjust the name and other details and press send:
+8. _If_ the proposed agent has a name other than Copilot Teacher input the following prompt to adjust the name and other details and press send:
 
 ```
 The name of the agent should be Copilot Teacher. Your tone should be friendly, personal, and emphatic. You can make jokes, use subtle irony and emojis when appropriate.
@@ -232,7 +232,7 @@ It shouldn't answer questions that are not related to Microsoft 365 Copilot, Cop
 10. Agent Builder will attempt to identify knowledge sources but may attempt to use too specific of a URL for Learn. Input the following prompt to provide specific URLs:
 
 ```
-Yes, use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.microsoft.com/en-us/microsoft-copilot-studio/ as knowledge sources
+Use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.microsoft.com/en-us/microsoft-copilot-studio/ as knowledge sources
 ```
 
 > [!TIP]  
@@ -256,7 +256,7 @@ Yes, use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://le
 
 16. Select **Go to agent**.
 
-17. Try your agent by selecting one of the prompts or by pasting this:
+17. Try your agent by selecting one of the prompts or by pasting the following prompt and selecting Send:
 
 ```
 What are the differences between Microsoft 365 Copilot and Copilot Chat?
@@ -349,48 +349,45 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
    - Ensure it contains sales data across multiple quarters/years
    - Verify product line categorization
    - Note the column headers and data format
+   - On the list of files in Documents, with the file Selected, Select Copy link in the toolboar, save the link in notepad for use later in the lab
 
 4. Open the **Word policy document** and review:
    - Sales procedures and guidelines
    - Policy information that might inform sales decisions
    - Any specific requirements or compliance information
+ - On the list of files in Documents, with the file Selected, Select Copy link in the toolboar, save the link in notepad for use later in the lab
 
 #### Create the Sales Admin Assistant agent
 
-5. Return to [Microsoft 365 Copilot Chat](https://m365.cloud.microsoft/chat/?auth=2&home=1) and go to the **Chat** tab.
+5. Return to [Microsoft 365 Copilot Chat](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
-6. On the side pane, expand **Agents** and select **Create agent**.
+6. On the left side pane, expand **Agents** and select **New agent**.
 
-7. When prompted to **describe the agent**, use this specific prompt:
+7. Select the **Describe** tab at the top, and copy/paste the following prompta nd select Send:
 
 ```
 You are a Sales Admin Assistant. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
 ```
 
-8. **Confirm** the suggested agent name when prompted.
+8. **Confirm** the suggested agent name if prompted.
 
 #### Configure knowledge sources
 
-9. Navigate to the **Configure** tab.
+9. Select the **Configure** tab.
 
-10. Now head over to the **Knowledge** section:
-    - Under **Knowledge**, select the **Search bar**
-    - Go to the **Files** tab
-    - Select both the **Sales Policy Document** and **Sales Excel** file
-    - You will see them being added as SharePoint documents
+10. Scroll down to the **Knowledge** section:
+    - Under **Knowledge**, Paste the Sales.xlsx URL that you copied earlier in the lab and then select Enter to add the file as knowledge to your agent
+    - Repeat that for the Sales Policy Document.docx
+    - You will see them being added as SharePoint documents in the knowledge section of the agent
 
 ![Files added to agent knowledge](images/add-files.png)
 
-> [!TIP]
->
-> - If you can't see the files you just opened, an alternative approach is to **paste** and **add** the SharePoint URL of the Sales folder.
-> - Another alternative approach is to **download** the files locally and **upload** them to your agent.
 
 #### Enable advanced capabilities
 
 11. Under **Capabilities**, enable:
-    - **Code interpreter** (for data analysis and chart generation)
-    - **Image generator** (for creating visual content)
+    - **Create documents, charts, and code** (for data analysis and chart generation)
+    - **Create images** (for creating visual content)
 
 ![SharePoint files configured as knowledge](images/configured-sources-and-settings.png)
 
@@ -414,13 +411,13 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
     - Instructions
     - Starter prompts
 
-13. When satisfied with the configuration, select **Create**.
+13. When satisfied with the configuration, select **Create** in the upper right corner.
 
 #### Test policy knowledge
 
 14. Select **Go to agent** to start testing.
 
-15. First, test the agent's **knowledge** of your sales policy:
+15. First, test the agent's **knowledge** of your sales policy, copy/paste the following prompt in the Message Copilot area and select Send:
 
 ```
 What are the key guidelines in our sales policy regarding customer discounts?
@@ -450,7 +447,7 @@ How are sales trending for home appliances?
 
 #### Test image generation
 
-20. **Start a new chat** and test the **image generation** capability with a relevant request:
+20. Select **Start a new chat** icon in the upper right corner of the screen and test the **image generation** capability with a relevant request:
 
 ```
 Design a professional badge for the first place winner of our sales contest. It should look modern and premium, with gold colors, the text '1st Place – Sales Contest', and a ribbon or trophy element.
@@ -458,8 +455,6 @@ Design a professional badge for the first place winner of our sales contest. It 
 
 ![Badge created by agent](images/image-generator.png)
 
-> [!TIP]
-> Notice how you can also invoke a specific agent by using **@** in the standard **Chat** area.
 
 ---
 
