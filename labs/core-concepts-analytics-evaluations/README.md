@@ -8,7 +8,7 @@ Learn how to use analytics to measure agent performance, create evaluation test 
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 200 | Maker | 45 minutes | After completing this lab, participants will be able to access and interpret agent analytics including conversation volume, topic performance, and user satisfaction, create evaluation test sets using quick generation, manual entry, and file import methods, configure evaluation methods including exact match, keyword match, similarity, general quality, and compare meaning, and run evaluations to compare results across runs and identify improvement opportunities. |
+| 200 | Maker | 30 minutes | After completing this lab, participants will be able to access and interpret agent analytics including conversation volume, topic performance, and user satisfaction, create evaluation test sets using auto-generation, CSV import, test canvas capture, and manual entry, configure evaluation methods including exact match, keyword match, similarity, general quality, and compare meaning, and review evaluation results to compare runs and identify improvement opportunities. |
 
 ---
 
@@ -24,7 +24,7 @@ Learn how to use analytics to measure agent performance, create evaluation test 
 - [Instructions by Use Case](#️-instructions-by-use-case)
   - [Use Case #1: Monitor Agent Performance with Analytics](#-use-case-1-monitor-agent-performance-with-analytics)
   - [Use Case #2: Create and Configure Evaluation Test Sets](#-use-case-2-create-and-configure-evaluation-test-sets)
-  - [Use Case #3: Run Evaluations and Interpret Results](#-use-case-3-run-evaluations-and-interpret-results)
+  - [Use Case #3: Review Evaluation Results](#-use-case-3-review-evaluation-results)
 
 ---
 
@@ -43,7 +43,7 @@ Think of analytics and evaluations like running a quality assurance program:
 - "I made changes to my agent but I'm not sure if they improved things"
 - "I need a systematic way to test my agent's quality before deploying updates"
 
-**In 45 minutes, you'll learn how to measure your agent's performance with analytics and build a repeatable evaluation framework for continuous quality improvement.**
+**In 30 minutes, you'll learn how to measure your agent's performance with analytics and build a repeatable evaluation framework for continuous quality improvement.**
 
 ---
 
@@ -95,11 +95,12 @@ In this lab, you'll use analytics to understand agent performance and build eval
 * Access and interpret conversation analytics including volume, engagement, and topic metrics
 * Analyze user satisfaction scores and identify improvement opportunities
 * Use failure analytics to discover knowledge gaps and conversation issues
-* Create evaluation test sets using quick generation, manual entry, and file import
+* Generate evaluation test sets automatically and import test cases from CSV files
+* Capture test cases from real agent conversations using the test canvas
+* Add manual test cases to target specific agent capabilities
 * Configure evaluation methods appropriate for different test scenarios
-* Run evaluations and interpret pass/fail results with detailed reasoning
-* Compare evaluation runs to measure improvement over time
-* Export evaluation results for reporting and documentation
+* Review evaluation results including pass rates, reasoning, and activity maps
+* Compare evaluation runs and export results for reporting
 
 ---
 
@@ -107,9 +108,9 @@ In this lab, you'll use analytics to understand agent performance and build eval
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Monitor Agent Performance with Analytics](#-use-case-1-monitor-agent-performance-with-analytics) | Measure agent performance and identify optimization opportunities using conversation data | 15 min |
-| 2 | [Create and Configure Evaluation Test Sets](#-use-case-2-create-and-configure-evaluation-test-sets) | Build systematic test cases to objectively measure agent quality with multiple evaluation methods | 15 min |
-| 3 | [Run Evaluations and Interpret Results](#-use-case-3-run-evaluations-and-interpret-results) | Execute evaluations, compare runs, and use results to drive measurable agent improvements | 15 min |
+| 1 | [Monitor Agent Performance with Analytics](#-use-case-1-monitor-agent-performance-with-analytics) | Measure agent performance and identify optimization opportunities using conversation data | 10 min |
+| 2 | [Create and Configure Evaluation Test Sets](#-use-case-2-create-and-configure-evaluation-test-sets) | Build systematic test cases to objectively measure agent quality with multiple evaluation methods | 10 min |
+| 3 | [Review Evaluation Results](#-use-case-3-review-evaluation-results) | Interpret evaluation outcomes and use results to drive measurable agent improvements | 10 min |
 
 ---
 
@@ -123,7 +124,7 @@ Learn how to access agent analytics, interpret performance metrics, identify imp
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Monitor Agent Performance with Analytics | Measure agent performance and identify optimization opportunities using conversation data | 15 minutes |
+| Monitor Agent Performance with Analytics | Measure agent performance and identify optimization opportunities using conversation data | 10 minutes |
 
 **Summary of tasks**
 
@@ -301,188 +302,161 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 ## 🔄 Use Case #2: Create and Configure Evaluation Test Sets
 
-Build systematic evaluation test sets using multiple creation methods and configure evaluation methods to objectively measure agent quality.
+Learn four different ways to create evaluation test sets - auto-generation, CSV import, test canvas capture, and manual entry - to systematically measure your agent's quality.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create and Configure Evaluation Test Sets | Build systematic test cases to objectively measure agent quality with multiple evaluation methods | 15 minutes |
+| Create and Configure Evaluation Test Sets | Build systematic test cases to objectively measure agent quality with multiple evaluation methods | 10 minutes |
 
 **Summary of tasks**
 
-In this section, you'll learn how to navigate to the Evaluation page, create test sets using AI-powered quick generation, add manual test cases with hand-crafted questions and expected responses, understand the file import format, and configure different evaluation methods for each test case.
+In this section, you'll learn how to generate test cases automatically, import test cases from a CSV file, capture test cases from the test canvas, and add manual test cases - giving you a complete toolkit for building comprehensive evaluation coverage.
 
-**Scenario:** You want to systematically test your Copilot Studio Assistant to ensure it provides accurate answers about Copilot Studio features, licensing, and prompt engineering. You'll create a comprehensive evaluation test set that covers your agent's key capabilities and configure appropriate evaluation methods for different types of questions.
+**Scenario:** You want to systematically test your Copilot Studio Assistant using different approaches. You'll create three distinct test sets - one auto-generated, one imported from CSV that is intentionally designed to fail, and one captured from real agent conversations that should pass - to see how different creation methods and evaluation outcomes work.
 
 > [!NOTE]
 > **Preview Feature:** Agent Evaluation is currently a preview feature in Copilot Studio. Features and UI may change as Microsoft iterates on the experience. Preview features are not intended for production use.
 
 ### Objective
 
-Create evaluation test sets using multiple methods and configure appropriate evaluation criteria for systematic agent quality testing.
+Create evaluation test sets using four different methods and understand how each approach serves different testing needs.
 
 ---
 
 ### Step-by-step instructions
 
-#### Navigate to the Evaluation Page
+#### Generate Test Cases
 
-1. In your Copilot Studio agent, click **Evaluation** in the left navigation panel (you may find it under **Analytics** or as a separate section).
-
-2. Review the Evaluation page overview. This is where you'll create test sets, run evaluations, and view results.
+1. In your Copilot Studio agent, click **Evaluation** in the left navigation panel.
 
 > [!NOTE]
 > If you don't see the Evaluation option, it may need to be enabled in your environment settings or may not yet be available in your region. Check [Agent Evaluation overview](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-overview) for availability.
 
-#### Create a Test Set with Quick Question Set
+2. Click **Create Test Set**.
 
-3. Click **+ New test set** or **Create test set** to begin.
+3. Click **Generate 10 questions**. Copilot Studio will use AI to automatically generate test cases based on your agent's knowledge sources and configuration.
 
-4. Select **Quick Question Set** as the creation method.
-
-5. Copilot Studio will use AI to automatically generate approximately 10 test cases based on your agent's knowledge sources and configuration.
-
-6. Review the generated test cases. Each includes:
-   - **Question**: A user question the agent should be able to answer
-   - **Expected response**: The correct or ideal answer
-   - **Testing method**: The evaluation method to use
-
-> [!TIP]
-> Quick Question Set is the fastest way to get started with evaluations. The AI generates relevant test cases based on your agent's actual knowledge and capabilities.
-
-7. Review each generated test case for accuracy and relevance. You can edit questions, expected responses, or remove irrelevant cases.
-
-8. Give your test set a descriptive name:
+4. Change the test set name to:
 
 ```
-Copilot Studio Assistant - Auto Generated
+Non-Critical Copilot Studio Guide Set
 ```
 
-9. Click **Save** to save the test set.
+5. Set the **User Profile** by selecting **Logged on user (Admin)**.
 
-#### Create Manual Test Cases
+6. Click **Save**.
 
-10. Click **+ New test set** again to create a second test set.
+7. Click on the first generated question to explore all the available options. For each test case, you can configure the **evaluation method**:
 
-11. Select **Manual Entry** as the creation method.
+    - **Exact Match**: Character-for-character comparison between expected and actual response. Use for questions with precise, factual answers.
 
-12. Give the test set a descriptive name:
+    - **Keyword Match**: Checks whether key terms from the expected response appear in the actual response. Use when exact wording doesn't matter but key concepts must be present.
 
-```
-Copilot Studio Assistant - Manual Quality Checks
-```
-
-13. Click **+ Add test case** to create your first manual test case.
-
-14. Enter the following test case:
-
-**Question:**
-```
-How do I license Copilot Studio with pay as you go?
-```
-
-**Expected response:**
-```
-Copilot Studio offers pay-as-you-go licensing through Azure where you are billed based on consumption using messages as the billing unit.
-```
-
-15. Click **+ Add test case** again and enter:
-
-**Question:**
-```
-What is the CARE framework for prompt engineering?
-```
-
-**Expected response:**
-```
-The CARE framework stands for Context, Action, Results, and Example. It provides a structured approach to writing effective prompts.
-```
-
-16. Add a third test case:
-
-**Question:**
-```
-How do I create a new agent in Copilot Studio?
-```
-
-**Expected response:**
-```
-To create a new agent, navigate to Copilot Studio, click Create in the left navigation, select New agent, provide a name and instructions, and click Create.
-```
-
-17. Add a fourth test case:
-
-**Question:**
-```
-What weather tools are available?
-```
-
-**Expected response:**
-```
-The MSN Weather connector provides real-time weather data including current conditions and forecasts for any location.
-```
-
-18. Add a fifth test case:
-
-**Question:**
-```
-How do I join the Copilot Studio mailing list?
-```
-
-**Expected response:**
-```
-You can join the mailing list by providing your email address, first name, and last name when prompted by the agent.
-```
-
-> [!NOTE]
-> Manual test cases give you full control over exactly what is tested and what the expected response should be. Use these for your most critical agent capabilities.
-
-#### Understand File Import Format (Reference)
-
-19. Note that you can also import test cases from a CSV file. The required format is:
-
-```
-Question,Expected response,Testing method
-"How do I create an agent?","Navigate to Copilot Studio and click Create","Similarity"
-"What is GPT-4?","GPT-4 is an advanced AI model","Keyword Match"
-```
-
-> [!TIP]
-> File import is useful when you have a large number of test cases or want to maintain test cases in a spreadsheet. You can import up to 100 test cases per test set.
-
-#### Configure Evaluation Methods
-
-20. For each test case in your manual test set, configure the appropriate **evaluation method**. Click on a test case to see the method options:
-
-    - **Exact Match**: Character-for-character comparison between expected and actual response. Use for questions with precise, factual answers (e.g., specific numbers or names).
-
-    - **Keyword Match**: Checks whether key terms from the expected response appear in the actual response. Use when the exact wording doesn't matter but key concepts must be present.
-
-    - **Similarity**: Uses cosine similarity to compare semantic meaning on a 0-1 scale with a configurable threshold. Use for questions where the meaning matters more than exact wording.
+    - **Similarity**: Uses cosine similarity to compare semantic meaning on a 0-1 scale with a configurable threshold. Use when meaning matters more than exact wording.
 
     - **General Quality**: Uses an LLM to evaluate response quality across four dimensions - relevance, groundedness, completeness, and abstention. Does NOT require an expected response. Use for open-ended questions.
 
-    - **Compare Meaning**: Evaluates whether the intent and meaning of the actual response matches the expected response, with a configurable threshold. Use when you want semantic comparison with more nuance than cosine similarity.
+    - **Compare Meaning**: Evaluates whether the intent and meaning of the actual response matches the expected response, with a configurable threshold. Use for semantic comparison with more nuance than cosine similarity.
 
-21. Configure the evaluation methods for your manual test cases:
-    - Test case 1 (licensing): Set to **Similarity** (threshold 0.7)
-    - Test case 2 (CARE framework): Set to **Keyword Match**
-    - Test case 3 (create agent): Set to **Compare Meaning** (threshold 0.7)
-    - Test case 4 (weather tools): Set to **Keyword Match**
-    - Test case 5 (mailing list): Set to **General Quality**
-
-> [!IMPORTANT]
+> [!TIP]
 > Choose evaluation methods that match the nature of each question. Factual questions with precise answers work well with Exact Match or Keyword Match. Open-ended questions benefit from General Quality or Similarity methods.
 
-#### Configure User Profile Authentication
-
-22. In the test set settings, look for a **User Profile** or **Authentication** configuration.
-
-23. Configure the authentication setting to match how your agent handles user identity during evaluations.
+8. Click **Evaluate** to start the evaluation of this test set.
 
 > [!NOTE]
-> User Profile settings determine whether the evaluation runs as an authenticated user or anonymous. Configure this to match your production scenario for accurate evaluation results.
+> Evaluation time depends on the number of test cases and agent response time. A test set with 10 cases typically completes in 1-3 minutes.
 
-24. Click **Save** to save all test cases and configurations.
+#### Import Test Cases
+
+9. Click **Create a test set**.
+
+10. Note the link to **download the CSV template**. Click it to review the required CSV format. The template shows the expected columns:
+
+```
+Question,Expected response,Testing method
+```
+
+11. Download the [EvaluationAlwaysFail.csv](EvaluationAlwaysFail.csv) file provided with this lab. This CSV contains adversarial test cases designed to verify your agent properly handles harmful or inappropriate requests. Import the file into the test set.
+
+> [!TIP]
+> File import is useful when you have a large number of test cases or want to maintain test cases in a spreadsheet. You can import up to 100 test cases per test set. Questions can be up to 1,000 characters.
+
+12. Change the test set name to:
+
+```
+Always Fail Copilot Studio Guide Set
+```
+
+13. Click **Save**.
+
+14. Click **Evaluate** to run the evaluation. These adversarial test cases use the General Quality method to assess how the agent handles harmful requests.
+
+#### Manually Create Test Cases from Test Canvas
+
+15. Open the **Test Canvas** (the test chat panel on the right side of the screen).
+
+16. Send the following message to your agent:
+
+```
+I want to get notified of the latest news about Copilot Studio.
+```
+
+17. The agent should trigger the mailing list topic and ask for your email address. Enter your email address when prompted.
+
+18. When prompted for your first name, enter your first name.
+
+19. When prompted for your last name, enter your last name.
+
+20. Now send the following questions to your agent one at a time, waiting for a response between each:
+
+```
+If I have a M365 Copilot license can I publish to Teams in Copilot Studio?
+```
+
+```
+What are Tools in Copilot Studio?
+```
+
+```
+What are all the topic triggers in Copilot Studio?
+```
+
+```
+What kind of connected agents does Copilot Studio support?
+```
+
+21. Click **Evaluate**. This captures all the questions and agent responses from your test canvas session as a new test set, using the agent's actual responses as the expected responses.
+
+22. Change the test set name to:
+
+```
+Always Pass Copilot Studio Guide Set
+```
+
+> [!NOTE]
+> Since the expected responses are captured directly from the agent's own answers, this test set should pass when evaluated - the agent should give the same (or very similar) answers when asked again.
+
+23. Click on the first test case (the mailing list question). Change the evaluation method to **Text Match** and set the expected response to:
+
+```
+Please enter your email address to join the Copilot Studio announcements mailing list.
+```
+
+24. Delete the follow-up response entries for email, first name, and last name. These conversational follow-ups are not needed as individual test cases since the mailing list flow is already tested by the first question.
+
+#### Add a Manual Test Case
+
+25. Click **Add Case Manually**.
+
+26. Enter the following question:
+
+```
+Where can I set DLP policies for Copilot Studio?
+```
+
+27. Click **Save Test Case**.
+
+28. Click **Evaluate** to run the evaluation on the updated test set.
 
 > [!IMPORTANT]
 > **Key limits to remember:** Each test set supports a maximum of 100 test cases. Questions can be up to 1,000 characters. Evaluation results are retained for 89 days.
@@ -497,163 +471,123 @@ Question,Expected response,Testing method
 
 **Key takeaways:**
 
-* **Multiple Creation Methods** – Quick Question Set (AI-generated), Manual Entry (hand-crafted), and File Import (CSV) each serve different needs for building comprehensive test sets
-* **Evaluation Methods Matter** – Different question types require different evaluation approaches. Factual questions need Exact/Keyword Match; open-ended questions need General Quality or Similarity
-* **General Quality Needs No Expected Response** – The LLM-based evaluation assesses relevance, groundedness, completeness, and abstention without needing a predefined answer
+* **Four Creation Methods** – Auto-generation, CSV import, test canvas capture, and manual entry each serve different needs. Auto-generation provides quick baseline coverage, CSV import enables bulk management, test canvas captures real conversations, and manual entry targets specific scenarios.
+* **Evaluation Methods Matter** – Different question types require different evaluation approaches. Factual questions need Exact/Keyword Match; open-ended questions benefit from General Quality or Similarity.
+* **Test Set Strategy** – Creating test sets that are intentionally designed to pass or fail helps you understand how evaluations work before applying them to real quality measurement.
 
 **Lessons learned & troubleshooting tips:**
 
-* Start with Quick Question Set to get baseline coverage, then add manual cases for critical scenarios
-* Set Similarity and Compare Meaning thresholds based on how strict you need matching to be (0.7 is a good starting point)
-* Review AI-generated test cases before running evaluations - they may include irrelevant or poorly worded questions
+* Start with auto-generated test cases for baseline coverage, then add manual cases for critical scenarios
+* Use the test canvas approach to capture test cases from real conversations - the agent's own responses make reliable expected answers
+* Review auto-generated test cases before relying on them - they may include irrelevant or poorly worded questions
 
 **Challenge: Apply this to your own use case**
 
 * What are the 10 most important questions your agent must answer correctly?
-* Which evaluation method would you use for customer-facing FAQ responses?
+* Which creation method would you use for ongoing regression testing?
 * How would you organize test sets for different agent capabilities?
 
 ---
 
 ---
 
-## 🧱 Use Case #3: Run Evaluations and Interpret Results
+## 🧱 Use Case #3: Review Evaluation Results
 
-Execute evaluation test sets, analyze pass/fail results with detailed reasoning, compare runs to measure improvement, and export results for documentation.
+Analyze evaluation results across your test sets to understand pass/fail outcomes, examine detailed reasoning, and use insights to drive agent improvements.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Run Evaluations and Interpret Results | Execute evaluations, compare runs, and use results to drive measurable agent improvements | 15 minutes |
+| Review Evaluation Results | Interpret evaluation outcomes and use results to drive measurable agent improvements | 10 minutes |
 
 **Summary of tasks**
 
-In this section, you'll learn how to run evaluation test sets, view and interpret pass rates, examine individual test case results with reasoning details, filter results, compare evaluation runs, provide feedback on evaluation quality, and export results.
+In this section, you'll learn how to review evaluation results from the test sets you created in Use Case #2, examine pass rates and individual test case details, compare results across your "Always Pass" and "Always Fail" test sets, filter results, and use insights to identify improvement opportunities.
 
-**Scenario:** You've created evaluation test sets in the previous use case. Now you'll run them against your agent, analyze the results to identify areas for improvement, make an agent change, re-run the evaluation, and compare results to verify the improvement worked.
+**Scenario:** You've created and evaluated three test sets in Use Case #2 - an auto-generated set, an intentionally failing set, and one captured from real agent conversations. Now you'll review the results to understand how evaluations work and how to use them for continuous quality improvement.
 
 ### Objective
 
-Run evaluations, interpret results, make improvements, and use comparison features to verify measurable quality gains.
+Review and interpret evaluation results, compare outcomes across test sets, and identify actionable improvements for your agent.
 
 ---
 
 ### Step-by-step instructions
 
-#### Run Your First Evaluation
+#### Review the Auto-Generated Test Set Results
 
 1. Navigate to the **Evaluation** page in your Copilot Studio agent.
 
-2. Select the manual test set you created in Use Case #2 ("Copilot Studio Assistant - Manual Quality Checks").
+2. Select the **Non-Critical Copilot Studio Guide Set** to view its evaluation results.
 
-3. Click **Evaluate** or **Run evaluation** to start the test run.
+3. Review the **pass rate** displayed in the results. This shows the percentage of auto-generated test cases that met their evaluation criteria (e.g., "7/10 passed - 70%").
 
-4. Wait for the evaluation to complete. The agent will process each test case, generate responses, and compare them against your expected results.
-
-> [!NOTE]
-> Evaluation time depends on the number of test cases and agent response time. A test set with 5-10 cases typically completes in 1-3 minutes.
-
-#### View Pass Rate and Summary
-
-5. Once the evaluation completes, review the **pass rate** displayed in the **Recent results** section.
-
-6. The pass rate shows the percentage of test cases that met their evaluation criteria (e.g., "4/5 passed - 80%").
-
-7. Review the summary to quickly identify:
-   - How many test cases passed
-   - How many test cases failed
-   - The overall quality trend
-
-#### Examine Individual Test Case Results
-
-8. Click on an individual test case to view its detailed results.
-
-9. For each test case, review:
+4. Click on an individual test case to view its detailed results:
    - **Question**: The original test question
-   - **Expected response**: What you defined as the correct answer
+   - **Expected response**: What the AI generated as the correct answer
    - **Actual response**: What the agent actually responded with
    - **Result**: Pass or Fail
    - **Reasoning**: An explanation of why the test passed or failed
 
-10. For failed test cases, pay close attention to:
-    - **Knowledge sources used**: Which documents or URLs the agent referenced
-    - **Tools used**: Whether the agent invoked any tools
-    - **Activity map**: The step-by-step conversation flow showing the agent's decision path
+5. For any failed test cases, review the **activity map** to see the step-by-step conversation flow showing the agent's decision path, including which knowledge sources, tools, and topics were used.
 
 > [!TIP]
 > The activity map is especially valuable for debugging failures. It shows exactly which knowledge sources, tools, and topics the agent used (or failed to use) when generating its response.
 
-11. For passing test cases, verify that the agent's reasoning is sound - a test can pass for the wrong reasons if thresholds are too lenient.
+#### Review the "Always Fail" Test Set Results
 
-#### Filter Results
+6. Select the **Always Fail Copilot Studio Guide Set** to view its results.
 
-12. Use the filter options to focus on specific subsets of results:
+7. Review the test case results. These adversarial questions test whether your agent properly refuses harmful or inappropriate requests using the **General Quality** evaluation method.
+
+8. Click on a test case and review:
+   - The **actual response** (how the agent handled the adversarial question)
+   - The **reasoning** explaining why the evaluation determined it was a pass or failure
+   - Whether the agent appropriately declined to answer or redirected the conversation
+
+> [!NOTE]
+> The "Always Fail" test set uses adversarial questions to verify your agent's safety guardrails. This is valuable for understanding how evaluations assess responsible AI behavior.
+
+#### Review the "Always Pass" Test Set Results
+
+9. Select the **Always Pass Copilot Studio Guide Set** to view its results.
+
+10. Review the pass rate. Since expected responses were captured from the agent's own answers in the test canvas, most test cases should pass.
+
+11. Check the first test case (mailing list question) which you configured with **Text Match**. Verify that the agent's response matches the expected text:
+
+```
+Please enter your email address to join the Copilot Studio announcements mailing list.
+```
+
+12. Check the DLP policies test case you added manually. Review whether the agent was able to answer this question and what the evaluation result was.
+
+> [!TIP]
+> If the DLP test case failed, it likely indicates a knowledge gap. This is exactly how evaluations help you discover areas where your agent needs additional knowledge or improved instructions.
+
+#### Filter and Compare Results
+
+13. Use the filter options to focus on specific subsets:
     - **All**: Show all test cases
     - **Pass**: Show only passing test cases
     - **Fail**: Show only failing test cases
 
-13. Filtering to failed cases quickly highlights exactly where your agent needs improvement.
+14. Filter to **Fail** across your test sets to quickly identify exactly where your agent needs improvement.
 
-#### Make an Agent Improvement
-
-14. Based on your evaluation results, identify one failing test case and determine the root cause:
-    - Is the agent missing knowledge? Add or update a knowledge source
-    - Are instructions unclear? Refine agent or tool instructions
-    - Is a topic not triggering? Update trigger phrases
-
-15. Make a specific improvement to address the failure. For example, if the licensing question failed:
-    - Navigate to **Knowledge** and verify the licensing document is indexed
-    - Update agent instructions to emphasize licensing expertise
-
-16. Click **Save** to apply your agent changes.
-
-> [!IMPORTANT]
-> Make one change at a time so you can clearly attribute improvements to specific actions. Multiple simultaneous changes make it hard to understand what worked.
-
-#### Re-Run the Evaluation
-
-17. Return to the **Evaluation** page.
-
-18. Select the same test set and click **Evaluate** again to run a new evaluation with your improved agent.
-
-19. Wait for the evaluation to complete.
-
-#### Compare Evaluation Runs
-
-20. Once the second evaluation completes, look for the **Compare with** dropdown or comparison feature in the results view.
-
-21. Select the previous evaluation run from the dropdown to compare the two runs side by side.
-
-22. Review the comparison view:
-    - **Green arrows** (or upward indicators) show test cases that improved (failed before, pass now)
-    - **Red arrows** (or downward indicators) show test cases that regressed (passed before, fail now)
-    - **No change** indicators show test cases with consistent results
-
-23. Verify that your improvement addressed the specific failure without causing regressions in other test cases.
+15. If you have multiple evaluation runs for the same test set, use the **Compare with** dropdown to compare two runs side by side:
+    - **Green arrows** show test cases that improved (failed before, pass now)
+    - **Red arrows** show test cases that regressed (passed before, fail now)
+    - **No change** indicators show consistent results
 
 > [!TIP]
 > The comparison feature is one of the most powerful aspects of Agent Evaluation. It turns agent improvement from guesswork into a measurable, data-driven process.
 
-#### Provide Feedback on Evaluation Quality
+#### Provide Feedback and Export Results
 
-24. For individual test case results, look for **thumbs up/thumbs down** feedback options.
-
-25. Provide feedback on whether the evaluation's pass/fail determination was accurate:
+16. For individual test case results, use the **thumbs up/thumbs down** feedback options to indicate whether the evaluation's pass/fail determination was accurate:
     - **Thumbs up**: The evaluation correctly assessed the response
     - **Thumbs down**: The evaluation's assessment was wrong (false positive or false negative)
 
-> [!NOTE]
-> Your feedback helps improve the evaluation system over time. If you consistently find that a particular evaluation method gives inaccurate results, consider switching to a different method for those test cases.
-
-#### Export Evaluation Results
-
-26. Look for an **Export** or **Download** button on the evaluation results page.
-
-27. Click **Export test results** to download the results as a CSV file.
-
-28. Review the exported CSV, which includes:
-    - Question, expected response, actual response
-    - Pass/fail status and reasoning
-    - Evaluation method used
+17. Click **Export test results** to download the results as a CSV file for stakeholder reporting or documentation.
 
 > [!TIP]
 > Exported results are valuable for stakeholder reporting, compliance documentation, and tracking quality trends over time. Consider exporting results after each major agent update.
@@ -666,9 +600,9 @@ Run evaluations, interpret results, make improvements, and use comparison featur
 
 ### Test your understanding
 
-* Why is it important to make one improvement at a time before re-running evaluations?
-* How do green and red arrows in the comparison view help you understand the impact of changes?
-* When would you use the General Quality evaluation method vs. Exact Match?
+* Why is creating an "Always Fail" test set a useful learning exercise?
+* How does the activity map help you debug failed test cases?
+* What does it tell you when a test case in the "Always Pass" set unexpectedly fails?
 
 **Challenge: Apply this to your own use case**
 
