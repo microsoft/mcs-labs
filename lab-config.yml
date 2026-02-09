@@ -106,7 +106,7 @@ labs:
   core-concepts-agent-knowledge-tools:
     title: "Build Intelligent Agents with Knowledge Sources, Tools, and Topics"
     difficulty: "Beginner to Intermediate"
-    duration: 60
+    duration: 45
     section: core
     order: 170
     journeys: [quick-start, business-user, developer]

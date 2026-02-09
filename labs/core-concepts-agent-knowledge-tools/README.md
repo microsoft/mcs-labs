@@ -8,7 +8,7 @@ Learn how to create an AI agent from scratch in Microsoft Copilot Studio, enhanc
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 100-200 | Maker | 60 minutes | After completing this lab, participants will be able to create and configure a new Copilot Studio agent with custom instructions and AI model selection, enhance agent intelligence by adding document and website knowledge sources, extend agent capabilities by creating connector-based and custom tools, and build custom topics with triggers and nodes to handle structured conversation flows. |
+| 200 | Maker | 45 minutes | After completing this lab, participants will be able to create and configure a new Copilot Studio agent with custom instructions and AI model selection, enhance agent intelligence by adding document and website knowledge sources, extend agent capabilities by creating connector-based and custom tools, and build custom topics with triggers and nodes to handle structured conversation flows. |
 
 ---
 
@@ -43,7 +43,7 @@ Think of building an AI agent like assembling a team:
 - "My agent needs real-time data from external systems"
 - "I need my agent to handle specific conversation flows and collect user information"
 
-**In just 60 minutes, you'll have a fully functional AI agent with knowledge, tools, and structured conversation flows** - no coding required.
+**In just 45 minutes, you'll have a fully functional AI agent with knowledge, tools, and structured conversation flows** - no coding required.
 
 ---
 
@@ -108,10 +108,10 @@ In this lab, you'll build a Copilot Studio agent from the ground up, enhance it 
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create and Configure Your First Agent](#-use-case-1-create-and-configure-your-first-agent) | Build a functional AI agent with clear instructions and optimal AI model settings | 12 min |
-| 2 | [Enhance Agent Intelligence with Knowledge Sources](#-use-case-2-enhance-agent-intelligence-with-knowledge-sources) | Transform generic AI into a domain expert by grounding responses in your organization's content | 13 min |
-| 3 | [Extend Your Agent with Tools](#-use-case-3-extend-your-agent-with-tools) | Connect your agent to external services and build custom analytical capabilities | 20 min |
-| 4 | [Build Custom Topics for Structured Conversations](#-use-case-4-build-custom-topics-for-structured-conversations) | Create structured conversation flows that handle specific user intents and workflows | 15 min |
+| 1 | [Create and Configure Your First Agent](#-use-case-1-create-and-configure-your-first-agent) | Build a functional AI agent with clear instructions and optimal AI model settings | 8 min |
+| 2 | [Enhance Agent Intelligence with Knowledge Sources](#-use-case-2-enhance-agent-intelligence-with-knowledge-sources) | Transform generic AI into a domain expert by grounding responses in your organization's content | 10 min |
+| 3 | [Extend Your Agent with Tools](#-use-case-3-extend-your-agent-with-tools) | Connect your agent to external services and build custom analytical capabilities | 15 min |
+| 4 | [Build Custom Topics for Structured Conversations](#-use-case-4-build-custom-topics-for-structured-conversations) | Create structured conversation flows that handle specific user intents and workflows | 12 min |
 
 ---
 
@@ -125,7 +125,7 @@ Build your first Copilot Studio agent with custom instructions, suggested prompt
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create and Configure Your First Agent | Build a functional AI agent with clear instructions and optimal AI model settings | 12 minutes |
+| Create and Configure Your First Agent | Build a functional AI agent with clear instructions and optimal AI model settings | 8 minutes |
 
 **Summary of tasks**
 
@@ -250,7 +250,7 @@ Upload custom documents and content to transform your agent from a generic assis
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Enhance Agent Intelligence with Knowledge Sources | Transform generic AI into a domain expert by grounding responses in your organization's content | 13 minutes |
+| Enhance Agent Intelligence with Knowledge Sources | Transform generic AI into a domain expert by grounding responses in your organization's content | 10 minutes |
 
 **Summary of tasks**
 
@@ -356,7 +356,7 @@ Build two different types of tools: a connector-based weather tool and a custom 
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Extend Your Agent with Tools | Connect your agent to external services and build custom analytical capabilities | 20 minutes |
+| Extend Your Agent with Tools | Connect your agent to external services and build custom analytical capabilities | 15 minutes |
 
 **Summary of tasks**
 
@@ -530,7 +530,7 @@ Create structured conversation flows with triggers, nodes, and logic to handle s
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Build Custom Topics for Structured Conversations | Create structured conversation flows that handle specific user intents and workflows | 15 minutes |
+| Build Custom Topics for Structured Conversations | Create structured conversation flows that handle specific user intents and workflows | 12 minutes |
 
 **Summary of tasks**
 
