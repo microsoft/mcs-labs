@@ -371,12 +371,11 @@ Non-Critical Copilot Studio Guide Set
 9. Click **Create a test set**.
 
 10. Note the link to **download the CSV template**. Click it to review the required CSV format. The template shows the expected columns:
+    - **Question** - The user question that the agent will answer
+    - **Expected response** - The expected answer to evaluate against
+    - **Testing method** - The evaluation method to use for the test case
 
-```
-Question,Expected response,Testing method
-```
-
-11. Download the [EvaluationAlwaysFail.csv](EvaluationAlwaysFail.csv) file provided with this lab. This CSV contains adversarial test cases designed to verify your agent properly handles harmful or inappropriate requests. Import the file into the test set.
+11. Download the <a href="EvaluationAlwaysFail.csv" target="_blank">EvaluationAlwaysFail.csv</a> file provided with this lab. This CSV contains adversarial test cases designed to verify your agent properly handles harmful or inappropriate requests. Import the file into the test set.
 
 > [!TIP]
 > File import is useful when you have a large number of test cases or want to maintain test cases in a spreadsheet. You can import up to 100 test cases per test set. Questions can be up to 1,000 characters.
@@ -401,7 +400,10 @@ Always Fail Copilot Studio Guide Set
 I want to get notified of the latest news about Copilot Studio.
 ```
 
-17. The agent should trigger the mailing list topic and ask for your email address. Enter your email address when prompted.
+17. The agent should trigger the mailing list topic and ask for your email address. Enter the email address of your lab account (e.g., `user@yourlabdomain.com`) when prompted.
+
+> [!NOTE]
+> For privacy reasons, use your lab account email rather than a personal email address. Your name is fine to use. All lab environment content is cleared 2 weeks after the event is over.
 
 18. When prompted for your first name, enter your first name.
 
@@ -457,6 +459,9 @@ Where can I set DLP policies for Copilot Studio?
 27. Click **Save Test Case**.
 
 28. Click **Evaluate** to run the evaluation on the updated test set.
+
+> [!NOTE]
+> Only one test set can run at a time. If an evaluation is already in progress from a previous step, you can wait for it to complete or move on to Use Case #3 and come back later.
 
 > [!IMPORTANT]
 > **Key limits to remember:** Each test set supports a maximum of 100 test cases. Questions can be up to 1,000 characters. Evaluation results are retained for 89 days.
