@@ -114,7 +114,7 @@ labs:
   core-concepts-variables-agents-channels:
     title: "Master Variables, Multi-Agent Architectures, and Channel Deployment"
     difficulty: "Intermediate"
-    duration: 55
+    duration: 30
     section: core
     order: 175
     journeys: [quick-start, business-user, developer]

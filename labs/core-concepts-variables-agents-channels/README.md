@@ -8,7 +8,7 @@ Learn how to manage conversation state with variables, build specialized child a
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 200 | Maker | 55 minutes | After completing this lab, participants will be able to create and manage both topic-level and global variables to maintain conversation state, create child agents with specialized knowledge and configure parent agent orchestration, and deploy agents to web and Microsoft Teams channels with appropriate security settings. |
+| 200 | Maker | 30 minutes | After completing this lab, participants will be able to create and manage both topic-level and global variables to maintain conversation state, create child agents with specialized knowledge and configure parent agent orchestration, and deploy agents to web and Microsoft Teams channels with appropriate security settings. |
 
 ---
 
@@ -45,7 +45,7 @@ Think of variables, child agents, and channels like organizing a company:
 - "My agent is ready but I don't know how to make it available to users"
 - "I need my agent in Teams, on our website, and in our mobile app"
 
-**In 55 minutes, you'll transform your agent into a sophisticated, memory-enabled, multi-agent system deployed where users need it.**
+**In 30 minutes, you'll transform your agent into a sophisticated, memory-enabled, multi-agent system deployed where users need it.**
 
 ---
 
@@ -110,9 +110,9 @@ In this lab, you'll implement conversation memory with variables, build a multi-
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Work with Variables](#-use-case-1-work-with-variables) | Implement conversation memory to maintain context and reuse data across topic nodes | 18 min |
-| 2 | [Create and Orchestrate Child Agents](#-use-case-2-create-and-orchestrate-child-agents) | Build specialized sub-agents with focused expertise to create modular, scalable solutions | 17 min |
-| 3 | [Deploy Your Agent Across Channels](#-use-case-3-deploy-your-agent-across-channels) | Make your agent accessible across web, Teams, and other platforms with appropriate security | 20 min |
+| 1 | [Work with Variables](#-use-case-1-work-with-variables) | Understand how variables maintain conversation context and how to navigate the variables interface | 5 min |
+| 2 | [Create and Orchestrate Child Agents](#-use-case-2-create-and-orchestrate-child-agents) | Build specialized sub-agents with focused expertise to create modular, scalable solutions | 13 min |
+| 3 | [Deploy Your Agent Across Channels](#-use-case-3-deploy-your-agent-across-channels) | Make your agent accessible across web, Teams, and other platforms with appropriate security | 12 min |
 
 ---
 
@@ -122,21 +122,24 @@ In this lab, you'll implement conversation memory with variables, build a multi-
 
 ## 🧱 Use Case #1: Work with Variables
 
-Learn how to create, configure, and use variables to maintain conversation state and pass data between topic nodes.
+Explore the variables interface in Copilot Studio to understand how conversation state is managed through topic-level and global variables.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Work with Variables | Implement conversation memory to maintain context and reuse data across topic nodes | 18 minutes |
+| Work with Variables | Understand how variables maintain conversation context and how to navigate the variables interface | 5 minutes |
 
 **Summary of tasks**
 
-In this section, you'll learn how to create topic-level and global variables, configure variable properties, use the Set Variable node to modify values, and understand variable scope and lifetime.
+In this section, you'll explore existing variables in your mailing list topic, understand variable properties and scope, review how variables are referenced in messages and formulas, and observe variable values during a test conversation.
 
-**Scenario:** In your mailing list topic (from the previous lab's Use Case #4), you need to store the user's email address as a variable, display it back to them for confirmation, and potentially use it in other parts of the conversation. You'll also explore global variables that persist across topics.
+**Scenario:** Your mailing list topic (from the previous lab's Use Case #4) already collects user information and stores it in variables. You'll explore how Copilot Studio automatically creates variables, understand the difference between topic-level and global scope, and observe how variables work during a live test conversation.
+
+> [!WARNING]
+> This use case is exploration only. Do NOT create, modify, or delete any variables or nodes - doing so could break your existing topic. You are here to navigate the interface and understand how variables work.
 
 ### Objective
 
-Master variable creation, configuration, and usage to build agents with conversation memory.
+Understand variable types, properties, scope, and behavior by exploring the existing variables interface in your agent.
 
 ---
 
@@ -149,26 +152,26 @@ Master variable creation, configuration, and usage to build agents with conversa
 2. Open the **Join Copilot Studio Mailing List** topic that you created in the previous lab's Use Case #4.
 
 > [!NOTE]
-> If you don't have this topic, create a simple topic with a question node that asks for the user's email address.
+> If you don't have this topic, you can explore variables in any existing topic that has question nodes.
 
-#### Review Existing Variable
+#### Review Existing Variables
 
-3. Find the **Question** node where you collect the user's email address.
+3. Find the **Question** node where the user's email address is collected.
 
 4. Click on the question node to expand its properties panel.
 
-5. Look for the **Save response as** or **Variable** section. You'll see that Copilot Studio automatically created a variable to store the email address.
+5. Look for the **Save response as** or **Variable** section. Notice that Copilot Studio automatically created a variable to store the email address when the question node was built.
 
 6. Note the variable name (likely something like `emailAddress` or `userEmail`).
 
 > [!TIP]
-> Whenever you create a question node, Copilot Studio automatically creates a variable to store the user's response. This variable is scoped to the topic by default.
+> Whenever a question node is created, Copilot Studio automatically creates a variable to store the user's response. This variable is scoped to the topic by default.
 
 #### Explore Variable Properties
 
 7. Click on the variable name to open the variable properties panel.
 
-8. Review the variable configuration:
+8. Review the variable configuration — do not change any values:
    - **Name**: The variable identifier used in the topic
    - **Type**: Data type (Text, Number, Boolean, etc.)
    - **Scope**: Topic-level or Global
@@ -176,102 +179,53 @@ Master variable creation, configuration, and usage to build agents with conversa
 
 9. Notice that this variable is **Topic-level** by default, meaning it only exists within this topic.
 
-#### Convert to Global Variable (Optional)
-
-10. To make this variable available across all topics, change the scope from **Topic** to **Global**.
-
-11. Notice how the variable name changes to include a namespace (like `Global.emailAddress`).
-
 > [!IMPORTANT]
-> Use global variables sparingly. They persist throughout the entire conversation and can be accessed by any topic. Only make variables global when you need to share data across multiple topics.
-
-12. For this exercise, keep the variable as **Topic-level** to understand the difference.
+> **Topic-level variables** exist only within a single topic and reset when the topic ends. **Global variables** persist across all topics and the entire conversation. Global variables use a namespace like `Global.emailAddress`. Use global variables sparingly — only when you need to share data across multiple topics.
 
 #### View All Variables
 
-13. Click **Variables** in the left navigation panel (or look for a Variables section in your topic).
+10. Click **Variables** in the left navigation panel (or look for a Variables section in your topic).
 
-14. Review the **Topic variables** section showing all variables in the current topic.
+11. Review the **Topic variables** section showing all variables in the current topic.
 
-15. Review the **Global variables** section showing variables available across the entire agent.
+12. Review the **Global variables** section showing variables available across the entire agent.
 
 > [!NOTE]
 > The Variables view gives you a centralized place to see all variables, their types, and their values during testing.
 
-#### Add a Set Variable Node
+#### Understand How Variables Are Used
 
-16. Return to your topic canvas.
+13. Return to your topic canvas and scroll through the nodes. Look for places where variables are referenced:
+    - **Message nodes** may use curly braces like `{Topic.emailAddress}` to dynamically insert variable values into text
+    - **Set Variable nodes** can transform data using formulas like `"Text " & Topic.variableName` (the `&` operator concatenates strings)
+    - **Condition nodes** can branch logic based on variable values
 
-17. After the email collection question, click **+** to add a new node.
-
-18. Select **Set a variable value** from the node options.
-
-19. Configure the Set Variable node:
-    - **Variable**: Select an existing variable or create a new one
-    - **Value**: Set the value using text, another variable, or a formula
-
-20. For this example, create a new variable called `confirmationMessage` and set its value using a formula:
-
-```
-"Thank you! We'll send announcements to " & Topic.emailAddress
-```
+14. Notice the **+** button between nodes. Click it to see the available node options (but do not add any nodes):
+    - **Set a variable value**: Modify variable values using text, other variables, or formulas
+    - **Ask a question**: Collect user input and automatically store it in a variable
+    - **Add a condition**: Branch conversation logic based on variable values
 
 > [!TIP]
-> The `&` operator concatenates text strings. This formula combines static text with the collected email address variable.
+> Understanding these node types helps you see how variables flow through a topic — from collection (question nodes) to transformation (set variable nodes) to output (message nodes) to logic (condition nodes).
 
-#### Use the Variable in a Message
+#### Observe Variables During Testing
 
-21. Click **+** after the Set Variable node to add a new node.
+15. In the test panel, start a new conversation.
 
-22. Select **Send a message** from the node options.
-
-23. In the message text, reference your confirmation message variable:
-
-```
-{Topic.confirmationMessage}
-```
-
-24. Alternatively, you can directly reference the email variable in the message:
-
-```
-Thank you! We'll send Copilot Studio announcements to {Topic.emailAddress}.
-```
-
-> [!NOTE]
-> Use curly braces `{}` to reference variables in message text. This dynamically inserts the variable value when the message is displayed.
-
-25. Click **Save** to save your topic changes.
-
-#### Test Variable Usage
-
-26. In the test panel, start a new conversation.
-
-27. Trigger the mailing list topic by saying:
+16. Trigger the mailing list topic by saying:
 
 ```
 I want to join the mailing list.
 ```
 
-28. When prompted for your email, provide:
+17. Follow the prompts and provide information when asked (email, name, etc.).
 
-```
-user@example.com
-```
+18. While in the test conversation, click **Variables** in the test panel (or look for a Variables icon).
 
-29. Observe how the agent displays the confirmation message using the variable value you provided.
-
-30. Notice how the variable persists throughout the topic and can be referenced in multiple nodes.
-
-#### Explore Variable Values During Testing
-
-31. While in a test conversation, click **Variables** in the test panel (or look for a Variables icon).
-
-32. Review the current values of all variables in the conversation.
-
-33. Notice how variables update in real-time as you progress through the conversation.
+19. Review the current values of all variables in the conversation. Notice how variables populate in real-time as you progress through the conversation.
 
 > [!TIP]
-> Monitoring variables during testing is essential for debugging complex conversation flows and understanding data flow.
+> Monitoring variables during testing is essential for debugging complex conversation flows and understanding data flow. This is one of the most useful debugging tools in Copilot Studio.
 
 ---
 
@@ -285,8 +239,8 @@ user@example.com
 
 * **Topic Variables Scope Locally** – Topic-level variables exist only within a single topic, preventing namespace pollution and keeping data organized
 * **Global Variables Share Context** – Global variables persist across all topics and the entire conversation, enabling cross-topic data sharing
-* **Set Variable Nodes Transform Data** – Use Set Variable nodes to perform calculations, concatenations, and transformations during conversation flows
-* **Variables Enable Personalization** – Referencing variables in messages creates dynamic, personalized user experiences
+* **Variables Are Auto-Created** – Copilot Studio automatically creates variables when you add question nodes, so variables are already working in your topics
+* **The Test Panel Shows Live Values** – Monitoring variables during testing is one of the most powerful debugging tools in Copilot Studio
 
 **Lessons learned & troubleshooting tips:**
 
@@ -297,9 +251,9 @@ user@example.com
 
 **Challenge: Apply this to your own use case**
 
-* What user information would you collect and store in variables?
+* What user information would your agent need to remember across a conversation?
 * Which variables should be global vs. topic-level in your agent?
-* How could you use variables to personalize messages or pre-fill forms?
+* How could you use the Variables test panel to debug a broken conversation flow?
 
 ---
 
@@ -311,7 +265,7 @@ Build specialized child agents with focused knowledge and instructions to create
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create and Orchestrate Child Agents | Build specialized sub-agents with focused expertise to create modular, scalable solutions | 17 minutes |
+| Create and Orchestrate Child Agents | Build specialized sub-agents with focused expertise to create modular, scalable solutions | 13 minutes |
 
 **Summary of tasks**
 
@@ -373,13 +327,9 @@ This agent should help users with understanding information about the prompt gui
 
 10. Click **+ Add knowledge** to add a knowledge source.
 
-11. Select **Upload files** and upload a PDF about the CARE prompt framework (if you have one), or use the URL:
+11. Select **Upload files** as the knowledge source type.
 
-```
-https://www.nngroup.com/articles/careful-prompts/
-```
-
-12. Alternatively, upload any document related to prompt engineering best practices.
+12. Download the [CAREful Prompts Printable Guide (PDF)](https://media.nngroup.com/media/articles/attachments/CAREful_Prompts_-_Printable-2.pdf?_gl=1*1lto3e8*_up*MQ..*_ga*NDc3ODQ3MjYzLjE3NzA2Njc5OTM.*_ga_630S9ESVKM*czE3NzA2Njc5OTIkbzEkZzAkdDE3NzA2Njc5OTIkajYwJGwwJGgw) and upload it to the child agent as a knowledge source.
 
 > [!IMPORTANT]
 > Child agents can have their own dedicated knowledge sources. This keeps knowledge organized and prevents one agent from being overloaded with unrelated content.
@@ -392,70 +342,75 @@ https://www.nngroup.com/articles/careful-prompts/
 
 15. Return to your **parent agent** (the main Copilot Studio Assistant).
 
-16. Navigate to the agent's **Instructions** or **Overview** section.
+16. Navigate to the parent agent's **Overview** page. This is where you configure the agent's main instructions — not the child agent's instructions.
 
-17. Add orchestration instructions to help the parent agent understand when to use the child agent:
+17. In the parent agent's **Instructions** field on the Overview page, add the following orchestration instructions. Notice the `(replace this text)` placeholder — you'll replace it with a direct reference to the child agent in the next step.
 
 ```
-Use CARE Prompt Guidance when asked to provide just general guidance around prompt building. Never use it when asked to analyze a prompt.
+Use (replace this text) when asked to provide just general guidance around prompt building. Never use it when asked to analyze a prompt.
 ```
+
+18. In the parent agent's Instructions field, select the `(replace this text)` placeholder, then type `/` to open the dropdown menu. This lists your agent's available tools, topics, child agents, knowledge sources, and more. Select **CARE Prompt Guidance** from the list to create a direct reference to the child agent, replacing the placeholder text.
+
+> [!TIP]
+> Using `/` references in your agent instructions creates explicit links to specific items in your agent configuration. This ensures the agent knows exactly which tool, topic, or child agent you're referring to — rather than relying on plain text name matching.
 
 > [!IMPORTANT]
 > Orchestration instructions are critical for proper agent routing. Be explicit about WHEN to use each child agent and WHEN NOT to use them. This prevents confusion and ensures the right agent handles each request.
 
-18. Click **Save** to apply the orchestration instructions.
+19. Click **Save** to apply the orchestration instructions.
 
 #### Review Agent Relationships
 
-19. In the parent agent, navigate to the **Agents** or **Skills** panel.
+20. In the parent agent, navigate to the **Agents** or **Skills** panel.
 
-20. Verify that the "CARE Prompt Guidance" child agent appears in the list of available agents.
+21. Verify that the "CARE Prompt Guidance" child agent appears in the list of available agents.
 
-21. Check that the child agent is **Enabled** (toggle should be on).
+22. Check that the child agent is **Enabled** (toggle should be on).
 
 > [!NOTE]
 > Disabled child agents won't be invoked by the parent agent. Always verify child agents are enabled after creation.
 
 #### Test the Child Agent
 
-22. In the parent agent's test panel, start a new conversation.
+23. In the parent agent's test panel, start a new conversation.
 
-23. Ask a question that should trigger the child agent:
+24. Ask a question that should trigger the child agent:
 
 ```
 How does the CARE prompt guidance help write prompts?
 ```
 
-24. Observe the agent's response. It should:
+25. Observe the agent's response. It should:
     - Recognize that this is a general prompt guidance question
     - Route the conversation to the "CARE Prompt Guidance" child agent
     - Provide an answer grounded in the CARE framework knowledge
 
-25. Look for indicators in the test panel showing which agent responded (some interfaces show "Responded by: CARE Prompt Guidance" or similar).
+26. Look for indicators in the test panel showing which agent responded (some interfaces show "Responded by: CARE Prompt Guidance" or similar).
 
 #### Test Orchestration Logic
 
-26. Now test the orchestration instructions by asking a question that should NOT use the child agent:
+27. Now test the orchestration instructions by asking a question that should NOT use the child agent:
 
 ```
 Analyze this prompt for improvements: Write a summary of the quarterly report.
 ```
 
-27. Verify that the parent agent uses the Prompt Analyzer tool (from the previous lab) instead of routing to the child agent.
+28. Verify that the parent agent uses the Prompt Analyzer tool (from the previous lab) instead of routing to the child agent.
 
 > [!TIP]
 > This demonstrates proper orchestration - the parent agent understands the difference between "general prompt guidance" (child agent) and "analyze a specific prompt" (tool).
 
 #### Explore Child Agent Capabilities
 
-28. Ask several different questions to test the child agent's knowledge:
+29. Ask several different questions to test the child agent's knowledge:
     - "What is the CARE framework?"
     - "How do I write better prompts?"
     - "What does the A stand for in CARE?"
 
-29. Verify that the child agent consistently provides accurate answers from its knowledge source.
+30. Verify that the child agent consistently provides accurate answers from its knowledge source.
 
-30. Return to the child agent's configuration and review how you could:
+31. Return to the child agent's configuration and review how you could:
     - Add more knowledge sources
     - Refine instructions for better responses
     - Create additional child agents for other domains
@@ -488,7 +443,7 @@ Learn how to configure and deploy your agent to multiple channels, understand ch
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Deploy Your Agent Across Channels | Make your agent accessible across web, Teams, and other platforms with appropriate security | 20 minutes |
+| Deploy Your Agent Across Channels | Make your agent accessible across web, Teams, and other platforms with appropriate security | 12 minutes |
 
 **Summary of tasks**
 
