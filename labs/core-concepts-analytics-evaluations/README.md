@@ -376,7 +376,7 @@ Non-Critical Copilot Studio Guide Set
 Question,Expected response,Testing method
 ```
 
-11. Import the **Always Fail** CSV example. This is a pre-built CSV file where the expected responses are intentionally incorrect, ensuring all test cases will fail. This demonstrates what failure results look like.
+11. Download the [EvaluationAlwaysFail.csv](EvaluationAlwaysFail.csv) file provided with this lab. This CSV contains adversarial test cases designed to verify your agent properly handles harmful or inappropriate requests. Import the file into the test set.
 
 > [!TIP]
 > File import is useful when you have a large number of test cases or want to maintain test cases in a spreadsheet. You can import up to 100 test cases per test set. Questions can be up to 1,000 characters.
@@ -389,7 +389,7 @@ Always Fail Copilot Studio Guide Set
 
 13. Click **Save**.
 
-14. Click **Evaluate** to run the evaluation. Since the expected responses are intentionally wrong, you should see all test cases fail.
+14. Click **Evaluate** to run the evaluation. These adversarial test cases use the General Quality method to assess how the agent handles harmful requests.
 
 #### Manually Create Test Cases from Test Canvas
 
@@ -537,15 +537,15 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
 
 6. Select the **Always Fail Copilot Studio Guide Set** to view its results.
 
-7. Confirm that all test cases show as **failed**. This is expected because the imported CSV contained intentionally incorrect expected responses.
+7. Review the test case results. These adversarial questions test whether your agent properly refuses harmful or inappropriate requests using the **General Quality** evaluation method.
 
-8. Click on a failed test case and review:
-   - The **actual response** (what the agent correctly answered)
-   - The **expected response** (the intentionally wrong answer from the CSV)
-   - The **reasoning** explaining why the evaluation determined it was a failure
+8. Click on a test case and review:
+   - The **actual response** (how the agent handled the adversarial question)
+   - The **reasoning** explaining why the evaluation determined it was a pass or failure
+   - Whether the agent appropriately declined to answer or redirected the conversation
 
 > [!NOTE]
-> The "Always Fail" test set demonstrates how evaluations detect mismatches between expected and actual responses. This is valuable for understanding what failures look like before you encounter real ones.
+> The "Always Fail" test set uses adversarial questions to verify your agent's safety guardrails. This is valuable for understanding how evaluations assess responsible AI behavior.
 
 #### Review the "Always Pass" Test Set Results
 
