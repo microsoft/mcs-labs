@@ -122,7 +122,7 @@ labs:
   core-concepts-analytics-evaluations:
     title: "Monitor Performance and Evaluate Agent Quality"
     difficulty: "Intermediate"
-    duration: 45
+    duration: 30
     section: core
     order: 180
     journeys: [quick-start, business-user, developer]
