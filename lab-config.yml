@@ -102,6 +102,31 @@ labs:
       repository: "microsoft/agent-academy"
       description: "Comprehensive 13-lesson curriculum covering agents, LLMs, declarative & custom agents, Topics, Adaptive Cards, Agent Flows, and deployment to Teams and Microsoft 365 Copilot"
 
+  # === COPILOT STUDIO CORE CONCEPTS (170-189) ===
+  core-concepts-agent-knowledge-tools:
+    title: "Build Intelligent Agents with Knowledge Sources, Tools, and Topics"
+    difficulty: "Beginner to Intermediate"
+    duration: 45
+    section: core
+    order: 170
+    journeys: [quick-start, business-user, developer]
+
+  core-concepts-variables-agents-channels:
+    title: "Master Variables, Multi-Agent Architectures, and Channel Deployment"
+    difficulty: "Intermediate"
+    duration: 55
+    section: core
+    order: 175
+    journeys: [quick-start, business-user, developer]
+
+  core-concepts-analytics-evaluations:
+    title: "Monitor Performance and Evaluate Agent Quality"
+    difficulty: "Intermediate"
+    duration: 45
+    section: core
+    order: 180
+    journeys: [quick-start, business-user, developer]
+
   # === INTERMEDIATE LABS (200-299) ===
   setup-for-success:
     title: "Set yourself up for success & discover ALM best practices"
@@ -288,6 +313,9 @@ journeys:
         mbr-prep-sharepoint-agent,
         standard-orchestrator,
         agent-builder-m365,
+        core-concepts-agent-knowledge-tools,
+        core-concepts-variables-agents-channels,
+        core-concepts-analytics-evaluations,
         dataverse-mcp-connector,
         agent-academy-recruit,
       ]
@@ -304,6 +332,9 @@ journeys:
         public-website-agent,
         mbr-prep-sharepoint-agent,
         agent-builder-m365,
+        core-concepts-agent-knowledge-tools,
+        core-concepts-variables-agents-channels,
+        core-concepts-analytics-evaluations,
         agent-academy-recruit,
         contract-alerts-azure-ai,
         setup-for-success,
@@ -328,6 +359,9 @@ journeys:
       [
         mbr-prep-sharepoint-agent,
         standard-orchestrator,
+        core-concepts-agent-knowledge-tools,
+        core-concepts-variables-agents-channels,
+        core-concepts-analytics-evaluations,
         setup-for-success,
         agent-builder-sharepoint,
         ask-me-anything,
