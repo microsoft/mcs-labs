@@ -78,7 +78,7 @@ This lab takes you through the foundational steps of agent creation - from initi
 ## ✅ Prerequisites
 
 * Access to Microsoft Copilot Studio (trial or licensed environment)
-* A document to upload as a knowledge source (PDF, Word, or text file) - or use the Copilot Studio Licensing Guide from Microsoft Learn
+* A document to upload as a knowledge source (PDF, Word, or text file) - or use the [Copilot Studio Licensing Guide (February 2026)](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/microsoft-365/1084694-Microsoft-Copilot-Studio-Licensing-Guide-February-2026-PUB.pdf)
 * Basic familiarity with web browsers and form filling
 
 ---
@@ -263,10 +263,10 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 3. Select **Upload files** from the knowledge source options.
 
-4. Upload the **Copilot Studio Licensing Guide** (if you have a copy) or any relevant PDF document about Copilot Studio or a topic of your choice.
+4. Download and upload the [**Copilot Studio Licensing Guide (February 2026)**](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/microsoft-365/1084694-Microsoft-Copilot-Studio-Licensing-Guide-February-2026-PUB.pdf) or any relevant PDF document about Copilot Studio or a topic of your choice.
 
 > [!TIP]
-> You can upload multiple file types including PDF, Word documents (.docx), PowerPoint (.pptx), and text files. Each file can be up to 50 MB.
+> You can upload multiple file types including PDF, Word documents (.docx), PowerPoint (.pptx), and text files. Each file can be up to 512 MB.
 
 5. Wait for the file to upload and process. You'll see a status indicator showing the indexing progress.
 
