@@ -181,6 +181,14 @@ labs:
     order: 250
     journeys: [business-user, developer]
 
+  component-collections:
+    title: "Using Component Collections in Copilot Studio"
+    difficulty: "Intermediate"
+    duration: 30
+    section: intermediate
+    order: 260
+    journeys: [business-user, developer]
+
   # === ADVANCED LABS (300-399) ===
   autonomous-cua:
     title: "Build an autonomous agent that uses Computer Use to retrieve data from legacy systems that lack API connectivity"
@@ -342,6 +350,7 @@ journeys:
         ask-me-anything,
         human-in-the-loop,
         mcs-multi-agent,
+        component-collections,
         mcs-byom,
         data-fabric-agent,
         guildhall-custom-mcp,
@@ -367,6 +376,7 @@ journeys:
         ask-me-anything,
         human-in-the-loop,
         mcs-multi-agent,
+        component-collections,
         autonomous-cua,
         autonomous-account-news,
         autonomous-support-agent,
