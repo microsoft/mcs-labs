@@ -363,6 +363,69 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ### Step-by-step instructions
 
+#### Ensure that indexes are in place for our connected agent
+
+> [!IMPORTANT]
+> This is not required for a connected agent to work, but to make sure that the one we have pre-loaded for you will return results we must index a few tables in your environment.
+
+1. In top left click the menu button with 9 dots in the shape of a box and select **Power Apps**
+
+![Open Power Apps](images/image-19.png)
+
+2. In the left hand menu select **Tables**
+
+3. Select the **Account** table from the list
+
+4. Select **Views** from the Data experiences section
+
+5. Select **Quick Find Active Accounts** option from the list of Views
+
+6. Select **View Column** to add the following list of columns to the view:
+   - Address1: State or Providence
+   - Address1: Postal Code
+   - Address1
+   - Annual Revenue
+   - Currency
+
+![Account View](images/image-20.png)
+
+7. Add the ability to search on certain fields by adding the following items to the **Find by** on the bottom right clicking on **Edit find table columns** option:
+   - Address1: State or Providence
+   - Address1: Postal Code
+   - Address1: City
+
+![Add Account Searchable Columns](images/image-21.png)
+
+8. Click **Save and publish** to update the index
+
+> [!IMPORTANT]
+> DO NOT navigate away until the save and publish is completed!
+
+9. Click **Back** in the upper left corner to go back to the Views list
+
+10. Click on **Tables** in the Views screen to go back to the list of Tables
+
+![Navigate to Tables](images/image-22.png)
+
+11. Select **Contact** table from the list
+
+12. Select **Views** from the Data experiences section
+
+13. Select **Quick Find Active Contacts** option from the list of Views
+
+14. Select **View Column** to add the following list of columns to the view:
+    - Anniversary
+    - Birthday
+    - Job Title
+    - Marital Status
+
+![Column Add Contact](images/image-23.png)
+
+15. Click **Save and publish** to update the index
+
+> [!IMPORTANT]
+> DO NOT navigate away until the save and publish is completed!
+
 #### Test and Publish the Account and Contact Information Agent
 
 16. In the Copilot Studio tab in your browser open the **Account Data Lookup Agent**
@@ -382,6 +445,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 22. Close the Settings menu by clicking the **X** in the upper right hand corner
 
 23. Click **Publish** and make sure that your agent publishes
+
 > [!IMPORTANT]
 > You can't connect to an agent unless it is published
 
