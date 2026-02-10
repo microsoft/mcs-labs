@@ -8,7 +8,7 @@ Help makers understand how to leverage multi-agent configurations including chil
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | [30 minutes] | After completing this lab, participants will be able to leverage multi-agent configurations with Copilot Studio. This lab teaches the concepts of multi-agent and shows the difference of connected and child agent configurations. |
+| 300 | Maker | 30 minutes | After completing this lab, participants will be able to leverage multi-agent configurations with Copilot Studio. This lab teaches the concepts of multi-agent and shows the difference of connected and child agent configurations. |
 
 ---
 
@@ -28,19 +28,19 @@ Help makers understand how to leverage multi-agent configurations including chil
 
 ## 🤔 Why This Matters
 
-**Makers and Architects** - Want to know how to appropriately leverage mutli-agent configurations and when to use connected vs child agents to optimize how your agent orchestrates and is built for scale?
+**Makers and Architects** - Want to know how to appropriately leverage multi-agent configurations and when to use connected vs child agents to optimize how your agent orchestrates and is built for scale?
 
 Think of a complex agent that might have many tools and knowledge sets that should only be used when appropriate:
 - **Without Multi-Agent**: Makers are heavily limited in the number of orchestratable topics and tools they have at their disposal.
-- **With Multi-Agent**: Makers are able to logically group their tools, topics, and knowledge into contextualized agents that allows for additional instructions and descriptions to be used to guide their orchestration on the best way to find the data it is looking to provide to the user.
+- **With Multi-Agent**: Makers are able to logically group their tools, topics, and knowledge into contextualized agents that allow for additional instructions and descriptions to be used to guide their orchestration on the best way to find the data it is looking to provide to the user.
 
 **Common challenges solved by this lab:**
 - "Abusing connected agents"
 - "Not knowing if something should be a connected agent or child agent"
 - "Don't understand the capabilities and rationale of child agents"
-- "Not classifying their agents capabilities and putting excessive instructions in the Overiew instructions to compensate"
+- "Not classifying their agents' capabilities and putting excessive instructions in the Overview instructions to compensate"
 
-**Become a multij-agent master** - no need to continue to wonder about how to work around limitations of tools and topics that can be orchestrated or have the wrong tool being called at the wrong time.
+**Become a multi-agent master** - no need to continue to wonder about how to work around limitations of tools and topics that can be orchestrated or have the wrong tool being called at the wrong time.
 
 
 ---
@@ -70,7 +70,7 @@ By the end, you’ll have a working multi‑agent copilot capable of distributin
 
 | Concept | Why it matters |
 |---------|----------------|
-| **Child Agents** | Allows a maker to group common set of tools and knowledge including instructions into a logical group |
+| **Child Agents** | Allows a maker to group a common set of tools and knowledge including instructions into a logical group |
 | **Connected Agents** | Allows a maker to connect an external agent to another agent in Copilot Studio |
 | **Orchestration** | Allows a maker to let the agent decide what tools and agents are best to solve the user's request |
 
@@ -87,7 +87,7 @@ By the end, you’ll have a working multi‑agent copilot capable of distributin
 ## ✅ Prerequisites
 
 - Access to Microsoft Copilot Studio
-- Dataverse Search Enable in Environment
+- Dataverse Search enabled in environment
 - Access to Dataverse unbound action connector
 - Sample Data loaded into Dataverse Tables
 - Access to Account / Contact table in environment
@@ -101,8 +101,8 @@ In this lab, you'll build a parent agent that will leverage both connected agent
 
 - Create a parent agent for a Sales Associate
 - Configure a child agent that gets information about products
-* Connect to a connected agent that gets information about Accounts and Contacts
-* Use generative orchestration to select the correct agent and tools to execute the request 
+- Connect to a connected agent that gets information about Accounts and Contacts
+- Use generative orchestration to select the correct agent and tools to execute the request
 
 ---
 
@@ -111,7 +111,7 @@ In this lab, you'll build a parent agent that will leverage both connected agent
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
 | 1 | [Create Sales Assistant Agent](#-use-case-1-use-case-1-title) | Creates parent agent to help sales associate find information they need | [X min] |
-| 2 | [Create Product Information Child Agents](#-use-case-2-use-case-2-title) | Creates child aget to provide product information | [X min] |
+| 2 | [Create Product Information Child Agents](#-use-case-2-use-case-2-title) | Creates child agent to provide product information | [X min] |
 | 3 | [Connect to Account and Contact Information Agent](#-use-case-3-use-case-3-title) | Connect existing Copilot Studio agent that provides account and contact information | [X min] |
 
 ---
@@ -132,11 +132,11 @@ Creates parent agent to help sales associate find information they need
 
 In this section, you'll learn how to create a parent agent to use as the base agent for a Sales Associate Assistant.
 
-**Scenario:** Your Sales Team needs to be able to quickly be able to answer questions and help customers with information on your products and help with finding account and account contact information.
+**Scenario:** Your Sales Team needs to quickly answer questions and help customers with information on your products and with finding account and contact information.
 
 ### Objective
 
-Create the parent agent base that will be needed to host all your tools / agents / knowledge for sales associates.
+Create the parent agent base that will be needed to host all your tools, agents, and knowledge for sales associates.
 
 ---
 
@@ -146,27 +146,27 @@ Create the parent agent base that will be needed to host all your tools / agents
 
 1. Navigate to the Copilot Studio home page at https://copilotstudio.microsoft.com.
 
-2. On Home page in the description of the agent your want to build enter: `Agent that assists sales associates with getting product information and lookup account and contact information in the sales system.`
+2. On the Home page in the description of the agent you want to build, enter: `Agent that assists sales associates with getting product information and lookup account and contact information in the sales system.`
 
 > [!IMPORTANT]
 > Do not click Enter or submit this text yet as we need to do the agent settings before we do that.
 
 ![Home Creation Text](images/image.png)
 
-3. Click the **Gear** on the description input area and edit schema name to include `salesassistant` and then click **Update**
+3. Click the **Gear** on the description input area and edit the schema name to include `salesassistant` and then click **Update**
 
 ![Agent Settings](images/image-1.png)
 
 > [!TIP]
-> [Putting an agent into a dedicated solution and changing the schema name is always helpful for helping with application lifecycle management in the future]
+> Putting an agent into a dedicated solution and changing the schema name is always helpful for application lifecycle management in the future.
 
 4. Click **Enter** or the **Arrow** button on the description field
 
-5. Once your agent is fully provisioned, review the instructions and tool or knowledge reccomendations provided by the Copilot Studio provisioning process.
+5. Once your agent is fully provisioned, review the instructions and tool or knowledge recommendations provided by the Copilot Studio provisioning process.
 
 #### Prevent Hallucinations
 
-6. To ensure that our agent doesn't use model knowledge, we want to turn off some features. So select **Settings** (In the upper right hand corner)
+6. To ensure that our agent doesn't use model knowledge, we want to turn off some features. Select **Settings** (in the upper right-hand corner)
 
 7. Scroll to the bottom of the list of settings on the **Generative AI** settings screen and turn **Off** both **Use general knowledge** and **Use information from the Web**
 
@@ -175,7 +175,7 @@ Create the parent agent base that will be needed to host all your tools / agents
 8. Click **Save** and then **Close** the settings page
 
 > [!TIP]
-> [Turning off model and web knowledge helps to keep your agent from hallucinating information that the model might know about our product catalog or other items that might confuse it.  This is best practice if you want it to keep to just the content you provide.]
+> Turning off model and web knowledge helps to keep your agent from hallucinating information that the model might know about our product catalog or other items that might confuse it. This is best practice if you want it to keep to just the content you provide.
 
 #### Collect Sales Associate's Market
 
@@ -185,11 +185,11 @@ Create the parent agent base that will be needed to host all your tools / agents
 
 ![Create blank topic](images/image-3.png)
 
-11. Hover your mouse over the box that says **The agent chooses** and click the **Double Arrows** to show the Change Trigger menu then select **It's redirected to**
+11. Hover your mouse over the box that says **The agent chooses** and click the **Double Arrows** to show the Change Trigger menu, then select **It's redirected to**
 
 ![Set Trigger on Topic](images/image-4.png)
 
-12. Change the name of the Topic to `Select Market` by clicking on the name in the upper left hand navigation
+12. Change the name of the Topic to `Select Market` by clicking on the name in the upper left-hand navigation
 
 ![Set Topic Name](images/image-5.png)
 
@@ -219,13 +219,13 @@ Create the parent agent base that will be needed to host all your tools / agents
 
 ![Go To Conversation Start](images/image-10.png)
 
-21. Add a new node at the end of the topic by selecting the **+** and the selecting **Topic Management > Go to another topic > Select Market**
+21. Add a new node at the end of the topic by selecting the **+** and then selecting **Topic Management > Go to another topic > Select Market**
 
 ![Add Node to Conversation Start](images/image-11.png)
 
 22. Click **Save**
 
-23. Open the Test chat by click **Test** in the upper right hand corner
+23. Open the Test chat by clicking **Test** in the upper right-hand corner
 
 24. Click the **+** in the Test chat to start a new test session and verify that you now are asked which market at the beginning of each new chat.
 
@@ -239,7 +239,7 @@ Create the parent agent base that will be needed to host all your tools / agents
 
 ## 🔄 Use Case #2: Create Product Information Child Agents
 
-Create child agents that allow the user based on their market get the right product market information.
+Create child agents that allow the user, based on their market, to get the right product information.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
@@ -276,7 +276,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 ![Add instructions](images/image-15.png)
 
-8. Add Knowledge to the Child Agent by click **Add** in the Knowledge section of the Child Agent configuration
+8. Add Knowledge to the Child Agent by clicking **Add** in the Knowledge section of the Child Agent configuration
 
 9. Select **Public Websites**
 
@@ -311,7 +311,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 ![Add Child Agent Instructions UK](images/image-17.png)
 
-8. Add Knowledge to the Child Agent by click **Add** in the Knowledge section of the Child Agent configuration
+8. Add Knowledge to the Child Agent by clicking **Add** in the Knowledge section of the Child Agent configuration
 
 9. Select **Public Websites**
 
@@ -321,7 +321,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 12. Click **Save** to save your child agent
 
-13. Open the Test chat by click **Test** in the upper right hand corner
+13. Open the Test chat by clicking **Test** in the upper right-hand corner
 
 14. Click the **+** in the Test chat to start a new test session 
 
@@ -329,7 +329,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 16. Enter `What are the starting prices for the Surface laptop?`
 
-17. Verfiy that the correct Child agent was triggered and that your answer is appropriate for the UK market
+17. Verify that the correct child agent was triggered and that your answer is appropriate for the UK market
 
 ![Example Response UK question](images/image-18.png)
 
@@ -337,23 +337,23 @@ In this section, you'll learn how to create child agents to logically group know
 
 ---
 
-###  🏅 Congratulations! You've completed [USE CASE 2]!
+###  🏅 Congratulations! You've completed Use Case #2!
 
 ---
 
 ## 🧱 Use Case #3: Connect to Account and Contact Information Agent
 
-Connect Account and Contact Information agent to our parent Sales Associate Agent.  Will need to ensure indexing is working in environment ahead of testing.
+Connect the Account and Contact Information agent to our parent Sales Associate Agent. Will need to ensure indexing is working in the environment ahead of testing.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Connect to Account and Contact Information Agent | Connect to Account and Contact Information agent | [X minutes] |
+| Connect to Account and Contact Information Agent | Connect to an Account and Contact Information agent | [X minutes] |
 
 **Summary of tasks**
 
-In this section, you'll learn how to connect a Copilot Studio agent to another Copilot Studio connected agent using connected agents.
+In this section, you'll learn how to connect an existing Copilot Studio agent to your parent agent using the connected agents feature.
 
-**Scenario:** Your Sales Team needs to be able to quickly be able to answer questions and help customers with information on your products and help with finding account and account contact information.
+**Scenario:** Your Sales Team needs to quickly answer questions and help customers with information on your products and with finding account and contact information.
 
 ### Objective
 
@@ -386,11 +386,11 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 > [!IMPORTANT]
 > This is not required for a connected agent to work, but to make sure that the one we have pre-loaded for you will return results we must index a few tables in your environment.
 
-9. In top left click the menu button with 9 dots in the shape of a box and select **Power Apps**
+9. In the top left, click the menu button with 9 dots in the shape of a box and select **Power Apps**
 
 ![Open Power Apps](images/image-19.png)
 
-10. In the left hand menu select **Tables**
+10. In the left-hand menu select **Tables**
 
 11. Select the **Account** table from the list
 
@@ -407,7 +407,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ![Account View](images/image-20.png)
 
-15. Add the ability to search on certain fields by verifying that the following items are in the **Find by** on the bottom right clicking on **Edit find table columns** option:
+15. Add the ability to search on certain fields by verifying that the following items are in the **Find by** on the bottom right. Click the **Edit find table columns** option to check:
    - Address1: State or Providence
    - Address1: Postal Code
    - Address1: City
@@ -431,7 +431,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 21. Select **Quick Find Active Contacts** option from the list of Views
 
-22. Select **View Column** to verify the following list of columns to the view:
+22. Select **View Column** to verify the following columns are in the view:
     - Anniversary
     - Birthday
     - Job Title
@@ -446,9 +446,9 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 #### Test and Publish the Account and Contact Information Agent
 
-24. In the Copilot Studio tab in your browser open the **Account Data Lookup Agent**
+24. In the Copilot Studio tab in your browser, open the **Account Data Lookup Agent**
 
-25. Open the Test chat by click **Test** in the upper right hand corner
+25. Open the Test chat by clicking **Test** in the upper right-hand corner
 
 26. Enter `What are the accounts in Texas?`
 
@@ -456,11 +456,11 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ![Test Account Lookup](images/image-24.png)
 
-28. Click **Settings** in the upper right hand menu
+28. Click **Settings** in the upper right-hand menu
 
 29. Make sure that the setting in the Generative AI menu in the Connected Agents section for **Let other agents connect to and use this one** is set to **On**
 
-30. Close the Settings menu by clicking the **X** in the upper right hand corner
+30. Close the Settings menu by clicking the **X** in the upper right-hand corner
 
 31. Click **Publish** and make sure that your agent publishes
 
@@ -469,13 +469,13 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 #### Connect the Account and Contact Information Agent
 
-32. In the Copilot Studio tab in your browser open your parent agent (Sales Associate Assistant)
+32. In the Copilot Studio tab in your browser, open your parent agent (Sales Associate Assistant)
 
 33. Navigate to the **Agents** menu on the top navigation bar
 
 34. Click **Add an agent**
 
-35. Select **Account Data Lookup Agent** out of the menu
+35. Select **Account Data Lookup Agent** from the menu
 
 ![Select Connected Agent](images/image-26.png)
 
@@ -487,18 +487,18 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 38. Click **Add and configure**
 
-39. Open the Test chat by click **Test** in the upper right hand corner
+39. Open the Test chat by clicking **Test** in the upper right-hand corner
 
 40. Select **US** in the test canvas to select that geography
 
 41. Enter `What are all of the details of accounts in Texas?` and send to agent
 
-42. Notice that the agent orchestrated to the connected agent which then called it's child agent that then called numerous tools to answer the question.
+42. Notice that the agent orchestrated to the connected agent which then called its child agent that then called numerous tools to answer the question.
 
 ![Account Info Results](images/image-25.png)
 
 ---
 
-###  🏅 Congratulations! You've completed [USE CASE 3]!
+###  🏅 Congratulations! You've completed Use Case #3!
 
 ---
