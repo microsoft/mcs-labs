@@ -363,24 +363,42 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ### Step-by-step instructions
 
+#### Make sure that Dataverse Search is set to on
+
+1. In the upper right-hand corner of Copilot Studio, click the **Gear** icon
+
+2. Select **Go to Power Platform admin center**
+
+3. In the left navigation, select **Environments**
+
+4. Select your environment from the list
+
+5. Select **Settings** in the top menu
+
+6. Expand **Product** and select **Features**
+
+7. In the Search section, ensure **Dataverse search** is turned **On**
+
+8. Click **Save** if you made any changes
+
 #### Ensure that indexes are in place for our connected agent
 
 > [!IMPORTANT]
 > This is not required for a connected agent to work, but to make sure that the one we have pre-loaded for you will return results we must index a few tables in your environment.
 
-1. In top left click the menu button with 9 dots in the shape of a box and select **Power Apps**
+9. In top left click the menu button with 9 dots in the shape of a box and select **Power Apps**
 
 ![Open Power Apps](images/image-19.png)
 
-2. In the left hand menu select **Tables**
+10. In the left hand menu select **Tables**
 
-3. Select the **Account** table from the list
+11. Select the **Account** table from the list
 
-4. Select **Views** from the Data experiences section
+12. Select **Views** from the Data experiences section
 
-5. Select **Quick Find Active Accounts** option from the list of Views
+13. Select **Quick Find Active Accounts** option from the list of Views
 
-6. Select **View Column** to add the following list of columns to the view:
+14. Select **View Column** to verify the following list of columns are in the view:
    - Address1: State or Providence
    - Address1: Postal Code
    - Address1
@@ -389,31 +407,31 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ![Account View](images/image-20.png)
 
-7. Add the ability to search on certain fields by adding the following items to the **Find by** on the bottom right clicking on **Edit find table columns** option:
+15. Add the ability to search on certain fields by verifying that the following items are in the **Find by** on the bottom right clicking on **Edit find table columns** option:
    - Address1: State or Providence
    - Address1: Postal Code
    - Address1: City
 
 ![Add Account Searchable Columns](images/image-21.png)
 
-8. Click **Save and publish** to update the index
+16. Click **Save and publish** to update the index
 
 > [!IMPORTANT]
 > DO NOT navigate away until the save and publish is completed!
 
-9. Click **Back** in the upper left corner to go back to the Views list
+17. Click **Back** in the upper left corner to go back to the Views list
 
-10. Click on **Tables** in the Views screen to go back to the list of Tables
+18. Click on **Tables** in the Views screen to go back to the list of Tables
 
 ![Navigate to Tables](images/image-22.png)
 
-11. Select **Contact** table from the list
+19. Select **Contact** table from the list
 
-12. Select **Views** from the Data experiences section
+20. Select **Views** from the Data experiences section
 
-13. Select **Quick Find Active Contacts** option from the list of Views
+21. Select **Quick Find Active Contacts** option from the list of Views
 
-14. Select **View Column** to add the following list of columns to the view:
+22. Select **View Column** to verify the following list of columns to the view:
     - Anniversary
     - Birthday
     - Job Title
@@ -421,61 +439,61 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ![Column Add Contact](images/image-23.png)
 
-15. Click **Save and publish** to update the index
+23. Click **Save and publish** to update the index
 
 > [!IMPORTANT]
 > DO NOT navigate away until the save and publish is completed!
 
 #### Test and Publish the Account and Contact Information Agent
 
-16. In the Copilot Studio tab in your browser open the **Account Data Lookup Agent**
+24. In the Copilot Studio tab in your browser open the **Account Data Lookup Agent**
 
-17. Open the Test chat by click **Test** in the upper right hand corner
+25. Open the Test chat by click **Test** in the upper right hand corner
 
-18. Enter `What are the accounts in Texas?`
+26. Enter `What are the accounts in Texas?`
 
-19. Verify that you get a response showing that the agent is working and the data is indexed
+27. Verify that you get a response showing that the agent is working and the data is indexed
 
 ![Test Account Lookup](images/image-24.png)
 
-20. Click **Settings** in the upper right hand menu
+28. Click **Settings** in the upper right hand menu
 
-21. Make sure that the setting in the Generative AI menu in the Connected Agents section for **Let other agents connect to and use this one** is set to **On**
+29. Make sure that the setting in the Generative AI menu in the Connected Agents section for **Let other agents connect to and use this one** is set to **On**
 
-22. Close the Settings menu by clicking the **X** in the upper right hand corner
+30. Close the Settings menu by clicking the **X** in the upper right hand corner
 
-23. Click **Publish** and make sure that your agent publishes
+31. Click **Publish** and make sure that your agent publishes
 
 > [!IMPORTANT]
 > You can't connect to an agent unless it is published
 
 #### Connect the Account and Contact Information Agent
 
-24. In the Copilot Studio tab in your browser open your parent agent (Sales Associate Assistant)
+32. In the Copilot Studio tab in your browser open your parent agent (Sales Associate Assistant)
 
-25. Navigate to the **Agents** menu on the top navigation bar
+33. Navigate to the **Agents** menu on the top navigation bar
 
-26. Click **Add an agent**
+34. Click **Add an agent**
 
-27. Select **Account Data Lookup Agent** out of the menu
+35. Select **Account Data Lookup Agent** out of the menu
 
 ![Select Connected Agent](images/image-26.png)
 
-28. Notice that the Description provides details on when to use this agent
+36. Notice that the Description provides details on when to use this agent
 
-29. Make sure that the **Pass conversation history to this agent** is **Checked**
+37. Make sure that the **Pass conversation history to this agent** is **Checked**
 
 ![Validate Setting Connected Agent](images/image-27.png)
 
-30. Click **Add and configure**
+38. Click **Add and configure**
 
-31. Open the Test chat by click **Test** in the upper right hand corner
+39. Open the Test chat by click **Test** in the upper right hand corner
 
-32. Select **US** in the test canvas to select that geography
+40. Select **US** in the test canvas to select that geography
 
-33. Enter `What are all of the details of accounts in Texas?` and send to agent
+41. Enter `What are all of the details of accounts in Texas?` and send to agent
 
-34. Notice that the agent orchestrated to the connected agent which then called it's child agent that then called numerous tools to answer the question.
+42. Notice that the agent orchestrated to the connected agent which then called it's child agent that then called numerous tools to answer the question.
 
 ![Account Info Results](images/image-25.png)
 
