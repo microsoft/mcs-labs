@@ -145,66 +145,34 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 1. Navigate to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and sign in with your credentials.
 
-2. Click **Create** in the left navigation menu, then select **New agent**.
+1. In the agent creation form, provide the following information and select **Send**:
 
-3. In the agent creation form, provide the following information:
+   ```
+   Provide information and guidance on how to use Copilot Studio and prompt engineering.
+   ```
+1. Wait for the "Your agent has been provisioned." notification.
 
-```
-Provide information and guidance on how to use Copilot Studio and prompt engineering.
-```
+1. In the Details pane, select **Edit**
 
-4. Set the agent name:
+1. Set the agent name to **Copilot Studio Assistant** and select **Save**:
 
-```
-Copilot Studio Assistant
-```
+1. Review the Instructions pane details, this prompt was created by Copilot Studio from your initial description. It should basically tell the agent to "Help users write prompts, create PowerFX formulas, and with navigating Copilot Studio features."
 
-5. Add detailed instructions for the agent:
+   > [!TIP]
+   > Clear, specific instructions help your agent understand its role and provide consistent responses. Think of instructions as the agent's job description.
 
-```
-You should help users write prompts, create PowerFX formulas, and with navigating Copilot Studio features.
-```
+1. Scroll down to the **Knowledge** section and select **Add Knowledge**.
 
-6. Add a knowledge source URL (we'll add more knowledge in Use Case #2):
+1. Select Public website from the list of knowledge source options.
 
-```
-https://learn.microsoft.com
-```
+1. Input https://learn.microsoft.com and select **Add**
 
-7. Click **Create** to initialize your agent.
+1. The website should appear in the list of links, select **Add to agent** to save the change.
 
-> [!TIP]
-> Clear, specific instructions help your agent understand its role and provide consistent responses. Think of instructions as the agent's job description.
-
-#### Configure Agent Settings
-
-8. Once your agent is created, click **Instructions** in the left panel to review the instructions you provided during setup.
-
-9. Review how your instructions appear in the agent configuration. These instructions guide every response the agent provides.
-
-10. Click **Knowledge** in the left panel to see the Microsoft Learn website you added as a knowledge source.
-
-> [!NOTE]
-> Knowledge sources are indexed and used by the agent to ground responses in factual content. The indexing process may take a few minutes.
-
-11. Click **Suggested prompts** in the left panel to view default prompts. These help users understand what questions they can ask.
-
-#### Select the AI Model
-
-12. Navigate to **Settings** in the top navigation bar.
-
-13. Find the **AI Model** section in the settings panel.
-
-14. Change the model from the default to **GPT-4.1** (or the latest GPT-4 version available).
-
-> [!IMPORTANT]
-> GPT-4 models provide superior reasoning and understanding compared to earlier models. Choose GPT-4 for production scenarios where accuracy and quality matter most.
-
-15. Click **Save** to apply the model change.
 
 #### Test Your Agent
 
-16. In the test panel on the right side of the screen, enter the following question:
+1. In the test panel on the right side of the screen, enter the following question and select **Send**:
 
 ```
 How do I begin using Copilot Studio?
@@ -268,65 +236,71 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 #### Add Document Knowledge Source
 
-1. In your Copilot Studio agent, click **Knowledge** in the left navigation panel.
+1. In your Copilot Studio agent, Select  **Knowledge** in the top navigation bar for the agent.
 
-2. Click **Add knowledge** or the **+ Add** button to add a new knowledge source.
+1. Download the [**Copilot Studio Licensing Guide**](https://go.microsoft.com/fwlink/?linkid=2320995). Just make sure you have the file local on your computer.
 
-3. Select **Upload files** from the knowledge source options.
+1. Select **Upload files** and use the file dialog to locate and select your downloaded license guide file from your local computer.
 
-4. Download and upload the [**Copilot Studio Licensing Guide (February 2026)**](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/microsoft-365/1084694-Microsoft-Copilot-Studio-Licensing-Guide-February-2026-PUB.pdf) or any relevant PDF document about Copilot Studio or a topic of your choice.
+   > [!TIP]
+   > You can upload multiple file types including PDF, Word documents (.docx), PowerPoint (.pptx), and text files. Each file can be up to 512 MB.
 
-> [!TIP]
-> You can upload multiple file types including PDF, Word documents (.docx), PowerPoint (.pptx), and text files. Each file can be up to 512 MB.
+1. Select **Add to agent**.
 
-5. Wait for the file to upload and process. You'll see a status indicator showing the indexing progress.
+1. The processing of the file will take a few minutes. While it processes select **Add knowledge** again and take a minute to review the other types of knowledge sources you can use. 
 
-> [!NOTE]
-> Knowledge indexing typically takes 2-5 minutes depending on the document size. Larger documents or multiple files may take longer.
+1. Select **Advanced** and review that list of sources as well. When you are done reviewing select **Cancel** to return to the list of your agents configured knowledge sources.
+
+1. Wait for the file to finish processing if not already done. You'll see a status indicator showing the indexing progress. When it is done it will say **Ready** in the Status column.
+
+   > [!NOTE]
+   > Knowledge indexing typically takes 2-5 minutes depending on the document size. Larger documents or multiple files may take longer.
 
 #### Configure Knowledge Source Settings
 
-6. Once the document is indexed, click on the knowledge source to view its details.
+1. Once the document is indexed, Select on the knowledge source to view its details.
 
-7. Review the **Name** and **Description** fields. Update if needed to make the source easily identifiable.
+1. Review the **Name** and **Description** fields. Update if needed to make the source easily identifiable.
 
-8. Ensure the knowledge source is **Enabled** (toggle should be on).
+1. Ensure the knowledge source is **Enabled** (toggle should be on).
 
-> [!IMPORTANT]
-> Disabled knowledge sources won't be used in agent responses. Always verify your knowledge sources are enabled after adding them.
+   > [!IMPORTANT]
+   > Disabled knowledge sources won't be used in agent responses. Always verify your knowledge sources are enabled after adding them.
 
 #### Test Knowledge Integration
 
-9. In the test panel on the right, click **Refresh** or start a new conversation to ensure the agent uses the latest knowledge.
+1. In the test panel on the right, click **Refresh** or start a new conversation to ensure the agent uses the latest knowledge.
 
-10. Enter the following question to test the newly added knowledge:
+1. Enter the following question to test the newly added knowledge and select **Send**:
 
-```
-How do I license Copilot Studio with pay as you go?
-```
+   ```
+   How do I license Copilot Studio with pay as you go?
+   ```
 
-11. Review the agent's response. It should now reference the specific licensing information from the uploaded document.
+1. Review the agent's response. It should now reference the specific licensing information from the uploaded document.
 
-12. Look for citations or references in the response that indicate which knowledge source was used.
+1. Look for citations or references in the response that indicate which knowledge source was used.
 
-> [!TIP]
-> Agents typically show citations at the bottom of responses, indicating which knowledge sources contributed to the answer. This helps users verify information accuracy.
+   > [!TIP]
+   > Agents typically show citations at the bottom of responses, indicating which knowledge sources contributed to the answer. This helps users verify information accuracy.
 
 #### Add Additional Knowledge Sources
 
-13. Return to the **Knowledge** panel and click **+ Add** again.
+1. Return to the **Knowledge** panel on the **Overview** tab on the agent and click **+ Add Knowledge** again.
 
-14. This time, select **Public website** as the knowledge source type.
+1. This time, select **Public websites** as the knowledge source type.
 
-15. Add additional relevant URLs if desired:
+1. Input https://www.nngroup.com/articles/careful-prompts/ and select **Add**.
 
-```
-https://www.nngroup.com/articles/careful-prompts/
-```
+1. Select **Add to agent**.
 
-16. Wait for the website content to be indexed.
+1. Wait for the website content to be indexed.
 
-17. Test the agent with a question that would be answered by this new knowledge source.
+1. Test the agent with the following question:
+
+   ```
+   Explain CAREful prompts to me?
+   ```
 
 ---
 
@@ -360,7 +334,7 @@ Build two different types of tools: a connector-based weather tool and a custom 
 
 **Summary of tasks**
 
-In this section, you'll learn how to create tools using pre-built connectors, build custom tools with prompts and inputs, configure authentication, and add agent-level instructions for tool usage.
+In this section, you'll learn how to create agent tools using pre-built connectors, build custom tools with prompts and inputs, configure authentication, and add agent-level instructions for tool usage.
 
 **Scenario:** Your Copilot Studio Assistant needs to help users in two ways: (1) fetch real-time weather data when users ask about weather conditions, and (2) analyze user prompts and provide feedback based on prompt engineering best practices (CARE framework).
 
@@ -376,121 +350,132 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. Open your Copilot Studio agent (the one you created in Use Case #1).
 
-2. Click **Tools** in the left navigation panel.
+1. Select **Tools** in the agent's top navigation bar.
 
-3. Review the Tools page to understand the available options for creating new tools.
+1. Select **Add a tool** and review the Tools page to understand the available options for creating new tools.
 
-#### Create a Weather Connector Tool
+1. Select **Connector** as the tool type (or browse available connectors).
 
-4. Click **+ Add tool** to create a new tool.
+1. Search for and in the **MSN Weather** connector section select the **Get current weather** action.
 
-5. Select **Connector** as the tool type (or browse available connectors).
+1. For the Connection, select **Create new connection**.
 
-6. Search for and select the **MSN Weather** connector (or similar weather service connector).
+1. When prompted, select **Create** to create the connection.
 
-7. Configure the weather connector:
-   - Select the action **Get current weather**
-   - Set the _Tool name_ to `Get Weather`
+1. Select **Add and configure** to add this tool to the agent.
 
-8. Configure authentication by selecting **Maker credentials**.
+1. Configure authentication by expanding the Additional details section and selecting **Maker-provided credentials** in the Credentials to use option.
 
-> [!IMPORTANT]
-> Maker credentials mean the tool authenticates using YOUR account. This is suitable for testing and internal tools. For production scenarios with end users, use connection references.
+   > [!IMPORTANT]
+   > Maker credentials mean the tool authenticates using YOUR account. This is suitable for testing and internal tools. For production scenarios with end users, use connection references.
 
-9. If prompted, sign in to authorize the weather connector with your credentials.
-
-10. Review the tool configuration and click **Save** or **Create**.
+1. Review the tool configuration and click **Save** .
 
 #### Test the Weather Tool
 
-11. In the test panel on the right, start a new conversation.
+1. In the test panel on the right, start a new conversation by selecting the + icon in the upper right corner of the test panel.
 
-12. Ask the following question:
+1. Ask the following question:
 
-```
-What is the weather?
-```
+   ```
+   What is the weather?
+   ```
 
-13. When the agent asks for a location, respond:
+1. When the agent asks for a location, respond:
+   ```
+   Orlando
+   ```
+1. If the agent asks your preference of Imperial or Metric choose your preference.
 
-```
-Orlando
-```
+1. Review the weather information returned by the agent. Notice how it uses the tool to fetch real-time data.
 
-14. Review the weather information returned by the agent. Notice how it uses the tool to fetch real-time data.
+   > [!TIP]
+   > If the agent doesn't use the tool automatically, check that the tool is enabled and that you've saved your agent configuration.
 
-> [!TIP]
-> If the agent doesn't use the tool automatically, check that the tool is enabled and that you've saved your agent configuration.
 
 #### Create a Custom Prompt Analyzer Tool
 
-15. Click **+ Add tool** again to create another tool.
+1. Select **Overview** in the agent's top navigation bar. 
 
-16. This time, select **Create a new tool** or **Custom tool** (depending on your interface).
+1. Scroll down to the **Tools** pane. This is the same list of tools from the agent's top navigation bar  **Tools** option.
 
-17. Configure the tool with the following details:
+1. Select **Add tool** to add another tool.
 
-**Tool Name:**
-```
-Prompt Analyzer
-```
+1. In the **Create new** section, select **Prompt**.
 
-**Tool Description:**
-```
-This tool is used to analyze a prompt that a user provides.
-```
+1. Select the current name e.g., **Custom prompt...** at the top left and change the name to **Prompt Analyzer**.
 
-18. In the **Prompt** section, add the following instruction:
+1. In the **Instructions** section, add the following :
 
-```
-Analyze this prompt (replace with text) based upon the CARE Prompt Guidance to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
-```
+   ```
+   Analyze this prompt (replace with text) based upon the CARE Prompt Guidance to determine what are recommendations on how to improve writing the prompt and if it is very good.  The intent of this prompt is to (replace with intent). Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
+   ```
+1. In the instructions you just pasted select ** (replace with text)**.
 
-#### Configure Tool Inputs
+1. With ** (replace with text)** still selected, in the lower left of the dialog, select **Add content**
 
-19. Click **+ Add input** to create the first input parameter.
+1. Select Text from the list of content types.
 
-20. Configure the input:
-   - _Name_: `PromptToAnalyze`
-   - _Description_: `The prompt that the user wants to be analyzed. Always ask for this from the user no matter what. The prompt should include the entirety of the prompt that the user wants analyzed for feedback.`
-   - _Sample value_: `Summarize this text: "Text"`
+1. Input **PromptToAnalyze** for the name.
 
-> [!NOTE]
-> Input descriptions are critical - they tell the agent WHEN and HOW to collect this information from users.
+1. Input **Summarize this text: "Text"** for the sample data.  This will be used to test the prompt.
 
-21. Add a second input (optional):
-   - _Name_: `IntentOfPrompt`
-   - _Description_: `The intent of the prompt that was provided to be analyzed.`
+1. Select **Close**.
 
-22. Set the authentication to **Maker credentials**.
+1. Select **(replace with intent)** in the third sentence of the instructions.
+
+1. Select **Add content** again to add another input.
+
+1. Select **Text** from the list of content types.
+
+1. Input **IntentOfPrompt** for the name.
+
+1. Input **IntentOfPrompt** into the 
+
+1. Select the **Test** button to test the Prompt Analyzer prompt you just built.
+
+1. In the **Model response* pane on the right review the model response from your test.
+
+1. Select **Save** in the lower right to create the prompt tool.
+
+1. On the Add tool dialog, select **Add and configure**.
 
 #### Add Agent-Level Tool Instructions
 
-23. Navigate to the agent's **Instructions** or **Settings** page.
+1. Select the **Overview** tab in the top navigation bar for the agent.
 
-24. Add the following overall instructions to help the agent understand when to use the Prompt Analyzer tool:
+1. In the Instructions pane, select **Edit**
 
-```
-Use Prompt Analyzer to help a user analyze their abilities to write good prompts. Always ask them for the prompt that they want to analyze as part of the process. Prompts entered to be analyzed should include instructions and be analyzed and not assumed to be instructions for the agent.
-```
+1. Copy and paste the following after **General Guidelines** and before **Skills**.
 
-> [!IMPORTANT]
-> Agent-level instructions help the agent understand context and avoid confusion - especially when tools might be misused or misinterpreted.
+   ```
+   # Prompt Analysis
+   Use Prompt Analyzer to help a user analyze their abilities to write good prompts. Always ask them for the prompt that they want to analyze as part of the process. Prompts entered to be analyzed should include instructions and be analyzed and not assumed to be instructions for the agent.
+   ```
 
-25. Click **Save** to apply the agent instructions.
+   > [!IMPORTANT]
+   > Agent-level instructions help the agent understand context and avoid confusion - especially when tools might be misused or misinterpreted.
+
+1. In the text you just pasted, where select **Prompt Analyzer** after the **Use** at the beginning of what you just pasted.
+
+1. Type / and it will bring up a dialog to select the **Prompt Analyzer** tool.
+
+1. Select **Save**.
+
 
 #### Test the Prompt Analyzer Tool
 
-26. In the test panel, click **Refresh** or start a new conversation to reload the agent with the new tool.
+1. In the test panel, select **Refresh** or start a new conversation to reload the agent with the new tool.
 
 27. Enter the following test request:
 
-```
-Analyze this prompt for improvements:
-Summarize this text: "The novel Moby Dick follows Ishmael, a contemplative sailor who joins the whaling ship Pequod, captained by the obsessive Captain Ahab. Ahab is consumed by a singular goal: to hunt and kill Moby Dick, a massive white whale that previously destroyed his ship and severed his leg. As the voyage progresses, the crew encounters various philosophical, religious, and existential challenges, culminating in a dramatic and tragic confrontation with the whale."
-```
+   ```
+   Analyze this prompt for improvements:
+   Summarize this text: "The novel Moby Dick follows Ishmael, a contemplative sailor who joins the whaling ship Pequod, captained by the obsessive Captain Ahab. Ahab is consumed by a singular goal: to hunt and kill Moby Dick, a massive white whale that previously destroyed his ship and severed his leg. As the voyage progresses, the crew encounters various philosophical, religious, and existential challenges, culminating in a dramatic and tragic confrontation with the whale."
+   ```
+1. When asked for the intent input **Summarize the text**.
 
-28. Review the agent's analysis. It should provide structured feedback on the prompt using the CARE framework.
+1. Review the agent's analysis. It should provide structured feedback on the prompt using the CARE framework.
 
 29. Observe how the tool uses markdown formatting with bold text and bullets to make the response visually appealing.
 
@@ -505,7 +490,7 @@ Summarize this text: "The novel Moby Dick follows Ishmael, a contemplative sailo
 **Key takeaways:**
 
 * **Connector Tools Provide Real-Time Data** – Pre-built connectors offer instant access to external services without API development
-* **Custom Tools Enable Specialized Actions** – Build purpose-built tools with custom prompts and inputs for unique business requirements
+* **Prompts Enable Specialized Actions** – Build purpose-built tools with custom prompts and inputs for unique business requirements
 * **Agent Instructions Guide Tool Usage** – Clear agent-level instructions prevent tool misuse and ensure proper context
 
 **Lessons learned & troubleshooting tips:**
@@ -548,40 +533,41 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
 
 #### Create a Topic with Description
 
-1. In your Copilot Studio agent, click **Topics** in the left navigation panel.
+1. In your Copilot Studio agent, click **Topics** in the top navigation bar.
 
-2. Click **+ Add topic** or **New topic** to create a topic.
+1. Select **+ Add topic**.
 
-3. Select **Create from description** (or **From description with Copilot**) if available.
+1. Select **Add from description with Copilot**.
 
-4. Enter the following description:
+1. Input **Join Copilot Studio Mailing List** for the name of your topic.
 
-```
-Join Copilot Studio Mailing List
+1. Input the following description in the **Create a topic to...**:
 
-Let the user provide their email address, first and last name to be added to the email mailing list for copilot studio announcements.
-```
+   ```
+   Join Copilot Studio Mailing List. Let the user provide their email address, first and last name to be added to the email mailing list for copilot studio announcements.
+   ```
 
-5. Click **Create** or **Generate** to let Copilot Studio build the topic structure.
+1. Select **Create** to let Copilot Studio build the topic structure.
 
-6. Review the generated topic. Notice how Copilot Studio creates:
+1. Review the generated topic. Notice how Copilot Studio creates:
    - A trigger phrase
    - Question nodes to collect email, first name, and last name
    - Message nodes to confirm actions
 
-> [!TIP]
-> Creating topics from descriptions is the fastest way to build conversation flows. Copilot Studio uses AI to generate the structure based on your natural language description.
+   > [!TIP]
+   > Creating topics from descriptions is the fastest way to build conversation flows. Copilot Studio uses AI to generate the structure based on your natural language description.
 
-#### Explore Topic Nodes and Options
+1. Select **Save** in the upper corner of the topic design pane to save the current progress of the topic.
 
-7. Review the topic canvas and identify the different node types:
+
+1. Review the topic canvas and identify the different node types:
    - **Trigger node**: Defines what phrases activate this topic
    - **Message nodes**: Display text to the user
    - **Question nodes**: Collect input from users
    - **Condition nodes**: Create branching logic
    - **Action nodes**: Call flows, tools, or connectors
 
-8. Click the **+** button between nodes to see all available node options:
+1. Select the **+** button between nodes to see all available node options:
    - Send a message
    - Ask a question
    - Add a condition
@@ -590,74 +576,69 @@ Let the user provide their email address, first and last name to be added to the
    - Set a variable
    - End the conversation
 
-> [!NOTE]
-> Understanding node types is essential for building sophisticated conversation flows. Each node type serves a specific purpose in the conversation logic.
+   > [!NOTE]
+   > Understanding node types is essential for building sophisticated conversation flows. Each node type serves a specific purpose in the conversation logic.
 
-#### Add Backend Integration Point
-
-9. At the end of your topic (after collecting email, first name, and last name), click **+** to add a new node.
-
-10. Select **Call an action** or **Call a connector** from the node options.
-
-11. Notice that you could select:
+1. Notice that you could select:
     - **Power Automate Flow** (to submit data to a backend system)
     - **Connector** (to write directly to a database or service)
     - **Tool** (to process the collected data)
 
-> [!IMPORTANT]
-> For production scenarios, you would connect to a real backend system here. For this lab, we're demonstrating the concept without actual submission.
+   > [!IMPORTANT]
+   > For production scenarios, you would connect to a real backend system here. For this lab, we're demonstrating the concept without actual submission.
 
-12. For now, add a **Message** node instead that says:
+1. Check your nodes and if you don't already have a node that thanks the user then select + after the last node and select a **Message** node.
 
-```
-Thank you! Your information has been recorded. (In production, this would submit to the mailing list system.)
-```
+1. Input the following as the message
+   ```
+   Thank you! Your information has been recorded. (In production, this would submit to the mailing list system.)
+   ```
 
-13. Click **Save** to save your topic.
+11. Select **Save** to save your topic.
 
 #### Test the Mailing List Topic
 
-14. In the test panel, start a new conversation.
+1. In the test panel, start a new conversation by selecting the + in the upper right corner of the test pane.
 
-15. Enter the following trigger phrase:
+1. Enter the following trigger phrase:
 
-```
-I want to get notified when there is news about Copilot Studio.
-```
+   ```
+   I want to get notified when there is news about Copilot Studio.
+   ```
 
-16. The agent should recognize this intent and activate your mailing list topic.
+1. The agent should recognize this intent and activate your mailing list topic.
 
-17. Follow the conversation flow:
+1. Follow the conversation flow:
     - Provide an email address when asked
     - Provide your first name
     - Provide your last name
 
-18. Observe how the agent guides you through the structured flow and confirms the submission.
+1. Observe how the agent guides you through the structured flow and confirms the submission.
 
 #### Create a Topic from Blank (Optional Advanced Exercise)
 
-19. Click **+ Add topic** again.
+1. Select **+ Add topic** again.
 
-20. This time, select **Create from blank** to build a topic manually.
+1. This time, select **Create from blank** to build a topic manually.
 
-21. Explore the blank canvas and available options:
+1. Explore the blank canvas and available options:
     - Add trigger phrases manually
     - Build conversation flow node by node
     - Configure conditions and branching logic
 
-22. Notice the **Trigger** options at the top:
+1. Notice the **Trigger** options at the top:
     - **Phrases**: Text patterns that activate the topic
     - **Events**: System events (conversation start, escalation, etc.)
     - **Automation**: Scheduled or triggered activations
 
-> [!TIP]
-> Building from blank gives you complete control but takes more time. Use description-based creation for speed, then refine manually if needed.
+   > [!TIP]
+   > Building from blank gives you complete control but takes more time. Use description-based creation for speed, then refine manually if needed.
 
 #### Explore All Node Options
 
-23. In your blank topic (or any existing topic), click **+** to add a node.
+1. In your blank topic (or any existing topic), click **+** to add a node.
 
-24. Review all available node types and think about when you would use each:
+1. Review all available node types and think about when you would use each:
     - **Send a message**: Display information or confirmation
     - **Ask a question**: Collect user input
     - **Condition**: Branch based on variable values or logic

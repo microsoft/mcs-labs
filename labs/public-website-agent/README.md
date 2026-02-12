@@ -311,7 +311,7 @@ In this section, you'll disable general knowledge to reduce hallucinations, then
 
 15. Notice how generative orchestration performs multiple searches and triggers the weather connector to provide a comprehensive answer.
 
-![alt text](images/generative-orchestration.png)
+![Generative orchestration example](images/generative-orchestration.png)
 
 ---
 
@@ -386,7 +386,7 @@ In this section, you'll customize built-in system topics to improve user interac
    - `Who is the current CEO of the company that owns GitHub? Where did they earn their MBA? What's the average rent for a one-bedroom apartment near that campus? What's the air quality index in that area today?`
    - `What's the temperature in the city that hosted the last Olympic Games?`
 
-    ![alt text](images/conversation-start.png)
+    ![Conversation starters](images/conversation-start.png)
 
 > [!TIP]
 > - You can test your changes in a topic without needing to save. Just refresh the test pane to get the latest experience.
@@ -486,7 +486,7 @@ In this section, you'll remove authentication to make your agent publicly access
 
 9. **Copy** the demo website URL, open it in a new tab, and interact with your agent.
 
-![alt text](images/demo-website.gif)
+![Demo Website](images/demo-website.gif)
 
 > [!TIP]
 > - The demo website URL can be shared with others for quick feedback before deployment
@@ -496,7 +496,7 @@ In this section, you'll remove authentication to make your agent publicly access
 
 ---
 
-###  🏅 Congratulations! You've published Nova AI to the demo website!
+###  🏅 Congratulations! You've published your agent to the demo website!
 
 ---
 

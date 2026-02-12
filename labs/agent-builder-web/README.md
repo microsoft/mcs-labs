@@ -119,33 +119,32 @@ Create, configure, and share a Copilot agent that serves as a knowledgeable guid
 #### Navigate to Microsoft 365 Copilot
 
 1. Navigate to [Microsoft 365 Copilot home page](https://m365.cloud.microsoft/chat/?auth=2&home=1)  
-   _Note: if you see 'coming soon' try again in a few minutes._
 
 > [!IMPORTANT]
 > - If the Microsoft 365 Copilot URL is `https://copilot.cloud.microsoft/` or if the Copilot pane is on the right-hand side, this means you're on the **wrong** page.
 > 
->   ![alt text](images/wrong-copilot-page.png)
+>   ![Wrong copilot page](images/wrong-copilot-page.png)
 > 
 > - To fix this, **close** the tab, then **go back to the SharePoint** page. Select the app launcher, and choose **Microsoft 365 Copilot** from there.
 >
->   ![alt text](images/app-launcher.png)
+>   ![App launcher](images/app-launcher.png)
 >
 > - The Copilot pane should be on the left-hand side of the page, and the URL should be `https://m365.cloud.microsoft/`. If you see this, you're on the right page:
 >
->   ![alt text](images/correct-copilot-page.png)
+>   ![Correct copilot page](images/correct-copilot-page.png)
 > 
 > - Make sure the **logged in user** is the fictitious one used in the lab. If you need your normal work user account, **select** the name and toggle to the fictitious user account.
 >
->   ![alt text](images/logged-in-user.png)
+>   ![Logged in user](images/logged-in-user.png)
 
 2. Go to the **Chat** tab.
 
 > [!TIP]  
 > Microsoft 365 Copilot and Copilot Chat are meant for internal, employee experiences – B2E (Business-to-Employee). When a user has access to both, they see a toggle in the user interface to switch between the Work (Microsoft 365 Copilot) and Web experiences (Copilot Chat).
 >
-> ![alt text](images/m365-copilot.png)
+> ![M365 copilot](images/m365-copilot.png)
 >  
-> **Microsoft 365 Copilot** is a per-user license ($30/user/mo.) with premium features:
+> **Microsoft 365 Copilot** is a per-user license  with premium features:
 > - Advanced agents like the research and analysts Frontier ones, grounded on enterprise data and using the latest reasoning models
 > - Surface areas (e.g., integration with Office applications)
 > - Knowledge sources (e.g., your enterprise data from Outlook, Teams or SharePoint)
@@ -165,18 +164,18 @@ Create, configure, and share a Copilot agent that serves as a knowledgeable guid
 ```
 Upcoming features in Microsoft Copilot Studio roadmap
 ```
-![alt text](images/simple-copilot-search.png)
+![Simple copilot search](images/simple-copilot-search.png)
 
 5. Select **Start a new chat** to reset.
 
 #### Create your agent
 
-6. On the side pane, expand **Agents** and select **Create agent**  
+6. On the side pane, expand **Agents** and select **New agent**  
 
 > [!TIP]  
-> If you don't see **Create agent**, try refreshing with Ctrl + F5. You user account may still be provisionning services.
+> If you don't see **New agent**, try refreshing with Ctrl + F5. You user account may still be provisionning services.
 
-7. Notice that you can explore existing **templates**. But for this lab, when prompted to **describe the agent**, reply with:
+7. Notice that you can explore existing **templates**. But for this lab, select the  **Describe** tab and copy/paste the following description into the input area to describe the agent you wish to build, then Select **send**:
 
 ```
 I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Agent Builder in Microsoft 365. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
@@ -185,7 +184,7 @@ I want to build a teacher-style agent that helps users learn about Copilot, incl
 > [!TIP]  
 > From here, you will find that the conversational creation experience might differ from the below step-by-step instructions, as it's using generative AI and it is by nature non-deterministic. The core concepts remain the same, but the UI may change slightly. Just adjust to the questions and options presented to you.
 
-8. *If* asked for agent name and other details, you can **instruct** it this:
+8. Agent Builder will try to determine a name for your agent from your initial prompt, if the name chosen is anything other than **Copilot Teacher**, then input the following prompt and select **send** to suggest an alternate agent name and tone:
 
 ```
 The name of the agent should be Copilot Teacher. Your tone should be friendly, personal, and emphatic. You can make jokes, use subtle irony and emojis when appropriate.
@@ -197,10 +196,10 @@ The name of the agent should be Copilot Teacher. Your tone should be friendly, p
 It shouldn't answer questions that are not related to Microsoft 365 Copilot, Copilot Chat, or Copilot Studio. Always guide users towards the correct solution based on your knowledge.
 ```
 
-10. When asked about **publicly accessible websites** as knowledge sources, **paste** these URLs:
+10. Agent Builder will try to identify potential knowledge sources, **paste** the following URLs to provide specific knowledge sources and select **send**:
 
 ```
-Yes, add https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.microsoft.com/en-us/microsoft-copilot-studio/
+Add https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.microsoft.com/en-us/microsoft-copilot-studio/ as knowledge sources
 ```
 
 > [!TIP]  
@@ -209,15 +208,15 @@ Yes, add https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://le
 
 #### Finalize configuration
 
-11. Now let's head over to the **Configure** tab. Notice how all of your previous interactions have led to the creation of your agent, its name, description, instructions, knowledge sources and starter prompts. Feel free to tweak them!
+11. Now select the **Configure** tab. Notice how all of your previous interactions have led to the creation of your agent, its name, description, instructions, knowledge sources and starter prompts. Feel free to tweak them!
 
-12. In the **Knowledge** section, toggle **Prioritize the knowledge sources you added for agent knowledge-based queries** so that the agent uses the configured websites when providing answers, and not its own large language model knowledge.
+12. In the **Knowledge** section, toggle the **Only use selected sources* option so that the agent uses the configured websites when providing answers, and not its own large language model knowledge.
 
 13. Fix any issue like max character limit for start prompt titles.
 
-14. You can test your agent in the test pane. When ready, select **Create**.
+14. You can test your agent in the test pane. When ready, select **Create** in the upper right corner to create the agent.
 
-![alt text](images/agent-builder.png)
+![Agent builder](images/agent-builder.png)
 
 #### Share and test your agent
 
@@ -234,7 +233,7 @@ What are the differences between Microsoft 365 Copilot and Copilot Chat?
 > [!TIP]
 >  If your training tenant is getting throttled because of lack of AI capacity (to prioritize production workloads), you may see a message like this: `Sorry, I wasn't able to respond to that. Is there something else I can help with?`. It's OK, **just test your agent while configuring it**, and not after you created it. You may try again later.
 
->   ![alt text](images/copilot-error.png)
+>   ![Copilot error](images/copilot-error.png)
 
 > [!IMPORTANT]  
 > If you need to update a declarative agent, select `...` next to the agent name and select **Edit**, or go to **Create agent** then navigate to **My agents** in the breadcrumbs.
