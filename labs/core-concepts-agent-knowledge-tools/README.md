@@ -456,7 +456,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
    > [!IMPORTANT]
    > Agent-level instructions help the agent understand context and avoid confusion - especially when tools might be misused or misinterpreted.
 
-1. In the text you just pasted, where select **Prompt Analyzer** after the **Use** at the begining of what you just pasted.
+1. In the text you just pasted, where select **Prompt Analyzer** after the **Use** at the beginning of what you just pasted.
 
 1. Type / and it will bring up a dialog to select the **Prompt Analyzer** tool.
 
