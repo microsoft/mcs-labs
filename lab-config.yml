@@ -189,6 +189,14 @@ labs:
     order: 260
     journeys: [business-user, developer]
 
+  mcs-tools:
+    title: "Copilot Studio Tools"
+    difficulty: "Intermediate"
+    duration: 60
+    section: intermediate
+    order: 270
+    journeys: [business-user, developer]
+
   # === ADVANCED LABS (300-399) ===
   autonomous-cua:
     title: "Build an autonomous agent that uses Computer Use to retrieve data from legacy systems that lack API connectivity"
@@ -351,6 +359,7 @@ journeys:
         human-in-the-loop,
         mcs-multi-agent,
         component-collections,
+        mcs-tools,
         mcs-byom,
         data-fabric-agent,
         guildhall-custom-mcp,
@@ -377,6 +386,7 @@ journeys:
         human-in-the-loop,
         mcs-multi-agent,
         component-collections,
+        mcs-tools,
         autonomous-cua,
         autonomous-account-news,
         autonomous-support-agent,
