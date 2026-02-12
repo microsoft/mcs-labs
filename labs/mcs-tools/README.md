@@ -8,7 +8,7 @@ Learn how to extend your agents with powerful tools including connectors, agent 
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 200 | Maker | 60 minutes | After completing this lab, participants will be able to use connectors to integrate external services, build deterministic business logic with agent flows, connect MCP servers for live data access, and create custom prompts for structured responses. An optional extra credit section covers Computer Using Agents (CUA) for legacy system automation. |
+| 300 | Maker | 60 minutes | After completing this lab, participants will be able to use connectors to integrate external services, build deterministic business logic with agent flows, connect MCP servers for live data access, and create custom prompts for structured responses. An optional extra credit section covers Computer Using Agents (CUA) for legacy system automation. |
 
 ---
 
