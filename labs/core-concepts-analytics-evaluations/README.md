@@ -153,7 +153,7 @@ Access and interpret agent analytics to measure performance and identify optimiz
     > [!NOTE]
     > Analytics data may take 24-48 hours to populate for new agents. If your agent is brand new, you may see limited or no data initially.
 
-1. Set the date range using the date picker in the top right of the analytics ):
+1. Set the date range using the date picker in the top right of the analyticss:
    - Last 7 days
    - Last 30 days
    - Custom date range
@@ -193,7 +193,7 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 #### Review Agent Performance
 
-1. Navigate to the **Agents** section in analytics.
+1. Go to the **Agents** section in analytics.
 
 1. Review the metrics for each of the child and connected Agents used by your agent:
     - Which agents are being used and what type are they
@@ -201,15 +201,15 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 #### Review generated answer rate and quality
 
-1. Navigate to the **Generated answer rate and quality** section. This section requires a minimum of 10 answers per day in conversation sessions.
+1. Go to the **Generated answer rate and quality** section. This section requires a minimum of 10 answers per day in conversation sessions.
 
-1. This section tracks answer quality across completeness, relevance, and use of knowledge sources. Review your **Answered**  and **Unanswered ** question percentages. 
+1. This section tracks answer quality across completeness, relevance, and use of knowledge sources. Review your **Answered** and **Unanswered ** question percentages. 
 
 1. Select **See details** to go deeper into the answer rate and source analytics.
 
 1. The **Generated answer rate and quality** panel will open on the right side of the screen.
 
-1. Notice at the top you can filter by main agent and child agent. Try selecting **Main agent** and then **Child agent** obvserving the changes in data for each.
+1. Notice at the top you can filter by main agent and child agent. Try selecting **Main agent** and then **Child agent** observing the changes in data for each.
 
 1. The **Unanswered questions** section breaks down the reason the agent didn't answer a user query.
    
@@ -221,9 +221,9 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 #### Review Escalation and Abandonment
 
-1. Navigate to the **Conversation outcomes** section on the **Analytics** tab.
+1. Go to the **Conversation outcomes** section on the **Analytics** tab.
 
-1. In the upper right corner of the section select **See details**
+1. In the upper right corner of the section, select **See details**
 
 1. Review the  **Resolved** metric :
     - How often users request were resolved
@@ -327,7 +327,7 @@ Create evaluation test sets using four different methods and understand how each
 
 1. Select **Save**.
 
-1. Click on the first generated question to explore all the available options. For each test case, you can configure the **evaluation method**:
+1. Select the first generated question to explore all the available options. For each test case, you can configure the **evaluation method**:
 
     - **Exact Match**: Character-for-character comparison between expected and actual response. Use for questions with precise, factual answers.
 
@@ -363,7 +363,7 @@ Create evaluation test sets using four different methods and understand how each
 
 1. Select **New evaluation**.
 
-1. In the middle of the screen in the **Start by uploading some questions* section, select **CSV** to download the CSV template.
+1. In the middle of the screen in the **Start by uploading some questions** section, select **CSV** to download the CSV template.
 
 1. Review the required CSV format by opening the file you downloaded. The template shows the expected columns:
     - **Question** - The user question that the agent will answer
@@ -448,9 +448,9 @@ Create evaluation test sets using four different methods and understand how each
     Where can I set DLP policies for Copilot Studio?
     ```
 
-1. Select **Apply** and then **Save* to save the set.
+1. Select **Apply** and then **Save** to save the set.
 
-28. Sekect **Evaluate** to run the evaluation on the updated test set.
+28. Select **Evaluate** to run the evaluation on the updated test set.
 
     > [!NOTE]
     > Only one test set can run at a time. If an evaluation is already in progress from a previous step, you can wait for it to complete or move on to Use Case #3 and come back later.
@@ -512,7 +512,7 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
 
 #### Review the Auto-Generated Test Set Results
 
-1. Navigate to the **Evaluation** page in your Copilot Studio agent.
+1. Go to the **Evaluation** page in your Copilot Studio agent.
 
 1. Select the **Non-Critical Copilot Studio Guide Set** to view its evaluation results.
 
@@ -584,7 +584,7 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
     - **Thumbs up**: The evaluation correctly assessed the response
     - **Thumbs down**: The evaluation's assessment was wrong (false positive or false negative)
 
-1. Click **Export test results** to download the results as a CSV file for stakeholder reporting or documentation.
+1. Select **Export test results** to download the results as a CSV file for stakeholder reporting or documentation.
 
     > [!TIP]
     > Exported results are valuable for stakeholder reporting, compliance documentation, and tracking quality trends over time. Consider exporting results after each major agent update.
