@@ -147,85 +147,90 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 #### Open the Mailing List Topic
 
-1. In your Copilot Studio agent, navigate to **Topics** in the left panel.
+1. Navigate to [Copilot Studio](https://copilotstudio.microsoft.com).
 
-2. Open the **Join Copilot Studio Mailing List** topic that you created in the previous lab's Use Case #4.
+1. Select **Agents** in your left side navigation bar, and select your **Copilot Studio Assistant** agent you created in the previous lab's Use Case #4.
 
-> [!NOTE]
-> If you don't have this topic, you can explore variables in any existing topic that has question nodes.
+1. Select **Topics** in the agent's top navigation bar.
+
+1. Select the **Join Copilot Studio Mailing List** topic that you created in the previous lab's Use Case #4.
+
+    > [!NOTE]
+    > If you don't have this topic, you can explore variables in any existing topic that has question nodes.
 
 #### Review Existing Variables
 
-3. Find the **Question** node where the user's email address is collected.
+1. Find the **Question** node where the user's email address is collected.
 
-4. Click on the question node to expand its properties panel.
 
-5. Look for the **Save response as** or **Variable** section. Notice that Copilot Studio automatically created a variable to store the email address when the question node was built.
+1. Look for the **Save response as**  section. Notice that Copilot Studio automatically created a variable to store the email address when the question node was built.
 
-6. Note the variable name (likely something like `emailAddress` or `userEmail`).
+1. Note the variable name (likely something like `EmailAddress` or `userEmail`).
 
-> [!TIP]
-> Whenever a question node is created, Copilot Studio automatically creates a variable to store the user's response. This variable is scoped to the topic by default.
+    > [!TIP]
+    > Whenever a question node is created, Copilot Studio automatically creates a variable to store the user's response. This variable is scoped to the topic by default.
 
 #### Explore Variable Properties
 
-7. Click on the variable name to open the variable properties panel.
+1. Select the variable name to open the variable properties panel.
 
-8. Review the variable configuration — do not change any values:
-   - **Name**: The variable identifier used in the topic
+1. Review the variable configuration — do not change any values:
+   - **Variable Name**: The variable identifier used in the topic
    - **Type**: Data type (Text, Number, Boolean, etc.)
-   - **Scope**: Topic-level or Global
-   - **Description**: Documentation for the variable's purpose
+   - **Usage**: Topic-level or Global
 
-9. Notice that this variable is **Topic-level** by default, meaning it only exists within this topic.
+1. Notice that this variable is **Topic-level** by default, meaning it only exists within this topic.
 
-> [!IMPORTANT]
-> **Topic-level variables** exist only within a single topic and reset when the topic ends. **Global variables** persist across all topics and the entire conversation. Global variables use a namespace like `Global.emailAddress`. Use global variables sparingly — only when you need to share data across multiple topics.
+    > [!IMPORTANT]
+    > **Topic-level variables** exist only within a single topic and reset when the topic ends. **Global variables** persist across all topics and the entire conversation. Global variables use a namespace like `Global.emailAddress`. Use global variables sparingly — only when you need to share data across multiple topics.
 
 #### View All Variables
 
-10. Click **Variables** in the left navigation panel (or look for a Variables section in your topic).
+1. Select  **Variables** in the topics top right tool bar just above the Variable properties panel.
 
-11. Review the **Topic variables** section showing all variables in the current topic.
+1. Review the **Topic variables** section showing all variables in the current topic.
 
-12. Review the **Global variables** section showing variables available across the entire agent.
+1. Review the **Global variables** section showing variables available across the entire agent.
 
-> [!NOTE]
-> The Variables view gives you a centralized place to see all variables, their types, and their values during testing.
+    > [!NOTE]
+    > The Variables view gives you a centralized place to see all variables, their types, and their values during testing.
 
 #### Understand How Variables Are Used
 
-13. Return to your topic canvas and scroll through the nodes. Look for places where variables are referenced:
+1. Return to your topic canvas and scroll through the nodes. Look for places where variables are referenced:
     - **Message nodes** may use curly braces like `{Topic.emailAddress}` to dynamically insert variable values into text
     - **Set Variable nodes** can transform data using formulas like `"Text " & Topic.variableName` (the `&` operator concatenates strings)
     - **Condition nodes** can branch logic based on variable values
 
-14. Notice the **+** button between nodes. Click it to see the available node options (but do not add any nodes):
+1. Notice the **+** button between nodes. select it to see the available node options (but do not add any nodes):
     - **Set a variable value**: Modify variable values using text, other variables, or formulas
     - **Ask a question**: Collect user input and automatically store it in a variable
     - **Add a condition**: Branch conversation logic based on variable values
 
-> [!TIP]
-> Understanding these node types helps you see how variables flow through a topic — from collection (question nodes) to transformation (set variable nodes) to output (message nodes) to logic (condition nodes).
+    > [!TIP]
+    > Understanding these node types helps you see how variables flow through a topic — from collection (question nodes) to transformation (set variable nodes) to output (message nodes) to logic (condition nodes).
 
 #### Observe Variables During Testing
 
-15. In the test panel, start a new conversation.
+1. In the test panel, start a new conversation.
 
-16. Trigger the mailing list topic by saying:
+1. Trigger the mailing list topic by sending the following prompt to your agent:
 
-```
-I want to join the mailing list.
-```
+    ```
+    I want to join the mailing list.
+    ```
+1. Select the agent response in the test chat. This action takes you to the topic and the node that sent the response. Nodes that fired have a colored checkmark and a colored bottom border.
 
-17. Follow the prompts and provide information when asked (email, name, etc.).
+1. Follow the prompts and provide information when asked (email, name, etc.). As you continue the conversation within the active topic, notice that each node that fires is marked with the checkbox and bottom border, and centered on the canvas.
 
-18. While in the test conversation, click **Variables** in the test panel (or look for a Variables icon).
+1. While in the test conversation, Select **Variables** in top navigation bar for the topic. If the topic is no longer showing, select **Topics** in the agents top navigation bar and select the Join **Copilot Mailing List** again to reopen.
 
-19. Review the current values of all variables in the conversation. Notice how variables populate in real-time as you progress through the conversation.
+1. In the **Variables** panel, select the **Test** tab to see a list of the variables and their current values. 
 
-> [!TIP]
-> Monitoring variables during testing is essential for debugging complex conversation flows and understanding data flow. This is one of the most useful debugging tools in Copilot Studio.
+1. Review the current values of all variables in the conversation. Notice how variables populate in real-time as you progress through the conversation.
+
+    > [!TIP]
+    > Monitoring variables during testing is essential for debugging complex conversation flows and understanding data flow. This is one of the most useful debugging tools in Copilot Studio.
 
 ---
 
@@ -283,134 +288,127 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 #### Create a Child Agent
 
-1. In your Copilot Studio agent, locate the **Agents** or **Skills** section in the left navigation panel.
+1. In your Copilot Studio agent, Select  **Agents**  in the agent top navigation bar.
 
-2. Click **+ Add agent** or **Create child agent** (terminology may vary).
+1. Select  **Add**.
 
-3. Select **Child agent** as the agent type.
+1. In the **Create a child agent** section, Select **ChNew child agent**.
 
-4. Configure the child agent with the following details:
+1. Input  **CARE Prompt Guidance** in the **Name** field.
 
-**Name:**
-```
-CARE Prompt Guidance
-```
+1. Input the following for the **Description**
+    ```
+    This agent provides information on the CARE Prompt guidance.
+    ```
 
-**Description:**
-```
-This agent provides information on the CARE Prompt guidance.
-```
+    > [!NOTE]
+    > The description helps the parent agent understand when to route conversations to this child agent. Be specific and clear.
 
-> [!NOTE]
-> The description helps the parent agent understand when to route conversations to this child agent. Be specific and clear.
-
-5. Click **Create** to initialize the child agent.
+1. Select  **Save** to initialize the child agent.
 
 #### Configure Child Agent Instructions
 
-6. Once the child agent is created, navigate to its **Instructions** section.
+1. Once save of the child agent has completed, input the following into the **Instructions** section.
+    ```
+    This agent should help users with understanding information about the prompt guidance framework and how they can leverage it to make their agents better.
+    ```
 
-7. Add the following instructions:
+    > [!TIP]
+    > Child agent instructions should be focused and specific to their domain of expertise. Avoid generic instructions - be precise about what this agent knows and does.
 
-```
-This agent should help users with understanding information about the prompt guidance framework and how they can leverage it to make their agents better.
-```
-
-> [!TIP]
-> Child agent instructions should be focused and specific to their domain of expertise. Avoid generic instructions - be precise about what this agent knows and does.
-
-8. Click **Save** to apply the instructions.
+1. Select  **Save** to apply the instruction changes to the agent.
 
 #### Add Knowledge Sources to Child Agent
 
-9. In the child agent, navigate to **Knowledge** in the left panel.
+1. In the child agent, scroll down to the **Knowledge** knowledge section or select **Knowledge** in the child agent left navigation. 
 
-10. Click **+ Add knowledge** to add a knowledge source.
+1. Select  **+ Add knowledge** to add a knowledge source.
 
-11. Select **Upload files** as the knowledge source type.
+1. Select **Upload files** as the knowledge source type.
 
-12. Download the [CAREful Prompts Printable Guide (PDF)](https://media.nngroup.com/media/articles/attachments/CAREful_Prompts_-_Printable-2.pdf?_gl=1*1lto3e8*_up*MQ..*_ga*NDc3ODQ3MjYzLjE3NzA2Njc5OTM.*_ga_630S9ESVKM*czE3NzA2Njc5OTIkbzEkZzAkdDE3NzA2Njc5OTIkajYwJGwwJGgw) and upload it to the child agent as a knowledge source.
+1. Download the [CAREful Prompts Printable Guide (PDF)](https://media.nngroup.com/media/articles/attachments/CAREful_Prompts_-_Printable-2.pdf) and upload it to the child agent as a knowledge source.
 
-> [!IMPORTANT]
-> Child agents can have their own dedicated knowledge sources. This keeps knowledge organized and prevents one agent from being overloaded with unrelated content.
+    > [!IMPORTANT]
+    > Child agents can have their own dedicated knowledge sources. This keeps knowledge organized and prevents one agent from being overloaded with unrelated content.
 
-13. Wait for the knowledge source to be indexed.
+1. Wait for the knowledge source to be indexed.
 
-14. Click **Save** to finalize the child agent configuration.
+1. Select  **Save** to finalize the child agent configuration.
 
 #### Configure Parent Agent Orchestration
 
-15. Return to your **parent agent** (the main Copilot Studio Assistant).
+1. Return to your **parent agent** (the main Copilot Studio Assistant) by selecting **Overview** in the top navigation bar.
 
-16. Navigate to the parent agent's **Overview** page. This is where you configure the agent's main instructions — not the child agent's instructions.
+1. In the parent agent's **Instructions** field on the Overview page, select **Edit** in the upper right corner of the **Instructions** section.
 
-17. In the parent agent's **Instructions** field on the Overview page, add the following orchestration instructions. Notice the `(replace this text)` placeholder — you'll replace it with a direct reference to the child agent in the next step.
+1. Add the following orchestration instructions just before the # General Guidlines paragraph of the instructions. Notice the `(replace this text)` placeholder — you'll replace it with a direct reference to the child agent in the next step.
 
-```
-Use (replace this text) when asked to provide just general guidance around prompt building. Never use it when asked to analyze a prompt.
-```
+    ```
+    # Prompt Guidance
+    Use (replace this text) when asked to provide just general guidance around prompt building. Never use it when asked to analyze a prompt.
+    ```
 
-18. In the parent agent's Instructions field, select the `(replace this text)` placeholder, then type `/` to open the dropdown menu. This lists your agent's available tools, topics, child agents, knowledge sources, and more. Select **CARE Prompt Guidance** from the list to create a direct reference to the child agent, replacing the placeholder text.
+1. Select the **`(replace this text)`** placeholder in the paragraph you just added, then type `/` to open the dropdown menu. This lists your agent's available tools, topics, child agents, knowledge sources, and more. Select **CARE Prompt Guidance** from the list to create a direct reference to the child agent, replacing the placeholder text.
 
-> [!TIP]
-> Using `/` references in your agent instructions creates explicit links to specific items in your agent configuration. This ensures the agent knows exactly which tool, topic, or child agent you're referring to — rather than relying on plain text name matching.
+    > [!TIP]
+    > Using `/` references in your agent instructions creates explicit links to specific items in your agent configuration. This ensures the agent knows exactly which tool, topic, or child agent you're referring to — rather than relying on plain text name matching.
 
-> [!IMPORTANT]
-> Orchestration instructions are critical for proper agent routing. Be explicit about WHEN to use each child agent and WHEN NOT to use them. This prevents confusion and ensures the right agent handles each request.
+    > [!IMPORTANT]
+    > Orchestration instructions are critical for proper agent routing. Be explicit about WHEN to use each child agent and WHEN NOT to use them. This prevents confusion and ensures the right agent handles each request.
 
-19. Click **Save** to apply the orchestration instructions.
+1. Select **Save** to apply the orchestration instructions.
 
 #### Review Agent Relationships
 
-20. In the parent agent, navigate to the **Agents** or **Skills** panel.
+1. In the parent agent, select **Agents** in the top navigation bar for the parent agent.
 
-21. Verify that the "CARE Prompt Guidance" child agent appears in the list of available agents.
+1. Verify that the **CARE Prompt Guidance** child agent appears in the list of available agents.
 
-22. Check that the child agent is **Enabled** (toggle should be on).
+1. Check that the child agent is **Enabled** (toggle should be on).
 
-> [!NOTE]
-> Disabled child agents won't be invoked by the parent agent. Always verify child agents are enabled after creation.
+    > [!NOTE]
+    > Disabled child agents won't be invoked by the parent agent. Always verify child agents are enabled after creation.
 
 #### Test the Child Agent
 
-23. In the parent agent's test panel, start a new conversation.
+1. In the parent agent's test panel, start a new conversation.
 
-24. Ask a question that should trigger the child agent:
+1. Ask a question that should trigger the child agent:
 
-```
-How does the CARE prompt guidance help write prompts?
-```
+    ```
+    How does the CARE prompt guidance help write prompts?
+    ```
 
-25. Observe the agent's response. It should:
+1. Observe the agent's response. It should:
     - Recognize that this is a general prompt guidance question
     - Route the conversation to the "CARE Prompt Guidance" child agent
     - Provide an answer grounded in the CARE framework knowledge
 
-26. Look for indicators in the test panel showing which agent responded (some interfaces show "Responded by: CARE Prompt Guidance" or similar).
+1. Look for indicators in the test panel showing which agent responded (some interfaces show "Responded by: CARE Prompt Guidance" or similar).
 
 #### Test Orchestration Logic
 
-27. Now test the orchestration instructions by asking a question that should NOT use the child agent:
+1. Now test the orchestration instructions by asking a question that should NOT use the child agent:
 
-```
-Analyze this prompt for improvements: Write a summary of the quarterly report.
-```
+    ```
+    Analyze this prompt for improvements: Write a summary of the quarterly report.
+    ```
 
-28. Verify that the parent agent uses the Prompt Analyzer tool (from the previous lab) instead of routing to the child agent.
+1. Verify that the parent agent uses the Prompt Analyzer tool (from the previous lab) instead of routing to the child agent.
 
-> [!TIP]
-> This demonstrates proper orchestration - the parent agent understands the difference between "general prompt guidance" (child agent) and "analyze a specific prompt" (tool).
+    > [!TIP]
+    > This demonstrates proper orchestration - the parent agent understands the difference between "general prompt guidance" (child agent) and "analyze a specific prompt" (tool).
 
 #### Explore Child Agent Capabilities
 
-29. Ask several different questions to test the child agent's knowledge:
+1. Ask several different questions to test the child agent's knowledge:
     - "What is the CARE framework?"
     - "How do I write better prompts?"
     - "What does the A stand for in CARE?"
 
-30. Verify that the child agent consistently provides accurate answers from its knowledge source.
+1. Verify that the child agent consistently provides accurate answers from its knowledge source.
 
-31. Return to the child agent's configuration and review how you could:
+1. Return to the child agent's configuration and review how you could:
     - Add more knowledge sources
     - Refine instructions for better responses
     - Create additional child agents for other domains
@@ -439,21 +437,21 @@ Analyze this prompt for improvements: Write a summary of the quarterly report.
 
 ## 🧱 Use Case #3: Deploy Your Agent Across Channels
 
-Learn how to configure and deploy your agent to multiple channels, understand channel-specific settings, and implement appropriate security controls.
+Learn how to configure and deploy your agent to channels, understand channel-specific settings, and implement appropriate security controls.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Deploy Your Agent Across Channels | Make your agent accessible across web, Teams, and other platforms with appropriate security | 12 minutes |
+| Deploy Your Agent To Channels | Make your agent accessible Teams and Microsoft 365 Copilot  | 12 minutes |
 
 **Summary of tasks**
 
-In this section, you'll learn how to navigate the Channels interface, configure the web channel with security settings, deploy to Microsoft Teams, and understand channel capabilities and limitations.
+In this section, you'll learn how to navigate the Channels interface, configure your agent to deploy to Microsoft Teams and Microsoft 365 Copilot, and understand channel capabilities and limitations.
 
-**Scenario:** Your Copilot Studio Assistant is ready for users. You need to make it available on your company website for easy access and in Microsoft Teams where most employees spend their day. You'll configure both channels with appropriate security settings.
+**Scenario:** Your Copilot Studio Assistant is ready for users. You need to make it available on your company users for easy access in Microsoft Teams and Microsoft 365 Copilot where most employees spend their day. 
 
 ### Objective
 
-Deploy your agent to web and Teams channels with proper configuration and security.
+Deploy your agent to Teams and Microsoft 365 Copilot channels with proper configuration and security.
 
 ---
 
@@ -461,9 +459,9 @@ Deploy your agent to web and Teams channels with proper configuration and securi
 
 #### Navigate to Channels
 
-1. In your Copilot Studio agent, click **Channels** in the left navigation panel.
+1. In your Copilot Studio agent, select **Channels** in the top navigation bar.
 
-2. Review the Channels overview page to see available channel options:
+1. Review the Channels overview page to see available channel options:
    - **Microsoft Teams**: Native Teams integration
    - **Demo website**: Test website for quick agent testing
    - **Custom website**: Embeddable web widget for your sites
@@ -471,132 +469,65 @@ Deploy your agent to web and Teams channels with proper configuration and securi
    - **Custom channel**: Direct Line API for custom applications
    - Additional channels may include Facebook, Slack, etc.
 
-> [!NOTE]
-> Available channels depend on your Copilot Studio license and environment settings. Some channels require additional configuration or premium licenses.
+    > [!NOTE]
+    > Available channels depend on your Copilot Studio license and environment settings. Some channels require additional configuration or premium licenses.
 
-3. Notice which channels are already enabled or configured (typically the demo website is enabled by default).
 
 #### Explore Channel Capabilities
 
-4. Review the description and capabilities of each channel type:
+1. Review the description and capabilities of each channel type:
    - **Teams**: Full authentication, rich adaptive cards, deep Microsoft 365 integration
    - **Web**: Customizable appearance, flexible security, easy embedding
    - **Mobile**: Native app experience with push notifications
    - **Custom**: Full API control for advanced integrations
 
-> [!TIP]
-> Choose channels based on where your users already work. Don't force users to adopt new tools - bring the agent to their existing environment.
+    > [!TIP]
+    > Choose channels based on where your users already work. Don't force users to adopt new tools - bring the agent to their existing environment.
 
-5. Consider the limitations of each channel:
+1. Consider the limitations of each channel:
    - Some features (like certain adaptive cards) may not work on all channels
    - Authentication requirements vary by channel
    - Customization options differ across channels
 
-#### Configure the Demo Website
+#### Deploy to Microsoft Teams and Microsoft 365 Copilot
 
-6. Click on **Demo website** to view its configuration.
+1. Return to the Channels page and select **Teams and Microsoft 365 Copilot**.
 
-7. Review the demo website settings:
-   - **Website URL**: The temporary URL where you can test your agent
-   - **Status**: Whether the demo site is enabled or disabled
-
-8. If the demo website isn't enabled, click **Enable** or **Turn on** to activate it.
-
-9. Click **Copy** next to the demo website URL, then open it in a new browser tab.
-
-10. Test your agent on the demo website by asking a few questions to verify functionality.
-
-> [!TIP]
-> The demo website is perfect for quick testing and sharing with stakeholders before full deployment. Use it to gather feedback before wider rollout.
-
-#### Configure Custom Website Channel
-
-11. Return to the Channels page and select **Custom website** (or **Website** depending on your interface).
-
-12. Review the custom website configuration options:
-    - **Embed code**: HTML/JavaScript code to embed the agent on your site
-    - **Style customization**: Colors, fonts, and branding options
-    - **Security settings**: Authentication and domain restrictions
-
-13. Click on **Configure** or **Settings** to access detailed configuration options.
-
-#### Configure Web Channel Security
-
-14. In the custom website settings, locate the **Security** section.
-
-15. Review the security options available:
-    - **No authentication**: Anyone can access the agent (use for public websites)
-    - **Require authentication**: Users must sign in (use for internal sites)
-    - **Allowed domains**: Restrict embedding to specific domains
-
-> [!IMPORTANT]
-> Security settings are critical for protecting sensitive data and ensuring compliance. For internal agents with access to company data, always require authentication.
-
-16. Configure domain restrictions by adding your website domains to the allowed list:
-
-```
-contoso.com
-www.contoso.com
-intranet.contoso.com
-```
-
-17. Review how domain restrictions prevent unauthorized embedding of your agent on external sites.
-
-> [!WARNING]
-> Without domain restrictions, anyone can embed your agent on any website. Always configure allowed domains for production deployments.
-
-18. Click **Save** to apply the security settings.
-
-#### Deploy to Microsoft Teams
-
-19. Return to the Channels page and select **Microsoft Teams**.
-
-20. Review the Teams channel configuration options:
+1. Review the **Agent preview** section that shows how users will see your agent.
     - **App name**: How the agent appears in Teams
     - **App icon**: Visual branding in Teams
     - **Availability**: Who can access the agent
 
-21. Click **Turn on Teams** or **Enable** to activate the Teams channel.
+1. Select **Edit details** and make adjustments. For example, change the short description to something like **Assist users building agents**
 
-22. Review the deployment options:
-    - **Share with team**: Add the agent to a specific Teams team or channel
-    - **Install for myself**: Add the agent to your personal Teams chat
-    - **Submit for admin approval**: Request organization-wide deployment
+1. Select **Save** to save your changes.
 
-23. Click **Download manifest** or **Get agent link** to get the Teams app package.
+1. Select **Publish** to publish your agent and make it available.
 
-> [!NOTE]
-> For organization-wide deployment, your IT admin must approve and publish the agent to your company's Teams app catalog.
+1. Select **Turn on Teams** or **Enable** to activate the Teams channel.
 
-24. Follow the prompts to install the agent in your personal Teams or share it with a team for testing.
+1. Select **Availability options** and review what is available:
 
-25. Open Microsoft Teams and verify that the agent appears in your chat list or team channels.
+1. After reviewing the options select the back arrow to return to the prior panel.
 
-#### Test Multi-Channel Deployment
+1. Select **See agent in Teams**, this will load a new browser tab with the Teams web application.
 
-26. Test your agent in Microsoft Teams by sending a few messages.
+1. If prompted to **Open Microsoft Teams?**, select **Cancel** and after the dialog closes select the **Use the web app instead**
 
-27. Compare the experience between Teams and the web demo site:
+1. If this is your first visit to Teams, you may be prompted with some other dialogs, after you dismiss them you may have to go back to Copilot Studio and re-select **See agent in Teams**
+
+1. You should now see a dialog presenting your agent for you to review before you add it to your Teams session. After reviewing the details, select **Add**
+
+1. You should next see a **Added successfully** message select **Open** to use your agent.
+
+1. Once yuur agent loads, ask it a question like **How do I build a good prompt?**
+
+1. Compare the experience between Teams and the web demo site:
     - Notice how the UI differs
-    - Test the same questions on both channels
-    - Observe how authentication works on each channel
+    - Test the same questions on the channel
 
-> [!TIP]
-> Always test your agent on each deployed channel. Some features or formatting may work differently across channels.
-
-#### Review Channel Limitations
-
-28. Return to the Channels page in Copilot Studio.
-
-29. Review the **Channel capabilities** documentation or table showing:
-    - Which features work on which channels
-    - Known limitations per channel
-    - Recommended practices for multi-channel deployment
-
-30. Consider how channel limitations might affect your agent design:
-    - Avoid features that don't work on your primary channels
-    - Design for the lowest common denominator if deploying everywhere
-    - Create channel-specific topics for advanced features
+    > [!TIP]
+    > Always test your agent on each deployed channel. Some features or formatting may work differently across channels.
 
 ---
 
