@@ -8,7 +8,7 @@ Learn how to extend your agents with powerful tools including connectors, agent 
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 200 | Maker | 60 minutes | After completing this lab, participants will be able to use connectors to integrate external services, build deterministic business logic with agent flows, connect MCP servers for live data access, and create custom prompts for structured responses. An optional extra credit section covers Computer Using Agents (CUA) for legacy system automation. |
+| 300 | Maker | 60 minutes | After completing this lab, participants will be able to use connectors to integrate external services, build deterministic business logic with agent flows, connect MCP servers for live data access, and create custom prompts for structured responses. An optional extra credit section covers Computer Using Agents (CUA) for legacy system automation. |
 
 ---
 
@@ -77,6 +77,8 @@ This lab teaches you how to use each tool type through hands-on scenarios.
 * [Connect to Dataverse with Model Context Protocol (MCP)](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/mcp)
 * [Use prompts to make your agent perform specific tasks](https://learn.microsoft.com/en-us/microsoft-copilot-studio/prompts)
 * [Use connectors in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-connectors)
+* [Create a custom connector from scratch](https://learn.microsoft.com/en-us/connectors/custom-connectors/define-blank)
+* [Free Dictionary API](https://dictionaryapi.dev/)
 * [Automate web and desktop apps with Computer use](https://learn.microsoft.com/microsoft-copilot-studio/computer-use)
 
 ---
@@ -120,32 +122,294 @@ In this lab, you'll extend agents with multiple tool types to address different 
 
 ## 🧱 Use Case #1: Extend Your Agent with Connectors
 
-Learn how to add pre-built connectors to your agent to integrate with external services and take actions on behalf of users.
+Create a custom connector for the Free Dictionary API and use it as a tool in your agent to look up word definitions.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Extend Your Agent with Connectors | Integrate external services and take actions through pre-built connectors | 15 minutes |
+| Extend Your Agent with Connectors | Build a custom connector and use it as a tool to integrate an external API | 15 minutes |
 
 **Summary of tasks**
 
-In this section, you'll learn how to browse and add connectors to your agent, configure connector authentication, and use connectors as tools that the agent can invoke during conversations.
+In this section, you'll learn how to create a custom connector from a public API, define its actions and response schema, add it as a tool in your agent, and test natural language queries against it.
 
-**Scenario:** Your agent needs to integrate with external services like Outlook, SharePoint, or third-party APIs to take actions on behalf of users.
+**Scenario:** Your organization needs a Dictionary Agent that can look up word definitions, origins, and pronunciations on demand. The Free Dictionary API provides this data, but there's no pre-built connector for it. You'll create a custom connector and wire it into your agent as a tool.
 
 ### Objective
 
-Add and configure connectors as tools in your agent to enable integration with external services.
+Create a custom connector for the Free Dictionary API, add it as a tool in your agent, and test word lookups through natural language conversation.
 
 ---
 
 ### Step-by-step instructions
 
+#### Create the Dictionary Agent
+
+1. Navigate to the **Agents** screen using the left-hand navigation menu.
+
+2. Click **Create a blank agent** in the upper right-hand corner.
+
+3. Once the agent is provisioned, rename it to `Dictionary Agent` by clicking **Edit** in the **Details** section.
+
+4. Enter the following as the **Description:**
+
+```
+This agent allows a user to lookup the definition of a word
+```
+
+5. Click **Save**.
+
+#### Create the Custom Connector
+
+6. Select **Tools** in the top navigation.
+
+7. Click **Add Tool**.
+
+8. Under **Create new**, click **See all**.
+
+9. Click on **Custom connector**.
+
+10. In the top navigation, click **New custom connector**.
+
+11. Select **Create from blank**.
+
+12. Enter the following into the **Connector name** field:
+
+```
+Lookup Word in Dictionary
+```
+
+13. Click **Save**.
+
+14. In the **Host** field, enter:
+
+```
+api.dictionaryapi.dev
+```
+
+15. In the **Base URL** field, enter:
+
+```
+/api/v3/
+```
+
+16. Click **Security** at the bottom.
+
 > [!NOTE]
-> **Coming Soon:** This section is currently under development. Connector tool configuration content will be added in a future update.
+> This API doesn't require authentication, but this is where you would select the authentication type for APIs that do.
+
+17. Ensure the authentication type is set to **No authentication** and click **Definition**.
+
+#### Define the API Action
+
+18. Click **+ New action** in the **Actions** section.
+
+19. In the **Summary** field, enter:
+
+```
+Word Lookup
+```
+
+20. In the **Description** field, enter:
+
+```
+Lookup a word in the dictionary
+```
+
+> [!TIP]
+> The description will later be used as the tool description, which allows the orchestrator to know when to use this tool. Make sure you are descriptive here to allow the best conversation routing.
+
+21. In the **Operation ID** field, enter:
+
+```
+WordLookup
+```
+
+22. Under **Request**, click **Import from sample**.
+
+23. Select **Get** as the **Verb**.
+
+24. In the **URL** field, enter:
+
+```
+https://api.dictionaryapi.dev/api/v2/entries/en/{word}
+```
+
+25. Click **Import**.
+
+26. Click the down arrow next to **word** and click **Edit**.
+
+27. In the **Description** field, enter:
+
+```
+The word that you want to lookup the definition of
+```
+
+28. Click **Back**.
+
+#### Define the Response Schema
+
+29. Click on **default** in the **Response** section.
+
+30. Click **Import from sample**.
+
+31. In the **Body** field, copy and paste the following JSON sample:
+
+```json
+[
+    {
+      "word": "hello",
+      "phonetic": "həˈləʊ",
+      "phonetics": [
+        {
+          "text": "həˈləʊ",
+          "audio": "//ssl.gstatic.com/dictionary/static/sounds/20200429/hello--_gb_1.mp3"
+        },
+        {
+          "text": "hɛˈləʊ"
+        }
+      ],
+      "origin": "early 19th century: variant of earlier hollo ; related to holla.",
+      "meanings": [
+        {
+          "partOfSpeech": "exclamation",
+          "definitions": [
+            {
+              "definition": "used as a greeting or to begin a phone conversation.",
+              "example": "hello there, Katie!",
+              "synonyms": [],
+              "antonyms": []
+            }
+          ]
+        },
+        {
+          "partOfSpeech": "noun",
+          "definitions": [
+            {
+              "definition": "an utterance of 'hello'; a greeting.",
+              "example": "she was getting polite nods and hellos from people",
+              "synonyms": [],
+              "antonyms": []
+            }
+          ]
+        },
+        {
+          "partOfSpeech": "verb",
+          "definitions": [
+            {
+              "definition": "say or shout 'hello'.",
+              "example": "I pressed the phone button and helloed",
+              "synonyms": [],
+              "antonyms": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+```
+
+32. Click **Import**.
+
+33. Update the following body items by clicking the down arrow on each and clicking **Edit**:
+
+- **origin**
+  - **Title:** `origin`
+  - **Description:** `Where the word originated from including data such as the definition, part of speech, example of its use, synonyms, antonyms. It includes all potential uses of the word in part of speech such as if it is used as a verb, noun, or an exclamation what the meaning is when used in that way.`
+
+- **phonetic**
+  - **Title:** `phonetic`
+  - **Description:** `How to pronounce the word including the audio file of it being spoken.`
+
+- **word**
+  - **Title:** `word`
+  - **Description:** `The word that was looked up`
+
+34. Click **Create connector** on the top menu.
+
+#### Add the Custom Connector as a Tool
+
+35. Go back to the browser tab with Copilot Studio.
+
+36. Refresh the page.
+
+37. In the **Add tool** screen, enter the following into the search box and press **Enter**:
+
+```
+Lookup a word in the dictionary
+```
+
+> [!NOTE]
+> It can sometimes take a few minutes for a new connector to sync to Copilot Studio. If you don't see it, try clearing your browser cache by refreshing the page.
+
+38. Select the **Word Lookup** connector from the search results.
+
+39. Click the down arrow next to the **Connection** and select **Create new connection**.
+
+40. Click **Create**.
+
+41. You should see the connection with a green check mark. Click **Add and configure**.
+
+42. Select **Additional details** and set **Credentials to use** to **Maker-provided credentials**.
+
+> [!TIP]
+> For unauthenticated APIs, it is best to use Maker-provided credentials so you don't require users to create a connection for anonymous connectors.
+
+43. In the **Inputs** section, click **Customize** next to **word**.
+
+44. Notice that all your inputs have been populated from your connector definition - this is why it is important to provide detailed descriptions when building your connector.
+
+45. Click **Save** to save the tool configuration.
+
+#### Test Your Dictionary Agent
+
+46. Click **Settings** in the upper right-hand corner.
+
+47. Scroll to the bottom of the **Generative AI** list of settings.
+
+48. Turn off **Use general knowledge**.
+
+> [!NOTE]
+> Disabling general knowledge ensures that only your custom connector API provides answers, not the underlying language model.
+
+49. Click **Save**.
+
+50. Close **Settings** using the **X** in the upper right-hand corner.
+
+51. In the test pane, try the following queries:
+
+```
+What is the meaning of the word copilot?
+```
+
+```
+Where does it come from?
+```
+
+```
+How about the word amazing?
+```
+
+52. Verify that the agent uses your custom connector tool to retrieve definitions, origins, and phonetic information from the Free Dictionary API.
 
 ---
 
 ### 🏅 Congratulations! You've completed Use Case #1!
+
+---
+
+### Test your understanding
+
+**Key takeaways:**
+
+* **Custom Connectors** - You can create connectors from any REST API, giving your agent access to virtually any external service
+* **Descriptive Metadata** - Detailed descriptions on actions, parameters, and response fields help the orchestrator route conversations correctly and improve tool selection
+* **Maker-Provided Credentials** - For unauthenticated APIs, use maker-provided credentials so end users don't need to create connections
+
+**Lessons learned & troubleshooting tips:**
+
+* New custom connectors may take a few minutes to sync to Copilot Studio - refresh your browser if the connector doesn't appear immediately
+* Disabling general knowledge forces the agent to rely solely on your tools, which is useful for validating that the connector works correctly
+* Always define response schemas with descriptive titles and descriptions so the agent can present results meaningfully
 
 ---
 
@@ -604,32 +868,182 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 ## 🔄 Use Case #4: Create Custom Prompts for Structured Responses
 
-Create custom prompts that ensure consistent, structured responses from your agent by pulling specific fields from Dataverse.
+Create a custom prompt tool that controls how your agent responds to conversations, including selecting which AI model to use.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create Custom Prompts for Structured Responses | Standardize agent outputs for consistent, business-relevant responses | 10 minutes |
+| Create Custom Prompts for Structured Responses | Control agent response behavior with prompt-based tools and model selection | 10 minutes |
 
 **Summary of tasks**
 
-In this section, you'll learn how to create custom prompts that structure agent responses to show specific Dataverse fields and provide consistent output formats.
+In this section, you'll learn how to create a custom prompt tool with specific response instructions, configure text inputs and sample data, select and compare different AI models, and wire the prompt into your agent using system variables.
 
-**Scenario:** Different users might get varying levels of detail when querying account information. By creating structured prompts, you ensure all users receive consistent, relevant account details that support their business decisions.
+**Scenario:** Your organization wants an agent that handles casual chit chat conversations in a friendly and professional manner, while staying focused on appropriate topics. A custom prompt tool gives you fine-grained control over exactly how the agent responds, including the ability to select which AI model powers the responses.
 
 ### Objective
 
-Create custom prompts that standardize agent responses with specific data fields from Dataverse.
+Create a Chit Chat Agent with a custom prompt tool that controls response behavior, test with different AI models, and validate that the agent stays within defined boundaries.
 
 ---
 
 ### Step-by-step instructions
 
+#### Create the Chit Chat Agent
+
+1. Navigate to the **Agents** screen using the left-hand navigation menu.
+
+2. Click **Create a blank agent** in the upper right-hand corner.
+
+3. Once the agent is provisioned, rename it to `Chit Chat Agent` by clicking **Edit** in the **Details** section.
+
+4. Enter the following as the **Description:**
+
+```
+This agent allows a user to chit chat and have general conversation
+```
+
+5. Click **Save**.
+
+#### Create the Chit Chat Prompt Tool
+
+6. Click on **Tools** in the top navigation.
+
+7. Click **Add a tool**.
+
+8. Click on **Prompt** under **Create new**.
+
+9. Click on the prompt name (it will show "Custom prompt" followed by the date) and change it to:
+
+```
+Chit Chat Prompt
+```
+
+10. In the **Instructions** field, paste the following text:
+
+```
+Respond to this (Replace this text) with an appropriate chit chat response. Do not leverage any information within the model to provide details outside of a simple chit chat response to the question. You should make the response be friendly and professional. It should never talk about politics, religion, or anything that is not just simple chit chat type discussion such as "Hello", "How are you?", or "How old are you?". Do not ask follow up questions as part of your response.
+```
+
+11. Highlight `(Replace this text)` with your mouse and replace it with a text input by clicking **Add content** and selecting **Text**.
+
+12. Click on the **Text input** in your instructions and set the **Name** to:
+
+```
+Query
+```
+
+13. In the **Sample data** field, enter the following text:
+
+```
+Hey there. I like cats do you?
+```
+
+14. Click **Close**.
+
 > [!NOTE]
-> **Coming Soon:** This section is currently under development. Custom prompt configuration content will be added in a future update.
+> The sample data is used for testing within the Prompt Builder interface. It simulates what a user might say so you can preview how the prompt responds.
+
+#### Test and Select an AI Model
+
+15. Click **Test** to test your prompt.
+
+16. Review the response in the **Model response** section.
+
+17. Click the down arrow next to **GPT-4.1 mini** to see the list of available model options.
+
+18. Select a different model and click **Test** again.
+
+19. Notice how the response style changes depending on the model selected.
+
+> [!NOTE]
+> You can also add additional models from Foundry if needed. Different models may produce different response styles and levels of detail.
+
+20. Change the model back to **GPT-4.1 mini** as it is the most cost-effective and fastest option.
+
+21. Click **Save**.
+
+22. Click **Add and configure**.
+
+#### Configure the Prompt Tool
+
+23. Change the **Description** to the following text:
+
+```
+This tool provides capabilities to allow the user to do chit chat with this agent. It should stay focused to only handle simple chit chat scenarios like "Hello" or "How old are you?" type of things but stay away from any non-chit chat related topics. Do not use this topic for things like "Goodbye".
+```
+
+24. In the **Inputs** section, change the **Query** input's **Fill Using** setting to **Custom value**.
+
+25. In the **Value** field, click the **...** button, then click **System** and select **Activity.Text**.
+
+> [!TIP]
+> System.Activity.Text stores the last thing the user said to the agent. This automatically passes the user's message into your custom prompt.
+
+26. Click **Save** on your Chit Chat Prompt tool.
+
+#### Disable General Knowledge
+
+27. Click **Settings** in the upper right-hand corner.
+
+28. Scroll to the bottom of the **Generative AI** menu and turn off **Use general knowledge**.
+
+> [!TIP]
+> To limit hallucinations, it is common practice to turn off the model's general knowledge. This restricts the agent to only the tools and knowledge you have provided.
+
+29. Click **Save**.
+
+30. Close the **Settings** menu using the **X** in the upper right-hand corner.
+
+#### Test Your Chit Chat Agent
+
+31. In the test pane, try the following chit chat queries:
+
+```
+Hey do you like cats? I have a tabby
+```
+
+```
+How old are you?
+```
+
+```
+What time is it?
+```
+
+32. Verify that the agent responds with friendly, professional chit chat responses.
+
+33. Now test that the agent stays within its defined boundaries by asking non-chit-chat questions:
+
+```
+How tall is the Empire State Building?
+```
+
+```
+Who is the president of the United States?
+```
+
+34. Verify that the agent does not answer these factual questions and instead keeps the conversation within chit chat boundaries.
 
 ---
 
 ### 🏅 Congratulations! You've completed Use Case #4!
+
+---
+
+### Test your understanding
+
+**Key takeaways:**
+
+* **Custom Prompts as Tools** - Prompts give you fine-grained control over how your agent responds, allowing you to define tone, boundaries, and behavior
+* **Model Selection** - You can choose and compare different AI models for your prompt, balancing cost, speed, and response quality
+* **System Variables** - Using System.Activity.Text automatically passes the user's latest message into your prompt, eliminating the need for manual input mapping
+
+**Lessons learned & troubleshooting tips:**
+
+* Use detailed prompt instructions to define both what the agent should and should not do
+* Test with boundary cases to ensure the agent stays within its defined scope
+* GPT-4.1 mini is typically the most cost-effective choice for simple conversational scenarios
+* Disabling general knowledge helps validate that your prompt tool is handling responses correctly
 
 ---
 
