@@ -437,21 +437,21 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 ## 🧱 Use Case #3: Deploy Your Agent Across Channels
 
-Learn how to configure and deploy your agent to multiple channels, understand channel-specific settings, and implement appropriate security controls.
+Learn how to configure and deploy your agent to channels, understand channel-specific settings, and implement appropriate security controls.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Deploy Your Agent Across Channels | Make your agent accessible across web, Teams, and other platforms with appropriate security | 12 minutes |
+| Deploy Your Agent To Channels | Make your agent accessible Teams and Microsoft 365 Copilot  | 12 minutes |
 
 **Summary of tasks**
 
-In this section, you'll learn how to navigate the Channels interface, configure the web channel with security settings, deploy to Microsoft Teams, and understand channel capabilities and limitations.
+In this section, you'll learn how to navigate the Channels interface, configure your agent to deploy to Microsoft Teams and Microsoft 365 Copilot, and understand channel capabilities and limitations.
 
-**Scenario:** Your Copilot Studio Assistant is ready for users. You need to make it available on your company website for easy access and in Microsoft Teams where most employees spend their day. You'll configure both channels with appropriate security settings.
+**Scenario:** Your Copilot Studio Assistant is ready for users. You need to make it available on your company users for easy access in Microsoft Teams and Microsoft 365 Copilot where most employees spend their day. 
 
 ### Objective
 
-Deploy your agent to web and Teams channels with proper configuration and security.
+Deploy your agent to Teams and Microsoft 365 Copilot channels with proper configuration and security.
 
 ---
 
@@ -472,7 +472,6 @@ Deploy your agent to web and Teams channels with proper configuration and securi
     > [!NOTE]
     > Available channels depend on your Copilot Studio license and environment settings. Some channels require additional configuration or premium licenses.
 
-1. Notice which channels are already enabled or configured (typically the demo website is enabled by default).
 
 #### Explore Channel Capabilities
 
@@ -490,111 +489,45 @@ Deploy your agent to web and Teams channels with proper configuration and securi
    - Authentication requirements vary by channel
    - Customization options differ across channels
 
-#### Configure the Demo Website
+#### Deploy to Microsoft Teams and Microsoft 365 Copilot
 
-1. Select **Demo website** to view its configuration.
+1. Return to the Channels page and select **Teams and Microsoft 365 Copilot**.
 
-1. Review the demo website settings:
-   - **Website URL**: The temporary URL where you can test your agent
-   - **Status**: Whether the demo site is enabled or disabled
-
-1. If the demo website isn't enabled, Select **Enable** or **Turn on** to activate it.
-
-1. Select **Copy** next to the demo website URL, then open it in a new browser tab.
-
-1. Test your agent on the demo website by asking a few questions to verify functionality.
-
-    > [!TIP]
-    > The demo website is perfect for quick testing and sharing with stakeholders before full deployment. Use it to gather feedback before wider rollout.
-
-#### Configure Custom Website Channel
-
-1. Return to the Channels page and select **Custom website** (or **Website** depending on your interface).
-
-1. Review the custom website configuration options:
-    - **Embed code**: HTML/JavaScript code to embed the agent on your site
-    - **Style customization**: Colors, fonts, and branding options
-    - **Security settings**: Authentication and domain restrictions
-
-1. Select on **Configure** or **Settings** to access detailed configuration options.
-
-#### Configure Web Channel Security
-
-1. In the custom website settings, locate the **Security** section.
-
-1. Review the security options available:
-    - **No authentication**: Anyone can access the agent (use for public websites)
-    - **Require authentication**: Users must sign in (use for internal sites)
-    - **Allowed domains**: Restrict embedding to specific domains
-
-    > [!IMPORTANT]
-    > Security settings are critical for protecting sensitive data and ensuring compliance. For internal agents with access to company data, always require authentication.
-
-1. Configure domain restrictions by adding your website domains to the allowed list:
-
-    ```
-    contoso.com
-    www.contoso.com
-    intranet.contoso.com
-    ```
-
-1. Review how domain restrictions prevent unauthorized embedding of your agent on external sites.
-
-    > [!WARNING]
-    > Without domain restrictions, anyone can embed your agent on any website. Always configure allowed domains for production deployments.
-
-1. Select **Save** to apply the security settings.
-
-#### Deploy to Microsoft Teams
-
-1. Return to the Channels page and select **Microsoft Teams**.
-
-1. Review the Teams channel configuration options:
+1. Review the **Agent preview** section that shows how users will see your agent.
     - **App name**: How the agent appears in Teams
     - **App icon**: Visual branding in Teams
     - **Availability**: Who can access the agent
 
+1. Select **Edit details** and make adjustments. For example, change the short description to something like **Assist users building agents**
+
+1. Select **Save** to save your changes.
+
+1. Select **Publish** to publish your agent and make it available.
+
 1. Select **Turn on Teams** or **Enable** to activate the Teams channel.
 
-1. Review the deployment options:
-    - **Share with team**: Add the agent to a specific Teams team or channel
-    - **Install for myself**: Add the agent to your personal Teams chat
-    - **Submit for admin approval**: Request organization-wide deployment
+1. Select **Availability options** and review what is available:
 
-1. Select **Download manifest** or **Get agent link** to get the Teams app package.
+1. After reviewing the options select the back arrow to return to the prior panel.
 
-    > [!NOTE]
-    > For organization-wide deployment, your IT admin must approve and publish the agent to your company's Teams app catalog.
+1. Select **See agent in Teams**, this will load a new browser tab with the Teams web application.
 
-1. Follow the prompts to install the agent in your personal Teams or share it with a team for testing.
+1. If prompted to **Open Microsoft Teams?**, select **Cancel** and after the dialog closes select the **Use the web app instead**
 
-1. Open Microsoft Teams and verify that the agent appears in your chat list or team channels.
+1. If this is your first visit to Teams, you may be prompted with some other dialogs, after you dismiss them you may have to go back to Copilot Studio and re-select **See agent in Teams**
 
-#### Test Multi-Channel Deployment
+1. You should now see a dialog presenting your agent for you to review before you add it to your Teams session. After reviewing the details, select **Add**
 
-1. Test your agent in Microsoft Teams by sending a few messages.
+1. You should next see a **Added successfully** message select **Open** to use your agent.
+
+1. Once yuur agent loads, ask it a question like **How do I build a good prompt?**
 
 1. Compare the experience between Teams and the web demo site:
     - Notice how the UI differs
-    - Test the same questions on both channels
-    - Observe how authentication works on each channel
+    - Test the same questions on the channel
 
     > [!TIP]
     > Always test your agent on each deployed channel. Some features or formatting may work differently across channels.
-
-#### Review Channel Limitations
-
-1. Return to the Channels page in Copilot Studio.
-
-1. Review the **Channel capabilities** documentation or table showing:
-    - Which features work on which channels
-    - Known limitations per channel
-    - Recommended practices for multi-channel deployment
-
-1. Consider how channel limitations might affect your agent design:
-    - Avoid features that don't work on your primary channels
-    - Design for the lowest common denominator if deploying everywhere
-    - Create channel-specific topics for advanced features
 
 ---
 
