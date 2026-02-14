@@ -155,17 +155,17 @@ Set up your development environment by creating a solution and custom publisher 
 
 1. Go to [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com/).
 
-2. Confirm you are in the correct environment (top-right corner).
+1. Confirm you are in the correct environment (top-right corner).
 
 #### Create a Solution
 
-3. In the left navigation (under the **...** menu), select **Solutions**.
+1 In the left navigation (under the **...** menu), select **Solutions**.
 
     ![Copilot Studio navigation menu with Solutions option highlighted](images/solutions.png)
 
-4. Select **New solution**.
+1. Select **New solution**.
 
-5. Enter a display name.
+1. Enter a display name.
 
 > [!TIP]
 > - Avoid names like `DEV`, `TEST`, `PROD`, `POC`, `MVP` or anything tied to a project lifecycle phase.
@@ -174,21 +174,22 @@ Set up your development environment by creating a solution and custom publisher 
 
 #### Create a Publisher
 
-6. If this is your first solution, Select **+ New publisher** to create one.
+1. If this is your first solution, Select **+ New publisher** to create one.
 
 > [!TIP]
 > - You may use your organization's name.
 > - While the **Display name** may contain spaces, the **Name** can't contain special characters and spaces.
 > - Define a short prefix for use in technical names.
 
-> [!IMPORTANT]
-> Avoid using the default publisher or the default solution. Custom publishers ensure cleaner component names and better ALM hygiene.
+    > [!IMPORTANT]
+    > Avoid using the default publisher or the default solution. Custom publishers ensure cleaner component names and better ALM hygiene.
 
 #### Set and Create
 
-7. Check **Set as your preferred solution** (so any new component goes into it by default).
+1. Check **Set as your preferred solution** (so any new component goes into it by default).
 
-8. Select **Create**.
+1. Select **Create**.
+
 
 ---
 
@@ -335,6 +336,25 @@ Create a deployment pipeline that automates solution deployment across environme
     > [!IMPORTANT]
     > Access the workshop agent in the same location as when you created your training user account. You will need the workshop code and your training user's email address if you previously closed the agent. Tell the agent to "Provision a PROD environment". You are limited to a single PROD environment for the duration of the workshop.
 
+#### Create an agent to deploy
+
+1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com/
+
+1. Enter the following to describe the agent you wish to create:
+
+    ```
+    Create a Microsoft Surface Guide agent that knows everything about the Surface devices and can help guide users to pick the one that would be best for how they work. It should use the information from https://www.microsoft.com/en-us/surface as an official knowledge source
+    ```
+1. After the agent is created do a quick test of the agent by asking something like **What are the different Surface devices?**.
+
+1. In the left navigation select "..." and then **Solutions**
+
+1. Select the solution you created previously in this lab to open it and see the list of components.
+
+1. You should see **Microsoft Surface Guide** or something similar in the **Agents** category of components.
+
+1. Your solution is now read yto deploy to the PROD environment.
+
 #### Access Power Platform Pipelines
 
 1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com/.
@@ -428,9 +448,11 @@ Set up Azure DevOps Git integration, commit your solution components, and unders
 
 1. If not already signed in, log in with your provided user account.
 
-1. Select **Join Visual Studio Dev Essentials**.
+1. On the **We need a few more details** screen review the information and select **Continue**
 
-1. Confirm.
+1. Select **Join Visual Studio Dev Essentials** on the right side of the screen.
+
+1. Review the Welcome screen and then select **Confirm**.
 
 1. Under **Subscription / Program**, select **Visual Studio Dev Essentials**.
 
@@ -440,13 +462,13 @@ Set up Azure DevOps Git integration, commit your solution components, and unders
     > 2. If prompted, create a new organization (you can leave the default name).
     > 3. Skip to the next step.
 
-1. Select **Azure DevOps** to open the Azure DevOps portal.
+1. Select **Get started** in the **Azure DevOps**  featured benifit section to open the Azure DevOps portal.
 
-1. In the **Benefits** tab, for **Azure DevOps**, select **Get started**.
-
-1. When prompted, select **Continue**.
+1. When prompted to **Get started with Azure DevOps**, select **Continue**.
 
 1. Name your organization (you can leave the default name) and select **Continue**.
+
+1. If it says you need to create a new Azure subscription ,select **Create new Azure subscription**. Follow the prompts to complete.
 
 1. Create a new project by setting a **project name**. For example, `Agents`.
 
@@ -474,9 +496,9 @@ Set up Azure DevOps Git integration, commit your solution components, and unders
 
     ![Connect to Git](images/connect-to-git.png)
 
-2. When prompted for the branch, select **Create new branch** and name it `dev`.
+1. When prompted for the branch, select **Create new branch** and name it `dev`.
 
-21. Select **Save** and then **Connect**.
+1. Select **Save** and then **Connect**.
 
 #### Commit Your Solution to Source Control
 
