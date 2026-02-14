@@ -77,7 +77,7 @@ This lab teaches you how to architect sophisticated agent solutions that scale w
 
 * [Use variables to store and reuse information](https://learn.microsoft.com/microsoft-copilot-studio/authoring-variables)
 * [Create and manage child agents](https://learn.microsoft.com/microsoft-copilot-studio/advanced-use-skills)
-* [Multi-agent architectures in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-multi-agent)
+* [Multi-agent patterns](https://learn.microsoft.com/en-us/microsoft-copilot-studio/guidance/architecture/multi-agent-patterns)
 * [Configure channels for your agent](https://learn.microsoft.com/microsoft-copilot-studio/publication-fundamentals-publish-channels)
 * [Deploy to Microsoft Teams](https://learn.microsoft.com/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams)
 
@@ -188,9 +188,11 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 1. Select  **Variables** in the topics top right tool bar just above the Variable properties panel.
 
-1. Review the **Topic variables** section showing all variables in the current topic.
+1. Review the **Topic** section showing all variables in the current topic.
 
-1. Review the **Global variables** section showing variables available across the entire agent.
+1. Review the **Global** section showing variables available across the entire agent.
+
+1. Review the **Enviornment** section showing enviornment variables that, in part, help support ALM to move Agents from one enviornment to another.
 
     > [!NOTE]
     > The Variables view gives you a centralized place to see all variables, their types, and their values during testing.
@@ -202,7 +204,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
     - **Set Variable nodes** can transform data using formulas like `"Text " & Topic.variableName` (the `&` operator concatenates strings)
     - **Condition nodes** can branch logic based on variable values
 
-1. Notice the **+** button between nodes. select it to see the available node options (but do not add any nodes):
+1. Notice the **+** button between nodes. Select it to see the available node options (but do not add any nodes).
     - **Set a variable value**: Modify variable values using text, other variables, or formulas
     - **Ask a question**: Collect user input and automatically store it in a variable
     - **Add a condition**: Branch conversation logic based on variable values
@@ -288,13 +290,13 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 #### Create a Child Agent
 
-1. In your Copilot Studio agent, Select  **Agents**  in the agent top navigation bar.
+1. In your Copilot Studio Assistant agent, Select  **Agents**  in the agent top navigation bar.
 
 1. Select  **Add**.
 
-1. In the **Create a child agent** section, Select **ChNew child agent**.
+1. In the **Create a child agent** section, Select **New child agent**.
 
-1. Input  **CARE Prompt Guidance** in the **Name** field.
+1. Enter  **CARE Prompt Guidance** in the **Name** field.
 
 1. Input the following for the **Description**
     ```
@@ -320,7 +322,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 #### Add Knowledge Sources to Child Agent
 
-1. In the child agent, scroll down to the **Knowledge** knowledge section or select **Knowledge** in the child agent left navigation. 
+1. In the child agent, scroll down to the **Knowledge** section or select **Knowledge** in the child agent left navigation. 
 
 1. Select  **+ Add knowledge** to add a knowledge source.
 
@@ -337,7 +339,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 #### Configure Parent Agent Orchestration
 
-1. Return to your **parent agent** (the main Copilot Studio Assistant) by selecting **Overview** in the top navigation bar.
+1. Go to your **parent agent** (the main Copilot Studio Assistant) by selecting **Overview** in the top navigation bar.
 
 1. In the parent agent's **Instructions** field on the Overview page, select **Edit** in the upper right corner of the **Instructions** section.
 
@@ -441,13 +443,13 @@ Learn how to configure and deploy your agent to channels, understand channel-spe
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Deploy Your Agent To Channels | Make your agent accessible Teams and Microsoft 365 Copilot  | 12 minutes |
+| Deploy Your Agent To Channels | Make your agent accessible via Teams and Microsoft 365 Copilot  | 12 minutes |
 
 **Summary of tasks**
 
 In this section, you'll learn how to navigate the Channels interface, configure your agent to deploy to Microsoft Teams and Microsoft 365 Copilot, and understand channel capabilities and limitations.
 
-**Scenario:** Your Copilot Studio Assistant is ready for users. You need to make it available on your company users for easy access in Microsoft Teams and Microsoft 365 Copilot where most employees spend their day. 
+**Scenario:** Your Copilot Studio Assistant is ready for users. You need to make it available for your company's users for easy access in Microsoft Teams and Microsoft 365 Copilot where most employees spend their day. 
 
 ### Objective
 
@@ -491,6 +493,7 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 #### Deploy to Microsoft Teams and Microsoft 365 Copilot
 
+1. Before you can deploy to a channel, you must first publish your agent.  Select **Publish** from the top right corner of the screen.  Follow the prompts.
 1. Return to the Channels page and select **Teams and Microsoft 365 Copilot**.
 
 1. Review the **Agent preview** section that shows how users will see your agent.
@@ -520,7 +523,7 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 1. You should next see a **Added successfully** message select **Open** to use your agent.
 
-1. Once yuur agent loads, ask it a question like **How do I build a good prompt?**
+1. Once your agent loads, ask it a question like **How do I build a good prompt?**
 
 1. Compare the experience between Teams and the web demo site:
     - Notice how the UI differs
