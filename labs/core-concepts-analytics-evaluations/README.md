@@ -8,7 +8,7 @@ Learn how to use analytics to measure agent performance, create evaluation test 
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 200 | Maker | 30 minutes | After completing this lab, participants will be able to access and interpret agent analytics including conversation volume, topic performance, and user satisfaction, create evaluation test sets using auto-generation, CSV import, test canvas capture, and manual entry, configure evaluation methods including exact match, keyword match, similarity, general quality, and compare meaning, and review evaluation results to compare runs and identify improvement opportunities. |
+| 200 | Maker | 30 minutes | After completing this lab, participants will be able to analyze agent performance using analytics such as conversation volume, topic performance, and user satisfaction; generate and manage evaluation test sets using multiple creation methods; apply a range of evaluation techniques including exact match, keyword match, similarity scoring, general quality assessment, and meaning comparison; and interpret results to compare runs and drive continuous improvement. |
 
 ---
 
@@ -74,7 +74,7 @@ This lab teaches you how to use both analytics and the Agent Evaluation feature 
 
 * [Analyze agent performance](https://learn.microsoft.com/microsoft-copilot-studio/analytics-overview)
 * [Use conversation analytics](https://learn.microsoft.com/microsoft-copilot-studio/analytics-summary)
-* [Agent Evaluation overview](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-overview)
+* [Agent evaluation overview](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-overview)
 * [Create evaluation test sets](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-create)
 * [View and interpret evaluation results](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-results)
 
@@ -142,7 +142,7 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 #### Navigate to Analytics
 
-1. In your Copilot Studio agent, select **Analytics** in the top navigation bar.
+1. Go to Copilot Studio and select **Agents** on the left navigation. Open your Copilot Studio Assistant agent and select **Analytics** in the top navigation bar.
 
 1. Review the analytics dashboard overview, which typically includes:
    - **Summary metrics**: Total conversations, engaged conversations, resolution rate
@@ -197,13 +197,13 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 1. Review the metrics for each of the child and connected Agents used by your agent:
     - Which agents are being used and what type are they
-    - Number of calls and Success rate - a low success rate might indicate the agent needs improvment or is not the right agent to be using
+    - Number of calls and success rate - a low success rate might indicate the agent needs improvment or is not the right agent to be using
 
 #### Review generated answer rate and quality
 
 1. Go to the **Generated answer rate and quality** section. This section requires a minimum of 10 answers per day in conversation sessions.
 
-1. This section tracks answer quality across completeness, relevance, and use of knowledge sources. Review your **Answered** and **Unanswered ** question percentages. 
+1. This section tracks answer quality across completeness, relevance, and use of knowledge sources. Review your **Answered** and **Unanswered** question percentages. 
 
 1. Select **See details** to go deeper into the answer rate and source analytics.
 
@@ -295,8 +295,8 @@ In this section, you'll learn how to generate test cases automatically, import t
 
 **Scenario:** You want to systematically test your Copilot Studio Assistant using different approaches. You'll create three distinct test sets - one auto-generated, one imported from CSV that is intentionally designed to fail, and one captured from real agent conversations that should pass - to see how different creation methods and evaluation outcomes work.
 
-    > [!NOTE]
-    > **Preview Feature:** Agent Evaluation is currently a preview feature in Copilot Studio. Features and UI may change as Microsoft iterates on the experience. Preview features are not intended for production use.
+    > [!NOTE] 
+    > Preview Feature: Agent evaluation is currently a preview feature in Copilot Studio. Features and UI may change as Microsoft iterates on the experience. Preview features are not intended for production use.
 
 ### Objective
 
@@ -308,7 +308,7 @@ Create evaluation test sets using four different methods and understand how each
 
 #### Generate Test Cases
 
-1. In your Copilot Studio agent, select **Evaluation** in the top navigation bar for your agent.
+1. In your Copilot Studio Assistant agent, select **Evaluation** in the top navigation bar for your agent.
 
     > [!NOTE]
     > If you don't see the Evaluation option, it may need to be enabled in your environment settings or may not yet be available in your region. Check [Agent Evaluation overview](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-overview) for availability.
@@ -335,7 +335,7 @@ Create evaluation test sets using four different methods and understand how each
 
     - **Similarity**: Uses cosine similarity to compare semantic meaning on a 0-1 scale with a configurable threshold. Use when meaning matters more than exact wording.
 
-    - **General Quality**: Uses an LLM to evaluate response quality across four dimensions - relevance, groundedness, completeness, and abstention. Does NOT require an expected response. Use for open-ended questions.
+    - **General Quality**: Uses a LLM to evaluate response quality across four dimensions - relevance, groundedness, completeness, and abstention. Does NOT require an expected response. Use for open-ended questions.
 
     - **Compare Meaning**: Evaluates whether the intent and meaning of the actual response matches the expected response, with a configurable threshold. Use for semantic comparison with more nuance than cosine similarity.
 
@@ -512,7 +512,7 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
 
 #### Review the Auto-Generated Test Set Results
 
-1. Go to the **Evaluation** page in your Copilot Studio agent.
+1. Go to the **Evaluation** page in your Copilot Studio Assistant agent.
 
 1. Select the **Non-Critical Copilot Studio Guide Set** to view its evaluation results.
 
@@ -522,7 +522,7 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
    - **Question**: The original test question
    - **Expected response**: What the AI generated as the correct answer
    - **Actual response**: What the agent actually responded with
-   - **Result**: Pass or Fail
+   - **Result**: Pass or fail
    - **Reasoning**: An explanation of why the test passed or failed
 
 1. For any failed test cases, review the **activity map** to see the step-by-step conversation flow showing the agent's decision path, including which knowledge sources, tools, and topics were used.
