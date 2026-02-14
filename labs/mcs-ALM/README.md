@@ -82,8 +82,8 @@ Without ALM, each of these steps is manual, error-prone, and difficult to repeat
 
 ## 📄 Documentation and Additional Training Links
 
-* [ALM overview - Microsoft Power Platform](https://learn.microsoft.com/power-platform/alm/alm-overview)
-* [Publish and deploy your agent](https://learn.microsoft.com/copilot-studio/publish-deploy)
+* [ALM overview - Microsoft Power Platform](https://learn.microsoft.com/en-us/power-platform/alm/)
+* [Publish and deploy your agent](https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-fundamentals-publish-channels)
 * [Webinar: Microsoft Copilot Studio ALM](https://aka.ms/MCSALMWebinar)
 * [Environment variables in solutions](https://learn.microsoft.com/power-apps/maker/data-platform/environmentvariables)
 * [Connection references in a solution](https://learn.microsoft.com/power-apps/maker/data-platform/create-connection-reference)
@@ -174,7 +174,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 #### Create a Publisher
 
-6. If this is your first solution, click **+ New publisher** to create one.
+6. If this is your first solution, Select **+ New publisher** to create one.
 
 > [!TIP]
 > - You may use your organization's name.
@@ -188,7 +188,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 7. Check **Set as your preferred solution** (so any new component goes into it by default).
 
-8. Click **Create**.
+8. Select **Create**.
 
 ---
 
@@ -238,7 +238,7 @@ Create environment variables and connection references that enable your solution
 
 1. Open the solution you created in Use Case #1.
 
-2. Select **+ New**, then go to **More** and choose **Environment variable**.
+2. Select **+ New**, then select **More** and choose **Environment variable**.
 
     ![Copilot Studio showing New menu expanded with Environment variable option highlighted](images/environment-variable-connection-reference.png)
 
@@ -254,12 +254,12 @@ Create environment variables and connection references that enable your solution
 > [!TIP]
 > Notice how, under **Advanced**, you can set whether the current value can follow through with your solution deployment, or if it should be reset each time the solution is deployed to a new environment.
 
-6. Click **Save**.
+6. Select **Save**.
 
 > [!TIP]
 > Environment variables can also be of type **Secret** to retrieve secure values like API keys from Azure Key Vault at runtime.
 
-7. In the solution, select **New**, then go to **More** and choose **Connection reference**.
+7. In the solution, select **New**, then select **More** and choose **Connection reference**.
 
 8. Use the connector name, `ServiceNow`, as the name. Optionally, prefix with your project name.
 
@@ -330,48 +330,48 @@ Create a deployment pipeline that automates solution deployment across environme
 > [!TIP]
 > If you haven't done so already, you need to request a PROD environment to be created for your user. This is a one-time setup step that will allow you to create pipelines for deployment.
 
-1. **Start** by requesting a PROD environment to be created for your user. Use the **Workshop Agent** to request this environment, which will be automatically created for you. This will take a couple of minutes to provision and show up.
+1. Start by requesting a PROD environment to be created for your user. Use the **Workshop Agent** [aka.ms/MCSWorkshopAgent](https://aka.ms/MCSWorkshopAgent) to request this environment, which will be automatically created for you. This will take a couple of minutes to provision and show up.
 
-> [!IMPORTANT]
-> Access the workshop agent in the same location as when you created your training user account. You will need the workshop code and your training user's email address if you previously closed the agent. Tell the agent to "Provision a PROD environment". You are limited to a single PROD environment for the duration of the workshop.
+    > [!IMPORTANT]
+    > Access the workshop agent in the same location as when you created your training user account. You will need the workshop code and your training user's email address if you previously closed the agent. Tell the agent to "Provision a PROD environment". You are limited to a single PROD environment for the duration of the workshop.
 
 #### Access Power Platform Pipelines
 
-2. Navigate to the Copilot Studio home page at https://copilotstudio.microsoft.com/.
+1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com/.
 
-3. Go to the **Solutions** menu (located in the left-hand menu under the ellipsis **...**) of your DEV environment.
+1. Go to the **Solutions** menu (located in the left-hand menu under the ellipsis **...**) of your DEV environment.
 
-4. Select the solution you created in Use Case #1.
+1. Select the solution you created in Use Case #1.
 
-5. In the left navigation, select **Pipelines**.
+1. In the left navigation, select **Pipelines**.
 
-6. Select **+ Create new pipeline**.
+1. Select **+ Create pipeline**.
 
 #### Configure Pipeline Basics
 
-7. Enter a **Name** for your pipeline, e.g., `<your user name> Pipeline`.
+1. Enter a **Name** for your pipeline, e.g., `<your user name> Pipeline`.
 
-8. Set a **Description** to explain the pipeline's purpose (e.g., `Automated deployment of agents from DEV to PROD`).
+1. Set a **Description** to explain the pipeline's purpose (e.g., `Automated deployment of agents from DEV to PROD`).
 
 #### Set Up Deployment Stage
 
-9. Select the **PROD** environment as the **Target environment**.
+1. Select the **PROD** environment as the **Target environment**.
 
-10. **Save** the pipeline configuration.
+1. **Save** the pipeline configuration.
 
     ![Pipeline configuration](images/pipeline.png)
 
 #### Test Your Pipeline
 
-11. In the PROD card, select **Deploy here**.
+1. In the PROD card, select **Deploy here**.
 
-> [!TIP]
-> - The wizard makes sure that each environment variable has a value set in the target environment, and that all connection references are valid. If any of these checks fail, you will be prompted to fix them before proceeding.
-> - If the deployment fails because of missing dependencies, go back to your solution explorer, click on the **...** next to each agent > **Advanced** > **Add required objects** and try re-deploying the solution.
+    > [!TIP]
+    > - The wizard makes sure that each environment variable has a value set in the target environment, and that all connection references are valid. If any of these checks fail, you will be prompted to fix them before proceeding.
+    > - If the deployment fails because of missing dependencies, go back to your solution explorer, select the **...** next to each agent > **Advanced** > **Add required objects** and try re-deploying the solution.
 
-12. In Copilot Studio, **switch** to the PROD environment.
+1. In Copilot Studio, **switch** to the PROD environment.
 
-13. See what the agents look like in the PROD environment. When entering a topic, see how customizations are locked because the solution is managed.
+1. See what the agents look like in the PROD environment. When entering a topic, see how customizations are locked because the solution is managed.
 
 ---
 
@@ -424,114 +424,114 @@ Set up Azure DevOps Git integration, commit your solution components, and unders
 
 #### Set Up Azure DevOps
 
-1. Navigate to [my.visualstudio.com/subscriptions](https://my.visualstudio.com/subscriptions).
+1. Go to [my.visualstudio.com/subscriptions](https://my.visualstudio.com/subscriptions).
 
-2. If not already signed in, log in with your fictitious user account.
+1. If not already signed in, log in with your provided user account.
 
-3. Select **Join Visual Studio Dev Essentials**.
+1. Select **Join Visual Studio Dev Essentials**.
 
-4. Confirm.
+1. Confirm.
 
-5. Under **Subscription / Program**, select **Visual Studio Dev Essentials**.
+1. Under **Subscription / Program**, select **Visual Studio Dev Essentials**.
 
-> [!IMPORTANT]
-> If you encounter a **Something went wrong!** error, follow these steps:
-> 1. Go to [aex.dev.azure.com](https://aex.dev.azure.com/).
-> 2. If prompted, create a new organization (you can leave the default name).
-> 3. Skip to step 6.
+    > [!IMPORTANT]
+    > If you encounter a **Something went wrong!** error, follow these steps:
+    > 1. Go to [aex.dev.azure.com](https://aex.dev.azure.com/).
+    > 2. If prompted, create a new organization (you can leave the default name).
+    > 3. Skip to the next step.
 
-6. Select **Azure DevOps** to open the Azure DevOps portal.
+1. Select **Azure DevOps** to open the Azure DevOps portal.
 
-7. In the **Benefits** tab, for **Azure DevOps**, select **Get started**.
+1. In the **Benefits** tab, for **Azure DevOps**, select **Get started**.
 
-8. When prompted, select **Continue**.
+1. When prompted, select **Continue**.
 
-9. Name your organization (you can leave the default name) and select **Continue**.
+1. Name your organization (you can leave the default name) and select **Continue**.
 
-10. Create a new project by setting a **project name**. For example, `Agents`.
+1. Create a new project by setting a **project name**. For example, `Agents`.
 
-11. Select **+ Create project**.
+1. Select **+ Create project**.
 
-12. After project creation, go to **Repos** > **Branches**.
+1. After project creation, go to **Repos** > **Branches**.
 
-13. Select **Initialize** (at the bottom) to create the `main` branch with a README or .gitignore.
+1. Select **Initialize** (at the bottom) to create the `main` branch with a README or .gitignore.
 
     ![Azure DevOps initialize branch](images/azure-devops-initialize-branch.png)
 
 #### Connect Microsoft Copilot Studio to Git
 
-14. Go back to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and open the **Solutions** page (under the **...** menu).
+1. Go back to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and open the **Solutions** page (under the **...** menu).
 
-15. In the menu, select **Connect to Git**.
+1. In the menu, select **Connect to Git**.
 
-16. Set **Connection type** to `Solution`.
+1. Set **Connection type** to `Solution`.
 
-17. Choose your **organization** and your newly created **project** and **repository**.
+1. Choose your **organization** and your newly created **project** and **repository**.
 
-18. Set the **Root Git folder** to `Solutions`.
+1. Set the **Root Git folder** to `Solutions`.
 
-19. Select **Next**, then pick the solution you created in Use Case #1.
+1. Select **Next**, then pick the solution you created in Use Case #1.
 
     ![Connect to Git](images/connect-to-git.png)
 
-20. When prompted for the branch, select **Create new branch** and name it `dev`.
+2. When prompted for the branch, select **Create new branch** and name it `dev`.
 
-21. Click **Save** and then **Connect**.
+21. Select **Save** and then **Connect**.
 
 #### Commit Your Solution to Source Control
 
-22. Open the solution you created in Use Case #1.
+1. Open the solution you created in Use Case #1.
 
-23. In the left-hand navigation, navigate to **Source control**.
+1. In the left-hand navigation, go to **Source control**.
 
-24. See how the various components you have added to your solution are now ready to be committed to source control. If you don't see them all, select **Refresh** as they get detected and added.
+1. See how the various components you have added to your solution are now ready to be committed to source control. If you don't see them all, select **Refresh** as they get detected and added.
 
-25. When ready, select **Commit**, and add a comment describing the changes (e.g., `New solution and environment variable`).
+1. When ready, select **Commit**, and add a comment describing the changes (e.g., `New solution and environment variable`).
 
     ![Commit changes](images/commit.png)
 
-26. Once committed, navigate to your commit in Azure DevOps to see the introduced, updated, or deleted components.
+1. Once committed, go to your commit in Azure DevOps to see the introduced, updated, or deleted components.
 
 #### Explore Solution Structure in Azure DevOps
 
-27. Navigate to your Azure DevOps project and browse to **Repos**.
+1. Go to your Azure DevOps project and browse to **Repos**.
 
-28. Explore the **Solutions** folder structure:
+1. Explore the **Solutions** folder structure:
 
-```
-Solutions/
-├── [SolutionName]/
-│   ├── botcomponents/
-│   ├── bots/
-│   ├── connectionreferences/
-│   ├── environmentvariabledefinitions/
-│   ├── publishers/
-│   └── solutions/
-```
+    ```
+    Solutions/
+    ├── [SolutionName]/
+    │   ├── botcomponents/
+    │   ├── bots/
+    │   ├── connectionreferences/
+    │   ├── environmentvariabledefinitions/
+    │   ├── publishers/
+    │   └── solutions/
+    ```
 
 #### Understand Component Organization
 
-29. Examine key folders:
+1. Examine key folders:
    - **ConnectionReferences/**: Contains connection reference definitions used by connectors, flows, and tools
    - **EnvironmentVariables/**: Contains environment variable definitions and values
    - **Workflows/**: Contains Power Automate flows (if any)
    - **Other/Copilot/**: Contains Copilot Studio agents and components
    - **SolutionPackage/**: Contains the overall solution metadata
 
-30. Open a component file to see the XML, YAML, or JSON structure that defines these components.
+1. Open a component file to see the XML, YAML, or JSON structure that defines these components.
 
-31. Notice how this structure enables:
+1. Notice how this structure enables:
     - Granular tracking of changes to individual components
     - Easy integration with other CI/CD tools and processes
     - Professional development workflows for larger teams
 
 #### Review Deployment History
 
-32. Go to **Repos** > **Commits** to see your deployment history.
+1. Go to **Repos** > **Commits** to see your deployment history.
 
-33. Compare commits to understand what changed between deployments.
+1. Compare commits to understand what changed between deployments.
 
-34. Use the diff view to see exactly what components were modified.
+1. Use the diff view to see exactly what components were modified.
 
 ---
 
