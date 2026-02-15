@@ -8,7 +8,7 @@ Learn how to create, share, and manage reusable component collections to package
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 30 minutes | After completing this lab, participants will be able to create component collections that package topics and knowledge into reusable bundles, share component collections across multiple agents, manage collection ownership with primary agent settings, and understand how component collections integrate with Power Platform solutions. |
+| 300 | Maker | 30 minutes | After completing this lab, you will be able to create component collections that package topics and knowledge into reusable bundles, share component collections across multiple agents, manage collection ownership with primary agent settings, and understand how component collections integrate with Power Platform solutions. |
 
 ---
 
@@ -70,8 +70,7 @@ This lab teaches you how to create component collections, share them across agen
 
 ## 📄 Documentation and Additional Training Links
 
-* [Component collections overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/component-collections)
-* [Create and manage component collections](https://learn.microsoft.com/en-us/microsoft-copilot-studio/manage-component-collections)
+* [Component collections overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-export-import-copilot-components)
 
 ---
 
@@ -133,78 +132,70 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 #### Create the Safe Travels Agent
 
-1. Navigate to the Copilot Studio home page at https://copilotstudio.microsoft.com.
+1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com.
 
-2. Click **Agents** on the left-hand menu.
+1. Select **Agents** on the left side navigation.
 
-3. Scroll down to the **Start with an agent template** section.
+1. Scroll down to the **Start with an agent template** section.
 
-4. Select the **Safe Travels** template.
+1. Select the **Safe Travels** template.
 
-5. Click **Create** to make the agent.
+1. Select **Create** to make the agent.
 
 #### Create a Sample Topic
 
-6. Once your agent is provisioned, scroll down to the **Topics** overview menu.
+1. Once your agent is provisioned, scroll down to the **Topics** section on the **Overview** tab.
 
-7. Click **Add a Topic**.
+1. Select **Add topic**.
 
-8. Enter the following into the **Name your topic** field:
+1. Enter **Request a travel brochure** into the **Name your topic** field
 
-```
-Request a travel brochure
-```
+1. Enter the following into the **Create a topic to...** field:
 
-9. Enter the following into the **Create a topic to...** field:
+  ```
+  Let a user request a brochure by providing details by asking them if they want it via mail or email. If they select email collect their email address, but if they say via mail then collect their street address including city, state, and postal code. Always collect their first and last name and telephone number.
+  ```
 
-```
-Let a user request a brochure by providing details by asking them if they want it via mail or email. If they select email collect their email address, but if they say via mail then collect their street address including city, state, and postal code. Always collect their first and last name and telephone number.
-```
+1. Select **Create**.
 
-10. Click **Create**.
+1. Notice that Copilot Studio has created a topic that allows the user to request a brochure, complete with branching logic for mail vs. email delivery.
 
-11. Notice that Copilot Studio has created a topic that allows the user to request a brochure, complete with branching logic for mail vs. email delivery.
-
-12. Click **Save** to save the topic.
+1. Select **Save** to save the topic.
 
 #### Create a Component Collection
 
-13. Click **Settings** (in the upper right-hand corner).
+1. Select **Settings** (in the upper right-hand corner).
 
-14. In the left-hand navigation, click **Component Collections**.
+1. In the left-hand navigation, Select **Component Collections**.
 
-15. Click **Create** on the Create a component collection screen.
+1. Select **Create** on the Create a component collection screen.
 
-16. Enter the following into the **Name** field:
+1. Enter **Travel Tools**  into the **Name** field
 
-```
-Travel Tools
-```
+1. Enter the following into the **Description** field:
 
-17. Enter the following into the **Description** field:
+  ```
+  These are tools that assist with travel related scenarios.
+  ```
 
-```
-These are tools that assist with travel related scenarios.
-```
+1. Check the **Solution** field, if **Select a solution** is showing do not change anything, if a solution is selected change it to **Create a new solution.
 
-18. Leave the **Solution** field blank.
+  > [!NOTE]
+  > If the Solution field is left blank, Copilot Studio will automatically create a new solution for you. You can also select an existing solution if you want to group multiple component collections together.
 
-> [!NOTE]
-> If the Solution field is left blank, Copilot Studio will automatically create a new solution for you. You can also select an existing solution if you want to group multiple component collections together.
+1. Select **Next**.
 
-19. Click **Next**.
+1. Select your **Request a travel brochure** topic and the **US Travel Website** knowledge item, then Select **Next**.
 
-20. Select your **Request a travel brochure** topic and the **US Travel Website** knowledge item, then click **Next**.
+1. On the **Review contents** screen, Select **Create**.
 
-21. On the **Review contents** screen, click **Create**.
+1. You will now see that you have created your first component collection called **Travel Tools**.
 
-22. You will now see that you have created your first component collection called **Travel Tools**.
+1. Close the Settings menu by selecting the **X** in the upper right-hand corner.
 
-23. Close the Settings menu by clicking the **X** in the upper right-hand corner.
+1. Select **Topics** in the top menu.
 
-24. Click **Topics** in the top menu.
-
-25. Notice the icon at the far end of the row where it says **Request a travel brochure** - this icon indicates that the topic is part of a component collection.
+1. Notice the icon at the far end of the row where it says **Request a travel brochure** - this icon indicates that the topic is part of a component collection.
 
 ---
 
@@ -259,54 +250,54 @@ Install a component collection in a new agent and verify that shared editing wor
 
 #### Add the Component Collection to a New Agent
 
-1. Click **Agents** on the left-hand navigation menu.
+1. Select **Agents** on the left-hand navigation menu.
 
-2. Click the **Create blank agent** button in the upper right-hand corner.
+1. Select the **Create blank agent** button in the upper right-hand corner.
 
-3. This will create a blank agent. Wait for it to be provisioned.
+1. This will create a blank agent. Wait for it to be provisioned.
 
-4. Once provisioned, go to **Settings** (in the upper right-hand corner).
+1. Once provisioned, go to **Settings** (in the upper right-hand corner).
 
-5. Click **Component collections** in the left-hand navigation.
+1. Select **Component collections** in the left-hand navigation.
 
-6. In the **Manage component collections** menu, select the **Available** tab.
+1. In the **Manage component collections** menu, select the **Available** tab.
 
-7. Hover over the **Travel Tools** item in the list, click the **...** menu, and select **Add to agent**.
+1. Hover over the **Travel Tools** item in the list, Select the **...** menu, and select **Add to agent**.
 
-8. This adds the Travel Tools component collection to your new agent.
+1. This adds the Travel Tools component collection to your new agent.
 
-9. Navigate to the **Installed** tab in the menu.
+1. Go to the **Installed** tab in the menu.
 
-10. Notice that **Travel Tools** is now listed as installed in both your new agent and the Safe Travels agent.
+1. Notice that **Travel Tools** is now listed as installed in both your new agent and the Safe Travels agent.
 
-11. Close the Settings menu by clicking the **X** in the upper right-hand corner.
+1. Close the Settings menu by selecting the **X** in the upper right-hand corner.
 
-12. Notice that you now have the knowledge and topic from Safe Travels available in your new agent as well.
+1. Notice that you now have the knowledge and topic from Safe Travels available in your new agent as well.
 
 #### Edit a Shared Component
 
-13. Open the **Request a travel brochure** topic.
+1. Open the **Request a travel brochure** topic.
 
-14. Add a **Message** node to the end of the topic by clicking the **+** at the very bottom and selecting **Send a message**.
+1. Add a **Message** node to the end of the topic by selecting the **+** at the very bottom and selecting **Send a message**.
 
-15. Enter the following text into the message:
+1. Enter the following text into the message:
 
-```
-Your request for a brochure has been submitted.
-```
+    ```
+    Your request for a brochure has been submitted.
+    ```
 
-16. Click **Save**.
+1. Select **Save**.
 
 #### Verify Changes Sync Across Agents
 
-17. In the **Agents** menu on the left-hand navigation, navigate back to the **Safe Travels** agent.
+1. In the **Agents** menu on the left-hand navigation, go back to the **Safe Travels** agent.
 
-18. Navigate to the **Request a travel brochure** topic and click on it to open it.
+1. Go to the **Request a travel brochure** topic and Select it to open it.
 
-19. You may need to refresh your browser, but you will see that the edit you made in the other agent is now reflected here as well.
+1. You may need to refresh your browser, but you will see that the edit you made in the other agent is now reflected here as well.
 
-> [!IMPORTANT]
-> This is the key value of component collections - changes made in any connected agent are automatically synced to all other agents that share the same collection. This eliminates the need to manually update components in multiple places.
+    > [!IMPORTANT]
+    > This is the key value of component collections - changes made in any connected agent are automatically synced to all other agents that share the same collection. This eliminates the need to manually update components in multiple places.
 
 ---
 
@@ -361,52 +352,52 @@ Manage component collection access, set a primary agent, and explore solution in
 
 #### View Component Collection Details
 
-1. In the left-hand navigation menu, click the **...** button and select **Component collections**.
+1. In the left-hand navigation menu, Select the **...** button and select **Component collections**.
 
-2. In the list, click on **Office Space Entities**.
+1. In the list, Select on **Corporate Services**.
 
-3. Review the details about the Office Space Entities component collection, including what is included in it (2 different Entities).
+1. Review the details about the **Corporate Services** component collection, including what is included in it.
 
 #### Add an Agent to a Component Collection
 
-4. In the **Connected agents** section in the upper right, select **Add agent**.
+1. In the **Connected agents** section in the upper right, select **Add agent**.
 
-5. Select the **Safe Travels** agent and click **Add** to connect it to this component collection.
+1. Select the **Safe Travels** agent and Select **Add** to connect it to this component collection.
 
-6. In the **Agents** navigation menu on the left, go to the **Safe Travels** agent.
+1. In the **Agents** navigation menu on the left, go to the **Safe Travels** agent.
 
-7. Go to **Settings**.
+1. Go to **Settings**.
 
-8. Go to **Topics** on the top menu and then select **Request Product Info**.
+1. Go to **Topics** on the top menu and then select **Request Product Info**.
 
-9. Notice that you can't make any changes as the component collection that installed it is managed.
+1. Notice that you can't make any changes as the component collection that installed it is managed.
 
-> [!NOTE]
-> Managed component collections are read-only in the consuming agent. Only the maker who owns the collection can edit its contents. This protects shared components from unintended modifications.
+    > [!NOTE]
+    > Managed component collections are read-only in the consuming agent. Only the maker who owns the collection can edit its contents. This protects shared components from unintended modifications.
 
 #### Set a Primary Agent
 
-10. Click the **...** in the left-hand navigation menu and select **Component collections**.
+1. Select the **...** in the left-hand navigation menu and select **Component collections**.
 
-11. Select **Travel Tools**.
+1. Select **Travel Tools**.
 
-12. In the **Connected agents** section on the upper right-hand side, click the **...** next to any agents other than the Safe Travels agent and click **Disconnect from agent** until only the Safe Travels agent is left in the list.
+1. In the **Connected agents** section on the upper right-hand side, Select the **...** next to any agents other than the Safe Travels agent and Select **Disconnect from agent** until only the Safe Travels agent is left in the list.
 
-13. Once you have only Safe Travels in the list, click the **...** next to it and select **Set as primary agent**.
+1. Once you have only Safe Travels in the list, Select the **...** next to it and select **Set as primary agent**.
 
-14. You will now see that Safe Travels shows as the **Primary agent** and that **Add agent** is greyed out. This means the component collection can only be used by this single agent in your environment.
+1. You will now see that Safe Travels shows as the **Primary agent** and that **Add agent** is greyed out. This means the component collection can only be used by this single agent in your environment.
 
-> [!TIP]
-> Setting a primary agent is useful when you want to make components created by others available to only one application. It allows you to hand off the development and release of a component without the worry that other agents will use the collection.
+  > [!TIP]
+  > Setting a primary agent is useful when you want to make components created by others available to only one application. It allows you to hand off the development and release of a component without the worry that other agents will use the collection.
 
 #### Explore Solution Awareness
 
-15. In the **Details** section, click **View Solution** (Travel Tools Solution).
+1. In the **Details** section, Select **View Solution** (Travel Tools Solution).
 
-16. This will let you inspect the details of the solution in Power Platform, as component collections are solution-aware.
+1. This will let you inspect the details of the solution in Power Platform, as component collections are solution-aware.
 
-> [!NOTE]
-> Multiple component collections can be placed in the same solution. This allows you to package groups of collections for common deployment to an environment. This is commonly done for corporate standards and organizational templates.
+  > [!NOTE]
+  > Multiple component collections can be placed in the same solution. This allows you to package groups of collections for common deployment to an environment. This is commonly done for corporate standards and organizational templates.
 
 ---
 
