@@ -70,7 +70,7 @@ Without ALM, each of these steps is manual, error-prone, and difficult to repeat
 | **Solution** | A standard way in Microsoft Power Platform to package and ship components - including agents, topics, knowledge sources, tools, flows, and other solution-aware component types - across environments. |
 | **Publisher** | A metadata element that identifies the creator of solution components. Using a custom publisher improves traceability and supports cleaner prefixes in naming conventions. |
 | **Environment** | A workspace in Power Platform where agents, flows, and data reside. ALM best practices typically involve multiple environments (e.g., dev, test, prod) to manage lifecycle stages. |
-| **Environment variable** | A reusable setting (like a URL, API key, or ID) that can vary between environments without modifying individual components. For secrets, use the Secret data type to retrieve values securely from Azure Key Vault. |
+| **Environment variable** | A reusable setting (like a URL, API key, or ID) that can vary between environments without modifying individual components. For secrets, use the secret data type to retrieve values securely from Azure Key Vault. |
 | **Connection reference** | An abstraction that links connectors (e.g., SharePoint, Dataverse, ServiceNow) to credentials and environment-specific settings, allowing reuse and cleaner ALM processes. |
 | **Managed solution** | A read-only version of a solution used for deployment to downstream environments. Managed solutions support clean, controlled, and incremental updates and prevent direct modifications in the target environment. |
 | **Unmanaged solution** | An editable solution used in development. Changes can be versioned and exported for deployment. Should not be used in test or production. |
@@ -84,7 +84,6 @@ Without ALM, each of these steps is manual, error-prone, and difficult to repeat
 
 * [ALM overview - Microsoft Power Platform](https://learn.microsoft.com/en-us/power-platform/alm/)
 * [Publish and deploy your agent](https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-fundamentals-publish-channels)
-* [Webinar: Microsoft Copilot Studio ALM](https://aka.ms/MCSALMWebinar)
 * [Environment variables in solutions](https://learn.microsoft.com/power-apps/maker/data-platform/environmentvariables)
 * [Connection references in a solution](https://learn.microsoft.com/power-apps/maker/data-platform/create-connection-reference)
 * [Overview of pipelines in Power Platform](https://learn.microsoft.com/power-platform/alm/pipelines)
@@ -159,7 +158,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 #### Create a Solution
 
-1 In the left navigation (under the **...** menu), select **Solutions**.
+1. In the left navigation (under the **...** menu), select **Solutions**.
 
     ![Copilot Studio navigation menu with Solutions option highlighted](images/solutions.png)
 
@@ -181,8 +180,8 @@ Set up your development environment by creating a solution and custom publisher 
 > - While the **Display name** may contain spaces, the **Name** can't contain special characters and spaces.
 > - Define a short prefix for use in technical names.
 
-    > [!IMPORTANT]
-    > Avoid using the default publisher or the default solution. Custom publishers ensure cleaner component names and better ALM hygiene.
+> [!IMPORTANT]
+> Avoid using the default publisher or the default solution. Custom publishers ensure cleaner component names and better ALM hygiene.
 
 #### Set and Create
 
