@@ -363,9 +363,9 @@ Manage component collection access, set a primary agent, and explore solution in
 
 1. In the left-hand navigation menu, click the **...** button and select **Component collections**.
 
-2. In the list, click on **Office Space Entities**.
+2. In the list, click on **Corporate Services**.
 
-3. Review the details about the Office Space Entities component collection, including what is included in it (2 different Entities).
+3. Review the details about the Corporate Services component collection, including what is included in it (Knowledge, 2 Entities, Topic, and Connector).
 
 #### Add an Agent to a Component Collection
 
