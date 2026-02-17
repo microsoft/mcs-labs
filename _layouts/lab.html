@@ -333,6 +333,34 @@ layout: default
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     // ========================================================================
+    // REPORT ISSUE - Pre-fill with current lab context
+    // ========================================================================
+    (function() {
+      var reportBtn = document.getElementById("report-issue-btn");
+      if (!reportBtn) return;
+
+      var labSlug = "{{ page.slug }}";
+      var labTitle = "{{ page.title | escape }}";
+
+      var issueTitle = "[" + labSlug + "] ";
+      var issueBody = "## Bug Report\n\n"
+        + "**Lab:** " + labTitle + " (`" + labSlug + "`)\n"
+        + "**Use case / step number:** \n"
+        + "**What happened:** \n\n"
+        + "**What I expected:** \n\n"
+        + "**Screenshots:** \n\n"
+        + "**Browser / environment:** \n";
+
+      var url = "https://github.com/microsoft/mcs-labs/issues/new"
+        + "?labels=lab"
+        + "&type=Bug"
+        + "&title=" + encodeURIComponent(issueTitle)
+        + "&body=" + encodeURIComponent(issueBody);
+
+      reportBtn.href = url;
+    })();
+
+    // ========================================================================
     // UNIFIED EVENT PARAMETER SYSTEM
     // ========================================================================
     // All events (Bootcamp, Azure AI Workshop, MCS in a Day) now use the

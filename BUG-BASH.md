@@ -4,48 +4,57 @@ Welcome to the MCS Labs Bug Bash! Your goal is to work through the labs and repo
 
 ## How to Report a Bug
 
-All bugs should be reported as GitHub Issues on the [microsoft/mcs-labs](https://github.com/microsoft/mcs-labs) repository.
+### Step 1: Navigate to a Lab
 
-### Step 1: Open a New Issue
+Open the [MCS Labs Portal](https://microsoft.github.io/mcs-labs/) and navigate to the lab you are testing. Each lab page has a red **Report Issue** button in the top navigation bar.
 
-Navigate to the **Issues** tab in the repository and click **New issue**, or use this direct link:
+![Lab page showing the Report Issue button in the navigation bar](assets/images/bug-bash-lab-page-top.png)
 
-> [Create a New Bug Report](https://github.com/microsoft/mcs-labs/issues/new?labels=bug+bash,lab&type=Bug)
+### Step 2: Click the Report Issue Button
 
-### Step 2: Fill in the Issue Details
+While you are on the lab page where you found the issue, click the **Report Issue** button in the navigation bar.
 
-![How to create a new issue](assets/images/github-new-issue.png)
+![Report Issue button in the navigation](assets/images/bug-bash-report-button-lab.png)
 
-**Title** — Write a clear, concise title that describes the problem. Include the lab name for easy identification.
+This will open a new GitHub Issue with the **lab name** and a **bug report template** automatically pre-filled for you — including the title format and description fields.
 
-Examples:
+### Step 3: Complete the Issue
+
+The issue title will be pre-filled with the lab name in brackets (e.g., `[mcs-multi-agent]`). Type a short description of the issue after the lab name.
+
+**Title examples:**
 - `[mcs-multi-agent] Step 12 screenshot does not match current UI`
 - `[core-concepts-agent-knowledge-tools] Broken link in Use Case #2`
 - `[agent-builder-m365] Missing image after "Create new agent" step`
 
-**Description** — Include as much detail as possible:
+The description will be pre-filled with a template. Fill in each field:
 
-- **Lab name** — Which lab were you working on?
 - **Use case / step number** — Where exactly did you encounter the issue?
 - **What happened** — Describe what went wrong or what was confusing.
-- **What you expected** — Describe what you think should have happened.
+- **What I expected** — Describe what you think should have happened.
 - **Screenshots** — Attach screenshots if applicable (drag and drop into the description field).
 - **Browser / environment** — Note your browser and any relevant environment details if the issue is technical.
 
-### Step 3: Set the Required Labels and Type
+### Step 4: Add the "bug bash" Label
 
-Before submitting, make sure the following are set on the right-hand side of the issue form:
+The Report Issue button pre-fills the `lab` label and `Bug` type for you. For the bug bash event, you must also add the **`bug bash`** label manually:
+
+1. On the right-hand side of the issue form, find **Labels**
+2. Click the gear icon next to Labels
+3. Search for and select **`bug bash`**
+
+![GitHub new issue form showing required labels and type](assets/images/github-new-issue.png)
+
+Your issue should have the following set:
 
 | Field | Required Value |
 |-------|---------------|
 | **Labels** | `bug bash` and `lab` |
 | **Type** | `Bug` |
 
-> **Important:** Issues without the `bug bash` and `lab` labels and `Bug` type will not be reviewed by the team during the bug bash.
+> **Important:** Issues without both the `bug bash` and `lab` labels and `Bug` type will not be reviewed by the team during the bug bash.
 
-If you used the [direct link](https://github.com/microsoft/mcs-labs/issues/new?labels=bug+bash,lab&type=Bug) above, these will be pre-filled for you.
-
-### Step 4: Submit
+### Step 5: Submit
 
 Click the green **Create** button to submit your issue.
 
