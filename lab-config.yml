@@ -79,7 +79,7 @@ labs:
     section: core
     order: 140
     journeys: [quick-start, business-user]
-    events: [bootcamp, mcs-in-a-day]
+    events: [bootcamp, mcs-in-a-day, mcs-in-a-day-v2]
 
   contract-alerts-azure-ai:
     title: "Proactive Contract Alerts in Teams with Azure AI Search and Speech-to-Text"
@@ -110,6 +110,7 @@ labs:
     section: core
     order: 170
     journeys: [quick-start, business-user, developer]
+    events: [bootcamp, mcs-in-a-day-v2]
 
   core-concepts-variables-agents-channels:
     title: "Master Variables, Multi-Agent Architectures, and Channel Deployment"
@@ -118,6 +119,7 @@ labs:
     section: core
     order: 175
     journeys: [quick-start, business-user, developer]
+    events: [bootcamp, mcs-in-a-day-v2]
 
   core-concepts-analytics-evaluations:
     title: "Monitor Performance and Evaluate Agent Quality"
@@ -126,8 +128,18 @@ labs:
     section: core
     order: 180
     journeys: [quick-start, business-user, developer]
+    events: [bootcamp, mcs-in-a-day-v2]
 
   # === INTERMEDIATE LABS (200-299) ===
+  mcs-governance:
+    title: "Governance Zones in Copilot Studio"
+    difficulty: "Advanced"
+    duration: 30
+    section: intermediate
+    order: 195
+    journeys: [business-user, developer]
+    events: [bootcamp]
+
   setup-for-success:
     title: "Set yourself up for success & discover ALM best practices"
     difficulty: "Intermediate"
@@ -135,7 +147,7 @@ labs:
     section: intermediate
     order: 200
     journeys: [business-user, developer]
-    events: [bootcamp, agent-buildathon-1month]
+    events: [agent-buildathon-1month]
 
   agent-builder-sharepoint:
     title: "Create your own SharePoint-based AI assistant with Agent Builder in Microsoft 365"
@@ -171,7 +183,6 @@ labs:
     section: intermediate
     order: 240
     journeys: [business-user, developer]
-    events: [bootcamp]
 
   mcs-multi-agent:
     title: "Using Multi-Agent in Copilot Studio"
@@ -180,6 +191,7 @@ labs:
     section: intermediate
     order: 250
     journeys: [business-user, developer]
+    events: [bootcamp]
 
   component-collections:
     title: "Using Component Collections in Copilot Studio"
@@ -188,6 +200,7 @@ labs:
     section: intermediate
     order: 260
     journeys: [business-user, developer]
+    events: [bootcamp]
 
   mcs-tools:
     title: "Copilot Studio Tools"
@@ -196,6 +209,7 @@ labs:
     section: intermediate
     order: 270
     journeys: [business-user, developer]
+    events: [bootcamp]
 
   mcs-ALM:
     title: "Application Lifecycle Management (ALM) in Copilot Studio"
@@ -204,6 +218,7 @@ labs:
     section: intermediate
     order: 280
     journeys: [business-user, developer]
+    events: [bootcamp]
 
   # === ADVANCED LABS (300-399) ===
   autonomous-cua:
@@ -213,7 +228,7 @@ labs:
     section: advanced
     order: 300
     journeys: [autonomous-ai, developer]
-    events: [bootcamp, agent-buildathon-1month]
+    events: [agent-buildathon-1month]
 
   autonomous-account-news:
     title: "Build an Autonomous Account News Assistant Agent"
@@ -240,7 +255,7 @@ labs:
     section: advanced
     order: 330
     journeys: [business-user]
-    events: [bootcamp, azure-ai-workshop]
+    events: [azure-ai-workshop]
 
   # === SPECIALIZED LABS (400-499) ===
   measure-success:
@@ -291,7 +306,7 @@ labs:
     section: specialized
     order: 450
     journeys: [quick-start, business-user, developer]
-    events: [bootcamp, azure-ai-workshop]
+    events: [azure-ai-workshop]
 
   # === OPTIONAL LABS (500-599) ===
   ask-me-anything-30-mins:
@@ -301,7 +316,7 @@ labs:
     section: optional
     order: 500
     journeys: [business-user]
-    events: [bootcamp, mcs-in-a-day]
+    events: [mcs-in-a-day]
 
   # === EXTERNAL LABS (600-699) ===
   mcs-mcp-external:
@@ -362,6 +377,7 @@ journeys:
         agent-academy-recruit,
         contract-alerts-azure-ai,
         setup-for-success,
+        mcs-governance,
         agent-builder-sharepoint,
         ask-me-anything,
         human-in-the-loop,
@@ -390,6 +406,7 @@ journeys:
         core-concepts-variables-agents-channels,
         core-concepts-analytics-evaluations,
         setup-for-success,
+        mcs-governance,
         agent-builder-sharepoint,
         ask-me-anything,
         human-in-the-loop,
@@ -426,18 +443,19 @@ journeys:
 events:
   bootcamp:
     title: "⚔️ Architecture Bootcamp"
-    description: "Intensive hands-on bootcamp covering progressive AI assistants, ALM best practices, autonomous agents, and advanced data integration with MCP and Fabric."
+    description: "Intensive hands-on bootcamp covering progressive AI assistants, core concepts, governance, tools, multi-agent architectures, and autonomous agents."
     lab_order:
       [
         agent-builder-m365,
-        setup-for-success,
-        public-website-agent,
-        ask-me-anything-30-mins,
+        core-concepts-agent-knowledge-tools,
+        core-concepts-variables-agents-channels,
+        core-concepts-analytics-evaluations,
+        mcs-ALM,
+        component-collections,
+        mcs-tools,
+        mcs-governance,
+        mcs-multi-agent,
         autonomous-account-news,
-        dataverse-mcp-connector,
-        autonomous-cua,
-        data-fabric-agent,
-        human-in-the-loop,
       ]
 
   azure-ai-workshop:
@@ -462,6 +480,17 @@ events:
         mbr-prep-sharepoint-agent,
         ask-me-anything-30-mins,
         autonomous-support-agent,
+      ]
+
+  mcs-in-a-day-v2:
+    title: "⚡ MCS in a Day V2"
+    description: "Updated full-day workshop covering progressive AI assistants and core Copilot Studio concepts including knowledge sources, tools, variables, multi-agent architectures, and analytics."
+    lab_order:
+      [
+        agent-builder-m365,
+        core-concepts-agent-knowledge-tools,
+        core-concepts-variables-agents-channels,
+        core-concepts-analytics-evaluations,
       ]
 
   agent-buildathon-1day:
