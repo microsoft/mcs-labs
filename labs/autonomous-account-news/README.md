@@ -129,7 +129,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 **Creating the Agent and Solution Setup**
 
-  1. Navigate to the Copilot Studio home page at https://copilotstudio.microsoft.com.
+  1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com.
 
   2. Go to the **Solutions** menu (left-hand menu under the ellipsis **…**).
 
@@ -138,13 +138,13 @@ Set up an autonomous agent with a recurring trigger that automatically activates
   4. Select **New**, then choose **Agent**.
 
 > [!TIP]
-> If you have set one of your solutions as the default solution, you can also create a new agent directly from Copilot Studio's home page by clicking **New agent**. It will automatically create the agent in your default solution.
+> If you have set one of your solutions as the default solution, you can also create a new agent directly from Copilot Studio's home page by Selecting **New agent**. It will automatically create the agent in your default solution.
 
   5. Select **Skip to configure** to bypass the setup wizard.
 
   6. Name your agent: `Account News Assistant`.
 
-7. Click **Create** to establish your new agent.
+7. Select **Create** to establish your new agent.
 
 #### Adding a Recurring Trigger
 
@@ -153,14 +153,14 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 > [!TIP]
 > The triggers section may not be immediately available as it depends on background processes started when the agent is created.  This should take no more than a minute to complete.
 
-  2.  Click **Add a new Trigger** and select **Recurrence**.
+  2.  Select **Add a new Trigger** and select **Recurrence**.
 
 > [!TIP]
 > Please be aware that the triggers wizard can take a few moments to move between screens.
 
   3.  Name the trigger: `Analyze Opportunities`.
 
-  4.  Click **Next**.
+  4.  Select **Next**.
 
   5.  Set the trigger interval to once a day
       - **Triggering interval:** `1`
@@ -171,7 +171,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
   
   6.  Under **Additional instructions to the agent when it's invoked by this trigger**, clear any default content and replace it with: `Analyze Opportunities`.
 
-  7.  Click **Create trigger** to create the trigger.
+  7.  Select **Create trigger** to create the trigger.
 
 > [!TIP]
 > The instruction *Analyze Opportunities* functions similarly to a conversational instruction. When triggered, the agent will try to follow this directive using its orchestration logic—factoring in global instructions and tool definitions (covered in later steps).
@@ -200,7 +200,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 #### Step-by-step instructions
 
-1. Navigate to **Tools** in the top-level menu.
+1. Go to **Tools** in the top-level menu.
 
   2. Select **+ Add a tool**.
 
@@ -235,7 +235,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
       - **Fill using**: `Custom value`
       - **Value**: `Opportunities`
   
-     Click **Add input** and select **Filter rows**.
+     Select **Add input** and select **Filter rows**.
      - **Fill using**: `Set a custom value`.
      - **Value**: 
 
@@ -243,10 +243,10 @@ Set up an autonomous agent with a recurring trigger that automatically activates
         cat_amount gt 300000 and cat_isclosed eq false
         ```
 
-  10. Click **Save** to finalize the tool configuration.
+  10. Select **Save** to finalize the tool configuration.
 
   12. To test your tool is correctly configured, you can type `Get opportunities` in the test canvas. Your agent should retrieve high-value opportunities based on the configured threshold.
-   ![alt text](images/test-get-opptys.png)
+   ![Account News Assistant interface showing Get Opportunity records connector action with complete status and test results panel](images/test-get-opptys.png)
 
 ---
 
@@ -281,13 +281,13 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 > [!TIP]
 > Deep reasoning is currently unavailable in the UI in certain regions.  If you do not see the Deep Reasoning toggle in the settings area, try accessing the agent via https://copilotstudio.preview.microsoft.com
 
-  4. Turn **On** the toggle for **Use information from the Web**. Then click **Save** to save this setting. Once saved, close the settings using the **X** on the top right.
+  4. Turn **On** the toggle for **Use information from the Web**. Then Select **Save** to save this setting. Once saved, close the settings using the **X** on the top right.
 
   5. To validate web search functionality, enter a test instruction such as: `Search for news on "Microsoft opens a new Datacenter"` in the test canvas. Your agent should retrieve relevant articles from the web.
 
   6. To validate Deep Reasoning, enter a prompt such as: `Use deep reasoning to evaluate the importance of these news`. The agent should respond with a structured and detailed analysis of the content, demonstrating its ability to assess relevance and significance.
    
-      ![alt text](images/web-and-reasoning.png)
+      ![Account News Assistant interface showing AI reasoning analysis of Microsoft's datacenter with activity map and test panel open](images/web-and-reasoning.png)
 
 ---
 
@@ -316,17 +316,17 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 #### Step-by-step instructions
 
-  1. In your agent, navigate to the **Topics** section.
+  1. In your agent, go to the **Topics** section.
 
-  2. Click **+ Add a topic**, and choose **From blank**.
+  2. Select **+ Add a topic**, and choose **From blank**.
 
-  3. Name the topic: `Log Search Results`, by clicking on the **Untitled** on the top left.
+  3. Name the topic: `Log Search Results`, by Selecting on the **Untitled** on the top left.
 
   4. Under **Describe what this topic does**, enter `Use this to log search results`.
 
-  5. Click on **Details** (in the menu bar, next to the save button) and then **Input**
+  5. Select on **Details** (in the menu bar, next to the save button) and then **Input**
 
-  6. Click on **Create a new variable**
+  6. Select on **Create a new variable**
 
   7. Under **Variable data type** select **String** 
 
@@ -341,7 +341,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
       - Search results related to those opportunities
       - Citation names and URLs
       ```
-  10. Click **Save** to finalize the input configuration.
+  10. Select **Save** to finalize the input configuration.
 
 > [!IMPORTANT]  
 > The description will guide the agent to populate this variable with a structured JSON format. You don't need to enforce a specific schema—just ensure it's easy for the agent to interpret in downstream steps.
@@ -352,9 +352,9 @@ Set up an autonomous agent with a recurring trigger that automatically activates
       - For **Set variable**, create a new variable, make it **Global**, and then name it `searchResults` (if you have an error saying the variable name already exists then you need to make it global first).
       - In **To value** select `Topic.searchResults`
 
-      ![alt text](images/log-search-results.png)
+      ![Copilot Studio topic configuration showing trigger, variable setting, and input variable details panel](images/log-search-results.png)
   
-  11. Click **Save**
+  11. Select **Save**
 
 > [!TIP]  
 > You can also copy and paste the YAML content below into your agent using the code editor. 
@@ -404,9 +404,9 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
   15. Under **Describe what this topic does**, enter `Use this to log relevant news for opportunities`
 
-  16. Click on **Details** (in the menu bar, next to the save button) and then **Input**
+  16. Select on **Details** (in the menu bar, next to the save button) and then **Input**
 
-  17. Click on **Create a new variable**
+  17. Select on **Create a new variable**
 
   18. Under **Variable data type**, select **String**
 
@@ -428,7 +428,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
       - For **Set variable**, create a new variable, make it **Global**, and name it `relevantNewsForOpportunities`. 
       - In **To value** select `Topic.relevantNewsForOpportunities`
 
-  22. Click **Save**
+  22. Select **Save**
 
   23. You can copy and paste the YAML content below into your agent using the code editor. 
 
@@ -474,11 +474,11 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 > OutputType: {}
 > ```
 
-  24. Click **Save**.
+  24. Select **Save**.
 
 #### Add instructions to your agent. 
   
-  25. Navigate to the **Overview** tab and locate the **Instructions** section. Paste the following instructions there to guide the agent's orchestration:
+  25. Go to the **Overview** tab and locate the **Instructions** section. Paste the following instructions there to guide the agent's orchestration:
 
   ```
   Follow these steps to analyze opportunities:
@@ -505,7 +505,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
       ![Instructions After Topics](images/instructions-after-topics.png)
 
-  31.  To test your configuration so far, invoke the trigger you created in Use Case #1. Navigate to the **Overview** tab, scroll to **Triggers**, and click **Test trigger** next to **Analyze opportunities**. A test run should appear as follows:
+  31.  To test your configuration so far, invoke the trigger you created in Use Case #1. Go to the **Overview** tab, scroll to **Triggers**, and Select **Test trigger** next to **Analyze opportunities**. A test run should appear as follows:
     
         ![Instructions After Topics](images/test-run-after-topics.png)
 
@@ -544,7 +544,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 #### Step-by-step instructions
 
-1. Navigate to the **Topics** tab.
+1. Go to the **Topics** tab.
 
 2. In the **System** tab, open the **Conversation start** topic.
 
@@ -559,7 +559,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 > [!NOTE]
 > To avoid errors, we:
 >   - Wrapped the entire HTML in double quotes: `"..."`
->   - Escaped each inner quote as double double-quotes: `""`
+>   - Escaped each inner quote as double-quotes: `""`
 
 ```
 "<!DOCTYPE html>
@@ -657,9 +657,9 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 8. Now that your agent has a preloaded HTML template, configure an Outlook email tool to deliver the report.
 
-9. Navigate to **Tools** in the top-level menu.
+9. Go to **Tools** in the top-level menu.
 
-10. Click **+ Add a tool**.
+10. Select **+ Add a tool**.
 
 11. In the search bar, type `Send an email`.
 
@@ -667,13 +667,13 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 13. Choose an existing Outlook connection or add a new one.
 
-14. Click **Add and configure**.
+14. Select **Add and configure**.
 
 15. Configure the following settings:
    - **Name**: `Send a summary report`
    - **Description**: `Sends a summary report on account news.`
 
-16. Click **Additional details**.
+16. Select **Additional details**.
 
 17. Under **Credentials to use**, select **Maker-provided credentials**.
 
@@ -684,13 +684,13 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
     - For `To`, set **Fill using** to **Custom value**, with your current user email (we will use a hard-coded email in this lab)
     - Leave **Subject** and **Body** as **Dynamically fill with AI**
-    - Click **Customize** next to **Body**, and under **Description**, enter `HTML report`
+    - Select **Customize** next to **Body**, and under **Description**, enter `HTML report`
 
-21. Click **Save** to finalize the tool.
+21. Select **Save** to finalize the tool.
 
 22. Now that you've created the report template and configured the email tool, you'll guide the agent to use them as part of its orchestration.
 
-23. Navigate to your agent and go to the **Overview** tab.
+23. Go to your agent and go to the **Overview** tab.
 
 24. In the **Instructions** section, add the following steps:
 
@@ -710,7 +710,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 26. **Save** your agent's instructions. The instructions should appear as follows:
  ![Instructions After Topics](images/final-instructions.png)
 
-27. Navigate to the **Triggers** section and click **Test trigger** on the `Analyze Opportunities` trigger.
+27. Go to the **Triggers** section and Select **Test trigger** on the `Analyze Opportunities` trigger.
 
 28. Once the agent finishes executing, verify:
    - It retrieved opportunities from the Sales App
@@ -721,7 +721,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 29. A successful autonomous run of your new agent should appear as follows:
     ![Instructions After Topics](images/final-run.png)
 
-    ![alt text](images/opportunity-news-email.png)
+    ![Email displaying Opportunity News Summary Report with Google network expansion and United Oil generator opportunities](images/opportunity-news-email.png)
 
 ---
 
