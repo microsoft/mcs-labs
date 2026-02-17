@@ -1,0 +1,279 @@
+---
+layout: default
+title: Bug Bash Guide
+description: How to report bugs during the MCS Labs Bug Bash event
+---
+
+<div class="bug-bash-guide">
+  <div class="bug-bash-header">
+    <h1>Bug Bash - MCS Labs</h1>
+    <p>Welcome to the MCS Labs Bug Bash! Your goal is to work through the labs and report any issues you find — broken steps, unclear instructions, missing images, incorrect information, or anything else that doesn't work as expected.</p>
+  </div>
+
+  <div class="bug-bash-content">
+    <h2>How to Report a Bug</h2>
+
+    <div class="bug-bash-step">
+      <h3>Step 1: Navigate to a Lab</h3>
+      <p>Open the <a href="{{ '/labs/' | relative_url }}" target="_blank">MCS Labs Portal</a> and navigate to the lab you are testing. Each lab page has a red <strong>Report Issue</strong> button in the top navigation bar.</p>
+      <div class="bug-bash-screenshot">
+        <img src="{{ '/assets/images/bug-bash-lab-page-top.png' | relative_url }}" alt="Lab page showing the Report Issue button in the navigation bar" />
+      </div>
+    </div>
+
+    <div class="bug-bash-step">
+      <h3>Step 2: Click the Report Issue Button</h3>
+      <p>While you are on the lab page where you found the issue, click the <strong>Report Issue</strong> button in the navigation bar.</p>
+      <div class="bug-bash-screenshot">
+        <img src="{{ '/assets/images/bug-bash-report-button-lab.png' | relative_url }}" alt="Report Issue button in the navigation" />
+      </div>
+      <p>This will open a new GitHub Issue with the <strong>lab name</strong> and a <strong>bug report template</strong> automatically pre-filled for you — including the title format and description fields.</p>
+    </div>
+
+    <div class="bug-bash-step">
+      <h3>Step 3: Complete the Issue</h3>
+      <p>The issue title will be pre-filled with the lab name in brackets (e.g., <code>[mcs-multi-agent]</code>). Type a short description of the issue after the lab name.</p>
+
+      <h4>Title examples:</h4>
+      <ul>
+        <li><code>[mcs-multi-agent] Step 12 screenshot does not match current UI</code></li>
+        <li><code>[core-concepts-agent-knowledge-tools] Broken link in Use Case #2</code></li>
+        <li><code>[agent-builder-m365] Missing image after "Create new agent" step</code></li>
+      </ul>
+
+      <p>The description will be pre-filled with a template. Fill in each field:</p>
+      <ul>
+        <li><strong>Use case / step number</strong> — Where exactly did you encounter the issue?</li>
+        <li><strong>What happened</strong> — Describe what went wrong or what was confusing.</li>
+        <li><strong>What I expected</strong> — Describe what you think should have happened.</li>
+        <li><strong>Screenshots</strong> — Attach screenshots if applicable (drag and drop into the description field).</li>
+        <li><strong>Browser / environment</strong> — Note your browser and any relevant environment details if the issue is technical.</li>
+      </ul>
+    </div>
+
+    <div class="bug-bash-step">
+      <h3>Step 4: Add the "bug bash" Label</h3>
+      <p>The Report Issue button pre-fills the <code>lab</code> label and <code>Bug</code> type for you. For the bug bash event, you must also add the <strong><code>bug bash</code></strong> label manually:</p>
+      <ol>
+        <li>On the right-hand side of the issue form, find <strong>Labels</strong></li>
+        <li>Click the gear icon next to Labels</li>
+        <li>Search for and select <strong><code>bug bash</code></strong></li>
+      </ol>
+      <div class="bug-bash-screenshot">
+        <img src="{{ '/assets/images/github-new-issue.png' | relative_url }}" alt="GitHub new issue form showing required labels and type" />
+      </div>
+      <p>Your issue should have the following set:</p>
+      <table>
+        <thead>
+          <tr>
+            <th>Field</th>
+            <th>Required Value</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Labels</strong></td>
+            <td><code>bug bash</code> and <code>lab</code></td>
+          </tr>
+          <tr>
+            <td><strong>Type</strong></td>
+            <td><code>Bug</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout callout-important">
+        <div class="callout-title">IMPORTANT</div>
+        <div class="callout-content">
+          <p>Issues without both the <code>bug bash</code> and <code>lab</code> labels and <code>Bug</code> type will not be reviewed by the team during the bug bash.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="bug-bash-step">
+      <h3>Step 5: Submit</h3>
+      <p>Click the green <strong>Create</strong> button to submit your issue.</p>
+    </div>
+
+    <hr />
+
+    <h2>What Makes a Good Bug Report</h2>
+    <ul>
+      <li><strong>Specific</strong> — Point to the exact lab, use case, and step number.</li>
+      <li><strong>Reproducible</strong> — Include the steps you followed so the team can reproduce the issue.</li>
+      <li><strong>Visual</strong> — Attach screenshots or screen recordings when possible.</li>
+      <li><strong>One issue per report</strong> — File separate issues for separate problems so each can be tracked independently.</li>
+    </ul>
+
+    <hr />
+
+    <h2>Quick Links</h2>
+    <div class="bug-bash-links">
+      <a href="{{ '/labs/' | relative_url }}" target="_blank" class="bug-bash-link-card">
+        <span class="link-icon">📚</span>
+        <span class="link-text">Browse All Labs</span>
+        <span class="link-desc">Open the lab portal to start testing</span>
+      </a>
+      <a href="{{ '/' | relative_url }}" target="_blank" class="bug-bash-link-card">
+        <span class="link-icon">🏠</span>
+        <span class="link-text">Portal Home</span>
+        <span class="link-desc">View learning journeys and events</span>
+      </a>
+      <a href="https://github.com/microsoft/mcs-labs/issues?q=is%3Aissue+label%3A%22bug+bash%22" target="_blank" class="bug-bash-link-card">
+        <span class="link-icon">🐛</span>
+        <span class="link-text">View Bug Bash Issues</span>
+        <span class="link-desc">See all reported bug bash issues</span>
+      </a>
+    </div>
+
+    <hr />
+
+    <h2>Questions?</h2>
+    <p>If you have questions about the bug bash process or need help filing an issue, reach out to your event facilitator.</p>
+    <p>Thank you for helping us improve MCS Labs!</p>
+  </div>
+</div>
+
+<style>
+.bug-bash-guide {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.bug-bash-header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 2px solid var(--border-light, #e2e8f0);
+}
+
+.bug-bash-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.75rem;
+  color: var(--heading-color, #1a202c);
+}
+
+.bug-bash-header p {
+  font-size: 1.1rem;
+  color: var(--text-secondary, #4a5568);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.bug-bash-content h2 {
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  color: var(--heading-color, #1a202c);
+  font-size: 1.5rem;
+}
+
+.bug-bash-step {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-light, #e2e8f0);
+  border-radius: 8px;
+  border-left: 4px solid var(--accent-color, #3182ce);
+}
+
+.bug-bash-step h3 {
+  margin-top: 0;
+  margin-bottom: 0.75rem;
+  color: var(--accent-color, #3182ce);
+  font-size: 1.2rem;
+}
+
+.bug-bash-step h4 {
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.bug-bash-screenshot {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.bug-bash-screenshot img {
+  max-width: 100%;
+  border: 1px solid var(--border-light, #e2e8f0);
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.bug-bash-step table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+}
+
+.bug-bash-step th,
+.bug-bash-step td {
+  padding: 0.5rem 1rem;
+  text-align: left;
+  border: 1px solid var(--border-light, #e2e8f0);
+}
+
+.bug-bash-step th {
+  background: var(--table-header-bg, #f7fafc);
+  font-weight: 600;
+}
+
+.bug-bash-step code {
+  background: var(--code-bg, #f1f5f9);
+  padding: 0.15rem 0.4rem;
+  border-radius: 3px;
+  font-size: 0.9em;
+}
+
+.bug-bash-step ol,
+.bug-bash-step ul {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.bug-bash-step li {
+  margin-bottom: 0.35rem;
+}
+
+.bug-bash-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+
+.bug-bash-link-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.25rem;
+  background: var(--card-bg, #ffffff);
+  border: 1px solid var(--border-light, #e2e8f0);
+  border-radius: 8px;
+  text-decoration: none;
+  color: var(--text-color, #1a202c);
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.bug-bash-link-card:hover {
+  border-color: var(--accent-color, #3182ce);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transform: translateY(-2px);
+}
+
+.link-icon {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.link-text {
+  font-weight: 600;
+  font-size: 1rem;
+  margin-bottom: 0.25rem;
+}
+
+.link-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary, #4a5568);
+}
+</style>
