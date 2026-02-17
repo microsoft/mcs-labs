@@ -1249,9 +1249,7 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
   If no portfolio data is found, reply that you couldn't find a portfolio with the specified ID.
   ```
 
-1. Keep the box **Use hosted browser** checked to create a connection to the hosted browser.
-
-1. Select **Add and configure**.
+1. Keep **Use hosted browser** enabled to create a connection to the hosted browser.
 
 1. Update the **Name** of the Computer use tool to `Look up portfolio data`.
 
@@ -1261,10 +1259,12 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 1. Enter name `Portfolio ID` and description `The ID of the portfolio` and select **Done**.
 
+1. Select **Save**.
+
   > [!TIP]
   > During execution, Computer use combines your instructions with the input values to complete the task.
 
-1. Select **Save**.
+
 
 #### Test the Computer Use Tool
 
