@@ -11,7 +11,7 @@ Write-Host "`n🔍 Lab Configuration Audit" -ForegroundColor Cyan
 Write-Host "================================`n" -ForegroundColor Cyan
 
 # Excluded event/special folders (not expected to have local folders)
-$excludedFolders = @("bootcamp", "azure-ai-workshop", "mcs-in-a-day", "agent-buildathon-1day", "agent-buildathon-1month")
+$excludedFolders = @("bootcamp", "azure-ai-workshop", "mcs-in-a-day", "mcs-in-a-day-v2", "agent-buildathon-1day", "agent-buildathon-1month")
 
 # Get all lab folders
 $labFolders = Get-ChildItem -Path "labs\" -Directory | 

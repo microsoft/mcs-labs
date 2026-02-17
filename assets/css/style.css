@@ -2038,6 +2038,10 @@ body[data-lab-type="external"] .lab-downloads,
     border-left-color: var(--border-dark-orange);
 }
 
+.event-card.mcs-in-a-day-v2 {
+    border-left-color: var(--border-dark-orange);
+}
+
 .event-card.agent-buildathon-1day {
     border-left-color: var(--border-dark-green);
 }
