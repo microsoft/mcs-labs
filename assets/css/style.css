@@ -188,6 +188,30 @@ body.lab-page .site-content .container {
     color: white !important;
 }
 
+/* Report Issue navigation link - red pill style */
+.site-header nav .report-issue-link {
+    background-color: var(--border-red, #dc3545);
+    color: white !important;
+    font-weight: 600;
+    border-radius: 999px;
+    padding: 0.35rem 1rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    box-shadow: 0 2px 6px rgba(220, 53, 69, 0.4);
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    line-height: 1;
+}
+
+.site-header nav .report-issue-link:hover {
+    background-color: #a71d2a;
+    color: white !important;
+    box-shadow: 0 4px 12px rgba(220, 53, 69, 0.6);
+    transform: translateY(-1px);
+}
+
 /* ============================================================================
    EVENTS DROPDOWN NAVIGATION
    
