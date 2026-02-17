@@ -146,9 +146,9 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Go to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and make sure you are in your development environment.
 
-1. Select **Agents** on the left-hand navigation.
+1. Select **Agents** on the left navigation.
 
-1. Select **Create blank agent** in the upper right-hand corner.
+1. Select **Create blank agent** in the upper right corner.
 
 1. Once the agent is provisioned, rename it to `Dictionary Agent` by selecting  **Edit** in the **Details** section on **Overview**.
 
@@ -180,7 +180,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. In the **Host** field, enter **api.dictionaryapi.dev**
 
-1. In the **Base URL** field, enter **/api/v3/**
+1. In the **Base URL** field, enter **api/v2/**
 
 1. Select **Security** at the bottom.
 
@@ -345,7 +345,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 #### Test Your Dictionary Agent
 
-1. Select **Settings** in the upper right-hand corner.
+1. Select **Settings** in the upper right corner.
 
 1. Scroll to the bottom of the **Generative AI** list of settings.
 
@@ -476,12 +476,12 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Select **+ Add input** for each parameter below:
 
-  | Parameter Name | Type | Description | Sample Value |
-  |----------------|------|-------------|--------------|
-  | `SalesRepName` | String | Sales representative's name | Sarah Johnson |
-  | `AnnualRevenue` | Number | Total annual sales revenue | 325000 |
-  | `QuotaAmount` | Number | Annual quota target | 300000 |
-  | `StrategicProductRevenue` | Number | Revenue from strategic products | 120000 |
+  | Parameter Name | Type | 
+  |----------------|------|
+  | `SalesRepName` | Text| 
+  | `AnnualRevenue` | Number | 
+  | `QuotaAmount` | Number | 
+  | `StrategicProductRevenue` | Number | 
 
 1. Select **Save draft** in the upper right corner after adding all inputs.
 
@@ -490,13 +490,13 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 #### Initialize Variables
 
-1. Select **+ Add node** in the flow canvas before the last node**Respond to the agent**.
+1. Select **+ Add node** in the flow canvas before the last node **Respond to the agent**.
 
 1. Select **Variable** > **Initialize variable**, Enter the name and select the type based on the list in the next step. You will repeat this for each of the 5 variables.
 
 1. Initialize the following variables:
 
-| Variable name | Type | Initial Value |
+| Variable name | Type | Value |
 |---------------|------|---------------|
 | `CommissionTier` | String | (leave empty) |
 | `CommissionRate` | Float | `0` |
@@ -527,7 +527,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
   ```
 1. Select **Create Expression** and then select **OK** 
 
-1. Review the expression it should look like the following if not updated it from here:
+1. Review the expression it should look like the following if not updat it from here:
 
   ```
   if(greater(triggerBody()?['number'], 500000), 0.12, if(greater(triggerBody()?['number'], 250000), 0.10, if(greater(triggerBody()?['number'], 100000), 0.05, 0.00)))
@@ -535,7 +535,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Select **Add**.
 
-1. Optionally, select **...** and then select **Rename** to change the step name to **Set Commission Rate**.
+1. Optionally, select **...** and then select **Rename** to change the step name to **Set CommissionTier**.
 
 
 #### Calculate Base Commission
@@ -557,7 +557,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
   ```
 1. Select **Create Expression** and then select **OK** 
 
-1. Review the expression it should look like the following if not updated it from here:
+1. Review the expression it should look like the following if not updat it from here:
 
   ```
   mul(triggerBody()?['number'], variables('CommissionRate'))
@@ -565,11 +565,11 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Select **Add**.
 
-1. Optionally, select **...** and then select **Rename** to change the step name to **Set Commission Rate**.
+1. Optionally, select **...** and then select **Rename** to change the step name to **Set CommissionBase**.
 
 1. Select **+ Add node** just before the last node **Respond to the agent**.
 
-1. Select **Variable** and then Select **Incremement variable**.
+1. Select **Variable** and then select **Incremement variable**.
 
 1. Select **TotalCommission** from the list of variable names.
 
@@ -581,9 +581,9 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 #### Calculate Product Mix Bonus
 
-1. Select **Variable** and then Select **Set variable**.
+1. Select **Variable** and then select **Set variable**.
 
-1. Select **ProductMixBonus** in the list of varaible names.
+1. Select **ProductMixBonus** in the list of variable names.
 
 1. Select **fx** on the right side of the value field to open the Insert expression pane.
 
@@ -596,7 +596,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
   ```
 1. Select **Create Expression** and then select **OK** 
 
-1. Review the expression it should look like the following if not updated it from here:
+1. Review the expression it should look like the following if not update it from here:
 
   ```
   if(greaterOrEquals(div(triggerBody()?['number_2'], triggerBody()?['number']), 0.3), 3000, 0)
