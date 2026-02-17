@@ -234,7 +234,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Import from sample**.
 
-1. In the **Body** field, copy and paste the following JSON sample:
+1. This JSON is an array containing a dictionary entry for the word “hello,” including its spelling, pronunciation (text and audio), origin, and its meanings broken down by part of speech (exclamation, noun, and verb) with definitions and examples.  It helps give the agent the needed context. In the **Body** field, copy and paste the following JSON sample:
 
 ```json
 [
@@ -523,7 +523,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
 1. Enter the following in the input area for Copilot to create an expression:
 
   ```
-  If(AnnualRevenue > 500000, "Tier 3", If(AnnualRevenue > 250000, "Tier 2", If(AnnualRevenue > 100000, "Tier 1", "Tier 0")))
+Create a calculated field called “Tier” based on the value of the Number field. If Number is greater than 500,000, set Tier to “Tier 3”. If Number is greater than 250,000 but less than or equal to 500,000, set Tier to “Tier 2”. If Number is greater than 100,000 but less than or equal to 250,000, set Tier to “Tier 1”. Otherwise, set Tier to “Tier 0”.
   ```
 1. Select **Create Expression** and then select **OK** 
 
@@ -553,7 +553,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
 1. Enter the following in the input area for Copilot to create an expression:
 
   ```
-  If(AnnualRevenue > 500000, 0.12, If(AnnualRevenue > 250000, 0.10, If(AnnualRevenue > 100000, 0.05, 0.00)))
+Create a calculated field called “Rate” based on the value of the Number field. If Number is greater than 500,000, set Rate to 0.12. If Number is greater than 250,000 but less than or equal to 500,000, set Rate to 0.10. If Number is greater than 100,000 but less than or equal to 250,000, set Rate to 0.05. Otherwise, set Rate to 0.00.
   ```
 1. Select **Create Expression** and then select **OK** 
 
@@ -663,7 +663,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
   ```
 1. Select **fx** to the right of the **Enter a value to respond with** field.
 
-1. Enter the following in the formula input area:
+1. Next we need to define the report details based on the variables we initiated and set. Enter the following in the formula input area:
 
   ```
   concat('COMMISSION CALCULATION REPORT
@@ -732,7 +732,7 @@ Calculate earnings
 
 1. Select **"..."** in the upper right corner of the node you just added and select **Properties**.
 
-1. Select **Edit adaptive card** and enter the following into the **Card payload editor** replacing the existing text:
+1. Select **Edit adaptive card**.  We need to tell the card what to display to the user, and then what to do with the responses. Enter the following into the **Card payload editor** replacing the existing text:
 
   ```json
   {
