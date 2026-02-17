@@ -22,7 +22,10 @@ Help makers understand how to leverage multi-agent configurations including chil
 - [Summary of Targets](#-summary-of-targets)
 - [Use Cases Covered](#-use-cases-covered)
 - [Instructions by Use Case](#️-instructions-by-use-case)
-
+  - [Use Case #1: Create Sales Assistant Agent](#-use-case-1-create-sales-assistant-agent)
+  - [Use Case #2: Create Product Information Child Agents](#-use-case-2-create-product-information-child-agents)
+  - [Use Case #3: Connect to Account and Contact Information Agent](#-use-case-3-connect-to-account-and-contact-information-agent)
+  - [Use Case #4 (Optional): Connect a Fabric Data Agent](#-use-case-4-optional-connect-a-fabric-data-agent)
 
 ---
 
@@ -110,9 +113,10 @@ In this lab, you'll build a parent agent that will leverage both connected agent
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create Sales Assistant Agent](#-use-case-1-use-case-1-title) | Creates parent agent to help sales associate find information they need | [X min] |
-| 2 | [Create Product Information Child Agents](#-use-case-2-use-case-2-title) | Creates child agent to provide product information | [X min] |
-| 3 | [Connect to Account and Contact Information Agent](#-use-case-3-use-case-3-title) | Connect existing Copilot Studio agent that provides account and contact information | [X min] |
+| 1 | [Create Sales Assistant Agent](#-use-case-1-create-sales-assistant-agent) | Creates parent agent to help sales associate find information they need | 8 min |
+| 2 | [Create Product Information Child Agents](#-use-case-2-create-product-information-child-agents) | Creates child agents to provide market-specific product information | 12 min |
+| 3 | [Connect to Account and Contact Information Agent](#-use-case-3-connect-to-account-and-contact-information-agent) | Connect existing Copilot Studio agent that provides account and contact information | 10 min |
+| 4 | [Connect a Fabric Data Agent (Optional)](#-use-case-4-optional-connect-a-fabric-data-agent) | Extend your multi-agent solution with Fabric Data Agent for e-commerce analytics | Optional |
 
 ---
 
@@ -126,7 +130,7 @@ Creates parent agent to help sales associate find information they need
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create Sales Assistant Agent | Creates parent agent to help sales associate find information they need | [X minutes] |
+| Create Sales Assistant Agent | Creates parent agent to help sales associate find information they need | 8 minutes |
 
 **Summary of tasks**
 
@@ -237,13 +241,30 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 ---
 
+### Test your understanding
+
+**Key takeaways:**
+
+* **Schema naming matters** – Using a descriptive schema name helps with application lifecycle management and finding your agent later.
+* **Disable model knowledge early** – Turning off general knowledge and web search prevents hallucinations and ensures the agent only uses content you provide.
+* **Global variables enable cross-agent context** – By making the Market variable global with external send capability, child agents can use it for conditional logic.
+
+**Lessons learned & troubleshooting tips:**
+
+* If the Market question doesn't appear, verify the Conversation Start topic redirects to your Select Market topic.
+* If the variable isn't available in child agents, confirm it is set to Global with External sources can receive value enabled.
+
+---
+
+---
+
 ## 🔄 Use Case #2: Create Product Information Child Agents
 
 Create child agents that allow the user, based on their market, to get the right product information.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create Product Information Child Agents | Group common tools and knowledge into logical groups for orchestration optimization | [X minutes] |
+| Create Product Information Child Agents | Group common tools and knowledge into logical groups for orchestration optimization | 12 minutes |
 
 **Summary of tasks**
 
@@ -341,13 +362,30 @@ In this section, you'll learn how to create child agents to logically group know
 
 ---
 
+### Test your understanding
+
+**Key takeaways:**
+
+* **Child agents group related capabilities** – Grouping knowledge and tools into a child agent with its own instructions improves orchestration accuracy.
+* **Conditions control availability** – Using a variable condition on a child agent means the orchestrator only considers it when the condition is met, preventing irrelevant responses.
+* **Instructions scope the agent's domain** – Specific instructions telling the agent what NOT to answer are just as important as telling it what to answer.
+
+**Lessons learned & troubleshooting tips:**
+
+* If the wrong child agent responds, verify the condition on the Advanced section matches the correct Market variable value.
+* If knowledge doesn't return results, confirm the Public Website knowledge source status shows a green check mark.
+
+---
+
+---
+
 ## 🧱 Use Case #3: Connect to Account and Contact Information Agent
 
 Connect the Account and Contact Information agent to our parent Sales Associate Agent. Will need to ensure indexing is working in the environment ahead of testing.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Connect to Account and Contact Information Agent | Connect to an Account and Contact Information agent | [X minutes] |
+| Connect to Account and Contact Information Agent | Connect to an Account and Contact Information agent | 10 minutes |
 
 **Summary of tasks**
 
@@ -500,5 +538,225 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 ---
 
 ###  🏅 Congratulations! You've completed Use Case #3!
+
+---
+
+### Test your understanding
+
+**Key takeaways:**
+
+* **Connected agents extend reach** – Unlike child agents that live inside your agent, connected agents are independently published agents that your agent delegates to.
+* **Publishing is required** – A connected agent must be published and have "Let other agents connect to and use this one" enabled before it can be connected.
+* **Conversation history improves context** – Passing conversation history to the connected agent helps it understand the full context of the user's request.
+
+**Lessons learned & troubleshooting tips:**
+
+* If the connected agent doesn't appear in the list, ensure it is published and the sharing setting is turned on.
+* If Dataverse search returns no results, verify the Quick Find views have the correct columns added and the view is saved and published.
+* If the agent can't find account data, check that Dataverse Search is enabled in the Power Platform admin center for your environment.
+
+**Challenge: Apply this to your own use case**
+
+* What agents in your organization could benefit from being connected to a parent orchestrator?
+* How would you decide whether something should be a child agent or a connected agent?
+* Consider building a connected agent for a different data source (e.g., ServiceNow, Salesforce) and adding it to this same parent agent.
+
+---
+
+---
+
+## 🔄 Use Case #4 (Optional): Connect a Fabric Data Agent
+
+Extend your multi-agent Sales Associate Assistant by connecting a Microsoft Fabric Data Agent to provide e-commerce analytics capabilities through agent-to-agent communication.
+
+| Use case | Value added | Estimated effort |
+|----------|-------------|------------------|
+| Connect a Fabric Data Agent | Add Fabric data intelligence to your multi-agent solution for e-commerce analytics | Optional (20 minutes) |
+
+> [!NOTE]
+> This use case is optional and does not count toward the 30-minute lab duration. It requires access to a Microsoft Fabric capacity and the Workshop Demo Workspace. Complete this if you finish the core lab early or want to explore advanced multi-agent patterns.
+
+**Summary of tasks**
+
+In this section, you'll learn how to create a Fabric Data Agent, optimize it with meta-prompts, and connect it as an additional agent to your Sales Associate Assistant.
+
+**Scenario:** Your Sales Team wants to ask natural language questions about e-commerce performance data stored in Microsoft Fabric — such as revenue trends, top products, and customer segments — directly through the Sales Associate Assistant without needing SQL expertise.
+
+### Objective
+
+Create a Fabric Data Agent connected to an e-commerce semantic model and add it as a connected agent to your Sales Associate Assistant, demonstrating how multi-agent architectures can span across Copilot Studio and Microsoft Fabric.
+
+---
+
+### Step-by-step instructions
+
+#### Create the Fabric Data Agent
+
+1. Navigate to [fabric.microsoft.com](https://fabric.microsoft.com) and sign in with your credentials.
+
+2. In the left navigation, select **Workspaces** and then select **Workshop Demo Workspace**.
+
+3. Within the workspace, locate the **e-commerce** folder and open the **E-commerce Dataset Report** to familiarize yourself with the data. Keep this tab open for reference.
+
+4. Create a personal folder in the workspace by clicking **New** > **Folder** and naming it with your username.
+
+5. In your personal folder, click **New Item**, search for `data agent`, and select **Data Agent (Preview)**.
+
+   ![Search for Data Agent](images/add-data-agent.png)
+
+6. Name your agent using the pattern `[YourUsername]_DataAgent` and click **Create**.
+
+#### Connect the Data Source
+
+7. In the agent setup, click **+ Data source** in the Explorer panel.
+
+   ![Select Data Source](images/select-data-source.png)
+
+8. Select **ecommerce-order-dataset** (Type: Semantic Model) and click **Add**.
+
+   ![Select ecommerce-order-dataset](images/select-ecommerce-order-dataset.png)
+
+9. After validation, select all available tables: Customers, Order_Items, Orders, Payments, Products.
+
+10. Test baseline functionality in the **Test** pane:
+
+    ```
+    What is our total revenue?
+    Show me the top 5 products by sales
+    How many customers do we have?
+    ```
+
+#### Optimize with Meta-Prompts
+
+11. Generate agent-level instructions by entering this meta-prompt in the **Test** pane:
+
+    ```
+    Meta-Prompt: Generate Agent-Level Instructions:
+    Analyze your available data sources and create agent-level instructions for yourself (max 15000 chars).
+
+    Objective: E-commerce analytics agent for business intelligence
+    Users: Business analysts and sales teams
+
+    Examine your data sources: list all sources, types, and primary use. Analyze domain, time coverage, and main themes.
+
+    Generate instructions with:
+    ## Objective
+    ## Data Sources (list with priority)
+    ## Key Terminology (infer from columns/measures)
+    ## Response Guidelines
+    Style: Clear summaries with data citations and trend analysis
+    ## Handling Common Topics (3-5 based on available data)
+    ```
+
+12. Copy the generated response, review it, and paste it into the **Agent Instructions** field in the **Setup** section.
+
+> [!TIP]
+> Always review generated instructions for accuracy. Meta-prompts provide a strong foundation but may need minor adjustments for your specific use case.
+
+#### Publish and Connect to Copilot Studio
+
+13. Generate a description using this meta-prompt in the Test pane:
+
+    ```
+    Create a 1-2 sentence description of yourself as a Fabric Data Agent (max 200 chars).
+    Analyze your data sources and describe: what data domain you cover and what questions you answer.
+    Output plain text only.
+    ```
+
+14. Click **Publish** and paste the generated description in the purpose and capabilities field.
+
+> [!IMPORTANT]
+> Save this description — you'll need it when connecting to Copilot Studio.
+
+15. Return to your **Sales Associate Assistant** in Copilot Studio.
+
+16. Navigate to the **Agents** tab on the top navigation bar.
+
+17. Click **Add an agent**.
+
+18. Select **Connect to an external agent** and choose **Microsoft Fabric (preview)**.
+
+19. If it shows **Not connected**, click the dropdown, select **Create new connection**, and sign in.
+
+    ![Create connection](images/create-connection.png)
+
+20. Select your Fabric Data Agent from the list (look for your username) and click **Next**.
+
+21. Configure the connected agent:
+    - **Name**: Your data agent name
+    - **Description**: Paste the description from step 13
+
+22. Verify the connection shows a green checkmark and click **Add agent**.
+
+> [!NOTE]
+> If you see "An unexpected server error occurred", try clicking **Add agent** again. If that doesn't work, select **Back**, reselect the agent, and try again.
+
+#### Test the Integrated Solution
+
+23. Open the **Test** pane in Copilot Studio.
+
+24. Select your market (US or UK) when prompted.
+
+25. Test the Fabric Data Agent connection with progressive queries:
+
+    ```
+    What products do we sell in our e-commerce store?
+    ```
+
+    ```
+    Show me our top customers by total purchase value
+    ```
+
+    ```
+    Analyze our quarterly sales performance and identify which product categories are trending up or down
+    ```
+
+26. Observe in the test pane that data queries are delegated to the Fabric Data Agent, indicated by handoff messages in the execution trace.
+
+> [!TIP]
+> Your Sales Associate Assistant now has three types of agents working together: child agents for market-specific product info, a connected agent for account/contact data, and a Fabric Data Agent for e-commerce analytics. This demonstrates real-world multi-agent orchestration at scale.
+
+---
+
+###  🏅 Congratulations! You've completed Use Case #4!
+
+---
+
+### Test your understanding
+
+* Can you identify when the Fabric Data Agent is being triggered versus the Account Data Lookup Agent in the test pane?
+* How does the agent description influence when the Fabric agent is consulted versus the child agents?
+* What types of queries benefit most from the Fabric Data Agent versus native Copilot Studio capabilities?
+
+---
+
+---
+
+## 🏆 Summary of learnings
+
+True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
+
+To maximize the impact of multi-agent configurations:
+
+* **Child agents group related capabilities** — Use them to logically organize tools and knowledge with dedicated instructions and conditions for orchestration.
+* **Connected agents extend your reach** — Use them to integrate independently published agents, including agents from other teams or platforms like Fabric.
+* **Conditions and variables drive orchestration** — Global variables and conditional availability ensure the right agent handles the right request.
+* **Descriptions are critical for orchestration** — Clear, specific descriptions help the orchestrator decide which agent to delegate to.
+* **Test incrementally** — Start with simple queries and progressively increase complexity to validate that orchestration routes correctly.
+
+---
+
+### Conclusions and recommendations
+
+**Multi-Agent golden rules:**
+
+* Always turn off model knowledge and web search on parent agents when you want strict control over information sources.
+* Use child agents when you need to group tools and knowledge with conditional availability inside a single agent.
+* Use connected agents when you need to integrate an independently managed and published agent.
+* Write clear descriptions for every agent — the orchestrator relies on them to make delegation decisions.
+* Set global variables early in the conversation to establish context that child agents can use for conditions.
+* Test each agent independently before testing the full multi-agent orchestration.
+
+By following these principles, you'll build scalable multi-agent architectures that distribute work effectively across specialized agents, giving users accurate, contextual answers from the right source every time.
 
 ---
