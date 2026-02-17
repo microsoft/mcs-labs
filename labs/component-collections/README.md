@@ -134,7 +134,7 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com.
 
-1. Select **Agents** on the left side navigation.
+1. Select **Agents** on the left navigation.
 
 1. Scroll down to the **Start with an agent template** section.
 
@@ -148,7 +148,7 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 1. Select **Add topic**.
 
-1. Enter **Request a travel brochure** into the **Name your topic** field
+1. Enter **Request a travel brochure** into the **Name your topic** field.
 
 1. Enter the following into the **Create a topic to...** field:
 
@@ -164,9 +164,9 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 #### Create a Component Collection
 
-1. Select **Settings** (in the upper right-hand corner).
+1. Select **Settings** in the upper right corner.
 
-1. In the left-hand navigation, Select **Component Collections**.
+1. In the left navigation, select **Component Collections**.
 
 1. Select **Create** on the Create a component collection screen.
 
@@ -191,7 +191,7 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 1. You will now see that you have created your first component collection called **Travel Tools**.
 
-1. Close the Settings menu by selecting the **X** in the upper right-hand corner.
+1. Close the Settings menu by selecting the **X** in the upper right corner.
 
 1. Select **Topics** in the top menu.
 
@@ -250,15 +250,15 @@ Install a component collection in a new agent and verify that shared editing wor
 
 #### Add the Component Collection to a New Agent
 
-1. Select **Agents** on the left-hand navigation menu.
+1. Select **Agents** on the left-ha navigation menu.
 
-1. Select the **Create blank agent** button in the upper right-hand corner.
+1. Select the **Create blank agent** button in the upper right corner.
 
 1. This will create a blank agent. Wait for it to be provisioned.
 
-1. Once provisioned, go to **Settings** (in the upper right-hand corner).
+1. Once provisioned, go to **Settings** in the upper right corner.
 
-1. Select **Component collections** in the left-hand navigation.
+1. Select **Component collections** in the left navigation.
 
 1. In the **Manage component collections** menu, select the **Available** tab.
 
@@ -270,7 +270,7 @@ Install a component collection in a new agent and verify that shared editing wor
 
 1. Notice that **Travel Tools** is now listed as installed in both your new agent and the Safe Travels agent.
 
-1. Close the Settings menu by selecting the **X** in the upper right-hand corner.
+1. Close the Settings menu by selecting the **X** in the upper right corner.
 
 1. Notice that you now have the knowledge and topic from Safe Travels available in your new agent as well.
 
@@ -290,7 +290,7 @@ Install a component collection in a new agent and verify that shared editing wor
 
 #### Verify Changes Sync Across Agents
 
-1. In the **Agents** menu on the left-hand navigation, go back to the **Safe Travels** agent.
+1. In the **Agents** menu on the left navigation, go back to the **Safe Travels** agent.
 
 1. Go to the **Request a travel brochure** topic and Select it to open it.
 
@@ -352,7 +352,7 @@ Manage component collection access, set a primary agent, and explore solution in
 
 #### View Component Collection Details
 
-1. In the left-hand navigation menu, Select the **...** button and select **Component collections**.
+1. In the left navigation menu, Select the **...** button and select **Component collections**.
 
 1. In the list, Select on **Corporate Services**.
 
@@ -364,9 +364,7 @@ Manage component collection access, set a primary agent, and explore solution in
 
 1. Select the **Safe Travels** agent and Select **Add** to connect it to this component collection.
 
-1. In the **Agents** navigation menu on the left, go to the **Safe Travels** agent.
-
-1. Go to **Settings**.
+1. In the **Agents** navigation menu on the left, select the **Safe Travels** agent.
 
 1. Go to **Topics** on the top menu and then select **Request Product Info**.
 
@@ -377,11 +375,11 @@ Manage component collection access, set a primary agent, and explore solution in
 
 #### Set a Primary Agent
 
-1. Select the **...** in the left-hand navigation menu and select **Component collections**.
+1. Select the **...** in the left navigation menu and select **Component collections**.
 
 1. Select **Travel Tools**.
 
-1. In the **Connected agents** section on the upper right-hand side, Select the **...** next to any agents other than the Safe Travels agent and Select **Disconnect from agent** until only the Safe Travels agent is left in the list.
+1. In the **Connected agents** section on the upper right side, select the **...** next to any agents other than the Safe Travels agent and Select **Disconnect from agent** until only the Safe Travels agent is left in the list.
 
 1. Once you have only Safe Travels in the list, Select the **...** next to it and select **Set as primary agent**.
 
