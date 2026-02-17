@@ -154,9 +154,9 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Enter the following as the **Description:**
 
-  ```
-  This agent allows a user to lookup the definition of a word
-  ```
+    ```
+    This agent allows a user to lookup the definition of a word
+    ```
 
 1. Select **Save**.
 
@@ -184,10 +184,10 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Security** at the bottom.
 
-  > [!NOTE]
-  > This API doesn't require authentication, but this is where you would select the authentication type for APIs that do.
+    > [!NOTE]
+    > This API doesn't require authentication, but this is where you would select the authentication type for APIs that do.
 
-1. Ensure the authentication type is set to **No authentication** and Select **Definition**.
+1. Make sure the authentication type is set to **No authentication** and Select **Definition**.
 
 #### Define the API Action
 
@@ -196,13 +196,12 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 1. In the **Summary** field, enter **Word Lookup**
 
 1. In the **Description** field, enter:
+    ```
+    Lookup a word in the dictionary
+    ```
 
-  ```
-  Lookup a word in the dictionary
-  ```
-
-  > [!TIP]
-  > The description will later be used as the tool description, which allows the orchestrator to know when to use this tool. Make sure you are descriptive here to allow the best conversation routing.
+    > [!TIP]
+    > The description will later be used as the tool description, which allows the orchestrator to know when to use this tool. Make sure you are descriptive here to allow the best conversation routing.
 
 1. In the **Operation ID** field, enter **WordLookup**
 
@@ -212,9 +211,9 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. In the **URL** field, enter:
 
-  ```
-  https://api.dictionaryapi.dev/api/v2/entries/en/{word}
-  ```
+    ```
+    https://api.dictionaryapi.dev/api/v2/entries/en/{word}
+    ```
 
 1. Select **Import**.
 
@@ -222,9 +221,9 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. In the **Description** field, enter:
 
-  ```
-  The word that you want to lookup the definition of
-  ```
+    ```
+    The word that you want to lookup the definition of
+    ```
 
 1. Select **Back** at the top of the form.
 
@@ -236,59 +235,59 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. This JSON is an array containing a dictionary entry for the word “hello,” including its spelling, pronunciation (text and audio), origin, and its meanings broken down by part of speech (exclamation, noun, and verb) with definitions and examples.  It helps give the agent the needed context. In the **Body** field, copy and paste the following JSON sample:
 
-```json
-[
-    {
-      "word": "hello",
-      "phonetic": "həˈləʊ",
-      "phonetics": [
+    ```json
+    [
         {
-          "text": "həˈləʊ",
-          "audio": "//ssl.gstatic.com/dictionary/static/sounds/20200429/hello--_gb_1.mp3"
-        },
-        {
-          "text": "hɛˈləʊ"
-        }
-      ],
-      "origin": "early 19th century: variant of earlier hollo ; related to holla.",
-      "meanings": [
-        {
-          "partOfSpeech": "exclamation",
-          "definitions": [
+          "word": "hello",
+          "phonetic": "həˈləʊ",
+          "phonetics": [
             {
-              "definition": "used as a greeting or to begin a phone conversation.",
-              "example": "hello there, Katie!",
-              "synonyms": [],
-              "antonyms": []
+              "text": "həˈləʊ",
+              "audio": "//ssl.gstatic.com/dictionary/static/sounds/20200429/hello--_gb_1.mp3"
+            },
+            {
+              "text": "hɛˈləʊ"
             }
-          ]
-        },
-        {
-          "partOfSpeech": "noun",
-          "definitions": [
+          ],
+          "origin": "early 19th century: variant of earlier hollo ; related to holla.",
+          "meanings": [
             {
-              "definition": "an utterance of 'hello'; a greeting.",
-              "example": "she was getting polite nods and hellos from people",
-              "synonyms": [],
-              "antonyms": []
-            }
-          ]
-        },
-        {
-          "partOfSpeech": "verb",
-          "definitions": [
+              "partOfSpeech": "exclamation",
+              "definitions": [
+                {
+                  "definition": "used as a greeting or to begin a phone conversation.",
+                  "example": "hello there, Katie!",
+                  "synonyms": [],
+                  "antonyms": []
+                }
+              ]
+            },
             {
-              "definition": "say or shout 'hello'.",
-              "example": "I pressed the phone button and helloed",
-              "synonyms": [],
-              "antonyms": []
+              "partOfSpeech": "noun",
+              "definitions": [
+                {
+                  "definition": "an utterance of 'hello'; a greeting.",
+                  "example": "she was getting polite nods and hellos from people",
+                  "synonyms": [],
+                  "antonyms": []
+                }
+              ]
+            },
+            {
+              "partOfSpeech": "verb",
+              "definitions": [
+                {
+                  "definition": "say or shout 'hello'.",
+                  "example": "I pressed the phone button and helloed",
+                  "synonyms": [],
+                  "antonyms": []
+                }
+              ]
             }
           ]
         }
       ]
-    }
-  ]
-```
+    ```
 
 1. Select **Import**.
 
@@ -317,12 +316,12 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. In the **Add tool** screen, enter the following into the search box and press **Enter**:
 
-  ```
-  Lookup a word in the dictionary
-  ```
+    ```
+    Lookup a word in the dictionary
+    ```
 
-  > [!NOTE]
-  > It can sometimes take a few minutes for a new connector to sync to Copilot Studio. If you don't see it, try clearing your browser cache by refreshing the page.
+    > [!NOTE]
+    > It can sometimes take a few minutes for a new connector to sync to Copilot Studio. If you don't see it, try clearing your browser cache by refreshing the page.
 
 1. Select the **Word Lookup** connector from the search results.
 
@@ -334,8 +333,8 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Additional details** and set **Credentials to use** to **Maker-provided credentials**.
 
-  > [!TIP]
-  > For unauthenticated APIs, it is best to use Maker-provided credentials so you don't require users to create a connection for anonymous connectors.
+    > [!TIP]
+    > For unauthenticated APIs, it is best to use Maker-provided credentials so you don't require users to create a connection for anonymous connectors.
 
 1. In the **Inputs** section, Select **Customize** next to **word**.
 
@@ -351,8 +350,8 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Turn off **Use general knowledge**.
 
-  > [!NOTE]
-  > Disabling general knowledge ensures that only your custom connector API provides answers, not the underlying language model.
+    > [!NOTE]
+    > Disabling general knowledge make sure that only your custom connector API provides answers, not the underlying language model.
 
 1. Select **Save**.
 
@@ -360,17 +359,17 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. In the test pane, try the following queries:
 
-  ```
-  What is the meaning of the word copilot?
-  ```
+    ```
+    What is the meaning of the word copilot?
+    ```
 
-  ```
-  Where does it come from?
-  ```
+    ```
+    Where does it come from?
+    ```
 
-  ```
-  How about the word amazing?
-  ```
+    ```
+    How about the word amazing?
+    ```
 
 1. Verify that the agent uses your custom connector tool to retrieve definitions, origins, and phonetic information from the Free Dictionary API.
 
@@ -436,8 +435,8 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Select **Save** in the upper right corner of the **Details** section.
 
-  > [!TIP]
-  > The agent creation may take 30-60 seconds. You'll see a loading indicator while your agent is being provisioned.
+    > [!TIP]
+    > The agent creation may take 30-60 seconds. You'll see a loading indicator while your agent is being provisioned.
 
 #### Create the Agent Flow
 
@@ -457,11 +456,11 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Enter **Calculate Sales Commission** for the Flow name.
 
-1. Eneer the following for the description:
+1. Enter the following for the description:
 
-  ```
-  Deterministic commission calculation with tiers, bonuses, and accelerators
-  ```
+    ```
+    Deterministic commission calculation with tiers, bonuses, and accelerators
+    ```
 
 1. Change **Express mode** at the bottom of that right panel to **Enabled**.
 
@@ -485,8 +484,8 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Select **Save draft** in the upper right corner after adding all inputs.
 
-  > [!IMPORTANT]
-  > Make sure parameter names match exactly (case-sensitive) as they'll be referenced in formulas.
+    > [!IMPORTANT]
+    > Make sure parameter names match exactly (case-sensitive) as they'll be referenced in formulas.
 
 #### Initialize Variables
 
@@ -496,15 +495,15 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Initialize the following variables:
 
-| Variable name | Type | Value |
-|---------------|------|---------------|
-| `CommissionTier` | String | (leave empty) |
-| `CommissionRate` | Float | `0` |
-| `BaseCommission` | Float | `0` |
-| `ProductMixBonus` | Float | `0` |
-| `TotalCommission` | Float | `0` |
+    | Variable name | Type | Value |
+    |---------------|------|---------------|
+    | `CommissionTier` | String | (leave empty) |
+    | `CommissionRate` | Float | `0` |
+    | `BaseCommission` | Float | `0` |
+    | `ProductMixBonus` | Float | `0` |
+    | `TotalCommission` | Float | `0` |
 
-1. Optionally, select "..." on each Initialize node and select **Rename*" and change them from generic Initialize variable 1 to Initialize and the name of the variable they are intializing.  This step is not required, however, it is a best practice.
+1. Optionally, select "..." on each Initialize node and select **Rename*" and change them from generic Initialize variable 1 to Initialize and the name of the variable they are initializing.  This step is not required, however, it is a best practice.
 
 1. Select **Save draft** to save your progress.
 
@@ -514,7 +513,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Select **Variable** and then Select **Set variable**.
 
-1. Select **CommissionTier** in the list of varaible names.
+1. Select **CommissionTier** in the list of variable names.
 
 1. Select **fx** on the right side of the value field to open the Insert expression pane.
 
@@ -522,16 +521,16 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Enter the following in the input area for Copilot to create an expression:
 
-  ```
-Create a calculated field called “Tier” based on the value of the Number field. If Number is greater than 500,000, set Tier to “Tier 3”. If Number is greater than 250,000 but less than or equal to 500,000, set Tier to “Tier 2”. If Number is greater than 100,000 but less than or equal to 250,000, set Tier to “Tier 1”. Otherwise, set Tier to “Tier 0”.
-  ```
+      ```
+    Create a calculated field called “Tier” based on the value of the Number field. If Number is greater than 500,000, set Tier to “Tier 3”. If Number is greater than 250,000 but less than or equal to 500,000, set Tier to “Tier 2”. If Number is greater than 100,000 but less than or equal to 250,000, set Tier to “Tier 1”. Otherwise, set Tier to “Tier 0”.
+      ```
 1. Select **Create Expression** and then select **OK** 
 
 1. Review the expression it should look like the following if not update it from here:
 
-  ```
-  if(greater(triggerBody()?['number'], 500000), 'Tier 3', if(greater(triggerBody()?['number'], 250000), 'Tier 2', if(greater(triggerBody()?['number'], 100000), 'Tier 1', 'Tier 0')) )
-  ```
+    ```
+    if(greater(triggerBody()?['number'], 500000), 'Tier 3', if(greater(triggerBody()?['number'], 250000), 'Tier 2', if(greater(triggerBody()?['number'], 100000), 'Tier 1', 'Tier 0')) )
+    ```
 
 1. Select **Add**.
 
@@ -544,7 +543,7 @@ Create a calculated field called “Tier” based on the value of the Number fie
 
 1. Select **Variable** and then Select **Set variable**.
 
-1. Select **CommissionRate** in the list of varaible names.
+1. Select **CommissionRate** in the list of variable names.
 
 1. Select **fx** on the right side of the value field to open the Insert expression pane.
 
@@ -552,16 +551,16 @@ Create a calculated field called “Tier” based on the value of the Number fie
 
 1. Enter the following in the input area for Copilot to create an expression:
 
-  ```
-Create a calculated field called “Rate” based on the value of the Number field. If Number is greater than 500,000, set Rate to 0.12. If Number is greater than 250,000 but less than or equal to 500,000, set Rate to 0.10. If Number is greater than 100,000 but less than or equal to 250,000, set Rate to 0.05. Otherwise, set Rate to 0.00.
-  ```
+      ```
+    Create a calculated field called “Rate” based on the value of the Number field. If Number is greater than 500,000, set Rate to 0.12. If Number is greater than 250,000 but less than or equal to 500,000, set Rate to 0.10. If Number is greater than 100,000 but less than or equal to 250,000, set Rate to 0.05. Otherwise, set Rate to 0.00.
+      ```
 1. Select **Create Expression** and then select **OK** 
 
-1. Review the expression it should look like the following if not updat it from here:
+1. Review the expression it should look like the following if not update it from here:
 
-  ```
-  if(greater(triggerBody()?['number'], 500000), 0.12, if(greater(triggerBody()?['number'], 250000), 0.10, if(greater(triggerBody()?['number'], 100000), 0.05, 0.00)))
-  ```
+      ```
+      if(greater(triggerBody()?['number'], 500000), 0.12, if(greater(triggerBody()?['number'], 250000), 0.10, if(greater(triggerBody()?['number'], 100000), 0.05, 0.00)))
+      ```
 
 1. Select **Add**.
 
@@ -574,7 +573,7 @@ Create a calculated field called “Rate” based on the value of the Number fie
 
 1. Select **Variable** and then Select **Set variable**.
 
-1. Select **BaseCommission** in the list of varaible names.
+1. Select **BaseCommission** in the list of variable names.
 
 1. Select **fx** on the right side of the value field to open the Insert expression pane.
 
@@ -582,16 +581,16 @@ Create a calculated field called “Rate” based on the value of the Number fie
 
 1. Enter the following in the input area for Copilot to create an expression:
 
-  ```
-  Multiply AnnualRevenue times CommissionRate
-  ```
+    ```
+    Multiply AnnualRevenue times CommissionRate
+    ```
 1. Select **Create Expression** and then select **OK** 
 
-1. Review the expression it should look like the following if not updat it from here:
+1. Review the expression it should look like the following if not update it from here:
 
-  ```
-  mul(triggerBody()?['number'], variables('CommissionRate'))
-  ```
+    ```
+    mul(triggerBody()?['number'], variables('CommissionRate'))
+    ```
 
 1. Select **Add**.
 
@@ -599,7 +598,7 @@ Create a calculated field called “Rate” based on the value of the Number fie
 
 1. Select **+ Add node** just before the last node **Respond to the agent**.
 
-1. Select **Variable** and then select **Incremement variable**.
+1. Select **Variable** and then select **Increment variable**.
 
 1. Select **TotalCommission** from the list of variable names.
 
@@ -621,16 +620,16 @@ Create a calculated field called “Rate” based on the value of the Number fie
 
 1. Enter the following in the input area for Copilot to create an expression:
 
-  ```
-  If you Divide StrategicProductRevenue by AnnualRevenue and it is >= 0.30 then ProductMixBonus is 3000 otherwise it is 0. Make sure you convert the two values to Float before dividing.
-  ```
+    ```
+    If you Divide StrategicProductRevenue by AnnualRevenue and it is >= 0.30 then ProductMixBonus is 3000 otherwise it is 0. Make sure you convert the two values to Float before dividing.
+    ```
 1. Select **Create Expression** and then select **OK** 
 
 1. Review the expression it should look like the following if not update it from here:
 
-  ```
-   if(greaterOrEquals(div(float(triggerBody()?['number_2']), float(triggerBody()?['number'])), 0.3), 3000, 0)
-  ```
+    ```
+    if(greaterOrEquals(div(float(triggerBody()?['number_2']), float(triggerBody()?['number'])), 0.3), 3000, 0)
+    ```
 
 1. Select **Add**.
 
@@ -638,7 +637,7 @@ Create a calculated field called “Rate” based on the value of the Number fie
 
 1. Select **+ Add node** just before the last node **Respond to the agent**.
 
-1. Select **Variable** and then Select **Incremement variable**.
+1. Select **Variable** and then Select **Increment variable**.
 
 1. Select **TotalCommission** from the list of variable names.
 
@@ -658,47 +657,47 @@ Create a calculated field called “Rate” based on the value of the Number fie
 
 1. Enter the following in the description:
 
-  ```
-  Report of the results of the commission calculation
-  ```
+    ```
+    Report of the results of the commission calculation
+    ```
 1. Select **fx** to the right of the **Enter a value to respond with** field.
 
 1. Next we need to define the report details based on the variables we initiated and set. Enter the following in the formula input area:
 
-  ```
-  concat('COMMISSION CALCULATION REPORT
-  ===================================
+    ```
+    concat('COMMISSION CALCULATION REPORT
+    ===================================
 
-  SALES REPRESENTATIVE: ', triggerBody()?['text'], '
+    SALES REPRESENTATIVE: ', triggerBody()?['text'], '
 
-  PERFORMANCE SUMMARY
-  -----------------------------------
-  Annual Revenue: $', formatNumber(triggerBody()?['number'], '#,##0.00'), '
-  Annual Quota: $', formatNumber(triggerBody()?['number_1'], '#,##0.00'), '
-  Strategic Product Revenue: $', formatNumber(triggerBody()?['number_2'], '#,##0.00'), '
+    PERFORMANCE SUMMARY
+    -----------------------------------
+    Annual Revenue: $', formatNumber(triggerBody()?['number'], '#,##0.00'), '
+    Annual Quota: $', formatNumber(triggerBody()?['number_1'], '#,##0.00'), '
+    Strategic Product Revenue: $', formatNumber(triggerBody()?['number_2'], '#,##0.00'), '
 
-  COMMISSION BREAKDOWN
-  -----------------------------------
-  Commission Tier: ', variables('CommissionTier'), '
-  Commission Rate: ', formatNumber(mul(variables('CommissionRate'), 100), '#,##0.0'), '%
-  Base Commission: $', formatNumber(variables('BaseCommission'), '#,##0.00'), '
+    COMMISSION BREAKDOWN
+    -----------------------------------
+    Commission Tier: ', variables('CommissionTier'), '
+    Commission Rate: ', formatNumber(mul(variables('CommissionRate'), 100), '#,##0.0'), '%
+    Base Commission: $', formatNumber(variables('BaseCommission'), '#,##0.00'), '
 
-  BONUS
-  -----------------------------------
-  ', if(greater(variables('ProductMixBonus'), 0), concat('Product Mix Bonus: $', formatNumber(variables('ProductMixBonus'), '#,##0.00'), ' (Strategic products >=30%)'), 'Product Mix Bonus: $0.00 (Strategic products <30%)'), '
+    BONUS
+    -----------------------------------
+    ', if(greater(variables('ProductMixBonus'), 0), concat('Product Mix Bonus: $', formatNumber(variables('ProductMixBonus'), '#,##0.00'), ' (Strategic products >=30%)'), 'Product Mix Bonus: $0.00 (Strategic products <30%)'), '
 
-  TOTAL COMMISSION
-  -----------------------------------
-  $', formatNumber(variables('TotalCommission'), '#,##0.00'), '
+    TOTAL COMMISSION
+    -----------------------------------
+    $', formatNumber(variables('TotalCommission'), '#,##0.00'), '
 
-  ===================================
-  Calculation Date: ', formatDateTime(utcNow(), 'MMM dd, yyyy'))
-  ```
+    ===================================
+    Calculation Date: ', formatDateTime(utcNow(), 'MMM dd, yyyy'))
+    ```
 1. Select **Add** to add the formula
 
 1. Select **Save Draft** in upper right corner of the screen.
 
-1. Select **Publish** to make your changes avaialble for the agent to use.
+1. Select **Publish** to make your changes available for the agent to use.
 
 ![Agent Flow](images/agentflow.jpg)
 
@@ -712,19 +711,19 @@ Create a calculated field called “Rate” based on the value of the Number fie
 
 1. Select **+ Add a Topic** > **From blank**.
 
-1. Enter **Calculate My Commission** for the Name by Selecting **Untitled** in the upper left corner of the screen.
+1. Enter **Calculate My Commission** for the Name by selecting **Untitled** in the upper left corner of the screen.
 
 1. Enter the following in the **Describe what the topic does** input area:
 
-```
-Calculate my commission
-What's my commission
-How much commission did I earn
-Check commission
-Commission calculator
-Show my earnings
-Calculate earnings
-```
+    ```
+    Calculate my commission
+    What's my commission
+    How much commission did I earn
+    Check commission
+    Commission calculator
+    Show my earnings
+    Calculate earnings
+    ```
 
 1. Select **Save**.
 
@@ -734,50 +733,50 @@ Calculate earnings
 
 1. Select **Edit adaptive card**.  We need to tell the card what to display to the user, and then what to do with the responses. Enter the following into the **Card payload editor** replacing the existing text:
 
-  ```json
-  {
-      "type": "AdaptiveCard",
-      "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
-      "version": "1.5",
-      "body": [
-          {
-              "type": "Input.Text",
-              "label": "What is your name",
-              "placeholder": "SalesRepName",
-              "id": "SalesRepName"
-          },
-          {
-              "type": "Input.Number",
-              "label": "What is your total annual revenue? (Number only)",
-              "placeholder": "AnnualRevenue",
-              "id": "AnnualRevenue"
-          },
-          {
-              "type": "Input.Number",
-              "label": "What is your annual quota target? (Number only)",
-              "placeholder": "QuotaAmount",
-              "id": "QuotaAmount"
-          },
-          {
-              "type": "Input.Number",
-              "label": "How much revenue came from strategic products? (Number only)",
-              "placeholder": "StrategicProductRevenue",
-              "id": "StrategicProductRevenue"
-          },
-          {
-              "type": "ActionSet",
-              "actions": [
-                  {
-                      "type": "Action.Submit",
-                      "title": "Calculate Commission"
-                  }
-              ]
-          }
-      ]
-  }
-  ```
+    ```json
+    {
+        "type": "AdaptiveCard",
+        "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+        "version": "1.5",
+        "body": [
+            {
+                "type": "Input.Text",
+                "label": "What is your name",
+                "placeholder": "SalesRepName",
+                "id": "SalesRepName"
+            },
+            {
+                "type": "Input.Number",
+                "label": "What is your total annual revenue? (Number only)",
+                "placeholder": "AnnualRevenue",
+                "id": "AnnualRevenue"
+            },
+            {
+                "type": "Input.Number",
+                "label": "What is your annual quota target? (Number only)",
+                "placeholder": "QuotaAmount",
+                "id": "QuotaAmount"
+            },
+            {
+                "type": "Input.Number",
+                "label": "How much revenue came from strategic products? (Number only)",
+                "placeholder": "StrategicProductRevenue",
+                "id": "StrategicProductRevenue"
+            },
+            {
+                "type": "ActionSet",
+                "actions": [
+                    {
+                        "type": "Action.Submit",
+                        "title": "Calculate Commission"
+                    }
+                ]
+            }
+        ]
+    }
+    ```
 
-![Adaptive Card](images/adaptivecard.jpg)
+    ![Adaptive Card](images/adaptivecard.jpg)
 
 1. Select **Save** and then Select **Close** in upper right corner to exit the editor.
 
@@ -791,7 +790,7 @@ Calculate earnings
 
 1. After the Calculate Sales Commission node,  Select **+ Add node** > **Send a message**.
 
-1. Enter **Here is your report:" in the message area.
+1. Enter **Here is your report:** in the message area.
 
 1. Select **+Add** and select **Basic Card**.
 
@@ -801,33 +800,33 @@ Calculate earnings
 
 1. Select **Save**.
 
-![Topic](images/topic.jpg)
+![Sales Commission Assistant workflow in Copilot Studio showing trigger, adaptive card form, and tool agent flow components](images/topic.jpg)
 
 #### Test Your Commission Calculator
 
-41. Select **Test** in the upper right-hand corner of Copilot Studio.
+1. Select **Test** in the upper right-hand corner of Copilot Studio.
 
-42. Type `Calculate my commission` and fill in the adaptive card with the following test data:
+1. Type `Calculate my commission` and fill in the adaptive card with the following test data:
     - **Name:** `Jennifer Rodriguez`
     - **Annual Revenue:** `675000`
     - **Annual Quota:** `400000`
     - **Strategic Product Revenue:** `250000`
 
-43. Verify the results:
+1. Verify the results:
     - Commission Tier: Tier 3 (12% rate)
     - Base Commission: $81,000.00
     - Product Mix Bonus: $3,000.00 (250K/675K = 37%, above 30%)
     - **Total Commission: $84,000.00**
 
-![Testing](images/test.jpg)
+    ![Sales Commission Assistant calculating JP's commission with $84,000 total result displayed](images/test.jpg)
 
-44. Reset the conversation and test with a below-quota scenario:
+1. Reset the conversation and test with a below-quota scenario:
     - **Name:** `David Park`
     - **Annual Revenue:** `75000`
     - **Annual Quota:** `100000`
     - **Strategic Product Revenue:** `10000`
 
-45. Verify: Commission Tier: Tier 0 (0% rate), Total Commission: $0.00
+1. Verify: Commission Tier: Tier 0 (0% rate), Total Commission: $0.00
 
 ---
 
@@ -845,7 +844,7 @@ Calculate earnings
 
 **Lessons learned & troubleshooting tips:**
 
-* Parameter names in agent flows are case-sensitive - ensure they match exactly between the flow and topic
+* Parameter names in agent flows are case-sensitive - make sure they match exactly between the flow and topic
 * Use the Express mode for simpler flows that don't require complex error handling
 * Test with edge cases (zero revenue, exactly at tier boundaries) to validate business rules
 
@@ -877,7 +876,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 #### Create and Configure the Agent
 
-1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/). Ensure you are logged in using the credentials for the lab and are in the correct environment.
+1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/). Make sure you are logged in using the credentials for the lab and are in the correct environment.
 
 1. Select **Agents** in the left navigation then select **Create blank agent** in the upper right corner.
 
@@ -906,17 +905,17 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
    - **Title:** Account Search | **Prompt:** `List all accounts in Redmond`
    - **Title:** Contact Search | **Prompt:** `List all contacts from Coho Winery`
 
-    ![Suggested prompts configuration](images/step4b-suggested-prompts-search.png)
+      ![Suggested prompts configuration](images/step4b-suggested-prompts-search.png)
 
-  > [!TIP]
-  > You can configure up to six suggested prompts that customers can choose from to start a conversation. In Teams and in Copilot Chat, suggested prompts appear on the agent's welcome page before you start a new chat. You can't see or use them when you test your agent in Copilot Studio.
+    > [!TIP]
+    > You can configure up to six suggested prompts that customers can choose from to start a conversation. In Teams and in Copilot Chat, suggested prompts appear on the agent's welcome page before you start a new chat. You can't see or use them when you test your agent in Copilot Studio.
 
 
 #### Add the Dataverse MCP Server as a Tool
 
 1. In the  **Tools** section on the **Overview** tab, Select **+ Add tool**.
 
-   ![Add tool](images/step6-add-tool.png)
+   ![Add tool dialog with Dataverse MCP Server option highlighted in red border](images/step6-add-tool.png)
 
 1. Search for **Dataverse** and select **Dataverse MCP Server** from the results. If there are multiple do not select the deprecated one and do not select the one that has preview in its description.
 
@@ -928,8 +927,8 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 1. Review **Authentication Type** it should already be set to **Oauth**, no changes are required, Select **Create**.  If prompted, confirm your student credentials.
 
-  > [!IMPORTANT]
-  > The Dataverse MCP Server will allow you natural language access to your tables in Dataverse. We have sample data in the Accounts and Contacts tables that we will use. The tools available are: list tables, describe table, read data, create record, update record, list prompts, execute prompt, list knowledge sources, and retrieve knowledge.
+    > [!IMPORTANT]
+    > The Dataverse MCP Server will allow you natural language access to your tables in Dataverse. We have sample data in the Accounts and Contacts tables that we will use. The tools available are: list tables, describe table, read data, create record, update record, list prompts, execute prompt, list knowledge sources, and retrieve knowledge.
 
 1. Select **Add and configure**.
 
@@ -946,17 +945,17 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 1. For the first run, you will get a consent dialog as by default the tool is configured to use "End user credentials". Select **Allow** to continue.
 
-    ![Allow MCP access](images/step11a-allow-mcp.png)
+      ![Allow MCP access](images/step11a-allow-mcp.png)
 
-  > [!NOTE]
-  > If you are using Service Principals or Client Certification Auth to connect to Dataverse, you may need to use "Maker-provided credentials". To change this, go to the Details section > Additional details section > Credentials to use.
+    > [!NOTE]
+    > If you are using Service Principals or Client Certification Auth to connect to Dataverse, you may need to use "Maker-provided credentials". To change this, go to the Details section > Additional details section > Credentials to use.
 
-   ![Test agent](images/step11b-test-agent.png)
+      ![Test agent](images/step11b-test-agent.png)
 
-  > [!TIP]
-  > Select the **Activity Map** at the top of the agent testing panel to track what topics or tools the agent is using. You can see that the Dataverse MCP server is initiated and then which tools are being used - list_tables, describe_tables, read_query.
+      > [!TIP]
+      > Select the **Activity Map** at the top of the agent testing panel to track what topics or tools the agent is using. You can see that the Dataverse MCP server is initiated and then which tools are being used - list_tables, describe_tables, read_query.
 
-   ![Activity map tracking](images/step11c-activity-map.png)
+      ![Activity map tracking](images/step11c-activity-map.png)
 
 1. If you select the tool that was used, you will see the **Inputs** and **Outputs** of the tool.
 
@@ -964,15 +963,15 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 1. If no accounts are found, try running the following prompt to create some test data. and then retry your previous prompt:
 
-```
-Create 10 account rows with test data for the common fields, include some accounts with a State of WA
-```
+    ```
+    Create 10 account rows with test data for the common fields, include some accounts with a State of WA
+    ```
 
 1. Use the following prompt to add some contacts to each account:
    
-```
-for each account create a test contact associated with the account
-```
+    ```
+    for each account create a test contact associated with the account
+    ```
 
 1. Continue testing by asking: **Who are the contacts for each account**
 
@@ -1026,17 +1025,17 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 #### Create the Chit Chat Agent
 
-1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/). Ensure you are logged in using the credentials for the lab and are in the correct environment.
+1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/). Make sure you are logged in using the credentials for the lab and are in the correct environment.
 
 1. Select **Agents** in the left navigation then select **Create blank agent** in the upper right corner.
 
-1. Once the agent is provisioned, rename it to **Chit Chat Agent** by Selecting **Edit** in the **Details** section.
+1. Once the agent is provisioned, rename it to **Chit Chat Agent** by selecting **Edit** in the **Details** section.
 
 1. Enter the following as the **Description:**
 
-  ```
-  This agent allows a user to chit chat and have general conversation
-  ```
+    ```
+    This agent allows a user to chit chat and have general conversation
+    ```
 1. Select **Save**.
 
 #### Create the Chit Chat Prompt Tool
@@ -1050,9 +1049,9 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. In the **Instructions** field, paste the following text:
 
-  ```
-  Respond to this (Replace this text) with an appropriate chit chat response. Do not leverage any information within the model to provide details outside of a simple chit chat response to the question. You should make the response be friendly and professional. It should never talk about politics, religion, or anything that is not just simple chit chat type discussion such as "Hello", "How are you?", or "How old are you?". Do not ask follow up questions as part of your response.
-  ```
+    ```
+    Respond to this (Replace this text) with an appropriate chit chat response. Do not leverage any information within the model to provide details outside of a simple chit chat response to the question. You should make the response be friendly and professional. It should never talk about politics, religion, or anything that is not just simple chit chat type discussion such as "Hello", "How are you?", or "How old are you?". Do not ask follow up questions as part of your response.
+    ```
 
 1. Select **(Replace this text)** with your mouse and replace it with a text input by Selecting **Add content** and selecting **Text**.
 
@@ -1060,14 +1059,14 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. In the **Sample data** field, enter the following text:
 
-  ```
-  Hey there. I like cats do you?
-  ```
+    ```
+    Hey there. I like cats do you?
+    ```
 
 1. Select **Close**.
 
-  > [!NOTE]
-  > The sample data is used for testing within the Prompt Builder interface. It simulates what a user might say so you can preview how the prompt responds.
+    > [!NOTE]
+    > The sample data is used for testing within the Prompt Builder interface. It simulates what a user might say so you can preview how the prompt responds.
 
 #### Test and Select an AI Model
 
@@ -1081,8 +1080,8 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. Notice how the response style changes depending on the model selected.
 
-  > [!NOTE]
-  > You can also add additional models from Foundry if needed. Different models may produce different response styles and levels of detail.
+    > [!NOTE]
+    > You can also add additional models from Foundry if needed. Different models may produce different response styles and levels of detail.
 
 1. Change the model back to **GPT-4.1 mini** as it is the most cost-effective and fastest option.
 
@@ -1094,16 +1093,16 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. Change the **Description** to the following text:
 
-  ```
-  This tool provides capabilities to allow the user to do chit chat with this agent. It should stay focused to only handle simple chit chat scenarios like "Hello" or "How old are you?" type of things but stay away from any non-chit chat related topics. Do not use this topic for things like "Goodbye".
-  ```
+    ```
+    This tool provides capabilities to allow the user to do chit chat with this agent. It should stay focused to only handle simple chit chat scenarios like "Hello" or "How old are you?" type of things but stay away from any non-chit chat related topics. Do not use this topic for things like "Goodbye".
+    ```
 
 1. In the **Inputs** section, change the **Query** input's **Fill Using** setting to **Custom value**.
 
 1. In the **Value** field, Select the **...** button, then Select **System** and select **Activity.Text**.
 
-  > [!TIP]
-  > System.Activity.Text stores the last thing the user said to the agent. This automatically passes the user's message into your custom prompt.
+    > [!TIP]
+    > System.Activity.Text stores the last thing the user said to the agent. This automatically passes the user's message into your custom prompt.
 
 1. Select **Save** on your Chit Chat Prompt tool.
 
@@ -1113,8 +1112,8 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. Scroll to the bottom of the **Generative AI** menu and turn off **Use general knowledge**.
 
-  > [!TIP]
-  > To limit hallucinations, it is common practice to turn off the model's general knowledge. This restricts the agent to only the tools and knowledge you have provided.
+    > [!TIP]
+    > To limit hallucinations, it is common practice to turn off the model's general knowledge. This restricts the agent to only the tools and knowledge you have provided.
 
 1. Select **Save**.
 
@@ -1124,17 +1123,17 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. In the test pane, try the following chit chat queries:
 
-  ```
-  Hey do you like cats? I have a tabby
-  ```
+      ```
+      Hey do you like cats? I have a tabby
+      ```
 
-  ```
-  How old are you?
-  ```
+      ```
+      How old are you?
+      ```
 
-  ```
-  What time is it?
-  ```
+      ```
+      What time is it?
+      ```
 
 1. Verify that the agent responds with friendly, professional chit chat responses.
 
@@ -1167,7 +1166,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 **Lessons learned & troubleshooting tips:**
 
 * Use detailed prompt instructions to define both what the agent should and should not do
-* Test with boundary cases to ensure the agent stays within its defined scope
+* Test with boundary cases to make sure the agent stays within its defined scope
 * GPT-4.1 mini is typically the most cost-effective choice for simple conversational scenarios
 * Disabling general knowledge helps validate that your prompt tool is handling responses correctly
 
@@ -1240,14 +1239,14 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 1. Enter the following into the **Instructions**:
 
-  ```
-  1. Go to https://computerusedemos.blob.core.windows.net/web/Portfolio/index.html.
-  2. Enter the Portfolio ID in the "Enter Portfolio ID" search field and Select the "Search" button.
-  3. Retrieve the "Client Name", "Portfolio Value" and "Manager" values exactly as shown.
-  4. Return those three values as the final output.
+    ```
+    1. Go to https://computerusedemos.blob.core.windows.net/web/Portfolio/index.html.
+    2. Enter the Portfolio ID in the "Enter Portfolio ID" search field and Select the "Search" button.
+    3. Retrieve the "Client Name", "Portfolio Value" and "Manager" values exactly as shown.
+    4. Return those three values as the final output.
 
-  If no portfolio data is found, reply that you couldn't find a portfolio with the specified ID.
-  ```
+    If no portfolio data is found, reply that you couldn't find a portfolio with the specified ID.
+    ```
 
 1. Keep **Use hosted browser** enabled to create a connection to the hosted browser.
 
@@ -1276,12 +1275,12 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
     - The left panel shows your instructions and a step-by-step log of the tool's reasoning and actions
     - The right panel shows a preview of the actions on the machine
 
-![Testing interface for portfolio lookup with Financial Portfolio Dashboard showing search results for portfolio Test](images/test_CUA.jpg)
+    ![Testing interface for portfolio lookup with Financial Portfolio Dashboard showing search results for portfolio Test](images/test_CUA.jpg)
 
 1. Select **Finish testing**.
 
-  > [!TIP]
-  > If the result isn't what you expect, refine your instructions with more details and test again. Allow sufficient time between tests to ensure the previous Computer use task has been fully completed before starting a new one.
+    > [!TIP]
+    > If the result isn't what you expect, refine your instructions with more details and test again. Allow sufficient time between tests to make sure the previous Computer use task has been fully completed before starting a new one.
 
 #### Set Up Email Response
 
@@ -1310,18 +1309,18 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 1. Enter the following instructions:
 
-  ```
-  When a financial portfolio related request is received, identify the Portfolio ID and search for the requested data using (replace this text). Once you have gathered the financial portfolio information, use the (replace this text) tool to reply to the original email you received. Do not respond with data beyond what was requested.
-  ```
+    ```
+    When a financial portfolio related request is received, identify the Portfolio ID and search for the requested data using (replace this text). Once you have gathered the financial portfolio information, use the (replace this text) tool to reply to the original email you received. Do not respond with data beyond what was requested.
+    ```
 
 1. For each `(replace this text)` placeholder in the instructions, select the placeholder, type `/` to open the dropdown menu, and select the corresponding tool:
     - First placeholder: Select **Look up portfolio data**
     - Second placeholder: Select **Reply to email**
 
-  > [!IMPORTANT]
-  > Using the `/` reference technique creates a direct link between your instructions and the configured tools, ensuring the agent knows exactly which tools to invoke.
+    > [!IMPORTANT]
+    > Using the `/` reference technique creates a direct link between your instructions and the configured tools, ensuring the agent knows exactly which tools to invoke.
 
-  ![Agent Instructions](images/agent_instructions.jpg)
+    ![Agent Instructions](images/agent_instructions.jpg)
 
 1. **Save** the instructions.
 
@@ -1335,15 +1334,15 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
     - **Subject:** `Portfolio data request`
     - **Body:**
 
-  ```
-  Hi!
+    ```
+    Hi!
 
-  I hope you're doing well!
-  I'm looking for the portfolio manager and value of portfolio #44123BCD.
+    I hope you're doing well!
+    I'm looking for the portfolio manager and value of portfolio #44123BCD.
 
-  Much appreciated.
-  Thanks!
-  ```
+    Much appreciated.
+    Thanks!
+    ```
 
 1. Make sure you receive the email in your training user's inbox at outlook.office.com.
 
@@ -1351,13 +1350,13 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 1. Select the trigger instance and then **Start testing**.
 
-  ![Test Trigger](images/test_trigger.jpg)
+      ![Test Trigger](images/test_trigger.jpg)
 
 1. Check your emails for the agent's reply.
 
-  > [!TIP]
-  > - Monitor the Computer use tool's actions in the Test chat window or through the agent's **Activity** page.
-  > - In the **Activity** page, select the current run and switch from **Activity map** to **Transcript** for a real-time view of all Computer use tool steps with screenshots.
+    > [!TIP]
+    > - Monitor the Computer use tool's actions in the Test chat window or through the agent's **Activity** page.
+    > - In the **Activity** page, select the current run and switch from **Activity map** to **Transcript** for a real-time view of all Computer use tool steps with screenshots.
 
 ---
 
@@ -1374,7 +1373,7 @@ To maximize the impact of tools in Copilot Studio:
 * **Choose the Right Tool Type** - Connectors for pre-built service integrations, agent flows for deterministic business logic, MCP servers for live data access, custom prompts for structured responses, and CUA for legacy system automation
 * **Use Agent Flows for Predictable Logic** - Financial calculations, compliance rules, and other business logic that must be auditable and consistent should use deterministic flows, not AI
 * **Leverage MCP for Real-Time Data** - The Dataverse MCP Server provides natural language access to live business data without building custom APIs or connectors
-* **Standardize with Custom Prompts** - Use structured prompts to ensure all users get consistent, relevant responses with the specific data fields they need
+* **Standardize with Custom Prompts** - Use structured prompts to make sure all users get consistent, relevant responses with the specific data fields they need
 * **Test Thoroughly** - Use the Activity Map to understand tool execution flow, validate calculations with edge cases, and verify end-to-end workflows
 
 ---
