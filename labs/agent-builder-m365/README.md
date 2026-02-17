@@ -63,8 +63,8 @@ The progressive approach ensures you understand core concepts before adding comp
 
 | Concept                                    | Why it matters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Agent**                                  | A customized digital assistant that can answer questions, retrieve information, and guide users through tasks based on configured instructions, prompts, and knowledge sources. Understanding agents is fundamental to automating knowledge work.                                                                                                                                                                                                                                                                                                                      |
-| **Microsoft 365 Copilot vs. Copilot Chat** | Microsoft 365 Copilot is grounded in your organization's data (emails, meetings, documents) while Copilot Chat comes for free with select [Microsoft 365, Office 365, and Microsoft Teams plans](https://learn.microsoft.com/en-us/copilot/manage#microsoft-365--chat-eligibility) and uses public web data by default. Knowing which to use determines your agent's capabilities and data access. Copilot Chat can be extended with some premium capabilities with a pay-as-you-go subscription and/or with Copilot Credits (pre-purchased capacity) |
+| **Agent**                                  | An Agent is a customized digital assistant that can answer questions, retrieve information, and guide users through tasks based on configured instructions, prompts, and knowledge sources. Understanding agents is fundamental to automating knowledge work.                                                                                                                                                                                                                                                                                                                      |
+| **Microsoft 365 Copilot vs. Copilot Chat** | Microsoft 365 Copilot is grounded in your organization's data (emails, meetings, documents) while Copilot Chat comes for free with select [Microsoft 365, Office 365, and Microsoft Teams plans](https://learn.microsoft.com/en-us/copilot/manage#microsoft-365--chat-eligibility) and uses public web data by default. Knowing which to use determines your agent's capabilities and data access. Copilot Chat can be extended with some premium capabilities with a pay-as-you-go subscription and/or with Copilot Credits (pre-purchased capacity). |
 | **Declarative Agent**                      | A simple type of Copilot agent built through instructions, prompts, and knowledge sources. Perfect for most business use cases where you need to scope behavior and ground responses in specific data.                                                                                                                                                                                                                                                                                                                                                                 |
 | **Grounding**                              | Anchoring agent responses to specific data sources (websites, SharePoint, files) to ensure accuracy and minimize hallucinations. This is what makes your agent trustworthy and business-ready.                                                                                                                                                                                                                                                                                                                                                                         |
 | **Code Interpreter**                       | An advanced feature that writes and executes code in real-time to analyze data, generate charts, and perform calculations. Transforms your agent from information retrieval to data analysis powerhouse.                                                                                                                                                                                                                                                                                                                                                               |
@@ -75,7 +75,7 @@ The progressive approach ensures you understand core concepts before adding comp
 
 ## 📄 Documentation and Additional Training Links
 
-- [Overview of Microsoft 365 Copilot Chat](https://learn.microsoft.com/en-us/copilot/chat)
+- [Overview of Microsoft 365 Copilot Chat](https://learn.microsoft.com/en-us/copilot/overview)
 - [What is Microsoft 365 Copilot?](https://learn.microsoft.com/en-us/microsoft-365-copilot)
 - [Declarative Agents for Microsoft 365 Copilot](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/overview-declarative-agent)
 - [Use Agent Builder in Microsoft 365 to Build Agents](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/agent-builder-build-agents)
@@ -201,7 +201,7 @@ What are new features in the Microsoft Copilot Studio roadmap?
 
 ![Response from Copilot showing the roadmap](images/simple-copilot-search.png)
 
-5. Select **Start a new chat** (top right icon) to reset. Notice how your history of converations is saved on the left-hand side.
+5. Select **Start a new chat** (top right icon) to reset. Notice how your history of converations is saved on the left side navigation pane.
 
 #### Create your learning assistant agent
 
@@ -287,7 +287,7 @@ What are the differences between Microsoft 365 Copilot and Copilot Chat?
 **Key takeaways:**
 
 - **Copilot Chat vs. Microsoft 365 Copilot** – One is grounded in your Microsoft 365 data (Work), the other in the web by default. Understanding the difference helps you choose the right foundation for your agents.
-- **Agent types matter** – Declarative agents are simple and instruction-based; Custom Engine agents are complex and fully orchestrated. Most business use cases are perfectly served by declarative agents.
+- **Agent types matter** – Declarative agents are simple and instruction-based. Custom Engine agents are complex and fully orchestrated. Most business use cases are perfectly served by declarative agents.
 - **Documentation is your friend** – Grounding agents on trusted content ensures more reliable, relevant answers and minimizes hallucinations.
 - **Conversational creation** – The agent creation process uses AI itself, which means the flow may vary but the concepts remain consistent.
 
@@ -312,7 +312,7 @@ Take your skills to the next level by creating an agent that integrates SharePoi
 
 | Use case                                                | Value added                                                                                                                    | Estimated effort |
 | ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ---------------- |
-| Build an advanced SharePoint-integrated sales assistant | Master advanced features including SharePoint integration, code interpretation, and image generation for business intelligence | 20 minutes       |
+| Build an advanced SharePoint-integrated sales assistant | Master advanced features including SharePoint integration, code interpretation, and image generation for business intelligence | 15 minutes       |
 
 **Summary of tasks**
 
@@ -355,7 +355,7 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
    - Sales procedures and guidelines
    - Policy information that might inform sales decisions
    - Any specific requirements or compliance information
- - On the list of files in Documents, with the file Selected, Select Copy link in the toolboar, save the link in notepad for use later in the lab
+   - On the list of files in Documents, with the file Selected, Select Copy link in the toolboar, save the link in notepad for use later in the lab
 
 #### Create the Sales Admin Assistant agent
 
@@ -363,7 +363,7 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 6. On the left side pane, expand **Agents** and select **New agent**.
 
-7. Select the **Describe** tab at the top, and copy/paste the following prompta nd select Send:
+7. Select the **Describe** tab at the top, and copy/paste the following prompt and select Send:
 
 ```
 You are a Sales Admin Assistant. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.

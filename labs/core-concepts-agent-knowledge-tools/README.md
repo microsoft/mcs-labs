@@ -75,9 +75,8 @@ This lab takes you through the complete journey from agent creation to a fully c
 
 * [Microsoft Copilot Studio Overview](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)
 * [Create and configure agents](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-get-started)
-* [Add knowledge sources to your agent](https://learn.microsoft.com/microsoft-copilot-studio/nlu-generative-answers-knowledge)
-* [Use tools to build custom actions](https://learn.microsoft.com/microsoft-copilot-studio/tools)
-* [Create and manage topics](https://learn.microsoft.com/microsoft-copilot-studio/authoring-topics)
+* [Add knowledge sources to your agent](https://learn.microsoft.com/en-us/microsoft-365-copilot/extensibility/knowledge-sources)
+* [Create and manage topics](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-create-edit-topics)
 * [Work with topic triggers](https://learn.microsoft.com/microsoft-copilot-studio/authoring-triggers)
 
 ---
@@ -154,8 +153,10 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 1. In the Details pane, select **Edit**
 
-1. Set the agent name to **Copilot Studio Assistant** and select **Save**:
+1. Set the agent name to **Copilot Studio Assistant** and select **Save**
 
+1. Select the dropdown for the agent's model.  Ensure that GPT-4.1 is selected.   
+  
 1. Review the Instructions pane details, this prompt was created by Copilot Studio from your initial description. It should basically tell the agent to "Help users write prompts, create PowerFX formulas, and with navigating Copilot Studio features."
 
    > [!TIP]
@@ -240,7 +241,7 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 1. Download the [**Copilot Studio Licensing Guide**](https://go.microsoft.com/fwlink/?linkid=2320995). Just make sure you have the file local on your computer.
 
-1. Select **Upload files** and use the file dialog to locate and select your downloaded license guide file from your local computer.
+1. Select **+Add Knowledge** and select **Upload files** and use the file dialog to locate and select your downloaded license guide file from your local computer.
 
    > [!TIP]
    > You can upload multiple file types including PDF, Word documents (.docx), PowerPoint (.pptx), and text files. Each file can be up to 512 MB.
@@ -262,14 +263,10 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 1. Review the **Name** and **Description** fields. Update if needed to make the source easily identifiable.
 
-1. Ensure the knowledge source is **Enabled** (toggle should be on).
-
-   > [!IMPORTANT]
-   > Disabled knowledge sources won't be used in agent responses. Always verify your knowledge sources are enabled after adding them.
 
 #### Test Knowledge Integration
 
-1. In the test panel on the right, click **Refresh** or start a new conversation to ensure the agent uses the latest knowledge.
+1. In the test panel on the right, click start a new conversation to ensure the agent uses the latest knowledge.
 
 1. Enter the following question to test the newly added knowledge and select **Send**:
 
@@ -348,7 +345,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 #### Navigate to Tools
 
-1. Open your Copilot Studio agent (the one you created in Use Case #1).
+1. Open your Copilot Studio Assistant agent (the one you created in Use Case #1).
 
 1. Select **Tools** in the agent's top navigation bar.
 
@@ -430,11 +427,11 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. Input **IntentOfPrompt** for the name.
 
-1. Input **IntentOfPrompt** into the 
+1. Input **IntentOfPrompt** into the sample data.
 
 1. Select the **Test** button to test the Prompt Analyzer prompt you just built.
 
-1. In the **Model response* pane on the right review the model response from your test.
+1. In the **Model response** pane on the right review the model response from your test.
 
 1. Select **Save** in the lower right to create the prompt tool.
 
@@ -456,9 +453,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
    > [!IMPORTANT]
    > Agent-level instructions help the agent understand context and avoid confusion - especially when tools might be misused or misinterpreted.
 
-1. In the text you just pasted, where select **Prompt Analyzer** after the **Use** at the beginning of what you just pasted.
-
-1. Type / and it will bring up a dialog to select the **Prompt Analyzer** tool.
+1. In the text you just pasted, where select **Prompt Analyzer** after the **Use** at the beginning of what you just pasted, type / and it will bring up a dialog to select the **Prompt Analyzer** tool.
 
 1. Select **Save**.
 
@@ -535,7 +530,7 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
 
 1. In your Copilot Studio agent, click **Topics** in the top navigation bar.
 
-1. Select **+ Add topic**.
+1. Select **+ Add a topic**.
 
 1. Select **Add from description with Copilot**.
 
@@ -598,7 +593,7 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
 
 #### Test the Mailing List Topic
 
-1. In the test panel, start a new conversation by selecting the + in the upper right corner of the test pane.
+1. In the test panel, start a new conversation.
 
 1. Enter the following trigger phrase:
 
@@ -615,39 +610,7 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
 
 1. Observe how the agent guides you through the structured flow and confirms the submission.
 
-#### Create a Topic from Blank (Optional Advanced Exercise)
 
-1. Select **+ Add topic** again.
-
-1. This time, select **Create from blank** to build a topic manually.
-
-1. Explore the blank canvas and available options:
-    - Add trigger phrases manually
-    - Build conversation flow node by node
-    - Configure conditions and branching logic
-
-1. Notice the **Trigger** options at the top:
-    - **Phrases**: Text patterns that activate the topic
-    - **Events**: System events (conversation start, escalation, etc.)
-    - **Automation**: Scheduled or triggered activations
-
-   > [!TIP]
-   > Building from blank gives you complete control but takes more time. Use description-based creation for speed, then refine manually if needed.
-
-#### Explore All Node Options
-
-1. In your blank topic (or any existing topic), click **+** to add a node.
-
-1. Review all available node types and think about when you would use each:
-    - **Send a message**: Display information or confirmation
-    - **Ask a question**: Collect user input
-    - **Condition**: Branch based on variable values or logic
-    - **Adaptive card**: Display rich, interactive cards
-    - **Call an action**: Trigger flows, connectors, or tools
-    - **Set a variable**: Store or modify data
-    - **Topic management**: Redirect to another topic or end conversation
-
----
 
 ### 🏅 Congratulations! You've completed Use Case 4!
 
