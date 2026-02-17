@@ -514,7 +514,37 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Select **Variable** and then Select **Set variable**.
 
-1. Select **Commission Tier** in the list of varaible names.
+1. Select **CommissionTier** in the list of varaible names.
+
+1. Select **fx** on the right side of the value field to open the Insert expression pane.
+
+1. Select **Create an expression with Copilot**.
+
+1. Enter the following in the input area for Copilot to create an expression:
+
+  ```
+  if(greater(triggerBody()?['number'], 500000), 'Tier 3', if(greater(triggerBody()?['number'], 250000), 'Tier 2', if(greater(triggerBody()?['number'], 100000), 'Tier 1', 'Tier 0')) )
+  ```
+1. Select **Create Expression** and then select **OK** 
+
+1. Review the expression it should look like the following if not updat it from here:
+
+  ```
+  if(greater(triggerBody()?['number'], 500000), 0.12, if(greater(triggerBody()?['number'], 250000), 0.10, if(greater(triggerBody()?['number'], 100000), 0.05, 0.00)))
+  ```
+
+1. Select **Add**.
+
+1. Optionally, select **...** and then select **Rename** to change the step name to **Set CommissionTier**.
+
+
+#### Determine Commission Rate
+
+1. Select **+ Add node** just before the last node **Respond to the agent**.
+
+1. Select **Variable** and then Select **Set variable**.
+
+1. Select **CommissionRate** in the list of varaible names.
 
 1. Select **fx** on the right side of the value field to open the Insert expression pane.
 
@@ -535,7 +565,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Select **Add**.
 
-1. Optionally, select **...** and then select **Rename** to change the step name to **Set CommissionTier**.
+1. Optionally, select **...** and then select **Rename** to change the step name to **Set CommissionRate**.
 
 
 #### Calculate Base Commission
