@@ -523,14 +523,14 @@ Create an agent flow that calculates sales commissions using deterministic busin
 1. Enter the following in the input area for Copilot to create an expression:
 
   ```
-  if(greater(triggerBody()?['number'], 500000), 'Tier 3', if(greater(triggerBody()?['number'], 250000), 'Tier 2', if(greater(triggerBody()?['number'], 100000), 'Tier 1', 'Tier 0')) )
+  If(AnnualRevenue > 500000, "Tier 3", If(AnnualRevenue > 250000, "Tier 2", If(AnnualRevenue > 100000, "Tier 1", "Tier 0")))
   ```
 1. Select **Create Expression** and then select **OK** 
 
-1. Review the expression it should look like the following if not updat it from here:
+1. Review the expression it should look like the following if not update it from here:
 
   ```
-  if(greater(triggerBody()?['number'], 500000), 0.12, if(greater(triggerBody()?['number'], 250000), 0.10, if(greater(triggerBody()?['number'], 100000), 0.05, 0.00)))
+  if(greater(triggerBody()?['number'], 500000), 'Tier 3', if(greater(triggerBody()?['number'], 250000), 'Tier 2', if(greater(triggerBody()?['number'], 100000), 'Tier 1', 'Tier 0')) )
   ```
 
 1. Select **Add**.
@@ -622,14 +622,14 @@ Create an agent flow that calculates sales commissions using deterministic busin
 1. Enter the following in the input area for Copilot to create an expression:
 
   ```
-  If you Divide StrategicProductRevenue by AnnualRevenue and it is >= 0.30 then ProductMixBonus is 3000 otherwise it is 0
+  If you Divide StrategicProductRevenue by AnnualRevenue and it is >= 0.30 then ProductMixBonus is 3000 otherwise it is 0. Make sure you convert the two values to Float before dividing.
   ```
 1. Select **Create Expression** and then select **OK** 
 
 1. Review the expression it should look like the following if not update it from here:
 
   ```
-  if(greaterOrEquals(div(triggerBody()?['number_2'], triggerBody()?['number']), 0.3), 3000, 0)
+   if(greaterOrEquals(div(float(triggerBody()?['number_2']), float(triggerBody()?['number'])), 0.3), 3000, 0)
   ```
 
 1. Select **Add**.
@@ -654,7 +654,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Select **Add an output** and Select **Text**.
 
-1. Enter **CommissionReport** in the name.
+1. Map **CommissionReport** in the name.
 
 1. Enter the following in the description:
 
@@ -879,8 +879,6 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/). Ensure you are logged in using the credentials for the lab and are in the correct environment.
 
-  ![Step 1: Go to Copilot Studio](images/step1-copilot-studio-navigation.png)
-
 1. Select **Agents** in the left navigation then select **Create blank agent** in the upper right corner.
 
 1. Select **Edit** and fill in the Name and Description:
@@ -920,11 +918,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
    ![Add tool](images/step6-add-tool.png)
 
-1. Enter **Dataverse** in the search input field and select the icon to the right of the field to begin the search.
-
-1. Select **Model Context Protocol** in the filter bar at the top of the results.
-
-1.  Select **Dataverse MCP Server** If there are multiple do not select the deprecated one and do not select the one that has preview in its description.
+1. Search for **Dataverse** and select **Dataverse MCP Server** from the results. If there are multiple do not select the deprecated one and do not select the one that has preview in its description.
 
    ![Select MCP Dataverse](images/step7-mcp-dataverse.png)
 
@@ -932,7 +926,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
    ![Add authentication](images/step8-add-auth.png)
 
-1. Review **Authentication Type** it should already be set to **Oauth**, no changes are required, Select **Create**.
+1. Review **Authentication Type** it should already be set to **Oauth**, no changes are required, Select **Create**.  If prompted, confirm your student credentials.
 
   > [!IMPORTANT]
   > The Dataverse MCP Server will allow you natural language access to your tables in Dataverse. We have sample data in the Accounts and Contacts tables that we will use. The tools available are: list tables, describe table, read data, create record, update record, list prompts, execute prompt, list knowledge sources, and retrieve knowledge.
@@ -950,7 +944,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 1. In the testing panel, ask the following question: **List the accounts in the state of WA**.
 
-1. For the first run, you will get a Consent dialog as by default the tool is configured to use "End user credentials". Select **Allow** to continue.
+1. For the first run, you will get a consent dialog as by default the tool is configured to use "End user credentials". Select **Allow** to continue.
 
     ![Allow MCP access](images/step11a-allow-mcp.png)
 
@@ -964,7 +958,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
    ![Activity map tracking](images/step11c-activity-map.png)
 
-1. If you Select the tool that was used, you will see the **Inputs** and **Outputs** of the tool.
+1. If you select the tool that was used, you will see the **Inputs** and **Outputs** of the tool.
 
     ![Tool inputs and outputs](images/step11d-inputs-outputs.png)
 
@@ -975,6 +969,7 @@ Create 10 account rows with test data for the common fields, include some accoun
 ```
 
 1. Use the following prompt to add some contacts to each account:
+   
 ```
 for each account create a test contact associated with the account
 ```
@@ -1035,14 +1030,13 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. Select **Agents** in the left navigation then select **Create blank agent** in the upper right corner.
 
-1. Once the agent is provisioned, rename it to **Chit Chat Agent**** by Selecting **Edit** in the **Details** section.
+1. Once the agent is provisioned, rename it to **Chit Chat Agent** by Selecting **Edit** in the **Details** section.
 
 1. Enter the following as the **Description:**
 
   ```
   This agent allows a user to chit chat and have general conversation
   ```
-
 1. Select **Save**.
 
 #### Create the Chit Chat Prompt Tool
@@ -1124,7 +1118,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. Select **Save**.
 
-1. Close the **Settings** menu using the **X** in the upper right-hand corner.
+1. Close the **Settings** menu using the **X** in the upper right corner.
 
 #### Test Your Chit Chat Agent
 
