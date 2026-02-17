@@ -211,7 +211,7 @@ labs:
     journeys: [business-user, developer]
     events: [bootcamp]
 
-  mcs-ALM:
+  mcs-alm:
     title: "Application Lifecycle Management (ALM) in Copilot Studio"
     difficulty: "Advanced"
     duration: 45
@@ -384,7 +384,7 @@ journeys:
         mcs-multi-agent,
         component-collections,
         mcs-tools,
-        mcs-ALM,
+        mcs-alm,
         mcs-byom,
         data-fabric-agent,
         guildhall-custom-mcp,
@@ -413,7 +413,7 @@ journeys:
         mcs-multi-agent,
         component-collections,
         mcs-tools,
-        mcs-ALM,
+        mcs-alm,
         autonomous-cua,
         autonomous-account-news,
         autonomous-support-agent,
@@ -450,7 +450,7 @@ events:
         core-concepts-agent-knowledge-tools,
         core-concepts-variables-agents-channels,
         core-concepts-analytics-evaluations,
-        mcs-ALM,
+        mcs-alm,
         component-collections,
         mcs-tools,
         mcs-governance,

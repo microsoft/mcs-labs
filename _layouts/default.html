@@ -132,6 +132,7 @@
                      No CSS changes needed - dropdown auto-sizes -->
               </div>
             </div>
+            <a id="report-issue-btn" href="https://github.com/microsoft/mcs-labs/issues/new?labels=lab&type=Bug" target="_blank" rel="noopener noreferrer" class="report-issue-link">⚠ Report Issue</a>
           </nav>
           <div class="header-actions">
             <div class="theme-controls">
@@ -446,7 +447,8 @@
               // If it's external (different domain), add target="_blank" and security attributes
               if (
                 linkDomain !== currentDomain &&
-                linkDomain !== "pratapladhani.github.io"
+                linkDomain !== "pratapladhani.github.io" &&
+                !link.classList.contains("report-issue-link")
               ) {
                 link.setAttribute("target", "_blank");
                 link.setAttribute("rel", "noopener noreferrer");
