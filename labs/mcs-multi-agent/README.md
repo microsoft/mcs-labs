@@ -43,7 +43,7 @@ Think of a complex agent that might have many tools and knowledge sets that shou
 - "Don't understand the capabilities and rationale of child agents"
 - "Not classifying their agents' capabilities and putting excessive instructions in the Overview instructions to compensate"
 
-**Become a multi-agent master** - no need to continue to wonder about how to work around limitations of tools and topics that can be orchestrated or have the wrong tool being called at the wrong time.
+**Become a multi-agent expert** - no need to continue to wonder about how to work around limitations of tools and topics that can be orchestrated or have the wrong tool being called at the wrong time.
 
 
 ---
@@ -150,90 +150,98 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com.
 
-2. On the Home page in the description of the agent you want to build, enter: `Agent that assists sales associates with getting product information and lookup account and contact information in the sales system.`
+1. Check the **Environment** in the upper right corner to make sure you are in your "DEV - user name" environment.
 
-> [!IMPORTANT]
-> Do not Select Enter or submit this text yet as we need to do the agent settings before we do that.
+1. On the Home page in the description of the agent you want to build, enter the following but do not select enter yet: 
+
+    ```text
+    Agent that assists sales associates with getting product information and lookup account and contact information in the sales system.
+    ```
+
+    > [!IMPORTANT]
+    > Do not Select Enter or submit this text yet as we need to do the agent settings before we do that.
 
 ![Home Creation Text](images/image.png)
 
-3. Select the **Gear** on the description input area and edit the schema name to include `salesassistant` and then Select **Update**
+1. Select the **Gear** on the description input area and edit the schema name to include `salesassistant` and then Select **Update**. 
 
-![Agent Settings](images/image-1.png)
+    ![Agent Settings](images/image-1.png)
 
-> [!TIP]
-> Putting an agent into a dedicated solution and changing the schema name is always helpful for application lifecycle management in the future.
+    > [!TIP]
+    > Putting an agent into a dedicated solution and changing the schema name is always helpful for application lifecycle management in the future.
 
-4. Select **Enter** or the **Arrow** button on the description field
+1. Select **Enter** or the **Arrow** button on the right side of the description field.
 
-5. Once your agent is fully provisioned, review the instructions and tool or knowledge recommendations provided by the Copilot Studio provisioning process.
+1. Once your agent is fully provisioned, review the instructions and tool or knowledge recommendations provided by the Copilot Studio provisioning process.
 
 #### Prevent Hallucinations
 
-6. To make sure that our agent doesn't use model knowledge, we want to turn off some features. Select **Settings** (in the upper right-hand corner)
+1. To make sure that our agent doesn't use model knowledge, we want to turn off some features. Select **Settings** in the upper right corner.
 
-7. Scroll to the bottom of the list of settings on the **Generative AI** settings screen and turn **Off** both **Use general knowledge** and **Use information from the Web**
+1. Scroll to the bottom of the list of settings on the **Generative AI** settings screen and turn **Off** both **Use general knowledge** and **Use information from the Web**.
 
-![Turn off Model and Web Knowledge](images/image-2.png)
+    ![Turn off Model and Web Knowledge](images/image-2.png)
 
-8. Select **Save** and then **Close** the settings page
+1. Select **Save** and then select the **X** in the upper right corner of the settings page to close it.
 
-> [!TIP]
-> Turning off model and web knowledge helps to keep your agent from hallucinating information that the model might know about our product catalog or other items that might confuse it. This is best practice if you want it to keep to just the content you provide.
+    > [!TIP]
+    > Turning off model and web knowledge helps to keep your agent from hallucinating information that the model might know about our product catalog or other items that might confuse it. This is best practice if you want it to keep to just the content you provide.
 
 #### Collect Sales Associate's Market
 
-9. Select **Topics** in the top navigation menu
+1. Select **Topics** in the top navigation menu.
 
-10. Select **Add a Topic** and select **From blank**
+1. Select **Add a Topic** and then select **From blank**
 
-![Create blank topic](images/image-3.png)
+    ![Create blank topic](images/image-3.png)
 
-11. Select the box that says **The agent chooses** and then select the **Double Arrows** to show the Change Trigger menu, then select **It's redirected to**
+1. Select the box that says **The agent chooses** and then select the **Double Arrows** to show the Change Trigger menu, then select **It's redirected to**
 
-![Set Trigger on Topic](images/image-4.png)
+    ![Set Trigger on Topic](images/image-4.png)
 
-12. Change the name of the Topic to `Select Market` by selecting on the name in the upper left-hand navigation
+1. Change the name of the Topic to **Select Market** by selecting on the name in the upper left navigation.
 
-![Set Topic Name](images/image-5.png)
+    ![Set Topic Name](images/image-5.png)
 
-13. Add a node after the Trigger by selecting the **+** and select **Ask a question**
+1. Add a node after the Trigger by selecting the **+** and select **Ask a question**
 
-![Add Question](images/image-6.png)
+    ![Add Question](images/image-6.png)
 
-14. Enter `What market are you wanting information in?` and add to Options for user both `US` and `UK` by selecting **New option**
+1. Enter **What market are you wanting information in?** in the message area.
 
-![Create Question and Options](images/image-7.png)
+1. Select **New option** and add **US** as the option, and then repeat to add **UK** as another option.
 
-15. Under **Save user response as** Select on **Var1** and set the Variable name to `Market`
+    ![Create Question and Options](images/image-7.png)
 
-16. Select **Global** as the Usage of the Variable and select **External sources can receive value**
+1. Under **Save user response as**, select **Var1** and change the Variable name to `Market`.
 
-17. Enter `The market that the sales associate is requesting information about.` in the Variable description
+1. On the **Variable properties** pane, select **Global** as the Usage of the Variable and select **External sources can receive value**.
 
-![Variable Settings](images/image-8.png)
+1. Enter **The market that the sales associate is requesting information about.** in the Variable description, near the bottom of the Variable properties.
 
-18. Delete all the **Condition** nodes by selecting **...** and then selecting **Delete** on each
+    ![Variable Settings](images/image-8.png)
 
-![Delete Conditions](images/image-9.png)
+1. Delete all the **Condition** nodes that were automatically added below the Question node by selecting **...** and then selecting **Delete** on each
 
-19. Select **Save** to save the topic
+    ![Delete Conditions](images/image-9.png)
 
-20. Select the **V** next to the name of the topic "Select Market" and select **Conversation Start** to go to the Conversation Start Topic
+1. Select **Save** to save the topic
 
-![Go To Conversation Start](images/image-10.png)
+1. Select the **V** next to the name of the topic "Select Market" and select **Conversation Start** to go to the Conversation Start Topic
 
-21. Add a new node at the end of the topic by selecting the **+** and then selecting **Topic Management > Go to another topic > Select Market**
+    ![Go To Conversation Start](images/image-10.png)
+
+1. Add a new node at the end of the topic by selecting the **+** and then selecting **Topic Management > Go to another topic > Select Market**
 
 ![Add Node to Conversation Start](images/image-11.png)
 
-22. Select **Save**
+1. Select **Save**
 
-23. Open the Test chat by Selecting **Test** in the upper right-hand corner
+1. Open the Test chat by Selecting **Test** in the upper right corner.
 
-24. Select the **+** in the Test chat to start a new test session and verify that you now are asked which market at the beginning of each new chat.
+1. Select the **+** in the Test chat to start a new test session and verify that you now are asked which market at the beginning of each new chat.
 
-![Test Chat Market Selection](images/image-12.png)
+    ![Test Chat Market Selection](images/image-12.png)
 
 ---
 
@@ -274,6 +282,45 @@ In this section, you'll learn how to create child agents to logically group know
 
 ### Create Child Agent for US product information
 
+1. In the Sales Associate Assistant, select **Agents** on the top navigation menu.
+
+1. Select **Add** on the Agents page.
+
+1. Select **New child agent**.
+
+![Select Child Agent](images/image-13.png)
+
+1. Set Agent Name to **US Product Information Agent**.
+
+1. Set the Description to **This agent provides details about the Surface products offered in the United States**
+
+1. Expand **Advanced** and set the Condition to the **Global.Market** variable **is equal to** `US`
+
+    ![Set Child Agent Details](images/image-14.png)
+
+    > [!TIP]
+    > You can use a formula or variables to make conditions for when this agent should be available. If you don't see the Global.Market variable that probably means you didn't mark it Global in the topic.
+
+1. Enter the following in the **Instructions**
+
+    ```text
+    This agent should only answer questions about Microsoft Surface products in regards to the US-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United States.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.
+    ```
+
+![Add instructions](images/image-15.png)
+
+1. Add Knowledge to the Child Agent by Selecting **Add** in the Knowledge section of the Child Agent configuration
+
+1. Select **Public Websites**
+
+1. Enter `microsoft.com` in Public website link and Select **Add**
+
+1. Select **Add to agent**
+
+1. Select **Save** to save your child agent
+
+#### Create Child Agent for UK product information
+
 1. In the Sales Associate Assistant, select **Agents** on the top navigation menu
 
 1. Select **Add** on the Agents page
@@ -282,79 +329,48 @@ In this section, you'll learn how to create child agents to logically group know
 
 ![Select Child Agent](images/image-13.png)
 
-1. Set Agent Name to `US Product Information Agent`
+1. Set Agent Name to `UK Product Information Agent`
 
-1. Set the Description to `This agent provides details about the Surface products offered in the United States`
+1. Set the Description to `This agent provides details about the Surface products offered in the United Kingdom`
 
-1. Expand **Advanced** and set the Condition to the **Global.Market** variable **is equal to** `US`
+1. Expand **Advanced** and set the Condition to the **Global.Market** variable **is equal to** `UK`
 
-    ![Set Child Agent Details](images/image-14.png)
+![Set Child Agent Details UK](images/image-16.png)
 
     > [!TIP]
     > You can use a formula or variables to make conditions for when this agent should be available.
 
-7. In Instructions add `This agent should only answer questions about Microsoft Surface products in regards to the US-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United States.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.`
+1. Enter the following in the **Instructions**:
 
-![Add instructions](images/image-15.png)
-
-8. Add Knowledge to the Child Agent by Selecting **Add** in the Knowledge section of the Child Agent configuration
-
-9. Select **Public Websites**
-
-10. Enter `microsoft.com` in Public website link and Select **Add**
-
-11. Select **Add to agent**
-
-12. Select **Save** to save your child agent
-
-#### Create Child Agent for UK product information
-
-1. In the Sales Associate Assistant, select **Agents** on the top navigation menu
-
-2. Select **Add** on the Agents page
-
-3. Select **New child agent** 
-
-![Select Child Agent](images/image-13.png)
-
-4. Set Agent Name to `UK Product Information Agent`
-
-5. Set the Description to `This agent provides details about the Surface products offered in the United Kingdom`
-
-6. Expand **Advanced** and set the Condition to the **Global.Market** variable **is equal to** `UK`
-
-![Set Child Agent Details UK](images/image-16.png)
-
-> [!TIP]
-> You can use a formula or variables to make conditions for when this agent should be available.
-
-7. In Instructions add `This agent should only answer questions about Microsoft Surface products in regards to the UK-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United Kingdom.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.`
+    ```text
+    This agent should only answer questions about Microsoft Surface products in regards to the UK-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United Kingdom.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.`
+    ```
 
 ![Add Child Agent Instructions UK](images/image-17.png)
 
-8. Add Knowledge to the Child Agent by Selecting **Add** in the Knowledge section of the Child Agent configuration
+1. Add Knowledge to the Child Agent by Selecting **Add** in the Knowledge section of the Child Agent configuration
 
-9. Select **Public Websites**
+1. Select **Public Websites**
 
-10. Enter `microsoft.com/en-gb` in Public website link and Select **Add**
+1. Enter `microsoft.com/en-gb` in Public website link and Select **Add**
 
-11. Select **Add to agent**
+1. Select **Add to agent**
 
-12. Select **Save** to save your child agent
+1. Select **Save** to save your child agent
 
-13. Open the Test chat by Selecting **Test** in the upper right-hand corner
+1. Open the Test chat by Selecting **Test** in the upper right-hand corner
 
-14. Select the **+** in the Test chat to start a new test session 
+1. Select the **+** in the Test chat to start a new test session 
 
-15. Select **UK**
+1. Select **UK**
 
-16. Enter `What are the starting prices for the Surface laptop?`
+1. Enter `What are the starting prices for the Surface laptop?`
 
-17. Verify that the correct child agent was triggered and that your answer is appropriate for the UK market
+1. Verify that the correct child agent was triggered and that your answer is appropriate for the UK market
 
 ![Example Response UK question](images/image-18.png)
 
-18. Reset the conversation and do again for the US market
+1. Reset the conversation and do again for the US market
 
 ---
 
@@ -405,71 +421,75 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. In the upper right-hand corner of Copilot Studio, Select the **Gear** icon
 
-2. Select **Go to Power Platform admin center**
+1. Select **Go to Power Platform admin center**
 
-3. In the left navigation, select **Environments**
+1. In the left navigation, select **Manage** then select **Environments**
 
-4. Select your environment from the list
+1. Select your environment from the list
 
-5. Select **Settings** in the top menu
+1. Select **Settings** in the top menu
 
-6. Expand **Product** and select **Features**
+1. Expand **Product** and select **Features**
 
-7. In the Search section, ensure **Dataverse search** is turned **On**
+1. In the Search section, ensure **Dataverse search** is turned **On**
 
-8. Select **Save** if you made any changes
+1. Select **Save** if you made any changes
 
 #### Ensure that indexes are in place for our connected agent
 
-> [!IMPORTANT]
-> This is not required for a connected agent to work, but to make sure that the one we have pre-loaded for you will return results we must index a few tables in your environment.
+    > [!IMPORTANT]
+    > This is not required for a connected agent to work, but to make sure that the one we have pre-loaded for you will return results we must index a few tables in your environment.
 
-9. In the top left, select the menu button with 9 dots in the shape of a box and select **Power Apps**
+1. Go to the Power Apps maker portal [https://make.powerapps.com](https://make.powerapps.com)
 
 ![Open Power Apps](images/image-19.png)
 
-10. In the left-hand menu select **Tables**
+1 In the left menu select **Tables**
 
-11. Select the **Account** table from the list
+1. Select the **Account** table from the list
 
-12. Select **Views** from the Data experiences section
+1. Select **Views** from the Data experiences section
 
-13. Select **Quick Find Active Accounts** option from the list of Views
+1. Select **Quick Find Active Accounts** option from the list of Views
 
-14. Select **View Column** to verify the following list of columns are in the view:
+1. Select **View Column** to verify the following list of columns are in the view:
    - Address1: State or Providence
    - Address1: Postal Code
    - Address1
    - Annual Revenue
    - Currency
 
+1. To add any that are missing select **+ View column** and then select the column from the list.
+
 ![Account View](images/image-20.png)
 
-15. Add the ability to search on certain fields by making sure that the following items are in the **Find by** on the bottom right. Select the **Edit find table columns** option to check:
+1. Add the ability to search on certain fields by making sure that the following items are in the **Find by** on the bottom right. Select the **Edit find table columns** option to check:
    - Address1: State or Providence
    - Address1: Postal Code
    - Address1: City
 
 ![Add Account Searchable Columns](images/image-21.png)
 
-16. Select **Save and publish** to update the index
+1. Select **Edit find table columns** to add any missing columns.
 
-> [!IMPORTANT]
-> DO NOT navigate away until the save and publish is completed!
+1. Select **Save and publish** to update the index
 
-17. Select **Back** in the upper left corner to go back to the Views list
+    > [!IMPORTANT]
+    > DO NOT navigate away until the save and publish is completed!
 
-18. Select on **Tables** in the Views screen to go back to the list of Tables
+1. Select **Back** in the upper left corner to go back to the Views list
+
+1. Select on **Tables** in the Views screen to go back to the list of Tables
 
 ![Go to Tables](images/image-22.png)
 
-19. Select **Contact** table from the list
+1. Select **Contact** table from the list
 
-20. Select **Views** from the Data experiences section
+1. Select **Views** from the Data experiences section
 
-21. Select **Quick Find Active Contacts** option from the list of Views
+1. Select **Quick Find Active Contacts** option from the list of Views
 
-22. Select **View Column** to verify the following columns are in the view:
+1. Select **View Column** to verify the following columns are in the view:
     - Anniversary
     - Birthday
     - Job Title
@@ -477,61 +497,63 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ![Column Add Contact](images/image-23.png)
 
-23. Select **Save and publish** to update the index
+1. Select **+ View column** to add any that are missing.
+
+1. Select **Save and publish** to update the index
 
 > [!IMPORTANT]
 > DO NOT navigate away until the save and publish is completed!
 
 #### Test and Publish the Account and Contact Information Agent
 
-24. In the Copilot Studio tab in your browser, go to the **Account Data Lookup Agent**
+1. In the Copilot Studio tab in your browser, go to the **Account Data Lookup Agent**
 
-25. Open the Test chat by Selecting **Test** in the upper right-hand corner
+1. Open the Test chat by Selecting **Test** in the upper right-hand corner
 
-26. Enter `What are the accounts in Texas?`
+1. Enter `What are the accounts in Texas?`
 
-27. Verify that you get a response showing that the agent is working and the data is indexed
+1. Verify that you get a response showing that the agent is working and the data is indexed
 
 ![Test Account Lookup](images/image-24.png)
 
-28. Select **Settings** in the upper right-hand menu
+1. Select **Settings** in the upper right-hand menu
 
-29. Make sure that the setting in the Generative AI menu in the Connected Agents section for **Let other agents connect to and use this one** is set to **On**
+1. Make sure that the setting in the Generative AI menu in the Connected Agents section for **Let other agents connect to and use this one** is set to **On**
 
-30. Close the Settings menu by Selecting the **X** in the upper right-hand corner
+1. Close the Settings menu by Selecting the **X** in the upper right-hand corner
 
-31. Select **Publish** and make sure that your agent publishes
+1. Select **Publish** and make sure that your agent publishes
 
 > [!IMPORTANT]
 > You can't connect to an agent unless it is published
 
 #### Connect the Account and Contact Information Agent
 
-32. In the Copilot Studio tab in your browser, go to the parent agent (Sales Associate Assistant)
+1. In the Copilot Studio tab in your browser, go to the parent agent (Sales Associate Assistant)
 
-33. Go to the **Agents** menu on the top navigation bar
+1. Go to the **Agents** menu on the top navigation bar
 
-34. Select **Add an agent**
+1. Select **Add an agent**
 
-35. Select **Account Data Lookup Agent** from the menu
+1. Select **Account Data Lookup Agent** from the menu
 
 ![Select Connected Agent](images/image-26.png)
 
-36. Notice that the Description provides details on when to use this agent
+1. Notice that the Description provides details on when to use this agent
 
-37. Make sure that the **Pass conversation history to this agent** is **Checked**
+1. Make sure that the **Pass conversation history to this agent** is **Checked**
 
 ![Validate Setting Connected Agent](images/image-27.png)
 
-38. Select **Add and configure**
+1. Select **Add and configure**
 
-39. Open the Test chat by Selecting **Test** in the upper right-hand corner
+1. Open the Test chat by Selecting **Test** in the upper right-hand corner
 
-40. Select **US** in the test canvas to select that geography
+1. Select **US** in the test canvas to select that geography
 
-41. Enter `What are all of the details of accounts in Texas?` and send to agent
+1. Enter `What are all of the details of accounts in Texas?` and send to agent
 
-42. See that the agent orchestrated to the connected agent which then called its child agent that then called numerous tools to answer the question.
+1. See that the agent orchestrated to the connected agent which then called its child agent that then called numerous tools to answer the question.
 
 ![Account Info Results](images/image-25.png)
 
