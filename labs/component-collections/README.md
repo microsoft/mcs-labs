@@ -178,7 +178,7 @@ Create an agent, build a custom topic, and package components into a reusable co
   These are tools that assist with travel related scenarios.
   ```
 
-1. Check the **Solution** field, if **Select a solution** is showing do not change anything, if a solution is selected change it to **Create a new solution.
+1. Check the **Solution** field, if **Select a solution** is showing do not change anything, if a solution is selected change it to **Create a new solution**.
 
   > [!NOTE]
   > If the Solution field is left blank, Copilot Studio will automatically create a new solution for you. You can also select an existing solution if you want to group multiple component collections together.
@@ -236,7 +236,7 @@ Add a component collection to a new agent and verify that shared edits sync auto
 
 **Summary of tasks**
 
-In this section, you'll learn how to create a new blank agent, install an existing component collection into it, edit a shared topic, and verify that changes sync back to the original agent.
+In this section, you will create a new blank agent, install an existing component collection into it, edit a shared topic, and verify that changes sync back to the original agent.
 
 **Scenario:** Your organization is building a second agent that also needs the travel brochure request capability and travel website knowledge. Instead of rebuilding these from scratch, you'll install the existing Travel Tools component collection.
 
@@ -250,7 +250,7 @@ Install a component collection in a new agent and verify that shared editing wor
 
 #### Add the Component Collection to a New Agent
 
-1. Select **Agents** on the left-ha navigation menu.
+1. Select **Agents** on the left navigation menu.
 
 1. Select the **Create blank agent** button in the upper right corner.
 
@@ -262,13 +262,9 @@ Install a component collection in a new agent and verify that shared editing wor
 
 1. In the **Manage component collections** menu, select the **Available** tab.
 
-1. Hover over the **Travel Tools** item in the list, Select the **...** menu, and select **Add to agent**.
+1. Hover over the **Travel Tools** item in the list, Select the **...** menu, and select **Add to agent**. This adds the Travel Tools component collection to your new agent.
 
-1. This adds the Travel Tools component collection to your new agent.
-
-1. Go to the **Installed** tab in the menu.
-
-1. Notice that **Travel Tools** is now listed as installed in both your new agent and the Safe Travels agent.
+1. Go to the **Installed** tab in the menu. Notice that **Travel Tools** is now listed as installed in both your new agent and the Safe Travels agent.
 
 1. Close the Settings menu by selecting the **X** in the upper right corner.
 
