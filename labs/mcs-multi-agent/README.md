@@ -31,7 +31,7 @@ Help makers understand how to leverage multi-agent configurations including chil
 
 ## 🤔 Why This Matters
 
-**Makers and Architects** - Want to know how to appropriately leverage multi-agent configurations and when to use connected vs child agents to optimize how your agent orchestrates and is built for scale?
+**Makers and Architects** - Want to know how to appropriately leverage multi-agent configurations and when to use connected vs child agents to optimize how your agent orchestrates and is built for scale.
 
 Think of a complex agent that might have many tools and knowledge sets that should only be used when appropriate:
 - **Without Multi-Agent**: Makers are heavily limited in the number of orchestratable topics and tools they have at their disposal.
@@ -41,7 +41,7 @@ Think of a complex agent that might have many tools and knowledge sets that shou
 - "Abusing connected agents"
 - "Not knowing if something should be a connected agent or child agent"
 - "Don't understand the capabilities and rationale of child agents"
-- "Not classifying their agents' capabilities and putting excessive instructions in the Overview instructions to compensate"
+- "Not classifying their agents' capabilities and putting excessive instructions in the overview instructions to compensate"
 
 **Become a multi-agent expert** - no need to continue to wonder about how to work around limitations of tools and topics that can be orchestrated or have the wrong tool being called at the wrong time.
 
@@ -90,9 +90,9 @@ By the end, you’ll have a working multi‑agent copilot capable of distributin
 ## ✅ Prerequisites
 
 - Access to Microsoft Copilot Studio
-- Dataverse Search enabled in environment
+- Dataverse search enabled in environment
 - Access to Dataverse unbound action connector
-- Sample Data loaded into Dataverse Tables
+- Sample data loaded into Dataverse tables
 - Access to Account / Contact table in environment
 - Access to modify views and create search indexes on Account / Contact table
 
@@ -259,7 +259,7 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 **Lessons learned & troubleshooting tips:**
 
-* If the Market question doesn't appear, verify the Conversation Start topic redirects to your Select Market topic.
+* If the market question doesn't appear, verify the conversation start topic redirects to your Select Market topic.
 * If the variable isn't available in child agents, confirm it is set to Global with External sources can receive value enabled.
 
 ---
@@ -370,7 +370,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 ![Example Response UK question](images/image-18.png)
 
-1. Reset the conversation and do again for the US market
+1. Reset the conversation and do again for the US market.
 
 ---
 
@@ -419,7 +419,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 #### Make sure that Dataverse Search is set to on
 
-1. In the upper right-hand corner of Copilot Studio, Select the **Gear** icon
+1. In the upper right corner of Copilot Studio, Select the **Gear** icon
 
 1. Select **Go to Power Platform admin center**
 
@@ -431,7 +431,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. Expand **Product** and select **Features**
 
-1. In the Search section, ensure **Dataverse search** is turned **On**
+1. In the Dataverse search section, ensure **Dataverse search** is turned **On**
 
 1. Select **Save** if you made any changes
 
@@ -452,10 +452,10 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. Select **Quick Find Active Accounts** option from the list of Views
 
-1. Select **View Column** to verify the following list of columns are in the view:
+1. Select **View Column** to verify the following list of columns are in the view, you may have to scroll to see all of the included columns:
    - Address1: State or Providence
    - Address1: Postal Code
-   - Address1
+   - Address1: City
    - Annual Revenue
    - Currency
 
@@ -516,7 +516,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ![Test Account Lookup](images/image-24.png)
 
-1. Select **Settings** in the upper right-hand menu
+1. Select **Settings** in the upper right menu
 
 1. Make sure that the setting in the Generative AI menu in the Connected Agents section for **Let other agents connect to and use this one** is set to **On**
 
@@ -529,7 +529,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 #### Connect the Account and Contact Information Agent
 
-1. In the Copilot Studio tab in your browser, go to the parent agent (Sales Associate Assistant)
+1. In the Copilot Studio tab in your browser, go to the parent agent (Sales Info Assistant)
 
 1. Go to the **Agents** menu on the top navigation bar
 
@@ -547,7 +547,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. Select **Add and configure**
 
-1. Open the Test chat by Selecting **Test** in the upper right-hand corner
+1. Open the Test chat by Selecting **Test** in the upper right corner
 
 1. Select **US** in the test canvas to select that geography
 
