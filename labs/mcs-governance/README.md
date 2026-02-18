@@ -138,7 +138,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Go to [https://copilotstudio.microsoft.com](https://copilotstudio.microsoft.com).
 
-2. Click the **Environment selector** in the top-right corner of the screen.
+2. Select the **Environment selector** in the top-right corner of the screen.
 
 3. Search for `Bootcamp Green` and select it.
 
