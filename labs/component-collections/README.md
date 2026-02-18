@@ -138,6 +138,8 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 1. Scroll down to the **Start with an agent template** section.
 
+![A screenshot showing selecting the template as mentioned in the text](images/Start%20with%20template.png)
+
 1. Select the **Safe Travels** template.
 
 1. Select **Create** to make the agent.
@@ -157,6 +159,8 @@ Create an agent, build a custom topic, and package components into a reusable co
   ```
 
 1. Select **Create**.
+
+  ![A screenshot showing creating the topic as mentioned in the text](images/Create%20a%20topic.png)
 
 1. Notice that Copilot Studio has created a topic that allows the user to request a brochure, complete with branching logic for mail vs. email delivery.
 
@@ -184,6 +188,8 @@ Create an agent, build a custom topic, and package components into a reusable co
   > If the Solution field is left blank, Copilot Studio will automatically create a new solution for you. You can also select an existing solution if you want to group multiple component collections together.
 
 1. Select **Next**.
+
+![A screenshot showing selecting the solution as mentioned in the text](images/choose%20solution.png)
 
 1. Select your **Request a travel brochure** topic and the **US Travel Website** knowledge item, then Select **Next**.
 
@@ -264,6 +270,8 @@ Install a component collection in a new agent and verify that shared editing wor
 
 1. Hover over the **Travel Tools** item in the list, Select the **...** menu, and select **Add to agent**. This adds the Travel Tools component collection to your new agent.
 
+![A screenshot showing available component collections as mentioned in the text](images/available%20component%20collections.png)
+
 1. Go to the **Installed** tab in the menu. Notice that **Travel Tools** is now listed as installed in both your new agent and the Safe Travels agent.
 
 1. Close the Settings menu by selecting the **X** in the upper right corner.
@@ -283,6 +291,8 @@ Install a component collection in a new agent and verify that shared editing wor
     ```
 
 1. Select **Save**.
+
+![A screenshot showing adding the message node as mentioned in the text](images/add%20message%20node.png)
 
 #### Verify Changes Sync Across Agents
 
@@ -353,6 +363,8 @@ Manage component collection access, set a primary agent, and explore solution in
 1. In the list, Select on **Corporate Services**.
 
 1. Review the details about the **Corporate Services** component collection, including what is included in it.
+
+![A screenshot showing the component collection as mentioned in the text](images/component%20collection%20details.png)
 
 #### Add an Agent to a Component Collection
 
