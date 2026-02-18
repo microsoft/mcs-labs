@@ -616,31 +616,31 @@ Create a Fabric Data Agent connected to an e-commerce semantic model and add it 
 
 1. Go to [fabric.microsoft.com](https://fabric.microsoft.com) and sign in with your credentials.
 
-2. In the left navigation, select **Workspaces** and then select **Workshop Demo Workspace**.
+1. In the left navigation, select **Workspaces** and then select **Workshop Demo Workspace**.
 
-3. Within the workspace, locate the **e-commerce** folder and open the **E-commerce Dataset Report** to familiarize yourself with the data. Keep this tab open for reference.
+1. Within the workspace, locate the **e-commerce** folder and open the **E-commerce Dataset Report** to familiarize yourself with the data. Keep this tab open for reference.
 
-4. Create a personal folder in the workspace by selecting **New** > **Folder** and naming it with your username.
+1. Create a personal folder in the workspace by selecting **New** > **Folder** and naming it with your username.
 
-5. In your personal folder, Select **New Item**, search for `data agent`, and select **Data Agent (Preview)**.
+1. In your personal folder, Select **New Item**, search for `data agent`, and select **Data Agent (Preview)**.
 
    ![Search for Data Agent](images/add-data-agent.png)
 
-6. Name your agent using the pattern `[YourUsername]_DataAgent` and select **Create**.
+1. Name your agent using the pattern `[YourUsername]_DataAgent` and select **Create**.
 
 #### Connect the Data Source
 
-7. In the agent setup, select **+ Data source** in the Explorer panel.
+1. In the agent setup, select **+ Data source** in the Explorer panel.
 
    ![Select Data Source](images/select-data-source.png)
 
-8. Select **ecommerce-order-dataset** (Type: Semantic Model) and select **Add**.
+1. Select **ecommerce-order-dataset** (Type: Semantic Model) and select **Add**.
 
    ![Select ecommerce-order-dataset](images/select-ecommerce-order-dataset.png)
 
-9. After validation, select all available tables: Customers, Order_Items, Orders, Payments, Products.
+1. After validation, select all available tables: Customers, Order_Items, Orders, Payments, Products.
 
-10. Test baseline functionality in the **Test** pane:
+1. Test baseline functionality in the **Test** pane:
 
     ```
     What is our total revenue?
@@ -650,7 +650,7 @@ Create a Fabric Data Agent connected to an e-commerce semantic model and add it 
 
 #### Optimize with Meta-Prompts
 
-11. Generate agent-level instructions by entering this meta-prompt in the **Test** pane:
+1. Generate agent-level instructions by entering this meta-prompt in the **Test** pane:
 
     ```
     Meta-Prompt: Generate Agent-Level Instructions:
@@ -670,14 +670,14 @@ Create a Fabric Data Agent connected to an e-commerce semantic model and add it 
     ## Handling Common Topics (3-5 based on available data)
     ```
 
-12. Copy the generated response, review it, and paste it into the **Agent Instructions** field in the **Setup** section.
+1. Copy the generated response, review it, and paste it into the **Agent Instructions** field in the **Setup** section.
 
-> [!TIP]
-> Always review generated instructions for accuracy. Meta-prompts provide a strong foundation but may need minor adjustments for your specific use case.
+    > [!TIP]
+    > Always review generated instructions for accuracy. Meta-prompts provide a strong foundation but may need minor adjustments for your specific use case.
 
 #### Publish and Connect to Copilot Studio
 
-13. Generate a description using this meta-prompt in the Test pane:
+1. Generate a description using this meta-prompt in the Test pane:
 
     ```
     Create a 1-2 sentence description of yourself as a Fabric Data Agent (max 200 chars).
@@ -685,41 +685,41 @@ Create a Fabric Data Agent connected to an e-commerce semantic model and add it 
     Output plain text only.
     ```
 
-14. Select **Publish** and paste the generated description in the purpose and capabilities field.
+1. Select **Publish** and paste the generated description in the purpose and capabilities field.
 
 > [!IMPORTANT]
 > Save this description — you'll need it when connecting to Copilot Studio.
 
-15. Go to your **Sales Associate Assistant** in Copilot Studio.
+1. Go to your **Sales Associate Assistant** in Copilot Studio.
 
-16. Select **Agents** tab on the top navigation bar.
+1. Select **Agents** tab on the top navigation bar.
 
-17. Select **Add an agent**.
+1. Select **Add an agent**.
 
-18. Select **Connect to an external agent** and choose **Microsoft Fabric (preview)**.
+1. Select **Connect to an external agent** and choose **Microsoft Fabric (preview)**.
 
-19. If it shows **Not connected**, Select the dropdown, select **Create new connection**, and sign in.
+1. If it shows **Not connected**, Select the dropdown, select **Create new connection**, and sign in.
 
     ![Create connection](images/create-connection.png)
 
-20. Select your Fabric Data Agent from the list (look for your username) and Select **Next**.
+1. Select your Fabric Data Agent from the list (look for your username) and Select **Next**.
 
-21. Configure the connected agent:
+1. Configure the connected agent:
     - **Name**: Your data agent name
     - **Description**: Paste the description from step 13
 
-22. Verify the connection shows a green checkmark and Select **Add agent**.
+1. Verify the connection shows a green checkmark and Select **Add agent**.
 
-> [!NOTE]
-> If you see "An unexpected server error occurred", try selecting **Add agent** again. If that doesn't work, select **Back**, reselect the agent, and try again.
+    > [!NOTE]
+    > If you see "An unexpected server error occurred", try selecting **Add agent** again. If that doesn't work, select **Back**, reselect the agent, and try again.
 
 #### Test the Integrated Solution
 
-23. Open the **Test** pane in Copilot Studio.
+1. Open the **Test** pane in Copilot Studio.
 
-24. Select your market (US or UK) when prompted.
+1. Select your market (US or UK) when prompted.
 
-25. Test the Fabric Data Agent connection with progressive queries:
+1. Test the Fabric Data Agent connection with progressive queries:
 
     ```
     What products do we sell in our e-commerce store?
@@ -733,10 +733,10 @@ Create a Fabric Data Agent connected to an e-commerce semantic model and add it 
     Analyze our quarterly sales performance and identify which product categories are trending up or down
     ```
 
-26. See in the test pane that data queries are delegated to the Fabric Data Agent, indicated by handoff messages in the execution trace.
+1. See in the test pane that data queries are delegated to the Fabric Data Agent, indicated by handoff messages in the execution trace.
 
-> [!TIP]
-> Your Sales Associate Assistant now has three types of agents working together: child agents for market-specific product info, a connected agent for account/contact data, and a Fabric Data Agent for e-commerce analytics. This demonstrates real-world multi-agent orchestration at scale.
+    > [!TIP]
+    > Your Sales Associate Assistant now has three types of agents working together: child agents for market-specific product info, a connected agent for account/contact data, and a Fabric Data Agent for e-commerce analytics. This demonstrates real-world multi-agent orchestration at scale.
 
 ---
 
