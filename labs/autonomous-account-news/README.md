@@ -1,6 +1,6 @@
 # Build an Autonomous Account News Assistant Agent
 
-Empower sellers with timely insights – Build an autonomous Copilot Studio agent that periodically scans your Sales App for high-value opportunities, finds related news, and sends curated reports.
+Empower sellers with timely insights. Build an autonomous Copilot Studio agent that periodically scans your Sales App for high-value opportunities, finds related news, and sends curated reports.
 
 ---
 
@@ -129,7 +129,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 **Creating the Agent and Solution Setup**
 
-  1. Go to the Copilot Studio home page at [Copilot Studio](https://copilotstudio.microsoft.com).
+  1. Go to the Copilot Studio home page at [Copilot Studio](https://copilotstudio.microsoft.com).  Confirm you are using your DEV enviornment.
 
   1. Select **Agents** in the left navigation.
 
@@ -177,7 +177,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
   | Use case                                                     | Value added                                                                       | Estimated effort |
   | ------------------------------------------------------------ | --------------------------------------------------------------------------------- | ---------------- |
-  | Add a Tool to Fetch High-Value Opportunities from your Sales App | Enables the agent to access relevant CRM data for further reasoning and reporting | 5 minutes       |
+  | Add a tool to fetch high-value opportunities from your Sales App | Enables the agent to access relevant CRM data for further reasoning and reporting | 5 minutes       |
 
   **Summary of tasks**
 
@@ -214,7 +214,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 1. Under **Credentials to use**, select **Maker-provided credentials**.
 
   > [!IMPORTANT]  
-  > Always use Maker-provided credentials for autonomous agents. This option allows tools to run without requiring user interaction.
+  > Always use maker-provided credentials for autonomous agents. This option allows tools to run without requiring user interaction.
 
 1. Under **Inputs**, change **Environments** to the following:
       - **Fill using**: `Custom value`
@@ -261,9 +261,9 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 #### Step-by-step instructions
 
-1. Go to the [Copilot Studio Preview Portal](https://https://copilotstudio.preview.microsoft.com/). The preview portal is required to update the agent to enable deep reasoning.
+1. Go to the [Copilot Studio Preview Portal](https://copilotstudio.preview.microsoft.com/). The preview portal is required to update the agent to enable deep reasoning.
 
-1. Open your agent and go to **Settings**.
+1. Open your Account News Assistant agent and go to **Settings**.
 
 1. In the left menu, select **Generative AI**.
 
@@ -272,7 +272,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
   > [!TIP]
   > Deep reasoning is currently unavailable in the UI in certain regions.  If you do not see the Deep Reasoning toggle in the settings area, try accessing the agent via https://copilotstudio.preview.microsoft.com
 
-1. Turn **On** the toggle for **Use information from the Web**. Then Select **Save** to save this setting. Once saved, close the settings using the **X** on the top right.
+1. Turn **On** the toggle for **Use information from the Web**. Then select **Save** to save these settings. Once saved, close the settings using the **X** on the top right.
 
 1. To validate web search functionality, enter a test instruction such as: `Search for news on "Microsoft opens a new Datacenter"` in the test canvas. Your agent should retrieve relevant articles from the web.
 
@@ -490,7 +490,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 1. Repeat the same action for the topic `<Log Search Results>`. Type **/** and in the drop-down menu, under **Topic**, select **Log Search Results** to insert a visual reference to the topic, replacing `<Log Search Results>`.
 
-  1. Insert a reference to one of the global variable you created earlier. Type **/** and in the drop-down menu and select **Power Fx**. In the formula box, type `Global.searchResults`. A visual reference to the global variable should be added to the instructions.
+  1. Insert a reference to one of the global variable you created earlier. Type **/** and in the drop-down menu and select **Power Fx**. In the formula box, type `Global.searchResults`. You may have to scroll to see the Power Fx option in the dropdown. A visual reference to the global variable should be added to the instructions.
 
   1. The instructions should now appear as follows:
 
