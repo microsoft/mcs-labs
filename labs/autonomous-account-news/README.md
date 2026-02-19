@@ -695,7 +695,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
     ```
     6. Send an HTML report of the data in {Global.relevantNewsForOpportunities}. Use {Global.reportTemplate} as a template for the report, and <Send a summary report> to send it.
-  ```
+    ```
 
     > [!TIP]
     > If instructions don't offer the "/" option to reference topics, tools or variables, you can skip the next step and continue with the next steps. You can always come back to this later.
