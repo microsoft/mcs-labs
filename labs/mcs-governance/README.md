@@ -136,21 +136,25 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 #### Part 1: Green Zone (SharePoint Knowledge Only)
 
-1. Go to [https://copilotstudio.microsoft.com](https://copilotstudio.microsoft.com).
+1. Go to [Copilot Studio](https://copilotstudio.microsoft.com).
 
-1. Select the **Environment selector** in the top-right corner of the screen.
+1. Select the **Environment selector** in the top-right corner of the screen. It make take a few seconds for the **Environment** list to become visible.
 
 1. Search for `Bootcamp Green` and select it.
 
 1. In the **"What would you like to build?"** pane, find the text area that says _"Start building by describing what your agent needs to do"_.
 
-1. Copy and paste the following text into the description field, but do not send it yet you will be adding more in the next step:
+1. Enter the following text into the description field, but do not send it yet you will be adding more in the next step:
 
     ```text
     Help me build an agent that knows everything about building agents in Power Platform Copilot Studio. You're an expert, you're a coach, you give proactive advice on how to build Copilot Studio agents. And your knowledge is built on top of a SharePoint document.
     ```
 
-1. After typing the description, add the **SharePoint link** that was shared with you by the facilitator.
+1. After typing the description, add the following **SharePoint link** to the end of the instructions
+
+    ```
+    Here is the document to use as knowledge: https://copilotstudiotraining.sharepoint.com/:p:/s/Workshop/IQDYEPT5O76JR5akoXWdwO-PAR3IVlIBJ-RqZqpHy2cCRLs?e=qpIVD6
+    ```
 
 1. At the end of your instructions, add the following text:
 
@@ -161,7 +165,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
     > [!NOTE]
     > We add the username so we can find your agent easily in this shared environment.
 
-1. Before clicking the blue arrow to create, select the **Settings** wheel icon in the bottom-left corner.
+1. Before selecting the blue arrow to create, select the **Settings** wheel icon in the bottom-left corner.
 
 1. In the Settings pane, make sure you select the **Solution** that was created at the start of this bootcamp.
 
@@ -170,7 +174,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
     > [!TIP]
     > Schema names are used for advanced management of your agents. We advise using schema names in collaboration with the description. For example: `mcs_build_advisor_[YourUsername]_green`. Include the zone name (green, yellow, red) so you can tell them apart later.
 
-1. Click the **blue arrow** on the right-hand side to submit and create your agent.
+1. Select the **blue arrow** on the right side to submit and create your agent.
 
 1. Wait for Copilot Studio to build your agent. It will generate your name, description, and auto-generated instructions.
 
@@ -182,13 +186,13 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Select the **Knowledge** tab.
 
-1. Click **Add knowledge**.
+1. Select **Add knowledge**.
 
 1. Select **SharePoint**.
 
-1. Paste in the SharePoint link provided by the facilitator.
+1. Enter the following for the URL: https://copilotstudiotraining.sharepoint.com/:p:/s/Workshop/IQDYEPT5O76JR5akoXWdwO-PAR3IVlIBJ-RqZqpHy2cCRLs?e=qpIVD6
 
-1. Click **Add**.
+1. Select **Add**.
 
 1. Check the name of the knowledge source. It should reference the Microsoft Copilot Studio Implementation Guide PPTX.
 
@@ -197,25 +201,25 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
     > [!NOTE]
     > The default name and description are fine for now. However, we encourage you to be more descriptive with naming and descriptions. The knowledge you add and how you describe it will be discussed in best practices. Good descriptions help the orchestrator understand what the knowledge is used for.
 
-1. Click **Add to agent**.
+1. Select **Add to agent**.
 
 1. Verify that the added knowledge source shows a **green check mark**, meaning it is ready.
 
 #### Test the Green Zone Agent
 
-1. In the **Test** pane on the right-hand side, type the following prompt:
+1. In the **Test** pane on the right side, type the following prompt:
 
     ```text
     Please give me some best practices on Copilot Studio
     ```
 
-1. Press **Enter** or click **Send**.
+1. Press **Enter** or select **Send**.
 
-1. On the left-hand side, notice that the agent is reviewing knowledge from the SharePoint source you added.
+1. On the left side, notice that the agent is reviewing knowledge from the SharePoint source you added.
 
 1. Review the response. It will give you best practices found in the Implementation Guide.
 
-1. Notice the **citations** in the response. You can click on them and they will hyperlink you to the specific location inside the PowerPoint document.
+1. Notice the **citations** in the response. You can select them and they will hyperlink you to the specific location inside the PowerPoint document.
 
 1. Scroll down to the **References** section. Notice that it only references the Copilot Studio Implementation Guide and nothing else. This is because the Green zone restricts knowledge to SharePoint only.
 
@@ -223,7 +227,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Go back to the **Knowledge** tab.
 
-1. Click **Add knowledge**.
+1. Select **Add knowledge**.
 
 1. Select **Public websites**.
 
@@ -233,18 +237,18 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
     learn.microsoft.com
     ```
 
-1. Click **Add**.
+1. Select **Add**.
 
 1. Review the name and description.
 
 > [!NOTE]
 > Again, the defaults are fine for now, but do improve these for production agents.
 
-1. Click **Add to agent**.
+1. Select **Add to agent**.
 
 1. After a couple of seconds, you will see two knowledge sources listed: one SharePoint, one Public Web.
 
-1. Notice that `learn.microsoft.com` shows a status of **Not Allowed**.
+1. Notice that `learn.microsoft.com` shows a status of **Blocked**.
 
     > [!IMPORTANT]
     > The status message will say something like _"Not allowed due to your organizational data loss prevention policies. Contact your admin."_ This is the DLP policy in action, blocking public website knowledge in the Green zone.
@@ -256,7 +260,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
     > [!NOTE]
     > In a real organization, you would need to go through your company's approval process to get access to a Yellow zone environment. For this bootcamp we have pre-provisioned access.
 
-1. Click the **Environment selector** in the top-right corner.
+1. Select the **Environment selector** in the top-right corner.
 
 1. Search for and select `Bootcamp Yellow`.
 
@@ -266,7 +270,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
     Help me build an agent that knows everything about building agents in Power Platform Copilot Studio. You're an expert, you're a coach, you give proactive advice on how to build Copilot Studio agents. And your knowledge is built on top of learn.microsoft.com as a public website.
     ```
 
-1. Before clicking the blue arrow, select the **Settings** wheel icon again.
+1. Before selecting the blue arrow, select the **Settings** wheel icon again.
 
 1. Double-check that the correct **Solution** is selected.
 
@@ -275,7 +279,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
     > [!TIP]
     > For example: `mcs_build_advisor_[YourUsername]_yellow`. Keeping a consistent naming pattern across zones helps you stay organized.
 
-1. Click the **blue arrow** to create the agent in the Bootcamp Yellow environment.
+1. Select the **blue arrow** to create the agent in the Bootcamp Yellow environment.
 
 1. Wait for the agent to be created. Your screen will say _"Getting things ready"_.
 
@@ -285,7 +289,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 #### Add Public Website Knowledge (Microsoft Learn)
 
-1. Click **Add knowledge**.
+1. Select **Add knowledge**.
 
 1. Select **Public websites**.
 
@@ -295,14 +299,14 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
     learn.microsoft.com
     ```
 
-1. Click **Add**.
+1. Select **Add**.
 
 1. Review the name and description.
 
     > [!NOTE]
     > This is fine for now. However, do make sure you create names and descriptions so the orchestrator can fully understand what this knowledge is used for.
 
-1. Click **Add to agent**.
+1. Select **Add to agent**.
 
 1. Notice that the knowledge source shows up with a **green Ready** status.
 
@@ -317,9 +321,9 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
     Please give me some best practices on Copilot Studio
     ```
 
-1. Click **Send**.
+1. Select **Send**.
 
-1. Watch the right-hand side of the test pane. It shows the agent searching `learn.microsoft.com` for information.
+1. Watch the right side of the test pane. It shows the agent searching `learn.microsoft.com` for information.
 
 1. Review the response. It will give you best practices pulled from Microsoft Learn documentation.
 
@@ -332,7 +336,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Select the **Knowledge** tab.
 
-1. Click **Add knowledge**.
+1. Select **Add knowledge**.
 
 1. Select **Public websites**.
 
@@ -342,11 +346,11 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
     microsoft.github.io/mcs-cat-blog
     ```
 
-1. Click **Add**.
+1. Select **Add**.
 
 1. Review the name and description as before.
 
-1. Click **Add to agent**.
+1. Select **Add to agent**.
 
 1. Notice that the blog shows up as **Blocked**.
 
@@ -407,7 +411,7 @@ Create a "Copilot Studio Advisor" agent in the Red zone with full public website
 
 #### Create the Red Zone Agent
 
-1. Click the **Environment selector** in the top-right corner.
+1. Select the **Environment selector** in the top-right corner.
 
 1. Search for and select `Bootcamp Red`.
 
@@ -429,7 +433,7 @@ Create a "Copilot Studio Advisor" agent in the Red zone with full public website
 > [!TIP]
 > For example: `mcs_build_advisor_[YourUsername]_red`
 
-1. Click the **blue arrow** to create the agent.
+1. Select the **blue arrow** to create the agent.
 
 1. Wait for the agent to be created.
 
@@ -439,16 +443,16 @@ Create a "Copilot Studio Advisor" agent in the Red zone with full public website
 
 #### Add Public Website Knowledge
 
-1. In the suggestions pane, click **Add** next to the suggested knowledge sources.
+1. In the suggestions pane, select **Add** next to the suggested knowledge sources. If for any reason your browser refreshes the list of suggestions will not be there.
 
-1. For each suggestion, it will show the link to the website. Click **Add**.
+1. For each suggestion, it will show the link to the website. Select **Add**.
 
 1. Review the name and description for each source.
 
     > [!TIP]
     > As always, make sure that names and descriptions are useful. The orchestrator uses these to decide which knowledge source to query.
 
-1. Click **Add to agent** for each source.
+1. Select **Add to agent** for each source.
 
 1. Repeat this process for each public website you want to add as knowledge.
 
@@ -460,7 +464,7 @@ Create a "Copilot Studio Advisor" agent in the Red zone with full public website
     Please give me some best practices on Copilot Studio
     ```
 
-1. Click **Send**.
+1. Select **Send**.
 
 1. Watch the right-hand side. It shows the agent searching across **multiple public websites**.
 
