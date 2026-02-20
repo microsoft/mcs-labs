@@ -75,7 +75,7 @@ labs:
   agent-builder-m365:
     title: "Build Progressive AI Assistants with Agent Builder in Microsoft 365"
     difficulty: "Beginner to Intermediate"
-    duration: 40
+    duration: 30
     section: core
     order: 140
     journeys: [quick-start, business-user]
@@ -143,7 +143,7 @@ labs:
   setup-for-success:
     title: "Set yourself up for success & discover ALM best practices"
     difficulty: "Intermediate"
-    duration: 35
+    duration: 20
     section: intermediate
     order: 200
     journeys: [business-user, developer]
