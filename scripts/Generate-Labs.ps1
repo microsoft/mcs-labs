@@ -1298,10 +1298,6 @@ function Get-AllLabsFromFolders {
                         if ($configLab.difficulty -match '(\d+)') {
                             $lab.difficulty = [int]$matches[1]
                         }
-                        # Use duration from config
-                        if ($configLab.duration) {
-                            $lab.duration = [int]$configLab.duration
-                        }
                         # Use section from config if specified
                         if ($configLab.section) {
                             $lab.section = $configLab.section
