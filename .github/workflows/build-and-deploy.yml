@@ -40,6 +40,8 @@ on:
       - ".github/scripts/**" # PDF generation scripts
       - ".github/workflows/build-and-deploy.yml" # This workflow file
       - "package.json" # Dependencies
+      - "*.html" # Root-level HTML pages (e.g., bug-bash.html)
+      - "*.md" # Root-level markdown content
 
   # Allow manual execution for testing
   workflow_dispatch:
