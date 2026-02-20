@@ -180,7 +180,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. In the **Host** field, enter **api.dictionaryapi.dev**
 
-1. In the **Base URL** field, enter **api/v2/**
+1. In the **Base URL** field, enter **/api/v2/**
 
 1. Select **Security** at the bottom.
 

@@ -138,220 +138,220 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Go to [https://copilotstudio.microsoft.com](https://copilotstudio.microsoft.com).
 
-2. Select the **Environment selector** in the top-right corner of the screen.
+1. Select the **Environment selector** in the top-right corner of the screen.
 
-3. Search for `Bootcamp Green` and select it.
+1. Search for `Bootcamp Green` and select it.
 
-4. In the **"What would you like to build?"** pane, find the text area that says _"Start building by describing what your agent needs to do"_.
+1. In the **"What would you like to build?"** pane, find the text area that says _"Start building by describing what your agent needs to do"_.
 
-5. Copy and paste the following text into the description field:
+1. Copy and paste the following text into the description field, but do not send it yet you will be adding more in the next step:
 
     ```text
     Help me build an agent that knows everything about building agents in Power Platform Copilot Studio. You're an expert, you're a coach, you give proactive advice on how to build Copilot Studio agents. And your knowledge is built on top of a SharePoint document.
     ```
 
-6. After typing the description, add the **SharePoint link** that was shared with you by the facilitator.
+1. After typing the description, add the **SharePoint link** that was shared with you by the facilitator.
 
-7. At the end of your instructions, add the following text:
+1. At the end of your instructions, add the following text:
 
     ```text
     Please name this agent Copilot Studio Advisor [YourUsername]
     ```
 
-> [!NOTE]
-> We add the username so we can find your agent easily in this shared environment.
+    > [!NOTE]
+    > We add the username so we can find your agent easily in this shared environment.
 
-8. Before clicking the blue arrow to create, select the **Settings** wheel icon in the bottom-left corner.
+1. Before clicking the blue arrow to create, select the **Settings** wheel icon in the bottom-left corner.
 
-9. In the Settings pane, make sure you select the **Solution** that was created at the start of this bootcamp.
+1. In the Settings pane, make sure you select the **Solution** that was created at the start of this bootcamp.
 
-10. Optionally, give your agent a custom **Schema Name**.
+1. Optionally, give your agent a custom **Schema Name**.
 
-> [!TIP]
-> Schema names are used for advanced management of your agents. We advise using schema names in collaboration with the description. For example: `mcs_build_advisor_[YourUsername]_green`. Include the zone name (green, yellow, red) so you can tell them apart later.
+    > [!TIP]
+    > Schema names are used for advanced management of your agents. We advise using schema names in collaboration with the description. For example: `mcs_build_advisor_[YourUsername]_green`. Include the zone name (green, yellow, red) so you can tell them apart later.
 
-11. Click the **blue arrow** on the right-hand side to submit and create your agent.
+1. Click the **blue arrow** on the right-hand side to submit and create your agent.
 
-12. Wait for Copilot Studio to build your agent. It will generate your name, description, and auto-generated instructions.
+1. Wait for Copilot Studio to build your agent. It will generate your name, description, and auto-generated instructions.
 
-13. Scroll down and notice that Copilot Studio has added suggested knowledge sources such as training hands-on labs, PowerPoint decks, and other capabilities.
+1. Scroll down and notice that Copilot Studio has added suggested knowledge sources such as training hands-on labs, PowerPoint decks, and other capabilities.
 
 #### Add SharePoint Knowledge
 
-14. In this Green zone, DLP policies restrict knowledge to **SharePoint only**.
+1. In this Green zone, DLP policies restrict knowledge to **SharePoint only**.
 
-15. Select the **Knowledge** tab.
+1. Select the **Knowledge** tab.
 
-16. Click **Add knowledge**.
+1. Click **Add knowledge**.
 
-17. Select **SharePoint**.
+1. Select **SharePoint**.
 
-18. Paste in the SharePoint link provided by the facilitator.
+1. Paste in the SharePoint link provided by the facilitator.
 
-19. Click **Add**.
+1. Click **Add**.
 
-20. Check the name of the knowledge source. It should reference the Microsoft Copilot Studio Implementation Guide PPTX.
+1. Check the name of the knowledge source. It should reference the Microsoft Copilot Studio Implementation Guide PPTX.
 
-21. Review the description.
+1. Review the description.
 
-> [!NOTE]
-> The default name and description are fine for now. However, we encourage you to be more descriptive with naming and descriptions. The knowledge you add and how you describe it will be discussed in best practices. Good descriptions help the orchestrator understand what the knowledge is used for.
+    > [!NOTE]
+    > The default name and description are fine for now. However, we encourage you to be more descriptive with naming and descriptions. The knowledge you add and how you describe it will be discussed in best practices. Good descriptions help the orchestrator understand what the knowledge is used for.
 
-22. Click **Add to agent**.
+1. Click **Add to agent**.
 
-23. Verify that the added knowledge source shows a **green check mark**, meaning it is ready.
+1. Verify that the added knowledge source shows a **green check mark**, meaning it is ready.
 
 #### Test the Green Zone Agent
 
-24. In the **Test** pane on the right-hand side, type the following prompt:
+1. In the **Test** pane on the right-hand side, type the following prompt:
 
     ```text
     Please give me some best practices on Copilot Studio
     ```
 
-25. Press **Enter** or click **Send**.
+1. Press **Enter** or click **Send**.
 
-26. On the left-hand side, notice that the agent is reviewing knowledge from the SharePoint source you added.
+1. On the left-hand side, notice that the agent is reviewing knowledge from the SharePoint source you added.
 
-27. Review the response. It will give you best practices found in the Implementation Guide.
+1. Review the response. It will give you best practices found in the Implementation Guide.
 
-28. Notice the **citations** in the response. You can click on them and they will hyperlink you to the specific location inside the PowerPoint document.
+1. Notice the **citations** in the response. You can click on them and they will hyperlink you to the specific location inside the PowerPoint document.
 
-29. Scroll down to the **References** section. Notice that it only references the Copilot Studio Implementation Guide and nothing else. This is because the Green zone restricts knowledge to SharePoint only.
+1. Scroll down to the **References** section. Notice that it only references the Copilot Studio Implementation Guide and nothing else. This is because the Green zone restricts knowledge to SharePoint only.
 
 #### Attempt to Add a Public Website (Will Be Blocked)
 
-30. Go back to the **Knowledge** tab.
+1. Go back to the **Knowledge** tab.
 
-31. Click **Add knowledge**.
+1. Click **Add knowledge**.
 
-32. Select **Public websites**.
+1. Select **Public websites**.
 
-33. Enter the following URL:
+1. Enter the following URL:
 
     ```text
     learn.microsoft.com
     ```
 
-34. Click **Add**.
+1. Click **Add**.
 
-35. Review the name and description.
+1. Review the name and description.
 
 > [!NOTE]
 > Again, the defaults are fine for now, but do improve these for production agents.
 
-36. Click **Add to agent**.
+1. Click **Add to agent**.
 
-37. After a couple of seconds, you will see two knowledge sources listed: one SharePoint, one Public Web.
+1. After a couple of seconds, you will see two knowledge sources listed: one SharePoint, one Public Web.
 
-38. Notice that `learn.microsoft.com` shows a status of **Not Allowed**.
+1. Notice that `learn.microsoft.com` shows a status of **Not Allowed**.
 
-> [!IMPORTANT]
-> The status message will say something like _"Not allowed due to your organizational data loss prevention policies. Contact your admin."_ This is the DLP policy in action, blocking public website knowledge in the Green zone.
+    > [!IMPORTANT]
+    > The status message will say something like _"Not allowed due to your organizational data loss prevention policies. Contact your admin."_ This is the DLP policy in action, blocking public website knowledge in the Green zone.
 
 ---
 
 #### Part 2: Yellow Zone (Microsoft Learn Allowed)
 
-> [!NOTE]
-> In a real organization, you would need to go through your company's approval process to get access to a Yellow zone environment. For this bootcamp we have pre-provisioned access.
+    > [!NOTE]
+    > In a real organization, you would need to go through your company's approval process to get access to a Yellow zone environment. For this bootcamp we have pre-provisioned access.
 
-39. Click the **Environment selector** in the top-right corner.
+1. Click the **Environment selector** in the top-right corner.
 
-40. Search for and select `Bootcamp Yellow`.
+1. Search for and select `Bootcamp Yellow`.
 
-41. In the **"What would you like to build?"** pane, copy and paste the following text:
+1. In the **"What would you like to build?"** pane, copy and paste the following text:
 
     ```text
     Help me build an agent that knows everything about building agents in Power Platform Copilot Studio. You're an expert, you're a coach, you give proactive advice on how to build Copilot Studio agents. And your knowledge is built on top of learn.microsoft.com as a public website.
     ```
 
-42. Before clicking the blue arrow, select the **Settings** wheel icon again.
+1. Before clicking the blue arrow, select the **Settings** wheel icon again.
 
-43. Double-check that the correct **Solution** is selected.
+1. Double-check that the correct **Solution** is selected.
 
-44. Give your agent a schema name similar to the Green zone but with `yellow` in it.
+1. Give your agent a schema name similar to the Green zone but with `yellow` in it.
 
-> [!TIP]
-> For example: `mcs_build_advisor_[YourUsername]_yellow`. Keeping a consistent naming pattern across zones helps you stay organized.
+    > [!TIP]
+    > For example: `mcs_build_advisor_[YourUsername]_yellow`. Keeping a consistent naming pattern across zones helps you stay organized.
 
-45. Click the **blue arrow** to create the agent in the Bootcamp Yellow environment.
+1. Click the **blue arrow** to create the agent in the Bootcamp Yellow environment.
 
-46. Wait for the agent to be created. Your screen will say _"Getting things ready"_.
+1. Wait for the agent to be created. Your screen will say _"Getting things ready"_.
 
-47. Once ready, verify that the agent has your name, description, and auto-generated instructions.
+1. Once ready, verify that the agent has your name, description, and auto-generated instructions.
 
-48. Scroll down and notice the knowledge suggestions again. You can add a couple that make sense for you.
+1. Scroll down and notice the knowledge suggestions again. You can add a couple that make sense for you.
 
 #### Add Public Website Knowledge (Microsoft Learn)
 
-49. Click **Add knowledge**.
+1. Click **Add knowledge**.
 
-50. Select **Public websites**.
+1. Select **Public websites**.
 
-51. Enter the following URL:
+1. Enter the following URL:
 
     ```text
     learn.microsoft.com
     ```
 
-52. Click **Add**.
+1. Click **Add**.
 
-53. Review the name and description.
+1. Review the name and description.
 
-> [!NOTE]
-> This is fine for now. However, do make sure you create names and descriptions so the orchestrator can fully understand what this knowledge is used for.
+    > [!NOTE]
+    > This is fine for now. However, do make sure you create names and descriptions so the orchestrator can fully understand what this knowledge is used for.
 
-54. Click **Add to agent**.
+1. Click **Add to agent**.
 
-55. Notice that the knowledge source shows up with a **green Ready** status.
+1. Notice that the knowledge source shows up with a **green Ready** status.
 
-> [!NOTE]
-> The Yellow zone allows public websites from Microsoft domains. This is why `learn.microsoft.com` works here but was blocked in the Green zone.
+    > [!NOTE]
+    > The Yellow zone allows public websites from Microsoft domains. This is why `learn.microsoft.com` works here but was blocked in the Green zone.
 
 #### Test the Yellow Zone Agent
 
-56. In the **Test** pane, enter the same prompt used in the Green zone:
+1. In the **Test** pane, enter the same prompt used in the Green zone:
 
     ```text
     Please give me some best practices on Copilot Studio
     ```
 
-57. Click **Send**.
+1. Click **Send**.
 
-58. Watch the right-hand side of the test pane. It shows the agent searching `learn.microsoft.com` for information.
+1. Watch the right-hand side of the test pane. It shows the agent searching `learn.microsoft.com` for information.
 
-59. Review the response. It will give you best practices pulled from Microsoft Learn documentation.
+1. Review the response. It will give you best practices pulled from Microsoft Learn documentation.
 
-60. Scroll to the bottom and check the **References** section. You should see multiple references, all with URLs starting with `learn.microsoft.com`.
+1. Scroll to the bottom and check the **References** section. You should see multiple references, all with URLs starting with `learn.microsoft.com`.
 
-> [!NOTE]
-> Your results may vary, but all references should come from `learn.microsoft.com`.
+    > [!NOTE]
+    > Your results may vary, but all references should come from `learn.microsoft.com`.
 
 #### Attempt to Add a Non-Microsoft Website (Will Be Blocked)
 
-61. Select the **Knowledge** tab.
+1. Select the **Knowledge** tab.
 
-62. Click **Add knowledge**.
+1. Click **Add knowledge**.
 
-63. Select **Public websites**.
+1. Select **Public websites**.
 
-64. Enter the following URL:
+1. Enter the following URL:
 
     ```text
     microsoft.github.io/mcs-cat-blog
     ```
 
-65. Click **Add**.
+1. Click **Add**.
 
-66. Review the name and description as before.
+1. Review the name and description as before.
 
-67. Click **Add to agent**.
+1. Click **Add to agent**.
 
-68. Notice that the blog shows up as **Blocked**.
+1. Notice that the blog shows up as **Blocked**.
 
-> [!IMPORTANT]
-> The Yellow zone only allows public knowledge from websites on the `microsoft.com` domain. The blog at `microsoft.github.io` is not on the `microsoft.com` domain, so it is blocked by the DLP policy.
+    > [!IMPORTANT]
+    > The Yellow zone only allows public knowledge from websites on the `microsoft.com` domain. The blog at `microsoft.github.io` is not on the `microsoft.com` domain, so it is blocked by the DLP policy.
 
 ---
 
@@ -409,93 +409,93 @@ Create a "Copilot Studio Advisor" agent in the Red zone with full public website
 
 1. Click the **Environment selector** in the top-right corner.
 
-2. Search for and select `Bootcamp Red`.
+1. Search for and select `Bootcamp Red`.
 
-3. In the **"What would you like to build?"** pane, copy and paste the following text:
+1. In the **"What would you like to build?"** pane, copy and paste the following text:
 
     ```text
     Help me build an agent that knows everything about building agents in Power Platform Copilot Studio. You're an expert, you're a coach, you give proactive advice on how to build Copilot Studio agents. And your knowledge is built on top of the following sources:
     ```
 
-> [!NOTE]
-> After the text above, add the list of public website URLs provided by the facilitator. These are useful sources for building Copilot Studio agents — and great bookmarks for your own reference.
+    > [!NOTE]
+    > After the text above, add the list of public website URLs provided by the facilitator. These are useful sources for building Copilot Studio agents — and great bookmarks for your own reference.
 
-4. Select the **Settings** wheel icon.
+1. Select the **Settings** wheel icon.
 
-5. Double-check your **Solution**.
+1. Double-check your **Solution**.
 
-6. Give your agent a schema name with `red` in it, following the same pattern as before.
+1. Give your agent a schema name with `red` in it, following the same pattern as before.
 
 > [!TIP]
 > For example: `mcs_build_advisor_[YourUsername]_red`
 
-7. Click the **blue arrow** to create the agent.
+1. Click the **blue arrow** to create the agent.
 
-8. Wait for the agent to be created.
+1. Wait for the agent to be created.
 
-9. Once ready, verify your agent has the correct name, description, and instructions.
+1. Once ready, verify your agent has the correct name, description, and instructions.
 
-10. Scroll down. You should see that the URLs you provided in the prompt have been added as suggestions.
+1. Scroll down. You should see that the URLs you provided in the prompt have been added as suggestions.
 
 #### Add Public Website Knowledge
 
-11. In the suggestions pane, click **Add** next to the suggested knowledge sources.
+1. In the suggestions pane, click **Add** next to the suggested knowledge sources.
 
-12. For each suggestion, it will show the link to the website. Click **Add**.
+1. For each suggestion, it will show the link to the website. Click **Add**.
 
-13. Review the name and description for each source.
+1. Review the name and description for each source.
 
-> [!TIP]
-> As always, make sure that names and descriptions are useful. The orchestrator uses these to decide which knowledge source to query.
+    > [!TIP]
+    > As always, make sure that names and descriptions are useful. The orchestrator uses these to decide which knowledge source to query.
 
-14. Click **Add to agent** for each source.
+1. Click **Add to agent** for each source.
 
-15. Repeat this process for each public website you want to add as knowledge.
+1. Repeat this process for each public website you want to add as knowledge.
 
 #### Test the Red Zone Agent
 
-16. In the **Test** pane, enter the same test prompt:
+1. In the **Test** pane, enter the same test prompt:
 
     ```text
     Please give me some best practices on Copilot Studio
     ```
 
-17. Click **Send**.
+1. Click **Send**.
 
-18. Watch the right-hand side. It shows the agent searching across **multiple public websites**.
+1. Watch the right-hand side. It shows the agent searching across **multiple public websites**.
 
-19. Review the response. It should provide best practices pulled from a variety of sources.
+1. Review the response. It should provide best practices pulled from a variety of sources.
 
-20. Check the **References** section at the bottom. You should see citations from **multiple different websites**.
+1. Check the **References** section at the bottom. You should see citations from **multiple different websites**.
 
-> [!NOTE]
-> The Red zone allows all public websites. Your agent now has access to community content, blogs, and other sources beyond just Microsoft Learn.
+    > [!NOTE]
+    > The Red zone allows all public websites. Your agent now has access to community content, blogs, and other sources beyond just Microsoft Learn.
 
 #### Bonus: Add and Explore the MCP Server
 
-> [!NOTE]
-> This section is for those who finish early. There are no detailed step-by-step instructions for this part, but here is what you need to know.
+    > [!NOTE]
+    > This section is for those who finish early. There are no detailed step-by-step instructions for this part, but here is what you need to know.
 
-21. Inside the Bootcamp Red environment, an MCP server has been pre-configured.
+1. Inside the Bootcamp Red environment, an MCP server has been pre-configured.
 
-22. The MCP server name is:
+1. The MCP server name is:
 
     ```text
     MCS Best Practice MCP
     ```
 
-23. When creating a connection, it will ask for an access key. Use the following:
+1. When creating a connection, it will ask for an access key. Use the following:
 
     ```text
     mcs-demo-key
     ```
 
-24. Add the MCP server as a **tool** and explore the available capabilities.
+1. Add the MCP server as a **tool** and explore the available capabilities.
 
-25. Try asking your agent questions and see how it uses the MCP tools to provide structured, curated answers.
+1. Try asking your agent questions and see how it uses the MCP tools to provide structured, curated answers.
 
-> [!TIP]
-> MCP is not just "more access." It provides curated, searchable, governed knowledge that beats random internet searches. Structured queries, copy-paste ready code snippets, and step-by-step troubleshooting guides are what make MCP powerful.
+    > [!TIP]
+    > MCP is not just "more access." It provides curated, searchable, governed knowledge that beats random internet searches. Structured queries, copy-paste ready code snippets, and step-by-step troubleshooting guides are what make MCP powerful.
 
 ---
 
