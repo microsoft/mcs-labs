@@ -6,7 +6,7 @@ Welcome to the MCS Labs Bug Bash! Your goal is to work through the labs and repo
 
 ### Step 1: Navigate to a Lab
 
-Open the [MCS Labs Portal](https://microsoft.github.io/mcs-labs/) and navigate to the lab you are testing. Each lab page has a red **Report Issue** button in the top navigation bar.
+Open the [MCS Labs Portal](https://microsoft.github.io/mcs-labs/labs/bootcamp/) and navigate to the lab you are testing. Each lab page has a red **Report Issue** button in the top navigation bar.
 
 ![Lab page showing the Report Issue button in the navigation bar](assets/images/bug-bash-lab-page-top.png)
 
