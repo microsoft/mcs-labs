@@ -466,7 +466,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
    ```
    Analyze this prompt for improvements:
-   Summarize this text: "The novel Moby Dick follows Ishmael, a contemplative sailor who joins the whaling ship Pequod, captained by the obsessive Captain Ahab. Ahab is consumed by a singular goal: to hunt and kill Moby Dick, a massive white whale that previously destroyed his ship and severed his leg. As the voyage progresses, the crew encounters various philosophical, religious, and existential challenges, culminating in a dramatic and tragic confrontation with the whale."
+   Summarize this text: "The novel follows Ishmael, a contemplative sailor who joins the whaling ship Pequod, captained by the obsessive Captain Ahab. Ahab is consumed by a singular goal: to hunt and kill the whale, a massive white whale that previously destroyed his ship and severed his leg. As the voyage progresses, the crew encounters various philosophical, religious, and existential challenges, culminating in a dramatic and tragic confrontation with the whale."
    ```
 1. When asked for the intent input **Summarize the text**.
 
