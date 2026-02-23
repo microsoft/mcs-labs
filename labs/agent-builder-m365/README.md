@@ -435,7 +435,7 @@ What are the key guidelines in our sales policy regarding customer discounts?
 How are sales trending for home appliances?
 ```
 
-18. _If_ offered to get a visual chart of this breakdown, **confirm**.
+18. After scrolling to the end of the details, you may be offered some starter prompts to get a visual chart, select one of the starter prompts or enter a prompt such as **Show a sales graph for Home Appliances**.
 
 ![Visual produced by agent](images/sales-data-analysis.png)
 
