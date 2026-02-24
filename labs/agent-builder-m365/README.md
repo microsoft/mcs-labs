@@ -196,7 +196,7 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
    - 2a. Make sure you are on the **Work** tab.
 
-   - 2b. Type the following prompt and select send:
+   - 2b. Type the following prompt and select **Send**:
    
      ```text
      Tell me about labs that my organization has available to learn about Copilot Studio
