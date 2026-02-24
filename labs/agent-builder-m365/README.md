@@ -198,9 +198,9 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
    - 2b. Type the following prompt and select send:
    
-   ```
-   Tell me about labs that my organization has available to learn about Copilot Studio
-   ```
+     ```text
+     Tell me about labs that my organization has available to learn about Copilot Studio
+     ```
    
    - 2c. Observe the results:
       - The response is **grounded in SharePoint** content from your organization
