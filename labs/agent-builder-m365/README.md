@@ -165,8 +165,6 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
  -->
 
-2. Select  **New chat** on the left navigation pane if not already selected.
-
 > [!TIP]  
 > Both Microsoft 365 Copilot and Copilot Chat are designed for internal, employee-facing (B2E) experiences.
 >
@@ -189,7 +187,27 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 > - **Declarative agents**: These rely on Copilot’s built-in orchestration, search, and reasoning. They define their behavior through instructions, pre-defined prompts, knowledge sources, and actions. Ideal for scoped knowledge retrieval or task-specific use cases.
 > - **Custom engine agents**: These do **not** use Copilot as their core engine. They include their own orchestration, knowledge, and skills, and may run on a different platform than Microsoft Copilot. Ideal for advanced or complex scenarios.
 
-#### Test the basic Copilot experience
+#### Test the Microsoft 365 Copilot experience
+
+2. Select **New chat** in the left navigation pane if not already selected.
+
+> [!IMPORTANT]
+> **Optional:** If you have an account in the CopilotStudioTraining tenant with a Microsoft 365 Copilot license, try the following steps to experience the Work tab firsthand.
+
+   - 2a. Make sure you are on the **Work** tab.
+
+   - 2b. Type the following prompt and select **Send**:
+   
+     ```text
+     Tell me about labs that my organization has available to learn about Copilot Studio
+     ```
+   
+   - 2c. Observe the results:
+      - The response is **grounded in SharePoint** content from your organization
+      - Citations reference documents in the organization's SharePoint site.
+      - This demonstrates how the **Work** tab provides an intelligent experience that automatically searches your organization's SharePoint data
+
+#### Test the Copilot Chat experience
 
 3. If you have Microsoft 365 Copilot license, make sure you are in the **Web** tab (if you don't see any tab for Work/Web, this means you only have access to Copilot Chat).
 
