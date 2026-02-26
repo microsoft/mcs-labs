@@ -257,8 +257,8 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 #### Part 2: Yellow Zone (Microsoft Learn Allowed)
 
-    > [!NOTE]
-    > In a real organization, you would need to go through your company's approval process to get access to a Yellow zone environment. For this bootcamp we have pre-provisioned access.
+> [!NOTE]
+> In a real organization, you would need to go through your company's approval process to get access to a Yellow zone environment. For this bootcamp we have pre-provisioned access.
 
 1. Select the **Environment selector** in the top-right corner.
 
@@ -478,8 +478,8 @@ Create a "Copilot Studio Advisor" agent in the Red zone with full public website
 
 #### Bonus: Add and Explore the MCP Server
 
-    > [!NOTE]
-    > This section is for those who finish early. There are no detailed step-by-step instructions for this part, but here is what you need to know.
+> [!NOTE]
+> This section is for those who finish early. There are no detailed step-by-step instructions for this part, but here is what you need to know.
 
 1. Inside the Bootcamp Red environment, an MCP server has been pre-configured.
 
