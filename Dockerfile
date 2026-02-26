@@ -36,11 +36,10 @@ RUN apt-get update && apt-get install -y \
     && fc-cache -f -v \
     && rm -rf /var/lib/apt/lists/*
 
-# Install Pandoc 3.1.3 (matching GitHub Actions version, auto-detect architecture)
-RUN ARCH=$(dpkg --print-architecture) \
-    && wget https://github.com/jgm/pandoc/releases/download/3.1.3/pandoc-3.1.3-1-${ARCH}.deb \
-    && dpkg -i pandoc-3.1.3-1-${ARCH}.deb \
-    && rm pandoc-3.1.3-1-${ARCH}.deb
+# Install Pandoc 3.1.3 (matching GitHub Actions version)
+RUN wget https://github.com/jgm/pandoc/releases/download/3.1.3/pandoc-3.1.3-1-amd64.deb \
+    && dpkg -i pandoc-3.1.3-1-amd64.deb \
+    && rm pandoc-3.1.3-1-amd64.deb
 
 # Copy Node.js from node-base stage
 COPY --from=node-base /usr/local/bin/node /usr/local/bin/
@@ -48,15 +47,10 @@ COPY --from=node-base /usr/local/lib/node_modules /usr/local/lib/node_modules
 RUN ln -s /usr/local/lib/node_modules/npm/bin/npm-cli.js /usr/local/bin/npm
 RUN ln -s /usr/local/lib/node_modules/npm/bin/npx-cli.js /usr/local/bin/npx
 
-# Install PowerShell (auto-detect architecture)
-RUN ARCH=$(dpkg --print-architecture) \
-    && if [ "$ARCH" = "amd64" ]; then PS_ARCH="x64"; else PS_ARCH="$ARCH"; fi \
-    && wget -q https://github.com/PowerShell/PowerShell/releases/download/v7.4.0/powershell-7.4.0-linux-${PS_ARCH}.tar.gz \
-    && mkdir -p /opt/microsoft/powershell/7 \
-    && tar -xzf powershell-7.4.0-linux-${PS_ARCH}.tar.gz -C /opt/microsoft/powershell/7 \
-    && chmod +x /opt/microsoft/powershell/7/pwsh \
-    && ln -s /opt/microsoft/powershell/7/pwsh /usr/local/bin/pwsh \
-    && rm powershell-7.4.0-linux-${PS_ARCH}.tar.gz
+# Install PowerShell
+RUN wget -q https://github.com/PowerShell/PowerShell/releases/download/v7.4.0/powershell_7.4.0-1.deb_amd64.deb \
+    && dpkg -i powershell_7.4.0-1.deb_amd64.deb || apt-get install -f -y \
+    && rm powershell_7.4.0-1.deb_amd64.deb
 
 # Set working directory
 WORKDIR /workspace
