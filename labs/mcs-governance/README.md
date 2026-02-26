@@ -419,10 +419,11 @@ Create a "Copilot Studio Advisor" agent in the Red zone with full public website
 
     ```text
     Help me build an agent that knows everything about building agents in Power Platform Copilot Studio. You're an expert, you're a coach, you give proactive advice on how to build Copilot Studio agents. And your knowledge is built on top of the following sources:
+    https://learn.microsoft.com, https://microsoft.github.io/mcscatblog/
     ```
 
     > [!NOTE]
-    > After the text above, add the list of public website URLs provided by the facilitator. These are useful sources for building Copilot Studio agents — and great bookmarks for your own reference.
+    > The URLs provided are great resources to be used for learning more about Copilot Studio.
 
 1. Select the **Settings** wheel icon.
 
