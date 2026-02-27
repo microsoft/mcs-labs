@@ -36,7 +36,7 @@
 | MCP Qualify Lead | [mcp-qualify-lead](./labs/mcp-qualify-lead) | Connect to Dynamics 365 Sales with Model Context Protocol to identify and prioritize high-value leads, enabling sellers to focus their time and effort where it counts most. |
 | Build and Connect Your Guild's Custom MCP Server | [guildhall-custom-mcp](./labs/guildhall-custom-mcp) | Deploy a custom Model Context Protocol (MCP) server locally and connect it to a Copilot Studio agent that can query quests, hire parties, and manage the Guild treasury on your behalf. |
 | Dataverse MCP Connector | [dataverse-mcp-connector](./labs/dataverse-mcp-connector) | Create and configure a Copilot Agent with Dataverse MCP Server integration to read and update account information from Dataverse using natural language queries. |
-| Create an 'Ask me anything' agent (30 min version) | [ask-me-anything-30-mins](./labs/ask-me-anything-30-mins) | A condensed version of the Ask Me Anything lab. Build a multi-agent IT Support solution with ALM best practices, ServiceNow integration, and deployment into Microsoft 365 Copilot. |
+| Create your own document ingestion pipeline with AI | [ingestion-pipeline-with-mistral-document-ai](./labs/ingestion-pipeline-with-mistral-document-ai) | Build an intelligent document processing system that automatically extracts structured content from SharePoint uploads using Azure OpenAI Mistral Document AI, and adds it to Copilot Studio knowledge base via automated Power Automate flows and custom connectors. |
 | Model Context Protocol (MCP) & Copilot Studio | [MCS-MCP Lab](https://github.com/microsoft/mcsmcp) | Learn how to deploy an MCP Server and integrate it with Microsoft Copilot Studio for streamlined deployment and management. |
 
 ## 📚 Documentation & Contributing
