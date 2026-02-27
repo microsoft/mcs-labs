@@ -145,11 +145,14 @@ Create Nova AI with custom instructions and Wikipedia knowledge integration usin
 
 #### Start the agent creation process
 
+> [!IMPORTANT]
+> Please follow steps 1, 2 and 3 adding an agent to your own solution is critical to this use case.
+
 1. **Navigate** to [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com).
 
 2. Make sure you're in the correct environment by looking at the top right corner. In these labs, the environment name should start by **'DEV - '**.
 
-2. Go to **Solutions** (under the `...` menu in the left-hand bar navigation). If you completed the setup lab, select the solution you had created. If you don't have a solution, create a new one. 
+2. Go to **Solutions** (under the `...` menu in the left-hand bar navigation). If you already have a solution, select it. If you don't have a solution, create a new one with a new publisher.
 
 3. Once in your solution, select **+ New** and choose **Agent** > **Agent**.
 
@@ -159,6 +162,9 @@ Create Nova AI with custom instructions and Wikipedia knowledge integration usin
 > - You will be redirected to the conversational creation experience. It allows you to use natural language to help you configure your agent.
 > - Note that this conversational experience only helps build and curate the agent title, description, instruction, and knowledge sources. 
 > - The order or nature of questions may vary.
+
+> [!IMPORTANT]
+> It may take a few minutes for the setting to be fully disabled. You may need to refresh and retry several times.
 
 4. In the **Conversational creation experience** chat, paste the below answer to the initial question:
 
@@ -266,7 +272,7 @@ In this section, you'll disable general knowledge to reduce hallucinations, then
 
 6. Go to the **Tools** tab and choose **+ Add a tool**.
 
-7. Search for `MSN Weather` and select **Get current weather** action.
+7. Search for `MSN Weather` and select **Get current weather** action. Configure a connection if one doesn't already exist.
 
 8. Select **Add and configure**.
 
@@ -305,7 +311,7 @@ In this section, you'll disable general knowledge to reduce hallucinations, then
 
 15. Notice how generative orchestration performs multiple searches and triggers the weather connector to provide a comprehensive answer.
 
-![alt text](images/generative-orchestration.png)
+![Generative orchestration example](images/generative-orchestration.png)
 
 ---
 
@@ -380,7 +386,7 @@ In this section, you'll customize built-in system topics to improve user interac
    - `Who is the current CEO of the company that owns GitHub? Where did they earn their MBA? What's the average rent for a one-bedroom apartment near that campus? What's the air quality index in that area today?`
    - `What's the temperature in the city that hosted the last Olympic Games?`
 
-    ![alt text](images/conversation-start.png)
+    ![Conversation starters](images/conversation-start.png)
 
 > [!TIP]
 > - You can test your changes in a topic without needing to save. Just refresh the test pane to get the latest experience.
@@ -480,7 +486,7 @@ In this section, you'll remove authentication to make your agent publicly access
 
 9. **Copy** the demo website URL, open it in a new tab, and interact with your agent.
 
-![alt text](images/demo-website.gif)
+![Demo Website](images/demo-website.gif)
 
 > [!TIP]
 > - The demo website URL can be shared with others for quick feedback before deployment
@@ -490,7 +496,7 @@ In this section, you'll remove authentication to make your agent publicly access
 
 ---
 
-###  🏅 Congratulations! You've published Nova AI to the demo website!
+###  🏅 Congratulations! You've published your agent to the demo website!
 
 ---
 

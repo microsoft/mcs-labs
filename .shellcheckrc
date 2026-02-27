@@ -1,0 +1,4 @@
+# Disable shellcheck for code blocks in markdown files
+# These are often examples in multiple languages (CSS, YAML, etc.)
+# and trigger false positives
+disable=SC2034,SC2154

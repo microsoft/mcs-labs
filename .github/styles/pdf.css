@@ -8,7 +8,7 @@
 
 /* Body and typography */
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+  font-family: 'DejaVu Sans', 'Liberation Sans', 'Noto Sans', 'Segoe UI', Arial, sans-serif, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji';
   font-size: 11pt;
   line-height: 1.6;
   color: #333;
@@ -17,8 +17,14 @@ body {
   padding: 0;
 }
 
-/* Headings */
-h1, h2, h3, h4, h5, h6 {
+/* Headings - ensure emoji fonts are available */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'DejaVu Sans', 'Liberation Sans', 'Noto Sans', 'Segoe UI', Arial, sans-serif, 'Noto Color Emoji', 'Apple Color Emoji', 'Segoe UI Emoji';
   color: #2c3e50;
   margin-top: 24pt;
   margin-bottom: 12pt;
@@ -57,7 +63,8 @@ p {
 }
 
 /* Lists */
-ul, ol {
+ul,
+ol {
   margin: 12pt 0;
   padding-left: 24pt;
 }
@@ -101,7 +108,8 @@ table {
   page-break-inside: avoid;
 }
 
-th, td {
+th,
+td {
   border: 1px solid #dee2e6;
   padding: 8pt 12pt;
   text-align: left;
@@ -197,7 +205,10 @@ hr {
 }
 
 /* GitHub-style callouts/admonitions for PDF */
-.note, .warning, .tip, .info {
+.note,
+.warning,
+.tip,
+.info {
   padding: 12pt;
   margin: 16pt 0;
   border-radius: 4pt;
@@ -206,7 +217,10 @@ hr {
 }
 
 /* Handle blockquote callouts */
-blockquote .note, blockquote .warning, blockquote .tip, blockquote .info {
+blockquote .note,
+blockquote .warning,
+blockquote .tip,
+blockquote .info {
   border-left: none;
   margin: 0;
   padding: 8pt;

@@ -83,6 +83,9 @@ window.ThemeManager = (function() {
         }
 
         try {
+            // Temporarily hide content during theme switch to prevent flash
+            document.documentElement.classList.remove('theme-ready');
+            
             // Load theme CSS
             await loadThemeCSS(themeConfig.file);
             
@@ -99,6 +102,13 @@ window.ThemeManager = (function() {
             // Store preference
             storeTheme(themeFamily, mode);
             
+            // Allow brief moment for CSS to apply, then show content
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => {
+                    document.documentElement.classList.add('theme-ready');
+                });
+            });
+            
             // Dispatch theme change event
             window.dispatchEvent(new CustomEvent('themeChanged', {
                 detail: { themeFamily, mode, theme: themeConfig }
@@ -107,6 +117,8 @@ window.ThemeManager = (function() {
             return true;
         } catch (error) {
             console.error(`Failed to load theme "${themeFamily}":`, error);
+            // Make sure content is visible even on error
+            document.documentElement.classList.add('theme-ready');
             return false;
         }
     }
@@ -140,6 +152,9 @@ window.ThemeManager = (function() {
             loadedThemeLink = existingLink;
         }
         
+        // Ensure theme is marked as ready
+        document.documentElement.classList.add('theme-ready');
+        
         // Store preference
         storeTheme(themeFamily, mode);
         
@@ -153,15 +168,24 @@ window.ThemeManager = (function() {
     function init() {
         // Safety timeout to ensure page is always visible, even if theme loading fails
         setTimeout(() => {
-            if (!document.documentElement.hasAttribute('data-theme')) {
-                console.warn('Theme loading timeout - showing page with default styling');
-                document.documentElement.setAttribute('data-theme', 'light');
+            if (!document.documentElement.classList.contains('theme-ready')) {
+                console.warn('Theme loading timeout - ensuring page is visible');
+                document.documentElement.classList.add('theme-ready');
             }
         }, 1000); // 1 second timeout
 
         const savedThemeFamily = getStoredTheme();
         const savedMode = getStoredMode();
-        applyTheme(savedThemeFamily, savedMode);
+        
+        // Check if theme was already loaded by inline script
+        const existingThemeLink = document.getElementById('active-theme-css');
+        if (existingThemeLink && savedThemeFamily === currentThemeFamily) {
+            // Theme already loaded, just sync state
+            syncState(savedThemeFamily, savedMode);
+        } else {
+            // Apply theme (will load CSS if needed)
+            applyTheme(savedThemeFamily, savedMode);
+        }
     }
 
     // Public API

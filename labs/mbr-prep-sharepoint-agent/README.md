@@ -164,28 +164,22 @@ Create a SharePoint site with MBR documents that will serve as the knowledge sou
 
 ![Select Finish](./assets/select-finish-site-creation.jpeg)
 
+
 #### Upload MBR documents
 
 > [!IMPORTANT]
 > **For training participants:** If you are following this lab as part of a guided training session, the MBR documents have already been uploaded to SharePoint at the location specified in your **Lab Resources**. You can skip this use case and proceed directly to [Use Case #2](#-use-case-2-build-and-deploy-mbr-agent).
 
-8. Navigate to the [sample files folder](./assets/) and download the sample files
+8. Navigate to the [sample files folder](https://github.com/microsoft/mcs-labs/tree/main/labs/mbr-prep-sharepoint-agent/assets/sample-files) and download the sample files
 
 9. Select `Documents` in the left navigation
 
-![Open Document Library](./assets/select-document-library.jpeg)
-
-
 10. Select `Upload`
-
-![Upload Files](./assets/select-upload.jpeg)
-
 
 11. Select all the sample files you just downloaded and click `Open`
 
-![Select Open](./assets/select-sample-files.jpeg)
-
 ---
+
 
 ###  🏅 Congratulations! You've set up your SharePoint site with MBR documents!
 

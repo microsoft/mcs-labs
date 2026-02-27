@@ -39,17 +39,8 @@
     /* ========================================
        TYPOGRAPHY - CHIRPY THEME FONTS
        ======================================== */
-    /* Chirpy font stack */
-    --font-family-base: 'Source Sans Pro', 'Microsoft Yahei', sans-serif;
-    --font-family-monospace: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Monaco, 'Courier New', monospace;
-    
-    /* Typography scale from Chirpy */
-    --font-size-base: 16px;
-    --font-size-sm: 14px;
-    --font-size-lg: 18px;
-    --line-height-base: 1.75;
-    --line-height-tight: 1.4;
-    
+    /* Note: Removed all typography variables (font-family, font-size, line-height) to match rich theme - themes should only define colors */
+
     /* ========================================
        CHIRPY LIGHT THEME COLORS - EXACT COPY
        ======================================== */
@@ -77,16 +68,20 @@
 
     /* Mapping to our existing structure - Enhanced Light Mode */
     --bg-primary: var(--main-bg);
-    --bg-secondary: #fafbfc;  /* Slightly warmer secondary background */
+    --bg-secondary: #fafbfc;
+    /* Slightly warmer secondary background */
     --bg-tertiary: #f6f8fa;
     --text-primary: var(--text-color);
     --text-secondary: var(--text-muted-color);
     --text-muted: var(--text-muted-color);
-    --border-color: #e1e4e8;  /* Slightly more defined borders */
+    --border-color: #e1e4e8;
+    /* Slightly more defined borders */
     --border-light: #f6f8fa;
-    --shadow: rgba(27,31,35,0.04);  /* More refined shadow */
-    --shadow-hover: rgba(27,31,35,0.08);  /* Enhanced hover shadow */
-    
+    --shadow: rgba(27, 31, 35, 0.04);
+    /* More refined shadow */
+    --shadow-hover: rgba(27, 31, 35, 0.08);
+    /* Enhanced hover shadow */
+
     /* ========================================
        INTERACTIVE COLORS - CHIRPY STYLE
        ======================================== */
@@ -94,7 +89,7 @@
     --accent-primary-hover: #003d82;
     --accent-secondary: #003d82;
     --hover-bg: #f6f8fa;
-    
+
     /* ========================================
        CHIRPY SCROLLBAR AND UTILITIES
        ======================================== */
@@ -102,14 +97,14 @@
     --scrollbar-thumb: #c5c5c5;
     --scrollbar-thumb-hover: #a0a0a0;
     --external-link-opacity: 0.7;
-    --fade-gradient: rgba(255,255,255,0.95);
-    
+    --fade-gradient: rgba(255, 255, 255, 0.95);
+
     /* Chirpy header styles */
     --header-bg: var(--main-bg);
     --header-text: var(--text-color);
     --header-text-secondary: var(--text-muted-color);
     --header-hover: #f6f8fa;
-    
+
     /* Chirpy-style minimal badges (all neutral) */
     --badge-green-bg: #f6f8fa;
     --badge-green-text: var(--text-muted-color);
@@ -121,7 +116,7 @@
     --badge-purple-text: var(--text-muted-color);
     --badge-blue-bg: #f6f8fa;
     --badge-blue-text: var(--text-muted-color);
-    
+
     /* Chirpy-style minimal borders (all neutral) */
     --border-green: var(--main-border-color);
     --border-orange: var(--main-border-color);
@@ -132,71 +127,72 @@
     --border-dark-green: var(--main-border-color);
     --border-dark-orange: var(--main-border-color);
     --border-red: var(--main-border-color);
-    
+
     /* Journey colors - Chirpy neutral style */
     --journey-quickstart-color: var(--text-muted-color);
     --journey-businessuser-color: var(--text-muted-color);
     --journey-developer-color: var(--text-muted-color);
     --journey-autonomous-color: var(--text-muted-color);
     --journey-bootcamp-color: var(--text-muted-color);
-    
+
     /* Chirpy button colors */
     --danger-color: #df3c30;
     --danger-color-hover: #c33529;
     --accent-tertiary: var(--link-color);
     --accent-tertiary-dark: #003d82;
     --dark-button-text: white;
-    
+    --text-on-accent: white;
+
     /* Chirpy code highlighting */
     --code-bg: #f6f8fa;
     --pre-bg: #f6f8fa;
-    
+
     /* Chirpy callout colors - minimal and elegant */
     --callout-note-bg: #e1f5fe;
     --callout-note-border: var(--main-border-color);
     --callout-note-text: var(--text-color);
     --callout-note-title: var(--text-color);
-    
-    --callout-tip-bg: rgb(123,247,144,0.2);
+
+    --callout-tip-bg: rgb(123, 247, 144, 0.2);
     --callout-tip-border: var(--main-border-color);
     --callout-tip-text: var(--text-color);
     --callout-tip-title: var(--text-color);
-    
-    --callout-important-bg: rgb(255,243,205);
+
+    --callout-important-bg: rgb(255, 243, 205);
     --callout-important-border: var(--main-border-color);
     --callout-important-text: var(--text-color);
     --callout-important-title: var(--text-color);
-    
-    --callout-warning-bg: rgb(255,243,205);
+
+    --callout-warning-bg: rgb(255, 243, 205);
     --callout-warning-border: var(--main-border-color);
     --callout-warning-text: var(--text-color);
     --callout-warning-title: var(--text-color);
-    
-    --callout-caution-bg: rgb(248,215,218,0.56);
+
+    --callout-caution-bg: rgb(248, 215, 218, 0.56);
     --callout-caution-border: var(--main-border-color);
     --callout-caution-text: var(--text-color);
     --callout-caution-title: var(--text-color);
-    
+
     /* Chirpy copy button colors */
     --copy-button-bg: var(--button-bg);
     --copy-button-border: var(--btn-border-color);
     --copy-button-text: var(--text-muted-color);
     --copy-button-hover-bg: #f0f0f0;
     --copy-button-hover-border: #d0d0d0;
-    --copy-success-bg: rgb(123,247,144,0.2);
+    --copy-success-bg: rgb(123, 247, 144, 0.2);
     --copy-success-border: #03b303;
     --copy-success-text: #03b303;
-    
+
     /* Chirpy lightbox colors */
     --lightbox-bg: rgba(255, 255, 255, 0.95);
     --lightbox-close-bg: var(--button-bg);
     --lightbox-close-text: var(--text-color);
     --lightbox-close-hover-bg: #f0f0f0;
-    
+
     /* Chirpy overlay effects */
-    --overlay-hover: rgba(104,104,104,0.05);
-    --overlay-active: rgba(104,104,104,0.1);
-    --overlay-border: rgba(104,104,104,0.15);
+    --overlay-hover: rgba(104, 104, 104, 0.05);
+    --overlay-active: rgba(104, 104, 104, 0.1);
+    --overlay-border: rgba(104, 104, 104, 0.15);
 }
 
 /* Chirpy Dark Theme - Exact Colors */
@@ -204,34 +200,28 @@
     /* ========================================
        TYPOGRAPHY - CONSISTENT WITH LIGHT MODE
        ======================================== */
-    --font-family-base: 'Source Sans Pro', 'Microsoft Yahei', sans-serif;
-    --font-family-monospace: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Monaco, 'Courier New', monospace;
-    --font-size-base: 16px;
-    --font-size-sm: 14px;
-    --font-size-lg: 18px;
-    --line-height-base: 1.75;
-    --line-height-tight: 1.4;
-    
+    /* Note: Removed all typography variables (font-family, font-size, line-height) to match rich theme - themes should only define colors */
+
     /* ========================================
        CHIRPY DARK THEME COLORS - EXACT COPY
        ======================================== */
     color-scheme: dark;
 
     /* Framework color */
-    --main-bg: rgb(27,27,30);
-    --mask-bg: rgb(68,69,70);
-    --main-border-color: rgb(44,45,45);
+    --main-bg: rgb(27, 27, 30);
+    --mask-bg: rgb(68, 69, 70);
+    --main-border-color: rgb(44, 45, 45);
 
     /* Common color */
-    --text-color: rgb(175,176,177);
+    --text-color: rgb(175, 176, 177);
     --text-muted-color: #868686;
     --text-muted-highlight-color: #aeaeae;
     --heading-color: #cccccc;
     --label-color: #a7a7a7;
-    --blockquote-border-color: rgb(66,66,66);
+    --blockquote-border-color: rgb(66, 66, 66);
     --blockquote-text-color: #868686;
-    --link-color: rgb(138,180,248);
-    --link-underline-color: rgb(82,108,150);
+    --link-color: rgb(138, 180, 248);
+    --link-underline-color: rgb(82, 108, 150);
     --button-bg: #1e1e1e;
     --btn-border-color: #2e2f31;
     --btn-backtotop-color: var(--text-color);
@@ -247,24 +237,24 @@
     --text-muted: var(--text-muted-color);
     --border-color: var(--main-border-color);
     --border-light: #21262d;
-    --shadow: rgba(1,4,9,0.8);
-    --shadow-hover: rgba(1,4,9,0.85);
+    --shadow: rgba(1, 4, 9, 0.8);
+    --shadow-hover: rgba(1, 4, 9, 0.85);
     --accent-primary: var(--link-color);
-    --accent-primary-hover: rgb(108,157,228);
-    --accent-secondary: rgb(108,157,228);
+    --accent-primary-hover: rgb(108, 157, 228);
+    --accent-secondary: rgb(108, 157, 228);
     --hover-bg: #161b22;
     --scrollbar-track: #161b22;
     --scrollbar-thumb: #484f58;
     --scrollbar-thumb-hover: #6e7681;
     --external-link-opacity: 0.8;
-    --fade-gradient: rgba(27,27,30,0.95);
-    
+    --fade-gradient: rgba(27, 27, 30, 0.95);
+
     /* Chirpy header - dark version */
     --header-bg: var(--main-bg);
     --header-text: var(--text-color);
     --header-text-secondary: var(--text-muted-color);
     --header-hover: #161b22;
-    
+
     /* Chirpy-style minimal badges - dark mode (all neutral) */
     --badge-green-bg: #161b22;
     --badge-green-text: var(--text-muted-color);
@@ -276,7 +266,7 @@
     --badge-purple-text: var(--text-muted-color);
     --badge-blue-bg: #161b22;
     --badge-blue-text: var(--text-muted-color);
-    
+
     /* Chirpy-style minimal borders - dark mode (all neutral) */
     --border-green: var(--main-border-color);
     --border-orange: var(--main-border-color);
@@ -287,71 +277,72 @@
     --border-dark-green: var(--main-border-color);
     --border-dark-orange: var(--main-border-color);
     --border-red: var(--main-border-color);
-    
+
     /* Journey colors - Chirpy neutral dark mode */
     --journey-quickstart-color: var(--text-muted-color);
     --journey-businessuser-color: var(--text-muted-color);
     --journey-developer-color: var(--text-muted-color);
     --journey-autonomous-color: var(--text-muted-color);
     --journey-bootcamp-color: var(--text-muted-color);
-    
+
     /* Chirpy button colors - dark mode */
     --danger-color: #cd0202;
     --danger-color-hover: #ff3333;
     --accent-tertiary: var(--link-color);
-    --accent-tertiary-dark: rgb(108,157,228);
+    --accent-tertiary-dark: rgb(108, 157, 228);
     --dark-button-text: var(--text-color);
-    
+    --text-on-accent: #1a1a1a;
+
     /* Chirpy code highlighting - dark style */
     --code-bg: #151515;
     --pre-bg: #151515;
-    
+
     /* Chirpy callout colors - dark mode */
-    --callout-note-bg: rgb(7,59,104,0.8);
+    --callout-note-bg: rgb(7, 59, 104, 0.8);
     --callout-note-border: var(--main-border-color);
     --callout-note-text: var(--text-color);
     --callout-note-title: var(--text-color);
-    
-    --callout-tip-bg: rgb(22,60,36,0.64);
+
+    --callout-tip-bg: rgb(22, 60, 36, 0.64);
     --callout-tip-border: var(--main-border-color);
     --callout-tip-text: var(--text-color);
     --callout-tip-title: var(--text-color);
-    
-    --callout-important-bg: rgb(90,69,3,0.88);
+
+    --callout-important-bg: rgb(90, 69, 3, 0.88);
     --callout-important-border: var(--main-border-color);
     --callout-important-text: var(--text-color);
     --callout-important-title: var(--text-color);
-    
-    --callout-warning-bg: rgb(90,69,3,0.88);
+
+    --callout-warning-bg: rgb(90, 69, 3, 0.88);
     --callout-warning-border: var(--main-border-color);
     --callout-warning-text: var(--text-color);
     --callout-warning-title: var(--text-color);
-    
-    --callout-caution-bg: rgb(86,28,8,0.8);
+
+    --callout-caution-bg: rgb(86, 28, 8, 0.8);
     --callout-caution-border: var(--main-border-color);
     --callout-caution-text: var(--text-color);
     --callout-caution-title: var(--text-color);
-    
+
     /* Chirpy copy button colors - dark mode */
     --copy-button-bg: var(--button-bg);
     --copy-button-border: var(--btn-border-color);
     --copy-button-text: var(--text-muted-color);
     --copy-button-hover-bg: #2a2a2a;
     --copy-button-hover-border: #404040;
-    --copy-success-bg: rgb(22,60,36,0.64);
-    --copy-success-border: rgb(15,164,15,0.81);
-    --copy-success-text: rgb(15,164,15,0.81);
-    
+    --copy-success-bg: rgb(22, 60, 36, 0.64);
+    --copy-success-border: rgb(15, 164, 15, 0.81);
+    --copy-success-text: rgb(15, 164, 15, 0.81);
+
     /* Chirpy lightbox colors - dark mode */
-    --lightbox-bg: rgba(27,27,30,0.95);
+    --lightbox-bg: rgba(27, 27, 30, 0.95);
     --lightbox-close-bg: var(--button-bg);
     --lightbox-close-text: var(--text-color);
     --lightbox-close-hover-bg: #2a2a2a;
-    
+
     /* Chirpy overlay effects - dark mode */
-    --overlay-hover: rgba(175,176,177,0.04);
-    --overlay-active: rgba(175,176,177,0.08);
-    --overlay-border: rgba(175,176,177,0.12);
+    --overlay-hover: rgba(175, 176, 177, 0.04);
+    --overlay-active: rgba(175, 176, 177, 0.08);
+    --overlay-border: rgba(175, 176, 177, 0.12);
 }
 
 /* ============================================================================
@@ -372,14 +363,14 @@ html[data-theme-family="minimal"] .lab-card {
     border: 1px solid var(--border-color);
     border-radius: 8px;
     padding: 1.5rem;
-    box-shadow: 0 1px 3px var(--shadow), 0 1px 2px rgba(27,31,35,0.04);
+    box-shadow: 0 1px 3px var(--shadow), 0 1px 2px rgba(27, 31, 35, 0.04);
     transition: all 0.2s ease;
     border-left: 3px solid var(--text-muted);
 }
 
 html[data-theme-family="minimal"] .lab-card:hover {
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px var(--shadow-hover), 0 2px 4px rgba(27,31,35,0.06);
+    box-shadow: 0 4px 12px var(--shadow-hover), 0 2px 4px rgba(27, 31, 35, 0.06);
     border-left-color: var(--text-primary);
     background: var(--bg-secondary);
 }
@@ -424,38 +415,69 @@ html[data-theme-family="minimal"] .btn-primary {
     font-weight: 500;
     font-size: 0.875rem;
     transition: all 0.2s ease;
-    box-shadow: 0 1px 2px rgba(27,31,35,0.1);
+    box-shadow: 0 1px 2px rgba(27, 31, 35, 0.1);
 }
 
 html[data-theme-family="minimal"] .lab-card .btn-primary:hover,
 html[data-theme-family="minimal"] .btn-primary:hover {
     background: var(--text-primary);
     border-color: var(--text-primary);
+    color: white;
     transform: translateY(-1px);
-    box-shadow: 0 3px 8px rgba(27,31,35,0.15);
+    box-shadow: 0 3px 8px rgba(27, 31, 35, 0.15);
 }
 
-/* Refined secondary buttons */
+/* Dark mode button fixes - grayscale only */
+html[data-theme-family="minimal"][data-theme="dark"] .lab-card .btn-primary,
+html[data-theme-family="minimal"][data-theme="dark"] .btn-primary {
+    background: var(--heading-color);
+    border-color: var(--heading-color);
+    color: var(--main-bg);
+}
+
+html[data-theme-family="minimal"][data-theme="dark"] .lab-card .btn-primary:hover,
+html[data-theme-family="minimal"][data-theme="dark"] .btn-primary:hover {
+    background: var(--text-color);
+    border-color: var(--text-color);
+    color: var(--main-bg);
+}
+
+/* Refined secondary buttons - same as primary for consistency */
 html[data-theme-family="minimal"] .lab-card .btn-secondary,
 html[data-theme-family="minimal"] .btn-secondary {
-    background: var(--bg-primary);
-    border: 1px solid var(--border-color);
-    color: var(--text-primary);
+    background: var(--heading-color);
+    border: 1px solid var(--heading-color);
+    color: white;
     padding: 0.65rem 1.3rem;
     border-radius: 6px;
     font-weight: 500;
     font-size: 0.875rem;
     transition: all 0.2s ease;
-    box-shadow: 0 1px 2px rgba(27,31,35,0.04);
+    box-shadow: 0 1px 2px rgba(27, 31, 35, 0.1);
 }
 
 html[data-theme-family="minimal"] .lab-card .btn-secondary:hover,
 html[data-theme-family="minimal"] .btn-secondary:hover {
-    background: var(--bg-tertiary);
-    border-color: var(--text-muted);
-    color: var(--heading-color);
+    background: var(--text-primary);
+    border-color: var(--text-primary);
+    color: white;
     transform: translateY(-1px);
-    box-shadow: 0 2px 4px rgba(27,31,35,0.08);
+    box-shadow: 0 3px 8px rgba(27, 31, 35, 0.15);
+}
+
+/* Dark mode secondary button fixes - grayscale only */
+html[data-theme-family="minimal"][data-theme="dark"] .lab-card .btn-secondary,
+html[data-theme-family="minimal"][data-theme="dark"] .btn-secondary {
+    background: var(--heading-color);
+    border-color: var(--heading-color);
+    color: var(--main-bg);
+}
+
+html[data-theme-family="minimal"][data-theme="dark"] .lab-card .btn-secondary:hover,
+html[data-theme-family="minimal"][data-theme="dark"] .btn-secondary:hover {
+    background: var(--text-color);
+    border-color: var(--text-color);
+    color: var(--main-bg);
 }
 
 /* Enhanced filter buttons for light mode */

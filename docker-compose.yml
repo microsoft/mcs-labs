@@ -15,6 +15,7 @@ services:
       - /workspace/_site # Anonymous volume for Jekyll build output
     environment:
       - JEKYLL_ENV=development
+      - TZ=America/Los_Angeles
     command: bundle exec jekyll serve --host 0.0.0.0 --livereload --livereload-port 35729 --incremental --force_polling
 
   pdf-generator:

@@ -21,22 +21,18 @@ layout: default
       </div>
 
       <nav class="journey-labs" id="journey-labs-nav">
-        {% comment %} Show all labs this lab belongs to, JavaScript will filter
-        based on URL params {% endcomment %} {% assign all_journey_labs =
-        site.labs | where_exp: "lab", "lab.journeys" | sort: "order" %} {% for
-        lab in all_journey_labs %} {% assign shared_journeys = "" %} {% for
-        lab_journey in lab.journeys %} {% for current_journey in
-        current_journeys %} {% if lab_journey == current_journey %} {% unless
-        shared_journeys contains lab_journey %} {% assign shared_journeys =
-        shared_journeys | append: lab_journey | append: "," %} {% endunless %}
-        {% endif %} {% endfor %} {% endfor %} {% if shared_journeys != "" %}
+        {% comment %} Show ALL labs including external labs - JavaScript will filter based on URL params (journey, workshop, section, bootcamp) {% endcomment %}
+        {% assign all_labs = site.labs | sort: "order" %}
+        {% for lab in all_labs %}
         <a
-          href="{{ lab.url | relative_url }}"
-          class="lab-nav-item {% if lab.url == page.url %}current{% endif %}"
+          href="{% if lab.lab_type == 'external' %}{{ lab.external_url }}{% else %}{{ lab.url | relative_url }}{% endif %}"
+          class="lab-nav-item {% if lab.url == page.url %}current{% endif %}{% if lab.lab_type == 'external' %} external-lab-link{% endif %}"
           title="{{ lab.title }}"
           data-journeys="{{ lab.journeys | join: ',' }}"
           data-section="{{ lab.section }}"
           data-order="{{ lab.order }}"
+          data-lab-id="{{ lab.slug }}"
+          {% if lab.lab_type == 'external' %}target="_blank" rel="noopener"{% endif %}
           {%
           if
           lab.bootcamp_order
@@ -49,7 +45,7 @@ layout: default
           <span class="lab-title">{{ lab.title }}</span>
           <span class="lab-duration">{{ lab.duration }}min</span>
         </a>
-        {% endif %} {% endfor %}
+        {% endfor %}
       </nav>
 
       {% comment %} Show other journeys this lab belongs to {% endcomment %} {%
@@ -94,19 +90,97 @@ layout: default
     </div>
   </aside>
 
+  {% comment %}
+  =====================================================
+  BUILD UNIFIED LAB ORDERS OBJECT (New 3-digit structure)
+  All filter types (journeys, events, sections) use lab_orders section
+  Format: { 'type:name': ['lab-id-1', 'lab-id-2', ...] }
+  =====================================================
+  {% endcomment %}
+
+  {% comment %}Build a lookup map from 3-digit order number to lab ID{% endcomment %}
+  {% assign order_to_id_map = "" %}
+  {% for meta_entry in site.data.lab-config.lab_metadata %}
+    {% assign order_num = meta_entry[0] %}
+    {% assign meta_data = meta_entry[1] %}
+    {% if meta_data.id %}
+      {% capture map_entry %}{{ order_num }}:{{ meta_data.id }}{% endcapture %}
+      {% if order_to_id_map == "" %}
+        {% assign order_to_id_map = map_entry %}
+      {% else %}
+        {% assign order_to_id_map = order_to_id_map | append: "|" | append: map_entry %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+  {% assign order_id_pairs = order_to_id_map | split: "|" %}
+
+  <!-- Unified Lab Orders - Single source for all filter ordering -->
+  <script id="lab-orders-data" type="application/json">
+  {
+    {% comment %}Journey orders from lab_orders.journey{% endcomment %}
+    {% for journey in site.data.lab-config.lab_orders.journey %}
+      {% assign journey_key = journey[0] %}
+      {% assign journey_labs = journey[1] %}
+      "journey:{{ journey_key }}": [
+        {% for lab_order in journey_labs %}
+          {% assign lab_order_str = lab_order | append: "" %}
+          {% for pair in order_id_pairs %}
+            {% assign pair_parts = pair | split: ":" %}
+            {% if pair_parts[0] == lab_order_str %}"{{ pair_parts[1] }}"{% unless forloop.parentloop.last %},{% endunless %}{% break %}{% endif %}
+          {% endfor %}
+        {% endfor %}
+      ]{% unless forloop.last %},{% endunless %}
+    {% endfor %},
+
+    {% comment %}Event orders from lab_orders.event{% endcomment %}
+    {% for event in site.data.lab-config.lab_orders.event %}
+      {% assign event_key = event[0] %}
+      {% assign event_labs = event[1] %}
+      "event:{{ event_key }}": [
+        {% for lab_order in event_labs %}
+          {% assign lab_order_str = lab_order | append: "" %}
+          {% for pair in order_id_pairs %}
+            {% assign pair_parts = pair | split: ":" %}
+            {% if pair_parts[0] == lab_order_str %}"{{ pair_parts[1] }}"{% unless forloop.parentloop.last %},{% endunless %}{% break %}{% endif %}
+          {% endfor %}
+        {% endfor %}
+      ]{% unless forloop.last %},{% endunless %}
+    {% endfor %},
+
+    {% comment %}Section orders from lab_orders.section{% endcomment %}
+    {% for section in site.data.lab-config.lab_orders.section %}
+      {% assign section_key = section[0] %}
+      {% assign section_labs = section[1] %}
+      "section:{{ section_key }}": [
+        {% for lab_order in section_labs %}
+          {% assign lab_order_str = lab_order | append: "" %}
+          {% for pair in order_id_pairs %}
+            {% assign pair_parts = pair | split: ":" %}
+            {% if pair_parts[0] == lab_order_str %}"{{ pair_parts[1] }}"{% unless forloop.parentloop.last %},{% endunless %}{% break %}{% endif %}
+          {% endfor %}
+        {% endfor %}
+      ]{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+  }
+  </script>
+
   <!-- Main Lab Content -->
   <article
     class="lab-content"
     data-journeys="{{ page.journeys | jsonify | escape }}"
     data-section="{{ page.section | escape }}"
-    {%
-    if
-    page.bootcamp_order
-    %}data-bootcamp-order="{{ page.bootcamp_order }}"
-    {%
-    endif
-    %}
   >
+    <!-- Event Context Banner - Displayed dynamically via JavaScript when viewing lab in event context -->
+    <div class="event-context-banner" style="display: none;">
+      <div class="event-context-content">
+        <span class="event-context-icon"></span>
+        <span class="event-context-text"></span>
+        <a href="#" class="event-context-link">View All Event Labs →</a>
+      </div>
+    </div>
+
+    <h1 class="lab-title">{{ page.title }}</h1>
+    
     {% if page.duration %}
     <div class="lab-meta-header">
       <div class="lab-meta">
@@ -210,6 +284,36 @@ layout: default
     </footer>
   </article>
 
+  <!-- Right Sidebar - Table of Contents -->
+  <aside class="lab-toc-sidebar">
+    <div class="toc-content">
+      <h4 class="toc-title">📋 On This Page</h4>
+      <nav class="toc-nav" id="toc-nav">
+        <!-- TOC will be dynamically generated by JavaScript -->
+      </nav>
+    </div>
+  </aside>
+
+  <!-- Floating TOC Button for Mobile/Tablet -->
+  <button id="toc-toggle-btn" class="toc-toggle-btn" aria-label="Toggle Table of Contents" title="Table of Contents">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M3 9h14V7H3v2zm0 4h14v-2H3v2zm0 4h14v-2H3v2zm16 0h2v-2h-2v2zm0-10v2h2V7h-2zm0 6h2v-2h-2v2z"/>
+    </svg>
+  </button>
+
+  <!-- TOC Mobile Overlay -->
+  <div id="toc-mobile-overlay" class="toc-mobile-overlay">
+    <div class="toc-mobile-content">
+      <div class="toc-mobile-header">
+        <h4>📋 On This Page</h4>
+        <button id="toc-close-btn" class="toc-close-btn" aria-label="Close">×</button>
+      </div>
+      <nav class="toc-mobile-nav" id="toc-mobile-nav">
+        <!-- TOC will be duplicated here for mobile -->
+      </nav>
+    </div>
+  </div>
+
   <!-- Scroll to Top Button -->
   <button
     id="scroll-to-top"
@@ -228,15 +332,106 @@ layout: default
 
 <script>
   document.addEventListener("DOMContentLoaded", function () {
+    // ========================================================================
+    // REPORT ISSUE - Pre-fill with current lab context
+    // ========================================================================
+    (function() {
+      var reportBtn = document.getElementById("report-issue-btn");
+      if (!reportBtn) return;
+
+      var labSlug = "{{ page.slug }}";
+      var labTitle = "{{ page.title | escape }}";
+
+      var issueTitle = "[" + labSlug + "] ";
+      var issueBody = "## Bug Report\n\n"
+        + "**Lab:** " + labTitle + " (`" + labSlug + "`)\n"
+        + "**Use case / step number:** \n"
+        + "**What happened:** \n\n"
+        + "**What I expected:** \n\n"
+        + "**Screenshots:** \n\n"
+        + "**Browser / environment:** \n";
+
+      var url = "https://github.com/microsoft/mcs-labs/issues/new"
+        + "?labels=lab"
+        + "&type=Bug"
+        + "&title=" + encodeURIComponent(issueTitle)
+        + "&body=" + encodeURIComponent(issueBody);
+
+      reportBtn.href = url;
+    })();
+
+    // ========================================================================
+    // UNIFIED EVENT PARAMETER SYSTEM
+    // ========================================================================
+    // All events (Bootcamp, Azure AI Workshop, MCS in a Day) now use the
+    // unified ?event=<event-name> parameter for consistent navigation.
+    //
+    // Event Mapping:
+    // - ?event=bootcamp → bootcamp_lab_orders
+    // - ?event=azure-ai-workshop → azure_ai_workshop_lab_orders
+    // - ?event=mcs-in-a-day → mcs_in_a_day_lab_orders
+    //
+    // This replaces the old dual system:
+    // - OLD: ?bootcamp=true and ?workshop=azure-ai
+    // - NEW: ?event=bootcamp and ?event=azure-ai-workshop
+    //
+    // Event configuration is centralized in lab-config.yml under event_configs
+    // ========================================================================
+
     // Check for filter context in URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     let filterJourney = urlParams.get("journey");
     const filterSection = urlParams.get("section");
+    const filterEvent = urlParams.get("event");
 
-    // Check for bootcamp parameter (special case)
-    const isBootcamp = urlParams.get("bootcamp") === "true";
-    if (isBootcamp) {
-      filterJourney = "bootcamp";
+    // Event configuration mapping (from lab-config.yml)
+    // Maps event parameter values to their corresponding lab order configuration keys
+    const eventConfigMap = {
+      "bootcamp": "bootcamp_lab_orders",
+      "azure-ai-workshop": "azure_ai_workshop_lab_orders",
+      "mcs-in-a-day": "mcs_in_a_day_lab_orders",
+      "agent-buildathon-1day": "agent_buildathon_1day_lab_orders",
+      "agent-buildathon-1month": "agent_buildathon_1month_lab_orders"
+    };
+
+    // Event display configuration (titles and icons for banner display)
+    const eventDisplayConfig = {
+      "bootcamp": { title: "⚔️ Architecture Bootcamp", icon: "⚔️" },
+      "azure-ai-workshop": { title: "☁️ MCS + Azure AI Workshop", icon: "☁️" },
+      "mcs-in-a-day": { title: "⚡ MCS in a Day", icon: "⚡" },
+      "agent-buildathon-1day": { title: "🏗️ Agent Build-A-Thon (1 day)", icon: "🏗️" },
+      "agent-buildathon-1month": { title: "🚀 Agent Build-A-Thon (1 month)", icon: "🚀" },
+      "mcs-in-a-day-v2": { title: "⚡ MCS in a Day V2", icon: "⚡" }
+    };
+
+    // Display event context banner if viewing lab within an event
+    if (filterEvent && eventConfigMap[filterEvent]) {
+      const eventBanner = document.querySelector(".event-context-banner");
+      const eventIcon = document.querySelector(".event-context-icon");
+      const eventText = document.querySelector(".event-context-text");
+      const eventLink = document.querySelector(".event-context-link");
+      
+      if (eventBanner && eventDisplayConfig[filterEvent]) {
+        const eventConfig = eventDisplayConfig[filterEvent];
+        // Extract just the text without emoji (remove emoji from title)
+        const titleText = eventConfig.title.replace(/[\u{1F300}-\u{1F9FF}]|[\u{2600}-\u{26FF}]|[\u{2700}-\u{27BF}]/gu, '').trim();
+        eventIcon.textContent = eventConfig.icon;
+        eventText.textContent = "Part of " + titleText;
+        
+        // Construct event page URL
+        const eventPageUrl = "/mcs-labs/labs/" + filterEvent + "/";
+        eventLink.setAttribute("href", eventPageUrl);
+        
+        // Show the banner
+        eventBanner.style.display = "block";
+      }
+    }
+
+    // Check for unified event parameter
+    if (filterEvent && eventConfigMap[filterEvent]) {
+      // Convert event name to internal filter format for consistency with existing code
+      // This allows events to be treated as "special journeys" in the navigation logic
+      filterJourney = filterEvent;
     }
 
     // Get the current lab's journeys and section from data attributes
@@ -250,15 +445,10 @@ layout: default
     let activeFilter = null;
     let activeFilterType = null;
 
-    if (filterJourney === "bootcamp") {
-      // Special case for bootcamp - check if current lab has bootcamp_order
-      const currentBootcampOrder = labContent.getAttribute(
-        "data-bootcamp-order"
-      );
-      if (currentBootcampOrder) {
-        activeFilter = filterJourney;
-        activeFilterType = "journey";
-      }
+    if (filterEvent && eventConfigMap[filterEvent]) {
+      // Event context detected (bootcamp, azure-ai-workshop, mcs-in-a-day)
+      activeFilter = filterEvent;
+      activeFilterType = "event";
     } else if (
       filterJourney &&
       currentJourneys &&
@@ -280,24 +470,56 @@ layout: default
     // Get all lab navigation items
     const navItems = Array.from(document.querySelectorAll(".lab-nav-item"));
 
+    // Load unified lab orders from embedded JSON
+    let labOrders = {};
+    const labOrdersScript = document.getElementById('lab-orders-data');
+    if (labOrdersScript) {
+      try {
+        labOrders = JSON.parse(labOrdersScript.textContent);
+      } catch (e) {
+        console.error("Failed to parse lab orders data:", e);
+      }
+    }
+
+    // Get ordered lab IDs for current filter (generic for all filter types)
+    const orderKey = activeFilterType + ':' + activeFilter;
+    const orderedLabIds = labOrders[orderKey] || [];
+
+    // Helper function to extract lab ID from nav item
+    function getLabIdFromNavItem(item) {
+      // First try data-lab-id attribute
+      if (item.dataset.labId) {
+        return item.dataset.labId;
+      }
+      // Fall back to extracting from URL
+      const labUrl = item.getAttribute("href");
+      if (labUrl) {
+        // Handle both internal (/labs/lab-name/) and external URLs
+        const labIdMatch = labUrl.match(/\/labs\/([^\/\?]+)/);
+        if (labIdMatch) {
+          return labIdMatch[1];
+        }
+      }
+      return null;
+    }
+
     // First pass: filter items based on active filter
     const filteredItems = [];
     navItems.forEach(function (item) {
       let shouldShow = false;
+      const labId = getLabIdFromNavItem(item);
 
-      if (activeFilterType === "journey") {
-        if (activeFilter === "bootcamp") {
-          // For bootcamp, filter by labs that have bootcamp_order
-          shouldShow =
-            item.dataset.bootcampOrder && item.dataset.bootcampOrder !== "";
-        } else {
-          // For other journeys, filter by journey membership
-          const itemJourneys = item.dataset.journeys
-            ? item.dataset.journeys.split(",").map((j) => j.trim())
-            : [];
-          shouldShow = itemJourneys.includes(activeFilter);
-        }
+      if (orderedLabIds.length > 0) {
+        // If we have ordered lab IDs, use them for filtering
+        shouldShow = labId && orderedLabIds.includes(labId);
+      } else if (activeFilterType === "journey") {
+        // Fall back to journey membership if no specific order defined
+        const itemJourneys = item.dataset.journeys
+          ? item.dataset.journeys.split(",").map((j) => j.trim())
+          : [];
+        shouldShow = itemJourneys.includes(activeFilter);
       } else if (activeFilterType === "section") {
+        // Fall back to section membership
         shouldShow = item.dataset.section === activeFilter;
       }
 
@@ -306,37 +528,27 @@ layout: default
       }
     });
 
-    // Sort filtered items numerically by order (or bootcamp_order for bootcamp journey)
+    // Sort filtered items by position in ordered list, or by default order
     filteredItems.sort((a, b) => {
-      if (activeFilterType === "journey" && activeFilter === "bootcamp") {
-        // For bootcamp, sort by bootcamp_order if available, otherwise by regular order
-        const getBootcampSortValue = (order) => {
-          if (!order) return 999;
-          // Convert "1a" to 1.1, "1b" to 1.2, "2" to 2.0, "3a" to 3.1, etc.
-          const match = order.match(/^(\d+)([ab]?)$/);
-          if (match) {
-            const num = parseInt(match[1]);
-            const suffix = match[2];
-            if (suffix === "a") return num + 0.1;
-            if (suffix === "b") return num + 0.2;
-            return num;
-          }
-          return 999;
-        };
-
-        const orderA = a.dataset.bootcampOrder
-          ? getBootcampSortValue(a.dataset.bootcampOrder)
-          : parseInt(a.dataset.order) || 999;
-        const orderB = b.dataset.bootcampOrder
-          ? getBootcampSortValue(b.dataset.bootcampOrder)
-          : parseInt(b.dataset.order) || 999;
-        return orderA - orderB;
-      } else {
-        // For other journeys, sort by regular order
-        const orderA = parseInt(a.dataset.order) || 999;
-        const orderB = parseInt(b.dataset.order) || 999;
-        return orderA - orderB;
+      const labIdA = getLabIdFromNavItem(a);
+      const labIdB = getLabIdFromNavItem(b);
+      
+      if (orderedLabIds.length > 0) {
+        // Sort by position in ordered list
+        const indexA = labIdA ? orderedLabIds.indexOf(labIdA) : 999;
+        const indexB = labIdB ? orderedLabIds.indexOf(labIdB) : 999;
+        // If both found in list, sort by position; otherwise by default order
+        if (indexA !== -1 && indexB !== -1) {
+          return indexA - indexB;
+        }
+        if (indexA !== -1) return -1;
+        if (indexB !== -1) return 1;
       }
+      
+      // Fall back to default order
+      const orderA = parseInt(a.dataset.order) || 999;
+      const orderB = parseInt(b.dataset.order) || 999;
+      return orderA - orderB;
     });
 
     // Hide all items first
@@ -355,17 +567,7 @@ layout: default
     filteredItems.forEach(function (item) {
       const orderSpan = item.querySelector("[data-lab-order]");
       if (orderSpan) {
-        // Check if we're in bootcamp journey and this lab has bootcamp ordering
-        const bootcampOrder = item.dataset.bootcampOrder;
-        if (
-          activeFilterType === "journey" &&
-          activeFilter === "bootcamp" &&
-          bootcampOrder
-        ) {
-          orderSpan.textContent = bootcampOrder;
-        } else {
-          orderSpan.textContent = sequenceNumber;
-        }
+        orderSpan.textContent = sequenceNumber;
         sequenceNumber++;
       }
       item.style.display = "block";
@@ -395,10 +597,26 @@ layout: default
       });
     }
 
-    // Update the journey title based on active filter
+    // Update the journey/event title based on active filter
     const journeyTitleText = document.getElementById("journey-title-text");
 
-    if (activeFilterType === "journey" && activeFilter) {
+    if (activeFilterType === "event" && activeFilter) {
+      // Event titles are centralized in lab-config.yml under event_configs
+      // Map event names to their configured titles
+      const eventTitles = {
+        "bootcamp": "⚔️ Event Navigation",
+        "azure-ai-workshop": "☁️ Event Navigation",
+        "mcs-in-a-day": "⚡ Event Navigation",
+        "agent-buildathon-1day": "🏗️ Event Navigation",
+        "agent-buildathon-1month": "🚀 Event Navigation"
+      };
+
+      const eventTitle = eventTitles[activeFilter] || "";
+
+      if (journeyTitleText && eventTitle) {
+        journeyTitleText.textContent = eventTitle;
+      }
+    } else if (activeFilterType === "journey" && activeFilter) {
       let journeyTitle = "";
 
       switch (activeFilter) {
@@ -528,52 +746,66 @@ layout: default
       // Get all lab items from hidden data container
       const labItems = Array.from(labData.querySelectorAll(".lab-item"));
 
-      // FILTERING LOGIC: Context-aware lab filtering
-      // Priority order ensures bootcamp is handled before general journey logic
+      // Load unified lab orders from embedded JSON
+      let labOrders = {};
+      const labOrdersScript = document.getElementById('lab-orders-data');
+      if (labOrdersScript) {
+        try {
+          labOrders = JSON.parse(labOrdersScript.textContent);
+        } catch (e) {
+          console.error("Failed to parse lab orders data:", e);
+        }
+      }
+
+      // Get ordered lab IDs for current filter (generic for all filter types)
+      const orderKey = activeFilterType + ':' + activeFilter;
+      const orderedLabIds = labOrders[orderKey] || [];
+
+      // Helper function to extract lab ID from URL
+      function getLabIdFromUrl(url) {
+        if (url) {
+          const labIdMatch = url.match(/\/labs\/([^\/\?]+)/);
+          if (labIdMatch) {
+            return labIdMatch[1];
+          }
+        }
+        return null;
+      }
+
+      // FILTERING LOGIC: Generic context-aware lab filtering
       let filteredLabs = labItems;
-      if (activeFilter === "bootcamp") {
-        // BOOTCAMP FILTERING: Labs with bootcamp_order attribute only
-        // This ensures only bootcamp-assigned labs appear in bootcamp navigation
+      if (orderedLabIds.length > 0) {
+        // Use ordered list for filtering
         filteredLabs = labItems.filter((item) => {
-          const bootcampOrder = item.getAttribute("data-bootcamp-order");
-          return bootcampOrder && bootcampOrder.trim() !== "";
+          const labUrl = item.getAttribute("data-url");
+          const labId = getLabIdFromUrl(labUrl);
+          return labId && orderedLabIds.includes(labId);
         });
       } else if (activeFilterType === "journey" && activeFilter) {
-        // JOURNEY FILTERING: Labs assigned to specific journey
-        // Uses journey array from lab frontmatter (e.g., ["quick-start", "business-user"])
+        // JOURNEY FILTERING fallback: Labs assigned to specific journey
         filteredLabs = labItems.filter((item) => {
           const labJourneys = item.getAttribute("data-journeys").split(",");
           return labJourneys.includes(activeFilter);
         });
       }
 
-      // SORTING LOGIC: Different ordering systems for different contexts
-      if (activeFilter === "bootcamp") {
-        // BOOTCAMP SORTING: Alphanumeric ordering (1a, 1b, 2, 3a, 3b, 4, 5a, 5b, 6, 7)
+      // SORTING LOGIC: Generic ordering by position in ordered list
+      if (orderedLabIds.length > 0) {
         filteredLabs.sort((a, b) => {
-          const aOrder = a.getAttribute("data-bootcamp-order");
-          const bOrder = b.getAttribute("data-bootcamp-order");
-
-          // ALPHANUMERIC PARSER: Handles "1a", "1b", "2", "3a" format
-          // Splits into numeric part (1, 2, 3) and letter part (a, b, empty)
-          const parseBootcampOrder = (order) => {
-            if (!order) return [0, ""];
-            const match = order.match(/^(\d+)([a-z]?)$/);
-            if (match) {
-              return [parseInt(match[1]), match[2] || ""];
-            }
-            return [0, order];
-          };
-
-          const [aNum, aLetter] = parseBootcampOrder(aOrder);
-          const [bNum, bLetter] = parseBootcampOrder(bOrder);
-
-          if (aNum !== bNum) return aNum - bNum;
-          return aLetter.localeCompare(bLetter);
+          const labIdA = getLabIdFromUrl(a.getAttribute("data-url"));
+          const labIdB = getLabIdFromUrl(b.getAttribute("data-url"));
+          const indexA = labIdA ? orderedLabIds.indexOf(labIdA) : 999;
+          const indexB = labIdB ? orderedLabIds.indexOf(labIdB) : 999;
+          if (indexA !== -1 && indexB !== -1) {
+            return indexA - indexB;
+          }
+          if (indexA !== -1) return -1;
+          if (indexB !== -1) return 1;
+          // Fall back to default order
+          return parseInt(a.getAttribute("data-order")) - parseInt(b.getAttribute("data-order"));
         });
       } else {
-        // REGULAR JOURNEY SORTING: Simple numeric ordering
-        // Uses standard lab order field for sequential navigation
+        // REGULAR SORTING fallback: Simple numeric ordering
         filteredLabs.sort((a, b) => {
           return (
             parseInt(a.getAttribute("data-order")) -
@@ -634,6 +866,9 @@ layout: default
 
     // Feature 3: Initialize image lightbox functionality
     initializeImageLightbox();
+
+    // Feature 4: Generate Table of Contents
+    generateTableOfContents();
 
     // ========================================================================
     // Function Definitions
@@ -1073,467 +1308,160 @@ layout: default
       // Initialize button state
       toggleScrollButton();
     }
-  });
-</script>
-
-<script>
-  // ============================================================================
-  // Enhanced Lab Features - Callouts, Copy Buttons, and Image Lightbox
-  // ============================================================================
-
-  document.addEventListener("DOMContentLoaded", function () {
-    // Feature 1: Initialize GitHub-style callouts
-    initializeCallouts();
-
-    // Feature 2: Add copy buttons to code blocks
-    initializeCopyButtons();
-
-    // Feature 3: Initialize image lightbox functionality
-    initializeImageLightbox();
 
     // ========================================================================
-    // GitHub-Style Callouts Implementation
     // ========================================================================
-    function initializeCallouts() {
-      // Find all blockquotes within lab content
-      const labContent = document.querySelector(".lab-body");
-      if (!labContent) return;
+    // Table of Contents Generation
+    // ========================================================================
+    // Generates navigation from h2 and h3 headings in lab content
+    // Supports both desktop sidebar and mobile popup overlay
+    // Features:
+    // - Multi-level navigation (h2 and h3 headings)
+    // - Smooth scrolling to sections
+    // - Visual hierarchy with indentation for h3 items
+    // - Synchronized between desktop and mobile TOCs
+    function generateTableOfContents() {
+      const tocNav = document.getElementById("toc-nav");
+      const tocMobileNav = document.getElementById("toc-mobile-nav");
+      const labBody = document.querySelector(".lab-body");
+      
+      if (!tocNav || !labBody) return;
 
-      const blockquotes = labContent.querySelectorAll("blockquote");
+      // Find h2 and h3 headings in the lab content for multi-level TOC
+      // h2 = main sections, h3 = subsections (e.g., "Use Case 1", "Use Case 2")
+      const headings = labBody.querySelectorAll("h2, h3");
+      
+      if (headings.length === 0) {
+        tocNav.innerHTML = '<p class="toc-empty">No sections found</p>';
+        if (tocMobileNav) tocMobileNav.innerHTML = '<p class="toc-empty">No sections found</p>';
+        return;
+      }
 
-      blockquotes.forEach((blockquote, index) => {
-        // Get the text content to check for callout pattern
-        const textContent = blockquote.textContent.trim();
+      // Build TOC list
+      const tocList = document.createElement("ul");
+      tocList.className = "toc-list";
 
-        // Check if this blockquote starts with a callout pattern
-        const match = textContent.match(
-          /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i
-        );
-        if (!match) return;
-
-        const calloutType = match[1].toLowerCase();
-
-        // Get the content after the callout marker
-        const contentAfterMarker = textContent
-          .replace(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i, "")
-          .trim();
-
-        // Create callout container
-        const calloutDiv = document.createElement("div");
-        calloutDiv.className = `callout callout-${calloutType}`;
-
-        // Create title element
-        const titleDiv = document.createElement("div");
-        titleDiv.className = "callout-title";
-        titleDiv.textContent = calloutType.toUpperCase();
-
-        // Create content container
-        const contentDiv = document.createElement("div");
-        contentDiv.className = "callout-content";
-
-        // Clone the original blockquote content but remove the callout marker
-        const clonedBlockquote = blockquote.cloneNode(true);
-        const firstP = clonedBlockquote.querySelector("p:first-child");
-
-        if (firstP) {
-          // Remove the callout marker from the first paragraph
-          const firstPText = firstP.innerHTML;
-          const cleanedText = firstPText.replace(
-            /^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]\s*/i,
-            ""
-          );
-
-          if (cleanedText.trim()) {
-            firstP.innerHTML = cleanedText;
-          } else {
-            // If first paragraph only had the marker, remove it entirely
-            firstP.remove();
-          }
+      headings.forEach((heading, index) => {
+        // Ensure heading has an ID for linking
+        if (!heading.id) {
+          heading.id = `section-${index}`;
         }
 
-        // Move all content from cloned blockquote to content div
-        Array.from(clonedBlockquote.children).forEach((child) => {
-          contentDiv.appendChild(child);
+        const listItem = document.createElement("li");
+        listItem.className = `toc-item toc-${heading.tagName.toLowerCase()}`;
+
+        const link = document.createElement("a");
+        link.href = `#${heading.id}`;
+        link.textContent = heading.textContent;
+        link.title = heading.textContent; // Show full text on hover
+        link.className = "toc-link";
+        
+        // Add data-level attribute for CSS styling
+        // Level 2 (h2) = main sections with standard styling
+        // Level 3 (h3) = subsections with indentation and smaller font
+        link.setAttribute("data-level", heading.tagName === "H2" ? "2" : "3");
+
+        // Smooth scroll to section
+        link.addEventListener("click", function(e) {
+          e.preventDefault();
+          heading.scrollIntoView({ behavior: "smooth", block: "start" });
+          
+          // Update URL hash without jumping
+          history.pushState(null, null, `#${heading.id}`);
+          
+          // Update active state
+          document.querySelectorAll(".toc-link").forEach(l => l.classList.remove("active"));
+          link.classList.add("active");
+
+          // Close mobile overlay if open
+          const mobileOverlay = document.getElementById("toc-mobile-overlay");
+          if (mobileOverlay) {
+            mobileOverlay.classList.remove("active");
+          }
         });
 
-        // Build final callout
-        calloutDiv.appendChild(titleDiv);
-        calloutDiv.appendChild(contentDiv);
-
-        // Replace the blockquote
-        blockquote.parentNode.replaceChild(calloutDiv, blockquote);
+        listItem.appendChild(link);
+        tocList.appendChild(listItem);
       });
-    }
 
-    // ========================================================================
-    // Copy Button Implementation
-    // ========================================================================
-    function initializeCopyButtons() {
-      // Find all pre elements with code
-      const preElements = document.querySelectorAll(".lab-content pre");
+      tocNav.appendChild(tocList);
 
-      preElements.forEach((pre) => {
-        // Skip if already has a copy button
-        if (pre.parentNode.classList.contains("code-container")) return;
-
-        // Create container wrapper
-        const container = document.createElement("div");
-        container.className = "code-container";
-
-        // Create copy button
-        const copyButton = document.createElement("button");
-        copyButton.className = "copy-button";
-        copyButton.textContent = "Copy";
-        copyButton.title = "Copy code to clipboard";
-
-        // Add click handler
-        copyButton.addEventListener("click", async function () {
-          const code = pre.textContent || pre.innerText;
-
-          try {
-            await navigator.clipboard.writeText(code);
-
-            // Show success state
-            copyButton.classList.add("copied");
-            copyButton.textContent = "Copied";
-
-            // Reset after 2 seconds
-            setTimeout(() => {
-              copyButton.classList.remove("copied");
-              copyButton.textContent = "Copy";
-            }, 2000);
-          } catch (err) {
-            // Fallback for older browsers
-            const textArea = document.createElement("textarea");
-            textArea.value = code;
-            document.body.appendChild(textArea);
-            textArea.select();
-
-            try {
-              document.execCommand("copy");
-              copyButton.textContent = "Copied";
-              setTimeout(() => {
-                copyButton.textContent = "Copy";
-              }, 2000);
-            } catch (fallbackErr) {
-              copyButton.textContent = "Failed";
-              setTimeout(() => {
-                copyButton.textContent = "Copy";
-              }, 2000);
+      // Clone TOC for mobile overlay
+      if (tocMobileNav) {
+        const tocListClone = tocList.cloneNode(true);
+        // Re-attach event listeners for cloned links
+        const clonedLinks = tocListClone.querySelectorAll(".toc-link");
+        clonedLinks.forEach((link, index) => {
+          link.addEventListener("click", function(e) {
+            e.preventDefault();
+            const targetId = link.getAttribute("href").substring(1);
+            const targetHeading = document.getElementById(targetId);
+            if (targetHeading) {
+              targetHeading.scrollIntoView({ behavior: "smooth", block: "start" });
+              history.pushState(null, null, `#${targetId}`);
             }
-
-            document.body.removeChild(textArea);
-          }
-        });
-
-        // Wrap pre element and add button
-        pre.parentNode.insertBefore(container, pre);
-        container.appendChild(pre);
-        container.appendChild(copyButton);
-      });
-    }
-
-    // ========================================================================
-    // Image Lightbox Implementation
-    // ========================================================================
-    function initializeImageLightbox() {
-      // Create lightbox overlay
-      const lightboxOverlay = document.createElement("div");
-      lightboxOverlay.className = "lightbox-overlay";
-      lightboxOverlay.innerHTML = `
-            <button class="lightbox-close" title="Close (ESC)">×</button>
-            <div class="lightbox-controls">
-                <button class="zoom-out" title="Zoom Out (-)">−</button>
-                <span class="zoom-level">100%</span>
-                <button class="zoom-in" title="Zoom In (+)">+</button>
-                <button class="zoom-reset" title="Reset Zoom (0)">⌂</button>
-            </div>
-            <div class="lightbox-loading">Loading...</div>
-            <div class="lightbox-container">
-                <img class="lightbox-image" alt="" style="display: none;">
-            </div>
-        `;
-      document.body.appendChild(lightboxOverlay);
-
-      const lightboxImage = lightboxOverlay.querySelector(".lightbox-image");
-      const lightboxLoading =
-        lightboxOverlay.querySelector(".lightbox-loading");
-      const lightboxContainer = lightboxOverlay.querySelector(
-        ".lightbox-container"
-      );
-      const closeButton = lightboxOverlay.querySelector(".lightbox-close");
-      const zoomInBtn = lightboxOverlay.querySelector(".zoom-in");
-      const zoomOutBtn = lightboxOverlay.querySelector(".zoom-out");
-      const zoomResetBtn = lightboxOverlay.querySelector(".zoom-reset");
-      const zoomLevel = lightboxOverlay.querySelector(".zoom-level");
-
-      let currentZoom = 1;
-      let isDragging = false;
-      let startX,
-        startY,
-        translateX = 0,
-        translateY = 0;
-
-      // Add click handlers to all images in lab content
-      const images = document.querySelectorAll(".lab-content img");
-
-      images.forEach((img) => {
-        img.addEventListener("click", function () {
-          openLightbox(img.src, img.alt);
-        });
-      });
-
-      // Open lightbox function
-      function openLightbox(src, alt) {
-        lightboxOverlay.classList.add("active");
-        lightboxImage.style.display = "none";
-        lightboxLoading.style.display = "block";
-
-        // Reset zoom and position
-        currentZoom = 1;
-        translateX = 0;
-        translateY = 0;
-
-        // Load image
-        const tempImage = new Image();
-        tempImage.onload = function () {
-          lightboxImage.src = src;
-          lightboxImage.alt = alt;
-
-          // Set initial size to fit container while maintaining aspect ratio
-          const container = lightboxOverlay.querySelector(
-            ".lightbox-container"
-          );
-          const containerWidth = container.clientWidth;
-          const containerHeight = container.clientHeight;
-
-          // Calculate scale to fit image in container
-          const scaleX = containerWidth / tempImage.width;
-          const scaleY = containerHeight / tempImage.height;
-          const initialScale = Math.min(scaleX, scaleY, 1); // Don't scale up beyond original size
-
-          // Set the image size directly
-          lightboxImage.style.width = tempImage.width * initialScale + "px";
-          lightboxImage.style.height = tempImage.height * initialScale + "px";
-
-          lightboxImage.style.display = "block";
-          lightboxLoading.style.display = "none";
-
-          updateImageTransform();
-          updateZoomLevel();
-        };
-        tempImage.onerror = function () {
-          lightboxLoading.textContent = "Failed to load image";
-        };
-        tempImage.src = src;
-
-        // Prevent body scroll
-        document.body.style.overflow = "hidden";
-      }
-
-      // Close lightbox function
-      function closeLightbox() {
-        lightboxOverlay.classList.remove("active");
-        document.body.style.overflow = "";
-      }
-
-      // Zoom functions
-      function zoomIn() {
-        currentZoom = Math.min(currentZoom * 1.5, 5);
-        updateImageTransform();
-        updateZoomLevel();
-        updateCursor();
-      }
-
-      function zoomOut() {
-        currentZoom = Math.max(currentZoom / 1.5, 0.5);
-        updateImageTransform();
-        updateZoomLevel();
-        updateCursor();
-      }
-
-      function resetZoom() {
-        currentZoom = 1;
-        translateX = 0;
-        translateY = 0;
-        updateImageTransform();
-        updateZoomLevel();
-        updateCursor();
-      }
-
-      function updateImageTransform() {
-        const transform = `translate(${translateX}px, ${translateY}px) scale(${currentZoom})`;
-        lightboxImage.style.transform = transform;
-        lightboxImage.style.transformOrigin = "center center";
-      }
-
-      function updateZoomLevel() {
-        const zoomPercent = Math.round(currentZoom * 100);
-        zoomLevel.textContent = zoomPercent + "%";
-      }
-
-      function updateCursor() {
-        if (currentZoom > 1) {
-          lightboxImage.style.cursor = isDragging ? "grabbing" : "grab";
-        } else {
-          lightboxImage.style.cursor = "default";
-        }
-      }
-
-      // Event listeners for zoom controls
-      zoomInBtn.addEventListener("click", zoomIn);
-      zoomOutBtn.addEventListener("click", zoomOut);
-      zoomResetBtn.addEventListener("click", resetZoom);
-
-      // Mouse wheel zoom
-      lightboxContainer.addEventListener("wheel", function (e) {
-        e.preventDefault();
-
-        if (e.deltaY < 0) {
-          zoomIn();
-        } else {
-          zoomOut();
-        }
-      });
-
-      // Touch/mouse drag to pan when zoomed
-      lightboxImage.addEventListener("mousedown", startDrag);
-      lightboxImage.addEventListener("touchstart", startDrag, {
-        passive: false,
-      });
-
-      function startDrag(e) {
-        if (currentZoom <= 1) return;
-
-        isDragging = true;
-        updateCursor();
-
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-        startX = clientX - translateX;
-        startY = clientY - translateY;
-
-        e.preventDefault();
-      }
-
-      document.addEventListener("mousemove", drag, { passive: false });
-      document.addEventListener("touchmove", drag, { passive: false });
-
-      function drag(e) {
-        if (!isDragging || currentZoom <= 1) return;
-
-        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
-
-        translateX = clientX - startX;
-        translateY = clientY - startY;
-
-        updateImageTransform();
-        e.preventDefault();
-      }
-
-      document.addEventListener("mouseup", stopDrag);
-      document.addEventListener("touchend", stopDrag);
-
-      function stopDrag() {
-        if (isDragging) {
-          isDragging = false;
-          updateCursor();
-        }
-      }
-
-      // Keyboard shortcuts
-      document.addEventListener("keydown", function (e) {
-        if (!lightboxOverlay.classList.contains("active")) return;
-
-        switch (e.key) {
-          case "Escape":
-            closeLightbox();
-            break;
-          case "+":
-          case "=":
-            e.preventDefault();
-            zoomIn();
-            break;
-          case "-":
-            e.preventDefault();
-            zoomOut();
-            break;
-          case "0":
-            e.preventDefault();
-            resetZoom();
-            break;
-        }
-      });
-
-      // Event listeners for closing
-      closeButton.addEventListener("click", closeLightbox);
-
-      lightboxOverlay.addEventListener("click", function (e) {
-        if (e.target === lightboxOverlay) {
-          closeLightbox();
-        }
-      });
-
-      // Prevent image and container clicks from closing lightbox
-      lightboxImage.addEventListener("click", function (e) {
-        e.stopPropagation();
-      });
-
-      lightboxContainer.addEventListener("click", function (e) {
-        e.stopPropagation();
-      });
-    }
-
-    // =========================================================================
-    // SCROLL TO TOP BUTTON FUNCTIONALITY
-    // =========================================================================
-
-    // Get the scroll-to-top button
-    const scrollToTopButton = document.getElementById("scroll-to-top");
-
-    if (scrollToTopButton) {
-      // Show/hide button based on scroll position
-      function toggleScrollButton() {
-        const scrollThreshold = 300; // Show button after scrolling 300px
-        const scrollPosition =
-          window.pageYOffset || document.documentElement.scrollTop;
-
-        if (scrollPosition > scrollThreshold) {
-          scrollToTopButton.classList.add("visible");
-        } else {
-          scrollToTopButton.classList.remove("visible");
-        }
-      }
-
-      // Smooth scroll to top function
-      function scrollToTop() {
-        // Check if browser supports smooth scrolling
-        if ("scrollBehavior" in document.documentElement.style) {
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
+            // Close mobile overlay
+            const mobileOverlay = document.getElementById("toc-mobile-overlay");
+            if (mobileOverlay) {
+              mobileOverlay.classList.remove("active");
+            }
           });
-        } else {
-          // Fallback for older browsers with animated scroll
-          const scrollStep = -window.scrollY / (300 / 15);
-          const scrollInterval = setInterval(function () {
-            if (window.scrollY !== 0) {
-              window.scrollBy(0, scrollStep);
-            } else {
-              clearInterval(scrollInterval);
-            }
-          }, 15);
-        }
+        });
+        tocMobileNav.appendChild(tocListClone);
       }
 
-      // Event listeners
-      window.addEventListener("scroll", toggleScrollButton, { passive: true });
-      scrollToTopButton.addEventListener("click", scrollToTop);
+      // Highlight active section on scroll
+      window.addEventListener("scroll", function() {
+        let currentSection = "";
+        
+        headings.forEach(heading => {
+          const rect = heading.getBoundingClientRect();
+          if (rect.top >= 0 && rect.top <= 150) {
+            currentSection = heading.id;
+          }
+        });
 
-      // Initialize button state
-      toggleScrollButton();
+        if (currentSection) {
+          document.querySelectorAll(".toc-link").forEach(link => {
+            link.classList.remove("active");
+            if (link.getAttribute("href") === `#${currentSection}`) {
+              link.classList.add("active");
+            }
+          });
+        }
+      }, { passive: true });
+
+      // ========================================================================
+      // Mobile TOC Button and Overlay Functionality
+      // ========================================================================
+      // Responsive navigation for screens ≤ 1366px
+      // Features:
+      // - Floating action button (bottom-right corner)
+      // - Full-screen overlay with slide-in panel
+      // - Auto-close on link click or outside click
+      // - Synchronized with desktop TOC content
+      const tocToggleBtn = document.getElementById("toc-toggle-btn");
+      const tocMobileOverlay = document.getElementById("toc-mobile-overlay");
+      const tocCloseBtn = document.getElementById("toc-close-btn");
+
+      if (tocToggleBtn && tocMobileOverlay) {
+        // Open mobile TOC overlay when floating button is clicked
+        tocToggleBtn.addEventListener("click", function() {
+          tocMobileOverlay.classList.add("active");
+        });
+
+        // Close overlay when X button is clicked
+        tocCloseBtn.addEventListener("click", function() {
+          tocMobileOverlay.classList.remove("active");
+        });
+
+        // Close overlay when clicking outside the panel (on the backdrop)
+        tocMobileOverlay.addEventListener("click", function(e) {
+          if (e.target === tocMobileOverlay) {
+            tocMobileOverlay.classList.remove("active");
+          }
+        });
+      }
     }
   });
 </script>

@@ -119,6 +119,7 @@
     --accent-tertiary: #8b5cf6;      /* Purple tertiary accent */
     --accent-tertiary-dark: #7c3aed; /* Darker purple variant */
     --dark-button-text: white;       /* Text color for dark buttons */
+    --text-on-accent: #ffffff;       /* Text color on accent backgrounds */
     
     /* ========================================
        CODE HIGHLIGHTING
@@ -267,6 +268,7 @@
     --accent-tertiary: #ba68c8;
     --accent-tertiary-dark: #ba68c8;
     --dark-button-text: #1a1a1a;
+    --text-on-accent: #ffffff;
     
     /* Code highlighting - dark mode */
     --code-bg: #2d2d30;

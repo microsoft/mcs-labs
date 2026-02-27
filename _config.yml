@@ -4,7 +4,7 @@ description: "Hands-on labs for building AI agents with Microsoft Copilot Studio
 baseurl: "/mcs-labs"
 url: "https://pratapladhani.github.io"
 
-# Build settings  
+# Build settings
 markdown: kramdown
 highlighter: rouge
 plugins:
@@ -16,6 +16,8 @@ plugins:
 kramdown:
   input: GFM
   syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: "highlight"
   entity_output: numeric
   smart_quotes: "39,39,34,34"
 

@@ -42,7 +42,8 @@ param(
     [switch]$ShowHelp = $false,
     [switch]$GeneratePDFs = $false,
     [switch]$LocalTest = $false,
-    [switch]$MarkdownDetectOnly = $false       # Detect markdown issues without modifying source content
+    [switch]$MarkdownDetectOnly = $false,       # Detect markdown issues without modifying source content
+    [string]$SingleLabPDF = ""                  # Generate PDF for a single lab by slug (e.g., "guildhall-custom-mcp")
 )
 
 # Global collection for detection-only summary
@@ -59,7 +60,8 @@ if ($ShowHelp) {
 ╚═════════════════════════════════════════════════════════════════════════════════════════╝
 
 USAGE:
-    .\Generate-Labs-Complete.ps1 [-SelectedJourneys <string[]>] [-SkipPDFs] [-GeneratePDFs] [-LocalTest] [-ShowHelp]
+    .\Generate-Labs.ps1 [-SelectedJourneys <string[]>] [-SkipPDFs] [-GeneratePDFs] [-LocalTest] 
+                        [-SingleLabPDF <string>] [-MarkdownDetectOnly] [-ShowHelp]
 
 DESCRIPTION:
     Refactored and well-documented version of the lab generation script.
@@ -72,16 +74,31 @@ PARAMETERS:
     -SkipPDFs             Skip PDF generation (Jekyll files only)
     -GeneratePDFs         Generate PDFs for all labs (requires Docker)
     -LocalTest            Complete local testing: generate Jekyll files + PDFs + build site
+    -SingleLabPDF         Generate PDF for a single lab by ID (e.g., "guildhall-custom-mcp")
     -MarkdownDetectOnly   Detection-only mode: report problematic fenced blocks but do not modify content
     -ShowHelp             Show this help message
 
 EXAMPLES:
-    .\Generate-Labs-Complete.ps1                                    # Generate all labs with PDFs
-    .\Generate-Labs-Complete.ps1 -SkipPDFs                         # Jekyll files only
-    .\Generate-Labs-Complete.ps1 -SelectedJourneys @("business-user") # Business user journey only
-    .\Generate-Labs-Complete.ps1 -LocalTest                        # Complete local test
-    .\Generate-Labs-Complete.ps1 -MarkdownDetectOnly               # Detect markdown issues only (no fixes)
-    .\Generate-Labs-Complete.ps1 -SkipPDFs -MarkdownDetectOnly     # Fast detection-only run
+    # Generate all labs with PDFs
+    .\Generate-Labs.ps1
+    
+    # Jekyll files only (skip PDF generation)
+    .\Generate-Labs.ps1 -SkipPDFs
+    
+    # Filter by journey
+    .\Generate-Labs.ps1 -SelectedJourneys @("business-user")
+    .\Generate-Labs.ps1 -SelectedJourneys @("quick-start", "developer") -SkipPDFs
+    
+    # Generate single lab PDF
+    .\Generate-Labs.ps1 -SingleLabPDF "guildhall-custom-mcp" -GeneratePDFs
+    .\Generate-Labs.ps1 -SingleLabPDF "public-website-agent" -GeneratePDFs
+    
+    # Complete local test (all labs + PDFs)
+    .\Generate-Labs.ps1 -LocalTest
+    
+    # Detect markdown issues only (no fixes, fast scan)
+    .\Generate-Labs.ps1 -MarkdownDetectOnly
+    .\Generate-Labs.ps1 -SkipPDFs -MarkdownDetectOnly
 
 REQUIREMENTS:
     - PowerShell 5.1+ or PowerShell Core
@@ -90,8 +107,15 @@ REQUIREMENTS:
     - Docker (for PDF generation)
 
 OUTPUT:
-    - Generated files are placed in _labs/ directory for Jekyll processing
-    - PDF files are generated in labs/[lab-id]/ directories
+    - Jekyll files: _labs/ directory
+    - PDF files: assets/pdfs/ directory
+    - Index pages: labs/index.md and index.md (root)
+
+NOTES:
+    - PDF generation requires Docker with jekyll-dev container running
+    - Single lab PDF mode generates only the specified lab (counter shows 1/1)
+    - Journey filtering affects Jekyll generation but not PDF generation
+    - Configuration sync happens automatically (lab-config.yml -> _data/lab-config.yml)
 
 "@ -ForegroundColor Cyan
     exit 0
@@ -130,6 +154,44 @@ function Initialize-Environment {
     
     Import-Module powershell-yaml -ErrorAction Stop
     Write-Host "✅  Environment initialized successfully" -ForegroundColor Green
+}
+
+function Invoke-LabConfigAudit {
+    <#
+    .SYNOPSIS
+        Run lab configuration audit by calling Check-LabConfigs.ps1
+    .DESCRIPTION
+        Invokes the Check-LabConfigs.ps1 script which validates:
+        - Labs have proper config entries
+        - No orphaned configs without lab folders  
+        - No duplicate lab IDs
+        - Journey cards match left nav counts
+    #>
+    
+    Write-Host ""
+    Write-Host "🔍  Running Lab Configuration Audit..." -ForegroundColor Cyan
+    
+    $scriptPath = Join-Path $PSScriptRoot "Check-LabConfigs.ps1"
+    
+    if (-not (Test-Path $scriptPath)) {
+        Write-Host "⚠️  Check-LabConfigs.ps1 not found at: $scriptPath" -ForegroundColor Yellow
+        Write-Host "    Skipping audit validation" -ForegroundColor Yellow
+        return
+    }
+    
+    # Run the audit script and capture exit code
+    & $scriptPath
+    $exitCode = $LASTEXITCODE
+    
+    if ($exitCode -ne 0) {
+        Write-Host ""
+        Write-Host "❌  Lab configuration audit FAILED" -ForegroundColor Red
+        Write-Host "    Configuration issues must be resolved before generation" -ForegroundColor Yellow
+        Write-Host ""
+        exit 1
+    }
+    
+    Write-Host "✅  Lab configuration audit passed" -ForegroundColor Green
 }
 
 function Get-Configuration {
@@ -205,6 +267,349 @@ function Get-Paths {
         outputPath = $outputPath
         indexPath  = $indexPath
     }
+}
+
+function Convert-SimplifiedConfig {
+    <#
+    .SYNOPSIS
+        Converts simplified lab-config format to legacy format for backward compatibility
+    .DESCRIPTION
+        The simplified config uses a single 'labs' section as source of truth.
+        This function transforms it into the legacy format (lab_metadata, lab_journeys, 
+        external_labs, lab_orders) so existing code continues to work.
+    #>
+    param([Parameter(Mandatory)]$Config)
+    
+    # Check if this is the new simplified format (has 'labs' section, no 'lab_metadata')
+    if (-not $Config.labs) {
+        # Already in legacy format, return as-is
+        return $Config
+    }
+    
+    Write-Host "🔄  Converting simplified config format..." -ForegroundColor Cyan
+    
+    # Build legacy structures from simplified 'labs' section
+    $lab_metadata = @{}
+    $lab_journeys = @{}
+    $external_labs = @()
+    $legacy_lab_orders = @{}
+    
+    # Also build lab_orders structure for journey/event/section ordering
+    $lab_orders = @{
+        journey = @{}
+        event   = @{}
+        section = @{}
+    }
+    
+    # Build section groupings
+    $sectionGroups = @{}
+    
+    foreach ($labId in $Config.labs.Keys) {
+        $lab = $Config.labs[$labId]
+        $order = if ($lab.order) { [int]$lab.order } else { 999 }
+        $orderKey = "{0:D3}" -f $order
+        
+        # Build lab_metadata entry
+        $lab_metadata[$orderKey] = @{
+            id         = $labId
+            title      = $lab.title
+            difficulty = $lab.difficulty
+            duration   = $lab.duration
+            section    = $lab.section
+        }
+        
+        # Build legacy_lab_orders
+        $legacy_lab_orders[$labId] = $order
+        
+        # Build lab_journeys (convert List to array for proper serialization)
+        if ($lab.journeys) {
+            $lab_journeys[$labId] = @($lab.journeys)
+        }
+        
+        # Build external_labs list
+        if ($lab.external) {
+            $external_labs += @{
+                id          = $labId
+                title       = $lab.title
+                duration    = $lab.duration
+                difficulty  = $lab.difficulty
+                description = $lab.external.description
+                url         = $lab.external.url
+                repository  = $lab.external.repository
+                journeys    = $lab.journeys
+                section     = $lab.section
+            }
+        }
+        
+        # Group labs by section for section ordering
+        $sectionKey = if ($lab.section) { $lab.section } else { "core" }
+        if (-not $sectionGroups.ContainsKey($sectionKey)) {
+            $sectionGroups[$sectionKey] = @()
+        }
+        $sectionGroups[$sectionKey] += @{ id = $labId; order = $order }
+    }
+    
+    # Build section orders from grouped labs (sorted by order)
+    foreach ($sectionKey in $sectionGroups.Keys) {
+        $sortedLabs = $sectionGroups[$sectionKey] | Sort-Object -Property order
+        $lab_orders.section[$sectionKey] = @($sortedLabs | ForEach-Object { $_.order })
+    }
+    
+    # Build journey orders from journey.lab_order arrays or derive from labs
+    if ($Config.journeys) {
+        foreach ($journeyKey in $Config.journeys.Keys) {
+            $journey = $Config.journeys[$journeyKey]
+            if ($journey.lab_order) {
+                # Use explicit lab_order array (contains lab IDs)
+                $orderNumbers = @()
+                foreach ($labId in $journey.lab_order) {
+                    if ($legacy_lab_orders.ContainsKey($labId)) {
+                        $orderNumbers += $legacy_lab_orders[$labId]
+                    }
+                }
+                $lab_orders.journey[$journeyKey] = $orderNumbers
+            }
+            else {
+                # Derive from labs that have this journey, sorted by order
+                $journeyLabs = @()
+                foreach ($labId in $Config.labs.Keys) {
+                    $lab = $Config.labs[$labId]
+                    if ($lab.journeys -contains $journeyKey) {
+                        $journeyLabs += @{ id = $labId; order = if ($lab.order) { [int]$lab.order } else { 999 } }
+                    }
+                }
+                $sortedLabs = $journeyLabs | Sort-Object -Property order
+                $lab_orders.journey[$journeyKey] = @($sortedLabs | ForEach-Object { $_.order })
+            }
+        }
+    }
+    
+    # Build event orders from events.*.lab_order arrays
+    if ($Config.events) {
+        foreach ($eventKey in $Config.events.Keys) {
+            $event = $Config.events[$eventKey]
+            if ($event.lab_order) {
+                $orderNumbers = @()
+                foreach ($labId in $event.lab_order) {
+                    if ($legacy_lab_orders.ContainsKey($labId)) {
+                        $orderNumbers += $legacy_lab_orders[$labId]
+                    }
+                }
+                $lab_orders.event[$eventKey] = $orderNumbers
+            }
+        }
+    }
+    
+    # Merge event_configs from events section and build event lab_orders hashes
+    $event_configs = @{}
+    $event_lab_orders_hashes = @{}  # Will hold bootcamp_lab_orders, azure_ai_workshop_lab_orders, etc.
+    
+    if ($Config.events) {
+        foreach ($eventKey in $Config.events.Keys) {
+            $event = $Config.events[$eventKey]
+            $configKeyName = ($eventKey -replace '-', '_') + "_lab_orders"
+            
+            $event_configs[$eventKey] = @{
+                title       = $event.title
+                description = $event.description
+                config_key  = $configKeyName
+            }
+            
+            # Build the lab_orders hash for this event: { "1": "lab-id", "2": "lab-id", ... }
+            if ($event.lab_order) {
+                $eventLabOrders = [ordered]@{}
+                $orderNum = 1
+                foreach ($labId in $event.lab_order) {
+                    $eventLabOrders["$orderNum"] = $labId
+                    $orderNum++
+                }
+                $event_lab_orders_hashes[$configKeyName] = $eventLabOrders
+            }
+        }
+    }
+    
+    # Create updated config with legacy structures
+    $updatedConfig = @{
+        labs              = $Config.labs           # Keep original
+        journeys          = $Config.journeys       # Keep original
+        events            = $Config.events         # Keep original
+        sections          = $Config.sections       # Keep original
+        event_configs     = $event_configs         # Derived
+        lab_metadata      = $lab_metadata          # Derived
+        lab_journeys      = $lab_journeys          # Derived
+        external_labs     = $external_labs         # Derived
+        legacy_lab_orders = $legacy_lab_orders   # Derived
+        lab_orders        = $lab_orders            # Derived
+    }
+    
+    # Add individual event lab_orders hashes to the config
+    foreach ($key in $event_lab_orders_hashes.Keys) {
+        $updatedConfig[$key] = $event_lab_orders_hashes[$key]
+    }
+    
+    Write-Host "✅  Config conversion complete: $($Config.labs.Keys.Count) labs processed" -ForegroundColor Green
+    return $updatedConfig
+}
+
+function Export-ConfigAsYaml {
+    <#
+    .SYNOPSIS
+        Exports the converted config to YAML format for Jekyll to consume
+    .DESCRIPTION
+        Serializes the PowerShell hashtable to YAML format so that Jekyll's Liquid
+        templates can access the legacy structures (lab_metadata, lab_orders, etc.)
+    #>
+    param(
+        [Parameter(Mandatory)]$Config,
+        [Parameter(Mandatory)][string]$OutputPath
+    )
+    
+    $yaml = @()
+    
+    # Helper function to convert value to YAML string
+    function ConvertTo-YamlValue {
+        param($Value, [int]$Indent = 0)
+        
+        $indentStr = "  " * $Indent
+        
+        if ($null -eq $Value) {
+            return "null"
+        }
+        elseif ($Value -is [string]) {
+            # Quote strings that might need it
+            if ($Value -match '[:#\[\]{}|>]' -or $Value -match '^\s' -or $Value -match '\s$' -or $Value -eq "") {
+                return "`"$($Value -replace '"', '\"')`""
+            }
+            return $Value
+        }
+        elseif ($Value -is [bool]) {
+            return $Value.ToString().ToLower()
+        }
+        elseif ($Value -is [int] -or $Value -is [long] -or $Value -is [double]) {
+            return $Value.ToString()
+        }
+        elseif ($Value -is [System.Collections.IEnumerable] -and -not ($Value -is [string]) -and -not ($Value -is [hashtable])) {
+            # Handle arrays and List<T> types
+            $arr = @($Value)  # Convert to array
+            if ($arr.Count -eq 0) { return "[]" }
+            # Check if simple array (all primitives)
+            $allPrimitive = $true
+            foreach ($item in $arr) {
+                if ($item -is [hashtable] -or $item -is [System.Collections.IEnumerable] -and -not ($item -is [string])) {
+                    $allPrimitive = $false
+                    break
+                }
+            }
+            if ($allPrimitive -and $arr.Count -le 6) {
+                $items = $arr | ForEach-Object { ConvertTo-YamlValue $_ }
+                return "[" + ($items -join ", ") + "]"
+            }
+            return $null  # Will be handled as multi-line
+        }
+        elseif ($Value -is [hashtable] -or $Value -is [System.Collections.Specialized.OrderedDictionary]) {
+            return $null  # Always multi-line
+        }
+        return $Value.ToString()
+    }
+    
+    # Recursive function to write YAML
+    function Write-YamlObject {
+        param($Object, [int]$Indent = 0, [string]$ParentKey = "")
+        
+        $lines = @()
+        $indentStr = "  " * $Indent
+        
+        if ($Object -is [hashtable] -or $Object -is [System.Collections.Specialized.OrderedDictionary]) {
+            $keys = if ($Object -is [System.Collections.Specialized.OrderedDictionary]) { $Object.Keys } else { $Object.Keys | Sort-Object }
+            foreach ($key in $keys) {
+                $value = $Object[$key]
+                $yamlValue = ConvertTo-YamlValue $value $Indent
+                
+                if ($null -ne $yamlValue) {
+                    $lines += "$indentStr${key}: $yamlValue"
+                }
+                else {
+                    # Complex value - recurse
+                    # Handle arrays and List<T> types
+                    $isEnumerable = $value -is [System.Collections.IEnumerable] -and -not ($value -is [string]) -and -not ($value -is [hashtable])
+                    if ($isEnumerable) {
+                        $arr = @($value)  # Convert to array
+                        if ($arr.Count -gt 0) {
+                            $lines += "$indentStr${key}:"
+                            foreach ($item in $arr) {
+                                if ($item -is [hashtable] -or $item -is [System.Collections.Specialized.OrderedDictionary]) {
+                                    $subLines = Write-YamlObject $item ($Indent + 1)
+                                    $firstLine = $true
+                                    foreach ($subLine in $subLines) {
+                                        if ($firstLine) {
+                                            $lines += "$("  " * ($Indent + 1))- " + $subLine.TrimStart()
+                                            $firstLine = $false
+                                        }
+                                        else {
+                                            $lines += "  " + $subLine
+                                        }
+                                    }
+                                }
+                                else {
+                                    $lines += "$("  " * ($Indent + 1))- $(ConvertTo-YamlValue $item)"
+                                }
+                            }
+                        }
+                    }
+                    elseif ($value -is [hashtable] -or $value -is [System.Collections.Specialized.OrderedDictionary]) {
+                        $lines += "$indentStr${key}:"
+                        $lines += Write-YamlObject $value ($Indent + 1)
+                    }
+                }
+            }
+        }
+        
+        return $lines
+    }
+    
+    # Add header comment
+    $yaml += "# ====================================="
+    $yaml += "# AUTO-GENERATED - DO NOT EDIT"
+    $yaml += "# Generated by Generate-Labs.ps1"
+    $yaml += "# Edit lab-config.yml in root instead"
+    $yaml += "# ====================================="
+    $yaml += ""
+    
+    # Write each top-level section (known sections first)
+    $topLevelOrder = @('lab_metadata', 'lab_journeys', 'legacy_lab_orders', 'lab_orders', 'external_labs', 'sections', 'event_configs')
+    
+    foreach ($section in $topLevelOrder) {
+        if ($Config.ContainsKey($section) -and $null -ne $Config[$section]) {
+            $value = $Config[$section]
+            
+            if ($value -is [array] -and $value.Count -eq 0) {
+                $yaml += "${section}: []"
+            }
+            elseif ($value -is [hashtable] -and $value.Keys.Count -eq 0) {
+                $yaml += "${section}: {}"
+            }
+            else {
+                $yaml += "${section}:"
+                $yaml += Write-YamlObject $value 1
+            }
+            $yaml += ""
+        }
+    }
+    
+    # Write any remaining keys (e.g., bootcamp_lab_orders, azure_ai_workshop_lab_orders, etc.)
+    foreach ($key in $Config.Keys) {
+        if ($topLevelOrder -notcontains $key -and @('labs', 'journeys', 'events') -notcontains $key) {
+            $value = $Config[$key]
+            if ($null -ne $value) {
+                $yaml += "${key}:"
+                $yaml += Write-YamlObject $value 1
+                $yaml += ""
+            }
+        }
+    }
+    
+    # Write to file
+    $yaml | Out-File -FilePath $OutputPath -Encoding UTF8 -Force
 }
 
 function Get-LabJourneyAssignments {
@@ -369,16 +774,29 @@ function Invoke-PDFGeneration {
     #>
     param(
         [Parameter(Mandatory)]$AllLabs,
-        [Parameter(Mandatory)]$Paths
+        [Parameter(Mandatory)]$Paths,
+        [string]$SingleLabPDF = ""
     )
     
     Write-Host "📄  Starting PDF generation..." -ForegroundColor Yellow
     
+    # Check if single lab mode is enabled
+    if ($SingleLabPDF) {
+        Write-Host "🎯  Single lab PDF mode: $SingleLabPDF" -ForegroundColor Cyan
+        $AllLabs = $AllLabs | Where-Object { $_.id -eq $SingleLabPDF }
+        if ($AllLabs.Count -eq 0) {
+            Write-Host "❌  Lab '$SingleLabPDF' not found in the current lab set" -ForegroundColor Red
+            return @()
+        }
+    }
+    
     # Check if PDFs have already been generated by GitHub Actions workflow
+    # Skip this check if -GeneratePDFs was explicitly passed (force regeneration)
     $preGeneratedPDFs = Test-PreGeneratedPDFs
-    if ($preGeneratedPDFs) {
+    if ($preGeneratedPDFs -and -not $SingleLabPDF -and -not $GeneratePDFs) {
         Write-Host "✅  PDFs already generated by GitHub Actions workflow - skipping PDF generation" -ForegroundColor Green
         Write-Host "    Found existing PDFs in dist/ or assets/pdfs/ directories" -ForegroundColor Cyan
+        Write-Host "    💡 Use -GeneratePDFs to force regeneration" -ForegroundColor Yellow
         return @()
     }
     
@@ -402,9 +820,17 @@ function Invoke-PDFGeneration {
     # Generate PDFs for each lab
     $results = @()
     $processed = 0
-    $total = $AllLabs.Count
     
-    foreach ($lab in $AllLabs) {
+    # Calculate total based on whether we're filtering to a single lab
+    $labsToProcess = @(if ($SingleLabPDF) {
+            $AllLabs | Where-Object { $_.id -eq $SingleLabPDF }
+        }
+        else {
+            $AllLabs
+        })
+    $total = $labsToProcess.Count
+    
+    foreach ($lab in $labsToProcess) {
         $processed++
         Write-Host "📝  Processing PDF $processed/$total`: $($lab.id)" -ForegroundColor Cyan
         
@@ -420,7 +846,8 @@ function Invoke-PDFGeneration {
     }
     
     # Summary
-    $successful = ($results | Where-Object { $_.Success }).Count
+    $successfulResults = @($results | Where-Object { $_.Success })
+    $successful = $successfulResults.Count
     $failed = $results.Count - $successful
     
     Write-Host "`n📊  PDF Generation Summary:" -ForegroundColor Yellow
@@ -469,50 +896,112 @@ function New-PDFForLab {
         New-Item -ItemType Directory -Path $distPath -Force | Out-Null
         New-Item -ItemType Directory -Path $assetsPath -Force | Out-Null
         
-        # Read and preprocess content to avoid duplicate titles
+        # Read and preprocess content
         $content = Get-Content $readmePath -Raw -ErrorAction Stop
-        $lines = $content -split "`n"
-        $processedLines = @()
-        $foundFirstTitle = $false
         
-        foreach ($line in $lines) {
-            if (-not $foundFirstTitle -and $line -match '^#\s+(.+)') {
-                $foundFirstTitle = $true
-                continue  # Skip the first title line
+        # Process callout blocks (GitHub-style [!NOTE], [!WARNING], etc.)
+        # This matches the AWK preprocessing in build-and-deploy.yml
+        $calloutLines = $content -split "`n"
+        $finalLines = @()
+        $inCallout = $false
+        $calloutIndent = ""
+        
+        for ($i = 0; $i -lt $calloutLines.Count; $i++) {
+            $line = $calloutLines[$i]
+            
+            # Match callout start: optional whitespace + > [!TYPE]
+            if ($line -match '^(\s*)>\s*\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\](.*)$') {
+                $calloutIndent = $matches[1]
+                $calloutType = $matches[2].ToLower()
+                $restOfLine = $matches[3]
+                
+                # Determine CSS class and label
+                $class = "note"
+                $label = "**Note:** "
+                if ($calloutType -eq "tip") {
+                    $class = "tip"
+                    $label = "**Tip:** "
+                }
+                elseif ($calloutType -in @("warning", "caution", "important")) {
+                    $class = "warning"
+                    $label = "**$($calloutType.ToUpper()):** "
+                }
+                
+                # Keep blockquote marker and wrap in div (matching GitHub Actions AWK)
+                $finalLines += "$calloutIndent> <div class=`"$class`">$label$restOfLine"
+                $inCallout = $true
             }
-            $processedLines += $line
+            # If in callout and line starts with > (with same indent), continue
+            elseif ($inCallout -and $line -match '^\s*>\s') {
+                $finalLines += $line
+            }
+            # If in callout and line doesn't start with >, close the callout
+            elseif ($inCallout) {
+                $finalLines += "$calloutIndent</div>"
+                $finalLines += $line
+                $inCallout = $false
+                $calloutIndent = ""
+            }
+            else {
+                $finalLines += $line
+            }
         }
         
-        # Remove leading empty lines
-        while ($processedLines.Count -gt 0 -and [string]::IsNullOrWhiteSpace($processedLines[0])) {
-            $processedLines = $processedLines[1..($processedLines.Length - 1)]
+        # Close callout if still open at end of file
+        if ($inCallout) {
+            $finalLines += "$calloutIndent</div>"
         }
         
-        $processedContent = $processedLines -join "`n"
+        $processedContent = $finalLines -join "`n"
         
-        # Write processed content to temporary file
-        $tempFile = Join-Path $distPath "README_processed.md"
-        Set-Content -Path $tempFile -Value $processedContent -Encoding UTF8
+        # Write processed content to temporary file IN THE LAB DIRECTORY (like GitHub Actions does)
+        # This ensures relative image paths work correctly
+        $tempFileInLabDir = Join-Path $labPath "$($Lab.id)_processed.md"
+        Set-Content -Path $tempFileInLabDir -Value $processedContent -Encoding UTF8
         
         # Choose execution method based on environment
         if ($UseDocker) {
             # Docker-based execution (local development)
-            $htmlFile = "dist/$($Lab.id)/$($Lab.id).html"
-            $createHtmlCmd = "cd dist/$($Lab.id) && pandoc README_processed.md -o $($Lab.id).html --standalone --css='../../.github/styles/html.css' --html-q-tags --section-divs --metadata title=`"$escapedTitle`" -f markdown+auto_identifiers+gfm_auto_identifiers+emoji -t html5"
+            # Match GitHub Actions: cd into lab directory before running Pandoc
+            $labRelativePath = "labs/$($Lab.id)"
+            $htmlFile = "../../dist/$($Lab.id)/$($Lab.id).html"
             
+            # Create dist directory
             docker-compose exec jekyll-dev bash -c "mkdir -p dist/$($Lab.id)" 2>&1 | Out-Null
-            $htmlResult = docker-compose exec jekyll-dev bash -c "$createHtmlCmd" 2>&1
+            
+            # Determine markdown format (check for YAML front matter)
+            $yamlDisabledFormat = "markdown+auto_identifiers+gfm_auto_identifiers+emoji+header_attributes+raw_html+raw_attribute"
+            if ($processedContent -match '(?m)^---\s*$') {
+                $lines = $processedContent -split "`n"
+                if ($lines[0] -ne "---" -or ($lines.Count -gt 1 -and $lines[1] -eq "---")) {
+                    $yamlDisabledFormat = "markdown-yaml_metadata_block+auto_identifiers+gfm_auto_identifiers+emoji+header_attributes+raw_html+raw_attribute"
+                }
+            }
+            
+            # Run Pandoc from the lab directory (like GitHub Actions does)
+            # Use exact same command as GitHub Actions workflow (single line for bash compatibility)
+            $createHtmlCmd = "cd $labRelativePath && pandoc $($Lab.id)_processed.md -o $htmlFile --standalone --embed-resources --css='../../.github/styles/html.css' --html-q-tags --section-divs --id-prefix='' --metadata title=`"$escapedTitle`" --metadata lang='en' -f '$yamlDisabledFormat' -t html5"
+            
+            $htmlResult = docker-compose exec jekyll-dev bash -c $createHtmlCmd 2>&1
             
             # Check if HTML was created
-            $htmlCheckResult = docker-compose exec jekyll-dev bash -c "test -f $htmlFile && echo 'exists' || echo 'missing'" 2>&1
+            $htmlCheckResult = docker-compose exec jekyll-dev bash -c "test -f dist/$($Lab.id)/$($Lab.id).html && echo 'exists' || echo 'missing'" 2>&1
             if ($htmlCheckResult -match "exists") {
+                # Post-process HTML (like GitHub Actions does)
+                $postProcessCmd = @"
+sed -i '/<header id=`"title-block-header`">/,/<\/header>/d' dist/$($Lab.id)/$($Lab.id).html && \
+sed -i 's/id=`"`"//g' dist/$($Lab.id)/$($Lab.id).html && \
+sed -i 's/<a href=`"\(https\?:\/\/[^`"]*\)`"/<a href=`"\1`" target=`"_blank`" rel=`"noopener noreferrer`"/g' dist/$($Lab.id)/$($Lab.id).html
+"@
+                docker-compose exec jekyll-dev bash -c $postProcessCmd 2>&1 | Out-Null
+                
                 # Generate PDF using Node.js script
-                $createPdfCmd = "node .github/scripts/generate-pdf.js $htmlFile assets/pdfs/$($Lab.id).pdf `"$escapedTitle`""
+                $createPdfCmd = "node .github/scripts/generate-pdf.js dist/$($Lab.id)/$($Lab.id).html assets/pdfs/$($Lab.id).pdf `"$escapedTitle`""
                 $pdfResult = docker-compose exec jekyll-dev bash -c "$createPdfCmd" 2>&1
                 
                 # Clean up temporary files
-                docker-compose exec jekyll-dev rm -f $htmlFile dist/$($Lab.id)/README_processed.md 2>&1 | Out-Null
-                Remove-Item -Path $tempFile -Force -ErrorAction SilentlyContinue
+                docker-compose exec jekyll-dev rm -f "dist/$($Lab.id)/$($Lab.id).html" "$labRelativePath/$($Lab.id)_processed.md" 2>&1 | Out-Null
+                Remove-Item -Path $tempFileInLabDir -Force -ErrorAction SilentlyContinue
                 $htmlCreated = $true
             }
             else {
@@ -523,14 +1012,19 @@ function New-PDFForLab {
         else {
             # Direct execution (CI environment)
             $htmlFile = Join-Path $distPath "$($Lab.id).html"
-            $cssPath = ".github/styles/html.css"  # Relative path from working directory
+            $cssPath = "../../.github/styles/html.css"  # Relative path from lab directory
             
-            # Create HTML using direct pandoc command
+            # Create HTML using direct pandoc command from lab directory
             try {
+                # Save current location
+                Push-Location
+                Set-Location $labPath
+                
                 $pandocArgs = @(
-                    $tempFile
+                    "$($Lab.id)_processed.md"
                     "-o", $htmlFile
                     "--standalone"
+                    "--embed-resources"
                     "--css", $cssPath
                     "--html-q-tags"
                     "--section-divs"
@@ -540,6 +1034,10 @@ function New-PDFForLab {
                 )
                 
                 & pandoc @pandocArgs 2>&1 | Out-Null
+                
+                # Return to original location
+                Pop-Location
+                
                 if ($LASTEXITCODE -eq 0 -and (Test-Path $htmlFile)) {
                     $htmlCreated = $true
                 }
@@ -549,6 +1047,7 @@ function New-PDFForLab {
                 }
             }
             catch {
+                Pop-Location -ErrorAction SilentlyContinue
                 $htmlCreated = $false
                 $htmlResult = "Direct pandoc execution error: $($_.Exception.Message)"
             }
@@ -574,7 +1073,7 @@ function New-PDFForLab {
                 
                 # Clean up temporary files
                 Remove-Item -Path $htmlFile -Force -ErrorAction SilentlyContinue
-                Remove-Item -Path $tempFile -Force -ErrorAction SilentlyContinue
+                Remove-Item -Path $tempFileInLabDir -Force -ErrorAction SilentlyContinue
             }
         }
         
@@ -590,7 +1089,7 @@ function New-PDFForLab {
         }
         else {
             # Clean up temp file even on failure
-            Remove-Item -Path $tempFile -Force -ErrorAction SilentlyContinue
+            Remove-Item -Path $tempFileInLabDir -Force -ErrorAction SilentlyContinue
             $errorMsg = if (-not $htmlCreated) { "Failed to create HTML: $htmlResult" } else { "PDF file not created: $pdfResult" }
             return @{
                 LabId          = $Lab.id
@@ -787,6 +1286,37 @@ function Get-AllLabsFromFolders {
     foreach ($folder in $labFolders) {
         $lab = Get-LabFromReadme -LabPath $folder.FullName -LabId $folder.Name
         if ($lab) {
+            # Override duration and difficulty with config values if they exist
+            # This allows lab-config.yml to be the source of truth for metadata
+            if ($Config.lab_metadata) {
+                foreach ($orderKey in $Config.lab_metadata.Keys) {
+                    $configLab = $Config.lab_metadata[$orderKey]
+                    if ($configLab.id -eq $folder.Name) {
+                        # Set order from the key (which is the order number)
+                        $lab.order = [int]$orderKey
+                        # Extract numeric difficulty from config (e.g., "Intermediate (Level 200)" -> 200)
+                        if ($configLab.difficulty -match '(\d+)') {
+                            $lab.difficulty = [int]$matches[1]
+                        }
+                        # Use section from config if specified
+                        if ($configLab.section) {
+                            $lab.section = $configLab.section
+                        }
+                        break
+                    }
+                }
+            }
+            
+            # If order wasn't set from lab_metadata, try legacy_lab_orders
+            if (-not $lab.order -and $Config.legacy_lab_orders -and $Config.legacy_lab_orders.ContainsKey($folder.Name)) {
+                $lab.order = $Config.legacy_lab_orders[$folder.Name]
+            }
+            
+            # Default order if still not set
+            if (-not $lab.order) {
+                $lab.order = 999
+            }
+            
             # Assign journeys from config or auto-assign
             if ($LabJourneys.ContainsKey($folder.Name)) {
                 $lab.journeys = $LabJourneys[$folder.Name]
@@ -798,7 +1328,7 @@ function Get-AllLabsFromFolders {
             }
             
             $discoveredLabs += $lab
-            Write-Host "  ✅  Discovered: $($folder.Name)" -ForegroundColor Green
+            Write-Host "  ✅  Discovered: $($folder.Name) (order: $($lab.order))" -ForegroundColor Green
         }
         else {
             Write-Host "  ⚠️   Failed to parse: $($folder.Name)" -ForegroundColor Yellow
@@ -809,6 +1339,12 @@ function Get-AllLabsFromFolders {
     if ($Config.external_labs) {
         Write-Host "🌐  Adding external labs from config..." -ForegroundColor Cyan
         foreach ($externalLab in $Config.external_labs) {
+            # Look up order from legacy_lab_orders (built during config processing)
+            $order = if ($Config.legacy_lab_orders -and $Config.legacy_lab_orders.ContainsKey($externalLab.id)) {
+                $Config.legacy_lab_orders[$externalLab.id]
+            }
+            else { 999 }
+            
             $lab = @{
                 id          = $externalLab.id
                 slug        = $externalLab.id  # Use the lab id as the slug
@@ -820,9 +1356,10 @@ function Get-AllLabsFromFolders {
                 section     = if ($externalLab.section) { $externalLab.section } else { "external_labs" }
                 url         = $externalLab.url
                 repository  = $externalLab.repository
+                order       = $order
             }
             $discoveredLabs += $lab
-            Write-Host "  ✅  Added external lab: $($externalLab.id)" -ForegroundColor Green
+            Write-Host "  ✅  Added external lab: $($externalLab.id) (order: $order)" -ForegroundColor Green
         }
     }
     
@@ -888,7 +1425,7 @@ function New-LocalLabFile {
         $frontMatter = Build-JekyllFrontMatter -Lab $Lab -Order $Order -SectionName $SectionName -LabType $LabType -Description $description
         
         # Process content (remove duplicate titles, normalize formatting)
-        $cleanContent = Get-CleanLabContent -Content $content -Title $Lab.title
+        $cleanContent = Get-CleanLabContent -Content $content -Title $Lab.title -LabId $Lab.id
 
         # Optional markdown detection (fenced code blocks immediately following list items)
         if ($MarkdownDetectOnly) {
@@ -1005,7 +1542,7 @@ section: $SectionName
     if ($IsExternal) {
         $frontMatter += "`nexternal: true"
         if ($Lab.url) {
-            $frontMatter += "`nurl: `"$($Lab.url)`""
+            $frontMatter += "`nexternal_url: `"$($Lab.url)`""
         }
         if ($Lab.repository) {
             $frontMatter += "`nrepository: `"$($Lab.repository)`""
@@ -1043,7 +1580,7 @@ function Get-CleanLabContent {
     .SYNOPSIS
         Clean and normalize lab content for Jekyll processing
     #>
-    param($Content, $Title)
+    param($Content, $Title, $LabId = "unknown")
     
     # Clean up content - remove leading/trailing whitespace and normalize newlines
     $cleanContent = $Content.Trim()
@@ -1062,7 +1599,184 @@ function Get-CleanLabContent {
         }
     }
     
+    # Normalize TOC markers to ensure consistency
+    $cleanContent = Normalize-TOCMarkers -Content $cleanContent -LabId $LabId
+    
+    # Escape pipes in markdown link text to prevent Kramdown from treating them as table separators
+    # Pattern: [text with | pipes](url) -> [text with \| pipes](url)
+    # Uses negative lookbehind to avoid double-escaping already escaped pipes
+    $cleanContent = $cleanContent -replace '\[([^\]]*(?<!\\))\|([^\]]*)\]\(', '[$1\|$2]('
+    
     return $cleanContent
+}
+
+function Normalize-TOCMarkers {
+    <#
+    .SYNOPSIS
+        Generate and insert proper TOC content by parsing markdown headings
+    .DESCRIPTION
+        Detects TOC sections using multiple patterns:
+        1. Any H2 heading containing "Table of Contents" (e.g., "## 📚 Table of Contents")
+        2. Legacy <!-- TOC --> marker format
+        
+        Generates TOC from H2-H6 headings and replaces manual TOC content with
+        auto-generated version. Excludes H1 lab title from TOC.
+        
+        Strategy:
+        - Detect TOC section using flexible pattern matching
+        - Parse all headings from H2 to H6 (excluding H1 lab title)
+        - Generate markdown list with proper indentation and anchor links
+        - Replace manual TOC content with generated version
+    #>
+    param(
+        [string]$Content,
+        [string]$LabId = "unknown"
+    )
+    
+    # Generate TOC content from headings
+    $tocContent = Generate-TOCFromHeadings -Content $Content
+    
+    $tocDetected = $false
+    $tocType = "none"
+    
+    # Strategy 1: Check if content has an H2 heading containing "Table of Contents"
+    # This matches: "## 📚 Table of Contents", "## 📜 Quest Log (Table of Contents)", etc.
+    # 
+    # WHY H2 HEADING DETECTION:
+    # - Flexible pattern matching allows custom TOC headings (e.g., themed labs like "Quest Log")
+    # - Consistent with lab authoring template that uses H2 for major sections
+    # - Avoids dependency on comment markers that require IDE extensions
+    if ($Content -match '(?m)^##\s+.*Table of Contents.*$') {
+        $tocDetected = $true
+        $tocType = "H2 heading"
+        
+        # Find the H2 heading line that contains "Table of Contents"
+        $tocHeading = [regex]::Match($Content, '(?m)^##\s+.*Table of Contents.*$').Value
+        
+        # SIMPLE SPLIT-AND-REBUILD APPROACH (most reliable):
+        # 1. Split content at TOC heading
+        # 2. Find where TOC content ends (next ## heading)
+        # 3. Rebuild with new TOC in between
+        
+        # Split at TOC heading
+        $beforeTOC = $Content -split [regex]::Escape($tocHeading), 2
+        if ($beforeTOC.Count -eq 2) {
+            $contentAfterTOCHeading = $beforeTOC[1]
+            
+            # Find the next H2 heading OR horizontal rule after TOC (this is where content resumes)
+            # Match: any content (non-greedy) up to EITHER the first H2 heading OR ---
+            # CRITICAL: Use (?s) to make . match newlines, capture TOC content, then capture EVERYTHING after
+            if ($contentAfterTOCHeading -match '(?s)^(.*?)(\r?\n)((?:##\s+.+|---).*)') {
+                $oldTOCContent = $matches[1]  # The old TOC list (will be discarded)
+                $newline = $matches[2]        # Preserve newline style
+                $restOfContent = $matches[3]  # Everything from ## or --- onward (keep ALL of this)
+                
+                # Rebuild: before + heading + new TOC + rest
+                $Content = $beforeTOC[0] + $tocHeading + [Environment]::NewLine + [Environment]::NewLine + 
+                $tocContent + [Environment]::NewLine + [Environment]::NewLine + $restOfContent
+                
+                Write-Host "    📋  TOC detected ($tocType): $($tocHeading.Trim())" -ForegroundColor DarkGray
+            }
+            else {
+                Write-Host "    ⚠️  Could not find end of TOC section in $LabId" -ForegroundColor Yellow
+            }
+        }
+    }
+    else {
+        # No TOC found - auto-add one after "## 🧭 Lab Details"
+        # Find the "## 🧭 Lab Details" section and insert TOC after it
+        # Look for the Lab Details heading followed by content until the next ## or ---
+        if ($Content -match '(?ms)(^##\s+🧭\s+Lab Details.*?)(?=^##\s|\r?\n---\r?\n)') {
+            $labDetailsSection = $matches[1]
+            
+            # Create new TOC section
+            $tocSection = "---" + [Environment]::NewLine + [Environment]::NewLine +
+            "## 📚 Table of Contents" + [Environment]::NewLine + [Environment]::NewLine +
+            $tocContent + [Environment]::NewLine + [Environment]::NewLine
+            
+            # Insert TOC section after Lab Details section
+            $Content = $Content -replace [regex]::Escape($labDetailsSection), ($labDetailsSection + [Environment]::NewLine + [Environment]::NewLine + $tocSection)
+            
+            Write-Host "    ➕  TOC auto-added after Lab Details section" -ForegroundColor Green
+        }
+        else {
+            Write-Host "    ⚠️  No TOC section and couldn't find Lab Details section in $LabId" -ForegroundColor Yellow
+        }
+    }
+    
+    return $Content
+}function Generate-TOCFromHeadings {
+    <#
+    .SYNOPSIS
+        Parse markdown headings and generate TOC list items
+    .DESCRIPTION
+        Extracts H2 headings only from markdown content and creates a flat list
+        with anchor links. Handles emoji, special characters, and proper formatting.
+        
+    .NOTES
+        ARCHITECTURAL DECISION: H2-ONLY TOC GENERATION
+        
+        WHY H2 ONLY (not H3-H6):
+        - Keeps TOC concise and focused on major sections
+        - Prevents overly long TOCs that hurt readability
+        - Matches standard documentation best practices
+        - H3+ headings are detailed subsections better discovered through scrolling
+        
+        WHY AUTOMATIC GENERATION (not manual TOC):
+        - Lab authors can't maintain manual TOCs in auto-generated _labs/*.md files
+        - Prevents TOC drift when lab content changes
+        - Ensures consistent TOC format across all 22+ labs
+        - Works in both Jekyll site rendering and PDF generation
+        
+        WHY SELF-REFERENCE EXCLUSION:
+        - Including "Table of Contents" in TOC creates confusing double-TOC effect
+        - Users don't need to jump to a TOC they're already viewing
+        - Cleaner user experience without circular references
+    #>
+    param([string]$Content)
+    
+    $lines = $Content -split "`n"
+    $tocLines = @()
+    
+    foreach ($line in $lines) {
+        # Match H2 headings only (##)
+        # WHY: See .NOTES section above for architectural rationale
+        if ($line -match '^(#{2})\s+(.+)$') {
+            $headingText = $matches[2].Trim()
+            
+            # Skip headings that are inside code blocks or have other markers
+            # WHY: Prevents false positives from markdown examples or documentation
+            if ($headingText -match '^```' -or $headingText -match '^---') {
+                continue
+            }
+            
+            # Skip the "Table of Contents" heading itself to avoid self-reference
+            # WHY: Prevents double-TOC display bug (see GitHub issue #xxx or commit message)
+            if ($headingText -match 'Table of Contents') {
+                continue
+            }
+            
+            # Generate anchor (lowercase, replace spaces/special chars with hyphens)
+            # WHY: Matches GitHub/Jekyll automatic anchor generation algorithm
+            # IMPORTANT: Must match Jekyll's anchor generation to prevent broken links
+            # Jekyll: base emoji→removed (variation selectors stay in place), special chars→dash, spaces→dash
+            $anchor = $headingText -replace '[\p{So}\p{Sk}]', ''    # Remove base emoji (keeps variation selectors like ️)
+            $anchor = $anchor -replace '[^\w\s\p{Mn}-]', '-'        # Convert special chars to dash (keep NonSpacingMarks)
+            $anchor = $anchor -replace '\s', '-'                    # Replace each space with hyphen
+            $anchor = $anchor.ToLower()                             # Lowercase
+            $anchor = $anchor -replace '-{3,}', '--'                # Collapse 3+ consecutive dashes to exactly 2
+            $anchor = $anchor -replace '^-+([\p{Mn}])', '$1'        # Remove leading dashes before variation selectors
+            $anchor = $anchor -replace '^-{2,}', '-'                # Keep only single leading dash (for emojis without modifiers)
+            $anchor = $anchor.TrimEnd('-')                          # Remove trailing hyphens
+            
+            # Create TOC entry (no indentation for H2 only)
+            $tocEntry = "- [$headingText](#$anchor)"
+            $tocLines += $tocEntry
+        }
+    }
+    
+    # Join all TOC lines
+    return ($tocLines -join [Environment]::NewLine)
 }
 
 function Test-MarkdownListCodeBlocks {
@@ -1239,8 +1953,62 @@ function New-IndexPage {
         }
     }
     
+    # Build lab orders for journey-specific ordering
+    # This maps journey names to ordered arrays of lab IDs
+    # Uses new unified lab_orders.journey section
+    # NOTE: YAML parses array values as integers, stripping leading zeros
+    # We pad to 3 digits to match lab_metadata keys (e.g., 10 -> "010")
+    $labOrdersJs = @()
+    if ($Config.lab_orders -and $Config.lab_orders.journey) {
+        foreach ($journeyKey in $Config.lab_orders.journey.Keys) {
+            $labNumbers = $Config.lab_orders.journey[$journeyKey]
+            # Map lab numbers to lab IDs using lab_metadata
+            $labIds = @()
+            foreach ($labNum in $labNumbers) {
+                # Pad to 3 digits to match lab_metadata keys (010, 100, etc.)
+                $labNumStr = "{0:D3}" -f [int]$labNum
+                if ($Config.lab_metadata -and $Config.lab_metadata[$labNumStr]) {
+                    $labIds += "'" + $Config.lab_metadata[$labNumStr].id + "'"
+                }
+            }
+            $labOrdersJs += "    'journey:$journeyKey': [" + ($labIds -join ", ") + "]"
+        }
+    }
+    
+    # Add event orders from unified lab_orders.event section
+    if ($Config.lab_orders -and $Config.lab_orders.event) {
+        foreach ($eventKey in $Config.lab_orders.event.Keys) {
+            $labNumbers = $Config.lab_orders.event[$eventKey]
+            $labIds = @()
+            foreach ($labNum in $labNumbers) {
+                # Pad to 3 digits to match lab_metadata keys
+                $labNumStr = "{0:D3}" -f [int]$labNum
+                if ($Config.lab_metadata -and $Config.lab_metadata[$labNumStr]) {
+                    $labIds += "'" + $Config.lab_metadata[$labNumStr].id + "'"
+                }
+            }
+            $labOrdersJs += "    'event:$eventKey': [" + ($labIds -join ", ") + "]"
+        }
+    }
+    
+    # Add section orders from unified lab_orders.section
+    if ($Config.lab_orders -and $Config.lab_orders.section) {
+        foreach ($sectionKey in $Config.lab_orders.section.Keys) {
+            $labNumbers = $Config.lab_orders.section[$sectionKey]
+            $labIds = @()
+            foreach ($labNum in $labNumbers) {
+                # Pad to 3 digits to match lab_metadata keys
+                $labNumStr = "{0:D3}" -f [int]$labNum
+                if ($Config.lab_metadata -and $Config.lab_metadata[$labNumStr]) {
+                    $labIds += "'" + $Config.lab_metadata[$labNumStr].id + "'"
+                }
+            }
+            $labOrdersJs += "    'section:$sectionKey': [" + ($labIds -join ", ") + "]"
+        }
+    }
+    
     # Generate the complete index.md content
-    $indexContent = Build-IndexPageContent -JourneyButtons $journeyButtons -JourneyDefinitions $journeyDefinitions -SectionButtons $sectionButtons
+    $indexContent = Build-IndexPageContent -JourneyButtons $journeyButtons -JourneyDefinitions $journeyDefinitions -SectionButtons $sectionButtons -LabOrders $labOrdersJs
     
     # Write to index.md file
     $indexPath = Join-Path $Paths.basePath "labs/index.md"
@@ -1277,6 +2045,38 @@ function New-RootHomepage {
             }
             
             $journeyStats[$journeyKey] = @{
+                LabCount      = $labCount
+                TotalDuration = $totalDuration
+                Hours         = [math]::Round($totalDuration / 60, 1)
+            }
+        }
+    }
+    
+    # Calculate stats for each event using unified lab_orders.event structure
+    $eventStats = @{}
+    if ($Config.event_configs) {
+        foreach ($eventKey in $Config.event_configs.Keys) {
+            $labCount = 0
+            $totalDuration = 0
+            
+            # Get the event-specific lab orders from lab_orders.event section
+            if ($Config.lab_orders -and $Config.lab_orders.event -and $Config.lab_orders.event[$eventKey]) {
+                $eventLabNumbers = $Config.lab_orders.event[$eventKey]
+                foreach ($labNum in $eventLabNumbers) {
+                    # Find the lab by looking up the 3-digit number in lab_metadata
+                    $labNumStr = [string]$labNum
+                    if ($Config.lab_metadata -and $Config.lab_metadata[$labNumStr]) {
+                        $labId = $Config.lab_metadata[$labNumStr].id
+                        $lab = $AllLabs | Where-Object { $_.id -eq $labId }
+                        if ($lab) {
+                            $labCount++
+                            $totalDuration += $lab.duration
+                        }
+                    }
+                }
+            }
+            
+            $eventStats[$eventKey] = @{
                 LabCount      = $labCount
                 TotalDuration = $totalDuration
                 Hours         = [math]::Round($totalDuration / 60, 1)
@@ -1327,8 +2127,43 @@ function New-RootHomepage {
         }
     }
     
+    # Build event cards dynamically
+    $eventCards = @()
+    if ($Config.event_configs) {
+        foreach ($eventKey in $Config.event_configs.Keys) {
+            $event = $Config.event_configs[$eventKey]
+            $stats = $eventStats[$eventKey]
+            
+            $title = if ($event.title) { $event.title } else { $eventKey }
+            $description = if ($event.description) { $event.description } else { "Event for $title" }
+            
+            # Format time display
+            $timeDisplay = if ($stats.Hours -lt 1) { 
+                "$($stats.TotalDuration) mins" 
+            }
+            elseif ($stats.Hours -ge 2) { 
+                "$([math]::Floor($stats.Hours))-$([math]::Ceiling($stats.Hours)) hours" 
+            }
+            else { 
+                "$($stats.Hours) hours" 
+            }
+            
+            $eventCards += @"
+    <div class="event-card $eventKey">
+        <h3>$title</h3>
+        <p>$description</p>
+        <div class="event-meta">
+            <span>⏱️ $timeDisplay</span>
+            <span>📚 $($stats.LabCount) labs</span>
+        </div>
+        <a href="{{ '/labs/$eventKey/?event=$eventKey' | relative_url }}" class="event-btn">View Event →</a>
+    </div>
+"@
+        }
+    }
+    
     # Build the complete homepage content
-    $homepageContent = Build-RootHomepageContent -JourneyCards $journeyCards
+    $homepageContent = Build-RootHomepageContent -JourneyCards $journeyCards -EventCards $eventCards
     
     # Write to root index.md file
     $rootIndexPath = Join-Path $Paths.basePath "index.md"
@@ -1346,9 +2181,10 @@ function Build-RootHomepageContent {
     .SYNOPSIS
         Build the complete root homepage content
     #>
-    param($JourneyCards)
+    param($JourneyCards, $EventCards)
     
     $journeyCardsHtml = $JourneyCards -join "`n`n"
+    $eventCardsHtml = $EventCards -join "`n`n"
     
     return @"
 ---
@@ -1370,6 +2206,16 @@ Welcome to hands-on labs for building AI agents with Microsoft Copilot Studio. C
 
 <div class="journey-cards">
 $journeyCardsHtml
+</div>
+
+---
+
+## 📅 **Featured Events**
+
+Participate in curated workshop experiences with guided lab sequences designed for specific learning outcomes.
+
+<div class="event-cards">
+$eventCardsHtml
 </div>
 
 ---
@@ -1397,11 +2243,12 @@ function Build-IndexPageContent {
     .SYNOPSIS
         Build the complete index.md page content
     #>
-    param($JourneyButtons, $JourneyDefinitions, $SectionButtons)
+    param($JourneyButtons, $JourneyDefinitions, $SectionButtons, $LabOrders)
     
     $journeyButtonsHtml = $JourneyButtons -join "`n"
     $journeyDefinitionsJs = $JourneyDefinitions -join ",`n"
     $sectionButtonsHtml = $SectionButtons -join "`n"
+    $labOrdersJs = $LabOrders -join ",`n"
     
     return @"
 ---
@@ -1460,7 +2307,7 @@ $sectionButtonsHtml
 
 <div class="labs-grid" id="labs-container">
 {% for lab in site.labs %}
-  <div class="lab-card" data-difficulty="{{ lab.difficulty }}" data-duration="{{ lab.duration }}" data-journeys="{{ lab.journeys | join: ',' }}" data-section="{{ lab.section }}" data-order="{{ lab.order }}">
+  <div class="lab-card" data-lab-id="{{ lab.slug }}" data-difficulty="{{ lab.difficulty }}" data-duration="{{ lab.duration }}" data-journeys="{{ lab.journeys | join: ',' }}" data-section="{{ lab.section }}" data-order="{{ lab.order }}">
     <div class="lab-sequence">
       <span class="sequence-number"></span>
     </div>
@@ -1509,6 +2356,49 @@ const sections = {
   'optional_labs': { title: '🔧 Optional Labs', description: 'Supplementary labs that provide additional knowledge and alternative approaches for specific use cases.', difficulty: 'Varies', icon: '🔧' },
   'specialized_labs': { title: '⚡ Specialized Labs', description: 'Focused labs covering specific tools, integrations, and specialized workflows for particular scenarios.', difficulty: 'Intermediate to Advanced', icon: '⚡' }
 };
+
+// Lab ordering for journeys and events (dynamically generated from config)
+// Format: 'type:name' => [ordered lab IDs]
+const labOrders = {
+$labOrdersJs
+};
+
+// Generic function to reorder cards based on filter type and value
+function reorderCardsForFilter(filterType, filterValue) {
+  const orderKey = filterType + ':' + filterValue;
+  const orderedLabIds = labOrders[orderKey];
+  
+  if (!orderedLabIds || orderedLabIds.length === 0) {
+    // No specific order defined, use default order
+    sortLabCardsByOrder();
+    return;
+  }
+  
+  const container = document.getElementById('labs-container');
+  const cards = Array.from(container.querySelectorAll('.lab-card'));
+  
+  // Sort cards: ordered labs first (in specified order), then remaining by default order
+  cards.sort((a, b) => {
+    const idA = a.dataset.labId;
+    const idB = b.dataset.labId;
+    const indexA = orderedLabIds.indexOf(idA);
+    const indexB = orderedLabIds.indexOf(idB);
+    
+    // Both in ordered list: sort by position in list
+    if (indexA !== -1 && indexB !== -1) {
+      return indexA - indexB;
+    }
+    // Only A in ordered list: A comes first
+    if (indexA !== -1) return -1;
+    // Only B in ordered list: B comes first
+    if (indexB !== -1) return 1;
+    // Neither in ordered list: sort by default order
+    return (parseInt(a.dataset.order) || 999) - (parseInt(b.dataset.order) || 999);
+  });
+  
+  // Reorder DOM elements
+  cards.forEach(card => container.appendChild(card));
+}
 
 function updateSequenceNumbers() {
   const cards = document.querySelectorAll('.lab-card');
@@ -1631,6 +2521,9 @@ function filterByJourney(journeyName) {
     '<strong>Difficulty Level:</strong> ' + journey.difficulty + '<br>' +
     '<strong>Estimated Time:</strong> ' + journey.estimatedTime + '<br>' +
     '<strong>Total Labs:</strong> ' + labCount + ' labs (' + totalDuration + ' minutes)';
+  
+  // Reorder cards based on journey-specific ordering
+  reorderCardsForFilter('journey', journeyName);
   
   // Update sequence numbers
   updateSequenceNumbers();
@@ -1790,8 +2683,15 @@ function Invoke-LabGeneration {
         # Initialize environment
         Initialize-Environment
         
+        # Run configuration audit
+        Invoke-LabConfigAudit
+        
         # Load configuration and set up paths
         $config = Get-Configuration
+        
+        # Convert simplified config format to legacy format if needed
+        $config = Convert-SimplifiedConfig -Config $config
+        
         $paths = Get-Paths
         $labJourneys = Get-LabJourneyAssignments -Config $config
         
@@ -1815,7 +2715,7 @@ function Invoke-LabGeneration {
         # Generate PDFs if not skipped
         $pdfResults = @()
         if (-not $SkipPDFs) {
-            $pdfResults = Invoke-PDFGeneration -AllLabs $allLabs -Paths $paths
+            $pdfResults = Invoke-PDFGeneration -AllLabs $allLabs -Paths $paths -SingleLabPDF $SingleLabPDF
         }
         else {
             Write-Host "⏭️   Skipping PDF generation (SkipPDFs flag set)" -ForegroundColor Yellow
@@ -1832,7 +2732,7 @@ function Invoke-LabGeneration {
         
         # Show final statistics
         $processingTime = (Get-Date) - $startTime
-        Show-FinalStatistics -Results $pdfResults -AllLabs $allLabs -ProcessingTime $processingTime
+        Show-FinalStatistics -Results $pdfResults -AllLabs $allLabs -ProcessingTime $processingTime -Config $config -Paths $paths
         
     }
     catch {
@@ -1865,15 +2765,8 @@ function Invoke-JekyllGeneration {
         foreach ($lab in $sectionLabs) {
             $labType = if ($lab.url) { "external" } else { "local" }
             
-            # Get the configured order from lab_orders, fallback to sequential if not found
-            $labSlug = $lab.slug
-            $order = if ($labSlug -and $Config.lab_orders -and $Config.lab_orders.ContainsKey($labSlug)) {
-                $Config.lab_orders[$labSlug]
-            }
-            else {
-                # Fallback: use a high number (999) for unconfigured labs to sort them last
-                999
-            }
+            # Get order directly from lab object (set during config processing)
+            $order = if ($lab.order) { [int]$lab.order } else { 999 }
             
             $success = ConvertTo-JekyllLab -Lab $lab -Order $order -SectionName $section.Name -LabType $labType -Paths $Paths
             
@@ -1891,7 +2784,7 @@ function Show-FinalStatistics {
     .SYNOPSIS
         Display final processing statistics
     #>
-    param($Results, $AllLabs, $ProcessingTime)
+    param($Results, $AllLabs, $ProcessingTime, $Config, $Paths)
     
     Write-Host "`n" + "="*80 -ForegroundColor Cyan
     Write-Host "📊  PROCESSING COMPLETE - FINAL STATISTICS" -ForegroundColor Cyan
@@ -1900,10 +2793,12 @@ function Show-FinalStatistics {
     # PDF Generation Results
     if ($Results.Count -gt 0) {
         # Use manual counting instead of Where-Object to avoid PowerShell hashtable filtering issues
+        # Wrap in array to ensure single result is treated as array
+        $resultArray = @($Results)
         $successful = 0
         $failed = 0
         
-        foreach ($result in $Results) {
+        foreach ($result in $resultArray) {
             if ($result -and $result.Success) {
                 $successful++
             }
@@ -1913,7 +2808,7 @@ function Show-FinalStatistics {
         }
         
         Write-Host "📄  PDF Generation Results:" -ForegroundColor Yellow
-        Write-Host "    ✅  Successful: $successful/$($Results.Count) PDFs" -ForegroundColor Green
+        Write-Host "    ✅  Successful: $successful/$($resultArray.Count) PDFs" -ForegroundColor Green
         
         if ($failed -gt 0) {
             Write-Host "    ❌  Failed: $failed PDFs" -ForegroundColor Red
@@ -1928,6 +2823,25 @@ function Show-FinalStatistics {
     Write-Host "`n⚡  Performance Metrics:" -ForegroundColor Yellow
     Write-Host "    ⏱️   Total Processing Time: $([math]::Round($ProcessingTime.TotalSeconds, 2)) seconds" -ForegroundColor Cyan
     Write-Host "    🏭  Labs per Second: $([math]::Round($AllLabs.Count / $ProcessingTime.TotalSeconds, 2))" -ForegroundColor Cyan
+    
+    # Export converted config to _data directory for Jekyll (includes legacy structures)
+    Write-Host "`n📋  Exporting configuration for Jekyll..." -ForegroundColor Yellow
+    $rootPath = if ($Paths) { $Paths.basePath } elseif (Test-Path "./labs") { "." } else { ".." }
+    $destConfig = Join-Path $rootPath "_data/lab-config.yml"
+    
+    if ($Config -and $Config.lab_metadata) {
+        # Config has been converted - export with legacy structures
+        Export-ConfigAsYaml -Config $Config -OutputPath $destConfig
+        Write-Host "✅  Exported converted config to _data/ directory" -ForegroundColor Green
+    }
+    else {
+        # Fallback to simple copy for legacy configs
+        $sourceConfig = Join-Path $rootPath "lab-config.yml"
+        if (Test-Path $sourceConfig) {
+            Copy-Item -Path $sourceConfig -Destination $destConfig -Force
+            Write-Host "✅  Synced lab-config.yml to _data/ directory" -ForegroundColor Green
+        }
+    }
     
     Write-Host "="*80 -ForegroundColor Cyan
     Write-Host "✅  All processing completed successfully!" -ForegroundColor Green

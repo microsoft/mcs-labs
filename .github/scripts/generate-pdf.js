@@ -31,7 +31,9 @@ async function generatePDF(htmlFilePath, outputPath, title = '') {
         '--disable-gpu',
         '--disable-background-timer-throttling',
         '--disable-backgrounding-occluded-windows',
-        '--disable-renderer-backgrounding'
+        '--disable-renderer-backgrounding',
+        '--font-render-hinting=none',
+        '--disable-font-subpixel-positioning'
       ]
     });
     
@@ -49,6 +51,112 @@ async function generatePDF(htmlFilePath, outputPath, title = '') {
     if (fs.existsSync(pdfCssPath)) {
       await page.addStyleTag({ path: pdfCssPath });
       console.log('🎨 Applied PDF-specific styling');
+    }
+    
+    // Wait for fonts to load (including emoji fonts)
+    await page.evaluateHandle('document.fonts.ready');
+    console.log('✅ Fonts loaded');
+    
+    // Check for Mermaid diagrams and render them if present
+    const hasMermaid = await page.evaluate(() => {
+      // Check for both HTML divs and Pandoc-generated code blocks
+      const mermaidElements = document.querySelectorAll('.mermaid, div.mermaid, code.language-mermaid, pre.mermaid');
+      console.log('Mermaid detection:', {
+        found: mermaidElements.length,
+        selectors: {
+          '.mermaid': document.querySelectorAll('.mermaid').length,
+          'div.mermaid': document.querySelectorAll('div.mermaid').length,
+          'code.language-mermaid': document.querySelectorAll('code.language-mermaid').length,
+          'pre.mermaid': document.querySelectorAll('pre.mermaid').length
+        }
+      });
+      return mermaidElements.length > 0;
+    });
+    
+    if (hasMermaid) {
+      console.log('🎨 Mermaid diagrams detected - loading Mermaid.js...');
+      
+      // Load Mermaid.js from CDN - using v11 for better rendering
+      await page.addScriptTag({
+        url: 'https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.min.js'
+      });
+      
+      // Initialize and render Mermaid diagrams
+      const renderResult = await page.evaluate(() => {
+        return new Promise((resolve) => {
+          // Convert Pandoc code blocks to Mermaid divs
+          const codeBlocks = document.querySelectorAll('code.language-mermaid, pre.mermaid > code');
+          console.log(`Converting ${codeBlocks.length} code blocks to Mermaid divs`);
+          codeBlocks.forEach(code => {
+            const pre = code.closest('pre');
+            if (pre) {
+              const div = document.createElement('div');
+              div.className = 'mermaid';
+              div.textContent = code.textContent;
+              pre.parentNode.replaceChild(div, pre);
+            }
+          });
+          
+          // Configure Mermaid for PDF rendering
+          mermaid.initialize({
+            startOnLoad: false,
+            theme: 'default',
+            logLevel: 'debug', // Enable debug logging
+            themeVariables: {
+              fontSize: '16px',
+              fontFamily: 'Arial, sans-serif'
+            },
+            flowchart: {
+              useMaxWidth: true,
+              htmlLabels: true,
+              curve: 'basis'
+            },
+            sequence: {
+              useMaxWidth: true,
+              diagramMarginX: 50,
+              diagramMarginY: 10,
+              actorMargin: 50,
+              width: 150,
+              height: 65,
+              boxMargin: 10,
+              boxTextMargin: 5,
+              noteMargin: 10,
+              messageMargin: 35
+            }
+          });
+          
+          // Find all mermaid divs and render them
+          const mermaidDivs = document.querySelectorAll('.mermaid, div.mermaid');
+          console.log(`Found ${mermaidDivs.length} Mermaid diagram(s) to render`);
+          
+          if (mermaidDivs.length === 0) {
+            resolve({ success: true, count: 0 });
+            return;
+          }
+          
+          // Log first diagram content for debugging
+          if (mermaidDivs.length > 0) {
+            console.log('First diagram content:', mermaidDivs[0].textContent.substring(0, 200));
+          }
+          
+          // Render all diagrams
+          mermaid.run({
+            querySelector: '.mermaid, div.mermaid'
+          }).then(() => {
+            console.log('✅ All Mermaid diagrams rendered successfully');
+            resolve({ success: true, count: mermaidDivs.length });
+          }).catch((error) => {
+            console.error('⚠️ Error rendering Mermaid diagrams:', error.message);
+            resolve({ success: false, error: error.message, count: mermaidDivs.length });
+          });
+        });
+      });
+      
+      console.log('Mermaid render result:', renderResult);
+      
+      // Wait a bit for rendering to complete
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      console.log('✅ Mermaid diagram rendering complete');
     }
     
     // Set PDF metadata if title is provided (must be done before page.pdf())
@@ -77,7 +185,9 @@ async function generatePDF(htmlFilePath, outputPath, title = '') {
           </div>
         </div>
       `,
-      preferCSSPageSize: false
+      preferCSSPageSize: false,
+      tagged: true,  // Create tagged PDF for better accessibility and structure
+      outline: true  // Generate PDF outline/bookmarks from headings
     });
     
     // Write PDF to file

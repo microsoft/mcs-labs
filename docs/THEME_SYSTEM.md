@@ -134,6 +134,51 @@ html[data-theme-family="minimal"] .filter-btn {
 - **Colorful badges** - Journey-specific color coding
 - **Rich visual hierarchy** - Strong contrast and visual elements
 
+### Mermaid Diagram Theme Integration
+
+Both theme families provide full support for Mermaid.js diagrams with automatic color adaptation:
+
+**Theme-Aware Rendering:**
+- Diagrams automatically detect current theme (light/dark mode)
+- Color palette updates when user switches themes
+- Smooth re-rendering preserves diagram structure
+
+**Color Variables:**
+Each theme mode configures 20+ Mermaid color variables including:
+- Primary/secondary/tertiary colors for diagram elements
+- Actor styling for sequence diagrams
+- Signal and note colors
+- Background and border colors
+- Text colors for labels and annotations
+
+**Implementation Details:**
+- Mermaid v11 ESM module with dynamic initialization
+- Theme change listener re-renders all diagrams
+- Original diagram code preserved in data attributes
+- Custom themeVariables synchronized with CSS custom properties
+
+**Usage:**
+```html
+<div class="mermaid">
+sequenceDiagram
+    participant A as User
+    participant B as System
+    A->>B: Request
+    B-->>A: Response
+</div>
+```
+
+**Styling:**
+- Responsive containers adapt to screen size
+- Max-width constraints prevent overly wide diagrams on desktop
+- Centered alignment for visual balance
+- Theme-specific color palettes defined in `_layouts/default.html`
+
+**Examples:**
+- See `labs/guildhall-custom-mcp/README.md` for OAuth flow sequence diagram
+- Diagrams maintain readability in both Rich and Minimal themes
+- Colors complement site design without clashing
+
 ## Backward Compatibility
 
 The system maintains backward compatibility while providing new features:
