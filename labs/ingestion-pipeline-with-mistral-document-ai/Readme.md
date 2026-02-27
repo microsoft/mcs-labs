@@ -150,14 +150,14 @@ Build the infrastructure for automated document processing including custom AI i
 
 4. Create a connection reference for SharePoint:
 
-   - **Display name**: `SharePoint Connection Reference`
-   - **Connector**: Select **SharePoint**
-   - **Connection**: Create new or select existing SharePoint connection
+   - _Display name_: `SharePoint Connection Reference`
+   - _Connector_: Select **SharePoint**
+   - _Connection_: Create new or select existing SharePoint connection
 
 5. Repeat for Dataverse:
-   - **Display name**: `Dataverse Connection Reference`
-   - **Connector**: Select **Microsoft Dataverse**
-   - **Connection**: Create new or select existing Dataverse connection
+   - _Display name_: `Dataverse Connection Reference`
+   - _Connector_: Select **Microsoft Dataverse**
+   - _Connection_: Create new or select existing Dataverse connection
 
 > [!IMPORTANT]
 > The dataverse connection will later be used to directly provide the preprocessed source to the copilot agent.
@@ -171,7 +171,7 @@ Build the infrastructure for automated document processing including custom AI i
 3. Choose **Import from OpenAPI file**
 
 4. Configure the connector name:
-    - **Connector name**: `Mistral Document AI Connector`
+    - _Connector name_: `Mistral Document AI Connector`
 
 5. **Upload** the OpenAPI definition file with the provided content into **Import an OpenAPI file** (save the content below as `mistral-document-ai-swagger-v2.json` or download
   from [mistral-document-ai-swagger-v2.json](resources/mistral-document-ai-swagger-v2.json)):
@@ -486,12 +486,12 @@ Build the infrastructure for automated document processing including custom AI i
 
 2. Enter the API key (provided on the lab resources page):
 
-    - **Authorization**: `[API_KEY_FROM_LAB_RESOURCES]`
+    - _Authorization_: `[API_KEY_FROM_LAB_RESOURCES]`
 
 3. **Create connection** and verify it shows as connected
 
 > [!TIP]
-> If you loose the window with your connector open, navigate back in your browser and click again on the **Edit** icon ✏️ next to the connector.
+> If you lose the window with your connector open, navigate back in your browser and click again on the **Edit** icon ✏️ next to the connector.
 > Then navigate to **5. Test** again.
 
 4. In the **Test** tab, select the **analyzeDocument** operation
@@ -513,9 +513,9 @@ Build the infrastructure for automated document processing including custom AI i
 
 7. Verify you receive a successful response (200 status code) with:
 
-    - **pages**: Array containing page objects with markdown content
-    - **model**: Confirmation of the model used
-    - **usage_info**: Processing statistics
+    - `pages`: Array containing page objects with markdown content
+    - `model`: Confirmation of the model used
+    - `usage_info`: Processing statistics
 
 8. Click **Update connector** once testing is successful.
 
@@ -530,16 +530,16 @@ Build the infrastructure for automated document processing including custom AI i
 
 3. Configure the agent:
 
-    - **Name**: `Mistral Document AI Agent`
-    - **Description**: `RAG Agent grounded on documents preprocessed with Mistral Document AI`
-    - **Instructions**: `Answer questions truthfully based on your knowledge. Use the uploaded documents to provide accurate and contextual responses about the content within them.`
+    - _Name_: `Mistral Document AI Agent`
+    - _Description_: `RAG Agent grounded on documents preprocessed with Mistral Document AI`
+    - _Instructions_: `Answer questions truthfully based on your knowledge. Use the uploaded documents to provide accurate and contextual responses about the content within them.`
 
-4. In the knowledge section, **disable** **Web search** to ensure responses are grounded only in uploaded knowledge
+4. In the knowledge section, disable _Web search_ to ensure responses are grounded only in uploaded knowledge
 
 5. Add the agent to your solution by selecting the **...** next to Create and select **Update advanced settings**.
 
-    - Note the **Schema Name** to a notebook for further use.
-      It will have the a value like `prefix_mistralDocumentAiAgent`.
+    - Note the _Schema Name_ to a notebook for further use.
+      It will have a value like `prefix_mistralDocumentAiAgent`.
 
 6. **Create** the agent
 
@@ -555,7 +555,7 @@ Build the infrastructure for automated document processing including custom AI i
 
 3. Configure the prompt:
 
-    - **Name**: `Create Knowledge Description`
+    - _Name_: `Create Knowledge Description`
 
 4. In the prompt instructions, paste:
 
@@ -586,15 +586,15 @@ Build the infrastructure for automated document processing including custom AI i
 
 5. Replace `[Document Content]` with an **Input** variable:
 
-    - **Type**: **Text**
-    - **Name**: `Document Content`
-    - **Sample data**: `A Simple PDF File: This is a small demonstration .pdf file -  just for use in the AI tutorials.`
+    - _Type_: `Text`
+    - _Name_: `Document Content`
+    - _Sample data_: `A Simple PDF File: This is a small demonstration .pdf file -  just for use in the AI tutorials.`
 
-6. Set **Output format** to **JSON**
+6. Set _Output format_ to `JSON`
 
 7. **Test** the prompt with sample content to verify it generates proper JSON responses
 
-    ![Create Knowledge Description Prompt](resources/create_knowledge_description_prompt.png)
+    ![Screenshot showing the Create Knowledge Description prompt configuration with input variable and JSON output format](resources/create_knowledge_description_prompt.png)
 
 8. **Save** the prompt
 
@@ -604,25 +604,25 @@ Build the infrastructure for automated document processing including custom AI i
 
 2. Configure the flow:
 
-    - **Flow name**: `Document Ingestion Pipeline`
-    - **Trigger**: **When a file is created or modified (properties only)** (SharePoint)
+    - _Flow name_: `Document Ingestion Pipeline`
+    - _Trigger_: **When a file is created or modified (properties only)** (SharePoint)
 
-    ![Configure Cloud Flow](resources/configure_cloud_flow_1.png)
+    ![Screenshot showing the automated cloud flow configuration with SharePoint trigger selected](resources/configure_cloud_flow_1.png)
 
 3. Configure the trigger:
 
-    - **Site Address**: Select your designated SharePoint site
-    - **Library Name**: Choose the document library for uploads
-    - **Folder**: Specify the target folder (if applicable)
+    - _Site Address_: Select your designated SharePoint site
+    - _Library Name_: Choose the document library for uploads
+    - _Folder_: Specify the target folder (if applicable)
 
 > [!TIP]
-> Consult the lab resources page or consult your instructure, which site and folder to use.
+> Consult the lab resources page or consult your instructor, which site and folder to use.
 
 4. Add **Initialize variable** action:
 
-    - **Name**: `varCopilotId`
-    - **Type**: **String**
-    - **Value**: Paste the bot ID you copied earlier
+    - _Name_: `varCopilotId`
+    - _Type_: `String`
+    - _Value_: Paste the bot ID you copied earlier
 
 > [!TIP]
 > This and some following steps, add Power Automate actions to your flow. Click on the **+** sign
@@ -631,10 +631,10 @@ Build the infrastructure for automated document processing including custom AI i
 
 5. Add **Get file content** (SharePoint) action:
 
-    - **Site Address**: Select the same as in the trigger
-    - **File Identifier**: Dynamic content **Identifier** from trigger
+    - _Site Address_: Select the same as in the trigger
+    - _File Identifier_: Dynamic content **Identifier** from trigger
 
-    ![Get File Content](resources/configure_cloud_flow_2.png)
+    ![Screenshot showing the Get file content SharePoint action with site address and file identifier configured](resources/configure_cloud_flow_2.png)
 
 6. **Save** the flow
 
@@ -693,19 +693,19 @@ In this section, you'll learn how to integrate AI document processing, implement
 
 2. To add your custom connector action after the **Get file content**, in the dialog to add a new action, first click on **Custom**. There you will see and select the **Mistral Document AI** connector and then the **Analyze a document (PDF or image)** action.
 
-    2.1. If you are prompted to provide a connection name and api key, enter the following information. _(If you have already created a connection, this will not be shown and you can continue with 2.2.):
+    1. If you are prompted to provide a connection name and api key, enter the following information (if you have already created a connection, this will not be shown and you can continue to the next sub-step):
 
-    - **Connection Name** e.g.: `Mistral Document AI Connection`
-    - **API Key**: _Paste the API Key provided in the Lab Resources_
+        - _Connection Name_: e.g. `Mistral Document AI Connection`
+        - _API Key_: Paste the API Key provided in the Lab Resources
 
-    2.2. Enter the following information to configure the action:
+    2. Enter the following information to configure the action:
 
-    - **model**: `mistral-document-ai-2505`
-    - **type**: `document_url`
-    - **include_image_base64**: **Yes**
-    - **document_url**:
-        - Static text: `data:application/pdf;base64,`
-        - Expression: `base64(body('Get_file_content'))`
+        - _model_: `mistral-document-ai-2505`
+        - _type_: `document_url`
+        - _include_image_base64_: **Yes**
+        - _document_url_:
+            - Static text: `data:application/pdf;base64,`
+            - Expression: `base64(body('Get_file_content'))`
 
 > [!TIP]
 > For the `document_url`, first paste the static text into the field. Then click on **Add dynamic content** > **Expression** and
@@ -713,11 +713,11 @@ In this section, you'll learn how to integrate AI document processing, implement
 
 3. Add a new Action at the bottom of your flow: **Apply to each**:
 
-   - **Select an output**: Dynamic content **pages** from AI connector.
+   - _Select an output_: Dynamic content **pages** from AI connector.
 
 4. Inside the **Apply to each**, add **Run a prompt** (AI Builder):
-   - **Prompt**: Select **Create Knowledge Description**
-   - **Document Content**: Dynamic content **markdown** from AI connector
+   - _Prompt_: Select **Create Knowledge Description**
+   - _Document Content_: Dynamic content **markdown** from AI connector
 
 > [!TIP]
 > The Apply to each loop processes each page or section of the document individually, allowing for granular knowledge creation.
@@ -726,12 +726,12 @@ In this section, you'll learn how to integrate AI document processing, implement
 
 1. Add **Add a new row** (Dataverse) inside the **Apply to each**:
 
-   - **Table name**: **Copilot Components**
-   - **Component Type**: `Bot File Attachment`
-   - **Schema Name**: Expression: `concat('prefix_mistralDocumentAiAgent.file.', triggerOutputs()?['body/FilenameWithExtension'], '_', items('Apply_to_each')?['index'], '.md')`
-   - **Name**: Dynamic content **Name** from prompt response
-   - **Content**: Dynamic content **description** from prompt response
-   - **parentbotid**: Expression: `concat('/bots(', variables('varCopilotId'), ')')`
+   - _Table name_: **Copilot Components**
+   - _Component Type_: `Bot File Attachment`
+   - _Schema Name_: Expression: `concat('prefix_mistralDocumentAiAgent.file.', triggerOutputs()?['body/FilenameWithExtension'], '_', items('Apply_to_each')?['index'], '.md')`
+   - _Name_: Dynamic content **Name** from prompt response
+   - _Content_: Dynamic content **description** from prompt response
+   - _parentbotid_: Expression: `concat('/bots(', variables('varCopilotId'), ')')`
 
 > [!TIP]
 >
@@ -739,19 +739,19 @@ In this section, you'll learn how to integrate AI document processing, implement
 > - If you don't see all the fields you need, click on **Show advanced options**.
 
 2. Add **Upload File or Image** (Dataverse) inside the **Apply to each**:
-   - **Table name**: **Copilot Components**
-   - **Row ID**: Dynamic content **BotComponent** from previous action
-   - **Column Name**: `filedata`
-   - **Content**: Dynamic content **markdown** from AI connector
-   - **Content Name**: Dynamic content **name** from prompt response
+   - _Table name_: **Copilot Components**
+   - _Row ID_: Dynamic content **BotComponent** from previous action
+   - _Column Name_: `filedata`
+   - _Content_: Dynamic content **markdown** from AI connector
+   - _Content Name_: Dynamic content **name** from prompt response
 
 #### Part 3: Publish Agent Updates
 
 1. Outside the **Apply to each**, add **Bound Action** (Dataverse):
 
-   - **Table name**: **Copilots**
-   - **Action Name**: `PvaPublish`
-   - **Row ID**: Variable **varCopilotId**
+   - _Table name_: **Copilots**
+   - _Action Name_: `PvaPublish`
+   - _Row ID_: Variable `varCopilotId`
 
 2. **Save** the flow
 
@@ -772,7 +772,7 @@ In this section, you'll learn how to integrate AI document processing, implement
 
     - Navigate to your agent
     - Check the **Knowledge** tab for new entries
-    - Verify the **Status** shows as **Ready**
+    - Verify the _Status_ shows as `Ready`
 
 4. Test the agent with questions about the uploaded document:
 
@@ -793,9 +793,17 @@ In this section, you'll learn how to integrate AI document processing, implement
 
 ### Test your understanding
 
-- How does the AI prompt ensure consistent metadata generation across different documents?
-- What advantages does programmatic knowledge addition provide over manual uploads?
-- How would you monitor and troubleshoot issues in a production document processing pipeline?
+**Key takeaways:**
+
+- **AI-Powered Document Processing** – Specialized AI models like Mistral Document AI can extract structured content from unstructured documents far more effectively than manual processing
+- **Programmatic Knowledge Management** – Using Dataverse APIs to add knowledge entries enables scalable, automated knowledge base maintenance without manual intervention
+- **End-to-End Automation** – Combining SharePoint triggers, AI processing, and Copilot Studio publishing creates a fully autonomous document ingestion pipeline
+
+**Lessons learned & troubleshooting tips:**
+
+- If the flow fails at the AI connector step, verify your API key and connection are still valid
+- Monitor AI Builder credit consumption to avoid unexpected throttling in production
+- Use descriptive naming for knowledge entries to make agent responses more traceable
 
 **Challenge: Apply this to your own use case**
 
@@ -834,4 +842,4 @@ By following these principles, you'll create robust, scalable document processin
 
 ---
 
-This lab is provided by courtesy of [Markus Tobler](https://github.com/mtob128).
+This lab is provided by courtesy of [Markus Tobler](https://github.com/markus-tobler).
