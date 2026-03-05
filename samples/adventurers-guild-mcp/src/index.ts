@@ -551,7 +551,7 @@ for (const method of ["get","delete","put","patch"] as const) {
   });
 }
 
-const PORT = process.env.PORT || 3000;
+const PORT = Number.parseInt(process.env.PORT ?? "4000", 10);
 setupServer()
   .then(() => {
     app.listen(PORT, () => {

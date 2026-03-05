@@ -1,12 +1,17 @@
 ---
-layout: event
-event_id: bootcamp
-title: Architecture Bootcamp
-description: Intensive hands-on bootcamp covering agent building, SharePoint integration, autonomous AI, and DevOps practices
+layout: single
+title: "Architecture Bootcamp"
+sidebar:
+  nav: "labs"
+toc: false
+description: "Intensive hands-on bootcamp covering agent building, SharePoint integration, autonomous AI, and DevOps practices"
 ---
 
-<!-- 
-🎯 BOOTCAMP EVENT PAGE
-📝 Uses unified event.html layout with bootcamp-specific configuration
-🔄 All content dynamically generated from lab-config.yml
--->
+Intensive hands-on bootcamp covering agent building, SharePoint integration, autonomous AI, and DevOps practices.
+
+## Bootcamp Labs
+
+| # | Lab | Duration | Difficulty |
+|---|-----|----------|------------|
+{% for lab in site.labs %}{% if lab.bootcamp_order %}| {{ lab.bootcamp_order }} | [{{ lab.title }}]({{ lab.url | relative_url }}) | {{ lab.duration }} min | Level {{ lab.difficulty }} |
+{% endif %}{% endfor %}
