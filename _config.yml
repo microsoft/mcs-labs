@@ -1,5 +1,5 @@
 # Jekyll Configuration for MCS Labs
-title: "Microsoft Copilot Studio Labs"
+title: "Microsoft Copilot Agents Labs"
 subtitle: "Hands-on labs for building AI agents"
 description: "Hands-on labs for building AI agents with Microsoft Copilot Studio"
 baseurl: "/mcs-labs"
