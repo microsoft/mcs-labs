@@ -74,7 +74,7 @@ defaults:
       toc_sticky: true
       toc_label: "On this page"
       toc_icon: "bookmark"
-      read_time: true
+      read_time: false
       share: false
   - scope:
       path: ""

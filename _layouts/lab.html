@@ -3,64 +3,9 @@ layout: single
 ---
 
 <style>
-/* Hide default title - we render our own */
-.page__title { display: none; }
-
-/* Lab header */
-.lab-header {
-  margin: -0.5em 0 1.5em;
-  padding-bottom: 1.2em;
-  border-bottom: 1px solid #e8e6e4;
-}
-.lab-header h1 {
-  font-size: 1.5em;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-  color: #323130;
-  margin: 0 0 0.4em;
-  line-height: 1.3;
-}
-.lab-header-desc {
-  font-size: 0.95em;
-  color: #605e5c;
-  line-height: 1.55;
-  margin: 0 0 0.8em;
-  max-width: 720px;
-}
-.lab-header-meta {
-  display: flex;
-  gap: 0.5em;
-  flex-wrap: wrap;
-  align-items: center;
-}
-.lab-meta-pill {
-  font-size: 0.75em;
-  font-weight: 600;
-  padding: 0.25em 0.7em;
-  border-radius: 100px;
-  white-space: nowrap;
-}
-.lab-meta-pill-duration {
-  background: #f3f2f1;
-  color: #605e5c;
-}
-.lab-meta-pill-level-100 {
-  background: #e6f2e6;
-  color: #0e700e;
-}
-.lab-meta-pill-level-200 {
-  background: #deecf9;
-  color: #004578;
-}
-.lab-meta-pill-level-300 {
-  background: #f0e6fc;
-  color: #5b2d8e;
-}
-.lab-meta-pill-section {
-  background: #fff;
-  color: #605e5c;
-  border: 1px solid #e1dfdd;
-}
+/* Lab layout: hide default title and meta — we render our own */
+#page-title, .page__title { display: none !important; }
+.page__meta { display: none !important; }
 </style>
 
 {% assign section_map = "core_learning_path:Core Learning Path,intermediate_labs:Intermediate,advanced_labs:Advanced,specialized_labs:Specialized,optional_labs:Optional,external_labs:External" | split: "," %}
