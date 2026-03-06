@@ -17,6 +17,9 @@ search_full_content: true
 # Breadcrumbs
 breadcrumbs: true
 
+# Code copy button
+enable_copy_code_button: true
+
 # Build settings
 markdown: kramdown
 highlighter: rouge
@@ -63,8 +66,7 @@ defaults:
       type: "labs"
     values:
       layout: "single"
-      sidebar:
-        nav: "labs"
+      author_profile: false
       toc: true
       toc_sticky: true
       toc_label: "On this page"

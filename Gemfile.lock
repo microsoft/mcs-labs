@@ -126,7 +126,6 @@ DEPENDENCIES
   jekyll (~> 4.3)
   jekyll-feed (~> 0.15)
   jekyll-include-cache
-  jekyll-paginate
   jekyll-seo-tag (~> 2.8)
   jekyll-sitemap (~> 1.4)
   kramdown-parser-gfm
