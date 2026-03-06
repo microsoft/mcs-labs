@@ -522,7 +522,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
 1. Enter the following in the input area for Copilot to create an expression:
 
       ```
-    Create a calculated field called “Tier” based on the value of the Number field. If Number is greater than 500,000, set Tier to “Tier 3”. If Number is greater than 250,000 but less than or equal to 500,000, set Tier to “Tier 2”. If Number is greater than 100,000 but less than or equal to 250,000, set Tier to “Tier 1”. Otherwise, set Tier to “Tier 0”.
+    Create a calculated field named “Tier” based on the Number field: assign “Tier 3” if Number > 500,000; “Tier 2” if > 250,000 and ≤ 500,000; “Tier 1” if > 100,000 and ≤ 250,000; otherwise assign “Tier 0”.
       ```
 1. Select **Create Expression** and then select **OK** 
 
