@@ -57,7 +57,10 @@ footer:
 collections:
   labs:
     output: true
-    permalink: /:collection/:name/
+    permalink: /labs/:name/
+  workshops:
+    output: true
+    permalink: /workshops/:name/
 
 # Default layouts and front matter
 defaults:
@@ -72,6 +75,17 @@ defaults:
       toc_label: "On this page"
       toc_icon: "bookmark"
       read_time: true
+      share: false
+  - scope:
+      path: ""
+      type: "workshops"
+    values:
+      layout: "workshop"
+      author_profile: false
+      toc: true
+      toc_sticky: true
+      toc_label: "Labs"
+      toc_icon: "flask"
       share: false
   - scope:
       path: ""

@@ -4,11 +4,11 @@ main:
   - title: "All Labs"
     url: /labs/
   - title: "Bootcamp"
-    url: /labs/bootcamp/
+    url: /workshops/bootcamp/
   - title: "Azure AI Workshop"
-    url: /labs/azure-ai-workshop/
+    url: /workshops/azure-ai-workshop/
   - title: "MCS in a Day"
-    url: /labs/mcs-in-a-day/
+    url: /workshops/mcs-in-a-day/
 
 labs:
   - title: "Core Learning Path"

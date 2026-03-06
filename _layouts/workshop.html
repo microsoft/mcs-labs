@@ -1,0 +1,39 @@
+---
+layout: single
+---
+
+<p>{{ page.description }}</p>
+
+{% assign total_duration = 0 %}
+{% for item in page.labs %}
+  {% assign lab = site.labs | where: "slug", item.slug | first %}
+  {% if lab %}
+    {% assign total_duration = total_duration | plus: lab.duration %}
+  {% endif %}
+{% endfor %}
+{% assign total_hours = total_duration | divided_by: 60.0 | round: 1 %}
+
+<p><strong>{{ page.labs.size }} labs</strong> &mdash; <strong>~{{ total_hours }} hours</strong> of hands-on content</p>
+
+<hr/>
+
+{% for item in page.labs %}
+{% assign lab = site.labs | where: "slug", item.slug | first %}
+{% if lab %}
+<h3 id="{{ item.label | slugify }}">{{ item.label }} &mdash; {{ lab.title }}</h3>
+
+<p>{{ lab.description | strip_html }}</p>
+
+<table>
+  <thead><tr><th>Detail</th><th>Value</th></tr></thead>
+  <tbody>
+    <tr><td>Duration</td><td>{{ lab.duration }} minutes</td></tr>
+    <tr><td>Difficulty</td><td>Level {{ lab.difficulty }}</td></tr>
+  </tbody>
+</table>
+
+<p><a href="{{ lab.url | relative_url }}?event={{ page.event_id }}" class="btn btn--primary">Start Lab</a></p>
+
+<hr/>
+{% endif %}
+{% endfor %}

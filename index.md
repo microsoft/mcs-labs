@@ -188,19 +188,21 @@ header:
 {% assign total_duration = 0 %}
 {% for lab in all_labs %}{% assign total_duration = total_duration | plus: lab.duration %}{% endfor %}
 {% assign total_hours = total_duration | divided_by: 60.0 | round: 1 %}
+{% assign levels = all_labs | map: "difficulty" | uniq %}
+{% assign all_workshops = site.workshops | sort: "order" %}
 
 <div class="home-hero">
   <h2>Hands-on labs for building AI agents</h2>
   <p>Learn Microsoft Copilot Studio through guided, practical labs. From your first agent to autonomous AI — choose a path that matches your skill level.</p>
   <div class="home-hero-actions">
     <a href="{{ '/labs/' | relative_url }}" class="btn-primary">Browse all labs</a>
-    <a href="{{ '/labs/bootcamp/' | relative_url }}" class="btn-outline">Start bootcamp</a>
+    <a href="{{ '/workshops/bootcamp/' | relative_url }}" class="btn-outline">Start bootcamp</a>
   </div>
   <ul class="home-stats">
     <li><strong>{{ all_labs.size }}</strong><span>Labs</span></li>
     <li><strong>~{{ total_hours }}h</strong><span>Content</span></li>
-    <li><strong>3</strong><span>Levels</span></li>
-    <li><strong>3</strong><span>Workshops</span></li>
+    <li><strong>{{ levels.size }}</strong><span>Levels</span></li>
+    <li><strong>{{ all_workshops.size }}</strong><span>Workshops</span></li>
   </ul>
 </div>
 
@@ -248,31 +250,20 @@ header:
   </li>
 </ul>
 
+{% assign accent_colors = "accent-blue,accent-green,accent-purple,accent-orange" | split: "," %}
+
 <h2 class="home-section-title">Workshops &amp; events</h2>
 <ul class="journey-grid">
+  {% for workshop in all_workshops %}
+  {% assign color_idx = forloop.index0 | modulo: 4 %}
   <li class="journey-card">
-    <div class="journey-card-accent accent-blue"></div>
-    <h3><a href="{{ '/labs/bootcamp/' | relative_url }}">Architecture Bootcamp</a></h3>
-    <div class="journey-card-desc">Intensive hands-on bootcamp covering agent building, SharePoint integration, autonomous AI, and DevOps.</div>
+    <div class="journey-card-accent {{ accent_colors[color_idx] }}"></div>
+    <h3><a href="{{ workshop.url | relative_url }}">{{ workshop.title }}</a></h3>
+    <div class="journey-card-desc">{{ workshop.description | truncate: 120 }}</div>
     <div class="journey-card-meta">
       <span class="journey-pill">Full day</span>
-      <span class="journey-pill">10 labs</span>
+      <span class="journey-pill">{{ workshop.labs.size }} labs</span>
     </div>
   </li>
-  <li class="journey-card">
-    <div class="journey-card-accent accent-green"></div>
-    <h3><a href="{{ '/labs/azure-ai-workshop/' | relative_url }}">Azure AI Workshop</a></h3>
-    <div class="journey-card-desc">Combine Microsoft Copilot Studio with Azure AI services for intelligent solutions.</div>
-    <div class="journey-card-meta">
-      <span class="journey-pill">Full day</span>
-    </div>
-  </li>
-  <li class="journey-card">
-    <div class="journey-card-accent accent-purple"></div>
-    <h3><a href="{{ '/labs/mcs-in-a-day/' | relative_url }}">MCS in a Day</a></h3>
-    <div class="journey-card-desc">Fast-track introduction through declarative agents, custom agents, and autonomous AI.</div>
-    <div class="journey-card-meta">
-      <span class="journey-pill">Full day</span>
-    </div>
-  </li>
+  {% endfor %}
 </ul>
