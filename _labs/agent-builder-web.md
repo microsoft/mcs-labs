@@ -1,16 +1,14 @@
 ---
 layout: single
 title: "Create your own web-based AI assistant with lite experience of Copilot Studio in Microsoft 365 Copilot (formerly Copilot Studio agent builder)"
+description: "Create an intelligent agent in Copilot that delivers contextual, multi-part answers using instructions and data from the Web."
 order: 1
-nav_order: 1
 duration: 15
 difficulty: 100
-lab_type: local
 section: core_learning_path
 journeys: ["quick-start", "business-user"]
 bootcamp_order: "1a"
-description: "Create an intelligent agent in Copilot that delivers contextual, multi-part answers using instructions and data from the Web."
-
+mcs_in_a_day_order: "1"
 ---
 
 Create an intelligent agent in Copilot that delivers contextual, multi-part answers using instructions and data from the Web.
@@ -27,30 +25,6 @@ Create an intelligent agent in Copilot that delivers contextual, multi-part answ
 
 ---
 
-## 📚 Table of Contents
-
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Create and configure your Copilot agent](#-use-case-1-create-and-configure-your-copilot-agent)
-- [Summary of Learnings](#-summary-of-learnings)
-- [Conclusions & Recommendations](#-conclusions--recommendations)
-
----
-
-## 🌐 Introduction
-
-In this lab, you'll create a Copilot agent in Microsoft 365 Copilot Chat with Copilot Studio Lite. This agent will be designed to assist users with questions about Copilot agents. The agent will act as a learning companion or teacher, grounded in official Microsoft documentation.
-
----
-
-## 🎓 Core Concepts Overview
-
-| Concept | Why it matters |
 |---------|----------------|
 | **Agent** | A customized digital assistant. Agents can answer questions, retrieve information, and guide users through tasks based on configured instructions, prompts, and knowledge sources. |
 | **Microsoft 365 Copilot** | An enterprise AI assistant integrated into Teams and Office applications. It uses organization data the employee has access to (emails, meetings, documents) and supports enhanced capabilities and agent extensibility ($30/user/month). |

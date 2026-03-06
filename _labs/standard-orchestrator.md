@@ -1,15 +1,12 @@
 ---
 layout: single
 title: "Create Your First Agent in Microsoft Copilot Studio"
+description: "Create and publish your first intelligent copilot using Microsoft Copilot Studio."
 order: 4
-nav_order: 4
 duration: 40
 difficulty: 100
-lab_type: local
 section: core_learning_path
 journeys: ["quick-start", "developer"]
-description: "Create and publish your first intelligent copilot using Microsoft Copilot Studio."
-
 ---
 
 Create and publish your first intelligent copilot using Microsoft Copilot Studio.
@@ -24,55 +21,6 @@ Create and publish your first intelligent copilot using Microsoft Copilot Studio
 
 ---
 
-## 📚 Table of Contents
-
-* [Why This Matters](#-why-this-matters)
-* [Introduction](#-introduction)
-* [Core Concepts Overview](#-core-concepts-overview)
-* [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-* [Prerequisites](#-prerequisites)
-* [Summary of Targets](#-summary-of-targets)
-* [Use Cases Covered](#-use-cases-covered)
-* [Instructions by Use Case](#️-instructions-by-use-case)
-
-  * [Use Case #1: Create an agent and topic](#-use-case-1-create-an-agent-and-topic)
-  * [Use Case #2: Publish your agent to the demo site](#-use-case-2-publish-your-agent-to-the-demo-site)
-
----
-
-## 🤔 Why This Matters
-
-**For new Copilot Studio makers:** You might feel unsure about where to start or how much time it will take to create something valuable.
-
-Think of building a bot like assembling a LEGO set:
-
-* **Without Copilot Studio**: Tedious setup, disconnected tools, high learning curve.
-* **With Copilot Studio**: Guided experience, intuitive UI, faster time to value.
-
-**Common challenges solved by this lab:**
-
-* "I don't know how to start a copilot."
-* "The interface is overwhelming."
-* "I want a quick win to show value."
-* "I’m not a developer—can I still build a bot?"
-
-**You’ll get value fast—just 40 minutes to build your first functional agent.**
-
----
-
-## 🌐 Introduction
-
-Microsoft Copilot Studio simplifies the creation of intelligent bots by providing a unified canvas for conversational logic, AI integration, and publishing.
-
-**Real-world example:** A customer support team wants to automate responses to order status inquiries. Instead of relying solely on human agents, they create a copilot that responds to common order-related questions 24/7, improving customer satisfaction and freeing up employee time.
-
-**This lab gives you the skills to build such a bot from scratch, test it, and publish it for feedback—all without writing code.**
-
----
-
-## 🎓 Core Concepts Overview
-
-| Concept                       | Why it matters                                                                         |
 | ----------------------------- | -------------------------------------------------------------------------------------- |
 | **Agent**                     | A container for all your topics and configurations—a digital assistant you can deploy. |
 | **Topic**                     | Defines how the agent responds to user input; it's the unit of conversation logic.     |

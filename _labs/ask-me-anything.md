@@ -1,16 +1,14 @@
 ---
 layout: single
 title: "Create an 'Ask me anything' agent for your employees"
+description: "Empower employees with answers that matter – Build an intelligent agent that connects to your knowledge and data."
 order: 13
-nav_order: 13
 duration: 40
 difficulty: 200
-lab_type: local
 section: intermediate_labs
 journeys: ["business-user", "developer"]
 bootcamp_order: "4"
-description: "Empower employees with answers that matter – Build an intelligent agent that connects to your knowledge and data."
-
+mcs_in_a_day_order: "4"
 ---
 
 Empower employees with answers that matter – Build an intelligent agent that connects to your knowledge and data.
@@ -25,57 +23,6 @@ Empower employees with answers that matter – Build an intelligent agent that c
 
 ---
 
-## 📚 Table of Contents
-
-- [Why This Matters](#-why-this-matters)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Create an 'Ask Me Anything' Agent and Add SharePoint Knowledge Source](#-use-case-1-create-an-ask-me-anything-agent-and-add-sharepoint-knowledge-source)
-  - [Use Case #2: Configure Suggested Prompts](#-use-case-2-configure-suggested-prompts)
-  - [Use Case #3: Deploy to Microsoft 365 Copilot](#-use-case-3-deploy-to-microsoft-365-copilot)
-  - [Use Case #4: Knowledge Prioritization Techniques](#-use-case-4-knowledge-prioritization-techniques)
-  - [Use Case #5: Create a child IT Support Agent](#-use-case-5-create-a-child-it-support-agent)
-  - [Use Case #6: Add Custom Knowledge](#-use-case-6-add-custom-knowledge)
-  - [Use Case #7: AI Summary and Review of Meeting Notes](#-use-case-7-ai-summary-and-review-of-meeting-notes)
-
----
-
-## 🤔 Why This Matters
-
-**Makers and IT professionals** - Tired of employees constantly asking the same questions about policies, benefits, or system status? Frustrated by scattered knowledge across multiple systems?
-
-Think of your organization's knowledge like a library:
-- **Without an intelligent agent**: Employees waste hours searching through SharePoint folders, submitting IT tickets for simple questions, and interrupting colleagues for information that should be readily available
-- **With an intelligent agent**: Employees get instant, accurate answers from a single conversational interface that automatically searches across all your knowledge sources with proper citations
-
-**Common challenges solved by this lab:**
-- "I can't find the leave policy for my country in our SharePoint site"
-- "What's the status of my ServiceNow incident?"
-- "Can someone help me structure these meeting notes properly?"
-- "I need information from multiple systems but don't know where to look"
-
-**This 40-minute investment will save your organization countless hours and improve employee satisfaction by providing instant access to knowledge.**
-
----
-
-## 🌐 Introduction
-
-In today's fast-paced business environment, employees need quick access to accurate information from multiple sources. Whether it's HR policies, IT incident status, or custom knowledge bases, information is often scattered across different systems, making it difficult for employees to find what they need efficiently.
-
-**Real-world example:** Imagine Sarah, a new employee in Germany, needs to understand her leave entitlements. Currently, she might spend 30 minutes navigating through SharePoint folders, trying different search terms, or even asking HR colleagues. With an intelligent "Ask me anything" agent, Sarah simply types "What's the leave policy for Germany?" and instantly receives the accurate policy document with proper citations, saving time and reducing frustration.
-
-This lab teaches you to build a comprehensive solution that transforms how employees interact with organizational knowledge, creating a single conversational interface that intelligently routes questions to the right knowledge sources and provides contextual, accurate responses.
-
----
-
-## 🎓 Core Concepts Overview
-
-| Concept | Why it matters |
 |---------|----------------|
 | **Knowledge Source Integration** | Connects your agent to multiple data sources (SharePoint, ServiceNow, custom APIs) so employees get comprehensive answers from a single interface, eliminating the need to search multiple systems. |
 | **Context-Aware Knowledge Prioritization** | Intelligently routes questions to the most relevant knowledge sources based on user context (location, role, etc.), ensuring employees get personalized and accurate information. |

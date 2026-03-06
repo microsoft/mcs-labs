@@ -1,16 +1,13 @@
 ---
 layout: single
 title: "Set yourself up for success & discover ALM best practices"
+description: "Build agents with confidence. Deploy with control. Master the lifecycle of your Microsoft Copilot Studio agents with best practices."
 order: 11
-nav_order: 11
 duration: 35
 difficulty: 200
-lab_type: local
 section: intermediate_labs
 journeys: ["business-user", "developer"]
 bootcamp_order: "2"
-description: "Build agents with confidence. Deploy with control. Master the lifecycle of your Microsoft Copilot Studio agents with best practices."
-
 ---
 
 Build agents with confidence. Deploy with control. Master the lifecycle of your Microsoft Copilot Studio agents with best practices.
@@ -25,45 +22,6 @@ Build agents with confidence. Deploy with control. Master the lifecycle of your 
 
 ---
 
-## 📚 Table of Contents
-
-- [Why Start with ALM?](#-why-start-with-alm)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Create a solution and custom publisher](#-use-case-1-create-a-solution-and-custom-publisher)
-  - [Use Case #2: Create environment variables and connection references](#-use-case-2-create-environment-variables-and-connection-references)
-  - [Use Case #3: Set up Git source control](#-use-case-3-set-up-git-source-control)
-
----
-
-## 🤔 Why Start with ALM?
-
-**New to Power Platform or Copilot Studio?** You might be eager to start building agents right away, but taking a few minutes to set up Application Lifecycle Management (ALM) first will save you hours of headaches later!
-
-Think of ALM as preparing your kitchen before cooking a complex meal:
-- **Without ALM**: Ingredients scattered across counters, no recipe plan, impromptu grocery trips mid-cooking
-- **With ALM**: Ingredients organized, recipe prepared, everything measured and ready
-
-**Common beginner challenges solved by ALM:**
-- "I built something great in dev, but can't easily move it to production"
-- "Someone changed my agent and now it's broken - who did it and how do I fix it?"
-- "I need to update my agent but I'm afraid of breaking what works"
-- "My team members keep overwriting each other's changes"
-
-**The few minutes ALM setup in this lab prevents all these problems!**
-
----
-
-## 🌐 Introduction
-
-Application Lifecycle Management (ALM) ensures that your solutions evolve safely and efficiently as they move from development to production. This lab will walk you through the foundational best practices of ALM in Microsoft Copilot Studio—from structuring your solution to managing configurations and source control.
-
-**Real-world example:** Imagine you've built a great customer service agent in your development environment. Without proper ALM:
 1. Moving to production means manually recreating all your work
 2. If something breaks, you can't easily roll back to a working version
 3. When multiple team members make changes, work gets overwritten

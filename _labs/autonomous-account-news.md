@@ -1,16 +1,13 @@
 ---
 layout: single
 title: "Build an Autonomous Account News Assistant Agent"
+description: "Empower sellers with timely insights – Build an autonomous Copilot Studio agent that periodically scans your Sales App for high-value opportunities, finds related news, and sends curated reports."
 order: 22
-nav_order: 22
 duration: 60
 difficulty: 200
-lab_type: local
 section: advanced_labs
 journeys: ["autonomous-ai", "developer"]
 bootcamp_order: "5b"
-description: "Empower sellers with timely insights – Build an autonomous Copilot Studio agent that periodically scans your Sales App for high-value opportunities, finds related news, and sends curated reports."
-
 ---
 
 Empower sellers with timely insights – Build an autonomous Copilot Studio agent that periodically scans your Sales App for high-value opportunities, finds related news, and sends curated reports.
@@ -25,51 +22,6 @@ Empower sellers with timely insights – Build an autonomous Copilot Studio agen
 
 ---
 
-## 📚 Table of Contents
-
-- [Why This Matters](#-why-this-matters)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-
----
-
-## 🤔 Why This Matters
-
-**Sales leaders and field sellers** – Want to know what your competitors or customers are up to before the next call? Tired of manually searching for news or relying on fragmented updates?
-
-Imagine an agent that works *autonomously* behind the scenes:
-
-- Scans your sales pipeline regularly
-- Finds relevant industry news
-- Matches articles to open opportunities
-- Sends tailored, branded reports by email
-
-**This lab helps you automate account intelligence** – no need for sellers to proactively interact with the agent. It runs independently, letting them delegate the task of tracking account-relevant news and focus on closing deals.
-
----
-
-## 🌐 Introduction
-
-Copilot Studio now supports two types of agents: **conversational agents**, which respond to user input, and **autonomous agents**, which act based on business events or schedules.
-
-In this lab, you'll build an autonomous agent that:
-
-- Scans a Sales App for high-value opportunities
-- Searches for related news across the web
-- Uses Copilot Studio's Deep Reasoning feature (powered by OpenAI o1) to determine relevance
-- Sends curated HTML summaries via Outlook email
-
-This proactive approach helps account teams stay ahead of client developments and tailor their engagement based on current events.
-
----
-
-## 🎓 Core Concepts Overview
-
-| Concept                             | Why it matters                                                                                                                                                                                                                      |
 | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Autonomous Agents**               | Run on a schedule or based on business events—no user prompt needed.                                                                                                                                                                |
 | **Tools**                           | Tools are simple or sophisticated connectors that the Copilot Studio orchestrator can invoke in response to user queries or business events.                                                                                        |

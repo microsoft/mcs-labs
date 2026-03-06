@@ -1,15 +1,12 @@
 ---
 layout: single
 title: "Measure success: Track conversation outcomes and user feedback on AI responses"
+description: "You can't improve what you can't measure: design your agent to track successful and unsuccessful outcomes while collecting user feedback on AI-generated responses."
 order: 31
-nav_order: 31
 duration: 60
 difficulty: 300
-lab_type: local
 section: specialized_labs
 journeys: ["developer"]
-description: "You can't improve what you can't measure: design your agent to track successful and unsuccessful outcomes while collecting user feedback on AI-generated responses."
-
 ---
 
 You can't improve what you can't measure: design your agent to track successful and unsuccessful outcomes while collecting user feedback on AI-generated responses.
@@ -24,52 +21,6 @@ You can't improve what you can't measure: design your agent to track successful 
 
 ---
 
-## 📚 Table of Contents
-
-- [Why This Matters](#-why-this-matters)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: The end of conversation topic](#-use-case-1-the-end-of-conversation-topic)
-  - [Use Case #2: Create a smooth and intuitive end-of-conversation experience](#-use-case-2-create-a-smooth-and-intuitive-end-of-conversation-experience)
-
----
-
-## 🤔 Why This Matters
-
-**Advanced Makers** - Many organizations struggle with understanding whether their AI agents are truly helping users or creating frustration through abandoned conversations.
-
-Think of running a retail store without knowing if customers leave satisfied or empty-handed:
-- **Without conversation tracking**: You see usage numbers but can't identify why users abandon conversations or which responses cause dissatisfaction
-- **With conversation tracking**: You gain actionable insights into user satisfaction, identify problematic knowledge sources, and continuously improve response quality
-
-**Common challenges solved by this lab:**
-- "Our analytics show high usage but we don't know if users are actually getting help"
-- "Users seem to abandon conversations but we don't understand why"
-- "We can't identify which knowledge sources need improvement"
-- "There's no way to capture user feedback on AI-generated responses"
-
-**The 60 minutes you invest in this lab will transform your agent from a black box into a data-driven tool for continuous improvement.**
-
----
-
-## 🌐 Introduction
-
-In today's AI-driven customer service landscape, simply having an agent that responds isn't enough. Organizations need to understand whether their AI assistants are genuinely solving user problems or creating barriers to success.
-
-**Real-world example:** A company deployed an AI assistant on their website to handle product inquiries. Initially, they celebrated high engagement metrics—thousands of conversations daily. However, customer satisfaction surveys revealed declining scores, and support tickets actually increased. The problem? Their AI was providing responses that looked helpful but weren't actually resolving user queries. Without proper conversation outcome tracking and feedback collection, they were flying blind.
-
-After implementing the strategies in this lab, they discovered that 40% of conversations were being abandoned after the first AI response, and users were providing consistent feedback about specific knowledge gaps. This insight allowed them to refine their content strategy, resulting in a 65% improvement in conversation resolution rates and significantly higher customer satisfaction scores.
-
----
-
-## 🎓 Core Concepts Overview
-
-| Concept | Why it matters |
 |---------|----------------|
 | **End of Conversation Topic** | Provides structured tracking of conversation outcomes (resolved, abandoned, escalated) enabling accurate measurement of agent effectiveness and user satisfaction patterns. |
 | **Conversation Resolution Tracking** | Distinguishes between implicit and explicit resolution, allowing you to understand not just if users got answers, but whether they were satisfied with those answers. |

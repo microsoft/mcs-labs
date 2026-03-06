@@ -8,7 +8,14 @@ logo: "/favicon.svg"
 
 # Theme
 theme: minimal-mistakes-jekyll
-minimal_mistakes_skin: "mint"
+minimal_mistakes_skin: "meridian"
+
+# Search
+search: true
+search_full_content: true
+
+# Breadcrumbs
+breadcrumbs: true
 
 # Build settings
 markdown: kramdown
@@ -69,6 +76,8 @@ defaults:
       toc_sticky: true
       toc_label: "On this page"
       toc_icon: "bookmark"
+      read_time: true
+      share: false
   - scope:
       path: ""
       type: "pages"

@@ -21,6 +21,8 @@ labs:
         url: /labs/mbr-prep-sharepoint-agent/
       - title: "First Agent in Copilot Studio"
         url: /labs/standard-orchestrator/
+      - title: "Contract Alerts (Azure AI)"
+        url: /labs/contract-alerts-azure-ai/
   - title: "Intermediate Labs"
     children:
       - title: "Set Up for Success & ALM"
@@ -29,6 +31,8 @@ labs:
         url: /labs/agent-builder-sharepoint/
       - title: "Ask Me Anything Agent"
         url: /labs/ask-me-anything/
+      - title: "Bring Your Own Model"
+        url: /labs/mcs-byom/
   - title: "Advanced Labs"
     children:
       - title: "Autonomous CUA Agent"
@@ -37,6 +41,8 @@ labs:
         url: /labs/autonomous-account-news/
       - title: "Autonomous Support Agent"
         url: /labs/autonomous-support-agent/
+      - title: "Data Fabric Agent"
+        url: /labs/data-fabric-agent/
   - title: "Specialized Labs"
     children:
       - title: "Measure Success"
@@ -45,8 +51,12 @@ labs:
         url: /labs/pipelines-and-source-control/
       - title: "Copilot Studio Kit"
         url: /labs/copilot-studio-kit/
-      - title: "Qualify Leads with MCP"
+      - title: "MCP Qualify Lead"
         url: /labs/mcp-qualify-lead/
+      - title: "Guild's Custom MCP Server"
+        url: /labs/guildhall-custom-mcp/
+      - title: "Dataverse MCP Connector"
+        url: /labs/dataverse-mcp-connector/
   - title: "Optional Labs"
     children:
       - title: "Ask Me Anything (30 min)"
@@ -55,5 +65,3 @@ labs:
     children:
       - title: "MCP & Copilot Studio"
         url: /labs/mcs-mcp-external/
-      - title: "Guild's Custom MCP Server"
-        url: /labs/guildhall-custom-mcp/

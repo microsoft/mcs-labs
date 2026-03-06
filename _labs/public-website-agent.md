@@ -1,16 +1,14 @@
 ---
 layout: single
 title: "Give your public website chatbot a brain and make it an agent"
+description: "Create an intelligent agent that delivers contextual, multi-part answers using your content and real-time data."
 order: 2
-nav_order: 2
 duration: 25
 difficulty: 100
-lab_type: local
 section: core_learning_path
 journeys: ["quick-start", "business-user"]
 bootcamp_order: "3a"
-description: "Create an intelligent agent that delivers contextual, multi-part answers using your content and real-time data."
-
+mcs_in_a_day_order: "2"
 ---
 
 Create an intelligent agent that delivers contextual, multi-part answers using your content and real-time data.
@@ -25,46 +23,6 @@ Create an intelligent agent that delivers contextual, multi-part answers using y
 
 ---
 
-## 📚 Table of Contents
-
-- [Why This Matters](#-why-this-matters)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Create a new agent and add knowledge](#-use-case-1-create-a-new-agent-and-add-knowledge)
-  - [Use Case #2: Disable general knowledge and add connectors](#-use-case-2-disable-general-knowledge-and-add-connectors)
-  - [Use Case #3: Fine-tune your AI assistant for smoother conversations](#-use-case-3-fine-tune-your-ai-assistant-for-smoother-conversations)
-  - [Use Case #4: Make your agent public and publish it to the demo website](#-use-case-4-make-your-agent-public-and-publish-it-to-the-demo-website)
-
----
-
-## 🤔 Why This Matters
-
-**New to building intelligent agents?** You might think creating a sophisticated AI assistant requires complex coding or expensive tools, but Copilot Studio makes it accessible to anyone!
-
-Think of building an agent like hiring a knowledgeable assistant:
-- **Without an intelligent agent**: Users struggle with static FAQs, can't get contextual answers, and frequently contact support for information that should be self-service
-- **With an intelligent agent**: Users get instant, accurate answers that combine your content with real-time data, reducing support tickets and improving satisfaction
-
-**Common challenges solved by this lab:**
-- "Our website visitors can't find the information they need quickly"
-- "We get the same questions repeatedly that could be answered with existing content"
-- "Our chatbot gives generic responses that don't reflect our brand or knowledge"
-- "Users need answers that combine multiple sources of information"
-
-**The 25 minutes you invest in this lab will transform how users interact with your content!**
-
----
-
-## 🌐 Introduction
-
-Modern users expect intelligent, contextual responses that go beyond simple keyword matching. This lab will guide you through creating Nova AI, an intelligent agent that can reason across multiple knowledge sources and perform real-time actions to deliver comprehensive, accurate answers.
-
-**Real-world example:** Imagine a user asks: "Who founded your company, what's their background, and what's the weather like at their alma mater today?" A traditional chatbot would fail, but Nova AI can:
 1. Search your knowledge sources for company history
 2. Find biographical information about the founder
 3. Look up their educational background

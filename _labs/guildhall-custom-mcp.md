@@ -1,15 +1,13 @@
 ---
 layout: single
 title: "⚔️ Quest: Build and Connect Your Guild's Custom MCP Server"
-order: 999
-nav_order: 999
-duration: 30
-difficulty: 100
-lab_type: local
-section: specialized_labs
-journeys: ["quick-start", "business-user", "developer"]
 description: "*Greetings, brave developer! The Adventurers' Guild seeks your expertise in establishing a mystical connection between the ancient Guild Hall and the modern realm of Copilot Studio. Your quest: forge a custom Model Context Protocol (MCP) server and bind it to an intelligent agent that can tap into the Guild's treasures.*"
-
+order: 999
+duration: 65
+difficulty: 200
+section: specialized_labs
+journeys: ["business-user", "developer"]
+azure_ai_workshop_order: "4"
 ---
 
 *Greetings, brave developer! The Adventurers' Guild seeks your expertise in establishing a mystical connection between the ancient Guild Hall and the modern realm of Copilot Studio. Your quest: forge a custom Model Context Protocol (MCP) server and bind it to an intelligent agent that can tap into the Guild's treasures.*
@@ -18,50 +16,17 @@ description: "*Greetings, brave developer! The Adventurers' Guild seeks your exp
 
 ## 🧭 Quest Details
 
-| Level | Persona        | Duration       | Purpose                                                                                                                                                                                                                                    |
-| ----- | -------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 200   | Pro Developer  | 60-70 minutes  | After completing this quest, you will have deployed a custom MCP server locally and connected it to a Copilot Studio agent that can query quests, hire parties, and manage the Guild treasury on your behalf. |
+| Level | Persona       | Duration      | Purpose                                                                                                                                                                                                       |
+| ----- | ------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 200   | Pro Developer | 60-70 minutes | After completing this quest, you will have deployed a custom MCP server locally and connected it to a Copilot Studio agent that can query quests, hire parties, and manage the Guild treasury on your behalf. |
 
 ---
 
-## 📜 Quest Log (Table of Contents)
-
-- [Why This Quest Matters](#-why-this-quest-matters)
-- [Core Concepts You'll Master](#-core-concepts-youll-master)
-- [Ancient Scrolls (Documentation Links)](#-ancient-scrolls-documentation-links)
-- [Prerequisites (Your Adventuring Gear)](#-prerequisites-your-adventuring-gear)
-- [Use Cases](#-use-cases)
-- [The Adventure Begins](#️-the-adventure-begins)
-
----
-
-## 🤔 Why This Quest Matters
-
-**Fellow Developers** – Tired of manually tracking quests, parties, and gold reserves? Wish you had an intelligent assistant that understood the Guild's unique operations?
-
-Imagine an agent that can:
-
-- Browse available quests filtered by rank
-- Find the perfect adventuring party for any job
-- Check treasury balance with proper authentication
-- Hire parties for quests while validating funds and compatibility
-
-**This quest teaches you advanced techniques for MCP servers in Copilot Studio:**
-
-- **Connecting Copilot Studio to custom MCP servers** – Using the MCP onboarding wizard to integrate domain-specific tools
-- **Passing context via custom headers** – Dynamically controlling server behavior through headers like `user-level`
-- **Implementing OAuth 2.0 authentication** – Securing MCP servers with Microsoft Entra ID, including app registration configuration
-
----
-
-## 🎓 Core Concepts You'll Master
-
-| Concept                                | What You'll Learn                                                                                                                                                 |
-| -------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Connecting Custom MCP Servers**      | Deploying a local MCP server and exposing it via Dev Tunnel for integration with Copilot Studio                                                                  |
-| **MCP Onboarding Wizard**              | Using Copilot Studio's MCP connector wizard to register custom servers and expose their tools to agents                                                          |
-| **Custom Header Context**              | **Advanced technique:** Passing context via custom headers (`user-level`) to dynamically control server behavior and content filtering                          |
-| **OAuth Authentication with MCP**      | **Advanced technique:** Securing MCP servers with OAuth 2.0, including Microsoft Entra ID app registration and bearer token validation                          |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| **Connecting Custom MCP Servers** | Deploying a local MCP server and exposing it via Dev Tunnel for integration with Copilot Studio                                        |
+| **MCP Onboarding Wizard**         | Using Copilot Studio's MCP connector wizard to register custom servers and expose their tools to agents                                |
+| **Custom Header Context**         | **Advanced technique:** Passing context via custom headers (`user-level`) to dynamically control server behavior and content filtering |
+| **OAuth Authentication with MCP** | **Advanced technique:** Securing MCP servers with OAuth 2.0, including Microsoft Entra ID app registration and bearer token validation |
 
 ---
 
@@ -91,12 +56,12 @@ Before embarking on this quest, ensure you have:
 
 In this quest, you will complete four use cases:
 
-| Use Case | Description                                                           | Estimated Time |
-| -------- | --------------------------------------------------------------------- | -------------- |
-| 1        | [Deploy Local MCP Server](#-use-case-1-deploy-local-mcp-server)      | 10 minutes     |
+| Use Case | Description                                                                               | Estimated Time |
+| -------- | ----------------------------------------------------------------------------------------- | -------------- |
+| 1        | [Deploy Local MCP Server](#-use-case-1-deploy-local-mcp-server)                           | 10 minutes     |
 | 2        | [Connect Agent to MCP Server](#-use-case-2-create-an-agent-and-connect-to-the-mcp-server) | 20 minutes     |
-| 3        | [Add Custom Headers](#️-use-case-3-add-custom-headers-advanced)       | 15 minutes     |
-| 4        | [Configure OAuth Authentication](#-use-case-4-configure-oauth-authentication-advanced) | 20 minutes     |
+| 3        | [Add Custom Headers](#️-use-case-3-add-custom-headers-advanced)                            | 15 minutes     |
+| 4        | [Configure OAuth Authentication](#-use-case-4-configure-oauth-authentication-advanced)    | 20 minutes     |
 
 ---
 
@@ -178,6 +143,10 @@ In this quest, you will complete four use cases:
    ⚡ Server ready to accept connections!
    ```
 
+   > [!NOTE]
+   > **Alternative: Lab-Hosted MCP Server**  
+   > If you're unable to deploy the MCP server locally, a pre-hosted version is available. Check the **Lab Resources** page for the endpoint URL under "Build and Connect Your Guild's Custom MCP Server."
+
 ---
 
 #### 🌉 Step 4: Create Dev Tunnel
@@ -225,12 +194,24 @@ In this quest, you will complete four use cases:
 
 12. Test the tunnel endpoint:
 
+    **Mac/Linux:**
     ```bash
     curl https://your-tunnel-url.devtunnels.ms/mcp \
       -H "Content-Type: application/json" \
       -H "Accept: application/json, text/event-stream" \
       -d '{"jsonrpc":"2.0","id":"1","method":"tools/list"}'
     ```
+
+    **Windows (PowerShell):**
+    ```powershell
+    curl https://your-tunnel-url.devtunnels.ms/mcp `
+      -H "Content-Type: application/json" `
+      -H "Accept: application/json, text/event-stream" `
+      -d '{"jsonrpc":"2.0","id":"1","method":"tools/list"}'
+    ```
+
+    > [!NOTE]
+    > **PowerShell uses backticks (`)** for line continuation instead of backslashes (`\`).
 
 13. Expected: JSON response listing available tools like `list_quests`, `parties`, `chest`, and `hire_party`.
 
@@ -246,7 +227,7 @@ In this quest, you will complete four use cases:
 
 ---
 
-### 🏆 Use Case 1 Complete!
+### 🏆 Use Case 1 Complete
 
 Your MCP server is running locally and accessible via Dev Tunnel. ✅
 
@@ -273,10 +254,11 @@ Your MCP server is running locally and accessible via Dev Tunnel. ✅
 5. Fill in the agent details:
 
    - **Name:** `Guildhall MCP Agent`
-   
+
    - **Description:** `Onwards to adventure!`
-   
-   - **Instructions:** 
+
+   - **Instructions:**
+
      ```
      You are a guildhall assistant, respond in character, use dnd related terminology and emojis. Use needlessly elaborate language.
 
@@ -284,7 +266,7 @@ Your MCP server is running locally and accessible via Dev Tunnel. ✅
      ```
 
    > [!TIP]
-   > **🎭 Pro tip:** Using these instructions ensures your agent stays in character and provides the most whimsical workshop experience! 
+   > **🎭 Pro tip:** Using these instructions ensures your agent stays in character and provides the most whimsical workshop experience!
 
 6. Click **Create** (top right).
 
@@ -299,7 +281,8 @@ Your MCP server is running locally and accessible via Dev Tunnel. ✅
 9. In the MCP onboarding wizard, enter:
 
     - **Server name:** `Adventurers Guild MCP`
-    - **Server description:** 
+    - **Server description:**
+
       ```
       A D&D-themed MCP server that manages guild operations including quests, 
       adventuring parties, and treasury. Supports rank-based access control 
@@ -350,7 +333,7 @@ Your MCP server is running locally and accessible via Dev Tunnel. ✅
 
     > [!NOTE]
     > **For this lab:** Using "Maker-provided credentials" simplifies testing by using the connection you just created. This avoids requiring users to authenticate during conversations.
-    > 
+    >
     > **For production:** Consider using "End user credentials" for personalized, user-specific authentication. Learn more: [Configure End-User Authentication](https://learn.microsoft.com/en-us/microsoft-copilot-studio/configure-enduser-authentication)
 
 20. Click **Save** (top right).
@@ -367,7 +350,7 @@ Your MCP server is running locally and accessible via Dev Tunnel. ✅
 
     **Model Selection:**
     - Under **Select your agent's model**, choose **GPT-4.1 (preview)** from the dropdown
-    
+
     > [!NOTE]
     > GPT-4.1 provides enhanced reasoning capabilities for complex guild operations and more creative responses to your theatrical queries!
 
@@ -377,7 +360,7 @@ Your MCP server is running locally and accessible via Dev Tunnel. ✅
 
     > [!NOTE]
     > **For this lab:** Setting content moderation to "Low" prevents the RPG-themed content (glorious battles, valorous quests) from being flagged. This ensures the Guild's colorful language flows freely!
-    > 
+    >
     > **For production:** Set content moderation levels based on your agent's purpose and audience. Higher moderation reduces risk of harmful content but may limit creative responses. Learn more: [Content Moderation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/responsible-ai-overview)
 
 24. Click **Save** (bottom of page).
@@ -415,7 +398,7 @@ Your MCP server is running locally and accessible via Dev Tunnel. ✅
     ```
 
 32. Expected: Agent attempts the hire_party tool but encounters an error:
-    
+
     ```
     💰 Alas! The guild treasury stands empty at 0 gold. 
     The Iron Vanguard demands 35 gold for their services. 
@@ -431,18 +414,21 @@ Your MCP server is running locally and accessible via Dev Tunnel. ✅
 When you first connected to the Guild, the mystical powers governing the MCP server assigned you the humble rank of **Novice** – the entry-level position for all new guild members. This rank-based system controls what you can see and do:
 
 **Why only 2 quests?**
+
 - The MCP server filters quests based on your rank
 - Novice adventurers only see Easy and Medium difficulty quests
 - Higher-ranked quests (Hard, Deadly, Legendary) remain hidden from inexperienced eyes
 - This prevents sending novices on deadly dragon-slaying missions!
 
 **Why only basic parties?**
+
 - Available parties are also filtered by rank
 - Novice members can only view parties with average levels 1-3
 - Elite high-level parties won't accept contracts from unproven guild members
 - As you climb the ranks, more powerful parties become available
 
 **Why is the treasury locked?**
+
 - The treasury requires **authentication** to access
 - Without proper credentials, the chest remains sealed at 0 gold
 - This protects the guild's finances from unauthorized access
@@ -456,11 +442,12 @@ In **Use Case 4**, you'll configure OAuth authentication to gain access to the t
 
 ---
 
-### 🏆 Use Case 2 Complete!
+### 🏆 Use Case 2 Complete
 
 Your Copilot Studio agent is connected and successfully invoking MCP server tools! ✅
 
 **Current Status:**
+
 - ✅ MCP server deployed and accessible
 - ✅ Agent connected and calling tools
 - ⚠️ Rank: Novice (limited quest/party access)
@@ -483,20 +470,22 @@ Your Copilot Studio agent is connected and successfully invoking MCP server tool
 Before we dive in, let's understand why we need custom headers for our Guild:
 
 **The Problem:**
+
 - Your guild rank (Novice, Adept, Veteran, Mythic) determines what quests and parties you can see
 - This is **server-level context** that applies to ALL tool calls
 - It's NOT a tool input that the AI should decide—it's part of your identity as a guild member
 
 **Custom Headers vs Tool Inputs:**
 
-| Custom Headers | Tool Inputs |
-|----------------|-------------|
-| Set once at connection level | Different for each tool call |
-| Verified server-side | AI orchestrator decides values |
-| Apply to all tools in session | Specific to individual tools |
+| Custom Headers                              | Tool Inputs                            |
+| ------------------------------------------- | -------------------------------------- |
+| Set once at connection level                | Different for each tool call           |
+| Verified server-side                        | AI orchestrator decides values         |
+| Apply to all tools in session               | Specific to individual tools           |
 | Examples: user roles, permissions, API keys | Examples: search queries, IDs, filters |
 
 In our case, `user-level` is a custom header because:
+
 - Your rank shouldn't change mid-conversation
 - The server needs to know your rank for ALL operations (quests, parties, hiring)
 - The AI shouldn't be able to arbitrarily change your rank
@@ -623,7 +612,7 @@ In our case, `user-level` is a custom header because:
 
 ---
 
-### 🗝️ Optional: Venture Deeper into the Dungeons of Server-Side Logic!
+### 🗝️ Optional: Venture Deeper into the Dungeons of Server-Side Logic
 
 **Curious how the custom header magic works behind the scenes?** Here's the flow:
 
@@ -632,6 +621,7 @@ In our case, `user-level` is a custom header because:
 3. **Copilot Studio adds header** → `user-level: Mythic` (from connector input)
 4. **MCP server receives request** with the `user-level` header
 5. **Server extracts context:**
+
    ```typescript
    function deriveCtxFromHeaders(headers: Record<string, string>): Context {
      const rawLevel = headers["user-level"] || "Novice";
@@ -639,13 +629,16 @@ In our case, `user-level` is a custom header because:
      return { level };
    }
    ```
+
 6. **Server filters quests** using `visibleQuests()`:
+
    ```typescript
    function visibleQuests(level: Level) {
      const allowed = new Set(QUEST_VIS_BY_LEVEL[level]);
      return QUESTS.filter(q => allowed.has(q.danger));
    }
    ```
+
 7. **Only rank-appropriate content** is returned to the AI
 
 The server code is in `samples/adventurers-guild-mcp/src/index.ts` if you want to explore further! 🏰
@@ -673,29 +666,32 @@ The server code is in `samples/adventurers-guild-mcp/src/index.ts` if you want t
 
     > [!TIP]
     > **🎨 Advanced: Dynamic Rank Assignment**
-    > 
+    >
     > Instead of hardcoding `Mythic`, you can set the `user-level` dynamically using system variables or PowerFX formulas:
-    > 
+    >
     > **Example - Grant Mythic rank to the Grand Archmage:**
+>
     > ```powerfx
     > If(System.User.DisplayName="Eldric Stormweaver, Grand Archmage of the Eternal Flame","Mythic")
     > ```
-    > 
+    >
     > This allows different users to automatically receive appropriate guild ranks based on their identity!
 
 ---
 
-### 🏆 Use Case 3 Complete!
+### 🏆 Use Case 3 Complete
 
 You've mastered passing context via custom headers! ✅
 
 **What you accomplished:**
+
 - ✅ Edited OpenAPI specification to define custom header
 - ✅ Refreshed connector in Copilot Studio to recognize new header
 - ✅ Configured header value to unlock Mythic-level content
 - ✅ Tested rank-based filtering with different header values
 
 **Current Status:**
+
 - ✅ MCP server deployed and accessible
 - ✅ Agent connected and calling tools
 - ✅ Rank: Mythic (all quests and parties visible!)
@@ -722,11 +718,11 @@ You've mastered passing context via custom headers! ✅
 3. Fill in the registration details:
 
    - **Name:** `[Your Name] the [Epic Title]'s Guildhall Connector`
-     
+
      *(Examples: "Shmendrik the Wizard's Guildhall Connector", "Elara Moonwhisper the Arcane's Guildhall Connector")*
-   
+
    - **Supported account types:** Select **Accounts in this organizational directory only**
-   
+
    - **Redirect URI:** Leave blank for now
 
 4. Click **Register**.
@@ -804,19 +800,19 @@ You've mastered passing context via custom headers! ✅
 26. Fill in the OAuth configuration:
 
     **OAuth 2.0 settings:**
-    
+
     - **Client ID:** *(Paste your connector app's Application (client) ID from Step 1)*
-    
+
     - **Client secret:** *(Paste the secret value from Step 3)*
-    
+
     - **Tenant ID:** *(Paste your Directory (tenant) ID from Step 1)*
-    
+
     - **Resource URL:** `api://f0ec2345-de9b-494b-82dd-7b44e9091054`
-      
+
       *(This is the Application ID URI of the Guildhall MCP Server app registration)*
-    
+
     - **Scope:** `Chest.Open`
-      
+
       *(This requests the specific permission to open the treasury)*
 
 27. Click **Update connector** (top right).
@@ -958,7 +954,32 @@ The guild treasury (`chest` tool) is protected by OAuth 2.0 authentication. To a
 
 **The Authentication Flow:**
 
-![OAuth Authentication Flow](images/auth-flow.png)
+```mermaid
+sequenceDiagram
+    autonumber
+    participant User
+    participant Agent as Copilot Studio Agent
+    participant Connector as MCP Connector
+    participant EntraID as Microsoft Entra ID
+    participant MCP as MCP Server
+
+    User->>Agent: How much gold in treasury?
+    Agent->>Connector: Invoke chest tool
+    Note over Connector: Check for cached token<br/>(None found - first request)
+    Connector->>EntraID: Request token with:<br/>• client_id (Connector App ID)<br/>• client_secret<br/>• scope: Chest.Open<br/>• resource: api://[MCP Server App ID]
+    Note over EntraID: 1. Validate client credentials<br/>2. Check permissions (Chest.Open)<br/>3. Generate access token
+    EntraID->>Connector: Return access token with:<br/>• aud: api://[MCP Server App ID]<br/>• scp: Chest.Open<br/>• exp: expiration timestamp
+    Note over Connector: Cache token for future requests
+    Connector->>MCP: POST /mcp<br/>Authorization: Bearer {token}
+    Note over MCP: Validate token:<br/>✓ Verify JWT signature<br/>✓ Check audience matches server<br/>✓ Check scope contains Chest.Open<br/>✓ Check token not expired
+    alt Valid Token
+        MCP->>Agent: Success<br/>{gold: 1000}
+        Agent->>User: The coffers hold<br/>1,000 gold!
+    else Invalid Token
+        MCP->>Agent: 401 Unauthorized
+        Agent->>User: The treasury<br/>remains sealed
+    end
+```
 
 **Why This Architecture?**
 
@@ -969,6 +990,7 @@ We employ a dual app registration pattern for maximum control:
 - **Connector App Registration** - Each connector gets its own identity. This enables Guild administrators to control exactly which connectors (and thus which agents) can invoke the mystical MCP server. Permissions are granted per-connector, allowing fine-grained access control.
 
 This separation of concerns means:
+
 - ✨ **Centralized security** - The MCP server doesn't manage credentials, Azure AD does
 - 🔐 **Granular permissions** - Grant `Chest.Open` to some connectors, deny to others
 - 📜 **Audit trail** - Track which connector (client) accessed which resources
@@ -976,7 +998,7 @@ This separation of concerns means:
 
 ---
 
-## 🎖️ Quest Complete!
+## 🎖️ Quest Complete
 
 ### 🏆 Hark! The Bells of Victory Ring Throughout the Guild Hall! 🏆
 
@@ -989,7 +1011,7 @@ You, O Master Developer, have achieved what few dare attempt! Through cunning, s
 ✅ **Mastered the arcane arts of custom headers**, wielding rank-based filtering with the precision of a master enchanter  
 ✅ **Unlocked the forbidden vaults** through OAuth 2.0 authentication, proving yourself worthy of the Guild's deepest secrets  
 
-### 🎭 Your Legend Grows!
+### 🎭 Your Legend Grows
 
 The Guild Master himself, Aldric Ironquill, raises his goblet in your honor! The tavern erupts in cheers! Bards compose ballads of your technical prowess! Your name shall be inscribed in the **Book of Distinguished Developers**, forevermore!
 

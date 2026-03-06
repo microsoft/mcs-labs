@@ -1,16 +1,14 @@
 ---
 layout: single
 title: "Autonomous Support Agent - Unlock new levels of productivity with AI automation"
+description: "Let AI do the work and automate processes more easily than ever with autonomous agents that handle user support inquiries automatically."
 order: 23
-nav_order: 23
 duration: 20
 difficulty: 200
-lab_type: local
 section: advanced_labs
 journeys: ["autonomous-ai", "developer"]
 bootcamp_order: "5a"
-description: "Let AI do the work and automate processes more easily than ever with autonomous agents that handle user support inquiries automatically."
-
+mcs_in_a_day_order: "5"
 ---
 
 Let AI do the work and automate processes more easily than ever with autonomous agents that handle user support inquiries automatically.
@@ -25,52 +23,6 @@ Let AI do the work and automate processes more easily than ever with autonomous 
 
 ---
 
-## 📚 Table of Contents
-
-- [Why This Matters](#-why-this-matters)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Create and Configure an Autonomous Agent](#-use-case-1-create-and-configure-an-autonomous-agent)
-  - [Use Case #2: Add Knowledge and Tools Integration](#-use-case-2-add-knowledge-and-tools)
-
----
-
-## 🤔 Why This Matters
-
-**IT Support Teams and Makers** - Tired of manually responding to repetitive support emails and constantly checking ticket statuses?
-
-Think of a traditional help desk:
-- **Without autonomous agents**: Support staff manually reads every email, searches knowledge bases, checks ticket systems, and crafts individual responses - consuming hours of valuable time
-- **With autonomous agents**: AI automatically processes incoming emails, searches your knowledge base, retrieves ticket information, and sends comprehensive responses in seconds
-
-**Common challenges solved by this lab:**
-- "Our support team spends too much time on routine email inquiries"
-- "Users have to wait hours for simple password reset instructions"
-- "We can't scale our support to handle increasing ticket volumes"
-- "Checking ticket statuses across systems is time-consuming and error-prone"
-
-**In just 20 minutes, you'll transform how your organization handles support requests, freeing your team to focus on complex issues that truly need human expertise.**
-
----
-
-## 🌐 Introduction
-
-Customer support automation has become essential for organizations looking to scale their operations while maintaining high service quality. Manual email responses and ticket lookups create bottlenecks that frustrate both support staff and end users.
-
-**Real-world example:** A mid-sized company receives 200+ support emails daily asking about password resets, ticket statuses, and common troubleshooting steps. Without automation, their 3-person support team spends 60% of their time on these routine inquiries, leaving complex issues unaddressed and creating long response times.
-
-After implementing autonomous agents, the same company now handles 80% of routine inquiries automatically, with instant responses that include personalized ticket updates and relevant knowledge base articles. The support team can focus on strategic initiatives and complex problem-solving, while user satisfaction increases due to immediate, accurate responses.
-
----
-
-## 🎓 Core Concepts Overview
-
-| Concept | Why it matters |
 |---------|----------------|
 | **Autonomous Agents** | Enable 24/7 automated responses to user inquiries, reducing manual workload and improving response times while maintaining consistency in support quality |
 | **Triggers** | Events, as simple as "Email received", that trigger autonomous agents to then automatically detect and process the content and context initially provided |

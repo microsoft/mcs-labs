@@ -1,15 +1,12 @@
 ---
 layout: single
 title: "Create an 'Ask me anything' agent for your employees"
+description: "Empower employees with answers that matter – Build an intelligent agent that connects to your knowledge and data."
 order: 41
-nav_order: 41
 duration: 30
 difficulty: 200
-lab_type: local
 section: optional_labs
 journeys: ["business-user"]
-description: "Empower employees with answers that matter – Build an intelligent agent that connects to your knowledge and data."
-
 ---
 
 Empower employees with answers that matter – Build an intelligent agent that connects to your knowledge and data.
@@ -24,74 +21,6 @@ Empower employees with answers that matter – Build an intelligent agent that c
 
 ---
 
-## 📚 Table of Contents
-
-- [Why This Matters](#-why-this-matters)
-- [Why Start with ALM?](#-why-start-with-alm)
-- [ALM Introduction](#-alm-introduction)
-- [Core ALM Concepts Overview](#-core-alm-concepts-overview)
-- [Lab Introduction](#-lab-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Create a solution and custom publisher](#-use-case-1-create-a-solution-and-custom-publisher)
-  - [Use Case #2: Create connection references](#-use-case-2-create-connection-references)
-  - [Use Case #3: Create an 'Ask Me Anything' Agent with SharePoint Knowledge](#-use-case-3-create-an-ask-me-anything-agent-and-add-sharepoint-knowledge-source)
-  - [Use Case #4: Configure Suggested Prompts](#-use-case-4-configure-suggested-prompts)
-  - [Use Case #5: Deploy to Microsoft 365 Copilot](#-use-case-5-deploy-to-microsoft-365-copilot)
-  - [Use Case #6: Create a child IT Support Agent](#-use-case-6-create-a-child-it-support-agent)
-
----
-
-## 🤔 Why This Matters
-
-**Makers and IT professionals** - Tired of employees constantly asking the same questions about policies, benefits, or system status? Frustrated by scattered knowledge across multiple systems?
-
-Think of your organization's knowledge like a library:
-
-- **Without an intelligent agent**: Employees waste hours searching through SharePoint folders, submitting IT tickets for simple questions, and interrupting colleagues for information that should be readily available
-- **With an intelligent agent**: Employees get instant, accurate answers from a single conversational interface that automatically searches across all your knowledge sources with proper citations
-
-**Common challenges solved by this lab:**
-
-- "I can't find the leave policy for my country in our SharePoint site"
-- "What's the status of my ServiceNow incident?"
-- "I need information from multiple systems but don't know where to look"
-
-**This 30-minute investment will save your organization countless hours and improve employee satisfaction by providing instant access to knowledge.**
-
----
-
-## 🤔 Why Start with ALM?
-
-**New to Power Platform or Copilot Studio?** You might be eager to start building agents right away, but taking a few minutes to set up Application Lifecycle Management (ALM) first will save you hours of headaches later!
-
-Think of ALM as preparing your kitchen before cooking a complex meal:
-
-- **Without ALM**: Ingredients scattered across counters, no recipe plan, impromptu grocery trips mid-cooking
-- **With ALM**: Ingredients organized, recipe prepared, everything measured and ready
-
-**Common beginner challenges solved by ALM:**
-
-- "I built something great in dev, but can't easily move it to production"
-- "Someone changed my agent and now it's broken - who did it and how do I fix it?"
-- "I need to update my agent but I'm afraid of breaking what works"
-- "My team members keep overwriting each other's changes"
-
-**The few minutes ALM setup in this lab prevents all these problems!**
-
----
-
-## 🌐 ALM Introduction
-
-Application Lifecycle Management (ALM) ensures that your solutions evolve safely and efficiently as they move from development to production. This lab will walk you through the foundational best practices of ALM in Microsoft Copilot Studio—from structuring your solution to managing configurations and source control.
-
-**Real-world example:** Imagine you've built a great customer service agent in your development environment. Without proper ALM:
-
-1. Moving to production means manually recreating all your work
 2. If something breaks, you can't easily roll back to a working version
 3. When multiple team members make changes, work gets overwritten
 

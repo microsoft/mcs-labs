@@ -1,16 +1,13 @@
 ---
 layout: single
 title: "Deploy with confidence: Power Platform pipelines & ALM"
+description: "Master the deployment of your Microsoft Copilot Studio agents across environments using Power Platform pipelines. Learn the complete lifecycle from development to production."
 order: 32
-nav_order: 32
 duration: 30
 difficulty: 300
-lab_type: local
 section: specialized_labs
 journeys: ["developer"]
 bootcamp_order: "6"
-description: "Master the deployment of your Microsoft Copilot Studio agents across environments using Power Platform pipelines. Learn the complete lifecycle from development to production."
-
 ---
 
 Master the deployment of your Microsoft Copilot Studio agents across environments using Power Platform pipelines. Learn the complete lifecycle from development to production.
@@ -25,45 +22,6 @@ Master the deployment of your Microsoft Copilot Studio agents across environment
 
 ---
 
-## 📚 Table of Contents
-
-- [Why Master ALM Deployment?](#-why-master-alm-deployment)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Create Power Platform pipelines for deployment](#-use-case-1-create-power-platform-pipelines-for-deployment)
-  - [Use Case #2: Deploy and configure post-deployment steps](#-use-case-2-deploy-and-configure-post-deployment-steps)
-  - [Use Case #3: Commit changes and understand source control structure](#-use-case-3-commit-changes-and-understand-source-control-structure)
-
----
-
-## 🤔 Why Master ALM Deployment?
-
-**Ready to move beyond development?** You've built amazing agents in your dev environment, but now you need to deploy them safely and consistently to test and production environments.
-
-Think of deployment pipelines as your quality assurance assembly line:
-- **Without pipelines**: Manual exports, forgotten configurations, "it worked in dev" syndrome
-- **With pipelines**: Automated, consistent, auditable deployments with proper validation
-
-**Common deployment challenges solved by proper ALM:**
-- "My agent works perfectly in dev but breaks in production"
-- "I forgot to configure the authentication settings after deployment"
-- "Someone deployed directly to production and bypassed testing"
-- "I can't track what changed between versions"
-
-**This lab transforms deployment from a risky manual process into a confident, repeatable workflow!**
-
----
-
-## 🌐 Introduction
-
-Application Lifecycle Management (ALM) deployment ensures your solutions move safely and consistently from development through testing to production. This lab builds on ALM foundations to implement automated deployment pipelines and understand the complete deployment lifecycle.
-
-**Real-world example:** Your customer service agent is ready for production, but deployment involves:
 1. Exporting the solution as managed
 2. Importing to test environment for validation
 3. Configuring environment-specific settings
