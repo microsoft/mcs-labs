@@ -1,3 +1,19 @@
+---
+layout: lab
+title: "Using Multi-Agent in Copilot Studio"
+order: 250
+duration: 30
+difficulty: 300
+lab_type: local
+section: intermediate
+journeys: ["business-user", "developer"]
+bootcamp_order: "9"
+description: "Help makers understand how to leverage multi-agent configurations including child and connected agents."
+
+---
+
+---
+
 # Using Multi-Agent in Copilot Studio
 
 Help makers understand how to leverage multi-agent configurations including child and connected agents.

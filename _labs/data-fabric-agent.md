@@ -1,3 +1,17 @@
+---
+layout: single
+title: "Connecting Fabric Data Agents with Microsoft Copilot Studio"
+description: "Build intelligent agent-to-agent communication between Microsoft Fabric Data Agents and Copilot Studio to unlock powerful e-commerce analytics capabilities."
+order: 999
+duration: 20
+difficulty: 200
+section: advanced_labs
+journeys: ["business-user"]
+azure_ai_workshop_order: "5"
+---
+
+---
+
 # Connecting Fabric Data Agents with Microsoft Copilot Studio
 
 Build intelligent agent-to-agent communication between Microsoft Fabric Data Agents and Copilot Studio to unlock powerful e-commerce analytics capabilities.

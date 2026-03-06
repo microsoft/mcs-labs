@@ -4,7 +4,7 @@ Let AI do the work and automate processes more easily than ever with autonomous 
 
 ---
 
-## 🧭 Lab Details
+## Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,22 +12,22 @@ Let AI do the work and automate processes more easily than ever with autonomous 
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
-- [Why This Matters](#-why-this-matters)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Create and Configure an Autonomous Agent](#-use-case-1-create-and-configure-an-autonomous-agent)
-  - [Use Case #2: Add Knowledge and Tools Integration](#-use-case-2-add-knowledge-and-tools)
+- [Why This Matters](#why-this-matters)
+- [Introduction](#introduction)
+- [Core Concepts Overview](#core-concepts-overview)
+- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Use Cases Covered](#use-cases-covered)
+- [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: Create and Configure an Autonomous Agent](#use-case-1-create-and-configure-an-autonomous-agent)
+  - [Use Case #2: Add Knowledge and Tools Integration](#use-case-2-add-knowledge-and-tools)
 
 ---
 
-## 🤔 Why This Matters
+## Why This Matters
 
 **IT Support Teams and Makers** - Tired of manually responding to repetitive support emails and constantly checking ticket statuses?
 
@@ -45,7 +45,7 @@ Think of a traditional help desk:
 
 ---
 
-## 🌐 Introduction
+## Introduction
 
 Customer support automation has become essential for organizations looking to scale their operations while maintaining high service quality. Manual email responses and ticket lookups create bottlenecks that frustrate both support staff and end users.
 
@@ -55,7 +55,7 @@ After implementing autonomous agents, the same company now handles 80% of routin
 
 ---
 
-## 🎓 Core Concepts Overview
+## Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -67,7 +67,7 @@ After implementing autonomous agents, the same company now handles 80% of routin
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 * [Microsoft Copilot Studio Documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/)
 * [Building Autonomous Agents with Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-autonomous-agents)
@@ -77,7 +77,7 @@ After implementing autonomous agents, the same company now handles 80% of routin
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 * Access to Microsoft Copilot Studio with appropriate licensing
 * ServiceNow instance with API access and valid credentials
@@ -87,7 +87,7 @@ After implementing autonomous agents, the same company now handles 80% of routin
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll build a complete autonomous support agent that transforms how your organization handles routine support inquiries. By the end of the lab, you will:
 
@@ -99,20 +99,20 @@ In this lab, you'll build a complete autonomous support agent that transforms ho
 
 ---
 
-## 🧩 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create and Configure an Autonomous Agent](#-use-case-1-create-and-configure-an-autonomous-agent) | Establishes the foundation for automated email processing with intelligent trigger configuration | 10 min |
-| 2 | [Add Knowledge and Tools](#-use-case-2-add-knowledge-and-tools) | Connects external knowledge sources and ServiceNow integration for comprehensive automated responses | 10 min |
+| 1 | [Create and Configure an Autonomous Agent](#use-case-1-create-and-configure-an-autonomous-agent) | Establishes the foundation for automated email processing with intelligent trigger configuration | 10 min |
+| 2 | [Add Knowledge and Tools](#use-case-2-add-knowledge-and-tools) | Connects external knowledge sources and ServiceNow integration for comprehensive automated responses | 10 min |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 🧱 Use Case #1: Create and Configure an Autonomous Agent
+## Use Case #1: Create and Configure an Autonomous Agent
 
 Set up the foundational autonomous agent with email triggers that automatically activates when support emails arrive.
 
@@ -176,7 +176,7 @@ Create an autonomous agent that automatically triggers when new support emails a
 
 ---
 
-###  🏅 Congratulations! You've completed Use Case #1!
+### Congratulations! You've completed Use Case #1!
 
 ---
 
@@ -202,7 +202,7 @@ Create an autonomous agent that automatically triggers when new support emails a
 
 ---
 
-## 🔄 Use Case #2: Add Knowledge and Tools
+## Use Case #2: Add Knowledge and Tools
 
 Transform your basic agent into a comprehensive support system by adding knowledge sources and ServiceNow integration for complete automated responses.
 
@@ -383,7 +383,7 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 
 ---
 
-###  🏅 Congratulations! You've completed Use Case #2!
+### Congratulations! You've completed Use Case #2!
 
 ---
 
@@ -474,7 +474,7 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

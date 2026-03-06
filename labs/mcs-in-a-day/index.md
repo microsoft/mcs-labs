@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "⚡ MCS in a Day"
+title: "MCS in a Day"
 description: "Fast-track full-day workshop introducing Microsoft Copilot Studio through hands-on labs covering declarative agents, custom agents, and autonomous AI."
 toc: true
 toc_sticky: true

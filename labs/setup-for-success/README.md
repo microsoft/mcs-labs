@@ -4,7 +4,7 @@ Build agents with confidence. Deploy with control. Master the lifecycle of your 
 
 ---
 
-## 🧭 Lab Details
+## Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,22 +12,22 @@ Build agents with confidence. Deploy with control. Master the lifecycle of your 
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
-- [Why Start with ALM?](#-why-start-with-alm)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Create a solution and custom publisher](#-use-case-1-create-a-solution-and-custom-publisher)
-  - [Use Case #2: Create environment variables and connection references](#-use-case-2-create-environment-variables-and-connection-references)
+- [Why Start with ALM?](#why-start-with-alm)
+- [Introduction](#introduction)
+- [Core Concepts Overview](#core-concepts-overview)
+- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Use Cases Covered](#use-cases-covered)
+- [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: Create a solution and custom publisher](#use-case-1-create-a-solution-and-custom-publisher)
+  - [Use Case #2: Create environment variables and connection references](#use-case-2-create-environment-variables-and-connection-references)
 
 ---
 
-## 🤔 Why Start with ALM?
+## Why Start with ALM?
 
 **New to Power Platform or Copilot Studio?** You might be eager to start building agents right away, but taking a few minutes to set up Application Lifecycle Management (ALM) first will save you hours of headaches later!
 
@@ -45,7 +45,7 @@ Think of ALM as preparing your kitchen before cooking a complex meal:
 
 ---
 
-## 🌐 Introduction
+## Introduction
 
 Application Lifecycle Management (ALM) ensures that your solutions evolve safely and efficiently as they move from development to production. This lab will walk you through the foundational best practices of ALM in Microsoft Copilot Studio—from structuring your solution to managing configurations and source control.
 
@@ -58,7 +58,7 @@ With the ALM practices in this lab, you'll avoid these pitfalls and set yourself
 
 ---
 
-## 🎓 Core Concepts Overview
+## Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -75,7 +75,7 @@ With the ALM practices in this lab, you'll avoid these pitfalls and set yourself
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 * [ALM overview - Microsoft Power Platform](https://learn.microsoft.com/power-platform/alm/alm-overview)
 * [Publish and deploy your agent](https://learn.microsoft.com/copilot-studio/publish-deploy)
@@ -85,14 +85,14 @@ With the ALM practices in this lab, you'll avoid these pitfalls and set yourself
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 * Access to Microsoft Copilot Studio.
 * A Microsoft Power Platform environment with at least an Environment Maker security role.
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll configure your ALM foundation for working with Microsoft Copilot Studio like a pro. By the end of the lab, you will:
 
@@ -102,18 +102,18 @@ In this lab, you'll configure your ALM foundation for working with Microsoft Cop
 
 ---
 
-## 🧩 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create a solution and custom publisher](#-use-case-1-create-a-solution-and-custom-publisher) | Structure your success – Group, manage, and deploy all your agent components with clarity and control. | 10 min |
-| 2 | [Create environment variables and connection references](#-use-case-2-create-environment-variables-and-connection-references) | Adapt with flexibility – Environment variables future-proof your agents for seamless multi-environment deployments. Manage credentials and services cleanly across dev, test, and prod. | 10 min |
+| 1 | [Create a solution and custom publisher](#use-case-1-create-a-solution-and-custom-publisher) | Structure your success – Group, manage, and deploy all your agent components with clarity and control. | 10 min |
+| 2 | [Create environment variables and connection references](#use-case-2-create-environment-variables-and-connection-references) | Adapt with flexibility – Environment variables future-proof your agents for seamless multi-environment deployments. Manage credentials and services cleanly across dev, test, and prod. | 10 min |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
-## 🧱 Use Case #1: Create a solution and custom publisher
+## Use Case #1: Create a solution and custom publisher
 
 Use a structured container to group all agents components for better lifecycle management.
 
@@ -175,7 +175,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 ---
 
-###  🏅 Congratulations! You've created your solution!
+### Congratulations! You've created your solution!
 
 ---
 
@@ -201,7 +201,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 ---
 
-## 🧩 Use Case #2: Create environment variables and connection references
+## Use Case #2: Create environment variables and connection references
 
 Use reusable variables and connection abstractions for seamless multi-environment deployments.
 
@@ -264,7 +264,7 @@ In this section, you'll learn how to create environment variables and connection
 
 ---
 
-###  🏅 Congratulations! You've created environment variables and connection references!
+### Congratulations! You've created environment variables and connection references!
 
 ---
 
@@ -286,7 +286,7 @@ In this section, you'll learn how to create environment variables and connection
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

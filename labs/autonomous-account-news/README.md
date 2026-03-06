@@ -4,7 +4,7 @@ Empower sellers with timely insights. Build an autonomous Copilot Studio agent t
 
 ---
 
-## 🧭 Lab Details
+## Lab Details
 
 | Level | Persona | Duration   | Purpose                                                                                                                                                                                                                                                                                                    |
 | ----- | ------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -12,19 +12,19 @@ Empower sellers with timely insights. Build an autonomous Copilot Studio agent t
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
-- [Why This Matters](#-why-this-matters)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Instructions by Use Case](#️-instructions-by-use-case)
+- [Why This Matters](#why-this-matters)
+- [Introduction](#introduction)
+- [Core Concepts Overview](#core-concepts-overview)
+- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Instructions by Use Case](#instructions-by-use-case)
 
 ---
 
-## 🤔 Why This Matters
+## Why This Matters
 
 **Sales leaders and field sellers** – Want to know what your competitors or customers are up to before the next call? Tired of manually searching for news or relying on fragmented updates?
 
@@ -39,7 +39,7 @@ Imagine an agent that works *autonomously* behind the scenes:
 
 ---
 
-## 🌐 Introduction
+## Introduction
 
 Copilot Studio now supports two types of agents: **conversational agents**, which respond to user input, and **autonomous agents**, which act based on business events or schedules.
 
@@ -54,7 +54,7 @@ This proactive approach helps account teams stay ahead of client developments an
 
 ---
 
-## 🎓 Core Concepts Overview
+## Core Concepts Overview
 
 | Concept                             | Why it matters                                                                                                                                                                                                                      |
 | ----------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -66,7 +66,7 @@ This proactive approach helps account teams stay ahead of client developments an
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 - [Generative Orchestration](https://learn.microsoft.com/en-us/microsoft-copilot-studio/faqs-generative-orchestration)
 - [Authoring Triggers](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-triggers-about)
@@ -75,7 +75,7 @@ This proactive approach helps account teams stay ahead of client developments an
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 - Access to Microsoft Copilot Studio
 - Sales App instance with active opportunities
@@ -85,7 +85,7 @@ This proactive approach helps account teams stay ahead of client developments an
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you will build an autonomous news assistant agent that:
 
@@ -99,17 +99,17 @@ In this lab, you will build an autonomous news assistant agent that:
 
 | Step | Use Case                                                                                                                                  | Value added                                                                    | Effort |
 | ---- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | ------ |
-| 1    | [Create and Configure an Autonomous Agent](#-use-case-1-create-and-configure-an-autonomous-agent)                                         | Establishes the agent framework and automated trigger for continuous operation | 5 min |
-| 2    | [Add a Tool to Fetch High-Value Opportunities from the Sales App](#-use-case-2-add-a-tool-to-fetch-high-value-opportunities-from-the-sales-app) | Enables data-driven insights by sourcing relevant CRM records                  | 5 min |
-| 3    | [Analyze Opportunities Using Web Search and Deep Reasoning](#-use-case-3-analyze-opportunities-using-web-search-and-deep-reasoning)       | Enriches understanding of each opportunity using external signals              | 5 min |
-| 4    | [Store Content Using Topics and Global Variables](#-use-case-4-store-content-using-topics-and-global-variables)                           | Maintains precise context for downstream steps and output accuracy             | 10 min |
-| 5    | [Create and Send a Structured HTML Report via Email](#-use-case-5-create-and-send-a-structured-html-report-via-email)                     | Delivers clear, actionable summaries to stakeholders                           | 5 min |
+| 1    | [Create and Configure an Autonomous Agent](#use-case-1-create-and-configure-an-autonomous-agent)                                         | Establishes the agent framework and automated trigger for continuous operation | 5 min |
+| 2    | [Add a Tool to Fetch High-Value Opportunities from the Sales App](#use-case-2-add-a-tool-to-fetch-high-value-opportunities-from-the-sales-app) | Enables data-driven insights by sourcing relevant CRM records                  | 5 min |
+| 3    | [Analyze Opportunities Using Web Search and Deep Reasoning](#use-case-3-analyze-opportunities-using-web-search-and-deep-reasoning)       | Enriches understanding of each opportunity using external signals              | 5 min |
+| 4    | [Store Content Using Topics and Global Variables](#use-case-4-store-content-using-topics-and-global-variables)                           | Maintains precise context for downstream steps and output accuracy             | 10 min |
+| 5    | [Create and Send a Structured HTML Report via Email](#use-case-5-create-and-send-a-structured-html-report-via-email)                     | Delivers clear, actionable summaries to stakeholders                           | 5 min |
 
 ---
 
-## ⚖️ Instructions by Use Case
+## Instructions by Use Case
 
-### 🧱 Use Case #1: Create and Configure an Autonomous Agent
+### Use Case #1: Create and Configure an Autonomous Agent
 
 Set up an autonomous agent with a recurring trigger that automatically activates on a schedule.
 
@@ -167,11 +167,11 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #1!
+### Congratulations! You've completed Use Case #1!
 
 ---
 
-### 🧱 Use Case #2: Add a Tool to Fetch High-Value Opportunities from the Sales App
+### Use Case #2: Add a Tool to Fetch High-Value Opportunities from the Sales App
 
   Configure a Dataverse connector tool that retrieves large, open opportunities using a pre-defined filter query.
 
@@ -239,11 +239,11 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #2!
+### Congratulations! You've completed Use Case #2!
 
 ---
 
-### 🧱 Use Case #3: Analyze Opportunities Using Web Search and Deep Reasoning
+### Use Case #3: Analyze Opportunities Using Web Search and Deep Reasoning
 
   Enable your agent to find relevant news articles for each opportunity and reason over them using Copilot Studio's Deep Reasoning feature.
 
@@ -282,11 +282,11 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #3!
+### Congratulations! You've completed Use Case #3!
 
 ---
 
-### 🧱 Use Case #4: Store Content Using Topics and Global Variables
+### Use Case #4: Store Content Using Topics and Global Variables
 
   Enable the agent to persist and reuse important data using pre-authored topics and global variables.
 
@@ -516,11 +516,11 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #4!
+### Congratulations! You've completed Use Case #4!
 
 ---
 
-### 🧱 Use Case #5: Create and Send a Structured HTML Report via Email
+### Use Case #5: Create and Send a Structured HTML Report via Email
 
 Automate the final step: format relevant news into a clean, branded email for account stakeholders.
 
@@ -611,17 +611,17 @@ Automate the final step: format relevant news into a clean, branded email for ac
   </head>
   <body>
 
-    <h2>📰 Opportunity News Summary Report</h2>
+    <h2> Opportunity News Summary Report</h2>
 
     <div class=""card"">
       <div class=""opportunity-name"">Microsoft AI Infrastructure Expansion</div>
       <div class=""news-summary"">
         Microsoft has launched new AI infrastructure powered by NVIDIA H100 GPUs, PCIe Gen5, and DDR5 memory. The company has expanded Azure OpenAI Service to new global regions and shared enterprise use cases such as KPMG and Mercedes-Benz. The platform emphasizes responsible AI and performance at scale.
       </div>
-      <div class=""relevance"">📌 This may indicate increased cloud infrastructure investment, creating opportunities for high-performance compute and service engagement.</div>
-      <div class=""section-title"">🔗 Sales App Opportunity:</div>
+      <div class=""relevance""> This may indicate increased cloud infrastructure investment, creating opportunities for high-performance compute and service engagement.</div>
+      <div class=""section-title""> Sales App Opportunity:</div>
       <a class=""link"" href=""https://workshop-hub.crm.dynamics.com/main.aspx?appid=aafe6e6a-6ca0-f011-b41c-000d3a5c95b7&pagetype=entityrecord&etn=cat_opportunity&id=5fae6fb3-6c43-4512-9af9-399953dff686"" target=""_blank"">View opportunity in Sales App</a>
-      <div class=""section-title"">📰 News Articles:</div>
+      <div class=""section-title""> News Articles:</div>
       <a class=""link"" href=""https://azure.microsoft.com/en-us/blog/scale-generative-ai-with-new-azure-ai-infrastructure-advancements-and-availability/"" target=""_blank"">Microsoft Blog: Scale Generative AI</a>
       <a class=""link"" href=""https://azure.microsoft.com/en-us/solutions/high-performance-computing/ai-infrastructure"" target=""_blank"">Azure AI Infrastructure Overview</a>
       <a class=""link"" href=""https://techcommunity.microsoft.com/t5/azure-ai/azure-openai-service-expands-to-five-new-regions/ba-p/3849827"" target=""_blank"">Azure OpenAI Service Expansion</a>
@@ -632,10 +632,10 @@ Automate the final step: format relevant news into a clean, branded email for ac
       <div class=""news-summary"">
         Google is expanding its software-defined global network to improve reliability, speed, and AI-era scalability. The backbone promises up to 40% better performance than public internet and spans multiple continents, supporting services like Gmail, YouTube, and Google Cloud.
       </div>
-      <div class=""relevance"">📌 Suggests infrastructure modernization that may align with proposed solutions in the opportunity.</div>
-      <div class=""section-title"">🔗 Sales App Opportunity:</div>
+      <div class=""relevance""> Suggests infrastructure modernization that may align with proposed solutions in the opportunity.</div>
+      <div class=""section-title""> Sales App Opportunity:</div>
       <a class=""link"" href=""https://workshop-hub.crm.dynamics.com/main.aspx?appid=aafe6e6a-6ca0-f011-b41c-000d3a5c95b7&pagetype=entityrecord&etn=cat_opportunity&id=deb06637-fe9b-4eeb-80de-1ad1f6ad2624"" target=""_blank"">View opportunity in Sales App</a>
-      <div class=""section-title"">📰 News Articles:</div>
+      <div class=""section-title""> News Articles:</div>
       <a class=""link"" href=""https://cloud.google.com/blog/products/networking/google-global-network-technology-deep-dive"" target=""_blank"">Google Blog: Global Network Deep Dive</a>
       <a class=""link"" href=""https://research.google/teams/global-networking/"" target=""_blank"">Google Research: Global Networking</a>
       <a class=""link"" href=""https://www.datacenterknowledge.com/networking/google-and-level-3-interconnect-network-backbones"" target=""_blank"">Network Backbone Analysis</a>
@@ -724,6 +724,6 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #5!
+### Congratulations! You've completed Use Case #5!
 
 ---

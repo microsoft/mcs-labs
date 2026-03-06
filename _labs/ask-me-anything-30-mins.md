@@ -13,7 +13,7 @@ Empower employees with answers that matter – Build an intelligent agent that c
 
 ---
 
-## 🧭 Lab Details
+## Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -28,7 +28,7 @@ With the ALM practices in this lab, you'll avoid these pitfalls and set yourself
 
 ---
 
-## 🎓 Core ALM Concepts Overview
+## Core ALM Concepts Overview
 
 | Concept                  | Why it matters                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -39,7 +39,7 @@ With the ALM practices in this lab, you'll avoid these pitfalls and set yourself
 
 ---
 
-## 🌐 Lab Introduction
+## Lab Introduction
 
 In today's fast-paced business environment, employees need quick access to accurate information from multiple sources. Whether it's HR policies, IT incident status, or custom knowledge bases, information is often scattered across different systems, making it difficult for employees to find what they need efficiently.
 
@@ -49,7 +49,7 @@ This lab teaches you to build a comprehensive solution that transforms how emplo
 
 ---
 
-## 🎓 Core Concepts Overview
+## Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -59,7 +59,7 @@ This lab teaches you to build a comprehensive solution that transforms how emplo
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 - [Microsoft Copilot Studio Documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/ )
 - [Knowledge Sources in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-boost-conversations)
@@ -69,7 +69,7 @@ This lab teaches you to build a comprehensive solution that transforms how emplo
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 - Access to Microsoft Copilot Studio with appropriate licensing.
 - A Microsoft Power Platform environment with at least an Environment Maker security role.
@@ -79,7 +79,7 @@ This lab teaches you to build a comprehensive solution that transforms how emplo
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll start with an ALM foundation for working with Microsoft Copilot Studio like a pro. Then you will build a comprehensive "Ask me anything" agent that serves as a central knowledge hub for your organization. By the end of the lab, you will:
 
@@ -93,24 +93,24 @@ In this lab, you'll start with an ALM foundation for working with Microsoft Copi
 
 ---
 
-## 🧩 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|---------|
-| 1 | [Create a solution and custom publisher](#-use-case-1-create-a-solution-and-custom-publisher) | Structure your success – Group, manage, and deploy all your agent components with clarity and control. | 5 mins |
-| 2 | [Create connection references](#-use-case-2-create-connection-references) | Adapt with flexibility – manage credentials and services cleanly across dev, test, and prod. | 5 mins |
-| 3 | [Create an 'Ask Me Anything' Agent and Add SharePoint Knowledge Source](#-use-case-3-create-an-ask-me-anything-agent-and-add-sharepoint-knowledge-source) | Establishes foundational agent with SharePoint knowledge integration and grounded AI responses | 5 mins |
-| 4 | [Configure Suggested Prompts](#-use-case-4-configure-suggested-prompts) | Guides users toward the agent's best capabilities through strategic prompt suggestions | 3 mins |
-| 5 | [Deploy to Microsoft 365 Copilot](#-use-case-5-deploy-to-microsoft-365-copilot) | Makes the agent available in Microsoft 365 Copilot for seamless user access | 2 mins |
-| 6 | [Create a child IT Support Agent](#-use-case-6-create-a-child-it-support-agent) | Discover how scoping for knowledge and tools can also be done through the multi-agent capabilities. | 10 mins |
+| 1 | [Create a solution and custom publisher](#use-case-1-create-a-solution-and-custom-publisher) | Structure your success – Group, manage, and deploy all your agent components with clarity and control. | 5 mins |
+| 2 | [Create connection references](#use-case-2-create-connection-references) | Adapt with flexibility – manage credentials and services cleanly across dev, test, and prod. | 5 mins |
+| 3 | [Create an 'Ask Me Anything' Agent and Add SharePoint Knowledge Source](#use-case-3-create-an-ask-me-anything-agent-and-add-sharepoint-knowledge-source) | Establishes foundational agent with SharePoint knowledge integration and grounded AI responses | 5 mins |
+| 4 | [Configure Suggested Prompts](#use-case-4-configure-suggested-prompts) | Guides users toward the agent's best capabilities through strategic prompt suggestions | 3 mins |
+| 5 | [Deploy to Microsoft 365 Copilot](#use-case-5-deploy-to-microsoft-365-copilot) | Makes the agent available in Microsoft 365 Copilot for seamless user access | 2 mins |
+| 6 | [Create a child IT Support Agent](#use-case-6-create-a-child-it-support-agent) | Discover how scoping for knowledge and tools can also be done through the multi-agent capabilities. | 10 mins |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 🧱 Use Case #1: Create a solution and custom publisher
+## Use Case #1: Create a solution and custom publisher
 
 Use a structured container to group all agents components for better lifecycle management.
 
@@ -182,7 +182,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 ---
 
-### 🏅 Congratulations! You've created your solution and completed Use Case #1
+### Congratulations! You've created your solution and completed Use Case #1
 
 ---
 
@@ -208,7 +208,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 ---
 
-## 🧩 Use Case #2: Create connection references
+## Use Case #2: Create connection references
 
 Use connection abstractions for seamless multi-environment deployments.
 
@@ -263,11 +263,11 @@ In this section, you'll learn how to create connection references in your soluti
 >
 ---
 
-### 🏅 Congratulations! You've created connection references for the project
+### Congratulations! You've created connection references for the project
 
 ---
 
-## 🧱 Use Case #3: Create an 'Ask Me Anything' Agent and Add SharePoint Knowledge Source
+## Use Case #3: Create an 'Ask Me Anything' Agent and Add SharePoint Knowledge Source
 
 Create a foundational intelligent agent with SharePoint integration for grounded AI responses.
 
@@ -331,7 +331,7 @@ Compare this plan with the other plans.
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #3
+### Congratulations! You've completed Use Case #3
 
 ---
 
@@ -346,7 +346,7 @@ Compare this plan with the other plans.
 ---
 
 
-## 🔄 Use Case #4: Configure Suggested Prompts
+## Use Case #4: Configure Suggested Prompts
 
 Guide users toward your agent's best capabilities through strategic prompt suggestions.
 
@@ -381,7 +381,7 @@ Suggest things your agent can do to your end-users through carefully crafted pro
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #4
+### Congratulations! You've completed Use Case #4
 
 ---
 
@@ -392,7 +392,7 @@ Suggest things your agent can do to your end-users through carefully crafted pro
 
 ---
 
-## 🔄 Use Case #5: Deploy to Microsoft 365 Copilot
+## Use Case #5: Deploy to Microsoft 365 Copilot
 
 Make the agent available in Microsoft 365 Copilot for seamless user access.
 
@@ -439,7 +439,7 @@ Make the agent available in Microsoft 365 Copilot for your users.
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #5
+### Congratulations! You've completed Use Case #5
 
 ---
 
@@ -450,7 +450,7 @@ Make the agent available in Microsoft 365 Copilot for your users.
 
 ---
 
-## 🔄 Use Case #6: Create a child IT Support Agent
+## Use Case #6: Create a child IT Support Agent
 
 Integrate real-time incident management for comprehensive support capabilities and demonstrate agent scoping techniques.
 
@@ -587,7 +587,7 @@ This use case demonstrates **agent scoping** principles:
 30. **Publish** your agent and test the third Suggested prompt regarding ticket status in M365 Copilot (and Teams if needed). Note: you don't need to reload your agent or restart the conversation. Your Ask Me Anything agent is now capable to query Service Now and resolve support issues based on Service Now Knowledge bases as well as query Incident details for you.
 ---
 
-### 🏅 Congratulations! You've completed Use Case #6
+### Congratulations! You've completed Use Case #6
 
 ---
 
@@ -598,7 +598,7 @@ This use case demonstrates **agent scoping** principles:
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

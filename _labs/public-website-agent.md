@@ -15,7 +15,7 @@ Create an intelligent agent that delivers contextual, multi-part answers using y
 
 ---
 
-## 🧭 Lab Details
+## Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -33,7 +33,7 @@ This level of intelligence transforms user experience from frustrating searches 
 
 ---
 
-## 🎓 Core Concepts Overview
+## Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -46,7 +46,7 @@ This level of intelligence transforms user experience from frustrating searches 
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 * [QuickStart: Create and deploy an agent](https://learn.microsoft.com/en-us/microsoft-copilot-studio/fundamentals-get-started?tabs=web)
 * [Add a public website as a knowledge source](https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-add-public-website)
@@ -55,7 +55,7 @@ This level of intelligence transforms user experience from frustrating searches 
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 * Ability to create a custom agent in Microsoft Copilot Studio.
 * Environment with the following data loss prevention policies NOT blocked:
@@ -66,7 +66,7 @@ This level of intelligence transforms user experience from frustrating searches 
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll build Nova AI, an intelligent assistant that goes beyond simple Q&A to deliver contextual, multi-part responses. By the end of the lab, you will:
 
@@ -77,22 +77,22 @@ In this lab, you'll build Nova AI, an intelligent assistant that goes beyond sim
 
 ---
 
-## 🧩 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create a new agent and add knowledge](#-use-case-1-create-a-new-agent-and-add-knowledge) | From idea to insight – Use the conversational experience to create an intelligent agent and enrich it with knowledge from websites like Wikipedia and your own files. | 8 min |
-| 2 | [Disable general knowledge and add connectors](#-use-case-2-disable-general-knowledge-and-add-connectors) | Your agent isn't ChatGPT – Scope AI-generated answers on your data while adding real-time capabilities like weather lookup. | 7 min |
-| 3 | [Fine-tune your AI assistant for smoother conversations](#-use-case-3-fine-tune-your-ai-assistant-for-smoother-conversations) | Fine-tune for a flawless experience – Customize system topics to enhance interactions and deliver a smoother user experience. | 5 min |
-| 4 | [Make your agent public and publish it to the demo website](#-use-case-4-make-your-agent-public-and-publish-it-to-the-demo-website) | Go live and test drive – Remove authentication barriers and publish your agent to see it in action on the demo website. | 5 min |
+| 1 | [Create a new agent and add knowledge](#use-case-1-create-a-new-agent-and-add-knowledge) | From idea to insight – Use the conversational experience to create an intelligent agent and enrich it with knowledge from websites like Wikipedia and your own files. | 8 min |
+| 2 | [Disable general knowledge and add connectors](#use-case-2-disable-general-knowledge-and-add-connectors) | Your agent isn't ChatGPT – Scope AI-generated answers on your data while adding real-time capabilities like weather lookup. | 7 min |
+| 3 | [Fine-tune your AI assistant for smoother conversations](#use-case-3-fine-tune-your-ai-assistant-for-smoother-conversations) | Fine-tune for a flawless experience – Customize system topics to enhance interactions and deliver a smoother user experience. | 5 min |
+| 4 | [Make your agent public and publish it to the demo website](#use-case-4-make-your-agent-public-and-publish-it-to-the-demo-website) | Go live and test drive – Remove authentication barriers and publish your agent to see it in action on the demo website. | 5 min |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 🧱 Use Case #1: Create a new agent and add knowledge
+## Use Case #1: Create a new agent and add knowledge
 
 Build Nova AI using the conversational creation experience and ground it with trusted knowledge sources.
 
@@ -154,7 +154,7 @@ Create Nova AI with custom instructions and Wikipedia knowledge integration usin
    ```
    The assistant should answer complex questions using verified public information and real-time lookups like weather or conversions. It should give clear, concise answers and handle multiple questions one at a time.
    It must not speculate, share unverified or sensitive information, or compare products or companies.
-   Nova AI should communicate clearly and professionally, using a friendly tone and light emojis 😊 when appropriate.
+   Nova AI should communicate clearly and professionally, using a friendly tone and light emojis  when appropriate.
    ```
 
 > [!TIP]
@@ -170,7 +170,7 @@ Create Nova AI with custom instructions and Wikipedia knowledge integration usin
 
 ---
 
-###  🏅 Congratulations! You've created Nova AI!
+### Congratulations! You've created Nova AI!
 
 ---
 
@@ -198,7 +198,7 @@ Create Nova AI with custom instructions and Wikipedia knowledge integration usin
 
 ---
 
-## 🔄 Use Case #2: Disable general knowledge and add connectors
+## Use Case #2: Disable general knowledge and add connectors
 
 Ensure accuracy by grounding responses in your data while adding real-time capabilities.
 
@@ -280,7 +280,7 @@ In this section, you'll disable general knowledge to reduce hallucinations, then
 
 ---
 
-###  🏅 Congratulations! You've enhanced Nova AI with controlled knowledge and real-time capabilities!
+### Congratulations! You've enhanced Nova AI with controlled knowledge and real-time capabilities!
 
 ---
 
@@ -298,7 +298,7 @@ In this section, you'll disable general knowledge to reduce hallucinations, then
 
 ---
 
-## 💬 Use Case #3: Fine-tune your AI assistant for smoother conversations
+## Use Case #3: Fine-tune your AI assistant for smoother conversations
 
 Customize system topics to enhance interactions and deliver a smoother user experience.
 
@@ -329,9 +329,9 @@ In this section, you'll customize built-in system topics to improve user interac
 4. Select the message and replace the text with a more personalized welcome message:
 
    ```
-   👋 Hi there! I'm Nova AI, your intelligent assistant for deep research and discovery.
+    Hi there! I'm Nova AI, your intelligent assistant for deep research and discovery.
 
-   I can break down complex questions and combine insights from historical facts, biographies, and real-time data like the weather ☁️🌦️.
+   I can break down complex questions and combine insights from historical facts, biographies, and real-time data like the weather .
    
    What are you curious about today?
    ```
@@ -388,7 +388,7 @@ In this section, you'll customize built-in system topics to improve user interac
 
 ---
 
-###  🏅 Congratulations! You've fine-tuned Nova AI for smoother conversations!
+### Congratulations! You've fine-tuned Nova AI for smoother conversations!
 
 ---
 
@@ -406,7 +406,7 @@ In this section, you'll customize built-in system topics to improve user interac
 
 ---
 
-## 🌐 Use Case #4: Make your agent public and publish it to the demo website
+## Use Case #4: Make your agent public and publish it to the demo website
 
 Remove authentication barriers and publish your agent to see it in action on the demo website.
 
@@ -461,7 +461,7 @@ In this section, you'll remove authentication to make your agent publicly access
 
 ---
 
-###  🏅 Congratulations! You've published Nova AI to the demo website!
+### Congratulations! You've published Nova AI to the demo website!
 
 ---
 
@@ -479,7 +479,7 @@ In this section, you'll remove authentication to make your agent publicly access
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

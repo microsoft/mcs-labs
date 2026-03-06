@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "☁️ MCS + Azure AI Workshop"
+title: "MCS + Azure AI Workshop"
 description: "Comprehensive hands-on workshop combining Microsoft Copilot Studio with Azure AI services for building intelligent, enterprise-grade AI solutions."
 toc: true
 toc_sticky: true

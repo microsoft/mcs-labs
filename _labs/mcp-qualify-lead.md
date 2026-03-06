@@ -13,7 +13,7 @@ Empower sellers to focus on what matters most—high-value leads.
 
 ---
 
-## 🧱 Lab Details
+## Lab Details
 
 | Level | Persona         | Duration   | Purpose                                                                                                                                                                                                                                                                                                                                                                    |
 | ----- | --------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -27,7 +27,7 @@ Empower sellers to focus on what matters most—high-value leads.
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 - [Microsoft Copilot Studio Documentation](https://learn.microsoft.com/en-us/copilot-studio/overview)
 - [Extend your agent with Model Context Protocol](https://learn.microsoft.com/en-us/copilot-studio/extend-agent-model-context)
@@ -36,7 +36,7 @@ Empower sellers to focus on what matters most—high-value leads.
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 - Access to Microsoft Copilot Studio with appropriate licensing.
 - Office 365 environment.
@@ -44,7 +44,7 @@ Empower sellers to focus on what matters most—high-value leads.
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll build a complete lead prioritization workflow that transforms how sellers in your organization identify and act on high-value opportunities. By the end of the lab, you will:
 
@@ -55,21 +55,21 @@ In this lab, you'll build a complete lead prioritization workflow that transform
 
 ---
 
-## 🧰 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case                                                                                                                              | Value added                                                                                      | Effort |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- | ------ |
-| 1    | [Create and configure an agent](#-use-case-1-create-and-configure-an-agent)                                                           | Establishes the foundation for intelligent lead processing and workflow orchestration              | 5 min  |
-| 2    | [Configure Model Context Protocol (Dataverse and D365 Sales)](#-use-case-2-configure-model-context-protocol-dataverse-and-d365-sales) | Enables AI to analyze CRM data in Dynamics 365 Sales and identify high-value leads                 | 5 min  |
-| 3    | [Test the Complete Workflow](#-use-case-3-test-the-complete-workflow)                                                                 | Validates the end-to-end solution and ensures reliability in real-world sales environments         | 5 min  |
+| 1    | [Create and configure an agent](#use-case-1-create-and-configure-an-agent)                                                           | Establishes the foundation for intelligent lead processing and workflow orchestration              | 5 min  |
+| 2    | [Configure Model Context Protocol (Dataverse and D365 Sales)](#use-case-2-configure-model-context-protocol-dataverse-and-d365-sales) | Enables AI to analyze CRM data in Dynamics 365 Sales and identify high-value leads                 | 5 min  |
+| 3    | [Test the Complete Workflow](#use-case-3-test-the-complete-workflow)                                                                 | Validates the end-to-end solution and ensures reliability in real-world sales environments         | 5 min  |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 🧱 Use Case #1: Create and Configure an Agent
+## Use Case #1: Create and Configure an Agent
 
 Set up the foundational agent
 
@@ -106,7 +106,7 @@ Create a seller-facing agent.
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #1!
+### Congratulations! You've completed Use Case #1!
 
 ### Test your understanding
 
@@ -193,11 +193,11 @@ General:
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #2!
+### Congratulations! You've completed Use Case #2!
 
 ---
 
-## 🧪 Use Case #3: Test the Complete Workflow
+## Use Case #3: Test the Complete Workflow
 
 | Use case                | Value added                                                                                      | Estimated effort |
 | ---------------------- | -------------------------------------------------------------------------------------------------- | ---------------- |
@@ -224,7 +224,7 @@ You’ll test your configured agent by simulating a realistic sales interaction.
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #3!
+### Congratulations! You've completed Use Case #3!
 
 ### Test your understanding
 
@@ -240,7 +240,7 @@ You’ll test your configured agent by simulating a realistic sales interaction.
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 To maximize the impact of AI in sales workflows:
 

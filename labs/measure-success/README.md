@@ -4,7 +4,7 @@ You can't improve what you can't measure: design your agent to track successful 
 
 ---
 
-## 🧭 Lab Details
+## Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,22 +12,22 @@ You can't improve what you can't measure: design your agent to track successful 
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
-- [Why This Matters](#-why-this-matters)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: The end of conversation topic](#-use-case-1-the-end-of-conversation-topic)
-  - [Use Case #2: Create a smooth and intuitive end-of-conversation experience](#-use-case-2-create-a-smooth-and-intuitive-end-of-conversation-experience)
+- [Why This Matters](#why-this-matters)
+- [Introduction](#introduction)
+- [Core Concepts Overview](#core-concepts-overview)
+- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Use Cases Covered](#use-cases-covered)
+- [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: The end of conversation topic](#use-case-1-the-end-of-conversation-topic)
+  - [Use Case #2: Create a smooth and intuitive end-of-conversation experience](#use-case-2-create-a-smooth-and-intuitive-end-of-conversation-experience)
 
 ---
 
-## 🤔 Why This Matters
+## Why This Matters
 
 **Advanced Makers** - Many organizations struggle with understanding whether their AI agents are truly helping users or creating frustration through abandoned conversations.
 
@@ -45,7 +45,7 @@ Think of running a retail store without knowing if customers leave satisfied or 
 
 ---
 
-## 🌐 Introduction
+## Introduction
 
 In today's AI-driven customer service landscape, simply having an agent that responds isn't enough. Organizations need to understand whether their AI assistants are genuinely solving user problems or creating barriers to success.
 
@@ -55,7 +55,7 @@ After implementing the strategies in this lab, they discovered that 40% of conve
 
 ---
 
-## 🎓 Core Concepts Overview
+## Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -68,7 +68,7 @@ After implementing the strategies in this lab, they discovered that 40% of conve
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 * [Measuring agent engagement](https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-engagement)
 * [Measuring agent outcomes](https://learn.microsoft.com/en-us/microsoft-copilot-studio/analytics-outcomes)
@@ -78,7 +78,7 @@ After implementing the strategies in this lab, they discovered that 40% of conve
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 * You need to have access to Microsoft Copilot Studio using https://copilotstudio.microsoft.com/.
 * You can either customize the agent from LAB-10 Create a knowledge agent for your public website or create a new agent with at least one knowledge source.
@@ -86,7 +86,7 @@ After implementing the strategies in this lab, they discovered that 40% of conve
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll transform your AI agent from a simple question-answering tool into a sophisticated system that tracks success and learns from user feedback. By the end of the lab, you will:
 
@@ -98,20 +98,20 @@ In this lab, you'll transform your AI agent from a simple question-answering too
 
 ---
 
-## 🧩 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [The end of conversation topic](#-use-case-1-the-end-of-conversation-topic) | Effectively manage user interactions by understanding when and how to seamlessly redirect users to the end-of-conversation topic, enabling accurate tracking of conversation outcomes. | 15 min |
-| 2 | [Create a smooth and intuitive end-of-conversation experience](#-use-case-2-create-a-smooth-and-intuitive-end-of-conversation-experience) | Customize the default end-of-conversation topic to create a more seamless, conversational-friendly experience for users. | 15 min |
+| 1 | [The end of conversation topic](#use-case-1-the-end-of-conversation-topic) | Effectively manage user interactions by understanding when and how to seamlessly redirect users to the end-of-conversation topic, enabling accurate tracking of conversation outcomes. | 15 min |
+| 2 | [Create a smooth and intuitive end-of-conversation experience](#use-case-2-create-a-smooth-and-intuitive-end-of-conversation-experience) | Customize the default end-of-conversation topic to create a more seamless, conversational-friendly experience for users. | 15 min |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 🧱 Use Case #1: The end of conversation topic
+## Use Case #1: The end of conversation topic
 
 Every conversation should have a conclusion – Design for clear outcomes.
 
@@ -228,7 +228,7 @@ By default, when the conversation reaches this stage, the agent asks, "Did this 
 
     Notice how the End of conversation topic isn't triggered. Why is that?
 
-    Open the **Greeting** topic by clicking the edit (✏️) icon.
+    Open the **Greeting** topic by clicking the edit () icon.
 
     Notice how the **End all topics** node prevents this behavior. Any subsequent user messages remain within the same conversation session, as the agent assumes the user's request hasn't yet been resolved.
 
@@ -240,7 +240,7 @@ By default, when the conversation reaches this stage, the agent asks, "Did this 
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #1!
+### Congratulations! You've completed Use Case #1!
 
 ---
 
@@ -268,7 +268,7 @@ By default, when the conversation reaches this stage, the agent asks, "Did this 
 
 ---
 
-## 🔄 Use Case #2: Create a smooth and intuitive end-of-conversation experience
+## Use Case #2: Create a smooth and intuitive end-of-conversation experience
 
 End conversations without friction – create a smooth, unobtrusive way to gather feedback without disrupting the flow.
 
@@ -306,7 +306,7 @@ In this section, you'll learn how the default End of conversation topic can unin
    Return to the Question Properties, then select **Entity recognition**:
    For **Action if no entity found**, choose **Set variable to empty (no value)**.
 
-3. Below the "Did that answer your question?" question, notice the condition only tests if SurveyResponse is true. Let's add another condition path, by clicking on the (➕) action above the various conditions.
+3. Below the "Did that answer your question?" question, notice the condition only tests if SurveyResponse is true. Let's add another condition path, by clicking on the () action above the various conditions.
 
    In **Select a variable**, choose **SurveyResponse**. For the test, leave it to **is equal to**, and set **false** for the value.
 
@@ -361,7 +361,7 @@ In this section, you'll learn how the default End of conversation topic can unin
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #2!
+### Congratulations! You've completed Use Case #2!
 
 ---
 
@@ -379,7 +379,7 @@ In this section, you'll learn how the default End of conversation topic can unin
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

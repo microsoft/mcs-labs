@@ -1,32 +1,4 @@
-<!-- Dark mode toggle handler -->
-<script>
-(function() {
-  var btn = document.querySelector('.dark-toggle');
-  if (!btn) return;
-  var html = document.documentElement;
-
-  function setTheme(mode) {
-    html.setAttribute('data-theme', mode);
-    localStorage.setItem('theme', mode);
-    btn.innerHTML = mode === 'dark'
-      ? '<i class="fas fa-sun"></i>'
-      : '<i class="fas fa-moon"></i>';
-  }
-
-  // Initialize icon
-  var current = html.getAttribute('data-theme') || 'light';
-  btn.innerHTML = current === 'dark'
-    ? '<i class="fas fa-sun"></i>'
-    : '<i class="fas fa-moon"></i>';
-
-  btn.addEventListener('click', function() {
-    var next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-    setTheme(next);
-  });
-})();
-</script>
-
-<!-- GitHub-style callout converter → MM notice classes -->
+<!-- GitHub-style callout converter -->
 <script>
 (function() {
   document.querySelectorAll('blockquote').forEach(function(bq) {
@@ -36,14 +8,13 @@
     var match = html.match(/^\[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/i);
     if (!match) return;
     var type = match[1].toLowerCase();
-    var cls = { note: 'info', tip: 'success', important: 'warning', warning: 'danger', caution: 'danger' };
-    first.innerHTML = html.replace(match[0], '<strong>' + type.charAt(0).toUpperCase() + type.slice(1) + ':</strong>');
+    var cls = {note:'info',tip:'success',important:'warning',warning:'danger',caution:'danger'};
+    first.innerHTML = html.replace(match[0], '<strong>'+type.charAt(0).toUpperCase()+type.slice(1)+':</strong>');
     bq.className = 'notice notice--' + (cls[type] || 'info');
   });
 })();
 </script>
-
-<!-- External link handler -->
+<!-- External links open in new tab -->
 <script>
 (function() {
   var host = location.hostname;

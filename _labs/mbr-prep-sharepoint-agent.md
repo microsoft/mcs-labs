@@ -16,7 +16,7 @@ This guide provides step-by-step instructions for creating an MBR (Monthly Busin
 
 ---
 
-## 🧭 Lab Details
+## Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -33,7 +33,7 @@ This guide provides step-by-step instructions for creating an MBR (Monthly Busin
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 * [Microsoft Copilot Studio Documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/)
 
@@ -41,14 +41,14 @@ This guide provides step-by-step instructions for creating an MBR (Monthly Busin
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 * Access to Microsoft Copilot Studio with appropriate licensing
 * Microsoft 365 environment with SharePoint access
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll build a conversational MBR agent that streamlines how managers and leaders access insights across Monthly Business Review decks. By the end of the lab, you will:
 
@@ -60,20 +60,20 @@ In this lab, you'll build a conversational MBR agent that streamlines how manage
 
 ---
 
-## 🧩 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 | ---- | -------- | ----------- | ------ |
-| 1 | [Create SharePoint site and upload MBR documents](#-use-case-1-create-sharepoint-site-and-upload-mbr-documents) | Establish centralized document repository for MBR data that the agent can access | 10 min |
-| 2 | [Build and deploy MBR agent](#-use-case-2-build-and-deploy-mbr-agent) | Create intelligent agent that analyzes MBR documents and provides instant insights | 10 min |
+| 1 | [Create SharePoint site and upload MBR documents](#use-case-1-create-sharepoint-site-and-upload-mbr-documents) | Establish centralized document repository for MBR data that the agent can access | 10 min |
+| 2 | [Build and deploy MBR agent](#use-case-2-build-and-deploy-mbr-agent) | Create intelligent agent that analyzes MBR documents and provides instant insights | 10 min |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 📁 Use Case #1: Create SharePoint site and upload MBR documents
+## Use Case #1: Create SharePoint site and upload MBR documents
 
 Set up a dedicated SharePoint site with MBR documents that will serve as the knowledge source for your agent.
 
@@ -131,7 +131,7 @@ Create a SharePoint site with MBR documents that will serve as the knowledge sou
 #### Upload MBR documents
 
 > [!IMPORTANT]
-> **For training participants:** If you are following this lab as part of a guided training session, the MBR documents have already been uploaded to SharePoint at the location specified in your **Lab Resources**. You can skip this use case and proceed directly to [Use Case #2](#-use-case-2-build-and-deploy-mbr-agent).
+> **For training participants:** If you are following this lab as part of a guided training session, the MBR documents have already been uploaded to SharePoint at the location specified in your **Lab Resources**. You can skip this use case and proceed directly to [Use Case #2](#use-case-2-build-and-deploy-mbr-agent).
 
 8. Navigate to the [sample files folder](./assets/) and download the sample files
 
@@ -151,7 +151,7 @@ Create a SharePoint site with MBR documents that will serve as the knowledge sou
 
 ---
 
-###  🏅 Congratulations! You've set up your SharePoint site with MBR documents!
+### Congratulations! You've set up your SharePoint site with MBR documents!
 
 ---
 
@@ -172,7 +172,7 @@ Create a SharePoint site with MBR documents that will serve as the knowledge sou
 
 ---
 
-## 🤖 Use Case #2: Build and deploy MBR agent
+## Use Case #2: Build and deploy MBR agent
 
 Create an intelligent conversational agent that can analyze your MBR documents and provide instant insights.
 
@@ -303,7 +303,7 @@ Create, configure, test, and deploy a conversational MBR agent that leverages Sh
 
 ---
 
-###  🏅 Congratulations! You've built and deployed your SharePoint MBR Agent!
+### Congratulations! You've built and deployed your SharePoint MBR Agent!
 
 ---
 
@@ -332,7 +332,7 @@ Create, configure, test, and deploy a conversational MBR agent that leverages Sh
 
 ---
 
-## 🔁 Summary of Learnings
+## Summary of Learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 
@@ -346,7 +346,7 @@ To maximize the impact of your MBR Agent:
 
 ---
 
-## 📌 Conclusions & Recommendations
+## Conclusions & Recommendations
 
 **MBR Agent golden rules:**
 

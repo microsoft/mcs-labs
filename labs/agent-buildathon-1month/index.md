@@ -6,7 +6,7 @@ description: Comprehensive month-long agent development program covering declara
 ---
 
 <!-- 
-🎯 AGENT BUILD-A-THON (1 MONTH) EVENT PAGE
-📝 Uses unified event.html layout with agent-buildathon-1month-specific configuration
-🔄 All content dynamically generated from lab-config.yml
+ AGENT BUILD-A-THON (1 MONTH) EVENT PAGE
+ Uses unified event.html layout with agent-buildathon-1month-specific configuration
+ All content dynamically generated from lab-config.yml
 -->

@@ -14,7 +14,7 @@ Master the deployment of your Microsoft Copilot Studio agents across environment
 
 ---
 
-## 🧭 Lab Details
+## Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -33,7 +33,7 @@ With Power Platform pipelines, this becomes an automated, governed process with 
 
 ---
 
-## 🎓 Core Concepts Overview
+## Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -47,7 +47,7 @@ With Power Platform pipelines, this becomes an automated, governed process with 
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 * [Overview of pipelines in Power Platform](https://learn.microsoft.com/power-platform/alm/pipelines)
 * [Export and import agents using solutions](https://learn.microsoft.com/microsoft-copilot-studio/authoring-solutions-import-export)
@@ -57,7 +57,7 @@ With Power Platform pipelines, this becomes an automated, governed process with 
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 * Completion of the [Set yourself up for success](https://github.com/microsoft/mcs-labs/tree/main/labs/setup-for-success) lab with a solution containing environment variables and connection references.
 * Access to multiple Power Platform environments (DEV, PROD). These are provided in the lab setup.
@@ -66,7 +66,7 @@ With Power Platform pipelines, this becomes an automated, governed process with 
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll implement a complete ALM deployment process for Microsoft Copilot Studio using Power Platform pipelines. By the end of the lab, you will:
 
@@ -78,20 +78,20 @@ In this lab, you'll implement a complete ALM deployment process for Microsoft Co
 
 ---
 
-## 🧩 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create Power Platform pipelines for deployment](#-use-case-1-create-power-platform-pipelines-for-deployment) | Automate with confidence – Set up governed, repeatable deployment workflows that democratize ALM for all makers while maintaining security and control through platform governance. | 10 min |
-| 2 | [Commit changes and understand source control structure](#-use-case-3-commit-changes-and-understand-source-control-structure) | Track and structure – Use Git integration to maintain deployment history and understand how solution components are organized in source control. | 5 min |
+| 1 | [Create Power Platform pipelines for deployment](#use-case-1-create-power-platform-pipelines-for-deployment) | Automate with confidence – Set up governed, repeatable deployment workflows that democratize ALM for all makers while maintaining security and control through platform governance. | 10 min |
+| 2 | [Commit changes and understand source control structure](#use-case-3-commit-changes-and-understand-source-control-structure) | Track and structure – Use Git integration to maintain deployment history and understand how solution components are organized in source control. | 5 min |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 🚀 Use Case #1: Create Power Platform pipelines for deployment
+## Use Case #1: Create Power Platform pipelines for deployment
 
 Set up automated deployment pipelines that democratize ALM while maintaining proper governance and security through platform controls.
 
@@ -164,7 +164,7 @@ the agent. Tell the agent to "Provision a PROD environment".  You are limited to
 
 ---
 
-###  🏅 Congratulations! You've created your deployment pipeline!
+### Congratulations! You've created your deployment pipeline!
 
 ---
 
@@ -186,7 +186,7 @@ the agent. Tell the agent to "Provision a PROD environment".  You are limited to
 
 ---
 
-## 📝 Use Case #2: Commit changes and understand source control structure
+## Use Case #2: Commit changes and understand source control structure
 
 Use Git integration to track deployment changes and understand how Power Platform solution components are organized in source control.
 
@@ -266,7 +266,7 @@ Commit deployment artifacts to Git and understand the structure of unpacked Powe
 
 ---
 
-###  🏅 Congratulations! You've mastered ALM deployment with pipelines and source control!
+### Congratulations! You've mastered ALM deployment with pipelines and source control!
 
 ---
 
@@ -286,23 +286,23 @@ Commit deployment artifacts to Git and understand the structure of unpacked Powe
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 **ALM golden rules reinforced:**
 
-✅ **Work in the context of solutions** – Pipelines require properly structured solutions for deployment automation.
+ **Work in the context of solutions** – Pipelines require properly structured solutions for deployment automation.
 
-✅ **Create separate solutions only if you need to deploy components independently** – Pipelines work best with cohesive solution packaging.
+ **Create separate solutions only if you need to deploy components independently** – Pipelines work best with cohesive solution packaging.
 
-✅ **Use a custom publisher and prefix** – Maintains clear ownership in automated deployment scenarios.
+ **Use a custom publisher and prefix** – Maintains clear ownership in automated deployment scenarios.
 
-✅ **Use environment variables for settings and secrets that change across environments** – Pipelines validate and update these automatically during deployment.
+ **Use environment variables for settings and secrets that change across environments** – Pipelines validate and update these automatically during deployment.
 
-✅ **Export and deploy solutions as managed, unless setting up a dev environment** – Pipelines automatically handle this, ensuring governance and preventing unauthorized changes.
+ **Export and deploy solutions as managed, unless setting up a dev environment** – Pipelines automatically handle this, ensuring governance and preventing unauthorized changes.
 
-✅ **Don't do customizations outside of dev** – Managed Environments enforce this rule, blocking unmanaged customizations in target environments.
+ **Don't do customizations outside of dev** – Managed Environments enforce this rule, blocking unmanaged customizations in target environments.
 
-✅ **Consider automating ALM for source control and automated deployments** – Pipelines provide this automation while remaining extensible for advanced scenarios.
+ **Consider automating ALM for source control and automated deployments** – Pipelines provide this automation while remaining extensible for advanced scenarios.
 
 > [!IMPORTANT]
 > **Critical reminder about non-solution-aware settings:**

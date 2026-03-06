@@ -4,7 +4,7 @@ Empower employees with answers that matter – Build an intelligent agent that c
 
 ---
 
-## 🧭 Lab Details
+## Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,27 +12,27 @@ Empower employees with answers that matter – Build an intelligent agent that c
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
-- [Why This Matters](#-why-this-matters)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Create an 'Ask Me Anything' Agent and Add SharePoint Knowledge Source](#-use-case-1-create-an-ask-me-anything-agent-and-add-sharepoint-knowledge-source)
-  - [Use Case #2: Configure Suggested Prompts](#-use-case-2-configure-suggested-prompts)
-  - [Use Case #3: Deploy to Microsoft 365 Copilot](#-use-case-3-deploy-to-microsoft-365-copilot)
-  - [Use Case #4: Knowledge Prioritization Techniques](#-use-case-4-knowledge-prioritization-techniques)
-  - [Use Case #5: Create a child IT Support Agent](#-use-case-5-create-a-child-it-support-agent)
-  - [Use Case #6: Add Custom Knowledge](#-use-case-6-add-custom-knowledge)
-  - [Use Case #7: AI Summary and Review of Meeting Notes](#-use-case-7-ai-summary-and-review-of-meeting-notes)
+- [Why This Matters](#why-this-matters)
+- [Introduction](#introduction)
+- [Core Concepts Overview](#core-concepts-overview)
+- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Use Cases Covered](#use-cases-covered)
+- [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: Create an 'Ask Me Anything' Agent and Add SharePoint Knowledge Source](#use-case-1-create-an-ask-me-anything-agent-and-add-sharepoint-knowledge-source)
+  - [Use Case #2: Configure Suggested Prompts](#use-case-2-configure-suggested-prompts)
+  - [Use Case #3: Deploy to Microsoft 365 Copilot](#use-case-3-deploy-to-microsoft-365-copilot)
+  - [Use Case #4: Knowledge Prioritization Techniques](#use-case-4-knowledge-prioritization-techniques)
+  - [Use Case #5: Create a child IT Support Agent](#use-case-5-create-a-child-it-support-agent)
+  - [Use Case #6: Add Custom Knowledge](#use-case-6-add-custom-knowledge)
+  - [Use Case #7: AI Summary and Review of Meeting Notes](#use-case-7-ai-summary-and-review-of-meeting-notes)
 
 ---
 
-## 🤔 Why This Matters
+## Why This Matters
 
 **Makers and IT professionals** - Tired of employees constantly asking the same questions about policies, benefits, or system status? Frustrated by scattered knowledge across multiple systems?
 
@@ -50,7 +50,7 @@ Think of your organization's knowledge like a library:
 
 ---
 
-## 🌐 Introduction
+## Introduction
 
 In today's fast-paced business environment, employees need quick access to accurate information from multiple sources. Whether it's HR policies, IT incident status, or custom knowledge bases, information is often scattered across different systems, making it difficult for employees to find what they need efficiently.
 
@@ -60,7 +60,7 @@ This lab teaches you to build a comprehensive solution that transforms how emplo
 
 ---
 
-## 🎓 Core Concepts Overview
+## Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -71,7 +71,7 @@ This lab teaches you to build a comprehensive solution that transforms how emplo
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 * [Microsoft Copilot Studio Documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/)
 * [Knowledge Sources in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-boost-conversations)
@@ -81,7 +81,7 @@ This lab teaches you to build a comprehensive solution that transforms how emplo
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 * Access to Microsoft Copilot Studio with appropriate licensing.
 * Access to SharePoint Online with sample knowledge content.
@@ -90,7 +90,7 @@ This lab teaches you to build a comprehensive solution that transforms how emplo
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll build a comprehensive "Ask me anything" agent that serves as a central knowledge hub for your organization. By the end of the lab, you will:
 
@@ -104,25 +104,25 @@ In this lab, you'll build a comprehensive "Ask me anything" agent that serves as
 
 ---
 
-## 🧩 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create an 'Ask Me Anything' Agent and Add SharePoint Knowledge Source](#-use-case-1-create-an-ask-me-anything-agent-and-add-sharepoint-knowledge-source) | Establishes foundational agent with SharePoint knowledge integration and grounded AI responses | 5 min |
-| 2 | [Configure Suggested Prompts](#-use-case-2-configure-suggested-prompts) | Guides users toward the agent's best capabilities through strategic prompt suggestions | 3 min |
-| 3 | [Deploy to Microsoft 365 Copilot](#-use-case-3-deploy-to-microsoft-365-copilot) | Makes the agent available in Microsoft 365 Copilot for seamless user access | 5 min |
-| 4 | [Knowledge Prioritization Techniques](#-use-case-4-knowledge-prioritization-techniques) | Implements context-aware knowledge routing for personalized and relevant responses | 8 min |
-| 5 | [Use Case #5: Create a child IT Support Agent](#-use-case-5-create-a-child-it-support-agent) | Discover how scoping for knowledge and tools can also be done through the multi-agent capabilitis. | 5 min |
-| 6 | [Add Custom Knowledge](#-use-case-6-add-custom-knowledge) | Extends knowledge base with custom HTTP endpoints for enterprise system integration | 7 min |
-| 7 | [AI Summary and Review of Meeting Notes](#-use-case-7-ai-summary-and-review-of-meeting-notes) | Automates document analysis with human review workflows for accuracy and approval | 7 min |
+| 1 | [Create an 'Ask Me Anything' Agent and Add SharePoint Knowledge Source](#use-case-1-create-an-ask-me-anything-agent-and-add-sharepoint-knowledge-source) | Establishes foundational agent with SharePoint knowledge integration and grounded AI responses | 5 min |
+| 2 | [Configure Suggested Prompts](#use-case-2-configure-suggested-prompts) | Guides users toward the agent's best capabilities through strategic prompt suggestions | 3 min |
+| 3 | [Deploy to Microsoft 365 Copilot](#use-case-3-deploy-to-microsoft-365-copilot) | Makes the agent available in Microsoft 365 Copilot for seamless user access | 5 min |
+| 4 | [Knowledge Prioritization Techniques](#use-case-4-knowledge-prioritization-techniques) | Implements context-aware knowledge routing for personalized and relevant responses | 8 min |
+| 5 | [Use Case #5: Create a child IT Support Agent](#use-case-5-create-a-child-it-support-agent) | Discover how scoping for knowledge and tools can also be done through the multi-agent capabilitis. | 5 min |
+| 6 | [Add Custom Knowledge](#use-case-6-add-custom-knowledge) | Extends knowledge base with custom HTTP endpoints for enterprise system integration | 7 min |
+| 7 | [AI Summary and Review of Meeting Notes](#use-case-7-ai-summary-and-review-of-meeting-notes) | Automates document analysis with human review workflows for accuracy and approval | 7 min |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 🧱 Use Case #1: Create an 'Ask Me Anything' Agent and Add SharePoint Knowledge Source
+## Use Case #1: Create an 'Ask Me Anything' Agent and Add SharePoint Knowledge Source
 
 Create a foundational intelligent agent with SharePoint integration for grounded AI responses.
 
@@ -184,7 +184,7 @@ What's the Northwind Health Plus Benefits plan?
 
 ---
 
-###  🏅 Congratulations! You've completed Use Case #1!
+### Congratulations! You've completed Use Case #1!
 
 ---
 
@@ -198,7 +198,7 @@ What's the Northwind Health Plus Benefits plan?
 
 ---
 
-## 🔄 Use Case #2: Configure Suggested Prompts
+## Use Case #2: Configure Suggested Prompts
 
 Guide users toward your agent's best capabilities through strategic prompt suggestions.
 
@@ -233,7 +233,7 @@ Suggest things your agent can do to your end-users through carefully crafted pro
 
 ---
 
-###  🏅 Congratulations! You've completed Use Case #2!
+### Congratulations! You've completed Use Case #2!
 
 ---
 
@@ -244,7 +244,7 @@ Suggest things your agent can do to your end-users through carefully crafted pro
 
 ---
 
-## 🔄 Use Case #3: Deploy to Microsoft 365 Copilot
+## Use Case #3: Deploy to Microsoft 365 Copilot
 
 Make the agent available in Microsoft 365 Copilot for seamless user access.
 
@@ -298,7 +298,7 @@ Make the agent available in Microsoft 365 Copilot for your users.
 
 ---
 
-###  🏅 Congratulations! You've completed Use Case #3!
+### Congratulations! You've completed Use Case #3!
 
 ---
 
@@ -309,7 +309,7 @@ Make the agent available in Microsoft 365 Copilot for your users.
 
 ---
 
-## 🔄 Use Case #4: Knowledge Prioritization Techniques
+## Use Case #4: Knowledge Prioritization Techniques
 
 Implement context-aware knowledge routing for personalized and relevant responses.
 
@@ -499,7 +499,7 @@ What benefits do employees get?
 
 ---
 
-###  🏅 Congratulations! You've completed Use Case #4!
+### Congratulations! You've completed Use Case #4!
 
 ---
 
@@ -510,7 +510,7 @@ What benefits do employees get?
 
 ---
 
-## 🔄 Use Case #5: Create a child IT Support Agent
+## Use Case #5: Create a child IT Support Agent
 
 Integrate real-time incident management for comprehensive support capabilities and demonstrate agent scoping techniques.
 
@@ -637,7 +637,7 @@ This use case demonstrates **agent scoping** principles:
 
 ---
 
-###  🏅 Congratulations! You've completed Use Case #5!
+### Congratulations! You've completed Use Case #5!
 
 ---
 
@@ -648,7 +648,7 @@ This use case demonstrates **agent scoping** principles:
 
 ---
 
-## 🔄 Use Case #6: Add Custom Knowledge
+## Use Case #6: Add Custom Knowledge
 
 Extend knowledge base with custom HTTP endpoints for enterprise system integration.
 
@@ -757,7 +757,7 @@ In this section, you'll configure any third-party knowledge to enrich knowledge 
 
 ---
 
-###  🏅 Congratulations! You've completed Use Case #6!
+### Congratulations! You've completed Use Case #6!
 
 ---
 
@@ -768,7 +768,7 @@ In this section, you'll configure any third-party knowledge to enrich knowledge 
 
 ---
 
-## 🔄 Use Case #7: AI Summary and Review of Meeting Notes
+## Use Case #7: AI Summary and Review of Meeting Notes
 
 Automate document analysis with human review workflows for accuracy and approval.
 
@@ -946,7 +946,7 @@ Use this tool to help users with meeting notes
 
 ---
 
-###  🏅 Congratulations! You've completed Use Case #7!
+### Congratulations! You've completed Use Case #7!
 
 ---
 
@@ -964,7 +964,7 @@ Use this tool to help users with meeting notes
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

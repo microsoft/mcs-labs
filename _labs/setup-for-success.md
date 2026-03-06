@@ -14,7 +14,7 @@ Build agents with confidence. Deploy with control. Master the lifecycle of your 
 
 ---
 
-## 🧭 Lab Details
+## Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -30,7 +30,7 @@ With the ALM practices in this lab, you'll avoid these pitfalls and set yourself
 
 ---
 
-## 🎓 Core Concepts Overview
+## Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -47,7 +47,7 @@ With the ALM practices in this lab, you'll avoid these pitfalls and set yourself
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 * [ALM overview - Microsoft Power Platform](https://learn.microsoft.com/power-platform/alm/alm-overview)
 * [Publish and deploy your agent](https://learn.microsoft.com/copilot-studio/publish-deploy)
@@ -58,7 +58,7 @@ With the ALM practices in this lab, you'll avoid these pitfalls and set yourself
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 * Access to Microsoft Copilot Studio.
 * A Microsoft Power Platform environment with at least an Environment Maker security role.
@@ -66,7 +66,7 @@ With the ALM practices in this lab, you'll avoid these pitfalls and set yourself
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll configure your ALM foundation for working with Microsoft Copilot Studio like a pro. By the end of the lab, you will:
 
@@ -78,21 +78,21 @@ In this lab, you'll configure your ALM foundation for working with Microsoft Cop
 
 ---
 
-## 🧩 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create a solution and custom publisher](#-use-case-1-create-a-solution-and-custom-publisher) | Structure your success – Group, manage, and deploy all your agent components with clarity and control. | 5 min |
-| 2 | [Create environment variables and connection references](#-use-case-2-create-environment-variables-and-connection-references) | Adapt with flexibility – Environment variables future-proof your agents for seamless multi-environment deployments. Manage credentials and services cleanly across dev, test, and prod. | 5 min |
-| 3 | [Set up Git source control](#-use-case-3-set-up-git-source-control) | Track and evolve – Use Git to version, review, and automate deployment of your agent assets. | 10 min |
+| 1 | [Create a solution and custom publisher](#use-case-1-create-a-solution-and-custom-publisher) | Structure your success – Group, manage, and deploy all your agent components with clarity and control. | 5 min |
+| 2 | [Create environment variables and connection references](#use-case-2-create-environment-variables-and-connection-references) | Adapt with flexibility – Environment variables future-proof your agents for seamless multi-environment deployments. Manage credentials and services cleanly across dev, test, and prod. | 5 min |
+| 3 | [Set up Git source control](#use-case-3-set-up-git-source-control) | Track and evolve – Use Git to version, review, and automate deployment of your agent assets. | 10 min |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 🧱 Use Case #1: Create a solution and custom publisher
+## Use Case #1: Create a solution and custom publisher
 
 Use a structured container to group all agents components for better lifecycle management.
 
@@ -154,7 +154,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 ---
 
-###  🏅 Congratulations! You've created your solution!
+### Congratulations! You've created your solution!
 
 ---
 
@@ -182,7 +182,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 ---
 
-## 🧩 Use Case #2: Create environment variables and connection references
+## Use Case #2: Create environment variables and connection references
 
 Use reusable variables and connection abstractions for seamless multi-environment deployments.
 
@@ -264,7 +264,7 @@ In this section, you'll learn how to create environment variables and connection
 
 ---
 
-###  🏅 Congratulations! You've created environment variables and connection references!
+### Congratulations! You've created environment variables and connection references!
 
 ---
 
@@ -286,7 +286,7 @@ In this section, you'll learn how to create environment variables and connection
 
 ---
 
-## 🔄 Use Case #3: Set up Git source control
+## Use Case #3: Set up Git source control
 
 > [!TIP]
 > This lab is optional and won't block your progress in future labs.
@@ -327,7 +327,7 @@ In this section, you'll learn how to create a new project in Azure DevOps, how t
 
    ![alt text](images/azure-devops-initialize-branch.png) 
     
-> 🎉 You’ve set up the Git repo! Now return to Microsoft Copilot Studio.
+>  You’ve set up the Git repo! Now return to Microsoft Copilot Studio.
 
 ### Connecting Microsoft Copilot Studio to Git
 
@@ -403,7 +403,7 @@ In this section, you'll learn how to create a new project in Azure DevOps, how t
 
    ![alt text](images/azure-devops-initialize-branch.png) 
     
-> 🎉 You’ve set up the Git repo! Now return to Microsoft Copilot Studio.
+>  You’ve set up the Git repo! Now return to Microsoft Copilot Studio.
 
 ### Connecting Microsoft Copilot Studio to Git
 
@@ -441,7 +441,7 @@ In this section, you'll learn how to create a new project in Azure DevOps, how t
 
 ---
 
-###  🏅 Congratulations! You've set up Git source control!
+### Congratulations! You've set up Git source control!
 
 ---
 
@@ -459,7 +459,7 @@ In this section, you'll learn how to create a new project in Azure DevOps, how t
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

@@ -1,3 +1,19 @@
+---
+layout: lab
+title: "Build Progressive AI Assistants with Agent Builder in Microsoft 365"
+order: 140
+duration: 30
+difficulty: 100
+lab_type: local
+section: core
+journeys: ["quick-start", "business-user"]
+bootcamp_order: "1"
+description: "Master agent creation from basic web-grounded assistants to advanced SharePoint-integrated agents with code interpreter and image generation capabilities."
+
+---
+
+---
+
 # Build Progressive AI Assistants with Agent Builder in Microsoft 365
 
 Master agent creation from basic web-grounded assistants to advanced SharePoint-integrated agents with code interpreter and image generation capabilities.

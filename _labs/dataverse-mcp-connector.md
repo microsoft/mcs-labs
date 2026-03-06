@@ -1,3 +1,17 @@
+---
+layout: single
+title: "Contoso Agent and Dataverse MCP Connector - Build an AI Agent with Live Data Integration"
+description: "Create and configure a Copilot Agent in Copilot Studio with Dataverse MCP Server integration to streamline business workflows."
+order: 999
+duration: 30
+difficulty: 100
+section: specialized_labs
+journeys: ["quick-start", "business-user", "developer"]
+azure_ai_workshop_order: "1"
+---
+
+---
+
 # Contoso Agent and Dataverse MCP Connector - Build an AI Agent with Live Data Integration
 
 Create and configure a Copilot Agent in Copilot Studio with Dataverse MCP Server integration to streamline business workflows.

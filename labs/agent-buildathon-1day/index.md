@@ -6,7 +6,7 @@ description: One-day intensive agent building workshop focused on creating web-b
 ---
 
 <!-- 
-🎯 AGENT BUILD-A-THON (1 DAY) EVENT PAGE
-📝 Uses unified event.html layout with agent-buildathon-1day-specific configuration
-🔄 All content dynamically generated from lab-config.yml
+ AGENT BUILD-A-THON (1 DAY) EVENT PAGE
+ Uses unified event.html layout with agent-buildathon-1day-specific configuration
+ All content dynamically generated from lab-config.yml
 -->

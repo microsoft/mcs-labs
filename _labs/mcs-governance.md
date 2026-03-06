@@ -1,3 +1,19 @@
+---
+layout: lab
+title: "Governance Zones in Copilot Studio"
+order: 195
+duration: 30
+difficulty: 300
+lab_type: local
+section: intermediate
+journeys: ["business-user", "developer"]
+bootcamp_order: "8"
+description: "Build the same agent across three governance zones (Green, Yellow, Red) to experience firsthand how DLP policies and environment settings control knowledge access in Microsoft Copilot Studio."
+
+---
+
+---
+
 # Governance Zones in Copilot Studio
 
 Build the same agent across three governance zones (Green, Yellow, Red) to experience firsthand how DLP policies and environment settings control knowledge access in Microsoft Copilot Studio.

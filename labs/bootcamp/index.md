@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "⚔️ Architecture Bootcamp"
+title: "Architecture Bootcamp"
 description: "Intensive hands-on bootcamp covering agent building, SharePoint integration, autonomous AI, and DevOps practices."
 toc: true
 toc_sticky: true

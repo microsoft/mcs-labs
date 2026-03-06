@@ -8,7 +8,7 @@ logo: "/favicon.svg"
 
 # Theme
 theme: minimal-mistakes-jekyll
-minimal_mistakes_skin: "meridian"
+minimal_mistakes_skin: "air"
 
 # Search
 search: true
@@ -25,7 +25,6 @@ plugins:
   - jekyll-sitemap
   - jekyll-seo-tag
   - jekyll-include-cache
-  - jekyll-paginate
 
 # Kramdown settings
 kramdown:
@@ -57,12 +56,6 @@ collections:
     output: true
     permalink: /:collection/:name/
 
-# Development settings
-livereload: true
-livereload_port: 35729
-incremental: false
-force_polling: true
-
 # Default layouts and front matter
 defaults:
   - scope:
@@ -90,17 +83,10 @@ include:
 
 # Exclude from build
 exclude:
-  - node_modules/
   - .github/
-  - package*.json
   - README.md
   - LICENSE
   - SECURITY.md
   - labs/*/README.md
   - labs/*/local-dist/
   - labs/lab-template.md
-  - scripts/
-  - _layouts_backup/
-  - samples/
-  - MISSING_CONTENT.md
-  - theme-test.md

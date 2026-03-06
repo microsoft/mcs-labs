@@ -6,7 +6,7 @@ description: Updated full-day workshop covering progressive AI assistants and co
 ---
 
 <!--
-🎯 MCS IN A DAY V2 EVENT PAGE
-📝 Uses unified event.html layout with mcs-in-a-day-v2-specific configuration
-🔄 All content dynamically generated from lab-config.yml
+ MCS IN A DAY V2 EVENT PAGE
+ Uses unified event.html layout with mcs-in-a-day-v2-specific configuration
+ All content dynamically generated from lab-config.yml
 -->

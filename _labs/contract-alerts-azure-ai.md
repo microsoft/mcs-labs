@@ -1,3 +1,17 @@
+---
+layout: single
+title: "Proactive Contract Alerts in Teams with Azure AI Search and Speech-to-Text - Build Intelligent Event-Driven Agents"
+description: "Configure Copilot Studio agents to proactively notify users, search contract documents, and transcribe audio files using Azure AI services."
+order: 999
+duration: 70
+difficulty: 200
+section: core_learning_path
+journeys: ["business-user"]
+azure_ai_workshop_order: "2"
+---
+
+---
+
 # Proactive Contract Alerts in Teams with Azure AI Search and Speech-to-Text - Build Intelligent Event-Driven Agents
 
 Configure Copilot Studio agents to proactively notify users, search contract documents, and transcribe audio files using Azure AI services.

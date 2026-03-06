@@ -1,3 +1,19 @@
+---
+layout: lab
+title: "Using Component Collections in Copilot Studio"
+order: 260
+duration: 30
+difficulty: 300
+lab_type: local
+section: intermediate
+journeys: ["business-user", "developer"]
+bootcamp_order: "6"
+description: "Learn how to create, share, and manage reusable component collections to package topics and knowledge across multiple agents in Copilot Studio."
+
+---
+
+---
+
 # Using Component Collections in Copilot Studio
 
 Learn how to create, share, and manage reusable component collections to package topics and knowledge across multiple agents in Copilot Studio.

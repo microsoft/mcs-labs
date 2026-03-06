@@ -1,3 +1,19 @@
+---
+layout: lab
+title: "Monitor Performance and Evaluate Agent Quality"
+order: 180
+duration: 30
+difficulty: 200
+lab_type: local
+section: core
+journeys: ["quick-start", "business-user", "developer"]
+bootcamp_order: "4"
+description: "Learn how to use analytics to measure agent performance, create evaluation test sets to systematically assess agent quality, and run evaluations to drive continuous improvement."
+
+---
+
+---
+
 # Monitor Performance and Evaluate Agent Quality
 
 Learn how to use analytics to measure agent performance, create evaluation test sets to systematically assess agent quality, and run evaluations to drive continuous improvement.

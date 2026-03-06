@@ -13,7 +13,7 @@ Create and publish your first intelligent copilot using Microsoft Copilot Studio
 
 ---
 
-## 🌝 Lab Details
+## Lab Details
 
 | Level | Persona | Duration   | Purpose                                                                                                                                                                                                                                                                                                                            |
 | ----- | ------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -31,7 +31,7 @@ Create and publish your first intelligent copilot using Microsoft Copilot Studio
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 * [Microsoft Copilot Studio Overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/overview)
 * [Copilot Studio Authoring Guide](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring)
@@ -40,7 +40,7 @@ Create and publish your first intelligent copilot using Microsoft Copilot Studio
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 * A computer with internet access
 * Access to a Microsoft tenant with Copilot Studio (trial or licensed)
@@ -48,7 +48,7 @@ Create and publish your first intelligent copilot using Microsoft Copilot Studio
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll build a complete agent and publish it for testing. By the end of the lab, you will:
 
@@ -60,20 +60,20 @@ In this lab, you'll build a complete agent and publish it for testing. By the en
 
 ---
 
-## 🧰 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case                                                                                | Value added                                                 | Effort |
 | ---- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------ |
-| 1    | [Create an agent and topic](#-use-case-1-create-an-agent-and-topic)                     | Build a usable agent with AI-augmented and manual authoring | 30 min |
-| 2    | [Publish your agent to the demo site](#-use-case-2-publish-your-agent-to-the-demo-site) | Deploy your agent and gather feedback from test users       | 10 min |
+| 1    | [Create an agent and topic](#use-case-1-create-an-agent-and-topic)                     | Build a usable agent with AI-augmented and manual authoring | 30 min |
+| 2    | [Publish your agent to the demo site](#use-case-2-publish-your-agent-to-the-demo-site) | Deploy your agent and gather feedback from test users       | 10 min |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 🧱 Use Case #1: Create an agent and topic
+## Use Case #1: Create an agent and topic
 
 Build your first copilot and create a topic to handle customer order status.
 
@@ -145,7 +145,7 @@ Create a fully functioning agent with one manually authored topic and one AI-gen
 
 ---
 
-####  🏅 Congratulations! You've created *Contoso Support Assistant* !
+#### Congratulations! You've created *Contoso Support Assistant* !
 
 ---
 
@@ -243,7 +243,7 @@ Create a fully functioning agent with one manually authored topic and one AI-gen
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case 1!
+### Congratulations! You've completed Use Case 1!
 
 ---
 
@@ -269,7 +269,7 @@ Create a fully functioning agent with one manually authored topic and one AI-gen
 
 ---
 
-## 🔄 Use Case #2: Publish your agent to the demo site
+## Use Case #2: Publish your agent to the demo site
 
 Let external users test your agent before going live.
 
@@ -325,7 +325,7 @@ In this section, you'll:
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case 2!
+### Congratulations! You've completed Use Case 2!
 
 ---
 
@@ -343,7 +343,7 @@ In this section, you'll:
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 To maximize your Copilot Studio experience:
 

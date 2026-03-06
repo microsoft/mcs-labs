@@ -1,3 +1,18 @@
+---
+layout: lab
+title: "Expense Claims Agent with Approvals (Human-in-the-Loop)"
+order: 240
+duration: 45
+difficulty: 200
+lab_type: local
+section: intermediate
+journeys: ["business-user", "developer"]
+description: "Build an end-to-end expense claims solution where an employee submits an expense report (and receipt) through an agent, the request is evaluated against policy using AI, escalated to a manager for final approval when needed, and the employee is notified of the final outcome via email."
+
+---
+
+---
+
 # Expense Claims Agent with Approvals (Human-in-the-Loop)
 
 Build an end-to-end expense claims solution where an employee submits an expense report (and receipt) through an agent, the request is evaluated against policy using AI, escalated to a manager for final approval when needed, and the employee is notified of the final outcome via email.
@@ -523,4 +538,3 @@ To maximize the impact of **agent flows with multistage approvals in Microsoft C
 By following these principles, you’ll build scalable, trustworthy, and efficient approval workflows that combine AI speed with human judgment and deliver consistent end-to-end experiences.
 
 ---
-

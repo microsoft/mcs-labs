@@ -4,7 +4,7 @@ Create and publish your first intelligent copilot using Microsoft Copilot Studio
 
 ---
 
-## 🌝 Lab Details
+## Lab Details
 
 | Level | Persona | Duration   | Purpose                                                                                                                                                                                                                                                                                                                            |
 | ----- | ------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -12,43 +12,43 @@ Create and publish your first intelligent copilot using Microsoft Copilot Studio
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
 - [Create Your First Agent in Microsoft Copilot Studio](#create-your-first-agent-in-microsoft-copilot-studio)
-  - [🌝 Lab Details](#-lab-details)
-  - [📚 Table of Contents](#-table-of-contents)
-  - [🤔 Why This Matters](#-why-this-matters)
-  - [🌐 Introduction](#-introduction)
-  - [🎓 Core Concepts Overview](#-core-concepts-overview)
-  - [📄 Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-  - [✅ Prerequisites](#-prerequisites)
-  - [🎯 Summary of Targets](#-summary-of-targets)
-  - [🧰 Use Cases Covered](#-use-cases-covered)
-  - [🛠️ Instructions by Use Case](#️-instructions-by-use-case)
-  - [🧱 Use Case #1: Create an agent and topic](#-use-case-1-create-an-agent-and-topic)
+  - [Lab Details](#lab-details)
+  - [Table of Contents](#table-of-contents)
+  - [Why This Matters](#why-this-matters)
+  - [Introduction](#introduction)
+  - [Core Concepts Overview](#core-concepts-overview)
+  - [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+  - [Prerequisites](#prerequisites)
+  - [Summary of Targets](#summary-of-targets)
+  - [Use Cases Covered](#use-cases-covered)
+  - [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: Create an agent and topic](#use-case-1-create-an-agent-and-topic)
     - [Objective](#objective)
     - [Step-by-step instructions](#step-by-step-instructions)
       - [Sign in and create an agent](#sign-in-and-create-an-agent)
       - [Define your agent through conversation](#define-your-agent-through-conversation)
-      - [🏅 Congratulations! You've created *Contoso Support Assistant* !](#-congratulations-youve-created-contoso-support-assistant-)
+      - [Congratulations! You've created *Contoso Support Assistant* !](#congratulations-youve-created-contoso-support-assistant-)
       - [Finalize creation](#finalize-creation)
       - [Manually create your first topic](#manually-create-your-first-topic)
       - [Create a topic using Copilot](#create-a-topic-using-copilot)
-    - [🏅 Congratulations! You've completed Use Case 1!](#-congratulations-youve-completed-use-case-1)
+    - [Congratulations! You've completed Use Case 1!](#congratulations-youve-completed-use-case-1)
     - [Test your understanding](#test-your-understanding)
-  - [🔄 Use Case #2: Publish your agent to the demo site](#-use-case-2-publish-your-agent-to-the-demo-site)
+  - [Use Case #2: Publish your agent to the demo site](#use-case-2-publish-your-agent-to-the-demo-site)
     - [Step-by-step instructions](#step-by-step-instructions-1)
       - [Modify the agent settings to enable access from external users](#modify-the-agent-settings-to-enable-access-from-external-users)
       - [Validate your agent's behavior on an external testing website](#validate-your-agents-behavior-on-an-external-testing-website)
-    - [🏅 Congratulations! You've completed Use Case 2!](#-congratulations-youve-completed-use-case-2)
+    - [Congratulations! You've completed Use Case 2!](#congratulations-youve-completed-use-case-2)
     - [Test your understanding](#test-your-understanding-1)
-  - [🏆 Summary of learnings](#-summary-of-learnings)
+  - [Summary of learnings](#summary-of-learnings)
     - [Conclusions and recommendations](#conclusions-and-recommendations)
 
 
 ---
 
-## 🤔 Why This Matters
+## Why This Matters
 
 **For new Copilot Studio makers:** You might feel unsure about where to start or how much time it will take to create something valuable.
 
@@ -68,7 +68,7 @@ Think of building a bot like assembling a LEGO set:
 
 ---
 
-## 🌐 Introduction
+## Introduction
 
 Microsoft Copilot Studio simplifies the creation of intelligent bots by providing a unified canvas for conversational logic, AI integration, and publishing.
 
@@ -78,7 +78,7 @@ Microsoft Copilot Studio simplifies the creation of intelligent bots by providin
 
 ---
 
-## 🎓 Core Concepts Overview
+## Core Concepts Overview
 
 | Concept                       | Why it matters                                                                         |
 | ----------------------------- | -------------------------------------------------------------------------------------- |
@@ -91,7 +91,7 @@ Microsoft Copilot Studio simplifies the creation of intelligent bots by providin
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 * [Microsoft Copilot Studio Overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/overview)
 * [Copilot Studio Authoring Guide](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring)
@@ -100,7 +100,7 @@ Microsoft Copilot Studio simplifies the creation of intelligent bots by providin
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 * A computer with internet access
 * Access to a Microsoft tenant with Copilot Studio (trial or licensed)
@@ -108,7 +108,7 @@ Microsoft Copilot Studio simplifies the creation of intelligent bots by providin
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll build a complete agent and publish it for testing. By the end of the lab, you will:
 
@@ -120,20 +120,20 @@ In this lab, you'll build a complete agent and publish it for testing. By the en
 
 ---
 
-## 🧰 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case                                                                                | Value added                                                 | Effort |
 | ---- | --------------------------------------------------------------------------------------- | ----------------------------------------------------------- | ------ |
-| 1    | [Create an agent and topic](#-use-case-1-create-an-agent-and-topic)                     | Build a usable agent with AI-augmented and manual authoring | 30 min |
-| 2    | [Publish your agent to the demo site](#-use-case-2-publish-your-agent-to-the-demo-site) | Deploy your agent and gather feedback from test users       | 10 min |
+| 1    | [Create an agent and topic](#use-case-1-create-an-agent-and-topic)                     | Build a usable agent with AI-augmented and manual authoring | 30 min |
+| 2    | [Publish your agent to the demo site](#use-case-2-publish-your-agent-to-the-demo-site) | Deploy your agent and gather feedback from test users       | 10 min |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 🧱 Use Case #1: Create an agent and topic
+## Use Case #1: Create an agent and topic
 
 Build your first copilot and create a topic to handle customer order status.
 
@@ -205,7 +205,7 @@ Create a fully functioning agent with one manually authored topic and one AI-gen
 
 ---
 
-####  🏅 Congratulations! You've created *Contoso Support Assistant* !
+#### Congratulations! You've created *Contoso Support Assistant* !
 
 ---
 
@@ -303,7 +303,7 @@ Create a fully functioning agent with one manually authored topic and one AI-gen
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case 1!
+### Congratulations! You've completed Use Case 1!
 
 ---
 
@@ -329,7 +329,7 @@ Create a fully functioning agent with one manually authored topic and one AI-gen
 
 ---
 
-## 🔄 Use Case #2: Publish your agent to the demo site
+## Use Case #2: Publish your agent to the demo site
 
 Let external users test your agent before going live.
 
@@ -385,7 +385,7 @@ In this section, you'll:
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case 2!
+### Congratulations! You've completed Use Case 2!
 
 ---
 
@@ -403,7 +403,7 @@ In this section, you'll:
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 To maximize your Copilot Studio experience:
 
