@@ -14,19 +14,18 @@
   });
 })();
 </script>
-<!-- TOC slide-out toggle -->
+<!-- TOC push-panel toggle -->
 <script>
 (function() {
   var sidebar = document.querySelector('.sidebar__right');
   if (!sidebar) return;
   var btn = document.createElement('button');
   btn.className = 'toc-toggle';
-  btn.innerHTML = '<i class="fas fa-list-ul"></i>';
+  btn.innerHTML = '<i class="fas fa-list-ul"></i> Contents';
   btn.setAttribute('aria-label', 'Toggle table of contents');
   document.body.appendChild(btn);
   btn.addEventListener('click', function() {
-    var open = sidebar.classList.toggle('toc-open');
-    btn.classList.toggle('toc-active', open);
+    document.body.classList.toggle('toc-open');
   });
 })();
 </script>

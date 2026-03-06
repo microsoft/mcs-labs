@@ -27,94 +27,98 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
 }
 
 // ---------------------------------------------------------------------------
-// TOC: slide-out panel from right edge
+// TOC: push-panel from the right
 // ---------------------------------------------------------------------------
+
+// Content area transitions when TOC opens
+#main {
+  transition: margin-right 0.25s ease;
+}
+
+body.toc-open #main {
+  margin-right: 240px;
+}
+
+// Sidebar panel — fixed right, hidden by default
 aside.sidebar__right {
   position: fixed !important;
-  top: 70px !important;
+  top: 0 !important;
   right: 0 !important;
   left: auto !important;
-  bottom: auto !important;
-  width: 260px !important;
-  max-height: calc(100vh - 90px) !important;
+  bottom: 0 !important;
+  width: 240px !important;
   margin: 0 !important;
-  padding: 0 !important;
-  z-index: 200;
+  padding: 60px 0 0 !important;
+  z-index: 100;
   float: none !important;
   inset-inline-end: 0 !important;
   margin-inline-end: 0 !important;
-  transform: translateX(calc(100% + 1px));
-  transition: transform 0.2s ease;
-  overflow: visible;
+  background: #fafaf9;
+  border-left: 1px solid #e8e6e4;
+  transform: translateX(100%);
+  transition: transform 0.25s ease;
+  overflow-y: auto;
 
-  &.toc-open {
+  body.toc-open & {
     transform: translateX(0);
   }
 }
 
-// Toggle tab pinned to right edge
+// Toggle button — always visible
 .toc-toggle {
   position: fixed;
   top: 76px;
-  right: 0;
+  right: 12px;
   z-index: 201;
-  width: 32px;
-  height: 32px;
+  height: 28px;
+  padding: 0 8px 0 6px;
   border: 1px solid #e1dfdd;
-  border-right: none;
-  border-radius: 6px 0 0 6px;
+  border-radius: 4px;
   background: #fff;
   color: #605e5c;
   cursor: pointer;
   display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 0.8em;
-  box-shadow: -1px 1px 3px rgba(0,0,0,0.06);
-  transition: all 0.2s;
+  gap: 5px;
+  font-family: $sans-serif;
+  font-size: 0.72em;
+  font-weight: 500;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+  transition: all 0.25s ease;
+
+  i { font-size: 0.95em; }
 
   &:hover {
     color: #0078d4;
-    background: #f0f6ff;
+    border-color: #c8c6c4;
   }
 
-  &.toc-active {
-    right: 260px;
-    background: #f3f2f1;
+  body.toc-open & {
+    right: 252px;
   }
 }
 
 .toc {
-  background: #fff;
-  border: 1px solid #e1dfdd;
-  border-right: none;
-  border-radius: 6px 0 0 6px;
-  box-shadow: -2px 0 8px rgba(0,0,0,0.06);
-  overflow-y: auto;
-  max-height: calc(100vh - 90px);
+  background: transparent;
+  border: none;
+  box-shadow: none;
 
   .nav__title {
-    background: none;
-    color: #323130;
-    font-size: 0.78em;
-    font-weight: 600;
-    letter-spacing: 0;
-    text-transform: none;
-    padding: 0.8em 1em 0.5em;
-    border-bottom: 1px solid #f3f2f1;
+    display: none; // We use the toggle button label instead
   }
 
   .toc__menu {
-    padding: 0.3em 0 0.5em;
+    padding: 0.5em 0;
 
     a {
       font-size: 0.78em;
       font-weight: 400;
       color: #605e5c;
-      padding: 0.25em 1em 0.25em 1em;
+      padding: 0.3em 1.2em 0.3em 1em;
       display: block;
       border-left: 2px solid transparent;
       text-decoration: none;
+      transition: color 0.1s;
 
       &:hover {
         color: #0078d4;
