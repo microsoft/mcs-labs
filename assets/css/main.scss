@@ -14,11 +14,10 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
 @import "minimal-mistakes";
 
 // ---------------------------------------------------------------------------
-// Layout: full-width content when no left sidebar
+// Layout: no left sidebar gap
 // ---------------------------------------------------------------------------
-#main:not(:has(.sidebar)) .page {
-  float: none;
-  // Keep original width to accommodate TOC sidebar
+.page {
+  float: none !important;
 }
 
 .breadcrumbs ol {
@@ -26,14 +25,61 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
   width: 100%;
 }
 
-// Wide pages (homepage, workshops) get full width and no TOC
+// Wide pages — full width, no TOC column
 .wide .page {
   width: 100% !important;
   padding-inline-end: 0 !important;
 }
 
 // ---------------------------------------------------------------------------
-// Page title
+// TOC: gentle, always-visible right sidebar
+// ---------------------------------------------------------------------------
+.toc {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  .nav__title {
+    background: none;
+    color: #323130;
+    font-size: 0.82em;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+    padding: 0 0 0.4em;
+    border-bottom: none;
+  }
+
+  .toc__menu {
+    padding: 0;
+
+    a {
+      font-size: 0.78em;
+      font-weight: 400;
+      color: #a19f9d;
+      padding: 0.2em 0 0.2em 0.8em;
+      display: block;
+      border-left: 2px solid transparent;
+      text-decoration: none;
+
+      &:hover {
+        color: #0078d4;
+      }
+    }
+
+    // Only show top-level TOC items (h2s)
+    ul { display: none; }
+  }
+
+  li.active > a {
+    color: #0078d4;
+    font-weight: 500;
+    border-left-color: #0078d4;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Page title (for non-lab pages)
 // ---------------------------------------------------------------------------
 .page__title {
   font-size: 1.4em;
@@ -55,72 +101,7 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
 }
 
 // ---------------------------------------------------------------------------
-// TOC sidebar
-// ---------------------------------------------------------------------------
-.sidebar__right {
-  // Sticky TOC that scrolls with the page
-  &.sticky {
-    top: 4em;
-  }
-}
-
-.toc {
-  border: 1px solid #e1dfdd;
-  border-radius: 8px;
-  background: #fff;
-  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
-
-  .nav__title {
-    background: #0f1b2d;
-    color: #fff;
-    font-size: 0.7em;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 0.65em 1em;
-    border-radius: 7px 7px 0 0;
-  }
-
-  .toc__menu {
-    padding: 0.4em 0;
-
-    a {
-      font-size: 0.8em;
-      font-weight: 500;
-      color: #605e5c;
-      padding: 0.3em 1em;
-      display: block;
-      border-left: 2px solid transparent;
-      transition: all 0.1s;
-
-      &:hover {
-        color: #0078d4;
-        border-left-color: #0078d4;
-        background: #f0f6ff;
-      }
-    }
-
-    // Nested items
-    ul a {
-      padding-left: 1.8em;
-      font-size: 0.76em;
-    }
-
-    ul ul a {
-      padding-left: 2.6em;
-      font-size: 0.73em;
-    }
-  }
-
-  li.active > a {
-    color: #0078d4;
-    font-weight: 600;
-    border-left-color: #0078d4;
-  }
-}
-
-// ---------------------------------------------------------------------------
-// Tables — lighter header
+// Tables
 // ---------------------------------------------------------------------------
 table {
   border-collapse: separate;
@@ -152,7 +133,7 @@ table {
 }
 
 // ---------------------------------------------------------------------------
-// Notices (callout border-left styling)
+// Notices
 // ---------------------------------------------------------------------------
 .notice, .notice--info, .notice--warning, .notice--success, .notice--danger, .notice--primary {
   border-radius: 6px;
@@ -229,55 +210,41 @@ p > code, li > code, td > code {
 }
 
 // ---------------------------------------------------------------------------
-// Lab layout: custom header replaces default title
-// ---------------------------------------------------------------------------
-
-// Hide default title + read-time when lab-header is present
-.lab-header ~ .placeholder-never-matches { /* specificity anchor */ }
-
-// The lab layout renders lab-header inside page__content,
-// but the default title/meta are siblings outside it.
-// Target pages that use the lab layout via the lab-header presence.
-.page__title,
-.page__meta-readtime {
-  // These get hidden by the lab layout's inline approach
-}
-
 // Lab header (rendered by _layouts/lab.html)
+// ---------------------------------------------------------------------------
 .lab-header {
-  margin: -0.5em 0 1.5em;
-  padding-bottom: 1.2em;
+  margin: -0.5em 0 1em;
+  padding-bottom: 0.8em;
   border-bottom: 1px solid #e8e6e4;
 
   h1 {
-    font-size: 1.5em;
+    font-size: 1.4em;
     font-weight: 700;
     letter-spacing: -0.01em;
     color: #323130;
-    margin: 0 0 0.4em;
+    margin: 0 0 0.3em;
     line-height: 1.3;
   }
 }
 
 .lab-header-desc {
-  font-size: 0.95em;
+  font-size: 0.9em;
   color: #605e5c;
-  line-height: 1.55;
-  margin: 0 0 0.8em;
-  max-width: 720px;
+  line-height: 1.5;
+  margin: 0 0 0.6em;
 }
 
 .lab-header-meta {
   display: flex;
-  gap: 0.5em;
+  gap: 0.4em;
   flex-wrap: wrap;
   align-items: center;
 }
 
 .lab-meta-pill {
-  font-size: 0.75em;
+  font-size: 0.72em;
   font-weight: 600;
-  padding: 0.25em 0.7em;
+  padding: 0.2em 0.6em;
   border-radius: 100px;
   white-space: nowrap;
 }
