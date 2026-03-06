@@ -18,12 +18,18 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
 // ---------------------------------------------------------------------------
 #main:not(:has(.sidebar)) .page {
   float: none;
-  width: 100%;
+  // Keep original width to accommodate TOC sidebar
 }
 
 .breadcrumbs ol {
   float: none;
   width: 100%;
+}
+
+// Wide pages (homepage, workshops) get full width and no TOC
+.wide .page {
+  width: 100% !important;
+  padding-inline-end: 0 !important;
 }
 
 // ---------------------------------------------------------------------------
@@ -48,42 +54,68 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
   }
 }
 
-// Move TOC up to align with title area instead of content section
-.page__content {
-  position: static;
+// ---------------------------------------------------------------------------
+// TOC sidebar
+// ---------------------------------------------------------------------------
+.sidebar__right {
+  // Sticky TOC that scrolls with the page
+  &.sticky {
+    top: 4em;
+  }
 }
 
-.page__inner-wrap {
-  position: relative;
-}
-
-// ---------------------------------------------------------------------------
-// TOC sidebar — lighter, less prominent
-// ---------------------------------------------------------------------------
 .toc {
-  border: 1px solid #e8e6e4;
-  border-radius: 6px;
-  background: #fafaf9;
+  border: 1px solid #e1dfdd;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.04);
 
   .nav__title {
-    background: #f3f2f1;
-    color: #605e5c;
-    font-size: 0.72em;
+    background: #0f1b2d;
+    color: #fff;
+    font-size: 0.7em;
     font-weight: 600;
-    letter-spacing: 0.04em;
-    padding: 0.6em 1em;
-    border-bottom: 1px solid #e8e6e4;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.65em 1em;
+    border-radius: 7px 7px 0 0;
   }
 
-  a {
-    font-size: 0.82em;
-    color: #605e5c;
-    &:hover { color: #0078d4; }
+  .toc__menu {
+    padding: 0.4em 0;
+
+    a {
+      font-size: 0.8em;
+      font-weight: 500;
+      color: #605e5c;
+      padding: 0.3em 1em;
+      display: block;
+      border-left: 2px solid transparent;
+      transition: all 0.1s;
+
+      &:hover {
+        color: #0078d4;
+        border-left-color: #0078d4;
+        background: #f0f6ff;
+      }
+    }
+
+    // Nested items
+    ul a {
+      padding-left: 1.8em;
+      font-size: 0.76em;
+    }
+
+    ul ul a {
+      padding-left: 2.6em;
+      font-size: 0.73em;
+    }
   }
 
   li.active > a {
     color: #0078d4;
     font-weight: 600;
+    border-left-color: #0078d4;
   }
 }
 
