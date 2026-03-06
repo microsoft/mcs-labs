@@ -27,42 +27,102 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
 }
 
 // ---------------------------------------------------------------------------
-// TOC: gentle, always-visible right sidebar
+// TOC: slide-out panel from right edge
 // ---------------------------------------------------------------------------
+aside.sidebar__right {
+  position: fixed !important;
+  top: 70px !important;
+  right: 0 !important;
+  left: auto !important;
+  bottom: auto !important;
+  width: 260px !important;
+  max-height: calc(100vh - 90px) !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  z-index: 200;
+  float: none !important;
+  inset-inline-end: 0 !important;
+  margin-inline-end: 0 !important;
+  transform: translateX(calc(100% + 1px));
+  transition: transform 0.2s ease;
+  overflow: visible;
+
+  &.toc-open {
+    transform: translateX(0);
+  }
+}
+
+// Toggle tab pinned to right edge
+.toc-toggle {
+  position: fixed;
+  top: 76px;
+  right: 0;
+  z-index: 201;
+  width: 32px;
+  height: 32px;
+  border: 1px solid #e1dfdd;
+  border-right: none;
+  border-radius: 6px 0 0 6px;
+  background: #fff;
+  color: #605e5c;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8em;
+  box-shadow: -1px 1px 3px rgba(0,0,0,0.06);
+  transition: all 0.2s;
+
+  &:hover {
+    color: #0078d4;
+    background: #f0f6ff;
+  }
+
+  &.toc-active {
+    right: 260px;
+    background: #f3f2f1;
+  }
+}
+
 .toc {
-  background: transparent;
-  border: none;
-  box-shadow: none;
+  background: #fff;
+  border: 1px solid #e1dfdd;
+  border-right: none;
+  border-radius: 6px 0 0 6px;
+  box-shadow: -2px 0 8px rgba(0,0,0,0.06);
+  overflow-y: auto;
+  max-height: calc(100vh - 90px);
 
   .nav__title {
     background: none;
     color: #323130;
-    font-size: 0.82em;
+    font-size: 0.78em;
     font-weight: 600;
     letter-spacing: 0;
     text-transform: none;
-    padding: 0 0 0.4em;
-    border-bottom: none;
+    padding: 0.8em 1em 0.5em;
+    border-bottom: 1px solid #f3f2f1;
   }
 
   .toc__menu {
-    padding: 0;
+    padding: 0.3em 0 0.5em;
 
     a {
       font-size: 0.78em;
       font-weight: 400;
-      color: #a19f9d;
-      padding: 0.2em 0 0.2em 0.8em;
+      color: #605e5c;
+      padding: 0.25em 1em 0.25em 1em;
       display: block;
       border-left: 2px solid transparent;
       text-decoration: none;
 
       &:hover {
         color: #0078d4;
+        border-left-color: #0078d4;
       }
     }
 
-    // Only show top-level TOC items (h2s)
+    // Only show top-level (h2)
     ul { display: none; }
   }
 

@@ -14,6 +14,22 @@
   });
 })();
 </script>
+<!-- TOC slide-out toggle -->
+<script>
+(function() {
+  var sidebar = document.querySelector('.sidebar__right');
+  if (!sidebar) return;
+  var btn = document.createElement('button');
+  btn.className = 'toc-toggle';
+  btn.innerHTML = '<i class="fas fa-list-ul"></i>';
+  btn.setAttribute('aria-label', 'Toggle table of contents');
+  document.body.appendChild(btn);
+  btn.addEventListener('click', function() {
+    var open = sidebar.classList.toggle('toc-open');
+    btn.classList.toggle('toc-active', open);
+  });
+})();
+</script>
 <!-- External links open in new tab -->
 <script>
 (function() {
