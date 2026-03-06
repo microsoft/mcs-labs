@@ -1,5 +1,4 @@
 ---
-layout: single
 title: "Create an 'Ask me anything' agent for your employees"
 description: "Empower employees with answers that matter – Build an intelligent agent that connects to your knowledge and data."
 order: 41

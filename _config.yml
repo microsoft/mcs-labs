@@ -68,7 +68,7 @@ defaults:
       path: ""
       type: "labs"
     values:
-      layout: "single"
+      layout: "lab"
       author_profile: false
       toc: true
       toc_sticky: true

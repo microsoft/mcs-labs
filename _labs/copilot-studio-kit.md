@@ -1,5 +1,4 @@
 ---
-layout: single
 title: "Deliver high-quality, scalable agents with Copilot Studio Kit"
 description: "Automate quality assurance for your Copilot Studio agents with the Copilot Studio Kit. In this lab, you'll configure and run automated test scenarios, validate agent behavior using multiple test types, and gain actionable insights through analytics. You'll also explore advanced tools like conversation KPIs, UI customization, and governance dashboards—equipping you to ship high-quality, secure, and scalable AI agents with confidence."
 order: 33

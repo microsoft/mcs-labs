@@ -1,5 +1,4 @@
 ---
-layout: single
 title: "Bring Your Own Model (BYOM) Tool in Copilot Studio"
 description: "*Unlock the power of Azure AI Foundry models in your Copilot Studio agents by integrating your own machine learning models, or by using off-the-shelf or fine-tuned models from Azure AI Foundry as conversational tools.*"
 order: 999

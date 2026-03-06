@@ -1,5 +1,4 @@
 ---
-layout: single
 title: "Create Your First Agent in Microsoft Copilot Studio"
 description: "Create and publish your first intelligent copilot using Microsoft Copilot Studio."
 order: 4

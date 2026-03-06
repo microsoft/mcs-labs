@@ -1,5 +1,4 @@
 ---
-layout: single
 title: "Give your public website chatbot a brain and make it an agent"
 description: "Create an intelligent agent that delivers contextual, multi-part answers using your content and real-time data."
 order: 2

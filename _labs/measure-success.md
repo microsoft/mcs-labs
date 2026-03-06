@@ -1,5 +1,4 @@
 ---
-layout: single
 title: "Measure success: Track conversation outcomes and user feedback on AI responses"
 description: "You can't improve what you can't measure: design your agent to track successful and unsuccessful outcomes while collecting user feedback on AI-generated responses."
 order: 31

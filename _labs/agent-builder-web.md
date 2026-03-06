@@ -1,5 +1,4 @@
 ---
-layout: single
 title: "Create your own web-based AI assistant with lite experience of Copilot Studio in Microsoft 365 Copilot (formerly Copilot Studio agent builder)"
 description: "Create an intelligent agent in Copilot that delivers contextual, multi-part answers using instructions and data from the Web."
 order: 1

@@ -1,5 +1,4 @@
 ---
-layout: single
 title: "Model Context Protocol (MCP) & Copilot Studio"
 description: "Learn to deploy an MCP Server and integrate it with Microsoft Copilot Studio"
 order: 51
