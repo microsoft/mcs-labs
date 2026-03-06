@@ -187,6 +187,55 @@ Create and configure a functional Copilot Agent with Dataverse MCP Server integr
 
    ![Add authentication](images/step8-add-auth.png)
 
+9.1 Whitelisting the MCP Client (If able to see error while adding the MCP tol)
+
+> [!IMPORTANT]
+> After adding the Dataverse MCP connector tool, if you see the below error near the tools & resources, you must allowlist the MCP client in the Power Platform Admin Center.
+
+![Error message](images/step8a-tool-error-message.png)
+
+1. Navigate to the Power Platform Admin Center:  
+   https://admin.powerplatform.microsoft.com/
+
+2. From **Manage**, select **Environments**.
+
+3. Select your lab environment.
+
+4. Click **Settings**.  
+   ![Click on settings](images/step8b-environment-settings.png)
+
+5. Select **Product** → **Features**.
+
+6. Locate **Dataverse Model Context Protocol**.
+
+7. Click **Advanced Settings**.  
+   ![Click on Advanced Settings](images/step8c-mcp-additional-settings.png)
+
+8. Click **New** to add a new MCP client to the allowlist.  
+   ![Click New](images/step8d-add-new-allowlist.png)
+
+Fill in the following details:
+
+- **Name:** `Copilot Studio`
+- **Unique Name:** `UserNameCopilotStudio`  
+  _(Prefix “CopilotStudio” with your lab user name to ensure uniqueness. Example: UserName_CopilotStudio)_
+- **Application ID:**  
+  `7ab7862c-4c57-491e-8a45-d52a7e023983`
+- **Is Enabled:** `Yes`
+
+![Allow list info](images/step8e-add-allowlist-info.png)
+
+Click **Save**.
+
+After saving:
+
+- Return to Copilot Studio.
+- Refresh the **Tools** section.
+- Retry the MCP connector.
+
+The Dataverse MCP connector should now work without the error.
+
+
 > [!IMPORTANT]
 > The Dataverse MCP Server will allow you natural language access to your tables in Dataverse. We have sample data in the Accounts and Contacts tables that we will use. The tools available are: list tables, describe table, read data, create record, update record, list prompts, execute prompt, list knowledge sources, and retrieve knowledge.
 
