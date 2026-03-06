@@ -82,10 +82,8 @@ defaults:
     values:
       layout: "workshop"
       author_profile: false
-      toc: true
-      toc_sticky: true
-      toc_label: "Labs"
-      toc_icon: "flask"
+      classes: wide
+      toc: false
       share: false
   - scope:
       path: ""
