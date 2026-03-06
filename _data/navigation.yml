@@ -1,0 +1,59 @@
+main:
+  - title: "Home"
+    url: /
+  - title: "All Labs"
+    url: /labs/
+  - title: "Bootcamp"
+    url: /labs/bootcamp/
+  - title: "Azure AI Workshop"
+    url: /labs/azure-ai-workshop/
+  - title: "MCS in a Day"
+    url: /labs/mcs-in-a-day/
+
+labs:
+  - title: "Core Learning Path"
+    children:
+      - title: "Agent Builder (Web)"
+        url: /labs/agent-builder-web/
+      - title: "Public Website Agent"
+        url: /labs/public-website-agent/
+      - title: "MBR SharePoint Agent"
+        url: /labs/mbr-prep-sharepoint-agent/
+      - title: "First Agent in Copilot Studio"
+        url: /labs/standard-orchestrator/
+  - title: "Intermediate Labs"
+    children:
+      - title: "Set Up for Success & ALM"
+        url: /labs/setup-for-success/
+      - title: "Agent Builder (SharePoint)"
+        url: /labs/agent-builder-sharepoint/
+      - title: "Ask Me Anything Agent"
+        url: /labs/ask-me-anything/
+  - title: "Advanced Labs"
+    children:
+      - title: "Autonomous CUA Agent"
+        url: /labs/autonomous-cua/
+      - title: "Autonomous Account News"
+        url: /labs/autonomous-account-news/
+      - title: "Autonomous Support Agent"
+        url: /labs/autonomous-support-agent/
+  - title: "Specialized Labs"
+    children:
+      - title: "Measure Success"
+        url: /labs/measure-success/
+      - title: "Pipelines & Source Control"
+        url: /labs/pipelines-and-source-control/
+      - title: "Copilot Studio Kit"
+        url: /labs/copilot-studio-kit/
+      - title: "Qualify Leads with MCP"
+        url: /labs/mcp-qualify-lead/
+  - title: "Optional Labs"
+    children:
+      - title: "Ask Me Anything (30 min)"
+        url: /labs/ask-me-anything-30-mins/
+  - title: "External Labs"
+    children:
+      - title: "MCP & Copilot Studio"
+        url: /labs/mcs-mcp-external/
+      - title: "Guild's Custom MCP Server"
+        url: /labs/guildhall-custom-mcp/

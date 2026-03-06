@@ -1,0 +1,9 @@
+<!-- Dark mode: restore theme before paint to prevent flash -->
+<script>
+  (function() {
+    var theme = localStorage.getItem('theme');
+    if (theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.setAttribute('data-theme', 'dark');
+    }
+  })();
+</script>
