@@ -266,42 +266,45 @@ classes: wide
   var sections = document.querySelectorAll('.lab-section');
   var emptyMsg = document.querySelector('.lab-empty-msg');
 
-  btns.forEach(function(btn) {
-    btn.addEventListener('click', function() {
-      var level = btn.getAttribute('data-level');
-
-      btns.forEach(function(b) {
-        b.className = 'lab-filter-btn';
-      });
-      if (level === 'all') {
-        btn.classList.add('active');
-      } else {
-        btn.classList.add('active-' + level);
-      }
-
-      var visibleCount = 0;
-      cards.forEach(function(card) {
-        if (level === 'all' || card.getAttribute('data-difficulty') === level) {
-          card.classList.remove('card-hidden');
-          visibleCount++;
-        } else {
-          card.classList.add('card-hidden');
-        }
-      });
-
-      sections.forEach(function(sec) {
-        var visible = sec.querySelectorAll('.lab-card:not(.card-hidden)');
-        if (visible.length === 0) {
-          sec.classList.add('section-hidden');
-        } else {
-          sec.classList.remove('section-hidden');
-        }
-      });
-
-      if (emptyMsg) {
-        emptyMsg.classList.toggle('visible', visibleCount === 0);
+  function applyFilter(level) {
+    btns.forEach(function(b) {
+      b.className = 'lab-filter-btn';
+      if (b.getAttribute('data-level') === level) {
+        b.classList.add(level === 'all' ? 'active' : 'active-' + level);
       }
     });
+
+    var visibleCount = 0;
+    cards.forEach(function(card) {
+      if (level === 'all' || card.getAttribute('data-difficulty') === level) {
+        card.classList.remove('card-hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('card-hidden');
+      }
+    });
+
+    sections.forEach(function(sec) {
+      var visible = sec.querySelectorAll('.lab-card:not(.card-hidden)');
+      sec.classList.toggle('section-hidden', visible.length === 0);
+    });
+
+    if (emptyMsg) {
+      emptyMsg.classList.toggle('visible', visibleCount === 0);
+    }
+  }
+
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      applyFilter(btn.getAttribute('data-level'));
+    });
   });
+
+  // Apply filter from ?level= query param on page load
+  var params = new URLSearchParams(window.location.search);
+  var levelParam = params.get('level');
+  if (levelParam && ['100', '200', '300'].indexOf(levelParam) !== -1) {
+    applyFilter(levelParam);
+  }
 })();
 </script>

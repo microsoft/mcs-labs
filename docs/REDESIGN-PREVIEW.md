@@ -86,6 +86,5 @@ Site will be at **http://127.0.0.1:4000/mcs-labs/**
 
 ## Known issues
 
-- **Learning path cards** on the homepage all link to `/labs/` without filtering — they don't yet lead to a filtered view
 - **About page team cards** have placeholder names/roles (to be filled in)
 - **utterances** requires the repo to be public and the utterances app installed

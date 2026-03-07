@@ -210,7 +210,7 @@ header:
 <ul class="journey-grid">
   <li class="journey-card">
     <div class="journey-card-accent accent-blue"></div>
-    <h3><a href="{{ '/labs/' | relative_url }}">Quick Start</a></h3>
+    <h3><a href="{{ '/labs/?level=100' | relative_url }}">Quick Start</a></h3>
     <div class="journey-card-desc">New to Copilot Studio? Essential labs to get up and running quickly.</div>
     <div class="journey-card-meta">
       <span class="journey-pill">3–4 hours</span>
@@ -230,7 +230,7 @@ header:
   </li>
   <li class="journey-card">
     <div class="journey-card-accent accent-purple"></div>
-    <h3><a href="{{ '/labs/' | relative_url }}">Developer</a></h3>
+    <h3><a href="{{ '/labs/?level=200' | relative_url }}">Developer</a></h3>
     <div class="journey-card-desc">Advanced features, integrations, and development best practices.</div>
     <div class="journey-card-meta">
       <span class="journey-pill">10–15 hours</span>
@@ -240,7 +240,7 @@ header:
   </li>
   <li class="journey-card">
     <div class="journey-card-accent accent-orange"></div>
-    <h3><a href="{{ '/labs/' | relative_url }}">Autonomous AI</a></h3>
+    <h3><a href="{{ '/labs/?level=300' | relative_url }}">Autonomous AI</a></h3>
     <div class="journey-card-desc">Build agents that perform complex tasks with minimal human intervention.</div>
     <div class="journey-card-meta">
       <span class="journey-pill">6–8 hours</span>
