@@ -14,11 +14,12 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
 @import "minimal-mistakes";
 
 // ---------------------------------------------------------------------------
-// Layout: no left sidebar gap
+// Layout: full-width content, no left sidebar gap
 // ---------------------------------------------------------------------------
 .page {
   float: none !important;
   width: 100% !important;
+  padding-inline-end: 0 !important;
 }
 
 .breadcrumbs ol {
@@ -27,75 +28,41 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
 }
 
 // ---------------------------------------------------------------------------
-// TOC: push-panel from the right
+// TOC: sticky right sidebar via CSS Grid
 // ---------------------------------------------------------------------------
 
-// Content area transitions when TOC opens
-#main {
-  transition: margin-right 0.25s ease;
+// Grid layout: 75% content / 25% TOC (desktop only, only when TOC exists)
+@media (min-width: 1024px) {
+  .page__content:has(> .sidebar__right) {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 0 2em;
+  }
+
+  // All content children go to column 1
+  .page__content:has(> .sidebar__right) > *:not(.sidebar__right) {
+    grid-column: 1;
+    min-width: 0;     // prevent grid blowout from wide tables/code
+    overflow-x: auto; // scroll wide tables within column
+  }
+
+  // TOC sidebar spans full height, sticks on scroll
+  aside.sidebar__right {
+    grid-column: 2;
+    grid-row: 1 / span 999;
+    position: sticky !important;
+    top: 2em;
+    align-self: start;
+    max-height: calc(100vh - 4em);
+    overflow-y: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
 }
 
-body.toc-open #main {
-  margin-right: 240px;
-}
-
-// Sidebar panel — fixed right, hidden by default
+// Mobile: TOC above content in normal flow
 aside.sidebar__right {
-  position: fixed !important;
-  top: 0 !important;
-  right: 0 !important;
-  left: auto !important;
-  bottom: 0 !important;
-  width: 240px !important;
-  margin: 0 !important;
-  padding: 60px 0 0 !important;
-  z-index: 100;
-  float: none !important;
-  inset-inline-end: 0 !important;
-  margin-inline-end: 0 !important;
-  background: #fafaf9;
-  border-left: 1px solid #e8e6e4;
-  transform: translateX(100%);
-  transition: transform 0.25s ease;
-  overflow-y: auto;
-
-  body.toc-open & {
-    transform: translateX(0);
-  }
-}
-
-// Toggle button — always visible
-.toc-toggle {
-  position: fixed;
-  top: 76px;
-  right: 12px;
-  z-index: 201;
-  height: 28px;
-  padding: 0 8px 0 6px;
-  border: 1px solid #e1dfdd;
-  border-radius: 4px;
-  background: #fff;
-  color: #605e5c;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  font-family: $sans-serif;
-  font-size: 0.72em;
-  font-weight: 500;
-  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
-  transition: all 0.25s ease;
-
-  i { font-size: 0.95em; }
-
-  &:hover {
-    color: #0078d4;
-    border-color: #c8c6c4;
-  }
-
-  body.toc-open & {
-    right: 252px;
-  }
+  margin-bottom: 1.5em;
 }
 
 .toc {
@@ -104,30 +71,37 @@ aside.sidebar__right {
   box-shadow: none;
 
   .nav__title {
-    display: none; // We use the toggle button label instead
+    font-size: 0.7em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #a19f9d;
+    background: transparent;
+    padding: 0 0 0.5em;
+    margin: 0;
   }
 
   .toc__menu {
-    padding: 0.5em 0;
+    padding: 0;
+
+    // Only show top-level (h2) items
+    ul { display: none; }
 
     a {
       font-size: 0.78em;
       font-weight: 400;
       color: #605e5c;
-      padding: 0.3em 1.2em 0.3em 1em;
+      padding: 0.3em 0.6em 0.3em 0.8em;
       display: block;
       border-left: 2px solid transparent;
       text-decoration: none;
-      transition: color 0.1s;
+      transition: color 0.15s, border-color 0.15s;
 
       &:hover {
         color: #0078d4;
         border-left-color: #0078d4;
       }
     }
-
-    // Only show top-level (h2)
-    ul { display: none; }
   }
 
   li.active > a {
