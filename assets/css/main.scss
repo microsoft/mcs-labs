@@ -286,6 +286,8 @@ p > code, li > code, td > code {
 .lab-meta-pill-level-200 { background: #deecf9; color: #004578; }
 .lab-meta-pill-level-300 { background: #f0e6fc; color: #5b2d8e; }
 .lab-meta-pill-section { background: #fff; color: #605e5c; border: 1px solid #e1dfdd; }
+.lab-meta-pill-feedback { background: #fff; color: #0078d4; border: 1px solid #0078d4; text-decoration: none; cursor: pointer; }
+.lab-meta-pill-feedback:hover { background: #0078d4; color: #fff; }
 
 // ---------------------------------------------------------------------------
 // Misc

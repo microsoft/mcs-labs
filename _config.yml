@@ -3,7 +3,7 @@ title: "Microsoft Copilot Agents Labs"
 subtitle: "Hands-on labs for building AI agents"
 description: "Hands-on labs for building AI agents with Microsoft Copilot Studio"
 baseurl: "/mcs-labs"
-url: "https://pratapladhani.github.io"
+url: "https://microsoft.github.io"
 logo: "/favicon.svg"
 
 # Theme
@@ -19,6 +19,14 @@ breadcrumbs: true
 
 # Code copy button
 enable_copy_code_button: true
+
+# Comments / Feedback
+comments:
+  utterances:
+    repo: "microsoft/mcs-labs"
+    issue_term: pathname
+    label: feedback
+    theme: preferred-color-scheme
 
 # Build settings
 markdown: kramdown
