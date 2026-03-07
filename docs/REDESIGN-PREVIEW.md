@@ -4,6 +4,39 @@
 
 The original MCS Labs site uses a fully custom Jekyll layout — hand-rolled HTML, CSS, and navigation. This redesign moves to **[Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/)** with the **"air" skin**, a mature, well-maintained Jekyll theme that gives us responsive layouts, built-in search, sidebar navigation, table-of-contents support, and accessibility out of the box — so we can focus on content instead of maintaining layout code.
 
+## How to run locally
+
+### Mac
+
+```bash
+git clone https://github.com/microsoft/mcs-labs.git
+cd mcs-labs
+git checkout redesign/air-theme
+bash tools/setup/mac/install.sh   # installs Ruby, Bundler, and gems
+bash tools/run.sh
+```
+
+### Windows (PowerShell)
+
+```powershell
+git clone https://github.com/microsoft/mcs-labs.git
+cd mcs-labs
+git checkout redesign/air-theme
+.\tools\setup\win\install.ps1     # installs Ruby, Bundler, and gems
+.\tools\run.ps1
+```
+
+Site will be at **http://127.0.0.1:4000/mcs-labs/**
+
+## Open questions
+
+- **Do we need learning paths on the homepage?** Currently Quick Start / Business User / Developer / Autonomous AI are hard-coded cards that link to the labs index with a level filter — but these are meant to be topic-based groupings, not difficulty levels. If we keep them, they should probably be curated indexes (like workshops) rather than just a filter shortcut. Or do workshops already serve this purpose?
+- **Do we need the section groupings on the labs index?** Labs are currently grouped under Core Learning Path, Intermediate, Advanced, Specialized, Optional, External — but the categories overlap and the naming is inconsistent (some are difficulty-based, some are topic-based). Should we simplify to just a flat list with level/duration filters? Or rethink the taxonomy entirely?
+
+Have feedback or found an issue? **[Open a redesign feedback issue](https://github.com/microsoft/mcs-labs/issues/new?template=redesign-feedback.yml)**
+
+---
+
 ## What to expect
 
 ### Homepage
@@ -46,32 +79,6 @@ Every lab and workshop page has an [utterances](https://utteranc.es/) comment se
 
 ---
 
-## How to run locally
-
-### Mac
-
-```bash
-git clone https://github.com/microsoft/mcs-labs.git
-cd mcs-labs
-git checkout redesign/air-theme
-bash tools/setup/mac/install.sh   # installs Ruby, Bundler, and gems
-bash tools/run.sh
-```
-
-### Windows (PowerShell)
-
-```powershell
-git clone https://github.com/microsoft/mcs-labs.git
-cd mcs-labs
-git checkout redesign/air-theme
-.\tools\setup\win\install.ps1     # installs Ruby, Bundler, and gems
-.\tools\run.ps1
-```
-
-Site will be at **http://127.0.0.1:4000/mcs-labs/**
-
----
-
 ## What to look for
 
 1. **Overall feel** — clean, modern layout with consistent card-based UI and dark hero banners
@@ -83,11 +90,6 @@ Site will be at **http://127.0.0.1:4000/mcs-labs/**
 7. **Workshop detail pages** — hero stats, ordered lab list, feedback section at bottom
 8. **`/about/`** — hero + team cards + about section
 9. **Responsive** — check on narrow viewports (TOC should collapse, grids reflow)
-
-## Open questions
-
-- **Do we need learning paths on the homepage?** Currently Quick Start / Business User / Developer / Autonomous AI are hard-coded cards that link to the labs index with a level filter — but these are meant to be topic-based groupings, not difficulty levels. If we keep them, they should probably be curated indexes (like workshops) rather than just a filter shortcut. Or do workshops already serve this purpose?
-- **Do we need the section groupings on the labs index?** Labs are currently grouped under Core Learning Path, Intermediate, Advanced, Specialized, Optional, External — but the categories overlap and the naming is inconsistent (some are difficulty-based, some are topic-based). Should we simplify to just a flat list with level/duration filters? Or rethink the taxonomy entirely?
 
 ## Known issues
 
