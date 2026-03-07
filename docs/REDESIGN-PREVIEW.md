@@ -1,5 +1,12 @@
 # Site Redesign Preview — `redesign/air-theme`
 
+- [What's changing](#whats-changing)
+- [How to run locally](#how-to-run-locally)
+- [Open questions](#open-questions)
+- [What to expect](#what-to-expect) — [Homepage](#homepage) · [Labs index](#labs-index-labs) · [Lab detail](#lab-detail-pages) · [Workshops index](#workshops-index-workshops) · [Workshop detail](#workshop-detail-pages) · [About](#about-page-about) · [Navigation](#navigation) · [Feedback](#feedback)
+- [What to look for](#what-to-look-for)
+- [Known issues](#known-issues)
+
 ## What's changing
 
 The original MCS Labs site uses a fully custom Jekyll layout — hand-rolled HTML, CSS, and navigation. This redesign moves to **[Minimal Mistakes](https://mmistakes.github.io/minimal-mistakes/)** with the **"air" skin**, a mature, well-maintained Jekyll theme that gives us responsive layouts, built-in search, sidebar navigation, table-of-contents support, and accessibility out of the box — so we can focus on content instead of maintaining layout code.
