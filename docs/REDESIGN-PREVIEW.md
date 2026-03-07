@@ -84,7 +84,13 @@ Site will be at **http://127.0.0.1:4000/mcs-labs/**
 8. **`/about/`** — hero + team cards + about section
 9. **Responsive** — check on narrow viewports (TOC should collapse, grids reflow)
 
+## Open questions
+
+- **Do we need learning paths on the homepage?** Currently Quick Start / Business User / Developer / Autonomous AI are hard-coded cards that link to the labs index with a level filter — but these are meant to be topic-based groupings, not difficulty levels. If we keep them, they should probably be curated indexes (like workshops) rather than just a filter shortcut. Or do workshops already serve this purpose?
+- **Do we need the section groupings on the labs index?** Labs are currently grouped under Core Learning Path, Intermediate, Advanced, Specialized, Optional, External — but the categories overlap and the naming is inconsistent (some are difficulty-based, some are topic-based). Should we simplify to just a flat list with level/duration filters? Or rethink the taxonomy entirely?
+
 ## Known issues
 
 - **About page team cards** have placeholder names/roles (to be filled in)
 - **utterances** requires the repo to be public and the utterances app installed
+- **Learning path links** are a temporary hack — they filter by difficulty level which doesn't match the intended topic-based groupings
