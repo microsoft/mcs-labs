@@ -471,7 +471,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. In the top navigation select the **Designer** tab.
 
-1. Select **When an agent calls the inputs** at the top.
+1. Select **When an agent calls the flow** at the top.
 
 1. Select **+ Add input** for each parameter below:
 
