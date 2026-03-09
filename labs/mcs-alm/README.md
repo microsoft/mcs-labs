@@ -378,8 +378,6 @@ Create a deployment pipeline that automates solution deployment across environme
 
 1. **Save** the pipeline configuration.
 
-    ![Pipeline configuration](images/pipeline.png)
-
 #### Test Your Pipeline
 
 1. In the PROD card, select **Deploy here**.
