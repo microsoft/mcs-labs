@@ -319,6 +319,14 @@ Create evaluation test sets using four different methods and understand how each
 
 1. In the **Configure test set** panel on the right side of your screen, change the test set name to **Non-Critical Copilot Studio Guide Set**
 
+1. In the Test method General Question is configured by default. You can configure additional test methods, those will be available to configure later when you edit questions.
+
+1. Select **Add test method**, review the list of test methods you can configure.
+
+1. On the **Set pass score**, review the settings for this option and select **OK**. Other test methods may have other options you can configure based on the approach.
+
+1. Select **Compare meaning** and then select **OK**.
+
 1. Select **Save** at the bottom of that same panel.
 
 1. In that same panel, select the **Manage profile** button.
@@ -329,18 +337,8 @@ Create evaluation test sets using four different methods and understand how each
 
 1. Select the first generated question to explore all the available options. For each test case, you can configure the **evaluation method**:
 
-    - **Exact Match**: Character-for-character comparison between expected and actual response. Use for questions with precise, factual answers.
-
-    - **Keyword Match**: Checks whether key terms from the expected response appear in the actual response. Use when exact wording doesn't matter but key concepts must be present.
-
-    - **Similarity**: Uses cosine similarity to compare semantic meaning on a 0-1 scale with a configurable threshold. Use when meaning matters more than exact wording.
-
-    - **General Quality**: Uses a LLM to evaluate response quality across four dimensions - relevance, groundedness, completeness, and abstention. Does NOT require an expected response. Use for open-ended questions.
-
-    - **Compare Meaning**: Evaluates whether the intent and meaning of the actual response matches the expected response, with a configurable threshold. Use for semantic comparison with more nuance than cosine similarity.
-
     > [!TIP]
-    > Choose evaluation methods that match the nature of each question. Factual questions with precise answers work well with Exact Match or Keyword Match. Open-ended questions benefit from General Quality or Similarity methods.
+    > Choose evaluation methods that match the nature of each question. Factual questions with precise answers work well with Exact Match or Keyword Match. Open-ended questions benefit from General Quality or Similarity methods. You can add additional test methods to the set at creation of the test set or later during editing.
 
 1. After reviewing, select **Cancel** to close the edit of the test case.
 
