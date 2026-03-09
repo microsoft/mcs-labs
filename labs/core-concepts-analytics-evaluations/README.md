@@ -345,7 +345,7 @@ Create evaluation test sets using four different methods and understand how each
 1. Select **Evaluate** to start the evaluation of this test set.
 
     > [!NOTE]
-    > Evaluation time depends on the number of test cases and agent response time. A test set with 10 cases typically completes in 1-3 minutes.
+    > Evaluation time depends on the number of test cases and agent response time. A test set with 10 cases typically completes in 3-5 minutes.
 
 1. After your evaluation runs, review the overall result and then select the evaluation row to drill down into details for each question.
 
