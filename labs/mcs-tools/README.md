@@ -1132,7 +1132,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
       ```
 
       ```
-      What time is it?
+      The weather is great today.
       ```
 
 1. Verify that the agent responds with friendly, professional chit chat responses.
