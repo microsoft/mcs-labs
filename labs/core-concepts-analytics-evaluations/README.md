@@ -518,10 +518,8 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
 
 1. Select an individual test case to view its detailed results:
    - **Question**: The original test question
-   - **Expected response**: What the AI generated as the correct answer
    - **Actual response**: What the agent actually responded with
    - **Result**: Pass or fail
-   - **Reasoning**: An explanation of why the test passed or failed
 
 1. For any failed test cases, review the **activity map** to see the step-by-step conversation flow showing the agent's decision path, including which knowledge sources, tools, and topics were used.
 
