@@ -481,9 +481,6 @@ Set up an autonomous agent with a recurring trigger that automatically activates
   5. Use Log relevant news for opportunities to log your findings. The base input for Log relevant news for opportunities should be {Global.searchResults} with determined relevance added
   ```
 
-> [!TIP]
-> If instructions don't offer the "/" option to reference topics, tools or variables, you can skip step 26-30 and continue with the next steps. You can always come back to this later.
-
   1 To increase orchestration accuracy, you will now replace names of topics, tools and variables with references. References can be added to instructions by typing **/** and selecting the appropriate object from the drop-down menu.
 
   1. In the instructions, select `<Get Opportunity records>`. Type **/** and in the drop-down menu, under **Tool**, select **Get Opportunity records**. The previous text in curly brackets should be replaced by a visual reference to the tool.
