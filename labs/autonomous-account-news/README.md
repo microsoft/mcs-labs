@@ -417,7 +417,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
       - Select on **(+)** to add a node. 
       - Select **Variable management** and then **Set a variable value**.
       - For **Set variable**, create a new variable, make it **Global**, and name it `relevantNewsForOpportunities`. 
-      - In **To value** select `Topic.relevantNewsForOpportunities`. You need to select ... then select Formula, then type **Topic.Formula**, then select Insert.
+      - In **To value** select `Topic.relevantNewsForOpportunities`. You need to select ... then select Formula, then type **Topic.relevantNewsForOpportunities**, then select Insert.
 
   1. Select **Save**
 
