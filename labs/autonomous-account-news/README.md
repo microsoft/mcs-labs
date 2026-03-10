@@ -231,6 +231,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
         ```
         cat_amount gt 300000 and cat_isclosed eq false
         ```
+    You may see a validation error like missing required property - value. After a few seconds or as you select away from that input field it should clear. Also, it is not necessary to select the ... to provide the OData filter.
 
   1. Select **Save** to finalize the tool configuration.
 
