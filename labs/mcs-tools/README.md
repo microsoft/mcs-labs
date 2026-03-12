@@ -462,7 +462,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
     Deterministic commission calculation with tiers, bonuses, and accelerators
     ```
 
-1. Change **Express mode** at the bottom of that right panel to **Enabled**.
+1. Change **Express mode** at the bottom of that right panel to **Enabled**. Express mode optmizes the flow for rapid execution which is ideal when the user is waiting for the processing results. 
 
 1. Select **Save**.
 
@@ -477,7 +477,6 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
   | Parameter Name | Type | 
   |----------------|------|
-  | `SalesRepName` | Text| 
   | `AnnualRevenue` | Number | 
   | `QuotaAmount` | Number | 
   | `StrategicProductRevenue` | Number | 
@@ -487,219 +486,51 @@ Create an agent flow that calculates sales commissions using deterministic busin
     > [!IMPORTANT]
     > Make sure parameter names match exactly (case-sensitive) as they'll be referenced in formulas.
 
-#### Initialize Variables
+#### Calculate Commission
+
+  > [!TIP]
+    > The following represents a simplified commission calculation. In a real implementation this logic could be as complex as needed and could use all the capabilities of flow.
 
 1. Select **+ Add node** in the flow canvas before the last node **Respond to the agent**.
 
 1. Select **Variable** > **Initialize variable**, Enter the name and select the type based on the list in the next step. You will repeat this for each of the 5 variables.
 
-1. Initialize the following variables:
+1. Enter **TotalCommission** for the Name.
 
-    | Variable name | Type | Value |
-    |---------------|------|---------------|
-    | `CommissionTier` | String | (leave empty) |
-    | `CommissionRate` | Float | `0` |
-    | `BaseCommission` | Float | `0` |
-    | `ProductMixBonus` | Float | `0` |
-    | `TotalCommission` | Float | `0` |
+1. Select **Float** for the Type.
 
-1. Optionally, select "..." on each Initialize node and select **Rename*" and change them from generic Initialize variable 1 to Initialize and the name of the variable they are initializing.  This step is not required, however, it is a best practice.
-
-1. Select **Save draft** to save your progress.
-
-#### Determine Commission Tier
-
-1. Select **+ Add node** just before the last node **Respond to the agent**.
-
-1. Select **Variable** and then Select **Set variable**.
-
-1. Select **CommissionTier** in the list of variable names.
-
-1. Select **fx** on the right side of the value field to open the Insert expression pane.
+1. For **Value** select the **fx** on the right side of the field.
 
 1. Select **Create an expression with Copilot**.
 
-1. Enter the following in the input area for Copilot to create an expression:
-
-      ```
-    Create a calculated field called “Tier” based on the value of the Number field. If Number is greater than 500,000, set Tier to “Tier 3”. If Number is greater than 250,000 but less than or equal to 500,000, set Tier to “Tier 2”. If Number is greater than 100,000 but less than or equal to 250,000, set Tier to “Tier 1”. Otherwise, set Tier to “Tier 0”.
-      ```
-1. Select **Create Expression** and then select **OK** 
-
-1. Review the expression it should look like the following if not update it from here:
+1. Enter the following in the input area to describe the expression you want Copilot to create.
+    ```
+    calculate TotalCommission by adding AnnualRevenue times 25% and StrategicProductRevenue * 35%
+    ```
+1. Confirm the expression looks like the following and then select **OK**.
 
     ```
-    if(greater(triggerBody()?['number'], 500000), 'Tier 3', if(greater(triggerBody()?['number'], 250000), 'Tier 2', if(greater(triggerBody()?['number'], 100000), 'Tier 1', 'Tier 0')) )
+    add(mul(triggerBody()?['number'], 0.25), mul(triggerBody()?['number_1'], 0.35))
     ```
+1. Select **Add** to save the expression to the node.
 
-1. Select **Add**.
-
-1. Optionally, select **...** and then select **Rename** to change the step name to **Set CommissionTier**.
-
-
-#### Determine Commission Rate
-
-1. Select **+ Add node** just before the last node **Respond to the agent**.
-
-1. Select **Variable** and then Select **Set variable**.
-
-1. Select **CommissionRate** in the list of variable names.
-
-1. Select **fx** on the right side of the value field to open the Insert expression pane.
-
-1. Select **Create an expression with Copilot**.
-
-1. Enter the following in the input area for Copilot to create an expression:
-
-      ```
-    Create a calculated field called “Rate” based on the value of the Number field. If Number is greater than 500,000, set Rate to 0.12. If Number is greater than 250,000 but less than or equal to 500,000, set Rate to 0.10. If Number is greater than 100,000 but less than or equal to 250,000, set Rate to 0.05. Otherwise, set Rate to 0.00.
-      ```
-1. Select **Create Expression** and then select **OK** 
-
-1. Review the expression it should look like the following if not update it from here:
-
-      ```
-      if(greater(triggerBody()?['number'], 500000), 0.12, if(greater(triggerBody()?['number'], 250000), 0.10, if(greater(triggerBody()?['number'], 100000), 0.05, 0.00)))
-      ```
-
-1. Select **Add**.
-
-1. Optionally, select **...** and then select **Rename** to change the step name to **Set CommissionRate**.
-
-
-#### Calculate Base Commission
-
-1. Select **+ Add node** just before the last node **Respond to the agent**.
-
-1. Select **Variable** and then Select **Set variable**.
-
-1. Select **BaseCommission** in the list of variable names.
-
-1. Select **fx** on the right side of the value field to open the Insert expression pane.
-
-1. Select **Create an expression with Copilot**.
-
-1. Enter the following in the input area for Copilot to create an expression:
-
-    ```
-    Multiply AnnualRevenue times CommissionRate
-    ```
-1. Select **Create Expression** and then select **OK** 
-
-1. Review the expression it should look like the following if not update it from here:
-
-    ```
-    mul(triggerBody()?['number'], variables('CommissionRate'))
-    ```
-
-1. Select **Add**.
-
-1. Optionally, select **...** and then select **Rename** to change the step name to **Set CommissionBase**.
-
-1. Select **+ Add node** just before the last node **Respond to the agent**.
-
-1. Select **Variable** and then select **Increment variable**.
-
-1. Select **TotalCommission** from the list of variable names.
-
-1. Select the lightening bolt next to the Value field to bring up the available dynamic data fields.
-
-1. Select **BaseCommission**.
-
-1. Optionally, select **...** and then select **Rename** to change the step name to **Add BaseCommission To TotalCommission**.
-
-#### Calculate Product Mix Bonus
-
-1. Select **Variable** and then select **Set variable**.
-
-1. Select **ProductMixBonus** in the list of variable names.
-
-1. Select **fx** on the right side of the value field to open the Insert expression pane.
-
-1. Select **Create an expression with Copilot**.
-
-1. Enter the following in the input area for Copilot to create an expression:
-
-    ```
-    If you Divide StrategicProductRevenue by AnnualRevenue and it is >= 0.30 then ProductMixBonus is 3000 otherwise it is 0. Make sure you convert the two values to Float before dividing.
-    ```
-1. Select **Create Expression** and then select **OK** 
-
-1. Review the expression it should look like the following if not update it from here:
-
-    ```
-    if(greaterOrEquals(div(float(triggerBody()?['number_2']), float(triggerBody()?['number'])), 0.3), 3000, 0)
-    ```
-
-1. Select **Add**.
-
-1. Optionally, select **...** and then select **Rename** to change the step name to **Set ProductMixBonus**.
-
-1. Select **+ Add node** just before the last node **Respond to the agent**.
-
-1. Select **Variable** and then Select **Increment variable**.
-
-1. Select **TotalCommission** from the list of variable names.
-
-1. Select the lightening bolt next to the Value field to bring up the available dynamic data fields.
-
-1. Select **ProductMixBonus**.
-
-1. Optionally, select **...** and then select **Rename** to change the step name to **Add ProductMixBonus To TotalCommission**.
 
 #### Create the Response Message
 
 1. Select the **Respond to the agent** node at the bottom of the flow.
 
-1. Select **Add an output** and Select **Text**.
+1. Select **Add an output** and Select **Number**.
 
-1. Map **CommissionReport** in the name.
+1. Enter **TotalCommission** in the Name field.
 
-1. Enter the following in the description:
+1. Select **the Enter a value to respond with** input area and then select the lightening bolt icon on the right side of the area.
 
-    ```
-    Report of the results of the commission calculation
-    ```
-1. Select **fx** to the right of the **Enter a value to respond with** field.
-
-1. Next we need to define the report details based on the variables we initiated and set. Enter the following in the formula input area:
-
-    ```
-    concat('COMMISSION CALCULATION REPORT
-    ===================================
-
-    SALES REPRESENTATIVE: ', triggerBody()?['text'], '
-
-    PERFORMANCE SUMMARY
-    -----------------------------------
-    Annual Revenue: $', formatNumber(triggerBody()?['number'], '#,##0.00'), '
-    Annual Quota: $', formatNumber(triggerBody()?['number_1'], '#,##0.00'), '
-    Strategic Product Revenue: $', formatNumber(triggerBody()?['number_2'], '#,##0.00'), '
-
-    COMMISSION BREAKDOWN
-    -----------------------------------
-    Commission Tier: ', variables('CommissionTier'), '
-    Commission Rate: ', formatNumber(mul(variables('CommissionRate'), 100), '#,##0.0'), '%
-    Base Commission: $', formatNumber(variables('BaseCommission'), '#,##0.00'), '
-
-    BONUS
-    -----------------------------------
-    ', if(greater(variables('ProductMixBonus'), 0), concat('Product Mix Bonus: $', formatNumber(variables('ProductMixBonus'), '#,##0.00'), ' (Strategic products >=30%)'), 'Product Mix Bonus: $0.00 (Strategic products <30%)'), '
-
-    TOTAL COMMISSION
-    -----------------------------------
-    $', formatNumber(variables('TotalCommission'), '#,##0.00'), '
-
-    ===================================
-    Calculation Date: ', formatDateTime(utcNow(), 'MMM dd, yyyy'))
-    ```
-1. Select **Add** to add the formula
+1. Select the **TotalCommission** variable from the list.
 
 1. Select **Save Draft** in upper right corner of the screen.
 
 1. Select **Publish** to make your changes available for the agent to use.
 
-![Agent Flow](images/agentflow.jpg)
 
 #### Build the Conversation Topic
 
@@ -783,24 +614,16 @@ Create an agent flow that calculates sales commissions using deterministic busin
 1. After the Adaptive card node, Select **+ Add node** > **Add a tool** and select the **Calculate Sales Commission**.
 
 1. Select your flow: **Calculate Sales Commission** and map the inputs:
-    - `SalesRepName` > Select variable `SalesRepName`
     - `AnnualRevenue` > Select variable `AnnualRevenue`
-    - `QuotaAmount` > Select variable `QuotaAmount`
     - `StrategicProductRevenue` > Select variable `StrategicProductRevenue`
 
 1. After the Calculate Sales Commission node,  Select **+ Add node** > **Send a message**.
 
-1. Enter **Here is your report:** in the message area.
+1. Enter **The commission is:** in the message area.
 
-1. Select **+Add** and select **Basic Card**.
-
-1. In the **Basic Card properties**, Enter **Commission Report** in the Title field.
-
-1. Select **CommissionReport** for the Text field.
+1. Select the **{x}** icon and then select **TotalCommission** from the list.
 
 1. Select **Save**.
-
-![Sales Commission Assistant workflow in Copilot Studio showing trigger, adaptive card form, and tool agent flow components](images/topic.jpg)
 
 #### Test Your Commission Calculator
 
