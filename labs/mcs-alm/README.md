@@ -56,7 +56,7 @@ Application Lifecycle Management (ALM) ensures that your solutions evolve safely
 1. Structure your work in a solution with a custom publisher
 2. Configure environment variables and connection references for portability
 3. Track all changes in Git source control
-4. Deploy through governed pipelines from DEV to PROD
+4. Deploy through governed pipelines from DEV to ALM Prod
 5. Validate environment-specific settings post-deployment
 
 Without ALM, each of these steps is manual, error-prone, and difficult to repeat. With ALM, it becomes an automated, auditable, and confident workflow.
@@ -96,7 +96,7 @@ Without ALM, each of these steps is manual, error-prone, and difficult to repeat
 
 - Access to Microsoft Copilot Studio
 - A Microsoft Power Platform environment with at least an Environment Maker security role
-- Access to multiple Power Platform environments (DEV, PROD) - provided in the lab setup
+- Access to multiple Power Platform environments (DEV, ALM Prod) - provided in the lab setup
 - Azure DevOps project with Git integration (for Extra Credit section only - set up during the lab)
 
 ---
@@ -108,7 +108,7 @@ In this lab, you'll configure a complete ALM foundation for working with Microso
 - Create and configure a structured solution with a custom publisher
 - Set up environment variables and connection references for portability across environments
 - Create and configure Power Platform pipelines for automated deployment
-- Deploy solutions from DEV to PROD and understand post-deployment configuration
+- Deploy solutions from DEV to ALM Prod and understand post-deployment configuration
 - (Extra Credit) Connect your solution to Azure DevOps Git for source control and understand the structure of unpacked solutions
 
 ---
@@ -164,19 +164,20 @@ Set up your development environment by creating a solution and custom publisher 
 
 1. Select **New solution**.
 
-1. Enter a display name.
+1. Enter a display name using the following naming convention: `UserID-(Solution Name)`.
 
 > [!TIP]
+> - Use your **UserID** followed by a hyphen and a descriptive solution name in parentheses.
+> - For example, if your UserID is `user01` and you are building agents for a training workshop, name your solution `user01-(Training Workshop Agents)`.
 > - Avoid names like `DEV`, `TEST`, `PROD`, `POC`, `MVP` or anything tied to a project lifecycle phase.
-> - Use a descriptive, project-based name.
-> - For example, if this is specific to this training and lab, use `Training Workshop Agents`
+> - Use a descriptive, project-based name inside the parentheses.
 
 #### Create a Publisher
 
-1. If this is your first solution, Select **+ New publisher** to create one.
+1. If this is your first solution, select **+ New publisher** to create one.
 
 > [!TIP]
-> - You may use your organization's name.
+> - Use the **username provided to you for logging into the lab** as the publisher name.
 > - While the **Display name** may contain spaces, the **Name** can't contain special characters and spaces.
 > - Define a short prefix for use in technical names.
 
@@ -313,9 +314,9 @@ Set up automated deployment pipelines that democratize ALM while maintaining pro
 
 **Summary of tasks**
 
-In this section, you'll learn how to request a PROD environment, create Power Platform pipelines, configure deployment stages, and deploy your solution from DEV to PROD.
+In this section, you'll learn how to verify your ALM Prod environment, create Power Platform pipelines, configure deployment stages, and deploy your solution from DEV to ALM Prod.
 
-**Scenario:** You have a solution ready in DEV and need to establish an automated process to deploy it to a PROD environment with minimal effort and maximum consistency.
+**Scenario:** You have a solution ready in DEV and need to establish an automated process to deploy it to the ALM Prod environment with minimal effort and maximum consistency.
 
 ### Objective
 
@@ -325,15 +326,12 @@ Create a deployment pipeline that automates solution deployment across environme
 
 ### Step-by-step instructions
 
-#### Get a PROD Environment
+#### Verify Your ALM Prod Environment
 
-> [!TIP]
-> If you haven't done so already, you need to request a PROD environment to be created for your user. This is a one-time setup step that will allow you to create pipelines for deployment.
-
-1. Start by requesting a PROD environment to be created for your user. Use the **Workshop Agent** [aka.ms/MCSWorkshopAgent](https://aka.ms/MCSWorkshopAgent) to request this environment, which will be automatically created for you. This will take a couple of minutes to provision and show up.
+1. Confirm that your **ALM Prod** environment has already been provisioned for you. You can verify this by checking the environment switcher (top-right corner) in [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com/) — you should see the **ALM Prod** environment in the list.
 
     > [!IMPORTANT]
-    > Access the workshop agent in the same location as when you created your training user account. You will need the workshop code and your training user's email address if you previously closed the agent. Tell the agent to "Provision a PROD environment". You are limited to a single PROD environment for the duration of the workshop.
+    > If you do not see the **ALM Prod** environment, contact your lab instructor for assistance.
 
 #### Create an agent to deploy
 
@@ -344,7 +342,13 @@ Create a deployment pipeline that automates solution deployment across environme
     ```
     Create a Microsoft Surface Guide agent that knows everything about the Surface devices and can help guide users to pick the one that would be best for how they work. It should use the information from https://www.microsoft.com/en-us/surface as an official knowledge source
     ```
-1. After the agent is created do a quick test of the agent by asking something like **What are the different Surface devices?**.
+
+1. Before saving, select the **gear icon** (Settings) on the agent and update the **Schema name** to include your UserID. For example, if your username is `user.xibbqhpx`, set the schema name to include `xibbqhpx`.
+
+    > [!IMPORTANT]
+    > You **must** update the schema name to include your UserID. If you do not set a unique schema name, your pipeline deployment to the ALM Prod environment will fail later. A unique schema name is required to build a pipeline to a shared ALM Prod environment.
+
+1. After the agent is created, do a quick test of the agent by asking something like **What are the different Surface devices?**.
 
 1. In the left navigation select "..." and then **Solutions**
 
@@ -352,7 +356,7 @@ Create a deployment pipeline that automates solution deployment across environme
 
 1. You should see **Microsoft Surface Guide** or something similar in the **Agents** category of components.
 
-1. Your solution is now read yto deploy to the PROD environment.
+1. Your solution is now ready to deploy to the ALM Prod environment.
 
 #### Access Power Platform Pipelines
 
@@ -370,25 +374,25 @@ Create a deployment pipeline that automates solution deployment across environme
 
 1. Enter a **Name** for your pipeline, e.g., `<your user name> Pipeline`.
 
-1. Set a **Description** to explain the pipeline's purpose (e.g., `Automated deployment of agents from DEV to PROD`).
+1. Set a **Description** to explain the pipeline's purpose (e.g., `Automated deployment of agents from DEV to ALM Prod`).
 
 #### Set Up Deployment Stage
 
-1. Select the **PROD** environment as the **Target environment**.
+1. Select the **ALM Prod** environment as the **Target environment**.
 
 1. **Save** the pipeline configuration.
 
 #### Test Your Pipeline
 
-1. In the PROD card, select **Deploy here**.
+1. In the ALM Prod card, select **Deploy here**.
 
     > [!TIP]
     > - The wizard makes sure that each environment variable has a value set in the target environment, and that all connection references are valid. If any of these checks fail, you will be prompted to fix them before proceeding.
     > - If the deployment fails because of missing dependencies, go back to your solution explorer, select the **...** next to each agent > **Advanced** > **Add required objects** and try re-deploying the solution.
 
-1. In Copilot Studio, **switch** to the PROD environment.
+1. In Copilot Studio, **switch** to the ALM Prod environment.
 
-1. See what the agents look like in the PROD environment. When entering a topic, see how customizations are locked because the solution is managed.
+1. See what the agents look like in the ALM Prod environment. When entering a topic, see how customizations are locked because the solution is managed.
 
 ---
 
@@ -601,7 +605,7 @@ To maximize the impact of ALM in Copilot Studio:
 
 > [!NOTE]
 > **Managed Environment governance in your lab:**
-> Your PROD environment uses Managed Environment governance to enforce that solutions are managed and unmanaged customizations are blocked. This ensures deployment integrity and prevents unauthorized changes outside of the pipeline process.
+> Your ALM Prod environment uses Managed Environment governance to enforce that solutions are managed and unmanaged customizations are blocked. This ensures deployment integrity and prevents unauthorized changes outside of the pipeline process.
 
 ---
 
