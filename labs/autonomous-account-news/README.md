@@ -231,6 +231,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
         ```
         cat_amount gt 300000 and cat_isclosed eq false
         ```
+    You may see a validation error like missing required property - value. After a few seconds or as you select away from that input field it should clear. Also, it is not necessary to select the ... to provide the OData filter.
 
   1. Select **Save** to finalize the tool configuration.
 
@@ -417,7 +418,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
       - Select on **(+)** to add a node. 
       - Select **Variable management** and then **Set a variable value**.
       - For **Set variable**, create a new variable, make it **Global**, and name it `relevantNewsForOpportunities`. 
-      - In **To value** select `Topic.relevantNewsForOpportunities`. You need to select ... then select Formula, then type **Topic.Formula**, then select Insert.
+      - In **To value** select `Topic.relevantNewsForOpportunities`. You need to select ... then select Formula, then type **Topic.relevantNewsForOpportunities**, then select Insert.
 
   1. Select **Save**
 
@@ -480,9 +481,6 @@ Set up an autonomous agent with a recurring trigger that automatically activates
   4. Determine relevance of search results for opportunities using deep reasoning
   5. Use Log relevant news for opportunities to log your findings. The base input for Log relevant news for opportunities should be {Global.searchResults} with determined relevance added
   ```
-
-> [!TIP]
-> If instructions don't offer the "/" option to reference topics, tools or variables, you can skip step 26-30 and continue with the next steps. You can always come back to this later.
 
   1 To increase orchestration accuracy, you will now replace names of topics, tools and variables with references. References can be added to instructions by typing **/** and selecting the appropriate object from the drop-down menu.
 

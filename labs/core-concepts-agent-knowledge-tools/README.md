@@ -263,6 +263,12 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 1. Review the **Name** and **Description** fields. Update if needed to make the source easily identifiable.
 
+#### Check and disable Web Search 
+The Use information from the web setting is available on the Generative AI settings page or the Web Search setting in the Knowledge section of the agent's Overview page. This setting lets your agent access broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. For our scenario, we want to keep the use of knowedge focused on our provided resources and not the broader web.
+
+1. Navigate to the Overview tab, scroll down to the Knowledge section
+
+1. Select Disabled on the Web Search option.
 
 #### Test Knowledge Integration
 

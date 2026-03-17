@@ -529,7 +529,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 #### Connect the Account and Contact Information Agent
 
-1. In the Copilot Studio tab in your browser, go to the parent agent (Sales Info Assistant)
+1. In the Copilot Studio tab in your browser, go to the parent agent (Sales Associate Assistant)
 
 1. Go to the **Agents** menu on the top navigation bar
 

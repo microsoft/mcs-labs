@@ -160,7 +160,7 @@ Create a SharePoint site with MBR documents that will serve as the knowledge sou
 
 ![Create Site](./assets/site-name.png)
 
-7. Click **Finish**
+7. Select **Create site**
 
 ![Select Finish](./assets/select-finish-site-creation.jpeg)
 
