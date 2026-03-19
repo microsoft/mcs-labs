@@ -1,0 +1,2 @@
+tokenEndpoint: "https://c22e64a4eda3ec278e9fb7e60ccab7.02.environment.api.powerplatform.com/powervirtualagents/botsbyschema/cat_WorkshopAgent/directline/token?api-version=2022-03-01-preview"
+botName: "Lab Assistant"

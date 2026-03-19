@@ -27,3 +27,10 @@
   });
 })();
 </script>
+
+<!-- WebChat side panel -->
+{% if site.data.webchat.tokenEndpoint %}
+{% include webchat/styles.html %}
+{% include webchat/panel.html %}
+{% include webchat/script.html %}
+{% endif %}

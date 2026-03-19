@@ -1,0 +1,65 @@
+<!-- Chat tag (pull handle) -->
+<div class="wc-tag" id="wcTag" role="button" tabindex="0" aria-label="Open chat assistant">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+  <span class="wc-tag-label">Ask</span>
+</div>
+
+<!-- Overlay -->
+<div class="wc-overlay" id="wcOverlay"></div>
+
+<!-- Chat panel -->
+<div class="wc-panel" id="wcPanel" role="complementary" aria-label="Chat assistant">
+  <!-- Header -->
+  <div class="wc-panel-header">
+    <div class="wc-panel-header-left">
+      <div class="wc-panel-header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+        </svg>
+      </div>
+      <div>
+        <div class="wc-panel-header-title">{{ site.data.webchat.botName | default: "Lab Assistant" }}</div>
+        <div class="wc-panel-header-status" id="wcStatus">Ready</div>
+      </div>
+    </div>
+    <button class="wc-panel-close" id="wcClose" aria-label="Close chat">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Body (WebChat renders here — transcript only, no sendbox) -->
+  <div class="wc-panel-body" id="wcBody">
+    <div class="wc-panel-loading" id="wcLoading" style="display: none;">
+      <div class="wc-panel-loading-spinner"></div>
+      <span>Connecting...</span>
+    </div>
+    <div class="wc-panel-error" id="wcError" style="display: none;">
+      <span>Could not connect to the assistant.</span>
+      <button id="wcRetry">Try again</button>
+    </div>
+  </div>
+
+  <!-- Typing indicator -->
+  <div class="wc-typing" id="wcTyping">
+    <div class="wc-typing-dots">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+
+  <!-- Custom send box -->
+  <div class="wc-sendbox">
+    <div class="wc-sendbox-inner">
+      <input type="text" id="wcSendInput" class="wc-sendbox-input" placeholder="Ask about labs, setup, or workshops..." autocomplete="off" />
+      <button id="wcSendBtn" class="wc-sendbox-btn" aria-label="Send message">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+    </div>
+    <div class="wc-sendbox-hint">Powered by Microsoft Copilot Studio</div>
+  </div>
+</div>

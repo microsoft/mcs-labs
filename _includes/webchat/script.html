@@ -1,0 +1,201 @@
+<script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+<script>
+(function () {
+  'use strict';
+
+  var TOKEN_ENDPOINT = {{ site.data.webchat.tokenEndpoint | jsonify }};
+
+  // Move elements to document.body to escape any ancestor stacking contexts
+  // (the footer include may be inside a positioned wrapper)
+  ['wcTag', 'wcOverlay', 'wcPanel'].forEach(function (id) {
+    var el = document.getElementById(id);
+    if (el && el.parentElement !== document.body) document.body.appendChild(el);
+  });
+
+  // DOM refs
+  var tag = document.getElementById('wcTag');
+  var overlay = document.getElementById('wcOverlay');
+  var panel = document.getElementById('wcPanel');
+  var closeBtn = document.getElementById('wcClose');
+  var body = document.getElementById('wcBody');
+  var loading = document.getElementById('wcLoading');
+  var error = document.getElementById('wcError');
+  var retryBtn = document.getElementById('wcRetry');
+  var status = document.getElementById('wcStatus');
+  var sendInput = document.getElementById('wcSendInput');
+  var sendBtn = document.getElementById('wcSendBtn');
+
+  var isOpen = false;
+  var chatInitialized = false;
+  var chatStore = null;
+
+  // --- Panel toggle ---
+
+  function open() {
+    isOpen = true;
+    panel.classList.add('wc-panel--open');
+    overlay.classList.add('wc-overlay--visible');
+    tag.classList.add('wc-tag--hidden');
+    if (!chatInitialized) initChat();
+    else sendInput.focus();
+  }
+
+  function close() {
+    isOpen = false;
+    panel.classList.remove('wc-panel--open');
+    overlay.classList.remove('wc-overlay--visible');
+    tag.classList.remove('wc-tag--hidden');
+  }
+
+  tag.addEventListener('click', open);
+  tag.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
+  });
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', close);
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isOpen) close();
+  });
+
+  // --- Custom send box ---
+
+  function sendMessage() {
+    var text = sendInput.value.trim();
+    if (!text || !chatStore) return;
+    chatStore.dispatch({
+      type: 'WEB_CHAT/SEND_MESSAGE',
+      payload: { text: text }
+    });
+    sendInput.value = '';
+    sendInput.focus();
+  }
+
+  sendBtn.addEventListener('click', sendMessage);
+  sendInput.addEventListener('keydown', function (e) {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+
+  // --- Chat initialization (lazy, on first open) ---
+
+  async function initChat() {
+    chatInitialized = true;
+    loading.style.display = '';
+    error.style.display = 'none';
+    status.textContent = 'Connecting...';
+
+    try {
+      var res = await fetch(TOKEN_ENDPOINT);
+      if (!res.ok) throw new Error('Token request failed (' + res.status + ')');
+      var data = await res.json();
+      var token = data.token;
+
+      var directLine = window.WebChat.createDirectLine({ token: token });
+
+      // Typing indicator state
+      var typingTimer = null;
+      var typingEl = document.getElementById('wcTyping');
+
+      function showTyping() {
+        typingEl.classList.add('wc-typing--visible');
+        clearTimeout(typingTimer);
+        typingTimer = setTimeout(function () {
+          typingEl.classList.remove('wc-typing--visible');
+        }, 5000);
+      }
+
+      function hideTyping() {
+        clearTimeout(typingTimer);
+        typingEl.classList.remove('wc-typing--visible');
+      }
+
+      var store = window.WebChat.createStore({}, function () {
+        return function (next) {
+          return function (action) {
+            if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
+              status.textContent = 'Online';
+              store.dispatch({
+                type: 'WEB_CHAT/SEND_EVENT',
+                payload: { name: 'startConversation', type: 'event', value: '' }
+              });
+            }
+            if (action.type === 'DIRECT_LINE/DISCONNECT_FULFILLED') {
+              status.textContent = 'Disconnected';
+            }
+            if (action.type === 'DIRECT_LINE/INCOMING_ACTIVITY') {
+              var activity = action.payload.activity;
+              if (activity.type === 'typing' && activity.from && activity.from.role === 'bot') {
+                showTyping();
+              } else if (activity.type === 'message' && activity.from && activity.from.role === 'bot') {
+                hideTyping();
+              }
+            }
+            return next(action);
+          };
+        };
+      });
+
+      chatStore = store;
+
+      var styleOptions = {
+        backgroundColor: '#faf9f8',
+        rootHeight: '100%',
+        rootWidth: '100%',
+
+        primaryFont: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+
+        botAvatarInitials: '',
+        userAvatarInitials: '',
+        showAvatarInGroup: false,
+        avatarSize: 0,
+
+        bubbleBackground: 'rgba(0, 0, 0, 0.04)',
+        bubbleBorderColor: 'transparent',
+        bubbleBorderRadius: 14,
+        bubbleTextColor: '#3b3a39',
+
+        bubbleFromUserBackground: 'rgba(0, 120, 212, 0.08)',
+        bubbleFromUserBorderColor: 'transparent',
+        bubbleFromUserBorderRadius: 14,
+        bubbleFromUserTextColor: '#1a3a5c',
+
+        // Hide default send box — we use our own
+        hideSendBox: true,
+        hideUploadButton: true,
+
+        suggestedActionBackgroundColor: '#ffffff',
+        suggestedActionBorderColor: '#0078d4',
+        suggestedActionTextColor: '#0078d4',
+        suggestedActionBorderRadius: 100,
+        suggestedActionHeight: 32,
+
+        timestampColor: '#a19f9d',
+        groupTimestamp: 30000,
+      };
+
+      loading.style.display = 'none';
+
+      window.WebChat.renderWebChat(
+        { directLine: directLine, store: store, styleOptions: styleOptions },
+        body
+      );
+
+      sendInput.focus();
+
+    } catch (err) {
+      console.error('WebChat init failed:', err);
+      loading.style.display = 'none';
+      error.style.display = '';
+      status.textContent = 'Error';
+      chatInitialized = false;
+    }
+  }
+
+  retryBtn.addEventListener('click', function () {
+    initChat();
+  });
+})();
+</script>
