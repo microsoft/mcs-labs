@@ -1,12 +1,11 @@
-<script src="https://cdn.botframework.com/botframework-webchat/latest/webchat.js"></script>
+<script src="https://cdn.botframework.com/botframework-webchat/4.18.0/webchat.js" defer></script>
 <script>
 (function () {
   'use strict';
 
   var TOKEN_ENDPOINT = {{ site.data.webchat.tokenEndpoint | jsonify }};
 
-  // Move elements to document.body to escape any ancestor stacking contexts
-  // (the footer include may be inside a positioned wrapper)
+  // Move elements to document.body to escape ancestor stacking contexts
   ['wcTag', 'wcOverlay', 'wcPanel'].forEach(function (id) {
     var el = document.getElementById(id);
     if (el && el.parentElement !== document.body) document.body.appendChild(el);
@@ -26,8 +25,42 @@
   var sendBtn = document.getElementById('wcSendBtn');
 
   var isOpen = false;
-  var chatInitialized = false;
+  var chatInitializing = false;
+  var chatReady = false;
   var chatStore = null;
+
+  // --- Sendbox disabled state ---
+
+  function setSendboxEnabled(enabled) {
+    sendInput.disabled = !enabled;
+    sendBtn.disabled = !enabled;
+    sendInput.placeholder = enabled
+      ? 'Ask about labs, setup, or workshops...'
+      : 'Connecting...';
+  }
+
+  setSendboxEnabled(false);
+
+  // --- Focus trap ---
+
+  function getFocusableElements() {
+    return panel.querySelectorAll(
+      'button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    );
+  }
+
+  function handleFocusTrap(e) {
+    if (e.key !== 'Tab' || !isOpen) return;
+    var focusable = getFocusableElements();
+    if (focusable.length === 0) return;
+    var first = focusable[0];
+    var last = focusable[focusable.length - 1];
+    if (e.shiftKey) {
+      if (document.activeElement === first) { e.preventDefault(); last.focus(); }
+    } else {
+      if (document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+  }
 
   // --- Panel toggle ---
 
@@ -36,8 +69,9 @@
     panel.classList.add('wc-panel--open');
     overlay.classList.add('wc-overlay--visible');
     tag.classList.add('wc-tag--hidden');
-    if (!chatInitialized) initChat();
-    else sendInput.focus();
+    panel.addEventListener('keydown', handleFocusTrap);
+    if (!chatInitializing && !chatReady) initChat();
+    else if (chatReady) sendInput.focus();
   }
 
   function close() {
@@ -45,6 +79,8 @@
     panel.classList.remove('wc-panel--open');
     overlay.classList.remove('wc-overlay--visible');
     tag.classList.remove('wc-tag--hidden');
+    panel.removeEventListener('keydown', handleFocusTrap);
+    tag.focus();
   }
 
   tag.addEventListener('click', open);
@@ -62,7 +98,7 @@
 
   function sendMessage() {
     var text = sendInput.value.trim();
-    if (!text || !chatStore) return;
+    if (!text || !chatStore || !chatReady) return;
     chatStore.dispatch({
       type: 'WEB_CHAT/SEND_MESSAGE',
       payload: { text: text }
@@ -81,13 +117,27 @@
 
   // --- Chat initialization (lazy, on first open) ---
 
+  function waitForWebChat() {
+    return new Promise(function (resolve) {
+      if (window.WebChat) return resolve();
+      var check = setInterval(function () {
+        if (window.WebChat) { clearInterval(check); resolve(); }
+      }, 100);
+    });
+  }
+
   async function initChat() {
-    chatInitialized = true;
+    if (chatInitializing) return;
+    chatInitializing = true;
+    chatReady = false;
     loading.style.display = '';
     error.style.display = 'none';
     status.textContent = 'Connecting...';
+    setSendboxEnabled(false);
 
     try {
+      await waitForWebChat();
+
       var res = await fetch(TOKEN_ENDPOINT);
       if (!res.ok) throw new Error('Token request failed (' + res.status + ')');
       var data = await res.json();
@@ -115,25 +165,40 @@
       var store = window.WebChat.createStore({}, function () {
         return function (next) {
           return function (action) {
+            var result = next(action);
+
+            // Handle post-dispatch side effects (avoids dispatch-in-dispatch)
             if (action.type === 'DIRECT_LINE/CONNECT_FULFILLED') {
               status.textContent = 'Online';
-              store.dispatch({
-                type: 'WEB_CHAT/SEND_EVENT',
-                payload: { name: 'startConversation', type: 'event', value: '' }
-              });
+              chatReady = true;
+              setSendboxEnabled(true);
+              sendInput.focus();
+              setTimeout(function () {
+                store.dispatch({
+                  type: 'WEB_CHAT/SEND_EVENT',
+                  payload: { name: 'startConversation', type: 'event', value: '' }
+                });
+              }, 0);
             }
+
             if (action.type === 'DIRECT_LINE/DISCONNECT_FULFILLED') {
               status.textContent = 'Disconnected';
+              chatReady = false;
+              setSendboxEnabled(false);
             }
+
             if (action.type === 'DIRECT_LINE/INCOMING_ACTIVITY') {
               var activity = action.payload.activity;
-              if (activity.type === 'typing' && activity.from && activity.from.role === 'bot') {
-                showTyping();
-              } else if (activity.type === 'message' && activity.from && activity.from.role === 'bot') {
-                hideTyping();
+              if (activity.from && activity.from.role === 'bot') {
+                if (activity.type === 'typing') {
+                  showTyping();
+                } else {
+                  hideTyping();
+                }
               }
             }
-            return next(action);
+
+            return result;
           };
         };
       });
@@ -162,7 +227,6 @@
         bubbleFromUserBorderRadius: 14,
         bubbleFromUserTextColor: '#1a3a5c',
 
-        // Hide default send box — we use our own
         hideSendBox: true,
         hideUploadButton: true,
 
@@ -176,26 +240,29 @@
         groupTimestamp: 30000,
       };
 
-      loading.style.display = 'none';
+      // Clear any prior mount before rendering
+      body.innerHTML = '';
 
       window.WebChat.renderWebChat(
         { directLine: directLine, store: store, styleOptions: styleOptions },
         body
       );
 
-      sendInput.focus();
+      loading.style.display = 'none';
 
     } catch (err) {
       console.error('WebChat init failed:', err);
+      body.innerHTML = '';
       loading.style.display = 'none';
       error.style.display = '';
       status.textContent = 'Error';
-      chatInitialized = false;
+      chatInitializing = false;
+      chatReady = false;
     }
   }
 
   retryBtn.addEventListener('click', function () {
-    initChat();
+    if (!chatInitializing) initChat();
   });
 })();
 </script>
