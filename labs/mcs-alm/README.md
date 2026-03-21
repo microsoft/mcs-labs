@@ -154,7 +154,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 1. Go to [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com/).
 
-1. Confirm you are in the correct environment (top-right corner).
+1. Confirm you are in the correct environment (top-right corner).  The environment should be named DEV - User (Your user ID).
 
 #### Create a Solution
 
@@ -174,7 +174,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 #### Create a Publisher
 
-1. If this is your first solution, select **+ New publisher** to create one.
+1. If you see a publish with your User name you can select that one, otherwise select **+ New publisher** to create one.
 
 > [!TIP]
 > - Use the **username provided to you for logging into the lab** as the publisher name.
@@ -237,13 +237,13 @@ Create environment variables and connection references that enable your solution
 
 ### Step-by-step instructions
 
-1. Open the solution you created in Use Case #1.
+1. Open the solution you created in Use Case #1. If you didn't navigate away after the create it should leave you in the solution.
 
 2. Select **+ New**, then select **More** and choose **Environment variable**.
 
     ![Copilot Studio showing New menu expanded with Environment variable option highlighted](images/environment-variable-connection-reference.png)
 
-3. In **Name**, enter: `Custom Knowledge Endpoint`
+3. In **Name**, enter: `Custom Knowledge Endpoint`, then add your User Name to make it unique. We are only doing this because you will be deploying to a shared environment.
 
 4. In **Data Type**, select **Text**.
 
@@ -262,7 +262,7 @@ Create environment variables and connection references that enable your solution
 
 7. In the solution, select **New**, then select **More** and choose **Connection reference**.
 
-8. Use the connector name, `ServiceNow`, as the name. Optionally, prefix with your project name.
+8. Enter `ServiceNow` plus your User Name to make it unique , as the name. 
 
 > [!TIP]
 > In other locales, the connector name may be localized.
@@ -331,13 +331,13 @@ Create a deployment pipeline that automates solution deployment across environme
 1. Confirm that your **ALM Prod** environment has already been provisioned for you. You can verify this by checking the environment switcher (top-right corner) in [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com/) — you should see the **ALM Prod** environment in the list.
 
     > [!IMPORTANT]
-    > If you do not see the **ALM Prod** environment, contact your lab instructor for assistance.
+    > If you do not see the **ALM Prod** environment, contact your lab instructor for assistance. 
 
 #### Create an agent to deploy
 
 1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com/
 
-1. Enter the following to describe the agent you wish to create:
+1. Enter the following to describe the agent you wish to create, but do NOT choose to create it yet:
 
     ```
     Create a Microsoft Surface Guide agent that knows everything about the Surface devices and can help guide users to pick the one that would be best for how they work. It should use the information from https://www.microsoft.com/en-us/surface as an official knowledge source
@@ -354,17 +354,10 @@ Create a deployment pipeline that automates solution deployment across environme
 
 1. Select the solution you created previously in this lab to open it and see the list of components.
 
-1. You should see **Microsoft Surface Guide** or something similar in the **Agents** category of components.
-
+1. You should see **Microsoft Surface Guide** or something similar in the **Agents** category of components. 
 1. Your solution is now ready to deploy to the ALM Prod environment.
 
 #### Access Power Platform Pipelines
-
-1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com/.
-
-1. Go to the **Solutions** menu (located in the left-hand menu under the ellipsis **...**) of your DEV environment.
-
-1. Select the solution you created in Use Case #1.
 
 1. In the left navigation, select **Pipelines**.
 
@@ -384,11 +377,17 @@ Create a deployment pipeline that automates solution deployment across environme
 
 #### Test Your Pipeline
 
-1. In the ALM Prod card, select **Deploy here**.
+1. In the ALM Prod card, select **Deploy here**. Then follow the wizard steps by selecting **Next**.
+
+1. If prompted to sign in to service now please do that using the lab resource account information provided. Then select **Next**.
+
+1. Select **Deploy** to start the actual deployment process.
 
     > [!TIP]
     > - The wizard makes sure that each environment variable has a value set in the target environment, and that all connection references are valid. If any of these checks fail, you will be prompted to fix them before proceeding.
     > - If the deployment fails because of missing dependencies, go back to your solution explorer, select the **...** next to each agent > **Advanced** > **Add required objects** and try re-deploying the solution.
+
+1. Wait for your deployment to complete.
 
 1. In Copilot Studio, **switch** to the ALM Prod environment.
 
