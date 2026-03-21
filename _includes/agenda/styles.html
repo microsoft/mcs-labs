@@ -1,0 +1,301 @@
+<script>
+// Set masthead height CSS variable for panels to sit below the header
+(function() {
+  function setMastheadHeight() {
+    var m = document.querySelector('.masthead');
+    if (m) document.documentElement.style.setProperty('--masthead-height', m.offsetHeight + 'px');
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', setMastheadHeight);
+  else setMastheadHeight();
+  window.addEventListener('resize', setMastheadHeight);
+})();
+</script>
+<style>
+/* ============================================
+   Agenda Side Panel — LEFT side (mirrors WebChat on right)
+   ============================================ */
+
+/* --- Tag (pull handle) — LEFT --- */
+.agenda-tag {
+  position: fixed;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99990;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  direction: rtl;
+  background: #fff;
+  color: #605e5c;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 14px 10px;
+  border-radius: 0 10px 10px 0;
+  border: 1px solid #e1dfdd;
+  border-left: none;
+  cursor: pointer;
+  box-shadow: 2px 0 12px rgba(0, 0, 0, 0.04);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, left 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.agenda-tag:hover {
+  background: #f3f2f1;
+  color: #323130;
+  box-shadow: 3px 0 16px rgba(0, 0, 0, 0.08);
+}
+
+.agenda-tag svg { width: 18px; height: 18px; flex-shrink: 0; }
+.agenda-tag-label { letter-spacing: 0.04em; }
+
+.agenda-tag.agenda-tag--hidden {
+  left: -60px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* --- Overlay --- */
+.agenda-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 27, 45, 0.06);
+  z-index: 100001;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.agenda-overlay.agenda-overlay--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- Panel (LEFT side) --- */
+.agenda-panel {
+  position: fixed;
+  top: var(--masthead-height, 70px);
+  left: 0;
+  bottom: 0;
+  width: 380px;
+  max-width: 90vw;
+  z-index: 100002;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-right: 1px solid #d2d0ce;
+  box-shadow:
+    8px 0 40px rgba(0, 0, 0, 0.08),
+    1px 0 0 rgba(0, 0, 0, 0.04);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.agenda-panel.agenda-panel--open {
+  transform: translateX(0);
+}
+
+/* --- Panel header --- */
+.agenda-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid #eae8e6;
+  flex-shrink: 0;
+  background: #fff;
+}
+
+.agenda-panel-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.agenda-panel-header-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0f1b2d 0%, #1a3a5c 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(15, 27, 45, 0.25);
+}
+
+.agenda-panel-header-icon svg {
+  width: 17px;
+  height: 17px;
+  color: #fff;
+}
+
+.agenda-panel-header-title {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #201f1e;
+  line-height: 1.2;
+}
+
+.agenda-panel-header-status {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.68rem;
+  color: #a19f9d;
+  font-weight: 500;
+  margin-top: 1px;
+  letter-spacing: 0.01em;
+}
+
+.agenda-panel-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: #a19f9d;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.agenda-panel-close:hover {
+  background: #f3f2f1;
+  color: #323130;
+}
+
+.agenda-panel-close svg { width: 16px; height: 16px; }
+
+/* --- Body (scrollable agenda) --- */
+.agenda-panel-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px 18px 24px;
+  background: #faf9f8;
+}
+
+.agenda-panel-body::-webkit-scrollbar { width: 5px; }
+.agenda-panel-body::-webkit-scrollbar-track { background: transparent; }
+.agenda-panel-body::-webkit-scrollbar-thumb { background: #d2d0ce; border-radius: 3px; }
+
+/* --- Day sections --- */
+.agenda-day {
+  margin-bottom: 20px;
+}
+
+.agenda-day:last-child {
+  margin-bottom: 0;
+}
+
+.agenda-day-header {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  background: linear-gradient(135deg, #0f1b2d 0%, #1a3a5c 100%);
+  padding: 6px 12px;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+/* --- Agenda items --- */
+.agenda-item {
+  display: flex;
+  gap: 10px;
+  padding: 6px 10px;
+  border-radius: 5px;
+  align-items: baseline;
+  transition: background 0.12s;
+  border-left: 3px solid transparent;
+}
+
+.agenda-item:hover {
+  background: #f3f2f1;
+}
+
+.agenda-time {
+  font-family: 'JetBrains Mono', 'SF Mono', monospace;
+  font-size: 0.68rem;
+  font-weight: 500;
+  color: #a19f9d;
+  white-space: nowrap;
+  min-width: 72px;
+  flex-shrink: 0;
+}
+
+.agenda-title {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #323130;
+  line-height: 1.4;
+}
+
+/* Lab items — blue accent */
+.agenda-item--lab {
+  border-left-color: #0078d4;
+}
+
+.agenda-item--lab .agenda-title {
+  color: #0078d4;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.agenda-item--lab a.agenda-title:hover {
+  text-decoration: underline;
+}
+
+/* Active/current lab highlight */
+.agenda-item--lab.agenda-item--active {
+  background: #deecf9;
+  border-left-color: #0078d4;
+  border-left-width: 4px;
+  border-radius: 4px;
+}
+
+.agenda-item--lab.agenda-item--active .agenda-title {
+  color: #004578;
+  font-weight: 700;
+}
+
+.agenda-item--lab.agenda-item--active .agenda-time {
+  color: #004578;
+  font-weight: 600;
+}
+
+/* Module items — subtle left border */
+.agenda-item--module {
+  border-left-color: #e1dfdd;
+}
+
+/* Break items — lighter */
+.agenda-item--break .agenda-title {
+  color: #a19f9d;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* ===================================
+   Responsive
+   =================================== */
+@media (max-width: 480px) {
+  .agenda-panel { width: 100vw; max-width: 100vw; }
+  .agenda-tag {
+    top: auto;
+    bottom: 24px;
+    transform: none;
+    padding: 12px 8px;
+    font-size: 0.72rem;
+  }
+}
+</style>

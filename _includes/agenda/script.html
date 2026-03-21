@@ -1,0 +1,109 @@
+<script>
+(function initAgenda() {
+  function setup() {
+    // Move agenda elements to <body> to escape stacking context of .page__content
+    var tag = document.getElementById("agendaTag");
+    var panel = document.getElementById("agendaPanel");
+    var overlay = document.getElementById("agendaOverlay");
+
+    if (!tag || !panel) return;
+
+    document.body.appendChild(tag);
+    document.body.appendChild(overlay);
+    document.body.appendChild(panel);
+
+    // Highlight current lab in the agenda
+    var currentSlug = null;
+    var path = window.location.pathname;
+    var labMatch = path.match(/\/labs\/([^\/]+)/);
+    if (labMatch) {
+      currentSlug = labMatch[1];
+    }
+
+    if (currentSlug) {
+      var labItems = panel.querySelectorAll('.agenda-item--lab[data-lab-slug]');
+      for (var i = 0; i < labItems.length; i++) {
+        if (labItems[i].getAttribute('data-lab-slug') === currentSlug) {
+          labItems[i].classList.add('agenda-item--active');
+          // Auto-scroll to the active item when panel opens
+          var activeItem = labItems[i];
+          var origOpen = null; // will be set below
+          break;
+        }
+      }
+    }
+
+    // Remove overlay — agenda should not block page interaction
+    if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
+
+    function openPanel() {
+      panel.classList.add("agenda-panel--open");
+      tag.classList.add("agenda-tag--hidden");
+      sessionStorage.setItem("agenda-panel-open", "true");
+      // Scroll to active lab item
+      var active = panel.querySelector('.agenda-item--active');
+      if (active) {
+        setTimeout(function () {
+          active.scrollIntoView({ block: 'center', behavior: 'smooth' });
+        }, 400);
+      }
+    }
+
+    function closePanel() {
+      panel.classList.remove("agenda-panel--open");
+      tag.classList.remove("agenda-tag--hidden");
+      sessionStorage.setItem("agenda-panel-open", "false");
+    }
+
+    // Auto-close if not on relevant workshop content
+    var path = window.location.pathname;
+    var params = new URLSearchParams(window.location.search);
+    var eventParam = params.get("event") || "";
+    var agendaEvents = ["bootcamp", "mcs-in-a-day-v2"];
+    var isWorkshopPage = false;
+    var isEventLab = false;
+    for (var e = 0; e < agendaEvents.length; e++) {
+      if (path.indexOf('/workshops/' + agendaEvents[e]) !== -1) isWorkshopPage = true;
+      if (eventParam === agendaEvents[e]) isEventLab = true;
+    }
+
+    if (!isWorkshopPage && !isEventLab) {
+      // Not relevant workshop content — clear persisted state and hide
+      sessionStorage.setItem("agenda-panel-open", "false");
+      tag.style.display = "none";
+      panel.style.display = "none";
+    } else {
+      // Restore panel state from previous page
+      if (sessionStorage.getItem("agenda-panel-open") === "true") {
+        openPanel();
+      }
+    }
+
+    // Open
+    tag.onclick = openPanel;
+
+    // Close via X button
+    var closeBtn = document.getElementById("agendaClose");
+    if (closeBtn) {
+      closeBtn.onclick = function (e) {
+        e.preventDefault();
+        e.stopPropagation();
+        closePanel();
+      };
+    }
+
+    // Close via Escape
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape" && panel.classList.contains("agenda-panel--open")) {
+        closePanel();
+      }
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", setup);
+  } else {
+    setup();
+  }
+})();
+</script>

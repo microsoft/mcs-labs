@@ -178,7 +178,6 @@ layout: single
 <div class="ws-hero">
   <h2>{{ page.title }}</h2>
   <p>{{ page.description }}</p>
-  <a href="#feedback" style="display: inline-block; margin-top: 1em; font-size: 0.78em; font-weight: 600; color: rgba(255,255,255,0.7); text-decoration: none; border: 1px solid rgba(255,255,255,0.25); padding: 0.3em 0.8em; border-radius: 4px;">Leave feedback</a>
   <ul class="ws-stats">
     <li><strong>{{ page.labs.size }}</strong><span>Labs</span></li>
     <li><strong>~{{ total_hours }}h</strong><span>Content</span></li>
@@ -212,15 +211,12 @@ layout: single
 {% endfor %}
 </ol>
 
-<section id="feedback" style="margin-top: 3em; padding-top: 2em; border-top: 1px solid #e8e6e4;">
-  <h2 style="font-size: 1.1em; font-weight: 700; color: #323130; margin: 0 0 0.5em;">Feedback</h2>
-  <p style="font-size: 0.85em; color: #605e5c; margin: 0 0 1.2em;">Found an issue or have a suggestion? Leave a comment below (requires GitHub sign-in).</p>
-  <script src="https://utteranc.es/client.js"
-    repo="{{ site.comments.utterances.repo }}"
-    issue-term="{{ site.comments.utterances.issue_term }}"
-    label="{{ site.comments.utterances.label }}"
-    theme="{{ site.comments.utterances.theme }}"
-    crossorigin="anonymous"
-    async>
-  </script>
-</section>
+{% if page.event_id == "bootcamp" %}
+{% include agenda/styles.html %}
+{% include agenda/panel.html %}
+{% include agenda/script.html %}
+{% elsif page.event_id == "mcs-in-a-day-v2" %}
+{% include agenda/styles.html %}
+{% include agenda/panel-mcs-in-a-day-v2.html %}
+{% include agenda/script.html %}
+{% endif %}
