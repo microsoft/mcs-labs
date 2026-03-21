@@ -148,3 +148,9 @@ dist/           # ← Generated HTML/PDF (auto-created)
 .github/        # ← Workflows and technical documentation
 package.json    # ← Dependencies for document generation
 ```
+
+---
+
+## 📋 Change Log
+
+For a detailed history of all changes, see [CHANGELOG.md](./CHANGELOG.md).
