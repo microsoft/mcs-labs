@@ -4,7 +4,7 @@ Automate quality assurance for your Copilot Studio agents with the Copilot Studi
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,23 +12,23 @@ Automate quality assurance for your Copilot Studio agents with the Copilot Studi
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Configure Agent Testis](#use-case-1-configure-agent-testing-infrastructure)
-  - [Use Case #2: Execute and Analyze Test Results](#use-case-2-execute-and-analyze-test-results)
-  - [Use Case #3: Explore the other Copilot Studio Kit features](#use-case-3-explore-the-other-copilot-studio-kit-features)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Configure Agent Testis](#-use-case-1-configure-agent-testing-infrastructure)
+  - [Use Case #2: Execute and Analyze Test Results](#-use-case-2-execute-and-analyze-test-results)
+  - [Use Case #3: Explore the other Copilot Studio Kit features](#-use-case-3-explore-the-other-copilot-studio-kit-features)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 **Makers and Developers** - Worried about deploying AI agents that might give inconsistent or incorrect responses to users?
 
@@ -46,7 +46,7 @@ Think of testing a chatbot like quality control in manufacturing:
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 Quality assurance for AI agents requires a systematic approach that goes beyond manual testing. The Power CAT Copilot Studio Kit provides enterprise-grade testing capabilities that enable makers to validate agent behavior at scale.
 
@@ -56,7 +56,7 @@ This lab teaches you to implement professional testing practices that ensure you
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -67,20 +67,20 @@ This lab teaches you to implement professional testing practices that ensure you
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 * [Power CAT Copilot Studio Kit Documentation](https://aka.ms/CopilotStudioKit)
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 * Access to a Microsoft Copilot Studio environment with agent creation permissions.
 * Access to the Power CAT Copilot Studio Kit (installed from AppSource or GitHub).
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll establish a comprehensive testing framework for Copilot Studio agents. By the end of the lab, you will:
 
@@ -91,22 +91,22 @@ In this lab, you'll establish a comprehensive testing framework for Copilot Stud
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Configure Agent Tests](#use-case-1-configure-agent-tests) | Establishes automated testing pipeline for systematic agent validation | 10 min |
-| 2 | [Execute and Analyze Test Results](#use-case-2-execute-and-analyze-test-results) | Delivers actionable insights for agent performance optimization | 10 min |
-| 3 | [Explore the other Copilot Studio Kit features](#use-case-3-explore-the-other-copilot-studio-kit-features) | Beyond testing, the Power CAT Copilot Studio Kit includes powerful tools for real-world deployment and governance: conversation KPIs for tracking agent performance, SharePoint synchronization for auto-updating knowledge bases, the Webchat Playground for UI customization, and the Adaptive Cards Gallery for rich interactions. It also offers admin tools like Agent Inventory for environment-wide visibility and the Agent Review Tool to detect issues and anti-patterns—helping makers ship secure, scalable, and effective agents. | 10 min |
+| 1 | [Configure Agent Tests](#-use-case-1-configure-agent-tests) | Establishes automated testing pipeline for systematic agent validation | 10 min |
+| 2 | [Execute and Analyze Test Results](#-use-case-2-execute-and-analyze-test-results) | Delivers actionable insights for agent performance optimization | 10 min |
+| 3 | [Explore the other Copilot Studio Kit features](#-use-case-3-explore-the-other-copilot-studio-kit-features) | Beyond testing, the Power CAT Copilot Studio Kit includes powerful tools for real-world deployment and governance: conversation KPIs for tracking agent performance, SharePoint synchronization for auto-updating knowledge bases, the Webchat Playground for UI customization, and the Adaptive Cards Gallery for rich interactions. It also offers admin tools like Agent Inventory for environment-wide visibility and the Agent Review Tool to detect issues and anti-patterns—helping makers ship secure, scalable, and effective agents. | 10 min |
 
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Configure Agent Tests
+## 🧱 Use Case #1: Configure Agent Tests
 
 Set up the foundational components needed to automate testing of your Copilot Studio agents.
 
@@ -173,7 +173,7 @@ Configure a Copilot Studio agent for external access and integrate it with the P
 
 ---
 
-### Congratulations! You've completed Agent Testing Infrastructure Setup!
+###  🏅 Congratulations! You've completed Agent Testing Infrastructure Setup!
 
 ---
 
@@ -201,7 +201,7 @@ Configure a Copilot Studio agent for external access and integrate it with the P
 
 ---
 
-## Use Case #2: Execute and Analyze Test Results
+## 🔄 Use Case #2: Execute and Analyze Test Results
 
 Run your configured tests and interpret the results to optimize agent performance and ensure quality.
 
@@ -260,7 +260,7 @@ In this section, you'll learn how to execute test runs, analyze detailed results
 
 ---
 
-### Congratulations! You've completed Test Execution and Analysis!
+###  🏅 Congratulations! You've completed Test Execution and Analysis!
 
 ---
 
@@ -280,7 +280,7 @@ In this section, you'll learn how to execute test runs, analyze detailed results
 
 ---
 
-## Use Case #3: Explore Advanced Kit Features
+## 🎨 Use Case #3: Explore Advanced Kit Features
 
 Discover the comprehensive ecosystem of tools available in the Power CAT Copilot Studio Kit for enhanced agent development and management.
 
@@ -330,7 +330,7 @@ In this section, you'll explore the full range of capabilities beyond testing, i
 
 ---
 
-### Congratulations! You've explored the full Power CAT Copilot Studio Kit ecosystem!
+###  🏅 Congratulations! You've explored the full Power CAT Copilot Studio Kit ecosystem!
 
 ---
 
@@ -346,7 +346,7 @@ In this section, you'll explore the full range of capabilities beyond testing, i
 * Plan how you could incorporate conversation KPIs and analytics into your ongoing agent optimization process
 * Consider how administrative tools could help you scale agent development across your organization while maintaining quality and security standards
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

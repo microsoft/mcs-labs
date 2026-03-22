@@ -6,7 +6,7 @@ Create an intelligent agent in Copilot that delivers contextual, multi-part answ
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -14,28 +14,28 @@ Create an intelligent agent in Copilot that delivers contextual, multi-part answ
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Create and configure your Copilot agent](#use-case-1-create-and-configure-your-copilot-agent)
-- [Summary of Learnings](#summary-of-learnings)
-- [Conclusions & Recommendations](#conclusions--recommendations)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Create and configure your Copilot agent](#-use-case-1-create-and-configure-your-copilot-agent)
+- [Summary of Learnings](#-summary-of-learnings)
+- [Conclusions & Recommendations](#-conclusions--recommendations)
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 In this lab, you'll create a Copilot agent in Microsoft 365 Copilot Chat with Agent Builder in Microsoft 365. This agent will be designed to assist users with questions about Copilot agents. The agent will act as a learning companion or teacher, grounded in official Microsoft documentation.
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -55,7 +55,7 @@ In this lab, you'll create a Copilot agent in Microsoft 365 Copilot Chat with Ag
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 * [Overview of Microsoft 365 Copilot Chat](https://learn.microsoft.com/en-us/copilot/chat)
 * [What is Microsoft 365 Copilot?](https://learn.microsoft.com/en-us/microsoft-365-copilot)
@@ -64,14 +64,14 @@ In this lab, you'll create a Copilot agent in Microsoft 365 Copilot Chat with Ag
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Access to Microsoft 365 Copilot or Copilot Chat  
 - Ability to create a Copilot agent  
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 By the end of the lab, your agent will be able to:
 
@@ -82,19 +82,19 @@ By the end of the lab, your agent will be able to:
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create and configure your Copilot agent](#use-case-1-create-and-configure-your-copilot-agent) | Design a tailored agent that understands your audience and delivers answers grounded in trusted Microsoft documentation | 15 min |
+| 1 | [Create and configure your Copilot agent](#-use-case-1-create-and-configure-your-copilot-agent) | Design a tailored agent that understands your audience and delivers answers grounded in trusted Microsoft documentation | 15 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Create and configure your Copilot agent
+## 🤖 Use Case #1: Create and configure your Copilot agent
 
 Use Agent Builder in Microsoft 365 to create a declarative agent and obtain a shareable link.
 
@@ -240,7 +240,7 @@ What are the differences between Microsoft 365 Copilot and Copilot Chat?
 
 ---
 
-### Congratulations! You've created your Copilot agent!
+###  🏅 Congratulations! You've created your Copilot agent!
 
 ---
 
@@ -268,7 +268,7 @@ What are the differences between Microsoft 365 Copilot and Copilot Chat?
 
 ---
 
-## Summary of Learnings
+## 🔁 Summary of Learnings
 
 > Mastery is not a destination but a journey—a joyful path where every step brings growth, discovery, and endless possibilities.
 
@@ -283,7 +283,7 @@ Now that you've built your own learning-focused agent, take a moment to evaluate
 
 ---
 
-## Conclusions & Recommendations
+## 📌 Conclusions & Recommendations
 
 > [!IMPORTANT]  
 > To maximize the impact of your teacher-style Copilot agent:

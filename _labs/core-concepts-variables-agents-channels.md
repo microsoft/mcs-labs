@@ -5,7 +5,7 @@ order: 175
 duration: 30
 difficulty: 200
 lab_type: local
-section: core
+section: core_learning_path
 journeys: ["quick-start", "business-user", "developer"]
 bootcamp_order: "3"
 description: "Learn how to manage conversation state with variables, build specialized child agents for modular solutions, and deploy your agent across multiple channels to reach users where they work."

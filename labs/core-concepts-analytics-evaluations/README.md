@@ -4,7 +4,7 @@ Learn how to use analytics to measure agent performance, create evaluation test 
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,23 +12,23 @@ Learn how to use analytics to measure agent performance, create evaluation test 
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Monitor Agent Performance with Analytics](#use-case-1-monitor-agent-performance-with-analytics)
-  - [Use Case #2: Create and Configure Evaluation Test Sets](#use-case-2-create-and-configure-evaluation-test-sets)
-  - [Use Case #3: Review Evaluation Results](#use-case-3-review-evaluation-results)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Monitor Agent Performance with Analytics](#-use-case-1-monitor-agent-performance-with-analytics)
+  - [Use Case #2: Create and Configure Evaluation Test Sets](#-use-case-2-create-and-configure-evaluation-test-sets)
+  - [Use Case #3: Review Evaluation Results](#-use-case-3-review-evaluation-results)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 **An agent you can't measure is impossible to improve, and without systematic evaluation, you're guessing about quality.**
 
@@ -47,7 +47,7 @@ Think of analytics and evaluations like running a quality assurance program:
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 Analytics and evaluations are the two pillars of agent quality management. Analytics provide real-time visibility into how users interact with your agent - tracking conversation volumes, topic performance, satisfaction scores, and failure patterns. Evaluations provide a structured testing framework where you define expected responses, run systematic tests, and compare results across agent versions. Together, they create a complete quality management system: analytics tells you WHERE to improve, and evaluations tell you WHETHER your improvements actually worked.
 
@@ -57,7 +57,7 @@ This lab teaches you how to use both analytics and the Agent Evaluation feature 
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -70,7 +70,7 @@ This lab teaches you how to use both analytics and the Agent Evaluation feature 
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 * [Analyze agent performance](https://learn.microsoft.com/microsoft-copilot-studio/analytics-overview)
 * [Use conversation analytics](https://learn.microsoft.com/microsoft-copilot-studio/analytics-summary)
@@ -80,7 +80,7 @@ This lab teaches you how to use both analytics and the Agent Evaluation feature 
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 * Completed [Build Intelligent Agents with Knowledge Sources, Tools, and Topics](../core-concepts-agent-knowledge-tools/README.md) and [Master Variables, Multi-Agent Architectures, and Channel Deployment](../core-concepts-variables-agents-channels/README.md) labs - you need a deployed agent with conversation history for meaningful analytics
 * Access to Microsoft Copilot Studio with analytics and evaluation permissions
@@ -88,7 +88,7 @@ This lab teaches you how to use both analytics and the Agent Evaluation feature 
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll use analytics to understand agent performance and build evaluation test sets to systematically measure and improve quality. By the end of the lab, you will:
 
@@ -104,21 +104,21 @@ In this lab, you'll use analytics to understand agent performance and build eval
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Monitor Agent Performance with Analytics](#use-case-1-monitor-agent-performance-with-analytics) | Measure agent performance and identify optimization opportunities using conversation data | 10 min |
-| 2 | [Create and Configure Evaluation Test Sets](#use-case-2-create-and-configure-evaluation-test-sets) | Build systematic test cases to objectively measure agent quality with multiple evaluation methods | 10 min |
-| 3 | [Review Evaluation Results](#use-case-3-review-evaluation-results) | Interpret evaluation outcomes and use results to drive measurable agent improvements | 10 min |
+| 1 | [Monitor Agent Performance with Analytics](#-use-case-1-monitor-agent-performance-with-analytics) | Measure agent performance and identify optimization opportunities using conversation data | 10 min |
+| 2 | [Create and Configure Evaluation Test Sets](#-use-case-2-create-and-configure-evaluation-test-sets) | Build systematic test cases to objectively measure agent quality with multiple evaluation methods | 10 min |
+| 3 | [Review Evaluation Results](#-use-case-3-review-evaluation-results) | Interpret evaluation outcomes and use results to drive measurable agent improvements | 10 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Monitor Agent Performance with Analytics
+## 🧱 Use Case #1: Monitor Agent Performance with Analytics
 
 Learn how to access agent analytics, interpret performance metrics, identify improvement opportunities, and use data to optimize agent experiences.
 
@@ -253,7 +253,7 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 ---
 
-### Congratulations! You've completed Use Case 1!
+### 🏅 Congratulations! You've completed Use Case 1!
 
 ---
 
@@ -281,7 +281,7 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 ---
 
-## Use Case #2: Create and Configure Evaluation Test Sets
+## 🔄 Use Case #2: Create and Configure Evaluation Test Sets
 
 Learn four different ways to create evaluation test sets - auto-generation, CSV import, test canvas capture, and manual entry - to systematically measure your agent's quality.
 
@@ -319,6 +319,14 @@ Create evaluation test sets using four different methods and understand how each
 
 1. In the **Configure test set** panel on the right side of your screen, change the test set name to **Non-Critical Copilot Studio Guide Set**
 
+1. In the Test method General Question is configured by default. You can configure additional test methods, those will be available to configure later when you edit questions.
+
+1. Select **Add test method**, review the list of test methods you can configure.
+
+1. On the **Set pass score**, review the settings for this option and select **OK**. Other test methods may have other options you can configure based on the approach.
+
+1. Select **Compare meaning** and then select **OK**.
+
 1. Select **Save** at the bottom of that same panel.
 
 1. In that same panel, select the **Manage profile** button.
@@ -329,25 +337,15 @@ Create evaluation test sets using four different methods and understand how each
 
 1. Select the first generated question to explore all the available options. For each test case, you can configure the **evaluation method**:
 
-    - **Exact Match**: Character-for-character comparison between expected and actual response. Use for questions with precise, factual answers.
-
-    - **Keyword Match**: Checks whether key terms from the expected response appear in the actual response. Use when exact wording doesn't matter but key concepts must be present.
-
-    - **Similarity**: Uses cosine similarity to compare semantic meaning on a 0-1 scale with a configurable threshold. Use when meaning matters more than exact wording.
-
-    - **General Quality**: Uses a LLM to evaluate response quality across four dimensions - relevance, groundedness, completeness, and abstention. Does NOT require an expected response. Use for open-ended questions.
-
-    - **Compare Meaning**: Evaluates whether the intent and meaning of the actual response matches the expected response, with a configurable threshold. Use for semantic comparison with more nuance than cosine similarity.
-
     > [!TIP]
-    > Choose evaluation methods that match the nature of each question. Factual questions with precise answers work well with Exact Match or Keyword Match. Open-ended questions benefit from General Quality or Similarity methods.
+    > Choose evaluation methods that match the nature of each question. Factual questions with precise answers work well with Exact Match or Keyword Match. Open-ended questions benefit from General Quality or Similarity methods. You can add additional test methods to the set at creation of the test set or later during editing.
 
 1. After reviewing, select **Cancel** to close the edit of the test case.
 
 1. Select **Evaluate** to start the evaluation of this test set.
 
     > [!NOTE]
-    > Evaluation time depends on the number of test cases and agent response time. A test set with 10 cases typically completes in 1-3 minutes.
+    > Evaluation time depends on the number of test cases and agent response time. A test set with 10 cases typically completes in 3-5 minutes.
 
 1. After your evaluation runs, review the overall result and then select the evaluation row to drill down into details for each question.
 
@@ -460,7 +458,7 @@ Create evaluation test sets using four different methods and understand how each
 
 ---
 
-### Congratulations! You've completed Use Case 2!
+### 🏅 Congratulations! You've completed Use Case 2!
 
 ---
 
@@ -488,7 +486,7 @@ Create evaluation test sets using four different methods and understand how each
 
 ---
 
-## Use Case #3: Review Evaluation Results
+## 🧱 Use Case #3: Review Evaluation Results
 
 Analyze evaluation results across your test sets to understand pass/fail outcomes, examine detailed reasoning, and use insights to drive agent improvements.
 
@@ -520,10 +518,8 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
 
 1. Select an individual test case to view its detailed results:
    - **Question**: The original test question
-   - **Expected response**: What the AI generated as the correct answer
    - **Actual response**: What the agent actually responded with
    - **Result**: Pass or fail
-   - **Reasoning**: An explanation of why the test passed or failed
 
 1. For any failed test cases, review the **activity map** to see the step-by-step conversation flow showing the agent's decision path, including which knowledge sources, tools, and topics were used.
 
@@ -591,7 +587,7 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
 
 ---
 
-### Congratulations! You've completed Use Case 3!
+### 🏅 Congratulations! You've completed Use Case 3!
 
 ---
 
@@ -609,7 +605,7 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

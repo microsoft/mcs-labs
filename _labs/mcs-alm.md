@@ -5,7 +5,7 @@ order: 280
 duration: 45
 difficulty: 300
 lab_type: local
-section: intermediate
+section: intermediate_labs
 journeys: ["business-user", "developer"]
 bootcamp_order: "5"
 description: "Master the complete lifecycle of your Microsoft Copilot Studio agents - from structuring solutions and managing configurations to deploying across environments with pipelines and source control."

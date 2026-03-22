@@ -4,7 +4,7 @@ Learn how to create an AI agent from scratch in Microsoft Copilot Studio, enhanc
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,24 +12,24 @@ Learn how to create an AI agent from scratch in Microsoft Copilot Studio, enhanc
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Create and Configure Your First Agent](#use-case-1-create-and-configure-your-first-agent)
-  - [Use Case #2: Enhance Agent Intelligence with Knowledge Sources](#use-case-2-enhance-agent-intelligence-with-knowledge-sources)
-  - [Use Case #3: Extend Your Agent with Tools](#use-case-3-extend-your-agent-with-tools)
-  - [Use Case #4: Build Custom Topics for Structured Conversations](#use-case-4-build-custom-topics-for-structured-conversations)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Create and Configure Your First Agent](#-use-case-1-create-and-configure-your-first-agent)
+  - [Use Case #2: Enhance Agent Intelligence with Knowledge Sources](#-use-case-2-enhance-agent-intelligence-with-knowledge-sources)
+  - [Use Case #3: Extend Your Agent with Tools](#-use-case-3-extend-your-agent-with-tools)
+  - [Use Case #4: Build Custom Topics for Structured Conversations](#-use-case-4-build-custom-topics-for-structured-conversations)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 **Building AI agents can feel overwhelming** - especially when you're starting from scratch and need them to actually DO things.
 
@@ -47,7 +47,7 @@ Think of building an AI agent like assembling a team:
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 Microsoft Copilot Studio empowers makers to build sophisticated AI agents without writing code. By combining intuitive visual tools with powerful AI capabilities, you can create agents that understand natural language, leverage your organization's knowledge, connect to external services, and guide users through structured conversation flows.
 
@@ -57,7 +57,7 @@ This lab takes you through the complete journey from agent creation to a fully c
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -71,7 +71,7 @@ This lab takes you through the complete journey from agent creation to a fully c
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 * [Microsoft Copilot Studio Overview](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-what-is-copilot-studio)
 * [Create and configure agents](https://learn.microsoft.com/microsoft-copilot-studio/fundamentals-get-started)
@@ -81,7 +81,7 @@ This lab takes you through the complete journey from agent creation to a fully c
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 * Access to Microsoft Copilot Studio (trial or licensed environment)
 * A document to upload as a knowledge source (PDF, Word, or text file) - or use the [Copilot Studio Licensing Guide (February 2026)](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/microsoft-365/1084694-Microsoft-Copilot-Studio-Licensing-Guide-February-2026-PUB.pdf)
@@ -89,7 +89,7 @@ This lab takes you through the complete journey from agent creation to a fully c
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll build a Copilot Studio agent from the ground up, enhance it with knowledge, extend it with tools, and add structured conversation flows. By the end of the lab, you will:
 
@@ -103,22 +103,22 @@ In this lab, you'll build a Copilot Studio agent from the ground up, enhance it 
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create and Configure Your First Agent](#use-case-1-create-and-configure-your-first-agent) | Build a functional AI agent with clear instructions and optimal AI model settings | 8 min |
-| 2 | [Enhance Agent Intelligence with Knowledge Sources](#use-case-2-enhance-agent-intelligence-with-knowledge-sources) | Transform generic AI into a domain expert by grounding responses in your organization's content | 10 min |
-| 3 | [Extend Your Agent with Tools](#use-case-3-extend-your-agent-with-tools) | Connect your agent to external services and build custom analytical capabilities | 15 min |
-| 4 | [Build Custom Topics for Structured Conversations](#use-case-4-build-custom-topics-for-structured-conversations) | Create structured conversation flows that handle specific user intents and workflows | 12 min |
+| 1 | [Create and Configure Your First Agent](#-use-case-1-create-and-configure-your-first-agent) | Build a functional AI agent with clear instructions and optimal AI model settings | 8 min |
+| 2 | [Enhance Agent Intelligence with Knowledge Sources](#-use-case-2-enhance-agent-intelligence-with-knowledge-sources) | Transform generic AI into a domain expert by grounding responses in your organization's content | 10 min |
+| 3 | [Extend Your Agent with Tools](#-use-case-3-extend-your-agent-with-tools) | Connect your agent to external services and build custom analytical capabilities | 15 min |
+| 4 | [Build Custom Topics for Structured Conversations](#-use-case-4-build-custom-topics-for-structured-conversations) | Create structured conversation flows that handle specific user intents and workflows | 12 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Create and Configure Your First Agent
+## 🧱 Use Case #1: Create and Configure Your First Agent
 
 Build your first Copilot Studio agent with custom instructions, suggested prompts, and AI model configuration.
 
@@ -185,7 +185,7 @@ How do I begin using Copilot Studio?
 
 ---
 
-### Congratulations! You've completed Use Case 1!
+### 🏅 Congratulations! You've completed Use Case 1!
 
 ---
 
@@ -213,7 +213,7 @@ How do I begin using Copilot Studio?
 
 ---
 
-## Use Case #2: Enhance Agent Intelligence with Knowledge Sources
+## 🔄 Use Case #2: Enhance Agent Intelligence with Knowledge Sources
 
 Upload custom documents and content to transform your agent from a generic assistant into a domain-specific expert.
 
@@ -263,6 +263,12 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 1. Review the **Name** and **Description** fields. Update if needed to make the source easily identifiable.
 
+#### Check and disable Web Search 
+The Use information from the web setting is available on the Generative AI settings page or the Web Search setting in the Knowledge section of the agent's Overview page. This setting lets your agent access broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. For our scenario, we want to keep the use of knowedge focused on our provided resources and not the broader web.
+
+1. Navigate to the Overview tab, scroll down to the Knowledge section
+
+1. Select Disabled on the Web Search option.
 
 #### Test Knowledge Integration
 
@@ -301,7 +307,7 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 ---
 
-### Congratulations! You've completed Use Case 2!
+### 🏅 Congratulations! You've completed Use Case 2!
 
 ---
 
@@ -321,7 +327,7 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 ---
 
-## Use Case #3: Extend Your Agent with Tools
+## 🧱 Use Case #3: Extend Your Agent with Tools
 
 Build two different types of tools: a connector-based weather tool and a custom prompt analyzer tool with intelligent inputs.
 
@@ -476,7 +482,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 ---
 
-### Congratulations! You've completed Use Case 3!
+### 🏅 Congratulations! You've completed Use Case 3!
 
 ---
 
@@ -504,7 +510,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 ---
 
-## Use Case #4: Build Custom Topics for Structured Conversations
+## 🔄 Use Case #4: Build Custom Topics for Structured Conversations
 
 Create structured conversation flows with triggers, nodes, and logic to handle specific user intents like mailing list signups.
 
@@ -612,7 +618,7 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
 
 
 
-### Congratulations! You've completed Use Case 4!
+### 🏅 Congratulations! You've completed Use Case 4!
 
 ---
 
@@ -630,7 +636,7 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

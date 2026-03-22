@@ -4,7 +4,7 @@ Build an intelligent sales admin assistant that analyzes SharePoint data using c
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,21 +12,21 @@ Build an intelligent sales admin assistant that analyzes SharePoint data using c
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Introduction](#introduction)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Access SharePoint documents](#use-case-1-access-sharepoint-documents)
-  - [Use Case #2: Create your Sales Admin Assistant agent](#use-case-2-create-your-sales-admin-assistant-agent)
-  - [Use Case #3: Test advanced AI capabilities](#use-case-3-test-advanced-ai-capabilities)
-- [Summary of Learnings](#summary-of-learnings)
+- [Introduction](#-introduction)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Access SharePoint documents](#-use-case-1-access-sharepoint-documents)
+  - [Use Case #2: Create your Sales Admin Assistant agent](#-use-case-2-create-your-sales-admin-assistant-agent)
+  - [Use Case #3: Test advanced AI capabilities](#-use-case-3-test-advanced-ai-capabilities)
+- [Summary of Learnings](#-summary-of-learnings)
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 This lab builds on the Agent Builder in Microsoft 365 experience by integrating SharePoint documents and enabling advanced AI capabilities. You'll create a Sales Admin Assistant that can analyze Excel data, reference policy documents, generate charts through code interpretation, and create visual content.
 
@@ -35,7 +35,7 @@ This lab builds on the Agent Builder in Microsoft 365 experience by integrating 
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Access to Microsoft 365 Copilot or Copilot Chat
 - Access to a SharePoint site with sample sales data
@@ -43,7 +43,7 @@ This lab builds on the Agent Builder in Microsoft 365 experience by integrating 
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 By the end of the lab, your Sales Admin Assistant will be able to:
 
@@ -55,21 +55,21 @@ By the end of the lab, your Sales Admin Assistant will be able to:
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Access SharePoint documents](#use-case-1-access-sharepoint-documents) | Establish data sources for the agent | 5 min |
-| 2 | [Create your Sales Admin Assistant agent](#use-case-2-create-your-sales-admin-assistant-agent) | Build an agent with SharePoint integration and advanced capabilities | 10 min |
-| 3 | [Test advanced AI capabilities](#use-case-3-test-advanced-ai-capabilities) | Validate code interpreter, image generation, and data analysis features | 5 min |
+| 1 | [Access SharePoint documents](#-use-case-1-access-sharepoint-documents) | Establish data sources for the agent | 5 min |
+| 2 | [Create your Sales Admin Assistant agent](#-use-case-2-create-your-sales-admin-assistant-agent) | Build an agent with SharePoint integration and advanced capabilities | 10 min |
+| 3 | [Test advanced AI capabilities](#-use-case-3-test-advanced-ai-capabilities) | Validate code interpreter, image generation, and data analysis features | 5 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Access SharePoint documents
+## 📁 Use Case #1: Access SharePoint documents
 
 Prepare the SharePoint documents that will serve as knowledge sources for your Sales Admin Assistant.
 
@@ -99,7 +99,7 @@ Prepare the SharePoint documents that will serve as knowledge sources for your S
 
 ---
 
-## Use Case #2: Create your Sales Admin Assistant agent
+## 🤖 Use Case #2: Create your Sales Admin Assistant agent
 
 Build a specialized agent with SharePoint integration and advanced AI capabilities.
 
@@ -157,7 +157,7 @@ Commented out; screenshots need update due to CPS updates.  Last minute change t
 
 ---
 
-## Use Case #3: Test advanced AI capabilities
+## 🧪 Use Case #3: Test advanced AI capabilities
 
 Validate your agent's ability to work with SharePoint data and advanced AI features.
 
@@ -222,11 +222,11 @@ Design a professional badge for the first place winner of our 2026 sales contest
    - Your **Emails**
    - Knowledge sources enabled by your organization at the tenant level, through **Copilot Connectors** (e.g., ServiceNow)
 
-### Congratulations! You've created an advanced SharePoint-integrated Copilot agent!
+###  🏅 Congratulations! You've created an advanced SharePoint-integrated Copilot agent!
 
 ---
 
-## Summary of Learnings
+## 🔁 Summary of Learnings
 
 Key achievements and insights from this lab:
 

@@ -4,7 +4,7 @@ Build intelligent agent-to-agent communication between Microsoft Fabric Data Age
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona         | Duration   | Purpose                                                                                                                                                                                                                                                                                                                                                                                                               |
 | ----- | --------------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -12,22 +12,22 @@ Build intelligent agent-to-agent communication between Microsoft Fabric Data Age
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Creating and Configuring the Fabric Data Agent](#use-case-1-creating-and-configuring-the-fabric-data-agent)
-  - [Use Case #2: Connecting Fabric Agent to Copilot Studio](#use-case-2-connecting-fabric-agent-to-copilot-studio)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Creating and Configuring the Fabric Data Agent](#-use-case-1-creating-and-configuring-the-fabric-data-agent)
+  - [Use Case #2: Connecting Fabric Agent to Copilot Studio](#-use-case-2-connecting-fabric-agent-to-copilot-studio)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 **Makers and Developers** - Stop struggling with disconnected data systems and manual query writing that limits your AI agents' potential.
 
@@ -47,7 +47,7 @@ Think of multi-agent communication like having a team of specialized experts:
 
 ---
 
-## Introduction
+## 🌍 Introduction
 
 Modern organizations need AI agents that can work together, sharing specialized knowledge to answer complex business questions. Microsoft Fabric Data Agents and Copilot Studio's MCP Server communication capabilities make this possible, but setting up this orchestration requires understanding both platforms and their integration points.
 
@@ -57,7 +57,7 @@ By mastering the techniques in this lab, you'll enable your organization to buil
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept                | Why it matters                                                                                                                                                                                                |
 | ---------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -67,7 +67,7 @@ By mastering the techniques in this lab, you'll enable your organization to buil
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 - [Microsoft Fabric documentation](https://learn.microsoft.com/en-us/fabric/)
 - [Microsoft Fabric data agent concepts (preview)](https://learn.microsoft.com/en-us/fabric/data-science/concept-data-agent)
@@ -76,7 +76,7 @@ By mastering the techniques in this lab, you'll enable your organization to buil
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Access to Microsoft Copilot Studio with available message packs
 - A Fabric capacity (any tier) with access to the "Workshop Demo Workspace"
@@ -86,7 +86,7 @@ By mastering the techniques in this lab, you'll enable your organization to buil
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll build an intelligent agent ecosystem by creating a Fabric Data Agent and connecting it to Copilot Studio. By the end of the lab, you will:
 
@@ -98,20 +98,20 @@ In this lab, you'll build an intelligent agent ecosystem by creating a Fabric Da
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case                                                                                                      | Value added                                                                                                                        | Effort |
 | ---- | ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------ |
-| 1    | [Creating and Configuring the Fabric Data Agent](#use-case-1-creating-and-configuring-the-fabric-data-agent) | Build a specialized data agent that understands your e-commerce semantic model and responds accurately to natural language queries | 12 min |
-| 2    | [Connecting Fabric Agent to Copilot Studio](#use-case-2-connecting-fabric-agent-to-copilot-studio)           | Enable your Copilot Studio agent to leverage Fabric data intelligence                                                              | 8 min  |
+| 1    | [Creating and Configuring the Fabric Data Agent](#-use-case-1-creating-and-configuring-the-fabric-data-agent) | Build a specialized data agent that understands your e-commerce semantic model and responds accurately to natural language queries | 12 min |
+| 2    | [Connecting Fabric Agent to Copilot Studio](#-use-case-2-connecting-fabric-agent-to-copilot-studio)           | Enable your Copilot Studio agent to leverage Fabric data intelligence                                                              | 8 min  |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Creating and Configuring the Fabric Data Agent
+## 🧱 Use Case #1: Creating and Configuring the Fabric Data Agent
 
 Transform your e-commerce semantic model into an intelligent, conversational data agent using meta-prompts for optimal configuration.
 
@@ -301,7 +301,7 @@ Create and configure a Fabric Data Agent that can intelligently query the e-comm
 
 ---
 
-### Congratulations! You've completed Use Case #1!
+### 🎯 Congratulations! You've completed Use Case #1!
 
 ---
 
@@ -329,7 +329,7 @@ Create and configure a Fabric Data Agent that can intelligently query the e-comm
 
 ---
 
-## Use Case #2: Connecting Fabric Agent to Copilot Studio
+## 🔄 Use Case #2: Connecting Fabric Agent to Copilot Studio
 
 Enable intelligent agent collaboration by connecting your Fabric Data Agent to Microsoft Copilot Studio.
 
@@ -497,7 +497,7 @@ In this section, you'll learn how to create a Copilot Studio agent, establish co
 
 ---
 
-### Congratulations! You've completed Use Case #2!
+### 🎯 Congratulations! You've completed Use Case #2!
 
 ---
 
@@ -515,7 +515,7 @@ In this section, you'll learn how to create a Copilot Studio agent, establish co
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 
@@ -546,7 +546,7 @@ By following these principles, you'll build robust AI ecosystems where specializ
 
 ### Optional Challenge Activities
 
- **Ready to go further?** Try these advanced challenges:
+🚀 **Ready to go further?** Try these advanced challenges:
 
 1. **Multi-Agent Orchestration**: Create a second Fabric Data Agent for a different dataset and connect both to the same Copilot Studio agent
 2. **Custom Visualizations**: Enable Code Interpreter and test queries that generate charts from your e-commerce data

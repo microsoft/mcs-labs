@@ -5,7 +5,7 @@ order: 195
 duration: 30
 difficulty: 300
 lab_type: local
-section: intermediate
+section: intermediate_labs
 journeys: ["business-user", "developer"]
 bootcamp_order: "8"
 description: "Build the same agent across three governance zones (Green, Yellow, Red) to experience firsthand how DLP policies and environment settings control knowledge access in Microsoft Copilot Studio."
