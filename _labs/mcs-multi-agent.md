@@ -5,7 +5,7 @@ order: 250
 duration: 30
 difficulty: 300
 lab_type: local
-section: intermediate
+section: intermediate_labs
 journeys: ["business-user", "developer"]
 bootcamp_order: "9"
 description: "Help makers understand how to leverage multi-agent configurations including child and connected agents."

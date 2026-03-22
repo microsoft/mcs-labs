@@ -4,7 +4,7 @@ Help makers understand how to leverage multi-agent configurations including chil
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,24 +12,24 @@ Help makers understand how to leverage multi-agent configurations including chil
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Create Sales Assistant Agent](#use-case-1-create-sales-assistant-agent)
-  - [Use Case #2: Create Product Information Child Agents](#use-case-2-create-product-information-child-agents)
-  - [Use Case #3: Connect to Account and Contact Information Agent](#use-case-3-connect-to-account-and-contact-information-agent)
-  - [Use Case #4 (Optional): Connect a Fabric Data Agent](#use-case-4-optional-connect-a-fabric-data-agent)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Create Sales Assistant Agent](#-use-case-1-create-sales-assistant-agent)
+  - [Use Case #2: Create Product Information Child Agents](#-use-case-2-create-product-information-child-agents)
+  - [Use Case #3: Connect to Account and Contact Information Agent](#-use-case-3-connect-to-account-and-contact-information-agent)
+  - [Use Case #4 (Optional): Connect a Fabric Data Agent](#-use-case-4-optional-connect-a-fabric-data-agent)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 **Makers and Architects** - Want to know how to appropriately leverage multi-agent configurations and when to use connected vs child agents to optimize how your agent orchestrates and is built for scale.
 
@@ -48,7 +48,7 @@ Think of a complex agent that might have many tools and knowledge sets that shou
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 Welcome to the Copilot Studio Multi‑Agent Lab.
 In this hands‑on session, you’ll learn how to design, orchestrate, and extend intelligent copilots using multi‑agent patterns, including child agents, connected agents, and coordinated task delegation.
@@ -69,7 +69,7 @@ By the end, you’ll have a working multi‑agent copilot capable of distributin
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -80,14 +80,14 @@ By the end, you’ll have a working multi‑agent copilot capable of distributin
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 * [Generative Orchestration](https://learn.microsoft.com/en-us/microsoft-copilot-studio/faqs-generative-orchestration)
 * [Multi-Agent](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-add-other-agents)
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Access to Microsoft Copilot Studio
 - Dataverse search enabled in environment
@@ -98,7 +98,7 @@ By the end, you’ll have a working multi‑agent copilot capable of distributin
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll build a parent agent that will leverage both connected agents and child agents. By the end of the lab, you will:
 
@@ -109,22 +109,22 @@ In this lab, you'll build a parent agent that will leverage both connected agent
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create Sales Assistant Agent](#use-case-1-create-sales-assistant-agent) | Creates parent agent to help sales associate find information they need | 8 min |
-| 2 | [Create Product Information Child Agents](#use-case-2-create-product-information-child-agents) | Creates child agents to provide market-specific product information | 12 min |
-| 3 | [Connect to Account and Contact Information Agent](#use-case-3-connect-to-account-and-contact-information-agent) | Connect existing Copilot Studio agent that provides account and contact information | 10 min |
-| 4 | [Connect a Fabric Data Agent (Optional)](#use-case-4-optional-connect-a-fabric-data-agent) | Extend your multi-agent solution with Fabric Data Agent for e-commerce analytics | Optional |
+| 1 | [Create Sales Assistant Agent](#-use-case-1-create-sales-assistant-agent) | Creates parent agent to help sales associate find information they need | 8 min |
+| 2 | [Create Product Information Child Agents](#-use-case-2-create-product-information-child-agents) | Creates child agents to provide market-specific product information | 12 min |
+| 3 | [Connect to Account and Contact Information Agent](#-use-case-3-connect-to-account-and-contact-information-agent) | Connect existing Copilot Studio agent that provides account and contact information | 10 min |
+| 4 | [Connect a Fabric Data Agent (Optional)](#-use-case-4-optional-connect-a-fabric-data-agent) | Extend your multi-agent solution with Fabric Data Agent for e-commerce analytics | Optional |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Create Sales Assistant Agent
+## 🧱 Use Case #1: Create Sales Assistant Agent
 
 Creates parent agent to help sales associate find information they need
 
@@ -245,7 +245,7 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 ---
 
-### Congratulations! You've completed Use Case #1!
+###  🏅 Congratulations! You've completed Use Case #1!
 
 ---
 
@@ -266,7 +266,7 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 ---
 
-## Use Case #2: Create Product Information Child Agents
+## 🔄 Use Case #2: Create Product Information Child Agents
 
 Create child agents that allow the user, based on their market, to get the right product information.
 
@@ -374,7 +374,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 ---
 
-### Congratulations! You've completed Use Case #2!
+###  🏅 Congratulations! You've completed Use Case #2!
 
 ---
 
@@ -395,7 +395,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 ---
 
-## Use Case #3: Connect to Account and Contact Information Agent
+## 🧱 Use Case #3: Connect to Account and Contact Information Agent
 
 Connect the Account and Contact Information agent to our parent Sales Associate Agent. Will need to ensure indexing is working in the environment ahead of testing.
 
@@ -529,7 +529,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 #### Connect the Account and Contact Information Agent
 
-1. In the Copilot Studio tab in your browser, go to the parent agent (Sales Info Assistant)
+1. In the Copilot Studio tab in your browser, go to the parent agent (Sales Associate Assistant)
 
 1. Go to the **Agents** menu on the top navigation bar
 
@@ -559,7 +559,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ---
 
-### Congratulations! You've completed Use Case #3!
+###  🏅 Congratulations! You've completed Use Case #3!
 
 ---
 
@@ -587,7 +587,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ---
 
-## Use Case #4 (Optional): Connect a Fabric Data Agent
+## 🔄 Use Case #4 (Optional): Connect a Fabric Data Agent
 
 Extend your multi-agent Sales Associate Assistant by connecting a Microsoft Fabric Data Agent to provide e-commerce analytics capabilities through agent-to-agent communication.
 
@@ -740,7 +740,7 @@ Create a Fabric Data Agent connected to an e-commerce semantic model and add it 
 
 ---
 
-### Congratulations! You've completed Use Case #4!
+###  🏅 Congratulations! You've completed Use Case #4!
 
 ---
 
@@ -754,7 +754,7 @@ Create a Fabric Data Agent connected to an e-commerce semantic model and add it 
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

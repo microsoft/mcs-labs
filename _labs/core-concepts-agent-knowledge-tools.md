@@ -5,7 +5,7 @@ order: 170
 duration: 45
 difficulty: 200
 lab_type: local
-section: core
+section: core_learning_path
 journeys: ["quick-start", "business-user", "developer"]
 bootcamp_order: "2"
 description: "Learn how to create an AI agent from scratch in Microsoft Copilot Studio, enhance it with knowledge sources, extend its capabilities with tools, and build custom topics for structured conversations."

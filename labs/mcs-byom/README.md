@@ -1,10 +1,10 @@
-# Bring Your Own Model (BYOM) Tool in Copilot Studio
+# 🤖 Bring Your Own Model (BYOM) Tool in Copilot Studio
 
 *Unlock the power of Azure AI Foundry models in your Copilot Studio agents by integrating your own machine learning models, or by using off-the-shelf or fine-tuned models from Azure AI Foundry as conversational tools.*
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona         | Duration   | Purpose                                                                                                                                                                                                 |
 | ----- | --------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -12,36 +12,36 @@
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Bring Your Own Model (BYOM) Tool in Copilot Studio](#bring-your-own-model-byom-tool-in-copilot-studio)
-  - [Lab Details](#lab-details)
-  - [Table of Contents](#table-of-contents)
-  - [Why This Matters](#why-this-matters)
-  - [Introduction](#introduction)
-  - [Core Concepts Overview](#core-concepts-overview)
-  - [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-  - [Prerequisites](#prerequisites)
-  - [Summary of Targets](#summary-of-targets)
-  - [Use Cases Covered](#use-cases-covered)
-  - [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Chit Chat Generator](#use-case-1-chit-chat-generator)
+- [🤖 Bring Your Own Model (BYOM) Tool in Copilot Studio](#-bring-your-own-model-byom-tool-in-copilot-studio)
+  - [🧭 Lab Details](#-lab-details)
+  - [📚 Table of Contents](#-table-of-contents)
+  - [🤔 Why This Matters](#-why-this-matters)
+  - [🌐 Introduction](#-introduction)
+  - [🎓 Core Concepts Overview](#-core-concepts-overview)
+  - [📄 Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+  - [✅ Prerequisites](#-prerequisites)
+  - [🎯 Summary of Targets](#-summary-of-targets)
+  - [🧩 Use Cases Covered](#-use-cases-covered)
+  - [🛠️ Instructions by Use Case](#️-instructions-by-use-case)
+  - [💬 Use Case #1: Chit Chat Generator](#-use-case-1-chit-chat-generator)
     - [Summary of tasks](#summary-of-tasks)
     - [Objective](#objective)
     - [Step-by-step instructions](#step-by-step-instructions)
       - [Lab 3A: Turn off General Knowledge and Add a topic Chit Chat](#lab-3a-turn-off-general-knowledge-and-add-a-topic-chit-chat)
     - [Testing Lab 3A](#testing-lab-3a)
-    - [Congratulations! You have completed Chit Chat Generator](#congratulations-you-have-completed-chit-chat-generator)
+    - [🏅 Congratulations! You have completed Chit Chat Generator](#-congratulations-you-have-completed-chit-chat-generator)
     - [Test your understanding](#test-your-understanding)
       - [Challenge: Apply this to your own use case](#challenge-apply-this-to-your-own-use-case)
-  - [Summary of Learnings](#summary-of-learnings)
-  - [Conclusions and Recommendations](#conclusions-and-recommendations)
-  - [Azure Setup (For Reference Only)](#azure-setup-for-reference-only)
+  - [🔁 Summary of Learnings](#-summary-of-learnings)
+  - [📌 Conclusions and Recommendations](#-conclusions-and-recommendations)
+  - [🔧 Azure Setup (For Reference Only)](#-azure-setup-for-reference-only)
     - [Create Azure AI Foundry Resource](#create-azure-ai-foundry-resource)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 Using different AI models in Copilot Studio allows agents to leverage each model's strengths; such as reasoning, creativity, or precision for specific tasks. This ensures higher accuracy, efficiency, and adaptability across diverse use cases.
 
@@ -66,7 +66,7 @@ This lab demonstrates how Copilot Studio provides flexibility to integrate model
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 As organizations increasingly adopt AI agents, the demand for accurate, domain-specific solutions continues to grow. In areas like sales operations, teams often spend a lot of time manually identifying and extracting key contract details or assessing potential risks---a repetitive, time-consuming process that's prone to human error. This not only hurts efficiency but also raises the risk of compliance issues.
 
@@ -76,7 +76,7 @@ This lab focuses on using industry-specific and task-based AI models for targete
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept                              | Why it matters                                                                                                                                                                                                                                                                                                               |
 | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -85,14 +85,14 @@ This lab focuses on using industry-specific and task-based AI models for targete
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 - [Bring your own model for your prompts | Microsoft Learn](https://learn.microsoft.com/en-us/ai-builder/byom-for-your-prompts)
 - [Azure AI Foundry Models | Microsoft Azure](https://azure.microsoft.com/en-us/products/ai-foundry/models)
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Access to **Microsoft Copilot Studio**, with permissions to create, edit, and publish agents and agent flows.
 - A **Contoso Agent** created in Lab 2 (or an equivalent Copilot Studio agent).
@@ -102,7 +102,7 @@ This lab focuses on using industry-specific and task-based AI models for targete
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 By the end of this lab, you will:
 
@@ -112,19 +112,19 @@ By the end of this lab, you will:
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case                                                  | Value Added                                                    | Effort     |
 | ---- | --------------------------------------------------------- | -------------------------------------------------------------- | ---------- |
-| 1    | [Chit Chat Generator](#use-case-1-chit-chat-generator) | Enable intelligent responses based on predefined criteria | 30 minutes |
+| 1    | [Chit Chat Generator](#-use-case-1-chit-chat-generator) | Enable intelligent responses based on predefined criteria | 30 minutes |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Chit Chat Generator
+## 💬 Use Case #1: Chit Chat Generator
 
 Use **Bring Your Own Model (BYOM)** in **Prompts** to run predefined prompts that extract specific information, perform reasoning, and enable entity extraction.
 
@@ -283,7 +283,7 @@ Tell me a dad joke
 
 ---
 
-### Congratulations! You have completed Chit Chat Generator
+### 🏅 Congratulations! You have completed Chit Chat Generator
 
 ---
 
@@ -302,7 +302,7 @@ Tell me a dad joke
 
 ---
 
-## Summary of Learnings
+## 🔁 Summary of Learnings
 
 > True learning comes from doing, questioning, and reflecting---so let's put your skills to the test.
 
@@ -310,7 +310,7 @@ Now that you've integrated Azure AI Foundry models into Copilot Studio, take a m
 
 ---
 
-## Conclusions and Recommendations
+## 📌 Conclusions and Recommendations
 
 **Copilot Agent and Bring Your Own Model golden rules:**
 
@@ -326,7 +326,7 @@ By following these principles, you'll create powerful, user-friendly agents that
 
 ---
 
-## Azure Setup (For Reference Only)
+## 🔧 Azure Setup (For Reference Only)
 
 This section provides background on the Azure AI Foundry resource used to deploy an off-the-shelf model from the model catalog. **You don't need to perform these steps in the lab**, as the resources are already pre-created for you. This reference is meant to help you understand how each component fits into the overall solution architecture. You'll see how the Azure AI Foundry resource is created and how a model is deployed from the model catalog.
 

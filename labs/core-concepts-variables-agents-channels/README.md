@@ -4,7 +4,7 @@ Learn how to manage conversation state with variables, build specialized child a
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,23 +12,23 @@ Learn how to manage conversation state with variables, build specialized child a
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Work with Variables](#use-case-1-work-with-variables)
-  - [Use Case #2: Create and Orchestrate Child Agents](#use-case-2-create-and-orchestrate-child-agents)
-  - [Use Case #3: Deploy Your Agent Across Channels](#use-case-3-deploy-your-agent-across-channels)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Work with Variables](#-use-case-1-work-with-variables)
+  - [Use Case #2: Create and Orchestrate Child Agents](#-use-case-2-create-and-orchestrate-child-agents)
+  - [Use Case #3: Deploy Your Agent Across Channels](#-use-case-3-deploy-your-agent-across-channels)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 **Agents need memory, specialization, and accessibility to deliver real business value.**
 
@@ -49,7 +49,7 @@ Think of variables, child agents, and channels like organizing a company:
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 Variables, child agents, and channels are the keys to building enterprise-grade agent solutions. Variables act as your agent's memory - storing user information and conversation context. Child agents enable modular architecture where specialized sub-agents handle specific domains. Channels determine where and how users interact with your agent - whether through Teams, web widgets, or custom applications.
 
@@ -59,7 +59,7 @@ This lab teaches you how to architect sophisticated agent solutions that scale w
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -73,7 +73,7 @@ This lab teaches you how to architect sophisticated agent solutions that scale w
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 * [Use variables to store and reuse information](https://learn.microsoft.com/microsoft-copilot-studio/authoring-variables)
 * [Create and manage child agents](https://learn.microsoft.com/microsoft-copilot-studio/advanced-use-skills)
@@ -83,7 +83,7 @@ This lab teaches you how to architect sophisticated agent solutions that scale w
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 * Completed [Build Intelligent Agents with Knowledge Sources, Tools, and Topics](../core-concepts-agent-knowledge-tools/README.md) lab - specifically the mailing list topic from Use Case #4, which is the foundation for the variables exercise
 * Access to Microsoft Copilot Studio with tool and channel configuration permissions
@@ -92,7 +92,7 @@ This lab teaches you how to architect sophisticated agent solutions that scale w
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll implement conversation memory with variables, build a multi-agent architecture with child agents, and deploy your agent across channels. By the end of the lab, you will:
 
@@ -106,21 +106,21 @@ In this lab, you'll implement conversation memory with variables, build a multi-
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Work with Variables](#use-case-1-work-with-variables) | Understand how variables maintain conversation context and how to navigate the variables interface | 5 min |
-| 2 | [Create and Orchestrate Child Agents](#use-case-2-create-and-orchestrate-child-agents) | Build specialized sub-agents with focused expertise to create modular, scalable solutions | 13 min |
-| 3 | [Deploy Your Agent Across Channels](#use-case-3-deploy-your-agent-across-channels) | Make your agent accessible across web, Teams, and other platforms with appropriate security | 12 min |
+| 1 | [Work with Variables](#-use-case-1-work-with-variables) | Understand how variables maintain conversation context and how to navigate the variables interface | 5 min |
+| 2 | [Create and Orchestrate Child Agents](#-use-case-2-create-and-orchestrate-child-agents) | Build specialized sub-agents with focused expertise to create modular, scalable solutions | 13 min |
+| 3 | [Deploy Your Agent Across Channels](#-use-case-3-deploy-your-agent-across-channels) | Make your agent accessible across web, Teams, and other platforms with appropriate security | 12 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Work with Variables
+## 🧱 Use Case #1: Work with Variables
 
 Explore the variables interface in Copilot Studio to understand how conversation state is managed through topic-level and global variables.
 
@@ -236,7 +236,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 ---
 
-### Congratulations! You've completed Use Case 1!
+### 🏅 Congratulations! You've completed Use Case 1!
 
 ---
 
@@ -266,7 +266,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 ---
 
-## Use Case #2: Create and Orchestrate Child Agents
+## 🔄 Use Case #2: Create and Orchestrate Child Agents
 
 Build specialized child agents with focused knowledge and instructions to create modular, scalable agent architectures.
 
@@ -417,7 +417,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 ---
 
-### Congratulations! You've completed Use Case 2!
+### 🏅 Congratulations! You've completed Use Case 2!
 
 ---
 
@@ -437,7 +437,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 ---
 
-## Use Case #3: Deploy Your Agent Across Channels
+## 🧱 Use Case #3: Deploy Your Agent Across Channels
 
 Learn how to configure and deploy your agent to channels, understand channel-specific settings, and implement appropriate security controls.
 
@@ -501,6 +501,8 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
     - **App icon**: Visual branding in Teams
     - **Availability**: Who can access the agent
 
+1. Select **Add channel** in the bottom right corner of the panel to start activation of this channel.
+
 1. Select **Edit details** and make adjustments. For example, change the short description to something like **Assist users building agents**
 
 1. Select **Save** to save your changes.
@@ -534,7 +536,7 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 ---
 
-### Congratulations! You've completed Use Case 3!
+### 🏅 Congratulations! You've completed Use Case 3!
 
 ---
 
@@ -562,7 +564,7 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

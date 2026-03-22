@@ -4,13 +4,13 @@ description: "Fast-track full-day workshop introducing Microsoft Copilot Studio 
 event_id: mcs-in-a-day
 order: 3
 labs:
-  - slug: agent-builder-web
+  - slug: agent-builder-m365
     label: "Lab 1"
   - slug: public-website-agent
     label: "Lab 2"
-  - slug: agent-builder-sharepoint
+  - slug: mbr-prep-sharepoint-agent
     label: "Lab 3"
-  - slug: ask-me-anything
+  - slug: ask-me-anything-30-mins
     label: "Lab 4"
   - slug: autonomous-support-agent
     label: "Lab 5"

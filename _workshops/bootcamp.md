@@ -1,27 +1,27 @@
 ---
 title: "Architecture Bootcamp"
-description: "Intensive hands-on bootcamp covering agent building, SharePoint integration, autonomous AI, and DevOps practices."
+description: "Intensive hands-on bootcamp covering progressive AI assistants, core concepts, governance, tools, multi-agent architectures, and autonomous agents."
 event_id: bootcamp
 order: 1
 labs:
-  - slug: agent-builder-web
-    label: "Lab 1a"
-  - slug: agent-builder-sharepoint
-    label: "Lab 1b"
-  - slug: setup-for-success
+  - slug: agent-builder-m365
+    label: "Lab 1"
+  - slug: core-concepts-agent-knowledge-tools
     label: "Lab 2"
-  - slug: public-website-agent
-    label: "Lab 3a"
-  - slug: mbr-prep-sharepoint-agent
-    label: "Lab 3b"
-  - slug: ask-me-anything
+  - slug: core-concepts-variables-agents-channels
+    label: "Lab 3"
+  - slug: core-concepts-analytics-evaluations
     label: "Lab 4"
-  - slug: autonomous-support-agent
-    label: "Lab 5a"
-  - slug: autonomous-account-news
-    label: "Lab 5b"
-  - slug: pipelines-and-source-control
+  - slug: mcs-alm
+    label: "Lab 5"
+  - slug: component-collections
     label: "Lab 6"
-  - slug: copilot-studio-kit
+  - slug: mcs-tools
     label: "Lab 7"
+  - slug: mcs-governance
+    label: "Lab 8"
+  - slug: mcs-multi-agent
+    label: "Lab 9"
+  - slug: autonomous-account-news
+    label: "Lab 10"
 ---

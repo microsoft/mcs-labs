@@ -4,7 +4,7 @@ Create and configure a Copilot Agent in Copilot Studio with Dataverse MCP Server
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration   | Purpose                                                                                                                                                                                                                                                                                                                                             |
 | ----- | ------- | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -12,22 +12,22 @@ Create and configure a Copilot Agent in Copilot Studio with Dataverse MCP Server
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Create and Configure Copilot Agent](#use-case-1-create-and-configure-copilot-agent)
-  - [Use Case #2: Structure Agent Responses with Custom Prompts](#use-case-2-structure-agent-responses-with-custom-prompts)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Create and Configure Copilot Agent](#-use-case-1-create-and-configure-copilot-agent)
+  - [Use Case #2: Structure Agent Responses with Custom Prompts](#-use-case-2-structure-agent-responses-with-custom-prompts)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 **Makers and Business Users** - Many professionals face challenges integrating data sources, automating workflows, and ensuring that business applications are both flexible and secure.
 
@@ -45,7 +45,7 @@ Think of your current sales workflow:
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 In today's fast-evolving digital landscape, organizations need solutions that empower makers to streamline business processes and enhance productivity. This lab provides a hands-on, 30-minute experience focused on building and configuring a Copilot Agent using Copilot Studio and the Dataverse MCP Server.
 
@@ -55,7 +55,7 @@ By giving you hands-on experience on how the Dataverse MCP Server integrates wit
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept                                              | Why it matters                                                                                                                                                                                                                                                                                                                                                                             |
 | ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
@@ -65,7 +65,7 @@ By giving you hands-on experience on how the Dataverse MCP Server integrates wit
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 - [Overview - Microsoft Copilot Studio | Microsoft Learn](https://learn.microsoft.com/en-us/microsoft-copilot-studio/)
 - [Connect to Dataverse with model context protocol (MCP) - Power Apps | Microsoft Learn](https://learn.microsoft.com/en-us/power-apps/developer/data-platform/mcp)
@@ -74,7 +74,7 @@ By giving you hands-on experience on how the Dataverse MCP Server integrates wit
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Access to Microsoft Copilot Studio, with permissions to create, edit, and publish agents and agent flows.
 - Power Platform environment enabled for Copilot Studio.
@@ -82,7 +82,7 @@ By giving you hands-on experience on how the Dataverse MCP Server integrates wit
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll build and configure a Copilot Agent that integrates with Dataverse to provide natural language access to business data. By the end of the lab, you will:
 
@@ -94,20 +94,20 @@ In this lab, you'll build and configure a Copilot Agent that integrates with Dat
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case                                                                                                    | Value added                                                                           | Effort |
 | ---- | ----------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------ |
-| 1    | [Create and Configure Copilot Agent](#use-case-1-create-and-configure-copilot-agent)                       | Enable natural language interaction with Dataverse data directly from Teams workspace | 20 min |
-| 2    | [Structure Agent Responses with Custom Prompts](#use-case-2-structure-agent-responses-with-custom-prompts) | Ensure consistent, business-relevant outputs that support decision-making processes   | 10 min |
+| 1    | [Create and Configure Copilot Agent](#-use-case-1-create-and-configure-copilot-agent)                       | Enable natural language interaction with Dataverse data directly from Teams workspace | 20 min |
+| 2    | [Structure Agent Responses with Custom Prompts](#-use-case-2-structure-agent-responses-with-custom-prompts) | Ensure consistent, business-relevant outputs that support decision-making processes   | 10 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Create and Configure Copilot Agent
+## 🧱 Use Case #1: Create and Configure Copilot Agent
 
 Build a Copilot Agent that connects to Dataverse through the MCP Server for seamless data access.
 
@@ -220,7 +220,7 @@ Create and configure a functional Copilot Agent with Dataverse MCP Server integr
 
     ![Test contacts query](images/step12-test-contacts.png)---
 
-### Congratulations! You've completed Create and Configure Copilot Agent
+### 🏅 Congratulations! You've completed Create and Configure Copilot Agent
 
 ---
 
@@ -246,7 +246,7 @@ Create and configure a functional Copilot Agent with Dataverse MCP Server integr
 
 ---
 
-## Use Case #2: Structure Agent Responses with Custom Prompts
+## 🔄 Use Case #2: Structure Agent Responses with Custom Prompts
 
 Create custom prompts to ensure consistent, structured responses from your agent that provide business-relevant information.
 
@@ -315,7 +315,7 @@ Navigate to the **Power Platform admin center** → **Environments** → **Setti
 
 ---
 
-### Congratulations! You've completed Structure Agent Responses with Custom Prompts
+### 🏅 Congratulations! You've completed Structure Agent Responses with Custom Prompts
 
 ---
 
@@ -333,7 +333,7 @@ Navigate to the **Power Platform admin center** → **Environments** → **Setti
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 

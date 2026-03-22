@@ -4,7 +4,7 @@ Master agent creation from basic web-grounded assistants to advanced SharePoint-
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level   | Persona                       | Duration   | Purpose                                                                                                                                                                                                                                                                                              |
 | ------- | ----------------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -12,24 +12,24 @@ Master agent creation from basic web-grounded assistants to advanced SharePoint-
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Create a web-based learning assistant](#use-case-1-create-a-web-based-learning-assistant)
-  - [Use Case #2: Build an advanced SharePoint-integrated sales assistant](#use-case-2-build-an-advanced-sharepoint-integrated-sales-assistant)
-- [Summary of Learnings](#summary-of-learnings)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Create a web-based learning assistant](#-use-case-1-create-a-web-based-learning-assistant)
+  - [Use Case #2: Build an advanced SharePoint-integrated sales assistant](#-use-case-2-build-an-advanced-sharepoint-integrated-sales-assistant)
+- [Summary of Learnings](#-summary-of-learnings)
 - [Conclusions & Recommendations](#conclusions--recommendations)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 **For makers and citizen developers:** You don't need to be a programmer to create powerful AI assistants that can transform how your team works.
 
@@ -49,7 +49,7 @@ Think of building agents like teaching a new team member:
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 This lab takes you on a journey from your first simple agent to a sophisticated business assistant. You'll start by testing Microsoft 365 Copilot's basic capabilities, then build a web-based learning assistant grounded in Microsoft documentation. Finally, you'll create an advanced Sales Admin Assistant that integrates SharePoint data, performs code-based analysis, and generates professional visuals.
 
@@ -59,7 +59,7 @@ The progressive approach ensures you understand core concepts before adding comp
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept                                    | Why it matters                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
 | ------------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -73,7 +73,7 @@ The progressive approach ensures you understand core concepts before adding comp
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 - [Overview of Microsoft 365 Copilot Chat](https://learn.microsoft.com/en-us/copilot/overview)
 - [What is Microsoft 365 Copilot?](https://learn.microsoft.com/en-us/microsoft-365-copilot)
@@ -83,7 +83,7 @@ The progressive approach ensures you understand core concepts before adding comp
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Access to Microsoft 365 Copilot or Copilot Chat
 - Ability to create and configure Copilot agents
@@ -92,7 +92,7 @@ The progressive approach ensures you understand core concepts before adding comp
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll progress from basic agent creation to advanced AI capabilities. By the end of the lab, you will:
 
@@ -105,20 +105,20 @@ In this lab, you'll progress from basic agent creation to advanced AI capabiliti
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case                                                                                                                        | Value added                                                                                                                    | Effort |
 | ---- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------ |
-| 1    | [Create a web-based learning assistant](#use-case-1-create-a-web-based-learning-assistant)                                     | Build foundational skills by creating an instructional agent grounded in trusted documentation                                 | 15 min |
-| 2    | [Build an advanced SharePoint-integrated sales assistant](#use-case-2-build-an-advanced-sharepoint-integrated-sales-assistant) | Master advanced features including SharePoint integration, code interpretation, and image generation for business intelligence | 15 min |
+| 1    | [Create a web-based learning assistant](#-use-case-1-create-a-web-based-learning-assistant)                                     | Build foundational skills by creating an instructional agent grounded in trusted documentation                                 | 15 min |
+| 2    | [Build an advanced SharePoint-integrated sales assistant](#-use-case-2-build-an-advanced-sharepoint-integrated-sales-assistant) | Master advanced features including SharePoint integration, code interpretation, and image generation for business intelligence | 15 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Create a web-based learning assistant
+## 🤖 Use Case #1: Create a web-based learning assistant
 
 Build your first Copilot agent that helps users learn about Microsoft Copilot capabilities, grounded in official documentation.
 
@@ -296,7 +296,7 @@ What are the differences between Microsoft 365 Copilot and Copilot Chat?
 
 ---
 
-### Congratulations! You've created your first web-based Copilot agent!
+### 🏅 Congratulations! You've created your first web-based Copilot agent!
 
 ---
 
@@ -324,7 +324,7 @@ What are the differences between Microsoft 365 Copilot and Copilot Chat?
 
 ---
 
-## Use Case #2: Build an advanced SharePoint-integrated sales assistant
+## 📊 Use Case #2: Build an advanced SharePoint-integrated sales assistant
 
 Take your skills to the next level by creating an agent that integrates SharePoint data and uses advanced AI capabilities like code interpretation and image generation.
 
@@ -476,7 +476,7 @@ Design a professional badge for the first place winner of our sales contest. It 
 
 ---
 
-### Congratulations! You've created an advanced SharePoint-integrated Copilot agent!
+### 🏅 Congratulations! You've created an advanced SharePoint-integrated Copilot agent!
 
 ---
 
@@ -505,7 +505,7 @@ Design a professional badge for the first place winner of our sales contest. It 
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 
@@ -527,7 +527,7 @@ To maximize the impact of your Copilot agents:
 
 ---
 
-## Conclusions & Recommendations
+## 📌 Conclusions & Recommendations
 
 **Copilot agent golden rules:**
 
