@@ -84,8 +84,10 @@ aside.sidebar__right {
   .toc__menu {
     padding: 0;
 
-    // Only show top-level (h2) items
-    ul { display: none; }
+    // Show h2 (top-level) and h3 (first nested ul)
+    // Hide h4+ (deeper nesting)
+    > li > ul { display: block; }          // h3 level — show
+    > li > ul > li > ul { display: none; } // h4+ — hide
 
     a {
       font-size: 0.78em;
@@ -101,6 +103,13 @@ aside.sidebar__right {
         color: #0078d4;
         border-left-color: #0078d4;
       }
+    }
+
+    // Indent h3 items
+    > li > ul > li > a {
+      padding-left: 1.4em;
+      font-size: 0.74em;
+      color: #8a8886;
     }
   }
 
@@ -288,6 +297,87 @@ p > code, li > code, td > code {
 .lab-meta-pill-section { background: #fff; color: #605e5c; border: 1px solid #e1dfdd; }
 .lab-meta-pill-feedback { background: #fff; color: #0078d4; border: 1px solid #0078d4; text-decoration: none; cursor: pointer; }
 .lab-meta-pill-feedback:hover { background: #0078d4; color: #fff; }
+
+// ---------------------------------------------------------------------------
+// Masthead: Workshops dropdown
+// ---------------------------------------------------------------------------
+.greedy-nav {
+  overflow: visible !important;
+}
+
+.greedy-nav .visible-links {
+  overflow: visible !important;
+}
+
+.masthead__menu-item--dropdown {
+  position: relative;
+
+  .masthead__dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 1000;
+    min-width: 240px;
+    margin: 0;
+    padding: 0.4em 0;
+    list-style: none;
+    background: #fff;
+    border: 1px solid #e1dfdd;
+    border-radius: 6px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+
+    li {
+      margin: 0;
+    }
+
+    a {
+      display: block;
+      padding: 0.5em 1em;
+      font-size: 0.85em;
+      font-weight: 500;
+      color: #323130;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.12s, color 0.12s;
+
+      &:hover {
+        background: #f3f2f1;
+        color: #0078d4;
+      }
+    }
+  }
+
+  &:hover .masthead__dropdown {
+    display: block;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Report Issue button in masthead
+// ---------------------------------------------------------------------------
+.report-issue-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  font-size: 0.78em;
+  font-weight: 600;
+  color: #605e5c;
+  background: #f3f2f1;
+  border: 1px solid #e1dfdd;
+  border-radius: 5px;
+  padding: 0.35em 0.75em;
+  margin-left: 0.75em;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+
+  &:hover {
+    background: #0078d4 !important;
+    border-color: #0078d4 !important;
+    color: #fff !important;
+  }
+}
 
 // ---------------------------------------------------------------------------
 // Misc

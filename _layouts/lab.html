@@ -33,14 +33,94 @@ layout: single
 {{ content }}
 
 <section id="feedback" style="margin-top: 3em; padding-top: 2em; border-top: 1px solid #e8e6e4;">
-  <h2 style="font-size: 1.1em; font-weight: 700; color: #323130; margin: 0 0 0.5em;">Feedback</h2>
-  <p style="font-size: 0.85em; color: #605e5c; margin: 0 0 1.2em;">Found an issue or have a suggestion? Leave a comment below (requires GitHub sign-in).</p>
-  <script src="https://utteranc.es/client.js"
-    repo="{{ site.comments.utterances.repo }}"
-    issue-term="{{ site.comments.utterances.issue_term }}"
-    label="{{ site.comments.utterances.label }}"
-    theme="{{ site.comments.utterances.theme }}"
-    crossorigin="anonymous"
-    async>
-  </script>
+  <h2 style="font-size: 1.1em; font-weight: 700; color: #323130; margin: 0 0 0.5em;">Feedback &amp; Issues</h2>
+  <p style="font-size: 0.85em; color: #605e5c; margin: 0 0 1em;">Found a problem or have a suggestion for <strong>{{ page.title }}</strong>?</p>
+  <div style="display: flex; gap: 0.75em; flex-wrap: wrap; margin-bottom: 1.5em;">
+    <a id="feedback-report-bug" href="#" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4em; font-size: 0.82em; font-weight: 600; color: #fff; background: #d83b01; padding: 0.5em 1.1em; border-radius: 6px; text-decoration: none; transition: background 0.15s;">⚠ Report a Bug</a>
+    <a id="feedback-enhancement" href="#" target="_blank" rel="noopener noreferrer" style="display: inline-flex; align-items: center; gap: 0.4em; font-size: 0.82em; font-weight: 600; color: #0078d4; background: #deecf9; padding: 0.5em 1.1em; border-radius: 6px; text-decoration: none; transition: background 0.15s;">💡 Suggest an Improvement</a>
+  </div>
+  <details style="margin-bottom: 1em;">
+    <summary style="font-size: 0.82em; font-weight: 600; color: #605e5c; cursor: pointer;">💬 Leave a comment (requires GitHub sign-in)</summary>
+    <div style="margin-top: 0.8em;">
+      <script src="https://utteranc.es/client.js"
+        repo="{{ site.comments.utterances.repo }}"
+        issue-term="{{ site.comments.utterances.issue_term }}"
+        label="{{ site.comments.utterances.label }}"
+        theme="{{ site.comments.utterances.theme }}"
+        crossorigin="anonymous"
+        async>
+      </script>
+    </div>
+  </details>
 </section>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+  var labSlug = "{{ page.slug }}";
+  var labTitle = "{{ page.title | escape }}";
+
+  // Bug report URL (used by nav button + feedback section)
+  var bugTitle = "[" + labSlug + "] ";
+  var bugBody = "## Bug Report\n\n"
+    + "**Lab:** " + labTitle + " (`" + labSlug + "`)\n"
+    + "**Use case / step number:** \n"
+    + "**What happened:** \n\n"
+    + "**What I expected:** \n\n"
+    + "**Screenshots:** \n\n"
+    + "**Browser / environment:** \n";
+
+  var bugUrl = "https://github.com/microsoft/mcs-labs/issues/new"
+    + "?labels=lab"
+    + "&type=Bug"
+    + "&title=" + encodeURIComponent(bugTitle)
+    + "&body=" + encodeURIComponent(bugBody);
+
+  // Enhancement URL
+  var enhTitle = "[" + labSlug + "] Enhancement: ";
+  var enhBody = "## Suggested Improvement\n\n"
+    + "**Lab:** " + labTitle + " (`" + labSlug + "`)\n"
+    + "**Section / step:** \n"
+    + "**What could be improved:** \n\n"
+    + "**Why this would help:** \n";
+
+  var enhUrl = "https://github.com/microsoft/mcs-labs/issues/new"
+    + "?labels=lab,enhancement"
+    + "&title=" + encodeURIComponent(enhTitle)
+    + "&body=" + encodeURIComponent(enhBody);
+
+  // Set nav Report Issue button
+  var reportBtn = document.getElementById("report-issue-btn");
+  if (reportBtn) reportBtn.href = bugUrl;
+
+  // Set feedback section buttons
+  var feedbackBug = document.getElementById("feedback-report-bug");
+  if (feedbackBug) feedbackBug.href = bugUrl;
+
+  var feedbackEnh = document.getElementById("feedback-enhancement");
+  if (feedbackEnh) feedbackEnh.href = enhUrl;
+});
+</script>
+
+{% include agenda/styles.html %}
+<!-- Agenda panels for each event (only one activated by JS based on ?event= param) -->
+<template id="agenda-tpl-bootcamp">{% include agenda/panel.html %}</template>
+<template id="agenda-tpl-mcs-in-a-day-v2">{% include agenda/panel-mcs-in-a-day-v2.html %}</template>
+<script>
+// Activate the correct agenda template based on event parameter
+(function () {
+  var params = new URLSearchParams(window.location.search);
+  var event = params.get("event");
+  var tpl = document.getElementById("agenda-tpl-" + event);
+  if (tpl) {
+    // Clone template content into the page
+    var content = tpl.content.cloneNode(true);
+    tpl.parentNode.insertBefore(content, tpl);
+  }
+  // Clean up all templates
+  var templates = document.querySelectorAll('template[id^="agenda-tpl-"]');
+  for (var i = 0; i < templates.length; i++) {
+    templates[i].parentNode.removeChild(templates[i]);
+  }
+})();
+</script>
+{% include agenda/script.html %}

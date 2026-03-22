@@ -1,0 +1,96 @@
+<!-- Agenda tag (pull handle) — LEFT side -->
+<div class="agenda-tag" id="agendaTag" role="button" tabindex="0" aria-label="Open bootcamp agenda">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+  </svg>
+  <span class="agenda-tag-label">Agenda</span>
+</div>
+
+<!-- Overlay -->
+<div class="agenda-overlay" id="agendaOverlay"></div>
+
+<!-- Agenda panel -->
+<div class="agenda-panel" id="agendaPanel" role="complementary" aria-label="Bootcamp agenda">
+  <!-- Header -->
+  <div class="agenda-panel-header">
+    <div class="agenda-panel-header-left">
+      <div class="agenda-panel-header-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/>
+        </svg>
+      </div>
+      <div>
+        <div class="agenda-panel-header-title">Architecture Bootcamp</div>
+        <div class="agenda-panel-header-status">3-Day Agenda</div>
+      </div>
+    </div>
+    <button class="agenda-panel-close" id="agendaClose" aria-label="Close agenda">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Body -->
+  <div class="agenda-panel-body">
+    <!-- Day 1 -->
+    <div class="agenda-day">
+      <div class="agenda-day-header">Day 1</div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">09:00–09:15</span><span class="agenda-title">Welcome + Breakout</span></div>
+      <div class="agenda-item"><span class="agenda-time">09:15–09:30</span><span class="agenda-title">Intro to hands-on labs</span></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">09:30–10:00</span><span class="agenda-title">Module 1 – M365 Agent Builder</span></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">10:00–10:15</span><span class="agenda-title">Coffee break / Q&A</span></div>
+      <div class="agenda-item agenda-item--lab" data-lab-slug="agent-builder-m365"><span class="agenda-time">10:15–10:30</span><a class="agenda-title" href="{{ '/labs/agent-builder-m365/?event=bootcamp' | relative_url }}">Lab 1: Build Progressive AI Assistants with Agent Builder in Microsoft 365</a></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">10:30–11:00</span><span class="agenda-title">Module 2 – Core Concepts Part 1</span></div>
+      <div class="agenda-item agenda-item--lab" data-lab-slug="core-concepts-agent-knowledge-tools"><span class="agenda-time">11:00–11:45</span><a class="agenda-title" href="{{ '/labs/core-concepts-agent-knowledge-tools/?event=bootcamp' | relative_url }}">Lab 2: Build Intelligent Agents with Knowledge Sources, Tools, and Topics</a></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">11:45–12:45</span><span class="agenda-title">Lunch break</span></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">12:45–13:00</span><span class="agenda-title">Quiz / Review / AMA / Flex</span></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">13:00–13:30</span><span class="agenda-title">Module 3 – Core Concepts Part 2</span></div>
+      <div class="agenda-item agenda-item--lab" data-lab-slug="core-concepts-variables-agents-channels"><span class="agenda-time">13:30–14:15</span><a class="agenda-title" href="{{ '/labs/core-concepts-variables-agents-channels/?event=bootcamp' | relative_url }}">Lab 3: Master Variables, Multi-Agent Architectures, and Channel Deployment</a></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">14:15–14:45</span><span class="agenda-title">Module 4 – Core Concepts Part 3</span></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">14:45–15:00</span><span class="agenda-title">Coffee break / Q&A</span></div>
+      <div class="agenda-item agenda-item--lab" data-lab-slug="core-concepts-analytics-evaluations"><span class="agenda-time">15:00–15:30</span><a class="agenda-title" href="{{ '/labs/core-concepts-analytics-evaluations/?event=bootcamp' | relative_url }}">Lab 4: Monitor Performance and Evaluate Agent Quality</a></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">15:30–16:00</span><span class="agenda-title">Module 5 – Licensing &amp; Consumption</span></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">16:00–16:30</span><span class="agenda-title">Open AMA</span></div>
+    </div>
+
+    <!-- Day 2 -->
+    <div class="agenda-day">
+      <div class="agenda-day-header">Day 2</div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">09:00–09:15</span><span class="agenda-title">Re-Welcome / Re-cap / Quiz</span></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">09:15–09:45</span><span class="agenda-title">Module 6 – ALM: Solutions, Env Vars, Connections &amp; Pipelines</span></div>
+      <div class="agenda-item agenda-item--lab" data-lab-slug="mcs-alm"><span class="agenda-time">09:45–10:30</span><a class="agenda-title" href="{{ '/labs/mcs-alm/?event=bootcamp' | relative_url }}">Lab 5: Application Lifecycle Management (ALM) in Copilot Studio</a></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">10:30–10:45</span><span class="agenda-title">Coffee break / Q&A</span></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">10:45–11:15</span><span class="agenda-title">Module 7 – Component Collections</span></div>
+      <div class="agenda-item agenda-item--lab" data-lab-slug="component-collections"><span class="agenda-time">11:15–11:45</span><a class="agenda-title" href="{{ '/labs/component-collections/?event=bootcamp' | relative_url }}">Lab 6: Using Component Collections in Copilot Studio</a></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">11:45–12:15</span><span class="agenda-title">Module 8 – Orchestration &amp; Dynamic Chaining</span></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">12:15–13:15</span><span class="agenda-title">Lunch break</span></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">13:15–13:30</span><span class="agenda-title">Quiz / Review / AMA / Flex / Guest Speaker</span></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">13:30–14:45</span><span class="agenda-title">Module 9 – Tools</span></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">14:45–15:00</span><span class="agenda-title">Coffee break / Q&A</span></div>
+      <div class="agenda-item agenda-item--lab" data-lab-slug="mcs-tools"><span class="agenda-time">15:00–16:00</span><a class="agenda-title" href="{{ '/labs/mcs-tools/?event=bootcamp' | relative_url }}">Lab 7: Copilot Studio Tools</a></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">16:00–16:30</span><span class="agenda-title">Open AMA</span></div>
+    </div>
+
+    <!-- Day 3 -->
+    <div class="agenda-day">
+      <div class="agenda-day-header">Day 3</div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">09:00–09:15</span><span class="agenda-title">Re-Welcome / Re-cap / Quiz</span></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">09:15–09:30</span><span class="agenda-title">Module 10 – Additional Resources</span></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">09:30–10:00</span><span class="agenda-title">Module 11 – Governance</span></div>
+      <div class="agenda-item agenda-item--lab" data-lab-slug="mcs-governance"><span class="agenda-time">10:00–10:30</span><a class="agenda-title" href="{{ '/labs/mcs-governance/?event=bootcamp' | relative_url }}">Lab 8: Governance Zones in Copilot Studio</a></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">10:30–10:45</span><span class="agenda-title">Coffee break / Q&A</span></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">10:45–11:00</span><span class="agenda-title">Module 12 – SDK w/ Demo</span></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">11:00–11:30</span><span class="agenda-title">Module 13 – Multi-Agent</span></div>
+      <div class="agenda-item agenda-item--lab" data-lab-slug="mcs-multi-agent"><span class="agenda-time">11:30–12:00</span><a class="agenda-title" href="{{ '/labs/mcs-multi-agent/?event=bootcamp' | relative_url }}">Lab 9: Using Multi-Agent in Copilot Studio</a></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">12:00–13:00</span><span class="agenda-title">Lunch break</span></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">13:00–13:15</span><span class="agenda-title">Quiz / Review / AMA / Flex / Guest Speaker</span></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">13:15–13:45</span><span class="agenda-title">Module 14 – Autonomous Agents</span></div>
+      <div class="agenda-item agenda-item--lab" data-lab-slug="autonomous-account-news"><span class="agenda-time">13:45–14:15</span><a class="agenda-title" href="{{ '/labs/autonomous-account-news/?event=bootcamp' | relative_url }}">Lab 10: Build an Autonomous Account News Assistant Agent</a></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">14:15–14:45</span><span class="agenda-title">Module 15 – Azure Integration w/ Demo</span></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">14:45–15:00</span><span class="agenda-title">Coffee break / Q&A</span></div>
+      <div class="agenda-item agenda-item--module"><span class="agenda-time">15:00–15:30</span><span class="agenda-title">Module 16 – Agent 365 w/ Demo</span></div>
+      <div class="agenda-item agenda-item--break"><span class="agenda-time">15:30–16:00</span><span class="agenda-title">General Q&A</span></div>
+    </div>
+  </div>
+</div>

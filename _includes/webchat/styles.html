@@ -51,12 +51,10 @@
   position: fixed;
   inset: 0;
   background: rgba(15, 27, 45, 0.06);
-  z-index: 99991;
+  z-index: 100001;
   opacity: 0;
   pointer-events: none;
   transition: opacity 0.3s ease;
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
 }
 
 .wc-overlay.wc-overlay--visible {
@@ -67,12 +65,12 @@
 /* --- Panel --- */
 .wc-panel {
   position: fixed;
-  top: 0;
+  top: var(--masthead-height, 70px);
   right: 0;
   bottom: 0;
   width: 400px;
   max-width: 90vw;
-  z-index: 99992;
+  z-index: 100002;
   display: flex;
   flex-direction: column;
   background: #fff;

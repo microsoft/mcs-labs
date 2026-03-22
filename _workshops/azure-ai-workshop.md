@@ -10,8 +10,8 @@ labs:
     label: "Lab 2"
   - slug: mcs-byom
     label: "Lab 3"
-  - slug: guildhall-custom-mcp
-    label: "Lab 4"
   - slug: data-fabric-agent
+    label: "Lab 4"
+  - slug: guildhall-custom-mcp
     label: "Lab 5"
 ---
