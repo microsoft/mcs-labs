@@ -1756,15 +1756,13 @@ function Normalize-TOCMarkers {
                 continue
             }
             
-            # Generate anchor (lowercase, replace spaces/special chars with hyphens)
-            # WHY: Matches GitHub/Jekyll automatic anchor generation algorithm
-            # IMPORTANT: Must match Jekyll's anchor generation to prevent broken links
-            # Jekyll: base emoji→removed (variation selectors stay in place), special chars→dash, spaces→dash
+            # Generate anchor to match Kramdown GFM heading ID generation
+            # IMPORTANT: Must match Kramdown's algorithm exactly to prevent broken links
+            # Kramdown GFM: strip emoji → remove non-(letter,digit,space,hyphen) → spaces to hyphens → lowercase
             $anchor = $headingText -replace '[\p{So}\p{Sk}]', ''    # Remove base emoji (keeps variation selectors like ️)
-            $anchor = $anchor -replace '[^\w\s\p{Mn}-]', '-'        # Convert special chars to dash (keep NonSpacingMarks)
+            $anchor = $anchor -replace '[^\w\s\p{Mn}-]', ''         # Remove special chars (#, :, &, etc.) — Kramdown strips these, not replaces
             $anchor = $anchor -replace '\s', '-'                    # Replace each space with hyphen
             $anchor = $anchor.ToLower()                             # Lowercase
-            $anchor = $anchor -replace '-{3,}', '--'                # Collapse 3+ consecutive dashes to exactly 2
             $anchor = $anchor -replace '^-+([\p{Mn}])', '$1'        # Remove leading dashes before variation selectors
             $anchor = $anchor -replace '^-{2,}', '-'                # Keep only single leading dash (for emojis without modifiers)
             $anchor = $anchor.TrimEnd('-')                          # Remove trailing hyphens
