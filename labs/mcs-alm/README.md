@@ -456,21 +456,11 @@ Set up Azure DevOps Git integration, commit your solution components, and unders
 
 1. Under **Subscription / Program**, select **Visual Studio Dev Essentials**.
 
-    > [!IMPORTANT]
-    > If you encounter a **Something went wrong!** error, follow these steps:
-    > 1. Go to [aex.dev.azure.com](https://aex.dev.azure.com/).
-    > 2. If prompted, create a new organization (you can leave the default name).
-    > 3. Skip to the next step.
-
-1. Select **Get started** in the **Azure DevOps**  featured benifit section to open the Azure DevOps portal.
-
 1. When prompted to **Get started with Azure DevOps**, select **Continue**.
 
-1. Name your organization (you can leave the default name) and select **Continue**.
+1. Navigate to [dev.azure.com/BootcampSeries/](https://dev.azure.com/BootcampSeries/).
 
-1. If it says you need to create a new Azure subscription ,select **Create new Azure subscription**. Follow the prompts to complete.
-
-1. Create a new project by setting a **project name**. For example, `Agents`.
+1. Create a new project by setting a **project name**. For example using your username, `User XXXXXXXX`.
 
 1. Select **+ Create project**.
 
