@@ -16,7 +16,7 @@
 # That's it! Run .\scripts\Generate-Labs.ps1 -SkipPDFs and you're done.
 #
 # OPTIONAL FIELDS:
-#   events: [bootcamp, mcs-in-a-day]     # Include in specific events
+#   events: [bootcamp, mcs-in-a-day]  # Include in specific events
 #   external:                             # For labs hosted elsewhere
 #     url: "https://..."
 #     repository: "org/repo"
@@ -79,7 +79,7 @@ labs:
     section: core
     order: 140
     journeys: [quick-start, business-user]
-    events: [bootcamp, mcs-in-a-day, mcs-in-a-day-v2]
+    events: [bootcamp, mcs-in-a-day]
 
   contract-alerts-azure-ai:
     title: "Proactive Contract Alerts in Teams with Azure AI Search and Speech-to-Text"
@@ -110,7 +110,7 @@ labs:
     section: core
     order: 170
     journeys: [quick-start, business-user, developer]
-    events: [bootcamp, mcs-in-a-day-v2]
+    events: [bootcamp, mcs-in-a-day, agent-buildathon-1month]
 
   core-concepts-variables-agents-channels:
     title: "Master Variables, Multi-Agent Architectures, and Channel Deployment"
@@ -119,7 +119,7 @@ labs:
     section: core
     order: 175
     journeys: [quick-start, business-user, developer]
-    events: [bootcamp, mcs-in-a-day-v2]
+    events: [bootcamp, mcs-in-a-day]
 
   core-concepts-analytics-evaluations:
     title: "Monitor Performance and Evaluate Agent Quality"
@@ -128,7 +128,7 @@ labs:
     section: core
     order: 180
     journeys: [quick-start, business-user, developer]
-    events: [bootcamp, mcs-in-a-day-v2]
+    events: [bootcamp, mcs-in-a-day]
 
   # === INTERMEDIATE LABS (200-299) ===
   mcs-governance:
@@ -246,7 +246,7 @@ labs:
     section: advanced
     order: 320
     journeys: [autonomous-ai, developer]
-    events: [mcs-in-a-day, agent-buildathon-1month]
+    events: [agent-buildathon-1month]
 
   data-fabric-agent:
     title: "Build a Data Fabric Agent"
@@ -316,7 +316,6 @@ labs:
     section: optional
     order: 500
     journeys: [business-user]
-    events: [mcs-in-a-day]
 
   # === EXTERNAL LABS (600-699) ===
   mcs-mcp-external:
@@ -472,19 +471,7 @@ events:
 
   mcs-in-a-day:
     title: "⚡ MCS in a Day"
-    description: "Fast-track full-day workshop introducing Microsoft Copilot Studio through hands-on labs covering declarative agents, custom agents, and autonomous AI."
-    lab_order:
-      [
-        agent-builder-m365,
-        public-website-agent,
-        mbr-prep-sharepoint-agent,
-        ask-me-anything-30-mins,
-        autonomous-support-agent,
-      ]
-
-  mcs-in-a-day-v2:
-    title: "⚡ MCS in a Day V2"
-    description: "Updated full-day workshop covering progressive AI assistants and core Copilot Studio concepts including knowledge sources, tools, variables, multi-agent architectures, and analytics."
+    description: "Full-day workshop covering progressive AI assistants and core Copilot Studio concepts including knowledge sources, tools, variables, multi-agent architectures, and analytics."
     lab_order:
       [
         agent-builder-m365,
@@ -505,7 +492,7 @@ events:
       [
         agent-builder-m365,
         setup-for-success,
-        public-website-agent,
+        core-concepts-agent-knowledge-tools,
         mbr-prep-sharepoint-agent,
         ask-me-anything,
         autonomous-support-agent,

@@ -35,7 +35,6 @@ body:
         - mcs-byom
         - mcs-governance
         - mcs-in-a-day
-        - mcs-in-a-day-v2
         - mcs-multi-agent
         - mcs-tools
         - measure-success
