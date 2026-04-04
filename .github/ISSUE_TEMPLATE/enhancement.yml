@@ -14,7 +14,6 @@ body:
         - agent-builder-sharepoint
         - agent-builder-web
         - ask-me-anything
-        - ask-me-anything-30-mins
         - autonomous-account-news
         - autonomous-cua
         - autonomous-support-agent
@@ -40,7 +39,6 @@ body:
         - mcs-tools
         - measure-success
         - pipelines-and-source-control
-        - public-website-agent
         - setup-for-success
         - standard-orchestrator
   - type: textarea

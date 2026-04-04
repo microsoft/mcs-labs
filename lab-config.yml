@@ -48,14 +48,6 @@ labs:
     order: 100
     journeys: [quick-start, business-user]
 
-  public-website-agent:
-    title: "Give your public website chatbot a brain and make it an agent"
-    difficulty: "Beginner"
-    duration: 25
-    section: core
-    order: 110
-    journeys: [quick-start, business-user]
-
   mbr-prep-sharepoint-agent:
     title: "Create a Monthly Business Review (MBR) Agent"
     difficulty: "Beginner"
@@ -308,15 +300,6 @@ labs:
     journeys: [quick-start, business-user, developer]
     events: [azure-ai-workshop]
 
-  # === OPTIONAL LABS (500-599) ===
-  ask-me-anything-30-mins:
-    title: "Create an 'Ask me anything' agent for your employees (30 min version)"
-    difficulty: "Intermediate"
-    duration: 30
-    section: optional
-    order: 500
-    journeys: [business-user]
-
   # === EXTERNAL LABS (600-699) ===
   mcs-mcp-external:
     title: "Model Context Protocol (MCP) & Copilot Studio"
@@ -347,7 +330,6 @@ journeys:
     lab_order:
       [
         agent-builder-web,
-        public-website-agent,
         mbr-prep-sharepoint-agent,
         standard-orchestrator,
         agent-builder-m365,
@@ -367,7 +349,6 @@ journeys:
     lab_order:
       [
         agent-builder-web,
-        public-website-agent,
         mbr-prep-sharepoint-agent,
         agent-builder-m365,
         core-concepts-agent-knowledge-tools,
@@ -388,7 +369,6 @@ journeys:
         data-fabric-agent,
         guildhall-custom-mcp,
         dataverse-mcp-connector,
-        ask-me-anything-30-mins,
       ]
 
   developer:
