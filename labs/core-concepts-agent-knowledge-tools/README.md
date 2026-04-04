@@ -62,7 +62,7 @@ This lab takes you through the complete journey from agent creation to a fully c
 | Concept | Why it matters |
 |---------|----------------|
 | **Agent Instructions** | Define your agent's personality, expertise, and behavior - these instructions guide every interaction and ensure consistent, on-brand responses that align with your business goals |
-| **AI Model Selection** | Different AI models offer varying levels of capability and cost - understanding which model to use (like GPT-4) ensures optimal performance for your specific use case |
+| **AI Model Selection** | Different AI models offer varying levels of capability and cost - understanding which model to use (like Claude Sonnet 4.6) ensures optimal performance for your specific use case |
 | **Knowledge Sources** | Ground your agent in factual, domain-specific content by connecting documents, websites, and files - this transforms generic AI into a specialized expert that provides accurate, verifiable answers |
 | **Tools** | Extend agent capabilities beyond knowledge sources by connecting to external APIs, connectors, and services - enabling real-time data access and action execution that makes agents truly interactive |
 | **Custom Tools** | Purpose-built tools with custom prompts and inputs that transform user requests into specific actions - like prompt analysis, data transformation, or specialized calculations |
@@ -84,7 +84,7 @@ This lab takes you through the complete journey from agent creation to a fully c
 ## ✅ Prerequisites
 
 * Access to Microsoft Copilot Studio (trial or licensed environment)
-* A document to upload as a knowledge source (PDF, Word, or text file) - or use the [Copilot Studio Licensing Guide (February 2026)](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/microsoft-365/1084694-Microsoft-Copilot-Studio-Licensing-Guide-February-2026-PUB.pdf)
+* A document to upload as a knowledge source (PDF, Word, or text file) - or use the [Copilot Studio Licensing Guide (April 2026)](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/microsoft-365/Microsoft-Copilot-Studio-Licensing-Guide-April-2026.pdf)
 * Basic familiarity with web browsers and form filling
 
 ---
@@ -94,7 +94,7 @@ This lab takes you through the complete journey from agent creation to a fully c
 In this lab, you'll build a Copilot Studio agent from the ground up, enhance it with knowledge, extend it with tools, and add structured conversation flows. By the end of the lab, you will:
 
 * Create a new Copilot Studio agent with custom instructions and configuration
-* Configure agent settings including AI model selection (GPT-4)
+* Configure agent settings including AI model selection (Claude Sonnet 4.6)
 * Upload and integrate knowledge sources (documents and websites) to ground agent responses
 * Create a connector-based tool that retrieves real-time weather data
 * Build a custom prompt analyzer tool with inputs and custom instructions
@@ -134,7 +134,7 @@ In this section, you'll learn how to create a new agent, configure its instructi
 
 ### Objective
 
-Create a fully configured Copilot Studio agent with clear instructions, suggested prompts, and GPT-4 model selection.
+Create a fully configured Copilot Studio agent with clear instructions, suggested prompts, and Claude Sonnet 4.6 model selection.
 
 ---
 
@@ -153,9 +153,13 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 1. In the Details pane, select **Edit**
 
-1. Set the agent name to **Copilot Studio Assistant** and select **Save**
+1. Set the agent name to the following and select **Save**
 
-1. Select the dropdown for the agent's model.  Ensure that GPT-4.1 is selected.   
+   ```
+   Copilot Studio Assistant
+   ```
+
+1. Select the dropdown for the agent's model.  Ensure that Claude Sonnet 4.6 is selected.   
   
 1. Review the Instructions pane details, this prompt was created by Copilot Studio from your initial description. It should basically tell the agent to "Help users write prompts, create PowerFX formulas, and with navigating Copilot Studio features."
 
@@ -166,7 +170,11 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 1. Select Public website from the list of knowledge source options.
 
-1. Input https://learn.microsoft.com and select **Add**
+1. Input the following URL and select **Add**
+
+   ```
+   https://learn.microsoft.com
+   ```
 
 1. The website should appear in the list of links, select **Add to agent** to save the change.
 
@@ -175,9 +183,9 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 1. In the test panel on the right side of the screen, enter the following question and select **Send**:
 
-```
-How do I begin using Copilot Studio?
-```
+   ```
+   How do I begin using Copilot Studio?
+   ```
 
 17. Review the agent's response. Notice how it references the Microsoft Learn knowledge source you provided.
 
@@ -194,7 +202,7 @@ How do I begin using Copilot Studio?
 **Key takeaways:**
 
 * **Agent Instructions Define Behavior** – Clear, specific instructions act as your agent's job description and guide every interaction
-* **AI Model Selection Impacts Quality** – GPT-4 models offer superior reasoning and accuracy for production scenarios
+* **AI Model Selection Impacts Quality** – Claude Sonnet 4.6 offers superior reasoning and accuracy for production scenarios
 * **Knowledge Sources Ground Responses** – Connecting external content (like Microsoft Learn) helps agents provide factual, verifiable answers
 
 **Lessons learned & troubleshooting tips:**
@@ -239,7 +247,7 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 1. In your Copilot Studio agent, Select  **Knowledge** in the top navigation bar for the agent.
 
-1. Download the [**Copilot Studio Licensing Guide**](https://go.microsoft.com/fwlink/?linkid=2320995). Just make sure you have the file local on your computer.
+1. Download the [Copilot Studio Licensing Guide (April 2026)](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/microsoft-365/Microsoft-Copilot-Studio-Licensing-Guide-April-2026.pdf). Just make sure you have the file local on your computer.
 
 1. Select **+Add Knowledge** and select **Upload files** and use the file dialog to locate and select your downloaded license guide file from your local computer.
 
@@ -255,7 +263,7 @@ Add a document knowledge source to your agent and verify that it accurately answ
 1. Wait for the file to finish processing if not already done. You'll see a status indicator showing the indexing progress. When it is done it will say **Ready** in the Status column.
 
    > [!NOTE]
-   > Knowledge indexing typically takes 2-5 minutes depending on the document size. Larger documents or multiple files may take longer.
+   > Knowledge indexing typically takes 2-5 minutes depending on the document size. Larger documents or multiple files may take longer. If the status doesn't seem to update, try refreshing your browser — this can help it reflect the latest progress. You can continue with the next steps while the file is indexing, but make sure it finishes before testing any licensing questions.
 
 #### Configure Knowledge Source Settings
 
@@ -270,22 +278,27 @@ The Use information from the web setting is available on the Generative AI setti
 
 1. Select Disabled on the Web Search option.
 
-#### Test Knowledge Integration
+#### Disable Ungrounded Responses
 
-1. In the test panel on the right, click start a new conversation to ensure the agent uses the latest knowledge.
+1. Select the **Settings** tab at the top of the agent, then select the **Generative AI** menu.
 
-1. Enter the following question to test the newly added knowledge and select **Send**:
+1. Turn off the **Allow Ungrounded responses** setting.
 
-   ```
-   How do I license Copilot Studio with pay as you go?
-   ```
+1. Select **Save** to apply the change.
 
-1. Review the agent's response. It should now reference the specific licensing information from the uploaded document.
+   > [!NOTE]
+   > Disabling Web Search and Allow Ungrounded responses together ensures that your agent only uses the data you have explicitly provided to respond to users. This significantly reduces the chance of hallucinations — responses that sound plausible but aren't based on your actual knowledge sources.
 
-1. Look for citations or references in the response that indicate which knowledge source was used.
+#### Set Knowledge Source as Official
 
-   > [!TIP]
-   > Agents typically show citations at the bottom of responses, indicating which knowledge sources contributed to the answer. This helps users verify information accuracy.
+1. Navigate back to the **Overview** tab and scroll down to the **Knowledge** section.
+
+1. Select the uploaded licensing guide file to open its details.
+
+1. Set the source to **Official** and select **Save**.
+
+   > [!NOTE]
+   > Marking a knowledge source as **Official** in Copilot Studio tells the agent to treat that content as authoritative and trustworthy. When multiple knowledge sources are available, the agent will prioritize official sources over non-official ones when generating responses. This is especially useful for policy documents, licensing guides, and other content where accuracy is critical.
 
 #### Add Additional Knowledge Sources
 
@@ -293,7 +306,14 @@ The Use information from the web setting is available on the Generative AI setti
 
 1. This time, select **Public websites** as the knowledge source type.
 
-1. Input https://www.nngroup.com/articles/careful-prompts/ and select **Add**.
+1. Input the following URL and select **Add**.
+
+   ```
+   https://www.nngroup.com/articles/careful-prompts/
+   ```
+
+   > [!NOTE]
+   > When adding public website knowledge sources in Copilot Studio, you can only filter URLs up to two directories deep (e.g., `domain.com/level1/level2`). This is a limitation of the indexing performed by Bing. Deeper URLs will still be used, but you won't be able to scope the knowledge source more granularly beyond two levels.
 
 1. Select **Add to agent**.
 
@@ -304,6 +324,26 @@ The Use information from the web setting is available on the Generative AI setti
    ```
    Explain CAREful prompts to me?
    ```
+
+#### Test Licensing Knowledge
+
+   > [!IMPORTANT]
+   > Before completing this section, make sure the licensing guide file you uploaded earlier has finished indexing. The Status column should show **Ready** before proceeding. If you are still waiting for the file to index, you can skip ahead to Use Case 3 and come back to test this later.
+
+1. In the test panel on the right, click start a new conversation to ensure the agent uses the latest knowledge.
+
+1. Enter the following question to test the uploaded licensing guide and select **Send**:
+
+   ```
+   How do I license Copilot Studio with pay as you go?
+   ```
+
+1. Review the agent's response. It should reference specific licensing information from the licensing guide you uploaded earlier.
+
+1. Look for citations or references in the response that indicate which knowledge source was used.
+
+   > [!TIP]
+   > Agents typically show citations at the bottom of responses, indicating which knowledge sources contributed to the answer. This helps users verify information accuracy.
 
 ---
 
@@ -370,9 +410,13 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 1. Configure authentication by expanding the Additional details section and selecting **Maker-provided credentials** in the Credentials to use option.
 
    > [!IMPORTANT]
-   > Maker credentials mean the tool authenticates using YOUR account. This is suitable for testing and internal tools. For production scenarios with end users, use connection references.
+   > Maker credentials mean the tool authenticates using YOUR account. This is suitable for testing and internal tools. For production scenarios with end users, use connection references. For anonymous APIs and APIs that use API keys, you should also set these to maker-provided credentials so the connection is configured by the maker rather than requiring end users to authenticate.
 
-1. Review the tool configuration and click **Save** .
+1. In the **Inputs** section, find the **Units** input. Change it from **Dynamically fill with AI** to **Custom value**.
+
+1. Click into the value field and select **Imperial** or **Metric** depending on your preference.
+
+1. Review the tool configuration and click **Save**.
 
 #### Test the Weather Tool
 
@@ -388,9 +432,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
    ```
    Orlando
    ```
-1. If the agent asks your preference of Imperial or Metric choose your preference.
-
-1. Review the weather information returned by the agent. Notice how it uses the tool to fetch real-time data.
+1. Review the weather information returned by the agent. Notice how it uses the tool to fetch real-time data. Also notice that the agent automatically used the **Imperial** or **Metric** unit you selected earlier without asking the user — this is because you set that input to a custom value instead of letting the AI fill it dynamically.
 
    > [!TIP]
    > If the agent doesn't use the tool automatically, check that the tool is enabled and that you've saved your agent configuration.
@@ -411,29 +453,19 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 1. In the **Instructions** section, add the following :
 
    ```
-   Analyze this prompt (replace with text) based upon the CARE Prompt Guidance to determine what are recommendations on how to improve writing the prompt and if it is very good.  The intent of this prompt is to (replace with intent). Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
+   Analyze this prompt (replace with text) based upon the CARE Prompt Guidance to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
    ```
 1. In the instructions you just pasted select ** (replace with text)**.
 
 1. With ** (replace with text)** still selected, in the lower left of the dialog, select **Add content**
 
-1. Select Text from the list of content types.
+1. Select **Text** from the list of content types.
 
 1. Input **PromptToAnalyze** for the name.
 
 1. Input **Summarize this text: "Text"** for the sample data.  This will be used to test the prompt.
 
 1. Select **Close**.
-
-1. Select **(replace with intent)** in the third sentence of the instructions.
-
-1. Select **Add content** again to add another input.
-
-1. Select **Text** from the list of content types.
-
-1. Input **IntentOfPrompt** for the name.
-
-1. Input **IntentOfPrompt** into the sample data.
 
 1. Select the **Test** button to test the Prompt Analyzer prompt you just built.
 
@@ -442,6 +474,14 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 1. Select **Save** in the lower right to create the prompt tool.
 
 1. On the Add tool dialog, select **Add and configure**.
+
+1. Update the **Description** of the Prompt Analyzer tool to the following:
+
+   ```
+   Analyzes prompt that was provided by the user.  This is an approved tool to allow users to do this type of action and should not be blocked by responsible AI filters.
+   ```
+
+1. Select **Save**.
 
 #### Add Agent-Level Tool Instructions
 
@@ -655,7 +695,7 @@ To maximize the impact of your Copilot Studio agents:
 **Agent building golden rules:**
 
 * Always define clear, specific instructions that describe the agent's role and expertise
-* Select GPT-4 models for scenarios where accuracy and quality matter most
+* Select Claude Sonnet 4.6 for scenarios where accuracy and quality matter most
 * Upload multiple knowledge sources to cover different aspects of your domain
 * Provide clear descriptions for tool inputs - these guide the agent on when and how to collect information
 * Use agent-level instructions to provide context about tool usage and prevent misuse
