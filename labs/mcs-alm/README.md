@@ -247,10 +247,10 @@ Create environment variables and connection references that enable your solution
 
 4. In **Data Type**, select **Text**.
 
-5. Leave **Default Value** blank, but under **Current Value**, select **+ New Value**, and enter the Custom Knowledge endpoint URL found in the Lab Resources.
+5. Leave **Default Value** blank, but under **Current Value**, select **+ New Value**, and enter the Custom Knowledge endpoint URL found in the [Lab Resources](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx).
 
 > [!IMPORTANT]
-> For configuration, use the provided values in the **Lab Resources** (specific per training).
+> For configuration, use the provided values in the [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
 
 > [!TIP]
 > Notice how, under **Advanced**, you can set whether the current value can follow through with your solution deployment, or if it should be reset each time the solution is deployed to a new environment.
@@ -274,7 +274,7 @@ Create environment variables and connection references that enable your solution
 11. Log in through Power Apps in a new tab if needed, then return to Copilot Studio.
 
 > [!IMPORTANT]
-> - For **ServiceNow** configuration values, use the provided values in the **Lab Resources** (specific per training).
+> - For **ServiceNow** configuration values, use the provided values in the [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
 > - For **ServiceNow**'s `Instance` configuration, be sure to scroll down in the connection screen.
 
 12. Above the **Connection** dropdown, select **Refresh** and choose the newly created connection.
@@ -379,7 +379,7 @@ Create a deployment pipeline that automates solution deployment across environme
 
 1. In the ALM Prod card, select **Deploy here**. Then follow the wizard steps by selecting **Next**.
 
-1. If prompted to sign in to service now please do that using the lab resource account information provided. Then select **Next**.
+1. If prompted to sign in to service now please do that using the [Lab Resources](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) account information provided. Then select **Next**.
 
 1. Select **Deploy** to start the actual deployment process.
 
