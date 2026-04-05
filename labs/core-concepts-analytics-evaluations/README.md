@@ -336,7 +336,7 @@ Create evaluation test sets using four different methods and understand how each
 1. Select the first generated question to explore all the available options. For each test case, you can configure the **evaluation method**:
 
     > [!TIP]
-    > Choose evaluation methods that match the nature of each question. Factual questions with precise answers work well with Exact Match or Keyword Match. Open-ended questions benefit from General Quality or Similarity methods. You can add additional test methods to the set at creation of the test set or later during editing.
+    > You can have multiple test methods for a test set, but all test cases in the set must follow all of the configured test methods. Choose methods that match the overall nature of your test set. For example, General Quality works well as a baseline for all questions, while Compare meaning can be added when expected responses are provided.
 
 1. After reviewing, select **Cancel** to close the edit of the test case.
 
