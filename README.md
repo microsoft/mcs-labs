@@ -7,7 +7,6 @@
 | Title | Download | Overview |
 | ----- | -------- | -------- |
 | Create your own web-based AI assistant with Agent Builder | [agent-builder-web](./labs/agent-builder-web) | Create a Copilot agent in Microsoft 365 Copilot Chat with Agent Builder. The agent acts as a learning companion grounded in official Microsoft documentation to assist users with questions about Copilot agents. |
-| Give your public website chatbot a brain and make it an agent | [public-website-agent](./labs/public-website-agent) | Build and publish a Copilot Studio agent that delivers rich, contextual answers by combining your content with real-time data. Create a branded assistant that handles multi-part questions, reflects your organization's tone, and can be deployed to a public demo website. |
 | Create a Monthly Business Review (MBR) Agent | [mbr-prep-sharepoint-agent](./labs/mbr-prep-sharepoint-agent) | Build a conversational MBR agent using Microsoft Copilot Studio and SharePoint. The agent streamlines MBR preparation by extracting key insights, surfacing trends, and answering questions directly from uploaded decks. |
 | Create AI Solutions with Standard Orchestrator in Copilot Studio | [standard-orchestrator](./labs/standard-orchestrator) | Create your first agent in Microsoft Copilot Studio. Learn the fundamentals including topic creation, message and question nodes, testing, and deployment. |
 | Build Progressive AI Assistants with Agent Builder in Microsoft 365 | [agent-builder-m365](./labs/agent-builder-m365) | Master agent creation from basic web-grounded assistants to advanced SharePoint-integrated agents with code interpreter and image generation capabilities. |
@@ -36,7 +35,6 @@
 | MCP Qualify Lead | [mcp-qualify-lead](./labs/mcp-qualify-lead) | Connect to Dynamics 365 Sales with Model Context Protocol to identify and prioritize high-value leads, enabling sellers to focus their time and effort where it counts most. |
 | Build and Connect Your Guild's Custom MCP Server | [guildhall-custom-mcp](./labs/guildhall-custom-mcp) | Deploy a custom Model Context Protocol (MCP) server locally and connect it to a Copilot Studio agent that can query quests, hire parties, and manage the Guild treasury on your behalf. |
 | Dataverse MCP Connector | [dataverse-mcp-connector](./labs/dataverse-mcp-connector) | Create and configure a Copilot Agent with Dataverse MCP Server integration to read and update account information from Dataverse using natural language queries. |
-| Create an 'Ask me anything' agent (30 min version) | [ask-me-anything-30-mins](./labs/ask-me-anything-30-mins) | A condensed version of the Ask Me Anything lab. Build a multi-agent IT Support solution with ALM best practices, ServiceNow integration, and deployment into Microsoft 365 Copilot. |
 | Model Context Protocol (MCP) & Copilot Studio | [MCS-MCP Lab](https://github.com/microsoft/mcsmcp) | Learn how to deploy an MCP Server and integrate it with Microsoft Copilot Studio for streamlined deployment and management. |
 
 ## 📚 Documentation & Contributing

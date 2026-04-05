@@ -81,11 +81,10 @@ azure_ai_workshop_lab_orders:
   # ... progressive numbering
 
 mcs_in_a_day_lab_orders:
-  1: "agent-builder-web"
-  2: "public-website-agent"
-  3: "agent-builder-sharepoint"
-  4: "ask-me-anything"
-  5: "autonomous-support-agent"
+  1: "agent-builder-m365"
+  2: "core-concepts-agent-knowledge-tools"
+  3: "core-concepts-variables-agents-channels"
+  4: "core-concepts-analytics-evaluations"
 ```
 
 **Key Principles:**

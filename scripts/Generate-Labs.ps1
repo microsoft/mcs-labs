@@ -91,7 +91,7 @@ EXAMPLES:
     
     # Generate single lab PDF
     .\Generate-Labs.ps1 -SingleLabPDF "guildhall-custom-mcp" -GeneratePDFs
-    .\Generate-Labs.ps1 -SingleLabPDF "public-website-agent" -GeneratePDFs
+    .\Generate-Labs.ps1 -SingleLabPDF "core-concepts-agent-knowledge-tools" -GeneratePDFs
     
     # Complete local test (all labs + PDFs)
     .\Generate-Labs.ps1 -LocalTest
