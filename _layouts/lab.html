@@ -967,7 +967,7 @@ layout: default
 
         // Add click handler
         copyButton.addEventListener("click", async function () {
-          const code = pre.textContent || pre.innerText;
+          const code = (pre.textContent || pre.innerText).replace(/\n$/, '');
 
           try {
             await navigator.clipboard.writeText(code);
