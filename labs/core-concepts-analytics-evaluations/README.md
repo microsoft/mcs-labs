@@ -606,7 +606,7 @@ To maximize the impact of analytics and evaluations in Copilot Studio:
 * Review analytics weekly for new agents, bi-weekly for mature agents
 * Prioritize improvements based on conversation volume multiplied by satisfaction impact
 * Track unrecognized phrases and unanswered questions - these reveal knowledge gaps
-* Create evaluation test sets that cover your agent's most critical capabilities
+* Create evaluation test sets that cover your agent's most critical capabilities. Consider having multiple test sets for different purposes — for example, an "Always Pass" set to verify core functionality, an "Always Fail" set to validate safety guardrails, and "Non-Critical" sets to track general quality over time
 * Run evaluations before and after every significant agent change
 * Make one improvement at a time to clearly attribute results
 * Export and share evaluation results with stakeholders to demonstrate quality commitment
