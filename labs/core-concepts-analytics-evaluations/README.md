@@ -319,13 +319,10 @@ Create evaluation test sets using four different methods and understand how each
 
 1. In the **Configure test set** panel on the right side of your screen, change the test set name to **Non-Critical Copilot Studio Guide Set**
 
-1. In the Test method General Question is configured by default. You can configure additional test methods, those will be available to configure later when you edit questions.
+1. In the Test method, **General Quality** is configured by default. Leave this as-is for this test set.
 
-1. Select **Add test method**, review the list of test methods you can configure.
-
-1. On the **Set pass score**, review the settings for this option and select **OK**. Other test methods may have other options you can configure based on the approach.
-
-1. Select **Compare meaning** and then select **OK**.
+    > [!TIP]
+    > You can have multiple test methods for a test set, but all test cases in the set must follow all of the configured test methods. Choose methods that match the overall nature of your test set. For example, General Quality works well as a baseline for all questions, while Compare meaning can be added when expected responses are provided.
 
 1. Select **Save** at the bottom of that same panel.
 
@@ -334,13 +331,6 @@ Create evaluation test sets using four different methods and understand how each
 1. In the **User** dropdown locate your user account and select the row.
 
 1. Select **Save**.
-
-1. Select the first generated question to explore all the available options. For each test case, you can configure the **evaluation method**:
-
-    > [!TIP]
-    > Choose evaluation methods that match the nature of each question. Factual questions with precise answers work well with Exact Match or Keyword Match. Open-ended questions benefit from General Quality or Similarity methods. You can add additional test methods to the set at creation of the test set or later during editing.
-
-1. After reviewing, select **Cancel** to close the edit of the test case.
 
 1. Select **Evaluate** to start the evaluation of this test set.
 
