@@ -2200,20 +2200,20 @@ title: Home
 
 Welcome to hands-on labs for building AI agents with Microsoft Copilot Studio. Choose your learning journey based on your goals and experience level.
 
-## 🎯 **Choose Your Learning Journey**
-
-<div class="journey-cards">
-$journeyCardsHtml
-</div>
-
----
-
 ## 📅 **Featured Events**
 
 Participate in curated workshop experiences with guided lab sequences designed for specific learning outcomes.
 
 <div class="event-cards">
 $eventCardsHtml
+</div>
+
+---
+
+## 🎯 **Choose Your Learning Journey**
+
+<div class="journey-cards">
+$journeyCardsHtml
 </div>
 
 ---
