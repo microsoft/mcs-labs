@@ -361,7 +361,7 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
    - Open the **Sales** folder
 
 > [!IMPORTANT]
-> The URL of the SharePoint site is available in **Lab Resources** (specific per training).
+> The URL of the SharePoint site is available in [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
 
 ![SharePoint documents](images/sales-docs.png)
 
