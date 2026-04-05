@@ -323,9 +323,7 @@ Create evaluation test sets using four different methods and understand how each
 
 1. Select **Add test method**, review the list of test methods you can configure.
 
-1. On the **Set pass score**, review the settings for this option and select **OK**. Other test methods may have other options you can configure based on the approach.
-
-1. Select **Compare meaning** and then select **OK**.
+1. Select **Compare meaning** and then select **OK**. Some test methods like Compare meaning will prompt you to set a pass score — review the settings and select **OK**.
 
 1. Select **Save** at the bottom of that same panel.
 
