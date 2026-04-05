@@ -25,7 +25,7 @@ Master the complete lifecycle of your Microsoft Copilot Studio agents - from str
   - [Use Case #1: Create a Solution and Custom Publisher](#-use-case-1-create-a-solution-and-custom-publisher)
   - [Use Case #2: Create Environment Variables and Connection References](#-use-case-2-create-environment-variables-and-connection-references)
   - [Use Case #3: Create Power Platform Pipelines for Deployment](#-use-case-3-create-power-platform-pipelines-for-deployment)
-  - [Extra Credit: Set Up Git Source Control and Understand Solution Structure](#-extra-credit-set-up-git-source-control-and-understand-solution-structure)
+
 
 ---
 
@@ -97,7 +97,7 @@ Without ALM, each of these steps is manual, error-prone, and difficult to repeat
 - Access to Microsoft Copilot Studio
 - A Microsoft Power Platform environment with at least an Environment Maker security role
 - Access to multiple Power Platform environments (DEV, ALM Prod) - provided in the lab setup
-- Azure DevOps project with Git integration (for Extra Credit section only - set up during the lab)
+
 
 ---
 
@@ -109,7 +109,7 @@ In this lab, you'll configure a complete ALM foundation for working with Microso
 - Set up environment variables and connection references for portability across environments
 - Create and configure Power Platform pipelines for automated deployment
 - Deploy solutions from DEV to ALM Prod and understand post-deployment configuration
-- (Extra Credit) Connect your solution to Azure DevOps Git for source control and understand the structure of unpacked solutions
+
 
 ---
 
@@ -120,7 +120,7 @@ In this lab, you'll configure a complete ALM foundation for working with Microso
 | 1 | [Create a Solution and Custom Publisher](#-use-case-1-create-a-solution-and-custom-publisher) | Structure your success - Group, manage, and deploy all your agent components with clarity and control | 15 min |
 | 2 | [Create Environment Variables and Connection References](#-use-case-2-create-environment-variables-and-connection-references) | Adapt with flexibility - Future-proof your agents for seamless multi-environment deployments | 15 min |
 | 3 | [Create Power Platform Pipelines for Deployment](#-use-case-3-create-power-platform-pipelines-for-deployment) | Automate with confidence - Set up governed, repeatable deployment workflows | 15 min |
-| EC | [Extra Credit: Set Up Git Source Control](#-extra-credit-set-up-git-source-control-and-understand-solution-structure) | Track and evolve - Use Git to version, review, and understand solution structure (Optional) | ~15 min |
+
 
 ---
 
@@ -412,158 +412,6 @@ Create a deployment pipeline that automates solution deployment across environme
 
 * Target environments must be Managed Environments for governance enforcement.
 * Pipelines are only visible from development environments, not target environments.
-
----
-
----
-
-## 🧱 Extra Credit: Set Up Git Source Control and Understand Solution Structure
-
-> [!NOTE]
-> **Optional - Extra Credit (~15 minutes):** This section is optional and not included in the 45-minute lab time. Complete it if you have additional time or want to explore source control integration and solution structure.
-
-Connect your solution to Azure DevOps Git to track changes, commit solution components, and understand the structure of unpacked Power Platform solutions.
-
-| Use case | Value added | Estimated effort |
-|----------|-------------|------------------|
-| Set Up Git Source Control and Understand Solution Structure | Track and evolve - Use Git to version, review, and understand solution component organization (Optional) | ~15 minutes |
-
-**Summary of tasks**
-
-In this section, you'll learn how to create a new project in Azure DevOps, initialize the main branch, connect it to your development environment, commit your solution components, and explore how Power Platform solutions are structured in source control.
-
-**Scenario:** You want to track changes to your Copilot Studio agents in source control, collaborate with your team, and understand how solution components are organized for professional CI/CD workflows.
-
-### Objective
-
-Set up Azure DevOps Git integration, commit your solution components, and understand the structure of unpacked Power Platform solutions in source control.
-
----
-
-### Step-by-step instructions
-
-#### Set Up Azure DevOps
-
-1. Go to [my.visualstudio.com/subscriptions](https://my.visualstudio.com/subscriptions).
-
-1. If not already signed in, log in with your provided user account.
-
-1. On the **We need a few more details** screen review the information and select **Continue**
-
-1. Select **Join Visual Studio Dev Essentials** on the right side of the screen.
-
-1. Review the Welcome screen and then select **Confirm**.
-
-1. Under **Subscription / Program**, select **Visual Studio Dev Essentials**.
-
-1. When prompted to **Get started with Azure DevOps**, select **Continue**.
-
-1. Navigate to [dev.azure.com/BootcampSeries/](https://dev.azure.com/BootcampSeries/).
-
-1. Create a new project by setting a **project name**. For example using your username, `User XXXXXXXX`.
-
-1. Select **+ Create project**.
-
-1. After project creation, go to **Repos** > **Branches**.
-
-1. Select **Initialize** (at the bottom) to create the `main` branch with a README or .gitignore.
-
-    ![Azure DevOps initialize branch](images/azure-devops-initialize-branch.png)
-
-#### Connect Microsoft Copilot Studio to Git
-
-1. Go back to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and open the **Solutions** page (under the **...** menu).
-
-1. In the menu, select **Connect to Git**.
-
-1. Set **Connection type** to `Solution`.
-
-1. Choose your **organization** and your newly created **project** and **repository**.
-
-1. Set the **Root Git folder** to `Solutions`.
-
-1. Select **Next**, then pick the solution you created in Use Case #1.
-
-    ![Connect to Git](images/connect-to-git.png)
-
-1. When prompted for the branch, select **Create new branch** and name it `dev`.
-
-1. Select **Save** and then **Connect**.
-
-#### Commit Your Solution to Source Control
-
-1. Open the solution you created in Use Case #1.
-
-1. In the left-hand navigation, go to **Source control**.
-
-1. See how the various components you have added to your solution are now ready to be committed to source control. If you don't see them all, select **Refresh** as they get detected and added.
-
-1. When ready, select **Commit**, and add a comment describing the changes (e.g., `New solution and environment variable`).
-
-    ![Commit changes](images/commit.png)
-
-1. Once committed, go to your commit in Azure DevOps to see the introduced, updated, or deleted components.
-
-#### Explore Solution Structure in Azure DevOps
-
-1. Go to your Azure DevOps project and browse to **Repos**.
-
-1. Explore the **Solutions** folder structure:
-
-    ```
-    Solutions/
-    ├── [SolutionName]/
-    │   ├── botcomponents/
-    │   ├── bots/
-    │   ├── connectionreferences/
-    │   ├── environmentvariabledefinitions/
-    │   ├── publishers/
-    │   └── solutions/
-    ```
-
-#### Understand Component Organization
-
-1. Examine key folders:
-   - **ConnectionReferences/**: Contains connection reference definitions used by connectors, flows, and tools
-   - **EnvironmentVariables/**: Contains environment variable definitions and values
-   - **Workflows/**: Contains Power Automate flows (if any)
-   - **Other/Copilot/**: Contains Copilot Studio agents and components
-   - **SolutionPackage/**: Contains the overall solution metadata
-
-1. Open a component file to see the XML, YAML, or JSON structure that defines these components.
-
-1. Notice how this structure enables:
-    - Granular tracking of changes to individual components
-    - Easy integration with other CI/CD tools and processes
-    - Professional development workflows for larger teams
-
-#### Review Deployment History
-
-1. Go to **Repos** > **Commits** to see your deployment history.
-
-1. Compare commits to understand what changed between deployments.
-
-1. Use the diff view to see exactly what components were modified.
-
----
-
-### 🏅 Congratulations! You've completed the Extra Credit section!
-
----
-
-### Test your understanding
-
-**Key takeaways:**
-
-* **Professional ALM made accessible** - Pipelines democratize sophisticated deployment processes while maintaining professional standards.
-* **Source control enables extension** - Git integration provides the foundation for advanced CI/CD scenarios when needed.
-* **Structured component organization** - Understanding the folder structure helps with troubleshooting and enables pipeline extensions.
-
-**Challenge: Apply this to your own use case**
-
-* Plan how you might extend pipelines with Power Platform CLI for advanced scenarios.
-* Design branching strategies that work with pipeline deployment workflows.
-* Consider how to integrate pipelines with existing organizational CI/CD processes.
 
 ---
 
