@@ -295,8 +295,8 @@ In this section, you'll learn how to generate test cases automatically, import t
 
 **Scenario:** You want to systematically test your Copilot Studio Assistant using different approaches. You'll create three distinct test sets - one auto-generated, one imported from CSV that is intentionally designed to fail, and one captured from real agent conversations that should pass - to see how different creation methods and evaluation outcomes work.
 
-    > [!NOTE] 
-    > Preview Feature: Agent evaluation is currently a preview feature in Copilot Studio. Features and UI may change as Microsoft iterates on the experience. Preview features are not intended for production use.
+> [!NOTE] 
+> Preview Feature: Agent evaluation is currently a preview feature in Copilot Studio. Features and UI may change as Microsoft iterates on the experience. Preview features are not intended for production use.
 
 ### Objective
 
@@ -419,13 +419,6 @@ Create evaluation test sets using four different methods and understand how each
     > [!NOTE]
     > Since the expected responses are captured directly from the agent's own answers, this test set should pass when evaluated - the agent should give the same (or very similar) answers when asked again.
 
-1. Select the first test case (the mailing list question). Change the evaluation method to **Text Match** and set the expected response to:
-
-    ```
-    Please enter your email address to join the Copilot Studio announcements mailing list.
-    ```
-
-
 #### Add a Manual Test Case
 
 1. Select **+ Add Question**, from the list select **Write**.
@@ -536,11 +529,7 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
 
 1. Review the pass rate. Since expected responses were captured from the agent's own answers in the test canvas, most test cases should pass.
 
-1. Check the first test case (mailing list question) which you configured with **Text Match**. Verify that the agent's response matches the expected text:
-
-    ```
-    Please enter your email address to join the Copilot Studio announcements mailing list.
-    ```
+1. Check the first test case (the mailing list question). Since the expected response was captured from the agent's own answer, verify that the evaluation passed.
 
 1. Check the DLP policies test case you added manually. Review whether the agent was able to answer this question and what the evaluation result was.
 
