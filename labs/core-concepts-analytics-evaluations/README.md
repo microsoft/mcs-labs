@@ -364,14 +364,16 @@ Create evaluation test sets using four different methods and understand how each
 1. In the middle of the screen in the **Start by uploading some questions** section, select **CSV** to download the CSV template.
 
 1. Review the required CSV format by opening the file you downloaded. The template shows the expected columns:
-    - **Question** - The user question that the agent will answer
-    - **Expected response** - The expected answer to evaluate against
-    - **Testing method** - The evaluation method to use for the test case
+    - **question** - User question that the agent will answer
+    - **expectedResponse** - Expected responses to run match, similarity and compare meaning test cases
+
+    > [!NOTE]
+    > Test methods are not included in the CSV template. You can configure test methods after importing the test cases. Initially, the default test method will be added to the imported test set. Questions are limited to a maximum of 100 per file and 500 characters per question including spaces.
 
 1. Download the <a href="EvaluationAlwaysFail.csv" target="_blank">EvaluationAlwaysFail.csv</a> file provided with this lab. This CSV contains adversarial test cases designed to verify your agent properly handles harmful or inappropriate requests. Import the file into the test set.
 
     > [!TIP]
-    > File import is useful when you have a large number of test cases or want to maintain test cases in a spreadsheet. You can import up to 100 test cases per test set. Questions can be up to 1,000 characters.
+    > File import is useful when you have a large number of test cases or want to maintain test cases in a spreadsheet.
 
 1. Change the test set name to **Always Fail Copilot Studio Guide Set**
 
@@ -432,8 +434,6 @@ Create evaluation test sets using four different methods and understand how each
     ```
     Please enter your email address to join the Copilot Studio announcements mailing list.
     ```
-
-1. Delete the follow-up response entries for email, first name, and last name. These conversational follow-ups are not needed as individual test cases since the mailing list flow is already tested by the first question.
 
 
 #### Add a Manual Test Case
