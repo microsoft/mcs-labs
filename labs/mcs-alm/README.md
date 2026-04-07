@@ -172,6 +172,9 @@ Set up your development environment by creating a solution and custom publisher 
 > - Avoid names like `DEV`, `TEST`, `PROD`, `POC`, `MVP` or anything tied to a project lifecycle phase.
 > - Use a descriptive, project-based name inside the parentheses.
 
+> [!IMPORTANT]
+> **Custom connectors must be in their own solution.** If your agent depends on a custom connector, that connector must be packaged in a separate solution and deployed to the target environment **before** the agent solution. The agent solution will fail to deploy if the custom connector it depends on is not already present in the target environment. Always plan your solution structure and deployment order with these dependencies in mind.
+
 #### Create a Publisher
 
 1. If you see a publish with your User name you can select that one, otherwise select **+ New publisher** to create one.
@@ -204,6 +207,7 @@ Set up your development environment by creating a solution and custom publisher 
 * **Solutions first** - Solutions help manage your agent and related components across environments.
 * **Lifecycle readiness** - Structuring up front simplifies governance, updates, and deployment.
 * **Naming matters** - Use clean, environment-agnostic names.
+* **Custom connectors need their own solution** - If your agent relies on a custom connector, that connector must be packaged in a separate solution and deployed to the target environment **before** you deploy the agent solution. The agent solution has a dependency on the custom connector, and the deployment will fail if the connector is not already present in the target environment. Plan your solution structure and deployment order accordingly.
 
 **Lessons learned & troubleshooting tips:**
 
@@ -389,9 +393,25 @@ Create a deployment pipeline that automates solution deployment across environme
 
 1. Wait for your deployment to complete.
 
+    > [!NOTE]
+    > The deployment process can take several minutes to complete. This is normal — the platform is exporting your solution as managed, transferring it to the target environment, and importing all components. Be patient and do not navigate away or retry while the deployment is in progress.
+
 1. In Copilot Studio, **switch** to the ALM Prod environment.
 
 1. See what the agents look like in the ALM Prod environment. When entering a topic, see how customizations are locked because the solution is managed.
+
+> [!IMPORTANT]
+> **Critical reminder about non-solution-aware settings:**
+>
+> These Copilot Studio settings require manual post-deployment configuration because they are tied to environment-specific resources, security boundaries, or external service registrations rather than to the agent's design-time logic:
+>
+> * **Azure Application Insights settings** - Instrumentation keys and connection strings point to environment-specific monitoring resources. DEV and PROD should send telemetry to separate Application Insights instances to keep diagnostics isolated.
+> * **Manual authentication settings** - App registrations, client IDs, and redirect URIs are registered per environment in Microsoft Entra ID. Bundling them in a solution would risk pointing a production agent at a development identity provider.
+> * **Direct Line / Web channel security settings** - Channel secrets and tokens are generated per environment to secure communication between the agent and its clients. These credentials cannot be transferred across environments.
+> * **Deployed channels** - Each channel deployment (Teams, web, Dynamics 365, etc.) creates a unique registration with the external platform. The target URLs, app IDs, and platform configurations are different in every environment.
+> * **Sharing (with other makers, or with end-users)** - Permissions reference specific users and security groups in each environment's Microsoft Entra ID tenant. The people who need maker access in DEV are typically different from the end-users in PROD.
+>
+> Always include these in your post-deployment checklist!
 
 ---
 
@@ -427,18 +447,6 @@ To maximize the impact of ALM in Copilot Studio:
 * **Leverage source control** - Use Git integration to track, audit, and collaborate - setting the stage for CI/CD without complex tooling.
 * **Automate where it counts** - Use pipelines for streamlined, repeatable deployments with built-in governance.
 * **Document post-deployment steps** - Track settings that aren't part of the solution so nothing is missed.
-
-> [!IMPORTANT]
-> **Critical reminder about non-solution-aware settings:**
->
-> These Copilot Studio settings require manual post-deployment configuration:
-> * **Azure Application Insights settings**
-> * **Manual authentication settings**
-> * **Direct Line / Web channel security settings**
-> * **Deployed channels**
-> * **Sharing (with other makers, or with end-users)**
->
-> Always include these in your post-deployment checklist!
 
 > [!NOTE]
 > **Managed Environment governance in your lab:**
