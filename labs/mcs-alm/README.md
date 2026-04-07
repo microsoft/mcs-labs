@@ -394,7 +394,7 @@ Create a deployment pipeline that automates solution deployment across environme
 1. Wait for your deployment to complete.
 
     > [!NOTE]
-    > The deployment process can take several minutes to complete. This is normal — the platform is exporting your solution as managed, transferring it to the target environment, and importing all components. Be patient and do not navigate away or retry while the deployment is in progress.
+    > The deployment process can take several minutes to complete. This is normal — the platform is exporting your solution as managed, transferring it to the target environment, and importing all components. Be patient and wait for it to finish.
 
 1. In Copilot Studio, **switch** to the ALM Prod environment.
 
