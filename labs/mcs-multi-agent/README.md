@@ -146,7 +146,7 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 #### Create Sales Associate Assistant
 
-1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com.
+1. Go to the Copilot Studio home page at [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com).
 
 1. Check the **Environment** in the upper right corner to make sure you are in your "DEV - user name" environment.
 

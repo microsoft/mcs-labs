@@ -339,7 +339,7 @@ Create a deployment pipeline that automates solution deployment across environme
 
 #### Create an agent to deploy
 
-1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com/
+1. Go to the Copilot Studio home page at [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com/)
 
 1. Enter the following to describe the agent you wish to create, but do NOT choose to create it yet:
 
