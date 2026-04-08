@@ -427,229 +427,119 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Select **Create blank agent** in the upper right corner.
 
-1. Select **Edit** in the **Details** section.
-
-1. Enter the following details:
-   - **Name:** `Sales Commission Assistant`
-   - **Description:** `Calculates sales commissions based on performance data`
-
-1. Select **Save** in the upper right corner of the **Details** section.
-
     > [!TIP]
     > The agent creation may take 30-60 seconds. You'll see a loading indicator while your agent is being provisioned.
 
-#### Create the Agent Flow
+1. Select **Edit** in the **Details** section.
 
-1. In the top navigation panel, Select **Tools**.
+1. Enter the following details:
+
+   - **Name:**
+     ```
+     Sales Commission Assistant
+     ```
+   - **Description:**
+     ```
+     Calculates sales commissions based on performance data
+     ```
+
+1. Select **Save** in the upper right corner of the **Details** section.
+
+1. On the **Overview** page, scroll down to the **Knowledge** section and turn off **Web Search**.
+
+1. Select **Edit** in the **Instructions** section and enter the following:
+
+    ```
+    When collecting information for a tool, always ask for one piece of information at a time.
+    ```
+
+1. Select **Save**.
+
+    > [!NOTE]
+    > Using instructions to explain how you want the agent to behave when collecting information is a good example of how Instructions should be used in agents. Instructions guide the agent's conversational behavior without requiring you to build explicit topics or flows for every interaction pattern.
+
+#### Add the Agent Flow
+
+1. In the top navigation panel, select **Tools**.
 
 1. Select **+ Add a tool**.
 
-1. In the **Create new** section, select **Agent flow**.
+1. In the filter list, select **Flow**.
 
-1. Select **Publish**.
+1. Select the pre-created **Calculate Sales Commission** flow from the results.
 
-1. Select **Stay in flow** when the publish completes.
+1. Select **Add and configure**.
 
-1. Select **Overview** tab in the top navigation.
-
-1. Select **Edit** in the upper right corner of the **Details** section.
-
-1. Enter **Calculate Sales Commission** for the Flow name.
-
-1. Enter the following for the description:
-
-    ```
-    Deterministic commission calculation with tiers, bonuses, and accelerators
-    ```
-
-1. Change **Express mode** at the bottom of that right panel to **Enabled**. Express mode optmizes the flow for rapid execution which is ideal when the user is waiting for the processing results. 
-
-1. Select **Save**.
-
-
-#### Define Input Parameters
-
-1. In the top navigation select the **Designer** tab.
-
-1. Select **When an agent calls the flow** at the top.
-
-1. Select **+ Add input** for each parameter below:
-
-  | Parameter Name | Type | 
-  |----------------|------|
-  | `AnnualRevenue` | Number | 
-  | `QuotaAmount` | Number | 
-  | `StrategicProductRevenue` | Number | 
-
-1. Select **Save draft** in the upper right corner after adding all inputs.
-
-    > [!IMPORTANT]
-    > Make sure parameter names match exactly (case-sensitive) as they'll be referenced in formulas.
-
-#### Calculate Commission
-
-  > [!TIP]
-    > The following represents a simplified commission calculation. In a real implementation this logic could be as complex as needed and could use all the capabilities of flow.
-
-1. Select **+ Add node** in the flow canvas before the last node **Respond to the agent**.
-
-1. Select **Variable** > **Initialize variable**, Enter the name and select the type based on the list in the next step. You will repeat this for each of the 5 variables.
-
-1. Enter **TotalCommission** for the Name.
-
-1. Select **Float** for the Type.
-
-1. For **Value** select the **fx** on the right side of the field.
-
-1. Select **Create an expression with Copilot**.
-
-1. Enter the following in the input area to describe the expression you want Copilot to create.
-    ```
-    calculate TotalCommission by adding AnnualRevenue times 25% and StrategicProductRevenue * 35%
-    ```
-1. Confirm the expression looks like the following and then select **OK**.
-
-    ```
-    add(mul(triggerBody()?['number'], 0.25), mul(triggerBody()?['number_1'], 0.35))
-    ```
-1. Select **Add** to save the expression to the node.
-
-
-#### Create the Response Message
-
-1. Select the **Respond to the agent** node at the bottom of the flow.
-
-1. Select **Add an output** and Select **Number**.
-
-1. Enter **TotalCommission** in the Name field.
-
-1. Select **the Enter a value to respond with** input area and then select the lightening bolt icon on the right side of the area.
-
-1. Select the **TotalCommission** variable from the list.
-
-1. Select **Save Draft** in upper right corner of the screen.
-
-1. Select **Publish** to make your changes available for the agent to use.
-
-
-#### Build the Conversation Topic
-
-1. Select **Agents** in the left side navigation.
-
-1. Select **Sales Commission Assistant** in the list of agents.
-
-1. In the top agent navigation, Select **Topics**.
-
-1. Select **+ Add a Topic** > **From blank**.
-
-1. Enter **Calculate My Commission** for the Name by selecting **Untitled** in the upper left corner of the screen.
-
-1. Enter the following in the **Describe what the topic does** input area:
-
-    ```
-    Calculate my commission
-    What's my commission
-    How much commission did I earn
-    Check commission
-    Commission calculator
-    Show my earnings
-    Calculate earnings
-    ```
-
-1. Select **Save**.
-
-1. Under the **Trigger** node, add an **Ask with adaptive card** node. 
-
-1. Select **"..."** in the upper right corner of the node you just added and select **Properties**.
-
-1. Select **Edit adaptive card**.  We need to tell the card what to display to the user, and then what to do with the responses. Enter the following into the **Card payload editor** replacing the existing text:
-
-    ```json
-    {
-        "type": "AdaptiveCard",
-        "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
-        "version": "1.5",
-        "body": [
-            {
-                "type": "Input.Text",
-                "label": "What is your name",
-                "placeholder": "SalesRepName",
-                "id": "SalesRepName"
-            },
-            {
-                "type": "Input.Number",
-                "label": "What is your total annual revenue? (Number only)",
-                "placeholder": "AnnualRevenue",
-                "id": "AnnualRevenue"
-            },
-            {
-                "type": "Input.Number",
-                "label": "What is your annual quota target? (Number only)",
-                "placeholder": "QuotaAmount",
-                "id": "QuotaAmount"
-            },
-            {
-                "type": "Input.Number",
-                "label": "How much revenue came from strategic products? (Number only)",
-                "placeholder": "StrategicProductRevenue",
-                "id": "StrategicProductRevenue"
-            },
-            {
-                "type": "ActionSet",
-                "actions": [
-                    {
-                        "type": "Action.Submit",
-                        "title": "Calculate Commission"
-                    }
-                ]
-            }
-        ]
-    }
-    ```
-
-    ![Adaptive Card](images/adaptivecard.jpg)
-
-1. Select **Save** and then Select **Close** in upper right corner to exit the editor.
-
-1. After the Adaptive card node, Select **+ Add node** > **Add a tool** and select the **Calculate Sales Commission**.
-
-1. Select your flow: **Calculate Sales Commission** and map the inputs:
-    - `AnnualRevenue` > Select variable `AnnualRevenue`
-    - `StrategicProductRevenue` > Select variable `StrategicProductRevenue`
-
-1. After the Calculate Sales Commission node,  Select **+ Add node** > **Send a message**.
-
-1. Enter **The commission is:** in the message area.
-
-1. Select the **{x}** icon and then select **TotalCommission** from the list.
-
-1. Select **Save**.
+    > [!TIP]
+    > This flow has already been provisioned for you with the commission calculation logic, input parameters, and response configuration. In a real implementation, you would build the agent flow yourself using Power Fx expressions — the logic could be as complex as needed and could use all the capabilities of flow.
 
 #### Test Your Commission Calculator
 
 1. Select **Test** in the upper right-hand corner of Copilot Studio.
 
-1. Type `Calculate my commission` and fill in the adaptive card with the following test data:
-    - **Name:** `Jennifer Rodriguez`
-    - **Annual Revenue:** `675000`
-    - **Annual Quota:** `400000`
-    - **Strategic Product Revenue:** `250000`
+1. Type the following in the test pane:
 
-1. Verify the results:
-    - Commission Tier: Tier 3 (12% rate)
+    ```
+    Calculate my commission
+    ```
+
+1. The agent will ask you for each piece of information one at a time. When prompted, enter the following values:
+
+    - **Name:**
+      ```
+      Jennifer Rodriguez
+      ```
+    - **Annual Revenue:**
+      ```
+      675000
+      ```
+    - **Quota Amount:**
+      ```
+      400000
+      ```
+    - **Strategic Product Revenue:**
+      ```
+      250000
+      ```
+
+1. Verify the results include:
+    - Commission Tier: Tier 3
+    - Commission Rate: 12.0%
     - Base Commission: $81,000.00
-    - Product Mix Bonus: $3,000.00 (250K/675K = 37%, above 30%)
+    - Product Mix Bonus: $3,000.00 (Strategic products >= 30%)
     - **Total Commission: $84,000.00**
 
-    ![Sales Commission Assistant calculating JP's commission with $84,000 total result displayed](images/test.jpg)
+1. Reset the conversation and test with a different scenario:
 
-1. Reset the conversation and test with a below-quota scenario:
-    - **Name:** `David Park`
-    - **Annual Revenue:** `75000`
-    - **Annual Quota:** `100000`
-    - **Strategic Product Revenue:** `10000`
+    ```
+    Calculate my commission
+    ```
 
-1. Verify: Commission Tier: Tier 0 (0% rate), Total Commission: $0.00
+1. When prompted, enter the following values:
+
+    - **Name:**
+      ```
+      David Park
+      ```
+    - **Annual Revenue:**
+      ```
+      75000
+      ```
+    - **Quota Amount:**
+      ```
+      100000
+      ```
+    - **Strategic Product Revenue:**
+      ```
+      10000
+      ```
+
+1. Verify the results include:
+    - Commission Tier: Tier 0
+    - Commission Rate: 0.0%
+    - Base Commission: $0.00
+    - Product Mix Bonus: $0.00 (Strategic products < 30%)
+    - **Total Commission: $0.00**
 
 ---
 
