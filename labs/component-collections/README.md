@@ -132,7 +132,7 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 #### Create the Safe Travels Agent
 
-1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com.
+1. Go to the Copilot Studio home page at <a href="https://copilotstudio.microsoft.com" target="_blank">copilotstudio.microsoft.com</a>.
 
 1. Select **Agents** on the left navigation.
 

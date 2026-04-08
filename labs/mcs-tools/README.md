@@ -421,7 +421,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 #### Create a New Agent
 
-1. Go to **Microsoft Copilot Studio** at https://copilotstudio.microsoft.com.
+1. Go to **Microsoft Copilot Studio** at <a href="https://copilotstudio.microsoft.com" target="_blank">copilotstudio.microsoft.com</a>.
 
 1. Select **Agents** on left navigation.
 
