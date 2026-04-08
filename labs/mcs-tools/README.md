@@ -931,12 +931,19 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 #### Disable General Knowledge
 
+1. On the **Overview** page, scroll down to the **Knowledge** section and turn off **Web Search**.
+
 1. Select **Settings** in the upper right-hand corner.
 
-1. Scroll to the bottom of the **Generative AI** menu and turn off **Use general knowledge**.
+1. In the **Generative AI** menu, turn off **Allow ungrounded responses**.
+
+1. Verify that **Use information from the web** is also turned off.
+
+    > [!NOTE]
+    > The **Use information from the web** setting here is the same as the **Web Search** toggle on the Overview page. Changing it in one place updates it in the other.
 
     > [!TIP]
-    > To limit hallucinations, it is common practice to turn off the model's general knowledge. This restricts the agent to only the tools and knowledge you have provided.
+    > To limit hallucinations, it is common practice to turn off these settings. This restricts the agent to only the tools and knowledge you have provided, preventing it from generating responses based on general knowledge or web results.
 
 1. Select **Save**.
 
