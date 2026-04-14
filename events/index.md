@@ -1,8 +1,8 @@
 ---
 layout: single
-title: "Workshops"
+title: "Events"
 author_profile: false
-description: "Browse all Microsoft Copilot Studio workshops — curated lab sequences for events and self-paced learning"
+description: "Browse all Microsoft Copilot Studio events — curated lab sequences for bootcamps, workshops, and self-paced learning"
 toc: false
 classes: wide
 ---
@@ -104,14 +104,14 @@ classes: wide
 }
 </style>
 
-{% assign all_workshops = site.workshops | sort: "order" %}
+{% assign all_events = site.events | sort: "order" %}
 
 <ul class="ws-index-stats">
-  <li><strong>{{ all_workshops.size }}</strong> workshops</li>
+  <li><strong>{{ all_events.size }}</strong> events</li>
 </ul>
 
 <ul class="ws-grid">
-{% for ws in all_workshops %}
+{% for ws in all_events %}
   {% assign ws_duration = 0 %}
   {% assign ws_levels = "" %}
   {% for item in ws.labs %}

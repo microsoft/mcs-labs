@@ -66,9 +66,9 @@ collections:
   labs:
     output: true
     permalink: /labs/:name/
-  workshops:
+  events:
     output: true
-    permalink: /workshops/:name/
+    permalink: /events/:name/
 
 # Default layouts and front matter
 defaults:
@@ -86,9 +86,9 @@ defaults:
       share: false
   - scope:
       path: ""
-      type: "workshops"
+      type: "events"
     values:
-      layout: "workshop"
+      layout: "event"
       author_profile: false
       classes: wide
       toc: false
