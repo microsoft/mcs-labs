@@ -140,6 +140,9 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 ### Step-by-step instructions
 
+> [!IMPORTANT]
+> **Your analytics dashboard will be empty.** Analytics data requires 24-48 hours to populate after an agent starts receiving conversations. Since your agent was just created during this bootcamp, there is no analytics data available yet. There is currently no way to pre-provision or simulate analytics data in the platform — we are actively working with the Product Group to provide a way to visualize what populated analytics would look like for lab scenarios. For now, follow the steps below to familiarize yourself with the dashboard layout, available metrics, and where to find insights once data begins flowing.
+
 #### Navigate to Analytics
 
 1. Go to Copilot Studio and select **Agents** on the left navigation. Open your Copilot Studio Assistant agent and select **Analytics** in the top navigation bar.
@@ -149,9 +152,6 @@ Access and interpret agent analytics to measure performance and identify optimiz
    - **Trend charts**: Conversation volume over time
    - **Topic performance**: Which topics are used most frequently
    - **User satisfaction**: Feedback scores from users
-
-    > [!NOTE]
-    > Analytics data may take 24-48 hours to populate for new agents. If your agent is brand new, you may see limited or no data initially.
 
 1. Set the date range using the date picker in the top right of the analyticss:
    - Last 7 days
@@ -295,8 +295,8 @@ In this section, you'll learn how to generate test cases automatically, import t
 
 **Scenario:** You want to systematically test your Copilot Studio Assistant using different approaches. You'll create three distinct test sets - one auto-generated, one imported from CSV that is intentionally designed to fail, and one captured from real agent conversations that should pass - to see how different creation methods and evaluation outcomes work.
 
-    > [!NOTE] 
-    > Preview Feature: Agent evaluation is currently a preview feature in Copilot Studio. Features and UI may change as Microsoft iterates on the experience. Preview features are not intended for production use.
+> [!NOTE] 
+> Preview Feature: Agent evaluation is currently a preview feature in Copilot Studio. Features and UI may change as Microsoft iterates on the experience. Preview features are not intended for production use.
 
 ### Objective
 
@@ -319,13 +319,10 @@ Create evaluation test sets using four different methods and understand how each
 
 1. In the **Configure test set** panel on the right side of your screen, change the test set name to **Non-Critical Copilot Studio Guide Set**
 
-1. In the Test method General Question is configured by default. You can configure additional test methods, those will be available to configure later when you edit questions.
+1. In the Test method, **General Quality** is configured by default. Leave this as-is for this test set.
 
-1. Select **Add test method**, review the list of test methods you can configure.
-
-1. On the **Set pass score**, review the settings for this option and select **OK**. Other test methods may have other options you can configure based on the approach.
-
-1. Select **Compare meaning** and then select **OK**.
+    > [!TIP]
+    > You can have multiple test methods for a test set, but all test cases in the set must follow all of the configured test methods. Choose methods that match the overall nature of your test set. For example, General Quality works well as a baseline for all questions, while Compare meaning can be added when expected responses are provided.
 
 1. Select **Save** at the bottom of that same panel.
 
@@ -334,13 +331,6 @@ Create evaluation test sets using four different methods and understand how each
 1. In the **User** dropdown locate your user account and select the row.
 
 1. Select **Save**.
-
-1. Select the first generated question to explore all the available options. For each test case, you can configure the **evaluation method**:
-
-    > [!TIP]
-    > Choose evaluation methods that match the nature of each question. Factual questions with precise answers work well with Exact Match or Keyword Match. Open-ended questions benefit from General Quality or Similarity methods. You can add additional test methods to the set at creation of the test set or later during editing.
-
-1. After reviewing, select **Cancel** to close the edit of the test case.
 
 1. Select **Evaluate** to start the evaluation of this test set.
 
@@ -364,14 +354,16 @@ Create evaluation test sets using four different methods and understand how each
 1. In the middle of the screen in the **Start by uploading some questions** section, select **CSV** to download the CSV template.
 
 1. Review the required CSV format by opening the file you downloaded. The template shows the expected columns:
-    - **Question** - The user question that the agent will answer
-    - **Expected response** - The expected answer to evaluate against
-    - **Testing method** - The evaluation method to use for the test case
+    - **question** - User question that the agent will answer
+    - **expectedResponse** - Expected responses to run match, similarity and compare meaning test cases
+
+    > [!NOTE]
+    > Test methods are not included in the CSV template. You can configure test methods after importing the test cases. Initially, the default test method will be added to the imported test set. Questions are limited to a maximum of 100 per file and 500 characters per question including spaces.
 
 1. Download the <a href="EvaluationAlwaysFail.csv" target="_blank">EvaluationAlwaysFail.csv</a> file provided with this lab. This CSV contains adversarial test cases designed to verify your agent properly handles harmful or inappropriate requests. Import the file into the test set.
 
     > [!TIP]
-    > File import is useful when you have a large number of test cases or want to maintain test cases in a spreadsheet. You can import up to 100 test cases per test set. Questions can be up to 1,000 characters.
+    > File import is useful when you have a large number of test cases or want to maintain test cases in a spreadsheet.
 
 1. Change the test set name to **Always Fail Copilot Studio Guide Set**
 
@@ -426,15 +418,6 @@ Create evaluation test sets using four different methods and understand how each
 
     > [!NOTE]
     > Since the expected responses are captured directly from the agent's own answers, this test set should pass when evaluated - the agent should give the same (or very similar) answers when asked again.
-
-1. Select the first test case (the mailing list question). Change the evaluation method to **Text Match** and set the expected response to:
-
-    ```
-    Please enter your email address to join the Copilot Studio announcements mailing list.
-    ```
-
-1. Delete the follow-up response entries for email, first name, and last name. These conversational follow-ups are not needed as individual test cases since the mailing list flow is already tested by the first question.
-
 
 #### Add a Manual Test Case
 
@@ -546,11 +529,7 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
 
 1. Review the pass rate. Since expected responses were captured from the agent's own answers in the test canvas, most test cases should pass.
 
-1. Check the first test case (mailing list question) which you configured with **Text Match**. Verify that the agent's response matches the expected text:
-
-    ```
-    Please enter your email address to join the Copilot Studio announcements mailing list.
-    ```
+1. Check the first test case (the mailing list question). Since the expected response was captured from the agent's own answer, verify that the evaluation passed.
 
 1. Check the DLP policies test case you added manually. Review whether the agent was able to answer this question and what the evaluation result was.
 
@@ -627,7 +606,7 @@ To maximize the impact of analytics and evaluations in Copilot Studio:
 * Review analytics weekly for new agents, bi-weekly for mature agents
 * Prioritize improvements based on conversation volume multiplied by satisfaction impact
 * Track unrecognized phrases and unanswered questions - these reveal knowledge gaps
-* Create evaluation test sets that cover your agent's most critical capabilities
+* Create evaluation test sets that cover your agent's most critical capabilities. Consider having multiple test sets for different purposes — for example, an "Always Pass" set to verify core functionality, an "Always Fail" set to validate safety guardrails, and "Non-Critical" sets to track general quality over time
 * Run evaluations before and after every significant agent change
 * Make one improvement at a time to clearly attribute results
 * Export and share evaluation results with stakeholders to demonstrate quality commitment
