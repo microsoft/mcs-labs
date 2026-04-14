@@ -67,7 +67,6 @@
   function open() {
     isOpen = true;
     panel.classList.add('wc-panel--open');
-    overlay.classList.add('wc-overlay--visible');
     tag.classList.add('wc-tag--hidden');
     panel.addEventListener('keydown', handleFocusTrap);
     if (!chatInitializing && !chatReady) initChat();
@@ -77,7 +76,6 @@
   function close() {
     isOpen = false;
     panel.classList.remove('wc-panel--open');
-    overlay.classList.remove('wc-overlay--visible');
     tag.classList.remove('wc-tag--hidden');
     panel.removeEventListener('keydown', handleFocusTrap);
     tag.focus();
@@ -88,7 +86,6 @@
     if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
   });
   closeBtn.addEventListener('click', close);
-  overlay.addEventListener('click', close);
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && isOpen) close();

@@ -46,22 +46,9 @@
   opacity: 0;
 }
 
-/* --- Overlay --- */
+/* --- Overlay (removed — panel flies out without blocking page) --- */
 .wc-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(15, 27, 45, 0.06);
-  z-index: 99991;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-  backdrop-filter: blur(1px);
-  -webkit-backdrop-filter: blur(1px);
-}
-
-.wc-overlay.wc-overlay--visible {
-  opacity: 1;
-  pointer-events: auto;
+  display: none;
 }
 
 /* --- Panel --- */
