@@ -4,7 +4,7 @@ Learn how to extend your agents with powerful tools including connectors, agent 
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,25 +12,25 @@ Learn how to extend your agents with powerful tools including connectors, agent 
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Extend Your Agent with Connectors](#use-case-1-extend-your-agent-with-connectors)
-  - [Use Case #2: Build Deterministic Logic with Agent Flows](#use-case-2-build-deterministic-logic-with-agent-flows)
-  - [Use Case #3: Connect an MCP Server for Live Data Access](#use-case-3-connect-an-mcp-server-for-live-data-access)
-  - [Use Case #4: Create Custom Prompts for Structured Responses](#use-case-4-create-custom-prompts-for-structured-responses)
-  - [Extra Credit: Automate Legacy Systems with Computer Using Agents (CUA)](#extra-credit-automate-legacy-systems-with-computer-using-agents-cua)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Extend Your Agent with Connectors](#-use-case-1-extend-your-agent-with-connectors)
+  - [Use Case #2: Build Deterministic Logic with Agent Flows](#-use-case-2-build-deterministic-logic-with-agent-flows)
+  - [Use Case #3: Connect an MCP Server for Live Data Access](#-use-case-3-connect-an-mcp-server-for-live-data-access)
+  - [Use Case #4: Create Custom Prompts for Structured Responses](#-use-case-4-create-custom-prompts-for-structured-responses)
+  - [Extra Credit: Automate Legacy Systems with Computer Using Agents (CUA)](#-extra-credit-automate-legacy-systems-with-computer-using-agents-cua)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 **Makers and Developers** - Want to know how to go beyond basic agent capabilities and connect your agents to real data, business logic, and external systems?
 
@@ -48,7 +48,7 @@ Think of tools as the hands and feet of your agent:
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 Tools are what transform a conversational agent into a powerful business assistant. Microsoft Copilot Studio offers multiple types of tools, each designed for different integration scenarios. Connectors provide pre-built integrations with hundreds of services. Agent flows enable deterministic, rule-based business logic using Power Fx. MCP (Model Context Protocol) servers provide real-time access to data sources like Dataverse. Custom prompts structure agent responses for consistent, business-relevant outputs. And for systems without APIs, Computer Using Agents (CUA) can simulate human interaction with graphical interfaces.
 
@@ -58,7 +58,7 @@ This lab teaches you how to use each tool type through hands-on scenarios.
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -70,7 +70,7 @@ This lab teaches you how to use each tool type through hands-on scenarios.
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 * [Tools overview in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent)
 * [Agent Flows in Microsoft Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-flow)
@@ -83,7 +83,7 @@ This lab teaches you how to use each tool type through hands-on scenarios.
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Access to Microsoft Copilot Studio with appropriate licensing
 - Power Platform environment enabled for Copilot Studio
@@ -92,7 +92,7 @@ This lab teaches you how to use each tool type through hands-on scenarios.
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll extend agents with multiple tool types to address different integration scenarios. By the end of the lab, you will:
 
@@ -104,23 +104,23 @@ In this lab, you'll extend agents with multiple tool types to address different 
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Extend Your Agent with Connectors](#use-case-1-extend-your-agent-with-connectors) | Integrate external services and take actions through pre-built connectors | 15 min |
-| 2 | [Build Deterministic Logic with Agent Flows](#use-case-2-build-deterministic-logic-with-agent-flows) | Implement business rules that always produce consistent, predictable results | 15 min |
-| 3 | [Connect an MCP Server for Live Data Access](#use-case-3-connect-an-mcp-server-for-live-data-access) | Enable natural language queries against live Dataverse business data | 20 min |
-| 4 | [Create Custom Prompts for Structured Responses](#use-case-4-create-custom-prompts-for-structured-responses) | Standardize agent outputs for consistent, business-relevant responses | 10 min |
-| EC | [Extra Credit: Automate Legacy Systems with CUA](#extra-credit-automate-legacy-systems-with-computer-using-agents-cua) | Automate systems that lack API connectivity using desktop simulation (Optional) | ~20 min |
+| 1 | [Extend Your Agent with Connectors](#-use-case-1-extend-your-agent-with-connectors) | Integrate external services and take actions through pre-built connectors | 15 min |
+| 2 | [Build Deterministic Logic with Agent Flows](#-use-case-2-build-deterministic-logic-with-agent-flows) | Implement business rules that always produce consistent, predictable results | 15 min |
+| 3 | [Connect an MCP Server for Live Data Access](#-use-case-3-connect-an-mcp-server-for-live-data-access) | Enable natural language queries against live Dataverse business data | 20 min |
+| 4 | [Create Custom Prompts for Structured Responses](#-use-case-4-create-custom-prompts-for-structured-responses) | Standardize agent outputs for consistent, business-relevant responses | 10 min |
+| EC | [Extra Credit: Automate Legacy Systems with CUA](#-extra-credit-automate-legacy-systems-with-computer-using-agents-cua) | Automate systems that lack API connectivity using desktop simulation (Optional) | ~20 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Extend Your Agent with Connectors
+## 🧱 Use Case #1: Extend Your Agent with Connectors
 
 Create a custom connector for the Free Dictionary API and use it as a tool in your agent to look up word definitions.
 
@@ -375,7 +375,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 ---
 
-### Congratulations! You've completed Use Case #1!
+### 🏅 Congratulations! You've completed Use Case #1!
 
 ---
 
@@ -397,7 +397,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 ---
 
-## Use Case #2: Build Deterministic Logic with Agent Flows
+## 🔄 Use Case #2: Build Deterministic Logic with Agent Flows
 
 Build a Sales Commission Calculator using agent flows to implement deterministic business logic that always produces consistent, predictable results.
 
@@ -421,416 +421,129 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 #### Create a New Agent
 
-1. Go to **Microsoft Copilot Studio** at https://copilotstudio.microsoft.com.
+1. Go to **Microsoft Copilot Studio** at <a href="https://copilotstudio.microsoft.com" target="_blank">copilotstudio.microsoft.com</a>.
 
 1. Select **Agents** on left navigation.
 
 1. Select **Create blank agent** in the upper right corner.
 
-1. Select **Edit** in the **Details** section.
-
-1. Enter the following details:
-   - **Name:** `Sales Commission Assistant`
-   - **Description:** `Calculates sales commissions based on performance data`
-
-1. Select **Save** in the upper right corner of the **Details** section.
-
     > [!TIP]
     > The agent creation may take 30-60 seconds. You'll see a loading indicator while your agent is being provisioned.
 
-#### Create the Agent Flow
+1. Select **Edit** in the **Details** section.
 
-1. In the top navigation panel, Select **Tools**.
+1. Enter the following details:
+
+   - **Name:**
+     ```
+     Sales Commission Assistant
+     ```
+   - **Description:**
+     ```
+     Calculates sales commissions based on performance data
+     ```
+
+1. Select **Save** in the upper right corner of the **Details** section.
+
+1. On the **Overview** page, scroll down to the **Knowledge** section and turn off **Web Search**.
+
+1. Select **Edit** in the **Instructions** section and enter the following:
+
+    ```
+    When collecting information for a tool, always ask for one piece of information at a time.
+    ```
+
+1. Select **Save**.
+
+    > [!NOTE]
+    > Using instructions to explain how you want the agent to behave when collecting information is a good example of how Instructions should be used in agents. Instructions guide the agent's conversational behavior without requiring you to build explicit topics or flows for every interaction pattern.
+
+#### Add the Agent Flow
+
+1. In the top navigation panel, select **Tools**.
 
 1. Select **+ Add a tool**.
 
-1. In the **Create new** section, select **Agent flow**.
+1. In the filter list, select **Flow**.
 
-1. Select **Publish**.
+1. Select the pre-created **Calculate Sales Commission** flow from the results.
 
-1. Select **Stay in flow** when the publish completes.
+1. Select **Add and configure**.
 
-1. Select **Overview** tab in the top navigation.
-
-1. Select **Edit** in the upper right corner of the **Details** section.
-
-1. Enter **Calculate Sales Commission** for the Flow name.
-
-1. Enter the following for the description:
-
-    ```
-    Deterministic commission calculation with tiers, bonuses, and accelerators
-    ```
-
-1. Change **Express mode** at the bottom of that right panel to **Enabled**.
-
-1. Select **Save**.
-
-
-#### Define Input Parameters
-
-1. In the top navigation select the **Designer** tab.
-
-1. Select **When an agent calls the inputs** at the top.
-
-1. Select **+ Add input** for each parameter below:
-
-  | Parameter Name | Type | 
-  |----------------|------|
-  | `SalesRepName` | Text| 
-  | `AnnualRevenue` | Number | 
-  | `QuotaAmount` | Number | 
-  | `StrategicProductRevenue` | Number | 
-
-1. Select **Save draft** in the upper right corner after adding all inputs.
-
-    > [!IMPORTANT]
-    > Make sure parameter names match exactly (case-sensitive) as they'll be referenced in formulas.
-
-#### Initialize Variables
-
-1. Select **+ Add node** in the flow canvas before the last node **Respond to the agent**.
-
-1. Select **Variable** > **Initialize variable**, Enter the name and select the type based on the list in the next step. You will repeat this for each of the 5 variables.
-
-1. Initialize the following variables:
-
-    | Variable name | Type | Value |
-    |---------------|------|---------------|
-    | `CommissionTier` | String | (leave empty) |
-    | `CommissionRate` | Float | `0` |
-    | `BaseCommission` | Float | `0` |
-    | `ProductMixBonus` | Float | `0` |
-    | `TotalCommission` | Float | `0` |
-
-1. Optionally, select "..." on each Initialize node and select **Rename*" and change them from generic Initialize variable 1 to Initialize and the name of the variable they are initializing.  This step is not required, however, it is a best practice.
-
-1. Select **Save draft** to save your progress.
-
-#### Determine Commission Tier
-
-1. Select **+ Add node** just before the last node **Respond to the agent**.
-
-1. Select **Variable** and then Select **Set variable**.
-
-1. Select **CommissionTier** in the list of variable names.
-
-1. Select **fx** on the right side of the value field to open the Insert expression pane.
-
-1. Select **Create an expression with Copilot**.
-
-1. Enter the following in the input area for Copilot to create an expression:
-
-      ```
-    Create a calculated field called “Tier” based on the value of the Number field. If Number is greater than 500,000, set Tier to “Tier 3”. If Number is greater than 250,000 but less than or equal to 500,000, set Tier to “Tier 2”. If Number is greater than 100,000 but less than or equal to 250,000, set Tier to “Tier 1”. Otherwise, set Tier to “Tier 0”.
-      ```
-1. Select **Create Expression** and then select **OK** 
-
-1. Review the expression it should look like the following if not update it from here:
-
-    ```
-    if(greater(triggerBody()?['number'], 500000), 'Tier 3', if(greater(triggerBody()?['number'], 250000), 'Tier 2', if(greater(triggerBody()?['number'], 100000), 'Tier 1', 'Tier 0')) )
-    ```
-
-1. Select **Add**.
-
-1. Optionally, select **...** and then select **Rename** to change the step name to **Set CommissionTier**.
-
-
-#### Determine Commission Rate
-
-1. Select **+ Add node** just before the last node **Respond to the agent**.
-
-1. Select **Variable** and then Select **Set variable**.
-
-1. Select **CommissionRate** in the list of variable names.
-
-1. Select **fx** on the right side of the value field to open the Insert expression pane.
-
-1. Select **Create an expression with Copilot**.
-
-1. Enter the following in the input area for Copilot to create an expression:
-
-      ```
-    Create a calculated field called “Rate” based on the value of the Number field. If Number is greater than 500,000, set Rate to 0.12. If Number is greater than 250,000 but less than or equal to 500,000, set Rate to 0.10. If Number is greater than 100,000 but less than or equal to 250,000, set Rate to 0.05. Otherwise, set Rate to 0.00.
-      ```
-1. Select **Create Expression** and then select **OK** 
-
-1. Review the expression it should look like the following if not update it from here:
-
-      ```
-      if(greater(triggerBody()?['number'], 500000), 0.12, if(greater(triggerBody()?['number'], 250000), 0.10, if(greater(triggerBody()?['number'], 100000), 0.05, 0.00)))
-      ```
-
-1. Select **Add**.
-
-1. Optionally, select **...** and then select **Rename** to change the step name to **Set CommissionRate**.
-
-
-#### Calculate Base Commission
-
-1. Select **+ Add node** just before the last node **Respond to the agent**.
-
-1. Select **Variable** and then Select **Set variable**.
-
-1. Select **BaseCommission** in the list of variable names.
-
-1. Select **fx** on the right side of the value field to open the Insert expression pane.
-
-1. Select **Create an expression with Copilot**.
-
-1. Enter the following in the input area for Copilot to create an expression:
-
-    ```
-    Multiply AnnualRevenue times CommissionRate
-    ```
-1. Select **Create Expression** and then select **OK** 
-
-1. Review the expression it should look like the following if not update it from here:
-
-    ```
-    mul(triggerBody()?['number'], variables('CommissionRate'))
-    ```
-
-1. Select **Add**.
-
-1. Optionally, select **...** and then select **Rename** to change the step name to **Set CommissionBase**.
-
-1. Select **+ Add node** just before the last node **Respond to the agent**.
-
-1. Select **Variable** and then select **Increment variable**.
-
-1. Select **TotalCommission** from the list of variable names.
-
-1. Select the lightening bolt next to the Value field to bring up the available dynamic data fields.
-
-1. Select **BaseCommission**.
-
-1. Optionally, select **...** and then select **Rename** to change the step name to **Add BaseCommission To TotalCommission**.
-
-#### Calculate Product Mix Bonus
-
-1. Select **Variable** and then select **Set variable**.
-
-1. Select **ProductMixBonus** in the list of variable names.
-
-1. Select **fx** on the right side of the value field to open the Insert expression pane.
-
-1. Select **Create an expression with Copilot**.
-
-1. Enter the following in the input area for Copilot to create an expression:
-
-    ```
-    If you Divide StrategicProductRevenue by AnnualRevenue and it is >= 0.30 then ProductMixBonus is 3000 otherwise it is 0. Make sure you convert the two values to Float before dividing.
-    ```
-1. Select **Create Expression** and then select **OK** 
-
-1. Review the expression it should look like the following if not update it from here:
-
-    ```
-    if(greaterOrEquals(div(float(triggerBody()?['number_2']), float(triggerBody()?['number'])), 0.3), 3000, 0)
-    ```
-
-1. Select **Add**.
-
-1. Optionally, select **...** and then select **Rename** to change the step name to **Set ProductMixBonus**.
-
-1. Select **+ Add node** just before the last node **Respond to the agent**.
-
-1. Select **Variable** and then Select **Increment variable**.
-
-1. Select **TotalCommission** from the list of variable names.
-
-1. Select the lightening bolt next to the Value field to bring up the available dynamic data fields.
-
-1. Select **ProductMixBonus**.
-
-1. Optionally, select **...** and then select **Rename** to change the step name to **Add ProductMixBonus To TotalCommission**.
-
-#### Create the Response Message
-
-1. Select the **Respond to the agent** node at the bottom of the flow.
-
-1. Select **Add an output** and Select **Text**.
-
-1. Map **CommissionReport** in the name.
-
-1. Enter the following in the description:
-
-    ```
-    Report of the results of the commission calculation
-    ```
-1. Select **fx** to the right of the **Enter a value to respond with** field.
-
-1. Next we need to define the report details based on the variables we initiated and set. Enter the following in the formula input area:
-
-    ```
-    concat('COMMISSION CALCULATION REPORT
-    ===================================
-
-    SALES REPRESENTATIVE: ', triggerBody()?['text'], '
-
-    PERFORMANCE SUMMARY
-    -----------------------------------
-    Annual Revenue: $', formatNumber(triggerBody()?['number'], '#,##0.00'), '
-    Annual Quota: $', formatNumber(triggerBody()?['number_1'], '#,##0.00'), '
-    Strategic Product Revenue: $', formatNumber(triggerBody()?['number_2'], '#,##0.00'), '
-
-    COMMISSION BREAKDOWN
-    -----------------------------------
-    Commission Tier: ', variables('CommissionTier'), '
-    Commission Rate: ', formatNumber(mul(variables('CommissionRate'), 100), '#,##0.0'), '%
-    Base Commission: $', formatNumber(variables('BaseCommission'), '#,##0.00'), '
-
-    BONUS
-    -----------------------------------
-    ', if(greater(variables('ProductMixBonus'), 0), concat('Product Mix Bonus: $', formatNumber(variables('ProductMixBonus'), '#,##0.00'), ' (Strategic products >=30%)'), 'Product Mix Bonus: $0.00 (Strategic products <30%)'), '
-
-    TOTAL COMMISSION
-    -----------------------------------
-    $', formatNumber(variables('TotalCommission'), '#,##0.00'), '
-
-    ===================================
-    Calculation Date: ', formatDateTime(utcNow(), 'MMM dd, yyyy'))
-    ```
-1. Select **Add** to add the formula
-
-1. Select **Save Draft** in upper right corner of the screen.
-
-1. Select **Publish** to make your changes available for the agent to use.
-
-![Agent Flow](images/agentflow.jpg)
-
-#### Build the Conversation Topic
-
-1. Select **Agents** in the left side navigation.
-
-1. Select **Sales Commission Assistant** in the list of agents.
-
-1. In the top agent navigation, Select **Topics**.
-
-1. Select **+ Add a Topic** > **From blank**.
-
-1. Enter **Calculate My Commission** for the Name by selecting **Untitled** in the upper left corner of the screen.
-
-1. Enter the following in the **Describe what the topic does** input area:
-
-    ```
-    Calculate my commission
-    What's my commission
-    How much commission did I earn
-    Check commission
-    Commission calculator
-    Show my earnings
-    Calculate earnings
-    ```
-
-1. Select **Save**.
-
-1. Under the **Trigger** node, add an **Ask with adaptive card** node. 
-
-1. Select **"..."** in the upper right corner of the node you just added and select **Properties**.
-
-1. Select **Edit adaptive card**.  We need to tell the card what to display to the user, and then what to do with the responses. Enter the following into the **Card payload editor** replacing the existing text:
-
-    ```json
-    {
-        "type": "AdaptiveCard",
-        "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
-        "version": "1.5",
-        "body": [
-            {
-                "type": "Input.Text",
-                "label": "What is your name",
-                "placeholder": "SalesRepName",
-                "id": "SalesRepName"
-            },
-            {
-                "type": "Input.Number",
-                "label": "What is your total annual revenue? (Number only)",
-                "placeholder": "AnnualRevenue",
-                "id": "AnnualRevenue"
-            },
-            {
-                "type": "Input.Number",
-                "label": "What is your annual quota target? (Number only)",
-                "placeholder": "QuotaAmount",
-                "id": "QuotaAmount"
-            },
-            {
-                "type": "Input.Number",
-                "label": "How much revenue came from strategic products? (Number only)",
-                "placeholder": "StrategicProductRevenue",
-                "id": "StrategicProductRevenue"
-            },
-            {
-                "type": "ActionSet",
-                "actions": [
-                    {
-                        "type": "Action.Submit",
-                        "title": "Calculate Commission"
-                    }
-                ]
-            }
-        ]
-    }
-    ```
-
-    ![Adaptive Card](images/adaptivecard.jpg)
-
-1. Select **Save** and then Select **Close** in upper right corner to exit the editor.
-
-1. After the Adaptive card node, Select **+ Add node** > **Add a tool** and select the **Calculate Sales Commission**.
-
-1. Select your flow: **Calculate Sales Commission** and map the inputs:
-    - `SalesRepName` > Select variable `SalesRepName`
-    - `AnnualRevenue` > Select variable `AnnualRevenue`
-    - `QuotaAmount` > Select variable `QuotaAmount`
-    - `StrategicProductRevenue` > Select variable `StrategicProductRevenue`
-
-1. After the Calculate Sales Commission node,  Select **+ Add node** > **Send a message**.
-
-1. Enter **Here is your report:** in the message area.
-
-1. Select **+Add** and select **Basic Card**.
-
-1. In the **Basic Card properties**, Enter **Commission Report** in the Title field.
-
-1. Select **CommissionReport** for the Text field.
-
-1. Select **Save**.
-
-![Sales Commission Assistant workflow in Copilot Studio showing trigger, adaptive card form, and tool agent flow components](images/topic.jpg)
+    > [!TIP]
+    > This flow has already been provisioned for you with the commission calculation logic, input parameters, and response configuration. In a real implementation, you would build the agent flow yourself using Power Fx expressions — the logic could be as complex as needed and could use all the capabilities of flow.
 
 #### Test Your Commission Calculator
 
 1. Select **Test** in the upper right-hand corner of Copilot Studio.
 
-1. Type `Calculate my commission` and fill in the adaptive card with the following test data:
-    - **Name:** `Jennifer Rodriguez`
-    - **Annual Revenue:** `675000`
-    - **Annual Quota:** `400000`
-    - **Strategic Product Revenue:** `250000`
+1. Type the following in the test pane:
 
-1. Verify the results:
-    - Commission Tier: Tier 3 (12% rate)
+    ```
+    Calculate my commission
+    ```
+
+1. The agent will ask you for each piece of information one at a time. When prompted, enter the following values:
+
+    - **Name:**
+      ```
+      Jennifer Rodriguez
+      ```
+    - **Annual Revenue:**
+      ```
+      675000
+      ```
+    - **Quota Amount:**
+      ```
+      400000
+      ```
+    - **Strategic Product Revenue:**
+      ```
+      250000
+      ```
+
+1. Verify the results include:
+    - Commission Tier: Tier 3
+    - Commission Rate: 12.0%
     - Base Commission: $81,000.00
-    - Product Mix Bonus: $3,000.00 (250K/675K = 37%, above 30%)
+    - Product Mix Bonus: $3,000.00 (Strategic products >= 30%)
     - **Total Commission: $84,000.00**
 
-    ![Sales Commission Assistant calculating JP's commission with $84,000 total result displayed](images/test.jpg)
+1. Reset the conversation and test with a different scenario:
 
-1. Reset the conversation and test with a below-quota scenario:
-    - **Name:** `David Park`
-    - **Annual Revenue:** `75000`
-    - **Annual Quota:** `100000`
-    - **Strategic Product Revenue:** `10000`
+    ```
+    Calculate my commission
+    ```
 
-1. Verify: Commission Tier: Tier 0 (0% rate), Total Commission: $0.00
+1. When prompted, enter the following values:
+
+    - **Name:**
+      ```
+      David Park
+      ```
+    - **Annual Revenue:**
+      ```
+      75000
+      ```
+    - **Quota Amount:**
+      ```
+      100000
+      ```
+    - **Strategic Product Revenue:**
+      ```
+      10000
+      ```
+
+1. Verify the results include:
+    - Commission Tier: Tier 0
+    - Commission Rate: 0.0%
+    - Base Commission: $0.00
+    - Product Mix Bonus: $0.00 (Strategic products < 30%)
+    - **Total Commission: $0.00**
 
 ---
 
-### Congratulations! You've completed Use Case #2!
+### 🏅 Congratulations! You've completed Use Case #2!
 
 ---
 
@@ -852,7 +565,7 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 ---
 
-## Use Case #3: Connect an MCP Server for Live Data Access
+## 🧱 Use Case #3: Connect an MCP Server for Live Data Access
 
 Create a Copilot Agent that connects to the Dataverse MCP Server for real-time natural language access to business data.
 
@@ -979,7 +692,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 ---
 
-### Congratulations! You've completed Use Case #3!
+### 🏅 Congratulations! You've completed Use Case #3!
 
 ---
 
@@ -1001,7 +714,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 ---
 
-## Use Case #4: Create Custom Prompts for Structured Responses
+## 🔄 Use Case #4: Create Custom Prompts for Structured Responses
 
 Create a custom prompt tool that controls how your agent responds to conversations, including selecting which AI model to use.
 
@@ -1108,12 +821,19 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 #### Disable General Knowledge
 
+1. On the **Overview** page, scroll down to the **Knowledge** section and turn off **Web Search**.
+
 1. Select **Settings** in the upper right-hand corner.
 
-1. Scroll to the bottom of the **Generative AI** menu and turn off **Use general knowledge**.
+1. In the **Generative AI** menu, turn off **Allow ungrounded responses**.
+
+1. Verify that **Use information from the web** is also turned off.
+
+    > [!NOTE]
+    > The **Use information from the web** setting here is the same as the **Web Search** toggle on the Overview page. Changing it in one place updates it in the other.
 
     > [!TIP]
-    > To limit hallucinations, it is common practice to turn off the model's general knowledge. This restricts the agent to only the tools and knowledge you have provided.
+    > To limit hallucinations, it is common practice to turn off these settings. This restricts the agent to only the tools and knowledge you have provided, preventing it from generating responses based on general knowledge or web results.
 
 1. Select **Save**.
 
@@ -1132,7 +852,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
       ```
 
       ```
-      What time is it?
+      The weather is great today.
       ```
 
 1. Verify that the agent responds with friendly, professional chit chat responses.
@@ -1151,7 +871,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 ---
 
-### Congratulations! You've completed Use Case #4!
+### 🏅 Congratulations! You've completed Use Case #4!
 
 ---
 
@@ -1174,7 +894,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 ---
 
-## Extra Credit: Automate Legacy Systems with Computer Using Agents (CUA)
+## 🧱 Extra Credit: Automate Legacy Systems with Computer Using Agents (CUA)
 
 > [!NOTE]
 > **Optional - Extra Credit (~20 minutes):** This use case is optional and not included in the 60-minute lab time. Complete it if you have additional time or want to explore advanced autonomous agent capabilities.
@@ -1360,11 +1080,11 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 ---
 
-### Congratulations! You've completed the Extra Credit section!
+### 🏅 Congratulations! You've completed the Extra Credit section!
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting - so let's put your skills to the test.
 

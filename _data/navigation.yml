@@ -3,8 +3,8 @@ main:
     url: /
   - title: "All Labs"
     url: /labs/
-  - title: "Workshops"
-    url: /workshops/
+  - title: "Events"
+    url: /events/
   - title: "About"
     url: /about/
 

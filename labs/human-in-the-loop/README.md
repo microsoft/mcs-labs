@@ -4,7 +4,7 @@ Build an end-to-end expense claims solution where an employee submits an expense
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,24 +12,24 @@ Build an end-to-end expense claims solution where an employee submits an expense
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Create an Agent Flow with a Multistage Approval](#use-case-1-create-an-agent-flow-with-a-multistage-approval)
-  - [Use Case #2: Create and Configure an Agent](#use-case-2-create-and-configure-an-agent)
-  - [Use Case #3: Configure Email Tool and Agent Invocation](#use-case-3-configure-email-tool-and-agent-invocation)
-  - [Test the End-to-End Solution](#test-the-end-to-end-solution)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Create an Agent Flow with a Multistage Approval](#-use-case-1-create-an-agent-flow-with-a-multistage-approval)
+  - [Use Case #2: Create and Configure an Agent](#-use-case-2-create-and-configure-an-agent)
+  - [Use Case #3: Configure Email Tool and Agent Invocation](#-use-case-3-configure-email-tool-and-agent-invocation)
+  - [Test the End-to-End Solution](#-test-the-end-to-end-solution)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 Expense claims is a classic “high volume, high friction” process:
 - Employees want fast decisions and clear outcomes.
@@ -40,7 +40,7 @@ This lab demonstrates a practical pattern for designing agents that orchestrate 
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 In this lab, you’ll learn how to build an agent using Microsoft Copilot Studio that collects structured user input, invokes agent flows, orchestrates approvals, and notifies users of outcomes.
 
@@ -51,7 +51,7 @@ In this lab, you’ll learn how to build an agent using Microsoft Copilot Studio
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -62,7 +62,7 @@ In this lab, you’ll learn how to build an agent using Microsoft Copilot Studio
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 * [Microsoft Copilot Studio Documentation](https://learn.microsoft.com/microsoft-copilot-studio/)
 * [Microsoft Power Automate documentation](https://learn.microsoft.com/power-automate/)
@@ -73,7 +73,7 @@ In this lab, you’ll learn how to build an agent using Microsoft Copilot Studio
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Access to Microsoft Copilot Studio with appropriate licensing
 - A Microsoft Power Platform environment with at least an Environment Maker security role
@@ -83,7 +83,7 @@ In this lab, you’ll learn how to build an agent using Microsoft Copilot Studio
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll build an end-to-end expense claims process. By the end of the lab, you will:
 
@@ -96,21 +96,21 @@ In this lab, you'll build an end-to-end expense claims process. By the end of th
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create an Agent Flow with a Multistage Approval](#use-case-1-create-an-agent-flow-with-a-multistage-approval) | Automates approvals using AI, conditions, and human review | 20 min |
-| 2 | [Create and Configure an Agent](#use-case-2-create-and-configure-an-agent) | Collects structured input and triggers backend processes conversationally | 10 min |
-| 3 | [Configure Email Tool and Agent Invocation](#use-case-3-configure-email-tool-and-agent-invocation) | Notifies users of outcomes and completes the end-to-end process | 15 min |
+| 1 | [Create an Agent Flow with a Multistage Approval](#-use-case-1-create-an-agent-flow-with-a-multistage-approval) | Automates approvals using AI, conditions, and human review | 20 min |
+| 2 | [Create and Configure an Agent](#-use-case-2-create-and-configure-an-agent) | Collects structured input and triggers backend processes conversationally | 10 min |
+| 3 | [Configure Email Tool and Agent Invocation](#-use-case-3-configure-email-tool-and-agent-invocation) | Notifies users of outcomes and completes the end-to-end process | 15 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Create an Agent Flow with a Multistage Approval
+## 🧱 Use Case #1: Create an Agent Flow with a Multistage Approval
 
 Create an agent flow that receives expense details, loads a policy document, evaluates the claim using an AI stage, and (optionally) routes to manager approval.
 
@@ -266,11 +266,11 @@ Reject if ANY of the criteria is met. In the rationale, ensure you state all the
 
 ---
 
-### Congratulations! You've completed Use Case #1!
+### 🏅 Congratulations! You've completed Use Case #1!
 
 ---
 
-## Use Case #2: Create and Configure an Agent
+## 🔄 Use Case #2: Create and Configure an Agent
 
 Create an agent that collects expense details using an Adaptive Card, captures the receipt file, and calls the approval flow.
 
@@ -371,11 +371,11 @@ Enable a user-friendly front end that reliably initiates backend approval proces
 
 ---
 
-### Congratulations! You've completed Use Case #2!
+### 🏅 Congratulations! You've completed Use Case #2!
 
 ---
 
-## Use Case #3: Configure Email Tool and Agent Invocation
+## 📣 Use Case #3: Configure Email Tool and Agent Invocation
 
 Add a tool to send the employee an email with the final approval outcome and integrate it into the agent workflow.
 
@@ -468,7 +468,7 @@ Expense claim amount: {Amount} EUR
 
 ---
 
-## Test the End-to-End Solution
+## 🧪 Test the End-to-End Solution
 
 1. In Copilot Studio, go to **Agents** > **Expense Claims Agent**
 2. In **Test your agent** window, send message: `Submit expense report`
@@ -495,7 +495,7 @@ Expense claim amount: {Amount} EUR
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting - so let’s put your skills to the test.
 

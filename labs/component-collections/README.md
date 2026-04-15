@@ -4,7 +4,7 @@ Learn how to create, share, and manage reusable component collections to package
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,23 +12,23 @@ Learn how to create, share, and manage reusable component collections to package
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Create an Agent and Build a Component Collection](#use-case-1-create-an-agent-and-build-a-component-collection)
-  - [Use Case #2: Share Component Collections Across Agents](#use-case-2-share-component-collections-across-agents)
-  - [Use Case #3: Manage Component Collections](#use-case-3-manage-component-collections)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Create an Agent and Build a Component Collection](#-use-case-1-create-an-agent-and-build-a-component-collection)
+  - [Use Case #2: Share Component Collections Across Agents](#-use-case-2-share-component-collections-across-agents)
+  - [Use Case #3: Manage Component Collections](#-use-case-3-manage-component-collections)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 **Makers and Architects** - Ever built a great topic or knowledge source in one agent and wished you could easily reuse it in another without duplicating work?
 
@@ -46,7 +46,7 @@ Think of component collections like shared libraries in software development:
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 As organizations build more agents in Copilot Studio, the need to share and reuse components across agents becomes critical. Component collections solve this by allowing you to package topics, knowledge sources, and other components into reusable bundles that can be installed in multiple agents. When you update a component in one place, the change is reflected everywhere it is used.
 
@@ -56,7 +56,7 @@ This lab teaches you how to create component collections, share them across agen
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -68,20 +68,20 @@ This lab teaches you how to create component collections, share them across agen
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 * [Component collections overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-export-import-copilot-components)
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 - Access to Microsoft Copilot Studio
 - Permissions to create agents and modify settings in your environment
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll create a component collection from an existing agent and learn how to share and manage it across multiple agents. By the end of the lab, you will:
 
@@ -94,21 +94,21 @@ In this lab, you'll create a component collection from an existing agent and lea
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create an Agent and Build a Component Collection](#use-case-1-create-an-agent-and-build-a-component-collection) | Package topics and knowledge into a reusable component collection | 10 min |
-| 2 | [Share Component Collections Across Agents](#use-case-2-share-component-collections-across-agents) | Share and edit components across multiple agents with automatic sync | 10 min |
-| 3 | [Manage Component Collections](#use-case-3-manage-component-collections) | Control access, set primary agents, and explore solution awareness | 10 min |
+| 1 | [Create an Agent and Build a Component Collection](#-use-case-1-create-an-agent-and-build-a-component-collection) | Package topics and knowledge into a reusable component collection | 10 min |
+| 2 | [Share Component Collections Across Agents](#-use-case-2-share-component-collections-across-agents) | Share and edit components across multiple agents with automatic sync | 10 min |
+| 3 | [Manage Component Collections](#-use-case-3-manage-component-collections) | Control access, set primary agents, and explore solution awareness | 10 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Create an Agent and Build a Component Collection
+## 🧱 Use Case #1: Create an Agent and Build a Component Collection
 
 Create an agent from a template, build a custom topic, and package it with knowledge into a reusable component collection.
 
@@ -132,7 +132,7 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 #### Create the Safe Travels Agent
 
-1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com.
+1. Go to the Copilot Studio home page at <a href="https://copilotstudio.microsoft.com" target="_blank">copilotstudio.microsoft.com</a>.
 
 1. Select **Agents** on the left navigation.
 
@@ -205,7 +205,7 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 ---
 
-### Congratulations! You've completed Use Case #1!
+### 🏅 Congratulations! You've completed Use Case #1!
 
 ---
 
@@ -232,7 +232,7 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 ---
 
-## Use Case #2: Share Component Collections Across Agents
+## 🔄 Use Case #2: Share Component Collections Across Agents
 
 Add a component collection to a new agent and verify that shared edits sync automatically across all connected agents.
 
@@ -307,7 +307,7 @@ Install a component collection in a new agent and verify that shared editing wor
 
 ---
 
-### Congratulations! You've completed Use Case #2!
+### 🏅 Congratulations! You've completed Use Case #2!
 
 ---
 
@@ -334,7 +334,7 @@ Install a component collection in a new agent and verify that shared editing wor
 
 ---
 
-## Use Case #3: Manage Component Collections
+## 🧱 Use Case #3: Manage Component Collections
 
 Explore component collection details, control access by setting a primary agent, and understand solution awareness for ALM practices.
 
@@ -407,7 +407,7 @@ Manage component collection access, set a primary agent, and explore solution in
 
 ---
 
-### Congratulations! You've completed Use Case #3!
+### 🏅 Congratulations! You've completed Use Case #3!
 
 ---
 
@@ -425,7 +425,7 @@ Manage component collection access, set a primary agent, and explore solution in
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting - so let's put your skills to the test.
 

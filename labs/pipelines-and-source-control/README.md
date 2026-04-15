@@ -4,7 +4,7 @@ Master the deployment of your Microsoft Copilot Studio agents across environment
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,23 +12,23 @@ Master the deployment of your Microsoft Copilot Studio agents across environment
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why Master ALM Deployment?](#why-master-alm-deployment)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Set Up Git For Source Control](#use-case-1-set-up-git-source-control)
-  - [Use Case #2: Create Power Platform pipelines for deployment](#use-case-2-create-power-platform-pipelines-for-deployment)
-  - [Use Case #3: Commit changes and understand source control structure](#use-case-3-commit-changes-and-understand-source-control-structure)
+- [Why Master ALM Deployment?](#-why-master-alm-deployment)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Set Up Git For Source Control](#-use-case-1-set-up-git-source-control)
+  - [Use Case #2: Create Power Platform pipelines for deployment](#-use-case-2-create-power-platform-pipelines-for-deployment)
+  - [Use Case #3: Commit changes and understand source control structure](#-use-case-3-commit-changes-and-understand-source-control-structure)
 
 ---
 
-## Why Master ALM Deployment?
+## 🤔 Why Master ALM Deployment?
 
 **Ready to move beyond development?** You've built amazing agents in your dev environment, but now you need to deploy them safely and consistently to test and production environments.
 
@@ -46,7 +46,7 @@ Think of deployment pipelines as your quality assurance assembly line:
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 Application Lifecycle Management (ALM) deployment ensures your solutions move safely and consistently from development through testing to production. This lab builds on ALM foundations to implement automated deployment pipelines and understand the complete deployment lifecycle.
 
@@ -62,7 +62,7 @@ With Power Platform pipelines, this becomes an automated, governed process with 
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -76,7 +76,7 @@ With Power Platform pipelines, this becomes an automated, governed process with 
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 * [Overview of pipelines in Power Platform](https://learn.microsoft.com/power-platform/alm/pipelines)
 * [Export and import agents using solutions](https://learn.microsoft.com/microsoft-copilot-studio/authoring-solutions-import-export)
@@ -86,7 +86,7 @@ With Power Platform pipelines, this becomes an automated, governed process with 
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 * Completion of the [Set yourself up for success](https://github.com/microsoft/mcs-labs/tree/main/labs/setup-for-success) lab with a solution containing environment variables and connection references.
 * Access to multiple Power Platform environments (DEV, PROD). These are provided in the lab setup.
@@ -95,7 +95,7 @@ With Power Platform pipelines, this becomes an automated, governed process with 
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll implement a complete ALM deployment process for Microsoft Copilot Studio using Power Platform pipelines. By the end of the lab, you will:
 
@@ -107,21 +107,21 @@ In this lab, you'll implement a complete ALM deployment process for Microsoft Co
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Set Up Git For Source Control](#use-case-1-set-up-git-source-control) | Track and evolve – Use Git to version, review, and automate deployment of your agent assets. | 10 minutes |
-| 2 | [Create Power Platform pipelines for deployment](#use-case-2-create-power-platform-pipelines-for-deployment) | Automate with confidence – Set up governed, repeatable deployment workflows that democratize ALM for all makers while maintaining security and control through platform governance. | 10 min |
-| 3 | [Commit changes and understand source control structure](#use-case-3-commit-changes-and-understand-source-control-structure) | Track and structure – Use Git integration to maintain deployment history and understand how solution components are organized in source control. | 5 min |
+| 1 | [Set Up Git For Source Control](#-use-case-1-set-up-git-source-control) | Track and evolve – Use Git to version, review, and automate deployment of your agent assets. | 10 minutes |
+| 2 | [Create Power Platform pipelines for deployment](#-use-case-2-create-power-platform-pipelines-for-deployment) | Automate with confidence – Set up governed, repeatable deployment workflows that democratize ALM for all makers while maintaining security and control through platform governance. | 10 min |
+| 3 | [Commit changes and understand source control structure](#-use-case-3-commit-changes-and-understand-source-control-structure) | Track and structure – Use Git integration to maintain deployment history and understand how solution components are organized in source control. | 5 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Set up Git source control
+## 🔄 Use Case #1: Set up Git source control
 
 > [!TIP]
 > This lab is optional and won't block your progress in future labs.
@@ -178,7 +178,7 @@ In this section, you'll learn how to create a new project in Azure DevOps, how t
 
    ![alt text](images/azure-devops-initialize-branch.png) 
     
->  You’ve set up the Git repo! Now return to Microsoft Copilot Studio.
+> 🎉 You’ve set up the Git repo! Now return to Microsoft Copilot Studio.
 
 ### Connecting Microsoft Copilot Studio to Git
 
@@ -216,7 +216,7 @@ In this section, you'll learn how to create a new project in Azure DevOps, how t
 
 ---
 
-### Congratulations! You've set up Git source control!
+###  🏅 Congratulations! You've set up Git source control!
 
 ---
 
@@ -234,7 +234,7 @@ In this section, you'll learn how to create a new project in Azure DevOps, how t
 
 ---
 
-## Use Case #2: Create Power Platform pipelines for deployment
+## 🚀 Use Case #2: Create Power Platform pipelines for deployment
 
 Set up automated deployment pipelines that democratize ALM while maintaining proper governance and security through platform controls.
 
@@ -307,7 +307,7 @@ the agent. Tell the agent to "Provision a PROD environment".  You are limited to
 
 ---
 
-### Congratulations! You've created your deployment pipeline!
+###  🏅 Congratulations! You've created your deployment pipeline!
 
 ---
 
@@ -329,7 +329,7 @@ the agent. Tell the agent to "Provision a PROD environment".  You are limited to
 
 ---
 
-## Use Case #3: Commit changes and understand source control structure
+## 📝 Use Case #3: Commit changes and understand source control structure
 
 Use Git integration to track deployment changes and understand how Power Platform solution components are organized in source control.
 
@@ -409,7 +409,7 @@ Commit deployment artifacts to Git and understand the structure of unpacked Powe
 
 ---
 
-### Congratulations! You've mastered ALM deployment with pipelines and source control!
+###  🏅 Congratulations! You've mastered ALM deployment with pipelines and source control!
 
 ---
 
@@ -429,23 +429,23 @@ Commit deployment artifacts to Git and understand the structure of unpacked Powe
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 **ALM golden rules reinforced:**
 
- **Work in the context of solutions** – Pipelines require properly structured solutions for deployment automation.
+✅ **Work in the context of solutions** – Pipelines require properly structured solutions for deployment automation.
 
- **Create separate solutions only if you need to deploy components independently** – Pipelines work best with cohesive solution packaging.
+✅ **Create separate solutions only if you need to deploy components independently** – Pipelines work best with cohesive solution packaging.
 
- **Use a custom publisher and prefix** – Maintains clear ownership in automated deployment scenarios.
+✅ **Use a custom publisher and prefix** – Maintains clear ownership in automated deployment scenarios.
 
- **Use environment variables for settings and secrets that change across environments** – Pipelines validate and update these automatically during deployment.
+✅ **Use environment variables for settings and secrets that change across environments** – Pipelines validate and update these automatically during deployment.
 
- **Export and deploy solutions as managed, unless setting up a dev environment** – Pipelines automatically handle this, ensuring governance and preventing unauthorized changes.
+✅ **Export and deploy solutions as managed, unless setting up a dev environment** – Pipelines automatically handle this, ensuring governance and preventing unauthorized changes.
 
- **Don't do customizations outside of dev** – Managed Environments enforce this rule, blocking unmanaged customizations in target environments.
+✅ **Don't do customizations outside of dev** – Managed Environments enforce this rule, blocking unmanaged customizations in target environments.
 
- **Consider automating ALM for source control and automated deployments** – Pipelines provide this automation while remaining extensible for advanced scenarios.
+✅ **Consider automating ALM for source control and automated deployments** – Pipelines provide this automation while remaining extensible for advanced scenarios.
 
 > [!IMPORTANT]
 > **Critical reminder about non-solution-aware settings:**

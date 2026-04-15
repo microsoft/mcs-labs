@@ -3,7 +3,7 @@
 - [What's changing](#whats-changing)
 - [How to run locally](#how-to-run-locally)
 - [Open questions](#open-questions)
-- [What to expect](#what-to-expect) — [Homepage](#homepage) · [Labs index](#labs-index-labs) · [Lab detail](#lab-detail-pages) · [Workshops index](#workshops-index-workshops) · [Workshop detail](#workshop-detail-pages) · [About](#about-page-about) · [Navigation](#navigation) · [Feedback](#feedback)
+- [What to expect](#what-to-expect) — [Homepage](#homepage) · [Labs index](#labs-index-labs) · [Lab detail](#lab-detail-pages) · [Events index](#events-index-events) · [Event detail](#event-detail-pages) · [About](#about-page-about) · [Navigation](#navigation) · [Feedback](#feedback)
 - [What to look for](#what-to-look-for)
 
 ## What's changing
@@ -48,7 +48,7 @@ Found a bug or have a suggestion? **[Open a redesign feedback issue](https://git
 ## What to expect
 
 ### Homepage
-Dark gradient hero banner with live stats (lab count, hours, levels, workshops), learning path cards, and workshop cards.
+Dark gradient hero banner with live stats (lab count, hours, levels, events), learning path cards, and event cards.
 
 ![Homepage](screenshots/homepage.png)
 
@@ -62,15 +62,15 @@ Structured header with metadata pills (level, duration, section). Table of conte
 
 ![Lab detail](screenshots/lab-detail.png)
 
-### Workshops index (`/workshops/`)
-Card grid showing each workshop with computed duration and level ranges.
+### Events index (`/events/`)
+Card grid showing each event with computed duration and level ranges.
 
-![Workshops index](screenshots/workshops-index.png)
+![Events index](screenshots/events-index.png)
 
-### Workshop detail pages
-Hero banner with workshop stats and an ordered lab card list. Feedback section at the bottom.
+### Event detail pages
+Hero banner with event stats and an ordered lab card list. Feedback section at the bottom.
 
-![Workshop detail](screenshots/workshop-detail.png)
+![Event detail](screenshots/event-detail.png)
 
 ### About page (`/about/`)
 New page showcasing the Copilot Acceleration Team (CAT) with a hero banner, team card grid, and an about-the-labs section.
@@ -78,10 +78,10 @@ New page showcasing the Copilot Acceleration Team (CAT) with a hero banner, team
 ![About](screenshots/about.png)
 
 ### Navigation
-Top nav bar: **Home | All Labs | Workshops | About**. Left sidebar groups labs by section (Core, Intermediate, Advanced, Specialized, Optional, External).
+Top nav bar: **Home | All Labs | Events | About**. Left sidebar groups labs by section (Core, Intermediate, Advanced, Specialized, Optional, External).
 
 ### Feedback
-Every lab and workshop page has an [utterances](https://utteranc.es/) comment section — GitHub-backed, so feedback shows up as GitHub Issues.
+Every lab and event page has an [utterances](https://utteranc.es/) comment section — GitHub-backed, so feedback shows up as GitHub Issues.
 
 > **Note:** The utterances widget won't render locally or on non-deployed branches. It only activates on the deployed domain with the [utterances GitHub app](https://github.com/apps/utterances) installed.
 
@@ -91,11 +91,11 @@ Every lab and workshop page has an [utterances](https://utteranc.es/) comment se
 
 1. **Overall feel** — clean, modern layout with consistent card-based UI and dark hero banners
 2. **Nav** — top bar and left sidebar both work, "About" link routes correctly
-3. **Homepage** — hero stats are accurate, learning path and workshop cards render
+3. **Homepage** — hero stats are accurate, learning path and event cards render
 4. **Labs index** — all labs appear as cards with correct pills
 5. **Lab pages** — sticky TOC on the right, structured header, "Leave feedback" pill
-6. **`/workshops/`** — descriptions fully visible, duration/level pills computed correctly
-7. **Workshop detail pages** — hero stats, ordered lab list, feedback section at bottom
+6. **`/events/`** — descriptions fully visible, duration/level pills computed correctly
+7. **Event detail pages** — hero stats, ordered lab list, feedback section at bottom
 8. **`/about/`** — hero + team cards + about section
 9. **Responsive** — check on narrow viewports (TOC should collapse, grids reflow)
 

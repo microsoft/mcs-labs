@@ -4,7 +4,7 @@ Build an autonomous Copilot Studio agent that retrieves financial portfolio data
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,22 +12,22 @@ Build an autonomous Copilot Studio agent that retrieves financial portfolio data
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Create and Configure an Autonomous Agent](#use-case-1-create-and-configure-an-autonomous-agent)
-  - [Use Case #2: Add Computer Use and Email Connector](#use-case-2-add-computer-use-and-email-connector)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Create and Configure an Autonomous Agent](#-use-case-1-create-and-configure-an-autonomous-agent)
+  - [Use Case #2: Add Computer Use and Email Connector](#️-use-case-2-add-computer-use-and-email-connector)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 Legacy systems without APIs create major roadblocks for automation. Traditional RPA often relies on fragile screen-scraping or manual workarounds, which slow down decision-making, increase errors, and reduce productivity.
 
@@ -35,7 +35,7 @@ This lab introduces Microsoft Copilot Studio and Computer Using Agents (CUA) as 
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 In this lab, you’ll learn how to build an autonomous agent using Microsoft Copilot Studio. This agent will simulate human interaction with a legacy internal system to retrieve financial portfolio data without requiring direct API access.
 
@@ -49,7 +49,7 @@ By implementing a Copilot Studio agent, advisors can securely and instantly retr
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -61,7 +61,7 @@ By implementing a Copilot Studio agent, advisors can securely and instantly retr
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 * [Microsoft Copilot Studio Documentation](https://learn.microsoft.com/microsoft-copilot-studio/)
 * [Copilot Studio Triggers](https://learn.microsoft.com/microsoft-copilot-studio/authoring-triggers-about)
@@ -71,14 +71,14 @@ By implementing a Copilot Studio agent, advisors can securely and instantly retr
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 * Access to Microsoft Copilot Studio with appropriate licensing
 * Office 365 environment with Outlook integration enabled
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll build an autonomous portfolio lookup agent that retrieves portfolio information from an internal legacy system. By the end of the lab, you will:
 
@@ -89,20 +89,20 @@ In this lab, you'll build an autonomous portfolio lookup agent that retrieves po
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create and Configure an Autonomous Agent](#use-case-1-create-and-configure-an-autonomous-agent) | Establishes the foundation for automated email processing with intelligent trigger configuration | 10 min |
-| 2 | [Add Computer Use and Email Connector](#use-case-2-add-computer-use-and-email-connector) | Enables automated data retrieval from a legacy internal system lacking API connectivity, without requiring backend access or system modifications, by implementing a non-intrusive integration layer. Delivers comprehensive, automated email responses containing only the specifically requested data. | 10 min |
+| 1 | [Create and Configure an Autonomous Agent](#-use-case-1-create-and-configure-an-autonomous-agent) | Establishes the foundation for automated email processing with intelligent trigger configuration | 10 min |
+| 2 | [Add Computer Use and Email Connector](#️-use-case-2-add-computer-use-and-email-connector) | Enables automated data retrieval from a legacy internal system lacking API connectivity, without requiring backend access or system modifications, by implementing a non-intrusive integration layer. Delivers comprehensive, automated email responses containing only the specifically requested data. | 10 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Create and Configure an Autonomous Agent
+## 🔄 Use Case #1: Create and Configure an Autonomous Agent
 
 Set up the foundational autonomous agent with email triggers that automatically activates when email requests arrive.
 
@@ -160,11 +160,11 @@ Learn how to create and configure an autonomous agent that listens for specific 
 
 ---
 
-### Congratulations! You've completed Use Case #1!
+###  🏅 Congratulations! You've completed Use Case #1!
 
 ---
 
-## Use Case #2: Add Computer Use and Email Connector
+## 🖥️ Use Case #2: Add Computer Use and Email Connector
 
 Configure a Computer use tool that logs into a computer, navigates through a website, searches and retrieves financial portfolio data. Then use the Office 365 Outlook connector to reply with the requested data.
 
@@ -319,11 +319,11 @@ Learn how to integrate and configure tools for desktop automation and email comm
 
 ---
 
-### Congratulations! You've completed Use Case #2!
+###  🏅 Congratulations! You've completed Use Case #2!
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting - so let's put your skills to the test.
 

@@ -21,8 +21,8 @@ body:
         - Homepage
         - Labs index (/labs/)
         - Lab detail page
-        - Workshops index (/workshops/)
-        - Workshop detail page
+        - Events index (/events/)
+        - Event detail page
         - About page (/about/)
         - Navigation / sidebar
         - Other

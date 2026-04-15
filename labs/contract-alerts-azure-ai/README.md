@@ -4,7 +4,7 @@ Configure Copilot Studio agents to proactively notify users, search contract doc
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration      | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
 | ----- | ------- | ------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -12,25 +12,25 @@ Configure Copilot Studio agents to proactively notify users, search contract doc
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Purpose](#purpose)
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Event-Driven Contract Notifications](#use-case-1-event-driven-contract-notifications)
-  - [Use Case #2: Intelligent Document Search and Audio Transcription](#use-case-2-intelligent-document-search-and-audio-transcription)
-- [Summary of Learnings](#summary-of-learnings)
-- [Azure Setup (For Reference Only)](#azure-setup-for-reference-only)
+- [Purpose](#-purpose)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Event-Driven Contract Notifications](#-use-case-1-event-driven-contract-notifications)
+  - [Use Case #2: Intelligent Document Search and Audio Transcription](#-use-case-2-intelligent-document-search-and-audio-transcription)
+- [Summary of Learnings](#-summary-of-learnings)
+- [Azure Setup (For Reference Only)](#️-azure-setup-for-reference-only)
 
 ---
 
-## Purpose
+## 🎯 Purpose
 
 After completing this lab, participants will be able to:
 
@@ -39,7 +39,7 @@ After completing this lab, participants will be able to:
 - Integrate **Azure Speech-to-Text** services to automatically **transcribe audio files** and return insights through Copilot Studio.
 - Understand how to combine **Low-code** and **Azure AI-based** services to extend **Copilot Studio** functionality end-to-end.
 
-## Why This Matters
+## 🤔 Why This Matters
 
 This lab demonstrates how Copilot Studio can move beyond simple chat-based interactions into **real-world automation and intelligence**.
 
@@ -55,7 +55,7 @@ Together, these skills showcase how **Copilot Studio + Azure AI** can transform 
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 As organizations adopt AI copilots across departments, the real value comes not from basic Q&A, but from connecting those copilots to **real business data and workflows**.
 
@@ -82,7 +82,7 @@ The lab is divided into **three guided modules (2A, 2B, and 2C)** plus an **Azur
 
 Together, these modules illustrate how to evolve a Copilot from a simple chat interface into a connected, intelligent assistant that can see, search, and listen across enterprise data sources.
 
-## Real-world example
+## 💼 Real-world example
 
 Imagine a **sales operations team** that handles dozens of new contracts and client calls every week.  
 
@@ -101,7 +101,7 @@ Imagine a **sales operations team** that handles dozens of new contracts and cli
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept                                         | Why it matters                                                                                                                                                                                                                                                                                           |
 | ----------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -112,7 +112,7 @@ Imagine a **sales operations team** that handles dozens of new contracts and cli
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 - [Advanced proactive messaging - Microsoft Copilot Studio | Microsoft Learn](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-proactive-message)
 - [Connect to Azure AI Search - Microsoft Copilot Studio | Microsoft Learn](https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-azure-ai-search)
@@ -121,7 +121,7 @@ Imagine a **sales operations team** that handles dozens of new contracts and cli
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 - **Access to Microsoft Copilot Studio**, with permissions to create, edit, and publish agents and agent flows.
 - Contoso Agent created in **Lab 1** (or equivalent Copilot Studio agent).
@@ -134,7 +134,7 @@ Imagine a **sales operations team** that handles dozens of new contracts and cli
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll transform your Copilot Studio agent into an intelligent, event-driven assistant that connects to Azure AI services. By the end of the lab, you will:
 
@@ -146,20 +146,20 @@ In this lab, you'll transform your Copilot Studio agent into an intelligent, eve
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case                                                                                                                | Value added                                                                                             | Effort |
 | ---- | ----------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------ |
-| 1    | [Event-Driven Contract Notifications](#use-case-1-event-driven-contract-notifications)                                 | Automate contract processing with proactive Teams notifications and AI-powered content extraction       | 35 min |
-| 2    | [Intelligent Document Search and Audio Transcription](#use-case-2-intelligent-document-search-and-audio-transcription) | Enable semantic document search and speech-to-text capabilities for comprehensive business intelligence | 30 min |
+| 1    | [Event-Driven Contract Notifications](#-use-case-1-event-driven-contract-notifications)                                 | Automate contract processing with proactive Teams notifications and AI-powered content extraction       | 35 min |
+| 2    | [Intelligent Document Search and Audio Transcription](#-use-case-2-intelligent-document-search-and-audio-transcription) | Enable semantic document search and speech-to-text capabilities for comprehensive business intelligence | 30 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Event-Driven Contract Notifications
+## 🧱 Use Case #1: Event-Driven Contract Notifications
 
 Build an intelligent agent flow that automatically detects new contract uploads and sends proactive Teams notifications with AI-extracted key details.
 
@@ -323,7 +323,7 @@ This is what we will achieve next in **Lab 2B**.
 
 ---
 
-### Congratulations! You've completed Event-Driven Contract Notifications
+### 🏅 Congratulations! You've completed Event-Driven Contract Notifications
 
 ---
 
@@ -349,7 +349,7 @@ This is what we will achieve next in **Lab 2B**.
 
 ---
 
-## Use Case #2: Intelligent Document Search and Audio Transcription
+## 🔄 Use Case #2: Intelligent Document Search and Audio Transcription
 
 Connect Azure AI Search for semantic document search and integrate Speech-to-Text services for comprehensive business intelligence capabilities.
 
@@ -559,7 +559,7 @@ In your Agent **Test pane**, send a message:
 
 ---
 
-### Congratulations! You've completed Intelligent Document Search and Audio Transcription
+### 🏅 Congratulations! You've completed Intelligent Document Search and Audio Transcription
 
 ---
 
@@ -577,7 +577,7 @@ In your Agent **Test pane**, send a message:
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 
@@ -606,7 +606,7 @@ By following these principles, you'll create powerful, intelligent agents that s
 
 ---
 
-## Azure Setup (For Reference Only)
+## ⚙️ Azure Setup (For Reference Only)
 
 This section provides background on the **Azure resources** that power your agent capabilities—**Blob Storage**, **Azure AI Search**, **Azure OpenAI embeddings**, and **Speech Services**. You don't need to perform these steps for the lab as these resources are **already pre-created for this lab**. This reference helps you understand how each component fits into the overall solution architecture. You'll see how contract documents are stored, indexed, and transcribed behind the scenes—so you can replicate or extend this setup in your own environment later.
 

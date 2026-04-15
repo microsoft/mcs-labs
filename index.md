@@ -189,22 +189,40 @@ header:
 {% for lab in all_labs %}{% assign total_duration = total_duration | plus: lab.duration %}{% endfor %}
 {% assign total_hours = total_duration | divided_by: 60.0 | round: 1 %}
 {% assign levels = all_labs | map: "difficulty" | uniq %}
-{% assign all_workshops = site.workshops | sort: "order" %}
+{% assign all_events = site.events | sort: "order" %}
 
 <div class="home-hero">
   <h2>Hands-on labs for building AI agents</h2>
-  <p>Learn Microsoft Copilot Studio through guided, practical labs. From your first agent to autonomous AI — choose a path that matches your skill level.</p>
+  <p>Learn Microsoft Copilot agents through guided, practical labs. From your first agent to autonomous AI — choose a path that matches your skill level.</p>
   <div class="home-hero-actions">
-    <a href="{{ '/labs/' | relative_url }}" class="btn-primary">Browse all labs</a>
-    <a href="{{ '/workshops/bootcamp/' | relative_url }}" class="btn-outline">Start bootcamp</a>
+    <a href="{{ '/events/' | relative_url }}" class="btn-primary">Browse all events</a>
+    <a href="{{ '/labs/' | relative_url }}" class="btn-outline">Browse all labs</a>
   </div>
   <ul class="home-stats">
     <li><strong>{{ all_labs.size }}</strong><span>Labs</span></li>
     <li><strong>~{{ total_hours }}h</strong><span>Content</span></li>
     <li><strong>{{ levels.size }}</strong><span>Levels</span></li>
-    <li><strong>{{ all_workshops.size }}</strong><span>Workshops</span></li>
+    <li><strong>{{ all_events.size }}</strong><span>Events</span></li>
   </ul>
 </div>
+
+{% assign accent_colors = "accent-blue,accent-green,accent-purple,accent-orange" | split: "," %}
+
+<h2 class="home-section-title">Events</h2>
+<ul class="journey-grid">
+  {% for event in all_events %}
+  {% assign color_idx = forloop.index0 | modulo: 4 %}
+  <li class="journey-card">
+    <div class="journey-card-accent {{ accent_colors[color_idx] }}"></div>
+    <h3><a href="{{ event.url | relative_url }}">{{ event.title }}</a></h3>
+    <div class="journey-card-desc">{{ event.description | truncate: 120 }}</div>
+    <div class="journey-card-meta">
+      <span class="journey-pill">Full day</span>
+      <span class="journey-pill">{{ event.labs.size }} labs</span>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
 
 <h2 class="home-section-title">Learning paths</h2>
 <ul class="journey-grid">
@@ -248,22 +266,4 @@ header:
       <span class="journey-pill">3 labs</span>
     </div>
   </li>
-</ul>
-
-{% assign accent_colors = "accent-blue,accent-green,accent-purple,accent-orange" | split: "," %}
-
-<h2 class="home-section-title">Workshops &amp; events</h2>
-<ul class="journey-grid">
-  {% for workshop in all_workshops %}
-  {% assign color_idx = forloop.index0 | modulo: 4 %}
-  <li class="journey-card">
-    <div class="journey-card-accent {{ accent_colors[color_idx] }}"></div>
-    <h3><a href="{{ workshop.url | relative_url }}">{{ workshop.title }}</a></h3>
-    <div class="journey-card-desc">{{ workshop.description | truncate: 120 }}</div>
-    <div class="journey-card-meta">
-      <span class="journey-pill">Full day</span>
-      <span class="journey-pill">{{ workshop.labs.size }} labs</span>
-    </div>
-  </li>
-  {% endfor %}
 </ul>

@@ -1,14 +1,14 @@
 ---
 title: "Agent Buildathon (1 Month)"
-description: "Extended buildathon program taking participants from declarative agents through custom agents, autonomous AI, and advanced scenarios over multiple sessions."
+description: "Comprehensive month-long agent development program covering declarative agents, autonomous AI, and enterprise deployment patterns."
 event_id: agent-buildathon-1month
-order: 6
+order: 5
 labs:
   - slug: agent-builder-m365
     label: "Lab 1"
   - slug: setup-for-success
     label: "Lab 2"
-  - slug: public-website-agent
+  - slug: core-concepts-agent-knowledge-tools
     label: "Lab 3"
   - slug: mbr-prep-sharepoint-agent
     label: "Lab 4"

@@ -43,7 +43,13 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
   .page__content:has(> .sidebar__right) > *:not(.sidebar__right) {
     grid-column: 1;
     min-width: 0;     // prevent grid blowout from wide tables/code
-    overflow-x: auto; // scroll wide tables within column
+  }
+
+  // Only scroll wide tables and code blocks, not all children
+  .page__content table,
+  .page__content div.highlighter-rouge,
+  .page__content figure.highlight {
+    overflow-x: auto;
   }
 
   // TOC sidebar spans full height, sticks on scroll
@@ -84,8 +90,10 @@ aside.sidebar__right {
   .toc__menu {
     padding: 0;
 
-    // Only show top-level (h2) items
-    ul { display: none; }
+    // Show h2 (top-level) and h3 (first nested ul)
+    // Hide h4+ (deeper nesting)
+    > li > ul { display: block; }
+    > li > ul > li > ul { display: none; }
 
     a {
       font-size: 0.78em;
@@ -101,6 +109,13 @@ aside.sidebar__right {
         color: #0078d4;
         border-left-color: #0078d4;
       }
+    }
+
+    // Indent h3 items
+    > li > ul > li > a {
+      padding-left: 1.4em;
+      font-size: 0.74em;
+      color: #8a8886;
     }
   }
 
@@ -246,26 +261,53 @@ p > code, li > code, td > code {
 // Lab header (rendered by _layouts/lab.html)
 // ---------------------------------------------------------------------------
 .lab-header {
-  margin: -0.5em 0 1em;
-  padding-bottom: 0.8em;
-  border-bottom: 1px solid #e8e6e4;
+  background: linear-gradient(135deg, #0f1b2d 0%, #1a3a5c 50%, #0f2440 100%);
+  color: #fff;
+  padding: 2em 2em 1.5em;
+  border-radius: 10px;
+  margin: -0.5em 0 1.5em;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -15%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(0,120,212,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
 
   h1 {
     font-size: 1.4em;
     font-weight: 700;
     letter-spacing: -0.01em;
-    color: #323130;
+    color: #fff;
     margin: 0 0 0.3em;
     line-height: 1.3;
+    border: none;
+    padding: 0;
   }
 }
 
 .lab-header-desc {
   font-size: 0.9em;
-  color: #605e5c;
+  color: rgba(255, 255, 255, 0.8);
   line-height: 1.5;
-  margin: 0 0 0.6em;
+  margin: 0 0 0.8em;
 }
+
+// Hide duplicate H1 title, description, and surrounding hrs from markdown content
+.lab-header + hr { display: none; }
+.lab-header + hr + h1 { display: none; }
+.lab-header + hr + h1 + p { display: none; }
+.lab-header + hr + h1 + p + hr { display: none; }
+// Also handle case without leading hr
+.lab-header + h1 { display: none; }
+.lab-header + h1 + p { display: none; }
+.lab-header + h1 + p + hr { display: none; }
 
 .lab-header-meta {
   display: flex;
@@ -281,13 +323,13 @@ p > code, li > code, td > code {
   border-radius: 100px;
   white-space: nowrap;
 }
-.lab-meta-pill-duration { background: #f3f2f1; color: #605e5c; }
-.lab-meta-pill-level-100 { background: #e6f2e6; color: #0e700e; }
-.lab-meta-pill-level-200 { background: #deecf9; color: #004578; }
-.lab-meta-pill-level-300 { background: #f0e6fc; color: #5b2d8e; }
-.lab-meta-pill-section { background: #fff; color: #605e5c; border: 1px solid #e1dfdd; }
-.lab-meta-pill-feedback { background: #fff; color: #0078d4; border: 1px solid #0078d4; text-decoration: none; cursor: pointer; }
-.lab-meta-pill-feedback:hover { background: #0078d4; color: #fff; }
+.lab-meta-pill-duration { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); }
+.lab-meta-pill-level-100 { background: rgba(16,124,16,0.25); color: #a3e4a3; }
+.lab-meta-pill-level-200 { background: rgba(0,120,212,0.25); color: #9ecbf6; }
+.lab-meta-pill-level-300 { background: rgba(127,57,251,0.25); color: #c9a8fc; }
+.lab-meta-pill-section { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.2); }
+.lab-meta-pill-feedback { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.25); text-decoration: none; cursor: pointer; }
+.lab-meta-pill-feedback:hover { background: rgba(255,255,255,0.2); color: #fff; }
 
 // ---------------------------------------------------------------------------
 // Misc

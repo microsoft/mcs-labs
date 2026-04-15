@@ -1,0 +1,44 @@
+name: New Lab Proposal
+description: Propose a new lab for the collection
+labels: ["type: new-lab"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Lab title
+      description: A short, descriptive title for the lab
+      placeholder: "e.g., Build a Dataverse MCP Connector"
+    validations:
+      required: true
+  - type: textarea
+    id: scenario
+    attributes:
+      label: What will the learner build?
+      description: Describe the end-to-end scenario and what the learner will have built by the end
+    validations:
+      required: true
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Difficulty
+      options:
+        - Beginner
+        - Intermediate
+        - Advanced
+    validations:
+      required: true
+  - type: textarea
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: What does the learner need before starting?
+      placeholder: |
+        - Copilot Studio environment
+        - Azure subscription
+        - ...
+  - type: textarea
+    id: duration
+    attributes:
+      label: Estimated duration
+      description: How long should this lab take?
+      placeholder: "e.g., 30 minutes, 1 hour"

@@ -4,7 +4,7 @@ Build the same agent across three governance zones (Green, Yellow, Red) to exper
 
 ---
 
-## Lab Details
+## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -12,22 +12,22 @@ Build the same agent across three governance zones (Green, Yellow, Red) to exper
 
 ---
 
-## Table of Contents
+## 📚 Table of Contents
 
-- [Why This Matters](#why-this-matters)
-- [Introduction](#introduction)
-- [Core Concepts Overview](#core-concepts-overview)
-- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
-- [Prerequisites](#prerequisites)
-- [Summary of Targets](#summary-of-targets)
-- [Use Cases Covered](#use-cases-covered)
-- [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Green and Yellow Zones — DLP-Restricted Agents](#use-case-1-green-and-yellow-zones--dlp-restricted-agents)
-  - [Use Case #2: Red Zone — Full Access and MCP Integration](#use-case-2-red-zone--full-access-and-mcp-integration)
+- [Why This Matters](#-why-this-matters)
+- [Introduction](#-introduction)
+- [Core Concepts Overview](#-core-concepts-overview)
+- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
+- [Prerequisites](#-prerequisites)
+- [Summary of Targets](#-summary-of-targets)
+- [Use Cases Covered](#-use-cases-covered)
+- [Instructions by Use Case](#️-instructions-by-use-case)
+  - [Use Case #1: Green and Yellow Zones — DLP-Restricted Agents](#-use-case-1-green-and-yellow-zones--dlp-restricted-agents)
+  - [Use Case #2: Red Zone — Full Access and MCP Integration](#-use-case-2-red-zone--full-access-and-mcp-integration)
 
 ---
 
-## Why This Matters
+## 🤔 Why This Matters
 
 **Makers and admins** — Ever built a great agent only to discover that a key knowledge source is blocked by your organization's policies? Or deployed an agent to a permissive environment and realized it returned unreliable results?
 
@@ -45,7 +45,7 @@ Think of governance zones like traffic lights:
 
 ---
 
-## Introduction
+## 🌐 Introduction
 
 Organizations adopt governance zones to balance innovation speed with data security. In Microsoft Copilot Studio, Data Loss Prevention (DLP) policies control which connectors and knowledge sources an agent can use. These policies are applied at the environment level, meaning the same agent definition can behave very differently depending on where it is deployed.
 
@@ -55,7 +55,7 @@ By completing this lab, you will build hands-on intuition for how governance zon
 
 ---
 
-## Core Concepts Overview
+## 🎓 Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -67,7 +67,7 @@ By completing this lab, you will build hands-on intuition for how governance zon
 
 ---
 
-## Documentation and Additional Training Links
+## 📄 Documentation and Additional Training Links
 
 * [Data loss prevention policies in Power Platform](https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention)
 * [Environments overview in Power Platform](https://learn.microsoft.com/en-us/power-platform/admin/environments-overview)
@@ -76,7 +76,7 @@ By completing this lab, you will build hands-on intuition for how governance zon
 
 ---
 
-## Prerequisites
+## ✅ Prerequisites
 
 * Access to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com).
 * Access to the **Bootcamp Green**, **Bootcamp Yellow**, and **Bootcamp Red** environments (pre-provisioned by the facilitator).
@@ -86,7 +86,7 @@ By completing this lab, you will build hands-on intuition for how governance zon
 
 ---
 
-## Summary of Targets
+## 🎯 Summary of Targets
 
 In this lab, you'll build the same Copilot Studio agent across three governance zones to compare their behavior side by side. By the end of the lab, you will:
 
@@ -99,20 +99,20 @@ In this lab, you'll build the same Copilot Studio agent across three governance 
 
 ---
 
-## Use Cases Covered
+## 🧩 Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Green and Yellow Zones — DLP-Restricted Agents](#use-case-1-green-and-yellow-zones--dlp-restricted-agents) | Experience how DLP policies progressively restrict or allow knowledge sources across environments | 25 min |
-| 2 | [Red Zone — Full Access and MCP Integration](#use-case-2-red-zone--full-access-and-mcp-integration) | Build an agent with full web access and explore MCP as a governed knowledge layer | 20 min |
+| 1 | [Green and Yellow Zones — DLP-Restricted Agents](#-use-case-1-green-and-yellow-zones--dlp-restricted-agents) | Experience how DLP policies progressively restrict or allow knowledge sources across environments | 25 min |
+| 2 | [Red Zone — Full Access and MCP Integration](#-use-case-2-red-zone--full-access-and-mcp-integration) | Build an agent with full web access and explore MCP as a governed knowledge layer | 20 min |
 
 ---
 
-## Instructions by Use Case
+## 🛠️ Instructions by Use Case
 
 ---
 
-## Use Case #1: Green and Yellow Zones — DLP-Restricted Agents
+## 🧱 Use Case #1: Green and Yellow Zones — DLP-Restricted Agents
 
 Build agents in the Green and Yellow governance zones to see how DLP policies progressively allow or block knowledge sources.
 
@@ -140,7 +140,32 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Select the **Environment selector** in the top-right corner of the screen. It make take a few seconds for the **Environment** list to become visible.
 
-1. Search for `Bootcamp Green` and select it.
+1. Search for the following and select it:
+
+    ```
+    Bootcamp Green
+    ```
+
+#### Create a Solution
+
+1. In the left navigation, select **"..."** and then select **Solutions**.
+
+1. Select **New solution** in the top navigation.
+
+1. Set the **Display name** to your username (e.g., `user01`).
+
+1. Set the **Name** to your username as well to ensure it is unique in this shared environment.
+
+    > [!NOTE]
+    > Solution names must be unique within an environment. Since this is a shared environment, using your username ensures there are no naming conflicts with other participants.
+
+1. Set the **Publisher** to **CAT** or the **Default Publisher** — either is fine for this lab.
+
+1. Select **Create**.
+
+#### Create the Agent
+
+1. Select **Home** in the left navigation to return to the main page.
 
 1. In the **"What would you like to build?"** pane, find the text area that says _"Start building by describing what your agent needs to do"_.
 
@@ -167,7 +192,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Before selecting the blue arrow to create, select the **Settings** wheel icon in the bottom-left corner.
 
-1. In the Settings pane, make sure you select the **Solution** that was created at the start of this bootcamp.
+1. In the Settings pane, select the **Solution** you created earlier in this lab (named with your username).
 
 1. Optionally, give your agent a custom **Schema Name**.
 
@@ -190,7 +215,11 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Select **SharePoint**.
 
-1. Enter the following for the URL: https://copilotstudiotraining.sharepoint.com/:p:/s/Workshop/IQDYEPT5O76JR5akoXWdwO-PAR3IVlIBJ-RqZqpHy2cCRLs?e=qpIVD6
+1. Enter the following for the URL:
+
+    ```
+    https://copilotstudiotraining.sharepoint.com/:p:/s/Workshop/IQDYEPT5O76JR5akoXWdwO-PAR3IVlIBJ-RqZqpHy2cCRLs?e=qpIVD6
+    ```
 
 1. Select **Add**.
 
@@ -251,7 +280,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 1. Notice that `learn.microsoft.com` shows a status of **Blocked**.
 
     > [!IMPORTANT]
-    > The status message will say something like _"Not allowed due to your organizational data loss prevention policies. Contact your admin."_ This is the DLP policy in action, blocking public website knowledge in the Green zone.
+    > The status message will say something like _"Not allowed due to your organizational data loss prevention policies. Contact your admin."_ This is the DLP policy in action, blocking public website knowledge in the Green zone. Additionally, publishing your agent will also be blocked while DLP policies are being enforced on knowledge sources. You must remove the blocked knowledge source before you can publish.
 
 ---
 
@@ -355,11 +384,11 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 1. Notice that the blog shows up as **Blocked**.
 
     > [!IMPORTANT]
-    > The Yellow zone only allows public knowledge from websites on the `microsoft.com` domain. The blog at `microsoft.github.io` is not on the `microsoft.com` domain, so it is blocked by the DLP policy.
+    > The Yellow zone only allows public knowledge from websites on the `microsoft.com` domain. The blog at `microsoft.github.io` is not on the `microsoft.com` domain, so it is blocked by the DLP policy. As with the Green zone, publishing your agent will also be blocked while DLP policies are being enforced on knowledge sources. You must remove the blocked knowledge source before you can publish.
 
 ---
 
-### Congratulations! You've completed Use Case #1!
+### 🏅 Congratulations! You've completed Use Case #1!
 
 ---
 
@@ -387,7 +416,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 ---
 
-## Use Case #2: Red Zone — Full Access and MCP Integration
+## 🔄 Use Case #2: Red Zone — Full Access and MCP Integration
 
 Build an agent in the Red zone with unrestricted public website access, then explore how an MCP server adds governed quality on top of open access.
 
@@ -504,7 +533,7 @@ Create a "Copilot Studio Advisor" agent in the Red zone with full public website
 
 ---
 
-### Congratulations! You've completed Use Case #2!
+### 🏅 Congratulations! You've completed Use Case #2!
 
 ---
 
@@ -530,7 +559,7 @@ Create a "Copilot Studio Advisor" agent in the Red zone with full public website
 
 ---
 
-## Summary of learnings
+## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting — so let's put your skills to the test.
 

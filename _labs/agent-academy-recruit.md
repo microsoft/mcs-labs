@@ -5,7 +5,7 @@ order: 160
 duration: 240
 difficulty: 200
 lab_type: external
-section: external
+section: external_labs
 external: true
 external_url: "https://microsoft.github.io/agent-academy/recruit/"
 repository: "microsoft/agent-academy"

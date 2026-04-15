@@ -165,7 +165,7 @@ classes: wide
 <div class="about-content">
   <p>MCS Labs is a collection of hands-on, guided labs for building AI agents with Microsoft Copilot Studio. Each lab walks you through a real-world scenario — from creating your first agent to deploying autonomous AI solutions.</p>
 
-  <p>Labs are organized by difficulty level (100–300) and grouped into workshops for instructor-led events and self-paced learning. All content is open-source and maintained by the Copilot Acceleration Team within Microsoft Customer Success.</p>
+  <p>Labs are organized by difficulty level (100–300) and grouped into events for instructor-led bootcamps, workshops, and self-paced learning. All content is open-source and maintained by the Copilot Acceleration Team within Microsoft Customer Success.</p>
 
-  <p>Whether you're a business user building your first agent or a developer integrating advanced connectors, there's a learning path for you. Browse <a href="{{ '/labs/' | relative_url }}">all labs</a> or pick a <a href="{{ '/workshops/' | relative_url }}">workshop</a> to get started.</p>
+  <p>Whether you're a business user building your first agent or a developer integrating advanced connectors, there's a learning path for you. Browse <a href="{{ '/labs/' | relative_url }}">all labs</a> or pick an <a href="{{ '/events/' | relative_url }}">event</a> to get started.</p>
 </div>

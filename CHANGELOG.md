@@ -5,6 +5,69 @@ All notable changes to the Microsoft Copilot Studio Labs will be documented in t
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 3.2.0 - 2026-03-20
+
+### Added
+- Presentation decks added to presentations folder (#227)
+- Presentations folder structure (#205)
+
+## 3.1.0 - 2026-02-26
+
+### Added
+- Optional Work tab experience steps to agent-builder-m365 lab (#190)
+- Bug Bash guide for reporting lab issues (#151)
+- Report Issue button to site navigation (#152)
+- mcs-governance lab, mcs-in-a-day-v2 event (#149, #150)
+- Required solution files for labs (#145)
+- New ALM consolidated lab combining setup-for-success and pipelines (#143)
+- Copilot Studio Tools lab (#142)
+- Dataverse MCP Connector lab (#140)
+- New Component Collections lab (#139)
+- Dataverse search steps (#137)
+- Copilot Studio bootcamp labs (#129)
+
+### Changed
+- Use README as source of truth for lab durations (#161)
+- Update BUG-BASH.md portal link to point to bootcamp event page (#160)
+- Refine instructions for Copilot Studio agent creation (#157)
+- Updates from testing (#155, #156)
+- Update component collection name and contents in Component Collections lab (#147)
+- Update root README with all labs (#146)
+- Update core-concepts-variables-agents-channels from testing (#144)
+- Update multi-agent lab copy (#128)
+- Update licensing guide and file size (#130)
+- Refactor core concepts into three focused labs (#131)
+
+### Fixed
+- Fix note callout formatting in governance lab (#199)
+- Revise prompt for visual sales chart in README (#169)
+- Refine summary of prompt in README (#170)
+- Update governance lab agent URLs and fix Dockerfile multi-arch support (#197)
+- Add missing mcs-governance lab to README table (#154)
+- Fix mcs-ALM 404 by renaming folder to lowercase mcs-alm (#153)
+- Fix grammar and spelling throughout multi-agent lab (#138)
+- Restore multi-agent indexing (#136)
+
+## 3.0.0 - 2026-01-28
+
+### Added
+- New multi-agent lab (#122)
+- Human-in-the-loop lab — expense claims with approvals (#118)
+- Setup-for-success added to buildathon 1-month journey (#113)
+- Workflow concurrency controls (#112)
+
+### Changed
+- Update top-level docs for multi-agent lab (#124)
+- Multi-agent lab: Remove indexing instructions (#123)
+- Update bootcamp docs (#119)
+- Update AI builder labs (#111)
+
+### Fixed
+- Add .gitignore for data config (#121)
+- Fix typo in lab instructions (#120)
+- Add tip to Ask Me Anything lab (#116)
+- Fix minor typos (#110)
+
 ## Unreleased
 
 ### Added
