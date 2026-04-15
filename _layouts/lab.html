@@ -26,21 +26,8 @@ layout: single
     <span class="lab-meta-pill lab-meta-pill-level-{{ page.difficulty }}">Level {{ page.difficulty }}</span>
     <span class="lab-meta-pill lab-meta-pill-duration">{{ page.duration }} min</span>
     <span class="lab-meta-pill lab-meta-pill-section">{{ section_label }}</span>
-    <a href="#feedback" class="lab-meta-pill lab-meta-pill-feedback">Leave feedback</a>
+    <a href="https://github.com/microsoft/mcs-labs/issues/new?template=bug_report.yml&title=%5B{{ page.slug }}%5D+" target="_blank" rel="noopener" class="lab-meta-pill lab-meta-pill-feedback">Report an issue</a>
   </div>
 </div>
 
 {{ content }}
-
-<section id="feedback" style="margin-top: 3em; padding-top: 2em; border-top: 1px solid #e8e6e4;">
-  <h2 style="font-size: 1.1em; font-weight: 700; color: #323130; margin: 0 0 0.5em;">Feedback</h2>
-  <p style="font-size: 0.85em; color: #605e5c; margin: 0 0 1.2em;">Found an issue or have a suggestion? Leave a comment below (requires GitHub sign-in).</p>
-  <script src="https://utteranc.es/client.js"
-    repo="{{ site.comments.utterances.repo }}"
-    issue-term="{{ site.comments.utterances.issue_term }}"
-    label="{{ site.comments.utterances.label }}"
-    theme="{{ site.comments.utterances.theme }}"
-    crossorigin="anonymous"
-    async>
-  </script>
-</section>

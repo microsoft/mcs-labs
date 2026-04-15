@@ -20,13 +20,6 @@ breadcrumbs: true
 # Code copy button
 enable_copy_code_button: true
 
-# Comments / Feedback
-comments:
-  utterances:
-    repo: "microsoft/mcs-labs"
-    issue_term: pathname
-    label: feedback
-    theme: preferred-color-scheme
 
 # Build settings
 markdown: kramdown
