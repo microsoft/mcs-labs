@@ -8,6 +8,10 @@ section: specialized_labs
 journeys: ["developer"]
 ---
 
+---
+
+# Prioritize Hot Leads with AI: Connect to Dynamics 365 Sales Using Model Context Protocol
+
 Empower sellers to focus on what matters most—high-value leads.
 
 ---
@@ -20,6 +24,54 @@ Empower sellers to focus on what matters most—high-value leads.
 
 ---
 
+## Table of Contents
+
+- [Why This Matters](#why-this-matters)
+- [Introduction](#introduction)
+- [Core Concepts Overview](#core-concepts-overview)
+- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Use Cases Covered](#use-cases-covered)
+- [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: Create and Configure an Agent](#use-case-1-create-and-configure-an-agent)
+  - [Use Case #2: Configure Model Context Protocol (Dataverse and D365 Sales)](#use-case-2-configure-model-context-protocol-dataverse-and-d365-sales)
+  - [Use Case #3: Test the Complete Workflow](#use-case-3-test-the-complete-workflow)
+
+---
+
+## Why This Matters
+
+**For sales leaders and CRM admins** - Lead overload is a common problem.
+
+Think of a sales team like a firefighter squad:
+
+- **Without AI prioritization**: They’re chasing every alarm, wasting time and missing real fires.
+- **With AI prioritization**: They focus on the biggest, hottest leads – fast and smart.
+
+**Common challenges solved by this lab:**
+
+- "We’re missing hot leads because we can’t triage fast enough."
+- "Our sellers are overwhelmed with too many low-priority leads."
+- "We need a smarter way to focus our sales efforts."
+
+**In just 15 minutes, you’ll learn how to use AI to help your sales team work smarter—not harder.**
+
+---
+
+## Introduction
+
+In today’s competitive sales environment, identifying and acting on the right leads at the right time is critical. Sellers are often overwhelmed by the volume of leads and lack the tools to quickly determine which ones are worth pursuing.
+
+**Real-world example:** A sales team receives hundreds of leads per week. Without automation, they spend hours reviewing CRM data. As a result, some of the best opportunities are missed or delayed.
+
+With D365 Sales Model Context Protocol and AI: AI analyzes lead data, engagement history, and contextual signals to surface the most promising leads. Sellers get a prioritized list—no guesswork, no delay.
+
+---
+
+## Core Concepts Overview
+
+| Concept                               | Why it matters                                                                                                                                  |
 | ------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | **Model Context Protocol**            | Enables AI to securely access tools, data, and prompts through a standard protocol                                                              |
 | **D365 Sales Model Context Protocol** | Enables AI to access and reason over CRM data in Dynamics 365 Sales, surfacing insights like lead quality, engagement level, and deal potential |
@@ -119,7 +171,7 @@ Create a seller-facing agent.
 
 ---
 
-## ↺ Use Case #2: Configure Model Context Protocol (Dataverse and D365 Sales)
+## Use Case #2: Configure Model Context Protocol (Dataverse and D365 Sales)
 
 Transform your agent by connecting it to Dataverse and D365 Sales via Model Context Protocol.
 

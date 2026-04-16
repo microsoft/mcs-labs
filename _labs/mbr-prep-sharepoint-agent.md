@@ -11,6 +11,10 @@ bootcamp_order: "3b"
 
 ---
 
+# Create a Monthly Business Review (MBR) Agent
+
+---
+
 This guide provides step-by-step instructions for creating an MBR (Monthly Business Review) Agent, which is designed to streamline the preparation process for MBRs. By following the guide, users will learn how to query resources and obtain quick answers, ultimately enhancing efficiency and organization for business reviews. It's a valuable tool for anyone looking to optimize their workflow and ensure they are well-prepared for important business discussions. 
 
 ---
@@ -23,6 +27,52 @@ This guide provides step-by-step instructions for creating an MBR (Monthly Busin
 
 ---
 
+## Table of Contents
+
+- [Why This Matters](#why-this-matters)
+- [Introduction](#introduction)
+- [Core Concepts Overview](#core-concepts-overview)
+- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Use Cases Covered](#use-cases-covered)
+- [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: Create SharePoint site and upload MBR documents](#use-case-1-create-sharepoint-site-and-upload-mbr-documents)
+  - [Use Case #2: Build and deploy MBR agent](#use-case-2-build-and-deploy-mbr-agent)
+- [Summary of Learnings](#summary-of-learnings)
+- [Conclusions & Recommendations](#conclusions--recommendations)
+
+---
+
+## Why This Matters
+
+**Managers and Team Leads** – Drowning in slide decks, scattered data, and last-minute scramble sessions before Monthly Business Reviews?
+
+Think of a traditional MBR prep process:  
+- **Without agents**: Leaders dig through dozens of decks, copy/paste insights, manually summarize risks and themes, and chase down team updates – all while trying to spot patterns across silos  
+- **With agents**: AI reads files from SharePoint, extracts key themes (like at-risk deals or blockers), and delivers concise summaries you can act on – no digging required
+
+**Common challenges solved by this lab:**
+- "We waste hours each month trying to consolidate MBR decks from every team"
+- "Leadership misses key risks or repetitive asks buried in PowerPoint files"
+- "It's hard to spot trends across different teams without a data analyst"
+- "We're reactive instead of proactive when it comes to business risks"
+
+**In just 20 minutes, you’ll learn how to build an agent that helps leaders get to the ‘so what’ faster—turning static decks into actionable insights.**
+
+## Introduction
+
+Monthly Business Reviews (MBRs) are critical for keeping leadership informed, identifying risks, and aligning on key initiatives. But the preparation process is often tedious and fragmented, requiring hours of manual effort to gather, review, and summarize insights from multiple teams.
+
+**Real-world example:** A regional sales org prepares for its MBR by collecting slide decks from over 10 team leads. Each deck includes updates, at-risk deals, and escalations—buried across inconsistent formats and file names. A single director spends 4–6 hours manually scanning each one, summarizing recurring themes, and building a master summary for leadership.
+
+After implementing an agent, the director simply prompts the system to scan the latest MBR files in SharePoint. Within seconds, the agent highlights common risks, summarizes recurring asks, and surfaces trends across teams. Now the director can focus on strategic insights—not file wrangling.
+
+---
+
+## Core Concepts Overview
+
+| Concept | Why it matters |
 | ------- | -------------- |
 | **Conversational Agent** | Powers natural, chat-like interactions so users can ask about MBR themes, risks, and takeaways without needing to dig through files manually |
 | **Knowledge** | Enables the agent to read and understand content from past MBR decks stored in SharePoint, so it can extract relevant insights and patterns |
@@ -123,32 +173,26 @@ Create a SharePoint site with MBR documents that will serve as the knowledge sou
 
 ![Create Site](./assets/site-name.png)
 
-7. Click **Finish**
+7. Select **Create site**
 
 ![Select Finish](./assets/select-finish-site-creation.jpeg)
+
 
 #### Upload MBR documents
 
 > [!IMPORTANT]
 > **For training participants:** If you are following this lab as part of a guided training session, the MBR documents have already been uploaded to SharePoint at the location specified in your **Lab Resources**. You can skip this use case and proceed directly to [Use Case #2](#use-case-2-build-and-deploy-mbr-agent).
 
-8. Navigate to the [sample files folder](./assets/) and download the sample files
+8. Navigate to the [sample files folder](https://github.com/microsoft/mcs-labs/tree/main/labs/mbr-prep-sharepoint-agent/assets/sample-files) and download the sample files
 
 9. Select `Documents` in the left navigation
 
-![Open Document Library](./assets/select-document-library.jpeg)
-
-
 10. Select `Upload`
-
-![Upload Files](./assets/select-upload.jpeg)
-
 
 11. Select all the sample files you just downloaded and click `Open`
 
-![Select Open](./assets/select-sample-files.jpeg)
-
 ---
+
 
 ### Congratulations! You've set up your SharePoint site with MBR documents!
 

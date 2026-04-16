@@ -10,7 +10,11 @@ bootcamp_order: "1b"
 mcs_in_a_day_order: "3"
 ---
 
-Build an intelligent sales admin assistant that analyzes SharePoint data using code interpreter and image generation features in Copilot Studio Lite.
+---
+
+# Create your own SharePoint-based AI assistant with Agent Builder in Microsoft 365
+
+Build an intelligent sales admin assistant that analyzes SharePoint data using code interpreter and image generation features in Agent Builder in Microsoft 365.
 
 ---
 
@@ -22,7 +26,26 @@ Build an intelligent sales admin assistant that analyzes SharePoint data using c
 
 ---
 
-> This lab assumes familiarity with the basic Copilot Studio lite concepts covered in the [web-based agent builder lab](../agent-builder-web/README.md).
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Use Cases Covered](#use-cases-covered)
+- [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: Access SharePoint documents](#use-case-1-access-sharepoint-documents)
+  - [Use Case #2: Create your Sales Admin Assistant agent](#use-case-2-create-your-sales-admin-assistant-agent)
+  - [Use Case #3: Test advanced AI capabilities](#use-case-3-test-advanced-ai-capabilities)
+- [Summary of Learnings](#summary-of-learnings)
+
+---
+
+## Introduction
+
+This lab builds on the Agent Builder in Microsoft 365 experience by integrating SharePoint documents and enabling advanced AI capabilities. You'll create a Sales Admin Assistant that can analyze Excel data, reference policy documents, generate charts through code interpretation, and create visual content.
+
+> [!NOTE]  
+> This lab assumes familiarity with the basic Agent Builder in Microsoft 365 concepts covered in the [web-based agent builder lab](../agent-builder-web/README.md).
 
 ---
 

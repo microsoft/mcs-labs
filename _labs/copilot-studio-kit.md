@@ -9,6 +9,10 @@ journeys: ["developer"]
 bootcamp_order: "7"
 ---
 
+---
+
+# Deliver high-quality, scalable agents with Copilot Studio Kit
+
 Automate quality assurance for your Copilot Studio agents with the Copilot Studio Kit. In this lab, you'll configure and run automated test scenarios, validate agent behavior using multiple test types, and gain actionable insights through analytics. You'll also explore advanced tools like conversation KPIs, UI customization, and governance dashboards—equipping you to ship high-quality, secure, and scalable AI agents with confidence.
 
 ---
@@ -21,6 +25,53 @@ Automate quality assurance for your Copilot Studio agents with the Copilot Studi
 
 ---
 
+## Table of Contents
+
+- [Why This Matters](#why-this-matters)
+- [Introduction](#introduction)
+- [Core Concepts Overview](#core-concepts-overview)
+- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Use Cases Covered](#use-cases-covered)
+- [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: Configure Agent Testis](#use-case-1-configure-agent-testing-infrastructure)
+  - [Use Case #2: Execute and Analyze Test Results](#use-case-2-execute-and-analyze-test-results)
+  - [Use Case #3: Explore the other Copilot Studio Kit features](#use-case-3-explore-the-other-copilot-studio-kit-features)
+
+---
+
+## Why This Matters
+
+**Makers and Developers** - Worried about deploying AI agents that might give inconsistent or incorrect responses to users?
+
+Think of testing a chatbot like quality control in manufacturing:
+- **Without systematic testing**: Agents deployed with unknown behavior, potential for embarrassing mistakes, and no confidence in responses
+- **With automated testing**: Validated agent performance, consistent quality assurance, and data-driven optimization insights
+
+**Common challenges solved by this lab:**
+- "How do I know if my agent is giving good answers?"
+- "I need to test multiple scenarios without manually chatting hundreds of times"
+- "My agent works sometimes but fails on edge cases I didn't think of"
+- "I want to track performance improvements over time"
+
+**Spend 30 minutes now to save hours of manual testing and avoid costly production issues later.**
+
+---
+
+## Introduction
+
+Quality assurance for AI agents requires a systematic approach that goes beyond manual testing. The Power CAT Copilot Studio Kit provides enterprise-grade testing capabilities that enable makers to validate agent behavior at scale.
+
+**Real-world example:** A customer service organization deploys a Copilot Studio agent to handle common inquiries about product returns. Without proper testing, the agent might incorrectly handle edge cases like partial returns or international shipping, leading to frustrated customers and escalated support tickets. With automated testing, they can validate hundreds of scenarios before deployment and catch issues early.
+
+This lab teaches you to implement professional testing practices that ensure your agents deliver consistent, reliable experiences to end users.
+
+---
+
+## Core Concepts Overview
+
+| Concept | Why it matters |
 |---------|----------------|
 | **Agent Configuration** | Defines the connection between your Copilot Studio agent and the testing framework, enabling automated interactions and response validation |
 | **Test Sets and Test Cases** | Structured collections of scenarios that systematically validate agent behavior across different conversation patterns and edge cases |
