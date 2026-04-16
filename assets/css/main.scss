@@ -1,0 +1,337 @@
+---
+# Only the main Sass file needs front matter (the dashes are enough)
+---
+
+@charset "utf-8";
+
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=JetBrains+Mono:wght@400;500&display=swap');
+
+$sans-serif: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !default;
+$global-font-family: $sans-serif !default;
+$header-font-family: $sans-serif !default;
+$monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
+
+@import "minimal-mistakes";
+
+// ---------------------------------------------------------------------------
+// Layout: full-width content, no left sidebar gap
+// ---------------------------------------------------------------------------
+.page {
+  float: none !important;
+  width: 100% !important;
+  padding-inline-end: 0 !important;
+}
+
+.breadcrumbs ol {
+  float: none;
+  width: 100%;
+}
+
+// ---------------------------------------------------------------------------
+// TOC: sticky right sidebar via CSS Grid
+// ---------------------------------------------------------------------------
+
+// Grid layout: 75% content / 25% TOC (desktop only, only when TOC exists)
+@media (min-width: 1024px) {
+  .page__content:has(> .sidebar__right) {
+    display: grid;
+    grid-template-columns: 3fr 1fr;
+    gap: 0 2em;
+  }
+
+  // All content children go to column 1
+  .page__content:has(> .sidebar__right) > *:not(.sidebar__right) {
+    grid-column: 1;
+    min-width: 0;     // prevent grid blowout from wide tables/code
+  }
+
+  // Only scroll wide tables and code blocks, not all children
+  .page__content table,
+  .page__content div.highlighter-rouge,
+  .page__content figure.highlight {
+    overflow-x: auto;
+  }
+
+  // TOC sidebar spans full height, sticks on scroll
+  aside.sidebar__right {
+    grid-column: 2;
+    grid-row: 1 / span 999;
+    position: sticky !important;
+    top: 2em;
+    align-self: start;
+    max-height: calc(100vh - 4em);
+    overflow-y: auto;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+}
+
+// Mobile: TOC above content in normal flow
+aside.sidebar__right {
+  margin-bottom: 1.5em;
+}
+
+.toc {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+
+  .nav__title {
+    font-size: 0.7em;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: #a19f9d;
+    background: transparent;
+    padding: 0 0 0.5em;
+    margin: 0;
+  }
+
+  .toc__menu {
+    padding: 0;
+
+    // Show h2 (top-level) and h3 (first nested ul)
+    // Hide h4+ (deeper nesting)
+    > li > ul { display: block; }
+    > li > ul > li > ul { display: none; }
+
+    a {
+      font-size: 0.78em;
+      font-weight: 400;
+      color: #605e5c;
+      padding: 0.3em 0.6em 0.3em 0.8em;
+      display: block;
+      border-left: 2px solid transparent;
+      text-decoration: none;
+      transition: color 0.15s, border-color 0.15s;
+
+      &:hover {
+        color: #0078d4;
+        border-left-color: #0078d4;
+      }
+    }
+
+    // Indent h3 items
+    > li > ul > li > a {
+      padding-left: 1.4em;
+      font-size: 0.74em;
+      color: #8a8886;
+    }
+  }
+
+  li.active > a {
+    color: #0078d4;
+    font-weight: 500;
+    border-left-color: #0078d4;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Page title (for non-lab pages)
+// ---------------------------------------------------------------------------
+.page__title {
+  font-size: 1.4em;
+  letter-spacing: -0.01em;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid #e1dfdd;
+  margin-bottom: 0.5em;
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 50px;
+    height: 2px;
+    background: #0078d4;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Tables
+// ---------------------------------------------------------------------------
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #e1dfdd;
+  font-size: 0.88em;
+
+  thead th {
+    background: #f3f2f1;
+    color: #323130;
+    font-weight: 600;
+    font-size: 0.8em;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    padding: 0.7em 1em;
+    border-bottom: 2px solid #e1dfdd;
+  }
+
+  tbody td {
+    padding: 0.65em 1em;
+    border-bottom: 1px solid #f3f2f1;
+  }
+
+  tbody tr:last-child td {
+    border-bottom: none;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Notices
+// ---------------------------------------------------------------------------
+.notice, .notice--info, .notice--warning, .notice--success, .notice--danger, .notice--primary {
+  border-radius: 6px;
+  border-left-width: 4px;
+  font-size: 0.9em;
+}
+
+// ---------------------------------------------------------------------------
+// Code blocks
+// ---------------------------------------------------------------------------
+div.highlighter-rouge, figure.highlight {
+  border-radius: 6px;
+  border: 1px solid #e1dfdd;
+  overflow: hidden;
+}
+
+code { font-family: $monospace; }
+
+p > code, li > code, td > code {
+  background: #f3f2f1;
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+// ---------------------------------------------------------------------------
+// Content typography
+// ---------------------------------------------------------------------------
+.page__content {
+  h2 {
+    font-size: 1.35em;
+    margin-top: 2em;
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid #e8e6e4;
+  }
+
+  h3 {
+    font-size: 1.1em;
+    margin-top: 1.6em;
+  }
+
+  h4 {
+    font-size: 0.9em;
+    margin-top: 1.3em;
+    color: #605e5c;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Images
+// ---------------------------------------------------------------------------
+.page__content img {
+  border-radius: 6px;
+  border: 1px solid #e1dfdd;
+}
+
+// ---------------------------------------------------------------------------
+// Hero overlay (homepage)
+// ---------------------------------------------------------------------------
+.page__hero--overlay {
+  padding: 5em 0 4em;
+  min-height: 300px;
+
+  .page__title {
+    font-size: 2.4em;
+    border-bottom: none;
+    &:after { display: none; }
+  }
+
+  .page__lead {
+    max-width: 660px;
+    opacity: 0.9;
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Lab header (rendered by _layouts/lab.html)
+// ---------------------------------------------------------------------------
+.lab-header {
+  background: linear-gradient(135deg, #0f1b2d 0%, #1a3a5c 50%, #0f2440 100%);
+  color: #fff;
+  padding: 2em 2em 1.5em;
+  border-radius: 10px;
+  margin: -0.5em 0 1.5em;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -40%;
+    right: -15%;
+    width: 350px;
+    height: 350px;
+    background: radial-gradient(circle, rgba(0,120,212,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  h1 {
+    font-size: 1.4em;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #fff;
+    margin: 0 0 0.3em;
+    line-height: 1.3;
+    border: none;
+    padding: 0;
+  }
+}
+
+.lab-header-desc {
+  font-size: 0.9em;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.5;
+  margin: 0 0 0.8em;
+}
+
+// Hide duplicate H1 title, description, and surrounding hrs from markdown content
+.lab-header + hr { display: none; }
+.lab-header + hr + h1 { display: none; }
+.lab-header + hr + h1 + p { display: none; }
+.lab-header + hr + h1 + p + hr { display: none; }
+// Also handle case without leading hr
+.lab-header + h1 { display: none; }
+.lab-header + h1 + p { display: none; }
+.lab-header + h1 + p + hr { display: none; }
+
+.lab-header-meta {
+  display: flex;
+  gap: 0.4em;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.lab-meta-pill {
+  font-size: 0.72em;
+  font-weight: 600;
+  padding: 0.2em 0.6em;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+.lab-meta-pill-duration { background: rgba(255,255,255,0.15); color: rgba(255,255,255,0.9); }
+.lab-meta-pill-level-100 { background: rgba(16,124,16,0.25); color: #a3e4a3; }
+.lab-meta-pill-level-200 { background: rgba(0,120,212,0.25); color: #9ecbf6; }
+.lab-meta-pill-level-300 { background: rgba(127,57,251,0.25); color: #c9a8fc; }
+.lab-meta-pill-section { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.2); }
+.lab-meta-pill-feedback { background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.8); border: 1px solid rgba(255,255,255,0.25); text-decoration: none; cursor: pointer; }
+.lab-meta-pill-feedback:hover { background: rgba(255,255,255,0.2); color: #fff; }
+
+// ---------------------------------------------------------------------------
+// Misc
+// ---------------------------------------------------------------------------
+.page__share { display: none; }

@@ -1,0 +1,51 @@
+name: "Redesign feedback"
+description: "Report a bug, visual issue, or suggestion for the air-theme redesign"
+title: "[Redesign] "
+labels: ["redesign", "feedback"]
+body:
+  - type: dropdown
+    id: type
+    attributes:
+      label: Type
+      options:
+        - Bug / visual issue
+        - Suggestion / improvement
+        - Question
+    validations:
+      required: true
+  - type: dropdown
+    id: page
+    attributes:
+      label: Which page?
+      options:
+        - Homepage
+        - Labs index (/labs/)
+        - Lab detail page
+        - Events index (/events/)
+        - Event detail page
+        - About page (/about/)
+        - Navigation / sidebar
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What did you notice? Include screenshots if possible.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should happen instead? (optional)
+    validations:
+      required: false
+  - type: input
+    id: browser
+    attributes:
+      label: Browser / OS
+      placeholder: "e.g. Chrome 120 / macOS 14"
+    validations:
+      required: false

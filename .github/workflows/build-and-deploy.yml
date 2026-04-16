@@ -1,10 +1,10 @@
 # =============================================================================
-# MICROSOFT COPILOT STUDIO LABS - UNIFIED BUILD AND DEPLOY WORKFLOW
+# MICROSOFT COPILOT STUDIO LABS - BUILD AND DEPLOY WORKFLOW
 # =============================================================================
-# This unified workflow:
+# This workflow:
 # 1. Generates PDFs from lab markdown files
-# 2. Builds Jekyll site with auto-generated lab pages
-# 3. Deploys to GitHub Pages with fresh PDFs included
+# 2. Builds Jekyll site (Minimal Mistakes theme, static collections)
+# 3. Deploys to GitHub Pages
 # =============================================================================
 
 name: 🚀 Build and Deploy Labs
@@ -31,15 +31,19 @@ on:
     paths:
       - "labs/**/*.md" # Lab markdown content
       - "labs/**/images/**" # Lab images and assets
+      - "_labs/**" # Lab collection files
+      - "_events/**" # Event collection files
       - "_layouts/**" # Jekyll layouts
+      - "_includes/**" # Jekyll includes
+      - "_data/**" # Jekyll data files
       - "assets/**" # Jekyll assets and styling
       - "_config.yml" # Jekyll configuration
-      - "scripts/**" # PowerShell generation scripts
-      - "lab-config.yml" # Lab configuration
+      - "index.md" # Homepage
       - ".github/styles/**" # PDF styling files
       - ".github/scripts/**" # PDF generation scripts
       - ".github/workflows/build-and-deploy.yml" # This workflow file
       - "package.json" # Dependencies
+      - "Gemfile" # Ruby dependencies
 
   # Allow manual execution for testing
   workflow_dispatch:
@@ -243,21 +247,6 @@ jobs:
           ruby-version: "3.1"
           bundler-cache: false
 
-      - name: 🔧 Install PowerShell and dependencies
-        run: |
-          # Install PowerShell 7.x
-          wget -q https://github.com/PowerShell/PowerShell/releases/download/v7.4.0/powershell_7.4.0-1.deb_amd64.deb
-          sudo dpkg -i powershell_7.4.0-1.deb_amd64.deb || sudo apt-get install -f -y
-
-      - name: 📦 Install PowerShell YAML module
-        run: pwsh -Command "Install-Module -Name powershell-yaml -Force -Scope CurrentUser -Repository PSGallery"
-
-      # =================================================================
-      # STEP 5: GENERATE JEKYLL CONTENT
-      # =================================================================
-      - name: 🏗️ Generate Jekyll lab pages and index files
-        run: pwsh -File scripts/Generate-Labs.ps1
-
       - name: 📄 Copy PDFs to Jekyll assets
         run: |
           # Create assets directory for PDFs
@@ -305,18 +294,5 @@ jobs:
 
       - name: 🎉 Deployment Summary
         run: |
-          echo "✅ Lab Browser deployed successfully!"
+          echo "✅ MCS Labs deployed successfully!"
           echo "🌐 Site URL: ${{ steps.deployment.outputs.page_url }}"
-          echo ""
-          echo "🔄 UNIFIED WORKFLOW COMPLETED:"
-          echo "  1. ✅ Generated PDFs from lab markdown files"
-          echo "  2. ✅ Generated Jekyll lab pages with PowerShell"
-          echo "  3. ✅ Built Jekyll site with PDF download links"
-          echo "  4. ✅ Deployed to GitHub Pages"
-          echo ""
-          echo "🎯 Features deployed:"
-          echo "  - Auto-generated lab pages from README files"
-          echo "  - Fresh PDFs with download buttons"  
-          echo "  - Journey-based navigation system"
-          echo "  - Responsive design with section filtering"
-          echo "  - Single workflow for complete build process"

@@ -1,0 +1,65 @@
+main:
+  - title: "Home"
+    url: /
+  - title: "All Labs"
+    url: /labs/
+  - title: "Events"
+    url: /events/
+  - title: "About"
+    url: /about/
+
+labs:
+  - title: "Core Learning Path"
+    children:
+      - title: "Agent Builder (Web)"
+        url: /labs/agent-builder-web/
+      - title: "Public Website Agent"
+        url: /labs/public-website-agent/
+      - title: "MBR SharePoint Agent"
+        url: /labs/mbr-prep-sharepoint-agent/
+      - title: "First Agent in Copilot Studio"
+        url: /labs/standard-orchestrator/
+      - title: "Contract Alerts (Azure AI)"
+        url: /labs/contract-alerts-azure-ai/
+  - title: "Intermediate Labs"
+    children:
+      - title: "Set Up for Success & ALM"
+        url: /labs/setup-for-success/
+      - title: "Agent Builder (SharePoint)"
+        url: /labs/agent-builder-sharepoint/
+      - title: "Ask Me Anything Agent"
+        url: /labs/ask-me-anything/
+      - title: "Bring Your Own Model"
+        url: /labs/mcs-byom/
+  - title: "Advanced Labs"
+    children:
+      - title: "Autonomous CUA Agent"
+        url: /labs/autonomous-cua/
+      - title: "Autonomous Account News"
+        url: /labs/autonomous-account-news/
+      - title: "Autonomous Support Agent"
+        url: /labs/autonomous-support-agent/
+      - title: "Data Fabric Agent"
+        url: /labs/data-fabric-agent/
+  - title: "Specialized Labs"
+    children:
+      - title: "Measure Success"
+        url: /labs/measure-success/
+      - title: "Pipelines & Source Control"
+        url: /labs/pipelines-and-source-control/
+      - title: "Copilot Studio Kit"
+        url: /labs/copilot-studio-kit/
+      - title: "MCP Qualify Lead"
+        url: /labs/mcp-qualify-lead/
+      - title: "Guild's Custom MCP Server"
+        url: /labs/guildhall-custom-mcp/
+      - title: "Dataverse MCP Connector"
+        url: /labs/dataverse-mcp-connector/
+  - title: "Optional Labs"
+    children:
+      - title: "Ask Me Anything (30 min)"
+        url: /labs/ask-me-anything-30-mins/
+  - title: "External Labs"
+    children:
+      - title: "MCP & Copilot Studio"
+        url: /labs/mcs-mcp-external/

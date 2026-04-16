@@ -1,0 +1,13 @@
+{
+  "name": "Jekyll Preview",
+  "image": "mcr.microsoft.com/devcontainers/ruby:3.1",
+  "postCreateCommand": "bundle install",
+  "postStartCommand": "bundle exec jekyll serve --livereload --host 0.0.0.0",
+  "forwardPorts": [4000],
+  "portsAttributes": {
+    "4000": {
+      "label": "Jekyll Preview",
+      "onAutoForward": "openPreview"
+    }
+  }
+}

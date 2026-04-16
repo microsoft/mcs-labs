@@ -1,0 +1,504 @@
+<style>
+/* ============================================
+   WebChat Side Panel — Air Theme
+   ============================================ */
+
+/* --- Tag (pull handle) --- */
+.wc-tag {
+  position: fixed;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 99990;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  writing-mode: vertical-lr;
+  text-orientation: mixed;
+  background: #fff;
+  color: #605e5c;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  padding: 14px 10px;
+  border-radius: 10px 0 0 10px;
+  border: 1px solid #e1dfdd;
+  border-right: none;
+  cursor: pointer;
+  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.04);
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.wc-tag:hover {
+  background: #f3f2f1;
+  color: #323130;
+  box-shadow: -3px 0 16px rgba(0, 0, 0, 0.08);
+}
+
+.wc-tag svg { width: 18px; height: 18px; flex-shrink: 0; }
+.wc-tag-label { letter-spacing: 0.04em; }
+
+.wc-tag.wc-tag--hidden {
+  right: -60px;
+  pointer-events: none;
+  opacity: 0;
+}
+
+/* --- Overlay --- */
+.wc-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(15, 27, 45, 0.06);
+  z-index: 99991;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+}
+
+.wc-overlay.wc-overlay--visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+/* --- Panel --- */
+.wc-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: 400px;
+  max-width: 90vw;
+  z-index: 99992;
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border-left: 1px solid #d2d0ce;
+  box-shadow:
+    -8px 0 40px rgba(0, 0, 0, 0.08),
+    -1px 0 0 rgba(0, 0, 0, 0.04);
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.wc-panel.wc-panel--open {
+  transform: translateX(0);
+}
+
+/* --- Panel header --- */
+.wc-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 18px;
+  border-bottom: 1px solid #eae8e6;
+  flex-shrink: 0;
+  background: #fff;
+}
+
+.wc-panel-header-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.wc-panel-header-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(0, 120, 212, 0.25);
+}
+
+.wc-panel-header-icon svg {
+  width: 17px;
+  height: 17px;
+  color: #fff;
+}
+
+.wc-panel-header-title {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 600;
+  color: #201f1e;
+  line-height: 1.2;
+}
+
+.wc-panel-header-status {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.68rem;
+  color: #a19f9d;
+  font-weight: 500;
+  margin-top: 1px;
+  letter-spacing: 0.01em;
+}
+
+.wc-panel-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  color: #a19f9d;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+  flex-shrink: 0;
+}
+
+.wc-panel-close:hover {
+  background: #f3f2f1;
+  color: #323130;
+}
+
+.wc-panel-close svg { width: 16px; height: 16px; }
+
+/* --- WebChat body (transcript) --- */
+.wc-panel-body {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  background: #faf9f8;
+}
+
+.wc-panel-body > div { height: 100%; }
+
+/* Loading — hidden, using WebChat's native connectivity status */
+.wc-panel-loading { display: none; }
+
+.wc-panel-error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  gap: 14px;
+  padding: 32px;
+  text-align: center;
+  color: #605e5c;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.84rem;
+}
+
+.wc-panel-error button {
+  background: #0078d4;
+  color: #fff;
+  border: none;
+  padding: 9px 20px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.wc-panel-error button:hover { background: #106ebe; }
+
+/* ===========================================
+   Typing Indicator
+   =========================================== */
+.wc-typing {
+  flex-shrink: 0;
+  padding: 0 18px;
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: height 0.25s ease, opacity 0.2s ease, padding 0.25s ease;
+}
+
+.wc-typing.wc-typing--visible {
+  height: 32px;
+  padding: 6px 18px;
+  opacity: 1;
+}
+
+.wc-typing-dots {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.wc-typing-dots span {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #b3b0ad;
+  animation: wc-dot-pulse 1.4s ease-in-out infinite;
+}
+
+.wc-typing-dots span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.wc-typing-dots span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes wc-dot-pulse {
+  0%, 60%, 100% {
+    transform: scale(1);
+    opacity: 0.35;
+  }
+  30% {
+    transform: scale(1.3);
+    opacity: 1;
+  }
+}
+
+/* ===========================================
+   Custom Send Box
+   Refined pill input with polished send button
+   =========================================== */
+.wc-sendbox {
+  flex-shrink: 0;
+  padding: 12px 16px 16px;
+  background: #fff;
+  border-top: 1px solid #eae8e6;
+}
+
+.wc-sendbox-inner {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #f0efed;
+  border: none;
+  border-radius: 24px;
+  padding: 4px 5px 4px 18px;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wc-sendbox-inner:focus-within {
+  background: #eae9e7;
+  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.12);
+}
+
+.wc-sendbox-input,
+.wc-sendbox-input[type="text"] {
+  flex: 1;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.8rem;
+  color: #201f1e;
+  padding: 9px 0 !important;
+  margin: 0 !important;
+  line-height: 1.4;
+  min-width: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.wc-sendbox-input::placeholder {
+  color: #b3b0ad;
+  font-weight: 400;
+}
+
+.wc-sendbox-input:focus {
+  border: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+.wc-sendbox-btn {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: 50%;
+  border: none;
+  background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+  box-shadow: 0 2px 6px rgba(0, 120, 212, 0.3);
+}
+
+.wc-sendbox-btn:hover {
+  background: linear-gradient(135deg, #106ebe 0%, #004578 100%);
+  box-shadow: 0 3px 10px rgba(0, 120, 212, 0.35);
+  transform: translateY(-1px);
+}
+
+.wc-sendbox-btn:active {
+  transform: translateY(0) scale(0.96);
+  box-shadow: 0 1px 3px rgba(0, 120, 212, 0.25);
+}
+
+.wc-sendbox-btn svg {
+  width: 16px;
+  height: 16px;
+  margin-left: 1px; /* optical centering for send arrow */
+}
+
+/* Hint text below sendbox */
+.wc-sendbox-hint {
+  text-align: center;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-size: 0.66rem;
+  color: #c8c6c4;
+  margin-top: 8px;
+  letter-spacing: 0.01em;
+}
+
+/* ===================================
+   WebChat Transcript Overrides
+   =================================== */
+
+.wc-panel-body .webchat__basic-transcript {
+  background: #faf9f8 !important;
+}
+
+/* Bot bubble */
+.wc-panel-body .webchat__bubble:not(.webchat__bubble--from-user) .webchat__bubble__content {
+  background: rgba(0, 0, 0, 0.04) !important;
+  border: none !important;
+  border-radius: 14px 14px 14px 4px !important;
+  color: #3b3a39 !important;
+}
+
+/* User bubble */
+.wc-panel-body .webchat__bubble--from-user .webchat__bubble__content {
+  background: rgba(0, 120, 212, 0.08) !important;
+  border: none !important;
+  border-radius: 14px 14px 4px 14px !important;
+  color: #1a3a5c !important;
+}
+
+/* Links */
+.wc-panel-body .webchat__bubble:not(.webchat__bubble--from-user) a {
+  color: #0078d4 !important;
+}
+
+.wc-panel-body .webchat__bubble--from-user a {
+  color: #0078d4 !important;
+}
+
+/* Suggested actions */
+.wc-panel-body .webchat__suggested-action__button {
+  background: #fff !important;
+  border: 1px solid #0078d4 !important;
+  color: #0078d4 !important;
+  border-radius: 100px !important;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 500 !important;
+  padding: 6px 16px !important;
+  transition: all 0.15s ease !important;
+  cursor: pointer !important;
+}
+
+.wc-panel-body .webchat__suggested-action__button:hover {
+  background: #0078d4 !important;
+  color: #fff !important;
+}
+
+/* Hide default typing indicator — we use our own */
+.wc-panel-body .webchat__typing-indicator {
+  display: none !important;
+}
+
+/* Hide default send box — we use our own */
+.wc-panel-body .webchat__send-box {
+  display: none !important;
+}
+
+/* Message text */
+.wc-panel-body .webchat__text-content,
+.wc-panel-body .webchat__text-content p,
+.wc-panel-body .webchat__render-markdown p,
+.wc-panel-body .webchat__render-markdown li {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  color: inherit !important;
+}
+
+/* Timestamp */
+.wc-panel-body .webchat__stacked-layout__status {
+  font-size: 0.65rem !important;
+  color: #b3b0ad !important;
+}
+
+/* Scrollbar */
+.wc-panel-body ::-webkit-scrollbar { width: 5px; }
+.wc-panel-body ::-webkit-scrollbar-track { background: transparent; }
+.wc-panel-body ::-webkit-scrollbar-thumb { background: #d2d0ce; border-radius: 3px; }
+
+/* ===================================
+   Adaptive Cards — Air Theme
+   =================================== */
+
+.wc-panel-body a.ac-anchor,
+.wc-panel-body a.ac-anchor:link,
+.wc-panel-body a.ac-anchor:visited {
+  color: #0078d4 !important;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.wc-panel-body a.ac-anchor:hover { color: #106ebe !important; }
+
+.wc-panel-body .ac-pushButton {
+  background: #fff !important;
+  color: #323130 !important;
+  border: 1px solid #e1dfdd !important;
+  border-radius: 8px !important;
+  padding: 8px 14px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.wc-panel-body .ac-pushButton:hover {
+  background: #f3f2f1 !important;
+  border-color: #c8c6c4 !important;
+}
+
+.wc-panel-body .ac-pushButton.style-positive { color: #0e700e !important; border-color: #a7e3a5 !important; }
+.wc-panel-body .ac-pushButton.style-destructive { color: #c4314b !important; border-color: #f1bbbc !important; }
+
+.wc-panel-body .ac-input {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+  font-size: 13px !important;
+  color: #323130 !important;
+  background: #fff !important;
+  border: 1px solid #e1dfdd !important;
+  border-radius: 8px !important;
+  padding: 8px 12px !important;
+}
+
+.wc-panel-body .ac-input:focus { outline: none; border-color: #0078d4 !important; }
+.wc-panel-body .ac-textBlock { line-height: 1.45; color: #323130; }
+.wc-panel-body .ac-image { border-radius: 8px; }
+.wc-panel-body .ac-actionSet { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
+
+/* ===================================
+   Responsive
+   =================================== */
+@media (max-width: 480px) {
+  .wc-tag { display: none; }
+  .wc-panel { display: none; }
+  .wc-overlay { display: none; }
+}
+</style>

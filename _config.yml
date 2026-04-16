@@ -1,8 +1,25 @@
 # Jekyll Configuration for MCS Labs
-title: "Microsoft Copilot Studio Labs"
+title: "Microsoft Copilot Agents Labs"
+subtitle: "Hands-on labs for building AI agents"
 description: "Hands-on labs for building AI agents with Microsoft Copilot Studio"
 baseurl: "/mcs-labs"
-url: "https://pratapladhani.github.io"
+url: "https://microsoft.github.io"
+logo: "/favicon.svg"
+
+# Theme
+theme: minimal-mistakes-jekyll
+minimal_mistakes_skin: "air"
+
+# Search
+search: true
+search_full_content: true
+
+# Breadcrumbs
+breadcrumbs: true
+
+# Code copy button
+enable_copy_code_button: true
+
 
 # Build settings
 markdown: kramdown
@@ -11,40 +28,69 @@ plugins:
   - jekyll-feed
   - jekyll-sitemap
   - jekyll-seo-tag
+  - jekyll-include-cache
 
-# Kramdown settings to fix apostrophe spacing issues
+# Kramdown settings
 kramdown:
   input: GFM
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     css_class: "highlight"
-  entity_output: numeric
-  smart_quotes: "39,39,34,34"
 
-# Development settings for better file watching
-livereload: true
-livereload_port: 35729
-incremental: true
-force_polling: true
+# Site author (shown in sidebar)
+author:
+  name: "MCS Labs"
+  bio: "Hands-on labs for building AI agents with Microsoft Copilot Studio"
+  avatar: "/favicon.svg"
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/pratapladhani/mcs-labs"
+
+# Footer
+footer:
+  links:
+    - label: "GitHub"
+      icon: "fab fa-fw fa-github"
+      url: "https://github.com/pratapladhani/mcs-labs"
 
 # Collections
 collections:
   labs:
     output: true
-    permalink: /:collection/:name/
+    permalink: /labs/:name/
+  events:
+    output: true
+    permalink: /events/:name/
 
-# Default layouts
+# Default layouts and front matter
 defaults:
   - scope:
       path: ""
       type: "labs"
     values:
       layout: "lab"
+      author_profile: false
+      toc: true
+      toc_sticky: true
+      toc_label: "On this page"
+      toc_icon: "bookmark"
+      read_time: false
+      share: false
+  - scope:
+      path: ""
+      type: "events"
+    values:
+      layout: "event"
+      author_profile: false
+      classes: wide
+      toc: false
+      share: false
   - scope:
       path: ""
       type: "pages"
     values:
-      layout: "default"
+      layout: "single"
 
 # Include favicon files
 include:
@@ -52,13 +98,10 @@ include:
 
 # Exclude from build
 exclude:
-  - node_modules/
   - .github/
-  - package*.json
   - README.md
   - LICENSE
   - SECURITY.md
   - labs/*/README.md
   - labs/*/local-dist/
   - labs/lab-template.md
-  - scripts/
