@@ -79,6 +79,11 @@ classes: wide
   border-color: #c8c6c4;
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
+.team-card a {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
 
 .team-avatar {
   width: 80px;
@@ -117,28 +122,28 @@ classes: wide
 </style>
 
 <div class="about-hero">
-  <h2>Copilot Acceleration Team</h2>
-  <p>We help Microsoft customers and partners unlock the full potential of Copilot Studio through hands-on enablement, technical guidance, and reusable lab content.</p>
+  <h2>About these labs</h2>
+  <p>MCS Labs is built and maintained by a small team within the Copilot Acceleration Team (CAT) at Microsoft Customer Success. We create hands-on, guided labs so customers and partners can learn Copilot Studio by building real agents.</p>
 </div>
 
-<h2 class="about-section-title">The team</h2>
+<h2 class="about-section-title">Built by</h2>
 
 <ul class="team-grid">
   {% for member in site.data.team %}
   <li class="team-card">
-    <img class="team-avatar" src="https://github.com/{{ member.github }}.png?size=128" alt="{{ member.name }}">
-    <div class="team-name">{{ member.name }}</div>
+    <a href="https://github.com/{{ member.github }}" target="_blank" rel="noopener">
+      <img class="team-avatar" src="https://github.com/{{ member.github }}.png?size=128" alt="{{ member.name }}">
+      <div class="team-name">{{ member.name }}</div>
+    </a>
     {% if member.role != "" %}<div class="team-role">{{ member.role }}</div>{% endif %}
   </li>
   {% endfor %}
 </ul>
 
-<h2 class="about-section-title">About these labs</h2>
+<h2 class="about-section-title">How the labs work</h2>
 
 <div class="about-content">
-  <p>MCS Labs is a collection of hands-on, guided labs for building AI agents with Microsoft Copilot Studio. Each lab walks you through a real-world scenario — from creating your first agent to deploying autonomous AI solutions.</p>
+  <p>Each lab walks you through a real-world scenario — from creating your first agent to deploying autonomous AI solutions. Labs are organized by difficulty level (100–300) and grouped into events for instructor-led sessions and self-paced learning.</p>
 
-  <p>Labs are organized by difficulty level (100–300) and grouped into events for instructor-led bootcamps, workshops, and self-paced learning. All content is open-source and maintained by the Copilot Acceleration Team within Microsoft Customer Success.</p>
-
-  <p>Whether you're a business user building your first agent or a developer integrating advanced connectors, there's a learning path for you. Browse <a href="{{ '/labs/' | relative_url }}">all labs</a> or pick an <a href="{{ '/events/' | relative_url }}">event</a> to get started.</p>
+  <p>Whether you're a business user building your first agent or a developer integrating advanced connectors, there's a path for you. Browse <a href="{{ '/labs/' | relative_url }}">all labs</a> or pick an <a href="{{ '/events/' | relative_url }}">event</a> to get started.</p>
 </div>
