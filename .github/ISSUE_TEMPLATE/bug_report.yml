@@ -2,44 +2,11 @@ name: Bug Report
 description: Report a problem with a lab
 labels: ["type: bug"]
 body:
-  - type: dropdown
+  - type: input
     id: lab
     attributes:
       label: Which lab?
-      options:
-        - agent-buildathon-1day
-        - agent-buildathon-1month
-        - agent-builder-m365
-        - agent-builder-sharepoint
-        - agent-builder-web
-        - ask-me-anything
-        - autonomous-account-news
-        - autonomous-cua
-        - autonomous-support-agent
-        - azure-ai-workshop
-        - bootcamp
-        - component-collections
-        - contract-alerts-azure-ai
-        - copilot-studio-kit
-        - core-concepts-agent-knowledge-tools
-        - core-concepts-analytics-evaluations
-        - core-concepts-variables-agents-channels
-        - data-fabric-agent
-        - dataverse-mcp-connector
-        - guildhall-custom-mcp
-        - human-in-the-loop
-        - mbr-prep-sharepoint-agent
-        - mcp-qualify-lead
-        - mcs-alm
-        - mcs-byom
-        - mcs-governance
-        - mcs-in-a-day
-        - mcs-multi-agent
-        - mcs-tools
-        - measure-success
-        - pipelines-and-source-control
-        - setup-for-success
-        - standard-orchestrator
+      description: Pre-filled if you clicked "Report an issue" from a lab page
     validations:
       required: true
   - type: textarea
