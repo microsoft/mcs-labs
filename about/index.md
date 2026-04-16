@@ -124,7 +124,7 @@ classes: wide
 
 <div class="about-hero">
   <h2>About these labs</h2>
-  <p>MCS Labs is built and maintained by a small team within the Copilot Acceleration Team (CAT) at Microsoft Customer Success. We create hands-on, guided labs so customers and partners can learn Copilot Studio by building real agents.</p>
+  <p>MCS Labs is built and maintained by a small team within the Copilot Acceleration Team (CAT). We create hands-on, guided labs so customers and partners can learn Copilot Studio by building real agents.</p>
 </div>
 
 <h2 class="about-section-title">Built by</h2>
