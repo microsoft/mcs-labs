@@ -59,25 +59,20 @@ classes: wide
 }
 
 .team-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 0.75em;
+  display: flex;
+  gap: 2.5em;
   margin: 0 0 2.5em;
   padding: 0;
   list-style: none;
+  flex-wrap: wrap;
 }
 
 .team-card {
-  border: 1px solid #e8e6e4;
-  border-radius: 8px;
-  padding: 1.4em 1.3em;
-  background: #fff;
   text-align: center;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition: transform 0.2s ease;
 }
 .team-card:hover {
-  border-color: #c8c6c4;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  transform: translateY(-2px);
 }
 .team-card a {
   text-decoration: none;
@@ -86,27 +81,33 @@ classes: wide
 }
 
 .team-avatar {
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
+  width: 72px !important;
+  height: 72px !important;
+  border-radius: 50% !important;
   object-fit: cover;
-  margin: 0 auto 0.8em;
+  margin: 0 auto 0.6em;
   display: block;
-  border: 2px solid #e8e6e4;
+  border: none !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+  transition: box-shadow 0.2s ease;
+}
+.team-card:hover .team-avatar {
+  box-shadow: 0 4px 20px rgba(0,120,212,0.15);
 }
 
 .team-name {
-  font-size: 0.92em;
+  font-size: 0.82em;
   font-weight: 600;
   color: #323130;
-  margin: 0 0 0.2em;
+  margin: 0;
+  letter-spacing: -0.01em;
 }
 
 .team-role {
-  font-size: 0.78em;
-  color: #605e5c;
-  margin: 0;
-  line-height: 1.4;
+  font-size: 0.72em;
+  color: #a19f9d;
+  margin: 0.15em 0 0;
+  line-height: 1.3;
 }
 
 .about-content {
