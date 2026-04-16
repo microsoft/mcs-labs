@@ -98,6 +98,7 @@ Without ALM, each of these steps is manual, error-prone, and difficult to repeat
 - A Microsoft Power Platform environment with at least an Environment Maker security role
 - Access to multiple Power Platform environments (DEV, ALM Prod) - provided in the lab setup
 
+
 ---
 
 ## 🎯 Summary of Targets
@@ -108,6 +109,7 @@ In this lab, you'll configure a complete ALM foundation for working with Microso
 - Set up environment variables and connection references for portability across environments
 - Create and configure Power Platform pipelines for automated deployment
 - Deploy solutions from DEV to ALM Prod and understand post-deployment configuration
+
 
 ---
 
