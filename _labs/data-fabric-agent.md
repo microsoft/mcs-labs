@@ -559,7 +559,7 @@ By following these principles, you'll build robust AI ecosystems where specializ
 
 ### Optional Challenge Activities
 
- **Ready to go further?** Try these advanced challenges:
+🚀 **Ready to go further?** Try these advanced challenges:
 
 1. **Multi-Agent Orchestration**: Create a second Fabric Data Agent for a different dataset and connect both to the same Copilot Studio agent
 2. **Custom Visualizations**: Enable Code Interpreter and test queries that generate charts from your e-commerce data

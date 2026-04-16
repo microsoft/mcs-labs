@@ -8,6 +8,10 @@ section: advanced_labs
 journeys: ["autonomous-ai", "developer"]
 ---
 
+---
+
+# Autonomous Portfolio Lookup Agent with Computer-Using Agents (CUA)
+
 Build an autonomous Copilot Studio agent that retrieves financial portfolio data from internal legacy systems that lack API connectivity.
 
 ---
@@ -20,6 +24,46 @@ Build an autonomous Copilot Studio agent that retrieves financial portfolio data
 
 ---
 
+## Table of Contents
+
+- [Why This Matters](#why-this-matters)
+- [Introduction](#introduction)
+- [Core Concepts Overview](#core-concepts-overview)
+- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Use Cases Covered](#use-cases-covered)
+- [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: Create and Configure an Autonomous Agent](#use-case-1-create-and-configure-an-autonomous-agent)
+  - [Use Case #2: Add Computer Use and Email Connector](#use-case-2-add-computer-use-and-email-connector)
+
+---
+
+## Why This Matters
+
+Legacy systems without APIs create major roadblocks for automation. Traditional RPA often relies on fragile screen-scraping or manual workarounds, which slow down decision-making, increase errors, and reduce productivity.
+
+This lab introduces Microsoft Copilot Studio and Computer Using Agents (CUA) as a smarter solution. By simulating human interaction with internal systems, CUAs can securely access and process data - without needing API integration. You’ll learn to build an autonomous agent that delivers faster responses, reduces manual workload, and enables real-time, informed decisions.
+
+---
+
+## Introduction
+
+In this lab, you’ll learn how to build an autonomous agent using Microsoft Copilot Studio. This agent will simulate human interaction with a legacy internal system to retrieve financial portfolio data without requiring direct API access.
+
+**Real-world example:** A financial advisor needs quick access to key portfolio details - such as client name, portfolio value, and assigned manager - to prepare for meetings, review performance, resolve issues, or recommend rebalancing. However, this data resides in a legacy system that lacks an API and is restricted from direct access.
+
+Traditional RPA tools may fall short in such scenarios. They rely on fragile screen-scraping and require constant maintenance, making them unreliable and costly for dynamic, real-time use cases.
+
+As a result, advisors must depend on back-office teams to retrieve information, causing delays, inefficiencies, and a higher risk of errors - ultimately limiting their ability to make timely, informed decisions.
+
+By implementing a Copilot Studio agent, advisors can securely and instantly retrieve accurate portfolio data. This improves response times, reduces manual workload, and enhances overall productivity without the limitations of traditional RPA.
+
+---
+
+## Core Concepts Overview
+
+| Concept | Why it matters |
 |---------|----------------|
 | **Autonomous Agents** | Enable 24/7 automated responses to user inquiries, reducing manual workload and improving response times while maintaining consistency in support quality. |
 | **Triggers** | Events, as simple as "Email received", that trigger autonomous agents to then automatically detect and process the content and context initially provided. |

@@ -9,6 +9,10 @@ journeys: ["developer"]
 bootcamp_order: "6"
 ---
 
+---
+
+# Deploy with confidence: Power Platform pipelines & ALM
+
 Master the deployment of your Microsoft Copilot Studio agents across environments using Power Platform pipelines. Learn the complete lifecycle from development to production.
 
 ---
@@ -21,6 +25,45 @@ Master the deployment of your Microsoft Copilot Studio agents across environment
 
 ---
 
+## Table of Contents
+
+- [Why Master ALM Deployment?](#why-master-alm-deployment)
+- [Introduction](#introduction)
+- [Core Concepts Overview](#core-concepts-overview)
+- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Use Cases Covered](#use-cases-covered)
+- [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: Set Up Git For Source Control](#use-case-1-set-up-git-source-control)
+  - [Use Case #2: Create Power Platform pipelines for deployment](#use-case-2-create-power-platform-pipelines-for-deployment)
+  - [Use Case #3: Commit changes and understand source control structure](#use-case-3-commit-changes-and-understand-source-control-structure)
+
+---
+
+## Why Master ALM Deployment?
+
+**Ready to move beyond development?** You've built amazing agents in your dev environment, but now you need to deploy them safely and consistently to test and production environments.
+
+Think of deployment pipelines as your quality assurance assembly line:
+- **Without pipelines**: Manual exports, forgotten configurations, "it worked in dev" syndrome
+- **With pipelines**: Automated, consistent, auditable deployments with proper validation
+
+**Common deployment challenges solved by proper ALM:**
+- "My agent works perfectly in dev but breaks in production"
+- "I forgot to configure the authentication settings after deployment"
+- "Someone deployed directly to production and bypassed testing"
+- "I can't track what changed between versions"
+
+**This lab transforms deployment from a risky manual process into a confident, repeatable workflow!**
+
+---
+
+## Introduction
+
+Application Lifecycle Management (ALM) deployment ensures your solutions move safely and consistently from development through testing to production. This lab builds on ALM foundations to implement automated deployment pipelines and understand the complete deployment lifecycle.
+
+**Real-world example:** Your customer service agent is ready for production, but deployment involves:
 1. Exporting the solution as managed
 2. Importing to test environment for validation
 3. Configuring environment-specific settings
@@ -81,8 +124,9 @@ In this lab, you'll implement a complete ALM deployment process for Microsoft Co
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create Power Platform pipelines for deployment](#use-case-1-create-power-platform-pipelines-for-deployment) | Automate with confidence – Set up governed, repeatable deployment workflows that democratize ALM for all makers while maintaining security and control through platform governance. | 10 min |
-| 2 | [Commit changes and understand source control structure](#use-case-3-commit-changes-and-understand-source-control-structure) | Track and structure – Use Git integration to maintain deployment history and understand how solution components are organized in source control. | 5 min |
+| 1 | [Set Up Git For Source Control](#use-case-1-set-up-git-source-control) | Track and evolve – Use Git to version, review, and automate deployment of your agent assets. | 10 minutes |
+| 2 | [Create Power Platform pipelines for deployment](#use-case-2-create-power-platform-pipelines-for-deployment) | Automate with confidence – Set up governed, repeatable deployment workflows that democratize ALM for all makers while maintaining security and control through platform governance. | 10 min |
+| 3 | [Commit changes and understand source control structure](#use-case-3-commit-changes-and-understand-source-control-structure) | Track and structure – Use Git integration to maintain deployment history and understand how solution components are organized in source control. | 5 min |
 
 ---
 
@@ -90,7 +134,120 @@ In this lab, you'll implement a complete ALM deployment process for Microsoft Co
 
 ---
 
-## Use Case #1: Create Power Platform pipelines for deployment
+## Use Case #1: Set up Git source control
+
+> [!TIP]
+> This lab is optional and won't block your progress in future labs.
+
+Connect your solution to Azure DevOps Git to track changes and prepare for CI/CD—no code required.
+
+| Use case | Value added | Estimated effort |
+|----------|-------------|------------------|
+| Set up Git source control | Track and evolve – Use Git to version, review, and automate deployment of your agent assets. | 10 minutes |
+
+**Summary of tasks**
+
+In this section, you'll learn how to create a new project in Azure DevOps, how to instantiate the main branch, and how to connect it to your developer environment.
+
+**Scenario:** You want to track changes to your Copilot Studio agents in source control, collaborate with your team, and prepare for automated deployment pipelines.
+
+### Step-by-step instructions
+
+---
+
+### Setting up Azure DevOps
+
+1. **Navigate** to [my.visualstudio.com/subscriptions](https://my.visualstudio.com/subscriptions)
+
+2. If not already signed in, **log in** with your fictitious user account.
+
+3. Select **Join Visual Studio Dev Essentials**
+
+4. **Confirm** 
+
+5. Under **Subscription / Program**, select **Visual Studio Dev Essentials**
+
+> [!IMPORTANT]
+> If you're landing into a **Something went wrong!** error, follow these steps:
+> 1. Go to [aex.dev.azure.com](https://aex.dev.azure.com/).
+> 2. If prompted, create new organization (you can leave the default name) if prompted
+> 3. Skip to step 6.
+
+6. Select **Azure DevOps** to open the Azure DevOps portal.
+
+7. In the **Benefits** tab, for **Azure DevOps**, select **Get started**.
+
+8. When prompted, select **Continue**.
+
+9. Name your organization (you can leave the default name) and select **Continue**.'
+
+10. Create a new project by setting a **project name**. For example `Agents`
+
+11. Select **+ Create project**.
+
+12. After project creation, go to **Repos** → **Branches**.
+
+13. Select **Initialize** (at the bottom) to create the `main` branch with a README or .gitignore.
+
+   ![alt text](images/azure-devops-initialize-branch.png) 
+    
+> 🎉 You’ve set up the Git repo! Now return to Microsoft Copilot Studio.
+
+### Connecting Microsoft Copilot Studio to Git
+
+14. Go back to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and open the **Solutions** page (still behind the `...` menu).
+
+15. In the menu, select **Connect to Git**.
+
+16. Set **Connection type** to `Solution`.
+
+17. Choose your **organization** and your newly created **project** and **repository**.
+
+18. Set the **Root Git folder** to `Solutions`.
+
+19. Select **Next**, then pick the solution created in Use Case #1.
+
+      ![alt text](images/connect-to-git.png)
+
+20. When prompted for the branch, select **Create new branch** and name it `dev`.
+
+21. Click **Save** and then **Connect**.
+
+### Observing the Git integration from Microsoft Copilot Studio
+
+22. Now, let's see this action. **Open the solution** you created in Use Case #1.
+
+23. In the left-hand navigation, navigate to **Source control**.
+
+24. **See** how the various components you have added to your solution are now ready to be committed to your source control. If don't see them all, select **Refresh** as they get detected and added.
+
+25. When ready, select **Commit**, add a comment describing the changes you're introducing (e.g., `New solution and environment variable`).
+
+![alt text](images/commit.png)
+
+26. Once committed, you can **navigate** to your commit in Azure DevOps and see the introduced, updated, or deleted components.
+
+---
+
+### Congratulations! You've set up Git source control!
+
+---
+
+### Test your understanding
+
+* Can you see your solution files in Azure DevOps?
+* Can you track history and commit changes?
+* Can you create new branches for testing changes?
+
+**Challenge: Apply this to your own use case**
+
+* Explore branching strategies (e.g., main/dev/feature).
+* How will your team review and merge changes?
+* How could this integrate with deployment pipelines later?
+
+---
+
+## Use Case #2: Create Power Platform pipelines for deployment
 
 Set up automated deployment pipelines that democratize ALM while maintaining proper governance and security through platform controls.
 
@@ -185,7 +342,7 @@ the agent. Tell the agent to "Provision a PROD environment".  You are limited to
 
 ---
 
-## Use Case #2: Commit changes and understand source control structure
+## Use Case #3: Commit changes and understand source control structure
 
 Use Git integration to track deployment changes and understand how Power Platform solution components are organized in source control.
 
@@ -289,19 +446,19 @@ Commit deployment artifacts to Git and understand the structure of unpacked Powe
 
 **ALM golden rules reinforced:**
 
- **Work in the context of solutions** – Pipelines require properly structured solutions for deployment automation.
+✅ **Work in the context of solutions** – Pipelines require properly structured solutions for deployment automation.
 
- **Create separate solutions only if you need to deploy components independently** – Pipelines work best with cohesive solution packaging.
+✅ **Create separate solutions only if you need to deploy components independently** – Pipelines work best with cohesive solution packaging.
 
- **Use a custom publisher and prefix** – Maintains clear ownership in automated deployment scenarios.
+✅ **Use a custom publisher and prefix** – Maintains clear ownership in automated deployment scenarios.
 
- **Use environment variables for settings and secrets that change across environments** – Pipelines validate and update these automatically during deployment.
+✅ **Use environment variables for settings and secrets that change across environments** – Pipelines validate and update these automatically during deployment.
 
- **Export and deploy solutions as managed, unless setting up a dev environment** – Pipelines automatically handle this, ensuring governance and preventing unauthorized changes.
+✅ **Export and deploy solutions as managed, unless setting up a dev environment** – Pipelines automatically handle this, ensuring governance and preventing unauthorized changes.
 
- **Don't do customizations outside of dev** – Managed Environments enforce this rule, blocking unmanaged customizations in target environments.
+✅ **Don't do customizations outside of dev** – Managed Environments enforce this rule, blocking unmanaged customizations in target environments.
 
- **Consider automating ALM for source control and automated deployments** – Pipelines provide this automation while remaining extensible for advanced scenarios.
+✅ **Consider automating ALM for source control and automated deployments** – Pipelines provide this automation while remaining extensible for advanced scenarios.
 
 > [!IMPORTANT]
 > **Critical reminder about non-solution-aware settings:**

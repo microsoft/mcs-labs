@@ -13,8 +13,6 @@ labs:
     children:
       - title: "Agent Builder (Web)"
         url: /labs/agent-builder-web/
-      - title: "Public Website Agent"
-        url: /labs/public-website-agent/
       - title: "MBR SharePoint Agent"
         url: /labs/mbr-prep-sharepoint-agent/
       - title: "First Agent in Copilot Studio"
@@ -55,10 +53,6 @@ labs:
         url: /labs/guildhall-custom-mcp/
       - title: "Dataverse MCP Connector"
         url: /labs/dataverse-mcp-connector/
-  - title: "Optional Labs"
-    children:
-      - title: "Ask Me Anything (30 min)"
-        url: /labs/ask-me-anything-30-mins/
   - title: "External Labs"
     children:
       - title: "MCP & Copilot Studio"

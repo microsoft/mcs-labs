@@ -156,7 +156,32 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Select the **Environment selector** in the top-right corner of the screen. It make take a few seconds for the **Environment** list to become visible.
 
-1. Search for `Bootcamp Green` and select it.
+1. Search for the following and select it:
+
+    ```
+    Bootcamp Green
+    ```
+
+#### Create a Solution
+
+1. In the left navigation, select **"..."** and then select **Solutions**.
+
+1. Select **New solution** in the top navigation.
+
+1. Set the **Display name** to your username (e.g., `user01`).
+
+1. Set the **Name** to your username as well to ensure it is unique in this shared environment.
+
+    > [!NOTE]
+    > Solution names must be unique within an environment. Since this is a shared environment, using your username ensures there are no naming conflicts with other participants.
+
+1. Set the **Publisher** to **CAT** or the **Default Publisher** — either is fine for this lab.
+
+1. Select **Create**.
+
+#### Create the Agent
+
+1. Select **Home** in the left navigation to return to the main page.
 
 1. In the **"What would you like to build?"** pane, find the text area that says _"Start building by describing what your agent needs to do"_.
 
@@ -183,7 +208,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Before selecting the blue arrow to create, select the **Settings** wheel icon in the bottom-left corner.
 
-1. In the Settings pane, make sure you select the **Solution** that was created at the start of this bootcamp.
+1. In the Settings pane, select the **Solution** you created earlier in this lab (named with your username).
 
 1. Optionally, give your agent a custom **Schema Name**.
 
@@ -206,7 +231,11 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Select **SharePoint**.
 
-1. Enter the following for the URL: https://copilotstudiotraining.sharepoint.com/:p:/s/Workshop/IQDYEPT5O76JR5akoXWdwO-PAR3IVlIBJ-RqZqpHy2cCRLs?e=qpIVD6
+1. Enter the following for the URL:
+
+    ```
+    https://copilotstudiotraining.sharepoint.com/:p:/s/Workshop/IQDYEPT5O76JR5akoXWdwO-PAR3IVlIBJ-RqZqpHy2cCRLs?e=qpIVD6
+    ```
 
 1. Select **Add**.
 
@@ -267,7 +296,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 1. Notice that `learn.microsoft.com` shows a status of **Blocked**.
 
     > [!IMPORTANT]
-    > The status message will say something like _"Not allowed due to your organizational data loss prevention policies. Contact your admin."_ This is the DLP policy in action, blocking public website knowledge in the Green zone.
+    > The status message will say something like _"Not allowed due to your organizational data loss prevention policies. Contact your admin."_ This is the DLP policy in action, blocking public website knowledge in the Green zone. Additionally, publishing your agent will also be blocked while DLP policies are being enforced on knowledge sources. You must remove the blocked knowledge source before you can publish.
 
 ---
 
@@ -371,7 +400,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 1. Notice that the blog shows up as **Blocked**.
 
     > [!IMPORTANT]
-    > The Yellow zone only allows public knowledge from websites on the `microsoft.com` domain. The blog at `microsoft.github.io` is not on the `microsoft.com` domain, so it is blocked by the DLP policy.
+    > The Yellow zone only allows public knowledge from websites on the `microsoft.com` domain. The blog at `microsoft.github.io` is not on the `microsoft.com` domain, so it is blocked by the DLP policy. As with the Green zone, publishing your agent will also be blocked while DLP policies are being enforced on knowledge sources. You must remove the blocked knowledge source before you can publish.
 
 ---
 
