@@ -81,17 +81,13 @@ classes: wide
 }
 
 .team-avatar {
-  width: 64px;
-  height: 64px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
-  background: #deecf9;
-  color: #0078d4;
-  font-size: 1.5em;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  object-fit: cover;
   margin: 0 auto 0.8em;
+  display: block;
+  border: 2px solid #e8e6e4;
 }
 
 .team-name {
@@ -128,36 +124,13 @@ classes: wide
 <h2 class="about-section-title">The team</h2>
 
 <ul class="team-grid">
+  {% for member in site.data.team %}
   <li class="team-card">
-    <div class="team-avatar">PL</div>
-    <div class="team-name">Pratap Ladhani</div>
-    <div class="team-role">Principal PM Lead</div>
+    <img class="team-avatar" src="https://github.com/{{ member.github }}.png?size=128" alt="{{ member.name }}">
+    <div class="team-name">{{ member.name }}</div>
+    {% if member.role != "" %}<div class="team-role">{{ member.role }}</div>{% endif %}
   </li>
-  <li class="team-card">
-    <div class="team-avatar">TM</div>
-    <div class="team-name">Team Member</div>
-    <div class="team-role">Role</div>
-  </li>
-  <li class="team-card">
-    <div class="team-avatar">TM</div>
-    <div class="team-name">Team Member</div>
-    <div class="team-role">Role</div>
-  </li>
-  <li class="team-card">
-    <div class="team-avatar">TM</div>
-    <div class="team-name">Team Member</div>
-    <div class="team-role">Role</div>
-  </li>
-  <li class="team-card">
-    <div class="team-avatar">TM</div>
-    <div class="team-name">Team Member</div>
-    <div class="team-role">Role</div>
-  </li>
-  <li class="team-card">
-    <div class="team-avatar">TM</div>
-    <div class="team-name">Team Member</div>
-    <div class="team-role">Role</div>
-  </li>
+  {% endfor %}
 </ul>
 
 <h2 class="about-section-title">About these labs</h2>
