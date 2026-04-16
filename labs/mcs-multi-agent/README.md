@@ -25,7 +25,6 @@ Help makers understand how to leverage multi-agent configurations including chil
   - [Use Case #1: Create Sales Assistant Agent](#-use-case-1-create-sales-assistant-agent)
   - [Use Case #2: Create Product Information Child Agents](#-use-case-2-create-product-information-child-agents)
   - [Use Case #3: Connect to Account and Contact Information Agent](#-use-case-3-connect-to-account-and-contact-information-agent)
-  - [Use Case #4 (Optional): Connect a Fabric Data Agent](#-use-case-4-optional-connect-a-fabric-data-agent)
 
 ---
 
@@ -116,7 +115,6 @@ In this lab, you'll build a parent agent that will leverage both connected agent
 | 1 | [Create Sales Assistant Agent](#-use-case-1-create-sales-assistant-agent) | Creates parent agent to help sales associate find information they need | 8 min |
 | 2 | [Create Product Information Child Agents](#-use-case-2-create-product-information-child-agents) | Creates child agents to provide market-specific product information | 12 min |
 | 3 | [Connect to Account and Contact Information Agent](#-use-case-3-connect-to-account-and-contact-information-agent) | Connect existing Copilot Studio agent that provides account and contact information | 10 min |
-| 4 | [Connect a Fabric Data Agent (Optional)](#-use-case-4-optional-connect-a-fabric-data-agent) | Extend your multi-agent solution with Fabric Data Agent for e-commerce analytics | Optional |
 
 ---
 
@@ -148,7 +146,7 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 #### Create Sales Associate Assistant
 
-1. Go to the Copilot Studio home page at https://copilotstudio.microsoft.com.
+1. Go to the Copilot Studio home page at <a href="https://copilotstudio.microsoft.com" target="_blank">copilotstudio.microsoft.com</a>.
 
 1. Check the **Environment** in the upper right corner to make sure you are in your "DEV - user name" environment.
 
@@ -529,7 +527,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 #### Connect the Account and Contact Information Agent
 
-1. In the Copilot Studio tab in your browser, go to the parent agent (Sales Info Assistant)
+1. In the Copilot Studio tab in your browser, go to the parent agent (Sales Associate Assistant)
 
 1. Go to the **Agents** menu on the top navigation bar
 
@@ -585,175 +583,6 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ---
 
----
-
-## 🔄 Use Case #4 (Optional): Connect a Fabric Data Agent
-
-Extend your multi-agent Sales Associate Assistant by connecting a Microsoft Fabric Data Agent to provide e-commerce analytics capabilities through agent-to-agent communication.
-
-| Use case | Value added | Estimated effort |
-|----------|-------------|------------------|
-| Connect a Fabric Data Agent | Add Fabric data intelligence to your multi-agent solution for e-commerce analytics | Optional (20 minutes) |
-
-> [!NOTE]
-> This use case is optional and does not count toward the 30-minute lab duration. It requires access to a Microsoft Fabric capacity and the Workshop Demo Workspace. Complete this if you finish the core lab early or want to explore advanced multi-agent patterns.
-
-**Summary of tasks**
-
-In this section, you'll learn how to create a Fabric Data Agent, optimize it with meta-prompts, and connect it as an additional agent to your Sales Associate Assistant.
-
-**Scenario:** Your Sales Team wants to ask natural language questions about e-commerce performance data stored in Microsoft Fabric — such as revenue trends, top products, and customer segments — directly through the Sales Associate Assistant without needing SQL expertise.
-
-### Objective
-
-Create a Fabric Data Agent connected to an e-commerce semantic model and add it as a connected agent to your Sales Associate Assistant, demonstrating how multi-agent architectures can span across Copilot Studio and Microsoft Fabric.
-
----
-
-### Step-by-step instructions
-
-#### Create the Fabric Data Agent
-
-1. Go to [fabric.microsoft.com](https://fabric.microsoft.com) and sign in with your credentials.
-
-1. In the left navigation, select **Workspaces** and then select **Workshop Demo Workspace**.
-
-1. Within the workspace, locate the **e-commerce** folder and open the **E-commerce Dataset Report** to familiarize yourself with the data. Keep this tab open for reference.
-
-1. Create a personal folder in the workspace by selecting **New** > **Folder** and naming it with your username.
-
-1. In your personal folder, Select **New Item**, search for `data agent`, and select **Data Agent (Preview)**.
-
-   ![Search for Data Agent](images/add-data-agent.png)
-
-1. Name your agent using the pattern `[YourUsername]_DataAgent` and select **Create**.
-
-#### Connect the Data Source
-
-1. In the agent setup, select **+ Data source** in the Explorer panel.
-
-   ![Select Data Source](images/select-data-source.png)
-
-1. Select **ecommerce-order-dataset** (Type: Semantic Model) and select **Add**.
-
-   ![Select ecommerce-order-dataset](images/select-ecommerce-order-dataset.png)
-
-1. After validation, select all available tables: Customers, Order_Items, Orders, Payments, Products.
-
-1. Test baseline functionality in the **Test** pane:
-
-    ```
-    What is our total revenue?
-    Show me the top 5 products by sales
-    How many customers do we have?
-    ```
-
-#### Optimize with Meta-Prompts
-
-1. Generate agent-level instructions by entering this meta-prompt in the **Test** pane:
-
-    ```
-    Meta-Prompt: Generate Agent-Level Instructions:
-    Analyze your available data sources and create agent-level instructions for yourself (max 15000 chars).
-
-    Objective: E-commerce analytics agent for business intelligence
-    Users: Business analysts and sales teams
-
-    Examine your data sources: list all sources, types, and primary use. Analyze domain, time coverage, and main themes.
-
-    Generate instructions with:
-    ## Objective
-    ## Data Sources (list with priority)
-    ## Key Terminology (infer from columns/measures)
-    ## Response Guidelines
-    Style: Clear summaries with data citations and trend analysis
-    ## Handling Common Topics (3-5 based on available data)
-    ```
-
-1. Copy the generated response, review it, and paste it into the **Agent Instructions** field in the **Setup** section.
-
-    > [!TIP]
-    > Always review generated instructions for accuracy. Meta-prompts provide a strong foundation but may need minor adjustments for your specific use case.
-
-#### Publish and Connect to Copilot Studio
-
-1. Generate a description using this meta-prompt in the Test pane:
-
-    ```
-    Create a 1-2 sentence description of yourself as a Fabric Data Agent (max 200 chars).
-    Analyze your data sources and describe: what data domain you cover and what questions you answer.
-    Output plain text only.
-    ```
-
-1. Select **Publish** and paste the generated description in the purpose and capabilities field.
-
-> [!IMPORTANT]
-> Save this description — you'll need it when connecting to Copilot Studio.
-
-1. Go to your **Sales Associate Assistant** in Copilot Studio.
-
-1. Select **Agents** tab on the top navigation bar.
-
-1. Select **Add an agent**.
-
-1. Select **Connect to an external agent** and choose **Microsoft Fabric (preview)**.
-
-1. If it shows **Not connected**, Select the dropdown, select **Create new connection**, and sign in.
-
-    ![Create connection](images/create-connection.png)
-
-1. Select your Fabric Data Agent from the list (look for your username) and Select **Next**.
-
-1. Configure the connected agent:
-    - **Name**: Your data agent name
-    - **Description**: Paste the description from step 13
-
-1. Verify the connection shows a green checkmark and Select **Add agent**.
-
-    > [!NOTE]
-    > If you see "An unexpected server error occurred", try selecting **Add agent** again. If that doesn't work, select **Back**, reselect the agent, and try again.
-
-#### Test the Integrated Solution
-
-1. Open the **Test** pane in Copilot Studio.
-
-1. Select your market (US or UK) when prompted.
-
-1. Test the Fabric Data Agent connection with progressive queries:
-
-    ```
-    What products do we sell in our e-commerce store?
-    ```
-
-    ```
-    Show me our top customers by total purchase value
-    ```
-
-    ```
-    Analyze our quarterly sales performance and identify which product categories are trending up or down
-    ```
-
-1. See in the test pane that data queries are delegated to the Fabric Data Agent, indicated by handoff messages in the execution trace.
-
-    > [!TIP]
-    > Your Sales Associate Assistant now has three types of agents working together: child agents for market-specific product info, a connected agent for account/contact data, and a Fabric Data Agent for e-commerce analytics. This demonstrates real-world multi-agent orchestration at scale.
-
----
-
-###  🏅 Congratulations! You've completed Use Case #4!
-
----
-
-### Test your understanding
-
-* Can you identify when the Fabric Data Agent is being triggered versus the Account Data Lookup Agent in the test pane?
-* How does the agent description influence when the Fabric agent is consulted versus the child agents?
-* What types of queries benefit most from the Fabric Data Agent versus native Copilot Studio capabilities?
-
----
-
----
-
 ## 🏆 Summary of learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
@@ -761,7 +590,7 @@ True learning comes from doing, questioning, and reflecting—so let's put your 
 To maximize the impact of multi-agent configurations:
 
 * **Child agents group related capabilities** — Use them to logically organize tools and knowledge with dedicated instructions and conditions for orchestration.
-* **Connected agents extend your reach** — Use them to integrate independently published agents, including agents from other teams or platforms like Fabric.
+* **Connected agents extend your reach** — Use them to integrate independently published agents, including agents from other teams or platforms.
 * **Conditions and variables drive orchestration** — Global variables and conditional availability ensure the right agent handles the right request.
 * **Descriptions are critical for orchestration** — Clear, specific descriptions help the orchestrator decide which agent to delegate to.
 * **Test incrementally** — Start with simple queries and progressively increase complexity to validate that orchestration routes correctly.

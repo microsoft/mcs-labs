@@ -400,8 +400,7 @@ layout: default
       "azure-ai-workshop": { title: "☁️ MCS + Azure AI Workshop", icon: "☁️" },
       "mcs-in-a-day": { title: "⚡ MCS in a Day", icon: "⚡" },
       "agent-buildathon-1day": { title: "🏗️ Agent Build-A-Thon (1 day)", icon: "🏗️" },
-      "agent-buildathon-1month": { title: "🚀 Agent Build-A-Thon (1 month)", icon: "🚀" },
-      "mcs-in-a-day-v2": { title: "⚡ MCS in a Day V2", icon: "⚡" }
+      "agent-buildathon-1month": { title: "🚀 Agent Build-A-Thon (1 month)", icon: "🚀" }
     };
 
     // Display event context banner if viewing lab within an event
@@ -967,7 +966,7 @@ layout: default
 
         // Add click handler
         copyButton.addEventListener("click", async function () {
-          const code = pre.textContent || pre.innerText;
+          const code = (pre.textContent || pre.innerText).replace(/\n$/, '');
 
           try {
             await navigator.clipboard.writeText(code);
@@ -1463,5 +1462,66 @@ layout: default
         });
       }
     }
+
+    // ========================================================================
+    // Markdown TOC Link Fix
+    // ========================================================================
+    // The manually-authored Table of Contents in lab markdown files can have
+    // anchor hrefs that don't match the actual Kramdown-generated heading IDs
+    // (e.g., "#-use-case--1--create..." vs actual "#-use-case-1-create...").
+    // This function intercepts those clicks, finds the correct heading via
+    // normalized ID matching, and scrolls smoothly — matching the behavior
+    // of the "On this page" sidebar TOC.
+    function fixMarkdownTocLinks() {
+      const labBody = document.querySelector(".lab-body");
+      if (!labBody) return;
+
+      // Normalize an ID for fuzzy matching: strip invisible Unicode,
+      // collapse multiple hyphens, and trim leading/trailing hyphens
+      function normalizeId(id) {
+        return id
+          .replace(/[\u200B-\u200D\uFE0F\uFEFF]/g, "") // invisible Unicode
+          .replace(/-+/g, "-")                            // collapse hyphens
+          .replace(/^-|-$/g, "");                         // trim edges
+      }
+
+      // Build a lookup from normalized heading IDs to heading elements
+      const headings = labBody.querySelectorAll("h2, h3");
+      const headingMap = new Map();
+      headings.forEach(function(h) {
+        if (h.id) {
+          headingMap.set(normalizeId(h.id), h);
+        }
+      });
+
+      // Intercept all in-page anchor links within the lab content
+      const anchorLinks = labBody.querySelectorAll('a[href^="#"]');
+      anchorLinks.forEach(function(link) {
+        link.addEventListener("click", function(e) {
+          var targetId = link.getAttribute("href").substring(1);
+          if (!targetId) return;
+
+          // Try exact match first, then normalized match
+          var target = document.getElementById(targetId)
+            || headingMap.get(normalizeId(decodeURIComponent(targetId)));
+
+          if (target) {
+            e.preventDefault();
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            history.pushState(null, null, "#" + target.id);
+
+            // Update active state in sidebar TOC
+            document.querySelectorAll(".toc-link").forEach(function(l) {
+              l.classList.remove("active");
+              if (l.getAttribute("href") === "#" + target.id) {
+                l.classList.add("active");
+              }
+            });
+          }
+        });
+      });
+    }
+
+    fixMarkdownTocLinks();
   });
 </script>

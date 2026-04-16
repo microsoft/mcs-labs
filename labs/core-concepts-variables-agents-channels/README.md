@@ -501,6 +501,8 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
     - **App icon**: Visual branding in Teams
     - **Availability**: Who can access the agent
 
+1. Select **Add channel** in the bottom right corner of the panel to start activation of this channel.
+
 1. Select **Edit details** and make adjustments. For example, change the short description to something like **Assist users building agents**
 
 1. Select **Save** to save your changes.
