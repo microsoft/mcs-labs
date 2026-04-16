@@ -1,298 +1,68 @@
 # =============================================================================
 # MICROSOFT COPILOT STUDIO LABS - BUILD AND DEPLOY WORKFLOW
 # =============================================================================
-# This workflow:
-# 1. Generates PDFs from lab markdown files
-# 2. Builds Jekyll site (Minimal Mistakes theme, static collections)
-# 3. Deploys to GitHub Pages
+# Builds Jekyll site (Minimal Mistakes theme) and deploys to GitHub Pages
 # =============================================================================
 
-name: 🚀 Build and Deploy Labs
+name: Build and Deploy
 
-# =============================================================================
-# CONCURRENCY CONTROL
-# =============================================================================
-# Prevents multiple GitHub Pages deployments from running simultaneously
-# - Only one deployment per group runs at a time
-# - Newer deployments automatically cancel any in-progress older deployments
-# - Prevents race conditions and deployment conflicts
-# =============================================================================
 concurrency:
   group: github-pages-deployment
   cancel-in-progress: true
 
-# =============================================================================
-# WORKFLOW TRIGGERS
-# =============================================================================
 on:
-  # Trigger on changes to lab content, configurations, or styling
   push:
     branches: [main]
     paths:
-      - "labs/**/*.md" # Lab markdown content
-      - "labs/**/images/**" # Lab images and assets
-      - "_labs/**" # Lab collection files
-      - "_events/**" # Event collection files
-      - "_layouts/**" # Jekyll layouts
-      - "_includes/**" # Jekyll includes
-      - "_data/**" # Jekyll data files
-      - "assets/**" # Jekyll assets and styling
-      - "_config.yml" # Jekyll configuration
-      - "index.md" # Homepage
-      - ".github/styles/**" # PDF styling files
-      - ".github/scripts/**" # PDF generation scripts
-      - ".github/workflows/build-and-deploy.yml" # This workflow file
-      - "package.json" # Dependencies
-      - "Gemfile" # Ruby dependencies
+      - "_labs/**"
+      - "_events/**"
+      - "_layouts/**"
+      - "_includes/**"
+      - "_data/**"
+      - "assets/**"
+      - "_config.yml"
+      - "index.md"
+      - "about/**"
+      - "events/**"
+      - "labs/**"
+      - ".github/workflows/build-and-deploy.yml"
+      - "Gemfile"
 
-  # Allow manual execution for testing
   workflow_dispatch:
-    inputs:
-      debug:
-        description: "Enable debug output"
-        required: false
-        default: false
-        type: boolean
 
-# =============================================================================
-# GITHUB PAGES PERMISSIONS
-# =============================================================================
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# =============================================================================
-# WORKFLOW JOBS
-# =============================================================================
 jobs:
   build-and-deploy:
-    name: 🔨 Build PDFs and Deploy Jekyll Site
+    name: Build and Deploy
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 15
 
     steps:
-      # =================================================================
-      # STEP 1: REPOSITORY SETUP
-      # =================================================================
-      - name: 📂 Checkout Repository
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
 
-      # =================================================================
-      # STEP 2: PDF GENERATION SETUP
-      # =================================================================
-      - name: 📄 Setup Pandoc (Markdown to HTML Converter)
-        uses: pandoc/actions/setup@v1.1.1
-        with:
-          version: 3.1.3
-
-      - name: 🔧 Setup Node.js and PDF Generation Tools
-        uses: actions/setup-node@v4
-        with:
-          node-version: "18"
-
-      - name: 📄 Install PDF Generation Dependencies
-        run: |
-          echo "🔧 Installing PDF generation dependencies..."
-          npm install
-          echo "✅ Dependencies installed successfully"
-
-          # Install fonts for better PDF rendering
-          sudo apt-get update -qq
-          sudo apt-get install -y --no-install-recommends fonts-noto-color-emoji fonts-noto-sans fonts-noto-serif || echo "⚠️ Warning: Could not install some fonts"
-          echo "✅ Font installation completed"
-
-          # Verify installations
-          echo "🔍 Verifying installations:"
-          pandoc --version 2>/dev/null | head -2 || echo "Pandoc version check failed"
-          node --version
-          npm list puppeteer --depth=0 2>/dev/null || echo "Puppeteer available locally"
-        timeout-minutes: 8
-
-      # =================================================================
-      # STEP 3: GENERATE PDFS FROM LAB MARKDOWN
-      # =================================================================
-      - name: 📄 Generate Lab PDFs
-        run: |
-          echo "📄 Starting PDF generation for all labs..."
-
-          # Create dist directory structure
-          mkdir -p dist
-
-          # Process each lab directory containing a README.md file
-          for lab_dir in labs/*/; do
-            if [ -d "$lab_dir" ] && [ -f "${lab_dir}README.md" ]; then
-              lab_name=$(basename "$lab_dir")
-              echo "📝 Processing lab: $lab_name"
-              
-              # Create output directory for this lab
-              mkdir -p "dist/$lab_name"
-              
-              # Enter lab directory to ensure relative image paths work correctly
-              cd "$lab_dir"
-              
-              # Preprocess markdown content
-              echo "  🔄 Preprocessing markdown content..."
-              cp "README.md" "${lab_name}_processed.md"
-              
-              # Handle callout blocks (including indented ones)
-              awk '
-                BEGIN {
-                  callout = 0;
-                  callout_type = "";
-                  indent = "";
-                }
-                match($0, /^([[:space:]]*)> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/, m) {
-                  callout = 1;
-                  indent = m[1];  # Capture leading whitespace
-                  callout_type = tolower(m[2]);
-                  if (callout_type == "note") { class="note"; label="**Note:** "; }
-                  else if (callout_type == "tip") { class="tip"; label="**Tip:** "; }
-                  else { class="warning"; label="**" toupper(callout_type) ":** "; }
-                  sub(/^[[:space:]]* *> \[!(NOTE|TIP|IMPORTANT|WARNING|CAUTION)\]/, indent "> <div class=\"" class "\">" label);
-                  print;
-                  next;
-                }
-                callout && /^[[:space:]]*> / {
-                  print;
-                  next;
-                }
-                callout && !/^[[:space:]]*> / {
-                  print indent "</div>";
-                  callout = 0;
-                  callout_type = "";
-                  indent = "";
-                }
-                { print; }
-              ' "${lab_name}_processed.md" > "${lab_name}_callouts.md"
-              mv "${lab_name}_callouts.md" "${lab_name}_processed.md"
-              
-              # Extract document title
-              lab_title=$(grep -m 1 '^# ' "${lab_name}_processed.md" | sed 's/^# //' | sed 's/[*_`]//g' | head -1)
-              if [ -z "$lab_title" ]; then
-                lab_title="$lab_name - Microsoft Copilot Studio Labs"
-              fi
-              echo "  📋 Document title: $lab_title"
-              
-              # Convert to HTML first
-              echo "  🔄 Converting to HTML..."
-              yaml_disabled_format="markdown+auto_identifiers+gfm_auto_identifiers+emoji+header_attributes+raw_html+raw_attribute"
-              
-              if grep -q '^---$' "${lab_name}_processed.md"; then
-                first_line=$(head -1 "${lab_name}_processed.md")
-                second_line=$(sed -n '2p' "${lab_name}_processed.md")
-                if [ "$first_line" != "---" ] || [ "$second_line" = "---" ]; then
-                  yaml_disabled_format="markdown-yaml_metadata_block+auto_identifiers+gfm_auto_identifiers+emoji+header_attributes+raw_html+raw_attribute"
-                fi
-              fi
-              
-              # Convert to HTML
-              if pandoc "${lab_name}_processed.md" \
-                -o "../../dist/${lab_name}/${lab_name}.html" \
-                --standalone \
-                --embed-resources \
-                --css="../../.github/styles/html.css" \
-                --html-q-tags \
-                --section-divs \
-                --id-prefix="" \
-                --metadata title="$lab_title" \
-                --metadata lang="en" \
-                -f "$yaml_disabled_format" \
-                -t html5; then
-                
-                echo "    ✅ HTML conversion successful"
-                
-                # Post-process HTML
-                html_output_file="../../dist/${lab_name}/${lab_name}.html"
-                sed -i '/<header id="title-block-header">/,/<\/header>/d' "$html_output_file"
-                sed -i 's/id=""//g' "$html_output_file"
-                sed -i 's/<a href="\(https\?:\/\/[^"]*\)"/<a href="\1" target="_blank" rel="noopener noreferrer"/g' "$html_output_file"
-                
-                # Convert HTML to PDF
-                echo "  📄 Converting HTML to PDF..."
-                pdf_output_file="../../dist/${lab_name}/${lab_name}.pdf"
-                
-                if node "../../.github/scripts/generate-pdf.js" "$html_output_file" "$pdf_output_file" "$lab_title"; then
-                  echo "    ✅ PDF generated successfully"
-                  # Conditionally clean up intermediate HTML file based on debug mode
-                  if [ "${{ inputs.debug }}" != "true" ]; then
-                    rm -f "$html_output_file"
-                    echo "    🧹 Cleaned up intermediate HTML file"
-                  else
-                    echo "    🔍 Debug mode: Keeping HTML file for inspection at $html_output_file"
-                  fi
-                else
-                  echo "    ⚠️  PDF generation failed for $lab_name"
-                fi
-              else
-                echo "    ❌ HTML conversion failed for $lab_name"
-              fi
-              
-              # Cleanup
-              rm -f "${lab_name}_processed.md"
-              cd - > /dev/null
-            fi
-          done
-
-          echo "📊 Generated PDFs: $(find dist -name "*.pdf" -type f | wc -l 2>/dev/null || echo "0")"
-
-      # =================================================================
-      # STEP 4: SETUP JEKYLL ENVIRONMENT
-      # =================================================================
-      - name: 💎 Setup Ruby and Jekyll
+      - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.1"
-          bundler-cache: false
+          bundler-cache: true
 
-      - name: 📄 Copy PDFs to Jekyll assets
-        run: |
-          # Create assets directory for PDFs
-          mkdir -p assets/pdfs
-
-          # Copy PDFs from dist to Jekyll assets
-          if [ -d "dist" ]; then
-            echo "📄 Copying generated PDFs to Jekyll assets..."
-            find dist -name "*.pdf" -type f | while read pdf_file; do
-              lab_name=$(basename "$(dirname "$pdf_file")")
-              cp "$pdf_file" "assets/pdfs/${lab_name}.pdf"
-              echo "  ✅ Copied PDF for lab: $lab_name"
-            done
-            echo "📊 Total PDFs copied: $(find assets/pdfs -name "*.pdf" | wc -l)"
-          else
-            echo "⚠️  No PDFs found to copy"
-          fi
-
-      - name: 💎 Install Jekyll dependencies
-        run: |
-          gem install bundler jekyll
-          bundle config set --local path 'vendor/bundle'
-          bundle install --retry 3 --jobs 4
-
-      - name: 🏗️ Build Jekyll site
-        run: |
-          bundle exec jekyll build --verbose
+      - name: Build Jekyll
+        run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
 
-      # =================================================================
-      # STEP 6: DEPLOY TO GITHUB PAGES
-      # =================================================================
-      - name: ⚙️ Setup GitHub Pages
+      - name: Setup Pages
         uses: actions/configure-pages@v4
 
-      - name: 📦 Upload to GitHub Pages
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./_site
 
-      - name: 🚀 Deploy to GitHub Pages
-        id: deployment
+      - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
-
-      - name: 🎉 Deployment Summary
-        run: |
-          echo "✅ MCS Labs deployed successfully!"
-          echo "🌐 Site URL: ${{ steps.deployment.outputs.page_url }}"
