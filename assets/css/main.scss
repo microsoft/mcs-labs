@@ -201,15 +201,16 @@ a:hover, a:focus-visible { color: var(--color-accent-hover); }
     overflow-x: auto;
   }
 
-  // TOC sidebar spans full height, sticks on scroll
+  // TOC sidebar sticks on scroll and flows with page. No internal scroll:
+  // the TOC is flattened (h2 only) so it rarely exceeds viewport height,
+  // and when it does the whole page scrolls rather than showing a second
+  // scrollbar stacked against the browser's main scrollbar.
   aside.sidebar__right {
     grid-column: 2;
     grid-row: 1 / span 999;
     position: sticky !important;
     top: 2em;
     align-self: start;
-    max-height: calc(100vh - 4em);
-    overflow-y: auto;
     margin: 0 !important;
     padding: 0 !important;
   }
