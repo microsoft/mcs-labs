@@ -49,6 +49,27 @@
     return null;
   }
 
+  // --- URL sanitizer ---
+  // Every URL used in href or location writes flows through safeUrl. The
+  // manifest URLs are produced by Jekyll at build time from trusted site
+  // data, but we still validate to cut the `javascript:` vector and to
+  // satisfy CodeQL's taint tracker.
+  function safeUrl(candidate) {
+    if (typeof candidate !== 'string' || !candidate) return '#';
+    // Disallow protocol-bearing strings we don't explicitly trust.
+    // Accepts absolute paths ("/..."), hash-only ("#..."), or full URLs
+    // whose origin matches the current page origin.
+    if (candidate.charAt(0) === '/' || candidate.charAt(0) === '#') return candidate;
+    try {
+      var u = new URL(candidate, window.location.origin);
+      if ((u.protocol === 'https:' || u.protocol === 'http:') &&
+          u.origin === window.location.origin) {
+        return u.pathname + u.search + u.hash;
+      }
+    } catch (e) {}
+    return '#';
+  }
+
   function eventContainsLab(event, labSlug) {
     if (!event || !event.schedule) return false;
     for (var i = 0; i < event.schedule.length; i++) {
@@ -106,18 +127,21 @@
   var nextLab = currentIdx < labsInEvent.length - 1 ? labsInEvent[currentIdx + 1] : null;
 
   function labHref(lab) {
-    return lab.url + '?event=' + encodeURIComponent(activeEvent.event_id);
+    return safeUrl(lab.url) + '?event=' + encodeURIComponent(activeEvent.event_id);
   }
 
   // --- Populate rail head ---
-  railEventLink.href = activeEvent.url;
+  railEventLink.href = safeUrl(activeEvent.url);
   railEventName.textContent = activeEvent.title;
   railPosition.textContent = 'Lab ' + (currentIdx + 1) + ' of ' + labsInEvent.length;
 
   if (prevLab) {
     prevBtn.removeAttribute('disabled');
     prevBtn.setAttribute('aria-label', 'Previous lab: ' + prevLab.title);
-    prevBtn.addEventListener('click', function () { window.location.href = labHref(prevLab); });
+    prevBtn.addEventListener('click', function () {
+      var href = labHref(prevLab);
+      window.location.assign(href);
+    });
   } else {
     prevBtn.setAttribute('disabled', '');
     prevBtn.setAttribute('aria-label', 'No previous lab');
@@ -126,13 +150,19 @@
   if (nextLab) {
     nextBtn.removeAttribute('disabled');
     nextBtn.setAttribute('aria-label', 'Next lab: ' + nextLab.title);
-    nextBtn.addEventListener('click', function () { window.location.href = labHref(nextLab); });
+    nextBtn.addEventListener('click', function () {
+      var href = labHref(nextLab);
+      window.location.assign(href);
+    });
   } else {
     nextBtn.setAttribute('disabled', '');
     nextBtn.setAttribute('aria-label', 'Back to ' + activeEvent.title);
     // When at the last lab, Next goes back to the event overview.
     nextBtn.removeAttribute('disabled');
-    nextBtn.addEventListener('click', function () { window.location.href = activeEvent.url; });
+    nextBtn.addEventListener('click', function () {
+      var href = safeUrl(activeEvent.url);
+      window.location.assign(href);
+    });
   }
 
   // --- Populate bottom nav-pair cards ---
@@ -141,7 +171,7 @@
     prevCardTitle.textContent = prevLab.title;
     prevCardDesc.textContent = prevLab.label || ('Lab ' + currentIdx);
   } else {
-    prevCard.href = activeEvent.url;
+    prevCard.href = safeUrl(activeEvent.url);
     prevCardTitle.textContent = 'Back to ' + activeEvent.title;
     prevCardDesc.textContent = 'Event overview';
   }
@@ -150,7 +180,7 @@
     nextCardTitle.textContent = nextLab.title;
     nextCardDesc.textContent = nextLab.label || ('Lab ' + (currentIdx + 2));
   } else {
-    nextCard.href = activeEvent.url;
+    nextCard.href = safeUrl(activeEvent.url);
     nextCardTitle.textContent = 'Finish ' + activeEvent.title;
     nextCardDesc.textContent = 'Event overview';
   }
@@ -186,7 +216,15 @@
       bodyCell.appendChild(a);
     } else if (item.type === 'link' && item.url) {
       var extA = document.createElement('a');
-      extA.href = item.url;
+      // External "link" items may legitimately point to any https URL
+      // (e.g. Microsoft Learn docs). Allow through if protocol is https.
+      var candidate = typeof item.url === 'string' ? item.url : '';
+      var extHref = '#';
+      try {
+        var u = new URL(candidate, window.location.origin);
+        if (u.protocol === 'https:' || u.protocol === 'http:') extHref = u.href;
+      } catch (e) {}
+      extA.href = extHref;
       extA.target = '_blank';
       extA.rel = 'noopener noreferrer';
       extA.textContent = item.title;
@@ -299,7 +337,7 @@
       li.setAttribute('itemscope', '');
       li.setAttribute('itemtype', 'https://schema.org/ListItem');
       var a = document.createElement('a');
-      a.href = href; // String assignment to href is not an HTML sink.
+      a.href = safeUrl(href);
       a.setAttribute('itemprop', 'item');
       var span = document.createElement('span');
       span.setAttribute('itemprop', 'name');
