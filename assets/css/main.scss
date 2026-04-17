@@ -214,6 +214,19 @@ a:hover, a:focus-visible { color: var(--color-accent-hover); }
     margin: 0 !important;
     padding: 0 !important;
   }
+
+  // Minimal-mistakes' own JS adds a `.sticky` class to aside.sidebar__right
+  // on scroll, which activates the upstream rule:
+  //   .sidebar__right.sticky .toc .toc__menu {
+  //     overflow-y: auto; max-height: calc(100vh - 7em);
+  //   }
+  // That rule is what produces the TOC's internal scrollbar stacked next
+  // to the main viewport scrollbar on long labs. Unset both so the page
+  // scroll handles everything.
+  .sidebar__right.sticky .toc .toc__menu {
+    overflow-y: visible;
+    max-height: none;
+  }
 }
 
 // Mobile: TOC above content in normal flow
