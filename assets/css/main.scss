@@ -239,10 +239,10 @@ aside.sidebar__right {
   .toc__menu {
     padding: 0;
 
-    // Show h2 (top-level) and h3 (first nested ul)
-    // Hide h4+ (deeper nesting)
-    > li > ul { display: block; }
-    > li > ul > li > ul { display: none; }
+    // Top-level only (h2). Hide everything nested — the page content
+    // contains its own sub-structure, and a shallow TOC is far easier
+    // to scan at a glance.
+    > li > ul { display: none; }
 
     a {
       font-size: 0.95em;
@@ -266,12 +266,6 @@ aside.sidebar__right {
       }
     }
 
-    // Indent h3 items
-    > li > ul > li > a {
-      padding-left: 1.4em;
-      font-size: 0.88em;
-      color: var(--color-fg-subtle);
-    }
   }
 
   li.active > a {
