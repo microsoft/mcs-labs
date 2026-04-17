@@ -170,7 +170,11 @@ a:hover, a:focus-visible { color: var(--color-accent-hover); }
 // defaults to 1280 px which leaves ~320 px of whitespace each side at
 // 1920 wide. 1600 px keeps readable line-length for body copy while giving
 // tables / code blocks / screenshots much more room.
-#main {
+// Masthead inner-wrap and footer also re-cap at 1600 so the top nav and
+// bottom band stay aligned with the content column.
+#main,
+.masthead__inner-wrap,
+.page__footer > footer {
   max-width: 1600px !important;
 }
 
