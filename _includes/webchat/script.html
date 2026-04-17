@@ -29,6 +29,114 @@
   var chatReady = false;
   var chatStore = null;
 
+  // --- Session persistence (per-tab, not a cookie) ---
+
+  var STORAGE_KEY = 'mcs-labs.webchat.v1';
+  var STORAGE_SCHEMA_VERSION = 1;
+  var ACTIVITY_CAP = 50;
+  var TOKEN_FALLBACK_LIFETIME_MS = 55 * 60 * 1000;
+  var TOKEN_SAFETY_BUFFER_MS = 60 * 1000;
+
+  var persistedState = null;
+  var recentActivities = [];
+  var lastWatermark = null;
+  var currentToken = null;
+  var currentTokenExpiresAt = 0;
+  var persistTimer = null;
+  var replayedActivityIds = null;
+  var fallingBack = false;
+
+  function loadPersistedState() {
+    try {
+      var raw = sessionStorage.getItem(STORAGE_KEY);
+      if (!raw) return null;
+      var state = JSON.parse(raw);
+      if (!state || state.schemaVersion !== STORAGE_SCHEMA_VERSION) {
+        clearPersistedState();
+        return null;
+      }
+      if (!state.tokenExpiresAt || state.tokenExpiresAt <= Date.now()) {
+        clearPersistedState();
+        return null;
+      }
+      return state;
+    } catch (e) {
+      clearPersistedState();
+      return null;
+    }
+  }
+
+  function buildStateSnapshot() {
+    return {
+      schemaVersion: STORAGE_SCHEMA_VERSION,
+      token: currentToken,
+      tokenExpiresAt: currentTokenExpiresAt,
+      watermark: lastWatermark,
+      isOpen: isOpen,
+      activities: recentActivities.slice(-ACTIVITY_CAP),
+      savedAt: Date.now()
+    };
+  }
+
+  function persistState() {
+    if (persistTimer) return;
+    persistTimer = setTimeout(function () {
+      persistTimer = null;
+      flushPersistState();
+    }, 200);
+  }
+
+  function flushPersistState() {
+    if (persistTimer) {
+      clearTimeout(persistTimer);
+      persistTimer = null;
+    }
+    if (!currentToken) return;
+    try {
+      sessionStorage.setItem(STORAGE_KEY, JSON.stringify(buildStateSnapshot()));
+    } catch (e) {
+      // Quota or serialization error — keep running in-memory.
+    }
+  }
+
+  function clearPersistedState() {
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+  }
+
+  function extractWatermark(activity) {
+    if (!activity || !activity.id) return null;
+    var parts = String(activity.id).split('|');
+    var suffix = parts[parts.length - 1];
+    return /^\d+$/.test(suffix) ? suffix : null;
+  }
+
+  function pushActivity(activity) {
+    if (!activity || !activity.id) return;
+    recentActivities.push(activity);
+    if (recentActivities.length > ACTIVITY_CAP) {
+      recentActivities.splice(0, recentActivities.length - ACTIVITY_CAP);
+    }
+    var wm = extractWatermark(activity);
+    if (wm) lastWatermark = wm;
+    persistState();
+  }
+
+  // --- Masthead offset: keep panel below the site header at all widths ---
+
+  var mastheadResizeFrame = null;
+
+  function applyMastheadOffset() {
+    mastheadResizeFrame = null;
+    var masthead = document.querySelector('.masthead');
+    var h = masthead ? Math.ceil(masthead.getBoundingClientRect().bottom) : 0;
+    document.documentElement.style.setProperty('--wc-panel-top', h + 'px');
+  }
+
+  function scheduleMastheadOffset() {
+    if (mastheadResizeFrame) return;
+    mastheadResizeFrame = requestAnimationFrame(applyMastheadOffset);
+  }
+
   // --- Sendbox disabled state ---
 
   function setSendboxEnabled(enabled) {
@@ -74,6 +182,7 @@
     panel.addEventListener('keydown', handleFocusTrap);
     if (!chatInitializing && !chatReady) initChat();
     else if (chatReady) sendInput.focus();
+    persistState();
   }
 
   function close() {
@@ -82,6 +191,7 @@
     tag.classList.remove('wc-tag--hidden');
     panel.removeEventListener('keydown', handleFocusTrap);
     tag.focus();
+    persistState();
   }
 
   tag.addEventListener('click', open);
@@ -126,7 +236,7 @@
     });
   }
 
-  async function initChat() {
+  async function initChat(resumeState) {
     if (chatInitializing) return;
     chatInitializing = true;
     chatReady = false;
@@ -138,12 +248,28 @@
     try {
       await waitForWebChat();
 
-      var res = await fetch(TOKEN_ENDPOINT);
-      if (!res.ok) throw new Error('Token request failed (' + res.status + ')');
-      var data = await res.json();
-      var token = data.token;
+      var token;
+      if (resumeState && resumeState.token && resumeState.tokenExpiresAt > Date.now()) {
+        token = resumeState.token;
+        currentTokenExpiresAt = resumeState.tokenExpiresAt;
+      } else {
+        var res = await fetch(TOKEN_ENDPOINT);
+        if (!res.ok) throw new Error('Token request failed (' + res.status + ')');
+        var data = await res.json();
+        token = data.token;
+        var lifetimeMs = (typeof data.expires_in === 'number' && data.expires_in > 0)
+          ? (data.expires_in * 1000) - TOKEN_SAFETY_BUFFER_MS
+          : TOKEN_FALLBACK_LIFETIME_MS;
+        currentTokenExpiresAt = Date.now() + lifetimeMs;
+      }
+      currentToken = token;
 
-      var directLine = window.WebChat.createDirectLine({ token: token });
+      var directLineOpts = { token: token };
+      if (resumeState && resumeState.watermark) {
+        directLineOpts.watermark = resumeState.watermark;
+        lastWatermark = resumeState.watermark;
+      }
+      var directLine = window.WebChat.createDirectLine(directLineOpts);
 
       // Typing indicator state
       var typingTimer = null;
@@ -173,12 +299,32 @@
               chatReady = true;
               setSendboxEnabled(true);
               sendInput.focus();
-              setTimeout(function () {
-                store.dispatch({
-                  type: 'WEB_CHAT/SEND_EVENT',
-                  payload: { name: 'startConversation', type: 'event', value: '' }
-                });
-              }, 0);
+              // Only fire startConversation for brand-new sessions; reconnects
+              // already have the bot's greeting in the cached transcript.
+              if (!resumeState) {
+                setTimeout(function () {
+                  store.dispatch({
+                    type: 'WEB_CHAT/SEND_EVENT',
+                    payload: { name: 'startConversation', type: 'event', value: '' }
+                  });
+                }, 0);
+              }
+              persistState();
+            }
+
+            if (action.type === 'DIRECT_LINE/CONNECT_REJECTED') {
+              status.textContent = 'Disconnected';
+              chatReady = false;
+              setSendboxEnabled(false);
+              if (resumeState && !fallingBack) {
+                fallingBack = true;
+                clearPersistedState();
+                currentToken = null;
+                recentActivities = [];
+                lastWatermark = null;
+                chatInitializing = false;
+                setTimeout(function () { initChat(); }, 0);
+              }
             }
 
             if (action.type === 'DIRECT_LINE/DISCONNECT_FULFILLED') {
@@ -195,6 +341,10 @@
                 } else {
                   hideTyping();
                 }
+              }
+              if (activity.type !== 'typing' && activity.id &&
+                  !(replayedActivityIds && replayedActivityIds.has(activity.id))) {
+                pushActivity(activity);
               }
             }
 
@@ -248,6 +398,21 @@
         body
       );
 
+      // Replay cached transcript so the user sees prior messages immediately.
+      if (resumeState && resumeState.activities && resumeState.activities.length) {
+        replayedActivityIds = new Set();
+        recentActivities = resumeState.activities.slice();
+        for (var i = 0; i < resumeState.activities.length; i++) {
+          var a = resumeState.activities[i];
+          if (!a || !a.id) continue;
+          replayedActivityIds.add(a.id);
+          store.dispatch({
+            type: 'DIRECT_LINE/INCOMING_ACTIVITY',
+            payload: { activity: a }
+          });
+        }
+      }
+
       loading.style.display = 'none';
 
     } catch (err) {
@@ -258,11 +423,54 @@
       status.textContent = 'Error';
       chatInitializing = false;
       chatReady = false;
+      if (resumeState && !fallingBack) {
+        fallingBack = true;
+        clearPersistedState();
+        currentToken = null;
+        recentActivities = [];
+        lastWatermark = null;
+        initChat();
+      }
     }
   }
 
   retryBtn.addEventListener('click', function () {
+    clearPersistedState();
+    currentToken = null;
+    recentActivities = [];
+    lastWatermark = null;
     if (!chatInitializing) initChat();
+  });
+
+  // --- Restore session state on page load ---
+
+  applyMastheadOffset();
+  window.addEventListener('resize', scheduleMastheadOffset);
+  window.addEventListener('load', applyMastheadOffset);
+
+  window.addEventListener('pagehide', flushPersistState);
+
+  persistedState = loadPersistedState();
+  if (persistedState) {
+    currentToken = persistedState.token;
+    currentTokenExpiresAt = persistedState.tokenExpiresAt;
+    lastWatermark = persistedState.watermark || null;
+    recentActivities = (persistedState.activities || []).slice();
+    if (persistedState.isOpen) {
+      isOpen = true;
+      panel.classList.add('wc-panel--open');
+      tag.classList.add('wc-tag--hidden');
+      panel.addEventListener('keydown', handleFocusTrap);
+      initChat(persistedState);
+    }
+  }
+
+  // Drop the wc-restore suppressor after the first paint so user-triggered
+  // open/close still animates normally within this page's lifetime.
+  requestAnimationFrame(function () {
+    requestAnimationFrame(function () {
+      document.documentElement.classList.remove('wc-restore');
+    });
   });
 })();
 </script>

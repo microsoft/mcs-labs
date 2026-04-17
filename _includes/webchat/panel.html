@@ -1,3 +1,18 @@
+<script>
+// Runs before the panel div is styled; sets html.wc-restore so CSS paints
+// the panel already open (no slide-in) when a session is being resumed.
+(function () {
+  try {
+    var raw = sessionStorage.getItem('mcs-labs.webchat.v1');
+    if (!raw) return;
+    var s = JSON.parse(raw);
+    if (s && s.schemaVersion === 1 && s.tokenExpiresAt > Date.now() && s.isOpen) {
+      document.documentElement.classList.add('wc-restore');
+    }
+  } catch (e) {}
+})();
+</script>
+
 <!-- Chat tag (pull handle) -->
 <div class="wc-tag" id="wcTag" role="button" tabindex="0" aria-label="Open chat assistant">
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
