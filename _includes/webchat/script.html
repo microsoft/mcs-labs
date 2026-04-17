@@ -121,21 +121,41 @@
     persistState();
   }
 
-  // --- Masthead offset: keep panel below the site header at all widths ---
+  // --- Masthead + footer offsets: keep panel inside the "chrome sandwich" ---
+  // The panel is position: fixed and would normally occupy the full right
+  // column between the top and bottom edges of the viewport. We nudge its
+  // top below the masthead (so nav stays reachable) and its bottom above
+  // the visible portion of the site footer (so the footer links are never
+  // obscured).
 
-  var mastheadResizeFrame = null;
+  var chromeOffsetFrame = null;
 
-  function applyMastheadOffset() {
-    mastheadResizeFrame = null;
+  function applyChromeOffsets() {
+    chromeOffsetFrame = null;
     var masthead = document.querySelector('.masthead');
-    var h = masthead ? Math.ceil(masthead.getBoundingClientRect().bottom) : 0;
-    document.documentElement.style.setProperty('--wc-panel-top', h + 'px');
+    var topPx = masthead ? Math.max(0, Math.ceil(masthead.getBoundingClientRect().bottom)) : 0;
+    document.documentElement.style.setProperty('--wc-panel-top', topPx + 'px');
+
+    var footer = document.querySelector('.page__footer') || document.getElementById('footer');
+    var bottomPx = 0;
+    if (footer) {
+      var rect = footer.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      // Footer intrudes into the viewport by (vh - rect.top); clamp so the
+      // panel only shrinks when the footer is actually visible.
+      bottomPx = Math.max(0, Math.ceil(vh - rect.top));
+    }
+    document.documentElement.style.setProperty('--wc-panel-bottom', bottomPx + 'px');
   }
 
-  function scheduleMastheadOffset() {
-    if (mastheadResizeFrame) return;
-    mastheadResizeFrame = requestAnimationFrame(applyMastheadOffset);
+  function scheduleChromeOffsets() {
+    if (chromeOffsetFrame) return;
+    chromeOffsetFrame = requestAnimationFrame(applyChromeOffsets);
   }
+
+  // Back-compat aliases for earlier variable names used elsewhere in this file.
+  var applyMastheadOffset = applyChromeOffsets;
+  var scheduleMastheadOffset = scheduleChromeOffsets;
 
   // --- Sendbox disabled state ---
 
@@ -464,9 +484,10 @@
 
   // --- Restore session state on page load ---
 
-  applyMastheadOffset();
-  window.addEventListener('resize', scheduleMastheadOffset);
-  window.addEventListener('load', applyMastheadOffset);
+  applyChromeOffsets();
+  window.addEventListener('resize', scheduleChromeOffsets);
+  window.addEventListener('scroll', scheduleChromeOffsets, { passive: true });
+  window.addEventListener('load', applyChromeOffsets);
 
   window.addEventListener('pagehide', flushPersistState);
 
