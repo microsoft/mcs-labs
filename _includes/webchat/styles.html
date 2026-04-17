@@ -329,7 +329,7 @@ html.wc-restore .wc-tag {
      indicator because the wrapper's focus-within triggers on input focus. */
   outline: none !important;
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: var(--color-fg, #201f1e);
   padding: 9px 0 !important;
   margin: 0 !important;
@@ -442,7 +442,7 @@ html.wc-restore .wc-tag {
   color: var(--color-accent, #0078d4) !important;
   border-radius: 100px !important;
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-  font-size: 0.8rem !important;
+  font-size: 0.9rem !important;
   font-weight: 500 !important;
   padding: 6px 16px !important;
   transition: all 0.15s ease !important;
@@ -464,13 +464,28 @@ html.wc-restore .wc-tag {
   display: none !important;
 }
 
-/* Message text */
+/* Message text — set base on the transcript container so every child
+   inherits via rem and follows the --font-scale root multiplier. Explicit
+   overrides on known WebChat text classes keep the cascade predictable
+   against WebChat's own emotion-injected rules. */
+.wc-panel-body .webchat__basic-transcript,
+.wc-panel-body .webchat__basic-transcript * {
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+}
+
+.wc-panel-body .webchat__basic-transcript {
+  font-size: 0.95rem !important;
+}
+
 .wc-panel-body .webchat__text-content,
 .wc-panel-body .webchat__text-content p,
+.wc-panel-body .webchat__render-markdown,
 .wc-panel-body .webchat__render-markdown p,
-.wc-panel-body .webchat__render-markdown li {
-  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
-  font-size: 0.8rem !important;
+.wc-panel-body .webchat__render-markdown li,
+.wc-panel-body .webchat__bubble__content,
+.wc-panel-body .webchat__bubble__content p,
+.wc-panel-body .webchat__bubble__content li {
+  font-size: 0.95rem !important;
   font-weight: 400 !important;
   line-height: 1.55 !important;
   color: inherit !important;
@@ -478,7 +493,7 @@ html.wc-restore .wc-tag {
 
 /* Timestamp */
 .wc-panel-body .webchat__stacked-layout__status {
-  font-size: 0.65rem !important;
+  font-size: 0.75rem !important;
   color: var(--color-fg-placeholder, #767472) !important;
 }
 
