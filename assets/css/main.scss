@@ -174,7 +174,8 @@ a:hover, a:focus-visible { color: var(--color-accent-hover); }
 // bottom band stay aligned with the content column.
 #main,
 .masthead__inner-wrap,
-.page__footer > footer {
+.page__footer > footer,
+nav.breadcrumbs {
   max-width: 1600px !important;
 }
 
