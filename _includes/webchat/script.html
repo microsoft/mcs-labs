@@ -367,8 +367,16 @@
 
       chatStore = store;
 
+      // Resolve token value from CSS at render time so WebChat's internal
+      // styling follows the active theme (data-theme on <html>).
+      var styleRoot = document.documentElement;
+      function tok(name, fallback) {
+        var v = getComputedStyle(styleRoot).getPropertyValue(name).trim();
+        return v || fallback;
+      }
+
       var styleOptions = {
-        backgroundColor: '#faf9f8',
+        backgroundColor: tok('--color-bg-subtle', '#faf9f8'),
         rootHeight: '100%',
         rootWidth: '100%',
 
@@ -379,26 +387,26 @@
         showAvatarInGroup: false,
         avatarSize: 0,
 
-        bubbleBackground: 'rgba(0, 0, 0, 0.04)',
+        bubbleBackground: tok('--bubble-bot-bg', 'rgba(0, 0, 0, 0.04)'),
         bubbleBorderColor: 'transparent',
         bubbleBorderRadius: 14,
-        bubbleTextColor: '#3b3a39',
+        bubbleTextColor: tok('--color-fg-body', '#3b3a39'),
 
-        bubbleFromUserBackground: 'rgba(0, 120, 212, 0.08)',
+        bubbleFromUserBackground: tok('--color-user-bubble-bg', 'rgba(0, 120, 212, 0.08)'),
         bubbleFromUserBorderColor: 'transparent',
         bubbleFromUserBorderRadius: 14,
-        bubbleFromUserTextColor: '#1a3a5c',
+        bubbleFromUserTextColor: tok('--color-user-bubble-fg', '#1a3a5c'),
 
         hideSendBox: true,
         hideUploadButton: true,
 
-        suggestedActionBackgroundColor: '#ffffff',
-        suggestedActionBorderColor: '#0078d4',
-        suggestedActionTextColor: '#0078d4',
+        suggestedActionBackgroundColor: tok('--color-bg', '#ffffff'),
+        suggestedActionBorderColor: tok('--color-accent', '#0078d4'),
+        suggestedActionTextColor: tok('--color-accent', '#0078d4'),
         suggestedActionBorderRadius: 100,
         suggestedActionHeight: 32,
 
-        timestampColor: '#a19f9d',
+        timestampColor: tok('--color-fg-placeholder', '#a19f9d'),
         groupTimestamp: 30000,
       };
 
@@ -488,5 +496,25 @@
       document.documentElement.classList.remove('wc-restore');
     });
   });
+
+  // Re-render WebChat when the theme changes so bot bubbles + transcript
+  // background adopt the new palette. Watermark-based resume keeps the
+  // transcript visible across the re-render.
+  var themeObserver = new MutationObserver(function (muts) {
+    for (var i = 0; i < muts.length; i++) {
+      if (muts[i].attributeName === 'data-theme') {
+        if (chatReady && currentToken && currentTokenExpiresAt > Date.now()) {
+          flushPersistState();
+          var resumeFrom = buildStateSnapshot();
+          chatInitializing = false;
+          chatReady = false;
+          replayedActivityIds = null;
+          initChat(resumeFrom);
+        }
+        break;
+      }
+    }
+  });
+  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
 })();
 </script>
