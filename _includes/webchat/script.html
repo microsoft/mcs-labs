@@ -497,24 +497,13 @@
     });
   });
 
-  // Re-render WebChat when the theme changes so bot bubbles + transcript
-  // background adopt the new palette. Watermark-based resume keeps the
-  // transcript visible across the re-render.
-  var themeObserver = new MutationObserver(function (muts) {
-    for (var i = 0; i < muts.length; i++) {
-      if (muts[i].attributeName === 'data-theme') {
-        if (chatReady && currentToken && currentTokenExpiresAt > Date.now()) {
-          flushPersistState();
-          var resumeFrom = buildStateSnapshot();
-          chatInitializing = false;
-          chatReady = false;
-          replayedActivityIds = null;
-          initChat(resumeFrom);
-        }
-        break;
-      }
-    }
-  });
-  themeObserver.observe(document.documentElement, { attributes: true, attributeFilter: ['data-theme'] });
+  // Note: theme changes do NOT re-initialize the chat. The user's conversation
+  // (token + watermark + transcript) survives theme toggles. Most WebChat
+  // surfaces (transcript bg, bubble bg/fg, links, suggested actions) are
+  // re-skinned at runtime via CSS custom properties in the accompanying
+  // styles.html. The few colors that WebChat bakes into its internal DOM at
+  // init (timestamp text, focus rings on internal controls) will stay at the
+  // theme that was active when the chat first mounted — they refresh on the
+  // next page load.
 })();
 </script>
