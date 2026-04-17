@@ -29,13 +29,14 @@
           {%- if item.type == "lab" -%}
             {%- assign lab = site.labs | where: "slug", item.slug | first -%}
             {%- if lab -%}
+              {%- assign display_title = item.title | default: lab.title -%}
               {{ item_sep }}
               {
                 "type": "lab",
                 "slug": {{ item.slug | jsonify }},
                 "label": {{ item.label | default: "" | jsonify }},
                 "url": {{ lab.url | relative_url | jsonify }},
-                "title": {{ lab.title | jsonify }},
+                "title": {{ display_title | jsonify }},
                 "difficulty": {{ lab.difficulty | default: 0 | jsonify }},
                 "duration": {{ item.duration | default: lab.duration | default: 0 }}
                 {%- if item.time %}, "time": {{ item.time | jsonify }}{% endif -%}

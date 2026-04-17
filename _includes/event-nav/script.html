@@ -215,7 +215,7 @@
       var itemUrl = buildLabUrl(item.url, activeEvent.event_id);
       var a = document.createElement('a');
       a.href = urlHrefOr(itemUrl);
-      a.textContent = (item.label ? item.label + ' — ' : '') + item.title;
+      a.textContent = (item.label ? item.label + ': ' : '') + item.title;
       if (item.slug === currentLab.slug) {
         a.setAttribute('aria-current', 'page');
         li.classList.add('event-agenda-row--current');

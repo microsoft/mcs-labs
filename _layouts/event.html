@@ -307,11 +307,12 @@ layout: single
   {%- if item_type == "lab" -%}
     {%- assign lab = site.labs | where: "slug", item.slug | first -%}
     {%- if lab -%}
+      {%- assign display_title = item.title | default: lab.title -%}
       <li class="ws-agenda-row ws-agenda-row--lab">
         <div class="ws-agenda-time">{% if item.time %}{{ item.time }}{% else %}&nbsp;{% endif %}</div>
         <div class="ws-agenda-body">
           <div class="ws-agenda-title">
-            <a href="{{ lab.url | relative_url }}?event={{ page.event_id }}">{% if item.label %}{{ item.label }} — {% endif %}{{ lab.title }}</a>
+            <a href="{{ lab.url | relative_url }}?event={{ page.event_id }}">{% if item.label %}{{ item.label }}: {% endif %}{{ display_title }}</a>
           </div>
           <p class="ws-agenda-desc">{{ lab.description | strip_html | truncate: 140 }}</p>
         </div>
