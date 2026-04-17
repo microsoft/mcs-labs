@@ -1,10 +1,10 @@
 main:
   - title: "Home"
     url: /
-  - title: "All Labs"
-    url: /labs/
   - title: "Events"
     url: /events/
+  - title: "All Labs"
+    url: /labs/
   - title: "About"
     url: /about/
 

@@ -8,6 +8,13 @@ layout: single
 .page__meta { display: none !important; }
 </style>
 
+{%- comment -%}
+  Event-nav manifest — inlines all events + agendas as JSON so the
+  event-nav IIFE can render in-lab navigation when an event context is
+  active (either via ?event= or a sticky sessionStorage value).
+{%- endcomment -%}
+{% include event-nav/manifest.html %}
+
 {% assign section_map = "core_learning_path:Core Learning Path,intermediate_labs:Intermediate,advanced_labs:Advanced,specialized_labs:Specialized,optional_labs:Optional,external_labs:External" | split: "," %}
 {% assign section_label = page.section %}
 {% for pair in section_map %}
@@ -30,4 +37,10 @@ layout: single
   </div>
 </div>
 
+{% include event-nav/rail.html %}
+
 {{ content }}
+
+{% include event-nav/nav-pair.html %}
+
+{% include event-nav/script.html %}

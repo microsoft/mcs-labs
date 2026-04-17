@@ -1,0 +1,52 @@
+<!-- Event navigation rail. Hidden by default; _includes/event-nav/script.html
+     unhides + populates when an active event context is resolved. All ARIA
+     attributes ship pre-set so assistive tech has a stable label even before
+     the script runs. -->
+<nav class="event-rail" id="event-rail" aria-label="Event navigation" hidden>
+  <div class="event-rail-head">
+    <a class="event-rail-event" id="event-rail-event" href="#">
+      <span class="event-rail-event-label">Event</span>
+      <span class="event-rail-event-name" id="event-rail-event-name"></span>
+    </a>
+    <span class="event-rail-position" id="event-rail-position" aria-live="polite"></span>
+    <div class="event-rail-actions">
+      <button type="button" class="event-rail-btn event-rail-prev" id="event-rail-prev"
+              aria-label="Previous lab">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+        <span class="event-rail-btn-label">Prev</span>
+      </button>
+      <button type="button" class="event-rail-btn event-rail-next" id="event-rail-next"
+              aria-label="Next lab">
+        <span class="event-rail-btn-label">Next</span>
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+      <button type="button" class="event-rail-btn event-rail-expand" id="event-rail-expand"
+              aria-label="Show full agenda" aria-expanded="false" aria-controls="event-rail-agenda">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="6 9 12 15 18 9"/>
+        </svg>
+      </button>
+      <button type="button" class="event-rail-btn event-rail-exit" id="event-rail-exit"
+              aria-label="Exit event context" title="Exit event context">
+        <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="18" height="18"
+             fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+  <div class="event-rail-agenda" id="event-rail-agenda" hidden>
+    <ol class="event-rail-agenda-list" id="event-rail-agenda-list" role="list"></ol>
+  </div>
+</nav>

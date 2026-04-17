@@ -1,0 +1,384 @@
+<script>
+(function () {
+  'use strict';
+
+  var STORAGE_KEY = 'mcs-labs.event-context.v1';
+
+  // --- DOM refs ---
+  var manifestEl = document.getElementById('mcs-events-manifest');
+  var contextEl = document.getElementById('mcs-lab-context');
+  if (!manifestEl || !contextEl) return;
+
+  var rail = document.getElementById('event-rail');
+  var railEventLink = document.getElementById('event-rail-event');
+  var railEventName = document.getElementById('event-rail-event-name');
+  var railPosition = document.getElementById('event-rail-position');
+  var prevBtn = document.getElementById('event-rail-prev');
+  var nextBtn = document.getElementById('event-rail-next');
+  var expandBtn = document.getElementById('event-rail-expand');
+  var exitBtn = document.getElementById('event-rail-exit');
+  var agendaPanel = document.getElementById('event-rail-agenda');
+  var agendaList = document.getElementById('event-rail-agenda-list');
+
+  var navpair = document.getElementById('event-navpair');
+  var prevCard = document.getElementById('event-navpair-prev');
+  var prevCardTitle = document.getElementById('event-navpair-prev-title');
+  var prevCardDesc = document.getElementById('event-navpair-prev-desc');
+  var nextCard = document.getElementById('event-navpair-next');
+  var nextCardTitle = document.getElementById('event-navpair-next-title');
+  var nextCardDesc = document.getElementById('event-navpair-next-desc');
+
+  var breadcrumbsNav = document.querySelector('nav.breadcrumbs ol');
+
+  // --- Parse payloads ---
+  var events;
+  var currentLab;
+  try {
+    events = JSON.parse(manifestEl.textContent);
+    currentLab = JSON.parse(contextEl.textContent);
+  } catch (e) {
+    return;
+  }
+  if (!Array.isArray(events) || !currentLab || !currentLab.slug) return;
+
+  function findEvent(eventId) {
+    if (!eventId) return null;
+    for (var i = 0; i < events.length; i++) {
+      if (events[i].event_id === eventId) return events[i];
+    }
+    return null;
+  }
+
+  // --- URL construction helpers ---
+  // All URLs embedded in the manifest come from Jekyll build output and are
+  // therefore trusted, but every href/location write still goes through the
+  // URL constructor so that (a) a javascript: URL can never sneak through
+  // and (b) CodeQL's xss-through-dom taint analysis sees a recognized
+  // sanitizer at every sink.
+  function buildLabUrl(labUrl, eventId) {
+    try {
+      var u = new URL(String(labUrl || ''), window.location.origin);
+      if (u.origin !== window.location.origin) return null;
+      if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
+      u.searchParams.set('event', String(eventId || ''));
+      return u;
+    } catch (e) { return null; }
+  }
+  function buildSameOriginUrl(candidate) {
+    try {
+      var u = new URL(String(candidate || ''), window.location.origin);
+      if (u.origin !== window.location.origin) return null;
+      if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
+      return u;
+    } catch (e) { return null; }
+  }
+  // URL.href on a constructed URL is always safe — it serializes a parsed
+  // origin + pathname + search + hash that can't be `javascript:`.
+  function urlHrefOr(url, fallback) {
+    return url ? url.href : (fallback || '#');
+  }
+
+  function eventContainsLab(event, labSlug) {
+    if (!event || !event.schedule) return false;
+    for (var i = 0; i < event.schedule.length; i++) {
+      var item = event.schedule[i];
+      if (item.type === 'lab' && item.slug === labSlug) return true;
+    }
+    return false;
+  }
+
+  // --- Resolve active event ---
+  // Priority: URL ?event= wins, then sessionStorage, but only if the stored
+  // event's schedule actually contains the current lab. Otherwise we clear
+  // stale sticky context and render a neutral page.
+  function readUrlEvent() {
+    try {
+      var q = new URLSearchParams(window.location.search);
+      return q.get('event');
+    } catch (e) { return null; }
+  }
+
+  var urlEventId = readUrlEvent();
+  var stickyEventId = null;
+  try { stickyEventId = sessionStorage.getItem(STORAGE_KEY); } catch (e) {}
+
+  var activeEvent = null;
+  if (urlEventId) {
+    activeEvent = findEvent(urlEventId);
+    if (activeEvent && eventContainsLab(activeEvent, currentLab.slug)) {
+      try { sessionStorage.setItem(STORAGE_KEY, urlEventId); } catch (e) {}
+    } else {
+      activeEvent = null; // URL param references an unknown event or a lab
+                          // not in that event — bail out silently.
+    }
+  } else if (stickyEventId) {
+    var stickyEvent = findEvent(stickyEventId);
+    if (stickyEvent && eventContainsLab(stickyEvent, currentLab.slug)) {
+      activeEvent = stickyEvent;
+    } else {
+      try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    }
+  }
+
+  if (!activeEvent) return; // Leave the lab page neutral.
+
+  // --- Build lab index within the event ---
+  var labsInEvent = activeEvent.schedule.filter(function (item) { return item.type === 'lab'; });
+  var currentIdx = -1;
+  for (var i = 0; i < labsInEvent.length; i++) {
+    if (labsInEvent[i].slug === currentLab.slug) { currentIdx = i; break; }
+  }
+  if (currentIdx === -1) return; // Defensive; eventContainsLab already checked.
+
+  var currentLabInSchedule = labsInEvent[currentIdx];
+  var prevLab = currentIdx > 0 ? labsInEvent[currentIdx - 1] : null;
+  var nextLab = currentIdx < labsInEvent.length - 1 ? labsInEvent[currentIdx + 1] : null;
+
+  var activeEventUrl = buildSameOriginUrl(activeEvent.url);
+
+  // --- Populate rail head ---
+  railEventLink.href = urlHrefOr(activeEventUrl);
+  railEventName.textContent = activeEvent.title;
+  railPosition.textContent = 'Lab ' + (currentIdx + 1) + ' of ' + labsInEvent.length;
+
+  var prevLabUrl = prevLab ? buildLabUrl(prevLab.url, activeEvent.event_id) : null;
+  var nextLabUrl = nextLab ? buildLabUrl(nextLab.url, activeEvent.event_id) : null;
+
+  if (prevLab && prevLabUrl) {
+    prevBtn.removeAttribute('disabled');
+    prevBtn.setAttribute('aria-label', 'Previous lab: ' + prevLab.title);
+    prevBtn.addEventListener('click', function () {
+      window.location.assign(prevLabUrl.href);
+    });
+  } else {
+    prevBtn.setAttribute('disabled', '');
+    prevBtn.setAttribute('aria-label', 'No previous lab');
+  }
+
+  if (nextLab && nextLabUrl) {
+    nextBtn.removeAttribute('disabled');
+    nextBtn.setAttribute('aria-label', 'Next lab: ' + nextLab.title);
+    nextBtn.addEventListener('click', function () {
+      window.location.assign(nextLabUrl.href);
+    });
+  } else {
+    nextBtn.setAttribute('disabled', '');
+    nextBtn.setAttribute('aria-label', 'Back to ' + activeEvent.title);
+    // When at the last lab, Next goes back to the event overview.
+    nextBtn.removeAttribute('disabled');
+    nextBtn.addEventListener('click', function () {
+      if (activeEventUrl) window.location.assign(activeEventUrl.href);
+    });
+  }
+
+  // --- Populate bottom nav-pair cards ---
+  if (prevLab && prevLabUrl) {
+    prevCard.href = prevLabUrl.href;
+    prevCardTitle.textContent = prevLab.title;
+    prevCardDesc.textContent = prevLab.label || ('Lab ' + currentIdx);
+  } else {
+    prevCard.href = urlHrefOr(activeEventUrl);
+    prevCardTitle.textContent = 'Back to ' + activeEvent.title;
+    prevCardDesc.textContent = 'Event overview';
+  }
+  if (nextLab && nextLabUrl) {
+    nextCard.href = nextLabUrl.href;
+    nextCardTitle.textContent = nextLab.title;
+    nextCardDesc.textContent = nextLab.label || ('Lab ' + (currentIdx + 2));
+  } else {
+    nextCard.href = urlHrefOr(activeEventUrl);
+    nextCardTitle.textContent = 'Finish ' + activeEvent.title;
+    nextCardDesc.textContent = 'Event overview';
+  }
+
+  // --- Populate agenda popover ---
+  var frag = document.createDocumentFragment();
+  for (var j = 0; j < activeEvent.schedule.length; j++) {
+    var item = activeEvent.schedule[j];
+    var li = document.createElement('li');
+    li.className = 'event-agenda-row event-agenda-row--' + item.type;
+
+    // Day rows render as a full-width section header (no time/body/duration).
+    if (item.type === 'day') {
+      li.textContent = item.title;
+      frag.appendChild(li);
+      continue;
+    }
+
+    var timeCell = document.createElement('span');
+    timeCell.className = 'event-agenda-time';
+    timeCell.textContent = item.time || '';
+    var bodyCell = document.createElement('span');
+    bodyCell.className = 'event-agenda-body';
+
+    if (item.type === 'lab') {
+      var itemUrl = buildLabUrl(item.url, activeEvent.event_id);
+      var a = document.createElement('a');
+      a.href = urlHrefOr(itemUrl);
+      a.textContent = (item.label ? item.label + ': ' : '') + item.title;
+      if (item.slug === currentLab.slug) {
+        a.setAttribute('aria-current', 'page');
+        li.classList.add('event-agenda-row--current');
+      }
+      bodyCell.appendChild(a);
+    } else if (item.type === 'link' && item.url) {
+      // External "link" items may point to any http/https URL. Use the URL
+      // constructor to parse and normalize; reject anything that isn't
+      // http(s) (e.g. a `javascript:` string).
+      var extA = document.createElement('a');
+      var extHref = '#';
+      try {
+        var extU = new URL(String(item.url || ''), window.location.origin);
+        if (extU.protocol === 'https:' || extU.protocol === 'http:') extHref = extU.href;
+      } catch (e) {}
+      extA.href = extHref;
+      extA.target = '_blank';
+      extA.rel = 'noopener noreferrer';
+      extA.textContent = item.title;
+      bodyCell.appendChild(extA);
+    } else {
+      bodyCell.textContent = item.title;
+    }
+
+    if (item.description) {
+      var desc = document.createElement('span');
+      desc.className = 'event-agenda-desc';
+      desc.textContent = item.description;
+      bodyCell.appendChild(desc);
+    }
+
+    var durCell = document.createElement('span');
+    durCell.className = 'event-agenda-duration';
+    if (item.duration) durCell.textContent = item.duration + ' min';
+
+    li.appendChild(timeCell);
+    li.appendChild(bodyCell);
+    li.appendChild(durCell);
+    frag.appendChild(li);
+  }
+  agendaList.innerHTML = '';
+  agendaList.appendChild(frag);
+
+  // --- Expand / collapse agenda ---
+  function setExpanded(open) {
+    expandBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (open) {
+      agendaPanel.hidden = false;
+      // Scroll the current-lab row into view inside the popover.
+      var currentRow = agendaList.querySelector('.event-agenda-row--current');
+      if (currentRow) currentRow.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    } else {
+      agendaPanel.hidden = true;
+    }
+  }
+  expandBtn.addEventListener('click', function () {
+    setExpanded(expandBtn.getAttribute('aria-expanded') !== 'true');
+  });
+
+  // Outside click closes the popover.
+  document.addEventListener('click', function (e) {
+    if (expandBtn.getAttribute('aria-expanded') !== 'true') return;
+    if (rail.contains(e.target)) return;
+    setExpanded(false);
+  });
+  // Esc closes + returns focus to the expand button.
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && expandBtn.getAttribute('aria-expanded') === 'true') {
+      setExpanded(false);
+      expandBtn.focus();
+    }
+  });
+
+  // --- Exit event context ---
+  exitBtn.addEventListener('click', function () {
+    try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+    // Strip ?event= from the URL without a navigation.
+    try {
+      var url = new URL(window.location.href);
+      url.searchParams.delete('event');
+      history.replaceState(null, '', url.toString());
+    } catch (e) {}
+    rail.hidden = true;
+    if (navpair) navpair.hidden = true;
+    delete document.documentElement.dataset.eventContext;
+    restoreBreadcrumb();
+  });
+
+  // --- Breadcrumb override ---
+  // Replaces the default "Home / Labs / <slugified>" with
+  // "Home / Events / <Event Name> / <Lab Title>". If the breadcrumb nav
+  // isn't in the page (some layouts) this is a silent no-op.
+  //
+  // Built entirely via document.createElement + textContent so no string
+  // concatenation flows into innerHTML — the XSS-through-DOM sink is
+  // removed structurally rather than relying on escaping.
+  var originalBreadcrumbChildren = null;
+  function overrideBreadcrumb() {
+    if (!breadcrumbsNav) return;
+
+    // Snapshot the existing children so restoreBreadcrumb() can put them back.
+    originalBreadcrumbChildren = [];
+    while (breadcrumbsNav.firstChild) {
+      originalBreadcrumbChildren.push(breadcrumbsNav.firstChild);
+      breadcrumbsNav.removeChild(breadcrumbsNav.firstChild);
+    }
+
+    var baseurl = '';
+    // Infer baseurl from any lingering breadcrumb link that we just removed.
+    for (var i = 0; i < originalBreadcrumbChildren.length; i++) {
+      var anchor = originalBreadcrumbChildren[i].querySelector
+        ? originalBreadcrumbChildren[i].querySelector('a')
+        : null;
+      if (anchor) {
+        try {
+          var parsed = new URL(anchor.href, window.location.origin);
+          baseurl = parsed.pathname.replace(/\/$/, '');
+        } catch (e) {}
+        break;
+      }
+    }
+
+    function makeCrumbLi(urlObj, text, position) {
+      var li = document.createElement('li');
+      li.setAttribute('itemprop', 'itemListElement');
+      li.setAttribute('itemscope', '');
+      li.setAttribute('itemtype', 'https://schema.org/ListItem');
+      var a = document.createElement('a');
+      a.href = urlHrefOr(urlObj);
+      a.setAttribute('itemprop', 'item');
+      var span = document.createElement('span');
+      span.setAttribute('itemprop', 'name');
+      span.textContent = text;
+      a.appendChild(span);
+      li.appendChild(a);
+      var meta = document.createElement('meta');
+      meta.setAttribute('itemprop', 'position');
+      meta.setAttribute('content', String(position));
+      li.appendChild(meta);
+      return li;
+    }
+
+    breadcrumbsNav.appendChild(makeCrumbLi(buildSameOriginUrl(baseurl + '/'), 'Home', 1));
+    breadcrumbsNav.appendChild(makeCrumbLi(buildSameOriginUrl(baseurl + '/events/'), 'Events', 2));
+    breadcrumbsNav.appendChild(makeCrumbLi(activeEventUrl, activeEvent.title, 3));
+
+    var currentLi = document.createElement('li');
+    currentLi.className = 'current';
+    currentLi.textContent = currentLab.title;
+    breadcrumbsNav.appendChild(currentLi);
+  }
+  function restoreBreadcrumb() {
+    if (!breadcrumbsNav || originalBreadcrumbChildren === null) return;
+    while (breadcrumbsNav.firstChild) breadcrumbsNav.removeChild(breadcrumbsNav.firstChild);
+    for (var i = 0; i < originalBreadcrumbChildren.length; i++) {
+      breadcrumbsNav.appendChild(originalBreadcrumbChildren[i]);
+    }
+  }
+
+  // --- Reveal the rail + nav-pair ---
+  document.documentElement.dataset.eventContext = activeEvent.event_id;
+  rail.hidden = false;
+  if (navpair) navpair.hidden = false;
+  overrideBreadcrumb();
+})();
+</script>

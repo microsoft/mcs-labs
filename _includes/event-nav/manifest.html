@@ -1,0 +1,91 @@
+{%- comment -%}
+  Emits a JSON manifest of all events + their resolved agenda schedules
+  into the page. Consumed by _includes/event-nav/script.html at runtime.
+
+  Schedule resolution (per event):
+    1. site.data.agendas[event_id].schedule if the agenda file exists.
+    2. Otherwise, synthesize a labs-only schedule from event.labs (each
+       entry becomes a type=lab row). This is the fallback so authors
+       don't need to create an agenda file for every event.
+
+  Lab rows are enriched with the lab's title, URL, difficulty, and
+  duration from site.labs so the IIFE can render the rail without
+  additional lookups.
+{%- endcomment -%}
+<script type="application/json" id="mcs-events-manifest">
+[
+{%- assign event_sep = "" -%}
+{%- for event in site.events -%}
+{{ event_sep }}
+  {
+    "event_id": {{ event.event_id | jsonify }},
+    "title": {{ event.title | jsonify }},
+    "url": {{ event.url | relative_url | jsonify }},
+    "schedule": [
+      {%- assign agenda = site.data.agendas[event.event_id] -%}
+      {%- assign item_sep = "" -%}
+      {%- if agenda and agenda.schedule -%}
+        {%- for item in agenda.schedule -%}
+          {%- if item.type == "lab" -%}
+            {%- assign lab = site.labs | where: "slug", item.slug | first -%}
+            {%- if lab -%}
+              {%- assign display_title = item.title | default: lab.title -%}
+              {{ item_sep }}
+              {
+                "type": "lab",
+                "slug": {{ item.slug | jsonify }},
+                "label": {{ item.label | default: "" | jsonify }},
+                "url": {{ lab.url | relative_url | jsonify }},
+                "title": {{ display_title | jsonify }},
+                "difficulty": {{ lab.difficulty | default: 0 | jsonify }},
+                "duration": {{ item.duration | default: lab.duration | default: 0 }}
+                {%- if item.time %}, "time": {{ item.time | jsonify }}{% endif -%}
+              }
+              {%- assign item_sep = "," -%}
+            {%- endif -%}
+          {%- else -%}
+            {{ item_sep }}
+            {
+              "type": {{ item.type | jsonify }},
+              "title": {{ item.title | default: "" | jsonify }}
+              {%- if item.description %}, "description": {{ item.description | jsonify }}{% endif -%}
+              {%- if item.speaker %}, "speaker": {{ item.speaker | jsonify }}{% endif -%}
+              {%- if item.url %}, "url": {{ item.url | jsonify }}{% endif -%}
+              {%- if item.time %}, "time": {{ item.time | jsonify }}{% endif -%}
+              {%- if item.duration %}, "duration": {{ item.duration }}{% endif -%}
+            }
+            {%- assign item_sep = "," -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%}Fallback: synthesize from event.labs{%- endcomment -%}
+        {%- for entry in event.labs -%}
+          {%- assign lab = site.labs | where: "slug", entry.slug | first -%}
+          {%- if lab -%}
+            {{ item_sep }}
+            {
+              "type": "lab",
+              "slug": {{ entry.slug | jsonify }},
+              "label": {{ entry.label | default: "" | jsonify }},
+              "url": {{ lab.url | relative_url | jsonify }},
+              "title": {{ lab.title | jsonify }},
+              "difficulty": {{ lab.difficulty | default: 0 | jsonify }},
+              "duration": {{ lab.duration | default: 0 }}
+            }
+            {%- assign item_sep = "," -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    ]
+  }
+{%- assign event_sep = "," -%}
+{%- endfor -%}
+]
+</script>
+<script type="application/json" id="mcs-lab-context">
+{
+  "slug": {{ page.slug | jsonify }},
+  "title": {{ page.title | jsonify }},
+  "url": {{ page.url | relative_url | jsonify }}
+}
+</script>

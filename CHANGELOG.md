@@ -8,6 +8,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- **Event-aware navigation.** Labs opened from an event page now show an in-lab rail below the header with the event name, `Lab X of Y` position, Previous / Next lab buttons, and an expandable agenda popover. A matching pair of Previous / Next cards renders at the bottom of the lab. Breadcrumbs override to `Home / Events / <Event> / <Lab>` when an event context is active. Event context sticks via `sessionStorage['mcs-labs.event-context.v1']` so the user keeps in-event navigation even when they click internal links that don't carry `?event=`. A × button on the rail exits the event context explicitly.
+- **Event agenda data model (`_data/agendas/<event_id>.yml`).** Each event can now declare a full schedule with labs, sessions, breaks, and external links. The event detail page renders this as a timeline; non-lab items (welcome, Q&A, lunch, etc.) display inline. Events without an agenda file fall back to the existing `labs:` array — no migration required.
+- Homepage "Browse all labs →" link replacing the Learning paths grid.
+
 - Accessibility settings menu in the masthead: theme switcher (Light, Dark, High contrast, Match system) and 3-step text size (A−, A, A+). Preferences persist in `localStorage` under `mcs-labs.prefs.v1`. A pre-paint inline script applies the stored theme before CSS loads, preventing any flash of wrong theme on reload.
 - Dark-mode Rouge syntax highlighting (Monokai-like palette) and high-contrast code blocks under `[data-theme="hc"]`.
 - Design-token layer (`assets/css/_tokens.scss`): all site colors now resolve through CSS custom properties with Light, Dark, and High contrast palettes plus a `System` option that follows `prefers-color-scheme`.

@@ -63,65 +63,85 @@ layout: single
   letter-spacing: 0.04em;
 }
 
-.ws-lab-list {
+/* Agenda section heading */
+.ws-agenda-heading {
+  font-size: 0.85em;
+  font-weight: 700;
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 1em;
+}
+
+/* Timeline */
+.ws-agenda {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 0 0 2em;
   display: flex;
   flex-direction: column;
   gap: 0.6em;
-  counter-reset: labcount;
 }
 
-.ws-lab-card {
-  border: 1px solid var(--color-border-subtle);
-  border-radius: 8px;
-  padding: 1em 1.2em;
-  background: var(--color-bg);
-  color: var(--color-fg-strong);
+.ws-agenda-row {
   display: grid;
-  grid-template-columns: 52px 1fr auto;
+  grid-template-columns: 72px 1fr auto;
   gap: 0 1em;
   align-items: start;
+  padding: 0.9em 1.2em;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  color: var(--color-fg-strong);
   transition: border-color 0.15s, box-shadow 0.15s;
-}
-.ws-lab-card:hover {
-  border-color: var(--color-border-strong);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  min-height: 44px;
 }
 
-.ws-lab-num {
-  font-size: 0.72em;
-  font-weight: 700;
-  color: var(--color-pill-blue-fg);
-  background: var(--color-pill-blue-bg);
-  border-radius: 6px;
-  padding: 0.35em 0;
-  text-align: center;
-  line-height: 1.3;
-  white-space: nowrap;
-  margin-top: 0.15em;
+/* Lab rows: prominent card with an accent left rail — the only rows that
+   are interactive, so they should read as primary calls to action. */
+.ws-agenda-row--lab {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  padding: 1em 1.2em 1em 1.1em;
+  min-height: 72px;
 }
 
-.ws-lab-body {
-  min-width: 0;
-}
-.ws-lab-title {
+/* Non-lab rows: compact, unboxed plain rows aligned to the same time
+   column. Keeps the timeline rhythm but makes labs pop. */
+.ws-agenda-row--session,
+.ws-agenda-row--break,
+.ws-agenda-row--link {
+  background: transparent;
+  border: none;
+  padding: 0.4em 0.4em 0.4em 1.2em;
+  min-height: 36px;
   font-size: 0.92em;
+}
+
+.ws-agenda-time {
+  font-size: 0.82em;
+  font-weight: 600;
+  color: var(--color-fg-muted);
+  font-variant-numeric: tabular-nums;
+  padding-top: 0.15em;
+  white-space: nowrap;
+}
+
+.ws-agenda-body { min-width: 0; }
+
+.ws-agenda-title {
+  font-size: 0.95em;
   font-weight: 600;
   color: var(--color-fg-strong);
-  margin: 0 0 0.25em;
+  margin: 0 0 0.2em;
   line-height: 1.35;
 }
-.ws-lab-title a {
-  color: inherit;
-  text-decoration: none;
-}
-.ws-lab-title a:hover {
-  color: var(--color-accent);
-}
-.ws-lab-desc {
-  font-size: 0.8em;
+.ws-agenda-title a { color: inherit; text-decoration: none; }
+.ws-agenda-title a:hover,
+.ws-agenda-title a:focus-visible { color: var(--color-accent); }
+
+.ws-agenda-desc {
+  font-size: 0.82em;
   color: var(--color-fg-muted);
   line-height: 1.5;
   margin: 0;
@@ -131,15 +151,21 @@ layout: single
   overflow: hidden;
 }
 
-.ws-lab-meta {
+.ws-agenda-speaker {
+  font-size: 0.78em;
+  color: var(--color-fg-muted);
+  margin-top: 0.25em;
+}
+
+.ws-agenda-meta {
   display: flex;
   flex-direction: column;
   gap: 0.35em;
   align-items: flex-end;
-  padding-top: 0.1em;
+  padding-top: 0.15em;
   flex-shrink: 0;
 }
-.ws-pill {
+.ws-agenda-pill {
   font-size: 0.68em;
   font-weight: 600;
   padding: 0.2em 0.55em;
@@ -150,41 +176,115 @@ layout: single
   background: var(--color-bg-elevated);
   color: var(--color-fg-muted);
 }
-.ws-pill-level-100 {
-  background: var(--color-pill-green-bg);
-  color: var(--color-pill-green-fg);
+.ws-pill-level-100 { background: var(--color-pill-green-bg);  color: var(--color-pill-green-fg); }
+.ws-pill-level-200 { background: var(--color-pill-blue-bg);   color: var(--color-pill-blue-fg); }
+.ws-pill-level-300 { background: var(--color-pill-purple-bg); color: var(--color-pill-purple-fg); }
+
+/* Lab-row hover */
+.ws-agenda-row--lab:hover,
+.ws-agenda-row--lab:focus-within {
+  border-color: var(--color-border-strong);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
-.ws-pill-level-200 {
-  background: var(--color-pill-blue-bg);
-  color: var(--color-pill-blue-fg);
+
+.ws-agenda-row--session .ws-agenda-title,
+.ws-agenda-row--break .ws-agenda-title,
+.ws-agenda-row--link .ws-agenda-title {
+  color: var(--color-fg-muted);
+  font-weight: 500;
+  font-size: 0.92em;
 }
-.ws-pill-level-300 {
-  background: var(--color-pill-purple-bg);
-  color: var(--color-pill-purple-fg);
+.ws-agenda-row--break .ws-agenda-title { font-style: italic; }
+
+/* Day header separator */
+.ws-agenda-day {
+  list-style: none;
+  font-size: 0.72em;
+  font-weight: 700;
+  color: var(--color-fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 1.5em 0 0.4em;
+  border-bottom: 1px solid var(--color-border);
+  margin: 0.5em 0 0.4em;
+}
+.ws-agenda:first-child > .ws-agenda-day:first-child,
+.ws-agenda > .ws-agenda-day:first-child { padding-top: 0; }
+
+/* Mobile */
+@media (max-width: 640px) {
+  .ws-agenda-row {
+    grid-template-columns: 1fr auto;
+    gap: 0.25em 0.75em;
+  }
+  .ws-agenda-time {
+    grid-column: 1;
+    grid-row: 1;
+    font-size: 0.75em;
+  }
+  .ws-agenda-body {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+  .ws-agenda-meta {
+    grid-column: 2;
+    grid-row: 1;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.35em;
+  }
 }
 </style>
 
-{% assign total_duration = 0 %}
-{% for item in page.labs %}
-  {% assign lab = site.labs | where: "slug", item.slug | first %}
-  {% if lab %}{% assign total_duration = total_duration | plus: lab.duration %}{% endif %}
-{% endfor %}
-{% assign total_hours = total_duration | divided_by: 60.0 | round: 1 %}
-{% assign levels_list = "" %}
-{% for item in page.labs %}
-  {% assign lab = site.labs | where: "slug", item.slug | first %}
-  {% if lab %}
-    {% assign levels_list = levels_list | append: lab.difficulty | append: "," %}
-  {% endif %}
-{% endfor %}
-{% assign ws_levels = levels_list | split: "," | uniq | sort %}
+{%- comment -%}
+  Resolve the event schedule: prefer site.data.agendas[event_id], fall back
+  to synthesizing from page.labs so events without an agenda file still
+  render correctly.
+{%- endcomment -%}
+{%- assign agenda_source = site.data.agendas[page.event_id] -%}
+{%- assign has_agenda = false -%}
+{%- if agenda_source and agenda_source.schedule -%}
+  {%- assign schedule = agenda_source.schedule -%}
+  {%- assign has_agenda = true -%}
+{%- else -%}
+  {%- assign schedule = page.labs -%}
+{%- endif -%}
+
+{%- comment -%}Compute lab-only totals for the hero stats.{%- endcomment -%}
+{%- assign total_duration = 0 -%}
+{%- assign lab_count = 0 -%}
+{%- assign levels_list = "" -%}
+{%- for item in schedule -%}
+  {%- if has_agenda -%}
+    {%- if item.type == "lab" -%}
+      {%- assign lab = site.labs | where: "slug", item.slug | first -%}
+      {%- if lab -%}
+        {%- assign lab_count = lab_count | plus: 1 -%}
+        {%- assign total_duration = total_duration | plus: item.duration | plus: 0 -%}
+        {%- if item.duration == nil -%}
+          {%- assign total_duration = total_duration | plus: lab.duration -%}
+        {%- endif -%}
+        {%- assign levels_list = levels_list | append: lab.difficulty | append: "," -%}
+      {%- endif -%}
+    {%- endif -%}
+  {%- else -%}
+    {%- assign lab = site.labs | where: "slug", item.slug | first -%}
+    {%- if lab -%}
+      {%- assign lab_count = lab_count | plus: 1 -%}
+      {%- assign total_duration = total_duration | plus: lab.duration -%}
+      {%- assign levels_list = levels_list | append: lab.difficulty | append: "," -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+{%- assign total_hours = total_duration | divided_by: 60.0 | round: 1 -%}
+{%- assign ws_levels = levels_list | split: "," | uniq | sort -%}
 
 <div class="ws-hero">
   <h2>{{ page.title }}</h2>
   <p>{{ page.description }}</p>
   <a href="https://github.com/microsoft/mcs-labs/issues/new?template=bug_report.yml&type=Bug&labels=lab&title=%5B{{ page.event_id }}%5D+&lab={{ page.event_id }}" target="_blank" rel="noopener" style="display: inline-block; margin-top: 1em; font-size: 0.78em; font-weight: 600; color: rgba(255,255,255,0.7); text-decoration: none; border: 1px solid rgba(255,255,255,0.25); padding: 0.3em 0.8em; border-radius: 4px;">Report an issue</a>
   <ul class="ws-stats">
-    <li><strong>{{ page.labs.size }}</strong><span>Labs</span></li>
+    <li><strong>{{ lab_count }}</strong><span>Labs</span></li>
     <li><strong>~{{ total_hours }}h</strong><span>Content</span></li>
     <li>
       <strong>
@@ -197,22 +297,72 @@ layout: single
   </ul>
 </div>
 
-<ol class="ws-lab-list">
-{% for item in page.labs %}
-  {% assign lab = site.labs | where: "slug", item.slug | first %}
-  {% if lab %}
-  <li class="ws-lab-card">
-    <div class="ws-lab-num">{{ item.label }}</div>
-    <div class="ws-lab-body">
-      <div class="ws-lab-title"><a href="{{ lab.url | relative_url }}?event={{ page.event_id }}">{{ lab.title }}</a></div>
-      <p class="ws-lab-desc">{{ lab.description | strip_html | truncate: 140 }}</p>
-    </div>
-    <div class="ws-lab-meta">
-      <span class="ws-pill ws-pill-level-{{ lab.difficulty }}">Level {{ lab.difficulty }}</span>
-      <span class="ws-pill ws-pill-duration">{{ lab.duration }} min</span>
-    </div>
-  </li>
-  {% endif %}
-{% endfor %}
-</ol>
+<h3 class="ws-agenda-heading">Agenda</h3>
 
+<ol class="ws-agenda">
+{%- for item in schedule -%}
+  {%- assign item_type = "lab" -%}
+  {%- if has_agenda -%}{%- assign item_type = item.type -%}{%- endif -%}
+
+  {%- if item_type == "lab" -%}
+    {%- assign lab = site.labs | where: "slug", item.slug | first -%}
+    {%- if lab -%}
+      {%- assign display_title = item.title | default: lab.title -%}
+      <li class="ws-agenda-row ws-agenda-row--lab">
+        <div class="ws-agenda-time">{% if item.time %}{{ item.time }}{% else %}&nbsp;{% endif %}</div>
+        <div class="ws-agenda-body">
+          <div class="ws-agenda-title">
+            <a href="{{ lab.url | relative_url }}?event={{ page.event_id }}">{% if item.label %}{{ item.label }}: {% endif %}{{ display_title }}</a>
+          </div>
+          <p class="ws-agenda-desc">{{ lab.description | strip_html | truncate: 140 }}</p>
+        </div>
+        <div class="ws-agenda-meta">
+          <span class="ws-agenda-pill ws-pill-level-{{ lab.difficulty }}">Level {{ lab.difficulty }}</span>
+          <span class="ws-agenda-pill ws-pill-duration">{% if item.duration %}{{ item.duration }}{% else %}{{ lab.duration }}{% endif %} min</span>
+        </div>
+      </li>
+    {%- endif -%}
+
+  {%- elsif item_type == "session" -%}
+    <li class="ws-agenda-row ws-agenda-row--session">
+      <div class="ws-agenda-time">{% if item.time %}{{ item.time }}{% else %}&nbsp;{% endif %}</div>
+      <div class="ws-agenda-body">
+        <div class="ws-agenda-title">{{ item.title }}</div>
+        {% if item.description %}<p class="ws-agenda-desc">{{ item.description }}</p>{% endif %}
+        {% if item.speaker %}<div class="ws-agenda-speaker">— {{ item.speaker }}</div>{% endif %}
+      </div>
+      <div class="ws-agenda-meta">
+        {% if item.duration %}<span class="ws-agenda-pill ws-pill-duration">{{ item.duration }} min</span>{% endif %}
+      </div>
+    </li>
+
+  {%- elsif item_type == "break" -%}
+    <li class="ws-agenda-row ws-agenda-row--break">
+      <div class="ws-agenda-time">{% if item.time %}{{ item.time }}{% else %}&nbsp;{% endif %}</div>
+      <div class="ws-agenda-body">
+        <div class="ws-agenda-title">{{ item.title }}</div>
+      </div>
+      <div class="ws-agenda-meta">
+        {% if item.duration %}<span class="ws-agenda-pill ws-pill-duration">{{ item.duration }} min</span>{% endif %}
+      </div>
+    </li>
+
+  {%- elsif item_type == "link" -%}
+    <li class="ws-agenda-row ws-agenda-row--link">
+      <div class="ws-agenda-time">{% if item.time %}{{ item.time }}{% else %}&nbsp;{% endif %}</div>
+      <div class="ws-agenda-body">
+        <div class="ws-agenda-title">
+          <a href="{{ item.url }}" target="_blank" rel="noopener noreferrer">{{ item.title }} ↗</a>
+        </div>
+        {% if item.description %}<p class="ws-agenda-desc">{{ item.description }}</p>{% endif %}
+      </div>
+      <div class="ws-agenda-meta">
+        {% if item.duration %}<span class="ws-agenda-pill ws-pill-duration">{{ item.duration }} min</span>{% endif %}
+      </div>
+    </li>
+
+  {%- elsif item_type == "day" -%}
+    <li class="ws-agenda-day">{{ item.title }}</li>
+  {%- endif -%}
+{%- endfor -%}
+</ol>
