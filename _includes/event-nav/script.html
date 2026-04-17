@@ -49,25 +49,33 @@
     return null;
   }
 
-  // --- URL sanitizer ---
-  // Every URL used in href or location writes flows through safeUrl. The
-  // manifest URLs are produced by Jekyll at build time from trusted site
-  // data, but we still validate to cut the `javascript:` vector and to
-  // satisfy CodeQL's taint tracker.
-  function safeUrl(candidate) {
-    if (typeof candidate !== 'string' || !candidate) return '#';
-    // Disallow protocol-bearing strings we don't explicitly trust.
-    // Accepts absolute paths ("/..."), hash-only ("#..."), or full URLs
-    // whose origin matches the current page origin.
-    if (candidate.charAt(0) === '/' || candidate.charAt(0) === '#') return candidate;
+  // --- URL construction helpers ---
+  // All URLs embedded in the manifest come from Jekyll build output and are
+  // therefore trusted, but every href/location write still goes through the
+  // URL constructor so that (a) a javascript: URL can never sneak through
+  // and (b) CodeQL's xss-through-dom taint analysis sees a recognized
+  // sanitizer at every sink.
+  function buildLabUrl(labUrl, eventId) {
     try {
-      var u = new URL(candidate, window.location.origin);
-      if ((u.protocol === 'https:' || u.protocol === 'http:') &&
-          u.origin === window.location.origin) {
-        return u.pathname + u.search + u.hash;
-      }
-    } catch (e) {}
-    return '#';
+      var u = new URL(String(labUrl || ''), window.location.origin);
+      if (u.origin !== window.location.origin) return null;
+      if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
+      u.searchParams.set('event', String(eventId || ''));
+      return u;
+    } catch (e) { return null; }
+  }
+  function buildSameOriginUrl(candidate) {
+    try {
+      var u = new URL(String(candidate || ''), window.location.origin);
+      if (u.origin !== window.location.origin) return null;
+      if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
+      return u;
+    } catch (e) { return null; }
+  }
+  // URL.href on a constructed URL is always safe — it serializes a parsed
+  // origin + pathname + search + hash that can't be `javascript:`.
+  function urlHrefOr(url, fallback) {
+    return url ? url.href : (fallback || '#');
   }
 
   function eventContainsLab(event, labSlug) {
@@ -126,33 +134,32 @@
   var prevLab = currentIdx > 0 ? labsInEvent[currentIdx - 1] : null;
   var nextLab = currentIdx < labsInEvent.length - 1 ? labsInEvent[currentIdx + 1] : null;
 
-  function labHref(lab) {
-    return safeUrl(lab.url) + '?event=' + encodeURIComponent(activeEvent.event_id);
-  }
+  var activeEventUrl = buildSameOriginUrl(activeEvent.url);
 
   // --- Populate rail head ---
-  railEventLink.href = safeUrl(activeEvent.url);
+  railEventLink.href = urlHrefOr(activeEventUrl);
   railEventName.textContent = activeEvent.title;
   railPosition.textContent = 'Lab ' + (currentIdx + 1) + ' of ' + labsInEvent.length;
 
-  if (prevLab) {
+  var prevLabUrl = prevLab ? buildLabUrl(prevLab.url, activeEvent.event_id) : null;
+  var nextLabUrl = nextLab ? buildLabUrl(nextLab.url, activeEvent.event_id) : null;
+
+  if (prevLab && prevLabUrl) {
     prevBtn.removeAttribute('disabled');
     prevBtn.setAttribute('aria-label', 'Previous lab: ' + prevLab.title);
     prevBtn.addEventListener('click', function () {
-      var href = labHref(prevLab);
-      window.location.assign(href);
+      window.location.assign(prevLabUrl.href);
     });
   } else {
     prevBtn.setAttribute('disabled', '');
     prevBtn.setAttribute('aria-label', 'No previous lab');
   }
 
-  if (nextLab) {
+  if (nextLab && nextLabUrl) {
     nextBtn.removeAttribute('disabled');
     nextBtn.setAttribute('aria-label', 'Next lab: ' + nextLab.title);
     nextBtn.addEventListener('click', function () {
-      var href = labHref(nextLab);
-      window.location.assign(href);
+      window.location.assign(nextLabUrl.href);
     });
   } else {
     nextBtn.setAttribute('disabled', '');
@@ -160,27 +167,26 @@
     // When at the last lab, Next goes back to the event overview.
     nextBtn.removeAttribute('disabled');
     nextBtn.addEventListener('click', function () {
-      var href = safeUrl(activeEvent.url);
-      window.location.assign(href);
+      if (activeEventUrl) window.location.assign(activeEventUrl.href);
     });
   }
 
   // --- Populate bottom nav-pair cards ---
-  if (prevLab) {
-    prevCard.href = labHref(prevLab);
+  if (prevLab && prevLabUrl) {
+    prevCard.href = prevLabUrl.href;
     prevCardTitle.textContent = prevLab.title;
     prevCardDesc.textContent = prevLab.label || ('Lab ' + currentIdx);
   } else {
-    prevCard.href = safeUrl(activeEvent.url);
+    prevCard.href = urlHrefOr(activeEventUrl);
     prevCardTitle.textContent = 'Back to ' + activeEvent.title;
     prevCardDesc.textContent = 'Event overview';
   }
-  if (nextLab) {
-    nextCard.href = labHref(nextLab);
+  if (nextLab && nextLabUrl) {
+    nextCard.href = nextLabUrl.href;
     nextCardTitle.textContent = nextLab.title;
     nextCardDesc.textContent = nextLab.label || ('Lab ' + (currentIdx + 2));
   } else {
-    nextCard.href = safeUrl(activeEvent.url);
+    nextCard.href = urlHrefOr(activeEventUrl);
     nextCardTitle.textContent = 'Finish ' + activeEvent.title;
     nextCardDesc.textContent = 'Event overview';
   }
@@ -206,8 +212,9 @@
     bodyCell.className = 'event-agenda-body';
 
     if (item.type === 'lab') {
+      var itemUrl = buildLabUrl(item.url, activeEvent.event_id);
       var a = document.createElement('a');
-      a.href = labHref(item);
+      a.href = urlHrefOr(itemUrl);
       a.textContent = (item.label ? item.label + ' — ' : '') + item.title;
       if (item.slug === currentLab.slug) {
         a.setAttribute('aria-current', 'page');
@@ -215,14 +222,14 @@
       }
       bodyCell.appendChild(a);
     } else if (item.type === 'link' && item.url) {
+      // External "link" items may point to any http/https URL. Use the URL
+      // constructor to parse and normalize; reject anything that isn't
+      // http(s) (e.g. a `javascript:` string).
       var extA = document.createElement('a');
-      // External "link" items may legitimately point to any https URL
-      // (e.g. Microsoft Learn docs). Allow through if protocol is https.
-      var candidate = typeof item.url === 'string' ? item.url : '';
       var extHref = '#';
       try {
-        var u = new URL(candidate, window.location.origin);
-        if (u.protocol === 'https:' || u.protocol === 'http:') extHref = u.href;
+        var extU = new URL(String(item.url || ''), window.location.origin);
+        if (extU.protocol === 'https:' || extU.protocol === 'http:') extHref = extU.href;
       } catch (e) {}
       extA.href = extHref;
       extA.target = '_blank';
@@ -331,13 +338,13 @@
       }
     }
 
-    function makeCrumbLi(href, text, position) {
+    function makeCrumbLi(urlObj, text, position) {
       var li = document.createElement('li');
       li.setAttribute('itemprop', 'itemListElement');
       li.setAttribute('itemscope', '');
       li.setAttribute('itemtype', 'https://schema.org/ListItem');
       var a = document.createElement('a');
-      a.href = safeUrl(href);
+      a.href = urlHrefOr(urlObj);
       a.setAttribute('itemprop', 'item');
       var span = document.createElement('span');
       span.setAttribute('itemprop', 'name');
@@ -351,9 +358,9 @@
       return li;
     }
 
-    breadcrumbsNav.appendChild(makeCrumbLi(baseurl + '/', 'Home', 1));
-    breadcrumbsNav.appendChild(makeCrumbLi(baseurl + '/events/', 'Events', 2));
-    breadcrumbsNav.appendChild(makeCrumbLi(activeEvent.url, activeEvent.title, 3));
+    breadcrumbsNav.appendChild(makeCrumbLi(buildSameOriginUrl(baseurl + '/'), 'Home', 1));
+    breadcrumbsNav.appendChild(makeCrumbLi(buildSameOriginUrl(baseurl + '/events/'), 'Events', 2));
+    breadcrumbsNav.appendChild(makeCrumbLi(activeEventUrl, activeEvent.title, 3));
 
     var currentLi = document.createElement('li');
     currentLi.className = 'current';
