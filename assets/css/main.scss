@@ -505,12 +505,12 @@ p > code, li > code, td > code {
 // fixed-position panel CSS; nothing here applies below 1024 px).
 @media (min-width: 1024px) {
   html[data-panel-open] body {
-    padding-right: 400px;
+    padding-right: 480px;
     transition: padding-right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   // Collapse the TOC column while the panel is open — at viewport 1024 px
-  // minus the 400 px panel, the content column would squeeze below ~450 px.
+  // minus the 480 px panel, the content column would squeeze too narrow.
   // The Lab Assistant doubles as navigation; re-show the TOC on ≥1440 px.
   html[data-panel-open] .page__content:has(> .sidebar__right) {
     grid-template-columns: 1fr;

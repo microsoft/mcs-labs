@@ -282,11 +282,21 @@
       payload: { text: text }
     });
     sendInput.value = '';
+    autoResize();
     sendInput.focus();
   }
 
+  // Textarea auto-resize: grow from the rows=2 baseline up to the CSS
+  // max-height, then scroll internally.
+  function autoResize() {
+    sendInput.style.height = 'auto';
+    sendInput.style.height = Math.min(sendInput.scrollHeight, 160) + 'px';
+  }
+
   sendBtn.addEventListener('click', sendMessage);
+  sendInput.addEventListener('input', autoResize);
   sendInput.addEventListener('keydown', function (e) {
+    // Enter sends; Shift+Enter inserts a newline.
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       sendMessage();
