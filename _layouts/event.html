@@ -358,7 +358,18 @@ layout: single
         {% if item.description %}<p class="ws-agenda-desc">{{ item.description }}</p>{% endif %}
         {% if item.speaker %}<div class="ws-agenda-speaker">— {{ item.speaker }}</div>{% endif %}
         {% if item.slides %}
-          <a class="ws-agenda-slides" href="{{ item.slides | relative_url }}" download>
+          {%- comment -%}
+          Decks live under /presentations/ and are tracked in Git LFS. GitHub Pages
+          serves LFS pointer files (~130 B) rather than resolving them, so we rewrite
+          any in-repo /presentations/ path to the GitHub raw URL which does resolve
+          LFS correctly. External URLs (http/https) pass through unchanged.
+          {%- endcomment -%}
+          {%- assign slides_href = item.slides -%}
+          {%- unless slides_href contains "://" -%}
+            {%- assign slides_path = slides_href | remove_first: "/" -%}
+            {%- assign slides_href = "https://github.com/microsoft/mcs-labs/raw/main/" | append: slides_path -%}
+          {%- endunless -%}
+          <a class="ws-agenda-slides" href="{{ slides_href }}" download>
             <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
             </svg>
