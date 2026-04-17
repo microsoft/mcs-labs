@@ -54,12 +54,17 @@ jobs:
       - name: Install dev dependencies
         run: npm install --no-audit --no-fund
 
-      - name: Serve site
-        run: npx http-server _site -p 4000 -s &
-        # Give the server a moment to come up before pa11y hits it.
-
-      - name: Wait for server
-        run: npx wait-on http://127.0.0.1:4000/mcs-labs/ --timeout 30000
-
-      - name: Run pa11y-ci
-        run: npx pa11y-ci --config .pa11yci.json
+      - name: Serve + wait + run pa11y-ci
+        # Keep server + wait + run in one step so the background http-server
+        # process persists — GitHub Actions runs each step in its own shell
+        # and kills backgrounded processes when a step ends.
+        # Jekyll outputs under `_site/` at top level even though links carry
+        # the `/mcs-labs/` baseurl, so we expose the site at the root via a
+        # symlink that matches the baseurl.
+        run: |
+          mkdir -p _serve && ln -s ../_site _serve/mcs-labs
+          npx http-server _serve -p 4000 -s &
+          SERVER_PID=$!
+          trap "kill $SERVER_PID" EXIT
+          npx wait-on http://127.0.0.1:4000/mcs-labs/ --timeout 30000
+          npx pa11y-ci --config .pa11yci.json

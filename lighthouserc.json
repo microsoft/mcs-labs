@@ -3,11 +3,11 @@
     "collect": {
       "staticDistDir": "./_site",
       "url": [
-        "http://localhost/mcs-labs/index.html",
-        "http://localhost/mcs-labs/about/index.html",
-        "http://localhost/mcs-labs/events/index.html",
-        "http://localhost/mcs-labs/bug-bash/index.html",
-        "http://localhost/mcs-labs/labs/mcs-governance/index.html"
+        "http://localhost/index.html",
+        "http://localhost/about/index.html",
+        "http://localhost/events/index.html",
+        "http://localhost/bug-bash.html",
+        "http://localhost/labs/mcs-governance/index.html"
       ],
       "numberOfRuns": 1,
       "settings": {

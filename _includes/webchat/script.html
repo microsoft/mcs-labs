@@ -175,6 +175,11 @@
   // Remove overlay — lab assistant should not block page interaction
   if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
 
+  // Start inert — panel is aria-hidden=true initially. `inert` pulls focusable
+  // children out of the tab order so keyboard users don't Tab into the hidden
+  // panel. Toggled in open()/close().
+  panel.inert = true;
+
   function open() {
     isOpen = true;
     panel.classList.add('wc-panel--open');
@@ -182,6 +187,7 @@
     document.documentElement.setAttribute('data-panel-open', '');
     tag.setAttribute('aria-expanded', 'true');
     panel.setAttribute('aria-hidden', 'false');
+    panel.inert = false;
     panel.addEventListener('keydown', handleFocusTrap);
     if (!chatInitializing && !chatReady) initChat();
     else if (chatReady) sendInput.focus();
@@ -195,6 +201,7 @@
     document.documentElement.removeAttribute('data-panel-open');
     tag.setAttribute('aria-expanded', 'false');
     panel.setAttribute('aria-hidden', 'true');
+    panel.inert = true;
     panel.removeEventListener('keydown', handleFocusTrap);
     tag.focus();
     persistState();
@@ -468,6 +475,7 @@
       document.documentElement.setAttribute('data-panel-open', '');
       tag.setAttribute('aria-expanded', 'true');
       panel.setAttribute('aria-hidden', 'false');
+      panel.inert = false;
       panel.addEventListener('keydown', handleFocusTrap);
       initChat(persistedState);
     }
