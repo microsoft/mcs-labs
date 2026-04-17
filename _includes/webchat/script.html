@@ -179,6 +179,9 @@
     isOpen = true;
     panel.classList.add('wc-panel--open');
     tag.classList.add('wc-tag--hidden');
+    document.documentElement.setAttribute('data-panel-open', '');
+    tag.setAttribute('aria-expanded', 'true');
+    panel.setAttribute('aria-hidden', 'false');
     panel.addEventListener('keydown', handleFocusTrap);
     if (!chatInitializing && !chatReady) initChat();
     else if (chatReady) sendInput.focus();
@@ -189,15 +192,17 @@
     isOpen = false;
     panel.classList.remove('wc-panel--open');
     tag.classList.remove('wc-tag--hidden');
+    document.documentElement.removeAttribute('data-panel-open');
+    tag.setAttribute('aria-expanded', 'false');
+    panel.setAttribute('aria-hidden', 'true');
     panel.removeEventListener('keydown', handleFocusTrap);
     tag.focus();
     persistState();
   }
 
   tag.addEventListener('click', open);
-  tag.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-  });
+  // No manual Enter/Space handler: #wcTag is now a native <button>, which
+  // activates on Enter/Space via the user-agent.
   closeBtn.addEventListener('click', close);
 
   document.addEventListener('keydown', function (e) {
@@ -460,6 +465,9 @@
       isOpen = true;
       panel.classList.add('wc-panel--open');
       tag.classList.add('wc-tag--hidden');
+      document.documentElement.setAttribute('data-panel-open', '');
+      tag.setAttribute('aria-expanded', 'true');
+      panel.setAttribute('aria-hidden', 'false');
       panel.addEventListener('keydown', handleFocusTrap);
       initChat(persistedState);
     }

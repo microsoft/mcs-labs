@@ -1,0 +1,20 @@
+<!-- Pre-paint: apply stored theme + font-size before CSS loads (no FOUC).
+     Minimal Mistakes includes this file from its _includes/head.html. -->
+<script>
+(function () {
+  try {
+    var raw = localStorage.getItem('mcs-labs.prefs.v1');
+    if (!raw) return;
+    var p = JSON.parse(raw);
+    if (!p || p.schemaVersion !== 1) return;
+    if (p.theme && p.theme !== 'system' &&
+        (p.theme === 'light' || p.theme === 'dark' || p.theme === 'hc')) {
+      document.documentElement.setAttribute('data-theme', p.theme);
+    }
+    if (typeof p.fontScale === 'number' &&
+        p.fontScale >= 0.75 && p.fontScale <= 1.5) {
+      document.documentElement.style.setProperty('--font-scale', String(p.fontScale));
+    }
+  } catch (e) {}
+})();
+</script>

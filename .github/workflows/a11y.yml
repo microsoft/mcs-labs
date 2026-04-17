@@ -1,0 +1,66 @@
+name: Accessibility (pa11y-ci)
+
+on:
+  pull_request:
+    paths:
+      - "_labs/**"
+      - "_events/**"
+      - "_layouts/**"
+      - "_includes/**"
+      - "_data/**"
+      - "assets/**"
+      - "_config.yml"
+      - "index.md"
+      - "about/**"
+      - "events/**"
+      - "labs/**"
+      - ".pa11yci.json"
+      - ".github/workflows/a11y.yml"
+      - "Gemfile"
+      - "Gemfile.lock"
+      - "package.json"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  pa11y:
+    name: pa11y-ci
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Build Jekyll
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: Install dev dependencies
+        run: npm ci
+
+      - name: Serve site
+        run: npx http-server _site -p 4000 -s &
+        # Give the server a moment to come up before pa11y hits it.
+
+      - name: Wait for server
+        run: npx wait-on http://127.0.0.1:4000/mcs-labs/ --timeout 30000
+
+      - name: Run pa11y-ci
+        run: npx pa11y-ci --config .pa11yci.json

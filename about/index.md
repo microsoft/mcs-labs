@@ -12,8 +12,11 @@ classes: wide
 .page__meta { display: none; }
 
 .about-hero {
-  background: linear-gradient(135deg, #0f1b2d 0%, #1a3a5c 50%, #0f2440 100%);
-  color: #fff;
+  background: linear-gradient(135deg,
+    var(--color-lab-grad-1) 0%,
+    var(--color-lab-grad-2) 50%,
+    var(--color-lab-grad-3) 100%);
+  color: var(--color-on-lab-header);
   padding: 3em 2.5em;
   border-radius: 10px;
   margin: -0.5em 0 2.5em;
@@ -27,7 +30,7 @@ classes: wide
   right: -20%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(0,120,212,0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--color-lab-hero-glow) 0%, transparent 70%);
   pointer-events: none;
 }
 .about-hero h2 {
@@ -37,7 +40,7 @@ classes: wide
   letter-spacing: -0.02em;
   border: none;
   padding: 0;
-  color: #fff;
+  color: var(--color-on-lab-header);
 }
 .about-hero p {
   font-size: 1em;
@@ -50,12 +53,12 @@ classes: wide
 .about-section-title {
   font-size: 1em;
   font-weight: 700;
-  color: #323130;
+  color: var(--color-fg-strong);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0 0 1em;
   padding-bottom: 0.5em;
-  border-bottom: 2px solid #e8e6e4;
+  border-bottom: 2px solid var(--color-border-subtle);
 }
 
 .team-grid {
@@ -92,20 +95,20 @@ classes: wide
   transition: box-shadow 0.2s ease;
 }
 .team-card:hover .team-avatar {
-  box-shadow: 0 4px 20px rgba(0,120,212,0.15);
+  box-shadow: 0 4px 20px var(--color-accent-tint-3);
 }
 
 .team-name {
   font-size: 0.82em;
   font-weight: 600;
-  color: #323130;
+  color: var(--color-fg-strong);
   margin: 0;
   letter-spacing: -0.01em;
 }
 
 .team-role {
   font-size: 0.72em;
-  color: #a19f9d;
+  color: var(--color-fg-disabled);
   margin: 0.15em 0 0;
   line-height: 1.3;
 }
@@ -116,7 +119,7 @@ classes: wide
 }
 .about-content p {
   font-size: 0.92em;
-  color: #605e5c;
+  color: var(--color-fg-muted);
   line-height: 1.7;
   margin: 0 0 1em;
 }

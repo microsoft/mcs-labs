@@ -1,7 +1,7 @@
 source "https://rubygems.org"
 
 gem "jekyll", "~> 4.3"
-gem "minimal-mistakes-jekyll", "~> 4.26"
+gem "minimal-mistakes-jekyll", "= 4.27.3"  # pinned: _includes/masthead.html shadows this version
 
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.15"

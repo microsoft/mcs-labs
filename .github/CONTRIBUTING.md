@@ -115,6 +115,39 @@ npm install  # Reads package.json, installs exact compatible versions
 2. Update `.github/scripts/generate-pdf.js` for PDF formatting
 3. Changes trigger automatic regeneration of all documents
 
+## ♿ Accessibility
+
+The site ships a design-token layer, a masthead theme switcher (Light / Dark / High contrast / Match system), a 3-step text-size control, and an adaptive Lab Assistant flyout. Two CI workflows enforce baselines on every PR:
+
+- **`.github/workflows/a11y.yml`** — runs `pa11y-ci` against the URL list in `.pa11yci.json` at `WCAG2AA`. Zero errors required.
+- **`.github/workflows/lighthouse.yml`** — runs Lighthouse CI (`lighthouserc.json`). Accessibility score ≥ 95 per URL.
+
+### Rules for contributors
+
+1. **Every new color must come from a token.** Add or reuse a CSS custom property in `assets/css/_tokens.scss`. Do not write hardcoded hex values in `assets/css/main.scss` or in `_includes/webchat/styles.html`. When adding a token, provide values in every palette (`:root`, `@mixin dark-tokens`, `[data-theme="hc"]`).
+2. **Use `:focus-visible` for focus styles.** Do not use `outline: none` without a `box-shadow` fallback on the same selector.
+3. **SVG icons** are decorative by default. Add `aria-hidden="true" focusable="false"` unless the icon is the only accessible name for its control, in which case add `<title>` + `role="img"` and ensure contrast.
+4. **Inputs need labels.** Placeholder text is not a label. Use a `<label for="…">` (hide it with `.visually-hidden` if a visible label would hurt the design).
+5. **Respect `prefers-reduced-motion`.** New CSS animations or transitions should be neutralized by the global block in `_tokens.scss`. If you need a longer-running animation, add an explicit override under that block.
+
+### Bumping the `minimal-mistakes-jekyll` gem
+
+`_includes/masthead.html` **shadows** the upstream theme's masthead at version `4.27.3` (see the header comment in that file). Bumping the Gemfile pin requires:
+
+1. Diff `_includes/masthead.html` against the new upstream version at `https://github.com/mmistakes/minimal-mistakes/blob/<new-version>/_includes/masthead.html`.
+2. Reconcile additions upstream into our shadow.
+3. Update the version line in the comment at the top of `_includes/masthead.html`.
+4. Re-run Phase A (local Docker) before opening the PR.
+
+### Local accessibility testing
+
+```bash
+# with the dev container running on http://localhost:4000/mcs-labs/
+npm install
+npm run a11y        # pa11y-ci
+npm run lighthouse  # @lhci/cli
+```
+
 ## 🐛 Troubleshooting
 
 ### Common Issues

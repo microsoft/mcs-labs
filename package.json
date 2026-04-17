@@ -1,0 +1,16 @@
+{
+  "name": "mcs-labs-a11y-ci",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Accessibility tooling dev deps for mcs-labs. No runtime code ships from here.",
+  "scripts": {
+    "a11y": "pa11y-ci --config .pa11yci.json",
+    "lighthouse": "lhci autorun"
+  },
+  "devDependencies": {
+    "@lhci/cli": "^0.14.0",
+    "http-server": "^14.1.1",
+    "pa11y-ci": "^3.1.0",
+    "wait-on": "^7.2.0"
+  }
+}

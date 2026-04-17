@@ -1,6 +1,11 @@
 <style>
 /* ============================================
    WebChat Side Panel — Air Theme
+
+   Every color resolves through a CSS custom property defined in
+   assets/css/_tokens.scss. Hex fallbacks after the comma preserve the
+   current light-theme appearance even if the token layer fails to load
+   (e.g. a build miss or stylesheet request failure).
    ============================================ */
 
 /* --- Tag (pull handle) --- */
@@ -15,26 +20,31 @@
   gap: 6px;
   writing-mode: vertical-lr;
   text-orientation: mixed;
-  background: #fff;
-  color: #605e5c;
+  background: var(--color-bg, #fff);
+  color: var(--color-fg-muted, #605e5c);
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.78rem;
   font-weight: 600;
   letter-spacing: 0.03em;
   padding: 14px 10px;
   border-radius: 10px 0 0 10px;
-  border: 1px solid #e1dfdd;
+  border: 1px solid var(--color-border, #e1dfdd);
   border-right: none;
   cursor: pointer;
-  box-shadow: -2px 0 12px rgba(0, 0, 0, 0.04);
+  box-shadow: var(--shadow-tag, -2px 0 12px rgba(0, 0, 0, 0.04));
   transition: background 0.2s, color 0.2s, box-shadow 0.2s, right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
 }
 
 .wc-tag:hover {
-  background: #f3f2f1;
-  color: #323130;
-  box-shadow: -3px 0 16px rgba(0, 0, 0, 0.08);
+  background: var(--color-bg-elevated, #f3f2f1);
+  color: var(--color-fg-strong, #323130);
+  box-shadow: var(--shadow-tag-hover, -3px 0 16px rgba(0, 0, 0, 0.08));
+}
+
+.wc-tag:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring, 0 0 0 2px #fff, 0 0 0 4px #0078d4);
 }
 
 .wc-tag svg { width: 18px; height: 18px; flex-shrink: 0; }
@@ -50,7 +60,7 @@
 .wc-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 27, 45, 0.06);
+  background: var(--overlay-bg, rgba(15, 27, 45, 0.06));
   z-index: 99991;
   opacity: 0;
   pointer-events: none;
@@ -75,11 +85,11 @@
   z-index: 99992;
   display: flex;
   flex-direction: column;
-  background: #fff;
-  border-left: 1px solid #d2d0ce;
-  box-shadow:
+  background: var(--color-bg, #fff);
+  border-left: 1px solid var(--color-border-strong, #d2d0ce);
+  box-shadow: var(--shadow-panel,
     -8px 0 40px rgba(0, 0, 0, 0.08),
-    -1px 0 0 rgba(0, 0, 0, 0.04);
+    -1px 0 0 rgba(0, 0, 0, 0.04));
   transform: translateX(100%);
   transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
@@ -103,9 +113,9 @@ html.wc-restore .wc-tag {
   align-items: center;
   justify-content: space-between;
   padding: 16px 18px;
-  border-bottom: 1px solid #eae8e6;
+  border-bottom: 1px solid var(--color-divider, #eae8e6);
   flex-shrink: 0;
-  background: #fff;
+  background: var(--color-bg, #fff);
 }
 
 .wc-panel-header-left {
@@ -118,32 +128,34 @@ html.wc-restore .wc-tag {
   width: 32px;
   height: 32px;
   border-radius: 10px;
-  background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
+  background: linear-gradient(135deg,
+    var(--color-accent, #0078d4) 0%,
+    var(--color-accent-active, #005a9e) 100%);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 2px 8px rgba(0, 120, 212, 0.25);
+  box-shadow: 0 2px 8px var(--color-accent-tint-3, rgba(0, 120, 212, 0.25));
 }
 
 .wc-panel-header-icon svg {
   width: 17px;
   height: 17px;
-  color: #fff;
+  color: var(--color-accent-on, #fff);
 }
 
 .wc-panel-header-title {
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.92rem;
   font-weight: 600;
-  color: #201f1e;
+  color: var(--color-fg, #201f1e);
   line-height: 1.2;
 }
 
 .wc-panel-header-status {
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.68rem;
-  color: #a19f9d;
+  color: var(--color-fg-disabled, #757371);
   font-weight: 500;
   margin-top: 1px;
   letter-spacing: 0.01em;
@@ -158,15 +170,20 @@ html.wc-restore .wc-tag {
   border-radius: 8px;
   border: none;
   background: transparent;
-  color: #a19f9d;
+  color: var(--color-fg-disabled, #757371);
   cursor: pointer;
   transition: background 0.15s, color 0.15s;
   flex-shrink: 0;
 }
 
 .wc-panel-close:hover {
-  background: #f3f2f1;
-  color: #323130;
+  background: var(--color-bg-elevated, #f3f2f1);
+  color: var(--color-fg-strong, #323130);
+}
+
+.wc-panel-close:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring, 0 0 0 2px #fff, 0 0 0 4px #0078d4);
 }
 
 .wc-panel-close svg { width: 16px; height: 16px; }
@@ -176,7 +193,7 @@ html.wc-restore .wc-tag {
   flex: 1;
   overflow: hidden;
   position: relative;
-  background: #faf9f8;
+  background: var(--color-bg-subtle, #faf9f8);
 }
 
 .wc-panel-body > div { height: 100%; }
@@ -193,14 +210,14 @@ html.wc-restore .wc-tag {
   gap: 14px;
   padding: 32px;
   text-align: center;
-  color: #605e5c;
+  color: var(--color-fg-muted, #605e5c);
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.84rem;
 }
 
 .wc-panel-error button {
-  background: #0078d4;
-  color: #fff;
+  background: var(--color-accent, #0078d4);
+  color: var(--color-accent-on, #fff);
   border: none;
   padding: 9px 20px;
   border-radius: 8px;
@@ -211,7 +228,12 @@ html.wc-restore .wc-tag {
   transition: background 0.15s;
 }
 
-.wc-panel-error button:hover { background: #106ebe; }
+.wc-panel-error button:hover { background: var(--color-accent-hover, #106ebe); }
+
+.wc-panel-error button:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring, 0 0 0 2px #fff, 0 0 0 4px #0078d4);
+}
 
 /* ===========================================
    Typing Indicator
@@ -242,7 +264,7 @@ html.wc-restore .wc-tag {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: #b3b0ad;
+  background: var(--color-fg-placeholder, #767472);
   animation: wc-dot-pulse 1.4s ease-in-out infinite;
 }
 
@@ -272,24 +294,27 @@ html.wc-restore .wc-tag {
 .wc-sendbox {
   flex-shrink: 0;
   padding: 12px 16px 16px;
-  background: #fff;
-  border-top: 1px solid #eae8e6;
+  background: var(--color-bg, #fff);
+  border-top: 1px solid var(--color-divider, #eae8e6);
 }
 
 .wc-sendbox-inner {
   display: flex;
   align-items: center;
   gap: 6px;
-  background: #f0efed;
+  background: var(--color-bg-input, #f0efed);
   border: none;
   border-radius: 24px;
   padding: 4px 5px 4px 18px;
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
+/* Focus state is owned by the wrapper so the focus ring encloses the whole
+   pill (input + send button). Visible for both mouse and keyboard users. */
 .wc-sendbox-inner:focus-within {
-  background: #eae9e7;
-  box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.12);
+  background: var(--color-bg-input-hover, #eae9e7);
+  box-shadow: 0 0 0 2px var(--color-accent-tint-2, rgba(0, 120, 212, 0.25)),
+              0 0 0 4px var(--color-accent, #0078d4);
 }
 
 .wc-sendbox-input,
@@ -299,10 +324,13 @@ html.wc-restore .wc-tag {
   border-radius: 0 !important;
   background: transparent !important;
   box-shadow: none !important;
+  /* No outline on the inner input — the focus ring lives on
+     .wc-sendbox-inner:focus-within above. Keyboard users still see a visible
+     indicator because the wrapper's focus-within triggers on input focus. */
   outline: none !important;
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.8rem;
-  color: #201f1e;
+  color: var(--color-fg, #201f1e);
   padding: 9px 0 !important;
   margin: 0 !important;
   line-height: 1.4;
@@ -312,14 +340,8 @@ html.wc-restore .wc-tag {
 }
 
 .wc-sendbox-input::placeholder {
-  color: #b3b0ad;
+  color: var(--color-fg-placeholder, #767472);
   font-weight: 400;
-}
-
-.wc-sendbox-input:focus {
-  border: none !important;
-  box-shadow: none !important;
-  outline: none !important;
 }
 
 .wc-sendbox-btn {
@@ -328,8 +350,10 @@ html.wc-restore .wc-tag {
   min-width: 34px;
   border-radius: 50%;
   border: none;
-  background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%);
-  color: #fff;
+  background: linear-gradient(135deg,
+    var(--color-accent, #0078d4) 0%,
+    var(--color-accent-active, #005a9e) 100%);
+  color: var(--color-accent-on, #fff);
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -337,18 +361,32 @@ html.wc-restore .wc-tag {
   padding: 0;
   flex-shrink: 0;
   transition: all 0.15s ease;
-  box-shadow: 0 2px 6px rgba(0, 120, 212, 0.3);
+  box-shadow: var(--shadow-send, 0 2px 6px rgba(0, 120, 212, 0.30));
 }
 
 .wc-sendbox-btn:hover {
-  background: linear-gradient(135deg, #106ebe 0%, #004578 100%);
-  box-shadow: 0 3px 10px rgba(0, 120, 212, 0.35);
+  background: linear-gradient(135deg,
+    var(--color-accent-hover, #106ebe) 0%,
+    var(--color-accent-deep, #004578) 100%);
+  box-shadow: var(--shadow-send-hover, 0 3px 10px rgba(0, 120, 212, 0.35));
   transform: translateY(-1px);
 }
 
 .wc-sendbox-btn:active {
   transform: translateY(0) scale(0.96);
-  box-shadow: 0 1px 3px rgba(0, 120, 212, 0.25);
+  box-shadow: var(--shadow-send-active, 0 1px 3px rgba(0, 120, 212, 0.25));
+}
+
+.wc-sendbox-btn:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring, 0 0 0 2px #fff, 0 0 0 4px #0078d4);
+}
+
+.wc-sendbox-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
 }
 
 .wc-sendbox-btn svg {
@@ -362,7 +400,7 @@ html.wc-restore .wc-tag {
   text-align: center;
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.66rem;
-  color: #c8c6c4;
+  color: var(--color-fg-hint, #605e5c);
   margin-top: 8px;
   letter-spacing: 0.01em;
 }
@@ -372,39 +410,36 @@ html.wc-restore .wc-tag {
    =================================== */
 
 .wc-panel-body .webchat__basic-transcript {
-  background: #faf9f8 !important;
+  background: var(--color-bg-subtle, #faf9f8) !important;
 }
 
 /* Bot bubble */
 .wc-panel-body .webchat__bubble:not(.webchat__bubble--from-user) .webchat__bubble__content {
-  background: rgba(0, 0, 0, 0.04) !important;
+  background: var(--bubble-bot-bg, rgba(0, 0, 0, 0.04)) !important;
   border: none !important;
   border-radius: 14px 14px 14px 4px !important;
-  color: #3b3a39 !important;
+  color: var(--color-fg-body, #3b3a39) !important;
 }
 
 /* User bubble */
 .wc-panel-body .webchat__bubble--from-user .webchat__bubble__content {
-  background: rgba(0, 120, 212, 0.08) !important;
+  background: var(--color-user-bubble-bg, rgba(0, 120, 212, 0.08)) !important;
   border: none !important;
   border-radius: 14px 14px 4px 14px !important;
-  color: #1a3a5c !important;
+  color: var(--color-user-bubble-fg, #1a3a5c) !important;
 }
 
 /* Links */
-.wc-panel-body .webchat__bubble:not(.webchat__bubble--from-user) a {
-  color: #0078d4 !important;
-}
-
+.wc-panel-body .webchat__bubble:not(.webchat__bubble--from-user) a,
 .wc-panel-body .webchat__bubble--from-user a {
-  color: #0078d4 !important;
+  color: var(--color-accent, #0078d4) !important;
 }
 
 /* Suggested actions */
 .wc-panel-body .webchat__suggested-action__button {
-  background: #fff !important;
-  border: 1px solid #0078d4 !important;
-  color: #0078d4 !important;
+  background: var(--color-bg, #fff) !important;
+  border: 1px solid var(--color-accent, #0078d4) !important;
+  color: var(--color-accent, #0078d4) !important;
   border-radius: 100px !important;
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
   font-size: 0.8rem !important;
@@ -415,8 +450,8 @@ html.wc-restore .wc-tag {
 }
 
 .wc-panel-body .webchat__suggested-action__button:hover {
-  background: #0078d4 !important;
-  color: #fff !important;
+  background: var(--color-accent, #0078d4) !important;
+  color: var(--color-accent-on, #fff) !important;
 }
 
 /* Hide default typing indicator — we use our own */
@@ -444,13 +479,13 @@ html.wc-restore .wc-tag {
 /* Timestamp */
 .wc-panel-body .webchat__stacked-layout__status {
   font-size: 0.65rem !important;
-  color: #b3b0ad !important;
+  color: var(--color-fg-placeholder, #767472) !important;
 }
 
 /* Scrollbar */
 .wc-panel-body ::-webkit-scrollbar { width: 5px; }
 .wc-panel-body ::-webkit-scrollbar-track { background: transparent; }
-.wc-panel-body ::-webkit-scrollbar-thumb { background: #d2d0ce; border-radius: 3px; }
+.wc-panel-body ::-webkit-scrollbar-thumb { background: var(--scrollbar-thumb, #d2d0ce); border-radius: 3px; }
 
 /* ===================================
    Adaptive Cards — Air Theme
@@ -459,17 +494,17 @@ html.wc-restore .wc-tag {
 .wc-panel-body a.ac-anchor,
 .wc-panel-body a.ac-anchor:link,
 .wc-panel-body a.ac-anchor:visited {
-  color: #0078d4 !important;
+  color: var(--color-accent, #0078d4) !important;
   text-decoration: underline;
   text-underline-offset: 2px;
 }
 
-.wc-panel-body a.ac-anchor:hover { color: #106ebe !important; }
+.wc-panel-body a.ac-anchor:hover { color: var(--color-accent-hover, #106ebe) !important; }
 
 .wc-panel-body .ac-pushButton {
-  background: #fff !important;
-  color: #323130 !important;
-  border: 1px solid #e1dfdd !important;
+  background: var(--color-bg, #fff) !important;
+  color: var(--color-fg-strong, #323130) !important;
+  border: 1px solid var(--color-border, #e1dfdd) !important;
   border-radius: 8px !important;
   padding: 8px 14px !important;
   font-size: 13px !important;
@@ -480,25 +515,25 @@ html.wc-restore .wc-tag {
 }
 
 .wc-panel-body .ac-pushButton:hover {
-  background: #f3f2f1 !important;
-  border-color: #c8c6c4 !important;
+  background: var(--color-bg-elevated, #f3f2f1) !important;
+  border-color: var(--color-border-strong, #d2d0ce) !important;
 }
 
-.wc-panel-body .ac-pushButton.style-positive { color: #0e700e !important; border-color: #a7e3a5 !important; }
-.wc-panel-body .ac-pushButton.style-destructive { color: #c4314b !important; border-color: #f1bbbc !important; }
+.wc-panel-body .ac-pushButton.style-positive { color: var(--color-success, #0e700e) !important; border-color: var(--color-success-border, #a7e3a5) !important; }
+.wc-panel-body .ac-pushButton.style-destructive { color: var(--color-danger, #c4314b) !important; border-color: var(--color-danger-border, #f1bbbc) !important; }
 
 .wc-panel-body .ac-input {
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
   font-size: 13px !important;
-  color: #323130 !important;
-  background: #fff !important;
-  border: 1px solid #e1dfdd !important;
+  color: var(--color-fg-strong, #323130) !important;
+  background: var(--color-bg, #fff) !important;
+  border: 1px solid var(--color-border, #e1dfdd) !important;
   border-radius: 8px !important;
   padding: 8px 12px !important;
 }
 
-.wc-panel-body .ac-input:focus { outline: none; border-color: #0078d4 !important; }
-.wc-panel-body .ac-textBlock { line-height: 1.45; color: #323130; }
+.wc-panel-body .ac-input:focus { outline: none; border-color: var(--color-accent, #0078d4) !important; box-shadow: 0 0 0 2px var(--color-accent-tint-2, rgba(0,120,212,0.12)); }
+.wc-panel-body .ac-textBlock { line-height: 1.45; color: var(--color-fg-strong, #323130); }
 .wc-panel-body .ac-image { border-radius: 8px; }
 .wc-panel-body .ac-actionSet { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
 

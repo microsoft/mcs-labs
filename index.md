@@ -16,8 +16,11 @@ header:
 <style>
 /* Hero */
 .home-hero {
-  background: linear-gradient(135deg, #0f1b2d 0%, #1a3a5c 50%, #0f2440 100%);
-  color: #fff;
+  background: linear-gradient(135deg,
+    var(--color-lab-grad-1) 0%,
+    var(--color-lab-grad-2) 50%,
+    var(--color-lab-grad-3) 100%);
+  color: var(--color-on-lab-header);
   padding: 3.5em 2.5em;
   border-radius: 10px;
   margin: -0.5em 0 2.5em;
@@ -31,7 +34,7 @@ header:
   right: -20%;
   width: 500px;
   height: 500px;
-  background: radial-gradient(circle, rgba(0,120,212,0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--color-lab-hero-glow) 0%, transparent 70%);
   pointer-events: none;
 }
 .home-hero h2 {
@@ -41,7 +44,7 @@ header:
   letter-spacing: -0.02em;
   border: none;
   padding: 0;
-  color: #fff;
+  color: var(--color-on-lab-header);
 }
 .home-hero p {
   font-size: 1.05em;
@@ -63,19 +66,19 @@ header:
   transition: all 0.15s;
 }
 .home-hero-actions .btn-primary {
-  background: #0078d4;
-  color: #fff;
+  background: var(--color-accent);
+  color: var(--color-accent-on);
 }
 .home-hero-actions .btn-primary:hover {
-  background: #106ebe;
+  background: var(--color-accent-hover);
 }
 .home-hero-actions .btn-outline {
-  background: rgba(255,255,255,0.1);
-  color: #fff;
-  border: 1px solid rgba(255,255,255,0.3);
+  background: var(--color-lab-pill-bg-soft);
+  color: var(--color-on-lab-header);
+  border: 1px solid var(--color-lab-pill-border);
 }
 .home-hero-actions .btn-outline:hover {
-  background: rgba(255,255,255,0.18);
+  background: var(--color-lab-pill-bg);
   border-color: rgba(255,255,255,0.5);
 }
 .home-stats {
@@ -104,12 +107,12 @@ header:
 .home-section-title {
   font-size: 1em;
   font-weight: 700;
-  color: #323130;
+  color: var(--color-fg-strong);
   text-transform: uppercase;
   letter-spacing: 0.05em;
   margin: 0 0 1em;
   padding-bottom: 0.5em;
-  border-bottom: 2px solid #e8e6e4;
+  border-bottom: 2px solid var(--color-border-subtle);
 }
 
 /* Journey cards */
@@ -122,17 +125,18 @@ header:
   list-style: none;
 }
 .journey-card {
-  border: 1px solid #e8e6e4;
+  border: 1px solid var(--color-border-subtle);
   border-radius: 8px;
   padding: 1.2em 1.3em;
-  background: #fff;
+  background: var(--color-bg);
+  color: var(--color-fg-strong);
   transition: border-color 0.15s, box-shadow 0.15s;
   display: flex;
   flex-direction: column;
   position: relative;
 }
 .journey-card:hover {
-  border-color: #c8c6c4;
+  border-color: var(--color-border-strong);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 .journey-card-accent {
@@ -141,15 +145,15 @@ header:
   border-radius: 2px;
   margin-bottom: 0.8em;
 }
-.accent-blue { background: #0078d4; }
-.accent-green { background: #107c10; }
-.accent-purple { background: #7f39fb; }
-.accent-orange { background: #ff8c00; }
+.accent-blue { background: var(--color-journey-blue); }
+.accent-green { background: var(--color-journey-green); }
+.accent-purple { background: var(--color-journey-purple); }
+.accent-orange { background: var(--color-journey-orange); }
 
 .journey-card h3 {
   font-size: 1em;
   font-weight: 700;
-  color: #323130;
+  color: var(--color-fg-strong);
   margin: 0 0 0.3em;
   border: none;
   padding: 0;
@@ -159,11 +163,11 @@ header:
   text-decoration: none;
 }
 .journey-card h3 a:hover {
-  color: #0078d4;
+  color: var(--color-accent);
 }
 .journey-card-desc {
   font-size: 0.82em;
-  color: #605e5c;
+  color: var(--color-fg-muted);
   line-height: 1.5;
   margin: 0 0 0.8em;
   flex: 1;
@@ -178,8 +182,8 @@ header:
   font-weight: 600;
   padding: 0.2em 0.55em;
   border-radius: 3px;
-  background: #f3f2f1;
-  color: #605e5c;
+  background: var(--color-bg-elevated);
+  color: var(--color-fg-muted);
   white-space: nowrap;
 }
 </style>

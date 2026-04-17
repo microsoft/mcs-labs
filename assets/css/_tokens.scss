@@ -1,0 +1,348 @@
+// ---------------------------------------------------------------------------
+// Design tokens — air-theme color system
+//
+// Every color consumed in main.scss and _includes/webchat/styles.html resolves
+// through a CSS custom property defined here. Four palettes ship:
+//
+//   :root                       → Light (default)
+//   [data-theme="dark"]         → Dark
+//   [data-theme="hc"]           → High contrast (WCAG AAA, forced-colors-safe)
+//   [data-theme] absent         → follows prefers-color-scheme via @mixin
+//   [data-theme="light"]        → explicit opt-out of system dark
+//
+// User selection is written to <html data-theme="…"> by assets/js/a11y-settings.js.
+// A pre-paint script in _includes/head/custom.html sets the attribute before
+// CSS loads to prevent a flash of wrong theme.
+// ---------------------------------------------------------------------------
+
+// --- Light palette (default) -----------------------------------------------
+
+:root {
+  // Surfaces
+  --color-bg:              #ffffff;
+  --color-bg-subtle:       #faf9f8;
+  --color-bg-elevated:     #f3f2f1;
+  --color-bg-input:        #f0efed;
+  --color-bg-input-hover:  #eae9e7;
+
+  // Text — failing grays darkened to pass WCAG AA (≥ 4.5:1 on white)
+  --color-fg:              #201f1e;
+  --color-fg-strong:       #323130;
+  --color-fg-body:         #3b3a39;
+  --color-fg-muted:        #605e5c;
+  --color-fg-subtle:       #6e6c6a;   // was #8a8886 (3.3:1) → 5.0:1
+  --color-fg-disabled:     #757371;   // was #a19f9d (2.8:1) → 4.6:1
+  --color-fg-placeholder:  #767472;   // was #b3b0ad (2.3:1) → 4.5:1
+  --color-fg-hint:         #605e5c;   // was #c8c6c4 (1.8:1) → reuse muted (6.0:1)
+  --color-fg-inverse:      #ffffff;
+
+  // Borders
+  --color-border:          #e1dfdd;
+  --color-border-subtle:   #e8e6e4;
+  --color-border-strong:   #d2d0ce;
+  --color-divider:         #eae8e6;
+
+  // Accent (Microsoft blue)
+  --color-accent:          #0078d4;
+  --color-accent-hover:    #106ebe;
+  --color-accent-active:   #005a9e;
+  --color-accent-deep:     #004578;
+  --color-accent-on:       #ffffff;
+  --color-accent-tint:     rgba(0, 120, 212, 0.08);
+  --color-accent-tint-2:   rgba(0, 120, 212, 0.12);
+  --color-accent-tint-3:   rgba(0, 120, 212, 0.25);
+  --color-accent-tint-4:   rgba(0, 120, 212, 0.30);
+  --color-accent-tint-5:   rgba(0, 120, 212, 0.35);
+
+  // User-message bubble uses deeper ink for readability on the tint background
+  --color-user-bubble-bg:  rgba(0, 120, 212, 0.08);
+  --color-user-bubble-fg:  #1a3a5c;
+
+  // Semantic
+  --color-success:         #0e700e;
+  --color-success-border:  #a7e3a5;
+  --color-danger:          #c4314b;
+  --color-danger-border:   #f1bbbc;
+
+  // Lab-header gradient stops
+  --color-lab-grad-1:      #0f1b2d;
+  --color-lab-grad-2:      #1a3a5c;
+  --color-lab-grad-3:      #0f2440;
+  --color-lab-hero-glow:   rgba(0, 120, 212, 0.12);
+  --color-on-lab-header:   #ffffff;
+  --color-on-lab-header-muted: rgba(255, 255, 255, 0.8);
+  --color-lab-pill-bg:     rgba(255, 255, 255, 0.15);
+  --color-lab-pill-bg-soft:rgba(255, 255, 255, 0.10);
+  --color-lab-pill-border: rgba(255, 255, 255, 0.20);
+  --color-lab-pill-level-100-bg: rgba(16, 124, 16, 0.25);
+  --color-lab-pill-level-100-fg: #a3e4a3;
+  --color-lab-pill-level-200-bg: rgba(0, 120, 212, 0.25);
+  --color-lab-pill-level-200-fg: #9ecbf6;
+  --color-lab-pill-level-300-bg: rgba(127, 57, 251, 0.25);
+  --color-lab-pill-level-300-fg: #c9a8fc;
+
+  // Effects
+  --shadow-panel:          -8px 0 40px rgba(0, 0, 0, 0.08), -1px 0 0 rgba(0, 0, 0, 0.04);
+  --shadow-tag:            -2px 0 12px rgba(0, 0, 0, 0.04);
+  --shadow-tag-hover:      -3px 0 16px rgba(0, 0, 0, 0.08);
+  --shadow-send:           0 2px 6px var(--color-accent-tint-4);
+  --shadow-send-hover:     0 3px 10px var(--color-accent-tint-5);
+  --shadow-send-active:    0 1px 3px var(--color-accent-tint-3);
+  --bubble-bot-bg:         rgba(0, 0, 0, 0.04);
+  --overlay-bg:            rgba(15, 27, 45, 0.06);
+  --scrollbar-thumb:       #d2d0ce;
+
+  // Focus
+  --focus-ring:            0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent);
+  --focus-ring-inset:      inset 0 0 0 2px var(--color-accent);
+
+  // Journey / learning-path accents (index page)
+  --color-journey-blue:    #0078d4;
+  --color-journey-green:   #107c10;
+  --color-journey-purple:  #7f39fb;
+  --color-journey-orange:  #ff8c00;
+
+  // Skill-level pills (used on event/workshop cards — light-surface variants)
+  --color-pill-blue-bg:    #deecf9;
+  --color-pill-blue-fg:    #004578;
+  --color-pill-green-bg:   #e6f2e6;
+  --color-pill-green-fg:   #0e700e;
+  --color-pill-purple-bg:  #f0e6fc;
+  --color-pill-purple-fg:  #5b2d8e;
+
+  // Typography scaling (1 = 16px root). Mutated at runtime by a11y-settings.js.
+  --font-scale:            1;
+}
+
+// --- Shared dark palette (used by [data-theme="dark"] and system-pref) -----
+
+@mixin dark-tokens {
+  --color-bg:              #1b1a19;
+  --color-bg-subtle:       #201f1e;
+  --color-bg-elevated:     #2b2a29;
+  --color-bg-input:        #2f2e2d;
+  --color-bg-input-hover:  #3a3938;
+
+  --color-fg:              #f3f2f1;
+  --color-fg-strong:       #ffffff;
+  --color-fg-body:         #e1dfdd;
+  --color-fg-muted:        #c8c6c4;
+  --color-fg-subtle:       #b3b0ad;
+  --color-fg-disabled:     #a19f9d;
+  --color-fg-placeholder:  #a19f9d;
+  --color-fg-hint:         #c8c6c4;
+  --color-fg-inverse:      #1b1a19;
+
+  --color-border:          #3b3a39;
+  --color-border-subtle:   #323130;
+  --color-border-strong:   #484644;
+  --color-divider:         #323130;
+
+  --color-accent:          #4cc2ff;
+  --color-accent-hover:    #69cbff;
+  --color-accent-active:   #2c9ce0;
+  --color-accent-deep:     #1a7dbf;
+  --color-accent-on:       #0a1929;
+  --color-accent-tint:     rgba(76, 194, 255, 0.12);
+  --color-accent-tint-2:   rgba(76, 194, 255, 0.22);
+  --color-accent-tint-3:   rgba(76, 194, 255, 0.30);
+  --color-accent-tint-4:   rgba(76, 194, 255, 0.40);
+  --color-accent-tint-5:   rgba(76, 194, 255, 0.50);
+
+  --color-user-bubble-bg:  rgba(76, 194, 255, 0.18);
+  --color-user-bubble-fg:  #e1f1ff;
+
+  --color-success:         #5cc05c;
+  --color-success-border:  #2d5a2d;
+  --color-danger:          #f07385;
+  --color-danger-border:   #5a2530;
+
+  --color-lab-grad-1:      #0a1220;
+  --color-lab-grad-2:      #122c45;
+  --color-lab-grad-3:      #0a1a2f;
+
+  --bubble-bot-bg:         rgba(255, 255, 255, 0.06);
+  --overlay-bg:            rgba(0, 0, 0, 0.45);
+  --scrollbar-thumb:       #484644;
+
+  --shadow-panel:          -8px 0 40px rgba(0, 0, 0, 0.5), -1px 0 0 rgba(255, 255, 255, 0.04);
+  --shadow-tag:            -2px 0 12px rgba(0, 0, 0, 0.35);
+  --shadow-tag-hover:      -3px 0 16px rgba(0, 0, 0, 0.55);
+
+  --focus-ring:            0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-accent);
+
+  --color-journey-blue:    #4cc2ff;
+  --color-journey-green:   #5cc05c;
+  --color-journey-purple:  #c9a8fc;
+  --color-journey-orange:  #ffb86c;
+
+  --color-pill-blue-bg:    rgba(76, 194, 255, 0.18);
+  --color-pill-blue-fg:    #9ecbf6;
+  --color-pill-green-bg:   rgba(92, 192, 92, 0.18);
+  --color-pill-green-fg:   #a3e4a3;
+  --color-pill-purple-bg:  rgba(201, 168, 252, 0.18);
+  --color-pill-purple-fg:  #c9a8fc;
+
+  color-scheme: dark;
+}
+
+[data-theme="dark"] { @include dark-tokens; }
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) { @include dark-tokens; }
+}
+
+// Ensures an explicit [data-theme="light"] wins over a system dark preference.
+[data-theme="light"] { color-scheme: light; }
+
+// --- High-contrast palette (black / white / yellow) ------------------------
+
+[data-theme="hc"] {
+  --color-bg:              #000000;
+  --color-bg-subtle:       #000000;
+  --color-bg-elevated:     #000000;
+  --color-bg-input:        #000000;
+  --color-bg-input-hover:  #111111;
+
+  --color-fg:              #ffffff;
+  --color-fg-strong:       #ffffff;
+  --color-fg-body:         #ffffff;
+  --color-fg-muted:        #ffffff;
+  --color-fg-subtle:       #ffffff;
+  --color-fg-disabled:     #ffff00;
+  --color-fg-placeholder:  #ffff00;
+  --color-fg-hint:         #ffff00;
+  --color-fg-inverse:      #000000;
+
+  --color-border:          #ffffff;
+  --color-border-subtle:   #ffffff;
+  --color-border-strong:   #ffffff;
+  --color-divider:         #ffffff;
+
+  --color-accent:          #ffff00;
+  --color-accent-hover:    #ffff66;
+  --color-accent-active:   #cccc00;
+  --color-accent-deep:     #999900;
+  --color-accent-on:       #000000;
+  --color-accent-tint:     transparent;
+  --color-accent-tint-2:   #ffff00;
+  --color-accent-tint-3:   #ffff00;
+  --color-accent-tint-4:   #ffff00;
+  --color-accent-tint-5:   #ffff00;
+
+  --color-user-bubble-bg:  #000000;
+  --color-user-bubble-fg:  #ffff00;
+
+  --color-success:         #00ff00;
+  --color-success-border:  #00ff00;
+  --color-danger:          #ff6060;
+  --color-danger-border:   #ff6060;
+
+  --color-lab-grad-1:      #000000;
+  --color-lab-grad-2:      #000000;
+  --color-lab-grad-3:      #000000;
+  --color-lab-hero-glow:   transparent;
+  --color-on-lab-header:   #ffffff;
+  --color-on-lab-header-muted: #ffffff;
+  --color-lab-pill-bg:     #000000;
+  --color-lab-pill-bg-soft:#000000;
+  --color-lab-pill-border: #ffff00;
+  --color-lab-pill-level-100-bg: #000000;
+  --color-lab-pill-level-100-fg: #00ff00;
+  --color-lab-pill-level-200-bg: #000000;
+  --color-lab-pill-level-200-fg: #ffff00;
+  --color-lab-pill-level-300-bg: #000000;
+  --color-lab-pill-level-300-fg: #ffffff;
+
+  --bubble-bot-bg:         #000000;
+  --overlay-bg:            rgba(0, 0, 0, 0.85);
+  --scrollbar-thumb:       #ffffff;
+
+  --shadow-panel:          -8px 0 40px rgba(0, 0, 0, 0.85), -1px 0 0 #ffffff;
+  --shadow-tag:            0 0 0 2px #ffff00;
+  --shadow-tag-hover:      0 0 0 3px #ffff00;
+  --shadow-send:           none;
+  --shadow-send-hover:     none;
+  --shadow-send-active:    none;
+
+  --focus-ring:            0 0 0 3px #000000, 0 0 0 6px #ffff00;
+
+  --color-journey-blue:    #ffff00;
+  --color-journey-green:   #ffff00;
+  --color-journey-purple:  #ffff00;
+  --color-journey-orange:  #ffff00;
+
+  --color-pill-blue-bg:    #000000;
+  --color-pill-blue-fg:    #ffff00;
+  --color-pill-green-bg:   #000000;
+  --color-pill-green-fg:   #00ff00;
+  --color-pill-purple-bg:  #000000;
+  --color-pill-purple-fg:  #ffffff;
+
+  color-scheme: dark;
+  forced-color-adjust: none;
+}
+
+// --- Typography scale -------------------------------------------------------
+// Applied to :root font-size so every em/rem in the site scales proportionally.
+// Default 1 = 16px. a11y-settings.js writes 0.875, 1, or 1.125 via inline style.
+
+:root {
+  font-size: calc(100% * var(--font-scale, 1));
+}
+
+// --- Reduced motion ---------------------------------------------------------
+// Global kill switch for motion-sensitive users. Neutralizes the panel slide,
+// typing-dot pulse, send-button scale, and the new panel-shift transition
+// without removing the elements themselves.
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+// --- Rouge syntax highlighting: dark + HC overrides -------------------------
+// Rouge emits classes via kramdown's rouge highlighter (_config.yml). Default
+// palette is light; override only the tokens we actually encounter in labs.
+
+@mixin rouge-dark {
+  .highlight                  { background: #1f1f1f; color: #e8e8e8; }
+  .highlight .c, .highlight .c1, .highlight .cm, .highlight .cp, .highlight .cs { color: #7c8488; font-style: italic; }     // comments
+  .highlight .k, .highlight .kd, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kt { color: #ff7ab2; }         // keywords
+  .highlight .s, .highlight .s1, .highlight .s2, .highlight .sb, .highlight .sc, .highlight .sd, .highlight .se, .highlight .sh, .highlight .si, .highlight .sx, .highlight .sr, .highlight .ss { color: #a3e28a; }  // strings
+  .highlight .m, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .mo { color: #ffb86c; }                         // numbers
+  .highlight .nf, .highlight .fm                                    { color: #82aaff; }                                     // functions
+  .highlight .nb, .highlight .bp                                    { color: #82aaff; }                                     // built-ins
+  .highlight .nc, .highlight .nn                                    { color: #c7a5f3; }                                     // classes / namespaces
+  .highlight .nt                                                    { color: #ff7ab2; }                                     // tags
+  .highlight .na                                                    { color: #ffb86c; }                                     // attributes
+  .highlight .o, .highlight .ow                                     { color: #e8e8e8; }                                     // operators
+  .highlight .p                                                     { color: #bdbdbd; }                                     // punctuation
+  .highlight .err                                                   { color: #ff6060; background: transparent; }
+  .highlight .gi                                                    { color: #a3e28a; }                                     // diff +
+  .highlight .gd                                                    { color: #f07385; }                                     // diff -
+  .highlight .gh, .highlight .gu                                    { color: #82aaff; font-weight: 600; }                   // diff header
+}
+
+[data-theme="dark"] { @include rouge-dark; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) { @include rouge-dark; }
+}
+
+[data-theme="hc"] .highlight {
+  background: #000000;
+  color: #ffffff;
+  border: 1px solid #ffffff;
+
+  .c, .c1, .cm, .cp, .cs { color: #ffff00; font-style: italic; }
+  .k, .kd, .kn, .kp, .kr, .kt, .nt, .nf, .nc, .nn, .nb, .bp, .fm { color: #ffff00; }
+  .s, .s1, .s2, .sb, .sc, .sd, .se, .sh, .si, .sx, .sr, .ss,
+  .m, .mf, .mh, .mi, .mo, .na, .o, .ow, .p, .gi, .gd, .gh, .gu { color: #ffffff; }
+  .err { color: #ff6060; }
+}
