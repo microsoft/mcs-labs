@@ -17,12 +17,12 @@ classes: wide
 }
 .ws-index-stats li {
   font-size: 0.88em;
-  color: #605e5c;
+  color: var(--color-fg-muted);
 }
 .ws-index-stats strong {
   font-size: 1.5em;
   display: block;
-  color: #323130;
+  color: var(--color-fg-strong);
   font-weight: 700;
   line-height: 1.2;
 }
@@ -37,23 +37,24 @@ classes: wide
 }
 
 .ws-card {
-  border: 1px solid #e8e6e4;
+  border: 1px solid var(--color-border-subtle);
   border-radius: 8px;
   padding: 1.2em 1.4em;
-  background: #fff;
+  background: var(--color-bg);
+  color: var(--color-fg-strong);
   transition: border-color 0.15s, box-shadow 0.15s;
   display: flex;
   flex-direction: column;
 }
 .ws-card:hover {
-  border-color: #c8c6c4;
+  border-color: var(--color-border-strong);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .ws-card-title {
   font-size: 1em;
   font-weight: 600;
-  color: #323130;
+  color: var(--color-fg-strong);
   margin: 0 0 0.4em;
   line-height: 1.35;
 }
@@ -62,12 +63,12 @@ classes: wide
   text-decoration: none;
 }
 .ws-card-title a:hover {
-  color: #0078d4;
+  color: var(--color-accent);
 }
 
 .ws-card-desc {
   font-size: 0.82em;
-  color: #605e5c;
+  color: var(--color-fg-muted);
   line-height: 1.55;
   margin: 0 0 0.8em;
   flex: 1;
@@ -91,16 +92,16 @@ classes: wide
   white-space: nowrap;
 }
 .ws-idx-pill-labs {
-  background: #deecf9;
-  color: #004578;
+  background: var(--color-pill-blue-bg);
+  color: var(--color-pill-blue-fg);
 }
 .ws-idx-pill-duration {
-  background: #f3f2f1;
-  color: #605e5c;
+  background: var(--color-bg-elevated);
+  color: var(--color-fg-muted);
 }
 .ws-idx-pill-levels {
-  background: #e6f2e6;
-  color: #0e700e;
+  background: var(--color-pill-green-bg);
+  color: var(--color-pill-green-fg);
 }
 </style>
 

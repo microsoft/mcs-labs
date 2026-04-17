@@ -7,13 +7,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Added
+- Accessibility settings menu in the masthead: theme switcher (Light, Dark, High contrast, Match system) and 3-step text size (A−, A, A+). Preferences persist in `localStorage` under `mcs-labs.prefs.v1`. A pre-paint inline script applies the stored theme before CSS loads, preventing any flash of wrong theme on reload.
+- Dark-mode Rouge syntax highlighting (Monokai-like palette) and high-contrast code blocks under `[data-theme="hc"]`.
+- Design-token layer (`assets/css/_tokens.scss`): all site colors now resolve through CSS custom properties with Light, Dark, and High contrast palettes plus a `System` option that follows `prefers-color-scheme`.
+- Global `prefers-reduced-motion` block that neutralizes panel slide, typing-dot pulse, and send-button transitions for motion-sensitive users.
+- Continuous a11y coverage on pull requests: `pa11y-ci` at WCAG 2.1 AA (`.github/workflows/a11y.yml`, `.pa11yci.json`) and Lighthouse CI requiring an accessibility score ≥ 95 (`.github/workflows/lighthouse.yml`, `lighthouserc.json`).
+
 ### Changed
 - Lab Assistant chat persists across in-tab page navigation using `sessionStorage` (no cookies). Token, Direct Line conversation, and transcript are preserved; state clears when the tab closes. Open/closed panel state also survives navigation.
 - Lab Assistant panel no longer overlaps the site masthead on small screens — panel top now tracks the masthead's live height.
+- Lab Assistant now shifts main content instead of overlaying it at viewports ≥ 1024 px. Below 1024 px the panel continues to overlay; at 1440 px+ both the TOC and the panel stay on-screen. The TOC collapses when the panel is open between 1024–1440 px to keep the content column readable.
+- Lab Assistant pull-handle is now a native `<button>`; gains automatic keyboard activation and focus semantics.
+- Pinned `minimal-mistakes-jekyll` to `= 4.27.3` to protect the new `_includes/masthead.html` shadow from silent upstream drift.
 
 ### Fixed
 - Restore lab content overwritten by the redesign merge (PR #265). The `_labs/*.md` collection was frozen at 2026-03-06 and missed subsequent content PRs (#215, #224, #225, #234, #242, #244, #245, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258). Rewrote every lab body from the authoritative `labs/*/README.md` source.
 - Re-apply PR #246 orphan-lab removal: delete `public-website-agent` and `ask-me-anything-30-mins` (lab files and navigation entries) that returned after the redesign merge.
+- Secondary-gray text tokens (TOC titles, timestamps, placeholders, hints) darkened to pass WCAG 2.1 AA contrast; previously several fell between 1.8:1 and 3.3:1.
+- Visible keyboard focus ring on the Lab Assistant send input; previously `outline: none !important` stripped it with no fallback.
+- Lab Assistant decorative SVG icons now carry `aria-hidden="true" focusable="false"` so screen readers skip them.
+- Lab Assistant send input is now associated with a `<label>` (`Message Lab Assistant`) — placeholder alone was not sufficient for assistive tech.
+- Lab Assistant panel announces with `role="dialog"` + `aria-labelledby` and exposes `aria-expanded` on its trigger; previously announced as a generic complementary region with no expanded state.
 
 ## 3.2.0 - 2026-03-20
 

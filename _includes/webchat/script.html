@@ -16,6 +16,7 @@
   var overlay = document.getElementById('wcOverlay');
   var panel = document.getElementById('wcPanel');
   var closeBtn = document.getElementById('wcClose');
+  var resetBtn = document.getElementById('wcReset');
   var body = document.getElementById('wcBody');
   var loading = document.getElementById('wcLoading');
   var error = document.getElementById('wcError');
@@ -121,21 +122,41 @@
     persistState();
   }
 
-  // --- Masthead offset: keep panel below the site header at all widths ---
+  // --- Masthead + footer offsets: keep panel inside the "chrome sandwich" ---
+  // The panel is position: fixed and would normally occupy the full right
+  // column between the top and bottom edges of the viewport. We nudge its
+  // top below the masthead (so nav stays reachable) and its bottom above
+  // the visible portion of the site footer (so the footer links are never
+  // obscured).
 
-  var mastheadResizeFrame = null;
+  var chromeOffsetFrame = null;
 
-  function applyMastheadOffset() {
-    mastheadResizeFrame = null;
+  function applyChromeOffsets() {
+    chromeOffsetFrame = null;
     var masthead = document.querySelector('.masthead');
-    var h = masthead ? Math.ceil(masthead.getBoundingClientRect().bottom) : 0;
-    document.documentElement.style.setProperty('--wc-panel-top', h + 'px');
+    var topPx = masthead ? Math.max(0, Math.ceil(masthead.getBoundingClientRect().bottom)) : 0;
+    document.documentElement.style.setProperty('--wc-panel-top', topPx + 'px');
+
+    var footer = document.querySelector('.page__footer') || document.getElementById('footer');
+    var bottomPx = 0;
+    if (footer) {
+      var rect = footer.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      // Footer intrudes into the viewport by (vh - rect.top); clamp so the
+      // panel only shrinks when the footer is actually visible.
+      bottomPx = Math.max(0, Math.ceil(vh - rect.top));
+    }
+    document.documentElement.style.setProperty('--wc-panel-bottom', bottomPx + 'px');
   }
 
-  function scheduleMastheadOffset() {
-    if (mastheadResizeFrame) return;
-    mastheadResizeFrame = requestAnimationFrame(applyMastheadOffset);
+  function scheduleChromeOffsets() {
+    if (chromeOffsetFrame) return;
+    chromeOffsetFrame = requestAnimationFrame(applyChromeOffsets);
   }
+
+  // Back-compat aliases for earlier variable names used elsewhere in this file.
+  var applyMastheadOffset = applyChromeOffsets;
+  var scheduleMastheadOffset = scheduleChromeOffsets;
 
   // --- Sendbox disabled state ---
 
@@ -175,10 +196,19 @@
   // Remove overlay — lab assistant should not block page interaction
   if (overlay && overlay.parentNode) overlay.parentNode.removeChild(overlay);
 
+  // Start inert — panel is aria-hidden=true initially. `inert` pulls focusable
+  // children out of the tab order so keyboard users don't Tab into the hidden
+  // panel. Toggled in open()/close().
+  panel.inert = true;
+
   function open() {
     isOpen = true;
     panel.classList.add('wc-panel--open');
     tag.classList.add('wc-tag--hidden');
+    document.documentElement.setAttribute('data-panel-open', '');
+    tag.setAttribute('aria-expanded', 'true');
+    panel.setAttribute('aria-hidden', 'false');
+    panel.inert = false;
     panel.addEventListener('keydown', handleFocusTrap);
     if (!chatInitializing && !chatReady) initChat();
     else if (chatReady) sendInput.focus();
@@ -189,16 +219,54 @@
     isOpen = false;
     panel.classList.remove('wc-panel--open');
     tag.classList.remove('wc-tag--hidden');
+    document.documentElement.removeAttribute('data-panel-open');
+    tag.setAttribute('aria-expanded', 'false');
+    panel.setAttribute('aria-hidden', 'true');
+    panel.inert = true;
     panel.removeEventListener('keydown', handleFocusTrap);
     tag.focus();
     persistState();
   }
 
   tag.addEventListener('click', open);
-  tag.addEventListener('keydown', function (e) {
-    if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(); }
-  });
+  // No manual Enter/Space handler: #wcTag is now a native <button>, which
+  // activates on Enter/Space via the user-agent.
   closeBtn.addEventListener('click', close);
+
+  // --- Reset conversation ---
+  // Tears down the current token + transcript + watermark, then calls
+  // initChat() with no resumeState so a fresh token is fetched from the
+  // token endpoint. The bot's greeting will fire for the new conversation
+  // because initChat dispatches 'startConversation' when resumeState is
+  // absent. Focus stays on the chat input so the user can type immediately.
+  function resetConversation() {
+    clearPersistedState();
+    currentToken = null;
+    currentTokenExpiresAt = 0;
+    lastWatermark = null;
+    recentActivities = [];
+    replayedActivityIds = null;
+    chatStore = null;
+    chatReady = false;
+    chatInitializing = false;
+    fallingBack = false;
+
+    // Replace the host element entirely so renderWebChat mounts a fresh
+    // React tree. Just clearing innerHTML leaves React's _reactRootContainer
+    // on the element, which causes renderWebChat to do an update rather
+    // than a full remount — the old store/directLine stay wired up and
+    // the bot's fresh-conversation greeting never makes it to the visible
+    // transcript.
+    var parent = body.parentNode;
+    var fresh = body.cloneNode(false);
+    parent.replaceChild(fresh, body);
+    body = fresh;
+
+    status.textContent = 'Connecting...';
+    initChat();
+  }
+
+  resetBtn.addEventListener('click', resetConversation);
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && isOpen) close();
@@ -355,8 +423,16 @@
 
       chatStore = store;
 
+      // Resolve token value from CSS at render time so WebChat's internal
+      // styling follows the active theme (data-theme on <html>).
+      var styleRoot = document.documentElement;
+      function tok(name, fallback) {
+        var v = getComputedStyle(styleRoot).getPropertyValue(name).trim();
+        return v || fallback;
+      }
+
       var styleOptions = {
-        backgroundColor: '#faf9f8',
+        backgroundColor: tok('--color-bg-subtle', '#faf9f8'),
         rootHeight: '100%',
         rootWidth: '100%',
 
@@ -367,27 +443,56 @@
         showAvatarInGroup: false,
         avatarSize: 0,
 
-        bubbleBackground: 'rgba(0, 0, 0, 0.04)',
+        bubbleBackground: tok('--bubble-bot-bg', 'rgba(0, 0, 0, 0.04)'),
         bubbleBorderColor: 'transparent',
         bubbleBorderRadius: 14,
-        bubbleTextColor: '#3b3a39',
+        bubbleTextColor: tok('--color-fg-body', '#3b3a39'),
 
-        bubbleFromUserBackground: 'rgba(0, 120, 212, 0.08)',
+        bubbleFromUserBackground: tok('--color-user-bubble-bg', 'rgba(0, 120, 212, 0.08)'),
         bubbleFromUserBorderColor: 'transparent',
         bubbleFromUserBorderRadius: 14,
-        bubbleFromUserTextColor: '#1a3a5c',
+        bubbleFromUserTextColor: tok('--color-user-bubble-fg', '#1a3a5c'),
 
         hideSendBox: true,
         hideUploadButton: true,
 
-        suggestedActionBackgroundColor: '#ffffff',
-        suggestedActionBorderColor: '#0078d4',
-        suggestedActionTextColor: '#0078d4',
+        suggestedActionBackgroundColor: tok('--color-bg', '#ffffff'),
+        suggestedActionBorderColor: tok('--color-accent', '#0078d4'),
+        suggestedActionTextColor: tok('--color-accent', '#0078d4'),
         suggestedActionBorderRadius: 100,
         suggestedActionHeight: 32,
 
-        timestampColor: '#a19f9d',
+        timestampColor: tok('--color-fg-placeholder', '#a19f9d'),
         groupTimestamp: 30000,
+
+        // Adaptive Cards HostConfig — inline colors the SDK paints into
+        // .ac-textRun/.ac-textBlock come from here. Populate from CSS tokens
+        // so new cards render with the active theme out of the box.
+        adaptiveCardsHostConfig: {
+          fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+          containerStyles: {
+            default: {
+              backgroundColor: tok('--bubble-bot-bg', '#00000010'),
+              foregroundColors: {
+                default:   { default: tok('--color-fg-strong', '#201f1e'), subtle: tok('--color-fg-muted', '#605e5c') },
+                dark:      { default: tok('--color-fg-strong', '#201f1e'), subtle: tok('--color-fg-muted', '#605e5c') },
+                light:     { default: tok('--color-fg-strong', '#201f1e'), subtle: tok('--color-fg-muted', '#605e5c') },
+                accent:    { default: tok('--color-accent', '#0078d4'),    subtle: tok('--color-accent-hover', '#106ebe') },
+                good:      { default: tok('--color-success', '#0e700e'),   subtle: tok('--color-success', '#0e700e') },
+                warning:   { default: tok('--color-danger', '#c4314b'),    subtle: tok('--color-danger', '#c4314b') },
+                attention: { default: tok('--color-danger', '#c4314b'),    subtle: tok('--color-danger', '#c4314b') },
+              },
+            },
+            emphasis: {
+              backgroundColor: tok('--color-bg-elevated', '#f3f2f1'),
+              foregroundColors: {
+                default:   { default: tok('--color-fg-strong', '#201f1e'), subtle: tok('--color-fg-muted', '#605e5c') },
+                accent:    { default: tok('--color-accent', '#0078d4'),    subtle: tok('--color-accent-hover', '#106ebe') },
+                attention: { default: tok('--color-danger', '#c4314b'),    subtle: tok('--color-danger', '#c4314b') },
+              },
+            },
+          },
+        },
       };
 
       // Clear any prior mount before rendering
@@ -444,9 +549,10 @@
 
   // --- Restore session state on page load ---
 
-  applyMastheadOffset();
-  window.addEventListener('resize', scheduleMastheadOffset);
-  window.addEventListener('load', applyMastheadOffset);
+  applyChromeOffsets();
+  window.addEventListener('resize', scheduleChromeOffsets);
+  window.addEventListener('scroll', scheduleChromeOffsets, { passive: true });
+  window.addEventListener('load', applyChromeOffsets);
 
   window.addEventListener('pagehide', flushPersistState);
 
@@ -460,6 +566,10 @@
       isOpen = true;
       panel.classList.add('wc-panel--open');
       tag.classList.add('wc-tag--hidden');
+      document.documentElement.setAttribute('data-panel-open', '');
+      tag.setAttribute('aria-expanded', 'true');
+      panel.setAttribute('aria-hidden', 'false');
+      panel.inert = false;
       panel.addEventListener('keydown', handleFocusTrap);
       initChat(persistedState);
     }
@@ -472,5 +582,14 @@
       document.documentElement.classList.remove('wc-restore');
     });
   });
+
+  // Note: theme changes do NOT re-initialize the chat. The user's conversation
+  // (token + watermark + transcript) survives theme toggles. Most WebChat
+  // surfaces (transcript bg, bubble bg/fg, links, suggested actions) are
+  // re-skinned at runtime via CSS custom properties in the accompanying
+  // styles.html. The few colors that WebChat bakes into its internal DOM at
+  // init (timestamp text, focus rings on internal controls) will stay at the
+  // theme that was active when the chat first mounted — they refresh on the
+  // next page load.
 })();
 </script>

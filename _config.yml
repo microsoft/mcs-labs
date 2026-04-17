@@ -10,6 +10,9 @@ logo: "/favicon.svg"
 theme: minimal-mistakes-jekyll
 minimal_mistakes_skin: "air"
 
+# Locale — emits <html lang>; used by minimal-mistakes for UI text lookups.
+locale: "en-US"
+
 # Search
 search: true
 search_full_content: true

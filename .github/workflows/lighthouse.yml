@@ -1,0 +1,60 @@
+name: Lighthouse CI
+
+on:
+  pull_request:
+    paths:
+      - "_labs/**"
+      - "_events/**"
+      - "_layouts/**"
+      - "_includes/**"
+      - "_data/**"
+      - "assets/**"
+      - "_config.yml"
+      - "index.md"
+      - "about/**"
+      - "events/**"
+      - "labs/**"
+      - "lighthouserc.json"
+      - ".github/workflows/lighthouse.yml"
+      - "Gemfile"
+      - "Gemfile.lock"
+      - "package.json"
+
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    name: Lighthouse (accessibility)
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"
+          bundler-cache: true
+
+      - name: Build Jekyll
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dev dependencies
+        run: npm install --no-audit --no-fund
+
+      - name: Run Lighthouse CI
+        run: npx lhci autorun
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}

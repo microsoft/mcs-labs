@@ -129,7 +129,7 @@ DEPENDENCIES
   jekyll-seo-tag (~> 2.8)
   jekyll-sitemap (~> 1.4)
   kramdown-parser-gfm
-  minimal-mistakes-jekyll (~> 4.26)
+  minimal-mistakes-jekyll (= 4.27.3)
   tzinfo-data
   wdm (~> 0.1)
 

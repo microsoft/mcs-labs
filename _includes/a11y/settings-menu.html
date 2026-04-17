@@ -1,0 +1,53 @@
+<!-- Accessibility settings popover: theme + text size.
+     Behavior owned by assets/js/a11y-settings.js. -->
+<div class="a11y-menu-wrap">
+  <button type="button" class="a11y-menu-toggle" id="a11yMenuToggle"
+          aria-haspopup="menu" aria-expanded="false" aria-controls="a11yMenu"
+          aria-label="Appearance and text size settings">
+    <svg class="a11y-menu-icon" viewBox="0 0 24 24" width="18" height="18" fill="none"
+         stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+         aria-hidden="true" focusable="false">
+      <circle cx="12" cy="12" r="4"></circle>
+      <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"></path>
+    </svg>
+  </button>
+
+  <div class="a11y-menu" id="a11yMenu" role="menu" aria-labelledby="a11yMenuToggle" hidden>
+    <div class="a11y-menu-section" role="group" aria-labelledby="a11yThemeLabel">
+      <div class="a11y-menu-label" id="a11yThemeLabel">Theme</div>
+      <div class="a11y-menu-options" role="radiogroup" aria-labelledby="a11yThemeLabel">
+        <button type="button" role="menuitemradio" class="a11y-menu-option" data-theme-value="light" aria-checked="false">
+          <span class="a11y-menu-swatch a11y-menu-swatch--light" aria-hidden="true"></span>
+          <span class="a11y-menu-option-text">Light</span>
+        </button>
+        <button type="button" role="menuitemradio" class="a11y-menu-option" data-theme-value="dark" aria-checked="false">
+          <span class="a11y-menu-swatch a11y-menu-swatch--dark" aria-hidden="true"></span>
+          <span class="a11y-menu-option-text">Dark</span>
+        </button>
+        <button type="button" role="menuitemradio" class="a11y-menu-option" data-theme-value="hc" aria-checked="false">
+          <span class="a11y-menu-swatch a11y-menu-swatch--hc" aria-hidden="true"></span>
+          <span class="a11y-menu-option-text">High contrast</span>
+        </button>
+        <button type="button" role="menuitemradio" class="a11y-menu-option" data-theme-value="system" aria-checked="false">
+          <span class="a11y-menu-swatch a11y-menu-swatch--system" aria-hidden="true"></span>
+          <span class="a11y-menu-option-text">Match system</span>
+        </button>
+      </div>
+    </div>
+
+    <div class="a11y-menu-section" role="group" aria-labelledby="a11yTextSizeLabel">
+      <div class="a11y-menu-label" id="a11yTextSizeLabel">Text size</div>
+      <div class="a11y-menu-textsize">
+        <button type="button" class="a11y-menu-textsize-btn" data-font-scale="0.875" aria-label="Smaller text" aria-pressed="false">
+          <span aria-hidden="true" class="a11y-ts-sm">A</span>
+        </button>
+        <button type="button" class="a11y-menu-textsize-btn" data-font-scale="1" aria-label="Default text size" aria-pressed="false">
+          <span aria-hidden="true" class="a11y-ts-md">A</span>
+        </button>
+        <button type="button" class="a11y-menu-textsize-btn" data-font-scale="1.125" aria-label="Larger text" aria-pressed="false">
+          <span aria-hidden="true" class="a11y-ts-lg">A</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -5,8 +5,11 @@ layout: single
 <style>
 .page__title, .page__meta { display: none; }
 .ws-hero {
-  background: linear-gradient(135deg, #0f1b2d 0%, #1a3a5c 50%, #0f2440 100%);
-  color: #fff;
+  background: linear-gradient(135deg,
+    var(--color-lab-grad-1) 0%,
+    var(--color-lab-grad-2) 50%,
+    var(--color-lab-grad-3) 100%);
+  color: var(--color-on-lab-header);
   padding: 2.5em 2em;
   border-radius: 10px;
   margin: -0.5em 0 2em;
@@ -20,7 +23,7 @@ layout: single
   right: -15%;
   width: 400px;
   height: 400px;
-  background: radial-gradient(circle, rgba(0,120,212,0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, var(--color-lab-hero-glow) 0%, transparent 70%);
   pointer-events: none;
 }
 .ws-hero h2 {
@@ -30,7 +33,7 @@ layout: single
   letter-spacing: -0.01em;
   border: none;
   padding: 0;
-  color: #fff;
+  color: var(--color-on-lab-header);
 }
 .ws-hero p {
   font-size: 0.95em;
@@ -71,10 +74,11 @@ layout: single
 }
 
 .ws-lab-card {
-  border: 1px solid #e8e6e4;
+  border: 1px solid var(--color-border-subtle);
   border-radius: 8px;
   padding: 1em 1.2em;
-  background: #fff;
+  background: var(--color-bg);
+  color: var(--color-fg-strong);
   display: grid;
   grid-template-columns: 52px 1fr auto;
   gap: 0 1em;
@@ -82,15 +86,15 @@ layout: single
   transition: border-color 0.15s, box-shadow 0.15s;
 }
 .ws-lab-card:hover {
-  border-color: #c8c6c4;
+  border-color: var(--color-border-strong);
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 .ws-lab-num {
   font-size: 0.72em;
   font-weight: 700;
-  color: #0078d4;
-  background: #deecf9;
+  color: var(--color-pill-blue-fg);
+  background: var(--color-pill-blue-bg);
   border-radius: 6px;
   padding: 0.35em 0;
   text-align: center;
@@ -105,7 +109,7 @@ layout: single
 .ws-lab-title {
   font-size: 0.92em;
   font-weight: 600;
-  color: #323130;
+  color: var(--color-fg-strong);
   margin: 0 0 0.25em;
   line-height: 1.35;
 }
@@ -114,11 +118,11 @@ layout: single
   text-decoration: none;
 }
 .ws-lab-title a:hover {
-  color: #0078d4;
+  color: var(--color-accent);
 }
 .ws-lab-desc {
   font-size: 0.8em;
-  color: #605e5c;
+  color: var(--color-fg-muted);
   line-height: 1.5;
   margin: 0;
   display: -webkit-box;
@@ -143,20 +147,20 @@ layout: single
   white-space: nowrap;
 }
 .ws-pill-duration {
-  background: #f3f2f1;
-  color: #605e5c;
+  background: var(--color-bg-elevated);
+  color: var(--color-fg-muted);
 }
 .ws-pill-level-100 {
-  background: #e6f2e6;
-  color: #0e700e;
+  background: var(--color-pill-green-bg);
+  color: var(--color-pill-green-fg);
 }
 .ws-pill-level-200 {
-  background: #deecf9;
-  color: #004578;
+  background: var(--color-pill-blue-bg);
+  color: var(--color-pill-blue-fg);
 }
 .ws-pill-level-300 {
-  background: #f0e6fc;
-  color: #5b2d8e;
+  background: var(--color-pill-purple-bg);
+  color: var(--color-pill-purple-fg);
 }
 </style>
 
