@@ -67,7 +67,7 @@
 /* --- Panel --- */
 .wc-panel {
   position: fixed;
-  top: 0;
+  top: var(--wc-panel-top, 0);
   right: 0;
   bottom: 0;
   width: 400px;
@@ -86,6 +86,15 @@
 
 .wc-panel.wc-panel--open {
   transform: translateX(0);
+}
+
+/* Session restore: panel is already open, no slide-in animation */
+html.wc-restore .wc-panel {
+  transform: translateX(0);
+  transition: none;
+}
+html.wc-restore .wc-tag {
+  display: none;
 }
 
 /* --- Panel header --- */

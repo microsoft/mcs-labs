@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## Unreleased
 
+### Changed
+- Lab Assistant chat persists across in-tab page navigation using `sessionStorage` (no cookies). Token, Direct Line conversation, and transcript are preserved; state clears when the tab closes. Open/closed panel state also survives navigation.
+- Lab Assistant panel no longer overlaps the site masthead on small screens — panel top now tracks the masthead's live height.
+
 ### Fixed
 - Restore lab content overwritten by the redesign merge (PR #265). The `_labs/*.md` collection was frozen at 2026-03-06 and missed subsequent content PRs (#215, #224, #225, #234, #242, #244, #245, #248, #249, #250, #251, #252, #253, #254, #255, #256, #257, #258). Rewrote every lab body from the authoritative `labs/*/README.md` source.
 - Re-apply PR #246 orphan-lab removal: delete `public-website-agent` and `ask-me-anything-30-mins` (lab files and navigation entries) that returned after the redesign merge.
