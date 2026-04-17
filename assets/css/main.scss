@@ -682,13 +682,36 @@ p > code, li > code, td > code {
   align-items: center;
   padding: 0.55em 1em;
   min-height: 44px;
+  border-left: 3px solid transparent;
 
   + .event-agenda-row {
     border-top: 1px solid var(--color-border-subtle);
   }
 
+  // Lab rows get the accent rail and a stronger tone
+  &--lab {
+    border-left-color: var(--color-accent);
+
+    .event-agenda-body a {
+      font-weight: 600;
+    }
+  }
+
+  // Non-lab rows are quieter
+  &--session,
+  &--break,
+  &--link {
+    .event-agenda-body,
+    .event-agenda-body a {
+      color: var(--color-fg-muted);
+      font-style: italic;
+      font-weight: 500;
+    }
+  }
+
   &--current {
     background: var(--color-accent-tint);
+    border-left-color: var(--color-accent);
   }
 
   // Day separator row in the popover

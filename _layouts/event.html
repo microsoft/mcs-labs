@@ -89,12 +89,33 @@ layout: single
   gap: 0 1em;
   align-items: start;
   padding: 0.9em 1.2em;
-  border: 1px solid var(--color-border-subtle);
+  border: 1px solid transparent;
   border-radius: 8px;
-  background: var(--color-bg);
   color: var(--color-fg-strong);
   transition: border-color 0.15s, box-shadow 0.15s;
-  min-height: 52px;
+  min-height: 44px;
+}
+
+/* Lab rows: prominent card with an accent left rail — the only rows that
+   are interactive, so they should read as primary calls to action. */
+.ws-agenda-row--lab {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-accent);
+  padding: 1em 1.2em 1em 1.1em;
+  min-height: 72px;
+}
+
+/* Non-lab rows: compact, unboxed plain rows aligned to the same time
+   column. Keeps the timeline rhythm but makes labs pop. */
+.ws-agenda-row--session,
+.ws-agenda-row--break,
+.ws-agenda-row--link {
+  background: transparent;
+  border: none;
+  padding: 0.4em 0.4em 0.4em 1.2em;
+  min-height: 36px;
+  font-size: 0.92em;
 }
 
 .ws-agenda-time {
@@ -166,17 +187,14 @@ layout: single
   box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
-/* Break + session + link rows — visually quieter */
-.ws-agenda-row--session,
-.ws-agenda-row--break,
-.ws-agenda-row--link {
-  background: var(--color-bg-subtle);
-  border-style: dashed;
-}
-.ws-agenda-row--break .ws-agenda-title {
+.ws-agenda-row--session .ws-agenda-title,
+.ws-agenda-row--break .ws-agenda-title,
+.ws-agenda-row--link .ws-agenda-title {
   color: var(--color-fg-muted);
   font-weight: 500;
+  font-size: 0.92em;
 }
+.ws-agenda-row--break .ws-agenda-title { font-style: italic; }
 
 /* Day header separator */
 .ws-agenda-day {
