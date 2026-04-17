@@ -263,49 +263,71 @@
   // Replaces the default "Home / Labs / <slugified>" with
   // "Home / Events / <Event Name> / <Lab Title>". If the breadcrumb nav
   // isn't in the page (some layouts) this is a silent no-op.
-  var originalBreadcrumbHtml = null;
+  //
+  // Built entirely via document.createElement + textContent so no string
+  // concatenation flows into innerHTML — the XSS-through-DOM sink is
+  // removed structurally rather than relying on escaping.
+  var originalBreadcrumbChildren = null;
   function overrideBreadcrumb() {
     if (!breadcrumbsNav) return;
-    originalBreadcrumbHtml = breadcrumbsNav.innerHTML;
-    var base = document.querySelector('base');
-    var baseurl = (window.mcsBaseUrl || '') || '';
-    // Try to infer baseurl from an existing breadcrumb link's href.
-    var firstExistingLink = breadcrumbsNav.querySelector('a');
-    if (firstExistingLink) {
-      // Use its resolved URL to derive baseurl fragment.
-      try {
-        var parsed = new URL(firstExistingLink.href, window.location.origin);
-        // The homepage link's path ends in '/'. Anything before the '/'
-        // beyond origin is the baseurl.
-        baseurl = parsed.pathname.replace(/\/$/, '');
-      } catch (e) {}
+
+    // Snapshot the existing children so restoreBreadcrumb() can put them back.
+    originalBreadcrumbChildren = [];
+    while (breadcrumbsNav.firstChild) {
+      originalBreadcrumbChildren.push(breadcrumbsNav.firstChild);
+      breadcrumbsNav.removeChild(breadcrumbsNav.firstChild);
     }
 
-    var items = [
-      { href: baseurl + '/', text: 'Home' },
-      { href: baseurl + '/events/', text: 'Events' },
-      { href: activeEvent.url, text: activeEvent.title },
-    ];
-    var html = '';
-    for (var k = 0; k < items.length; k++) {
-      html += '<li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">';
-      html += '<a href="' + items[k].href + '" itemprop="item"><span itemprop="name">' +
-              escapeHtml(items[k].text) + '</span></a>';
-      html += '<meta itemprop="position" content="' + (k + 1) + '">';
-      html += '</li>';
+    var baseurl = '';
+    // Infer baseurl from any lingering breadcrumb link that we just removed.
+    for (var i = 0; i < originalBreadcrumbChildren.length; i++) {
+      var anchor = originalBreadcrumbChildren[i].querySelector
+        ? originalBreadcrumbChildren[i].querySelector('a')
+        : null;
+      if (anchor) {
+        try {
+          var parsed = new URL(anchor.href, window.location.origin);
+          baseurl = parsed.pathname.replace(/\/$/, '');
+        } catch (e) {}
+        break;
+      }
     }
-    html += '<li class="current">' + escapeHtml(currentLab.title) + '</li>';
-    breadcrumbsNav.innerHTML = html;
+
+    function makeCrumbLi(href, text, position) {
+      var li = document.createElement('li');
+      li.setAttribute('itemprop', 'itemListElement');
+      li.setAttribute('itemscope', '');
+      li.setAttribute('itemtype', 'https://schema.org/ListItem');
+      var a = document.createElement('a');
+      a.href = href; // String assignment to href is not an HTML sink.
+      a.setAttribute('itemprop', 'item');
+      var span = document.createElement('span');
+      span.setAttribute('itemprop', 'name');
+      span.textContent = text;
+      a.appendChild(span);
+      li.appendChild(a);
+      var meta = document.createElement('meta');
+      meta.setAttribute('itemprop', 'position');
+      meta.setAttribute('content', String(position));
+      li.appendChild(meta);
+      return li;
+    }
+
+    breadcrumbsNav.appendChild(makeCrumbLi(baseurl + '/', 'Home', 1));
+    breadcrumbsNav.appendChild(makeCrumbLi(baseurl + '/events/', 'Events', 2));
+    breadcrumbsNav.appendChild(makeCrumbLi(activeEvent.url, activeEvent.title, 3));
+
+    var currentLi = document.createElement('li');
+    currentLi.className = 'current';
+    currentLi.textContent = currentLab.title;
+    breadcrumbsNav.appendChild(currentLi);
   }
   function restoreBreadcrumb() {
-    if (breadcrumbsNav && originalBreadcrumbHtml !== null) {
-      breadcrumbsNav.innerHTML = originalBreadcrumbHtml;
+    if (!breadcrumbsNav || originalBreadcrumbChildren === null) return;
+    while (breadcrumbsNav.firstChild) breadcrumbsNav.removeChild(breadcrumbsNav.firstChild);
+    for (var i = 0; i < originalBreadcrumbChildren.length; i++) {
+      breadcrumbsNav.appendChild(originalBreadcrumbChildren[i]);
     }
-  }
-  function escapeHtml(s) {
-    return String(s)
-      .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;').replace(/'/g, '&#39;');
   }
 
   // --- Reveal the rail + nav-pair ---
