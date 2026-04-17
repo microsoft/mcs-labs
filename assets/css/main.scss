@@ -523,6 +523,383 @@ p > code, li > code, td > code {
 }
 
 // ---------------------------------------------------------------------------
+// Event-aware navigation
+// Rail (below lab header) + bottom Previous/Next cards + popover agenda.
+// Only shown on lab pages when an event context is resolved at runtime by
+// _includes/event-nav/script.html.
+// ---------------------------------------------------------------------------
+
+.event-rail {
+  display: block;
+  margin: 0 0 1.5em;
+  padding: 0;
+  background: var(--color-bg-elevated);
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 10px;
+  overflow: hidden;
+
+  &[hidden] { display: none; }
+}
+
+.event-rail-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6em 0.75em;
+  padding: 0.6em 0.8em;
+}
+
+.event-rail-event {
+  display: inline-flex;
+  flex-direction: column;
+  gap: 0.1em;
+  text-decoration: none;
+  padding: 0.35em 0.6em;
+  border-radius: 6px;
+  color: inherit;
+  min-height: 44px;
+  justify-content: center;
+
+  &:hover,
+  &:focus-visible {
+    background: var(--color-bg);
+    color: var(--color-accent);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+}
+
+.event-rail-event-label {
+  font-size: 0.6em;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--color-fg-muted);
+  line-height: 1;
+}
+
+.event-rail-event-name {
+  font-size: 0.88em;
+  font-weight: 600;
+  color: var(--color-fg-strong);
+  line-height: 1.2;
+}
+
+.event-rail-event:hover .event-rail-event-name,
+.event-rail-event:focus-visible .event-rail-event-name {
+  color: var(--color-accent);
+}
+
+.event-rail-position {
+  font-size: 0.78em;
+  font-weight: 600;
+  color: var(--color-fg-muted);
+  padding: 0.25em 0.7em;
+  background: var(--color-bg);
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+.event-rail-actions {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  margin-left: auto;
+}
+
+.event-rail-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0 0.7em;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--color-fg-muted);
+  font-family: inherit;
+  font-size: 0.82em;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+
+  &:hover:not([disabled]),
+  &:focus-visible:not([disabled]) {
+    background: var(--color-bg);
+    color: var(--color-fg-strong);
+    border-color: var(--color-border);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+
+  &[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+
+  &[aria-expanded="true"] {
+    background: var(--color-accent-tint);
+    color: var(--color-accent);
+    border-color: var(--color-accent-tint-2);
+
+    svg { transform: rotate(180deg); }
+  }
+
+  svg { transition: transform 0.2s ease; }
+}
+
+.event-rail-btn-label {
+  display: inline;
+}
+
+.event-rail-agenda {
+  border-top: 1px solid var(--color-border-subtle);
+  background: var(--color-bg);
+
+  &[hidden] { display: none; }
+}
+
+.event-rail-agenda-list {
+  list-style: none;
+  margin: 0;
+  padding: 0.4em 0;
+  max-height: 50vh;
+  overflow-y: auto;
+}
+
+.event-agenda-row {
+  display: grid;
+  grid-template-columns: 70px 1fr auto;
+  gap: 0 0.85em;
+  align-items: center;
+  padding: 0.55em 1em;
+  min-height: 44px;
+
+  + .event-agenda-row {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  &--current {
+    background: var(--color-accent-tint);
+  }
+
+  // Day separator row in the popover
+  &--day {
+    display: block;
+    font-size: 0.72em;
+    font-weight: 700;
+    color: var(--color-fg-muted);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    padding: 1em 1em 0.4em;
+    background: var(--color-bg-elevated);
+    min-height: 0;
+    border-top: 2px solid var(--color-border);
+  }
+  &--day:first-child { border-top: 0; }
+}
+
+.event-agenda-time {
+  font-size: 0.78em;
+  font-weight: 600;
+  color: var(--color-fg-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.event-agenda-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+
+  a {
+    color: var(--color-fg-strong);
+    font-weight: 500;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible { color: var(--color-accent); }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+      border-radius: 2px;
+    }
+  }
+}
+
+.event-agenda-row--current .event-agenda-body a {
+  color: var(--color-accent);
+  font-weight: 600;
+}
+
+.event-agenda-row--break .event-agenda-body,
+.event-agenda-row--session .event-agenda-body,
+.event-agenda-row--link .event-agenda-body {
+  color: var(--color-fg-muted);
+  font-style: italic;
+}
+
+.event-agenda-desc {
+  font-size: 0.78em;
+  color: var(--color-fg-muted);
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 0.1em;
+}
+
+.event-agenda-duration {
+  font-size: 0.7em;
+  font-weight: 600;
+  color: var(--color-fg-muted);
+  white-space: nowrap;
+}
+
+// Mobile adjustments for the rail
+@media (max-width: 640px) {
+  .event-rail-head {
+    padding: 0.5em;
+  }
+  .event-rail-actions {
+    margin-left: 0;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  .event-rail-btn-label {
+    display: none;
+  }
+  .event-rail-event {
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+  .event-rail-event-name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .event-agenda-row {
+    grid-template-columns: 60px 1fr auto;
+    padding: 0.55em 0.75em;
+  }
+}
+
+// Coarse pointer (touch) — bump button sizes for comfortable taps
+@media (pointer: coarse) {
+  .event-rail-btn {
+    min-width: 48px;
+    min-height: 48px;
+  }
+}
+
+// Hide minimal-mistakes' generic post pagination when an event context is
+// active — my event-aware nav-pair replaces its function in that case.
+html[data-event-context] .pagination {
+  display: none;
+}
+
+// Bottom Previous / Next lab cards
+.event-navpair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75em;
+  margin: 3em 0 1em;
+
+  &[hidden] { display: none; }
+}
+
+.event-navpair-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25em;
+  padding: 1em 1.2em;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 10px;
+  background: var(--color-bg);
+  color: inherit;
+  text-decoration: none;
+  min-height: 72px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+
+  &:hover,
+  &:focus-visible {
+    border-color: var(--color-border-strong);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
+}
+
+.event-navpair-next {
+  text-align: right;
+  align-items: flex-end;
+}
+
+.event-navpair-dir {
+  font-size: 0.72em;
+  font-weight: 700;
+  color: var(--color-accent);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.event-navpair-title {
+  font-size: 0.95em;
+  font-weight: 600;
+  color: var(--color-fg-strong);
+  line-height: 1.3;
+}
+
+.event-navpair-desc {
+  font-size: 0.78em;
+  color: var(--color-fg-muted);
+}
+
+@media (max-width: 640px) {
+  .event-navpair {
+    grid-template-columns: 1fr;
+  }
+  .event-navpair-next {
+    text-align: left;
+    align-items: flex-start;
+  }
+}
+
+// Homepage "Browse all labs →" link (replaces the old Learning paths grid)
+.home-browse-all {
+  margin: 1em 0 2em;
+  font-size: 0.95em;
+
+  a {
+    color: var(--color-accent);
+    font-weight: 600;
+    text-decoration: none;
+
+    &:hover,
+    &:focus-visible { color: var(--color-accent-hover); text-decoration: underline; }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+      border-radius: 2px;
+    }
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Accessibility settings popover (theme + font size)
 // ---------------------------------------------------------------------------
 .a11y-menu-wrap {

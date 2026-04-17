@@ -1,0 +1,89 @@
+event_id: mcs-in-a-day
+
+# MCS in a Day — 1-day condensed agenda.
+# Source: PR #230 (dewain/air-theme-enhancements).
+
+schedule:
+  - type: break
+    title: "Welcome + Breakout"
+    time: "09:00"
+    duration: 15
+
+  - type: session
+    title: "Intro to hands-on labs"
+    time: "09:15"
+    duration: 15
+
+  - type: session
+    title: "Module 1 – M365 Agent Builder"
+    time: "09:30"
+    duration: 30
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "10:00"
+    duration: 15
+
+  - type: lab
+    slug: agent-builder-m365
+    label: "Lab 1"
+    time: "10:15"
+    duration: 15
+
+  - type: session
+    title: "Module 2 – Core Concepts Part 1"
+    time: "10:30"
+    duration: 30
+
+  - type: lab
+    slug: core-concepts-agent-knowledge-tools
+    label: "Lab 2"
+    time: "11:00"
+    duration: 45
+
+  - type: break
+    title: "Lunch break"
+    time: "11:45"
+    duration: 60
+
+  - type: break
+    title: "Quiz / Review / AMA / Flex"
+    time: "12:45"
+    duration: 15
+
+  - type: session
+    title: "Module 3 – Core Concepts Part 2"
+    time: "13:00"
+    duration: 30
+
+  - type: lab
+    slug: core-concepts-variables-agents-channels
+    label: "Lab 3"
+    time: "13:30"
+    duration: 45
+
+  - type: session
+    title: "Module 4 – Core Concepts Part 3"
+    time: "14:15"
+    duration: 30
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "14:45"
+    duration: 15
+
+  - type: lab
+    slug: core-concepts-analytics-evaluations
+    label: "Lab 4"
+    time: "15:00"
+    duration: 30
+
+  - type: session
+    title: "Module 5 – Licensing & Consumption"
+    time: "15:30"
+    duration: 30
+
+  - type: break
+    title: "Open AMA"
+    time: "16:00"
+    duration: 30
