@@ -16,6 +16,7 @@
   var overlay = document.getElementById('wcOverlay');
   var panel = document.getElementById('wcPanel');
   var closeBtn = document.getElementById('wcClose');
+  var resetBtn = document.getElementById('wcReset');
   var body = document.getElementById('wcBody');
   var loading = document.getElementById('wcLoading');
   var error = document.getElementById('wcError');
@@ -231,6 +232,30 @@
   // No manual Enter/Space handler: #wcTag is now a native <button>, which
   // activates on Enter/Space via the user-agent.
   closeBtn.addEventListener('click', close);
+
+  // --- Reset conversation ---
+  // Tears down the current token + transcript + watermark, then calls
+  // initChat() with no resumeState so a fresh token is fetched from the
+  // token endpoint. The bot's greeting will fire for the new conversation
+  // because initChat dispatches 'startConversation' when resumeState is
+  // absent. Focus stays on the chat input so the user can type immediately.
+  function resetConversation() {
+    clearPersistedState();
+    currentToken = null;
+    currentTokenExpiresAt = 0;
+    lastWatermark = null;
+    recentActivities = [];
+    replayedActivityIds = null;
+    chatStore = null;
+    chatReady = false;
+    chatInitializing = false;
+    fallingBack = false;
+    body.innerHTML = '';
+    status.textContent = 'Connecting...';
+    initChat();
+  }
+
+  resetBtn.addEventListener('click', resetConversation);
 
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && isOpen) close();

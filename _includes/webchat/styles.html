@@ -163,7 +163,14 @@ html.wc-restore .wc-tag {
   letter-spacing: 0.01em;
 }
 
-.wc-panel-close {
+.wc-panel-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  flex-shrink: 0;
+}
+
+.wc-panel-action {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -178,17 +185,17 @@ html.wc-restore .wc-tag {
   flex-shrink: 0;
 }
 
-.wc-panel-close:hover {
+.wc-panel-action:hover {
   background: var(--color-bg-elevated, #f3f2f1);
   color: var(--color-fg-strong, #323130);
 }
 
-.wc-panel-close:focus-visible {
+.wc-panel-action:focus-visible {
   outline: none;
   box-shadow: var(--focus-ring, 0 0 0 2px #fff, 0 0 0 4px #0078d4);
 }
 
-.wc-panel-close svg { width: 16px; height: 16px; }
+.wc-panel-action svg { width: 16px; height: 16px; }
 
 /* --- WebChat body (transcript) --- */
 .wc-panel-body {
