@@ -102,18 +102,19 @@ schedule:
     title: "Day 2"
 
   - type: break
-    title: "Re-Welcome / Re-cap / Quiz"
+    title: "Re-Welcome / Re-cap"
     time: "09:00"
     duration: 15
 
   - type: session
-    title: "Module 6 – ALM: Solutions, Env Vars, Connections & Pipelines"
+    title: "Module 6 - ALM - Solutions, Environment Variables, Connection References, and Pipelines"
     time: "09:15"
     duration: 30
 
   - type: lab
     slug: mcs-alm
     label: "Lab 5"
+    title: "Export / Import Solutions, Environment Variables, Connection References, and Pipelines"
     time: "09:45"
 
   - type: break
@@ -122,17 +123,18 @@ schedule:
     duration: 15
 
   - type: session
-    title: "Module 7 – Component Collections"
+    title: "Module 7 - ALM - Component Collections"
     time: "10:45"
     duration: 30
 
   - type: lab
     slug: component-collections
     label: "Lab 6"
+    title: "Component Collections"
     time: "11:15"
 
   - type: session
-    title: "Module 8 – Orchestration & Dynamic Chaining"
+    title: "Module 8 - Orchestration and Dynamic Chaining Concepts w/ Demos"
     time: "11:45"
     duration: 30
 
@@ -142,14 +144,14 @@ schedule:
     duration: 60
 
   - type: break
-    title: "Quiz / Review / AMA / Flex / Guest Speaker"
+    title: "Quiz Time"
     time: "13:15"
     duration: 15
 
   - type: session
-    title: "Module 9 – Tools"
-    time: "13:30"
-    duration: 75
+    title: "Module 9 - Tools"
+    time: "13:15"
+    duration: 90
 
   - type: break
     title: "Coffee break / Q&A"
@@ -159,10 +161,11 @@ schedule:
   - type: lab
     slug: mcs-tools
     label: "Lab 7"
+    title: "Tools"
     time: "15:00"
 
   - type: break
-    title: "Open AMA"
+    title: "Open Q+A"
     time: "16:00"
     duration: 30
 
