@@ -118,11 +118,14 @@ html, body {
 }
 
 // Page footer
-// --color-accent (#0078d4) on --color-bg-subtle (#faf9f8) computes as 4.31:1
-// under pa11y's sRGB rounding — one notch under AA. Use the darker active
-// accent for footer links to clear 4.5:1 comfortably.
+// Use --color-bg (same as body) so the bottom band paints uniformly even
+// when the Lab Assistant panel shrinks the body width and leaves body's
+// padding-right strip visible beside the footer.
+// --color-accent (#0078d4) on --color-bg (#ffffff) computes as 4.53:1
+// under pa11y's sRGB rounding — clears AA. Under dark/hc the active
+// accent keeps plenty of headroom.
 .page__footer {
-  background: var(--color-bg-subtle);
+  background: var(--color-bg);
   color: var(--color-fg-strong);
   border-top: 1px solid var(--color-border);
 
