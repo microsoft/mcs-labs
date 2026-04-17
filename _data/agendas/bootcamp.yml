@@ -2,7 +2,11 @@ event_id: bootcamp
 
 # Architecture Bootcamp — 3-day agenda. "module" items are instructor-led
 # modules (rendered as type: session); "day" rows act as headers.
-# Source: PR #230 (dewain/air-theme-enhancements).
+# Lab rows intentionally omit `duration:` so the agenda pill falls back to
+# the lab's own declared duration in _labs/<slug>.md. Time is the session
+# start slot; the lab's real duration is what we show next to it.
+# Source: PR #230 (dewain/air-theme-enhancements), updated to reflect real
+# lab durations from the _labs/ collection.
 
 schedule:
   # --- Day 1 ------------------------------------------------------------
@@ -33,7 +37,6 @@ schedule:
     slug: agent-builder-m365
     label: "Lab 1"
     time: "10:15"
-    duration: 15
 
   - type: session
     title: "Module 2 – Core Concepts Part 1"
@@ -44,7 +47,6 @@ schedule:
     slug: core-concepts-agent-knowledge-tools
     label: "Lab 2"
     time: "11:00"
-    duration: 45
 
   - type: break
     title: "Lunch break"
@@ -65,7 +67,6 @@ schedule:
     slug: core-concepts-variables-agents-channels
     label: "Lab 3"
     time: "13:30"
-    duration: 45
 
   - type: session
     title: "Module 4 – Core Concepts Part 3"
@@ -81,7 +82,6 @@ schedule:
     slug: core-concepts-analytics-evaluations
     label: "Lab 4"
     time: "15:00"
-    duration: 30
 
   - type: session
     title: "Module 5 – Licensing & Consumption"
@@ -111,7 +111,6 @@ schedule:
     slug: mcs-alm
     label: "Lab 5"
     time: "09:45"
-    duration: 45
 
   - type: break
     title: "Coffee break / Q&A"
@@ -127,7 +126,6 @@ schedule:
     slug: component-collections
     label: "Lab 6"
     time: "11:15"
-    duration: 30
 
   - type: session
     title: "Module 8 – Orchestration & Dynamic Chaining"
@@ -158,7 +156,6 @@ schedule:
     slug: mcs-tools
     label: "Lab 7"
     time: "15:00"
-    duration: 60
 
   - type: break
     title: "Open AMA"
@@ -188,7 +185,6 @@ schedule:
     slug: mcs-governance
     label: "Lab 8"
     time: "10:00"
-    duration: 30
 
   - type: break
     title: "Coffee break / Q&A"
@@ -209,7 +205,6 @@ schedule:
     slug: mcs-multi-agent
     label: "Lab 9"
     time: "11:30"
-    duration: 30
 
   - type: break
     title: "Lunch break"
@@ -230,7 +225,6 @@ schedule:
     slug: autonomous-account-news
     label: "Lab 10"
     time: "13:45"
-    duration: 30
 
   - type: session
     title: "Module 15 – Azure Integration w/ Demo"

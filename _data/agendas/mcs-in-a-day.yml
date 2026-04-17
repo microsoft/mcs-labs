@@ -1,6 +1,8 @@
 event_id: mcs-in-a-day
 
 # MCS in a Day — 1-day condensed agenda.
+# Lab rows omit `duration:` so the pill reads the real lab duration from
+# _labs/<slug>.md.
 # Source: PR #230 (dewain/air-theme-enhancements).
 
 schedule:
@@ -28,7 +30,6 @@ schedule:
     slug: agent-builder-m365
     label: "Lab 1"
     time: "10:15"
-    duration: 15
 
   - type: session
     title: "Module 2 – Core Concepts Part 1"
@@ -39,7 +40,6 @@ schedule:
     slug: core-concepts-agent-knowledge-tools
     label: "Lab 2"
     time: "11:00"
-    duration: 45
 
   - type: break
     title: "Lunch break"
@@ -60,7 +60,6 @@ schedule:
     slug: core-concepts-variables-agents-channels
     label: "Lab 3"
     time: "13:30"
-    duration: 45
 
   - type: session
     title: "Module 4 – Core Concepts Part 3"
@@ -76,7 +75,6 @@ schedule:
     slug: core-concepts-analytics-evaluations
     label: "Lab 4"
     time: "15:00"
-    duration: 30
 
   - type: session
     title: "Module 5 – Licensing & Consumption"
