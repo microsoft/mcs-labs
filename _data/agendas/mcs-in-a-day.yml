@@ -3,7 +3,8 @@ event_id: mcs-in-a-day
 # MCS in a Day — 1-day condensed agenda. Matches Day 1 of the Bootcamp.
 # Lab rows carry a short `title:` override for the event-friendly name;
 # the full lab title still lives in _labs/<slug>.md and is used outside
-# of event contexts.
+# of event contexts. Module decks are shared with the Bootcamp since
+# MCS in a Day is Day 1 of the Bootcamp content.
 
 schedule:
   - type: break
@@ -20,6 +21,7 @@ schedule:
     title: "Agent Builder"
     time: "09:30"
     duration: 30
+    slides: "/presentations/01.%20Agent%20Builder_CB.pptx"
 
   - type: break
     title: "Coffee break / Q+A"
@@ -36,6 +38,7 @@ schedule:
     title: "Copilot Studio Core Concepts - Part 1"
     time: "10:30"
     duration: 30
+    slides: "/presentations/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
 
   - type: lab
     slug: core-concepts-agent-knowledge-tools
@@ -57,6 +60,7 @@ schedule:
     title: "Copilot Studio Core Concepts - Part 2"
     time: "13:00"
     duration: 30
+    slides: "/presentations/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
 
   - type: lab
     slug: core-concepts-variables-agents-channels
@@ -68,6 +72,7 @@ schedule:
     title: "Copilot Studio Core Concepts - Part 3"
     time: "14:15"
     duration: 30
+    slides: "/presentations/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
 
   - type: break
     title: "Coffee break / Q&A"
@@ -84,6 +89,7 @@ schedule:
     title: "Licensing"
     time: "15:30"
     duration: 30
+    slides: "/presentations/05.%20Licensing_CB.pptx"
 
   - type: break
     title: "Open Q+A"

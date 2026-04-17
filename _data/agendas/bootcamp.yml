@@ -27,6 +27,7 @@ schedule:
     title: "Agent Builder"
     time: "09:30"
     duration: 30
+    slides: "/presentations/01.%20Agent%20Builder_CB.pptx"
 
   - type: break
     title: "Coffee break / Q+A"
@@ -43,6 +44,7 @@ schedule:
     title: "Copilot Studio Core Concepts - Part 1"
     time: "10:30"
     duration: 30
+    slides: "/presentations/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
 
   - type: lab
     slug: core-concepts-agent-knowledge-tools
@@ -64,6 +66,7 @@ schedule:
     title: "Copilot Studio Core Concepts - Part 2"
     time: "13:00"
     duration: 30
+    slides: "/presentations/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
 
   - type: lab
     slug: core-concepts-variables-agents-channels
@@ -75,6 +78,7 @@ schedule:
     title: "Copilot Studio Core Concepts - Part 3"
     time: "14:15"
     duration: 30
+    slides: "/presentations/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
 
   - type: break
     title: "Coffee break / Q&A"
@@ -91,6 +95,7 @@ schedule:
     title: "Licensing"
     time: "15:30"
     duration: 30
+    slides: "/presentations/05.%20Licensing_CB.pptx"
 
   - type: break
     title: "Open Q+A"
@@ -110,6 +115,7 @@ schedule:
     title: "Module 6 - ALM - Solutions, Environment Variables, Connection References, and Pipelines"
     time: "09:15"
     duration: 30
+    slides: "/presentations/06.%20Application%20Lifecycle%20Management%20-Final%20Feb%2027_CB.pptx"
 
   - type: lab
     slug: mcs-alm
@@ -126,6 +132,7 @@ schedule:
     title: "Module 7 - ALM - Component Collections"
     time: "10:45"
     duration: 30
+    slides: "/presentations/07.%20Component%20Collections_CB.pptx"
 
   - type: lab
     slug: component-collections
@@ -137,6 +144,7 @@ schedule:
     title: "Module 8 - Orchestration and Dynamic Chaining Concepts w/ Demos"
     time: "11:45"
     duration: 30
+    slides: "/presentations/08.%20Orchestration%20and%20Dynamic%20Chaining%20Concepts_CB.pptx"
 
   - type: break
     title: "Lunch break"
@@ -152,6 +160,7 @@ schedule:
     title: "Module 9 - Tools"
     time: "13:15"
     duration: 90
+    slides: "/presentations/09.%20Copilot%20Studio%20Tools%20Overview%20RRS_CB.pptx"
 
   - type: break
     title: "Coffee break / Q&A"
@@ -187,6 +196,7 @@ schedule:
     title: "Module 11 - Governance"
     time: "09:30"
     duration: 30
+    slides: "/presentations/11.%20Governance_CB.pptx"
 
   - type: lab
     slug: mcs-governance
@@ -203,11 +213,13 @@ schedule:
     title: "Module 12 - SDK /w Demo"
     time: "10:45"
     duration: 15
+    slides: "/presentations/12.%20SDK_CB.pptx"
 
   - type: session
     title: "Module 13 - Multi-Agent"
     time: "11:00"
     duration: 30
+    slides: "/presentations/13.%20Multi%20Agent_CB.pptx"
 
   - type: lab
     slug: mcs-multi-agent
@@ -229,6 +241,7 @@ schedule:
     title: "Module 14 - Autonomous Agents"
     time: "13:15"
     duration: 30
+    slides: "/presentations/14.%20Autonomous%20Agents_CB.pptx"
 
   - type: lab
     slug: autonomous-account-news
@@ -240,6 +253,7 @@ schedule:
     title: "Module 15 - Azure Integration /w Demo"
     time: "14:15"
     duration: 30
+    slides: "/presentations/15.%20CopilotStudioAzureBetterTogether_CB.pptx"
 
   - type: break
     title: "Coffee break / Q&A"
@@ -250,6 +264,7 @@ schedule:
     title: "Module 16 - Agent 365 w/ Demo"
     time: "15:00"
     duration: 30
+    slides: "/presentations/16.%20A365_CB2.pptx"
 
   - type: break
     title: "General Q+A"
