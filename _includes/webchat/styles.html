@@ -561,14 +561,31 @@ html.wc-restore .wc-tag {
   box-shadow: 0 0 0 2px var(--color-accent-tint-2, rgba(0,120,212,0.25)) !important;
 }
 
-/* Force a visible label color in every palette. Adaptive Cards sometimes
-   renders its own inline color on .ac-textBlock descendants — raise
-   specificity and keep !important to beat it. */
+/* Force a visible label color in every palette. Adaptive Cards SDK writes
+   an inline `color: rgb(…)` on every .ac-textRun / .ac-textBlock based on
+   its HostConfig (locked to Light values at render time). Override with
+   !important so dark/HC labels are readable. The companion HostConfig
+   injected via styleOptions (see script.html) preserves semantic colors
+   (accent, attention, good, warning) via distinct CSS overrides below. */
 .wc-panel-body .ac-textBlock,
 .wc-panel-body .ac-textBlock span,
-.wc-panel-body .ac-textBlock p {
+.wc-panel-body .ac-textBlock p,
+.wc-panel-body .ac-richTextBlock,
+.wc-panel-body .ac-richTextBlock .ac-textRun,
+.wc-panel-body .ac-textRun,
+.wc-panel-body .ac-container .ac-textRun {
   line-height: 1.45;
-  color: var(--color-fg, #201f1e) !important;
+  color: var(--color-fg-strong, #201f1e) !important;
+}
+
+/* Keep semantic color runs readable: if Adaptive Cards emits an inline
+   color near the red "attention" spectrum, map to --color-danger so it
+   stays visible against dark bg. Using attribute-prefix matches the SDK's
+   default HostConfig value (#D13438). */
+.wc-panel-body .ac-textRun[style*="rgb(209, 52, 56)"],
+.wc-panel-body .ac-textRun[style*="#D13438"],
+.wc-panel-body .ac-textRun[style*="#d13438"] {
+  color: var(--color-danger, #c4314b) !important;
 }
 
 .wc-panel-body .ac-image { border-radius: 8px; }

@@ -428,6 +428,35 @@
 
         timestampColor: tok('--color-fg-placeholder', '#a19f9d'),
         groupTimestamp: 30000,
+
+        // Adaptive Cards HostConfig — inline colors the SDK paints into
+        // .ac-textRun/.ac-textBlock come from here. Populate from CSS tokens
+        // so new cards render with the active theme out of the box.
+        adaptiveCardsHostConfig: {
+          fontFamily: "'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
+          containerStyles: {
+            default: {
+              backgroundColor: tok('--bubble-bot-bg', '#00000010'),
+              foregroundColors: {
+                default:   { default: tok('--color-fg-strong', '#201f1e'), subtle: tok('--color-fg-muted', '#605e5c') },
+                dark:      { default: tok('--color-fg-strong', '#201f1e'), subtle: tok('--color-fg-muted', '#605e5c') },
+                light:     { default: tok('--color-fg-strong', '#201f1e'), subtle: tok('--color-fg-muted', '#605e5c') },
+                accent:    { default: tok('--color-accent', '#0078d4'),    subtle: tok('--color-accent-hover', '#106ebe') },
+                good:      { default: tok('--color-success', '#0e700e'),   subtle: tok('--color-success', '#0e700e') },
+                warning:   { default: tok('--color-danger', '#c4314b'),    subtle: tok('--color-danger', '#c4314b') },
+                attention: { default: tok('--color-danger', '#c4314b'),    subtle: tok('--color-danger', '#c4314b') },
+              },
+            },
+            emphasis: {
+              backgroundColor: tok('--color-bg-elevated', '#f3f2f1'),
+              foregroundColors: {
+                default:   { default: tok('--color-fg-strong', '#201f1e'), subtle: tok('--color-fg-muted', '#605e5c') },
+                accent:    { default: tok('--color-accent', '#0078d4'),    subtle: tok('--color-accent-hover', '#106ebe') },
+                attention: { default: tok('--color-danger', '#c4314b'),    subtle: tok('--color-danger', '#c4314b') },
+              },
+            },
+          },
+        },
       };
 
       // Clear any prior mount before rendering
