@@ -196,6 +196,33 @@ layout: single
 }
 .ws-agenda-row--break .ws-agenda-title { font-style: italic; }
 
+/* Module slides download link */
+.ws-agenda-slides {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  margin-top: 0.4em;
+  padding: 0.25em 0.6em;
+  border-radius: 4px;
+  background: var(--color-bg-elevated);
+  color: var(--color-accent) !important;
+  font-size: 0.78em;
+  font-weight: 600;
+  text-decoration: none !important;
+  font-style: normal;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.ws-agenda-slides:hover,
+.ws-agenda-slides:focus-visible {
+  background: var(--color-accent-tint);
+  color: var(--color-accent-hover) !important;
+}
+.ws-agenda-slides:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+}
+.ws-agenda-slides svg { flex-shrink: 0; }
+
 /* Day header separator */
 .ws-agenda-day {
   list-style: none;
@@ -330,6 +357,14 @@ layout: single
         <div class="ws-agenda-title">{{ item.title }}</div>
         {% if item.description %}<p class="ws-agenda-desc">{{ item.description }}</p>{% endif %}
         {% if item.speaker %}<div class="ws-agenda-speaker">— {{ item.speaker }}</div>{% endif %}
+        {% if item.slides %}
+          <a class="ws-agenda-slides" href="{{ item.slides | relative_url }}" download>
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+            Slides
+          </a>
+        {% endif %}
       </div>
       <div class="ws-agenda-meta">
         {% if item.duration %}<span class="ws-agenda-pill ws-pill-duration">{{ item.duration }} min</span>{% endif %}
