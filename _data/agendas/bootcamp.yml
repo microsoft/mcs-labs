@@ -174,23 +174,24 @@ schedule:
     title: "Day 3"
 
   - type: break
-    title: "Re-Welcome / Re-cap / Quiz"
+    title: "Re-Welcome / Re-cap"
     time: "09:00"
     duration: 15
 
   - type: session
-    title: "Module 10 – Additional Resources"
+    title: "Module 10 - Additional Resources"
     time: "09:15"
     duration: 15
 
   - type: session
-    title: "Module 11 – Governance"
+    title: "Module 11 - Governance"
     time: "09:30"
     duration: 30
 
   - type: lab
     slug: mcs-governance
     label: "Lab 8"
+    title: "Governance - DLP"
     time: "10:00"
 
   - type: break
@@ -199,18 +200,19 @@ schedule:
     duration: 15
 
   - type: session
-    title: "Module 12 – SDK w/ Demo"
+    title: "Module 12 - SDK /w Demo"
     time: "10:45"
     duration: 15
 
   - type: session
-    title: "Module 13 – Multi-Agent"
+    title: "Module 13 - Multi-Agent"
     time: "11:00"
     duration: 30
 
   - type: lab
     slug: mcs-multi-agent
     label: "Lab 9"
+    title: "Multi-Agent"
     time: "11:30"
 
   - type: break
@@ -219,22 +221,23 @@ schedule:
     duration: 60
 
   - type: break
-    title: "Quiz / Review / AMA / Flex / Guest Speaker"
+    title: "Quiz Time / Review"
     time: "13:00"
     duration: 15
 
   - type: session
-    title: "Module 14 – Autonomous Agents"
+    title: "Module 14 - Autonomous Agents"
     time: "13:15"
     duration: 30
 
   - type: lab
     slug: autonomous-account-news
     label: "Lab 10"
+    title: "Autonomous Agents"
     time: "13:45"
 
   - type: session
-    title: "Module 15 – Azure Integration w/ Demo"
+    title: "Module 15 - Azure Integration /w Demo"
     time: "14:15"
     duration: 30
 
@@ -244,11 +247,11 @@ schedule:
     duration: 15
 
   - type: session
-    title: "Module 16 – Agent 365 w/ Demo"
+    title: "Module 16 - Agent 365 w/ Demo"
     time: "15:00"
     duration: 30
 
   - type: break
-    title: "General Q&A"
+    title: "General Q+A"
     time: "15:30"
     duration: 30
