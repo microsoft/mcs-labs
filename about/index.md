@@ -136,7 +136,7 @@ classes: wide
   {% for member in site.data.team %}
   <li class="team-card">
     <a href="https://github.com/{{ member.github }}" target="_blank" rel="noopener">
-      <img class="team-avatar" src="https://github.com/{{ member.github }}.png?size=128" alt="{{ member.name }}">
+      <img class="team-avatar" src="https://github.com/{{ member.github }}.png?size=128" alt="">
       <div class="team-name">{{ member.name }}</div>
     </a>
     {% if member.role != "" %}<div class="team-role">{{ member.role }}</div>{% endif %}

@@ -28,8 +28,19 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
 }
 
 // The theme already emits <nav class="skip-links"> with three links. Add
-// tokenized focus styling so they stay readable across all four palettes.
+// tokenized focus styling so they stay readable across all four palettes,
+// and bump the size so Lighthouse's WCAG 2.5.8 target-size audit passes.
+.skip-links {
+  li + li { margin-top: 0.25em; }
+}
 .skip-links a.screen-reader-shortcut {
+  min-height: 24px;
+  min-width: 24px;
+  padding: 0.25em 0.5em;
+  display: inline-flex;
+  align-items: center;
+  line-height: 1.2;
+
   &:focus,
   &:focus-visible {
     background: var(--color-bg);
@@ -38,6 +49,14 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
     outline: none;
     box-shadow: var(--focus-ring);
   }
+}
+
+// Breadcrumb separators via CSS so the <ol> contains only <li> children
+// (axe rule: list must contain only li/script/template).
+.breadcrumbs ol li + li::before {
+  content: "/";
+  padding: 0 0.5em;
+  color: var(--color-fg-muted);
 }
 
 // Give theme switching a smooth, explicit transition on tokenized properties
