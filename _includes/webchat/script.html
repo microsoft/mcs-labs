@@ -250,7 +250,18 @@
     chatReady = false;
     chatInitializing = false;
     fallingBack = false;
-    body.innerHTML = '';
+
+    // Replace the host element entirely so renderWebChat mounts a fresh
+    // React tree. Just clearing innerHTML leaves React's _reactRootContainer
+    // on the element, which causes renderWebChat to do an update rather
+    // than a full remount — the old store/directLine stay wired up and
+    // the bot's fresh-conversation greeting never makes it to the visible
+    // transcript.
+    var parent = body.parentNode;
+    var fresh = body.cloneNode(false);
+    parent.replaceChild(fresh, body);
+    body = fresh;
+
     status.textContent = 'Connecting...';
     initChat();
   }
