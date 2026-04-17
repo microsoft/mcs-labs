@@ -99,13 +99,23 @@ html, body {
 }
 
 // Page footer
+// --color-accent (#0078d4) on --color-bg-subtle (#faf9f8) computes as 4.31:1
+// under pa11y's sRGB rounding — one notch under AA. Use the darker active
+// accent for footer links to clear 4.5:1 comfortably.
 .page__footer {
   background: var(--color-bg-subtle);
-  color: var(--color-fg-muted);
+  color: var(--color-fg-strong);
   border-top: 1px solid var(--color-border);
 
-  a { color: var(--color-accent); }
-  a:hover { color: var(--color-accent-hover); }
+  a { color: var(--color-accent-active); }
+  a:hover { color: var(--color-accent); }
+}
+
+// Theme's footer copyright uses .page__footer-copyright with muted text.
+// Make sure it clears AA contrast on the subtle bg.
+.page__footer-copyright,
+.page__footer .page__footer-follow {
+  color: var(--color-fg-strong);
 }
 
 // Search overlay + results

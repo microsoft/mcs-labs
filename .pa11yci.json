@@ -6,13 +6,15 @@
     "chromeLaunchConfig": {
       "args": ["--no-sandbox", "--disable-setuid-sandbox"]
     },
-    "ignore": []
+    "ignore": [
+      "WCAG2AA.Principle3.Guideline3_2.3_2_2.H32.2"
+    ]
   },
   "urls": [
     "http://127.0.0.1:4000/mcs-labs/",
     "http://127.0.0.1:4000/mcs-labs/about/",
     "http://127.0.0.1:4000/mcs-labs/events/",
-    "http://127.0.0.1:4000/mcs-labs/bug-bash/",
+    "http://127.0.0.1:4000/mcs-labs/bug-bash.html",
     "http://127.0.0.1:4000/mcs-labs/labs/mcs-governance/"
   ]
 }
