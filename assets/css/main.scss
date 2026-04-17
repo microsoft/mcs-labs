@@ -165,6 +165,20 @@ a:hover, a:focus-visible { color: var(--color-accent-hover); }
 // ---------------------------------------------------------------------------
 // Layout: full-width content, no left sidebar gap
 // ---------------------------------------------------------------------------
+
+// Widen the main content cap so wide monitors aren't half-empty. The theme
+// defaults to 1280 px which leaves ~320 px of whitespace each side at
+// 1920 wide. 1600 px keeps readable line-length for body copy while giving
+// tables / code blocks / screenshots much more room.
+// Masthead inner-wrap and footer also re-cap at 1600 so the top nav and
+// bottom band stay aligned with the content column.
+#main,
+.masthead__inner-wrap,
+.page__footer > footer,
+nav.breadcrumbs {
+  max-width: 1600px !important;
+}
+
 .page {
   float: none !important;
   width: 100% !important;
@@ -505,12 +519,12 @@ p > code, li > code, td > code {
 // fixed-position panel CSS; nothing here applies below 1024 px).
 @media (min-width: 1024px) {
   html[data-panel-open] body {
-    padding-right: 400px;
+    padding-right: 480px;
     transition: padding-right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   // Collapse the TOC column while the panel is open — at viewport 1024 px
-  // minus the 400 px panel, the content column would squeeze below ~450 px.
+  // minus the 480 px panel, the content column would squeeze too narrow.
   // The Lab Assistant doubles as navigation; re-show the TOC on ≥1440 px.
   html[data-panel-open] .page__content:has(> .sidebar__right) {
     grid-template-columns: 1fr;

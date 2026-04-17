@@ -82,8 +82,8 @@
   /* --wc-panel-bottom tracks how far the site footer has scrolled into
      view, so the panel never overlaps footer links on low-res displays. */
   bottom: var(--wc-panel-bottom, 0);
-  width: 400px;
-  max-width: 90vw;
+  width: 480px;
+  max-width: 95vw;
   z-index: 99992;
   display: flex;
   flex-direction: column;
@@ -309,12 +309,12 @@ html.wc-restore .wc-tag {
 
 .wc-sendbox-inner {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
   gap: 6px;
   background: var(--color-bg-input, #f0efed);
   border: none;
-  border-radius: 24px;
-  padding: 4px 5px 4px 18px;
+  border-radius: 20px;
+  padding: 8px 8px 8px 18px;
   transition: background 0.2s ease, box-shadow 0.2s ease;
 }
 
@@ -327,7 +327,8 @@ html.wc-restore .wc-tag {
 }
 
 .wc-sendbox-input,
-.wc-sendbox-input[type="text"] {
+.wc-sendbox-input[type="text"],
+textarea.wc-sendbox-input {
   flex: 1;
   border: none !important;
   border-radius: 0 !important;
@@ -340,10 +341,14 @@ html.wc-restore .wc-tag {
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.95rem;
   color: var(--color-fg, #201f1e);
-  padding: 9px 0 !important;
+  padding: 4px 0 !important;
   margin: 0 !important;
-  line-height: 1.4;
+  line-height: 1.45;
   min-width: 0;
+  min-height: 44px;
+  max-height: 160px;
+  resize: none !important;
+  overflow-y: auto;
   -webkit-appearance: none;
   appearance: none;
 }

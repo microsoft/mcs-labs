@@ -42,11 +42,11 @@
       </div>
     </div>
     <div class="wc-panel-header-actions">
-      <button type="button" class="wc-panel-action" id="wcReset" aria-label="Reset conversation" title="Reset conversation">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
-          <polyline points="1 4 1 10 7 10"/>
-          <polyline points="23 20 23 14 17 14"/>
-          <path d="M20.49 9A9 9 0 0 0 5.64 5.64L1 10M3.51 15a9 9 0 0 0 14.85 3.36L23 14"/>
+      <button type="button" class="wc-panel-action" id="wcReset" aria-label="New conversation" title="New conversation">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+          <rect x="4" y="4" width="16" height="16" rx="3" ry="3"/>
+          <line x1="12" y1="8" x2="12" y2="16"/>
+          <line x1="8" y1="12" x2="16" y2="12"/>
         </svg>
       </button>
       <button type="button" class="wc-panel-action wc-panel-close" id="wcClose" aria-label="Close Lab Assistant">
@@ -77,7 +77,7 @@
   <div class="wc-sendbox">
     <label for="wcSendInput" class="visually-hidden">Message Lab Assistant</label>
     <div class="wc-sendbox-inner">
-      <input type="text" id="wcSendInput" class="wc-sendbox-input" placeholder="Ask about labs, setup, or workshops..." autocomplete="off" />
+      <textarea id="wcSendInput" class="wc-sendbox-input" placeholder="Ask about labs, setup, or workshops..." rows="2" autocomplete="off"></textarea>
       <button type="button" id="wcSendBtn" class="wc-sendbox-btn" aria-label="Send message">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
           <path d="M5 12h14M12 5l7 7-7 7"/>
