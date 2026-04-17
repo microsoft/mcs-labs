@@ -165,6 +165,15 @@ a:hover, a:focus-visible { color: var(--color-accent-hover); }
 // ---------------------------------------------------------------------------
 // Layout: full-width content, no left sidebar gap
 // ---------------------------------------------------------------------------
+
+// Widen the main content cap so wide monitors aren't half-empty. The theme
+// defaults to 1280 px which leaves ~320 px of whitespace each side at
+// 1920 wide. 1600 px keeps readable line-length for body copy while giving
+// tables / code blocks / screenshots much more room.
+#main {
+  max-width: 1600px !important;
+}
+
 .page {
   float: none !important;
   width: 100% !important;
