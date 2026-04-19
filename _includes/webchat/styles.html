@@ -603,6 +603,43 @@ textarea.wc-sendbox-input {
 .wc-panel-body .ac-image { border-radius: 8px; }
 .wc-panel-body .ac-actionSet { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
 
+/* Adaptive Card tiles (topic starters, quick-action cards) ship with an
+   inline `background-color` baked into the card JSON — almost always a
+   near-white (#F9F9F9 / #F0F0F0) tone. In dark / HC we repaint those inner
+   containers with theme-correct surface tokens; otherwise our .ac-textBlock
+   rule (which forces --color-fg-strong onto every label) leaves white text
+   on a white tile — the bug seen in the initial greeting card. Inline style
+   attributes set without !important lose to our !important overrides. */
+[data-theme="dark"] .wc-panel-body .ac-container[style*="background-color"] {
+  background-color: var(--color-bg-elevated, #2b2a29) !important;
+}
+[data-theme="hc"] .wc-panel-body .ac-container[style*="background-color"] {
+  background-color: var(--color-bg-elevated, #000) !important;
+  outline: 1px solid var(--color-fg-strong, #fff);
+  outline-offset: -1px;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .wc-panel-body .ac-container[style*="background-color"],
+  [data-theme="system"] .wc-panel-body .ac-container[style*="background-color"] {
+    background-color: var(--color-bg-elevated, #2b2a29) !important;
+  }
+}
+
+/* Tile icons are typically inline-data SVGs with fill="#212121" (dark on
+   light). When we flip the tile to a dark surface above, those icons become
+   invisible. Flip to pure white via filter. Scoped to ac-images inside a
+   tile so the colorful bot avatar / hero images elsewhere stay untouched. */
+[data-theme="dark"] .wc-panel-body .ac-container[style*="background-color"] img.ac-image,
+[data-theme="hc"] .wc-panel-body .ac-container[style*="background-color"] img.ac-image {
+  filter: brightness(0) invert(1);
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) .wc-panel-body .ac-container[style*="background-color"] img.ac-image,
+  [data-theme="system"] .wc-panel-body .ac-container[style*="background-color"] img.ac-image {
+    filter: brightness(0) invert(1);
+  }
+}
+
 /* ===================================
    Responsive
    =================================== */
