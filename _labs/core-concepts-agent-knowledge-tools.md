@@ -524,17 +524,16 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. In the test panel, select **Refresh** or start a new conversation to reload the agent with the new tool.
 
-27. Enter the following test request:
+1. Enter the following test request:
 
    ```
    Analyze this prompt for improvements:
    Summarize this text: "The novel follows Ishmael, a contemplative sailor who joins the whaling ship Pequod, captained by the obsessive Captain Ahab. Ahab is consumed by a singular goal: to hunt and kill the whale, a massive white whale that previously destroyed his ship and severed his leg. As the voyage progresses, the crew encounters various philosophical, religious, and existential challenges, culminating in a dramatic and tragic confrontation with the whale."
    ```
-1. When asked for the intent input **Summarize the text**.
 
 1. Review the agent's analysis. It should provide structured feedback on the prompt using the CARE framework.
 
-29. Observe how the tool uses markdown formatting with bold text and bullets to make the response visually appealing.
+1. Observe how the tool uses markdown formatting with bold text and bullets to make the response visually appealing.
 
 ---
 
