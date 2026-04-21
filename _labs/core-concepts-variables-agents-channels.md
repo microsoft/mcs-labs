@@ -509,6 +509,19 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 #### Deploy to Microsoft Teams and Microsoft 365 Copilot
 
+1. Before starting the Teams channel setup, sign in to the web version of Teams so your browser has an authenticated Teams session ready. In the **Copilot Studio** tab, select the **app launcher** (the 3×3 grid icon in the upper-left corner), then select **Teams**.
+
+   ![Microsoft 365 app launcher opened from Copilot Studio, with Teams highlighted](images/m365-app-launcher-teams.png)
+
+1. When Teams opens, make sure you're using the **web interface**, not the desktop client. If you're prompted with **Open Microsoft Teams?**, select **Cancel**, then choose **Use the web app instead**.
+
+1. If prompted, sign in with your **lab credentials**. Wait for Teams web to finish loading.
+
+1. **Leave this Teams tab open** and return to the Copilot Studio tab.
+
+    > [!NOTE]
+    > This step pre-authenticates Teams in your browser. Without it, the later **See agent in Teams** step may fail or redirect you into a login flow that interrupts the lab.
+
 1. Before you can deploy to a channel, you must first publish your agent.  Select **Publish** from the top right corner of the screen.  Follow the prompts.
 1. Return to the Channels page and select **Teams and Microsoft 365 Copilot**.
 
