@@ -79,9 +79,9 @@
   position: fixed;
   top: var(--wc-panel-top, 0);
   right: 0;
-  /* --wc-panel-bottom tracks how far the site footer has scrolled into
-     view, so the panel never overlaps footer links on low-res displays. */
-  bottom: var(--wc-panel-bottom, 0);
+  /* Pin to viewport bottom so the panel never resizes during page scroll —
+     it overlaps the footer when the user scrolls down. */
+  bottom: 0;
   width: 480px;
   max-width: 95vw;
   z-index: 99992;
