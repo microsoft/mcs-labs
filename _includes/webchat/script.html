@@ -451,7 +451,11 @@
         bubbleFromUserBorderRadius: 14,
         bubbleFromUserTextColor: tok('--color-user-bubble-fg', '#1a3a5c'),
 
-        hideSendBox: true,
+        // Keep the send-box composer mounted so SuggestedActions (quick
+        // replies) render — they live inside <BasicSendBox>, not the
+        // transcript. We hide just the inner input row via CSS instead so
+        // our custom send box (.wc-sendbox) owns the visible input.
+        hideSendBox: false,
         hideUploadButton: true,
 
         suggestedActionBackgroundColor: tok('--color-bg', '#ffffff'),
