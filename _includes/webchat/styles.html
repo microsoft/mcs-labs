@@ -79,9 +79,9 @@
   position: fixed;
   top: var(--wc-panel-top, 0);
   right: 0;
-  /* --wc-panel-bottom tracks how far the site footer has scrolled into
-     view, so the panel never overlaps footer links on low-res displays. */
-  bottom: var(--wc-panel-bottom, 0);
+  /* Pin to viewport bottom so the panel never resizes during page scroll —
+     it overlaps the footer when the user scrolls down. */
+  bottom: 0;
   width: 480px;
   max-width: 95vw;
   z-index: 99992;
@@ -473,8 +473,23 @@ textarea.wc-sendbox-input {
   display: none !important;
 }
 
-/* Hide default send box — we use our own */
+/* SendBox: keep the container mounted so SuggestedActions (quick replies)
+   render inside it, but strip its chrome so it looks invisible above our
+   custom .wc-sendbox. Web Chat's own input row is hidden below. */
 .wc-panel-body .webchat__send-box {
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  min-height: 0 !important;
+}
+
+/* Hide Web Chat's actual input form (textarea + buttons). Suggested actions
+   render in a sibling div, so they survive. Selecting `form` inside the send
+   box is robust across Web Chat 4.x versions where the form classname has
+   shifted (.webchat__send-box__main vs .webchat__send-box-text-box). */
+.wc-panel-body .webchat__send-box form,
+.wc-panel-body .webchat__send-box-text-box {
   display: none !important;
 }
 
