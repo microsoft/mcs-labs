@@ -24,6 +24,7 @@
   var status = document.getElementById('wcStatus');
   var sendInput = document.getElementById('wcSendInput');
   var sendBtn = document.getElementById('wcSendBtn');
+  var quickRepliesEl = document.getElementById('wcQuickReplies');
 
   var isOpen = false;
   var chatInitializing = false;
@@ -122,12 +123,11 @@
     persistState();
   }
 
-  // --- Masthead + footer offsets: keep panel inside the "chrome sandwich" ---
-  // The panel is position: fixed and would normally occupy the full right
-  // column between the top and bottom edges of the viewport. We nudge its
-  // top below the masthead (so nav stays reachable) and its bottom above
-  // the visible portion of the site footer (so the footer links are never
-  // obscured).
+  // --- Masthead offset: keep panel below the (non-sticky) masthead ---
+  // The panel is position: fixed. We nudge its top below the masthead so the
+  // top nav stays reachable while the chat is open. The bottom edge stays
+  // pinned to the viewport bottom (panel overlaps the footer when scrolled),
+  // which avoids resizing the chat surface during page scroll.
 
   var chromeOffsetFrame = null;
 
@@ -136,17 +136,6 @@
     var masthead = document.querySelector('.masthead');
     var topPx = masthead ? Math.max(0, Math.ceil(masthead.getBoundingClientRect().bottom)) : 0;
     document.documentElement.style.setProperty('--wc-panel-top', topPx + 'px');
-
-    var footer = document.querySelector('.page__footer') || document.getElementById('footer');
-    var bottomPx = 0;
-    if (footer) {
-      var rect = footer.getBoundingClientRect();
-      var vh = window.innerHeight || document.documentElement.clientHeight;
-      // Footer intrudes into the viewport by (vh - rect.top); clamp so the
-      // panel only shrinks when the footer is actually visible.
-      bottomPx = Math.max(0, Math.ceil(vh - rect.top));
-    }
-    document.documentElement.style.setProperty('--wc-panel-bottom', bottomPx + 'px');
   }
 
   function scheduleChromeOffsets() {
@@ -157,6 +146,65 @@
   // Back-compat aliases for earlier variable names used elsewhere in this file.
   var applyMastheadOffset = applyChromeOffsets;
   var scheduleMastheadOffset = scheduleChromeOffsets;
+
+  // --- Quick replies (suggested actions) ---
+  // We render our own buttons from activity.suggestedActions instead of
+  // showing Web Chat's built-in <SuggestedActions>, so we don't need
+  // hideSendBox: false (which leaks the input form + connectivity dots).
+
+  function clearQuickReplies() {
+    if (!quickRepliesEl) return;
+    while (quickRepliesEl.firstChild) quickRepliesEl.removeChild(quickRepliesEl.firstChild);
+    quickRepliesEl.hidden = true;
+  }
+
+  function renderQuickReplies(actions) {
+    if (!quickRepliesEl) return;
+    clearQuickReplies();
+    if (!actions || !actions.length) return;
+    actions.forEach(function (action) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'wc-quickreply';
+      btn.textContent = action.title || action.displayText || action.text || action.value || '';
+      btn.addEventListener('click', function () {
+        var t = action.type || 'imBack';
+        if (t === 'openUrl' && action.value) {
+          // Open in a new tab; keep the buttons available so the user can
+          // pick a different one if they came back without picking.
+          window.open(action.value, '_blank', 'noopener,noreferrer');
+          return;
+        }
+        // Pre-clear so a slow round-trip can't double-fire on a second click.
+        clearQuickReplies();
+        if (!chatStore || !chatReady) return;
+        if (t === 'postBack') {
+          chatStore.dispatch({
+            type: 'WEB_CHAT/SEND_POST_BACK',
+            payload: { value: action.value }
+          });
+        } else if (t === 'messageBack') {
+          chatStore.dispatch({
+            type: 'WEB_CHAT/SEND_MESSAGE_BACK',
+            payload: {
+              value: action.value,
+              text: action.text || action.title,
+              displayText: action.displayText || action.title
+            }
+          });
+        } else {
+          // imBack and any default: send as a regular text message so the
+          // bot sees it like a typed user reply.
+          chatStore.dispatch({
+            type: 'WEB_CHAT/SEND_MESSAGE',
+            payload: { text: action.value || action.title }
+          });
+        }
+      });
+      quickRepliesEl.appendChild(btn);
+    });
+    quickRepliesEl.hidden = false;
+  }
 
   // --- Sendbox disabled state ---
 
@@ -250,6 +298,7 @@
     chatReady = false;
     chatInitializing = false;
     fallingBack = false;
+    clearQuickReplies();
 
     // Replace the host element entirely so renderWebChat mounts a fresh
     // React tree. Just clearing innerHTML leaves React's _reactRootContainer
@@ -277,6 +326,8 @@
   function sendMessage() {
     var text = sendInput.value.trim();
     if (!text || !chatStore || !chatReady) return;
+    // Typing a new message supersedes any pending quick replies.
+    clearQuickReplies();
     chatStore.dispatch({
       type: 'WEB_CHAT/SEND_MESSAGE',
       payload: { text: text }
@@ -418,6 +469,17 @@
                   showTyping();
                 } else {
                   hideTyping();
+                }
+                // Quick replies: render our own buttons from
+                // activity.suggestedActions. A bot message without
+                // suggestedActions clears any stale ones from a prior turn.
+                if (activity.type === 'message') {
+                  var sa = activity.suggestedActions;
+                  if (sa && Array.isArray(sa.actions) && sa.actions.length) {
+                    renderQuickReplies(sa.actions);
+                  } else {
+                    clearQuickReplies();
+                  }
                 }
               }
               if (activity.type !== 'typing' && activity.id &&

@@ -73,6 +73,13 @@
     </div>
   </div>
 
+  <!-- Quick replies (suggested actions). Rendered by script.html when an
+       incoming bot activity carries activity.suggestedActions.actions. We
+       build our own buttons here instead of letting Web Chat render its
+       built-in <SuggestedActions> inside <BasicSendBox>, because hiding
+       that subtree was the source of the duplicate-send-box bug. -->
+  <div class="wc-quickreplies" id="wcQuickReplies" role="group" aria-label="Quick replies" hidden></div>
+
   <!-- Custom send box -->
   <div class="wc-sendbox">
     <label for="wcSendInput" class="visually-hidden">Message Lab Assistant</label>
