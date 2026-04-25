@@ -79,9 +79,9 @@
   position: fixed;
   top: var(--wc-panel-top, 0);
   right: 0;
-  /* --wc-panel-bottom tracks how far the site footer has scrolled into
-     view, so the panel never overlaps footer links on low-res displays. */
-  bottom: var(--wc-panel-bottom, 0);
+  /* Pin to viewport bottom so the panel never resizes during page scroll —
+     it overlaps the footer when the user scrolls down. */
+  bottom: 0;
   width: 480px;
   max-width: 95vw;
   z-index: 99992;
@@ -294,6 +294,47 @@ html.wc-restore .wc-tag {
     transform: scale(1.3);
     opacity: 1;
   }
+}
+
+/* ===========================================
+   Quick Replies (suggested actions)
+   Rendered by script.html from activity.suggestedActions, instead of
+   relying on Web Chat's built-in <SuggestedActions> inside <BasicSendBox>.
+   =========================================== */
+.wc-quickreplies {
+  flex-shrink: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 8px 18px 4px;
+  background: var(--color-bg-subtle, #faf9f8);
+}
+
+.wc-quickreplies[hidden] {
+  display: none !important;
+}
+
+.wc-quickreply {
+  background: var(--color-bg, #fff);
+  border: 1px solid var(--color-accent, #0078d4);
+  color: var(--color-accent, #0078d4);
+  border-radius: 100px;
+  font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+.wc-quickreply:hover {
+  background: var(--color-accent, #0078d4);
+  color: var(--color-accent-on, #fff);
+}
+
+.wc-quickreply:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring, 0 0 0 2px #fff, 0 0 0 4px #0078d4);
 }
 
 /* ===========================================
