@@ -122,11 +122,12 @@
     persistState();
   }
 
-  // --- Masthead offset: keep panel below the (non-sticky) masthead ---
-  // The panel is position: fixed. We nudge its top below the masthead so the
-  // top nav stays reachable while the chat is open. The bottom edge stays
-  // pinned to the viewport bottom (panel overlaps the footer when scrolled),
-  // which avoids resizing the chat surface during page scroll.
+  // --- Masthead + footer offsets: keep panel inside the "chrome sandwich" ---
+  // The panel is position: fixed and would normally occupy the full right
+  // column between the top and bottom edges of the viewport. We nudge its
+  // top below the masthead (so nav stays reachable) and its bottom above
+  // the visible portion of the site footer (so the footer links are never
+  // obscured).
 
   var chromeOffsetFrame = null;
 
@@ -135,6 +136,17 @@
     var masthead = document.querySelector('.masthead');
     var topPx = masthead ? Math.max(0, Math.ceil(masthead.getBoundingClientRect().bottom)) : 0;
     document.documentElement.style.setProperty('--wc-panel-top', topPx + 'px');
+
+    var footer = document.querySelector('.page__footer') || document.getElementById('footer');
+    var bottomPx = 0;
+    if (footer) {
+      var rect = footer.getBoundingClientRect();
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      // Footer intrudes into the viewport by (vh - rect.top); clamp so the
+      // panel only shrinks when the footer is actually visible.
+      bottomPx = Math.max(0, Math.ceil(vh - rect.top));
+    }
+    document.documentElement.style.setProperty('--wc-panel-bottom', bottomPx + 'px');
   }
 
   function scheduleChromeOffsets() {
@@ -451,11 +463,7 @@
         bubbleFromUserBorderRadius: 14,
         bubbleFromUserTextColor: tok('--color-user-bubble-fg', '#1a3a5c'),
 
-        // Keep the send-box composer mounted so SuggestedActions (quick
-        // replies) render — they live inside <BasicSendBox>, not the
-        // transcript. We hide just the inner input row via CSS instead so
-        // our custom send box (.wc-sendbox) owns the visible input.
-        hideSendBox: false,
+        hideSendBox: true,
         hideUploadButton: true,
 
         suggestedActionBackgroundColor: tok('--color-bg', '#ffffff'),
