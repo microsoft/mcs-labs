@@ -573,26 +573,29 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
 
 #### Open the Researcher agent
 
-2. Navigate to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/?auth=2&home=1).
+1. Navigate to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
-3. In the right-side panel or the main chat area, look for the **Researcher** agent. You can find it by:
+1. In the **left-side** panel or the main chat area, look for the **Researcher** agent. You can find it by:
    - Selecting the agent picker (if available) and choosing **Researcher**
    - Or typing `@Researcher` in the chat input area
 
 > [!TIP]
 > The Researcher agent is one of Microsoft's **frontier agents** — purpose-built AI agents that use advanced reasoning models. Researcher excels at deep document analysis, cross-referencing multiple sections, and synthesizing complex information. It's available to users with a Microsoft 365 Copilot license.
 
-4. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the attachment icon (paperclip) in the chat input area and choosing the file from your local machine.
+1. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the attachment icon (paperclip) in the chat input area and choosing the file from your local machine.
 
 #### Prompt 1: Executive briefing with root-cause analysis
 
-5. Once the file is uploaded, copy and paste the following prompt and select **Send**:
+1. Once the file is uploaded, copy and paste the following prompt and select **Send**:
 
 ```text
 Create an executive briefing for the GM that summarizes the five most urgent operational issues, their root causes, financial impact, and recommended fixes — all sourced from this report.
 ```
 
-6. **Observe** how the Researcher agent:
+> [!NOTE]
+> Researcher may ask a clarifying follow-up about preferred report length or detail level. Either select your preferred option, or simply reply `go ahead` to accept the default — both work.
+
+1. **Observe** how the Researcher agent:
    - Identifies issues across multiple sections (housekeeping, WiFi, HVAC, F&B margins, elevator maintenance)
    - Traces each issue back to its root cause using data from different parts of the report
    - Quantifies the financial impact by pulling revenue, cost, and complaint data from various tables
@@ -604,18 +607,20 @@ Create an executive briefing for the GM that summarizes the five most urgent ope
 
 #### Prompt 2: Gap analysis — problems vs. recommendations
 
-7. In the **same conversation** (to maintain context), copy and paste this follow-up prompt and select **Send**:
+1. In the **same conversation** (to maintain context), copy and paste this follow-up prompt and select **Send**:
 
 ```text
 Identify every metric in this report that is trending in the wrong direction or below target. For each one, trace the root cause and map it to a specific recommendation. Are there any gaps where a problem exists but no recommendation addresses it?
 ```
 
-8. **Observe** how the Researcher agent:
+1. **Observe** how the Researcher agent:
    - Systematically scans every KPI table, satisfaction score, and operational metric in the report
    - Identifies metrics that are below target (e.g., HK SLA compliance at 77% vs. 90% target, WiFi satisfaction at 3.60 vs. 4.0 benchmark)
    - Identifies metrics trending negatively (e.g., F&B margins, linen costs, parking revenue)
    - Maps each problem to a specific recommendation (R1–R10)
    - Critically evaluates whether any gaps exist where a problem is documented but no recommendation addresses it
+
+1. Try the **Convert to** menu at the bottom of the response — Researcher can render the analysis as an **Infographic**, **HTML**, **YAML**, **C#**, and more. Selecting **Infographic** produces a polished visual you can share directly; the code-format options are useful when you want to feed the analysis into a downstream system.
 
 > [!TIP]
 > This is the kind of analysis that demonstrates the true power of the Researcher agent. A human reviewer might miss connections between a declining metric buried in Appendix B and a recommendation in Section 16. Researcher performs an **exhaustive cross-reference** across the entire document. Try asking follow-up questions like "What's the strongest counterargument to your top recommendation?" to see how Researcher handles critical thinking.
