@@ -81,7 +81,7 @@ This lab teaches you how to use both analytics and the Agent Evaluation feature 
 | **User Satisfaction Scores** | Feedback metrics measuring whether users found the agent helpful - low satisfaction scores indicate areas needing improvement in knowledge, instructions, or conversation flows |
 | **Failure Analytics** | Data showing where conversations fail, which questions go unanswered, and where users escalate or abandon - these insights directly guide improvement priorities |
 | **Evaluation Test Sets** | Collections of test cases with questions and expected responses that systematically verify agent quality - these provide repeatable, objective quality measurement |
-| **Evaluation Methods** | Different comparison techniques (Exact Match, Keyword Match, Similarity, General Quality, Compare Meaning) that determine how agent responses are assessed against expected answers |
+| **Test Methods** | Different comparison techniques (Exact Match, Keyword Match, Similarity, General Quality, Compare Meaning) that determine how agent responses are assessed against expected answers. Older Copilot Studio docs and earlier versions of this lab refer to them as *evaluation methods* — the terms are interchangeable. |
 | **Evaluation Results** | Pass/fail outcomes with detailed reasoning, knowledge citations, and activity maps - these reveal exactly why an agent succeeded or failed on each test case |
 
 ---
@@ -117,7 +117,7 @@ In this lab, you'll use analytics to understand agent performance and build eval
 * Generate evaluation test sets automatically and import test cases from CSV files
 * Capture test cases from real agent conversations using the test canvas
 * Add manual test cases to target specific agent capabilities
-* Configure evaluation methods appropriate for different test scenarios
+* Configure **test methods** appropriate for different test scenarios
 * Review evaluation results including pass rates, reasoning, and activity maps
 * Compare evaluation runs and export results for reporting
 
@@ -128,7 +128,7 @@ In this lab, you'll use analytics to understand agent performance and build eval
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
 | 1 | [Monitor Agent Performance with Analytics](#use-case-1-monitor-agent-performance-with-analytics) | Measure agent performance and identify optimization opportunities using conversation data | 10 min |
-| 2 | [Create and Configure Evaluation Test Sets](#use-case-2-create-and-configure-evaluation-test-sets) | Build systematic test cases to objectively measure agent quality with multiple evaluation methods | 10 min |
+| 2 | [Create and Configure Evaluation Test Sets](#use-case-2-create-and-configure-evaluation-test-sets) | Build systematic test cases to objectively measure agent quality with multiple **test methods** | 10 min |
 | 3 | [Review Evaluation Results](#use-case-3-review-evaluation-results) | Interpret evaluation outcomes and use results to drive measurable agent improvements | 10 min |
 
 ---
@@ -306,7 +306,7 @@ Learn four different ways to create evaluation test sets - auto-generation, CSV 
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create and Configure Evaluation Test Sets | Build systematic test cases to objectively measure agent quality with multiple evaluation methods | 10 minutes |
+| Create and Configure Evaluation Test Sets | Build systematic test cases to objectively measure agent quality with multiple **test methods** | 10 minutes |
 
 **Summary of tasks**
 
@@ -468,7 +468,7 @@ Create evaluation test sets using four different methods and understand how each
 **Key takeaways:**
 
 * **Four Creation Methods** – Auto-generation, CSV import, test canvas capture, and manual entry each serve different needs. Auto-generation provides quick baseline coverage, CSV import enables bulk management, test canvas captures real conversations, and manual entry targets specific scenarios.
-* **Evaluation Methods Matter** – Different question types require different evaluation approaches. Factual questions need Exact/Keyword Match; open-ended questions benefit from General Quality or Similarity.
+* **Test Methods Matter** – Different question types require different evaluation approaches. Factual questions need Exact/Keyword Match; open-ended questions benefit from General Quality or Similarity.
 * **Test Set Strategy** – Creating test sets that are intentionally designed to pass or fail helps you understand how evaluations work before applying them to real quality measurement.
 
 **Lessons learned & troubleshooting tips:**
@@ -531,7 +531,7 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
 
 1. Select the **Always Fail Copilot Studio Guide Set** to view its results.
 
-1. Review the test case results. These adversarial questions test whether your agent properly refuses harmful or inappropriate requests using the **General Quality** evaluation method.
+1. Review the test case results. These adversarial questions test whether your agent properly refuses harmful or inappropriate requests using the **General Quality** test method.
 
 1. Select a test case and review:
    - The **actual response** (how the agent handled the adversarial question)
@@ -611,7 +611,7 @@ To maximize the impact of analytics and evaluations in Copilot Studio:
 * **Measure Continuously with Analytics** – Regular analytics review identifies issues early and guides improvement priorities. Use data, not assumptions, to optimize agent performance.
 * **Focus on High-Impact Improvements** – Prioritize high-volume, low-satisfaction topics over rarely-used ones. Improve what affects the most users first.
 * **Build Comprehensive Test Sets** – Use Quick Question Set for baseline coverage and manual entries for critical scenarios. Cover your agent's most important capabilities.
-* **Choose Evaluation Methods Wisely** – Match evaluation methods to question types. Factual questions need strict matching; open-ended questions need semantic evaluation.
+* **Choose Test Methods Wisely** – Match test methods to question types. Factual questions need strict matching; open-ended questions need semantic evaluation.
 * **Compare Runs to Verify Improvements** – Never assume a change helped. Run evaluations before and after changes and use the comparison feature to verify measurable improvement without regressions.
 * **Close the Feedback Loop** – Analytics identifies problems, evaluations verify fixes, and continuous iteration ensures your agent gets better over time.
 
