@@ -259,7 +259,7 @@ I want to build a teacher-style agent that helps users learn about Copilot, incl
 > [!TIP]  
 > From here, you will find that the conversational creation experience might differ from the below step-by-step instructions, as it's using generative AI and it is by nature non-deterministic. The core concepts remain the same, but the UI may change slightly. Just adjust to the questions and options presented to you.
 
-8. _If_ the proposed agent has a name other than Copilot Teacher input the following prompt to adjust the name and other details and press send:
+8. Input the following prompt to set the agent's name and tone, then press send. (This will rename the agent if Agent Builder proposed a different name, and apply the desired tone in either case.)
 
 ```
 The name of the agent should be Copilot Teacher. Your tone should be friendly, personal, and emphatic. You can make jokes, use subtle irony and emojis when appropriate.
@@ -271,11 +271,22 @@ The name of the agent should be Copilot Teacher. Your tone should be friendly, p
 It shouldn't answer questions that are not related to Microsoft 365 Copilot, Copilot Chat, or Copilot Studio. Always guide users towards the correct solution based on your knowledge.
 ```
 
-10. Agent Builder will attempt to identify knowledge sources but may attempt to use too specific of a URL for Learn. Input the following prompt to provide specific URLs:
+10. Agent Builder will attempt to identify knowledge sources but may attempt to use too specific of a URL for Learn. Send the following two prompts in sequence — entering both URLs in a single prompt has been observed to register only one of them, so split them up:
 
-```
-Use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.microsoft.com/en-us/microsoft-copilot-studio/ as knowledge sources
-```
+    First prompt:
+
+    ```
+    Use https://learn.microsoft.com/en-us/microsoft-365-copilot/ as a knowledge source
+    ```
+
+    Second prompt (after the first has been processed):
+
+    ```
+    Also add https://learn.microsoft.com/en-us/microsoft-copilot-studio/ as a knowledge source
+    ```
+
+    > [!TIP]
+    > After both prompts, open the **Configure** tab and confirm both URLs appear under the agent's knowledge sources before continuing.
 
 > [!TIP]  
 > You can set URLs with up to 2 levels of depth for grounding. E.g., https://www.domain.com/level1/level2. Just like folders in a file system. That way, all pages under that URL will be used as grounding sources. E.g., https://www.domain.com/level1/level2/page1.html, https://www.domain.com/level1/level2/page2.html, etc.
