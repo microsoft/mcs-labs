@@ -101,7 +101,7 @@ This lab teaches you how to architect sophisticated agent solutions that scale w
 
 ## Prerequisites
 
-* Completed [Build Intelligent Agents with Knowledge Sources, Tools, and Topics](../core-concepts-agent-knowledge-tools/README.md) lab - specifically the mailing list topic from Use Case #4, which is the foundation for the variables exercise
+* Completed [Build Intelligent Agents with Knowledge Sources, Tools, and Topics]({% link _labs/core-concepts-agent-knowledge-tools.md %}) lab - specifically the mailing list topic from Use Case #4, which is the foundation for the variables exercise
 * Access to Microsoft Copilot Studio with tool and channel configuration permissions
 * Access to Microsoft Teams (for Teams channel testing)
 * A document for child agent knowledge (e.g., a prompt engineering guide PDF)

@@ -45,7 +45,7 @@ Build an intelligent sales admin assistant that analyzes SharePoint data using c
 This lab builds on the Agent Builder in Microsoft 365 experience by integrating SharePoint documents and enabling advanced AI capabilities. You'll create a Sales Admin Assistant that can analyze Excel data, reference policy documents, generate charts through code interpretation, and create visual content.
 
 > [!NOTE]  
-> This lab assumes familiarity with the basic Agent Builder in Microsoft 365 concepts covered in the [web-based agent builder lab](../agent-builder-web/README.md).
+> This lab assumes familiarity with the basic Agent Builder in Microsoft 365 concepts covered in the [web-based agent builder lab]({% link _labs/agent-builder-web.md %}).
 
 ---
 
