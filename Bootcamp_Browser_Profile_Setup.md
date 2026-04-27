@@ -33,11 +33,11 @@ If you see your work identity anywhere, you are in the wrong profile. Switch to 
 
 ### Step 3: Get your training account and access the labs
 
-1. In your **new, unsigned-in profile**, go to [**Microsoft Copilot Studio Training**](https://microsoft.github.io/MCSWorkshopAgent/) and chat with the training agent to get an account.
+1. In your **new, unsigned-in profile**, go to [**Microsoft Copilot Studio Training**](https://aka.ms/MCSWorkshopAgent/) and chat with the training agent to get an account.
 2. Use the **code provided by your instructor** when prompted.
 3. The agent will provide you with training credentials (username and password).
 4. Go to [**portal.microsoft.com**](https://portal.microsoft.com) and log in using the credentials provided by the agent.
-5. Go to the [**Architecture Bootcamp — Microsoft Copilot Agents Labs**](https://microsoft.github.io/mcs-labs/events/bootcamp/) to access the labs. **Make sure you are in the labs specific to your bootcamp.**
+5. Go to the [**Architecture Bootcamp — Microsoft Copilot Agents Labs**](https://aka.ms/MCSWorkshopAgent/) to access the labs. **Make sure you are in the labs specific to your bootcamp.**
 
 ---
 
