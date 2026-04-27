@@ -354,8 +354,11 @@ Set up an autonomous agent with a recurring trigger that automatically activates
   1. In the authoring canvas: 
       - Select on **(+)** to add a node. 
       - Select **Variable management** and then **Set a variable value**.
-      - For **Set variable**, create a new variable, make it **Global**, and then name it `searchResults` (if you have an error saying the variable name already exists then you need to make it global first).
-      - In **To value** select `Topic.searchResults`
+      - For **Set variable**, create a new variable, make it **Global**, and then name it `globalSearchResults`.
+      - In **To value**, click the **fx** (formula) option and enter `Topic.searchResults`.
+
+      > [!TIP]
+      > Global and topic variables must use **different names** in Copilot Studio — using the same name across scopes triggers a *"variable name already exists"* validation error. Prefixing globals with `global` keeps them clearly distinct from their topic-input counterparts.
 
       ![Copilot Studio topic configuration showing trigger, variable setting, and input variable details panel](images/log-search-results.png)
   
@@ -385,7 +388,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 >   actions:
 >     - kind: SetVariable
 >       id: setVariable_J3g8bd
->       variable: Global.searchResults
+>       variable: Global.globalSearchResults
 >       value: =Topic.searchResults
 > 
 > inputType:
@@ -430,8 +433,8 @@ Set up an autonomous agent with a recurring trigger that automatically activates
   1. In the authoring canvas: 
       - Select on **(+)** to add a node. 
       - Select **Variable management** and then **Set a variable value**.
-      - For **Set variable**, create a new variable, make it **Global**, and name it `relevantNewsForOpportunities`. 
-      - In **To value** select `Topic.relevantNewsForOpportunities`. You need to select ... then select Formula, then type **Topic.relevantNewsForOpportunities**, then select Insert.
+      - For **Set variable**, create a new variable, make it **Global**, and name it `globalRelevantNewsForOpportunities`.
+      - In **To value**, click the **fx** (formula) option and enter `Topic.relevantNewsForOpportunities`.
 
   1. Select **Save**
 
@@ -461,7 +464,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 >   actions:
 >     - kind: SetVariable
 >       id: setVariable_5ZOEWA
->       variable: Global.relevantNewsForOpportunities
+>       variable: Global.globalRelevantNewsForOpportunities
 >       value: =Topic.relevantNewsForOpportunities
 > 
 > inputType:
@@ -492,7 +495,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
   2. Execute a separate knowledge search for news on each opportunity
   3. Log all search results for each opportunity using <Log Search Results>. Invoke <Log Search Results> only once.
   4. Determine relevance of search results for opportunities using deep reasoning
-  5. Use Log relevant news for opportunities to log your findings. The base input for Log relevant news for opportunities should be {Global.searchResults} with determined relevance added
+  5. Use Log relevant news for opportunities to log your findings. The base input for Log relevant news for opportunities should be {Global.globalSearchResults} with determined relevance added
   ```
 
   1 To increase orchestration accuracy, you will now replace names of topics, tools and variables with references. References can be added to instructions by typing **/** and selecting the appropriate object from the drop-down menu.
@@ -501,7 +504,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 1. Repeat the same action for the topic `<Log Search Results>`. Type **/** and in the drop-down menu, under **Topic**, select **Log Search Results** to insert a visual reference to the topic, replacing `<Log Search Results>`.
 
-  1. Insert a reference to one of the global variable you created earlier. Type **/** and in the drop-down menu and select **Power Fx**. In the formula box, type `Global.searchResults`. You may have to scroll to see the Power Fx option in the dropdown. A visual reference to the global variable should be added to the instructions.
+  1. Insert a reference to one of the global variable you created earlier. Type **/** and in the drop-down menu and select **Power Fx**. In the formula box, type `Global.globalSearchResults`. You may have to scroll to see the Power Fx option in the dropdown. A visual reference to the global variable should be added to the instructions.
 
   1. The instructions should now appear as follows:
 
@@ -705,7 +708,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 1. In the **Instructions** section, add the following steps:
 
     ```
-    6. Send an HTML report of the data in {Global.relevantNewsForOpportunities}. Use {Global.reportTemplate} as a template for the report, and <Send a summary report> to send it.
+    6. Send an HTML report of the data in {Global.globalRelevantNewsForOpportunities}. Use {Global.reportTemplate} as a template for the report, and <Send a summary report> to send it.
     ```
 
     > [!TIP]
@@ -713,7 +716,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 1. Highlight the tools and variables and use the `/` shortcut to insert references:
 
-   - For `Global.relevantNewsForOpportunities`, use **Power Fx** > `Global.relevantNewsForOpportunities`
+   - For `Global.globalRelevantNewsForOpportunities`, use **Power Fx** > `Global.globalRelevantNewsForOpportunities`
    - For `Global.reportTemplate`, use **Power Fx** > `Global.reportTemplate`
    - For `<Send a summary report>`, use **Tool** > *Send a summary report* (select it from the list)
 
