@@ -98,7 +98,7 @@ This lab teaches you how to use both analytics and the Agent Evaluation feature 
 
 ## Prerequisites
 
-* Completed [Build Intelligent Agents with Knowledge Sources, Tools, and Topics](../core-concepts-agent-knowledge-tools/README.md) and [Master Variables, Multi-Agent Architectures, and Channel Deployment](../core-concepts-variables-agents-channels/README.md) labs - you need a deployed agent with conversation history for meaningful analytics
+* Completed [Build Intelligent Agents with Knowledge Sources, Tools, and Topics]({% link _labs/core-concepts-agent-knowledge-tools.md %}) and [Master Variables, Multi-Agent Architectures, and Channel Deployment]({% link _labs/core-concepts-variables-agents-channels.md %}) labs - you need a deployed agent with conversation history for meaningful analytics
 * Access to Microsoft Copilot Studio with analytics and evaluation permissions
 * An agent that has been **published** and used through a **deployed channel** (e.g., Microsoft Teams or another Copilot Studio channel) — only those conversations contribute to analytics data
 
