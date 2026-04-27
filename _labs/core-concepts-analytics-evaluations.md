@@ -100,7 +100,10 @@ This lab teaches you how to use both analytics and the Agent Evaluation feature 
 
 * Completed [Build Intelligent Agents with Knowledge Sources, Tools, and Topics](../core-concepts-agent-knowledge-tools/README.md) and [Master Variables, Multi-Agent Architectures, and Channel Deployment](../core-concepts-variables-agents-channels/README.md) labs - you need a deployed agent with conversation history for meaningful analytics
 * Access to Microsoft Copilot Studio with analytics and evaluation permissions
-* An agent that has been deployed and used (even test conversations count for analytics data)
+* An agent that has been **published** and used through a **deployed channel** (e.g., Microsoft Teams or another Copilot Studio channel) — only those conversations contribute to analytics data
+
+> [!NOTE]
+> Test-canvas conversations may not appear in the analytics view. Before starting Use Case #1, publish your agent and have at least one real conversation through a deployed channel so analytics has data to render.
 
 ---
 
@@ -426,11 +429,10 @@ Create evaluation test sets using four different methods and understand how each
 
 1. Select **Evaluate** in the top of the test panel. This opens the evaluation tab if it wasn't already open.
 
-1. Select **New evaluation**.
+    > [!NOTE]
+    > Selecting **Evaluate** now jumps directly to the new evaluation set / test set view — earlier versions of the lab had additional intermediate steps (*"Select New evaluation"* then *"In More ways to start, select Use your test chat conversation"*) that no longer apply in the current Copilot Studio UI. Your test-canvas conversation is captured automatically as the seed for the new test set.
 
-1. In the **More ways to start** section select **Use your test chat conversation**. This captures all the questions and agent responses from your test canvas session as a new test set, using the agent's actual responses as the expected responses.
-
-21. Change the test set name to **Always Pass Copilot Studio Guide Set**
+1. Change the test set name to **Always Pass Copilot Studio Guide Set**
 
     > [!NOTE]
     > Since the expected responses are captured directly from the agent's own answers, this test set should pass when evaluated - the agent should give the same (or very similar) answers when asked again.
