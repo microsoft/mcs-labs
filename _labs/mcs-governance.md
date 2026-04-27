@@ -309,6 +309,27 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Search for and select `Bootcamp Yellow`.
 
+#### Create a Solution
+
+1. In the left navigation, select **"..."** and then select **Solutions**.
+
+1. Select **New solution** in the top navigation.
+
+1. Set the **Display name** to your username (e.g., `user01`).
+
+1. Set the **Name** to your username as well to ensure it is unique in this shared environment.
+
+    > [!NOTE]
+    > Solution names must be unique within an environment. Since this is a shared environment, using your username ensures there are no naming conflicts with other participants. The same `<username>` value is reused in each zone's environment because Solutions are scoped per environment.
+
+1. Set the **Publisher** to **CAT** or the **Default Publisher** — either is fine for this lab.
+
+1. Select **Create**.
+
+#### Create the Yellow Zone Agent
+
+1. Select **Home** in the left navigation to return to the main page.
+
 1. In the **"What would you like to build?"** pane, copy and paste the following text:
 
     ```text
@@ -317,7 +338,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Before selecting the blue arrow, select the **Settings** wheel icon again.
 
-1. Double-check that the correct **Solution** is selected.
+1. In the Settings pane, select the **Solution** you just created (named with your username).
 
 1. Give your agent a schema name similar to the Green zone but with `yellow` in it.
 
@@ -454,11 +475,32 @@ Create a "Copilot Studio Advisor" agent in the Red zone with full public website
 
 ### Step-by-step instructions
 
-#### Create the Red Zone Agent
+#### Switch to the Red Zone Environment
 
 1. Select the **Environment selector** in the top-right corner.
 
 1. Search for and select `Bootcamp Red`.
+
+#### Create a Solution
+
+1. In the left navigation, select **"..."** and then select **Solutions**.
+
+1. Select **New solution** in the top navigation.
+
+1. Set the **Display name** to your username (e.g., `user01`).
+
+1. Set the **Name** to your username as well to ensure it is unique in this shared environment.
+
+    > [!NOTE]
+    > Solution names must be unique within an environment. Since this is a shared environment, using your username ensures there are no naming conflicts with other participants. The same `<username>` value is reused in each zone's environment because Solutions are scoped per environment.
+
+1. Set the **Publisher** to **CAT** or the **Default Publisher** — either is fine for this lab.
+
+1. Select **Create**.
+
+#### Create the Red Zone Agent
+
+1. Select **Home** in the left navigation to return to the main page.
 
 1. In the **"What would you like to build?"** pane, copy and paste the following text:
 
@@ -472,7 +514,7 @@ Create a "Copilot Studio Advisor" agent in the Red zone with full public website
 
 1. Select the **Settings** wheel icon.
 
-1. Double-check your **Solution**.
+1. In the Settings pane, select the **Solution** you just created (named with your username).
 
 1. Give your agent a schema name with `red` in it, following the same pattern as before.
 

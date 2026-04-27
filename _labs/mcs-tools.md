@@ -364,10 +364,10 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Scroll to the bottom of the **Generative AI** list of settings.
 
-1. Turn off **Use general knowledge**.
+1. Turn off **Allow ungrounded responses**.
 
     > [!NOTE]
-    > Disabling general knowledge make sure that only your custom connector API provides answers, not the underlying language model.
+    > Disabling **Allow ungrounded responses** ensures that only your custom connector API provides answers, not the underlying language model. This setting was previously labelled **Use general knowledge** in older Copilot Studio UI.
 
 1. Select **Save**.
 
@@ -406,7 +406,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 **Lessons learned & troubleshooting tips:**
 
 * New custom connectors may take a few minutes to sync to Copilot Studio - refresh your browser if the connector doesn't appear immediately
-* Disabling general knowledge forces the agent to rely solely on your tools, which is useful for validating that the connector works correctly
+* Disabling **Allow ungrounded responses** forces the agent to rely solely on your tools, which is useful for validating that the connector works correctly
 * Always define response schemas with descriptive titles and descriptions so the agent can present results meaningfully
 
 ---
@@ -904,7 +904,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 * Use detailed prompt instructions to define both what the agent should and should not do
 * Test with boundary cases to make sure the agent stays within its defined scope
 * GPT-4.1 mini is typically the most cost-effective choice for simple conversational scenarios
-* Disabling general knowledge helps validate that your prompt tool is handling responses correctly
+* Disabling **Allow ungrounded responses** helps validate that your prompt tool is handling responses correctly
 
 ---
 
@@ -1060,7 +1060,7 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 1. **Save** the instructions.
 
-1. Go to the agent's **Settings**, and in the Knowledge section **disable** the **Use general knowledge** option to ground agent responses only to data retrieved from CUA.
+1. Go to the agent's **Settings**, and in the Knowledge section **disable** the **Allow ungrounded responses** option to ground agent responses only to data retrieved from CUA.
 
 1. **Save** the settings.
 
