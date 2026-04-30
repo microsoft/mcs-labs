@@ -3,10 +3,68 @@
 (function () {
   'use strict';
 
+  // --- Discoverability: pulse + nudge + account CTA ---
+  // First-visit-per-session affordances that draw attention to the assistant
+  // without nagging returning visitors. State is held in sessionStorage so
+  // a fresh tab gets the introduction once, and only once.
+  var TAG_PULSE_KEY = 'mcs-labs.assistant-pulse.v1';
+  var NUDGE_KEY     = 'mcs-labs.assistant-nudge.v1';
+
+  // Pulse the chat tag once per session (purely visual; no DOM consequences).
+  document.addEventListener('DOMContentLoaded', function () {
+    try {
+      if (sessionStorage.getItem(TAG_PULSE_KEY)) return;
+      var t = document.getElementById('wcTag');
+      if (!t) return;
+      t.classList.add('wc-tag--pulse');
+      sessionStorage.setItem(TAG_PULSE_KEY, '1');
+    } catch (e) { /* sessionStorage disabled — quietly skip */ }
+  });
+
+  // Reveal + wire up the nudge balloon once per session. Dismissed via × click,
+  // body click (which also opens the chat), or sessionStorage flag from a
+  // prior visit in the same tab.
+  document.addEventListener('DOMContentLoaded', function () {
+    var nudge = document.getElementById('wcNudge');
+    if (!nudge) return;
+    try {
+      if (sessionStorage.getItem(NUDGE_KEY)) return;
+    } catch (e) { /* fall through and show */ }
+    var nudgeBody  = document.getElementById('wcNudgeBody');
+    var nudgeClose = document.getElementById('wcNudgeClose');
+    nudge.removeAttribute('hidden');
+    function dismiss() {
+      nudge.classList.add('wc-nudge--dismissed');
+      try { sessionStorage.setItem(NUDGE_KEY, '1'); } catch (e) {}
+    }
+    if (nudgeClose) nudgeClose.addEventListener('click', function (e) {
+      e.stopPropagation();
+      dismiss();
+    });
+    if (nudgeBody) nudgeBody.addEventListener('click', function () {
+      dismiss();
+      var t = document.getElementById('wcTag');
+      if (t) t.click();
+    });
+  });
+
+  // Account-request CTA buttons (masthead pill + home-hero button). Clicking
+  // either just opens the chat panel — the bot greets normally and the user
+  // types their own request.
+  document.addEventListener('DOMContentLoaded', function () {
+    var ctas = document.querySelectorAll('[data-wc-account-cta]');
+    Array.prototype.forEach.call(ctas, function (btn) {
+      btn.addEventListener('click', function () {
+        var t = document.getElementById('wcTag');
+        if (t) t.click();
+      });
+    });
+  });
+
   var TOKEN_ENDPOINT = {{ site.data.webchat.tokenEndpoint | jsonify }};
 
   // Move elements to document.body to escape ancestor stacking contexts
-  ['wcTag', 'wcOverlay', 'wcPanel'].forEach(function (id) {
+  ['wcTag', 'wcOverlay', 'wcPanel', 'wcNudge'].forEach(function (id) {
     var el = document.getElementById(id);
     if (el && el.parentElement !== document.body) document.body.appendChild(el);
   });

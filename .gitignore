@@ -5,6 +5,7 @@ _site/
 
 # Claude Code
 .claude/
+.superpowers/
 nul
 
 ## Ignore Visual Studio temporary files, build results, and

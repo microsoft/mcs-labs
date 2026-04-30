@@ -201,6 +201,15 @@ header:
   <div class="home-hero-actions">
     <a href="{{ '/events/' | relative_url }}" class="btn-primary">Browse all events</a>
     <a href="{{ '/labs/' | relative_url }}" class="btn-outline">Browse all labs</a>
+    <button type="button" class="wc-account-cta wc-account-cta--hero" data-wc-account-cta>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+        <circle cx="12" cy="7" r="4"/>
+        <path d="M19 8v6"/>
+        <path d="M22 11h-6"/>
+      </svg>
+      Request an account
+    </button>
   </div>
   <ul class="home-stats">
     <li><strong>{{ all_labs.size }}</strong><span>Labs</span></li>
