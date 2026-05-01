@@ -170,6 +170,8 @@
       btn.addEventListener('click', function () {
         var t = action.type || 'imBack';
         if (t === 'openUrl' && action.value) {
+          // Only allow http(s) URLs — block javascript: and other schemes.
+          if (!/^https?:\/\//i.test(action.value)) return;
           // Open in a new tab; keep the buttons available so the user can
           // pick a different one if they came back without picking.
           window.open(action.value, '_blank', 'noopener,noreferrer');
@@ -221,9 +223,9 @@
   // --- Focus trap ---
 
   function getFocusableElements() {
-    return panel.querySelectorAll(
+    return Array.from(panel.querySelectorAll(
       'button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])'
-    );
+    )).filter(function (el) { return el.offsetParent !== null; });
   }
 
   function handleFocusTrap(e) {
@@ -473,7 +475,8 @@
                 // Quick replies: render our own buttons from
                 // activity.suggestedActions. A bot message without
                 // suggestedActions clears any stale ones from a prior turn.
-                if (activity.type === 'message') {
+                if (activity.type === 'message' &&
+                    !(replayedActivityIds && replayedActivityIds.has(activity.id))) {
                   var sa = activity.suggestedActions;
                   if (sa && Array.isArray(sa.actions) && sa.actions.length) {
                     renderQuickReplies(sa.actions);
