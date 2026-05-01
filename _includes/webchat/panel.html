@@ -23,6 +23,22 @@
   <span class="wc-tag-label">Lab Assistant</span>
 </button>
 
+<!-- Nudge balloon: a one-time-per-session speech bubble next to the chat tag,
+     introducing what the assistant can help with. The script.html IIFE
+     reveals it (removes [hidden]) on first session-load and dismisses it on
+     × click, body click, or sessionStorage flag (set after dismissal). -->
+<div class="wc-nudge" id="wcNudge" role="region" aria-label="Lab Assistant suggestion" hidden>
+  <button type="button" class="wc-nudge-body" id="wcNudgeBody" aria-label="Open Lab Assistant">
+    <span class="wc-nudge-emoji" aria-hidden="true">👋</span>
+    <span class="wc-nudge-text">Hi! I can help you get your account, find labs, or troubleshoot setup.</span>
+  </button>
+  <button type="button" class="wc-nudge-close" id="wcNudgeClose" aria-label="Dismiss suggestion">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+      <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+    </svg>
+  </button>
+</div>
+
 <!-- Overlay (script strips this from the DOM on init; see script.html:176) -->
 <div class="wc-overlay" id="wcOverlay" aria-hidden="true"></div>
 

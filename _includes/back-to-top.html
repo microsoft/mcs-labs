@@ -1,0 +1,36 @@
+<!-- Back-to-top button: appears once the user has scrolled past a threshold,
+     scrolls smoothly to the top on click. Hidden by default via the `hidden`
+     attribute — the IIFE toggles it based on scroll position. -->
+<button type="button" class="back-to-top" id="backToTop" aria-label="Back to top of page" hidden>
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
+    <line x1="12" y1="19" x2="12" y2="5"/>
+    <polyline points="5 12 12 5 19 12"/>
+  </svg>
+</button>
+<script>
+(function () {
+  var btn = document.getElementById('backToTop');
+  if (!btn) return;
+  var THRESHOLD = 400; // px scrolled before showing
+  var ticking = false;
+
+  function update() {
+    if (window.scrollY > THRESHOLD) btn.removeAttribute('hidden');
+    else btn.setAttribute('hidden', '');
+    ticking = false;
+  }
+  function onScroll() {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', onScroll, { passive: true });
+  btn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Initial state in case the page loaded already-scrolled (e.g. via #anchor).
+  update();
+})();
+</script>

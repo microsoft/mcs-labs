@@ -523,6 +523,14 @@ p > code, li > code, td > code {
     transition: padding-right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
+  // The body padding above also squeezes the masthead, which makes the
+  // greedy-nav collapse its links into the "More" overflow menu. Cancel it
+  // out for the masthead only — content below still shifts as intended.
+  html[data-panel-open] body > .masthead {
+    margin-right: -480px;
+    transition: margin-right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
   // Collapse the TOC column while the panel is open — at viewport 1024 px
   // minus the 480 px panel, the content column would squeeze too narrow.
   // The Lab Assistant doubles as navigation; re-show the TOC on ≥1440 px.
@@ -555,10 +563,11 @@ p > code, li > code, td > code {
   display: block;
   margin: 0 0 1.5em;
   padding: 0;
-  background: var(--color-bg-elevated);
-  border: 1px solid var(--color-border-subtle);
+  background: var(--color-accent);
+  border: 1px solid var(--color-accent-active);
   border-radius: 10px;
   overflow: hidden;
+  box-shadow: 0 4px 14px var(--color-accent-tint-3);
 
   &[hidden] { display: none; }
 }
@@ -578,14 +587,14 @@ p > code, li > code, td > code {
   text-decoration: none;
   padding: 0.35em 0.6em;
   border-radius: 6px;
-  color: inherit;
+  color: var(--color-accent-on);
   min-height: 44px;
   justify-content: center;
 
   &:hover,
   &:focus-visible {
-    background: var(--color-bg);
-    color: var(--color-accent);
+    background: color-mix(in srgb, var(--color-accent-on) 15%, transparent);
+    color: var(--color-accent-on);
   }
 
   &:focus-visible {
@@ -599,28 +608,28 @@ p > code, li > code, td > code {
   font-weight: 700;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--color-fg-muted);
+  color: color-mix(in srgb, var(--color-accent-on) 85%, transparent);
   line-height: 1;
 }
 
 .event-rail-event-name {
   font-size: 0.88em;
   font-weight: 600;
-  color: var(--color-fg-strong);
+  color: var(--color-accent-on);
   line-height: 1.2;
 }
 
 .event-rail-event:hover .event-rail-event-name,
 .event-rail-event:focus-visible .event-rail-event-name {
-  color: var(--color-accent);
+  color: var(--color-accent-on);
 }
 
 .event-rail-position {
   font-size: 0.78em;
   font-weight: 600;
-  color: var(--color-fg-muted);
+  color: var(--color-accent-on);
   padding: 0.25em 0.7em;
-  background: var(--color-bg);
+  background: color-mix(in srgb, var(--color-accent-on) 22%, transparent);
   border-radius: 100px;
   white-space: nowrap;
 }
@@ -643,18 +652,18 @@ p > code, li > code, td > code {
   border: 1px solid transparent;
   border-radius: 8px;
   background: transparent;
-  color: var(--color-fg-muted);
+  color: var(--color-accent-on);
   font-family: inherit;
   font-size: 0.82em;
-  font-weight: 500;
+  font-weight: 700;
   cursor: pointer;
   transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 
   &:hover:not([disabled]),
   &:focus-visible:not([disabled]) {
-    background: var(--color-bg);
-    color: var(--color-fg-strong);
-    border-color: var(--color-border);
+    background: color-mix(in srgb, var(--color-accent-on) 15%, transparent);
+    color: var(--color-accent-on);
+    border-color: transparent;
   }
 
   &:focus-visible {
@@ -662,21 +671,35 @@ p > code, li > code, td > code {
     box-shadow: var(--focus-ring);
   }
 
+  // Disabled buttons stay in the accent-on family — drop saturation but
+  // keep the hue so they read as part of the same surface, not a foreign
+  // muted-gray fallback.
   &[disabled] {
-    opacity: 0.4;
+    color: color-mix(in srgb, var(--color-accent-on) 55%, transparent);
     cursor: not-allowed;
   }
 
   &[aria-expanded="true"] {
-    background: var(--color-accent-tint);
-    color: var(--color-accent);
-    border-color: var(--color-accent-tint-2);
+    background: color-mix(in srgb, var(--color-accent-on) 22%, transparent);
+    color: var(--color-accent-on);
+    border-color: transparent;
 
     svg { transform: rotate(180deg); }
   }
 
-  svg { transition: transform 0.2s ease; }
+  // Bump SVG chevron weight — at 2px on light-blue (dark-theme accent) the
+  // strokes read as faint compared to the text labels.
+  svg {
+    stroke-width: 2.5;
+    transition: transform 0.2s ease;
+  }
 }
+
+// The exit-event-context (X) button is removed via CSS — event navigation
+// is sticky for the duration of the lab path. The button stays in the DOM
+// so the JS handler reference (`document.getElementById('event-rail-exit')`)
+// doesn't break.
+.event-rail-exit { display: none; }
 
 .event-rail-btn-label {
   display: inline;
@@ -1121,4 +1144,65 @@ a:focus-visible {
   outline: 2px solid var(--color-accent);
   outline-offset: 2px;
   border-radius: 2px;
+}
+
+// ---------------------------------------------------------------------------
+// Back-to-top button (lab pages only)
+// ---------------------------------------------------------------------------
+// Floats at the bottom-right corner. Appears when scrolled past 400 px and
+// scrolls smoothly to the top on click. Theme-aware via accent tokens.
+
+.back-to-top {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: var(--color-accent-on);
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 99988;
+  transition: opacity 0.25s ease, transform 0.25s ease, background 0.15s ease;
+
+  // Use [hidden] to hide while still allowing transitions; UA `display: none`
+  // would skip the fade. We override UA hiding via the rule below.
+  &[hidden] {
+    display: flex;
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(8px);
+  }
+
+  &:hover { background: var(--color-accent-hover); }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25), var(--focus-ring);
+  }
+
+  svg { width: 20px; height: 20px; }
+}
+
+// Mobile: tighten the inset slightly and bump the size for an easier tap.
+@media (max-width: 640px) {
+  .back-to-top {
+    bottom: 16px;
+    right: 16px;
+    width: 48px;
+    height: 48px;
+  }
+}
+
+// Hide while the chat panel is open — at ≥1024 px the panel covers the
+// right 480 px (where the button lives); below that, the panel covers the
+// whole viewport. Cleaner UX than trying to shift the button around.
+html[data-panel-open] .back-to-top {
+  opacity: 0 !important;
+  pointer-events: none;
 }

@@ -6,6 +6,34 @@ layout: single
 /* Lab layout: hide default title and meta — we render our own */
 #page-title, .page__title { display: none !important; }
 .page__meta { display: none !important; }
+
+/* Lab markdown files repeat the title + description right after the front
+   matter — between two `---` rules — which produces a leading
+   <hr><h1><p><hr> quartet inside .page__content. The .lab-header above
+   already renders page.title + page.description, so this prefix is
+   redundant. Hide all four elements when the pattern matches. */
+.page__content > hr:first-of-type:has(+ h1 + p + hr),
+.page__content > hr:first-of-type:has(+ h1 + p + hr) + h1,
+.page__content > hr:first-of-type:has(+ h1 + p + hr) + h1 + p,
+.page__content > hr:first-of-type:has(+ h1 + p + hr) + h1 + p + hr {
+  display: none !important;
+}
+
+/* Hide the inline "## Table of Contents" section in lab markdown — the right
+   sidebar's "On this page" nav already provides this. Matches the heading,
+   the list immediately following, and the trailing <hr> separator. */
+.page__content > h2#table-of-contents,
+.page__content > h2#table-of-contents + ul,
+.page__content > h2#table-of-contents + ul + hr {
+  display: none !important;
+}
+
+/* The minimal-mistakes "On this page" sidebar is auto-built from heading IDs,
+   so it surfaces a "Table of Contents" entry even though the inline heading
+   is CSS-hidden above. Hide that entry too. */
+.toc__menu li:has(> a[href="#table-of-contents"]) {
+  display: none !important;
+}
 </style>
 
 {%- comment -%}
@@ -44,3 +72,5 @@ layout: single
 {% include event-nav/nav-pair.html %}
 
 {% include event-nav/script.html %}
+
+{% include back-to-top.html %}
