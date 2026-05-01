@@ -20,26 +20,26 @@
   gap: 6px;
   writing-mode: vertical-lr;
   text-orientation: mixed;
-  background: var(--color-accent, #0078d4);
-  color: var(--color-accent-on, #ffffff);
+  background: var(--color-accent);
+  color: var(--color-accent-on);
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   font-size: 0.78rem;
   font-weight: 700;
   letter-spacing: 0.03em;
   padding: 18px 12px;
   border-radius: 10px 0 0 10px;
-  border: 1px solid var(--color-accent-active, #005a9e);
+  border: 1px solid var(--color-accent-active);
   border-right: none;
   cursor: pointer;
-  box-shadow: -3px 0 16px rgba(0, 120, 212, 0.25);
+  box-shadow: -3px 0 16px var(--color-accent-tint-3);
   transition: background 0.2s, color 0.2s, box-shadow 0.2s, right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
 }
 
 .wc-tag:hover {
-  background: var(--color-accent-hover, #106ebe);
-  color: var(--color-accent-on, #ffffff);
-  box-shadow: -3px 0 18px rgba(0, 120, 212, 0.35);
+  background: var(--color-accent-hover);
+  color: var(--color-accent-on);
+  box-shadow: -3px 0 18px var(--color-accent-tint-5);
 }
 
 /* One-time-per-session pulse on first appearance (gated by sessionStorage in
@@ -48,9 +48,9 @@
   animation: wc-tag-pulse 2.4s ease-out 1;
 }
 @keyframes wc-tag-pulse {
-  0%   { box-shadow: -3px 0 16px rgba(0, 120, 212, 0.25), 0 0 0 0 rgba(0, 120, 212, 0.45); }
-  60%  { box-shadow: -3px 0 16px rgba(0, 120, 212, 0.25), 0 0 0 14px rgba(0, 120, 212, 0); }
-  100% { box-shadow: -3px 0 16px rgba(0, 120, 212, 0.25), 0 0 0 0 rgba(0, 120, 212, 0); }
+  0%   { box-shadow: -3px 0 16px var(--color-accent-tint-3), 0 0 0 0 var(--color-accent-tint-5); }
+  60%  { box-shadow: -3px 0 16px var(--color-accent-tint-3), 0 0 0 14px transparent; }
+  100% { box-shadow: -3px 0 16px var(--color-accent-tint-3), 0 0 0 0 transparent; }
 }
 
 .wc-tag:focus-visible {
@@ -718,11 +718,11 @@ textarea.wc-sendbox-input {
   align-items: stretch;
   gap: 0;
   padding: 0;
-  background: var(--color-accent, #0078d4);
-  color: var(--color-accent-on, #ffffff);
-  border: 1px solid var(--color-accent-active, #005a9e);
+  background: var(--color-accent);
+  color: var(--color-accent-on);
+  border: 1px solid var(--color-accent-active);
   border-radius: 14px;
-  box-shadow: 0 12px 36px rgba(0, 120, 212, 0.35);
+  box-shadow: 0 12px 36px var(--color-accent-tint-5);
   font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   animation: wc-nudge-in 0.45s ease-out 0.6s both;
 }
@@ -736,9 +736,9 @@ textarea.wc-sendbox-input {
   transform: translateY(-50%) rotate(45deg);
   width: 12px;
   height: 12px;
-  background: var(--color-accent, #0078d4);
-  border-right: 1px solid var(--color-accent-active, #005a9e);
-  border-top: 1px solid var(--color-accent-active, #005a9e);
+  background: var(--color-accent);
+  border-right: 1px solid var(--color-accent-active);
+  border-top: 1px solid var(--color-accent-active);
 }
 @keyframes wc-nudge-in {
   from { opacity: 0; transform: translateY(-50%) translateX(8px); }
@@ -758,10 +758,10 @@ textarea.wc-sendbox-input {
   flex: 1;
   border-radius: 13px 0 0 13px;
 }
-.wc-nudge-body:hover { background: var(--color-accent-hover, #106ebe); }
+.wc-nudge-body:hover { background: var(--color-accent-hover); }
 .wc-nudge-body:focus-visible {
   outline: none;
-  box-shadow: var(--focus-ring, 0 0 0 2px #fff, 0 0 0 4px #0078d4);
+  box-shadow: var(--focus-ring);
 }
 .wc-nudge-emoji { font-size: 22px; flex-shrink: 0; }
 .wc-nudge-text { font-size: 0.95rem; line-height: 1.4; font-weight: 500; }
@@ -778,8 +778,8 @@ textarea.wc-sendbox-input {
   border-radius: 0 13px 13px 0;
 }
 .wc-nudge-close:hover {
-  background: var(--color-accent-hover, #106ebe);
-  color: var(--color-accent-on, #ffffff);
+  background: var(--color-accent-hover);
+  color: var(--color-accent-on);
 }
 .wc-nudge-close svg { width: 16px; height: 16px; flex-shrink: 0; }
 .wc-nudge.wc-nudge--dismissed { display: none !important; }
@@ -825,14 +825,14 @@ textarea.wc-sendbox-input {
   font-size: 0.88em;
   padding: 0.6em 1.4em;
   border-radius: 6px;
-  background: var(--color-success, #0e700e);
-  color: #ffffff;
-  box-shadow: 0 4px 14px rgba(14, 112, 14, 0.3);
+  background: var(--color-success);
+  color: var(--color-on-success);
+  box-shadow: 0 4px 14px color-mix(in srgb, var(--color-success) 30%, transparent);
 }
 .wc-account-cta--hero:hover {
-  background: var(--color-success-hover, #095a09);
+  background: var(--color-success-hover);
   transform: translateY(-1px);
-  box-shadow: 0 6px 18px rgba(14, 112, 14, 0.4);
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--color-success) 40%, transparent);
 }
 .wc-account-cta--hero svg { width: 16px; height: 16px; flex-shrink: 0; }
 
@@ -842,13 +842,13 @@ textarea.wc-sendbox-input {
   margin-right: 8px;
   padding: 6px 12px;
   border-radius: 999px;
-  background: var(--color-accent, #0078d4);
-  color: var(--color-accent-on, #ffffff);
+  background: var(--color-accent);
+  color: var(--color-accent-on);
   font-size: 0.78rem;
 }
 .wc-account-cta--masthead:hover {
-  background: var(--color-accent-hover, #106ebe);
-  color: var(--color-accent-on, #ffffff);
+  background: var(--color-accent-hover);
+  color: var(--color-accent-on);
 }
 .wc-account-cta--masthead svg { width: 14px; height: 14px; flex-shrink: 0; }
 
