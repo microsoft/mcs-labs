@@ -46,6 +46,12 @@
       var t = document.getElementById('wcTag');
       if (t) t.click();
     });
+    // Discovering the assistant via the tag itself (or any code path that
+    // triggers the tag click — including the account CTAs) is equivalent
+    // to dismissing the nudge: the user has now found the assistant, so
+    // the introductory tip is no longer useful.
+    var tag = document.getElementById('wcTag');
+    if (tag) tag.addEventListener('click', dismiss);
   });
 
   // Account-request CTA buttons (masthead pill + home-hero button). Clicking
