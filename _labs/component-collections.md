@@ -2,7 +2,7 @@
 layout: lab
 title: "Using Component Collections in Copilot Studio"
 order: 260
-duration: 30
+duration: 45
 difficulty: 300
 lab_type: local
 section: intermediate_labs

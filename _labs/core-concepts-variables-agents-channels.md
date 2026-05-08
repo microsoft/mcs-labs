@@ -2,7 +2,7 @@
 layout: lab
 title: "Master Variables, Multi-Agent Architectures, and Channel Deployment"
 order: 175
-duration: 30
+duration: 45
 difficulty: 200
 lab_type: local
 section: core_learning_path

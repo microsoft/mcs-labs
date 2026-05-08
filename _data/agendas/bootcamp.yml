@@ -1,12 +1,11 @@
 event_id: bootcamp
 
-# Architecture Bootcamp — 3-day agenda. "module" items are instructor-led
+# Architecture Bootcamp — V2.1 — 3-day agenda. "module" items are instructor-led
 # modules (rendered as type: session); "day" rows act as headers.
 # Lab rows intentionally omit `duration:` so the agenda pill falls back to
 # the lab's own declared duration in _labs/<slug>.md. Time is the session
 # start slot; the lab's real duration is what we show next to it.
-# Source: PR #230 (dewain/air-theme-enhancements), updated to reflect real
-# lab durations from the _labs/ collection.
+# Source: V2.1 content update on branch dewain/bootcamp-v2.1-content.
 
 schedule:
   # --- Day 1 ------------------------------------------------------------
@@ -24,24 +23,24 @@ schedule:
     duration: 15
 
   - type: session
-    title: "Agent Builder"
+    title: "Module 1 - M365 Agent Builder"
     time: "09:30"
     duration: 30
     slides: "/presentations/01.%20Agent%20Builder_CB.pptx"
 
   - type: break
-    title: "Coffee break / Q+A"
+    title: "Coffee break / Q&A"
     time: "10:00"
     duration: 15
 
   - type: lab
     slug: agent-builder-m365
     label: "Lab 1"
-    title: "Agent Builder"
+    title: "M365 Agent Builder"
     time: "10:00"
 
   - type: session
-    title: "Copilot Studio Core Concepts - Part 1"
+    title: "Module 2 - Copilot Studio Core Concepts - Part 1"
     time: "10:30"
     duration: 30
     slides: "/presentations/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
@@ -58,12 +57,12 @@ schedule:
     duration: 60
 
   - type: break
-    title: "Q+A"
+    title: "Quiz Time / Review / AMA / Flex"
     time: "12:45"
     duration: 15
 
   - type: session
-    title: "Copilot Studio Core Concepts - Part 2"
+    title: "Module 3 - Copilot Studio Core Concepts - Part 2"
     time: "13:00"
     duration: 30
     slides: "/presentations/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
@@ -75,7 +74,7 @@ schedule:
     time: "13:30"
 
   - type: session
-    title: "Copilot Studio Core Concepts - Part 3"
+    title: "Module 4 - Copilot Studio Core Concepts - Part 3"
     time: "14:15"
     duration: 30
     slides: "/presentations/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
@@ -92,13 +91,13 @@ schedule:
     time: "15:00"
 
   - type: session
-    title: "Licensing"
+    title: "Module 5 - Azure Integration /w Demo"
     time: "15:30"
     duration: 30
-    slides: "/presentations/05.%20Licensing_CB.pptx"
+    slides: "/presentations/05.%20CopilotStudioAzureBetterTogether_CB.pptx"
 
   - type: break
-    title: "Open Q+A"
+    title: "Open AMA"
     time: "16:00"
     duration: 30
 
@@ -107,7 +106,7 @@ schedule:
     title: "Day 2"
 
   - type: break
-    title: "Re-Welcome / Re-cap"
+    title: "Re-Welcome / Re-cap / Quiz"
     time: "09:00"
     duration: 15
 
@@ -140,69 +139,65 @@ schedule:
     title: "Component Collections"
     time: "11:15"
 
-  - type: session
-    title: "Module 8 - Orchestration and Dynamic Chaining Concepts w/ Demos"
-    time: "11:45"
-    duration: 30
-    slides: "/presentations/08.%20Orchestration%20and%20Dynamic%20Chaining%20Concepts_CB.pptx"
-
   - type: break
     title: "Lunch break"
-    time: "12:15"
+    time: "12:00"
     duration: 60
 
-  - type: break
-    title: "Quiz Time"
-    time: "13:15"
-    duration: 15
+  - type: session
+    title: "Module 8 - Orchestration and Dynamic Chaining Concepts w/ Demos"
+    time: "13:00"
+    duration: 45
+    slides: "/presentations/08.%20Orchestration%20and%20Dynamic%20Chaining%20Concepts_CB.pptx"
+
+  - type: lab
+    slug: mcs-orchestration
+    label: "Lab 7"
+    title: "Orchestration with Copilot Studio"
+    time: "13:45"
 
   - type: session
     title: "Module 9 - Tools"
-    time: "13:15"
-    duration: 90
+    time: "14:30"
+    duration: 45
     slides: "/presentations/09.%20Copilot%20Studio%20Tools%20Overview%20RRS_CB.pptx"
 
   - type: break
     title: "Coffee break / Q&A"
-    time: "14:45"
+    time: "15:15"
     duration: 15
 
   - type: lab
     slug: mcs-tools
-    label: "Lab 7"
+    label: "Lab 8"
     title: "Tools"
-    time: "15:00"
+    time: "15:30"
 
   - type: break
-    title: "Open Q+A"
-    time: "16:00"
-    duration: 30
+    title: "Networking HH"
+    time: "16:30"
+    duration: 60
 
   # --- Day 3 ------------------------------------------------------------
   - type: day
     title: "Day 3"
 
   - type: break
-    title: "Re-Welcome / Re-cap"
+    title: "Re-Welcome / Re-cap / Quiz"
     time: "09:00"
     duration: 15
 
   - type: session
-    title: "Module 10 - Additional Resources"
-    time: "09:15"
-    duration: 15
-
-  - type: session
     title: "Module 11 - Governance"
-    time: "09:30"
+    time: "09:15"
     duration: 30
     slides: "/presentations/11.%20Governance_CB.pptx"
 
   - type: lab
     slug: mcs-governance
-    label: "Lab 8"
+    label: "Lab 9"
     title: "Governance - DLP"
-    time: "10:00"
+    time: "09:45"
 
   - type: break
     title: "Coffee break / Q&A"
@@ -210,20 +205,14 @@ schedule:
     duration: 15
 
   - type: session
-    title: "Module 12 - SDK /w Demo"
-    time: "10:45"
-    duration: 15
-    slides: "/presentations/12.%20SDK_CB.pptx"
-
-  - type: session
     title: "Module 13 - Multi-Agent"
-    time: "11:00"
-    duration: 30
+    time: "10:45"
+    duration: 45
     slides: "/presentations/13.%20Multi%20Agent_CB.pptx"
 
   - type: lab
     slug: mcs-multi-agent
-    label: "Lab 9"
+    label: "Lab 10"
     title: "Multi-Agent"
     time: "11:30"
 
@@ -233,7 +222,7 @@ schedule:
     duration: 60
 
   - type: break
-    title: "Quiz Time / Review"
+    title: "Quiz Time / Review / AMA / Flex / Guest Speaker"
     time: "13:00"
     duration: 15
 
@@ -245,28 +234,28 @@ schedule:
 
   - type: lab
     slug: autonomous-account-news
-    label: "Lab 10"
+    label: "Lab 11"
     title: "Autonomous Agents"
     time: "13:45"
 
   - type: session
-    title: "Module 15 - Azure Integration /w Demo"
-    time: "14:15"
+    title: "Module 15 - Copilot Studio Plugin for GitHub Copilot CLI and Claude Code"
+    time: "14:45"
     duration: 30
-    slides: "/presentations/15.%20CopilotStudioAzureBetterTogether_CB.pptx"
+    slides: "/presentations/15.%20Skills%20for%20Copilot%20Studio_CB.pptx"
 
   - type: break
     title: "Coffee break / Q&A"
-    time: "14:45"
+    time: "15:15"
     duration: 15
 
   - type: session
     title: "Module 16 - Agent 365 w/ Demo"
-    time: "15:00"
+    time: "15:30"
     duration: 30
     slides: "/presentations/16.%20A365_CB2.pptx"
 
   - type: break
-    title: "General Q+A"
-    time: "15:30"
+    title: "General Q&A"
+    time: "16:00"
     duration: 30

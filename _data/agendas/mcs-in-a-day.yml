@@ -24,7 +24,7 @@ schedule:
     slides: "/presentations/01.%20Agent%20Builder_CB.pptx"
 
   - type: break
-    title: "Coffee break / Q+A"
+    title: "Coffee break / Q&A"
     time: "10:00"
     duration: 15
 
@@ -89,7 +89,7 @@ schedule:
     title: "Licensing"
     time: "15:30"
     duration: 30
-    slides: "/presentations/05.%20Licensing_CB.pptx"
+    slides: "/presentations/15.%20Licensing_CB.pptx"
 
   - type: break
     title: "Open Q+A"
