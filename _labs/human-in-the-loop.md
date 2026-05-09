@@ -165,29 +165,29 @@ Implement a scalable approval flow that blends AI decisioning with human oversig
 
 8. **Sign in** with your training account to create a connection 
 
-> [!IMPORTANT]
-> For **Site Address** and **File Identifier**, use the provided values in **Lab Resources**
+    > [!IMPORTANT]
+    > For **Site Address** and **File Identifier**, use the provided values in **Lab Resources**
 
 9. Select **+** to add **Parse JSON** (Data Operation)
    - In **Content**, insert dynamic content and add the **Receipt** parameter from the trigger (use **See more** on the trigger to find it).
    - In **Schema**, paste:
 
-```json
-{
-  "type": "object",
-  "properties": {
-    "ContentType": { "type": "string" },
-    "Content": { "type": "string" }
-  }
-}
-```
-> [!TIP]
-> This step overcomes the limitation of multistage approvals not supporting file attachments
+    ```json
+    {
+      "type": "object",
+      "properties": {
+        "ContentType": { "type": "string" },
+        "Content": { "type": "string" }
+      }
+    }
+    ```
+    > [!TIP]
+    > This step overcomes the limitation of multistage approvals not supporting file attachments
 
 10. Select **+** to add **Respond to the agent** (Skills connector)
 
-> [!TIP]
-> Agent flows can fail if they take longer than 2 minutes to respond to the agent. Here, you send an empty reply to avoid timeouts while the flow continues executing.
+    > [!TIP]
+    > Agent flows can fail if they take longer than 2 minutes to respond to the agent. Here, you send an empty reply to avoid timeouts while the flow continues executing.
 
 11. Select **+** to add **Run a multistage approval (preview)** (Human in the loop connector)
 
@@ -268,11 +268,11 @@ Reject if ANY of the criteria is met. In the rationale, ensure you state all the
 #### Wire up the flow inputs to the approval action
 
 15. Back in the main agent flow designer, set inputs on **Run a multistage approval**:
-- For **Date, Category, Reason, Amount, Name**: select **/** to insert dynamic content from **When an agent calls the flow**
-- For the remaining values, select **/** to insert expressions:
-  - **Expense Reimbursement Policy** = `string(body('Get_file_content')?['$content'])`
-  - **AmountAsText** = `string(triggerBody()?['number'])`
-  - **Receipt** = `string(body('Parse_JSON')?['Content'])`
+    - For **Date, Category, Reason, Amount, Name**: select **/** to insert dynamic content from **When an agent calls the flow**
+    - For the remaining values, select **/** to insert expressions:
+    - **Expense Reimbursement Policy** = `string(body('Get_file_content')?['$content'])`
+    - **AmountAsText** = `string(triggerBody()?['number'])`
+    - **Receipt** = `string(body('Parse_JSON')?['Content'])`
 
    ![alt text](images/agent-flow-designer.png)
 
@@ -323,37 +323,37 @@ Enable a user-friendly front end that reliably initiates backend approval proces
 9. Select **+ Add node** > **Ask with Adaptive Card**
 10. Select **…More** > **Properties** > **Edit adaptive card** and paste this payload:
 
-```json
-{
-  "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
-  "type": "AdaptiveCard",
-  "version": "1.5",
-  "body": [
-    { "type": "TextBlock", "text": "Expense Claims Request", "size": "Large", "weight": "Bolder", "wrap": true },
-    { "type": "TextBlock", "text": "Date", "weight": "Bolder", "wrap": true, "spacing": "Medium" },
-    { "type": "Input.Date", "id": "Date", "placeholder": "Select the current date" },
-    { "type": "TextBlock", "text": "Amount", "weight": "Bolder", "wrap": true, "spacing": "Medium" },
-    { "type": "Input.Number", "id": "Amount", "placeholder": "Enter the total amount", "min": 0 },
-    { "type": "TextBlock", "text": "Category", "weight": "Bolder", "wrap": true, "spacing": "Medium" },
+    ```json
     {
-      "type": "Input.ChoiceSet",
-      "id": "Category",
-      "style": "expanded",
-      "choices": [
-        { "title": "Meals", "value": "Meals" },
-        { "title": "Travel", "value": "Travel" },
-        { "title": "Accommodation", "value": "Accommodation" },
-        { "title": "Other", "value": "Other" }
+      "$schema": "https://adaptivecards.io/schemas/adaptive-card.json",
+      "type": "AdaptiveCard",
+      "version": "1.5",
+      "body": [
+        { "type": "TextBlock", "text": "Expense Claims Request", "size": "Large", "weight": "Bolder", "wrap": true },
+        { "type": "TextBlock", "text": "Date", "weight": "Bolder", "wrap": true, "spacing": "Medium" },
+        { "type": "Input.Date", "id": "Date", "placeholder": "Select the current date" },
+        { "type": "TextBlock", "text": "Amount", "weight": "Bolder", "wrap": true, "spacing": "Medium" },
+        { "type": "Input.Number", "id": "Amount", "placeholder": "Enter the total amount", "min": 0 },
+        { "type": "TextBlock", "text": "Category", "weight": "Bolder", "wrap": true, "spacing": "Medium" },
+        {
+          "type": "Input.ChoiceSet",
+          "id": "Category",
+          "style": "expanded",
+          "choices": [
+            { "title": "Meals", "value": "Meals" },
+            { "title": "Travel", "value": "Travel" },
+            { "title": "Accommodation", "value": "Accommodation" },
+            { "title": "Other", "value": "Other" }
+          ]
+        },
+        { "type": "TextBlock", "text": "Reason for purchase", "weight": "Bolder", "wrap": true, "spacing": "Medium" },
+        { "type": "Input.Text", "id": "Reason", "placeholder": "Expense Description / Business Purpose", "isMultiline": true }
+      ],
+      "actions": [
+        { "type": "Action.Submit", "title": "Submit", "data": { "formType": "expenseClaims" } }
       ]
-    },
-    { "type": "TextBlock", "text": "Reason for purchase", "weight": "Bolder", "wrap": true, "spacing": "Medium" },
-    { "type": "Input.Text", "id": "Reason", "placeholder": "Expense Description / Business Purpose", "isMultiline": true }
-  ],
-  "actions": [
-    { "type": "Action.Submit", "title": "Submit", "data": { "formType": "expenseClaims" } }
-  ]
-}
-```
+    }
+    ```
 
 11. Select **Save** and **Close**
 
@@ -429,8 +429,8 @@ Complete the end-to-end process by automatically communicating final decisions.
 
 `When the final approval outcome is received, use {Send an email (V2)} to reply to the expense claim requestor with the results.`
 
-> [!IMPORTANT]
-> For each placeholder `{…}`, use **/** to insert the tool you configured.
+    > [!IMPORTANT]
+    > For each placeholder `{…}`, use **/** to insert the tool you configured.
 
    ![alt text](images/agent-instructions.png)
 
@@ -451,14 +451,14 @@ Now that the approval flow produces an outcome, call the agent to send the final
 6. Select the **Expense Claims Agent**
 7. Select **Show all** and set **Body/message** to:
 
-```text
-Final outcome of the approval: {Final outcome}
-Expense claim requestor: {Name}({Email})
-Expense claim amount: {Amount} EUR
-```
+    ```text
+    Final outcome of the approval: {Final outcome}
+    Expense claim requestor: {Name}({Email})
+    Expense claim amount: {Amount} EUR
+    ```
 
-> [!IMPORTANT]
-> For each placeholder `{…}`, use **/** to insert dynamic content from previous actions
+    > [!IMPORTANT]
+    > For each placeholder `{…}`, use **/** to insert dynamic content from previous actions
 
    ![alt text](images/execute-agent-action.png)
 

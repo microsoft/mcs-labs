@@ -237,11 +237,11 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
 4. Test the basic experience by typing the following into the Message Copilot input area and then selecting send:
 
-```
-What are new features in the Microsoft Copilot Studio roadmap?
-```
+    ```
+    What are new features in the Microsoft Copilot Studio roadmap?
+    ```
 
-![Response from Copilot showing the roadmap](images/simple-copilot-search.png)
+    ![Response from Copilot showing the roadmap](images/simple-copilot-search.png)
 
 5. Select **Start a new chat** (top right icon) to reset. Notice how your history of converations is saved on the left side navigation pane.
 
@@ -252,24 +252,24 @@ What are new features in the Microsoft Copilot Studio roadmap?
 
 7. Notice that you can explore existing available templates. But for this lab, you want to select the  **Describe** tab at the top of the form and paste the following into the input area for the intial agent prompt input area, and then select Send.
 
-```
-I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Agent Builder in Microsoft 365. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
-```
+    ```
+    I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Agent Builder in Microsoft 365. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
+    ```
 
-> [!TIP]  
-> From here, you will find that the conversational creation experience might differ from the below step-by-step instructions, as it's using generative AI and it is by nature non-deterministic. The core concepts remain the same, but the UI may change slightly. Just adjust to the questions and options presented to you.
+    > [!TIP]  
+    > From here, you will find that the conversational creation experience might differ from the below step-by-step instructions, as it's using generative AI and it is by nature non-deterministic. The core concepts remain the same, but the UI may change slightly. Just adjust to the questions and options presented to you.
 
 8. Input the following prompt to set the agent's name and tone, then press send. (This will rename the agent if Agent Builder proposed a different name, and apply the desired tone in either case.)
 
-```
-The name of the agent should be Copilot Teacher. Your tone should be friendly, personal, and emphatic. You can make jokes, use subtle irony and emojis when appropriate.
-```
+    ```
+    The name of the agent should be Copilot Teacher. Your tone should be friendly, personal, and emphatic. You can make jokes, use subtle irony and emojis when appropriate.
+    ```
 
 9. _If_ asked about how the agent should handle **questions that are directly related to Copilot**, or how the agent should handle **situations where the user provides incorrect information or demonstrates a misunderstanding**, reply with:
 
-```
-It shouldn't answer questions that are not related to Microsoft 365 Copilot, Copilot Chat, or Copilot Studio. Always guide users towards the correct solution based on your knowledge.
-```
+    ```
+    It shouldn't answer questions that are not related to Microsoft 365 Copilot, Copilot Chat, or Copilot Studio. Always guide users towards the correct solution based on your knowledge.
+    ```
 
 10. Agent Builder will attempt to identify knowledge sources but may attempt to use too specific of a URL for Learn. Send the following two prompts in sequence — entering both URLs in a single prompt has been observed to register only one of them, so split them up:
 
@@ -387,10 +387,10 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
    - Go to the **Documents** tab
    - Open the **Sales** folder
 
-> [!IMPORTANT]
-> The URL of the SharePoint site is available in [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
+    > [!IMPORTANT]
+    > The URL of the SharePoint site is available in [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
 
-![SharePoint documents](images/sales-docs.png)
+    ![SharePoint documents](images/sales-docs.png)
 
 2. Locate the following sample files:
 
@@ -418,9 +418,9 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 7. Select the **Describe** tab at the top, and copy/paste the following prompt and select Send:
 
-```
-You are a Sales Admin Assistant. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
-```
+    ```
+    You are a Sales Admin Assistant. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
+    ```
 
 8. **Confirm** the suggested agent name if prompted.
 
@@ -472,9 +472,9 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
 
 15. First, test the agent's **knowledge** of your sales policy, copy/paste the following prompt in the Message Copilot area and select Send:
 
-```
-What are the key guidelines in our sales policy regarding customer discounts?
-```
+    ```
+    What are the key guidelines in our sales policy regarding customer discounts?
+    ```
 
 16. Verify the agent references your SharePoint policy document and provides accurate information.
 
@@ -484,13 +484,13 @@ What are the key guidelines in our sales policy regarding customer discounts?
 
 17. **Start a new chat** and test the **code interpreter** capability with a data analysis request:
 
-```
-How are sales trending for home appliances?
-```
+    ```
+    How are sales trending for home appliances?
+    ```
 
 18. After scrolling to the end of the details, you may be offered some starter prompts to get a visual chart, select one of the starter prompts or enter a prompt such as **Show a sales graph for Home Appliances**.
 
-![Visual produced by agent](images/sales-data-analysis.png)
+    ![Visual produced by agent](images/sales-data-analysis.png)
 
 19. **Observe** how the agent:
     - Accesses your Excel data
@@ -579,8 +579,8 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
    - Selecting the agent picker (if available) and choosing **Researcher**
    - Or typing `@Researcher` in the chat input area
 
-> [!TIP]
-> The Researcher agent is one of Microsoft's **frontier agents** — purpose-built AI agents that use advanced reasoning models. Researcher excels at deep document analysis, cross-referencing multiple sections, and synthesizing complex information. It's available to users with a Microsoft 365 Copilot license.
+    > [!TIP]
+    > The Researcher agent is one of Microsoft's **frontier agents** — purpose-built AI agents that use advanced reasoning models. Researcher excels at deep document analysis, cross-referencing multiple sections, and synthesizing complex information. It's available to users with a Microsoft 365 Copilot license.
 
 1. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the attachment icon (paperclip) in the chat input area and choosing the file from your local machine.
 
@@ -588,12 +588,12 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
 
 1. Once the file is uploaded, copy and paste the following prompt and select **Send**:
 
-```text
-Create an executive briefing for the GM that summarizes the five most urgent operational issues, their root causes, financial impact, and recommended fixes — all sourced from this report.
-```
+    ```text
+    Create an executive briefing for the GM that summarizes the five most urgent operational issues, their root causes, financial impact, and recommended fixes — all sourced from this report.
+    ```
 
-> [!NOTE]
-> Researcher may ask a clarifying follow-up about preferred report length or detail level. Either select your preferred option, or simply reply `go ahead` to accept the default — both work.
+    > [!NOTE]
+    > Researcher may ask a clarifying follow-up about preferred report length or detail level. Either select your preferred option, or simply reply `go ahead` to accept the default — both work.
 
 1. **Observe** how the Researcher agent:
    - Identifies issues across multiple sections (housekeeping, WiFi, HVAC, F&B margins, elevator maintenance)
@@ -609,9 +609,9 @@ Create an executive briefing for the GM that summarizes the five most urgent ope
 
 1. In the **same conversation** (to maintain context), copy and paste this follow-up prompt and select **Send**:
 
-```text
-Identify every metric in this report that is trending in the wrong direction or below target. For each one, trace the root cause and map it to a specific recommendation. Are there any gaps where a problem exists but no recommendation addresses it?
-```
+    ```text
+    Identify every metric in this report that is trending in the wrong direction or below target. For each one, trace the root cause and map it to a specific recommendation. Are there any gaps where a problem exists but no recommendation addresses it?
+    ```
 
 1. **Observe** how the Researcher agent:
    - Systematically scans every KPI table, satisfaction score, and operational metric in the report
@@ -678,8 +678,8 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
    - Selecting the agent picker and choosing **Analyst**
    - Or typing `@Analyst` in the chat input area
 
-> [!TIP]
-> The Analyst agent is another **frontier agent** in Microsoft 365 Copilot. While Researcher excels at reasoning and synthesis, Analyst is purpose-built for **data-heavy work** — extracting tables from documents, performing calculations, building models, generating visualizations, and producing structured outputs like Excel files. Think of Researcher as your strategic advisor and Analyst as your financial modeler.
+    > [!TIP]
+    > The Analyst agent is another **frontier agent** in Microsoft 365 Copilot. While Researcher excels at reasoning and synthesis, Analyst is purpose-built for **data-heavy work** — extracting tables from documents, performing calculations, building models, generating visualizations, and producing structured outputs like Excel files. Think of Researcher as your strategic advisor and Analyst as your financial modeler.
 
 3. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the attachment icon and choosing the same file you downloaded earlier.
 
@@ -690,18 +690,18 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
 
 4. Copy and paste the following prompt and select **Send**:
 
-```text
-Using the recommendation data from Section 16 of this hotel performance report, build a detailed ROI analysis for each of the 10 recommendations (R1 through R10). For each recommendation, extract the investment cost and estimated annual ROI from the report, then calculate:
+    ```text
+    Using the recommendation data from Section 16 of this hotel performance report, build a detailed ROI analysis for each of the 10 recommendations (R1 through R10). For each recommendation, extract the investment cost and estimated annual ROI from the report, then calculate:
 
-1. Net Present Value (NPV) at an 8% discount rate over a 5-year horizon
-2. Internal Rate of Return (IRR)
-3. Payback period (both simple and discounted)
-4. 5-year cumulative net benefit (total returns minus investment)
+    1. Net Present Value (NPV) at an 8% discount rate over a 5-year horizon
+    2. Internal Rate of Return (IRR)
+    3. Payback period (both simple and discounted)
+    4. 5-year cumulative net benefit (total returns minus investment)
 
-Assume that annual ROI figures begin in Year 1 and remain constant over the 5-year period. For the elevator modernization (R5), assume the $1.2M investment is split evenly across Year 0 and Year 1, with returns beginning in Year 2. For ongoing annual programs (R7, R10), treat the annual investment as a recurring cost each year.
+    Assume that annual ROI figures begin in Year 1 and remain constant over the 5-year period. For the elevator modernization (R5), assume the $1.2M investment is split evenly across Year 0 and Year 1, with returns beginning in Year 2. For ongoing annual programs (R7, R10), treat the annual investment as a recurring cost each year.
 
-Present the results in a ranked table sorted by NPV (highest to lowest). Include a column indicating whether each recommendation creates or destroys value at the 8% hurdle rate. Then provide a summary recommendation on which investments should be approved, which are marginal, and which should be deferred — based purely on the financial analysis.
-```
+    Present the results in a ranked table sorted by NPV (highest to lowest). Include a column indicating whether each recommendation creates or destroys value at the 8% hurdle rate. Then provide a summary recommendation on which investments should be approved, which are marginal, and which should be deferred — based purely on the financial analysis.
+    ```
 
 5. **Observe** how the Analyst agent:
    - Extracts investment costs and annual returns from Section 16's ten recommendations

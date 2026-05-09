@@ -145,7 +145,7 @@ Create and configure a functional Copilot Agent with Dataverse MCP Server integr
 #### Navigate to Copilot Studio and Create Agent
 
 1. Browse to [Copilot Studio Homepage](https://copilotstudio.microsoft.com/). Ensure you are logged in using the credentials for the lab and are in the correct Environment for building your agent.
-![Step 1: Navigate to Copilot Studio](images/step1-copilot-studio-navigation.png)
+    ![Step 1: Navigate to Copilot Studio](images/step1-copilot-studio-navigation.png)
 
 2. Click on **+ New Agent**.
 ![Step 2: Create new agent](images/step2-create-agent.png)
@@ -179,8 +179,8 @@ Create and configure a functional Copilot Agent with Dataverse MCP Server integr
 
    ![Suggested prompts configuration](images/step4b-suggested-prompts-search.png)
 
-> [!TIP]
-> You can configure up to six suggested prompts customers can choose from to start a conversation. In Teams and in Copilot Chat, suggested prompts appear on the agent's welcome page, before you start a new chat. You can't see or use them when you test your agent in Copilot Studio.
+    > [!TIP]
+    > You can configure up to six suggested prompts customers can choose from to start a conversation. In Teams and in Copilot Chat, suggested prompts appear on the agent's welcome page, before you start a new chat. You can't see or use them when you test your agent in Copilot Studio.
 
 5. Click **Create**.
 
@@ -200,8 +200,8 @@ Create and configure a functional Copilot Agent with Dataverse MCP Server integr
 
    ![Add authentication](images/step8-add-auth.png)
 
-> [!IMPORTANT]
-> The Dataverse MCP Server will allow you natural language access to your tables in Dataverse. We have sample data in the Accounts and Contacts tables that we will use. The tools available are: list tables, describe table, read data, create record, update record, list prompts, execute prompt, list knowledge sources, and retrieve knowledge.
+    > [!IMPORTANT]
+    > The Dataverse MCP Server will allow you natural language access to your tables in Dataverse. We have sample data in the Accounts and Contacts tables that we will use. The tools available are: list tables, describe table, read data, create record, update record, list prompts, execute prompt, list knowledge sources, and retrieve knowledge.
 
 10. Review the tools available for the Dataverse MCP Server. You can select and deselect which tools are available to the agent. When the tool is executed, the list is dynamically updated from the MCP Server. You cannot call an MCP Server from a Topic for this reason.
 

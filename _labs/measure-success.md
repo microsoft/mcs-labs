@@ -340,8 +340,8 @@ In this section, you'll learn how the default End of conversation topic can unin
 
    Notice how follow-up questions are no longer blocking the conversation flow.
 
-> [!TIP]
-> If you want the user's follow-up questions to trigger existing topics rather than always defaulting to Conversational boosting, verify the Interruptions setting in the "Did that answer your question?" question properties. By default, they allow interruptions, meaning the agent can seamlessly switch to a recognized topic based on the user's next input.
+    > [!TIP]
+    > If you want the user's follow-up questions to trigger existing topics rather than always defaulting to Conversational boosting, verify the Interruptions setting in the "Did that answer your question?" question properties. By default, they allow interruptions, meaning the agent can seamlessly switch to a recognized topic based on the user's next input.
 
 7. You can further simplify what happens after the user answers **Yes**.
 

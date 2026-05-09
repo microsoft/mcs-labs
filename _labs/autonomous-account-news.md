@@ -210,24 +210,24 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 1. Choose an existing Dataverse connection or add a new one (select Oauth as authentication type).
 
-  > [!IMPORTANT]  
-  > If you need to create the connection use OAuth and sign in with your workshop credentials. Your user requires permission to access Opportunity records, which is provided as part of the workshop.
+    > [!IMPORTANT]  
+    > If you need to create the connection use OAuth and sign in with your workshop credentials. Your user requires permission to access Opportunity records, which is provided as part of the workshop.
 
 1. Select **Add and configure**.
 
 1. Configure the following settings:
-  - **Name:** `Get Opportunity records`
-  - **Description:** `This operation gets Opportunity records`
+    - **Name:** `Get Opportunity records`
+    - **Description:** `This operation gets Opportunity records`
 
-  > [!IMPORTANT]  
-  > Clear and specific tool names and descriptions help the Orchestrator understand the tool's purpose. Names can even be more influential than descriptions.
+    > [!IMPORTANT]  
+    > Clear and specific tool names and descriptions help the Orchestrator understand the tool's purpose. Names can even be more influential than descriptions.
 
 1. Select **Additional details**.
 
 1. Under **Credentials to use**, select **Maker-provided credentials**.
 
-  > [!IMPORTANT]  
-  > Always use maker-provided credentials for autonomous agents. This option allows tools to run without requiring user interaction.
+    > [!IMPORTANT]  
+    > Always use maker-provided credentials for autonomous agents. This option allows tools to run without requiring user interaction.
 
 1. Under **Inputs**, change **Environments** to the following:
       - **Fill using**: `Custom value`
@@ -283,8 +283,8 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 1. Turn **On** the toggle for **Deep Reasoning**.
 
-  > [!TIP]
-  > Deep reasoning is currently unavailable in the UI in certain regions.  If you do not see the Deep Reasoning toggle in the settings area, try accessing the agent via https://copilotstudio.preview.microsoft.com
+    > [!TIP]
+    > Deep reasoning is currently unavailable in the UI in certain regions.  If you do not see the Deep Reasoning toggle in the settings area, try accessing the agent via https://copilotstudio.preview.microsoft.com
 
 1. Turn **On** the toggle for **Use information from the Web**. Then select **Save** to save these settings. Once saved, close the settings using the **X** on the top right.
 
@@ -567,15 +567,15 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 1. Enter the following HTML content as a string:
 
-  > [!NOTE]
-  > To avoid errors, we:
-  >   - Wrapped the entire HTML in double quotes: `"..."`
-  >   - Escaped each inner quote as double-quotes: `""`
+    > [!NOTE]
+    > To avoid errors, we:
+    >   - Wrapped the entire HTML in double quotes: `"..."`
+    >   - Escaped each inner quote as double-quotes: `""`
 
-  ```html
-  "<!DOCTYPE html>
-  <html>
-  <head>
+    ```html
+    "<!DOCTYPE html>
+    <html>
+    <head>
     <style>
       body {
         font-family: Arial, sans-serif;
@@ -622,8 +622,8 @@ Automate the final step: format relevant news into a clean, branded email for ac
         text-decoration: none;
       }
     </style>
-  </head>
-  <body>
+    </head>
+    <body>
 
     <h2>📰 Opportunity News Summary Report</h2>
 
@@ -655,9 +655,9 @@ Automate the final step: format relevant news into a clean, branded email for ac
       <a class=""link"" href=""https://www.datacenterknowledge.com/networking/google-and-level-3-interconnect-network-backbones"" target=""_blank"">Network Backbone Analysis</a>
     </div>
 
-  </body>
-  </html>"
-  ```
+    </body>
+    </html>"
+    ```
 
     > [!IMPORTANT]  
     > The HTML template functions as a **one-shot example** that guides the agent's generation process. When the agent is asked to produce an HTML report, it will refer to this template to determine how to format the content, structure the sections, and organize links.
@@ -690,8 +690,8 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 1. Under **Credentials to use**, select **Maker-provided credentials**.
 
-  > [!IMPORTANT]  
-  > Always use Maker-provided credentials for autonomous agents. This allows tools to run without user interaction.
+    > [!IMPORTANT]  
+    > Always use Maker-provided credentials for autonomous agents. This allows tools to run without user interaction.
 
 1. Under **Inputs**:
 
@@ -721,7 +721,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
    - For `<Send a summary report>`, use **Tool** > *Send a summary report* (select it from the list)
 
 1. **Save** your agent's instructions. The instructions should appear as follows:
- ![Instructions After Topics](images/final-instructions.png)
+    ![Instructions After Topics](images/final-instructions.png)
 
 1. Go to the **Triggers** section and Select **Test trigger** on the `Analyze Opportunities` trigger.
 

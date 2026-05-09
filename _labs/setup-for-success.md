@@ -234,7 +234,7 @@ In this section, you'll learn how to create environment variables and connection
 
 2. Select **+ New**, then go to **More** and choose **Environment variable**.
 
-![Copilot Studio showing "New" menu expanded with "Environment variable" option highlighted](images/environment-variable-connection-reference.png)
+    ![Copilot Studio showing "New" menu expanded with "Environment variable" option highlighted](images/environment-variable-connection-reference.png)
 
 3. In **Name**, enter: `Custom Knowledge Endpoint`
 
@@ -242,23 +242,23 @@ In this section, you'll learn how to create environment variables and connection
 
 5. Leave **Default Value** blank, but under **Current Value**, select **+ New Value**, and enter the Custom Knowledge endpoint URL found in the Lab Resources.
 
-> [!IMPORTANT]
->  * For configuration, use the provided values in the **Lab Resources** (specific per training).
+    > [!IMPORTANT]
+    >  * For configuration, use the provided values in the **Lab Resources** (specific per training).
 
-> [!TIP]
->  * Notice how, under **Advanced**, you can set whether the current value can follow through with your solution deployment, or if it should be reset each time the solution is deployed to a new environment
+    > [!TIP]
+    >  * Notice how, under **Advanced**, you can set whether the current value can follow through with your solution deployment, or if it should be reset each time the solution is deployed to a new environment
 
 6. Click **Save**.
 
-> [!TIP]
->  * Environment variables can also be of type **Secret** to retrieve secure values like API keys from Azure Key Vault at runtime.
+    > [!TIP]
+    >  * Environment variables can also be of type **Secret** to retrieve secure values like API keys from Azure Key Vault at runtime.
 
 7. In the solution, select **New**, then go to **More** and choose **Connection reference**.
 
 8. Use the connector name, `ServiceNow`, as the name. Optionally, prefix with your project name.
 
-> [!TIP]
-> In other locales, the connector name may be localized.
+    > [!TIP]
+    > In other locales, the connector name may be localized.
 
 9. Select the connector **ServiceNow**.
 
@@ -266,9 +266,9 @@ In this section, you'll learn how to create environment variables and connection
 
 11. Log in through Power Apps in a new tab if needed, then return to Copilot Studio.
 
-> [!IMPORTANT]
->  * For **ServiceNow** configuration values, use the provided values in the **Lab Resources** (specific per training).
->  * For **ServiceNow**'s `Instance` configuration, be sure to scroll down in the connection screen.
+    > [!IMPORTANT]
+    >  * For **ServiceNow** configuration values, use the provided values in the **Lab Resources** (specific per training).
+    >  * For **ServiceNow**'s `Instance` configuration, be sure to scroll down in the connection screen.
 
 12. Above the **Connection** dropdown, select **Refresh** and choose the newly created connection.
 

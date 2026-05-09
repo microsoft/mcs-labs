@@ -309,17 +309,17 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Update the following body items by selecting the down arrow on each and selecting **Edit**, change the data and then select **back**:
 
-- **origin**
-  - **Title:** `origin`
-  - **Description:** `Where the word originated from including data such as the definition, part of speech, example of its use, synonyms, antonyms. It includes all potential uses of the word in part of speech such as if it is used as a verb, noun, or an exclamation what the meaning is when used in that way.`
+    - **origin**
+    - **Title:** `origin`
+    - **Description:** `Where the word originated from including data such as the definition, part of speech, example of its use, synonyms, antonyms. It includes all potential uses of the word in part of speech such as if it is used as a verb, noun, or an exclamation what the meaning is when used in that way.`
 
-- **phonetic**
-  - **Title:** `phonetic`
-  - **Description:** `How to pronounce the word including the audio file of it being spoken.`
+    - **phonetic**
+    - **Title:** `phonetic`
+    - **Description:** `How to pronounce the word including the audio file of it being spoken.`
 
-- **word**
-  - **Title:** `word`
-  - **Description:** `The word that was looked up`
+    - **word**
+    - **Title:** `word`
+    - **Description:** `The word that was looked up`
 
 1. Select **Create connector** on the top menu.
 
@@ -875,13 +875,13 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. Now test that the agent stays within its defined boundaries by asking non-chit-chat questions:
 
-  ```
-  How tall is the Empire State Building?
-  ```
+    ```
+    How tall is the Empire State Building?
+    ```
 
-  ```
-  Who is the president of the United States?
-  ```
+    ```
+    Who is the president of the United States?
+    ```
 
 1. Verify that the agent does not answer these factual questions and instead keeps the conversation within chit chat boundaries.
 

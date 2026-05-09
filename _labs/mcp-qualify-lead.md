@@ -191,7 +191,7 @@ You’ll configure MCP tools to allow AI to surface prioritized leads.
 
 1. Go to the **Tools** tab in your agent.
 2. Click **+ Add a tool** > choose **Model Context Protocol** > select **Dataverse MCP server**.
-![Dataverse MCP Server](images/DataverseMCPServer.png)
+    ![Dataverse MCP Server](images/DataverseMCPServer.png)
 3. Click **Add and configure**.
 4. Rename the tool to **Dataverse MCP**.
 5. Under **Additional details**, set **Credentials to use** to **Maker-provided credentials**.
@@ -204,7 +204,7 @@ You’ll configure MCP tools to allow AI to surface prioritized leads.
 
 1. Add a second MCP tool.
 2. Select **D365 Sales MCP server**.
-![D365 MCP Server](images/D365MCPServer.png)
+    ![D365 MCP Server](images/D365MCPServer.png)
 3. Click **Add and configure**.
 4. Rename to **Lead Qualifier**.
 5. Update description: *Support identifying and focusing on high-potential leads.*
@@ -219,26 +219,26 @@ You’ll configure MCP tools to allow AI to surface prioritized leads.
 1. Navigate to **Overview > Instructions**.
 2. Paste these instructions:
 
-```
-When the user says they want to see leads they should focus on:
-- Retrieve and present 3–5 leads: name, company, lead ID, summary
+    ```
+    When the user says they want to see leads they should focus on:
+    - Retrieve and present 3–5 leads: name, company, lead ID, summary
 
-When user says "pick one":
-- Confirm selection
-- Show details: name, company, status, interaction, interest
-- Ask to qualify
+    When user says "pick one":
+    - Confirm selection
+    - Show details: name, company, status, interaction, interest
+    - Ask to qualify
 
-When user says "qualify it":
-- Do not request lead ID again
-- Qualify the lead
-- Ask to draft follow-up email
+    When user says "qualify it":
+    - Do not request lead ID again
+    - Qualify the lead
+    - Ask to draft follow-up email
 
-General:
-- Always confirm intent
-- Offer quick replies
-- Ask before proceeding
-- Be brief, helpful, and friendly
-```
+    General:
+    - Always confirm intent
+    - Offer quick replies
+    - Ask before proceeding
+    - Be brief, helpful, and friendly
+    ```
 
 3. Publish the agent.
 
@@ -263,11 +263,11 @@ You’ll test your configured agent by simulating a realistic sales interaction.
 ### Step-by-step instructions
 
 1. Send the prompt: **Which leads should I focus on?**
-![Test leads to focus on](images/TestLeadToFocusOn.png)
+    ![Test leads to focus on](images/TestLeadToFocusOn.png)
 2. Pick a lead from the list using the prompt: **Pick Maria**
-![Test pick a lead](images/TestPickALead.png)
+    ![Test pick a lead](images/TestPickALead.png)
 3. Send **Yes** to qualify the selected lead.
-![Test qualify a lead](images/TestQualifyLead.png)
+    ![Test qualify a lead](images/TestQualifyLead.png)
 4. Check if the lead status is updated in CRM.
 ![Test lead qualified in the CRM](images/TestLeadQualifiedinCRM.png)
 

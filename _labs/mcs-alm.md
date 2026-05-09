@@ -267,23 +267,23 @@ Create environment variables and connection references that enable your solution
 
 5. Leave **Default Value** blank, but under **Current Value**, select **+ New Value**, and enter the Custom Knowledge endpoint URL found in the [Lab Resources](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx).
 
-> [!IMPORTANT]
-> For configuration, use the provided values in the [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
+    > [!IMPORTANT]
+    > For configuration, use the provided values in the [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
 
-> [!TIP]
-> Notice how, under **Advanced**, you can set whether the current value can follow through with your solution deployment, or if it should be reset each time the solution is deployed to a new environment.
+    > [!TIP]
+    > Notice how, under **Advanced**, you can set whether the current value can follow through with your solution deployment, or if it should be reset each time the solution is deployed to a new environment.
 
 6. Select **Save**.
 
-> [!TIP]
-> Environment variables can also be of type **Secret** to retrieve secure values like API keys from Azure Key Vault at runtime.
+    > [!TIP]
+    > Environment variables can also be of type **Secret** to retrieve secure values like API keys from Azure Key Vault at runtime.
 
 7. In the solution, select **New**, then select **More** and choose **Connection reference**.
 
 8. Enter `ServiceNow` plus your User Name to make it unique , as the name. 
 
-> [!TIP]
-> In other locales, the connector name may be localized.
+    > [!TIP]
+    > In other locales, the connector name may be localized.
 
 9. Select the connector **ServiceNow**.
 
@@ -291,9 +291,9 @@ Create environment variables and connection references that enable your solution
 
 11. Log in through Power Apps in a new tab if needed, then return to Copilot Studio.
 
-> [!IMPORTANT]
-> - For **ServiceNow** configuration values, use the provided values in the [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
-> - For **ServiceNow**'s `Instance` configuration, be sure to scroll down in the connection screen.
+    > [!IMPORTANT]
+    > - For **ServiceNow** configuration values, use the provided values in the [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
+    > - For **ServiceNow**'s `Instance` configuration, be sure to scroll down in the connection screen.
 
 12. Above the **Connection** dropdown, select **Refresh** and choose the newly created connection.
 

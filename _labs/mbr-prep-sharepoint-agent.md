@@ -148,30 +148,30 @@ Create a SharePoint site with MBR documents that will serve as the knowledge sou
 
 1. Go to [m365.cloud.microsoft/apps/](https://m365.cloud.microsoft/apps/?from=PortalHome&auth=2) and select **SharePoint**
 
-![SharePoint](./assets/select-sharepoint.jpeg)
+    ![SharePoint](./assets/select-sharepoint.jpeg)
 
 
 2. Select **Create Site**
 
-![Create Site](./assets/create-site.png)
+    ![Create Site](./assets/create-site.png)
 
 
 3. Select **Team Site**
 
-![Team Site](./assets/team-site.png)
+    ![Team Site](./assets/team-site.png)
 
 
 4. Select **Standard team**
 
-![Standard Team](./assets/select-template.png)
+    ![Standard Team](./assets/select-template.png)
 
 5. Select **Use Template**
 
-![Use Template](./assets/use-template.png)
+    ![Use Template](./assets/use-template.png)
 
 6. Put `MBR - <Your User Name>` in the Site Name and Select **Next**
 
-![Create Site](./assets/site-name.png)
+    ![Create Site](./assets/site-name.png)
 
 7. Select **Create site**
 
@@ -241,17 +241,17 @@ Create, configure, test, and deploy a conversational MBR agent that leverages Sh
 
 1. Open a new browser tab and navigate to [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com). Select **Create**
 
-![Select Create](./assets/create-agent.jpeg)
+    ![Select Create](./assets/create-agent.jpeg)
 
 2. Select **New agent**
 
-![Select New Agent](./assets/new-agent.jpeg)
+    ![Select New Agent](./assets/new-agent.jpeg)
 
 3. Select the **Configure** tab
 
 4. In the **Name** field type `MBR Agent`. In the **Description** field type,  `This agent helps in preparing for Monthly Business Reviews. It queries MBR resources and provides quick answers`
 
-![Fill out Agent Details](./assets/agent-name.jpeg)
+    ![Fill out Agent Details](./assets/agent-name.jpeg)
 
 5. Select `...` to go into **Edit advanced settings**. Make sure the agent is created as part of one of your **solutions**.
 
@@ -263,22 +263,22 @@ Create, configure, test, and deploy a conversational MBR agent that leverages Sh
 
 7. Select **Add knowledge**
 
-![Select Add Knowledge](./assets/add-knowledge.jpeg)
+    ![Select Add Knowledge](./assets/add-knowledge.jpeg)
 
 8. Select **SharePoint**
 
-![Select SharePoint](./assets/sharepoint-knowledge.jpeg)
+    ![Select SharePoint](./assets/sharepoint-knowledge.jpeg)
 
 9. **Paste** the URL of your SharePoint site folder where the MBR documents are located in the text input
 
-> [!IMPORTANT]
-> If these files have already been uploaded for you, use the URL provided in **Lab Resources** (specific per training).
+    > [!IMPORTANT]
+    > If these files have already been uploaded for you, use the URL provided in **Lab Resources** (specific per training).
 
-![Paste SharePoint URL](./assets/sharepoint-url.jpeg)
+    ![Paste SharePoint URL](./assets/sharepoint-url.jpeg)
 
 10. Select **Add**
 
-![Select Add Knowledge](./assets/add-sp-knowledge1.jpeg)
+    ![Select Add Knowledge](./assets/add-sp-knowledge1.jpeg)
 
 11. Select **Add** again
 
@@ -288,11 +288,11 @@ Create, configure, test, and deploy a conversational MBR agent that leverages Sh
 
 12. Now we need to test our agent to see if it returns answers from our knowledge. 
 
-![Test Panel](./assets/empty-test-panel.jpeg)
+    ![Test Panel](./assets/empty-test-panel.jpeg)
 
 13. Type `what deals are currently in the negotiation stage?` and send the message.
 
-![Test the agent](./assets/test1.jpeg)
+    ![Test the agent](./assets/test1.jpeg)
 
 14. **Review** the answer in the test window and notice the logic in the Activity Pane on the left hand side
 
@@ -302,21 +302,21 @@ Create, configure, test, and deploy a conversational MBR agent that leverages Sh
 
 15. Now that we know the agent is working, we need to publish our changes by selecting the **Publish** button in the upper right hand corner.
 
-![Select Publish](./assets/publish.jpeg)
+    ![Select Publish](./assets/publish.jpeg)
 
 16. Now it's time to deploy our agent to SharePoint. Select the **Channels** tab.
 
-![Select Channels](./assets/channels-tab.jpeg)
+    ![Select Channels](./assets/channels-tab.jpeg)
 
 17. Select **SharePoint**
 
-![Select SharePoint](./assets/channels-sharepoint.jpeg)
+    ![Select SharePoint](./assets/channels-sharepoint.jpeg)
 
 18. **Select** or **search** the SharePoint site you created in the previous steps from the list of options
 
-> [!IMPORTANT] Only sites where the user has **Edit** permissions can be used. Otherwise, an error will be displayed.
+    > [!IMPORTANT] Only sites where the user has **Edit** permissions can be used. Otherwise, an error will be displayed.
 
-![Select the SharePoint Site](./assets/sharepoint-dropdown.jpeg)
+    ![Select the SharePoint Site](./assets/sharepoint-dropdown.jpeg)
 
 19. Select **Deploy**
 
@@ -326,19 +326,19 @@ Create, configure, test, and deploy a conversational MBR agent that leverages Sh
 
 20. Select the `...` next to the Deployed text and select **Copy Agent Url**. Open a new browser tab and paste in the URL.
 
-![Select Copy Site URL](./assets/copy-url.jpeg)
+    ![Select Copy Site URL](./assets/copy-url.jpeg)
 
 21. Your agent will open up in SharePoint. Test it out by typing `What are the top 3 blockers?` in the text input and pressing `Return`
 
-![Testing the agent](./assets/deployed-test1.jpeg)
+    ![Testing the agent](./assets/deployed-test1.jpeg)
 
 22. Review the answer and note that it provides links to the referenced documents.
 
-![Review the first test](./assets/deployed-review1.jpeg)
+    ![Review the first test](./assets/deployed-review1.jpeg)
 
 23. Perform another test by typing `Which reps requested additional pre-sales support?` and pressing `Return`
 
-![Testing the agent](./assets/deployed-test2.jpeg)
+    ![Testing the agent](./assets/deployed-test2.jpeg)
 
 24. Review your response. Congratulations! You've built and deployed your SharePoint MBR Agent!
 

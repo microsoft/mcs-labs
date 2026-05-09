@@ -188,10 +188,10 @@ schedule:
     duration: 15
 
   - type: session
-    title: "Module 11 - Governance"
+    title: "Module 10 - Governance"
     time: "09:15"
     duration: 30
-    slides: "/presentations/bootcamp/11.%20Governance_CB.pptx"
+    slides: "/presentations/bootcamp/10.%20Governance_CB.pptx"
 
   - type: lab
     slug: mcs-governance
@@ -205,10 +205,10 @@ schedule:
     duration: 15
 
   - type: session
-    title: "Module 13 - Multi-Agent"
+    title: "Module 11 - Multi-Agent"
     time: "10:45"
     duration: 45
-    slides: "/presentations/bootcamp/13.%20Multi%20Agent_CB.pptx"
+    slides: "/presentations/bootcamp/11.%20Multi%20Agent_CB.pptx"
 
   - type: lab
     slug: mcs-multi-agent
@@ -227,10 +227,10 @@ schedule:
     duration: 15
 
   - type: session
-    title: "Module 14 - Autonomous Agents"
+    title: "Module 12 - Autonomous Agents"
     time: "13:15"
     duration: 30
-    slides: "/presentations/bootcamp/14.%20Autonomous%20Agents_CB.pptx"
+    slides: "/presentations/bootcamp/12.%20Autonomous%20Agents_CB.pptx"
 
   - type: lab
     slug: autonomous-account-news
@@ -239,10 +239,10 @@ schedule:
     time: "13:45"
 
   - type: session
-    title: "Module 15 - Copilot Studio Plugin for GitHub Copilot CLI and Claude Code"
+    title: "Module 13 - Copilot Studio Plugin for GitHub Copilot CLI and Claude Code"
     time: "14:45"
     duration: 30
-    slides: "/presentations/bootcamp/15.%20Skills%20for%20Copilot%20Studio_CB.pptx"
+    slides: "/presentations/bootcamp/13.%20Skills%20for%20Copilot%20Studio_CB.pptx"
 
   - type: break
     title: "Coffee break / Q&A"
@@ -250,10 +250,10 @@ schedule:
     duration: 15
 
   - type: session
-    title: "Module 16 - Agent 365 w/ Demo"
+    title: "Module 14 - Agent 365 w/ Demo"
     time: "15:30"
     duration: 30
-    slides: "/presentations/bootcamp/16.%20A365_CB2.pptx"
+    slides: "/presentations/bootcamp/14.%20A365_CB2.pptx"
 
   - type: break
     title: "General Q&A"

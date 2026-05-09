@@ -175,7 +175,7 @@ Create the parent agent base that will be needed to host all your tools, agents,
     > [!IMPORTANT]
     > Do not Select Enter or submit this text yet as we need to do the agent settings before we do that.
 
-![Home Creation Text](images/image.png)
+    ![Home Creation Text](images/image.png)
 
 1. Select the **Gear** on the description input area and edit the schema name to include `salesassistant` and then Select **Update**. 
 
@@ -247,7 +247,7 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 1. Add a new node at the end of the topic by selecting the **+** and then selecting **Topic Management > Go to another topic > Select Market**
 
-![Add Node to Conversation Start](images/image-11.png)
+    ![Add Node to Conversation Start](images/image-11.png)
 
 1. Select **Save**
 
@@ -302,7 +302,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 1. Select **New child agent**.
 
-![Select Child Agent](images/image-13.png)
+    ![Select Child Agent](images/image-13.png)
 
 1. Set Agent Name to **US Product Information Agent**.
 
@@ -321,7 +321,7 @@ In this section, you'll learn how to create child agents to logically group know
     This agent should only answer questions about Microsoft Surface products in regards to the US-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United States.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.
     ```
 
-![Add instructions](images/image-15.png)
+    ![Add instructions](images/image-15.png)
 
 1. Add Knowledge to the Child Agent by Selecting **Add** in the Knowledge section of the Child Agent configuration
 
@@ -341,7 +341,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 1. Select **New child agent** 
 
-![Select Child Agent](images/image-13.png)
+    ![Select Child Agent](images/image-13.png)
 
 1. Set Agent Name to `UK Product Information Agent`
 
@@ -349,7 +349,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 1. Expand **Advanced** and set the Condition to the **Global.Market** variable **is equal to** `UK`
 
-![Set Child Agent Details UK](images/image-16.png)
+    ![Set Child Agent Details UK](images/image-16.png)
 
     > [!TIP]
     > You can use a formula or variables to make conditions for when this agent should be available.
@@ -360,7 +360,7 @@ In this section, you'll learn how to create child agents to logically group know
     This agent should only answer questions about Microsoft Surface products in regards to the UK-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United Kingdom.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.`
     ```
 
-![Add Child Agent Instructions UK](images/image-17.png)
+    ![Add Child Agent Instructions UK](images/image-17.png)
 
 1. Add Knowledge to the Child Agent by Selecting **Add** in the Knowledge section of the Child Agent configuration
 
@@ -382,7 +382,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 1. Verify that the correct child agent was triggered and that your answer is appropriate for the UK market
 
-![Example Response UK question](images/image-18.png)
+    ![Example Response UK question](images/image-18.png)
 
 1. Reset the conversation and do again for the US market.
 
@@ -451,14 +451,14 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 #### Ensure that indexes are in place for our connected agent
 
-    > [!IMPORTANT]
-    > This is not required for a connected agent to work, but to make sure that the one we have pre-loaded for you will return results we must index a few tables in your environment.
+> [!IMPORTANT]
+> This is not required for a connected agent to work, but to make sure that the one we have pre-loaded for you will return results we must index a few tables in your environment.
 
 1. Go to the Power Apps maker portal [https://make.powerapps.com](https://make.powerapps.com)
 
-![Open Power Apps](images/image-19.png)
+    ![Open Power Apps](images/image-19.png)
 
-1 In the left menu select **Tables**
+1. In the left menu select **Tables**
 
 1. Select the **Account** table from the list
 
@@ -475,14 +475,14 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. To add any that are missing select **+ View column** and then select the column from the list.
 
-![Account View](images/image-20.png)
+    ![Account View](images/image-20.png)
 
 1. Add the ability to search on certain fields by making sure that the following items are in the **Find by** on the bottom right. Select the **Edit find table columns** option to check:
    - Address1: State or Providence
    - Address1: Postal Code
    - Address1: City
 
-![Add Account Searchable Columns](images/image-21.png)
+    ![Add Account Searchable Columns](images/image-21.png)
 
 1. Select **Edit find table columns** to add any missing columns.
 
@@ -495,7 +495,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. Select on **Tables** in the Views screen to go back to the list of Tables
 
-![Go to Tables](images/image-22.png)
+    ![Go to Tables](images/image-22.png)
 
 1. Select **Contact** table from the list
 
@@ -504,19 +504,19 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 1. Select **Quick Find Active Contacts** option from the list of Views
 
 1. Select **View Column** to verify the following columns are in the view:
-    - Anniversary
-    - Birthday
-    - Job Title
-    - Marital Status
+   - Anniversary
+   - Birthday
+   - Job Title
+   - Marital Status
 
-![Column Add Contact](images/image-23.png)
+    ![Column Add Contact](images/image-23.png)
 
 1. Select **+ View column** to add any that are missing.
 
 1. Select **Save and publish** to update the index
 
-> [!IMPORTANT]
-> DO NOT navigate away until the save and publish is completed!
+    > [!IMPORTANT]
+    > DO NOT navigate away until the save and publish is completed!
 
 #### Test and Publish the Account and Contact Information Agent
 
@@ -528,7 +528,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. Verify that you get a response showing that the agent is working and the data is indexed
 
-![Test Account Lookup](images/image-24.png)
+    ![Test Account Lookup](images/image-24.png)
 
 1. Select **Settings** in the upper right menu
 
@@ -551,13 +551,13 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. Select **Account Data Lookup Agent** from the menu
 
-![Select Connected Agent](images/image-26.png)
+    ![Select Connected Agent](images/image-26.png)
 
 1. Notice that the Description provides details on when to use this agent
 
 1. Make sure that the **Pass conversation history to this agent** is **Checked**
 
-![Validate Setting Connected Agent](images/image-27.png)
+    ![Validate Setting Connected Agent](images/image-27.png)
 
 1. Select **Add and configure**
 
