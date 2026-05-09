@@ -40,7 +40,8 @@ Help makers understand how to leverage multi-agent configurations including chil
 - [Instructions by Use Case](#instructions-by-use-case)
   - [Use Case #1: Create Sales Assistant Agent](#use-case-1-create-sales-assistant-agent)
   - [Use Case #2: Create Product Information Child Agents](#use-case-2-create-product-information-child-agents)
-  - [Use Case #3: Connect to Account and Contact Information Agent](#use-case-3-connect-to-account-and-contact-information-agent)
+  - [Use Case #3: Verify Account and Contact Information Agent Setup](#use-case-3-verify-account-and-contact-information-agent-setup)
+  - [Use Case #4: Connect to Account and Contact Information Agent](#use-case-4-connect-to-account-and-contact-information-agent)
 
 ---
 
@@ -130,7 +131,8 @@ In this lab, you'll build a parent agent that will leverage both connected agent
 |------|----------|-------------|--------|
 | 1 | [Create Sales Assistant Agent](#use-case-1-create-sales-assistant-agent) | Creates parent agent to help sales associate find information they need | 8 min |
 | 2 | [Create Product Information Child Agents](#use-case-2-create-product-information-child-agents) | Creates child agents to provide market-specific product information | 12 min |
-| 3 | [Connect to Account and Contact Information Agent](#use-case-3-connect-to-account-and-contact-information-agent) | Connect existing Copilot Studio agent that provides account and contact information | 10 min |
+| 3 | [Verify Account and Contact Information Agent Setup](#use-case-3-verify-account-and-contact-information-agent-setup) | Confirm the prebuilt connected agent and its data are ready before wiring it up | 5 min |
+| 4 | [Connect to Account and Contact Information Agent](#use-case-4-connect-to-account-and-contact-information-agent) | Wire the prebuilt connected agent into the parent agent | 5 min |
 
 ---
 
@@ -409,23 +411,26 @@ In this section, you'll learn how to create child agents to logically group know
 
 ---
 
-## Use Case #3: Connect to Account and Contact Information Agent
+## Use Case #3: Verify Account and Contact Information Agent Setup
 
-Connect the Account and Contact Information agent to our parent Sales Associate Agent. Will need to ensure indexing is working in the environment ahead of testing.
+Verify that the Account and Contact Information agent (the connected agent we'll use in the next Use Case) is fully configured to work in your environment.
+
+> [!NOTE]
+> If you've already completed this verification in another lab (such as the **Orchestration lab**), you can skip this Use Case and continue to [Use Case #4](#use-case-4-connect-to-account-and-contact-information-agent).
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Connect to Account and Contact Information Agent | Connect to an Account and Contact Information agent | 10 minutes |
+| Verify Account and Contact Information Agent Setup | Confirm the prebuilt connected agent and its data are ready before wiring it up | 5 minutes |
 
 **Summary of tasks**
 
-In this section, you'll learn how to connect an existing Copilot Studio agent to your parent agent using the connected agents feature.
+In this section, you'll confirm that Dataverse Search is enabled, the Account and Contact tables are indexed, and the Account Data Lookup Agent is published and discoverable.
 
-**Scenario:** Your Sales Team needs to quickly answer questions and help customers with information on your products and with finding account and contact information.
+**Scenario:** Before connecting an existing agent to your parent agent, you need to make sure the existing agent and its underlying data are properly configured.
 
 ### Objective
 
-Connect existing agent to our Sales Associate Assistant agent to add ability to find account and contact information from the sales system.
+Confirm the environment is ready to host a connected agent for account and contact lookups.
 
 ---
 
@@ -541,6 +546,51 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 > [!IMPORTANT]
 > You can't connect to an agent unless it is published
 
+---
+
+### Congratulations! You've completed Use Case #3!
+
+---
+
+### Test your understanding
+
+**Key takeaways:**
+
+* **Dataverse Search must be enabled** – Connected agents that look up Dataverse data depend on Dataverse Search being on at the environment level.
+* **Quick Find indexes drive what's searchable** – The columns added to the Quick Find view determine which fields the agent can filter on at runtime.
+* **Publishing + sharing must both be on** – A connected agent must be published and have "Let other agents connect to and use this one" enabled before it can be connected.
+
+**Lessons learned & troubleshooting tips:**
+
+* If Dataverse search returns no results, verify the Quick Find views have the correct columns added and the view is saved and published.
+* If the agent can't find account data, check that Dataverse Search is enabled in the Power Platform admin center for your environment.
+
+---
+
+---
+
+## Use Case #4: Connect to Account and Contact Information Agent
+
+Connect the Account and Contact Information agent to our parent Sales Associate Agent so the parent can delegate account and contact lookups to it via the connected agents feature.
+
+| Use case | Value added | Estimated effort |
+|----------|-------------|------------------|
+| Connect to Account and Contact Information Agent | Wire the prebuilt connected agent into the parent agent | 5 minutes |
+
+**Summary of tasks**
+
+In this section, you'll connect the existing Account Data Lookup Agent to your parent Sales Associate Assistant using the connected agents feature, then test that the parent successfully delegates to it.
+
+**Scenario:** Your parent agent now needs to answer account and contact questions, and that capability lives in a separate, already-published agent.
+
+### Objective
+
+Connect the existing agent to the parent agent and validate that orchestration delegates to it correctly.
+
+---
+
+### Step-by-step instructions
+
 #### Connect the Account and Contact Information Agent
 
 1. In the Copilot Studio tab in your browser, go to the parent agent (Sales Associate Assistant)
@@ -573,7 +623,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ---
 
-### Congratulations! You've completed Use Case #3!
+### Congratulations! You've completed Use Case #4!
 
 ---
 
@@ -582,14 +632,13 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 **Key takeaways:**
 
 * **Connected agents extend reach** – Unlike child agents that live inside your agent, connected agents are independently published agents that your agent delegates to.
-* **Publishing is required** – A connected agent must be published and have "Let other agents connect to and use this one" enabled before it can be connected.
 * **Conversation history improves context** – Passing conversation history to the connected agent helps it understand the full context of the user's request.
+* **Descriptions drive delegation** – The orchestrator uses the connected agent's description to decide when to route to it, so write descriptions with that decision in mind.
 
 **Lessons learned & troubleshooting tips:**
 
-* If the connected agent doesn't appear in the list, ensure it is published and the sharing setting is turned on.
-* If Dataverse search returns no results, verify the Quick Find views have the correct columns added and the view is saved and published.
-* If the agent can't find account data, check that Dataverse Search is enabled in the Power Platform admin center for your environment.
+* If the connected agent doesn't appear in the list, ensure it is published and the sharing setting is turned on (covered in Use Case #3).
+* If the parent agent doesn't delegate to the connected agent, check the connected agent's description — it's what the orchestrator reads when deciding whether to route to it.
 
 **Challenge: Apply this to your own use case**
 

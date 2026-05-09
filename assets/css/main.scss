@@ -329,6 +329,12 @@ aside.sidebar__right {
 // Tables
 // ---------------------------------------------------------------------------
 table {
+  // Override upstream `table { display: block }` so width: 100% actually
+  // stretches the cells; under `display: block` the outer box is 100% wide
+  // but the inner cells still shrink to content, leaving the table visually
+  // shorter than surrounding headings/lists on tables with brief rows.
+  display: table;
+  width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   border-radius: 6px;
@@ -343,13 +349,19 @@ table {
     font-size: 0.8em;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-    padding: 0.7em 1em;
+    // Horizontal padding is 1.25em so it equals tbody td's 1em of the table
+    // font (this th has font-size: 0.8em, which scales every em down by 0.8).
+    padding: 0.7em 1.25em;
     border-bottom: 2px solid var(--color-border);
   }
 
   tbody td {
     padding: 0.65em 1em;
-    border-bottom: 1px solid var(--color-bg-elevated);
+    // Uses --color-divider rather than --color-bg-elevated. The latter is so
+    // close to the page background in dark mode that 1px lines get heavily
+    // anti-aliased and render unevenly across rows — most noticeable on
+    // tables with short, tightly packed rows.
+    border-bottom: 1px solid var(--color-divider);
   }
 
   tbody tr:last-child td {
