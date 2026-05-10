@@ -2,12 +2,12 @@
 layout: lab
 title: "Governance Zones in Copilot Studio"
 order: 195
-duration: 30
+duration: 45
 difficulty: 300
 lab_type: local
 section: intermediate_labs
 journeys: ["business-user", "developer"]
-bootcamp_order: "8"
+bootcamp_order: "9"
 description: "Build the same agent across three governance zones (Green, Yellow, Red) to experience firsthand how DLP policies and environment settings control knowledge access in Microsoft Copilot Studio."
 
 ---
@@ -286,8 +286,8 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Review the name and description.
 
-> [!NOTE]
-> Again, the defaults are fine for now, but do improve these for production agents.
+    > [!NOTE]
+    > Again, the defaults are fine for now, but do improve these for production agents.
 
 1. Select **Add to agent**.
 
@@ -518,8 +518,8 @@ Create a "Copilot Studio Advisor" agent in the Red zone with full public website
 
 1. Give your agent a schema name with `red` in it, following the same pattern as before.
 
-> [!TIP]
-> For example: `mcs_build_advisor_[YourUsername]_red`
+    > [!TIP]
+    > For example: `mcs_build_advisor_[YourUsername]_red`
 
 1. Select the **blue arrow** to create the agent.
 

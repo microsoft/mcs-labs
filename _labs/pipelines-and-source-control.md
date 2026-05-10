@@ -167,11 +167,11 @@ In this section, you'll learn how to create a new project in Azure DevOps, how t
 
 5. Under **Subscription / Program**, select **Visual Studio Dev Essentials**
 
-> [!IMPORTANT]
-> If you're landing into a **Something went wrong!** error, follow these steps:
-> 1. Go to [aex.dev.azure.com](https://aex.dev.azure.com/).
-> 2. If prompted, create new organization (you can leave the default name) if prompted
-> 3. Skip to step 6.
+    > [!IMPORTANT]
+    > If you're landing into a **Something went wrong!** error, follow these steps:
+    > 1. Go to [aex.dev.azure.com](https://aex.dev.azure.com/).
+    > 2. If prompted, create new organization (you can leave the default name) if prompted
+    > 3. Skip to step 6.
 
 6. Select **Azure DevOps** to open the Azure DevOps portal.
 
@@ -223,7 +223,7 @@ In this section, you'll learn how to create a new project in Azure DevOps, how t
 
 25. When ready, select **Commit**, add a comment describing the changes you're introducing (e.g., `New solution and environment variable`).
 
-![alt text](images/commit.png)
+    ![alt text](images/commit.png)
 
 26. Once committed, you can **navigate** to your commit in Azure DevOps and see the introduced, updated, or deleted components.
 
@@ -310,9 +310,9 @@ the agent. Tell the agent to "Provision a PROD environment".  You are limited to
 
 13. In the PROD card, select **Deploy here**.
 
-> [!TIP]
-> - The wizard then makes sure that each environment variable has a value set in the target environment, and that all connection references are valid. If any of these checks fail, you will be prompted to fix them before proceeding. 
-> - If the deployment fails because of missing dependencies make sure to go back to your solution explorer, click on the 3-dots next to each agents > Advanced > Add required objects and try re-deploying the solution.
+    > [!TIP]
+    > - The wizard then makes sure that each environment variable has a value set in the target environment, and that all connection references are valid. If any of these checks fail, you will be prompted to fix them before proceeding. 
+    > - If the deployment fails because of missing dependencies make sure to go back to your solution explorer, click on the 3-dots next to each agents > Advanced > Add required objects and try re-deploying the solution.
 
 14. In Copilot Studio, **switch** to the PROD environment.
 

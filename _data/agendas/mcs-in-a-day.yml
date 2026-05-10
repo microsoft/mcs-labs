@@ -21,10 +21,10 @@ schedule:
     title: "Agent Builder"
     time: "09:30"
     duration: 30
-    slides: "/presentations/01.%20Agent%20Builder_CB.pptx"
+    slides: "/presentations/mcs-in-a-day/01.%20Agent%20Builder_CB.pptx"
 
   - type: break
-    title: "Coffee break / Q+A"
+    title: "Coffee break / Q&A"
     time: "10:00"
     duration: 15
 
@@ -38,7 +38,7 @@ schedule:
     title: "Copilot Studio Core Concepts - Part 1"
     time: "10:30"
     duration: 30
-    slides: "/presentations/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
+    slides: "/presentations/mcs-in-a-day/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
 
   - type: lab
     slug: core-concepts-agent-knowledge-tools
@@ -60,7 +60,7 @@ schedule:
     title: "Copilot Studio Core Concepts - Part 2"
     time: "13:00"
     duration: 30
-    slides: "/presentations/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
+    slides: "/presentations/mcs-in-a-day/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
 
   - type: lab
     slug: core-concepts-variables-agents-channels
@@ -72,7 +72,7 @@ schedule:
     title: "Copilot Studio Core Concepts - Part 3"
     time: "14:15"
     duration: 30
-    slides: "/presentations/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
+    slides: "/presentations/mcs-in-a-day/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
 
   - type: break
     title: "Coffee break / Q&A"
@@ -89,7 +89,7 @@ schedule:
     title: "Licensing"
     time: "15:30"
     duration: 30
-    slides: "/presentations/05.%20Licensing_CB.pptx"
+    slides: "/presentations/mcs-in-a-day/15.%20Licensing_CB.pptx"
 
   - type: break
     title: "Open Q+A"

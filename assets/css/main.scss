@@ -329,6 +329,12 @@ aside.sidebar__right {
 // Tables
 // ---------------------------------------------------------------------------
 table {
+  // Override upstream `table { display: block }` so width: 100% actually
+  // stretches the cells; under `display: block` the outer box is 100% wide
+  // but the inner cells still shrink to content, leaving the table visually
+  // shorter than surrounding headings/lists on tables with brief rows.
+  display: table;
+  width: 100%;
   border-collapse: separate;
   border-spacing: 0;
   border-radius: 6px;
@@ -343,13 +349,19 @@ table {
     font-size: 0.8em;
     letter-spacing: 0.03em;
     text-transform: uppercase;
-    padding: 0.7em 1em;
+    // Horizontal padding is 1.25em so it equals tbody td's 1em of the table
+    // font (this th has font-size: 0.8em, which scales every em down by 0.8).
+    padding: 0.7em 1.25em;
     border-bottom: 2px solid var(--color-border);
   }
 
   tbody td {
     padding: 0.65em 1em;
-    border-bottom: 1px solid var(--color-bg-elevated);
+    // Uses --color-divider rather than --color-bg-elevated. The latter is so
+    // close to the page background in dark mode that 1px lines get heavily
+    // anti-aliased and render unevenly across rows — most noticeable on
+    // tables with short, tightly packed rows.
+    border-bottom: 1px solid var(--color-divider);
   }
 
   tbody tr:last-child td {
@@ -382,6 +394,119 @@ p > code, li > code, td > code {
   padding: 0.15em 0.4em;
   border-radius: 4px;
   font-size: 0.85em;
+}
+
+// Minimal-mistakes' default `.page__content :not(pre) > code` rule hardcodes
+// `background: $code-background-color` (≈ #fafafa) at SCSS compile time, so
+// inline code remained near-white in Dark / HC themes — the user-visible
+// symptom was an "invisible" white pill at the end of "Global.Market is
+// equal to `US`" on the multi-agent lab. Match the gem's specificity and
+// route both bg and color through theme tokens.
+.page__content :not(pre) > code {
+  background: var(--color-bg-elevated);
+  color: var(--color-fg-strong);
+  border: 1px solid var(--color-border-subtle);
+}
+
+// GitHub-flavored alert callouts (`> [!IMPORTANT]` etc.). The conversion
+// from plain blockquote → styled callout happens in
+// assets/js/github-alerts.js, which adds `github-alert` plus a variant
+// modifier and a `.github-alert__header` label. Each variant gets a
+// dedicated accent that resolves through theme tokens where possible so
+// the callouts remain readable in Light / Dark / HC.
+.page__content blockquote.github-alert {
+  margin: 1.25em 0;
+  padding: 0.85em 1.1em 0.9em;
+  border-left: 4px solid var(--color-accent);
+  border-radius: 6px;
+  background: var(--color-bg-elevated);
+  color: var(--color-fg-body);
+  font-style: normal;
+
+  > .github-alert__header {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    font-weight: 700;
+    font-size: 0.95em;
+    text-transform: none;
+    margin-bottom: 0.3em;
+    color: var(--color-accent);
+
+    &::before {
+      content: "";
+      width: 1em;
+      height: 1em;
+      background-color: currentColor;
+      -webkit-mask-position: center;
+              mask-position: center;
+      -webkit-mask-size: contain;
+              mask-size: contain;
+      -webkit-mask-repeat: no-repeat;
+              mask-repeat: no-repeat;
+    }
+  }
+
+  > p {
+    margin: 0.25em 0;
+    color: var(--color-fg-body);
+
+    &:last-child { margin-bottom: 0; }
+  }
+
+  // --- Variant accents -----------------------------------------------------
+  // Note (blue) — uses the existing accent token so it follows brand colors.
+  &--note {
+    border-left-color: var(--color-accent);
+    > .github-alert__header { color: var(--color-accent); }
+    > .github-alert__header::before {
+      // Info circle
+      -webkit-mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM7.25 4.75a.75.75 0 111.5 0v.5a.75.75 0 11-1.5 0v-.5zM7 7h1.5v4.5H7V7z'/></svg>");
+              mask-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='black' d='M8 1.5a6.5 6.5 0 100 13 6.5 6.5 0 000-13zM7.25 4.75a.75.75 0 111.5 0v.5a.75.75 0 11-1.5 0v-.5zM7 7h1.5v4.5H7V7z'/></svg>");
+    }
+  }
+
+  // Tip (green) — semantic success token.
+  &--tip {
+    border-left-color: var(--color-success);
+    > .github-alert__header { color: var(--color-success); }
+  }
+
+  // Important (purple).
+  &--important {
+    --gha-color: #8957e5;
+    border-left-color: var(--gha-color);
+    > .github-alert__header { color: var(--gha-color); }
+  }
+
+  // Warning (amber).
+  &--warning {
+    --gha-color: #c98a00;
+    border-left-color: var(--gha-color);
+    > .github-alert__header { color: var(--gha-color); }
+  }
+
+  // Caution (red).
+  &--caution {
+    --gha-color: #cf222e;
+    border-left-color: var(--gha-color);
+    > .github-alert__header { color: var(--gha-color); }
+  }
+}
+
+// Dark theme — bump variant accents one notch brighter so they stay legible
+// against `--color-bg-elevated` (#2b2a29).
+[data-theme="dark"] .page__content blockquote.github-alert {
+  &--important { --gha-color: #b894f0; }
+  &--warning   { --gha-color: #f0b94c; }
+  &--caution   { --gha-color: #ff6e75; }
+  &--tip > .github-alert__header { color: #4ec96b; }
+}
+
+// High-contrast theme: use bold accent tokens so each variant stays distinct.
+[data-theme="hc"] .page__content blockquote.github-alert {
+  background: var(--color-bg-elevated);
+  border-left-width: 6px;
 }
 
 // ---------------------------------------------------------------------------

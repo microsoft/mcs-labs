@@ -134,22 +134,22 @@ Create, configure, and share a Copilot agent that serves as a knowledgeable guid
 
 1. Navigate to [Microsoft 365 Copilot home page](https://m365.cloud.microsoft/chat/?auth=2&home=1)  
 
-> [!IMPORTANT]
-> - If the Microsoft 365 Copilot URL is `https://copilot.cloud.microsoft/` or if the Copilot pane is on the right-hand side, this means you're on the **wrong** page.
-> 
->   ![Wrong copilot page](images/wrong-copilot-page.png)
-> 
-> - To fix this, **close** the tab, then **go back to the SharePoint** page. Select the app launcher, and choose **Microsoft 365 Copilot** from there.
->
->   ![App launcher](images/app-launcher.png)
->
-> - The Copilot pane should be on the left-hand side of the page, and the URL should be `https://m365.cloud.microsoft/`. If you see this, you're on the right page:
->
->   ![Correct copilot page](images/correct-copilot-page.png)
-> 
-> - Make sure the **logged in user** is the fictitious one used in the lab. If you need your normal work user account, **select** the name and toggle to the fictitious user account.
->
->   ![Logged in user](images/logged-in-user.png)
+    > [!IMPORTANT]
+    > - If the Microsoft 365 Copilot URL is `https://copilot.cloud.microsoft/` or if the Copilot pane is on the right-hand side, this means you're on the **wrong** page.
+    > 
+    >   ![Wrong copilot page](images/wrong-copilot-page.png)
+    > 
+    > - To fix this, **close** the tab, then **go back to the SharePoint** page. Select the app launcher, and choose **Microsoft 365 Copilot** from there.
+    >
+    >   ![App launcher](images/app-launcher.png)
+    >
+    > - The Copilot pane should be on the left-hand side of the page, and the URL should be `https://m365.cloud.microsoft/`. If you see this, you're on the right page:
+    >
+    >   ![Correct copilot page](images/correct-copilot-page.png)
+    > 
+    > - Make sure the **logged in user** is the fictitious one used in the lab. If you need your normal work user account, **select** the name and toggle to the fictitious user account.
+    >
+    >   ![Logged in user](images/logged-in-user.png)
 
 2. Go to the **Chat** tab.
 
@@ -175,10 +175,10 @@ Create, configure, and share a Copilot agent that serves as a knowledgeable guid
 3. If you have Microsoft 365 Copilot license, make sure you are in the **Web** tab (if you don't see any tab for Work/Web, this means you only have access to Copilot Chat).
 
 4. Test the experience:
-```
-Upcoming features in Microsoft Copilot Studio roadmap
-```
-![Simple copilot search](images/simple-copilot-search.png)
+    ```
+    Upcoming features in Microsoft Copilot Studio roadmap
+    ```
+    ![Simple copilot search](images/simple-copilot-search.png)
 
 5. Select **Start a new chat** to reset.
 
@@ -186,29 +186,29 @@ Upcoming features in Microsoft Copilot Studio roadmap
 
 6. On the side pane, expand **Agents** and select **New agent**  
 
-> [!TIP]  
-> If you don't see **New agent**, try refreshing with Ctrl + F5. You user account may still be provisionning services.
+    > [!TIP]  
+    > If you don't see **New agent**, try refreshing with Ctrl + F5. You user account may still be provisionning services.
 
 7. Notice that you can explore existing **templates**. But for this lab, select the  **Describe** tab and copy/paste the following description into the input area to describe the agent you wish to build, then Select **send**:
 
-```
-I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Agent Builder in Microsoft 365. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
-```
+    ```
+    I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Agent Builder in Microsoft 365. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
+    ```
 
-> [!TIP]  
-> From here, you will find that the conversational creation experience might differ from the below step-by-step instructions, as it's using generative AI and it is by nature non-deterministic. The core concepts remain the same, but the UI may change slightly. Just adjust to the questions and options presented to you.
+    > [!TIP]  
+    > From here, you will find that the conversational creation experience might differ from the below step-by-step instructions, as it's using generative AI and it is by nature non-deterministic. The core concepts remain the same, but the UI may change slightly. Just adjust to the questions and options presented to you.
 
 8. Agent Builder will try to determine a name for your agent from your initial prompt, if the name chosen is anything other than **Copilot Teacher**, then input the following prompt and select **send** to suggest an alternate agent name and tone:
 
-```
-The name of the agent should be Copilot Teacher. Your tone should be friendly, personal, and emphatic. You can make jokes, use subtle irony and emojis when appropriate.
-```
+    ```
+    The name of the agent should be Copilot Teacher. Your tone should be friendly, personal, and emphatic. You can make jokes, use subtle irony and emojis when appropriate.
+    ```
 
 9. *If* asked about how the agent should handle **questions that are directly related to Copilot**, or how the agent should handle **situations where the user provides incorrect information or demonstrates a misunderstanding**, reply with:
 
-```
-It shouldn't answer questions that are not related to Microsoft 365 Copilot, Copilot Chat, or Copilot Studio. Always guide users towards the correct solution based on your knowledge.
-```
+    ```
+    It shouldn't answer questions that are not related to Microsoft 365 Copilot, Copilot Chat, or Copilot Studio. Always guide users towards the correct solution based on your knowledge.
+    ```
 
 10. Agent Builder will try to identify potential knowledge sources, **paste** the following URLs to provide specific knowledge sources and select **send**:
 

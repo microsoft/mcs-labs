@@ -104,22 +104,22 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
 <!-- 
 
-> [!IMPORTANT]
-> - If the Microsoft 365 Copilot URL is `https://copilot.cloud.microsoft/` or if the Copilot pane is on the right-hand side, this means you're on the **wrong** page.
-> 
-> ![alt text](images/wrong-copilot-page.png)
-> 
-> - To fix this, **close** the tab, then **go back to the SharePoint** page. Select the app launcher, and choose **Microsoft 365 Copilot** from there.
->
-> ![alt text](images/app-launcher.png)
->
-> - The Copilot pane should be on the left-hand side of the page, and the URL should be `https://m365.cloud.microsoft/`. If you see this, you're on the right page:
->
-> ![alt text](images/correct-copilot-page.png)
-> 
-> - Make sure the **logged in user** is the fictitious one used in the lab. If you need your normal work user account, **select** the name and toggle to the fictitious user account.
->
-> ![alt text](images/logged-in-user.png)
+    > [!IMPORTANT]
+    > - If the Microsoft 365 Copilot URL is `https://copilot.cloud.microsoft/` or if the Copilot pane is on the right-hand side, this means you're on the **wrong** page.
+    > 
+    > ![alt text](images/wrong-copilot-page.png)
+    > 
+    > - To fix this, **close** the tab, then **go back to the SharePoint** page. Select the app launcher, and choose **Microsoft 365 Copilot** from there.
+    >
+    > ![alt text](images/app-launcher.png)
+    >
+    > - The Copilot pane should be on the left-hand side of the page, and the URL should be `https://m365.cloud.microsoft/`. If you see this, you're on the right page:
+    >
+    > ![alt text](images/correct-copilot-page.png)
+    > 
+    > - Make sure the **logged in user** is the fictitious one used in the lab. If you need your normal work user account, **select** the name and toggle to the fictitious user account.
+    >
+    > ![alt text](images/logged-in-user.png)
 
  -->
 
@@ -151,11 +151,11 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
 4. Test the basic experience by typing:
 
-```
-What are new features in the Microsoft Copilot Studio roadmap?
-```
+    ```
+    What are new features in the Microsoft Copilot Studio roadmap?
+    ```
 
-![alt text](images/simple-copilot-search.png)
+    ![alt text](images/simple-copilot-search.png)
 
 5. Select **Start a new chat** (top right icon) to reset. Notice how your history of converations is saved on the left-hand side.
 
@@ -163,29 +163,29 @@ What are new features in the Microsoft Copilot Studio roadmap?
 
 6. On the side pane, expand **Agents** and select **Create agent** 
 
-> [!TIP] 
-> If you don't see **Create agent**, try refreshing with Ctrl + F5.
+    > [!TIP] 
+    > If you don't see **Create agent**, try refreshing with Ctrl + F5.
 
 7. Notice that you can explore existing **templates**. But for this lab, when prompted to **describe the agent**, reply with:
 
-```
-I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Copilot Studio Lite. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
-```
+    ```
+    I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Copilot Studio Lite. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
+    ```
 
-> [!TIP] 
-> From here, you will find that the conversational creation experience might differ from the below step-by-step instructions, as it's using generative AI and it is by nature non-deterministic. The core concepts remain the same, but the UI may change slightly. Just adjust to the questions and options presented to you.
+    > [!TIP] 
+    > From here, you will find that the conversational creation experience might differ from the below step-by-step instructions, as it's using generative AI and it is by nature non-deterministic. The core concepts remain the same, but the UI may change slightly. Just adjust to the questions and options presented to you.
 
 8. *If* asked for agent name and other details, you can **instruct** it this:
 
-```
-The name of the agent should be Copilot Teacher. Your tone should be friendly, personal, and emphatic. You can make jokes, use subtle irony and emojis when appropriate.
-```
+    ```
+    The name of the agent should be Copilot Teacher. Your tone should be friendly, personal, and emphatic. You can make jokes, use subtle irony and emojis when appropriate.
+    ```
 
 9. *If* asked about how the agent should handle **questions that are directly related to Copilot**, or how the agent should handle **situations where the user provides incorrect information or demonstrates a misunderstanding**, reply with:
 
-```
-It shouldn't answer questions that are not related to Microsoft 365 Copilot, Copilot Chat, or Copilot Studio. Always guide users towards the correct solution based on your knowledge.
-```
+    ```
+    It shouldn't answer questions that are not related to Microsoft 365 Copilot, Copilot Chat, or Copilot Studio. Always guide users towards the correct solution based on your knowledge.
+    ```
 
 10. When asked about **publicly accessible websites** as knowledge sources, **paste** these URLs:
 
@@ -289,22 +289,22 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 #### Access and prepare SharePoint documents
 
 1. Navigate to your organization's SharePoint site
- - Go to the **Documents** tab 
- - Open the **Sales** folder 
+    - Go to the **Documents** tab 
+    - Open the **Sales** folder 
 
-> [!IMPORTANT]
-> The URL of the SharePoint site is available in **Lab Resources** (specific per training).
+    > [!IMPORTANT]
+    > The URL of the SharePoint site is available in **Lab Resources** (specific per training).
 
-![alt text](images/sales-docs.png)
+    ![alt text](images/sales-docs.png)
 
 2. Locate the following sample files:
- - **Sales Excel file**: A spreadsheet containing sales data with columns for dates, product lines, revenue, and quarters
- - **Sales policy document**: A Word document containing sales policies, procedures, and guidelines
+    - **Sales Excel file**: A spreadsheet containing sales data with columns for dates, product lines, revenue, and quarters
+    - **Sales policy document**: A Word document containing sales policies, procedures, and guidelines
 
 3. Open the **Excel file** and review the data structure:
- - Ensure it contains sales data across multiple quarters/years
- - Verify product line categorization
- - Note the column headers and data format
+    - Ensure it contains sales data across multiple quarters/years
+    - Verify product line categorization
+    - Note the column headers and data format
 
 4. Open the **Word policy document** and review:
  - Sales procedures and guidelines
@@ -319,9 +319,9 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 7. When prompted to **describe the agent**, use this specific prompt:
 
-```
-You are a Sales Admin Assistant. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
-```
+    ```
+    You are a Sales Admin Assistant. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
+    ```
 
 8. **Confirm** the suggested agent name when prompted.
 
@@ -363,9 +363,9 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
 #### Finalize and create
 
 12. Review the **Configure** tab to refine:
- - Agent name and description
- - Instructions
- - Starter prompts
+    - Agent name and description
+    - Instructions
+    - Starter prompts
 
 13. When satisfied with the configuration, select **Create**.
 
@@ -375,9 +375,9 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
 
 15. First, test the agent's **knowledge** of your sales policy:
 
-```
-What are the key guidelines in our sales policy regarding customer discounts?
-```
+    ```
+    What are the key guidelines in our sales policy regarding customer discounts?
+    ```
 
 16. Verify the agent references your SharePoint policy document and provides accurate information.
 
@@ -387,13 +387,13 @@ What are the key guidelines in our sales policy regarding customer discounts?
 
 17. **Start a new chat** and test the **code interpreter** capability with a data analysis request:
 
-```
-How are sales trending for home appliances?
-```
+    ```
+    How are sales trending for home appliances?
+    ```
 
 18. *If* offered to get a visual chart of this breakdown, **confirm**.
 
-![alt text](images/sales-data-analysis.png)
+    ![alt text](images/sales-data-analysis.png)
 
 19. **Observe** how the agent:
  - Accesses your Excel data

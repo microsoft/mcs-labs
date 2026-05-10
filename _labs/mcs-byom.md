@@ -233,8 +233,8 @@ Create a reusable prompt template that leverages Azure AI Foundry models to hand
 
     ![Model connection details](images/image14.png)
 
-> [!NOTE]
-> All connection details including endpoint URLs and API keys will be provided by your lab instructor or found in your lab environment documentation.
+    > [!NOTE]
+    > All connection details including endpoint URLs and API keys will be provided by your lab instructor or found in your lab environment documentation.
 
 14. Click on **Connect**.
 

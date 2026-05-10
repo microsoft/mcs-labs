@@ -95,8 +95,8 @@ Prepare the SharePoint documents that will serve as knowledge sources for your S
     - Go to the **Documents** tab 
     - Open the **Sales** folder 
 
-> [!IMPORTANT]
->  The URL of the SharePoint site is available in **Lab Resources** (specific per training).
+    > [!IMPORTANT]
+    >  The URL of the SharePoint site is available in **Lab Resources** (specific per training).
 
 2. Locate the following sample files:
    - **Sales Excel file**: A spreadsheet containing sales data with columns for dates, product lines, revenue, and quarters
@@ -127,21 +127,21 @@ Build a specialized agent with SharePoint integration and advanced AI capabiliti
 
 3. When prompted to **describe the agent**, use this specific prompt:
 
-```
-You are a Sales Admin Assistant. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
-```
+    ```
+    You are a Sales Admin Assistant. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
+    ```
 
 4. **Confirm** the suggested agent name when prompted.
 
 5. Go to the **Configure** tab
 
 <!--
-![alt text](images/knowledge-files.png)
+    ![alt text](images/knowledge-files.png)
 Commented out; screenshots need update due to CPS updates.  Last minute change to labs required so will do at a later date
-> [!TIP]
-> If you can't see the files you just opened, an alternative approach is just to **paste** and **add** the SharePoint URL of the Sales folder.
-> 
->    ![alt text](images/sharepoint-url-fallback.png)
+    > [!TIP]
+    > If you can't see the files you just opened, an alternative approach is just to **paste** and **add** the SharePoint URL of the Sales folder.
+    > 
+    >    ![alt text](images/sharepoint-url-fallback.png)
 -->
 
 6. Under **capabilities**, enable:
@@ -163,9 +163,9 @@ Commented out; screenshots need update due to CPS updates.  Last minute change t
    - Select both the **Sales Policy Document** and **Sales** documents
    - You will see them being added as SharePoint documents
   
-> [!TIP]
-> - If you can't see the files you just opened, an alternative approach is to **paste** and **add** the SharePoint URL of the Sales folder.
-> - Another alternative approach is to **download** the files locally and **upload** them to your agent.
+    > [!TIP]
+    > - If you can't see the files you just opened, an alternative approach is to **paste** and **add** the SharePoint URL of the Sales folder.
+    > - Another alternative approach is to **download** the files locally and **upload** them to your agent.
 
 8. When satisfied with the configuration, select **Create**.
 
@@ -183,9 +183,9 @@ Validate your agent's ability to work with SharePoint data and advanced AI featu
 
 2. First, test the agent's **knowledge** of your sales policy:
 
-```
-What are the key guidelines in our sales policy regarding customer discounts?
-```
+    ```
+    What are the key guidelines in our sales policy regarding customer discounts?
+    ```
 
 3. Verify the agent references your SharePoint policy document and provides accurate information.
 
@@ -193,15 +193,15 @@ What are the key guidelines in our sales policy regarding customer discounts?
 
 4. **Start a new chat** and test the **code interpreter** capability with a data analysis request:
 
-```
-How are sales trending for home appliances?
-```
+    ```
+    How are sales trending for home appliances?
+    ```
 
 5. *If* offered to get a visual chart of this breakdown, **confirm**.
 
-![alt text](images/sales-data-analysis.png)
+    ![alt text](images/sales-data-analysis.png)
 
-![alt text](images/code-interpreter.png)
+    ![alt text](images/code-interpreter.png)
 
 
 6. **Observe** how the agent:

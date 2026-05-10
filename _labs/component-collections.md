@@ -2,7 +2,7 @@
 layout: lab
 title: "Using Component Collections in Copilot Studio"
 order: 260
-duration: 30
+duration: 45
 difficulty: 300
 lab_type: local
 section: intermediate_labs
@@ -154,7 +154,7 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 1. Scroll down to the **Start with an agent template** section.
 
-![A screenshot showing selecting the template as mentioned in the text](images/Start%20with%20template.png)
+    ![A screenshot showing selecting the template as mentioned in the text](images/Start%20with%20template.png)
 
 1. Select the **Safe Travels** template.
 
@@ -170,13 +170,13 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 1. Enter the following into the **Create a topic to...** field:
 
-  ```
-  Let a user request a brochure by providing details by asking them if they want it via mail or email. If they select email collect their email address, but if they say via mail then collect their street address including city, state, and postal code. Always collect their first and last name and telephone number.
-  ```
+    ```
+    Let a user request a brochure by providing details by asking them if they want it via mail or email. If they select email collect their email address, but if they say via mail then collect their street address including city, state, and postal code. Always collect their first and last name and telephone number.
+    ```
 
 1. Select **Create**.
 
-  ![A screenshot showing creating the topic as mentioned in the text](images/Create%20a%20topic.png)
+    ![A screenshot showing creating the topic as mentioned in the text](images/Create%20a%20topic.png)
 
 1. Notice that Copilot Studio has created a topic that allows the user to request a brochure, complete with branching logic for mail vs. email delivery.
 
@@ -194,18 +194,18 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 1. Enter the following into the **Description** field:
 
-  ```
-  These are tools that assist with travel related scenarios.
-  ```
+    ```
+    These are tools that assist with travel related scenarios.
+    ```
 
 1. Check the **Solution** field, if **Select a solution** is showing do not change anything, if a solution is selected change it to **Create a new solution**.
 
-  > [!NOTE]
-  > If the Solution field is left blank, Copilot Studio will automatically create a new solution for you. You can also select an existing solution if you want to group multiple component collections together.
+    > [!NOTE]
+    > If the Solution field is left blank, Copilot Studio will automatically create a new solution for you. You can also select an existing solution if you want to group multiple component collections together.
 
 1. Select **Next**.
 
-![A screenshot showing selecting the solution as mentioned in the text](images/choose%20solution.png)
+    ![A screenshot showing selecting the solution as mentioned in the text](images/choose%20solution.png)
 
 1. Select your **Request a travel brochure** topic and the **US Travel Website** knowledge item, then Select **Next**.
 
@@ -286,7 +286,7 @@ Install a component collection in a new agent and verify that shared editing wor
 
 1. Hover over the **Travel Tools** item in the list, Select the **...** menu, and select **Add to agent**. This adds the Travel Tools component collection to your new agent.
 
-![A screenshot showing available component collections as mentioned in the text](images/available%20component%20collections.png)
+    ![A screenshot showing available component collections as mentioned in the text](images/available%20component%20collections.png)
 
 1. Go to the **Installed** tab in the menu. Notice that **Travel Tools** is now listed as installed in both your new agent and the Safe Travels agent.
 

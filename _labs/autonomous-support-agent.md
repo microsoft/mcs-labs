@@ -183,8 +183,8 @@ Create an autonomous agent that automatically triggers when new support emails a
 
 13. Finally **Create trigger**
 
-> [!TIP]
-> This trigger configuration determines which emails activate your agent. You can refine filters later to target specific email addresses or subject patterns.
+    > [!TIP]
+    > This trigger configuration determines which emails activate your agent. You can refine filters later to target specific email addresses or subject patterns.
 
 14. The trigger is now configured. After you **publish** your agent, it will automatically activate your agent when new emails arrive
 
@@ -253,15 +253,15 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 
 7. Select **Add and configure**
 
-> [!TIP]
-> You may need to set the connection again for the buttons to be available.
+    > [!TIP]
+    > You may need to set the connection again for the buttons to be available.
 
 8. Rename the tool to `Get ServiceNow ticket details`
 
 9. Update the description to: `Gets the details of an incident using its incident number`
 
-> [!TIP]
-> The description helps the AI know when to use this tool and what it does.
+    > [!TIP]
+    > The description helps the AI know when to use this tool and what it does.
 
 10. Under **Additional details**, change **Credentials to use** to **Maker-provided credentials**
 
@@ -269,8 +269,8 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 
 12. Select **+ Add input** and choose **Query**
 
-> [!TIP]
-> If you see an error such as `Duplicate Item Detected`, select `Custom Value` from the dropdown and then select `Dynamically fill with AI` again.
+    > [!TIP]
+    > If you see an error such as `Duplicate Item Detected`, select `Custom Value` from the dropdown and then select `Dynamically fill with AI` again.
 
 13. Select **Customize** and use this for **Description**:
 
@@ -278,8 +278,8 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
     The output of this variable is the concatenation of numberCONTAINS and the incident number. E.g., 'numberCONTAINSINC0007001'. Only the incident number should be prompted and obtained from the user (e.g., INC0007001)
     ```
 
-> [!TIP]
-> These instructions will be used by AI to understand how determine how to pass that information to the ServiceNow connector. In this case, how to use the very specific OData formatting of ServiceNow queries.
+    > [!TIP]
+    > These instructions will be used by AI to understand how determine how to pass that information to the ServiceNow connector. In this case, how to use the very specific OData formatting of ServiceNow queries.
 
 14. Select **+ Add input** and choose **Limit**
 
@@ -334,13 +334,13 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
     3. Once you have gathered knowledge and ticket information, use the <Reply to email> tool to reply to the original email received. Your reply should use the same language as the initial user email (e.g., if the questions are in French, reply in French, etc.)
     ```
 
-> [!IMPORTANT]
-> For each of the placeholder <...> in the description, use `/` to insert the tools you  just configured in your instructions.
+    > [!IMPORTANT]
+    > For each of the placeholder <...> in the description, use `/` to insert the tools you  just configured in your instructions.
 
-> [!TIP]
-> Note: the UX may differ and you don't have that option, leave the description as-is.
+    > [!TIP]
+    > Note: the UX may differ and you don't have that option, leave the description as-is.
 
-![alt text](images/instructions-and-tools.png)
+    ![alt text](images/instructions-and-tools.png)
 
 29. Click on **Save** to save the instructions and **Publish** your agent to activate it
 
@@ -348,31 +348,31 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 
 30. **Send** a test email to your training user email by using the **Workshop Agent**. Simply ask `Send a support email`. You will then shortly receive the email in **Microsoft Outlook**.
 
-> [!IMPORTANT]
-> - Access the workshop agent in the same location as when you created your training user account.
-> - You will need the workshop code and your training user's email address if you previously closed the agent.
-> - You can repeat this process as desired.
+    > [!IMPORTANT]
+    > - Access the workshop agent in the same location as when you created your training user account.
+    > - You will need the workshop code and your training user's email address if you previously closed the agent.
+    > - You can repeat this process as desired.
 
->
-> The email should contain something like this:
->   ```
->   Hi!
->   
->   I hope you're doing well!
->   
->   I had a couple of questions - what are the steps again to reset your Now Support user password?
->   Also, was wondering if you had an update on my cases INC0000059 and INC0000055
->   
->   Much appreciated.
->   Thanks!
->   ```
+    >
+    > The email should contain something like this:
+    >   ```
+    >   Hi!
+    >   
+    >   I hope you're doing well!
+    >   
+    >   I had a couple of questions - what are the steps again to reset your Now Support user password?
+    >   Also, was wondering if you had an update on my cases INC0000059 and INC0000055
+    >   
+    >   Much appreciated.
+    >   Thanks!
+    >   ```
 
 31. Make sure you **receive** the email in your **inbox**, in [outlook.office.com](https://outlook.office.com/mail/)
 
-> [!TIP]
-> You don't need to repeat the original trigger event to make more tests. In the **Test** pane, you can select `...`, choose **Test trigger** and then select the desired trigger and from there, decide to execute a past trigger again.
-> 
-> ![alt text](images/test-trigger.png)
+    > [!TIP]
+    > You don't need to repeat the original trigger event to make more tests. In the **Test** pane, you can select `...`, choose **Test trigger** and then select the desired trigger and from there, decide to execute a past trigger again.
+    > 
+    > ![alt text](images/test-trigger.png)
 
 32. Check the execution of your  autonomous agent by going to the **Activity** tab. Select the **Refresh** icon until you see the execution.
 

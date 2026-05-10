@@ -231,8 +231,8 @@ Learn how to integrate and configure tools for desktop automation and email comm
 
 1. Enter name `Portfolio ID` and description `The ID of the portfolio` and select **Done**
 
-> [!TIP]
-> During execution, Computer use combines your instructions with the input values to complete the task.
+    > [!TIP]
+    > During execution, Computer use combines your instructions with the input values to complete the task.
 
 14. Select **Save**
 
@@ -246,7 +246,7 @@ Learn how to integrate and configure tools for desktop automation and email comm
     - The left panel shows your instructions and a step-by-step log of the tool’s reasoning and actions.
     - The right panel shows a preview of the actions on the machine you set up for computer use.
 
-  ![alt text](images/test_CUA.jpg)
+    ![alt text](images/test_CUA.jpg)
 
 18. Select **Finish testing**
 
@@ -287,10 +287,10 @@ Learn how to integrate and configure tools for desktop automation and email comm
     When a financial portfolio related request is received, identify the Portfolio ID and search for the requested data using <Look up portfolio data>. Once you have gathered the financial portfolio information, use the <Reply to email>  tool to reply to the original email you received. Do not respond with data beyond what was requested. 
     ```
 
-> [!IMPORTANT]
-> For each of the placeholder <...> in the description, use / to insert the tools you just configured in your instructions.
+    > [!IMPORTANT]
+    > For each of the placeholder <...> in the description, use / to insert the tools you just configured in your instructions.
 
-  ![alt text](images/agent_instructions.jpg)
+    ![alt text](images/agent_instructions.jpg)
 
 31. **Save** the instructions
 
@@ -318,7 +318,7 @@ Learn how to integrate and configure tools for desktop automation and email comm
 
 1. Select the trigger instance and then **Start testing**
 
-  ![alt text](images/test_trigger.jpg)
+    ![alt text](images/test_trigger.jpg)
 
 38. Check your emails for the agent’s reply.
 

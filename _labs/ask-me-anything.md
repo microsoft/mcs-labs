@@ -174,17 +174,17 @@ Create a new agent with SharePoint knowledge integration that provides grounded,
 
 8. Go to **Knowledge**
 
-  ![alt text](images/knowledge-sharepoint.png)
+    ![alt text](images/knowledge-sharepoint.png)
 
 9. Select **SharePoint**, and paste the SharePoint Knowledge URL and select **Add**.
 
-> [!IMPORTANT]
->  * For configuration, use the provided values in the **Lab Resources** (specific per training).
+    > [!IMPORTANT]
+    >  * For configuration, use the provided values in the **Lab Resources** (specific per training).
 
 10. Choose **Add**  
 
-> [!TIP]
-> - If an error appears after adding the SharePoint URL, click "Browse items" and then "Confirm selection".
+    > [!TIP]
+    > - If an error appears after adding the SharePoint URL, click "Browse items" and then "Confirm selection".
 
 
 11. Test your agent with this question: 
@@ -294,12 +294,12 @@ Make the agent available in Microsoft 365 Copilot for your users.
 
 9. In the **Microsoft 365 Copilot** experience, the agent description will pop up. Select **Add**
 
-> [!TIP]
-> - You may need to give it a few tries/minutes the first time you deploy to Microsoft 365 Copilot so it deploys correctly.
-> - If encountering issues, try to publish your agent agent.
-> - If this doesn't work, try in Teams instead:
->   - Choose **See agents in Teams** instead. 
->   - In the new window, if prompted *This site is trying to open Microsoft Teams*, select **Cancel**, and the select **use the web app instead**
+    > [!TIP]
+    > - You may need to give it a few tries/minutes the first time you deploy to Microsoft 365 Copilot so it deploys correctly.
+    > - If encountering issues, try to publish your agent agent.
+    > - If this doesn't work, try in Teams instead:
+    >   - Choose **See agents in Teams** instead. 
+    >   - In the new window, if prompted *This site is trying to open Microsoft Teams*, select **Cancel**, and the select **use the web app instead**
 
 10. Test the agent with the benefits prompt
 
@@ -364,14 +364,14 @@ Let's start by asking for the user country at the beginning of the conversation.
 
 6. Select the **Get user** connector action and **Submit**.
 
-  ![alt text](images/add-tool-connector.png)
+    ![alt text](images/add-tool-connector.png)
 
-> [!IMPORTANT]
-> - If you don't see the **Get user** action, select another of the Microsoft Entra ID actions, such as **Create user**  and **Submit**.
-> - Then in the topic command bar, select `...` and **Open code editor**.
-> - Update `CreateUser` to `GetUser` in both **operationId** and **variable**.
-> - Select **Close code editor**.
-> - In the **Get user** node, select `...` and **Refresh** 
+    > [!IMPORTANT]
+    > - If you don't see the **Get user** action, select another of the Microsoft Entra ID actions, such as **Create user**  and **Submit**.
+    > - Then in the topic command bar, select `...` and **Open code editor**.
+    > - Update `CreateUser` to `GetUser` in both **operationId** and **variable**.
+    > - Select **Close code editor**.
+    > - In the **Get user** node, select `...` and **Refresh** 
 
 7. In the **Get user** node, select `...` and **Properties** 
 
@@ -379,7 +379,7 @@ Let's start by asking for the user country at the beginning of the conversation.
 
 9. In the **Inputs** tab, for **User Id or Principal Name**, select `...`, go the the **System** tab, and select **User.Id**.
 
-![alt text](images/select-user-id.png)
+    ![alt text](images/select-user-id.png)
 
 10. **Save**
 
@@ -395,7 +395,7 @@ Let's start by asking for the user country at the beginning of the conversation.
 
 6. Select the **Get user** connector action and **Submit**.
 
-  ![alt text](images/add-tool-connector.png)
+    ![alt text](images/add-tool-connector.png)
 
 7. In the **Get user** node, select `...` and **Properties** 
 
@@ -403,27 +403,27 @@ Let's start by asking for the user country at the beginning of the conversation.
 
 9. In the **Inputs** tab, for **User Id or Principal Name**, select `...`, go the the **System** tab, and select **User.Id**.
 
-![alt text](images/select-user-id.png)
+    ![alt text](images/select-user-id.png)
 
 10. Test if everything is working as expected by **refreshing** the conversation test pane.
    
 11. **Send** a message such as:
 
-```
-Hello!
-```
+    ```
+    Hello!
+    ```
 
 15. Navigate to the **Topics** tab, open the **Conversation Starts** topic, and to see what values are returned from the connector, enter the **Variables** pane in the topic command bar. Go the **Test** to see the variable values at runtime (i.e., as you are testing in the conversation test pane).
   
-  ![alt text](images/variables-pane.png)
+    ![alt text](images/variables-pane.png)
 
 16. Select **Value** under the **GetUser** record, and **expand** it to see if the expected value was returned.
 
-![alt text](images/user-record-entra-id.png)
+    ![alt text](images/user-record-entra-id.png)
 
 17. Because we will need to use that variable value in other parts and topics of the agent, select the **GetUser** variable and make it **Global**.
 
-![alt text](images/set-global-variable.png)
+    ![alt text](images/set-global-variable.png)
 
 18. **Save**
 
@@ -435,25 +435,25 @@ Hello!
 
 18. Under **Describe what this topic does** paste: 
 
-```
-Use this tool for questions about leave policy, time off, etc.
-```
+    ```
+    Use this tool for questions about leave policy, time off, etc.
+    ```
 
 19. Add a new node: **Advanced > Generative answers**
 
 20. For input,  select `...`, go to the **System** tab and choose the **Activity.Text** variable.
 
-> [!TIP]
-> The **Activity.Text** variable is super useful because it captures the last message/text the user has typed in or selected when interacting with the agent.
+    > [!TIP]
+    > The **Activity.Text** variable is super useful because it captures the last message/text the user has typed in or selected when interacting with the agent.
 
-![alt text](images/activity-text.png)
+    ![alt text](images/activity-text.png)
 
 21. Go to the **properties** of the **Create generative answers** node
 
 22. Select **Search only selected sources** and **don't select anything**
 
-> [!TIP]
-> This means that none of the knowledge sources that are configured at the top level of your agent will be used.
+    > [!TIP]
+    > This means that none of the knowledge sources that are configured at the top level of your agent will be used.
 
 23. Toggle off **Allow the AI to use its own general knowledge (preview)**
 
@@ -463,19 +463,19 @@ Use this tool for questions about leave policy, time off, etc.
 
 26. Paste the **SharePoint classic data formula**
 
-> [!IMPORTANT]
-> - Use the formula provided in the **Lab Resources** (specific per training).
-> - Notice how the formula concatenates the SharePoint URL with the office location, effectively using context to target the correct source and location for the content.
+    > [!IMPORTANT]
+    > - Use the formula provided in the **Lab Resources** (specific per training).
+    > - Notice how the formula concatenates the SharePoint URL with the office location, effectively using context to target the correct source and location for the content.
 
-  ![alt text](images/sharepoint-formulas.png)
+    ![alt text](images/sharepoint-formulas.png)
 
 27. Select **Insert** once done, then **Save** your topic
 
 28. **Refresh** the test pane and ask:
 
-```
-What's the leave policy?
-```
+    ```
+    What's the leave policy?
+    ```
 
 29. **Verify** that the leave policy used to generate this answer is the one matching the country you selected.
 
@@ -488,14 +488,14 @@ What's the leave policy?
 
 31. **Paste** the below line
 
-```
-Always start by triggering the  topic.
-Always append the user country () in knowledge search queries (e.g., "<question> in <country>?") that are HR related.
-```
+    ```
+    Always start by triggering the  topic.
+    Always append the user country () in knowledge search queries (e.g., "<question> in <country>?") that are HR related.
+    ```
 
 32. We need to set the variable value in-between the parenthesis. **Type** `/` and select **Power Fx**.
 
-  ![alt text](images/instructions-formula.png)
+    ![alt text](images/instructions-formula.png)
 
 33. **Type** `Global.GetUser.officeLocation` and select **Insert**
 
@@ -503,9 +503,9 @@ Always append the user country () in knowledge search queries (e.g., "<question>
 
 35. **Test**
 
-```
-What benefits do employees get?
-```
+    ```
+    What benefits do employees get?
+    ```
 
 36. Notice how the query is **rewritten** to take into account the **variables** you provided, like country, **augmenting the chances** of returning the correct results for summarization.
 
@@ -594,13 +594,13 @@ This use case demonstrates **agent scoping** principles:
 
 6. Change **description** to `Gets the details of an incident using its incident number. Use this tool when users ask about ServiceNow tickets, incident status, or IT support requests.`
 
-> [!TIP]
-> The description will help the AI know when to use that tool, so it's important to have clear instructions WHEN and WHEN NOT to use this tool. This is a key aspect of agent scoping - being specific about tool usage.
+    > [!TIP]
+    > The description will help the AI know when to use that tool, so it's important to have clear instructions WHEN and WHEN NOT to use this tool. This is a key aspect of agent scoping - being specific about tool usage.
 
 7. Under **Additional details**, change **Credentials to use** to **Maker-provided credentials**
 
-> [!IMPORTANT]
-> In production scenarios, you may want to use the user context when making the connection to ServiceNow. Here, your context (as the author) is used by end-users of your agent when searching for incidents.
+    > [!IMPORTANT]
+    > In production scenarios, you may want to use the user context when making the connection to ServiceNow. Here, your context (as the author) is used by end-users of your agent when searching for incidents.
 
 8. For **Record Type**, under **Fill using**, choose **Custom value** and choose `Incident`
 
@@ -612,9 +612,9 @@ This use case demonstrates **agent scoping** principles:
     The output of this variable is the concatenation of numberCONTAINS and the incident number. E.g., 'numberCONTAINSINC0007001'. Only the incident number should be prompted and obtained from the user (e.g., INC0007001)
     ```
 
-> [!TIP]
-> - Again, these instructions will be used by AI to understand how determine how to pass that information to the ServiceNow connector. In this case, how to use the very specific OData formatting of ServiceNow queries.
-> - If you get a "There is an error: 'DuplicateItem'" error, toggle to **Custom value**, then switch back to **Dynamically fill with AI** and set the customized **description** again.
+    > [!TIP]
+    > - Again, these instructions will be used by AI to understand how determine how to pass that information to the ServiceNow connector. In this case, how to use the very specific OData formatting of ServiceNow queries.
+    > - If you get a "There is an error: 'DuplicateItem'" error, toggle to **Custom value**, then switch back to **Dynamically fill with AI** and set the customized **description** again.
 
 11. Select **+ Add input** and choose **Limit**
 
@@ -630,15 +630,15 @@ This use case demonstrates **agent scoping** principles:
     My USB port is no longer working on my PC... what can I do? While you're here, can you also share an update for case INC0000059? It's been quite a while since I've opened them... thanks!!
     ```
 
-> [!TIP]
-> Notice how the agent automatically:
-> - Asks the user to consent before running a search using ServiceNow knowledge. 
-> - Uses the appropriate ServiceNow tool based on the query type
-> - Handles multiple tickets in a single request (e.g., if you ask for both cases INC0000059 and INC0000060)
-> - Creates user-friendly responses with proper formatting
-> - Combines ServiceNow data with other knowledge sources when needed
+    > [!TIP]
+    > Notice how the agent automatically:
+    > - Asks the user to consent before running a search using ServiceNow knowledge. 
+    > - Uses the appropriate ServiceNow tool based on the query type
+    > - Handles multiple tickets in a single request (e.g., if you ask for both cases INC0000059 and INC0000060)
+    > - Creates user-friendly responses with proper formatting
+    > - Combines ServiceNow data with other knowledge sources when needed
 
-  ![alt text](images/multi-agent-servicenow.png)
+    ![alt text](images/multi-agent-servicenow.png)
 
 29. **Observe** how your agent now demonstrates scoped capabilities:
     - **Tool Selection**: Automatically chooses the right ServiceNow tool based on user intent
@@ -733,7 +733,7 @@ In this section, you'll configure any third-party knowledge to enrich knowledge 
 
 13. Under **Save response as**, select **Create a new variable**, select the variable name that was created (e.g., **Var1**) and rename it `KnowledgeResults`.
 
-![alt text](images/http-request.png)
+    ![alt text](images/http-request.png)
 
 14. Add a new node, **Variable management** > **Set a variable value**
 
@@ -752,8 +752,8 @@ In this section, you'll configure any third-party knowledge to enrich knowledge 
     )
     ```
 
-> [!TIP]
-> What we're doing here with this formula is slightly transforming the content we receive from the HTTP request to the expected format that will allow to augment the search results, whenever Knowledge is invoked by the generative orchestration.
+    > [!TIP]
+    > What we're doing here with this formula is slightly transforming the content we receive from the HTTP request to the expected format that will allow to augment the search results, whenever Knowledge is invoked by the generative orchestration.
 
 17. **Save**
 
@@ -806,9 +806,9 @@ In this section, you'll learn how to upload files and run files through a prompt
 
 4. Under **Describe what this topic does** paste: 
 
-```
-Use this tool to help users with meeting notes
-```
+    ```
+    Use this tool to help users with meeting notes
+    ```
 
 5. Add a **Question** node: `Sure, I can help you with that! Please upload your meeting notes`
 
@@ -824,29 +824,29 @@ Use this tool to help users with meeting notes
 
 9. Select **+ Add content**, and choose **Image or Document**
 
-> [!IMPORTANT]
-> As a sample, use the **Meeting Minutes.pdf** file provided in the **Lab Resources** (specific per training).
+    > [!IMPORTANT]
+    > As a sample, use the **Meeting Minutes.pdf** file provided in the **Lab Resources** (specific per training).
 
 10. **Rename** the input to `UploadedNotes`
 
 11. In the **Instructions**, just below **UploadedNotes**, paste:
 
-  ```
-  Using the content of the uploaded document, populate the following JSON record (for the schema, only string properties, no arrays, except for Data and time) with:
-  - Title of the meeting
-  - Description/summary
-  - Date and time
-  - List of attendees
-  - Action items / next steps
+    ```
+    Using the content of the uploaded document, populate the following JSON record (for the schema, only string properties, no arrays, except for Data and time) with:
+    - Title of the meeting
+    - Description/summary
+    - Date and time
+    - List of attendees
+    - Action items / next steps
 
-  {
+    {
     "MeetingTitle": "Title of the meeting",
     "MeetingSummary": "Description/summary",
     "MeetingDateTime": "Date and time",
     "MeetingAttendees": "List of attendees",
     "MeetingActions": "Action items / next steps"
-  }
-  ```
+    }
+    ```
 
 12. Change the **Output** to `JSON`
 
@@ -926,8 +926,8 @@ Use this tool to help users with meeting notes
 
 20. Select **Save** and **Close** (IMPORTANT: if you don't save the adaptive card, the auto complete feature will not work in the next step)
 
-> [!TIP]
-> Notice how the Adaptive Card editor offers a visual editor to create your own Adaptive Card experience with a no-code/low-code editor.
+    > [!TIP]
+    > Notice how the Adaptive Card editor offers a visual editor to create your own Adaptive Card experience with a no-code/low-code editor.
 
 21. We now need to make the card dynamic to reference the content that was returned from the prompt. Toggle from **JSON card** to **Formula card**.
 
@@ -943,9 +943,9 @@ Use this tool to help users with meeting notes
 
 25. Add a new **Message** node, and paste:
 
-  ```
-  Thank you! I've successfully logged your meeting notes in our systems.
-  ```
+    ```
+    Thank you! I've successfully logged your meeting notes in our systems.
+    ```
 
 26. **Test** your agent. Try to modify the content directly in the adaptive card before selecting **Confirm minutes**.
 

@@ -145,8 +145,8 @@ Configure a Copilot Studio agent for external access and integrate it with the P
 
 1. **Start** by accessing the Copilot Studio Kit application, either installed in your organization or the one that was setup for the training.
 
-> [!IMPORTANT]
-> - To access this app, use the provided URL in the **Lab Resources** (specific per training).
+    > [!IMPORTANT]
+    > - To access this app, use the provided URL in the **Lab Resources** (specific per training).
 
 2. The first time you open the app, you will be prompted to allow Copilot Studio Kit to access your data. Select **Allow** to grant permissions.
 
@@ -160,11 +160,11 @@ Configure a Copilot Studio agent for external access and integrate it with the P
 
 6. To obtain the **Token Endpoint**, you need to navigate to your **Nova AI** agent, go to **Channels**, select **Direct Line Speech**, and copy the **Token Endpoint** URL. Paste this URL into the **Token Endpoint** field in the Copilot Studio Kit.
 
-> [!TIP]
-> The **tokent endpoint** allows to obtain a token that can be used to initiate a conversation with the agent programmatically. This is essential for automated testing frameworks to interact with your agent. Once the token is obtained, it can be used to send messages to the agent and receive responses from the **Direct Line API**.
+    > [!TIP]
+    > The **tokent endpoint** allows to obtain a token that can be used to initiate a conversation with the agent programmatically. This is essential for automated testing frameworks to interact with your agent. Once the token is obtained, it can be used to send messages to the agent and receive responses from the **Direct Line API**.
 
-> [!IMPORTANT]
-> Using "No authentication" is suitable for agents that do not access sensitive internal information. It allows anyone to interact with your agent, so use it cautiously.
+    > [!IMPORTANT]
+    > Using "No authentication" is suitable for agents that do not access sensitive internal information. It allows anyone to interact with your agent, so use it cautiously.
 
 7. Select **Save and close** to create the agent configuration.
 

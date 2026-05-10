@@ -7,7 +7,7 @@ difficulty: 300
 lab_type: local
 section: intermediate_labs
 journeys: ["business-user", "developer"]
-bootcamp_order: "9"
+bootcamp_order: "10"
 description: "Help makers understand how to leverage multi-agent configurations including child and connected agents."
 
 ---
@@ -40,7 +40,8 @@ Help makers understand how to leverage multi-agent configurations including chil
 - [Instructions by Use Case](#instructions-by-use-case)
   - [Use Case #1: Create Sales Assistant Agent](#use-case-1-create-sales-assistant-agent)
   - [Use Case #2: Create Product Information Child Agents](#use-case-2-create-product-information-child-agents)
-  - [Use Case #3: Connect to Account and Contact Information Agent](#use-case-3-connect-to-account-and-contact-information-agent)
+  - [Use Case #3: Verify Account and Contact Information Agent Setup](#use-case-3-verify-account-and-contact-information-agent-setup)
+  - [Use Case #4: Connect to Account and Contact Information Agent](#use-case-4-connect-to-account-and-contact-information-agent)
 
 ---
 
@@ -130,7 +131,8 @@ In this lab, you'll build a parent agent that will leverage both connected agent
 |------|----------|-------------|--------|
 | 1 | [Create Sales Assistant Agent](#use-case-1-create-sales-assistant-agent) | Creates parent agent to help sales associate find information they need | 8 min |
 | 2 | [Create Product Information Child Agents](#use-case-2-create-product-information-child-agents) | Creates child agents to provide market-specific product information | 12 min |
-| 3 | [Connect to Account and Contact Information Agent](#use-case-3-connect-to-account-and-contact-information-agent) | Connect existing Copilot Studio agent that provides account and contact information | 10 min |
+| 3 | [Verify Account and Contact Information Agent Setup](#use-case-3-verify-account-and-contact-information-agent-setup) | Confirm the prebuilt connected agent and its data are ready before wiring it up | 5 min |
+| 4 | [Connect to Account and Contact Information Agent](#use-case-4-connect-to-account-and-contact-information-agent) | Wire the prebuilt connected agent into the parent agent | 5 min |
 
 ---
 
@@ -175,7 +177,7 @@ Create the parent agent base that will be needed to host all your tools, agents,
     > [!IMPORTANT]
     > Do not Select Enter or submit this text yet as we need to do the agent settings before we do that.
 
-![Home Creation Text](images/image.png)
+    ![Home Creation Text](images/image.png)
 
 1. Select the **Gear** on the description input area and edit the schema name to include `salesassistant` and then Select **Update**. 
 
@@ -247,7 +249,7 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 1. Add a new node at the end of the topic by selecting the **+** and then selecting **Topic Management > Go to another topic > Select Market**
 
-![Add Node to Conversation Start](images/image-11.png)
+    ![Add Node to Conversation Start](images/image-11.png)
 
 1. Select **Save**
 
@@ -302,11 +304,19 @@ In this section, you'll learn how to create child agents to logically group know
 
 1. Select **New child agent**.
 
-![Select Child Agent](images/image-13.png)
+    ![Select Child Agent](images/image-13.png)
 
-1. Set Agent Name to **US Product Information Agent**.
+1. Set the **Agent Name** to:
 
-1. Set the Description to **This agent provides details about the Surface products offered in the United States**
+    ```text
+    US Product Information Agent
+    ```
+
+1. Set the **Description** to:
+
+    ```text
+    This agent provides details about the Surface products offered in the United States
+    ```
 
 1. Expand **Advanced** and set the Condition to the **Global.Market** variable **is equal to** `US`
 
@@ -321,7 +331,7 @@ In this section, you'll learn how to create child agents to logically group know
     This agent should only answer questions about Microsoft Surface products in regards to the US-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United States.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.
     ```
 
-![Add instructions](images/image-15.png)
+    ![Add instructions](images/image-15.png)
 
 1. Add Knowledge to the Child Agent by Selecting **Add** in the Knowledge section of the Child Agent configuration
 
@@ -341,15 +351,23 @@ In this section, you'll learn how to create child agents to logically group know
 
 1. Select **New child agent** 
 
-![Select Child Agent](images/image-13.png)
+    ![Select Child Agent](images/image-13.png)
 
-1. Set Agent Name to `UK Product Information Agent`
+1. Set the **Agent Name** to:
 
-1. Set the Description to `This agent provides details about the Surface products offered in the United Kingdom`
+    ```text
+    UK Product Information Agent
+    ```
+
+1. Set the **Description** to:
+
+    ```text
+    This agent provides details about the Surface products offered in the United Kingdom
+    ```
 
 1. Expand **Advanced** and set the Condition to the **Global.Market** variable **is equal to** `UK`
 
-![Set Child Agent Details UK](images/image-16.png)
+    ![Set Child Agent Details UK](images/image-16.png)
 
     > [!TIP]
     > You can use a formula or variables to make conditions for when this agent should be available.
@@ -357,10 +375,10 @@ In this section, you'll learn how to create child agents to logically group know
 1. Enter the following in the **Instructions**:
 
     ```text
-    This agent should only answer questions about Microsoft Surface products in regards to the UK-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United Kingdom.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.`
+    This agent should only answer questions about Microsoft Surface products in regards to the UK-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United Kingdom.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.
     ```
 
-![Add Child Agent Instructions UK](images/image-17.png)
+    ![Add Child Agent Instructions UK](images/image-17.png)
 
 1. Add Knowledge to the Child Agent by Selecting **Add** in the Knowledge section of the Child Agent configuration
 
@@ -382,7 +400,7 @@ In this section, you'll learn how to create child agents to logically group know
 
 1. Verify that the correct child agent was triggered and that your answer is appropriate for the UK market
 
-![Example Response UK question](images/image-18.png)
+    ![Example Response UK question](images/image-18.png)
 
 1. Reset the conversation and do again for the US market.
 
@@ -409,23 +427,26 @@ In this section, you'll learn how to create child agents to logically group know
 
 ---
 
-## Use Case #3: Connect to Account and Contact Information Agent
+## Use Case #3: Verify Account and Contact Information Agent Setup
 
-Connect the Account and Contact Information agent to our parent Sales Associate Agent. Will need to ensure indexing is working in the environment ahead of testing.
+Verify that the Account and Contact Information agent (the connected agent we'll use in the next Use Case) is fully configured to work in your environment.
+
+> [!NOTE]
+> If you've already completed this verification in another lab (such as the **Orchestration lab**), you can skip this Use Case and continue to [Use Case #4](#use-case-4-connect-to-account-and-contact-information-agent).
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Connect to Account and Contact Information Agent | Connect to an Account and Contact Information agent | 10 minutes |
+| Verify Account and Contact Information Agent Setup | Confirm the prebuilt connected agent and its data are ready before wiring it up | 5 minutes |
 
 **Summary of tasks**
 
-In this section, you'll learn how to connect an existing Copilot Studio agent to your parent agent using the connected agents feature.
+In this section, you'll confirm that Dataverse Search is enabled, the Account and Contact tables are indexed, and the Account Data Lookup Agent is published and discoverable.
 
-**Scenario:** Your Sales Team needs to quickly answer questions and help customers with information on your products and with finding account and contact information.
+**Scenario:** Before connecting an existing agent to your parent agent, you need to make sure the existing agent and its underlying data are properly configured.
 
 ### Objective
 
-Connect existing agent to our Sales Associate Assistant agent to add ability to find account and contact information from the sales system.
+Confirm the environment is ready to host a connected agent for account and contact lookups.
 
 ---
 
@@ -445,20 +466,24 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. Expand **Product** and select **Features**
 
-1. In the Dataverse search section, ensure **Dataverse search** is turned **On**
+1. In the Dataverse search section, verify that **both** check boxes are enabled:
+   - **Turn on search indexing to support Dataverse intelligence (Work IQ) in AI and agent experiences**
+   - **Show global search bar in all model driven apps and turn on search indexing to support search-only experiences**
+
+    ![Dataverse Search Settings](images/image-28.png)
 
 1. Select **Save** if you made any changes
 
 #### Ensure that indexes are in place for our connected agent
 
-    > [!IMPORTANT]
-    > This is not required for a connected agent to work, but to make sure that the one we have pre-loaded for you will return results we must index a few tables in your environment.
+> [!IMPORTANT]
+> This is not required for a connected agent to work, but to make sure that the one we have pre-loaded for you will return results we must index a few tables in your environment.
 
 1. Go to the Power Apps maker portal [https://make.powerapps.com](https://make.powerapps.com)
 
-![Open Power Apps](images/image-19.png)
+    ![Open Power Apps](images/image-19.png)
 
-1 In the left menu select **Tables**
+1. In the left menu select **Tables**
 
 1. Select the **Account** table from the list
 
@@ -475,14 +500,14 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. To add any that are missing select **+ View column** and then select the column from the list.
 
-![Account View](images/image-20.png)
+    ![Account View](images/image-20.png)
 
 1. Add the ability to search on certain fields by making sure that the following items are in the **Find by** on the bottom right. Select the **Edit find table columns** option to check:
    - Address1: State or Providence
    - Address1: Postal Code
    - Address1: City
 
-![Add Account Searchable Columns](images/image-21.png)
+    ![Add Account Searchable Columns](images/image-21.png)
 
 1. Select **Edit find table columns** to add any missing columns.
 
@@ -495,7 +520,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. Select on **Tables** in the Views screen to go back to the list of Tables
 
-![Go to Tables](images/image-22.png)
+    ![Go to Tables](images/image-22.png)
 
 1. Select **Contact** table from the list
 
@@ -504,19 +529,19 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 1. Select **Quick Find Active Contacts** option from the list of Views
 
 1. Select **View Column** to verify the following columns are in the view:
-    - Anniversary
-    - Birthday
-    - Job Title
-    - Marital Status
+   - Anniversary
+   - Birthday
+   - Job Title
+   - Marital Status
 
-![Column Add Contact](images/image-23.png)
+    ![Column Add Contact](images/image-23.png)
 
 1. Select **+ View column** to add any that are missing.
 
 1. Select **Save and publish** to update the index
 
-> [!IMPORTANT]
-> DO NOT navigate away until the save and publish is completed!
+    > [!IMPORTANT]
+    > DO NOT navigate away until the save and publish is completed!
 
 #### Test and Publish the Account and Contact Information Agent
 
@@ -528,7 +553,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. Verify that you get a response showing that the agent is working and the data is indexed
 
-![Test Account Lookup](images/image-24.png)
+    ![Test Account Lookup](images/image-24.png)
 
 1. Select **Settings** in the upper right menu
 
@@ -536,10 +561,57 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. Close the Settings menu by Selecting the **X** in the upper right-hand corner
 
-1. Select **Publish** and make sure that your agent publishes
+1. Select **Publish**. In the **Publish this agent** dialog, make sure **Force newest version** is checked, then select **Publish** to confirm.
+
+    ![Publish this agent](images/image-29.png)
 
 > [!IMPORTANT]
-> You can't connect to an agent unless it is published
+> You can't connect to an agent unless it is published. Forcing the newest version ensures any agent that connects to it picks up your latest changes.
+
+---
+
+### Congratulations! You've completed Use Case #3!
+
+---
+
+### Test your understanding
+
+**Key takeaways:**
+
+* **Dataverse Search must be enabled** – Connected agents that look up Dataverse data depend on Dataverse Search being on at the environment level.
+* **Quick Find indexes drive what's searchable** – The columns added to the Quick Find view determine which fields the agent can filter on at runtime.
+* **Publishing + sharing must both be on** – A connected agent must be published and have "Let other agents connect to and use this one" enabled before it can be connected.
+
+**Lessons learned & troubleshooting tips:**
+
+* If Dataverse search returns no results, verify the Quick Find views have the correct columns added and the view is saved and published.
+* If the agent can't find account data, check that Dataverse Search is enabled in the Power Platform admin center for your environment.
+
+---
+
+---
+
+## Use Case #4: Connect to Account and Contact Information Agent
+
+Connect the Account and Contact Information agent to our parent Sales Associate Agent so the parent can delegate account and contact lookups to it via the connected agents feature.
+
+| Use case | Value added | Estimated effort |
+|----------|-------------|------------------|
+| Connect to Account and Contact Information Agent | Wire the prebuilt connected agent into the parent agent | 5 minutes |
+
+**Summary of tasks**
+
+In this section, you'll connect the existing Account Data Lookup Agent to your parent Sales Associate Assistant using the connected agents feature, then test that the parent successfully delegates to it.
+
+**Scenario:** Your parent agent now needs to answer account and contact questions, and that capability lives in a separate, already-published agent.
+
+### Objective
+
+Connect the existing agent to the parent agent and validate that orchestration delegates to it correctly.
+
+---
+
+### Step-by-step instructions
 
 #### Connect the Account and Contact Information Agent
 
@@ -551,13 +623,13 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 1. Select **Account Data Lookup Agent** from the menu
 
-![Select Connected Agent](images/image-26.png)
+    ![Select Connected Agent](images/image-26.png)
 
 1. Notice that the Description provides details on when to use this agent
 
 1. Make sure that the **Pass conversation history to this agent** is **Checked**
 
-![Validate Setting Connected Agent](images/image-27.png)
+    ![Validate Setting Connected Agent](images/image-27.png)
 
 1. Select **Add and configure**
 
@@ -573,7 +645,7 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 
 ---
 
-### Congratulations! You've completed Use Case #3!
+### Congratulations! You've completed Use Case #4!
 
 ---
 
@@ -582,14 +654,13 @@ Connect existing agent to our Sales Associate Assistant agent to add ability to 
 **Key takeaways:**
 
 * **Connected agents extend reach** – Unlike child agents that live inside your agent, connected agents are independently published agents that your agent delegates to.
-* **Publishing is required** – A connected agent must be published and have "Let other agents connect to and use this one" enabled before it can be connected.
 * **Conversation history improves context** – Passing conversation history to the connected agent helps it understand the full context of the user's request.
+* **Descriptions drive delegation** – The orchestrator uses the connected agent's description to decide when to route to it, so write descriptions with that decision in mind.
 
 **Lessons learned & troubleshooting tips:**
 
-* If the connected agent doesn't appear in the list, ensure it is published and the sharing setting is turned on.
-* If Dataverse search returns no results, verify the Quick Find views have the correct columns added and the view is saved and published.
-* If the agent can't find account data, check that Dataverse Search is enabled in the Power Platform admin center for your environment.
+* If the connected agent doesn't appear in the list, ensure it is published and the sharing setting is turned on (covered in Use Case #3).
+* If the parent agent doesn't delegate to the connected agent, check the connected agent's description — it's what the orchestrator reads when deciding whether to route to it.
 
 **Challenge: Apply this to your own use case**
 
