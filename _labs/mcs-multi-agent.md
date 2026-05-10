@@ -306,9 +306,17 @@ In this section, you'll learn how to create child agents to logically group know
 
     ![Select Child Agent](images/image-13.png)
 
-1. Set Agent Name to **US Product Information Agent**.
+1. Set the **Agent Name** to:
 
-1. Set the Description to **This agent provides details about the Surface products offered in the United States**
+    ```text
+    US Product Information Agent
+    ```
+
+1. Set the **Description** to:
+
+    ```text
+    This agent provides details about the Surface products offered in the United States
+    ```
 
 1. Expand **Advanced** and set the Condition to the **Global.Market** variable **is equal to** `US`
 
@@ -345,9 +353,17 @@ In this section, you'll learn how to create child agents to logically group know
 
     ![Select Child Agent](images/image-13.png)
 
-1. Set Agent Name to `UK Product Information Agent`
+1. Set the **Agent Name** to:
 
-1. Set the Description to `This agent provides details about the Surface products offered in the United Kingdom`
+    ```text
+    UK Product Information Agent
+    ```
+
+1. Set the **Description** to:
+
+    ```text
+    This agent provides details about the Surface products offered in the United Kingdom
+    ```
 
 1. Expand **Advanced** and set the Condition to the **Global.Market** variable **is equal to** `UK`
 
@@ -359,7 +375,7 @@ In this section, you'll learn how to create child agents to logically group know
 1. Enter the following in the **Instructions**:
 
     ```text
-    This agent should only answer questions about Microsoft Surface products in regards to the UK-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United Kingdom.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.`
+    This agent should only answer questions about Microsoft Surface products in regards to the UK-based products.  It should never provide details or stats on any products not offered or details about models offered outside of the United Kingdom.  You should only talk about Microsoft Surface products and not discuss any products that are not Microsoft Surface products even if they are made by Microsoft.
     ```
 
     ![Add Child Agent Instructions UK](images/image-17.png)
@@ -450,7 +466,11 @@ Confirm the environment is ready to host a connected agent for account and conta
 
 1. Expand **Product** and select **Features**
 
-1. In the Dataverse search section, ensure **Dataverse search** is turned **On**
+1. In the Dataverse search section, verify that **both** check boxes are enabled:
+   - **Turn on search indexing to support Dataverse intelligence (Work IQ) in AI and agent experiences**
+   - **Show global search bar in all model driven apps and turn on search indexing to support search-only experiences**
+
+    ![Dataverse Search Settings](images/image-28.png)
 
 1. Select **Save** if you made any changes
 
@@ -541,10 +561,12 @@ Confirm the environment is ready to host a connected agent for account and conta
 
 1. Close the Settings menu by Selecting the **X** in the upper right-hand corner
 
-1. Select **Publish** and make sure that your agent publishes
+1. Select **Publish**. In the **Publish this agent** dialog, make sure **Force newest version** is checked, then select **Publish** to confirm.
+
+    ![Publish this agent](images/image-29.png)
 
 > [!IMPORTANT]
-> You can't connect to an agent unless it is published
+> You can't connect to an agent unless it is published. Forcing the newest version ensures any agent that connects to it picks up your latest changes.
 
 ---
 

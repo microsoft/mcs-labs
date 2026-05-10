@@ -18,10 +18,12 @@ labs:
     label: "Lab 6"
   - slug: mcs-tools
     label: "Lab 7"
-  - slug: mcs-governance
+  - slug: mcs-orchestration
     label: "Lab 8"
-  - slug: mcs-multi-agent
+  - slug: mcs-governance
     label: "Lab 9"
-  - slug: autonomous-account-news
+  - slug: mcs-multi-agent
     label: "Lab 10"
+  - slug: autonomous-account-news
+    label: "Lab 11"
 ---

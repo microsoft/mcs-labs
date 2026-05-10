@@ -463,9 +463,10 @@ bootcamp_lab_orders:
   5: mcs-alm
   6: component-collections
   7: mcs-tools
-  8: mcs-governance
-  9: mcs-multi-agent
-  10: autonomous-account-news
+  8: mcs-orchestration
+  9: mcs-governance
+  10: mcs-multi-agent
+  11: autonomous-account-news
 
 agent_buildathon_1month_lab_orders:
   1: agent-builder-m365

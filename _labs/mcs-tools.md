@@ -7,7 +7,7 @@ difficulty: 300
 lab_type: local
 section: intermediate_labs
 journeys: ["business-user", "developer"]
-bootcamp_order: "8"
+bootcamp_order: "7"
 description: "Learn how to extend your agents with powerful tools including connectors, agent flows, MCP servers, and custom prompts in Microsoft Copilot Studio."
 
 ---

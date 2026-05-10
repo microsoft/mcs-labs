@@ -145,32 +145,27 @@ schedule:
     duration: 60
 
   - type: session
-    title: "Module 8 - Orchestration and Dynamic Chaining Concepts w/ Demos"
+    title: "Module 8 - Tools"
     time: "13:00"
     duration: 45
-    slides: "/presentations/bootcamp/08.%20Orchestration%20and%20Dynamic%20Chaining%20Concepts_CB.pptx"
-
-  - type: lab
-    slug: mcs-orchestration
-    label: "Lab 7"
-    title: "Orchestration with Copilot Studio"
-    time: "13:45"
-
-  - type: session
-    title: "Module 9 - Tools"
-    time: "14:30"
-    duration: 45
-    slides: "/presentations/bootcamp/09.%20Copilot%20Studio%20Tools%20Overview%20RRS_CB.pptx"
-
-  - type: break
-    title: "Coffee break / Q&A"
-    time: "15:15"
-    duration: 15
+    slides: "/presentations/bootcamp/08.%20Copilot%20Studio%20Tools%20Overview%20RRS_CB.pptx"
 
   - type: lab
     slug: mcs-tools
-    label: "Lab 8"
+    label: "Lab 7"
     title: "Tools"
+    time: "13:45"
+
+  - type: session
+    title: "Module 9 - Orchestration and Dynamic Chaining Concepts w/ Demos"
+    time: "14:45"
+    duration: 45
+    slides: "/presentations/bootcamp/09.%20Orchestration%20and%20Dynamic%20Chaining%20Concepts_CB.pptx"
+
+  - type: lab
+    slug: mcs-orchestration
+    label: "Lab 8"
+    title: "Orchestration with Copilot Studio"
     time: "15:30"
 
   - type: break
