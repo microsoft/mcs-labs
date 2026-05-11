@@ -526,9 +526,12 @@ p > code, li > code, td > code {
   }
 
   h4 {
-    font-size: 0.9em;
-    margin-top: 1.3em;
-    color: var(--color-fg-muted);
+    font-size: 1.05em;
+    font-weight: 600;
+    color: var(--color-fg-strong);
+    margin-top: 1.8em;
+    padding-bottom: 0.2em;
+    border-bottom: 2px solid var(--color-accent);
   }
 }
 
