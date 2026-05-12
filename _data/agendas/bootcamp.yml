@@ -37,11 +37,11 @@ schedule:
     slug: agent-builder-m365
     label: "Lab 1"
     title: "M365 Agent Builder"
-    time: "10:00"
+    time: "10:15"
 
   - type: session
     title: "Module 2 - Copilot Studio Core Concepts - Part 1"
-    time: "10:30"
+    time: "10:45"
     duration: 30
     slides: "/presentations/bootcamp/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
 
@@ -49,21 +49,21 @@ schedule:
     slug: core-concepts-agent-knowledge-tools
     label: "Lab 2"
     title: "Creation, Topics, Knowledge, and Tools"
-    time: "11:00"
+    time: "11:15"
 
   - type: break
     title: "Lunch break"
-    time: "11:45"
+    time: "12:00"
     duration: 60
 
   - type: break
     title: "Quiz Time / Review / AMA / Flex"
-    time: "12:45"
+    time: "13:00"
     duration: 15
 
   - type: session
     title: "Module 3 - Copilot Studio Core Concepts - Part 2"
-    time: "13:00"
+    time: "13:15"
     duration: 30
     slides: "/presentations/bootcamp/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
 
@@ -71,34 +71,34 @@ schedule:
     slug: core-concepts-variables-agents-channels
     label: "Lab 3"
     title: "Variables, Agents, and Channels"
-    time: "13:30"
+    time: "13:45"
 
   - type: session
     title: "Module 4 - Copilot Studio Core Concepts - Part 3"
-    time: "14:15"
+    time: "14:30"
     duration: 30
     slides: "/presentations/bootcamp/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
 
   - type: break
     title: "Coffee break / Q&A"
-    time: "14:45"
+    time: "15:00"
     duration: 15
 
   - type: lab
     slug: core-concepts-analytics-evaluations
     label: "Lab 4"
     title: "Analytics and Evaluations"
-    time: "15:00"
+    time: "15:15"
 
   - type: session
     title: "Module 5 - Azure Integration /w Demo"
-    time: "15:30"
+    time: "15:45"
     duration: 30
     slides: "/presentations/bootcamp/05.%20CopilotStudioAzureBetterTogether_CB.pptx"
 
   - type: break
     title: "Open AMA"
-    time: "16:00"
+    time: "16:15"
     duration: 30
 
   # --- Day 2 ------------------------------------------------------------
@@ -169,7 +169,7 @@ schedule:
     time: "15:30"
 
   - type: break
-    title: "Networking and Happy Hour"
+    title: "Networking time"
     time: "16:30"
     duration: 60
 
