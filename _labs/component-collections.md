@@ -24,7 +24,7 @@ Learn how to create, share, and manage reusable component collections to package
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 30 minutes | After completing this lab, you will be able to create component collections that package topics and knowledge into reusable bundles, share component collections across multiple agents, manage collection ownership with primary agent settings, and understand how component collections integrate with Power Platform solutions. |
+| 300 | Maker | 45 minutes | After completing this lab, you will be able to create component collections that package topics and knowledge into reusable bundles, share component collections across multiple agents, manage collection ownership with primary agent settings, and understand how component collections integrate with Power Platform solutions. |
 
 ---
 
@@ -58,7 +58,7 @@ Think of component collections like shared libraries in software development:
 - "I need to control which agents can use a shared component to prevent unauthorized reuse"
 - "I want to package and distribute standard components across my organization"
 
-**In 30 minutes, you'll learn how to create, share, and manage component collections - giving you a powerful tool for building scalable, maintainable agent architectures.**
+**In 45 minutes, you'll learn how to create, share, and manage component collections - giving you a powerful tool for building scalable, maintainable agent architectures.**
 
 ---
 
