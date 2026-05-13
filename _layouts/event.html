@@ -73,10 +73,13 @@ layout: single
   margin: 0 0 1em;
 }
 
-/* Timeline */
+/* Timeline.
+   Right padding clears the docked Lab Assistant tag (position: fixed; right: 0;
+   ~40-50px wide). Event pages lack a TOC sidebar, so without this the duration
+   pills on the right edge of each row sit underneath the tag. */
 .ws-agenda {
   list-style: none;
-  padding: 0;
+  padding: 0 60px 0 0;
   margin: 0 0 2em;
   display: flex;
   flex-direction: column;
