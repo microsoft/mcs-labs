@@ -1,0 +1,105 @@
+/* Tracker — scoped under .tracker to avoid bleed into other pages */
+.tracker {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1.5em 1em;
+  font-family: -apple-system, "Segoe UI", sans-serif;
+  color: var(--color-fg-strong);
+}
+.tracker-header {
+  position: sticky; top: 0; z-index: 10;
+  background: var(--color-bg);
+  padding: 1em 0;
+  border-bottom: 1px solid var(--color-border-subtle);
+}
+.tracker-header-row { display: flex; align-items: baseline; justify-content: space-between; gap: 1em; }
+.tracker-title { font-size: 1.6em; font-weight: 700; margin: 0; border: none; padding: 0; }
+.tracker-updated { font-size: 0.75em; color: var(--color-fg-muted); }
+.tracker-subtitle { font-size: 0.9em; color: var(--color-fg-muted); margin: 0.3em 0 1em; }
+.tracker-controls { display: flex; align-items: center; gap: 0.75em; flex-wrap: wrap; }
+.tracker-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--color-border-subtle); flex: 1; }
+.tracker-tab {
+  background: none; border: none; padding: 0.6em 1.2em; font-size: 0.9em; font-weight: 600;
+  color: var(--color-fg-muted); border-bottom: 2px solid transparent; margin-bottom: -1px; cursor: pointer;
+}
+.tracker-tab.is-active { color: var(--color-fg-strong); border-bottom-color: var(--color-accent); }
+.tracker-range select, .tracker-newissue summary, .tracker-signin {
+  font-size: 0.85em; padding: 0.4em 0.8em; border: 1px solid var(--color-border-subtle);
+  border-radius: 4px; background: var(--color-bg); cursor: pointer;
+}
+.tracker-newissue { position: relative; }
+.tracker-newissue summary { list-style: none; }
+.tracker-newissue ul {
+  position: absolute; right: 0; top: 100%; margin-top: 4px; min-width: 200px;
+  background: var(--color-bg); border: 1px solid var(--color-border-subtle); border-radius: 4px;
+  padding: 0.4em 0; list-style: none; box-shadow: 0 2px 8px rgba(0,0,0,0.08); z-index: 20;
+}
+.tracker-newissue li a { display: block; padding: 0.4em 1em; font-size: 0.85em; text-decoration: none; color: var(--color-fg-strong); }
+.tracker-newissue li a:hover { background: var(--color-bg-elevated); }
+.tracker-tabpanel.is-hidden { display: none; }
+
+/* KPI tiles */
+.tracker-kpis { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.5em; margin: 1em 0; }
+.tracker-kpi {
+  background: var(--color-bg-elevated); border: 1px solid var(--color-border-subtle);
+  border-radius: 6px; padding: 0.7em 0.9em;
+}
+.tracker-kpi strong { display: block; font-size: 1.5em; font-weight: 700; }
+.tracker-kpi span { font-size: 0.7em; color: var(--color-fg-muted); text-transform: uppercase; letter-spacing: 0.04em; }
+.tracker-kpi .delta-up { color: #0e8a16; font-size: 0.75em; font-weight: 600; }
+.tracker-kpi .delta-down { color: #d73a4a; font-size: 0.75em; font-weight: 600; }
+
+/* Charts row */
+.tracker-charts { display: grid; grid-template-columns: 1fr 2fr; gap: 1em; margin: 1em 0; }
+.tracker-chart {
+  background: var(--color-bg-elevated); border: 1px solid var(--color-border-subtle);
+  border-radius: 6px; padding: 1em;
+}
+.tracker-chart h3 { font-size: 0.8em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--color-fg-muted); margin: 0 0 0.6em; border: none; padding: 0; }
+
+/* Aging heatmap */
+.tracker-heatmap { background: var(--color-bg-elevated); border: 1px solid var(--color-border-subtle); border-radius: 6px; padding: 1em; margin: 1em 0; }
+.tracker-heatmap-row { display: flex; align-items: center; gap: 0.5em; margin-bottom: 0.3em; }
+.tracker-heatmap-label { width: 110px; font-size: 0.8em; color: var(--color-fg-muted); text-align: right; }
+.tracker-heatmap-cells { display: flex; gap: 2px; flex-wrap: wrap; flex: 1; }
+.tracker-heatmap-cell { width: 14px; height: 14px; border-radius: 2px; cursor: pointer; }
+.age-1 { background: #c2e0c6; } .age-2 { background: #7fc97f; }
+.age-3 { background: #fbcfb8; } .age-4 { background: #e99695; } .age-5 { background: #d73a4a; }
+.tracker-heatmap-tooltip {
+  position: absolute; background: #1f2328; color: #fff; padding: 0.4em 0.6em; border-radius: 4px;
+  font-size: 0.75em; pointer-events: none; z-index: 100; max-width: 280px;
+}
+
+/* Board */
+.tracker-filters { display: flex; gap: 0.4em; margin: 1em 0; flex-wrap: wrap; align-items: center; }
+.tracker-chip {
+  font-size: 0.8em; padding: 0.3em 0.8em; background: var(--color-bg-elevated);
+  border-radius: 99px; color: var(--color-fg-muted); cursor: pointer; border: 1px solid transparent;
+}
+.tracker-chip.is-active { background: var(--color-fg-strong); color: var(--color-bg); border-color: var(--color-fg-strong); }
+.tracker-newissue-smart { margin-left: auto; }
+
+.tracker-kanban { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6em; }
+.tracker-col {
+  background: var(--color-bg-elevated); border: 1px solid var(--color-border-subtle);
+  border-radius: 6px; padding: 0.6em; min-height: 200px;
+}
+.tracker-col-head { display: flex; justify-content: space-between; font-size: 0.75em; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5em; }
+.tracker-card {
+  background: var(--color-bg); border: 1px solid var(--color-border-subtle);
+  border-left: 3px solid var(--color-fg-muted); border-radius: 3px;
+  padding: 0.4em 0.6em; margin-bottom: 0.3em; font-size: 0.8em;
+  text-decoration: none; color: var(--color-fg-strong); display: block;
+}
+.tracker-card.cat-bug { border-left-color: #d73a4a; }
+.tracker-card.cat-newLab { border-left-color: #0e8a16; }
+.tracker-card.cat-contentUpdate { border-left-color: #8957e5; }
+.tracker-card.cat-portalEnhancement { border-left-color: #1d76db; }
+.tracker-card.cat-bootcampFeature { border-left-color: #d4a72c; }
+.tracker-card-meta { font-size: 0.7em; color: var(--color-fg-muted); margin-top: 0.2em; }
+
+@media (max-width: 768px) {
+  .tracker-kpis { grid-template-columns: repeat(2, 1fr); }
+  .tracker-charts { grid-template-columns: 1fr; }
+  .tracker-kanban { grid-template-columns: 1fr; }
+}
