@@ -1,0 +1,711 @@
+{
+  "stats": {
+    "open": 2,
+    "closed30d": 15,
+    "avgAgeDays": 15,
+    "pctTriage": 1,
+    "deltas": {
+      "open": 0,
+      "closed30d": 0,
+      "avgAgeDays": 0,
+      "pctTriage": 0
+    }
+  },
+  "categories": {
+    "bug": {
+      "open": 2,
+      "triage": 2,
+      "backlog": 0,
+      "inProgress": 0,
+      "done30d": 9
+    },
+    "newLab": {
+      "open": 0,
+      "triage": 0,
+      "backlog": 0,
+      "inProgress": 0,
+      "done30d": 1
+    },
+    "contentUpdate": {
+      "open": 0,
+      "triage": 0,
+      "backlog": 0,
+      "inProgress": 0,
+      "done30d": 1
+    },
+    "portalEnhancement": {
+      "open": 0,
+      "triage": 0,
+      "backlog": 0,
+      "inProgress": 0,
+      "done30d": 4
+    },
+    "bootcampFeature": {
+      "open": 0,
+      "triage": 0,
+      "backlog": 0,
+      "inProgress": 0,
+      "done30d": 0
+    }
+  },
+  "trend90d": [
+    {
+      "date": "2026-02-21",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-02-22",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-02-23",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-02-24",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-02-25",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-02-26",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-02-27",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-02-28",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-01",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-02",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-03",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-04",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-05",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-06",
+      "opened": 3,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-07",
+      "opened": 2,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-08",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-09",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-10",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-11",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-12",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-13",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-14",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-15",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-16",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-17",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-18",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-19",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-20",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-21",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-22",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-23",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-24",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-25",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-26",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-27",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-28",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-29",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-30",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-03-31",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-01",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-02",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-03",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-04",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-05",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-06",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-07",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-08",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-09",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-10",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-11",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-12",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-13",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-14",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-15",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-16",
+      "opened": 1,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-17",
+      "opened": 1,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-18",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-19",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-20",
+      "opened": 1,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-21",
+      "opened": 2,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-22",
+      "opened": 3,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-23",
+      "opened": 2,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-24",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-25",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-26",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-27",
+      "opened": 0,
+      "closed": 15
+    },
+    {
+      "date": "2026-04-28",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-29",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-04-30",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-01",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-02",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-03",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-04",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-05",
+      "opened": 2,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-06",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-07",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-08",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-09",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-10",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-11",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-12",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-13",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-14",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-15",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-16",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-17",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-18",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-19",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-20",
+      "opened": 0,
+      "closed": 0
+    },
+    {
+      "date": "2026-05-21",
+      "opened": 0,
+      "closed": 0
+    }
+  ],
+  "issues": [
+    {
+      "number": 308,
+      "title": "Lab #02, #04, #06- Documentation and Additional Training Links throws 404 Page not found.",
+      "url": "https://github.com/microsoft/mcs-labs/issues/308",
+      "category": "bug",
+      "status": "triage",
+      "ageDays": 15,
+      "createdAt": "2026-05-05T22:38:24Z",
+      "updatedAt": "2026-05-05T22:42:10Z",
+      "closedAt": null,
+      "assignees": []
+    },
+    {
+      "number": 307,
+      "title": "Lab #02- ServiceNow instance is in hibernation.",
+      "url": "https://github.com/microsoft/mcs-labs/issues/307",
+      "category": "bug",
+      "status": "triage",
+      "ageDays": 15,
+      "createdAt": "2026-05-05T22:28:44Z",
+      "updatedAt": "2026-05-05T22:28:44Z",
+      "closedAt": null,
+      "assignees": []
+    },
+    {
+      "number": 213,
+      "title": "[Redesign] Do we need learning paths on the homepage?",
+      "url": "https://github.com/microsoft/mcs-labs/issues/213",
+      "category": "portalEnhancement",
+      "status": "done",
+      "ageDays": 75,
+      "createdAt": "2026-03-07T12:43:46Z",
+      "updatedAt": "2026-04-27T23:46:29Z",
+      "closedAt": "2026-04-27T23:46:29Z",
+      "assignees": []
+    },
+    {
+      "number": 214,
+      "title": "[Redesign] Rethink lab section groupings on /labs/ index",
+      "url": "https://github.com/microsoft/mcs-labs/issues/214",
+      "category": "portalEnhancement",
+      "status": "done",
+      "ageDays": 75,
+      "createdAt": "2026-03-07T12:43:48Z",
+      "updatedAt": "2026-04-27T23:46:19Z",
+      "closedAt": "2026-04-27T23:46:19Z",
+      "assignees": []
+    },
+    {
+      "number": 274,
+      "title": "[Redesign]",
+      "url": "https://github.com/microsoft/mcs-labs/issues/274",
+      "category": "portalEnhancement",
+      "status": "done",
+      "ageDays": 33,
+      "createdAt": "2026-04-17T18:38:01Z",
+      "updatedAt": "2026-04-27T23:32:46Z",
+      "closedAt": "2026-04-27T23:32:46Z",
+      "assignees": []
+    },
+    {
+      "number": 210,
+      "title": "New lab: Dataverse MCP Connector",
+      "url": "https://github.com/microsoft/mcs-labs/issues/210",
+      "category": "newLab",
+      "status": "done",
+      "ageDays": 76,
+      "createdAt": "2026-03-06T12:12:37Z",
+      "updatedAt": "2026-04-27T18:35:04Z",
+      "closedAt": "2026-04-27T18:35:04Z",
+      "assignees": []
+    },
+    {
+      "number": 209,
+      "title": "Validate all lab frontmatter after theme migration",
+      "url": "https://github.com/microsoft/mcs-labs/issues/209",
+      "category": "bug",
+      "status": "done",
+      "ageDays": 76,
+      "createdAt": "2026-03-06T12:12:34Z",
+      "updatedAt": "2026-04-27T18:34:50Z",
+      "closedAt": "2026-04-27T18:34:50Z",
+      "assignees": []
+    },
+    {
+      "number": 211,
+      "title": "Add estimated completion time to all lab pages",
+      "url": "https://github.com/microsoft/mcs-labs/issues/211",
+      "category": "contentUpdate",
+      "status": "done",
+      "ageDays": 76,
+      "createdAt": "2026-03-06T12:12:39Z",
+      "updatedAt": "2026-04-27T18:34:41Z",
+      "closedAt": "2026-04-27T18:34:41Z",
+      "assignees": []
+    },
+    {
+      "number": 263,
+      "title": "[Redesign] Event schedule flyout on lab pages",
+      "url": "https://github.com/microsoft/mcs-labs/issues/263",
+      "category": "portalEnhancement",
+      "status": "done",
+      "ageDays": 35,
+      "createdAt": "2026-04-16T14:09:07Z",
+      "updatedAt": "2026-04-27T18:33:51Z",
+      "closedAt": "2026-04-27T18:33:51Z",
+      "assignees": []
+    },
+    {
+      "number": 286,
+      "title": "[core-concepts-analytics-evaluations] Use Case #2 Steps do not match current UI",
+      "url": "https://github.com/microsoft/mcs-labs/issues/286",
+      "category": "bug",
+      "status": "done",
+      "ageDays": 28,
+      "createdAt": "2026-04-22T20:30:41Z",
+      "updatedAt": "2026-04-27T16:38:19Z",
+      "closedAt": "2026-04-27T16:38:19Z",
+      "assignees": []
+    },
+    {
+      "number": 283,
+      "title": "[agent-builder-m365]",
+      "url": "https://github.com/microsoft/mcs-labs/issues/283",
+      "category": "bug",
+      "status": "done",
+      "ageDays": 29,
+      "createdAt": "2026-04-21T21:24:23Z",
+      "updatedAt": "2026-04-27T16:38:11Z",
+      "closedAt": "2026-04-27T16:38:11Z",
+      "assignees": []
+    },
+    {
+      "number": 284,
+      "title": "[agent-builder-m365]",
+      "url": "https://github.com/microsoft/mcs-labs/issues/284",
+      "category": "bug",
+      "status": "done",
+      "ageDays": 29,
+      "createdAt": "2026-04-21T21:30:14Z",
+      "updatedAt": "2026-04-27T16:34:43Z",
+      "closedAt": "2026-04-27T16:34:43Z",
+      "assignees": []
+    },
+    {
+      "number": 285,
+      "title": "[core-concepts-variables-agents-channels] Use Case #3 Steps 6,11,12 do not match current UI",
+      "url": "https://github.com/microsoft/mcs-labs/issues/285",
+      "category": "bug",
+      "status": "done",
+      "ageDays": 28,
+      "createdAt": "2026-04-22T20:12:12Z",
+      "updatedAt": "2026-04-27T16:24:43Z",
+      "closedAt": "2026-04-27T16:24:43Z",
+      "assignees": []
+    },
+    {
+      "number": 287,
+      "title": "[core-concepts-analytics-evaluations] Expectations in prerequisites do not match experience",
+      "url": "https://github.com/microsoft/mcs-labs/issues/287",
+      "category": "bug",
+      "status": "done",
+      "ageDays": 28,
+      "createdAt": "2026-04-22T20:34:56Z",
+      "updatedAt": "2026-04-27T16:16:38Z",
+      "closedAt": "2026-04-27T16:16:37Z",
+      "assignees": []
+    },
+    {
+      "number": 288,
+      "title": "[mcs-tools] Agent settings do not match current UI",
+      "url": "https://github.com/microsoft/mcs-labs/issues/288",
+      "category": "bug",
+      "status": "done",
+      "ageDays": 27,
+      "createdAt": "2026-04-23T21:48:11Z",
+      "updatedAt": "2026-04-27T16:10:36Z",
+      "closedAt": "2026-04-27T16:10:36Z",
+      "assignees": []
+    },
+    {
+      "number": 289,
+      "title": "[mcs-governance] Instructions for Yellow and Red zone are skipping solution creation",
+      "url": "https://github.com/microsoft/mcs-labs/issues/289",
+      "category": "bug",
+      "status": "done",
+      "ageDays": 27,
+      "createdAt": "2026-04-23T21:53:14Z",
+      "updatedAt": "2026-04-27T16:00:54Z",
+      "closedAt": "2026-04-27T16:00:54Z",
+      "assignees": []
+    },
+    {
+      "number": 281,
+      "title": "Test the Prompt Analyzer Tool",
+      "url": "https://github.com/microsoft/mcs-labs/issues/281",
+      "category": "bug",
+      "status": "done",
+      "ageDays": 31,
+      "createdAt": "2026-04-20T16:22:01Z",
+      "updatedAt": "2026-04-27T15:34:09Z",
+      "closedAt": "2026-04-27T15:34:09Z",
+      "assignees": []
+    }
+  ],
+  "recentActivity": [],
+  "generatedAt": "2026-05-21T16:53:22.394Z"
+}
