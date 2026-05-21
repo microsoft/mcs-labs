@@ -1,4 +1,4 @@
-# Issue Tracker Implementation Plan
+# Backlog Tracker Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
@@ -164,7 +164,7 @@ body:
         - Events index (/events/)
         - Event detail page
         - About page (/about/)
-        - Issue tracker (/tracker/)
+        - Backlog tracker (/tracker/)
         - Navigation / sidebar
         - Other
     validations:
@@ -647,7 +647,7 @@ Create `tracker.md` (single file — no separate layout):
 ```markdown
 ---
 layout: single
-title: "Issue Tracker"
+title: "Backlog Tracker"
 permalink: /tracker/
 toc: false
 classes: wide
@@ -665,7 +665,7 @@ header:
 <main class="tracker" data-tracker>
   <header class="tracker-header">
     <div class="tracker-header-row">
-      <h2 class="tracker-title">Issue Tracker</h2>
+      <h2 class="tracker-title">Backlog Tracker</h2>
       <span class="tracker-updated" data-tracker-updated>Loading…</span>
     </div>
     <p class="tracker-subtitle">Status of bootcamp work across the labs project.</p>
@@ -1164,7 +1164,7 @@ let _rangeDays = +(localStorage.getItem('tracker.range') || 30);
 async function init() {
   try { await load(); }
   catch (e) {
-    document.querySelector('[data-tracker]').innerHTML = `<p style="padding:2em;text-align:center;color:var(--color-fg-muted);">Issue tracker data not available yet — check back shortly.</p>`;
+    document.querySelector('[data-tracker]').innerHTML = `<p style="padding:2em;text-align:center;color:var(--color-fg-muted);">Backlog tracker data not available yet — check back shortly.</p>`;
     return;
   }
 
@@ -1228,7 +1228,7 @@ Create `_includes/home-tracker-link.html`:
 
 ```html
 <p class="home-tracker-link" style="margin-top:2em;text-align:center;font-size:0.85em;color:var(--color-fg-muted);">
-  <a href="{{ '/tracker/' | relative_url }}">Issue tracker →</a>
+  <a href="{{ '/tracker/' | relative_url }}">Backlog tracker →</a>
   <span style="opacity:0.6;"> · status of bootcamp work</span>
 </p>
 ```
@@ -1245,7 +1245,7 @@ Append to the very end of `C:/Users/dewainr/projects/mcs-labs/index.md` (after t
 
 ```bash
 git add _includes/home-tracker-link.html index.md
-git commit -m "feat(tracker): home-page footer link to issue tracker"
+git commit -m "feat(tracker): home-page footer link to backlog tracker"
 ```
 
 ---
@@ -1283,7 +1283,7 @@ Open `http://localhost:4000/mcs-labs/tracker/` in a browser. Verify:
 - [ ] Time-range selector changes the "Closed Nd" KPI and trend x-axis. Reload retains selection.
 - [ ] Board tab: filter chips work, smart `+ New issue` updates URL when a chip is selected.
 - [ ] Each `+ New issue` link opens the correct GitHub issue template.
-- [ ] Home page (`/`) shows the `Issue tracker →` link at the bottom; other pages do NOT.
+- [ ] Home page (`/`) shows the `Backlog tracker →` link at the bottom; other pages do NOT.
 - [ ] No console errors.
 
 - [ ] **Step 16.4: If anything fails, fix and re-commit, then return to 16.3**
@@ -1300,7 +1300,7 @@ Add these entries under the existing `## Unreleased` section, matching the Keep-
 - [ ] **Step 16.5.1: Add to the existing `### Added` block (or create one near the top of Unreleased)**
 
 ```markdown
-- **Issue tracker at `/tracker/`.** New static page surfacing GitHub issues across 5 categories (Bugs, New Labs, Content Updates, Portal Enhancements, Bootcamp Features) with an Insights tab (KPI tiles, donut chart, opened-vs-closed trend, aging heatmap) and a Board tab (Kanban view with filter chips and a smart "+ New issue" button that deep-links to the right template). 100% public — any deeper interaction (assignees, comments, history) deep-links to the corresponding GitHub issue. Data refreshes via a 15-minute GitHub Actions cron (`tracker-data.yml`) that commits a normalized snapshot to `assets/data/issues.json`. Linked from the home page footer only.
+- **Backlog tracker at `/tracker/`.** New static page surfacing GitHub issues across 5 categories (Bugs, New Labs, Content Updates, Portal Enhancements, Bootcamp Features) with an Insights tab (KPI tiles, donut chart, opened-vs-closed trend, aging heatmap) and a Board tab (Kanban view with filter chips and a smart "+ New issue" button that deep-links to the right template). 100% public — any deeper interaction (assignees, comments, history) deep-links to the corresponding GitHub issue. Data refreshes via a 15-minute GitHub Actions cron (`tracker-data.yml`) that commits a normalized snapshot to `assets/data/issues.json`. Linked from the home page footer only.
 - **`Bootcamp Feature` issue template.** New `.github/ISSUE_TEMPLATE/bootcamp_feature.yml` for bootcamp process, tooling, and management work — auto-applies `type: bootcamp-feature` and `status: triage` so new submissions land in a reviewable state.
 - **Labels: `type: bootcamp-feature`, `status: triage`, `status: backlog`, `status: in-progress`.** New labels supporting the tracker's Triage → Backlog → In Progress → Done lifecycle.
 ```
@@ -1308,7 +1308,7 @@ Add these entries under the existing `## Unreleased` section, matching the Keep-
 - [ ] **Step 16.5.2: Add to the existing `### Changed` block**
 
 ```markdown
-- **Issue template rename: "Redesign feedback" → "Portal Enhancements".** The air-theme redesign is now just "the site," so the template covering site-wide bugs/suggestions has been renamed and broadened. File renamed `.github/ISSUE_TEMPLATE/redesign-feedback.yml` → `portal_enhancement.yml`; label `redesign` → `portal-enhancement`. The template's "Which page?" dropdown now includes `Issue tracker` as an option.
+- **Issue template rename: "Redesign feedback" → "Portal Enhancements".** The air-theme redesign is now just "the site," so the template covering site-wide bugs/suggestions has been renamed and broadened. File renamed `.github/ISSUE_TEMPLATE/redesign-feedback.yml` → `portal_enhancement.yml`; label `redesign` → `portal-enhancement`. The template's "Which page?" dropdown now includes `Backlog tracker` as an option.
 - **Label rename: `feedback` → `discussion`.** Distinguishes open-ended threads from the existing `question` label (which implies a specific answer is wanted).
 ```
 
@@ -1316,7 +1316,7 @@ Add these entries under the existing `## Unreleased` section, matching the Keep-
 
 ```bash
 git add CHANGELOG.md
-git commit -m "docs(changelog): record issue tracker + template/label changes"
+git commit -m "docs(changelog): record backlog tracker + template/label changes"
 ```
 
 ---
@@ -1335,7 +1335,7 @@ git push -u origin dewain/issues-tracker
 
 ```bash
 gh pr create --repo microsoft/mcs-labs \
-  --title "Issue tracker + new template + label cleanup" \
+  --title "Backlog tracker + new template + label cleanup" \
   --body "$(cat <<'EOF'
 ## Summary
 - Adds `/tracker/` — a static page showing GitHub issues across 5 categories with an Insights tab (KPIs, donut, trend, aging heatmap) and a Board tab (Kanban with filter chips and smart new-issue button).
@@ -1392,8 +1392,8 @@ Expected: `HTTP/2 200`.
 
 - [ ] **Step 18.3: Browser smoke test on production**
 
-- [ ] Open `https://microsoft.github.io/mcs-labs/`, scroll to bottom, click `Issue tracker →`.
-- [ ] Issue tracker loads with current data.
+- [ ] Open `https://microsoft.github.io/mcs-labs/`, scroll to bottom, click `Backlog tracker →`.
+- [ ] Backlog tracker loads with current data.
 - [ ] All `+ New issue` template links open correctly.
 - [ ] No console errors.
 

@@ -1,4 +1,4 @@
-# Issue Tracker — Design Spec
+# Backlog Tracker — Design Spec
 
 Status: Draft for approval
 Owner: dewainr
@@ -86,26 +86,28 @@ Browser loads /tracker/
 ## 5. Page Structure
 
 ### Header (sticky on both tabs)
-- Title "Issue Tracker" + tagline
-- "Updated 4 min ago" timestamp
+- Title "Backlog Tracker" + tagline
+- Snapshot timestamp ("Updated N min ago") wrapped in a **manual refresh button**. Clicking re-fetches `issues.json` and reports: "✓ New data loaded" (file changed), "✓ No changes — snapshot still current" (file identical), or "⚠ Refresh failed". A 400 ms minimum spinner ensures the click feels acknowledged on fast local fetches. The 15-min cron continues independently — the button is for impatience or post-cron pull.
 - Tabs: **Insights** (default) · Board
 - Time-range selector (7d · 14d · 30d · 60d · 90d) — drives Closed KPI, trend chart x-axis, Done column window. Default 30d. Persists in localStorage.
-- `+ New issue ▾` dropdown (template picker) — always visible
+- `+ New item ▾` dropdown (template picker) — always visible
 
 ### Insights tab (default landing)
 - **KPI strip** — 4 tiles: Open total · Closed (Nd) · Avg age · % in triage, each with delta vs. prior period.
 - **Donut** — open issues by category. Clicking a slice switches to Board tab pre-filtered to that category.
-- **Trend** — opened vs. closed line over selected time range. Filter chips above isolate a single category.
-- **Aging heatmap** — 5 rows (one per category). Each row is the open issues sorted oldest → newest, one cell per issue, colored by age bucket (≤7d, ≤14d, ≤30d, ≤60d, >60d). Hover → tooltip with issue # + title; click → opens the GitHub issue.
+- **Trend** — opened vs. closed line over selected time range, with x-axis date labels (start / midpoint / end) and y-axis count gridlines.
+- **Aging by category** — 5 rows (one per category). Each row shows: name, summary ("N open · oldest Nd"), a proportional bucket bar (segments labeled with counts; colored ≤7d→>60d from green to red), and the literal oldest open issue title rendered as a link to GitHub. Empty rows say "no open issues."
+- **Oldest open issues** — flat tappable table, top 15 open issues sorted by age descending. Each row: `#NNN` · category badge · title · days (red when >60d). The whole row links to the GitHub issue. Empty state: "No open issues — all clear."
+- (Earlier-draft aging heatmap was dropped: hover-only info isn't mobile-friendly and didn't reveal what issues actually *were*.)
 
 ### Board tab
 - Filter chip row: `All · 56` · `Bugs · 14` · `New Labs · 3` · `Content · 9` · `Portal · 22` · `Bootcamp · 8`
-- Smart `+ New issue` pill — when a category chip is active, links to that template; with All, opens the picker.
+- Smart `+ New item` pill — when a category chip is active, links to that template; with All, opens the picker.
 - 4 columns: Triage / Backlog / In Progress / Done (window).
 - Cards: color-striped by category, show #, title, age. Click → opens the GitHub issue (where assignees, comments, and history are visible).
 
 ### Home-page footer link
-- Added to `index.md` (not site-wide footer) as a quiet link styled like the existing `home-browse-all` link: `Issue tracker →`.
+- Added to `index.md` (not site-wide footer) as a quiet link styled like the existing `home-browse-all` link: `Backlog tracker →`.
 
 ## 6. Data Pipeline
 
@@ -172,7 +174,7 @@ Target payload: < 50 KB raw, < 30 KB gzipped.
 |---|---|
 | Snapshot older than 30 min | Amber dot + "Snapshot is N min old" (no auto-refresh in v1 — cron is the mechanism) |
 | Category has zero open issues | Donut slice still in legend at 0%; Board column shows empty state |
-| `issues.json` missing or malformed | Skeleton + "Issue tracker data not available yet — check back shortly" |
+| `issues.json` missing or malformed | Skeleton + "Backlog tracker data not available yet — check back shortly" |
 | Issue closed but no `closedAt` | Treated as still open (defensive) |
 | Issue has multiple `type:` labels | First match wins, in priority order: bug > new-lab > content-update > portal-enhancement > bootcamp-feature |
 | Issue has multiple `status:` labels | Most recently applied wins (timeline lookup) |

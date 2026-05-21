@@ -23,7 +23,7 @@ body:
         - Events index (/events/)
         - Event detail page
         - About page (/about/)
-        - Issues tracker (/tracker/)
+        - Backlog tracker (/tracker/)
         - Navigation / sidebar
         - Other
     validations:
