@@ -42,52 +42,70 @@ Open issues that have a type label (per §2) but no `status:` label default to T
 
 ## 4. Architecture
 
-**Stack:** static Jekyll page + GitHub Actions data refresh + client-side JS. Zero server-side runtime. No external chart libraries.
+**Stack:** static Jekyll page + client-side fetch of the public GitHub Issues REST API. Zero server-side runtime, zero scheduled jobs, no external chart libraries.
 
 ```
-GitHub Actions (every 15 min + on issue/PR events)
-   │ queries Issues API with GITHUB_TOKEN
-   │ shapes into assets/data/issues.json
-   │ idempotency: skip commit if unchanged
-   └─ commits → triggers Pages rebuild
-
 Browser loads /tracker/
-   └─ renders Insights tab immediately from issues.json (zero API calls)
-      (No background refresh — the 15-min cron is the freshness mechanism.
-       Anonymous GitHub API calls share a 60/hr/IP limit, not worth the complexity.)
+   │
+   ├─ main.js init()
+   │    └─ data.js load()
+   │         ├─ GET https://api.github.com/repos/microsoft/mcs-labs/issues
+   │         │     ?state=all&per_page=100 (paginated up to 5 pages, stops on
+   │         │     closed issues older than 180d)
+   │         ├─ filter out PRs (REST mixes them into the issues list)
+   │         ├─ categorize(labels), deriveStatus(issue), shape(issues) — all in browser
+   │         └─ assigns shaped data with source='live'
+   │
+   └─ Manual refresh button → calls data.js load() again
+         (Initial page load is the only automatic fetch. Tab switches, filter
+          changes, and time-range changes re-render from the already-loaded
+          dataset — no extra API calls.)
+
+Fallback path (live API unavailable):
+   On any network/5xx error, OR on HTTP 403 with X-RateLimit-Remaining=0,
+   data.js loads the committed assets/data/issues.json (the seed snapshot)
+   instead, marks the data with source='seed-rate-limited' or 'seed-fallback',
+   and the header timestamp surfaces the degraded state to the viewer.
 ```
+
+**Why not a workflow-driven snapshot:** the `microsoft/mcs-labs` repo is governed by org policies that block (1) direct pushes to `main` by `github-actions[bot]` (branch protection requires PRs) and (2) GitHub Actions creating pull requests (org-level setting). Together these make the workflow-publishes-snapshot pattern unworkable. Live API fetch sidesteps the entire publication problem. Rate-limit math: anonymous GitHub API allows 60 requests/hour per IP — one fetch per page load — so a single viewer would need to reload 60+ times per hour to be throttled. The seed fallback covers that edge case + any GitHub outage.
 
 ### Files created or modified
 
 | Path | Purpose |
 |---|---|
-| `tracker.md` (new, at repo root) | Page with front matter `layout: tracker` |
-| `_layouts/tracker.html` (new) | Layout with header, tabs, empty mount points for JS |
-| `assets/js/tracker/data.js` (new) | Loads `issues.json`, exposes shaped data |
-| `assets/js/tracker/insights.js` (new) | Renders KPI tiles, donut, trend line, aging heatmap |
-| `assets/js/tracker/board.js` (new) | Renders Kanban columns, filter chips, smart New-issue button |
+| `tracker.md` (new, at repo root) | Page with `layout: single`, all UI inline so chrome (masthead/footer/theme) is inherited |
+| `assets/js/tracker/data.js` (new) | Live API fetch + categorize/deriveStatus/shape + seed fallback |
+| `assets/js/tracker/insights.js` (new) | Renders KPI tiles, donut, trend line, aging-by-category, oldest-issues table |
+| `assets/js/tracker/board.js` (new) | Renders Kanban columns, filter chips, smart New-item button |
+| `assets/js/tracker/main.js` (new) | Wiring: tabs, range selector, refresh button, render orchestration |
 | `assets/css/tracker.css` (new) | All tracker styles, scoped to `.tracker-*` classes |
-| `assets/data/issues.json` (new, generated) | Data snapshot committed by workflow |
-| `_data/tracker.yml` (new) | Public config: repo owner/name, settings |
+| `assets/data/issues.json` (new) | Fallback snapshot used only when the live API call fails. Updated occasionally by manually running `scripts/build-tracker-data.js` + a regular PR. Goes stale otherwise — that's fine, it's a fallback. |
+| `_data/tracker.yml` (new) | Public config: repo owner/name, stale threshold |
 | `_includes/home-tracker-link.html` (new) | Footer-style link rendered only by `index.md` |
 | `index.md` (modified) | Adds the footer-area link to the tracker |
-| `.github/workflows/tracker-data.yml` (new) | 15-min cron + event-triggered data refresh |
-| `.github/ISSUE_TEMPLATE/bootcamp_feature.yml` (already created) | Already in untracked state |
+| `scripts/build-tracker-data.js` (new) | Standalone Node script — same shape logic as data.js. Used to regenerate the seed JSON on demand. |
+| `.github/ISSUE_TEMPLATE/bootcamp_feature.yml` (new) | Bootcamp feature template |
 | `.github/ISSUE_TEMPLATE/portal_enhancement.yml` (renamed from redesign-feedback.yml) | Template rename + label updates |
 | `docs/issues-tracker-design.md` (this file) | Design spec |
 
+(Note: an earlier draft included a `.github/workflows/tracker-data.yml` cron workflow. It was removed before shipping the live-fetch architecture — both branch protection and the org's "Actions can't create PRs" setting blocked any way for the workflow to publish updates to `main`.)
+
 ### Files NOT created
-- No server-side anything (no Functions, no API)
+- No server-side anything (no Functions, no API, no scheduled workflow)
 - No external JS dependencies (no Chart.js, no React)
 - No comment / issue-creation forms (deep-link to GitHub instead)
 - No `auth.js` — OAuth was dropped from v1; everything is public
-- No background API refresh — freshness comes from the 15-min cron
+- No background polling — initial page load is the only automatic fetch; the rest is on-demand via the manual refresh button
 
 ## 5. Page Structure
 
 ### Header (sticky on both tabs)
 - Title "Backlog Tracker" + tagline
-- Snapshot timestamp ("Updated N min ago") wrapped in a **manual refresh button**. Clicking re-fetches `issues.json` and reports: "✓ New data loaded" (file changed), "✓ No changes — snapshot still current" (file identical), or "⚠ Refresh failed". A 400 ms minimum spinner ensures the click feels acknowledged on fast local fetches. The 15-min cron continues independently — the button is for impatience or post-cron pull.
+- Header timestamp surfaces the data state:
+  - `Live · just refreshed` / `Live · refreshed N min ago` — current page session, data came directly from GitHub.
+  - `⚠ Cached snapshot · N min old (live API unavailable)` — live fetch failed or was rate-limited, fell back to the committed seed JSON.
+- Wrapped in a **manual refresh button**. Clicking re-runs `data.js load()` (which tries live API, falls back to seed) and surfaces the result with one of: "✓ Refreshed from GitHub", "⚠ Using cached data — live API unavailable", "⚠ Refresh failed". 400 ms minimum spinner ensures the click feels acknowledged even on fast fetches.
 - Tabs: **Insights** (default) · Board
 - Time-range selector (7d · 14d · 30d · 60d · 90d) — drives Closed KPI, trend chart x-axis, Done column window. Default 30d. Persists in localStorage.
 - `+ New item ▾` dropdown (template picker) — always visible

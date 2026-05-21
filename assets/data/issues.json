@@ -555,7 +555,7 @@
       "url": "https://github.com/microsoft/mcs-labs/issues/274",
       "category": "portalEnhancement",
       "status": "done",
-      "ageDays": 33,
+      "ageDays": 34,
       "createdAt": "2026-04-17T18:38:01Z",
       "updatedAt": "2026-04-27T23:32:46Z",
       "closedAt": "2026-04-27T23:32:46Z",
@@ -615,7 +615,7 @@
       "url": "https://github.com/microsoft/mcs-labs/issues/286",
       "category": "bug",
       "status": "done",
-      "ageDays": 28,
+      "ageDays": 29,
       "createdAt": "2026-04-22T20:30:41Z",
       "updatedAt": "2026-04-27T16:38:19Z",
       "closedAt": "2026-04-27T16:38:19Z",
@@ -651,7 +651,7 @@
       "url": "https://github.com/microsoft/mcs-labs/issues/285",
       "category": "bug",
       "status": "done",
-      "ageDays": 28,
+      "ageDays": 29,
       "createdAt": "2026-04-22T20:12:12Z",
       "updatedAt": "2026-04-27T16:24:43Z",
       "closedAt": "2026-04-27T16:24:43Z",
@@ -663,7 +663,7 @@
       "url": "https://github.com/microsoft/mcs-labs/issues/287",
       "category": "bug",
       "status": "done",
-      "ageDays": 28,
+      "ageDays": 29,
       "createdAt": "2026-04-22T20:34:56Z",
       "updatedAt": "2026-04-27T16:16:38Z",
       "closedAt": "2026-04-27T16:16:37Z",
@@ -707,5 +707,5 @@
     }
   ],
   "recentActivity": [],
-  "generatedAt": "2026-05-21T16:53:22.394Z"
+  "generatedAt": "2026-05-21T20:54:01.803Z"
 }

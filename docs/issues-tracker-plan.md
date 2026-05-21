@@ -1,10 +1,12 @@
 # Backlog Tracker Implementation Plan
 
+> **Status (post-implementation):** This plan was executed via PR #315. After merge, the GitHub Actions cron portion failed due to org policies (branch protection on `main` + "Actions can't create PRs" setting both blocked the workflow's commit path). The page was switched to live client-side GitHub API fetch in a follow-up — see `docs/issues-tracker-design.md` §4 for the current architecture. The plan below is preserved as the historical execution record; treat all `tracker-data.yml` workflow content as deprecated.
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Build a static `/tracker/` page on the labs site that shows GitHub issues across 5 categories with charts and a Kanban view. 100% public; any deeper interaction deep-links to GitHub.
 
-**Architecture:** Jekyll page + GitHub Actions 15-min refresh + client-side vanilla JS. Data lives in a committed `assets/data/issues.json` snapshot; JS renders entirely from the snapshot. No OAuth, no background API calls — GitHub is the source of truth for anything beyond the dashboard view.
+**Architecture (as planned — see status note above for what actually shipped):** Jekyll page + GitHub Actions 15-min refresh + client-side vanilla JS. Data lives in a committed `assets/data/issues.json` snapshot; JS renders entirely from the snapshot. No OAuth, no background API calls — GitHub is the source of truth for anything beyond the dashboard view.
 
 **Tech Stack:** Jekyll (minimal-mistakes theme), GitHub Actions, Node 20+ (built-in `fetch` + `node:test`), vanilla JS + SVG (no chart libraries).
 
