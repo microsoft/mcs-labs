@@ -1,0 +1,7 @@
+# Public tracker configuration. Safe to commit — no secrets.
+repo:
+  owner: "microsoft"
+  name: "mcs-labs"
+
+snapshot:
+  staleThresholdMs: 1800000 # 30 minutes — show "snapshot is N min old" indicator past this
