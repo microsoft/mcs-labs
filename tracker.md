@@ -1,6 +1,6 @@
 ---
 layout: single
-title: "Issue Tracker"
+title: "Backlog Tracker"
 permalink: /tracker/
 toc: false
 classes: wide
@@ -18,8 +18,14 @@ header:
 <main class="tracker" data-tracker>
   <header class="tracker-header">
     <div class="tracker-header-row">
-      <h2 class="tracker-title">Issue Tracker</h2>
-      <span class="tracker-updated" data-tracker-updated>Loading…</span>
+      <h2 class="tracker-title">Backlog Tracker</h2>
+      <button class="tracker-refresh" data-tracker-refresh title="Refresh snapshot now (auto-refresh runs every 15 min on the server)">
+        <span class="tracker-updated" data-tracker-updated>Loading…</span>
+        <svg class="tracker-refresh-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M3 12a9 9 0 1 0 3-6.7" />
+          <polyline points="3 4 3 10 9 10" />
+        </svg>
+      </button>
     </div>
     <p class="tracker-subtitle">Status of bootcamp work across the labs project.</p>
     <div class="tracker-controls">
@@ -38,7 +44,7 @@ header:
         </select>
       </label>
       <details class="tracker-newissue">
-        <summary>+ New issue</summary>
+        <summary>+ New item</summary>
         <ul data-tracker-templates>
           <li><a href="https://github.com/microsoft/mcs-labs/issues/new?template=bug_report.yml">Bug</a></li>
           <li><a href="https://github.com/microsoft/mcs-labs/issues/new?template=new_lab.yml">New Lab</a></li>
@@ -56,7 +62,8 @@ header:
       <div data-tracker-donut></div>
       <div data-tracker-trend></div>
     </div>
-    <div data-tracker-heatmap></div>
+    <div data-tracker-aging></div>
+    <div data-tracker-oldest></div>
   </section>
 
   <section class="tracker-tabpanel is-hidden" data-tabpanel="board" role="tabpanel">
