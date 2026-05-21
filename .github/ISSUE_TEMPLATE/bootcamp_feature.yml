@@ -1,0 +1,35 @@
+name: Bootcamp Feature
+description: Propose a change to the bootcamp itself — process, tooling, or how the bootcamp is managed
+labels: ["type: bootcamp-feature", "status: triage"]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Process (curriculum, schedule, registration, communications)
+        - Tooling (scripts, automation, repo infrastructure)
+        - Content management (how labs/events are authored, reviewed, published)
+        - Logistics (venues, hardware, accounts, environments)
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What should change?
+      description: Describe the feature, improvement, or change you'd like to see
+    validations:
+      required: true
+  - type: textarea
+    id: motivation
+    attributes:
+      label: Why?
+      description: What problem does this solve, or what does it enable?
+    validations:
+      required: true
+  - type: textarea
+    id: approach
+    attributes:
+      label: Suggested approach
+      description: How might we implement this? (optional)
