@@ -238,3 +238,5 @@ header:
 </ul>
 
 <p class="home-browse-all"><a href="{{ '/labs/' | relative_url }}">Browse all labs →</a></p>
+
+{% include home-tracker-link.html %}
