@@ -13,6 +13,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Labels: `type: bootcamp-feature`, `status: triage`, `status: backlog`, `status: in-progress`.** Support the Backlog Tracker's Triage → Backlog → In Progress → Done lifecycle.
 
 ### Changed
+- **Backlog Tracker refresh workflow now opens an auto-merging PR instead of pushing direct to `main`.** The repo's branch protection ("Changes must be made through a pull request") was rejecting the bot's direct push, so every 15-min cron run was failing at the commit step. Switched `.github/workflows/tracker-data.yml` to use `peter-evans/create-pull-request@v7` on a stable bot branch (`bot/tracker-data-refresh`) plus `gh pr merge --squash --auto` so each snapshot change opens (or updates) a PR that lands automatically when CI clears. The architecture (snapshot in repo at `assets/data/issues.json`, page reads it as a static asset) is unchanged.
 - **Issue template rename: "Redesign feedback" → "Portal Enhancements".** The air-theme redesign is now just "the site," so the template covering site-wide bugs/suggestions has been renamed and broadened. File renamed `.github/ISSUE_TEMPLATE/redesign-feedback.yml` → `portal_enhancement.yml`; label `redesign` → `portal-enhancement`. The "Which page?" dropdown now includes `Backlog tracker (/tracker/)`.
 - **Label rename: `feedback` → `discussion`.** Distinguishes open-ended threads from the existing `question` label (which implies a specific answer is wanted).
 
