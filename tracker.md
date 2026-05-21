@@ -19,7 +19,7 @@ header:
   <header class="tracker-header">
     <div class="tracker-header-row">
       <h2 class="tracker-title">Backlog Tracker</h2>
-      <button class="tracker-refresh" data-tracker-refresh title="Refresh snapshot now (auto-refresh runs every 15 min on the server)">
+      <button class="tracker-refresh" data-tracker-refresh title="Re-fetch live issue data from GitHub (data also loads fresh on each page load)">
         <span class="tracker-updated" data-tracker-updated>Loading…</span>
         <svg class="tracker-refresh-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
           <path d="M3 12a9 9 0 1 0 3-6.7" />

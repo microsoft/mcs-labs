@@ -2,7 +2,7 @@
 layout: null
 permalink: /assets/js/tracker/main.js
 ---
-import { load, get, isStale, snapshotAgeMs } from './data.js';
+import { load, get, isStale, snapshotAgeMs, dataSource } from './data.js';
 import { render as renderInsights } from './insights.js';
 import { render as renderBoard } from './board.js';
 
@@ -61,9 +61,10 @@ async function refresh() {
 
 function showRefreshFeedback(changed, failed) {
   const el = document.querySelector('[data-tracker-updated]');
+  const src = dataSource();
   if (failed) el.textContent = '⚠ Refresh failed';
-  else if (changed) el.textContent = '✓ New data loaded';
-  else el.textContent = '✓ No changes — snapshot still current';
+  else if (src && src.startsWith('seed')) el.textContent = '⚠ Using cached data — live API unavailable';
+  else el.textContent = '✓ Refreshed from GitHub';
   if (_feedbackTimer) clearTimeout(_feedbackTimer);
   _feedbackTimer = setTimeout(() => { _feedbackTimer = null; updateTimestamp(); }, 3000);
 }
@@ -79,7 +80,14 @@ function updateTimestamp() {
   if (_feedbackTimer) return; // don't overwrite refresh feedback
   const el = document.querySelector('[data-tracker-updated]');
   const min = Math.round(snapshotAgeMs() / 60000);
-  el.textContent = isStale() ? `⚠ Snapshot ${min} min old` : `Updated ${min} min ago`;
+  const src = dataSource();
+  if (src && src.startsWith('seed')) {
+    el.textContent = `⚠ Cached snapshot · ${min} min old (live API unavailable)`;
+  } else if (min < 1) {
+    el.textContent = 'Live · just refreshed';
+  } else {
+    el.textContent = `Live · refreshed ${min} min ago`;
+  }
 }
 
 function switchTab(name) {
