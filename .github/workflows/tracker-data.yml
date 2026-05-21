@@ -71,6 +71,7 @@ jobs:
         uses: peter-evans/create-pull-request@v7
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          base: main
           branch: bot/tracker-data-refresh
           delete-branch: true
           commit-message: "chore(tracker): refresh issues snapshot"
