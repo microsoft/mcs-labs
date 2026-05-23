@@ -2,7 +2,7 @@
 layout: lab
 title: "Using Component Collections in Copilot Studio"
 order: 260
-duration: 45
+duration: 30
 difficulty: 300
 lab_type: local
 section: intermediate_labs
@@ -94,6 +94,12 @@ This lab teaches you how to create component collections, share them across agen
 
 - Access to Microsoft Copilot Studio
 - Permissions to create agents and modify settings in your environment
+- Before starting **Use Case #3**, import the **Corporate Services** managed solution into your environment so the Corporate Services component collection is available:
+  1. Download [corporateServices_1733752691034_1_1_managed.zip](https://github.com/microsoft/mcs-labs/raw/main/labs/component-collections/corporateServices_1733752691034_1_1_managed.zip) from the lab assets.
+  1. Go to the Power Apps maker portal at [https://make.powerapps.com](https://make.powerapps.com) and confirm you are in the correct environment.
+  1. In the left navigation, select **Solutions**, then select **Import solution**.
+  1. Select **Browse**, choose the downloaded **corporateServices_1733752691034_1_1_managed.zip** file, then select **Next** and **Import**.
+  1. Wait for the import to complete before continuing to Use Case #3.
 
 ---
 
@@ -106,6 +112,7 @@ In this lab, you'll create a component collection from an existing agent and lea
 - Add a component collection to a different agent and verify shared access
 - Edit a shared component and confirm changes sync across agents
 - Manage component collection ownership by setting a primary agent
+- Understand how managed component collections behave as read-only in consuming agents
 - Understand how component collections integrate with Power Platform solutions
 
 ---
@@ -190,7 +197,7 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 1. Select **Create** on the Create a component collection screen.
 
-1. Enter **Travel Tools**  into the **Name** field
+1. Enter **Travel Tools** into the **Name** field.
 
 1. Enter the following into the **Description** field:
 
@@ -198,7 +205,7 @@ Create an agent, build a custom topic, and package components into a reusable co
     These are tools that assist with travel related scenarios.
     ```
 
-1. Check the **Solution** field, if **Select a solution** is showing do not change anything, if a solution is selected change it to **Create a new solution**.
+1. Review the **Solution** field. If **Select a solution** is shown, leave it as is so Copilot Studio creates a new solution for you. If a solution is already selected, change the selection to **Create a new solution**.
 
     > [!NOTE]
     > If the Solution field is left blank, Copilot Studio will automatically create a new solution for you. You can also select an existing solution if you want to group multiple component collections together.
@@ -390,7 +397,7 @@ Manage component collection access, set a primary agent, and explore solution in
 
 1. In the **Agents** navigation menu on the left, select the **Safe Travels** agent.
 
-1. Go to **Topics** on the top menu and then select **Request Product Info**.
+1. Go to **Topics** on the top menu and then select a topic from the **Corporate Services** collection (for example, **Request Product Info**).
 
 1. Notice that you can't make any changes as the component collection that installed it is managed.
 
@@ -414,7 +421,7 @@ Manage component collection access, set a primary agent, and explore solution in
 
 #### Explore Solution Awareness
 
-1. In the **Details** section, Select **View Solution** (Travel Tools Solution).
+1. In the **Details** section, select the **View Solution** link next to the auto-generated solution (for example, **Travel Tools**).
 
 1. This will let you inspect the details of the solution in Power Platform, as component collections are solution-aware.
 
