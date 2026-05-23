@@ -125,6 +125,12 @@ lab_metadata:
     id: mcs-alm
     section: intermediate
     title: Application Lifecycle Management (ALM) in Copilot Studio
+  290:
+    difficulty: Advanced
+    duration: 60
+    id: mcs-orchestration
+    section: intermediate
+    title: Orchestration with Copilot Studio
   300:
     difficulty: Advanced
     duration: 30
@@ -225,6 +231,7 @@ lab_journeys:
   mcs-governance: [business-user, developer]
   mcs-mcp-external: [developer]
   mcs-multi-agent: [business-user, developer]
+  mcs-orchestration: [developer]
   mcs-tools: [business-user, developer]
   measure-success: [developer]
   pipelines-and-source-control: [developer]
@@ -259,6 +266,7 @@ legacy_lab_orders:
   mcs-governance: 195
   mcs-mcp-external: 600
   mcs-multi-agent: 250
+  mcs-orchestration: 290
   mcs-tools: 270
   measure-success: 400
   pipelines-and-source-control: 410
@@ -378,6 +386,7 @@ lab_orders:
       - 260
       - 270
       - 280
+      - 290
     optional: [500]
     specialized: [400, 410, 420, 430, 440, 450]
 
