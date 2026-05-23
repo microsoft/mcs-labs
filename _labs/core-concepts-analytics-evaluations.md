@@ -89,7 +89,7 @@ This lab teaches you how to use both analytics and the Agent Evaluation feature 
 ## Documentation and Additional Training Links
 
 * [Analyze agent performance](https://learn.microsoft.com/microsoft-copilot-studio/analytics-overview)
-* [Use conversation analytics](https://learn.microsoft.com/microsoft-copilot-studio/analytics-summary)
+* [Analyze conversational agent effectiveness](https://learn.microsoft.com/microsoft-copilot-studio/analytics-improve-agent-effectiveness)
 * [Agent evaluation overview](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-overview)
 * [Create evaluation test sets](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-create)
 * [View and interpret evaluation results](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-results)
@@ -172,7 +172,7 @@ Access and interpret agent analytics to measure performance and identify optimiz
    - **Topic performance**: Which topics are used most frequently
    - **User satisfaction**: Feedback scores from users
 
-1. Set the date range using the date picker in the top right of the analyticss:
+1. Set the date range using the date picker in the top right of the analytics page:
    - Last 7 days
    - Last 30 days
    - Custom date range
@@ -216,7 +216,7 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 1. Review the metrics for each of the child and connected Agents used by your agent:
     - Which agents are being used and what type are they
-    - Number of calls and success rate - a low success rate might indicate the agent needs improvment or is not the right agent to be using
+    - Number of calls and success rate - a low success rate might indicate the agent needs improvement or is not the right agent to be using
 
 #### Review generated answer rate and quality
 
@@ -332,9 +332,9 @@ Create evaluation test sets using four different methods and understand how each
     > [!NOTE]
     > If you don't see the Evaluation option, it may need to be enabled in your environment settings or may not yet be available in your region. Check [Agent Evaluation overview](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-overview) for availability.
 
-1. Select  **Create a test set**.
+1. Select **New evaluation**, then select **Single response**.
 
-1. Select **Generate 10 questions** from the **More ways to start** section. Copilot Studio will use AI to automatically generate test cases based on your agent's knowledge sources and configuration.
+1. Select **New evaluation**, then **Single response**, then choose **Quick question set** to generate 10 test cases automatically. Copilot Studio will use AI to automatically generate test cases based on your agent's knowledge sources and configuration.
 
 1. In the **Configure test set** panel on the right side of your screen, change the test set name to **Non-Critical Copilot Studio Guide Set**
 
@@ -345,7 +345,7 @@ Create evaluation test sets using four different methods and understand how each
 
 1. Select **Save** at the bottom of that same panel.
 
-1. In that same panel, select the **Manage profile** button.
+1. In that same panel, select **User profile**.
 
 1. In the **User** dropdown locate your user account and select the row.
 
@@ -449,7 +449,7 @@ Create evaluation test sets using four different methods and understand how each
 
 1. Select **Apply** and then **Save** to save the set.
 
-28. Select **Evaluate** to run the evaluation on the updated test set.
+1. Select **Evaluate** to run the evaluation on the updated test set.
 
     > [!NOTE]
     > Only one test set can run at a time. If an evaluation is already in progress from a previous step, you can wait for it to complete or move on to Use Case #3 and come back later.
