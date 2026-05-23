@@ -136,7 +136,7 @@ In this lab, you'll build a Copilot Studio agent from the ground up, enhance it 
 
 ## Use Case #1: Create and Configure Your First Agent
 
-Build your first Copilot Studio agent with custom instructions, suggested prompts, and AI model configuration.
+Build your first Copilot Studio agent with custom instructions and AI model configuration.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
@@ -144,13 +144,13 @@ Build your first Copilot Studio agent with custom instructions, suggested prompt
 
 **Summary of tasks**
 
-In this section, you'll learn how to create a new agent, configure its instructions and behavior, add suggested prompts, and select the appropriate AI model.
+In this section, you'll learn how to create a new agent, configure its instructions and behavior, and select the appropriate AI model.
 
 **Scenario:** You're building a "Copilot Studio Assistant" to help internal teams learn about Copilot Studio features, write effective prompts, and navigate the platform. This agent will serve as a learning companion grounded in official Microsoft documentation.
 
 ### Objective
 
-Create a fully configured Copilot Studio agent with clear instructions, suggested prompts, and Claude Sonnet 4.6 model selection.
+Create a fully configured Copilot Studio agent with clear instructions and Claude Sonnet 4.6 model selection.
 
 ---
 
@@ -159,6 +159,11 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 #### Create Your Agent
 
 1. Navigate to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and sign in with your credentials.
+
+1. On the Copilot Studio **Home** page, locate the **Describe your agent in your own words** box (the inline agent creation form).
+
+   > [!NOTE]
+   > If you don't see the inline **Describe your agent** box, your environment may not support agent creation by using natural language. In that case, select **Create** (or **+ New agent**) from the left navigation, then choose the **Describe** option to reach the same form.
 
 1. In the agent creation form, provide the following information and select **Send**:
 
@@ -203,9 +208,9 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
    How do I begin using Copilot Studio?
    ```
 
-17. Review the agent's response. Notice how it references the Microsoft Learn knowledge source you provided.
+1. Review the agent's response. Notice how it references the Microsoft Learn knowledge source you provided.
 
-18. Observe the response quality and how the agent leverages its instructions to provide helpful, contextual guidance.
+1. Observe the response quality and how the agent leverages its instructions to provide helpful, contextual guidance.
 
 ---
 
@@ -225,7 +230,7 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 * If your agent gives generic responses, review and refine your instructions to be more specific about its role and expertise
 * Knowledge source indexing can take 2-5 minutes - wait before testing knowledge-specific questions
-* Suggested prompts improve user adoption - customize them to match your most common use cases
+* Selecting a more capable model (such as Claude Sonnet 4.6) generally improves reasoning quality, but you should still test with your own scenarios to confirm it's the right fit
 
 **Challenge: Apply this to your own use case**
 
@@ -288,7 +293,8 @@ Add a document knowledge source to your agent and verify that it accurately answ
 1. Review the **Name** and **Description** fields. Update if needed to make the source easily identifiable.
 
 #### Check and disable Web Search
-The Use information from the web setting is available on the Generative AI settings page or the Web Search setting in the Knowledge section of the agent's Overview page. This setting lets your agent access broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. For our scenario, we want to keep the use of knowedge focused on our provided resources and not the broader web.
+
+The Use information from the web setting is available on the Generative AI settings page or the Web Search setting in the Knowledge section of the agent's Overview page. This setting lets your agent access broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. For our scenario, we want to keep the use of knowledge focused on our provided resources and not the broader web.
 
 1. Navigate to the Overview tab, scroll down to the Knowledge section
 
@@ -650,7 +656,7 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
    Thank you! Your information has been recorded. (In production, this would submit to the mailing list system.)
    ```
 
-11. Select **Save** to save your topic.
+1. Select **Save** to save your topic.
 
 #### Test the Mailing List Topic
 
