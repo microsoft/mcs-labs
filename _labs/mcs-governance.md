@@ -24,7 +24,7 @@ Build the same agent across three governance zones (Green, Yellow, Red) to exper
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker / Admin | 30 minutes | After completing this lab, participants will be able to explain the differences between Green, Yellow, and Red governance zones, understand how DLP policies restrict knowledge sources, build agents that comply with organizational governance requirements, and evaluate the trade-offs between access and control across environments. |
+| 300 | Maker / Admin | 45 minutes | After completing this lab, participants will be able to explain the differences between Green, Yellow, and Red governance zones, understand how DLP policies restrict knowledge sources, build agents that comply with organizational governance requirements, and evaluate the trade-offs between access and control across environments. |
 
 ---
 
@@ -57,7 +57,7 @@ Think of governance zones like traffic lights:
 - "How do I get the best of both worlds — full access and governed quality?"
 - "What is the actual difference between our dev, staging, and production environments for Copilot Studio?"
 
-**In 30 minutes, you will build the same agent three times and see exactly how governance changes behavior — so you never get surprised in production again.**
+**In 45 minutes, you will build the same agent three times and see exactly how governance changes behavior — so you never get surprised in production again.**
 
 ---
 
@@ -88,7 +88,7 @@ By completing this lab, you will build hands-on intuition for how governance zon
 * [Data loss prevention policies in Power Platform](https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention)
 * [Environments overview in Power Platform](https://learn.microsoft.com/en-us/power-platform/admin/environments-overview)
 * [Knowledge sources in Microsoft Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio)
-* [Model Context Protocol (MCP) in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-mcp-overview)
+* [Model Context Protocol (MCP) in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-mcp)
 
 ---
 
@@ -154,7 +154,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Go to [Copilot Studio](https://copilotstudio.microsoft.com).
 
-1. Select the **Environment selector** in the top-right corner of the screen. It make take a few seconds for the **Environment** list to become visible.
+1. Select the **Environment selector** in the top-right corner of the screen. It may take a few seconds for the **Environment** list to become visible.
 
 1. Search for the following and select it:
 
@@ -409,7 +409,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 1. Enter the following URL:
 
     ```text
-    microsoft.github.io/mcs-cat-blog
+    microsoft.github.io/mcscatblog
     ```
 
 1. Select **Add**.
