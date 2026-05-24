@@ -297,9 +297,9 @@ aside.sidebar__right {
   }
 
   li.active > a {
-    color: var(--color-toc-active);
+    color: var(--color-accent-active);
     font-weight: 500;
-    border-left-color: var(--color-toc-active);
+    border-left-color: var(--color-accent-active);
   }
 }
 

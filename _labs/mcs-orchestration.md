@@ -95,11 +95,10 @@ You'll start by ensuring a sample connected agent is configured and working in y
 ## Prerequisites
 
 - Access to Microsoft Copilot Studio
-- Dataverse search enabled in environment
-- Access to Dataverse unbound action connector
-- Sample data loaded into Dataverse tables
-- Access to Account / Contact table in environment
-- Access to modify views and create search indexes on Account / Contact table
+- A Power Platform environment where you can edit Dataverse table views and toggle environment settings (System Administrator or System Customizer)
+- Sample data loaded into the Account and Contact Dataverse tables (the (sample) records used throughout Use Cases #1 and #2)
+- The pre-loaded **Account Data Lookup Agent** available in your environment (Use Case #1 verifies and publishes it)
+- For Use Case #3 only: an environment where Enhanced Task Completion (preview), Dataverse Intelligence (Work IQ), and Dataverse MCP servers can be turned on
 
 ---
 
@@ -192,7 +191,7 @@ Confirm the environment is ready and the sample connected agent is published.
 1. Select **Quick Find Active Accounts** option from the list of Views
 
 1. Select **View Column** to verify the following list of columns are in the view, you may have to scroll to see all of the included columns:
-   - Address1: State or Providence
+   - Address 1: State/Province
    - Address1: Postal Code
    - Address1: City
    - Annual Revenue
@@ -203,7 +202,7 @@ Confirm the environment is ready and the sample connected agent is published.
     ![Account View](images/image-20.png)
 
 1. Add the ability to search on certain fields by making sure that the following items are in the **Find by** on the bottom right. Select the **Edit find table columns** option to check:
-   - Address1: State or Providence
+   - Address 1: State/Province
    - Address1: Postal Code
    - Address1: City
 
@@ -243,7 +242,7 @@ Confirm the environment is ready and the sample connected agent is published.
     > [!IMPORTANT]
     > DO NOT navigate away until the save and publish is completed!
 
-#### Test and Publish the Account and Contact Information Agent
+#### Test and Publish the Account Data Lookup Agent
 
 1. In the Copilot Studio tab in your browser, go to the **Account Data Lookup Agent**
 
@@ -395,7 +394,7 @@ Open the **Account Data Lookup Agent** in Copilot Studio and walk through each o
    - **Input descriptions tell the planner what value belongs in the input *and how to format it*.** The planner uses this text to translate a user's words into the exact value the tool expects to receive. Vague input descriptions are the most common reason a tool gets called with the wrong argument — even when the right tool was picked.
    - Read the description on the `search` input carefully:
 
-     > *"Search query that includes state in the format of two digit state code in all caps, 5 digit zip code, city, the account name, and/or the account name"*
+     > *"Search query that includes state in the format of two digit state code in all caps, 5 digit zip code, city, the account name, and/or the primary contact name"*
 
      Notice how strict the **state code formatting requirement** is: *"two digit state code in all caps"*. That single phrase tells the planner to translate the user's word *"Texas"* into `TX`, not `texas`, not `Texas`, not `Tex`. Dataverse search only matches if the value comes in correctly cased and formatted — so this description is what makes the difference between *"agent returned all Texas accounts"* and *"agent returned no results."*
    - **The `Fill using` column** (left of the Value column) controls how each input gets its value at runtime. The options include **Custom value** (the planner fills it from the conversation, guided by the description) and **dynamically filled** options that pull from variables or **outputs of an earlier tool**. The description matters in either case — when the value is dynamically filled from another tool's output, the description tells the planner *how to reshape that output* to match this input's expected format.
@@ -415,13 +414,12 @@ Open the **Account Data Lookup Agent** in Copilot Studio and walk through each o
 
 1. Select the **+** in the Test chat to start a **new conversation** so no prior context influences the planner.
 
-> [!IMPORTANT]
-> Run the following prompts in order **without resetting the conversation again** between turns. Several prompts depend on the planner remembering earlier results (e.g., "them", "the 2nd one"), and resetting partway through will break those references.
+   > [!IMPORTANT]
+   > Run the following prompts in order **without resetting the conversation again** between turns. Several prompts depend on the planner remembering earlier results (e.g., "them", "the 2nd one"), and resetting partway through will break those references.
 
-After each response, expand the **activity panel** in the test chat to see which child agent and which tool the planner chose, and what arguments it passed.
+   After each response, expand the **activity panel** in the test chat to see which child agent and which tool the planner chose, and what arguments it passed.
 
-{: start="3"}
-1. **Find accounts by location.** Uses the **Address1: State or Providence** column we indexed in Use Case #1.
+1. **Find accounts by location.** Uses the **Address 1: State/Province** column we indexed in Use Case #1.
 
     ```text
     What are the accounts in Texas?
