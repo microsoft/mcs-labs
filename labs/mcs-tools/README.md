@@ -645,7 +645,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 1. Select **Add and configure**.
 
-9. Review the tools available for the Dataverse MCP Server. You can select and deselect which tools are available to the agent. When the tool is executed, the list is dynamically updated from the MCP Server.
+1. Review the tools available for the Dataverse MCP Server. You can select and deselect which tools are available to the agent. When the tool is executed, the list is dynamically updated from the MCP Server.
 
     ![Review MCP tools](images/step9-review-mcp.png)
 
