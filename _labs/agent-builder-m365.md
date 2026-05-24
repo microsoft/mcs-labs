@@ -665,7 +665,7 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
     > [!TIP]
     > The Analyst agent is another **frontier agent** in Microsoft 365 Copilot. While Researcher excels at reasoning and synthesis, Analyst is purpose-built for **data-heavy work** — extracting tables from documents, performing calculations, building models, generating visualizations, and producing structured outputs like Excel files. Think of Researcher as your strategic advisor and Analyst as your financial modeler.
 
-3. Upload the [**Contoso_Grand_Hotel_Performance_Report.pdf**](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf) by selecting the **+** (Add and manage sources) button next to the message input, choosing **Upload images and files**, and selecting the same PDF you downloaded earlier. (If you don't still have it, the [download link](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf) is here too.)
+3. Upload the [**Contoso_Grand_Hotel_Performance_Report.pdf**](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf) by selecting the **+** (Add and manage sources) button next to the message input, choosing **Upload images and files**, and selecting the same PDF you downloaded earlier.
 
 > [!NOTE]
 > You're using the [same PDF](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf) from Use Case #3, but with a completely different agent. This demonstrates how different frontier agents can extract different types of value from the same source document.
@@ -779,7 +779,7 @@ Use the Cowork agent to read the [same PDF report](https://github.com/microsoft/
 
 #### Upload the report and ask Cowork to draft an email
 
-1. Click **Add attachments** (the paperclip icon next to the message input), then choose **Upload images and files (PDF, Word, Excel, images)**. Select the [`Contoso_Grand_Hotel_Performance_Report.pdf`](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf) file you downloaded for Use Case #3 (or [download it](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf) again if you no longer have it locally).
+1. Click **Add attachments** (the paperclip icon next to the message input), then choose **Upload images and files (PDF, Word, Excel, images)**. Select the [`Contoso_Grand_Hotel_Performance_Report.pdf`](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf) file you downloaded for Use Case #3.
 
 1. Wait for the upload to complete — the PDF will appear as a chip above the message input.
 
