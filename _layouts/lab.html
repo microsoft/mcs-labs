@@ -30,7 +30,14 @@ layout: single
 
 /* The minimal-mistakes "On this page" sidebar is auto-built from heading IDs,
    so it surfaces a "Table of Contents" entry even though the inline heading
-   is CSS-hidden above. Hide that entry too. */
+   is CSS-hidden above. Hide that entry too.
+   The :has() rule hides the whole <li> on Chrome 105+; the direct a rule
+   hides the link text in older Chromium (e.g. Puppeteer 9 / Chrome 92 used
+   by pa11y-ci 3.x), ensuring the element has no visible text and is skipped
+   by contrast checkers. */
+.toc__menu a[href="#table-of-contents"] {
+  display: none !important;
+}
 .toc__menu li:has(> a[href="#table-of-contents"]) {
   display: none !important;
 }
