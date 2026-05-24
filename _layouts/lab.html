@@ -41,6 +41,14 @@ layout: single
 .toc__menu li:has(> a[href="#table-of-contents"]) {
   display: none !important;
 }
+
+/* Fallback for browsers without :has() support (e.g. Chromium < 105, used by
+   pa11y-ci). If these two selectors were combined in a single rule, the whole
+   rule would be dropped in those browsers; keeping them separate ensures the
+   direct-anchor rule is applied independently. */
+.toc__menu a[href="#table-of-contents"] {
+  display: none !important;
+}
 </style>
 
 {%- comment -%}
