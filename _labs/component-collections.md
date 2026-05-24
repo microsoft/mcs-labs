@@ -2,7 +2,7 @@
 layout: lab
 title: "Using Component Collections in Copilot Studio"
 order: 260
-duration: 30
+duration: 45
 difficulty: 300
 lab_type: local
 section: intermediate_labs
@@ -94,12 +94,7 @@ This lab teaches you how to create component collections, share them across agen
 
 - Access to Microsoft Copilot Studio
 - Permissions to create agents and modify settings in your environment
-- Before starting **Use Case #3**, import the **Corporate Services** managed solution into your environment so the Corporate Services component collection is available:
-  1. Download [corporateServices_1733752691034_1_1_managed.zip](https://github.com/microsoft/mcs-labs/raw/main/labs/component-collections/corporateServices_1733752691034_1_1_managed.zip) from the lab assets.
-  1. Go to the Power Apps maker portal at [https://make.powerapps.com](https://make.powerapps.com) and confirm you are in the correct environment.
-  1. In the left navigation, select **Solutions**, then select **Import solution**.
-  1. Select **Browse**, choose the downloaded **corporateServices_1733752691034_1_1_managed.zip** file, then select **Next** and **Import**.
-  1. Wait for the import to complete before continuing to Use Case #3.
+- The **Corporate Services** managed solution that Use Case #3 depends on has already been imported into your lab environment as part of the lab preparation — you do **not** need to import it yourself. For reference, the source file lives at [corporateServices_1733752691034_1_1_managed.zip](https://github.com/microsoft/mcs-labs/raw/main/labs/component-collections/corporateServices_1733752691034_1_1_managed.zip) in the lab assets, and you can confirm it is installed by opening the Power Apps maker portal at [https://make.powerapps.com](https://make.powerapps.com) and looking for the **Corporate Services** solution under **Solutions**.
 
 ---
 
