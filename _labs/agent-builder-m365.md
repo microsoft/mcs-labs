@@ -240,7 +240,7 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
     ![Response from Copilot showing the roadmap](images/simple-copilot-search.png)
 
-5. Select **Start a new chat** (top right icon) to reset. Notice how your history of conversations is saved on the left side navigation pane.
+5. Select **New chat** (top right icon) to reset. Notice how your history of conversations is saved on the left side navigation pane.
 
 #### Create your learning assistant agent
 
@@ -461,9 +461,9 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 #### Test policy knowledge
 
-14. Select **Go to agent** to start testing.
+14. Select **Go to agent** to start testing, then click the **Try It** tab to open the test chat for your agent.
 
-15. First, test the agent's **knowledge** of your sales policy, copy/paste the following prompt in the Message Copilot area and select Send:
+15. First, test the agent's **knowledge** of your sales policy. Copy/paste the following prompt into the **Type your message** input area in the Try It panel and select Send:
 
     ```
     What are the key guidelines in our sales policy regarding customer discounts?
@@ -493,7 +493,7 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 #### Test image generation
 
-20. Select **Start a new chat** icon in the upper right corner of the screen and test the **image generation** capability with a relevant request:
+20. Select the **New chat** button at the top of the Try It panel to reset, then test the **image generation** capability with a relevant request:
 
 ```
 Design a professional badge for the first place winner of our sales contest. It should look modern and premium, with gold colors, the text '1st Place – Sales Contest', and a ribbon or trophy element.
@@ -638,7 +638,7 @@ While Researcher (Use Case #3) is still reasoning in the background, switch to t
 
 | Use case                                       | Value added                                                                                              | Estimated effort |
 | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ---------------- |
-| Financial modeling with the Analyst agent      | Use the Analyst frontier agent to compute NPV, IRR, and rank capital investments by financial merit      | 5 minutes        |
+| Financial modeling with the Analyst agent      | Use the Analyst frontier agent to compute NPV, IRR, and rank capital investments by financial merit      | 8–10 minutes     |
 
 **Summary of tasks**
 
@@ -813,14 +813,14 @@ Use the Cowork agent to read the [same PDF report](https://github.com/microsoft/
    > [!IMPORTANT]
    > On your first Outlook visit, a "Your privacy matters" prompt may appear — click **Continue** to dismiss it. After that, the Outlook UI is ready for use.
 
-1. In the Outlook left rail, click the **Drafts** folder. Find the email Cowork created at the top of the list, with subject starting **`Five Most Urgent Operational Issues — Contoso Grand Hotel...`**. Click it to open.
+1. In the Outlook left rail, click the **Drafts** folder. Find the email Cowork just created at the top of the list — the subject will mention the Contoso Grand Hotel performance report and the urgent operational issues (Cowork phrases the subject conversationally, so the exact wording varies). Click it to open.
 
    ![Cowork's draft email open in Outlook](images/cowork-outlook-draft.png)
 
 1. **Review** the draft:
 
    - **Recipient:** Dewain Robinson (resolved as a contact pill — hover or click the pill to see the SMTP address)
-   - **Subject:** starts with "Five Most Urgent Operational Issues"
+   - **Subject:** mentions the Contoso Grand Hotel report and the urgent operational issues (Cowork-generated wording — exact text varies)
    - **Body:** five bullets, each covering symptom + root cause + financial impact + recommendation R-number
    - **Sign-off:** "Best regards, The Operations Team"
    - Total: approximately 300–400 words
@@ -856,7 +856,7 @@ Use the Cowork agent to read the [same PDF report](https://github.com/microsoft/
 
 ---
 
-## Summary of learnings
+## Summary of Learnings
 
 True learning comes from doing, questioning, and reflecting—so let's put your skills to the test.
 
@@ -868,7 +868,7 @@ To maximize the impact of your Copilot agents:
 
 - **Match capabilities to use cases** – Not every agent needs code interpreter or image generation. Choose features based on what your users actually need. Simple instruction-based agents are often more effective than feature-laden ones.
 
-- **Use frontier agents for deep work** – The Cowork and Analyst frontier agents are purpose-built for tasks that go beyond conversational chat. Cowork excels at agentic action-taking across Microsoft 365 surfaces (drafting Outlook emails, Word docs, Teams messages from source content). Analyst excels at data extraction, computation, and financial modeling. Use them when you need to *complete* a task or *elevate* analysis beyond what a source document provides.
+- **Use frontier agents for deep work** – The Researcher, Analyst, and Cowork frontier agents are purpose-built for tasks that go beyond conversational chat. Researcher excels at deep document analysis and cross-section synthesis. Analyst excels at data extraction, computation, and financial modeling. Cowork excels at agentic action-taking across Microsoft 365 surfaces (drafting Outlook emails, Word docs, Teams messages from source content). Use them when you need to *reason*, *compute*, or *complete* a task that goes beyond what conversational chat can do on its own.
 
 - **Prompt design drives quality** – The difference between a mediocre and a powerful result often comes down to prompt specificity. Asking for "root causes," "gap analysis," or "NPV at an 8% discount rate" forces the agent to reason deeply rather than provide surface-level summaries.
 
