@@ -12,8 +12,6 @@ description: "Master agent creation from basic web-grounded assistants to advanc
 
 ---
 
----
-
 # Build Progressive AI Assistants with Agent Builder in Microsoft 365
 
 Master agent creation from basic web-grounded assistants to advanced SharePoint-integrated agents with code interpreter and image generation capabilities.
@@ -168,8 +166,6 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
 1. Navigate to [Microsoft 365 Copilot home page](https://m365.cloud.microsoft/chat/?auth=2&home=1)
 
-<!--
-
 > [!IMPORTANT]
 > - If the Microsoft 365 Copilot URL is `https://copilot.cloud.microsoft/` or if the Copilot pane is on the right-hand side, this means you're on the **wrong** page.
 >
@@ -186,8 +182,6 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 > - Make sure the **logged in user** is the fictitious one used in the lab. If you need your normal work user account, **select** the name and toggle to the fictitious user account.
 >
 >   ![alt text](images/logged-in-user.png)
-
- -->
 
 > [!TIP]  
 > Both Microsoft 365 Copilot and Copilot Chat are designed for internal, employee-facing (B2E) experiences.
@@ -243,14 +237,14 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
     ![Response from Copilot showing the roadmap](images/simple-copilot-search.png)
 
-5. Select **Start a new chat** (top right icon) to reset. Notice how your history of converations is saved on the left side navigation pane.
+5. Select **Start a new chat** (top right icon) to reset. Notice how your history of conversations is saved on the left side navigation pane.
 
 #### Create your learning assistant agent
 
 6. On the left side navigation pane, expand the **Agents** section and select **New agent**
 
 
-7. Notice that you can explore existing available templates. But for this lab, you want to select the  **Describe** tab at the top of the form and paste the following into the input area for the intial agent prompt input area, and then select Send.
+7. Notice that you can explore existing available templates. But for this lab, you want to select the  **Describe** tab at the top of the form and paste the following into the initial agent prompt input area, and then select Send.
 
     ```
     I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Agent Builder in Microsoft 365. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
@@ -315,14 +309,10 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 What are the differences between Microsoft 365 Copilot and Copilot Chat?
 ```
 
-<!--
-
 > [!TIP]
 > If your training tenant is getting throttled because of lack of AI capacity (to prioritize production workloads), you may see a message like this: `Sorry, I wasn't able to respond to that. Is there something else I can help with?`. It's OK, **just test your agent while configuring it**, and not after you created it. You may try again later.
 >
 > ![alt text](images/copilot-error.png)
-
- -->
 
 ![Results from testing your agent](images/declarative-agent-test.png)
 
@@ -402,17 +392,17 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
    - Ensure it contains sales data across multiple quarters/years
    - Verify product line categorization
    - Note the column headers and data format
-   - On the list of files in Documents, with the file Selected, Select Copy link in the toolboar, save the link in notepad for use later in the lab
+   - On the list of files in Documents, with the file Selected, Select Copy link in the toolbar, save the link in notepad for use later in the lab
 
 4. Open the **Word policy document** and review:
    - Sales procedures and guidelines
    - Policy information that might inform sales decisions
    - Any specific requirements or compliance information
-   - On the list of files in Documents, with the file Selected, Select Copy link in the toolboar, save the link in notepad for use later in the lab
+   - On the list of files in Documents, with the file Selected, Select Copy link in the toolbar, save the link in notepad for use later in the lab
 
 #### Create the Sales Admin Assistant agent
 
-5. Return to [Microsoft 365 Copilot Chat](https://m365.cloud.microsoft/chat/?auth=2&home=1).
+5. Return to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
 6. On the left side pane, expand **Agents** and select **New agent**.
 

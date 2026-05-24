@@ -2,7 +2,7 @@
 title: "Build an Autonomous Account News Assistant Agent"
 description: "Empower sellers with timely insights – Build an autonomous Copilot Studio agent that periodically scans your Sales App for high-value opportunities, finds related news, and sends curated reports."
 order: 22
-duration: 60
+duration: 30
 difficulty: 200
 section: advanced_labs
 journeys: ["autonomous-ai", "developer"]
@@ -93,6 +93,7 @@ This proactive approach helps account teams stay ahead of client developments an
 - Access to Microsoft Copilot Studio
 - Sales App instance with active opportunities
 - Access to Microsoft 365 email connector (Outlook)
+- A Dataverse (Microsoft Dataverse / Dynamics 365) OAuth connection, with permission to read Opportunity records in the workshop environment
 - Familiarity with Power Automate for recurring triggers
 - Basic understanding of Generative Orchestration in Copilot Studio
 
@@ -142,7 +143,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 **Creating the Agent and Solution Setup**
 
-  1. Go to the Copilot Studio home page at [Copilot Studio](https://copilotstudio.microsoft.com).  Confirm you are using your DEV enviornment.
+  1. Go to the Copilot Studio home page at [Copilot Studio](https://copilotstudio.microsoft.com).  Confirm you are using your DEV environment.
 
   1. Select **Agents** in the left navigation.
 
@@ -438,8 +439,6 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
   1. Select **Save**
 
-  1. You can copy and paste the YAML content below into your agent using the code editor. 
-
 > [!TIP]  
 > You can also copy and paste the YAML content below into your agent using the code editor. 
 > 
@@ -469,7 +468,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 > 
 > inputType:
 >   properties:
->     searchResults:
+>     relevantNewsForOpportunities:
 >       displayName: relevantNewsForOpportunities
 >       description: |-
 >         A JSON representing opportunity IDs, search responses for each opportunity, with citation names and URLs, and an explanation regarding the relevance of search response to the opportunity
@@ -498,9 +497,9 @@ Set up an autonomous agent with a recurring trigger that automatically activates
   5. Use Log relevant news for opportunities to log your findings. The base input for Log relevant news for opportunities should be {Global.globalSearchResults} with determined relevance added
   ```
 
-  1 To increase orchestration accuracy, you will now replace names of topics, tools and variables with references. References can be added to instructions by typing **/** and selecting the appropriate object from the drop-down menu.
+  1. To increase orchestration accuracy, you will now replace names of topics, tools and variables with references. References can be added to instructions by typing **/** and selecting the appropriate object from the drop-down menu.
 
-  1. In the instructions, select `<Get Opportunity records>`. Type **/** and in the drop-down menu, under **Tool**, select **Get Opportunity records**. The previous text in curly brackets should be replaced by a visual reference to the tool.
+  1. In the instructions, select `<Get Opportunity records>`. Type **/** and in the drop-down menu, under **Tool**, select **Get Opportunity records**. The previous text in angle brackets should be replaced by a visual reference to the tool.
 
 1. Repeat the same action for the topic `<Log Search Results>`. Type **/** and in the drop-down menu, under **Topic**, select **Log Search Results** to insert a visual reference to the topic, replacing `<Log Search Results>`.
 
