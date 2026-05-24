@@ -296,7 +296,15 @@ In this section, you'll learn how to create child agents to logically group know
 
 **Scenario:** You want to orchestrate to knowledge about your products based upon the market that the user selects.
 
-### Create Child Agent for US product information
+### Objective
+
+Create two child agents that provide market-specific Surface product information, gated by the Market variable set in Use Case #1.
+
+---
+
+### Step-by-step instructions
+
+#### Create Child Agent for US product information
 
 1. In the Sales Associate Assistant, select **Agents** on the top navigation menu.
 
