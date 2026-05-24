@@ -2,7 +2,7 @@
 layout: lab
 title: "Master Variables, Multi-Agent Architectures, and Channel Deployment"
 order: 175
-duration: 45
+duration: 30
 difficulty: 200
 lab_type: local
 section: core_learning_path
@@ -116,8 +116,8 @@ In this lab, you'll implement conversation memory with variables, build a multi-
 * Use the Set Variable node to transform and concatenate data during conversations
 * Create child agents with specialized knowledge and instructions
 * Configure parent agent orchestration rules for proper conversation routing
-* Deploy your agent to the web channel with security settings
 * Deploy your agent to Microsoft Teams
+* Deploy your agent to Microsoft 365 Copilot
 * Test multi-channel deployment to verify consistent functionality
 
 ---
@@ -208,7 +208,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 1. Review the **Global** section showing variables available across the entire agent.
 
-1. Review the **Enviornment** section showing enviornment variables that, in part, help support ALM to move Agents from one enviornment to another.
+1. Review the **Environment** section showing environment variables that, in part, help support ALM to move Agents from one environment to another.
 
     > [!NOTE]
     > The Variables view gives you a centralized place to see all variables, their types, and their values during testing.
@@ -237,6 +237,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
     ```
     I want to join the mailing list.
     ```
+
 1. Select the agent response in the test chat. This action takes you to the topic and the node that sent the response. Nodes that fired have a colored checkmark and a colored bottom border.
 
 1. Follow the prompts and provide information when asked (email, name, etc.). As you continue the conversation within the active topic, notice that each node that fires is marked with the checkbox and bottom border, and centered on the canvas.
@@ -359,7 +360,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 1. In the parent agent's **Instructions** field on the Overview page, select **Edit** in the upper right corner of the **Instructions** section.
 
-1. Add the following orchestration instructions just before the # General Guidlines paragraph of the instructions. Notice the `(replace this text)` placeholder — you'll replace it with a direct reference to the child agent in the next step.
+1. Add the following orchestration instructions just before the # General Guidelines paragraph of the instructions. Notice the `(replace this text)` placeholder — you'll replace it with a direct reference to the child agent in the next step.
 
     ```
     # Prompt Guidance
@@ -459,7 +460,7 @@ Learn how to configure and deploy your agent to channels, understand channel-spe
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Deploy Your Agent To Channels | Make your agent accessible via Teams and Microsoft 365 Copilot  | 12 minutes |
+| Deploy Your Agent Across Channels | Make your agent accessible via Teams and Microsoft 365 Copilot | 12 minutes |
 
 **Summary of tasks**
 

@@ -41,6 +41,12 @@ layout: single
 .toc__menu li:has(> a[href="#table-of-contents"]) {
   display: none !important;
 }
+
+/* Pa11y CI uses an older Chromium that doesn't support :has(), so add a
+   direct-link fallback to keep this anchor hidden in that environment too. */
+.toc__menu a[href="#table-of-contents"] {
+  display: none !important;
+}
 </style>
 
 {%- comment -%}
