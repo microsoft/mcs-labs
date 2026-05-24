@@ -2,7 +2,7 @@
 layout: lab
 title: "Governance Zones in Copilot Studio"
 order: 195
-duration: 45
+duration: 30
 difficulty: 300
 lab_type: local
 section: intermediate_labs
@@ -24,7 +24,7 @@ Build the same agent across three governance zones (Green, Yellow, Red) to exper
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker / Admin | 45 minutes | After completing this lab, participants will be able to explain the differences between Green, Yellow, and Red governance zones, understand how DLP policies restrict knowledge sources, build agents that comply with organizational governance requirements, and evaluate the trade-offs between access and control across environments. |
+| 300 | Maker / Admin | 30 minutes | After completing this lab, participants will be able to explain the differences between Green, Yellow, and Red governance zones, understand how DLP policies restrict knowledge sources, build agents that comply with organizational governance requirements, and evaluate the trade-offs between access and control across environments. |
 
 ---
 
@@ -57,7 +57,7 @@ Think of governance zones like traffic lights:
 - "How do I get the best of both worlds — full access and governed quality?"
 - "What is the actual difference between our dev, staging, and production environments for Copilot Studio?"
 
-**In 45 minutes, you will build the same agent three times and see exactly how governance changes behavior — so you never get surprised in production again.**
+**In 30 minutes, you will build the same agent three times and see exactly how governance changes behavior — so you never get surprised in production again.**
 
 ---
 
