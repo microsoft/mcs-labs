@@ -71,9 +71,8 @@ Application Lifecycle Management (ALM) ensures that your solutions evolve safely
 **Real-world example:** Your customer service agent is ready for production. With a proper ALM setup, the deployment process becomes:
 1. Structure your work in a solution with a custom publisher
 2. Configure environment variables and connection references for portability
-3. Track all changes in Git source control
-4. Deploy through governed pipelines from DEV to ALM Prod
-5. Validate environment-specific settings post-deployment
+3. Deploy through governed pipelines from DEV to ALM Prod
+4. Validate environment-specific settings post-deployment
 
 Without ALM, each of these steps is manual, error-prone, and difficult to repeat. With ALM, it becomes an automated, auditable, and confident workflow.
 
@@ -191,7 +190,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 #### Create a Publisher
 
-1. If you see a publish with your User name you can select that one, otherwise select **+ New publisher** to create one.
+1. If you see a publisher with your User name you can select that one, otherwise select **+ New publisher** to create one.
 
 > [!TIP]
 > - Use the **username provided to you for logging into the lab** as the publisher name.
@@ -278,7 +277,7 @@ Create environment variables and connection references that enable your solution
     > [!TIP]
     > Environment variables can also be of type **Secret** to retrieve secure values like API keys from Azure Key Vault at runtime.
 
-7. In the solution, select **New**, then select **More** and choose **Connection reference**.
+7. In the solution, select **+ New**, then select **More** and choose **Connection reference**.
 
 8. Enter `ServiceNow` plus your User Name to make it unique , as the name. 
 
@@ -389,9 +388,10 @@ Create a deployment pipeline that automates solution deployment across environme
 
 #### Set Up Deployment Stage
 
-1. Select the **ALM Prod** environment as the **Target environment**.
-
-1. **Save** the pipeline configuration.
+1. In the pipeline editor, select **+ New deployment stage** (or use the default stage).
+1. Enter a **Stage name** (for example, `Prod`).
+1. For **Target environment**, select **ALM Prod**.
+1. Select **Save** to save the pipeline configuration.
 
 #### Test Your Pipeline
 

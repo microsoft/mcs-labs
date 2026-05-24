@@ -2,7 +2,7 @@
 layout: lab
 title: "Governance Zones in Copilot Studio"
 order: 195
-duration: 45
+duration: 30
 difficulty: 300
 lab_type: local
 section: intermediate_labs
@@ -88,7 +88,7 @@ By completing this lab, you will build hands-on intuition for how governance zon
 * [Data loss prevention policies in Power Platform](https://learn.microsoft.com/en-us/power-platform/admin/wp-data-loss-prevention)
 * [Environments overview in Power Platform](https://learn.microsoft.com/en-us/power-platform/admin/environments-overview)
 * [Knowledge sources in Microsoft Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/knowledge-copilot-studio)
-* [Model Context Protocol (MCP) in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-mcp-overview)
+* [Model Context Protocol (MCP) in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-mcp)
 
 ---
 
@@ -154,7 +154,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Go to [Copilot Studio](https://copilotstudio.microsoft.com).
 
-1. Select the **Environment selector** in the top-right corner of the screen. It make take a few seconds for the **Environment** list to become visible.
+1. Select the **Environment selector** in the top-right corner of the screen. It may take a few seconds for the **Environment** list to become visible.
 
 1. Search for the following and select it:
 
@@ -409,7 +409,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 1. Enter the following URL:
 
     ```text
-    microsoft.github.io/mcs-cat-blog
+    microsoft.github.io/mcscatblog
     ```
 
 1. Select **Add**.
