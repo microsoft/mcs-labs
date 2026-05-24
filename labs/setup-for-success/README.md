@@ -77,9 +77,9 @@ With the ALM practices in this lab, you'll avoid these pitfalls and set yourself
 
 ## 📄 Documentation and Additional Training Links
 
-* [ALM overview - Microsoft Power Platform](https://learn.microsoft.com/power-platform/alm/alm-overview)
-* [Publish and deploy your agent](https://learn.microsoft.com/copilot-studio/publish-deploy)
-* [Webinar: Microsoft Copilot Studio ALM](https://aka.ms/MCSALMWebinar)
+* [ALM overview - Microsoft Power Platform](https://learn.microsoft.com/en-us/power-platform/alm/)
+* [Publish and deploy your agent](https://learn.microsoft.com/en-us/microsoft-copilot-studio/publication-fundamentals-publish-channels)
+* [Overview of Git integration in Power Platform](https://learn.microsoft.com/en-us/power-platform/alm/git-integration/overview)
 * [Environment variables in solutions](https://learn.microsoft.com/power-apps/maker/data-platform/environmentvariables)
 * [Connection references in a solution](https://learn.microsoft.com/power-apps/maker/data-platform/create-connection-reference)
 
