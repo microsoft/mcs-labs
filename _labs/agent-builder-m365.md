@@ -40,6 +40,7 @@ Master agent creation from basic web-grounded assistants to advanced SharePoint-
   - [Use Case #2: Build an advanced SharePoint-integrated sales assistant](#use-case-2-build-an-advanced-sharepoint-integrated-sales-assistant)
   - [Use Case #3: Deep analysis with the Researcher agent](#use-case-3-deep-analysis-with-the-researcher-agent)
   - [Use Case #4: Financial modeling with the Analyst agent](#use-case-4-financial-modeling-with-the-analyst-agent)
+  - [Use Case #5: Draft an executive email with the Cowork agent from a PDF report](#use-case-5-draft-an-executive-email-with-the-cowork-agent-from-a-pdf-report)
 - [Summary of Learnings](#summary-of-learnings)
 - [Conclusions & Recommendations](#conclusions--recommendations)
 
@@ -105,8 +106,8 @@ The progressive approach ensures you understand core concepts before adding comp
 - Ability to create and configure Copilot agents
 - Access to a SharePoint site with sample sales data (for Use Case #2)
 - Basic understanding of Excel data structures (for Use Case #2)
-- Access to Microsoft 365 Copilot with Researcher and Analyst agents (for Use Cases #3 and #4)
-- Download the sample report PDF (for Use Cases #3 and #4): [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf)
+- Access to Microsoft 365 Copilot with the Researcher, Analyst, and Cowork (Frontier) frontier agents (for Use Cases #3, #4, and #5)
+- Download the sample report PDF (for Use Cases #3, #4, and #5): [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf)
 
 ---
 
@@ -119,8 +120,9 @@ In this lab, you'll progress from basic agent creation to advanced AI capabiliti
 - **Configure** agent behavior, tone, and knowledge sources for specific use cases
 - **Build** an advanced SharePoint-integrated agent with code interpreter and image generation
 - **Analyze** sales data and generate professional charts through natural language requests
-- **Research** complex documents using the Researcher agent for multi-section synthesis and strategic insights
+- **Research** complex documents using the Researcher agent for deep multi-section synthesis (and submit-and-come-back-later workflows)
 - **Model** financial scenarios using the Analyst agent to compute NPV, IRR, and investment prioritization from report data
+- **Draft** an executive email with the Cowork agent that reads a PDF report and creates the email directly in Outlook
 - **Apply** best practices for agent design, grounding strategies, and knowledge source selection
 
 ---
@@ -131,8 +133,9 @@ In this lab, you'll progress from basic agent creation to advanced AI capabiliti
 | ---- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ | ------ |
 | 1    | [Create a web-based learning assistant](#use-case-1-create-a-web-based-learning-assistant)                                     | Build foundational skills by creating an instructional agent grounded in trusted documentation                                 | 10 min |
 | 2    | [Build an advanced SharePoint-integrated sales assistant](#use-case-2-build-an-advanced-sharepoint-integrated-sales-assistant) | Master advanced features including SharePoint integration, code interpretation, and image generation for business intelligence | 10 min |
-| 3    | [Deep analysis with the Researcher agent](#use-case-3-deep-analysis-with-the-researcher-agent)                                | Use the Researcher frontier agent to synthesize insights across a complex multi-section business report                        | 5 min  |
+| 3    | [Deep analysis with the Researcher agent](#use-case-3-deep-analysis-with-the-researcher-agent)                                | Use the Researcher frontier agent to synthesize insights across a complex multi-section business report (submit-and-come-back) | 5 min to send · 10–25 min for results |
 | 4    | [Financial modeling with the Analyst agent](#use-case-4-financial-modeling-with-the-analyst-agent)                             | Use the Analyst frontier agent to perform NPV/IRR financial modeling and investment prioritization from document data          | 5 min  |
+| 5    | [Draft an executive email with the Cowork agent from a PDF report](#use-case-5-draft-an-executive-email-with-the-cowork-agent-from-a-pdf-report) | Use the Cowork frontier agent to read a PDF and draft a real Outlook email summarizing key issues for a specific recipient    | 5 min  |
 
 ---
 
@@ -244,7 +247,7 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 6. On the left side navigation pane, expand the **Agents** section and select **New agent**
 
 
-7. Notice that you can explore existing available templates. But for this lab, you want to select the  **Describe** tab at the top of the form and paste the following into the initial agent prompt input area, and then select Send.
+7. Notice that you can explore existing available templates. For this lab, paste the following into the **Describe the agent you want to create** input area at the top of the form (the describe textbox is the primary input — there is no separate tab to select), and then select Send.
 
     ```
     I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Agent Builder in Microsoft 365. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
@@ -280,16 +283,16 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
     ```
 
     > [!TIP]
-    > After both prompts, open the **Configure** tab and confirm both URLs appear under the agent's knowledge sources before continuing.
+    > After both prompts, review the **Configure** pane on the right and confirm both URLs appear under the agent's knowledge sources before continuing.
 
 > [!TIP]  
 > You can set URLs with up to 2 levels of depth for grounding. E.g., https://www.domain.com/level1/level2. Just like folders in a file system. That way, all pages under that URL will be used as grounding sources. E.g., https://www.domain.com/level1/level2/page1.html, https://www.domain.com/level1/level2/page2.html, etc.
 
 #### Finalize configuration
 
-11. Now let's head over to the **Configure** tab. Notice how all of your previous interactions have built the configuration of your agent, its name, description, instructions, knowledge sources and starter prompts. Feel free to tweak them!
+11. Now review the **Configure** tab on the right side of Agent Builder. Notice how all of your previous interactions have built the configuration of your agent, its name, description, instructions, knowledge sources and starter prompts — populated incrementally during the conversational creation. Feel free to tweak them!
 
-12. In the **Knowledge** section, toggle **Only use specified sources** so that the agent uses the configured websites when providing answers, and not its own large language model knowledge.
+12. In the **Knowledge** section, confirm **Only use specified sources** is enabled (the toggle is on by default once knowledge sources are added; toggle it on if it is not) so that the agent uses the configured websites when providing answers, and not its own large language model knowledge.
 
 13. Fix any issue like max character limit for starter prompt titles.
 
@@ -373,12 +376,12 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 #### Access and prepare SharePoint documents
 
-1. Navigate to your organization's SharePoint site
-   - Go to the **Documents** tab
+1. Navigate to the workshop SharePoint site at [https://copilotstudiotraining.sharepoint.com/](https://copilotstudiotraining.sharepoint.com/)
+   - Click **Documents** in the left navigation
    - Open the **Sales** folder
 
     > [!IMPORTANT]
-    > The URL of the SharePoint site is available in [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
+    > The Sales folder lives in the tenant-root site's Shared Documents, not under the `/sites/Workshop` site. The URL of the SharePoint site is also available in [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
 
     ![SharePoint documents](images/sales-docs.png)
 
@@ -406,7 +409,7 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 6. On the left side pane, expand **Agents** and select **New agent**.
 
-7. Select the **Describe** tab at the top, and copy/paste the following prompt and select Send:
+7. In the **Describe the agent you want to create** textbox at the top of the new agent page, paste the following prompt and press Send (or Enter). The describe textbox is the primary input — there is no separate tab to select.
 
     ```
     You are a Sales Admin Assistant. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
@@ -416,9 +419,9 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 #### Configure knowledge sources
 
-9. Select the **Configure** tab.
+9. The agent's **Configure** panel appears automatically on the right side of the page (or as a `Chat | Configure` tab pair in the chat pane depending on viewport).
 
-10. Scroll down to the **Knowledge** section:
+10. Scroll the Configure panel to the **Knowledge** section:
     - Under **Knowledge**, Paste the Sales.xlsx URL that you copied earlier in the lab and then select Enter to add the file as knowledge to your agent
     - Repeat that for the Sales Policy Document.docx
     - You will see them being added as SharePoint documents in the knowledge section of the agent
@@ -428,7 +431,7 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 #### Enable advanced capabilities
 
-11. Under **Capabilities**, enable:
+11. Under **Capabilities**, verify these toggles are enabled (they are usually pre-enabled — enable them if not):
     - **Create documents, charts, and code** (for data analysis and chart generation)
     - **Create images** (for creating visual content)
 
@@ -448,7 +451,7 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 #### Finalize and create
 
-12. Review the **Configure** tab to refine:
+12. Review the **Configure** panel to refine:
 
     - Agent name and description
     - Instructions
@@ -534,9 +537,9 @@ Design a professional badge for the first place winner of our sales contest. It 
 
 Leverage the Researcher frontier agent in Microsoft 365 Copilot to perform deep, multi-section analysis of a complex business document — synthesizing insights that would take a human analyst hours to compile manually.
 
-| Use case                                    | Value added                                                                                         | Estimated effort |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------------- | ---------------- |
-| Deep analysis with the Researcher agent     | Use the Researcher frontier agent to synthesize strategic insights across a multi-section report     | 5 minutes        |
+| Use case                                    | Value added                                                                                         | Estimated effort                          |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------- | ----------------------------------------- |
+| Deep analysis with the Researcher agent     | Use the Researcher frontier agent to synthesize strategic insights across a multi-section report     | 5 min to send · 10–25 min for results     |
 
 **Summary of tasks**
 
@@ -548,31 +551,34 @@ In this section, you'll upload a sample hotel performance report to the Research
 
 Use the Researcher agent to perform two deep-analysis tasks on a complex PDF document, demonstrating its ability to reason across multiple sections and synthesize findings.
 
+> [!IMPORTANT]
+> **Researcher is a deep-reasoning frontier agent** — on a ~20-page PDF like this one, a single prompt typically takes **10–25 minutes** to produce a complete response, and may sometimes enter a long "thinking" loop before converging. **You will be notified in the chat list when Researcher finishes — you do not need to sit and wait.** Send each prompt, then move on to the next use case (Cowork) and come back when Researcher signals it's done. If a response appears stuck after ~25 minutes, press **Stop** and use the partial result.
+
 ---
 
 ### Step-by-step instructions
 
 #### Download the sample report
 
-1. If you haven't already, download the sample report PDF that you'll use for this exercise and the next:
+1. If you haven't already, download the sample report PDF that you'll use for this exercise and the next two:
 
    **[Download: Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf)**
 
 > [!IMPORTANT]
-> Save this file to a location you can easily find (e.g., your Desktop or Downloads folder). You will need to upload it in the next step. This is a fictional ~20-page report containing tables, charts, financial data, and operational metrics across 18 sections.
+> Save this file to a location you can easily find (e.g., your Desktop or Downloads folder). You will need to upload it for Use Cases #3, #4, and #5. This is a fictional ~20-page report containing tables, charts, financial data, and operational metrics across 18 sections.
 
 #### Open the Researcher agent
 
 1. Navigate to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
-1. In the **left-side** panel or the main chat area, look for the **Researcher** agent. You can find it by:
-   - Selecting the agent picker (if available) and choosing **Researcher**
-   - Or typing `@Researcher` in the chat input area
+1. In the **left-side** sidebar agent list, look for the **Researcher** agent. You can also open it by typing `@Researcher` in the chat input area.
 
     > [!TIP]
     > The Researcher agent is one of Microsoft's **frontier agents** — purpose-built AI agents that use advanced reasoning models. Researcher excels at deep document analysis, cross-referencing multiple sections, and synthesizing complex information. It's available to users with a Microsoft 365 Copilot license.
 
-1. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the attachment icon (paperclip) in the chat input area and choosing the file from your local machine.
+1. (Recommended) In the Researcher chat header (top right), click the **mode picker pill** (defaults to **Auto**) and switch to **Critique** (`GPT responses, refined by Claude (Frontier)`). Critique mode produces more reliable convergence on long PDFs than Auto in the current product. The other options (`Model Council`, `Claude`) are also valid but tend to be slower.
+
+1. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by clicking the **+** (Add and manage sources) button next to the message input, choosing **Upload images and files**, and selecting the file from your local machine. Wait for the upload confirmation before continuing.
 
 #### Prompt 1: Executive briefing with root-cause analysis
 
@@ -583,34 +589,21 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
     ```
 
     > [!NOTE]
-    > Researcher may ask a clarifying follow-up about preferred report length or detail level. Either select your preferred option, or simply reply `go ahead` to accept the default — both work.
+    > Researcher will likely ask a clarifying follow-up about audience/tone, urgency definition, and report length. **Click one of the suggestion chips** (or type `go ahead` / `proceed`) and press **Send** — clicking a chip only fills the message box; it does **not** auto-submit. Once you reply, Researcher begins reasoning.
+    >
+    > **Don't wait for Researcher to finish before moving on.** The chat list (left rail) will show the conversation update when the response is complete. Open the next use case (Cowork) now and come back to Researcher later.
 
-1. **Observe** how the Researcher agent:
+1. **Move on to the next use case now.** When the Researcher reply appears in the chat list (left rail), come back and **observe** how the agent:
    - Identifies issues across multiple sections (housekeeping, WiFi, HVAC, F&B margins, elevator maintenance)
    - Traces each issue back to its root cause using data from different parts of the report
    - Quantifies the financial impact by pulling revenue, cost, and complaint data from various tables
    - Maps each issue to specific recommendations from Section 16
    - Produces a structured, executive-ready summary
 
+1. To export the response, click **Edit in Pages** at the bottom of the message. The response opens in the Pages side-panel editor, where the **Create** menu (top toolbar) offers **Document** (Word) and **PDF** exports. (Earlier versions of Researcher offered a "Convert to" menu with Infographic / HTML / YAML / C# options — those have been retired; Document/PDF via Pages is the current export path.)
+
 > [!NOTE]
 > This prompt is powerful because it requires **cross-section synthesis** — the Researcher must connect data from the occupancy analysis (Section 3), housekeeping operations (Section 6), customer satisfaction scores (Section 8), online reviews (Section 9), maintenance logs (Section 12), and the recommendations (Section 16). No single section of the report contains the full answer.
-
-#### Prompt 2: Gap analysis — problems vs. recommendations
-
-1. In the **same conversation** (to maintain context), copy and paste this follow-up prompt and select **Send**:
-
-    ```text
-    Identify every metric in this report that is trending in the wrong direction or below target. For each one, trace the root cause and map it to a specific recommendation. Are there any gaps where a problem exists but no recommendation addresses it?
-    ```
-
-1. **Observe** how the Researcher agent:
-   - Systematically scans every KPI table, satisfaction score, and operational metric in the report
-   - Identifies metrics that are below target (e.g., HK SLA compliance at 77% vs. 90% target, WiFi satisfaction at 3.60 vs. 4.0 benchmark)
-   - Identifies metrics trending negatively (e.g., F&B margins, linen costs, parking revenue)
-   - Maps each problem to a specific recommendation (R1–R10)
-   - Critically evaluates whether any gaps exist where a problem is documented but no recommendation addresses it
-
-1. Try the **Convert to** menu at the bottom of the response — Researcher can render the analysis as an **Infographic**, **HTML**, **YAML**, **C#**, and more. Selecting **Infographic** produces a polished visual you can share directly; the code-format options are useful when you want to feed the analysis into a downstream system.
 
 > [!TIP]
 > This is the kind of analysis that demonstrates the true power of the Researcher agent. A human reviewer might miss connections between a declining metric buried in Appendix B and a recommendation in Section 16. Researcher performs an **exhaustive cross-reference** across the entire document. Try asking follow-up questions like "What's the strongest counterargument to your top recommendation?" to see how Researcher handles critical thinking.
@@ -629,6 +622,7 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
 - **Prompt design matters** — Asking for "root causes" and "gap analysis" forces Researcher to reason deeply rather than simply summarize
 - **Follow-up prompts leverage context** — The second prompt builds on the first, allowing Researcher to refine and extend its analysis
 - **Frontier agents are purpose-built** — Researcher uses advanced reasoning models optimized for deep analysis, unlike general chat which is optimized for conversational responses
+- **Mode matters for long PDFs** — Critique mode tends to converge more reliably than Auto on large documents. And because Researcher is *slow* by design, treat its prompts as fire-and-forget: submit, switch tasks, come back when the chat list signals completion.
 
 **Challenge: Apply this to your own use case**
 
@@ -640,7 +634,7 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
 
 ## Use Case #4: Financial modeling with the Analyst agent
 
-Use the Analyst frontier agent to extract data from the same hotel performance report and perform rigorous financial analysis — computing NPV, IRR, and investment prioritization that goes beyond what the original report provides.
+While Researcher (Use Case #3) is still reasoning in the background, switch to the **Analyst** frontier agent to extract data from the same hotel performance report and perform rigorous financial analysis — computing NPV, IRR, and investment prioritization that goes beyond what the original report provides.
 
 | Use case                                       | Value added                                                                                              | Estimated effort |
 | ---------------------------------------------- | -------------------------------------------------------------------------------------------------------- | ---------------- |
@@ -671,7 +665,7 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
     > [!TIP]
     > The Analyst agent is another **frontier agent** in Microsoft 365 Copilot. While Researcher excels at reasoning and synthesis, Analyst is purpose-built for **data-heavy work** — extracting tables from documents, performing calculations, building models, generating visualizations, and producing structured outputs like Excel files. Think of Researcher as your strategic advisor and Analyst as your financial modeler.
 
-3. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the attachment icon and choosing the same file you downloaded earlier.
+3. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the **+** (Add and manage sources) button next to the message input, choosing **Upload images and files**, and selecting the same PDF you downloaded earlier.
 
 > [!NOTE]
 > You're using the same PDF from Use Case #3, but with a completely different agent. This demonstrates how different frontier agents can extract different types of value from the same source document.
@@ -703,6 +697,8 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
    - Identifies which investments create or destroy value at the hurdle rate
    - Provides a clear approve/defer recommendation
 
+   ![Analyst ranked NPV table](images/analyst-npv-ranked-table.png)
+
 > [!IMPORTANT]
 > The report only includes **simple payback periods** (which ignore the time value of money). The Analyst agent produces **NPV and IRR** — the gold-standard financial metrics that CFOs actually use to evaluate capital projects. This is a powerful example of how the Analyst agent can *elevate* analysis beyond the source material.
 
@@ -713,6 +709,8 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
 ```text
 Now create a chart showing NPV vs. Investment Cost for all 10 recommendations, with bubble size representing IRR.
 ```
+
+![NPV vs Investment Cost bubble chart](images/analyst-bubble-chart.png)
 
 ```text
 Which combination of recommendations gives the highest total NPV while staying under a $1.5M total budget constraint?
@@ -740,7 +738,121 @@ Which combination of recommendations gives the highest total NPV while staying u
 
 - What capital investment decisions does your organization face that could benefit from automated NPV/IRR analysis?
 - What reports or proposals do you review that only include simple payback and could be elevated with proper DCF analysis?
-- How could you combine Researcher (for strategic context) and Analyst (for financial modeling) to prepare a comprehensive investment recommendation?
+- How could you combine Cowork (for agentic drafting — Use Case #5) and Analyst (for financial modeling) to prepare a comprehensive investment recommendation — Analyst builds the NPV/IRR analysis, then Cowork drafts the executive email or memo presenting it?
+
+---
+
+## Use Case #5: Draft an executive email with the Cowork agent from a PDF report
+
+If Researcher (Use Case #3) is still reasoning in the background, that's fine — you can run Cowork in parallel. Switch to the **Cowork (Frontier)** agent to do something purely conversational agents cannot: agentically read a complex business document, look up the right recipient in your organization, and draft a complete email in Outlook — ready for you to review and send.
+
+| Use case                                       | Value added                                                                                                       | Estimated effort |
+| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------- |
+| Draft an executive email with Cowork           | Cowork takes agentic action: reads the PDF, resolves the recipient, and drafts a real Outlook email on your behalf | 5 minutes        |
+
+**Summary of tasks**
+
+In this section, you'll upload the same Contoso PDF to the Cowork agent, ask it to draft an email to a specific colleague summarizing the most urgent operational issues, and then verify the draft was created in Outlook.
+
+**Scenario:** You're an operations lead at the Contoso Grand Hotel and need to brief your colleague Dewain on the most pressing issues from the annual performance report. Rather than writing the email yourself, you'll let Cowork extract the key facts from the report and draft the email — addressed to Dewain, ready for you to review, edit, and send.
+
+### Objective
+
+Use the Cowork agent to read the same PDF report you uploaded to Researcher, identify five operational issues with root causes and recommendations, and have Cowork draft a real Outlook email to a named recipient (Dewain Robinson).
+
+---
+
+### Step-by-step instructions
+
+#### Open the Cowork agent
+
+1. From the same Microsoft 365 Copilot page (`https://m365.cloud.microsoft/chat/?auth=2&home=1`), locate **Cowork (Frontier)** in the left-side sidebar agent list and click it.
+
+   ![Cowork in the sidebar agent list](images/cowork-sidebar.png)
+
+   > [!TIP]
+   > Cowork is a **frontier agent** in Microsoft 365 Copilot, purpose-built for *agentic action-taking*: it can read documents, look up people in your tenant, and create real Outlook drafts / Word docs / Teams messages on your behalf. While Researcher excels at deep analysis and Analyst at data and computation, Cowork excels at completing multi-step tasks that span several Microsoft 365 surfaces.
+
+1. On the Cowork landing page, note the heading **"What should we tackle next?"** and four workflow suggestion chips (Organize my inbox, Arrange my week, Prep for a meeting, Research a company).
+
+   ![Cowork landing page](images/cowork-landing.png)
+
+#### Upload the report and ask Cowork to draft an email
+
+1. Click **Add attachments** (the paperclip icon next to the message input), then choose **Upload images and files (PDF, Word, Excel, images)**. Select the `Contoso_Grand_Hotel_Performance_Report.pdf` file you downloaded for Use Case #3.
+
+1. Wait for the upload to complete — the PDF will appear as a chip above the message input.
+
+1. Paste the following prompt into the message input and press **Send**:
+
+    ```text
+    Draft a professional email to Dewain Robinson summarizing the five most urgent operational issues from the attached hotel performance report.
+
+    For each issue, include in one short bullet: the symptom, the root cause, the estimated financial impact, and the matching recommendation (Section 16 R-number).
+
+    Address the email "Hi Dewain," and sign it from "The Operations Team". Keep the total email under 400 words. Use the PDF as the only source.
+    ```
+
+    > [!TIP]
+    > Cowork executes this as a **multi-step task**: (1) reads the attached PDF, (2) looks up "Dewain Robinson" in the M365 People graph, (3) drafts a new email in your Outlook mailbox, (4) reports back in chat when done. Unlike Researcher, Cowork rarely asks clarifying questions — when the prompt is clear, it just acts, and typically completes in ~2–3 minutes.
+
+1. **Observe** how the Cowork agent:
+
+   - Streams execution updates (e.g., "Reading PDF", "Searching for Dewain Robinson", "Drafting email in Outlook")
+   - Confirms the recipient resolved correctly (e.g., "Drafted email to Dewain Robinson")
+   - Reports back inline in chat with a summary of the email it created and ends with **"Open it in Outlook to review, edit, or send"**
+
+   ![Cowork drafting the email](images/cowork-email-confirmation.png)
+
+#### Verify the draft in Outlook
+
+1. **Open the app launcher** (the 3×3 dot "waffle" icon at the **top-left** of the page) and select **Outlook**. Outlook opens in a **new browser tab**.
+
+   ![M365 app launcher with Outlook highlighted](images/m365-app-launcher-open.png)
+
+   > [!IMPORTANT]
+   > On your first Outlook visit, a "Your privacy matters" prompt may appear — click **Continue** to dismiss it. After that, the Outlook UI is ready for use.
+
+1. In the Outlook left rail, click the **Drafts** folder. Find the email Cowork created at the top of the list, with subject starting **`Five Most Urgent Operational Issues — Contoso Grand Hotel...`**. Click it to open.
+
+   ![Cowork's draft email open in Outlook](images/cowork-outlook-draft.png)
+
+1. **Review** the draft:
+
+   - **Recipient:** Dewain Robinson (resolved as a contact pill — hover or click the pill to see the SMTP address)
+   - **Subject:** starts with "Five Most Urgent Operational Issues"
+   - **Body:** five bullets, each covering symptom + root cause + financial impact + recommendation R-number
+   - **Sign-off:** "Best regards, The Operations Team"
+   - Total: approximately 300–400 words
+
+1. From here you can **edit, send, or delete** the draft as you would any other Outlook email. For this lab, leave it as a draft (or delete it) — no need to actually send.
+
+   > [!TIP]
+   > Cowork appends a `Sent by Copilot Cowork` footer to drafts it creates. You can remove that line before sending if you prefer a clean signature.
+
+> [!TIP]
+> By now, head back to Use Case #3 and check whether Researcher has finished. If it has, compare the two outputs side-by-side: Researcher gives you a deep analytical breakdown, Cowork gives you an actionable email ready to send. Each is the right tool for a different job.
+
+---
+
+### Congratulations! You've used Cowork to draft an executive email from a PDF report!
+
+---
+
+### Test your understanding
+
+**Key takeaways:**
+
+- **Cowork takes agentic action** — It doesn't just summarize. It reads a document, resolves a person in your org, and creates real artifacts (an Outlook draft, a Word doc, a Teams message) that are ready for you to review.
+- **No clarifying-question round-trip** — When the prompt is clear and directive ("Draft an email to X about Y, address as Z, sign as W"), Cowork proceeds without asking follow-ups. The cost of being specific is a faster, more deterministic result.
+- **Cross-app integration** — The result lives in **Outlook**, not in the chat. Cowork pivots the M365 experience from "answer in chat" to "complete the task in the right app".
+- **Parallel work pays off** — Cowork is a great companion to Researcher: while Researcher reasons in the background, Cowork drafts a real artifact you can ship in a fraction of the time.
+
+**Challenge: Apply this to your own use case**
+
+- What weekly emails do you draft from the same source data? Could Cowork generate the first draft?
+- Which Microsoft 365 documents would you ask Cowork to read — project status reports, meeting notes, customer feedback summaries?
+- Beyond email, Cowork can draft Word documents and Teams messages — what scenarios in your work would benefit from that kind of agentic drafting?
 
 ---
 
@@ -756,11 +868,11 @@ To maximize the impact of your Copilot agents:
 
 - **Match capabilities to use cases** – Not every agent needs code interpreter or image generation. Choose features based on what your users actually need. Simple instruction-based agents are often more effective than feature-laden ones.
 
-- **Use frontier agents for deep work** – The Researcher and Analyst agents are purpose-built for tasks that go beyond conversational chat. Researcher excels at multi-section synthesis and strategic reasoning; Analyst excels at data extraction, computation, and financial modeling. Use them when you need to *elevate* analysis beyond what a source document provides.
+- **Use frontier agents for deep work** – The Cowork and Analyst frontier agents are purpose-built for tasks that go beyond conversational chat. Cowork excels at agentic action-taking across Microsoft 365 surfaces (drafting Outlook emails, Word docs, Teams messages from source content). Analyst excels at data extraction, computation, and financial modeling. Use them when you need to *complete* a task or *elevate* analysis beyond what a source document provides.
 
 - **Prompt design drives quality** – The difference between a mediocre and a powerful result often comes down to prompt specificity. Asking for "root causes," "gap analysis," or "NPV at an 8% discount rate" forces the agent to reason deeply rather than provide surface-level summaries.
 
-- **Combine agents for comprehensive results** – Use Researcher to identify strategic issues, then Analyst to quantify the financial impact. This combination mirrors how a real consulting team works — strategists set direction, analysts build the business case.
+- **Combine agents for comprehensive results** – Use Analyst to quantify the financial impact of strategic recommendations, then use Cowork to draft the executive email that delivers the findings. This combination mirrors how a real consulting team works — analysts build the business case, communicators package and deliver it.
 
 - **Test systematically** – Test each capability independently before combining them. Use "Start a new chat" between tests. Verify that agents reference the correct knowledge sources in their responses.
 
@@ -790,6 +902,6 @@ To maximize the impact of your Copilot agents:
 
 - **Security and compliance first** – Ensure your agents only expose data to users who should have access. Review knowledge sources for sensitive information. Understand how Microsoft 365's security model applies to your agents.
 
-By following these principles, you'll create Copilot agents that don't just answer questions — they transform how your organization accesses knowledge, analyzes data, and accomplishes work. You've progressed from basic declarative agents to advanced SharePoint integration, and then experienced the power of frontier agents (Researcher and Analyst) for deep document analysis and financial modeling. Together, these capabilities form a complete toolkit for solving real business problems with AI.
+By following these principles, you'll create Copilot agents that don't just answer questions — they transform how your organization accesses knowledge, analyzes data, and accomplishes work. You've progressed from basic declarative agents to advanced SharePoint integration, and then experienced the power of frontier agents (Cowork and Analyst) for agentic action-taking and financial modeling. Together, these capabilities form a complete toolkit for solving real business problems with AI.
 
 ---
