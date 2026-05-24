@@ -41,10 +41,11 @@ layout: default
 
       <section class="page__content" itemprop="text">
         {% if page.toc %}
+          {% assign toc_content = content | replace: '<h2 id="table-of-contents">', '<h2 id="table-of-contents" class="no_toc">' %}
           <aside class="sidebar__right {% if page.toc_sticky %}sticky{% endif %}">
             <nav class="toc">
               <header><h4 class="nav__title"><i class="fas fa-{{ page.toc_icon | default: 'file-alt' }}"></i> {{ page.toc_label | default: site.data.ui-text[site.locale].toc_label | default: "On this page" }}</h4></header>
-              {% include toc.html sanitize=true html=content h_min=2 h_max=3 class="toc__menu" skip_no_ids=true %}
+              {% include toc.html sanitize=true html=toc_content h_min=2 h_max=3 class="toc__menu" skip_no_ids=true %}
             </nav>
           </aside>
         {% endif %}
