@@ -48,6 +48,7 @@
   --color-accent-active:   #005a9e;
   --color-accent-deep:     #004578;
   --color-accent-on:       #ffffff;
+  --color-toc-active:      #0067b7;
   --color-accent-tint:     rgba(0, 120, 212, 0.08);
   --color-accent-tint-2:   rgba(0, 120, 212, 0.12);
   --color-accent-tint-3:   rgba(0, 120, 212, 0.25);
@@ -145,6 +146,7 @@
   --color-accent-active:   #2c9ce0;
   --color-accent-deep:     #1a7dbf;
   --color-accent-on:       #0a1929;
+  --color-toc-active:      var(--color-accent);
   --color-accent-tint:     rgba(76, 194, 255, 0.12);
   --color-accent-tint-2:   rgba(76, 194, 255, 0.22);
   --color-accent-tint-3:   rgba(76, 194, 255, 0.30);
@@ -228,6 +230,7 @@
   --color-accent-active:   #cccc00;
   --color-accent-deep:     #999900;
   --color-accent-on:       #000000;
+  --color-toc-active:      var(--color-accent);
   --color-accent-tint:     transparent;
   --color-accent-tint-2:   #ffff00;
   --color-accent-tint-3:   #ffff00;
