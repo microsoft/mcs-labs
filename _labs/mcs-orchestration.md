@@ -641,22 +641,24 @@ You'll build a brand-new agent for this Use Case. It is **separate** from the Ac
 
 #### Add knowledge to the agent
 
-Add a sample policy document so the agent has a body of knowledge to reason against during the test phase.
-
-1. Download the sample file: [**company_policies_sample.pdf**](company_policies_sample.pdf). Save it somewhere convenient on your machine (e.g., your Downloads folder).
+Add the workshop's sample policy document so the agent has a body of knowledge to reason against during the test phase. The document is already published to the workshop's **OnePlace** SharePoint site, so the fastest path is to pick it from there as a SharePoint knowledge source — that path queries SharePoint live via Work IQ and avoids the Dataverse indexing wait of an uploaded file.
 
 1. On the Sales Account Assistant's **Overview** page, scroll down to the **Knowledge** section.
 
 1. Select **+ Add knowledge** in the upper-right of the Knowledge section.
 
-1. Choose **Files** as the knowledge source, then upload `company_policies_sample.pdf` from where you saved it.
+1. In the **Add knowledge** dialog, locate the **SharePoint** card labeled **Powered by Work IQ** (further down in the knowledge-source list — **not** the SharePoint shortcut inside the *Upload file* card at the top, which uploads to Dataverse and requires indexing). Select that card.
 
-1. Wait a moment for the upload to complete. The file will appear in the Knowledge section with a status indicator.
+1. Select **Browse items**.
 
-    ![Knowledge section showing company_policies_sample.pdf with In progress status](images/image-58.png)
+1. In the file picker, navigate to **OnePlace → Documents → HR**, then select **company_policies_sample.pdf** and choose **Confirm selection**.
 
-> [!IMPORTANT]
-> The file's status will show **In progress** until Dataverse finishes indexing it. **Do not move on to the test phase until the status shows Ready** — until then the agent can recognize the file is attached but cannot retrieve content from it, which will make the test prompts behave inconsistently. Indexing can take several minutes, especially in shared environments. While you wait, you can continue with the next two subsections (**Enable Enhanced Task Completion** and **Create the tools the agent will orchestrate**); just confirm the file is **Ready** before you reach **Test agent capabilities**.
+1. Select **Add to agent**. The file appears in the Knowledge section with status **Ready** almost immediately (no Dataverse indexing required).
+
+    ![Knowledge section showing company_policies_sample.pdf with Ready status](images/image-58.png)
+
+> [!NOTE]
+> **Why Work IQ SharePoint instead of file upload.** The *Upload file* card at the top of the Add knowledge dialog also offers a SharePoint shortcut, but that path **uploads a copy into Dataverse** and waits on Dataverse indexing (often several minutes in shared environments). The **SharePoint - Powered by Work IQ** card lower in the list **queries SharePoint live** through Work IQ, so the file is Ready immediately and stays in sync with the source document. Use Upload-to-Dataverse only when the file lives on your local machine and isn't already in a SharePoint location the agent's user can read.
 
 #### Enable Enhanced Task Completion
 
@@ -877,16 +879,16 @@ The Test pane (now occupying roughly half the canvas after enabling Enhanced Tas
 
     The agent should use the **Microsoft Dataverse MCP Server** to query Account records filtered to Texas, then format the response as a Markdown table inline in the Test pane. Notice this turn does **not** require the gift-policy or weather context from the previous turns — the planner correctly scopes the work to just Dataverse.
 
-1. **Modify the previous result without re-running the search.** Send the following prompt:
+1. **Add a column the previous query didn't include.** Send the following prompt:
 
     ```text
     Add the account number to the list
     ```
 
-    The agent should re-render the table with an **Account Number** column added, **without re-querying Dataverse**. The Reasoning Loop has the previous result set in conversation context, so it can reformat in place. (Same conversation-context behavior you saw in Use Case #2's *"What are all the details on them?"* prompt — but here it carries through the new orchestrator as well.)
+    The agent should re-render the table with an **Account Number** column added. Watch the Test pane: because the previous Dataverse query didn't `SELECT` the `accountnumber` field, the planner will issue a **second `read_query`** that includes it — this is the correct behavior (you can't reformat a column that wasn't fetched). The conversation context still carries the previous turn's filter (`Texas`), so the planner doesn't need to be reminded which accounts to return — only the new column.
 
     > [!TIP]
-    > **Account number is just one example — you can ask for any field.** Try requesting other columns from the Account table that you're curious about: city, state, primary contact, annual revenue, industry, last modified date, anything that lives on the Account record. Each ask is a chance to confirm the planner is reformatting from context and **not** re-issuing a Dataverse query. Watching the Test pane during these turns is the cheapest way to internalize what *"Reasoning Loop using prior context"* actually feels like in practice.
+    > **When the planner reformats vs. re-queries.** If you ask for a column that was already in the previous result (e.g., *"Just show me the city and the phone number"*), the planner will reformat in place without a new Dataverse call. If you ask for a column that wasn't in the previous `SELECT` (e.g., *account number, industry, last modified date, primary contact*), the planner re-issues a query and you'll see a second `read_query` step in the train of thought. Watching the train of thought during these turns is the cheapest way to learn the boundary — the Reasoning Loop reuses conversation context as far as it can and reaches for Dataverse only when it must.
 
 1. **Chain to a file-creation step.** Send the following prompt:
 
