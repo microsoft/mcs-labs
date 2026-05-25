@@ -229,7 +229,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 1. Select **Add knowledge**.
 
-1. Select **SharePoint**.
+1. In the knowledge-source list, locate the **SharePoint** card marked **Powered by Work IQ** (further down the list — **not** the SharePoint shortcut inside the *Upload file* card at the top, which uploads files to Dataverse and waits on indexing). Select that card.
 
 1. Enter the following for the URL:
 
@@ -296,7 +296,7 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 1. Notice that `learn.microsoft.com` shows a status of **Blocked**.
 
     > [!IMPORTANT]
-    > The status message will say something like _"Not allowed due to your organizational data loss prevention policies. Contact your admin."_ This is the DLP policy in action, blocking public website knowledge in the Green zone. Additionally, publishing your agent will also be blocked while DLP policies are being enforced on knowledge sources. You must remove the blocked knowledge source before you can publish.
+    > The status will read **Blocked**, and the agent-status warning panel will explain it with text similar to: _"Your organization's data loss prevention policies do not allow the creation of triggers. The 'shared_microsoftcopilotstudio' connector or one of its tools is blocked by the following policy: Bootcamp Green. Contact your admin with questions."_ (Exact wording may vary; the message names the connector and the specific DLP policy that blocked it.) This is the DLP policy in action, blocking public website knowledge in the Green zone. Additionally, publishing your agent will also be blocked while DLP policies are being enforced on knowledge sources. You must remove the blocked knowledge source before you can publish.
 
 ---
 
