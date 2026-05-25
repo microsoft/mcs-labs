@@ -171,9 +171,12 @@ Set up your development environment by creating a solution and custom publisher 
 
 #### Create a Solution
 
-1. In the left navigation (under the **...** menu), select **Solutions**.
+1. In the left navigation, select **Explore Power Platform** (the icon button at the bottom of the left nav). In the flyout menu that opens, choose **Solutions** under the **Explore** section.
 
     ![Copilot Studio navigation menu with Solutions option highlighted](images/solutions.png)
+
+    > [!NOTE]
+    > Selecting **Solutions** opens a new browser tab. Stay in the new tab for the rest of this use case — the original Copilot Studio Home tab is no longer needed. The Solutions surface itself is the Power Apps maker portal embedded in Copilot Studio.
 
 1. Select **New solution**.
 
@@ -190,7 +193,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 #### Create a Publisher
 
-1. If you see a publisher with your User name you can select that one, otherwise select **+ New publisher** to create one.
+1. If you see a publisher with your User name you can select that one, otherwise select **New publisher** to create one.
 
 > [!TIP]
 > - Use the **username provided to you for logging into the lab** as the publisher name.
@@ -256,15 +259,15 @@ Create environment variables and connection references that enable your solution
 
 1. Open the solution you created in Use Case #1. If you didn't navigate away after the create it should leave you in the solution.
 
-2. Select **+ New**, then select **More** and choose **Environment variable**.
+1. Select **+ New**, then select **More** and choose **Environment variable**.
 
     ![Copilot Studio showing New menu expanded with Environment variable option highlighted](images/environment-variable-connection-reference.png)
 
-3. In **Name**, enter: `Custom Knowledge Endpoint`, then add your User Name to make it unique. We are only doing this because you will be deploying to a shared environment.
+1. In **Name**, enter: `Custom Knowledge Endpoint`, then add your User Name to make it unique. We are only doing this because you will be deploying to a shared environment.
 
-4. In **Data Type**, select **Text**.
+1. In **Data Type**, select **Text**.
 
-5. Leave **Default Value** blank, but under **Current Value**, select **+ New Value**, and enter the Custom Knowledge endpoint URL found in the [Lab Resources](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx).
+1. Leave **Default Value** blank, but under **Current Value**, select **+ New Value**, and enter the Custom Knowledge endpoint URL found in the [Lab Resources](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx).
 
     > [!IMPORTANT]
     > For configuration, use the provided values in the [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
@@ -272,29 +275,29 @@ Create environment variables and connection references that enable your solution
     > [!TIP]
     > Notice how, under **Advanced**, you can set whether the current value can follow through with your solution deployment, or if it should be reset each time the solution is deployed to a new environment.
 
-6. Select **Save**.
+1. Select **Save**.
 
     > [!TIP]
     > Environment variables can also be of type **Secret** to retrieve secure values like API keys from Azure Key Vault at runtime.
 
-7. In the solution, select **+ New**, then select **More** and choose **Connection reference**.
+1. In the solution, select **+ New**, then select **More** and choose **Connection reference**.
 
-8. Enter `ServiceNow` plus your User Name to make it unique , as the name. 
+1. Enter `ServiceNow` plus your User Name to make it unique , as the name. 
 
     > [!TIP]
     > In other locales, the connector name may be localized.
 
-9. Select the connector **ServiceNow**.
+1. Select the connector **ServiceNow**.
 
-10. In the connection dropdown, choose **New connection** if none exists.
+1. In the connection dropdown, choose **New connection** if none exists.
 
-11. Log in through Power Apps in a new tab if needed, then return to Copilot Studio.
+1. Log in through Power Apps in a new tab if needed, then return to Copilot Studio.
 
     > [!IMPORTANT]
     > - For **ServiceNow** configuration values, use the provided values in the [**Lab Resources**](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx) (specific per training).
     > - For **ServiceNow**'s `Instance` configuration, be sure to scroll down in the connection screen.
 
-12. Above the **Connection** dropdown, select **Refresh** and choose the newly created connection.
+1. Above the **Connection** dropdown, select **Refresh** and choose the newly created connection.
 
 > [!TIP]
 > If the **Create** button is grayed out, it's because you pasted the display name. Type an extra character in the display name field and remove it to enable the button.
