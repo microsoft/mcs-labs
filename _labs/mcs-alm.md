@@ -259,11 +259,11 @@ Create environment variables and connection references that enable your solution
 
 1. Open the solution you created in Use Case #1. If you didn't navigate away after the create it should leave you in the solution.
 
-1. Select **+ New**, then select **More** and choose **Environment variable**.
+1. Select **New**, then select **More** and choose **Environment variable**.
 
     ![Copilot Studio showing New menu expanded with Environment variable option highlighted](images/environment-variable-connection-reference.png)
 
-1. In **Name**, enter: `Custom Knowledge Endpoint`, then add your User Name to make it unique. We are only doing this because you will be deploying to a shared environment.
+1. In **Display name**, enter: `Custom Knowledge Endpoint`, then add your User Name to make it unique. We are only doing this because you will be deploying to a shared environment. The **Name** field below will auto-populate with a `cat_` prefixed schema name (e.g. `cat_CustomKnowledgeEndpointU2sypp5l9`) — leave that as-is.
 
 1. In **Data Type**, select **Text**.
 
@@ -280,7 +280,7 @@ Create environment variables and connection references that enable your solution
     > [!TIP]
     > Environment variables can also be of type **Secret** to retrieve secure values like API keys from Azure Key Vault at runtime.
 
-1. In the solution, select **+ New**, then select **More** and choose **Connection reference**.
+1. In the solution, select **New**, then select **More** and choose **Connection Reference**.
 
 1. Enter `ServiceNow` plus your User Name to make it unique , as the name. 
 
