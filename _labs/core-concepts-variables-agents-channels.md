@@ -326,11 +326,9 @@ Create a specialized child agent and configure the parent agent to orchestrate c
     > [!NOTE]
     > The description helps the parent agent understand when to route conversations to this child agent. Be specific and clear.
 
-1. Select  **Save** to initialize the child agent.
-
 #### Configure Child Agent Instructions
 
-1. Once save of the child agent has completed, input the following into the **Instructions** section.
+1. Input the following into the **Instructions** section.
 
     ```
     This agent should help users with understanding information about the prompt guidance framework and how they can leverage it to make their agents better.
@@ -339,7 +337,10 @@ Create a specialized child agent and configure the parent agent to orchestrate c
     > [!TIP]
     > Child agent instructions should be focused and specific to their domain of expertise. Avoid generic instructions - be precise about what this agent knows and does.
 
-1. Select  **Save** to apply the instruction changes to the agent.
+1. Select **Save** to create the child agent with its name, description, and instructions.
+
+    > [!NOTE]
+    > Save the child agent only after you've entered the **Name**, **Description**, and **Instructions** — saving earlier triggers a *"Save agent with errors? (1 error)"* validation dialog because **Instructions** is a required field.
 
 #### Add Knowledge Sources to Child Agent
 
