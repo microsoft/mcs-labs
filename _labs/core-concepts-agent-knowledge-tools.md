@@ -188,14 +188,14 @@ Create a fully configured Copilot Studio agent with clear instructions and Claud
 
 1. Select the dropdown for the agent's model.  Ensure that Claude Sonnet 4.6 is selected.   
   
-1. Review the Instructions pane details, this prompt was created by Copilot Studio from your initial description. It should basically tell the agent to "Help users write prompts, create PowerFX formulas, and with navigating Copilot Studio features."
+1. Review the **Instructions** pane. Copilot Studio generated a structured prompt from your initial description, organized into sections such as **Purpose**, **General Guidelines**, **Skills**, **Step-by-Step Instructions**, and **Interaction Examples**. The exact wording varies per generation, but the agent should focus on helping users with **Copilot Studio** and **prompt engineering** — the two topics from your description.
 
    > [!TIP]
    > Clear, specific instructions help your agent understand its role and provide consistent responses. Think of instructions as the agent's job description.
 
 1. Scroll down to the **Knowledge** section and select **Add Knowledge**.
 
-1. Select Public website from the list of knowledge source options.
+1. Select **Public websites** from the list of knowledge source options.
 
 1. Input the following URL and select **Add**
 
@@ -276,7 +276,7 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 1. Download the [Copilot Studio Licensing Guide (April 2026)](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/microsoft-365/Microsoft-Copilot-Studio-Licensing-Guide-April-2026.pdf). Just make sure you have the file local on your computer.
 
-1. Select **+Add Knowledge** and select **Upload files** and use the file dialog to locate and select your downloaded license guide file from your local computer.
+1. Select **+ Add knowledge** and select the **Upload file** option (the large drop-zone tile at the top of the Featured list). Click **select to browse** and use the file dialog to locate and select your downloaded license guide file from your local computer.
 
    > [!TIP]
    > You can upload multiple file types including PDF, Word documents (.docx), PowerPoint (.pptx), and text files. Each file can be up to 512 MB.
@@ -308,9 +308,9 @@ The Use information from the web setting is available on the Generative AI setti
 
 #### Disable Ungrounded Responses
 
-1. Select the **Settings** tab at the top of the agent, then select the **Generative AI** menu.
+1. Select the **Settings** button at the top right of the agent (next to **Publish**). The Settings panel opens with **Generative AI** selected by default; if it isn't selected, choose **Generative AI** from the left navigation.
 
-1. Turn off the **Allow Ungrounded responses** setting.
+1. Scroll to the **Knowledge** section of the Generative AI settings page and turn off the **Allow ungrounded responses** toggle.
 
 1. Select **Save** to apply the change.
 
