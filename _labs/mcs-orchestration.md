@@ -641,22 +641,24 @@ You'll build a brand-new agent for this Use Case. It is **separate** from the Ac
 
 #### Add knowledge to the agent
 
-Add a sample policy document so the agent has a body of knowledge to reason against during the test phase.
-
-1. Download the sample file: [**company_policies_sample.pdf**](company_policies_sample.pdf). Save it somewhere convenient on your machine (e.g., your Downloads folder).
+Add the workshop's sample policy document so the agent has a body of knowledge to reason against during the test phase. The document is already published to the workshop's **OnePlace** SharePoint site, so the fastest path is to pick it from there as a SharePoint knowledge source — that path queries SharePoint live via Work IQ and avoids the Dataverse indexing wait of an uploaded file.
 
 1. On the Sales Account Assistant's **Overview** page, scroll down to the **Knowledge** section.
 
 1. Select **+ Add knowledge** in the upper-right of the Knowledge section.
 
-1. Choose **Files** as the knowledge source, then upload `company_policies_sample.pdf` from where you saved it.
+1. In the **Add knowledge** dialog, locate the **SharePoint** card labeled **Powered by Work IQ** (further down in the knowledge-source list — **not** the SharePoint shortcut inside the *Upload file* card at the top, which uploads to Dataverse and requires indexing). Select that card.
 
-1. Wait a moment for the upload to complete. The file will appear in the Knowledge section with a status indicator.
+1. Select **Browse items**.
 
-    ![Knowledge section showing company_policies_sample.pdf with In progress status](images/image-58.png)
+1. In the file picker, navigate to **OnePlace → Documents → HR**, then select **company_policies_sample.pdf** and choose **Confirm selection**.
 
-> [!IMPORTANT]
-> The file's status will show **In progress** until Dataverse finishes indexing it. **Do not move on to the test phase until the status shows Ready** — until then the agent can recognize the file is attached but cannot retrieve content from it, which will make the test prompts behave inconsistently. Indexing can take several minutes, especially in shared environments. While you wait, you can continue with the next two subsections (**Enable Enhanced Task Completion** and **Create the tools the agent will orchestrate**); just confirm the file is **Ready** before you reach **Test agent capabilities**.
+1. Select **Add to agent**. The file appears in the Knowledge section with status **Ready** almost immediately (no Dataverse indexing required).
+
+    ![Knowledge section showing company_policies_sample.pdf with Ready status](images/image-58.png)
+
+> [!NOTE]
+> **Why Work IQ SharePoint instead of file upload.** The *Upload file* card at the top of the Add knowledge dialog also offers a SharePoint shortcut, but that path **uploads a copy into Dataverse** and waits on Dataverse indexing (often several minutes in shared environments). The **SharePoint - Powered by Work IQ** card lower in the list **queries SharePoint live** through Work IQ, so the file is Ready immediately and stays in sync with the source document. Use Upload-to-Dataverse only when the file lives on your local machine and isn't already in a SharePoint location the agent's user can read.
 
 #### Enable Enhanced Task Completion
 
@@ -884,6 +886,9 @@ The Test pane (now occupying roughly half the canvas after enabling Enhanced Tas
     ```
 
     The agent should re-render the table with an **Account Number** column added, **without re-querying Dataverse**. The Reasoning Loop has the previous result set in conversation context, so it can reformat in place. (Same conversation-context behavior you saw in Use Case #2's *"What are all the details on them?"* prompt — but here it carries through the new orchestrator as well.)
+
+    > [!NOTE]
+    > **What you may see today vs. the steady-state behavior described above.** The Reasoning Loop is actively evolving, and at the moment a column you ask for that wasn't in the previous query's `SELECT` (like `Account Number`) may cause the planner to issue a second `read_query` to fetch that field — you'll see the extra `read_query` step in the train of thought. That's an implementation snapshot, not a contradiction of the lab — the feature is moving toward the steady-state behavior described in this step, where reformat-from-context is the default for any follow-up that asks for table changes. Treat the wording above as the intended behavior; if your turn shows a re-query, you're seeing the current implementation, not a misconfiguration on your end.
 
     > [!TIP]
     > **Account number is just one example — you can ask for any field.** Try requesting other columns from the Account table that you're curious about: city, state, primary contact, annual revenue, industry, last modified date, anything that lives on the Account record. Each ask is a chance to confirm the planner is reformatting from context and **not** re-issuing a Dataverse query. Watching the Test pane during these turns is the cheapest way to internalize what *"Reasoning Loop using prior context"* actually feels like in practice.
