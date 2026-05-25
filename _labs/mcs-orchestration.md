@@ -879,16 +879,16 @@ The Test pane (now occupying roughly half the canvas after enabling Enhanced Tas
 
     The agent should use the **Microsoft Dataverse MCP Server** to query Account records filtered to Texas, then format the response as a Markdown table inline in the Test pane. Notice this turn does **not** require the gift-policy or weather context from the previous turns — the planner correctly scopes the work to just Dataverse.
 
-1. **Add a column the previous query didn't include.** Send the following prompt:
+1. **Modify the previous result without re-running the search.** Send the following prompt:
 
     ```text
     Add the account number to the list
     ```
 
-    The agent should re-render the table with an **Account Number** column added. Watch the Test pane: because the previous Dataverse query didn't `SELECT` the `accountnumber` field, the planner will issue a **second `read_query`** that includes it — this is the correct behavior (you can't reformat a column that wasn't fetched). The conversation context still carries the previous turn's filter (`Texas`), so the planner doesn't need to be reminded which accounts to return — only the new column.
+    The agent should re-render the table with an **Account Number** column added, **without re-querying Dataverse**. The Reasoning Loop has the previous result set in conversation context, so it can reformat in place. (Same conversation-context behavior you saw in Use Case #2's *"What are all the details on them?"* prompt — but here it carries through the new orchestrator as well.)
 
     > [!TIP]
-    > **When the planner reformats vs. re-queries.** If you ask for a column that was already in the previous result (e.g., *"Just show me the city and the phone number"*), the planner will reformat in place without a new Dataverse call. If you ask for a column that wasn't in the previous `SELECT` (e.g., *account number, industry, last modified date, primary contact*), the planner re-issues a query and you'll see a second `read_query` step in the train of thought. Watching the train of thought during these turns is the cheapest way to learn the boundary — the Reasoning Loop reuses conversation context as far as it can and reaches for Dataverse only when it must.
+    > **Account number is just one example — you can ask for any field.** Try requesting other columns from the Account table that you're curious about: city, state, primary contact, annual revenue, industry, last modified date, anything that lives on the Account record. Each ask is a chance to confirm the planner is reformatting from context and **not** re-issuing a Dataverse query. Watching the Test pane during these turns is the cheapest way to internalize what *"Reasoning Loop using prior context"* actually feels like in practice.
 
 1. **Chain to a file-creation step.** Send the following prompt:
 
