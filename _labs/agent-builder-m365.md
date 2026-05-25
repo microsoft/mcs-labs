@@ -786,7 +786,7 @@ Use the Cowork agent to read the [same PDF report](https://github.com/microsoft/
 1. Paste the following prompt into the message input and press **Send**:
 
     ```text
-    Draft a professional email to Dewain Robinson summarizing the five most urgent operational issues from the attached hotel performance report.
+    Create a draft email in my Outlook mailbox addressed to Dewain Robinson summarizing the five most urgent operational issues from the attached hotel performance report. Use the Outlook draft tool — do not just write the email text in chat.
 
     For each issue, include in one short bullet: the symptom, the root cause, the estimated financial impact, and the matching recommendation (Section 16 R-number).
 
