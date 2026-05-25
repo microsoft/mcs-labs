@@ -425,11 +425,14 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. Select **Add a tool** and review the Tools page to understand the available options for creating new tools.
 
-1. Select **Connector** as the tool type (or browse available connectors).
+1. The Add tool dialog opens with a list of suggested connector actions. Either type **MSN Weather** in the search box at the top of the dialog (and press Enter), or click the **Connector** filter chip above the results table to narrow the list to connectors.
 
-1. Search for and in the **MSN Weather** connector section select the **Get current weather** action.
+   > [!NOTE]
+   > The **Create new** tile list at the top of the dialog (Agent flow, Prompt, Model Context Protocol, Computer use) is for net-new tool types — not for selecting an existing connector. Use the search box or the **Connector** filter instead.
 
-1. For the Connection, select **Create new connection**.
+1. In the **MSN Weather** connector section, select the **Get current weather** action.
+
+1. The connector configuration page opens with a **Connection** field labeled **Not connected**. Click that button to open the connection picker, then select **Create new connection** from the popover.
 
 1. When prompted, select **Create** to create the connection.
 
@@ -477,6 +480,9 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 1. Select **Add tool** to add another tool.
 
 1. In the **Create new** section, select **Prompt**.
+
+   > [!NOTE]
+   > The first time you open the Prompt builder, a **Define your intent** product tour (1 of 3) appears as a coachmark overlay. Click **X** to dismiss it (or step through with **Next**) before continuing.
 
 1. Select the current name e.g., **Custom prompt...** at the top left and change the name to **Prompt Analyzer**.
 
