@@ -160,16 +160,22 @@ Create a fully configured Copilot Studio agent with clear instructions and Claud
 
 1. Navigate to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and sign in with your credentials.
 
-1. On the Copilot Studio **Home** page, locate the **Describe your agent in your own words** box (the inline agent creation form).
+   > [!NOTE]
+   > On a first sign-in (especially for workshop / fresh-tenant accounts) you may see two one-time dialogs before reaching the home page:
+   > 1. **Welcome to Microsoft Copilot Studio** — choose a country/region (e.g. **United States**) and select **Get Started**. The marketing-opt-in checkbox is optional.
+   > 1. **Welcome to Copilot Studio!** — a 4-step product tour. Click **Skip** (or step through with **Next**) to dismiss it.
+
+1. On the Copilot Studio **Home** page, under the heading **What would you like to build?**, locate the inline agent-creation textbox (placeholder _"Start building by describing what your agent needs to do"_). The **Agent** tab should be selected by default.
 
    > [!NOTE]
-   > If you don't see the inline **Describe your agent** box, your environment may not support agent creation by using natural language. In that case, select **Create** (or **+ New agent**) from the left navigation, then choose the **Describe** option to reach the same form.
+   > If you don't see the inline agent-creation textbox on the home page, your environment may not support agent creation by using natural language. In that case, select **Create** (or **+ New agent**) from the left navigation, then choose the **Describe** option to reach the same form.
 
 1. In the agent creation form, provide the following information and select **Send**:
 
    ```
    Provide information and guidance on how to use Copilot Studio and prompt engineering.
    ```
+
 1. Wait for the "Your agent has been provisioned." notification.
 
 1. In the Details pane, select **Edit**
@@ -451,9 +457,11 @@ Create and configure two tools that extend your agent's capabilities beyond simp
    ```
 
 1. When the agent asks for a location, respond:
+
    ```
    Orlando
    ```
+
 1. Review the weather information returned by the agent. Notice how it uses the tool to fetch real-time data. Also notice that the agent automatically used the **Imperial** or **Metric** unit you selected earlier without asking the user — this is because you set that input to a custom value instead of letting the AI fill it dynamically.
 
    > [!TIP]
@@ -477,6 +485,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
    ```
    Analyze this prompt (replace with text) based upon the CARE Prompt Guidance to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
    ```
+
 1. In the instructions you just pasted select ** (replace with text)**.
 
 1. With ** (replace with text)** still selected, in the lower left of the dialog, select **Add content**
@@ -651,7 +660,8 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
 
 1. Check your nodes and if you don't already have a node that thanks the user then select + after the last node and select a **Message** node.
 
-1. Input the following as the message
+1. Input the following as the message:
+
    ```
    Thank you! Your information has been recorded. (In production, this would submit to the mailing list system.)
    ```
