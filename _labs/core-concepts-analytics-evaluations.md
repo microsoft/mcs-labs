@@ -81,7 +81,7 @@ This lab teaches you how to use both analytics and the Agent Evaluation feature 
 | **User Satisfaction Scores** | Feedback metrics measuring whether users found the agent helpful - low satisfaction scores indicate areas needing improvement in knowledge, instructions, or conversation flows |
 | **Failure Analytics** | Data showing where conversations fail, which questions go unanswered, and where users escalate or abandon - these insights directly guide improvement priorities |
 | **Evaluation Test Sets** | Collections of test cases with questions and expected responses that systematically verify agent quality - these provide repeatable, objective quality measurement |
-| **Test Methods** | Different comparison techniques (Exact Match, Keyword Match, Similarity, General Quality, Compare Meaning) that determine how agent responses are assessed against expected answers. Older Copilot Studio docs and earlier versions of this lab refer to them as *evaluation methods* — the terms are interchangeable. |
+| **Test Methods** | Different comparison techniques (such as Exact match, Keyword match, Similarity, General quality, Compare meaning, plus newer methods like Capability use and Custom) that determine how agent responses are assessed against expected answers. See the *Choose evaluation methods* article on Microsoft Learn for the full current list — methods are added as the preview feature matures. Older Copilot Studio docs and earlier versions of this lab refer to them as *evaluation methods* — the terms are interchangeable. |
 | **Evaluation Results** | Pass/fail outcomes with detailed reasoning, knowledge citations, and activity maps - these reveal exactly why an agent succeeded or failed on each test case |
 
 ---
@@ -160,7 +160,7 @@ Access and interpret agent analytics to measure performance and identify optimiz
 ### Step-by-step instructions
 
 > [!IMPORTANT]
-> **Your analytics dashboard will be empty.** Analytics data requires 24-48 hours to populate after an agent starts receiving conversations. Since your agent was just created during this bootcamp, there is no analytics data available yet. There is currently no way to pre-provision or simulate analytics data in the platform — we are actively working with the Product Group to provide a way to visualize what populated analytics would look like for lab scenarios. For now, follow the steps below to familiarize yourself with the dashboard layout, available metrics, and where to find insights once data begins flowing.
+> **Your analytics dashboard will be empty until the agent is published.** Before any analytics sections render, your agent must be **published** (see the prerequisite at the top of this lab). Until publish, the Analytics page shows a *"Publish your agent to track performance"* empty-state panel with a single **Publish** button — none of the dashboard sections described below will be visible. Once published and receiving conversations through a deployed channel, analytics data still takes 24–48 hours to populate. There is currently no way to pre-provision or simulate analytics data in the platform — the Product Group is working on a way to visualize what populated analytics would look like for lab scenarios. For now, skim the descriptions below to know what to expect once data flows.
 
 #### Navigate to Analytics
 
@@ -332,24 +332,20 @@ Create evaluation test sets using four different methods and understand how each
     > [!NOTE]
     > If you don't see the Evaluation option, it may need to be enabled in your environment settings or may not yet be available in your region. Check [Agent Evaluation overview](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-overview) for availability.
 
-1. Select **New evaluation**, then select **Single response**.
-
-1. Select **New evaluation**, then **Single response**, then choose **Quick question set** to generate 10 test cases automatically. Copilot Studio will use AI to automatically generate test cases based on your agent's knowledge sources and configuration.
+1. Select **Create a test set** to open the New evaluation page. Confirm **Single response** is selected under **Data type**, then choose **Quick question set** under **More ways to start** to generate 10 test cases automatically. Copilot Studio will use AI to generate test cases based on your agent's knowledge sources and configuration.
 
 1. In the **Configure test set** panel on the right side of your screen, change the test set name to **Non-Critical Copilot Studio Guide Set**
 
-1. In the Test method, **General Quality** is configured by default. Leave this as-is for this test set.
+1. In the Test method section, **General quality** is configured by default. Leave this as-is for this test set.
 
     > [!TIP]
-    > You can have multiple test methods for a test set, but all test cases in the set must follow all of the configured test methods. Choose methods that match the overall nature of your test set. For example, General Quality works well as a baseline for all questions, while Compare meaning can be added when expected responses are provided.
+    > You can have multiple test methods for a test set, but all test cases in the set must follow all of the configured test methods. Choose methods that match the overall nature of your test set. For example, General quality works well as a baseline for all questions, while Compare meaning can be added when expected responses are provided.
 
 1. Select **Save** at the bottom of that same panel.
 
-1. In that same panel, select **User profile**.
+1. In that same panel, scroll to the **User profile** subsection and select **Manage**.
 
-1. In the **User** dropdown locate your user account and select the row.
-
-1. Select **Save**.
+1. In the user-profile management surface that opens, locate your user account and select it. Confirm the selection and return to the Configure test set panel.
 
 1. Select **Evaluate** to start the evaluation of this test set.
 
@@ -368,7 +364,7 @@ Create evaluation test sets using four different methods and understand how each
 
 #### Import Test Cases
 
-1. Select **New evaluation**.
+1. Select **Create a test set** to open the New evaluation page.
 
 1. In the middle of the screen in the **Start by uploading some questions** section, select **CSV** to download the CSV template.
 
@@ -388,7 +384,7 @@ Create evaluation test sets using four different methods and understand how each
 
 1. Select **Save**.
 
-1. Select **Evaluate** to run the evaluation. These adversarial test cases use the General Quality method to assess how the agent handles harmful requests.
+1. Select **Evaluate** to run the evaluation. These adversarial test cases use the **General quality** method to assess how the agent handles harmful requests.
 
 #### Manually Create Test Cases from Test Canvas
 
@@ -531,7 +527,7 @@ Review and interpret evaluation results, compare outcomes across test sets, and 
 
 1. Select the **Always Fail Copilot Studio Guide Set** to view its results.
 
-1. Review the test case results. These adversarial questions test whether your agent properly refuses harmful or inappropriate requests using the **General Quality** test method.
+1. Review the test case results. These adversarial questions test whether your agent properly refuses harmful or inappropriate requests using the **General quality** test method.
 
 1. Select a test case and review:
    - The **actual response** (how the agent handled the adversarial question)
