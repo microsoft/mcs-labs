@@ -855,6 +855,19 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. Close the **Settings** menu using the **X** in the upper right corner.
 
+#### Turn Off the Default Greeting Topic
+
+1. Select the **Topics** tab in the top navigation.
+
+1. In the system topics list, select the **Greeting** topic.
+
+1. Select **More** in the top-right toolbar of the topic editor and turn off the topic (set the topic to **Off**).
+
+    > [!NOTE]
+    > The default **Greeting** topic fires on utterances classified as greetings ("Hello", "Hey", "Hi", etc.), and the orchestrator routes to it before it can route to a tool. Several of the test queries in the next step start with greeting-shaped phrases ("Hey do you like cats?"), so the Greeting topic would short-circuit the test if it remained enabled. Turning it off here lets the orchestrator route those queries through your Chit Chat Prompt tool.
+
+1. Confirm the banner reads "This topic has been turned off, and you won't be able to test it." then return to the **Overview** tab.
+
 #### Test Your Chit Chat Agent
 
 1. In the test pane, try the following chit chat queries:
