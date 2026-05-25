@@ -887,6 +887,9 @@ The Test pane (now occupying roughly half the canvas after enabling Enhanced Tas
 
     The agent should re-render the table with an **Account Number** column added, **without re-querying Dataverse**. The Reasoning Loop has the previous result set in conversation context, so it can reformat in place. (Same conversation-context behavior you saw in Use Case #2's *"What are all the details on them?"* prompt — but here it carries through the new orchestrator as well.)
 
+    > [!NOTE]
+    > **What you may see today vs. the steady-state behavior described above.** The Reasoning Loop is actively evolving, and at the moment a column you ask for that wasn't in the previous query's `SELECT` (like `Account Number`) may cause the planner to issue a second `read_query` to fetch that field — you'll see the extra `read_query` step in the train of thought. That's an implementation snapshot, not a contradiction of the lab — the feature is moving toward the steady-state behavior described in this step, where reformat-from-context is the default for any follow-up that asks for table changes. Treat the wording above as the intended behavior; if your turn shows a re-query, you're seeing the current implementation, not a misconfiguration on your end.
+
     > [!TIP]
     > **Account number is just one example — you can ask for any field.** Try requesting other columns from the Account table that you're curious about: city, state, primary contact, annual revenue, industry, last modified date, anything that lives on the Account record. Each ask is a chance to confirm the planner is reformatting from context and **not** re-issuing a Dataverse query. Watching the Test pane during these turns is the cheapest way to internalize what *"Reasoning Loop using prior context"* actually feels like in practice.
 
