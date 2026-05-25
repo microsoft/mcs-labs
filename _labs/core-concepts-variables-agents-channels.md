@@ -174,12 +174,14 @@ Understand variable types, properties, scope, and behavior by exploring the exis
     > [!NOTE]
     > If you don't have this topic, you can explore variables in any existing topic that has question nodes.
 
+    > [!NOTE]
+    > When you open a topic that was created via **Add from description with Copilot**, an **Edit with Copilot** side panel opens by default. You don't need it for this exploration use case — close it via the **X** in its upper-right corner to get a clear view of the canvas.
+
 #### Review Existing Variables
 
-1. Find the **Question** node where the user's email address is collected.
+1. Find the first **Question** node (the one where the user's email address is collected). Click the node so the details panel opens on the right side of the canvas — the auto-created variable is shown there, not on the node card itself. (The node card displays the placeholder text **Select a variable** under **Save user response as**, which is misleading — the variable is bound; you just have to open the details panel to see its name and type.)
 
-
-1. Look for the **Save response as**  section. Notice that Copilot Studio automatically created a variable to store the email address when the question node was built.
+1. Look for the **Save user response as** section. Notice that Copilot Studio automatically created a variable (e.g. `EmailAddress`) to store the email address when the question node was built.
 
 1. Note the variable name (likely something like `EmailAddress` or `userEmail`).
 
@@ -316,6 +318,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 1. Enter  **CARE Prompt Guidance** in the **Name** field.
 
 1. Input the following for the **Description**
+
     ```
     This agent provides information on the CARE Prompt guidance.
     ```
@@ -325,9 +328,13 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 1. Select  **Save** to initialize the child agent.
 
+    > [!NOTE]
+    > You may see a **Save agent with errors?** confirmation dialog with the message *"This agent has (1) error"*. This is expected — the error is the missing **Instructions**, which you'll add in the next section. Click **Save** in the confirmation to proceed.
+
 #### Configure Child Agent Instructions
 
 1. Once save of the child agent has completed, input the following into the **Instructions** section.
+
     ```
     This agent should help users with understanding information about the prompt guidance framework and how they can leverage it to make their agents better.
     ```
@@ -481,12 +488,13 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 1. In your Copilot Studio agent, select **Channels** in the top navigation bar.
 
 1. Review the Channels overview page to see available channel options:
-   - **Microsoft Teams**: Native Teams integration
+   - **Microsoft 365 and Microsoft Teams**: Native Teams + Microsoft 365 Copilot integration (this is the tile you'll deploy to later in this use case)
    - **Demo website**: Test website for quick agent testing
-   - **Custom website**: Embeddable web widget for your sites
-   - **Mobile app**: iOS and Android integration
-   - **Custom channel**: Direct Line API for custom applications
-   - Additional channels may include Facebook, Slack, etc.
+   - **SharePoint**: Deploy as a SharePoint-grounded agent
+   - **Web app**: Embeddable web widget for your sites
+   - **Native app**: iOS and Android integration
+   - **Direct Line Speech** / **Email** / **Dynamics 365 Customer Service** / **Genesys** / **LivePerson**: Specialized service channels
+   - Social / messaging: **Facebook**, **WhatsApp**, **Slack**, **Telegram**, **Twilio**, **Line**, **GroupMe**
 
     > [!NOTE]
     > Available channels depend on your Copilot Studio license and environment settings. Some channels require additional configuration or premium licenses.
