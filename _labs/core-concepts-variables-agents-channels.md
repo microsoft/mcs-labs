@@ -328,9 +328,6 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 1. Select  **Save** to initialize the child agent.
 
-    > [!NOTE]
-    > You may see a **Save agent with errors?** confirmation dialog with the message *"This agent has (1) error"*. This is expected — the error is the missing **Instructions**, which you'll add in the next section. Click **Save** in the confirmation to proceed.
-
 #### Configure Child Agent Instructions
 
 1. Once save of the child agent has completed, input the following into the **Instructions** section.
