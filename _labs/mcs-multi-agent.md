@@ -194,9 +194,9 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 1. To make sure that our agent doesn't use model knowledge, we want to turn off some features. Select **Settings** in the upper right corner.
 
-1. Scroll to the bottom of the list of settings on the **Generative AI** settings screen and turn **Off** both **Use general knowledge** and **Use information from the Web**.
+1. Scroll to the bottom of the list of settings on the **Generative AI** settings screen and turn **Off** both **Allow ungrounded responses** and **Use information from the Web**.
 
-    ![Turn off Model and Web Knowledge](images/image-2.png)
+    ![Turn off ungrounded responses and Web Knowledge](images/image-2.png)
 
 1. Select **Save** and then select the **X** in the upper right corner of the settings page to close it.
 
@@ -500,7 +500,7 @@ Confirm the environment is ready to host a connected agent for account and conta
 1. Select **Quick Find Active Accounts** option from the list of Views
 
 1. Select **View Column** to verify the following list of columns are in the view, you may have to scroll to see all of the included columns:
-   - Address1: State or Providence
+   - Address 1: State/Province
    - Address1: Postal Code
    - Address1: City
    - Annual Revenue
@@ -511,7 +511,7 @@ Confirm the environment is ready to host a connected agent for account and conta
     ![Account View](images/image-20.png)
 
 1. Add the ability to search on certain fields by making sure that the following items are in the **Find by** on the bottom right. Select the **Edit find table columns** option to check:
-   - Address1: State or Providence
+   - Address 1: State/Province
    - Address1: Postal Code
    - Address1: City
 
