@@ -500,7 +500,7 @@ Confirm the environment is ready to host a connected agent for account and conta
 1. Select **Quick Find Active Accounts** option from the list of Views
 
 1. Select **View Column** to verify the following list of columns are in the view, you may have to scroll to see all of the included columns:
-   - Address1: State or Providence
+   - Address 1: State/Province
    - Address1: Postal Code
    - Address1: City
    - Annual Revenue
@@ -511,7 +511,7 @@ Confirm the environment is ready to host a connected agent for account and conta
     ![Account View](images/image-20.png)
 
 1. Add the ability to search on certain fields by making sure that the following items are in the **Find by** on the bottom right. Select the **Edit find table columns** option to check:
-   - Address1: State or Providence
+   - Address 1: State/Province
    - Address1: Postal Code
    - Address1: City
 
