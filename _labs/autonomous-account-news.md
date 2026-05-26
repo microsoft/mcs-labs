@@ -147,9 +147,9 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
   1. Select **Agents** in the left navigation.
 
-  1. Select **Create agent from blank** in upper right corner.
+  1. Select **Create blank agent** in upper right corner.
 
-  1. Select **Edit** in the Details section and change  the Name to `Account News Assistant` and then select **Save**.
+  1. In the **Name your agent** dialog that opens, enter `Account News Assistant` in the **Enter agent name** textbox and select **Create**.
 
 #### Adding a Recurring Trigger
 
@@ -158,7 +158,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
   > [!TIP]
   > The triggers section may not be immediately available as it depends on background processes started when the agent is created.  This should take no more than a minute to complete.
 
-  1.  Select **Add a new Trigger** and select **Recurrence** and then select **Next**
+  1.  Select **Add trigger**, select **Recurrence**, and then select **Next**
 
   > [!TIP]
   > Please be aware that the triggers wizard can take a few moments to move between screens.
@@ -203,11 +203,11 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 #### Step-by-step instructions
 
-1. Go to **Tools** in the top-level menu.
+1. Go to the agent's **Tools** tab (in the agent's top tab strip alongside Overview, Knowledge, Topics, etc.).
 
 1. Select **+ Add a tool**.
 
-1. Search and select `List rows from selected environment`.
+1. Search for `List rows` and select the **List rows from selected environment** action (under **Microsoft Dataverse**, displayed as *List rows from a table in a Power Platform environment*).
 
 1. Choose an existing Dataverse connection or add a new one (select Oauth as authentication type).
 
@@ -239,7 +239,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
       - **Value**: `Opportunities`
   
      Select **Add input** and select **Filter rows**.
-     - **Fill using**: `Set a custom value`.
+     - **Fill using**: `Custom value`.
      - **Value**: 
 
         ```
@@ -282,7 +282,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 1. In the left menu, select **Generative AI**.
 
-1. Turn **On** the toggle for **Deep Reasoning**.
+1. Turn **On** the toggle for **Deep reasoning (preview)**.
 
     > [!TIP]
     > Deep reasoning is currently unavailable in the UI in certain regions.  If you do not see the Deep Reasoning toggle in the settings area, try accessing the agent via https://copilotstudio.preview.microsoft.com
@@ -669,7 +669,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 1. Now that your agent has a preloaded HTML template, configure an Outlook email tool to deliver the report.
 
-1. Go to **Tools** in the top-level menu.
+1. Go to the agent's **Tools** tab (in the agent's top tab strip alongside Overview, Knowledge, Topics, etc.).
 
 1. Select **+ Add a tool**.
 
