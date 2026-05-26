@@ -198,9 +198,6 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
     ![Turn off ungrounded responses and Web Knowledge](images/image-2.png)
 
-    > [!NOTE]
-    > The **Allow ungrounded responses** toggle was previously labeled **Use general knowledge** — older lab screenshots or referrals may still use that wording. The behavior is the same: turning it off restricts the model to grounded responses only (no model-internal knowledge).
-
 1. Select **Save** and then select the **X** in the upper right corner of the settings page to close it.
 
     > [!TIP]
