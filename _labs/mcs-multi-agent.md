@@ -194,9 +194,12 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 1. To make sure that our agent doesn't use model knowledge, we want to turn off some features. Select **Settings** in the upper right corner.
 
-1. Scroll to the bottom of the list of settings on the **Generative AI** settings screen and turn **Off** both **Use general knowledge** and **Use information from the Web**.
+1. Scroll to the bottom of the list of settings on the **Generative AI** settings screen and turn **Off** both **Allow ungrounded responses** and **Use information from the Web**.
 
-    ![Turn off Model and Web Knowledge](images/image-2.png)
+    ![Turn off ungrounded responses and Web Knowledge](images/image-2.png)
+
+    > [!NOTE]
+    > The **Allow ungrounded responses** toggle was previously labeled **Use general knowledge** — older lab screenshots or referrals may still use that wording. The behavior is the same: turning it off restricts the model to grounded responses only (no model-internal knowledge).
 
 1. Select **Save** and then select the **X** in the upper right corner of the settings page to close it.
 
