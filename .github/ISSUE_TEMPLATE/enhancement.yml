@@ -48,3 +48,15 @@ body:
       description: Describe the improvement you'd like to see
     validations:
       required: true
+  - type: textarea
+    id: attachment
+    attributes:
+      label: Content Update File
+      description: >-
+        Drag and drop or paste a file (e.g., PowerPoint presentation) containing
+        the content update you'd like applied. GitHub supports attaching files up
+        to 25 MB. For larger files, upload to SharePoint or OneDrive and paste
+        the sharing link here instead.
+      placeholder: Drag and drop your file here
+    validations:
+      required: false
