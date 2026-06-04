@@ -46,11 +46,7 @@ header:
       <details class="tracker-newissue">
         <summary>+ New item</summary>
         <ul data-tracker-templates>
-          <li><a href="https://github.com/microsoft/mcs-labs/issues/new?template=bug_report.yml">Bug</a></li>
-          <li><a href="https://github.com/microsoft/mcs-labs/issues/new?template=new_lab.yml">New Lab</a></li>
-          <li><a href="https://github.com/microsoft/mcs-labs/issues/new?template=enhancement.yml">Content Update</a></li>
-          <li><a href="https://github.com/microsoft/mcs-labs/issues/new?template=portal_enhancement.yml">Portal Enhancement</a></li>
-          <li><a href="https://github.com/microsoft/mcs-labs/issues/new?template=bootcamp_feature.yml">Bootcamp Feature</a></li>
+          <li class="tracker-templates-loading">Loading…</li>
         </ul>
       </details>
     </div>

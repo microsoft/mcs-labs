@@ -1,0 +1,77 @@
+name: New Module Proposal
+description: Propose a new module that introduces a concept — modules are delivered before labs and can include demos
+labels: ["type: new-module", "status: triage"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Module title
+      description: A short, descriptive title for the module
+      placeholder: "e.g., Introduction to Generative Orchestration"
+    validations:
+      required: true
+  - type: textarea
+    id: concept
+    attributes:
+      label: What concept does this module introduce?
+      description: Describe the concept or topic this module will teach. What should the learner understand after completing it?
+    validations:
+      required: true
+  - type: dropdown
+    id: difficulty
+    attributes:
+      label: Difficulty
+      options:
+        - Beginner
+        - Intermediate
+        - Advanced
+    validations:
+      required: true
+  - type: textarea
+    id: demos
+    attributes:
+      label: Demos included
+      description: Will this module include demos? If so, briefly describe them. Demo content will be in the attached slide deck.
+      placeholder: |
+        - Demo 1: Show how to configure ...
+        - Demo 2: Walk through ...
+  - type: dropdown
+    id: has_lab
+    attributes:
+      label: Should a hands-on lab accompany this module?
+      description: Modules introduce concepts; labs let learners practice them. Select whether a lab should follow this module.
+      options:
+        - "Yes — a lab should be created for this module"
+        - "No — this module is concept-only for now"
+    validations:
+      required: true
+  - type: textarea
+    id: lab_description
+    attributes:
+      label: Lab outline (if applicable)
+      description: If a lab should accompany this module, briefly describe what the learner would build or practice
+      placeholder: "e.g., Build an autonomous agent that monitors account news and sends weekly summaries"
+  - type: textarea
+    id: prerequisites
+    attributes:
+      label: Prerequisites
+      description: What does the learner need to know or have before this module?
+      placeholder: |
+        - Familiarity with Copilot Studio basics
+        - Completed Module: Introduction to Agent Knowledge
+        - ...
+  - type: textarea
+    id: duration
+    attributes:
+      label: Estimated duration
+      description: How long should this module take to deliver (excluding lab time)?
+      placeholder: "e.g., 20 minutes, 45 minutes"
+  - type: textarea
+    id: deck
+    attributes:
+      label: Slide deck
+      description: >-
+        Drag and drop or paste the PowerPoint deck for this module. GitHub supports
+        files up to 25 MB. For larger files, upload to SharePoint or OneDrive and
+        paste the sharing link here instead.
+      placeholder: Drag and drop your slide deck here

@@ -134,9 +134,13 @@
 }
 .tracker-oldest-cat.cat-bug { background: #d73a4a; }
 .tracker-oldest-cat.cat-newLab { background: #0e8a16; }
+.tracker-oldest-cat.cat-newModule { background: #a371f7; }
 .tracker-oldest-cat.cat-contentUpdate { background: #8957e5; }
 .tracker-oldest-cat.cat-portalEnhancement { background: #1d76db; }
 .tracker-oldest-cat.cat-bootcampFeature { background: #d4a72c; }
+.tracker-oldest-cat.cat-documentation { background: #0075ca; }
+.tracker-oldest-cat.cat-infrastructure { background: #7057ff; }
+.tracker-oldest-cat.cat-feature { background: #2da44e; }
 .tracker-oldest-title { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .tracker-oldest-age { color: var(--color-fg-muted); font-variant-numeric: tabular-nums; min-width: 40px; text-align: right; flex: 0 0 auto; }
 .tracker-oldest-age.old { color: #d73a4a; font-weight: 600; }
@@ -165,9 +169,13 @@
 }
 .tracker-card.cat-bug { border-left-color: #d73a4a; }
 .tracker-card.cat-newLab { border-left-color: #0e8a16; }
+.tracker-card.cat-newModule { border-left-color: #a371f7; }
 .tracker-card.cat-contentUpdate { border-left-color: #8957e5; }
 .tracker-card.cat-portalEnhancement { border-left-color: #1d76db; }
 .tracker-card.cat-bootcampFeature { border-left-color: #d4a72c; }
+.tracker-card.cat-documentation { border-left-color: #0075ca; }
+.tracker-card.cat-infrastructure { border-left-color: #7057ff; }
+.tracker-card.cat-feature { border-left-color: #2da44e; }
 .tracker-card-meta { font-size: 0.7em; color: var(--color-fg-muted); margin-top: 0.2em; }
 
 @media (max-width: 768px) {
