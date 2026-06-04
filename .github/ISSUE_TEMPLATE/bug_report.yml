@@ -1,6 +1,6 @@
 name: Bug Report
 description: Report a problem with a lab
-labels: ["type: bug"]
+labels: ["type: bug", "status: triage", "lab"]
 body:
   - type: input
     id: lab

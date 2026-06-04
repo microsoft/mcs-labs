@@ -1,6 +1,6 @@
 name: Portal Enhancements
 description: Report a bug, visual issue, or improvement suggestion for the labs site
-labels: ["portal-enhancement"]
+labels: ["type: portal-enhancement", "status: triage", "portal"]
 body:
   - type: dropdown
     id: type

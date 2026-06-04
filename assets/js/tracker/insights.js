@@ -1,10 +1,12 @@
 const CAT_COLORS = {
-  bug: '#d73a4a', newLab: '#0e8a16', contentUpdate: '#8957e5',
+  bug: '#d73a4a', newLab: '#0e8a16', newModule: '#a371f7', contentUpdate: '#8957e5',
   portalEnhancement: '#1d76db', bootcampFeature: '#d4a72c',
+  documentation: '#0075ca', infrastructure: '#7057ff', feature: '#2da44e',
 };
 const CAT_LABELS = {
-  bug: 'Bugs', newLab: 'New Labs', contentUpdate: 'Content',
+  bug: 'Bugs', newLab: 'New Labs', newModule: 'New Modules', contentUpdate: 'Content',
   portalEnhancement: 'Portal Enh', bootcampFeature: 'Bootcamp',
+  documentation: 'Docs', infrastructure: 'Infra', feature: 'Features',
 };
 
 export function render(data, { rangeDays }) {

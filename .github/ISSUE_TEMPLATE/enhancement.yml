@@ -1,6 +1,6 @@
 name: Enhancement
 description: Suggest an improvement to an existing lab or to the site
-labels: ["type: lab-update"]
+labels: ["type: lab-update", "status: triage"]
 body:
   - type: dropdown
     id: lab
