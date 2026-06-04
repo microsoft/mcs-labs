@@ -1,6 +1,6 @@
 name: Bootcamp Feature
 description: Propose a change to the bootcamp itself — process, tooling, or how the bootcamp is managed
-labels: ["type: bootcamp-feature", "status: triage"]
+labels: ["type: bootcamp-feature", "status: triage", "bootcamp"]
 body:
   - type: dropdown
     id: area

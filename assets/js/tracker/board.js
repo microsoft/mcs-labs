@@ -1,10 +1,7 @@
 const CAT_LABELS = {
-  bug: 'Bugs', newLab: 'New Labs', contentUpdate: 'Content',
+  bug: 'Bugs', newLab: 'New Labs', newModule: 'New Modules', contentUpdate: 'Content',
   portalEnhancement: 'Portal Enh', bootcampFeature: 'Bootcamp',
-};
-const CAT_TEMPLATE = {
-  bug: 'bug_report.yml', newLab: 'new_lab.yml', contentUpdate: 'enhancement.yml',
-  portalEnhancement: 'portal_enhancement.yml', bootcampFeature: 'bootcamp_feature.yml',
+  documentation: 'Docs', infrastructure: 'Infra', feature: 'Features',
 };
 const COLUMNS = [['triage', 'Triage'], ['backlog', 'Backlog'], ['inProgress', 'In Progress'], ['done', 'Done']];
 
@@ -32,9 +29,7 @@ function renderFilters(data) {
 }
 
 function smartUrl() {
-  const base = 'https://github.com/microsoft/mcs-labs/issues/new';
-  if (_state.activeCategory === 'all') return base + '/choose';
-  return `${base}?template=${CAT_TEMPLATE[_state.activeCategory]}`;
+  return 'https://github.com/microsoft/mcs-labs/issues/new/choose';
 }
 
 function renderKanban(data) {

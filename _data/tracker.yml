@@ -5,3 +5,19 @@ repo:
 
 snapshot:
   staleThresholdMs: 1800000 # 30 minutes — show "snapshot is N min old" indicator past this
+
+# Issue templates shown in the "+ New item" menu.
+# Keep in sync with .github/ISSUE_TEMPLATE/*.yml files.
+templates:
+  - label: "Bug Report"
+    file: "bug_report.yml"
+  - label: "New Lab Proposal"
+    file: "new_lab.yml"
+  - label: "New Module Proposal"
+    file: "new_module.yml"
+  - label: "Enhancement"
+    file: "enhancement.yml"
+  - label: "Portal Enhancement"
+    file: "portal_enhancement.yml"
+  - label: "Bootcamp Feature"
+    file: "bootcamp_feature.yml"

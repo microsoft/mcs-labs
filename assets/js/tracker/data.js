@@ -15,9 +15,13 @@ let _data = null;
 const LABEL_TO_CATEGORY = [
   ['type: bug', 'bug'],
   ['type: new-lab', 'newLab'],
+  ['type: new-module', 'newModule'],
   ['type: lab-update', 'contentUpdate'],
-  ['portal-enhancement', 'portalEnhancement'],
+  ['type: portal-enhancement', 'portalEnhancement'],
   ['type: bootcamp-feature', 'bootcampFeature'],
+  ['type: documentation', 'documentation'],
+  ['type: infrastructure', 'infrastructure'],
+  ['type: feature', 'feature'],
 ];
 
 const STATUS_LABELS = {
@@ -48,7 +52,7 @@ function deriveStatus(issue, windowDays = 90) {
 
 function shape(rawIssues) {
   const now = Date.now();
-  const cats = ['bug', 'newLab', 'contentUpdate', 'portalEnhancement', 'bootcampFeature'];
+  const cats = ['bug', 'newLab', 'newModule', 'contentUpdate', 'portalEnhancement', 'bootcampFeature', 'documentation', 'infrastructure', 'feature'];
   const categories = Object.fromEntries(cats.map(c => [c, { open: 0, triage: 0, backlog: 0, inProgress: 0, done30d: 0 }]));
 
   const issues = [];

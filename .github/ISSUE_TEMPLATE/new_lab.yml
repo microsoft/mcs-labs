@@ -1,6 +1,6 @@
 name: New Lab Proposal
 description: Propose a new lab for the collection
-labels: ["type: new-lab"]
+labels: ["type: new-lab", "status: triage"]
 body:
   - type: input
     id: title
