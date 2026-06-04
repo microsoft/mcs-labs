@@ -19,17 +19,12 @@ function renderFilters(data) {
   const el = document.querySelector('[data-tracker-filters]');
   el.innerHTML = `
     ${chips.map(([k, label, n]) => `<button class="tracker-chip ${k === _state.activeCategory ? 'is-active' : ''}" data-cat="${k}">${label} · ${n}</button>`).join('')}
-    <a class="tracker-chip tracker-newissue-smart" data-newissue-smart href="${smartUrl()}" target="_blank" rel="noopener">+ New item</a>
   `;
   el.querySelectorAll('[data-cat]').forEach(btn => btn.addEventListener('click', () => {
     _state.activeCategory = btn.getAttribute('data-cat');
     renderFilters(data);
     renderKanban(data);
   }));
-}
-
-function smartUrl() {
-  return 'https://github.com/microsoft/mcs-labs/issues/new/choose';
 }
 
 function renderKanban(data) {
