@@ -184,26 +184,3 @@ export function isStale() {
 export function dataSource() {
   return _data?.source ?? 'unknown';
 }
-
-// Fetch issue templates from the GitHub API and populate the "+ New item" dropdown
-export async function loadTemplates() {
-  const el = document.querySelector('[data-tracker-templates]');
-  if (!el) return;
-  try {
-    const url = `https://api.github.com/repos/${REPO.owner}/${REPO.name}/contents/.github/ISSUE_TEMPLATE`;
-    const res = await fetch(url, { headers: { Accept: 'application/vnd.github+json' } });
-    if (!res.ok) throw new Error(`GitHub API ${res.status}`);
-    const files = await res.json();
-    const templates = files
-      .filter(f => f.name.endsWith('.yml') && f.name !== 'config.yml')
-      .map(f => {
-        const label = f.name.replace('.yml', '').replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
-        return `<li><a href="https://github.com/${REPO.owner}/${REPO.name}/issues/new?template=${f.name}" target="_blank" rel="noopener">${label}</a></li>`;
-      });
-    el.innerHTML = templates.join('');
-  } catch (e) {
-    // Fallback: link to the template chooser page
-    console.warn('Tracker: failed to load issue templates', e);
-    el.innerHTML = `<li><a href="https://github.com/${REPO.owner}/${REPO.name}/issues/new/choose" target="_blank" rel="noopener">Create issue…</a></li>`;
-  }
-}

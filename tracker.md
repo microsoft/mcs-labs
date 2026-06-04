@@ -46,7 +46,9 @@ header:
       <details class="tracker-newissue">
         <summary>+ New item</summary>
         <ul data-tracker-templates>
-          <li class="tracker-templates-loading">Loading…</li>
+          {% for tpl in site.data.tracker.templates %}
+          <li><a href="https://github.com/{{ site.data.tracker.repo.owner }}/{{ site.data.tracker.repo.name }}/issues/new?template={{ tpl.file }}">{{ tpl.label }}</a></li>
+          {% endfor %}
         </ul>
       </details>
     </div>
