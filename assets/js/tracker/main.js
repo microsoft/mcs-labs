@@ -2,7 +2,7 @@
 layout: null
 permalink: /assets/js/tracker/main.js
 ---
-import { load, get, isStale, snapshotAgeMs, dataSource, loadTemplates } from './data.js';
+import { load, get, isStale, snapshotAgeMs, dataSource } from './data.js';
 import { render as renderInsights } from './insights.js';
 import { render as renderBoard } from './board.js';
 
@@ -30,8 +30,6 @@ async function init() {
   document.querySelectorAll('[data-tab]').forEach(btn => btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab'))));
 
   document.querySelector('[data-tracker-refresh]')?.addEventListener('click', refresh);
-
-  loadTemplates();
 
   // Re-tick the timestamp every 30s so it doesn't grow stale on the screen while the tab sits open.
   setInterval(updateTimestamp, 30000);
