@@ -68,6 +68,17 @@ layout: single
 {% endfor %}
 
 <div class="lab-header">
+  {%- comment -%}Show parent module link if this lab has one{%- endcomment -%}
+  {%- if page.module -%}
+    {%- assign parent_mod = site.modules | where: "slug", page.module | first -%}
+    {%- if parent_mod -%}
+      <div class="lab-module-link" style="font-size: 0.78em; margin-bottom: 0.5em;">
+        <a href="{{ parent_mod.url | relative_url }}" style="color: var(--color-accent); text-decoration: none; font-weight: 600;">
+          ← Part of: {{ parent_mod.title }}
+        </a>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
   <h1>{{ page.title }}</h1>
   {% if page.description %}
   <p class="lab-header-desc">{{ page.description | strip_html }}</p>

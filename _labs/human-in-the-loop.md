@@ -1,5 +1,6 @@
 ---
 layout: lab
+module: human-in-the-loop
 title: "Expense Claims Agent with Approvals (Human-in-the-Loop)"
 order: 240
 duration: 45

@@ -1,5 +1,6 @@
 ---
 layout: lab
+module: component-collections
 title: "Using Component Collections in Copilot Studio"
 order: 260
 duration: 45

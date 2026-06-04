@@ -1,5 +1,6 @@
 ---
 layout: lab
+module: core-concepts-part2
 title: "Master Variables, Multi-Agent Architectures, and Channel Deployment"
 order: 175
 duration: 30

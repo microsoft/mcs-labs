@@ -1,4 +1,5 @@
 ---
+module: guildhall-custom-mcp
 title: "Quest: Build and Connect Your Guild's Custom MCP Server"
 description: "*Greetings, brave developer! The Adventurers' Guild seeks your expertise in establishing a mystical connection between the ancient Guild Hall and the modern realm of Copilot Studio. Your quest: forge a custom Model Context Protocol (MCP) server and bind it to an intelligent agent that can tap into the Guild's treasures.*"
 order: 999

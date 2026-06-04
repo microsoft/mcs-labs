@@ -61,58 +61,6 @@ classes: wide
   border-bottom: 2px solid var(--color-border-subtle);
 }
 
-.team-grid {
-  display: flex;
-  gap: 2.5em;
-  margin: 0 0 2.5em;
-  padding: 0;
-  list-style: none;
-  flex-wrap: wrap;
-}
-
-.team-card {
-  text-align: center;
-  transition: transform 0.2s ease;
-}
-.team-card:hover {
-  transform: translateY(-2px);
-}
-.team-card a {
-  text-decoration: none;
-  color: inherit;
-  display: block;
-}
-
-.team-avatar {
-  width: 72px !important;
-  height: 72px !important;
-  border-radius: 50% !important;
-  object-fit: cover;
-  margin: 0 auto 0.6em;
-  display: block;
-  border: none !important;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.08);
-  transition: box-shadow 0.2s ease;
-}
-.team-card:hover .team-avatar {
-  box-shadow: 0 4px 20px var(--color-accent-tint-3);
-}
-
-.team-name {
-  font-size: 0.82em;
-  font-weight: 600;
-  color: var(--color-fg-strong);
-  margin: 0;
-  letter-spacing: -0.01em;
-}
-
-.team-role {
-  font-size: 0.72em;
-  color: var(--color-fg-disabled);
-  margin: 0.15em 0 0;
-  line-height: 1.3;
-}
-
 .about-content {
   max-width: 720px;
   margin: 0 0 2.5em;
@@ -126,28 +74,28 @@ classes: wide
 </style>
 
 <div class="about-hero">
-  <h2>About these labs</h2>
-  <p>MCS Labs is built and maintained by a small team within the Copilot Acceleration Team (CAT). We create hands-on, guided labs so customers and partners can learn Copilot Studio by building real agents.</p>
+  <h2>About MCS Labs</h2>
+  <p>MCS Labs is a collection of hands-on training content created and maintained by the Copilot Acceleration Team (CAT) and the CAPE organization. The labs, modules, and events on this site are designed for instructor-led training delivered through our event training tenant.</p>
 </div>
 
-<h2 class="about-section-title">Built by</h2>
-
-<ul class="team-grid">
-  {% for member in site.data.team %}
-  <li class="team-card">
-    <a href="https://github.com/{{ member.github }}" target="_blank" rel="noopener">
-      <img class="team-avatar" src="https://github.com/{{ member.github }}.png?size=128" alt="">
-      <div class="team-name">{{ member.name }}</div>
-    </a>
-    {% if member.role != "" %}<div class="team-role">{{ member.role }}</div>{% endif %}
-  </li>
-  {% endfor %}
-</ul>
-
-<h2 class="about-section-title">How the labs work</h2>
+<h2 class="about-section-title">Important — Training Tenant Required</h2>
 
 <div class="about-content">
-  <p>Each lab walks you through a real-world scenario — from creating your first agent to deploying autonomous AI solutions. Labs are organized by difficulty level (100–300) and grouped into events for instructor-led sessions and self-paced learning.</p>
+  <p>These labs are built to be used within our dedicated event training tenant. To complete them, you will need an account provisioned in that tenant. Many of the key resources, instructions, and artifacts needed to work through a lab are available in the GitHub repository for each lab, but the labs themselves were designed for instructor-led events delivered by the CAT or CAPE organization.</p>
 
-  <p>Whether you're a business user building your first agent or a developer integrating advanced connectors, there's a path for you. Browse <a href="{{ '/labs/' | relative_url }}">all labs</a> or pick an <a href="{{ '/events/' | relative_url }}">event</a> to get started.</p>
+  <p>You are welcome to explore the content and attempt the labs on your own, however please be aware that this content was not designed to be consumed in a self-service manner. Some steps may require environment-specific configuration or resources that are only available during scheduled training events.</p>
+
+  <p>If you are interested in finding out more about CAT-delivered events, visit the <a href="https://microsoft.github.io/cat/programs/architecture-bootcamp.html" target="_blank" rel="noopener">CAT Architecture Bootcamp</a> page.</p>
+</div>
+
+<h2 class="about-section-title">How the content is organized</h2>
+
+<div class="about-content">
+  <p><strong>Modules</strong> are the core building blocks — each one corresponds to a presentation deck and optionally includes a hands-on lab. Modules are organized by difficulty level (100–300).</p>
+
+  <p><strong>Events</strong> are curated, scheduled training experiences with a fixed agenda of modules. They are consistently delivered and follow a structured format.</p>
+
+  <p><strong>Workshops</strong> are less formal and are typically delivered on-demand. They also follow an agenda but are not as rigidly structured as events.</p>
+
+  <p>Browse <a href="{{ '/modules/' | relative_url }}">all modules</a>, pick an <a href="{{ '/events/' | relative_url }}">event</a>, or explore a <a href="{{ '/workshops/' | relative_url }}">workshop</a> to learn more.</p>
 </div>

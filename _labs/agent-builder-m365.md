@@ -1,5 +1,6 @@
 ---
 layout: lab
+module: agent-builder
 title: "Build Progressive AI Assistants with Agent Builder in Microsoft 365"
 order: 140
 duration: 30

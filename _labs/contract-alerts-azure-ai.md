@@ -1,4 +1,5 @@
 ---
+module: contract-alerts-azure-ai
 title: "Proactive Contract Alerts in Teams with Azure AI Search and Speech-to-Text - Build Intelligent Event-Driven Agents"
 description: "Configure Copilot Studio agents to proactively notify users, search contract documents, and transcribe audio files using Azure AI services."
 order: 999

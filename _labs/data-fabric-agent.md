@@ -1,4 +1,5 @@
 ---
+module: data-fabric-agent
 title: "Connecting Fabric Data Agents with Microsoft Copilot Studio"
 description: "Build intelligent agent-to-agent communication between Microsoft Fabric Data Agents and Copilot Studio to unlock powerful e-commerce analytics capabilities."
 order: 999

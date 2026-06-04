@@ -1,5 +1,6 @@
 ---
 layout: lab
+module: multi-agent
 title: "Using Multi-Agent in Copilot Studio"
 order: 250
 duration: 30

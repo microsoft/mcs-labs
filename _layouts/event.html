@@ -280,9 +280,10 @@ layout: single
   {%- assign schedule = page.labs -%}
 {%- endif -%}
 
-{%- comment -%}Compute lab-only totals for the hero stats.{%- endcomment -%}
+{%- comment -%}Compute totals for the hero stats (labs + modules).{%- endcomment -%}
 {%- assign total_duration = 0 -%}
 {%- assign lab_count = 0 -%}
+{%- assign module_count = 0 -%}
 {%- assign levels_list = "" -%}
 {%- for item in schedule -%}
   {%- if has_agenda -%}
@@ -295,6 +296,21 @@ layout: single
           {%- assign total_duration = total_duration | plus: lab.duration -%}
         {%- endif -%}
         {%- assign levels_list = levels_list | append: lab.difficulty | append: "," -%}
+      {%- endif -%}
+    {%- elsif item.type == "module" -%}
+      {%- assign mod = site.modules | where: "slug", item.slug | first -%}
+      {%- if mod -%}
+        {%- assign module_count = module_count | plus: 1 -%}
+        {%- assign mod_dur = item.duration | default: mod.duration -%}
+        {%- assign total_duration = total_duration | plus: mod_dur -%}
+        {%- if mod.lab -%}
+          {%- assign mod_lab = site.labs | where: "slug", mod.lab | first -%}
+          {%- if mod_lab -%}
+            {%- assign lab_count = lab_count | plus: 1 -%}
+            {%- assign total_duration = total_duration | plus: mod_lab.duration -%}
+            {%- assign levels_list = levels_list | append: mod_lab.difficulty | append: "," -%}
+          {%- endif -%}
+        {%- endif -%}
       {%- endif -%}
     {%- endif -%}
   {%- else -%}
@@ -314,6 +330,7 @@ layout: single
   <p>{{ page.description }}</p>
   <a href="https://github.com/microsoft/mcs-labs/issues/new?template=bug_report.yml&type=Bug&labels=lab&title=%5B{{ page.event_id }}%5D+&lab={{ page.event_id }}" target="_blank" rel="noopener" style="display: inline-block; margin-top: 1em; font-size: 0.78em; font-weight: 600; color: rgba(255,255,255,0.7); text-decoration: none; border: 1px solid rgba(255,255,255,0.25); padding: 0.3em 0.8em; border-radius: 4px;">Report an issue</a>
   <ul class="ws-stats">
+    {% if module_count > 0 %}<li><strong>{{ module_count }}</strong><span>Modules</span></li>{% endif %}
     <li><strong>{{ lab_count }}</strong><span>Labs</span></li>
     <li><strong>~{{ total_hours }}h</strong><span>Content</span></li>
     <li>
@@ -349,6 +366,40 @@ layout: single
         <div class="ws-agenda-meta">
           <span class="ws-agenda-pill ws-pill-level-{{ lab.difficulty }}">Level {{ lab.difficulty }}</span>
           <span class="ws-agenda-pill ws-pill-duration">{% if item.duration %}{{ item.duration }}{% else %}{{ lab.duration }}{% endif %} min</span>
+        </div>
+      </li>
+    {%- endif -%}
+
+  {%- elsif item_type == "module" -%}
+    {%- assign mod = site.modules | where: "slug", item.slug | first -%}
+    {%- if mod -%}
+      {%- assign display_title = item.title | default: mod.title -%}
+      {%- assign mod_duration = item.duration | default: mod.duration -%}
+      <li class="ws-agenda-row ws-agenda-row--session">
+        <div class="ws-agenda-time">{% if item.time %}{{ item.time }}{% else %}&nbsp;{% endif %}</div>
+        <div class="ws-agenda-body">
+          <div class="ws-agenda-title">
+            <a href="{{ mod.url | relative_url }}?event={{ page.event_id }}">{% if item.label %}{{ item.label }}: {% endif %}{{ display_title }}</a>
+          </div>
+          {% if mod.description %}<p class="ws-agenda-desc">{{ mod.description }}</p>{% endif %}
+          {% if item.speaker %}<div class="ws-agenda-speaker">— {{ item.speaker }}</div>{% endif %}
+          {%- assign mod_slides = item.slides | default: mod.slides -%}
+          {% if mod_slides %}
+            {%- assign slides_href = mod_slides -%}
+            {%- unless slides_href contains "://" -%}
+              {%- assign slides_path = slides_href | remove_first: "/" -%}
+              {%- assign slides_href = "https://github.com/microsoft/mcs-labs/raw/main/" | append: slides_path -%}
+            {%- endunless -%}
+            <a class="ws-agenda-slides" href="{{ slides_href }}" download>
+              <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
+              </svg>
+              Slides
+            </a>
+          {% endif %}
+        </div>
+        <div class="ws-agenda-meta">
+          {% if mod_duration %}<span class="ws-agenda-pill ws-pill-duration">{{ mod_duration }} min</span>{% endif %}
         </div>
       </li>
     {%- endif -%}

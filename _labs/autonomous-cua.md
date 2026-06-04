@@ -1,4 +1,5 @@
 ---
+module: autonomous-cua
 title: "Autonomous Portfolio Lookup Agent with Computer-Using Agents (CUA)"
 description: "Build an autonomous Copilot Studio agent that retrieves financial portfolio data from internal legacy systems that lack API connectivity."
 order: 21

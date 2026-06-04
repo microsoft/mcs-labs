@@ -1,4 +1,5 @@
 ---
+module: pipelines-and-source-control
 title: "Deploy with confidence: Power Platform pipelines & ALM"
 description: "Master the deployment of your Microsoft Copilot Studio agents across environments using Power Platform pipelines. Learn the complete lifecycle from development to production."
 order: 32

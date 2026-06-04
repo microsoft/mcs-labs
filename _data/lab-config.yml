@@ -9,36 +9,35 @@ lab_metadata:
     difficulty: Beginner
     duration: 15
     id: agent-builder-web
+    module: agent-builder-web
     section: core
     title: Create your own web-based AI assistant with Agent Builder in Microsoft 365
-  110:
-    difficulty: Beginner
-    duration: 25
-    id: public-website-agent
-    section: core
-    title: Give your public website chatbot a brain and make it an agent
   120:
     difficulty: Beginner
     duration: 20
     id: mbr-prep-sharepoint-agent
+    module: mbr-prep-sharepoint-agent
     section: core
     title: Create a Monthly Business Review (MBR) Agent
   130:
     difficulty: Beginner
     duration: 40
     id: standard-orchestrator
+    module: standard-orchestrator
     section: core
     title: Create AI Solutions with Standard Orchestrator in Copilot Studio
   140:
     difficulty: Beginner to Intermediate
     duration: 30
     id: agent-builder-m365
+    module: agent-builder
     section: core
     title: Build Progressive AI Assistants with Agent Builder in Microsoft 365
   150:
     difficulty: Intermediate
     duration: 70
     id: contract-alerts-azure-ai
+    module: contract-alerts-azure-ai
     section: core
     title: Proactive Contract Alerts in Teams with Azure AI Search and Speech-to-Text
   160:
@@ -51,158 +50,170 @@ lab_metadata:
     difficulty: Beginner to Intermediate
     duration: 45
     id: core-concepts-agent-knowledge-tools
+    module: core-concepts-part1
     section: core
     title: Build Intelligent Agents with Knowledge Sources, Tools, and Topics
   175:
     difficulty: Intermediate
     duration: 30
     id: core-concepts-variables-agents-channels
+    module: core-concepts-part2
     section: core
     title: Master Variables, Multi-Agent Architectures, and Channel Deployment
   180:
     difficulty: Intermediate
     duration: 30
     id: core-concepts-analytics-evaluations
+    module: core-concepts-part3
     section: core
     title: Monitor Performance and Evaluate Agent Quality
   195:
     difficulty: Advanced
     duration: 30
     id: mcs-governance
+    module: governance
     section: intermediate
     title: Governance Zones in Copilot Studio
   200:
     difficulty: Intermediate
     duration: 20
     id: setup-for-success
+    module: setup-for-success
     section: intermediate
     title: Set yourself up for success & discover ALM best practices
   210:
     difficulty: Intermediate
     duration: 20
     id: agent-builder-sharepoint
+    module: agent-builder-sharepoint
     section: intermediate
     title: Create your own SharePoint-based AI assistant with Agent Builder in Microsoft 365
   220:
     difficulty: Intermediate
     duration: 40
     id: ask-me-anything
+    module: ask-me-anything
     section: intermediate
     title: Create an 'Ask me anything' agent for your employees
   230:
     difficulty: Intermediate
     duration: 40
     id: mcs-byom
+    module: byom
     section: intermediate
     title: Bring Your Own Model (BYOM) to Copilot Studio
   240:
     difficulty: Intermediate
     duration: 45
     id: human-in-the-loop
+    module: human-in-the-loop
     section: intermediate
     title: Expense Claims Agent with Approvals (Human-in-the-Loop)
   250:
     difficulty: Intermediate
     duration: 30
     id: mcs-multi-agent
+    module: multi-agent
     section: intermediate
     title: Using Multi-Agent in Copilot Studio
   260:
     difficulty: Intermediate
     duration: 30
     id: component-collections
+    module: component-collections
     section: intermediate
     title: Using Component Collections in Copilot Studio
   270:
     difficulty: Intermediate
     duration: 60
     id: mcs-tools
+    module: tools-overview
     section: intermediate
     title: Copilot Studio Tools
   280:
     difficulty: Advanced
     duration: 45
     id: mcs-alm
+    module: alm
     section: intermediate
     title: Application Lifecycle Management (ALM) in Copilot Studio
   290:
     difficulty: Advanced
     duration: 60
     id: mcs-orchestration
+    module: orchestration
     section: intermediate
     title: Orchestration with Copilot Studio
   300:
     difficulty: Advanced
     duration: 30
     id: autonomous-cua
+    module: autonomous-cua
     section: advanced
     title: Build an autonomous agent that uses Computer Use to retrieve data from legacy systems that lack API connectivity
   310:
     difficulty: Advanced
     duration: 30
     id: autonomous-account-news
+    module: autonomous-agents
     section: advanced
     title: Build an Autonomous Account News Assistant Agent
   320:
     difficulty: Advanced
     duration: 20
     id: autonomous-support-agent
+    module: autonomous-support-agent
     section: advanced
     title: Create an autonomous support agent and unlock new levels of productivity with AI automation
   330:
     difficulty: Advanced
     duration: 20
     id: data-fabric-agent
+    module: data-fabric-agent
     section: advanced
     title: Build a Data Fabric Agent
   400:
     difficulty: Intermediate
     duration: 60
     id: measure-success
+    module: measure-success
     section: specialized
     title: Measure Success & Analytics
   410:
     difficulty: Intermediate
     duration: 30
     id: pipelines-and-source-control
+    module: pipelines-and-source-control
     section: specialized
     title: Source control and deploy your agents
   420:
     difficulty: Intermediate
     duration: 30
     id: copilot-studio-kit
+    module: copilot-studio-kit
     section: specialized
     title: Copilot Studio Kit
   430:
     difficulty: Intermediate
     duration: 15
     id: mcp-qualify-lead
+    module: mcp-qualify-lead
     section: specialized
     title: MCP Qualify Lead
   440:
     difficulty: Intermediate
     duration: 65
     id: guildhall-custom-mcp
+    module: guildhall-custom-mcp
     section: specialized
     title: Build and Connect Your Guild's Custom MCP Server
   450:
     difficulty: Beginner
     duration: 30
     id: dataverse-mcp-connector
+    module: dataverse-mcp-connector
     section: specialized
     title: Dataverse MCP Connector
-  500:
-    difficulty: Intermediate
-    duration: 30
-    id: ask-me-anything-30-mins
-    section: optional
-    title: Create an 'Ask me anything' agent for your employees (30 min version)
-  600:
-    difficulty: Advanced
-    duration: 90
-    id: mcs-mcp-external
-    section: external
-    title: Model Context Protocol (MCP) & Copilot Studio
 
 lab_journeys:
   agent-academy-recruit: [quick-start, business-user]
@@ -210,7 +221,6 @@ lab_journeys:
   agent-builder-sharepoint: [business-user, developer]
   agent-builder-web: [quick-start, business-user]
   ask-me-anything: [business-user, developer]
-  ask-me-anything-30-mins: [business-user]
   autonomous-account-news: [autonomous-ai, developer]
   autonomous-cua: [autonomous-ai, developer]
   autonomous-support-agent: [autonomous-ai, developer]
@@ -229,13 +239,11 @@ lab_journeys:
   mcs-alm: [business-user, developer]
   mcs-byom: [business-user]
   mcs-governance: [business-user, developer]
-  mcs-mcp-external: [developer]
   mcs-multi-agent: [business-user, developer]
   mcs-orchestration: [developer]
   mcs-tools: [business-user, developer]
   measure-success: [developer]
   pipelines-and-source-control: [developer]
-  public-website-agent: [quick-start, business-user]
   setup-for-success: [business-user, developer]
   standard-orchestrator: [quick-start, developer]
 
@@ -245,7 +253,6 @@ legacy_lab_orders:
   agent-builder-sharepoint: 210
   agent-builder-web: 100
   ask-me-anything: 220
-  ask-me-anything-30-mins: 500
   autonomous-account-news: 310
   autonomous-cua: 300
   autonomous-support-agent: 320
@@ -264,13 +271,11 @@ legacy_lab_orders:
   mcs-alm: 280
   mcs-byom: 230
   mcs-governance: 195
-  mcs-mcp-external: 600
   mcs-multi-agent: 250
   mcs-orchestration: 290
   mcs-tools: 270
   measure-success: 400
   pipelines-and-source-control: 410
-  public-website-agent: 110
   setup-for-success: 200
   standard-orchestrator: 130
 
@@ -452,10 +457,8 @@ mcs_in_a_day_v2_lab_orders:
 
 mcs_in_a_day_lab_orders:
   1: agent-builder-m365
-  2: public-website-agent
-  3: mbr-prep-sharepoint-agent
-  4: ask-me-anything-30-mins
-  5: autonomous-support-agent
+  2: mbr-prep-sharepoint-agent
+  3: autonomous-support-agent
 
 azure_ai_workshop_lab_orders:
   1: dataverse-mcp-connector
@@ -480,14 +483,322 @@ bootcamp_lab_orders:
 agent_buildathon_1month_lab_orders:
   1: agent-builder-m365
   2: setup-for-success
-  3: public-website-agent
-  4: mbr-prep-sharepoint-agent
-  5: ask-me-anything
-  6: autonomous-support-agent
-  7: autonomous-account-news
-  8: autonomous-cua
+  3: mbr-prep-sharepoint-agent
+  4: ask-me-anything
+  5: autonomous-support-agent
+  6: autonomous-account-news
+  7: autonomous-cua
 
 agent_buildathon_1day_lab_orders:
   1: agent-builder-m365
   2: mbr-prep-sharepoint-agent
+
+# =====================================
+# Module Metadata
+# Modules are training content entities (presentations/lectures)
+# that may optionally link to a hands-on lab.
+# =====================================
+
+module_metadata:
+  1010:
+    id: agent-builder
+    title: "M365 Agent Builder"
+    description: "Overview of Agent Builder capabilities in Microsoft 365 for creating AI assistants."
+    difficulty: Beginner to Intermediate
+    duration: 30
+    section: core
+    slides: "/presentations/bootcamp/01.%20Agent%20Builder_CB.pptx"
+    lab: agent-builder-m365
+  1020:
+    id: core-concepts-part1
+    title: "Copilot Studio Core Concepts - Part 1"
+    description: "Agent creation, topics, knowledge sources, and tools in Copilot Studio."
+    difficulty: Beginner to Intermediate
+    duration: 30
+    section: core
+    slides: "/presentations/bootcamp/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
+    lab: core-concepts-agent-knowledge-tools
+  1030:
+    id: core-concepts-part2
+    title: "Copilot Studio Core Concepts - Part 2"
+    description: "Variables, multi-agent architectures, and channel deployment."
+    difficulty: Intermediate
+    duration: 30
+    section: core
+    slides: "/presentations/bootcamp/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
+    lab: core-concepts-variables-agents-channels
+  1040:
+    id: core-concepts-part3
+    title: "Copilot Studio Core Concepts - Part 3"
+    description: "Analytics, evaluations, and monitoring agent performance."
+    difficulty: Intermediate
+    duration: 30
+    section: core
+    slides: "/presentations/bootcamp/02-04.%20Copilot%20Studio%20Core%20Concepts_CB.pptx"
+    lab: core-concepts-analytics-evaluations
+  1050:
+    id: azure-integration
+    title: "Azure Integration"
+    description: "Integrating Copilot Studio with Azure AI services including Azure AI Search and Speech-to-Text."
+    difficulty: Intermediate
+    duration: 30
+    section: core
+    slides: "/presentations/bootcamp/05.%20CopilotStudioAzureBetterTogether_CB.pptx"
+  1060:
+    id: alm
+    title: "Application Lifecycle Management (ALM)"
+    description: "Solutions, environment variables, connection references, and pipelines for ALM."
+    difficulty: Advanced
+    duration: 30
+    section: intermediate
+    slides: "/presentations/bootcamp/06.%20Application%20Lifecycle%20Management%20-Final%20Feb%2027_CB.pptx"
+    lab: mcs-alm
+  1070:
+    id: component-collections
+    title: "Component Collections"
+    description: "Using component collections in Copilot Studio for reusable agent components."
+    difficulty: Intermediate
+    duration: 30
+    section: intermediate
+    slides: "/presentations/bootcamp/07.%20Component%20Collections_CB.pptx"
+    lab: component-collections
+  1080:
+    id: tools-overview
+    title: "Copilot Studio Tools"
+    description: "Connectors, Power Automate flows, and custom tools in Copilot Studio."
+    difficulty: Intermediate
+    duration: 45
+    section: intermediate
+    slides: "/presentations/bootcamp/08.%20Copilot%20Studio%20Tools%20Overview%20RRS_CB.pptx"
+    lab: mcs-tools
+  1090:
+    id: orchestration
+    title: "Orchestration and Dynamic Chaining"
+    description: "Orchestration concepts and dynamic chaining patterns in Copilot Studio."
+    difficulty: Advanced
+    duration: 45
+    section: intermediate
+    slides: "/presentations/bootcamp/09.%20Orchestration%20and%20Dynamic%20Chaining%20Concepts_CB.pptx"
+    lab: mcs-orchestration
+  1100:
+    id: governance
+    title: "Governance"
+    description: "Governance zones, DLP policies, and security controls in Copilot Studio."
+    difficulty: Advanced
+    duration: 30
+    section: intermediate
+    slides: "/presentations/bootcamp/10.%20Governance_CB.pptx"
+    lab: mcs-governance
+  1110:
+    id: multi-agent
+    title: "Multi-Agent Architectures"
+    description: "Multi-agent architectures and collaboration patterns in Copilot Studio."
+    difficulty: Intermediate
+    duration: 45
+    section: intermediate
+    slides: "/presentations/bootcamp/11.%20Multi%20Agent_CB.pptx"
+    lab: mcs-multi-agent
+  1120:
+    id: autonomous-agents
+    title: "Autonomous Agents"
+    description: "Building autonomous agents that can operate independently with minimal human intervention."
+    difficulty: Advanced
+    duration: 30
+    section: advanced
+    slides: "/presentations/bootcamp/12.%20Autonomous%20Agents_CB.pptx"
+    lab: autonomous-account-news
+  1130:
+    id: copilot-studio-plugin
+    title: "Copilot Studio Plugin for Developer Tools"
+    description: "Using the Copilot Studio plugin with GitHub Copilot CLI and Claude Code."
+    difficulty: Intermediate
+    duration: 30
+    section: specialized
+    slides: "/presentations/bootcamp/13.%20Skills%20for%20Copilot%20Studio_CB.pptx"
+  1140:
+    id: agent-365
+    title: "Agent 365"
+    description: "Overview of the Agent 365 platform and its capabilities."
+    difficulty: Intermediate
+    duration: 30
+    section: specialized
+    slides: "/presentations/bootcamp/14.%20A365_CB2.pptx"
+  1150:
+    id: licensing
+    title: "Licensing"
+    description: "Copilot Studio licensing models, pricing tiers, and capacity planning."
+    difficulty: Beginner
+    duration: 30
+    section: specialized
+    slides: "/presentations/mcs-in-a-day/15.%20Licensing_CB.pptx"
+  2010:
+    id: agent-builder-web
+    title: "Agent Builder (Web)"
+    description: "Creating web-based AI assistants using Agent Builder in Microsoft 365."
+    difficulty: Beginner
+    duration: 15
+    section: core
+    lab: agent-builder-web
+  2030:
+    id: mbr-prep-sharepoint-agent
+    title: "Monthly Business Review Agent"
+    description: "Creating an agent for monthly business review preparation using SharePoint data."
+    difficulty: Beginner
+    duration: 20
+    section: core
+    lab: mbr-prep-sharepoint-agent
+  2040:
+    id: standard-orchestrator
+    title: "Standard Orchestrator"
+    description: "Creating AI solutions with the standard orchestrator in Copilot Studio."
+    difficulty: Beginner
+    duration: 40
+    section: core
+    lab: standard-orchestrator
+  2050:
+    id: agent-builder-sharepoint
+    title: "Agent Builder (SharePoint)"
+    description: "Creating SharePoint-based AI assistants using Agent Builder in Microsoft 365."
+    difficulty: Intermediate
+    duration: 20
+    section: intermediate
+    lab: agent-builder-sharepoint
+  2060:
+    id: ask-me-anything
+    title: "Ask Me Anything Agent"
+    description: "Building an ask me anything agent for employees using Copilot Studio."
+    difficulty: Intermediate
+    duration: 40
+    section: intermediate
+    lab: ask-me-anything
+  2070:
+    id: byom
+    title: "Bring Your Own Model (BYOM)"
+    description: "Integrating custom AI models with Copilot Studio."
+    difficulty: Intermediate
+    duration: 40
+    section: intermediate
+    lab: mcs-byom
+  2080:
+    id: human-in-the-loop
+    title: "Human-in-the-Loop Approvals"
+    description: "Building expense claims agents with approval workflows."
+    difficulty: Intermediate
+    duration: 45
+    section: intermediate
+    lab: human-in-the-loop
+  2090:
+    id: autonomous-cua
+    title: "Autonomous Computer Use Agent"
+    description: "Building autonomous agents that use computer interfaces to retrieve data from legacy systems."
+    difficulty: Advanced
+    duration: 30
+    section: advanced
+    lab: autonomous-cua
+  2100:
+    id: autonomous-support-agent
+    title: "Autonomous Support Agent"
+    description: "Creating autonomous support agents for productivity automation."
+    difficulty: Advanced
+    duration: 20
+    section: advanced
+    lab: autonomous-support-agent
+  2110:
+    id: data-fabric-agent
+    title: "Data Fabric Agent"
+    description: "Building a data fabric agent for unified data access."
+    difficulty: Advanced
+    duration: 20
+    section: advanced
+    lab: data-fabric-agent
+  2120:
+    id: measure-success
+    title: "Measure Success & Analytics"
+    description: "Measuring agent success and using analytics effectively."
+    difficulty: Intermediate
+    duration: 60
+    section: specialized
+    lab: measure-success
+  2130:
+    id: pipelines-and-source-control
+    title: "Pipelines & Source Control"
+    description: "Source control and deployment pipelines for Copilot Studio agents."
+    difficulty: Intermediate
+    duration: 30
+    section: specialized
+    lab: pipelines-and-source-control
+  2140:
+    id: copilot-studio-kit
+    title: "Copilot Studio Kit"
+    description: "Using the Copilot Studio Kit for testing and evaluation."
+    difficulty: Intermediate
+    duration: 30
+    section: specialized
+    lab: copilot-studio-kit
+  2150:
+    id: mcp-qualify-lead
+    title: "MCP Qualify Lead"
+    description: "Using Model Context Protocol for lead qualification scenarios."
+    difficulty: Intermediate
+    duration: 15
+    section: specialized
+    lab: mcp-qualify-lead
+  2160:
+    id: guildhall-custom-mcp
+    title: "Custom MCP Server"
+    description: "Building and connecting custom MCP servers with Copilot Studio."
+    difficulty: Intermediate
+    duration: 65
+    section: specialized
+    lab: guildhall-custom-mcp
+  2170:
+    id: dataverse-mcp-connector
+    title: "Dataverse MCP Connector"
+    description: "Using the Dataverse MCP connector with Copilot Studio agents."
+    difficulty: Beginner
+    duration: 30
+    section: specialized
+    lab: dataverse-mcp-connector
+  2180:
+    id: contract-alerts-azure-ai
+    title: "Contract Alerts with Azure AI"
+    description: "Proactive contract alerts in Teams using Azure AI Search and Speech-to-Text."
+    difficulty: Intermediate
+    duration: 70
+    section: core
+    lab: contract-alerts-azure-ai
+  2190:
+    id: setup-for-success
+    title: "Set Up for Success"
+    description: "ALM best practices and environment setup for Copilot Studio."
+    difficulty: Intermediate
+    duration: 20
+    section: intermediate
+    lab: setup-for-success
+  2200:
+    id: agent-academy-recruit
+    title: "Agent Academy - Recruit Level"
+    description: "Copilot Studio Agent Academy recruit-level training program."
+    difficulty: Beginner to Intermediate
+    duration: 240
+    section: external
+    lab: agent-academy-recruit
+
+module_sections:
+  core:
+    title: Core Modules
+    description: Essential foundation modules - start here first!
+    icon: 📚
+  intermediate:
+    title: Intermediate Modules
+    description: Build on core concepts with practical applications
+    icon: 🎯
+  advanced:
+    title: Advanced Modules
+    description: Complex scenarios and autonomous agents
+    icon: 🚀
+  specialized:
+    title: Specialized Modules
+    description: Development tools, analytics, and platform features
+    icon: ⚡
 
