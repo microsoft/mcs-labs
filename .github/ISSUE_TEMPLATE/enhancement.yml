@@ -1,62 +1,23 @@
 name: Enhancement
-description: Suggest an improvement to an existing lab or to the site
-labels: ["type: lab-update", "status: triage"]
+description: Suggest a general improvement to the bootcamp, site, or overall experience
+labels: ["type: enhancement", "status: triage"]
 body:
-  - type: dropdown
-    id: lab
-    attributes:
-      label: Which lab? (leave blank if site-wide)
-      options:
-        - (site-wide / not lab specific)
-        - agent-buildathon-1day
-        - agent-buildathon-1month
-        - agent-builder-m365
-        - agent-builder-sharepoint
-        - agent-builder-web
-        - ask-me-anything
-        - autonomous-account-news
-        - autonomous-cua
-        - autonomous-support-agent
-        - azure-ai-workshop
-        - bootcamp
-        - component-collections
-        - contract-alerts-azure-ai
-        - copilot-studio-kit
-        - core-concepts-agent-knowledge-tools
-        - core-concepts-analytics-evaluations
-        - core-concepts-variables-agents-channels
-        - data-fabric-agent
-        - dataverse-mcp-connector
-        - guildhall-custom-mcp
-        - human-in-the-loop
-        - mbr-prep-sharepoint-agent
-        - mcp-qualify-lead
-        - mcs-alm
-        - mcs-byom
-        - mcs-governance
-        - mcs-in-a-day
-        - mcs-multi-agent
-        - mcs-tools
-        - measure-success
-        - pipelines-and-source-control
-        - setup-for-success
-        - standard-orchestrator
   - type: textarea
     id: proposal
     attributes:
       label: What should change and why?
-      description: Describe the improvement you'd like to see
+      description: Describe the enhancement you'd like to see
     validations:
       required: true
   - type: textarea
     id: attachment
     attributes:
-      label: Content Update File
+      label: Supporting Material
       description: >-
         Drag and drop or paste a file (e.g., PowerPoint presentation) containing
-        the content update you'd like applied. GitHub supports attaching files up
-        to 25 MB. For larger files, upload to SharePoint or OneDrive and paste
-        the sharing link here instead.
+        supporting material. GitHub supports attaching files up to 25 MB. For
+        larger files, upload to SharePoint or OneDrive and paste the sharing link
+        here instead.
       placeholder: Drag and drop your file here
     validations:
       required: false
