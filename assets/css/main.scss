@@ -58,6 +58,12 @@ $monospace: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace !default;
   padding: 0 0.5em;
   color: var(--color-fg-muted);
 }
+.breadcrumbs a {
+  color: var(--color-accent);
+}
+.breadcrumbs a:hover {
+  color: var(--color-accent-hover);
+}
 
 // Give theme switching a smooth, explicit transition on tokenized properties
 // only — avoid `transition: all` to keep paint cost bounded.
@@ -129,7 +135,7 @@ html, body {
   color: var(--color-fg-strong);
   border-top: 1px solid var(--color-border);
 
-  a { color: var(--color-accent-active); }
+  a { color: var(--color-fg-strong); }
   a:hover { color: var(--color-accent); }
 }
 
@@ -137,6 +143,12 @@ html, body {
 // Make sure it clears AA contrast on the subtle bg.
 .page__footer-copyright,
 .page__footer .page__footer-follow {
+  color: var(--color-fg-strong);
+}
+.page__footer .fas,
+.page__footer .fab,
+.page__footer .far,
+.page__footer .fal {
   color: var(--color-fg-strong);
 }
 
@@ -313,6 +325,11 @@ aside.sidebar__right {
   border-bottom: 1px solid var(--color-border);
   margin-bottom: 0.5em;
   position: relative;
+  color: var(--color-fg-strong);
+
+  a {
+    color: inherit;
+  }
 
   &:after {
     content: '';
@@ -1142,7 +1159,7 @@ html[data-event-context] .pagination {
   position: absolute;
   top: calc(100% + 8px);
   right: 0;
-  z-index: 1000;
+  z-index: 999999;
   min-width: 240px;
   padding: 12px;
   background: var(--color-bg);

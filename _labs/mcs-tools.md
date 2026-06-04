@@ -1,5 +1,6 @@
 ---
 layout: lab
+module: tools-overview
 title: "Copilot Studio Tools"
 order: 270
 duration: 60

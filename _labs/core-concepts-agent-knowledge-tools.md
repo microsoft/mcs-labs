@@ -1,5 +1,6 @@
 ---
 layout: lab
+module: core-concepts-part1
 title: "Build Intelligent Agents with Knowledge Sources, Tools, and Topics"
 order: 170
 duration: 45

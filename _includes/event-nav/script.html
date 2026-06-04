@@ -137,6 +137,9 @@
   var activeEventUrl = buildSameOriginUrl(activeEvent.url);
 
   // --- Populate rail head ---
+  var kindLabel = activeEvent.kind === 'workshop' ? 'Workshop' : 'Event';
+  var kindLabelEl = document.querySelector('.event-rail-event-label');
+  if (kindLabelEl) kindLabelEl.textContent = kindLabel;
   railEventLink.href = urlHrefOr(activeEventUrl);
   railEventName.textContent = activeEvent.title;
   railPosition.textContent = 'Lab ' + (currentIdx + 1) + ' of ' + labsInEvent.length;
@@ -358,8 +361,10 @@
       return li;
     }
 
+    var kindPlural = activeEvent.kind === 'workshop' ? 'Workshops' : 'Events';
+    var kindPath = activeEvent.kind === 'workshop' ? '/workshops/' : '/events/';
     breadcrumbsNav.appendChild(makeCrumbLi(buildSameOriginUrl(baseurl + '/'), 'Home', 1));
-    breadcrumbsNav.appendChild(makeCrumbLi(buildSameOriginUrl(baseurl + '/events/'), 'Events', 2));
+    breadcrumbsNav.appendChild(makeCrumbLi(buildSameOriginUrl(baseurl + kindPath), kindPlural, 2));
     breadcrumbsNav.appendChild(makeCrumbLi(activeEventUrl, activeEvent.title, 3));
 
     var currentLi = document.createElement('li');

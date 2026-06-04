@@ -103,9 +103,20 @@ classes: wide
   background: var(--color-pill-green-bg);
   color: var(--color-pill-green-fg);
 }
+.ws-card-accent {
+  width: 32px;
+  height: 3px;
+  border-radius: 2px;
+  margin-bottom: 0.8em;
+}
+.accent-blue { background: var(--color-journey-blue); }
+.accent-green { background: var(--color-journey-green); }
+.accent-purple { background: var(--color-journey-purple); }
+.accent-orange { background: var(--color-journey-orange); }
 </style>
 
 {% assign all_events = site.events | sort: "order" %}
+{% assign accent_colors = "accent-blue,accent-green,accent-purple,accent-orange" | split: "," %}
 
 <ul class="ws-index-stats">
   <li><strong>{{ all_events.size }}</strong> events</li>
@@ -125,16 +136,12 @@ classes: wide
   {% assign ws_hours = ws_duration | divided_by: 60.0 | round: 1 %}
   {% assign levels_arr = ws_levels | split: "," | uniq | sort %}
   <li class="ws-card">
+    {% assign color_idx = forloop.index0 | modulo: 4 %}
+    <div class="ws-card-accent {{ accent_colors[color_idx] }}"></div>
     <div class="ws-card-title"><a href="{{ ws.url | relative_url }}">{{ ws.title }}</a></div>
     <div class="ws-card-desc">{{ ws.description | strip_html | truncate: 160 }}</div>
     <div class="ws-card-meta">
       <span class="ws-idx-pill ws-idx-pill-labs">{{ ws.labs.size }} labs</span>
-      <span class="ws-idx-pill ws-idx-pill-duration">~{{ ws_hours }}h</span>
-      <span class="ws-idx-pill ws-idx-pill-levels">
-        {%- for lvl in levels_arr -%}
-          {%- if lvl != "" -%}Level {{ lvl }}{%- unless forloop.last -%}, {% endunless -%}{%- endif -%}
-        {%- endfor -%}
-      </span>
     </div>
   </li>
 {% endfor %}

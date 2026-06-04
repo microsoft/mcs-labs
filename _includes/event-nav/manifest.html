@@ -14,13 +14,15 @@
 {%- endcomment -%}
 <script type="application/json" id="mcs-events-manifest">
 [
+{%- assign all_deliveries = site.events | concat: site.workshops -%}
 {%- assign event_sep = "" -%}
-{%- for event in site.events -%}
+{%- for event in all_deliveries -%}
 {{ event_sep }}
   {
     "event_id": {{ event.event_id | jsonify }},
     "title": {{ event.title | jsonify }},
     "url": {{ event.url | relative_url | jsonify }},
+    "kind": {% if event.collection == "workshops" %}"workshop"{% else %}"event"{% endif %},
     "schedule": [
       {%- assign agenda = site.data.agendas[event.event_id] -%}
       {%- assign item_sep = "" -%}

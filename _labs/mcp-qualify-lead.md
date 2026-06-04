@@ -1,4 +1,5 @@
 ---
+module: mcp-qualify-lead
 title: "Prioritize Hot Leads with AI: Connect to Dynamics 365 Sales Using Model Context Protocol"
 description: "Empower sellers to focus on what matters most—high-value leads."
 order: 34

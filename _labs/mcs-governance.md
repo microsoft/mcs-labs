@@ -1,5 +1,6 @@
 ---
 layout: lab
+module: governance
 title: "Governance Zones in Copilot Studio"
 order: 195
 duration: 30

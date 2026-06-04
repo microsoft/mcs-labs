@@ -1,5 +1,6 @@
 ---
 layout: lab
+module: core-concepts-part3
 title: "Monitor Performance and Evaluate Agent Quality"
 order: 180
 duration: 30

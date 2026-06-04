@@ -1,5 +1,6 @@
 ---
 layout: lab
+module: alm
 title: "Application Lifecycle Management (ALM) in Copilot Studio"
 order: 280
 duration: 45

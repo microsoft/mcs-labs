@@ -194,13 +194,15 @@ header:
 {% assign total_hours = total_duration | divided_by: 60.0 | round: 1 %}
 {% assign levels = all_labs | map: "difficulty" | uniq %}
 {% assign all_events = site.events | sort: "order" %}
+{% assign all_workshops = site.workshops | sort: "order" %}
+{% assign all_modules = site.modules | sort: "order" %}
 
 <div class="home-hero">
   <h2>Hands-on labs for building AI agents</h2>
   <p>Learn Microsoft Copilot agents through guided, practical labs. From your first agent to autonomous AI — choose a path that matches your skill level.</p>
   <div class="home-hero-actions">
-    <a href="{{ '/events/' | relative_url }}" class="btn-primary">Browse all events</a>
-    <a href="{{ '/labs/' | relative_url }}" class="btn-outline">Browse all labs</a>
+    <a href="{{ '/events/' | relative_url }}" class="btn-primary">Browse events</a>
+    <a href="{{ '/modules/' | relative_url }}" class="btn-outline">Browse all modules</a>
     <button type="button" class="wc-account-cta wc-account-cta--hero" data-wc-account-cta>
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
         <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -212,10 +214,10 @@ header:
     </button>
   </div>
   <ul class="home-stats">
+    <li><strong>{{ all_modules.size }}</strong><span>Modules</span></li>
     <li><strong>{{ all_labs.size }}</strong><span>Labs</span></li>
-    <li><strong>~{{ total_hours }}h</strong><span>Content</span></li>
-    <li><strong>{{ levels.size }}</strong><span>Levels</span></li>
     <li><strong>{{ all_events.size }}</strong><span>Events</span></li>
+    <li><strong>{{ all_workshops.size }}</strong><span>Workshops</span></li>
   </ul>
 </div>
 
@@ -230,13 +232,46 @@ header:
     <h3><a href="{{ event.url | relative_url }}">{{ event.title }}</a></h3>
     <div class="journey-card-desc">{{ event.description | truncate: 120 }}</div>
     <div class="journey-card-meta">
-      <span class="journey-pill">Full day</span>
       <span class="journey-pill">{{ event.labs.size }} labs</span>
     </div>
   </li>
   {% endfor %}
 </ul>
 
-<p class="home-browse-all"><a href="{{ '/labs/' | relative_url }}">Browse all labs →</a></p>
+<h2 class="home-section-title">Workshops</h2>
+<ul class="journey-grid">
+{% for ws in all_workshops %}
+{% unless ws.external %}
+{% assign color_idx = forloop.index0 | modulo: 4 %}
+<li class="journey-card">
+<div class="journey-card-accent {{ accent_colors[color_idx] }}"></div>
+<h3><a href="{{ ws.url | relative_url }}">{{ ws.title }}</a></h3>
+<div class="journey-card-desc">{{ ws.description | truncate: 120 }}</div>
+<div class="journey-card-meta">
+<span class="journey-pill">{{ ws.labs.size }} labs</span>
+</div>
+</li>
+{% endunless %}
+{% endfor %}
+</ul>
+
+<h2 class="home-section-title">External Workshops</h2>
+<ul class="journey-grid">
+{% for ws in all_workshops %}
+{% if ws.external %}
+{% assign color_idx = forloop.index0 | modulo: 4 %}
+<li class="journey-card">
+<div class="journey-card-accent {{ accent_colors[color_idx] }}"></div>
+<h3><a href="{{ ws.external_url }}" target="_blank" rel="noopener">{{ ws.title }} ↗</a></h3>
+<div class="journey-card-desc">{{ ws.description | truncate: 120 }}</div>
+<div class="journey-card-meta">
+<span class="journey-pill">External</span>
+</div>
+</li>
+{% endif %}
+{% endfor %}
+</ul>
+
+<p class="home-browse-all"><a href="{{ '/modules/' | relative_url }}">Browse all modules →</a></p>
 
 {% include home-tracker-link.html %}

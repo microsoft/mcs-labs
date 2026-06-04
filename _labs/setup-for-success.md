@@ -1,4 +1,5 @@
 ---
+module: setup-for-success
 title: "Set yourself up for success & discover ALM best practices"
 description: "Build agents with confidence. Deploy with control. Master the lifecycle of your Microsoft Copilot Studio agents with best practices."
 order: 11

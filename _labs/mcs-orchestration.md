@@ -1,5 +1,6 @@
 ---
 layout: lab
+module: orchestration
 title: "Orchestration with Copilot Studio"
 order: 800
 duration: 60

@@ -1,4 +1,5 @@
 ---
+module: autonomous-support-agent
 title: "Autonomous Support Agent - Unlock new levels of productivity with AI automation"
 description: "Let AI do the work and automate processes more easily than ever with autonomous agents that handle user support inquiries automatically."
 order: 23

@@ -48,26 +48,42 @@ author:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/pratapladhani/mcs-labs"
+      url: "https://github.com/microsoft/mcs-labs"
 
 # Footer
 footer:
   links:
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: "https://github.com/pratapladhani/mcs-labs"
+      url: "https://github.com/microsoft/mcs-labs"
 
 # Collections
 collections:
+  modules:
+    output: true
+    permalink: /modules/:name/
   labs:
     output: true
     permalink: /labs/:name/
   events:
     output: true
     permalink: /events/:name/
+  workshops:
+    output: true
+    permalink: /workshops/:name/
 
 # Default layouts and front matter
 defaults:
+  - scope:
+      path: ""
+      type: "modules"
+    values:
+      layout: "module"
+      author_profile: false
+      toc: false
+      breadcrumbs: false
+      read_time: false
+      share: false
   - scope:
       path: ""
       type: "labs"
@@ -91,6 +107,15 @@ defaults:
       share: false
   - scope:
       path: ""
+      type: "workshops"
+    values:
+      layout: "workshop"
+      author_profile: false
+      classes: wide
+      toc: false
+      share: false
+  - scope:
+      path: ""
       type: "pages"
     values:
       layout: "single"
@@ -108,3 +133,4 @@ exclude:
   - labs/*/README.md
   - labs/*/local-dist/
   - labs/lab-template.md
+  - modules/*/README.md

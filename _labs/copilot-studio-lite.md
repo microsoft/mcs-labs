@@ -1,4 +1,5 @@
 ---
+module: copilot-studio-lite
 title: "Build Progressive AI Assistants with Copilot Studio Lite in Microsoft 365 Copilot"
 description: "Master agent creation from basic web-grounded assistants to advanced SharePoint-integrated agents with code interpreter and image generation capabilities."
 order: 999

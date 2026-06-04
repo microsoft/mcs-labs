@@ -1,4 +1,5 @@
 ---
+module: autonomous-agents
 title: "Build an Autonomous Account News Assistant Agent"
 description: "Empower sellers with timely insights – Build an autonomous Copilot Studio agent that periodically scans your Sales App for high-value opportunities, finds related news, and sends curated reports."
 order: 22
