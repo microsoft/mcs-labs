@@ -14,6 +14,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Labels: `type: bootcamp-feature`, `status: triage`, `status: backlog`, `status: in-progress`.** Support the Backlog Tracker's Triage → Backlog → In Progress → Done lifecycle.
 
 ### Changed
+- **Agenda module rows now render as accented cards.** On every event/workshop agenda, `type: module` rows are styled like lab rows (boxed card, prominent title, hover) but with a distinct **purple** left accent rail (`--color-journey-purple`) versus the lab rows' blue rail — surfacing that modules are clickable links to their module page and visually separating modules from labs in the timeline. Previously module rows reused the plain, unboxed `--session` styling. New `.ws-agenda-row--module` rules in `_layouts/event.html`; the module `<li>` now carries `ws-agenda-row--module`.
 - **Issue template rename: "Redesign feedback" → "Portal Enhancements".** The air-theme redesign is now just "the site," so the template covering site-wide bugs/suggestions has been renamed and broadened. File renamed `.github/ISSUE_TEMPLATE/redesign-feedback.yml` → `portal_enhancement.yml`; label `redesign` → `portal-enhancement`. The "Which page?" dropdown now includes `Backlog tracker (/tracker/)`.
 - **Label rename: `feedback` → `discussion`.** Distinguishes open-ended threads from the existing `question` label (which implies a specific answer is wanted).
 
