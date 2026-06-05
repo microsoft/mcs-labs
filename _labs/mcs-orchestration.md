@@ -152,6 +152,25 @@ Confirm the environment is ready and the sample connected agent is published.
 
 ### Step-by-step instructions
 
+#### Load the Dataverse sample data
+
+This lab uses the standard Dataverse **`(sample)`** Account and Contact records (Fourth Coffee, Litware, Adventure Works, Alpine Ski House, and so on). A brand-new environment doesn't have them yet, so install them first.
+
+1. In the upper-right corner of Copilot Studio, select the **Gear** icon, then **Go to Power Platform admin center**.
+
+1. In the left navigation, select **Manage** → **Environments**, then select your environment.
+
+1. Open the environment's **Settings**, then open **Sample Data** (the environment data-management setting that installs the standard sample records).
+
+1. If it shows **"Sample Data is not installed on this system"**, select **Install Sample Data**.
+
+    ![Sample Data – not installed, with the Install Sample Data button](images/uc1-sample-data-install.png)
+
+1. Wait for the install to finish — it shows **"Installing data.."** and can take a few minutes. When it completes, the page reports that sample data is installed.
+
+    > [!NOTE]
+    > If **Sample Data** already shows as installed, you can skip this step — the `(sample)` Account and Contact records are already in your environment. (You can confirm later in the Power Apps maker portal under **Tables → Account**, where the rows end in `(sample)`.)
+
 #### Make sure that Dataverse Search is set to on
 
 1. In the upper right corner of Copilot Studio, Select the **Gear** icon
