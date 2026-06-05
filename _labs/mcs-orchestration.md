@@ -575,7 +575,7 @@ Build a brand-new **Sales Account Assistant** in Copilot Studio's **New experien
 
 **Summary of tasks**
 
-You'll create a **new-type agent** (in the New experience), add a knowledge file and three tools (a public weather connector, the **Work IQ Mail** MCP server, and the **Microsoft Dataverse MCP Server**), and run a series of prompts that exercise the **Agentic Reasoning Loop** — multi-tool reasoning, dynamic chaining, and train-of-thought inspection.
+You'll create a **new-type agent** (in the New experience), add a knowledge file and two tools (a public weather connector and the **Microsoft Dataverse MCP Server**), and run a series of prompts that exercise the **Agentic Reasoning Loop** — multi-tool reasoning, dynamic chaining, and train-of-thought inspection.
 
 **Scenario:** You're building a Sales Account Assistant that completes multi-step tasks for sales associates without stopping to prompt them at each step. A new-type agent uses the New Orchestrator natively, so the same prompts produce a finished result rather than a series of intermediate confirmations.
 
@@ -593,7 +593,7 @@ Stand up a new-type agent and validate how the New Orchestrator's Agentic Reason
 #### Enable Dataverse Intelligence (Work IQ) and Dataverse MCP servers
 
 > [!NOTE]
-> These environment features are required for the **Dataverse MCP** and **Work IQ Mail** tools you'll add below — they are not specific to the New Orchestrator.
+> These environment features are required for the **Dataverse MCP** tool you'll add below — they are not specific to the New Orchestrator.
 
 1. Navigate to the **Power Platform admin center** the same way you did in [Use Case #1](#use-case-1-get-the-sample-connected-agent-working) — in Copilot Studio, select the **Gear** icon in the upper right, then **Go to Power Platform admin center**.
 
@@ -624,7 +624,7 @@ Stand up a new-type agent and validate how the New Orchestrator's Agentic Reason
 1. In the **Instructions** box, paste a short set of instructions so the orchestrator knows how to use its tools:
 
     ```text
-    You are a Sales Account Assistant for sales associates. Help users complete multi-step tasks end to end. Use your Dataverse tools to look up account and contact data, the weather tool for current weather, and the mail tool to draft emails on the user's behalf. When a request touches gifts or spending, follow the company gifting policy in your knowledge. Complete the whole task before responding rather than stopping to ask at each step.
+    You are a Sales Account Assistant for sales associates. Help users complete multi-step tasks end to end. Use your Dataverse tools to look up account and contact data and the weather tool for current weather. When a request touches gifts or spending, follow the company gifting policy in your knowledge. Complete the whole task before responding rather than stopping to ask at each step.
     ```
 
 1. Leave the **Model** set to its default (**Claude Sonnet 4.6**) and select **Save** in the command bar. The agent is assigned an ID and the **Preview** and **Evaluate** tabs become available.
@@ -663,15 +663,7 @@ You'll add three tools. In the new designer, adding a tool is **Add tool → pic
     ![Tool details – Authentication mode set to Maker with a connection](images/new-orch-03.png)
 
     > [!IMPORTANT]
-    > **Set Weather to Maker.** The MSN Weather connector authenticates anonymously, so it should run as the **maker** — your connection is reused for every end user and no one is prompted to connect at runtime. If you leave it on **User**, the agent returns a **"Connection Required"** card the first time it tries to call the tool. Tools that act *as the user* (like Work IQ Mail, below) stay on **User**.
-
-##### Add the Work IQ Mail MCP tool (acts as the user)
-
-1. Select **Add tool** again. Search for **work iq**, apply the **Model Context Protocol** filter, and select **Work IQ Mail (Preview)**.
-
-    ![Add tool – Work IQ Mail (Preview)](images/new-orch-10.png)
-
-1. On the **Select a connection** step, choose **Not connected → Create new connection** and complete the **Login with Microsoft Entra ID** prompt (sign in / consent). Select **Next**, then **Confirm** on the capabilities review. Leave the **Authentication mode** as **User** — this MCP server drafts mail **as the signed-in user**, which is what you want.
+    > **Set Weather to Maker.** The MSN Weather connector authenticates anonymously, so it should run as the **maker** — your connection is reused for every end user and no one is prompted to connect at runtime. If you leave it on **User**, the agent returns a **"Connection Required"** card the first time it tries to call the tool. (Tools that act *as the signed-in user* — e.g. a mailbox or files connector — would instead keep **User** authentication.)
 
 ##### Add the Microsoft Dataverse MCP Server tool
 
@@ -683,9 +675,7 @@ You'll add three tools. In the new designer, adding a tool is **Add tool → pic
 
 1. On **Review capabilities** (it lists the MCP server's actions, e.g. `read_query`), select **Confirm** to attach the server.
 
-1. Select **Save** in the command bar. Your **Tools** list should now show **Get current weather**, **Work IQ Mail (Preview)**, and **Microsoft Dataverse MCP Server**.
-
-    ![Tools list with weather, Work IQ Mail, and Dataverse MCP](images/new-orch-11.png)
+1. Select **Save** in the command bar. Your **Tools** list should now show **Get current weather** and **Microsoft Dataverse MCP Server**.
 
 #### Test the Agentic Reasoning Loop
 
@@ -731,19 +721,6 @@ Open the **Preview** tab. The New Orchestrator surfaces its work **inline in the
 
     ![Reasoning loop – multi-tool gift recommendation with policy citation](images/new-orch-12.png)
 
-1. **Draft an email via Work IQ Mail.** Send:
-
-    ```text
-    This looks good. Please create an email draft to the primary contact asking if one of the gift options that doesn't require manager approval works for them, confirm none of their policies prevent them from accepting, thank them for their continued support, and say we look forward to working with them.
-    ```
-
-    The agent re-reads the policy to keep only the no-approval-needed option and composes the email **as you** (the signed-in user), then presents it inline with the recipient, body, and policy notes.
-
-    ![Reasoning loop – Work IQ Mail email composition](images/new-orch-13.png)
-
-    > [!NOTE]
-    > **Where the draft lands.** Work IQ Mail acts on the signed-in user's mailbox, so a successful draft shows up in **Outlook → Drafts** (open it via the app launcher → **Outlook**). With the **Preview** Work IQ Mail server and the workshop's **sample** contacts (whose addresses are placeholders like `someone@example.com`), the agent may present the finished email inline and/or save it as a draft file rather than reliably creating an Outlook draft item. Either way, the point of this turn is the **Reasoning Loop composing a policy-filtered email end to end** — read the train of thought to confirm it filtered to the no-approval gift and pulled the recipient from the prior turns.
-
 1. **Inspect a single step in the train of thought.** Scroll to any tool step with a **green check** (e.g. `read_query` on the Texas-accounts turn) and select it to expand. You'll see the exact **parameters** the orchestrator sent (the generated SQL, e.g. `SELECT name, address1_city, address1_stateorprovince, … FROM account WHERE address1_stateorprovince = 'Texas' OR address1_stateorprovince = 'TX'`) and the raw **result** it reasoned over.
 
     ![Expanded train-of-thought step – read_query parameters + result](images/new-orch-07.png)
@@ -763,7 +740,7 @@ Open the **Preview** tab. The New Orchestrator surfaces its work **inline in the
 
 * **A new-type agent uses the New Orchestrator (Agentic Reasoning Loop) by default.** It plans → acts → observes → iterates within a single turn until the user's task is complete, instead of stopping at the next tool call. This is what **Enhanced Task Completion** previewed on classic agents.
 * **The trade-off is visibility.** The classic **Activity Tracker** and **Get rationale** (Use Case #2) aren't the surface here — the **Preview** pane shows the train of thought inline, and you expand a step to see its parameters and result.
-* **Match the credential pattern to the tool.** Anonymous / API-key / service-account tools (like MSN Weather) use **Maker** authentication. Tools that act *as the user* (like Work IQ Mail) use **User** authentication.
+* **Match the credential pattern to the tool.** Anonymous / API-key / service-account tools (like MSN Weather) use **Maker** authentication; tools that act *as the signed-in user* (e.g. a mailbox connector) use **User** authentication.
 * **The New Orchestrator chains tools across knowledge, Dataverse, and mail in one turn** — multi-tool reasoning, dynamic chaining, and reformat-from-context all happen without prompting the user at each step.
 
 **Lessons learned & troubleshooting tips:**
