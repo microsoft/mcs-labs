@@ -45,6 +45,23 @@
               }
               {%- assign item_sep = "," -%}
             {%- endif -%}
+          {%- elsif item.type == "module" -%}
+            {%- assign mod = site.modules | where: "slug", item.slug | first -%}
+            {%- if mod -%}
+              {%- assign display_title = item.title | default: mod.title -%}
+              {{ item_sep }}
+              {
+                "type": "module",
+                "slug": {{ item.slug | jsonify }},
+                "label": {{ item.label | default: "" | jsonify }},
+                "url": {{ mod.url | relative_url | jsonify }},
+                "title": {{ display_title | jsonify }},
+                "difficulty": {{ mod.difficulty | default: 0 | jsonify }},
+                "duration": {{ item.duration | default: mod.duration | default: 0 }}
+                {%- if item.time %}, "time": {{ item.time | jsonify }}{% endif -%}
+              }
+              {%- assign item_sep = "," -%}
+            {%- endif -%}
           {%- else -%}
             {{ item_sep }}
             {
@@ -86,6 +103,7 @@
 </script>
 <script type="application/json" id="mcs-lab-context">
 {
+  "type": {% if page.collection == "modules" %}"module"{% else %}"lab"{% endif %},
   "slug": {{ page.slug | jsonify }},
   "title": {{ page.title | jsonify }},
   "url": {{ page.url | relative_url | jsonify }}

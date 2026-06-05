@@ -1,0 +1,89 @@
+event_id: agent-in-a-day
+
+# Agent in a Day — 1-day hands-on agenda.
+#
+# Module and lab rows are linked to first-class entities by `slug` only, so
+# they stay in sync automatically: the layout resolves the link, description,
+# difficulty level, duration, and (for modules) slide deck live from
+# _modules/<slug>.md and _labs/<slug>.md on every build. Do NOT duplicate
+# those values here — an override freezes the field (`item.x | default: entity.x`).
+#
+# The ONLY intentional override kept here is the short `title:` on lab rows:
+# an event-friendly agenda label (e.g. "Variables, Agents, and Channels") that
+# is deliberately more concise than the lab's full descriptive title. Everything
+# else flows from the entity. Sessions and breaks are not entity-backed, so they
+# carry their own title/description/duration.
+
+schedule:
+  - type: session
+    title: "Welcome + Kickoff"
+    description: "Meet your instructor, review the day, and set expectations."
+    label: "Welcome"
+    time: "09:00"
+    duration: 15
+
+  - type: session
+    title: "Introduction to Hands-On Labs"
+    description: "Overview of the lab environment, setup instructions, and how the day flows."
+    label: "Intro"
+    time: "09:15"
+    duration: 15
+
+  - type: module
+    slug: agent-builder
+    label: "Module 1"
+    time: "09:30"
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "10:00"
+    duration: 15
+
+  - type: lab
+    slug: agent-builder-m365
+    label: "Lab 1"
+    title: "M365 Agent Builder"
+    time: "10:15"
+
+  - type: module
+    slug: core-concepts-part1
+    label: "Module 2"
+    time: "10:45"
+
+  - type: lab
+    slug: core-concepts-agent-knowledge-tools
+    label: "Lab 2"
+    title: "Creation, Topics, Knowledge, and Tools"
+    time: "11:15"
+
+  - type: break
+    title: "Lunch break"
+    time: "12:00"
+    duration: 60
+
+  - type: module
+    slug: core-concepts-part2
+    label: "Module 3"
+    time: "13:00"
+
+  - type: lab
+    slug: core-concepts-variables-agents-channels
+    label: "Lab 3"
+    title: "Variables, Agents, and Channels"
+    time: "13:30"
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "14:00"
+    duration: 15
+
+  - type: module
+    slug: orchestration
+    label: "Module 4"
+    time: "14:15"
+
+  - type: lab
+    slug: mcs-orchestration
+    label: "Lab 4"
+    title: "Orchestration with Copilot Studio"
+    time: "15:00"

@@ -28,18 +28,31 @@
   var nextCardTitle = document.getElementById('event-navpair-next-title');
   var nextCardDesc = document.getElementById('event-navpair-next-desc');
 
+  // The rail/nav-pair markup is required for the in-page navigation chrome.
+  // (The breadcrumb override below works independently and tolerates either
+  // the theme breadcrumb or the module page's custom one.)
+  if (!rail) return;
+
   var breadcrumbsNav = document.querySelector('nav.breadcrumbs ol');
+  var modBreadcrumb = document.querySelector('nav.mod-breadcrumb');
 
   // --- Parse payloads ---
   var events;
-  var currentLab;
+  var current;
   try {
     events = JSON.parse(manifestEl.textContent);
-    currentLab = JSON.parse(contextEl.textContent);
+    current = JSON.parse(contextEl.textContent);
   } catch (e) {
     return;
   }
-  if (!Array.isArray(events) || !currentLab || !currentLab.slug) return;
+  if (!Array.isArray(events) || !current || !current.slug) return;
+
+  // The current page is either a lab or a module; the rail walks the matching
+  // item type within the event so a module page gets "Module X of N" with
+  // prev/next across modules, exactly mirroring the lab experience.
+  var currentType = current.type === 'module' ? 'module' : 'lab';
+  var typeWord = currentType === 'module' ? 'Module' : 'Lab';
+  var typeWordLower = currentType === 'module' ? 'module' : 'lab';
 
   function findEvent(eventId) {
     if (!eventId) return null;
@@ -55,9 +68,9 @@
   // URL constructor so that (a) a javascript: URL can never sneak through
   // and (b) CodeQL's xss-through-dom taint analysis sees a recognized
   // sanitizer at every sink.
-  function buildLabUrl(labUrl, eventId) {
+  function buildItemUrl(itemUrl, eventId) {
     try {
-      var u = new URL(String(labUrl || ''), window.location.origin);
+      var u = new URL(String(itemUrl || ''), window.location.origin);
       if (u.origin !== window.location.origin) return null;
       if (u.protocol !== 'http:' && u.protocol !== 'https:') return null;
       u.searchParams.set('event', String(eventId || ''));
@@ -78,18 +91,18 @@
     return url ? url.href : (fallback || '#');
   }
 
-  function eventContainsLab(event, labSlug) {
+  function eventContainsItem(event, type, slug) {
     if (!event || !event.schedule) return false;
     for (var i = 0; i < event.schedule.length; i++) {
       var item = event.schedule[i];
-      if (item.type === 'lab' && item.slug === labSlug) return true;
+      if (item.type === type && item.slug === slug) return true;
     }
     return false;
   }
 
   // --- Resolve active event ---
   // Priority: URL ?event= wins, then sessionStorage, but only if the stored
-  // event's schedule actually contains the current lab. Otherwise we clear
+  // event's schedule actually contains the current item. Otherwise we clear
   // stale sticky context and render a neutral page.
   function readUrlEvent() {
     try {
@@ -105,34 +118,33 @@
   var activeEvent = null;
   if (urlEventId) {
     activeEvent = findEvent(urlEventId);
-    if (activeEvent && eventContainsLab(activeEvent, currentLab.slug)) {
+    if (activeEvent && eventContainsItem(activeEvent, currentType, current.slug)) {
       try { sessionStorage.setItem(STORAGE_KEY, urlEventId); } catch (e) {}
     } else {
-      activeEvent = null; // URL param references an unknown event or a lab
+      activeEvent = null; // URL param references an unknown event or an item
                           // not in that event — bail out silently.
     }
   } else if (stickyEventId) {
     var stickyEvent = findEvent(stickyEventId);
-    if (stickyEvent && eventContainsLab(stickyEvent, currentLab.slug)) {
+    if (stickyEvent && eventContainsItem(stickyEvent, currentType, current.slug)) {
       activeEvent = stickyEvent;
     } else {
       try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
     }
   }
 
-  if (!activeEvent) return; // Leave the lab page neutral.
+  if (!activeEvent) return; // Leave the page neutral.
 
-  // --- Build lab index within the event ---
-  var labsInEvent = activeEvent.schedule.filter(function (item) { return item.type === 'lab'; });
+  // --- Build item index within the event (over the current page's type) ---
+  var itemsInEvent = activeEvent.schedule.filter(function (item) { return item.type === currentType; });
   var currentIdx = -1;
-  for (var i = 0; i < labsInEvent.length; i++) {
-    if (labsInEvent[i].slug === currentLab.slug) { currentIdx = i; break; }
+  for (var i = 0; i < itemsInEvent.length; i++) {
+    if (itemsInEvent[i].slug === current.slug) { currentIdx = i; break; }
   }
-  if (currentIdx === -1) return; // Defensive; eventContainsLab already checked.
+  if (currentIdx === -1) return; // Defensive; eventContainsItem already checked.
 
-  var currentLabInSchedule = labsInEvent[currentIdx];
-  var prevLab = currentIdx > 0 ? labsInEvent[currentIdx - 1] : null;
-  var nextLab = currentIdx < labsInEvent.length - 1 ? labsInEvent[currentIdx + 1] : null;
+  var prevItem = currentIdx > 0 ? itemsInEvent[currentIdx - 1] : null;
+  var nextItem = currentIdx < itemsInEvent.length - 1 ? itemsInEvent[currentIdx + 1] : null;
 
   var activeEventUrl = buildSameOriginUrl(activeEvent.url);
 
@@ -142,32 +154,32 @@
   if (kindLabelEl) kindLabelEl.textContent = kindLabel;
   railEventLink.href = urlHrefOr(activeEventUrl);
   railEventName.textContent = activeEvent.title;
-  railPosition.textContent = 'Lab ' + (currentIdx + 1) + ' of ' + labsInEvent.length;
+  railPosition.textContent = typeWord + ' ' + (currentIdx + 1) + ' of ' + itemsInEvent.length;
 
-  var prevLabUrl = prevLab ? buildLabUrl(prevLab.url, activeEvent.event_id) : null;
-  var nextLabUrl = nextLab ? buildLabUrl(nextLab.url, activeEvent.event_id) : null;
+  var prevItemUrl = prevItem ? buildItemUrl(prevItem.url, activeEvent.event_id) : null;
+  var nextItemUrl = nextItem ? buildItemUrl(nextItem.url, activeEvent.event_id) : null;
 
-  if (prevLab && prevLabUrl) {
+  if (prevItem && prevItemUrl) {
     prevBtn.removeAttribute('disabled');
-    prevBtn.setAttribute('aria-label', 'Previous lab: ' + prevLab.title);
+    prevBtn.setAttribute('aria-label', 'Previous ' + typeWordLower + ': ' + prevItem.title);
     prevBtn.addEventListener('click', function () {
-      window.location.assign(prevLabUrl.href);
+      window.location.assign(prevItemUrl.href);
     });
   } else {
     prevBtn.setAttribute('disabled', '');
-    prevBtn.setAttribute('aria-label', 'No previous lab');
+    prevBtn.setAttribute('aria-label', 'No previous ' + typeWordLower);
   }
 
-  if (nextLab && nextLabUrl) {
+  if (nextItem && nextItemUrl) {
     nextBtn.removeAttribute('disabled');
-    nextBtn.setAttribute('aria-label', 'Next lab: ' + nextLab.title);
+    nextBtn.setAttribute('aria-label', 'Next ' + typeWordLower + ': ' + nextItem.title);
     nextBtn.addEventListener('click', function () {
-      window.location.assign(nextLabUrl.href);
+      window.location.assign(nextItemUrl.href);
     });
   } else {
     nextBtn.setAttribute('disabled', '');
     nextBtn.setAttribute('aria-label', 'Back to ' + activeEvent.title);
-    // When at the last lab, Next goes back to the event overview.
+    // When at the last item, Next goes back to the event overview.
     nextBtn.removeAttribute('disabled');
     nextBtn.addEventListener('click', function () {
       if (activeEventUrl) window.location.assign(activeEventUrl.href);
@@ -175,23 +187,25 @@
   }
 
   // --- Populate bottom nav-pair cards ---
-  if (prevLab && prevLabUrl) {
-    prevCard.href = prevLabUrl.href;
-    prevCardTitle.textContent = prevLab.title;
-    prevCardDesc.textContent = prevLab.label || ('Lab ' + currentIdx);
-  } else {
-    prevCard.href = urlHrefOr(activeEventUrl);
-    prevCardTitle.textContent = 'Back to ' + activeEvent.title;
-    prevCardDesc.textContent = 'Event overview';
-  }
-  if (nextLab && nextLabUrl) {
-    nextCard.href = nextLabUrl.href;
-    nextCardTitle.textContent = nextLab.title;
-    nextCardDesc.textContent = nextLab.label || ('Lab ' + (currentIdx + 2));
-  } else {
-    nextCard.href = urlHrefOr(activeEventUrl);
-    nextCardTitle.textContent = 'Finish ' + activeEvent.title;
-    nextCardDesc.textContent = 'Event overview';
+  if (navpair && prevCard && nextCard) {
+    if (prevItem && prevItemUrl) {
+      prevCard.href = prevItemUrl.href;
+      prevCardTitle.textContent = prevItem.title;
+      prevCardDesc.textContent = prevItem.label || (typeWord + ' ' + currentIdx);
+    } else {
+      prevCard.href = urlHrefOr(activeEventUrl);
+      prevCardTitle.textContent = 'Back to ' + activeEvent.title;
+      prevCardDesc.textContent = 'Event overview';
+    }
+    if (nextItem && nextItemUrl) {
+      nextCard.href = nextItemUrl.href;
+      nextCardTitle.textContent = nextItem.title;
+      nextCardDesc.textContent = nextItem.label || (typeWord + ' ' + (currentIdx + 2));
+    } else {
+      nextCard.href = urlHrefOr(activeEventUrl);
+      nextCardTitle.textContent = 'Finish ' + activeEvent.title;
+      nextCardDesc.textContent = 'Event overview';
+    }
   }
 
   // --- Populate agenda popover ---
@@ -214,12 +228,14 @@
     var bodyCell = document.createElement('span');
     bodyCell.className = 'event-agenda-body';
 
-    if (item.type === 'lab') {
-      var itemUrl = buildLabUrl(item.url, activeEvent.event_id);
+    if (item.type === 'lab' || item.type === 'module') {
+      // Both labs and modules are first-class destinations; render them as
+      // links that carry the event context so navigation stays in-event.
+      var itemUrl = buildItemUrl(item.url, activeEvent.event_id);
       var a = document.createElement('a');
       a.href = urlHrefOr(itemUrl);
       a.textContent = (item.label ? item.label + ': ' : '') + item.title;
-      if (item.slug === currentLab.slug) {
+      if (item.type === currentType && item.slug === current.slug) {
         a.setAttribute('aria-current', 'page');
         li.classList.add('event-agenda-row--current');
       }
@@ -267,7 +283,7 @@
     expandBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
     if (open) {
       agendaPanel.hidden = false;
-      // Scroll the current-lab row into view inside the popover.
+      // Scroll the current row into view inside the popover.
       var currentRow = agendaList.querySelector('.event-agenda-row--current');
       if (currentRow) currentRow.scrollIntoView({ block: 'nearest', inline: 'nearest' });
     } else {
@@ -308,26 +324,29 @@
   });
 
   // --- Breadcrumb override ---
-  // Replaces the default "Home / Labs / <slugified>" with
-  // "Home / Events / <Event Name> / <Lab Title>". If the breadcrumb nav
-  // isn't in the page (some layouts) this is a silent no-op.
+  // Replaces the default breadcrumb with "Home / Events|Workshops / <Event
+  // Name> / <Item Title>". Works with either the theme breadcrumb
+  // (nav.breadcrumbs ol, used by lab pages) or the module page's custom
+  // nav.mod-breadcrumb. Silent no-op if neither is present.
   //
   // Built entirely via document.createElement + textContent so no string
   // concatenation flows into innerHTML — the XSS-through-DOM sink is
   // removed structurally rather than relying on escaping.
   var originalBreadcrumbChildren = null;
-  function overrideBreadcrumb() {
-    if (!breadcrumbsNav) return;
+  var breadcrumbTarget = breadcrumbsNav || modBreadcrumb;
 
-    // Snapshot the existing children so restoreBreadcrumb() can put them back.
+  function snapshotAndClear(el) {
     originalBreadcrumbChildren = [];
-    while (breadcrumbsNav.firstChild) {
-      originalBreadcrumbChildren.push(breadcrumbsNav.firstChild);
-      breadcrumbsNav.removeChild(breadcrumbsNav.firstChild);
+    while (el.firstChild) {
+      originalBreadcrumbChildren.push(el.firstChild);
+      el.removeChild(el.firstChild);
     }
+  }
+
+  function overrideThemeBreadcrumb() {
+    snapshotAndClear(breadcrumbsNav);
 
     var baseurl = '';
-    // Infer baseurl from any lingering breadcrumb link that we just removed.
     for (var i = 0; i < originalBreadcrumbChildren.length; i++) {
       var anchor = originalBreadcrumbChildren[i].querySelector
         ? originalBreadcrumbChildren[i].querySelector('a')
@@ -369,14 +388,41 @@
 
     var currentLi = document.createElement('li');
     currentLi.className = 'current';
-    currentLi.textContent = currentLab.title;
+    currentLi.textContent = current.title;
     breadcrumbsNav.appendChild(currentLi);
   }
+
+  function overrideModuleBreadcrumb() {
+    snapshotAndClear(modBreadcrumb);
+
+    var rootLink = document.createElement('a');
+    rootLink.href = urlHrefOr(activeEventUrl);
+    rootLink.textContent = activeEvent.title;
+    modBreadcrumb.appendChild(rootLink);
+
+    var sep = document.createElement('span');
+    sep.setAttribute('aria-hidden', 'true');
+    sep.textContent = '/';
+    modBreadcrumb.appendChild(sep);
+
+    var currentSpan = document.createElement('span');
+    currentSpan.className = 'mod-breadcrumb-current';
+    currentSpan.textContent = current.title;
+    modBreadcrumb.appendChild(currentSpan);
+  }
+
+  function overrideBreadcrumb() {
+    if (breadcrumbsNav) {
+      overrideThemeBreadcrumb();
+    } else if (modBreadcrumb) {
+      overrideModuleBreadcrumb();
+    }
+  }
   function restoreBreadcrumb() {
-    if (!breadcrumbsNav || originalBreadcrumbChildren === null) return;
-    while (breadcrumbsNav.firstChild) breadcrumbsNav.removeChild(breadcrumbsNav.firstChild);
+    if (!breadcrumbTarget || originalBreadcrumbChildren === null) return;
+    while (breadcrumbTarget.firstChild) breadcrumbTarget.removeChild(breadcrumbTarget.firstChild);
     for (var i = 0; i < originalBreadcrumbChildren.length; i++) {
-      breadcrumbsNav.appendChild(originalBreadcrumbChildren[i]);
+      breadcrumbTarget.appendChild(originalBreadcrumbChildren[i]);
     }
   }
 

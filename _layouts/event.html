@@ -99,14 +99,30 @@ layout: single
   min-height: 44px;
 }
 
-/* Lab rows: prominent card with an accent left rail — the only rows that
-   are interactive, so they should read as primary calls to action. */
+/* Lab rows: prominent card with an accent left rail — interactive, so they
+   read as the primary calls to action (blue accent rail). */
 .ws-agenda-row--lab {
   background: var(--color-bg);
   border: 1px solid var(--color-border);
   border-left: 4px solid var(--color-accent);
   padding: 1em 1.2em 1em 1.1em;
   min-height: 72px;
+}
+
+/* Module rows: also interactive cards (they link to the module page), styled
+   like labs but with a distinct purple accent rail so the two read as
+   companion-but-different in the timeline. */
+.ws-agenda-row--module {
+  background: var(--color-bg);
+  border: 1px solid var(--color-border);
+  border-left: 4px solid var(--color-journey-purple);
+  padding: 1em 1.2em 1em 1.1em;
+  min-height: 72px;
+}
+.ws-agenda-row--module:hover,
+.ws-agenda-row--module:focus-within {
+  border-color: var(--color-border-strong);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
 }
 
 /* Non-lab rows: compact, unboxed plain rows aligned to the same time
@@ -375,7 +391,7 @@ layout: single
     {%- if mod -%}
       {%- assign display_title = item.title | default: mod.title -%}
       {%- assign mod_duration = item.duration | default: mod.duration -%}
-      <li class="ws-agenda-row ws-agenda-row--session">
+      <li class="ws-agenda-row ws-agenda-row--module">
         <div class="ws-agenda-time">{% if item.time %}{{ item.time }}{% else %}&nbsp;{% endif %}</div>
         <div class="ws-agenda-body">
           <div class="ws-agenda-title">
