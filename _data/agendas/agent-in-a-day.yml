@@ -1,11 +1,18 @@
 event_id: agent-in-a-day
 
 # Agent in a Day — 1-day hands-on agenda.
-# Module items reference first-class module entities in the _modules collection;
-# lab rows reference labs in _labs/<slug>.md. Both carry a short event-friendly
-# `title:` override; the full lab/module title still lives in its own file.
-# Module slide decks resolve automatically from each module's `slides:` front
-# matter, so no `slides:` lines are needed here.
+#
+# Module and lab rows are linked to first-class entities by `slug` only, so
+# they stay in sync automatically: the layout resolves the link, description,
+# difficulty level, duration, and (for modules) slide deck live from
+# _modules/<slug>.md and _labs/<slug>.md on every build. Do NOT duplicate
+# those values here — an override freezes the field (`item.x | default: entity.x`).
+#
+# The ONLY intentional override kept here is the short `title:` on lab rows:
+# an event-friendly agenda label (e.g. "Variables, Agents, and Channels") that
+# is deliberately more concise than the lab's full descriptive title. Everything
+# else flows from the entity. Sessions and breaks are not entity-backed, so they
+# carry their own title/description/duration.
 
 schedule:
   - type: session
@@ -25,9 +32,7 @@ schedule:
   - type: module
     slug: agent-builder
     label: "Module 1"
-    title: "M365 Agent Builder"
     time: "09:30"
-    duration: 30
 
   - type: break
     title: "Coffee break / Q&A"
@@ -39,21 +44,17 @@ schedule:
     label: "Lab 1"
     title: "M365 Agent Builder"
     time: "10:15"
-    duration: 30
 
   - type: module
     slug: core-concepts-part1
     label: "Module 2"
-    title: "Copilot Studio Core Concepts - Part 1"
     time: "10:45"
-    duration: 30
 
   - type: lab
     slug: core-concepts-agent-knowledge-tools
     label: "Lab 2"
     title: "Creation, Topics, Knowledge, and Tools"
     time: "11:15"
-    duration: 45
 
   - type: break
     title: "Lunch break"
@@ -63,16 +64,13 @@ schedule:
   - type: module
     slug: core-concepts-part2
     label: "Module 3"
-    title: "Copilot Studio Core Concepts - Part 2"
     time: "13:00"
-    duration: 30
 
   - type: lab
     slug: core-concepts-variables-agents-channels
     label: "Lab 3"
     title: "Variables, Agents, and Channels"
     time: "13:30"
-    duration: 30
 
   - type: break
     title: "Coffee break / Q&A"
@@ -82,13 +80,10 @@ schedule:
   - type: module
     slug: orchestration
     label: "Module 4"
-    title: "Orchestration & Dynamic Chaining"
     time: "14:15"
-    duration: 45
 
   - type: lab
     slug: mcs-orchestration
     label: "Lab 4"
     title: "Orchestration with Copilot Studio"
     time: "15:00"
-    duration: 60
