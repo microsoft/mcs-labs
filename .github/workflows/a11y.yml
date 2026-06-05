@@ -48,14 +48,15 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v5
+        # The action runtime is Node 24 (clears the deprecation), but the
+        # browser test tool runs on Node 20: pa11y-ci's bundled Puppeteer 9
+        # cannot launch its Chromium on Node 24. The Node the tool runs on is
+        # independent of the action's own runtime.
         with:
-          node-version: "24"
+          node-version: "20"
 
       - name: Install dev dependencies
         run: npm install --no-audit --no-fund
-
-      - name: Install Chrome for Puppeteer
-        run: npx puppeteer browsers install chrome
 
       - name: Serve + wait + run pa11y-ci
         # Keep server + wait + run in one step so the background http-server

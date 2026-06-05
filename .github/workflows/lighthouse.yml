@@ -48,8 +48,11 @@ jobs:
 
       - name: Setup Node
         uses: actions/setup-node@v5
+        # Action runtime is Node 24 (clears the deprecation); the Lighthouse
+        # tool itself runs on Node 20 to match the pa11y job and stay on the
+        # browser tooling's validated runtime.
         with:
-          node-version: "24"
+          node-version: "20"
 
       - name: Install dev dependencies
         run: npm install --no-audit --no-fund
