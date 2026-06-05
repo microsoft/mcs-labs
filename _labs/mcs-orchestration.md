@@ -619,9 +619,12 @@ You'll build a brand-new agent for this Use Case. It is **separate** from the Ac
 
 1. In Copilot Studio, select **Agents** in the left navigation pane.
 
-1. On the Agents page, select **+ Create blank agent** in the upper-right corner.
+    > [!NOTE]
+    > **New experience toggle.** Copilot Studio's **New experience** toggle (top-right of the Home and Agents pages) is **on by default** and unlocks the newest agent-building capabilities, including the new orchestrator. You can switch it **off** to return to the previous experience, but you then **lose access to those new-agent capabilities (including the new orchestrator)**. This Use Case builds a **classic agent**, so leave the New experience on and use the **New Agent ▾ → New classic agent** path below.
 
-    ![Agents page with the Create blank agent button](images/image-43.png)
+1. On the Agents page, select the dropdown arrow (**▾**) next to **New Agent** in the upper-right corner, then choose **New classic agent**. (The older standalone **+ Create blank agent** button was replaced by this dropdown when the New experience became the default.)
+
+    ![Agents page with the New Agent dropdown expanded showing New classic agent](images/image-43.png)
 
 1. In the **Name your agent** dialog, enter:
 
