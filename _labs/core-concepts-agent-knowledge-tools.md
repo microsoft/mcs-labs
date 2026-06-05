@@ -166,6 +166,13 @@ Create a fully configured Copilot Studio agent with clear instructions and Claud
    > 1. **Welcome to Microsoft Copilot Studio** — choose a country/region (e.g. **United States**) and select **Get Started**. The marketing-opt-in checkbox is optional.
    > 1. **Welcome to Copilot Studio!** — a 4-step product tour. Click **Skip** (or step through with **Next**) to dismiss it.
 
+   > [!IMPORTANT]
+   > **This lab uses the previous Copilot Studio experience.** Copilot Studio's **New experience** toggle (top-right of the Home and Agents pages) is **on by default**. While it's on, the Home page shows **Agent** / **Workflow** cards instead of the describe textbox below, and creating an agent that way produces a **new-type agent that has no Topics** (you build a Topic in Use Case #4) and no auto-generated instructions — so the steps in this lab won't match.
+   >
+   > Turn the **New experience** toggle **off** before continuing: select the **New experience** toggle, then **Switch back** in the confirmation dialog. The Home page will return to the **"What would you like to build?"** layout described below.
+   >
+   > **Tradeoff:** the previous experience does **not** include the newest agent-building capabilities (including the new orchestrator). This lab intentionally uses the classic, Topics-based authoring flow, so the previous experience is the right choice here. You can turn the New experience back on at any time once you've finished the core-concepts labs.
+
 1. On the Copilot Studio **Home** page, under the heading **What would you like to build?**, locate the inline agent-creation textbox (placeholder _"Start building by describing what your agent needs to do"_). The **Agent** tab should be selected by default.
 
    > [!NOTE]
