@@ -54,6 +54,9 @@ jobs:
       - name: Install dev dependencies
         run: npm install --no-audit --no-fund
 
+      - name: Install Chrome for Puppeteer
+        run: npx puppeteer browsers install chrome
+
       - name: Serve + wait + run pa11y-ci
         # Keep server + wait + run in one step so the background http-server
         # process persists — GitHub Actions runs each step in its own shell
