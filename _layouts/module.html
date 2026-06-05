@@ -303,6 +303,13 @@ layout: single
   {% endif %}
 </section>
 
+{% comment %}
+  Event navigation rail — hidden until event-nav/script.html resolves an
+  active event context (via ?event= or sticky sessionStorage). Lets a module
+  reached from an agenda show the same in-event nav + breadcrumb as labs.
+{% endcomment %}
+{% include event-nav/rail.html %}
+
 {% if linked_lab %}
 <section class="mod-lab" aria-labelledby="module-lab-heading">
   <h2 class="mod-section-heading" id="module-lab-heading">Hands-on Lab</h2>
@@ -324,3 +331,7 @@ layout: single
   </a>
 </section>
 {% endif %}
+
+{% include event-nav/nav-pair.html %}
+
+{% include event-nav/script.html %}
