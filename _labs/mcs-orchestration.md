@@ -637,21 +637,9 @@ Stand up a new-type agent and validate how the New Orchestrator's Agentic Reason
 > [!NOTE]
 > **Why a new agent rather than the description-driven creation flow?** Starting from a named, lightly-instructed agent keeps the baseline clean — the behavior you observe in the test phase is the direct result of the tools you attach and the New Orchestrator driving them, not something a description-driven setup added on your behalf.
 
-#### Add knowledge to the agent
-
-Add the workshop's sample policy document so the agent has a body of knowledge to reason against.
-
-1. On the **Build** tab, select **Add knowledge** in the right rail.
-
-1. In the **Add knowledge** dialog, select the **SharePoint** card (**Powered by Work IQ**), choose **Browse items**, and navigate **OnePlace → Documents → HR → company_policies_sample.pdf**, then **Confirm selection** and **Add to agent**. (The Work IQ SharePoint path queries SharePoint live, so the source is **Ready** almost immediately — no Dataverse indexing wait.)
-
-1. Confirm the file appears in the **Knowledge** section.
-
-    ![Build tab with knowledge file and tools attached](images/new-orch-09.png)
-
 #### Add the tools the orchestrator will use
 
-You'll add three tools. In the new designer, adding a tool is **Add tool → pick the tool → Add**, and then you configure its **connection** and **authentication mode** from the tool's **Details** panel.
+You'll add two tools. In the new designer, adding a tool is **Add tool → pick the tool → Add**, and then you configure its **connection** and **authentication mode** from the tool's **Details** panel.
 
 ##### Add the Weather tool (Maker authentication)
 
@@ -686,6 +674,18 @@ You'll add three tools. In the new designer, adding a tool is **Add tool → pic
 1. On **Review capabilities** (it lists the MCP server's actions — `read_query`, `search`, `create_table`, `update_record`, and so on), leave the **default selection** as-is and select **Confirm** to attach the server. This lab only ever exercises **`read_query`** (reading accounts and contacts) and **`search`** (schema discovery); the orchestrator won't call the write/delete actions unless a prompt explicitly asks it to.
 
 1. Select **Save** in the command bar. Your **Tools** list should now show **Get current weather** and **Microsoft Dataverse MCP Server**.
+
+#### Add knowledge to the agent
+
+Add the workshop's sample policy document so the agent has a body of knowledge to reason against.
+
+1. On the **Build** tab, select **Add knowledge** in the right rail.
+
+1. In the **Add knowledge** dialog, select the **SharePoint** card (**Powered by Work IQ**), choose **Browse items**, and navigate **OnePlace → Documents → HR → company_policies_sample.pdf**, then **Confirm selection** and **Add to agent**. (The Work IQ SharePoint path queries SharePoint live, so the source is **Ready** almost immediately — no Dataverse indexing wait.)
+
+1. Confirm the file appears in the **Knowledge** section.
+
+    ![Build tab with knowledge file and tools attached](images/new-orch-09.png)
 
 #### Test the Agentic Reasoning Loop
 
