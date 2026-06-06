@@ -658,8 +658,6 @@ You'll add two tools. In the new designer, adding a tool is **Add tool → pick 
 
 1. Still in **Tool details**, select **Inputs** from the left panel. Leave **Location** set to **AI** (the agent infers the location from the conversation). For **Units**, change **How is this filled?** from **AI** to **Value** so you control the unit system, then bind it to a variable: open the **Value** picker, select **+ Add variable**, and in the variable's **Value** field **click the chevron on the right** — *that chevron is where the unit options appear*. Choose **I** (Imperial) for this lab, then **Save**.
 
-    ![Tool details – Units input set to a Value of I (Imperial)](images/new-orch-03b.png)
-
     > [!NOTE]
     > **Units** accepts **`I`** for Imperial (°F) or **`C`** for Celsius (°C). This lab uses **`I`**, but set whichever matches your preference — the agent reports temperatures in the unit you pick here.
 
