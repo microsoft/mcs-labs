@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -47,7 +47,11 @@ jobs:
           JEKYLL_ENV: production
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
+        # The action runtime is Node 24 (clears the deprecation), but the
+        # browser test tool runs on Node 20: pa11y-ci's bundled Puppeteer 9
+        # cannot launch its Chromium on Node 24. The Node the tool runs on is
+        # independent of the action's own runtime.
         with:
           node-version: "20"
 

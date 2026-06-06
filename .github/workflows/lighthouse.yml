@@ -33,7 +33,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
@@ -47,7 +47,10 @@ jobs:
           JEKYLL_ENV: production
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
+        # Action runtime is Node 24 (clears the deprecation); the Lighthouse
+        # tool itself runs on Node 20 to match the pa11y job and stay on the
+        # browser tooling's validated runtime.
         with:
           node-version: "20"
 
