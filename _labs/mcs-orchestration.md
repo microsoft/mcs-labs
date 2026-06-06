@@ -9,7 +9,7 @@ lab_type: local
 section: core_learning_path
 journeys: ["developer"]
 bootcamp_order: "8"
-description: "Apply Module 9 concepts hands-on: explore how Copilot Studio's generative orchestration engine routes requests, see the impact of Instructions and Descriptions on the planner, and enable Enhanced Task Completion to change orchestration behavior."
+description: "Apply Module 9 concepts hands-on: explore how Copilot Studio's generative orchestration engine routes requests, see the impact of Instructions and Descriptions on the planner, and use the New Orchestrator's Agentic Reasoning Loop in a new-type agent."
 
 ---
 
@@ -17,7 +17,7 @@ description: "Apply Module 9 concepts hands-on: explore how Copilot Studio's gen
 
 # Orchestration with Copilot Studio
 
-Apply Module 9 concepts hands-on: explore how Copilot Studio's generative orchestration engine routes requests, see the impact of Instructions and Descriptions on the planner, and enable Enhanced Task Completion to change orchestration behavior.
+Apply Module 9 concepts hands-on: explore how Copilot Studio's generative orchestration engine routes requests, see the impact of Instructions and Descriptions on the planner, and use the New Orchestrator's Agentic Reasoning Loop in a new-type agent.
 
 ---
 
@@ -25,7 +25,7 @@ Apply Module 9 concepts hands-on: explore how Copilot Studio's generative orches
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 60 minutes | After completing this lab, participants will understand how Copilot Studio's generative orchestration engine selects tools and child/connected agents, see firsthand how Instructions and Descriptions shape that selection, and enable Enhanced Task Completion to alter orchestration behavior. |
+| 300 | Maker | 60 minutes | After completing this lab, participants will understand how Copilot Studio's generative orchestration engine selects tools and child/connected agents, see firsthand how Instructions and Descriptions shape that selection, and use the New Orchestrator (Agentic Reasoning Loop) in a new-type agent. |
 
 ---
 
@@ -41,19 +41,19 @@ Apply Module 9 concepts hands-on: explore how Copilot Studio's generative orches
 - [Instructions by Use Case](#instructions-by-use-case)
   - [Use Case #1: Get the Sample Connected Agent Working](#use-case-1-get-the-sample-connected-agent-working)
   - [Use Case #2: See the Impact of Instructions and Descriptions on the Planner](#use-case-2-see-the-impact-of-instructions-and-descriptions-on-the-planner)
-  - [Use Case #3: Enable Enhanced Task Completion](#use-case-3-enable-enhanced-task-completion)
+  - [Use Case #3: New Orchestrator – Agentic Reasoning Loop](#use-case-3-new-orchestrator--agentic-reasoning-loop)
 
 ---
 
 ## Why This Matters
 
-**Makers and Architects** — The generative orchestration engine in Copilot Studio decides which tool, knowledge source, child agent, or connected agent should handle each turn. The quality of those decisions depends almost entirely on the **descriptions** and **instructions** you provide and on whether features like **Enhanced Task Completion** are enabled. Getting orchestration right is the difference between a copilot that "feels smart" and one that hallucinates or routes to the wrong place.
+**Makers and Architects** — The generative orchestration engine in Copilot Studio decides which tool, knowledge source, child agent, or connected agent should handle each turn. The quality of those decisions depends almost entirely on the **descriptions** and **instructions** you provide and on whether you use the **New Orchestrator** (the Agentic Reasoning Loop in new-type agents). Getting orchestration right is the difference between a copilot that "feels smart" and one that hallucinates or routes to the wrong place.
 
 **Common challenges solved by this lab:**
 
 - "My agent picked the wrong tool"
 - "I don't know how Instructions vs Descriptions affect routing"
-- "What does Enhanced Task Completion actually change?"
+- "What does the New Orchestrator (Agentic Reasoning Loop) actually change?"
 
 **Pairs with:** Module 9 — Orchestration and Dynamic Chaining Concepts (the 45-minute session immediately preceding this lab).
 
@@ -63,14 +63,14 @@ Apply Module 9 concepts hands-on: explore how Copilot Studio's generative orches
 
 Welcome to the Copilot Studio Orchestration lab. This is the hands-on companion to **Module 9 — Orchestration and Dynamic Chaining Concepts**.
 
-You'll start by ensuring a sample connected agent is configured and working in your environment, then walk through changing Instructions and Descriptions to see how the planner's choices shift, and finally enable Enhanced Task Completion to compare orchestration behavior with and without it.
+You'll start by ensuring a sample connected agent is configured and working in your environment, then walk through changing Instructions and Descriptions to see how the planner's choices shift, and finally build a new-type agent whose **New Orchestrator** (Agentic Reasoning Loop) completes multi-step tasks end to end.
 
 **What You Will Learn**
 
 - How **Instructions** and **Descriptions** shape standard generative orchestration, and the priority order the planner uses
 - How to use the **activity tracker** and **Get rationale** to debug and tune planner decisions
-- What **Enhanced Task Completion**'s Reasoning Loop changes about orchestration
-- When to choose standard orchestration vs. Enhanced Task Completion
+- What the **New Orchestrator**'s Agentic Reasoning Loop changes about orchestration
+- When to choose standard orchestration vs. the New Orchestrator (Agentic Reasoning Loop)
 
 ---
 
@@ -81,7 +81,7 @@ You'll start by ensuring a sample connected agent is configured and working in y
 | **Generative Orchestration** | The engine that decides which tool, knowledge source, child agent, or connected agent handles each turn |
 | **Instructions** | Top-level guidance for the parent agent — shapes overall behavior and how the planner approaches each request |
 | **Descriptions** | Per-tool / per-agent metadata the planner reads when deciding what to route to |
-| **Enhanced Task Completion** | A feature that changes how the orchestrator drives multi-step task completion |
+| **New Orchestrator (Agentic Reasoning Loop)** | The default orchestrator in new-type agents — plans, acts, observes, and iterates within a single turn until the task is complete (previewed on classic agents as Enhanced Task Completion) |
 
 ---
 
@@ -99,7 +99,7 @@ You'll start by ensuring a sample connected agent is configured and working in y
 - A Power Platform environment where you can edit Dataverse table views and toggle environment settings (System Administrator or System Customizer)
 - Sample data loaded into the Account and Contact Dataverse tables (the (sample) records used throughout Use Cases #1 and #2)
 - The pre-loaded **Account Data Lookup Agent** available in your environment (Use Case #1 verifies and publishes it)
-- For Use Case #3 only: an environment where Enhanced Task Completion (preview), Dataverse Intelligence (Work IQ), and Dataverse MCP servers can be turned on
+- For Use Case #3 only: an environment where new-type agents (the New Orchestrator), Dataverse Intelligence (Work IQ), and Dataverse MCP servers can be used
 
 ---
 
@@ -109,7 +109,7 @@ In this lab, you'll explore how Copilot Studio's generative orchestration engine
 
 - Have a working sample connected agent (the Account Data Lookup Agent) verified in your environment
 - Understand the impact of Instructions and Descriptions on the planner
-- Have enabled Enhanced Task Completion and observed how orchestration behavior changes
+- Have built a new-type agent and observed how the New Orchestrator (Agentic Reasoning Loop) completes multi-step tasks
 
 ---
 
@@ -119,7 +119,7 @@ In this lab, you'll explore how Copilot Studio's generative orchestration engine
 |------|----------|-------------|--------|
 | 1 | [Get the Sample Connected Agent Working](#use-case-1-get-the-sample-connected-agent-working) | Confirm the prebuilt connected agent and its data are ready before working with it | 10 min |
 | 2 | [See the Impact of Instructions and Descriptions on the Planner](#use-case-2-see-the-impact-of-instructions-and-descriptions-on-the-planner) | Build intuition for how planner decisions track with Instructions and Descriptions | 20 min |
-| 3 | [Enable Enhanced Task Completion](#use-case-3-enable-enhanced-task-completion) | Compare orchestration behavior with and without Enhanced Task Completion | 30 min |
+| 3 | [New Orchestrator – Agentic Reasoning Loop](#use-case-3-new-orchestrator--agentic-reasoning-loop) | See how a new-type agent's New Orchestrator completes multi-step tasks end to end | 30 min |
 
 ---
 
@@ -158,13 +158,13 @@ Confirm the environment is ready and the sample connected agent is published.
 
 1. Select **Go to Power Platform admin center**
 
-1. In the left navigation, select **Manage** then select **Environments**
+1. In the **Power Platform admin center** ([https://admin.powerplatform.microsoft.com](https://admin.powerplatform.microsoft.com)), select the **Manage** tab, then select **Environments**
 
-1. Select your environment from the list
+1. Select your environment from the list to open its details page
 
-1. Select **Settings** in the top menu
+1. Select **Settings** on the **top navigation bar** of that page (the **Settings** command across the top of the environment — *not* the gear/global settings). Navigate to it through the admin center rather than pasting a direct URL.
 
-1. Expand **Product** and select **Features**
+1. Expand the **Product** group and select **Features**
 
 1. In the Dataverse search section, verify that **both** check boxes are enabled:
    - **Turn on search indexing to support Dataverse intelligence (Work IQ) in AI and agent experiences**
@@ -565,23 +565,26 @@ Open the **Account Data Lookup Agent** in Copilot Studio and walk through each o
 
 ---
 
-## Use Case #3: Enable Enhanced Task Completion
+## Use Case #3: New Orchestrator – Agentic Reasoning Loop
 
-Build a new **Sales Account Assistant** agent, enable **Enhanced Task Completion** on it, attach a set of tools the planner can orchestrate, and test how the agent behaves with the feature turned on.
+Build a brand-new **Sales Account Assistant** in Copilot Studio's **New experience**, attach knowledge and a set of tools, and watch the **New Orchestrator** drive multi-step tasks with its **Agentic Reasoning Loop** — planning, calling a tool, observing the result, and iterating until the user's task is complete, all in a single turn.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Enable Enhanced Task Completion | Show how Enhanced Task Completion changes orchestration behavior | 30 minutes |
+| New Orchestrator – Agentic Reasoning Loop | See how a new-type agent's native orchestrator completes multi-step tasks end to end | 30 minutes |
 
 **Summary of tasks**
 
-In this section, you'll enable the **Dataverse Intelligence (Work IQ)** and **Dataverse MCP server** features required for this lab's scenarios, create a new Sales Account Assistant agent, attach a sample knowledge file, turn on Enhanced Task Completion, build the tools the agent will orchestrate, and run a series of tests to see the feature in action.
+You'll create a **new-type agent** (in the New experience), add a knowledge file and two tools (a public weather connector and the **Microsoft Dataverse MCP Server**), and run a series of prompts that exercise the **Agentic Reasoning Loop** — multi-tool reasoning, dynamic chaining, and train-of-thought inspection.
 
-**Scenario:** You're building a Sales Account Assistant that needs to complete multi-step tasks for sales associates without prompting them at every step. Enhanced Task Completion changes how the planner drives the conversation toward the user's end goal, so the same prompts produce noticeably different behavior with the feature on versus a baseline agent.
+**Scenario:** You're building a Sales Account Assistant that completes multi-step tasks for sales associates without stopping to prompt them at each step. A new-type agent uses the New Orchestrator natively, so the same prompts produce a finished result rather than a series of intermediate confirmations.
+
+> [!NOTE]
+> **What happened to "Enhanced Task Completion"?** On **classic** agents, the Agentic Reasoning Loop was previewed behind a **Settings → Generative AI → Enhanced task completion** toggle. In the **New experience**, a **new-type agent uses the New Orchestrator (Agentic Reasoning Loop) by default** — there's no toggle to flip. This Use Case builds a new-type agent so you see the orchestrator as it ships, not the preview. (Use Cases #1 and #2 deliberately use the **classic** Account Data Lookup Agent because they showcase the classic surfaces — child agents, the Activity Tracker, and **Get rationale** — which are specific to standard generative orchestration.)
 
 ### Objective
 
-Stand up a new agent with Enhanced Task Completion enabled and validate the feature's impact on orchestration behavior.
+Stand up a new-type agent and validate how the New Orchestrator's Agentic Reasoning Loop drives multi-tool task completion.
 
 ---
 
@@ -590,337 +593,148 @@ Stand up a new agent with Enhanced Task Completion enabled and validate the feat
 #### Enable Dataverse Intelligence (Work IQ) and Dataverse MCP servers
 
 > [!NOTE]
-> The features below are required for the rest of this Use Case to work, but they are **not** required by Enhanced Task Completion itself. They're separate environment-level prerequisites — the Sales Account Assistant relies on **Dataverse Intelligence (Work IQ)** for AI-aware Dataverse access and on **Dataverse MCP servers** for the MCP-based tools you'll build later in this Use Case.
+> These environment features are required for the **Dataverse MCP** tool you'll add below — they are not specific to the New Orchestrator.
 
 1. Navigate to the **Power Platform admin center** the same way you did in [Use Case #1](#use-case-1-get-the-sample-connected-agent-working) — in Copilot Studio, select the **Gear** icon in the upper right, then **Go to Power Platform admin center**.
 
-1. In the left navigation, select **Manage** → **Environments**, choose your environment, then select **Settings** in the top menu.
+1. Select the **Manage** tab, then **Environments**, choose your environment, then select **Settings** on the **top navigation bar** of the environment page (the same top-nav **Settings** command you used in Use Case #1).
 
-1. Expand **Product** and select **Features**.
+1. Expand the **Product** group and select **Features**.
 
-1. Scroll to the **Dataverse intelligence** section and verify that **Turn on Dataverse intelligence (Work IQ) for agents and AI experiences** is checked.
+1. Under **Dataverse intelligence**, verify **Turn on Dataverse intelligence (Work IQ) for agents and AI experiences** is checked.
 
-1. Scroll to the **Dataverse Model Context Protocol** section. Under **Step 1: Decide whether or not you'll allow MCP client access**, verify that **both** options are checked:
-   - **Allow MCP clients to interact with Dataverse MCP server (GA version)**
-   - **Allow MCP clients to interact with Dataverse MCP server (Preview version)**
-
-1. Use the screenshot below to confirm your settings match. Three check boxes should be on — one Work IQ box and two MCP boxes.
-
-    ![WorkIQ + Dataverse MCP feature settings](images/image-42.png)
+1. Under **Dataverse Model Context Protocol**, verify **both** MCP client options are checked (GA and Preview).
 
 1. Select **Save** if you made any changes.
 
-> [!TIP]
-> If you don't see the **Dataverse Model Context Protocol** section at all, your environment hasn't received that release yet. The Use Case will still work for the parts that don't depend on MCP tooling, but specific steps in the *Create the tools* section may need adjustment for non-MCP equivalents.
+    ![WorkIQ + Dataverse MCP feature settings](images/image-42.png)
 
-#### Create the Sales Account Assistant
+#### Create the new-type Sales Account Assistant
 
-You'll build a brand-new agent for this Use Case. It is **separate** from the Account Data Lookup Agent used in Use Cases #1 and #2 — keeping them apart makes the Enhanced Task Completion behavior easier to compare against the baseline you've already seen.
+1. In Copilot Studio, confirm the **New experience** toggle (top-right) is **on** — it is by default.
 
-1. In Copilot Studio, select **Agents** in the left navigation pane.
+1. Select **Agents** in the left navigation pane, then select **New Agent** in the upper-right corner. Selecting **New Agent** itself creates a **new-type agent** in the new designer. (The **New classic agent** option in the dropdown is for the older classic canvas — you do **not** want that here.)
 
-1. On the Agents page, select **+ Create blank agent** in the upper-right corner.
+    > [!NOTE]
+    > Creating an agent this way produces a **new-type agent that runs on the New Orchestration engine** — the one that leverages the **Agentic Reasoning Loop** (plan → act → observe → iterate within a single turn). That orchestration engine is what makes the multi-step behavior you'll see later in this Use Case possible, and it's enabled by default for new-type agents with no toggle to flip.
 
-    ![Agents page with the Create blank agent button](images/image-43.png)
-
-1. In the **Name your agent** dialog, enter:
+1. The new agent designer opens on the **Build** tab. Use the agent-name field (or the **Rename agent** control) to name it:
 
     ```text
     Sales Account Assistant
     ```
 
-    Leave **Agent settings (Optional)** collapsed — the defaults are fine for this Use Case.
+1. In the **Instructions** box, paste a short set of instructions so the orchestrator knows how to use its tools:
 
-    ![Name your agent — Sales Account Assistant](images/image-44.png)
+    ```text
+    You are a Sales Account Assistant for sales associates. Help users complete multi-step tasks end to end. Use your Dataverse tools to look up account and contact data and the weather tool for current weather. When a request touches gifts or spending, follow the company gifting policy in your knowledge. Complete the whole task before responding rather than stopping to ask at each step.
+    ```
 
-1. Select **Create**.
+1. Leave the **Model** set to its default (**Claude Sonnet 4.6**) and select **Save** in the command bar. The agent is assigned an ID and the **Preview** and **Evaluate** tabs become available.
 
-1. Wait for the agent to finish provisioning, then confirm you're on the new Sales Account Assistant's **Overview** page (the agent name should appear at the top of the page).
-
-> [!NOTE]
-> **Why a blank agent rather than the description-driven creation flow?** Starting blank means we begin with no instructions, no tools, and no knowledge sources. That's the right baseline for this Use Case — every behavior you observe later in the test phase is the direct result of a setting *you* turn on, not something the description-driven setup added on your behalf. Easier to attribute the changes to Enhanced Task Completion when nothing else has been auto-configured.
-
-#### Add knowledge to the agent
-
-Add the workshop's sample policy document so the agent has a body of knowledge to reason against during the test phase. The document is already published to the workshop's **OnePlace** SharePoint site, so the fastest path is to pick it from there as a SharePoint knowledge source — that path queries SharePoint live via Work IQ and avoids the Dataverse indexing wait of an uploaded file.
-
-1. On the Sales Account Assistant's **Overview** page, scroll down to the **Knowledge** section.
-
-1. Select **+ Add knowledge** in the upper-right of the Knowledge section.
-
-1. In the **Add knowledge** dialog, locate the **SharePoint** card labeled **Powered by Work IQ** (further down in the knowledge-source list — **not** the SharePoint shortcut inside the *Upload file* card at the top, which uploads to Dataverse and requires indexing). Select that card.
-
-1. Select **Browse items**.
-
-1. In the file picker, navigate to **OnePlace → Documents → HR**, then select **company_policies_sample.pdf** and choose **Confirm selection**.
-
-1. Select **Add to agent**. The file appears in the Knowledge section with status **Ready** almost immediately (no Dataverse indexing required).
-
-    ![Knowledge section showing company_policies_sample.pdf with Ready status](images/image-58.png)
+    ![New-type Sales Account Assistant on the Build tab](images/new-orch-01.png)
 
 > [!NOTE]
-> **Why Work IQ SharePoint instead of file upload.** The *Upload file* card at the top of the Add knowledge dialog also offers a SharePoint shortcut, but that path **uploads a copy into Dataverse** and waits on Dataverse indexing (often several minutes in shared environments). The **SharePoint - Powered by Work IQ** card lower in the list **queries SharePoint live** through Work IQ, so the file is Ready immediately and stays in sync with the source document. Use Upload-to-Dataverse only when the file lives on your local machine and isn't already in a SharePoint location the agent's user can read.
+> **Why a new agent rather than the description-driven creation flow?** Starting from a named, lightly-instructed agent keeps the baseline clean — the behavior you observe in the test phase is the direct result of the tools you attach and the New Orchestrator driving them, not something a description-driven setup added on your behalf.
 
-#### Enable Enhanced Task Completion
+#### Add the tools the orchestrator will use
 
-1. With the **Sales Account Assistant** open, select **Settings** in the top toolbar (between **Publish** and the **...** menu).
+You'll add two tools. In the new designer, adding a tool is **Add tool → pick the tool → Add**, and then you configure its **connection** and **authentication mode** from the tool's **Details** panel.
 
-    ![Settings button in the agent's top toolbar](images/image-45.png)
+##### Add the Weather tool (Maker authentication)
 
-1. In the Settings panel, select the **Generative AI** tab on the left.
+1. In the right rail, select **Add tool**. Search for **Weather** and select **Get current weather** (MSN Weather), then select **Add**.
 
-1. Scroll to the **Orchestration** section and turn **Enhanced task completion** to **On**.
+    ![Add tool – MSN Weather Get current weather](images/new-orch-02.png)
 
-1. A confirmation dialog will appear. Read it carefully — it lists exactly which capabilities are supported and which are *unsupported* while Enhanced Task Completion is enabled.
+1. In the **Tools** list in the right rail, **select the `Get current weather` tool** to open its **Tool details**. (Clicking a tool in this menu is how you configure it — there's no separate settings button; the tool's name opens its Details, Inputs, and Outputs panels.)
 
-    ![Enhanced task completion — supported / unsupported confirmation dialog](images/image-46.png)
+1. Under **Authentication mode**, select **Maker**. A **Connection** field appears — select **Not connected → Create new connection → Create**. Once it shows your connection, select **Save**.
 
-    The current dialog states:
-
-    **Supported** with Enhanced Task Completion:
-    - **Tools** (MCP / connectors / Agent Flows)
-    - **Knowledge**
-    - **Connected agents**
-
-    **Unsupported** with Enhanced Task Completion:
-    - **Topics** — your topic-driven dialogs won't run while ETC is on
-    - **Evaluation / Analytics** — evaluation runs and analytics dashboards aren't applicable
-    - **Child agents** — peer-child orchestration like the Account Agent / Contact Agent pattern from Use Case #2 is not supported
-    - **Activity history** — the activity tracker / "Get rationale" view you used in Use Case #2 is not available the same way
+    ![Tool details – Authentication mode set to Maker with a connection](images/new-orch-03.png)
 
     > [!IMPORTANT]
-    > Enhanced Task Completion is an **experimental** feature and is not yet supported for production use. The supported / unsupported list above reflects the current Preview build — **expect this list to change as the feature moves toward general availability**. Always read the in-product dialog at the time you enable it; do not rely solely on this lab's snapshot.
+    > **Use Maker for anonymous or API‑key / service‑account tools.** The MSN Weather connector authenticates anonymously, so it should run as the **maker** — your connection is reused for every end user and no one is prompted to connect at runtime. The same rule applies to any connector that authenticates with a **shared API key or service account** rather than the end user's identity: set those to **Maker** too. If you leave such a tool on **User**, the agent returns a **"Connection Required"** card the first time it tries to call it. (Tools that act *as the signed-in user* — e.g. a mailbox or files connector — would instead keep **User** authentication.)
 
-1. Select **Confirm** to accept the trade-offs and proceed.
-
-1. Back in the Settings panel, you should see the **Enhanced task completion** toggle in the **On** state with the **Experimental** badge, and a banner at the top confirming *"Enhanced task completion is enabled. Some features are not currently supported."* Select **Save** at the bottom of the panel.
-
-    ![Settings panel showing Enhanced task completion enabled, with Save button](images/image-47.png)
-
-1. Close the Settings panel by selecting the **X** in the upper-right corner.
-
-1. Notice that the **Test pane on the right side of the canvas is now larger and takes up roughly half of the screen** — and the **Activity Tracker** view you used throughout Use Case #2 has been replaced by this expanded Test pane. The new orchestrator surfaces its work directly inside the Test pane rather than in a separate Activity Tracker panel.
-
-    ![Sales Account Assistant Overview with the expanded Test pane after enabling ETC](images/image-48.png)
-
-> [!IMPORTANT]
-> The familiar **Activity Tracker** UI from Use Case #2 — the per-turn breakdown showing which child agent and tool the planner chose, plus **Get rationale** — is **not available** while Enhanced Task Completion is on. The expanded Test pane is the new surface for inspecting agent behavior under ETC. If you ever need to compare against standard-orchestration behavior, you'll need to toggle Enhanced Task Completion off, save, and reload — at which point the Activity Tracker comes back.
-
-> [!NOTE]
-> **What you just turned on.** Enabling Enhanced Task Completion swaps the orchestrator under the hood. Standard generative orchestration — the planner you watched in Use Case #2 — uses a single-pass approach where it picks a tool / child / knowledge source per turn based on user intent. Enhanced Task Completion replaces that with a **Reasoning Loop**: the agent plans, calls a tool, observes the result, decides whether the user's task is complete, and iterates. The same prompt that produced one tool call under standard orchestration may now produce several iterations of plan-act-observe before the agent responds. That's the change you'll observe in the test phase.
-
-#### Create the tools the agent will orchestrate
-
-You'll add three tools to the Sales Account Assistant — a public weather connector, the **Work IQ Mail** MCP server (so the agent can read mail context), and the **Microsoft Dataverse MCP Server** (so the agent can reach Dataverse data). Together they give the Reasoning Loop enough surface area to demonstrate Enhanced Task Completion's behavior.
-
-##### Turn on Work IQ for the agent
-
-1. Return to the agent's **Overview** page and scroll down to the **Tools** section.
-
-1. Toggle **Work IQ** to **Enabled**. This is the intelligence layer that personalizes the agent against the signed-in user's Microsoft 365 context (mail, files, calendar, Teams).
-
-    ![Overview — Tools section with Work IQ enabled and Add tool button](images/image-49.png)
-
-##### Add the Weather tool
-
-1. In the **Tools** section, select **Add tool**.
-
-1. In the search box at the top of the Add tool dialog, type:
-
-    ```text
-    Weather
-    ```
-
-1. Under the **MSN Weather** heading, select **Get current weather**.
-
-    ![Add tool — Weather search with MSN Weather Get current weather highlighted](images/image-50.png)
-
-1. The next screen prompts for a **Connection**. Open the **Connection** dropdown and select **+ Create new connection**.
-
-    ![Get current weather — Create new connection](images/image-51.png)
-
-1. Select **Create** to create the MSN Weather connection. Once it shows as connected, return to the Add tool flow and select **Add and configure**.
-
-1. The tool's Details panel opens. Scroll to **Additional details** and locate **Credentials to use**. Change the dropdown to **Maker-provided credentials**.
-
-    ![Get current weather — Maker-provided credentials in Additional details](images/image-52.png)
+1. Still in **Tool details**, select **Inputs** from the left panel. Leave **Location** set to **AI** (the agent infers the location from the conversation). For **Units**, change **How is this filled?** from **AI** to **Value** so you control the unit system, then bind it to a variable: open the **Value** picker, select **+ Add variable**, and in the variable's **Value** field **click the chevron on the right** — *that chevron is where the unit options appear*. Choose **I** (Imperial) for this lab, then **Save**.
 
     > [!NOTE]
-    > **Why Maker-provided credentials for this tool.** The MSN Weather connector doesn't require a per-user identity — it's effectively an anonymous / public-data API. With **Maker-provided credentials**, *your* connection (the maker's) is reused for every end user, so users never see a connection prompt. This is the right pattern for any tool that authenticates anonymously, with an API key, or with a service account. For tools that act *as the user* (their mail, their files, their account data), use the default **End-user credentials** instead so each user authenticates with their own identity.
-
-1. In the left panel of the tool's configuration, select **Inputs**.
-
-1. Find the **Units** input. Change **Fill using** from the default to **Custom value**, then enter the value:
-
-    ```text
-    Metric
-    ```
-
-    (Or `Imperial` if you'd rather see Fahrenheit / mph in your tests.)
-
-    ![Get current weather — Inputs with Units set to Custom value: Metric](images/image-53.png)
-
-1. Leave **Location** set to **Dynamically fill with AI** so the planner can populate it from conversation context.
-
-1. Select **Save** in the top-right of the tool configuration.
-
-##### Add the Work IQ Mail MCP tool
-
-1. Go back to the agent's **Overview** page (or **Tools** in the top nav) and select **Add tool** again.
-
-1. In the search box, type:
-
-    ```text
-    work iq
-    ```
-
-1. Apply the **Model Context Protocol** filter at the top of the dialog so the results are scoped to MCP servers.
-
-1. Under the **Work IQ Mail MCP** heading, select **Work IQ Mail (Preview)**.
-
-    ![Add tool — Work IQ Mail (Preview) under Work IQ Mail MCP](images/image-54.png)
-
-1. The **Connect to Work IQ Mail MCP** dialog opens. Leave the **Authentication type** as **Login with Microsoft Entra ID** — this MCP server acts on behalf of the signed-in user, so end-user credentials are correct here (the opposite of what we did for Weather).
-
-    ![Connect to Work IQ Mail MCP — Login with Microsoft Entra ID](images/image-55.png)
-
-1. Select **Create**, then **Add and configure** when the connection completes.
-
-1. On the tool's Details panel, leave the defaults — the auto-populated description from the MCP server is sufficient for this Use Case. Select **Save**.
+    > **Units** accepts **`I`** for Imperial (°F) or **`C`** for Celsius (°C). This lab uses **`I`**, but set whichever matches your preference — the agent reports temperatures in the unit you pick here.
 
 ##### Add the Microsoft Dataverse MCP Server tool
 
-1. Select **Add tool** again.
+1. Select **Add tool** again. Search for **Dataverse**, apply the **Model Context Protocol** filter, and select **Microsoft Dataverse MCP Server** — the GA card, **not** the *(Preview)* variant.
 
-1. In the search box, type:
+    ![Add tool – Microsoft Dataverse MCP Server (GA)](images/new-orch-05.png)
 
-    ```text
-    Dataverse
-    ```
+1. On the **Select a connection** step, pick your Dataverse connection. If you created one in an earlier lab it's already selected with a green check — just confirm it. Otherwise choose **Not connected → Create new connection → Create**, sign in / consent when the Entra popup appears. Then select **Next**.
 
-1. Apply the **Model Context Protocol** filter.
+1. On **Review capabilities** (it lists the MCP server's actions — `read_query`, `search`, `create_table`, `update_record`, and so on), leave the **default selection** as-is and select **Confirm** to attach the server. This lab only ever exercises **`read_query`** (reading accounts and contacts) and **`search`** (schema discovery); the orchestrator won't call the write/delete actions unless a prompt explicitly asks it to.
 
-1. Select **Microsoft Dataverse MCP Server** — the **Connector action** card on the left, marked *"Provides Remote MCP Server access to Dataverse."*
+1. Select **Save** in the command bar. Your **Tools** list should now show **Get current weather** and **Microsoft Dataverse MCP Server**.
 
-    > [!IMPORTANT]
-    > Pick the **Microsoft Dataverse MCP Server** card, **not** the *(Deprecated)* or *(Preview)* variants you'll see beside it in the search results. The preview and deprecated entries are older builds and may behave inconsistently with what this lab shows.
+#### Add knowledge to the agent
 
-    ![Add tool — Microsoft Dataverse MCP Server selected (not Deprecated / not Preview)](images/image-56.png)
+Add the workshop's sample policy document so the agent has a body of knowledge to reason against.
 
-1. Create the connection (sign in if prompted), select **Create**, then **Add and configure**.
+1. On the **Build** tab, select **Add knowledge** in the right rail.
 
-1. On the Details panel, leave the defaults and select **Save**.
+1. In the **Add knowledge** dialog, select the **SharePoint** card (**Powered by Work IQ**), choose **Browse items**, and navigate **OnePlace → Documents → HR → company_policies_sample.pdf**, then **Confirm selection** and **Add to agent**. (The Work IQ SharePoint path queries SharePoint live, so the source is **Ready** almost immediately — no Dataverse indexing wait.)
 
-##### Verify your tool list
+1. Confirm the file appears in the **Knowledge** section.
 
-1. From the top navigation of the Sales Account Assistant, select **Tools**.
+    ![Build tab with knowledge file and tools attached](images/new-orch-09.png)
 
-1. Confirm your tools list looks like the screenshot below — the three tools you added (**Get current weather**, **Work IQ Mail (Preview)**, **Microsoft Dataverse MCP Server**) plus any additional Work IQ MCP tools that come along when Work IQ is enabled (such as **Work IQ Copilot** and **Work IQ User**).
+#### Test the Agentic Reasoning Loop
 
-    ![Sales Account Assistant — Tools list with weather, Work IQ, and Dataverse MCP](images/image-57.png)
+Open the **Preview** tab. The New Orchestrator surfaces its work **inline in the Preview pane** — you'll see a brief *"Working on it…"*, then a **train of thought** that names each tool it calls before the final answer.
 
-> [!NOTE]
-> If you see additional Work IQ entries in your list that aren't in the screenshot, that's expected — turning on Work IQ in the previous step exposes a family of MCP servers and the exact set may differ as the feature evolves. The Use Case's test phase only relies on the three tools you added explicitly above.
-
-#### Test agent capabilities
-
-> [!IMPORTANT]
-> Before running these tests, confirm the **company_policies_sample.pdf** knowledge file shows **Ready** (not *In progress*) on the Overview page. Until Dataverse finishes indexing the file, prompts that depend on policy content will return inconsistent results.
-
-You'll exercise the Sales Account Assistant with six prompts that progressively show what the **Reasoning Loop** under Enhanced Task Completion can do. Each one is intentionally chosen to stretch the agent across multiple tools — knowledge, Dataverse, weather, and Work IQ Mail — in a single turn.
-
-The Test pane (now occupying roughly half the canvas after enabling Enhanced Task Completion) will surface the planner's intermediate steps inline as it iterates plan → act → observe.
-
-1. **Multi-tool reasoning across knowledge, Dataverse, and weather.** Send the following prompt:
+1. **A single tool call.** Send:
 
     ```text
-    I need to get a gift for the primary account contact for Litware. Can you purpose an appropriate gift that takes in consideration our gifting policies and their weather to make some good recommendations for an appropriate gift.
+    What is the current weather in Seattle?
     ```
 
-    Watch the Test pane. The Reasoning Loop should drive the agent through several distinct steps without prompting you back:
-    - Look up the primary contact for **Litware, Inc.** in Dataverse (via the Microsoft Dataverse MCP Server) and resolve to the contact's name and city.
-    - Retrieve the **gifting policy section** from the `company_policies_sample.pdf` knowledge file.
-    - Call **Get current weather** for the contact's city.
-    - Synthesize all three signals into one or more gift recommendations that are policy-compliant and weather-appropriate.
+    The reasoning trace shows the agent deciding to call **Get current weather**, then returning the conditions.
 
-    > [!TIP]
-    > This single prompt would have been difficult to fulfill under standard generative orchestration — each tool call would typically end its turn and wait for you. Under Enhanced Task Completion, the planner keeps iterating until it has enough information to satisfy the *complete task*, not just the next reasonable step.
+    ![Reasoning loop – Get current weather](images/new-orch-04.png)
 
-1. **Refine using prior context + create a draft via Work IQ Mail.** Send the following prompt:
+1. **Query structured data via the Dataverse MCP server.** Send:
 
     ```text
-    This looks good can you please create an email draft to Susana that asks her if one of the gift options that doesn't require manager approval is preferable to her and make sure that she doesn't have any policies that would prevent her from being able to accept the gift.  Thank her for her continued support of our products and company and state that we look forward to working with her more in the future.
+    Give me a table with all the accounts that are in Texas
     ```
 
-    Notice several things in the Test pane:
-    - **Pronoun + name resolution**. The user wrote *"Susana"* (one *n*), but the agent recognized the contact as **Susanna Stubberod (sample)** from the previous turn. Enhanced Task Completion's reasoning is robust to user typos.
-    - **Filter applied from policy knowledge**. The agent re-reads the gifting policy to identify which gift options *don't* require manager approval and includes only those in the email.
-    - **Compose via Work IQ Mail**. The agent uses the **Work IQ Mail (Preview)** MCP tool to create the draft using the signed-in user's identity (the End-user-credentials choice you made earlier when adding that tool).
+    The trace shows the agent reasoning *"I need to search the accounts table in Dataverse and query it,"* calling **read_query**, and rendering the Texas accounts as a Markdown table.
 
-1. **Inspect the result.** \***Open Outlook to view the draft you just had the agent create.** You don't need to leave the browser — Copilot Studio runs inside the Microsoft 365 app surface, so Outlook is one click away:
+    ![Reasoning loop – read_query returns Texas accounts](images/new-orch-06.png)
 
-    - Select the **app launcher** (the waffle / 9-dot icon) in the upper-left of the Copilot Studio header.
-    - From the app menu that appears, select **Outlook**.
-
-    ![Microsoft 365 app launcher with Outlook highlighted](images/image-59.png)
-
-    Once Outlook is open, navigate to **Drafts** in the left navigation. Open the draft addressed to Susanna and confirm its content matches the agent's response — it should contain:
-    - The gift options that don't require manager approval (per policy)
-    - A note that none of Susanna's company policies prevent her from accepting
-    - A thank-you for her continued support, and a forward-looking close
-
-    > [!NOTE]
-    > **Why this matters.** A standard-orchestration agent could *describe* the email it would write and ask you to confirm before drafting. The Reasoning Loop drafts directly because completing the task is the goal, not stopping at the boundary of the next tool. The end-user identity that owns the draft is the one signed in to Copilot Studio — exactly the right behavior for an agent acting on the user's behalf, and exactly why the draft shows up in *your* Outlook Drafts folder.
-
-1. **Pivot to a structured-data ask.** Send the following prompt:
-
-    ```text
-    Give me table with all the accounts that are in Texas
-    ```
-
-    The agent should use the **Microsoft Dataverse MCP Server** to query Account records filtered to Texas, then format the response as a Markdown table inline in the Test pane. Notice this turn does **not** require the gift-policy or weather context from the previous turns — the planner correctly scopes the work to just Dataverse.
-
-1. **Modify the previous result without re-running the search.** Send the following prompt:
+1. **Modify the previous result.** Send:
 
     ```text
     Add the account number to the list
     ```
 
-    The agent should re-render the table with an **Account Number** column added, **without re-querying Dataverse**. The Reasoning Loop has the previous result set in conversation context, so it can reformat in place. (Same conversation-context behavior you saw in Use Case #2's *"What are all the details on them?"* prompt — but here it carries through the new orchestrator as well.)
+    The agent re-renders the table with an **Account Number** column, reusing the prior turn's context (it may issue a second `read_query` to fetch the new field — you'll see that in the trace).
 
-    > [!NOTE]
-    > **What you may see today vs. the steady-state behavior described above.** The Reasoning Loop is actively evolving, and at the moment a column you ask for that wasn't in the previous query's `SELECT` (like `Account Number`) may cause the planner to issue a second `read_query` to fetch that field — you'll see the extra `read_query` step in the train of thought. That's an implementation snapshot, not a contradiction of the lab — the feature is moving toward the steady-state behavior described in this step, where reformat-from-context is the default for any follow-up that asks for table changes. Treat the wording above as the intended behavior; if your turn shows a re-query, you're seeing the current implementation, not a misconfiguration on your end.
+    ![Reasoning loop – account number added from context](images/new-orch-08.png)
 
-    > [!TIP]
-    > **Account number is just one example — you can ask for any field.** Try requesting other columns from the Account table that you're curious about: city, state, primary contact, annual revenue, industry, last modified date, anything that lives on the Account record. Each ask is a chance to confirm the planner is reformatting from context and **not** re-issuing a Dataverse query. Watching the Test pane during these turns is the cheapest way to internalize what *"Reasoning Loop using prior context"* actually feels like in practice.
-
-1. **Chain to a file-creation step.** Send the following prompt:
+1. **Multi-tool reasoning (knowledge + Dataverse + weather).** Send:
 
     ```text
-    Give me that table in an excel file
+    I need to get a gift for the primary account contact for Litware. Can you propose an appropriate gift that takes into consideration our gifting policies and their weather to make some good recommendations for an appropriate gift.
     ```
 
-    Watch the **train of thought** in the Test pane carefully on this turn. You should see the agent reach for **Bash** to complete the task — it executes a short shell / Python step that converts the in-conversation table into an `.xlsx` workbook and returns a download link.
+    Watch the loop drive through several steps in one turn: **search** the gifting policy (knowledge), **read_query** the Litware account and its primary contact (Dataverse MCP), **Get current weather** for the contact's city, then synthesize a policy-compliant, weather-appropriate recommendation — complete with a citation back to `company_policies_sample.pdf`.
 
-    Open the workbook and confirm the columns and rows match what the previous turn rendered.
+    ![Reasoning loop – multi-tool gift recommendation with policy citation](images/new-orch-12.png)
 
-    > [!NOTE]
-    > **Why Bash shows up here.** Enhanced Task Completion's Reasoning Loop has access to a **code-execution surface** in addition to the connector / MCP / knowledge tools you explicitly added. When the planner decides the cheapest path to the user's goal is "run a small script," it can. That's how it gets from a Markdown table sitting in conversation context to an actual `.xlsx` file you can download — there's no formal "table-to-Excel" tool in the agent's tool list, so the planner improvises with code. This is a meaningful capability difference vs. standard generative orchestration, where the planner is constrained to the tools you wired up explicitly. It's also a behavior to be aware of from a governance perspective: review the train of thought when authoring an ETC agent so you know when code execution is in play and decide whether that fits your scenario.
+1. **Inspect a single step in the train of thought.** **Any** tool step in the trace is expandable — select one to open it. The example below uses a `read_query` step from the Texas-accounts turn, but pick whichever step you like (a `search`, a `Get current weather`, or any `read_query`); they all expand the same way. You'll see the exact **parameters** the orchestrator sent (for a `read_query`, the generated SQL — e.g. `SELECT name, address1_city, address1_stateorprovince, … FROM account WHERE address1_stateorprovince = 'Texas' OR address1_stateorprovince = 'TX'`; the exact query varies per step) and the raw **result** it reasoned over.
 
-1. **Inspect a single step in the train of thought.** Scroll back up through the Test pane to any of the previous turns and find a **green check mark** next to a tool name in the agent's reasoning trace (e.g., `read_query` on the Texas-accounts turn). Select the green check mark to expand that step.
+    ![Expanded train-of-thought step – read_query parameters + result](images/new-orch-07.png)
 
-    ![Expanded train-of-thought step — read_query showing parameters and result](images/image-60.png)
-
-    The expanded panel shows you exactly what the planner did at that step:
-
-    - **parameters** — the input the planner sent to the tool. For `read_query` on the Texas accounts turn, you'll see the actual generated SQL: `SELECT name, address1_line1, address1_city, address1_stateorprovince, address1_postalcode, telephone1, emailaddress1 FROM account WHERE address1_stateorprovince = 'TX'`. That string is the planner's interpretation of *"all the accounts in Texas"* compiled down to a Dataverse MCP query.
-    - **result** — the raw payload the tool returned, exactly as the planner saw it (JSON in this case). This is what the planner reasoned over to produce the next step in the loop.
-
-    > [!NOTE]
-    > **The Activity Tracker isn't entirely gone — it's just inline.** Earlier in this Use Case (right after enabling ETC) we noted that the formal **Activity Tracker** panel from Use Case #2 isn't available under Enhanced Task Completion. That's still true: there's no separate per-turn panel, and **Get rationale** in its UC #2 form isn't here. But the green check marks in the Test pane's reasoning trace give you the same kind of step-level visibility you used for debugging in UC #2 — the parameters going *in* to a tool and the data coming *out*. When an ETC agent does the wrong thing, expanding the relevant step is your debugger trace: read the parameters to see whether the planner translated user intent into the right tool inputs, and read the result to see whether the tool returned what the planner expected.
-
-> [!TIP]
-> **What you've now seen across these six prompts** — multi-tool reasoning in a single turn, robust pronoun / typo resolution, knowledge-driven content filtering, fluent pivots between unrelated data domains, in-conversation result reformatting, and tool-chaining to produce file deliverables. None of these are *new* capabilities introduced by Enhanced Task Completion — but the **Reasoning Loop** lets the planner combine them aggressively in a single turn, so the user gets a finished result instead of a series of intermediate confirmations. The trade-off is the loss of granular Activity Tracker / Get rationale visibility (covered in the previous subsection's IMPORTANT callout). Use Enhanced Task Completion for agents whose users want results, not transparency; keep standard orchestration when authors and users both need to inspect each step.
+> [!NOTE]
+> **Reasoning Loop vs. standard orchestration (Use Case #2).** Standard generative orchestration (the classic Account Data Lookup Agent) is single-pass and highly inspectable — every decision shows up in the **Activity Tracker**, and **Get rationale** reads the plan back to you. The **New Orchestrator** optimizes for the **user's end goal**: it plans → acts → observes → iterates within one turn until the task is complete, surfacing its work inline in the Preview pane rather than in a separate Activity Tracker. Choose standard orchestration when authors and users need to inspect every step; choose a new-type agent (New Orchestrator) when users want a finished outcome.
 
 ---
 
@@ -932,23 +746,20 @@ The Test pane (now occupying roughly half the canvas after enabling Enhanced Tas
 
 **Key takeaways:**
 
-* **Enhanced Task Completion replaces the orchestrator with a Reasoning Loop.** The planner iterates plan → act → observe within a single turn until the user's task is complete, instead of stopping at the next tool call.
-* **The trade-off is visibility.** Activity Tracker and Get rationale (the inspectable surface from Use Case #2) are not available while ETC is on. The expanded Test pane surfaces intermediate steps inline, but the per-step deep dive is gone.
-* **ETC is currently experimental and excludes Topics, Evaluation / Analytics, Child agents, and Activity history.** That list is expected to change — always read the live confirmation dialog when enabling the feature in your tenant.
-* **The right pattern for tool credentials depends on whether the tool acts on the user's behalf.** Public / API-key / service-account tools (like MSN Weather) belong on **Maker-provided credentials**. Tools that act *as the user* (like Work IQ Mail) belong on **End-user credentials**.
-* **Knowledge files must be Ready before testing.** Dataverse indexing is asynchronous — agent behavior with an *In progress* file is not representative.
+* **A new-type agent uses the New Orchestrator (Agentic Reasoning Loop) by default.** It plans → acts → observes → iterates within a single turn until the user's task is complete, instead of stopping at the next tool call. This is what **Enhanced Task Completion** previewed on classic agents.
+* **The trade-off is visibility.** The classic **Activity Tracker** and **Get rationale** (Use Case #2) aren't the surface here — the **Preview** pane shows the train of thought inline, and you expand a step to see its parameters and result.
+* **Match the credential pattern to the tool.** Anonymous / API-key / service-account tools (like MSN Weather) use **Maker** authentication; tools that act *as the signed-in user* (e.g. a mailbox connector) use **User** authentication.
+* **The New Orchestrator chains tools across knowledge, Dataverse, and mail in one turn** — multi-tool reasoning, dynamic chaining, and reformat-from-context all happen without prompting the user at each step.
 
 **Lessons learned & troubleshooting tips:**
 
-* If the agent gives inconsistent answers to policy-related prompts, confirm the knowledge file shows **Ready**, not *In progress*.
-* If a tool prompts every end user for a connection when you didn't expect it to, check the **Credentials to use** dropdown — it likely needs **Maker-provided credentials**.
-* If you wanted Activity Tracker / Get rationale back, toggle Enhanced Task Completion **Off**, **Save**, and reload the agent. The classic orchestrator's surfaces return.
-* If you don't see the **Dataverse MCP Server** option, verify that both Dataverse MCP server checkboxes are still on in the Power Platform admin center (the *"Enable Dataverse Intelligence (Work IQ) and Dataverse MCP servers"* subsection earlier in this Use Case).
+* If a tool returns a **"Connection Required"** card at runtime, open the tool's **Details** and confirm its **Authentication mode** and **Connection** are set (Weather should be **Maker** with a connection).
+* If the agent can't query Dataverse, confirm the **Dataverse MCP** environment feature is on and that you completed the Entra connection for the **Microsoft Dataverse MCP Server** tool.
+* If a policy-dependent answer looks generic, confirm `company_policies_sample.pdf` shows in the **Knowledge** section.
 
 **Challenge: Apply this to your own use case**
 
-* Identify a workflow in your organization that requires a user to gather information from multiple disconnected systems and then take an action (compose an email, draft a document, file a ticket). Sketch the tools that workflow would need and decide whether Enhanced Task Completion is the right fit — does the user want a finished outcome, or do they need to inspect each step?
-* For the workflow you sketched, decide for each tool whether **Maker-provided credentials** or **End-user credentials** is the right pattern, and write down *why* in one sentence per tool.
+* Identify a workflow in your organization that gathers information from multiple systems and then takes an action (compose an email, draft a document, file a ticket). Sketch the tools it would need and decide, for each, whether **Maker** or **User** authentication is correct — and why.
 
 ---
 
@@ -957,9 +768,9 @@ The Test pane (now occupying roughly half the canvas after enabling Enhanced Tas
 True learning comes from doing, questioning, and reflecting. Across this lab, you've seen Copilot Studio's orchestration engine from two distinct angles:
 
 * **Standard generative orchestration** (Use Case #2) — a single-pass planner that picks one tool / child / knowledge source per turn based on the user's intent. Highly inspectable: every decision shows up in the activity tracker, and *Get rationale* lets you read the planner's reasoning back to you. Tunable through agent Instructions, child-agent and tool Names + Descriptions, and input-parameter Descriptions.
-* **Enhanced Task Completion** (Use Case #3) — the new Reasoning Loop. Plans, acts, observes, iterates within a single turn until the task is complete. Better when users want finished outcomes; worse when authors and users need step-by-step transparency. Currently experimental and excludes Topics, Child agents, Evaluation / Analytics, and Activity history.
+* **New Orchestrator – Agentic Reasoning Loop** (Use Case #3) — the default orchestrator in new-type agents (previewed on classic agents as Enhanced Task Completion). Plans, acts, observes, iterates within a single turn until the task is complete. Better when users want finished outcomes; worse when authors and users need step-by-step transparency.
 
-**The single most important shift between the two**: standard orchestration optimizes for *the next correct step*; Enhanced Task Completion optimizes for *the user's end goal*. Pick the orchestrator based on which behavior your users actually want.
+**The single most important shift between the two**: standard orchestration optimizes for *the next correct step*; the New Orchestrator (Agentic Reasoning Loop) optimizes for *the user's end goal*. Pick the orchestrator based on which behavior your users actually want.
 
 ---
 
@@ -971,7 +782,7 @@ True learning comes from doing, questioning, and reflecting. Across this lab, yo
 * **Input descriptions are the foundation of dynamic chaining.** Without clear input descriptions, the planner has to guess how to reshape one tool's output into another tool's input.
 * **Use Get rationale as a debugger trace for your descriptions.** When the planner makes the wrong decision, the rationale points you at exactly which description needs sharper wording.
 * **Match credential pattern to tool intent.** Anonymous / API-key / service-account tools belong on **Maker-provided credentials**. Tools that act as the user belong on **End-user credentials**.
-* **Choose your orchestrator deliberately.** Standard orchestration where transparency matters; Enhanced Task Completion where finished outcomes matter.
+* **Choose your orchestrator deliberately.** Standard orchestration where transparency matters; the New Orchestrator (Agentic Reasoning Loop) where finished outcomes matter.
 
 By following these principles, you'll build agents that route to the right work the first time, and you'll know exactly which lever to pull when they don't.
 
