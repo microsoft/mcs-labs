@@ -158,13 +158,13 @@ Confirm the environment is ready and the sample connected agent is published.
 
 1. Select **Go to Power Platform admin center**
 
-1. In the left navigation, select **Manage** then select **Environments**
+1. In the **Power Platform admin center** ([https://admin.powerplatform.microsoft.com](https://admin.powerplatform.microsoft.com)), select the **Manage** tab, then select **Environments**
 
-1. Select your environment from the list
+1. Select your environment from the list to open its details page
 
-1. Select **Settings** in the top menu
+1. Select **Settings** on the **top navigation bar** of that page (the **Settings** command across the top of the environment — *not* the gear/global settings). Navigate to it through the admin center rather than pasting a direct URL.
 
-1. Expand **Product** and select **Features**
+1. Expand the **Product** group and select **Features**
 
 1. In the Dataverse search section, verify that **both** check boxes are enabled:
    - **Turn on search indexing to support Dataverse intelligence (Work IQ) in AI and agent experiences**
@@ -597,9 +597,9 @@ Stand up a new-type agent and validate how the New Orchestrator's Agentic Reason
 
 1. Navigate to the **Power Platform admin center** the same way you did in [Use Case #1](#use-case-1-get-the-sample-connected-agent-working) — in Copilot Studio, select the **Gear** icon in the upper right, then **Go to Power Platform admin center**.
 
-1. In the left navigation, select **Manage** → **Environments**, choose your environment, then select **Settings** in the top menu.
+1. Select the **Manage** tab, then **Environments**, choose your environment, then select **Settings** on the **top navigation bar** of the environment page (the same top-nav **Settings** command you used in Use Case #1).
 
-1. Expand **Product** and select **Features**.
+1. Expand the **Product** group and select **Features**.
 
 1. Under **Dataverse intelligence**, verify **Turn on Dataverse intelligence (Work IQ) for agents and AI experiences** is checked.
 
@@ -614,6 +614,9 @@ Stand up a new-type agent and validate how the New Orchestrator's Agentic Reason
 1. In Copilot Studio, confirm the **New experience** toggle (top-right) is **on** — it is by default.
 
 1. Select **Agents** in the left navigation pane, then select **New Agent** in the upper-right corner. Selecting **New Agent** itself creates a **new-type agent** in the new designer. (The **New classic agent** option in the dropdown is for the older classic canvas — you do **not** want that here.)
+
+    > [!NOTE]
+    > Creating an agent this way produces a **new-type agent that runs on the New Orchestration engine** — the one that leverages the **Agentic Reasoning Loop** (plan → act → observe → iterate within a single turn). That orchestration engine is what makes the multi-step behavior you'll see later in this Use Case possible, and it's enabled by default for new-type agents with no toggle to flip.
 
 1. The new agent designer opens on the **Build** tab. Use the agent-name field (or the **Rename agent** control) to name it:
 
@@ -656,14 +659,21 @@ You'll add three tools. In the new designer, adding a tool is **Add tool → pic
 
     ![Add tool – MSN Weather Get current weather](images/new-orch-02.png)
 
-1. In the **Tools** list, select **Get current weather** to open its **Tool details**.
+1. In the **Tools** list in the right rail, **select the `Get current weather` tool** to open its **Tool details**. (Clicking a tool in this menu is how you configure it — there's no separate settings button; the tool's name opens its Details, Inputs, and Outputs panels.)
 
 1. Under **Authentication mode**, select **Maker**. A **Connection** field appears — select **Not connected → Create new connection → Create**. Once it shows your connection, select **Save**.
 
     ![Tool details – Authentication mode set to Maker with a connection](images/new-orch-03.png)
 
     > [!IMPORTANT]
-    > **Set Weather to Maker.** The MSN Weather connector authenticates anonymously, so it should run as the **maker** — your connection is reused for every end user and no one is prompted to connect at runtime. If you leave it on **User**, the agent returns a **"Connection Required"** card the first time it tries to call the tool. (Tools that act *as the signed-in user* — e.g. a mailbox or files connector — would instead keep **User** authentication.)
+    > **Use Maker for anonymous or API‑key / service‑account tools.** The MSN Weather connector authenticates anonymously, so it should run as the **maker** — your connection is reused for every end user and no one is prompted to connect at runtime. The same rule applies to any connector that authenticates with a **shared API key or service account** rather than the end user's identity: set those to **Maker** too. If you leave such a tool on **User**, the agent returns a **"Connection Required"** card the first time it tries to call it. (Tools that act *as the signed-in user* — e.g. a mailbox or files connector — would instead keep **User** authentication.)
+
+1. Still in **Tool details**, select **Inputs** from the left panel. Leave **Location** set to **AI** (the agent infers the location from the conversation). For **Units**, change **How is this filled?** from **AI** to **Value** so you control the unit system, then bind it to a variable: open the **Value** picker, select **+ Add variable**, and in the variable's **Value** field **click the chevron on the right** — *that chevron is where the unit options appear*. Choose **I** (Imperial) for this lab, then **Save**.
+
+    ![Tool details – Units input set to a Value of I (Imperial)](images/new-orch-03b.png)
+
+    > [!NOTE]
+    > **Units** accepts **`I`** for Imperial (°F) or **`C`** for Celsius (°C). This lab uses **`I`**, but set whichever matches your preference — the agent reports temperatures in the unit you pick here.
 
 ##### Add the Microsoft Dataverse MCP Server tool
 
@@ -671,9 +681,9 @@ You'll add three tools. In the new designer, adding a tool is **Add tool → pic
 
     ![Add tool – Microsoft Dataverse MCP Server (GA)](images/new-orch-05.png)
 
-1. On the **Select a connection** step, choose **Not connected → Create new connection → Create**, sign in / consent when the Entra popup appears, then select **Next**.
+1. On the **Select a connection** step, pick your Dataverse connection. If you created one in an earlier lab it's already selected with a green check — just confirm it. Otherwise choose **Not connected → Create new connection → Create**, sign in / consent when the Entra popup appears. Then select **Next**.
 
-1. On **Review capabilities** (it lists the MCP server's actions, e.g. `read_query`), select **Confirm** to attach the server.
+1. On **Review capabilities** (it lists the MCP server's actions — `read_query`, `search`, `create_table`, `update_record`, and so on), leave the **default selection** as-is and select **Confirm** to attach the server. This lab only ever exercises **`read_query`** (reading accounts and contacts) and **`search`** (schema discovery); the orchestrator won't call the write/delete actions unless a prompt explicitly asks it to.
 
 1. Select **Save** in the command bar. Your **Tools** list should now show **Get current weather** and **Microsoft Dataverse MCP Server**.
 
@@ -721,7 +731,7 @@ Open the **Preview** tab. The New Orchestrator surfaces its work **inline in the
 
     ![Reasoning loop – multi-tool gift recommendation with policy citation](images/new-orch-12.png)
 
-1. **Inspect a single step in the train of thought.** Scroll to any tool step with a **green check** (e.g. `read_query` on the Texas-accounts turn) and select it to expand. You'll see the exact **parameters** the orchestrator sent (the generated SQL, e.g. `SELECT name, address1_city, address1_stateorprovince, … FROM account WHERE address1_stateorprovince = 'Texas' OR address1_stateorprovince = 'TX'`) and the raw **result** it reasoned over.
+1. **Inspect a single step in the train of thought.** **Any** tool step in the trace is expandable — select one to open it. The example below uses a `read_query` step from the Texas-accounts turn, but pick whichever step you like (a `search`, a `Get current weather`, or any `read_query`); they all expand the same way. You'll see the exact **parameters** the orchestrator sent (for a `read_query`, the generated SQL — e.g. `SELECT name, address1_city, address1_stateorprovince, … FROM account WHERE address1_stateorprovince = 'Texas' OR address1_stateorprovince = 'TX'`; the exact query varies per step) and the raw **result** it reasoned over.
 
     ![Expanded train-of-thought step – read_query parameters + result](images/new-orch-07.png)
 
