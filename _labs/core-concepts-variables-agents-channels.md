@@ -166,6 +166,9 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 1. Navigate to [Copilot Studio](https://copilotstudio.microsoft.com).
 
+   > [!NOTE]
+   > **You can do this lab in the new experience.** You created the **Copilot Studio Assistant** in the previous lab using the *previous* experience, then switched the **New experience** toggle back on. That's the right place to be for this lab — your classic agent reopens with its full **Overview / Knowledge / Tools / Agents / Topics / Channels** canvas under the new experience, so Variables, child agents, and channel deployment all work here. If for any reason the agent doesn't show those tabs, confirm you opened the **Copilot Studio Assistant** classic agent from the previous lab (not a new-type agent).
+
 1. Select **Agents** in your left side navigation bar, and select your **Copilot Studio Assistant** agent you created in the previous lab's Use Case #4.
 
 1. Select **Topics** in the agent's top navigation bar.
