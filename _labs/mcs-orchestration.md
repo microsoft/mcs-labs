@@ -831,9 +831,9 @@ This Use Case uses two prebuilt **custom MCP connectors** — **Order Management
 
 1. Repeat the **Add tool** step for **Warehouse MCP Server** (`check_stock`, `get_fulfillment_status`, `find_alternatives`, `get_restock_date`), creating its connection the same way.
 
-    Both connections now exist in the environment and are reusable. You can confirm them under **Power Platform → Connections** if you like, then leave the classic agent as-is.
+    Both connections now exist in the environment and are reusable. Leave the classic agent as-is.
 
-    ![Both MCP connections created](images/uc4-connections-both.png)
+    ![Both MCP servers added to the classic agent](images/uc4-connections-both.png)
 
 #### Add the MCP server tools to the Sales Account Assistant
 
