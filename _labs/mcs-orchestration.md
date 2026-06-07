@@ -193,8 +193,8 @@ Confirm the environment is ready and the sample connected agent is published.
 
 1. Select **View Column** to verify the following list of columns are in the view, you may have to scroll to see all of the included columns:
    - Address 1: State/Province
-   - Address1: Postal Code
-   - Address1: City
+   - Address 1: ZIP/Postal Code
+   - Address 1: City
    - Annual Revenue
    - Currency
 
@@ -204,8 +204,8 @@ Confirm the environment is ready and the sample connected agent is published.
 
 1. Add the ability to search on certain fields by making sure that the following items are in the **Find by** on the bottom right. Select the **Edit find table columns** option to check:
    - Address 1: State/Province
-   - Address1: Postal Code
-   - Address1: City
+   - Address 1: ZIP/Postal Code
+   - Address 1: City
 
     ![Add Account Searchable Columns](images/image-21.png)
 
@@ -257,7 +257,10 @@ Confirm the environment is ready and the sample connected agent is published.
 
 1. Select **Settings** in the upper right menu
 
-1. Make sure that the setting in the Generative AI menu in the Connected Agents section for **Let other agents connect to and use this one** is set to **On**
+1. On the **Generative AI** settings page, scroll to the **Connected agents** section and make sure **Let other agents connect to and use this one** is set to **On**.
+
+    > [!NOTE]
+    > Use the **Connected agents** *section on the Generative AI page* — **not** the separate **Connected Agents** item in the Settings left navigation. That left-nav item opens an input/output management page ("Manage input and output for the agent") and does **not** contain this toggle.
 
 1. Close the Settings menu by Selecting the **X** in the upper right-hand corner
 
