@@ -84,7 +84,7 @@ This lab takes you through the complete journey from agent creation to a fully c
 ## ✅ Prerequisites
 
 * Access to Microsoft Copilot Studio (trial or licensed environment)
-* A document to upload as a knowledge source (PDF, Word, or text file) - or use the [Copilot Studio Licensing Guide (April 2026)](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/microsoft-365/Microsoft-Copilot-Studio-Licensing-Guide-April-2026.pdf)
+* A document to upload as a knowledge source (PDF, Word, or text file) - or use the [Copilot Studio Licensing Guide (June 2026)](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/bizapps/Microsoft-Copilot-Studio-Licensing-Guide-June-2026-PUB.pdf)
 * Basic familiarity with web browsers and form filling
 
 ---
@@ -247,7 +247,7 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 1. In your Copilot Studio agent, Select  **Knowledge** in the top navigation bar for the agent.
 
-1. Download the [Copilot Studio Licensing Guide (April 2026)](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/microsoft-365/Microsoft-Copilot-Studio-Licensing-Guide-April-2026.pdf). Just make sure you have the file local on your computer.
+1. Download the [Copilot Studio Licensing Guide (June 2026)](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/bizapps/Microsoft-Copilot-Studio-Licensing-Guide-June-2026-PUB.pdf). Just make sure you have the file local on your computer.
 
 1. Select **+Add Knowledge** and select **Upload files** and use the file dialog to locate and select your downloaded license guide file from your local computer.
 
