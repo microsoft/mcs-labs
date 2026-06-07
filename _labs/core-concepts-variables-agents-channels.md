@@ -248,7 +248,11 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 1. Follow the prompts and provide information when asked (email, name, etc.). As you continue the conversation within the active topic, notice that each node that fires is marked with the checkbox and bottom border, and centered on the canvas.
 
-1. While in the test conversation, Select **Variables** in top navigation bar for the topic. If the topic is no longer showing, select **Topics** in the agents top navigation bar and select the Join **Copilot Mailing List** again to reopen.
+1. While in the test conversation, open the test panel's **…** (More commands) menu in the test toolbar and turn **off** *Show activity map when testing*. This switches the test pane from the activity-map view to the variables view. (Turn it back **on** afterward to return to the activity map.)
+
+    ![Turn off "Show activity map when testing" from the test panel's … menu](images/variables-show-activity-map-toggle.png)
+
+1. Select **Variables** in the test panel toolbar for the topic. If the topic is no longer showing, select **Topics** in the agents top navigation bar and select the Join **Copilot Studio Mailing List** again to reopen.
 
 1. In the **Variables** panel, select the **Test** tab to see a list of the variables and their current values. 
 
@@ -432,7 +436,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 1. Ask several different questions to test the child agent's knowledge:
     - "What is the CARE framework?"
     - "How do I write better prompts?"
-    - "What does the A stand for in CARE?"
+    - "Use the CARE framework to improve this weak prompt: 'write me something about sales'."
 
 1. Verify that the child agent consistently provides accurate answers from its knowledge source.
 
