@@ -415,6 +415,7 @@ layout: single
           {% endif %}
         </div>
         <div class="ws-agenda-meta">
+          {% if mod.difficulty %}<span class="ws-agenda-pill ws-pill-level-{{ mod.difficulty }}">Level {{ mod.difficulty }}</span>{% endif %}
           {% if mod_duration %}<span class="ws-agenda-pill ws-pill-duration">{{ mod_duration }} min</span>{% endif %}
         </div>
       </li>
