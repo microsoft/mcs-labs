@@ -1,0 +1,84 @@
+event_id: advanced-agent-in-a-day
+
+# Advanced Agent in a Day — 1-day, 300-level hands-on agenda.
+#
+# Module and lab rows are linked to first-class entities by `slug` only, so
+# they stay in sync automatically: the layout resolves the link, description,
+# difficulty level, duration, and (for modules) slide deck live from
+# _modules/<slug>.md and _labs/<slug>.md on every build. Do NOT duplicate
+# those values here — an override freezes the field (`item.x | default: entity.x`).
+#
+# The ONLY intentional override kept here is the short `title:` on lab rows:
+# an event-friendly agenda label that is deliberately more concise than the
+# lab's full descriptive title. Sessions and breaks are not entity-backed, so
+# they carry their own title/description/duration.
+#
+# Placeholders to connect later: the Module 1 (core-concepts-multi-agent) and
+# Module 4 (workflows) modules and the Lab 3 (mcs-workflows) lab are scaffolds —
+# their decks/content will be linked in a follow-up.
+
+schedule:
+  - type: session
+    title: "Welcome + Introductions"
+    description: "Meet your instructor, review the day, and confirm the 300-level prerequisites (agent creation, topics, knowledge sources, and variables)."
+    label: "Welcome"
+    time: "09:00"
+    duration: 15
+
+  - type: module
+    slug: core-concepts-multi-agent
+    label: "Module 1"
+    time: "09:15"
+
+  - type: module
+    slug: tools-overview
+    label: "Module 2"
+    time: "09:45"
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "10:15"
+    duration: 15
+
+  - type: lab
+    slug: mcs-tools
+    label: "Lab 1"
+    title: "Tools"
+    time: "10:30"
+
+  - type: module
+    slug: orchestration
+    label: "Module 3"
+    time: "11:30"
+
+  - type: break
+    title: "Lunch break"
+    time: "12:15"
+    duration: 60
+
+  - type: lab
+    slug: mcs-orchestration
+    label: "Lab 2"
+    title: "Orchestration with Copilot Studio"
+    time: "13:15"
+
+  - type: module
+    slug: workflows
+    label: "Module 4"
+    time: "14:15"
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "14:45"
+    duration: 15
+
+  - type: lab
+    slug: mcs-workflows
+    label: "Lab 3"
+    title: "Workflows"
+    time: "15:00"
+
+  - type: module
+    slug: copilot-studio-plugin
+    label: "Module 5"
+    time: "15:45"
