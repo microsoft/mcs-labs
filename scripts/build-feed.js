@@ -42,3 +42,10 @@ module.exports.resolveConfig = resolveConfig;
 
 // Pure functions are appended below by subsequent tasks.
 // The CLI entry (if require.main === module) is added last.
+
+function itemInFeed(item, feedDef) {
+  if (feedDef.include.includes(item.slug)) return true;
+  if (feedDef.collections.includes(item.collection) && !feedDef.exclude.includes(item.slug)) return true;
+  return false;
+}
+module.exports.itemInFeed = itemInFeed;

@@ -36,3 +36,26 @@ test('resolveConfig: explicit feeds.all replaces the synthesized everything feed
   const r = feed.resolveConfig({ feeds: { all: { collections: ['labs'] } } });
   assert.deepEqual(r.feeds.all.collections, ['labs']);
 });
+
+test('itemInFeed: included when collection listed and slug not excluded', () => {
+  const def = feed.resolveConfig({ feeds: { f: { collections: ['labs'] } } }).feeds.f;
+  assert.equal(feed.itemInFeed({ collection: 'labs', slug: 'a' }, def), true);
+  assert.equal(feed.itemInFeed({ collection: 'modules', slug: 'a' }, def), false);
+});
+
+test('itemInFeed: exclude blocks an item whose collection is included', () => {
+  const def = feed.resolveConfig({ feeds: { f: { collections: ['labs'], exclude: ['a'] } } }).feeds.f;
+  assert.equal(feed.itemInFeed({ collection: 'labs', slug: 'a' }, def), false);
+});
+
+test('itemInFeed: include adds an item whose collection is not listed', () => {
+  const def = feed.resolveConfig({ feeds: { f: { collections: [], include: ['a'] } } }).feeds.f;
+  assert.equal(feed.itemInFeed({ collection: 'labs', slug: 'a' }, def), true);
+});
+
+test('itemInFeed: an item can belong to multiple feeds', () => {
+  const r = feed.resolveConfig({ feeds: { f1: { collections: ['labs'] }, f2: { collections: ['labs'] } } });
+  const it = { collection: 'labs', slug: 'a' };
+  assert.equal(feed.itemInFeed(it, r.feeds.f1), true);
+  assert.equal(feed.itemInFeed(it, r.feeds.f2), true);
+});
