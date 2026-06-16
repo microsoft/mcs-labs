@@ -49,3 +49,14 @@ function itemInFeed(item, feedDef) {
   return false;
 }
 module.exports.itemInFeed = itemInFeed;
+
+function orderItems(items) {
+  const ord = (i) => (typeof i.metadata?.order === 'number' ? i.metadata.order : Number.POSITIVE_INFINITY);
+  return [...items].sort(
+    (a, b) =>
+      a.collection.localeCompare(b.collection) ||
+      ord(a) - ord(b) ||
+      a.slug.localeCompare(b.slug)
+  );
+}
+module.exports.orderItems = orderItems;

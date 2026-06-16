@@ -59,3 +59,23 @@ test('itemInFeed: an item can belong to multiple feeds', () => {
   assert.equal(feed.itemInFeed(it, r.feeds.f1), true);
   assert.equal(feed.itemInFeed(it, r.feeds.f2), true);
 });
+
+test('orderItems: sorts by collection, then metadata.order, then slug', () => {
+  const items = [
+    { collection: 'labs', slug: 'b', metadata: { order: 20 } },
+    { collection: 'labs', slug: 'a', metadata: { order: 10 } },
+    { collection: 'events', slug: 'z', metadata: {} },
+    { collection: 'labs', slug: 'a2', metadata: { order: 10 } },
+  ];
+  const sorted = feed.orderItems(items).map((i) => `${i.collection}/${i.slug}`);
+  assert.deepEqual(sorted, ['events/z', 'labs/a', 'labs/a2', 'labs/b']);
+});
+
+test('orderItems: items missing order sort after items with order', () => {
+  const items = [
+    { collection: 'labs', slug: 'noorder', metadata: {} },
+    { collection: 'labs', slug: 'first', metadata: { order: 5 } },
+  ];
+  const sorted = feed.orderItems(items).map((i) => i.slug);
+  assert.deepEqual(sorted, ['first', 'noorder']);
+});
