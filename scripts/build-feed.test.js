@@ -122,3 +122,12 @@ test('rewriteImages: de-duplicates repeated images', () => {
   const { images } = feed.rewriteImages(md, 'https://x.test', 'labs', 'demo');
   assert.equal(images.length, 1);
 });
+
+test('contentHash: deterministic, prefixed, and content-sensitive', () => {
+  const h1 = feed.contentHash('hello');
+  const h2 = feed.contentHash('hello');
+  const h3 = feed.contentHash('world');
+  assert.equal(h1, h2);
+  assert.notEqual(h1, h3);
+  assert.match(h1, /^sha256:[0-9a-f]{64}$/);
+});

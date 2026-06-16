@@ -84,3 +84,8 @@ function rewriteImages(markdown, baseUrl, collection, slug) {
   return { markdown: out, images: [...images] };
 }
 module.exports.rewriteImages = rewriteImages;
+
+function contentHash(content) {
+  return 'sha256:' + crypto.createHash('sha256').update(String(content == null ? '' : content), 'utf8').digest('hex');
+}
+module.exports.contentHash = contentHash;
