@@ -60,3 +60,8 @@ function orderItems(items) {
   );
 }
 module.exports.orderItems = orderItems;
+
+function selectFeedItems(allItems, feedDef) {
+  return orderItems(allItems.filter((it) => itemInFeed(it, feedDef)));
+}
+module.exports.selectFeedItems = selectFeedItems;

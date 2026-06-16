@@ -79,3 +79,14 @@ test('orderItems: items missing order sort after items with order', () => {
   const sorted = feed.orderItems(items).map((i) => i.slug);
   assert.deepEqual(sorted, ['first', 'noorder']);
 });
+
+test('selectFeedItems: returns only matching items, ordered', () => {
+  const def = feed.resolveConfig({ feeds: { f: { collections: ['labs'] } } }).feeds.f;
+  const items = [
+    { collection: 'labs', slug: 'b', metadata: { order: 2 } },
+    { collection: 'modules', slug: 'm', metadata: { order: 1 } },
+    { collection: 'labs', slug: 'a', metadata: { order: 1 } },
+  ];
+  const got = feed.selectFeedItems(items, def).map((i) => i.slug);
+  assert.deepEqual(got, ['a', 'b']);
+});
