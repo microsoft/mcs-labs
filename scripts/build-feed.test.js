@@ -147,3 +147,39 @@ test('deriveReferences: labs and missing data yield empty refs', () => {
   assert.deepEqual(feed.deriveReferences('labs', { title: 'x' }), { labs: [] });
   assert.deepEqual(feed.deriveReferences('events', {}), { labs: [] });
 });
+
+test('buildItem: assembles a lab item with absolutized images and hash', () => {
+  const item = feed.buildItem({
+    collection: 'labs',
+    slug: 'demo',
+    frontMatter: { layout: 'lab', title: 'Demo Lab', description: 'd', order: 10, duration: 30 },
+    body: 'Intro ![x](images/x.png)',
+    baseUrl: 'https://x.test/mcs-labs',
+    lastModified: '2026-05-01T00:00:00Z',
+  });
+  assert.equal(item.collection, 'labs');
+  assert.equal(item.slug, 'demo');
+  assert.equal(item.title, 'Demo Lab');
+  assert.equal(item.url, 'https://x.test/mcs-labs/labs/demo/');
+  assert.equal(item.metadata.layout, undefined); // layout stripped
+  assert.equal(item.metadata.order, 10);
+  assert.deepEqual(item.references, { labs: [] });
+  assert.deepEqual(item.images, ['https://x.test/mcs-labs/labs/demo/images/x.png']);
+  assert.match(item.content_markdown, /images\/x\.png/);
+  assert.match(item.content_hash, /^sha256:/);
+  assert.equal(item.last_modified, '2026-05-01T00:00:00Z');
+});
+
+test('buildItem: module item carries lab reference and slug fallback title', () => {
+  const item = feed.buildItem({
+    collection: 'modules',
+    slug: 'mod-a',
+    frontMatter: { lab: 'lab-a' },
+    body: '',
+    baseUrl: 'https://x.test',
+  });
+  assert.equal(item.title, 'mod-a');
+  assert.deepEqual(item.references, { labs: ['lab-a'] });
+  assert.equal(item.url, 'https://x.test/modules/mod-a/');
+  assert.equal(item.last_modified, null);
+});

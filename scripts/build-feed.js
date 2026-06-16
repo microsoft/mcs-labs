@@ -101,3 +101,23 @@ function deriveReferences(collection, frontMatter = {}) {
   return { labs: [] };
 }
 module.exports.deriveReferences = deriveReferences;
+
+function buildItem({ collection, slug, frontMatter = {}, body = '', baseUrl, lastModified = null }) {
+  const { markdown, images } = rewriteImages(body, baseUrl, collection, slug);
+  const metadata = { ...frontMatter };
+  delete metadata.layout;
+  return {
+    collection,
+    slug,
+    title: frontMatter.title || slug,
+    description: frontMatter.description || '',
+    url: `${baseUrl}/${collection}/${slug}/`,
+    metadata,
+    references: deriveReferences(collection, frontMatter),
+    content_markdown: markdown,
+    images,
+    last_modified: lastModified,
+    content_hash: contentHash(markdown),
+  };
+}
+module.exports.buildItem = buildItem;
