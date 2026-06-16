@@ -148,3 +148,90 @@ function buildIndex(resolved, counts, { baseUrl, generated, siteTitle }) {
   };
 }
 module.exports.buildIndex = buildIndex;
+
+// CLI entry: node scripts/build-feed.js [--out <dir>]
+if (require.main === module) {
+  const fs = require('node:fs');
+  const path = require('node:path');
+  const yaml = require('js-yaml');
+  const matter = require('gray-matter');
+  const { execFileSync } = require('node:child_process');
+
+  const root = process.cwd();
+  const args = process.argv.slice(2);
+  const outArgIdx = args.indexOf('--out');
+  const outArg = outArgIdx >= 0 ? args[outArgIdx + 1] : '_site/feed';
+  const outDir = path.isAbsolute(outArg) ? outArg : path.join(root, outArg);
+
+  const readYaml = (rel) => {
+    try {
+      return yaml.load(fs.readFileSync(path.join(root, rel), 'utf8')) || {};
+    } catch {
+      return null;
+    }
+  };
+
+  const cfg = readYaml('_config.yml') || {};
+  const defaultBaseUrl = `${cfg.url || ''}${cfg.baseurl || ''}`.replace(/\/+$/, '') || 'https://microsoft.github.io/mcs-labs';
+  const siteTitle = cfg.title || 'Microsoft Copilot Agents Labs';
+
+  let rawConfig = readYaml('_data/feeds.yml');
+  if (rawConfig === null) {
+    console.warn('[build-feed] no _data/feeds.yml found; using defaults');
+    rawConfig = {};
+  }
+
+  const resolved = resolveConfig(rawConfig, { defaultBaseUrl });
+  if (Object.keys(resolved.feeds).length === 0) {
+    console.warn('[build-feed] no feeds configured (everything_feed disabled and no feeds:); nothing to emit');
+  }
+
+  const gitDate = (relFile) => {
+    try {
+      const out = execFileSync('git', ['log', '-1', '--format=%cI', '--', relFile], { cwd: root }).toString().trim();
+      return out || null;
+    } catch {
+      return null;
+    }
+  };
+
+  const allItems = [];
+  for (const collection of ALL_COLLECTIONS) {
+    const dir = path.join(root, `_${collection}`);
+    let files = [];
+    try {
+      files = fs.readdirSync(dir).filter((f) => f.endsWith('.md'));
+    } catch {
+      continue;
+    }
+    for (const file of files) {
+      const slug = file.replace(/\.md$/, '');
+      const full = path.join(dir, file);
+      const parsed = matter(fs.readFileSync(full, 'utf8'));
+      allItems.push(
+        buildItem({
+          collection,
+          slug,
+          frontMatter: parsed.data,
+          body: parsed.content,
+          baseUrl: resolved.baseUrl,
+          lastModified: gitDate(path.relative(root, full).split(path.sep).join('/')),
+        })
+      );
+    }
+  }
+
+  fs.mkdirSync(outDir, { recursive: true });
+  const generated = new Date().toISOString();
+  const counts = {};
+  for (const feedDef of Object.values(resolved.feeds)) {
+    const items = selectFeedItems(allItems, feedDef);
+    counts[feedDef.name] = items.length;
+    const fileObj = buildFeedFile(feedDef, items, { baseUrl: resolved.baseUrl, generated });
+    fs.writeFileSync(path.join(outDir, `${feedDef.name}.json`), JSON.stringify(fileObj, null, 2));
+    console.log(`[build-feed] wrote ${feedDef.name}.json (${items.length} items)`);
+  }
+  const index = buildIndex(resolved, counts, { baseUrl: resolved.baseUrl, generated, siteTitle });
+  fs.writeFileSync(path.join(outDir, 'index.json'), JSON.stringify(index, null, 2));
+  console.log(`[build-feed] wrote index.json (${Object.keys(resolved.feeds).length} feeds) → ${outDir}`);
+}
