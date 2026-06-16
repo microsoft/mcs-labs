@@ -121,3 +121,30 @@ function buildItem({ collection, slug, frontMatter = {}, body = '', baseUrl, las
   };
 }
 module.exports.buildItem = buildItem;
+
+function buildFeedFile(feedDef, items, { baseUrl, generated }) {
+  return {
+    schema_version: '1.0',
+    generated,
+    feed: { name: feedDef.name, title: feedDef.title, description: feedDef.description },
+    site: { base_url: baseUrl },
+    items,
+  };
+}
+module.exports.buildFeedFile = buildFeedFile;
+
+function buildIndex(resolved, counts, { baseUrl, generated, siteTitle }) {
+  return {
+    schema_version: '1.0',
+    generated,
+    site: { title: siteTitle, base_url: baseUrl },
+    feeds: Object.values(resolved.feeds).map((f) => ({
+      name: f.name,
+      title: f.title,
+      description: f.description,
+      url: `${baseUrl}/feed/${f.name}.json`,
+      item_count: counts[f.name] ?? 0,
+    })),
+  };
+}
+module.exports.buildIndex = buildIndex;

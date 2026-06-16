@@ -183,3 +183,28 @@ test('buildItem: module item carries lab reference and slug fallback title', () 
   assert.equal(item.url, 'https://x.test/modules/mod-a/');
   assert.equal(item.last_modified, null);
 });
+
+test('buildFeedFile: wraps items with schema metadata', () => {
+  const def = feed.resolveConfig({}).feeds.all;
+  const out = feed.buildFeedFile(def, [{ slug: 'a' }], { baseUrl: 'https://x.test', generated: '2026-06-16T00:00:00Z' });
+  assert.equal(out.schema_version, '1.0');
+  assert.equal(out.generated, '2026-06-16T00:00:00Z');
+  assert.deepEqual(out.feed, { name: 'all', title: 'MCS Labs — All Content', description: 'All modules, events, workshops, and labs' });
+  assert.deepEqual(out.site, { base_url: 'https://x.test' });
+  assert.equal(out.items.length, 1);
+});
+
+test('buildIndex: lists feeds with urls and counts', () => {
+  const resolved = feed.resolveConfig({ feeds: { extra: { collections: ['labs'] } } });
+  const out = feed.buildIndex(resolved, { all: 42, extra: 7 }, {
+    baseUrl: 'https://x.test/mcs-labs',
+    generated: '2026-06-16T00:00:00Z',
+    siteTitle: 'Site',
+  });
+  assert.equal(out.schema_version, '1.0');
+  assert.deepEqual(out.site, { title: 'Site', base_url: 'https://x.test/mcs-labs' });
+  const all = out.feeds.find((f) => f.name === 'all');
+  assert.equal(all.url, 'https://x.test/mcs-labs/feed/all.json');
+  assert.equal(all.item_count, 42);
+  assert.equal(out.feeds.find((f) => f.name === 'extra').item_count, 7);
+});
