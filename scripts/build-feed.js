@@ -65,3 +65,22 @@ function selectFeedItems(allItems, feedDef) {
   return orderItems(allItems.filter((it) => itemInFeed(it, feedDef)));
 }
 module.exports.selectFeedItems = selectFeedItems;
+
+function rewriteImages(markdown, baseUrl, collection, slug) {
+  const base = `${baseUrl}/${collection}/${slug}`;
+  const images = new Set();
+  const abs = (rel) => {
+    const url = `${base}/${rel}`;
+    images.add(url);
+    return url;
+  };
+  let out = String(markdown == null ? '' : markdown);
+  // Markdown image/link refs: ](images/...) or ](./images/...)
+  out = out.replace(/\]\((?:\.\/)?images\/([^)\s]+)/g, (_m, p) => `](${abs('images/' + p)}`);
+  // HTML src="images/..." / src="./images/..."
+  out = out.replace(/src="(?:\.\/)?images\/([^"]+)"/g, (_m, p) => `src="${abs('images/' + p)}"`);
+  // HTML src='images/...'
+  out = out.replace(/src='(?:\.\/)?images\/([^']+)'/g, (_m, p) => `src='${abs('images/' + p)}'`);
+  return { markdown: out, images: [...images] };
+}
+module.exports.rewriteImages = rewriteImages;

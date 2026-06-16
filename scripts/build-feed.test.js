@@ -90,3 +90,35 @@ test('selectFeedItems: returns only matching items, ordered', () => {
   const got = feed.selectFeedItems(items, def).map((i) => i.slug);
   assert.deepEqual(got, ['a', 'b']);
 });
+
+test('rewriteImages: rewrites markdown image refs and collects absolute URLs', () => {
+  const md = '![alt](images/a.png) and ![b](./images/sub/b.jpg)';
+  const { markdown, images } = feed.rewriteImages(md, 'https://x.test/mcs-labs', 'labs', 'demo');
+  assert.match(markdown, /\]\(https:\/\/x\.test\/mcs-labs\/labs\/demo\/images\/a\.png\)/);
+  assert.match(markdown, /\]\(https:\/\/x\.test\/mcs-labs\/labs\/demo\/images\/sub\/b\.jpg\)/);
+  assert.deepEqual(images.sort(), [
+    'https://x.test/mcs-labs/labs/demo/images/a.png',
+    'https://x.test/mcs-labs/labs/demo/images/sub/b.jpg',
+  ]);
+});
+
+test('rewriteImages: rewrites HTML src (single and double quotes)', () => {
+  const md = '<img src="images/c.png"> <img src=\'images/d.png\'>';
+  const { markdown, images } = feed.rewriteImages(md, 'https://x.test', 'labs', 'demo');
+  assert.match(markdown, /src="https:\/\/x\.test\/labs\/demo\/images\/c\.png"/);
+  assert.match(markdown, /src='https:\/\/x\.test\/labs\/demo\/images\/d\.png'/);
+  assert.equal(images.length, 2);
+});
+
+test('rewriteImages: leaves absolute, protocol-relative, and root-relative refs untouched', () => {
+  const md = '![a](https://cdn.test/x.png) ![b](//cdn.test/y.png) ![c](/z.png)';
+  const { markdown, images } = feed.rewriteImages(md, 'https://x.test', 'labs', 'demo');
+  assert.equal(markdown, md);
+  assert.deepEqual(images, []);
+});
+
+test('rewriteImages: de-duplicates repeated images', () => {
+  const md = '![a](images/a.png) again ![a](images/a.png)';
+  const { images } = feed.rewriteImages(md, 'https://x.test', 'labs', 'demo');
+  assert.equal(images.length, 1);
+});
