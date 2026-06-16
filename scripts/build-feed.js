@@ -89,3 +89,15 @@ function contentHash(content) {
   return 'sha256:' + crypto.createHash('sha256').update(String(content == null ? '' : content), 'utf8').digest('hex');
 }
 module.exports.contentHash = contentHash;
+
+function deriveReferences(collection, frontMatter = {}) {
+  if (collection === 'events' || collection === 'workshops') {
+    const list = Array.isArray(frontMatter.labs) ? frontMatter.labs : [];
+    return { labs: list.map((l) => (typeof l === 'string' ? l : l && l.slug)).filter(Boolean) };
+  }
+  if (collection === 'modules') {
+    return { labs: frontMatter.lab ? [frontMatter.lab] : [] };
+  }
+  return { labs: [] };
+}
+module.exports.deriveReferences = deriveReferences;

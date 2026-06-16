@@ -131,3 +131,19 @@ test('contentHash: deterministic, prefixed, and content-sensitive', () => {
   assert.notEqual(h1, h3);
   assert.match(h1, /^sha256:[0-9a-f]{64}$/);
 });
+
+test('deriveReferences: events/workshops map labs list (objects or strings) to slugs', () => {
+  const fm = { labs: [{ slug: 'l1', label: 'Lab 1' }, { slug: 'l2', label: 'Lab 2' }] };
+  assert.deepEqual(feed.deriveReferences('events', fm), { labs: ['l1', 'l2'] });
+  assert.deepEqual(feed.deriveReferences('workshops', { labs: ['l3'] }), { labs: ['l3'] });
+});
+
+test('deriveReferences: modules map single lab field', () => {
+  assert.deepEqual(feed.deriveReferences('modules', { lab: 'l9' }), { labs: ['l9'] });
+  assert.deepEqual(feed.deriveReferences('modules', {}), { labs: [] });
+});
+
+test('deriveReferences: labs and missing data yield empty refs', () => {
+  assert.deepEqual(feed.deriveReferences('labs', { title: 'x' }), { labs: [] });
+  assert.deepEqual(feed.deriveReferences('events', {}), { labs: [] });
+});
