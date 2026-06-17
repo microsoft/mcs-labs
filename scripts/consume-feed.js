@@ -127,11 +127,18 @@ if (require.main === module) {
     return out;
   };
 
+  // Safe collection/slug name guard (re-checked at write time below).
+  const SAFE_NAME = /^[A-Za-z0-9_-]+$/;
+
   // external: read the subscription's manifest, then each per-item doc
   const readExternalItems = async (sub) => {
     const manifest = await readJson(joinBase(sub.url, `${sub.feed}/manifest.json`));
     const out = [];
     for (const mi of manifest.items) {
+      if (!SAFE_NAME.test(mi.collection || '') || !SAFE_NAME.test(mi.slug || '')) {
+        console.warn(`[consume-feed] skipping external item with unsafe collection/slug: ${mi.collection}/${mi.slug}`);
+        continue;
+      }
       const doc = await readJson(joinBase(sub.url, `items/${mi.collection}/${mi.slug}.json`));
       if (doc && doc.item) out.push(doc.item);
     }
@@ -167,7 +174,6 @@ if (require.main === module) {
     const { items, collisions } = mergeItems(taggedLists);
     for (const c of collisions) console.warn(`[consume-feed] collision ${c.key}: dropped from "${c.droppedSource}" (own wins)`);
 
-    const SAFE_NAME = /^[A-Za-z0-9_-]+$/;
     for (const item of items) {
       if (!SAFE_NAME.test(item.collection || '') || !SAFE_NAME.test(item.slug || '')) {
         console.warn(`[consume-feed] skipping item with unsafe collection/slug: ${item.collection}/${item.slug}`);
