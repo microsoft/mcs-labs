@@ -112,6 +112,7 @@ function buildItem({ collection, slug, frontMatter = {}, body = '', baseUrl, las
     title: frontMatter.title || slug,
     description: frontMatter.description || '',
     url: `${baseUrl}/${collection}/${slug}/`,
+    content_url: `${baseUrl}/feed/items/${collection}/${slug}.json`,
     metadata,
     references: deriveReferences(collection, frontMatter),
     content_markdown: markdown,

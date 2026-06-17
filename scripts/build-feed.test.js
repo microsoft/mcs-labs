@@ -249,3 +249,11 @@ test('CLI: generates index.json and all.json from real collections', () => {
     if (out) fs.rmSync(out, { recursive: true, force: true });
   }
 });
+
+test('buildItem: includes a content_url to the per-item feed document', () => {
+  const item = feed.buildItem({
+    collection: 'labs', slug: 'demo', frontMatter: { title: 'Demo' }, body: 'x',
+    baseUrl: 'https://x.test/mcs-labs',
+  });
+  assert.equal(item.content_url, 'https://x.test/mcs-labs/feed/items/labs/demo.json');
+});
