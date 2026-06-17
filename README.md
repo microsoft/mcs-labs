@@ -111,6 +111,7 @@ This repository uses GitHub Actions to automatically convert lab markdown files 
 - **🚀 Quick Start**: See [Quick Start Guide](./docs/QUICK_START.md) for immediate development setup
 - **🏗️ Development Guide**: See [Development Guide](./docs/DEVELOPMENT.md) for comprehensive setup and workflow
 - **📋 Architecture Decisions**: See [ADR](./docs/ADR.md) for architectural decisions and context
+- **📡 Content feed**: See the [Content Feed guide](./docs/CONTENT_FEED.md) — the portal publishes all labs/modules/events/workshops as JSON feeds and can render its own pages from a consumed feed. Covers the producer/consumer config, the feed URLs + schema, and local preview.
 
 ### 🌐 Local Testing
 
@@ -142,10 +143,15 @@ docker-compose up -d
 ### Project Structure
 
 ```text
-labs/           # ← Source lab content (edit these!)
-dist/           # ← Generated HTML/PDF (auto-created)
-.github/        # ← Workflows and technical documentation
-package.json    # ← Dependencies for document generation
+labs/                         # ← Source lab content (edit these!)
+scripts/build-feed.js         # ← Producer: emits the JSON content feed (see docs/CONTENT_FEED.md)
+scripts/consume-feed.js       # ← Consumer: renders the portal from the consumed feed
+_data/feeds.yml               # ← Which feeds this instance publishes
+_data/feed_subscriptions.yml  # ← Which feeds this instance ingests
+_config.feed.yml              # ← Jekyll overlay used to render from the feed
+dist/                         # ← Generated HTML/PDF (auto-created)
+.github/                      # ← Workflows and technical documentation
+package.json                  # ← Dependencies for document generation
 ```
 
 ---
