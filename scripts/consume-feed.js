@@ -51,10 +51,11 @@ function mergeItems(taggedLists) {
 module.exports.mergeItems = mergeItems;
 
 function relativizeImages(markdown, ownBaseUrl, collection, slug) {
+  // Literal (non-regex) global replace of the own-origin images prefix. Using
+  // split/join avoids constructing a RegExp from a URL string (which trips
+  // CodeQL's incomplete-hostname-regexp rule) and is exactly what we want here.
   const absPrefix = `${ownBaseUrl}/${collection}/${slug}/images/`;
-  const escaped = absPrefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  const re = new RegExp(escaped, 'g');
-  return String(markdown == null ? '' : markdown).replace(re, 'images/');
+  return String(markdown == null ? '' : markdown).split(absPrefix).join('images/');
 }
 module.exports.relativizeImages = relativizeImages;
 
