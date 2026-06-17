@@ -133,3 +133,31 @@ test('CLI: materializes own + external items into .feed-build', () => {
     if (work) fs.rmSync(work, { recursive: true, force: true });
   }
 });
+
+test('round-trip: self-only materialized bodies equal committed collection bodies', () => {
+  let work;
+  try {
+    work = fs.mkdtempSync(path.join(os.tmpdir(), 'mcs-roundtrip-'));
+    const published = path.join(work, 'published');
+    const out = path.join(work, 'build');
+    const cfg = path.join(work, 'subs.yml');
+    fs.writeFileSync(cfg, 'subscriptions:\n  - name: self\n    self: true\n');
+
+    execFileSync('node', ['scripts/build-feed.js', '--out', published], { cwd: process.cwd(), stdio: 'pipe' });
+    execFileSync('node', ['scripts/consume-feed.js', '--out', out, '--feed-dir', published, '--config', cfg], { cwd: process.cwd(), stdio: 'pipe' });
+
+    // every committed collection doc must have a materialized twin with an identical body
+    for (const collection of ['labs', 'modules', 'events', 'workshops']) {
+      const srcDir = path.join(process.cwd(), `_${collection}`);
+      for (const f of fs.readdirSync(srcDir).filter((x) => x.endsWith('.md'))) {
+        const committed = matter(fs.readFileSync(path.join(srcDir, f), 'utf8')).content;
+        const materializedPath = path.join(out, `_${collection}`, f);
+        assert.ok(fs.existsSync(materializedPath), `materialized ${collection}/${f} exists`);
+        const materialized = matter(fs.readFileSync(materializedPath, 'utf8')).content;
+        assert.equal(materialized.trim(), committed.trim(), `${collection}/${f} body round-trips`);
+      }
+    }
+  } finally {
+    if (work) fs.rmSync(work, { recursive: true, force: true });
+  }
+});
