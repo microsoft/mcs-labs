@@ -283,3 +283,12 @@ test('buildManifest: light envelope with mapped items', () => {
   assert.equal(m.items.length, 1);
   assert.equal(m.items[0].content_markdown, undefined);
 });
+
+test('buildPerItemDoc: wraps the full item in an envelope', () => {
+  const full = feed.buildItem({ collection: 'labs', slug: 'd', frontMatter: { title: 'D' }, body: 'b', baseUrl: 'https://x.test' });
+  const doc = feed.buildPerItemDoc(full, { baseUrl: 'https://x.test', generated: '2026-06-16T00:00:00Z' });
+  assert.equal(doc.schema_version, '1.1');
+  assert.deepEqual(doc.site, { base_url: 'https://x.test' });
+  assert.equal(doc.item.slug, 'd');
+  assert.equal(doc.item.content_markdown, 'b');
+});

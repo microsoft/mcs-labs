@@ -168,6 +168,11 @@ function buildManifest(feedDef, items, { baseUrl, generated }) {
 }
 module.exports.buildManifest = buildManifest;
 
+function buildPerItemDoc(item, { baseUrl, generated }) {
+  return { schema_version: SCHEMA_VERSION, generated, site: { base_url: baseUrl }, item };
+}
+module.exports.buildPerItemDoc = buildPerItemDoc;
+
 // CLI entry: node scripts/build-feed.js [--out <dir>]
 if (require.main === module) {
   const fs = require('node:fs');
