@@ -24,9 +24,9 @@ Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** �
 - [Instructions by Use Case](#️-instructions-by-use-case)
   - [Use Case #1: Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent)
   - [Use Case #2: Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow)
-  - [Use Case #3: Customer Inquiry — M365 Copilot and Human Review](#-use-case-3-customer-inquiry--m365-copilot-and-human-review)
-  - [Use Case #4: Supplier Delay — Agent with MCP Servers](#-use-case-4-supplier-delay--agent-with-mcp-servers)
-  - [Use Case #5: Quote Request — Price Quote Agent (Existing Agent)](#-use-case-5-quote-request--price-quote-agent-existing-agent)
+  - [Use Case #3: Use M365 Copilot and Add a Human-in-the-Loop in Order Management](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management)
+  - [Use Case #4: Build an Inline Agent for Inventory Management](#-use-case-4-build-an-inline-agent-for-inventory-management)
+  - [Use Case #5: Call a Price Quote Specialist Agent from a Workflow](#-use-case-5-call-a-price-quote-specialist-agent-from-a-workflow)
 - [Summary of Learnings](#-summary-of-learnings)
 - [Conclusions & Recommendations](#-conclusions--recommendations)
 
@@ -113,9 +113,9 @@ In this lab, you'll build an autonomous Workflow that turns a new to-do into sch
 |------|----------|-------------|--------|
 | 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 45 min |
 | 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Configure connections, fix solution references, transfer ownership, publish, and end-to-end test a pre-built email classification workflow | 30 min |
-| 3 | [Customer Inquiry — M365 Copilot and Human Review](#-use-case-3-customer-inquiry--m365-copilot-and-human-review) | Review a grounded M365 Copilot draft, route it through human approval, and verify the approved response is sent to the customer | 20 min |
-| 4 | [Supplier Delay — Agent with MCP Servers](#-use-case-4-supplier-delay--agent-with-mcp-servers) | Add an inline agent that reasons over delay emails, uses MCP tools for warehouse and Dataverse, and returns structured output | 25 min |
-| 5 | [Quote Request — Price Quote Agent (Existing Agent)](#-use-case-5-quote-request--price-quote-agent-existing-agent) | Reuse a published agent with knowledge, MCP tools, and a skill to generate and send a professional customer quote | 20 min |
+| 3 | [Use M365 Copilot and Add a Human-in-the-Loop in Order Management](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Review a grounded M365 Copilot draft, route it through human approval, and verify the approved response is sent to the customer | 20 min |
+| 4 | [Build an Inline Agent for Inventory Management](#-use-case-4-build-an-inline-agent-for-inventory-management) | Add an inline agent that reasons over delay emails, uses MCP tools for warehouse and Dataverse, and returns structured output | 25 min |
+| 5 | [Call a Price Quote Specialist Agent from a Workflow](#-use-case-5-call-a-price-quote-specialist-agent-from-a-workflow) | Reuse a published agent with knowledge, MCP tools, and a skill to generate and send a professional customer quote | 20 min |
 
 ---
 
@@ -420,7 +420,7 @@ You've completed the foundation that all subsequent use cases build on — the w
 
 ---
 
-## 💬 Use Case #3: Customer Inquiry — M365 Copilot and Human Review
+## 💬 Use Case #3: Use M365 Copilot and Add a Human-in-the-Loop in Order Management
 
 Configure and validate the **Customer Inquiry** branch so the workflow drafts a response with **M365 Copilot**, pauses for a **Human review**, and only replies to the customer after approval.
 
@@ -516,7 +516,7 @@ You've confirmed that the workflow can generate a grounded response with M365 Co
 
 ---
 
-## 📦 Use Case #4: Supplier Delay — Agent with MCP Servers
+## 📦 Use Case #4: Build an Inline Agent for Inventory Management
 
 Extend the **Supplier Delay** branch with an inline **Agent** that uses **MCP servers** to reason over the delay notice, check current stock, and create a follow-up **Dataverse Task**.
 
@@ -665,7 +665,7 @@ You've added a reasoning agent that enriches a supplier delay notice with live w
 
 ---
 
-## 💰 Use Case #5: Quote Request — Price Quote Agent (Existing Agent)
+## 💰 Use Case #5: Call a Price Quote Specialist Agent from a Workflow
 
 Connect the **Quote Request** branch to a reusable, published **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse product data**, and **WorkIQ Mail** to produce and send a professional quote.
 
