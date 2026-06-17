@@ -1,0 +1,5 @@
+# Jekyll overlay for feed-as-source-of-truth builds.
+# Use: bundle exec jekyll build --config _config.yml,_config.feed.yml
+# Points Jekyll's collections at the materialized build dir produced by
+# scripts/consume-feed.js instead of the committed _<collection>/ dirs.
+collections_dir: .feed-build

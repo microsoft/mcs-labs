@@ -7,7 +7,8 @@
     "a11y": "pa11y-ci --config .pa11yci.json",
     "lighthouse": "lhci autorun",
     "test": "node --test scripts/*.test.js",
-    "build:feed": "node scripts/build-feed.js"
+    "build:feed": "node scripts/build-feed.js",
+    "consume:feed": "node scripts/consume-feed.js"
   },
   "devDependencies": {
     "@lhci/cli": "^0.14.0",
