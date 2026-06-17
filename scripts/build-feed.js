@@ -253,14 +253,51 @@ if (require.main === module) {
 
   fs.mkdirSync(outDir, { recursive: true });
   const generated = new Date().toISOString();
+
+  // Per-feed membership (computed once, reused for manifest + bundle + published set).
+  const feedMembers = {};
+  for (const feedDef of Object.values(resolved.feeds)) {
+    feedMembers[feedDef.name] = selectFeedItems(allItems, feedDef);
+  }
+
+  // Per-item documents: every item published in ≥1 feed, written once (deduped).
+  const seenItem = new Set();
+  for (const members of Object.values(feedMembers)) {
+    for (const item of members) {
+      const key = `${item.collection}/${item.slug}`;
+      if (seenItem.has(key)) continue;
+      seenItem.add(key);
+      const dir = path.join(outDir, 'items', item.collection);
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(
+        path.join(dir, `${item.slug}.json`),
+        JSON.stringify(buildPerItemDoc(item, { baseUrl: resolved.baseUrl, generated }), null, 2)
+      );
+    }
+  }
+  console.log(`[build-feed] wrote ${seenItem.size} per-item documents`);
+
   const counts = {};
   for (const feedDef of Object.values(resolved.feeds)) {
-    const items = selectFeedItems(allItems, feedDef);
-    counts[feedDef.name] = items.length;
-    const fileObj = buildFeedFile(feedDef, items, { baseUrl: resolved.baseUrl, generated });
-    fs.writeFileSync(path.join(outDir, `${feedDef.name}.json`), JSON.stringify(fileObj, null, 2));
-    console.log(`[build-feed] wrote ${feedDef.name}.json (${items.length} items)`);
+    const members = feedMembers[feedDef.name];
+    counts[feedDef.name] = members.length;
+
+    const feedDir = path.join(outDir, feedDef.name);
+    fs.mkdirSync(feedDir, { recursive: true });
+    fs.writeFileSync(
+      path.join(feedDir, 'manifest.json'),
+      JSON.stringify(buildManifest(feedDef, members, { baseUrl: resolved.baseUrl, generated }), null, 2)
+    );
+
+    if (feedDef.bundle !== false) {
+      fs.writeFileSync(
+        path.join(outDir, `${feedDef.name}.json`),
+        JSON.stringify(buildFeedFile(feedDef, members, { baseUrl: resolved.baseUrl, generated }), null, 2)
+      );
+    }
+    console.log(`[build-feed] wrote ${feedDef.name}/manifest.json (${members.length} items)${feedDef.bundle === false ? ' [no bundle]' : ' + bundle'}`);
   }
+
   const index = buildIndex(resolved, counts, { baseUrl: resolved.baseUrl, generated, siteTitle });
   fs.writeFileSync(path.join(outDir, 'index.json'), JSON.stringify(index, null, 2));
   console.log(`[build-feed] wrote index.json (${Object.keys(resolved.feeds).length} feeds) → ${outDir}`);

@@ -292,3 +292,34 @@ test('buildPerItemDoc: wraps the full item in an envelope', () => {
   assert.equal(doc.item.slug, 'd');
   assert.equal(doc.item.content_markdown, 'b');
 });
+
+test('CLI: emits manifest, per-item docs, and bundle with the 1.1 layout', () => {
+  let out;
+  try {
+    out = fs.mkdtempSync(path.join(os.tmpdir(), 'mcs-feed2-'));
+    execFileSync('node', ['scripts/build-feed.js', '--out', out], { cwd: process.cwd(), stdio: 'pipe' });
+
+    const index = JSON.parse(fs.readFileSync(path.join(out, 'index.json'), 'utf8'));
+    assert.equal(index.schema_version, '1.1');
+    const allEntry = index.feeds.find((f) => f.name === 'all');
+    assert.match(allEntry.manifest_url, /\/feed\/all\/manifest\.json$/);
+    assert.match(allEntry.bundle_url, /\/feed\/all\.json$/);
+
+    const manifest = JSON.parse(fs.readFileSync(path.join(out, 'all', 'manifest.json'), 'utf8'));
+    assert.equal(manifest.schema_version, '1.1');
+    assert.ok(manifest.items.length > 0);
+    assert.equal(manifest.items[0].content_markdown, undefined, 'manifest items carry no markdown');
+    assert.ok(manifest.items[0].content_url, 'manifest items carry content_url');
+
+    // a known per-item doc exists and has full content
+    const itemDoc = JSON.parse(fs.readFileSync(path.join(out, 'items', 'labs', 'agent-builder-m365.json'), 'utf8'));
+    assert.equal(itemDoc.item.slug, 'agent-builder-m365');
+    assert.ok(itemDoc.item.content_markdown.length > 0);
+
+    // bundle still present and full
+    const bundle = JSON.parse(fs.readFileSync(path.join(out, 'all.json'), 'utf8'));
+    assert.ok(bundle.items.find((i) => i.slug === 'agent-builder-m365').content_markdown.length > 0);
+  } finally {
+    if (out) fs.rmSync(out, { recursive: true, force: true });
+  }
+});
