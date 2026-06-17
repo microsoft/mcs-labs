@@ -32,3 +32,14 @@ test('itemPassesFilter: drops by slug or collection, default passes', () => {
   const open = consume.resolveSubscriptions({ subscriptions: [{ url: 'x' }] })[0];
   assert.equal(consume.itemPassesFilter({ collection: 'labs', slug: 'a' }, open), true);
 });
+
+test('mergeItems: first source wins on (collection, slug) collision', () => {
+  const { items, collisions } = consume.mergeItems([
+    { source: 'self', items: [{ collection: 'labs', slug: 'a', v: 'own' }] },
+    { source: 'partner', items: [{ collection: 'labs', slug: 'a', v: 'ext' }, { collection: 'labs', slug: 'b', v: 'ext' }] },
+  ]);
+  assert.equal(items.length, 2);
+  assert.equal(items.find((i) => i.slug === 'a').v, 'own');
+  assert.equal(items.find((i) => i.slug === 'b').v, 'ext');
+  assert.deepEqual(collisions, [{ key: 'labs/a', droppedSource: 'partner' }]);
+});

@@ -32,3 +32,20 @@ function itemPassesFilter(item, sub) {
   return true;
 }
 module.exports.itemPassesFilter = itemPassesFilter;
+
+function mergeItems(taggedLists) {
+  const byKey = new Map();
+  const collisions = [];
+  for (const { source, items } of taggedLists) {
+    for (const item of items) {
+      const key = `${item.collection}/${item.slug}`;
+      if (byKey.has(key)) {
+        collisions.push({ key, droppedSource: source });
+        continue;
+      }
+      byKey.set(key, item);
+    }
+  }
+  return { items: [...byKey.values()], collisions };
+}
+module.exports.mergeItems = mergeItems;
