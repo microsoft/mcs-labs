@@ -200,10 +200,12 @@ A Node script following the repo's existing `scripts/*.js` + `*.test.js` convent
 ### Inputs
 
 - `_data/feeds.yml` (or defaults).
-- Collection sources:
-  - **labs** → raw body from `labs/<slug>/README.md` (source of truth) + front
-    matter (from the README and/or `_labs/<slug>.md`).
-  - **modules / events / workshops** → `_<collection>/<slug>.md` via `gray-matter`.
+- `_config.yml` (for the default `base_url` and site title).
+- Collection sources — all four collections are read uniformly from
+  `_<collection>/<slug>.md` via `gray-matter` (front matter + body). For **labs**
+  this is `_labs/<slug>.md`, the committed/rendered body the site publishes (the
+  sibling `labs/<slug>/README.md` has no front matter and is only an authoring
+  source, so it is not read directly). One code path serves every collection.
 
 ### Processing
 

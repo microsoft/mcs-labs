@@ -17,6 +17,7 @@ on:
       - "_labs/**"
       - "_events/**"
       - "_workshops/**"
+      - "_modules/**"
       - "_layouts/**"
       - "_includes/**"
       - "_data/**"
