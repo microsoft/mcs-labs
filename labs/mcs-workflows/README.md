@@ -23,6 +23,7 @@ Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** �
 - [Use Cases Covered](#-use-cases-covered)
 - [Instructions by Use Case](#️-instructions-by-use-case)
   - [Use Case #1: Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent)
+  - [Use Case #2: Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow)
 - [Summary of Learnings](#-summary-of-learnings)
 - [Conclusions & Recommendations](#-conclusions--recommendations)
 
@@ -108,6 +109,7 @@ In this lab, you'll build an autonomous Workflow that turns a new to-do into sch
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
 | 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 45 min |
+| 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Configure connections, fix solution references, transfer ownership, publish, and end-to-end test a pre-built email classification workflow | 30 min |
 
 ---
 
@@ -255,6 +257,163 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
 ---
 
+## 📧 Use Case #2: Setting Up the Order Management Workflow
+
+Configure and publish a pre-built **Order Management Workflow** that classifies incoming emails and routes them through different processing paths — then verify the setup end-to-end by testing the "Other" classification path.
+
+**Summary of tasks**
+
+In this section, you'll configure connection references in the Power Apps solution, transfer workflow ownership, open the workflow to verify canvas-level connections, explore the email classification categories, publish, and verify everything works by sending a test email that triggers the "Other" classification path.
+
+**Scenario:** Your environment contains a pre-built Order Management Workflow that automatically classifies incoming emails with "Order Management" in the subject. It routes emails into one of four categories — **Quote Request**, **Supplier Delay**, **Customer Inquiry**, or **Other** — and takes different automated actions for each. Before the workflow can run, you need to configure all its connections and link them in the solution.
+
+### Objective
+
+Complete the setup of the **Order Management Workflow**: configure all solution connection references, transfer ownership, verify canvas-level connections, explore the classification categories, publish, and validate end-to-end by sending a test email through the "Other" path.
+
+> [!IMPORTANT]
+> This use case is the **foundation for all subsequent use cases** in this module. The connections, ownership, and publishing you complete here are required for the Customer Inquiry, Quote Request, and Supplier Delay paths covered later. Take extra care during setup — if a connection reference is missed or ownership isn't transferred correctly, later use cases will fail silently or with hard-to-diagnose errors.
+
+---
+
+### Step-by-step instructions
+
+#### Take ownership and configure the solution
+
+> [!IMPORTANT]
+> **Complete the solution-level setup first.** The steps below transfer ownership and configure connection references — both of which **must** be done before the workflow can be published or tested. Skipping or rushing through these steps is the most common cause of "publish failed" errors later. Read each note carefully.
+
+1. Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. This solution bundles the Order Management Workflow along with its connection references, agents, and related components.
+
+   ![The LAB: Order Management solution in Power Apps](images/solution-order-management.png)
+
+2. The workflow was originally created by a different user, so you need to **take ownership** before making any changes. From the solution's **Objects** view, navigate to the workflow's underlying Dataverse record (the **Process** entity record for "Order Management Workflow"). In the command bar, select **Assign**, choose **Assign to: Me**, and confirm.
+
+   > [!IMPORTANT]
+   > Ownership transfer ensures you have full control over the workflow — including the ability to publish, enable/disable, and monitor runs. Without ownership, the Publish button will appear blocked or produce cryptic errors. Always transfer ownership **before** configuring connections — it avoids permission issues during the remaining setup steps.
+
+3. Back in the solution, select **Connection References** from the left sidebar (or filter the Objects view to show only Connection References). You should see multiple connection references — at minimum: **When a new email arrives** (Office 365 Outlook), **Dataverse**, **M365 Copilot**, and **Human review** (Advanced Approvals).
+
+   ![Connection References listed in the solution](images/solution-objects.png)
+
+4. For **each** connection reference, you need to link it to a live connection under your account. Perform the following for every row:
+
+   1. Hover over the row to reveal the **Commands** (⋮) button, then select it.
+   2. Choose **Edit** from the context menu.
+   3. In the Edit panel, open the **Connection** dropdown. If a connection for your account already exists, select it. If not, select **New connection** at the top of the dropdown to create one — sign in with your lab account, then return and select the newly created connection (use the **Refresh** button if it doesn't appear immediately).
+   4. Select **Save**, then confirm by clicking **Save changes** in the confirmation dialog.
+
+   Repeat this for **all four** connection references: **When a new email arrives**, **Dataverse**, **M365 Copilot**, and **Human review**.
+
+   > [!WARNING]
+   > **Do not skip any connection reference.** Even one unlinked reference will block publishing with the error: *"A connector was imported, however the related connection references need connections created and then any dependent flows can be started."* The confirmation dialog warning that changes impact dependent apps and flows is expected — confirm it each time.
+
+   > [!NOTE]
+   > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
+
+#### Open and explore the Order Management Workflow
+
+5. In **Copilot Studio**, select **Workflows** from the left navigation. Locate and open the **Order Management Workflow** to view it in the canvas designer. Since you already own the workflow and have configured the solution connections, the canvas should load without ownership warnings.
+
+   > [!NOTE]
+   > The workflow has been pre-built for your lab environment. You'll see a **trigger** node ("When a new email arrives"), a **Classify** node, and several branch paths — one for each email category.
+
+   ![The Order Management Workflow open in the canvas designer](images/order-management-workflow-overview.png)
+
+#### Verify the trigger connection and subject filter
+
+6. Select the **trigger** node ("When a new email arrives"). The connection should already be established from the solution-level setup (step 4). If the connection status still shows as missing, select **Create new connection** to set up an **Office 365 Outlook** connection and sign in with your lab account.
+
+   ![The trigger node with a valid connection established](images/trigger-connection-created.png)
+
+7. With the trigger connected, observe the **Subject Filter** expression: `@{string('Order Management')}`. This means the workflow only fires for emails whose subject contains "Order Management" — all other emails are ignored.
+
+   > [!IMPORTANT]
+   > Keep this filter in mind when testing: every test email you send **must include "Order Management" in the subject line**, or the workflow will not trigger. This is a common source of confusion when tests "don't seem to work."
+
+   ![The subject filter expression configured on the trigger](images/subject-filter-expression.png)
+
+#### Verify the Classify node connection and explore categories
+
+8. Select the **Classify** node further down the workflow. The Dataverse connection should already be established from the solution-level setup. If it still shows as missing, select **Create new connection** to set up a **Microsoft Dataverse** connection and sign in with your lab account.
+
+   ![The Classify node with Dataverse connection established](images/classify-connection-created.png)
+
+9. With the connection established, review the four classification categories configured in the Classify node. Each category has a name and example text that the AI model uses to determine where an incoming email should be routed:
+
+   - **Quote Request** — emails requesting pricing or quotes for products/services
+   - **Supplier Delay** — notifications about delays from suppliers
+   - **Customer Inquiry** — general questions from customers about orders, shipping, etc.
+   - **Other** — anything that doesn't fit the above categories (spam, promotions, irrelevant)
+
+   ![All four classification categories with their example descriptions](images/classify-categories-all.png)
+
+   > [!TIP]
+   > **Improving classification accuracy:** You can add multiple examples to each category to handle different phrasings and edge cases. For instance, a "Quote Request" might come as *"Can you send me pricing for 500 units?"* or *"We'd like a formal quotation for the attached spec."* Adding diverse examples helps the model generalize better. A good testing exercise is to try common cases **and** edge cases using the **Test** tab in the Classify node, observe how categories get assigned, and refine the category descriptions accordingly.
+
+#### Test the classification
+
+10. Select the **Test** tab in the Classify node to verify the classification works. Enter a sample email body — for example: *"Hi, I would like to request a quote for 500 units of Product A."* — and observe the predicted category. It should classify as **Quote Request**.
+
+    > [!TIP]
+    > Use the Test tab to experiment with different email texts before publishing. Try edge cases like a supplier email that also mentions pricing, or a customer complaint — these help you understand how the model assigns categories and whether you need to refine the category descriptions or add more examples.
+
+    ![The classification test result showing Quote Request](images/classify-test-result.png)
+
+#### Publish the workflow
+
+11. Return to **Copilot Studio → Workflows**. In the Workflows list, locate **Order Management Workflow** and select the **Publish** button (the icon next to the workflow name). The status should change from **Draft** to **Published**.
+
+    > [!IMPORTANT]
+    > If publishing fails, double-check that **all four connection references** are linked (step 4) and that you have **ownership** of the workflow (step 2). These are the two most common blockers. You can verify connection references by returning to the Power Apps solution and confirming each one shows a connection in the Edit panel.
+
+    ![The Order Management Workflow showing Published status](images/workflow-published.png)
+
+#### Test the "Other" classification path end-to-end
+
+12. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and compose a new email **to yourself** with the following:
+
+    - **Subject:** `Order Management - Congratulations! Your order desk has been selected`
+    - **Body:**
+
+      ```
+      Dear Order Manager,
+
+      Congratulations! Your order management team has been selected in our monthly
+      business draw and is entitled to claim an exclusive cash reward.
+
+      To release your reward, please reply with your full name and contact details,
+      and a small processing fee may apply.
+
+      Act soon, as unclaimed rewards expire.
+
+      Regards,
+      Promotions Team
+      MegaDraw Rewards
+      ```
+
+    Send the email. This spam/scam email should be classified as **Other** by the workflow.
+
+    > [!NOTE]
+    > The subject must contain **"Order Management"** to match the trigger's subject filter. The body content is intentionally irrelevant to quotes, suppliers, or customer inquiries — it should fall through to the "Other" category.
+
+    ![Composing the test email in Outlook](images/test-other-email-compose.png)
+
+13. Wait approximately **1–2 minutes** for the workflow to trigger and process the email. Then navigate to your **Archive** folder in Outlook. You should see the test email has been automatically moved there — confirming the "Other" classification path is working correctly.
+
+    > [!TIP]
+    > If the email doesn't appear in the Archive folder after 2 minutes, check the **Activity** tab in the workflow in Copilot Studio to see if the run triggered. If no run appears, verify the workflow is **Published** (not Draft) and that the email subject includes "Order Management."
+
+    ![The test email moved to the Archive folder by the workflow](images/archive-other-email.png)
+
+---
+
+### 🏅 Congratulations! The Order Management Workflow is now fully configured and operational.
+
+You've completed the foundation that all subsequent use cases build on — the workflow is published, connections are linked, and you've verified the "Other" classification path works end-to-end.
+
+---
+
 ## 🔁 Summary of Learnings
 
 True learning comes from doing, questioning, and reflecting — so let's put your skills to the test.
@@ -267,6 +426,9 @@ To get the most out of Workflows in Copilot Studio:
 * **Tools are the agent's hands** — without the Work IQ Calendar and Update to-do tools (and web search), the agent could reason but not act. Grant exactly the tools the goal requires.
 * **Constrain behavior in the instructions** — small additions like "only within my 8:00 AM–5:00 PM working hours" meaningfully change the agent's choices. Iterate on the instructions, then **re-publish**.
 * **Publish before you test** — the trigger is only live after a publish, and changes don't take effect until you re-publish.
+* **Solution-level setup matters** — connection references in the Power Apps solution must be linked to actual connections *before* the workflow can be activated. Canvas-level connections alone are not sufficient; always verify solution connection references.
+* **Classify with examples, refine with testing** — the Classify node's accuracy depends on the quality and diversity of category examples. Test with edge cases and refine descriptions iteratively to improve routing accuracy.
+* **Ownership is a prerequisite** — workflows created by another user require an ownership transfer before you can publish or manage them. Use the Dataverse **Assign** function to take control.
 
 ---
 
@@ -279,5 +441,8 @@ To get the most out of Workflows in Copilot Studio:
 > * Reference trigger data with the **`/` dynamic-content token** so the agent acts on the real input every run.
 > * Give the agent **only the tools it needs**, and state constraints (working hours, formatting, categories) explicitly in the instructions.
 > * Always **Save → Publish** before testing, and **re-publish** after any change. Use the **Activity** and **Monitor** views — and the **Agent** node's run details — to see exactly what the agent decided and did.
+> * **Fix connection references at the solution level** — creating connections in the canvas is not enough. Always verify and link connection references in the Power Apps solution before publishing.
+> * **Transfer ownership early** — if a workflow was created by another user, take ownership via Dataverse **Assign** before attempting any other management operations.
+> * **Classify nodes are only as good as their examples** — invest time in adding diverse, representative examples to each category and testing edge cases to improve classification accuracy.
 >
 > With these foundations, you can move from agents that *talk* to agents that *act on their own* — reacting to events, reasoning over real data, and getting work done across Microsoft 365.
