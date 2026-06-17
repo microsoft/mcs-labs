@@ -25,6 +25,8 @@ on:
       - "about/**"
       - "events/**"
       - "labs/**"
+      - "scripts/**"
+      - "package.json"
       - ".github/workflows/build-and-deploy.yml"
       - "Gemfile"
 
@@ -55,6 +57,17 @@ jobs:
         run: bundle exec jekyll build
         env:
           JEKYLL_ENV: production
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: "20"
+
+      - name: Install feed deps
+        run: npm install --no-audit --no-fund
+
+      - name: Build content feed
+        run: node scripts/build-feed.js --out _site/feed
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
