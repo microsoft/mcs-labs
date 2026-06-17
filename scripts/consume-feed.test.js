@@ -57,3 +57,27 @@ test('relativizeImages: own-origin image URLs become relative, others untouched'
   assert.match(out, /partner\.example\.com\/mcs-labs\/labs\/other\/images\/c\.png/); // external untouched
   assert.match(out, /\]\(\/x\.png\)/); // root-relative untouched
 });
+
+const matter = require('gray-matter');
+
+test('renderFrontMatter: emits a YAML front-matter block', () => {
+  const fm = consume.renderFrontMatter({ title: 'Demo', order: 10 });
+  assert.match(fm, /^---\n/);
+  assert.match(fm, /title: Demo/);
+  assert.match(fm, /order: 10/);
+  assert.match(fm, /---\n$/);
+});
+
+test('materializeDoc: round-trips body and carries metadata', () => {
+  const base = 'https://x.test/mcs-labs';
+  const item = {
+    collection: 'labs', slug: 'demo',
+    metadata: { title: 'Demo', order: 5 },
+    content_markdown: 'Intro ![a](https://x.test/mcs-labs/labs/demo/images/a.png)',
+  };
+  const doc = consume.materializeDoc(item, base);
+  const parsed = matter(doc);
+  assert.equal(parsed.data.title, 'Demo');
+  assert.equal(parsed.data.order, 5);
+  assert.equal(parsed.content.trim(), 'Intro ![a](images/a.png)');
+});

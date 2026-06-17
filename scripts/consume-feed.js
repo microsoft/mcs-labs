@@ -57,3 +57,15 @@ function relativizeImages(markdown, ownBaseUrl, collection, slug) {
   return String(markdown == null ? '' : markdown).replace(re, 'images/');
 }
 module.exports.relativizeImages = relativizeImages;
+
+function renderFrontMatter(metadata) {
+  const body = yaml.dump(metadata || {}, { lineWidth: -1, noRefs: true });
+  return `---\n${body}---\n`;
+}
+module.exports.renderFrontMatter = renderFrontMatter;
+
+function materializeDoc(item, ownBaseUrl) {
+  const body = relativizeImages(item.content_markdown, ownBaseUrl, item.collection, item.slug);
+  return `${renderFrontMatter(item.metadata)}\n${body}`;
+}
+module.exports.materializeDoc = materializeDoc;
