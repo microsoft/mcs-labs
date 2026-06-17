@@ -69,3 +69,101 @@ function materializeDoc(item, ownBaseUrl) {
   return `${renderFrontMatter(item.metadata)}\n${body}`;
 }
 module.exports.materializeDoc = materializeDoc;
+
+// CLI: node scripts/consume-feed.js [--out <dir>] [--feed-dir <dir>] [--config <path>]
+if (require.main === module) {
+  const fs = require('node:fs');
+  const path = require('node:path');
+
+  const root = process.cwd();
+  const args = process.argv.slice(2);
+  const argVal = (flag, def) => {
+    const i = args.indexOf(flag);
+    return i >= 0 && args[i + 1] !== undefined ? args[i + 1] : def;
+  };
+  const outArg = argVal('--out', '.feed-build');
+  const feedDirArg = argVal('--feed-dir', path.join('.feed-build', 'published'));
+  const configArg = argVal('--config', path.join('_data', 'feed_subscriptions.yml'));
+  const outDir = path.isAbsolute(outArg) ? outArg : path.join(root, outArg);
+  const feedDir = path.isAbsolute(feedDirArg) ? feedDirArg : path.join(root, feedDirArg);
+  const configPath = path.isAbsolute(configArg) ? configArg : path.join(root, configArg);
+
+  const isHttp = (s) => /^https?:\/\//.test(s);
+  const joinBase = (base, rel) => (isHttp(base) ? `${base.replace(/\/+$/, '')}/${rel}` : path.join(base, rel));
+  const readJson = async (loc) => {
+    if (isHttp(loc)) {
+      const res = await fetch(loc);
+      if (!res.ok) throw new Error(`fetch ${loc} -> ${res.status}`);
+      return res.json();
+    }
+    return JSON.parse(fs.readFileSync(loc, 'utf8'));
+  };
+
+  // own base_url comes from the produced feed's index.json
+  const readOwnBaseUrl = () => {
+    try {
+      return JSON.parse(fs.readFileSync(path.join(feedDir, 'index.json'), 'utf8')).site.base_url;
+    } catch {
+      return 'https://microsoft.github.io/mcs-labs';
+    }
+  };
+
+  // self: read every per-item doc under <feedDir>/items/<collection>/<slug>.json
+  const readSelfItems = () => {
+    const itemsRoot = path.join(feedDir, 'items');
+    const out = [];
+    let collections = [];
+    try { collections = fs.readdirSync(itemsRoot); } catch { return out; }
+    for (const collection of collections) {
+      const dir = path.join(itemsRoot, collection);
+      let files = [];
+      try { files = fs.readdirSync(dir).filter((f) => f.endsWith('.json')); } catch { continue; }
+      for (const f of files) out.push(JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')).item);
+    }
+    return out;
+  };
+
+  // external: read the subscription's manifest, then each per-item doc
+  const readExternalItems = async (sub) => {
+    const manifest = await readJson(joinBase(sub.url, `${sub.feed}/manifest.json`));
+    const out = [];
+    for (const mi of manifest.items) {
+      const doc = await readJson(joinBase(sub.url, `items/${mi.collection}/${mi.slug}.json`));
+      out.push(doc.item);
+    }
+    return out;
+  };
+
+  (async () => {
+    let rawConfig = {};
+    try { rawConfig = yaml.load(fs.readFileSync(configPath, 'utf8')) || {}; }
+    catch { console.warn(`[consume-feed] no ${configArg}; using self-only default`); }
+
+    const subs = resolveSubscriptions(rawConfig).filter((s) => s.enabled);
+    // self always evaluated first so own items win collisions
+    subs.sort((a, b) => (a.self === b.self ? 0 : a.self ? -1 : 1));
+
+    const ownBaseUrl = readOwnBaseUrl();
+    const taggedLists = [];
+    for (const sub of subs) {
+      let items = [];
+      try {
+        items = sub.self ? readSelfItems() : await readExternalItems(sub);
+      } catch (err) {
+        console.warn(`[consume-feed] subscription "${sub.name}" failed: ${err.message}; skipping`);
+        continue;
+      }
+      taggedLists.push({ source: sub.name, items: items.filter((it) => itemPassesFilter(it, sub)) });
+    }
+
+    const { items, collisions } = mergeItems(taggedLists);
+    for (const c of collisions) console.warn(`[consume-feed] collision ${c.key}: dropped from "${c.droppedSource}" (own wins)`);
+
+    for (const item of items) {
+      const dir = path.join(outDir, `_${item.collection}`);
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(path.join(dir, `${item.slug}.md`), materializeDoc(item, ownBaseUrl));
+    }
+    console.log(`[consume-feed] materialized ${items.length} items into ${outDir}`);
+  })();
+}

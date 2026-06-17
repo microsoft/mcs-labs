@@ -81,3 +81,55 @@ test('materializeDoc: round-trips body and carries metadata', () => {
   assert.equal(parsed.data.order, 5);
   assert.equal(parsed.content.trim(), 'Intro ![a](images/a.png)');
 });
+
+const { execFileSync } = require('node:child_process');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
+
+test('CLI: materializes own + external items into .feed-build', () => {
+  let work;
+  try {
+    work = fs.mkdtempSync(path.join(os.tmpdir(), 'mcs-consume-'));
+    const published = path.join(work, 'published');
+    const out = path.join(work, 'build');
+
+    // 1. produce this repo's own feed
+    execFileSync('node', ['scripts/build-feed.js', '--out', published], { cwd: process.cwd(), stdio: 'pipe' });
+
+    // 2. hand-build a tiny external fixture feed (distinct slug, external origin)
+    const extBase = path.join(work, 'ext');
+    fs.mkdirSync(path.join(extBase, 'all'), { recursive: true });
+    fs.mkdirSync(path.join(extBase, 'items', 'labs'), { recursive: true });
+    const extItem = {
+      collection: 'labs', slug: 'partner-demo',
+      title: 'Partner Demo', metadata: { title: 'Partner Demo', order: 999 },
+      content_markdown: '# Partner Demo\n\n![p](https://partner.example.com/mcs-labs/labs/partner-demo/images/p.png)',
+    };
+    fs.writeFileSync(path.join(extBase, 'all', 'manifest.json'),
+      JSON.stringify({ items: [{ collection: 'labs', slug: 'partner-demo' }] }));
+    fs.writeFileSync(path.join(extBase, 'items', 'labs', 'partner-demo.json'),
+      JSON.stringify({ item: extItem }));
+
+    // 3. subscriptions config: self + the local external fixture
+    const cfg = path.join(work, 'subs.yml');
+    fs.writeFileSync(cfg,
+      `subscriptions:\n  - name: self\n    self: true\n  - name: partner\n    url: ${extBase}\n    feed: all\n`);
+
+    // 4. consume
+    execFileSync('node',
+      ['scripts/consume-feed.js', '--out', out, '--feed-dir', published, '--config', cfg],
+      { cwd: process.cwd(), stdio: 'pipe' });
+
+    // own item present (round-tripped to relative images)
+    const ownDoc = fs.readFileSync(path.join(out, '_labs', 'agent-builder-m365.md'), 'utf8');
+    assert.match(ownDoc, /\]\(images\//, 'own images are relative');
+    assert.doesNotMatch(ownDoc, /microsoft\.github\.io\/mcs-labs\/labs\/agent-builder-m365\/images/, 'no own-absolute images');
+
+    // external item materialized, external image stays absolute
+    const extDoc = fs.readFileSync(path.join(out, '_labs', 'partner-demo.md'), 'utf8');
+    assert.match(extDoc, /partner\.example\.com\/mcs-labs\/labs\/partner-demo\/images\/p\.png/);
+  } finally {
+    if (work) fs.rmSync(work, { recursive: true, force: true });
+  }
+});
