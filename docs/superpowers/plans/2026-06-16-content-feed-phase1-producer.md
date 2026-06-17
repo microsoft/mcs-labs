@@ -1042,6 +1042,439 @@ git commit -m "docs(feed): note content feed producer in CHANGELOG"
 
 ---
 
+## Addendum — Scalable output: manifest + per-item documents (Tasks 15–20)
+
+These tasks extend the producer (already built in Tasks 1–14) so consumers can sync
+**incrementally**: a lightweight per-feed `manifest.json` (no markdown) + deduped
+per-item documents at `feed/items/<collection>/<slug>.json`, with the full inline
+`feed/<name>.json` kept as an optional `bundle`. Bumps `schema_version` to `1.1`.
+See the spec's "Feed output layout" and "Feed JSON schema" sections.
+
+### Task 15: `SCHEMA_VERSION` constant + `bundle` config + index `manifest_url`/`bundle_url`
+
+**Files:** Modify `scripts/build-feed.js`; Test `scripts/build-feed.test.js`
+
+- [ ] **Step 1: Update the existing `buildFeedFile` and `buildIndex` tests to the 1.1 shape**
+
+In `scripts/build-feed.test.js`, in the test `buildFeedFile: wraps items with schema metadata`, change `assert.equal(out.schema_version, '1.0');` to `assert.equal(out.schema_version, '1.1');`.
+
+Replace the body of the test `buildIndex: lists feeds with urls and counts` with:
+
+```js
+test('buildIndex: lists feeds with manifest_url, bundle_url, and counts', () => {
+  const resolved = feed.resolveConfig({ feeds: { extra: { collections: ['labs'], bundle: false } } });
+  const out = feed.buildIndex(resolved, { all: 42, extra: 7 }, {
+    baseUrl: 'https://x.test/mcs-labs',
+    generated: '2026-06-16T00:00:00Z',
+    siteTitle: 'Site',
+  });
+  assert.equal(out.schema_version, '1.1');
+  assert.deepEqual(out.site, { title: 'Site', base_url: 'https://x.test/mcs-labs' });
+  const all = out.feeds.find((f) => f.name === 'all');
+  assert.equal(all.manifest_url, 'https://x.test/mcs-labs/feed/all/manifest.json');
+  assert.equal(all.bundle_url, 'https://x.test/mcs-labs/feed/all.json');
+  assert.equal(all.item_count, 42);
+  const extra = out.feeds.find((f) => f.name === 'extra');
+  assert.equal(extra.bundle_url, null); // bundle:false → no bundle_url
+  assert.equal(extra.item_count, 7);
+});
+
+test('resolveConfig: bundle defaults true and can be disabled per feed', () => {
+  const r = feed.resolveConfig({ feeds: { a: { collections: ['labs'] }, b: { collections: ['labs'], bundle: false } } });
+  assert.equal(r.feeds.a.bundle, true);
+  assert.equal(r.feeds.b.bundle, false);
+  assert.equal(r.feeds.all.bundle, true);
+});
+```
+
+- [ ] **Step 2: Run tests to verify they fail**
+
+Run: `node --test scripts/build-feed.test.js`
+Expected: FAIL — `schema_version` is still `1.0`, `manifest_url`/`bundle_url`/`bundle` undefined.
+
+- [ ] **Step 3: Implement the constant, `bundle`, and index changes**
+
+In `scripts/build-feed.js`, add the constant next to `ALL_COLLECTIONS`:
+
+```js
+const SCHEMA_VERSION = '1.1';
+```
+
+In `normalizeFeedDef`, add a `bundle` field (default true):
+
+```js
+function normalizeFeedDef(name, def = {}) {
+  return {
+    name,
+    title: def.title || name,
+    description: def.description || '',
+    collections: [...(def.collections || [])],
+    include: [...(def.include || [])],
+    exclude: [...(def.exclude || [])],
+    bundle: def.bundle !== false,
+  };
+}
+```
+
+Update `buildFeedFile` to use the constant — change its `schema_version: '1.0'` to `schema_version: SCHEMA_VERSION`.
+
+Replace `buildIndex` with:
+
+```js
+function buildIndex(resolved, counts, { baseUrl, generated, siteTitle }) {
+  return {
+    schema_version: SCHEMA_VERSION,
+    generated,
+    site: { title: siteTitle, base_url: baseUrl },
+    feeds: Object.values(resolved.feeds).map((f) => ({
+      name: f.name,
+      title: f.title,
+      description: f.description,
+      manifest_url: `${baseUrl}/feed/${f.name}/manifest.json`,
+      bundle_url: f.bundle === false ? null : `${baseUrl}/feed/${f.name}.json`,
+      item_count: counts[f.name] ?? 0,
+    })),
+  };
+}
+module.exports.buildIndex = buildIndex;
+```
+
+- [ ] **Step 4: Run tests to verify they pass**
+
+Run: `node --test scripts/build-feed.test.js`
+Expected: PASS.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add scripts/build-feed.js scripts/build-feed.test.js
+git commit -m "feat(feed): schema 1.1 — bundle config + index manifest/bundle URLs"
+```
+
+---
+
+### Task 16: `content_url` on each item
+
+**Files:** Modify `scripts/build-feed.js`; Test `scripts/build-feed.test.js`
+
+- [ ] **Step 1: Extend the `buildItem` tests (append)**
+
+```js
+test('buildItem: includes a content_url to the per-item feed document', () => {
+  const item = feed.buildItem({
+    collection: 'labs', slug: 'demo', frontMatter: { title: 'Demo' }, body: 'x',
+    baseUrl: 'https://x.test/mcs-labs',
+  });
+  assert.equal(item.content_url, 'https://x.test/mcs-labs/feed/items/labs/demo.json');
+});
+```
+
+- [ ] **Step 2: Run test to verify it fails**
+
+Run: `node --test scripts/build-feed.test.js`
+Expected: FAIL — `item.content_url` is undefined.
+
+- [ ] **Step 3: Add `content_url` to `buildItem`**
+
+In `buildItem`, add the `content_url` field immediately after the `url` field:
+
+```js
+    url: `${baseUrl}/${collection}/${slug}/`,
+    content_url: `${baseUrl}/feed/items/${collection}/${slug}.json`,
+```
+
+- [ ] **Step 4: Run tests to verify they pass**
+
+Run: `node --test scripts/build-feed.test.js`
+Expected: PASS (the new test plus all existing `buildItem` tests).
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add scripts/build-feed.js scripts/build-feed.test.js
+git commit -m "feat(feed): add per-item content_url to items"
+```
+
+---
+
+### Task 17: `buildManifestItem` + `buildManifest`
+
+**Files:** Modify `scripts/build-feed.js`; Test `scripts/build-feed.test.js`
+
+- [ ] **Step 1: Write the failing tests (append)**
+
+```js
+test('buildManifestItem: drops heavy fields, keeps pointers and hashes', () => {
+  const full = feed.buildItem({
+    collection: 'labs', slug: 'demo',
+    frontMatter: { title: 'Demo', order: 1 }, body: '![a](images/a.png)',
+    baseUrl: 'https://x.test',
+  });
+  const light = feed.buildManifestItem(full);
+  assert.equal(light.content_markdown, undefined);
+  assert.equal(light.images, undefined);
+  assert.equal(light.metadata, undefined);
+  assert.equal(light.slug, 'demo');
+  assert.equal(light.content_url, full.content_url);
+  assert.equal(light.content_hash, full.content_hash);
+  assert.deepEqual(light.references, full.references);
+});
+
+test('buildManifest: light envelope with mapped items', () => {
+  const def = feed.resolveConfig({}).feeds.all;
+  const full = feed.buildItem({ collection: 'labs', slug: 'd', frontMatter: {}, body: 'b', baseUrl: 'https://x.test' });
+  const m = feed.buildManifest(def, [full], { baseUrl: 'https://x.test', generated: '2026-06-16T00:00:00Z' });
+  assert.equal(m.schema_version, '1.1');
+  assert.deepEqual(m.feed, { name: 'all', title: 'MCS Labs — All Content', description: 'All modules, events, workshops, and labs' });
+  assert.equal(m.items.length, 1);
+  assert.equal(m.items[0].content_markdown, undefined);
+});
+```
+
+- [ ] **Step 2: Run tests to verify they fail**
+
+Run: `node --test scripts/build-feed.test.js`
+Expected: FAIL — `feed.buildManifestItem is not a function`.
+
+- [ ] **Step 3: Implement both functions**
+
+Append to `scripts/build-feed.js`:
+
+```js
+function buildManifestItem(item) {
+  const { content_markdown, images, metadata, ...light } = item;
+  return light;
+}
+module.exports.buildManifestItem = buildManifestItem;
+
+function buildManifest(feedDef, items, { baseUrl, generated }) {
+  return {
+    schema_version: SCHEMA_VERSION,
+    generated,
+    feed: { name: feedDef.name, title: feedDef.title, description: feedDef.description },
+    site: { base_url: baseUrl },
+    items: items.map(buildManifestItem),
+  };
+}
+module.exports.buildManifest = buildManifest;
+```
+
+- [ ] **Step 4: Run tests to verify they pass**
+
+Run: `node --test scripts/build-feed.test.js`
+Expected: PASS.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add scripts/build-feed.js scripts/build-feed.test.js
+git commit -m "feat(feed): lightweight manifest items + buildManifest"
+```
+
+---
+
+### Task 18: `buildPerItemDoc`
+
+**Files:** Modify `scripts/build-feed.js`; Test `scripts/build-feed.test.js`
+
+- [ ] **Step 1: Write the failing test (append)**
+
+```js
+test('buildPerItemDoc: wraps the full item in an envelope', () => {
+  const full = feed.buildItem({ collection: 'labs', slug: 'd', frontMatter: { title: 'D' }, body: 'b', baseUrl: 'https://x.test' });
+  const doc = feed.buildPerItemDoc(full, { baseUrl: 'https://x.test', generated: '2026-06-16T00:00:00Z' });
+  assert.equal(doc.schema_version, '1.1');
+  assert.deepEqual(doc.site, { base_url: 'https://x.test' });
+  assert.equal(doc.item.slug, 'd');
+  assert.equal(doc.item.content_markdown, 'b');
+});
+```
+
+- [ ] **Step 2: Run test to verify it fails**
+
+Run: `node --test scripts/build-feed.test.js`
+Expected: FAIL — `feed.buildPerItemDoc is not a function`.
+
+- [ ] **Step 3: Implement `buildPerItemDoc`**
+
+Append to `scripts/build-feed.js`:
+
+```js
+function buildPerItemDoc(item, { baseUrl, generated }) {
+  return { schema_version: SCHEMA_VERSION, generated, site: { base_url: baseUrl }, item };
+}
+module.exports.buildPerItemDoc = buildPerItemDoc;
+```
+
+- [ ] **Step 4: Run tests to verify they pass**
+
+Run: `node --test scripts/build-feed.test.js`
+Expected: PASS.
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add scripts/build-feed.js scripts/build-feed.test.js
+git commit -m "feat(feed): per-item document envelope"
+```
+
+---
+
+### Task 19: CLI emits per-item docs + manifests + conditional bundle
+
+**Files:** Modify `scripts/build-feed.js` (CLI block); Test `scripts/build-feed.test.js`
+
+- [ ] **Step 1: Extend the integration test (append a new test)**
+
+```js
+test('CLI: emits manifest, per-item docs, and bundle with the 1.1 layout', () => {
+  let out;
+  try {
+    out = fs.mkdtempSync(path.join(os.tmpdir(), 'mcs-feed2-'));
+    execFileSync('node', ['scripts/build-feed.js', '--out', out], { cwd: process.cwd(), stdio: 'pipe' });
+
+    const index = JSON.parse(fs.readFileSync(path.join(out, 'index.json'), 'utf8'));
+    assert.equal(index.schema_version, '1.1');
+    const allEntry = index.feeds.find((f) => f.name === 'all');
+    assert.match(allEntry.manifest_url, /\/feed\/all\/manifest\.json$/);
+    assert.match(allEntry.bundle_url, /\/feed\/all\.json$/);
+
+    const manifest = JSON.parse(fs.readFileSync(path.join(out, 'all', 'manifest.json'), 'utf8'));
+    assert.equal(manifest.schema_version, '1.1');
+    assert.ok(manifest.items.length > 0);
+    assert.equal(manifest.items[0].content_markdown, undefined, 'manifest items carry no markdown');
+    assert.ok(manifest.items[0].content_url, 'manifest items carry content_url');
+
+    // a known per-item doc exists and has full content
+    const itemDoc = JSON.parse(fs.readFileSync(path.join(out, 'items', 'labs', 'agent-builder-m365.json'), 'utf8'));
+    assert.equal(itemDoc.item.slug, 'agent-builder-m365');
+    assert.ok(itemDoc.item.content_markdown.length > 0);
+
+    // bundle still present and full
+    const bundle = JSON.parse(fs.readFileSync(path.join(out, 'all.json'), 'utf8'));
+    assert.ok(bundle.items.find((i) => i.slug === 'agent-builder-m365').content_markdown.length > 0);
+  } finally {
+    if (out) fs.rmSync(out, { recursive: true, force: true });
+  }
+});
+```
+
+- [ ] **Step 2: Run test to verify it fails**
+
+Run: `node --test scripts/build-feed.test.js`
+Expected: FAIL — `all/manifest.json` and `items/labs/agent-builder-m365.json` do not exist yet.
+
+- [ ] **Step 3: Update the CLI write loop**
+
+In the CLI block of `scripts/build-feed.js`, replace the existing write loop (the section that starts at `fs.mkdirSync(outDir, { recursive: true });` and writes the per-feed bundle + `index.json`) with:
+
+```js
+  fs.mkdirSync(outDir, { recursive: true });
+  const generated = new Date().toISOString();
+
+  // Per-feed membership (computed once, reused for manifest + bundle + published set).
+  const feedMembers = {};
+  for (const feedDef of Object.values(resolved.feeds)) {
+    feedMembers[feedDef.name] = selectFeedItems(allItems, feedDef);
+  }
+
+  // Per-item documents: every item published in ≥1 feed, written once (deduped).
+  const seenItem = new Set();
+  for (const members of Object.values(feedMembers)) {
+    for (const item of members) {
+      const key = `${item.collection}/${item.slug}`;
+      if (seenItem.has(key)) continue;
+      seenItem.add(key);
+      const dir = path.join(outDir, 'items', item.collection);
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(
+        path.join(dir, `${item.slug}.json`),
+        JSON.stringify(buildPerItemDoc(item, { baseUrl: resolved.baseUrl, generated }), null, 2)
+      );
+    }
+  }
+  console.log(`[build-feed] wrote ${seenItem.size} per-item documents`);
+
+  const counts = {};
+  for (const feedDef of Object.values(resolved.feeds)) {
+    const members = feedMembers[feedDef.name];
+    counts[feedDef.name] = members.length;
+
+    const feedDir = path.join(outDir, feedDef.name);
+    fs.mkdirSync(feedDir, { recursive: true });
+    fs.writeFileSync(
+      path.join(feedDir, 'manifest.json'),
+      JSON.stringify(buildManifest(feedDef, members, { baseUrl: resolved.baseUrl, generated }), null, 2)
+    );
+
+    if (feedDef.bundle !== false) {
+      fs.writeFileSync(
+        path.join(outDir, `${feedDef.name}.json`),
+        JSON.stringify(buildFeedFile(feedDef, members, { baseUrl: resolved.baseUrl, generated }), null, 2)
+      );
+    }
+    console.log(`[build-feed] wrote ${feedDef.name}/manifest.json (${members.length} items)${feedDef.bundle === false ? ' [no bundle]' : ' + bundle'}`);
+  }
+
+  const index = buildIndex(resolved, counts, { baseUrl: resolved.baseUrl, generated, siteTitle });
+  fs.writeFileSync(path.join(outDir, 'index.json'), JSON.stringify(index, null, 2));
+  console.log(`[build-feed] wrote index.json (${Object.keys(resolved.feeds).length} feeds) → ${outDir}`);
+```
+
+- [ ] **Step 4: Run the full suite to verify it passes**
+
+Run: `npm test`
+Expected: PASS — the new integration test plus all earlier tests (the original Task 11 integration test still passes: `index.json` and `all.json` still exist).
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add scripts/build-feed.js scripts/build-feed.test.js
+git commit -m "feat(feed): emit per-item docs + per-feed manifests + optional bundle"
+```
+
+---
+
+### Task 20: Final verification + docs for the 1.1 layout
+
+**Files:** none (verification) + `CHANGELOG.md`
+
+- [ ] **Step 1: Run the full suite**
+
+Run: `npm test`
+Expected: PASS (all tests).
+
+- [ ] **Step 2: Generate and inspect the layered output**
+
+Run: `npm run build:feed -- --out _site/feed`
+Then:
+```
+node -e "const fs=require('node:fs'),p=require('node:path'); const idx=require('./_site/feed/index.json'); console.log('schema:',idx.schema_version); console.log('feeds:',idx.feeds.map(f=>f.name+' manifest='+!!f.manifest_url+' bundle='+!!f.bundle_url)); const m=require('./_site/feed/all/manifest.json'); console.log('manifest items:',m.items.length,'first has markdown?',m.items[0].content_markdown!==undefined); const items=fs.readdirSync(p.join('_site','feed','items')); console.log('per-item collections:',items); const lab=require('./_site/feed/items/labs/agent-builder-m365.json'); console.log('per-item ok:',lab.item.slug, lab.item.content_markdown.length>0);"
+```
+Expected: `schema: 1.1`, the `all` feed with `manifest=true bundle=true`, manifest items with `first has markdown? false`, per-item collections including `labs`, and the sample per-item doc resolving with non-empty markdown.
+
+- [ ] **Step 3: Confirm `_site/` is not tracked**
+
+Run: `git status --porcelain _site/`
+Expected: empty.
+
+- [ ] **Step 4: Update CHANGELOG**
+
+Add under the same Unreleased/Added entry (extend the existing feed bullet or add a sub-bullet):
+
+```markdown
+- Content feed now publishes a scalable layout (schema 1.1): a lightweight per-feed `manifest.json` (no markdown) plus deduplicated per-item documents at `feed/items/<collection>/<slug>.json`, so consumers sync incrementally. The full inline `feed/<name>.json` bundle remains (toggle per feed via `bundle:` in `_data/feeds.yml`).
+```
+
+- [ ] **Step 5: Commit**
+
+```bash
+git add CHANGELOG.md
+git commit -m "docs(feed): note scalable manifest + per-item layout (schema 1.1)"
+```
+
+---
+
 ## Notes for the implementer
 
 - **Source of truth for content:** all four collections are read uniformly from `_<collection>/<slug>.md` via `gray-matter`. For labs, this file carries both the front matter and the normalized body the site renders (the sibling `labs/<slug>/README.md` has no front matter and is only an authoring source). This keeps one code path for every collection.

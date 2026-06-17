@@ -45,7 +45,8 @@ These hold across all phases unless a later phase's spec revises them.
 | Decision | Choice |
 | --- | --- |
 | Consumers | Both sibling portals **and** arbitrary external systems |
-| Format | Single static **JSON** manifest per feed |
+| Format | Static **JSON**: lightweight manifest + deduped per-item documents, plus an optional full bundle per feed |
+| Scalability | Consumers sync **incrementally** — fetch manifest, diff hashes, pull only changed per-item docs |
 | Item payload | **Raw markdown** + front-matter metadata + **absolute** image URLs |
 | Overall direction | Bidirectional: instance **publishes** feeds and (Phase 3) **renders from its own consumed feed** |
 | Generation mechanism | **Tested Node script** (`scripts/build-feed.js`) |
@@ -121,7 +122,13 @@ feeds:
     collections: [events, workshops, modules, labs]  # whole-collection inclusion
     include: [<slug>, ...]   # optional: extra individual items (any collection)
     exclude: [<slug>, ...]   # optional: remove/block individual items from this feed
+    bundle: true             # optional: also emit the full inline feed/<name>.json
+                             #   (default true). Set false to publish only the
+                             #   lightweight manifest + per-item documents.
 ```
+
+Every feed always emits a `manifest.json` plus per-item documents (the scalable
+core); `bundle` only controls the optional all-in-one `feed/<name>.json`.
 
 ### Membership rule (per feed)
 
@@ -219,9 +226,16 @@ A Node script following the repo's existing `scripts/*.js` + `*.test.js` convent
    Collect the resulting absolute image URLs into `images[]`.
 4. Compute `content_hash` = `sha256` of the raw markdown body (before image rewrite — so content and image-path changes are captured without churning when `base_url` changes).
 5. Compute `last_modified` from `git log -1 --format=%cI -- <source-file>`.
-6. For each configured feed, select members via the membership rule and emit
-   `feed/<name>.json`.
-7. Emit `feed/index.json` discovery manifest.
+6. Write one **per-item document** per published item (any item that belongs to ≥1
+   feed), deduplicated by `(collection, slug)`, at the feed-agnostic path
+   `feed/items/<collection>/<slug>.json` (full content).
+7. For each configured feed:
+   - emit `feed/<name>/manifest.json` — the **lightweight** item list (metadata +
+     hashes + `content_url` pointers, **no** `content_markdown`/`images`);
+   - emit `feed/<name>.json` — the **bundle** with full inline items — *unless* that
+     feed sets `bundle: false`.
+8. Emit `feed/index.json` discovery manifest (lists each feed's `manifest_url` and,
+   when present, `bundle_url`).
 
 ### Output location (Phase 1)
 
@@ -242,13 +256,35 @@ therefore hashes and diffs — is stable across builds.
 - A feed that ends up with no members → emitted with `items: []` plus a warning.
 - Non-zero exit only on unrecoverable errors (e.g. malformed `_data/feeds.yml`).
 
+## Feed output layout (scalable: manifest + per-item)
+
+The producer emits a layered set of files so consumers can sync **incrementally** —
+fetch a small manifest, diff hashes, then pull only the items that changed — rather
+than re-downloading one large bundle every time. `schema_version` is **`1.1`**.
+
+```
+feed/index.json                       # discovery: which feeds exist + their URLs
+feed/<name>/manifest.json             # light: per-item metadata + hashes + content_url (no markdown)
+feed/items/<collection>/<slug>.json   # heavy: one full document per item (feed-agnostic, deduped)
+feed/<name>.json                      # optional bundle: full inline items (config: bundle, default true)
+```
+
+Per-item documents live under the **feed-agnostic** `feed/items/…` path (not nested
+per feed) so an item that belongs to several feeds is stored **once** and every
+manifest references the same `content_url`.
+
+**Consumer sync flow:** GET `index.json` → GET each `manifest.json` → diff
+`content_hash`/`last_modified` against local cache → GET only changed
+`feed/items/<collection>/<slug>.json`. The `bundle` (`<name>.json`) remains for small
+consumers that prefer a single fetch.
+
 ## Feed JSON schema
 
 ### `feed/index.json` (discovery manifest)
 
 ```json
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "generated": "2026-06-16T12:00:00Z",
   "site": {
     "title": "Microsoft Copilot Agents Labs",
@@ -259,18 +295,21 @@ therefore hashes and diffs — is stable across builds.
       "name": "all",
       "title": "MCS Labs — All Content",
       "description": "All modules, events, workshops, and labs",
-      "url": "https://microsoft.github.io/mcs-labs/feed/all.json",
+      "manifest_url": "https://microsoft.github.io/mcs-labs/feed/all/manifest.json",
+      "bundle_url": "https://microsoft.github.io/mcs-labs/feed/all.json",
       "item_count": 42
     }
   ]
 }
 ```
 
-### `feed/<name>.json`
+`bundle_url` is `null` when a feed sets `bundle: false`.
+
+### `feed/<name>/manifest.json` (lightweight)
 
 ```json
 {
-  "schema_version": "1.0",
+  "schema_version": "1.1",
   "generated": "2026-06-16T12:00:00Z",
   "feed": { "name": "all", "title": "MCS Labs — All Content", "description": "…" },
   "site": { "base_url": "https://microsoft.github.io/mcs-labs" },
@@ -279,27 +318,49 @@ therefore hashes and diffs — is stable across builds.
       "collection": "labs",
       "slug": "agent-builder-m365",
       "title": "Build Progressive AI Assistants with Agent Builder in Microsoft 365",
-      "description": "Master agent creation from basic web-grounded assistants …",
+      "description": "Master agent creation …",
       "url": "https://microsoft.github.io/mcs-labs/labs/agent-builder-m365/",
-      "metadata": {
-        "order": 140,
-        "duration": 30,
-        "difficulty": 100,
-        "section": "core_learning_path",
-        "journeys": ["quick-start", "business-user"],
-        "module": "agent-builder"
-      },
       "references": { "labs": [] },
-      "content_markdown": "# Build Progressive AI Assistants …\n\n![alt](https://microsoft.github.io/mcs-labs/labs/agent-builder-m365/images/agent-builder.png)\n…",
-      "images": [
-        "https://microsoft.github.io/mcs-labs/labs/agent-builder-m365/images/agent-builder.png"
-      ],
+      "content_url": "https://microsoft.github.io/mcs-labs/feed/items/labs/agent-builder-m365.json",
       "last_modified": "2026-05-01T12:00:00Z",
       "content_hash": "sha256:…"
     }
   ]
 }
 ```
+
+Manifest items deliberately **omit** `content_markdown`, `images`, and `metadata`
+to stay small — those live in the per-item document at `content_url`.
+
+### `feed/items/<collection>/<slug>.json` (full per-item document)
+
+```json
+{
+  "schema_version": "1.1",
+  "generated": "2026-06-16T12:00:00Z",
+  "site": { "base_url": "https://microsoft.github.io/mcs-labs" },
+  "item": {
+    "collection": "labs",
+    "slug": "agent-builder-m365",
+    "title": "Build Progressive AI Assistants with Agent Builder in Microsoft 365",
+    "description": "Master agent creation …",
+    "url": "https://microsoft.github.io/mcs-labs/labs/agent-builder-m365/",
+    "content_url": "https://microsoft.github.io/mcs-labs/feed/items/labs/agent-builder-m365.json",
+    "metadata": { "order": 140, "duration": 30, "difficulty": 100, "module": "agent-builder" },
+    "references": { "labs": [] },
+    "content_markdown": "# Build Progressive AI Assistants …",
+    "images": ["https://microsoft.github.io/mcs-labs/labs/agent-builder-m365/images/agent-builder.png"],
+    "last_modified": "2026-05-01T12:00:00Z",
+    "content_hash": "sha256:…"
+  }
+}
+```
+
+### `feed/<name>.json` (optional bundle)
+
+Same envelope as the manifest but its `items` are the **full** item objects (every
+field shown in the per-item `item` above, inline). Emitted unless the feed sets
+`bundle: false`.
 
 ### Field notes
 
@@ -308,7 +369,8 @@ therefore hashes and diffs — is stable across builds.
 - `references` is populated for `events`/`workshops`/`modules` (their referenced lab
   slugs, **by reference** — not inlined). For `labs` it is empty/omitted.
 - `content_markdown` is the raw markdown body with image URLs absolutized.
-- `url` is the item's canonical page on the producing site.
+- `url` is the item's canonical page on the producing site; `content_url` is the
+  item's per-item feed document.
 
 ## Deploy integration (Phase 1)
 
