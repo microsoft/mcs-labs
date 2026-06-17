@@ -56,6 +56,11 @@ test('relativizeImages: own-origin image URLs become relative, others untouched'
   assert.match(out, /src="images\/b\.png"/);
   assert.match(out, /partner\.example\.com\/mcs-labs\/labs\/other\/images\/c\.png/); // external untouched
   assert.match(out, /\]\(\/x\.png\)/); // root-relative untouched
+  // producer emits single-quote src='…'; cover that form too
+  assert.match(
+    consume.relativizeImages("<img src='https://x.test/mcs-labs/labs/demo/images/e.png'>", 'https://x.test/mcs-labs', 'labs', 'demo'),
+    /src='images\/e\.png'/
+  );
 });
 
 const matter = require('gray-matter');
@@ -134,6 +139,23 @@ test('CLI: materializes own + external items into .feed-build', () => {
   }
 });
 
+test('CLI: a broken external subscription warns and is skipped; own content still materializes', () => {
+  let work;
+  try {
+    work = fs.mkdtempSync(path.join(os.tmpdir(), 'mcs-extfail-'));
+    const published = path.join(work, 'published');
+    const out = path.join(work, 'build');
+    execFileSync('node', ['scripts/build-feed.js', '--out', published], { cwd: process.cwd(), stdio: 'pipe' });
+    const cfg = path.join(work, 'subs.yml');
+    fs.writeFileSync(cfg, `subscriptions:\n  - name: self\n    self: true\n  - name: broken\n    url: ${path.join(work, 'does-not-exist')}\n    feed: all\n`);
+    // should NOT throw; own items still materialize, broken sub skipped
+    execFileSync('node', ['scripts/consume-feed.js', '--out', out, '--feed-dir', published, '--config', cfg], { cwd: process.cwd(), stdio: 'pipe' });
+    assert.ok(fs.existsSync(path.join(out, '_labs', 'agent-builder-m365.md')), 'own content materialized despite broken external sub');
+  } finally {
+    if (work) fs.rmSync(work, { recursive: true, force: true });
+  }
+});
+
 test('round-trip: self-only materialized bodies equal committed collection bodies', () => {
   let work;
   try {
@@ -150,7 +172,11 @@ test('round-trip: self-only materialized bodies equal committed collection bodie
     for (const collection of ['labs', 'modules', 'events', 'workshops']) {
       const srcDir = path.join(process.cwd(), `_${collection}`);
       for (const f of fs.readdirSync(srcDir).filter((x) => x.endsWith('.md'))) {
-        const committed = matter(fs.readFileSync(path.join(srcDir, f), 'utf8')).content;
+        // `./images/` and `images/` are equivalent relative refs; the producer canonicalizes
+        // to `images/`, so normalize the committed side before comparing.
+        const committed = matter(fs.readFileSync(path.join(srcDir, f), 'utf8')).content
+          .replace(/\]\(\.\/images\//g, '](images/')
+          .replace(/src=(["'])\.\/images\//g, 'src=$1images/');
         const materializedPath = path.join(out, `_${collection}`, f);
         assert.ok(fs.existsSync(materializedPath), `materialized ${collection}/${f} exists`);
         const materialized = matter(fs.readFileSync(materializedPath, 'utf8')).content;

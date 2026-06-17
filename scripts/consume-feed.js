@@ -104,6 +104,7 @@ if (require.main === module) {
     try {
       return JSON.parse(fs.readFileSync(path.join(feedDir, 'index.json'), 'utf8')).site.base_url;
     } catch {
+      console.warn(`[consume-feed] could not read own base_url from ${feedDirArg}/index.json; using default`);
       return 'https://microsoft.github.io/mcs-labs';
     }
   };
@@ -118,7 +119,10 @@ if (require.main === module) {
       const dir = path.join(itemsRoot, collection);
       let files = [];
       try { files = fs.readdirSync(dir).filter((f) => f.endsWith('.json')); } catch { continue; }
-      for (const f of files) out.push(JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8')).item);
+      for (const f of files) {
+        const parsed = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+        if (parsed && parsed.item) out.push(parsed.item);
+      }
     }
     return out;
   };
@@ -129,7 +133,7 @@ if (require.main === module) {
     const out = [];
     for (const mi of manifest.items) {
       const doc = await readJson(joinBase(sub.url, `items/${mi.collection}/${mi.slug}.json`));
-      out.push(doc.item);
+      if (doc && doc.item) out.push(doc.item);
     }
     return out;
   };
@@ -150,6 +154,10 @@ if (require.main === module) {
       try {
         items = sub.self ? readSelfItems() : await readExternalItems(sub);
       } catch (err) {
+        if (sub.self) {
+          console.error(`[consume-feed] FATAL: own feed could not be read (${err.message})`);
+          process.exit(1);
+        }
         console.warn(`[consume-feed] subscription "${sub.name}" failed: ${err.message}; skipping`);
         continue;
       }
@@ -159,7 +167,12 @@ if (require.main === module) {
     const { items, collisions } = mergeItems(taggedLists);
     for (const c of collisions) console.warn(`[consume-feed] collision ${c.key}: dropped from "${c.droppedSource}" (own wins)`);
 
+    const SAFE_NAME = /^[A-Za-z0-9_-]+$/;
     for (const item of items) {
+      if (!SAFE_NAME.test(item.collection || '') || !SAFE_NAME.test(item.slug || '')) {
+        console.warn(`[consume-feed] skipping item with unsafe collection/slug: ${item.collection}/${item.slug}`);
+        continue;
+      }
       const dir = path.join(outDir, `_${item.collection}`);
       fs.mkdirSync(dir, { recursive: true });
       fs.writeFileSync(path.join(dir, `${item.slug}.md`), materializeDoc(item, ownBaseUrl));
