@@ -652,7 +652,7 @@ function buildItem({ collection, slug, frontMatter = {}, body = '', baseUrl, las
     content_markdown: markdown,
     images,
     last_modified: lastModified,
-    content_hash: contentHash(markdown),
+    content_hash: contentHash(body),
   };
 }
 module.exports.buildItem = buildItem;

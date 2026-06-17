@@ -1,5 +1,9 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
+const { execFileSync } = require('node:child_process');
+const fs = require('node:fs');
+const os = require('node:os');
+const path = require('node:path');
 const feed = require('./build-feed');
 
 test('resolveConfig: empty config yields default "all" feed with all collections', () => {
@@ -209,29 +213,29 @@ test('buildIndex: lists feeds with urls and counts', () => {
   assert.equal(out.feeds.find((f) => f.name === 'extra').item_count, 7);
 });
 
-const { execFileSync } = require('node:child_process');
-const fs = require('node:fs');
-const os = require('node:os');
-const path = require('node:path');
-
 test('CLI: generates index.json and all.json from real collections', () => {
-  const out = fs.mkdtempSync(path.join(os.tmpdir(), 'mcs-feed-'));
-  execFileSync('node', ['scripts/build-feed.js', '--out', out], { cwd: process.cwd(), stdio: 'pipe' });
+  let out;
+  try {
+    out = fs.mkdtempSync(path.join(os.tmpdir(), 'mcs-feed-'));
+    execFileSync('node', ['scripts/build-feed.js', '--out', out], { cwd: process.cwd(), stdio: 'pipe' });
 
-  const index = JSON.parse(fs.readFileSync(path.join(out, 'index.json'), 'utf8'));
-  assert.equal(index.schema_version, '1.0');
-  const allEntry = index.feeds.find((f) => f.name === 'all');
-  assert.ok(allEntry, 'index lists the all feed');
-  assert.ok(allEntry.item_count > 0, 'all feed has items');
+    const index = JSON.parse(fs.readFileSync(path.join(out, 'index.json'), 'utf8'));
+    assert.equal(index.schema_version, '1.0');
+    const allEntry = index.feeds.find((f) => f.name === 'all');
+    assert.ok(allEntry, 'index lists the all feed');
+    assert.ok(allEntry.item_count > 0, 'all feed has items');
 
-  const all = JSON.parse(fs.readFileSync(path.join(out, 'all.json'), 'utf8'));
-  const slugs = all.items.map((i) => i.slug);
-  assert.ok(slugs.includes('agent-builder-m365'), 'includes a known lab slug');
+    const all = JSON.parse(fs.readFileSync(path.join(out, 'all.json'), 'utf8'));
+    const slugs = all.items.map((i) => i.slug);
+    assert.ok(slugs.includes('agent-builder-m365'), 'includes a known lab slug');
 
-  const lab = all.items.find((i) => i.slug === 'agent-builder-m365');
-  assert.equal(lab.collection, 'labs');
-  assert.match(lab.content_hash, /^sha256:/);
-  assert.ok(lab.content_markdown.length > 0);
-  // every image URL is absolute
-  for (const img of lab.images) assert.match(img, /^https?:\/\//);
+    const lab = all.items.find((i) => i.slug === 'agent-builder-m365');
+    assert.equal(lab.collection, 'labs');
+    assert.match(lab.content_hash, /^sha256:/);
+    assert.ok(lab.content_markdown.length > 0);
+    // every image URL is absolute
+    for (const img of lab.images) assert.match(img, /^https?:\/\//);
+  } finally {
+    if (out) fs.rmSync(out, { recursive: true, force: true });
+  }
 });

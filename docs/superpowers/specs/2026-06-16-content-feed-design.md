@@ -215,7 +215,7 @@ A Node script following the repo's existing `scripts/*.js` + `*.test.js` convent
    HTML `src="images/…"` — to `<base_url>/labs/<slug>/images/…`. Absolute URLs
    (`http(s)://…`, protocol-relative `//…`, root-relative `/…`) are left untouched.
    Collect the resulting absolute image URLs into `images[]`.
-4. Compute `content_hash` = `sha256` of the raw markdown body (post image-rewrite).
+4. Compute `content_hash` = `sha256` of the raw markdown body (before image rewrite — so content and image-path changes are captured without churning when `base_url` changes).
 5. Compute `last_modified` from `git log -1 --format=%cI -- <source-file>`.
 6. For each configured feed, select members via the membership rule and emit
    `feed/<name>.json`.

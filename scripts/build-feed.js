@@ -40,9 +40,6 @@ function resolveConfig(raw = {}, { defaultBaseUrl = 'https://microsoft.github.io
 }
 module.exports.resolveConfig = resolveConfig;
 
-// Pure functions are appended below by subsequent tasks.
-// The CLI entry (if require.main === module) is added last.
-
 function itemInFeed(item, feedDef) {
   if (feedDef.include.includes(item.slug)) return true;
   if (feedDef.collections.includes(item.collection) && !feedDef.exclude.includes(item.slug)) return true;
@@ -76,6 +73,7 @@ function rewriteImages(markdown, baseUrl, collection, slug) {
   };
   let out = String(markdown == null ? '' : markdown);
   // Markdown image/link refs: ](images/...) or ](./images/...)
+  // Matches any relative ref into the lab's images/ dir (images and linked assets); absolutized so consumers can fetch them.
   out = out.replace(/\]\((?:\.\/)?images\/([^)\s]+)/g, (_m, p) => `](${abs('images/' + p)}`);
   // HTML src="images/..." / src="./images/..."
   out = out.replace(/src="(?:\.\/)?images\/([^"]+)"/g, (_m, p) => `src="${abs('images/' + p)}"`);
@@ -117,7 +115,7 @@ function buildItem({ collection, slug, frontMatter = {}, body = '', baseUrl, las
     content_markdown: markdown,
     images,
     last_modified: lastModified,
-    content_hash: contentHash(markdown),
+    content_hash: contentHash(body),
   };
 }
 module.exports.buildItem = buildItem;
@@ -160,7 +158,11 @@ if (require.main === module) {
   const root = process.cwd();
   const args = process.argv.slice(2);
   const outArgIdx = args.indexOf('--out');
-  const outArg = outArgIdx >= 0 ? args[outArgIdx + 1] : '_site/feed';
+  const outArg = (outArgIdx >= 0 && args[outArgIdx + 1] !== undefined) ? args[outArgIdx + 1] : '_site/feed';
+  if (outArgIdx >= 0 && args[outArgIdx + 1] === undefined) {
+    console.error('[build-feed] --out requires a path argument');
+    process.exit(1);
+  }
   const outDir = path.isAbsolute(outArg) ? outArg : path.join(root, outArg);
 
   const readYaml = (rel) => {
@@ -171,7 +173,9 @@ if (require.main === module) {
     }
   };
 
-  const cfg = readYaml('_config.yml') || {};
+  const cfgRaw = readYaml('_config.yml');
+  if (cfgRaw === null) console.warn('[build-feed] could not read _config.yml; using default base URL');
+  const cfg = cfgRaw || {};
   const defaultBaseUrl = `${cfg.url || ''}${cfg.baseurl || ''}`.replace(/\/+$/, '') || 'https://microsoft.github.io/mcs-labs';
   const siteTitle = cfg.title || 'Microsoft Copilot Agents Labs';
 
