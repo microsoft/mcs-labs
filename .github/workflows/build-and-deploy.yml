@@ -16,6 +16,7 @@ on:
     paths:
       - "_labs/**"
       - "_events/**"
+      - "_workshops/**"
       - "_layouts/**"
       - "_includes/**"
       - "_data/**"
