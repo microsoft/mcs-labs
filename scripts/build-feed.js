@@ -151,6 +151,23 @@ function buildIndex(resolved, counts, { baseUrl, generated, siteTitle }) {
 }
 module.exports.buildIndex = buildIndex;
 
+function buildManifestItem(item) {
+  const { content_markdown, images, metadata, ...light } = item;
+  return light;
+}
+module.exports.buildManifestItem = buildManifestItem;
+
+function buildManifest(feedDef, items, { baseUrl, generated }) {
+  return {
+    schema_version: SCHEMA_VERSION,
+    generated,
+    feed: { name: feedDef.name, title: feedDef.title, description: feedDef.description },
+    site: { base_url: baseUrl },
+    items: items.map(buildManifestItem),
+  };
+}
+module.exports.buildManifest = buildManifest;
+
 // CLI entry: node scripts/build-feed.js [--out <dir>]
 if (require.main === module) {
   const fs = require('node:fs');

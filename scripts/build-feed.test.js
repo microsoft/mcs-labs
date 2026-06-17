@@ -257,3 +257,29 @@ test('buildItem: includes a content_url to the per-item feed document', () => {
   });
   assert.equal(item.content_url, 'https://x.test/mcs-labs/feed/items/labs/demo.json');
 });
+
+test('buildManifestItem: drops heavy fields, keeps pointers and hashes', () => {
+  const full = feed.buildItem({
+    collection: 'labs', slug: 'demo',
+    frontMatter: { title: 'Demo', order: 1 }, body: '![a](images/a.png)',
+    baseUrl: 'https://x.test',
+  });
+  const light = feed.buildManifestItem(full);
+  assert.equal(light.content_markdown, undefined);
+  assert.equal(light.images, undefined);
+  assert.equal(light.metadata, undefined);
+  assert.equal(light.slug, 'demo');
+  assert.equal(light.content_url, full.content_url);
+  assert.equal(light.content_hash, full.content_hash);
+  assert.deepEqual(light.references, full.references);
+});
+
+test('buildManifest: light envelope with mapped items', () => {
+  const def = feed.resolveConfig({}).feeds.all;
+  const full = feed.buildItem({ collection: 'labs', slug: 'd', frontMatter: {}, body: 'b', baseUrl: 'https://x.test' });
+  const m = feed.buildManifest(def, [full], { baseUrl: 'https://x.test', generated: '2026-06-16T00:00:00Z' });
+  assert.equal(m.schema_version, '1.1');
+  assert.deepEqual(m.feed, { name: 'all', title: 'MCS Labs — All Content', description: 'All modules, events, workshops, and labs' });
+  assert.equal(m.items.length, 1);
+  assert.equal(m.items[0].content_markdown, undefined);
+});
