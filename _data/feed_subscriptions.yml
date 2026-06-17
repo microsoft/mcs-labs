@@ -1,0 +1,26 @@
+# Consumer configuration — which feeds THIS portal instance ingests.
+# Full design: docs/superpowers/specs/2026-06-17-feed-source-of-truth-design.md
+#
+# Default (this file present with only the self subscription, or absent entirely):
+#   the portal renders exactly its own content — identical to building from the
+#   collections directly.
+#
+# Each subscription:
+#   name:     local identifier
+#   self:     true to consume THIS instance's own produced feed (no HTTP)
+#   url:      base feed URL of an external instance (the dir containing index.json)
+#   feed:     which named feed to pull from that instance (default: all)
+#   enabled:  default true
+#   exclude:  { slugs: [...], collections: [...] } — subtractive local filter
+
+subscriptions:
+  - name: self
+    self: true
+    enabled: true
+
+# Example external subscription (uncomment + edit to use):
+#   - name: partner
+#     url: https://partner.example.com/mcs-labs/feed
+#     feed: all
+#     exclude:
+#       collections: [events]
