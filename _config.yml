@@ -127,6 +127,7 @@ include:
 # Exclude from build
 exclude:
   - .github/
+  - .feed-build/
   - README.md
   - LICENSE
   - SECURITY.md

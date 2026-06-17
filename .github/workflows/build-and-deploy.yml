@@ -23,6 +23,7 @@ on:
       - "_data/**"
       - "assets/**"
       - "_config.yml"
+      - "_config.feed.yml"
       - "index.md"
       - "about/**"
       - "events/**"
@@ -55,11 +56,6 @@ jobs:
           ruby-version: "3.3"
           bundler-cache: true
 
-      - name: Build Jekyll
-        run: bundle exec jekyll build
-        env:
-          JEKYLL_ENV: production
-
       - name: Setup Node
         uses: actions/setup-node@v5
         with:
@@ -68,8 +64,21 @@ jobs:
       - name: Install feed deps
         run: npm install --no-audit --no-fund
 
-      - name: Build content feed
-        run: node scripts/build-feed.js --out _site/feed
+      - name: Produce feed (own)
+        run: node scripts/build-feed.js --out .feed-build/published
+
+      - name: Consume feed and materialize
+        run: node scripts/consume-feed.js --out .feed-build --feed-dir .feed-build/published
+
+      - name: Build Jekyll from materialized feed
+        run: bundle exec jekyll build --config _config.yml,_config.feed.yml
+        env:
+          JEKYLL_ENV: production
+
+      - name: Publish feed alongside the site
+        run: |
+          mkdir -p _site/feed
+          cp -r .feed-build/published/. _site/feed/
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
