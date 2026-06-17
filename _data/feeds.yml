@@ -1,0 +1,24 @@
+# Feed publishing configuration for this portal instance (Phase 1: producer).
+# Full design: docs/superpowers/specs/2026-06-16-content-feed-design.md
+#
+# base_url:        Absolute base for image/link rewriting. Defaults to the site's
+#                  url + baseurl from _config.yml when omitted.
+# everything_feed: Emit a default "all" feed containing every collection.
+#                  true  -> emit feed "all" (DEFAULT)
+#                  false -> do not emit it
+#                  { name: <n>, title: <t> } -> emit it under a custom name/title
+# feeds:           Additional named feeds, emitted alongside the everything feed.
+#                  Each feed: collections (bulk include), include (extra slugs),
+#                  exclude (block slugs). An item may appear in multiple feeds.
+
+everything_feed: true
+
+# Example additional feeds (uncomment / edit to use):
+# feeds:
+#   labs-only:
+#     title: "Labs"
+#     collections: [labs]
+#   featured:
+#     title: "Featured"
+#     collections: []
+#     include: [agent-builder-m365, mcs-orchestration]
