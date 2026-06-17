@@ -43,3 +43,17 @@ test('mergeItems: first source wins on (collection, slug) collision', () => {
   assert.equal(items.find((i) => i.slug === 'b').v, 'ext');
   assert.deepEqual(collisions, [{ key: 'labs/a', droppedSource: 'partner' }]);
 });
+
+test('relativizeImages: own-origin image URLs become relative, others untouched', () => {
+  const base = 'https://microsoft.github.io/mcs-labs';
+  const md =
+    '![a](https://microsoft.github.io/mcs-labs/labs/demo/images/a.png) ' +
+    '<img src="https://microsoft.github.io/mcs-labs/labs/demo/images/b.png"> ' +
+    '![ext](https://partner.example.com/mcs-labs/labs/other/images/c.png) ' +
+    '![root](/x.png)';
+  const out = consume.relativizeImages(md, base, 'labs', 'demo');
+  assert.match(out, /\]\(images\/a\.png\)/);
+  assert.match(out, /src="images\/b\.png"/);
+  assert.match(out, /partner\.example\.com\/mcs-labs\/labs\/other\/images\/c\.png/); // external untouched
+  assert.match(out, /\]\(\/x\.png\)/); // root-relative untouched
+});

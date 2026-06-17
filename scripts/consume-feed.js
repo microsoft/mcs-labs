@@ -49,3 +49,11 @@ function mergeItems(taggedLists) {
   return { items: [...byKey.values()], collisions };
 }
 module.exports.mergeItems = mergeItems;
+
+function relativizeImages(markdown, ownBaseUrl, collection, slug) {
+  const absPrefix = `${ownBaseUrl}/${collection}/${slug}/images/`;
+  const escaped = absPrefix.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const re = new RegExp(escaped, 'g');
+  return String(markdown == null ? '' : markdown).replace(re, 'images/');
+}
+module.exports.relativizeImages = relativizeImages;
