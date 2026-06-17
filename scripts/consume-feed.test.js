@@ -23,3 +23,12 @@ test('resolveSubscriptions: normalizes explicit subscriptions', () => {
   assert.deepEqual(subs[1].exclude, { slugs: ['x'], collections: [] });
   assert.equal(subs[2].enabled, false);
 });
+
+test('itemPassesFilter: drops by slug or collection, default passes', () => {
+  const sub = consume.resolveSubscriptions({ subscriptions: [{ url: 'x', exclude: { slugs: ['a'], collections: ['events'] } }] })[0];
+  assert.equal(consume.itemPassesFilter({ collection: 'labs', slug: 'a' }, sub), false);
+  assert.equal(consume.itemPassesFilter({ collection: 'events', slug: 'b' }, sub), false);
+  assert.equal(consume.itemPassesFilter({ collection: 'labs', slug: 'b' }, sub), true);
+  const open = consume.resolveSubscriptions({ subscriptions: [{ url: 'x' }] })[0];
+  assert.equal(consume.itemPassesFilter({ collection: 'labs', slug: 'a' }, open), true);
+});

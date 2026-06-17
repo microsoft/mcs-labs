@@ -25,3 +25,10 @@ function resolveSubscriptions(raw = {}) {
   return list.map(normalizeSubscription);
 }
 module.exports.resolveSubscriptions = resolveSubscriptions;
+
+function itemPassesFilter(item, sub) {
+  if (sub.exclude.slugs.includes(item.slug)) return false;
+  if (sub.exclude.collections.includes(item.collection)) return false;
+  return true;
+}
+module.exports.itemPassesFilter = itemPassesFilter;
