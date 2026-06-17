@@ -191,26 +191,36 @@ test('buildItem: module item carries lab reference and slug fallback title', () 
 test('buildFeedFile: wraps items with schema metadata', () => {
   const def = feed.resolveConfig({}).feeds.all;
   const out = feed.buildFeedFile(def, [{ slug: 'a' }], { baseUrl: 'https://x.test', generated: '2026-06-16T00:00:00Z' });
-  assert.equal(out.schema_version, '1.0');
+  assert.equal(out.schema_version, '1.1');
   assert.equal(out.generated, '2026-06-16T00:00:00Z');
   assert.deepEqual(out.feed, { name: 'all', title: 'MCS Labs — All Content', description: 'All modules, events, workshops, and labs' });
   assert.deepEqual(out.site, { base_url: 'https://x.test' });
   assert.equal(out.items.length, 1);
 });
 
-test('buildIndex: lists feeds with urls and counts', () => {
-  const resolved = feed.resolveConfig({ feeds: { extra: { collections: ['labs'] } } });
+test('buildIndex: lists feeds with manifest_url, bundle_url, and counts', () => {
+  const resolved = feed.resolveConfig({ feeds: { extra: { collections: ['labs'], bundle: false } } });
   const out = feed.buildIndex(resolved, { all: 42, extra: 7 }, {
     baseUrl: 'https://x.test/mcs-labs',
     generated: '2026-06-16T00:00:00Z',
     siteTitle: 'Site',
   });
-  assert.equal(out.schema_version, '1.0');
+  assert.equal(out.schema_version, '1.1');
   assert.deepEqual(out.site, { title: 'Site', base_url: 'https://x.test/mcs-labs' });
   const all = out.feeds.find((f) => f.name === 'all');
-  assert.equal(all.url, 'https://x.test/mcs-labs/feed/all.json');
+  assert.equal(all.manifest_url, 'https://x.test/mcs-labs/feed/all/manifest.json');
+  assert.equal(all.bundle_url, 'https://x.test/mcs-labs/feed/all.json');
   assert.equal(all.item_count, 42);
-  assert.equal(out.feeds.find((f) => f.name === 'extra').item_count, 7);
+  const extra = out.feeds.find((f) => f.name === 'extra');
+  assert.equal(extra.bundle_url, null); // bundle:false → no bundle_url
+  assert.equal(extra.item_count, 7);
+});
+
+test('resolveConfig: bundle defaults true and can be disabled per feed', () => {
+  const r = feed.resolveConfig({ feeds: { a: { collections: ['labs'] }, b: { collections: ['labs'], bundle: false } } });
+  assert.equal(r.feeds.a.bundle, true);
+  assert.equal(r.feeds.b.bundle, false);
+  assert.equal(r.feeds.all.bundle, true);
 });
 
 test('CLI: generates index.json and all.json from real collections', () => {
@@ -220,7 +230,7 @@ test('CLI: generates index.json and all.json from real collections', () => {
     execFileSync('node', ['scripts/build-feed.js', '--out', out], { cwd: process.cwd(), stdio: 'pipe' });
 
     const index = JSON.parse(fs.readFileSync(path.join(out, 'index.json'), 'utf8'));
-    assert.equal(index.schema_version, '1.0');
+    assert.equal(index.schema_version, '1.1');
     const allEntry = index.feeds.find((f) => f.name === 'all');
     assert.ok(allEntry, 'index lists the all feed');
     assert.ok(allEntry.item_count > 0, 'all feed has items');

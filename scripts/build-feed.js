@@ -3,6 +3,7 @@
 const crypto = require('node:crypto');
 
 const ALL_COLLECTIONS = ['events', 'workshops', 'modules', 'labs'];
+const SCHEMA_VERSION = '1.1';
 
 module.exports = {};
 
@@ -14,6 +15,7 @@ function normalizeFeedDef(name, def = {}) {
     collections: [...(def.collections || [])],
     include: [...(def.include || [])],
     exclude: [...(def.exclude || [])],
+    bundle: def.bundle !== false,
   };
 }
 
@@ -122,7 +124,7 @@ module.exports.buildItem = buildItem;
 
 function buildFeedFile(feedDef, items, { baseUrl, generated }) {
   return {
-    schema_version: '1.0',
+    schema_version: SCHEMA_VERSION,
     generated,
     feed: { name: feedDef.name, title: feedDef.title, description: feedDef.description },
     site: { base_url: baseUrl },
@@ -133,14 +135,15 @@ module.exports.buildFeedFile = buildFeedFile;
 
 function buildIndex(resolved, counts, { baseUrl, generated, siteTitle }) {
   return {
-    schema_version: '1.0',
+    schema_version: SCHEMA_VERSION,
     generated,
     site: { title: siteTitle, base_url: baseUrl },
     feeds: Object.values(resolved.feeds).map((f) => ({
       name: f.name,
       title: f.title,
       description: f.description,
-      url: `${baseUrl}/feed/${f.name}.json`,
+      manifest_url: `${baseUrl}/feed/${f.name}/manifest.json`,
+      bundle_url: f.bundle === false ? null : `${baseUrl}/feed/${f.name}.json`,
       item_count: counts[f.name] ?? 0,
     })),
   };
