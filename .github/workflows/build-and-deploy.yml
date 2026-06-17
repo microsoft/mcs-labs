@@ -23,6 +23,7 @@ on:
       - "_data/**"
       - "assets/**"
       - "_config.yml"
+      - "_config.feed.yml"
       - "index.md"
       - "about/**"
       - "events/**"
