@@ -4,6 +4,7 @@ const crypto = require('node:crypto');
 
 const ALL_COLLECTIONS = ['events', 'workshops', 'modules', 'labs'];
 const SCHEMA_VERSION = '1.1';
+const RESERVED_FEED_NAMES = new Set(['index', 'items']);
 
 module.exports = {};
 
@@ -31,11 +32,18 @@ function resolveConfig(raw = {}, { defaultBaseUrl = 'https://microsoft.github.io
       title: obj.title || 'MCS Labs — All Content',
       description: obj.description || 'All modules, events, workshops, and labs',
       collections: ALL_COLLECTIONS,
+      bundle: obj.bundle,
     });
   }
 
   for (const [name, def] of Object.entries(raw.feeds || {})) {
     feeds[name] = normalizeFeedDef(name, def);
+  }
+
+  for (const name of Object.keys(feeds)) {
+    if (RESERVED_FEED_NAMES.has(name)) {
+      throw new Error(`[build-feed] feed name "${name}" is reserved (conflicts with feed/${name}.json or feed/items/)`);
+    }
   }
 
   return { baseUrl, feeds };
@@ -144,7 +152,7 @@ function buildIndex(resolved, counts, { baseUrl, generated, siteTitle }) {
       title: f.title,
       description: f.description,
       manifest_url: `${baseUrl}/feed/${f.name}/manifest.json`,
-      bundle_url: f.bundle === false ? null : `${baseUrl}/feed/${f.name}.json`,
+      bundle_url: f.bundle ? `${baseUrl}/feed/${f.name}.json` : null,
       item_count: counts[f.name] ?? 0,
     })),
   };
@@ -191,9 +199,13 @@ if (require.main === module) {
   }
   const outDir = path.isAbsolute(outArg) ? outArg : path.join(root, outArg);
 
+  const cfgIdx = args.indexOf('--config');
+  const configPath = cfgIdx >= 0 ? args[cfgIdx + 1] : '_data/feeds.yml';
+
   const readYaml = (rel) => {
     try {
-      return yaml.load(fs.readFileSync(path.join(root, rel), 'utf8')) || {};
+      const full = path.isAbsolute(rel) ? rel : path.join(root, rel);
+      return yaml.load(fs.readFileSync(full, 'utf8')) || {};
     } catch {
       return null;
     }
@@ -205,7 +217,7 @@ if (require.main === module) {
   const defaultBaseUrl = `${cfg.url || ''}${cfg.baseurl || ''}`.replace(/\/+$/, '') || 'https://microsoft.github.io/mcs-labs';
   const siteTitle = cfg.title || 'Microsoft Copilot Agents Labs';
 
-  let rawConfig = readYaml('_data/feeds.yml');
+  let rawConfig = readYaml(configPath);
   if (rawConfig === null) {
     console.warn('[build-feed] no _data/feeds.yml found; using defaults');
     rawConfig = {};
@@ -289,13 +301,13 @@ if (require.main === module) {
       JSON.stringify(buildManifest(feedDef, members, { baseUrl: resolved.baseUrl, generated }), null, 2)
     );
 
-    if (feedDef.bundle !== false) {
+    if (feedDef.bundle) {
       fs.writeFileSync(
         path.join(outDir, `${feedDef.name}.json`),
         JSON.stringify(buildFeedFile(feedDef, members, { baseUrl: resolved.baseUrl, generated }), null, 2)
       );
     }
-    console.log(`[build-feed] wrote ${feedDef.name}/manifest.json (${members.length} items)${feedDef.bundle === false ? ' [no bundle]' : ' + bundle'}`);
+    console.log(`[build-feed] wrote ${feedDef.name}/manifest.json (${members.length} items)${feedDef.bundle ? ' + bundle' : ' [no bundle]'}`);
   }
 
   const index = buildIndex(resolved, counts, { baseUrl: resolved.baseUrl, generated, siteTitle });

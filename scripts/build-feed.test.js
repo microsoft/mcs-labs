@@ -323,3 +323,34 @@ test('CLI: emits manifest, per-item docs, and bundle with the 1.1 layout', () =>
     if (out) fs.rmSync(out, { recursive: true, force: true });
   }
 });
+
+test('CLI: a feed with bundle:false omits the bundle file and nulls bundle_url', () => {
+  let out;
+  try {
+    out = fs.mkdtempSync(path.join(os.tmpdir(), 'mcs-feed3-'));
+    const cfg = path.join(out, 'feeds.yml');
+    fs.writeFileSync(cfg, 'everything_feed: false\nfeeds:\n  lite:\n    collections: [labs]\n    bundle: false\n');
+    execFileSync('node', ['scripts/build-feed.js', '--out', out, '--config', cfg], { cwd: process.cwd(), stdio: 'pipe' });
+
+    assert.ok(fs.existsSync(path.join(out, 'lite', 'manifest.json')), 'manifest is written');
+    assert.ok(!fs.existsSync(path.join(out, 'lite.json')), 'bundle is NOT written for bundle:false');
+
+    const index = JSON.parse(fs.readFileSync(path.join(out, 'index.json'), 'utf8'));
+    const lite = index.feeds.find((f) => f.name === 'lite');
+    assert.equal(lite.bundle_url, null);
+    assert.match(lite.manifest_url, /\/feed\/lite\/manifest\.json$/);
+  } finally {
+    if (out) fs.rmSync(out, { recursive: true, force: true });
+  }
+});
+
+test('resolveConfig: rejects reserved feed names', () => {
+  assert.throws(() => feed.resolveConfig({ feeds: { index: { collections: ['labs'] } } }), /reserved/);
+  assert.throws(() => feed.resolveConfig({ feeds: { items: { collections: ['labs'] } } }), /reserved/);
+  assert.throws(() => feed.resolveConfig({ everything_feed: { name: 'items' } }), /reserved/);
+});
+
+test('resolveConfig: everything_feed bundle:false is honored', () => {
+  const r = feed.resolveConfig({ everything_feed: { bundle: false } });
+  assert.equal(r.feeds.all.bundle, false);
+});
