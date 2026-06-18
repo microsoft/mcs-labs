@@ -34,8 +34,8 @@ test('image-only change → clean', () => {
   assert.deepEqual(r.warnings, []);
 });
 
-test('new README added without _labs → violation', () => {
-  const r = findUnsyncedLabs(['labs/newlab/README.md'], { readmeSlugs: slugs(['newlab']) });
+test('new README added without _labs → violation (slug not yet on disk)', () => {
+  const r = findUnsyncedLabs(['labs/newlab/README.md'], { readmeSlugs: slugs([]) });
   assert.deepEqual(r.violations, ['newlab']);
 });
 

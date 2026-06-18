@@ -2,8 +2,6 @@
 
 module.exports = {};
 
-// findUnsyncedLabs is added in the next task; the CLI entry is added last.
-
 const README_RE = /^labs\/([^/]+)\/README\.md$/;
 const LABS_RE = /^_labs\/([^/]+)\.md$/;
 
