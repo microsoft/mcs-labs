@@ -145,7 +145,7 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 #### Navigate to Analytics
 
-1. Go to Copilot Studio and select **Agents** on the left navigation. Open your Copilot Studio Assistant agent and select **Analytics** in the top navigation bar.
+1. Go to Copilot Studio and select **Agents** on the left navigation. Open your Copilot Studio Assistant agent, then select the **more options (…/+N)** overflow on the agent's tab bar and choose **Analytics** (it may not be visible directly on the tab bar).
 
 1. Review the analytics dashboard overview, which typically includes:
    - **Summary metrics**: Total conversations, engaged conversations, resolution rate
@@ -205,7 +205,7 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 1. This section tracks answer quality across completeness, relevance, and use of knowledge sources. Review your **Answered** and **Unanswered** question percentages. 
 
-1. Select **See details** to go deeper into the answer rate and source analytics.
+1. Select **See questions** to go deeper into the answer rate and source analytics.
 
 1. The **Generated answer rate and quality** panel will open on the right side of the screen.
 
@@ -308,7 +308,7 @@ Create evaluation test sets using four different methods and understand how each
 
 #### Generate Test Cases
 
-1. In your Copilot Studio Assistant agent, select **Evaluation** in the top navigation bar for your agent.
+1. In your Copilot Studio Assistant agent, select the **more options (…/+N)** overflow on the agent's tab bar and choose **Evaluate** (it may not be visible directly on the tab bar).
 
     > [!NOTE]
     > If you don't see the Evaluation option, it may need to be enabled in your environment settings or may not yet be available in your region. Check [Agent Evaluation overview](https://learn.microsoft.com/microsoft-copilot-studio/analytics-agent-evaluation-overview) for availability.
@@ -345,13 +345,13 @@ Create evaluation test sets using four different methods and understand how each
 
 1. You can also select the successful ones to see details like the agent response.
 
-1. When you are done reviewing, select **Evaluation** in the agent top navigation bar to return back to the list of evaluation sets.
+1. When you are done reviewing, select **Evaluate** from the agent's tab bar (via the **more options (…/+N)** overflow if needed) to return back to the list of evaluation sets.
 
 #### Import Test Cases
 
 1. Select **New evaluation**.
 
-1. In the middle of the screen in the **Start by uploading some questions** section, select **CSV** to download the CSV template.
+1. In the middle of the screen in the **Start by uploading some questions** section, select the **template** link to download the sample CSV.
 
 1. Review the required CSV format by opening the file you downloaded. The template shows the expected columns:
     - **question** - User question that the agent will answer
