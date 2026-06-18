@@ -4,19 +4,39 @@ module.exports = {};
 
 const README_RE = /^labs\/([^/]+)\/README\.md$/;
 const LABS_RE = /^_labs\/([^/]+)\.md$/;
+const DEFAULT_STATUS = 'M';
+const ADDED_STATUS_RE = /^A\d*$/;
 
 function findUnsyncedLabs(changedFiles, { readmeSlugs } = {}) {
   const readmes = readmeSlugs || new Set();
   const changedReadmes = new Set();
+  const addedReadmes = new Set();
   const changedLabs = new Set();
-  for (const f of changedFiles) {
-    const r = String(f).match(README_RE);
-    if (r) { changedReadmes.add(r[1]); continue; }
-    const l = String(f).match(LABS_RE);
-    if (l) { changedLabs.add(l[1]); }
+  for (const line of changedFiles) {
+    const raw = String(line).trim();
+    if (!raw) continue;
+    const parts = raw.split('\t');
+    const hasStatus = parts.length > 1;
+    // Backward-compatibility: callers that provide plain paths (no status)
+    // are treated as "modified" paths.
+    const status = hasStatus ? parts[0] : DEFAULT_STATUS;
+    const paths = hasStatus ? parts.slice(1) : [raw];
+    for (const f of paths) {
+      const r = String(f).match(README_RE);
+      if (r) {
+        changedReadmes.add(r[1]);
+        // Match git "added" statuses (e.g., A, A100).
+        if (ADDED_STATUS_RE.test(status)) addedReadmes.add(r[1]);
+        continue;
+      }
+      const l = String(f).match(LABS_RE);
+      if (l) changedLabs.add(l[1]);
+    }
   }
   const violations = [];
   for (const slug of changedReadmes) {
+    // Backfill scenario: README was newly added for an existing lab.
+    if (addedReadmes.has(slug) && readmes.has(slug)) continue;
     if (!changedLabs.has(slug)) violations.push(slug);
   }
   const warnings = [];
