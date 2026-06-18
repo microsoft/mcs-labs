@@ -40,6 +40,9 @@ Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** �
 - [Instructions by Use Case](#instructions-by-use-case)
   - [Use Case #1: Automate Task Time-Blocking with a Workflow and an Inline Agent](#use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent)
   - [Use Case #2: Setting Up the Order Management Workflow](#use-case-2-setting-up-the-order-management-workflow)
+  - [Use Case #3: Use M365 Copilot and Add a Human-in-the-Loop in Order Management](#use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management)
+  - [Use Case #4: Build an Inline Agent for Inventory Management](#use-case-4-build-an-inline-agent-for-inventory-management)
+  - [Use Case #5: Call a Price Quote Specialist Agent from a Workflow](#use-case-5-call-a-price-quote-specialist-agent-from-a-workflow)
 - [Summary of Learnings](#summary-of-learnings)
 - [Conclusions & Recommendations](#conclusions--recommendations)
 
@@ -426,6 +429,368 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 ### Congratulations! The Order Management Workflow is now fully configured and operational.
 
 You've completed the foundation that all subsequent use cases build on — the workflow is published, connections are linked, and you've verified the "Other" classification path works end-to-end.
+
+---
+
+## Use Case #3: Use M365 Copilot and Add a Human-in-the-Loop in Order Management
+
+Configure and validate the **Customer Inquiry** branch so the workflow drafts a response with **M365 Copilot**, pauses for a **Human review**, and only replies to the customer after approval.
+
+**Summary of tasks**
+
+In this section, you'll inspect the Customer Inquiry routing branch, review how the M365 Copilot and Human review nodes are configured, publish any updates if needed, and run an end-to-end test with an approval email.
+
+**Scenario:** A customer sends a product question to the order desk. Instead of crafting the answer manually every time, the workflow uses M365 Copilot to prepare a grounded draft response, sends that draft to a human reviewer for approval, and then either replies to the customer or flags the message for follow-up depending on the approver's decision.
+
+### Objective
+
+Validate the **Customer Inquiry** path of the **Order Management Workflow**: confirm the M365 Copilot draft prompt, inspect the Human review approval experience, test the path with a sample customer email, approve the proposed reply, and verify the customer response lands in your inbox.
+
+---
+
+### Step-by-step instructions
+
+#### Inspect the Customer Inquiry branch
+
+1. In **Copilot Studio**, open the published **Order Management Workflow** and select the **Classify** node. Observe the **Customer Inquiry** branch that leaves the classification node and note how it routes customer questions into a draft-and-review sequence.
+
+   > [!TIP]
+   > **Classify node tuning:** You can add different examples associated to the same category to handle edge cases properly. A good testing exercise is to try common cases and some edge cases within the node test level and observe how categories get assigned, then refine the category description accordingly.
+
+   ![The Customer Inquiry branch selected from the Classify node](images/customer-inquiry-branch.png)
+
+2. Select the **M365 Copilot** node in that branch. Review the prompt and confirm it uses the **Customer question** input based on the incoming email body. This is the grounded draft-generation step that prepares the proposed response for the reviewer.
+
+   > [!NOTE]
+   > **M365 Copilot node scope:** The M365 Copilot node excels at addressing questions that leverage Microsoft Graph (emails, Teams chats, etc.) — think of it as prompts you would send in M365 Copilot chat. Note that the operations this node performs are **read-only** — it can search and retrieve information from emails, chats, and files, but it **cannot send emails or Teams messages**. If you need those write operations, use an **Agent** node with access to the relevant Work IQ tools instead.
+
+   ![The M365 Copilot node showing the Customer question input from the email body](images/customer-inquiry-m365-copilot-node.png)
+
+3. Select the **Human review** node and inspect its configuration carefully:
+
+   - In the approval message, confirm the proposed reply from **M365 Copilot** is inserted for the reviewer to read.
+   - Scroll down and confirm the **Outlook** channel is selected.
+   - Review the **Yes/No** inputs for **Send proposed reply from M365?**
+   - **Bonus:** Select **+** to observe the other input types available, but do **not** add any new inputs.
+
+   ![The Human review node showing the proposed M365 reply and approval options](images/customer-inquiry-human-review-node.png)
+
+4. Select the **If/Else** node after Human review and observe the decision logic. When the reviewer answers **Yes**, the workflow sends the proposed reply to the customer; otherwise, the original email is flagged in the inbox for manual follow-up.
+
+   ![The If Else node routing Yes to reply and No to inbox flagging](images/customer-inquiry-if-else-node.png)
+
+#### Run an end-to-end Customer Inquiry test
+
+5. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and send the following email **to yourself**:
+
+   - **Subject:** `Order Management - Question about iPad Air warranty and MDM`
+   - **Body:**
+
+     ```
+     Hi team,
+
+     Quick question before we expand our last order. What is the standard warranty
+     period on the iPad Air (M2), and can the devices be enrolled in our mobile device
+     management (MDM)? I think we asked something similar a few months back but I can't
+     find the reply.
+
+     Thanks,
+     Jordan Kim
+     IT, Alpine Ski House
+     ```
+
+   ![The customer inquiry test email being composed in Outlook](images/customer-inquiry-test-email.png)
+
+6. Return to the workflow and open the **Activity** panel. Refresh until the new run appears, then open it and observe the path: **Classify → Customer Inquiry**.
+
+   > [!IMPORTANT]
+   > This path pauses at the approval step. If the run seems to stop, that is expected — the workflow is waiting for the **Human review** action to be completed from Outlook.
+
+   ![The Activity panel showing the run entering the Customer Inquiry path](images/customer-inquiry-activity-path.png)
+
+7. Wait until the run reaches the **Human Request** node. Select the node in the run details if you want to confirm that the workflow is awaiting reviewer input.
+
+   ![The run details showing the Human Request node waiting for approval](images/customer-inquiry-human-request-waiting.png)
+
+8. Go to **Outlook** and open the incoming approval email. Review the proposed M365 Copilot reply, then select **Yes** to approve sending it.
+
+   ![The approval email in Outlook with the proposed reply and Yes button](images/customer-inquiry-approval-email.png)
+
+9. Return to your inbox and verify that the approved reply email lands there. This confirms the workflow resumed after human approval and sent the response automatically.
+
+   ![The approved reply email received in the inbox](images/customer-inquiry-reply-received.png)
+
+---
+
+### Congratulations! The Customer Inquiry path is now drafting, reviewing, and replying successfully.
+
+You've confirmed that the workflow can generate a grounded response with M365 Copilot, pause for human approval, and then continue automatically based on the reviewer's decision.
+
+---
+
+## Use Case #4: Build an Inline Agent for Inventory Management
+
+Extend the **Supplier Delay** branch with an inline **Agent** that uses **MCP servers** to reason over the delay notice, check current stock, and create a follow-up **Dataverse Task**.
+
+**Summary of tasks**
+
+In this section, you'll add a new agent node to the Supplier Delay branch, connect the Warehouse and Dataverse MCP servers, define the agent's instructions and structured output, publish the workflow, and test the scenario with a supplier delay email.
+
+**Scenario:** A supplier warns that an incoming shipment is delayed. The workflow shouldn't just forward the email — it should reason about the impact by checking current inventory, determine urgency, and create a structured Dataverse task so the replenishment team can act immediately.
+
+### Objective
+
+Build and validate the **Supplier Delay** path of the **Order Management Workflow** by adding the **Inventory Task Agent**, equipping it with MCP tools, generating structured output, and verifying that it creates the expected Dataverse task after a test email is received.
+
+---
+
+### Step-by-step instructions
+
+#### Add and configure the Supplier Delay agent
+
+1. In the **Classify** node, locate the **Supplier Delay** category. Select the **+** next to that branch and choose **Agent** to add a new agent step for this path.
+
+   ![The Supplier Delay category with the add action menu open to Agent](images/supplier-delay-add-agent.png)
+
+2. In the new node, leave **Agent** set to **New agent in this workflow** and keep the default AI model. This creates an inline agent dedicated to this workflow path.
+
+3. Select **Expand** (the two arrows next to **...**) so you can edit the full agent configuration, then rename the node title to **Inventory Task Agent**.
+
+   ![The expanded agent configuration renamed to Inventory Task Agent](images/supplier-delay-agent-expanded.png)
+
+4. Under **Tools**, navigate to **Model Context Protocol** (**MCP servers**), then add and connect both of these tools:
+
+   - **Microsoft Dataverse MCP Server**
+   - **Warehouse MCP**
+
+   Sign in or connect as prompted so both tools show as available in the agent.
+
+   ![The agent tools panel showing Dataverse MCP and Warehouse MCP connected](images/supplier-delay-mcp-tools.png)
+
+5. In the **Instructions** box, paste the following agent instructions:
+
+   ```
+   Purpose
+   You triage supplier shipment-delay notices into restock tasks for Contoso Electronics. A delay notice names a delayed product but does not include stock levels, so you use the Warehouse tool to find the current stock and judge how urgent the delay is, then record a task in Dataverse.
+
+   Inputs
+   Delay notice: [email body]
+   Review by (Due Date): [due date]
+
+   Guidelines
+   Take the current stock and all restock details from the Warehouse tool; the email does not contain them.
+   Judge urgency from the current on-hand quantity: zero on-hand means the delay causes a stockout and is urgent; low but above zero means the buffer is at risk; healthy stock means the delay is tolerable.
+
+   Steps
+   Read the product or SKU named in the delay notice.
+   Call the Warehouse restock-date lookup once, passing the exact SKU from the notice (no extra spaces). It returns the current quantity, next shipment date, expected quantity, and supplier. Do not call the stock-check tool.
+   Decide the urgency of the delay from the current on-hand quantity.
+   Use Dataverse to create one row in the Task table in the current environment, setting only these columns:
+   Subject: Restock delay - [product] ([SKU]).
+   Description: the current on-hand quantity and warehouse; the delayed next shipment date, the expected quantity, and the supplier; the urgency judgement; and a one-line action for the replenishment team.
+   Priority: High if the on-hand quantity is zero, otherwise Normal.
+
+   Rules
+   Create exactly one Task row and set only the columns listed above.
+   If the product is not found in the Warehouse, record it as unrecognised for a person to check.
+   ```
+
+   ![The Supplier Delay agent instructions pasted into the configuration panel](images/supplier-delay-agent-instructions.png)
+
+6. Replace the placeholders in the instructions with dynamic content:
+
+   1. Select **`[email body]`**, choose the **lightning** icon, search for **body**, and insert **Body** from **When a new email arrives**.
+   2. Select **`[due date]`**, choose the **lightning** icon, then select **Ask Copilot to generate an expression**.
+   3. Enter: **Add 3 days to the date and time of arrival of the trigger email**
+   4. Confirm Copilot returns:
+
+      ```
+      addDays(triggerOutputs()?['body/receivedDateTime'], 3)
+      ```
+
+      Select **Insert**.
+
+   > [!TIP]
+   > **"Request human assistance when unsure":** Notice the button in the agent configuration panel. This feature sends a structured message to the connection owner when the agent encounters ambiguity or conflicting information — it dynamically generates questions based on the problem at hand, allowing human judgment for edge cases while keeping the automation running.
+
+   ![The agent instructions showing Body and due date dynamic expressions inserted](images/supplier-delay-dynamic-content.png)
+
+7. Scroll to the **Output** section and change the dropdown to **Structured output**. Add these three properties:
+
+   - `sku` (**string**) — *The SKU named in the delay notice*
+   - `stock` (**number**) — *Current stock quantity from the warehouse for the SKU named*
+   - `risk` (**boolean**) — *True if current stock is zero*
+
+   ![The structured output configuration with sku stock and risk properties](images/supplier-delay-structured-output.png)
+
+8. Minimize the view, then select **Save** and **Publish** so the Supplier Delay branch is live with the new agent configuration.
+
+   ![The Order Management Workflow published with the Inventory Task Agent added](images/supplier-delay-workflow-published.png)
+
+#### Test the Supplier Delay path
+
+9. In **Outlook**, send the following email **to yourself**:
+
+   - **Subject:** `Order Management - Shipment delay - LumiRead E-Reader`
+   - **Body:**
+
+     ```
+     Hello Contoso,
+
+     We're writing to let you know that the upcoming shipment of the LumiRead E-Reader
+     (16GB), SKU-LUMI, has been delayed and will not arrive on the originally planned
+     date.
+
+     We apologise for the inconvenience and will keep you updated.
+
+     Regards,
+     LumiRead Supply Team
+     ```
+
+   ![The supplier delay test email being composed in Outlook](images/supplier-delay-test-email.png)
+
+10. Return to the workflow's **Activity** panel, refresh until the run appears, and open it. Observe the path: **Classify → Supplier Delay → Inventory Task Agent**.
+
+    ![The Activity panel showing the Supplier Delay path and Inventory Task Agent run](images/supplier-delay-activity-path.png)
+
+11. Select the **Inventory Task Agent** node in the run details and scroll through the tool runs. You should see the warehouse lookup and the Dataverse describe/create operations executed by the agent.
+
+    ![The Inventory Task Agent run details showing Warehouse and Dataverse tool calls](images/supplier-delay-tool-runs.png)
+
+12. In the same run details, review the **structured output** and confirm it contains:
+
+    - `sku = SKU-LUMI`
+    - `stock = 0`
+    - `risk = true`
+
+    ![The structured output values showing SKU-LUMI stock 0 and risk true](images/supplier-delay-structured-output-result.png)
+
+13. Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), navigate to **Tables → Task**, and find the row **Restock delay - LumiRead E-Reader (16GB) (SKU-LUMI)**. Verify the task has a **Due Date** three days from now and **Priority = High**.
+
+    ![The Dataverse Task row created for the delayed LumiRead shipment](images/supplier-delay-dataverse-task.png)
+
+---
+
+### Congratulations! The Supplier Delay path is now using an MCP-powered inline agent.
+
+You've added a reasoning agent that enriches a supplier delay notice with live warehouse data, creates a Dataverse task, and emits structured output for downstream visibility.
+
+---
+
+## Use Case #5: Call a Price Quote Specialist Agent from a Workflow
+
+Connect the **Quote Request** branch to a reusable, published **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse product data**, and **WorkIQ Mail** to produce and send a professional quote.
+
+**Summary of tasks**
+
+In this section, you'll inspect the existing Price Quote Agent, wire it into the Quote Request branch, pass the sender and email body as dynamic inputs, publish the workflow, and verify the generated quote email end-to-end.
+
+**Scenario:** A customer asks for pricing on a bundle of products. Rather than rebuilding the quote logic inside the workflow, you can reuse an already-published agent that knows how to look up pricing guidance, combine it with product catalog data, and send a polished quote response.
+
+### Objective
+
+Configure the **Quote Request** path to use the published **Price Quote Agent**, provide it with the email sender and request body at runtime, and verify that it completes the quote process and sends the resulting email.
+
+---
+
+### Step-by-step instructions
+
+#### Inspect the reusable Price Quote Agent
+
+1. In **Copilot Studio**, select **Agents** in the left navigation. Ensure the **New experience** toggle (top-right of the Agents list) is **ON** — this gives you the modern agent builder with the **Build | Preview | Evaluate | Monitor** tab layout.
+
+   > [!NOTE]
+   > If the toggle is not visible or already active, you are already in the new experience. The new interface provides a cleaner single-page layout for inspecting agent instructions, tools, knowledge, and skills at a glance.
+
+   ![The Agents list with the New experience toggle enabled](images/agents-list-new-experience.png)
+
+2. Open **Price Quote Agent**. In the new experience's **Build** tab, inspect the agent and confirm these components are present on the right-hand panel:
+
+   - **Model**: the assigned AI model (e.g. Claude Sonnet 4.6)
+   - **Tools**: **Microsoft Dataverse MCP Server** and **Work IQ Mail (Preview)**
+   - **Knowledge**: **Order Management** (SharePoint knowledge source with pricing guidance, customer tiers, and related policy)
+   - **Skills**: **price-quote** — the structured skill for composing and sending the quote email
+   - On the left, the **Instructions** pane shows the agent's broad, conversational guidelines about handling price questions
+
+   ![The Price Quote Agent in the new Build experience showing instructions tools and knowledge](images/uc5-agent-new-experience.png)
+
+3. Return to the **Order Management Workflow** and locate the **Quote Request** category in the **Classify** node.
+
+#### Configure the Quote Request branch
+
+4. Select the **+** next to **Quote Request** and choose **Agent**.
+
+5. In the **Agent** dropdown, select **Price Quote Agent** — the existing published agent.
+
+   > [!IMPORTANT]
+   > **Only published agents appear in the dropdown:** When using the Agent node with an existing agent, only agents that have been **published** (not just saved) will appear in the agent selection dropdown. If your agent is missing from the list, go to the agent page and publish it first.
+
+   ![The Quote Request branch agent selector showing Price Quote Agent](images/quote-request-select-existing-agent.png)
+
+6. In the **Message** field, enter:
+
+   ```
+   Prepare a price quote for this customer request:
+   Customer email: [email sender]
+   Request: [email body]
+   ```
+
+7. Replace the placeholders with dynamic values:
+
+   - Select **`[email sender]`**, choose the **lightning** icon, search for **from**, and insert **From**
+   - Select **`[email body]`**, choose the **lightning** icon, search for **body**, and insert **Body**
+
+   ![The Quote Request message field with From and Body dynamic tokens inserted](images/quote-request-message-dynamic-content.png)
+
+8. Select **Save**, then **Publish**.
+
+   ![The workflow published after wiring the Quote Request branch to Price Quote Agent](images/quote-request-workflow-published.png)
+
+#### Test the Quote Request path
+
+9. In **Outlook**, send the following email **to yourself**:
+
+   - **Subject:** `Order Management - Quote request - Adventure Works`
+   - **Body:**
+
+     ```
+     Hello Contoso team,
+
+     We're fitting out a new office and would like a quote for:
+     - 10 Sony WH-1000XM5 headphones
+     - 5 iPad Air (M2, 256GB)
+
+     Delivery to our Santa Cruz, California office. Could you confirm your best price,
+     the payment terms, and the delivery estimate?
+
+     Thanks,
+     Nancy Anderson
+     Procurement, Adventure Works
+     ```
+
+   ![The quote request test email being composed in Outlook](images/quote-request-test-email.png)
+
+10. Return to the workflow's **Activity** panel, refresh until the run appears, and confirm the route **Classify → Quote Request → Agent completed**.
+
+    ![The Activity panel showing the Quote Request branch run completed](images/quote-request-activity-path.png)
+
+11. Select the **Agent** node in the run details and read the completion message describing what the Price Quote Agent did to prepare the customer response.
+
+    ![The Quote Request agent run details showing the completion message](images/quote-request-agent-completion.png)
+
+12. Open **Outlook** and verify that the generated price quote email has landed in your inbox.
+
+    ![The completed price quote email received in Outlook](images/quote-request-email-received.png)
+
+13. **Bonus:** Return to **Price Quote Agent** and select the **Preview** tab (top of the new experience). Ask: **What are the iPad Air prices applicable to Fabrikam?** Observe the extended reasoning — the agent searches SharePoint for customer-tier pricing guidance and queries Dataverse with a `read_query` to build an accurate, tiered response.
+
+    ![The Price Quote Agent Preview tab showing the Fabrikam pricing question with reasoning](images/uc5-bonus-agent-reasoning.png)
+
+---
+
+### Congratulations! The Quote Request path is now powered by a reusable published agent.
+
+You've connected a workflow branch to a published agent that blends knowledge, data, and mail actions — a strong pattern for reusing sophisticated business logic across multiple automations.
 
 ---
 
