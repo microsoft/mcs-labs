@@ -150,30 +150,30 @@ schedule:
     label: "Module 8"
     title: "Tools"
     time: "13:00"
-    duration: 45
+    duration: 30
 
   - type: lab
     slug: mcs-tools
     label: "Lab 7"
     title: "Tools"
-    time: "13:45"
+    time: "13:30"
 
   - type: module
     slug: orchestration
     label: "Module 9"
     title: "Orchestration and Dynamic Chaining Concepts w/ Demos"
-    time: "14:45"
+    time: "14:30"
     duration: 45
 
   - type: lab
     slug: mcs-orchestration
     label: "Lab 8"
     title: "Orchestration with Copilot Studio"
-    time: "15:30"
+    time: "15:15"
 
   - type: break
     title: "Networking time"
-    time: "16:30"
+    time: "16:15"
     duration: 60
 
   # --- Day 3 ------------------------------------------------------------

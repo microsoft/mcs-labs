@@ -3,7 +3,7 @@ layout: lab
 module: workflows
 title: "Workflows"
 order: 340
-duration: 45
+duration: 60
 difficulty: 300
 lab_type: local
 section: advanced_labs
@@ -24,7 +24,7 @@ Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** �
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 45 minutes | After completing this lab, participants will be able to create a Workflow in Copilot Studio, fire it from an event-driven **trigger**, and embed a non-deterministic **inline agent** that reasons over the trigger's data and acts through tools (Outlook calendar, Microsoft To Do, and web search) — going beyond the classic, deterministic autonomous-agent model. |
+| 300 | Maker | 60 minutes | After completing this lab, participants will be able to create a Workflow in Copilot Studio, fire it from an event-driven **trigger**, and embed a non-deterministic **inline agent** that reasons over the trigger's data and acts through tools (Outlook calendar, Microsoft To Do, and web search) — going beyond the classic, deterministic autonomous-agent model. |
 
 ---
 
@@ -62,7 +62,7 @@ Think of Workflows as the autonomous side of Copilot Studio:
 - "My flows are rigid — I need a step that can reason about messy, real-world inputs and choose what to do."
 - "I want an agent that can read my calendar, book time, and update a task — on its own."
 
-**In 45 minutes, you'll build an autonomous Workflow whose inline agent schedules focus time on your calendar and enriches a to-do — triggered automatically by simply creating a task.**
+**In 60 minutes, you'll build an autonomous Workflow whose inline agent schedules focus time on your calendar and enriches a to-do — triggered automatically by simply creating a task.**
 
 ---
 

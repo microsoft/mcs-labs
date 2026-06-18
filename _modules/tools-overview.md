@@ -2,7 +2,7 @@
 layout: module
 title: "Copilot Studio Tools"
 order: 1080
-duration: 45
+duration: 30
 difficulty: 300
 section: intermediate_modules
 description: "Connectors, Power Automate flows, and custom tools in Copilot Studio."
