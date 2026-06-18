@@ -1,0 +1,26 @@
+name: Lab Doc Sync
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  lab-doc-sync:
+    name: Lab Doc Sync
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v5
+        with:
+          node-version: "20"
+
+      - name: Check README ↔ _labs sync
+        run: |
+          git diff --name-only "${{ github.event.pull_request.base.sha }}...HEAD" | node scripts/check-lab-sync.js
