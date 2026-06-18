@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## Unreleased
 
 ### Added
+- Added a `Lab Doc Sync` pull-request check (`scripts/check-lab-sync.js` + `.github/workflows/lab-doc-sync.yml`) that fails when `labs/<slug>/README.md` changes without the rendered `_labs/<slug>.md` — the file the site actually builds from. Prevents lab content updates from silently not appearing on the live portal.
 - The portal can now render from the consumed feed (feed-as-source-of-truth). `scripts/consume-feed.js` reads `_data/feed_subscriptions.yml` (self by default, optional external instances, `exclude` filters), merges (own wins), and materializes collection docs into a git-ignored `.feed-build/` that Jekyll renders via `_config.feed.yml` (`collections_dir`). Own content round-trips identically (verified gate); committed sources and the lab auditor are untouched.
 - **Content syndication feed (Phase 1, producer).** Build-time `scripts/build-feed.js` emits config-driven JSON feeds (`feed/<name>.json` + `feed/index.json`) of modules/events/workshops/labs with raw markdown, metadata, and absolute image URLs. Configured via `_data/feeds.yml`.
 - Content feed now publishes a scalable layout (schema 1.1): a lightweight per-feed `manifest.json` (no markdown) plus deduplicated per-item documents at `feed/items/<collection>/<slug>.json`, so consumers sync incrementally. The full inline `feed/<name>.json` bundle remains (toggle per feed via `bundle:` in `_data/feeds.yml`).

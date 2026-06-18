@@ -153,3 +153,10 @@ and the self-feed round-trip gate.
 The full design and implementation notes live under
 [`docs/superpowers/`](./superpowers/) (`*-content-feed-design.md`,
 `*-feed-source-of-truth-design.md`, and the matching plans).
+
+## Lab content: README ↔ `_labs/`
+
+Each lab's content lives in two files: `labs/<slug>/README.md` (browsable on GitHub)
+and `_labs/<slug>.md` (the collection doc the **site renders from**). When you change a
+lab's `README.md`, you must update `_labs/<slug>.md` too, or the change won't appear on
+the live site. The **Lab Doc Sync** pull-request check enforces this.
