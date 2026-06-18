@@ -301,17 +301,22 @@ layout: single
 {%- assign lab_count = 0 -%}
 {%- assign module_count = 0 -%}
 {%- assign levels_list = "" -%}
+{%- assign lab_slugs = "," -%}
 {%- for item in schedule -%}
   {%- if has_agenda -%}
     {%- if item.type == "lab" -%}
       {%- assign lab = site.labs | where: "slug", item.slug | first -%}
       {%- if lab -%}
-        {%- assign lab_count = lab_count | plus: 1 -%}
-        {%- assign total_duration = total_duration | plus: item.duration | plus: 0 -%}
-        {%- if item.duration == nil -%}
-          {%- assign total_duration = total_duration | plus: lab.duration -%}
-        {%- endif -%}
-        {%- assign levels_list = levels_list | append: lab.difficulty | append: "," -%}
+        {%- capture lab_key -%},{{ item.slug }},{%- endcapture -%}
+        {%- unless lab_slugs contains lab_key -%}
+          {%- assign lab_count = lab_count | plus: 1 -%}
+          {%- assign lab_slugs = lab_slugs | append: item.slug | append: "," -%}
+          {%- assign total_duration = total_duration | plus: item.duration | plus: 0 -%}
+          {%- if item.duration == nil -%}
+            {%- assign total_duration = total_duration | plus: lab.duration -%}
+          {%- endif -%}
+          {%- assign levels_list = levels_list | append: lab.difficulty | append: "," -%}
+        {%- endunless -%}
       {%- endif -%}
     {%- elsif item.type == "module" -%}
       {%- assign mod = site.modules | where: "slug", item.slug | first -%}
@@ -322,9 +327,13 @@ layout: single
         {%- if mod.lab -%}
           {%- assign mod_lab = site.labs | where: "slug", mod.lab | first -%}
           {%- if mod_lab -%}
-            {%- assign lab_count = lab_count | plus: 1 -%}
-            {%- assign total_duration = total_duration | plus: mod_lab.duration -%}
-            {%- assign levels_list = levels_list | append: mod_lab.difficulty | append: "," -%}
+            {%- capture mod_lab_key -%},{{ mod.lab }},{%- endcapture -%}
+            {%- unless lab_slugs contains mod_lab_key -%}
+              {%- assign lab_count = lab_count | plus: 1 -%}
+              {%- assign lab_slugs = lab_slugs | append: mod.lab | append: "," -%}
+              {%- assign total_duration = total_duration | plus: mod_lab.duration -%}
+              {%- assign levels_list = levels_list | append: mod_lab.difficulty | append: "," -%}
+            {%- endunless -%}
           {%- endif -%}
         {%- endif -%}
       {%- endif -%}
@@ -332,9 +341,13 @@ layout: single
   {%- else -%}
     {%- assign lab = site.labs | where: "slug", item.slug | first -%}
     {%- if lab -%}
-      {%- assign lab_count = lab_count | plus: 1 -%}
-      {%- assign total_duration = total_duration | plus: lab.duration -%}
-      {%- assign levels_list = levels_list | append: lab.difficulty | append: "," -%}
+      {%- capture lab_key -%},{{ item.slug }},{%- endcapture -%}
+      {%- unless lab_slugs contains lab_key -%}
+        {%- assign lab_count = lab_count | plus: 1 -%}
+        {%- assign lab_slugs = lab_slugs | append: item.slug | append: "," -%}
+        {%- assign total_duration = total_duration | plus: lab.duration -%}
+        {%- assign levels_list = levels_list | append: lab.difficulty | append: "," -%}
+      {%- endunless -%}
     {%- endif -%}
   {%- endif -%}
 {%- endfor -%}
