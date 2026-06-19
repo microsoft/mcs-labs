@@ -148,9 +148,14 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Agents** on the left navigation.
 
-1. Select **Create blank agent** in the upper right corner.
+1. From the Agents list, select the down-arrow (chevron) next to **New Agent**, then choose **New classic agent**. In the **Name your agent** dialog, enter `Dictionary Agent` and select **Create**.
 
-1. Once the agent is provisioned, rename it to `Dictionary Agent` by selecting  **Edit** in the **Details** section on **Overview**.
+    ![New Agent split-button menu showing New classic agent](images/new-agent-classic-menu.png)
+
+    > [!NOTE]
+    > Keep the **New experience** toggle ON — **New classic agent** opens the classic canvas in a new browser tab without switching experiences. A one-time **Welcome to Microsoft Copilot Studio** consent dialog may appear on first sign-in (select **Get Started**; if it stacks behind the **Name your agent** dialog, Cancel, Get Started, then retry).
+
+1. Once the agent is provisioned, confirm its name is `Dictionary Agent`. If you need to change it, select **Edit** in the **Details** section on **Overview**.
 
 1. Enter the following as the **Description:**
 
@@ -425,14 +430,14 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Select **Agents** on left navigation.
 
-1. Select **Create blank agent** in the upper right corner.
+1. From the Agents list, select the down-arrow (chevron) next to **New Agent**, then choose **New classic agent**. In the **Name your agent** dialog, enter `Sales Commission Assistant` and select **Create**.
 
     > [!TIP]
     > The agent creation may take 30-60 seconds. You'll see a loading indicator while your agent is being provisioned.
 
 1. Select **Edit** in the **Details** section.
 
-1. Enter the following details:
+1. Confirm the **Name** and add the **Description**:
 
    - **Name:**
      ```
@@ -591,9 +596,9 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/). Make sure you are logged in using the credentials for the lab and are in the correct environment.
 
-1. Select **Agents** in the left navigation then select **Create blank agent** in the upper right corner.
+1. Select **Agents** in the left navigation, then select the down-arrow (chevron) next to **New Agent** and choose **New classic agent**. In the **Name your agent** dialog, enter `Contoso Agent` and select **Create**.
 
-1. Select **Edit** and fill in the Name and Description:
+1. Select **Edit** and confirm the Name and add the Description:
 
    **Name:** `Contoso Agent`
 
@@ -740,9 +745,9 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/). Make sure you are logged in using the credentials for the lab and are in the correct environment.
 
-1. Select **Agents** in the left navigation then select **Create blank agent** in the upper right corner.
+1. Select **Agents** in the left navigation, then select the down-arrow (chevron) next to **New Agent** and choose **New classic agent**. In the **Name your agent** dialog, enter `Chit Chat Agent` and select **Create**.
 
-1. Once the agent is provisioned, rename it to **Chit Chat Agent** by selecting **Edit** in the **Details** section.
+1. Once the agent is provisioned, confirm its name is **Chit Chat Agent**. If you need to change it, select **Edit** in the **Details** section.
 
 1. Enter the following as the **Description:**
 
@@ -923,11 +928,9 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 1. Go to [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com).
 
-1. Select **Agents** in the left navigation and then select **Create from blank** in the upper right corner.
+1. Select **Agents** in the left navigation, then select the down-arrow (chevron) next to **New Agent** and choose **New classic agent**. In the **Name your agent** dialog, enter `Portfolio Lookup Agent` and select **Create**.
 
-1. In the **Details** section select **Edit** and change the name to **Portfolio Lookup Agent**.
-
-1. Select **Save**.
+1. Once the agent is provisioned, confirm its name is **Portfolio Lookup Agent**. If you need to change it, select **Edit** in the **Details** section and select **Save**.
 
 #### Configure Email Triggers
 
