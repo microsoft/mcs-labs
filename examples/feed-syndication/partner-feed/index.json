@@ -1,0 +1,26 @@
+{
+  "schema_version": "1.1",
+  "generated": "2026-06-19T00:00:00.000Z",
+  "site": {
+    "title": "Contoso Copilot Labs",
+    "base_url": "https://contoso.github.io/copilot-labs"
+  },
+  "feeds": [
+    {
+      "name": "all",
+      "title": "Contoso Copilot Labs — All Content",
+      "description": "All labs, events, workshops, and modules",
+      "manifest_url": "https://contoso.github.io/copilot-labs/feed/all/manifest.json",
+      "bundle_url": "https://contoso.github.io/copilot-labs/feed/all.json",
+      "item_count": 5
+    },
+    {
+      "name": "labs-events",
+      "title": "Contoso — Labs & Events",
+      "description": "Labs and events only (workshops and modules withheld)",
+      "manifest_url": "https://contoso.github.io/copilot-labs/feed/labs-events/manifest.json",
+      "bundle_url": "https://contoso.github.io/copilot-labs/feed/labs-events.json",
+      "item_count": 3
+    }
+  ]
+}

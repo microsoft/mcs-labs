@@ -1,0 +1,22 @@
+# Scenario 3 — CONSUMER-SIDE FILTERING ("limit the feeds being consumed").
+# The partner still offers its full "all" feed, but THIS portal chooses to drop
+# some of it locally. `exclude` is subtractive — a subscriber can remove items
+# the source offered, but can never add ones the source withheld.
+#
+# Here we keep the partner's labs and its workshop, but drop its events and
+# modules wholesale, plus one specific lab by slug. Compare with Scenario 2:
+# there the partner's WORKSHOP was missing because the source withheld it; here
+# the workshop is present and the EVENT is missing because *we* declined it.
+subscriptions:
+  - name: self
+    self: true
+    enabled: true
+
+  - name: contoso
+    label: "Contoso Copilot Labs"
+    url: http://partner:8080
+    feed: all                       # the partner offers everything...
+    enabled: true
+    exclude:                        # ...but we keep only the parts we want.
+      collections: [events, modules]      # drop ALL partner events and modules
+      slugs: [contoso-agent-governance]   # and this one specific lab

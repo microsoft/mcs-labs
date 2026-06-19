@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.1",
+  "generated": "2026-06-19T00:00:00.000Z",
+  "site": {
+    "base_url": "https://contoso.github.io/copilot-labs"
+  },
+  "item": {
+    "collection": "modules",
+    "slug": "contoso-responsible-ai",
+    "title": "Contoso: Responsible AI for Agents",
+    "description": "A short module on Responsible AI practices applied to Copilot agents.",
+    "url": "https://contoso.github.io/copilot-labs/modules/contoso-responsible-ai/",
+    "content_url": "https://contoso.github.io/copilot-labs/feed/items/modules/contoso-responsible-ai.json",
+    "metadata": {
+      "title": "Contoso: Responsible AI for Agents",
+      "order": 1200,
+      "duration": 30,
+      "difficulty": 200,
+      "section": "specialized_modules",
+      "description": "A short module on Responsible AI practices applied to Copilot agents."
+    },
+    "references": {
+      "labs": []
+    },
+    "content_markdown": "## Responsible AI for Agents\n\nA short partner module on Responsible AI: transparency, grounding, evaluation,\nand human oversight for production agents.\n\n> Syndicated from Contoso Copilot Labs via the content feed.",
+    "images": [],
+    "last_modified": "2026-06-19T00:00:00.000Z",
+    "content_hash": "sha256:16d75aaab2791e24108e2c6a3e05e136239595a1f15e3ac2db8de1178ac321c5"
+  }
+}

@@ -356,8 +356,9 @@ layout: single
 
 <div class="ws-hero">
   <h2>{{ page.title }}</h2>
+  {% if page.syndicated %}<p style="margin:0 0 0.6em;">{% include syndicated-pill.html source=page.source %}</p>{% endif %}
   <p>{{ page.description }}</p>
-  <a href="https://github.com/microsoft/mcs-labs/issues/new?template=bug_report.yml&type=Bug&labels=lab&title=%5B{{ page.event_id }}%5D+&lab={{ page.event_id }}" target="_blank" rel="noopener" style="display: inline-block; margin-top: 1em; font-size: 0.78em; font-weight: 600; color: rgba(255,255,255,0.7); text-decoration: none; border: 1px solid rgba(255,255,255,0.25); padding: 0.3em 0.8em; border-radius: 4px;">Report an issue</a>
+  {% unless page.syndicated %}<a href="https://github.com/microsoft/mcs-labs/issues/new?template=bug_report.yml&type=Bug&labels=lab&title=%5B{{ page.event_id }}%5D+&lab={{ page.event_id }}" target="_blank" rel="noopener" style="display: inline-block; margin-top: 1em; font-size: 0.78em; font-weight: 600; color: rgba(255,255,255,0.7); text-decoration: none; border: 1px solid rgba(255,255,255,0.25); padding: 0.3em 0.8em; border-radius: 4px;">Report an issue</a>{% endunless %}
   <ul class="ws-stats">
     {% if module_count > 0 %}<li><strong>{{ module_count }}</strong><span>Modules</span></li>{% endif %}
     <li><strong>{{ lab_count }}</strong><span>Labs</span></li>

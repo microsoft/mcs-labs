@@ -1,0 +1,37 @@
+# Two-container content-feed syndication demo.
+#
+#   partner  — a stand-in for a SECOND portal. A plain static file server that
+#              publishes the pre-generated Contoso Copilot Labs feed.
+#   portal   — THIS repo's site. On startup it produces its own feed, consumes
+#              its own + the partner's feed over the network, materializes the
+#              merged content, and serves the rendered site.
+#
+# Pick a scenario with SUBSCRIPTIONS_FILE (see ./subscriptions/*.yml):
+#   SUBSCRIPTIONS_FILE=examples/feed-syndication/subscriptions/full.yml docker compose up --build
+#
+# Then open http://localhost:4000/mcs-labs/  (wait for the "Server running" log).
+
+services:
+  partner:
+    image: python:3.12-alpine
+    command: ["python", "-m", "http.server", "8080", "--directory", "/feed"]
+    volumes:
+      - ./partner-feed:/feed:ro
+    networks: [feednet]
+
+  portal:
+    build:
+      context: ../..                      # repo root, so the Gemfile is in context
+      dockerfile: examples/feed-syndication/portal.Dockerfile
+    depends_on: [partner]
+    environment:
+      # Default scenario; override from the shell to switch demos.
+      SUBSCRIPTIONS_FILE: ${SUBSCRIPTIONS_FILE:-examples/feed-syndication/subscriptions/full.yml}
+    volumes:
+      - ../..:/site                       # bind-mount the repo (scripts, content, node_modules)
+    ports:
+      - "4000:4000"
+    networks: [feednet]
+
+networks:
+  feednet:

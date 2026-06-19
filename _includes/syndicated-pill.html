@@ -1,0 +1,7 @@
+{%- comment -%}
+  Provenance pill for content that was pulled into this portal from an EXTERNAL
+  content feed (see docs/CONTENT_FEED.md). Rendered wherever a syndicated item
+  appears so visitors can tell at a glance that it did not originate here.
+  Param: source — display name of the originating feed (optional).
+{%- endcomment -%}
+<span class="syndicated-pill" title="Syndicated into this portal via the content feed{% if include.source %} from {{ include.source }}{% endif %}" style="display:inline-flex;align-items:center;gap:0.4em;background:var(--color-pill-purple-bg,#efe3fb);color:var(--color-pill-purple-fg,#6b2fb3);font-size:0.72em;font-weight:700;letter-spacing:0.02em;padding:0.32em 0.72em;border-radius:999px;line-height:1;white-space:nowrap;vertical-align:middle;"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 11a9 9 0 0 1 9 9"/><path d="M4 4a16 16 0 0 1 16 16"/><circle cx="5" cy="19" r="1.6" fill="currentColor" stroke="none"/></svg>Syndicated{% if include.source %} · {{ include.source }}{% endif %}</span>

@@ -9,8 +9,10 @@ module.exports = {};
 
 function normalizeSubscription(sub = {}) {
   const ex = sub.exclude || {};
+  const name = sub.name || (sub.self ? 'self' : sub.url || 'unnamed');
   return {
-    name: sub.name || (sub.self ? 'self' : sub.url || 'unnamed'),
+    name,
+    label: sub.label || name,
     self: sub.self === true,
     url: sub.url || null,
     feed: sub.feed || 'all',
@@ -32,6 +34,23 @@ function itemPassesFilter(item, sub) {
   return true;
 }
 module.exports.itemPassesFilter = itemPassesFilter;
+
+// Stamp provenance onto items pulled from an EXTERNAL subscription so the site
+// can render a "Syndicated" indicator. Self items are returned untouched, which
+// keeps a self-only build byte-identical to a direct collection build.
+function stampProvenance(item, sub) {
+  if (!sub || sub.self) return item;
+  return {
+    ...item,
+    metadata: {
+      ...item.metadata,
+      syndicated: true,
+      source: sub.label || sub.name,
+      source_feed: sub.feed,
+    },
+  };
+}
+module.exports.stampProvenance = stampProvenance;
 
 function mergeItems(taggedLists) {
   const byKey = new Map();
@@ -169,7 +188,10 @@ if (require.main === module) {
         console.warn(`[consume-feed] subscription "${sub.name}" failed: ${err.message}; skipping`);
         continue;
       }
-      taggedLists.push({ source: sub.name, items: items.filter((it) => itemPassesFilter(it, sub)) });
+      taggedLists.push({
+        source: sub.name,
+        items: items.filter((it) => itemPassesFilter(it, sub)).map((it) => stampProvenance(it, sub)),
+      });
     }
 
     const { items, collisions } = mergeItems(taggedLists);
