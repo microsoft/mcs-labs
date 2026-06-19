@@ -134,7 +134,16 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 1. Go to the Copilot Studio home page at <a href="https://copilotstudio.microsoft.com" target="_blank">copilotstudio.microsoft.com</a>.
 
-1. Select **Agents** on the left navigation.
+1. At the top of the page, turn **off** the **New experience** toggle to return to the previous (classic) experience. The **Start with an agent template** gallery used in this lab is only available in the classic experience.
+
+    ![The New experience toggle, shown switched on](images/new-experience-toggle.png)
+
+    > [!NOTE]
+    > When you turn the toggle off, a **Submit feedback to Microsoft** dialog appears. Select a reason (for example, **I'm missing a feature I need**), optionally add a comment, then select **Submit** and **Done**. Selecting **Cancel** keeps you in the new experience. The page then reloads into the classic experience.
+    >
+    > ![The Submit feedback dialog shown when switching back to the classic experience](images/switch-back-feedback-dialog.png)
+
+1. Select **Agents** on the top navigation.
 
 1. Scroll down to the **Start with an agent template** section.
 
@@ -143,6 +152,12 @@ Create an agent, build a custom topic, and package components into a reusable co
 1. Select the **Safe Travels** template.
 
 1. Select **Create** to make the agent.
+
+1. After the agent is created, return to the new experience: select **Home** in the top navigation, then select **Try now** on the **New Copilot Studio experience** banner. The page switches back to the new experience.
+
+    ![The New Copilot Studio experience banner with the Try now button](images/switch-back-try-now-banner.png)
+
+1. Select **Agents** in the left navigation and open your new **Safe Travels** agent to continue.
 
 #### Create a Sample Topic
 
