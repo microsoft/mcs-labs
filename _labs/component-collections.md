@@ -277,9 +277,12 @@ Install a component collection in a new agent and verify that shared editing wor
 
 1. Select **Agents** on the left navigation menu.
 
-1. Select the **Create blank agent** button in the upper right corner.
+1. From the Agents list, select the down-arrow (chevron) next to **New Agent**, then choose **New classic agent**. In the **Name your agent** dialog, enter `Travel Hub` and select **Create**.
 
-1. In the **Name your agent** dialog, enter a name (for example, `Travel Hub`) and select **Create**.
+    ![New Agent split-button menu showing New classic agent](images/new-agent-classic-menu.png)
+
+    > [!NOTE]
+    > Keep the **New experience** toggle ON — **New classic agent** opens the classic canvas in a new browser tab without switching experiences. On a first sign-in, a one-time **Welcome to Microsoft Copilot Studio** consent dialog may appear (select **Get Started**; if it stacks behind the **Name your agent** dialog, select Cancel, then Get Started, then create again).
 
 1. Wait for the agent to be provisioned.
 
