@@ -169,27 +169,42 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 1. Check the **Environment** in the upper right corner to make sure you are in your "DEV - user name" environment.
 
-1. On the Home page in the description of the agent you want to build, enter the following but do not select enter yet: 
+1. In the left navigation, select **Agents**.
+
+1. From the Agents list, select the **down-arrow (chevron)** next to **New Agent**, then choose **New classic agent**.
+
+    ![New Agent split-button menu showing New classic agent](images/new-agent-classic-menu.png)
+
+    > [!NOTE]
+    > Leave the **New experience** toggle **on**. **New classic agent** opens the classic authoring canvas in a new tab without switching experiences — there's no need to flip experiences. On a first sign-in you may see a one-time **Welcome to Microsoft Copilot Studio** consent dialog; select **Get Started** to dismiss it. (If it later appears stacked *behind* the **Name your agent** dialog, select **Cancel** on that dialog, choose **Get Started**, then create the agent again.)
+
+1. In the **Name your agent** dialog, enter the following name and select **Create**:
 
     ```text
-    Agent that assists sales associates with getting product information and lookup account and contact information in the sales system.
+    Sales Associate Assistant
     ```
 
-    > [!IMPORTANT]
-    > Do not Select Enter or submit this text yet as we need to do the agent settings before we do that.
-
-    ![Home Creation Text](images/image.png)
-
-1. Select the **Gear** on the description input area and edit the schema name to include `salesassistant` and then Select **Update**. 
-
-    ![Agent Settings](images/image-1.png)
+1. Wait for the **"Your agent has been provisioned."** notification. Your agent opens on its **Overview** page.
 
     > [!TIP]
-    > Putting an agent into a dedicated solution and changing the schema name is always helpful for application lifecycle management in the future.
+    > Putting an agent into a dedicated solution and changing the schema name is always helpful for application lifecycle management in the future. You can set the schema name from the agent's **Settings** once it's created.
 
-1. Select **Enter** or the **Arrow** button on the right side of the description field.
+1. A new classic agent starts **blank** — empty Instructions, default system topics, and the model defaults to **Claude Sonnet 4.6**. In the **Instructions** section, select **Edit**, paste the following, and save:
 
-1. Once your agent is fully provisioned, review the instructions and tool or knowledge recommendations provided by the Copilot Studio provisioning process.
+    ```text
+    You are the Sales Associate Assistant. Your purpose is to help sales associates quickly find product information and look up account and contact information in the sales system.
+
+    Guidelines:
+    - Help sales associates get market-specific product information and answer account and contact questions.
+    - Only use the knowledge, tools, and connected or child agents configured on this agent. Do not rely on general model knowledge or the web.
+    - Ask the user which market they are working in when it is needed to scope product information.
+    - Delegate account and contact lookups to the connected account and contact agent.
+    - Keep responses concise, accurate, and grounded in the sources you are given.
+    - If you don't have the information, say so rather than guessing.
+    ```
+
+    > [!NOTE]
+    > Earlier versions of this lab created the parent agent with a describe-driven flow that auto-generated these Instructions. A new classic agent starts blank, so you provide the Instructions here. Feel free to refine the wording for your scenario.
 
 #### Prevent Hallucinations
 
