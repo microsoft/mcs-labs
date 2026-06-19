@@ -28,18 +28,25 @@ This page is the overview. The details live in focused guides:
 | Limit what goes out / comes in | [FILTERING.md](FILTERING.md) |
 | See it run across two containers, with screenshots | [`examples/feed-syndication/`](../examples/feed-syndication/) |
 
-```
-PRODUCER (your portal)                         CONSUMER (any portal)
-┌───────────────────────────┐                  ┌───────────────────────────┐
-│ _<collection>/*.md         │  build-feed.js   │ feed_subscriptions.yml     │
-│  + _data/feeds.yml         │ ───────────────▶ │  (self + external + filter)│
-│                            │   feed/*.json    │            │ consume-feed.js
-│                            │   (static, HTTP) │            ▼               │
-│                            │                  │ .feed-build/_<collection>/ │
-└───────────────────────────┘                  │            │ jekyll        │
-                                                │            ▼               │
-                                                │ rendered pages (+ pill)    │
-                                                └───────────────────────────┘
+```mermaid
+flowchart LR
+    subgraph PROD["PRODUCER · the source portal"]
+        direction TB
+        A["Source content<br/>collection docs + _data/feeds.yml"] --> B["build-feed.js"]
+    end
+    subgraph CONS["CONSUMER · any portal"]
+        direction TB
+        C["_data/feed_subscriptions.yml<br/>self + external + filters"] --> D["consume-feed.js"]
+        D --> E[".feed-build/ — materialized docs"]
+        E --> F["jekyll build"]
+        F --> G["Rendered pages<br/>+ Syndicated pill"]
+    end
+    B -->|"feed/*.json — static JSON, served over HTTP"| C
+
+    classDef prod fill:#e8effc,stroke:#2f5bd7,color:#13294f;
+    classDef cons fill:#f1e9fb,stroke:#6b2fb3,color:#33124f;
+    class A,B prod;
+    class C,D,E,F,G cons;
 ```
 
 ### Syndicated content is visibly marked
@@ -119,12 +126,12 @@ subscriptions:
 
 The deploy (`.github/workflows/build-and-deploy.yml`) is **feed-first**:
 
-```
-Produce feed (build-feed.js → .feed-build/published)
-  → Consume + materialize (consume-feed.js → .feed-build/_<collection>/…)
-  → Jekyll build --config _config.yml,_config.feed.yml   (collections_dir: .feed-build)
-  → Publish feed (.feed-build/published → _site/feed)
-  → Deploy _site
+```mermaid
+flowchart LR
+    P["Produce feed<br/>build-feed.js → .feed-build/published"] --> C["Consume + materialize<br/>consume-feed.js → .feed-build/_collection_/"]
+    C --> J["Jekyll build<br/>--config _config.yml,_config.feed.yml"]
+    J --> PUB["Publish feed<br/>.feed-build/published → _site/feed"]
+    PUB --> D["Deploy _site"]
 ```
 
 `_config.feed.yml` points Jekyll's collections at the materialized `.feed-build/`
@@ -148,27 +155,14 @@ Each item carries: `collection`, `slug`, `title`, `description`, `url` (canonica
 `content_markdown` (raw markdown, absolute image URLs), `images`, `last_modified`,
 `content_hash`.
 
-## Local preview (Docker)
+## Running it locally
 
-The feed pipeline is pure Node; Jekyll renders the result. To preview the
-feed-sourced site locally:
-
-```powershell
-# 1. Materialize the feed on the host (Node only)
-node scripts/build-feed.js --out .feed-build/published
-node scripts/consume-feed.js --out .feed-build --feed-dir .feed-build/published
-
-# 2. Serve the materialized site with Jekyll (container only needs Ruby)
-docker run --rm -p 4000:4000 -v "${PWD}:/work" -w /work mcr.microsoft.com/devcontainers/ruby:3.1 `
-  bash -lc 'bundle install && bundle exec jekyll serve --no-watch --host 0.0.0.0 --config _config.yml,_config.feed.yml'
-```
-
-- **Wait for the `Server running...` log line** before opening the browser — the first
-  build takes 1–3 minutes (`bundle install` + Jekyll build). An early request returns
-  `ERR_CONNECTION_REFUSED` simply because the server isn't up yet.
-- Open **http://localhost:4000/mcs-labs/** (note the `/mcs-labs/` base path).
-- The container must bind `--host 0.0.0.0` (a container's loopback ≠ the host). To
-  restrict exposure to your machine, publish with `-p 127.0.0.1:4000:4000`.
+To preview the feed-sourced site — or to watch one portal syndicate another end to
+end — use the runnable demo in [`examples/feed-syndication/`](../examples/feed-syndication/).
+It brings up this portal plus a sample partner feed in Docker and lets you flip
+between the full-merge, producer-filtered, and consumer-filtered scenarios. Its
+[README](../examples/feed-syndication/README.md) has the commands and the gotchas
+(e.g. waiting for the `Server running…` log line before opening the browser).
 
 ## Files
 
@@ -201,12 +195,6 @@ and the self-feed round-trip gate.
 | **Materialize** | Writing consumed items to `.feed-build/_<collection>/` so Jekyll can render them. |
 | **Syndicated** | An item rendered here that originated in an external feed (gets the provenance pill). |
 | **`content_hash`** | `sha256:` of an item's markdown body; the primitive consumers diff to sync incrementally. |
-
-## Design references
-
-The full design and implementation notes live under
-[`docs/superpowers/`](./superpowers/) (`*-content-feed-design.md`,
-`*-feed-source-of-truth-design.md`, and the matching plans).
 
 ## Lab content: README ↔ `_labs/`
 
