@@ -91,8 +91,8 @@ This lab is **Use Case #1** of a deeper Workflows module. It establishes the fou
 ## Documentation and Additional Training Links
 
 * [Workflows in Microsoft Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-overview)
-* [Add an agent to a workflow](https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-action-agent)
-* [Triggers for workflows](https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-triggers)
+* [Add an agent to a workflow](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-node-workflow)
+* [Triggers for workflows](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-triggers-about)
 * [Add tools to an agent](https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent)
 * [Model Context Protocol (MCP) in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-mcp)
 * [Microsoft To Do](https://to-do.office.com/) · [Outlook Calendar](https://outlook.office.com/calendar/)
@@ -128,6 +128,10 @@ In this lab, you'll build an autonomous Workflow that turns a new to-do into sch
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
 | 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 45 min |
+| 2 | [Setting Up the Order Management Workflow](#use-case-2-setting-up-the-order-management-workflow) | Configure connections, fix solution references, transfer ownership, publish, and end-to-end test a pre-built email classification workflow | 30 min |
+| 3 | [Use M365 Copilot and Add a Human-in-the-Loop in Order Management](#use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Review a grounded M365 Copilot draft, route it through human approval, and verify the approved response is sent to the customer | 20 min |
+| 4 | [Build an Inline Agent for Inventory Management](#use-case-4-build-an-inline-agent-for-inventory-management) | Add an inline agent that reasons over delay emails, uses MCP tools for warehouse and Dataverse, and returns structured output | 25 min |
+| 5 | [Call a Price Quote Specialist Agent from a Workflow](#use-case-5-call-a-price-quote-specialist-agent-from-a-workflow) | Reuse a published agent with knowledge, MCP tools, and a skill to generate and send a professional customer quote | 20 min |
 
 ---
 
