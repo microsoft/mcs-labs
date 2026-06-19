@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const { findUnsyncedLabs } = require('./check-lab-sync');
 
 const slugs = (s) => new Set(s); // readmeSlugs helper
+const statusLine = (status, path) => `${status}\t${path}`;
 
 test('README changed without _labs → violation', () => {
   const r = findUnsyncedLabs(['labs/demo/README.md'], { readmeSlugs: slugs(['demo']) });
@@ -37,6 +38,12 @@ test('image-only change → clean', () => {
 test('new README added without _labs → violation (slug not yet on disk)', () => {
   const r = findUnsyncedLabs(['labs/newlab/README.md'], { readmeSlugs: slugs([]) });
   assert.deepEqual(r.violations, ['newlab']);
+});
+
+test('added README for an existing lab with unchanged _labs → clean', () => {
+  const r = findUnsyncedLabs([statusLine('A', 'labs/demo/README.md')], { readmeSlugs: slugs(['demo']) });
+  assert.deepEqual(r.violations, []);
+  assert.deepEqual(r.warnings, []);
 });
 
 test('multiple labs evaluated independently', () => {
@@ -78,6 +85,11 @@ test('CLI: README-only change for a real lab exits 1', () => {
 
 test('CLI: README + _labs changed together exits 0', () => {
   const { code } = runCli(['labs/mcs-workflows/README.md', '_labs/mcs-workflows.md']);
+  assert.equal(code, 0);
+});
+
+test('CLI: added README for existing lab exits 0', () => {
+  const { code } = runCli([statusLine('A', 'labs/mcs-workflows/README.md')]);
   assert.equal(code, 0);
 });
 

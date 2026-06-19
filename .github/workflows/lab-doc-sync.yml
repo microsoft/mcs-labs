@@ -23,4 +23,4 @@ jobs:
 
       - name: Check README ↔ _labs sync
         run: |
-          git diff --name-only "${{ github.event.pull_request.base.sha }}...HEAD" | node scripts/check-lab-sync.js
+          git diff --name-status --find-renames "${{ github.event.pull_request.base.sha }}...HEAD" | node scripts/check-lab-sync.js
