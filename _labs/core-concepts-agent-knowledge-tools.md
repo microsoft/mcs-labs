@@ -162,64 +162,47 @@ Create a fully configured Copilot Studio agent with clear instructions and Claud
 1. Navigate to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and sign in with your credentials.
 
    > [!NOTE]
-   > On a first sign-in (especially for workshop / fresh-tenant accounts) you may see two one-time dialogs before reaching the home page:
-   > 1. **Welcome to Microsoft Copilot Studio** — choose a country/region (e.g. **United States**) and select **Get Started**. The marketing-opt-in checkbox is optional.
-   > 1. **Welcome to Copilot Studio!** — a 4-step product tour. Click **Skip** (or step through with **Next**) to dismiss it.
+   > On a first sign-in (especially for workshop / fresh-tenant accounts) you may see a one-time **Welcome to Microsoft Copilot Studio** consent dialog. Select **Get Started** to dismiss it. (If it later appears stacked *behind* the **Name your agent** dialog, select **Cancel** on that dialog, choose **Get Started**, then create the agent again.)
+
+1. In the left navigation, select **Agents**.
+
+1. Select the **down-arrow (chevron)** next to the **New Agent** button, then choose **New classic agent**.
+
+   ![New Agent split-button menu showing New classic agent](images/new-agent-classic-menu.png)
 
    > [!NOTE]
-   > **Copilot Studio has two experiences, and you can move between them at any time.** The **New experience** toggle (top-right of the **Home** and **Agents** pages) is **on by default**, and its Home greets you with **Agent** and **Workflow** cards. In this lab you'll use **both** experiences on purpose — and learn how to switch back and forth between them:
-   >
-   > - The **previous experience** hosts the **describe-driven creation** flow: you type one sentence describing your agent and Copilot Studio generates a starter agent for you, complete with instructions and a topic set.
-   > - The **new experience** is the newer UX where you'll do your ongoing authoring and where the latest agent capabilities live.
-   >
-   > You'll **create and name** the agent in the previous experience, then **switch back to the new experience** to build it out. Moving between the two is a handy skill in its own right.
+   > Leave the **New experience** toggle **on**. **New classic agent** opens the classic authoring canvas while keeping you in the new experience — there's no need to switch experiences. (The classic create flow opens in a new browser tab.)
 
-   ![New experience Home with Agent and Workflow cards](images/new-experience-home.png)
-
-1. **Switch to the previous experience to create the agent.** In the top-right corner, select the **New experience** toggle to turn it **off**. In the **Switch back to the previous experience?** dialog you can leave the reason blank — just select **Switch back**.
-
-   ![Switch back to the previous experience dialog](images/switch-to-previous-experience.png)
-
-1. The Home page returns to the **"What would you like to build?"** layout. Under that heading, locate the inline agent-creation textbox (placeholder _"Start building by describing what your agent needs to do"_). The **Agent** tab should be selected by default.
-
-   ![Previous experience Home with the describe textbox](images/previous-experience-home.png)
-
-   > [!NOTE]
-   > If you don't see the inline agent-creation textbox on the home page, your environment may not support agent creation by using natural language. In that case, select **Create** (or **+ New agent**) from the left navigation, then choose the **Describe** option to reach the same form.
-
-1. In the agent creation form, provide the following information and select **Send**:
-
-   ```
-   Provide information and guidance on how to use Copilot Studio and prompt engineering.
-   ```
-
-   ![Describing the agent in the previous experience](images/describe-your-agent.png)
-
-1. Wait for the "Your agent has been provisioned." notification. Copilot Studio generates a structured set of **Instructions** from your description (organized into sections such as **Purpose**, **General Guidelines**, **Skills**, and **Step-by-Step Instructions**), and creates the agent with a starter topic set.
-
-1. In the Details pane, select **Edit**
-
-1. Set the agent name to the following and select **Save**
+1. In the **Name your agent** dialog, enter the following name and select **Create**:
 
    ```
    Copilot Studio Assistant
    ```
 
-   ![Provisioned Copilot Studio Assistant agent in the previous experience](images/agent-created-classic.png)
+1. Wait for the **"Your agent has been provisioned."** notification. Your agent opens on its **Overview** page with the **Overview / Knowledge / Tools / Agents / Topics / Channels** tabs.
 
-1. Select the dropdown for the agent's model.  Ensure that Claude Sonnet 4.6 is selected.   
-  
-1. Review the **Instructions** pane. Copilot Studio generated a structured prompt from your initial description, organized into sections such as **Purpose**, **General Guidelines**, **Skills**, **Step-by-Step Instructions**, and **Interaction Examples**. The exact wording varies per generation, but the agent should focus on helping users with **Copilot Studio** and **prompt engineering** — the two topics from your description.
+   ![Provisioned Copilot Studio Assistant agent on its Overview page](images/classic-agent-created-overview.png)
+
+1. Confirm the agent's model is set to **Claude Sonnet 4.6**. This is the default for new classic agents; if it isn't selected, choose it from the **Select your agent's model** dropdown.
+
+1. In the **Instructions** section, select **Edit**, paste the following, and save:
+
+   ```
+   You are the Copilot Studio Assistant. Your purpose is to help internal teams learn how to use Microsoft Copilot Studio and write effective prompts.
+
+   Guidelines:
+   - Answer questions about Copilot Studio features, concepts, and navigation.
+   - Help users write clear, effective prompts and explain prompt-engineering best practices, including the CARE framework (Context, Ask, Rules, Examples).
+   - When relevant, walk through the steps in the Copilot Studio interface.
+   - Keep responses concise, accurate, and grounded in official Microsoft documentation.
+   - If you are unsure, say so rather than guessing.
+   ```
+
+   > [!NOTE]
+   > Earlier versions of this lab used a describe-driven flow that auto-generated these Instructions. A new classic agent starts blank, so you provide the Instructions here. Feel free to refine the wording.
 
    > [!TIP]
-   > Clear, specific instructions help your agent understand its role and provide consistent responses. Think of instructions as the agent's job description.
-
-1. **Switch back to the new experience to continue building.** At the top of the **Home** page, select **Try now** in the **New Copilot Studio experience** banner — or turn the **New experience** toggle back **on**. Then reopen your **Copilot Studio Assistant** agent from the **Agents** list. You'll do the rest of your authoring — knowledge, tools, and topics — here in the new experience; your agent reopens with the same **Overview / Knowledge / Tools / Agents / Topics / Channels** tabs, so every later step in this lab applies.
-
-   ![Try now banner on the previous experience Home returns you to the new experience](images/switch-back-to-new-experience.png)
-
-   > [!TIP]
-   > That's the round trip: **create** in the previous experience, then **build** in the new experience. The **New experience** toggle is a per-user setting you can flip whenever you like — switching never changes or deletes your agent.
+   > Think of instructions as the agent's job description: clear, specific instructions help your agent understand its role and respond consistently.
 
 1. Scroll down to the **Knowledge** section and select **Add Knowledge**.
 
