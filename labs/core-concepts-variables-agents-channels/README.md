@@ -296,7 +296,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 1. In your Copilot Studio Assistant agent, Select  **Agents**  in the agent top navigation bar.
 
-1. Select  **Add**.
+1. Select  **Add an agent**.
 
 1. In the **Create a child agent** section, Select **New child agent**.
 

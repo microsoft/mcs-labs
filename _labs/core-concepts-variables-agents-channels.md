@@ -319,7 +319,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 1. In your Copilot Studio Assistant agent, Select  **Agents**  in the agent top navigation bar.
 
-1. Select  **Add**.
+1. Select  **Add an agent**.
 
 1. In the **Create a child agent** section, Select **New child agent**.
 
@@ -499,7 +499,7 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
    - **SharePoint**: Deploy as a SharePoint-grounded agent
    - **Web app**: Embeddable web widget for your sites
    - **Native app**: iOS and Android integration
-   - **Direct Line Speech** / **Email** / **Dynamics 365 Customer Service** / **Genesys** / **LivePerson**: Specialized service channels
+   - **Direct Line Speech** / **Email** / **Dynamics 365 Contact Center** / **Genesys** / **LivePerson**: Specialized service channels
    - Social / messaging: **Facebook**, **WhatsApp**, **Slack**, **Telegram**, **Twilio**, **Line**, **GroupMe**
 
     > [!NOTE]
