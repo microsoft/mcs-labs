@@ -16,6 +16,42 @@ There are two halves:
 > same way; the feed pipeline runs at build time and never writes to those files. The
 > lab auditor (`/audit-*`, `/build-lab`) is therefore unaffected.
 
+## Documentation map
+
+This page is the overview. The details live in focused guides:
+
+| If you want to… | Read |
+| --- | --- |
+| **Provide** a feed others can consume | [PUBLISHING_FEEDS.md](PUBLISHING_FEEDS.md) |
+| **Consume** another portal's feed and render it | [CONSUMING_FEEDS.md](CONSUMING_FEEDS.md) |
+| Understand the on-the-wire JSON (manifest, items, `content_hash`, …) | [feed/FEED_FORMAT.md](feed/FEED_FORMAT.md) |
+| Limit what goes out / comes in | [FILTERING.md](FILTERING.md) |
+| See it run across two containers, with screenshots | [`examples/feed-syndication/`](../examples/feed-syndication/) |
+
+```
+PRODUCER (your portal)                         CONSUMER (any portal)
+┌───────────────────────────┐                  ┌───────────────────────────┐
+│ _<collection>/*.md         │  build-feed.js   │ feed_subscriptions.yml     │
+│  + _data/feeds.yml         │ ───────────────▶ │  (self + external + filter)│
+│                            │   feed/*.json    │            │ consume-feed.js
+│                            │   (static, HTTP) │            ▼               │
+│                            │                  │ .feed-build/_<collection>/ │
+└───────────────────────────┘                  │            │ jekyll        │
+                                                │            ▼               │
+                                                │ rendered pages (+ pill)    │
+                                                └───────────────────────────┘
+```
+
+### Syndicated content is visibly marked
+
+Items pulled from an **external** feed render as normal pages but carry a
+**"Syndicated · &lt;source&gt;" pill** (home-page cards and page heroes), and their
+"Report an issue" action is hidden — the issue belongs to the source repo. The
+consumer stamps this provenance (`syndicated`, `source`) onto external items only;
+your own content is never marked, which keeps a self-only build identical to a
+direct build. See [`_includes/syndicated-pill.html`](../_includes/syndicated-pill.html)
+and [CONSUMING_FEEDS.md → What it looks like in the portal](CONSUMING_FEEDS.md#what-it-looks-like-in-the-portal).
+
 ## Published URLs
 
 On the deployed site (base `https://microsoft.github.io/mcs-labs`):
@@ -143,10 +179,28 @@ docker run --rm -p 4000:4000 -v "${PWD}:/work" -w /work mcr.microsoft.com/devcon
 | `_data/feeds.yml` | Producer config (what to publish) |
 | `_data/feed_subscriptions.yml` | Consumer config (what to ingest) |
 | `_config.feed.yml` | Jekyll overlay (`collections_dir: .feed-build`) |
+| `_includes/syndicated-pill.html` | The "Syndicated" provenance pill rendered on external items |
+| `examples/feed-syndication/` | Runnable two-container demo (this portal + a partner feed) |
 | `.feed-build/` | Build-only output (git-ignored), never committed |
 
 Tests: `npm test` (Node's built-in runner) — includes the producer/consumer unit tests
 and the self-feed round-trip gate.
+
+## Glossary
+
+| Term | Meaning |
+| --- | --- |
+| **Producer** | A portal that emits its content as a feed (`build-feed.js`). |
+| **Consumer** | A portal (or system) that ingests a feed (`consume-feed.js`). |
+| **Feed** | A named, static JSON view of content (e.g. `all`). One portal can publish several. |
+| **Manifest** | A feed's lightweight item list (metadata + `content_hash`, no body) — for change detection. |
+| **Per-item document** | One item's full content (markdown + metadata + images), fetched on demand. |
+| **Bundle** | A single file with every item inline — convenient for simple consumers. |
+| **Item** | One piece of content (a lab/event/workshop/module), keyed by `collection/slug`. |
+| **Subscription** | A consumer's declaration to pull a given feed (`self` or external) + optional filter. |
+| **Materialize** | Writing consumed items to `.feed-build/_<collection>/` so Jekyll can render them. |
+| **Syndicated** | An item rendered here that originated in an external feed (gets the provenance pill). |
+| **`content_hash`** | `sha256:` of an item's markdown body; the primitive consumers diff to sync incrementally. |
 
 ## Design references
 

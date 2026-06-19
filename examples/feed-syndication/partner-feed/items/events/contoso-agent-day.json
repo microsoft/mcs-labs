@@ -1,0 +1,41 @@
+{
+  "schema_version": "1.1",
+  "generated": "2026-06-19T00:00:00.000Z",
+  "site": {
+    "base_url": "https://contoso.github.io/copilot-labs"
+  },
+  "item": {
+    "collection": "events",
+    "slug": "contoso-agent-day",
+    "title": "Contoso Agent Day",
+    "description": "A one-day Contoso-hosted event pairing two hands-on agent labs with architecture guidance.",
+    "url": "https://contoso.github.io/copilot-labs/events/contoso-agent-day/",
+    "content_url": "https://contoso.github.io/copilot-labs/feed/items/events/contoso-agent-day.json",
+    "metadata": {
+      "title": "Contoso Agent Day",
+      "event_id": "contoso-agent-day",
+      "order": 9,
+      "description": "A one-day Contoso-hosted event pairing two hands-on agent labs with architecture guidance.",
+      "labs": [
+        {
+          "slug": "contoso-intro-to-agents",
+          "label": "Lab 1"
+        },
+        {
+          "slug": "contoso-agent-governance",
+          "label": "Lab 2"
+        }
+      ]
+    },
+    "references": {
+      "labs": [
+        "contoso-intro-to-agents",
+        "contoso-agent-governance"
+      ]
+    },
+    "content_markdown": "## Contoso Agent Day\n\nA one-day partner event. Attendees complete two hands-on labs and leave with a\nreference architecture for agents in regulated environments.\n\n> Syndicated from Contoso Copilot Labs via the content feed.",
+    "images": [],
+    "last_modified": "2026-06-19T00:00:00.000Z",
+    "content_hash": "sha256:05f54ccb78c72396cad3d4ad3af2bd75874c38b6dc5991546a5d6a9943bbf76d"
+  }
+}

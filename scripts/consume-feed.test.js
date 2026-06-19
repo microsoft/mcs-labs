@@ -4,7 +4,7 @@ const consume = require('./consume-feed');
 
 test('resolveSubscriptions: empty/missing config yields a single self subscription', () => {
   assert.deepEqual(consume.resolveSubscriptions({}), [
-    { name: 'self', self: true, url: null, feed: 'all', enabled: true, exclude: { slugs: [], collections: [] } },
+    { name: 'self', label: 'self', self: true, url: null, feed: 'all', enabled: true, exclude: { slugs: [], collections: [] } },
   ]);
   assert.equal(consume.resolveSubscriptions({ subscriptions: [] }).length, 1);
 });
@@ -31,6 +31,24 @@ test('itemPassesFilter: drops by slug or collection, default passes', () => {
   assert.equal(consume.itemPassesFilter({ collection: 'labs', slug: 'b' }, sub), true);
   const open = consume.resolveSubscriptions({ subscriptions: [{ url: 'x' }] })[0];
   assert.equal(consume.itemPassesFilter({ collection: 'labs', slug: 'a' }, open), true);
+});
+
+test('stampProvenance: marks external items, leaves self items untouched', () => {
+  const item = { collection: 'labs', slug: 'a', metadata: { title: 'A' } };
+  const self = consume.resolveSubscriptions({ subscriptions: [{ name: 'self', self: true }] })[0];
+  const ext = consume.resolveSubscriptions({ subscriptions: [{ name: 'p', label: 'Partner', url: 'x', feed: 'all' }] })[0];
+
+  // self: returned as-is (no syndicated keys -> self-only build stays byte-identical)
+  assert.equal(consume.stampProvenance(item, self), item);
+  assert.equal(consume.stampProvenance(item, self).metadata.syndicated, undefined);
+
+  // external: provenance stamped from the subscription
+  const stamped = consume.stampProvenance(item, ext);
+  assert.equal(stamped.metadata.syndicated, true);
+  assert.equal(stamped.metadata.source, 'Partner');
+  assert.equal(stamped.metadata.source_feed, 'all');
+  assert.equal(stamped.metadata.title, 'A');     // original metadata preserved
+  assert.equal(item.metadata.syndicated, undefined); // input not mutated
 });
 
 test('mergeItems: first source wins on (collection, slug) collision', () => {

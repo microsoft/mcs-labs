@@ -1,0 +1,94 @@
+{
+  "schema_version": "1.1",
+  "generated": "2026-06-19T00:00:00.000Z",
+  "feed": {
+    "name": "labs-events",
+    "title": "Contoso — Labs & Events",
+    "description": "Labs and events only (workshops and modules withheld)"
+  },
+  "site": {
+    "base_url": "https://contoso.github.io/copilot-labs"
+  },
+  "items": [
+    {
+      "collection": "labs",
+      "slug": "contoso-intro-to-agents",
+      "title": "Contoso: Intro to Copilot Agents",
+      "description": "Build your first declarative agent on the Contoso reference stack and ground it in a product catalog.",
+      "url": "https://contoso.github.io/copilot-labs/labs/contoso-intro-to-agents/",
+      "content_url": "https://contoso.github.io/copilot-labs/feed/items/labs/contoso-intro-to-agents.json",
+      "metadata": {
+        "title": "Contoso: Intro to Copilot Agents",
+        "order": 145,
+        "duration": 60,
+        "difficulty": 100,
+        "section": "core_learning_path",
+        "description": "Build your first declarative agent on the Contoso reference stack and ground it in a product catalog."
+      },
+      "references": {
+        "labs": []
+      },
+      "content_markdown": "## Overview\n\nThis partner lab from **Contoso Copilot Labs** walks you through building your\nfirst declarative agent and grounding it in the Contoso product catalog.\n\n## What you'll build\n\n- A declarative agent with a focused set of instructions\n- A knowledge source over the Contoso catalog\n- A tested conversation starter\n\n## Steps\n\n1. Create a new agent in Copilot Studio.\n2. Add the catalog knowledge source.\n3. Add three conversation starters and test them.\n\n> Syndicated from Contoso Copilot Labs via the content feed.",
+      "images": [],
+      "last_modified": "2026-06-19T00:00:00.000Z",
+      "content_hash": "sha256:b3cc4632ed64137792f2c45f0b2ce1d22a9010cbcf969ae771b91cfafa9578e5"
+    },
+    {
+      "collection": "labs",
+      "slug": "contoso-agent-governance",
+      "title": "Contoso: Agent Governance & DLP",
+      "description": "Apply DLP policies, environment routing, and governance guardrails to agents at Contoso scale.",
+      "url": "https://contoso.github.io/copilot-labs/labs/contoso-agent-governance/",
+      "content_url": "https://contoso.github.io/copilot-labs/feed/items/labs/contoso-agent-governance.json",
+      "metadata": {
+        "title": "Contoso: Agent Governance & DLP",
+        "order": 520,
+        "duration": 90,
+        "difficulty": 300,
+        "section": "advanced_labs",
+        "description": "Apply DLP policies, environment routing, and governance guardrails to agents at Contoso scale."
+      },
+      "references": {
+        "labs": []
+      },
+      "content_markdown": "## Overview\n\nA 300-level partner lab covering governance: data-loss-prevention policies,\nenvironment strategy, and guardrails for agents deployed across a large tenant.\n\n## Topics\n\n- DLP policy zones\n- Managed environments and routing\n- Audit and monitoring\n\n> Syndicated from Contoso Copilot Labs via the content feed.",
+      "images": [],
+      "last_modified": "2026-06-19T00:00:00.000Z",
+      "content_hash": "sha256:c327516a4c087b55c61730ed6e2f0846dbdd7995b333121979888bfedbb7029e"
+    },
+    {
+      "collection": "events",
+      "slug": "contoso-agent-day",
+      "title": "Contoso Agent Day",
+      "description": "A one-day Contoso-hosted event pairing two hands-on agent labs with architecture guidance.",
+      "url": "https://contoso.github.io/copilot-labs/events/contoso-agent-day/",
+      "content_url": "https://contoso.github.io/copilot-labs/feed/items/events/contoso-agent-day.json",
+      "metadata": {
+        "title": "Contoso Agent Day",
+        "event_id": "contoso-agent-day",
+        "order": 9,
+        "description": "A one-day Contoso-hosted event pairing two hands-on agent labs with architecture guidance.",
+        "labs": [
+          {
+            "slug": "contoso-intro-to-agents",
+            "label": "Lab 1"
+          },
+          {
+            "slug": "contoso-agent-governance",
+            "label": "Lab 2"
+          }
+        ]
+      },
+      "references": {
+        "labs": [
+          "contoso-intro-to-agents",
+          "contoso-agent-governance"
+        ]
+      },
+      "content_markdown": "## Contoso Agent Day\n\nA one-day partner event. Attendees complete two hands-on labs and leave with a\nreference architecture for agents in regulated environments.\n\n> Syndicated from Contoso Copilot Labs via the content feed.",
+      "images": [],
+      "last_modified": "2026-06-19T00:00:00.000Z",
+      "content_hash": "sha256:05f54ccb78c72396cad3d4ad3af2bd75874c38b6dc5991546a5d6a9943bbf76d"
+    }
+  ]
+}

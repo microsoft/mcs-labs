@@ -1,0 +1,30 @@
+{
+  "schema_version": "1.1",
+  "generated": "2026-06-19T00:00:00.000Z",
+  "site": {
+    "base_url": "https://contoso.github.io/copilot-labs"
+  },
+  "item": {
+    "collection": "labs",
+    "slug": "contoso-intro-to-agents",
+    "title": "Contoso: Intro to Copilot Agents",
+    "description": "Build your first declarative agent on the Contoso reference stack and ground it in a product catalog.",
+    "url": "https://contoso.github.io/copilot-labs/labs/contoso-intro-to-agents/",
+    "content_url": "https://contoso.github.io/copilot-labs/feed/items/labs/contoso-intro-to-agents.json",
+    "metadata": {
+      "title": "Contoso: Intro to Copilot Agents",
+      "order": 145,
+      "duration": 60,
+      "difficulty": 100,
+      "section": "core_learning_path",
+      "description": "Build your first declarative agent on the Contoso reference stack and ground it in a product catalog."
+    },
+    "references": {
+      "labs": []
+    },
+    "content_markdown": "## Overview\n\nThis partner lab from **Contoso Copilot Labs** walks you through building your\nfirst declarative agent and grounding it in the Contoso product catalog.\n\n## What you'll build\n\n- A declarative agent with a focused set of instructions\n- A knowledge source over the Contoso catalog\n- A tested conversation starter\n\n## Steps\n\n1. Create a new agent in Copilot Studio.\n2. Add the catalog knowledge source.\n3. Add three conversation starters and test them.\n\n> Syndicated from Contoso Copilot Labs via the content feed.",
+    "images": [],
+    "last_modified": "2026-06-19T00:00:00.000Z",
+    "content_hash": "sha256:b3cc4632ed64137792f2c45f0b2ce1d22a9010cbcf969ae771b91cfafa9578e5"
+  }
+}

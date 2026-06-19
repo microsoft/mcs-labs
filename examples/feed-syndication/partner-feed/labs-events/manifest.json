@@ -1,0 +1,56 @@
+{
+  "schema_version": "1.1",
+  "generated": "2026-06-19T00:00:00.000Z",
+  "feed": {
+    "name": "labs-events",
+    "title": "Contoso — Labs & Events",
+    "description": "Labs and events only (workshops and modules withheld)"
+  },
+  "site": {
+    "base_url": "https://contoso.github.io/copilot-labs"
+  },
+  "items": [
+    {
+      "collection": "labs",
+      "slug": "contoso-intro-to-agents",
+      "title": "Contoso: Intro to Copilot Agents",
+      "description": "Build your first declarative agent on the Contoso reference stack and ground it in a product catalog.",
+      "url": "https://contoso.github.io/copilot-labs/labs/contoso-intro-to-agents/",
+      "content_url": "https://contoso.github.io/copilot-labs/feed/items/labs/contoso-intro-to-agents.json",
+      "references": {
+        "labs": []
+      },
+      "last_modified": "2026-06-19T00:00:00.000Z",
+      "content_hash": "sha256:b3cc4632ed64137792f2c45f0b2ce1d22a9010cbcf969ae771b91cfafa9578e5"
+    },
+    {
+      "collection": "labs",
+      "slug": "contoso-agent-governance",
+      "title": "Contoso: Agent Governance & DLP",
+      "description": "Apply DLP policies, environment routing, and governance guardrails to agents at Contoso scale.",
+      "url": "https://contoso.github.io/copilot-labs/labs/contoso-agent-governance/",
+      "content_url": "https://contoso.github.io/copilot-labs/feed/items/labs/contoso-agent-governance.json",
+      "references": {
+        "labs": []
+      },
+      "last_modified": "2026-06-19T00:00:00.000Z",
+      "content_hash": "sha256:c327516a4c087b55c61730ed6e2f0846dbdd7995b333121979888bfedbb7029e"
+    },
+    {
+      "collection": "events",
+      "slug": "contoso-agent-day",
+      "title": "Contoso Agent Day",
+      "description": "A one-day Contoso-hosted event pairing two hands-on agent labs with architecture guidance.",
+      "url": "https://contoso.github.io/copilot-labs/events/contoso-agent-day/",
+      "content_url": "https://contoso.github.io/copilot-labs/feed/items/events/contoso-agent-day.json",
+      "references": {
+        "labs": [
+          "contoso-intro-to-agents",
+          "contoso-agent-governance"
+        ]
+      },
+      "last_modified": "2026-06-19T00:00:00.000Z",
+      "content_hash": "sha256:05f54ccb78c72396cad3d4ad3af2bd75874c38b6dc5991546a5d6a9943bbf76d"
+    }
+  ]
+}

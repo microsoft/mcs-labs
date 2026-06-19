@@ -1,0 +1,85 @@
+{
+  "schema_version": "1.1",
+  "generated": "2026-06-19T00:00:00.000Z",
+  "feed": {
+    "name": "all",
+    "title": "Contoso Copilot Labs — All Content",
+    "description": "All labs, events, workshops, and modules"
+  },
+  "site": {
+    "base_url": "https://contoso.github.io/copilot-labs"
+  },
+  "items": [
+    {
+      "collection": "labs",
+      "slug": "contoso-intro-to-agents",
+      "title": "Contoso: Intro to Copilot Agents",
+      "description": "Build your first declarative agent on the Contoso reference stack and ground it in a product catalog.",
+      "url": "https://contoso.github.io/copilot-labs/labs/contoso-intro-to-agents/",
+      "content_url": "https://contoso.github.io/copilot-labs/feed/items/labs/contoso-intro-to-agents.json",
+      "references": {
+        "labs": []
+      },
+      "last_modified": "2026-06-19T00:00:00.000Z",
+      "content_hash": "sha256:b3cc4632ed64137792f2c45f0b2ce1d22a9010cbcf969ae771b91cfafa9578e5"
+    },
+    {
+      "collection": "labs",
+      "slug": "contoso-agent-governance",
+      "title": "Contoso: Agent Governance & DLP",
+      "description": "Apply DLP policies, environment routing, and governance guardrails to agents at Contoso scale.",
+      "url": "https://contoso.github.io/copilot-labs/labs/contoso-agent-governance/",
+      "content_url": "https://contoso.github.io/copilot-labs/feed/items/labs/contoso-agent-governance.json",
+      "references": {
+        "labs": []
+      },
+      "last_modified": "2026-06-19T00:00:00.000Z",
+      "content_hash": "sha256:c327516a4c087b55c61730ed6e2f0846dbdd7995b333121979888bfedbb7029e"
+    },
+    {
+      "collection": "events",
+      "slug": "contoso-agent-day",
+      "title": "Contoso Agent Day",
+      "description": "A one-day Contoso-hosted event pairing two hands-on agent labs with architecture guidance.",
+      "url": "https://contoso.github.io/copilot-labs/events/contoso-agent-day/",
+      "content_url": "https://contoso.github.io/copilot-labs/feed/items/events/contoso-agent-day.json",
+      "references": {
+        "labs": [
+          "contoso-intro-to-agents",
+          "contoso-agent-governance"
+        ]
+      },
+      "last_modified": "2026-06-19T00:00:00.000Z",
+      "content_hash": "sha256:05f54ccb78c72396cad3d4ad3af2bd75874c38b6dc5991546a5d6a9943bbf76d"
+    },
+    {
+      "collection": "workshops",
+      "slug": "contoso-partner-workshop",
+      "title": "Contoso Partner Enablement Workshop",
+      "description": "A full-day partner enablement workshop covering agent design, governance, and ALM on the Contoso stack.",
+      "url": "https://contoso.github.io/copilot-labs/workshops/contoso-partner-workshop/",
+      "content_url": "https://contoso.github.io/copilot-labs/feed/items/workshops/contoso-partner-workshop.json",
+      "references": {
+        "labs": [
+          "contoso-intro-to-agents",
+          "contoso-agent-governance"
+        ]
+      },
+      "last_modified": "2026-06-19T00:00:00.000Z",
+      "content_hash": "sha256:b3711532f56244d21ecabae4f7ce821907a5df3015615e605a60ac9d438cbbdb"
+    },
+    {
+      "collection": "modules",
+      "slug": "contoso-responsible-ai",
+      "title": "Contoso: Responsible AI for Agents",
+      "description": "A short module on Responsible AI practices applied to Copilot agents.",
+      "url": "https://contoso.github.io/copilot-labs/modules/contoso-responsible-ai/",
+      "content_url": "https://contoso.github.io/copilot-labs/feed/items/modules/contoso-responsible-ai.json",
+      "references": {
+        "labs": []
+      },
+      "last_modified": "2026-06-19T00:00:00.000Z",
+      "content_hash": "sha256:16d75aaab2791e24108e2c6a3e05e136239595a1f15e3ac2db8de1178ac321c5"
+    }
+  ]
+}

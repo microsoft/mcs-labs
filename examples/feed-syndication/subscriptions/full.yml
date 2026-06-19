@@ -1,0 +1,12 @@
+# Scenario 1 — FULL MERGE (no filtering).
+# This portal renders its own content PLUS everything the partner publishes.
+subscriptions:
+  - name: self            # this portal's own content (no HTTP)
+    self: true
+    enabled: true
+
+  - name: contoso         # the partner container on the compose network
+    label: "Contoso Copilot Labs"
+    url: http://partner:8080
+    feed: all             # pull the partner's "everything" feed
+    enabled: true

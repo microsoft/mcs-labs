@@ -1,0 +1,16 @@
+# Scenario 2 — PRODUCER-SIDE FILTERING ("limit the feeds going out").
+# The partner publishes a deliberately narrowed feed named "labs-events" that
+# contains ONLY its labs and events. Its workshops and modules are withheld at
+# the SOURCE, so no subscriber can pull them — there is nothing this portal could
+# do to get them. Compare the homepage with Scenario 1: the Contoso workshop and
+# the Contoso module are gone.
+subscriptions:
+  - name: self
+    self: true
+    enabled: true
+
+  - name: contoso
+    label: "Contoso Copilot Labs"
+    url: http://partner:8080
+    feed: labs-events     # <-- the partner's narrowed feed (no workshops, no modules)
+    enabled: true

@@ -233,6 +233,7 @@ header:
     <div class="journey-card-desc">{{ event.description | truncate: 120 }}</div>
     <div class="journey-card-meta">
       <span class="journey-pill">{{ event.labs.size }} labs</span>
+      {% if event.syndicated %}{% include syndicated-pill.html source=event.source %}{% endif %}
     </div>
   </li>
   {% endfor %}
@@ -249,6 +250,7 @@ header:
 <div class="journey-card-desc">{{ ws.description | truncate: 120 }}</div>
 <div class="journey-card-meta">
 <span class="journey-pill">{{ ws.labs.size }} labs</span>
+{% if ws.syndicated %}{% include syndicated-pill.html source=ws.source %}{% endif %}
 </div>
 </li>
 {% endunless %}
