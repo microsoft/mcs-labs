@@ -148,9 +148,14 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
   1. Select **Agents** in the left navigation.
 
-  1. Select **Create blank agent** in upper right corner.
+  1. From the Agents list, select the down-arrow (chevron) next to **New Agent**, then choose **New classic agent**.
 
   1. In the **Name your agent** dialog that opens, enter `Account News Assistant` in the **Enter agent name** textbox and select **Create**.
+
+      ![New Agent split-button menu showing New classic agent](images/new-agent-classic-menu.png)
+
+      > [!NOTE]
+      > Keep the **New experience** toggle ON — **New classic agent** opens the classic canvas in a new browser tab without switching experiences. A one-time **Welcome to Microsoft Copilot Studio** consent dialog may appear on first sign-in (select **Get Started**; if it stacks behind the **Name your agent** dialog, Cancel, Get Started, then retry).
 
 #### Adding a Recurring Trigger
 
