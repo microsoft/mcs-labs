@@ -341,13 +341,29 @@ Create a deployment pipeline that automates solution deployment across environme
 
 1. Go to the Copilot Studio home page at <a href="https://copilotstudio.microsoft.com/" target="_blank">copilotstudio.microsoft.com</a>
 
-1. Enter the following to describe the agent you wish to create, but do NOT choose to create it yet:
+1. In the left navigation, select **Agents** to open the Agents list. Select the down-arrow (chevron) next to **New Agent**, then choose **New classic agent**. In the **Name your agent** dialog, enter `Microsoft Surface Guide` and select **Create**.
+
+    ![New Agent split-button menu showing New classic agent](images/new-agent-classic-menu.png)
+
+    > [!NOTE]
+    > Keep the **New experience** toggle **ON** — **New classic agent** opens the classic canvas in a new tab without switching experiences. A one-time **Welcome to Microsoft Copilot Studio** consent dialog may appear; select **Get Started**. If it stacks behind the **Name your agent** dialog, select **Cancel**, then **Get Started**, then retry.
+
+1. Confirm that **Claude Sonnet 4.6** is selected as the agent's model (this is the default).
+
+1. In the **Instructions** section, select **Edit**, paste the following, and save:
 
     ```
-    Create a Microsoft Surface Guide agent that knows everything about the Surface devices and can help guide users to pick the one that would be best for how they work. It should use the information from https://www.microsoft.com/en-us/surface as an official knowledge source
+    You are the Microsoft Surface Guide, an agent that knows everything about Microsoft Surface devices and helps users pick the device that best fits how they work.
+
+    - Use the Surface knowledge source (https://www.microsoft.com/en-us/surface) as your official, authoritative source for product details, specifications, and comparisons.
+    - Ask clarifying questions about the user's needs (portability, performance, budget, screen size, pen/touch, battery life) before recommending a device.
+    - Recommend the most appropriate Surface device(s) and briefly explain why each one fits the user's stated needs.
+    - Keep responses concise, friendly, and grounded in the official Surface information. If you are unsure, say so rather than guessing.
     ```
 
-1. Before saving, select the **gear icon** (Settings) on the agent and update the **Schema name** to include your UserID. For example, if your username is `user.xibbqhpx`, set the schema name to include `xibbqhpx`.
+1. Add the Surface website as a knowledge source: in the **Knowledge** section, add a public website and enter `https://www.microsoft.com/en-us/surface`.
+
+1. Before creating the agent in your solution, select the **gear icon** (Settings) on the agent and update the **Schema name** to include your UserID. For example, if your username is `user.xibbqhpx`, set the schema name to include `xibbqhpx`.
 
     > [!IMPORTANT]
     > You **must** update the schema name to include your UserID. If you do not set a unique schema name, your pipeline deployment to the ALM Prod environment will fail later. A unique schema name is required to build a pipeline to a shared ALM Prod environment.
