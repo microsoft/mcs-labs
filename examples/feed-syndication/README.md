@@ -3,15 +3,21 @@
 This example shows the [content feed](../../docs/CONTENT_FEED.md) working end to
 end across **two containers**:
 
-```
-┌─────────────────────────────┐        HTTP         ┌──────────────────────────────┐
-│ partner                     │  GET …/all/manifest │ portal                       │
-│ static server (python http) │ ◀────────────────── │ THIS repo's site             │
-│ serves ./partner-feed       │  GET …/items/…      │ build-feed → consume-feed →  │
-│ = "Contoso Copilot Labs"    │ ──────────────────▶ │ jekyll serve (feed-sourced)  │
-└─────────────────────────────┘                     └──────────────────────────────┘
-        publishes a feed                              consumes it + renders the merge
-                                                      http://localhost:4000/mcs-labs/
+```mermaid
+flowchart LR
+    subgraph partner["partner container"]
+        PF["static file server<br/>serves ./partner-feed<br/>= Contoso Copilot Labs"]
+    end
+    subgraph portal["portal container · THIS repo"]
+        PO["build-feed → consume-feed → jekyll serve<br/>renders the merge at<br/>http://localhost:4000/mcs-labs/"]
+    end
+    PO -->|"GET /all/manifest.json, /items/…"| PF
+    PF -->|"feed JSON over HTTP"| PO
+
+    classDef a fill:#f1e9fb,stroke:#6b2fb3,color:#33124f;
+    classDef b fill:#e8effc,stroke:#2f5bd7,color:#13294f;
+    class PF a;
+    class PO b;
 ```
 
 - **`partner`** stands in for a *second* mcs-labs-style portal. It's just a static
