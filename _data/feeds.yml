@@ -1,5 +1,5 @@
-# Feed publishing configuration for this portal instance (Phase 1: producer).
-# Full design: docs/superpowers/specs/2026-06-16-content-feed-design.md
+# Feed publishing configuration for this portal instance (the producer side).
+# Guide: docs/PUBLISHING_FEEDS.md   ·   Format: docs/feed/FEED_FORMAT.md
 #
 # base_url:        Absolute base for image/link rewriting. Defaults to the site's
 #                  url + baseurl from _config.yml when omitted.

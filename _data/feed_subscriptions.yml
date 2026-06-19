@@ -1,5 +1,5 @@
 # Consumer configuration — which feeds THIS portal instance ingests.
-# Full design: docs/superpowers/specs/2026-06-17-feed-source-of-truth-design.md
+# Guide: docs/CONSUMING_FEEDS.md   ·   Filtering: docs/FILTERING.md
 #
 # Default (this file present with only the self subscription, or absent entirely):
 #   the portal renders exactly its own content — identical to building from the
@@ -13,8 +13,6 @@
 #   feed:     which named feed to pull from that instance (default: all)
 #   enabled:  default true
 #   exclude:  { slugs: [...], collections: [...] } — subtractive local filter
-#
-# Full how-to: docs/CONSUMING_FEEDS.md   ·   Filtering: docs/FILTERING.md
 
 subscriptions:
   - name: self
