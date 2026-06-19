@@ -231,7 +231,7 @@ What are new features in the Microsoft Copilot Studio roadmap?
 
 #### Create your learning assistant agent
 
-6. On the left side navigation pane, expand the **Agents** section and select **New agent**
+6. On the left side navigation pane, select **Agents** to open the **Agent Store**, then select **Create agent** (or the **New agent** card)
 
 
 7. Notice that you can explore existing available templates. But for this lab, you want to select the  **Describe** tab at the top of the form and paste the following into the input area for the intial agent prompt input area, and then select Send.
@@ -268,7 +268,7 @@ Use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.m
 
 11. Now let's head over to the **Configure** tab. Notice how all of your previous interactions have built the configuration of your agent, its name, description, instructions, knowledge sources and starter prompts. Feel free to tweak them!
 
-12. In the **Knowledge** section, toggle **Only use specified sources** so that the agent uses the configured websites when providing answers, and not its own large language model knowledge.
+12. In the **Knowledge** section, after adding knowledge sources, turn **Only use specified sources** **on** (it is not enabled automatically) so that the agent uses the configured websites when providing answers, and not its own large language model knowledge.
 
 13. Fix any issue like max character limit for starter prompt titles.
 
@@ -387,7 +387,7 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 5. Return to [Microsoft 365 Copilot Chat](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
-6. On the left side pane, expand **Agents** and select **New agent**.
+6. On the left side pane, select **Agents** to open the **Agent Store**, then select **Create agent** (or the **New agent** card).
 
 7. Select the **Describe** tab at the top, and copy/paste the following prompt and select Send:
 
