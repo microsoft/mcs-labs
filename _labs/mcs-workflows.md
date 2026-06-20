@@ -712,20 +712,22 @@ Configure the **Quote Request** path to use the published **Price Quote Agent**,
 
    ![The Price Quote Agent in the new Build experience showing instructions tools and knowledge](images/uc5-agent-new-experience.png)
 
-3. Return to the **Order Management Workflow** and locate the **Quote Request** category in the **Classify** node.
+3. **Publish** the Price Quote Agent by selecting **Publish** in the top-right corner. Only published agents will appear in the workflow's Agent node dropdown — if you skip this step, the agent won't be selectable later.
+
+4. Return to the **Order Management Workflow** and locate the **Quote Request** category in the **Classify** node.
 
 #### Configure the Quote Request branch
 
-4. Select the **+** next to **Quote Request** and choose **Agent**.
+5. Select the **+** next to **Quote Request** and choose **Agent**.
 
-5. In the **Agent** dropdown, select **Price Quote Agent** — the existing published agent.
+6. In the **Agent** dropdown, select **Price Quote Agent** — the existing published agent.
 
    > [!IMPORTANT]
    > **Only published agents appear in the dropdown:** When using the Agent node with an existing agent, only agents that have been **published** (not just saved) will appear in the agent selection dropdown. If your agent is missing from the list, go to the agent page and publish it first.
 
    ![The Quote Request branch agent selector showing Price Quote Agent](images/quote-request-select-existing-agent.png)
 
-6. In the **Message** field, enter:
+7. In the **Message** field, enter:
 
    ```
    Prepare a price quote for this customer request:
@@ -733,20 +735,20 @@ Configure the **Quote Request** path to use the published **Price Quote Agent**,
    Request: [email body]
    ```
 
-7. Replace the placeholders with dynamic values:
+8. Replace the placeholders with dynamic values:
 
    - Select **`[email sender]`**, choose the **lightning** icon, search for **from**, and insert **From**
    - Select **`[email body]`**, choose the **lightning** icon, search for **body**, and insert **Body**
 
    ![The Quote Request message field with From and Body dynamic tokens inserted](images/quote-request-message-dynamic-content.png)
 
-8. Select **Save**, then **Publish**.
+9. Select **Save**, then **Publish**.
 
    ![The workflow published after wiring the Quote Request branch to Price Quote Agent](images/quote-request-workflow-published.png)
 
 #### Test the Quote Request path
 
-9. In **Outlook**, send the following email **to yourself**:
+10. In **Outlook**, send the following email **to yourself**:
 
    - **Subject:** `Order Management - Quote request - Adventure Works`
    - **Body:**
@@ -768,19 +770,19 @@ Configure the **Quote Request** path to use the published **Price Quote Agent**,
 
    ![The quote request test email being composed in Outlook](images/quote-request-test-email.png)
 
-10. Return to the workflow's **Activity** panel, refresh until the run appears, and confirm the route **Classify → Quote Request → Agent completed**.
+11. Return to the workflow's **Activity** panel, refresh until the run appears, and confirm the route **Classify → Quote Request → Agent completed**.
 
     ![The Activity panel showing the Quote Request branch run completed](images/quote-request-activity-path.png)
 
-11. Select the **Agent** node in the run details and read the completion message describing what the Price Quote Agent did to prepare the customer response.
+12. Select the **Agent** node in the run details and read the completion message describing what the Price Quote Agent did to prepare the customer response.
 
     ![The Quote Request agent run details showing the completion message](images/quote-request-agent-completion.png)
 
-12. Open **Outlook** and verify that the generated price quote email has landed in your inbox.
+13. Open **Outlook** and verify that the generated price quote email has landed in your inbox.
 
     ![The completed price quote email received in Outlook](images/quote-request-email-received.png)
 
-13. **Bonus:** Return to **Price Quote Agent** and select the **Preview** tab (top of the new experience). Ask: **What are the iPad Air prices applicable to Fabrikam?** Observe the extended reasoning — the agent searches SharePoint for customer-tier pricing guidance and queries Dataverse with a `read_query` to build an accurate, tiered response.
+14. **Bonus:** Return to **Price Quote Agent** and select the **Preview** tab (top of the new experience). Ask: **What are the iPad Air prices applicable to Fabrikam?** Observe the extended reasoning — the agent searches SharePoint for customer-tier pricing guidance and queries Dataverse with a `read_query` to build an accurate, tiered response.
 
     ![The Price Quote Agent Preview tab showing the Fabrikam pricing question with reasoning](images/uc5-bonus-agent-reasoning.png)
 
