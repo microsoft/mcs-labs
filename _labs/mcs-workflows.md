@@ -6,7 +6,7 @@ order: 340
 duration: 60
 difficulty: 300
 lab_type: local
-section: advanced_labs
+section: advanced
 journeys: ["autonomous-ai", "developer"]
 description: "Build an autonomous agent using Workflows — the next generation of autonomous agents in Copilot Studio — with an event-driven trigger and a non-deterministic inline agent that books calendar time and updates a to-do."
 
@@ -128,6 +128,10 @@ In this lab, you'll build an autonomous Workflow that turns a new to-do into sch
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
 | 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 45 min |
+| 2 | [Setting Up the Order Management Workflow](#use-case-2-setting-up-the-order-management-workflow) | Configure connections, ownership, and publish a pre-built multi-branch classification workflow | 15 min |
+| 3 | [Use M365 Copilot and Add a Human-in-the-Loop](#use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: M365 Copilot drafts a response, human approves, workflow replies | 10 min |
+| 4 | [Build an Inline Agent for Inventory Management](#use-case-4-build-an-inline-agent-for-inventory-management) | Add an MCP-powered inline agent that checks warehouse stock and creates Dataverse tasks | 20 min |
+| 5 | [Call a Price Quote Specialist Agent from a Workflow](#use-case-5-call-a-price-quote-specialist-agent-from-a-workflow) | Wire a published agent into a workflow branch to generate and send price quotes | 15 min |
 
 ---
 
@@ -305,28 +309,22 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
    ![The LAB: Order Management solution in Power Apps](images/solution-order-management.png)
 
-2. The workflow was originally created by a different user, so you need to **take ownership** before making any changes. From the solution's **Objects** view, navigate to the workflow's underlying Dataverse record (the **Process** entity record for "Order Management Workflow"). In the command bar, select **Assign**, choose **Assign to: Me**, and confirm.
+2. Navigate to the **Cloud Flow** object (the Order Management Workflow) inside the solution. Select the flow, then in the command bar select **Edit** → **Owner** (or open the flow details and look for **Primary Owner**). Change the owner to **yourself** (your lab account). This ensures you have full control to publish and monitor.
 
    > [!IMPORTANT]
-   > Ownership transfer ensures you have full control over the workflow — including the ability to publish, enable/disable, and monitor runs. Without ownership, the Publish button will appear blocked or produce cryptic errors. Always transfer ownership **before** configuring connections — it avoids permission issues during the remaining setup steps.
+   > Ownership transfer **must** happen before configuring connections or publishing. Without ownership, the Publish button will appear blocked or produce cryptic errors.
 
-3. Back in the solution, select **Connection References** from the left sidebar (or filter the Objects view to show only Connection References). You should see multiple connection references — at minimum: **When a new email arrives** (Office 365 Outlook), **Dataverse**, **M365 Copilot**, and **Human review** (Advanced Approvals).
-
-   ![Connection References listed in the solution](images/solution-objects.png)
-
-4. For **each** connection reference, you need to link it to a live connection under your account. Perform the following for every row:
-
-   1. Hover over the row to reveal the **Commands** (⋮) button, then select it.
-   2. Choose **Edit** from the context menu.
-   3. In the Edit panel, open the **Connection** dropdown. If a connection for your account already exists, select it. If not, select **New connection** at the top of the dropdown to create one — sign in with your lab account, then return and select the newly created connection (use the **Refresh** button if it doesn't appear immediately).
-   4. Select **Save**, then confirm by clicking **Save changes** in the confirmation dialog.
-
-   Repeat this for **all four** connection references: **When a new email arrives**, **Dataverse**, **M365 Copilot**, and **Human review**.
-
-   > [!WARNING]
-   > **Do not skip any connection reference.** Even one unlinked reference will block publishing with the error: *"A connector was imported, however the related connection references need connections created and then any dependent flows can be started."* The confirmation dialog warning that changes impact dependent apps and flows is expected — confirm it each time.
+3. In **Copilot Studio**, navigate to **Workflows** and open the **Order Management Workflow**. Open each node on the canvas by clicking on it — close and reopen nodes if needed to trigger an auto-refresh. For most nodes, the connection will **automatically pop up** with a green checkmark using your account.
 
    > [!NOTE]
+   > Connections appear automatically across most nodes **except** the **M365 Copilot** and **Human Request** nodes — for these two, you need to manually click **Create new connection** and sign in with your lab account.
+
+4. Return to the **Power Apps solution** → **Connection References** in the left sidebar. For **each** connection reference, select **Edit** and choose the connection just created from the dropdown (it should now appear after the previous step).
+
+   - If a connection reference shows **no value in the dropdown** (i.e., no matching connector is deployed to this environment), it can be **safely removed** from the solution — it is not needed for the workflow to run.
+   - For all others, select the connection and click **Save**, then confirm with **Save changes**.
+
+   > [!WARNING]
    > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
 
 #### Open and explore the Order Management Workflow
