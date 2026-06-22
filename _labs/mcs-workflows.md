@@ -387,7 +387,7 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
 #### Test the "Other" classification path end-to-end
 
-12. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and compose a new email **to yourself** with the following:
+12. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and compose a new email **to your lab user account** with the following:
 
     - **Subject:** `Order Management - Congratulations! Your order desk has been selected`
     - **Body:**
