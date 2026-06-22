@@ -479,7 +479,7 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
 #### Run an end-to-end Customer Inquiry test
 
-5. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and send the following email **to yourself**:
+5. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and send the following email **to your lab user account**:
 
    - **Subject:** `Order Management - Question about iPad Air warranty and MDM`
    - **Body:**
@@ -627,7 +627,7 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 
 #### Test the Supplier Delay path
 
-9. In **Outlook**, send the following email **to yourself**:
+9. In **Outlook**, send the following email **to your lab user account**:
 
    - **Subject:** `Order Management - Shipment delay - LumiRead E-Reader`
    - **Body:**
@@ -748,7 +748,7 @@ Configure the **Quote Request** path to use the published **Price Quote Agent**,
 
 #### Test the Quote Request path
 
-10. In **Outlook**, send the following email **to yourself**:
+10. In **Outlook**, send the following email **to your lab user account**:
 
    - **Subject:** `Order Management - Quote request - Adventure Works`
    - **Body:**
