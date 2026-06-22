@@ -309,23 +309,23 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
    ![The LAB: Order Management solution in Power Apps](images/solution-order-management.png)
 
-2. Navigate to the **Cloud Flow** object (the Order Management Workflow) inside the solution. Select the flow, then in the command bar select **Edit** → **Owner** (or open the flow details and look for **Primary Owner**). Change the owner to **yourself** (your lab account). This ensures you have full control to publish and monitor.
-
-   > [!IMPORTANT]
-   > Ownership transfer **must** happen before configuring connections or publishing. Without ownership, the Publish button will appear blocked or produce cryptic errors.
-
-3. In **Copilot Studio**, navigate to **Workflows** and open the **Order Management Workflow**. Open each node on the canvas by clicking on it — close and reopen nodes if needed to trigger an auto-refresh. For most nodes, the connection will **automatically pop up** with a green checkmark using your account.
+2. In **Copilot Studio**, navigate to **Workflows** and open the **Order Management Workflow**. Open each node on the canvas by clicking on it — close and reopen nodes if needed to trigger an auto-refresh. For most nodes, the connection will **automatically pop up** with a green checkmark using your account.
 
    > [!NOTE]
    > Connections appear automatically across most nodes **except** the **M365 Copilot** and **Human Request** nodes — for these two, you need to manually click **Create new connection** and sign in with your lab account.
 
-4. Return to the **Power Apps solution** → **Connection References** in the left sidebar. For **each** connection reference, select **Edit** and choose the connection just created from the dropdown (it should now appear after the previous step).
+3. Return to the **Power Apps solution** → **Connection References** in the left sidebar. For **each** connection reference, select **Edit** and choose the connection just created from the dropdown (it should now appear after the previous step).
 
    - If a connection reference shows **no value in the dropdown** (i.e., no matching connector is deployed to this environment), it can be **safely removed** from the solution — it is not needed for the workflow to run.
    - For all others, select the connection and click **Save**, then confirm with **Save changes**.
 
    > [!WARNING]
    > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
+
+4. Navigate to the **Cloud Flow** object (the Order Management Workflow) inside the solution. Select the flow, then in the command bar select **Edit** → **Owner** (or open the flow details and look for **Primary Owner**). Change the owner to **yourself** (your lab account). This ensures you have full control to publish and monitor.
+
+   > [!IMPORTANT]
+   > Ownership transfer **must** happen after connection references are configured. Without ownership, the Publish button will appear blocked or produce cryptic errors.
 
 #### Open and explore the Order Management Workflow
 
