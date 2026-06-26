@@ -167,7 +167,7 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 >
 >   ![alt text](images/correct-copilot-page.png)
 >
-> - Make sure the **logged in user** is the fictitious one used in the lab. If you need your normal work user account, **select** the name and toggle to the fictitious user account.
+> - Make sure the **logged in user** is the fictitious one used in the lab. If you see your normal work user account, **select** the name and toggle to the fictitious user account.
 >
 >   ![alt text](images/logged-in-user.png)
 
@@ -231,10 +231,10 @@ What are new features in the Microsoft Copilot Studio roadmap?
 
 #### Create your learning assistant agent
 
-6. On the left side navigation pane, select **Agents** to open the **Agent Store**, then select **Create agent** (or the **New agent** card)
+6. On the left side navigation pane, select **New agent**.
 
 
-7. Notice that you can explore existing available templates. But for this lab, you want to select the  **Describe** tab at the top of the form and paste the following into the input area for the intial agent prompt input area, and then select Send.
+7. Notice that you can explore existing available templates. But for this lab, you want to use **Describe the agent you want to create** tab at the top of the form and paste the following into the input area for the initial agent prompt input area, and then select Send.
 
 ```
 I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Agent Builder in Microsoft 365. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
@@ -272,9 +272,9 @@ Use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.m
 
 13. Fix any issue like max character limit for starter prompt titles.
 
-14. You can test your agent in the test pane. When ready, select **Create** in the upper right corner to finish creating your agent.
+14. You can test your agent in the **Preview** pane. When ready, select **Create** in the upper right corner to finish creating your agent.
 
-![Agent Builder test pane](images/agent-builder.png)
+![Agent Builder Preview pane](images/agent-builder.png)
 
 #### Share and test your agent
 
@@ -292,8 +292,7 @@ What are the differences between Microsoft 365 Copilot and Copilot Chat?
 
 > [!TIP]
 > If your training tenant is getting throttled because of lack of AI capacity (to prioritize production workloads), you may see a message like this: `Sorry, I wasn't able to respond to that. Is there something else I can help with?`. It's OK, **just test your agent while configuring it**, and not after you created it. You may try again later.
->
-> ![alt text](images/copilot-error.png)
+
 
  -->
 
@@ -387,9 +386,9 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 5. Return to [Microsoft 365 Copilot Chat](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
-6. On the left side pane, select **Agents** to open the **Agent Store**, then select **Create agent** (or the **New agent** card).
+6. On the left side pane, select **New agent**.
 
-7. Select the **Describe** tab at the top, and copy/paste the following prompt and select Send:
+7. In the **Describe** tab at the top, and copy/paste the following prompt and select Send:
 
 ```
 You are a Sales Admin Assistant. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
@@ -479,8 +478,6 @@ How are sales trending for home appliances?
 Design a professional badge for the first place winner of our sales contest. It should look modern and premium, with gold colors, the text '1st Place – Sales Contest', and a ribbon or trophy element.
 ```
 
-![Badge created by agent](images/image-generator.png)
-
 
 ---
 
@@ -548,14 +545,12 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
 
 2. Navigate to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
-3. In the right-side panel or the main chat area, look for the **Researcher** agent. You can find it by:
-   - Selecting the agent picker (if available) and choosing **Researcher**
-   - Or typing `@Researcher` in the chat input area
+3. In the left-side panel or the main chat area, select the **Researcher** agent. 
 
 > [!TIP]
 > The Researcher agent is one of Microsoft's **frontier agents** — purpose-built AI agents that use advanced reasoning models. Researcher excels at deep document analysis, cross-referencing multiple sections, and synthesizing complex information. It's available to users with a Microsoft 365 Copilot license.
 
-4. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the attachment icon (paperclip) in the chat input area and choosing the file from your local machine.
+4. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the plus then the attachment icon (paperclip) in the chat input area and choosing the file from your local machine.
 
 #### Prompt 1: Executive briefing with root-cause analysis
 
@@ -642,14 +637,12 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
 
 1. Navigate to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
-2. Select the **Analyst** agent. You can find it by:
-   - Selecting the agent picker and choosing **Analyst**
-   - Or typing `@Analyst` in the chat input area
+2. Select the **Analyst** agent. 
 
 > [!TIP]
 > The Analyst agent is another **frontier agent** in Microsoft 365 Copilot. While Researcher excels at reasoning and synthesis, Analyst is purpose-built for **data-heavy work** — extracting tables from documents, performing calculations, building models, generating visualizations, and producing structured outputs like Excel files. Think of Researcher as your strategic advisor and Analyst as your financial modeler.
 
-3. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the attachment icon and choosing the same file you downloaded earlier.
+3. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the plus then the attachment icon and choosing the same file you downloaded earlier.
 
 > [!NOTE]
 > You're using the same PDF from Use Case #3, but with a completely different agent. This demonstrates how different frontier agents can extract different types of value from the same source document.
