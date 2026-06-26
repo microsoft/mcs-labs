@@ -141,7 +141,7 @@ Confirm the environment is ready and the sample connected agent is published.
 
 #### Make sure that Dataverse Search is set to on
 
-1. In the upper right corner of Copilot Studio, Select the **Gear** icon
+1. In the upper right corner of Copilot Studio, select the **Gear** icon
 
 1. Select **Go to Power Platform admin center**
 
@@ -149,7 +149,7 @@ Confirm the environment is ready and the sample connected agent is published.
 
 1. Select your environment from the list to open its details page
 
-1. Select **Settings** on the **top navigation bar** of that page (the **Settings** command across the top of the environment — *not* the gear/global settings). Navigate to it through the admin center rather than pasting a direct URL.
+1. Select **Settings** on the **top navigation bar** of that page (the **Settings** command across the top of the environment — *not* the gear/global settings). Go to it through the admin center rather than pasting a direct URL.
 
 1. Expand the **Product** group and select **Features**
 
@@ -163,22 +163,22 @@ Confirm the environment is ready and the sample connected agent is published.
 
 #### Ensure that indexes are in place for our connected agent
 
-> [!IMPORTANT]
+> [!NOTE]
 > This is not required for a connected agent to work, but to make sure that the one we have pre-loaded for you will return results we must index a few tables in your environment.
 
 1. Go to the Power Apps maker portal [https://make.powerapps.com](https://make.powerapps.com)
 
-    ![Open Power Apps](images/image-19.png)
+    ![Microsoft 365 app launcher in Copilot Studio showing various apps including Power Apps highlighted](images/image-19.png)
 
-1. In the left menu select **Tables**
+1. In the left menu, select **Tables**
 
 1. Select the **Account** table from the list
 
 1. Select **Views** from the Data experiences section
 
-1. Select **Quick Find Active Accounts** option from the list of Views
+1. Select **Quick Find Active Accounts**  from the list of Views
 
-1. Select **View Column** to verify the following list of columns are in the view, you may have to scroll to see all of the included columns:
+1. Select **View Column** to verify the following list of columns are in the view. You may have to scroll to see all of the included columns:
    - Address 1: State/Province
    - Address 1: ZIP/Postal Code
    - Address 1: City
@@ -189,7 +189,7 @@ Confirm the environment is ready and the sample connected agent is published.
 
     ![Account View](images/image-20.png)
 
-1. Add the ability to search on certain fields by making sure that the following items are in the **Find by** on the bottom right. Select the **Edit find table columns** option to check:
+1. Add the ability to search on certain fields by making sure the following items are in the **Find by** on the bottom right. Select the **Edit find table columns** option to check:
    - Address 1: State/Province
    - Address 1: ZIP/Postal Code
    - Address 1: City
@@ -234,13 +234,19 @@ Confirm the environment is ready and the sample connected agent is published.
 
 1. In the Copilot Studio tab in your browser, go to the **Account Data Lookup Agent**
 
-1. Open the Test chat by Selecting **Test** in the upper right-hand corner
+1. Open the Test chat by selecting **Test** in the upper right-hand corner
+
+1. You might be required to **Confirm Consent** since this agent was shared with you by another user.
 
 1. Enter `What are the accounts in Texas?`
 
 1. Verify that you get a response showing that the agent is working and the data is indexed
 
     ![Test Account Lookup](images/image-24.png)
+
+
+   > [!TIP]
+> If you don't get results, go check your Dataverse table view settings you made previously.
 
 1. Select **Settings** in the upper right menu
 
@@ -249,7 +255,7 @@ Confirm the environment is ready and the sample connected agent is published.
     > [!NOTE]
     > Use the **Connected agents** *section on the Generative AI page* — **not** the separate **Connected Agents** item in the Settings left navigation. That left-nav item opens an input/output management page ("Manage input and output for the agent") and does **not** contain this toggle.
 
-1. Close the Settings menu by Selecting the **X** in the upper right-hand corner
+1. Close the Settings menu by selecting the **X** in the upper right-hand corner
 
 1. Select **Publish**. In the **Publish this agent** dialog, make sure **Force newest version** is checked, then select **Publish** to confirm.
 
@@ -585,7 +591,7 @@ Stand up a new-type agent and validate how the New Orchestrator's Agentic Reason
 > [!NOTE]
 > These environment features are required for the **Dataverse MCP** tool you'll add below — they are not specific to the New Orchestrator.
 
-1. Navigate to the **Power Platform admin center** the same way you did in [Use Case #1](#use-case-1-get-the-sample-connected-agent-working) — in Copilot Studio, select the **Gear** icon in the upper right, then **Go to Power Platform admin center**.
+1. Go to the **Power Platform admin center** the same way you did in [Use Case #1](#use-case-1-get-the-sample-connected-agent-working) — in Copilot Studio, select the **Gear** icon in the upper right, then **Go to Power Platform admin center**.
 
 1. Select the **Manage** tab, then **Environments**, choose your environment, then select **Settings** on the **top navigation bar** of the environment page (the same top-nav **Settings** command you used in Use Case #1).
 
@@ -637,7 +643,7 @@ You'll add two tools. In the new designer, adding a tool is **Add tool → pick 
 
     ![Add tool – MSN Weather Get current weather](images/new-orch-02.png)
 
-1. In the **Tools** list in the right rail, **select the `Get current weather` tool** to open its **Tool details**. (Clicking a tool in this menu is how you configure it — there's no separate settings button; the tool's name opens its Details, Inputs, and Outputs panels.)
+1. In the **Tools** list in the right rail, **select the `Get current weather` tool** to open its **Tool details**. (Select a tool in this menu is how you configure it — there's no separate settings button; the tool's name opens its Details, Inputs, and Outputs panels.)
 
 1. Under **Authentication mode**, select **Maker**. A **Connection** field appears — select **Not connected → Create new connection → Create**. Once it shows your connection, select **Save**.
 
@@ -646,7 +652,7 @@ You'll add two tools. In the new designer, adding a tool is **Add tool → pick 
     > [!IMPORTANT]
     > **Use Maker for anonymous or API‑key / service‑account tools.** The MSN Weather connector authenticates anonymously, so it should run as the **maker** — your connection is reused for every end user and no one is prompted to connect at runtime. The same rule applies to any connector that authenticates with a **shared API key or service account** rather than the end user's identity: set those to **Maker** too. If you leave such a tool on **User**, the agent returns a **"Connection Required"** card the first time it tries to call it. (Tools that act *as the signed-in user* — e.g. a mailbox or files connector — would instead keep **User** authentication.)
 
-1. Still in **Tool details**, select **Inputs** from the left panel. Leave **Location** set to **AI** (the agent infers the location from the conversation). For **Units**, change **How is this filled?** from **AI** to **Value** so you control the unit system, then bind it to a variable: open the **Value** picker, select **+ Add variable**, and in the variable's **Value** field **click the chevron on the right** — *that chevron is where the unit options appear*. Choose **I** (Imperial) for this lab, then **Save**.
+1. Still in **Tool details**, select **Inputs** from the left panel. Leave **Location** set to **AI** (the agent infers the location from the conversation). For **Units**, change **How is this filled?** from **AI** to **Value** so you control the unit system, then bind it to a variable: open the **Value** picker, select **+ Add variable**, and in the variable's **Value** field **select the chevron on the right** — *that chevron is where the unit options appear*. Choose **I** (Imperial) for this lab, then **Save**.
 
     > [!NOTE]
     > **Units** accepts **`I`** for Imperial (°F) or **`C`** for Celsius (°C). This lab uses **`I`**, but set whichever matches your preference — the agent reports temperatures in the unit you pick here.
@@ -792,41 +798,15 @@ In Use Case #3 you added the internal `company_policies_sample.pdf` from the **H
     > [!NOTE]
     > Two policy sources is deliberate. The customer-facing **Contoso Customer Care Policies** is what the agent quotes to a customer; the internal `company_policies_sample.pdf` is handling/escalation guidance the agent uses to decide but does **not** read back to a customer. The instructions and Skill you add below draw that line explicitly.
 
-#### Create the MCP server connections
 
-This Use Case uses two prebuilt **custom MCP connectors** — **Order Management MCP** and **Warehouse MCP** — that simulate an e-commerce backend ([Enhanced Task Completion sample](https://microsoft.github.io/enhanced-task-completion/)). Before a new-type agent can use them, each needs a **connection**.
-
-> [!IMPORTANT]
-> **Temporary workaround (preview limitation).** At the time of writing, the **new-type agent's** inline *Add tool → connection* step cannot create a brand-new connection for these custom MCP connectors yet. Until that's supported, create the connections **once** by adding the servers to a throwaway **classic** agent, which *can* create them. After that, the new-type agent will find and reuse the connections. This whole section is expected to disappear as the preview matures.
-
-1. Go to the **Agents** page. Select the **chevron** to the right of **New Agent**, then choose **New classic agent**.
-
-1. Name it `Enable New MCP Servers` and select **Create**. (This agent exists only to mint the connections — you won't publish or use it otherwise.)
-
-1. On the agent's **Overview**, select **Add tool**. In the tool picker, filter to **Model Context Protocol (MCP)**, type `Order Management` in the search box, and press **Enter** to run the search.
-
-    > [!TIP]
-    > Filtering to **Model Context Protocol** before searching makes the custom MCP servers much easier to find among the hundreds of connectors.
-
-1. Select **Order Management MCP Server**. On the detail panel, open the **Connection** dropdown (it reads **Not connected**) and choose **Create new connection**, then **Create** in the dialog that appears (these connectors need no credentials). When the connection shows as connected, select **Add and configure** — the server's actions (`search_orders`, `get_order`, `get_shipment`, `request_return`, `get_return_status`) will load.
-
-    ![Creating the MCP connection through the classic agent](images/uc4-connection-create.png)
-
-1. Repeat the **Add tool** step for **Warehouse MCP Server** (`check_stock`, `get_fulfillment_status`, `find_alternatives`, `get_restock_date`), creating its connection the same way.
-
-    Both connections now exist in the environment and are reusable. Leave the classic agent as-is.
-
-    ![Both MCP servers added to the classic agent](images/uc4-connections-both.png)
 
 #### Add the MCP server tools to the Sales Account Assistant
 
-Now that the connections exist, attach the two servers to the **new-type** agent.
+1. In the **Sales Account Assistant** (Build tab). In the right rail, select **Add tool** (the **+** on the Tools section).
 
-1. Return to the **Sales Account Assistant** (Build tab). In the right rail, select **Add tool** (the **+** on the Tools section).
+1. Filter to **Model Context Protocol (MCP)**, search **Order Management**, and select **Order Management MCP Server**. Create a connection if there is not already one available.
 
-1. Filter to **Model Context Protocol (MCP)**, search **Order Management**, and select **Order Management MCP Server**. This time the **Connection** step resolves to the connection you created — select **Next**.
-
-1. On **Review capabilities**, the server's actions now load (no "Couldn't load MCP tools" error). Select **Confirm** to attach it.
+1. On **Review capabilities**, the server's actions now load. Select **Confirm** to attach it.
 
     ![MCP capabilities load for the new-type agent](images/uc4-tool-capabilities.png)
 
@@ -1029,7 +1009,7 @@ You extended a new-type agent with a **Skill**, two **custom MCP servers**, a se
 
 ## Summary of learnings
 
-True learning comes from doing, questioning, and reflecting. Across this lab, you've seen Copilot Studio's orchestration engine from two distinct angles:
+Learning comes from doing, questioning, and reflecting. Across this lab, you've seen Copilot Studio's orchestration engine from two distinct angles:
 
 * **Standard generative orchestration** (Use Case #2) — a single-pass planner that picks one tool / child / knowledge source per turn based on the user's intent. Highly inspectable: every decision shows up in the activity tracker, and *Get rationale* lets you read the planner's reasoning back to you. Tunable through agent Instructions, child-agent and tool Names + Descriptions, and input-parameter Descriptions.
 * **New Orchestrator – Agentic Reasoning Loop** (Use Case #3) — the default orchestrator in new-type agents (previewed on classic agents as Enhanced Task Completion). Plans, acts, observes, iterates within a single turn until the task is complete. Better when users want finished outcomes; worse when authors and users need step-by-step transparency.
