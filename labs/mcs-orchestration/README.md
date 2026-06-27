@@ -792,43 +792,13 @@ In Use Case #3 you added the internal `company_policies_sample.pdf` from the **H
     > [!NOTE]
     > Two policy sources is deliberate. The customer-facing **Contoso Customer Care Policies** is what the agent quotes to a customer; the internal `company_policies_sample.pdf` is handling/escalation guidance the agent uses to decide but does **not** read back to a customer. The instructions and Skill you add below draw that line explicitly.
 
-#### Create the MCP server connections
-
-This Use Case uses two prebuilt **custom MCP connectors** — **Order Management MCP** and **Warehouse MCP** — that simulate an e-commerce backend ([Enhanced Task Completion sample](https://microsoft.github.io/enhanced-task-completion/)). Before a new-type agent can use them, each needs a **connection**.
-
-> [!IMPORTANT]
-> **Temporary workaround (preview limitation).** At the time of writing, the **new-type agent's** inline *Add tool → connection* step cannot create a brand-new connection for these custom MCP connectors yet. Until that's supported, create the connections **once** by adding the servers to a throwaway **classic** agent, which *can* create them. After that, the new-type agent will find and reuse the connections. This whole section is expected to disappear as the preview matures.
-
-1. Go to the **Agents** page. Select the **chevron** to the right of **New Agent**, then choose **New classic agent**.
-
-1. Name it `Enable New MCP Servers` and select **Create**. (This agent exists only to mint the connections — you won't publish or use it otherwise.)
-
-1. On the agent's **Overview**, select **Add tool**. In the tool picker, filter to **Model Context Protocol (MCP)**, type `Order Management` in the search box, and press **Enter** to run the search.
-
-    > [!TIP]
-    > Filtering to **Model Context Protocol** before searching makes the custom MCP servers much easier to find among the hundreds of connectors.
-
-1. Select **Order Management MCP Server**. On the detail panel, open the **Connection** dropdown (it reads **Not connected**) and choose **Create new connection**, then **Create** in the dialog that appears (these connectors need no credentials). When the connection shows as connected, select **Add and configure** — the server's actions (`search_orders`, `get_order`, `get_shipment`, `request_return`, `get_return_status`) will load.
-
-    ![Creating the MCP connection through the classic agent](images/uc4-connection-create.png)
-
-1. Repeat the **Add tool** step for **Warehouse MCP Server** (`check_stock`, `get_fulfillment_status`, `find_alternatives`, `get_restock_date`), creating its connection the same way.
-
-    Both connections now exist in the environment and are reusable. Leave the classic agent as-is.
-
-    ![Both MCP servers added to the classic agent](images/uc4-connections-both.png)
-
 #### Add the MCP server tools to the Sales Account Assistant
 
-Now that the connections exist, attach the two servers to the **new-type** agent.
+Attach the two servers to the **new-type** agent, creating each connection inline as you add it.
 
 1. Return to the **Sales Account Assistant** (Build tab). In the right rail, select **Add tool** (the **+** on the Tools section).
 
-1. Filter to **Model Context Protocol (MCP)**, search **Order Management**, and select **Order Management MCP Server**. This time the **Connection** step resolves to the connection you created — select **Next**.
-
-1. On **Review capabilities**, the server's actions now load (no "Couldn't load MCP tools" error). Select **Confirm** to attach it.
-
-    ![MCP capabilities load for the new-type agent](images/uc4-tool-capabilities.png)
+1. Filter to **Model Context Protocol (MCP)**, search **Order Management**, and select **Order Management MCP Server**. On the connection step, choose **Create new connection → Create**, then **Add**.
 
 1. Repeat for **Warehouse MCP Server**. Your **Tools** list should now show four tools: **Get current weather**, **Microsoft Dataverse MCP Server**, **Order Management MCP Server**, and **Warehouse MCP Server**.
 
@@ -1016,8 +986,7 @@ You extended a new-type agent with a **Skill**, two **custom MCP servers**, a se
 
 **Lessons learned & troubleshooting tips:**
 
-* If the new-type agent's **Add tool → connection** step won't create a connection for a custom MCP server, use the **classic-agent workaround** above to mint the connection first (a temporary preview limitation).
-* If a server shows **"Couldn't load MCP tools"** on Review capabilities, the connection isn't in place yet — create it via the classic agent, then re-add the tool.
+* If a custom MCP server's tools don't load right after you add it, the connection may not have completed — remove the tool, then re-add it and create the connection inline (**Create new connection → Create → Add**).
 * If a custom MCP server is hard to find, **filter the tool picker to Model Context Protocol** and press **Enter** to run the search.
 * If the agent carries a previous customer into a new question, select **New chat** to reset — context persists across a conversation.
 
