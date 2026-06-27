@@ -358,6 +358,8 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
     > [!NOTE]
     > Disabling general knowledge make sure that only your custom connector API provides answers, not the underlying language model.
 
+1. Turn off **Use information from the Web** as well.
+
 1. Select **Save**.
 
 1. Close **Settings** using the **X** in the upper right-hand corner.
@@ -369,11 +371,11 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
     ```
 
     ```
-    Where does it come from?
+    How about the word amazing?
     ```
 
     ```
-    How about the word amazing?
+    How do I pronounce the word "leverage" in English?
     ```
 
 1. Verify that the agent uses your custom connector tool to retrieve definitions, origins, and phonetic information from the Free Dictionary API.
