@@ -165,12 +165,9 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Agents** on the left navigation.
 
-1. Turn **OFF** the **New experience** toggle (look for the banner or toggle at the top of Copilot Studio). When the feedback pop-up appears, select **Submit**. This switches you to the classic Copilot Studio experience, where the classic agent canvas works reliably.
+1. Turn **OFF** the **New experience** toggle (look for the banner or toggle at the top of Copilot Studio). When the feedback pop-up appears, select **Submit**. This switches you to the classic Copilot Studio experience.
 
     ![New Agent split-button menu showing New classic agent](images/new-agent-classic-menu.png)
-
-    > [!NOTE]
-    > Creating a **classic agent** with the **New experience** toggle still ON can leave the **Name your agent** dialog stuck (the **Cancel** control is not selectable). Turning the toggle OFF first avoids this and gives you the classic canvas directly.
 
 1. Select **Agents** in the left navigation, then select **Create blank agent**. In the **Name your agent** dialog, enter `Dictionary Agent` and select **Continue**.
 
