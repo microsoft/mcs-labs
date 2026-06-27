@@ -678,9 +678,6 @@ You'll add two tools. In the new designer, adding a tool is **Add tool → pick 
 
 1. Once the **Microsoft Dataverse MCP Server** is added, open the tool and observe the list of the MCP server's actions (`read_query`, `search`, `create_table`, `update_record`, and so on). Leave the **default selection** as-is, but note that these can be turned on/off. This lab only ever exercises **`read_query`** (reading accounts and contacts) and **`search`** (schema discovery); the orchestrator won't call the write/delete actions unless a prompt explicitly asks it to.
 
-    > [!NOTE]
-    > There is no separate **Review capabilities / Confirm** dialog when adding the connector — once you select **Add**, the tool is attached immediately.
-
 1. Close the **Tool** editing view. We now have **Get current weather** and **Microsoft Dataverse MCP Server** configured.
 
 #### Add knowledge to the agent
