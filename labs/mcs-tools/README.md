@@ -427,6 +427,8 @@ Create an agent flow that calculates sales commissions using deterministic busin
 
 1. Go to **Microsoft Copilot Studio** at <a href="https://copilotstudio.microsoft.com" target="_blank">copilotstudio.microsoft.com</a>.
 
+1. Make sure you are in the **New Copilot Studio experience** — look for the banner or toggle at the top and select **Try now** (or turn the **New experience** toggle ON).
+
 1. Select **Agents** on left navigation.
 
 1. From the Agents list, select the down-arrow (chevron) next to **New Agent**, then choose **New classic agent**. In the **Name your agent** dialog, enter `Sales Commission Assistant` and select **Create**.
@@ -593,7 +595,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 #### Create and Configure the Agent
 
-1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/). Make sure you are logged in using the credentials for the lab and are in the correct environment.
+1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/). Make sure you are logged in using the credentials for the lab and are in the correct environment, and that you are in the **New Copilot Studio experience** — if a banner or toggle offers it, select **Try now** (or turn the **New experience** toggle ON).
 
 1. Select **Agents** in the left navigation, then select the down-arrow (chevron) next to **New Agent** and choose **New classic agent**. In the **Name your agent** dialog, enter `Contoso Agent` and select **Create**.
 
