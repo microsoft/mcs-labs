@@ -518,7 +518,10 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 
    ![The Supplier Delay category with the add action menu open to Agent](images/supplier-delay-add-agent.png)
 
-2. In the new node, leave **Agent** set to **New agent in this workflow** and keep the default AI model. This creates an inline agent dedicated to this workflow path.
+2. In the new node, leave **Agent** set to **New agent in this workflow**. This creates an inline agent dedicated to this workflow path. Keep the default AI model.
+
+   > [!TIP]
+   > A strength of AI-native nodes in Workflows is that you can choose a **different model per node**. This inline agent runs on **Claude Sonnet 4.6** for its reasoning, while the **Classify** node uses the lighter **GPT-4.1 mini** — a cost-optimized choice for that lightweight classification step. Matching the model to the work each node does keeps the workflow both capable and economical.
 
 3. Select **Expand** (the two arrows next to **...**) so you can edit the full agent configuration, then rename the node title from **Agent** to **Inventory Task Agent**.
 
