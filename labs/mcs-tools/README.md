@@ -148,12 +148,14 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Agents** on the left navigation.
 
-1. From the Agents list, select the down-arrow (chevron) next to **New Agent**, then choose **New classic agent**. In the **Name your agent** dialog, enter `Dictionary Agent` and select **Create**.
+1. Turn **OFF** the **New experience** toggle (look for the banner or toggle at the top of Copilot Studio). When the feedback pop-up appears, select **Submit**. This switches you to the classic Copilot Studio experience, where the classic agent canvas works reliably.
 
     ![New Agent split-button menu showing New classic agent](images/new-agent-classic-menu.png)
 
     > [!NOTE]
-    > Keep the **New experience** toggle ON — **New classic agent** opens the classic canvas in a new browser tab without switching experiences. A one-time **Welcome to Microsoft Copilot Studio** consent dialog may appear on first sign-in (select **Get Started**; if it stacks behind the **Name your agent** dialog, Cancel, Get Started, then retry).
+    > Creating a **classic agent** with the **New experience** toggle still ON can leave the **Name your agent** dialog stuck (the **Cancel** control is not selectable). Turning the toggle OFF first avoids this and gives you the classic canvas directly.
+
+1. Select **Agents** in the left navigation, then select **Create blank agent**. In the **Name your agent** dialog, enter `Dictionary Agent` and select **Continue**.
 
 1. Once the agent is provisioned, confirm its name is `Dictionary Agent`. If you need to change it, select **Edit** in the **Details** section on **Overview**.
 
