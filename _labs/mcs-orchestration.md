@@ -1003,7 +1003,7 @@ You extended a new-type agent with a **Skill**, two **custom MCP servers**, a se
 
 **Lessons learned & troubleshooting tips:**
 
-* If a custom MCP server's tools don't load right after you add it, the connection may not have completed — remove the tool, then re-add it and create the connection inline (**Create new connection → Create → Add**).
+* If a custom MCP server's tools don't load right after you add it, the connection may not have completed — remove the tool, then re-add it and recreate the connection (**Create new connection → Create → Add**).
 * If a custom MCP server is hard to find, **filter the tool picker to Model Context Protocol** and press **Enter** to run the search.
 * If the agent carries a previous customer into a new question, select **New chat** to reset — context persists across a conversation.
 
