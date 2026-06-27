@@ -375,6 +375,11 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
     > [!NOTE]
     > Disabling **Allow ungrounded responses** ensures that only your custom connector API provides answers, not the underlying language model. This setting was previously labelled **Use general knowledge** in older Copilot Studio UI.
 
+1. Turn off **Use information from the Web** as well.
+
+    > [!NOTE]
+    > If web grounding is left on, the agent can answer from a web search instead of your custom connector. Turning it off forces the agent to use the Free Dictionary API tool for every query.
+
 1. Select **Save**.
 
 1. Close **Settings** using the **X** in the upper right-hand corner.
@@ -386,11 +391,11 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
     ```
 
     ```
-    Where does it come from?
+    How about the word amazing?
     ```
 
     ```
-    How about the word amazing?
+    How do I pronounce the word "leverage" in English?
     ```
 
 1. Verify that the agent uses your custom connector tool to retrieve definitions, origins, and phonetic information from the Free Dictionary API.
