@@ -377,9 +377,6 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Turn off **Use information from the Web** as well.
 
-    > [!NOTE]
-    > If web grounding is left on, the agent can answer from a web search instead of your custom connector. Turning it off forces the agent to use the Free Dictionary API tool for every query.
-
 1. Select **Save**.
 
 1. Close **Settings** using the **X** in the upper right-hand corner.
