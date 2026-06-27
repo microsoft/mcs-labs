@@ -433,7 +433,7 @@ Open the **Account Data Lookup Agent** in Copilot Studio and walk through each o
     What are the accounts in Texas?
     ```
 
-    Expand the **activity tracker** for this turn. You should see all three planner decisions land correctly, and — most importantly — see the input value transformation in action.
+    Expand the **activity tracker** for this turn. You should see all three planner decisions land correctly, and — most importantly — see the input value transformation in action. This first question is the *start* of a progression: the planner begins by **finding** the accounts with `Find Account`, and it may already **chain `Get Account Details` calls** to return full per-account information (location, email, phone, account number, primary contact, revenue) in one go. The next question then builds on that account context.
 
     ![Activity tracker — Find Account input shows search: TX](images/image-36.png)
 
@@ -457,7 +457,7 @@ Open the **Account Data Lookup Agent** in Copilot Studio and walk through each o
 
     Notice in the screenshot:
     - **Same child agent**: still `Account Agent` — the planner stayed in the same child for a related follow-up question.
-    - **Different tool, different pattern**: the previous turn called `Find Account` (search). This turn calls `Get Account Details` — a different tool whose description told the planner *"use me when expanding details on an account already in context"*.
+    - **Building on context**: the previous turn started with `Find Account` (and may have already chained some `Get Account Details` calls). This turn already has the accounts in context, so the tool the planner picks is `Get Account Details` — the tool whose description told it *"use me when expanding details on an account already in context"*.
     - **Four parallel calls, one per account**: `Total 4`. The planner walked the 4-account result from the previous turn and issued one details call per account, using each account's identifier from the conversation context as the input.
     - **Pronoun resolution worked**: the word *"them"* was never sent to a tool. The planner resolved it to the specific 4 accounts and made the data flow deterministic.
 
