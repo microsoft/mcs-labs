@@ -200,7 +200,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 1. Search and select `List rows from selected environment`.
 
-1. Choose an existing Dataverse connection or add a new one (select Oauth as authentication type).
+1. Select an existing Dataverse connection or add a new one (select OAuth as authentication type).
 
   > [!IMPORTANT]  
   > If you need to create the connection use OAuth and sign in with your workshop credentials. Your user requires permission to access Opportunity records, which is provided as part of the workshop.
@@ -275,7 +275,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 1. Turn **On** the toggle for **Deep Reasoning**.
 
-  > [!TIP]
+  > [!IMPORTANT]
   > Deep reasoning is currently unavailable in the UI in certain regions.  If you do not see the Deep Reasoning toggle in the settings area, try accessing the agent via https://copilotstudio.preview.microsoft.com
 
 1. Turn **On** the toggle for **Use information from the Web**. Then select **Save** to save these settings. Once saved, close the settings using the **X** on the top right.
@@ -655,7 +655,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 1. Select **Insert**.
 
-1. Save the **Conversation start** topic
+1. Save the **Conversation start** topic.
 
 1. Now that your agent has a preloaded HTML template, configure an Outlook email tool to deliver the report.
 
@@ -692,7 +692,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 1. Now that you've created the report template and configured the email tool, you'll guide the agent to use them as part of its orchestration.
 
-1. Go to your agent and go to the **Overview** tab.
+1. Go to your agent and select the **Overview** tab.
 
 1. In the **Instructions** section, add the following steps:
 
@@ -712,7 +712,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 1. **Save** your agent's instructions. The instructions should appear as follows:
  ![Instructions After Topics](images/final-instructions.png)
 
-1. Go to the **Triggers** section and Select **Test trigger** on the `Analyze Opportunities` trigger.
+1. Go to the **Triggers** section and select **Test trigger** on the `Analyze Opportunities` trigger.
 
 1. Once the agent finishes executing, verify:
    - It retrieved opportunities from the Sales App
