@@ -610,15 +610,15 @@ Stand up a new-type agent and validate how the New Orchestrator's Agentic Reason
 
 1. The new agent designer opens on the **Build** tab. Use the agent-name field (or the **Rename agent** control) to name it:
 
-    ```text
-    Sales Account Assistant
-    ```
+   ```text
+   Sales Account Assistant
+   ```
 
 1. In the **Instructions** box, paste a short set of instructions so the orchestrator knows how to use its tools:
 
-    ```text
-    You are a Sales Account Assistant for sales associates. Help users complete multi-step tasks end to end. Use your Dataverse tools to look up account and contact data and the weather tool for current weather. When a request touches gifts or spending, follow the company gifting policy in your knowledge. Complete the whole task before responding rather than stopping to ask at each step.
-    ```
+   ```text
+   You are a Sales Account Assistant for sales associates. Help users complete multi-step tasks end to end. Use your Dataverse tools to look up account and contact data and the weather tool for current weather. When a request touches gifts or spending, follow the company gifting policy in your knowledge. Complete the whole task before responding rather than stopping to ask at each step.
+   ```
 
 1. Leave the **Model** set to its default (**Claude Sonnet 4.6**) and select **Save** in the command bar. The agent is assigned an ID and the **Preview** and **Evaluate** tabs become available.
 
