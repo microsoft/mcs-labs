@@ -70,10 +70,8 @@ After implementing autonomous agents, the same company now handles 80% of routin
 ## 📄 Documentation and Additional Training Links
 
 * [Microsoft Copilot Studio Documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/)
-* [Building Autonomous Agents with Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-autonomous-agents)
 * [ServiceNow Connector Documentation](https://learn.microsoft.com/en-us/connectors/service-now/)
 * [Office 365 Outlook Connector](https://learn.microsoft.com/en-us/connectors/office365/)
-* [Copilot Studio Triggers and Actions](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-trigger-actions)
 
 ---
 
@@ -220,9 +218,9 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 
 #### Adding Knowledge Sources
 
-1. Navigate to the **Knowledge** tab in your agent and select **+ Add knowledge**
+1. Go to the **Knowledge** tab in your agent and select **+ Add knowledge**
 
-2. Choose **Public website** as your knowledge source type
+2. Select **Public website** as your knowledge source type
 
 3. **Add** this URL: `https://support.servicenow.com/` 
 
@@ -235,7 +233,7 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 
 5. Search for `ServiceNow List records` and select **List records**
 
-6. Ensure your connection is selected from the dropdown, or select `Create New Connection` and enter the details from the Lab Resources.
+6. Make sure your connection is selected from the dropdown, or select `Create New Connection` and enter the details from the Lab Resources.
 
 7. Select **Add and configure**
 
@@ -287,31 +285,31 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 
 22. Under **Additional details**, set **Credentials to use** to **Maker-provided credentials**
 
-23. For the **To** input, keep **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
+23. For the **To** input, keep **Dynamically fill with AI**, select on **Customize** to set its **Description** to:
 
     ```
     Use the "from" email of the triggering received email.
     ```
 
-24. For the **Subject** input, keep **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
+24. For the **Subject** input, keep **Dynamically fill with AI**, select on **Customize** to set its **Description** to:
+
 
     ```
     Use the original subject of the triggering received email.
     ```
 
-25. For the **Body** input, keep **Dynamically fill with AI**, click on **Customize** to set its **Description** to:
-
+25. For the **Body** input, keep **Dynamically fill with AI**, select on **Customize** to set its **Description** to:
     ```
     Write the email body using minimal HTML that renders well in Outlook. Use <p> for paragraphs, <br> for line breaks, <ul>/<ol> for bullet points, and <table> for simple tables if needed. All URLs must be formatted as HTML links using <a href="...">, not left as plain text. Do not use Markdown syntax like [1] or reference-style links. Do not include full HTML documents or tags like <html> or <head>. The HTML must be valid as a JSON string: escape double quotes (") and avoid unescaped special characters.
     ```
 
-26. Click **Save** to finalize the tool configuration
+26. Select **Save** to finalize the tool configuration
 
 #### Configuring Agent Instructions and AI Settings
 
-27. Navigate to **Overview** and then click the **Edit** for **Instructions**
+27. Go to **Overview** and then click the **Edit** for **Instructions**
 
-28. **Paste** the following comprehensive instructions:
+28. **Paste** the following instructions:
 
     ```
     1. Understand and isolate each question from the received email body.
@@ -323,16 +321,16 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 > [!IMPORTANT]
 > For each of the placeholder <...> in the description, use `/` to insert the tools you  just configured in your instructions.
 
-> [!TIP]
+> [!NOTE]
 > Note: the UX may differ and you don't have that option, leave the description as-is.
 
-![alt text](images/instructions-and-tools.png)
+![Reply to email tool selected in agent instructions dropdown menu](images/instructions-and-tools.png)
 
-29. Click on **Save** to save the instructions and **Publish** your agent to activate it
+29. Select on **Save** to save the instructions and **Publish** your agent to activate it
 
 #### Testing Your Complete Agent
 
-30. **Send** a test email to your training user email by using the **Workshop Agent**. Simply ask `Send a support email`. You will then shortly receive the email in **Microsoft Outlook**.
+30. **Send** a test email to your training user email by using the **Workshop Agent**. Ask it to `Send a support email`. You will then shortly receive the email in **Microsoft Outlook**.
 
 > [!IMPORTANT]
 > - Access the workshop agent in the same location as when you created your training user account.
@@ -358,7 +356,7 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 > [!TIP]
 > You don't need to repeat the original trigger event to make more tests. In the **Test** pane, you can select `...`, choose **Test trigger** and then select the desired trigger and from there, decide to execute a past trigger again.
 > 
-> ![alt text](images/test-trigger.png)
+> ![Test trigger option highlighted in the Test your agent dropdown menu"](images/test-trigger.png)
 
 32. Check the execution of your  autonomous agent by going to the **Activity** tab. Select the **Refresh** icon until you see the execution.
 
@@ -379,7 +377,7 @@ In this section, you'll learn how to integrate knowledge sources, configure Serv
 >   - Fallback
 >   - Multiple topics matched
 
-![alt text](images/autonomous-agent-plan.png)
+![Copilot Studio activity map showing "Send a Teams message" connector action marked Complete](images/autonomous-agent-plan.png)
 
 ---
 
