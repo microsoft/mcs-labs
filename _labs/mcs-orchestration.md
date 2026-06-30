@@ -627,15 +627,15 @@ Stand up a new-type agent and validate how the New Orchestrator's Agentic Reason
 
 1. The new agent designer opens on the **Build** tab. Use the agent-name field (or the **Rename agent** control) to name it:
 
-    ```text
-    Sales Account Assistant
-    ```
+   ```text
+   Sales Account Assistant
+   ```
 
 1. In the **Instructions** box, paste a short set of instructions so the orchestrator knows how to use its tools:
 
-    ```text
-    You are a Sales Account Assistant for sales associates. Help users complete multi-step tasks end to end. Use your Dataverse tools to look up account and contact data and the weather tool for current weather. When a request touches gifts or spending, follow the company gifting policy in your knowledge. Complete the whole task before responding rather than stopping to ask at each step.
-    ```
+   ```text
+   You are a Sales Account Assistant for sales associates. Help users complete multi-step tasks end to end. Use your Dataverse tools to look up account and contact data and the weather tool for current weather. When a request touches gifts or spending, follow the company gifting policy in your knowledge. Complete the whole task before responding rather than stopping to ask at each step.
+   ```
 
 1. Leave the **Model** set to its default (**Claude Sonnet 4.6**) and select **Save** in the command bar. The agent is assigned an ID and the **Preview** and **Evaluate** tabs become available.
 
@@ -676,9 +676,9 @@ You'll add two tools. In the new designer, adding a tool is **Add tool → pick 
 
 1. On the **Select a connection** step, pick your Dataverse connection. If you created one in an earlier lab it's already selected with a green check — just confirm it. Otherwise choose **Not connected → Create new connection → Create**, sign in / consent when the Entra popup appears. Then select **Next**.
 
-1. On **Review capabilities** (it lists the MCP server's actions — `read_query`, `search`, `create_table`, `update_record`, and so on), leave the **default selection** as-is and select **Confirm** to attach the server. This lab only ever exercises **`read_query`** (reading accounts and contacts) and **`search`** (schema discovery); the orchestrator won't call the write/delete actions unless a prompt explicitly asks it to.
+1. Once the **Microsoft Dataverse MCP Server** is added, open the tool and observe the list of the MCP server's actions (`read_query`, `search`, `create_table`, `update_record`, and so on). Leave the **default selection** as-is, but note that these can be turned on/off. This lab only ever exercises **`read_query`** (reading accounts and contacts) and **`search`** (schema discovery); the orchestrator won't call the write/delete actions unless a prompt explicitly asks it to.
 
-1. Select **Save** in the command bar. Your **Tools** list should now show **Get current weather** and **Microsoft Dataverse MCP Server**.
+1. Close the **Tool** editing view. We now have **Get current weather** and **Microsoft Dataverse MCP Server** configured.
 
 #### Add knowledge to the agent
 
@@ -809,43 +809,13 @@ In Use Case #3 you added the internal `company_policies_sample.pdf` from the **H
     > [!NOTE]
     > Two policy sources is deliberate. The customer-facing **Contoso Customer Care Policies** is what the agent quotes to a customer; the internal `company_policies_sample.pdf` is handling/escalation guidance the agent uses to decide but does **not** read back to a customer. The instructions and Skill you add below draw that line explicitly.
 
-#### Create the MCP server connections
-
-This Use Case uses two prebuilt **custom MCP connectors** — **Order Management MCP** and **Warehouse MCP** — that simulate an e-commerce backend ([Enhanced Task Completion sample](https://microsoft.github.io/enhanced-task-completion/)). Before a new-type agent can use them, each needs a **connection**.
-
-> [!IMPORTANT]
-> **Temporary workaround (preview limitation).** At the time of writing, the **new-type agent's** inline *Add tool → connection* step cannot create a brand-new connection for these custom MCP connectors yet. Until that's supported, create the connections **once** by adding the servers to a throwaway **classic** agent, which *can* create them. After that, the new-type agent will find and reuse the connections. This whole section is expected to disappear as the preview matures.
-
-1. Go to the **Agents** page. Select the **chevron** to the right of **New Agent**, then choose **New classic agent**.
-
-1. Name it `Enable New MCP Servers` and select **Create**. (This agent exists only to mint the connections — you won't publish or use it otherwise.)
-
-1. On the agent's **Overview**, select **Add tool**. In the tool picker, filter to **Model Context Protocol (MCP)**, type `Order Management` in the search box, and press **Enter** to run the search.
-
-    > [!TIP]
-    > Filtering to **Model Context Protocol** before searching makes the custom MCP servers much easier to find among the hundreds of connectors.
-
-1. Select **Order Management MCP Server**. On the detail panel, open the **Connection** dropdown (it reads **Not connected**) and choose **Create new connection**, then **Create** in the dialog that appears (these connectors need no credentials). When the connection shows as connected, select **Add and configure** — the server's actions (`search_orders`, `get_order`, `get_shipment`, `request_return`, `get_return_status`) will load.
-
-    ![Creating the MCP connection through the classic agent](images/uc4-connection-create.png)
-
-1. Repeat the **Add tool** step for **Warehouse MCP Server** (`check_stock`, `get_fulfillment_status`, `find_alternatives`, `get_restock_date`), creating its connection the same way.
-
-    Both connections now exist in the environment and are reusable. Leave the classic agent as-is.
-
-    ![Both MCP servers added to the classic agent](images/uc4-connections-both.png)
-
 #### Add the MCP server tools to the Sales Account Assistant
 
-Now that the connections exist, attach the two servers to the **new-type** agent.
+Attach the two servers to the **new-type** agent, creating each connection inline as you add it.
 
 1. Return to the **Sales Account Assistant** (Build tab). In the right rail, select **Add tool** (the **+** on the Tools section).
 
-1. Filter to **Model Context Protocol (MCP)**, search **Order Management**, and select **Order Management MCP Server**. This time the **Connection** step resolves to the connection you created — select **Next**.
-
-1. On **Review capabilities**, the server's actions now load (no "Couldn't load MCP tools" error). Select **Confirm** to attach it.
-
-    ![MCP capabilities load for the new-type agent](images/uc4-tool-capabilities.png)
+1. Filter to **Model Context Protocol (MCP)**, search **Order Management**, and select **Order Management MCP Server**. On the connection step, choose **Create new connection → Create**, then **Add**.
 
 1. Repeat for **Warehouse MCP Server**. Your **Tools** list should now show four tools: **Get current weather**, **Microsoft Dataverse MCP Server**, **Order Management MCP Server**, and **Warehouse MCP Server**.
 
@@ -1033,8 +1003,7 @@ You extended a new-type agent with a **Skill**, two **custom MCP servers**, a se
 
 **Lessons learned & troubleshooting tips:**
 
-* If the new-type agent's **Add tool → connection** step won't create a connection for a custom MCP server, use the **classic-agent workaround** above to mint the connection first (a temporary preview limitation).
-* If a server shows **"Couldn't load MCP tools"** on Review capabilities, the connection isn't in place yet — create it via the classic agent, then re-add the tool.
+* If a custom MCP server's tools don't load right after you add it, the connection may not have completed — remove the tool, then re-add it and recreate the connection (**Create new connection → Create → Add**).
 * If a custom MCP server is hard to find, **filter the tool picker to Model Context Protocol** and press **Enter** to run the search.
 * If the agent carries a previous customer into a new question, select **New chat** to reset — context persists across a conversation.
 

@@ -26,7 +26,7 @@ Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** �
   - [Use Case #2: Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow)
   - [Use Case #3: Use M365 Copilot and Add a Human-in-the-Loop in Order Management](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management)
   - [Use Case #4: Build an Inline Agent for Inventory Management](#-use-case-4-build-an-inline-agent-for-inventory-management)
-  - [Use Case #5: Call a Price Quote Specialist Agent from a Workflow](#-use-case-5-call-a-price-quote-specialist-agent-from-a-workflow)
+  - [Use Case #5 (Bonus): Call a Price Quote Specialist Agent from a Workflow](#-use-case-5-bonus-call-a-price-quote-specialist-agent-from-a-workflow)
 - [Summary of Learnings](#-summary-of-learnings)
 - [Conclusions & Recommendations](#-conclusions--recommendations)
 
@@ -46,7 +46,7 @@ Think of Workflows as the autonomous side of Copilot Studio:
 - "My flows are rigid — I need a step that can reason about messy, real-world inputs and choose what to do."
 - "I want an agent that can read my calendar, book time, and update a task — on its own."
 
-**In 60 minutes, you'll build an autonomous Workflow whose inline agent schedules focus time on your calendar and enriches a to-do — triggered automatically by simply creating a task.**
+**In 60 minutes, you'll build autonomous Workflows that act on their own when something happens — an inline agent that blocks focus time and enriches a task, a multi-branch order-management workflow with human-in-the-loop approval, an MCP-powered inventory agent that checks stock and creates Dataverse tasks, and a workflow that calls a published price-quote specialist agent.**
 
 ---
 
@@ -56,7 +56,7 @@ Workflows are the next generation of autonomous agents in Microsoft Copilot Stud
 
 **Real-world example:** You keep a running list of things you need to do, but you never actually block time to do them. In this lab you'll build a Workflow that watches a Microsoft To Do list. The moment you add a task, the Workflow's inline agent reads the task, checks your Outlook calendar for an appropriate slot within your working hours, books a focus block, and then updates the to-do with a due date, a reminder, helpful notes, and a category — all autonomously. You add one task; the agent does the planning.
 
-This lab is **Use Case #1** of a deeper Workflows module. It establishes the foundation — trigger plus inline agent plus tools — that later use cases build on.
+This example is covered in **Use Case 1** of this lab. It establishes the foundation — trigger plus inline agent plus tools — that the later use cases build on.
 
 ---
 
@@ -86,24 +86,26 @@ This lab is **Use Case #1** of a deeper Workflows module. It establishes the fou
 ## ✅ Prerequisites
 
 - Access to Microsoft Copilot Studio with appropriate licensing, in an environment where **Workflows** are enabled.
-- A work or school **Microsoft 365 account** with **Outlook (calendar)** and **Microsoft To Do** provisioned — the agent reads and writes *this* account's calendar and tasks.
-- Permission to create connections for **Microsoft To-Do (Business)** and the **Work IQ Calendar** tool.
+- A work or school **Microsoft 365 account** with **Outlook (calendar)** and **Microsoft To Do** provisioned — the inline agent reads and writes *this* account's calendar and tasks.
+- A **Power Platform environment** where you can edit Dataverse table data and toggle environment settings (System Administrator or System Customizer).
+- **Sample data pre-loaded** into the Dataverse tables used by the order-management use cases ("Tasks" table).
+- Permission to create connections for the services used across the lab: **Microsoft To-Do (Business)**, **Work IQ Calendar / Work IQ**, **Office 365 Outlook**, **Microsoft Dataverse / Dataverse MCP**, Human Review, and **Microsoft 365 Copilot**.
 - Basic familiarity with the Copilot Studio interface.
 
 > [!IMPORTANT]
-> Use the **same work account** for Copilot Studio, Microsoft To Do, and Outlook throughout this lab. The trigger, the agent, and the tools all act on one identity — if they don't match, the Workflow can't see your list or write to your calendar.
+> Use the **same work account** for Copilot Studio and every connected service in this lab (Microsoft To Do, Outlook, Dataverse, M365 Copilot, and approvals). The triggers, inline agents, and tools all act on one identity — if they don't match, a workflow can't see your data or write back to your calendar, tasks, or Dataverse records.
 
 ---
 
 ## 🎯 Summary of Targets
 
-In this lab, you'll build an autonomous Workflow that turns a new to-do into scheduled focus time. By the end, you will be able to:
+In this lab, you'll build several autonomous Workflows that act on event-driven triggers and hand real work to inline and published agents. By the end, you will be able to:
 
-- Create a **Workflow** and configure a **connector trigger** that fires on a new Microsoft To Do item.
-- Embed a **non-deterministic inline agent** in a Workflow and give it goal-oriented instructions.
-- Reference the trigger's data inside the agent's instructions using the **`/` dynamic-content token**.
-- Equip the agent with **tools** (Work IQ Calendar, Update to-do) and **web search**.
-- **Publish** the Workflow and trigger it end-to-end, then **monitor** the run and verify the agent's calendar and to-do changes.
+- Create a **Workflow** and configure **manual, scheduled, and connector-based triggers**.
+- Embed a **non-deterministic inline agent** in a workflow, give it goal-oriented instructions, and reference earlier data with the **`/` dynamic-content token**.
+- Equip agents with **tools** across Microsoft 365 and Dataverse (Work IQ Calendar, Update to-do, **Dataverse MCP**, web search) and use **M365 Copilot** inside a workflow.
+- Add a **human-in-the-loop approval** step so a person validates an AI-drafted action before the workflow continues.
+- **Publish, run, and monitor** workflows end-to-end — including calling a separate **published agent** from a workflow branch.
 
 ---
 
@@ -111,11 +113,11 @@ In this lab, you'll build an autonomous Workflow that turns a new to-do into sch
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 45 min |
-| 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Configure connections, fix solution references, transfer ownership, publish, and end-to-end test a pre-built email classification workflow | 30 min |
-| 3 | [Use M365 Copilot and Add a Human-in-the-Loop in Order Management](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Review a grounded M365 Copilot draft, route it through human approval, and verify the approved response is sent to the customer | 20 min |
-| 4 | [Build an Inline Agent for Inventory Management](#-use-case-4-build-an-inline-agent-for-inventory-management) | Add an inline agent that reasons over delay emails, uses MCP tools for warehouse and Dataverse, and returns structured output | 25 min |
-| 5 | [Call a Price Quote Specialist Agent from a Workflow](#-use-case-5-call-a-price-quote-specialist-agent-from-a-workflow) | Reuse a published agent with knowledge, MCP tools, and a skill to generate and send a professional customer quote | 20 min |
+| 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 15 min |
+| 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Configure connections, ownership, and publish a pre-built multi-branch classification workflow | 15 min |
+| 3 | [Use M365 Copilot and Add a Human-in-the-Loop in Order Management](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: M365 Copilot drafts a response, human approves, workflow replies | 15 min |
+| 4 | [Build an Inline Agent for Inventory Management](#-use-case-4-build-an-inline-agent-for-inventory-management) | Add an MCP-powered inline agent that checks warehouse stock and creates Dataverse tasks | 15 min |
+| 5 | [Call a Price Quote Specialist Agent from a Workflow (Bonus)](#-use-case-5-bonus-call-a-price-quote-specialist-agent-from-a-workflow) | Wire a published agent into a workflow branch to generate and send price quotes | 10 min (extra) |
 
 ---
 
@@ -287,65 +289,47 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 #### Take ownership and configure the solution
 
 > [!IMPORTANT]
-> **Complete the solution-level setup first.** The steps below transfer ownership and configure connection references — both of which **must** be done before the workflow can be published or tested. Skipping or rushing through these steps is the most common cause of "publish failed" errors later. Read each note carefully.
+> **Complete the solution-level setup first.** The steps below configure the node connections, link the connection references in the Power Apps solution, and transfer ownership — all of which **must** be done before the workflow can be published or tested. Skipping or rushing through these steps is the most common cause of "publish failed" errors later. Read each note carefully.
 
-1. Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. This solution bundles the Order Management Workflow along with its connection references, agents, and related components.
-
-   ![The LAB: Order Management solution in Power Apps](images/solution-order-management.png)
-
-2. The workflow was originally created by a different user, so you need to **take ownership** before making any changes. From the solution's **Objects** view, navigate to the workflow's underlying Dataverse record (the **Process** entity record for "Order Management Workflow"). In the command bar, select **Assign**, choose **Assign to: Me**, and confirm.
-
-   > [!IMPORTANT]
-   > Ownership transfer ensures you have full control over the workflow — including the ability to publish, enable/disable, and monitor runs. Without ownership, the Publish button will appear blocked or produce cryptic errors. Always transfer ownership **before** configuring connections — it avoids permission issues during the remaining setup steps.
-
-3. Back in the solution, select **Connection References** from the left sidebar (or filter the Objects view to show only Connection References). You should see multiple connection references — at minimum: **When a new email arrives** (Office 365 Outlook), **Dataverse**, **M365 Copilot**, and **Human review** (Advanced Approvals).
-
-   ![Connection References listed in the solution](images/solution-objects.png)
-
-4. For **each** connection reference, you need to link it to a live connection under your account. Perform the following for every row:
-
-   1. Hover over the row to reveal the **Commands** (⋮) button, then select it.
-   2. Choose **Edit** from the context menu.
-   3. In the Edit panel, open the **Connection** dropdown. If a connection for your account already exists, select it. If not, select **New connection** at the top of the dropdown to create one — sign in with your lab account, then return and select the newly created connection (use the **Refresh** button if it doesn't appear immediately).
-   4. Select **Save**, then confirm by clicking **Save changes** in the confirmation dialog.
-
-   Repeat this for **all four** connection references: **When a new email arrives**, **Dataverse**, **M365 Copilot**, and **Human review**.
-
-   > [!WARNING]
-   > **Do not skip any connection reference.** Even one unlinked reference will block publishing with the error: *"A connector was imported, however the related connection references need connections created and then any dependent flows can be started."* The confirmation dialog warning that changes impact dependent apps and flows is expected — confirm it each time.
-
-   > [!NOTE]
-   > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
-
-#### Open and explore the Order Management Workflow
-
-5. In **Copilot Studio**, select **Workflows** from the left navigation. Locate and open the **Order Management Workflow** to view it in the canvas designer. Since you already own the workflow and have configured the solution connections, the canvas should load without ownership warnings.
+1. In **Copilot Studio**, navigate to **Workflows** and open the **Order Management Workflow**.
 
    > [!NOTE]
    > The workflow has been pre-built for your lab environment. You'll see a **trigger** node ("When a new email arrives"), a **Classify** node, and several branch paths — one for each email category.
 
    ![The Order Management Workflow open in the canvas designer](images/order-management-workflow-overview.png)
 
-#### Verify the trigger connection and subject filter
+2. Open each node on the canvas by clicking on it so its connection can resolve. Start with the trigger: click **When a new email arrives** and, under **Connections**, wait for the connection to load — it should update automatically to your lab user. Most other nodes resolve the same way. Two nodes need a connection created manually:
 
-6. Select the **trigger** node ("When a new email arrives"). The connection should already be established from the solution-level setup (step 4). If the connection status still shows as missing, select **Create new connection** to set up an **Office 365 Outlook** connection and sign in with your lab account.
+   - **M365 Copilot** node — open the node and, under **Connections**, select **Create new connection** > **Create**, then sign in with your lab account.
+   - **Human review** node — open the node and, under **Connections**, select **Create new connection** > **Create**, then sign in with your lab account.
 
-   ![The trigger node with a valid connection established](images/trigger-connection-created.png)
+3. Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
 
-7. With the trigger connected, observe the **Subject Filter** expression: `@{string('Order Management')}`. This means the workflow only fires for emails whose subject contains "Order Management" — all other emails are ignored.
+   - You should see **five** connection references. If a **sixth** one is present whose connection id starts with `crc3b_draft_bRURqJ.cr.shared_a365outlookmailmcp`, it is not needed for the workflow to run and can be **safely removed** from the solution.
+   - For all others, select the connection and click **Save**, then confirm with **Save changes**.
+
+   ![The LAB: Order Management solution in Power Apps](images/solution-order-management.png)
+
+   > [!WARNING]
+   > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
+
+4. Navigate to the **Cloud Flow** object (the Order Management Workflow) inside the solution and select the flow. Choose **Set primary owner**, **remove the existing owner**, set yourself (your lab user) as the new owner, and select **Save**. A **green bar** should appear confirming the owner was successfully changed.
+
+   > [!IMPORTANT]
+   > Without the ownership change, publishing is **disabled by default**, so the workflow cannot be triggered end-to-end — you can still test individual nodes inside it, but no real incoming email will start a run. Once you own the workflow, the **Publish** button becomes available. Ownership must be transferred **after** the connection references are configured.
+
+5. Go back to the workflow, select **Save**, and **Publish**. Verify the workflow was successfully published after changing the ownership — publishing only succeeds once you own the flow.
+
+#### Open and explore the Order Management Workflow
+
+6. Select the **trigger** node ("When a new email arrives"). Next to **Subject filter**, select the code symbol **`</>`** (**Switch to expression mode**) to reveal the expression `@{string('Order Management')}`. This means the workflow only fires for emails whose subject contains "Order Management" — all other emails are ignored.
 
    > [!IMPORTANT]
    > Keep this filter in mind when testing: every test email you send **must include "Order Management" in the subject line**, or the workflow will not trigger. This is a common source of confusion when tests "don't seem to work."
 
    ![The subject filter expression configured on the trigger](images/subject-filter-expression.png)
 
-#### Verify the Classify node connection and explore categories
-
-8. Select the **Classify** node further down the workflow. The Dataverse connection should already be established from the solution-level setup. If it still shows as missing, select **Create new connection** to set up a **Microsoft Dataverse** connection and sign in with your lab account.
-
-   ![The Classify node with Dataverse connection established](images/classify-connection-created.png)
-
-9. With the connection established, review the four classification categories configured in the Classify node. Each category has a name and example text that the AI model uses to determine where an incoming email should be routed:
+7. Select the **Classify** node. Review the four classification categories configured in the node. Each category has a name and example text that the AI model uses to determine where an incoming email should be routed:
 
    - **Quote Request** — emails requesting pricing or quotes for products/services
    - **Supplier Delay** — notifications about delays from suppliers
@@ -359,58 +343,52 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
 #### Test the classification
 
-10. Select the **Test** tab in the Classify node to verify the classification works. Enter a sample email body — for example: *"Hi, I would like to request a quote for 500 units of Product A."* — and observe the predicted category. It should classify as **Quote Request**.
+8. Test the classification before sending a real email. In the **When a new email arrives** section, find **Body** (*The body of the message*), click into the box, and paste:
 
-    > [!TIP]
-    > Use the Test tab to experiment with different email texts before publishing. Try edge cases like a supplier email that also mentions pricing, or a customer complaint — these help you understand how the model assigns categories and whether you need to refine the category descriptions or add more examples.
+   ```
+   Hi, I would like to request a quote for 500 units of Product A.
+   ```
 
-    ![The classification test result showing Quote Request](images/classify-test-result.png)
+   Select **Run test** and observe the predicted category — it should classify as **Quote Request**.
 
-#### Publish the workflow
-
-11. Return to **Copilot Studio → Workflows**. In the Workflows list, locate **Order Management Workflow** and select the **Publish** button (the icon next to the workflow name). The status should change from **Draft** to **Published**.
-
-    > [!IMPORTANT]
-    > If publishing fails, double-check that **all four connection references** are linked (step 4) and that you have **ownership** of the workflow (step 2). These are the two most common blockers. You can verify connection references by returning to the Power Apps solution and confirming each one shows a connection in the Edit panel.
-
-    ![The Order Management Workflow showing Published status](images/workflow-published.png)
+   ![The classification test result showing Quote Request](images/classify-test-result.png)
 
 #### Test the "Other" classification path end-to-end
 
-12. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and compose a new email **to yourself** with the following:
+9. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and compose a new email **to your lab user account** with the following:
 
-    - **Subject:** `Order Management - Congratulations! Your order desk has been selected`
-    - **Body:**
+   - **Subject:** `Order Management - Congratulations! Your order desk has been selected`
+   - **Body:**
 
-      ```
-      Dear Order Manager,
+     ```
+     Dear Order Manager,
 
-      Congratulations! Your order management team has been selected in our monthly
-      business draw and is entitled to claim an exclusive cash reward.
+     Congratulations! Your order management team has been selected in our monthly
+     business draw and is entitled to claim an exclusive cash reward.
 
-      To release your reward, please reply with your full name and contact details,
-      and a small processing fee may apply.
+     To release your reward, please reply with your full name and contact details,
+     and a small processing fee may apply.
 
-      Act soon, as unclaimed rewards expire.
+     Act soon, as unclaimed rewards expire.
 
-      Regards,
-      Promotions Team
-      MegaDraw Rewards
-      ```
+     Regards,
+     Promotions Team
+     MegaDraw Rewards
+     ```
 
-    Send the email. This spam/scam email should be classified as **Other** by the workflow.
+   Send the email. This spam/scam email should be classified as **Other** by the workflow.
 
-    > [!NOTE]
-    > The subject must contain **"Order Management"** to match the trigger's subject filter. The body content is intentionally irrelevant to quotes, suppliers, or customer inquiries — it should fall through to the "Other" category.
+   > [!NOTE]
+   > The subject must contain **"Order Management"** to match the trigger's subject filter. The body content is intentionally irrelevant to quotes, suppliers, or customer inquiries — it should fall through to the "Other" category.
 
-    ![Composing the test email in Outlook](images/test-other-email-compose.png)
+   ![Composing the test email in Outlook](images/test-other-email-compose.png)
 
-13. Wait approximately **1–2 minutes** for the workflow to trigger and process the email. Then navigate to your **Archive** folder in Outlook. You should see the test email has been automatically moved there — confirming the "Other" classification path is working correctly.
+10. Wait a **few seconds** for the workflow to trigger and process the email. Then navigate to your **Archive** folder in Outlook. You should see the test email has been automatically moved there — confirming the "Other" classification path is working correctly.
 
-    > [!TIP]
-    > If the email doesn't appear in the Archive folder after 2 minutes, check the **Activity** tab in the workflow in Copilot Studio to see if the run triggered. If no run appears, verify the workflow is **Published** (not Draft) and that the email subject includes "Order Management."
+   > [!TIP]
+   > If the email doesn't appear in the Archive folder, check the **Activity** tab in the workflow in Copilot Studio to see if the run triggered. If no run appears, verify the workflow is **Published** (not Draft) and that the email subject includes "Order Management."
 
-    ![The test email moved to the Archive folder by the workflow](images/archive-other-email.png)
+   ![The test email moved to the Archive folder by the workflow](images/archive-other-email.png)
 
 ---
 
@@ -442,24 +420,21 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
 1. In **Copilot Studio**, open the published **Order Management Workflow** and select the **Classify** node. Observe the **Customer Inquiry** branch that leaves the classification node and note how it routes customer questions into a draft-and-review sequence.
 
-   > [!TIP]
-   > **Classify node tuning:** You can add different examples associated to the same category to handle edge cases properly. A good testing exercise is to try common cases and some edge cases within the node test level and observe how categories get assigned, then refine the category description accordingly.
-
-   ![The Customer Inquiry branch selected from the Classify node](images/customer-inquiry-branch.png)
-
-2. Select the **M365 Copilot** node in that branch. Review the prompt and confirm it uses the **Customer question** input based on the incoming email body. This is the grounded draft-generation step that prepares the proposed response for the reviewer.
+2. Select the **M365 Copilot** node in that branch. Review the prompt and confirm it uses the **Customer question** input based on the incoming email body. This is the grounded draft-generation step that prepares the proposed response for the reviewer. The prompt asks M365 Copilot to read the customer's question, search the existing email threads of the user that owns the node connection (you) for any prior context or earlier reply on the same topic, and then draft a complete, ready-to-send reply — answering clearly when it finds an answer, or writing a brief holding response when it can't (without inventing product facts), always addressed "Dear Customer," and signed off as "Contoso Electronics Order Management".
 
    > [!NOTE]
    > **M365 Copilot node scope:** The M365 Copilot node excels at addressing questions that leverage Microsoft Graph (emails, Teams chats, etc.) — think of it as prompts you would send in M365 Copilot chat. Note that the operations this node performs are **read-only** — it can search and retrieve information from emails, chats, and files, but it **cannot send emails or Teams messages**. If you need those write operations, use an **Agent** node with access to the relevant Work IQ tools instead.
+
+   > [!NOTE]
+   > **Fresh lab accounts have no history to ground on:** Because this lab uses a freshly provisioned account with no prior emails or Teams messages, the M365 Copilot node won't find real substance to build its answer from — so expect a generic holding reply. This step is illustrative: in a real mailbox with genuine history, M365 Copilot would ground the draft in actual prior threads and context.
 
    ![The M365 Copilot node showing the Customer question input from the email body](images/customer-inquiry-m365-copilot-node.png)
 
 3. Select the **Human review** node and inspect its configuration carefully:
 
-   - In the approval message, confirm the proposed reply from **M365 Copilot** is inserted for the reviewer to read.
-   - Scroll down and confirm the **Outlook** channel is selected.
-   - Review the **Yes/No** inputs for **Send proposed reply from M365?**
-   - **Bonus:** Select **+** to observe the other input types available, but do **not** add any new inputs.
+   - In the message, confirm the proposed reply drafted by **M365 Copilot** is inserted for the reviewer to read.
+   - Notice that the review request is delivered over **Outlook** — observe how we use an Outlook email to ask a person to approve before the workflow continues.
+   - The reviewer responds through a single **Yes/No** input (**Send proposed reply from M365?**). Select **+** to expand and see the other input types available — text, email, number, date, and more. You don't need to add any here, but it's worth understanding the variety of formatted inputs you can request and then reuse cleanly in downstream nodes.
 
    ![The Human review node showing the proposed M365 reply and approval options](images/customer-inquiry-human-review-node.png)
 
@@ -469,7 +444,7 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
 #### Run an end-to-end Customer Inquiry test
 
-5. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and send the following email **to yourself**:
+5. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and send the following email **to your lab user account**:
 
    - **Subject:** `Order Management - Question about iPad Air warranty and MDM`
    - **Body:**
@@ -496,11 +471,14 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
    ![The Activity panel showing the run entering the Customer Inquiry path](images/customer-inquiry-activity-path.png)
 
-7. Wait until the run reaches the **Human Request** node. Select the node in the run details if you want to confirm that the workflow is awaiting reviewer input.
+7. Wait until the run reaches the **Human Request** node. Once M365 Copilot finishes exploring your emails and drafting an appropriate response, a **green check** appears on the node and you should be notified of an incoming review email within a matter of seconds.
 
    ![The run details showing the Human Request node waiting for approval](images/customer-inquiry-human-request-waiting.png)
 
 8. Go to **Outlook** and open the incoming approval email. Review the proposed M365 Copilot reply, then select **Yes** to approve sending it.
+
+   > [!TIP]
+   > If you don't see the approval email, try **refreshing** Outlook. If it still doesn't land, go back to the workflow, open the **Build** tab, re-establish the connection on the **Human review** node by creating a new one, then select **Save** > **Publish** and run the test again.
 
    ![The approval email in Outlook with the proposed reply and Yes button](images/customer-inquiry-approval-email.png)
 
@@ -540,9 +518,12 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 
    ![The Supplier Delay category with the add action menu open to Agent](images/supplier-delay-add-agent.png)
 
-2. In the new node, leave **Agent** set to **New agent in this workflow** and keep the default AI model. This creates an inline agent dedicated to this workflow path.
+2. In the new node, leave **Agent** set to **New agent in this workflow**. This creates an inline agent dedicated to this workflow path. Keep the default AI model.
 
-3. Select **Expand** (the two arrows next to **...**) so you can edit the full agent configuration, then rename the node title to **Inventory Task Agent**.
+   > [!TIP]
+   > A strength of AI-native nodes in Workflows is that you can choose a **different model per node**. This inline agent runs on **Claude Sonnet 4.6** for its reasoning, while the **Classify** node uses the lighter **GPT-4.1 mini** — a cost-optimized choice for that lightweight classification step. Matching the model to the work each node does keeps the workflow both capable and economical.
+
+3. Select **Expand** (the two arrows next to **...**) so you can edit the full agent configuration, then rename the node title from **Agent** to **Inventory Task Agent**.
 
    ![The expanded agent configuration renamed to Inventory Task Agent](images/supplier-delay-agent-expanded.png)
 
@@ -588,7 +569,7 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 6. Replace the placeholders in the instructions with dynamic content:
 
    1. Select **`[email body]`**, choose the **lightning** icon, search for **body**, and insert **Body** from **When a new email arrives**.
-   2. Select **`[due date]`**, choose the **lightning** icon, then select **Ask Copilot to generate an expression**.
+   2. Select **`[due date]`**, choose the **lightning** icon, then look above the search bar for the **diamonds** icon — **Ask Copilot to generate an expression**.
    3. Enter: **Add 3 days to the date and time of arrival of the trigger email**
    4. Confirm Copilot returns:
 
@@ -597,9 +578,6 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
       ```
 
       Select **Insert**.
-
-   > [!TIP]
-   > **"Request human assistance when unsure":** Notice the button in the agent configuration panel. This feature sends a structured message to the connection owner when the agent encounters ambiguity or conflicting information — it dynamically generates questions based on the problem at hand, allowing human judgment for edge cases while keeping the automation running.
 
    ![The agent instructions showing Body and due date dynamic expressions inserted](images/supplier-delay-dynamic-content.png)
 
@@ -611,13 +589,16 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 
    ![The structured output configuration with sku stock and risk properties](images/supplier-delay-structured-output.png)
 
+   > [!TIP]
+   > **"Request human assistance when unsure":** Notice the button in the agent configuration panel. This feature sends a structured message to the connection owner when the agent encounters ambiguity or conflicting information — it dynamically generates questions based on the problem at hand, allowing human judgment for edge cases while keeping the automation running.
+
 8. Minimize the view, then select **Save** and **Publish** so the Supplier Delay branch is live with the new agent configuration.
 
    ![The Order Management Workflow published with the Inventory Task Agent added](images/supplier-delay-workflow-published.png)
 
 #### Test the Supplier Delay path
 
-9. In **Outlook**, send the following email **to yourself**:
+9. In **Outlook**, send the following email **to your lab user account**:
 
    - **Subject:** `Order Management - Shipment delay - LumiRead E-Reader`
    - **Body:**
@@ -641,7 +622,12 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 
     ![The Activity panel showing the Supplier Delay path and Inventory Task Agent run](images/supplier-delay-activity-path.png)
 
-11. Select the **Inventory Task Agent** node in the run details and scroll through the tool runs. You should see the warehouse lookup and the Dataverse describe/create operations executed by the agent.
+11. Select the **Inventory Task Agent** node in the run details and scroll through the tool runs. You should see the warehouse lookup and the Dataverse describe/create operations executed by the agent:
+
+    - Using the **Warehouse MCP**, the agent looks up the current stock for the delayed product (the SKU named in the email).
+    - Using **Dataverse**, it then inspects the **Task** table and creates a new row there, filling in the subject, description, priority, and due date exactly as the instructions specified.
+
+    Together, these tool calls show how the agent turned an unstructured delay email into a concrete, trackable restock task.
 
     ![The Inventory Task Agent run details showing Warehouse and Dataverse tool calls](images/supplier-delay-tool-runs.png)
 
@@ -665,7 +651,7 @@ You've added a reasoning agent that enriches a supplier delay notice with live w
 
 ---
 
-## 💰 Use Case #5: Call a Price Quote Specialist Agent from a Workflow
+## 💰 Use Case #5 (Bonus): Call a Price Quote Specialist Agent from a Workflow
 
 Connect the **Quote Request** branch to a reusable, published **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse product data**, and **WorkIQ Mail** to produce and send a professional quote.
 
@@ -685,37 +671,37 @@ Configure the **Quote Request** path to use the published **Price Quote Agent**,
 
 #### Inspect the reusable Price Quote Agent
 
-1. In **Copilot Studio**, select **Agents** in the left navigation. Ensure the **New experience** toggle (top-right of the Agents list) is **ON** — this gives you the modern agent builder with the **Build | Preview | Evaluate | Monitor** tab layout.
-
-   > [!NOTE]
-   > If the toggle is not visible or already active, you are already in the new experience. The new interface provides a cleaner single-page layout for inspecting agent instructions, tools, knowledge, and skills at a glance.
+1. In **Copilot Studio**, select **Agents** in the left navigation. Ensure the **New experience** toggle (top-right of the Agents list) is **ON** — this gives you the modern agent builder.
 
    ![The Agents list with the New experience toggle enabled](images/agents-list-new-experience.png)
 
 2. Open **Price Quote Agent**. In the new experience's **Build** tab, inspect the agent and confirm these components are present on the right-hand panel:
 
-   - **Model**: the assigned AI model (e.g. Claude Sonnet 4.6)
    - **Tools**: **Microsoft Dataverse MCP Server** and **Work IQ Mail (Preview)**
    - **Knowledge**: **Order Management** (SharePoint knowledge source with pricing guidance, customer tiers, and related policy)
    - **Skills**: **price-quote** — the structured skill for composing and sending the quote email
-   - On the left, the **Instructions** pane shows the agent's broad, conversational guidelines about handling price questions
+   - On the left, the **Instructions** pane holds the agent's broad, conversational guidelines about handling price questions. Notice they stay deliberately high-level: the precise, procedural steps live in the **price-quote** skill instead — a best practice that keeps the instructions readable while the repeatable logic is encapsulated in a skill.
 
    ![The Price Quote Agent in the new Build experience showing instructions tools and knowledge](images/uc5-agent-new-experience.png)
 
-3. Return to the **Order Management Workflow** and locate the **Quote Request** category in the **Classify** node.
+3. Open the **price-quote** skill and read through what it does. The skill spells out exactly how to build a quote: read the customer name and the requested items from the request, use **Dataverse** to look up the customer's account and employee count and derive their pricing **tier** (Small / Mid / Large), take each item's SKU and list price from the **Sales & Pricing Guide**, then calculate the line totals, subtotal, tier discount, and final total. It finishes by reading the payment terms and delivery lead time and using **Work IQ** to email a fully formatted quote to the customer — applying only the prices and discounts found in the knowledge, never estimates.
+
+4. **Publish** the Price Quote Agent by selecting **Publish** in the top-right corner.
 
 #### Configure the Quote Request branch
 
-4. Select the **+** next to **Quote Request** and choose **Agent**.
+5. Return to the **Order Management Workflow** and locate the **Quote Request** category in the **Classify** node.
 
-5. In the **Agent** dropdown, select **Price Quote Agent** — the existing published agent.
+6. Select the **+** next to **Quote Request** and choose **Agent**.
+
+7. In the **Agent** dropdown, select **Price Quote Agent** — the existing published agent.
 
    > [!IMPORTANT]
    > **Only published agents appear in the dropdown:** When using the Agent node with an existing agent, only agents that have been **published** (not just saved) will appear in the agent selection dropdown. If your agent is missing from the list, go to the agent page and publish it first.
 
    ![The Quote Request branch agent selector showing Price Quote Agent](images/quote-request-select-existing-agent.png)
 
-6. In the **Message** field, enter:
+8. In the **Message** field, enter:
 
    ```
    Prepare a price quote for this customer request:
@@ -723,54 +709,56 @@ Configure the **Quote Request** path to use the published **Price Quote Agent**,
    Request: [email body]
    ```
 
-7. Replace the placeholders with dynamic values:
+9. Replace the placeholders with dynamic values:
 
-   - Select **`[email sender]`**, choose the **lightning** icon, search for **from**, and insert **From**
-   - Select **`[email body]`**, choose the **lightning** icon, search for **body**, and insert **Body**
+   - Replace the **`[email sender]`** placeholder (select the arrow **>**), choose the **lightning** icon, search for **from**, and insert **From**.
+   - Replace the **`[email body]`** placeholder (select the arrow **>**), choose the **lightning** icon, search for **body**, and insert **Body**.
 
    ![The Quote Request message field with From and Body dynamic tokens inserted](images/quote-request-message-dynamic-content.png)
 
-8. Select **Save**, then **Publish**.
+10. Select **Save**, then **Publish**.
 
-   ![The workflow published after wiring the Quote Request branch to Price Quote Agent](images/quote-request-workflow-published.png)
+    ![The workflow published after wiring the Quote Request branch to Price Quote Agent](images/quote-request-workflow-published.png)
 
 #### Test the Quote Request path
 
-9. In **Outlook**, send the following email **to yourself**:
+11. In **Outlook**, send the following email **to your lab user account**:
 
-   - **Subject:** `Order Management - Quote request - Adventure Works`
-   - **Body:**
+    - **Subject:** `Order Management - Quote request - Adventure Works`
+    - **Body:**
 
-     ```
-     Hello Contoso team,
+      ```
+      Hello Contoso team,
 
-     We're fitting out a new office and would like a quote for:
-     - 10 Sony WH-1000XM5 headphones
-     - 5 iPad Air (M2, 256GB)
+      We're fitting out a new office and would like a quote for:
+      - 10 Sony WH-1000XM5 headphones
+      - 5 iPad Air (M2, 256GB)
 
-     Delivery to our Santa Cruz, California office. Could you confirm your best price,
-     the payment terms, and the delivery estimate?
+      Delivery to our Santa Cruz, California office. Could you confirm your best price,
+      the payment terms, and the delivery estimate?
 
-     Thanks,
-     Nancy Anderson
-     Procurement, Adventure Works
-     ```
+      Thanks,
+      Nancy Anderson
+      Procurement, Adventure Works
+      ```
 
-   ![The quote request test email being composed in Outlook](images/quote-request-test-email.png)
+    ![The quote request test email being composed in Outlook](images/quote-request-test-email.png)
 
-10. Return to the workflow's **Activity** panel, refresh until the run appears, and confirm the route **Classify → Quote Request → Agent completed**.
+12. Return to the workflow's **Activity** panel, refresh until the run appears, and confirm the route **Classify → Quote Request → Agent completed**.
 
     ![The Activity panel showing the Quote Request branch run completed](images/quote-request-activity-path.png)
 
-11. Select the **Agent** node in the run details and read the completion message describing what the Price Quote Agent did to prepare the customer response.
+13. Select the **Agent** node in the run details and read the completion message describing what the Price Quote Agent did to prepare the customer response.
 
     ![The Quote Request agent run details showing the completion message](images/quote-request-agent-completion.png)
 
-12. Open **Outlook** and verify that the generated price quote email has landed in your inbox.
+14. Open **Outlook** and verify that the generated price quote email has landed in your inbox.
 
     ![The completed price quote email received in Outlook](images/quote-request-email-received.png)
 
-13. **Bonus:** Return to **Price Quote Agent** and select the **Preview** tab (top of the new experience). Ask: **What are the iPad Air prices applicable to Fabrikam?** Observe the extended reasoning — the agent searches SharePoint for customer-tier pricing guidance and queries Dataverse with a `read_query` to build an accurate, tiered response.
+15. **Bonus:** Return to **Price Quote Agent** and select the **Preview** tab (top of the new experience). As a bonus, observe how the agent reasons over a question by combining the different tools at hand. Ask: **What are the iPad Air prices applicable to Fabrikam?** Watch the extended reasoning — the agent issues a Dataverse `read_query` that looks up the number of employees where the account name is **Fabrikam**, then connects that result with the **SharePoint** knowledge about customer tiers: it works out that Fabrikam falls into the **Mid** tier and shows the discounts the SharePoint handbook says should apply.
+
+    You can also try asking **We have received this customer email: []** and paste the email you used to test the workflow. You'll see how the agent reasons over the answer — and how, this time, it loads the **price-quote** skill to build a full quote following the skill's specified steps.
 
     ![The Price Quote Agent Preview tab showing the Fabrikam pricing question with reasoning](images/uc5-bonus-agent-reasoning.png)
 
