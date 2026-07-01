@@ -139,11 +139,11 @@ Learn how to create and configure an autonomous agent that listens for specific 
 
 #### Creating the agent and trigger setup
 
-1. Navigate to [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com)
+1. Go to [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com)
 
 1. Make sure you're in the correct environment by looking at the top right corner. In these labs, the environment name should start with **'DEV - '**
 
-1. Go to the **Solutions** menu (located in the left-hand menu under the ellipsis `...`)
+1. Go to the **Solutions** menu (located in the left navigation menu under the ellipsis `...`)
 
 1. Select the solution you had created previously for your labs
 
@@ -157,7 +157,7 @@ Learn how to create and configure an autonomous agent that listens for specific 
 
 #### Configuring email triggers
 
-9. Scroll down to the triggers section and click **+Add trigger**
+9. Scroll down to the triggers section and select **+Add trigger**
 
 1. Search and select `When a new email arrives (V3) (Office 365 Outlook)`
 
@@ -201,7 +201,7 @@ Learn how to integrate and configure tools for desktop automation and email comm
 
 #### Configuring the Computer use tool
 
-1. Navigate to **Tools** in the top-level menu
+1. Go to **Tools** in the top-level menu
 
 1. Select **+ Add a tool**
 
@@ -247,7 +247,7 @@ Learn how to integrate and configure tools for desktop automation and email comm
     - The left panel shows your instructions and a step-by-step log of the tool’s reasoning and actions.
     - The right panel shows a preview of the actions on the machine you set up for computer use.
 
-    ![alt text](images/test_CUA.jpg)
+    ![Financial Portfolio Dashboard showing portfolio 44123BCD for Munson's Pickles, valued at $120,000,000](images/test_CUA.jpg)
 
 18. Select **Finish testing**
 
@@ -277,11 +277,11 @@ Learn how to integrate and configure tools for desktop automation and email comm
 1. Customize the **Body** input and set its **Description** to:
     `Write the email body using HTML and highlight the requested data.`
 
-1. Click **Save** to finalize the tool configuration
+1. Select **Save** to finalize the tool configuration
 
 #### Configuring agent instructions and AI settings
 
-29. Navigate to **Overview** tab and then **Edit** the **Instructions**
+29. Go to **Overview** tab and then **Edit** the **Instructions**
 
 1. Paste the following comprehensive instructions:
     ```
@@ -291,7 +291,7 @@ Learn how to integrate and configure tools for desktop automation and email comm
     > [!IMPORTANT]
     > For each of the placeholder <...> in the description, use / to insert the tools you just configured in your instructions.
 
-    ![alt text](images/agent_instructions.jpg)
+    ![Copilot instruction editor with dropdown showing "Reply to email" tool selected](images/agent_instructions.jpg)
 
 31. **Save** the instructions
 
@@ -319,7 +319,7 @@ Learn how to integrate and configure tools for desktop automation and email comm
 
 1. Select the trigger instance and then **Start testing**
 
-    ![alt text](images/test_trigger.jpg)
+    ![Test your trigger" dialog with Jul 10 instance selected and Start testing button](images/test_trigger.jpg)
 
 38. Check your emails for the agent’s reply.
 
@@ -327,7 +327,7 @@ Learn how to integrate and configure tools for desktop automation and email comm
 > - Monitor the Computer use tool's actions in the Test chat window or through the agent's **Activity** page.
 > - In the **Activity** page select the current run and switch from **Activity map** to **Transcript** to get a real-time view of all the steps of the Computer use tool along with their respective screenshots. This view is especially useful in autonomous agent runs.
 
-> [!NOTE]
+> [!TIP]
 > Send an additional email request for another portfolio ID and observe the results.
 
 ---
