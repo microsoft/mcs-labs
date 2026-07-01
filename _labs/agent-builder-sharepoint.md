@@ -134,8 +134,6 @@ Build a specialized agent with SharePoint integration and advanced AI capabiliti
 
 4. Go to the **Configure** tab.
 
-5. Go to the **Configure** tab
-
 <!--
     ![alt text](images/knowledge-files.png)
 Commented out; screenshots need update due to CPS updates.  Last minute change to labs required so will do at a later date
@@ -229,8 +227,6 @@ Design a professional badge for the first place winner of our 2026 sales contest
 8. Select **...** next to your agent name in the side bar navigation, and choose **Edit**
 
 9. In the **Configure** tab, explore additional **knowledge** capabilities:
-
-10. In the **Configure** tab, explore additional **knowledge** capabilities:
    - All **Websites** (or specific websites)
    - All **SharePoint** data (or specific files or sites)
    - All **Teams** data (or data from specific group chats, meetings, or channels)

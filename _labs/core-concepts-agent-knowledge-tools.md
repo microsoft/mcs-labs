@@ -334,7 +334,7 @@ The Use information from the web setting is available on the Generative AI setti
 
 1. Select the uploaded licensing guide file to open its details.
 
-1. Set the source to **Official** and select Got it if advised that it will Update agent instructions.
+1. Set the source to **Official** and select **Got it** if prompted that this will update agent instructions.
 
    > [!NOTE]
    > Marking a knowledge source as **Official** in Copilot Studio tells the agent to treat that content as authoritative and trustworthy. When multiple knowledge sources are available, the agent will prioritize official sources over non-official ones when generating responses. This is especially useful for policy documents, licensing guides, and other content where accuracy is critical.
@@ -476,7 +476,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
    Orlando
    ```
 
-1. Review the weather information returned by the agent. Notice how it uses the tool to fetch real-time data. Also notice that the agent automatically used the **Imperial** or **Metric** unit you selected earlier without asking the user. The agent knew this is because you set that input to a custom value instead of letting the AI fill it dynamically.
+1. Review the weather information returned by the agent. Notice how it uses the tool to fetch real-time data. Also notice that the agent automatically used the **Imperial** or **Metric** unit you selected earlier without asking the user. This is because you set that input to a custom value instead of letting the AI fill it dynamically.
 
    > [!TIP]
    > If the agent doesn't use the tool automatically, check that the tool is enabled and that you've saved your agent configuration.

@@ -654,7 +654,7 @@ You'll add two tools. In the new designer, adding a tool is **Add tool → pick 
 
     ![Add tool – MSN Weather Get current weather](images/new-orch-02.png)
 
-1. In the **Tools** list in the right rail, **select the `Get current weather` tool** to open its **Tool details**. (Select a tool in this menu is how you configure it — there's no separate settings button; the tool's name opens its Details, Inputs, and Outputs panels.)
+1. In the **Tools** list in the right rail, **select the `Get current weather` tool** to open its **Tool details**. (Selecting a tool in this menu is how you configure it — there's no separate settings button; the tool's name opens its Details, Inputs, and Outputs panels.)
 
 1. Under **Authentication mode**, select **Maker**. A **Connection** field appears — select **Not connected → Create new connection → Create**. Once it shows your connection, select **Save**.
 
@@ -811,11 +811,11 @@ In Use Case #3 you added the internal `company_policies_sample.pdf` from the **H
 
 #### Add the MCP server tools to the Sales Account Assistant
 
-1. In the **Sales Account Assistant** (Build tab). In the right rail, select **Add tool** (the **+** on the Tools section).
+Attach the two servers to the **new-type** agent, creating each connection inline as you add it.
 
-1. On **Review capabilities**, the server's actions now load. Select **Confirm** to attach it.
+1. Return to the **Sales Account Assistant** (Build tab). In the right rail, select **Add tool** (the **+** on the Tools section).
 
-    ![MCP capabilities load for the new-type agent](images/uc4-tool-capabilities.png)
+1. Filter to **Model Context Protocol (MCP)**, search **Order Management**, and select **Order Management MCP Server**. On the connection step, choose **Create new connection → Create**, then **Add**.
 
 1. Repeat for **Warehouse MCP Server**. Your **Tools** list should now show four tools: **Get current weather**, **Microsoft Dataverse MCP Server**, **Order Management MCP Server**, and **Warehouse MCP Server**.
 

@@ -659,7 +659,7 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
 
 1. Navigate to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
-2. Select the **Analyst** agent.
+2. Select the **Analyst** agent. You can find it by:
    - Selecting the agent picker and choosing **Analyst**
    - Or typing `@Analyst` in the chat input area
 

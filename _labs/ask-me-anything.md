@@ -855,7 +855,7 @@ In this section, you'll learn how to upload files and run files through a prompt
 
 14. **Save** your prompt
 
-    !Copilot Studio AI prompt node "Meeting AI Notes" with GPT-4o model returning JSON meeting data](images/prompt.png)
+    ![Copilot Studio AI prompt node "Meeting AI Notes" with GPT-4o model returning JSON meeting data](images/prompt.png)
 
 14. **Save** the topic.
 

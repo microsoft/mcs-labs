@@ -179,7 +179,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
     This agent allows a user to lookup the definition of a word
     ```
 
-1. Select **Save**..
+1. Select **Save**.
 
 #### Create the Custom Connector
 
