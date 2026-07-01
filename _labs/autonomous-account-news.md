@@ -161,7 +161,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 1.  In the agent's **Overview** tab, scroll to the **Triggers** section.
 
-  > [!TIP]
+  > [!IMPORTANT]
   > The triggers section may not be immediately available as it depends on background processes started when the agent is created.  This should take no more than a minute to complete.
 
   1.  Select **Add trigger**, select **Recurrence**, and then select **Next**
@@ -215,7 +215,7 @@ Set up an autonomous agent with a recurring trigger that automatically activates
 
 1. Search for `List rows` and select the **List rows from selected environment** action (under **Microsoft Dataverse**, displayed as *List rows from a table in a Power Platform environment*).
 
-1. Choose an existing Dataverse connection or add a new one (select Oauth as authentication type).
+1. Select an existing Dataverse connection or add a new one (select OAuth as authentication type).
 
     > [!IMPORTANT]  
     > If you need to create the connection use OAuth and sign in with your workshop credentials. Your user requires permission to access Opportunity records, which is provided as part of the workshop.
@@ -671,7 +671,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 1. Select **Insert**.
 
-1. Save the **Conversation start** topic
+1. Save the **Conversation start** topic.
 
 1. Now that your agent has a preloaded HTML template, configure an Outlook email tool to deliver the report.
 
@@ -708,7 +708,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 
 1. Now that you've created the report template and configured the email tool, you'll guide the agent to use them as part of its orchestration.
 
-1. Go to your agent and go to the **Overview** tab.
+1. Go to your agent and select the **Overview** tab.
 
 1. In the **Instructions** section, add the following steps:
 
@@ -728,7 +728,7 @@ Automate the final step: format relevant news into a clean, branded email for ac
 1. **Save** your agent's instructions. The instructions should appear as follows:
     ![Instructions After Topics](images/final-instructions.png)
 
-1. Go to the **Triggers** section and Select **Test trigger** on the `Analyze Opportunities` trigger.
+1. Go to the **Triggers** section and select **Test trigger** on the `Analyze Opportunities` trigger.
 
 1. Once the agent finishes executing, verify:
    - It retrieved opportunities from the Sales App

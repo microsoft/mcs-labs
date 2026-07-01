@@ -68,11 +68,11 @@ Think of variables, child agents, and channels like organizing a company:
 
 ## Introduction
 
-Variables, child agents, and channels are the keys to building enterprise-grade agent solutions. Variables act as your agent's memory - storing user information and conversation context. Child agents enable modular architecture where specialized sub-agents handle specific domains. Channels determine where and how users interact with your agent - whether through Teams, web widgets, or custom applications.
+Variables, child agents, and channels are the keys to building enterprise-grade agent solutions. Variables act as your agent's memory - storing user information and conversation context. Child agents enable modular architecture where specialized sub-agents handle specific domains. The agents configured channels (such as Teams, web widgets, or custom applications) determine where and how users interact with your agent.
 
 **Real-world example:** An IT support agent collects a user's employee ID and department at the start of the conversation, storing them in variables for personalized responses throughout the interaction. When the user asks about password policies, the parent agent delegates to a specialized "Security Policies" child agent with deep authentication knowledge. The entire experience is available in Microsoft Teams (where employees chat daily), on the company intranet (for quick access), and through a mobile app (for field workers). Variables maintain context, child agents provide expertise, and channels ensure accessibility.
 
-This lab teaches you how to architect sophisticated agent solutions that scale with your organization's complexity - combining conversation memory, specialized intelligence, and strategic deployment.
+This lab teaches you how to architect sophisticated agent solutions that scale with your organization's complexity by combining conversation memory, specialized intelligence, and strategic deployment.
 
 ---
 
@@ -164,7 +164,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 #### Open the Mailing List Topic
 
-1. Navigate to [Copilot Studio](https://copilotstudio.microsoft.com).
+1. Go to [Copilot Studio](https://copilotstudio.microsoft.com).
 
    > [!NOTE]
    > **You can do this lab in the new experience.** You created the **Copilot Studio Assistant** in the previous lab using the *previous* experience, then switched the **New experience** toggle back on. That's the right place to be for this lab — your classic agent reopens with its full **Overview / Knowledge / Tools / Agents / Topics / Channels** canvas under the new experience, so Variables, child agents, and channel deployment all work here. If for any reason the agent doesn't show those tabs, confirm you opened the **Copilot Studio Assistant** classic agent from the previous lab (not a new-type agent).
@@ -196,7 +196,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 1. Select the variable name to open the variable properties panel.
 
-1. Review the variable configuration — do not change any values:
+1. Review the variable configuration, but do not change any values:
    - **Variable Name**: The variable identifier used in the topic
    - **Type**: Data type (Text, Number, Boolean, etc.)
    - **Usage**: Topic-level or Global
@@ -317,15 +317,15 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 #### Create a Child Agent
 
-1. In your Copilot Studio Assistant agent, Select  **Agents**  in the agent top navigation bar.
+1. In your Copilot Studio Assistant agent, select  **Agents**  in the agent top navigation bar.
 
-1. Select  **Add an agent**.
+1. Select  **+ Add** to Add an agent.
 
-1. In the **Create a child agent** section, Select **New child agent**.
+1. In the **Create a child agent** section, select **New child agent**.
 
 1. Enter  **CARE Prompt Guidance** in the **Name** field.
 
-1. Input the following for the **Description**
+1. Enter the following for the **Description**
 
     ```
     This agent provides information on the CARE Prompt guidance.
@@ -491,7 +491,7 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 #### Navigate to Channels
 
-1. In your Copilot Studio agent, select **Channels** in the top navigation bar.
+1. In your Copilot Studio Assistant agent, select **Channels** in the top navigation bar.
 
 1. Review the Channels overview page to see available channel options:
    - **Microsoft 365 and Microsoft Teams**: Native Teams + Microsoft 365 Copilot integration (this is the tile you'll deploy to later in this use case)
@@ -537,7 +537,7 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
     > [!NOTE]
     > This step pre-authenticates Teams in your browser. Without it, the later **See agent in Teams** step may fail or redirect you into a login flow that interrupts the lab.
 
-1. Before you can deploy to a channel, you must first publish your agent.  Select **Publish** from the top right corner of the screen.  Follow the prompts.
+1. Before you can deploy to a channel, you must first publish your agent. Select **Publish** from the top right corner of the screen.  Follow the prompts.
 1. Return to the Channels page and select **Microsoft 365 and Microsoft Teams**.
 
 1. Review the **Agent preview** section that shows how users will see your agent.
@@ -562,7 +562,7 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 1. Select **Availability options** and review what is available:
 
-1. After reviewing the options select the back arrow to return to the prior panel.
+1. After reviewing the options, select the back arrow to return to the prior panel.
 
 1. Select **See agent in Teams**, this will load a new browser tab with the Teams web application.
 

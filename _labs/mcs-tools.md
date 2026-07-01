@@ -1,4 +1,4 @@
----
+    ---
 layout: lab
 module: tools-overview
 title: "Copilot Studio Tools"
@@ -9,7 +9,7 @@ lab_type: local
 section: intermediate_labs
 journeys: ["business-user", "developer"]
 bootcamp_order: "7"
-description: "Learn how to extend your agents with powerful tools including connectors, agent flows, MCP servers, and custom prompts in Microsoft Copilot Studio."
+description: "Learn how to extend your agents with tools including connectors, agent flows, MCP servers, and custom prompts in Microsoft Copilot Studio."
 
 ---
 
@@ -114,7 +114,7 @@ This lab teaches you how to use each tool type through hands-on scenarios.
 In this lab, you'll extend agents with multiple tool types to address different integration scenarios. By the end of the lab, you will:
 
 - Use connectors to integrate external services with your agent
-- Build an agent flow with deterministic business logic for commission calculations
+- Configure a workflow for an agent with deterministic business logic for commission calculations
 - Connect a Dataverse MCP server for real-time natural language data access
 - Create custom prompts that structure agent responses with specific data fields
 - (Extra Credit) Configure a Computer Using Agent to automate a legacy system without API access
@@ -161,7 +161,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 #### Create the Dictionary Agent
 
-1. Go to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and make sure you are in your development environment.
+1. Go to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and confirm you are in your development environment.
 
 1. Select **Agents** on the left navigation.
 
@@ -171,7 +171,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Agents** in the left navigation, then select **Create blank agent**. In the **Name your agent** dialog, enter `Dictionary Agent` and select **Continue**.
 
-1. Once the agent is provisioned, confirm its name is `Dictionary Agent`. If you need to change it, select **Edit** in the **Details** section on **Overview**.
+1. After the agent is provisioned, confirm its name is `Dictionary Agent`. If you need to change it, select **Edit** in the **Details** section on **Overview**.
 
 1. Enter the following as the **Description:**
 
@@ -185,13 +185,13 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Tools** in the top navigation.
 
-1. Select **Add Tool**.
+1. Select **Add a tool**.
 
-1. Under **Create new**, Select **See all**.
+1. On the right top corner of the  **Create new** section, select **See all**.
 
 1. Select **Custom connector**.
 
-1. In the top navigation, Select **New custom connector**.
+1. In the top navigation, select **New custom connector**.
 
 1. Select **Create from blank**.
 
@@ -208,7 +208,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
     > [!NOTE]
     > This API doesn't require authentication, but this is where you would select the authentication type for APIs that do.
 
-1. Make sure the authentication type is set to **No authentication** and Select **Definition**.
+1. Confirm the authentication type is set to **No authentication** and select **Definition**.
 
 #### Define the API Action
 
@@ -221,12 +221,12 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
     Lookup a word in the dictionary
     ```
 
-    > [!TIP]
+    > [!NOTE]
     > The description will later be used as the tool description, which allows the orchestrator to know when to use this tool. Make sure you are descriptive here to allow the best conversation routing.
 
 1. In the **Operation ID** field, enter **WordLookup**
 
-1. Under **Request**, Select **Import from sample**.
+1. Under **Request**, select **Import from sample**.
 
 1. Select **Get** as the **Verb**.
 
@@ -238,7 +238,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Import**.
 
-1. Select the down arrow next to **word** and Select **Edit**.
+1. Select the down arrow next to **word** and select **Edit**.
 
 1. In the **Description** field, enter:
 
@@ -312,7 +312,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Import**.
 
-1. Update the following body items by selecting the down arrow on each and selecting **Edit**, change the data and then select **back**:
+1. Update the following body items by selecting the down arrow on each and selecting **Edit**, change the data and then select **Back**:
 
     - **origin**
     - **Title:** `origin`
@@ -331,7 +331,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 #### Add the Custom Connector as a Tool
 
-1. Go back to the browser tab with Copilot Studio.
+1. Return to the browser tab with Copilot Studio.
 
 1. Refresh the page.
 
@@ -352,12 +352,12 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. You should see the connection with a green check mark. Select **Add and configure**.
 
-1. Select **Additional details** and set **Credentials to use** to **Maker-provided credentials**.
+1. In the **Details** section, select **Additional details** and set **Credentials to use** to **Maker-provided credentials**.
 
     > [!TIP]
     > For unauthenticated APIs, it is best to use Maker-provided credentials so you don't require users to create a connection for anonymous connectors.
 
-1. In the **Inputs** section, Select **Customize** next to **word**.
+1. In the **Inputs** section, select **Additional details** below **word**.
 
 1. Notice that all your inputs have been populated from your connector definition - this is why it is important to provide detailed descriptions when building your connector.
 
@@ -422,11 +422,11 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 ## Use Case #2: Build Deterministic Logic with Agent Flows
 
-Build a Sales Commission Calculator using agent flows to implement deterministic business logic that always produces consistent, predictable results.
+Build a Sales Commission Calculator using workflows to implement deterministic business logic that always produces consistent, predictable results.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Build Deterministic Logic with Agent Flows | Implement business rules that always produce consistent, predictable results | 15 minutes |
+| Build Deterministic Logic with Workflows | Implement business rules that always produce consistent, predictable results | 15 minutes |
 
 **Summary of tasks**
 
@@ -467,7 +467,7 @@ Use a pre-created agent that calculates sales commissions with deterministic bus
 
 #### Test Your Commission Calculator
 
-1. Select **Test** in the upper right-hand corner of Copilot Studio.
+1. If the **Test your agent** panel is not showing , select **Test** in the upper right-hand corner of Copilot Studio to show it.
 
 1. Type the following in the test pane:
 
@@ -501,7 +501,7 @@ Use a pre-created agent that calculates sales commissions with deterministic bus
     - Product Mix Bonus: $3,000.00 (Strategic products >= 30%)
     - **Total Commission: $84,000.00**
 
-1. Reset the conversation and test with a different scenario:
+1. Reset the conversation by selecting **New test session** at the top of the panel, and test with a different scenario:
 
     ```
     Calculate my commission
@@ -606,7 +606,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 1. Scroll down in the **Overview** tab to the **Suggested prompts** section and select **Add suggested prompts**.
 
-1. Add the following prompts, then Select **Save**:
+1. Add the following prompts, then select **Save**:
    - **Title:** Account Search | **Prompt:** `List all accounts in Redmond`
    - **Title:** Contact Search | **Prompt:** `List all contacts from Coho Winery`
 
@@ -781,7 +781,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. Select the down arrow next to **GPT-4.1 mini** to see the list of available model options.
 
-1. Select a different model and Select **Test** again.
+1. Select a different model and select **Test** again.
 
 1. Notice how the response style changes depending on the model selected.
 
@@ -804,7 +804,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. In the **Inputs** section, change the **Query** input's **Fill Using** setting to **Custom value**.
 
-1. In the **Value** field, Select the **...** button, then Select **System** and select **Activity.Text**.
+1. In the **Value** field, Select the **...** button, then select **System** and select **Activity.Text**.
 
     > [!TIP]
     > System.Activity.Text stores the last thing the user said to the agent. This automatically passes the user's message into your custom prompt.
@@ -971,7 +971,7 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
     If no portfolio data is found, reply that you couldn't find a portfolio with the specified ID.
     ```
 
-1. Keep **Use hosted browser** enabled to create a connection to the hosted browser.
+1. Select **Add and configure**.
 
 1. Update the **Name** of the Computer use tool to `Look up portfolio data`.
 
@@ -990,7 +990,7 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 #### Test the Computer Use Tool
 
-1. In the **Instructions** section, select the **Test** button on the right.
+1. In the **Instructions** section, select the **Test Directly** button on the right.
 
 1. Add the sample value `44123BCD` and select **Test now**.
 
@@ -1112,6 +1112,6 @@ To maximize the impact of tools in Copilot Studio:
 * Test with realistic data and edge cases before deploying
 * Structure agent responses with custom prompts when consistency matters for business decisions
 
-By following these principles, you'll build agents that go beyond conversation - they take action, access live data, execute business logic, and integrate with the systems your organization relies on.
+By following these principles, you'll build agents that go beyond conversation and take action, access live data, execute business logic, and integrate with the systems your organization relies on.
 
 ---

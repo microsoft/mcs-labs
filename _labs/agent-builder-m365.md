@@ -183,7 +183,7 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 >
 >   ![alt text](images/correct-copilot-page.png)
 >
-> - Make sure the **logged in user** is the fictitious one used in the lab. If you need your normal work user account, **select** the name and toggle to the fictitious user account.
+> - Make sure the **logged in user** is the fictitious one used in the lab. If you see your normal work user account, **select** the name and toggle to the fictitious user account.
 >
 >   ![alt text](images/logged-in-user.png)
 
@@ -245,7 +245,7 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
 #### Create your learning assistant agent
 
-6. On the left side navigation pane, select **Agents** to open the **Agent Store**, then select **Create agent** (or the **New agent** card)
+6. On the left side navigation pane, select **New agent**.
 
 
 7. Notice that you can explore existing available templates. For this lab, paste the following into the **Describe the agent you want to create** input area at the top of the form (the describe textbox is the primary input — there is no separate tab to select), and then select Send.
@@ -297,9 +297,9 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
 13. Fix any issue like max character limit for starter prompt titles.
 
-14. You can test your agent in the test pane. When ready, select **Create** in the upper right corner to finish creating your agent.
+14. You can test your agent in the **Preview** pane. When ready, select **Create** in the upper right corner to finish creating your agent.
 
-![Agent Builder test pane](images/agent-builder.png)
+![Agent Builder Preview pane](images/agent-builder.png)
 
 #### Share and test your agent
 
@@ -408,7 +408,7 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 5. Return to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
-6. On the left side pane, select **Agents** to open the **Agent Store**, then select **Create agent** (or the **New agent** card).
+6. On the left side pane, select **New agent**.
 
 7. In the **Describe the agent you want to create** textbox at the top of the new agent page, paste the following prompt and press Send (or Enter). The describe textbox is the primary input — there is no separate tab to select.
 

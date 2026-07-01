@@ -1,7 +1,7 @@
 ---
 module: ask-me-anything
 title: "Create an 'Ask me anything' agent for your employees"
-description: "Empower employees with answers that matter – Build an intelligent agent that connects to your knowledge and data."
+description: "Build an agent that answers employee questions using your organization's knowledge and data."
 order: 13
 duration: 40
 difficulty: 200
@@ -159,7 +159,7 @@ Create a new agent with SharePoint knowledge integration that provides grounded,
 
 ### Step-by-step instructions
 
-1. Navigate to the Copilot Studio home page at [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com/)
+1. Go to the Copilot Studio home page at [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com/)
 
 2. Go to the Solutions menu (located in the left-hand menu under the ellipsis …)
 
@@ -175,14 +175,14 @@ Create a new agent with SharePoint knowledge integration that provides grounded,
 
 8. Go to **Knowledge**
 
-    ![alt text](images/knowledge-sharepoint.png)
+    ![Copilot Studio "Add knowledge" dialog with SharePoint option highlighted](images/knowledge-sharepoint.png)
 
 9. Select **SharePoint**, and paste the SharePoint Knowledge URL and select **Add**.
 
     > [!IMPORTANT]
     >  * For configuration, use the provided values in the **Lab Resources** (specific per training).
 
-10. Choose **Add**  
+10. Select **Add**
 
     > [!TIP]
     > - If an error appears after adding the SharePoint URL, click "Browse items" and then "Confirm selection".
@@ -291,7 +291,7 @@ Make the agent available in Microsoft 365 Copilot for your users.
 
 8. Select **See agent in Microsoft 365** 
 
-   ![alt text](images/m365-copilot-channel.png)
+   ![Copilot Studio agent published to Teams and Microsoft 365 Copilot channel successfully](images/m365-copilot-channel.png)
 
 9. In the **Microsoft 365 Copilot** experience, the agent description will pop up. Select **Add**
 
@@ -355,17 +355,17 @@ Let's start by asking for the user country at the beginning of the conversation.
 
 <!-- replacing with instrucftions on how to do this on message received, so it works in M365 channel too
 
-2. Now, in your 'Ask Me Anything' agent, go to the **Topics** tab, and then to the **System topics** tab.
+2. In your 'Ask Me Anything' agent, go to the **Topics** tab, and then to the **System topics** tab.
 
 3. Open the **Conversation Start** topic
 
 4. At the beginning of the topic, right after the **Trigger**, add a new node **(+)** and choose **Add a tool**.
 
-5. Go the **Connector** tab, and search for `Microsoft Entra ID Get user`
+5. Go to the **Connector** tab, and search for `Microsoft Entra ID Get user`
 
 6. Select the **Get user** connector action and **Submit**.
 
-    ![alt text](images/add-tool-connector.png)
+    ![Get user Microsoft Entra ID connector tool in Copilot Studio flow editor](images/add-tool-connector.png)
 
     > [!IMPORTANT]
     > - If you don't see the **Get user** action, select another of the Microsoft Entra ID actions, such as **Create user**  and **Submit**.
@@ -378,9 +378,9 @@ Let's start by asking for the user country at the beginning of the conversation.
 
 8. Toggle the **End user authentication** to **Agent author authentication**.
 
-9. In the **Inputs** tab, for **User Id or Principal Name**, select `...`, go the the **System** tab, and select **User.Id**.
+9. In the **Inputs** tab, for **User Id or Principal Name**, select `...`, go to the **System** tab, and select **User.Id**.
 
-    ![alt text](images/select-user-id.png)
+    ![Microsoft Copilot Studio Get user action with User.Id system variable selected as input](images/select-user-id.png)
 
 10. **Save**
 
@@ -392,7 +392,7 @@ Let's start by asking for the user country at the beginning of the conversation.
 
 4. At the beginning of the topic, right after the **Trigger**, add a new node **(+)** and choose **Add a tool**.
 
-5. Go the **Connector** tab, and search for `Microsoft Entra ID Get user`
+5. Go to the **Connector** tab, and search for `Microsoft Entra ID Get user`
 
 6. Select the **Get user** connector action and **Submit**.
 
@@ -402,7 +402,7 @@ Let's start by asking for the user country at the beginning of the conversation.
 
 8. Toggle the **End user authentication** to **Maker-provided credentials**.
 
-9. In the **Inputs** tab, for **User Id or Principal Name**, select `...`, go the the **System** tab, and select **User.Id**.
+9. In the **Inputs** tab, for **User Id or Principal Name**, select `...`, go to the **System** tab, and select **User.Id**.
 
     ![alt text](images/select-user-id.png)
 
@@ -414,9 +414,9 @@ Let's start by asking for the user country at the beginning of the conversation.
     Hello!
     ```
 
-15. Navigate to the **Topics** tab, open the **Conversation Starts** topic, and to see what values are returned from the connector, enter the **Variables** pane in the topic command bar. Go the **Test** to see the variable values at runtime (i.e., as you are testing in the conversation test pane).
+15. Go to the **Topics** tab, open the **Conversation Starts** topic, and to see what values are returned from the connector, enter the **Variables** pane in the topic command bar. Go the **Test** to see the variable values at runtime (i.e., as you are testing in the conversation test pane).
   
-    ![alt text](images/variables-pane.png)
+    ![Variables panel open with Test tab selected, showing Topic variable GetUser of type record](images/variables-pane.png)
 
 16. Select **Value** under the **GetUser** record, and **expand** it to see if the expected value was returned.
 
@@ -468,7 +468,7 @@ Let's start by asking for the user country at the beginning of the conversation.
     > - Use the formula provided in the **Lab Resources** (specific per training).
     > - Notice how the formula concatenates the SharePoint URL with the office location, effectively using context to target the correct source and location for the content.
 
-    ![alt text](images/sharepoint-formulas.png)
+    ![Copilot Studio topic editor configuring SharePoint data source with a dynamic formula using office location variable](images/sharepoint-formulas.png)
 
 27. Select **Insert** once done, then **Save** your topic
 
@@ -496,7 +496,7 @@ Let's start by asking for the user country at the beginning of the conversation.
 
 32. We need to set the variable value in-between the parenthesis. **Type** `/` and select **Power Fx**.
 
-    ![alt text](images/instructions-formula.png)
+    ![Power Fx option highlighted in Instructions panel dropdown menu](images/instructions-formula.png)
 
 33. **Type** `Global.GetUser.officeLocation` and select **Insert**
 
@@ -554,7 +554,7 @@ This use case demonstrates **agent scoping** principles:
 
 2. Go to the **Agents** tab, and **+ Add an agent**
 
-    ![alt text](images/add-agent.png)
+    ![Choose how to extend your agent dialog with 'Create an agent' option selected](images/add-agent.png)
 
 3. Update 
     - Its **Name** to: `IT Support Agent`
@@ -575,7 +575,7 @@ This use case demonstrates **agent scoping** principles:
 
 5. Select **ServiceNow**
 
-6. Choose the **ServiceNow** connection under **Your connections**, and **Next**
+6. Select the **ServiceNow** connection under **Your connections**, and **Next**
    
 8. Select **Knowledge** as the knowledge source.
 
@@ -603,9 +603,9 @@ This use case demonstrates **agent scoping** principles:
     > [!IMPORTANT]
     > In production scenarios, you may want to use the user context when making the connection to ServiceNow. Here, your context (as the author) is used by end-users of your agent when searching for incidents.
 
-8. For **Record Type**, under **Fill using**, choose **Custom value** and choose `Incident`
+8. For **Record Type**, under **Fill using**, select **Custom value** and select `Incident`
 
-9. Select **+ Add input** and choose **Query**
+9. Select **+ Add input** and select **Query**
 
 10. Next to **Dynamically fill with AI**, select **Customize** and use this for **Description**:
 
@@ -619,7 +619,7 @@ This use case demonstrates **agent scoping** principles:
 
 11. Select **+ Add input** and choose **Limit**
 
-12. Under **Fill using**, choose **Custom value** and  set **1**
+12. Under **Fill using**, select **Custom value** and  set **1**
 
 13. Select **Save**
 
@@ -639,7 +639,7 @@ This use case demonstrates **agent scoping** principles:
     > - Creates user-friendly responses with proper formatting
     > - Combines ServiceNow data with other knowledge sources when needed
 
-    ![alt text](images/multi-agent-servicenow.png)
+    ![Copilot Studio activity map showing IT Support Agent handling USB troubleshooting and ServiceNow ticket query](images/multi-agent-servicenow.png)
 
 29. **Observe** how your agent now demonstrates scoped capabilities:
     - **Tool Selection**: Automatically chooses the right ServiceNow tool based on user intent
@@ -703,7 +703,7 @@ In this section, you'll configure any third-party knowledge to enrich knowledge 
 
 5. Add a new node > **Advanced**, **Send HTTP request**
 
-6. For **URL**, select `...`, go the **Environment** tab, and choose the **Custom Knowledge Endpoint**  variable you had created.
+6. For **URL**, select `...`, go the **Environment** tab, and select the **Custom Knowledge Endpoint**  variable you had created.
 
 7. **Method**: `Post`
 
@@ -734,7 +734,7 @@ In this section, you'll configure any third-party knowledge to enrich knowledge 
 
 13. Under **Save response as**, select **Create a new variable**, select the variable name that was created (e.g., **Var1**) and rename it `KnowledgeResults`.
 
-    ![alt text](images/http-request.png)
+    ![HTTP Request action configured with POST method, JSON body using System.Activity.Text, saving results as KnowledgeResults table](images/http-request.png)
 
 14. Add a new node, **Variable management** > **Set a variable value**
 
@@ -768,7 +768,7 @@ In this section, you'll configure any third-party knowledge to enrich knowledge 
 > Notice how the knowledge step returned results that contain citations to a fictitious knowledge base.
 
 
-  ![alt text](images/custom-knowledge-source.png)
+  ![Knowledge node response showing vendor update steps with 3 referenced sources highlighted](images/custom-knowledge-source.png)
 
 ---
 
@@ -855,7 +855,7 @@ In this section, you'll learn how to upload files and run files through a prompt
 
 14. **Save** your prompt
 
-    ![alt text](images/prompt.png)
+    ![Copilot Studio AI prompt node "Meeting AI Notes" with GPT-4o model returning JSON meeting data](images/prompt.png)
 
 14. **Save** the topic.
 

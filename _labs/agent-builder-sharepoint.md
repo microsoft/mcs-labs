@@ -124,17 +124,15 @@ Build a specialized agent with SharePoint integration and advanced AI capabiliti
 
 1. Navigate to [Microsoft 365 Copilot Chat](https://m365.cloud.microsoft/chat/?auth=2&home=1) and go to the **Chat** tab.
 
-2. On the side pane, expand **Agents** and select **Create agent**.
+2. On the side pane select **New agent**.
 
-3. When prompted to **describe the agent**, use this specific prompt:
+3. In the **describe the agent** chat, use this specific prompt:
 
     ```
     You are a Sales Admin Assistant. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
     ```
 
-4. **Confirm** the suggested agent name when prompted.
-
-5. Go to the **Configure** tab
+4. Go to the **Configure** tab.
 
 <!--
     ![alt text](images/knowledge-files.png)
@@ -146,12 +144,12 @@ Commented out; screenshots need update due to CPS updates.  Last minute change t
 -->
 
 6. Under **capabilities**, enable:
-   - **Code interpreter** (for data analysis and chart generation)
-   - **Image generator** (for creating visual content)
+   - **Create documents, charts, and code** (for data analysis and chart generation)
+   - **Create images** (for creating visual content)
 
 #### Finalize configuration
 
-6. Navigate to the **Configure** tab to review and refine:
+6. Review and refine the following:
    - Agent name and description
    - Instructions
    - Starter prompts
@@ -228,9 +226,7 @@ Design a professional badge for the first place winner of our 2026 sales contest
 
 8. Select **...** next to your agent name in the side bar navigation, and choose **Edit**
 
-9. Select the Sales agent you created
-
-10. In the **Configure** tab, explore additional **knowledge** capabilities:
+9. In the **Configure** tab, explore additional **knowledge** capabilities:
    - All **Websites** (or specific websites)
    - All **SharePoint** data (or specific files or sites)
    - All **Teams** data (or data from specific group chats, meetings, or channels)

@@ -1,7 +1,7 @@
 ---
 module: setup-for-success
 title: "Set yourself up for success & discover ALM best practices"
-description: "Build agents with confidence. Deploy with control. Master the lifecycle of your Microsoft Copilot Studio agents with best practices."
+description: "Build agents with confidence. Deploy with control. Manage the lifecycle of your Microsoft Copilot Studio agents with best practices."
 order: 11
 duration: 35
 difficulty: 200
@@ -108,7 +108,7 @@ With the ALM practices in this lab, you'll avoid these pitfalls and set yourself
 
 ## Summary of Targets
 
-In this lab, you'll configure your ALM foundation for working with Microsoft Copilot Studio like a pro. By the end of the lab, you will:
+In this lab, you'll configure your ALM foundation for working with Microsoft Copilot Studio. By the end of the lab, you will:
 
 * Create and configure a structured solution for your customizations.
 * Set up a custom publisher to track ownership and maintain ALM hygiene.
@@ -151,9 +151,9 @@ Set up your development environment by creating a solution and custom publisher 
 
 #### Open the Solutions area
 
-1. Go to the [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com/).
+1. Go to the [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com/)
 
-2. Confirm you are in the correct environment (top-right corner).
+2. Make sure you are in the correct environment (top-right corner).
 
 #### Create a solution
 
@@ -172,7 +172,7 @@ Set up your development environment by creating a solution and custom publisher 
 
 #### Create a publisher
 
-6. If this is your first solution, click **+ New publisher** to create one.
+6. If this is your first solution, select **+ New publisher** to create one.
 
 > [!TIP]
 >  * You may use your organization’s name.
@@ -184,8 +184,8 @@ Set up your development environment by creating a solution and custom publisher 
 
 #### Set and create
 
-7. Check **Set as your preferred solution** (so any new component goes into it by default).
-8. Click **Create**.
+7. Select **Set as your preferred solution** (so any new component goes into it by default).
+8. Select **Create**.
 
 ---
 
@@ -231,7 +231,7 @@ In this section, you'll learn how to create environment variables and connection
 
 ### Step-by-step instructions
 
-1. Open the solution you created in Use Case #1.
+1. Open the solution you created in the previous use case.
 
 2. Select **+ New**, then go to **More** and choose **Environment variable**.
 
@@ -249,7 +249,7 @@ In this section, you'll learn how to create environment variables and connection
     > [!TIP]
     >  * Notice how, under **Advanced**, you can set whether the current value can follow through with your solution deployment, or if it should be reset each time the solution is deployed to a new environment
 
-6. Click **Save**.
+6. Select **Save**.
 
     > [!TIP]
     >  * Environment variables can also be of type **Secret** to retrieve secure values like API keys from Azure Key Vault at runtime.
@@ -263,7 +263,7 @@ In this section, you'll learn how to create environment variables and connection
 
 9. Select the connector **ServiceNow**.
 
-10. In the connection dropdown, choose **New connection** if none exists.
+10. In the connection dropdown, select **New connection** if none exists.
 
 11. Log in through Power Apps in a new tab if needed, then return to Copilot Studio.
 
@@ -271,7 +271,7 @@ In this section, you'll learn how to create environment variables and connection
     >  * For **ServiceNow** configuration values, use the provided values in the **Lab Resources** (specific per training).
     >  * For **ServiceNow**'s `Instance` configuration, be sure to scroll down in the connection screen.
 
-12. Above the **Connection** dropdown, select **Refresh** and choose the newly created connection.
+12. Above the **Connection** dropdown, select **Refresh** and select the newly created connection.
 
 > [!TIP]
 >  * If the **Create** button is grayed out, it's just because you pasted the display name. Type an extra character in the display name field and remove it to be able to create. 
