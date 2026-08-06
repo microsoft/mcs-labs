@@ -599,7 +599,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
     This agent will:
     Read accounts and contact information from the Account and Contact Tables in Dataverse using the Dataverse MCP Server.
     Update accounts and contact information from the Account and Contact Tables in Dataverse using the Dataverse MCP Server.
-    Create new accounts and contact information in the Account and Opportunity Tables in Dataverse using the Dataverse MCP Server.
+    Create new accounts and contact information in the Account and Contact Tables in Dataverse using the Dataverse MCP Server.
     Do not use outside knowledge. Only use the Dataverse MCP Tool to create, read, update and delete.
     ```
 1. Select **Save**
