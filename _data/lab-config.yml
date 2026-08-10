@@ -61,13 +61,6 @@ lab_metadata:
     module: standard-harness
     section: core
     title: Standard Harness - Component Model
-  145:
-    difficulty: Intermediate
-    duration: 25
-    id: child-agents-and-channels
-    module: standard-harness
-    section: optional
-    title: Child Agents and Channels
   150:
     difficulty: Intermediate
     duration: 70
@@ -257,7 +250,6 @@ lab_journeys:
   cowork-hands-on: [quick-start, business-user]
   copilot-harness-agent-builder: [quick-start, business-user]
   standard-harness-component-model: [business-user, developer]
-  child-agents-and-channels: [business-user, developer]
   agent-builder-sharepoint: [business-user, developer]
   agent-builder-web: [quick-start, business-user]
   ask-me-anything: [business-user, developer]
@@ -294,7 +286,6 @@ legacy_lab_orders:
   cowork-hands-on: 115
   copilot-harness-agent-builder: 125
   standard-harness-component-model: 135
-  child-agents-and-channels: 145
   agent-builder-sharepoint: 210
   agent-builder-web: 100
   ask-me-anything: 220

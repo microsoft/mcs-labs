@@ -309,11 +309,6 @@ schedule:
     title: "Continue on your own — optional labs"
 
   - type: link
-    title: "Child Agents and Channels — extends M6"
-    url: "/mcs-labs/labs/child-agents-and-channels/"
-    description: "Delegate to child agents and publish to Teams and the web. 25 min."
-
-  - type: link
     title: "Multi-Agent — extends M13"
     url: "/mcs-labs/labs/mcs-multi-agent/"
     description: "Build a main agent with child agents for product and account information. 30 min."

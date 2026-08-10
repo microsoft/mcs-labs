@@ -27,6 +27,8 @@ Build an agent in the Standard harness from its component parts — topics, know
   - [Use Case #3: Enhance Agent Intelligence with Knowledge Sources](#-use-case-3-enhance-agent-intelligence-with-knowledge-sources)
   - [Use Case #4: Extend Your Agent with Tools](#-use-case-4-extend-your-agent-with-tools)
   - [Use Case #5: Work with Variables](#-use-case-5-work-with-variables)
+  - [Extra Credit: Create and Orchestrate Child Agents](#-extra-credit-create-and-orchestrate-child-agents)
+  - [Extra Credit: Deploy Your Agent Across Channels](#-extra-credit-deploy-your-agent-across-channels)
 
 ---
 
@@ -100,6 +102,8 @@ In this lab you'll assemble the Standard harness component model one piece at a 
 | 3 | [Enhance Agent Intelligence with Knowledge Sources](#-use-case-3-enhance-agent-intelligence-with-knowledge-sources) | Ground responses in your own content so answers are sourced and citable | 10 min |
 | 4 | [Extend Your Agent with Tools](#-use-case-4-extend-your-agent-with-tools) | Give the agent the ability to act on external systems | 10 min |
 | 5 | [Work with Variables](#-use-case-5-work-with-variables) | Carry state across turns and pass it between components | 5 min |
+| EC | [Extra Credit: Create and Orchestrate Child Agents](#-extra-credit-create-and-orchestrate-child-agents) | Delegate scoped work to specialists rather than growing one agent indefinitely (Optional) | ~13 min |
+| EC | [Extra Credit: Deploy Your Agent Across Channels](#-extra-credit-deploy-your-agent-across-channels) | Make the agent reachable on the surfaces your users already use (Optional) | ~12 min |
 
 > **Note on pacing:** tools get a full 60-minute treatment later in the bootcamp in *Deep Dive: Knowledge & Tools*. Use Case #4 here is deliberately the component-level view — enough to place tools in the model, not the deep dive.
 
@@ -841,6 +845,316 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 ---
 
+## 🧩 Extra Credit: Create and Orchestrate Child Agents
+
+> [!NOTE]
+> **Optional - Extra Credit (~13 minutes):** This use case is optional and not included in the 45-minute lab time. Complete it if you have additional time or want to see how a main agent delegates to specialists.
+
+Build specialized child agents with focused knowledge and instructions to create modular, scalable agent architectures.
+
+| Use case | Value added | Estimated effort |
+|----------|-------------|------------------|
+| Create and Orchestrate Child Agents | Build specialized sub-agents with focused expertise to create modular, scalable solutions | 13 minutes |
+
+**Summary of tasks**
+
+In this section, you'll learn how to create child agents, configure their specialized knowledge and instructions, set up orchestration rules in the parent agent, and test multi-agent interactions.
+
+**Scenario:** Your Copilot Studio Assistant needs specialized expertise in prompt engineering frameworks. Instead of overloading the main agent with all knowledge, you'll create a child agent called "CARE Prompt Guidance" that specializes in the CARE framework for prompt writing. This child agent will be automatically invoked when users ask about general prompt guidance.
+
+### Objective
+
+Create a specialized child agent and configure the parent agent to orchestrate conversations appropriately.
+
+---
+
+### Step-by-step instructions
+
+#### Create a Child Agent
+
+1. In your Copilot Studio Assistant agent, Select  **Agents**  in the agent top navigation bar.
+
+1. Select  **Add an agent**.
+
+1. In the **Create a child agent** section, Select **New child agent**.
+
+1. Enter  **CARE Prompt Guidance** in the **Name** field.
+
+1. Input the following for the **Description**
+    ```
+    This agent provides information on the CARE Prompt guidance.
+    ```
+
+    > [!NOTE]
+    > The description helps the parent agent understand when to route conversations to this child agent. Be specific and clear.
+
+1. Select  **Save** to initialize the child agent.
+
+#### Configure Child Agent Instructions
+
+1. Once save of the child agent has completed, input the following into the **Instructions** section.
+    ```
+    This agent should help users with understanding information about the prompt guidance framework and how they can leverage it to make their agents better.
+    ```
+
+    > [!TIP]
+    > Child agent instructions should be focused and specific to their domain of expertise. Avoid generic instructions - be precise about what this agent knows and does.
+
+1. Select  **Save** to apply the instruction changes to the agent.
+
+#### Add Knowledge Sources to Child Agent
+
+1. In the child agent, scroll down to the **Knowledge** section or select **Knowledge** in the child agent left navigation. 
+
+1. Select  **+ Add knowledge** to add a knowledge source.
+
+1. Select **Upload files** as the knowledge source type.
+
+1. Download the [CAREful Prompts Printable Guide (PDF)](https://media.nngroup.com/media/articles/attachments/CAREful_Prompts_-_Printable-2.pdf) and upload it to the child agent as a knowledge source.
+
+    > [!IMPORTANT]
+    > Child agents can have their own dedicated knowledge sources. This keeps knowledge organized and prevents one agent from being overloaded with unrelated content.
+
+1. Wait for the knowledge source to be indexed.
+
+1. Select  **Save** to finalize the child agent configuration.
+
+#### Configure Parent Agent Orchestration
+
+1. Go to your **parent agent** (the main Copilot Studio Assistant) by selecting **Overview** in the top navigation bar.
+
+1. In the parent agent's **Instructions** field on the Overview page, select **Edit** in the upper right corner of the **Instructions** section.
+
+1. Add the following orchestration instructions just before the # General Guidlines paragraph of the instructions. Notice the `(replace this text)` placeholder — you'll replace it with a direct reference to the child agent in the next step.
+
+    ```
+    # Prompt Guidance
+    Use (replace this text) when asked to provide just general guidance around prompt building. Never use it when asked to analyze a prompt.
+    ```
+
+1. Select the **`(replace this text)`** placeholder in the paragraph you just added, then type `/` to open the dropdown menu. This lists your agent's available tools, topics, child agents, knowledge sources, and more. Select **CARE Prompt Guidance** from the list to create a direct reference to the child agent, replacing the placeholder text.
+
+    > [!TIP]
+    > Using `/` references in your agent instructions creates explicit links to specific items in your agent configuration. This ensures the agent knows exactly which tool, topic, or child agent you're referring to — rather than relying on plain text name matching.
+
+    > [!IMPORTANT]
+    > Orchestration instructions are critical for proper agent routing. Be explicit about WHEN to use each child agent and WHEN NOT to use them. This prevents confusion and ensures the right agent handles each request.
+
+1. Select **Save** to apply the orchestration instructions.
+
+#### Review Agent Relationships
+
+1. In the parent agent, select **Agents** in the top navigation bar for the parent agent.
+
+1. Verify that the **CARE Prompt Guidance** child agent appears in the list of available agents.
+
+1. Check that the child agent is **Enabled** (toggle should be on).
+
+    > [!NOTE]
+    > Disabled child agents won't be invoked by the parent agent. Always verify child agents are enabled after creation.
+
+#### Test the Child Agent
+
+1. In the parent agent's test panel, start a new conversation.
+
+1. Ask a question that should trigger the child agent:
+
+    ```
+    How does the CARE prompt guidance help write prompts?
+    ```
+
+1. Observe the agent's response. It should:
+    - Recognize that this is a general prompt guidance question
+    - Route the conversation to the "CARE Prompt Guidance" child agent
+    - Provide an answer grounded in the CARE framework knowledge
+
+1. Look for indicators in the test panel showing which agent responded (some interfaces show "Responded by: CARE Prompt Guidance" or similar).
+
+#### Test Orchestration Logic
+
+1. Now test the orchestration instructions by asking a question that should NOT use the child agent:
+
+    ```
+    Analyze this prompt for improvements: Write a summary of the quarterly report.
+    ```
+
+1. Verify that the parent agent uses the Prompt Analyzer tool (from the previous lab) instead of routing to the child agent.
+
+    > [!TIP]
+    > This demonstrates proper orchestration - the parent agent understands the difference between "general prompt guidance" (child agent) and "analyze a specific prompt" (tool).
+
+#### Explore Child Agent Capabilities
+
+1. Ask several different questions to test the child agent's knowledge:
+    - "What is the CARE framework?"
+    - "How do I write better prompts?"
+    - "Use the CARE framework to improve this weak prompt: 'write me something about sales'."
+
+1. Verify that the child agent consistently provides accurate answers from its knowledge source.
+
+1. Return to the child agent's configuration and review how you could:
+    - Add more knowledge sources
+    - Refine instructions for better responses
+    - Create additional child agents for other domains
+
+---
+
+### 🏅 Congratulations! You've completed Use Case 2!
+
+---
+
+### Test your understanding
+
+* When should you create a child agent vs. adding more knowledge to the parent agent?
+* How do orchestration instructions help the parent agent make routing decisions?
+* What happens if orchestration instructions are ambiguous or missing?
+
+**Challenge: Apply this to your own use case**
+
+* What specialized domains in your organization would benefit from dedicated child agents?
+* How would you organize knowledge across parent and child agents for optimal performance?
+* What orchestration rules would you write to ensure proper routing in a multi-agent system?
+
+---
+
+---
+
+---
+
+---
+
+## 🚀 Extra Credit: Deploy Your Agent Across Channels
+
+> [!NOTE]
+> **Optional - Extra Credit (~12 minutes):** This use case is optional and not included in the 45-minute lab time. Complete it if you have additional time or want to publish your agent where users actually work.
+
+Learn how to configure and deploy your agent to channels, understand channel-specific settings, and implement appropriate security controls.
+
+| Use case | Value added | Estimated effort |
+|----------|-------------|------------------|
+| Deploy Your Agent To Channels | Make your agent accessible via Teams and Microsoft 365 Copilot  | 12 minutes |
+
+**Summary of tasks**
+
+In this section, you'll learn how to navigate the Channels interface, configure your agent to deploy to Microsoft Teams and Microsoft 365 Copilot, and understand channel capabilities and limitations.
+
+**Scenario:** Your Copilot Studio Assistant is ready for users. You need to make it available for your company's users for easy access in Microsoft Teams and Microsoft 365 Copilot where most employees spend their day. 
+
+### Objective
+
+Deploy your agent to Teams and Microsoft 365 Copilot channels with proper configuration and security.
+
+---
+
+### Step-by-step instructions
+
+#### Navigate to Channels
+
+1. In your Copilot Studio agent, select **Channels** in the top navigation bar.
+
+1. Review the Channels overview page to see available channel options:
+   - **Microsoft Teams**: Native Teams integration
+   - **Demo website**: Test website for quick agent testing
+   - **Custom website**: Embeddable web widget for your sites
+   - **Mobile app**: iOS and Android integration
+   - **Custom channel**: Direct Line API for custom applications
+   - Additional channels may include Facebook, Slack, etc.
+
+    > [!NOTE]
+    > Available channels depend on your Copilot Studio license and environment settings. Some channels require additional configuration or premium licenses.
+
+
+#### Explore Channel Capabilities
+
+1. Review the description and capabilities of each channel type:
+   - **Teams**: Full authentication, rich adaptive cards, deep Microsoft 365 integration
+   - **Web**: Customizable appearance, flexible security, easy embedding
+   - **Mobile**: Native app experience with push notifications
+   - **Custom**: Full API control for advanced integrations
+
+    > [!TIP]
+    > Choose channels based on where your users already work. Don't force users to adopt new tools - bring the agent to their existing environment.
+
+1. Consider the limitations of each channel:
+   - Some features (like certain adaptive cards) may not work on all channels
+   - Authentication requirements vary by channel
+   - Customization options differ across channels
+
+#### Deploy to Microsoft Teams and Microsoft 365 Copilot
+
+1. Before you can deploy to a channel, you must first publish your agent.  Select **Publish** from the top right corner of the screen.  Follow the prompts.
+1. Return to the Channels page and select **Teams and Microsoft 365 Copilot**.
+
+1. Review the **Agent preview** section that shows how users will see your agent.
+    - **App name**: How the agent appears in Teams
+    - **App icon**: Visual branding in Teams
+    - **Availability**: Who can access the agent
+
+1. Select **Add channel** in the bottom right corner of the panel to start activation of this channel.
+
+1. Select **Edit details** and make adjustments. For example, change the short description to something like **Assist users building agents**
+
+1. Select **Save** to save your changes.
+
+1. Select **Publish** to publish your agent and make it available.
+
+1. Select **Turn on Teams** or **Enable** to activate the Teams channel.
+
+1. Select **Availability options** and review what is available:
+
+1. After reviewing the options select the back arrow to return to the prior panel.
+
+1. Select **See agent in Teams**, this will load a new browser tab with the Teams web application.
+
+1. If prompted to **Open Microsoft Teams?**, select **Cancel** and after the dialog closes select the **Use the web app instead**
+
+1. If this is your first visit to Teams, you may be prompted with some other dialogs, after you dismiss them you may have to go back to Copilot Studio and re-select **See agent in Teams**
+
+1. You should now see a dialog presenting your agent for you to review before you add it to your Teams session. After reviewing the details, select **Add**
+
+1. You should next see a **Added successfully** message select **Open** to use your agent.
+
+1. Once your agent loads, ask it a question like **How do I build a good prompt?**
+
+1. Compare the experience between Teams and the web demo site:
+    - Notice how the UI differs
+    - Test the same questions on the channel
+
+    > [!TIP]
+    > Always test your agent on each deployed channel. Some features or formatting may work differently across channels.
+
+---
+
+### 🏅 Congratulations! You've completed Use Case 3!
+
+---
+
+### Test your understanding
+
+**Key takeaways:**
+
+* **Channels Enable Access** – Deploy to channels where your users already work to maximize adoption and minimize friction
+* **Security Settings Matter** – Always configure appropriate authentication and domain restrictions to protect data and ensure compliance
+* **Channel Capabilities Vary** – Test thoroughly on each channel and design agents that work within the limitations of your target platforms
+* **Demo Sites Accelerate Feedback** – Use demo websites for quick testing and stakeholder review before full production deployment
+
+**Lessons learned & troubleshooting tips:**
+
+* If your agent doesn't appear in Teams after deployment, check with your IT admin about app approval policies
+* Domain restrictions prevent unauthorized embedding - always configure allowed domains for production
+* Test authentication flows on each channel to ensure proper security enforcement
+* Some rich UI features may not work on all channels - design for compatibility
+
+**Challenge: Apply this to your own use case**
+
+* Which channels would provide the most value for your users?
+* What security settings are appropriate for your agent's data sensitivity?
+* How would you roll out your agent - pilot with a team first or organization-wide immediately?
+
+---
+
+---
+
 ## 🏆 Summary of learnings
 
 **One agent, five components, and the model is visible.** Nothing here was magic — each capability came from a part you added and configured.
@@ -856,5 +1170,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 **Reach for the Standard harness when the process matters.** Defined paths, controlled handling and state across turns are what it exists for.
 
 **Do not author what the orchestrator can infer.** Topics are for the conversations that must go a specific way — not every conversation.
+
+**The optional sections go further.** Child agents show delegation to specialists; channels make the agent reachable where people work. M6 covers both in the talk track, but they sit outside the timed 45 minutes.
 
 **Carry this model forward.** The GitHub Copilot harness rearranges these same concerns around instructions, skills, tools, knowledge and memory. Recognising the mapping is most of understanding the newer model.
