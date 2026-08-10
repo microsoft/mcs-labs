@@ -90,17 +90,17 @@ schedule:
     time: "13:45"
     duration: 45
 
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "14:30"
+    duration: 15
+
   - type: module
     slug: copilot-harness
     label: "Module 5"
     title: "Dedicated: Copilot harness — Agent Builder, pro-code DAs, DAs in MCS"
-    time: "14:30"
+    time: "14:45"
     duration: 45
-
-  - type: break
-    title: "Coffee break / Q&A"
-    time: "15:15"
-    duration: 15
 
   - type: lab
     slug: copilot-harness-agent-builder
