@@ -324,7 +324,12 @@ layout: single
         {%- assign module_count = module_count | plus: 1 -%}
         {%- assign mod_dur = item.duration | default: mod.duration -%}
         {%- assign total_duration = total_duration | plus: mod_dur -%}
-        {%- if mod.lab -%}
+        {%- comment -%}
+          A module entity may declare its own companion `lab:`. Events that reuse
+          the module but deliberately drop that lab from their agenda opt out with
+          `lab: false` on the agenda row, so the hero stats stay accurate.
+        {%- endcomment -%}
+        {%- if mod.lab and item.lab != false -%}
           {%- assign mod_lab = site.labs | where: "slug", mod.lab | first -%}
           {%- if mod_lab -%}
             {%- capture mod_lab_key -%},{{ mod.lab }},{%- endcapture -%}
@@ -357,6 +362,15 @@ layout: single
 <div class="ws-hero">
   <h2>{{ page.title }}</h2>
   {% if page.syndicated %}<p style="margin:0 0 0.6em;">{% include syndicated-pill.html source=page.source %}</p>{% endif %}
+  {%- comment -%}
+    A deprecated event still renders in full — people mid-delivery need it — but says
+    so plainly and points at what replaces it.
+  {%- endcomment -%}
+  {% if page.deprecated %}
+    {%- assign successor = site.events | where: "event_id", page.superseded_by | first -%}
+    <p style="margin:0 0 0.9em;"><span style="display:inline-block; background:#a32020; color:#fff; font-size:0.68em; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:0.3em 0.7em; border-radius:3px;">Deprecated</span>
+    {% if successor %}<span style="margin-left:0.7em; font-size:0.86em; opacity:0.85;">Superseded by <a href="{{ successor.url | relative_url }}" style="color:#fff; text-decoration:underline;">{{ successor.title }}</a></span>{% endif %}</p>
+  {% endif %}
   <p>{{ page.description }}</p>
   {% unless page.syndicated %}<a href="https://github.com/microsoft/mcs-labs/issues/new?template=bug_report.yml&type=Bug&labels=lab&title=%5B{{ page.event_id }}%5D+&lab={{ page.event_id }}" target="_blank" rel="noopener" style="display: inline-block; margin-top: 1em; font-size: 0.78em; font-weight: 600; color: rgba(255,255,255,0.7); text-decoration: none; border: 1px solid rgba(255,255,255,0.25); padding: 0.3em 0.8em; border-radius: 4px;">Report an issue</a>{% endunless %}
   <ul class="ws-stats">
@@ -404,6 +418,7 @@ layout: single
     {%- assign mod = site.modules | where: "slug", item.slug | first -%}
     {%- if mod -%}
       {%- assign display_title = item.title | default: mod.title -%}
+      {%- assign display_desc = item.description | default: mod.description -%}
       {%- assign mod_duration = item.duration | default: mod.duration -%}
       <li class="ws-agenda-row ws-agenda-row--module">
         <div class="ws-agenda-time">{% if item.time %}{{ item.time }}{% else %}&nbsp;{% endif %}</div>
@@ -411,14 +426,15 @@ layout: single
           <div class="ws-agenda-title">
             <a href="{{ mod.url | relative_url }}?event={{ page.event_id }}">{% if item.label %}{{ item.label }}: {% endif %}{{ display_title }}</a>
           </div>
-          {% if mod.description %}<p class="ws-agenda-desc">{{ mod.description }}</p>{% endif %}
+          {% if display_desc %}<p class="ws-agenda-desc">{{ display_desc }}</p>{% endif %}
           {% if item.speaker %}<div class="ws-agenda-speaker">— {{ item.speaker }}</div>{% endif %}
           {%- assign mod_slides = item.slides | default: mod.slides -%}
           {% if mod_slides %}
             {%- assign slides_href = mod_slides -%}
             {%- unless slides_href contains "://" -%}
               {%- assign slides_path = slides_href | remove_first: "/" -%}
-              {%- assign slides_href = "https://github.com/microsoft/mcs-labs/raw/main/" | append: slides_path -%}
+              {%- assign slides_href = site.slides_base_url | append: slides_path -%}
+              {%- if site.slides_base_url == "" -%}{%- assign slides_href = mod_slides | relative_url -%}{%- endif -%}
             {%- endunless -%}
             <a class="ws-agenda-slides" href="{{ slides_href }}" download>
               <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -446,13 +462,16 @@ layout: single
           {%- comment -%}
           Decks live under /presentations/ and are tracked in Git LFS. GitHub Pages
           serves LFS pointer files (~130 B) rather than resolving them, so we rewrite
-          any in-repo /presentations/ path to the GitHub raw URL which does resolve
-          LFS correctly. External URLs (http/https) pass through unchanged.
+          any in-repo /presentations/ path onto `site.slides_base_url`, which resolves
+          LFS correctly. Setting that to "" (see _config.local.yml) links the deck
+          relative to the site instead, so a local review build serves the real file
+          out of the working tree. External URLs (http/https) pass through unchanged.
           {%- endcomment -%}
           {%- assign slides_href = item.slides -%}
           {%- unless slides_href contains "://" -%}
             {%- assign slides_path = slides_href | remove_first: "/" -%}
-            {%- assign slides_href = "https://github.com/microsoft/mcs-labs/raw/main/" | append: slides_path -%}
+            {%- assign slides_href = site.slides_base_url | append: slides_path -%}
+              {%- if site.slides_base_url == "" -%}{%- assign slides_href = item.slides | relative_url -%}{%- endif -%}
           {%- endunless -%}
           <a class="ws-agenda-slides" href="{{ slides_href }}" download>
             <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

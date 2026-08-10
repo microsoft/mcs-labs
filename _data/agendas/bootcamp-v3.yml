@@ -1,0 +1,339 @@
+event_id: bootcamp-v3
+
+# Architecture Bootcamp — V3 — 3-day agenda.
+#
+# V3 rebuilds the bootcamp around the three agent harnesses (Copilot, Standard,
+# GitHub Copilot) and their component models, rather than around the classic
+# Copilot Studio feature tour that V2.1 used.
+#
+# Conventions:
+#   * "module" rows reference first-class entities in the _modules collection.
+#     `title:` and `duration:` on the row override the module's own values.
+#   * "lab" rows reference _labs/<slug>.md. `duration:` overrides the lab's own.
+#   * Labs 2-6, 9 and 10 do not exist yet. They are carried as "session" rows so
+#     the timeline stays complete and correctly timed; each names the seed
+#     material it will be authored from. Convert each to a `type: lab` row as
+#     the lab lands.
+#   * `lab: false` on a module row suppresses that module's companion lab from
+#     the hero stats — used for M13, whose mcs-multi-agent lab is not in V3.
+
+schedule:
+  # --- Day 1 — Framing, on-ramp & the Copilot harness ---------------------
+  - type: day
+    title: "Day 1 — Framing, On-ramp & Copilot Harness"
+
+  - type: break
+    title: "Welcome + Breakout"
+    time: "09:00"
+    duration: 15
+
+  - type: session
+    title: "Introduction to Hands-On Labs"
+    description: "Lab environment, tenant setup, and how the hands-on flow works across the three days."
+    label: "Intro"
+    time: "09:15"
+    duration: 15
+
+  - type: module
+    slug: agents-workflows-making-them-real
+    label: "Module 1"
+    title: "Agents & Workflows — Making Them Real"
+    time: "09:30"
+    duration: 45
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "10:15"
+    duration: 15
+
+  - type: module
+    slug: agent-builder
+    label: "Module 2"
+    title: "M365 Copilot"
+    # Agent Builder moves to M5 (Copilot harness) in V3, so the module entity's
+    # own Agent-Builder-centric description is overridden here.
+    description: "Microsoft 365 Copilot as an agent surface — what ships out of the box, the frontier agents (Researcher and Analyst), and where it sits against the other surfaces."
+    slides: "/presentations/bootcamp-v3/M02.%20M365%20Copilot.pptx"
+    time: "10:30"
+    duration: 30
+
+  - type: lab
+    slug: m365-copilot-frontier-agents
+    label: "Lab 1"
+    title: "M365 Copilot and Frontier Agents"
+    time: "11:00"
+    duration: 30
+
+  - type: module
+    slug: cowork
+    label: "Module 3"
+    title: "Cowork (+ skills, + plugins)"
+    time: "11:30"
+    duration: 30
+
+  - type: break
+    title: "Lunch break"
+    time: "12:00"
+    duration: 60
+
+  - type: lab
+    slug: cowork-hands-on
+    label: "Lab 2"
+    title: "Cowork hands-on"
+    time: "13:00"
+    duration: 45
+
+  - type: module
+    slug: harnesses-and-component-models
+    label: "Module 4"
+    title: "Orchestration, Harnesses & Component Models — Overview"
+    time: "13:45"
+    duration: 45
+
+  - type: module
+    slug: copilot-harness
+    label: "Module 5"
+    title: "Dedicated: Copilot harness — Agent Builder, pro-code DAs, DAs in MCS"
+    time: "14:30"
+    duration: 30
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "15:00"
+    duration: 15
+
+  - type: lab
+    slug: copilot-harness-agent-builder
+    label: "Lab 3"
+    title: "Copilot harness — Agent Builder"
+    time: "15:15"
+    duration: 45
+
+  - type: break
+    title: "Q&A"
+    time: "16:00"
+    duration: 30
+
+  # --- Day 2 — Standard & GitHub harnesses, creation & workflows ----------
+  - type: day
+    title: "Day 2 — Standard & GitHub Harnesses, Creation & Workflows"
+
+  - type: break
+    title: "Re-Welcome / Re-cap"
+    time: "09:00"
+    duration: 15
+
+  - type: module
+    slug: standard-harness
+    label: "Module 6"
+    title: "Dedicated: Standard harness — Component Model"
+    time: "09:15"
+    duration: 30
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "09:45"
+    duration: 15
+
+  - type: lab
+    slug: standard-harness-component-model
+    label: "Lab 4"
+    title: "Standard harness — Component Model"
+    time: "10:00"
+    duration: 45
+
+  - type: module
+    slug: github-copilot-harness
+    label: "Module 7"
+    title: "Dedicated: GitHub Copilot harness — Component Model"
+    time: "10:45"
+    duration: 60
+
+  - type: break
+    title: "Lunch break"
+    time: "11:45"
+    duration: 60
+
+  - type: session
+    title: "Lab 5: GitHub Copilot harness — Component Model"
+    description: "Placeholder — lab to be authored. Seeded by mcs-orchestration UC3 (Agentic Reasoning Loop), roughly half the runtime."
+    label: "Lab 5"
+    time: "12:45"
+    duration: 60
+
+  - type: module
+    slug: creation-github-harness
+    label: "Module 8"
+    title: "Creation — GitHub harness (from UX, from Chat)"
+    time: "13:45"
+    duration: 30
+
+  - type: session
+    title: "Lab 6: Creation — GitHub harness"
+    description: "Placeholder — lab to be authored. True white space: docs exist, no lab anywhere in the repo."
+    label: "Lab 6"
+    time: "14:15"
+    duration: 30
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "14:45"
+    duration: 15
+
+  - type: module
+    slug: workflows
+    label: "Module 9"
+    title: "Workflows"
+    slides: "/presentations/bootcamp-v3/M09.%20Workflows.pptx"
+    time: "15:00"
+    duration: 30
+
+  - type: lab
+    slug: mcs-workflows
+    label: "Lab 7"
+    title: "Workflows"
+    time: "15:30"
+    duration: 60
+
+  - type: break
+    title: "Social / Networking"
+    time: "16:30"
+    duration: 60
+
+  # --- Day 3 — Knowledge, tools, skills & operations ----------------------
+  - type: day
+    title: "Day 3 — Knowledge, Tools, Skills & Operations"
+
+  - type: break
+    title: "Re-Welcome / Re-cap / Quiz"
+    time: "09:00"
+    duration: 15
+
+  - type: module
+    slug: knowledge-and-tools-deep-dive
+    label: "Module 10"
+    title: "Deep Dive: Knowledge & Tools"
+    time: "09:15"
+    duration: 45
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "10:00"
+    duration: 15
+
+  - type: lab
+    slug: mcs-tools
+    label: "Lab 8"
+    title: "Deep Dive: Knowledge & Tools"
+    time: "10:15"
+    duration: 60
+
+  - type: module
+    slug: instructions-and-descriptions
+    label: "Module 11"
+    title: "Deep Dive: Instructions & Descriptions"
+    time: "11:15"
+    duration: 30
+
+  - type: break
+    title: "Lunch break"
+    time: "11:45"
+    duration: 60
+
+  - type: session
+    title: "Lab 9: Deep Dive: Instructions & Descriptions"
+    description: "Placeholder — lab to be authored. Near-exact match in mcs-orchestration UC2 (impact of instructions and descriptions on the planner)."
+    label: "Lab 9"
+    time: "12:45"
+    duration: 30
+
+  - type: module
+    slug: agent-skills
+    label: "Module 12"
+    title: "Deep Dive: Skills"
+    time: "13:15"
+    duration: 30
+
+  - type: session
+    title: "Lab 10: Deep Dive: Skills"
+    description: "Placeholder — lab to be authored. Near-exact match in mcs-orchestration UC4 (Leveraging Skills)."
+    label: "Lab 10"
+    time: "13:45"
+    duration: 30
+
+  - type: module
+    slug: multi-agent
+    label: "Module 13"
+    title: "Multi-Agent"
+    slides: "/presentations/bootcamp-v3/M13.%20Multi-Agent.pptx"
+    time: "14:15"
+    duration: 30
+    lab: false
+
+  - type: module
+    slug: coding-agents
+    label: "Module 14"
+    title: "Coding Agents — plugin, migration, new creation"
+    time: "14:45"
+    duration: 30
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "15:15"
+    duration: 15
+
+  - type: module
+    slug: alm-and-analytics
+    label: "Module 15"
+    title: "ALM — Traditional, Component Collections + Reporting, Analytics & Evals"
+    time: "15:30"
+    duration: 30
+
+  - type: module
+    slug: governance-and-agent-365
+    label: "Module 16"
+    title: "Governance — Managed environment + Agent 365"
+    time: "16:00"
+    duration: 30
+
+  - type: break
+    title: "General Q&A"
+    time: "16:30"
+    duration: 30
+
+  # --- Continue on your own -----------------------------------------------
+  # Optional labs with no timetabled slot. Deliberately `link` rows, not `lab`
+  # rows: a lab row would count into the event's hero stats and make the
+  # bootcamp read as though these are delivered on the day.
+  - type: day
+    title: "Continue on your own — optional labs"
+
+  - type: link
+    title: "Child Agents and Channels — extends M6"
+    url: "/mcs-labs/labs/child-agents-and-channels/"
+    description: "Delegate to child agents and publish to Teams and the web. 25 min."
+
+  - type: link
+    title: "Multi-Agent — extends M13"
+    url: "/mcs-labs/labs/mcs-multi-agent/"
+    description: "Build a main agent with child agents for product and account information. 30 min."
+
+  - type: link
+    title: "ALM — extends M15"
+    url: "/mcs-labs/labs/mcs-alm/"
+    description: "Solutions, environment variables, connection references and deployment pipelines. 45 min."
+
+  - type: link
+    title: "Component Collections — extends M15"
+    url: "/mcs-labs/labs/component-collections/"
+    description: "Build, share and version component collections across agents. 30 min."
+
+  - type: link
+    title: "Analytics and Evaluations — extends M15"
+    url: "/mcs-labs/labs/core-concepts-analytics-evaluations/"
+    description: "Monitor performance, configure evaluation test sets and review results. 30 min."
+
+  - type: link
+    title: "Governance — extends M16"
+    url: "/mcs-labs/labs/mcs-governance/"
+    description: "DLP-restricted agents across green, yellow and red zones. 45 min."
