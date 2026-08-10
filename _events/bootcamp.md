@@ -3,6 +3,8 @@ title: "Architecture Bootcamp"
 description: "Intensive hands-on bootcamp covering progressive AI assistants, core concepts, governance, tools, multi-agent architectures, and autonomous agents."
 event_id: bootcamp
 order: 1
+deprecated: true
+superseded_by: bootcamp-v3
 labs:
   - slug: agent-builder-m365
     label: "Lab 1"
