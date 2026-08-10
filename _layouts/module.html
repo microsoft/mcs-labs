@@ -252,13 +252,15 @@ layout: single
 
 {%- comment -%}
   Decks under /presentations/ are tracked in Git LFS. GitHub Pages serves the
-  pointer file, so in-repo paths are rewritten to the GitHub raw URL.
+  pointer file, so in-repo paths are rewritten onto `site.slides_base_url`.
+  Set that to "" (see _config.local.yml) to serve decks from the working tree.
 {%- endcomment -%}
 {%- assign slides_href = page.slides -%}
 {%- if page.slides -%}
   {%- unless slides_href contains "://" -%}
     {%- assign slides_path = slides_href | remove_first: "/" -%}
-    {%- assign slides_href = "https://github.com/microsoft/mcs-labs/raw/main/" | append: slides_path -%}
+    {%- assign slides_href = site.slides_base_url | append: slides_path -%}
+    {%- if site.slides_base_url == "" -%}{%- assign slides_href = page.slides | relative_url -%}{%- endif -%}
   {%- endunless -%}
 {%- endif -%}
 
@@ -310,6 +312,16 @@ layout: single
   reached from an agenda show the same in-event nav + breadcrumb as labs.
 {% endcomment %}
 {% include event-nav/rail.html %}
+
+{% comment %}
+  Module body. The `.mod-content` rule has existed in this layout's <style>
+  block since it was written, but nothing ever emitted the wrapper, so the
+  markdown body of every module file was silently dropped from its page.
+  Modules that carry a body (e.g. placeholder notes on scaffolded modules)
+  now render it; modules with an empty body render nothing extra.
+{% endcomment %}
+{%- assign mod_body = content | strip -%}
+{% if mod_body != "" %}<div class="mod-content">{{ content }}</div>{% endif %}
 
 {% if linked_lab %}
 <section class="mod-lab" aria-labelledby="module-lab-heading">
