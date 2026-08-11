@@ -303,7 +303,14 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
    - **M365 Copilot** node — open the node and, under **Connections**, select **Create new connection** > **Create**, then sign in with your lab account.
    - **Human review** node — open the node and, under **Connections**, select **Create new connection** > **Create**, then sign in with your lab account.
 
-3. Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
+3. Navigate to the **Cloud Flow** object (the Order Management Workflow) inside the solution and select the flow. Choose **Set primary owner**, **remove the existing owner**, set yourself (your lab user) as the new owner, and select **Save**. A **green bar** should appear confirming the owner was successfully changed.
+
+   > [!IMPORTANT]
+   > Without the ownership change, publishing is **disabled by default**, so the workflow cannot be triggered end-to-end — you can still test individual nodes inside it, but no real incoming email will start a run. Once you own the workflow, the **Publish** button becomes available.
+
+4. Go back to the workflow and select **Save** (or press **Ctrl+S**). The **Publish** button becomes available after saving — select **Publish**. If publishing succeeds, the setup is complete and you can **skip step 5**.
+
+5. **(Backup — only if Publish stays disabled or fails.)** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
 
    - You should see **five** connection references. If a **sixth** one is present whose connection id starts with `crc3b_draft_bRURqJ.cr.shared_a365outlookmailmcp`, it is not needed for the workflow to run and can be **safely removed** from the solution.
    - For all others, select the connection and click **Save**, then confirm with **Save changes**.
@@ -313,12 +320,7 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
    > [!WARNING]
    > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
 
-4. Navigate to the **Cloud Flow** object (the Order Management Workflow) inside the solution and select the flow. Choose **Set primary owner**, **remove the existing owner**, set yourself (your lab user) as the new owner, and select **Save**. A **green bar** should appear confirming the owner was successfully changed.
-
-   > [!IMPORTANT]
-   > Without the ownership change, publishing is **disabled by default**, so the workflow cannot be triggered end-to-end — you can still test individual nodes inside it, but no real incoming email will start a run. Once you own the workflow, the **Publish** button becomes available. Ownership must be transferred **after** the connection references are configured.
-
-5. Go back to the workflow, select **Save**, and **Publish**. Verify the workflow was successfully published after changing the ownership — publishing only succeeds once you own the flow.
+   When done, **retry step 4 (Save and Publish).**
 
 #### Open and explore the Order Management Workflow
 
