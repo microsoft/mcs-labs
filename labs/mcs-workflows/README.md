@@ -176,7 +176,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 5. Select the **+** after the trigger and choose **Agent** to add an agent node. (Copilot Studio automatically wraps it in an **Apply to each** loop so the agent runs once per new to-do.) When prompted, **Create new connection** with your lab account. Leave the **Agent** dropdown on **New agent for this workflow** — this creates a brand-new, *non-deterministic* agent dedicated to this workflow rather than reusing an existing one.
 
    > [!TIP]
-   > This is the heart of the lab: instead of hard-coded actions, the workflow hands the task to an agent that *reasons* about how to schedule it. The default model is **Claude Sonnet 4.6**.
+   > This is the heart of the lab: instead of hard-coded actions, the workflow hands the task to an agent that *reasons* about how to schedule it.
 
    ![Agent node added with New agent for this workflow selected](images/add-new-agent-node.png)
 
