@@ -387,7 +387,7 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
 
 #### Enable advanced capabilities
 
-11. Under **Capabilities**, enable:
+11. Under **Capabilities**, check that the following are enabled, and if not, turn them on with the toggle:
     - **Create documents, charts, and code** (for data analysis and chart generation)
     - **Create images** (for creating visual content)
 
