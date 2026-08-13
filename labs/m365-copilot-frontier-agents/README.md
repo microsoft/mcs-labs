@@ -151,6 +151,9 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
 Create an executive briefing for the GM that summarizes the five most urgent operational issues, their root causes, financial impact, and recommended fixes — all sourced from this report.
 ```
 
+> [!NOTE]
+> Before it starts, the Researcher agent may ask a clarifying question and offer to **choose a report length** (e.g., Short or Long). Selecting a length alone does not begin generation — reply (for example, "go ahead") or answer its question to start the research. Researcher then shows a visible **Research Plan** and **Thought process** as it works.
+
 6. **Observe** how the Researcher agent:
    - Identifies issues across multiple sections (housekeeping, WiFi, HVAC, F&B margins, elevator maintenance)
    - Traces each issue back to its root cause using data from different parts of the report
