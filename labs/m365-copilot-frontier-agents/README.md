@@ -134,7 +134,7 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
 
 2. Navigate to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
-3. In the right-side panel or the main chat area, look for the **Researcher** agent. You can find it by:
+3. In the **left navigation pane**, look for the **Researcher** agent — Microsoft pins it there by default (it can't be unpinned). You can also find it by:
    - Selecting the agent picker (if available) and choosing **Researcher**
    - Or typing `@Researcher` in the chat input area
 
