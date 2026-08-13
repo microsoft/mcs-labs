@@ -310,7 +310,9 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
 4. Go back to the workflow and select **Save** (or press **Ctrl+S**). The **Publish** button becomes available after saving — select **Publish**. If publishing succeeds, the setup is complete and you can **skip step 5**.
 
-5. **(Backup — only if Publish stays disabled or fails.)** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
+5. **(Backup — only if Publish stays disabled or fails.)** Complete both backup steps below.
+
+   **5.1 Configure the connection references.** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
 
    - You should see **five** connection references. If a **sixth** one is present whose connection id starts with `crc3b_draft_bRURqJ.cr.shared_a365outlookmailmcp`, it is not needed for the workflow to run and can be **safely removed** from the solution.
    - For all others, select the connection and click **Save**, then confirm with **Save changes**.
@@ -319,6 +321,8 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
    > [!WARNING]
    > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
+
+   **5.2 Grant ownership through the Power Platform Admin Center.** Open the **Power Platform Admin Center** ([admin.powerplatform.microsoft.com](https://admin.powerplatform.microsoft.com)) and navigate to **Environments** → your environment → **Flows**. Find the **Order Management Workflow** row, open **More flow actions (…)** → **Share**, add your **lab user** as a **co-owner**, and select **Save**. This grants ownership through the Admin Center if the **Set primary owner** action in step 3 did not enable publishing.
 
    When done, **retry step 4 (Save and Publish).**
 
