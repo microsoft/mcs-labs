@@ -193,7 +193,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
    3. Continue typing the rest of the instruction right after the token:
 
       ```
-      on my calendar in the next couple of business days and block that time on my calendar to work on this task. Then update the to-do with a due date a week out from the time block we created. Add appropriate notes and suggestions in the notes on key things I might want to consider and categorize it as blue. Also set a reminder 2 days before the due date. Make sure that the format of the Calendar notes and To-Do are formatted properly for the user to be able to read them well. Only schedule the time block within my normal working hours of 8:00 AM to 5:00 PM.
+      on my calendar in the next couple of business days and block that time on my calendar to work on this task. Then update the to-do with a due date a week out from the time block we created. Add appropriate notes and suggestions in the notes on key things I might want to consider. Also set a reminder 2 days before the due date. Make sure that the format of the Calendar notes and To-Do are formatted properly for the user to be able to read them well. Only schedule the time block within my normal working hours of 8:00 AM to 5:00 PM.
       ```
 
    > [!IMPORTANT]
@@ -208,7 +208,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
    - Turn on the **Web search** toggle so the agent can look things up (e.g., venue or location details referenced in a task).
 
    > [!TIP]
-   > The **Work IQ Calendar** tool lets the agent read your free/busy and create calendar events; **Update to-do** lets it write the due date, notes, category, and reminder back onto the task.
+   > The **Work IQ Calendar** tool lets the agent read your free/busy and create calendar events; **Update to-do** lets it write the due date, notes, and reminder back onto the task.
 
    ![Agent configured with Work IQ Calendar and Update to-do tools and Web search enabled](images/agent-tools-web-search.png)
 
@@ -248,12 +248,12 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
 #### Verify the results
 
-12. Go back to **Microsoft To Do** and refresh the **Time Block** list. Open your task — it has been updated by the agent: a **due date** (a week out), a **reminder** set 2 days before the due date, a **blue** category, and richly formatted **notes** (target date, the scheduled work block, and an action checklist).
+12. Go back to **Microsoft To Do** and refresh the **Time Block** list. Open your task — it has been updated by the agent: a **due date** (a week out), a **reminder** set 2 days before the due date, and richly formatted **notes** (target date, the scheduled work block, and an action checklist).
 
     > [!TIP]
     > Switch the list to **List** view and open the task to see the full notes the agent wrote — it even researched the venue with web search.
 
-    ![The to-do updated by the agent with due date, reminder, blue category, and formatted notes](images/todo-updated-details.png)
+    ![The to-do updated by the agent with due date, reminder, and formatted notes](images/todo-updated-details.png)
 
 13. Open **Outlook → Calendar**. The agent has added a **time block** event to reserve time to work on the task — on the next business day it found free and **within your 8:00 AM–5:00 PM working hours** — with a body summarizing the target date and venue. The workflow ran end-to-end with no further input from you.
 
