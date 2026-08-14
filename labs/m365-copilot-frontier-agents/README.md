@@ -237,7 +237,7 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
 > [!TIP]
 > The Analyst agent is another **frontier agent** in Microsoft 365 Copilot. While Researcher excels at reasoning and synthesis, Analyst is purpose-built for **data-heavy work** — extracting tables from documents, performing calculations, building models, generating visualizations, and producing structured outputs like Excel files. Think of Researcher as your strategic advisor and Analyst as your financial modeler.
 
-3. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the attachment icon and choosing the same file you downloaded earlier.
+3. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting **Add and manage sources** (the **+** icon), choosing **Upload images and files**, and selecting the same file you downloaded earlier.
 
 > [!NOTE]
 > You're using the same PDF from Use Case #1, but with a completely different agent. This demonstrates how different frontier agents can extract different types of value from the same source document.
