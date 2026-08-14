@@ -457,7 +457,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
       ![Allow MCP access](images/step11a-allow-mcp.png)
 
     > [!NOTE]
-    > If you are using Service Principals or Client Certification Auth to connect to Dataverse, you may need to use "Maker-provided credentials". To change this, go to the Details section > Additional details section > Credentials to use.
+    > If you are using Service Principals or Client Certification Auth to connect to Dataverse, you may need to use **Maker-provided credentials**. To change this, select the **Microsoft Dataverse MCP Server** in the agent designer's **Tools** section, then under **Additional details** set **Credentials to use** to **Maker-provided credentials**.
 
       ![Test agent](images/step11b-test-agent.png)
 
