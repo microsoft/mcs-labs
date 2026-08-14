@@ -141,7 +141,7 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
 > [!TIP]
 > The Researcher agent is one of Microsoft's **frontier agents** — purpose-built AI agents that use advanced reasoning models. Researcher excels at deep document analysis, cross-referencing multiple sections, and synthesizing complex information. It's available to users with a Microsoft 365 Copilot license.
 
-4. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the attachment icon (paperclip) in the chat input area and choosing the file from your local machine.
+4. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting **Add and manage sources** (the **+** icon) in the chat input area, choosing **Upload images and files**, and selecting the file from your local machine.
 
 #### Prompt 1: Executive briefing with root-cause analysis
 
