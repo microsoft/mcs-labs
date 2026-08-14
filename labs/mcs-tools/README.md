@@ -304,56 +304,36 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 #### Add the Custom Connector as a Tool
 
-1. Go back to the browser tab with Copilot Studio.
+1. Go back to the browser tab with Copilot Studio and open your **Dictionary Agent**.
 
-1. Refresh the page.
-
-1. In the **Add tool** screen, enter the following into the search box and press **Enter**:
+1. In the agent designer's **Tools** section, select **Add tool**, then enter the following into the search box and press **Enter**:
 
     ```
     Lookup a word in the dictionary
     ```
 
     > [!NOTE]
-    > It can sometimes take a few minutes for a new connector to sync to Copilot Studio. If you don't see it, try clearing your browser cache by refreshing the page.
+    > It can sometimes take a few minutes for a new connector to sync to Copilot Studio. If you don't see it, try refreshing the page.
 
 1. Select the **Word Lookup** connector from the search results.
 
-1. Select the down arrow next to the **Connection** and select **Create new connection**.
-
-1. Select **Create**.
-
-1. You should see the connection with a green check mark. Select **Add and configure**.
-
-1. Select **Additional details** and set **Credentials to use** to **Maker-provided credentials**.
+1. Select **Add**. The connection is set up automatically for this connector. If you are prompted to select a connection, create one and confirm your student credentials if asked.
 
     > [!TIP]
-    > For unauthenticated APIs, it is best to use Maker-provided credentials so you don't require users to create a connection for anonymous connectors.
+    > This connector uses **Maker-provided credentials**, so end users don't need to create their own connection for the unauthenticated Dictionary API. You can review a tool's settings any time by selecting it in the **Tools** section.
 
-1. In the **Inputs** section, Select **Customize** next to **word**.
-
-1. Notice that all your inputs have been populated from your connector definition - this is why it is important to provide detailed descriptions when building your connector.
-
-1. Select **Save** to save the tool configuration.
+1. The **Word Lookup** tool now appears in the **Tools** section of the agent designer.
 
 #### Test Your Dictionary Agent
 
-1. Select **Settings** in the upper right corner.
-
-1. Scroll to the bottom of the **Generative AI** list of settings.
-
-1. Turn off **Use general knowledge**.
+1. In the agent designer's **Knowledge** section, remove the **Search all websites** knowledge (select **Remove** next to it) so the agent doesn't answer from the web.
 
     > [!NOTE]
-    > Disabling general knowledge make sure that only your custom connector API provides answers, not the underlying language model.
-
-1. Turn off **Use information from the Web** as well.
+    > Removing web knowledge helps make sure that only your custom connector API provides answers, not the underlying language model. To further restrict general knowledge, select **More options (…) > Settings > AI & behavior** and disable ungrounded responses.
 
 1. Select **Save**.
 
-1. Close **Settings** using the **X** in the upper right-hand corner.
-
-1. In the test pane, try the following queries:
+1. Select the **Preview** tab and try the following queries in the chat pane:
 
     ```
     What is the meaning of the word copilot?
