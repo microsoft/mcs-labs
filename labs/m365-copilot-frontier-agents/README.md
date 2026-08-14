@@ -272,6 +272,9 @@ Present the results in a ranked table sorted by NPV (highest to lowest). Include
 > [!IMPORTANT]
 > The report only includes **simple payback periods** (which ignore the time value of money). The Analyst agent produces **NPV and IRR** — the gold-standard financial metrics that CFOs actually use to evaluate capital projects. This is a powerful example of how the Analyst agent can *elevate* analysis beyond the source material.
 
+> [!NOTE]
+> The Analyst runs real code to extract and model the data, so this can take a few minutes (often 40–50 reasoning steps). Its extraction is **non-deterministic**: occasionally it will try to OCR the PDF, report that it "can't read Section 16," and ask you to paste a screenshot or table. If that happens, **start a new Analyst chat, re-attach the PDF, and resend the prompt** — the recommendation data in Section 16 is machine-readable and the analysis normally succeeds on a retry.
+
 #### Explore follow-up analysis (optional)
 
 6. If time permits, try one or both of these follow-up prompts to explore Analyst's capabilities further:
