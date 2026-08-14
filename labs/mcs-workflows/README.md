@@ -683,12 +683,15 @@ Configure the **Quote Request** path to use the published **Price Quote Agent**,
 
 2. Open **Price Quote Agent**. In the new experience's **Build** tab, inspect the agent and confirm these components are present on the right-hand panel:
 
-   - **Tools**: **Microsoft Dataverse MCP Server** and **Work IQ Mail (Preview)**
+   - **Tools**: **Microsoft Dataverse MCP Server** and **Mail** (formerly **Work IQ Mail (Preview)**)
    - **Knowledge**: **Order Management** (SharePoint knowledge source with pricing guidance, customer tiers, and related policy)
    - **Skills**: **price-quote** — the structured skill for composing and sending the quote email
    - On the left, the **Instructions** pane holds the agent's broad, conversational guidelines about handling price questions. Notice they stay deliberately high-level: the precise, procedural steps live in the **price-quote** skill instead — a best practice that keeps the instructions readable while the repeatable logic is encapsulated in a skill.
 
    ![The Price Quote Agent in the new Build experience showing instructions tools and knowledge](images/uc5-agent-new-experience.png)
+
+   > [!IMPORTANT]
+   > The **Mail** tool's connection may not import with the solution. In the published **Price Quote Agent**, open **Tools > Mail** and check its **Connection**. If it shows **Not Connected**, select **Create new connection > Create** and **Confirm** (sign in with your lab account). Without a connected Mail tool the agent will reason over the quote but never send the email, so the quote email in the final step will not arrive.
 
 3. Open the **price-quote** skill and read through what it does. The skill spells out exactly how to build a quote: read the customer name and the requested items from the request, use **Dataverse** to look up the customer's account and employee count and derive their pricing **tier** (Small / Mid / Large), take each item's SKU and list price from the **Sales & Pricing Guide**, then calculate the line totals, subtotal, tier discount, and final total. It finishes by reading the payment terms and delivery lead time and using **Work IQ** to email a fully formatted quote to the customer — applying only the prices and discounts found in the knowledge, never estimates.
 
