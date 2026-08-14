@@ -13,7 +13,7 @@ labs:
   - slug: standard-harness-component-model
     label: "Lab 4"
   - slug: mcs-workflows
-    label: "Lab 7"
+    label: "Lab 6"
   - slug: mcs-tools
-    label: "Lab 8"
+    label: "Lab 7"
 ---

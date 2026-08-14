@@ -6,7 +6,7 @@ duration: 30
 difficulty: 300
 section: intermediate_modules
 description: "Skills as instructions on demand — packaging behaviour into a reusable unit the orchestrator loads only when it becomes relevant."
-slides: "/presentations/bootcamp-v3/M12.%20Deep%20Dive%20-%20Skills.pptx"
+slides: "/presentations/bootcamp-v3/M13.%20Deep%20Dive%20-%20Skills.pptx"
 placeholder: true
 ---
 
@@ -16,4 +16,4 @@ placeholder: true
 >
 > Not to be confused with the `copilot-studio-plugin` module (the Copilot Studio plugin for GitHub Copilot CLI and Claude Code), which V3 covers under **Module 14 — Coding Agents**. Different subject.
 >
-> Companion **Lab 10** is a near-exact match for `mcs-orchestration` UC4 — *Leveraging Skills* — already authored in the new-orchestrator era.
+> Companion **Lab 9** is a near-exact match for `mcs-orchestration` UC4 — *Leveraging Skills* — already authored in the new-orchestrator era.

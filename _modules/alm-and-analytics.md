@@ -6,7 +6,7 @@ duration: 30
 difficulty: 300
 section: intermediate_modules
 description: "One operations module: traditional ALM and component collections, folded together with reporting, analytics, and agent evaluations."
-slides: "/presentations/bootcamp-v3/M15.%20ALM%20Reporting%20Analytics%20and%20Evals.pptx"
+slides: "/presentations/bootcamp-v3/M16.%20ALM%20Reporting%20Analytics%20and%20Evals.pptx"
 placeholder: true
 ---
 
