@@ -417,17 +417,6 @@ The Use information from the web setting is available on the Generative AI setti
 
 1. Select Disabled on the Web Search option.
 
-#### Disable Ungrounded Responses
-
-1. Select the **Settings** tab at the top of the agent, then select the **Generative AI** menu.
-
-1. Turn off the **Allow Ungrounded responses** setting.
-
-1. Select **Save** to apply the change.
-
-   > [!NOTE]
-   > Disabling Web Search and Allow Ungrounded responses together ensures that your agent only uses the data you have explicitly provided to respond to users. This significantly reduces the chance of hallucinations — responses that sound plausible but aren't based on your actual knowledge sources.
-
 #### Set Knowledge Source as Official
 
 1. Navigate back to the **Overview** tab and scroll down to the **Knowledge** section.
