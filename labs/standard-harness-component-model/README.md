@@ -340,7 +340,7 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
 
 
 
-### 🏅 Congratulations! You've completed Use Case 4!
+### 🏅 Congratulations! You've completed Use Case 2!
 
 ---
 
@@ -467,7 +467,7 @@ The Use information from the web setting is available on the Generative AI setti
 #### Test Licensing Knowledge
 
    > [!IMPORTANT]
-   > Before completing this section, make sure the licensing guide file you uploaded earlier has finished indexing. The Status column should show **Ready** before proceeding. If you are still waiting for the file to index, you can skip ahead to Use Case 3 and come back to test this later.
+   > Before completing this section, make sure the licensing guide file you uploaded earlier has finished indexing. The Status column should show **Ready** before proceeding. If you are still waiting for the file to index, you can skip ahead to Use Case 4 and come back to test this later.
 
 1. In the test panel on the right, click start a new conversation to ensure the agent uses the latest knowledge.
 
@@ -486,7 +486,7 @@ The Use information from the web setting is available on the Generative AI setti
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case 2!
+### 🏅 Congratulations! You've completed Use Case 3!
 
 ---
 
@@ -663,7 +663,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case 3!
+### 🏅 Congratulations! You've completed Use Case 4!
 
 ---
 
@@ -813,7 +813,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case 1!
+### 🏅 Congratulations! You've completed Use Case 5!
 
 ---
 
@@ -999,7 +999,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case 2!
+### 🏅 Congratulations! You've completed the Extra Credit: Create and Orchestrate Child Agents!
 
 ---
 
@@ -1125,7 +1125,7 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case 3!
+### 🏅 Congratulations! You've completed the Extra Credit: Deploy Your Agent Across Channels!
 
 ---
 
