@@ -140,17 +140,13 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Go to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and make sure you are in your development environment.
 
-1. Select **Agents** on the left navigation.
+1. Select **Agents** on the left navigation. Make sure you are in the **New Copilot Studio experience** — if a banner or toggle offers it, select **Try now** (or turn the **New experience** toggle ON).
 
-1. Turn **OFF** the **New experience** toggle (look for the banner or toggle at the top of Copilot Studio). When the feedback pop-up appears, select **Submit**. This switches you to the classic Copilot Studio experience.
+1. Select **New agent** to create an autonomous agent. This opens the agent designer.
 
-    ![New Agent split-button menu showing New classic agent](images/new-agent-classic-menu.png)
+1. In the **Name your agent** field, enter `Dictionary Agent`.
 
-1. Select **Agents** in the left navigation, then select **Create blank agent**. In the **Name your agent** dialog, enter `Dictionary Agent` and select **Continue**.
-
-1. Once the agent is provisioned, confirm its name is `Dictionary Agent`. If you need to change it, select **Edit** in the **Details** section on **Overview**.
-
-1. Enter the following as the **Description:**
+1. In the **Instructions** field, enter the following:
 
     ```
     This agent allows a user to lookup the definition of a word
@@ -423,19 +419,15 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/). Make sure you are logged in using the credentials for the lab and are in the correct environment, and that you are in the **New Copilot Studio experience** — if a banner or toggle offers it, select **Try now** (or turn the **New experience** toggle ON).
 
-1. Select **Agents** in the left navigation, then select the down-arrow (chevron) next to **New Agent** and choose **New classic agent**. In the **Name your agent** dialog, enter `Contoso Agent` and select **Create**.
+1. Select **New agent** to create an autonomous agent. This opens the agent designer.
 
-1. Select **Edit** and confirm the Name and add the Description:
+1. In the **Name your agent** field, enter `Contoso Agent`.
 
-   **Name:** `Contoso Agent`
+1. In the **Instructions** field, enter the following instructions:
 
-   **Description:** `This agent will help Contoso sales reps update their accounts and contacts using the Dataverse MCP Server.`
-
-1. Select **Save**.
-
-1. Select **Edit** in the upper right corner of the Instructions section and enter the following instructions:
-  
     ```
+    This agent will help Contoso sales reps update their accounts and contacts using the Dataverse MCP Server.
+
     This agent will:
     Read accounts and contact information from the Account and Contact Tables in Dataverse using the Dataverse MCP Server.
     Update accounts and contact information from the Account and Contact Tables in Dataverse using the Dataverse MCP Server.
@@ -444,13 +436,9 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
     ```
 1. Select **Save**
 
-1. Scroll down in the **Overview** tab to the **Suggested prompts** section and select **Add suggested prompts**.
-
-1. Add the following prompts, then Select **Save**:
+1. Add suggested prompts: select **More options** (the **…** menu in the upper right of the designer), select **Settings**, then open the **Greeting & prompts** tab. Under **Suggested prompts**, select **Add** and enter the following, then close the settings dialog:
    - **Title:** Account Search | **Prompt:** `List all accounts in Redmond`
    - **Title:** Contact Search | **Prompt:** `List all contacts from Coho Winery`
-
-      ![Suggested prompts configuration](images/step4b-suggested-prompts-search.png)
 
     > [!TIP]
     > You can configure up to six suggested prompts that customers can choose from to start a conversation. In Teams and in Copilot Chat, suggested prompts appear on the agent's welcome page before you start a new chat. You can't see or use them when you test your agent in Copilot Studio.
@@ -458,26 +446,22 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 #### Add the Dataverse MCP Server as a Tool
 
-1. In the  **Tools** section on the **Overview** tab, Select **+ Add tool**.
+1. In the agent designer's **Tools** section, select **Add tool**.
 
    ![Add tool dialog with Dataverse MCP Server option highlighted in red border](images/step6-add-tool.png)
 
-1. Search for **Dataverse** and select **Dataverse MCP Server** from the results. If there are multiple do not select the deprecated one and do not select the one that has preview in its description.
+1. Select the **Model Context Protocol (MCP)** tab, search for **Dataverse**, and select **Microsoft Dataverse MCP Server** from the results. If there are multiple, do not select the deprecated ones and do not select the one that has **(Preview)** in its name.
 
    ![Select MCP Dataverse](images/step7-mcp-dataverse.png)
 
-1. In the **Connection** list if it says **Not connected**, select it and then select **Create new connection**.
-
-   ![Add authentication](images/step8-add-auth.png)
-
-1. Review **Authentication Type** it should already be set to **Oauth**, no changes are required, Select **Create**.  If prompted, confirm your student credentials.
+1. On the **Select a connection** step, the **Connection** is usually populated automatically with your signed-in student account. If it shows **Not connected**, select the field, create a connection, and confirm your student credentials if prompted.
 
     > [!IMPORTANT]
     > The Dataverse MCP Server will allow you natural language access to your tables in Dataverse. We have sample data in the Accounts and Contacts tables that we will use. The tools available are: list tables, describe table, read data, create record, update record, list prompts, execute prompt, list knowledge sources, and retrieve knowledge.
 
-1. Select **Add and configure**.
+1. Select **Add**.
 
-1. Review the tools available for the Dataverse MCP Server. You can select and deselect which tools are available to the agent. When the tool is executed, the list is dynamically updated from the MCP Server.
+1. The **Microsoft Dataverse MCP Server** now appears in the **Tools** section of the agent designer. Select it to review the individual tools available. You can enable or disable which tools are available to the agent; when a tool is executed, the list is dynamically updated from the MCP Server.
 
     ![Review MCP tools](images/step9-review-mcp.png)
 
@@ -486,9 +470,9 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 #### Test Your Agent
 
-1. In the testing panel, ask the following question: **List the accounts in the state of WA**.
+1. Select the **Preview** tab at the top of the agent designer. In the chat pane, ask the following question: **List the accounts in the state of WA**.
 
-1. For the first run, you will get a consent dialog as by default the tool is configured to use "End user credentials". Select **Allow** to continue.
+1. The first time the tool runs against a new connection you may get a consent dialog, as by default the tool is configured to use "End user credentials". If it appears, select **Allow** to continue.
 
       ![Allow MCP access](images/step11a-allow-mcp.png)
 
