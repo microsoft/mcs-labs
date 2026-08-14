@@ -705,7 +705,7 @@ Explore the variables interface in Copilot Studio to understand how conversation
 
 In this section, you'll explore existing variables in your mailing list topic, understand variable properties and scope, review how variables are referenced in messages and formulas, and observe variable values during a test conversation.
 
-**Scenario:** Your mailing list topic (from the previous lab's Use Case #4) already collects user information and stores it in variables. You'll explore how Copilot Studio automatically creates variables, understand the difference between topic-level and global scope, and observe how variables work during a live test conversation.
+**Scenario:** Your mailing list topic (from Use Case #2 earlier in this lab) already collects user information and stores it in variables. You'll explore how Copilot Studio automatically creates variables, understand the difference between topic-level and global scope, and observe how variables work during a live test conversation.
 
 > [!WARNING]
 > This use case is exploration only. Do NOT create, modify, or delete any variables or nodes - doing so could break your existing topic. You are here to navigate the interface and understand how variables work.
@@ -722,11 +722,11 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 1. Navigate to [Copilot Studio](https://copilotstudio.microsoft.com).
 
-1. Select **Agents** in your left side navigation bar, and select your **Copilot Studio Assistant** agent you created in the previous lab's Use Case #4.
+1. Select **Agents** in your left side navigation bar, and select your **Copilot Studio Assistant** agent you created in Use Case #1 earlier in this lab.
 
 1. Select **Topics** in the agent's top navigation bar.
 
-1. Select the **Join Copilot Studio Mailing List** topic that you created in the previous lab's Use Case #4.
+1. Select the **Join Copilot Studio Mailing List** topic that you created in Use Case #2 earlier in this lab.
 
     > [!NOTE]
     > If you don't have this topic, you can explore variables in any existing topic that has question nodes.
