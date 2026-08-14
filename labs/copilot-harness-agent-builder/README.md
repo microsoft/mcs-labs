@@ -253,7 +253,7 @@ Use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.m
 
 15. You can use the generated link to share your agents with other users.
 
-16. Select **Go to agent**.
+16. Select **Start chat** to open and test your agent.
 
 17. Try your agent by selecting one of the prompts or by pasting the following prompt and selecting Send:
 
@@ -417,7 +417,7 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
 
 #### Test policy knowledge
 
-14. Select **Go to agent** to start testing.
+14. Select **Start chat** to open the agent and start testing.
 
 15. First, test the agent's **knowledge** of your sales policy, copy/paste the following prompt in the Message Copilot area and select Send:
 
