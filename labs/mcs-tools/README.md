@@ -1,6 +1,6 @@
 # Copilot Studio Tools
 
-Learn how to extend your agents with powerful tools including connectors, agent flows, MCP servers, and custom prompts in Microsoft Copilot Studio.
+Learn how to extend your agents with powerful tools including connectors, MCP servers, and custom prompts in Microsoft Copilot Studio.
 
 ---
 
@@ -8,7 +8,7 @@ Learn how to extend your agents with powerful tools including connectors, agent 
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 60 minutes | After completing this lab, participants will be able to use connectors to integrate external services, build deterministic business logic with agent flows, connect MCP servers for live data access, and create custom prompts for structured responses. An optional extra credit section covers Computer Using Agents (CUA) for legacy system automation. |
+| 300 | Maker | 35 minutes | After completing this lab, participants will be able to use connectors to integrate external services and connect MCP servers for live data access. Optional extra credit sections cover creating custom prompts for structured responses and using Computer Using Agents (CUA) for legacy system automation. |
 
 ---
 
@@ -23,9 +23,8 @@ Learn how to extend your agents with powerful tools including connectors, agent 
 - [Use Cases Covered](#-use-cases-covered)
 - [Instructions by Use Case](#️-instructions-by-use-case)
   - [Use Case #1: Extend Your Agent with Connectors](#-use-case-1-extend-your-agent-with-connectors)
-  - [Use Case #2: Build Deterministic Logic with Agent Flows](#-use-case-2-build-deterministic-logic-with-agent-flows)
-  - [Use Case #3: Connect an MCP Server for Live Data Access](#-use-case-3-connect-an-mcp-server-for-live-data-access)
-  - [Use Case #4: Create Custom Prompts for Structured Responses](#-use-case-4-create-custom-prompts-for-structured-responses)
+  - [Use Case #2: Connect an MCP Server for Live Data Access](#-use-case-2-connect-an-mcp-server-for-live-data-access)
+  - [Extra Credit: Create Custom Prompts for Structured Responses](#-extra-credit-create-custom-prompts-for-structured-responses)
   - [Extra Credit: Automate Legacy Systems with Computer Using Agents (CUA)](#-extra-credit-automate-legacy-systems-with-computer-using-agents-cua)
 
 ---
@@ -41,18 +40,17 @@ Think of tools as the hands and feet of your agent:
 **Common challenges solved by this lab:**
 - "My agent can answer questions but can't actually do anything"
 - "I need my agent to access live data from Dataverse and other systems"
-- "I have business rules that must always produce the same result - AI alone isn't deterministic enough"
 - "I need to connect to legacy systems that don't have APIs"
 
-**In 60 minutes, you'll learn four different ways to extend your agents with tools - giving you the skills to build agents that don't just talk, but take action.**
+**In about 35 minutes, you'll learn two core ways to extend your agents with tools - giving you the skills to build agents that don't just talk, but take action. Optional extra credit sections go further with custom prompts and Computer Using Agents.**
 
 ---
 
 ## 🌐 Introduction
 
-Tools are what transform a conversational agent into a powerful business assistant. Microsoft Copilot Studio offers multiple types of tools, each designed for different integration scenarios. Connectors provide pre-built integrations with hundreds of services. Agent flows enable deterministic, rule-based business logic using Power Fx. MCP (Model Context Protocol) servers provide real-time access to data sources like Dataverse. Custom prompts structure agent responses for consistent, business-relevant outputs. And for systems without APIs, Computer Using Agents (CUA) can simulate human interaction with graphical interfaces.
+Tools are what transform a conversational agent into a powerful business assistant. Microsoft Copilot Studio offers multiple types of tools, each designed for different integration scenarios. Connectors provide pre-built integrations with hundreds of services. MCP (Model Context Protocol) servers provide real-time access to data sources like Dataverse. Custom prompts structure agent responses for consistent, business-relevant outputs. And for systems without APIs, Computer Using Agents (CUA) can simulate human interaction with graphical interfaces.
 
-**Real-world example:** A sales organization needs an agent that can calculate commissions based on fixed business rules (agent flow), look up account details from Dataverse in real time (MCP server), send notifications through Teams or email (connectors), present data in a consistent format (custom prompts), and even pull data from a legacy portfolio system with no API (CUA). Each tool type addresses a different integration need, and together they create a comprehensive, capable agent.
+**Real-world example:** A sales organization needs an agent that can look up account details from Dataverse in real time (MCP server), send notifications through Teams or email (connectors), present data in a consistent format (custom prompts), and even pull data from a legacy portfolio system with no API (CUA). Each tool type addresses a different integration need, and together they create a comprehensive, capable agent.
 
 This lab teaches you how to use each tool type through hands-on scenarios.
 
@@ -63,7 +61,6 @@ This lab teaches you how to use each tool type through hands-on scenarios.
 | Concept | Why it matters |
 |---------|----------------|
 | **Connectors** | Pre-built integrations with hundreds of Microsoft and third-party services, enabling agents to take actions like sending emails, creating records, or querying external APIs |
-| **Agent Flows** | Deterministic, rule-based workflows that process inputs and produce predictable outputs using Power Fx - essential for business logic that must always be consistent |
 | **MCP Servers** | Model Context Protocol servers that provide real-time, dynamic access to data sources like Dataverse, enabling natural language queries against live business data |
 | **Custom Prompts** | Structured prompt templates that standardize agent responses by pulling specific fields from data sources, ensuring consistent and relevant output formats |
 | **Computer Using Agents (CUA)** | Agents that simulate human interaction with graphical user interfaces, enabling automation of legacy systems that lack API connectivity |
@@ -73,7 +70,6 @@ This lab teaches you how to use each tool type through hands-on scenarios.
 ## 📄 Documentation and Additional Training Links
 
 * [Tools overview in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent)
-* [Agent Flows in Microsoft Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-flow)
 * [Connect to Dataverse with Model Context Protocol (MCP)](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/data-platform-mcp)
 * [Use prompts to make your agent perform specific tasks](https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-prompt-node)
 * [Use connectors in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-connectors)
@@ -97,9 +93,8 @@ This lab teaches you how to use each tool type through hands-on scenarios.
 In this lab, you'll extend agents with multiple tool types to address different integration scenarios. By the end of the lab, you will:
 
 - Use connectors to integrate external services with your agent
-- Build an agent flow with deterministic business logic for commission calculations
 - Connect a Dataverse MCP server for real-time natural language data access
-- Create custom prompts that structure agent responses with specific data fields
+- (Extra Credit) Create custom prompts that structure agent responses with specific data fields
 - (Extra Credit) Configure a Computer Using Agent to automate a legacy system without API access
 
 ---
@@ -109,9 +104,8 @@ In this lab, you'll extend agents with multiple tool types to address different 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
 | 1 | [Extend Your Agent with Connectors](#-use-case-1-extend-your-agent-with-connectors) | Integrate external services and take actions through pre-built connectors | 15 min |
-| 2 | [Build Deterministic Logic with Agent Flows](#-use-case-2-build-deterministic-logic-with-agent-flows) | Implement business rules that always produce consistent, predictable results | 15 min |
-| 3 | [Connect an MCP Server for Live Data Access](#-use-case-3-connect-an-mcp-server-for-live-data-access) | Enable natural language queries against live Dataverse business data | 20 min |
-| 4 | [Create Custom Prompts for Structured Responses](#-use-case-4-create-custom-prompts-for-structured-responses) | Standardize agent outputs for consistent, business-relevant responses | 10 min |
+| 2 | [Connect an MCP Server for Live Data Access](#-use-case-2-connect-an-mcp-server-for-live-data-access) | Enable natural language queries against live Dataverse business data | 20 min |
+| EC | [Extra Credit: Create Custom Prompts for Structured Responses](#-extra-credit-create-custom-prompts-for-structured-responses) | Standardize agent outputs for consistent, business-relevant responses (Optional) | 10 min |
 | EC | [Extra Credit: Automate Legacy Systems with CUA](#-extra-credit-automate-legacy-systems-with-computer-using-agents-cua) | Automate systems that lack API connectivity using desktop simulation (Optional) | ~20 min |
 
 ---
@@ -403,144 +397,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 ---
 
-## 🔄 Use Case #2: Build Deterministic Logic with Agent Flows
-
-Build a Sales Commission Calculator using agent flows to implement deterministic business logic that always produces consistent, predictable results.
-
-| Use case | Value added | Estimated effort |
-|----------|-------------|------------------|
-| Build Deterministic Logic with Agent Flows | Implement business rules that always produce consistent, predictable results | 15 minutes |
-
-**Summary of tasks**
-
-In this section, you'll explore a pre-created agent that uses an agent flow for deterministic business logic, see how tier-based commission calculations are implemented with Power Fx, and test multiple scenarios to validate the business rules.
-
-**Scenario:** Contoso Electronics has a sales team that needs instant visibility into their commission earnings. Commission calculations involve performance tiers with different percentage rates and product mix bonuses - rules that must always produce the same result for the same inputs. Agent flows are the ideal tool because they provide deterministic, rule-based processing rather than AI-generated responses.
-
-### Objective
-
-Use a pre-created agent that calculates sales commissions with deterministic business rules, and test the complete workflow across multiple scenarios.
-
----
-
-### Step-by-step instructions
-
-#### Open the Pre-Created Agent
-
-1. Go to **Microsoft Copilot Studio** at <a href="https://copilotstudio.microsoft.com" target="_blank">copilotstudio.microsoft.com</a>.
-
-1. Make sure you are in the **New Copilot Studio experience** — look for the banner or toggle at the top and select **Try now** (or turn the **New experience** toggle ON).
-
-1. Select **Agents** on left navigation, then open the pre-created **Sales Commission Assistant** agent.
-
-    > [!NOTE]
-    > The **Sales Commission Assistant** agent has already been created and configured for you, and the **Calculate Sales Commission** agent flow is already connected as a tool. In a real implementation, you would create the agent and wire up the flow yourself — this lab provides them so you can focus on understanding how deterministic agent flows work.
-
-1. (Optional) Review how the agent is configured so you understand what was set up for you:
-
-    - On the **Overview** page, the **Description** is set to `Calculates sales commissions based on performance data`, and **Web Search** is turned off in the **Knowledge** section.
-    - The **Instructions** section contains: `When collecting information for a tool, always ask for one piece of information at a time.`
-    - In the **Tools** section, the **Calculate Sales Commission** agent flow is connected.
-
-    > [!NOTE]
-    > Using instructions to explain how you want the agent to behave when collecting information is a good example of how Instructions should be used in agents. Instructions guide the agent's conversational behavior without requiring you to build explicit topics or flows for every interaction pattern.
-
-    > [!TIP]
-    > The **Calculate Sales Commission** flow has already been provisioned for you with the commission calculation logic, input parameters, and response configuration. In a real implementation, you would build the agent flow yourself using Power Fx expressions — the logic could be as complex as needed and could use all the capabilities of flow.
-
-#### Test Your Commission Calculator
-
-1. Select **Test** in the upper right-hand corner of Copilot Studio.
-
-1. Type the following in the test pane:
-
-    ```
-    Calculate my commission
-    ```
-
-1. The agent will ask you for each piece of information one at a time. When prompted, enter the following values:
-
-    - **Name:**
-      ```
-      Jennifer Rodriguez
-      ```
-    - **Annual Revenue:**
-      ```
-      675000
-      ```
-    - **Quota Amount:**
-      ```
-      400000
-      ```
-    - **Strategic Product Revenue:**
-      ```
-      250000
-      ```
-
-1. Verify the results include:
-    - Commission Tier: Tier 3
-    - Commission Rate: 12.0%
-    - Base Commission: $81,000.00
-    - Product Mix Bonus: $3,000.00 (Strategic products >= 30%)
-    - **Total Commission: $84,000.00**
-
-1. Reset the conversation and test with a different scenario:
-
-    ```
-    Calculate my commission
-    ```
-
-1. When prompted, enter the following values:
-
-    - **Name:**
-      ```
-      David Park
-      ```
-    - **Annual Revenue:**
-      ```
-      75000
-      ```
-    - **Quota Amount:**
-      ```
-      100000
-      ```
-    - **Strategic Product Revenue:**
-      ```
-      10000
-      ```
-
-1. Verify the results include:
-    - Commission Tier: Tier 0
-    - Commission Rate: 0.0%
-    - Base Commission: $0.00
-    - Product Mix Bonus: $0.00 (Strategic products < 30%)
-    - **Total Commission: $0.00**
-
----
-
-### 🏅 Congratulations! You've completed Use Case #2!
-
----
-
-### Test your understanding
-
-**Key takeaways:**
-
-* **Deterministic Logic** - Same inputs always produce the same commission outputs with no AI variability, which is critical for financial calculations
-* **Power Fx Formulas** - Used to calculate percentages, apply rates, and aggregate totals within the flow
-* **Agent Flows vs. AI** - Use agent flows for business rules that must be predictable and auditable; use AI for open-ended, conversational responses
-
-**Lessons learned & troubleshooting tips:**
-
-* Parameter names in agent flows are case-sensitive - make sure they match exactly between the flow and topic
-* Use the Express mode for simpler flows that don't require complex error handling
-* Test with edge cases (zero revenue, exactly at tier boundaries) to validate business rules
-
----
-
----
-
-## 🧱 Use Case #3: Connect an MCP Server for Live Data Access
+## 🧱 Use Case #2: Connect an MCP Server for Live Data Access
 
 Create a Copilot Agent that connects to the Dataverse MCP Server for real-time natural language access to business data.
 
@@ -667,7 +524,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #3!
+### 🏅 Congratulations! You've completed Use Case #2!
 
 ---
 
@@ -689,7 +546,10 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 ---
 
-## 🔄 Use Case #4: Create Custom Prompts for Structured Responses
+## 🔄 Extra Credit: Create Custom Prompts for Structured Responses
+
+> [!NOTE]
+> **Optional - Extra Credit (~10 minutes):** This use case is optional and not included in the core lab time. Complete it if you have additional time or want to explore prompt-based tools and model selection.
 
 Create a custom prompt tool that controls how your agent responds to conversations, including selecting which AI model to use.
 
@@ -846,7 +706,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 ---
 
-### 🏅 Congratulations! You've completed Use Case #4!
+### 🏅 Congratulations! You've completed the Custom Prompts Extra Credit section!
 
 ---
 
@@ -872,7 +732,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 ## 🧱 Extra Credit: Automate Legacy Systems with Computer Using Agents (CUA)
 
 > [!NOTE]
-> **Optional - Extra Credit (~20 minutes):** This use case is optional and not included in the 60-minute lab time. Complete it if you have additional time or want to explore advanced autonomous agent capabilities.
+> **Optional - Extra Credit (~20 minutes):** This use case is optional and not included in the core lab time. Complete it if you have additional time or want to explore advanced autonomous agent capabilities.
 
 Build an autonomous agent that retrieves financial portfolio data from a legacy system without API connectivity using Computer Using Agents (CUA).
 
@@ -1053,7 +913,7 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 ---
 
-### 🏅 Congratulations! You've completed the Extra Credit section!
+### 🏅 Congratulations! You've completed the CUA Extra Credit section!
 
 ---
 
@@ -1063,8 +923,7 @@ True learning comes from doing, questioning, and reflecting - so let's put your 
 
 To maximize the impact of tools in Copilot Studio:
 
-* **Choose the Right Tool Type** - Connectors for pre-built service integrations, agent flows for deterministic business logic, MCP servers for live data access, custom prompts for structured responses, and CUA for legacy system automation
-* **Use Agent Flows for Predictable Logic** - Financial calculations, compliance rules, and other business logic that must be auditable and consistent should use deterministic flows, not AI
+* **Choose the Right Tool Type** - Connectors for pre-built service integrations, MCP servers for live data access, custom prompts for structured responses, and CUA for legacy system automation
 * **Leverage MCP for Real-Time Data** - The Dataverse MCP Server provides natural language access to live business data without building custom APIs or connectors
 * **Standardize with Custom Prompts** - Use structured prompts to make sure all users get consistent, relevant responses with the specific data fields they need
 * **Test Thoroughly** - Use the Activity Map to understand tool execution flow, validate calculations with edge cases, and verify end-to-end workflows
@@ -1076,7 +935,6 @@ To maximize the impact of tools in Copilot Studio:
 **Copilot Studio tools golden rules:**
 
 * Match the tool type to the integration need - don't force one approach for all scenarios
-* Use agent flows for any business logic that must produce the same result every time
 * Always configure proper agent instructions that specify which tools to use and when
 * Use Activity Map to debug and optimize tool execution
 * Test with realistic data and edge cases before deploying
