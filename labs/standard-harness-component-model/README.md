@@ -630,7 +630,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. In the Instructions pane, select **Edit**
 
-1. Copy and paste the following after **General Guidelines** and before **Skills**.
+1. Copy and paste the following at the end of the Instructions, after the existing Guidelines list.
 
    ```
    # Prompt Analysis
