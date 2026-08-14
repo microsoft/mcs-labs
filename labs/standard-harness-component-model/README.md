@@ -141,10 +141,10 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 1. In the left navigation, select **Agents**.
 
-1. Select the **down-arrow (chevron)** next to the **New Agent** button, then choose **New classic agent**.
+1. Select the **More create options** chevron next to the **New agent** button, then choose **Agent (Standard)** — the rule-based conversational agent.
 
    > [!NOTE]
-   > Leave the **New experience** toggle **on** — **New classic agent** opens the classic authoring canvas in a new tab without switching experiences. On a first sign-in you may see a one-time **Welcome to Microsoft Copilot Studio** consent dialog; select **Get Started** to dismiss it.
+   > **Agent (Standard)** opens the classic authoring canvas in a new tab. On a first sign-in you may see a one-time **Welcome to Microsoft Copilot Studio** consent dialog; select **Get Started** to dismiss it. This consent dialog can appear **stacked behind** the **Name your agent** dialog — if you don't see it, move or dismiss the name dialog first so you can select **Get Started**.
 
 1. In the **Name your agent** dialog, enter the following name and select **Create**:
 
