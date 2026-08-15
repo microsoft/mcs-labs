@@ -46,7 +46,7 @@ Microsoft 365 Copilot also provides access to frontier agents: **Researcher** pe
 - A Microsoft 365 account with a Microsoft 365 Copilot licence
 - Access to Microsoft 365 Copilot with the Researcher and Analyst agents enabled
 - Use Case #2 resources:
-  - **Instructor-led bootcamp:** Access to the SharePoint location provided in **Lab Resources**, where the required files are preloaded
+  - **Instructor-led bootcamp:** Files are already preloaded to the SharePoint location, so you can skip this prerequisite
   - **Independent use:** Upload the following files to a OneDrive or SharePoint location that Microsoft 365 Copilot can access:
     - [Zava DIY Markdown and Clearance Policy](assets/sample-files/Zava_DIY_Markdown_and_Clearance_Policy.docx)
     - [Zava DIY Q2 2026 Store Performance Report](assets/sample-files/Zava_DIY_Q2_2026_Store_Performance_Report.pdf)
@@ -188,27 +188,37 @@ Models vary in their responses, their voice, and how they structure an answer. A
 |---|---|---|
 | Grounding Copilot with Work IQ | Reference a file directly, apply it to a real decision, then let Work IQ find what you never named | 13 minutes |
 
-**Summary of tasks:** You'll switch organizational grounding back on, reference a policy document with `/`, summarize it for an executive audience, turn it into a decision, let Copilot find the quarterly report without being told where it is, and finish in a shareable Page.
+**Summary of tasks:** You will use Work IQ to reference a policy document in SharePoint, summarize it, turn it into a decision, and publish it into a shareable page.
 
 **Scenario:** You have the market context. Now you need Zava DIY's own quarter, the merchandising rules that govern it, and an answer good enough to put in front of leadership in two days.
 
 ### Objective
 
-Ground Copilot in your organization's content well enough to produce a cited, review-ready deliverable.
+Use Work IQ to ground Copilot in your organizational content and produce a cited, review-ready deliverable.
 
 ### Step-by-step instructions
 
-#### Prepare the Zava DIY lab resources
+> [!IMPORTANT]
+> If you are not attending the facilitated bootcamp, confirm that the Use Case #2 files listed in [Prerequisites](#prerequisites) are uploaded and available through Work IQ before continuing.
 
-Confirm that the Use Case #2 files listed in [Prerequisites](#prerequisites) are available through Work IQ, then continue.
+#### 2.1 Reference a file with `/`
 
-#### 2.1 Turn Work IQ back on, and meet `/`
+1. Click **New chat** at the top left to start a new conversation with Copilot.
 
-1. At the **top left of the chat**, re-enable **Work IQ**, then select **New chat** to start a fresh conversation.
-2. Type `/` in the prompt box. A picker appears: you can reference **files, chats, and people** directly inside a prompt.
-3. Start typing `Zava` and select **Zava_DIY_Markdown_and_Clearance_Policy.docx**.
+2. Re-enable **Work IQ**.
 
-> **Tip:** `/` is the difference between hoping Copilot finds the right thing and telling it. In production the same picker gets you a person or a conversation. This lab only exercises files, because the training tenant has no mail or chat history.
+   ![New chat with Work IQ enabled in Microsoft 365 Copilot](images/lab-m365copilot-workiq-newchat.png)
+
+3. Type `/` in the prompt box. A picker appears so you can reference content directly inside a prompt.
+
+   ![Reference picker opened with a slash in Microsoft 365 Copilot](images/lab-m365copilot-slash.png)
+
+4. Start typing `Zava` and select **Zava_DIY_Markdown_and_Clearance_Policy.docx**.
+
+> [!TIP]
+> The same picker can also reference a Teams group conversation, a chat with a colleague, or a meeting transcript. This lab focuses on files because the training tenant has no mail or chat history.
+
+> **Troubleshooting:** If a file does not appear in the `/` picker, it may not be indexed yet. Paste the file's SharePoint link into the prompt instead, or download and attach it.
 
 #### 2.2 Summarize the policy
 
@@ -220,7 +230,7 @@ leadership team, who have 60 seconds before the quarterly business review starts
 After each bullet, cite the section it came from.
 ```
 
-Check the citations against the document. Section numbers that don't exist, or bullets with no section at all, are the failure to catch.
+Select a citation to open the source document directly inside Microsoft 365 Copilot. This lets you verify details and explore the document without switching context.
 
 #### 2.3 Make the policy answer a decision
 
@@ -241,15 +251,18 @@ Quote the governing section for each requirement,
 and tell me if any part of my plan isn't allowed.
 ```
 
-Summarizing a policy is useful. Applying one to a decision on the table is what people actually need, and the answer here is spread across three sections, which makes it checkable against the document in front of you.
+Summarizing a policy is useful, but deciphering criteria across multiple sections to determine whether a proposal complies with the policy is more valuable.
+
+Observe how Copilot breaks the request into individual requirements, cross-references eligibility against each one, and compiles a conclusion from the full criteria set. Review how each conclusion maps back to the cited policy sections.
 
 #### 2.4 Let Copilot find the report by itself
 
-Do **not** attach a file or paste a link. Let Work IQ locate the named report in your organization's content. Paste the following into the prompt box and hit **Send**:
+Do **not** attach a file or paste a link. Let Work IQ locate the named report in your organization's content.
+
+Paste the following into the prompt box and hit **Send**:
 
 ```text
-Find the Zava DIY Q2 2026 Store Performance Report
-and cross-reference it with the policy.
+Find the DIY Q2 2026 performance and cross-reference it with the policy.
 
 Build a table of all stores besides online with these columns:
 - Store
@@ -262,28 +275,22 @@ Where the report does not state a value, write "not stated."
 Do not estimate, calculate, or infer anything.
 ```
 
-**Two things to call out when it lands:**
+**Two things to call out once the M365 Copilot response lands:**
 
-1. **Nobody attached a file or supplied its location.** Copilot searched your organization's content, found the Q2 2026 report by name, and grounded on it. That's Work IQ doing the retrieval you would otherwise have done by hand. Use `/` when you know exactly what you want, and let search work when you know the source but not where it lives. Check the citations to verify that the performance-report PDF actually answered.
-2. **"Not stated" should fill the inventory column.** The report deliberately withholds store-level inventory, and its methodology appendix says so. Forbidding invention is how you get a grounded answer instead of a plausible one. If anyone got numbers in that column, stop and discuss.
+1. **Nobody attached a file or supplied its location.** Copilot searched your organization's content, found the Q2 2026 report, and grounded on it. That's Work IQ doing the retrieval you would otherwise have done by hand. Use `/` when you know exactly what you want, and let search work when you know the information exists but are unsure where it lives. Check the citations to verify that the performance-report PDF actually answered.
+2. **"Not stated" should fill the inventory column.** The report deliberately withholds store-level inventory, and its methodology appendix says so. Forbidding invention is how you get a grounded answer instead of a plausible one.
 
 Note also that Copilot respects permissions throughout. It sees only what the signed-in user could already open, so grounding never widens access.
 
-> **Troubleshooting:** if a file doesn't appear in the `/` picker, it may not be indexed yet. Paste the file's SharePoint link into the prompt instead, or download and attach it.
-
 #### 2.5 Turn the answer into a deliverable
 
-1. On the store table, select **Edit in Pages** / **Create a page**.
+1. Scroll to the bottom of the response, select the ellipsis (**...**), then select **Edit in Pages**.
 
-2. Work on the page with Copilot beside it. Paste the following into the prompt box and hit **Send**:
+   ![Edit the Copilot response in Pages](images/lab-m365copilot-edit-pages.png)
 
-```text
-Add a section titled "Open questions for merchandising"
-with five questions this analysis raises but cannot answer,
-ordered by how much they'd change the conclusion.
-```
+2. Copilot Pages now renders on the right. You can make further edits, add information, and share the page with colleagues.
 
-3. Then, back in chat, paste the following and hit **Send**:
+3. Using the Microsoft 365 Copilot app on the left, turn this Copilot Page into a report-ready deliverable. Paste the following prompt and select **Send**:
 
 ```text
 Turn this into a one-page pre-read for the Zava DIY quarterly business review:
@@ -293,7 +300,7 @@ Turn this into a one-page pre-read for the Zava DIY quarterly business review:
 - Open questions
 ```
 
-Blank prompt to cited, review-ready pre-read in under 30 minutes, with no agent, no configuration, and no code.
+You reached a review-ready quarterly briefing within minutes, with no configuration and no code.
 
 ### Test your understanding
 
@@ -301,17 +308,8 @@ Blank prompt to cited, review-ready pre-read in under 30 minutes, with no agent,
 
 - **`/` when you know, search when you don't.** Referencing a file, chat, or person is precision; letting Work IQ find the source is reach. Either way, check what it actually cited.
 - **A summary is not an answer.** Applying a policy to a decision on the table is where the value is, and quoting the governing section is what makes it checkable.
-- **"Not stated" is a feature.** Explicitly forbidding invention is how you get a grounded answer instead of a plausible one.
-- **Grounding never widens access.** Copilot sees only what you could already open.
-- **Finish in a deliverable.** Pages is how the answer leaves the chat and reaches someone who never opened Copilot.
-
-**Lessons learned & troubleshooting tips:**
-
-- No links in a web answer → check the grounding control, or web access is blocked in the tenant.
-- Task 2.4 returns nothing → the report isn't indexed yet. Reference it with `/` and note that you had to.
-- A file missing from the `/` picker → paste its SharePoint link instead.
-- Reasoning responses are slower by design. Thirty quiet seconds is the feature working.
-- Busy training tenants throttle ("Sorry, I wasn't able to respond to that"). Re-send, or move on and return.
+- **Work IQ respects existing permissions.** It gathers insights only from organizational content the signed-in user can already access, then brings relevant information together for the task.
+- **Copilot Pages turn conversations into shareable reports.** Continue editing the response and share the finished page with colleagues.
 
 **Challenge:** Which policy or standard does your team apply by hand today, and what would change if Copilot could quote the governing section every time?
 
