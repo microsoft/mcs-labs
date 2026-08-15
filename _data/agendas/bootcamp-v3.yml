@@ -54,13 +54,10 @@ schedule:
     duration: 15
 
   - type: module
-    slug: agent-builder
+    slug: m365-copilot
     label: "Module 2"
     title: "M365 Copilot"
-    # Agent Builder moves to M5 (Copilot harness) in V3, so the module entity's
-    # own Agent-Builder-centric description is overridden here.
-    description: "Microsoft 365 Copilot as an agent surface — what ships out of the box, the frontier agents (Researcher and Analyst), and where it sits against the other surfaces."
-    slides: "/presentations/bootcamp-v3/M02.%20M365%20Copilot.pptx"
+    description: "Microsoft 365 Copilot as an agent surface — public-web grounding, Work IQ, response modes, multi-model support, frontier agents, and where it sits against the other surfaces."
     time: "10:30"
     duration: 30
 
