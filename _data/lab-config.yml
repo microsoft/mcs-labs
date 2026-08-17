@@ -37,7 +37,7 @@ lab_metadata:
     difficulty: Beginner
     duration: 30
     id: m365-copilot-frontier-agents
-    module: agent-builder
+    module: m365-copilot
     section: core
     title: M365 Copilot and Frontier Agents
   115:
