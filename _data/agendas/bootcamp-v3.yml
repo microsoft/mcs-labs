@@ -258,10 +258,10 @@ schedule:
     time: "13:15"
     duration: 30
 
-  - type: session
-    title: "Lab 9: Deep Dive: Skills"
-    description: "Placeholder — lab to be authored. Near-exact match in mcs-orchestration UC4 (Leveraging Skills)."
+  - type: lab
+    slug: mcs-skills
     label: "Lab 9"
+    title: "Deep Dive: Skills"
     time: "13:45"
     duration: 30
 

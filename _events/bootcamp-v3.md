@@ -16,4 +16,6 @@ labs:
     label: "Lab 6"
   - slug: mcs-tools
     label: "Lab 7"
+  - slug: mcs-skills
+    label: "Lab 9"
 ---
