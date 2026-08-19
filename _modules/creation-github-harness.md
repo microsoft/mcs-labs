@@ -7,13 +7,4 @@ difficulty: 200
 section: intermediate_modules
 description: "Creating agents in the GitHub Copilot harness two ways — from the authoring UX and from natural-language chat."
 slides: "/presentations/bootcamp-v3/M08.%20Creation%20GitHub%20Harness%20from%20UX%20and%20from%20Chat.pptx"
-placeholder: true
 ---
-
-> **Placeholder module — Architecture Bootcamp - V3. Content to be connected later.**
->
-> Net-new module for **Architecture Bootcamp - V3**. A deck exists (M08); the module body is still to be written.
->
-> The click-paths are fully documented on Learn (`build-new-agent`, `create-automation-natural-language`), so this can be authored against real current product rather than guesswork.
->
-> **Presentation-only — there is no companion lab.** The 30-minute placeholder Lab 6 was dropped and the module went from 30 to 45 minutes to absorb the demo time.
