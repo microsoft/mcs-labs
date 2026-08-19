@@ -268,6 +268,11 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 
 1. From the Microsoft 365 Copilot page, select **Cowork** on the **Chat / Cowork** toggle at the top of the Copilot panel.
 
+1. Open the model picker at the top of the panel (it reads **Auto** by default), choose **Claude**, then **Opus 5**.
+
+   > [!IMPORTANT]
+   > Cowork writes the dashboard code itself, so the model you pick changes what you get. On **Opus 5** the dashboard comes back with cross-filtering charts and a detail table, as described below. On **Auto** the same prompt has produced a filters-only dashboard with no table. Pick Opus 5 so your result matches the lab.
+
 1. Paste the following prompt into the message input and press **Send**:
 
     ```text
@@ -291,12 +296,15 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
    > [!TIP]
    > This is the moment that separates delegation from chat. You are reading a finished artifact while the agent is still working on the next one. Nothing is blocked on your attention, and nothing was blocked on the agent's.
 
-1. **Observe** the dashboard in the side panel: dropdown filters for region, product line, sales rep and fiscal period, charts that cross-filter the whole view when you click them, and a sortable detail table. This is a working artifact, not a picture of one — try a filter before you move on.
+1. **Observe** the dashboard in the side panel: dropdown filters for region, product line, sales rep and fiscal period, KPI tiles, charts that cross-filter the whole view when you click a bar, and a monthly detail table. This is a working artifact, not a picture of one — try a filter before you move on, then click a single bar and watch every other chart and tile redraw around it.
 
    ![The generated dashboard open in the Cowork side panel](images/cowork-dashboard-sidepanel.png)
 
+   > [!NOTE]
+   > Cowork designs this dashboard from scratch each run, so the exact layout, chart types and tile set will differ from the screenshot. Filters and charts are reliably there; extras such as a records tile or a second summary table come and go.
+
    > [!TIP]
-   > Read the line under the dashboard title — it cites its own source, along the lines of *"Source: Sales.xlsx — Sales Lab1b document library · 48 monthly records."* That is the fastest confirmation that Cowork found the right workbook and read all of it, and you never have to leave the panel to check.
+   > Read the line under the dashboard title — it cites its own source, along the lines of *"Source: Sales.xlsx · Sales Lab1b document library · Jul 2023 – Jun 2025."* That is the fastest confirmation that Cowork found the right workbook and read all of it, and you never have to leave the panel to check.
 
 #### Verify the draft in Outlook
 
@@ -307,6 +315,8 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
    - **Recipient:** Alice Appleton, resolved as a contact pill
    - **Body:** a written summary of the sales data, not just a chart
    - **Graphic:** the sales visual from the dashboard renders inline in the email body — not as a link, and not as an attachment
+
+   ![The Cowork-drafted email open in Outlook, with Alice Appleton resolved and the sales graphic inline](images/cowork-uc2-outlook-draft.png)
 
 1. Leave it as a draft. As in Use Case #1, nothing needs to be sent.
 
@@ -381,19 +391,29 @@ Resume the previous Cowork session, have Cowork create a Home Appliance holiday 
     > [!TIP]
     > "With my name in Planner" is doing real work in a shared tenant — it keeps your plan distinguishable from everyone else's in the room. The launch date is the only hard constraint you give; the campaign structure, the tasks, and their sequencing are all Cowork's to decide.
 
-1. When Cowork prompts for **Microsoft Graph**, click **Approve**, then **Always allow call graph**.
+1. When Cowork prompts with **Use Microsoft Graph?**, open the arrow next to **Approve** and choose **Always allow Call graph**.
+
+   ![The Microsoft Graph consent card with the Approve dropdown open, showing Always allow Call graph](images/cowork-graph-consent-always-allow.png)
 
    > [!IMPORTANT]
    > This is the permission boundary made visible. Reading your files and drafting your mail needed no extra consent — writing into Planner does. Note that **Always allow** persists for future calls, so it is a decision about every subsequent task, not just this one.
+
+   > [!TIP]
+   > **Always allow Call graph** lives in the dropdown *on* the **Approve** button, not as a step after it — plain **Approve** authorises one single call and the card disappears. Building this plan takes Cowork dozens of Graph calls, and approving them one at a time means a prompt for every one.
 
 #### Review the tasks in Planner
 
 1. Open the app launcher (the 3×3 "waffle" icon at the top-left), choose **More apps**, then select **Planner**. Planner opens in a new window.
 
-1. **Observe** the tasks Cowork created in the Planner **My Tasks** section.
+1. Select **My plans**, then open the plan Cowork created — its name combines the campaign with your username. **Observe** the tasks it wrote: phase buckets, due dates working back from the launch, and an assignee on each one. Switch to the **Grid** view to see the whole plan at once.
+
+   ![The campaign plan Cowork created, in Planner's Grid view, showing each task with its assignee, due date and bucket](images/cowork-planner-task-grid.png)
+
+   > [!NOTE]
+   > Use **My plans**, not **My Tasks**. My Tasks lists only what is assigned to you *and* indexed, and it is routinely still empty at this point in the lab even when the tasks already exist in the plan. If My Tasks looks empty, nothing has gone wrong — open the plan instead.
 
    > [!IMPORTANT]
-   > Stop here for a moment. In Use Cases #1 and #2, Cowork prepared work and waited for you to approve it before anything reached another person. Here there was no draft stage — the tasks were created and assigned as soon as Cowork decided on them. Ask yourself whether that is the right default for this kind of action, and what you would want to change if this plan involved twenty people instead of two.
+   > Stop here for a moment. In Use Cases #1 and #2, Cowork prepared work and waited for you to approve it before anything reached another person. Here there was no draft stage — the tasks were written straight into a shared plan the moment Cowork decided on them, with no review step in between. Ask yourself whether that is the right default for this kind of action, and what you would want to change if this plan involved twenty people instead of two.
 
 #### Revise the plan in a second turn
 
@@ -415,7 +435,12 @@ Resume the previous Cowork session, have Cowork create a Home Appliance holiday 
    > [!TIP]
    > Cowork names the plan itself, so the exact wording varies from run to run. Look for your username and "Home Appliance" rather than matching the title character for character — this is the same reason the email subject in Use Case #1 is described rather than quoted.
 
-1. **Observe** that the Launch task is now assigned to **Alice Appleton** and has been moved back by one week.
+1. **Observe** that the launch task is now assigned to **Alice Appleton** and dated one week later.
+
+   ![The launch task in Planner, now dated one week later and assigned to Alice Appleton](images/cowork-planner-launch-revised.png)
+
+   > [!NOTE]
+   > Planner currently rejects Cowork's edits to a task it already created. When that happens Cowork does not fail — it writes a **replacement** task with the new owner and date, leaves the original in place, and tells you which one to delete. If you see two launch tasks, that is why; delete the original along with the plan during clean-up. The delegation point is unchanged, only the mechanism.
 
 #### Clean up
 
@@ -434,7 +459,7 @@ Resume the previous Cowork session, have Cowork create a Home Appliance holiday 
 - **Sessions carry context** — Resuming the Use Case #2 conversation meant one sentence about "the weak home appliances business" was enough. Cowork still had the data, the dashboard, and its own analysis.
 - **Some actions have no draft stage** — An email waits for you. A Planner assignment does not. The more systems an agent can write to, the more that distinction matters.
 - **Consent is where the boundary shows** — Reading and drafting were free; writing to Planner required explicit Microsoft Graph approval. "Always allow" is a decision about every future call, not just this one.
-- **Revision beats regeneration** — One sentence moved a task and reassigned it. You didn't restate the plan, name the task list, or start over — which is what working with a colleague actually looks like.
+- **Revision is a conversation, not a restatement** — One sentence moved the task and reassigned it. You didn't name the plan, the bucket, the task or the original date — Cowork built them, so it still knew. Whether it edits the task in place or replaces it is an implementation detail it reports back to you; either way you never re-briefed it.
 
 **Challenge: Apply this to your own use case**
 
