@@ -152,9 +152,7 @@ Confirm the environment is ready and the sample connected agent is published.
 
 #### Make sure that Dataverse Search is set to on
 
-1. In the upper right corner of Copilot Studio, Select the **Gear** icon
-
-1. Select **Go to Power Platform admin center**
+1. In the upper right corner of Copilot Studio, select **More options** (**⋯**), then select **Power Platform Admin Center** (if you finished your previous lab in the previous Copilot Studio experience, the upper-right corner shows a **Gear** icon instead — select it, then select **Go to Power Platform admin center**)
 
 1. In the **Power Platform admin center** ([https://admin.powerplatform.microsoft.com](https://admin.powerplatform.microsoft.com)), select the **Manage** tab, then select **Environments**
 
