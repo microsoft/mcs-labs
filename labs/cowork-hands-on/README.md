@@ -395,9 +395,6 @@ Resume the previous Cowork session, have Cowork create a Home Appliance campaign
    > [!NOTE]
    > Use **My plans**, not **My Tasks**. My Tasks lists only what is assigned to you *and* indexed, and it is routinely still empty at this point in the lab even when the tasks already exist in the plan. If My Tasks looks empty, nothing has gone wrong — open the plan instead.
 
-   > [!IMPORTANT]
-   > Stop here for a moment. In Use Cases #1 and #2, Cowork prepared work and waited for you to approve it. Here there was no draft stage — the tasks were written straight into Planner the moment Cowork decided on them, with no review step in between. Ask yourself whether that is the right default for this kind of action.
-
 #### Ask for the immediate actions
 
 1. Go back to Cowork and click on your session to resume it.
