@@ -19,7 +19,7 @@ See what the generative orchestration planner actually reads when it decides whi
 
 ---
 
-## 🧭 Lab Details
+## Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -27,25 +27,25 @@ See what the generative orchestration planner actually reads when it decides whi
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
-- [Why This Matters](#-why-this-matters)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Get the Sample Connected Agent Working](#-use-case-1-get-the-sample-connected-agent-working)
-  - [Use Case #2: See the Impact of Instructions and Descriptions on the Planner](#-use-case-2-see-the-impact-of-instructions-and-descriptions-on-the-planner)
-  - [Use Case #3: New Orchestrator – Agentic Reasoning Loop](#-use-case-3-new-orchestrator--agentic-reasoning-loop)
-- [Summary of learnings](#-summary-of-learnings)
-- [Conclusions and recommendations](#-conclusions-and-recommendations)
+- [Why This Matters](#why-this-matters)
+- [Introduction](#introduction)
+- [Core Concepts Overview](#core-concepts-overview)
+- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Use Cases Covered](#use-cases-covered)
+- [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: Get the Sample Connected Agent Working](#use-case-1-get-the-sample-connected-agent-working)
+  - [Use Case #2: See the Impact of Instructions and Descriptions on the Planner](#use-case-2-see-the-impact-of-instructions-and-descriptions-on-the-planner)
+  - [Use Case #3: New Orchestrator – Agentic Reasoning Loop](#use-case-3-new-orchestrator--agentic-reasoning-loop)
+- [Summary of learnings](#summary-of-learnings)
+- [Conclusions and recommendations](#conclusions-and-recommendations)
 
 ---
 
-## 🤔 Why This Matters
+## Why This Matters
 
 **Makers and Architects** — an agent that picks the wrong tool is almost never fixed by rewording the user's prompt. The generative orchestration planner decides which child agent, tool, knowledge source, and input value to use on every turn, and it makes those decisions by reading text *you* wrote: the agent's Instructions and the Descriptions on its children, tools, and inputs. Those fields are the actual program. Most "the agent is dumb" bugs are a description that never said the thing the planner needed to know.
 
@@ -62,7 +62,7 @@ The distinction is the whole lab: **instructions always apply — descriptions d
 
 ---
 
-## 🌐 Introduction
+## Introduction
 
 This is the hands-on companion to **Module 12 — Deep Dive: Instructions & Descriptions**.
 
@@ -80,7 +80,7 @@ The through-line is inspectability. Every routing decision in this lab is visibl
 
 ---
 
-## 🎓 Core Concepts Overview
+## Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -93,7 +93,7 @@ The through-line is inspectability. Every routing decision in this lab is visibl
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 * [Generative Orchestration](https://learn.microsoft.com/en-us/microsoft-copilot-studio/faqs-generative-orchestration)
 * [Configure generative actions](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-generative-actions)
@@ -101,7 +101,7 @@ The through-line is inspectability. Every routing decision in this lab is visibl
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 - Access to Microsoft Copilot Studio
 - A Power Platform environment where you can edit Dataverse table views and toggle environment settings (System Administrator or System Customizer)
@@ -114,7 +114,7 @@ The through-line is inspectability. Every routing decision in this lab is visibl
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab, you'll learn to read and tune the text the orchestration planner actually acts on. By the end of the lab, you will:
 
@@ -126,26 +126,26 @@ In this lab, you'll learn to read and tune the text the orchestration planner ac
 
 ---
 
-## 🧩 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Get the Sample Connected Agent Working](#-use-case-1-get-the-sample-connected-agent-working) | Confirm the prebuilt connected agent and its data are ready before working with it | 10 min |
-| 2 | [See the Impact of Instructions and Descriptions on the Planner](#-use-case-2-see-the-impact-of-instructions-and-descriptions-on-the-planner) | Build intuition for how planner decisions track with Instructions and Descriptions | 20 min |
-| 3 | [New Orchestrator – Agentic Reasoning Loop](#-use-case-3-new-orchestrator--agentic-reasoning-loop) | See how a new-type agent's New Orchestrator completes multi-step tasks end to end | 30 min |
+| 1 | [Get the Sample Connected Agent Working](#use-case-1-get-the-sample-connected-agent-working) | Confirm the prebuilt connected agent and its data are ready before working with it | 10 min |
+| 2 | [See the Impact of Instructions and Descriptions on the Planner](#use-case-2-see-the-impact-of-instructions-and-descriptions-on-the-planner) | Build intuition for how planner decisions track with Instructions and Descriptions | 20 min |
+| 3 | [New Orchestrator – Agentic Reasoning Loop](#use-case-3-new-orchestrator--agentic-reasoning-loop) | See how a new-type agent's New Orchestrator completes multi-step tasks end to end | 30 min |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 🧱 Use Case #1: Get the Sample Connected Agent Working
+## Use Case #1: Get the Sample Connected Agent Working
 
 Verify that the Account and Contact Information agent (the sample connected agent we'll build on throughout this lab) is fully configured to work in your environment.
 
 > [!NOTE]
-> If you've already completed this verification in another lab (such as the **Multi-Agent lab**), you can skip this Use Case and continue to [Use Case #2](#-use-case-2-see-the-impact-of-instructions-and-descriptions-on-the-planner).
+> If you've already completed this verification in another lab (such as the **Multi-Agent lab**), you can skip this Use Case and continue to [Use Case #2](#use-case-2-see-the-impact-of-instructions-and-descriptions-on-the-planner).
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
@@ -312,7 +312,7 @@ Confirm the environment is ready and the sample connected agent is published.
 
 ---
 
-## 🧱 Use Case #2: See the Impact of Instructions and Descriptions on the Planner
+## Use Case #2: See the Impact of Instructions and Descriptions on the Planner
 
 Walk through where **Instructions** and **Descriptions** live in the Account Data Lookup Agent, then run a series of test queries to observe how the generative orchestration planner uses them to pick the right child agent, tool, and inputs at each turn.
 
@@ -597,7 +597,7 @@ Open the **Account Data Lookup Agent** in Copilot Studio and walk through each o
 
 ---
 
-## 🧱 Use Case #3: New Orchestrator – Agentic Reasoning Loop
+## Use Case #3: New Orchestrator – Agentic Reasoning Loop
 
 Build a brand-new **Sales Account Assistant** in Copilot Studio's **New experience**, attach knowledge and a set of tools, and watch the **New Orchestrator** drive multi-step tasks with its **Agentic Reasoning Loop** — planning, calling a tool, observing the result, and iterating until the user's task is complete, all in a single turn.
 
@@ -627,7 +627,7 @@ Stand up a new-type agent and validate how the New Orchestrator's Agentic Reason
 > [!NOTE]
 > These environment features are required for the **Dataverse MCP** tool you'll add below — they are not specific to the New Orchestrator.
 
-1. Navigate to the **Power Platform admin center** the same way you did in [Use Case #1](#-use-case-1-get-the-sample-connected-agent-working) — in Copilot Studio, select the **Gear** icon in the upper right, then **Go to Power Platform admin center**.
+1. Navigate to the **Power Platform admin center** the same way you did in [Use Case #1](#use-case-1-get-the-sample-connected-agent-working) — in Copilot Studio, select the **Gear** icon in the upper right, then **Go to Power Platform admin center**.
 
 1. Select the **Manage** tab, then **Environments**, choose your environment, then select **Settings** on the **top navigation bar** of the environment page (the same top-nav **Settings** command you used in Use Case #1).
 
@@ -803,7 +803,7 @@ Open the **Preview** tab. The New Orchestrator surfaces its work **inline in the
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 True learning comes from doing, questioning, and reflecting. Across this lab you saw the same orchestration engine from two angles, and one idea underneath both of them.
 
@@ -817,7 +817,7 @@ True learning comes from doing, questioning, and reflecting. Across this lab you
 
 ---
 
-## 🔍 Conclusions and recommendations
+## Conclusions and recommendations
 
 **Instructions and Descriptions golden rules:**
 
