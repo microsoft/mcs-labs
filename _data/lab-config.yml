@@ -172,6 +172,13 @@ lab_metadata:
     module: orchestration
     section: intermediate
     title: Orchestration with Copilot Studio
+  295:
+    difficulty: Advanced
+    duration: 30
+    id: mcs-skills
+    module: agent-skills
+    section: intermediate
+    title: 'Deep Dive: Skills'
   300:
     difficulty: Advanced
     duration: 30
@@ -273,6 +280,7 @@ lab_journeys:
   mcs-governance: [business-user, developer]
   mcs-multi-agent: [business-user, developer]
   mcs-orchestration: [developer]
+  mcs-skills: [developer]
   mcs-tools: [business-user, developer]
   measure-success: [developer]
   pipelines-and-source-control: [developer]
@@ -309,6 +317,7 @@ legacy_lab_orders:
   mcs-governance: 195
   mcs-multi-agent: 250
   mcs-orchestration: 290
+  mcs-skills: 295
   mcs-tools: 270
   measure-success: 400
   pipelines-and-source-control: 410
