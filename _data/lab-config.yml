@@ -172,6 +172,13 @@ lab_metadata:
     module: orchestration
     section: intermediate
     title: Orchestration with Copilot Studio
+  293:
+    difficulty: Advanced
+    duration: 30
+    id: mcs-instructions
+    module: instructions-and-descriptions
+    section: intermediate
+    title: 'Deep Dive: Instructions & Descriptions'
   295:
     difficulty: Advanced
     duration: 30
@@ -278,6 +285,7 @@ lab_journeys:
   mcs-alm: [business-user, developer]
   mcs-byom: [business-user]
   mcs-governance: [business-user, developer]
+  mcs-instructions: [developer]
   mcs-multi-agent: [business-user, developer]
   mcs-orchestration: [developer]
   mcs-skills: [developer]
@@ -315,6 +323,7 @@ legacy_lab_orders:
   mcs-alm: 280
   mcs-byom: 230
   mcs-governance: 195
+  mcs-instructions: 293
   mcs-multi-agent: 250
   mcs-orchestration: 290
   mcs-skills: 295
