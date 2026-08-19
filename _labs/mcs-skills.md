@@ -18,6 +18,12 @@ Package a repeatable procedure as a Skill, then run that one Skill across a Copi
 
 ---
 
+# Deep Dive: Skills
+
+Package a repeatable procedure as a Skill, then run that one Skill across a Copilot Studio agent, a workflow, Copilot Cowork, and coding agents.
+
+---
+
 ## 🧭 Lab Details
 
 | Level | Persona | Duration | Purpose |
@@ -40,6 +46,7 @@ Package a repeatable procedure as a Skill, then run that one Skill across a Copi
   - [Use Case #2: Using skills in Copilot Studio workflows](#-use-case-2-using-skills-in-copilot-studio-workflows)
   - [Use Case #3: Using skills and plugins in Copilot Cowork](#-use-case-3-using-skills-and-plugins-in-copilot-cowork)
   - [Use Case #4: Using skills in coding agents (demonstration)](#-use-case-4-using-skills-in-coding-agents-demonstration)
+  - [Use Case #5: Leveraging a Skill inside a new-type agent](#-use-case-5-leveraging-a-skill-inside-a-new-type-agent)
 - [Summary of learnings](#-summary-of-learnings)
 - [Conclusions and recommendations](#-conclusions-and-recommendations)
 
@@ -123,6 +130,7 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
 | 2 | [Using skills in Copilot Studio workflows](#-use-case-2-using-skills-in-copilot-studio-workflows) | Call a Skill-equipped agent from a workflow and deliver the result | 10 min |
 | 3 | [Using skills and plugins in Copilot Cowork](#-use-case-3-using-skills-and-plugins-in-copilot-cowork) | Install the same Skill as a Cowork plugin and run it there | 6 min |
 | 4 | [Using skills in coding agents (demonstration)](#-use-case-4-using-skills-in-coding-agents-demonstration) | See the same Skill running in coding agents (demonstration) | 2 min |
+| 5 | [Leveraging a Skill inside a new-type agent](#-use-case-5-leveraging-a-skill-inside-a-new-type-agent) | Author a Skill from blank and watch the New Orchestrator load it and chain custom MCP servers, knowledge, and weather | 30 min |
 
 ---
 
@@ -664,6 +672,251 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
 
 ---
 
+## 🧱 Use Case #5: Leveraging a Skill inside a new-type agent
+
+Take the **Sales Account Assistant** you built in Use Case #3 of [Deep Dive: Instructions & Descriptions](../mcs-instructions/README.md) and turn it into a focused order-resolution agent by adding a **Skill** — a reusable, structured set of behaviors the New Orchestrator loads when a request matches. Along the way you'll attach two **custom MCP servers** (Order Management and Warehouse), a second **knowledge source** (customer-facing policies), and updated **instructions** that tell the orchestrator how to use them together.
+
+A **Skill** packages "when to use me" + "the tools I rely on" + "the procedure to follow" into one component. Instead of cramming every rule into the agent's top-level instructions, you give the orchestrator a named, self-contained playbook it pulls in only when it's relevant — keeping the base instructions short and the behavior consistent.
+
+### Objective
+
+Extend that Sales Account Assistant so it can diagnose and resolve order problems end to end — then watch the New Orchestrator **load the Skill** and chain the MCP tools, knowledge, and weather across a single turn. By the end you will have:
+
+- Added a **Customer Care** knowledge source from the **Customer** folder of the same SharePoint library used by that agent
+- Created the **Order Management MCP** and **Warehouse MCP** connections and attached both servers as tools
+- Authored an **Order Resolution Concierge** Skill and updated the agent's instructions to use it
+- Run a series of prompts that show the Skill loading and the orchestrator chaining everything together
+
+> [!IMPORTANT]
+> **This Use Case has a prerequisite in another lab.** It builds directly on the **Sales Account Assistant** created in **Use Case #3 of [Deep Dive: Instructions & Descriptions](../mcs-instructions/README.md)** — the new-type agent with the **Get current weather** tool, the **Microsoft Dataverse MCP Server** tool, and the internal `company_policies_sample.pdf` knowledge (from the **HR** folder) attached. Build that agent first; without it there is nothing here to extend.
+
+### Step-by-step instructions
+
+#### Add the Customer Care knowledge source
+
+That agent already carries the internal `company_policies_sample.pdf` from the **HR** folder. Now add a **second, customer-facing** policy document so the agent can tell the difference between *internal* guidance and *what it's allowed to say to a customer*.
+
+1. Open the **Sales Account Assistant** agent on the **Build** tab.
+
+1. In the right rail, select **Add knowledge**, then choose the **SharePoint** card.
+
+1. Select **Browse items**, then navigate **OnePlace → Documents → Customer** and select **Contoso-Customer-Care-Policies.pdf**. Choose **Confirm selection**.
+
+    ![Select the Customer Care policy from the Customer folder](images/uc5-knowledge-customer.png)
+
+1. Select **Add to agent**. Your **Knowledge** section should now list **both** policy sources — the internal HR document and the customer-facing Customer Care document.
+
+    ![Both knowledge sources attached](images/uc5-knowledge-both.png)
+
+    > [!NOTE]
+    > Two policy sources is deliberate. The customer-facing **Contoso Customer Care Policies** is what the agent quotes to a customer; the internal `company_policies_sample.pdf` is handling/escalation guidance the agent uses to decide but does **not** read back to a customer. The instructions and Skill you add below draw that line explicitly.
+
+#### Add the MCP server tools to the Sales Account Assistant
+
+Attach the two servers to the **new-type** agent, creating each connection inline as you add it.
+
+1. Return to the **Sales Account Assistant** (Build tab). In the right rail, select **Add tool** (the **+** on the Tools section).
+
+1. Filter to **Model Context Protocol (MCP)**, search **Order Management**, and select **Order Management MCP Server**. On the connection step, choose **Create new connection → Create**, then **Add**.
+
+1. Repeat for **Warehouse MCP Server**. Your **Tools** list should now show four tools: **Get current weather**, **Microsoft Dataverse MCP Server**, **Order Management MCP Server**, and **Warehouse MCP Server**.
+
+    ![All four tools attached](images/uc5-tools-attached.png)
+
+#### Add a Skill
+
+A Skill gives the orchestrator a named playbook for order problems. You'll create it directly in the UI.
+
+1. In the right rail, select **Add skill** (the **+** on the Skills section). The dialog offers **Upload a skill** (a `SKILL.md` file) or **Create from blank**. Choose **Create from blank**.
+
+    ![Add skill dialog — Upload or Create from blank](images/uc5-skill-add.png)
+
+1. Fill in the three fields:
+
+    - **Name:**
+
+      ```text
+      order-resolution-concierge
+      ```
+
+    - **Description:**
+
+      ```text
+      Use when a customer or sales rep asks about an order that is delayed, stuck, missing, damaged, out of stock, that they want to return or exchange, or whose delivery might be affected by weather. Diagnoses where the order is in the fulfillment pipeline and reports the options (wait for restock, exchange for a different size/color, or start a return) grounded in company policy. Only acts when the user explicitly asks.
+      ```
+
+    - **Instructions:**
+
+      ```text
+      You help resolve an order problem when asked. Answer the question the user actually asked. Do not push next steps, volunteer extra options, or take any write action (returns, exchanges, follow-up messages) unless the user explicitly asks for it.
+
+      When to use this skill:
+      - "Where is my order?" / "Why is order #12345 late?"
+      - "This item is out of stock — what can I do?"
+      - "I want to return / exchange an item."
+      - "Can I get this in a different size or color?"
+      - "Could the weather hold up my delivery?"
+
+      Tools you have:
+      - Order Management MCP: search_orders (find the order and identify the customer by name, email, or order number); get_order (full order detail — items, SKUs, status, shipping address); get_shipment (carrier, tracking, delivery estimate — shipped/delivered orders only); request_return (open a return for an item); get_return_status (return stage / refund status).
+      - Warehouse MCP: get_fulfillment_status (picking/packing stage for an order not yet shipped); check_stock (inventory level for a SKU); find_alternatives (other in-stock items in the same category — best for size/color exchanges); get_restock_date (expected arrival date + incoming quantity for an out-of-stock SKU).
+      - Get current weather: current conditions at a delivery destination, to flag risk to an active delivery.
+      - Contoso Customer Care Policies (knowledge): return window, refunds, restocking fees, exchanges, cancellations, shipping/weather-delay, backorder rules.
+
+      Procedure:
+      1. Identify the order and the customer. If given an order ID, call get_order directly. Otherwise call search_orders with the name, email, or partial info — this both finds the order(s) and identifies the customer. If more than one matches, ask one clarifying question — never guess.
+      2. Diagnose by the order's state. Shipped/delivered: get_shipment for carrier, tracking, delivery estimate. Not yet shipped (processing): get_fulfillment_status for the warehouse stage. get_shipment will error for an order that hasn't shipped — that's expected; pivot to get_fulfillment_status rather than reporting a failure.
+      3. If an item is delayed or unavailable, call check_stock for that SKU. If out of stock, call get_restock_date for when it returns. Only offer find_alternatives when a same-category item is a genuine substitute (a different size or color of the same product); do not present an unrelated category-mate (e.g. a cable for an e-reader). When nothing comparable is in stock, say so and present waiting for restock as the honest option.
+      4. Ground the options in policy. Two policy sources are loaded — use the right one. Contoso Customer Care Policies is the customer-facing source: what you state, quote, and promise the customer (returns, refunds, exchanges, cancellations, shipping) — cite it by section. The internal policies (company_policies_sample.pdf) are internal handling/escalation guidance: use them to decide and escalate, but do not quote or read them back to a customer. When both cover the same topic, the customer hears the customer-facing rule; apply internal constraints silently or by escalating. Key rules: Returns (section 1) 30 days from delivery, in-transit not yet returnable; Damaged/wrong item (1.4) priority — no restocking fee, free return shipping, customer's choice of replacement/exchange/full refund including original shipping; Restocking fee (3) 15% only on opened non-defective electronics, waived for defects, our error, or exchanges; Refund timing (2) 5–7 business days after receipt and inspection; Cancellations (5) free before the order ships, processing/picked/packed and backordered lines still cancellable, partial cancels allowed; Backorders/mixed availability (6) wait, split the shipment (free shipping on the second box), or cancel the backordered line; Shipping/weather delays (7) standard shipping not refundable for weather or carrier delays, lost packages reshipped free. If the knowledge doesn't cover it, say so and route to a human.
+      5. If the user asks whether weather could affect an active delivery, get the destination from get_order, confirm the order is in transit or out for delivery via get_shipment, then call Get current weather for the destination city and assess risk. Current conditions only — don't present it as a forecast; frame it as conditions now at the destination for an imminent delivery.
+      6. Answer the question. Report what you found — status, location, restock date, eligible options — and stop. If they asked "where is my order," tell them where it is. Only lay out resolution choices (wait/exchange/return) if they asked what they can do about it.
+      7. Take action only when explicitly asked. Return: only if the user says to start one — request_return, then get_return_status to confirm it opened, and read back the return authorization. Exchange: only if the user chooses a specific size/color — confirm with check_stock first. Never open a return, commit an exchange, or send any message on your own initiative.
+
+      Guardrails:
+      - Never promise a refund, exchange, restock date, or delivery outcome that a tool result or the policy knowledge does not support.
+      - If a tool returns nothing or errors, say so plainly and offer the next-best path; do not invent order, stock, tracking, or weather data.
+      - Resolve the customer and order with search_orders/get_order; don't ask for info you can already look up.
+      - Never disclose internal policy (company_policies_sample.pdf) to a customer. Quote only the Contoso Customer Care Policies; use internal policy to decide and escalate, not to answer.
+      ```
+
+    ![The Create from blank skill form filled in](images/uc5-skill-create.png)
+
+    > [!NOTE]
+    > If you author a Skill as a `SKILL.md` file instead, the file carries a small YAML **front matter** block with the `name` and `description`. When you fill the form fields here, you **don't** include that front matter — the **Name** and **Description** fields capture it, and the **Instructions** field holds the body only.
+
+1. Select **Create**. The Skill appears under **Skills** as **order-resolution-concierge**, and the agent saves.
+
+    ![The Skill attached to the agent](images/uc5-skill-attached.png)
+
+#### Update the agent instructions
+
+Replace the agent's existing instructions with a shorter, Skill-aware version that points the orchestrator at the Skill for order problems and draws the internal-vs-customer policy line.
+
+1. In the **Instructions** box, select all of the existing text and replace it with:
+
+    ```text
+    You are the Sales Account Assistant for sales associates. Help users resolve order issues end to end — order status, shipments, returns, exchanges, inventory, restock timing, and delivery-weather risk.
+
+    Use your tools to do the work: search_orders and get_order plus the Order Management and Warehouse MCP servers for order, fulfillment, stock, and return actions; the Dataverse tools for account and contact data; and the weather tool for current conditions at a delivery destination.
+
+    For any order problem (delayed, stuck, out of stock, damaged, return, exchange, or weather-risk), follow the Order Resolution Concierge skill.
+
+    Ground customer-facing answers in the Contoso Customer Care Policies (returns, refunds, exchanges, cancellations, shipping) and cite the relevant section. Treat the internal company policy as internal guidance only — use it to decide and escalate, and do not quote it to a customer.
+
+    Answer the question that was asked. Only take an action (open a return or commit an exchange) when the user explicitly asks. Never invent order, stock, tracking, or weather data — if a tool returns nothing or errors, say so and offer the next-best step.
+    ```
+
+1. Select **Save**.
+
+    ![Updated, Skill-aware instructions](images/uc5-instructions.png)
+
+#### Demonstration
+
+Open the **Preview** pane and run the prompts below. Each exercises a different part of the Skill and the orchestrator. Watch the train of thought: on order problems you'll see **Loaded Skill: …order-resolution-conc…** followed by the MCP tool calls, the knowledge search, and a synthesized answer.
+
+> [!IMPORTANT]
+> **Reset the conversation between prompts that state a customer name.** When a prompt opens with "I'm Sarah Mitchell" or "this is James Rivera," the orchestrator keeps that person in context for the rest of the conversation. Before running the next prompt, select **New chat** (the refresh control at the top of the Preview pane) so the agent starts clean and doesn't carry the previous customer forward. Resetting between every prompt keeps each result independent.
+
+**1. Full account picture (identity + fan-out).**
+
+```text
+Hi, I'm Sarah Mitchell. Can you pull up my orders and summarize where each one stands, flagging anything that's delayed or has a return in progress?
+```
+
+One request fans out across the whole account: `search_orders` finds Sarah's three orders, `get_order` pulls all three at once, then `get_shipment` and `get_fulfillment_status` fill in the live state. *Driven by the instructions' "search_orders … to identify the customer" guidance.* **Reset the conversation afterward** (Sarah is now in context).
+
+![Account portfolio summary](images/uc5-demo-1-portfolio.png)
+
+**2. The bundle dilemma (Skill loads; mixed availability).**
+
+```text
+Order ORD-10460 still hasn't arrived. What's holding it up, and what are my options?
+```
+
+This is the centerpiece. Watch **the Skill load**, then the orchestrator runs `get_order` → `get_fulfillment_status` + `check_stock` (both items) → `get_restock_date` for the out-of-stock item → a policy search — and reports the mixed-availability picture (one item backordered, one in stock and picked). *Driven by the Skill's Procedure steps 2–4.*
+
+![Skill loads and diagnoses the bundle](images/uc5-demo-2-bundle.png)
+
+**3. Restock timing (the honest "wait").**
+
+```text
+When will the LumiRead e-reader in order ORD-10422 ship?
+```
+
+`get_order` → `get_fulfillment_status` → `get_restock_date` returns the restock date, and the agent reports "still awaiting restock" rather than inventing a ship date. *Driven by the Skill's restock handling and the "never invent … data" guardrail.*
+
+![Restock answer](images/uc5-demo-3-restock.png)
+
+**4. Size/color exchange (where find_alternatives shines).**
+
+```text
+The black TrailMark hoodie in order ORD-10455 — can I get it in XL or grey instead?
+```
+
+`get_order` → `find_alternatives` surfaces the genuine same-product substitutes (XL and grey), and the agent checks the Customer Care exchange rules before answering. *Driven by Procedure step 3's "genuine substitute … different size or color" rule.*
+
+![Exchange options](images/uc5-demo-4-exchange.png)
+
+**5. Weather and delivery risk (cross-domain synthesis).**
+
+```text
+My order ORD-10421 is out for delivery — could the weather hold it up?
+```
+
+The orchestrator bridges three domains: `get_order` + `get_shipment` to find the destination and confirm it's out for delivery, then **Get current weather** for that city, then the shipping-delay policy — and concludes whether weather is a concern. Note it reports **current conditions, not a forecast**. *Driven by the Skill's Procedure step 5.*
+
+![Weather → delivery-risk synthesis](images/uc5-demo-5-weather.png)
+
+**6. Policy-grounded eligibility (the guardrail in action).**
+
+```text
+The PulseWave earbuds in order ORD-10318 are defective. Confirm I'm within policy, then go ahead and start the return for me.
+```
+
+Even though the user asks for an action, the agent checks the policy first: `get_order` + `get_shipment` establish the delivery date, the policy gives the **30-day return window (§1.1)**, and the agent **declines to start the return** because the order is outside that window — citing the section rather than calling `request_return`. *Driven by Procedure step 7 ("take action only when … supported") and the "never promise … the policy does not support" guardrail.*
+
+> [!NOTE]
+> The sample orders are dated well before the current date, so they fall outside the 30-day window — which is why this prompt demonstrates a **policy-grounded refusal** rather than an executed return. It's a clean illustration that the grounding is real: the agent does exactly what the policy says.
+
+![Policy-grounded refusal citing the return window](images/uc5-demo-6-policy-refusal.png)
+
+**7. Won't guess (the clarifying-question guardrail).**
+
+```text
+Hi, this is James Rivera. Can you check on my recent order?
+```
+
+`search_orders` finds **two** orders for James, so instead of guessing, the agent asks **one clarifying question** — which order would you like, or both? *Driven by Procedure step 1's "if more than one matches, ask one clarifying question — never guess."*
+
+![Clarifying question instead of guessing](images/uc5-demo-7-guardrail.png)
+
+### 🏅 Congratulations! You've completed Use Case #5!
+
+You extended a new-type agent with a **Skill**, two **custom MCP servers**, a second **knowledge source**, and **Skill-aware instructions** — and watched the New Orchestrator load the Skill and chain everything across a single turn.
+
+### Test your understanding
+
+**Key takeaways:**
+
+* **A Skill is a reusable, named playbook the orchestrator loads on demand.** It bundles *when to use me*, *the tools I rely on*, and *the procedure to follow* — keeping the agent's base instructions short while making the behavior consistent. You saw **Loaded Skill: …** in the train of thought whenever a prompt matched.
+* **Custom MCP servers extend the agent with domain actions.** Order Management and Warehouse added ten order/fulfillment tools the orchestrator chains dynamically — no per-step prompting.
+* **Two knowledge sources, two audiences.** The customer-facing Customer Care policy is what the agent quotes; the internal policy is decision/escalation guidance it doesn't read back to a customer. Instructions and the Skill enforce that line.
+* **Grounding is real, not cosmetic.** The agent cited policy sections, respected the return window, and refused an out-of-window return — proof the policy actually governs its answers.
+
+**Lessons learned & troubleshooting tips:**
+
+* If a custom MCP server's tools don't load right after you add it, the connection may not have completed — remove the tool, then re-add it and recreate the connection (**Create new connection → Create → Add**).
+* If a custom MCP server is hard to find, **filter the tool picker to Model Context Protocol** and press **Enter** to run the search.
+* If the agent carries a previous customer into a new question, select **New chat** to reset — context persists across a conversation.
+
+**Challenge: Apply this to your own use case**
+
+* Take a multi-step process in your domain (onboarding, incident triage, quoting) and sketch it as a Skill: the *when to use me* trigger phrases, the *tools* it would call, and a numbered *procedure* with explicit guardrails for when **not** to act. Decide what belongs in the Skill versus the agent's base instructions.
+
+---
+
+---
+
 ## 🏆 Summary of learnings
 
 You built one Skill-equipped agent and then reused that Skill three more times without editing it. Along the way:
@@ -686,5 +939,4 @@ You built one Skill-equipped agent and then reused that Skill three more times w
 - **Choose the surface by what has to come out of it.** If the deliverable is a file, use a surface that can hand files back; if it is a notification, a workflow node is more reliable than asking the agent to send it
 - **Let the deterministic half be deterministic.** Triggers, routing and loops belong in a workflow. Judgement, reading and drafting belong to the agent and its Skill
 - **A Skill constrains structure, sourcing and honesty - not arithmetic.** Two runs of the same Skill on the same RFP produced different prices. Commercial numbers still need a human owner before anything reaches a customer
-
 

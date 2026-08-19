@@ -10,7 +10,7 @@ event_id: bootcamp-v3
 #   * "module" rows reference first-class entities in the _modules collection.
 #     `title:` and `duration:` on the row override the module's own values.
 #   * "lab" rows reference _labs/<slug>.md. `duration:` overrides the lab's own.
-#   * Labs 5, 8 and 9 do not exist yet. They are carried as "session" rows so
+#   * Lab 5 does not exist yet. It is carried as a "session" row so
 #     the timeline stays complete and correctly timed; each names the seed
 #     material it will be authored from. Convert each to a `type: lab` row as
 #     the lab lands.
@@ -244,10 +244,10 @@ schedule:
     time: "11:45"
     duration: 60
 
-  - type: session
-    title: "Lab 8: Deep Dive: Instructions & Descriptions"
-    description: "Placeholder — lab to be authored. Near-exact match in mcs-orchestration UC2 (impact of instructions and descriptions on the planner)."
+  - type: lab
+    slug: mcs-instructions
     label: "Lab 8"
+    title: "Deep Dive: Instructions & Descriptions"
     time: "12:45"
     duration: 30
 
