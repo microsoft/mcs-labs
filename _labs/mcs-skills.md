@@ -24,7 +24,7 @@ Package a repeatable procedure as a Skill, then run that one Skill across a Copi
 
 ---
 
-## 🧭 Lab Details
+## Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
@@ -32,27 +32,27 @@ Package a repeatable procedure as a Skill, then run that one Skill across a Copi
 
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
-- [Why This Matters](#-why-this-matters)
-- [Introduction](#-introduction)
-- [Core Concepts Overview](#-core-concepts-overview)
-- [Documentation and Additional Training Links](#-documentation-and-additional-training-links)
-- [Prerequisites](#-prerequisites)
-- [Summary of Targets](#-summary-of-targets)
-- [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#️-instructions-by-use-case)
-  - [Use Case #1: Leveraging Skills in Copilot Studio agents](#-use-case-1-leveraging-skills-in-copilot-studio-agents)
-  - [Use Case #2: Using skills in Copilot Studio workflows](#-use-case-2-using-skills-in-copilot-studio-workflows)
-  - [Use Case #3: Using skills and plugins in Copilot Cowork](#-use-case-3-using-skills-and-plugins-in-copilot-cowork)
-  - [Use Case #4: Using skills in coding agents (demonstration)](#-use-case-4-using-skills-in-coding-agents-demonstration)
-  - [Use Case #5: Leveraging a Skill inside a new-type agent](#-use-case-5-leveraging-a-skill-inside-a-new-type-agent)
-- [Summary of learnings](#-summary-of-learnings)
-- [Conclusions and recommendations](#-conclusions-and-recommendations)
+- [Why This Matters](#why-this-matters)
+- [Introduction](#introduction)
+- [Core Concepts Overview](#core-concepts-overview)
+- [Documentation and Additional Training Links](#documentation-and-additional-training-links)
+- [Prerequisites](#prerequisites)
+- [Summary of Targets](#summary-of-targets)
+- [Use Cases Covered](#use-cases-covered)
+- [Instructions by Use Case](#instructions-by-use-case)
+  - [Use Case #1: Leveraging Skills in Copilot Studio agents](#use-case-1-leveraging-skills-in-copilot-studio-agents)
+  - [Use Case #2: Using skills in Copilot Studio workflows](#use-case-2-using-skills-in-copilot-studio-workflows)
+  - [Use Case #3: Using skills and plugins in Copilot Cowork](#use-case-3-using-skills-and-plugins-in-copilot-cowork)
+  - [Use Case #4: Using skills in coding agents (demonstration)](#use-case-4-using-skills-in-coding-agents-demonstration)
+  - [Use Case #5: Leveraging a Skill inside a new-type agent](#use-case-5-leveraging-a-skill-inside-a-new-type-agent)
+- [Summary of learnings](#summary-of-learnings)
+- [Conclusions and recommendations](#conclusions-and-recommendations)
 
 ---
 
-## 🤔 Why This Matters
+## Why This Matters
 
 **Makers and Developers** - Have you written the same long instructions into three different agents, and watched them drift apart?
 
@@ -69,7 +69,7 @@ Think of a Skill as a playbook the orchestrator picks up only when it is relevan
 
 ---
 
-## 🌐 Introduction
+## Introduction
 
 A Skill packages a named, self-contained playbook: a description that tells the orchestrator when the Skill applies, instructions describing the procedure, and the reference material the work depends on. Instead of cramming every rule into an agent's instructions, you hand the orchestrator something it can load only when a request matches.
 
@@ -79,7 +79,7 @@ This lab uses exactly that scenario. You build an RFP Response agent with a Skil
 
 ---
 
-## 🎓 Core Concepts Overview
+## Core Concepts Overview
 
 | Concept | Why it matters |
 |---------|----------------|
@@ -91,7 +91,7 @@ This lab uses exactly that scenario. You build an RFP Response agent with a Skil
 
 ---
 
-## 📄 Documentation and Additional Training Links
+## Documentation and Additional Training Links
 
 * [Agent skills in Microsoft Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/)
 * [Create and manage workflows in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/flows-overview)
@@ -101,7 +101,7 @@ This lab uses exactly that scenario. You build an RFP Response agent with a Skil
 
 ---
 
-## ✅ Prerequisites
+## Prerequisites
 
 - Access to Microsoft Copilot Studio with an environment you can create agents in
 - A Microsoft 365 account with Outlook, used both to trigger the workflow and to receive its output
@@ -110,7 +110,7 @@ This lab uses exactly that scenario. You build an RFP Response agent with a Skil
 
 ---
 
-## 🎯 Summary of Targets
+## Summary of Targets
 
 In this lab you author one Skill and reuse it everywhere the work arrives. By the end of the lab you will:
 
@@ -122,23 +122,23 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
 
 ---
 
-## 🧩 Use Cases Covered
+## Use Cases Covered
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Leveraging Skills in Copilot Studio agents](#-use-case-1-leveraging-skills-in-copilot-studio-agents) | Attach a Skill to an agent and watch the orchestrator load it unprompted | 12 min |
-| 2 | [Using skills in Copilot Studio workflows](#-use-case-2-using-skills-in-copilot-studio-workflows) | Call a Skill-equipped agent from a workflow and deliver the result | 10 min |
-| 3 | [Using skills and plugins in Copilot Cowork](#-use-case-3-using-skills-and-plugins-in-copilot-cowork) | Install the same Skill as a Cowork plugin and run it there | 6 min |
-| 4 | [Using skills in coding agents (demonstration)](#-use-case-4-using-skills-in-coding-agents-demonstration) | See the same Skill running in coding agents (demonstration) | 2 min |
-| 5 | [Leveraging a Skill inside a new-type agent](#-use-case-5-leveraging-a-skill-inside-a-new-type-agent) | Author a Skill from blank and watch the New Orchestrator load it and chain custom MCP servers, knowledge, and weather | 30 min |
+| 1 | [Leveraging Skills in Copilot Studio agents](#use-case-1-leveraging-skills-in-copilot-studio-agents) | Attach a Skill to an agent and watch the orchestrator load it unprompted | 12 min |
+| 2 | [Using skills in Copilot Studio workflows](#use-case-2-using-skills-in-copilot-studio-workflows) | Call a Skill-equipped agent from a workflow and deliver the result | 10 min |
+| 3 | [Using skills and plugins in Copilot Cowork](#use-case-3-using-skills-and-plugins-in-copilot-cowork) | Install the same Skill as a Cowork plugin and run it there | 6 min |
+| 4 | [Using skills in coding agents (demonstration)](#use-case-4-using-skills-in-coding-agents-demonstration) | See the same Skill running in coding agents (demonstration) | 2 min |
+| 5 | [Leveraging a Skill inside a new-type agent](#use-case-5-leveraging-a-skill-inside-a-new-type-agent) | Author a Skill from blank and watch the New Orchestrator load it and chain custom MCP servers, knowledge, and weather | 30 min |
 
 ---
 
-## 🛠️ Instructions by Use Case
+## Instructions by Use Case
 
 ---
 
-## 🧱 Use Case #1: Leveraging Skills in Copilot Studio agents
+## Use Case #1: Leveraging Skills in Copilot Studio agents
 
 ### Step-by-step instructions
 
@@ -354,11 +354,11 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
     > [!NOTE]
     > Publishing to the Agent Store is the first step toward discoverability, not instant availability - an admin still controls broader access in Microsoft 365 and Teams. The **See agent in Microsoft 365** and **See agent in Teams** links stay greyed out until that propagates.
 
-### 🏅 Congratulations! You've completed Use Case #1!
+### Congratulations! You've completed Use Case #1!
 
 ---
 
-## 🧱 Use Case #2: Using skills in Copilot Studio workflows
+## Use Case #2: Using skills in Copilot Studio workflows
 
 ### Step-by-step instructions
 
@@ -506,11 +506,11 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
     > [!TIP]
     > Read the cover letter. Requirement 4.3.2 demands HITRUST CSF certification, and the proposal states plainly that **Aventra does not hold it** - then lists what it does hold. The Skill's answer library is what produces that; a model left to itself would be tempted to blur the gap.
 
-### 🏅 Congratulations! You've completed Use Case #2!
+### Congratulations! You've completed Use Case #2!
 
 ---
 
-## 🧱 Use Case #3: Using skills and plugins in Copilot Cowork
+## Use Case #3: Using skills and plugins in Copilot Cowork
 
 ### Step-by-step instructions
 
@@ -589,11 +589,11 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
     > [!TIP]
     > Read the closing summary. It matches Legacy Application Modernization to Ironwood's "no hard cutover" constraint, prices the engagement against their stated budget, writes to their 35% technical-approach weighting, and closes with a short list of items needing sign-off - typically including that Aventra holds SOC 2 and ISO 27001 but **not** IEC 62443 for plant-floor networks. The figures and the flag count differ from run to run; the structure and the candour do not. Same guardrails as the earlier use cases, a different RFP, no re-teaching.
 
-### 🏅 Congratulations! You've completed Use Case #3!
+### Congratulations! You've completed Use Case #3!
 
 ---
 
-## 🧱 Use Case #4: Using skills in coding agents (demonstration)
+## Use Case #4: Using skills in coding agents (demonstration)
 
 > [!NOTE]
 > **This use case is a demonstration, not a hands-on exercise.** Coding agents run on a developer's own machine and are not part of the lab environment, so there is nothing to configure here. Read it, then continue to the summary.
@@ -668,11 +668,11 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
     > [!IMPORTANT]
     > This is the lesson worth carrying out of the lab. A Skill is a portable unit of behaviour - authored once, packaged per host, governed wherever that host governs. You do not rewrite the playbook for each surface; you choose the surface that can deliver what the work needs, and the answer library, the procedure and the guardrails come along unchanged.
 
-### 🏅 Congratulations! You've completed Use Case #4!
+### Congratulations! You've completed Use Case #4!
 
 ---
 
-## 🧱 Use Case #5: Leveraging a Skill inside a new-type agent
+## Use Case #5: Leveraging a Skill inside a new-type agent
 
 Take the **Sales Account Assistant** you built in Use Case #3 of [Deep Dive: Instructions & Descriptions](../mcs-instructions/README.md) and turn it into a focused order-resolution agent by adding a **Skill** — a reusable, structured set of behaviors the New Orchestrator loads when a request matches. Along the way you'll attach two **custom MCP servers** (Order Management and Warehouse), a second **knowledge source** (customer-facing policies), and updated **instructions** that tell the orchestrator how to use them together.
 
@@ -890,7 +890,7 @@ Hi, this is James Rivera. Can you check on my recent order?
 
 ![Clarifying question instead of guessing](images/uc5-demo-7-guardrail.png)
 
-### 🏅 Congratulations! You've completed Use Case #5!
+### Congratulations! You've completed Use Case #5!
 
 You extended a new-type agent with a **Skill**, two **custom MCP servers**, a second **knowledge source**, and **Skill-aware instructions** — and watched the New Orchestrator load the Skill and chain everything across a single turn.
 
@@ -917,7 +917,7 @@ You extended a new-type agent with a **Skill**, two **custom MCP servers**, a se
 
 ---
 
-## 🏆 Summary of learnings
+## Summary of learnings
 
 You built one Skill-equipped agent and then reused that Skill three more times without editing it. Along the way:
 
@@ -929,7 +929,7 @@ You built one Skill-equipped agent and then reused that Skill three more times w
 
 ---
 
-## 🔍 Conclusions and recommendations
+## Conclusions and recommendations
 
 **Skill golden rules:**
 
