@@ -41,7 +41,7 @@ Delegate real work to Copilot Cowork — hand it a document, let it reason over 
 - [Instructions by Use Case](#instructions-by-use-case)
   - [Use Case #1: Draft an executive email with the Cowork agent from a PDF report](#use-case-1-draft-an-executive-email-with-the-cowork-agent-from-a-pdf-report)
   - [Use Case #2: Build an interactive sales dashboard from SharePoint and draft the summary email](#use-case-2-build-an-interactive-sales-dashboard-from-sharepoint-and-draft-the-summary-email)
-  - [Use Case #3: Build a sales campaign in Planner and revise it in a second turn](#use-case-3-build-a-sales-campaign-in-planner-and-revise-it-in-a-second-turn)
+  - [Use Case #3: Build a sales campaign in Planner and identify immediate actions](#use-case-3-build-a-sales-campaign-in-planner-and-identify-immediate-actions)
 
 ---
 
@@ -104,8 +104,8 @@ In this lab you'll delegate a real task to Cowork rather than chatting with it. 
 - Turn spreadsheet data into an interactive HTML dashboard you can explore in the side panel
 - Have Cowork embed a graphic from an artifact it built into an Outlook draft
 - Resume a previous Cowork session and build on the work already in it
-- Have Cowork create and assign real Planner tasks, and grant the Microsoft Graph consent that requires
-- Revise Cowork's own output with a follow-up instruction rather than starting over
+- Have Cowork create real Planner tasks, and grant the Microsoft Graph consent that requires
+- Ask Cowork to prioritize its own plan and explain the dependencies between immediate actions
 - Verify the artifact Cowork produced, and edit it before sending
 - Explain where Cowork sits against Copilot Chat and a custom agent
 
@@ -117,7 +117,7 @@ In this lab you'll delegate a real task to Cowork rather than chatting with it. 
 | ---- | -------- | ----------- | ------ |
 | 1 | [Draft an executive email with the Cowork agent from a PDF report](#use-case-1-draft-an-executive-email-with-the-cowork-agent-from-a-pdf-report) | Cowork takes agentic action: reads the PDF, resolves the recipient, and drafts a real Outlook email on your behalf | 5 min |
 | 2 | [Build an interactive sales dashboard from SharePoint and draft the summary email](#use-case-2-build-an-interactive-sales-dashboard-from-sharepoint-and-draft-the-summary-email) | Cowork locates the workbook through Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an email with a graphic from it embedded | 10 min |
-| 3 | [Build a sales campaign in Planner and revise it in a second turn](#use-case-3-build-a-sales-campaign-in-planner-and-revise-it-in-a-second-turn) | Cowork writes real assigned tasks into Planner — output that lands on a colleague's board with no draft stage — then revises its own plan on a follow-up instruction | 10 min |
+| 3 | [Build a sales campaign in Planner and identify immediate actions](#use-case-3-build-a-sales-campaign-in-planner-and-identify-immediate-actions) | Cowork writes real tasks into Planner with no draft stage, then uses the plan's context to prioritize the nearest actions and explain their dependencies | 10 min |
 
 ---
 
@@ -349,23 +349,23 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 
 ---
 
-## Use Case #3: Build a sales campaign in Planner and revise it in a second turn
+## Use Case #3: Build a sales campaign in Planner and identify immediate actions
 
-Use Cases #1 and #2 both stopped at a draft — private, reversible, sitting in your own mailbox until you decided otherwise. This one doesn't. Cowork writes real tasks into Planner, and the moment it does, they exist for the people they're assigned to.
+Use Cases #1 and #2 both stopped at a draft — private, reversible, sitting in your own mailbox until you decided otherwise. This one doesn't. Cowork writes real tasks into Planner, and the moment it does, they exist in your plan.
 
 | Use case                                          | Value added                                                                                                                                                        | Estimated effort |
 | -------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| Build and revise a sales campaign in Planner      | Cowork writes real assigned tasks into Planner — output with no draft stage — then revises its own plan on a follow-up instruction rather than rebuilding it        | 10 minutes       |
+| Build and prioritize a sales campaign in Planner  | Cowork writes real tasks into Planner with no draft stage, then identifies the nearest actions and explains the dependencies between them                           | 10 minutes       |
 
 **Summary of tasks**
 
-In this section, you'll resume your Use Case #2 session, ask Cowork to turn what it found in the sales data into a campaign plan in Planner, approve the Microsoft Graph consent it needs to write there, review the tasks it created, and then change one of them with a single follow-up sentence.
+In this section, you'll resume your Use Case #2 session, ask Cowork to turn what it found in the sales data into a campaign plan in Planner, approve the Microsoft Graph consent it needs to write there, review the tasks it created, and then ask it to identify the three nearest actions.
 
-**Scenario:** The dashboard you built in Use Case #2 showed home appliances lagging. The Nov–Dec holiday period is coming, and your sales reps need a campaign they can actually run. Rather than writing the plan and keying the tasks in yourself, you'll delegate both — and then change your mind about one of them, the way you would with a colleague.
+**Scenario:** The dashboard you built in Use Case #2 showed home appliances lagging, and your sales reps need a campaign they can launch three months from now. Rather than writing the plan and keying the tasks in yourself, you'll delegate both — and then ask Cowork to prioritize what needs attention first.
 
 ### Objective
 
-Resume the previous Cowork session, have Cowork create a Home Appliance holiday campaign as a plan in Planner with tasks your sales reps can work from, grant the Microsoft Graph consent required to write there, and then reassign and reschedule one task through a follow-up instruction.
+Resume the previous Cowork session, have Cowork create a Home Appliance campaign as a plan in Planner with tasks your sales reps can work from, grant the Microsoft Graph consent required to write there, and then ask Cowork to identify the three nearest actions and their dependencies.
 
 ---
 
@@ -385,7 +385,7 @@ Resume the previous Cowork session, have Cowork create a Home Appliance holiday 
 1. Type the following prompt and press **Send**:
 
     ```text
-    I want to build a sales campaign to shore up the weak home appliances business. Create a short sales campaign with my name in Planner that our sales reps can use to boost sales around home appliances.  The Nov-Dec holiday period is coming soon, so let's design a plan to launch the campaign by the beginning of November
+    I want to build a sales campaign to shore up the weak home appliances business. Create a short sales campaign with my name in Planner that our sales reps can use to boost sales around home appliances. Let's design a plan to launch the campaign three months from now.
     ```
 
     > [!TIP]
@@ -405,50 +405,41 @@ Resume the previous Cowork session, have Cowork create a Home Appliance holiday 
 
 1. Open the app launcher (the 3×3 "waffle" icon at the top-left), choose **More apps**, then select **Planner**. Planner opens in a new window.
 
-1. Select **My plans**, then open the plan Cowork created — its name combines the campaign with your username. **Observe** the tasks it wrote: phase buckets, due dates working back from the launch, and an assignee on each one. Switch to the **Grid** view to see the whole plan at once.
+1. Select **My plans**, then open the plan Cowork created — its name combines the campaign with your username. **Observe** the tasks it wrote: phase buckets and due dates working back from the launch. Switch to the **Grid** view to see the whole plan at once.
 
-   ![The campaign plan Cowork created, in Planner's Grid view, showing each task with its assignee, due date and bucket](images/cowork-planner-task-grid.png)
+   ![The campaign plan Cowork created, in Planner's Grid view, showing each task with its due date and bucket](images/cowork-planner-task-grid.png)
 
    > [!NOTE]
    > Use **My plans**, not **My Tasks**. My Tasks lists only what is assigned to you *and* indexed, and it is routinely still empty at this point in the lab even when the tasks already exist in the plan. If My Tasks looks empty, nothing has gone wrong — open the plan instead.
 
    > [!IMPORTANT]
-   > Stop here for a moment. In Use Cases #1 and #2, Cowork prepared work and waited for you to approve it before anything reached another person. Here there was no draft stage — the tasks were written straight into a shared plan the moment Cowork decided on them, with no review step in between. Ask yourself whether that is the right default for this kind of action, and what you would want to change if this plan involved twenty people instead of two.
+   > Stop here for a moment. In Use Cases #1 and #2, Cowork prepared work and waited for you to approve it. Here there was no draft stage — the tasks were written straight into Planner the moment Cowork decided on them, with no review step in between. Ask yourself whether that is the right default for this kind of action.
 
-#### Revise the plan in a second turn
+#### Ask for the immediate actions
 
 1. Go back to Cowork and click on your session to resume it.
 
 1. Type the following prompt and press **Send**:
 
     ```text
-    The launch task is actually for Alice Appleton, assign it to her and push it back 1 week as well
+    What are the 3 immediate actions to be taken care of?
     ```
 
     > [!TIP]
-    > Notice what this prompt doesn't include: which plan, which task list, what the original date was, or how to find any of it. Cowork built the plan, so it still knows. This is the difference between an agent that holds context and a tool you have to re-brief every time.
+    > Notice what this prompt doesn't include: which plan, which tasks, or where to find them. Cowork built the plan in this session, so it still knows. This is the difference between an agent that holds context and a tool you have to re-brief every time.
 
-#### Verify the revision
+#### Review Cowork's prioritization
 
-1. Go back to the Planner page and select **My Plans**, then open the plan Cowork created. Its name combines your username with the campaign — something like `<your username> - Home Appliance Holiday Campaign`.
+1. **Observe** how Cowork returns the three nearest campaign actions and calls out the dependencies between them.
 
-   > [!TIP]
-   > Cowork names the plan itself, so the exact wording varies from run to run. Look for your username and "Home Appliance" rather than matching the title character for character — this is the same reason the email subject in Use Case #1 is described rather than quoted.
-
-1. **Observe** that the launch task is now assigned to **Alice Appleton** and dated one week later.
-
-   ![The launch task in Planner, now dated one week later and assigned to Alice Appleton](images/cowork-planner-launch-revised.png)
+   ![Cowork identifies the three nearest campaign actions and explains the dependencies between them](images/cowork-planner-immediate-actions.png)
 
    > [!NOTE]
-   > Planner currently rejects Cowork's edits to a task it already created. When that happens Cowork does not fail — it writes a **replacement** task with the new owner and date, leaves the original in place, and tells you which one to delete. If you see two launch tasks, that is why; delete the original along with the plan during clean-up. The delegation point is unchanged, only the mechanism.
-
-#### Clean up
-
-1. If you are working in a shared tenant, delete the plan you created when you're finished. Unlike the drafts from the earlier use cases, this one is visible to other people and will stay on their boards until someone removes it.
+   > Cowork bases its answer on today's date and the plan it created, so the action names, dates, and dependencies will vary from the example.
 
 ---
 
-### Congratulations! You've had Cowork plan real work, assign it, and then change its mind on request!
+### Congratulations! You've had Cowork plan real work and prioritize what needs attention first!
 
 ---
 
@@ -457,15 +448,15 @@ Resume the previous Cowork session, have Cowork create a Home Appliance holiday 
 **Key takeaways:**
 
 - **Sessions carry context** — Resuming the Use Case #2 conversation meant one sentence about "the weak home appliances business" was enough. Cowork still had the data, the dashboard, and its own analysis.
-- **Some actions have no draft stage** — An email waits for you. A Planner assignment does not. The more systems an agent can write to, the more that distinction matters.
+- **Some actions have no draft stage** — An email waits for you. Planner tasks do not. The more systems an agent can write to, the more that distinction matters.
 - **Consent is where the boundary shows** — Reading and drafting were free; writing to Planner required explicit Microsoft Graph approval. "Always allow" is a decision about every future call, not just this one.
-- **Revision is a conversation, not a restatement** — One sentence moved the task and reassigned it. You didn't name the plan, the bucket, the task or the original date — Cowork built them, so it still knew. Whether it edits the task in place or replaces it is an implementation detail it reports back to you; either way you never re-briefed it.
+- **Prioritization uses session context** — One short question was enough for Cowork to identify the nearest actions, explain why their order matters, and call out dependencies without you restating the plan.
 
 **Challenge: Apply this to your own use case**
 
 - Which project plans do you build by hand from a report someone else already wrote?
-- Where in your work would you want an approval gate before an agent assigns something to another person — and where would that gate just be friction?
-- Cowork revised its own plan from one sentence. What would you want to change about a plan *after* the agent built it, and would you trust it to make that change unsupervised?
+- Where in your work would you want an approval gate before an agent writes tasks into a system — and where would that gate just be friction?
+- When an agent creates a plan, what context should it use to decide which actions are most urgent?
 
 ---
 
@@ -473,21 +464,21 @@ Resume the previous Cowork session, have Cowork create a Home Appliance holiday 
 
 ## Summary of learnings
 
-**You delegated, you did not converse.** Three instructions produced an Outlook draft, an interactive dashboard, and a staffed project plan — no follow-up prompting, no copying content between windows.
+**You delegated, you did not converse.** Three instructions produced an Outlook draft, an interactive dashboard, and a project plan — no copying content between windows.
 
 **Cowork acted inside Microsoft 365.** The outputs were a real draft in your mailbox, a real dashboard you could explore, and real tasks on a real board — not blocks of suggested text you then had to place somewhere.
 
 **It found its own inputs.** In Use Case #2 you never said where the workbook lived. Locating it was part of what you delegated, not part of what you specified.
 
-**Context survived between tasks.** Use Case #3 built its campaign on what Use Case #2 discovered, and then revised its own plan from a single sentence — no restating, no starting over.
+**Context survived between tasks.** Use Case #3 built its campaign on what Use Case #2 discovered, then prioritized its own plan from one short question — no restating, no starting over.
 
-**The review gate held wherever one existed.** The emails waited for you. The Planner assignments did not — they landed the moment Cowork decided on them, and the Microsoft Graph consent was the only checkpoint in that path.
+**The review gate held wherever one existed.** The emails waited for you. The Planner tasks did not — they landed the moment Cowork decided on them, and the Microsoft Graph consent was the only checkpoint in that path.
 
 ---
 
 ## Conclusions & Recommendations
 
-**Use Cowork when the job is a task, not a question.** If the outcome is an artifact — an email, a dashboard, a set of assignments — delegation beats conversation.
+**Use Cowork when the job is a task, not a question.** If the outcome is an artifact — an email, a dashboard, a set of tasks — delegation beats conversation.
 
 **Know which actions have a draft stage and which don't.** Where one exists, it is your control and you should use it. Where it doesn't — Planner, and anything else written straight into a system other people share — the consent prompt is the only checkpoint you get, and "always allow" spends it once on behalf of every run that follows. Scope what you delegate accordingly.
 
