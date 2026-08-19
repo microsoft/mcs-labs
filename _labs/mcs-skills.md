@@ -310,8 +310,8 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
     > [!TIP]
     > This is the diagnostic to reach for when a skill does *not* fire. If the description does not contain the language a user would actually use, the orchestrator never matches it - and nothing in the transcript tells you the skill exists.
 
-1. Let the run finish. The agent drafts the proposal, then runs the skill's bundled
-    `scripts/md_to_pdf.py` converter to format it.
+1. Let the run finish. The agent drafts the proposal, then uses the tools available to it to
+    render it as a PDF.
 
     > [!NOTE]
     > The full draft-plus-PDF run takes several minutes - it is writing a nine-page proposal and then rendering it. The reasoning trace updates as it works and is worth reading; the agent has not hung.
@@ -576,8 +576,8 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
     > [!TIP]
     > You never named the skill or the plugin - exactly as in Use Case #1. Cowork matched your request against the same **description** and loaded the same playbook. The right rail lists what it is working with under **Skills & Plugins** and **References**.
 
-1. Let the run finish - it takes several minutes. Cowork drafts the proposal, runs the skill's
-    bundled `scripts/md_to_pdf.py` converter, and publishes both files. They appear under
+1. Let the run finish - it takes several minutes. Cowork drafts the proposal, uses the tools
+    available to it to render it as a PDF, and publishes both files. They appear under
     **Output** in the details pane - an `Aventra ... IW-2026-SHOPFLOOR` markdown file and the
     matching `.pdf`. The exact filename varies slightly between runs.
 
