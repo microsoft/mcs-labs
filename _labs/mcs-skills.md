@@ -399,8 +399,7 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
 
 1. Select **Classify** in the palette, and create a Dataverse connection when prompted.
 
-1. Leave **Prompt model** on the default (**GPT-4.1 mini**). Deciding whether a message is an RFP
-    request is a simple two-way call.
+1. Leave **Prompt model** on the default.
 
 1. In **Input to classify**, use **Insert dynamic content** to add **Content** (the attachment
     content), then **Body** (the email body).
