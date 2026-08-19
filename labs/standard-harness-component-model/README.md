@@ -196,9 +196,9 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
    How do I begin using Copilot Studio?
    ```
 
-17. Review the agent's response. Notice how it references the Microsoft Learn knowledge source you provided.
+1. Review the agent's response. Notice how it references the Microsoft Learn knowledge source you provided.
 
-18. Observe the response quality and how the agent leverages its instructions to provide helpful, contextual guidance.
+1. Observe the response quality and how the agent leverages its instructions to provide helpful, contextual guidance.
 
 ---
 
@@ -317,7 +317,7 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
    Thank you! Your information has been recorded. (In production, this would submit to the mailing list system.)
    ```
 
-11. Select **Save** to save your topic.
+1. Select **Save** to save your topic.
 
 #### Test the Mailing List Topic
 
@@ -411,7 +411,7 @@ Add a document knowledge source to your agent and verify that it accurately answ
 1. Review the **Name** and **Description** fields. Update if needed to make the source easily identifiable.
 
 #### Check and disable Web Search 
-The Use information from the web setting is available on the Generative AI settings page or the Web Search setting in the Knowledge section of the agent's Overview page. This setting lets your agent access broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. For our scenario, we want to keep the use of knowedge focused on our provided resources and not the broader web.
+The Use information from the web setting is available on the Generative AI settings page or the Web Search setting in the Knowledge section of the agent's Overview page. This setting lets your agent access broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. For our scenario, we want to keep the use of knowledge focused on our provided resources and not the broader web.
 
 1. Navigate to the Overview tab, scroll down to the Knowledge section
 
@@ -503,7 +503,7 @@ Build two different types of tools: a connector-based weather tool and a custom 
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Extend Your Agent with Tools | Connect your agent to external services and build custom analytical capabilities | 15 minutes |
+| Extend Your Agent with Tools | Connect your agent to external services and build custom analytical capabilities | 10 minutes |
 
 **Summary of tasks**
 
@@ -638,7 +638,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. In the test panel, select **Refresh** or start a new conversation to reload the agent with the new tool.
 
-27. Enter the following test request:
+1. Enter the following test request:
 
    ```
    Analyze this prompt for improvements:
@@ -648,7 +648,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. Review the agent's analysis. It should provide structured feedback on the prompt using the CARE framework.
 
-29. Observe how the tool uses markdown formatting with bold text and bullets to make the response visually appealing.
+1. Observe how the tool uses markdown formatting with bold text and bullets to make the response visually appealing.
 
 ---
 
@@ -754,7 +754,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 1. Review the **Global** section showing variables available across the entire agent.
 
-1. Review the **Enviornment** section showing enviornment variables that, in part, help support ALM to move Agents from one enviornment to another.
+1. Review the **Environment** section showing environment variables that, in part, help support ALM to move agents from one environment to another.
 
     > [!NOTE]
     > The Variables view gives you a centralized place to see all variables, their types, and their values during testing.
@@ -914,7 +914,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 1. In the parent agent's **Instructions** field on the Overview page, select **Edit** in the upper right corner of the **Instructions** section.
 
-1. Add the following orchestration instructions just before the # General Guidlines paragraph of the instructions. Notice the `(replace this text)` placeholder — you'll replace it with a direct reference to the child agent in the next step.
+1. Add the following orchestration instructions just before the `# General Guidelines` paragraph of the instructions. Notice the `(replace this text)` placeholder — you'll replace it with a direct reference to the child agent in the next step.
 
     ```
     # Prompt Guidance
@@ -967,7 +967,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
     Analyze this prompt for improvements: Write a summary of the quarterly report.
     ```
 
-1. Verify that the parent agent uses the Prompt Analyzer tool (from the previous lab) instead of routing to the child agent.
+1. Verify that the parent agent uses the Prompt Analyzer tool from Use Case #4 instead of routing to the child agent.
 
     > [!TIP]
     > This demonstrates proper orchestration - the parent agent understands the difference between "general prompt guidance" (child agent) and "analyze a specific prompt" (tool).
