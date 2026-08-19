@@ -316,6 +316,8 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
    - **Body:** a written summary of the sales data, not just a chart
    - **Graphic:** the sales visual from the dashboard is attached to the email and can be previewed
 
+   ![The Cowork-drafted email open in Outlook, with Dewain Robinson resolved and the sales graphic attached](images/cowork-uc2-outlook-draft.png)
+
 1. Leave it as a draft. As in Use Case #1, nothing needs to be sent.
 
    > [!TIP]
