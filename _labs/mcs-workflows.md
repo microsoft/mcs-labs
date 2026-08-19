@@ -89,8 +89,8 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 ## Documentation and Additional Training Links
 
 * [Workflows in Microsoft Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-overview)
-* [Add an agent to a workflow](https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-action-agent)
-* [Triggers for workflows](https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-triggers)
+* [Add an agent to a workflow](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-node-workflow?tabs=workflows)
+* [Triggers overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-triggers-about)
 * [Add tools to an agent](https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent)
 * [Model Context Protocol (MCP) in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-mcp)
 * [Microsoft To Do](https://to-do.office.com/) · [Outlook Calendar](https://outlook.office.com/calendar/)
@@ -129,7 +129,7 @@ In this lab, you'll build several autonomous Workflows that act on event-driven 
 |------|----------|-------------|--------|
 | 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 15 min |
 | 2 | [Setting Up the Order Management Workflow](#use-case-2-setting-up-the-order-management-workflow) | Configure connections, ownership, and publish a pre-built multi-branch classification workflow | 15 min |
-| 3 | [Use M365 Copilot and Add a Human-in-the-Loop in Order Management](#use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: M365 Copilot drafts a response, human approves, workflow replies | 15 min |
+| 3 | [Use M365 Copilot and Add a Human-in-the-Loop](#use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: M365 Copilot drafts a response, human approves, workflow replies | 15 min |
 | 4 | [Build an Inline Agent for Inventory Management](#use-case-4-build-an-inline-agent-for-inventory-management) | Add an MCP-powered inline agent that checks warehouse stock and creates Dataverse tasks | 15 min |
 | 5 | [Call a Price Quote Specialist Agent from a Workflow (Bonus)](#use-case-5-bonus-call-a-price-quote-specialist-agent-from-a-workflow) | Wire a published agent into a workflow branch to generate and send price quotes | 10 min (extra) |
 
@@ -818,20 +818,20 @@ To get the most out of Workflows in Copilot Studio:
 
 ## Conclusions & Recommendations
 
-> [!IMPORTANT]
-> **Workflows golden rules:**
-> * Match the **trigger** to the event that should start the work — manual for testing, recurrence for schedules, connector for "when something changes."
-> * Reach for an **inline agent** when a step needs reasoning; keep deterministic actions for steps that must always behave identically.
-> * Reference trigger data with the **`/` dynamic-content token** so the agent acts on the real input every run.
-> * Give the agent **only the tools it needs**, and state constraints (working hours, formatting, categories) explicitly in the instructions.
-> * Always **Save → Publish** before testing, and **re-publish** after any change. Use the **Activity** and **Monitor** views — and the **Agent** node's run details — to see exactly what the agent decided and did.
-> * **Fix connection references at the solution level** — creating connections in the canvas is not enough. Always verify and link connection references in the Power Apps solution before publishing.
-> * **Transfer ownership early** — if a workflow was created by another user, take ownership via Dataverse **Assign** before attempting any other management operations.
-> * **Classify nodes are only as good as their examples** — invest time in adding diverse, representative examples to each category and testing edge cases to improve classification accuracy.
-> * Use the **M365 Copilot** node for grounded, **read-only** retrieval and drafting, then pair it with other nodes when the workflow needs to send messages or update systems.
-> * Put **Human review** in front of customer-facing actions whenever the quality bar or business risk warrants a person-in-the-loop checkpoint.
-> * Use **MCP-connected agents** when the workflow needs to reason over live enterprise data and write operational outcomes such as Dataverse tasks.
-> * Prefer **structured output** from agents when downstream steps, monitoring, or reporting depend on predictable fields rather than free-form text.
-> * Reuse **published agents** for repeatable business capabilities — especially when they already combine knowledge sources, skills, and tools that multiple workflows can benefit from.
->
-> With these foundations, you can move from agents that *talk* to agents that *act on their own* — reacting to events, reasoning over real data, and getting work done across Microsoft 365.
+**Workflows golden rules:**
+
+* Match the **trigger** to the event that should start the work — manual for testing, recurrence for schedules, connector for "when something changes."
+* Reach for an **inline agent** when a step needs reasoning; keep deterministic actions for steps that must always behave identically.
+* Reference trigger data with the **`/` dynamic-content token** so the agent acts on the real input every run.
+* Give the agent **only the tools it needs**, and state constraints (working hours, formatting, categories) explicitly in the instructions.
+* Always **Save → Publish** before testing, and **re-publish** after any change. Use the **Activity** and **Monitor** views — and the **Agent** node's run details — to see exactly what the agent decided and did.
+* **Fix connection references at the solution level** — creating connections in the canvas is not enough. Always verify and link connection references in the Power Apps solution before publishing.
+* **Transfer ownership early** — if a workflow was created by another user, take ownership via Dataverse **Assign** before attempting any other management operations.
+* **Classify nodes are only as good as their examples** — invest time in adding diverse, representative examples to each category and testing edge cases to improve classification accuracy.
+* Use the **M365 Copilot** node for grounded, **read-only** retrieval and drafting, then pair it with other nodes when the workflow needs to send messages or update systems.
+* Put **Human review** in front of customer-facing actions whenever the quality bar or business risk warrants a person-in-the-loop checkpoint.
+* Use **MCP-connected agents** when the workflow needs to reason over live enterprise data and write operational outcomes such as Dataverse tasks.
+* Prefer **structured output** from agents when downstream steps, monitoring, or reporting depend on predictable fields rather than free-form text.
+* Reuse **published agents** for repeatable business capabilities — especially when they already combine knowledge sources, skills, and tools that multiple workflows can benefit from.
+
+With these foundations, you can move from agents that *talk* to agents that *act on their own* — reacting to events, reasoning over real data, and getting work done across Microsoft 365.
