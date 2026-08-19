@@ -162,9 +162,9 @@ A simple prompt gets a fast answer no matter what you select. A complex prompt t
 
 #### 1.5 Change the model
 
-Click **Think deeper** and look at the AI models offered. Alongside the default GPT models, Claude is also available for most tenants (subject to what your admin has enabled).
+Open the same selector to the right of **Work IQ**. Below the response modes you'll see the available AI models — alongside **GPT**, **Claude** is available for most tenants (subject to what your admin has enabled).
 
-Select a Claude model.
+Select **Claude**.
 
 ![Claude model selected in Microsoft 365 Copilot](images/lab-m365copilot-claude-model.png)
 
