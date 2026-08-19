@@ -89,7 +89,7 @@ In this lab you hand Cowork the same annual hotel performance report used elsewh
 - Access to Copilot Cowork
 - Outlook available to the same account, so the drafted email can be verified
 - Download the sample report PDF: [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf)
-- For Use Case #2: a sales tracker Excel workbook in a SharePoint document library the account can reach, with columns covering month, region, product line, and sales rep — the reference tenant uses `Sales.xlsx` in the `Sales Lab1b` document library — and a colleague named Alice Appleton who resolves in the tenant directory
+- For Use Case #2: a sales tracker Excel workbook in a SharePoint document library the account can reach, with columns covering month, region, product line, and sales rep — the reference tenant uses `Sales.xlsx` in the `Sales Lab1b` document library — and a colleague named Dewain Robinson who resolves in the tenant directory
 - For Use Case #3: Planner available to the same account, and the ability to grant Microsoft Graph consent when Cowork prompts for it. Use Case #3 continues the Use Case #2 session, so run them in order
 
 ---
@@ -102,7 +102,7 @@ In this lab you'll delegate a real task to Cowork rather than chatting with it. 
 - Have Cowork resolve a recipient from your organisation and draft a real Outlook email
 - Have Cowork locate a file in SharePoint through Work IQ without being told where it lives
 - Turn spreadsheet data into an interactive HTML dashboard you can explore in the side panel
-- Have Cowork embed a graphic from an artifact it built into an Outlook draft
+- Have Cowork attach a graphic from an artifact it built to an Outlook draft
 - Resume a previous Cowork session and build on the work already in it
 - Have Cowork create and assign real Planner tasks, and grant the Microsoft Graph consent that requires
 - Revise Cowork's own output with a follow-up instruction rather than starting over
@@ -116,7 +116,7 @@ In this lab you'll delegate a real task to Cowork rather than chatting with it. 
 | Step | Use Case | Value added | Effort |
 | ---- | -------- | ----------- | ------ |
 | 1 | [Draft an executive email with the Cowork agent from a PDF report](#use-case-1-draft-an-executive-email-with-the-cowork-agent-from-a-pdf-report) | Cowork takes agentic action: reads the PDF, resolves the recipient, and drafts a real Outlook email on your behalf | 5 min |
-| 2 | [Build an interactive sales dashboard from SharePoint and draft the summary email](#use-case-2-build-an-interactive-sales-dashboard-from-sharepoint-and-draft-the-summary-email) | Cowork locates the workbook through Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an email with a graphic from it embedded | 10 min |
+| 2 | [Build an interactive sales dashboard from SharePoint and draft the summary email](#use-case-2-build-an-interactive-sales-dashboard-from-sharepoint-and-draft-the-summary-email) | Cowork locates the workbook through Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an email with a graphic attached | 10 min |
 | 3 | [Build a sales campaign in Planner and revise it in a second turn](#use-case-3-build-a-sales-campaign-in-planner-and-revise-it-in-a-second-turn) | Cowork writes real assigned tasks into Planner — output that lands on a colleague's board with no draft stage — then revises its own plan on a follow-up instruction | 10 min |
 
 ---
@@ -248,17 +248,17 @@ Use Case #1 handed Cowork a file you uploaded and asked for one artifact. This o
 
 | Use case                                                | Value added                                                                                                                                                  | Estimated effort |
 | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| Build a sales dashboard and draft the summary email     | Cowork locates the workbook through Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an email with a graphic from it embedded     | 10 minutes       |
+| Build a sales dashboard and draft the summary email     | Cowork locates the workbook through Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an email with a graphic attached             | 10 minutes       |
 
 **Summary of tasks**
 
-In this section, you'll give Cowork one instruction that spans four surfaces: it locates a sales tracker workbook in SharePoint using Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an Outlook email to a named colleague with a chart from that dashboard embedded in the body.
+In this section, you'll give Cowork one instruction that spans four surfaces: it locates a sales tracker workbook in SharePoint using Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an Outlook email to a named colleague with a chart from that dashboard attached.
 
-**Scenario:** You're a sales operations analyst. The sales tracker lives somewhere in SharePoint, and Alice Appleton needs a readable summary — not a spreadsheet attachment she has to open and interpret. Rather than building the charts yourself and pasting them into Outlook, you'll delegate the whole chain in one prompt and watch Cowork work through it.
+**Scenario:** You're a sales operations analyst. The sales tracker lives somewhere in SharePoint, and Dewain Robinson needs a readable summary with a sales visual he can preview without opening and interpreting the source workbook. Rather than building the charts yourself and assembling the email in Outlook, you'll delegate the whole chain in one prompt and watch Cowork work through it.
 
 ### Objective
 
-Have Cowork find the sales tracker workbook in SharePoint without you naming its location, build an interactive HTML dashboard covering sales by month, region, product line, and sales rep, and draft an Outlook email to Alice Appleton that summarizes the data with a graphic from the dashboard embedded in it.
+Have Cowork find the sales tracker workbook in SharePoint without you naming its location, build an interactive HTML dashboard covering sales by month, region, product line, and sales rep, and draft an Outlook email to Dewain Robinson that summarizes the data with a graphic from the dashboard attached.
 
 ---
 
@@ -276,11 +276,11 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 1. Paste the following prompt into the message input and press **Send**:
 
     ```text
-    Find the sales tracker excel document in the document library and create an interactive html dashboard highlighting the sales by month, region, product line, and sales rep. Draft an email to Alice Appleton with a summary of the data and embed the sales graphic from the dashboard into the email
+    Find the sales tracker excel document in the document library and create an interactive html dashboard highlighting the sales by month, region, product line, and sales rep. Draft an email to Dewain Robinson with a summary of the data and attach the sales graphic from the dashboard to the email
     ```
 
     > [!TIP]
-    > Note what this prompt does *not* contain: a file path, a site name, an attachment, or a sequence of steps. You named an outcome and a recipient. Everything between those two things — locating the workbook, deciding what the charts should be, choosing which graphic belongs in the email — is Cowork's to work out.
+    > Note what this prompt does *not* contain: a file path, a site name, or a sequence of steps. You named an outcome and a recipient. Everything between those two things — locating the workbook, deciding what the charts should be, choosing which graphic belongs in the email — is Cowork's to work out.
 
 #### Observe how Cowork works
 
@@ -312,11 +312,9 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 
 1. Open the draft Cowork created and check:
 
-   - **Recipient:** Alice Appleton, resolved as a contact pill
+   - **Recipient:** Dewain Robinson, resolved as a contact pill
    - **Body:** a written summary of the sales data, not just a chart
-   - **Graphic:** the sales visual from the dashboard renders inline in the email body — not as a link, and not as an attachment
-
-   ![The Cowork-drafted email open in Outlook, with Alice Appleton resolved and the sales graphic inline](images/cowork-uc2-outlook-draft.png)
+   - **Graphic:** the sales visual from the dashboard is attached to the email and can be previewed
 
 1. Leave it as a draft. As in Use Case #1, nothing needs to be sent.
 
@@ -335,7 +333,7 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 
 - **One prompt, four surfaces** — Search, extraction, visualization, and drafting. You described an outcome; Cowork decided the sequence and executed it without asking you to confirm each step.
 - **Work IQ did the finding** — You never supplied a path or a site name. Locating the file was part of the problem you delegated, not part of the prompt you wrote.
-- **The dashboard is a live artifact, not a picture** — It has interactive controls and opens in the side panel. Cowork built a working thing, then pulled a still from it for the email.
+- **The dashboard is a live artifact, not a picture** — It has interactive controls and opens in the side panel. Cowork built a working thing, then attached a still from it to the email.
 - **Work continues while you explore** — Clicking into the dashboard mid-run doesn't pause the email draft. That parallelism is the delegation model doing exactly what it promises.
 - **The review gate held again** — The email is a draft. Cowork prepared the work and stopped.
 
