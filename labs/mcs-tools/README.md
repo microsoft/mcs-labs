@@ -8,7 +8,7 @@ Learn how to extend your agents with powerful tools including connectors, MCP se
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 35 minutes | After completing this lab, participants will be able to use connectors to integrate external services and connect MCP servers for live data access. Optional extra credit sections cover creating custom prompts for structured responses and using Computer Using Agents (CUA) for legacy system automation. |
+| 300 | Maker | 30 minutes | After completing this lab, participants will be able to use connectors to integrate external services and connect MCP servers for live data access. Optional extra credit sections cover creating custom prompts for structured responses and using Computer Using Agents (CUA) for legacy system automation. |
 
 ---
 
@@ -42,7 +42,7 @@ Think of tools as the hands and feet of your agent:
 - "I need my agent to access live data from Dataverse and other systems"
 - "I need to connect to legacy systems that don't have APIs"
 
-**In about 35 minutes, you'll learn two core ways to extend your agents with tools - giving you the skills to build agents that don't just talk, but take action. Optional extra credit sections go further with custom prompts and Computer Using Agents.**
+**In about 30 minutes, you'll learn two core ways to extend your agents with tools - giving you the skills to build agents that don't just talk, but take action. Optional extra credit sections go further with custom prompts and Computer Using Agents.**
 
 ---
 
@@ -104,7 +104,7 @@ In this lab, you'll extend agents with multiple tool types to address different 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
 | 1 | [Extend Your Agent with Connectors](#-use-case-1-extend-your-agent-with-connectors) | Integrate external services and take actions through pre-built connectors | 15 min |
-| 2 | [Connect an MCP Server for Live Data Access](#-use-case-2-connect-an-mcp-server-for-live-data-access) | Enable natural language queries against live Dataverse business data | 20 min |
+| 2 | [Connect an MCP Server for Live Data Access](#-use-case-2-connect-an-mcp-server-for-live-data-access) | Enable natural language queries against live Dataverse business data | 15 min |
 | EC | [Extra Credit: Create Custom Prompts for Structured Responses](#-extra-credit-create-custom-prompts-for-structured-responses) | Standardize agent outputs for consistent, business-relevant responses (Optional) | 10 min |
 | EC | [Extra Credit: Automate Legacy Systems with CUA](#-extra-credit-automate-legacy-systems-with-computer-using-agents-cua) | Automate systems that lack API connectivity using desktop simulation (Optional) | ~20 min |
 
@@ -379,7 +379,7 @@ Create a Copilot Agent that connects to the Dataverse MCP Server for real-time n
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Connect an MCP Server for Live Data Access | Enable natural language queries against live Dataverse business data | 20 minutes |
+| Connect an MCP Server for Live Data Access | Enable natural language queries against live Dataverse business data | 15 minutes |
 
 **Summary of tasks**
 

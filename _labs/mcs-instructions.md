@@ -3,7 +3,7 @@ layout: lab
 module: instructions-and-descriptions
 title: "Deep Dive: Instructions & Descriptions"
 order: 293
-duration: 30
+duration: 45
 difficulty: 300
 lab_type: local
 section: intermediate_labs
@@ -23,7 +23,7 @@ See what the generative orchestration planner actually reads when it decides whi
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 30 minutes | After completing this lab, participants will be able to locate every place the planner reads Instructions and Descriptions, explain which of the two shapes behaviour and which drives selection, debug a wrong routing decision from the activity tracker and Get rationale, and describe what the New Orchestrator's Agentic Reasoning Loop changes. |
+| 300 | Maker | 45 minutes | After completing this lab, participants will be able to locate every place the planner reads Instructions and Descriptions, explain which of the two shapes behaviour and which drives selection, debug a wrong routing decision from the activity tracker and Get rationale, and describe what the New Orchestrator's Agentic Reasoning Loop changes. |
 
 ---
 
@@ -132,7 +132,7 @@ In this lab, you'll learn to read and tune the text the orchestration planner ac
 |------|----------|-------------|--------|
 | 1 | [Get the Sample Connected Agent Working](#use-case-1-get-the-sample-connected-agent-working) | Confirm the prebuilt connected agent and its data are ready before working with it | 10 min |
 | 2 | [See the Impact of Instructions and Descriptions on the Planner](#use-case-2-see-the-impact-of-instructions-and-descriptions-on-the-planner) | Build intuition for how planner decisions track with Instructions and Descriptions | 20 min |
-| 3 | [New Orchestrator – Agentic Reasoning Loop](#use-case-3-new-orchestrator--agentic-reasoning-loop) | See how a new-type agent's New Orchestrator completes multi-step tasks end to end | 30 min |
+| 3 | [New Orchestrator – Agentic Reasoning Loop](#use-case-3-new-orchestrator--agentic-reasoning-loop) | See how a new-type agent's New Orchestrator completes multi-step tasks end to end | 15 min |
 
 ---
 

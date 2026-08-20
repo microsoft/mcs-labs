@@ -8,7 +8,7 @@ Package a repeatable procedure as a Skill, then run that one Skill across a Copi
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 30 minutes | After completing this lab, participants will be able to attach a Skill to an agent, call that agent from a workflow, install the same Skill as a plugin in Copilot Cowork, and explain how one authored Skill is reused across every surface. |
+| 300 | Maker | 45 minutes | After completing this lab, participants will be able to attach a Skill to an agent, call that agent from a workflow, install the same Skill as a plugin in Copilot Cowork, and explain how one authored Skill is reused across every surface. |
 
 ---
 
@@ -45,7 +45,7 @@ Think of a Skill as a playbook the orchestrator picks up only when it is relevan
 - "We rebuilt the same process for the chat agent, the automation, and the desktop tool"
 - "The agent sounds confident about things the company cannot actually commit to"
 
-**In about 30 minutes you will build one Skill-equipped agent and then reuse that same Skill in three more places, without rewriting it once.**
+**In about 45 minutes you will build one Skill-equipped agent and then reuse that same Skill in three more places, without rewriting it once.**
 
 ---
 
@@ -110,7 +110,7 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
 | 2 | [Using skills in Copilot Studio workflows](#-use-case-2-using-skills-in-copilot-studio-workflows) | Call a Skill-equipped agent from a workflow and deliver the result | 10 min |
 | 3 | [Using skills and plugins in Copilot Cowork](#-use-case-3-using-skills-and-plugins-in-copilot-cowork) | Install the same Skill as a Cowork plugin and run it there | 6 min |
 | 4 | [Using skills in coding agents (demonstration)](#-use-case-4-using-skills-in-coding-agents-demonstration) | See the same Skill running in coding agents (demonstration) | 2 min |
-| 5 | [Leveraging a Skill inside a new-type agent](#-use-case-5-leveraging-a-skill-inside-a-new-type-agent) | Author a Skill from blank and watch the New Orchestrator load it and chain custom MCP servers, knowledge, and weather | 30 min |
+| 5 | [Leveraging a Skill inside a new-type agent](#-use-case-5-leveraging-a-skill-inside-a-new-type-agent) | Author a Skill from blank and watch the New Orchestrator load it and chain custom MCP servers, knowledge, and weather | 15 min |
 
 ---
 
