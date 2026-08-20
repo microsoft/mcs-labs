@@ -36,7 +36,6 @@ body:
         - mcs-in-a-day
         - mcs-multi-agent
         - mcs-tools
-        - measure-success
         - pipelines-and-source-control
         - setup-for-success
         - standard-orchestrator

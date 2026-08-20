@@ -43,8 +43,6 @@ labs:
         url: /labs/data-fabric-agent/
   - title: "Specialized Labs"
     children:
-      - title: "Measure Success"
-        url: /labs/measure-success/
       - title: "Pipelines & Source Control"
         url: /labs/pipelines-and-source-control/
       - title: "Copilot Studio Kit"
