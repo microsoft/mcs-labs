@@ -530,12 +530,12 @@ Open the **Account Data Lookup Agent** in Copilot Studio and walk through each o
     Are they married?
     ```
 
-    Confirm the agent answers correctly (Nancy Anderson is married). Now scroll to the bottom of the activity tracker item for this turn and select **Get rationale**. The agent will produce a plain-language explanation of *why* it chose the tools it chose and *how* it built the plan.
+    Scroll to the bottom of the activity tracker item for this turn and select **Get rationale**. The agent will produce a plain-language explanation of *why* it chose the tools it chose and *how* it built the plan.
 
     ![Activity tracker — Get rationale showing planner's plan in plain language](images/uc2-activity-get-rationale.png)
 
     Notice in the screenshot:
-    - **The Summary at the top recaps what happened across the recent turns** — it names the accounts, the contact, and the specific values the agent retrieved (`Purchasing Assistant`, `66`, `married`).
+    - **The Summary at the top recaps what happened across the recent turns** — it names the accounts, the contact, and the specific values the agent retrieved (e.g. `Purchasing Assistant`, `66`, `married`).
     - **The Rationale section breaks the plan into discrete reasoning steps**, in the planner's own words:
       - *"Identify all accounts based in Texas from the provided data."*
       - *"Extract and list all available details for each Texas-based account."*
@@ -548,17 +548,17 @@ Open the **Account Data Lookup Agent** in Copilot Studio and walk through each o
 1. **Pivot directly to a contact.** Up to this point every prompt has started from accounts. This one enters from the **contact** side.
 
     ```text
-    What is Susanna Stubberod's phone number?
+    What is Marie Campbell's phone number?
     ```
 
     Expand the **activity tracker** for this turn and notice that the planner went **directly to the Contact Agent** — there is no `Account Agent` block, and no `Find Account` call.
 
-    ![Activity tracker — direct dispatch to Contact Agent for Susanna Stubberod's phone number](images/uc2-activity-direct-contact.png)
+    ![Activity tracker — direct dispatch to Contact Agent for Marie Campbell's phone number](images/uc2-activity-direct-contact.png)
 
     Notice in the screenshot:
-    - **No Account Agent in the activity trace.** The planner read the user's request, recognized that the subject is a *person* (`Susanna Stubberod`), and dispatched straight to the `Contact Agent`. It didn't search accounts first because the question doesn't require one.
-    - **The Task input names both the contact and their account context**: *"Retrieve the phone number for Susanna Stubberod (sample), who is the primary contact for Litware, Inc. (sample)."* The planner enriched the Task with the related account information it discovered along the way, so the Contact Agent has full context for its lookup.
-    - **The Summary mirrors the answer back to the parent** with the same enrichment, naming both Susanna and Litware, Inc.
+    - **No Account Agent in the activity trace.** The planner read the user's request, recognized that the subject is a *person* (`Marie Campbell`), and dispatched straight to the `Contact Agent`. It didn't search accounts first because the question doesn't require one.
+    - **The Task input is a direct contact lookup**: *"Find and provide the phone number for Marie Campbell."* The planner didn't need to resolve an account first — the contact name alone was enough to dispatch to the `Contact Agent`.
+    - **The Summary mirrors the answer back to the parent** — the phone number the Contact Agent found for Marie Campbell.
     - **Two Contact Agent calls visible** — the activity tracker still shows the previous turn's Contact Agent invocation as well, since the test session is the same conversation.
 
     > [!NOTE]
@@ -566,7 +566,7 @@ Open the **Account Data Lookup Agent** in Copilot Studio and walk through each o
     >
     > - *"What are the accounts in Texas?"* → `Account Agent`
     > - *"Who's the primary contact for Adventure Works?"* → `Account Agent` → `Contact Agent` (chained)
-    > - *"What is Susanna Stubberod's phone number?"* → `Contact Agent` directly
+    > - *"What is Marie Campbell's phone number?"* → `Contact Agent` directly
     > - *"What's the phone number of every primary contact in Texas?"* → `Account Agent` → `Contact Agent` (looped, one contact per account)
     >
     > The same set of tools answers every direction of question. **You don't write a tool for each pivot — you write good descriptions on each tool, and the planner finds the path.** That's the difference between an agent you have to extend for every new question and one that flexes to whatever the user asks.
