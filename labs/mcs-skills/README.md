@@ -311,8 +311,10 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
 
 #### Publish the agent
 
-1. Select **Publish** in the command bar (or the chevron beside it and
-    **Customize publish channels**).
+1. Select the chevron beside **Publish** and choose
+    **Customize publish channels** to open the **Publish agent** dialog.
+    (Selecting the plain **Publish** button re-publishes the agent directly,
+    without offering channel options.)
 
 1. In the **Publish agent** dialog, select **Teams + Microsoft 365** in the channel list, then
     tick its checkbox to enable the channel.
