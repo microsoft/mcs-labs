@@ -135,7 +135,6 @@ In this lab, you'll progress from basic agent creation to advanced AI capabiliti
 | 2    | [Build an advanced SharePoint-integrated sales assistant](#use-case-2-build-an-advanced-sharepoint-integrated-sales-assistant) | Master advanced features including SharePoint integration, code interpretation, and image generation for business intelligence | 10 min |
 | 3    | [Deep analysis with the Researcher agent](#use-case-3-deep-analysis-with-the-researcher-agent)                                | Use the Researcher frontier agent to synthesize insights across a complex multi-section business report (submit-and-come-back) | 5 min to send · 10–25 min for results |
 | 4    | [Financial modeling with the Analyst agent](#use-case-4-financial-modeling-with-the-analyst-agent)                             | Use the Analyst frontier agent to perform NPV/IRR financial modeling and investment prioritization from document data          | 5 min  |
-| 5    | [Draft an executive email with the Cowork agent from a PDF report](#use-case-5-draft-an-executive-email-with-the-cowork-agent-from-a-pdf-report) | Use the Cowork frontier agent to read a PDF and draft a real Outlook email summarizing key issues for a specific recipient    | 5 min  |
 
 ---
 

@@ -225,7 +225,13 @@ Each has a colocated `*.test.js`; `npm test` runs them all with `node --test`.
 - **Journeys**: self-paced learning paths surfaced on the homepage
 - **Events**: curated workshop experiences (Bootcamp, Azure AI Workshop, MCS in a Day, Agent Build-A-Thon variants)
 
-Event pages live at `labs/<event-name>/index.md` and their running order comes from `_data/agendas/*.yml` (e.g. `_data/agendas/bootcamp-v3.yml`), which the event layouts read. Use the shared `.event-*` CSS classes for styling.
+**A new event is a document in the `_events` collection** — `_events/<event_id>.md`, which `_config.yml` declares with `output: true` and `permalink: /events/:name/`, defaulting it to `layout: event`. That is the file to create; `_events/bootcamp-v3.md` is the current example.
+
+Its running order comes from `_data/agendas/<event_id>.yml`, read by `_layouts/event.html` — see `_data/agendas/README.md` for the row schema.
+
+> Several older events also have a page at `labs/<event-name>/index.md` (bootcamp, mcs-in-a-day, azure-ai-workshop and others). Those are legacy pages served under `/labs/`, **not** part of the events collection. Do not add new events there — a file in `labs/` never enters `site.events` and will not get the event layout, agenda rendering or `/events/` URL.
+
+Use the shared `.event-*` CSS classes for styling.
 
 ## 🚀 Common Workflows
 

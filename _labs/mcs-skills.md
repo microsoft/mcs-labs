@@ -18,11 +18,6 @@ Package a repeatable procedure as a Skill, then run that one Skill across a Copi
 
 ---
 
-# Deep Dive: Skills
-
-Package a repeatable procedure as a Skill, then run that one Skill across a Copilot Studio agent, a workflow, Copilot Cowork, and coding agents.
-
----
 
 ## Lab Details
 
