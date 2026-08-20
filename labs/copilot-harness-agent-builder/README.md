@@ -385,13 +385,21 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
 ![Files added to agent knowledge](images/add-files.png)
 
 
-#### Enable advanced capabilities
+#### Configure advanced knowledge settings
 
-11. Under **Capabilities**, check that the following are enabled, and if not, turn them on with the toggle:
-    - **Create documents, charts, and code** (for data analysis and chart generation)
-    - **Create images** (for creating visual content)
+11. In the upper-right corner of the **Knowledge** section, select the **Settings** (gear) icon.
 
-![SharePoint files configured as knowledge](images/configured-sources-and-settings.png)
+![Knowledge section with the Settings icon highlighted](images/knowledge-settings-button.png)
+
+> [!IMPORTANT]
+> In the current Agent Builder experience, most advanced capabilities are configured from this **Knowledge settings** panel.
+
+12. In **Knowledge settings**, review and configure the capabilities for your agent:
+    - Turn on **Create documents, charts and code** so the agent can analyze data, create charts, perform calculations, generate code snippets, and create Word, Excel, or PowerPoint files.
+    - Turn on **Create images** so the agent can generate visual content from user prompts.
+    - Optionally, turn on **Discourage model knowledge** when you want the agent to prioritize its configured knowledge sources instead of relying on general model knowledge. This can help keep responses grounded in the sources available to the agent.
+
+![Knowledge settings with advanced capabilities enabled](images/knowledge-settings.png)
 
 > [!TIP]  
 > You can explore additional **knowledge** capabilities:
@@ -407,41 +415,41 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
 
 #### Finalize and create
 
-12. Review the **Configure** tab to refine:
+13. Review the **Configure** tab to refine:
 
     - Agent name and description
     - Instructions
     - Starter prompts
 
-13. When satisfied with the configuration, select **Create** in the upper right corner.
+14. When satisfied with the configuration, select **Create** in the upper right corner.
 
 #### Test policy knowledge
 
-14. Select **Start chat** to open the agent and start testing.
+15. Select **Start chat** to open the agent and start testing.
 
-15. First, test the agent's **knowledge** of your sales policy, copy/paste the following prompt in the Message Copilot area and select Send:
+16. First, test the agent's **knowledge** of your sales policy, copy/paste the following prompt in the Message Copilot area and select Send:
 
 ```
 What are the key guidelines in our sales policy regarding customer discounts?
 ```
 
-16. Verify the agent references your SharePoint policy document and provides accurate information.
+17. Verify the agent references your SharePoint policy document and provides accurate information.
 
 ![Results of your test prompt](images/sales-policy-question.png)
 
 #### Test code interpreter with data analysis
 
-17. **Start a new chat** and test the **code interpreter** capability with a data analysis request:
+18. **Start a new chat** and test the **code interpreter** capability with a data analysis request:
 
 ```
 How are sales trending for home appliances?
 ```
 
-18. After scrolling to the end of the details, you may be offered some starter prompts to get a visual chart, select one of the starter prompts or enter a prompt such as **Show a sales graph for Home Appliances**.
+19. After scrolling to the end of the details, you may be offered some starter prompts to get a visual chart, select one of the starter prompts or enter a prompt such as **Show a sales graph for Home Appliances**.
 
 ![Visual produced by agent](images/sales-data-analysis.png)
 
-19. **Observe** how the agent:
+20. **Observe** how the agent:
     - Accesses your Excel data
     - Uses code interpreter to process the data
     - Generates dynamic charts and visualizations
@@ -449,7 +457,7 @@ How are sales trending for home appliances?
 
 #### Test image generation
 
-20. Select **Start a new chat** icon in the upper right corner of the screen and test the **image generation** capability with a relevant request:
+21. Select **Start a new chat** icon in the upper right corner of the screen and test the **image generation** capability with a relevant request:
 
 ```
 Design a professional badge for the first place winner of our sales contest. It should look modern and premium, with gold colors, the text '1st Place – Sales Contest', and a ribbon or trophy element.
