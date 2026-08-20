@@ -3,7 +3,7 @@ layout: lab
 module: copilot-harness
 title: "Copilot Harness — Agent Builder"
 order: 125
-duration: 45
+duration: 30
 difficulty: 200
 lab_type: local
 section: core_learning_path
@@ -23,7 +23,7 @@ Build declarative agents in the Copilot harness with Agent Builder — grounding
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 200 | Business User / Maker | 45 minutes | After completing this lab, participants will be able to build a declarative agent in Agent Builder grounded in public web sources, extend a second agent with SharePoint knowledge, code interpreter and image generation, and describe where the Copilot harness sits against the Standard and GitHub Copilot harnesses. |
+| 200 | Business User / Maker | 30 minutes | After completing this lab, participants will be able to build a declarative agent in Agent Builder grounded in public web sources, extend a second agent with SharePoint knowledge, code interpreter and image generation, and describe where the Copilot harness sits against the Standard and GitHub Copilot harnesses. |
 
 ---
 
@@ -104,8 +104,8 @@ In this lab you'll build declarative agents in the Copilot harness from the simp
 
 | Step | Use Case | Value added | Effort |
 | ---- | -------- | ----------- | ------ |
-| 1 | [Create a web-based learning assistant](#use-case-1-create-a-web-based-learning-assistant) | Build foundational skills by creating an instructional agent grounded in trusted documentation | 10 min |
-| 2 | [Build an advanced SharePoint-integrated sales assistant](#use-case-2-build-an-advanced-sharepoint-integrated-sales-assistant) | Master advanced features including SharePoint integration, code interpretation, and image generation for business intelligence | 10 min |
+| 1 | [Create a web-based learning assistant](#use-case-1-create-a-web-based-learning-assistant) | Build foundational skills by creating an instructional agent grounded in trusted documentation | 15 min |
+| 2 | [Build an advanced SharePoint-integrated sales assistant](#use-case-2-build-an-advanced-sharepoint-integrated-sales-assistant) | Master advanced features including SharePoint integration, code interpretation, and image generation for business intelligence | 15 min |
 
 ---
 
