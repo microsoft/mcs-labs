@@ -6,6 +6,7 @@ order: 33
 duration: 30
 difficulty: 200
 section: specialized_labs
+deprecated: true
 journeys: ["developer"]
 bootcamp_order: "7"
 ---

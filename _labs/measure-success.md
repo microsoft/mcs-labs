@@ -6,6 +6,7 @@ order: 31
 duration: 60
 difficulty: 300
 section: specialized_labs
+deprecated: true
 journeys: ["developer"]
 ---
 

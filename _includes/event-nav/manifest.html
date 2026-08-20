@@ -59,6 +59,21 @@
                 "difficulty": {{ mod.difficulty | default: 0 | jsonify }},
                 "duration": {{ item.duration | default: mod.duration | default: 0 }}
                 {%- if item.time %}, "time": {{ item.time | jsonify }}{% endif -%}
+                {%- comment -%}
+                  An agenda row may point a module at a different deck than its own
+                  front matter (V3 reuses the Workflows and Multi-Agent modules with
+                  V3 decks). Emit the override already resolved through
+                  `slides_base_url`, so the consumer swaps in a ready-made URL.
+                {%- endcomment -%}
+                {%- if item.slides -%}
+                  {%- assign ev_slides = item.slides -%}
+                  {%- unless ev_slides contains "://" -%}
+                    {%- assign ev_path = ev_slides | remove_first: "/" -%}
+                    {%- assign ev_slides = site.slides_base_url | append: ev_path -%}
+                    {%- if site.slides_base_url == "" -%}{%- assign ev_slides = item.slides | relative_url -%}{%- endif -%}
+                  {%- endunless -%}
+                  , "slides": {{ ev_slides | jsonify }}
+                {%- endif -%}
               }
               {%- assign item_sep = "," -%}
             {%- endif -%}

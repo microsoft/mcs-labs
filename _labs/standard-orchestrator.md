@@ -6,6 +6,7 @@ order: 4
 duration: 40
 difficulty: 100
 section: core_learning_path
+deprecated: true
 journeys: ["quick-start", "developer"]
 ---
 
