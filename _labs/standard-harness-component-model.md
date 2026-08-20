@@ -13,8 +13,6 @@ description: "Assemble an agent in the Standard harness from its component parts
 
 ---
 
----
-
 # Standard Harness — Component Model
 
 Build an agent in the Standard harness from its component parts — topics, knowledge, tools and variables — and see how each piece changes what the agent can do.
@@ -158,10 +156,10 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 1. In the left navigation, select **Agents**.
 
-1. Select the **down-arrow (chevron)** next to the **New Agent** button, then choose **New classic agent**.
+1. Select the **More create options** chevron next to the **New agent** button, then choose **Agent (Standard)** — the rule-based conversational agent.
 
    > [!NOTE]
-   > Leave the **New experience** toggle **on** — **New classic agent** opens the classic authoring canvas in a new tab without switching experiences. On a first sign-in you may see a one-time **Welcome to Microsoft Copilot Studio** consent dialog; select **Get Started** to dismiss it.
+   > **Agent (Standard)** opens the classic authoring canvas in a new tab. On a first sign-in you may see a one-time **Welcome to Microsoft Copilot Studio** consent dialog; select **Get Started** to dismiss it. This consent dialog can appear **stacked behind** the **Name your agent** dialog — if you don't see it, move or dismiss the name dialog first so you can select **Get Started**.
 
 1. In the **Name your agent** dialog, enter the following name and select **Create**:
 
@@ -213,9 +211,9 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
    How do I begin using Copilot Studio?
    ```
 
-17. Review the agent's response. Notice how it references the Microsoft Learn knowledge source you provided.
+1. Review the agent's response. Notice how it references the Microsoft Learn knowledge source you provided.
 
-18. Observe the response quality and how the agent leverages its instructions to provide helpful, contextual guidance.
+1. Observe the response quality and how the agent leverages its instructions to provide helpful, contextual guidance.
 
 ---
 
@@ -334,7 +332,7 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
    Thank you! Your information has been recorded. (In production, this would submit to the mailing list system.)
    ```
 
-11. Select **Save** to save your topic.
+1. Select **Save** to save your topic.
 
 #### Test the Mailing List Topic
 
@@ -357,7 +355,7 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
 
 
 
-### Congratulations! You've completed Use Case 4!
+### Congratulations! You've completed Use Case 2!
 
 ---
 
@@ -427,23 +425,12 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 1. Review the **Name** and **Description** fields. Update if needed to make the source easily identifiable.
 
-#### Check and disable Web Search
+#### Check and disable Web Search 
 The Use information from the web setting is available on the Generative AI settings page or the Web Search setting in the Knowledge section of the agent's Overview page. This setting lets your agent access broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. For our scenario, we want to keep the use of knowedge focused on our provided resources and not the broader web.
 
 1. Navigate to the Overview tab, scroll down to the Knowledge section
 
 1. Select Disabled on the Web Search option.
-
-#### Disable Ungrounded Responses
-
-1. Select the **Settings** tab at the top of the agent, then select the **Generative AI** menu.
-
-1. Turn off the **Allow Ungrounded responses** setting.
-
-1. Select **Save** to apply the change.
-
-   > [!NOTE]
-   > Disabling Web Search and Allow Ungrounded responses together ensures that your agent only uses the data you have explicitly provided to respond to users. This significantly reduces the chance of hallucinations — responses that sound plausible but aren't based on your actual knowledge sources.
 
 #### Set Knowledge Source as Official
 
@@ -484,7 +471,7 @@ The Use information from the web setting is available on the Generative AI setti
 #### Test Licensing Knowledge
 
    > [!IMPORTANT]
-   > Before completing this section, make sure the licensing guide file you uploaded earlier has finished indexing. The Status column should show **Ready** before proceeding. If you are still waiting for the file to index, you can skip ahead to Use Case 3 and come back to test this later.
+   > Before completing this section, make sure the licensing guide file you uploaded earlier has finished indexing. The Status column should show **Ready** before proceeding. If you are still waiting for the file to index, you can skip ahead to Use Case 4 and come back to test this later.
 
 1. In the test panel on the right, click start a new conversation to ensure the agent uses the latest knowledge.
 
@@ -503,7 +490,7 @@ The Use information from the web setting is available on the Generative AI setti
 
 ---
 
-### Congratulations! You've completed Use Case 2!
+### Congratulations! You've completed Use Case 3!
 
 ---
 
@@ -531,7 +518,7 @@ Build two different types of tools: a connector-based weather tool and a custom 
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Extend Your Agent with Tools | Connect your agent to external services and build custom analytical capabilities | 15 minutes |
+| Extend Your Agent with Tools | Connect your agent to external services and build custom analytical capabilities | 10 minutes |
 
 **Summary of tasks**
 
@@ -647,7 +634,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. In the Instructions pane, select **Edit**
 
-1. Copy and paste the following after **General Guidelines** and before **Skills**.
+1. Copy and paste the following at the end of the Instructions, after the existing Guidelines list.
 
    ```
    # Prompt Analysis
@@ -666,7 +653,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. In the test panel, select **Refresh** or start a new conversation to reload the agent with the new tool.
 
-27. Enter the following test request:
+1. Enter the following test request:
 
    ```
    Analyze this prompt for improvements:
@@ -676,11 +663,11 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. Review the agent's analysis. It should provide structured feedback on the prompt using the CARE framework.
 
-29. Observe how the tool uses markdown formatting with bold text and bullets to make the response visually appealing.
+1. Observe how the tool uses markdown formatting with bold text and bullets to make the response visually appealing.
 
 ---
 
-### Congratulations! You've completed Use Case 3!
+### Congratulations! You've completed Use Case 4!
 
 ---
 
@@ -722,7 +709,7 @@ Explore the variables interface in Copilot Studio to understand how conversation
 
 In this section, you'll explore existing variables in your mailing list topic, understand variable properties and scope, review how variables are referenced in messages and formulas, and observe variable values during a test conversation.
 
-**Scenario:** Your mailing list topic (from the previous lab's Use Case #4) already collects user information and stores it in variables. You'll explore how Copilot Studio automatically creates variables, understand the difference between topic-level and global scope, and observe how variables work during a live test conversation.
+**Scenario:** Your mailing list topic (from Use Case #2 earlier in this lab) already collects user information and stores it in variables. You'll explore how Copilot Studio automatically creates variables, understand the difference between topic-level and global scope, and observe how variables work during a live test conversation.
 
 > [!WARNING]
 > This use case is exploration only. Do NOT create, modify, or delete any variables or nodes - doing so could break your existing topic. You are here to navigate the interface and understand how variables work.
@@ -739,11 +726,11 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 1. Navigate to [Copilot Studio](https://copilotstudio.microsoft.com).
 
-1. Select **Agents** in your left side navigation bar, and select your **Copilot Studio Assistant** agent you created in the previous lab's Use Case #4.
+1. Select **Agents** in your left side navigation bar, and select your **Copilot Studio Assistant** agent you created in Use Case #1 earlier in this lab.
 
 1. Select **Topics** in the agent's top navigation bar.
 
-1. Select the **Join Copilot Studio Mailing List** topic that you created in the previous lab's Use Case #4.
+1. Select the **Join Copilot Studio Mailing List** topic that you created in Use Case #2 earlier in this lab.
 
     > [!NOTE]
     > If you don't have this topic, you can explore variables in any existing topic that has question nodes.
@@ -782,7 +769,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 1. Review the **Global** section showing variables available across the entire agent.
 
-1. Review the **Enviornment** section showing enviornment variables that, in part, help support ALM to move Agents from one enviornment to another.
+1. Review the **Environment** section showing environment variables that, in part, help support ALM to move agents from one environment to another.
 
     > [!NOTE]
     > The Variables view gives you a centralized place to see all variables, their types, and their values during testing.
@@ -830,7 +817,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 ---
 
-### Congratulations! You've completed Use Case 1!
+### Congratulations! You've completed Use Case 5!
 
 ---
 
@@ -942,7 +929,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 1. In the parent agent's **Instructions** field on the Overview page, select **Edit** in the upper right corner of the **Instructions** section.
 
-1. Add the following orchestration instructions just before the # General Guidlines paragraph of the instructions. Notice the `(replace this text)` placeholder — you'll replace it with a direct reference to the child agent in the next step.
+1. Add the following orchestration instructions just before the `# General Guidelines` paragraph of the instructions. Notice the `(replace this text)` placeholder — you'll replace it with a direct reference to the child agent in the next step.
 
     ```
     # Prompt Guidance
@@ -995,7 +982,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
     Analyze this prompt for improvements: Write a summary of the quarterly report.
     ```
 
-1. Verify that the parent agent uses the Prompt Analyzer tool (from the previous lab) instead of routing to the child agent.
+1. Verify that the parent agent uses the Prompt Analyzer tool from Use Case #4 instead of routing to the child agent.
 
     > [!TIP]
     > This demonstrates proper orchestration - the parent agent understands the difference between "general prompt guidance" (child agent) and "analyze a specific prompt" (tool).
@@ -1016,7 +1003,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 ---
 
-### Congratulations! You've completed Use Case 2!
+### Congratulations! You've completed the Extra Credit: Create and Orchestrate Child Agents!
 
 ---
 
@@ -1142,7 +1129,7 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 ---
 
-### Congratulations! You've completed Use Case 3!
+### Congratulations! You've completed the Extra Credit: Deploy Your Agent Across Channels!
 
 ---
 

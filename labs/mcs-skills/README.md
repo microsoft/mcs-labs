@@ -290,8 +290,8 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
     > [!TIP]
     > This is the diagnostic to reach for when a skill does *not* fire. If the description does not contain the language a user would actually use, the orchestrator never matches it - and nothing in the transcript tells you the skill exists.
 
-1. Let the run finish. The agent drafts the proposal, then runs the skill's bundled
-    `scripts/md_to_pdf.py` converter to format it.
+1. Let the run finish. The agent drafts the proposal, then uses the tools available to it to
+    render it as a PDF.
 
     > [!NOTE]
     > The full draft-plus-PDF run takes several minutes - it is writing a nine-page proposal and then rendering it. The reasoning trace updates as it works and is worth reading; the agent has not hung.
@@ -311,8 +311,10 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
 
 #### Publish the agent
 
-1. Select **Publish** in the command bar (or the chevron beside it and
-    **Customize publish channels**).
+1. Select the chevron beside **Publish** and choose
+    **Customize publish channels** to open the **Publish agent** dialog.
+    (Selecting the plain **Publish** button re-publishes the agent directly,
+    without offering channel options.)
 
 1. In the **Publish agent** dialog, select **Teams + Microsoft 365** in the channel list, then
     tick its checkbox to enable the channel.
@@ -379,8 +381,7 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
 
 1. Select **Classify** in the palette, and create a Dataverse connection when prompted.
 
-1. Leave **Prompt model** on the default (**GPT-4.1 mini**). Deciding whether a message is an RFP
-    request is a simple two-way call.
+1. Leave **Prompt model** on the default.
 
 1. In **Input to classify**, use **Insert dynamic content** to add **Content** (the attachment
     content), then **Body** (the email body).
@@ -556,8 +557,8 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
     > [!TIP]
     > You never named the skill or the plugin - exactly as in Use Case #1. Cowork matched your request against the same **description** and loaded the same playbook. The right rail lists what it is working with under **Skills & Plugins** and **References**.
 
-1. Let the run finish - it takes several minutes. Cowork drafts the proposal, runs the skill's
-    bundled `scripts/md_to_pdf.py` converter, and publishes both files. They appear under
+1. Let the run finish - it takes several minutes. Cowork drafts the proposal, uses the tools
+    available to it to render it as a PDF, and publishes both files. They appear under
     **Output** in the details pane - an `Aventra ... IW-2026-SHOPFLOOR` markdown file and the
     matching `.pdf`. The exact filename varies slightly between runs.
 
