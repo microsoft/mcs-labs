@@ -12,8 +12,6 @@ description: "Build an autonomous agent using Workflows — the next generation 
 
 ---
 
----
-
 # Workflows
 
 Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** — an agent that runs on a trigger instead of waiting for a chat, and hands real work to a non-deterministic inline agent.
@@ -192,7 +190,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 5. Select the **+** after the trigger and choose **Agent** to add an agent node. (Copilot Studio automatically wraps it in an **Apply to each** loop so the agent runs once per new to-do.) When prompted, **Create new connection** with your lab account. Leave the **Agent** dropdown on **New agent for this workflow** — this creates a brand-new, *non-deterministic* agent dedicated to this workflow rather than reusing an existing one.
 
    > [!TIP]
-   > This is the heart of the lab: instead of hard-coded actions, the workflow hands the task to an agent that *reasons* about how to schedule it. The default model is **Claude Sonnet 4.6**.
+   > This is the heart of the lab: instead of hard-coded actions, the workflow hands the task to an agent that *reasons* about how to schedule it.
 
    ![Agent node added with New agent for this workflow selected](images/add-new-agent-node.png)
 
@@ -209,7 +207,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
    3. Continue typing the rest of the instruction right after the token:
 
       ```
-      on my calendar in the next couple of business days and block that time on my calendar to work on this task. Then update the to-do with a due date a week out from the time block we created. Add appropriate notes and suggestions in the notes on key things I might want to consider and categorize it as blue. Also set a reminder 2 days before the due date. Make sure that the format of the Calendar notes and To-Do are formatted properly for the user to be able to read them well. Only schedule the time block within my normal working hours of 8:00 AM to 5:00 PM.
+      on my calendar in the next couple of business days and block that time on my calendar to work on this task. Then update the to-do with a due date a week out from the time block we created. Add appropriate notes and suggestions in the notes on key things I might want to consider. Also set a reminder 2 days before the due date. Make sure that the format of the Calendar notes and To-Do are formatted properly for the user to be able to read them well. Only schedule the time block within my normal working hours of 8:00 AM to 5:00 PM.
       ```
 
    > [!IMPORTANT]
@@ -224,7 +222,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
    - Turn on the **Web search** toggle so the agent can look things up (e.g., venue or location details referenced in a task).
 
    > [!TIP]
-   > The **Work IQ Calendar** tool lets the agent read your free/busy and create calendar events; **Update to-do** lets it write the due date, notes, category, and reminder back onto the task.
+   > The **Work IQ Calendar** tool lets the agent read your free/busy and create calendar events; **Update to-do** lets it write the due date, notes, and reminder back onto the task.
 
    ![Agent configured with Work IQ Calendar and Update to-do tools and Web search enabled](images/agent-tools-web-search.png)
 
@@ -264,12 +262,12 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
 #### Verify the results
 
-12. Go back to **Microsoft To Do** and refresh the **Time Block** list. Open your task — it has been updated by the agent: a **due date** (a week out), a **reminder** set 2 days before the due date, a **blue** category, and richly formatted **notes** (target date, the scheduled work block, and an action checklist).
+12. Go back to **Microsoft To Do** and refresh the **Time Block** list. Open your task — it has been updated by the agent: a **due date** (a week out), a **reminder** set 2 days before the due date, and richly formatted **notes** (target date, the scheduled work block, and an action checklist).
 
     > [!TIP]
     > Switch the list to **List** view and open the task to see the full notes the agent wrote — it even researched the venue with web search.
 
-    ![The to-do updated by the agent with due date, reminder, blue category, and formatted notes](images/todo-updated-details.png)
+    ![The to-do updated by the agent with due date, reminder, and formatted notes](images/todo-updated-details.png)
 
 13. Open **Outlook → Calendar**. The agent has added a **time block** event to reserve time to work on the task — on the next business day it found free and **within your 8:00 AM–5:00 PM working hours** — with a body summarizing the target date and venue. The workflow ran end-to-end with no further input from you.
 
@@ -351,7 +349,7 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
    ![The subject filter expression configured on the trigger](images/subject-filter-expression.png)
 
-7. Select the **Classify** node. Review the four classification categories configured in the node. Each category has a name and example text that the AI model uses to determine where an incoming email should be routed:
+7. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the four classification categories configured in the node. Each category has a name and example text that the AI model uses to determine where an incoming email should be routed:
 
    - **Quote Request** — emails requesting pricing or quotes for products/services
    - **Supplier Delay** — notifications about delays from suppliers
@@ -543,7 +541,7 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 2. In the new node, leave **Agent** set to **New agent in this workflow**. This creates an inline agent dedicated to this workflow path. Keep the default AI model.
 
    > [!TIP]
-   > A strength of AI-native nodes in Workflows is that you can choose a **different model per node**. This inline agent runs on **Claude Sonnet 4.6** for its reasoning, while the **Classify** node uses the lighter **GPT-4.1 mini** — a cost-optimized choice for that lightweight classification step. Matching the model to the work each node does keeps the workflow both capable and economical.
+   > A strength of AI-native nodes in Workflows is that you can choose a **different model per node**. An example is an inline agent that runs on a **Claude** model for its reasoning, while the **Classify** node uses a lighter **GPT** model — a cost-optimization pattern. Matching the model to the work each node does keeps the workflow both capable and economical.
 
 3. Select **Expand** (the two arrows next to **...**) so you can edit the full agent configuration, then rename the node title from **Agent** to **Inventory Task Agent**.
 
@@ -699,12 +697,15 @@ Configure the **Quote Request** path to use the published **Price Quote Agent**,
 
 2. Open **Price Quote Agent**. In the new experience's **Build** tab, inspect the agent and confirm these components are present on the right-hand panel:
 
-   - **Tools**: **Microsoft Dataverse MCP Server** and **Work IQ Mail (Preview)**
+   - **Tools**: **Microsoft Dataverse MCP Server** and **Mail** (formerly **Work IQ Mail (Preview)**)
    - **Knowledge**: **Order Management** (SharePoint knowledge source with pricing guidance, customer tiers, and related policy)
    - **Skills**: **price-quote** — the structured skill for composing and sending the quote email
    - On the left, the **Instructions** pane holds the agent's broad, conversational guidelines about handling price questions. Notice they stay deliberately high-level: the precise, procedural steps live in the **price-quote** skill instead — a best practice that keeps the instructions readable while the repeatable logic is encapsulated in a skill.
 
    ![The Price Quote Agent in the new Build experience showing instructions tools and knowledge](images/uc5-agent-new-experience.png)
+
+   > [!IMPORTANT]
+   > The **Mail** tool's connection may not import with the solution. In the published **Price Quote Agent**, open **Tools > Mail** and check its **Connection**. If it shows **Not Connected**, select **Create new connection > Create** and **Confirm** (sign in with your lab account). Without a connected Mail tool the agent will reason over the quote but never send the email, so the quote email in the final step will not arrive.
 
 3. Open the **price-quote** skill and read through what it does. The skill spells out exactly how to build a quote: read the customer name and the requested items from the request, use **Dataverse** to look up the customer's account and employee count and derive their pricing **tier** (Small / Mid / Large), take each item's SKU and list price from the **Sales & Pricing Guide**, then calculate the line totals, subtotal, tier discount, and final total. It finishes by reading the payment terms and delivery lead time and using **Work IQ** to email a fully formatted quote to the customer — applying only the prices and discounts found in the knowledge, never estimates.
 
@@ -804,17 +805,33 @@ To get the most out of Workflows in Copilot Studio:
 * **Tools are the agent's hands** — without the Work IQ Calendar and Update to-do tools (and web search), the agent could reason but not act. Grant exactly the tools the goal requires.
 * **Constrain behavior in the instructions** — small additions like "only within my 8:00 AM–5:00 PM working hours" meaningfully change the agent's choices. Iterate on the instructions, then **re-publish**.
 * **Publish before you test** — the trigger is only live after a publish, and changes don't take effect until you re-publish.
+* **Solution-level setup matters** — connection references in the Power Apps solution must be linked to actual connections *before* the workflow can be activated. Canvas-level connections alone are not sufficient; always verify solution connection references.
+* **Classify with examples, refine with testing** — the Classify node's accuracy depends on the quality and diversity of category examples. Test with edge cases and refine descriptions iteratively to improve routing accuracy.
+* **Ownership is a prerequisite** — workflows created by another user require an ownership transfer before you can publish or manage them. Use the Dataverse **Assign** function to take control.
+* **Use M365 Copilot when you need grounded, read-only retrieval** — the M365 Copilot node is excellent for finding context in email, chats, and files, but it does not perform write actions such as sending mail. Pair it with downstream workflow actions when approval or dispatch is required.
+* **Human review is the safety valve for customer-facing automation** — approval nodes let you insert AI-generated content into a reviewer-friendly message, capture a clear Yes/No decision, and keep the workflow paused until a person signs off.
+* **MCP servers turn an agent into an operational worker** — by connecting the Agent node to tools like Warehouse MCP and Dataverse MCP, the workflow can retrieve live business data, make judgments, and write records into line-of-business systems.
+* **Structured output makes agent reasoning reusable** — typed fields like `sku`, `stock`, and `risk` make it easier to inspect runs, pass results downstream, and design automations that combine non-deterministic reasoning with deterministic follow-up.
+* **Published agents are reusable business capabilities** — once an agent is published with its knowledge, tools, and skills, you can invoke it from multiple workflows instead of rebuilding the same logic in every branch.
 
 ---
 
 ## Conclusions & Recommendations
 
-> [!IMPORTANT]
-> **Workflows golden rules:**
-> * Match the **trigger** to the event that should start the work — manual for testing, recurrence for schedules, connector for "when something changes."
-> * Reach for an **inline agent** when a step needs reasoning; keep deterministic actions for steps that must always behave identically.
-> * Reference trigger data with the **`/` dynamic-content token** so the agent acts on the real input every run.
-> * Give the agent **only the tools it needs**, and state constraints (working hours, formatting, categories) explicitly in the instructions.
-> * Always **Save → Publish** before testing, and **re-publish** after any change. Use the **Activity** and **Monitor** views — and the **Agent** node's run details — to see exactly what the agent decided and did.
->
-> With these foundations, you can move from agents that *talk* to agents that *act on their own* — reacting to events, reasoning over real data, and getting work done across Microsoft 365.
+**Workflows golden rules:**
+
+* Match the **trigger** to the event that should start the work — manual for testing, recurrence for schedules, connector for "when something changes."
+* Reach for an **inline agent** when a step needs reasoning; keep deterministic actions for steps that must always behave identically.
+* Reference trigger data with the **`/` dynamic-content token** so the agent acts on the real input every run.
+* Give the agent **only the tools it needs**, and state constraints (working hours, formatting, categories) explicitly in the instructions.
+* Always **Save → Publish** before testing, and **re-publish** after any change. Use the **Activity** and **Monitor** views — and the **Agent** node's run details — to see exactly what the agent decided and did.
+* **Fix connection references at the solution level** — creating connections in the canvas is not enough. Always verify and link connection references in the Power Apps solution before publishing.
+* **Transfer ownership early** — if a workflow was created by another user, take ownership via Dataverse **Assign** before attempting any other management operations.
+* **Classify nodes are only as good as their examples** — invest time in adding diverse, representative examples to each category and testing edge cases to improve classification accuracy.
+* Use the **M365 Copilot** node for grounded, **read-only** retrieval and drafting, then pair it with other nodes when the workflow needs to send messages or update systems.
+* Put **Human review** in front of customer-facing actions whenever the quality bar or business risk warrants a person-in-the-loop checkpoint.
+* Use **MCP-connected agents** when the workflow needs to reason over live enterprise data and write operational outcomes such as Dataverse tasks.
+* Prefer **structured output** from agents when downstream steps, monitoring, or reporting depend on predictable fields rather than free-form text.
+* Reuse **published agents** for repeatable business capabilities — especially when they already combine knowledge sources, skills, and tools that multiple workflows can benefit from.
+
+With these foundations, you can move from agents that *talk* to agents that *act on their own* — reacting to events, reasoning over real data, and getting work done across Microsoft 365.
