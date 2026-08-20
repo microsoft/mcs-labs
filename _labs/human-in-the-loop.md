@@ -7,6 +7,7 @@ duration: 45
 difficulty: 200
 lab_type: local
 section: intermediate_labs
+deprecated: true
 journeys: ["business-user", "developer"]
 description: "Build an end-to-end expense claims solution where an employee submits an expense report (and receipt) through an agent, the request is evaluated against policy using AI, escalated to a manager for final approval when needed, and the employee is notified of the final outcome via email."
 
