@@ -89,7 +89,7 @@ Understand what Microsoft 365 Copilot does on its own, grounded in public web co
 
 ![Work IQ turned off in Microsoft 365 Copilot](images/lab-m365copilot-workiq.png)
 
-#### 1.3 Ask a broad market question
+#### 1.2 Ask a broad market question
 
 Paste the following into the prompt box and hit **Send**:
 
@@ -104,7 +104,7 @@ It went and looked. You gave it no file, no site, no URL, just a generic industr
 
 References are critical, since an answer with no reference is an answer you can't verify.
 
-#### 1.4 Ask for deeper reasoning
+#### 1.3 Ask for deeper reasoning
 
 Look to the right of **Work IQ** for the **response mode selector**:
 
@@ -144,7 +144,7 @@ Flag anything you could not source. Do not present an estimate as a fact.
 
 This one will run a bit longer than the first.
 
-**Scroll up to see the responses from 1.3.** It was on **Auto**, and Auto decided the question deserved a **Quick response**. In 1.4, you selected **Think deeper** because this question has complexities that a quick answer cannot address.
+**Scroll up to see the responses from 1.2.** It was on **Auto**, and Auto decided the question deserved a **Quick response**. In 1.3, you selected **Think deeper** because this question has complexities that a quick answer cannot address.
 
 Compare the two responses:
 
@@ -160,7 +160,7 @@ A simple prompt gets a fast answer no matter what you select. A complex prompt t
 > [!TIP]
 > When in doubt, use Auto in Response mode.
 
-#### 1.5 Change the model
+#### 1.4 Change the model
 
 Click **Think deeper** and look at the AI models offered. Alongside the default GPT models, Claude is also available for most tenants (subject to what your admin has enabled).
 
