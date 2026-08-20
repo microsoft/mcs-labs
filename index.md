@@ -188,7 +188,12 @@ header:
 }
 </style>
 
-{% assign all_labs = site.labs | sort: "order" %}
+{%- comment -%}
+  Must match the filter in labs/index.md: labs carrying `deprecated: true`
+  are hidden there, so counting them here would report a total the labs
+  index contradicts.
+{%- endcomment -%}
+{% assign all_labs = site.labs | where_exp: "lab", "lab.deprecated != true" | sort: "order" %}
 {% assign total_duration = 0 %}
 {% for lab in all_labs %}{% assign total_duration = total_duration | plus: lab.duration %}{% endfor %}
 {% assign total_hours = total_duration | divided_by: 60.0 | round: 1 %}
