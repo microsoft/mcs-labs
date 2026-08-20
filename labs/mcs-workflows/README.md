@@ -75,8 +75,8 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 ## 📄 Documentation and Additional Training Links
 
 * [Workflows in Microsoft Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-overview)
-* [Add an agent to a workflow](https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-action-agent)
-* [Triggers for workflows](https://learn.microsoft.com/en-us/microsoft-copilot-studio/flows-triggers)
+* [Add an agent to a workflow](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-node-workflow?tabs=workflows)
+* [Triggers overview](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-triggers-about)
 * [Add tools to an agent](https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent)
 * [Model Context Protocol (MCP) in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/agent-extend-action-mcp)
 * [Microsoft To Do](https://to-do.office.com/) · [Outlook Calendar](https://outlook.office.com/calendar/)
@@ -115,9 +115,9 @@ In this lab, you'll build several autonomous Workflows that act on event-driven 
 |------|----------|-------------|--------|
 | 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 15 min |
 | 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Configure connections, ownership, and publish a pre-built multi-branch classification workflow | 15 min |
-| 3 | [Use M365 Copilot and Add a Human-in-the-Loop in Order Management](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: M365 Copilot drafts a response, human approves, workflow replies | 15 min |
+| 3 | [Use M365 Copilot and Add a Human-in-the-Loop](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: M365 Copilot drafts a response, human approves, workflow replies | 15 min |
 | 4 | [Build an Inline Agent for Inventory Management](#-use-case-4-build-an-inline-agent-for-inventory-management) | Add an MCP-powered inline agent that checks warehouse stock and creates Dataverse tasks | 15 min |
-| 5 | [Call a Price Quote Specialist Agent from a Workflow (Bonus)](#-use-case-5-bonus-call-a-price-quote-specialist-agent-from-a-workflow) | Wire a published agent into a workflow branch to generate and send price quotes | 10 min (extra) |
+| EC | [Call a Price Quote Specialist Agent from a Workflow (Bonus)](#-use-case-5-bonus-call-a-price-quote-specialist-agent-from-a-workflow) | Wire a published agent into a workflow branch to generate and send price quotes | 10 min (extra) |
 
 ---
 
@@ -176,7 +176,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 5. Select the **+** after the trigger and choose **Agent** to add an agent node. (Copilot Studio automatically wraps it in an **Apply to each** loop so the agent runs once per new to-do.) When prompted, **Create new connection** with your lab account. Leave the **Agent** dropdown on **New agent for this workflow** — this creates a brand-new, *non-deterministic* agent dedicated to this workflow rather than reusing an existing one.
 
    > [!TIP]
-   > This is the heart of the lab: instead of hard-coded actions, the workflow hands the task to an agent that *reasons* about how to schedule it. The default model is **Claude Sonnet 4.6**.
+   > This is the heart of the lab: instead of hard-coded actions, the workflow hands the task to an agent that *reasons* about how to schedule it.
 
    ![Agent node added with New agent for this workflow selected](images/add-new-agent-node.png)
 
@@ -193,7 +193,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
    3. Continue typing the rest of the instruction right after the token:
 
       ```
-      on my calendar in the next couple of business days and block that time on my calendar to work on this task. Then update the to-do with a due date a week out from the time block we created. Add appropriate notes and suggestions in the notes on key things I might want to consider and categorize it as blue. Also set a reminder 2 days before the due date. Make sure that the format of the Calendar notes and To-Do are formatted properly for the user to be able to read them well. Only schedule the time block within my normal working hours of 8:00 AM to 5:00 PM.
+      on my calendar in the next couple of business days and block that time on my calendar to work on this task. Then update the to-do with a due date a week out from the time block we created. Add appropriate notes and suggestions in the notes on key things I might want to consider. Also set a reminder 2 days before the due date. Make sure that the format of the Calendar notes and To-Do are formatted properly for the user to be able to read them well. Only schedule the time block within my normal working hours of 8:00 AM to 5:00 PM.
       ```
 
    > [!IMPORTANT]
@@ -208,7 +208,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
    - Turn on the **Web search** toggle so the agent can look things up (e.g., venue or location details referenced in a task).
 
    > [!TIP]
-   > The **Work IQ Calendar** tool lets the agent read your free/busy and create calendar events; **Update to-do** lets it write the due date, notes, category, and reminder back onto the task.
+   > The **Work IQ Calendar** tool lets the agent read your free/busy and create calendar events; **Update to-do** lets it write the due date, notes, and reminder back onto the task.
 
    ![Agent configured with Work IQ Calendar and Update to-do tools and Web search enabled](images/agent-tools-web-search.png)
 
@@ -248,12 +248,12 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
 #### Verify the results
 
-12. Go back to **Microsoft To Do** and refresh the **Time Block** list. Open your task — it has been updated by the agent: a **due date** (a week out), a **reminder** set 2 days before the due date, a **blue** category, and richly formatted **notes** (target date, the scheduled work block, and an action checklist).
+12. Go back to **Microsoft To Do** and refresh the **Time Block** list. Open your task — it has been updated by the agent: a **due date** (a week out), a **reminder** set 2 days before the due date, and richly formatted **notes** (target date, the scheduled work block, and an action checklist).
 
     > [!TIP]
     > Switch the list to **List** view and open the task to see the full notes the agent wrote — it even researched the venue with web search.
 
-    ![The to-do updated by the agent with due date, reminder, blue category, and formatted notes](images/todo-updated-details.png)
+    ![The to-do updated by the agent with due date, reminder, and formatted notes](images/todo-updated-details.png)
 
 13. Open **Outlook → Calendar**. The agent has added a **time block** event to reserve time to work on the task — on the next business day it found free and **within your 8:00 AM–5:00 PM working hours** — with a body summarizing the target date and venue. The workflow ran end-to-end with no further input from you.
 
@@ -303,7 +303,16 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
    - **M365 Copilot** node — open the node and, under **Connections**, select **Create new connection** > **Create**, then sign in with your lab account.
    - **Human review** node — open the node and, under **Connections**, select **Create new connection** > **Create**, then sign in with your lab account.
 
-3. Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
+3. Navigate to the **Cloud Flow** object (the Order Management Workflow) inside the solution and select the flow. Choose **Set primary owner**, **remove the existing owner**, set yourself (your lab user) as the new owner, and select **Save**. A **green bar** should appear confirming the owner was successfully changed.
+
+   > [!IMPORTANT]
+   > Without the ownership change, publishing is **disabled by default**, so the workflow cannot be triggered end-to-end — you can still test individual nodes inside it, but no real incoming email will start a run. Once you own the workflow, the **Publish** button becomes available.
+
+4. Go back to the workflow and select **Save** (or press **Ctrl+S**). The **Publish** button becomes available after saving — select **Publish**. If publishing succeeds, the setup is complete and you can **skip step 5**.
+
+5. **(Backup — only if Publish stays disabled or fails.)** Complete both backup steps below.
+
+   **5.1 Configure the connection references.** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
 
    - You should see **five** connection references. If a **sixth** one is present whose connection id starts with `crc3b_draft_bRURqJ.cr.shared_a365outlookmailmcp`, it is not needed for the workflow to run and can be **safely removed** from the solution.
    - For all others, select the connection and click **Save**, then confirm with **Save changes**.
@@ -313,12 +322,9 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
    > [!WARNING]
    > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
 
-4. Navigate to the **Cloud Flow** object (the Order Management Workflow) inside the solution and select the flow. Choose **Set primary owner**, **remove the existing owner**, set yourself (your lab user) as the new owner, and select **Save**. A **green bar** should appear confirming the owner was successfully changed.
+   **5.2 Grant ownership through the Power Platform Admin Center.** Open the **Power Platform Admin Center** ([admin.powerplatform.microsoft.com](https://admin.powerplatform.microsoft.com)) and navigate to **Environments** → your environment → **Flows**. Find the **Order Management Workflow** row, open **More flow actions (…)** → **Share**, add your **lab user** as a **co-owner**, and select **Save**. This grants ownership through the Admin Center if the **Set primary owner** action in step 3 did not enable publishing.
 
-   > [!IMPORTANT]
-   > Without the ownership change, publishing is **disabled by default**, so the workflow cannot be triggered end-to-end — you can still test individual nodes inside it, but no real incoming email will start a run. Once you own the workflow, the **Publish** button becomes available. Ownership must be transferred **after** the connection references are configured.
-
-5. Go back to the workflow, select **Save**, and **Publish**. Verify the workflow was successfully published after changing the ownership — publishing only succeeds once you own the flow.
+   When done, **retry step 4 (Save and Publish).**
 
 #### Open and explore the Order Management Workflow
 
@@ -329,7 +335,7 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
    ![The subject filter expression configured on the trigger](images/subject-filter-expression.png)
 
-7. Select the **Classify** node. Review the four classification categories configured in the node. Each category has a name and example text that the AI model uses to determine where an incoming email should be routed:
+7. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the four classification categories configured in the node. Each category has a name and example text that the AI model uses to determine where an incoming email should be routed:
 
    - **Quote Request** — emails requesting pricing or quotes for products/services
    - **Supplier Delay** — notifications about delays from suppliers
@@ -521,7 +527,7 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 2. In the new node, leave **Agent** set to **New agent in this workflow**. This creates an inline agent dedicated to this workflow path. Keep the default AI model.
 
    > [!TIP]
-   > A strength of AI-native nodes in Workflows is that you can choose a **different model per node**. This inline agent runs on **Claude Sonnet 4.6** for its reasoning, while the **Classify** node uses the lighter **GPT-4.1 mini** — a cost-optimized choice for that lightweight classification step. Matching the model to the work each node does keeps the workflow both capable and economical.
+   > A strength of AI-native nodes in Workflows is that you can choose a **different model per node**. An example is an inline agent that runs on a **Claude** model for its reasoning, while the **Classify** node uses a lighter **GPT** model — a cost-optimization pattern. Matching the model to the work each node does keeps the workflow both capable and economical.
 
 3. Select **Expand** (the two arrows next to **...**) so you can edit the full agent configuration, then rename the node title from **Agent** to **Inventory Task Agent**.
 
@@ -677,12 +683,15 @@ Configure the **Quote Request** path to use the published **Price Quote Agent**,
 
 2. Open **Price Quote Agent**. In the new experience's **Build** tab, inspect the agent and confirm these components are present on the right-hand panel:
 
-   - **Tools**: **Microsoft Dataverse MCP Server** and **Work IQ Mail (Preview)**
+   - **Tools**: **Microsoft Dataverse MCP Server** and **Mail** (formerly **Work IQ Mail (Preview)**)
    - **Knowledge**: **Order Management** (SharePoint knowledge source with pricing guidance, customer tiers, and related policy)
    - **Skills**: **price-quote** — the structured skill for composing and sending the quote email
    - On the left, the **Instructions** pane holds the agent's broad, conversational guidelines about handling price questions. Notice they stay deliberately high-level: the precise, procedural steps live in the **price-quote** skill instead — a best practice that keeps the instructions readable while the repeatable logic is encapsulated in a skill.
 
    ![The Price Quote Agent in the new Build experience showing instructions tools and knowledge](images/uc5-agent-new-experience.png)
+
+   > [!IMPORTANT]
+   > The **Mail** tool's connection may not import with the solution. In the published **Price Quote Agent**, open **Tools > Mail** and check its **Connection**. If it shows **Not Connected**, select **Create new connection > Create** and **Confirm** (sign in with your lab account). Without a connected Mail tool the agent will reason over the quote but never send the email, so the quote email in the final step will not arrive.
 
 3. Open the **price-quote** skill and read through what it does. The skill spells out exactly how to build a quote: read the customer name and the requested items from the request, use **Dataverse** to look up the customer's account and employee count and derive their pricing **tier** (Small / Mid / Large), take each item's SKU and list price from the **Sales & Pricing Guide**, then calculate the line totals, subtotal, tier discount, and final total. It finishes by reading the payment terms and delivery lead time and using **Work IQ** to email a fully formatted quote to the customer — applying only the prices and discounts found in the knowledge, never estimates.
 

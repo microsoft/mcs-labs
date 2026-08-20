@@ -1,9 +1,9 @@
-    ---
+---
 layout: lab
 module: tools-overview
 title: "Copilot Studio Tools"
 order: 270
-duration: 60
+duration: 30
 difficulty: 300
 lab_type: local
 section: intermediate_labs
@@ -13,11 +13,9 @@ description: "Learn how to extend your agents with tools including connectors, a
 
 ---
 
----
-
 # Copilot Studio Tools
 
-Learn how to extend your agents with powerful tools including connectors, agent flows, MCP servers, and custom prompts in Microsoft Copilot Studio.
+Learn how to extend your agents with powerful tools including connectors, MCP servers, and custom prompts in Microsoft Copilot Studio.
 
 ---
 
@@ -25,7 +23,7 @@ Learn how to extend your agents with powerful tools including connectors, agent 
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 60 minutes | After completing this lab, participants will be able to use connectors to integrate external services, build deterministic business logic with agent flows, connect MCP servers for live data access, and create custom prompts for structured responses. An optional extra credit section covers Computer Using Agents (CUA) for legacy system automation. |
+| 300 | Maker | 30 minutes | After completing this lab, participants will be able to use connectors to integrate external services and connect MCP servers for live data access. Optional extra credit sections cover creating custom prompts for structured responses and using Computer Using Agents (CUA) for legacy system automation. |
 
 ---
 
@@ -40,9 +38,8 @@ Learn how to extend your agents with powerful tools including connectors, agent 
 - [Use Cases Covered](#use-cases-covered)
 - [Instructions by Use Case](#instructions-by-use-case)
   - [Use Case #1: Extend Your Agent with Connectors](#use-case-1-extend-your-agent-with-connectors)
-  - [Use Case #2: Build Deterministic Logic with Agent Flows](#use-case-2-build-deterministic-logic-with-agent-flows)
-  - [Use Case #3: Connect an MCP Server for Live Data Access](#use-case-3-connect-an-mcp-server-for-live-data-access)
-  - [Use Case #4: Create Custom Prompts for Structured Responses](#use-case-4-create-custom-prompts-for-structured-responses)
+  - [Use Case #2: Connect an MCP Server for Live Data Access](#use-case-2-connect-an-mcp-server-for-live-data-access)
+  - [Extra Credit: Create Custom Prompts for Structured Responses](#extra-credit-create-custom-prompts-for-structured-responses)
   - [Extra Credit: Automate Legacy Systems with Computer Using Agents (CUA)](#extra-credit-automate-legacy-systems-with-computer-using-agents-cua)
 
 ---
@@ -58,18 +55,17 @@ Think of tools as the hands and feet of your agent:
 **Common challenges solved by this lab:**
 - "My agent can answer questions but can't actually do anything"
 - "I need my agent to access live data from Dataverse and other systems"
-- "I have business rules that must always produce the same result - AI alone isn't deterministic enough"
 - "I need to connect to legacy systems that don't have APIs"
 
-**In 60 minutes, you'll learn four different ways to extend your agents with tools - giving you the skills to build agents that don't just talk, but take action.**
+**In about 30 minutes, you'll learn two core ways to extend your agents with tools - giving you the skills to build agents that don't just talk, but take action. Optional extra credit sections go further with custom prompts and Computer Using Agents.**
 
 ---
 
 ## Introduction
 
-Tools are what transform a conversational agent into a powerful business assistant. Microsoft Copilot Studio offers multiple types of tools, each designed for different integration scenarios. Connectors provide pre-built integrations with hundreds of services. Agent flows enable deterministic, rule-based business logic using Power Fx. MCP (Model Context Protocol) servers provide real-time access to data sources like Dataverse. Custom prompts structure agent responses for consistent, business-relevant outputs. And for systems without APIs, Computer Using Agents (CUA) can simulate human interaction with graphical interfaces.
+Tools are what transform a conversational agent into a powerful business assistant. Microsoft Copilot Studio offers multiple types of tools, each designed for different integration scenarios. Connectors provide pre-built integrations with hundreds of services. MCP (Model Context Protocol) servers provide real-time access to data sources like Dataverse. Custom prompts structure agent responses for consistent, business-relevant outputs. And for systems without APIs, Computer Using Agents (CUA) can simulate human interaction with graphical interfaces.
 
-**Real-world example:** A sales organization needs an agent that can calculate commissions based on fixed business rules (agent flow), look up account details from Dataverse in real time (MCP server), send notifications through Teams or email (connectors), present data in a consistent format (custom prompts), and even pull data from a legacy portfolio system with no API (CUA). Each tool type addresses a different integration need, and together they create a comprehensive, capable agent.
+**Real-world example:** A sales organization needs an agent that can look up account details from Dataverse in real time (MCP server), send notifications through Teams or email (connectors), present data in a consistent format (custom prompts), and even pull data from a legacy portfolio system with no API (CUA). Each tool type addresses a different integration need, and together they create a comprehensive, capable agent.
 
 This lab teaches you how to use each tool type through hands-on scenarios.
 
@@ -80,7 +76,6 @@ This lab teaches you how to use each tool type through hands-on scenarios.
 | Concept | Why it matters |
 |---------|----------------|
 | **Connectors** | Pre-built integrations with hundreds of Microsoft and third-party services, enabling agents to take actions like sending emails, creating records, or querying external APIs |
-| **Agent Flows** | Deterministic, rule-based workflows that process inputs and produce predictable outputs using Power Fx - essential for business logic that must always be consistent |
 | **MCP Servers** | Model Context Protocol servers that provide real-time, dynamic access to data sources like Dataverse, enabling natural language queries against live business data |
 | **Custom Prompts** | Structured prompt templates that standardize agent responses by pulling specific fields from data sources, ensuring consistent and relevant output formats |
 | **Computer Using Agents (CUA)** | Agents that simulate human interaction with graphical user interfaces, enabling automation of legacy systems that lack API connectivity |
@@ -90,7 +85,6 @@ This lab teaches you how to use each tool type through hands-on scenarios.
 ## Documentation and Additional Training Links
 
 * [Tools overview in Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/add-tools-custom-agent)
-* [Agent Flows in Microsoft Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/advanced-flow)
 * [Connect to Dataverse with Model Context Protocol (MCP)](https://learn.microsoft.com/en-us/power-apps/maker/data-platform/data-platform-mcp)
 * [Use prompts to make your agent perform specific tasks](https://learn.microsoft.com/en-us/microsoft-copilot-studio/nlu-prompt-node)
 * [Use connectors in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/advanced-connectors)
@@ -114,9 +108,8 @@ This lab teaches you how to use each tool type through hands-on scenarios.
 In this lab, you'll extend agents with multiple tool types to address different integration scenarios. By the end of the lab, you will:
 
 - Use connectors to integrate external services with your agent
-- Configure a workflow for an agent with deterministic business logic for commission calculations
 - Connect a Dataverse MCP server for real-time natural language data access
-- Create custom prompts that structure agent responses with specific data fields
+- (Extra Credit) Create custom prompts that structure agent responses with specific data fields
 - (Extra Credit) Configure a Computer Using Agent to automate a legacy system without API access
 
 ---
@@ -126,9 +119,8 @@ In this lab, you'll extend agents with multiple tool types to address different 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
 | 1 | [Extend Your Agent with Connectors](#use-case-1-extend-your-agent-with-connectors) | Integrate external services and take actions through pre-built connectors | 15 min |
-| 2 | [Build Deterministic Logic with Agent Flows](#use-case-2-build-deterministic-logic-with-agent-flows) | Implement business rules that always produce consistent, predictable results | 15 min |
-| 3 | [Connect an MCP Server for Live Data Access](#use-case-3-connect-an-mcp-server-for-live-data-access) | Enable natural language queries against live Dataverse business data | 20 min |
-| 4 | [Create Custom Prompts for Structured Responses](#use-case-4-create-custom-prompts-for-structured-responses) | Standardize agent outputs for consistent, business-relevant responses | 10 min |
+| 2 | [Connect an MCP Server for Live Data Access](#use-case-2-connect-an-mcp-server-for-live-data-access) | Enable natural language queries against live Dataverse business data | 15 min |
+| EC | [Extra Credit: Create Custom Prompts for Structured Responses](#extra-credit-create-custom-prompts-for-structured-responses) | Standardize agent outputs for consistent, business-relevant responses (Optional) | 10 min |
 | EC | [Extra Credit: Automate Legacy Systems with CUA](#extra-credit-automate-legacy-systems-with-computer-using-agents-cua) | Automate systems that lack API connectivity using desktop simulation (Optional) | ~20 min |
 
 ---
@@ -161,19 +153,15 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 #### Create the Dictionary Agent
 
-1. Go to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and confirm you are in your development environment.
+1. Go to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and make sure you are in your development environment.
 
-1. Select **Agents** on the left navigation.
+1. Select **Agents** on the left navigation. Make sure you are in the **New Copilot Studio experience** — if a banner or toggle offers it, select **Try now** (or turn the **New experience** toggle ON).
 
-1. Turn **OFF** the **New experience** toggle (look for the banner or toggle at the top of Copilot Studio). When the feedback pop-up appears, select **Submit**. This switches you to the classic Copilot Studio experience.
+1. Select **New agent** to create an autonomous agent. This opens the agent designer.
 
-    ![New Agent split-button menu showing New classic agent](images/new-agent-classic-menu.png)
+1. In the **Name your agent** field, enter `Dictionary Agent`.
 
-1. Select **Agents** in the left navigation, then select **Create blank agent**. In the **Name your agent** dialog, enter `Dictionary Agent` and select **Continue**.
-
-1. After the agent is provisioned, confirm its name is `Dictionary Agent`. If you need to change it, select **Edit** in the **Details** section on **Overview**.
-
-1. Enter the following as the **Description:**
+1. In the **Instructions** field, enter the following:
 
     ```
     This agent allows a user to lookup the definition of a word
@@ -185,13 +173,13 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Tools** in the top navigation.
 
-1. Select **Add a tool**.
+1. Select **Add Tool**.
 
-1. On the right top corner of the  **Create new** section, select **See all**.
+1. Under **Create new**, Select **See all**.
 
 1. Select **Custom connector**.
 
-1. In the top navigation, select **New custom connector**.
+1. In the top navigation, Select **New custom connector**.
 
 1. Select **Create from blank**.
 
@@ -208,7 +196,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
     > [!NOTE]
     > This API doesn't require authentication, but this is where you would select the authentication type for APIs that do.
 
-1. Confirm the authentication type is set to **No authentication** and select **Definition**.
+1. Make sure the authentication type is set to **No authentication** and Select **Definition**.
 
 #### Define the API Action
 
@@ -221,12 +209,12 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
     Lookup a word in the dictionary
     ```
 
-    > [!NOTE]
+    > [!TIP]
     > The description will later be used as the tool description, which allows the orchestrator to know when to use this tool. Make sure you are descriptive here to allow the best conversation routing.
 
 1. In the **Operation ID** field, enter **WordLookup**
 
-1. Under **Request**, select **Import from sample**.
+1. Under **Request**, Select **Import from sample**.
 
 1. Select **Get** as the **Verb**.
 
@@ -238,7 +226,7 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Import**.
 
-1. Select the down arrow next to **word** and select **Edit**.
+1. Select the down arrow next to **word** and Select **Edit**.
 
 1. In the **Description** field, enter:
 
@@ -312,75 +300,55 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 1. Select **Import**.
 
-1. Update the following body items by selecting the down arrow on each and selecting **Edit**, change the data and then select **Back**:
+1. Update the following body items by selecting the down arrow on each and selecting **Edit**, change the data and then select **back**:
 
-    - **origin**
-    - **Title:** `origin`
-    - **Description:** `Where the word originated from including data such as the definition, part of speech, example of its use, synonyms, antonyms. It includes all potential uses of the word in part of speech such as if it is used as a verb, noun, or an exclamation what the meaning is when used in that way.`
+- **origin**
+  - **Title:** `origin`
+  - **Description:** `Where the word originated from including data such as the definition, part of speech, example of its use, synonyms, antonyms. It includes all potential uses of the word in part of speech such as if it is used as a verb, noun, or an exclamation what the meaning is when used in that way.`
 
-    - **phonetic**
-    - **Title:** `phonetic`
-    - **Description:** `How to pronounce the word including the audio file of it being spoken.`
+- **phonetic**
+  - **Title:** `phonetic`
+  - **Description:** `How to pronounce the word including the audio file of it being spoken.`
 
-    - **word**
-    - **Title:** `word`
-    - **Description:** `The word that was looked up`
+- **word**
+  - **Title:** `word`
+  - **Description:** `The word that was looked up`
 
 1. Select **Create connector** on the top menu.
 
 
 #### Add the Custom Connector as a Tool
 
-1. Return to the browser tab with Copilot Studio.
+1. Go back to the browser tab with Copilot Studio and open your **Dictionary Agent**.
 
-1. Refresh the page.
-
-1. In the **Add tool** screen, enter the following into the search box and press **Enter**:
+1. In the agent designer's **Tools** section, select **Add tool**, then enter the following into the search box and press **Enter**:
 
     ```
     Lookup a word in the dictionary
     ```
 
     > [!NOTE]
-    > It can sometimes take a few minutes for a new connector to sync to Copilot Studio. If you don't see it, try clearing your browser cache by refreshing the page.
+    > It can sometimes take a few minutes for a new connector to sync to Copilot Studio. If you don't see it, try refreshing the page.
 
 1. Select the **Word Lookup** connector from the search results.
 
-1. Select the down arrow next to the **Connection** and select **Create new connection**.
-
-1. Select **Create**.
-
-1. You should see the connection with a green check mark. Select **Add and configure**.
-
-1. In the **Details** section, select **Additional details** and set **Credentials to use** to **Maker-provided credentials**.
+1. Select **Add**. The connection is set up automatically for this connector. If you are prompted to select a connection, create one and confirm your student credentials if asked.
 
     > [!TIP]
-    > For unauthenticated APIs, it is best to use Maker-provided credentials so you don't require users to create a connection for anonymous connectors.
+    > This connector uses **Maker-provided credentials**, so end users don't need to create their own connection for the unauthenticated Dictionary API. You can review a tool's settings any time by selecting it in the **Tools** section.
 
-1. In the **Inputs** section, select **Additional details** below **word**.
-
-1. Notice that all your inputs have been populated from your connector definition - this is why it is important to provide detailed descriptions when building your connector.
-
-1. Select **Save** to save the tool configuration.
+1. The **Word Lookup** tool now appears in the **Tools** section of the agent designer.
 
 #### Test Your Dictionary Agent
 
-1. Select **Settings** in the upper right corner.
-
-1. Scroll to the bottom of the **Generative AI** list of settings.
-
-1. Turn off **Allow ungrounded responses**.
+1. In the agent designer's **Knowledge** section, remove the **Search all websites** knowledge (select **Remove** next to it) so the agent doesn't answer from the web.
 
     > [!NOTE]
-    > Disabling **Allow ungrounded responses** ensures that only your custom connector API provides answers, not the underlying language model. This setting was previously labelled **Use general knowledge** in older Copilot Studio UI.
-
-1. Turn off **Use information from the Web** as well.
+    > Removing web knowledge helps make sure that only your custom connector API provides answers, not the underlying language model. To further restrict general knowledge, select **More options (…) > Settings > AI & behavior** and disable ungrounded responses.
 
 1. Select **Save**.
 
-1. Close **Settings** using the **X** in the upper right-hand corner.
-
-1. In the test pane, try the following queries:
+1. Select the **Preview** tab and try the following queries in the chat pane:
 
     ```
     What is the meaning of the word copilot?
@@ -413,157 +381,20 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 **Lessons learned & troubleshooting tips:**
 
 * New custom connectors may take a few minutes to sync to Copilot Studio - refresh your browser if the connector doesn't appear immediately
-* Disabling **Allow ungrounded responses** forces the agent to rely solely on your tools, which is useful for validating that the connector works correctly
+* Disabling general knowledge forces the agent to rely solely on your tools, which is useful for validating that the connector works correctly
 * Always define response schemas with descriptive titles and descriptions so the agent can present results meaningfully
 
 ---
 
 ---
 
-## Use Case #2: Build Deterministic Logic with Agent Flows
-
-Build a Sales Commission Calculator using workflows to implement deterministic business logic that always produces consistent, predictable results.
-
-| Use case | Value added | Estimated effort |
-|----------|-------------|------------------|
-| Build Deterministic Logic with Workflows | Implement business rules that always produce consistent, predictable results | 15 minutes |
-
-**Summary of tasks**
-
-In this section, you'll explore a pre-created agent that uses an agent flow for deterministic business logic, see how tier-based commission calculations are implemented with Power Fx, and test multiple scenarios to validate the business rules.
-
-**Scenario:** Contoso Electronics has a sales team that needs instant visibility into their commission earnings. Commission calculations involve performance tiers with different percentage rates and product mix bonuses - rules that must always produce the same result for the same inputs. Agent flows are the ideal tool because they provide deterministic, rule-based processing rather than AI-generated responses.
-
-### Objective
-
-Use a pre-created agent that calculates sales commissions with deterministic business rules, and test the complete workflow across multiple scenarios.
-
----
-
-### Step-by-step instructions
-
-#### Open the Pre-Created Agent
-
-1. Go to **Microsoft Copilot Studio** at <a href="https://copilotstudio.microsoft.com" target="_blank">copilotstudio.microsoft.com</a>.
-
-1. Make sure you are in the **New Copilot Studio experience** — look for the banner or toggle at the top and select **Try now** (or turn the **New experience** toggle ON).
-
-1. Select **Agents** on left navigation, then open the pre-created **Sales Commission Assistant** agent.
-
-    > [!NOTE]
-    > The **Sales Commission Assistant** agent has already been created and configured for you, and the **Calculate Sales Commission** agent flow is already connected as a tool. In a real implementation, you would create the agent and wire up the flow yourself — this lab provides them so you can focus on understanding how deterministic agent flows work.
-
-1. (Optional) Review how the agent is configured so you understand what was set up for you:
-
-    - On the **Overview** page, the **Description** is set to `Calculates sales commissions based on performance data`, and **Web Search** is turned off in the **Knowledge** section.
-    - The **Instructions** section contains: `When collecting information for a tool, always ask for one piece of information at a time.`
-    - In the **Tools** section, the **Calculate Sales Commission** agent flow is connected.
-
-    > [!NOTE]
-    > Using instructions to explain how you want the agent to behave when collecting information is a good example of how Instructions should be used in agents. Instructions guide the agent's conversational behavior without requiring you to build explicit topics or flows for every interaction pattern.
-
-    > [!TIP]
-    > The **Calculate Sales Commission** flow has already been provisioned for you with the commission calculation logic, input parameters, and response configuration. In a real implementation, you would build the agent flow yourself using Power Fx expressions — the logic could be as complex as needed and could use all the capabilities of flow.
-
-#### Test Your Commission Calculator
-
-1. If the **Test your agent** panel is not showing , select **Test** in the upper right-hand corner of Copilot Studio to show it.
-
-1. Type the following in the test pane:
-
-    ```
-    Calculate my commission
-    ```
-
-1. The agent will ask you for each piece of information one at a time. When prompted, enter the following values:
-
-    - **Name:**
-      ```
-      Jennifer Rodriguez
-      ```
-    - **Annual Revenue:**
-      ```
-      675000
-      ```
-    - **Quota Amount:**
-      ```
-      400000
-      ```
-    - **Strategic Product Revenue:**
-      ```
-      250000
-      ```
-
-1. Verify the results include:
-    - Commission Tier: Tier 3
-    - Commission Rate: 12.0%
-    - Base Commission: $81,000.00
-    - Product Mix Bonus: $3,000.00 (Strategic products >= 30%)
-    - **Total Commission: $84,000.00**
-
-1. Reset the conversation by selecting **New test session** at the top of the panel, and test with a different scenario:
-
-    ```
-    Calculate my commission
-    ```
-
-1. When prompted, enter the following values:
-
-    - **Name:**
-      ```
-      David Park
-      ```
-    - **Annual Revenue:**
-      ```
-      75000
-      ```
-    - **Quota Amount:**
-      ```
-      100000
-      ```
-    - **Strategic Product Revenue:**
-      ```
-      10000
-      ```
-
-1. Verify the results include:
-    - Commission Tier: Tier 0
-    - Commission Rate: 0.0%
-    - Base Commission: $0.00
-    - Product Mix Bonus: $0.00 (Strategic products < 30%)
-    - **Total Commission: $0.00**
-
----
-
-### Congratulations! You've completed Use Case #2!
-
----
-
-### Test your understanding
-
-**Key takeaways:**
-
-* **Deterministic Logic** - Same inputs always produce the same commission outputs with no AI variability, which is critical for financial calculations
-* **Power Fx Formulas** - Used to calculate percentages, apply rates, and aggregate totals within the flow
-* **Agent Flows vs. AI** - Use agent flows for business rules that must be predictable and auditable; use AI for open-ended, conversational responses
-
-**Lessons learned & troubleshooting tips:**
-
-* Parameter names in agent flows are case-sensitive - make sure they match exactly between the flow and topic
-* Use the Express mode for simpler flows that don't require complex error handling
-* Test with edge cases (zero revenue, exactly at tier boundaries) to validate business rules
-
----
-
----
-
-## Use Case #3: Connect an MCP Server for Live Data Access
+## Use Case #2: Connect an MCP Server for Live Data Access
 
 Create a Copilot Agent that connects to the Dataverse MCP Server for real-time natural language access to business data.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Connect an MCP Server for Live Data Access | Enable natural language queries against live Dataverse business data | 20 minutes |
+| Connect an MCP Server for Live Data Access | Enable natural language queries against live Dataverse business data | 15 minutes |
 
 **Summary of tasks**
 
@@ -583,19 +414,15 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 1. Go to [Copilot Studio](https://copilotstudio.microsoft.com/). Make sure you are logged in using the credentials for the lab and are in the correct environment, and that you are in the **New Copilot Studio experience** — if a banner or toggle offers it, select **Try now** (or turn the **New experience** toggle ON).
 
-1. Select **Agents** in the left navigation, then select the down-arrow (chevron) next to **New Agent** and choose **New classic agent**. In the **Name your agent** dialog, enter `Contoso Agent` and select **Create**.
+1. Select **New agent** to create an autonomous agent. This opens the agent designer.
 
-1. Select **Edit** and confirm the Name and add the Description:
+1. In the **Name your agent** field, enter `Contoso Agent`.
 
-   **Name:** `Contoso Agent`
+1. In the **Instructions** field, enter the following instructions:
 
-   **Description:** `This agent will help Contoso sales reps update their accounts and contacts using the Dataverse MCP Server.`
-
-1. Select **Save**.
-
-1. Select **Edit** in the upper right corner of the Instructions section and enter the following instructions:
-  
     ```
+    This agent will help Contoso sales reps update their accounts and contacts using the Dataverse MCP Server.
+
     This agent will:
     Read accounts and contact information from the Account and Contact Tables in Dataverse using the Dataverse MCP Server.
     Update accounts and contact information from the Account and Contact Tables in Dataverse using the Dataverse MCP Server.
@@ -604,13 +431,9 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
     ```
 1. Select **Save**
 
-1. Scroll down in the **Overview** tab to the **Suggested prompts** section and select **Add suggested prompts**.
-
-1. Add the following prompts, then select **Save**:
+1. Add suggested prompts: select **More options** (the **…** menu in the upper right of the designer), select **Settings**, then open the **Greeting & prompts** tab. Under **Suggested prompts**, select **Add** and enter the following, then close the settings dialog:
    - **Title:** Account Search | **Prompt:** `List all accounts in Redmond`
    - **Title:** Contact Search | **Prompt:** `List all contacts from Coho Winery`
-
-      ![Suggested prompts configuration](images/step4b-suggested-prompts-search.png)
 
     > [!TIP]
     > You can configure up to six suggested prompts that customers can choose from to start a conversation. In Teams and in Copilot Chat, suggested prompts appear on the agent's welcome page before you start a new chat. You can't see or use them when you test your agent in Copilot Studio.
@@ -618,26 +441,22 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 #### Add the Dataverse MCP Server as a Tool
 
-1. In the  **Tools** section on the **Overview** tab, Select **+ Add tool**.
+1. In the agent designer's **Tools** section, select **Add tool**.
 
    ![Add tool dialog with Dataverse MCP Server option highlighted in red border](images/step6-add-tool.png)
 
-1. Search for **Dataverse** and select **Dataverse MCP Server** from the results. If there are multiple do not select the deprecated one and do not select the one that has preview in its description.
+1. Select the **Model Context Protocol (MCP)** tab, search for **Dataverse**, and select **Microsoft Dataverse MCP Server** from the results. If there are multiple, do not select the deprecated ones and do not select the one that has **(Preview)** in its name.
 
    ![Select MCP Dataverse](images/step7-mcp-dataverse.png)
 
-1. In the **Connection** list if it says **Not connected**, select it and then select **Create new connection**.
-
-   ![Add authentication](images/step8-add-auth.png)
-
-1. Review **Authentication Type** it should already be set to **Oauth**, no changes are required, Select **Create**.  If prompted, confirm your student credentials.
+1. On the **Select a connection** step, the **Connection** is usually populated automatically with your signed-in student account. If it shows **Not connected**, select the field, create a connection, and confirm your student credentials if prompted.
 
     > [!IMPORTANT]
     > The Dataverse MCP Server will allow you natural language access to your tables in Dataverse. We have sample data in the Accounts and Contacts tables that we will use. The tools available are: list tables, describe table, read data, create record, update record, list prompts, execute prompt, list knowledge sources, and retrieve knowledge.
 
-1. Select **Add and configure**.
+1. Select **Add**.
 
-1. Review the tools available for the Dataverse MCP Server. You can select and deselect which tools are available to the agent. When the tool is executed, the list is dynamically updated from the MCP Server.
+1. The **Microsoft Dataverse MCP Server** now appears in the **Tools** section of the agent designer. Select it to review the individual tools available. You can enable or disable which tools are available to the agent; when a tool is executed, the list is dynamically updated from the MCP Server.
 
     ![Review MCP tools](images/step9-review-mcp.png)
 
@@ -646,14 +465,14 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 #### Test Your Agent
 
-1. In the testing panel, ask the following question: **List the accounts in the state of WA**.
+1. Select the **Preview** tab at the top of the agent designer. In the chat pane, ask the following question: **List the accounts in the state of WA**.
 
-1. For the first run, you will get a consent dialog as by default the tool is configured to use "End user credentials". Select **Allow** to continue.
+1. The first time the tool runs against a new connection you may get a consent dialog, as by default the tool is configured to use "End user credentials". If it appears, select **Allow** to continue.
 
       ![Allow MCP access](images/step11a-allow-mcp.png)
 
     > [!NOTE]
-    > If you are using Service Principals or Client Certification Auth to connect to Dataverse, you may need to use "Maker-provided credentials". To change this, go to the Details section > Additional details section > Credentials to use.
+    > If you are using Service Principals or Client Certification Auth to connect to Dataverse, you may need to use **Maker-provided credentials**. To change this, select the **Microsoft Dataverse MCP Server** in the agent designer's **Tools** section, then under **Additional details** set **Credentials to use** to **Maker-provided credentials**.
 
       ![Test agent](images/step11b-test-agent.png)
 
@@ -684,7 +503,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 ---
 
-### Congratulations! You've completed Use Case #3!
+### Congratulations! You've completed Use Case #2!
 
 ---
 
@@ -706,7 +525,10 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 ---
 
-## Use Case #4: Create Custom Prompts for Structured Responses
+## Extra Credit: Create Custom Prompts for Structured Responses
+
+> [!NOTE]
+> **Optional - Extra Credit (~10 minutes):** This use case is optional and not included in the core lab time. Complete it if you have additional time or want to explore prompt-based tools and model selection.
 
 Create a custom prompt tool that controls how your agent responds to conversations, including selecting which AI model to use.
 
@@ -781,7 +603,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. Select the down arrow next to **GPT-4.1 mini** to see the list of available model options.
 
-1. Select a different model and select **Test** again.
+1. Select a different model and Select **Test** again.
 
 1. Notice how the response style changes depending on the model selected.
 
@@ -804,7 +626,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. In the **Inputs** section, change the **Query** input's **Fill Using** setting to **Custom value**.
 
-1. In the **Value** field, Select the **...** button, then select **System** and select **Activity.Text**.
+1. In the **Value** field, Select the **...** button, then Select **System** and select **Activity.Text**.
 
     > [!TIP]
     > System.Activity.Text stores the last thing the user said to the agent. This automatically passes the user's message into your custom prompt.
@@ -831,19 +653,6 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. Close the **Settings** menu using the **X** in the upper right corner.
 
-#### Turn Off the Default Greeting Topic
-
-1. Select the **Topics** tab in the top navigation.
-
-1. In the system topics list, select the **Greeting** topic.
-
-1. Select **More** in the top-right toolbar of the topic editor and turn off the topic (set the topic to **Off**).
-
-    > [!NOTE]
-    > The default **Greeting** topic fires on utterances classified as greetings ("Hello", "Hey", "Hi", etc.), and the orchestrator routes to it before it can route to a tool. Several of the test queries in the next step start with greeting-shaped phrases ("Hey do you like cats?"), so the Greeting topic would short-circuit the test if it remained enabled. Turning it off here lets the orchestrator route those queries through your Chit Chat Prompt tool.
-
-1. Confirm the banner reads "This topic has been turned off, and you won't be able to test it." then return to the **Overview** tab.
-
 #### Test Your Chit Chat Agent
 
 1. In the test pane, try the following chit chat queries:
@@ -864,19 +673,19 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 
 1. Now test that the agent stays within its defined boundaries by asking non-chit-chat questions:
 
-    ```
-    How tall is the Empire State Building?
-    ```
+  ```
+  How tall is the Empire State Building?
+  ```
 
-    ```
-    Who is the president of the United States?
-    ```
+  ```
+  Who is the president of the United States?
+  ```
 
 1. Verify that the agent does not answer these factual questions and instead keeps the conversation within chit chat boundaries.
 
 ---
 
-### Congratulations! You've completed Use Case #4!
+### Congratulations! You've completed the Custom Prompts Extra Credit section!
 
 ---
 
@@ -893,7 +702,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 * Use detailed prompt instructions to define both what the agent should and should not do
 * Test with boundary cases to make sure the agent stays within its defined scope
 * GPT-4.1 mini is typically the most cost-effective choice for simple conversational scenarios
-* Disabling **Allow ungrounded responses** helps validate that your prompt tool is handling responses correctly
+* Disabling general knowledge helps validate that your prompt tool is handling responses correctly
 
 ---
 
@@ -902,7 +711,7 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 ## Extra Credit: Automate Legacy Systems with Computer Using Agents (CUA)
 
 > [!NOTE]
-> **Optional - Extra Credit (~20 minutes):** This use case is optional and not included in the 60-minute lab time. Complete it if you have additional time or want to explore advanced autonomous agent capabilities.
+> **Optional - Extra Credit (~20 minutes):** This use case is optional and not included in the core lab time. Complete it if you have additional time or want to explore advanced autonomous agent capabilities.
 
 Build an autonomous agent that retrieves financial portfolio data from a legacy system without API connectivity using Computer Using Agents (CUA).
 
@@ -971,7 +780,7 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
     If no portfolio data is found, reply that you couldn't find a portfolio with the specified ID.
     ```
 
-1. Select **Add and configure**.
+1. Keep **Use hosted browser** enabled to create a connection to the hosted browser.
 
 1. Update the **Name** of the Computer use tool to `Look up portfolio data`.
 
@@ -990,7 +799,7 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 #### Test the Computer Use Tool
 
-1. In the **Instructions** section, select the **Test Directly** button on the right.
+1. In the **Instructions** section, select the **Test** button on the right.
 
 1. Add the sample value `44123BCD` and select **Test now**.
 
@@ -1047,7 +856,7 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 1. **Save** the instructions.
 
-1. Go to the agent's **Settings**, and in the Knowledge section **disable** the **Allow ungrounded responses** option to ground agent responses only to data retrieved from CUA.
+1. Go to the agent's **Settings**, and in the Knowledge section **disable** the **Use general knowledge** option to ground agent responses only to data retrieved from CUA.
 
 1. **Save** the settings.
 
@@ -1083,7 +892,7 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 ---
 
-### Congratulations! You've completed the Extra Credit section!
+### Congratulations! You've completed the CUA Extra Credit section!
 
 ---
 
@@ -1093,8 +902,7 @@ True learning comes from doing, questioning, and reflecting - so let's put your 
 
 To maximize the impact of tools in Copilot Studio:
 
-* **Choose the Right Tool Type** - Connectors for pre-built service integrations, agent flows for deterministic business logic, MCP servers for live data access, custom prompts for structured responses, and CUA for legacy system automation
-* **Use Agent Flows for Predictable Logic** - Financial calculations, compliance rules, and other business logic that must be auditable and consistent should use deterministic flows, not AI
+* **Choose the Right Tool Type** - Connectors for pre-built service integrations, MCP servers for live data access, custom prompts for structured responses, and CUA for legacy system automation
 * **Leverage MCP for Real-Time Data** - The Dataverse MCP Server provides natural language access to live business data without building custom APIs or connectors
 * **Standardize with Custom Prompts** - Use structured prompts to make sure all users get consistent, relevant responses with the specific data fields they need
 * **Test Thoroughly** - Use the Activity Map to understand tool execution flow, validate calculations with edge cases, and verify end-to-end workflows
@@ -1106,12 +914,11 @@ To maximize the impact of tools in Copilot Studio:
 **Copilot Studio tools golden rules:**
 
 * Match the tool type to the integration need - don't force one approach for all scenarios
-* Use agent flows for any business logic that must produce the same result every time
 * Always configure proper agent instructions that specify which tools to use and when
 * Use Activity Map to debug and optimize tool execution
 * Test with realistic data and edge cases before deploying
 * Structure agent responses with custom prompts when consistency matters for business decisions
 
-By following these principles, you'll build agents that go beyond conversation and take action, access live data, execute business logic, and integrate with the systems your organization relies on.
+By following these principles, you'll build agents that go beyond conversation - they take action, access live data, execute business logic, and integrate with the systems your organization relies on.
 
 ---

@@ -143,6 +143,20 @@
   }
   if (currentIdx === -1) return; // Defensive; eventContainsItem already checked.
 
+  // --- Event-specific deck override -------------------------------------
+  // Module pages render their download from page.slides, which is the
+  // module's own deck. An event agenda may override it (V3 reuses the
+  // Workflows and Multi-Agent modules but ships V3 decks). When an event
+  // context is active and its row overrides the deck, repoint the link so
+  // following a V3 agenda link never hands the reader a V2 deck.
+  if (currentType === 'module') {
+    var eventSlides = itemsInEvent[currentIdx] && itemsInEvent[currentIdx].slides;
+    if (eventSlides) {
+      var slidesLink = document.querySelector('a.mod-button[download]');
+      if (slidesLink) { slidesLink.href = eventSlides; }
+    }
+  }
+
   var prevItem = currentIdx > 0 ? itemsInEvent[currentIdx - 1] : null;
   var nextItem = currentIdx < itemsInEvent.length - 1 ? itemsInEvent[currentIdx + 1] : null;
 

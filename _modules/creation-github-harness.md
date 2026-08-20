@@ -1,0 +1,10 @@
+---
+layout: module
+title: "Creation — GitHub harness (from UX, from Chat)"
+order: 3070
+duration: 45
+difficulty: 200
+section: intermediate_modules
+description: "Creating agents in the GitHub Copilot harness two ways — from the authoring UX and from natural-language chat."
+slides: "/presentations/bootcamp-v3/M08.%20Creation%20GitHub%20Harness%20from%20UX%20and%20from%20Chat.pptx"
+---

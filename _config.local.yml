@@ -1,0 +1,8 @@
+# Local review overrides. Not used by CI or GitHub Pages.
+#
+#   bundle exec jekyll serve --config _config.yml,_config.local.yml
+#
+# Serves slide decks from the working tree instead of the GitHub raw URL, so
+# Slides buttons open the real files while reviewing a branch that has not been
+# pushed yet.
+slides_base_url: ""

@@ -57,6 +57,13 @@ footer:
       icon: "fab fa-fw fa-github"
       url: "https://github.com/microsoft/mcs-labs"
 
+# Slide decks under /presentations/ are tracked in Git LFS. GitHub Pages serves
+# the LFS pointer file rather than the deck, so in-repo slide paths are rewritten
+# to a base URL that resolves LFS correctly. Set this to "" (see _config.local.yml)
+# to link decks relative to the site instead — the working tree has the real
+# files, so local review can actually open them.
+slides_base_url: "https://github.com/microsoft/mcs-labs/raw/main/"
+
 # Collections
 collections:
   modules:

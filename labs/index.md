@@ -214,7 +214,12 @@ classes: wide
 }
 </style>
 
-{% assign all_labs = site.labs | sort: "order" %}
+{%- comment -%}
+  Labs superseded by newer content carry `deprecated: true` in front matter.
+  They keep their pages and stay reachable from their module, but drop off
+  this index -- and out of the counts below, which derive from the same list.
+{%- endcomment -%}
+{% assign all_labs = site.labs | where_exp: "lab", "lab.deprecated != true" | sort: "order" %}
 {% assign total_duration = 0 %}
 {% for lab in all_labs %}{% assign total_duration = total_duration | plus: lab.duration %}{% endfor %}
 {% assign total_hours = total_duration | divided_by: 60.0 | round: 1 %}

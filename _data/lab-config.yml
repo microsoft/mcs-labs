@@ -33,6 +33,34 @@ lab_metadata:
     module: agent-builder
     section: core
     title: Build Progressive AI Assistants with Agent Builder in Microsoft 365
+  105:
+    difficulty: Beginner
+    duration: 30
+    id: m365-copilot-frontier-agents
+    module: m365-copilot
+    section: core
+    title: M365 Copilot and Frontier Agents
+  115:
+    difficulty: Intermediate
+    duration: 45
+    id: cowork-hands-on
+    module: cowork
+    section: core
+    title: Cowork Hands-On
+  125:
+    difficulty: Intermediate
+    duration: 45
+    id: copilot-harness-agent-builder
+    module: copilot-harness
+    section: core
+    title: Copilot Harness - Agent Builder
+  135:
+    difficulty: Intermediate
+    duration: 45
+    id: standard-harness-component-model
+    module: standard-harness
+    section: core
+    title: Standard Harness - Component Model
   150:
     difficulty: Intermediate
     duration: 70
@@ -144,6 +172,20 @@ lab_metadata:
     module: orchestration
     section: intermediate
     title: Orchestration with Copilot Studio
+  293:
+    difficulty: Advanced
+    duration: 30
+    id: mcs-instructions
+    module: instructions-and-descriptions
+    section: intermediate
+    title: 'Deep Dive: Instructions & Descriptions'
+  295:
+    difficulty: Advanced
+    duration: 30
+    id: mcs-skills
+    module: agent-skills
+    section: intermediate
+    title: 'Deep Dive: Skills'
   300:
     difficulty: Advanced
     duration: 30
@@ -218,6 +260,10 @@ lab_metadata:
 lab_journeys:
   agent-academy-recruit: [quick-start, business-user]
   agent-builder-m365: [quick-start, business-user]
+  m365-copilot-frontier-agents: [quick-start, business-user]
+  cowork-hands-on: [quick-start, business-user]
+  copilot-harness-agent-builder: [quick-start, business-user]
+  standard-harness-component-model: [business-user, developer]
   agent-builder-sharepoint: [business-user, developer]
   agent-builder-web: [quick-start, business-user]
   ask-me-anything: [business-user, developer]
@@ -239,8 +285,10 @@ lab_journeys:
   mcs-alm: [business-user, developer]
   mcs-byom: [business-user]
   mcs-governance: [business-user, developer]
+  mcs-instructions: [developer]
   mcs-multi-agent: [business-user, developer]
   mcs-orchestration: [developer]
+  mcs-skills: [developer]
   mcs-tools: [business-user, developer]
   measure-success: [developer]
   pipelines-and-source-control: [developer]
@@ -250,6 +298,10 @@ lab_journeys:
 legacy_lab_orders:
   agent-academy-recruit: 160
   agent-builder-m365: 140
+  m365-copilot-frontier-agents: 105
+  cowork-hands-on: 115
+  copilot-harness-agent-builder: 125
+  standard-harness-component-model: 135
   agent-builder-sharepoint: 210
   agent-builder-web: 100
   ask-me-anything: 220
@@ -271,8 +323,10 @@ legacy_lab_orders:
   mcs-alm: 280
   mcs-byom: 230
   mcs-governance: 195
+  mcs-instructions: 293
   mcs-multi-agent: 250
   mcs-orchestration: 290
+  mcs-skills: 295
   mcs-tools: 270
   measure-success: 400
   pipelines-and-source-control: 410
@@ -802,3 +856,9 @@ module_sections:
     description: Development tools, analytics, and platform features
     icon: ⚡
 
+
+# Labs no longer referenced by any event or workshop.
+#   deprecated  — still current product, kept for reference and extra credit,
+#                 hidden from the main index
+#   superseded  — content now lives inside another lab; safe to delete once
+#                 maintainers agree
