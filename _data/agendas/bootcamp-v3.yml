@@ -23,6 +23,17 @@ event_id: bootcamp-v3
 #   * M10 (Consumption Management) closes Day 2 and is presentation-only. It was
 #     inserted after M9, so the former M10-M16 shifted up to M11-M17 — decks in
 #     `presentations/bootcamp-v3/` were renamed to match.
+#   * Day 3 lab timings were rebalanced (2026-08-20): Lab 7 dropped 60 -> 30 and
+#     Labs 8 and 9 rose 30 -> 45 each. The three changes cancel, so Day 3 still
+#     runs 480 minutes with 120 minutes hands-on and still ends at 17:00 — but
+#     everything between Lab 7 and Lab 9 moved earlier. Lunch was then moved back
+#     one slot to sit after Lab 8 rather than before it, so Day 3 lunch runs
+#     12:00-13:00 (was 11:45) and M12 now leads straight into its own Lab 8.
+#     Day 1 and Day 2 are untouched.
+#   * A lab row's `duration:` is the *slot*. Each lab's own front matter and its
+#     "Lab Details" table must agree with that slot, and the lab's core use cases
+#     (Extra Credit excluded) should sum to it. Labs 2, 3 and 6 do not currently
+#     satisfy this — see the Content Gap Analysis for the open timing items.
 
 schedule:
   # --- Day 1 — Framing, on-ramp & the Copilot harness ---------------------
@@ -30,7 +41,7 @@ schedule:
     title: "Day 1 — Framing, On-ramp & Copilot Harness"
 
   - type: break
-    title: "Welcome + Breakout"
+    title: "Welcome"
     time: "09:00"
     duration: 15
 
@@ -230,40 +241,40 @@ schedule:
     label: "Lab 7"
     title: "Deep Dive: Knowledge & Tools"
     time: "10:15"
-    duration: 60
+    duration: 30
 
   - type: module
     slug: instructions-and-descriptions
     label: "Module 12"
     title: "Deep Dive: Instructions & Descriptions"
-    time: "11:15"
+    time: "10:45"
     duration: 30
-
-  - type: break
-    title: "Lunch break"
-    time: "11:45"
-    duration: 60
 
   - type: lab
     slug: mcs-instructions
     label: "Lab 8"
     title: "Deep Dive: Instructions & Descriptions"
-    time: "12:45"
-    duration: 30
+    time: "11:15"
+    duration: 45
+
+  - type: break
+    title: "Lunch break"
+    time: "12:00"
+    duration: 60
 
   - type: module
     slug: agent-skills
     label: "Module 13"
     title: "Deep Dive: Skills"
-    time: "13:15"
+    time: "13:00"
     duration: 30
 
   - type: lab
     slug: mcs-skills
     label: "Lab 9"
     title: "Deep Dive: Skills"
-    time: "13:45"
-    duration: 30
+    time: "13:30"
+    duration: 45
 
   - type: module
     slug: multi-agent
