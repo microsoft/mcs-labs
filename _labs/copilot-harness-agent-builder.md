@@ -13,8 +13,6 @@ description: "Build declarative agents in the Copilot harness with Agent Builder
 
 ---
 
----
-
 # Copilot Harness — Agent Builder
 
 Build declarative agents in the Copilot harness with Agent Builder — grounding them in web content and in your own SharePoint, without leaving Microsoft 365.
@@ -224,7 +222,7 @@ What are new features in the Microsoft Copilot Studio roadmap?
 6. On the left side navigation pane, select **Agents** to open the **Agent Store**, then select **Create agent** (or the **New agent** card)
 
 
-7. Notice that you can explore existing available templates. But for this lab, you want to select the  **Describe** tab at the top of the form and paste the following into the input area for the intial agent prompt input area, and then select Send.
+7. Notice that you can explore existing available templates. But for this lab, paste the following prompt into the **Message Agent Builder** input area on the initial screen, and then select Send. (The **Describe**, **Configure**, and **Preview** tabs appear once the conversation begins.)
 
 ```
 I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Agent Builder in Microsoft 365. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
@@ -270,7 +268,7 @@ Use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.m
 
 15. You can use the generated link to share your agents with other users.
 
-16. Select **Go to agent**.
+16. Select **Start chat** to open and test your agent.
 
 17. Try your agent by selecting one of the prompts or by pasting the following prompt and selecting Send:
 
@@ -382,7 +380,7 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 6. On the left side pane, select **Agents** to open the **Agent Store**, then select **Create agent** (or the **New agent** card).
 
-7. Select the **Describe** tab at the top, and copy/paste the following prompt and select Send:
+7. Paste the following prompt into the **Message Agent Builder** input area and select Send (the **Describe** tab appears after your first message):
 
 ```
 You are a Sales Admin Assistant. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
@@ -404,7 +402,7 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
 
 #### Enable advanced capabilities
 
-11. Under **Capabilities**, enable:
+11. Under **Capabilities**, check that the following are enabled, and if not, turn them on with the toggle:
     - **Create documents, charts, and code** (for data analysis and chart generation)
     - **Create images** (for creating visual content)
 
@@ -434,7 +432,7 @@ You are a Sales Admin Assistant. Your job is to help sales managers track revenu
 
 #### Test policy knowledge
 
-14. Select **Go to agent** to start testing.
+14. Select **Start chat** to open the agent and start testing.
 
 15. First, test the agent's **knowledge** of your sales policy, copy/paste the following prompt in the Message Copilot area and select Send:
 

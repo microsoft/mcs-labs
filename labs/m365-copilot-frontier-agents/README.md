@@ -89,7 +89,7 @@ Understand what Microsoft 365 Copilot does on its own, grounded in public web co
 
 ![Work IQ turned off in Microsoft 365 Copilot](images/lab-m365copilot-workiq.png)
 
-#### 1.3 Ask a broad market question
+#### 1.2 Ask a broad market question
 
 Paste the following into the prompt box and hit **Send**:
 
@@ -104,7 +104,7 @@ It went and looked. You gave it no file, no site, no URL, just a generic industr
 
 References are critical, since an answer with no reference is an answer you can't verify.
 
-#### 1.4 Ask for deeper reasoning
+#### 1.3 Ask for deeper reasoning
 
 Look to the right of **Work IQ** for the **response mode selector**:
 
@@ -144,7 +144,7 @@ Flag anything you could not source. Do not present an estimate as a fact.
 
 This one will run a bit longer than the first.
 
-**Scroll up to see the responses from 1.3.** It was on **Auto**, and Auto decided the question deserved a **Quick response**. In 1.4, you selected **Think deeper** because this question has complexities that a quick answer cannot address.
+**Scroll up to see the responses from 1.2.** It was on **Auto**, and Auto decided the question deserved a **Quick response**. In 1.3, you selected **Think deeper** because this question has complexities that a quick answer cannot address.
 
 Compare the two responses:
 
@@ -160,11 +160,11 @@ A simple prompt gets a fast answer no matter what you select. A complex prompt t
 > [!TIP]
 > When in doubt, use Auto in Response mode.
 
-#### 1.5 Change the model
+#### 1.4 Change the model
 
-Click **Think deeper** and look at the AI models offered. Alongside the default GPT models, Claude is also available for most tenants (subject to what your admin has enabled).
+Open the same selector to the right of **Work IQ**. Below the response modes you'll see the available AI models — alongside **GPT**, **Claude** is available for most tenants (subject to what your admin has enabled).
 
-Select a Claude model.
+Select **Claude**, then choose a model (for example **Sonnet**).
 
 ![Claude model selected in Microsoft 365 Copilot](images/lab-m365copilot-claude-model.png)
 
@@ -201,7 +201,7 @@ Use Work IQ to ground Copilot in your organizational content and produce a cited
 > [!IMPORTANT]
 > If you are not attending the facilitated bootcamp, confirm that the Use Case #2 files listed in [Prerequisites](#prerequisites) are uploaded and available through Work IQ before continuing.
 
-#### 2.1 Reference a file with `/`
+#### 2.1 Start a grounded chat
 
 1. Click **New chat** at the top left to start a new conversation with Copilot.
 
@@ -209,24 +209,14 @@ Use Work IQ to ground Copilot in your organizational content and produce a cited
 
    ![New chat with Work IQ enabled in Microsoft 365 Copilot](images/lab-m365copilot-workiq-newchat.png)
 
-3. Type `/` in the prompt box. A picker appears so you can reference content directly inside a prompt.
-
-   ![Reference picker opened with a slash in Microsoft 365 Copilot](images/lab-m365copilot-slash.png)
-
-4. Start typing `Zava` and select **Zava_DIY_Markdown_and_Clearance_Policy.docx**.
-
-> [!TIP]
-> The same picker can also reference a Teams group conversation, a chat with a colleague, or a meeting transcript. This lab focuses on files because the training tenant has no mail or chat history.
-
-> **Troubleshooting:** If a file does not appear in the `/` picker, it may not be indexed yet. Paste the file's SharePoint link into the prompt instead, or download and attach it.
-
 #### 2.2 Summarize the policy
 
 Paste the following into the prompt box and hit **Send**:
 
 ```text
-Summarize the markdown clearance docx in five bullets for the Zava DIY
-leadership team, who have 60 seconds before the quarterly business review starts.
+Find the Zava DIY Markdown and Clearance Policy document, then summarize the
+markdown clearance policy in five bullets for the Zava DIY leadership team, who
+have 60 seconds before the quarterly business review starts.
 After each bullet, cite the section it came from.
 ```
 
@@ -277,7 +267,7 @@ Do not estimate, calculate, or infer anything.
 
 **Two things to call out once the M365 Copilot response lands:**
 
-1. **Nobody attached a file or supplied its location.** Copilot searched your organization's content, found the Q2 2026 report, and grounded on it. That's Work IQ doing the retrieval you would otherwise have done by hand. Use `/` when you know exactly what you want, and let search work when you know the information exists but are unsure where it lives. Check the citations to verify that the performance-report PDF actually answered.
+1. **Nobody attached a file or supplied its location.** Copilot searched your organization's content, found the Q2 2026 report, and grounded on it. That's Work IQ doing the retrieval you would otherwise have done by hand — you name what you need and let search locate it. Check the citations to verify that the performance-report PDF actually answered.
 2. **"Not stated" should fill the inventory column.** The report deliberately withholds store-level inventory, and its methodology appendix says so. Forbidding invention is how you get a grounded answer instead of a plausible one.
 
 Note also that Copilot respects permissions throughout. It sees only what the signed-in user could already open, so grounding never widens access.
@@ -306,7 +296,7 @@ You reached a review-ready quarterly briefing within minutes, with no configurat
 
 **Key takeaways:**
 
-- **`/` when you know, search when you don't.** Referencing a file, chat, or person is precision; letting Work IQ find the source is reach. Either way, check what it actually cited.
+- **Let Work IQ find the source.** You don't need to attach a file or paste a link — name what you need in the prompt and let search locate it. Either way, check what it actually cited.
 - **A summary is not an answer.** Applying a policy to a decision on the table is where the value is, and quoting the governing section is what makes it checkable.
 - **Work IQ respects existing permissions.** It gathers insights only from organizational content the signed-in user can already access, then brings relevant information together for the task.
 - **Copilot Pages turn conversations into shareable reports.** Continue editing the response and share the finished page with colleagues.
@@ -357,7 +347,7 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
 > [!TIP]
 > The Researcher agent is one of Microsoft's **frontier agents** — purpose-built AI agents that use advanced reasoning models. Researcher excels at deep document analysis, cross-referencing multiple sections, and synthesizing complex information. It's available to users with a Microsoft 365 Copilot license.
 
-4. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the attachment icon (paperclip) in the chat input area and choosing the file from your local machine.
+4. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting **Add and manage sources** (the **+** icon) in the chat input area, choosing **Upload images and files**, and selecting the file from your local machine.
 
 #### Prompt 1: Executive briefing with root-cause analysis
 
@@ -453,7 +443,7 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
 > [!TIP]
 > The Analyst agent is another **frontier agent** in Microsoft 365 Copilot. While Researcher excels at reasoning and synthesis, Analyst is purpose-built for **data-heavy work** — extracting tables from documents, performing calculations, building models, generating visualizations, and producing structured outputs like Excel files. Think of Researcher as your strategic advisor and Analyst as your financial modeler.
 
-3. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting the attachment icon and choosing the same file you downloaded earlier.
+3. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting **Add and manage sources** (the **+** icon), choosing **Upload images and files**, and selecting the same file you downloaded earlier.
 
 > [!NOTE]
 > You're using the same PDF from Use Case #3, but with a completely different agent. This demonstrates how different frontier agents can extract different types of value from the same source document.

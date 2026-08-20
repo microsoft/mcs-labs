@@ -13,8 +13,6 @@ description: "Assemble an agent in the Standard harness from its component parts
 
 ---
 
----
-
 # Standard Harness — Component Model
 
 Build an agent in the Standard harness from its component parts — topics, knowledge, tools and variables — and see how each piece changes what the agent can do.
@@ -158,10 +156,10 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 1. In the left navigation, select **Agents**.
 
-1. Select the **down-arrow (chevron)** next to the **New Agent** button, then choose **New classic agent**.
+1. Select the **More create options** chevron next to the **New agent** button, then choose **Agent (Standard)** — the rule-based conversational agent.
 
    > [!NOTE]
-   > Leave the **New experience** toggle **on** — **New classic agent** opens the classic authoring canvas in a new tab without switching experiences. On a first sign-in you may see a one-time **Welcome to Microsoft Copilot Studio** consent dialog; select **Get Started** to dismiss it.
+   > **Agent (Standard)** opens the classic authoring canvas in a new tab. On a first sign-in you may see a one-time **Welcome to Microsoft Copilot Studio** consent dialog; select **Get Started** to dismiss it. This consent dialog can appear **stacked behind** the **Name your agent** dialog — if you don't see it, move or dismiss the name dialog first so you can select **Get Started**.
 
 1. In the **Name your agent** dialog, enter the following name and select **Create**:
 
@@ -427,23 +425,12 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 1. Review the **Name** and **Description** fields. Update if needed to make the source easily identifiable.
 
-#### Check and disable Web Search
-The Use information from the web setting is available on the Generative AI settings page or the Web Search setting in the Knowledge section of the agent's Overview page. This setting lets your agent access broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. For our scenario, we want to keep the use of knowledge focused on our provided resources and not the broader web.
+#### Check and disable Web Search 
+The Use information from the web setting is available on the Generative AI settings page or the Web Search setting in the Knowledge section of the agent's Overview page. This setting lets your agent access broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. For our scenario, we want to keep the use of knowedge focused on our provided resources and not the broader web.
 
 1. Navigate to the Overview tab, scroll down to the Knowledge section
 
 1. Select Disabled on the Web Search option.
-
-#### Disable Ungrounded Responses
-
-1. Select the **Settings** tab at the top of the agent, then select the **Generative AI** menu.
-
-1. Turn off the **Allow Ungrounded responses** setting.
-
-1. Select **Save** to apply the change.
-
-   > [!NOTE]
-   > Disabling Web Search and Allow Ungrounded responses together ensures that your agent only uses the data you have explicitly provided to respond to users. This significantly reduces the chance of hallucinations — responses that sound plausible but aren't based on your actual knowledge sources.
 
 #### Set Knowledge Source as Official
 
@@ -647,7 +634,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. In the Instructions pane, select **Edit**
 
-1. Copy and paste the following after **General Guidelines** and before **Skills**.
+1. Copy and paste the following at the end of the Instructions, after the existing Guidelines list.
 
    ```
    # Prompt Analysis
@@ -722,7 +709,7 @@ Explore the variables interface in Copilot Studio to understand how conversation
 
 In this section, you'll explore existing variables in your mailing list topic, understand variable properties and scope, review how variables are referenced in messages and formulas, and observe variable values during a test conversation.
 
-**Scenario:** Your mailing list topic from Use Case #2 already collects user information and stores it in variables. You'll explore how Copilot Studio automatically creates variables, understand the difference between topic-level and global scope, and observe how variables work during a live test conversation.
+**Scenario:** Your mailing list topic (from Use Case #2 earlier in this lab) already collects user information and stores it in variables. You'll explore how Copilot Studio automatically creates variables, understand the difference between topic-level and global scope, and observe how variables work during a live test conversation.
 
 > [!WARNING]
 > This use case is exploration only. Do NOT create, modify, or delete any variables or nodes - doing so could break your existing topic. You are here to navigate the interface and understand how variables work.
@@ -739,11 +726,11 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 1. Navigate to [Copilot Studio](https://copilotstudio.microsoft.com).
 
-1. Select **Agents** in your left side navigation bar, and select your **Copilot Studio Assistant** agent created in Use Case #1.
+1. Select **Agents** in your left side navigation bar, and select your **Copilot Studio Assistant** agent you created in Use Case #1 earlier in this lab.
 
 1. Select **Topics** in the agent's top navigation bar.
 
-1. Select the **Join Copilot Studio Mailing List** topic created in Use Case #2.
+1. Select the **Join Copilot Studio Mailing List** topic that you created in Use Case #2 earlier in this lab.
 
     > [!NOTE]
     > If you don't have this topic, you can explore variables in any existing topic that has question nodes.
