@@ -862,15 +862,3 @@ module_sections:
 #                 hidden from the main index
 #   superseded  — content now lives inside another lab; safe to delete once
 #                 maintainers agree
-deprecated_labs:
-  - standard-orchestrator
-  - copilot-studio-kit
-  - human-in-the-loop
-  - mcp-qualify-lead
-  - measure-success
-  - pipelines-and-source-control
-
-superseded_labs:
-  agent-builder-web: agent-builder-m365
-  agent-builder-sharepoint: agent-builder-m365
-  copilot-studio-lite: agent-builder-m365
