@@ -79,7 +79,7 @@ In this lab you hand Cowork the same annual hotel performance report used elsewh
 ## Documentation and Additional Training Links
 
 * [Microsoft 365 Copilot documentation](https://learn.microsoft.com/microsoft-365-copilot/)
-* [Microsoft 365 Copilot Chat](https://learn.microsoft.com/microsoft-365-copilot/microsoft-365-copilot-chat)
+* [Microsoft 365 Copilot overview](https://learn.microsoft.com/copilot/overview)
 
 ---
 
