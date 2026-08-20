@@ -98,9 +98,9 @@ In this lab you'll delegate a real task to Cowork rather than chatting with it. 
 
 | Step | Use Case | Value added | Effort |
 | ---- | -------- | ----------- | ------ |
-| 1 | [Draft an executive email with the Cowork agent from a PDF report](#-use-case-1-draft-an-executive-email-with-the-cowork-agent-from-a-pdf-report) | Cowork takes agentic action: reads the PDF, resolves the recipient, and drafts a real Outlook email on your behalf | 5 min |
-| 2 | [Build an interactive sales dashboard from SharePoint and draft the summary email](#-use-case-2-build-an-interactive-sales-dashboard-from-sharepoint-and-draft-the-summary-email) | Cowork locates the workbook through Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an email with a graphic attached | 10 min |
-| 3 | [Build a sales campaign in Planner and identify immediate actions](#-use-case-3-build-a-sales-campaign-in-planner-and-identify-immediate-actions) | Cowork writes real tasks into Planner with no draft stage, then uses the plan's context to prioritize the nearest actions and explain their dependencies | 10 min |
+| 1 | [Draft an executive email with the Cowork agent from a PDF report](#-use-case-1-draft-an-executive-email-with-the-cowork-agent-from-a-pdf-report) | Cowork takes agentic action: reads the PDF, resolves the recipient, and drafts a real Outlook email on your behalf | 10 min |
+| 2 | [Build an interactive sales dashboard from SharePoint and draft the summary email](#-use-case-2-build-an-interactive-sales-dashboard-from-sharepoint-and-draft-the-summary-email) | Cowork locates the workbook through Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an email with a graphic attached | 20 min |
+| 3 | [Build a sales campaign in Planner and identify immediate actions](#-use-case-3-build-a-sales-campaign-in-planner-and-identify-immediate-actions) | Cowork writes real tasks into Planner with no draft stage, then uses the plan's context to prioritize the nearest actions and explain their dependencies | 15 min |
 
 ---
 
