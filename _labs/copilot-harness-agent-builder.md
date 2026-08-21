@@ -187,10 +187,10 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
 2. Select **New chat** in the left navigation pane if not already selected.
 
-> [!IMPORTANT]
-> **Optional:** If you have an account in the CopilotStudioTraining tenant with a Microsoft 365 Copilot license, try the following steps to experience the Work tab firsthand.
+> [!NOTE]
+> If you see **Work** and **Web** tabs at the top of the chat, use the **Work** tab for this step. These tabs appear only if you have a Microsoft 365 Copilot license in the CopilotStudioTraining tenant. If you don't see any Work/Web tabs, you only have access to Copilot Chat — you can still run the prompt below, then continue.
 
-   - 2a. Make sure you are on the **Work** tab.
+   - 2a. If the tabs are shown, make sure you are on the **Work** tab.
 
    - 2b. Type the following prompt and select **Send**:
    
@@ -205,7 +205,7 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
 #### Test the Copilot Chat experience
 
-3. If you have Microsoft 365 Copilot license, make sure you are in the **Web** tab (if you don't see any tab for Work/Web, this means you only have access to Copilot Chat).
+3. If you see **Work** and **Web** tabs, make sure you are on the **Web** tab for this step. If you don't see any Work/Web tabs, you only have access to Copilot Chat — continue with the step below.
 
 4. Test the basic experience by typing the following into the Message Copilot input area and then selecting send:
 
@@ -219,7 +219,7 @@ What are new features in the Microsoft Copilot Studio roadmap?
 
 #### Create your learning assistant agent
 
-6. On the left side navigation pane, select **Agents** to open the **Agent Store**, then select **Create agent** (or the **New agent** card)
+6. On the left side navigation pane, select **More Agents**, then select **Create agent** (or the **New agent** card)
 
 
 7. Notice that you can explore existing available templates. But for this lab, paste the following prompt into the **Message Agent Builder** input area on the initial screen, and then select Send. (The **Describe**, **Configure**, and **Preview** tabs appear once the conversation begins.)
@@ -256,7 +256,7 @@ Use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.m
 
 11. Now let's head over to the **Configure** tab. Notice how all of your previous interactions have built the configuration of your agent, its name, description, instructions, knowledge sources and starter prompts. Feel free to tweak them!
 
-12. In the **Knowledge** section, after adding knowledge sources, turn **Only use specified sources** **on** (it is not enabled automatically) so that the agent uses the configured websites when providing answers, and not its own large language model knowledge.
+12. In the **Knowledge** section, after adding knowledge sources, turn on **Discourage model knowledge** (it is not enabled automatically) so that the agent uses the configured websites when providing answers, and not its own large language model knowledge.
 
 13. Fix any issue like max character limit for starter prompt titles.
 
@@ -378,7 +378,7 @@ Build a sophisticated Sales Admin Assistant that integrates organizational data 
 
 5. Return to [Microsoft 365 Copilot Chat](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
-6. On the left side pane, select **Agents** to open the **Agent Store**, then select **Create agent** (or the **New agent** card).
+6. On the left side pane, select **More Agents**, then select **Create agent** (or the **New agent** card).
 
 7. Paste the following prompt into the **Message Agent Builder** input area and select Send (the **Describe** tab appears after your first message):
 
