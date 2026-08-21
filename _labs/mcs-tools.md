@@ -443,8 +443,6 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 1. Select the **Model Context Protocol (MCP)** tab, search for **Dataverse**, and select **Microsoft Dataverse MCP Server** from the results. If there are multiple, do not select the deprecated ones and do not select the one that has **(Preview)** in its name.
 
-   ![Select MCP Dataverse](images/step7-mcp-dataverse.png)
-
 1. On the **Select a connection** step, the **Connection** is usually populated automatically with your signed-in student account. If it shows **Not connected**, select the field, create a connection, and confirm your student credentials if prompted.
 
     > [!IMPORTANT]
