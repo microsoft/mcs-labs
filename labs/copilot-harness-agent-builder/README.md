@@ -151,7 +151,7 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
  -->
 
-> [!TIP]  
+> [!TIP]
 > Both Microsoft 365 Copilot and Copilot Chat are designed for internal, employee-facing (B2E) experiences.
 >
 > - Users who have **only Copilot Chat** will **not see any toggle** in the interface – this is expected.
@@ -197,49 +197,49 @@ Create, configure, and test a web-based Copilot agent that serves as a knowledge
 
 1. If you have Microsoft 365 Copilot license, make sure you are in the **Web** tab (if you don't see any tab for Work/Web, this means you only have access to Copilot Chat).
 
-2. Test the basic experience by typing the following into the Message Copilot input area and then selecting send:
+2. Test the basic experience by typing the following into the Message Copilot input area and then selecting **Send**:
 
-```
-What are new features in the Microsoft Copilot Studio roadmap?
-```
+   ```
+   What are new features in the Microsoft Copilot Studio roadmap?
+   ```
 
-![Response from Copilot showing the roadmap](images/simple-copilot-search.png)
+   ![Response from Copilot showing the roadmap](images/simple-copilot-search.png)
 
-3. Select **Start a new chat** (top right icon) to reset. Notice how your history of converations is saved on the left side navigation pane.
+3. Select **Start a new chat** (top right icon) to reset. Notice how your history of conversations is saved on the left side navigation pane.
 
 #### Create your learning assistant agent
 
 1. On the left side navigation pane, select **Agents** to open the **Agent Store**, then select **Create agent** (or the **New agent** card)
 
-2. Notice that you can explore existing available templates. But for this lab, paste the following prompt into the **Message Agent Builder** input area on the initial screen, and then select Send. (The **Describe**, **Configure**, and **Preview** tabs appear once the conversation begins.)
+2. Notice that you can explore existing available templates. But for this lab, paste the following prompt into the **Message Agent Builder** input area on the initial screen, and then select **Send**. (The **Describe**, **Configure**, and **Preview** tabs appear once the conversation begins.)
 
-```
-I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Agent Builder in Microsoft 365. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
-```
+   ```
+   I want to build a teacher-style agent that helps users learn about Copilot, including the differences between Microsoft 365 Copilot and Copilot Chat, Declarative Agents vs. Custom Engine Agents, and how to use Agent Builder in Microsoft 365. The agent should ask questions to validate and reinforce user understanding, encourage exploration, and act as a knowledgeable guide grounded in Microsoft documentation.
+   ```
 
-> [!TIP]  
-> From here, you will find that the conversational creation experience might differ from the below step-by-step instructions, as it's using generative AI and it is by nature non-deterministic. The core concepts remain the same, but the UI may change slightly. Just adjust to the questions and options presented to you.
+   > [!TIP]
+   > From here, you will find that the conversational creation experience might differ from the below step-by-step instructions, as it's using generative AI and it is by nature non-deterministic. The core concepts remain the same, but the UI may change slightly. Just adjust to the questions and options presented to you.
 
-3. _If_ the proposed agent has a name other than Copilot Teacher input the following prompt to adjust the name and other details and press send:
+3. _If_ the proposed agent has a name other than Copilot Teacher input the following prompt to adjust the name and other details and select **Send**:
 
-```
-The name of the agent should be Copilot Teacher. Your tone should be friendly, personal, and emphatic. You can make jokes, use subtle irony and emojis when appropriate.
-```
+   ```
+   The name of the agent should be Copilot Teacher. Your tone should be friendly, personal, and emphatic. You can make jokes, use subtle irony and emojis when appropriate.
+   ```
 
 4. _If_ asked about how the agent should handle **questions that are directly related to Copilot**, or how the agent should handle **situations where the user provides incorrect information or demonstrates a misunderstanding**, reply with:
 
-```
-It shouldn't answer questions that are not related to Microsoft 365 Copilot, Copilot Chat, or Copilot Studio. Always guide users towards the correct solution based on your knowledge.
-```
+   ```
+   It shouldn't answer questions that are not related to Microsoft 365 Copilot, Copilot Chat, or Copilot Studio. Always guide users towards the correct solution based on your knowledge.
+   ```
 
 5. Agent Builder will attempt to identify knowledge sources but may attempt to use too specific of a URL for Learn. Input the following prompt to provide specific URLs:
 
-```
-Use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.microsoft.com/en-us/microsoft-copilot-studio/ as knowledge sources
-```
+   ```
+   Use https://learn.microsoft.com/en-us/microsoft-365-copilot/ and https://learn.microsoft.com/en-us/microsoft-copilot-studio/ as knowledge sources
+   ```
 
-> [!TIP]  
-> You can set URLs with up to 2 levels of depth for grounding. E.g., https://www.domain.com/level1/level2. Just like folders in a file system. That way, all pages under that URL will be used as grounding sources. E.g., https://www.domain.com/level1/level2/page1.html, https://www.domain.com/level1/level2/page2.html, etc.
+   > [!TIP]
+   > You can set URLs with up to 2 levels of depth for grounding. E.g., https://www.domain.com/level1/level2. Just like folders in a file system. That way, all pages under that URL will be used as grounding sources. E.g., https://www.domain.com/level1/level2/page1.html, https://www.domain.com/level1/level2/page2.html, etc.
 
 #### Finalize configuration
 
@@ -312,8 +312,6 @@ What are the differences between Microsoft 365 Copilot and Copilot Chat?
 
 ---
 
----
-
 
 ## 📊 Use Case #2: Build an advanced SharePoint-integrated sales assistant
 
@@ -343,16 +341,16 @@ Build a sophisticated Sales Revenue Analyst that integrates organizational data 
    - Go to the **Documents** tab
    - Open the **Sales** folder
 
-**SharePoint Sales folder:**
+   **SharePoint Sales folder:**
 
-```
-https://copilotstudiotraining.sharepoint.com/Shared%20Documents/Forms/AllItems.aspx?id=%2FShared%20Documents%2FSales&viewid=80e5d223%2Dbb2c%2D4c6a%2D8f86%2D6854957a257d
-```
+   ```
+   https://copilotstudiotraining.sharepoint.com/Shared%20Documents/Forms/AllItems.aspx?id=%2FShared%20Documents%2FSales&viewid=80e5d223%2Dbb2c%2D4c6a%2D8f86%2D6854957a257d
+   ```
 
-> [!NOTE]
-> If your training uses a different tenant, use the Sales folder URL provided in [Lab Resources](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx).
+   > [!NOTE]
+   > The Sales folder lives in the tenant-root site's Shared Documents, not under the `/sites/Workshop` site. If your training uses a different tenant, use the Sales folder URL provided in [Lab Resources](https://copilotstudiotraining.sharepoint.com/sites/Workshop/SitePages/Lab-Assets.aspx).
 
-![SharePoint documents](images/sales-docs.png)
+   ![SharePoint documents](images/sales-docs.png)
 
 2. Locate the following sample files:
 
@@ -378,11 +376,11 @@ https://copilotstudiotraining.sharepoint.com/Shared%20Documents/Forms/AllItems.a
 
 2. On the left side pane, select **Agents** to open the **Agent Store**, then select **Create agent** (or the **New agent** card).
 
-3. Paste the following prompt into the **Message Agent Builder** input area and select Send (the **Describe** tab appears after your first message):
+3. Paste the following prompt into the **Message Agent Builder** input area and select **Send** (the **Describe** tab appears after your first message):
 
-```
-You are a Sales Revenue Analyst. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
-```
+   ```
+   You are a Sales Revenue Analyst. Your job is to help sales managers track revenue and identify trends across product lines. You understand product hierarchies, time periods (e.g. quarters, fiscal years), and sales metrics. Users can ask questions like 'Graph the sales for the last 2 years with a breakdown per product line and quarter'. You always respond in a friendly and professional tone, aiming to be helpful and insightful.
+   ```
 
 4. **Confirm** the suggested agent name if prompted.
 
@@ -395,36 +393,36 @@ You are a Sales Revenue Analyst. Your job is to help sales managers track revenu
     - Repeat that for the Sales Policy Document.docx
     - You will see them being added as SharePoint documents in the knowledge section of the agent
 
-![Files added to agent knowledge](images/add-files.png)
+   ![Files added to agent knowledge](images/add-files.png)
 
 
 #### Configure advanced knowledge settings
 
 1. In the upper-right corner of the **Knowledge** section, select the **Settings** (gear) icon.
 
-![Knowledge section with the Settings icon highlighted](images/knowledge-settings-button.png)
+   ![Knowledge section with the Settings icon highlighted](images/knowledge-settings-button.png)
 
-> [!IMPORTANT]
-> In the current Agent Builder experience, most advanced capabilities are configured from this **Knowledge settings** panel. If your tenant still shows a separate **Capabilities** section, enable the same options there.
+   > [!IMPORTANT]
+   > In the current Agent Builder experience, most advanced capabilities are configured from this **Knowledge settings** panel. If your tenant still shows a separate **Capabilities** section, enable the same options there.
 
 2. In **Knowledge settings**, review and configure the capabilities for your agent:
     - Turn on **Create documents, charts and code** so the agent can analyze data, create charts, perform calculations, generate code snippets, and create Word, Excel, or PowerPoint files.
     - Turn on **Create images** so the agent can generate visual content from user prompts.
     - Optionally, turn on **Discourage model knowledge** when you want the agent to prioritize its configured knowledge sources instead of relying on general model knowledge. This can help keep responses grounded in the sources available to the agent.
 
-![Knowledge settings with advanced capabilities enabled](images/knowledge-settings.png)
+   ![Knowledge settings with advanced capabilities enabled](images/knowledge-settings.png)
 
-> [!TIP]  
-> You can explore additional **knowledge** capabilities:
->
-> - All **websites** (or specific ones)
-> - All **SharePoint** data (or specific files or sites)
-> - Organization-wide knowledge sources enabled through **Copilot Connectors** (e.g., ServiceNow)
->
-> If your account has a **Microsoft 365 Copilot** license, you can also access:
->
-> - **My Teams chats and meetings**
-> - **My emails**
+   > [!TIP]
+   > You can explore additional **knowledge** capabilities:
+   >
+   > - All **websites** (or specific ones)
+   > - All **SharePoint** data (or specific files or sites)
+   > - Organization-wide knowledge sources enabled through **Copilot Connectors** (e.g., ServiceNow)
+   >
+   > If your account has a **Microsoft 365 Copilot** license, you can also access:
+   >
+   > - **My Teams chats and meetings**
+   > - **My emails**
 
 #### Finalize and create
 
@@ -440,15 +438,15 @@ You are a Sales Revenue Analyst. Your job is to help sales managers track revenu
 
 1. Select **Start chat** to open the agent and start testing.
 
-2. First, test the agent's **knowledge** of your sales policy, copy/paste the following prompt in the Message Copilot area and select Send:
+2. First, test the agent's **knowledge** of your sales policy, copy/paste the following prompt in the Message Copilot area and select **Send**:
 
-```
-What are the key guidelines in our sales policy regarding customer discounts?
-```
+   ```
+   What are the key guidelines in our sales policy regarding customer discounts?
+   ```
 
 3. Verify the agent references your SharePoint policy document and provides accurate information.
 
-![Results of your test prompt](images/sales-policy-question.png)
+   ![Results of your test prompt](images/sales-policy-question.png)
 
 #### Test image generation
 
@@ -555,8 +553,6 @@ What are the key guidelines in our sales policy regarding customer discounts?
 - Define the evidence and citations required to trust the response.
 - Decide whether the desired outcome is an answer, chart, workbook, image, or a combination of artifacts.
 - Determine whether the scenario remains a good fit for a declarative agent or requires deterministic workflow, state, or system actions from another harness.
-
----
 
 ---
 
