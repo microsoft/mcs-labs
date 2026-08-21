@@ -268,6 +268,8 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 
 1. From the Microsoft 365 Copilot page, select **Cowork** on the **Chat / Cowork** toggle at the top of the Copilot panel.
 
+1. Select **New Task** to start a fresh Cowork session, so this use case doesn't continue the conversation from Use Case #1.
+
 1. Open the model picker at the top of the panel (it reads **Auto** by default), choose **Claude**, then **Opus 5**.
 
    > [!IMPORTANT]
