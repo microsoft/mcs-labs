@@ -171,13 +171,9 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 #### Create the Custom Connector
 
-1. Select **Tools** in the top navigation.
+1. Navigate to [Power Apps](https://make.powerapps.com/) and confirm you are in the correct environment (check the environment selector in the top-right).
 
-1. Select **Add Tool**.
-
-1. Under **Create new**, Select **See all**.
-
-1. Select **Custom connector**.
+1. In the left navigation menu, select **... More** and choose **Custom connectors**. If **Custom connectors** isn't listed, select **Discover all**, then select **Custom connectors** (you can pin it for quicker access next time).
 
 1. In the top navigation, Select **New custom connector**.
 
@@ -467,10 +463,6 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
 1. Select the **Preview** tab at the top of the agent designer. In the chat pane, ask the following question: **List the accounts in the state of WA**.
 
-1. The first time the tool runs against a new connection you may get a consent dialog, as by default the tool is configured to use "End user credentials". If it appears, select **Allow** to continue.
-
-      ![Allow MCP access](images/step11a-allow-mcp.png)
-
     > [!NOTE]
     > If you are using Service Principals or Client Certification Auth to connect to Dataverse, you may need to use **Maker-provided credentials**. To change this, select the **Microsoft Dataverse MCP Server** in the agent designer's **Tools** section, then under **Additional details** set **Credentials to use** to **Maker-provided credentials**.
 
@@ -481,7 +473,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 
       ![Activity map tracking](images/step11c-activity-map.png)
 
-1. If you select the tool that was used, you will see the **Inputs** and **Outputs** of the tool.
+1. If you expand the tool that was used, you will see the **Inputs** and **Outputs** of the tool.
 
     ![Tool inputs and outputs](images/step11d-inputs-outputs.png)
 
@@ -497,7 +489,7 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
     for each account create a test contact associated with the account
     ```
 
-1. Continue testing by asking: **Who are the contacts for each account**
+    Observe the contacts created. If they are not shown in the chat pane, ask: **Who are the contacts for each account**.
 
     ![Test contacts query](images/step12-test-contacts.png)
 
@@ -799,7 +791,7 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
 #### Test the Computer Use Tool
 
-1. In the **Instructions** section, select the **Test** button on the right.
+1. In the **Instructions** section, select the **Test now** button on the right.
 
 1. Add the sample value `44123BCD` and select **Test now**.
 
@@ -809,7 +801,7 @@ Create an autonomous agent that uses the Computer use tool to retrieve portfolio
 
     ![Testing interface for portfolio lookup with Financial Portfolio Dashboard showing search results for portfolio Test](images/test_CUA.jpg)
 
-1. Select **Finish testing**.
+1. Close the test window.
 
     > [!TIP]
     > If the result isn't what you expect, refine your instructions with more details and test again. Allow sufficient time between tests to make sure the previous Computer use task has been fully completed before starting a new one.
