@@ -363,6 +363,9 @@ Create an executive briefing for the GM that summarizes:
 Source every finding from this report.
 ```
 
+> [!NOTE]
+> The Researcher agent may pause to ask a clarifying question before it starts — for example, how long the artifact should be, or whether it should use its best judgement. Reply with `go ahead` and let it proceed.
+
 6. **Observe** how the Researcher agent:
    - Identifies issues across multiple sections (housekeeping, WiFi, HVAC, F&B margins, elevator maintenance)
    - Traces each issue back to its root cause using data from different parts of the report
