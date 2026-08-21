@@ -721,6 +721,8 @@ Add the workshop's sample policy document so the agent has a body of knowledge t
 
     ![Build tab with knowledge file and tools attached](images/uc3-build-tab-complete.png)
 
+1. Select **Save** in the command bar to save the agent with its new knowledge source.
+
 #### Test the Agentic Reasoning Loop
 
 Open the **Preview** tab. The New Orchestrator surfaces its work **inline in the Preview pane** — you'll see a **"Thought for N seconds"** line you can expand, a sentence of reasoning, and the name of each tool it calls before the final answer.
