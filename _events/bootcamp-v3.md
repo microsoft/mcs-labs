@@ -12,6 +12,8 @@ labs:
     label: "Lab 3"
   - slug: standard-harness-component-model
     label: "Lab 4"
+  - slug: mcs-github-harness
+    label: "Lab 5"
   - slug: mcs-workflows
     label: "Lab 6"
   - slug: mcs-tools
