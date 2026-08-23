@@ -98,7 +98,21 @@ In the final use case you build a second agent in a completely different industr
 - Access to Microsoft Copilot Studio with the **New experience** enabled
 - A Power Platform environment where you can create agents and add tools
 - The four lab MCP servers imported into your environment: **Asset Telemetry MCP**, **Work Orders MCP**, **Policy Lookup MCP**, **Claims History MCP**
-- Four knowledge documents in SharePoint under **OnePlace → Documents**, in folders named **Energy Ops** and **Claims Ops**
+- Four knowledge documents uploaded to SharePoint under **OnePlace → Documents**, in folders named **Energy Ops** and **Claims Ops**
+
+#### Knowledge documents
+
+The four PDFs ship with this lab under [`assets/knowledge-documents`](assets/knowledge-documents). Upload them into two SharePoint folders named exactly as below — the instructions reference those folder names, and Use Case #2 walks you to them.
+
+| Document | SharePoint folder | What the agent uses it for |
+|----------|-------------------|-----------------------------|
+| [Aeris 3.2 MW Turbine — Maintenance Manual (Excerpt)](assets/knowledge-documents/Aeris-3.2MW-Turbine-Maintenance-Manual-Excerpt.pdf) | **Energy Ops** | Manufacturer limits — alarm codes, vibration and temperature thresholds |
+| [Northgate Asset Performance & Dispatch Standards](assets/knowledge-documents/Northgate-Asset-Performance-and-Dispatch-Standards.pdf) | **Energy Ops** | Operator response — severity tiers, dispatch windows, escalation |
+| [Meridian Personal Property Coverage Handbook (Excerpt)](assets/knowledge-documents/Meridian-Personal-Property-Coverage-Handbook-Excerpt.pdf) | **Claims Ops** | Perils, deductibles and sublimits |
+| [Meridian FNOL Handling Standards](assets/knowledge-documents/Meridian-FNOL-Handling-Standards.pdf) | **Claims Ops** | Intake requirements, severity tiers, fraud indicators |
+
+> [!IMPORTANT]
+> Use the copies in this repository rather than any earlier version you may have. The turbine manual is **Revision G** — its measurement-validity floor is **30% of rated output**, and the standards document's trend trigger is **0.75 mm/s across a 60-day window**. Both figures are calibrated against the sample telemetry: with the earlier values, the reading at the centre of Use Case #2 falls outside the manual's own validity band and the agent will correctly refuse to treat it as actionable, which breaks the use case.
 
 > [!NOTE]
 > **First time in Copilot Studio?** A **Welcome to Microsoft Copilot Studio** dialog appears on first sign-in, followed by a short product tour. The dialog blocks the page behind it until you select **Get Started**; the tour can be dismissed with **Skip**. Clear both before starting.
