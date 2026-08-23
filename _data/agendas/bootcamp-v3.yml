@@ -10,10 +10,7 @@ event_id: bootcamp-v3
 #   * "module" rows reference first-class entities in the _modules collection.
 #     `title:` and `duration:` on the row override the module's own values.
 #   * "lab" rows reference _labs/<slug>.md. `duration:` overrides the lab's own.
-#   * Lab 5 does not exist yet. It is carried as a "session" row so
-#     the timeline stays complete and correctly timed; each names the seed
-#     material it will be authored from. Convert each to a `type: lab` row as
-#     the lab lands.
+#   * Labs 1-9 are all authored and carried as `type: lab` rows.
 #   * Labs run 1-9 with no gaps, in chronological order. M8 (Creation — GitHub
 #     harness) is presentation-only: its 30-minute placeholder lab was dropped
 #     and 15 of those minutes went to the module, which now runs 45. The labs
@@ -169,10 +166,10 @@ schedule:
     time: "11:45"
     duration: 60
 
-  - type: session
-    title: "Lab 5: GitHub Copilot harness — Component Model"
-    description: "Placeholder — lab to be authored. Seeded by mcs-orchestration UC3 (Agentic Reasoning Loop), roughly half the runtime."
+  - type: lab
+    slug: mcs-github-harness
     label: "Lab 5"
+    title: "GitHub Copilot harness — Component Model"
     time: "12:45"
     duration: 60
 

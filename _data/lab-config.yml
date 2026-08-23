@@ -61,6 +61,13 @@ lab_metadata:
     module: standard-harness
     section: core
     title: Standard Harness - Component Model
+  140:
+    difficulty: Advanced
+    duration: 60
+    id: mcs-github-harness
+    module: github-copilot-harness
+    section: core
+    title: GitHub Copilot Harness - Component Model
   150:
     difficulty: Intermediate
     duration: 70
@@ -284,6 +291,7 @@ lab_journeys:
   mcp-qualify-lead: [developer]
   mcs-alm: [business-user, developer]
   mcs-byom: [business-user]
+  mcs-github-harness: [developer]
   mcs-governance: [business-user, developer]
   mcs-instructions: [developer]
   mcs-multi-agent: [business-user, developer]
@@ -322,6 +330,7 @@ legacy_lab_orders:
   mcp-qualify-lead: 430
   mcs-alm: 280
   mcs-byom: 230
+  mcs-github-harness: 140
   mcs-governance: 195
   mcs-instructions: 293
   mcs-multi-agent: 250
