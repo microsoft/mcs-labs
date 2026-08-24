@@ -226,6 +226,14 @@ In this lab you'll build two agents on the GitHub Copilot harness and learn to r
 
 ## 🧱 Use Case #1: Build an agent on the GitHub Copilot harness
 
+> [!IMPORTANT]
+> **Work the [Prerequisites](#-prerequisites) before you start.** This lab depends on four MCP servers and four SharePoint knowledge documents being in place, and none of it is set up from inside the lab. If they are missing you will not find out here — you will find out in Use Case #2, when the tool you are told to add is not in the list, and again in Use Case #4 when the second agent has nothing to ground against.
+>
+> Two checks, a couple of minutes:
+>
+> - [Are the four MCP servers loaded?](#check-whether-they-are-already-loaded) — in most delivery tenants they ship with the environment and there is nothing to do. If any are missing, [import them](#how-to-import-a-solution); the packages are in this repo.
+> - [Are the four knowledge documents in SharePoint?](#knowledge-documents) — in folders named exactly **Energy Ops** and **Claims Ops**. The PDFs are in this repo too.
+
 You are an operations analyst at **Northgate Energy**. Turbines at the Cascade Ridge wind farm report telemetry continuously, the manufacturer publishes limits, and Northgate publishes its own dispatch policy. Your job is to decide when a reading is worth someone driving out to the site.
 
 | Use case | Value added | Estimated effort |
