@@ -100,6 +100,68 @@ In the final use case you build a second agent in a completely different industr
 - The four lab MCP servers imported into your environment: **Asset Telemetry MCP**, **Work Orders MCP**, **Policy Lookup MCP**, **Claims History MCP**
 - Four knowledge documents uploaded to SharePoint under **OnePlace → Documents**, in folders named **Energy Ops** and **Claims Ops**
 
+#### MCP servers
+
+The four MCP servers ship with this lab as Dataverse solution packages under [`assets/mcp-servers`](assets/mcp-servers). They are what the agents actually call — without them, Use Cases #2, #3 and #4 have no data.
+
+| Solution package | Solution name in the environment | Tools it exposes |
+|------------------|----------------------------------|------------------|
+| [`NorthgateEnergyAssetTelemetryMCP_1_0_0_1.zip`](assets/mcp-servers/NorthgateEnergyAssetTelemetryMCP_1_0_0_1.zip) | **Asset Telemetry MCP** | `list_assets`, `get_asset_status`, `query_telemetry` |
+| [`NorthgateEnergyWorkOrdersMCP_1_0_0_1.zip`](assets/mcp-servers/NorthgateEnergyWorkOrdersMCP_1_0_0_1.zip) | **Work Orders MCP** | `list_work_orders`, `get_work_order`, `create_work_order` |
+| [`MeridianMutualPolicyLookupMCP_1_0_0_1.zip`](assets/mcp-servers/MeridianMutualPolicyLookupMCP_1_0_0_1.zip) | **Policy Lookup MCP** | `find_policy`, `get_policy` |
+| [`MeridianMutualClaimsHistoryMCP_1_0_0_1.zip`](assets/mcp-servers/MeridianMutualClaimsHistoryMCP_1_0_0_1.zip) | **Claims History MCP** | `list_claims`, `get_claim` |
+
+All four carry synthetic data for fictional companies. Nothing in them reaches a real system.
+
+##### Check whether they are already loaded
+
+In many delivery tenants the four solutions are already provisioned with the environment, and there is nothing to do. Check before you import — importing a solution that is already present is not harmful, but it wastes lab time.
+
+1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names the same environment you are building agents in. This is the single most common mistake — the solutions land in one environment and the agent is built in another.
+
+1. Select **Solutions** in the left navigation.
+
+1. Look for all four display names. Sort by **Created** to bring recent imports to the top.
+
+    ![The Solutions list with the four lab MCP solutions present](images/prereq-solutions-list.png)
+
+    | Display name | Unique name | Version |
+    |--------------|-------------|---------|
+    | Asset Telemetry MCP | `NorthgateEnergyAssetTelemetryMCP` | 1.0.0.1 |
+    | Work Orders MCP | `NorthgateEnergyWorkOrdersMCP` | 1.0.0.1 |
+    | Policy Lookup MCP | `MeridianMutualPolicyLookupMCP` | 1.0.0.1 |
+    | Claims History MCP | `MeridianMutualClaimsHistoryMCP` | 1.0.0.1 |
+
+1. **All four present?** You are done — skip the import below.
+
+    **Any missing?** Import just the missing ones using the procedure below.
+
+    > [!TIP]
+    > There is a faster smoke test if you only want to know whether the agent will find them: in Copilot Studio, open any agent, select **Tools → + Add a tool**, and search for `MCP`. The four servers appear in the results if they are loaded. The Solutions list is still the authoritative check, because it also shows you the **version**.
+
+    > [!NOTE]
+    > **First visit to make.powerapps.com?** A **Choose your country/region** dialog can appear over the page and blocks the Solutions list behind it. Pick a region and select **Get started** to clear it.
+
+##### How to import a solution
+
+Do this once per missing solution. Each import takes a minute or two.
+
+1. Download the `.zip` from [`assets/mcp-servers`](assets/mcp-servers). Use the **raw** file — GitHub's file view will not give you a usable archive, and a `.zip` that your browser has helpfully unpacked will not import.
+
+1. In [make.powerapps.com](https://make.powerapps.com), confirm the environment picker, then select **Solutions → Import solution**.
+
+1. Select **Browse**, choose the `.zip`, then **Next**.
+
+1. Review the solution name and version on the summary step, then select **Import**. The import runs in the background; the banner reports success or failure when it finishes.
+
+1. Repeat for each remaining `.zip`, then refresh the **Solutions** list and confirm all four are present.
+
+    > [!IMPORTANT]
+    > These are **unmanaged** solutions published by *Dynamic Communities*. Import them into a development or training environment — not production.
+
+    > [!TIP]
+    > If an import fails on a missing dependency, import **Asset Telemetry MCP** first and retry. If a tool still does not appear in Copilot Studio's **Add a tool** search after a successful import, select **Publish all customizations** on the Solutions page and search again.
+
 #### Knowledge documents
 
 The four PDFs ship with this lab under [`assets/knowledge-documents`](assets/knowledge-documents). Upload them into two SharePoint folders named exactly as below — the instructions reference those folder names, and Use Case #2 walks you to them.
@@ -208,6 +270,9 @@ Create a new-type agent, write instructions that establish scope rather than scr
 1. Turn **Memory** on using the toggle at the bottom of the rail.
 
     ![Memory enabled in the component rail](images/uc1-memory-enabled.png)
+
+    > [!NOTE]
+    > **No Memory row in the rail?** Immediately after the first save the rail sometimes ends at **Connected agents**, with Memory absent rather than disabled. Refresh the page and it comes back with its toggle. Nothing is wrong with the agent.
 
     > [!NOTE]
     > Memory is per-user and per-agent, stored in a tenant-scoped store, and it persists **across conversations** — unlike conversation history, which does not. One user's memories are never shared with another user or another agent, makers can view and delete them, and inactive memories are removed after 28 days.
@@ -387,7 +452,9 @@ Observe the loop recovering from a failed tool call, and using the Agent Sandbox
     >   "message": "Maximum query window is 90 days. Narrow the range and retry." }
     > ```
     >
-    > The trace then shows the agent's decision in one line: *"I should split the date range into two 90-day windows instead of one long span."* It calls the tool again — twice — then pulls current status for context, and answers the original question in full.
+    > The trace then shows the agent deciding, in one line, to split the request into narrower windows and call the tool again. It does — more than once, adjusting the boundaries when a window comes back a day too wide — and then answers the original question in full.
+    >
+    > The exact wording and the number of retries differ from run to run; the recovery itself does not. What you are looking for is the failed call, followed by a decision, followed by successful calls.
     >
     > A standard-harness plan stops here. It would raise the error, reroute to an error topic, and surface a failure message to the user. There is no flexible retry. The GHCP loop reads the error, reasons about an alternative approach, and continues.
 
@@ -412,7 +479,9 @@ Observe the loop recovering from a failed tool call, and using the Agent Sandbox
     > It did not eyeball the numbers and guess. It computed **r = −0.74** across the window, then split the series into two regimes and reported the correlation for each. Nobody asked for that breakdown.
 
     > [!TIP]
-    > Look for the third series. To test whether falling wind explained the falling output — rather than a fault in the turbine — the agent pulled **wind speed** as well. That hypothesis was never in the prompt. This is what "decide the next step from the latest state" looks like in practice: it found a possible confound and went to check it.
+    > Count the telemetry calls before the sandbox runs. Two — temperature and power — is the question as asked. If you get a **third**, look at what it pulled: on one authoring run it was **wind speed**, to test whether falling wind explained the falling output rather than a fault in the turbine. That hypothesis was never in the prompt.
+    >
+    > Whether the confound check happens is not deterministic, and that is the lesson. "Decide the next step from the latest state" means the loop *may* go and check something nobody asked about — you get a range of behaviours from the same prompt, not one scripted path.
 
 1. Read the conclusion. Temperature climbed from about 71 °C to 79 °C while power output roughly **halved**. Sump temperature is supposed to rise *with* load; here it rose as load fell. The manual names that divergence as the finding itself — the signature of a developing drivetrain or cooling fault.
 
@@ -429,7 +498,7 @@ Observe the loop recovering from a failed tool call, and using the Agent Sandbox
 
 * What would a standard-harness agent have done with the `range_too_large` error?
 * Why did the agent use the sandbox for this question but not for the earlier ones?
-* The agent pulled wind speed without being asked. What does that tell you about how the loop plans?
+* On some runs the agent pulls a third series nobody asked for, and on others it does not. What does that variability tell you about how the loop plans?
 
 ---
 
@@ -480,7 +549,7 @@ You now know the shape: name, instructions, knowledge, tools. This time it shoul
 1. Add a third tool — search for **MSN Weather** and select **Get current weather**.
 
     > [!WARNING]
-    > Search results include **Ambee**'s similarly-named *Get current weather by geospatial search*, which often sorts **above** the one you want. Check the publisher heading and pick the action under **MSN Weather**.
+    > Search results include **Ambee**'s similarly-named *Get current weather by geospatial search*, which may sort **above** the one you want depending on what you type. Result ordering is not stable — check the publisher heading and pick the action under **MSN Weather**. If you select the wrong one, remove it from the rail and add the right one; the agent will otherwise stall on a connector you have no connection for.
 
 1. Open the **Get current weather** tool, set **Authentication mode** to **Maker**, then **Not connected → Create new connection → Create**, and **Done**.
 
@@ -554,7 +623,7 @@ You now know the shape: name, instructions, knowledge, tools. This time it shoul
     ![The FNOL skill loading and running its full procedure](images/uc4-skill-fires-fnol.png)
 
     > [!IMPORTANT]
-    > This time the trace opens with *"I should run the FNOL intake skill for this"* and **`Loading skill: fnol-intake`**. The procedure then runs end to end: `find_policy`, weather, `list_claims`, and both knowledge documents — producing a structured intake summary with the policy confirmed in force on the date of loss, the peril mapped, and the **$2,500 wind/hail deductible** named.
+    > This time the trace opens with the agent recognising the request as an intake case, followed by **`Loading skill: fnol-intake`**. The procedure then runs end to end: `find_policy`, weather, `list_claims`, and both knowledge documents — producing a structured intake summary with the policy confirmed in force on the date of loss, the peril mapped, and the **$2,500 wind/hail deductible** named.
 
     > [!TIP]
     > Two details worth reading closely.
@@ -586,7 +655,7 @@ You built two agents in two industries on the same harness, and in both cases th
 
 * **The component model is a set of decisions, not a checklist.** Instructions for what is always true, knowledge for settled facts, tools for live truth and actions, Skills for procedures that only sometimes apply, the sandbox for work that must be computed rather than estimated. Choosing wrongly is what produces bloated context and wrong answers.
 * **Descriptions route; instructions shape.** You never told either agent which tool to call or which document to search. It matched your request against the descriptions of what it had. When routing goes wrong, the description is nearly always where the fix belongs.
-* **The trace is the debugger.** Every decision either agent made was visible and explicable — the retries during retrieval, the decision to split a date range, the choice to compute rather than estimate, the hypothesis about wind speed. Reading it is the fastest route from "why did it do that" to a fix.
+* **The trace is the debugger.** Every decision either agent made was visible and explicable — the retries during retrieval, the decision to split a date range, the choice to compute rather than estimate, any hypothesis it went off to test. Reading it is the fastest route from "why did it do that" to a fix.
 * **Failure is a state to reason about, not a stop condition.** The `range_too_large` error did not end the task; it changed the next step. That behaviour depends on your tools returning errors that say what to do differently.
 * **A Skill earns its keep by staying out of the way.** The same agent answered a coverage question without loading `fnol-intake`, then ran all seven of its steps when a loss was reported. Instructions cannot do that — they load on every turn regardless.
 * **The model transfers wholesale across domains.** The second agent — different industry, different tools, different documents — took a fraction of the time, because the shape was identical.
