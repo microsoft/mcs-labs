@@ -2,7 +2,7 @@
 layout: module
 title: "Creation — GitHub harness (from UX, from Chat)"
 order: 3070
-duration: 45
+duration: 30
 difficulty: 200
 section: intermediate_modules
 description: "Creating agents in the GitHub Copilot harness two ways — from the authoring UX and from natural-language chat."
