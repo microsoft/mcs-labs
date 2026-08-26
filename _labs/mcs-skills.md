@@ -102,6 +102,56 @@ This lab uses exactly that scenario. You build an RFP Response agent with a Skil
 - A Microsoft 365 account with Outlook, used both to trigger the workflow and to receive its output
 - Access to Microsoft 365 Copilot with Cowork available in the left navigation
 - The sample Skill package and test RFPs from [AgentDudeSamples](https://github.com/Dewain27/AgentDudeSamples/tree/main/samples/RFP%20Skill)
+- The **Order Management MCP** and **Warehouse MCP** custom MCP servers imported into your environment — see [Custom MCP servers](#custom-mcp-servers) below. **Use Case #5 cannot be completed without them.**
+
+#### Custom MCP servers
+
+Use Case #5 attaches two custom MCP servers to the agent: **Order Management MCP** and **Warehouse MCP**. Neither is part of the platform — both are custom connectors that have to already exist in your environment, and nothing inside this lab creates them. If they are missing you will not find out here; you will find out in Use Case #5, when the tools you are told to add are not in the picker.
+
+They ship with this lab as an unmanaged Dataverse solution under [`assets/mcp-servers`](assets/mcp-servers).
+
+| Solution package | Solution name in the environment | MCP servers it installs |
+|------------------|----------------------------------|-------------------------|
+| [`EnhancedTaskCompletion_1_0_0_2.zip`](assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip) | **Enhanced Task Completion** | **Warehouse MCP** — `check_stock`, `get_restock_date`, `get_fulfillment_status`, `find_alternatives`<br>**Order Management MCP** — `search_orders`, `get_order`, `get_shipment`, `request_return`, `get_return_status` |
+
+Both servers run inline inside the connector as a C# script, over mock data for a fictional retailer. Nothing in them reaches a real system. The two connectors ship together in one solution.
+
+> [!NOTE]
+> The **Microsoft Dataverse MCP Server**, also attached in Use Case #5, is first-party and needs no import — it appears in the **Model Context Protocol** tool list on its own. Only these two custom servers have to be provisioned.
+
+##### Check whether they are already loaded
+
+Most delivery tenants ship this solution pre-provisioned. Check before importing — a duplicate import is not harmful, but it wastes lab time.
+
+1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names the same environment you are building the workflow in. A mismatch here is the usual cause of "the tool is not in the list".
+
+1. Select **Solutions** in the left navigation and look for **Enhanced Task Completion** (unique name `EnhancedTaskCompletion`, version 1.0.0.2). Sort by **Created** to bring recent imports to the top.
+
+1. **Present?** You are done — skip the import below. **Missing?** Import it.
+
+    > [!TIP]
+    > Faster smoke test if you only want to know whether the agent will find them: in Copilot Studio open any agent, select **Tools → + Add tool**, filter to **Model Context Protocol (MCP)**, and look for **Order Management MCP** and **Warehouse MCP**. The Solutions list is still the authoritative check, because it also shows you the version.
+
+    > [!NOTE]
+    > **First visit to make.powerapps.com on a fresh lab account?** A **Choose your country/region** dialog opens over the page and hides the Solutions list behind it. Pick a region and select **Get started** to clear it.
+
+##### How to import them
+
+1. Download [`EnhancedTaskCompletion_1_0_0_2.zip`](assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
+
+1. In [make.powerapps.com](https://make.powerapps.com), confirm the environment picker, then select **Solutions → Import solution**.
+
+1. Select **Browse**, choose the `.zip`, then **Next**, then **Import**. The import runs in the background and reports success or failure in a banner when it finishes.
+
+1. Select **Custom connectors** in the left navigation. For **each** MCP connector, select **Create connection** — no credentials are needed, just select **Create**.
+
+    > [!IMPORTANT]
+    > This is an **unmanaged** solution published by *CAT*. Import it into a development or training environment — not production.
+
+    > [!TIP]
+    > If the servers still do not appear in Copilot Studio's tool picker after a successful import, select **Publish all customizations** on the Solutions page and search again.
+
+The solution comes from the [Enhanced Task Completion sample](https://github.com/microsoft/new-copilot-studio-tech-guide/tree/main/sample/archive). It also carries two demo agents alongside the connectors; this lab does not use them.
 
 ---
 
@@ -669,6 +719,9 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
 ---
 
 ## Use Case #5: Leveraging a Skill inside a new-type agent
+
+> [!IMPORTANT]
+> **This use case needs the Order Management MCP and Warehouse MCP servers already present in your environment.** They are custom connectors, not platform tools, and nothing earlier in this lab creates them — if they are missing, the **Add tool** step below has nothing to select. Two minutes now saves the detour: [are they already loaded?](#check-whether-they-are-already-loaded) In most delivery tenants they ship with the environment. If not, [import them](#how-to-import-them) — the solution package is in this repo.
 
 Take the **Sales Account Assistant** you built in Use Case #3 of [Deep Dive: Instructions & Descriptions](../mcs-instructions/README.md) and turn it into a focused order-resolution agent by adding a **Skill** — a reusable, structured set of behaviors the New Orchestrator loads when a request matches. Along the way you'll attach two **custom MCP servers** (Order Management and Warehouse), a second **knowledge source** (customer-facing policies), and updated **instructions** that tell the orchestrator how to use them together.
 
