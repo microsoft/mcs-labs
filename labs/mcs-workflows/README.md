@@ -92,46 +92,55 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 - Permission to create connections for the services used across the lab: **Microsoft To-Do (Business)**, **Work IQ Calendar / Work IQ**, **Office 365 Outlook**, **Microsoft Dataverse / Dataverse MCP**, Human Review, and **Microsoft 365 Copilot**.
 - Basic familiarity with the Copilot Studio interface.
 - The **Warehouse MCP** custom MCP server imported into your environment — see [Custom MCP servers](#custom-mcp-servers) below. **Use Case #4 cannot be completed without it.**
-- The **LAB: Order Management** solution installed in your environment — it carries the pre-built workflow that Use Cases #2–#5 configure. See [The Order Management solution](#the-order-management-solution) below if it is missing.
+- The **LAB: Order Management** solution **deleted and re-imported by you** — you must own the workflow to publish it. See [The Order Management solution](#the-order-management-solution) below. **Use Cases #2–#5 fail without this.**
 
 > [!IMPORTANT]
 > Use the **same work account** for Copilot Studio and every connected service in this lab (Microsoft To Do, Outlook, Dataverse, M365 Copilot, and approvals). The triggers, inline agents, and tools all act on one identity — if they don't match, a workflow can't see your data or write back to your calendar, tasks, or Dataverse records.
 
 #### The Order Management solution
 
-Use Cases #2 through #5 all build on a pre-built **Order Management Workflow** that ships inside the **LAB: Order Management** solution, together with the classification agent components and the connection references the workflow binds to. Your environment should arrive with it already installed — this section is here for the case where it did not.
+Use Cases #2 through #5 all build on a pre-built **Order Management Workflow**, which ships inside the **LAB: Order Management** solution together with its agent components and connection references.
 
-It ships with this lab as an unmanaged Dataverse solution under [`assets/solutions`](assets/solutions).
+Your environment arrives with that solution **already installed by the lab author** — and installed that way, the lab author owns the workflow, not you. Before you start, **delete the pre-installed solution and import your own copy**. Importing it yourself makes you the owner of everything inside it.
+
+> [!IMPORTANT]
+> **Do not skip this — the lab cannot be completed without it.** Every one of Use Cases #2 through #5 depends on the workflow being **published**, and **only an owner can publish a workflow**. If you leave the pre-installed copy in place you are not the owner, the **Publish** button stays unavailable, and the lab fails at Use Case #2 with no way forward.
 
 | Solution package | Solution name in the environment | What it contains |
 |------------------|----------------------------------|------------------|
 | [`LABOrderManagement_1_0_0_5.zip`](assets/solutions/LABOrderManagement_1_0_0_5.zip) | **LAB: Order Management** | The **Order Management Workflow**, its agent components, and six connection references |
 
-The workflow binds to first-party connectors only — Office 365 Outlook, Microsoft Dataverse, M365 Copilot, Human review (Advanced Approvals), and the Outlook Mail MCP. It does **not** carry the custom **Warehouse MCP** that Use Case #4 uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) above.
+The workflow binds to first-party connectors only — Office 365 Outlook, Microsoft Dataverse, M365 Copilot, Human review (Advanced Approvals), and the Outlook Mail MCP. It does **not** carry the custom **Warehouse MCP** that Use Case #4 uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) below.
 
-##### Check whether it is already installed
+##### Delete the pre-installed solution
 
-1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names your **DEV - User \<your ID\>** environment.
+1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names your **DEV - User \<your ID\>** environment. Deleting from the wrong environment is the one mistake here that is awkward to undo.
 
-1. Select **Solutions** in the left navigation and look for **LAB: Order Management** (unique name `LABOrderManagement`, version 1.0.0.5).
+1. Select **Solutions** in the left navigation and find **LAB: Order Management** (unique name `LABOrderManagement`, version 1.0.0.5).
 
-1. **Present?** You are done — skip the import. **Missing?** Import it below.
+1. Select the row, choose **Delete** on the command bar, and confirm.
+
+    > [!NOTE]
+    > This removes the **Order Management Workflow** along with the solution — that is expected. You are about to put back an identical copy that you own. Nothing else in your environment is affected.
 
     > [!TIP]
-    > A faster check from inside the lab: in Copilot Studio, open **Workflows**. If **Order Management Workflow** is listed, the solution is installed.
+    > If **LAB: Order Management** is not in the list, nothing was pre-installed. Skip straight to the import below.
 
-##### How to import the solution
+##### Import your own copy
 
 1. Download [`LABOrderManagement_1_0_0_5.zip`](assets/solutions/LABOrderManagement_1_0_0_5.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
 
-1. In [make.powerapps.com](https://make.powerapps.com), confirm the environment picker, then select **Solutions → Import solution**.
+1. In [make.powerapps.com](https://make.powerapps.com), confirm the environment picker again, then select **Solutions → Import solution**.
 
-1. Select **Browse**, choose the `.zip`, then **Next**, then **Import**.
+1. Select **Browse**, choose the `.zip`, then **Next**, then **Import**. The import runs in the background and reports success in a banner when it finishes.
 
-1. When the import finishes, work through the connection references it brings in — Use Case #2 step 2 covers exactly that, and the import leaves them unset.
+1. Refresh the **Solutions** list and confirm **LAB: Order Management** is present, with **you** shown as the owner of the flow it contains.
 
     > [!IMPORTANT]
     > This is an **unmanaged** solution published by *CAT*. Import it into a development or training environment — not production.
+
+    > [!NOTE]
+    > The import leaves the solution's connection references unset. Use Case #2 step 2 walks through connecting each one, so there is nothing to do about them here.
 
 #### Custom MCP servers
 
