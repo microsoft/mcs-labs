@@ -106,9 +106,46 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 - Permission to create connections for the services used across the lab: **Microsoft To-Do (Business)**, **Work IQ Calendar / Work IQ**, **Office 365 Outlook**, **Microsoft Dataverse / Dataverse MCP**, Human Review, and **Microsoft 365 Copilot**.
 - Basic familiarity with the Copilot Studio interface.
 - The **Warehouse MCP** custom MCP server imported into your environment — see [Custom MCP servers](#custom-mcp-servers) below. **Use Case #4 cannot be completed without it.**
+- The **LAB: Order Management** solution installed in your environment — it carries the pre-built workflow that Use Cases #2–#5 configure. See [The Order Management solution](#the-order-management-solution) below if it is missing.
 
 > [!IMPORTANT]
 > Use the **same work account** for Copilot Studio and every connected service in this lab (Microsoft To Do, Outlook, Dataverse, M365 Copilot, and approvals). The triggers, inline agents, and tools all act on one identity — if they don't match, a workflow can't see your data or write back to your calendar, tasks, or Dataverse records.
+
+#### The Order Management solution
+
+Use Cases #2 through #5 all build on a pre-built **Order Management Workflow** that ships inside the **LAB: Order Management** solution, together with the classification agent components and the connection references the workflow binds to. Your environment should arrive with it already installed — this section is here for the case where it did not.
+
+It ships with this lab as an unmanaged Dataverse solution under [`assets/solutions`](assets/solutions).
+
+| Solution package | Solution name in the environment | What it contains |
+|------------------|----------------------------------|------------------|
+| [`LABOrderManagement_1_0_0_5.zip`](assets/solutions/LABOrderManagement_1_0_0_5.zip) | **LAB: Order Management** | The **Order Management Workflow**, its agent components, and six connection references |
+
+The workflow binds to first-party connectors only — Office 365 Outlook, Microsoft Dataverse, M365 Copilot, Human review (Advanced Approvals), and the Outlook Mail MCP. It does **not** carry the custom **Warehouse MCP** that Use Case #4 uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) above.
+
+##### Check whether it is already installed
+
+1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names your **DEV - User \<your ID\>** environment.
+
+1. Select **Solutions** in the left navigation and look for **LAB: Order Management** (unique name `LABOrderManagement`, version 1.0.0.5).
+
+1. **Present?** You are done — skip the import. **Missing?** Import it below.
+
+    > [!TIP]
+    > A faster check from inside the lab: in Copilot Studio, open **Workflows**. If **Order Management Workflow** is listed, the solution is installed.
+
+##### How to import the solution
+
+1. Download [`LABOrderManagement_1_0_0_5.zip`](assets/solutions/LABOrderManagement_1_0_0_5.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
+
+1. In [make.powerapps.com](https://make.powerapps.com), confirm the environment picker, then select **Solutions → Import solution**.
+
+1. Select **Browse**, choose the `.zip`, then **Next**, then **Import**.
+
+1. When the import finishes, work through the connection references it brings in — Use Case #2 step 2 covers exactly that, and the import leaves them unset.
+
+    > [!IMPORTANT]
+    > This is an **unmanaged** solution published by *CAT*. Import it into a development or training environment — not production.
 
 #### Custom MCP servers
 
