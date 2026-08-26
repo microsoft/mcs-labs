@@ -303,10 +303,43 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
    - **M365 Copilot** node — open the node and, under **Connections**, select **Create new connection** > **Create**, then sign in with your lab account.
    - **Human review** node — open the node and, under **Connections**, select **Create new connection** > **Create**, then sign in with your lab account.
 
-3. Navigate to the **Cloud Flow** object (the Order Management Workflow) inside the solution and select the flow. Choose **Set primary owner**, **remove the existing owner**, set yourself (your lab user) as the new owner, and select **Save**. A **green bar** should appear confirming the owner was successfully changed.
+3. **Take ownership of the workflow.** The Order Management Workflow was pre-built by the lab author, so your lab user currently has no rights on it and **Publish** is unavailable. You fix that by adding yourself as an **owner** of the underlying cloud flow. Work through 3a–3e in order.
 
    > [!IMPORTANT]
-   > Without the ownership change, publishing is **disabled by default**, so the workflow cannot be triggered end-to-end — you can still test individual nodes inside it, but no real incoming email will start a run. Once you own the workflow, the **Publish** button becomes available.
+   > Do this in **Power Automate**, not Copilot Studio. The Copilot Studio workflow designer has no ownership UI, and the **Advanced** menu on the solution's Cloud flow object doesn't contain an ownership command either. The flow's **Co-owners** page is the only place to change this.
+
+   **3a. Find the flow and confirm who owns it today.** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)) and check the environment picker in the top-right reads **DEV - User \<your ID\>**. Go to **Solutions** → **LAB: Order Management** → **Objects** → **Cloud flows (1)**. The **Owner** column shows the lab author rather than you, and **Status** is **Off** — both change once you finish this step.
+
+   ![The Cloud flows object in the LAB: Order Management solution, with the Owner column showing the lab author](images/uc2-owner-cloudflow-object.png)
+
+   **3b. Open the flow's Co-owners page.** Go to **Power Automate** ([make.powerautomate.com](https://make.powerautomate.com)) and confirm it is in the **same environment**. Select **Solutions** → **LAB: Order Management** → **Order Management Workflow**, then choose **Share** on the command bar. The **Co-owners** page opens, listing the lab author as the only owner.
+
+   ![The flow's Co-owners page listing only the lab author](images/uc2-owner-coowners-before.png)
+
+   > [!TIP]
+   > If the solution list is slow to load, use **My flows** → **All flows** in Power Automate and search for *Order Management Workflow* instead — the **Share** command is the same from either list.
+
+   **3c. Add your lab user as an owner.** Under **Add a system user or team as an owner**, type your lab user name (start with `user.` followed by your ID). Select your account from the suggestions, matching on the **full email address** rather than the display name.
+
+   ![Typing the lab user into the owner picker, with the matching suggestion shown](images/uc2-owner-picker.png)
+
+   > [!WARNING]
+   > Choose **your own lab account**. The picker also returns the lab author and other tenant users — adding the wrong person will not enable publishing for you.
+
+   **3d. Confirm the change saved.** Your account now appears in the owner list next to the original owner. **This page has no Save button — the change applies the instant you select the user.**
+
+   ![The Co-owners list showing both the lab author and the lab user as owners](images/uc2-owner-added.png)
+
+   > [!NOTE]
+   > The lab author stays in the list and **their delete icon is greyed out**. You cannot remove a flow's primary owner from this page, and you don't need to: co-ownership already grants full control — edit, publish, delete, and access to run history. Leaving the author in place is expected.
+
+   **3e. Verify Publish is now available.** Return to the workflow in **Copilot Studio** and **refresh the browser tab**. The **Publish** button in the top right is now enabled. If it is still greyed out, wait about 30 seconds and refresh again — the permission change takes a moment to propagate.
+
+   > [!IMPORTANT]
+   > Without this ownership change, publishing stays **disabled**, so the workflow can never be triggered end-to-end. You can still test individual nodes inside the designer, but no real incoming email will start a run.
+
+   > [!NOTE]
+   > This is an automated, trigger-driven flow, so Power Automate can take up to **seven days** to move it onto the new owner's license. Saving the flow forces that switch immediately — which is why the **Save** in step 4 matters even when you have changed nothing in the designer.
 
 4. Go back to the workflow and select **Save** (or press **Ctrl+S**). The **Publish** button becomes available after saving — select **Publish**. If publishing succeeds, the setup is complete and you can **skip step 5**.
 
@@ -322,7 +355,7 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
    > [!WARNING]
    > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
 
-   **5.2 Grant ownership through the Power Platform Admin Center.** Open the **Power Platform Admin Center** ([admin.powerplatform.microsoft.com](https://admin.powerplatform.microsoft.com)) and navigate to **Environments** → your environment → **Flows**. Find the **Order Management Workflow** row, open **More flow actions (…)** → **Share**, add your **lab user** as a **co-owner**, and select **Save**. This grants ownership through the Admin Center if the **Set primary owner** action in step 3 did not enable publishing.
+   **5.2 Grant ownership through the Power Platform Admin Center.** Open the **Power Platform Admin Center** ([admin.powerplatform.microsoft.com](https://admin.powerplatform.microsoft.com)) and navigate to **Environments** → your environment → **Flows**. Find the **Order Management Workflow** row, open **More flow actions (…)** → **Share**, add your **lab user** as a **co-owner**, and select **Save**. This grants ownership through the Admin Center if the co-owner change in step 3 did not enable publishing.
 
    When done, **retry step 4 (Save and Publish).**
 
