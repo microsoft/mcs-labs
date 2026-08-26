@@ -122,7 +122,7 @@ Your environment arrives with that solution **already installed by the lab autho
 
 | Solution package | Solution name in the environment | What it contains |
 |------------------|----------------------------------|------------------|
-| [`LABOrderManagement_1_0_0_5.zip`](assets/solutions/LABOrderManagement_1_0_0_5.zip) | **LAB: Order Management** | The **Order Management Workflow**, its agent components, and six connection references |
+| [`LABOrderManagement_1_0_0_6.zip`](assets/solutions/LABOrderManagement_1_0_0_6.zip) | **LAB: Order Management** | The **Order Management Workflow**, its agent components, and ten connection references |
 
 The workflow binds to first-party connectors only — Office 365 Outlook, Microsoft Dataverse, M365 Copilot, Human review (Advanced Approvals), and the Outlook Mail MCP. It does **not** carry the custom **Warehouse MCP** that Use Case #4 uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) below.
 
@@ -130,7 +130,7 @@ The workflow binds to first-party connectors only — Office 365 Outlook, Micros
 
 1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names your **DEV - User \<your ID\>** environment. Deleting from the wrong environment is the one mistake here that is awkward to undo.
 
-1. Select **Solutions** in the left navigation and find **LAB: Order Management** (unique name `LABOrderManagement`, version 1.0.0.5).
+1. Select **Solutions** in the left navigation and find **LAB: Order Management** (unique name `LABOrderManagement`, version 1.0.0.6).
 
 1. Select the row, choose **Delete** on the command bar, and confirm.
 
@@ -142,7 +142,7 @@ The workflow binds to first-party connectors only — Office 365 Outlook, Micros
 
 ##### Import your own copy
 
-1. Download [`LABOrderManagement_1_0_0_5.zip`](assets/solutions/LABOrderManagement_1_0_0_5.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
+1. Download [`LABOrderManagement_1_0_0_6.zip`](assets/solutions/LABOrderManagement_1_0_0_6.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
 
 1. In [make.powerapps.com](https://make.powerapps.com), confirm the environment picker again, then select **Solutions → Import solution**.
 
@@ -431,7 +431,7 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
    **5.1 Configure the connection references.** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
 
-   - You should see **five** connection references. If a **sixth** one is present whose connection id starts with `crc3b_draft_bRURqJ.cr.shared_a365outlookmailmcp`, it is not needed for the workflow to run and can be **safely removed** from the solution.
+   - You should see **ten** connection references. Set a connection for each one. If a reference whose connection id starts with `crc3b_draft_bRURqJ.cr.shared_a365outlookmailmcp` is present, it is not needed for the workflow to run and can be **safely removed** from the solution.
    - For all others, select the connection and click **Save**, then confirm with **Save changes**.
 
    ![The LAB: Order Management solution in Power Apps](images/solution-order-management.png)
