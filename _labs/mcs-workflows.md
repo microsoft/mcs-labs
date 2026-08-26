@@ -106,9 +106,55 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 - Permission to create connections for the services used across the lab: **Microsoft To-Do (Business)**, **Work IQ Calendar / Work IQ**, **Office 365 Outlook**, **Microsoft Dataverse / Dataverse MCP**, Human Review, and **Microsoft 365 Copilot**.
 - Basic familiarity with the Copilot Studio interface.
 - The **Warehouse MCP** custom MCP server imported into your environment — see [Custom MCP servers](#custom-mcp-servers) below. **Use Case #4 cannot be completed without it.**
+- The **LAB: Order Management** solution **deleted and re-imported by you** — you must own the workflow to publish it. See [The Order Management solution](#the-order-management-solution) below. **Use Cases #2–#5 fail without this.**
 
 > [!IMPORTANT]
 > Use the **same work account** for Copilot Studio and every connected service in this lab (Microsoft To Do, Outlook, Dataverse, M365 Copilot, and approvals). The triggers, inline agents, and tools all act on one identity — if they don't match, a workflow can't see your data or write back to your calendar, tasks, or Dataverse records.
+
+#### The Order Management solution
+
+Use Cases #2 through #5 all build on a pre-built **Order Management Workflow**, which ships inside the **LAB: Order Management** solution together with its agent components and connection references.
+
+Your environment arrives with that solution **already installed by the lab author** — and installed that way, the lab author owns the workflow, not you. Before you start, **delete the pre-installed solution and import your own copy**. Importing it yourself makes you the owner of everything inside it.
+
+> [!IMPORTANT]
+> **Do not skip this — the lab cannot be completed without it.** Every one of Use Cases #2 through #5 depends on the workflow being **published**, and **only an owner can publish a workflow**. If you leave the pre-installed copy in place you are not the owner, the **Publish** button stays unavailable, and the lab fails at Use Case #2 with no way forward.
+
+| Solution package | Solution name in the environment | What it contains |
+|------------------|----------------------------------|------------------|
+| [`LABOrderManagement_1_0_0_6.zip`](assets/solutions/LABOrderManagement_1_0_0_6.zip) | **LAB: Order Management** | The **Order Management Workflow**, its agent components, and ten connection references |
+
+The workflow binds to first-party connectors only — Office 365 Outlook, Microsoft Dataverse, M365 Copilot, Human review (Advanced Approvals), and the Outlook Mail MCP. It does **not** carry the custom **Warehouse MCP** that Use Case #4 uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) below.
+
+##### Delete the pre-installed solution
+
+1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names your **DEV - User \<your ID\>** environment. Deleting from the wrong environment is the one mistake here that is awkward to undo.
+
+1. Select **Solutions** in the left navigation and find **LAB: Order Management** (unique name `LABOrderManagement`, version 1.0.0.6).
+
+1. Select the row, choose **Delete** on the command bar, and confirm.
+
+    > [!NOTE]
+    > This removes the **Order Management Workflow** along with the solution — that is expected. You are about to put back an identical copy that you own. Nothing else in your environment is affected.
+
+    > [!TIP]
+    > If **LAB: Order Management** is not in the list, nothing was pre-installed. Skip straight to the import below.
+
+##### Import your own copy
+
+1. Download [`LABOrderManagement_1_0_0_6.zip`](assets/solutions/LABOrderManagement_1_0_0_6.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
+
+1. In [make.powerapps.com](https://make.powerapps.com), confirm the environment picker again, then select **Solutions → Import solution**.
+
+1. Select **Browse**, choose the `.zip`, then **Next**, then **Import**. The import runs in the background and reports success in a banner when it finishes.
+
+1. Refresh the **Solutions** list and confirm **LAB: Order Management** is present, with **you** shown as the owner of the flow it contains.
+
+    > [!IMPORTANT]
+    > This is an **unmanaged** solution published by *CAT*. Import it into a development or training environment — not production.
+
+    > [!NOTE]
+    > The import leaves the solution's connection references unset. Use Case #2 step 2 walks through connecting each one, so there is nothing to do about them here.
 
 #### Custom MCP servers
 
@@ -367,58 +413,25 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
    - **M365 Copilot** node — open the node and, under **Connections**, select **Create new connection** > **Create**, then sign in with your lab account.
    - **Human review** node — open the node and, under **Connections**, select **Create new connection** > **Create**, then sign in with your lab account.
 
-3. **Take ownership of the workflow.** The Order Management Workflow was pre-built by the lab author, so your lab user has no rights on it yet. You fix that by adding yourself as an **owner** of the underlying cloud flow. Work through 3a–3d in order.
+3. **Confirm you own the workflow.** In **Copilot Studio**, select **Workflows** in the left navigation and find **Order Management Workflow**. Check the **Owner** column.
 
-   **3a. Copy the two IDs from the workflow's address bar.** With the **Order Management Workflow** still open in Copilot Studio from step 1, look at your browser's address bar. It has this shape:
+   - **It shows your own lab user** — you are set. Continue to step 4.
+   - **It shows the lab author** — the prerequisite import was skipped. Go back to [The Order Management solution](#the-order-management-solution), delete the solution and import your own copy, then return here.
 
-   ```
-   https://copilotstudio.microsoft.com/environments/<environmentId>/flows/<flowId>
-   ```
-
-   Copy the whole address somewhere you can edit it — you need both GUIDs, and this page is the only place both appear together.
-
-   - **`<environmentId>`** is the GUID after `/environments/`
-   - **`<flowId>`** is the GUID after `/flows/` (ignore anything after a `?`)
-
-   > [!TIP]
-   > The two GUIDs look alike. Keep them in order — swapping them produces a page that loads and then reports the flow does not exist.
-
-   **3b. Build the Co-owners address and open it.** Take the same two GUIDs and put them into this address, then open it in a new browser tab:
-
-   ```
-   https://make.powerautomate.com/environments/<environmentId>/flows/<flowId>/owners
-   ```
-
-   The **Co-owners** page opens, listing the lab author as the only owner.
-
-   ![The flow's Co-owners page listing only the lab author](images/uc2-owner-coowners-before.png)
+   ![The Workflows list with Order Management Workflow owned by the lab user](images/uc2-owner-column.png)
 
    > [!IMPORTANT]
-   > Sign in to Power Automate with the **same lab account** you are using for Copilot Studio. If the page shows a different environment name in the top right, you are signed in as another account — sign out and back in before continuing.
-
-   **3c. Add your lab user as an owner.** Under **Add a system user or team as an owner**, type your lab user name (start with `user.` followed by your ID). Select your account from the suggestions, matching on the **full email address** rather than the display name.
-
-   ![Typing the lab user into the owner picker, with the matching suggestion shown](images/uc2-owner-picker.png)
-
-   > [!WARNING]
-   > Choose **your own lab account**. The picker also returns the lab author and other tenant users — adding the wrong person will not give you the rights you need.
-
-   **3d. Confirm the change saved.** Your account now appears in the owner list next to the original owner. **This page has no Save button — the change applies the instant you select the user.**
-
-   ![The Co-owners list showing both the lab author and the lab user as owners](images/uc2-owner-added.png)
+   > **Only an owner can publish a workflow.** Use Cases #2 through #5 all depend on publishing, so if the **Owner** column names anyone but you, the rest of this lab cannot be completed — no amount of configuration in the designer will change that.
 
    > [!NOTE]
-   > The lab author stays in the list and **their delete icon is greyed out**. You cannot remove a flow's primary owner from this page, and you don't need to: co-ownership already grants full control — edit, publish, delete, and access to run history. Leaving the author in place is expected.
-
-   > [!NOTE]
-   > This is an automated, trigger-driven flow, so Power Automate can take up to **seven days** to move it onto the new owner's license. Saving the flow forces that switch immediately — which is why the **Save** in step 4 matters even when you have changed nothing in the designer.
+   > After your own import the workflow arrives with status **Published**, and the **Publish** button in the designer is greyed out. That is expected: there is nothing new to publish yet. It becomes available again as soon as you change something and select **Save** — which is exactly what step 4 does.
 4. Go back to the workflow and select **Save** (or press **Ctrl+S**). The **Publish** button becomes available after saving — select **Publish**. If publishing succeeds, the setup is complete and you can **skip step 5**.
 
 5. **(Backup — only if Publish stays disabled or fails.)** Complete both backup steps below.
 
    **5.1 Configure the connection references.** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
 
-   - You should see **five** connection references. If a **sixth** one is present whose connection id starts with `crc3b_draft_bRURqJ.cr.shared_a365outlookmailmcp`, it is not needed for the workflow to run and can be **safely removed** from the solution.
+   - You should see **ten** connection references. Set a connection for each one. If a reference whose connection id starts with `crc3b_draft_bRURqJ.cr.shared_a365outlookmailmcp` is present, it is not needed for the workflow to run and can be **safely removed** from the solution.
    - For all others, select the connection and click **Save**, then confirm with **Save changes**.
 
    ![The LAB: Order Management solution in Power Apps](images/solution-order-management.png)
@@ -426,7 +439,7 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
    > [!WARNING]
    > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
 
-   **5.2 Grant ownership through the Power Platform Admin Center.** Open the **Power Platform Admin Center** ([admin.powerplatform.microsoft.com](https://admin.powerplatform.microsoft.com)) and navigate to **Environments** → your environment → **Flows**. Find the **Order Management Workflow** row, open **More flow actions (…)** → **Share**, add your **lab user** as a **co-owner**, and select **Save**. This grants ownership through the Admin Center if the co-owner change in step 3 did not enable publishing.
+   **5.2 Grant ownership through the Power Platform Admin Center.** Open the **Power Platform Admin Center** ([admin.powerplatform.microsoft.com](https://admin.powerplatform.microsoft.com)) and navigate to **Environments** → your environment → **Flows**. Find the **Order Management Workflow** row, open **More flow actions (…)** → **Share**, add your **lab user** as a **co-owner**, and select **Save**. Use this only if the Owner column in step 3 still does not name you after re-importing the solution.
 
    When done, **retry step 4 (Save and Publish).**
 
