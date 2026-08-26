@@ -105,9 +105,59 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 - **Sample data pre-loaded** into the Dataverse tables used by the order-management use cases ("Tasks" table).
 - Permission to create connections for the services used across the lab: **Microsoft To-Do (Business)**, **Work IQ Calendar / Work IQ**, **Office 365 Outlook**, **Microsoft Dataverse / Dataverse MCP**, Human Review, and **Microsoft 365 Copilot**.
 - Basic familiarity with the Copilot Studio interface.
+- The **Warehouse MCP** custom MCP server imported into your environment — see [Custom MCP servers](#custom-mcp-servers) below. **Use Case #4 cannot be completed without it.**
 
 > [!IMPORTANT]
 > Use the **same work account** for Copilot Studio and every connected service in this lab (Microsoft To Do, Outlook, Dataverse, M365 Copilot, and approvals). The triggers, inline agents, and tools all act on one identity — if they don't match, a workflow can't see your data or write back to your calendar, tasks, or Dataverse records.
+
+#### Custom MCP servers
+
+Use Case #4 gives the inline agent a **Warehouse MCP** tool. That server is **not** part of the platform — it is a custom connector that has to already exist in your environment, and nothing inside this lab creates it. If it is missing you will not find out here; you will find out in Use Case #4, when the tool you are told to add is not in the picker.
+
+It ships with this lab as an unmanaged Dataverse solution under [`assets/mcp-servers`](assets/mcp-servers).
+
+| Solution package | Solution name in the environment | MCP servers it installs |
+|------------------|----------------------------------|-------------------------|
+| [`EnhancedTaskCompletion_1_0_0_2.zip`](assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip) | **Enhanced Task Completion** | **Warehouse MCP** — `check_stock`, `get_restock_date`, `get_fulfillment_status`, `find_alternatives`<br>**Order Management MCP** — `search_orders`, `get_order`, `get_shipment`, `request_return`, `get_return_status` |
+
+Both servers run inline inside the connector as a C# script, over mock data for a fictional retailer. Nothing in them reaches a real system. This lab calls only **Warehouse MCP** — specifically the restock-date lookup in Use Case #4 — but the two connectors ship together in one solution and importing both is harmless.
+
+> [!NOTE]
+> The **Microsoft Dataverse MCP Server**, also used in Use Case #4, is first-party and needs no import — it appears in the **Model Context Protocol** tool list on its own. **Warehouse MCP** is the only server you have to provision.
+
+##### Check whether it is already loaded
+
+Most delivery tenants ship this solution pre-provisioned. Check before importing — a duplicate import is not harmful, but it wastes lab time.
+
+1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names the same environment you are building the workflow in. A mismatch here is the usual cause of "the tool is not in the list".
+
+1. Select **Solutions** in the left navigation and look for **Enhanced Task Completion** (unique name `EnhancedTaskCompletion`, version 1.0.0.2). Sort by **Created** to bring recent imports to the top.
+
+1. **Present?** You are done — skip the import below. **Missing?** Import it.
+
+    > [!TIP]
+    > Faster smoke test if you only want to know whether the agent will find it: in Copilot Studio open any Agent node, select **Tools → + Add tool**, filter to **Model Context Protocol (MCP)**, and look for **Warehouse MCP**. The Solutions list is still the authoritative check, because it also shows you the version.
+
+    > [!NOTE]
+    > **First visit to make.powerapps.com on a fresh lab account?** A **Choose your country/region** dialog opens over the page and hides the Solutions list behind it. Pick a region and select **Get started** to clear it.
+
+##### How to import it
+
+1. Download [`EnhancedTaskCompletion_1_0_0_2.zip`](assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
+
+1. In [make.powerapps.com](https://make.powerapps.com), confirm the environment picker, then select **Solutions → Import solution**.
+
+1. Select **Browse**, choose the `.zip`, then **Next**, then **Import**. The import runs in the background and reports success or failure in a banner when it finishes.
+
+1. Select **Custom connectors** in the left navigation. For **each** MCP connector, select **Create connection** — no credentials are needed, just select **Create**.
+
+    > [!IMPORTANT]
+    > This is an **unmanaged** solution published by *CAT*. Import it into a development or training environment — not production.
+
+    > [!TIP]
+    > If **Warehouse MCP** still does not appear in Copilot Studio's tool picker after a successful import, select **Publish all customizations** on the Solutions page and search again.
+
+The solution comes from the [Enhanced Task Completion sample](https://github.com/microsoft/new-copilot-studio-tech-guide/tree/main/sample/archive). It also carries two demo agents alongside the connectors; this lab does not use them.
 
 ---
 
@@ -548,6 +598,9 @@ You've confirmed that the workflow can generate a grounded response with M365 Co
 ---
 
 ## Use Case #4: Build an Inline Agent for Inventory Management
+
+> [!IMPORTANT]
+> **This use case needs the Warehouse MCP server already present in your environment.** It is a custom connector, not a platform tool, and nothing earlier in this lab creates it — if it is missing, the **Add tool** step below has nothing to select. Two minutes now saves the detour: [is it already loaded?](#check-whether-it-is-already-loaded) In most delivery tenants it ships with the environment. If not, [import it](#how-to-import-it) — the solution package is in this repo.
 
 Extend the **Supplier Delay** branch with an inline **Agent** that uses **MCP servers** to reason over the delay notice, check current stock, and create a follow-up **Dataverse Task**.
 
