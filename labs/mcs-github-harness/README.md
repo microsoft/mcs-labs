@@ -44,13 +44,13 @@ But a loop is only as good as what you put inside it. The harness exposes a **co
 - "My instructions have grown into a wall of text that applies to every conversation"
 - "I don't know when to use knowledge versus a tool"
 
-**Pairs with:** Module 7 — Dedicated: GitHub Copilot harness — Component Model.
+**Pairs with:** Module 10 — Dedicated: GitHub Copilot harness — Component Model.
 
 ---
 
 ## 🌐 Introduction
 
-This is the hands-on companion to **Module 7**, and the longest lab of the bootcamp — deliberately, because this is the harness the rest of the week assumes.
+This is the hands-on companion to **Module 10**, and the longest lab of the bootcamp — deliberately, because this is the harness the rest of the week assumes.
 
 You build an agent from nothing for **Northgate Energy**, an operator investigating an underperforming wind turbine. You give it two knowledge documents — a manufacturer manual and the operator's own dispatch standards — and two MCP tools that read live telemetry and maintenance records. Then you stop telling it what to use and start watching it choose.
 
@@ -273,7 +273,7 @@ Create a new-type agent, write instructions that establish scope rather than scr
 
 #### Walk the component rail
 
-1. Look down the right-hand rail. Every component from Module 7 is here: **Model**, **Skills**, **Tools**, **Knowledge**, **Connected agents** and **Memory**. This rail is the component model made concrete — the design question for any agent is which of these carries which job.
+1. Look down the right-hand rail. Every component from Module 10 is here: **Model**, **Skills**, **Tools**, **Knowledge**, **Connected agents** and **Memory**. This rail is the component model made concrete — the design question for any agent is which of these carries which job.
 
 1. Turn **Memory** on using the toggle at the bottom of the rail.
 
