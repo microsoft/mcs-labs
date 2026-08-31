@@ -10,39 +10,54 @@ event_id: bootcamp-v3
 #   * "module" rows reference first-class entities in the _modules collection.
 #     `title:` and `duration:` on the row override the module's own values.
 #   * "lab" rows reference _labs/<slug>.md. `duration:` overrides the lab's own.
-#   * Labs 1-9 are all authored and carried as `type: lab` rows.
-#   * Labs run 1-9 with no gaps, in chronological order. M8 (Creation — GitHub
-#     harness) is presentation-only: its 30-minute placeholder lab was dropped.
-#     The labs after it were resequenced down one — the former Labs 7-10 are
-#     now 6-9.
+#   * Modules run 1-17 and labs run 1-9, both with no gaps and both in
+#     chronological order. Every module number matches its deck in
+#     `presentations/bootcamp-v3/`, so reordering the schedule means renaming
+#     decks and rewriting the `slides:` paths that point at them.
 #   * `lab: false` on a module row suppresses that module's companion lab from
 #     the hero stats — used for M14, whose mcs-multi-agent lab is not in V3.
-#   * M10 (Consumption Management) closes Day 2 and is presentation-only. It was
-#     inserted after M9, so the former M10-M16 shifted up to M11-M17 — decks in
-#     `presentations/bootcamp-v3/` were renamed to match.
-#   * Day 3 lab timings were rebalanced (2026-08-20): Lab 7 dropped 60 -> 30 and
-#     Labs 8 and 9 rose 30 -> 45 each. The three changes cancel, so Day 3 still
-#     runs 480 minutes with 120 minutes hands-on and still ends at 17:00 — but
-#     everything between Lab 7 and Lab 9 moved earlier. Lunch was then moved back
-#     one slot to sit after Lab 8 rather than before it, so Day 3 lunch runs
-#     12:00-13:00 (was 11:45) and M12 now leads straight into its own Lab 8.
-#     Day 1 and Day 2 are untouched.
-#   * Day 2 module timings were rebalanced (2026-08-24): M8 (Creation — GitHub
-#     harness) dropped 45 -> 30 and M9 (Workflows) rose 30 -> 45. The two cancel,
-#     so Day 2 still totals 525 minutes, content still closes at 16:45 and the
-#     social hour still ends at 17:45. Only two rows move — the afternoon coffee
-#     break (14:30 -> 14:15) and M9's start (14:45 -> 14:30); Lab 6 onward is
-#     unchanged. M9 reuses the shared `workflows` module entity, which stays at
-#     30 for Advanced Agent in a Day — the 45 is a row-level override here.
 #   * A lab row's `duration:` is the *slot*. Each lab's own front matter and its
 #     "Lab Details" table must agree with that slot, and the lab's core use cases
-#     (Extra Credit excluded) should sum to it. Labs 2, 3 and 6 do not currently
+#     (Extra Credit excluded) should sum to it. Labs 2, 6 and 9 do not currently
 #     satisfy this — see the Content Gap Analysis for the open timing items.
+#   * Lab front-matter `bootcamp_order:` belongs to the *original* bootcamp event
+#     (see `bootcamp_lab_orders` in _data/lab-config.yml), not to V3. V3 lab
+#     numbering lives here and in _events/bootcamp-v3.md only. Do not touch
+#     `bootcamp_order` when resequencing V3.
+#
+#   * Deep dives moved ahead of the dedicated harnesses (2026-08-31). M4
+#     (Orchestration, Harnesses & Component Models) dropped 45 -> 30 and now
+#     hands straight into the three deep dives — Instructions, then Skills, then
+#     Knowledge & Tools — with the Copilot harness following them rather than
+#     preceding them. Instructions and Skills and their labs close Day 1;
+#     Knowledge & Tools opens Day 2. Every module still sits immediately before
+#     its own lab, and no module/lab pair is split across a day boundary.
+#
+#     M11 (Creation — GitHub harness) was then pulled back to close Day 2,
+#     following its own harness pair (M10 + Lab 8) rather than opening Day 3.
+#
+#     Day lengths shifted as a result. Day 1 gained 75 minutes and now runs
+#     09:00-17:00, absorbing its 30-minute closing Q&A — Lab 4 closes the day.
+#     Day 2 gained 30 and runs 09:00-19:00 — content to 17:00, then the social,
+#     which is a two-hour block (it was carried as 60 minutes here in error
+#     until 2026-08-31; the real event has always run about two hours).
+#     Day 3 lost 90 and now ends 15:30; that time is deliberate slack for labs
+#     that overrun earlier in the week.
+#
+#     Modules 5-13 were resequenced and their decks renamed to match:
+#       M12 -> M5  Instructions & Descriptions     M8  -> M11 Creation (GitHub)
+#       M13 -> M6  Skills                          M9  -> M12 Workflows
+#       M11 -> M7  Knowledge & Tools               M10 -> M13 Consumption Mgmt
+#       M5  -> M8  Copilot harness                 M6  -> M9  Standard harness
+#       M7  -> M10 GitHub Copilot harness
+#     Modules 1-4 and 14-17 are unchanged. Labs resequenced to match:
+#       Lab 8 -> 3, Lab 9 -> 4, Lab 7 -> 5, Lab 3 -> 6, Lab 4 -> 7,
+#       Lab 5 -> 8, Lab 6 -> 9. Labs 1 and 2 are unchanged.
 
 schedule:
-  # --- Day 1 — Framing, on-ramp & the Copilot harness ---------------------
+  # --- Day 1 — Framing, on-ramp, harnesses & the first deep dives ----------
   - type: day
-    title: "Day 1 — Framing, On-ramp & Copilot Harness"
+    title: "Day 1 — Framing, On-ramp, Harnesses & Deep Dives"
 
   - type: break
     title: "Welcome"
@@ -107,35 +122,44 @@ schedule:
     label: "Module 4"
     title: "Orchestration, Harnesses & Component Models — Overview"
     time: "13:45"
+    duration: 30
+
+  - type: module
+    slug: instructions-and-descriptions
+    label: "Module 5"
+    title: "Deep Dive: Instructions & Descriptions"
+    time: "14:15"
+    duration: 30
+
+  - type: lab
+    slug: mcs-instructions
+    label: "Lab 3"
+    title: "Deep Dive: Instructions & Descriptions"
+    time: "14:45"
     duration: 45
 
   - type: break
     title: "Coffee break / Q&A"
-    time: "14:30"
+    time: "15:30"
     duration: 15
 
   - type: module
-    slug: copilot-harness
-    label: "Module 5"
-    title: "Dedicated: Copilot harness — Agent Builder, pro-code DAs, DAs in MCS"
-    time: "14:45"
-    duration: 45
+    slug: agent-skills
+    label: "Module 6"
+    title: "Deep Dive: Skills"
+    time: "15:45"
+    duration: 30
 
   - type: lab
-    slug: copilot-harness-agent-builder
-    label: "Lab 3"
-    title: "Copilot harness — Agent Builder"
-    time: "15:30"
-    duration: 30
+    slug: mcs-skills
+    label: "Lab 4"
+    title: "Deep Dive: Skills"
+    time: "16:15"
+    duration: 45
 
-  - type: break
-    title: "Q&A"
-    time: "16:00"
-    duration: 30
-
-  # --- Day 2 — Standard & GitHub harnesses, creation & workflows ----------
+  # --- Day 2 — Knowledge & tools, then the three dedicated harnesses -------
   - type: day
-    title: "Day 2 — Standard & GitHub Harnesses, Creation & Workflows"
+    title: "Day 2 — Knowledge & Tools and the Dedicated Harnesses"
 
   - type: break
     title: "Re-Welcome / Re-cap"
@@ -143,123 +167,37 @@ schedule:
     duration: 15
 
   - type: module
-    slug: standard-harness
-    label: "Module 6"
-    title: "Dedicated: Standard harness — Component Model"
-    time: "09:15"
-    duration: 30
-
-  - type: break
-    title: "Coffee break / Q&A"
-    time: "09:45"
-    duration: 15
-
-  - type: lab
-    slug: standard-harness-component-model
-    label: "Lab 4"
-    title: "Standard harness — Component Model"
-    time: "10:00"
-    duration: 45
-
-  - type: module
-    slug: github-copilot-harness
-    label: "Module 7"
-    title: "Dedicated: GitHub Copilot harness — Component Model"
-    time: "10:45"
-    duration: 60
-
-  - type: break
-    title: "Lunch break"
-    time: "11:45"
-    duration: 60
-
-  - type: lab
-    slug: mcs-github-harness
-    label: "Lab 5"
-    title: "GitHub Copilot harness — Component Model"
-    time: "12:45"
-    duration: 60
-
-  - type: module
-    slug: creation-github-harness
-    label: "Module 8"
-    title: "Creation — GitHub harness (from UX, from Chat)"
-    time: "13:45"
-    duration: 30
-
-  - type: break
-    title: "Coffee break / Q&A"
-    time: "14:15"
-    duration: 15
-
-  - type: module
-    slug: workflows
-    label: "Module 9"
-    title: "Workflows"
-    slides: "/presentations/bootcamp-v3/M09.%20Workflows.pptx"
-    time: "14:30"
-    duration: 45
-
-  - type: lab
-    slug: mcs-workflows
-    label: "Lab 6"
-    title: "Workflows"
-    time: "15:15"
-    duration: 60
-
-  - type: module
-    slug: consumption-management
-    label: "Module 10"
-    title: "Consumption Management"
-    time: "16:15"
-    duration: 30
-
-  - type: break
-    title: "Social / Networking"
-    time: "16:45"
-    duration: 60
-
-  # --- Day 3 — Knowledge, tools, skills & operations ----------------------
-  - type: day
-    title: "Day 3 — Knowledge, Tools, Skills & Operations"
-
-  - type: break
-    title: "Re-Welcome / Re-cap / Quiz"
-    time: "09:00"
-    duration: 15
-
-  - type: module
     slug: knowledge-and-tools-deep-dive
-    label: "Module 11"
+    label: "Module 7"
     title: "Deep Dive: Knowledge & Tools"
     time: "09:15"
     duration: 45
-
-  - type: break
-    title: "Coffee break / Q&A"
-    time: "10:00"
-    duration: 15
 
   - type: lab
     slug: mcs-tools
-    label: "Lab 7"
+    label: "Lab 5"
     title: "Deep Dive: Knowledge & Tools"
-    time: "10:15"
+    time: "10:00"
     duration: 30
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "10:30"
+    duration: 15
 
   - type: module
-    slug: instructions-and-descriptions
-    label: "Module 12"
-    title: "Deep Dive: Instructions & Descriptions"
+    slug: copilot-harness
+    label: "Module 8"
+    title: "Dedicated: Copilot harness — Agent Builder, pro-code DAs, DAs in MCS"
     time: "10:45"
-    duration: 30
+    duration: 45
 
   - type: lab
-    slug: mcs-instructions
-    label: "Lab 8"
-    title: "Deep Dive: Instructions & Descriptions"
-    time: "11:15"
-    duration: 45
+    slug: copilot-harness-agent-builder
+    label: "Lab 6"
+    title: "Copilot harness — Agent Builder"
+    time: "11:30"
+    duration: 30
 
   - type: break
     title: "Lunch break"
@@ -267,25 +205,97 @@ schedule:
     duration: 60
 
   - type: module
-    slug: agent-skills
-    label: "Module 13"
-    title: "Deep Dive: Skills"
+    slug: standard-harness
+    label: "Module 9"
+    title: "Dedicated: Standard harness — Component Model"
     time: "13:00"
     duration: 30
 
   - type: lab
-    slug: mcs-skills
-    label: "Lab 9"
-    title: "Deep Dive: Skills"
+    slug: standard-harness-component-model
+    label: "Lab 7"
+    title: "Standard harness — Component Model"
     time: "13:30"
     duration: 45
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "14:15"
+    duration: 15
+
+  - type: module
+    slug: github-copilot-harness
+    label: "Module 10"
+    title: "Dedicated: GitHub Copilot harness — Component Model"
+    time: "14:30"
+    duration: 60
+
+  - type: lab
+    slug: mcs-github-harness
+    label: "Lab 8"
+    title: "GitHub Copilot harness — Component Model"
+    time: "15:30"
+    duration: 60
+
+  - type: module
+    slug: creation-github-harness
+    label: "Module 11"
+    title: "Creation — GitHub harness (from UX, from Chat)"
+    time: "16:30"
+    duration: 30
+
+  - type: break
+    title: "Social / Networking"
+    time: "17:00"
+    duration: 120
+
+  # --- Day 3 — Workflows & operations -------------------------------------
+  - type: day
+    title: "Day 3 — Workflows & Operations"
+
+  - type: break
+    title: "Re-Welcome / Re-cap / Quiz"
+    time: "09:00"
+    duration: 15
+
+  - type: module
+    slug: workflows
+    label: "Module 12"
+    title: "Workflows"
+    slides: "/presentations/bootcamp-v3/M12.%20Workflows.pptx"
+    time: "09:15"
+    duration: 45
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "10:00"
+    duration: 15
+
+  - type: lab
+    slug: mcs-workflows
+    label: "Lab 9"
+    title: "Workflows"
+    time: "10:15"
+    duration: 60
+
+  - type: module
+    slug: consumption-management
+    label: "Module 13"
+    title: "Consumption Management"
+    time: "11:15"
+    duration: 30
+
+  - type: break
+    title: "Lunch break"
+    time: "11:45"
+    duration: 60
 
   - type: module
     slug: multi-agent
     label: "Module 14"
     title: "Multi-Agent"
     slides: "/presentations/bootcamp-v3/M14.%20Multi-Agent.pptx"
-    time: "14:15"
+    time: "12:45"
     duration: 30
     lab: false
 
@@ -293,31 +303,31 @@ schedule:
     slug: coding-agents
     label: "Module 15"
     title: "Coding Agents — plugin, migration, new creation"
-    time: "14:45"
+    time: "13:15"
     duration: 30
 
   - type: break
     title: "Coffee break / Q&A"
-    time: "15:15"
+    time: "13:45"
     duration: 15
 
   - type: module
     slug: alm-and-analytics
     label: "Module 16"
     title: "ALM — Traditional, Component Collections + Reporting, Analytics & Evals"
-    time: "15:30"
+    time: "14:00"
     duration: 30
 
   - type: module
     slug: governance-and-agent-365
     label: "Module 17"
     title: "Governance — Managed environment + Agent 365"
-    time: "16:00"
+    time: "14:30"
     duration: 30
 
   - type: break
     title: "General Q&A"
-    time: "16:30"
+    time: "15:00"
     duration: 30
 
   # --- Continue on your own -----------------------------------------------

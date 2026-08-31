@@ -58,13 +58,13 @@ The distinction is the whole lab: **instructions always apply — descriptions d
 - "I don't know how Instructions differ from Descriptions in practice"
 - "What does the New Orchestrator (Agentic Reasoning Loop) actually change?"
 
-**Pairs with:** Module 12 — Deep Dive: Instructions & Descriptions.
+**Pairs with:** Module 5 — Deep Dive: Instructions & Descriptions.
 
 ---
 
 ## Introduction
 
-This is the hands-on companion to **Module 12 — Deep Dive: Instructions & Descriptions**.
+This is the hands-on companion to **Module 5 — Deep Dive: Instructions & Descriptions**.
 
 You start by making sure a prebuilt sample agent — the **Account Data Lookup Agent** — is configured and working, because you cannot observe planner decisions against data that is not indexed. Then you walk the four levels at which the planner reads metadata, and run a multi-turn conversation where each turn is designed to expose one decision: which child agent it delegated to, which tool it called, and what argument it passed. Finally you build a **new-type agent** and watch the **New Orchestrator** make the same class of decisions repeatedly inside a single turn, without stopping to ask.
 
