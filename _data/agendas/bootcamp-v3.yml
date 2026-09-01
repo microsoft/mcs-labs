@@ -235,19 +235,19 @@ schedule:
     label: "Lab 8"
     title: "GitHub Copilot harness — Component Model"
     time: "15:30"
-    duration: 60
+    duration: 30
 
   - type: module
     slug: creation-github-harness
     label: "Module 11"
     title: "Creation — GitHub harness (from UX, from Chat)"
-    time: "16:30"
+    time: "16:00"
     duration: 30
 
   - type: break
     title: "Social / Networking"
-    time: "17:00"
-    duration: 120
+    time: "16:30"
+    duration: 90
 
   # --- Day 3 — Workflows & operations -------------------------------------
   - type: day
@@ -256,80 +256,72 @@ schedule:
   - type: break
     title: "Re-Welcome / Re-cap / Quiz"
     time: "09:00"
-    duration: 15
+    duration: 30
 
   - type: module
     slug: workflows
     label: "Module 12"
     title: "Workflows"
     slides: "/presentations/bootcamp-v3/M12.%20Workflows.pptx"
-    time: "09:15"
+    time: "09:30"
     duration: 45
 
   - type: break
     title: "Coffee break / Q&A"
-    time: "10:00"
+    time: "10:15"
     duration: 15
 
   - type: lab
     slug: mcs-workflows
     label: "Lab 9"
     title: "Workflows"
-    time: "10:15"
-    duration: 60
-
-  - type: module
-    slug: consumption-management
-    label: "Module 13"
-    title: "Consumption Management"
-    time: "11:15"
-    duration: 30
-
-  - type: break
-    title: "Lunch break"
-    time: "11:45"
+    time: "10:30"
     duration: 60
 
   - type: module
     slug: multi-agent
-    label: "Module 14"
+    label: "Module 13"
     title: "Multi-Agent"
     slides: "/presentations/bootcamp-v3/M14.%20Multi-Agent.pptx"
-    time: "12:45"
+    time: "11:30"
     duration: 30
     lab: false
+
+  - type: break
+    title: "Lunch break"
+    time: "12:00"
+    duration: 60
+
+  - type: module
+    slug: alm-and-analytics
+    label: "Module 14"
+    title: "ALM — Traditional, Component Collections + Reporting, Analytics & Evals"
+    time: "13:00"
+    duration: 30
 
   - type: module
     slug: coding-agents
     label: "Module 15"
     title: "Coding Agents — plugin, migration, new creation"
-    time: "13:15"
+    time: "13:30"
     duration: 30
 
   - type: break
     title: "Coffee break / Q&A"
-    time: "13:45"
+    time: "14:00"
     duration: 15
 
   - type: module
-    slug: alm-and-analytics
+    slug: ai-finops
     label: "Module 16"
-    title: "ALM — Traditional, Component Collections + Reporting, Analytics & Evals"
-    time: "14:00"
-    duration: 30
-
-  - type: module
-    slug: governance-and-agent-365
-    label: "Module 17"
-    title: "Governance — Managed environment + Agent 365"
-    time: "14:30"
-    duration: 30
+    title: "AI FinOps"
+    time: "14:15"
+    duration: 60
 
   - type: break
     title: "General Q&A"
-    time: "15:00"
-    duration: 30
-
+    time: "15:15"
+    duration: 45
   # --- Continue on your own -----------------------------------------------
   # Optional labs with no timetabled slot. Deliberately `link` rows, not `lab`
   # rows: a lab row would count into the event's hero stats and make the
@@ -338,26 +330,26 @@ schedule:
     title: "Continue on your own — optional labs"
 
   - type: link
-    title: "Multi-Agent — extends M14"
+    title: "Multi-Agent — extends M13"
     url: "/mcs-labs/labs/mcs-multi-agent/"
     description: "Build a main agent with child agents for product and account information. 30 min."
 
   - type: link
-    title: "ALM — extends M16"
+    title: "ALM — extends M14"
     url: "/mcs-labs/labs/mcs-alm/"
     description: "Solutions, environment variables, connection references and deployment pipelines. 45 min."
 
   - type: link
-    title: "Component Collections — extends M16"
+    title: "Component Collections — extends M14"
     url: "/mcs-labs/labs/component-collections/"
     description: "Build, share and version component collections across agents. 30 min."
 
   - type: link
-    title: "Analytics and Evaluations — extends M16"
+    title: "Analytics and Evaluations — extends M14"
     url: "/mcs-labs/labs/core-concepts-analytics-evaluations/"
     description: "Monitor performance, configure evaluation test sets and review results. 30 min."
 
   - type: link
-    title: "Governance — extends M17"
+    title: "Governance"
     url: "/mcs-labs/labs/mcs-governance/"
     description: "DLP-restricted agents across green, yellow and red zones. 45 min."
