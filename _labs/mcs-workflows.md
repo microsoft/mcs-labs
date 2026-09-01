@@ -82,7 +82,7 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 | **Trigger** | What starts a Workflow. Triggers can be manual, scheduled (recurrence), or **connector-based** (an event in an external service, like a new Microsoft To Do task). |
 | **Inline agent (agent node)** | A *non-deterministic* agent embedded directly in a Workflow step. Instead of a fixed action, it reasons over the input and decides how to achieve the goal. |
 | **Dynamic content / `/` token** | A reference to data produced earlier in the Workflow (e.g., the trigger's to-do **Title**), inserted into the agent's instructions so it acts on the *actual* item at run time. |
-| **Tools** | The capabilities you grant the agent so it can take action — here the **Work IQ Calendar** MCP (Outlook calendar), the **Update to-do** action, and **Web search**. |
+| **Tools** | The capabilities you grant the agent so it can take action — here the **Find meeting times** and **Create event** actions (Office 365 Outlook), the **Update to-do** action, and **Web search**. |
 
 ---
 
@@ -103,7 +103,7 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 - A work or school **Microsoft 365 account** with **Outlook (calendar)** and **Microsoft To Do** provisioned — the inline agent reads and writes *this* account's calendar and tasks.
 - A **Power Platform environment** where you can edit Dataverse table data and toggle environment settings (System Administrator or System Customizer).
 - **Sample data pre-loaded** into the Dataverse tables used by the order-management use cases ("Tasks" table).
-- Permission to create connections for the services used across the lab: **Microsoft To-Do (Business)**, **Work IQ Calendar / Work IQ**, **Office 365 Outlook**, **Microsoft Dataverse / Dataverse MCP**, Human Review, and **Microsoft 365 Copilot**.
+- Permission to create connections for the services used across the lab: **Microsoft To-Do (Business)**, **Office 365 Outlook**, **Work IQ Mail**, **Microsoft Dataverse / Dataverse MCP**, Human Review, and **Microsoft 365 Copilot**.
 - Basic familiarity with the Copilot Studio interface.
 - The **Warehouse MCP** custom MCP server imported into your environment — see [Custom MCP servers](#custom-mcp-servers) below. **Use Case #4 cannot be completed without it.**
 - The **LAB: Order Management** solution **imported by you** — your environment does not ship with it, and you must own the workflow to publish it. See [The Order Management solution](#the-order-management-solution) below. **Use Cases #2–#5 fail without this.**
@@ -217,7 +217,7 @@ In this lab, you'll build several autonomous Workflows that act on event-driven 
 
 - Create a **Workflow** and configure **manual, scheduled, and connector-based triggers**.
 - Embed a **non-deterministic inline agent** in a workflow, give it goal-oriented instructions, and reference earlier data with the **`/` dynamic-content token**.
-- Equip agents with **tools** across Microsoft 365 and Dataverse (Work IQ Calendar, Update to-do, **Dataverse MCP**, web search) and use **M365 Copilot** inside a workflow.
+- Equip agents with **tools** across Microsoft 365 and Dataverse (Office 365 Outlook's **Find meeting times** and **Create event**, Update to-do, **Dataverse MCP**, web search) and use **M365 Copilot** inside a workflow.
 - Add a **human-in-the-loop approval** step so a person validates an AI-drafted action before the workflow continues.
 - **Publish, run, and monitor** workflows end-to-end — including calling a separate **published agent** from a workflow branch.
 
@@ -317,14 +317,18 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
 7. Give the agent the tools it needs to act. In the agent panel:
 
-   - Under **Tools**, select **+** (Add tool), search for **Work IQ Calendar**, choose **Work IQ Calendar (Preview)** — the MCP server for Outlook calendar operations — and **Create new connection** with your lab account, then **Add**.
-   - Add a second tool: **+** → search **Update to-do** → under **Microsoft To-Do (Business)** choose **Update to-do** → **Add** (it reuses your To Do connection).
+   - Under **Tools**, select **+** (Add tool), search for **Find meeting times**, and choose the result whose connector is **Office 365 Outlook** (*Find meeting time suggestions based on organizer, attendee availability, and time or location constraints*). Select **Create new connection** with your lab account, then **Add**.
+   - Add a second tool: **+** → search **Create event** → choose the **Office 365 Outlook** result (*This operation creates a new event in a calendar*) → **Add** (it reuses the Outlook connection you just created).
+   - Add a third tool: **+** → search **Update to-do** → under **Microsoft To-Do (Business)** choose **Update to-do** → **Create new connection** with your lab account, then **Add**.
    - Turn on the **Web search** toggle so the agent can look things up (e.g., venue or location details referenced in a task).
 
-   > [!TIP]
-   > The **Work IQ Calendar** tool lets the agent read your free/busy and create calendar events; **Update to-do** lets it write the due date, notes, and reminder back onto the task.
+   > [!WARNING]
+   > **Check the connector, not just the tool name.** The picker returns several tools with near-identical names from unrelated connectors — searching `Create event` also returns an **Eventbrite** "Create event" and other look-alikes. Pick the row showing the **Office 365 Outlook** icon; the panel names the connector under the tool title before you select **Add**. Choosing the wrong one leaves the agent unable to reach your calendar.
 
-   ![Agent configured with Work IQ Calendar and Update to-do tools and Web search enabled](images/agent-tools-web-search.png)
+   > [!TIP]
+   > **Find meeting times** lets the agent read your free/busy and propose a slot; **Create event** books the focus block on your Outlook calendar; **Update to-do** writes the due date, notes, and reminder back onto the task. Granting the two calendar actions separately — rather than one broad calendar tool — gives the agent exactly the capabilities the goal needs and nothing more.
+
+   ![Agent configured with the Find meeting times and Create event Outlook tools, Update to-do, and Web search enabled](images/agent-tools-web-search.png)
 
 #### Publish, then trigger the workflow
 
@@ -356,7 +360,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 11. In the run details, select the **Agent** node to expand its details. You'll see the agent's own narration of what it did — checking your free/busy, choosing a time block *inside your working hours*, creating the calendar event, finding the to-do, and updating it. This is the *non-deterministic* part: the agent decided the specifics, they aren't hard-coded in the workflow.
 
     > [!TIP]
-    > The Agent's **Outputs / Response** is a great teaching moment — it shows the model reasoning step-by-step and calling the Work IQ Calendar and Update to-do tools on its own.
+    > The Agent's **Outputs / Response** is a great teaching moment — it shows the model reasoning step-by-step and calling the Find meeting times, Create event, and Update to-do tools on its own.
 
     ![The Agent node run details showing the agent's reasoning and tool actions](images/agent-run-details.png)
 
@@ -912,7 +916,7 @@ To get the most out of Workflows in Copilot Studio:
 * **Trigger first, chat never** — a Workflow runs on an event (a schedule or a connector trigger), so it works in the background without a user present. Pick the trigger that matches the "when" of your automation.
 * **Use an inline agent for the messy middle** — when a step needs judgment (which slot? how to phrase the notes?), the agent node lets the model reason and act, instead of forcing every decision into deterministic logic.
 * **Ground the agent with dynamic content** — the `/` token feeds the agent the *actual* trigger data (the to-do **Title**), so each run acts on the real item, not a fixed example.
-* **Tools are the agent's hands** — without the Work IQ Calendar and Update to-do tools (and web search), the agent could reason but not act. Grant exactly the tools the goal requires.
+* **Tools are the agent's hands** — without the Find meeting times, Create event, and Update to-do tools (and web search), the agent could reason but not act. Grant exactly the tools the goal requires.
 * **Constrain behavior in the instructions** — small additions like "only within my 8:00 AM–5:00 PM working hours" meaningfully change the agent's choices. Iterate on the instructions, then **re-publish**.
 * **Publish before you test** — the trigger is only live after a publish, and changes don't take effect until you re-publish.
 * **Solution-level setup matters** — connection references in the Power Apps solution must be linked to actual connections *before* the workflow can be activated. Canvas-level connections alone are not sufficient; always verify solution connection references.
