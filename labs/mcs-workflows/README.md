@@ -92,14 +92,14 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 - Permission to create connections for the services used across the lab: **Microsoft To-Do (Business)**, **Office 365 Outlook**, **Work IQ Mail**, **Microsoft Dataverse / Dataverse MCP**, Human Review, and **Microsoft 365 Copilot**.
 - Basic familiarity with the Copilot Studio interface.
 - The **Warehouse MCP** custom MCP server imported into your environment — see [Custom MCP servers](#custom-mcp-servers) below. **Use Case #4 cannot be completed without it.**
-- The **LAB: Order Management** solution **imported by you** — your environment does not ship with it, and you must own the workflow to publish it. See [The Order Management solution](#the-order-management-solution) below. **Use Cases #2–#5 fail without this.**
+- The **LAB: Order Management Workflows** solution **imported by you** — your environment does not ship with it, and you must own the workflow to publish it. See [The Order Management solution](#the-order-management-solution) below. **Use Cases #2–#5 fail without this.**
 
 > [!IMPORTANT]
 > Use the **same work account** for Copilot Studio and every connected service in this lab (Microsoft To Do, Outlook, Dataverse, M365 Copilot, and approvals). The triggers, inline agents, and tools all act on one identity — if they don't match, a workflow can't see your data or write back to your calendar, tasks, or Dataverse records.
 
 #### The Order Management solution
 
-Use Cases #2 through #5 all build on a pre-built **Order Management Workflow**, which ships inside the **LAB: Order Management** solution together with its agent components and connection references.
+Use Cases #2 through #5 all build on a pre-built **Order Management Workflow**, which ships inside the **LAB: Order Management Workflows** solution together with its connection references.
 
 **Your environment does not come with it — you import it yourself.** That is deliberate: importing the solution makes *you* the owner of everything inside it.
 
@@ -108,13 +108,13 @@ Use Cases #2 through #5 all build on a pre-built **Order Management Workflow**, 
 
 | Solution package | Solution name in the environment | What it contains |
 |------------------|----------------------------------|------------------|
-| [`LABOrderManagement_1_0_0_6.zip`](assets/solutions/LABOrderManagement_1_0_0_6.zip) | **LAB: Order Management** | The **Order Management Workflow**, its agent components, and ten connection references |
+| [`LABOrderManagementWorkflows_1_0_0_7.zip`](assets/solutions/LABOrderManagementWorkflows_1_0_0_7.zip) | **LAB: Order Management Workflows** | The **Order Management Workflow** and its four connection references |
 
-The workflow binds to first-party connectors only — Office 365 Outlook, Microsoft Dataverse, M365 Copilot, Human review (Advanced Approvals), the Agent node, and the Outlook Mail MCP. It does **not** carry the custom **Warehouse MCP** that Use Case #4 uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) below.
+The workflow binds to first-party connectors only — Office 365 Outlook, M365 Copilot, Human review (Advanced Approvals), and the Agent node. It does **not** carry the custom **Warehouse MCP** that Use Case #4 uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) below.
 
 ##### Import the solution
 
-1. Download [`LABOrderManagement_1_0_0_6.zip`](assets/solutions/LABOrderManagement_1_0_0_6.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
+1. Download [`LABOrderManagementWorkflows_1_0_0_7.zip`](assets/solutions/LABOrderManagementWorkflows_1_0_0_7.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
 
 1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names your **DEV - User \<your ID\>** environment.
 
@@ -123,14 +123,26 @@ The workflow binds to first-party connectors only — Office 365 Outlook, Micros
 
 1. Select **Solutions** in the left navigation, then **Import solution**.
 
-1. Select **Browse**, choose the `.zip`, then **Next**. Review the details — name `LABOrderManagement`, type **Unmanaged**, publisher **CAT** — and select **Next** again.
+1. Select **Browse**, choose the `.zip`, then **Next**. Review the details — name `LABOrderManagementWorkflows`, type **Unmanaged**, publisher **CAT**, version **1.0.0.7** — and select **Next** again.
 
-1. The wizard stops on a **Connections** step reading *"Re-establish connections to activate your solution — 10 updates needed."* **Sign in here for each service listed.** Every connection you establish now is one you do not have to fix later, and a green check means that service is ready.
+1. The wizard stops on a **Connections** step reading *"Re-establish connections to activate your solution."* with **4 updates needed**. **Sign in here for each service listed.** Every connection you establish now is one you do not have to fix later, and a green check means that service is ready.
+
+    Each row is named after the **node** that uses it, not the connector:
+
+    | Row | Connector behind it |
+    |-----|---------------------|
+    | **When a new email arrives** | Office 365 Outlook |
+    | **Human review** | Advanced Approvals |
+    | **M365 Copilot** | M365 Copilot |
+    | **Agent** | Agent node |
+
+    > [!NOTE]
+    > A row may already show a green **Valid connection** without you doing anything — that happens when you have already signed in to that service in this environment, for example while building the Use Case #1 workflow. Only the rows without a green check need action.
 
     > [!TIP]
-    > You can select **Import** without completing this step. The solution still imports, but its connection references arrive unset and you have to set all ten by hand in Use Case #2 step 2. Doing it here is much faster.
+    > You can select **Import** without completing this step. The solution still imports, but its connection references arrive unset and you have to set all four by hand in Use Case #2 step 5.1. Doing it here is much faster.
 
-1. Select **Import**. The import runs in the background and reports success in a banner — allow up to a minute.
+1. Select **Import**. The import runs in the background and reports success in a banner reading *"Solution "LAB: Order Management Workflows" imported successfully"* — allow up to a minute.
 
 1. Open **Workflows** in Copilot Studio and confirm **Order Management Workflow** is listed with **you** in the **Owner** column and a status of **Published**.
 
@@ -139,9 +151,11 @@ The workflow binds to first-party connectors only — Office 365 Outlook, Micros
 
 ##### If a copy is already there
 
-If **LAB: Order Management** already appears in your **Solutions** list — someone else installed it, or you are re-running the lab — delete it first, then import your own copy using the steps above. You must be the importer to own the workflow.
+A freshly provisioned lab environment does **not** ship this solution, so on a first run there is nothing to remove — go straight to the import steps above.
 
-1. In **Solutions**, select the **LAB: Order Management** row and choose **Delete** on the command bar, then confirm.
+Only if **LAB: Order Management Workflows** already appears in your **Solutions** list — you are re-running the lab, or someone else installed it into a shared environment — delete it first, then import your own copy. You must be the importer to own the workflow.
+
+1. In **Solutions**, select the **LAB: Order Management Workflows** row and choose **Delete** on the command bar, then confirm.
 
     > [!NOTE]
     > Power Apps warns that deleting an **unmanaged** solution removes the solution but **not the objects inside it**. If **Order Management Workflow** still appears in Copilot Studio → **Workflows** afterwards, delete it there too — its row **`…`** menu has a **Delete** command — before importing your copy.
@@ -377,7 +391,7 @@ Configure and publish a pre-built **Order Management Workflow** that classifies 
 
 In this section, you'll configure connection references in the Power Apps solution, transfer workflow ownership, open the workflow to verify canvas-level connections, explore the email classification categories, publish, and verify everything works by sending a test email that triggers the "Other" classification path.
 
-**Scenario:** Your environment contains a pre-built Order Management Workflow that automatically classifies incoming emails with "Order Management" in the subject. It routes emails into one of four categories — **Quote Request**, **Supplier Delay**, **Customer Inquiry**, or **Other** — and takes different automated actions for each. Before the workflow can run, you need to configure all its connections and link them in the solution.
+**Scenario:** The solution you imported in the prerequisites contains a pre-built Order Management Workflow that automatically classifies incoming emails with "Order Management" in the subject. It routes emails into one of four categories — **Quote Request**, **Supplier Delay**, **Customer Inquiry**, or **Other** — and takes different automated actions for each. Before the workflow can run, you need to configure all its connections and link them in the solution.
 
 ### Objective
 
@@ -410,7 +424,7 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 3. **Confirm you own the workflow.** In **Copilot Studio**, select **Workflows** in the left navigation and find **Order Management Workflow**. Check the **Owner** column.
 
    - **It shows your own lab user** — you are set. Continue to step 4.
-   - **It shows the lab author** — the prerequisite import was skipped. Go back to [The Order Management solution](#the-order-management-solution), delete the solution and import your own copy, then return here.
+   - **It shows anyone other than you** — the workflow came from someone else's import, not yours. Go back to [The Order Management solution](#the-order-management-solution), delete the solution and import your own copy, then return here.
 
    ![The Workflows list with Order Management Workflow owned by the lab user](images/uc2-owner-column.png)
 
@@ -423,12 +437,12 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
 5. **(Backup — only if Publish stays disabled or fails.)** Complete both backup steps below.
 
-   **5.1 Configure the connection references.** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
+   **5.1 Configure the connection references.** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management Workflows** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
 
-   - You should see **ten** connection references. Set a connection for each one. If a reference whose connection id starts with `crc3b_draft_bRURqJ.cr.shared_a365outlookmailmcp` is present, it is not needed for the workflow to run and can be **safely removed** from the solution.
-   - For all others, select the connection and click **Save**, then confirm with **Save changes**.
+   - You should see **four** connection references — Office 365 Outlook, Advanced Approvals (Human review), M365 Copilot, and the Agent node. Set a connection for each one.
+   - Select the connection and click **Save**, then confirm with **Save changes**.
 
-   ![The LAB: Order Management solution in Power Apps](images/solution-order-management.png)
+   ![The LAB: Order Management Workflows solution in Power Apps](images/solution-order-management.png)
 
    > [!WARNING]
    > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
@@ -446,14 +460,14 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
    ![The subject filter expression configured on the trigger](images/subject-filter-expression.png)
 
-7. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the four classification categories configured in the node. Each category has a name and example text that the AI model uses to determine where an incoming email should be routed:
+7. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the classification categories. **Three** are configured explicitly in the node, and the panel notes that *a "Default" category is automatically created for inputs that don't match any category* — that automatic category is what the canvas shows as the **Other** branch. Each configured category has a name and example text that the AI model uses to determine where an incoming email should be routed:
 
    - **Quote Request** — emails requesting pricing or quotes for products/services
    - **Supplier Delay** — notifications about delays from suppliers
    - **Customer Inquiry** — general questions from customers about orders, shipping, etc.
-   - **Other** — anything that doesn't fit the above categories (spam, promotions, irrelevant)
+   - **Other** — the automatic **Default** category: anything that doesn't match the three above (spam, promotions, irrelevant). You will not find it in the **Categories** list, because the Classify node creates it for you.
 
-   ![All four classification categories with their example descriptions](images/classify-categories-all.png)
+   ![The Classify node categories, with the three configured categories listed](images/classify-categories-all.png)
 
    > [!TIP]
    > **Improving classification accuracy:** You can add multiple examples to each category to handle different phrasings and edge cases. For instance, a "Quote Request" might come as *"Can you send me pricing for 500 units?"* or *"We'd like a formal quotation for the attached spec."* Adding diverse examples helps the model generalize better. A good testing exercise is to try common cases **and** edge cases using the **Test** tab in the Classify node, observe how categories get assigned, and refine the category descriptions accordingly.
@@ -592,14 +606,20 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
    ![The run details showing the Human Request node waiting for approval](images/customer-inquiry-human-request-waiting.png)
 
-8. Go to **Outlook** and open the incoming approval email. Review the proposed M365 Copilot reply, then select **Yes** to approve sending it.
+8. Go to **Outlook** and open the incoming approval email. It arrives from **Microsoft Power Automate** with the subject **"Action Needed: Review Customer Enquiry Reply"** and opens *"Dear reviewer, A customer inquiry has come in…"*. Review the proposed M365 Copilot reply, choose **Yes** under **Send proposed reply from M365?**, and select **Submit**.
+
+   > [!NOTE]
+   > The approval card is an **actionable message**, so Outlook renders the Yes/No choice and a **Submit** button inside the email itself — approving is two clicks (pick **Yes**, then **Submit**), not one. Outlook may also show a **Trust sender** prompt above the card; the card still works without actioning it.
 
    > [!TIP]
    > If you don't see the approval email, try **refreshing** Outlook. If it still doesn't land, go back to the workflow, open the **Build** tab, re-establish the connection on the **Human review** node by creating a new one, then select **Save** > **Publish** and run the test again.
 
    ![The approval email in Outlook with the proposed reply and Yes button](images/customer-inquiry-approval-email.png)
 
-9. Return to your inbox and verify that the approved reply email lands there. This confirms the workflow resumed after human approval and sent the response automatically.
+9. Return to your inbox and verify that the approved reply email lands there — it arrives with the subject **"Your inquiry - Contoso Electronics"** and opens *"Dear Customer,"*. This confirms the workflow resumed after human approval and sent the response automatically.
+
+   > [!NOTE]
+   > Allow a couple of minutes after **Submit**. The workflow has to resume from the paused Human review node before it sends, so the reply does not appear instantly.
 
    ![The approved reply email received in the inbox](images/customer-inquiry-reply-received.png)
 
