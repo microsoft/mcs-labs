@@ -282,7 +282,7 @@ schedule:
     slug: multi-agent
     label: "Module 13"
     title: "Multi-Agent"
-    slides: "/presentations/bootcamp-v3/M14.%20Multi-Agent.pptx"
+    slides: "/presentations/bootcamp-v3/M13.%20Multi-Agent.pptx"
     time: "11:30"
     duration: 30
     lab: false
