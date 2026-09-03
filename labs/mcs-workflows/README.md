@@ -108,13 +108,13 @@ Use Cases #2 through #5 all build on a pre-built **Order Management Workflow**, 
 
 | Solution package | Solution name in the environment | What it contains |
 |------------------|----------------------------------|------------------|
-| [`LABOrderManagementWorkflows_1_0_0_7.zip`](assets/solutions/LABOrderManagementWorkflows_1_0_0_7.zip) | **LAB: Order Management Workflows** | The **Order Management Workflow** and its four connection references |
+| [`LABOrderManagementWorkflows_1_0_0_8.zip`](assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip) | **LAB: Order Management Workflows** | The **Order Management Workflow**, the **Price Quote Agent** with its price-quote skill and Dataverse/Mail tools, and six connection references |
 
-The workflow binds to first-party connectors only — Office 365 Outlook, M365 Copilot, Human review (Advanced Approvals), and the Agent node. It does **not** carry the custom **Warehouse MCP** that Use Case #4 uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) below.
+The workflow binds to first-party connectors only — Office 365 Outlook, M365 Copilot, Human review (Advanced Approvals), the Agent node, Microsoft Dataverse, and the Outlook Mail MCP. It does **not** carry the custom **Warehouse MCP** that Use Case #4 uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) below.
 
 ##### Import the solution
 
-1. Download [`LABOrderManagementWorkflows_1_0_0_7.zip`](assets/solutions/LABOrderManagementWorkflows_1_0_0_7.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
+1. Download [`LABOrderManagementWorkflows_1_0_0_8.zip`](assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
 
 1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names your **DEV - User \<your ID\>** environment.
 
@@ -123,24 +123,26 @@ The workflow binds to first-party connectors only — Office 365 Outlook, M365 C
 
 1. Select **Solutions** in the left navigation, then **Import solution**.
 
-1. Select **Browse**, choose the `.zip`, then **Next**. Review the details — name `LABOrderManagementWorkflows`, type **Unmanaged**, publisher **CAT**, version **1.0.0.7** — and select **Next** again.
+1. Select **Browse**, choose the `.zip`, then **Next**. Review the details — name `LABOrderManagementWorkflows`, type **Unmanaged**, publisher **CAT**, version **1.0.0.8** — and select **Next** again.
 
-1. The wizard stops on a **Connections** step reading *"Re-establish connections to activate your solution."* with **4 updates needed**. **Sign in here for each service listed.** Every connection you establish now is one you do not have to fix later, and a green check means that service is ready.
+1. The wizard stops on a **Connections** step reading *"Re-establish connections to activate your solution."* with **6 updates needed**. **Sign in here for each service listed.** Every connection you establish now is one you do not have to fix later, and a green check means that service is ready.
 
-    Each row is named after the **node** that uses it, not the connector:
+    Four rows are named after the **node** that uses them; the remaining two show their raw connection-reference logical name instead, which is expected:
 
-    | Row | Connector behind it |
-    |-----|---------------------|
+    | Row as displayed | Connector behind it |
+    |------------------|---------------------|
     | **When a new email arrives** | Office 365 Outlook |
     | **Human review** | Advanced Approvals |
     | **M365 Copilot** | M365 Copilot |
     | **Agent** | Agent node |
+    | `crc3b_draft_bRURqJ.cr.shared_commondataserviceforapps.…` | Microsoft Dataverse |
+    | `crc3b_draft_bRURqJ.cr.shared_a365outlookmailmcp.…` | Outlook Mail MCP |
 
     > [!NOTE]
-    > A row may already show a green **Valid connection** without you doing anything — that happens when you have already signed in to that service in this environment, for example while building the Use Case #1 workflow. Only the rows without a green check need action.
+    > Rows often show a green **Valid connection** on their own — the wizard matches or creates first-party connections for you, and a row that shows a **Sign in** button may still resolve by itself a moment later. Only act on rows that still lack a green check.
 
     > [!TIP]
-    > You can select **Import** without completing this step. The solution still imports, but its connection references arrive unset and you have to set all four by hand in Use Case #2 step 5.1. Doing it here is much faster.
+    > You can select **Import** without completing this step. The solution still imports, but its connection references arrive unset and you have to set all six by hand in Use Case #2 step 5.1. Doing it here is much faster.
 
 1. Select **Import**. The import runs in the background and reports success in a banner reading *"Solution "LAB: Order Management Workflows" imported successfully"* — allow up to a minute.
 
@@ -439,7 +441,7 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
    **5.1 Configure the connection references.** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management Workflows** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
 
-   - You should see **four** connection references — Office 365 Outlook, Advanced Approvals (Human review), M365 Copilot, and the Agent node. Set a connection for each one.
+   - You should see **six** connection references — Office 365 Outlook, Advanced Approvals (Human review), M365 Copilot, the Agent node, Microsoft Dataverse, and the Outlook Mail MCP. Set a connection for each one.
    - Select the connection and click **Save**, then confirm with **Save changes**.
 
    ![The LAB: Order Management Workflows solution in Power Apps](images/solution-order-management.png)
@@ -793,17 +795,17 @@ You've added a reasoning agent that enriches a supplier delay notice with live w
 
 ## 💰 Use Case #5 (Bonus): Call a Price Quote Specialist Agent from a Workflow
 
-Connect the **Quote Request** branch to a reusable, published **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse product data**, and **WorkIQ Mail** to produce and send a professional quote.
+Connect the **Quote Request** branch to a reusable **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse product data**, and **WorkIQ Mail** to produce and send a professional quote. The agent ships inside the solution you imported and arrives in **Draft** — you publish it in step 4 below.
 
 **Summary of tasks**
 
 In this section, you'll inspect the existing Price Quote Agent, wire it into the Quote Request branch, pass the sender and email body as dynamic inputs, publish the workflow, and verify the generated quote email end-to-end.
 
-**Scenario:** A customer asks for pricing on a bundle of products. Rather than rebuilding the quote logic inside the workflow, you can reuse an already-published agent that knows how to look up pricing guidance, combine it with product catalog data, and send a polished quote response.
+**Scenario:** A customer asks for pricing on a bundle of products. Rather than rebuilding the quote logic inside the workflow, you can reuse a purpose-built agent that knows how to look up pricing guidance, combine it with product catalog data, and send a polished quote response.
 
 ### Objective
 
-Configure the **Quote Request** path to use the published **Price Quote Agent**, provide it with the email sender and request body at runtime, and verify that it completes the quote process and sends the resulting email.
+Publish the **Price Quote Agent**, configure the **Quote Request** path to use it, provide it with the email sender and request body at runtime, and verify that it completes the quote process and sends the resulting email.
 
 ---
 
@@ -837,7 +839,7 @@ Configure the **Quote Request** path to use the published **Price Quote Agent**,
 
 6. Select the **+** next to **Quote Request** and choose **Agent**.
 
-7. In the **Agent** dropdown, select **Price Quote Agent** — the existing published agent.
+7. In the **Agent** dropdown, select **Price Quote Agent** — the agent you published in step 4.
 
    > [!IMPORTANT]
    > **Only published agents appear in the dropdown:** When using the Agent node with an existing agent, only agents that have been **published** (not just saved) will appear in the agent selection dropdown. If your agent is missing from the list, go to the agent page and publish it first.
