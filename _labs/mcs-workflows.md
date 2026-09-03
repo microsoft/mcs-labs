@@ -841,7 +841,14 @@ Publish the **Price Quote Agent**, configure the **Quote Request** path to use i
    ![The Price Quote Agent in the new Build experience showing instructions tools and knowledge](images/uc5-agent-new-experience.png)
 
    > [!IMPORTANT]
-   > The **Mail** tool's connection may not import with the solution. In the published **Price Quote Agent**, open **Tools > Mail** and check its **Connection**. If it shows **Not Connected**, select **Create new connection > Create** and **Confirm** (sign in with your lab account). Without a connected Mail tool the agent will reason over the quote but never send the email, so the quote email in the final step will not arrive.
+   > **Check both the connection *and* the tool list on each MCP tool.** Open **Tools > Mail**, then **Tools > Microsoft Dataverse MCP Server**, and look at two things in each panel:
+   >
+   > - **Connection** — if it shows **Not Connected**, select **Create new connection > Create** and **Confirm** (sign in with your lab account).
+   > - **Tools / Inputs** — this should list the operations the MCP server exposes. If it reads **"No tools found"**, the MCP server is not surfacing any operations to the agent in this environment.
+   >
+   > The second check is the one that bites, because a **"No tools found"** panel still shows a perfectly valid connection. Re-creating the connection does **not** fix it — that has been tested. When either MCP server exposes no tools, the agent still runs and still calculates the quote correctly, but it cannot send anything: the run **Succeeds**, and the Agent node's output reads *"Since Work IQ and Dataverse connectors are not available as tools in this environment, I'll present the complete results here for the orders team to act on."* The quote email in step 14 never arrives.
+   >
+   > If you see that, the environment is missing the MCP server provisioning rather than anything you configured. Read the quote out of the Agent node's output in the run details and treat steps 13–14 as read-only, or ask your instructor whether the Dataverse MCP and Mail (Work IQ) servers are enabled for this tenant.
 
 3. Open the **price-quote** skill and read through what it does. The skill spells out exactly how to build a quote: read the customer name and the requested items from the request, use **Dataverse** to look up the customer's account and employee count and derive their pricing **tier** (Small / Mid / Large), take each item's SKU and list price from the **Sales & Pricing Guide**, then calculate the line totals, subtotal, tier discount, and final total. It finishes by reading the payment terms and delivery lead time and using **Work IQ** to email a fully formatted quote to the customer — applying only the prices and discounts found in the knowledge, never estimates.
 
