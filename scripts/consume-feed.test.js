@@ -81,6 +81,19 @@ test('relativizeImages: own-origin image URLs become relative, others untouched'
   );
 });
 
+test('relativizeImages: own-origin assets/ URLs become relative too', () => {
+  const base = 'https://microsoft.github.io/mcs-labs';
+  const md =
+    '[pdf](https://microsoft.github.io/mcs-labs/labs/demo/assets/knowledge-documents/manual.pdf) ' +
+    '[zip](https://microsoft.github.io/mcs-labs/labs/demo/assets/mcp-servers/s.zip) ' +
+    '[ext](https://partner.example.com/mcs-labs/labs/other/assets/c.pdf)';
+  const out = consume.relativizeImages(md, base, 'labs', 'demo');
+  assert.match(out, /\]\(assets\/knowledge-documents\/manual\.pdf\)/);
+  assert.match(out, /\]\(assets\/mcp-servers\/s\.zip\)/);
+  assert.match(out, /partner\.example\.com\/mcs-labs\/labs\/other\/assets\/c\.pdf/); // external untouched
+});
+
+
 const matter = require('gray-matter');
 
 test('renderFrontMatter: emits a YAML front-matter block', () => {
@@ -191,10 +204,12 @@ test('round-trip: self-only materialized bodies equal committed collection bodie
       const srcDir = path.join(process.cwd(), `_${collection}`);
       for (const f of fs.readdirSync(srcDir).filter((x) => x.endsWith('.md'))) {
         // `./images/` and `images/` are equivalent relative refs; the producer canonicalizes
-        // to `images/`, so normalize the committed side before comparing.
+        // to `images/`, so normalize the committed side before comparing. Same for `assets/`,
+        // which the producer absolutizes alongside images so feed consumers can fetch the
+        // PDFs and solution packages labs link to.
         const committed = matter(fs.readFileSync(path.join(srcDir, f), 'utf8')).content
-          .replace(/\]\(\.\/images\//g, '](images/')
-          .replace(/src=(["'])\.\/images\//g, 'src=$1images/');
+          .replace(/\]\(\.\/(images|assets)\//g, ']($1/')
+          .replace(/src=(["'])\.\/(images|assets)\//g, 'src=$1$2/');
         const materializedPath = path.join(out, `_${collection}`, f);
         assert.ok(fs.existsSync(materializedPath), `materialized ${collection}/${f} exists`);
         const materialized = matter(fs.readFileSync(materializedPath, 'utf8')).content;

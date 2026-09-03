@@ -70,12 +70,19 @@ function mergeItems(taggedLists) {
 module.exports.mergeItems = mergeItems;
 
 function relativizeImages(markdown, ownBaseUrl, collection, slug) {
-  // Literal (non-regex) global replace of the own-origin images prefix. Using
+  // Literal (non-regex) global replace of the own-origin prefixes. Using
   // split/join avoids constructing a RegExp from a URL string (which trips
   // CodeQL's incomplete-hostname-regexp rule) and is exactly what we want here.
-  const absPrefix = `${ownBaseUrl}/${collection}/${slug}/images/`;
-  return String(markdown == null ? '' : markdown).split(absPrefix).join('images/');
+  // Mirrors OWN_DIRS in build-feed.js: whatever that absolutizes on the way out
+  // is made relative again for the origin that owns the lab.
+  let out = String(markdown == null ? '' : markdown);
+  for (const dir of ['images', 'assets']) {
+    const absPrefix = `${ownBaseUrl}/${collection}/${slug}/${dir}/`;
+    out = out.split(absPrefix).join(`${dir}/`);
+  }
+  return out;
 }
+
 module.exports.relativizeImages = relativizeImages;
 
 function renderFrontMatter(metadata) {
