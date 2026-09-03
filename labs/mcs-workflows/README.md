@@ -90,16 +90,47 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 - A **Power Platform environment** where you can edit Dataverse table data and toggle environment settings (System Administrator or System Customizer).
 - **Sample data pre-loaded** into the Dataverse tables used by the order-management use cases ("Tasks" table).
 - Permission to create connections for the services used across the lab: **Microsoft To-Do (Business)**, **Office 365 Outlook**, **Work IQ Mail**, **Microsoft Dataverse / Dataverse MCP**, Human Review, and **Microsoft 365 Copilot**.
+- The **Dataverse connection reference** in the pre-loaded **LAB: Account Lookup Agent** solution repointed to a connection you own — see [Dataverse connection reference — do this first](#dataverse-connection-reference--do-this-first). **Every Dataverse tool in this lab fails silently without it.**
 - Basic familiarity with the Copilot Studio interface.
 - The **Warehouse MCP** custom MCP server imported into your environment — see [Custom MCP servers](#custom-mcp-servers) below. **Use Case #4 cannot be completed without it.**
-- The **LAB: Order Management** solution **imported by you** — your environment does not ship with it, and you must own the workflow to publish it. See [The Order Management solution](#the-order-management-solution) below. **Use Cases #2–#5 fail without this.**
+- The **LAB: Order Management Workflows** solution **imported by you** — your environment does not ship with it, and you must own the workflow to publish it. See [The Order Management solution](#the-order-management-solution) below. **Use Cases #2–#5 fail without this.**
 
 > [!IMPORTANT]
 > Use the **same work account** for Copilot Studio and every connected service in this lab (Microsoft To Do, Outlook, Dataverse, M365 Copilot, and approvals). The triggers, inline agents, and tools all act on one identity — if they don't match, a workflow can't see your data or write back to your calendar, tasks, or Dataverse records.
 
+#### Dataverse connection reference — do this first
+
+**Do this before anything else in the lab.** Your environment ships with the **LAB: Account Lookup Agent** solution, and the Dataverse connection reference inside it is owned by the workshop author, not by you — it arrives with **Owner** set to someone else and **Status: Off**. Until you point it at a connection of your own, anything that reaches Dataverse fails, and it fails quietly: the tool shows a healthy connection but lists no operations, and an agent that needs it will report that the Dataverse connector is "not available as a tool" rather than erroring.
+
+> [!NOTE]
+> **Already did this in another lab in this event?** You do not need to repeat it — the fix is per environment, not per lab. Come back to this section only if a Dataverse tool starts misbehaving: no rows returned, a tool that lists no operations, or an agent that says it cannot reach Dataverse.
+
+1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names your **DEV - User <your ID>** environment.
+
+1. Select **Solutions**, open **LAB: Account Lookup Agent**, then select **Connection references** in the left pane. There is exactly one, named `copilots_header_cref7_LookupDataAgent.shared_commondataserviceforapps.…`. Note its **Owner** — it will not be you.
+
+1. Tick the row's checkbox and choose **Edit** on the command bar.
+
+1. In the **Connection** field, open the dropdown and choose **New connection**. A new browser tab opens on the connectors list.
+
+    > [!WARNING]
+    > **Two connectors are both called "Microsoft Dataverse."** Pick the modern one — its id is `shared_commondataserviceforapps`. The other is the legacy `shared_commondataservice` connector, and a connection created from it can never satisfy this reference. If you are unsure, go straight to `https://make.powerapps.com/environments/<your environment id>/connections/available/shared_commondataserviceforapps`.
+
+1. Select **Create**, sign in with **your lab account**, and wait for the connection to show **Connected**.
+
+1. Return to the connection reference tab, open the **Connection** dropdown again, and select the connection that now carries **your** account name.
+
+    > [!TIP]
+    > If your new connection is not in the list, the dropdown is stale rather than empty — reload the page and reopen the reference. The field's own **Refresh** button re-queries the service but does not re-open the list.
+
+1. Select **Save** — **and then confirm the follow-up screen that appears.**
+
+    > [!IMPORTANT]
+    > **Save on its own does not commit the change.** A confirmation screen follows it. If you close the panel or navigate away without confirming, the edit is discarded silently: nothing errors, and the reference simply shows the old connection again the next time you open it. Confirm, then reload the page and reopen the reference to check it now names your account. That reload is the only reliable proof the rebind stuck.
+
 #### The Order Management solution
 
-Use Cases #2 through #5 all build on a pre-built **Order Management Workflow**, which ships inside the **LAB: Order Management** solution together with its agent components and connection references.
+Use Cases #2 through #5 all build on a pre-built **Order Management Workflow**, which ships inside the **LAB: Order Management Workflows** solution together with its connection references.
 
 **Your environment does not come with it — you import it yourself.** That is deliberate: importing the solution makes *you* the owner of everything inside it.
 
@@ -108,13 +139,13 @@ Use Cases #2 through #5 all build on a pre-built **Order Management Workflow**, 
 
 | Solution package | Solution name in the environment | What it contains |
 |------------------|----------------------------------|------------------|
-| [`LABOrderManagement_1_0_0_6.zip`](assets/solutions/LABOrderManagement_1_0_0_6.zip) | **LAB: Order Management** | The **Order Management Workflow**, its agent components, and ten connection references |
+| [`LABOrderManagementWorkflows_1_0_0_8.zip`](assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip) | **LAB: Order Management Workflows** | The **Order Management Workflow**, the **Price Quote Agent** with its price-quote skill and Dataverse/Mail tools, and six connection references |
 
-The workflow binds to first-party connectors only — Office 365 Outlook, Microsoft Dataverse, M365 Copilot, Human review (Advanced Approvals), the Agent node, and the Outlook Mail MCP. It does **not** carry the custom **Warehouse MCP** that Use Case #4 uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) below.
+The workflow binds to first-party connectors only — Office 365 Outlook, M365 Copilot, Human review (Advanced Approvals), the Agent node, Microsoft Dataverse, and the Outlook Mail MCP. It does **not** carry the custom **Warehouse MCP** that Use Case #4 uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) below.
 
 ##### Import the solution
 
-1. Download [`LABOrderManagement_1_0_0_6.zip`](assets/solutions/LABOrderManagement_1_0_0_6.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
+1. Download [`LABOrderManagementWorkflows_1_0_0_8.zip`](assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip). Use the **raw** file — GitHub's file preview will not give you a usable archive, and a `.zip` your browser has helpfully unpacked will not import.
 
 1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names your **DEV - User \<your ID\>** environment.
 
@@ -123,14 +154,28 @@ The workflow binds to first-party connectors only — Office 365 Outlook, Micros
 
 1. Select **Solutions** in the left navigation, then **Import solution**.
 
-1. Select **Browse**, choose the `.zip`, then **Next**. Review the details — name `LABOrderManagement`, type **Unmanaged**, publisher **CAT** — and select **Next** again.
+1. Select **Browse**, choose the `.zip`, then **Next**. Review the details — name `LABOrderManagementWorkflows`, type **Unmanaged**, publisher **CAT**, version **1.0.0.8** — and select **Next** again.
 
-1. The wizard stops on a **Connections** step reading *"Re-establish connections to activate your solution — 10 updates needed."* **Sign in here for each service listed.** Every connection you establish now is one you do not have to fix later, and a green check means that service is ready.
+1. The wizard stops on a **Connections** step reading *"Re-establish connections to activate your solution."* with **6 updates needed**. **Sign in here for each service listed.** Every connection you establish now is one you do not have to fix later, and a green check means that service is ready.
+
+    Four rows are named after the **node** that uses them; the remaining two show their raw connection-reference logical name instead, which is expected:
+
+    | Row as displayed | Connector behind it |
+    |------------------|---------------------|
+    | **When a new email arrives** | Office 365 Outlook |
+    | **Human review** | Advanced Approvals |
+    | **M365 Copilot** | M365 Copilot |
+    | **Agent** | Agent node |
+    | `crc3b_draft_bRURqJ.cr.shared_commondataserviceforapps.…` | Microsoft Dataverse |
+    | `crc3b_draft_bRURqJ.cr.shared_a365outlookmailmcp.…` | Outlook Mail MCP |
+
+    > [!NOTE]
+    > Rows often show a green **Valid connection** on their own — the wizard matches or creates first-party connections for you, and a row that shows a **Sign in** button may still resolve by itself a moment later. Only act on rows that still lack a green check.
 
     > [!TIP]
-    > You can select **Import** without completing this step. The solution still imports, but its connection references arrive unset and you have to set all ten by hand in Use Case #2 step 2. Doing it here is much faster.
+    > You can select **Import** without completing this step. The solution still imports, but its connection references arrive unset and you have to set all six by hand in Use Case #2 step 5.1. Doing it here is much faster.
 
-1. Select **Import**. The import runs in the background and reports success in a banner — allow up to a minute.
+1. Select **Import**. The import runs in the background and reports success in a banner reading *"Solution "LAB: Order Management Workflows" imported successfully"* — allow up to a minute.
 
 1. Open **Workflows** in Copilot Studio and confirm **Order Management Workflow** is listed with **you** in the **Owner** column and a status of **Published**.
 
@@ -139,9 +184,11 @@ The workflow binds to first-party connectors only — Office 365 Outlook, Micros
 
 ##### If a copy is already there
 
-If **LAB: Order Management** already appears in your **Solutions** list — someone else installed it, or you are re-running the lab — delete it first, then import your own copy using the steps above. You must be the importer to own the workflow.
+A freshly provisioned lab environment does **not** ship this solution, so on a first run there is nothing to remove — go straight to the import steps above.
 
-1. In **Solutions**, select the **LAB: Order Management** row and choose **Delete** on the command bar, then confirm.
+Only if **LAB: Order Management Workflows** already appears in your **Solutions** list — you are re-running the lab, or someone else installed it into a shared environment — delete it first, then import your own copy. You must be the importer to own the workflow.
+
+1. In **Solutions**, select the **LAB: Order Management Workflows** row and choose **Delete** on the command bar, then confirm.
 
     > [!NOTE]
     > Power Apps warns that deleting an **unmanaged** solution removes the solution but **not the objects inside it**. If **Order Management Workflow** still appears in Copilot Studio → **Workflows** afterwards, delete it there too — its row **`…`** menu has a **Delete** command — before importing your copy.
@@ -377,7 +424,7 @@ Configure and publish a pre-built **Order Management Workflow** that classifies 
 
 In this section, you'll configure connection references in the Power Apps solution, transfer workflow ownership, open the workflow to verify canvas-level connections, explore the email classification categories, publish, and verify everything works by sending a test email that triggers the "Other" classification path.
 
-**Scenario:** Your environment contains a pre-built Order Management Workflow that automatically classifies incoming emails with "Order Management" in the subject. It routes emails into one of four categories — **Quote Request**, **Supplier Delay**, **Customer Inquiry**, or **Other** — and takes different automated actions for each. Before the workflow can run, you need to configure all its connections and link them in the solution.
+**Scenario:** The solution you imported in the prerequisites contains a pre-built Order Management Workflow that automatically classifies incoming emails with "Order Management" in the subject. It routes emails into one of four categories — **Quote Request**, **Supplier Delay**, **Customer Inquiry**, or **Other** — and takes different automated actions for each. Before the workflow can run, you need to configure all its connections and link them in the solution.
 
 ### Objective
 
@@ -410,7 +457,7 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 3. **Confirm you own the workflow.** In **Copilot Studio**, select **Workflows** in the left navigation and find **Order Management Workflow**. Check the **Owner** column.
 
    - **It shows your own lab user** — you are set. Continue to step 4.
-   - **It shows the lab author** — the prerequisite import was skipped. Go back to [The Order Management solution](#the-order-management-solution), delete the solution and import your own copy, then return here.
+   - **It shows anyone other than you** — the workflow came from someone else's import, not yours. Go back to [The Order Management solution](#the-order-management-solution), delete the solution and import your own copy, then return here.
 
    ![The Workflows list with Order Management Workflow owned by the lab user](images/uc2-owner-column.png)
 
@@ -423,12 +470,12 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
 5. **(Backup — only if Publish stays disabled or fails.)** Complete both backup steps below.
 
-   **5.1 Configure the connection references.** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
+   **5.1 Configure the connection references.** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management Workflows** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
 
-   - You should see **ten** connection references. Set a connection for each one. If a reference whose connection id starts with `crc3b_draft_bRURqJ.cr.shared_a365outlookmailmcp` is present, it is not needed for the workflow to run and can be **safely removed** from the solution.
-   - For all others, select the connection and click **Save**, then confirm with **Save changes**.
+   - You should see **six** connection references — Office 365 Outlook, Advanced Approvals (Human review), M365 Copilot, the Agent node, Microsoft Dataverse, and the Outlook Mail MCP. Set a connection for each one.
+   - Select the connection and click **Save**, then confirm with **Save changes**.
 
-   ![The LAB: Order Management solution in Power Apps](images/solution-order-management.png)
+   ![The LAB: Order Management Workflows solution in Power Apps](images/solution-order-management.png)
 
    > [!WARNING]
    > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
@@ -446,14 +493,14 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
    ![The subject filter expression configured on the trigger](images/subject-filter-expression.png)
 
-7. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the four classification categories configured in the node. Each category has a name and example text that the AI model uses to determine where an incoming email should be routed:
+7. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the classification categories. **Three** are configured explicitly in the node, and the panel notes that *a "Default" category is automatically created for inputs that don't match any category* — that automatic category is what the canvas shows as the **Other** branch. Each configured category has a name and example text that the AI model uses to determine where an incoming email should be routed:
 
    - **Quote Request** — emails requesting pricing or quotes for products/services
    - **Supplier Delay** — notifications about delays from suppliers
    - **Customer Inquiry** — general questions from customers about orders, shipping, etc.
-   - **Other** — anything that doesn't fit the above categories (spam, promotions, irrelevant)
+   - **Other** — the automatic **Default** category: anything that doesn't match the three above (spam, promotions, irrelevant). You will not find it in the **Categories** list, because the Classify node creates it for you.
 
-   ![All four classification categories with their example descriptions](images/classify-categories-all.png)
+   ![The Classify node categories, with the three configured categories listed](images/classify-categories-all.png)
 
    > [!TIP]
    > **Improving classification accuracy:** You can add multiple examples to each category to handle different phrasings and edge cases. For instance, a "Quote Request" might come as *"Can you send me pricing for 500 units?"* or *"We'd like a formal quotation for the attached spec."* Adding diverse examples helps the model generalize better. A good testing exercise is to try common cases **and** edge cases using the **Test** tab in the Classify node, observe how categories get assigned, and refine the category descriptions accordingly.
@@ -592,14 +639,20 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
    ![The run details showing the Human Request node waiting for approval](images/customer-inquiry-human-request-waiting.png)
 
-8. Go to **Outlook** and open the incoming approval email. Review the proposed M365 Copilot reply, then select **Yes** to approve sending it.
+8. Go to **Outlook** and open the incoming approval email. It arrives from **Microsoft Power Automate** with the subject **"Action Needed: Review Customer Enquiry Reply"** and opens *"Dear reviewer, A customer inquiry has come in…"*. Review the proposed M365 Copilot reply, choose **Yes** under **Send proposed reply from M365?**, and select **Submit**.
+
+   > [!NOTE]
+   > The approval card is an **actionable message**, so Outlook renders the Yes/No choice and a **Submit** button inside the email itself — approving is two clicks (pick **Yes**, then **Submit**), not one. Outlook may also show a **Trust sender** prompt above the card; the card still works without actioning it.
 
    > [!TIP]
    > If you don't see the approval email, try **refreshing** Outlook. If it still doesn't land, go back to the workflow, open the **Build** tab, re-establish the connection on the **Human review** node by creating a new one, then select **Save** > **Publish** and run the test again.
 
    ![The approval email in Outlook with the proposed reply and Yes button](images/customer-inquiry-approval-email.png)
 
-9. Return to your inbox and verify that the approved reply email lands there. This confirms the workflow resumed after human approval and sent the response automatically.
+9. Return to your inbox and verify that the approved reply email lands there — it arrives with the subject **"Your inquiry - Contoso Electronics"** and opens *"Dear Customer,"*. This confirms the workflow resumed after human approval and sent the response automatically.
+
+   > [!NOTE]
+   > Allow a couple of minutes after **Submit**. The workflow has to resume from the paused Human review node before it sends, so the reply does not appear instantly.
 
    ![The approved reply email received in the inbox](images/customer-inquiry-reply-received.png)
 
@@ -650,9 +703,15 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 4. Under **Tools**, navigate to **Model Context Protocol** (**MCP servers**), then add and connect both of these tools:
 
    - **Microsoft Dataverse MCP Server**
-   - **Warehouse MCP**
+   - **Warehouse and Fulfillment MCP**
 
    Sign in or connect as prompted so both tools show as available in the agent.
+
+    > [!WARNING]
+    > The server is listed as **Warehouse and Fulfillment MCP**, not "Warehouse MCP" — searching for the shorter name returns nothing. It appears only under the **Model Context Protocol (MCP)** tab of the tool picker; the **All** tab returns unrelated connector actions.
+
+    > [!IMPORTANT]
+    > **If a tool's panel says "No tools found", remove the tool and add it again.** Open the tool and look at its **Tools / Inputs** list, not just its **Connection** — an MCP server can show a perfectly valid connection while exposing no operations at all. When that happens the agent runs, reasons, and reports that the connector is "not available as a tool" instead of failing, so the run succeeds while doing nothing. Re-creating the connection does **not** fix it. Removing the tool from the agent and re-adding it from the **Model Context Protocol (MCP)** tab does. After re-adding, the button becomes **Save and publish** — plain **Publish** leaves the change unsaved.
 
    ![The agent tools panel showing Dataverse MCP and Warehouse MCP connected](images/supplier-delay-mcp-tools.png)
 
@@ -773,17 +832,17 @@ You've added a reasoning agent that enriches a supplier delay notice with live w
 
 ## 💰 Use Case #5 (Bonus): Call a Price Quote Specialist Agent from a Workflow
 
-Connect the **Quote Request** branch to a reusable, published **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse product data**, and **WorkIQ Mail** to produce and send a professional quote.
+Connect the **Quote Request** branch to a reusable **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse product data**, and **WorkIQ Mail** to produce and send a professional quote. The agent ships inside the solution you imported and arrives in **Draft** — you publish it in step 4 below.
 
 **Summary of tasks**
 
 In this section, you'll inspect the existing Price Quote Agent, wire it into the Quote Request branch, pass the sender and email body as dynamic inputs, publish the workflow, and verify the generated quote email end-to-end.
 
-**Scenario:** A customer asks for pricing on a bundle of products. Rather than rebuilding the quote logic inside the workflow, you can reuse an already-published agent that knows how to look up pricing guidance, combine it with product catalog data, and send a polished quote response.
+**Scenario:** A customer asks for pricing on a bundle of products. Rather than rebuilding the quote logic inside the workflow, you can reuse a purpose-built agent that knows how to look up pricing guidance, combine it with product catalog data, and send a polished quote response.
 
 ### Objective
 
-Configure the **Quote Request** path to use the published **Price Quote Agent**, provide it with the email sender and request body at runtime, and verify that it completes the quote process and sends the resulting email.
+Publish the **Price Quote Agent**, configure the **Quote Request** path to use it, provide it with the email sender and request body at runtime, and verify that it completes the quote process and sends the resulting email.
 
 ---
 
@@ -805,7 +864,14 @@ Configure the **Quote Request** path to use the published **Price Quote Agent**,
    ![The Price Quote Agent in the new Build experience showing instructions tools and knowledge](images/uc5-agent-new-experience.png)
 
    > [!IMPORTANT]
-   > The **Mail** tool's connection may not import with the solution. In the published **Price Quote Agent**, open **Tools > Mail** and check its **Connection**. If it shows **Not Connected**, select **Create new connection > Create** and **Confirm** (sign in with your lab account). Without a connected Mail tool the agent will reason over the quote but never send the email, so the quote email in the final step will not arrive.
+   > **Check both the connection *and* the tool list on each MCP tool.** Open **Tools > Mail**, then **Tools > Microsoft Dataverse MCP Server**, and look at two things in each panel:
+   >
+   > - **Connection** — if it shows **Not Connected**, select **Create new connection > Create** and **Confirm** (sign in with your lab account).
+   > - **Tools / Inputs** — this should list the operations the MCP server exposes. If it reads **"No tools found"**, the MCP server is not surfacing any operations to the agent in this environment.
+   >
+   > The second check is the one that bites, because a **"No tools found"** panel still shows a perfectly valid connection. Re-creating the connection does **not** fix it — that has been tested. When either MCP server exposes no tools, the agent still runs and still calculates the quote correctly, but it cannot send anything: the run **Succeeds**, and the Agent node's output reads *"Since Work IQ and Dataverse connectors are not available as tools in this environment, I'll present the complete results here for the orders team to act on."* The quote email in step 14 never arrives.
+   >
+   > If you see that, the environment is missing the MCP server provisioning rather than anything you configured. Read the quote out of the Agent node's output in the run details and treat steps 13–14 as read-only, or ask your instructor whether the Dataverse MCP and Mail (Work IQ) servers are enabled for this tenant.
 
 3. Open the **price-quote** skill and read through what it does. The skill spells out exactly how to build a quote: read the customer name and the requested items from the request, use **Dataverse** to look up the customer's account and employee count and derive their pricing **tier** (Small / Mid / Large), take each item's SKU and list price from the **Sales & Pricing Guide**, then calculate the line totals, subtotal, tier discount, and final total. It finishes by reading the payment terms and delivery lead time and using **Work IQ** to email a fully formatted quote to the customer — applying only the prices and discounts found in the knowledge, never estimates.
 
@@ -817,7 +883,7 @@ Configure the **Quote Request** path to use the published **Price Quote Agent**,
 
 6. Select the **+** next to **Quote Request** and choose **Agent**.
 
-7. In the **Agent** dropdown, select **Price Quote Agent** — the existing published agent.
+7. In the **Agent** dropdown, select **Price Quote Agent** — the agent you published in step 4.
 
    > [!IMPORTANT]
    > **Only published agents appear in the dropdown:** When using the Agent node with an existing agent, only agents that have been **published** (not just saved) will appear in the agent selection dropdown. If your agent is missing from the list, go to the agent page and publish it first.

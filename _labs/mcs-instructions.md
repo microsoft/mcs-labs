@@ -107,10 +107,41 @@ The through-line is inspectability. Every routing decision in this lab is visibl
 - A Power Platform environment where you can edit Dataverse table views and toggle environment settings (System Administrator or System Customizer)
 - Sample data loaded into the Account and Contact Dataverse tables (the (sample) records used throughout Use Cases #1 and #2)
 - The pre-loaded **Account Data Lookup Agent** available in your environment (Use Case #1 verifies and publishes it)
+- Its **Dataverse connection reference** repointed to a connection you own — see [Dataverse connection reference — do this first](#dataverse-connection-reference--do-this-first). **Every Dataverse lookup in this lab fails silently without it.**
 - For Use Case #3 only: an environment where new-type agents (the New Orchestrator), Dataverse Intelligence (Work IQ), and Dataverse MCP servers can be used
 
 > [!NOTE]
 > **First time in Copilot Studio?** A **Welcome to Microsoft Copilot Studio** dialog appears on first sign-in, followed by a short product tour. The Welcome dialog blocks the page behind it until you select **Get Started**, and the tour can be dismissed with **Skip**. Clear both before starting Use Case #1.
+
+#### Dataverse connection reference — do this first
+
+**Do this before anything else in the lab.** Your environment ships with the **LAB: Account Lookup Agent** solution, and the Dataverse connection reference inside it is owned by the workshop author, not by you — it arrives with **Owner** set to someone else and **Status: Off**. Until you point it at a connection of your own, anything that reaches Dataverse fails, and it fails quietly: the tool shows a healthy connection but lists no operations, and an agent that needs it will report that the Dataverse connector is "not available as a tool" rather than erroring.
+
+> [!NOTE]
+> **Already did this in another lab in this event?** You do not need to repeat it — the fix is per environment, not per lab. Come back to this section only if a Dataverse tool starts misbehaving: no rows returned, a tool that lists no operations, or an agent that says it cannot reach Dataverse.
+
+1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names your **DEV - User <your ID>** environment.
+
+1. Select **Solutions**, open **LAB: Account Lookup Agent**, then select **Connection references** in the left pane. There is exactly one, named `copilots_header_cref7_LookupDataAgent.shared_commondataserviceforapps.…`. Note its **Owner** — it will not be you.
+
+1. Tick the row's checkbox and choose **Edit** on the command bar.
+
+1. In the **Connection** field, open the dropdown and choose **New connection**. A new browser tab opens on the connectors list.
+
+    > [!WARNING]
+    > **Two connectors are both called "Microsoft Dataverse."** Pick the modern one — its id is `shared_commondataserviceforapps`. The other is the legacy `shared_commondataservice` connector, and a connection created from it can never satisfy this reference. If you are unsure, go straight to `https://make.powerapps.com/environments/<your environment id>/connections/available/shared_commondataserviceforapps`.
+
+1. Select **Create**, sign in with **your lab account**, and wait for the connection to show **Connected**.
+
+1. Return to the connection reference tab, open the **Connection** dropdown again, and select the connection that now carries **your** account name.
+
+    > [!TIP]
+    > If your new connection is not in the list, the dropdown is stale rather than empty — reload the page and reopen the reference. The field's own **Refresh** button re-queries the service but does not re-open the list.
+
+1. Select **Save** — **and then confirm the follow-up screen that appears.**
+
+    > [!IMPORTANT]
+    > **Save on its own does not commit the change.** A confirmation screen follows it. If you close the panel or navigate away without confirming, the edit is discarded silently: nothing errors, and the reference simply shows the old connection again the next time you open it. Confirm, then reload the page and reopen the reference to check it now names your account. That reload is the only reliable proof the rebind stuck.
 
 ---
 
@@ -390,7 +421,7 @@ Open the **Account Data Lookup Agent** in Copilot Studio and walk through each o
    - Select **Tools** from the top navigation, then open the **Find Account** tool.
 
    > [!IMPORTANT]
-   > The tool's **Inputs** only populate once a Dataverse **connection** exists — the `entities` and `search` rows are read from the connector's schema, so with no connection you will see just **Environment** and **Action Name**. Setting the **Connection** in the tool's Details panel and selecting **Save** does not reliably persist on this agent, because it is owned by the workshop author and only shared with you. The dependable route is the **in-chat** one: run the first Demonstration prompt below, select **Allow** on the *"Connect to continue"* card the agent returns, then come back and reopen this tool.
+   > The tool's **Inputs** only populate once a Dataverse **connection** exists — the `entities` and `search` rows are read from the connector's schema, so with no connection you will see just **Environment** and **Action Name**. Setting the **Connection** in the tool's Details panel and selecting **Save** does not reliably persist on this agent, because it is owned by the workshop author and only shared with you. Two routes fix that. The durable one is [Dataverse connection reference — do this first](#dataverse-connection-reference--do-this-first): repointing the solution's connection reference at a connection you own makes this tool populate normally, and holds for every later lab in the environment. The quick one is **in-chat**: run the first Demonstration prompt below, select **Allow** on the *"Connect to continue"* card the agent returns, then come back and reopen this tool.
 
    > [!WARNING]
    > **Known environment issue.** In some tenants the shared Account Data Lookup Agent ships without the `search` input on **Find Account**. When that happens the tool call fails with *"Required field 'search' is missing for RequestName='searchquery'"*, step 6 below has nothing to open, and the Demonstration cannot run. It cannot be repaired from a learner account — ask your workshop host to reprovision the sample agent or grant you co-owner rights on it.
