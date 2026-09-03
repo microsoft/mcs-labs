@@ -117,7 +117,7 @@ In the final use case you build a second agent in a completely different industr
 
 #### MCP servers
 
-The four MCP servers ship with this lab as Dataverse solution packages under [`assets/mcp-servers`](assets/mcp-servers). They are what the agents actually call — without them, Use Cases #2, #3 and #4 have no data.
+The four MCP servers ship with this lab as Dataverse solution packages under [`assets/mcp-servers`](https://github.com/microsoft/mcs-labs/tree/main/labs/mcs-github-harness/assets/mcp-servers). They are what the agents actually call — without them, Use Cases #2, #3 and #4 have no data.
 
 | Solution package | Solution name in the environment | Tools it exposes |
 |------------------|----------------------------------|------------------|
@@ -161,7 +161,7 @@ In many delivery tenants the four solutions are already provisioned with the env
 
 Do this once per missing solution. Each import takes a minute or two.
 
-1. Download the `.zip` from [`assets/mcp-servers`](assets/mcp-servers). Use the **raw** file — GitHub's file view will not give you a usable archive, and a `.zip` that your browser has helpfully unpacked will not import.
+1. Download the `.zip` from [`assets/mcp-servers`](https://github.com/microsoft/mcs-labs/tree/main/labs/mcs-github-harness/assets/mcp-servers). Use the **raw** file — GitHub's file view will not give you a usable archive, and a `.zip` that your browser has helpfully unpacked will not import.
 
 1. In [make.powerapps.com](https://make.powerapps.com), confirm the environment picker, then select **Solutions → Import solution**.
 
@@ -179,7 +179,7 @@ Do this once per missing solution. Each import takes a minute or two.
 
 #### Knowledge documents
 
-The four PDFs ship with this lab under [`assets/knowledge-documents`](assets/knowledge-documents). Upload them into two SharePoint folders named exactly as below — the instructions reference those folder names, and Use Case #2 walks you to them.
+The four PDFs ship with this lab under [`assets/knowledge-documents`](https://github.com/microsoft/mcs-labs/tree/main/labs/mcs-github-harness/assets/knowledge-documents). Upload them into two SharePoint folders named exactly as below — the instructions reference those folder names, and Use Case #2 walks you to them.
 
 | Document | SharePoint folder | What the agent uses it for |
 |----------|-------------------|-----------------------------|

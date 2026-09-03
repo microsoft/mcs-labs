@@ -127,6 +127,17 @@ test('rewriteImages: de-duplicates repeated images', () => {
   assert.equal(images.length, 1);
 });
 
+test('rewriteImages: absolutizes assets/ refs so feed consumers can fetch them', () => {
+  const md = '[pdf](assets/knowledge-documents/manual.pdf) [zip](./assets/mcp-servers/s.zip) <img src="assets/diagram.png">';
+  const { markdown, images } = feed.rewriteImages(md, 'https://x.test/mcs-labs', 'labs', 'demo');
+  assert.match(markdown, /\]\(https:\/\/x\.test\/mcs-labs\/labs\/demo\/assets\/knowledge-documents\/manual\.pdf\)/);
+  assert.match(markdown, /\]\(https:\/\/x\.test\/mcs-labs\/labs\/demo\/assets\/mcp-servers\/s\.zip\)/);
+  assert.match(markdown, /src="https:\/\/x\.test\/mcs-labs\/labs\/demo\/assets\/diagram\.png"/);
+  // assets/ stays out of the images manifest: consumers link to these, not mirror them
+  assert.deepEqual(images, []);
+});
+
+
 test('contentHash: deterministic, prefixed, and content-sensitive', () => {
   const h1 = feed.contentHash('hello');
   const h2 = feed.contentHash('hello');
