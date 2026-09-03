@@ -832,7 +832,7 @@ You've added a reasoning agent that enriches a supplier delay notice with live w
 
 ## 💰 Use Case #5 (Bonus): Call a Price Quote Specialist Agent from a Workflow
 
-Connect the **Quote Request** branch to a reusable **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse product data**, and **WorkIQ Mail** to produce and send a professional quote. The agent ships inside the solution you imported and arrives in **Draft** — you publish it in step 4 below.
+Connect the **Quote Request** branch to a reusable **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse product data**, and **WorkIQ Mail** to produce and send a professional quote. The agent ships inside the solution you imported and arrives in **Draft** — you publish it in step 5 below.
 
 **Summary of tasks**
 
@@ -863,34 +863,38 @@ Publish the **Price Quote Agent**, configure the **Quote Request** path to use i
 
    ![The Price Quote Agent in the new Build experience showing instructions tools and knowledge](images/uc5-agent-new-experience.png)
 
+3. **Confirm each MCP tool actually lists its operations, and re-add any that do not.** Open **Tools > Mail**, then **Tools > Microsoft Dataverse MCP Server**, and check each panel:
+
+   - **Connection** — if it shows **Not Connected**, select **Create new connection > Create** and **Confirm**, signing in with your lab account.
+   - **Tools / Inputs** — this must list the operations the server exposes. **Mail** should show **AddDraftAttachments**, **UpdateDraft** and **SendEmailWithAttachment**; **Microsoft Dataverse MCP Server** should show **read_query**, **create_record** and **update_record**.
+
+   If either panel reads **"No tools found"**, remove that tool and add it back: select it in the agent's **Tools** list and delete it, choose **Add tool**, open the **Model Context Protocol (MCP)** tab, pick the same server, then **Save and publish** the agent. Reopen the tool and the operations are listed. **Mail** is the one that most often deploys empty, so expect to do this at least once.
+
    > [!IMPORTANT]
-   > **Check both the connection *and* the tool list on each MCP tool.** Open **Tools > Mail**, then **Tools > Microsoft Dataverse MCP Server**, and look at two things in each panel:
+   > **Do not skip this on the strength of a healthy-looking Connection.** A **"No tools found"** panel still shows a perfectly valid connection, and re-creating the connection does **not** fix it — that has been tested. Removing and re-adding the tool is what works.
    >
-   > - **Connection** — if it shows **Not Connected**, select **Create new connection > Create** and **Confirm** (sign in with your lab account).
-   > - **Tools / Inputs** — this should list the operations the MCP server exposes. If it reads **"No tools found"**, the MCP server is not surfacing any operations to the agent in this environment.
+   > If it is **Microsoft Dataverse MCP Server** that lists nothing, also check [Dataverse connection reference — do this first](#dataverse-connection-reference--do-this-first) — an unbound connection reference produces the same empty tool list, and re-adding the tool alone will not fix that one.
    >
-   > The second check is the one that bites, because a **"No tools found"** panel still shows a perfectly valid connection. Re-creating the connection does **not** fix it — that has been tested. When either MCP server exposes no tools, the agent still runs and still calculates the quote correctly, but it cannot send anything: the run **Succeeds**, and the Agent node's output reads *"Since Work IQ and Dataverse connectors are not available as tools in this environment, I'll present the complete results here for the orders team to act on."* The quote email in step 14 never arrives.
-   >
-   > If you see that, the environment is missing the MCP server provisioning rather than anything you configured. Read the quote out of the Agent node's output in the run details and treat steps 13–14 as read-only, or ask your instructor whether the Dataverse MCP and Mail (Work IQ) servers are enabled for this tenant.
+   > Left unaddressed, the agent still runs and still calculates the quote correctly, but it cannot send anything: the run **Succeeds**, and the Agent node's output reads *"Since Work IQ and Dataverse connectors are not available as tools in this environment, I'll present the complete results here for the orders team to act on."* The quote email never arrives. If re-adding the tool still leaves the list empty, ask your instructor whether the Dataverse MCP and Mail servers are enabled for this tenant — and in the meantime read the quote out of the Agent node's output in the run details.
 
-3. Open the **price-quote** skill and read through what it does. The skill spells out exactly how to build a quote: read the customer name and the requested items from the request, use **Dataverse** to look up the customer's account and employee count and derive their pricing **tier** (Small / Mid / Large), take each item's SKU and list price from the **Sales & Pricing Guide**, then calculate the line totals, subtotal, tier discount, and final total. It finishes by reading the payment terms and delivery lead time and using **Work IQ** to email a fully formatted quote to the customer — applying only the prices and discounts found in the knowledge, never estimates.
+4. Open the **price-quote** skill and read through what it does. The skill spells out exactly how to build a quote: read the customer name and the requested items from the request, use **Dataverse** to look up the customer's account and employee count and derive their pricing **tier** (Small / Mid / Large), take each item's SKU and list price from the **Sales & Pricing Guide**, then calculate the line totals, subtotal, tier discount, and final total. It finishes by reading the payment terms and delivery lead time and using **Work IQ** to email a fully formatted quote to the customer — applying only the prices and discounts found in the knowledge, never estimates.
 
-4. **Publish** the Price Quote Agent by selecting **Publish** in the top-right corner.
+5. **Publish** the Price Quote Agent by selecting **Publish** in the top-right corner.
 
 #### Configure the Quote Request branch
 
-5. Return to the **Order Management Workflow** and locate the **Quote Request** category in the **Classify** node.
+6. Return to the **Order Management Workflow** and locate the **Quote Request** category in the **Classify** node.
 
-6. Select the **+** next to **Quote Request** and choose **Agent**.
+7. Select the **+** next to **Quote Request** and choose **Agent**.
 
-7. In the **Agent** dropdown, select **Price Quote Agent** — the agent you published in step 4.
+8. In the **Agent** dropdown, select **Price Quote Agent** — the agent you published in step 5.
 
    > [!IMPORTANT]
    > **Only published agents appear in the dropdown:** When using the Agent node with an existing agent, only agents that have been **published** (not just saved) will appear in the agent selection dropdown. If your agent is missing from the list, go to the agent page and publish it first.
 
    ![The Quote Request branch agent selector showing Price Quote Agent](images/quote-request-select-existing-agent.png)
 
-8. In the **Message** field, enter:
+9. In the **Message** field, enter:
 
    ```
    Prepare a price quote for this customer request:
@@ -898,20 +902,20 @@ Publish the **Price Quote Agent**, configure the **Quote Request** path to use i
    Request: [email body]
    ```
 
-9. Replace the placeholders with dynamic values:
+10. Replace the placeholders with dynamic values:
 
    - Replace the **`[email sender]`** placeholder (select the arrow **>**), choose the **lightning** icon, search for **from**, and insert **From**.
    - Replace the **`[email body]`** placeholder (select the arrow **>**), choose the **lightning** icon, search for **body**, and insert **Body**.
 
    ![The Quote Request message field with From and Body dynamic tokens inserted](images/quote-request-message-dynamic-content.png)
 
-10. Select **Save**, then **Publish**.
+11. Select **Save**, then **Publish**.
 
     ![The workflow published after wiring the Quote Request branch to Price Quote Agent](images/quote-request-workflow-published.png)
 
 #### Test the Quote Request path
 
-11. In **Outlook**, send the following email **to your lab user account**:
+12. In **Outlook**, send the following email **to your lab user account**:
 
     - **Subject:** `Order Management - Quote request - Adventure Works`
     - **Body:**
@@ -933,19 +937,19 @@ Publish the **Price Quote Agent**, configure the **Quote Request** path to use i
 
     ![The quote request test email being composed in Outlook](images/quote-request-test-email.png)
 
-12. Return to the workflow's **Activity** panel, refresh until the run appears, and confirm the route **Classify → Quote Request → Agent completed**.
+13. Return to the workflow's **Activity** panel, refresh until the run appears, and confirm the route **Classify → Quote Request → Agent completed**.
 
     ![The Activity panel showing the Quote Request branch run completed](images/quote-request-activity-path.png)
 
-13. Select the **Agent** node in the run details and read the completion message describing what the Price Quote Agent did to prepare the customer response.
+14. Select the **Agent** node in the run details and read the completion message describing what the Price Quote Agent did to prepare the customer response.
 
     ![The Quote Request agent run details showing the completion message](images/quote-request-agent-completion.png)
 
-14. Open **Outlook** and verify that the generated price quote email has landed in your inbox.
+15. Open **Outlook** and verify that the generated price quote email has landed in your inbox.
 
     ![The completed price quote email received in Outlook](images/quote-request-email-received.png)
 
-15. **Bonus:** Return to **Price Quote Agent** and select the **Preview** tab (top of the new experience). As a bonus, observe how the agent reasons over a question by combining the different tools at hand. Ask: **What are the iPad Air prices applicable to Fabrikam?** Watch the extended reasoning — the agent issues a Dataverse `read_query` that looks up the number of employees where the account name is **Fabrikam**, then connects that result with the **SharePoint** knowledge about customer tiers: it works out that Fabrikam falls into the **Mid** tier and shows the discounts the SharePoint handbook says should apply.
+16. **Bonus:** Return to **Price Quote Agent** and select the **Preview** tab (top of the new experience). As a bonus, observe how the agent reasons over a question by combining the different tools at hand. Ask: **What are the iPad Air prices applicable to Fabrikam?** Watch the extended reasoning — the agent issues a Dataverse `read_query` that looks up the number of employees where the account name is **Fabrikam**, then connects that result with the **SharePoint** knowledge about customer tiers: it works out that Fabrikam falls into the **Mid** tier and shows the discounts the SharePoint handbook says should apply.
 
     You can also try asking **We have received this customer email: []** and paste the email you used to test the workflow. You'll see how the agent reasons over the answer — and how, this time, it loads the **price-quote** skill to build a full quote following the skill's specified steps.
 
