@@ -104,12 +104,43 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 - A **Power Platform environment** where you can edit Dataverse table data and toggle environment settings (System Administrator or System Customizer).
 - **Sample data pre-loaded** into the Dataverse tables used by the order-management use cases ("Tasks" table).
 - Permission to create connections for the services used across the lab: **Microsoft To-Do (Business)**, **Office 365 Outlook**, **Work IQ Mail**, **Microsoft Dataverse / Dataverse MCP**, Human Review, and **Microsoft 365 Copilot**.
+- The **Dataverse connection reference** in the pre-loaded **LAB: Account Lookup Agent** solution repointed to a connection you own — see [Dataverse connection reference — do this first](#dataverse-connection-reference--do-this-first). **Every Dataverse tool in this lab fails silently without it.**
 - Basic familiarity with the Copilot Studio interface.
 - The **Warehouse MCP** custom MCP server imported into your environment — see [Custom MCP servers](#custom-mcp-servers) below. **Use Case #4 cannot be completed without it.**
 - The **LAB: Order Management Workflows** solution **imported by you** — your environment does not ship with it, and you must own the workflow to publish it. See [The Order Management solution](#the-order-management-solution) below. **Use Cases #2–#5 fail without this.**
 
 > [!IMPORTANT]
 > Use the **same work account** for Copilot Studio and every connected service in this lab (Microsoft To Do, Outlook, Dataverse, M365 Copilot, and approvals). The triggers, inline agents, and tools all act on one identity — if they don't match, a workflow can't see your data or write back to your calendar, tasks, or Dataverse records.
+
+#### Dataverse connection reference — do this first
+
+**Do this before anything else in the lab.** Your environment ships with the **LAB: Account Lookup Agent** solution, and the Dataverse connection reference inside it is owned by the workshop author, not by you — it arrives with **Owner** set to someone else and **Status: Off**. Until you point it at a connection of your own, anything that reaches Dataverse fails, and it fails quietly: the tool shows a healthy connection but lists no operations, and an agent that needs it will report that the Dataverse connector is "not available as a tool" rather than erroring.
+
+> [!NOTE]
+> **Already did this in another lab in this event?** You do not need to repeat it — the fix is per environment, not per lab. Come back to this section only if a Dataverse tool starts misbehaving: no rows returned, a tool that lists no operations, or an agent that says it cannot reach Dataverse.
+
+1. Go to [make.powerapps.com](https://make.powerapps.com) and confirm the **environment picker** in the top right names your **DEV - User <your ID>** environment.
+
+1. Select **Solutions**, open **LAB: Account Lookup Agent**, then select **Connection references** in the left pane. There is exactly one, named `copilots_header_cref7_LookupDataAgent.shared_commondataserviceforapps.…`. Note its **Owner** — it will not be you.
+
+1. Tick the row's checkbox and choose **Edit** on the command bar.
+
+1. In the **Connection** field, open the dropdown and choose **New connection**. A new browser tab opens on the connectors list.
+
+    > [!WARNING]
+    > **Two connectors are both called "Microsoft Dataverse."** Pick the modern one — its id is `shared_commondataserviceforapps`. The other is the legacy `shared_commondataservice` connector, and a connection created from it can never satisfy this reference. If you are unsure, go straight to `https://make.powerapps.com/environments/<your environment id>/connections/available/shared_commondataserviceforapps`.
+
+1. Select **Create**, sign in with **your lab account**, and wait for the connection to show **Connected**.
+
+1. Return to the connection reference tab, open the **Connection** dropdown again, and select the connection that now carries **your** account name.
+
+    > [!TIP]
+    > If your new connection is not in the list, the dropdown is stale rather than empty — reload the page and reopen the reference. The field's own **Refresh** button re-queries the service but does not re-open the list.
+
+1. Select **Save** — **and then confirm the follow-up screen that appears.**
+
+    > [!IMPORTANT]
+    > **Save on its own does not commit the change.** A confirmation screen follows it. If you close the panel or navigate away without confirming, the edit is discarded silently: nothing errors, and the reference simply shows the old connection again the next time you open it. Confirm, then reload the page and reopen the reference to check it now names your account. That reload is the only reliable proof the rebind stuck.
 
 #### The Order Management solution
 
@@ -686,9 +717,15 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 4. Under **Tools**, navigate to **Model Context Protocol** (**MCP servers**), then add and connect both of these tools:
 
    - **Microsoft Dataverse MCP Server**
-   - **Warehouse MCP**
+   - **Warehouse and Fulfillment MCP**
 
    Sign in or connect as prompted so both tools show as available in the agent.
+
+    > [!WARNING]
+    > The server is listed as **Warehouse and Fulfillment MCP**, not "Warehouse MCP" — searching for the shorter name returns nothing. It appears only under the **Model Context Protocol (MCP)** tab of the tool picker; the **All** tab returns unrelated connector actions.
+
+    > [!IMPORTANT]
+    > **If a tool's panel says "No tools found", remove the tool and add it again.** Open the tool and look at its **Tools / Inputs** list, not just its **Connection** — an MCP server can show a perfectly valid connection while exposing no operations at all. When that happens the agent runs, reasons, and reports that the connector is "not available as a tool" instead of failing, so the run succeeds while doing nothing. Re-creating the connection does **not** fix it. Removing the tool from the agent and re-adding it from the **Model Context Protocol (MCP)** tab does. After re-adding, the button becomes **Save and publish** — plain **Publish** leaves the change unsaved.
 
    ![The agent tools panel showing Dataverse MCP and Warehouse MCP connected](images/supplier-delay-mcp-tools.png)
 
