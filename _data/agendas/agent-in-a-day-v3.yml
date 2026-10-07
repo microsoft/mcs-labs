@@ -1,0 +1,153 @@
+event_id: agent-in-a-day-v3
+
+# Agent in a Day — V3 — 1-day hands-on agenda.
+#
+# V3 is the one-day cut of the Architecture Bootcamp V3 material: the same
+# harness-first framing (Copilot, Standard, GitHub Copilot) compressed into a
+# single day, pairing each instructor-led module with its own hands-on lab.
+#
+# Conventions (as in agent-in-a-day.yml):
+#   * "module" and "lab" rows link to first-class entities by `slug`, so the
+#     link, description, difficulty and slide deck resolve live from
+#     _modules/<slug>.md and _labs/<slug>.md on every build. Do not duplicate
+#     those values here.
+#   * Two kinds of override are intentional:
+#       - `title:` on lab rows (and on the two harness modules) is a shorter,
+#         event-friendly agenda label. The harness modules drop the bootcamp's
+#         "Dedicated:" prefix, which only makes sense inside the 3-day event.
+#       - `duration:` where the one-day cut is shorter than the entity's own
+#         bootcamp runtime. Five rows are compressed:
+#             M1  Agents & Workflows      45 -> 30
+#             Lab 2 Cowork hands-on       45 -> 30
+#             M6  GitHub Copilot harness  60 -> 45
+#             Lab 4 GitHub Copilot harness 60 -> 45
+#             Lab 5 Workflows             60 -> 45
+#         Every other row runs at its entity duration.
+#   * The day runs 07:30-17:15: 7 modules, 5 labs, 8h00m of content of which
+#     3h00m is hands-on.
+
+schedule:
+  - type: break
+    title: "Registration, Breakfast & Networking"
+    time: "07:30"
+    duration: 30
+
+  - type: session
+    title: "Welcome & Program Overview"
+    description: "Meet your instructors, review the day, and set expectations."
+    label: "Welcome"
+    time: "08:00"
+    duration: 15
+
+  - type: session
+    title: "Introduction to Hands-On Labs"
+    description: "Lab environment, tenant setup, and how the hands-on flow works through the day."
+    label: "Intro"
+    time: "08:15"
+    duration: 15
+
+  - type: module
+    slug: agents-workflows-making-them-real
+    label: "Module 1"
+    time: "08:30"
+    duration: 30
+
+  - type: module
+    slug: m365-copilot
+    label: "Module 2"
+    time: "09:00"
+
+  - type: lab
+    slug: m365-copilot-frontier-agents
+    label: "Lab 1"
+    title: "M365 Copilot & Frontier Agents"
+    time: "09:30"
+
+  - type: break
+    title: "Coffee & Refreshments"
+    time: "10:00"
+    duration: 15
+
+  - type: module
+    slug: cowork
+    label: "Module 3"
+    time: "10:15"
+
+  - type: lab
+    slug: cowork-hands-on
+    label: "Lab 2"
+    title: "Cowork Hands-On"
+    time: "10:45"
+    duration: 30
+
+  - type: module
+    slug: harnesses-and-component-models
+    label: "Module 4"
+    time: "11:15"
+
+  - type: session
+    title: "Fireside Chat / Q&A"
+    description: "Open discussion with the instructors — architecture questions, adoption experience, and what to take back."
+    label: "Fireside"
+    time: "11:45"
+    duration: 15
+
+  - type: break
+    title: "Lunch & Networking"
+    time: "12:00"
+    duration: 45
+
+  - type: module
+    slug: copilot-harness
+    label: "Module 5"
+    title: "Copilot Harness: Agent Builder, pro-code DAs, DAs in MCS"
+    time: "12:45"
+
+  - type: lab
+    slug: copilot-harness-agent-builder
+    label: "Lab 3"
+    title: "Copilot Harness"
+    time: "13:15"
+
+  - type: module
+    slug: github-copilot-harness
+    label: "Module 6"
+    title: "GitHub Copilot Harness: Component Model"
+    time: "13:45"
+    duration: 45
+
+  - type: break
+    title: "Coffee & Refreshments"
+    time: "14:30"
+    duration: 15
+
+  - type: lab
+    slug: mcs-github-harness
+    label: "Lab 4"
+    title: "GitHub Copilot Harness: Component Model"
+    time: "14:45"
+    duration: 45
+
+  - type: module
+    slug: workflows
+    label: "Module 7"
+    # The shared `workflows` module entity defaults to the original bootcamp
+    # deck (presentations/bootcamp/10. Workflows_CB.pptx) because Advanced
+    # Agent in a Day still uses it. Point this day at the V3 deck, the same
+    # override bootcamp-v3.yml carries.
+    slides: "/presentations/bootcamp-v3/M12.%20Workflows.pptx"
+    time: "15:30"
+
+  - type: lab
+    slug: mcs-workflows
+    label: "Lab 5"
+    title: "Workflows"
+    time: "16:00"
+    duration: 45
+
+  - type: session
+    title: "Closing Remarks / Ask Me Anything"
+    description: "Wrap-up, where to go next, and an open floor for questions."
+    label: "Closing"
+    time: "16:45"
+    duration: 30
