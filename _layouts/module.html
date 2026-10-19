@@ -280,6 +280,12 @@ layout: single
   {% if page.description %}
   <p class="mod-header-desc">{{ page.description | strip_html }}</p>
   {% endif %}
+  {% if page.content_last_updated %}
+  <p class="mod-header-updated">
+    Content last updated:
+    <time datetime="{{ page.content_last_updated | date_to_xmlschema }}">{{ page.content_last_updated | date: "%-m/%-d/%Y" }}</time>
+  </p>
+  {% endif %}
 
   <div class="mod-meta">
     {% if page.difficulty %}

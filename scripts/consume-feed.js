@@ -93,7 +93,11 @@ module.exports.renderFrontMatter = renderFrontMatter;
 
 function materializeDoc(item, ownBaseUrl) {
   const body = relativizeImages(item.content_markdown, ownBaseUrl, item.collection, item.slug);
-  return `${renderFrontMatter(item.metadata)}\n${body}`;
+  const metadata = { ...(item.metadata || {}) };
+  if (['labs', 'modules'].includes(item.collection) && item.last_modified && !metadata.content_last_updated) {
+    metadata.content_last_updated = item.last_modified;
+  }
+  return `${renderFrontMatter(metadata)}\n${body}`;
 }
 module.exports.materializeDoc = materializeDoc;
 

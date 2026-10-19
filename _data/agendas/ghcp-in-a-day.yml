@@ -95,7 +95,7 @@ schedule:
     duration: 15
 
   - type: lab
-    slug: mcs-tools
+    slug: mcs-knowledge-tools-hooks
     label: "Lab 5"
     title: "Deep Dive — Knowledge & Tools"
     time: "15:00"

@@ -19,10 +19,14 @@ GEM
     faraday-net_http (3.4.4)
       net-http (~> 0.5)
     ffi (1.17.4-aarch64-linux-gnu)
+    ffi (1.17.4-aarch64-mingw-ucrt)
     ffi (1.17.4-arm64-darwin)
     ffi (1.17.4-x86_64-linux-gnu)
     ffi (1.17.4-x86_64-linux-musl)
     forwardable-extended (2.6.0)
+    google-protobuf (4.34.1)
+      bigdecimal
+      rake (~> 13.3)
     google-protobuf (4.34.1-aarch64-linux-gnu)
       bigdecimal
       rake (~> 13.3)
@@ -109,6 +113,8 @@ GEM
     sass-embedded (1.99.0)
       google-protobuf (~> 4.31)
       rake (>= 13)
+    sass-embedded (1.99.0-aarch64-mingw-ucrt)
+      google-protobuf (~> 4.31)
     sawyer (0.9.3)
       addressable (>= 2.3.5)
       faraday (>= 0.17.3, < 3)
@@ -120,6 +126,7 @@ GEM
 
 PLATFORMS
   aarch64-linux
+  aarch64-mingw-ucrt
   arm64-darwin-24
   x86_64-linux
   x86_64-linux-musl

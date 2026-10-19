@@ -5,6 +5,8 @@ on:
     paths:
       - "_labs/**"
       - "_events/**"
+      - "_modules/**"
+      - "_plugins/**"
       - "_layouts/**"
       - "_includes/**"
       - "_data/**"
@@ -14,6 +16,7 @@ on:
       - "about/**"
       - "events/**"
       - "labs/**"
+      - "presentations/**"
       - "lighthouserc.json"
       - ".github/workflows/lighthouse.yml"
       - "Gemfile"
@@ -34,6 +37,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1

@@ -624,6 +624,33 @@ p > code, li > code, td > code {
   margin: 0 0 0.8em;
 }
 
+.lab-header-updated {
+  font-size: 0.76em;
+  color: var(--color-on-lab-header-muted);
+  line-height: 1.4;
+  margin: 0 0 0.8em;
+
+  time {
+    font-weight: 600;
+  }
+}
+
+.lab-header-desc + .lab-header-updated {
+  margin-top: -0.4em;
+}
+
+.mod-header-updated {
+  margin: 0.55rem 0 0;
+  color: var(--color-fg-muted);
+  font-size: 0.82rem;
+  line-height: 1.4;
+
+  time {
+    color: var(--color-fg-strong);
+    font-weight: 600;
+  }
+}
+
 // Hide duplicate H1 title, description, and surrounding hrs from markdown content
 .lab-header + hr { display: none; }
 .lab-header + hr + h1 { display: none; }

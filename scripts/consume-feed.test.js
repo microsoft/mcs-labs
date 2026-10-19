@@ -109,13 +109,57 @@ test('materializeDoc: round-trips body and carries metadata', () => {
   const item = {
     collection: 'labs', slug: 'demo',
     metadata: { title: 'Demo', order: 5 },
+    last_modified: '2026-05-01T00:00:00Z',
     content_markdown: 'Intro ![a](https://x.test/mcs-labs/labs/demo/images/a.png)',
   };
   const doc = consume.materializeDoc(item, base);
   const parsed = matter(doc);
   assert.equal(parsed.data.title, 'Demo');
   assert.equal(parsed.data.order, 5);
+  assert.equal(parsed.data.content_last_updated, '2026-05-01T00:00:00Z');
   assert.equal(parsed.content.trim(), 'Intro ![a](images/a.png)');
+});
+
+test('materializeDoc: preserves an explicit lab content update date', () => {
+  const item = {
+    collection: 'labs',
+    slug: 'demo',
+    metadata: { title: 'Demo', content_last_updated: '2026-06-01T00:00:00Z' },
+    last_modified: '2026-05-01T00:00:00Z',
+    content_markdown: 'Body',
+  };
+
+  const parsed = matter(consume.materializeDoc(item, 'https://x.test'));
+
+  assert.equal(parsed.data.content_last_updated, '2026-06-01T00:00:00Z');
+});
+
+test('materializeDoc: carries source update metadata for modules', () => {
+  const item = {
+    collection: 'modules',
+    slug: 'demo',
+    metadata: { title: 'Demo' },
+    last_modified: '2026-05-01T00:00:00Z',
+    content_markdown: 'Body',
+  };
+
+  const parsed = matter(consume.materializeDoc(item, 'https://x.test'));
+
+  assert.equal(parsed.data.content_last_updated, '2026-05-01T00:00:00Z');
+});
+
+test('materializeDoc: does not add content update metadata to other collections', () => {
+  const item = {
+    collection: 'workshops',
+    slug: 'demo',
+    metadata: { title: 'Demo' },
+    last_modified: '2026-05-01T00:00:00Z',
+    content_markdown: 'Body',
+  };
+
+  const parsed = matter(consume.materializeDoc(item, 'https://x.test'));
+
+  assert.equal(parsed.data.content_last_updated, undefined);
 });
 
 const { execFileSync } = require('node:child_process');

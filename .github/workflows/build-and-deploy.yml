@@ -18,6 +18,7 @@ on:
       - "_events/**"
       - "_workshops/**"
       - "_modules/**"
+      - "_plugins/**"
       - "_layouts/**"
       - "_includes/**"
       - "_data/**"
@@ -28,6 +29,7 @@ on:
       - "about/**"
       - "events/**"
       - "labs/**"
+      - "presentations/**"
       - "scripts/**"
       - "package.json"
       - ".github/workflows/build-and-deploy.yml"
@@ -49,6 +51,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
