@@ -79,7 +79,7 @@ In this lab you build **Zava Procurement Buddy** on the GitHub Copilot harness a
 
 **What You Will Learn**
 
-- How to add a hook to an agent and create its workflow from the **Add hook** dialog
+- The two ways to add a hook to an agent, *workflow first* and *native*, and how to do both
 - How **Start (pre-loop)** uses `additionalContext` to hand the model information before the first turn
 - How **User prompt submitted** uses `modifiedPrompt` to replace what the user typed — here with a **Classify** node and an **inline agent**
 - How **Pre tool use** uses `permissionDecision` to block a tool call and `additionalContext` to tell the agent what to do instead
@@ -100,6 +100,8 @@ In this lab you build **Zava Procurement Buddy** on the GitHub Copilot harness a
 | **Inline agent** | A non-deterministic agent embedded in a workflow step. Here it rewrites the prompt instead of following a fixed script |
 
 ### Two ways to create a hook workflow
+
+There are two ways to add a hook to an agent. Neither is better than the other; they lead to the same result: a hook bound to a published workflow. This lab uses both, so you can try each and choose the one that suits your work.
 
 Every hook workflow starts from the starter that the **Add hook** dialog generates for an event. The **Workflows** page cannot create one: its trigger types don't include hook events, and outputs you add by hand are always required, so the workflow never matches. What you can choose is *when* you connect the workflow to the hook:
 
