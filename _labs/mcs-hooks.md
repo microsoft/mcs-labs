@@ -176,6 +176,8 @@ You are a maker on Zava's finance team. Before you add any hooks you need an age
 
 Create the agent and its **Create purchase request** tool, then add a **Start (pre-loop)** hook that returns `additionalContext` at the beginning of every conversation.
 
+You add this hook the *workflow first* way: build and publish the hook workflow, then connect it to the hook. See [Two ways to create a hook workflow](#two-ways-to-create-a-hook-workflow).
+
 ---
 
 ### Step-by-step instructions
