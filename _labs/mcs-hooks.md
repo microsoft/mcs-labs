@@ -65,8 +65,6 @@ That is what hooks are for. A hook binds a workflow to a moment in the agent's l
 - "We have one travel policy per country or region, and the agent mixes up the limits between them"
 - "I wrote 'only book approved airlines' in the instructions, and the agent still booked another one"
 
-**Pairs with:** the *Deep dive in modern agents* workshop.
-
 ---
 
 ## Introduction
@@ -84,7 +82,6 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 
 **What You Will Learn**
 
-- The two ways to add a hook to an agent, *workflow first* and *native*, and how to do both
 - How **Start (pre-loop)** uses `additionalContext` to hand the model information before the first turn
 - How **User prompt submitted** uses `modifiedPrompt` to replace what the user typed — here with a **Classify** node and an **inline agent**
 - How SharePoint knowledge selects documents by their **Location** metadata before it searches their contents
@@ -97,7 +94,7 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 | Concept | Why it matters |
 |---------|----------------|
 | **Hook** | An *event* plus an *action*. When the event fires, Copilot Studio calls the workflow bound to it and reads the workflow's response back into the conversation |
-| **Hook workflow** | A workflow whose **When an agent calls the flow** inputs and **Respond to the agent** outputs match the event. Keep the starter field names — Copilot Studio uses them to decide whether a workflow fits an event |
+| **Hook workflow** | A workflow whose **When an agent calls the flow** inputs and **Respond to the agent** outputs match the event. Create it from **Add hook** → **New workflow** — the **Workflows** page cannot create one — and keep the starter field names: the hook's **Workflow** list only shows workflows that match the event |
 | **`metadata`** | Sent with every hook: conversation, user, channel and agent details, including `userAadObjectId` of the signed-in user |
 | **Start (pre-loop)** | Runs once when a new conversation begins. Returns `additionalContext` — background text the model receives for the session |
 | **User prompt submitted** | Runs on every user message, before the agent processes it. Receives `prompt`, returns `modifiedPrompt` to replace it |
@@ -105,19 +102,6 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 | **Classify node** | An AI step in a workflow that routes text into categories you describe — a deterministic branch driven by a model judgement |
 | **Inline agent** | A non-deterministic agent embedded in a workflow step. Here it rewrites the prompt instead of following a fixed script |
 | **SharePoint metadata filtering** | The SharePoint knowledge source reads a column such as **Location**, keeps only the matching documents and searches just those — so the answer comes from the right policy |
-
-### Two ways to create a hook workflow
-
-There are two ways to add a hook to an agent. Neither is better than the other; they lead to the same result: a hook bound to a published workflow. This lab uses both, so you can try each and choose the one that suits your work.
-
-Every hook workflow starts from the starter that the **Add hook** dialog generates for an event. The **Workflows** page cannot create one: its trigger types don't include hook events, and outputs you add by hand are always required, so the workflow never matches. What you can choose is *when* you connect the workflow to the hook:
-
-| Way | How | When to use it | In this lab |
-|-----|-----|----------------|-------------|
-| **Workflow first** | Generate the starter from **Add hook** → **New workflow**, build and publish it, then **Cancel** the dialog. The workflow is saved in **Workflows**. Later, create the hook and **select the existing workflow** in the **Workflow** list | One workflow serves several hooks or agents, or one person builds the workflow and another configures the agent | Use Case #1 |
-| **Native (inline)** | **Add hook** → **New workflow**, build and publish, and the dialog binds the new workflow to the hook in one go | A workflow built for a single hook | Use Case #2 and the Extra |
-
-Either way, the **Workflow** list only shows workflows whose inputs and outputs match the selected event.
 
 ---
 
@@ -196,8 +180,6 @@ You are a maker on the finance team. First you create the agent the hooks will a
 
 Create the **Travel Policy Agent** with its full instructions, then add a **Start (pre-loop)** hook that hands the agent the signed-in employee's Microsoft Entra object ID, `userAadObjectId`, and their office location at the beginning of every conversation, through `additionalContext`.
 
-You add this hook the *workflow first* way: build and publish the hook workflow, then connect it to the hook. See [Two ways to create a hook workflow](#two-ways-to-create-a-hook-workflow).
-
 ---
 
 ### Step-by-step instructions
@@ -261,16 +243,20 @@ You add this hook the *workflow first* way: build and publish the hook workflow,
 
     ![Travel Policy Agent saved with its instructions](images/uc1-agent-created.png)
 
-#### Build the hook workflow first
-
-In this use case you build the workflow first and connect it to the hook afterwards: the *workflow first* way from [Two ways to create a hook workflow](#two-ways-to-create-a-hook-workflow). You still start in the **Add hook** dialog, because only that dialog generates a starter that fits a hook event.
+#### Create the hook and its workflow
 
 1. On the top menu bar, next to **Monitor**, select the three dots (**…**) → **Hooks** → **Create**.
 
     > [!IMPORTANT]
     > No **Hooks** in the menu? Check the address bar. Hooks only appear on `https://copilotstudio.preview.microsoft.com/...`, not on `https://copilotstudio.microsoft.com/...`. Add `.preview` and reload — see [Prerequisites](#prerequisites).
 
-1. Set **Event type** to **Start (pre-loop)**. Open the **Workflow** dropdown and select **New workflow**. The designer opens with a starter workflow: **When an agent calls the flow** already carries the `event`, `timestamp` and `metadata` inputs, and **Respond to the agent** already carries the `additionalContext` output.
+1. Set **Event type** to **Start (pre-loop)** and **Name** to:
+
+    ```text
+    Load traveller profile
+    ```
+
+1. Open the **Workflow** dropdown and select **New workflow**. The designer opens with a starter workflow: **When an agent calls the flow** already carries the `event`, `timestamp` and `metadata` inputs, and **Respond to the agent** already carries the `additionalContext` output.
 
     > [!TIP]
     > Keep the starter input and output names exactly as they are, and do not add outputs. If you rename, remove or add fields, the workflow no longer matches the event and disappears from the hook's **Workflow** list.
@@ -287,23 +273,13 @@ In this use case you build the workflow first and connect it to the hook afterwa
 
 1. With the cursor at the end of the text, type **`/`** to open the dynamic content picker and select `metadata` → `userAadObjectId`. It appears as a token after the text.
 
-1. **Publish** the workflow and close the designer.
+1. **Publish** the workflow.
 
     ![Load traveller profile workflow with the office location and userAadObjectId in additionalContext](images/uc1-sessionstart-workflow.png)
 
-1. Closing the designer also closes **Add hook** — if the dialog is still open, select **Cancel**. No hook is added yet, but the published workflow is saved: you'll find **Load traveller profile** on the **Workflows** page.
+1. Close the designer. You are back on **Add hook**, with **Load traveller profile** selected in **Workflow**. Select **Done**, then **Save** the agent.
 
-#### Connect the workflow to the hook
-
-1. Open **…** → **Hooks** → **Create** again. Set **Event type** to **Start (pre-loop)** and **Name** to:
-
-    ```text
-    Load traveller profile
-    ```
-
-1. Open the **Workflow** dropdown. **Load traveller profile** is listed because its inputs and outputs match the Start (pre-loop) event. Select it, then select **Done** and **Save** the agent.
-
-    ![Add hook dialog with the existing Load traveller profile workflow selected](images/uc1-hook-select-existing.png)
+    ![Add hook dialog with the Load traveller profile workflow selected](images/uc1-add-hook.png)
 
 #### Test it
 
@@ -374,9 +350,6 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
     ```
 
 1. In **Workflow**, select **New workflow**. The starter workflow receives `prompt` and returns `modifiedPrompt` and `suppressOutput`.
-
-    > [!NOTE]
-    > This time you use the *native* way from [Two ways to create a hook workflow](#two-ways-to-create-a-hook-workflow): you build the workflow from inside the hook dialog, and publishing binds it to the hook in one go.
 
 #### Classify the prompt
 
@@ -690,7 +663,7 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
     Check approved airline
     ```
 
-1. In **Workflow**, select **New workflow**. The starter workflow receives `event`, `timestamp`, `toolName`, `parameters` and `metadata`, and returns `permissionDecision`, `permissionDecisionReason`, `modifiedParameters`, `additionalContext` and `suppressOutput` — all optional. Like Use Case #2, this is the *native* way: the workflow is built from the hook dialog and bound to it when you publish.
+1. In **Workflow**, select **New workflow**. The starter workflow receives `event`, `timestamp`, `toolName`, `parameters` and `metadata`, and returns `permissionDecision`, `permissionDecisionReason`, `modifiedParameters`, `additionalContext` and `suppressOutput` — all optional.
 
     ![Add hook dialog with Pre tool use and the Book flight tool](images/extra-add-hook.png)
 
