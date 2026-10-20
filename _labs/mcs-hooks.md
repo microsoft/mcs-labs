@@ -194,45 +194,51 @@ Create the agent and its **Create purchase request** tool, then add a **Start (p
 
 1. Select **Save**.
 
-<!-- TODO screenshot: images/uc1-agent-created.png — Zava Procurement Buddy saved with instructions -->
+    ![Zava Procurement Buddy saved with its instructions](images/uc1-agent-created.png)
 
 #### Create the Create purchase request tool
 
-The tool does not reach a real system. It returns a fake purchase request number so you can see whether it ran.
+The tool does not reach a real system. It returns a made-up purchase request number so you can see whether it ran.
 
-1. In the component rail, select **Tools** → **+ Add a tool** → **Workflow** → **New workflow**. The workflow designer opens with a **When an agent calls the flow** trigger and a **Respond to the agent** node.
+1. Next to **Tools**, select **+** → **Add** → **Workflow** → **New workflow**. The workflow designer opens with a **When an agent calls the flow** trigger and a **Respond to the agent** node.
 
 1. Rename the workflow to **Create purchase request**.
 
-1. On **When an agent calls the flow**, add these inputs:
+1. Select **When an agent calls the flow** and add these inputs with **+ Add an input**:
 
     | Input | Type | Description |
     |-------|------|-------------|
     | `supplier` | Text | Name of the supplier to buy from |
-    | `description` | Text | What is being bought |
+    | `description` | Text | Short description of what is being bought |
     | `amount` | Number | Total amount of the purchase |
     | `currency` | Text | Three-letter currency code, for example EUR |
-    | `costCenter` | Text | The employee's cost center |
+    | `costCenter` | Text | Cost center of the requester |
 
-1. On **Respond to the agent**, add a Text output named `prNumber` and set its value with this expression:
+1. Select the **+** after the trigger → **Function** → **Data Operations** → **Compose**. Rename it **Generate PR number**, select **Switch to expression mode** and paste:
 
     ```text
-    concat('PR-', string(rand(10000, 99999)))
+    concat('PR-', formatDateTime(utcNow(), 'yyMMdd-HHmmss'))
     ```
 
-1. **Save** and **Publish** the workflow, then return to the agent and confirm **Create purchase request** is listed under **Tools**. Give it this description if it has none:
+    The designer shows **Expression is valid**.
+
+1. On **Respond to the agent**, add a **Text** output named `prNumber` and set its value to the **Outputs** of **Generate PR number** from the dynamic content picker (type **`/`**).
+
+1. **Publish** the workflow and close the designer. In the **Workflow details** dialog, set **Description for AI** to the text below and add the tool:
 
     ```text
     Submits a purchase request for a Zava employee and returns the purchase request number.
     ```
 
-1. **Save** the agent.
+1. Confirm **Create purchase request** is listed under **Tools**, then **Save** the agent.
 
-<!-- TODO screenshot: images/uc1-tool-workflow.png — Create purchase request workflow with five inputs and prNumber output -->
+    ![Create purchase request workflow with five inputs, Generate PR number and Respond to the agent](images/uc1-tool-workflow.png)
+
+    ![Create purchase request listed under Tools](images/uc1-tool-added.png)
 
 #### Add the Start (pre-loop) hook
 
-1. On the top menu bar, select the three dots (**…**) → **Hooks** → **Create**.
+1. On the top menu bar, next to **Monitor**, select the three dots (**…**) → **Hooks** → **Create**.
 
 1. Set **Event type** to **Start (pre-loop)** and **Name** to:
 
@@ -240,36 +246,36 @@ The tool does not reach a real system. It returns a fake purchase request number
     Load requester context
     ```
 
-1. Select **New workflow**. The designer opens with a starter workflow: **When an agent calls the flow** already carries the `event`, `timestamp` and `metadata` inputs, and **Respond to the agent** already carries the `additionalContext` output.
+1. Open the **Workflow** dropdown and select **New workflow**. The designer opens with a starter workflow: **When an agent calls the flow** already carries the `event`, `timestamp` and `metadata` inputs, and **Respond to the agent** already carries the `additionalContext` output.
 
     > [!TIP]
-    > Keep the starter input and output names exactly as they are. If you rename or remove them, the workflow no longer matches the event and disappears from the hook's **Workflow** list.
+    > Keep the starter input and output names exactly as they are, and do not add outputs. If you rename, remove or add fields, the workflow no longer matches the event and disappears from the hook's **Workflow** list.
 
-1. Between the two nodes, add a **Compose** action. Set its input to `metadata` → `userAadObjectId` from the dynamic content picker (type **`/`**).
-
-1. On **Respond to the agent**, set `additionalContext` to the text below, then replace `{OUTPUT}` with the **Outputs** of the **Compose** step from the dynamic content picker:
+1. Select **Respond to the agent** and paste this into `additionalContext`:
 
     ```text
-    The SessionStart hook was executed, print this as output with lots of smileys, include the: {OUTPUT}
+    The SessionStart hook was executed, print this as output with lots of smileys, include the user object ID: 
     ```
 
-1. **Save** and **Publish** the workflow. When the designer closes, you are back on **Add hook** with the new workflow selected. Select **Done**, then **Save** the agent.
+1. With the cursor at the end of the text, type **`/`** to open the dynamic content picker and select `metadata` → `userAadObjectId`. It appears as a token after the text.
 
-<!-- TODO screenshot: images/uc1-sessionstart-workflow.png — Compose of userAadObjectId feeding additionalContext -->
+1. **Publish** the workflow and close the designer. Back on **Add hook**, select **Load requester context** in **Workflow** if it is not already selected. Select **Done**, then **Save** the agent.
+
+    ![Load requester context workflow with userAadObjectId in additionalContext](images/uc1-sessionstart-workflow.png)
 
 #### Test it
 
-1. In the test pane, start a **new conversation** — the hook only fires when a session begins — and send:
+1. Open **Preview**, turn on **Debug mode**, select **New chat** — the hook only fires when a session begins — and send:
 
     ```text
     Hi
     ```
 
-1. The reply should announce that the SessionStart hook ran, with plenty of smileys and a GUID — your Microsoft Entra object ID.
+1. The reply announces that the SessionStart hook ran, with plenty of smileys and a GUID — your Microsoft Entra object ID.
 
-1. Open the activity / trace for the turn and find the hook. You can see the `additionalContext` it returned, attached to your first message.
+1. Expand **Executed hook: SessionStart** above the reply. You see the hook's input — including `metadata` — and the `additionalContext` it returned.
 
-<!-- TODO screenshot: images/uc1-sessionstart-test.png — test pane reply with smileys and object ID, plus trace -->
+    ![Test pane reply with smileys and the user object ID](images/uc1-sessionstart-test.png)
 
 > [!NOTE]
 > You did not type your ID, and the instructions say nothing about smileys. The hook supplied both. In production this is where you would look up the employee's cost center, approval limit and preferred language — and the agent would simply know them.
@@ -312,28 +318,28 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
     Redact personal data
     ```
 
-1. Select **New workflow**. The starter workflow receives `prompt` and returns `modifiedPrompt` and `suppressOutput`.
+1. In **Workflow**, select **New workflow**. The starter workflow receives `prompt` and returns `modifiedPrompt` and `suppressOutput`.
 
 #### Classify the prompt
 
-1. After **When an agent calls the flow**, add a **Classify** node. Pick the default model if none is selected, and set the text to classify to `prompt` from the dynamic content picker.
+1. Select **When an agent calls the flow**, then select **Classify** in the **Add** panel. The Classify node is inserted between the trigger and **Respond to the agent**. Set the text to classify to `prompt` from the dynamic content picker (type **`/`**).
 
-1. Add a category named `Contains PII` with this description:
-
-    ```text
-    The text contains personal or financial data: names of private individuals, a personal email address or phone number, a home address, a national ID or social security number, an IBAN or bank account number, or a credit card number.
-    ```
-
-1. Add a second category named `No PII` with this description:
+1. Name the first category `No PII` with this description:
 
     ```text
     The text contains no personal or financial data. Company names, supplier names, product descriptions, amounts, currencies and cost centers are not personal data.
     ```
 
-    > [!NOTE]
-    > The Classify node also creates a **Default** branch for anything that matches neither category. Treat it like **No PII** in this lab.
+1. Name the second category `Contains PII` with this description:
 
-1. Use the **Test** tab on the Classify node with each of these and confirm the category:
+    ```text
+    The text contains personal or financial data: names of private individuals, a personal email address or phone number, a home address, a national ID or social security number, an IBAN or bank account number, or a credit card number.
+    ```
+
+    > [!NOTE]
+    > Classify also creates a **Default** category for anything that matches neither. On the canvas it shows as a third branch, **Other**. Treat it like **No PII**.
+
+1. Optionally, use the **Run node** tab on the Classify node with each of these and confirm the category:
 
     ```text
     I need 20 office chairs from Fabrikam, about 3,000 EUR, cost center ZA-4410.
@@ -343,17 +349,22 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
     Please pay Fabrikam to IBAN NL91 ABNA 0417 1643 00 and send the invoice to jan.devries@outlook.com.
     ```
 
-<!-- TODO screenshot: images/uc2-classify-categories.png — Classify node with Contains PII / No PII -->
+    ![Classify node with the No PII and Contains PII categories](images/uc2-classify-categories.png)
 
 #### Pass clean prompts through
 
-1. On the **No PII** branch (and the **Default** branch), add **Respond to the agent** and set `modifiedPrompt` to `prompt`. Leave `suppressOutput` empty.
+1. Make sure the **No PII** branch is connected to **Respond to the agent**. Then drag the connection point of **Other** onto **Respond to the agent** as well.
+
+1. Select **Respond to the agent** and set `modifiedPrompt` to `prompt` from the dynamic content picker. Leave `suppressOutput` empty.
+
+    > [!IMPORTANT]
+    > Do not leave `modifiedPrompt` empty here, and wire **every** branch. If no **Respond to the agent** runs, the workflow run can still show *Succeeded*, but the hook reports that it could not be executed and the agent carries on as if there were no hook. When in doubt, open the workflow's **Activity** tab, select the run and check which nodes were skipped.
 
 #### Redact with an inline agent
 
-1. On the **Contains PII** branch, add an **Agent** node. Leave the agent dropdown on **New agent for this workflow**.
+1. Select the **+** on the **Contains PII** branch and add an **Agent** node. Leave the agent dropdown on **New agent for this workflow** and rename the node **Redact PII**.
 
-1. Paste these **Instructions**, then replace `{PROMPT}` with `prompt` from the dynamic content picker (type **`/`**):
+1. Paste these **Instructions**, then put the cursor after `Text:` and insert `prompt` from the dynamic content picker:
 
     ```text
     Rewrite the text below, replacing every piece of personal or financial data with a typed placeholder in capitals and square brackets, for example [NAME REDACTED], [EMAIL REDACTED], [PHONE REDACTED], [ADDRESS REDACTED], [NATIONAL ID REDACTED], [IBAN REDACTED], [CARD NUMBER REDACTED].
@@ -366,24 +377,28 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
     Return only the rewritten text and the note. No explanation, no quotes, no formatting.
 
     Text:
-    {PROMPT}
     ```
 
-1. After the Agent node, add **Respond to the agent** and set `modifiedPrompt` to the agent's response from the dynamic content picker.
+1. Select **Respond to the agent**, copy it (**Ctrl+C** / **Cmd+C**) and paste it (**Ctrl+V** / **Cmd+V**). The copy, **Respond to the agent 2**, has the same outputs as the starter. Drag the output connection point of **Redact PII** onto it.
 
-1. **Save** and **Publish** the workflow, select **Done**, then **Save** the agent.
+    > [!TIP]
+    > Copy the starter node rather than adding a new **Respond to the agent** from the panel. Outputs you add yourself are marked required, every Respond node in a workflow must return the same schema, and a mismatch makes the workflow incompatible with the hook.
 
-<!-- TODO screenshot: images/uc2-redaction-workflow.png — Classify branches, inline agent and both Respond nodes -->
+1. On **Respond to the agent 2**, set `modifiedPrompt` to **Agent Response** of **Redact PII** from the dynamic content picker.
+
+1. **Publish** the workflow and close the designer. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
+
+    ![Redact personal data workflow: Classify branches, Redact PII and both Respond nodes](images/uc2-redaction-workflow.png)
 
 #### Test it
 
-1. Start a new conversation in the test pane and send the clean prompt:
+1. Select **New chat** in the test pane and send the clean prompt:
 
     ```text
     I need 20 office chairs from Fabrikam, about 3,000 EUR, cost center ZA-4410.
     ```
 
-    The agent carries on as normal. In the trace, the hook ran and `modifiedPrompt` is identical to what you typed.
+    The agent carries on as normal. Expand **Executed hook: UserPromptSubmitted** — `modifiedPrompt` is identical to what you typed.
 
 1. Now send the prompt with personal data:
 
@@ -391,9 +406,9 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
     Please order 5 laptop stands from Fabrikam for 250 EUR, cost center ZA-4410. Pay to IBAN NL91 ABNA 0417 1643 00 and send the invoice to jan.devries@outlook.com.
     ```
 
-1. The agent tells you personal data was removed and asks you not to share it. In the trace, `modifiedPrompt` shows `[IBAN REDACTED]` and `[EMAIL REDACTED]` — that is the only version the model worked with. The supplier, amount and cost center survived.
+1. The agent tells you personal data was removed and asks you not to share it. In the hook's **Output**, `modifiedPrompt` shows `[IBAN REDACTED]` and `[EMAIL REDACTED]` — that is the only version the model worked with. The supplier, amount and cost center survived.
 
-<!-- TODO screenshot: images/uc2-redaction-test.png — trace showing original prompt vs modifiedPrompt -->
+    ![Hook output with the redacted modifiedPrompt](images/uc2-redaction-test.png)
 
 > [!IMPORTANT]
 > The hook changes what the **model** sees. It does not erase what Copilot Studio has already received — the original prompt still reaches the hook workflow and can appear in transcripts. Configure transcript access and retention separately.
@@ -422,7 +437,7 @@ Zava buys from five approved suppliers. A purchase request for anyone else must 
 
 ### Objective
 
-Add a **Pre tool use** hook scoped to **Create purchase request**. Its workflow checks `parameters.supplier` against an approved list and returns `deny` with a reason and the list of alternatives when the supplier is not on it.
+Add a **Pre tool use** hook scoped to **Create purchase request**. Its workflow checks the supplier in the tool's `parameters` against an approved list and returns `deny` with a reason and the list of alternatives when the supplier is not on it.
 
 ---
 
@@ -430,58 +445,69 @@ Add a **Pre tool use** hook scoped to **Create purchase request**. Its workflow 
 
 #### Create the hook and its workflow
 
-1. **…** → **Hooks** → **Create**. Set **Event type** to **Pre tool use** and **Name** to:
+1. **…** → **Hooks** → **Create**. Set **Event type** to **Pre tool use**. A **Tools** field appears.
+
+1. In **Tools**, select **Create purchase request**. The hook now fires only for that tool — leave it empty and it fires for every tool.
+
+1. Set **Name** to:
 
     ```text
     Check approved supplier
     ```
 
-1. In **Tools**, select **Create purchase request**. The hook now fires only for that tool.
+1. In **Workflow**, select **New workflow**. The starter workflow receives `event`, `timestamp`, `toolName`, `parameters` and `metadata`, and returns `permissionDecision`, `permissionDecisionReason`, `modifiedParameters`, `additionalContext` and `suppressOutput` — all optional.
 
-1. Select **New workflow**. The starter workflow receives `toolName` and `parameters` and returns `permissionDecision`, `permissionDecisionReason`, `modifiedParameters`, `additionalContext` and `suppressOutput`.
-
-#### Load the approved supplier list
-
-1. After the trigger, add a **Compose** action, rename it **Approved suppliers**, and paste:
-
-    ```json
-    ["Fabrikam", "Northwind Traders", "Litware", "Adventure Works", "Wide World Importers"]
-    ```
+    ![Add hook dialog with Pre tool use and the Create purchase request tool](images/uc3-add-hook.png)
 
 #### Check the supplier
 
-1. Add a **Condition**. Switch the left side to expression mode (**`</>`**) and paste:
+1. Select **When an agent calls the flow**, then select **If/Else** in the **Add** panel. The If/Else node is inserted between the trigger and **Respond to the agent**; the starter Respond is connected to its first branch.
+
+1. Select the If/Else node. Rename the first branch to `Approved supplier`.
+
+1. Click in **Property** and paste this expression, **including** `@{` and `}` — the field turns it into an expression token:
 
     ```text
-    contains(split(toLower(join(outputs('Approved_suppliers'), '|')), '|'), toLower(trim(string(triggerBody()?['parameters']?['supplier']))))
+    @{contains(createArray('fabrikam','northwind traders','litware','adventure works','wide world importers'), toLower(trim(string(triggerBody()?['parameters']?['text']))))}
     ```
 
-    Set the operator to **is equal to** and the right side to `true`.
+1. Leave **Operator** on **Equals** and set **Value** to `true`.
+
+    ![If/Else with the Approved supplier condition](images/uc3-ifelse-condition.png)
+
+    > [!IMPORTANT]
+    > **Why `['text']` and not `['supplier']`?** `parameters` carries the tool workflow's **internal** input keys, not the names you typed. Text inputs become `text`, `text_1`, `text_2`…, number inputs `number`, in the order you created them. Supplier was the first text input, so it arrives as `text`. Whenever you build a **Pre tool use** hook, run the tool once and read `parameters` in the hook's input in the test pane to find the right key.
 
     > [!TIP]
-    > The expression lower-cases both sides, so `fabrikam` and `Fabrikam` match, but `Fabrikam Inc.` does not — it is an exact, case-insensitive match. If your trigger action has a different name, or `parameters` arrives as text rather than an object, pick `parameters` → `supplier` from the dynamic content picker instead, or wrap it as `json(triggerBody()?['parameters'])?['supplier']`. Check a real run in the trace if in doubt.
+    > The expression lower-cases and trims the supplier, so `fabrikam` and ` Fabrikam ` match, but `Fabrikam Inc.` does not — it is an exact, case-insensitive match.
 
 #### Return the decision
 
-1. On the **True** branch (approved), add **Respond to the agent** and leave **every output empty**. Empty means *allow*: the tool runs with its original parameters.
+1. The **Approved supplier** branch already leads to **Respond to the agent**. Leave **every output empty**. Empty means *allow*: the tool runs with its original parameters.
 
-1. On the **False** branch (not approved), add **Respond to the agent** and set:
+1. Select **Respond to the agent**, copy it (**Ctrl+C** / **Cmd+C**) and paste it (**Ctrl+V** / **Cmd+V**). Drag the **Else** connection point of the If/Else onto the copy, **Respond to the agent 2**.
+
+1. On **Respond to the agent 2**, set:
 
     | Output | Value |
     |--------|-------|
     | `permissionDecision` | `deny` |
     | `permissionDecisionReason` | `This supplier is not on Zava's approved supplier list, so the purchase request was not created.` |
-    | `additionalContext` | `Approved Zava suppliers: @{join(outputs('Approved_suppliers'), ', ')}. Offer these to the user and ask which one to use instead.` |
+    | `additionalContext` | `Approved Zava suppliers: Fabrikam, Northwind Traders, Litware, Adventure Works, Wide World Importers. Offer these to the user and ask which one to use instead.` |
 
-    Leave `modifiedParameters` empty and `suppressOutput` false.
+    Leave `modifiedParameters` and `suppressOutput` empty.
 
-1. **Save** and **Publish** the workflow, select **Done**, then **Save** the agent.
+1. **Publish** the workflow and close the designer. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
 
-<!-- TODO screenshot: images/uc3-pretool-workflow.png — Approved suppliers compose, condition and deny branch outputs -->
+    ![Check approved supplier workflow: If/Else with an allow and a deny Respond node](images/uc3-pretool-workflow.png)
+
+1. Open **…** → **Hooks**. All three hooks are listed.
+
+    ![Hooks list with the three hooks](images/uc3-hooks-list.png)
 
 #### Test it
 
-1. Start a new conversation and send:
+1. Select **New chat** and send:
 
     ```text
     Order 10 standing desks from Tailspin Toys for 4,500 EUR, cost center ZA-4410.
@@ -489,18 +515,19 @@ Add a **Pre tool use** hook scoped to **Create purchase request**. Its workflow 
 
 1. The agent tries to call **Create purchase request**, the hook denies it, and the agent explains that Tailspin Toys is not an approved supplier and offers the five that are. No purchase request number is returned.
 
+1. Expand **Executed hook: PreTool (Createpurchaserequest)**. The input shows the proposed `parameters` with `"text": "Tailspin Toys"`; the **Output** shows `isContinue: false`, `permissionDecision: deny` and your reason and context. The tool itself never ran.
+
+    ![PreTool hook trace denying Tailspin Toys](images/uc3-pretool-deny.png)
+
 1. Reply:
 
     ```text
     Use Fabrikam instead.
     ```
 
-1. This time the hook allows the call, the tool runs, and the agent confirms a `PR-` number.
+1. This time the hook returns `isContinue: true`, the tool runs, and the agent confirms a `PR-` number.
 
-1. Open the trace for both turns. In the first, find the **Pre tool use** hook, the proposed `parameters` with `supplier: Tailspin Toys`, and the `deny` decision — the tool itself never ran. In the second, the hook returned nothing and the tool ran.
-
-<!-- TODO screenshot: images/uc3-pretool-deny.png — trace showing deny for Tailspin Toys -->
-<!-- TODO screenshot: images/uc3-pretool-allow.png — trace showing allowed call and PR number for Fabrikam -->
+    ![PreTool hook allowing Fabrikam and the purchase request number](images/uc3-pretool-allow.png)
 
 > [!IMPORTANT]
 > **Hooks fail open.** If the hook workflow errors or times out, the tool call goes ahead. A rule that *must* hold — such as the approved supplier list — also has to be enforced by the purchasing system behind the tool. The hook stops the agent from trying; the backend stops the purchase.
@@ -538,7 +565,7 @@ Time left? Each idea below reuses what you just built. There are no step-by-step
 
 * **Hooks run on events, not on judgement.** The agent never chose to load your identity, redact a prompt or check a supplier. The runtime did, because the event fired.
 * **Each event changes a different thing.** Start (pre-loop) adds context, User prompt submitted replaces the prompt, Pre tool use allows, modifies or denies a tool call.
-* **A hook is just a workflow with a fixed contract.** Inputs and outputs are defined by the event; between them you can use anything a workflow can — Compose, Condition, Classify, an inline agent.
+* **A hook is just a workflow with a fixed contract.** Inputs and outputs are defined by the event; between them you can use anything a workflow can — If/Else, Classify, an inline agent, an expression.
 * **Deny with a reason and a way forward.** The agent recovered from the blocked request because `additionalContext` told it which suppliers were allowed.
 * **Instructions stayed short.** Three rules were added to the agent's behaviour without a single extra line in its instructions.
 
