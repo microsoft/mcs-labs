@@ -8,7 +8,7 @@ Add hooks to an agent on the GitHub Copilot harness so that a workflow runs at f
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 200 | Maker | 30 minutes | After completing this lab, participants will be able to attach workflows to agent lifecycle events with hooks, return context to the model at session start, rewrite a user's prompt with a classifier and an inline agent before the agent sees it, and deny a tool call that breaks a business rule — and explain why each of these belongs in a hook rather than in instructions or a tool. |
+| 200 | Maker | 35 minutes | After completing this lab, participants will be able to attach workflows to agent lifecycle events with hooks, return context to the model at session start, rewrite a user's prompt with a classifier and an inline agent before the agent uses it further, and deny a tool call that breaks a business rule — and explain why each of these belongs in a hook rather than in instructions or a tool. |
 
 ---
 
@@ -23,7 +23,7 @@ Add hooks to an agent on the GitHub Copilot harness so that a workflow runs at f
 - [Use Cases Covered](#-use-cases-covered)
 - [Instructions by Use Case](#️-instructions-by-use-case)
   - [Use Case #1: Build Zava Procurement Buddy and load context at session start](#-use-case-1-build-zava-procurement-buddy-and-load-context-at-session-start)
-  - [Use Case #2: Redact personal data before the agent sees it](#-use-case-2-redact-personal-data-before-the-agent-sees-it)
+  - [Use Case #2: Redact personal data before the agent uses it](#-use-case-2-redact-personal-data-before-the-agent-uses-it)
   - [Use Case #3: Block unapproved suppliers before the tool runs](#-use-case-3-block-unapproved-suppliers-before-the-tool-runs)
 - [Bonus: Try it yourself](#-bonus-try-it-yourself)
 - [Summary of learnings](#-summary-of-learnings)
@@ -46,7 +46,7 @@ That is what hooks are for. A hook binds a workflow to a moment in the agent's l
 **Common challenges solved by this lab:**
 
 - "Every conversation starts cold — the agent has to ask who I am before it can help"
-- "Users paste bank details and personal email addresses into the chat, and I don't want the model to process them"
+- "Users paste bank details and personal email addresses into the chat, and I don't want the agent to carry them into its replies and tool calls"
 - "I wrote 'only use approved suppliers' in the instructions, and the agent still raised a request for a supplier we don't use"
 
 **Pairs with:** the *Deep dive in modern agents* workshop.
@@ -58,10 +58,10 @@ That is what hooks are for. A hook binds a workflow to a moment in the agent's l
 **Zava** is a fast-growing retailer. Its finance and procurement team wants employees to raise their own purchase requests through an agent instead of filling in forms — and it has three concerns before it lets that agent loose.
 
 1. **Know who is asking.** Every request needs to be tied to the signed-in employee from the very first message.
-2. **Keep personal data out of the model.** Employees routinely paste a supplier's IBAN, a colleague's personal phone number or their own card number into a request. Procurement does not need it, and the agent should never see it.
+2. **Keep personal data out of the agent's work.** Employees routinely paste a supplier's IBAN, a colleague's personal phone number or their own card number into a request. Procurement does not need it, so it must be redacted before the agent uses the message — in its reasoning, its replies or its tool calls.
 3. **Only buy from approved suppliers.** Zava has a short list of approved vendors. A purchase request for anyone else must be stopped *before* it is created — not politely discouraged in the instructions.
 
-In this lab you build **Zava Procurement Buddy** on the GitHub Copilot harness and give it one tool, **Create purchase request**. Then you add three hooks, one per concern, and watch each one change what the agent does — without touching its instructions.
+In this lab you build **Zava Procurement Buddy** on the GitHub Copilot harness and add three hooks, one per concern, and watch each one change what the agent does — without touching its instructions. In Use Case #3 you also give the agent a deliberately minimal **Create purchase request** tool: the action the supplier check guards.
 
 **What You Will Learn**
 
@@ -117,6 +117,15 @@ Either way, the **Workflow** list only shows workflows whose inputs and outputs 
 - A Power Platform environment where you can create agents and **Workflows**.
 - Signed in with your work account — the session-start hook reads your Microsoft Entra object ID from `metadata`.
 
+> [!IMPORTANT]
+> **Use the `.preview` URL, or you won't see Hooks.** On `https://copilotstudio.microsoft.com/environments/<environment-id>` the **Hooks** option is missing from the agent's **…** menu. Add `.preview` after `copilotstudio` in the address bar:
+>
+> | ❌ No Hooks | ✅ Hooks |
+> |------------|---------|
+> | `https://copilotstudio.microsoft.com/environments/<environment-id>` | `https://copilotstudio.preview.microsoft.com/environments/<environment-id>` |
+>
+> Keep the rest of the URL the same — environment ID, agent ID and page. If you open an agent from a link, a bookmark or Power Apps, check the address bar before you look for **Hooks**.
+
 > [!NOTE]
 > Hooks are a preview feature and the designer is still changing. If a label in this lab differs slightly from what you see, look for the closest match — the event names, input names and output names are the stable part.
 
@@ -129,10 +138,10 @@ Either way, the **Workflow** list only shows workflows whose inputs and outputs 
 
 By the end of this lab you will have:
 
-- Built **Zava Procurement Buddy** with one workflow tool, **Create purchase request**
+- Built **Zava Procurement Buddy** on the GitHub Copilot harness
 - Added a **Start (pre-loop)** hook that hands the model your identity before the first message
 - Added a **User prompt submitted** hook that classifies every prompt and redacts personal data with an inline agent
-- Added a **Pre tool use** hook that denies purchase requests for unapproved suppliers and tells the agent which suppliers are allowed
+- Added a minimal **Create purchase request** tool and a **Pre tool use** hook that denies purchase requests for unapproved suppliers and tells the agent which suppliers are allowed
 
 ---
 
@@ -141,8 +150,8 @@ By the end of this lab you will have:
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
 | 1 | [Build Zava Procurement Buddy and load context at session start](#-use-case-1-build-zava-procurement-buddy-and-load-context-at-session-start) | An agent that knows who it is talking to before the first turn | 10 min |
-| 2 | [Redact personal data before the agent sees it](#-use-case-2-redact-personal-data-before-the-agent-sees-it) | Personal and financial data never reaches the model | 10 min |
-| 3 | [Block unapproved suppliers before the tool runs](#-use-case-3-block-unapproved-suppliers-before-the-tool-runs) | A business rule the agent cannot talk its way around | 10 min |
+| 2 | [Redact personal data before the agent uses it](#-use-case-2-redact-personal-data-before-the-agent-uses-it) | The agent only works with a redacted copy of personal and financial data | 10 min |
+| 3 | [Block unapproved suppliers before the tool runs](#-use-case-3-block-unapproved-suppliers-before-the-tool-runs) | A business rule the agent cannot talk its way around | 15 min |
 
 ---
 
@@ -152,7 +161,7 @@ By the end of this lab you will have:
 
 ## 🧱 Use Case #1: Build Zava Procurement Buddy and load context at session start
 
-You are a maker on Zava's finance team. Before you add any hooks you need an agent and a tool for them to act on.
+You are a maker on Zava's finance team. Before you add any hooks you need an agent for them to act on.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
@@ -160,7 +169,7 @@ You are a maker on Zava's finance team. Before you add any hooks you need an age
 
 ### Objective
 
-Create the agent and its **Create purchase request** tool, then add a **Start (pre-loop)** hook that returns `additionalContext` at the beginning of every conversation.
+Create the agent, then add a **Start (pre-loop)** hook that hands the agent the signed-in employee's identity — their Microsoft Entra object ID, `userAadObjectId` — at the beginning of every conversation, through `additionalContext`.
 
 You add this hook the *workflow first* way: build and publish the hook workflow, then connect it to the hook. See [Two ways to create a hook workflow](#two-ways-to-create-a-hook-workflow).
 
@@ -183,7 +192,7 @@ You add this hook the *workflow first* way: build and publish the hook workflow,
     ```text
     You help Zava employees raise purchase requests.
 
-    Collect the supplier, a short description of what is being bought, the amount, the currency and the employee's cost center, then use the Create purchase request tool to submit it. Ask only for the details that are missing. Confirm the purchase request number once it is created.
+    Collect the supplier, a short description of what is being bought, the amount, the currency and the employee's cost center, then use the Create purchase request tool to submit it. Ask only for the details that are missing. Confirm to the employee once the request is submitted.
 
     If a request is blocked, explain why in plain language and help the employee choose an alternative.
 
@@ -192,56 +201,21 @@ You add this hook the *workflow first* way: build and publish the hook workflow,
 
     > [!NOTE]
     > Notice what is **not** in there: nothing about personal data, nothing about approved suppliers. Those rules are about to be enforced by hooks, which run whether or not the model remembers them.
+    >
+    > The instructions already mention the **Create purchase request** tool. You add it in [Use Case #3](#-use-case-3-block-unapproved-suppliers-before-the-tool-runs), where the Pre tool use hook needs a tool call to guard. Until then the agent collects the details but can't submit them.
 
 1. Select **Save**.
 
     ![Zava Procurement Buddy saved with its instructions](images/uc1-agent-created.png)
-
-#### Create the Create purchase request tool
-
-The tool does not reach a real system. It returns a made-up purchase request number so you can see whether it ran.
-
-1. Next to **Tools**, select **+** → **Add** → **Workflow** → **New workflow**. The workflow designer opens with a **When an agent calls the flow** trigger and a **Respond to the agent** node.
-
-1. Rename the workflow to **Create purchase request**.
-
-1. Select **When an agent calls the flow** and add these inputs with **+ Add an input**:
-
-    | Input | Type | Description |
-    |-------|------|-------------|
-    | `supplier` | Text | Name of the supplier to buy from |
-    | `description` | Text | Short description of what is being bought |
-    | `amount` | Number | Total amount of the purchase |
-    | `currency` | Text | Three-letter currency code, for example EUR |
-    | `costCenter` | Text | Cost center of the requester |
-
-1. Select the **+** after the trigger → **Function** → **Data Operations** → **Compose**. Rename it **Generate PR number**, select **Switch to expression mode** and paste:
-
-    ```text
-    concat('PR-', formatDateTime(utcNow(), 'yyMMdd-HHmmss'))
-    ```
-
-    The designer shows **Expression is valid**.
-
-1. On **Respond to the agent**, add a **Text** output named `prNumber` and set its value to the **Outputs** of **Generate PR number** from the dynamic content picker (type **`/`**).
-
-1. **Publish** the workflow and close the designer. In the **Workflow details** dialog, set **Description for AI** to the text below and add the tool:
-
-    ```text
-    Submits a purchase request for a Zava employee and returns the purchase request number.
-    ```
-
-1. Confirm **Create purchase request** is listed under **Tools**, then **Save** the agent.
-
-    ![Create purchase request workflow with five inputs, Generate PR number and Respond to the agent](images/uc1-tool-workflow.png)
-
-    ![Create purchase request listed under Tools](images/uc1-tool-added.png)
 
 #### Build the hook workflow first
 
 In this use case you build the workflow first and connect it to the hook afterwards: the *workflow first* way from [Two ways to create a hook workflow](#two-ways-to-create-a-hook-workflow). You still start in the **Add hook** dialog, because only that dialog generates a starter that fits a hook event.
 
 1. On the top menu bar, next to **Monitor**, select the three dots (**…**) → **Hooks** → **Create**.
+
+    > [!IMPORTANT]
+    > No **Hooks** in the menu? Check the address bar. Hooks only appear on `https://copilotstudio.preview.microsoft.com/...`, not on `https://copilotstudio.microsoft.com/...`. Add `.preview` and reload — see [Prerequisites](#-prerequisites).
 
 1. Set **Event type** to **Start (pre-loop)**. Open the **Workflow** dropdown and select **New workflow**. The designer opens with a starter workflow: **When an agent calls the flow** already carries the `event`, `timestamp` and `metadata` inputs, and **Respond to the agent** already carries the `additionalContext` output.
 
@@ -293,7 +267,20 @@ In this use case you build the workflow first and connect it to the hook afterwa
     ![Test pane reply with smileys and the user object ID](images/uc1-sessionstart-test.png)
 
 > [!NOTE]
-> You did not type your ID, and the instructions say nothing about smileys. The hook supplied both. In production this is where you would look up the employee's cost center, approval limit and preferred language — and the agent would simply know them.
+> You did not type your ID, and the instructions say nothing about smileys. The hook supplied both. The smileys are only there to make the hook visible.
+
+#### From object ID to requester context
+
+`userAadObjectId` is the useful part. It identifies the signed-in employee in Microsoft Entra ID, so a hook workflow can use it as the key to look up everything else about the requester, before the agent says a word:
+
+| Add to the hook workflow | Use `userAadObjectId` as | Gives the agent |
+|--------------------------|--------------------------|-----------------|
+| **Office 365 Users** → **Get user profile (V2)** | **User (UPN)** | Display name, department, job title, office location |
+| **Office 365 Users** → **Get manager (V2)** | **User (UPN)** | The approver for this employee |
+| **HTTP with Microsoft Entra ID** → Microsoft Graph `GET /users/{id}` | `{id}` | Any directory attribute, such as `employeeId` or an extension attribute for the cost center |
+| A Dataverse or SharePoint lookup | The filter value | Zava-specific data: approval limit, default cost center, preferred language |
+
+Put the results in `additionalContext`, for example *"The requester is Jan de Vries, Finance, cost center ZA-4410, manager Priya Patel."*, and the agent no longer has to ask for them. You don't need to build this for the lab.
 
 ---
 
@@ -309,13 +296,13 @@ In this use case you build the workflow first and connect it to the hook afterwa
 
 ---
 
-## 🧱 Use Case #2: Redact personal data before the agent sees it
+## 🧱 Use Case #2: Redact personal data before the agent uses it
 
-Employees paste whatever they have to hand into the chat — a supplier's bank details, a personal email address, a card number. Procurement does not need any of it, and Zava does not want the model to process it.
+Employees paste whatever they have to hand into the chat — a supplier's bank details, a personal email address, a card number. Procurement does not need any of it, so Zava wants it removed before the agent reasons about it, repeats it or passes it to a tool.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Redact personal data before the agent sees it | Personal and financial data never reaches the model | 10 minutes |
+| Redact personal data before the agent uses it | The agent only works with a redacted copy of personal and financial data | 10 minutes |
 
 ### Objective
 
@@ -428,12 +415,12 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
     Please order 5 laptop stands from Fabrikam for 250 EUR, cost center ZA-4410. Pay to IBAN NL91 ABNA 0417 1643 00 and send the invoice to jan.devries@outlook.com.
     ```
 
-1. The agent tells you personal data was removed and asks you not to share it. In the hook's **Output**, `modifiedPrompt` shows `[IBAN REDACTED]` and `[EMAIL REDACTED]` — that is the only version the model worked with. The supplier, amount and cost center survived.
+1. The agent tells you personal data was removed and asks you not to share it. In the hook's **Output**, `modifiedPrompt` shows `[IBAN REDACTED]` and `[EMAIL REDACTED]` — that is the version the agent works with from here on. The supplier, amount and cost center survived.
 
     ![Hook output with the redacted modifiedPrompt](images/uc2-redaction-test.png)
 
 > [!IMPORTANT]
-> The hook changes what the **model** sees. It does not erase what Copilot Studio has already received — the original prompt still reaches the hook workflow and can appear in transcripts. Configure transcript access and retention separately.
+> The hook changes what the **agent works with**. It does not erase what Copilot Studio has already received — the original prompt still reaches the hook workflow and can appear in transcripts. Configure transcript access and retention separately.
 
 ---
 
@@ -455,15 +442,54 @@ Zava buys from five approved suppliers. A purchase request for anyone else must 
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Block unapproved suppliers before the tool runs | A business rule the agent cannot talk its way around | 10 minutes |
+| Block unapproved suppliers before the tool runs | A business rule the agent cannot talk its way around | 15 minutes |
 
 ### Objective
 
-Add a **Pre tool use** hook scoped to **Create purchase request**. Its workflow checks the supplier in the tool's `parameters` against an approved list and returns `deny` with a reason and the list of alternatives when the supplier is not on it.
+Give the agent a minimal **Create purchase request** tool, then add a **Pre tool use** hook scoped to that tool. Its workflow checks the supplier in the tool's `parameters` against an approved list and returns `deny` with a reason and the list of alternatives when the supplier is not on it.
 
 ---
 
 ### Step-by-step instructions
+
+#### Create the action the hook guards
+
+A **Pre tool use** hook needs a tool call to intercept. The tool you add here is deliberately empty: it doesn't reach a real purchasing system and only returns `Purchase request submitted`. What matters is that the agent calls it with a supplier, so the hook has something to check.
+
+1. On the agent's **Build** page, next to **Tools**, select **+** → **Add** → **Workflow** → **New workflow**. The workflow designer opens with a **When an agent calls the flow** trigger and a **Respond to the agent** node.
+
+1. Rename the workflow to **Create purchase request**.
+
+1. Select **When an agent calls the flow** and add these inputs with **+ Add an input**, in this order:
+
+    | Input | Type | Description |
+    |-------|------|-------------|
+    | `supplier` | Text | Name of the supplier to buy from |
+    | `description` | Text | Short description of what is being bought |
+    | `amount` | Number | Total amount of the purchase |
+    | `currency` | Text | Three-letter currency code, for example EUR |
+    | `costCenter` | Text | Cost center of the requester |
+
+    > [!NOTE]
+    > Keep `supplier` as the **first** Text input. The hook reads it by its internal key, which depends on this order.
+
+1. On **Respond to the agent**, add a **Text** output named `result` with the value:
+
+    ```text
+    Purchase request submitted
+    ```
+
+1. **Publish** the workflow and close the designer. In the **Workflow details** dialog, set **Description for Intelligence** to the text below and add the tool:
+
+    ```text
+    Submits a purchase request for a Zava employee. Use it once you have the supplier, description, amount, currency and cost center.
+    ```
+
+    ![Create purchase request workflow: five inputs and a Respond node returning Purchase request submitted](images/uc3-tool-workflow.png)
+
+1. Confirm **Create purchase request** is listed under **Tools**, then **Save** the agent.
+
+    ![Create purchase request listed under Tools](images/uc3-tool-added.png)
 
 #### Create the hook and its workflow
 
@@ -537,7 +563,7 @@ Add a **Pre tool use** hook scoped to **Create purchase request**. Its workflow 
     Order 10 standing desks from Tailspin Toys for 4,500 EUR, cost center ZA-4410.
     ```
 
-1. The agent tries to call **Create purchase request**, the hook denies it, and the agent explains that Tailspin Toys is not an approved supplier and offers the five that are. No purchase request number is returned.
+1. The agent tries to call **Create purchase request**, the hook denies it, and the agent explains that Tailspin Toys is not an approved supplier and offers the five that are. The tool never ran, so the agent does not confirm a submission.
 
 1. Expand **Executed hook: PreTool (Createpurchaserequest)**. The input shows the proposed `parameters` with `"text": "Tailspin Toys"`; the **Output** shows `isContinue: false`, `permissionDecision: deny` and your reason and context. The tool itself never ran.
 
@@ -549,9 +575,9 @@ Add a **Pre tool use** hook scoped to **Create purchase request**. Its workflow 
     Use Fabrikam instead.
     ```
 
-1. This time the hook returns `isContinue: true`, the tool runs, and the agent confirms a `PR-` number.
+1. This time the hook returns `isContinue: true`, **Used tool: Create purchase request** appears under the hook, and the agent confirms the request was submitted.
 
-    ![PreTool hook allowing Fabrikam and the purchase request number](images/uc3-pretool-allow.png)
+    ![PreTool hook allowing Fabrikam and the tool running](images/uc3-pretool-allow.png)
 
 > [!IMPORTANT]
 > **Hooks fail open.** If the hook workflow errors or times out, the tool call goes ahead. A rule that *must* hold — such as the approved supplier list — also has to be enforced by the purchasing system behind the tool. The hook stops the agent from trying; the backend stops the purchase.
@@ -578,7 +604,7 @@ Time left? Each idea below reuses what you just built. There are no step-by-step
 |------|-------|----------------|
 | **Fix instead of block.** Normalise the currency to `EUR`, or overwrite `costCenter` with the requester's real cost center, so a sloppy call is corrected rather than refused | **Pre tool use** | `modifiedParameters` with the corrected arguments |
 | **Spend limit.** Deny any purchase request above 5,000 and tell the agent to route the employee to their manager | **Pre tool use** | `permissionDecision` = `deny`, a reason, and guidance in `additionalContext` |
-| **Tidy the confirmation.** Add the expected approval time and approver to the purchase request result, or write every created request to a list for auditing | **Post tool use** | `modifiedResult`, or nothing (log only) |
+| **Tidy the confirmation.** Add the expected approval time and approver to the tool's result, or write every submitted request to a list for auditing | **Post tool use** | `modifiedResult`, or nothing (log only) |
 | **Guide the retry.** Make **Create purchase request** fail when `costCenter` is empty and tell the agent to ask the user for it | **After tool failure** | `additionalContext` with the guidance |
 | **A friendlier error.** Replace a generic failure with a Zava-branded message and skip the failing step | **Error** | `userNotification`, `errorHandling` = `skip` |
 | **Stay on topic.** Classify prompts as *Procurement* or *Off-topic* and rewrite off-topic prompts into a polite redirect | **User prompt submitted** | `modifiedPrompt` |
@@ -601,6 +627,6 @@ Time left? Each idea below reuses what you just built. There are no step-by-step
 * **Keep the starter field names.** They are how Copilot Studio matches a workflow to an event.
 * **Classify before you transform.** A cheap classification step keeps the inline agent — and its latency — off prompts that don't need it.
 * **Design for fail-open.** Hooks currently fail open. Enforce rules that must hold in the system behind the tool as well, and treat the hook as the first line, not the only one.
-* **Remember what redaction does not do.** `modifiedPrompt` changes what the model sees, not what was received. Manage transcript access and retention separately.
+* **Remember what redaction does not do.** `modifiedPrompt` changes what the agent works with, not what was received. Manage transcript access and retention separately.
 
 ---
