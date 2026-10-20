@@ -192,7 +192,7 @@ lab_metadata:
     id: mcs-skills
     module: agent-skills
     section: intermediate
-    title: 'Deep Dive: Skills and Skill Authoring'
+    title: 'Deep Dive: Skills'
   300:
     difficulty: Advanced
     duration: 30

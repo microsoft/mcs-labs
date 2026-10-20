@@ -82,7 +82,7 @@ schedule:
   - type: lab
     slug: mcs-skills
     label: "Lab 4"
-    title: "Deep Dive: Skills and Skill Authoring"
+    title: "Deep Dive — Instructions, Skills, Runtime & Sandbox"
     time: "14:15"
     duration: 30
 
