@@ -85,6 +85,17 @@ In this lab you build **Zava Procurement Buddy** on the GitHub Copilot harness a
 | **Classify node** | An AI step in a workflow that routes text into categories you describe — a deterministic branch driven by a model judgement |
 | **Inline agent** | A non-deterministic agent embedded in a workflow step. Here it rewrites the prompt instead of following a fixed script |
 
+### Two ways to create a hook workflow
+
+Every hook workflow starts from the starter that the **Add hook** dialog generates for an event. The **Workflows** page cannot create one: its trigger types don't include hook events, and outputs you add by hand are always required, so the workflow never matches. What you can choose is *when* you connect the workflow to the hook:
+
+| Way | How | When to use it | In this lab |
+|-----|-----|----------------|-------------|
+| **Workflow first** | Generate the starter from **Add hook** → **New workflow**, build and publish it, then **Cancel** the dialog. The workflow is saved in **Workflows**. Later, create the hook and **select the existing workflow** in the **Workflow** list | One workflow serves several hooks or agents, or one person builds the workflow and another configures the agent | Use Case #1 |
+| **Native (inline)** | **Add hook** → **New workflow**, build and publish, and the dialog binds the new workflow to the hook in one go | A workflow built for a single hook | Use Cases #2 and #3 |
+
+Either way, the **Workflow** list only shows workflows whose inputs and outputs match the selected event.
+
 ---
 
 ## 📄 Documentation and Additional Training Links
@@ -222,22 +233,22 @@ The tool does not reach a real system. It returns a made-up purchase request num
 
     ![Create purchase request listed under Tools](images/uc1-tool-added.png)
 
-#### Add the Start (pre-loop) hook
+#### Build the hook workflow first
+
+In this use case you build the workflow first and connect it to the hook afterwards: the *workflow first* way from [Two ways to create a hook workflow](#two-ways-to-create-a-hook-workflow). You still start in the **Add hook** dialog, because only that dialog generates a starter that fits a hook event.
 
 1. On the top menu bar, next to **Monitor**, select the three dots (**…**) → **Hooks** → **Create**.
 
-1. Set **Event type** to **Start (pre-loop)** and **Name** to:
-
-    ```text
-    Load requester context
-    ```
-
-1. Open the **Workflow** dropdown and select **New workflow**. The designer opens with a starter workflow: **When an agent calls the flow** already carries the `event`, `timestamp` and `metadata` inputs, and **Respond to the agent** already carries the `additionalContext` output.
+1. Set **Event type** to **Start (pre-loop)**. Open the **Workflow** dropdown and select **New workflow**. The designer opens with a starter workflow: **When an agent calls the flow** already carries the `event`, `timestamp` and `metadata` inputs, and **Respond to the agent** already carries the `additionalContext` output.
 
     > [!TIP]
     > Keep the starter input and output names exactly as they are, and do not add outputs. If you rename, remove or add fields, the workflow no longer matches the event and disappears from the hook's **Workflow** list.
 
-1. Select **Respond to the agent** and paste this into `additionalContext`:
+1. Select the workflow title **Untitled workflow** and rename it to `Load requester context`.
+
+1. Select **Respond to the agent**, select its name at the top of the panel and rename it to `Return requester context`. Node names are only labels: renaming them does not affect whether the workflow fits the hook.
+
+1. On **Return requester context**, paste this into `additionalContext`:
 
     ```text
     The SessionStart hook was executed, print this as output with lots of smileys, include the user object ID: 
@@ -245,9 +256,23 @@ The tool does not reach a real system. It returns a made-up purchase request num
 
 1. With the cursor at the end of the text, type **`/`** to open the dynamic content picker and select `metadata` → `userAadObjectId`. It appears as a token after the text.
 
-1. **Publish** the workflow and close the designer. Back on **Add hook**, select **Load requester context** in **Workflow** if it is not already selected. Select **Done**, then **Save** the agent.
+1. **Publish** the workflow and close the designer.
 
     ![Load requester context workflow with userAadObjectId in additionalContext](images/uc1-sessionstart-workflow.png)
+
+1. Back on **Add hook**, select **Cancel**. The hook is not added, but the published workflow is saved: you'll find **Load requester context** on the **Workflows** page.
+
+#### Connect the workflow to the hook
+
+1. Open **…** → **Hooks** → **Create** again. Set **Event type** to **Start (pre-loop)** and **Name** to:
+
+    ```text
+    Load requester context
+    ```
+
+1. Open the **Workflow** dropdown. **Load requester context** is listed because its inputs and outputs match the Start (pre-loop) event. Select it, then select **Done** and **Save** the agent.
+
+    ![Add hook dialog with the existing Load requester context workflow selected](images/uc1-hook-select-existing.png)
 
 #### Test it
 
@@ -306,9 +331,12 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
 
 1. In **Workflow**, select **New workflow**. The starter workflow receives `prompt` and returns `modifiedPrompt` and `suppressOutput`.
 
+    > [!NOTE]
+    > This time you use the *native* way from [Two ways to create a hook workflow](#two-ways-to-create-a-hook-workflow): you build the workflow from inside the hook dialog, and publishing binds it to the hook in one go.
+
 #### Classify the prompt
 
-1. Select **When an agent calls the flow**, then select **Classify** in the **Add** panel. The Classify node is inserted between the trigger and **Respond to the agent**. Set the text to classify to `prompt` from the dynamic content picker (type **`/`**).
+1. Select **When an agent calls the flow**, then select **Classify** in the **Add** panel. The Classify node is inserted between the trigger and the starter **Respond to the agent** node. Set the text to classify to `prompt` from the dynamic content picker (type **`/`**).
 
 1. Name the first category `No PII` with this description:
 
@@ -339,12 +367,14 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
 
 #### Pass clean prompts through
 
-1. Make sure the **No PII** branch is connected to **Respond to the agent**. Then drag the connection point of **Other** onto **Respond to the agent** as well.
+1. Select the starter **Respond to the agent** node, select its name at the top of the panel and rename it to `Return original prompt`.
 
-1. Select **Respond to the agent** and set `modifiedPrompt` to `prompt` from the dynamic content picker. Leave `suppressOutput` empty.
+1. Make sure the **No PII** branch is connected to **Return original prompt**. Then drag the connection point of **Other** onto **Return original prompt** as well.
+
+1. Select **Return original prompt** and set `modifiedPrompt` to `prompt` from the dynamic content picker. Leave `suppressOutput` empty.
 
     > [!IMPORTANT]
-    > Do not leave `modifiedPrompt` empty here, and wire **every** branch. If no **Respond to the agent** runs, the workflow run can still show *Succeeded*, but the hook reports that it could not be executed and the agent carries on as if there were no hook. When in doubt, open the workflow's **Activity** tab, select the run and check which nodes were skipped.
+    > Do not leave `modifiedPrompt` empty here, and wire **every** branch. If no Respond node runs, the workflow run can still show *Succeeded*, but the hook reports that it could not be executed and the agent carries on as if there were no hook. When in doubt, open the workflow's **Activity** tab, select the run and check which nodes were skipped.
 
 #### Redact with an inline agent
 
@@ -365,16 +395,18 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
     Text:
     ```
 
-1. Select **Respond to the agent**, copy it (**Ctrl+C** / **Cmd+C**) and paste it (**Ctrl+V** / **Cmd+V**). The copy, **Respond to the agent 2**, has the same outputs as the starter. Drag the output connection point of **Redact PII** onto it.
+1. Select **Return original prompt**, copy it (**Ctrl+C** / **Cmd+C**) and paste it (**Ctrl+V** / **Cmd+V**). The copy has the same outputs as the starter. Rename it to `Return redacted prompt` and drag the output connection point of **Redact PII** onto it.
 
     > [!TIP]
+    > **Why two Respond nodes?** A Respond node returns fixed values, so every *different* answer needs its own node. Branches that return the same answer share one: **No PII** and **Other** both go to **Return original prompt**. Name each node after the answer it gives, so the canvas reads as the decision.
+    >
     > Copy the starter node rather than adding a new **Respond to the agent** from the panel. Outputs you add yourself are marked required, every Respond node in a workflow must return the same schema, and a mismatch makes the workflow incompatible with the hook.
 
-1. On **Respond to the agent 2**, set `modifiedPrompt` to **Agent Response** of **Redact PII** from the dynamic content picker.
+1. On **Return redacted prompt**, set `modifiedPrompt` to **Agent Response** of **Redact PII** from the dynamic content picker.
 
 1. **Publish** the workflow and close the designer. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
 
-    ![Redact personal data workflow: Classify branches, Redact PII and both Respond nodes](images/uc2-redaction-workflow.png)
+    ![Redact personal data workflow: Classify branches, Redact PII, Return original prompt and Return redacted prompt](images/uc2-redaction-workflow.png)
 
 #### Test it
 
@@ -441,13 +473,15 @@ Add a **Pre tool use** hook scoped to **Create purchase request**. Its workflow 
     Check approved supplier
     ```
 
-1. In **Workflow**, select **New workflow**. The starter workflow receives `event`, `timestamp`, `toolName`, `parameters` and `metadata`, and returns `permissionDecision`, `permissionDecisionReason`, `modifiedParameters`, `additionalContext` and `suppressOutput` — all optional.
+1. In **Workflow**, select **New workflow**. The starter workflow receives `event`, `timestamp`, `toolName`, `parameters` and `metadata`, and returns `permissionDecision`, `permissionDecisionReason`, `modifiedParameters`, `additionalContext` and `suppressOutput` — all optional. Like Use Case #2, this is the *native* way: the workflow is built from the hook dialog and bound to it when you publish.
 
     ![Add hook dialog with Pre tool use and the Create purchase request tool](images/uc3-add-hook.png)
 
+    ![Pre tool use starter workflow: the Respond node with its five optional outputs](images/uc3-starter-workflow.png)
+
 #### Check the supplier
 
-1. Select **When an agent calls the flow**, then select **If/Else** in the **Add** panel. The If/Else node is inserted between the trigger and **Respond to the agent**; the starter Respond is connected to its first branch.
+1. Select **When an agent calls the flow**, then select **If/Else** in the **Add** panel. The If/Else node is inserted between the trigger and the starter **Respond to the agent** node, which is connected to its first branch.
 
 1. Select the If/Else node. Rename the first branch to `Approved supplier`.
 
@@ -469,11 +503,11 @@ Add a **Pre tool use** hook scoped to **Create purchase request**. Its workflow 
 
 #### Return the decision
 
-1. The **Approved supplier** branch already leads to **Respond to the agent**. Leave **every output empty**. Empty means *allow*: the tool runs with its original parameters.
+1. The **Approved supplier** branch already leads to the starter **Respond to the agent** node. Rename it to `Allow tool call` and leave **every output empty**. Empty means *allow*: the tool runs with its original parameters.
 
-1. Select **Respond to the agent**, copy it (**Ctrl+C** / **Cmd+C**) and paste it (**Ctrl+V** / **Cmd+V**). Drag the **Else** connection point of the If/Else onto the copy, **Respond to the agent 2**.
+1. Select **Allow tool call**, copy it (**Ctrl+C** / **Cmd+C**) and paste it (**Ctrl+V** / **Cmd+V**). Rename the copy to `Deny tool call` and drag the **Else** connection point of the If/Else onto it. As in Use Case #2, each decision gets its own Respond node because each returns different values.
 
-1. On **Respond to the agent 2**, set:
+1. On **Deny tool call**, set:
 
     | Output | Value |
     |--------|-------|
@@ -485,7 +519,7 @@ Add a **Pre tool use** hook scoped to **Create purchase request**. Its workflow 
 
 1. **Publish** the workflow and close the designer. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
 
-    ![Check approved supplier workflow: If/Else with an allow and a deny Respond node](images/uc3-pretool-workflow.png)
+    ![Check approved supplier workflow: If/Else with Allow tool call and Deny tool call](images/uc3-pretool-workflow.png)
 
 1. Open **…** → **Hooks**. All three hooks are listed.
 
