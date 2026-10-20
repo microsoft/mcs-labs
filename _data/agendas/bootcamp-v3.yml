@@ -153,9 +153,9 @@ schedule:
   - type: lab
     slug: mcs-skills
     label: "Lab 4"
-    title: "Deep Dive: Skills"
+    title: "Deep Dive: Skills and Skill Authoring"
     time: "16:15"
-    duration: 45
+    duration: 30
 
   # --- Day 2 — Knowledge & tools, then the three dedicated harnesses -------
   - type: day
