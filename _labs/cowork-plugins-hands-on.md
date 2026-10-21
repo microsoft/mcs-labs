@@ -1,6 +1,6 @@
 ---
 layout: lab
-module: cowork
+module: ghcp-in-a-day-cowork
 title: "Cowork + Plugins Hands-On Lab"
 order: 116
 duration: 30
@@ -41,6 +41,8 @@ Delegate real work to Copilot Cowork — hand it a document, let it reason over 
 ---
 
 ## Introduction
+
+This lab accompanies [Cowork (+ skills, + plugins)]({{ '/modules/ghcp-in-a-day-cowork/' | relative_url }}) in the **Deep dive in modern agents** workshop.
 
 Copilot Cowork takes a delegated task and works it agentically: reading source material, resolving who and what it needs from your organisation, and producing real output in Microsoft 365 — a drafted email, a document, a set of updates — for you to review before anything is sent.
 

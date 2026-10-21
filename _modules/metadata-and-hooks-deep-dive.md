@@ -1,6 +1,6 @@
 ---
 layout: module
-title: "Deep Dive: Metadata & Hooks"
+title: "Deep Dive: Knowledge and Tools"
 order: 3085
 duration: 15
 difficulty: 200

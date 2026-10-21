@@ -1,4 +1,4 @@
-# Deep Dive: Skills and Skill Authoring
+# Skills and Skill Authoring
 
 Start with a Skill-equipped agent, then choose your adventure: call it from a workflow or generate and test your own Skill in Preview or Cowork.
 
@@ -50,7 +50,7 @@ Think of a Skill as a playbook the orchestrator picks up only when it is relevan
 
 ## 🌐 Introduction
 
-This lab accompanies [Deep Dive: Instructions, Skills, Runtime & Sandbox](https://microsoft.github.io/mcs-labs/modules/instructions-skills-runtime-and-sandbox/) in the **Deep dive in modern agents** workshop.
+This lab accompanies [Deep Dive: Instructions, Skills, Runtime and Sandbox](https://microsoft.github.io/mcs-labs/modules/instructions-skills-runtime-and-sandbox/) in the **Deep dive in modern agents** workshop.
 
 A Skill packages a named, self-contained playbook: a description that tells the orchestrator when the Skill applies, instructions describing the procedure, and the reference material the work depends on. Instead of cramming every rule into an agent's instructions, you hand the orchestrator something it can load only when a request matches.
 

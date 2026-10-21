@@ -13,7 +13,7 @@ description: "Assemble an agent on the GitHub Copilot harness from its component
 
 ---
 
-# GitHub Copilot Harness — Component Model
+# GitHub Copilot Harness - Component Model
 
 Assemble an agent on the GitHub Copilot harness from its components — instructions, knowledge, tools, memory, skills and the agent sandbox — then watch the orchestrator decide, recover and explain itself.
 
