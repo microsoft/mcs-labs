@@ -50,6 +50,8 @@ Think of a Skill as a playbook the orchestrator picks up only when it is relevan
 
 ## 🌐 Introduction
 
+This lab accompanies [Deep Dive: Instructions, Skills, Runtime & Sandbox](https://microsoft.github.io/mcs-labs/modules/instructions-skills-runtime-and-sandbox/) in the **Deep dive in modern agents** workshop.
+
 A Skill packages a named, self-contained playbook: a description that tells the orchestrator when the Skill applies, instructions describing the procedure, and the reference material the work depends on. Instead of cramming every rule into an agent's instructions, you hand the orchestrator something it can load only when a request matches.
 
 **Real-world example:** a proposal team answers RFPs. The rules are stable - match the request to an offering, answer from pre-approved language, never claim a certification the company does not hold - but the work arrives in different ways: someone attaches a solicitation to a chat agent, or a mailbox receives one as an attachment. A Skill keeps that procedure in one place, and a workflow calls the same Skill-equipped agent to handle emailed requests.

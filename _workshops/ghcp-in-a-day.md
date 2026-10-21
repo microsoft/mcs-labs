@@ -10,7 +10,7 @@ labs:
     label: "Lab 2"
   - slug: mcs-workflows
     label: "Lab 3"
-  - slug: mcs-skills
+  - slug: mcs-skills-authoring
     label: "Lab 4"
   - slug: mcs-hooks
     label: "Lab 5"
