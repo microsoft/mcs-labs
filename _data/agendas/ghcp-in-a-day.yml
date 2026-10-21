@@ -87,17 +87,17 @@ schedule:
     duration: 30
 
   - type: module
-    slug: knowledge-and-tools-deep-dive
+    slug: metadata-and-hooks-deep-dive
     label: "Module 6"
-    title: "Deep Dive — Knowledge & Tools"
+    title: "Deep Dive — Tools and Knowledge"
     slides: "/presentations/ghcp-in-a-day/Module%206%20-%20Deep%20Dive%20-%20Knowledge%20%26%20Tools.pptx"
     time: "14:45"
     duration: 15
 
   - type: lab
-    slug: mcs-knowledge-tools-hooks
+    slug: mcs-hooks
     label: "Lab 5"
-    title: "Deep Dive — Knowledge & Tools"
+    title: "Deep Dive — Tools and Knowledge"
     time: "15:00"
     duration: 30
 
