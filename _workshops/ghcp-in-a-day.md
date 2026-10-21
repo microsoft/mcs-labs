@@ -4,7 +4,7 @@ description: "A hands-on, full-day workshop focused on engineering enterprise ag
 event_id: ghcp-in-a-day
 order: 6
 labs:
-  - slug: cowork-hands-on
+  - slug: cowork-plugins-hands-on
     label: "Lab 1"
   - slug: mcs-github-harness
     label: "Lab 2"

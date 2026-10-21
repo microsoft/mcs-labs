@@ -30,9 +30,9 @@ schedule:
     duration: 15
 
   - type: lab
-    slug: cowork-hands-on
+    slug: cowork-plugins-hands-on
     label: "Lab 1"
-    title: "Cowork hands-on"
+    title: "Cowork + Plugins Hands-On Lab"
     time: "10:15"
     duration: 30
 
