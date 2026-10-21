@@ -12,7 +12,7 @@ description: "Build a Travel Policy Agent and use hooks to load the traveller's 
 
 ---
 
-# Hooks and Knowledge — Travel Policy Agent
+# Hooks and Knowledge: Travel Policy Agent
 
 Build a **Travel Policy Agent** on the GitHub Copilot harness and use hooks to make it behave the same way in every conversation: load the traveller's profile when a session starts, redact personal data from every prompt, and ground answers in SharePoint travel policies filtered by their `Location` metadata. As an extra, block flight bookings with unapproved airlines before the tool runs.
 

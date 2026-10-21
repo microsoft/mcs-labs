@@ -1,6 +1,6 @@
 ---
 layout: module
-title: "Deep Dive: Instructions, Skills, Runtime & Sandbox"
+title: "Deep Dive: Instructions, Skills, Runtime and Sandbox"
 order: 3095
 duration: 15
 difficulty: 300

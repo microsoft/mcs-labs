@@ -1,6 +1,6 @@
 event_id: ghcp-in-a-day
 
-# This workshop uses shorter, event-specific cuts of existing modules and labs.
+# This workshop combines dedicated module pages with shared modules and labs.
 schedule:
   - type: session
     title: "Welcome & Intro"
@@ -13,16 +13,16 @@ schedule:
     duration: 15
 
   - type: module
-    slug: harnesses-and-component-models
+    slug: ghcp-in-a-day-when-to-use-what
     label: "Module 1"
-    title: "When to use what?"
+    title: "When to Use What?"
     description: "An overview of the available agent stacks and harnesses, and when to use each one."
     slides: "/presentations/ghcp-in-a-day/Module%201%20-%20When%20to%20Use%20What.pptx"
     time: "09:45"
     duration: 15
 
   - type: module
-    slug: cowork
+    slug: ghcp-in-a-day-cowork
     label: "Module 2"
     title: "Cowork (+ skills, + plugins)"
     slides: "/presentations/ghcp-in-a-day/Module%202%20-%20Cowork%20-%20skills%20%26%20plugins.pptx"
@@ -37,9 +37,9 @@ schedule:
     duration: 30
 
   - type: module
-    slug: github-copilot-harness
+    slug: ghcp-in-a-day-github-copilot-harness
     label: "Module 3"
-    title: "GHCP UI, Orchestration, Harnesses"
+    title: "GitHub Copilot UI, Orchestration and Harnesses"
     slides: "/presentations/ghcp-in-a-day/Module%203%20-%20GHCP%20UI%2C%20Orchestration%2C%20Harnesses.pptx"
     time: "10:45"
     duration: 15
@@ -47,7 +47,7 @@ schedule:
   - type: lab
     slug: mcs-github-harness
     label: "Lab 2"
-    title: "Build your first GHCP agent"
+    title: "GitHub Copilot Harness - Component Model"
     time: "11:00"
     duration: 60
 
@@ -74,7 +74,7 @@ schedule:
   - type: module
     slug: instructions-skills-runtime-and-sandbox
     label: "Module 5"
-    title: "Deep Dive — Instructions, Skills, Runtime & Sandbox"
+    title: "Deep Dive: Instructions, Skills, Runtime and Sandbox"
     slides: "/presentations/ghcp-in-a-day/Module%205%20-%20Deep%20Dive%20-%20Instructions%2C%20Skills%2C%20Runtime%20%26%20Sandbox.pptx"
     time: "14:00"
     duration: 15
@@ -82,14 +82,14 @@ schedule:
   - type: lab
     slug: mcs-skills-authoring
     label: "Lab 4"
-    title: "Deep Dive: Skills and Skill Authoring"
+    title: "Skills and Skill Authoring"
     time: "14:15"
     duration: 30
 
   - type: module
     slug: metadata-and-hooks-deep-dive
     label: "Module 6"
-    title: "Deep Dive — Tools and Knowledge"
+    title: "Deep Dive: Knowledge and Tools"
     slides: "/presentations/ghcp-in-a-day/Module%206%20-%20Deep%20Dive%20-%20Knowledge%20%26%20Tools.pptx"
     time: "14:45"
     duration: 15
@@ -97,7 +97,7 @@ schedule:
   - type: lab
     slug: mcs-hooks
     label: "Lab 5"
-    title: "Deep Dive — Tools and Knowledge"
+    title: "Hooks and Knowledge: Travel Policy Agent"
     time: "15:00"
     duration: 30
 

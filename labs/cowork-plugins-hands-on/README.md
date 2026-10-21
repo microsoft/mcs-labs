@@ -26,6 +26,8 @@ Delegate real work to Copilot Cowork — hand it a document, let it reason over 
 
 ## 🌐 Introduction
 
+This lab accompanies [Cowork (+ skills, + plugins)](https://microsoft.github.io/mcs-labs/modules/ghcp-in-a-day-cowork/) in the **Deep dive in modern agents** workshop.
+
 Copilot Cowork takes a delegated task and works it agentically: reading source material, resolving who and what it needs from your organisation, and producing real output in Microsoft 365 — a drafted email, a document, a set of updates — for you to review before anything is sent.
 
 In this lab you ask Cowork to draft an executive email from a hotel performance report, then start a separate task to find sales data in SharePoint, build an interactive dashboard, and draft a summary email with a graphic attached. In both use cases, you verify the output in Outlook without sending it.
