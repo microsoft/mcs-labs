@@ -1,6 +1,6 @@
 ---
 layout: lab
-module: agent-skills
+module: instructions-skills-runtime-and-sandbox
 title: "Deep Dive: Skills and Skill Authoring"
 order: 297
 duration: 30
@@ -62,6 +62,8 @@ Think of a Skill as a playbook the orchestrator picks up only when it is relevan
 ---
 
 ## Introduction
+
+This lab accompanies [Deep Dive: Instructions, Skills, Runtime & Sandbox]({{ '/modules/instructions-skills-runtime-and-sandbox/' | relative_url }}) in the **Deep dive in modern agents** workshop.
 
 A Skill packages a named, self-contained playbook: a description that tells the orchestrator when the Skill applies, instructions describing the procedure, and the reference material the work depends on. Instead of cramming every rule into an agent's instructions, you hand the orchestrator something it can load only when a request matches.
 

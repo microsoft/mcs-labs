@@ -72,7 +72,7 @@ schedule:
     duration: 45
 
   - type: module
-    slug: instructions-and-descriptions
+    slug: instructions-skills-runtime-and-sandbox
     label: "Module 5"
     title: "Deep Dive — Instructions, Skills, Runtime & Sandbox"
     slides: "/presentations/ghcp-in-a-day/Module%205%20-%20Deep%20Dive%20-%20Instructions%2C%20Skills%2C%20Runtime%20%26%20Sandbox.pptx"
@@ -80,7 +80,7 @@ schedule:
     duration: 15
 
   - type: lab
-    slug: mcs-skills
+    slug: mcs-skills-authoring
     label: "Lab 4"
     title: "Deep Dive — Instructions, Skills, Runtime & Sandbox"
     time: "14:15"
