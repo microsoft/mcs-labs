@@ -274,6 +274,21 @@ if (require.main === module) {
     }
   }
 
+  // Share Jekyll's resolver so syndicated pages retain the source's deck-derived date.
+  const datedItems = allItems.filter((item) => ['labs', 'modules'].includes(item.collection));
+  if (datedItems.length) {
+    const dates = JSON.parse(execFileSync('ruby', [path.join(__dirname, 'resolve-content-dates.rb')], {
+      cwd: root,
+      input: JSON.stringify(datedItems.map(({ collection, slug, metadata }) => ({ collection, slug, metadata }))),
+      encoding: 'utf8',
+      stdio: ['pipe', 'pipe', 'inherit'],
+    }));
+    for (const item of datedItems) {
+      const date = dates[`${item.collection}/${item.slug}`];
+      if (date) item.metadata.content_last_updated = date;
+    }
+  }
+
   fs.mkdirSync(outDir, { recursive: true });
   const generated = new Date().toISOString();
 

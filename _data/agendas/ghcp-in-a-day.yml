@@ -1,0 +1,107 @@
+event_id: ghcp-in-a-day
+
+# This workshop uses shorter, event-specific cuts of existing modules and labs.
+schedule:
+  - type: session
+    title: "Welcome & Intro"
+    time: "09:00"
+    duration: 30
+
+  - type: session
+    title: "Intro to Hands-On Labs"
+    time: "09:30"
+    duration: 15
+
+  - type: module
+    slug: harnesses-and-component-models
+    label: "Module 1"
+    title: "When to use what?"
+    description: "An overview of the available agent stacks and harnesses, and when to use each one."
+    slides: "/presentations/ghcp-in-a-day/Module%201%20-%20When%20to%20Use%20What.pptx"
+    time: "09:45"
+    duration: 15
+
+  - type: module
+    slug: cowork
+    label: "Module 2"
+    title: "Cowork (+ skills, + plugins)"
+    slides: "/presentations/ghcp-in-a-day/Module%202%20-%20Cowork%20-%20skills%20%26%20plugins.pptx"
+    time: "10:00"
+    duration: 15
+
+  - type: lab
+    slug: cowork-plugins-hands-on
+    label: "Lab 1"
+    title: "Cowork + Plugins Hands-On Lab"
+    time: "10:15"
+    duration: 30
+
+  - type: module
+    slug: github-copilot-harness
+    label: "Module 3"
+    title: "GHCP UI, Orchestration, Harnesses"
+    slides: "/presentations/ghcp-in-a-day/Module%203%20-%20GHCP%20UI%2C%20Orchestration%2C%20Harnesses.pptx"
+    time: "10:45"
+    duration: 15
+
+  - type: lab
+    slug: mcs-github-harness
+    label: "Lab 2"
+    title: "Build your first GHCP agent"
+    time: "11:00"
+    duration: 60
+
+  - type: break
+    title: "Lunch break"
+    time: "12:00"
+    duration: 60
+
+  - type: module
+    slug: workflows
+    label: "Module 4"
+    title: "Workflows"
+    slides: "/presentations/ghcp-in-a-day/Module%204%20-%20Workflows.pptx"
+    time: "13:00"
+    duration: 15
+
+  - type: lab
+    slug: mcs-workflows
+    label: "Lab 3"
+    title: "Workflows"
+    time: "13:15"
+    duration: 45
+
+  - type: module
+    slug: instructions-and-descriptions
+    label: "Module 5"
+    title: "Deep Dive — Instructions, Skills, Runtime & Sandbox"
+    slides: "/presentations/ghcp-in-a-day/Module%205%20-%20Deep%20Dive%20-%20Instructions%2C%20Skills%2C%20Runtime%20%26%20Sandbox.pptx"
+    time: "14:00"
+    duration: 15
+
+  - type: lab
+    slug: mcs-skills
+    label: "Lab 4"
+    title: "Deep Dive — Instructions, Skills, Runtime & Sandbox"
+    time: "14:15"
+    duration: 30
+
+  - type: module
+    slug: metadata-and-hooks-deep-dive
+    label: "Module 6"
+    title: "Deep Dive — Tools and Knowledge"
+    slides: "/presentations/ghcp-in-a-day/Module%206%20-%20Deep%20Dive%20-%20Knowledge%20%26%20Tools.pptx"
+    time: "14:45"
+    duration: 15
+
+  - type: lab
+    slug: mcs-hooks
+    label: "Lab 5"
+    title: "Deep Dive — Tools and Knowledge"
+    time: "15:00"
+    duration: 30
+
+  - type: session
+    title: "Q&A"
+    time: "15:30"
+    duration: 30

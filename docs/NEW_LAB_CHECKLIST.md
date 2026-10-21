@@ -93,6 +93,26 @@ Labs belong to a module in the `_modules` collection. `_layouts/lab.html` resolv
 
 Both directions are needed for the "← Part of: …" header and the module page's lab link to render.
 
+## 📅 Content Update Date
+
+Do not add a manual update date to lab or module front matter. Every lab page
+derives its **Content last updated** value automatically:
+
+1. If the parent module has a local `slides:` PowerPoint path, the page uses the
+   deck's latest Git commit date.
+2. If there is no local PowerPoint, the page uses the latest Git commit date of
+   `_labs/<slug>.md`.
+3. If a linked deck is missing or cannot be resolved, the build emits a warning
+   and falls back to the lab date.
+
+The public date changes after the relevant deck or lab file is committed. Keep
+the GitHub README and `_labs` copy synchronized as usual; `_labs/<slug>.md` is
+the source used for the no-deck fallback.
+
+The parent module page displays the same deck date. If that module has no local
+PowerPoint, its page falls back to the latest Git commit date of
+`_modules/<slug>.md`.
+
 ## 🎪 Adding a Lab to an Event
 
 Event running order lives in `_data/agendas/<event_id>.yml`, read by `_layouts/event.html`. Add a `lab` row at the right position in the schedule:

@@ -6,7 +6,7 @@
   "scripts": {
     "a11y": "pa11y-ci --config .pa11yci.json",
     "lighthouse": "lhci autorun",
-    "test": "node --test scripts/*.test.js",
+    "test": "node --test scripts/*.test.js && ruby scripts/content_last_updated_test.rb",
     "build:feed": "node scripts/build-feed.js",
     "consume:feed": "node scripts/consume-feed.js"
   },

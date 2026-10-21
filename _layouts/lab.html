@@ -83,6 +83,12 @@ layout: single
   {% if page.description %}
   <p class="lab-header-desc">{{ page.description | strip_html }}</p>
   {% endif %}
+  {% if page.content_last_updated %}
+  <p class="lab-header-updated">
+    Content last updated:
+    <time datetime="{{ page.content_last_updated | date_to_xmlschema }}">{{ page.content_last_updated | date: "%-m/%-d/%Y" }}</time>
+  </p>
+  {% endif %}
   <div class="lab-header-meta">
     <span class="lab-meta-pill lab-meta-pill-level-{{ page.difficulty }}">Level {{ page.difficulty }}</span>
     <span class="lab-meta-pill lab-meta-pill-duration">{{ page.duration }} min</span>

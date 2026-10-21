@@ -105,6 +105,14 @@ This repository uses GitHub Actions to automatically convert lab markdown files 
 - **🔧 Architecture**: Automated workflows, dependency management, and troubleshooting  
 - **🚀 Getting started**: Just edit markdown files in `labs/` - documentation generates automatically!
 
+### Content Update Dates
+
+Each published lab and module page displays a **Content last updated** date.
+Modules use their local PowerPoint deck's latest Git commit, falling back to
+their `_modules/<slug>.md` file when no deck is linked. Labs use their parent
+module's deck date, falling back to `_labs/<slug>.md`. The date is generated
+automatically; authors should not add or maintain a manual date in front matter.
+
 ### For Developers
 
 - **🚀 Quick Start**: See [Quick Start Guide](./docs/QUICK_START.md) for immediate development setup
@@ -148,6 +156,7 @@ scripts/consume-feed.js       # ← Consumer: renders the portal from the consum
 _data/feeds.yml               # ← Which feeds this instance publishes
 _data/feed_subscriptions.yml  # ← Which feeds this instance ingests
 _config.feed.yml              # ← Jekyll overlay used to render from the feed
+_plugins/                     # ← Build-time metadata, including lab update dates
 dist/                         # ← Generated HTML/PDF (auto-created)
 .github/                      # ← Workflows and technical documentation
 package.json                  # ← Dependencies for document generation
