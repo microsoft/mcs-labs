@@ -1,6 +1,6 @@
 # Deep Dive: Skills and Skill Authoring
 
-Start with a Skill-equipped agent, then choose your adventure: call it from a workflow or generate and test your own Skill with Cowork.
+Start with a Skill-equipped agent, then choose your adventure: call it from a workflow or generate and test your own Skill in Preview or Cowork.
 
 ---
 
@@ -101,7 +101,8 @@ These resources cover agents and workflows powered by the **GitHub Copilot harne
 - **Everyone:** access to Microsoft Copilot Studio with the GitHub Copilot harness, permission to create agents and use Skills, sandbox code execution with an available charting library, and a workshop account that can connect to Work IQ (Preview)
 - The sample Skill package and test RFPs from [AgentDudeSamples](https://github.com/Dewain27/AgentDudeSamples/tree/main/samples/RFP%20Skill)
 - **Use Case #2 only:** permission to publish agents and workflows, an Outlook mailbox, and access to Office 365 Outlook and Dataverse connections
-- **Use Case #3 only:** access to **Cowork** in Microsoft 365 Copilot with file upload and download available. GitHub Copilot CLI is not available in this lab tenant, so this adventure uses Cowork to author the Skill
+- **Use Case #3, Example A:** a reasoning-capable model in Copilot Studio, such as **Opus 5 if available**, plus file attachments and sandbox ZIP-file generation/download in Preview. Model names and availability vary by environment
+- **Use Case #3, Example B:** access to **Cowork** in Microsoft 365 Copilot with file upload and download available. GitHub Copilot CLI is not available in this lab tenant; Example B uses Cowork to author the Skill
 - **Use Case #3 materials:** [download the Word process documents, fictional meeting transcript, and supplier proposals](assets/skill-generation/skill-generation-materials-v3.zip). Extract the ZIP before attaching individual files to Cowork or Copilot Studio; it contains source materials, not a finished Skill
 
 ---
@@ -114,20 +115,20 @@ Everyone completes the shared foundation, then one extension. By the end of the 
 - Read a Skill package and explain what its description, references, assets and scripts each do
 - Use sandbox code execution to extract the RFP's evaluation weights and create a downloadable chart, checking the result against the source
 - **Workflow adventure:** call the Skill-equipped agent from a workflow and create an Outlook draft containing its response
-- **Generation adventure:** turn a process into a Skill with Cowork, using formal documentation and, for the supplier-comparison example, a meeting transcript as context; upload it to a separate agent and test its evidence-backed PDF reports
+- **Generation adventure:** turn a process into a Skill in a blank agent's Copilot Studio Preview for guided intake, or in Cowork for supplier comparison; upload the package, add agent instructions, and test the conversation or evidence-backed PDF reports
 - Explain why a Skill guides behavior but does not replace deterministic validation or guaranteed branching
 
 ---
 
 ## 🧩 Use Cases Covered
 
-Complete Use Case #1, then choose **either** Use Case #2 **or** Use Case #3.
+**Complete Use Case #1 first. Then choose ONE: Use Case #2 OR Use Case #3.** You do not need to complete both.
 
 | Route | Use Case | Value added | Timebox |
 |-------|----------|-------------|---------|
 | Everyone | [Use Case #1: Leveraging Skills in Copilot Studio agents](#-use-case-1-leveraging-skills-in-copilot-studio-agents) | Upload, inspect, and test an existing Skill, then chart source data in the sandbox | 15 min |
-| Choose A | [Use Case #2: Using skills in Copilot Studio workflows](#-use-case-2-using-skills-in-copilot-studio-workflows) | Publish the agent, call it from a workflow, and create an email draft | 10 min |
-| Choose B | [Use Case #3: Generate and test your own Skill](#-use-case-3-generate-and-test-your-own-skill) | Explore guided intake or document review by generating and testing a Skill | 10 min |
+| Choose Use Case #2 | [Use Case #2: Using skills in Copilot Studio workflows](#-use-case-2-using-skills-in-copilot-studio-workflows) | Publish the agent, call it from a workflow, and create an email draft | 15 min |
+| OR choose Use Case #3 | [Use Case #3: Generate and test your own Skill](#-use-case-3-generate-and-test-your-own-skill) | Explore guided intake or document review by generating and testing a Skill | 15 min |
 
 ---
 
@@ -194,7 +195,7 @@ Complete Use Case #1, then choose **either** Use Case #2 **or** Use Case #3.
 
 #### Give the agent its instructions
 
-1. Select the **Instructions** box in the middle of the Build tab and paste the following:
+1. Copy the entire block below into **Copilot Studio > Build > Instructions**. These are agent instructions, not a chat message.
 
     ```text
     You are the RFP Response Agent for our organization. You help our team write clear, accurate answers to customer RFPs (requests for proposal).
@@ -283,7 +284,7 @@ Complete Use Case #1, then choose **either** Use Case #2 **or** Use Case #3.
     > [!NOTE]
     > The sample solicitations carry fixed submission dates that have since passed, so the agent may open its response by flagging that the deadline is behind us. That is the skill being careful rather than a fault - read past it and judge the proposal itself.
 
-1. In the chat composer, select **Attach file** and attach the RFP, then type:
+1. In **Copilot Studio > Preview chat**, select **Attach file** and attach the RFP. Copy the block below into the chat composer, then select **Send**:
 
     ```text
     We are bidding on this RFP. Draft our response.
@@ -291,7 +292,7 @@ Complete Use Case #1, then choose **either** Use Case #2 **or** Use Case #3.
 
     ![The Preview composer with the RFP attached and the prompt typed](images/uc1-preview-attach.png)
 
-1. Select **Send**, then watch the agent's turn. Before it writes anything, it announces
+1. Watch the agent's turn. Before it writes anything, it announces
     *"I'll start with the RFP response skill"* and the orchestrator shows
     **Loading skill: rfp-response** under **Reasoned through your request**.
 
@@ -329,7 +330,7 @@ Complete Use Case #1, then choose **either** Use Case #2 **or** Use Case #3.
 
 #### Use the sandbox to chart the evaluation weights
 
-1. In the **same Preview conversation**, send the following follow-up. Reattach the sample RFP if it is no longer available in the conversation:
+1. In the **same Preview conversation**, reattach the sample RFP if it is no longer available. Copy the block below into **Preview chat**, then select **Send**:
 
     ```text
     Use your sandbox to analyze section 4, Evaluation criteria, of the attached City of Westbrook RFP. Read the source file with code and extract the criterion names and numeric weights; do not use scores or coverage claims from our proposal.
@@ -356,7 +357,7 @@ Choose your next step: [workflow integration in Use Case #2](#-use-case-2-using-
 
 ## 🧱 Use Case #2: Using skills in Copilot Studio workflows
 
-**Choose A: Workflow integration. Timebox: 10 minutes.** Continue with the RFP Response Agent from Use Case #1. If you chose Skill generation, skip to Use Case #3 instead.
+**Use Case #2: Workflow integration. Timebox: 15 minutes.** Choose this instead of Use Case #3, after completing Use Case #1. Continue with your RFP Response Agent.
 
 ### Step-by-step instructions
 
@@ -432,7 +433,7 @@ Choose your next step: [workflow integration in Use Case #2](#-use-case-2-using-
     > [!IMPORTANT]
     > Adding **Content** automatically wraps the Classify node in an **Apply to each** loop - attachments are a collection, so the workflow now runs the classification once per attachment. You did not add that loop; the designer inferred it from the data you bound.
 
-1. Rename **Category 1** to `RFP Response Needed` and give it the description:
+1. Rename **Category 1** to `RFP Response Needed`. Copy the block below into the category's **Description** field, not into chat:
 
     ```text
     This is for request for RFP response where we have an RFP request attached that needs to be responded to.
@@ -441,8 +442,8 @@ Choose your next step: [workflow integration in Use Case #2](#-use-case-2-using-
 1. Delete **Category 2**. A **Default** branch is created automatically for anything that does not
     match, and it appears on the canvas as **Other** - so the node ends up with exactly two branches.
 
-1. Under **Examples**, select **Add example**, choose the **RFP Response Needed** category, and
-    enter:
+1. Under **Examples**, select **Add example** and choose the **RFP Response Needed** category.
+    Copy the block below into the example's text field, not into chat:
 
     ```text
     We need to get a response to the attached RFP
@@ -463,12 +464,25 @@ Choose your next step: [workflow integration in Use Case #2](#-use-case-2-using-
     > [!WARNING]
     > The **Message** and **Output** fields stay stuck on *Loading...* until the workflow has been saved at least once. If the panel does not finish loading, select **Save** in the toolbar, then reopen the node.
 
-1. Build the **Message** field by alternating typed text and dynamic content. Type the text, insert
-    the chip, then type the next piece - you cannot paste the whole thing at once:
+1. Build the **Message** field one piece at a time, alternating copied text and dynamic-content chips. These blocks go into the workflow's **Message** field, not into Preview chat.
 
-    - Type `Create an RFP Response for this request:` then insert **Body**
-    - Type `Here is the attachements:` then insert **Attachments**
-    - Type `Then Email the response back to the requestor at this email address:` then insert **From**
+    Copy this first block into **Message**, then use **Insert dynamic content** to insert **Body**:
+
+    ```text
+    Create an RFP Response for this request:
+    ```
+
+    After the **Body** chip, paste this block, then insert **Attachments**:
+
+    ```text
+    Here is the attachements:
+    ```
+
+    After the **Attachments** chip, paste this block, then insert **From**:
+
+    ```text
+    Then Email the response back to the requestor at this email address:
+    ```
 
 1. Leave **Output** as **Text response**, and rename the node to `RFP Response Agent`.
 
@@ -496,7 +510,7 @@ Choose your next step: [workflow integration in Use Case #2](#-use-case-2-using-
 
     ![The Draft an email message node bound to From, Subject and the agent Result](images/uc2-draft-node.png)
 
-1. Open the **RFP Response Agent** node and make the message ask for the deliverable itself:
+1. Open the **RFP Response Agent** node. Copy the block below into its **Message** field as the deliverable instruction, keeping the RFP content and dynamic-content chips:
 
     ```text
     Return the COMPLETE proposal as your response. Do not summarize it and do not describe what you did. Format it as clean HTML for an email body using headings, paragraphs, tables and lists. No Markdown.
@@ -538,66 +552,57 @@ Continue to the [conclusions and recommendations](#-conclusions-and-recommendati
 
 ## 🧱 Use Case #3: Generate and test your own Skill
 
-**Choose B: Skill generation. Timebox: 10 minutes.** Complete Use Case #1 first, then start with whichever example interests you. Try both if you have time. Neither example needs connectors or external data.
+**Use Case #3: Skill generation. Timebox: 15 minutes.** Choose this instead of Use Case #2, after completing Use Case #1. Within this use case, choose **Example A or Example B**; try both examples if you have time. Neither example needs connectors or external data.
 
-[Download the Use Case #3 PDF handout](assets/mcs-skills-use-case-3.pdf). It includes an embedded copy of the source-materials ZIP; use a PDF reader that supports attachments to extract it.
-
-| Example | What you build | What you learn |
-|---------|----------------|----------------|
-| A: Guided project intake | A Skill that collects a few details through a short conversation | Guide a topic-style interaction without building a topic tree |
-| B: Supplier proposal comparison | A Skill that compares launch suppliers and generates a PDF with like-for-like costs, evidence, and trade-offs | Combine formal documentation, meeting context, sandbox calculations, and document generation |
+| Example | Create the Skill in | What you build |
+|---------|---------------------|----------------|
+| A: Guided project intake | Copilot Studio **Preview**, using a reasoning model and an agent with **no instructions yet** | A Skill that guides a short intake conversation without a topic tree |
+| B: Supplier proposal comparison | Microsoft 365 Copilot **Cowork** | A Skill that compares suppliers and generates a PDF with like-for-like costs, evidence, and trade-offs |
 
 Example B uses the agent's sandbox to create a PDF attachment. Confirm that sandbox file generation is available in your environment; no external PDF connector is needed.
 
-For authoring from process documents and examples, the recommended path for this lab is **Cowork or GitHub Copilot CLI**. GitHub Copilot CLI is not available in this lab tenant, so the hands-on steps below use **Cowork**. Cowork authors the package; **Copilot Studio is where you run and test the resulting Skill**.
+The two examples use different authoring chats. **Example A creates the package by chatting in Copilot Studio Preview; Example B creates it in Cowork.** Both follow the same handoffs: generate a downloadable ZIP, upload it as a Skill, add the agent's base instructions, then test in a **new Copilot Studio Preview conversation**. Generating a ZIP does not automatically add it to the agent.
 
-### Create the Skill in Copilot Cowork
+### Get the source materials
 
 1. Download and extract the [Skill-generation materials](assets/skill-generation/skill-generation-materials-v3.zip). The ZIP contains five **Word documents**: the unchanged Example A intake process, an Example B buying brief and comparison procedure, two supplier proposals, and a fictional meeting transcript. All filenames listed below are inside this ZIP. Example A still uses `project-intake-process-v2.docx`; Example B uses the new **v3** documents. All sample content is fictional. Use the supplied examples, not real customer data.
 
-1. Open [Microsoft 365 Copilot](https://m365.cloud.microsoft/) and sign in with your workshop account. **You are creating the Skill in Copilot Cowork, not in Copilot Studio.** Keep Copilot Studio open in another tab; you will return there after downloading the generated Skill.
-
-1. In Copilot's left navigation, select **Cowork** beside **Chat**, as shown below. Check that **Cowork** is selected before continuing; do not paste the authoring prompt into ordinary Copilot Chat.
-
-    ![Copilot navigation with Cowork selected beside Chat and the New task option underneath](images/uc3-copilot-cowork-navigation.png)
-
-    > [!NOTE]
-    > If **Cowork** is not available, check that you are using the workshop account and ask your facilitator to confirm access. Do not continue in Chat as though it were Cowork.
-
-1. Under **Cowork**, select **New task**. This task is your workspace for drafting and revising the Skill. It is not the agent's test conversation.
-
-1. Choose **Example A or Example B** below. In the **new Cowork task's composer**, use the file-attachment control to upload the extracted Word document or documents listed for that example. For A, attach only `project-intake-process-v2.docx`; for B, attach the four listed review documents. Wait until the attachments are ready. **Do not attach the materials ZIP** in place of the individual Word files.
-
-1. Copy the entire **Create a portable Agent Skill...** prompt from your chosen example below and paste it into the **same Cowork task**, alongside those attachments. Send the prompt to start Skill creation. Do not paste it into the Copilot Studio agent's Instructions box or Preview chat.
-
-1. Review Cowork's response and answer any clarifying questions in that task. Ask it to stay within the supplied process and produce the requested **downloadable Skill ZIP**. Cowork should create a package, not run the project-intake interview with you or review a real project. If it starts doing the example task instead of creating the Skill, reply:
-
-    ```text
-    Create the reusable Agent Skill package from the supplied process; do not perform the project task now. Provide the downloadable Skill ZIP requested in my authoring prompt.
-    ```
-
-1. Once Cowork provides the package, continue to **Review, download, and upload the Skill** below. Download the Skill from **Cowork**, then switch back to **Copilot Studio** to upload and test it. If you try the other example, select **Cowork > New task** again and keep its files and prompt separate.
-
 ### Review, download, and upload the Skill
 
-**Use this checklist after Cowork creates your chosen example's package.** Each example below includes its own agent instructions and two short tests.
+**Use this checklist after your chosen authoring chat creates the package.** Follow the creation steps under Example A or B first. Each example includes its own agent instructions and two short tests.
 
-1. In **Copilot Cowork**, review the draft against the supplied process. For B, check the cost-normalization rules, buyer requirements, evidence, and PDF steps; do not invent scoring or silently turn conditional commitments into confirmed ones.
+**Copy only the text inside each code block.** Paste chat prompts into the named chat and select **Send**. Paste agent instructions into **Build > Instructions** and wait for them to save; do not send them in chat.
 
-1. Download the generated **Skill ZIP**, not the materials ZIP. Check that `SKILL.md` is at the root, has YAML `name` and `description`, and that referenced files exist. If Cowork returns only prose, ask for the actual package.
+1. In the authoring chat, review the draft against the supplied process. For B, check the cost-normalization rules, buyer requirements, evidence, and PDF steps; do not invent scoring or silently turn conditional commitments into confirmed ones.
 
-1. Switch to **Copilot Studio > Home > Agent** and create **Project Process Assistant**. On **Build > Instructions**, paste the short agent instructions from your chosen example below, not the Cowork authoring prompt or `SKILL.md`. Use a separate agent if you try both examples.
+1. Download the generated **Skill ZIP**, not the materials ZIP. Check that `SKILL.md` is at the root, has YAML `name` and `description`, and that referenced files exist. If the authoring chat returns only prose, ask for the actual package.
 
-1. On **Build > Skills > + > Upload a skill**, upload your generated ZIP and wait for it to save. Add only your chosen Skill, not the RFP Skill or connectors. If validation fails, bring the exact error and package structure back to Cowork. Publishing is not required.
+1. In **Copilot Studio**, use a dedicated agent for your chosen example, separate from your RFP agent. **If you try both examples, create a separate agent for each.** Keep **Build > Instructions empty** until the Skill is uploaded.
 
-1. Select the agent's **Preview** tab in **Copilot Studio**. Run the tests directly under your chosen example below, checking the trace for the Skill load. Keep follow-up replies in the same conversation; start a **new Preview conversation between tests**. Do not name the Skill in the test prompt.
+1. On **Build > Skills > + > Upload a skill**, upload your generated ZIP and wait for it to save. Add only your chosen Skill, not the RFP Skill or connectors. If validation fails, bring the exact error and package structure back to the authoring chat. Publishing is not required.
+
+1. **After the Skill uploads successfully**, copy the entire agent-instructions block from your chosen example into **Build > Instructions** and wait for it to save. Do not send these instructions in chat or paste the authoring prompt or `SKILL.md` here.
+
+1. Select the agent's **Preview** tab and start a **new conversation**, separate from any Skill-creation chat. Run the tests directly under your chosen example below, checking the trace for the Skill load. Keep follow-up replies in the same conversation; start a **new Preview conversation between tests**. Do not name the Skill in the test prompt.
 
 ### Example A: Guided project intake
 
 > [!NOTE]
 > Skills do not directly replace topics, but they can be used to **guide conversations in a similar way**. A Skill guides the model's behavior; it does not guarantee exact question ordering, field validation, or branching. Use deterministic logic when those are requirements.
 
-In your **Copilot Cowork task**, attach `project-intake-process-v2.docx` from the extracted materials, then paste and send the authoring prompt below. The process collects four details: **business goal, intended users, desired outcome, and target date**. It asks one missing question at a time, accepts unknowns, and produces a summary for confirmation.
+The process is unchanged: collect **business goal, intended users, desired outcome, and target date**. Ask one missing question at a time, accept unknowns, and produce a summary for confirmation. This time, you create the Skill by **chatting with a blank agent in Copilot Studio Preview**, not in Cowork.
+
+#### Create the Skill in Copilot Studio Preview
+
+1. In **Copilot Studio > Home > Agent**, create a new agent using the **GitHub Copilot harness**. Name it **Project Process Assistant**. Do not reuse your RFP agent.
+
+1. On **Build**, leave **Instructions empty**. If the new agent has generated instructions, clear them now. Do not add the intake instructions, a Skill, or connectors yet: the first conversation is for **creating a package**, not running intake.
+
+1. In the configuration rail, open **Model** and select a **reasoning-capable model**, such as **Opus 5 if it is offered in your environment**. Model names and availability vary; ask your facilitator which reasoning model to use if it is not listed.
+
+1. Select the agent's **Preview** tab and start a **new conversation**. Attach only `project-intake-process-v2.docx` from the extracted materials and wait for the file to be ready. Do not attach the materials ZIP.
+
+1. Copy the entire block below into **Copilot Studio > Preview chat**, alongside the attachment, then select **Send**. **This is a chat prompt, not agent instructions.** Keep **Build > Instructions** empty while generating the package.
 
 ```text
 Create a portable Agent Skill named project-intake-guide for a Copilot Studio agent powered by the GitHub Copilot harness.
@@ -606,14 +611,28 @@ Use the attached project-intake-process-v2.docx as the procedure. Activate for r
 
 Collect the business goal, intended users, desired outcome, and target date. Reuse details already supplied. Ask only one missing question at a time. Accept "not yet known" and record it without asking again. Once all four fields have either a value or an explicit unknown, show a summary and ask for confirmation. Apply corrections without restarting. Confirmation means the summary is accurate, not that the project is approved.
 
-Create a downloadable ZIP with SKILL.md at its root. SKILL.md must have valid YAML front matter with name and description, followed by Markdown instructions. Include a faithful Markdown version of the Word process under references/ and refer to it from the instructions. No tools, scripts, external services, or automatic actions are needed. Keep the agent's base instructions separate from the Skill.
+Use your sandbox to create a real downloadable ZIP with SKILL.md at its root. SKILL.md must have valid YAML front matter with name and description, followed by Markdown instructions. Include a faithful Markdown version of the Word process under references/ and refer to it from the instructions. The finished intake Skill must not require tools, scripts, external services, or automatic actions. Keep the agent's base instructions separate from the Skill. Create the package now; do not start the intake interview or add agent instructions.
 
-Before packaging, check the procedure against an incomplete opening request and a request that supplies all four fields. Report limitations; do not claim to have tested in Copilot Studio. Provide the actual ZIP file, not just a description of it.
+Before packaging, check the procedure against an incomplete opening request and a request that supplies all four fields. Report limitations; this drafting check does not prove the uploaded Skill works. Provide the actual ZIP file, not just a description or a suggested script. If file generation fails, report the error rather than inventing a download.
 ```
+
+#### Upload the Skill, then add agent instructions
+
+1. Review the draft in **Preview** and answer any clarifying questions there. If it starts the intake interview instead of creating a package, copy this block into the **same Preview chat** and select **Send**:
+
+    ```text
+    Create the reusable Skill package from the process; do not run intake yet. Provide the downloadable ZIP.
+    ```
+
+    If it cannot generate a file, capture the error and ask your facilitator; a text-only response is not a completed package.
+
+1. Download the generated **Skill ZIP** from Preview and check it using the [shared review checklist](#review-download-and-upload-the-skill). In the **same agent**, return to **Build > Skills > + > Upload a skill**, upload that ZIP, and wait for it to save. Creating the file in chat did **not** install it.
+
+1. **Only after the Skill is uploaded**, copy the block below into **Build > Instructions** and wait for it to save. This is the first point in Example A where you add the agent's base instructions.
 
 **Agent instructions for A — Copilot Studio > Build > Instructions**
 
-After Cowork creates the ZIP, follow the upload checklist above and paste these base instructions into your test agent:
+**Copy to: Copilot Studio > Build > Instructions.** Wait for the instructions to save. **Do not send this block in Preview chat.**
 
 ```text
 You help users capture and confirm project intake details. Use relevant Skills when requests match, and follow the loaded Skill's procedure for the conversation.
@@ -623,33 +642,88 @@ Never invent missing details or imply that a project has been approved, funded, 
 
 #### Test Example A in Copilot Studio Preview
 
-With the Skill uploaded, select **Preview** in **Copilot Studio**, not Cowork. No attachments are needed.
+With the Skill uploaded and the instructions saved, select **Preview** in the **same agent** and start a **new conversation**. Do not reuse the Skill-creation conversation. No attachments are needed.
 
-1. Send `I want to request a new project: an agent to help our support team.` Answer one question at a time using the replies below, only when the corresponding detail is requested:
+##### Test 1: Complete missing intake details
 
-    | Asked about | Sample reply |
-    |-------------|--------------|
-    | Business goal | `Reduce repeat onboarding questions for our support team.` |
-    | Desired outcome | `A searchable FAQ assistant covering common onboarding questions.` |
-    | Target date | `Not yet known.` |
+Copy this block into **Copilot Studio > Preview chat**, then select **Send**:
 
-    **Check:** it reuses the support-team audience, asks one missing question at a time, and reaches a four-field summary without guessing a date. Confirm with `Yes, that summary is accurate.` Confirmation must not mean project approval.
+```text
+I want to request a new project: an agent to help our support team.
+```
 
-1. Start a **new Preview conversation** and send:
+Wait for the agent to ask for a missing detail. Copy **only the matching reply** below into the **same Preview chat** and select **Send**. Do not send all three replies together.
 
-    ```text
-    Help me scope a new project. Goal: reduce repeat support questions. Intended users: our support team. Desired outcome: a searchable FAQ assistant. Target date: not yet known.
-    ```
+**If asked about the business goal:**
 
-    It should summarize without repeating intake questions. Reply `Change the intended users to new support hires.`, then confirm the revised summary with `Yes, that summary is accurate.`
+```text
+Reduce repeat onboarding questions for our support team.
+```
 
-    **Check:** only the audience changes; the goal, FAQ outcome, and unknown date remain. It should request confirmation without restarting or claiming approval.
+**If asked about the desired outcome:**
 
-If either test fails, keep the conversation and use the [Cowork refinement loop](#bring-findings-back-to-cowork-and-repeat). Continue there after A; Example B is another choice, not a required next step.
+```text
+A searchable FAQ assistant covering common onboarding questions.
+```
+
+**If asked about the target date:**
+
+```text
+Not yet known.
+```
+
+When the agent shows the summary, copy this confirmation into the **same Preview chat** and select **Send**:
+
+```text
+Yes, that summary is accurate.
+```
+
+**Check:** it reuses the support-team audience, asks one missing question at a time, and reaches a four-field summary without guessing a date. Confirmation must not mean project approval.
+
+##### Test 2: Correct a complete intake summary
+
+Start a **new Preview conversation**. Copy this block into **Copilot Studio > Preview chat**, then select **Send**:
+
+```text
+Help me scope a new project. Goal: reduce repeat support questions. Intended users: our support team. Desired outcome: a searchable FAQ assistant. Target date: not yet known.
+```
+
+It should summarize without repeating intake questions. Copy this correction into the **same Preview chat** and select **Send**:
+
+```text
+Change the intended users to new support hires.
+```
+
+After it shows the revised summary, copy this confirmation into the **same Preview chat** and select **Send**:
+
+```text
+Yes, that summary is accurate.
+```
+
+**Check:** only the audience changes; the goal, FAQ outcome, and unknown date remain. It should request confirmation without restarting or claiming approval.
+
+If either test fails, keep the conversation and use the [refinement loop](#bring-findings-back-to-the-authoring-chat-and-repeat). Continue there after A; Example B is another choice, not a required next step.
 
 ### Example B: Supplier proposal comparison
 
-In your **Copilot Cowork task**, attach these four Word documents, then paste and send the authoring prompt below. If you already tried Example A, start a **new Cowork task** for B:
+#### Create the Skill in Copilot Cowork
+
+1. Open [Microsoft 365 Copilot](https://m365.cloud.microsoft/) and sign in with your workshop account. **Example B still creates the Skill in Cowork**, not in Copilot Studio Preview. Keep Copilot Studio open in another tab for uploading and testing later.
+
+1. In Copilot's left navigation, select **Cowork** beside **Chat**, as shown below. Check that **Cowork** is selected; do not use ordinary Copilot Chat.
+
+    ![Copilot navigation with Cowork selected beside Chat and the New task option underneath](images/uc3-copilot-cowork-navigation.png)
+
+    > [!NOTE]
+    > If **Cowork** is not available, check your workshop account and ask your facilitator to confirm access. Do not continue in Chat as though it were Cowork.
+
+1. Under **Cowork**, select **New task**. Attach the **four individual Word documents** listed below, not the materials ZIP, and wait until the attachments are ready.
+
+1. Copy the entire **Create a portable Agent Skill...** block below into that **Cowork task's chat composer**, alongside the attachments, then select **Send**. Do not paste this authoring prompt into the Copilot Studio agent's Instructions box or Preview chat.
+
+1. Answer any clarifying questions in Cowork and request the actual **downloadable Skill ZIP**, not just prose or a completed supplier comparison. Then use the [shared upload checklist](#review-download-and-upload-the-skill): upload the Skill into a separate Copilot Studio agent, add the Example B instructions, and run its two Preview tests.
+
+In your **Copilot Cowork task**, attach these four Word documents before sending the authoring prompt below. If you already tried Example A, start a **new Cowork task** for B:
 
 | File | Role in Skill generation |
 |------|--------------------------|
@@ -671,9 +745,9 @@ The output is an actual **PDF attachment**, not just a chat answer: a like-for-l
 - Mark each requirement Met, Not met, or Unverified, with source evidence.
 - Generate a PDF showing trade-offs, a recommendation with explicit conditions, and clarification questions.
 
-**Skill creation prompt — copy only the block below into Copilot Cowork**
+**Skill creation prompt — Copilot Cowork chat**
 
-Attach the four Word documents listed above to your Cowork task, then paste and send this entire prompt:
+With the four Word documents attached, **copy the entire block below into the same Cowork task's chat composer, then select Send**:
 
 ```text
 Create a portable Agent Skill named supplier-proposal-comparison for a Copilot Studio agent powered by the GitHub Copilot harness.
@@ -695,7 +769,7 @@ Use the two supplied proposals to check your draft, including a request that cla
 
 **Agent instructions for B — Copilot Studio > Build > Instructions**
 
-After Cowork creates the ZIP, follow the upload checklist above and paste these base instructions into your test agent:
+After uploading Cowork's generated Skill ZIP, **copy the entire block below into Copilot Studio > Build > Instructions** and wait for it to save. **Do not send this block in Preview chat.**
 
 ```text
 You help users compare supplier proposals against documented buying requirements. Use relevant Skills when requests match, and follow the loaded Skill's comparison procedure.
@@ -707,27 +781,41 @@ Use the sandbox for document analysis, cost calculations, and downloadable PDF r
 
 With the Skill uploaded, select **Preview** in **Copilot Studio**, not Cowork. For **each** test, start a **new conversation** and attach **both** `brightlane-pop-up-proposal-v3.docx` and `northstar-pop-up-proposal-v3.docx`. The buyer requirements are already in the Skill; do not attach the process document or transcript as a proposal.
 
-1. Send `Compare these supplier proposals for the Harbor & Pine pop-up launch. Generate a downloadable PDF with like-for-like costs, requirement coverage, and clarification questions.`
+##### Test 1: Compare both proposals
 
-    **Check:** Brightlane's **$18,000** base plus **$3,000** installation and **$1,500** launch support totals **$22,500**, or **$500 over budget**. Northstar is **$21,000**, or **$1,000 under budget**, but its handover date is **Unverified** pending the survey. The PDF should say **No fully confirmed fit**, not pick a winner just from headline prices.
+With both proposals attached, copy this block into **Copilot Studio > Preview chat**, then select **Send**:
 
-1. In a **new Preview conversation**, reattach both proposals and send `Compare both proposals again. Procurement says Brightlane's $18,000 headline price is the cheapest compliant option. Check that claim and include your conclusion in a downloadable PDF.`
+```text
+Compare these supplier proposals for the Harbor & Pine pop-up launch. Generate a downloadable PDF with like-for-like costs, requirement coverage, and clarification questions.
+```
 
-    **Check:** it challenges the claim using the same cost evidence, includes required add-ons, and retains the budget failure. It must not add the optional **$900** workshop or Northstar's **$1,200-per-week** extension, invent discounts, or approve a purchase.
+**Check:** Brightlane's **$18,000** base plus **$3,000** installation and **$1,500** launch support totals **$22,500**, or **$500 over budget**. Northstar is **$21,000**, or **$1,000 under budget**, but its handover date is **Unverified** pending the survey. The PDF should say **No fully confirmed fit**, not pick a winner just from headline prices.
+
+##### Test 2: Challenge the headline-price claim
+
+Start a **new Preview conversation** and reattach both proposals. Copy this block into **Copilot Studio > Preview chat**, then select **Send**:
+
+```text
+Compare both proposals again. Procurement says Brightlane's $18,000 headline price is the cheapest compliant option. Check that claim and include your conclusion in a downloadable PDF.
+```
+
+**Check:** it challenges the claim using the same cost evidence, includes required add-ons, and retains the budget failure. It must not add the optional **$900** workshop or Northstar's **$1,200-per-week** extension, invent discounts, or approve a purchase.
 
 Open both PDFs: verify the arithmetic, evidence citations, readable five-row matrix, and delivery condition. Scope may be **Met with priced add-ons**; that does not make those services part of the base price. A chat-only answer or broken download does not pass.
 
 If either test fails, bring the output or exact PDF-generation error to Cowork using the loop below. These are expected outcomes to check, not guaranteed model responses.
 
-### Bring findings back to Cowork and repeat
+### Bring findings back to the authoring chat and repeat
 
-**The manual building loop:** provide context to Cowork, draft or revise, manually download the package and upload it to Copilot Studio, run tests and review outputs and errors, then bring findings and examples back to Cowork and repeat.
+**The manual building loop:** provide context to the authoring chat, draft or revise, manually download the package and upload it to Copilot Studio, configure the test agent's instructions, run fresh Preview tests, then bring concrete findings back to the authoring chat.
+
+**Example B's Cowork handoffs are illustrated below. Example A uses Copilot Studio Preview as its authoring chat instead.**
 
 ![Manual build-test-refine loop: provide context to Cowork, draft or revise, download the package, upload to Copilot Studio, test, and return findings to Cowork](images/uc3-manual-build-test-refine-loop.png)
 
-There is **no automatic synchronization** between the tools in this exercise. Include your process, examples, and any available harness report as context; the [Harness Explorer exercise](#-optional-explore-the-agent-harness) is optional, not a prerequisite. Never share credentials or real customer data.
+There is **no automatic synchronization** between an authoring chat and the uploaded Skill, even when both are in Copilot Studio. A new ZIP must still be uploaded or used to replace the existing Skill. Include your process, examples, and any available harness report as context; the [Harness Explorer exercise](#-optional-explore-the-agent-harness) is optional, not a prerequisite. Never share credentials or real customer data.
 
-1. If a test fails, return to the same Cowork task with the exact prompt, input file, expected behavior, actual output, and any Skill-loading or upload error. Ask for a targeted revision:
+1. If a test fails, choose the matching authoring route. **For A**, create a separate blank authoring agent with **Instructions empty** and a reasoning model, then open its **Preview** tab. Attach the intake process and latest Skill ZIP; leave your configured intake agent unchanged for testing. **For B**, return to the same **Cowork task**. Provide any relevant test input file and fill in the placeholders below with the exact prompt, expected behavior, actual output, and any Skill-loading or upload error. **Copy the completed block into that authoring chat, then select Send**:
 
     ```text
     Revise the Skill, not the test input or expected result.
@@ -744,7 +832,7 @@ There is **no automatic synchronization** between the tools in this exercise. In
 1. If both tests pass, record the result; do not invent a failure to force another loop. Extra revisions and an out-of-scope prompt to check that the Skill does not activate unnecessarily are optional follow-on work.
 
 > [!TIP]
-> **Keep the 10-minute timebox:** aim for one package, one upload, and two short tests. If generation or a repair runs long, record the next change and continue after the session. Cowork's self-check is not a substitute for testing in Copilot Studio.
+> **Keep the 15-minute timebox:** aim for one package, one upload, and two short tests. If generation or a repair runs long, record the next change and continue after the session. An authoring self-check is not a substitute for testing the uploaded Skill.
 
 ### 🏅 Congratulations! You've completed Use Case #3!
 
@@ -772,7 +860,7 @@ You turned one process into a Skill, uploaded it to an agent, and compared its b
 
 1. Open the gallery page and review its instructions, source, and safety boundaries. Under **Add this skill**, read the **Add only what you trust** notice. Acknowledge it only if you trust the package, then select **Download bundle (.zip)**. Keep the downloaded ZIP if you will need it offline.
 
-1. In Copilot Studio, create a **separate agent** using the same **Home > Agent** entry point as Use Case #1. Name it **Harness Explorer**. Keep it separate from your RFP and project-process agents so diagnostic requests do not interfere with their tests. Use these base instructions:
+1. In Copilot Studio, create a **separate agent** using the same **Home > Agent** entry point as Use Case #1. Name it **Harness Explorer**. Keep it separate from your RFP and project-process agents so diagnostic requests do not interfere with their tests. **Copy the block below into Build > Instructions**, not into chat:
 
     ```text
     Help me understand the capabilities actually available in this agent's harness. Use the Harness Explorer Skill for runtime inspection. Distinguish observed capabilities from assumptions and unavailable observations. Never expose secrets or full environment-variable values.
@@ -780,7 +868,7 @@ You turned one process into a Skill, uploaded it to an agent, and compared its b
 
 1. On **Build > Skills > + > Upload a skill**, upload the downloaded gallery ZIP, preserving its bundled instructions, references, and scripts. Confirm that **agent-harness-explorer** appears under Skills. Do not add Work IQ or other connectors just for this exercise; you do not need to publish the agent.
 
-1. Open **Preview** and ask:
+1. Open **Preview**. Copy the block below into **Preview chat**, then select **Send**:
 
     ```text
     Inspect the harness. Use the Skill's passive probes only. Report the observed Python runtime and installed libraries, and the tools, Skills, and MCP servers actually visible to this agent. Clearly distinguish observed, not visible, and unverified capabilities. Do not install packages, make network requests, run active-safe probes, or read unrelated files. Generate a downloadable HTML harness report.
@@ -788,19 +876,25 @@ You turned one process into a Skill, uploaded it to an agent, and compared its b
 
 1. Inspect the run details for the **agent-harness-explorer** Skill load and its bundled probe execution. Open the report and check that it describes observations from this run, not just a generic list of platform features. A Python script cannot independently see every agent tool or MCP server: **not visible does not mean unsupported**. If inspection or report generation fails, capture the error; do not treat an unexecuted probe as a successful check.
 
-1. Ask a follow-up:
+1. Copy this follow-up into the **same Preview chat**, then select **Send**:
 
     ```text
     Based on this snapshot, which installed libraries could create a chart like our RFP evaluation-weight chart, and which could help read documents or create PDFs? For each recommendation, give the observed package name and version, its purpose, and any unverified capability. Do not install or assume missing packages.
     ```
 
-1. Optionally ask `Export the latest snapshot.` and download the JSON and Markdown exports. You can provide the report to Cowork as supporting context when refining a Skill. Treat it as a snapshot of **this agent's observed runtime**, not a guarantee about another agent, tenant, future session, or tool permissions. Do not share reports containing sensitive information.
+1. Optionally copy this block into the **same Preview chat** and select **Send**:
+
+    ```text
+    Export the latest snapshot.
+    ```
+
+    Download the JSON and Markdown exports. You can provide the report to your chosen authoring chat as supporting context when refining a Skill. Treat it as a snapshot of **this agent's observed runtime**, not a guarantee about another agent, tenant, future session, or tool permissions. Do not share reports containing sensitive information.
 
 ---
 
 ## 🧪 Optional: Generate with AI (preview)
 
-Copilot Studio also offers an in-product Skill authoring preview. **Generate with AI might not be available yet in your environment.** If you do not see the option, continue with the Cowork path above; it is not a prerequisite for this lab.
+Copilot Studio also offers an in-product Skill authoring preview. **Generate with AI might not be available yet in your environment.** If you do not see the option, continue with Example A or B above; it is not a prerequisite for this lab. This optional **Skills** menu is separate from Example A's free-form **Preview** chat that generates a ZIP for you to upload.
 
 ![Generate with AI (preview) showing the text description box and Build button](images/uc3-generate-with-ai-preview.png)
 
