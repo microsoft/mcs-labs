@@ -185,6 +185,9 @@ Markdown date; lab pages use the parent module's deck date and fall back to the
 `_labs/<slug>.md` Git date. Do not add manual update-date fields.
 Jekyll-building workflows require full Git history, and presentation-only
 changes must remain included in their path filters.
+The Node feed producer calls `scripts/resolve-content-dates.rb` once per build
+to reuse this resolver and publish `metadata.content_last_updated`. Feed
+generation requires Ruby and Git on PATH, but does not load the Jekyll gems.
 
 **Headings and the table of contents:**
 

@@ -154,6 +154,30 @@ class ContentLastUpdatedTest < Minitest::Test
     assert_equal ["presentations/Shared.pptx"], @requested_paths
   end
 
+  def test_syndicated_dates_survive_a_missing_local_deck
+    published_date = "2026-10-05T12:00:00Z"
+    lab = document(
+      "partner-demo",
+      { "module" => "partner-module", "content_last_updated" => published_date },
+      "labs"
+    )
+    mod = document(
+      "partner-module",
+      {
+        "slides" => "/presentations/Partner%20Deck.pptx",
+        "content_last_updated" => published_date
+      },
+      "modules"
+    )
+
+    apply([lab], [mod], {})
+
+    assert_equal published_date, lab.data["content_last_updated"]
+    assert_equal published_date, mod.data["content_last_updated"]
+    assert_empty @requested_paths
+    assert_includes @logger.warnings.join("\n"), "Partner Deck.pptx"
+  end
+
   private
 
   def document(slug, data, collection_name)

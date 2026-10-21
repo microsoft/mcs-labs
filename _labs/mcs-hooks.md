@@ -1,6 +1,6 @@
 ---
 layout: lab
-module: github-copilot-harness
+module: metadata-and-hooks-deep-dive
 title: "Hooks and Knowledge: Travel Policy Agent"
 order: 145
 duration: 45

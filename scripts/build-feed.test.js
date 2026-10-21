@@ -261,6 +261,68 @@ test('CLI: generates index.json and all.json from real collections', () => {
   }
 });
 
+test('CLI: publishes resolved deck dates and Markdown fallbacks without changing last_modified', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'mcs-feed-dates-'));
+  const markdownDate = '2026-09-01T10:00:00+00:00';
+  const deckDate = '2026-10-05T12:00:00+00:00';
+  try {
+    for (const dir of ['_labs', '_modules', '_workshops', 'presentations']) {
+      fs.mkdirSync(path.join(root, dir));
+    }
+    fs.writeFileSync(path.join(root, '_labs', 'demo.md'), '---\nmodule: shared\n---\nLab body\n');
+    fs.writeFileSync(path.join(root, '_modules', 'shared.md'), '---\nslides: /presentations/Shared%20Deck.pptx\n---\nModule body\n');
+    fs.writeFileSync(path.join(root, '_labs', 'no-deck.md'), '---\ntitle: No deck\n---\nFallback body\n');
+    fs.writeFileSync(path.join(root, '_modules', 'missing.md'), '---\nslides: /presentations/Missing.pptx\n---\nMissing deck\n');
+    fs.writeFileSync(path.join(root, '_labs', 'missing.md'), '---\nmodule: missing\n---\nMissing deck lab\n');
+    fs.writeFileSync(path.join(root, '_modules', 'no-deck.md'), '---\ntitle: No deck\n---\nModule fallback\n');
+    fs.writeFileSync(path.join(root, '_workshops', 'demo.md'), '---\ntitle: Workshop\n---\nWorkshop body\n');
+    execFileSync('git', ['init', '--quiet'], { cwd: root });
+    const commit = (date, message) => {
+      execFileSync('git', ['-c', 'core.autocrlf=false', 'add', '.'], { cwd: root });
+      execFileSync('git', ['-c', 'user.name=Feed Test', '-c', 'user.email=feed-test@example.invalid',
+        '-c', 'commit.gpgsign=false', '-c', `core.hooksPath=${path.join(root, 'no-hooks')}`, 'commit', '--quiet', '-m', message], {
+        cwd: root,
+        env: { ...process.env, GIT_AUTHOR_DATE: date, GIT_COMMITTER_DATE: date },
+      });
+    };
+    commit(markdownDate, 'Add content');
+    fs.writeFileSync(path.join(root, 'presentations', 'Shared Deck.pptx'), 'Fixture deck');
+    commit(deckDate, 'Add shared deck');
+    const sourceDate = execFileSync('git', ['log', '-1', '--format=%cI', '--', '_labs/demo.md'], {
+      cwd: root, encoding: 'utf8',
+    }).trim();
+
+    const out = path.join(root, 'published');
+    const result = execFileSync(process.execPath, [path.join(__dirname, 'build-feed.js'), '--out', out], {
+      cwd: root, encoding: 'utf8', stdio: ['pipe', 'pipe', 'pipe'],
+    });
+    assert.match(result, /wrote index.json/);
+    const bundle = JSON.parse(fs.readFileSync(path.join(out, 'all.json'), 'utf8'));
+    const find = (collection, slug) => bundle.items.find((item) => item.collection === collection && item.slug === slug);
+    for (const [collection, slug, expected] of [
+      ['labs', 'demo', deckDate], ['modules', 'shared', deckDate],
+      ['labs', 'no-deck', markdownDate], ['modules', 'no-deck', markdownDate],
+      ['labs', 'missing', markdownDate], ['modules', 'missing', markdownDate],
+    ]) {
+      const item = find(collection, slug);
+      assert.equal(Date.parse(item.metadata.content_last_updated), Date.parse(expected));
+      assert.equal(item.last_modified, sourceDate);
+      const perItem = JSON.parse(fs.readFileSync(path.join(out, 'items', collection, `${slug}.json`), 'utf8'));
+      assert.equal(perItem.item.metadata.content_last_updated, item.metadata.content_last_updated);
+    }
+    assert.equal(find('workshops', 'demo').metadata.content_last_updated, undefined);
+    assert.equal(find('labs', 'demo').content_hash, feed.contentHash('Lab body\n'));
+
+    const consume = require('./consume-feed');
+    for (const item of [find('labs', 'demo'), find('modules', 'shared')]) {
+      const parsed = require('gray-matter')(consume.materializeDoc(item, 'https://consumer.test'));
+      assert.equal(parsed.data.content_last_updated, item.metadata.content_last_updated);
+    }
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('buildItem: includes a content_url to the per-item feed document', () => {
   const item = feed.buildItem({
     collection: 'labs', slug: 'demo', frontMatter: { title: 'Demo' }, body: 'x',

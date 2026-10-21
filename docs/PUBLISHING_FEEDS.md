@@ -28,6 +28,11 @@ everything_feed: true
 
 Build it locally to see exactly what gets served:
 
+The producer requires Node.js, Ruby, and Git on `PATH`. It calls the shared
+Ruby/Jekyll date resolver once per build; Ruby's standard library is sufficient
+for this step, with no Jekyll gem loading required. Use a full-history Git
+checkout so older deck and document dates remain available.
+
 ```bash
 node scripts/build-feed.js --out _site/feed
 # wrote per-item documents, all/manifest.json + bundle, index.json
@@ -121,6 +126,12 @@ For each source doc `_<collection>/<slug>.md`, the producer emits an item with:
   rewritten to **absolute** URLs (under `base_url`) so they load off-site. The list
   of those URLs is in `images`.
 - `last_modified` — the source file's last git commit time (ISO-8601), or `null`.
+- `metadata.content_last_updated` — for labs and modules, the resolved display
+  date from the same resolver used by Jekyll: the linked local PowerPoint's
+  latest Git commit (the parent module's deck for labs), falling back to the
+  document's Git date. Consumers preserve this value even without local decks;
+  older feeds without it still fall back to `last_modified`. This does not
+  change the meaning of `last_modified` or `content_hash`.
 - `content_hash` — `sha256:` of the raw body, the primitive consumers use to detect
   change. See [FEED_FORMAT.md](feed/FEED_FORMAT.md#content_hash-semantics).
 
