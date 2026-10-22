@@ -60,7 +60,7 @@ The optional Extra Credit exercise adds a shared RFP Response plugin to Cowork a
 - A colleague named Dewain Robinson who resolves in the tenant directory, or a facilitator-provided recipient substituted consistently in both use cases
 - Download the sample report PDF: [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf)
 - For Use Case #2: a sales tracker Excel workbook in a SharePoint document library the account can reach, with columns covering month, region, product line, and sales rep — the reference tenant uses `Sales.xlsx` in the `Sales Lab1b` document library
-- For Use Case #2: access to **Claude > Opus 5** in the Cowork model picker, as used in the dashboard instructions
+- For Use Case #2: access to **Claude > Opus 5.5** in the Cowork model picker, as used in the dashboard instructions
 - For optional Extra Credit only: the **RFP Response** plugin published by the facilitator and shared with your account in Cowork. Confirm it appears under **Customize > Plugins > Shared with me** before starting; if it is missing, ask the facilitator to share it. You do not need to complete the Skills lab or create a Copilot Studio agent or workflow.
 
 ---
@@ -224,10 +224,16 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 
 1. Select **New Task** to start a fresh Cowork session, so this use case doesn't continue the conversation from Use Case #1.
 
-1. Open the model picker at the top of the panel (it reads **Auto** by default), choose **Claude**, then **Opus 5**.
+1. At the bottom-right of the **Start a task…** text box, select the **Auto** model control (it may display **Auto Medium**) to open **Model and reasoning effort**.
+
+   ![The Auto Medium model control at the bottom-right of the Cowork text box](images/cowork-model-picker-location.png)
+
+1. In the menu, select **Auto** again to open the model list. Expand **Claude**, then select **Opus 5.5**.
+
+   ![The model list showing Claude expanded and Opus 5.5 highlighted](images/cowork-model-picker-opus-5-5.png)
 
    > [!IMPORTANT]
-   > Cowork writes the dashboard code itself, so the model you pick changes what you get. On **Opus 5** the dashboard comes back with cross-filtering charts and a detail table, as described below. On **Auto** the same prompt has produced a filters-only dashboard with no table. Pick Opus 5 so your result matches the lab.
+   > Cowork writes the dashboard code itself, so the model you pick affects the result. Select **Opus 5.5** rather than **Auto** for this lab, then verify the dashboard's filters, charts, and detail table as described below. The exact layout can vary between runs.
 
 1. Paste the following prompt into the message input and press **Send**:
 
@@ -354,10 +360,14 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 
 #### Run an RFP through Cowork
 
-1. Select **New task**. Download the sample solicitation
-    [05-ironwood-legacy-modernization.md](https://github.com/Dewain27/AgentDudeSamples/blob/main/samples/RFP%20Skill/test-rfps/05-ironwood-legacy-modernization.md)
-    - Ironwood Manufacturing replacing a shop floor control system. Choose **Add attachments** and
-    **Upload images and files**, select the file, then type:
+1. Open the sample solicitation
+    [05-ironwood-legacy-modernization.md on GitHub](https://github.com/Dewain27/AgentDudeSamples/blob/main/samples/RFP%20Skill/test-rfps/05-ironwood-legacy-modernization.md)
+    - On the GitHub file page, select the **Download raw file** button (the downward-arrow icon)
+      in the toolbar at the top-right of the file contents.
+    - Save the `.md` file to your Downloads folder or another location you can find.
+
+1. Return to **Cowork** and select **New task**. Choose **Add attachments** and
+    **Upload images and files**, select the downloaded `.md` file, then type:
 
     ```text
     We are bidding on this RFP. Draft our response.
@@ -402,13 +412,3 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 **The review gate held in both use cases.** Both emails stayed in Outlook Drafts for you to inspect. Check the report facts, workbook figures, recipients, and attachment before sending anything.
 
 **Optional: a plugin added a reusable skill.** If you completed Extra Credit, you installed the shared RFP Response plugin, observed Cowork select its skill without being told to, and reviewed the generated Markdown and PDF proposal files.
-
----
-
-## Conclusions & Recommendations
-
-**Use Cowork when the job is a task, not a question.** If the outcome is an artifact — an email or an interactive dashboard — delegation beats conversation.
-
-**Review before sending.** Verify the generated emails against the source report and workbook, confirm the recipient and attached graphic, and leave both emails as drafts for this lab.
-
-**Position it against the alternatives.** Chat answers, Cowork acts, and a custom agent encodes a repeatable process you own. Those three sit side by side, and picking correctly is the design skill this bootcamp is teaching.
