@@ -8,7 +8,7 @@ difficulty: 200
 lab_type: local
 section: core_learning_path
 journeys: ["quick-start", "business-user"]
-description: "Use Copilot Cowork to draft emails and build a SharePoint sales dashboard in 30 minutes, with optional Extra Credit on skills and plugins."
+description: "Use Copilot Cowork to draft emails, build a SharePoint sales dashboard, and generate an RFP response with a plugin in 30 minutes, with optional Extra Credit on Planner campaigns."
 
 ---
 
@@ -24,7 +24,7 @@ Delegate real work to Copilot Cowork — hand it a document, let it reason over 
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 200 | Business User | 30 minutes | After completing this lab, participants will be able to delegate document-grounded tasks to Copilot Cowork, create an interactive dashboard from SharePoint data, and verify Outlook drafts before sending. |
+| 200 | Business User | 30 minutes | After completing this lab, participants will be able to delegate document-grounded tasks to Copilot Cowork, create an interactive dashboard from SharePoint data, use a plugin's bundled skill to generate an RFP response, and review the outputs before sending or sharing. |
 
 ---
 
@@ -36,19 +36,14 @@ Delegate real work to Copilot Cowork — hand it a document, let it reason over 
 - [Instructions by Use Case](#instructions-by-use-case)
   - [Use Case #1: Draft an executive email with the Cowork agent from a PDF report](#use-case-1-draft-an-executive-email-with-the-cowork-agent-from-a-pdf-report)
   - [Use Case #2: Build an interactive sales dashboard from SharePoint and draft the summary email](#use-case-2-build-an-interactive-sales-dashboard-from-sharepoint-and-draft-the-summary-email)
-  - [Extra Credit: Using skills and plugins in Copilot Cowork](#extra-credit-using-skills-and-plugins-in-copilot-cowork)
+  - [Use Case #3: Using skills and plugins in Copilot Cowork](#use-case-3-using-skills-and-plugins-in-copilot-cowork)
+  - [Extra Credit: Build a sales campaign in Planner and identify immediate actions](#extra-credit-build-a-sales-campaign-in-planner-and-identify-immediate-actions)
 
 ---
 
 ## Introduction
 
-This lab accompanies [Cowork (+ skills, + plugins)]({{ '/modules/ghcp-in-a-day-cowork/' | relative_url }}) in the **Deep dive in modern agents** workshop.
-
 Copilot Cowork takes a delegated task and works it agentically: reading source material, resolving who and what it needs from your organisation, and producing real output in Microsoft 365 — a drafted email, a document, a set of updates — for you to review before anything is sent.
-
-In this lab you ask Cowork to draft an executive email from a hotel performance report, then start a separate task to find sales data in SharePoint, build an interactive dashboard, and draft a summary email with a graphic attached. In both use cases, you verify the output in Outlook without sending it.
-
-The optional Extra Credit exercise adds a shared RFP Response plugin to Cowork and uses its bundled skill to generate a proposal as Markdown and PDF files. It is outside the 30-minute core lab.
 
 ---
 
@@ -57,11 +52,12 @@ The optional Extra Credit exercise adds a shared RFP Response plugin to Cowork a
 - A Microsoft 365 account with a Microsoft 365 Copilot licence
 - Access to Copilot Cowork
 - Outlook available to the same account, so the drafted email can be verified
-- A colleague named Dewain Robinson who resolves in the tenant directory, or a facilitator-provided recipient substituted consistently in both use cases
+- A colleague named Dewain Robinson who resolves in the tenant directory, or a facilitator-provided recipient substituted consistently in Use Cases #1 and #2
 - Download the sample report PDF: [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf)
 - For Use Case #2: a sales tracker Excel workbook in a SharePoint document library the account can reach, with columns covering month, region, product line, and sales rep — the reference tenant uses `Sales.xlsx` in the `Sales Lab1b` document library
 - For Use Case #2: access to **Claude > Opus 5.5** in the Cowork model picker, as used in the dashboard instructions
-- For optional Extra Credit only: the **RFP Response** plugin published by the facilitator and shared with your account in Cowork. Confirm it appears under **Customize > Plugins > Shared with me** before starting; if it is missing, ask the facilitator to share it. You do not need to complete the Skills lab or create a Copilot Studio agent or workflow.
+- For Use Case #3: the **RFP Response** plugin published by the facilitator and shared with your account in Cowork.
+- For optional Extra Credit only: Planner available to the same account.
 
 ---
 
@@ -69,9 +65,10 @@ The optional Extra Credit exercise adds a shared RFP Response plugin to Cowork a
 
 | Step | Use Case | Value added | Effort |
 | ---- | -------- | ----------- | ------ |
-| 1 | [Draft an executive email with the Cowork agent from a PDF report](#use-case-1-draft-an-executive-email-with-the-cowork-agent-from-a-pdf-report) | Cowork takes agentic action: reads the PDF, resolves the recipient, and drafts a real Outlook email on your behalf | 10 min |
-| 2 | [Build an interactive sales dashboard from SharePoint and draft the summary email](#use-case-2-build-an-interactive-sales-dashboard-from-sharepoint-and-draft-the-summary-email) | Cowork locates the workbook through Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an email with a graphic attached | 20 min |
-| EC | [Extra Credit: Using skills and plugins in Copilot Cowork](#extra-credit-using-skills-and-plugins-in-copilot-cowork) | Install a shared plugin and use its bundled skill to generate an RFP response (Optional) | ~6 min |
+| 1 | [Draft an executive email with the Cowork agent from a PDF report](#use-case-1-draft-an-executive-email-with-the-cowork-agent-from-a-pdf-report) | Cowork takes agentic action: reads the PDF, resolves the recipient, and drafts a real Outlook email on your behalf | 8 min |
+| 2 | [Build an interactive sales dashboard from SharePoint and draft the summary email](#use-case-2-build-an-interactive-sales-dashboard-from-sharepoint-and-draft-the-summary-email) | Cowork locates the workbook through Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an email with a graphic attached | 15 min |
+| 3 | [Using skills and plugins in Copilot Cowork](#use-case-3-using-skills-and-plugins-in-copilot-cowork) | Install a shared plugin and use its bundled skill to generate an RFP response | 7 min |
+| EC | [Extra Credit: Build a sales campaign in Planner and identify immediate actions](#extra-credit-build-a-sales-campaign-in-planner-and-identify-immediate-actions) | Create real Planner tasks from the sales analysis, then identify immediate actions and dependencies (Optional) | ~10 min |
 
 ---
 
@@ -85,7 +82,7 @@ If Researcher (the Researcher exercise in Lab 1) is still reasoning in the backg
 
 | Use case                                       | Value added                                                                                                       | Estimated effort |
 | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------- |
-| Draft an executive email with Cowork           | Cowork takes agentic action: reads the PDF, resolves the recipient, and drafts a real Outlook email on your behalf | 10 minutes       |
+| Draft an executive email with Cowork           | Cowork takes agentic action: reads the PDF, resolves the recipient, and drafts a real Outlook email on your behalf | 8 minutes        |
 
 **Summary of tasks**
 
@@ -202,7 +199,7 @@ Use Case #1 handed Cowork a file you uploaded and asked for one artifact. This o
 
 | Use case                                                | Value added                                                                                                                                                  | Estimated effort |
 | ------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
-| Build a sales dashboard and draft the summary email     | Cowork locates the workbook through Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an email with a graphic attached             | 20 minutes       |
+| Build a sales dashboard and draft the summary email     | Cowork locates the workbook through Work IQ, extracts the data, builds an interactive HTML dashboard, and drafts an email with a graphic attached             | 15 minutes       |
 
 **Summary of tasks**
 
@@ -311,10 +308,13 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 
 ---
 
-## Extra Credit: Using skills and plugins in Copilot Cowork
+## Use Case #3: Using skills and plugins in Copilot Cowork
 
-> [!NOTE]
-> **Optional - Extra Credit (~6 minutes):** This use case is optional and not included in the 30-minute lab time. Complete it if you have additional time or want to see how a plugin adds a reusable skill to Cowork.
+| Use case | Value added | Estimated effort |
+| -------- | ----------- | ---------------- |
+| Using skills and plugins in Copilot Cowork | Install a shared plugin and use its bundled skill to generate an RFP response as Markdown and PDF files | 7 minutes |
+
+This use case is part of the 30-minute core lab. Install the shared RFP Response plugin, observe Cowork select its bundled skill, and review the generated proposal files before sharing them.
 
 ### Step-by-step instructions
 
@@ -397,18 +397,137 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
     > [!TIP]
     > Read the closing summary. It matches Legacy Application Modernization to Ironwood's "no hard cutover" constraint, prices the engagement against their stated budget, writes to their 35% technical-approach weighting, and closes with a short list of items needing sign-off - typically including that Aventra holds SOC 2 and ISO 27001 but **not** IEC 62443 for plant-floor networks. The figures and the flag count differ from run to run; the structure and the candour do not. The bundled skill supplies the response procedure and guardrails.
 
-### Congratulations! You've completed the Extra Credit: Using skills and plugins in Copilot Cowork!
+### Congratulations! You've completed Use Case #3: Using skills and plugins in Copilot Cowork!
+
+---
+
+## Extra Credit: Build a sales campaign in Planner and identify immediate actions
+
+> [!NOTE]
+> **Optional - Extra Credit (~10 minutes):** This exercise is optional and not included in the 30-minute lab time. It builds on Use Case #2: resume its sales dashboard session, not the RFP session from Use Case #3.
+
+Use Cases #1 and #2 both stopped at a draft — private, reversible, sitting in your own mailbox until you decided otherwise. This one doesn't. Cowork writes real tasks into Planner, and the moment it does, they exist in your plan.
+
+| Use case | Value added | Estimated effort |
+| -------- | ----------- | ---------------- |
+| Build and prioritize a sales campaign in Planner | Cowork writes real tasks into Planner with no draft stage, then identifies the nearest actions and explains the dependencies between them | 10 minutes |
+
+**Summary of tasks**
+
+In this section, you'll resume your Use Case #2 session, ask Cowork to turn what it found in the sales data into a campaign plan in Planner, approve the Microsoft Graph consent it needs to write there, review the tasks it created, and then ask it to identify the three nearest actions.
+
+**Scenario:** The dashboard you built in Use Case #2 showed home appliances lagging, and your sales reps need a campaign they can launch three months from now. Rather than writing the plan and keying the tasks in yourself, you'll delegate both — and then ask Cowork to prioritize what needs attention first.
+
+### Objective
+
+Resume the previous Cowork session, have Cowork create a Home Appliance campaign as a plan in Planner with tasks your sales reps can work from, grant the Microsoft Graph consent required to write there, and then ask Cowork to identify the three nearest actions and their dependencies.
+
+---
+
+### Step-by-step instructions
+
+#### Resume your previous session
+
+1. Open **Cowork** from the Microsoft 365 Copilot page.
+
+1. Open the **previous session** — the sales dashboard session from Use Case #2, not the RFP session from Use Case #3.
+
+   > [!TIP]
+   > This matters more than it looks. That session already holds the sales data Cowork extracted, the dashboard it built, and the conclusions it drew. Resuming it means the next prompt can refer to "the weak home appliances business" without you re-explaining anything or re-attaching a single file. A new session would start cold.
+
+#### Delegate the campaign plan
+
+1. Type the following prompt and press **Send**:
+
+    ```text
+    I want to build a sales campaign to shore up the weak home appliances business. Create a short sales campaign with my name in Planner that our sales reps can use to boost sales around home appliances. Let's design a plan to launch the campaign three months from now.
+    ```
+
+    > [!TIP]
+    > "With my name in Planner" is doing real work in a shared tenant — it keeps your plan distinguishable from everyone else's in the room. The launch date is the only hard constraint you give; the campaign structure, the tasks, and their sequencing are all Cowork's to decide.
+
+1. When Cowork prompts with **Use Microsoft Graph?**, open the arrow next to **Approve** and choose **Always allow Call graph**.
+
+   ![The Microsoft Graph consent card with the Approve dropdown open, showing Always allow Call graph](images/cowork-graph-consent-always-allow.png)
+
+   > [!IMPORTANT]
+   > This is the permission boundary made visible. Reading your files and drafting your mail needed no extra consent — writing into Planner does. Note that **Always allow** persists for future calls, so it is a decision about every subsequent task, not just this one.
+
+   > [!TIP]
+   > **Always allow Call graph** lives in the dropdown *on* the **Approve** button, not as a step after it — plain **Approve** authorises one single call and the card disappears. Building this plan takes Cowork dozens of Graph calls, and approving them one at a time means a prompt for every one.
+
+#### Review the tasks in Planner
+
+1. Open the app launcher (the 3×3 "waffle" icon at the top-left) and choose **More apps**. In the **Apps** section at the top of the page, select **All apps** at the bottom-right of that section, then find and select **Planner**. Planner opens in a new window.
+
+   ![The Microsoft 365 app launcher with More apps highlighted](images/m365-app-launcher-more-apps.png)
+
+1. Select **My plans**, then open the plan Cowork created — its name combines the campaign with your username.
+
+   ![Planner's My plans page showing the Home Appliances Sales Campaign plan](images/cowork-planner-my-plans.png)
+
+1. **Observe** the tasks it wrote: phase buckets and due dates working back from the launch. Switch to the **Grid** view to see the whole plan at once.
+
+   ![The campaign plan Cowork created, in Planner's Grid view, showing each task with its due date and bucket](images/cowork-planner-task-grid.png)
+
+   > [!NOTE]
+   > Use **My plans**, not **My Tasks**. My Tasks lists only what is assigned to you *and* indexed, and it is routinely still empty at this point in the lab even when the tasks already exist in the plan. If My Tasks looks empty, nothing has gone wrong — open the plan instead.
+
+#### Ask for the immediate actions
+
+1. Go back to Cowork and click on your session to resume it.
+
+1. Type the following prompt and press **Send**:
+
+    ```text
+    What are the 3 immediate actions to be taken care of?
+    ```
+
+    > [!TIP]
+    > Notice what this prompt doesn't include: which plan, which tasks, or where to find them. Cowork built the plan in this session, so it still knows. This is the difference between an agent that holds context and a tool you have to re-brief every time.
+
+#### Review Cowork's prioritization
+
+1. **Observe** how Cowork returns the three nearest campaign actions and calls out the dependencies between them.
+
+   ![Cowork identifies the three nearest campaign actions and explains the dependencies between them](images/cowork-planner-prioritization.png)
+
+   > [!NOTE]
+   > Cowork bases its answer on today's date and the plan it created, so the action names, dates, and dependencies will vary from the example.
+
+---
+
+### Congratulations! You've completed the Extra Credit: Build a sales campaign in Planner and identify immediate actions!
+
+---
+
+### Test your understanding
+
+**Key takeaways:**
+
+- **Sessions carry context** — Resuming the Use Case #2 conversation meant one sentence about "the weak home appliances business" was enough. Cowork still had the data, the dashboard, and its own analysis.
+- **Some actions have no draft stage** — An email waits for you. Planner tasks do not. The more systems an agent can write to, the more that distinction matters.
+- **Consent is where the boundary shows** — Reading and drafting were free; writing to Planner required explicit Microsoft Graph approval. "Always allow" is a decision about every future call, not just this one.
+- **Prioritization uses session context** — One short question was enough for Cowork to identify the nearest actions, explain why their order matters, and call out dependencies without you restating the plan.
+
+**Challenge: Apply this to your own use case**
+
+- Which project plans do you build by hand from a report someone else already wrote?
+- Where in your work would you want an approval gate before an agent writes tasks into a system — and where would that gate just be friction?
+- When an agent creates a plan, what context should it use to decide which actions are most urgent?
 
 ---
 
 ## Summary of learnings
 
-**You delegated, you did not converse.** Two instructions produced two Outlook drafts and an interactive dashboard — no copying content between windows.
+**You delegated, you did not converse.** Three delegated tasks produced two Outlook drafts, an interactive dashboard, and RFP proposal files — no copying content between windows.
 
-**Cowork acted inside Microsoft 365.** The outputs were real drafts in your mailbox and a real dashboard you could explore — not blocks of suggested text you then had to place somewhere.
+**Cowork produced real artifacts.** The outputs were real drafts in your Microsoft 365 mailbox, a dashboard you could explore, and Markdown and PDF proposal files — not blocks of suggested text you then had to place somewhere.
 
 **It found its own inputs.** In Use Case #2 you never said where the workbook lived. Locating it was part of what you delegated, not part of what you specified.
 
-**The review gate held in both use cases.** Both emails stayed in Outlook Drafts for you to inspect. Check the report facts, workbook figures, recipients, and attachment before sending anything.
+**Review before sending or sharing.** In Use Cases #1 and #2, both emails stayed in Outlook Drafts for you to inspect. Check the report facts, workbook figures, recipients, and attachment before sending anything. In Use Case #3, review both the Markdown and PDF proposal files before sharing them.
 
-**Optional: a plugin added a reusable skill.** If you completed Extra Credit, you installed the shared RFP Response plugin, observed Cowork select its skill without being told to, and reviewed the generated Markdown and PDF proposal files.
+**A plugin added a reusable skill.** In Use Case #3, you installed the shared RFP Response plugin, observed Cowork select its skill without being told to, and reviewed the generated Markdown and PDF proposal files.
+
+**Optional: context carried into real Planner actions.** If you completed Extra Credit, you resumed the sales dashboard session, approved Microsoft Graph access, reviewed the campaign tasks Cowork created, and asked it to prioritize immediate actions. Unlike Outlook drafts, Planner tasks took effect as soon as they were created.
