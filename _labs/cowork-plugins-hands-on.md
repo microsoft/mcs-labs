@@ -78,7 +78,7 @@ Copilot Cowork takes a delegated task and works it agentically: reading source m
 
 ## Use Case #1: Draft an executive email with the Cowork agent from a PDF report
 
-If Researcher (the Researcher exercise in Lab 1) is still reasoning in the background, that's fine — you can run Cowork in parallel. Switch to **Cowork** to do something purely conversational agents cannot: agentically read a complex business document, look up the right recipient in your organization, and draft a complete email in Outlook — ready for you to review and send.
+Use **Cowork** to do something purely conversational agents cannot: agentically read a complex business document, look up the right recipient in your organization, and draft a complete email in Outlook — ready for you to review and send.
 
 | Use case                                       | Value added                                                                                                       | Estimated effort |
 | ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- | ---------------- |
@@ -86,13 +86,13 @@ If Researcher (the Researcher exercise in Lab 1) is still reasoning in the backg
 
 **Summary of tasks**
 
-In this section, you'll upload the same Contoso PDF to the Cowork agent, ask it to draft an email to a specific colleague summarizing the most urgent operational issues, and then verify the draft was created in Outlook.
+In this section, you'll download the Contoso Grand Hotel performance report, upload it to the Cowork agent, ask it to draft an email to a specific colleague summarizing the most urgent operational issues, and then verify the draft was created in Outlook.
 
 **Scenario:** You're an operations lead at the Contoso Grand Hotel and need to brief your colleague Dewain on the most pressing issues from the annual performance report. Rather than writing the email yourself, you'll let Cowork extract the key facts from the report and draft the email — addressed to Dewain, ready for you to review, edit, and send.
 
 ### Objective
 
-Use the Cowork agent to read the [same PDF report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf) you uploaded to Researcher, identify five operational issues with root causes and recommendations, and have Cowork draft a real Outlook email to a named recipient (Dewain Robinson).
+Use the Cowork agent to read the [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf), identify five operational issues with root causes and recommendations, and have Cowork draft a real Outlook email to a named recipient (Dewain Robinson).
 
 ---
 
@@ -100,18 +100,20 @@ Use the Cowork agent to read the [same PDF report](https://github.com/microsoft/
 
 #### Open the Cowork agent
 
-1. From the same Microsoft 365 Copilot page (`https://m365.cloud.microsoft/chat/?auth=2&home=1`), select **Cowork** on the **Chat / Cowork** toggle at the top of the Copilot panel.
+1. Open Microsoft 365 Copilot (`https://m365.cloud.microsoft/chat/?auth=2&home=1`) and select **Cowork** on the **Chat / Cowork** toggle at the top of the Copilot panel.
 
    ![The Cowork surface in Microsoft 365 Copilot](images/cowork-landing.png)
 
    Take a moment to orient before you type anything. The message input reads **Start a task…**, not "ask me anything" — and that wording is the distinction this whole lab is about: you are handing over an outcome, not opening a conversation. In the left rail, **My tasks** is where delegated work appears while it runs, **Automations** is for work you want to recur, and below those Cowork lists your previous sessions.
 
    > [!TIP]
-   > Cowork is generally available in Microsoft 365 Copilot and is purpose-built for *agentic action-taking*: it can read documents, look up people in your tenant, and create real Outlook drafts / Word docs / Teams messages on your behalf. While Researcher excels at deep analysis and Analyst at data and computation, Cowork excels at completing multi-step tasks that span several Microsoft 365 surfaces.
+   > Cowork is generally available in Microsoft 365 Copilot and is purpose-built for *agentic action-taking*: it can read documents, look up people in your tenant, and create real Outlook drafts / Word docs / Teams messages on your behalf. Cowork excels at completing multi-step tasks that span several Microsoft 365 surfaces.
 
 #### Upload the report and ask Cowork to draft an email
 
-1. Click **Add attachments** (the paperclip icon next to the message input), then choose **Upload images and files (PDF, Word, Excel, images)**. Select the [`Contoso_Grand_Hotel_Performance_Report.pdf`](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf) file you downloaded for the Researcher exercise in Lab 1.
+1. Download [`Contoso_Grand_Hotel_Performance_Report.pdf`](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf) and save it to your Downloads folder or another location you can find.
+
+1. Click **Add attachments** (the paperclip icon next to the message input), then choose **Upload images and files (PDF, Word, Excel, images)**. Select the `Contoso_Grand_Hotel_Performance_Report.pdf` file you just downloaded.
 
 1. Wait for the upload to complete — the PDF will appear as a chip above the message input.
 
@@ -129,7 +131,7 @@ Use the Cowork agent to read the [same PDF report](https://github.com/microsoft/
     ```
 
     > [!TIP]
-    > Cowork executes this as a **multi-step task**: (1) reads the attached PDF, (2) looks up "Dewain Robinson" through Work IQ, (3) drafts a new email in your Outlook mailbox, (4) reports back in chat when done. Unlike Researcher, Cowork rarely asks clarifying questions — when the prompt is clear, it just acts, and typically completes in ~2–3 minutes.
+    > Cowork executes this as a **multi-step task**: (1) reads the attached PDF, (2) looks up "Dewain Robinson" through Work IQ, (3) drafts a new email in your Outlook mailbox, (4) reports back in chat when done. Cowork rarely asks clarifying questions — when the prompt is clear, it just acts, and typically completes in ~2–3 minutes.
 
 1. **Observe** how the Cowork agent:
 
@@ -165,9 +167,6 @@ Use the Cowork agent to read the [same PDF report](https://github.com/microsoft/
    > [!TIP]
    > Cowork appends a `Sent by Copilot Cowork` footer to drafts it creates. You can remove that line before sending if you prefer a clean signature.
 
-> [!TIP]
-> By now, head back to the Researcher exercise in Lab 1 and check whether Researcher has finished. If it has, compare the two outputs side-by-side: Researcher gives you a deep analytical breakdown, Cowork gives you an actionable email ready to send. Each is the right tool for a different job.
-
 ---
 
 ### Congratulations! You've used Cowork to draft an executive email from a PDF report!
@@ -181,7 +180,7 @@ Use the Cowork agent to read the [same PDF report](https://github.com/microsoft/
 - **Cowork takes agentic action** — It doesn't just summarize. It reads a document, resolves a person in your org, and creates real artifacts (an Outlook draft, a Word doc, a Teams message) that are ready for you to review.
 - **No clarifying-question round-trip** — When the prompt is clear and directive ("Draft an email to X about Y, address as Z, sign as W"), Cowork proceeds without asking follow-ups. The cost of being specific is a faster, more deterministic result.
 - **Cross-app integration** — The result lives in **Outlook**, not in the chat. Cowork pivots the M365 experience from "answer in chat" to "complete the task in the right app".
-- **Parallel work pays off** — Cowork is a great companion to Researcher: while Researcher reasons in the background, Cowork drafts a real artifact you can ship in a fraction of the time.
+- **Parallel work pays off** — Cowork continues working on your delegated task while you do something else, then returns an artifact for you to review.
 
 **Challenge: Apply this to your own use case**
 
