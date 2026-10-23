@@ -221,22 +221,22 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
     ```
 
     > [!TIP]
-    > The search returns every connector with "work" anywhere in a name or action - dozens of results - and **Work IQ (Preview)** is listed *last*, below the connector groups. Scroll to the bottom of the results rather than picking one of the "work order" actions near the top.
+    > The search returns every connector with "work" anywhere in a name or action - dozens of results - and **Work IQ** is listed *last*, below the connector groups. Scroll to the bottom of the results rather than picking one of the "work order" actions near the top.
 
-1. Select **Work IQ (Preview)**.
+1. Select **Work IQ**.
 
 1. On the **Select a connection** step, the connection shows **Not connected**. Select it, then
     choose **Create new connection** and **Create**. Sign in with your workshop account when the
     account picker appears.
 
-    ![The Select a connection step showing Work IQ (Preview) connected to the workshop account](images/uc1-workiq-connection.png)
+    ![The Select a connection step showing Work IQ connected to the workshop account](images/uc1-workiq-connection.png)
 
     > [!NOTE]
-    > Work IQ (Preview) covers Microsoft 365 operations - mail, calendar, files, chats and more. The connection is created under *your* identity, so the agent acts on the signed-in user's Microsoft 365 data.
+    > Work IQ covers Microsoft 365 operations - mail, calendar, files, chats and more. The connection is created under *your* identity, so the agent acts on the signed-in user's Microsoft 365 data.
 
-1. Select **Add**. **Work IQ (Preview)** now appears under **Tools** in the rail.
+1. Select **Add**. **Work IQ** now appears under **Tools** in the rail.
 
-    ![Work IQ (Preview) attached under the Tools section](images/uc1-workiq-attached.png)
+    ![Work IQ attached under the Tools section](images/uc1-workiq-attached.png)
 
 #### Give the agent its instructions
 
@@ -285,7 +285,7 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
     **Saving skill...** to finish.
 
 1. **rfp-response** now appears under **Skills** in the rail, alongside the
-    **Work IQ (Preview)** tool.
+    **Work IQ** tool.
 
     ![The rfp-response skill attached under the Skills section](images/uc1-skill-attached.png)
 
@@ -376,30 +376,12 @@ In this lab you author one Skill and reuse it everywhere the work arrives. By th
 
 #### Publish the agent
 
-1. Select the chevron beside **Publish** and choose
-    **Customize publish channels** to open the **Publish agent** dialog.
-    (Selecting the plain **Publish** button re-publishes the agent directly,
-    without offering channel options.)
+1. Select **Publish** to publish the RFP Response Agent.
 
-1. In the **Publish agent** dialog, select **Teams + Microsoft 365** in the channel list, then
-    tick its checkbox to enable the channel.
-
-    > [!IMPORTANT]
-    > Selecting the channel row only opens its settings - you must tick the checkbox beside it to actually enable the channel. **Publish** stays disabled until at least one channel is enabled.
-
-1. Under **Turn on Microsoft 365**, tick **Make agent available in Microsoft 365 Copilot**.
-
-    ![The Publish agent dialog with Teams + Microsoft 365 enabled and M365 Copilot availability ticked](images/uc1-publish-dialog.png)
-
-1. Select **Save and publish**.
-
-1. The dialog returns as **Agent published** with a *Channel enabled* badge and a last-published
-    timestamp. The **Monitor** tab also becomes available now the agent is live. Select **Close**.
-
-    ![The Agent published confirmation showing the Teams + Microsoft 365 channel enabled](images/uc1-published.png)
+1. Wait for confirmation that the agent is published before creating the workflow.
 
     > [!NOTE]
-    > Publishing to the Agent Store is the first step toward discoverability, not instant availability - an admin still controls broader access in Microsoft 365 and Teams. The **See agent in Microsoft 365** and **See agent in Teams** links stay greyed out until that propagates.
+    > Channel configuration is separate from publishing. You do not need to add Teams or Microsoft 365 Copilot channels for a workflow to call the agent.
 
 ### Congratulations! You've completed Use Case #1!
 
@@ -988,4 +970,3 @@ You built one Skill-equipped agent and then reused that Skill three more times w
 - **Choose the surface by what has to come out of it.** If the deliverable is a file, use a surface that can hand files back; if it is a notification, a workflow node is more reliable than asking the agent to send it
 - **Let the deterministic half be deterministic.** Triggers, routing and loops belong in a workflow. Judgement, reading and drafting belong to the agent and its Skill
 - **A Skill constrains structure, sourcing and honesty - not arithmetic.** Two runs of the same Skill on the same RFP produced different prices. Commercial numbers still need a human owner before anything reaches a customer
-
