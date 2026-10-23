@@ -601,7 +601,7 @@ Use a new agent for this example, not your RFP agent. You will first use its Pre
 
 1. In the configuration rail, open **Model** and select a **reasoning-capable model**, such as **Opus 5.5 if it is offered in your environment**. Model names and availability vary; ask your facilitator which reasoning model to use if it is not listed.
 
-1. Select the agent's **Preview** tab and start a **new conversation**. Attach only `project-intake-process-v2.docx` from the extracted materials and wait for the file to be ready. Do not attach the materials ZIP.
+1. Select the agent's **Preview** tab and start a **new conversation**. Attach only `project-intake-process-v2.docx` from the extracted materials. Do not attach the ZIP file.
 
 1. Copy the entire block below into **Copilot Studio > Preview chat**, alongside the attachment, then select **Send**. **This is a chat prompt, not agent instructions.** Keep **Build > Instructions** empty while generating the package.
 
@@ -629,13 +629,11 @@ Before packaging, check the procedure against an incomplete opening request and 
 
     If it cannot generate a file, capture the error and ask your facilitator; a text-only response is not a completed package.
 
-1. Download the generated **Skill ZIP** from Preview and check it using the [package checklist](#review-download-and-upload-the-skill).
+1. Download the generated **Skill ZIP** from Preview, unzip it, and review its contents using the [package checklist](#review-download-and-upload-the-skill).
 
-1. In the **same agent**, go to **Build > Skills > + > Upload a skill**. Upload the generated ZIP and wait for it to save. Add only the intake Skill; no RFP Skill or connectors are needed.
+1. In the **same agent**, go to **Build > Skills > + > Upload a skill**. Upload the generated ZIP and wait for it to save. Add only the intake Skill.
 
 1. After the upload succeeds, paste the entire block below into **Build > Instructions** and wait for it to save.
-
-**Agent instructions — paste into Build > Instructions, not Preview chat:**
 
 ```text
 You help users capture and confirm project intake details. Use relevant Skills when requests match, and follow the loaded Skill's procedure for the conversation.
