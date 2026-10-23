@@ -36,8 +36,12 @@ test('GHCP workshop module lab cards, decks, and lab list match its agenda', () 
     if (item.slug !== 'workflows') {
       assert.equal(item.slides, module.slides, `${item.label}: dedicated workshop slide deck`);
     }
-    assert.ok(fs.existsSync(path.join(root, decodeURIComponent(item.slides).replace(/^\//, ''))),
-      `${item.label}: slide deck exists`);
+    if (item.slides.startsWith('https://')) {
+      assert.ok(new URL(item.slides).hostname, `${item.label}: external slide deck URL is valid`);
+    } else {
+      assert.ok(fs.existsSync(path.join(root, decodeURIComponent(item.slides).replace(/^\//, ''))),
+        `${item.label}: slide deck exists`);
+    }
   }
 
   assert.deepEqual(workshop.data.labs, agenda.schedule
