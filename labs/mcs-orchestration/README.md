@@ -1,6 +1,6 @@
 # Orchestration with Copilot Studio
 
-Apply Module 9 concepts hands-on: explore how Copilot Studio's generative orchestration engine routes requests, see the impact of Instructions and Descriptions on the planner, and use the New Orchestrator's Agentic Reasoning Loop in a new-type agent.
+Apply concepts from **Orchestration and Dynamic Chaining Concepts** hands-on: explore how Copilot Studio's generative orchestration engine routes requests, see the impact of Instructions and Descriptions on the planner, and use the New Orchestrator's Agentic Reasoning Loop in a new-type agent.
 
 ---
 
@@ -39,13 +39,13 @@ Apply Module 9 concepts hands-on: explore how Copilot Studio's generative orches
 - "I don't know how Instructions vs Descriptions affect routing"
 - "What does the New Orchestrator (Agentic Reasoning Loop) actually change?"
 
-**Pairs with:** Module 9 — Orchestration and Dynamic Chaining Concepts (the 45-minute session immediately preceding this lab).
+**Pairs with:** Orchestration and Dynamic Chaining Concepts.
 
 ---
 
 ## Introduction
 
-Welcome to the Copilot Studio Orchestration lab. This is the hands-on companion to **Module 9 — Orchestration and Dynamic Chaining Concepts**.
+Welcome to the Copilot Studio Orchestration lab. This is the hands-on companion to **Orchestration and Dynamic Chaining Concepts**.
 
 You'll start by ensuring a sample connected agent is configured and working in your environment, then walk through changing Instructions and Descriptions to see how the planner's choices shift, and finally build a new-type agent whose **New Orchestrator** (Agentic Reasoning Loop) completes multi-step tasks end to end.
 
