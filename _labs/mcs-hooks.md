@@ -8,13 +8,13 @@ difficulty: 200
 lab_type: local
 section: core_labs
 journeys: ["developer"]
-description: "Build a Travel Policy Agent and use hooks to load the traveller's profile at session start, redact personal data with a classifier and an inline agent, ground answers in SharePoint policies filtered by Location metadata, and block bookings with unapproved airlines before the tool runs."
+description: "Build a Travel Policy Agent and use hooks to load the traveler's profile at session start, redact personal data with a classifier and an inline agent, ground answers in SharePoint policies filtered by Location metadata, and block bookings with unapproved airlines before the tool runs."
 
 ---
 
 # Hooks and Knowledge: Travel Policy Agent
 
-Build a **Travel Policy Agent** on the GitHub Copilot harness and use hooks to make it behave the same way in every conversation: load the traveller's profile when a session starts, redact personal data from every prompt, and ground answers in SharePoint travel policies filtered by their `Location` metadata. As an extra, block flight bookings with unapproved airlines before the tool runs.
+Build a **Travel Policy Agent** on the GitHub Copilot harness and use hooks to make it behave the same way in every conversation: load the traveler's profile when a session starts, redact personal data from every prompt, and ground answers in SharePoint travel policies filtered by their `Location` metadata. As an extra, block flight bookings with unapproved airlines before the tool runs.
 
 ---
 
@@ -36,9 +36,9 @@ Build a **Travel Policy Agent** on the GitHub Copilot harness and use hooks to m
 - [Summary of Targets](#summary-of-targets)
 - [Use Cases Covered](#use-cases-covered)
 - [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Create the Travel Policy Agent and load the traveller's profile at session start](#use-case-1-create-the-travel-policy-agent-and-load-the-travellers-profile-at-session-start)
-  - [Use Case #2: Redact personal data before the agent uses it further](#use-case-2-redact-personal-data-before-the-agent-uses-it-further)
-  - [Use Case #3: Ground the agent in travel policies filtered by Location](#use-case-3-ground-the-agent-in-travel-policies-filtered-by-location)
+  - [Use Case #1: Create the Travel Policy Agent and load the traveler's profile at session start](#use-case-1-create-the-travel-policy-agent-and-load-the-travelers-profile-at-session-start)
+  - [Use Case #2: Ground the agent in travel policies filtered by Location](#use-case-2-ground-the-agent-in-travel-policies-filtered-by-location)
+  - [Use Case #3: Redact personal data before the agent uses it further](#use-case-3-redact-personal-data-before-the-agent-uses-it-further)
   - [Extra: Block unapproved airlines before the booking tool runs](#extra-block-unapproved-airlines-before-the-booking-tool-runs)
 - [Bonus: Try it yourself](#bonus-try-it-yourself)
 - [Summary of learnings](#summary-of-learnings)
@@ -60,8 +60,8 @@ That is what hooks are for. A hook binds a workflow to a moment in the agent's l
 
 **Common challenges solved by this lab:**
 
-- "The agent asks every traveller where they are based before it can answer a single policy question"
-- "Travellers paste passport and card numbers into the chat, and I don't want the agent to carry them into its replies and tool calls"
+- "The agent asks every traveler where they are based before it can answer a single policy question"
+- "Travelers paste passport and card numbers into the chat, and I don't want the agent to carry them into its replies and tool calls"
 - "We have one travel policy per country or region, and the agent mixes up the limits between them"
 - "I wrote 'only book approved airlines' in the instructions, and the agent still booked another one"
 
@@ -69,13 +69,13 @@ That is what hooks are for. A hook binds a workflow to a moment in the agent's l
 
 ## Introduction
 
-A training company publishes a separate **travel policy** for each country or region it operates in, plus a **Global** policy for everywhere else. The policies live in a SharePoint folder and each document is tagged with a **Location**: `France`, `Europe`, `USA`, `Global`… Employees keep asking the same questions — *What is my per diem? How much can I spend on a hotel in New York?* — and the answer depends on where they are based or travelling.
+A training company publishes a separate **travel policy** for each country or region it operates in, plus a **Global** policy for everywhere else. The policies live in a SharePoint folder and each document is tagged with a **Location**: `France`, `Europe`, `USA`, `Global`… Employees keep asking the same questions — *What is my per diem? How much can I spend on a hotel in New York?* — and the answer depends on where they are based or traveling.
 
 Finance wants an agent that answers these questions, and it has four concerns:
 
-1. **Know who is asking.** The agent should know the traveller's office location from the first message, instead of asking for it.
-2. **Keep personal data out of the agent's work.** Travellers paste passport numbers, card numbers and personal email addresses into the chat. The agent does not need them, so they must be redacted before the agent uses the message any further — in its reasoning, its replies or its tool calls.
-3. **Answer from the right policy.** A question about Paris must be answered from the France policy, a question about Italy from the Europe policy, and the agent must never combine limits from different policies.
+1. **Know who is asking.** The agent should know the traveler's office location from the first message, instead of asking for it.
+2. **Answer from the right policy.** A question about Paris must be answered from the France policy, a question about Italy from the Europe policy, and the agent must never combine limits from different policies.
+3. **Keep personal data out of the agent's work.** Travelers paste passport numbers, card numbers and personal email addresses into the chat. The agent does not need them, so they must be redacted before the agent uses the message any further — in its reasoning, its replies or its tool calls.
 4. **Only book approved airlines.** When booking tools arrive, a flight with an airline that is not on the approved list must be stopped *before* it is booked — not politely discouraged in the instructions.
 
 In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness and address each concern in turn — two with hooks, one with knowledge — and, as an extra, a third hook that guards a simulated booking tool.
@@ -83,8 +83,8 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 **What You Will Learn**
 
 - How **Start (pre-loop)** uses `additionalContext` to hand the model information before the first turn
-- How **User prompt submitted** uses `modifiedPrompt` to replace what the user typed — here with a **Classify** node and an **inline agent**
 - How SharePoint knowledge selects documents by their **Location** metadata before it searches their contents
+- How **User prompt submitted** uses `modifiedPrompt` to replace what the user typed — here with a **Classify** node and an **inline agent**
 - How **Pre tool use** uses `permissionDecision` to block a tool call and `additionalContext` to tell the agent what to do instead
 
 ---
@@ -122,7 +122,7 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 - The **New experience** toggle on, so that **New agent** creates an agent on the **GitHub Copilot harness**.
 - A Power Platform environment where you can create agents and **Workflows** — your facilitator supplies a training environment.
 - Read access to the SharePoint site your facilitator identifies, with a **Travel Policies** folder whose documents carry a **Location** column (`France`, `Europe`, `USA`, `Global`…).
-- Signed in with your work account — the session-start hook reads your Microsoft Entra object ID from `metadata`.
+- Signed in with your work account, with an **Office 365 Users** connection for that account — the session-start workflow uses **Get my profile** to retrieve its **Office Location**.
 
 > [!IMPORTANT]
 > **Use the `.preview` URL, or you won't see Hooks.** On `https://copilotstudio.microsoft.com/environments/<environment-id>` the **Hooks** option is missing from the agent's **…** menu. Add `.preview` after `copilotstudio` in the address bar:
@@ -146,9 +146,9 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 By the end of this lab you will have:
 
 - Built the **Travel Policy Agent** on the GitHub Copilot harness
-- Added a **Start (pre-loop)** hook that hands the model your identity and office location before the first message
-- Added a **User prompt submitted** hook that classifies every prompt and redacts personal data with an inline agent
+- Added a **Start (pre-loop)** hook that retrieves your Office Location and supplies it to the model before its first reply
 - Grounded the agent in the **Travel Policies** SharePoint folder, filtered by its **Location** metadata
+- Added a **User prompt submitted** hook that classifies every prompt and redacts personal data with an inline agent
 - *(Extra)* Added a simulated **Book flight** tool and a **Pre tool use** hook that denies bookings with unapproved airlines and tells the agent which airlines are allowed
 
 ---
@@ -157,9 +157,9 @@ By the end of this lab you will have:
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create the Travel Policy Agent and load the traveller's profile at session start](#use-case-1-create-the-travel-policy-agent-and-load-the-travellers-profile-at-session-start) | An agent that knows who it is talking to, and where they are based, before the first turn | 10 min |
-| 2 | [Redact personal data before the agent uses it further](#use-case-2-redact-personal-data-before-the-agent-uses-it-further) | The agent only works with a redacted copy of personal and financial data | 10 min |
-| 3 | [Ground the agent in travel policies filtered by Location](#use-case-3-ground-the-agent-in-travel-policies-filtered-by-location) | Answers from the one policy that applies, with a citation | 10 min |
+| 1 | [Create the Travel Policy Agent and load the traveler's profile at session start](#use-case-1-create-the-travel-policy-agent-and-load-the-travelers-profile-at-session-start) | An agent that knows who it is talking to, and where they are based, before the first turn | 10 min |
+| 2 | [Ground the agent in travel policies filtered by Location](#use-case-2-ground-the-agent-in-travel-policies-filtered-by-location) | Answers from the one policy that applies, with a citation | 10 min |
+| 3 | [Redact personal data before the agent uses it further](#use-case-3-redact-personal-data-before-the-agent-uses-it-further) | The agent only works with a redacted copy of personal and financial data | 10 min |
 | Extra | [Block unapproved airlines before the booking tool runs](#extra-block-unapproved-airlines-before-the-booking-tool-runs) | A business rule the agent cannot talk its way around | 15 min |
 
 ---
@@ -168,17 +168,17 @@ By the end of this lab you will have:
 
 ---
 
-## Use Case #1: Create the Travel Policy Agent and load the traveller's profile at session start
+## Use Case #1: Create the Travel Policy Agent and load the traveler's profile at session start
 
 You are a maker on the finance team. First you create the agent the hooks will act on; then you make sure it knows who it is talking to.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create the Travel Policy Agent and load the traveller's profile at session start | An agent that knows who it is talking to, and where they are based, before the first turn | 10 minutes |
+| Create the Travel Policy Agent and load the traveler's profile at session start | An agent that knows who it is talking to, and where they are based, before the first turn | 10 minutes |
 
 ### Objective
 
-Create the **Travel Policy Agent** with its full instructions, then add a **Start (pre-loop)** hook that hands the agent the signed-in employee's Microsoft Entra object ID, `userAadObjectId`, and their office location at the beginning of every conversation, through `additionalContext`.
+Create the **Travel Policy Agent** with its full instructions, then add a **Start (pre-loop)** hook that calls **Office 365 Users → Get my profile** and supplies **Office Location** through `additionalContext` at the beginning of every conversation. Use Paris only as a fallback when Office Location is missing.
 
 ---
 
@@ -237,7 +237,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
     ```
 
     > [!NOTE]
-    > The instructions already refer to things you add later: the *Microsoft Entra ID profile supplied in session context* comes from the hook in this use case, the *travel policies SharePoint folder* from [Use Case #3](#use-case-3-ground-the-agent-in-travel-policies-filtered-by-location), and the *booking tools* from the [Extra](#extra-block-unapproved-airlines-before-the-booking-tool-runs). Notice what is **not** in there: nothing about personal data and nothing about approved airlines. Those rules are enforced by hooks, which run whether or not the model remembers them.
+    > The instructions already refer to things you add later: the *Microsoft Entra ID profile supplied in session context* comes from the hook in this use case, the *travel policies SharePoint folder* from [Use Case #2](#use-case-2-ground-the-agent-in-travel-policies-filtered-by-location), and the *booking tools* from the [Extra](#extra-block-unapproved-airlines-before-the-booking-tool-runs). Notice what is **not** in there: nothing about personal data and nothing about approved airlines. Those rules are enforced by hooks, which run whether or not the model remembers them.
 
 1. Select **Save**. Confirm you are in the new agent's designer and can see its component rail, including **Knowledge** and **Tools**. Keep this agent open for every remaining exercise; do not switch to another agent.
 
@@ -253,7 +253,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 1. Set **Event type** to **Start (pre-loop)** and **Name** to:
 
     ```text
-    Load traveller profile
+    Load traveler profile
     ```
 
 1. Open the **Workflow** dropdown and select **New workflow**. The designer opens with a starter workflow: **When an agent calls the flow** already carries the `event`, `timestamp` and `metadata` inputs, and **Respond to the agent** already carries the `additionalContext` output.
@@ -261,25 +261,52 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
     > [!TIP]
     > Keep the starter input and output names exactly as they are, and do not add outputs. If you rename, remove or add fields, the workflow no longer matches the event and disappears from the hook's **Workflow** list.
 
-1. Select the workflow title **Untitled workflow** and rename it to `Load traveller profile`.
+1. Select the workflow title **Untitled workflow** and rename it to `Load traveler profile`.
 
-1. Select **Respond to the agent**, select its name at the top of the panel and rename it to `Return traveller profile`. Node names are only labels: renaming them does not affect whether the workflow fits the hook.
+1. Between **When an agent calls the flow** and **Respond to the agent**, click **+** to add a step.
 
-1. On **Return traveller profile**, paste this into `additionalContext`:
+    ![The plus button between the workflow's trigger and response nodes](images/uc1-add-profile-step.png)
+
+1. In the step search box, paste:
 
     ```text
-    The SessionStart hook was executed. In your first reply, say so with lots of smileys. Microsoft Entra ID profile of the signed-in user: office location Paris. User object ID: 
+    office 365 get my profile
     ```
 
-1. With the cursor at the end of the text, type **`/`** to open the dynamic content picker and select `metadata` → `userAadObjectId`. It appears as a token after the text.
+    Select **Get my profile** under **Office 365 Users**.
+
+    ![Searching for office 365 get my profile and selecting Get my profile](images/uc1-search-get-my-profile.png)
+
+    > [!IMPORTANT]
+    > If prompted, create or select an Office 365 Users connection signed in with your training account. **Get my profile** returns the profile of the connection's account. Use your own connection for this lab; a shared connection would return that account's location, not each participant's.
+
+1. Select **Respond to the agent**, select its name at the top of the panel and rename it to `Return traveler profile`. Node names are only labels: renaming them does not affect whether the workflow fits the hook.
+
+1. On **Return traveler profile**, paste this into `additionalContext`:
+
+    ```text
+    The SessionStart hook was executed. In your first reply, say so with lots of smileys. Use this
+    ```
+
+1. With the cursor at the end of the text, add a space, type **`/`** to open the dynamic content picker, and select **Office Location** from **Get my profile**.
+
+1. After **Office Location**, paste the following text, including the leading space:
+
+    ```text
+     to determine policy. But if Office location is missing, use Paris. Only mention the relevant location.
+    ```
+
+    ![The Get my profile step and Return traveler profile output using Office Location with a Paris fallback](images/uc1-office-location-context.png)
 
 1. **Publish** the workflow.
 
-    ![Load traveller profile workflow with the office location and userAadObjectId in additionalContext](images/uc1-sessionstart-workflow.png)
+1. Close the designer by clicking **Travel Policy Agent** at the top-left.
 
-1. Close the designer. You are back on **Add hook**, with **Load traveller profile** selected in **Workflow**. Select **Done**, then **Save** the agent.
+    ![The Travel Policy Agent breadcrumb at the top-left of the published Load traveler profile workflow](images/uc1-return-to-travel-policy-agent.png)
 
-    ![Add hook dialog with the Load traveller profile workflow selected](images/uc1-add-hook.png)
+    You are back on **Add hook**, with **Load traveler profile** selected in **Workflow**. Select **Done**, then click **X** to close the **Hooks** section. Select **Save** at the top-right to save the agent.
+
+    ![Add hook dialog with the Load traveler profile workflow selected](images/uc1-add-hook.png)
 
 #### Test it
 
@@ -289,27 +316,31 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
     Hi
     ```
 
-1. The reply announces that the SessionStart hook ran, with plenty of smileys, and mentions your office location, Paris. Ask *What is my object ID?* if you want to see the GUID — your Microsoft Entra object ID.
+1. The reply announces that the SessionStart hook ran, with plenty of smileys, and mentions the Office Location returned by **Get my profile**. In the training tenant this is most likely **USA**, but check your own profile. Paris should be used only if Office Location is missing.
 
 1. Expand **Executed hook: SessionStart** above the reply. You see the hook's input — including `metadata` — and the `additionalContext` it returned.
 
-    ![Test pane reply with smileys and the Paris office location](images/uc1-sessionstart-test.png)
+    ![The SessionStart hook output and first reply using USA from the profile's Office Location](images/uc1-sessionstart-office-location-test.png)
 
 > [!NOTE]
-> You did not tell the agent where you are based, and the instructions say nothing about smileys. The hook supplied both. The smileys are only there to make the hook visible; the office location is what the agent will use in [Use Case #3](#use-case-3-ground-the-agent-in-travel-policies-filtered-by-location) to pick the right policy when you ask *What is my per diem?*
+> You did not tell the agent where you are based, and the instructions say nothing about smileys. The hook supplied both. The smileys are only there to make the hook visible; the office location is what the agent will use in [Use Case #2](#use-case-2-ground-the-agent-in-travel-policies-filtered-by-location) to pick the right policy when you ask *What is my per diem?*
 
-#### From object ID to the real profile
+#### From Office Location to personalized policy context
 
-In this lab the office location is **hardcoded** as Paris, so everyone gets the same result. In production you'd look it up. `userAadObjectId` identifies the signed-in employee in Microsoft Entra ID, so the hook workflow can use it as the key to fetch the real profile before the agent says a word:
+You can view your **Contact Information**, including Office or Work Location, on [My Account → Personal info](https://myaccount.microsoft.com/personal-info). In the training tenant, your Office Location is most likely **USA**; use your account's actual value rather than assuming everyone has the same location.
 
-| Add to the hook workflow | Use `userAadObjectId` as | Gives the agent |
-|--------------------------|--------------------------|-----------------|
-| **Office 365 Users** → **Get user profile (V2)** | **User (UPN)** | `officeLocation`, `country`, department, job title |
-| **Office 365 Users** → **Get manager (V2)** | **User (UPN)** | The approver for this traveller |
-| **HTTP with Microsoft Entra ID** → Microsoft Graph `GET /users/{id}` | `{id}` | Any directory attribute, such as `usageLocation` or an extension attribute |
-| A Dataverse or SharePoint lookup | The filter value | Company-specific data: travel tier, home cost center, preferred airline |
+The hook calls **Get my profile** and injects **Office Location** into `additionalContext` before the agent's first reply. The runtime triggers this lookup every time a session starts, rather than leaving the model to decide whether to look up the location or ask the user. Paris is only the lab's fallback for a missing value, not the location assigned to every participant.
 
-Put the results in `additionalContext` — for example *"Office location: Paris. Department: Training delivery. Manager: Priya Patel."* — and the agent no longer has to ask. You don't need to build this for the lab.
+The same pattern can supply other useful context before a conversation begins:
+
+| Add to the hook workflow | Read or look up | Gives the agent |
+|--------------------------|-----------------|-----------------|
+| **Office 365 Users** → **Get my profile** | **Office Location**, department or job title from your connection's profile | Location-based policy context and relevant organizational details |
+| **Office 365 Users** → **Get manager (V2)** | The user's UPN from the retrieved profile | An approver for travel requests |
+| **HTTP with Microsoft Entra ID** → Microsoft Graph | Authorized directory attributes for the intended user | Country, usage location or organization-specific profile attributes |
+| A Dataverse or SharePoint lookup | An employee key from the retrieved profile | Company-specific data: travel tier, home cost center or preferred airline |
+
+Return only the context the agent needs through `additionalContext`. In production, ensure the connection or lookup identifies the intended user; **Get my profile** on a shared maker connection does not automatically return the chatting user's profile. The extra lookups in the table are extension ideas, not required lab steps.
 
 ---
 
@@ -320,153 +351,14 @@ Put the results in `additionalContext` — for example *"Office location: Paris.
 ### Test your understanding
 
 * Why does the hook only fire when you start a new conversation, and not on every message?
-* The workflow uses `userAadObjectId` rather than `userId`. What would go wrong with `userId` in Microsoft Teams?
+* Whose Office Location does **Get my profile** return, and what would change if you used another person's connection?
 * The instructions tell the agent to prefer an explicitly requested location over the profile. Why is that order important?
 
 ---
 
-## Use Case #2: Redact personal data before the agent uses it further
+## Use Case #2: Ground the agent in travel policies filtered by Location
 
-Travellers paste whatever they have to hand into the chat — a passport number, a card number, a personal email address. The Travel Policy Agent does not need any of it, so finance wants it removed before the agent reasons about it, repeats it in a reply or passes it to a tool.
-
-| Use case | Value added | Estimated effort |
-|----------|-------------|------------------|
-| Redact personal data before the agent uses it further | The agent only works with a redacted copy of personal and financial data | 10 minutes |
-
-### Objective
-
-Add a **User prompt submitted** hook whose workflow classifies every prompt. Prompts without personal data pass through unchanged; prompts with personal data are rewritten by an inline agent and returned as `modifiedPrompt`.
-
----
-
-### Step-by-step instructions
-
-#### Create the hook and its workflow
-
-1. **…** → **Hooks** → **Create**. Set **Event type** to **User prompt submitted** and **Name** to:
-
-    ```text
-    Redact personal data
-    ```
-
-1. In **Workflow**, select **New workflow**. The starter workflow receives `prompt` and returns `modifiedPrompt` and `suppressOutput`.
-
-#### Classify the prompt
-
-1. Select **When an agent calls the flow**, then select **Classify** in the **Add** panel. The Classify node is inserted between the trigger and the starter **Respond to the agent** node. Set the text to classify to `prompt` from the dynamic content picker (type **`/`**).
-
-1. Name the first category `No PII` with this description:
-
-    ```text
-    The text contains no personal or financial data. Cities, countries, regions, airlines, hotels, travel dates, amounts and currencies are not personal data.
-    ```
-
-1. Name the second category `Contains PII` with this description:
-
-    ```text
-    The text contains personal or financial data: names of private individuals, a personal email address or phone number, a home address, a passport number, a national ID or social security number, an IBAN or bank account number, or a credit card number.
-    ```
-
-    > [!NOTE]
-    > Classify also creates a **Default** category for anything that matches neither. On the canvas it shows as a third branch, **Other**. Treat it like **No PII**.
-
-1. Optionally, use the **Run node** tab on the Classify node with each of these and confirm the category:
-
-    ```text
-    I'm flying to Lyon next week for a customer workshop. What can I spend on dinner?
-    ```
-
-    ```text
-    My passport number is 18AB12345 and you can reach me at jan.devries@outlook.com.
-    ```
-
-    ![Classify node with the No PII and Contains PII categories](images/uc2-classify-categories.png)
-
-#### Pass clean prompts through
-
-1. Select the starter **Respond to the agent** node, select its name at the top of the panel and rename it to `Return original prompt`.
-
-1. Look at the line between the Classify node and **Return original prompt**. It was drawn when you inserted Classify and is **not** tied to a category, so the node would be skipped at run time. Select the line and delete it with the **Delete edge** button that appears on it.
-
-1. Drag the connection point of **No PII** onto **Return original prompt**, then drag the connection point of **Other** onto it as well.
-
-1. Select **Return original prompt** and set `modifiedPrompt` to `prompt` from the dynamic content picker. Leave `suppressOutput` empty.
-
-    > [!IMPORTANT]
-    > Do not leave `modifiedPrompt` empty here, and wire **every** branch. If no Respond node runs, the workflow run can still show *Succeeded*, but the test pane shows *Hook failed: UserPromptSubmitted – The hook flow could not be executed.* When in doubt, open **…** → **Hooks**, select **More options** on the hook → **Edit** → **Go to workflow**, open the **Activity** tab, select the run and check which nodes were **Skipped**.
-
-#### Redact with an inline agent
-
-1. Select the **+** on the **Contains PII** branch. In the **Add** dialog, **Select action: Agent**. Leave the agent dropdown on **New agent for this workflow** and rename the node **Redact PII**.
-
-1. Paste these **Instructions**, then put the cursor after `Text:`, select the **Insert dynamic content** button and pick `prompt`:
-
-    ```text
-    Rewrite the text below, replacing every piece of personal or financial data with a typed placeholder in capitals and square brackets, for example [NAME REDACTED], [EMAIL REDACTED], [PHONE REDACTED], [ADDRESS REDACTED], [PASSPORT NUMBER REDACTED], [NATIONAL ID REDACTED], [IBAN REDACTED], [CARD NUMBER REDACTED].
-
-    Do not change anything else. Keep cities, countries, airlines, hotels, travel dates, amounts and currencies exactly as written.
-
-    After the rewritten text, add one new line:
-    (Note to agent: personal or financial data was removed from this message before you received it. Tell the user it was removed and ask them not to share personal or financial data in this chat.)
-
-    Return only the rewritten text and the note. No explanation, no quotes, no formatting.
-
-    Text:
-    ```
-
-1. Select **Return original prompt**, copy it (**Ctrl+C** / **Cmd+C**) and paste it (**Ctrl+V** / **Cmd+V**). The copy, **Return original prompt 2**, has the same outputs as the starter but no connections. Rename it to `Return redacted prompt` and drag the output connection point of **Redact PII** onto it — connect it first, because the dynamic content picker only offers steps that come before the node.
-
-    > [!TIP]
-    > **Why two Respond nodes?** A Respond node returns fixed values, so every *different* answer needs its own node. Branches that return the same answer share one: **No PII** and **Other** both go to **Return original prompt**. Name each node after the answer it gives, so the canvas reads as the decision.
-    >
-    > Copy the starter node rather than adding a new **Respond to the agent** from the panel. Outputs you add yourself are marked required, every Respond node in a workflow must return the same schema, and a mismatch makes the workflow incompatible with the hook.
-
-1. On **Return redacted prompt**, set `modifiedPrompt` to **Agent Response** of **Redact PII** from the dynamic content picker.
-
-1. **Publish** the workflow and close the designer. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
-
-    ![Redact personal data workflow: Classify branches, Redact PII, Return original prompt and Return redacted prompt](images/uc2-redaction-workflow.png)
-
-#### Test it
-
-1. Select **New chat** in the test pane and send the clean prompt:
-
-    ```text
-    I'm flying to Lyon next week for a customer workshop. What can I spend on dinner?
-    ```
-
-    Expand **Executed hook: UserPromptSubmitted** — `modifiedPrompt` is identical to what you typed. The agent may not be able to answer the question yet: it has no knowledge until [Use Case #3](#use-case-3-ground-the-agent-in-travel-policies-filtered-by-location).
-
-1. Now send the prompt with personal data:
-
-    ```text
-    I'm flying to Lyon on 12 May. My passport number is 18AB12345, charge my card 4111 1111 1111 1111 and send the itinerary to jan.devries@outlook.com.
-    ```
-
-1. The agent tells you personal data was removed and asks you not to share it. In the hook's **Output**, `modifiedPrompt` shows `[PASSPORT NUMBER REDACTED]`, `[CARD NUMBER REDACTED]` and `[EMAIL REDACTED]` — that is the version the agent works with from here on. Lyon and the travel date survived.
-
-    ![Hook output with the redacted modifiedPrompt](images/uc2-redaction-test.png)
-
-> [!IMPORTANT]
-> The hook changes what the **agent works with**. It does not erase what Copilot Studio has already received — the original prompt still reaches the hook workflow and can appear in transcripts. Configure transcript access and retention separately.
-
----
-
-### Congratulations! You've completed Use Case #2!
-
----
-
-### Test your understanding
-
-* Why use a Classify node first instead of sending every prompt to the inline agent?
-* Why typed placeholders like `[PASSPORT NUMBER REDACTED]` rather than asterisks?
-* Could you get the same result by adding "never repeat personal data" to the agent's instructions? What is the difference?
-
----
-
-## Use Case #3: Ground the agent in travel policies filtered by Location
-
-The agent knows where the traveller is based and works with a clean prompt. Now it needs the policies themselves — and it must answer each question from the **one** policy that applies.
+The agent knows where the traveler is based from the Use Case #1 hook. Now it needs the policies themselves — and it must answer each question from the **one** policy that applies.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
@@ -578,16 +470,19 @@ Now bring Use Case #1 back in: ask a question without naming a location.
     What is my per diem?
     ```
 
-    **Expected:** The agent takes the office location **Paris** from the profile the hook supplied, resolves it to **France**, filters on `Location = France` and answers **€70** per day, citing the France policy. It does not ask where you are based.
+    **Expected:** The agent uses the Office Location retrieved by the hook. If it is **USA**, it filters on `Location = USA` and cites the USA policy's per diem. If your Office Location differs, expect the matching country, regional or Global policy instead. Only a missing Office Location should trigger the Paris fallback, which resolves to **France** and the France policy's **€70** per day. It does not ask where you are based.
 
-    ![Per diem answer for the traveller's own location, resolved from the hook's profile](images/uc3-test-profile.png)
+    ![Per diem answer for the traveler's own location, resolved from the hook's profile](images/uc3-test-profile.png)
+
+    > [!NOTE]
+    > This screenshot illustrates the France policy response. Your location and allowance may differ because the hook now reads your profile.
 
 > [!NOTE]
 > This is the hook and the knowledge working together. The hook decides *who* is asking, the instructions decide *how* to turn that into a Location, and the SharePoint retrieval decides *which documents* are searched.
 
 ---
 
-### Congratulations! You've completed Use Case #3!
+### Congratulations! You've completed Use Case #2!
 
 ---
 
@@ -599,9 +494,168 @@ Now bring Use Case #1 back in: ask a question without naming a location.
 
 ---
 
+## Use Case #3: Redact personal data before the agent uses it further
+
+Travelers paste whatever they have to hand into the chat — a passport number, a card number, a personal email address. The Travel Policy Agent does not need any of it, so finance wants it removed before the agent reasons about it, repeats it in a reply or passes it to a tool.
+
+| Use case | Value added | Estimated effort |
+|----------|-------------|------------------|
+| Redact personal data before the agent uses it further | The agent only works with a redacted copy of personal and financial data | 10 minutes |
+
+### Objective
+
+Add a **User prompt submitted** hook whose workflow classifies every prompt. Prompts without personal data pass through unchanged; prompts with personal data are rewritten by an inline agent and returned as `modifiedPrompt`.
+
+---
+
+### Step-by-step instructions
+
+#### Create the hook and its workflow
+
+1. **…** → **Hooks** → **Create**. Set **Event type** to **User prompt submitted** and **Name** to:
+
+    ```text
+    Redact personal data
+    ```
+
+1. In **Workflow**, select **New workflow**. The starter workflow receives `prompt` and returns `modifiedPrompt` and `suppressOutput`.
+
+#### Classify the prompt
+
+1. Select **When an agent calls the flow**, then select **Classify** in the **Add** panel. The Classify node is inserted between the trigger and the starter **Respond to the agent** node. Set the text to classify to `prompt` from the dynamic content picker (type **`/`**).
+
+1. Name the first category `No PII` with this description:
+
+    ```text
+    The text contains no personal or financial data. Cities, countries, regions, airlines, hotels, travel dates, amounts and currencies are not personal data.
+    ```
+
+1. Name the second category `Contains PII` with this description:
+
+    ```text
+    The text contains personal or financial data: names of private individuals, a personal email address or phone number, a home address, a passport number, a national ID or social security number, an IBAN or bank account number, or a credit card number.
+    ```
+
+    ![The Classify node configured with prompt as its input and No PII, Contains PII and Other branches](images/uc2-classify-configured.png)
+
+    > [!NOTE]
+    > Classify also creates a **Default** category for anything that matches neither. On the canvas it shows as a third branch, **Other**. Treat it like **No PII**.
+
+1. Optionally, use the **Run node** tab on the Classify node with each of these and confirm the category:
+
+    ![The Classify Run node tab showing a clean prompt classified as No PII](images/uc2-classify-run-no-pii.png)
+
+    ```text
+    I'm flying to Lyon next week for a customer workshop. What can I spend on dinner?
+    ```
+
+    ```text
+    My passport number is 18AB12345 and you can reach me at jan.devries@outlook.com.
+    ```
+
+#### Pass clean prompts through
+
+1. Select the starter **Respond to the agent** node, select its name at the top of the panel and rename it to `Return original prompt`.
+
+1. Drag or delete connections as needed so that **No PII** and **Other** both connect to **Return original prompt**, matching the screenshot. Leave **Contains PII** for the redaction step below.
+
+    ![The No PII and Other branches connected to Return original prompt, with Contains PII not yet connected](images/uc2-clean-prompt-branches.png)
+
+1. Select **Return original prompt**. In the `modifiedPrompt` section, click **Enter a value**, type **`/`**, search for `prompt`, and select **prompt** from **When an agent calls the flow**. Leave `suppressOutput` empty.
+
+    ![Return original prompt with the prompt dynamic value selected for modifiedPrompt](images/uc2-return-original-prompt.png)
+
+    > [!IMPORTANT]
+    > Do not leave `modifiedPrompt` empty here, and wire **every** branch. If no Respond node runs, the workflow run can still show *Succeeded*, but the test pane shows *Hook failed: UserPromptSubmitted – The hook flow could not be executed.* When in doubt, open **…** → **Hooks**, select **More options** on the hook → **Edit** → **Go to workflow**, open the **Activity** tab, select the run and check which nodes were **Skipped**.
+
+#### Redact with an inline agent
+
+1. Select the **+** on the **Contains PII** branch. In the **Add** dialog, **Select action: Agent**. Leave the agent dropdown on **New agent for this workflow** and rename the node **Redact PII**.
+
+1. Paste these **Instructions**, then put the cursor after `Text:`, select the **Insert dynamic content** button and pick `prompt`:
+
+    ```text
+    Rewrite the text below, replacing every piece of personal or financial data with a typed placeholder in capitals and square brackets, for example [NAME REDACTED], [EMAIL REDACTED], [PHONE REDACTED], [ADDRESS REDACTED], [PASSPORT NUMBER REDACTED], [NATIONAL ID REDACTED], [IBAN REDACTED], [CARD NUMBER REDACTED].
+
+    Do not change anything else. Keep cities, countries, airlines, hotels, travel dates, amounts and currencies exactly as written.
+
+    After the rewritten text, add one new line:
+    (Note to agent: personal or financial data was removed from this message before you received it. Tell the user it was removed and ask them not to share personal or financial data in this chat.)
+
+    Return only the rewritten text and the note. No explanation, no quotes, no formatting.
+
+    Text:
+    ```
+
+    ![The Redact PII inline agent with its instructions and prompt dynamic value after Text](images/uc2-redact-pii-instructions.png)
+
+1. Right-click **Return original prompt**, then select **Copy**.
+
+    ![The Return original prompt node's context menu with Copy highlighted](images/uc2-copy-original-prompt.png)
+
+1. Right-click an empty area of the canvas, then select **Paste**. The copied node, **Return original prompt 2**, has the same outputs as the original but no connections.
+
+    ![The canvas context menu with Paste highlighted](images/uc2-paste-response-node.png)
+
+1. Drag a new connection from the output connection point of **Redact PII** to the input connection point of **Return original prompt 2**. Connect the nodes before selecting dynamic content, because the picker only offers outputs from earlier steps on that path.
+
+    ![Dragging a connection from Redact PII to Return original prompt 2](images/uc2-connect-redact-response.png)
+
+    Select **Return original prompt 2**, select its name at the top of the panel, and rename it to `Return redacted prompt`.
+
+    > [!TIP]
+    > **Why two Respond nodes?** A Respond node returns fixed values, so every *different* answer needs its own node. Branches that return the same answer share one: **No PII** and **Other** both go to **Return original prompt**. Name each node after the answer it gives, so the canvas reads as the decision.
+    >
+    > Copy the starter node rather than adding a new **Respond to the agent** from the panel. Outputs you add yourself are marked required, every Respond node in a workflow must return the same schema, and a mismatch makes the workflow incompatible with the hook.
+
+1. On **Return redacted prompt**, set `modifiedPrompt` to **Agent Response** of **Redact PII** from the dynamic content picker.
+
+    ![Return redacted prompt with Agent Response selected for modifiedPrompt](images/uc2-return-redacted-agent-response.png)
+
+1. **Publish** the workflow and close the designer. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
+
+    ![Redact personal data workflow: Classify branches, Redact PII, Return original prompt and Return redacted prompt](images/uc2-redaction-workflow.png)
+
+#### Test it
+
+1. Select **New chat** in the test pane and send the clean prompt:
+
+    ```text
+    I'm flying to Lyon next week for a customer workshop. What can I spend on dinner?
+    ```
+
+    Expand **Executed hook: UserPromptSubmitted** — `modifiedPrompt` is identical to what you typed. The agent can use the travel-policy knowledge you connected in [Use Case #2](#use-case-2-ground-the-agent-in-travel-policies-filtered-by-location) to answer the clean prompt.
+
+1. Now send the prompt with personal data:
+
+    ```text
+    I'm flying to Lyon on 12 May. My passport number is 18AB12345, charge my card 4111 1111 1111 1111 and send the itinerary to jan.devries@outlook.com.
+    ```
+
+1. The agent tells you personal data was removed and asks you not to share it. In the hook's **Output**, `modifiedPrompt` shows `[PASSPORT NUMBER REDACTED]`, `[CARD NUMBER REDACTED]` and `[EMAIL REDACTED]` — that is the version the agent works with from here on. Lyon and the travel date survived.
+
+    ![Hook output with the redacted modifiedPrompt](images/uc2-redaction-test.png)
+
+> [!IMPORTANT]
+> The hook changes what the **agent works with**. It does not erase what Copilot Studio has already received — the original prompt still reaches the hook workflow and can appear in transcripts. Configure transcript access and retention separately.
+
+---
+
+### Congratulations! You've completed Use Case #3!
+
+---
+
+### Test your understanding
+
+* Why use a Classify node first instead of sending every prompt to the inline agent?
+* Why typed placeholders like `[PASSPORT NUMBER REDACTED]` rather than asterisks?
+* Could you get the same result by adding "never repeat personal data" to the agent's instructions? What is the difference?
+
+---
+
 ## Extra: Block unapproved airlines before the booking tool runs
 
-The instructions promised booking tools "for simulations only". Finance has one more rule: travellers may only fly with an approved airline. A booking with any other airline must not happen — no matter how the conversation got there.
+The instructions promised booking tools "for simulations only". Finance has one more rule: travelers may only fly with an approved airline. A booking with any other airline must not happen — no matter how the conversation got there.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
@@ -628,8 +682,8 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
     | Input | Type | Description |
     |-------|------|-------------|
     | `airline` | Text | Name of the airline to fly with |
-    | `origin` | Text | City the traveller departs from |
-    | `destination` | Text | City the traveller flies to |
+    | `origin` | Text | City the traveler departs from |
+    | `destination` | Text | City the traveler flies to |
     | `departureDate` | Text | Date of departure |
 
     > [!NOTE]
@@ -644,7 +698,7 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
 1. **Publish** the workflow and close the designer. The **Workflow details** dialog opens. Select **Edit description** under **Description for Intelligence**, paste the text below and select **Save**:
 
     ```text
-    Simulates booking a flight for a traveller. Use it once you have the airline, origin, destination and departure date.
+    Simulates booking a flight for a traveler. Use it once you have the airline, origin, destination and departure date.
     ```
 
     ![Book flight workflow: four inputs and a Respond node returning the simulated booking](images/extra-tool-workflow.png)
@@ -695,7 +749,7 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
 
 1. The **Approved airline** branch already leads to the starter **Respond to the agent** node. Rename it to `Allow tool call` and leave **every output empty**. Empty means *allow*: the tool runs with its original parameters.
 
-1. Select **Allow tool call**, copy it (**Ctrl+C** / **Cmd+C**) and paste it (**Ctrl+V** / **Cmd+V**). Rename the copy, **Allow tool call 2**, to `Deny tool call` and drag the **Else** connection point of the If/Else onto it. As in Use Case #2, each decision gets its own Respond node because each returns different values.
+1. Select **Allow tool call**, copy it (**Ctrl+C** / **Cmd+C**) and paste it (**Ctrl+V** / **Cmd+V**). Rename the copy, **Allow tool call 2**, to `Deny tool call` and drag the **Else** connection point of the If/Else onto it. As in Use Case #3, each decision gets its own Respond node because each returns different values.
 
 1. On **Deny tool call**, set:
 
@@ -762,9 +816,9 @@ Time left? Each idea below reuses what you just built. There are no step-by-step
 
 | Idea | Event | What to return |
 |------|-------|----------------|
-| **Use the real profile.** Replace the hardcoded Paris with **Office 365 Users** → **Get user profile (V2)** and its `officeLocation` | **Start (pre-loop)** | `additionalContext` with the real office location |
+| **Handle missing locations explicitly.** Replace the lab's Paris fallback with a verified employee-directory lookup or guidance to ask the user for their location | **Start (pre-loop)** | `additionalContext` with a verified location or clear missing-location guidance |
 | **Fix instead of block.** Normalise the airline name, for example `Contoso` → `Contoso Air`, so a sloppy call is corrected rather than refused | **Pre tool use** | `modifiedParameters` with the corrected arguments |
-| **Book ahead.** Deny bookings with a departure date less than 14 days away and tell the agent to point the traveller to the policy's booking rule | **Pre tool use** | `permissionDecision` = `deny`, a reason, and guidance in `additionalContext` |
+| **Book ahead.** Deny bookings with a departure date less than 14 days away and tell the agent to point the traveler to the policy's booking rule | **Pre tool use** | `permissionDecision` = `deny`, a reason, and guidance in `additionalContext` |
 | **Tidy the confirmation.** Add the applicable per diem to the booking result, or write every simulated booking to a list for auditing | **Post tool use** | `modifiedResult`, or nothing (log only) |
 | **A friendlier error.** Replace a generic failure with a branded message and skip the failing step | **Error** | `userNotification`, `errorHandling` = `skip` |
 | **Stay on topic.** Classify prompts as *Travel* or *Off-topic* and rewrite off-topic prompts into a polite redirect | **User prompt submitted** | `modifiedPrompt` |
