@@ -176,7 +176,7 @@ The workflow binds to first-party connectors only — Office 365 Outlook, M365 C
     > Rows often show a green **Valid connection** on their own — the wizard matches or creates first-party connections for you, and a row that shows a **Sign in** button may still resolve by itself a moment later. Only act on rows that still lack a green check.
 
     > [!TIP]
-    > You can select **Import** without completing this step. The solution still imports, but its connection references arrive unset and you have to set all six by hand in Use Case #2 step 5.1. Doing it here is much faster.
+    > You can select **Import** without completing this step. The solution still imports, but its connection references arrive unset and you have to set all six by hand afterwards in the solution's **Connection references**. Doing it here is much faster.
 
 1. Select **Import**. The import runs in the background and reports success in a banner reading *"Solution "LAB: Order Management Workflows" imported successfully"* — allow up to a minute.
 
@@ -264,7 +264,7 @@ In this lab, you'll build several autonomous Workflows that act on event-driven 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
 | 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 15 min |
-| 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Verify connections and ownership, and publish a pre-built multi-branch classification workflow | 8 min |
+| 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Verify connections and publish a pre-built multi-branch classification workflow | 8 min |
 | 3 | [Use M365 Copilot and Add a Human-in-the-Loop](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: Copilot drafts a response, human approves, workflow replies | 7 min |
 | 4 | [Build an Inline Agent for Inventory Management](#-use-case-4-build-an-inline-agent-for-inventory-management) | Add an MCP-powered inline agent that checks warehouse stock and creates Dataverse tasks | 15 min |
 | EC | [Call a Price Quote Specialist Agent from a Workflow (Bonus)](#-use-case-5-bonus-call-a-price-quote-specialist-agent-from-a-workflow) | Wire a published agent into a workflow branch to generate and send price quotes | 10 min (extra) |
@@ -283,13 +283,13 @@ Build a Workflow that watches a Microsoft To Do list and, whenever a task is add
 
 **Summary of tasks**
 
-In this section, you'll create a To Do list to watch, build a Workflow with a To Do trigger, add a non-deterministic inline agent with goal-oriented instructions and tools, publish it, and then trigger it with a real task and verify the results.
+In this section, you'll create a To Do list to watch, configure the pre-created To Do Time Block Workflow with a To Do trigger, add a non-deterministic inline agent with goal-oriented instructions and tools, publish it, and then trigger it with a real task and verify the results.
 
 **Scenario:** You capture work in Microsoft To Do but never actually reserve time to do it. You want an assistant that, the moment you jot down a task, finds an appropriate slot in your workday, books a calendar block, and updates the task with a due date, reminder, notes, and category — without you lifting a finger beyond adding the task.
 
 ### Objective
 
-Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a new task to an inline agent that schedules a calendar block within your working hours and updates the to-do — then run it end-to-end and confirm the calendar event and the enriched task.
+Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a new task to an inline agent that schedules a calendar block within your working hours and updates the to-do — then run it end-to-end and confirm the calendar event and the enriched task.
 
 ---
 
@@ -297,28 +297,23 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
 #### Create the To-Do list that drives the workflow
 
-1. In **Microsoft To Do** ([to-do.office.com](https://to-do.office.com)), select **New list** in the left sidebar, name it **Time Block**, and press **Enter** to create it. This is the list the workflow will watch — adding a task here is what triggers the automation.
+1. Go to [Microsoft To Do](https://to-do.office.com/). The first time you open it, you need to **sign in** — use the **same account** you use for Copilot Studio.
 
    > [!TIP]
-   > Sign in to To Do with the **same account** you use for Copilot Studio. The workflow's trigger connects to *your* To Do, so the list and the workflow must live under one identity.
+   > The workflow's trigger connects to *your* To Do, so the list and the workflow must live under one identity.
+
+2. In **Microsoft To Do**, select **New list** in the left sidebar, name it **Time Block**, and press **Enter** to create it. This is the list the workflow will watch — adding a task here is what triggers the automation.
 
    ![The new Time Block list created in Microsoft To Do](images/create-time-block-list.png)
 
-#### Create the workflow and configure its trigger
+#### Open the workflow and configure its trigger
 
-2. In **Copilot Studio**, make sure you're in the right environment, then on the **Home** page select **AI workflow**. Rename the workflow from **Untitled Workflow** to **To Do Time Block** by selecting the title at the top of the designer.
+3. In **Copilot Studio**, make sure you're in the right environment, then select **Workflows** in the left navigation and open the pre-created **To Do Time Block** workflow.
 
    > [!TIP]
    > Workflows are the autonomous side of Copilot Studio — they run on a trigger instead of waiting for a user to chat. You'll find them in the left navigation next to **Agents**.
 
-   ![The Home page AI workflow creation card](images/home-ai-workflow.png)
-
-3. Select the **Start** trigger node. In the configuration panel, change **Trigger type** from **Manual** to **Connector**, then choose **Select trigger...** and search for **To Do**. Under **Microsoft To-Do (Business)**, choose **When a new to-do in a specific folder is created**. This makes the workflow fire automatically whenever a task lands in the list you specify.
-
-   > [!IMPORTANT]
-   > Pick the **(Business)** connector, not **(Consumer)** — the lab uses your work/school To Do account, which is where Copilot Studio and the calendar tools also run.
-
-4. Wait for the connection to resolve. Reuse it if it is connected as your lab account; otherwise, select **Create new connection** and sign in with the **same work account** you're using for this lab. Once connected, set **To-do List** to **Time Block** from the dropdown.
+4. Select the **When a new to-do in a specific folder is created** trigger. Under **Connection**, select **Create new connection** and sign in with your lab account if there isn't one. In **To-do list**, switch to **Select from list** and select **Time Block**. This makes the workflow fire automatically whenever a task lands in that list.
 
    > [!TIP]
    > If the list picker initially appears empty, type **Time Block** and select the matching option or press **Enter** to commit the selection. Confirm the required-field/setup warning disappears before continuing.
@@ -328,16 +323,18 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
    ![The To Do Time Block workflow with its trigger configured](images/trigger-todo-time-block.png)
 
+5. Delete the **Scope** node — it isn't useful for this lab.
+
 #### Add and configure the inline agent
 
-5. Select the **+** after the trigger and choose **Agent** to add an agent node. Reuse the connected lab-account connection, or **Create new connection** if needed. Leave the **Agent** dropdown on **New agent for this workflow** — this creates a brand-new, *non-deterministic* agent dedicated to this workflow rather than reusing an existing one.
+6. Select the **+** after the trigger and choose **Agent** to add an agent node. Reuse the connected lab-account connection, or **Create new connection** if needed. Leave the **Agent** dropdown on **New agent for this workflow** — this creates a brand-new, *non-deterministic* agent dedicated to this workflow rather than reusing an existing one.
 
    > [!TIP]
    > This is the heart of the lab: instead of hard-coded actions, the workflow hands the task to an agent that *reasons* about how to schedule it.
 
    ![Agent node added with New agent for this workflow selected](images/add-new-agent-node.png)
 
-6. In the **Instructions** box, give the agent its goal. Enter it in three parts so the agent receives the *actual* to-do title at run time:
+7. In the **Instructions** box, give the agent its goal. Enter it in three parts so the agent receives the *actual* to-do title at run time:
 
    1. Type the first line of text:
 
@@ -358,7 +355,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
    ![The completed agent instructions with the Title token inserted inline](images/agent-instructions-filled.png)
 
-7. Give the agent the tools it needs to act. In the agent panel:
+8. Give the agent the tools it needs to act. In the agent panel:
 
    - Under **Tools**, select **+** (Add tool), search for **Find meeting times**, and choose the result whose connector is **Office 365 Outlook** (*Find meeting time suggestions based on organizer, attendee availability, and time or location constraints*). Reuse your connected lab-account connection or select **Create new connection** if needed, then **Add**.
    - Add a second tool: **+** → search **Create event** → choose the **Office 365 Outlook** result (*This operation creates a new event in a calendar*) → **Add** (it reuses the Outlook connection you just created).
@@ -375,23 +372,27 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
 #### Publish, then trigger the workflow
 
-8. Select **Save**, then **Publish**.
+9. Select **Save**, then **Publish**.
 
    > [!WARNING]
    > **Publishing is required.** A workflow only listens for its trigger once it has been published — so it will **not** run from a new to-do until you publish it. If you add the to-do before publishing, nothing happens. After publishing, the **Activity** and **Monitor** tabs become available.
 
    ![The published To Do Time Block workflow showing Trigger, Apply to each, and Agent nodes](images/workflow-published.png)
 
-9. Open **Microsoft To Do**, go to the **Time Block** list, and add a new task: **Book Skull's Rainbow Room in Nashville for Next Friday**. Creating this task in the watched list is what fires the workflow's trigger.
+10. Open **Microsoft To Do**, go to the **Time Block** list, and add a new task with the following title. Creating this task in the watched list is what fires the workflow's trigger.
 
-   > [!TIP]
-   > Use a task whose title implies a real-world commitment with a time and place — it gives the agent something concrete to reason about (find a slot, block the calendar, look up the venue).
+    ```
+    Book Skull's Rainbow Room in Nashville for Next Friday
+    ```
 
-   ![The new task added to the Time Block list in Microsoft To Do](images/add-todo-task.png)
+    > [!TIP]
+    > Use a task whose title implies a real-world commitment with a time and place — it gives the agent something concrete to reason about (find a slot, block the calendar, look up the venue).
+
+    ![The new task added to the Time Block list in Microsoft To Do](images/add-todo-task.png)
 
 #### Watch the workflow run
 
-10. Back in the workflow, open the **Activity** tab and select **Refresh** to look for the run. When the new run appears (status **Running**), select it to open the run details and watch the workflow execute node-by-node (trigger → **Apply to each** → **Agent**).
+11. Back in the workflow, open the **Activity** tab and select **Refresh** to look for the run. When the new run appears (status **Running**), select it to open the run details and watch the workflow execute node-by-node (trigger → **Apply to each** → **Agent**).
 
     > [!IMPORTANT]
     > Be patient — the To Do trigger polls on a schedule, so the run can take a **few minutes** to appear. Press **Refresh** in the Activity list a few times until it shows up.
@@ -400,7 +401,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
     ![The run executing, with the trigger succeeded and the Agent node in progress](images/run-monitor-executing.png)
 
-11. In the run details, select the **Agent** node to expand its details. You'll see the agent's own narration of what it did — checking your free/busy, choosing a time block *inside your working hours*, creating the calendar event, finding the to-do, and updating it. This is the *non-deterministic* part: the agent decided the specifics, they aren't hard-coded in the workflow.
+12. In the run details, select the **Agent** node to expand its details. You'll see the agent's own narration of what it did — checking your free/busy, choosing a time block *inside your working hours*, creating the calendar event, finding the to-do, and updating it. This is the *non-deterministic* part: the agent decided the specifics, they aren't hard-coded in the workflow.
 
     > [!TIP]
     > The Agent's **Outputs / Response** is a great teaching moment — it shows the model reasoning step-by-step and calling the Find meeting times, Create event, and Update to-do tools on its own.
@@ -409,14 +410,14 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
 #### Verify the results
 
-12. Go back to **Microsoft To Do** and refresh the **Time Block** list. Open your task — it has been updated by the agent: a **due date** (a week out), a **reminder** set 2 days before the due date, and richly formatted **notes** (target date, the scheduled work block, and an action checklist).
+13. Go back to **Microsoft To Do** and refresh the **Time Block** list. Open your task — it has been updated by the agent: a **due date** (a week out), a **reminder** set 2 days before the due date, and richly formatted **notes** (target date, the scheduled work block, and an action checklist).
 
     > [!TIP]
     > Switch the list to **List** view and open the task to see the full notes the agent wrote — it even researched the venue with web search.
 
     ![The to-do updated by the agent with due date, reminder, and formatted notes](images/todo-updated-details.png)
 
-13. Open **Outlook → Calendar**. The agent has added a **time block** event to reserve time to work on the task — on the next business day it found free and **within your 8:00 AM–5:00 PM working hours** — with a body summarizing the target date and venue. The workflow ran end-to-end with no further input from you.
+14. Open **Outlook → Calendar**. The agent has added a **time block** event to reserve time to work on the task — on the next business day it found free and **within your 8:00 AM–5:00 PM working hours** — with a body summarizing the target date and venue. The workflow ran end-to-end with no further input from you.
 
     ![The calendar time-block event the agent created in Outlook](images/calendar-event-details.png)
 
@@ -432,25 +433,25 @@ Configure and publish a pre-built **Order Management Workflow** that classifies 
 
 **Summary of tasks**
 
-In this section, you'll configure connection references in the Power Apps solution, transfer workflow ownership, open the workflow to verify canvas-level connections, explore the email classification categories, publish, and verify everything works by sending a test email that triggers the "Other" classification path.
+In this section, you'll open the workflow to verify its connections, explore the email classification categories, publish, and verify everything works by sending a test email that triggers the "Other" classification path.
 
-**Scenario:** The solution you imported in the prerequisites contains a pre-built Order Management Workflow that automatically classifies incoming emails with "Order Management" in the subject. It routes emails into one of four categories — **Quote Request**, **Supplier Delay**, **Customer Inquiry**, or **Other** — and takes different automated actions for each. Before the workflow can run, you need to configure all its connections and link them in the solution.
+**Scenario:** The solution you imported in the prerequisites contains a pre-built Order Management Workflow that automatically classifies incoming emails with "Order Management" in the subject. It routes emails into one of four categories — **Quote Request**, **Supplier Delay**, **Customer Inquiry**, or **Other** — and takes different automated actions for each. Before the workflow can run, you need to verify its connections and publish it.
 
 ### Objective
 
-Complete the setup of the **Order Management Workflow**: configure all solution connection references, transfer ownership, verify canvas-level connections, explore the classification categories, publish, and validate end-to-end by sending a test email through the "Other" path.
+Complete the setup of the **Order Management Workflow**: verify its connections, explore the classification categories, publish, and validate end-to-end by sending a test email through the "Other" path.
 
 > [!IMPORTANT]
-> This use case is the **foundation for all subsequent use cases** in this module. The connections, ownership, and publishing you complete here are required for the Customer Inquiry, Quote Request, and Supplier Delay paths covered later. Take extra care during setup — if a connection reference is missed or ownership isn't transferred correctly, later use cases will fail silently or with hard-to-diagnose errors.
+> This use case is the **foundation for all subsequent use cases** in this module. The connections and publishing you complete here are required for the Customer Inquiry, Quote Request, and Supplier Delay paths covered later. Take extra care during setup — if a connection is missed, later use cases will fail silently or with hard-to-diagnose errors.
 
 ---
 
 ### Step-by-step instructions
 
-#### Take ownership and configure the solution
+#### Open the workflow and verify its connections
 
 > [!IMPORTANT]
-> **Verify the solution-level setup first.** The workflow must have valid node connections, bound solution connection references, and the correct owner before it can be published or tested. Your import may already have configured these correctly: inspect them first, and use the backup repair steps only if needed.
+> **Verify the connections first.** The workflow must have valid node connections before it can be published or tested. Your import may already have configured these correctly — inspect them first.
 
 1. In **Copilot Studio**, navigate to **Workflows** and open the **Order Management Workflow**.
 
@@ -463,46 +464,16 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
    If a node remains disconnected or uses a different account, select **Create new connection** > **Create** and sign in with your lab account. Do not create duplicate connections when the existing connection is already correct.
 
-3. **Confirm you own the workflow.** In **Copilot Studio**, select **Workflows** in the left navigation and find **Order Management Workflow**. Check the **Owner** column.
-
-   - **It shows your own lab user** — you are set. Continue to step 4.
-   - **It shows anyone other than you** — the workflow came from someone else's import, not yours. Go back to [The Order Management solution](#the-order-management-solution), delete the solution and import your own copy, then return here.
-
-   ![The Workflows list with Order Management Workflow owned by the lab user](images/uc2-owner-column.png)
-
-   > [!IMPORTANT]
-   > **Only an owner can publish a workflow.** Use Cases #2 through #5 all depend on publishing, so if the **Owner** column names anyone but you, the rest of this lab cannot be completed — no amount of configuration in the designer will change that.
-
-   > [!NOTE]
-   > After your own import the workflow arrives with status **Published**, and the **Publish** button in the designer is greyed out. That is expected: there is nothing new to publish yet. It becomes available again as soon as you change something and select **Save** — which is exactly what step 4 does.
-4. Go back to the workflow and select **Save** (or press **Ctrl+S**). The **Publish** button becomes available after saving — select **Publish**. If publishing succeeds, the setup is complete and you can **skip step 5**.
-
-5. **(Backup — only if Publish stays disabled or fails.)** Complete both backup steps below.
-
-   **5.1 Configure the connection references.** Open **Power Apps** ([make.powerapps.com](https://make.powerapps.com)), ensure you are in the correct environment, navigate to **Solutions**, and open the **LAB: Order Management Workflows** solution. In the left pane, select **Objects**, then open **Connection References**. For **each** connection reference, select **Edit** and choose the connection you just created from the dropdown (it should now appear).
-
-   - You should see **six** connection references — Office 365 Outlook, Advanced Approvals (Human review), M365 Copilot, the Agent node, Microsoft Dataverse, and the Outlook Mail MCP. Set a connection for each one.
-   - Select the connection and click **Save**, then confirm with **Save changes**.
-
-   ![The LAB: Order Management Workflows solution in Power Apps](images/solution-order-management.png)
-
-   > [!WARNING]
-   > Always sign in with your **lab account** when creating connections — not a personal or different work account. All connections in this workflow must use the same identity, or the workflow will fail at runtime with permissions errors.
-
-   **5.2 Grant ownership through the Power Platform Admin Center.** Open the **Power Platform Admin Center** ([admin.powerplatform.microsoft.com](https://admin.powerplatform.microsoft.com)) and navigate to **Environments** → your environment → **Flows**. Find the **Order Management Workflow** row, open **More flow actions (…)** → **Share**, add your **lab user** as a **co-owner**, and select **Save**. Use this only if the Owner column in step 3 still does not name you after re-importing the solution.
-
-   When done, **retry step 4 (Save and Publish).**
-
 #### Open and explore the Order Management Workflow
 
-6. Select the **trigger** node ("When a new email arrives"). Next to **Subject filter**, select the code symbol **`</>`** (**Switch to expression mode**) to reveal the expression `@string('Order Management')`. This means the workflow only fires for emails whose subject contains "Order Management" — all other emails are ignored.
+3. Select the **trigger** node ("When a new email arrives"). Next to **Subject filter**, select the code symbol **`</>`** (**Switch to expression mode**) to reveal the expression `@string('Order Management')`. This means the workflow only fires for emails whose subject contains "Order Management" — all other emails are ignored.
 
    > [!IMPORTANT]
    > Keep this filter in mind when testing: every test email you send **must include "Order Management" in the subject line**, or the workflow will not trigger. This is a common source of confusion when tests "don't seem to work."
 
    ![The subject filter expression configured on the trigger](images/subject-filter-expression.png)
 
-7. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the classification categories. **Three** are configured explicitly in the node, and the panel notes that *a "Default" category is automatically created for inputs that don't match any category* — that automatic category is what the canvas shows as the **Other** branch. Each configured category has a name and example text that the AI model uses to determine where an incoming email should be routed:
+4. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the classification categories. **Three** are configured explicitly in the node, and the panel notes that *a "Default" category is automatically created for inputs that don't match any category* — that automatic category is what the canvas shows as the **Other** branch. Each configured category has a name and example text that the AI model uses to determine where an incoming email should be routed:
 
    - **Quote Request** — emails requesting pricing or quotes for products/services
    - **Supplier Delay** — notifications about delays from suppliers
@@ -516,7 +487,7 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
 #### Test the classification
 
-8. Select the Classify node's **Run node** tab to test classification before sending a real email. In the **When a new email arrives** section, find **Body** (*The body of the message*), click into the box, and paste:
+5. Select the Classify node's **Run node** tab to test classification before sending a real email. In the **When a new email arrives** section, find **Body** (*The body of the message*), click into the box, and paste:
 
    ```
    Hi, I would like to request a quote for 500 units of Product A.
@@ -526,11 +497,18 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
    ![The classification test result showing Quote Request](images/classify-test-result.png)
 
+6. Select **Save** (or press **Ctrl+S**). The **Publish** button becomes available after saving — select **Publish**.
+
 #### Test the "Other" classification path end-to-end
 
-9. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and compose a new email **to your lab user account** with the following:
+7. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and compose a new email **to your lab user account** with the following:
 
-   - **Subject:** `Order Management - Congratulations! Your order desk has been selected`
+   - **Subject:**
+
+     ```
+     Order Management - Congratulations! Your order desk has been selected
+     ```
+
    - **Body:**
 
      ```
@@ -556,7 +534,7 @@ Complete the setup of the **Order Management Workflow**: configure all solution 
 
    ![The Other-path sample email in Outlook after automatic archiving](images/test-other-email-compose.png)
 
-10. Wait a **few seconds** for the workflow to trigger and process the email. Then navigate to your **Archive** folder in Outlook. You should see the test email has been automatically moved there — confirming the "Other" classification path is working correctly.
+8. Wait a **few seconds** for the workflow to trigger and process the email. Then navigate to your **Archive** folder in Outlook. You should see the test email has been automatically moved there — confirming the "Other" classification path is working correctly.
 
    > [!TIP]
    > If the email doesn't appear in the Archive folder, check the **Activity** tab in the workflow in Copilot Studio to see if the run triggered. If no run appears, verify the workflow is **Published** (not Draft) and that the email subject includes "Order Management."
@@ -619,7 +597,12 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
 5. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and send the following email **to your lab user account**:
 
-   - **Subject:** `Order Management - Question about iPad Air warranty and MDM`
+   - **Subject:**
+
+     ```
+     Order Management - Question about iPad Air warranty and MDM
+     ```
+
    - **Body:**
 
      ```
@@ -765,7 +748,12 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 
    1. Select **`[email body]`**, choose the **lightning** icon, search for **body**, and insert **Body** from **When a new email arrives**.
    2. Select **`[due date]`**, choose the **lightning** icon, then look above the search bar for the **diamonds** icon — **Ask Copilot to generate an expression**.
-   3. Enter: **Add 3 days to the date and time of arrival of the trigger email**
+   3. Enter:
+
+      ```
+      Add 3 days to the date and time of arrival of the trigger email
+      ```
+
    4. Confirm Copilot returns:
 
       ```
@@ -776,7 +764,7 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 
    ![The agent instructions showing Body and due date dynamic expressions inserted](images/supplier-delay-dynamic-content.png)
 
-7. Scroll to the **Output** section and change the dropdown to **Structured output**. Add these three properties:
+7. Scroll to the **Output** section and change the dropdown to **Structured output**. Add these three properties and their **Description**:
 
    - `sku` (**Text**, JSON `string`) — *The SKU named in the delay notice*
    - `stock` (**Number**, JSON `number`) — *Current stock quantity from the warehouse for the SKU named*
@@ -795,7 +783,12 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 
 9. In **Outlook**, send the following email **to your lab user account**:
 
-   - **Subject:** `Order Management - Shipment delay - LumiRead E-Reader`
+   - **Subject:**
+
+     ```
+     Order Management - Shipment delay - LumiRead E-Reader
+     ```
+
    - **Body:**
 
      ```
@@ -866,7 +859,7 @@ Publish the **Price Quote Agent**, configure the **Quote Request** path to use i
 
 #### Inspect the reusable Price Quote Agent
 
-1. In **Copilot Studio**, select **Agents** in the left navigation and find **Price Quote Agent**. There is no **New experience** toggle to enable in the current Agents list.
+1. In **Copilot Studio**, select **Agents** in the left navigation and find **Price Quote Agent**.
 
    ![The current Agents list showing Price Quote Agent](images/agents-list-current.png)
 
@@ -935,7 +928,12 @@ Publish the **Price Quote Agent**, configure the **Quote Request** path to use i
 
 12. In **Outlook**, send the following email **to your lab user account**:
 
-    - **Subject:** `Order Management - Quote request - Adventure Works`
+    - **Subject:**
+
+      ```
+      Order Management - Quote request - Adventure Works
+      ```
+
     - **Body:**
 
       ```
@@ -967,9 +965,21 @@ Publish the **Price Quote Agent**, configure the **Quote Request** path to use i
 
     ![The completed price quote email received in Outlook](images/quote-request-email-received.png)
 
-16. **Bonus:** Return to **Price Quote Agent** and select the **Preview** tab (top of the new experience). As a bonus, observe how the agent reasons over a question by combining the different tools at hand. Ask: **What are the iPad Air prices applicable to Fabrikam?** Watch the extended reasoning — the agent issues a Dataverse `read_query` that looks up the number of employees where the account name is **Fabrikam**, then connects that result with the **SharePoint** knowledge about customer tiers: it works out that Fabrikam falls into the **Mid** tier and shows the discounts the SharePoint handbook says should apply.
+16. **Bonus:** Return to **Price Quote Agent** and select the **Preview** tab (top of the new experience). As a bonus, observe how the agent reasons over a question by combining the different tools at hand. Ask:
 
-    You can also try asking **We have received this customer email: []** and paste the email you used to test the workflow. You'll see how the agent reasons over the answer — and how, this time, it loads the **price-quote** skill to build a full quote following the skill's specified steps.
+    ```
+    What are the iPad Air prices applicable to Fabrikam?
+    ```
+
+    Watch the extended reasoning — the agent issues a Dataverse `read_query` that looks up the number of employees where the account name is **Fabrikam**, then connects that result with the **SharePoint** knowledge about customer tiers: it works out that Fabrikam falls into the **Mid** tier and shows the discounts the SharePoint handbook says should apply.
+
+    You can also try asking the following and paste the email you used to test the workflow inside the brackets:
+
+    ```
+    We have received this customer email: []
+    ```
+
+    You'll see how the agent reasons over the answer — and how, this time, it loads the **price-quote** skill to build a full quote following the skill's specified steps.
 
     ![The Price Quote Agent Preview tab showing the Fabrikam pricing question with reasoning](images/uc5-bonus-agent-reasoning.png)
 

@@ -146,7 +146,7 @@ Everyone completes the shared foundation, then one extension. By the end of the 
 
 #### Create the agent
 
-1. From the Copilot Studio **Home** page, under **Optimize your business processes**, select **Agent**.
+1. Create a new agent in [Copilot Studio](https://copilotstudio.microsoft.com/).
 
     The agent designer opens on the **Build** tab with a new, unsaved agent.
 
@@ -177,8 +177,10 @@ Everyone completes the shared foundation, then one extension. By the end of the 
     Work IQ
     ```
 
+    Then filter the results by **MCP** to narrow the list.
+
     > [!TIP]
-    > The search returns every connector with "work" anywhere in a name or action - dozens of results - and **Work IQ** is listed *last*, below the connector groups. Scroll to the bottom of the results rather than picking one of the "work order" actions near the top.
+    > Without the **MCP** filter, the search returns every connector with "work" anywhere in a name or action - dozens of results - and **Work IQ** is listed *last*, below the connector groups. Scroll to the bottom of the results rather than picking one of the "work order" actions near the top.
 
 1. Select **Work IQ**.
 
@@ -197,7 +199,7 @@ Everyone completes the shared foundation, then one extension. By the end of the 
 
 #### Give the agent its instructions
 
-1. Copy the entire block below into **Copilot Studio > Build > Instructions**. These are agent instructions, not a chat message.
+1. Copy the entire block below into the agent's **Instructions**. These are agent instructions, not a chat message.
 
     ```text
     You are the RFP Response Agent for our organization. You help our team write clear, accurate answers to customer RFPs (requests for proposal).
@@ -411,11 +413,10 @@ Choose your next step: [workflow integration in Use Case #2](#-use-case-2-using-
 
 1. Leave **Prompt model** on the default.
 
-1. In **Input to classify**, use **Insert dynamic content** to add **Content** (the attachment
-    content), then **Body** (the email body).
+1. In **Input to classify**, use **Insert dynamic content** to add **Attachment content**, then **Body** (the email body).
 
     > [!IMPORTANT]
-    > Adding **Content** automatically wraps the Classify node in an **Apply to each** loop - attachments are a collection, so the workflow now runs the classification once per attachment. You did not add that loop; the designer inferred it from the data you bound.
+    > Adding **Attachment content** automatically wraps the Classify node in an **Apply to each** loop - attachments are a collection, so the workflow now runs the classification once per attachment. You did not add that loop; the designer inferred it from the data you bound.
 
 1. Rename **Category 1** to `RFP Response Needed`. Copy the block below into the category's **Description** field, not into chat:
 
@@ -448,6 +449,8 @@ Choose your next step: [workflow integration in Use Case #2](#-use-case-2-using-
     > [!WARNING]
     > The **Message** and **Output** fields stay stuck on *Loading...* until the workflow has been saved at least once. If the panel does not finish loading, select **Save** in the toolbar, then reopen the node.
 
+1. Rename the **Agent** node to `RFP Response Agent`.
+
 1. Build the **Message** field one piece at a time, alternating copied text and dynamic-content chips. These blocks go into the workflow's **Message** field, not into Preview chat.
 
     Copy this first block into **Message**, then use **Insert dynamic content** to insert **Body**:
@@ -468,7 +471,7 @@ Choose your next step: [workflow integration in Use Case #2](#-use-case-2-using-
     Then Email the response back to the requestor at this email address:
     ```
 
-1. Leave **Output** as **Text response**, and rename the node to `RFP Response Agent`.
+1. Leave **Output** as **Text response**.
 
     ![The Agent node calling RFP Response Agent with the composed message](images/uc2-agent-node.png)
 
@@ -536,7 +539,7 @@ Continue to the [conclusions and recommendations](#-conclusions-and-recommendati
 
 ## 🧱 Use Case #3: Generate and test your own Skill
 
-**Timebox: 15 minutes.** Complete Use Case #1 first, then choose this use case **instead of Use Case #2**.
+**Timebox: 15 minutes.**
 
 **Your goal:** turn a written process into a reusable Skill, upload it to an agent, and check that it works in two test conversations.
 
@@ -561,6 +564,10 @@ Generating a ZIP does **not** install the Skill. The authoring prompt creates th
 ### Get the source materials
 
 1. Download and extract the [Skill-generation materials](assets/skill-generation/skill-generation-materials-v3.zip).
+
+    > [!WARNING]
+    > Do not extract the ZIP inside a **OneDrive for Business** folder. Your organization may automatically encrypt files saved there, and the agent will then be unable to read them. Extract the files to a location outside OneDrive.
+
 1. For **A**, use `project-intake-process-v2.docx`. For **B**, use the other four Word documents, listed in Example B. Attach the individual documents, not the materials ZIP.
 
 These are fictional source documents, not a ready-to-upload Skill. Use the supplied examples rather than real customer data.
@@ -586,7 +593,7 @@ Use a new agent for this example, not your RFP agent. You will first use its Pre
 
 #### Create the Skill in Copilot Studio Preview
 
-1. In **Copilot Studio > Home > Agent**, create a new agent using the **GitHub Copilot harness**. Name it **Project Process Assistant**. Do not reuse your RFP agent.
+1. In [Copilot Studio](https://copilotstudio.microsoft.com/), create a new agent using the **GitHub Copilot harness**. Name it **Project Process Assistant**. Do not reuse your RFP agent.
 
 1. On **Build**, leave **Instructions empty**. If the new agent has generated instructions, clear them now. Do not add the intake instructions, a Skill, or connectors yet: the first conversation is for **creating a package**, not running intake.
 
@@ -708,7 +715,7 @@ The Skill must compare the full cost of meeting those requirements, not just the
 
 #### Create the Skill in Copilot Cowork
 
-1. Open [Microsoft 365 Copilot](https://m365.cloud.microsoft/) and sign in with your workshop account.
+1. Open [Microsoft Cowork](https://copilot.cloud.microsoft/cowork?auth=2) and sign in with your workshop account.
 
 1. In Copilot's left navigation, select **Cowork** beside **Chat**, as shown below. Check that **Cowork** is selected; do not use ordinary Copilot Chat.
 
@@ -752,7 +759,7 @@ The Skill must compare the full cost of meeting those requirements, not just the
 
 1. Answer any clarifying questions in the **same Cowork task**. Download the generated **Skill ZIP** and check it using the [package checklist](#review-download-and-upload-the-skill). A completed comparison or prose description alone is not the reusable package.
 
-1. In **Copilot Studio > Home > Agent**, create a new agent using the **GitHub Copilot harness**. Name it **Supplier Comparison Assistant**. Do not reuse your RFP agent or Example A's agent.
+1. In [Copilot Studio](https://copilotstudio.microsoft.com/), create a new agent using the **GitHub Copilot harness**. Name it **Supplier Comparison Assistant**. Do not reuse your RFP agent or Example A's agent.
 
 1. Leave **Build > Instructions empty** until the Skill is uploaded. Clear any generated instructions.
 
@@ -868,7 +875,7 @@ You turned one process into a Skill, uploaded it to an agent, and compared its b
 
 1. Open the gallery page and review its instructions, source, and safety boundaries. Under **Add this skill**, read the **Add only what you trust** notice. Acknowledge it only if you trust the package, then select **Download bundle (.zip)**. Keep the downloaded ZIP if you will need it offline.
 
-1. In Copilot Studio, create a **separate agent** using the same **Home > Agent** entry point as Use Case #1. Name it **Harness Explorer**. Keep it separate from your RFP and project-process agents so diagnostic requests do not interfere with their tests. **Copy the block below into Build > Instructions**, not into chat:
+1. In Copilot Studio, create a **separate agent** the same way as in Use Case #1. Name it **Harness Explorer**. Keep it separate from your RFP and project-process agents so diagnostic requests do not interfere with their tests. **Copy the block below into Build > Instructions**, not into chat:
 
     ```text
     Help me understand the capabilities actually available in this agent's harness. Use the Harness Explorer Skill for runtime inspection. Distinguish observed capabilities from assumptions and unavailable observations. Never expose secrets or full environment-variable values.
