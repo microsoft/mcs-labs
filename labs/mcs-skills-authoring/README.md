@@ -25,7 +25,8 @@ Start with a Skill-equipped agent, then choose your adventure: call it from a wo
 - [Instructions by Use Case](#️-instructions-by-use-case)
   - [Use Case #1: Leveraging Skills in Copilot Studio agents](#-use-case-1-leveraging-skills-in-copilot-studio-agents)
   - [Use Case #2: Using skills in Copilot Studio workflows](#-use-case-2-using-skills-in-copilot-studio-workflows)
-  - [Use Case #3: Generate and test your own Skill](#-use-case-3-generate-and-test-your-own-skill)
+  - [Use Case #3: Create and test a Skill with Copilot Studio](#-use-case-3-create-and-test-a-skill-with-copilot-studio)
+  - [Use Case #4: Create and test a Skill with Cowork](#-use-case-4-create-and-test-a-skill-with-cowork)
 - [Conclusions and recommendations](#-conclusions-and-recommendations)
 - [Extra Credit: Explore the agent harness](#-extra-credit-explore-the-agent-harness)
 
@@ -44,7 +45,7 @@ Think of a Skill as a playbook the orchestrator picks up only when it is relevan
 - "We rebuilt the same process for the chat agent and the automation"
 - "The agent sounds confident about things the company cannot actually commit to"
 
-**In 30 minutes, everyone builds and tests one Skill-equipped agent. Then choose one adventure: reuse it in a workflow, or generate a new Skill from a simple business process. You do not need to complete both.**
+**In 30 minutes, everyone builds and tests one Skill-equipped agent. Then choose one adventure: reuse it in a workflow, create a guided-intake Skill in Copilot Studio, or create a supplier-comparison Skill in Cowork. You do not need to complete all three.**
 
 ---
 
@@ -56,7 +57,7 @@ A Skill packages a named, self-contained playbook: a description that tells the 
 
 **Real-world example:** a proposal team answers RFPs. The rules are stable - match the request to an offering, answer from pre-approved language, never claim a certification the company does not hold - but the work arrives in different ways: someone attaches a solicitation to a chat agent, or a mailbox receives one as an attachment. A Skill keeps that procedure in one place, and a workflow calls the same Skill-equipped agent to handle emailed requests.
 
-Use Case #1 is the shared foundation: build an RFP Response agent with a sample Skill and watch it load. Then choose **Use Case #2** to call that agent from an email-triggered workflow, or **Use Case #3** to generate a new Skill for a guided conversation or a document review. The generation adventure uses a separate agent so the two procedures do not compete.
+Use Case #1 is the shared foundation: build an RFP Response agent with a sample Skill and watch it load. Then choose **Use Case #2** to call that agent from an email-triggered workflow, **Use Case #3** to create a guided project-intake Skill in Copilot Studio Preview, or **Use Case #4** to create a supplier-comparison Skill in Cowork. Each Skill-authoring adventure uses a separate agent so the procedures do not compete.
 
 ---
 
@@ -106,9 +107,9 @@ These resources cover agents and workflows powered by the **GitHub Copilot harne
 - **Everyone:** access to Microsoft Copilot Studio with the GitHub Copilot harness, permission to create agents and use Skills, sandbox code execution with an available charting library, and a workshop account that can connect to Work IQ
 - The sample Skill package and test RFPs from [AgentDudeSamples](https://github.com/Dewain27/AgentDudeSamples/tree/main/samples/RFP%20Skill)
 - **Use Case #2 only:** permission to publish agents and workflows, an Outlook mailbox, and access to Office 365 Outlook and Dataverse connections
-- **Use Case #3, Example A:** a reasoning-capable model in Copilot Studio, such as **Opus 5 if available**, plus file attachments and sandbox ZIP-file generation/download in Preview. Model names and availability vary by environment
-- **Use Case #3, Example B:** access to **Cowork** in Microsoft 365 Copilot with file upload and download available. GitHub Copilot CLI is not available in this lab tenant; Example B uses Cowork to author the Skill
-- **Use Case #3 materials:** [download the Word process documents, fictional meeting transcript, and supplier proposals](assets/skill-generation/skill-generation-materials-v3.zip). Extract the ZIP before attaching individual files to Cowork or Copilot Studio; it contains source materials, not a finished Skill
+- **Use Case #3 only:** a reasoning-capable model in Copilot Studio, such as **Opus 5 if available**, plus file attachments and sandbox ZIP-file generation/download in Preview. Model names and availability vary by environment
+- **Use Case #4 only:** access to **Cowork** in Microsoft 365 Copilot with file upload and download available, plus sandbox PDF generation in the Copilot Studio test agent. GitHub Copilot CLI is not available in this lab tenant; this use case uses Cowork to author the Skill
+- **Use Cases #3 and #4 materials:** [download the Word process documents, fictional meeting transcript, and supplier proposals](assets/skill-generation/skill-generation-materials-v3.zip). Extract the ZIP before attaching individual files to Cowork or Copilot Studio; it contains source materials, not a finished Skill
 
 ---
 
@@ -120,20 +121,22 @@ Everyone completes the shared foundation, then one extension. By the end of the 
 - Read a Skill package and explain what its description, references, assets and scripts each do
 - Use sandbox code execution to extract the RFP's evaluation weights and create a downloadable chart, checking the result against the source
 - **Workflow adventure:** call the Skill-equipped agent from a workflow and create an Outlook draft containing its response
-- **Generation adventure:** turn a process into a Skill in a blank agent's Copilot Studio Preview for guided intake, or in Cowork for supplier comparison; upload the package, add agent instructions, and test the conversation or evidence-backed PDF reports
+- **Copilot Studio authoring adventure:** turn a project-intake process into a Skill in a blank agent's Preview; upload the package, add agent instructions, and test the guided conversation
+- **Cowork authoring adventure:** turn a supplier-comparison process into a Skill in Cowork; upload it to a new Copilot Studio agent, add agent instructions, and test the evidence-backed PDF reports
 - Explain why a Skill guides behavior but does not replace deterministic validation or guaranteed branching
 
 ---
 
 ## 🧩 Use Cases Covered
 
-**Complete Use Case #1 first. Then choose ONE: Use Case #2 OR Use Case #3.** You do not need to complete both.
+**Complete Use Case #1 first. Then choose ONE: Use Case #2, #3, OR #4.** You do not need to complete all three extensions.
 
 | Route | Use Case | Value added | Timebox |
 |-------|----------|-------------|---------|
 | Everyone | [Use Case #1: Leveraging Skills in Copilot Studio agents](#-use-case-1-leveraging-skills-in-copilot-studio-agents) | Upload, inspect, and test an existing Skill, then chart source data in the sandbox | 15 min |
 | Choose Use Case #2 | [Use Case #2: Using skills in Copilot Studio workflows](#-use-case-2-using-skills-in-copilot-studio-workflows) | Publish the agent, call it from a workflow, and create an email draft | 15 min |
-| OR choose Use Case #3 | [Use Case #3: Generate and test your own Skill](#-use-case-3-generate-and-test-your-own-skill) | Explore guided intake or document review by generating and testing a Skill | 15 min |
+| OR choose Use Case #3 | [Use Case #3: Create and test a Skill with Copilot Studio](#-use-case-3-create-and-test-a-skill-with-copilot-studio) | Create a guided project-intake Skill in Copilot Studio Preview, then upload and test it | 15 min |
+| OR choose Use Case #4 | [Use Case #4: Create and test a Skill with Cowork](#-use-case-4-create-and-test-a-skill-with-cowork) | Create a supplier-comparison Skill in Cowork, then upload and test it in Copilot Studio | 15 min |
 
 ---
 
@@ -358,13 +361,13 @@ Everyone completes the shared foundation, then one extension. By the end of the 
 
 ### 🏅 Congratulations! You've completed Use Case #1!
 
-Choose your next step: [workflow integration in Use Case #2](#-use-case-2-using-skills-in-copilot-studio-workflows) **or** [Skill generation in Use Case #3](#-use-case-3-generate-and-test-your-own-skill). Do not complete both during the 30-minute session.
+Choose one next step: [workflow integration in Use Case #2](#-use-case-2-using-skills-in-copilot-studio-workflows), [Copilot Studio Skill authoring in Use Case #3](#-use-case-3-create-and-test-a-skill-with-copilot-studio), **or** [Cowork Skill authoring in Use Case #4](#-use-case-4-create-and-test-a-skill-with-cowork). Complete only one extension during the 30-minute session.
 
 ---
 
 ## 🧱 Use Case #2: Using skills in Copilot Studio workflows
 
-**Use Case #2: Workflow integration. Timebox: 15 minutes.** Choose this instead of Use Case #3, after completing Use Case #1. Continue with your RFP Response Agent.
+**Use Case #2: Workflow integration. Timebox: 15 minutes.** Choose this instead of Use Case #3 or #4, after completing Use Case #1. Continue with your RFP Response Agent.
 
 ### Step-by-step instructions
 
@@ -536,28 +539,21 @@ Choose your next step: [workflow integration in Use Case #2](#-use-case-2-using-
 
 ### 🏅 Congratulations! You've completed Use Case #2!
 
-Continue to the [conclusions and recommendations](#-conclusions-and-recommendations). Use Case #3 is the alternative adventure, not another required exercise.
+Continue to the [conclusions and recommendations](#-conclusions-and-recommendations). Use Cases #3 and #4 are alternative adventures, not additional required exercises.
 
 ---
 
-## 🧱 Use Case #3: Generate and test your own Skill
+## 🧱 Use Case #3: Create and test a Skill with Copilot Studio
 
 **Timebox: 15 minutes.**
 
-**Your goal:** turn a written process into a reusable Skill, upload it to an agent, and check that it works in two test conversations.
+**Your goal:** use **Copilot Studio Preview** to turn a project-intake process into a reusable Skill that asks for missing details and summarizes them for confirmation.
 
-Choose **one** example. You do not need to complete both.
+Choose this instead of Use Case #2 or #4, after completing Use Case #1. You need a reasoning-capable model and sandbox ZIP generation in Preview. No connectors, external data, or Cowork access are needed.
 
-| Example | Create the Skill in | What you build |
-|---------|---------------------|----------------|
-| A: Guided project intake | Copilot Studio **Preview** | An agent that asks for missing project details, then summarizes them for confirmation |
-| B: Supplier proposal comparison | Microsoft 365 Copilot **Cowork** | An agent that compares two proposals and creates an evidence-backed PDF |
+Follow this sequence:
 
-For **A**, you need a reasoning-capable model and sandbox ZIP generation in Preview. For **B**, you need Cowork access and sandbox PDF generation in the test agent. Neither example needs connectors or external data.
-
-Both examples follow this sequence:
-
-1. **Create** a Skill ZIP in the authoring chat: Preview for A, Cowork for B.
+1. **Create** a Skill ZIP in a blank agent's **Copilot Studio Preview**.
 1. **Upload** that ZIP under the agent's **Build > Skills**.
 1. **Configure** the agent by pasting the supplied base instructions into **Build > Instructions**.
 1. **Test** the agent in two fresh **Copilot Studio Preview** conversations.
@@ -571,28 +567,28 @@ Generating a ZIP does **not** install the Skill. The authoring prompt creates th
     > [!WARNING]
     > Do not extract the ZIP inside a **OneDrive for Business** folder. Your organization may automatically encrypt files saved there, and the agent will then be unable to read them. Extract the files to a location outside OneDrive.
 
-1. For **A**, use `project-intake-process-v2.docx`. For **B**, use the other four Word documents, listed in Example B. Attach the individual documents, not the materials ZIP.
+1. Use `project-intake-process-v2.docx`. Attach this individual document to Copilot Studio Preview, not the materials ZIP. The other four documents are for Use Case #4.
 
 These are fictional source documents, not a ready-to-upload Skill. Use the supplied examples rather than real customer data.
 
-### Review, download, and upload the Skill
+### Project-intake Skill package checklist
 
-**Reference checklist:** use this after your chosen example generates a Skill ZIP. Start with the Example A or B steps below; you do not need to upload anything yet.
+**Reference checklist:** use this after the Copilot Studio Preview steps below generate a Skill ZIP. You do not need to upload anything yet.
 
-1. **Review the procedure.** Compare the generated Skill with the source process. For B, check the buyer requirements, cost rules, evidence, and PDF steps. Conditional commitments must stay conditional; the Skill must not invent scores.
+1. **Review the procedure.** Compare the generated Skill with the project-intake process. It must collect the four details, reuse supplied answers, accept unknowns, and request confirmation without implying project approval.
 
 1. **Check the package.** Download the generated **Skill ZIP**, not the materials ZIP. It must contain `SKILL.md` at the root, YAML `name` and `description` fields, and all files referenced by the instructions. A prose response is not a completed package.
 
 1. **Handle errors before continuing.** If file generation fails, capture the error and ask your facilitator. If uploading fails, return the exact validation error and package structure to the authoring chat for repair.
 
-### Example A: Guided project intake
+### Guided project intake
 
 > [!NOTE]
 > Skills do not directly replace topics, but they can be used to **guide conversations in a similar way**. A Skill guides the model's behavior; it does not guarantee exact question ordering, field validation, or branching. Use deterministic logic when those are requirements.
 
 You will create a Skill that collects four details: **business goal, intended users, desired outcome, and target date**. It should ask one missing question at a time, accept unknowns, and summarize the answers for confirmation.
 
-Use a new agent for this example, not your RFP agent. You will first use its Preview chat to **create the package**, then upload the package and start a fresh chat to **test intake**.
+Use a new agent for this use case, not your RFP agent. You will first use its Preview chat to **create the package**, then upload the package and start a fresh chat to **test intake**.
 
 #### Create the Skill in Copilot Studio Preview
 
@@ -630,7 +626,7 @@ Before packaging, check the procedure against an incomplete opening request and 
 
     If it cannot generate a file, capture the error and ask your facilitator; a text-only response is not a completed package.
 
-1. Download the generated **Skill ZIP** from Preview, unzip it, and review its contents using the [package checklist](#review-download-and-upload-the-skill).
+1. Download the generated **Skill ZIP** from Preview, unzip it, and review its contents using the [project-intake package checklist](#project-intake-skill-package-checklist).
 
 1. In the **same agent**, go to **Build > Skills > + > Upload a skill**. Upload the generated ZIP and wait for it to save. Add only the intake Skill.
 
@@ -642,7 +638,7 @@ You help users capture and confirm project intake details. Use relevant Skills w
 Never invent missing details or imply that a project has been approved, funded, or scheduled. Do not send messages or make changes to external systems. Answer general project-management questions without starting intake unless the user requests it.
 ```
 
-#### Test Example A in Copilot Studio Preview
+#### Test the intake Skill in Copilot Studio Preview
 
 In the **same agent**, open **Preview** and start a **new conversation**. No attachments are needed. Use the prompts below without naming the Skill, and check the reasoning trace to confirm that the Skill loads.
 
@@ -706,11 +702,75 @@ Yes, that summary is accurate.
 
 **Check:** only the audience changes; the goal, FAQ outcome, and unknown date remain. It should request confirmation without restarting or claiming approval.
 
-After both tests, go to the [refinement loop](#bring-findings-back-to-the-authoring-chat-and-repeat). If a test failed, keep its prompt and output for troubleshooting. **You can skip Example B**; it is an alternative, not the next required step.
+After both tests, use the refinement steps below if needed. If a test failed, keep its prompt and output for troubleshooting.
 
-### Example B: Supplier proposal comparison
+### Refine the intake Skill in Copilot Studio
+
+**If both tests pass, you are done.** Record the result and continue to the conclusions. If a test fails, revise the Skill and test it again.
+
+There is **no automatic synchronization** between the authoring chat and the uploaded Skill. Every revision needs a new ZIP and a manual replacement in Copilot Studio. Never share credentials or real customer data. A [Harness Explorer report](#-extra-credit-explore-the-agent-harness) can provide extra context, but is optional.
+
+1. Create a separate blank agent with **Instructions empty** and a reasoning model. In its **Preview**, attach the intake process and latest Skill ZIP. Keep **Project Process Assistant** unchanged as your test agent.
+
+1. Fill in the placeholders below with what actually happened, then send the completed block in the blank agent's **Preview**, not the intake test conversation:
+
+   ```text
+   Revise the Skill, not the test input or expected result.
+   Test prompt: [paste]
+   Expected behavior: [paste]
+   Actual output or exact error: [paste]
+   Skill loaded in the reasoning trace: [yes/no/not visible]
+   Fix the procedure or activation description responsible for the mismatch.
+   Keep the existing guardrails and provide a new downloadable ZIP.
+   ```
+
+1. Download the revised package. In **Project Process Assistant > Build > Skills**, open the uploaded Skill's menu and select **Replace**, then upload the new ZIP. See [Replace a skill you uploaded](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/skills-manage#replace-a-skill-you-uploaded). Start new Preview conversations and rerun both intake tests to check for regressions.
+
+1. If both tests pass, record the result; do not invent a failure to force another loop. Extra revisions and an out-of-scope prompt to check that the Skill does not activate unnecessarily are optional follow-on work.
+
+> [!TIP]
+> **Keep the 15-minute timebox:** aim for one package, one upload, and two short tests. If generation or a repair runs long, record the next change and continue after the session. An authoring self-check is not a substitute for testing the uploaded Skill.
+
+### 🏅 Congratulations! You've completed Use Case #3!
+
+You created a project-intake Skill in Copilot Studio Preview, uploaded it, and checked it in two conversations. Continue to the [conclusions and recommendations](#-conclusions-and-recommendations). Use Cases #2 and #4 are alternatives, not additional required exercises.
+
+---
+
+## 🧱 Use Case #4: Create and test a Skill with Cowork
+
+**Timebox: 15 minutes.**
+
+**Your goal:** use **Cowork** to turn a supplier-comparison process into a reusable Skill, then upload it to Copilot Studio and test its evidence-backed PDF reports.
+
+Choose this instead of Use Case #2 or #3, after completing Use Case #1. You need Cowork access with file upload and download, plus sandbox PDF generation in the Copilot Studio test agent. No connectors or external data are needed.
 
 You will create a Skill in **Cowork**, then upload and test it in a **new Copilot Studio agent**. Keep both apps open.
+
+Generating a ZIP does **not** install the Skill. Create the package in Cowork, upload it under **Build > Skills**, add the supplied base instructions under **Build > Instructions**, then run both tests in fresh **Copilot Studio Preview** conversations. Publishing is not required.
+
+### Get the supplier-comparison source materials
+
+1. Download and extract the [Skill-generation materials](assets/skill-generation/skill-generation-materials-v3.zip) if you have not already done so.
+
+    > [!WARNING]
+    > Do not extract the ZIP inside a **OneDrive for Business** folder. Your organization may automatically encrypt files saved there, and the agent will then be unable to read them. Extract the files to a location outside OneDrive.
+
+1. Use the four Word documents listed in the Cowork steps below. Attach the individual documents, not the materials ZIP. The project-intake document is for Use Case #3.
+
+These are fictional source documents, not a ready-to-upload Skill. Use the supplied examples rather than real customer data.
+
+### Supplier-comparison Skill package checklist
+
+**Reference checklist:** use this after Cowork generates a Skill ZIP.
+
+1. **Review the procedure.** Compare the generated Skill with the source process. Check the buyer requirements, cost rules, evidence, and PDF steps. Conditional commitments must stay conditional; the Skill must not invent scores.
+
+1. **Check the package.** Download the generated **Skill ZIP**, not the materials ZIP. It must contain `SKILL.md` at the root, YAML `name` and `description` fields, and all files referenced by the instructions. A prose response is not a completed package.
+
+1. **Handle errors before continuing.** If file generation fails, capture the error and ask your facilitator. If uploading fails, return the exact validation error and package structure to the same Cowork task for repair.
+
+### Supplier proposal comparison
 
 **The scenario:** Harbor & Pine needs six checkout kits across three pop-up shops, on-site setup, and staffed launch support for **22–23 May 2027**. Handover is due **20 May**, with a budget of **USD 22,000 before tax**.
 
@@ -760,9 +820,9 @@ The Skill must compare the full cost of meeting those requirements, not just the
 
 #### Upload the Skill, then configure the comparison agent
 
-1. Answer any clarifying questions in the **same Cowork task**. Download the generated **Skill ZIP** and check it using the [package checklist](#review-download-and-upload-the-skill). A completed comparison or prose description alone is not the reusable package.
+1. Answer any clarifying questions in the **same Cowork task**. Download the generated **Skill ZIP** and check it using the [supplier-comparison package checklist](#supplier-comparison-skill-package-checklist). A completed comparison or prose description alone is not the reusable package.
 
-1. In [Copilot Studio](https://copilotstudio.microsoft.com/), create a new agent using the **GitHub Copilot harness**. Name it **Supplier Comparison Assistant**. Do not reuse your RFP agent or Example A's agent.
+1. In [Copilot Studio](https://copilotstudio.microsoft.com/), create a new agent using the **GitHub Copilot harness**. Name it **Supplier Comparison Assistant**. Do not reuse your RFP agent or the project-intake agent from Use Case #3.
 
 1. Leave **Build > Instructions empty** until the Skill is uploaded. Clear any generated instructions.
 
@@ -778,7 +838,7 @@ You help users compare supplier proposals against documented buying requirements
 Use the sandbox for document analysis, cost calculations, and downloadable PDF reports when the Skill requires them. Never invent prices or commitments, turn assumptions into evidence, or imply that a purchase or budget exception is approved. Report missing inputs and tool failures explicitly; never fabricate a download. Do not contact suppliers, send messages, or place orders.
 ```
 
-#### Test Example B in Copilot Studio Preview
+#### Test the comparison Skill in Copilot Studio Preview
 
 Open **Preview** in your **Supplier Comparison Assistant**, not Cowork. For each test:
 
@@ -819,19 +879,17 @@ Open both PDFs: verify the arithmetic, evidence citations, readable five-row mat
 
 If either test fails, bring the output or exact PDF-generation error to Cowork using the loop below. These are expected outcomes to check, not guaranteed model responses.
 
-### Bring findings back to the authoring chat and repeat
+### Refine the comparison Skill in Cowork
 
 **If both tests pass, you are done.** Record the result and continue to the conclusions. If a test fails, use the steps below to revise the Skill and test it again.
 
-**Example B's Cowork handoffs are illustrated below. Example A uses Copilot Studio Preview as its authoring chat instead.**
+**The Cowork authoring and Copilot Studio testing handoffs are illustrated below.**
 
 ![Manual build-test-refine loop: provide context to Cowork, draft or revise, download the package, upload to Copilot Studio, test, and return findings to Cowork](images/uc3-manual-build-test-refine-loop.png)
 
 There is **no automatic synchronization** between the authoring chat and the uploaded Skill. Every revision needs a new ZIP and a manual replacement in Copilot Studio. Never share credentials or real customer data. A [Harness Explorer report](#-extra-credit-explore-the-agent-harness) can provide extra context, but is optional.
 
-1. Open the right authoring chat:
-   - **A:** create a separate blank agent with **Instructions empty** and a reasoning model. In its **Preview**, attach the intake process and latest Skill ZIP. Keep **Project Process Assistant** unchanged as your test agent.
-   - **B:** return to the same **Cowork task**.
+1. Return to the same **Cowork task** that generated the comparison Skill.
 
 1. Attach any relevant test input files. Fill in the placeholders below with what actually happened, then send the completed block in the **authoring chat**, not the test conversation:
 
@@ -852,9 +910,9 @@ There is **no automatic synchronization** between the authoring chat and the upl
 > [!TIP]
 > **Keep the 15-minute timebox:** aim for one package, one upload, and two short tests. If generation or a repair runs long, record the next change and continue after the session. An authoring self-check is not a substitute for testing the uploaded Skill.
 
-### 🏅 Congratulations! You've completed Use Case #3!
+### 🏅 Congratulations! You've completed Use Case #4!
 
-You turned one process into a Skill, uploaded it to an agent, and compared its behavior with two expected outcomes. Continue to the [conclusions and recommendations](#-conclusions-and-recommendations); you do not need to complete the workflow adventure as well.
+You created a supplier-comparison Skill in Cowork, uploaded it to Copilot Studio, and checked its PDF reports against two expected outcomes. Continue to the [conclusions and recommendations](#-conclusions-and-recommendations). Use Cases #2 and #3 are alternatives, not additional required exercises.
 
 ---
 
@@ -912,7 +970,7 @@ You turned one process into a Skill, uploaded it to an agent, and compared its b
 
 ## 🧪 Extra Credit: Generate with AI (preview)
 
-Copilot Studio also offers an in-product Skill authoring preview. **Generate with AI might not be available yet in your environment.** If you do not see the option, continue with Example A or B above; it is not a prerequisite for this lab. This optional **Skills** menu is separate from Example A's free-form **Preview** chat that generates a ZIP for you to upload.
+Copilot Studio also offers an in-product Skill authoring preview. **Generate with AI might not be available yet in your environment.** If you do not see the option, continue with Use Case #3 or #4 above; it is not a prerequisite for this lab. This optional **Skills** menu is separate from Use Case #3's free-form **Preview** chat that generates a ZIP for you to upload.
 
 ![Generate with AI (preview) showing the text description box and Build button](images/uc3-generate-with-ai-preview.png)
 
@@ -922,7 +980,7 @@ Copilot Studio also offers an in-product Skill authoring preview. **Generate wit
 To try it when available:
 
 1. Use a separate test agent and open **Skills > Add skill > Generate with AI (preview)**.
-1. Paste your chosen authoring prompt, then copy the process text from its Word document into the same box. Remove the instructions about attachments and downloadable ZIP packaging. For Example B, also paste the relevant transcript excerpts as supporting context, clearly labeled separately from the authoritative process. Do not paste the supplier test proposals.
+1. Paste your chosen authoring prompt, then copy the process text from its Word document into the same box. Remove the instructions about attachments and downloadable ZIP packaging. For the supplier-comparison process from Use Case #4, also paste the relevant transcript excerpts as supporting context, clearly labeled separately from the authoritative process. Do not paste the supplier test proposals.
 1. Select **Build**, answer the agent builder's questions, review the generated Skill, and select **Add to agent**.
 1. Run the same two tests in the agent's Preview chat. Generating a Skill does not validate its behavior.
 
