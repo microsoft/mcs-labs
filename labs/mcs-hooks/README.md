@@ -104,20 +104,19 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 
 ## ✅ Prerequisites
 
-- Access to Microsoft Copilot Studio **preview** at [copilotstudio.preview.microsoft.com](https://copilotstudio.preview.microsoft.com/) — hooks are in public preview and only available there. Confirm **Hooks** appears in the agent's **…** menu before you start.
+- Access to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com/). Hooks are in public preview and still rolling out to environments, so confirm **Hooks** appears in the agent's **…** menu before you start — see below.
 - The **New experience** toggle on, so that **New agent** creates an agent on the **GitHub Copilot harness**.
-- A Power Platform environment where you can create agents and **Workflows** — your facilitator supplies a training environment.
+- A Power Platform environment where you can create agents and **Workflows** and where hooks are available — your regular **DEV - User XXXXXXXX** environment, or the **PREVIEW - User XXXXXXXX** environment your facilitator supplies (see below).
 - Read access to the SharePoint site your facilitator identifies, with a **Travel Policies** folder whose documents carry a **Location** column (`France`, `Europe`, `USA`, `Global`…).
 - Signed in with your work account, with an **Office 365 Users** connection for that account — the session-start workflow uses **Get my profile** to retrieve its **Office Location**.
 
 > [!IMPORTANT]
-> **Use the `.preview` URL, or you won't see Hooks.** On `https://copilotstudio.microsoft.com/environments/<environment-id>` the **Hooks** option is missing from the agent's **…** menu. Add `.preview` after `copilotstudio` in the address bar:
+> **Pick an environment where Hooks is available.** Open the regular [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com/) address and choose the environment with the **environment picker** in the top right:
 >
-> | ❌ No Hooks | ✅ Hooks |
-> |------------|---------|
-> | `https://copilotstudio.microsoft.com/environments/<environment-id>` | `https://copilotstudio.preview.microsoft.com/environments/<environment-id>` |
+> - **DEV - User XXXXXXXX** — your regular environment. Hooks are rolling out to regular environments, so check this one first: open any agent built on the GitHub Copilot harness (for example, one from an earlier lab) and select the three dots (**…**) next to **Monitor**. If **Hooks** is listed, do the whole lab here.
+> - **PREVIEW - User XXXXXXXX** — provisioned by your facilitator, with hooks already available. Switch to it if **Hooks** isn't listed in your DEV environment yet.
 >
-> Keep the rest of the URL the same — environment ID, agent ID and page. If you open an agent from a link, a bookmark or Power Apps, check the address bar before you look for **Hooks**.
+> XXXXXXXX is your user ID. Agents and workflows don't move between environments, so build every part of this lab in the same one.
 
 > [!NOTE]
 > Hooks are a preview feature and the designer is still changing. If a label in this lab differs slightly from what you see, look for the closest match — the event names, input names and output names are the stable part.
@@ -172,7 +171,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 
 #### Create a new agent
 
-1. Open [Copilot Studio Preview](https://copilotstudio.preview.microsoft.com/) and select the training environment supplied by your facilitator.
+1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and, in the **environment picker** in the top right, select the environment you chose in [Prerequisites](#-prerequisites): **DEV - User XXXXXXXX** if it already shows **Hooks**, otherwise **PREVIEW - User XXXXXXXX**.
 
 1. Confirm **New experience** is enabled. Select **Agents** in the left navigation, then **New agent**. Use the default **GitHub Copilot harness** creation path, not **Build using standard orchestration** — hooks only exist on the GitHub Copilot harness.
 
@@ -234,7 +233,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 1. On the top menu bar, next to **Monitor**, select the three dots (**…**) → **Hooks** → **Create**.
 
     > [!IMPORTANT]
-    > No **Hooks** in the menu? Check the address bar. Hooks only appear on `https://copilotstudio.preview.microsoft.com/...`, not on `https://copilotstudio.microsoft.com/...`. Add `.preview` and reload — see [Prerequisites](#-prerequisites).
+    > No **Hooks** in the menu? Hooks haven't reached this environment yet. Switch to your **PREVIEW - User XXXXXXXX** environment in the **environment picker** and repeat **Create a new agent** there — the agent doesn't carry over between environments. See [Prerequisites](#-prerequisites).
 
 1. Set **Event type** to **Start (pre-loop)** and **Name** to:
 
