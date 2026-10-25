@@ -110,6 +110,9 @@ In the final use case you build a second agent in a completely different industr
 
 ## ✅ Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 - Access to Microsoft Copilot Studio
 - A Power Platform environment where you can create agents and add tools
 - The four lab MCP servers imported into your environment: **Asset Telemetry MCP**, **Work Orders MCP**, **Policy Lookup MCP**, **Claims History MCP**

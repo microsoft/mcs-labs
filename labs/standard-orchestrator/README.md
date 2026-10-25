@@ -102,6 +102,9 @@ Microsoft Copilot Studio simplifies the creation of intelligent bots by providin
 
 ## ✅ Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 * A computer with internet access
 * Access to a Microsoft tenant with Copilot Studio (trial or licensed)
 * Generative AI setting must be set to "[Classic](https://learn.microsoft.com/microsoft-copilot-studio/advanced-generative-actions#turn-off-generative-orchestration-for-an-agent)"

@@ -85,6 +85,9 @@ This lab teaches you how to architect sophisticated agent solutions that scale w
 
 ## ✅ Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 * Completed [Build Intelligent Agents with Knowledge Sources, Tools, and Topics](../core-concepts-agent-knowledge-tools/README.md) lab - specifically the mailing list topic from Use Case #4, which is the foundation for the variables exercise
 * Access to Microsoft Copilot Studio with tool and channel configuration permissions
 * Access to Microsoft Teams (for Teams channel testing)

@@ -58,6 +58,9 @@ Microsoft 365 Copilot also provides access to frontier agents: **Researcher** pe
 
 ## Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 - A Microsoft 365 account with a Microsoft 365 Copilot licence
 - Access to Microsoft 365 Copilot with the Researcher and Analyst agents enabled
 - Use Case #2 resources:

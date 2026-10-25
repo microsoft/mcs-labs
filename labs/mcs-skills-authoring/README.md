@@ -100,6 +100,9 @@ These resources cover agents and workflows powered by the **GitHub Copilot harne
 
 ## ✅ Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 - **Everyone:** access to Microsoft Copilot Studio with the GitHub Copilot harness, permission to create agents and use Skills, sandbox code execution with an available charting library, and a workshop account that can connect to Work IQ
 - The sample Skill package and test RFPs from [AgentDudeSamples](https://github.com/Dewain27/AgentDudeSamples/tree/main/samples/RFP%20Skill)
 - **Use Case #2 only:** permission to publish agents and workflows, an Outlook mailbox, and access to Office 365 Outlook and Dataverse connections

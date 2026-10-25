@@ -121,6 +121,9 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 
 ## Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 - Access to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com/).
 - The **New experience** toggle on, so that **New agent** creates an agent on the **GitHub Copilot harness**.
 - The **PREVIEW - User XXXXXXXX** environment provisioned for you, where you can create agents and **Workflows**.
@@ -298,6 +301,9 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
     You are back on **Add hook**, with **Load traveler profile** selected in **Workflow**. Select **Done**, then click **X** to close the **Hooks** section. Select **Save** at the top-right to save the agent.
 
     ![Add hook dialog with the Load traveler profile workflow selected](images/uc1-add-hook.png)
+
+    > [!IMPORTANT]
+    > Always select **Publish** at the top-right after adding a new workflow to your agent. Otherwise, the agent will encounter an error when the workflow runs.
 
 #### Test it
 

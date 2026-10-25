@@ -83,6 +83,9 @@ This lab takes you through the complete journey from agent creation to a fully c
 
 ## ✅ Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 * Access to Microsoft Copilot Studio (trial or licensed environment)
 * A document to upload as a knowledge source (PDF, Word, or text file) - or use the [Copilot Studio Licensing Guide (June 2026)](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/bizapps/Microsoft-Copilot-Studio-Licensing-Guide-June-2026-PUB.pdf)
 * Basic familiarity with web browsers and form filling

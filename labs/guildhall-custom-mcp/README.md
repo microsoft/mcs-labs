@@ -64,6 +64,9 @@ Imagine an agent that can:
 
 ## ✅ Prerequisites (Your Adventuring Gear)
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 Before embarking on this quest, ensure you have:
 
 - **Node.js** installed (v18 or higher)
