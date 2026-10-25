@@ -92,6 +92,9 @@ In this lab, you’ll learn how to build an agent using Microsoft Copilot Studio
 
 ## Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 - Access to Microsoft Copilot Studio with appropriate licensing
 - A Microsoft Power Platform environment with at least an Environment Maker security role
 - Access to SharePoint Online with a sample policy document

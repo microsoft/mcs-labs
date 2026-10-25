@@ -93,6 +93,9 @@ After implementing an agent, the director simply prompts the system to scan the 
 
 ## Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 * Access to Microsoft Copilot Studio with appropriate licensing
 * Microsoft 365 environment with SharePoint access
 

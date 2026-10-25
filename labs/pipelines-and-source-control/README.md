@@ -88,6 +88,9 @@ With Power Platform pipelines, this becomes an automated, governed process with 
 
 ## ✅ Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 * Completion of the [Set yourself up for success](https://github.com/microsoft/mcs-labs/tree/main/labs/setup-for-success) lab with a solution containing environment variables and connection references.
 * Access to multiple Power Platform environments (DEV, PROD). These are provided in the lab setup.
 * Azure DevOps project with Git integration already established.

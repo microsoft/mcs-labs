@@ -90,6 +90,9 @@ You will add each in turn to a single agent, testing after every step so the con
 
 ## Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 - Access to Microsoft Copilot Studio with permission to create agents
 - A Copilot Studio environment you can build in
 - No prior Copilot Studio experience required

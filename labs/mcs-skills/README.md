@@ -83,6 +83,9 @@ This lab uses exactly that scenario. You build an RFP Response agent with a Skil
 
 ## ✅ Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 - Access to Microsoft Copilot Studio with an environment you can create agents in
 - A Microsoft 365 account with Outlook, used both to trigger the workflow and to receive its output
 - Access to Microsoft 365 Copilot with Cowork available in the left navigation

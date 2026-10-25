@@ -108,6 +108,9 @@ This lab focuses on using industry-specific and task-based AI models for targete
 
 ## Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 - Access to **Microsoft Copilot Studio**, with permissions to create, edit, and publish agents and agent flows.
 - A **Contoso Agent** created in Lab 2 (or an equivalent Copilot Studio agent).
 - **Connection details** provided for pre-deployed models in Azure AI Foundry, including endpoint URLs, access keys, and model names.

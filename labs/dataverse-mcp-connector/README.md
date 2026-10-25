@@ -76,6 +76,9 @@ By giving you hands-on experience on how the Dataverse MCP Server integrates wit
 
 ## ✅ Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 - Access to Microsoft Copilot Studio, with permissions to create, edit, and publish agents and agent flows.
 - Power Platform environment enabled for Copilot Studio.
 - Basic familiarity with Copilot Studio concepts such as agent setup, knowledge sources, and flows.

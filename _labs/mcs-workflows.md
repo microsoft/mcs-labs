@@ -102,6 +102,9 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 
 ## Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 - Access to Microsoft Copilot Studio with appropriate licensing, in an environment where **Workflows** are enabled.
 - A work or school **Microsoft 365 account** with **Outlook (calendar)** and **Microsoft To Do** provisioned — the inline agent reads and writes *this* account's calendar and tasks.
 - A **Power Platform environment** where you can edit Dataverse table data and toggle environment settings (System Administrator or System Customizer).

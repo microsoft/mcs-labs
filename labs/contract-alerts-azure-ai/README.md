@@ -123,6 +123,9 @@ Imagine a **sales operations team** that handles dozens of new contracts and cli
 
 ## ✅ Prerequisites
 
+> [!NOTE]
+> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+
 - **Access to Microsoft Copilot Studio**, with permissions to create, edit, and publish agents and agent flows.
 - Contoso Agent created in **Lab 1** (or equivalent Copilot Studio agent).
 - **Microsoft Teams account** to test Copilot notifications and interactions.
