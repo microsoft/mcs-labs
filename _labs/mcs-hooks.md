@@ -16,6 +16,9 @@ description: "Build a Travel Policy Agent and use hooks to load the traveler's p
 
 Build a **Travel Policy Agent** on the GitHub Copilot harness and use hooks to make it behave the same way in every conversation: load the traveler's profile when a session starts, redact personal data from every prompt, and ground answers in SharePoint travel policies filtered by their `Location` metadata. As an extra, block flight bookings with unapproved airlines before the tool runs.
 
+> [!IMPORTANT]
+> **Build this lab in your PREVIEW - User XXXXXXXX environment.** Hooks aren't available in your regular **DEV - User XXXXXXXX** environment yet, so a separate preview environment has been provisioned for you. Open [Copilot Studio](https://copilotstudio.microsoft.com/) as usual and switch to it with the environment picker in the bottom left before you create the agent.
+
 ---
 
 ## Lab Details
@@ -118,20 +121,11 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 
 ## Prerequisites
 
-- Access to Microsoft Copilot Studio **preview** at [copilotstudio.preview.microsoft.com](https://copilotstudio.preview.microsoft.com/) — hooks are in public preview and only available there. Confirm **Hooks** appears in the agent's **…** menu before you start.
+- Access to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com/).
 - The **New experience** toggle on, so that **New agent** creates an agent on the **GitHub Copilot harness**.
-- A Power Platform environment where you can create agents and **Workflows** — your facilitator supplies a training environment.
+- The **PREVIEW - User XXXXXXXX** environment provisioned for you, where you can create agents and **Workflows**.
 - Read access to the SharePoint site your facilitator identifies, with a **Travel Policies** folder whose documents carry a **Location** column (`France`, `Europe`, `USA`, `Global`…).
 - Signed in with your work account, with an **Office 365 Users** connection for that account — the session-start workflow uses **Get my profile** to retrieve its **Office Location**.
-
-> [!IMPORTANT]
-> **Use the `.preview` URL, or you won't see Hooks.** On `https://copilotstudio.microsoft.com/environments/<environment-id>` the **Hooks** option is missing from the agent's **…** menu. Add `.preview` after `copilotstudio` in the address bar:
->
-> | ❌ No Hooks | ✅ Hooks |
-> |------------|---------|
-> | `https://copilotstudio.microsoft.com/environments/<environment-id>` | `https://copilotstudio.preview.microsoft.com/environments/<environment-id>` |
->
-> Keep the rest of the URL the same — environment ID, agent ID and page. If you open an agent from a link, a bookmark or Power Apps, check the address bar before you look for **Hooks**.
 
 > [!NOTE]
 > Hooks are a preview feature and the designer is still changing. If a label in this lab differs slightly from what you see, look for the closest match — the event names, input names and output names are the stable part.
@@ -186,7 +180,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 
 #### Create a new agent
 
-1. Open [Copilot Studio Preview](https://copilotstudio.preview.microsoft.com/) and select the training environment supplied by your facilitator.
+1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and, in the environment picker in the bottom left, switch to **PREVIEW - User XXXXXXXX**.
 
 1. Confirm **New experience** is enabled. Select **Agents** in the left navigation, then **New agent**. Use the default **GitHub Copilot harness** creation path, not **Build using standard orchestration** — hooks only exist on the GitHub Copilot harness.
 
@@ -246,9 +240,6 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 #### Create the hook and its workflow
 
 1. On the top menu bar, next to **Monitor**, select the three dots (**…**) → **Hooks** → **Create**.
-
-    > [!IMPORTANT]
-    > No **Hooks** in the menu? Check the address bar. Hooks only appear on `https://copilotstudio.preview.microsoft.com/...`, not on `https://copilotstudio.microsoft.com/...`. Add `.preview` and reload — see [Prerequisites](#prerequisites).
 
 1. Set **Event type** to **Start (pre-loop)** and **Name** to:
 
