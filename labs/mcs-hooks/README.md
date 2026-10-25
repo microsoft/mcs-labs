@@ -599,6 +599,9 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
 
     ![Redact personal data workflow: Classify branches, Redact PII, Return original prompt and Return redacted prompt](images/uc2-redaction-workflow.png)
 
+    > [!IMPORTANT]
+    > Always select **Publish** at the top-right after adding a new workflow to your agent. Otherwise, the agent will encounter an error when the workflow runs.
+
 #### Test it
 
 1. Select **New chat** in the test pane and send the clean prompt:

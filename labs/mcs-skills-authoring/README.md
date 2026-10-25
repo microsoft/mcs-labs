@@ -9,7 +9,7 @@ Start with a Skill-equipped agent, then choose your adventure: call it from a wo
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 30 minutes | Attach, inspect, and test a Skill in a Copilot Studio agent, then choose either workflow integration or generating a new Skill from a business process. |
+| 300 | Maker | 60 minutes | Attach, inspect, and test a Skill in a Copilot Studio agent, then choose either workflow integration or generating a new Skill from a business process. |
 
 ---
 
@@ -45,7 +45,7 @@ Think of a Skill as a playbook the orchestrator picks up only when it is relevan
 - "We rebuilt the same process for the chat agent and the automation"
 - "The agent sounds confident about things the company cannot actually commit to"
 
-**In 30 minutes, everyone builds and tests one Skill-equipped agent. Then choose one adventure: reuse it in a workflow, create a guided-intake Skill in Copilot Studio, or create a supplier-comparison Skill in Cowork. You do not need to complete all three.**
+**In 60 minutes, everyone builds and tests one Skill-equipped agent. Then choose one adventure: reuse it in a workflow, create a guided-intake Skill in Copilot Studio, or create a supplier-comparison Skill in Cowork. You do not need to complete all three.**
 
 ---
 
@@ -131,12 +131,16 @@ Everyone completes the shared foundation, then one extension. By the end of the 
 
 **Complete Use Case #1 first. Then choose ONE: Use Case #2, #3, OR #4.** You do not need to complete all three extensions.
 
+**Suggested 60-minute session:** 5 minutes for orientation and route selection, 20 minutes for Use Case #1, up to 30 minutes for your chosen extension, and 5 minutes for review and conclusions. Use Case #3 takes 25 minutes, leaving 5 minutes of the extension slot for troubleshooting.
+
+These are planning timeboxes for a prepared tenant, not measured execution guarantees. Complete tenant prerequisites before the session if you are not using a CAT-managed tenant. Allow extra time for connection prompts, model runs, or repairs. Extra-credit exercises are outside the 60-minute duration.
+
 | Route | Use Case | Value added | Timebox |
 |-------|----------|-------------|---------|
-| Everyone | [Use Case #1: Leveraging Skills in Copilot Studio agents](#-use-case-1-leveraging-skills-in-copilot-studio-agents) | Upload, inspect, and test an existing Skill, then chart source data in the sandbox | 15 min |
-| Choose Use Case #2 | [Use Case #2: Using skills in Copilot Studio workflows](#-use-case-2-using-skills-in-copilot-studio-workflows) | Publish the agent, call it from a workflow, and create an email draft | 15 min |
-| OR choose Use Case #3 | [Use Case #3: Create and test a Skill with Copilot Studio](#-use-case-3-create-and-test-a-skill-with-copilot-studio) | Create a guided project-intake Skill in Copilot Studio Preview, then upload and test it | 15 min |
-| OR choose Use Case #4 | [Use Case #4: Create and test a Skill with Cowork](#-use-case-4-create-and-test-a-skill-with-cowork) | Create a supplier-comparison Skill in Cowork, then upload and test it in Copilot Studio | 15 min |
+| Everyone | [Use Case #1: Leveraging Skills in Copilot Studio agents](#-use-case-1-leveraging-skills-in-copilot-studio-agents) | Upload, inspect, and test an existing Skill, then chart source data in the sandbox | 20 min |
+| Choose Use Case #2 | [Use Case #2: Using skills in Copilot Studio workflows](#-use-case-2-using-skills-in-copilot-studio-workflows) | Publish the agent, call it from a workflow, and create an email draft | 30 min |
+| OR choose Use Case #3 | [Use Case #3: Create and test a Skill with Copilot Studio](#-use-case-3-create-and-test-a-skill-with-copilot-studio) | Create a guided project-intake Skill in Copilot Studio Preview, then upload and test it | 25 min |
+| OR choose Use Case #4 | [Use Case #4: Create and test a Skill with Cowork](#-use-case-4-create-and-test-a-skill-with-cowork) | Create a supplier-comparison Skill in Cowork, then upload and test it in Copilot Studio | 30 min |
 
 ---
 
@@ -146,7 +150,7 @@ Everyone completes the shared foundation, then one extension. By the end of the 
 
 ## 🧱 Use Case #1: Leveraging Skills in Copilot Studio agents
 
-**Everyone starts here. Timebox: 15 minutes.** You do not need to publish the agent unless you choose the workflow adventure next.
+**Everyone starts here. Timebox: 20 minutes.** You do not need to publish the agent unless you choose the workflow adventure next.
 
 ### Step-by-step instructions
 
@@ -361,13 +365,13 @@ Everyone completes the shared foundation, then one extension. By the end of the 
 
 ### 🏅 Congratulations! You've completed Use Case #1!
 
-Choose one next step: [workflow integration in Use Case #2](#-use-case-2-using-skills-in-copilot-studio-workflows), [Copilot Studio Skill authoring in Use Case #3](#-use-case-3-create-and-test-a-skill-with-copilot-studio), **or** [Cowork Skill authoring in Use Case #4](#-use-case-4-create-and-test-a-skill-with-cowork). Complete only one extension during the 30-minute session.
+Choose one next step: [workflow integration in Use Case #2](#-use-case-2-using-skills-in-copilot-studio-workflows), [Copilot Studio Skill authoring in Use Case #3](#-use-case-3-create-and-test-a-skill-with-copilot-studio), **or** [Cowork Skill authoring in Use Case #4](#-use-case-4-create-and-test-a-skill-with-cowork). Complete only one extension during the 60-minute session.
 
 ---
 
 ## 🧱 Use Case #2: Using skills in Copilot Studio workflows
 
-**Use Case #2: Workflow integration. Timebox: 15 minutes.** Choose this instead of Use Case #3 or #4, after completing Use Case #1. Continue with your RFP Response Agent.
+**Use Case #2: Workflow integration. Timebox: 30 minutes.** Choose this instead of Use Case #3 or #4, after completing Use Case #1. Continue with your RFP Response Agent.
 
 ### Step-by-step instructions
 
@@ -545,7 +549,7 @@ Continue to the [conclusions and recommendations](#-conclusions-and-recommendati
 
 ## 🧱 Use Case #3: Create and test a Skill with Copilot Studio
 
-**Timebox: 15 minutes.**
+**Timebox: 25 minutes.**
 
 **Your goal:** use **Copilot Studio Preview** to turn a project-intake process into a reusable Skill that asks for missing details and summarizes them for confirmation.
 
@@ -729,7 +733,7 @@ There is **no automatic synchronization** between the authoring chat and the upl
 1. If both tests pass, record the result; do not invent a failure to force another loop. Extra revisions and an out-of-scope prompt to check that the Skill does not activate unnecessarily are optional follow-on work.
 
 > [!TIP]
-> **Keep the 15-minute timebox:** aim for one package, one upload, and two short tests. If generation or a repair runs long, record the next change and continue after the session. An authoring self-check is not a substitute for testing the uploaded Skill.
+> **Keep the 25-minute timebox:** aim for one package, one upload, and two short tests. Use the session's 5-minute troubleshooting buffer if needed. If generation or a repair runs longer, record the next change and continue after the session. An authoring self-check is not a substitute for testing the uploaded Skill.
 
 ### 🏅 Congratulations! You've completed Use Case #3!
 
@@ -739,7 +743,7 @@ You created a project-intake Skill in Copilot Studio Preview, uploaded it, and c
 
 ## 🧱 Use Case #4: Create and test a Skill with Cowork
 
-**Timebox: 15 minutes.**
+**Timebox: 30 minutes.**
 
 **Your goal:** use **Cowork** to turn a supplier-comparison process into a reusable Skill, then upload it to Copilot Studio and test its evidence-backed PDF reports.
 
@@ -908,7 +912,7 @@ There is **no automatic synchronization** between the authoring chat and the upl
 1. If both tests pass, record the result; do not invent a failure to force another loop. Extra revisions and an out-of-scope prompt to check that the Skill does not activate unnecessarily are optional follow-on work.
 
 > [!TIP]
-> **Keep the 15-minute timebox:** aim for one package, one upload, and two short tests. If generation or a repair runs long, record the next change and continue after the session. An authoring self-check is not a substitute for testing the uploaded Skill.
+> **Keep the 30-minute timebox:** aim for one package, one upload, and two PDF tests, including opening and checking both reports. If generation or a repair runs long, record the next change and continue after the session. An authoring self-check is not a substitute for testing the uploaded Skill.
 
 ### 🏅 Congratulations! You've completed Use Case #4!
 
