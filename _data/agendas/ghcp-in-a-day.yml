@@ -21,19 +21,24 @@ schedule:
     time: "09:45"
     duration: 15
 
+  - type: break
+    title: "Coffee break"
+    time: "10:00"
+    duration: 15
+
   - type: module
     slug: ghcp-in-a-day-cowork
     label: "Module 2"
     title: "Cowork (+ skills, + plugins)"
     slides: "/presentations/ghcp-in-a-day/Module%202%20-%20Cowork%20-%20skills%20%26%20plugins.pptx"
-    time: "10:00"
+    time: "10:15"
     duration: 15
 
   - type: lab
     slug: cowork-plugins-hands-on
     label: "Lab 1"
     title: "Cowork + Plugins Hands-On Lab"
-    time: "10:15"
+    time: "10:30"
     duration: 30
 
   - type: module
@@ -41,15 +46,18 @@ schedule:
     label: "Module 3"
     title: "GitHub Copilot UI, Orchestration and Harnesses"
     slides: "/presentations/ghcp-in-a-day/Module%203%20-%20GHCP%20UI%2C%20Orchestration%2C%20Harnesses.pptx"
-    time: "10:45"
+    time: "11:00"
     duration: 15
+    # Don't auto-attach the companion lab here: its default duration (60) would override
+    # the 45-minute slot set on the explicit Lab 2 row below in the hero stats.
+    lab: false
 
   - type: lab
     slug: mcs-github-harness
     label: "Lab 2"
     title: "GitHub Copilot Harness - Component Model"
-    time: "11:00"
-    duration: 60
+    time: "11:15"
+    duration: 45
 
   - type: break
     title: "Lunch break"

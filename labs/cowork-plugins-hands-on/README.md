@@ -33,7 +33,7 @@ Copilot Cowork takes a delegated task and works it agentically: reading source m
 
 ## ✅ Prerequisites
 
-- A Microsoft 365 account with a Microsoft 365 Copilot licence
+- A Microsoft 365 account with a Microsoft Copilot licence
 - Access to Copilot Cowork
 - Outlook available to the same account, so the drafted email can be verified
 - A colleague named Dewain Robinson who resolves in the tenant directory, or a facilitator-provided recipient substituted consistently in Use Cases #1 and #2
@@ -84,14 +84,14 @@ Use the Cowork agent to read the [Contoso Grand Hotel Performance Report](https:
 
 #### Open the Cowork agent
 
-1. Open Microsoft 365 Copilot (`https://m365.cloud.microsoft/chat/?auth=2&home=1`) and select **Cowork** on the **Chat / Cowork** toggle at the top of the Copilot panel.
+1. Open Microsoft Copilot ([copilot.cloud.microsoft/chat](https://copilot.cloud.microsoft/chat?auth=2)) and select **Cowork** on the **Chat / Cowork** toggle at the top of the Copilot panel.
 
-   ![The Cowork surface in Microsoft 365 Copilot](images/cowork-landing.png)
+   ![The Cowork surface in Microsoft Copilot](images/cowork-landing.png)
 
    Take a moment to orient before you type anything. The message input reads **Start a task…**, not "ask me anything" — and that wording is the distinction this whole lab is about: you are handing over an outcome, not opening a conversation. In the left rail, **My tasks** is where delegated work appears while it runs, **Automations** is for work you want to recur, and below those Cowork lists your previous sessions.
 
    > [!TIP]
-   > Cowork is generally available in Microsoft 365 Copilot and is purpose-built for *agentic action-taking*: it can read documents, look up people in your tenant, and create real Outlook drafts / Word docs / Teams messages on your behalf. Cowork excels at completing multi-step tasks that span several Microsoft 365 surfaces.
+   > Cowork is generally available in Microsoft Copilot and is purpose-built for *agentic action-taking*: it can read documents, look up people in your tenant, and create real Outlook drafts / Word docs / Teams messages on your behalf. Cowork excels at completing multi-step tasks that span several Microsoft 365 surfaces.
 
 #### Upload the report and ask Cowork to draft an email
 
@@ -106,13 +106,13 @@ Use the Cowork agent to read the [Contoso Grand Hotel Performance Report](https:
 
 1. Paste the following prompt into the message input and press **Send**:
 
-    ```text
-    Create a draft email in my Outlook mailbox addressed to Dewain Robinson summarizing the five most urgent operational issues from the attached hotel performance report. Use the Outlook draft tool — do not just write the email text in chat.
+   ```text
+   Create a draft email in my Outlook mailbox addressed to Dewain Robinson summarizing the five most urgent operational issues from the attached hotel performance report. Use the Outlook draft tool — do not just write the email text in chat.
 
-    For each issue, include in one short bullet: the symptom, the root cause, the estimated financial impact, and the matching recommendation (Section 16 R-number).
+   For each issue, include in one short bullet: the symptom, the root cause, the estimated financial impact, and the matching recommendation (Section 16 R-number).
 
-    Address the email "Hi Dewain," and sign it from "The Operations Team". Keep the total email under 400 words. Use the PDF as the only source.
-    ```
+   Address the email "Hi Dewain," and sign it from "The Operations Team". Keep the total email under 400 words. Use the PDF as the only source.
+   ```
 
     > [!TIP]
     > Cowork executes this as a **multi-step task**: (1) reads the attached PDF, (2) looks up "Dewain Robinson" through Work IQ, (3) drafts a new email in your Outlook mailbox, (4) reports back in chat when done. Cowork rarely asks clarifying questions — when the prompt is clear, it just acts, and typically completes in ~2–3 minutes.
@@ -200,7 +200,7 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 
 #### Open the Cowork agent
 
-1. From the Microsoft 365 Copilot page, select **Cowork** on the **Chat / Cowork** toggle at the top of the Copilot panel.
+1. From the Microsoft Copilot page, select **Cowork** on the **Chat / Cowork** toggle at the top of the Copilot panel.
 
 1. Select **New Task** to start a fresh Cowork session, so this use case doesn't continue the conversation from Use Case #1.
 
@@ -217,9 +217,9 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 
 1. Paste the following prompt into the message input and press **Send**:
 
-    ```text
-    Find the sales tracker excel document in the document library and create an interactive html dashboard highlighting the sales by month, region, product line, and sales rep. Draft an email to Dewain Robinson with a summary of the data and attach the sales graphic from the dashboard to the email
-    ```
+   ```text
+   Find the Sales excel document in the OnePlace document library and create an interactive html dashboard highlighting the sales by month, region, product line, and sales rep. Draft an email to Dewain Robinson with a summary of the data and attach the sales graphic from the dashboard to the email
+   ```
 
     > [!TIP]
     > Note what this prompt does *not* contain: a file path, a site name, or a sequence of steps. You named an outcome and a recipient. Everything between those two things — locating the workbook, deciding what the charts should be, choosing which graphic belongs in the email — is Cowork's to work out.
@@ -303,7 +303,7 @@ This use case is part of the 30-minute core lab. Install the shared RFP Response
 
 #### Open Cowork and find Customize
 
-1. Go to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/?auth=2&home=1) and select the
+1. Go to [Microsoft Copilot](https://copilot.cloud.microsoft/chat?auth=2) and select the
     **Cowork** tab at the top of the left navigation.
 
 1. Select **Customize** in the left navigation. The page has two tabs - **Plugins** and **Skills** -
@@ -352,9 +352,9 @@ This use case is part of the 30-minute core lab. Install the shared RFP Response
 1. Return to **Cowork** and select **New task**. Choose **Add attachments** and
     **Upload images and files**, select the downloaded `.md` file, then type:
 
-    ```text
-    We are bidding on this RFP. Draft our response.
-    ```
+   ```text
+   We are bidding on this RFP. Draft our response.
+   ```
 
     ![A new Cowork task with the Ironwood RFP attached](images/uc3-cowork-task-input.png)
 
@@ -411,7 +411,7 @@ Resume the previous Cowork session, have Cowork create a Home Appliance campaign
 
 #### Resume your previous session
 
-1. Open **Cowork** from the Microsoft 365 Copilot page.
+1. Open **Cowork** from the Microsoft Copilot page.
 
 1. Open the **previous session** — the sales dashboard session from Use Case #2, not the RFP session from Use Case #3.
 
@@ -422,9 +422,9 @@ Resume the previous Cowork session, have Cowork create a Home Appliance campaign
 
 1. Type the following prompt and press **Send**:
 
-    ```text
-    I want to build a sales campaign to shore up the weak home appliances business. Create a short sales campaign with my name in Planner that our sales reps can use to boost sales around home appliances. Let's design a plan to launch the campaign three months from now.
-    ```
+   ```text
+   I want to build a sales campaign to shore up the weak home appliances business. Create a short sales campaign with my name in Planner that our sales reps can use to boost sales around home appliances. Let's design a plan to launch the campaign three months from now.
+   ```
 
     > [!TIP]
     > "With my name in Planner" is doing real work in a shared tenant — it keeps your plan distinguishable from everyone else's in the room. The launch date is the only hard constraint you give; the campaign structure, the tasks, and their sequencing are all Cowork's to decide.
@@ -462,9 +462,9 @@ Resume the previous Cowork session, have Cowork create a Home Appliance campaign
 
 1. Type the following prompt and press **Send**:
 
-    ```text
-    What are the 3 immediate actions to be taken care of?
-    ```
+   ```text
+   What are the 3 immediate actions to be taken care of?
+   ```
 
     > [!TIP]
     > Notice what this prompt doesn't include: which plan, which tasks, or where to find them. Cowork built the plan in this session, so it still knows. This is the difference between an agent that holds context and a tool you have to re-brief every time.

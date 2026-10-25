@@ -110,7 +110,7 @@ In the final use case you build a second agent in a completely different industr
 
 ## ✅ Prerequisites
 
-- Access to Microsoft Copilot Studio with the **New experience** enabled
+- Access to Microsoft Copilot Studio
 - A Power Platform environment where you can create agents and add tools
 - The four lab MCP servers imported into your environment: **Asset Telemetry MCP**, **Work Orders MCP**, **Policy Lookup MCP**, **Claims History MCP**
 - Four knowledge documents uploaded to SharePoint under **OnePlace → Documents**, in folders named **Energy Ops** and **Claims Ops**
@@ -250,7 +250,7 @@ Create a new-type agent, write instructions that establish scope rather than scr
 
 #### Create the agent
 
-1. In Copilot Studio, confirm the **New experience** toggle in the top right is **on** — it is by default.
+1. Open [Copilot Studio](https://copilotstudio.microsoft.com/).
 
 1. Select **Agents** in the left navigation, then **New agent** in the upper right. Selecting **New agent** creates an agent on the **GitHub Copilot harness**.
 
@@ -366,9 +366,9 @@ Send these three prompts in order. Do not tell the agent which source to use —
 
 1. **A question only the documents can answer.**
 
-    ```text
-    What is the vibration action limit for the Aeris 3.2 gearbox, and at what point does exceeding it become a dispatch?
-    ```
+   ```text
+   What is the vibration action limit for the Aeris 3.2 gearbox, and at what point does exceeding it become a dispatch?
+   ```
 
     The agent searches knowledge, never touches a tool, and answers from both PDFs: the action limit is **4.5 mm/s** (manual), and exceeding it meets an **S2** criterion with a crew dispatched within **72 hours** (standards).
 
@@ -379,9 +379,9 @@ Send these three prompts in order. Do not tell the agent which source to use —
 
 1. **A question only a tool can answer.**
 
-    ```text
-    Which turbines at Cascade Ridge are alarming right now?
-    ```
+   ```text
+   Which turbines at Cascade Ridge are alarming right now?
+   ```
 
     The agent calls **`list_assets`** and reports that **WTG-114** is the only alarming unit. Then watch what it does next.
 
@@ -397,9 +397,9 @@ Send these three prompts in order. Do not tell the agent which source to use —
 
 1. **A question for the second tool.**
 
-    ```text
-    What maintenance is already open on WTG-114?
-    ```
+   ```text
+   What maintenance is already open on WTG-114?
+   ```
 
     The agent calls **`list_work_orders`** and finds **WO-00001**, open since March.
 
@@ -412,9 +412,9 @@ Send these three prompts in order. Do not tell the agent which source to use —
 
 1. Now try to get it to act:
 
-    ```text
-    That work order clearly won't fix it. Sort it out for me.
-    ```
+   ```text
+   That work order clearly won't fix it. Sort it out for me.
+   ```
 
     It declines.
 
@@ -457,11 +457,13 @@ Observe the loop recovering from a failed tool call, and using the Agent Sandbox
 
 #### Watch it recover from a failure
 
+1. In the **Preview** tab of your **Asset Performance Assistant**, start a **New chat** so the trace begins from a clean context — nothing from Use Case #2 should carry over.
+
 1. Ask for more history than the tool will return in one call:
 
-    ```text
-    Show me vibration on WTG-114 for the past six months.
-    ```
+   ```text
+   Show me vibration on WTG-114 for the past six months.
+   ```
 
 1. Expand the trace and read what happens.
 
@@ -488,9 +490,9 @@ Observe the loop recovering from a failed tool call, and using the Agent Sandbox
 
 1. Ask a question that cannot be answered by reading numbers off a screen:
 
-    ```text
-    Chart gearbox temperature against power output for WTG-114 over the last 60 days and tell me whether the temperature rise tracks load or is independent of it.
-    ```
+   ```text
+   Chart gearbox temperature against power output for WTG-114 over the last 60 days and tell me whether the temperature rise tracks load or is independent of it.
+   ```
 
 1. Let it run — this one takes longer than the others, because it is doing real work.
 
@@ -574,12 +576,12 @@ You now know the shape: name, instructions, knowledge, tools. This time it shoul
     > [!WARNING]
     > Search results include **Ambee**'s similarly-named *Get current weather by geospatial search*, which may sort **above** the one you want depending on what you type. Result ordering is not stable — check the publisher heading and pick the action under **MSN Weather**. If you select the wrong one, remove it from the rail and add the right one; the agent will otherwise stall on a connector you have no connection for.
 
-1. Open the **Get current weather** tool, set **Authentication mode** to **Maker**, then **Not connected → Create new connection → Create**, and **Done**.
+1. Open the **Get current weather** tool, set **Authentication** to **Shared account**, then **Not connected → Create new connection → Create**, and **Done**.
 
     > [!IMPORTANT]
     > **Do not skip the authentication step.** The tool defaults to **User** authentication, and if you leave it there the agent stops mid-task with a *"Connection Required — this action requires a connection to shared_msnweather"* card the first time it reaches for weather.
     >
-    > The rule is about *whose identity the tool should act as*. MSN Weather authenticates anonymously, so it should run as the **maker** — your connection is reused for every end user and nobody is prompted. The same applies to any connector using a shared API key or service account. Tools that act *as the signed-in user* — a mailbox, a files connector — keep **User**.
+    > The rule is about *whose identity the tool should act as*. MSN Weather authenticates anonymously, so it should run on a **shared account** — your connection is reused for every end user and nobody is prompted. The same applies to any connector using a shared API key or service account. Tools that act *as the signed-in user* — a mailbox, a files connector — keep **User**.
 
 1. Select **Save**.
 
@@ -591,29 +593,29 @@ You now know the shape: name, instructions, knowledge, tools. This time it shoul
 
     **Name:**
 
-    ```text
-    fnol-intake
-    ```
+   ```text
+   fnol-intake
+   ```
 
     **Description:**
 
-    ```text
-    Runs the first-notice-of-loss intake procedure when someone reports property damage or a loss event. Use whenever a caller reports damage, wants to start or file a claim, or says they had a fire, flood, storm, hail, water damage or break-in.
-    ```
+   ```text
+   Runs the first-notice-of-loss intake procedure when someone reports property damage or a loss event. Use whenever a caller reports damage, wants to start or file a claim, or says they had a fire, flood, storm, hail, water damage or break-in.
+   ```
 
     **Instructions:**
 
-    ```text
-    1. Identify the policy. If given a policy number, confirm it with get_policy. Otherwise use find_policy on last name and address, and disambiguate on address before continuing.
-    2. Confirm the policy was in force on the date of loss. If it was not, stop and say so plainly - do not continue the intake.
-    3. Classify the peril, then check the coverage handbook for exclusions and the applicable deductible or sublimit. Name the specific figure.
-    4. Pull prior claims with list_claims. Note any pattern in the last 24 months.
-    5. For wind or hail losses, check the weather for that date and location and say whether it corroborates the account.
-    6. Assign a severity tier using the FNOL Handling Standards, and state which rule produced the tier.
-    7. Return a structured intake summary: policy, insured, date of loss, peril, coverage position, deductible, prior-loss note, corroboration, tier, and what happens next.
+   ```text
+   1. Identify the policy. If given a policy number, confirm it with get_policy. Otherwise use find_policy on last name and address, and disambiguate on address before continuing.
+   2. Confirm the policy was in force on the date of loss. If it was not, stop and say so plainly - do not continue the intake.
+   3. Classify the peril, then check the coverage handbook for exclusions and the applicable deductible or sublimit. Name the specific figure.
+   4. Pull prior claims with list_claims. Note any pattern in the last 24 months.
+   5. For wind or hail losses, check the weather for that date and location and say whether it corroborates the account.
+   6. Assign a severity tier using the FNOL Handling Standards, and state which rule produced the tier.
+   7. Return a structured intake summary: policy, insured, date of loss, peril, coverage position, deductible, prior-loss note, corroboration, tier, and what happens next.
 
-    Never estimate a settlement figure. Never tell the caller a claim is approved.
-    ```
+   Never estimate a settlement figure. Never tell the caller a claim is approved.
+   ```
 
     ![The Create from blank skill form, filled in](images/uc4-skill-create-from-blank.png)
 
@@ -626,9 +628,9 @@ You now know the shape: name, instructions, knowledge, tools. This time it shoul
 
 1. Open **Preview** and ask a question about coverage — no loss reported:
 
-    ```text
-    Does our standard homeowners policy cover water backup, and is there a separate limit?
-    ```
+   ```text
+   Does our standard homeowners policy cover water backup, and is there a separate limit?
+   ```
 
     ![A coverage question answered from knowledge, with the skill never loading](images/uc4-skill-does-not-fire.png)
 
@@ -639,9 +641,9 @@ You now know the shape: name, instructions, knowledge, tools. This time it shoul
 
 1. Start a **New chat**, then report an actual loss:
 
-    ```text
-    A customer just called — hail came through the roof at 418 Foothills Pkwy in Boulder last Tuesday. Policyholder is Nakamura.
-    ```
+   ```text
+   A customer just called — hail came through the roof at 418 Foothills Pkwy in Boulder last Tuesday. Policyholder is Nakamura.
+   ```
 
     ![The FNOL skill loading and running its full procedure](images/uc4-skill-fires-fnol.png)
 
@@ -668,7 +670,7 @@ You now know the shape: name, instructions, knowledge, tools. This time it shoul
 
 * Why is the Skill's **description** written in a caller's vocabulary rather than a procedure's?
 * Why did the coverage question not load the Skill, when both questions are about the same policy form?
-* The MSN Weather tool needed **Maker** authentication. What rule decides that, and which tools would keep **User**?
+* The MSN Weather tool needed **Shared account** authentication. What rule decides that, and which tools would keep **User**?
 
 ---
 
@@ -692,7 +694,7 @@ You built two agents in two industries on the same harness, and in both cases th
 * **Keep instructions about scope and relationships, not procedure.** The line that made the energy agent useful was the one saying a reading only becomes actionable when compared against a limit and a policy — it described how the sources relate, and the loop worked out the rest.
 * **State hard rules in more than one place.** The work-order guardrail held under pressure because it was in the instructions *and* in the grounding. Rules that matter should be discoverable from the agent's sources, not just asserted in its prompt.
 * **Write tool errors for an agent, not a log file.** "Maximum query window is 90 days. Narrow the range and retry." is recoverable. "500 Internal Server Error" is not.
-* **Set authentication by whose identity the tool acts as.** Anonymous, API-key and service-account tools belong on **Maker**. Tools acting for the signed-in user keep **User**. Getting this wrong surfaces as a connection card mid-task.
+* **Set authentication by whose identity the tool acts as.** Anonymous, API-key and service-account tools belong on **Shared account**. Tools acting for the signed-in user keep **User**. Getting this wrong surfaces as a connection card mid-task.
 * **Reach for a Skill when a procedure is real, repeatable and occasional.** If it applies to every turn it belongs in instructions; if it is a fact it belongs in knowledge; if it is a numbered process that fires sometimes, it is a Skill.
 * **Read the trace before changing anything.** Most "the agent is wrong" reports are a description problem, and the trace will show you which one.
 
