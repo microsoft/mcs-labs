@@ -17,7 +17,7 @@ schedule:
     label: "Module 1"
     title: "When to Use What?"
     description: "An overview of the available agent stacks and harnesses, and when to use each one."
-    slides: "https://microsofteur.sharepoint.com/teams/PowerVirtualAgentsV-Team/Shared%20Documents/General/Conferences/PPCC%202026/Workshop%20-%20Deep%20Dive%20Into%20the%20New%20Copilot%20Studio%20Engineering%20Enterprise%20Agents%20and%20Workflows/Module%201%20-%20When%20to%20Use%20What.pptx?web=1"
+    slides: "/presentations/ghcp-in-a-day/Module%201%20-%20When%20to%20Use%20What.pptx"
     time: "09:45"
     duration: 15
 
