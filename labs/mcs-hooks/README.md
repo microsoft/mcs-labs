@@ -2,6 +2,9 @@
 
 Build a **Travel Policy Agent** on the GitHub Copilot harness and use hooks to make it behave the same way in every conversation: load the traveler's profile when a session starts, redact personal data from every prompt, and ground answers in SharePoint travel policies filtered by their `Location` metadata. As an extra, block flight bookings with unapproved airlines before the tool runs.
 
+> [!IMPORTANT]
+> **Build this lab in your PREVIEW - User XXXXXXXX environment.** Hooks aren't available in your regular **DEV - User XXXXXXXX** environment yet, so a separate preview environment has been provisioned for you. Open [Copilot Studio](https://copilotstudio.microsoft.com/) as usual and switch to it with the environment picker in the bottom left before you create the agent.
+
 ---
 
 ## 🧭 Lab Details
@@ -104,19 +107,11 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 
 ## ✅ Prerequisites
 
-- Access to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com/). Hooks are in public preview and still rolling out to environments, so confirm **Hooks** appears in the agent's **…** menu before you start — see below.
+- Access to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com/).
 - The **New experience** toggle on, so that **New agent** creates an agent on the **GitHub Copilot harness**.
-- A Power Platform environment where you can create agents and **Workflows** and where hooks are available — your regular **DEV - User XXXXXXXX** environment, or the **PREVIEW - User XXXXXXXX** environment your facilitator supplies (see below).
+- The **PREVIEW - User XXXXXXXX** environment provisioned for you, where you can create agents and **Workflows**.
 - Read access to the SharePoint site your facilitator identifies, with a **Travel Policies** folder whose documents carry a **Location** column (`France`, `Europe`, `USA`, `Global`…).
 - Signed in with your work account, with an **Office 365 Users** connection for that account — the session-start workflow uses **Get my profile** to retrieve its **Office Location**.
-
-> [!IMPORTANT]
-> **Pick an environment where Hooks is available.** Open the regular [copilotstudio.microsoft.com](https://copilotstudio.microsoft.com/) address and choose the environment with the **environment picker** in the top right:
->
-> - **DEV - User XXXXXXXX** — your regular environment. Hooks are rolling out to regular environments, so check this one first: open any agent built on the GitHub Copilot harness (for example, one from an earlier lab) and select the three dots (**…**) next to **Monitor**. If **Hooks** is listed, do the whole lab here.
-> - **PREVIEW - User XXXXXXXX** — provisioned by your facilitator, with hooks already available. Switch to it if **Hooks** isn't listed in your DEV environment yet.
->
-> XXXXXXXX is your user ID. Agents and workflows don't move between environments, so build every part of this lab in the same one.
 
 > [!NOTE]
 > Hooks are a preview feature and the designer is still changing. If a label in this lab differs slightly from what you see, look for the closest match — the event names, input names and output names are the stable part.
@@ -171,7 +166,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 
 #### Create a new agent
 
-1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and, in the **environment picker** in the top right, select the environment you chose in [Prerequisites](#-prerequisites): **DEV - User XXXXXXXX** if it already shows **Hooks**, otherwise **PREVIEW - User XXXXXXXX**.
+1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and, in the environment picker in the bottom left, switch to **PREVIEW - User XXXXXXXX**.
 
 1. Confirm **New experience** is enabled. Select **Agents** in the left navigation, then **New agent**. Use the default **GitHub Copilot harness** creation path, not **Build using standard orchestration** — hooks only exist on the GitHub Copilot harness.
 
@@ -231,9 +226,6 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 #### Create the hook and its workflow
 
 1. On the top menu bar, next to **Monitor**, select the three dots (**…**) → **Hooks** → **Create**.
-
-    > [!IMPORTANT]
-    > No **Hooks** in the menu? Hooks haven't reached this environment yet. Switch to your **PREVIEW - User XXXXXXXX** environment in the **environment picker** and repeat **Create a new agent** there — the agent doesn't carry over between environments. See [Prerequisites](#-prerequisites).
 
 1. Set **Event type** to **Start (pre-loop)** and **Name** to:
 
