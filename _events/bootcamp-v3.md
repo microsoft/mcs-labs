@@ -1,6 +1,6 @@
 ---
-title: "Architecture Bootcamp - V3"
-description: "Three-day architecture bootcamp rebuilt around the agent harnesses — Copilot, Standard, and GitHub Copilot — their component models, Cowork, workflows, and coding agents. Deep dives on instructions, skills, knowledge and tools, closing with ALM, analytics, and governance."
+title: "Architecture Bootcamp - Latest"
+description: "Three-day architecture bootcamp rebuilt around the agent harnesses — Copilot, Standard, and Customer Conversation — when to use what, what is inside Cowork, the different harnesses, workflows, and coding agents. Deep dives on instructions, skills, knowledge and tools, closing with ALM, analytics, and governance."
 event_id: bootcamp-v3
 order: 2
 labs:
