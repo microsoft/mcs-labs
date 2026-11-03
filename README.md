@@ -9,12 +9,12 @@
 | Create your own web-based AI assistant with Agent Builder | [agent-builder-web](./labs/agent-builder-web) | Create a Copilot agent in Microsoft 365 Copilot Chat with Agent Builder. The agent acts as a learning companion grounded in official Microsoft documentation to assist users with questions about Copilot agents. |
 | Create a Monthly Business Review (MBR) Agent | [mbr-prep-sharepoint-agent](./labs/mbr-prep-sharepoint-agent) | Build a conversational MBR agent using Microsoft Copilot Studio and SharePoint. The agent streamlines MBR preparation by extracting key insights, surfacing trends, and answering questions directly from uploaded decks. |
 | Create AI Solutions with Standard Orchestrator in Copilot Studio | [standard-orchestrator](./labs/standard-orchestrator) | Create your first agent in Microsoft Copilot Studio. Learn the fundamentals including topic creation, message and question nodes, testing, and deployment. |
-| Standard Harness - Component Model | [standard-harness-component-model](./labs/standard-harness-component-model) | Assemble an agent in the Standard harness from its component parts: topics, knowledge, tools, and variables, one piece at a time. |
+| Standard harness — Component Model | [mcs-standard-harness](./labs/mcs-standard-harness) | Assemble an agent in the Standard harness from its component parts: topics, knowledge, tools, and variables, one piece at a time. |
 | GitHub Copilot Harness - Component Model | [mcs-github-harness](./labs/mcs-github-harness) | Assemble an agent on the GitHub Copilot harness using instructions, knowledge, tools, memory, skills, and the agent sandbox, then inspect how the orchestrator decides and recovers from failures. |
 | Build Progressive AI Assistants with Agent Builder in Microsoft 365 | [agent-builder-m365](./labs/agent-builder-m365) | Master agent creation from basic web-grounded assistants to advanced SharePoint-integrated agents with code interpreter and image generation capabilities. |
 | Build Progressive AI Assistants with Copilot Studio Lite in Microsoft 365 Copilot | [copilot-studio-lite](https://microsoft.github.io/mcs-labs/labs/copilot-studio-lite/) | Build progressively sophisticated agents grounded in web and SharePoint content, with code interpreter and image generation capabilities. |
 | Copilot Harness - Agent Builder | [copilot-harness-agent-builder](./labs/copilot-harness-agent-builder) | Build declarative agents in the Copilot harness with Agent Builder, grounded in web and SharePoint content, with code interpreter and image generation. |
-| M365 Copilot and Frontier Agents | [m365-copilot-frontier-agents](./labs/m365-copilot-frontier-agents) | Use Microsoft 365 Copilot chat, Work IQ, response modes, multiple AI models, and frontier agents to turn public and organizational information into decision-ready work. |
+| Copilot Agent Ecosystem | [m365-copilot-frontier-agents](./labs/m365-copilot-frontier-agents) | Use Microsoft 365 Copilot chat, Work IQ, response modes, multiple AI models, and frontier agents to turn public and organizational information into decision-ready work. |
 | Cowork Hands-On | [cowork-hands-on](./labs/cowork-hands-on) | Delegate a document-grounded task to Copilot Cowork and have it draft real output in Microsoft 365 on your behalf. |
 | Cowork + Plugins Hands-On Lab | [cowork-plugins-hands-on](./labs/cowork-plugins-hands-on) | Use Copilot Cowork to draft emails and build a SharePoint sales dashboard, with optional exercises on reusable skills and shared plugins. |
 | Proactive Contract Alerts in Teams with Azure AI Search and Speech-to-Text | [contract-alerts-azure-ai](./labs/contract-alerts-azure-ai) | Configure Copilot Studio agents to proactively notify users when new files are added to Azure Blob Storage, connect Azure AI Search as a knowledge source, and integrate Azure Speech-to-Text services to transcribe audio files. |
@@ -48,6 +48,32 @@
 | Build and Connect Your Guild's Custom MCP Server | [guildhall-custom-mcp](./labs/guildhall-custom-mcp) | Deploy a custom Model Context Protocol (MCP) server locally and connect it to a Copilot Studio agent that can query quests, hire parties, and manage the Guild treasury on your behalf. |
 | Dataverse MCP Connector | [dataverse-mcp-connector](./labs/dataverse-mcp-connector) | Create and configure a Copilot Agent with Dataverse MCP Server integration to read and update account information from Dataverse using natural language queries. |
 | Model Context Protocol (MCP) & Copilot Studio | [MCS-MCP Lab](https://github.com/microsoft/mcsmcp) | Learn how to deploy an MCP Server and integrate it with Microsoft Copilot Studio for streamlined deployment and management. |
+
+## Architecture Bootcamp Latest
+
+The [Bootcamp Latest agenda](./_data/agendas/bootcamp-latest.yml) contains 16 modules and 12 labs.
+Each lab uses `mcs-<module-slug>`; the standalone Copilot Code lab uses `mcs-copilot-code`.
+Shared modules and labs have Bootcamp-specific copies with `-latest` slugs so other deliveries retain their existing content and associations.
+
+| Lab | Title | Slot |
+| --- | ----- | ---- |
+| 1 | [M365 Copilot Chat](./labs/mcs-m365-copilot-latest) | 15 min |
+| 2 | [Cowork hands-on](./labs/mcs-cowork-latest) | 30 min |
+| 3 | [Copilot Code: build a managed app](./labs/mcs-copilot-code) | 30 min |
+| 4 | [Put a Cowork skill into a DA](./labs/mcs-copilot-harness-latest) | 30 min |
+| 5 | [Standard harness — Component Model](./labs/mcs-standard-harness) | 30 min |
+| 6 | [Copilot Chat harness in Copilot Studio](./labs/mcs-harnesses-and-component-models-latest) | 15 min |
+| 7 | [Deep Dive: Instructions & Skills](./labs/mcs-instructions-and-skills) | 30 min |
+| 8 | [Deep Dive: Knowledge, Tools & Hooks](./labs/mcs-knowledge-and-tools-deep-dive) | 30 min |
+| 9 | [Customer Conversation Harness](./labs/mcs-customer-conversation-harness) | 30 min |
+| 10 | [Managed Apps](./labs/mcs-managed-apps) | 30 min |
+| 11 | [Workflows](./labs/mcs-workflows-latest) | 30 min |
+| 12 | [Agent integration](./labs/mcs-agent-integration) | 30 min |
+
+Slots are agenda allocations, not a promise that all retained reference exercises fit.
+See each lab's pacing or placeholder note, and the [dependency notes](./_data/agendas/README.md#bootcamp-latest).
+Active [presentation decks](./presentations/bootcamp-latest) follow module numbers M01-M16;
+unused decks remain in the same folder and empty placeholders contain no slides.
 
 ## 📚 Documentation & Contributing
 

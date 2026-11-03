@@ -1,7 +1,7 @@
 ---
 layout: lab
 module: m365-copilot
-title: "M365 Copilot and Frontier Agents"
+title: "M365 Copilot Chat"
 order: 105
 duration: 30
 difficulty: 100
@@ -13,7 +13,7 @@ description: "Use Microsoft 365 Copilot chat, Work IQ, response modes, multiple 
 
 ---
 
-# M365 Copilot and Frontier Agents
+# M365 Copilot Chat
 
 Use Microsoft 365 Copilot and Frontier agents (Researcher and Analyst) to turn information into decision-ready work. Start with the capabilities already available, and build only when the scenario requires something more.
 

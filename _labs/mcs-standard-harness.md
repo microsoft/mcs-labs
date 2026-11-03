@@ -1,9 +1,9 @@
 ---
 layout: lab
 module: standard-harness
-title: "Standard Harness — Component Model"
+title: "Standard harness — Component Model"
 order: 135
-duration: 45
+duration: 30
 difficulty: 200
 lab_type: local
 section: core_learning_path
@@ -13,7 +13,7 @@ description: "Assemble an agent in the Standard harness from its component parts
 
 ---
 
-# Standard Harness — Component Model
+# Standard harness — Component Model
 
 Build an agent in the Standard harness from its component parts — topics, knowledge, tools and variables — and see how each piece changes what the agent can do.
 
@@ -23,7 +23,9 @@ Build an agent in the Standard harness from its component parts — topics, know
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 200 | Maker | 45 minutes | After completing this lab, participants will be able to create and configure an agent in the Standard harness, author custom topics, ground it with knowledge sources, extend it with tools, and use variables to carry state — assembling the full Standard component model from scratch. |
+| 200 | Maker | 30 minutes | After completing this lab, participants will be able to create and configure an agent in the Standard harness, author custom topics, ground it with knowledge sources, extend it with tools, and use variables to carry state — assembling the full Standard component model from scratch. |
+
+> **Bootcamp Latest pacing:** The scheduled slot is 30 minutes. The retained core reference exercises total 45 minutes, so the instructor must select a subset; unfinished exercises and extra credit are follow-up work.
 
 ---
 
@@ -123,7 +125,7 @@ In this lab you'll assemble the Standard harness component model one piece at a 
 | EC | [Extra Credit: Create and Orchestrate Child Agents](#extra-credit-create-and-orchestrate-child-agents) | Delegate scoped work to specialists rather than growing one agent indefinitely (Optional) | ~13 min |
 | EC | [Extra Credit: Deploy Your Agent Across Channels](#extra-credit-deploy-your-agent-across-channels) | Make the agent reachable on the surfaces your users already use (Optional) | ~12 min |
 
-> **Note on pacing:** tools get a full 60-minute treatment later in the bootcamp in *Deep Dive: Knowledge & Tools*. Use Case #4 here is deliberately the component-level view — enough to place tools in the model, not the deep dive.
+> **Note on pacing:** the later *Deep Dive: Knowledge, Tools & Hooks* module and lab cover tools in more depth. Use Case #4 here is deliberately the component-level view — enough to place tools in the model, not the deep dive.
 
 ---
 
@@ -429,7 +431,7 @@ Add a document knowledge source to your agent and verify that it accurately answ
 1. Review the **Name** and **Description** fields. Update if needed to make the source easily identifiable.
 
 #### Check and disable Web Search 
-The Use information from the web setting is available on the Generative AI settings page or the Web Search setting in the Knowledge section of the agent's Overview page. This setting lets your agent access broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. For our scenario, we want to keep the use of knowedge focused on our provided resources and not the broader web.
+The Use information from the web setting is available on the Generative AI settings page or the Web Search setting in the Knowledge section of the agent's Overview page. This setting lets your agent access broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. For our scenario, we want to keep the use of knowledge focused on our provided resources and not the broader web.
 
 1. Navigate to the Overview tab, scroll down to the Knowledge section
 

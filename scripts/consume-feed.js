@@ -80,6 +80,15 @@ function relativizeImages(markdown, ownBaseUrl, collection, slug) {
     const absPrefix = `${ownBaseUrl}/${collection}/${slug}/${dir}/`;
     out = out.split(absPrefix).join(`${dir}/`);
   }
+  // Restore shared sibling assets when consuming our own feed; partner URLs
+  // stay absolute so they continue to resolve against the publishing site.
+  const collectionPrefix = `${ownBaseUrl}/${collection}/`;
+  out = out.replace(/(\]\(|\bsrc=["'])(https?:\/\/[^"'()\s]+)/g, (match, lead, url) => {
+    if (!url.startsWith(collectionPrefix)) return match;
+    const relative = url.slice(collectionPrefix.length);
+    if (!/^[A-Za-z0-9_-]+\/(?:images|assets)\//.test(relative)) return match;
+    return `${lead}../${relative}`;
+  });
   return out;
 }
 

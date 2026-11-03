@@ -1,10 +1,10 @@
 ---
-title: "Architecture Bootcamp"
+title: "Architecture Bootcamp - Deprecated"
 description: "Intensive hands-on bootcamp covering progressive AI assistants, core concepts, governance, tools, multi-agent architectures, and autonomous agents."
 event_id: bootcamp
 order: 1
 deprecated: true
-superseded_by: bootcamp-v3
+superseded_by: bootcamp-latest
 labs:
   - slug: agent-builder-m365
     label: "Lab 1"
