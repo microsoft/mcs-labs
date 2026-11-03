@@ -94,7 +94,33 @@ test('relativizeImages: own-origin assets/ URLs become relative too', () => {
 });
 
 
+test('relativizeImages: own sibling images and downloads become sibling-relative links', () => {
+  const base = 'https://x.test/mcs-labs';
+  const md = '![a](https://x.test/mcs-labs/labs/shared-lab/images/a.png) <img src="https://x.test/mcs-labs/labs/shared-lab/images/b.png"> <img src=\'https://x.test/mcs-labs/labs/shared-lab/images/c.png\'> [zip](https://x.test/mcs-labs/labs/shared-lab/assets/demo.zip)';
+  assert.equal(consume.relativizeImages(md, base, 'labs', 'bootcamp-copy'),
+    '![a](../shared-lab/images/a.png) <img src="../shared-lab/images/b.png"> <img src=\'../shared-lab/images/c.png\'> [zip](../shared-lab/assets/demo.zip)');
+});
+
+test('relativizeImages: sibling rewriting preserves other origins, collections, and non-asset links', () => {
+  const md = '![a](https://partner.test/mcs-labs/labs/shared-lab/images/a.png) ![b](https://x.test.evil/mcs-labs/labs/shared-lab/images/b.png) ![c](https://x.test/mcs-labs/modules/shared-module/images/c.png) [overview](https://x.test/mcs-labs/labs/shared-lab/)';
+  assert.equal(consume.relativizeImages(md, 'https://x.test/mcs-labs', 'labs', 'demo'), md);
+  assert.equal(consume.relativizeImages(null, 'https://x.test/mcs-labs', 'labs', 'demo'), '');
+});
+
 const matter = require('gray-matter');
+
+test('materializeDoc: shared sibling media round-trips through the producer and consumer', () => {
+  const feed = require('./build-feed');
+  const body = '![a](../shared-lab/images/a.png?size=2#preview) [zip](../shared-lab/assets/demo.zip) <img src="../shared-lab/images/b.png">';
+  const item = feed.buildItem({
+    collection: 'labs',
+    slug: 'bootcamp-copy',
+    frontMatter: { title: 'Copy' },
+    body,
+    baseUrl: 'https://x.test/mcs-labs',
+  });
+  assert.equal(matter(consume.materializeDoc(item, 'https://x.test/mcs-labs')).content.trim(), body);
+});
 
 test('renderFrontMatter: emits a YAML front-matter block', () => {
   const fm = consume.renderFrontMatter({ title: 'Demo', order: 10 });

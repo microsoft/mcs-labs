@@ -236,7 +236,7 @@ Each has a colocated `*.test.js`; `npm test` runs them all with `node --test`.
 - **Journeys**: self-paced learning paths surfaced on the homepage
 - **Events**: curated workshop experiences (Bootcamp, Azure AI Workshop, MCS in a Day, Agent Build-A-Thon variants)
 
-**A new event is a document in the `_events` collection** — `_events/<event_id>.md`, which `_config.yml` declares with `output: true` and `permalink: /events/:name/`, defaulting it to `layout: event`. That is the file to create; `_events/bootcamp-v3.md` is the current example.
+**A new event is a document in the `_events` collection** — `_events/<event_id>.md`, which `_config.yml` declares with `output: true` and `permalink: /events/:name/`, defaulting it to `layout: event`. That is the file to create; `_events/bootcamp-latest.md` is the current example.
 
 Its running order comes from `_data/agendas/<event_id>.yml`, read by `_layouts/event.html` — see `_data/agendas/README.md` for the row schema.
 

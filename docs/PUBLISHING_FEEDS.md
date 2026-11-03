@@ -11,6 +11,14 @@ systems can consume. For the wire format see
   (`labs/<slug>/README.md`, `_<collection>/<slug>.md`) at build time. You never
   hand-edit feed JSON, and the producer never writes back to your content.
 
+Lab copies may reuse a sibling lab's media with links such as
+`../shared-lab/images/example.png` or `../shared-lab/assets/guide.pdf`.
+The producer resolves these against the source lab URL before publishing.
+Images enter the feed's image manifest; downloads remain links to the source.
+Keep the original asset folders available when maintaining a copied lab.
+When consuming the site's own feed, the consumer restores sibling-relative
+asset links; assets from partner origins remain absolute.
+
 ## What a feed is
 
 A feed is a directory of static JSON describing your `labs`, `events`,

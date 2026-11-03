@@ -1,7 +1,7 @@
 ---
 layout: lab
-title: "Copilot Code: Build a Managed App"
-order: 120
+title: "Copilot Code: build a managed app"
+order: 116
 duration: 30
 difficulty: 100
 lab_type: local
@@ -10,7 +10,7 @@ journeys: ["business-user", "developer"]
 description: "Use Copilot Code to generate, test, and refine a multi-day Bootcamp Lab Tracker from a plain-language prompt and the published agenda."
 ---
 
-# Copilot Code: Build a Managed App
+# Copilot Code: build a managed app
 
 Use Copilot Code to turn a plain-language specification and the published bootcamp agenda into a working Bootcamp Lab Tracker without writing code manually.
 
@@ -38,6 +38,7 @@ Use Copilot Code to turn a plain-language specification and the published bootca
 - [Use Case #2: Customize and Recheck Your Tracker](#use-case-2-customize-and-recheck-your-tracker)
 - [Summary of Learnings](#summary-of-learnings)
 - [Conclusions and Recommendations](#conclusions-and-recommendations)
+- [Architecture Bootcamp Latest](#architecture-bootcamp-latest)
 
 ---
 
@@ -96,7 +97,7 @@ These optional resources explain the web technologies and browser checks used in
 For an instructor-led bootcamp, use the provided environment and designated working folder. If completing the lab independently, arrange the following before starting:
 
 - Access to Copilot Code in your provided environment.
-- Copilot Code must be able to fetch the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-v3/) while generating the app.
+- Copilot Code must be able to fetch the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) while generating the app.
 - A designated working folder where Copilot Code can create files.
 - A browser that can open the generated HTML file.
 
@@ -167,7 +168,7 @@ The screenshot shows an earlier example prompt. Copy the current prompt below, i
 ```text
 Build `index.html`, "My Bootcamp Lab Tracker", for a Copilot bootcamp: one self-contained file in plain HTML, CSS and JS with nothing external (no libraries, web fonts, storage or runtime network requests). Progress lives in memory, resets on reload, and starts all unchecked.
 ## Schedule (source of truth)
-Before building, fetch the agenda at https://microsoft.github.io/mcs-labs/events/bootcamp-v3/ and read **every day** in it.
+Before building, fetch the agenda at https://microsoft.github.io/mcs-labs/events/bootcamp-latest/ and read **every day** in it.
 - **Days:** keep each day's number and theme (the text after "Day N —").
 - **Labs:** every item whose title starts with "Lab N:". Keep its number N, use the text after "Lab N:" as the title (with "Copilot" spelled out in full), take the start time from the agenda and calculate the end time as start + duration.
 - **Lunch:** each day's "Lunch break" item, with its start and end time. It's a break, not a lab: never clickable, never counted.
@@ -198,7 +199,7 @@ Open the generated `index.html` in a browser. If the generated link does not ope
 
 #### Check That It Works
 
-- Compare the tracker with the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-v3/). Confirm every day's number, theme, scheduled lab numbers and titles, and Lunch appear in time order. Check that end times equal start times plus agenda durations.
+- Compare the tracker with the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/). Confirm every day's number, theme, scheduled lab numbers and titles, and Lunch appear in time order. Check that end times equal start times plus agenda durations.
 - Confirm that modules, welcome/re-cap, coffee breaks, Q&A, social, and optional labs without time slots are excluded.
 - Count the included labs and confirm the overall counter starts at **0 of TOTAL**, using that count rather than a fixed number. Each day's count should start at **0** with the correct daily total.
 - Confirm every day's timeline uses the same hour range, rounded outward to cover the earliest start and latest end across all days.
@@ -312,3 +313,9 @@ The first prompt builds the app; follow-up prompts help you refine it.
 - Check excluded items, reverse actions, and reload behavior as well as the happy path.
 - State what must remain unchanged in a refinement prompt.
 - Report unexpected results to your facilitator instead of accepting a convincing-looking screen.
+
+---
+
+## Architecture Bootcamp Latest
+
+This lab is part of [Architecture Bootcamp Latest]({{ '/events/bootcamp-latest/' | relative_url }}).

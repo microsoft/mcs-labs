@@ -2,7 +2,7 @@ event_id: agent-in-a-day-v3
 
 # Agent in a Day — V3 — 1-day hands-on agenda.
 #
-# V3 is the one-day cut of the Architecture Bootcamp V3 material: the same
+# V3 is the one-day cut of the Architecture Bootcamp Latest material: the same
 # harness-first framing (Copilot, Standard, GitHub Copilot) compressed into a
 # single day, pairing each instructor-led module with its own hands-on lab.
 #
@@ -60,7 +60,7 @@ schedule:
   - type: lab
     slug: m365-copilot-frontier-agents
     label: "Lab 1"
-    title: "M365 Copilot & Frontier Agents"
+    title: "Copilot Agent Ecosystem"
     time: "09:30"
 
   - type: break
@@ -131,11 +131,9 @@ schedule:
   - type: module
     slug: workflows
     label: "Module 7"
-    # The shared `workflows` module entity defaults to the original bootcamp
-    # deck (presentations/bootcamp/10. Workflows_CB.pptx) because Advanced
-    # Agent in a Day still uses it. Point this day at the V3 deck, the same
-    # override bootcamp-v3.yml carries.
-    slides: "/presentations/bootcamp-v3/M12.%20Workflows.pptx"
+    # Keep this workshop on the existing Workflows deck after its V3 renumbering.
+    # Bootcamp Latest now uses its own `workflows-latest` module and companion lab.
+    slides: "/presentations/bootcamp-latest/M11.%20Workflows.pptx"
     time: "15:30"
 
   - type: lab
