@@ -1,0 +1,35 @@
+---
+layout: null
+---
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title | default: "Page moved" | escape }}</title>
+  <link rel="canonical" href="{{ page.redirect_to | absolute_url }}">
+  <noscript>
+    <meta http-equiv="refresh" content="0;url={{ page.redirect_to | relative_url }}">
+  </noscript>
+</head>
+<body>
+  <p>This page has moved. <a id="redirect-target" href="{{ page.redirect_to | relative_url }}">Continue to the current page</a>.</p>
+  <script>
+  (function () {
+    'use strict';
+    var target = new URL(document.getElementById('redirect-target').href, window.location.origin);
+    if (target.origin !== window.location.origin || (target.protocol !== 'http:' && target.protocol !== 'https:')) {
+      console.error('Redirect target must be an HTTP(S) URL on this site.');
+      return;
+    }
+    target.search = window.location.search;
+    target.hash = window.location.hash;
+    if (target.href === window.location.href) {
+      console.error('Redirect target resolves to the current page.');
+      return;
+    }
+    window.location.replace(target.href);
+  })();
+  </script>
+</body>
+</html>

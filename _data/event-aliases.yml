@@ -1,0 +1,20 @@
+bootcamp-v3:
+  event_id: bootcamp-latest
+  modules:
+    agents-workflows-making-them-real: agents-workflows-making-them-real-latest
+    m365-copilot: m365-copilot-latest
+    cowork: cowork-latest
+    harnesses-and-component-models: harnesses-and-component-models-latest
+    instructions-and-descriptions: instructions-and-skills
+    agent-skills: instructions-and-skills
+    copilot-harness: copilot-harness-latest
+    workflows: workflows-latest
+  labs:
+    m365-copilot-frontier-agents: mcs-m365-copilot-latest
+    cowork-hands-on: mcs-cowork-latest
+    mcs-instructions: mcs-instructions-and-skills
+    mcs-skills: mcs-instructions-and-skills
+    mcs-tools: mcs-knowledge-and-tools-deep-dive
+    copilot-harness-agent-builder: mcs-copilot-harness-latest
+    standard-harness-component-model: mcs-standard-harness
+    mcs-workflows: mcs-workflows-latest

@@ -75,6 +75,10 @@ See each lab's pacing or placeholder note, and the [dependency notes](./_data/ag
 Active [presentation decks](./presentations/bootcamp-latest) follow module numbers M01-M16;
 unused decks remain in the same folder and empty placeholders contain no slides.
 
+Legacy Bootcamp event URLs and event-context links forward to the latest agenda
+or corresponding current module/lab. Old presentation download URLs are not
+redirected; see the [compatibility notes](./_data/agendas/README.md#legacy-event-links).
+
 ## 📚 Documentation & Contributing
 
 ### 🎯 Navigation System
