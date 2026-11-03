@@ -60,7 +60,9 @@ schedule:
 The canonical event ID, event document basename, agenda basename, and
 presentation directory use `bootcamp-latest`. Public links use
 `/events/bootcamp-latest/` and `?event=bootcamp-latest`. The former versioned
-URLs are retired without redirects; update bookmarks and external links.
+event URL redirects to the current event. Legacy module/lab context links also
+resolve to their current counterparts; old presentation download URLs remain
+retired.
 
 `bootcamp-latest.yml` is the source of truth for 16 modules and 12 labs. Its day
 boundaries are 09:00-16:00, 09:00-18:00 (including the social), and 09:00-16:00.
@@ -72,6 +74,28 @@ dedicated module row and uses `mcs-copilot-code`. Keep the event's fallback
 `labs:` list in `_events/bootcamp-latest.md` in the same order as the agenda.
 Explicit lab rows are authoritative for hero counts and timing, so preceding
 companion-module rows use `lab: false`.
+
+### Legacy event links
+
+The [event alias definitions](../event-aliases.yml) map the former event ID and
+renamed module/lab slugs to the current curriculum. Instructions and Skills
+links resolve to the combined topic. Items no longer scheduled in the latest
+agenda resolve to the event overview instead of an unrelated replacement.
+
+Compatibility pages use the [redirect layout](../../_layouts/redirect.html)
+outside the event/lab collections, so they do not create duplicate catalog
+entries. The former Standard Harness lab URL also has a compatibility page.
+Redirects preserve query parameters and fragment anchors when JavaScript is
+enabled; the standalone pages provide a no-JavaScript refresh and clickable
+fallback. GitHub Pages serves these as HTML redirects, not HTTP 301 responses.
+
+Event navigation rewrites only configured legacy event IDs. Saved legacy
+context is normalized when the current item is still in the latest agenda;
+unrelated standalone pages are not redirected by saved context. Other event
+and workshop contexts retain their existing behavior.
+
+These aliases do not restore old presentation download paths or redirects on
+GitHub's raw/media hosts.
 
 ### Shared content and delivery dependencies
 

@@ -7,6 +7,7 @@
   // --- DOM refs ---
   var manifestEl = document.getElementById('mcs-events-manifest');
   var contextEl = document.getElementById('mcs-lab-context');
+  var aliasesEl = document.getElementById('mcs-event-aliases');
   if (!manifestEl || !contextEl) return;
 
   var rail = document.getElementById('event-rail');
@@ -39,13 +40,20 @@
   // --- Parse payloads ---
   var events;
   var current;
+  var eventAliases;
   try {
     events = JSON.parse(manifestEl.textContent);
     current = JSON.parse(contextEl.textContent);
+    eventAliases = aliasesEl ? JSON.parse(aliasesEl.textContent) : {};
   } catch (e) {
+    console.error('Unable to parse event navigation metadata.', e);
     return;
   }
   if (!Array.isArray(events) || !current || !current.slug) return;
+  if (!eventAliases || typeof eventAliases !== 'object' || Array.isArray(eventAliases)) {
+    console.error('Event aliases must be an object.');
+    return;
+  }
 
   // The current page is either a lab or a module; the rail walks the matching
   // item type within the event so a module page gets "Module X of N" with
@@ -60,6 +68,19 @@
       if (events[i].event_id === eventId) return events[i];
     }
     return null;
+  }
+
+  function findEventAlias(eventId) {
+    if (!eventId || !Object.prototype.hasOwnProperty.call(eventAliases, eventId)) return null;
+    return eventAliases[eventId];
+  }
+
+  function saveEventContext(eventId) {
+    try {
+      sessionStorage.setItem(STORAGE_KEY, eventId);
+    } catch (e) {
+      console.warn('Unable to save event navigation context.', e);
+    }
   }
 
   // --- URL construction helpers ---
@@ -115,11 +136,56 @@
   var stickyEventId = null;
   try { stickyEventId = sessionStorage.getItem(STORAGE_KEY); } catch (e) {}
 
+  // Legacy context must resolve the item too: copied modules/labs have new slugs.
+  var legacyEvent = findEventAlias(urlEventId);
+  if (legacyEvent) {
+    var canonicalEvent = findEvent(legacyEvent.event_id);
+    if (!canonicalEvent) {
+      console.error('Legacy event alias points to an unknown event.');
+      return;
+    }
+    var slugAliases = currentType === 'module' ? legacyEvent.modules : legacyEvent.labs;
+    var hasItemAlias = slugAliases && Object.prototype.hasOwnProperty.call(slugAliases, current.slug);
+    var targetSlug = hasItemAlias ? slugAliases[current.slug] : current.slug;
+    var targetItem = null;
+    for (var k = 0; k < canonicalEvent.schedule.length; k++) {
+      var candidate = canonicalEvent.schedule[k];
+      if (candidate.type === currentType && candidate.slug === targetSlug) {
+        targetItem = candidate;
+        break;
+      }
+    }
+    if (hasItemAlias && !targetItem) {
+      console.error('Legacy item alias points to an item outside the current agenda.');
+      return;
+    }
+    // Items removed from the curriculum land on the current agenda.
+    var redirectTarget = targetItem ? targetItem.url : canonicalEvent.url;
+    var redirectUrl = redirectTarget ? buildSameOriginUrl(redirectTarget) : null;
+    if (!redirectUrl) {
+      console.error('Legacy event redirect target must be an HTTP(S) URL on this site.');
+      return;
+    }
+    redirectUrl.search = window.location.search;
+    redirectUrl.searchParams.set('event', canonicalEvent.event_id);
+    redirectUrl.hash = window.location.hash;
+    if (redirectUrl.pathname !== window.location.pathname) {
+      saveEventContext(canonicalEvent.event_id);
+      window.location.replace(redirectUrl.href);
+      return;
+    }
+    history.replaceState(null, '', redirectUrl.href);
+    urlEventId = canonicalEvent.event_id;
+  }
+
+  var legacyStickyEvent = findEventAlias(stickyEventId);
+  if (legacyStickyEvent) stickyEventId = legacyStickyEvent.event_id;
+
   var activeEvent = null;
   if (urlEventId) {
     activeEvent = findEvent(urlEventId);
     if (activeEvent && eventContainsItem(activeEvent, currentType, current.slug)) {
-      try { sessionStorage.setItem(STORAGE_KEY, urlEventId); } catch (e) {}
+      saveEventContext(urlEventId);
     } else {
       activeEvent = null; // URL param references an unknown event or an item
                           // not in that event — bail out silently.
@@ -128,6 +194,7 @@
     var stickyEvent = findEvent(stickyEventId);
     if (stickyEvent && eventContainsItem(stickyEvent, currentType, current.slug)) {
       activeEvent = stickyEvent;
+      if (legacyStickyEvent) saveEventContext(stickyEventId);
     } else {
       try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
     }

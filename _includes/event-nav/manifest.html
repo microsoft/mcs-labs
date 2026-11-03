@@ -116,6 +116,13 @@
 {%- endfor -%}
 ]
 </script>
+<script type="application/json" id="mcs-event-aliases">
+{%- if site.data.event-aliases -%}
+{{ site.data.event-aliases | jsonify }}
+{%- else -%}
+{}
+{%- endif -%}
+</script>
 <script type="application/json" id="mcs-lab-context">
 {
   "type": {% if page.collection == "modules" %}"module"{% else %}"lab"{% endif %},
