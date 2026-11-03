@@ -1,4 +1,4 @@
-# M365 Copilot and Frontier Agents
+# M365 Copilot Chat
 
 Use Microsoft 365 Copilot and Frontier agents (Researcher and Analyst) to turn information into decision-ready work. Start with the capabilities already available, and build only when the scenario requires something more.
 

@@ -75,16 +75,20 @@ module.exports.selectFeedItems = selectFeedItems;
 
 // Lab-owned directories whose relative refs are absolutized for the feed. Feed
 // consumers serve this markdown from their own origin, so a bare `images/x.png`
-// or `assets/guide.pdf` would resolve against their site and 404.
+// or `assets/guide.pdf` would resolve against their site and 404. Bootcamp
+// copies also reuse sibling labs' files via `../shared-lab/images/...`.
 const OWN_DIRS = ['images', 'assets'];
 
 function rewriteImages(markdown, baseUrl, collection, slug) {
   const base = `${baseUrl}/${collection}/${slug}`;
+  const prefix = '(?:\\./|(?:\\.\\./)+(?:[^/\\s"\'()]+/)+)?';
   const images = new Set();
   let out = String(markdown == null ? '' : markdown);
   for (const dir of OWN_DIRS) {
     const abs = (rel) => {
-      const url = `${base}/${rel}`;
+      const url = rel.startsWith('../')
+        ? new URL(rel, `${base}/`).href
+        : `${base}/${rel.replace(/^\.\//, '')}`;
       // Only images/ feeds the manifest: assets/ holds the PDFs and solution
       // .zip files consumers link to rather than mirror, and `images` is part
       // of the published feed schema.
@@ -92,12 +96,11 @@ function rewriteImages(markdown, baseUrl, collection, slug) {
       return url;
     };
     // dir is a fixed literal from OWN_DIRS, so it needs no escaping here.
-    // Markdown image/link refs: ](<dir>/...) or ](./<dir>/...)
-    out = out.replace(new RegExp('\\]\\((?:\\./)?' + dir + '/([^)\\s]+)', 'g'), (_m, p) => `](${abs(dir + '/' + p)}`);
-    // HTML src="<dir>/..." / src="./<dir>/..."
-    out = out.replace(new RegExp('src="(?:\\./)?' + dir + '/([^"]+)"', 'g'), (_m, p) => `src="${abs(dir + '/' + p)}"`);
+    // Include sibling lab paths without duplicating their images or downloads.
+    out = out.replace(new RegExp('\\]\\((' + prefix + dir + '/[^)\\s]+)', 'g'), (_m, rel) => `](${abs(rel)}`);
+    out = out.replace(new RegExp('src="(' + prefix + dir + '/[^"]+)"', 'g'), (_m, rel) => `src="${abs(rel)}"`);
     // HTML src='<dir>/...'
-    out = out.replace(new RegExp("src='(?:\\./)?" + dir + "/([^']+)'", 'g'), (_m, p) => `src='${abs(dir + '/' + p)}'`);
+    out = out.replace(new RegExp("src='(" + prefix + dir + "/[^']+)'", 'g'), (_m, rel) => `src='${abs(rel)}'`);
   }
   return { markdown: out, images: [...images] };
 }

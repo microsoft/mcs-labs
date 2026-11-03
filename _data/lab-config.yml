@@ -39,7 +39,7 @@ lab_metadata:
     id: m365-copilot-frontier-agents
     module: m365-copilot
     section: core
-    title: M365 Copilot and Frontier Agents
+    title: M365 Copilot Chat
   115:
     difficulty: Intermediate
     duration: 45
@@ -56,11 +56,11 @@ lab_metadata:
     title: Copilot Harness - Agent Builder
   135:
     difficulty: Intermediate
-    duration: 45
-    id: standard-harness-component-model
+    duration: 30
+    id: mcs-standard-harness
     module: standard-harness
     section: core
-    title: Standard Harness - Component Model
+    title: Standard harness — Component Model
   145:
     difficulty: Advanced
     duration: 60
@@ -270,7 +270,7 @@ lab_journeys:
   m365-copilot-frontier-agents: [quick-start, business-user]
   cowork-hands-on: [quick-start, business-user]
   copilot-harness-agent-builder: [quick-start, business-user]
-  standard-harness-component-model: [business-user, developer]
+  mcs-standard-harness: [business-user, developer]
   agent-builder-sharepoint: [business-user, developer]
   agent-builder-web: [quick-start, business-user]
   ask-me-anything: [business-user, developer]
@@ -309,7 +309,7 @@ legacy_lab_orders:
   m365-copilot-frontier-agents: 105
   cowork-hands-on: 115
   copilot-harness-agent-builder: 125
-  standard-harness-component-model: 135
+  mcs-standard-harness: 135
   agent-builder-sharepoint: 210
   agent-builder-web: 100
   ask-me-anything: 220

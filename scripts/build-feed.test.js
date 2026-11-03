@@ -138,6 +138,30 @@ test('rewriteImages: absolutizes assets/ refs so feed consumers can fetch them',
 });
 
 
+test('rewriteImages: shared sibling images resolve against the source lab and are deduplicated', () => {
+  const md = '![a](../shared-lab/images/a.png) <img src="../shared-lab/images/a.png"> <img src=\'../shared-lab/images/b.png\'>';
+  const { markdown, images } = feed.rewriteImages(md, 'https://x.test/mcs-labs', 'labs', 'bootcamp-copy');
+  assert.equal(markdown, '![a](https://x.test/mcs-labs/labs/shared-lab/images/a.png) <img src="https://x.test/mcs-labs/labs/shared-lab/images/a.png"> <img src=\'https://x.test/mcs-labs/labs/shared-lab/images/b.png\'>');
+  assert.deepEqual(images.sort(), [
+    'https://x.test/mcs-labs/labs/shared-lab/images/a.png',
+    'https://x.test/mcs-labs/labs/shared-lab/images/b.png',
+  ]);
+});
+
+test('rewriteImages: shared sibling downloads become absolute without entering the images manifest', () => {
+  const md = '[pdf](../shared-lab/assets/manual.pdf) [zip](../shared-lab/assets/solutions/demo.zip) <img src="../shared-lab/assets/diagram.png">';
+  const { markdown, images } = feed.rewriteImages(md, 'https://x.test/mcs-labs', 'labs', 'bootcamp-copy');
+  assert.equal(markdown, '[pdf](https://x.test/mcs-labs/labs/shared-lab/assets/manual.pdf) [zip](https://x.test/mcs-labs/labs/shared-lab/assets/solutions/demo.zip) <img src="https://x.test/mcs-labs/labs/shared-lab/assets/diagram.png">');
+  assert.deepEqual(images, []);
+});
+
+test('rewriteImages: multiple parent segments normalize and unrelated relative links stay untouched', () => {
+  const md = '![a](../../labs/shared-lab/images/a.png) [overview](../shared-lab/) [notes](../shared-lab/notes.md)';
+  const { markdown, images } = feed.rewriteImages(md, 'https://x.test/mcs-labs', 'labs', 'bootcamp-copy');
+  assert.equal(markdown, '![a](https://x.test/mcs-labs/labs/shared-lab/images/a.png) [overview](../shared-lab/) [notes](../shared-lab/notes.md)');
+  assert.deepEqual(images, ['https://x.test/mcs-labs/labs/shared-lab/images/a.png']);
+});
+
 test('contentHash: deterministic, prefixed, and content-sensitive', () => {
   const h1 = feed.contentHash('hello');
   const h2 = feed.contentHash('hello');
