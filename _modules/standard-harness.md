@@ -1,6 +1,6 @@
 ---
 layout: module
-title: "Dedicated: Standard harness — Component Model"
+title: "Standard harness — Component Model"
 order: 3050
 duration: 30
 difficulty: 200
