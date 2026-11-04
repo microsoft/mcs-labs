@@ -165,7 +165,7 @@ This one will run a bit longer than the first.
 
 Compare the two responses:
 
-| | 1.3 on Quick response | 1.4 on Think deeper |
+| | 1.2 on Auto (Quick response) | 1.3 on Think deeper |
 |---|---|---|
 | **References** | A handful, lightly used | Many, tied to specific figures |
 | **Numbers** | Described | Retrieved, then calculated with |

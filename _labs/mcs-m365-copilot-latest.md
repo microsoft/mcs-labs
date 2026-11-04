@@ -1,18 +1,18 @@
 ---
 layout: lab
 module: m365-copilot-latest
-title: "M365 Copilot Chat"
+title: "M365 Copilot Chat and Work IQ"
 order: 106
 duration: 15
 difficulty: 100
 lab_type: local
 section: core_learning_path
 journeys: ["quick-start", "business-user"]
-description: "Use Microsoft 365 Copilot chat, Work IQ, response modes, multiple AI models, and frontier agents to turn public and organizational information into decision-ready work."
+description: "Use Microsoft 365 Copilot chat, Work IQ, response modes, and multiple AI models to turn public and organizational information into decision-ready work, with frontier agents as extra credit."
 
 ---
 
-# M365 Copilot Chat
+# M365 Copilot Chat and Work IQ
 
 Use Microsoft 365 Copilot and Frontier agents (Researcher and Analyst) to turn information into decision-ready work. Start with the capabilities already available, and build only when the scenario requires something more.
 
@@ -20,9 +20,9 @@ Use Microsoft 365 Copilot and Frontier agents (Researcher and Analyst) to turn i
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 100 | Business User | 15 minutes | After completing this lab, participants will be able to use Microsoft 365 Copilot with deliberate grounding, response-mode, and model choices, then use the Researcher and Analyst frontier agents for deeper synthesis and financial modelling. |
+| 100 | Business User | 15 minutes | After completing this lab, participants will be able to use Microsoft 365 Copilot with deliberate grounding, response-mode, and model choices, and ground answers in organizational content with Work IQ. As extra credit, they can use the Researcher and Analyst frontier agents for deeper synthesis and financial modelling. |
 
-> **Bootcamp Latest pacing:** The scheduled slot is 15 minutes. The retained reference exercises total 30 minutes, so the instructor must select a subset and leave the remaining exercises for afterward. The [shared lab](../m365-copilot-frontier-agents/) remains available for other deliveries.
+> **Bootcamp Latest pacing:** The scheduled slot is 15 minutes. The core use cases take about 20 minutes, so in the slot treat [1.3 Ask for deeper reasoning](#13-ask-for-deeper-reasoning) and [2.5 Turn the answer into a deliverable](#25-turn-the-answer-into-a-deliverable) as optional. The Researcher and Analyst extra credit sections are not included in the slot. The [shared lab](../m365-copilot-chat-work-iq/) remains available for other deliveries.
 
 ## Table of Contents
 
@@ -34,8 +34,8 @@ Use Microsoft 365 Copilot and Frontier agents (Researcher and Analyst) to turn i
 - [Instructions by Use Case](#instructions-by-use-case)
   - [Use Case #1: Getting started with Microsoft 365 Copilot](#use-case-1-getting-started-with-microsoft-365-copilot)
   - [Use Case #2: Grounding Copilot with Work IQ](#use-case-2-grounding-copilot-with-work-iq)
-  - [Use Case #3: Deep analysis with the Researcher agent](#use-case-3-deep-analysis-with-the-researcher-agent)
-  - [Use Case #4: Financial modeling with the Analyst agent](#use-case-4-financial-modeling-with-the-analyst-agent)
+  - [Extra Credit #1: Deep analysis with the Researcher agent](#extra-credit-1-deep-analysis-with-the-researcher-agent)
+  - [Extra Credit #2: Financial modeling with the Analyst agent](#extra-credit-2-financial-modeling-with-the-analyst-agent)
 
 ## Introduction
 
@@ -63,13 +63,13 @@ Microsoft 365 Copilot also provides access to frontier agents: **Researcher** pe
 > If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
 
 - A Microsoft 365 account with a Microsoft 365 Copilot licence
-- Access to Microsoft 365 Copilot with the Researcher and Analyst agents enabled
+- (Extra Credit) Access to Microsoft 365 Copilot with the Researcher and Analyst agents enabled
 - Use Case #2 resources:
   - **Instructor-led bootcamp:** Files are already preloaded to the SharePoint location, so you can skip this prerequisite
   - **Independent use:** Upload the following files to a OneDrive or SharePoint location that Microsoft 365 Copilot can access:
     - [Zava DIY Markdown and Clearance Policy](../m365-copilot-frontier-agents/assets/sample-files/Zava_DIY_Markdown_and_Clearance_Policy.docx)
     - [Zava DIY Q2 2026 Store Performance Report](../m365-copilot-frontier-agents/assets/sample-files/Zava_DIY_Q2_2026_Store_Performance_Report.pdf)
-- Download the sample report PDF used in Use Cases #3 and #4: [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf)
+- (Extra Credit) Download the sample report PDF used in Extra Credit #1 and #2: [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf)
 
 ## Use Cases Covered
 
@@ -77,8 +77,8 @@ Microsoft 365 Copilot also provides access to frontier agents: **Researcher** pe
 | ---- | -------- | ----------- | ------ |
 | 1 | [Getting started with Microsoft 365 Copilot](#use-case-1-getting-started-with-microsoft-365-copilot) | Learn how Work IQ, response modes and AI model choice shape an answer | 7 min |
 | 2 | [Grounding Copilot with Work IQ](#use-case-2-grounding-copilot-with-work-iq) | Reference a file directly, apply it to a real decision, then let Work IQ find what you never named | 13 min |
-| 3 | [Deep analysis with the Researcher agent](#use-case-3-deep-analysis-with-the-researcher-agent) | Use the Researcher frontier agent to synthesize insights across a complex multi-section business report | 5 min |
-| 4 | [Financial modeling with the Analyst agent](#use-case-4-financial-modeling-with-the-analyst-agent) | Use the Analyst frontier agent to perform NPV/IRR financial modeling and investment prioritization from document data | 5 min |
+| EC1 | [Deep analysis with the Researcher agent](#extra-credit-1-deep-analysis-with-the-researcher-agent) | Use the Researcher frontier agent to synthesize insights across a complex multi-section business report | 5 min |
+| EC2 | [Financial modeling with the Analyst agent](#extra-credit-2-financial-modeling-with-the-analyst-agent) | Use the Analyst frontier agent to perform NPV/IRR financial modeling and investment prioritization from document data | 5 min |
 
 ## Instructions by Use Case
 
@@ -167,7 +167,7 @@ This one will run a bit longer than the first.
 
 Compare the two responses:
 
-| | 1.3 on Quick response | 1.4 on Think deeper |
+| | 1.2 on Auto (Quick response) | 1.3 on Think deeper |
 |---|---|---|
 | **References** | A handful, lightly used | Many, tied to specific figures |
 | **Numbers** | Described | Retrieved, then calculated with |
@@ -324,9 +324,12 @@ You reached a review-ready quarterly briefing within minutes, with no configurat
 
 ### Where this goes next
 
-The Researcher and Analyst use cases take the same principle further by applying purpose-built frontier agents to deeper document synthesis and financial modelling.
+The optional Researcher and Analyst extra credit sections take the same principle further by applying purpose-built frontier agents to deeper document synthesis and financial modelling.
 
-## Use Case #3: Deep analysis with the Researcher agent
+## Extra Credit #1: Deep analysis with the Researcher agent
+
+> [!NOTE]
+> **Optional - Extra Credit (~5 minutes):** Use the Researcher frontier agent for deep, multi-section document analysis. This section isn't included in the core lab time.
 
 Leverage the Researcher frontier agent in Microsoft 365 Copilot to perform deep, multi-section analysis of a complex business document — synthesizing insights that would take a human analyst hours to compile manually.
 
@@ -434,7 +437,10 @@ Are there any gaps where a problem exists but no recommendation addresses it?
 - What cross-functional insights might Researcher uncover that individual department reviews miss?
 - How could you use Researcher to prepare for board meetings or executive reviews?
 
-## Use Case #4: Financial modeling with the Analyst agent
+## Extra Credit #2: Financial modeling with the Analyst agent
+
+> [!NOTE]
+> **Optional - Extra Credit (~5 minutes):** Use the Analyst frontier agent for financial modelling on the same report. This section isn't included in the core lab time.
 
 Use the Analyst frontier agent to extract data from the same hotel performance report and perform rigorous financial analysis — computing NPV, IRR, and investment prioritization that goes beyond what the original report provides.
 
@@ -468,7 +474,7 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
 3. Upload the **Contoso_Grand_Hotel_Performance_Report.pdf** by selecting **Add and manage sources** (the **+** icon), choosing **Upload images and files**, and selecting the same file you downloaded earlier.
 
 > [!NOTE]
-> You're using the same PDF from Use Case #3, but with a completely different agent. This demonstrates how different frontier agents can extract different types of value from the same source document.
+> You're using the same PDF from Extra Credit #1, but with a completely different agent. This demonstrates how different frontier agents can extract different types of value from the same source document.
 
 #### Run the financial analysis prompt
 

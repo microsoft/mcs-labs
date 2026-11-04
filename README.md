@@ -57,7 +57,7 @@ Shared modules and labs have Bootcamp-specific copies with `-latest` slugs so ot
 
 | Lab | Title | Slot |
 | --- | ----- | ---- |
-| 1 | [M365 Copilot Chat](./labs/mcs-m365-copilot-latest) | 15 min |
+| 1 | [M365 Copilot Chat and Work IQ](./labs/mcs-m365-copilot-latest) | 15 min |
 | 2 | [Cowork hands-on](./labs/mcs-cowork-latest) | 30 min |
 | 3 | [Copilot Code: build a managed app](./labs/mcs-copilot-code) | 30 min |
 | 4 | [Put a Cowork skill into a DA](./labs/mcs-copilot-harness-latest) | 30 min |
