@@ -302,8 +302,6 @@ Access and interpret agent analytics to measure performance and identify optimiz
 
 ---
 
----
-
 ## Use Case #2: Create and Configure Evaluation Test Sets
 
 Learn four different ways to create evaluation test sets - auto-generation, CSV import, test canvas capture, and manual entry - to systematically measure your agent's quality.
@@ -482,8 +480,6 @@ Create evaluation test sets using four different methods and understand how each
 * What are the 10 most important questions your agent must answer correctly?
 * Which creation method would you use for ongoing regression testing?
 * How would you organize test sets for different agent capabilities?
-
----
 
 ---
 

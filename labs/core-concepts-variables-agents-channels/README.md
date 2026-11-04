@@ -271,8 +271,6 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 ---
 
----
-
 ## 🔄 Use Case #2: Create and Orchestrate Child Agents
 
 Build specialized child agents with focused knowledge and instructions to create modular, scalable agent architectures.
@@ -439,8 +437,6 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 * What specialized domains in your organization would benefit from dedicated child agents?
 * How would you organize knowledge across parent and child agents for optimal performance?
 * What orchestration rules would you write to ensure proper routing in a multi-agent system?
-
----
 
 ---
 

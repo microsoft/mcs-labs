@@ -23,9 +23,9 @@ Build an agent in the Standard harness from its component parts — topics, know
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 200 | Maker | 30 minutes | After completing this lab, participants will be able to create and configure an agent in the Standard harness, author custom topics, ground it with knowledge sources, extend it with tools, and use variables to carry state — assembling the full Standard component model from scratch. |
+| 200 | Maker | 30 minutes | After completing this lab, participants will be able to create and configure an agent in the Standard harness, author custom topics, ground it with knowledge sources, and extend it with tools. Optional extra credit explores variables, child agents, and channels. |
 
-> **Bootcamp Latest pacing:** The scheduled slot is 30 minutes. The retained core reference exercises total 45 minutes, so the instructor must select a subset; unfinished exercises and extra credit are follow-up work.
+> **Bootcamp Latest pacing:** Complete Use Cases #1–#4 in 30 minutes: agent configuration (6 minutes), topics (8 minutes), knowledge (8 minutes), and tools (8 minutes). Variables, child agents, and channels are optional extra credit outside this allocation.
 
 ---
 
@@ -43,7 +43,7 @@ Build an agent in the Standard harness from its component parts — topics, know
   - [Use Case #2: Build Custom Topics for Structured Conversations](#use-case-2-build-custom-topics-for-structured-conversations)
   - [Use Case #3: Enhance Agent Intelligence with Knowledge Sources](#use-case-3-enhance-agent-intelligence-with-knowledge-sources)
   - [Use Case #4: Extend Your Agent with Tools](#use-case-4-extend-your-agent-with-tools)
-  - [Use Case #5: Work with Variables](#use-case-5-work-with-variables)
+  - [Extra Credit: Work with Variables](#extra-credit-work-with-variables)
   - [Extra Credit: Create and Orchestrate Child Agents](#extra-credit-create-and-orchestrate-child-agents)
   - [Extra Credit: Deploy Your Agent Across Channels](#extra-credit-deploy-your-agent-across-channels)
 
@@ -55,7 +55,7 @@ Build an agent in the Standard harness from its component parts — topics, know
 
 In the Copilot harness you describe an outcome and the platform infers the rest. In the Standard harness you assemble the agent from named parts — topics, knowledge, tools, variables — and you decide how each behaves. That is more work, and it is what buys you control over the process.
 
-This lab builds one agent five times over, adding a component at each step, so the shape of the model is visible rather than asserted. Every later harness in this bootcamp is a variation on these same pieces.
+This lab builds one agent step by step, adding a component at each stage, so the shape of the model is visible rather than asserted. Every later harness in this bootcamp is a variation on these same pieces.
 
 ---
 
@@ -65,7 +65,7 @@ The Standard harness — the classic Copilot Studio authoring model — gives yo
 
 **Topics** define authored conversation paths. **Knowledge** grounds answers in your content. **Tools** let the agent act on external systems. **Variables** carry state between turns and between components.
 
-You will add each in turn to a single agent, testing after every step so the contribution of each part is unambiguous.
+In the 30-minute core lab, you will configure a single agent and add topics, knowledge, and tools, testing after every step so the contribution of each part is unambiguous. Optional extra credit explores variables, child agents, and channels.
 
 ---
 
@@ -109,7 +109,7 @@ In this lab you'll assemble the Standard harness component model one piece at a 
 - Author custom topics for conversations that must follow a defined path
 - Ground the agent in knowledge sources and verify the answers are sourced
 - Extend the agent with tools so it can act, not only answer
-- Use variables to carry state between turns and components
+- Explore how variables carry state between turns and components (optional extra credit)
 
 ---
 
@@ -117,11 +117,11 @@ In this lab you'll assemble the Standard harness component model one piece at a 
 
 | Step | Use Case | Value added | Effort |
 | ---- | -------- | ----------- | ------ |
-| 1 | [Create and Configure Your First Agent](#use-case-1-create-and-configure-your-first-agent) | Establish the agent and its instructions before any component is added | 8 min |
-| 2 | [Build Custom Topics for Structured Conversations](#use-case-2-build-custom-topics-for-structured-conversations) | Author deterministic conversation paths for scenarios that must not vary | 12 min |
-| 3 | [Enhance Agent Intelligence with Knowledge Sources](#use-case-3-enhance-agent-intelligence-with-knowledge-sources) | Ground responses in your own content so answers are sourced and citable | 10 min |
-| 4 | [Extend Your Agent with Tools](#use-case-4-extend-your-agent-with-tools) | Give the agent the ability to act on external systems | 10 min |
-| 5 | [Work with Variables](#use-case-5-work-with-variables) | Carry state across turns and pass it between components | 5 min |
+| 1 | [Create and Configure Your First Agent](#use-case-1-create-and-configure-your-first-agent) | Establish the agent and its instructions before any component is added | 6 min |
+| 2 | [Build Custom Topics for Structured Conversations](#use-case-2-build-custom-topics-for-structured-conversations) | Author deterministic conversation paths for scenarios that must not vary | 8 min |
+| 3 | [Enhance Agent Intelligence with Knowledge Sources](#use-case-3-enhance-agent-intelligence-with-knowledge-sources) | Ground responses in your own content so answers are sourced and citable | 8 min |
+| 4 | [Extend Your Agent with Tools](#use-case-4-extend-your-agent-with-tools) | Give the agent the ability to act on external systems | 8 min |
+| EC | [Extra Credit: Work with Variables](#extra-credit-work-with-variables) | Explore how variables carry state across turns and between components (Optional) | ~5 min |
 | EC | [Extra Credit: Create and Orchestrate Child Agents](#extra-credit-create-and-orchestrate-child-agents) | Delegate scoped work to specialists rather than growing one agent indefinitely (Optional) | ~13 min |
 | EC | [Extra Credit: Deploy Your Agent Across Channels](#extra-credit-deploy-your-agent-across-channels) | Make the agent reachable on the surfaces your users already use (Optional) | ~12 min |
 
@@ -135,21 +135,21 @@ In this lab you'll assemble the Standard harness component model one piece at a 
 
 ## Use Case #1: Create and Configure Your First Agent
 
-Build your first Copilot Studio agent with custom instructions, suggested prompts, and AI model configuration.
+Build your first Copilot Studio agent with custom instructions, and AI model configuration.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create and Configure Your First Agent | Build a functional AI agent with clear instructions and optimal AI model settings | 8 minutes |
+| Create and Configure Your First Agent | Build a functional AI agent with clear instructions and optimal AI model settings | 6 minutes |
 
 **Summary of tasks**
 
-In this section, you'll learn how to create a new agent, configure its instructions and behavior, add suggested prompts, and select the appropriate AI model.
+In this section, you'll learn how to create a new agent, configure its instructions and behavior, and select the appropriate AI model.
 
 **Scenario:** You're building a "Copilot Studio Assistant" to help internal teams learn about Copilot Studio features, write effective prompts, and navigate the platform. This agent will serve as a learning companion grounded in official Microsoft documentation.
 
 ### Objective
 
-Create a fully configured Copilot Studio agent with clear instructions, suggested prompts, and Claude Sonnet 4.6 model selection.
+Create a fully configured Copilot Studio agent with clear instructions, knowledge, tools and Claude Sonnet 4.6 model selection.
 
 ---
 
@@ -238,7 +238,6 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 * If your agent gives generic responses, review and refine your instructions to be more specific about its role and expertise
 * Knowledge source indexing can take 2-5 minutes - wait before testing knowledge-specific questions
-* Suggested prompts improve user adoption - customize them to match your most common use cases
 
 **Challenge: Apply this to your own use case**
 
@@ -248,17 +247,13 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 ---
 
----
-
----
-
 ## Use Case #2: Build Custom Topics for Structured Conversations
 
 Create structured conversation flows with triggers, nodes, and logic to handle specific user intents like mailing list signups.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Build Custom Topics for Structured Conversations | Create structured conversation flows that handle specific user intents and workflows | 12 minutes |
+| Build Custom Topics for Structured Conversations | Create structured conversation flows that handle specific user intents and workflows | 8 minutes |
 
 **Summary of tasks**
 
@@ -378,15 +373,13 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
 
 ---
 
----
-
 ## Use Case #3: Enhance Agent Intelligence with Knowledge Sources
 
 Upload custom documents and content to transform your agent from a generic assistant into a domain-specific expert.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Enhance Agent Intelligence with Knowledge Sources | Transform generic AI into a domain expert by grounding responses in your organization's content | 10 minutes |
+| Enhance Agent Intelligence with Knowledge Sources | Transform generic AI into a domain expert by grounding responses in your organization's content | 8 minutes |
 
 **Summary of tasks**
 
@@ -513,17 +506,13 @@ The Use information from the web setting is available on the Generative AI setti
 
 ---
 
----
-
----
-
 ## Use Case #4: Extend Your Agent with Tools
 
 Build two different types of tools: a connector-based weather tool and a custom prompt analyzer tool with intelligent inputs.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Extend Your Agent with Tools | Connect your agent to external services and build custom analytical capabilities | 10 minutes |
+| Extend Your Agent with Tools | Connect your agent to external services and build custom analytical capabilities | 8 minutes |
 
 **Summary of tasks**
 
@@ -698,11 +687,10 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 ---
 
----
+## Extra Credit: Work with Variables
 
----
-
-## Use Case #5: Work with Variables
+> [!NOTE]
+> **Optional - Extra Credit (~5 minutes):** This use case is not included in the 30-minute lab time. Complete it after Use Case #2 if you have additional time to explore the variables in your mailing list topic.
 
 Explore the variables interface in Copilot Studio to understand how conversation state is managed through topic-level and global variables.
 
@@ -822,7 +810,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 ---
 
-### Congratulations! You've completed Use Case 5!
+### Congratulations! You've completed the Variables extra credit!
 
 ---
 
@@ -850,14 +838,10 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 ---
 
----
-
----
-
 ## Extra Credit: Create and Orchestrate Child Agents
 
 > [!NOTE]
-> **Optional - Extra Credit (~13 minutes):** This use case is optional and not included in the 45-minute lab time. Complete it if you have additional time or want to see how a main agent delegates to specialists.
+> **Optional - Extra Credit (~13 minutes):** This use case is optional and not included in the 30-minute lab time. Complete it if you have additional time or want to see how a main agent delegates to specialists.
 
 Build specialized child agents with focused knowledge and instructions to create modular, scalable agent architectures.
 
@@ -1026,16 +1010,10 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 ---
 
----
-
----
-
----
-
 ## Extra Credit: Deploy Your Agent Across Channels
 
 > [!NOTE]
-> **Optional - Extra Credit (~12 minutes):** This use case is optional and not included in the 45-minute lab time. Complete it if you have additional time or want to publish your agent where users actually work.
+> **Optional - Extra Credit (~12 minutes):** This use case is optional and not included in the 30-minute lab time. Complete it if you have additional time or want to publish your agent where users actually work.
 
 Learn how to configure and deploy your agent to channels, understand channel-specific settings, and implement appropriate security controls.
 
@@ -1162,11 +1140,9 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 ---
 
----
-
 ## Summary of learnings
 
-**One agent, five components, and the model is visible.** Nothing here was magic — each capability came from a part you added and configured.
+**One agent, assembled step by step, and the model is visible.** Nothing here was magic — each capability came from a part you added and configured.
 
 **Composition is the trade.** The Standard harness asks more of the maker than a declarative agent does, and returns control over how the conversation runs.
 
@@ -1180,6 +1156,6 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 **Do not author what the orchestrator can infer.** Topics are for the conversations that must go a specific way — not every conversation.
 
-**The optional sections go further.** Child agents show delegation to specialists; channels make the agent reachable where people work. M6 covers both in the talk track, but they sit outside the timed 45 minutes.
+**The optional sections go further.** Variables reveal conversation state; child agents show delegation to specialists; channels make the agent reachable where people work. All three sit outside the timed 30 minutes.
 
 **Carry this model forward.** The GitHub Copilot harness rearranges these same concerns around instructions, skills, tools, knowledge and memory. Recognising the mapping is most of understanding the newer model.

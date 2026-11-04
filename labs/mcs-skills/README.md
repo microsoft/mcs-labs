@@ -934,8 +934,6 @@ You extended a new-type agent with a **Skill**, two **custom MCP servers**, a se
 
 ---
 
----
-
 ## 🏆 Summary of learnings
 
 You built one Skill-equipped agent and then reused that Skill three more times without editing it. Along the way:

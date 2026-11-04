@@ -332,8 +332,6 @@ Confirm the environment is ready and the sample connected agent is published.
 
 ---
 
----
-
 ## Use Case #2: See the Impact of Instructions and Descriptions on the Planner
 
 Walk through where **Instructions** and **Descriptions** live in the Account Data Lookup Agent, then run a series of test queries to observe how the generative orchestration planner uses them to pick the right child agent, tool, and inputs at each turn.
@@ -603,8 +601,6 @@ Open the **Account Data Lookup Agent** in Copilot Studio and walk through each o
 * If the planner picks the wrong child agent, the **child's Description** is usually the place to fix it.
 * If a tool gets called with the wrong argument, it's almost always an **input Description** issue, not the user's wording.
 * If the planner re-searches when it should have used context, your tool descriptions may be unclear about which inputs are required vs. optional.
-
----
 
 ---
 

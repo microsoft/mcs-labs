@@ -8,7 +8,7 @@ Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** �
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 45 minutes (core; bonus extra) | After completing this lab, participants will be able to create a Workflow in Copilot Studio, fire it from an event-driven **trigger**, and embed a non-deterministic **inline agent** that reasons over the trigger's data and acts through tools (Outlook calendar, Microsoft To Do, and web search) — going beyond the classic, deterministic autonomous-agent model. |
+| 300 | Maker | 30 minutes (core; extra credit optional) | After completing this lab, participants will be able to create a Workflow in Copilot Studio, fire it from an event-driven **trigger**, and embed a non-deterministic **inline agent** that reasons over the trigger's data and acts through tools (Outlook calendar, Microsoft To Do, and web search) — going beyond the classic, deterministic autonomous-agent model. |
 
 ---
 
@@ -25,8 +25,8 @@ Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** �
   - [Use Case #1: Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent)
   - [Use Case #2: Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow)
   - [Use Case #3: Use M365 Copilot and Add a Human-in-the-Loop in Order Management](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management)
-  - [Use Case #4: Build an Inline Agent for Inventory Management](#-use-case-4-build-an-inline-agent-for-inventory-management)
-  - [Use Case #5 (Bonus): Call a Price Quote Specialist Agent from a Workflow](#-use-case-5-bonus-call-a-price-quote-specialist-agent-from-a-workflow)
+  - [Extra Credit: Build an Inline Agent for Inventory Management](#-extra-credit-build-an-inline-agent-for-inventory-management)
+  - [Extra Credit: Call a Price Quote Specialist Agent from a Workflow](#-extra-credit-call-a-price-quote-specialist-agent-from-a-workflow)
 - [Summary of Learnings](#-summary-of-learnings)
 - [Conclusions & Recommendations](#-conclusions--recommendations)
 
@@ -46,10 +46,10 @@ Think of Workflows as the autonomous side of Copilot Studio:
 - "My flows are rigid — I need a step that can reason about messy, real-world inputs and choose what to do."
 - "I want an agent that can read my calendar, book time, and update a task — on its own."
 
-**The 45-minute core covers Use Cases #1–#4:** an inline agent that blocks focus time and enriches a task, a multi-branch order-management workflow with human-in-the-loop approval, and an MCP-powered inventory agent that checks stock and creates Dataverse tasks. **Use Case #5 is an optional bonus** that calls a published price-quote specialist agent.
+**The 30-minute core covers Use Cases #1–#3:** an inline agent that blocks focus time and enriches a task, and a multi-branch order-management workflow with human-in-the-loop approval. **Optional extra credit** adds an MCP-powered inventory agent and calls a published price-quote specialist agent.
 
 > [!IMPORTANT]
-> Complete the prerequisites, solution imports, and first-use sign-in/consent before starting the core lab. The duration is a workshop target, not a measured completion guarantee; trigger pickup, connection setup, and human approval can add waiting time. Finish the core verification steps before attempting the bonus.
+> **At a CAT-led event, including the bootcamp, prerequisite setup is already prepared for you.** Start with Use Case #1 and sign in with your assigned lab account when prompted. For self-guided delivery, complete the setup in [Prerequisites](#-prerequisites) before starting. The duration is a workshop target, not a measured completion guarantee; trigger pickup and human approval can add waiting time. Finish the core verification steps before attempting extra credit.
 
 ---
 
@@ -89,7 +89,11 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 ## ✅ Prerequisites
 
 > [!NOTE]
-> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+> **CAT-led event or bootcamp? Skip this entire Prerequisites section and start at [Use Case #1](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent).** The CAT team has prepared the environment, starter workflows, sample data, solution imports, and connection references. Use your assigned lab account and complete any sign-in or consent prompts in the exercises. If a prepared resource is missing or inaccessible, ask your instructor rather than deleting or reimporting event resources.
+
+### Self-guided setup (outside CAT-led events)
+
+The setup below is only for running this lab independently in your own development or training environment.
 
 - Access to Microsoft Copilot Studio with appropriate licensing, in an environment where **Workflows** are enabled.
 - A work or school **Microsoft 365 account** with **Outlook (calendar)** and **Microsoft To Do** provisioned — the inline agent reads and writes *this* account's calendar and tasks.
@@ -98,15 +102,15 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 - Permission to create connections for the services used across the lab: **Microsoft To-Do (Business)**, **Office 365 Outlook**, **Work IQ Mail**, **Microsoft Dataverse / Dataverse MCP**, Human Review, and **Microsoft 365 Copilot**.
 - The **Dataverse connection reference** in the pre-loaded **LAB: Account Lookup Agent** solution repointed to a connection you own — see [Dataverse connection reference — do this first](#dataverse-connection-reference--do-this-first). **Every Dataverse tool in this lab fails silently without it.**
 - Basic familiarity with the Copilot Studio interface.
-- The **Warehouse MCP** custom MCP server imported into your environment — see [Custom MCP servers](#custom-mcp-servers) below. **Use Case #4 cannot be completed without it.**
-- The **LAB: Order Management Workflows** solution **imported by you** — your environment does not ship with it, and you must own the workflow to publish it. See [The Order Management solution](#the-order-management-solution) below. **Use Cases #2–#5 fail without this.**
+- The **Warehouse MCP** custom MCP server imported into your environment if you plan to complete the inventory extra credit — see [Custom MCP servers](#custom-mcp-servers) below.
+- The **LAB: Order Management Workflows** solution imported into your environment, with permission to edit and publish the workflow. See [The Order Management solution](#the-order-management-solution) below. It is required for Use Cases #2–#3 and both extra-credit exercises.
 
 > [!IMPORTANT]
 > Use the **same work account** for Copilot Studio and every connected service in this lab (Microsoft To Do, Outlook, Dataverse, M365 Copilot, and approvals). The triggers, inline agents, and tools all act on one identity — if they don't match, a workflow can't see your data or write back to your calendar, tasks, or Dataverse records.
 
 #### Dataverse connection reference — do this first
 
-**Do this before anything else in the lab.** Your environment ships with the **LAB: Account Lookup Agent** solution, and the Dataverse connection reference inside it is owned by the workshop author, not by you — it arrives with **Owner** set to someone else and **Status: Off**. Until you point it at a connection of your own, anything that reaches Dataverse fails, and it fails quietly: the tool shows a healthy connection but lists no operations, and an agent that needs it will report that the Dataverse connector is "not available as a tool" rather than erroring.
+**Self-guided setup only; CAT-event participants skip this section.** If your environment contains the pre-loaded **LAB: Account Lookup Agent** solution, inspect its Dataverse connection reference before using the Dataverse tools. A reference still linked to the workshop author's connection may show **Status: Off** or leave the tool with no operations. Follow the steps below only if the reference needs to be repointed to your connection.
 
 > [!NOTE]
 > **Already did this in another lab in this event?** You do not need to repeat it — the fix is per environment, not per lab. Come back to this section only if a Dataverse tool starts misbehaving: no rows returned, a tool that lists no operations, or an agent that says it cannot reach Dataverse.
@@ -136,18 +140,18 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 
 #### The Order Management solution
 
-Use Cases #2 through #5 all build on a pre-built **Order Management Workflow**, which ships inside the **LAB: Order Management Workflows** solution together with its connection references.
+Use Cases #2–#3 and both extra-credit exercises build on a pre-built **Order Management Workflow**, which ships inside the **LAB: Order Management Workflows** solution together with its connection references.
 
-**Your environment does not come with it — you import it yourself.** That is deliberate: importing the solution makes *you* the owner of everything inside it.
+**CAT-led event:** the team has already prepared this solution and workflow for you; skip the import instructions. **Self-guided delivery:** if the solution is missing, import it using the steps below.
 
 > [!IMPORTANT]
-> **Do not skip this — the lab cannot be completed without it.** Every one of Use Cases #2 through #5 depends on the workflow being **published**, and **only an owner can publish a workflow**. If someone else's copy is in place, you are not the owner, the **Publish** button stays unavailable, and the lab fails at Use Case #2 with no way forward.
+> The Order Management exercises require a **published** workflow that you can edit and publish. At a CAT-led event, ask your instructor if those permissions are missing. In a self-guided environment, verify ownership and connections before starting Use Case #2.
 
 | Solution package | Solution name in the environment | What it contains |
 |------------------|----------------------------------|------------------|
 | [`LABOrderManagementWorkflows_1_0_0_8.zip`](assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip) | **LAB: Order Management Workflows** | The **Order Management Workflow**, the **Price Quote Agent** with its price-quote skill and Dataverse/Mail tools, and six connection references |
 
-The workflow binds to first-party connectors only — Office 365 Outlook, M365 Copilot, Human review (Advanced Approvals), the Agent node, Microsoft Dataverse, and the Outlook Mail MCP. It does **not** carry the custom **Warehouse MCP** that Use Case #4 uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) below.
+The workflow binds to first-party connectors only — Office 365 Outlook, M365 Copilot, Human review (Advanced Approvals), the Agent node, Microsoft Dataverse, and the Outlook Mail MCP. It does **not** carry the custom **Warehouse MCP** that the inventory extra credit uses; that comes from the separate package in [Custom MCP servers](#custom-mcp-servers) below.
 
 ##### Import the solution
 
@@ -190,9 +194,9 @@ The workflow binds to first-party connectors only — Office 365 Outlook, M365 C
 
 ##### If a copy is already there
 
-A freshly provisioned lab environment does **not** ship this solution, so on a first run there is nothing to remove — go straight to the import steps above.
+**CAT-led event participants:** do not delete or reimport the prepared solution. Ask your instructor if you cannot edit or publish the workflow.
 
-Only if **LAB: Order Management Workflows** already appears in your **Solutions** list — you are re-running the lab, or someone else installed it into a shared environment — delete it first, then import your own copy. You must be the importer to own the workflow.
+**Self-guided delivery:** if you already own a working copy, keep it. If you need to replace a disposable copy in your own training environment, use the cleanup below before importing again. Do not delete another person's workflow or shared resources.
 
 1. In **Solutions**, select the **LAB: Order Management Workflows** row and choose **Delete** on the command bar, then confirm.
 
@@ -201,7 +205,7 @@ Only if **LAB: Order Management Workflows** already appears in your **Solutions*
 
 #### Custom MCP servers
 
-Use Case #4 gives the inline agent a **Warehouse MCP** tool. That server is **not** part of the platform — it is a custom connector that has to already exist in your environment, and nothing inside this lab creates it. If it is missing you will not find out here; you will find out in Use Case #4, when the tool you are told to add is not in the picker.
+The inventory extra credit gives the inline agent a **Warehouse MCP** tool. CAT-led events prepare this custom connector in advance. For self-guided delivery, check whether it is present and import it below only if needed. It is not required for the 30-minute core lab.
 
 It ships with this lab as an unmanaged Dataverse solution under [`assets/mcp-servers`](assets/mcp-servers).
 
@@ -209,10 +213,10 @@ It ships with this lab as an unmanaged Dataverse solution under [`assets/mcp-ser
 |------------------|----------------------------------|-------------------------|
 | [`EnhancedTaskCompletion_1_0_0_2.zip`](assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip) | **Enhanced Task Completion** | **Warehouse MCP** — `check_stock`, `get_restock_date`, `get_fulfillment_status`, `find_alternatives`<br>**Order Management MCP** — `search_orders`, `get_order`, `get_shipment`, `request_return`, `get_return_status` |
 
-Both servers run inline inside the connector as a C# script, over mock data for a fictional retailer. Nothing in them reaches a real system. This lab calls only **Warehouse MCP** — specifically the restock-date lookup in Use Case #4 — but the two connectors ship together in one solution and importing both is harmless.
+Both servers run inline inside the connector as a C# script, over mock data for a fictional retailer. Nothing in them reaches a real system. This lab calls only **Warehouse MCP** — specifically the restock-date lookup in the inventory extra credit — but the two connectors ship together in one solution and importing both is harmless.
 
 > [!NOTE]
-> The **Microsoft Dataverse MCP Server**, also used in Use Case #4, is first-party and needs no import — it appears in the **Model Context Protocol** tool list on its own. **Warehouse MCP** is the only server you have to provision.
+> The **Microsoft Dataverse MCP Server**, also used in the inventory extra credit, is first-party and needs no import — it appears in the **Model Context Protocol** tool list on its own. **Warehouse MCP** is the only server you have to provision for self-guided delivery.
 
 ##### Check whether it is already loaded
 
@@ -256,9 +260,9 @@ In this lab, you'll build several autonomous Workflows that act on event-driven 
 
 - Create a **Workflow** and configure **manual, scheduled, and connector-based triggers**.
 - Embed a **non-deterministic inline agent** in a workflow, give it goal-oriented instructions, and reference earlier data with the **`/` dynamic-content token**.
-- Equip agents with **tools** across Microsoft 365 and Dataverse (Office 365 Outlook's **Find meeting times** and **Create event**, Update to-do, **Dataverse MCP**, web search) and use **M365 Copilot** inside a workflow.
+- Equip agents with Microsoft 365 **tools** (Office 365 Outlook's **Find meeting times** and **Create event**, Update to-do, web search) and use **M365 Copilot** inside a workflow; explore **Dataverse MCP** in optional extra credit.
 - Add a **human-in-the-loop approval** step so a person validates an AI-drafted action before the workflow continues.
-- **Publish, run, and monitor** workflows end-to-end — including calling a separate **published agent** from a workflow branch.
+- **Publish, run, and monitor** workflows end-to-end; optionally call a separate **published agent** from a workflow branch in extra credit.
 
 ---
 
@@ -269,10 +273,10 @@ In this lab, you'll build several autonomous Workflows that act on event-driven 
 | 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 15 min |
 | 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Verify connections and publish a pre-built multi-branch classification workflow | 8 min |
 | 3 | [Use M365 Copilot and Add a Human-in-the-Loop](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: Copilot drafts a response, human approves, workflow replies | 7 min |
-| 4 | [Build an Inline Agent for Inventory Management](#-use-case-4-build-an-inline-agent-for-inventory-management) | Add an MCP-powered inline agent that checks warehouse stock and creates Dataverse tasks | 15 min |
-| EC | [Call a Price Quote Specialist Agent from a Workflow (Bonus)](#-use-case-5-bonus-call-a-price-quote-specialist-agent-from-a-workflow) | Wire a published agent into a workflow branch to generate and send price quotes | 10 min (extra) |
+| EC | [Extra Credit: Build an Inline Agent for Inventory Management](#-extra-credit-build-an-inline-agent-for-inventory-management) | Add an MCP-powered inline agent that checks warehouse stock and creates Dataverse tasks (Optional) | ~15 min |
+| EC | [Extra Credit: Call a Price Quote Specialist Agent from a Workflow](#-extra-credit-call-a-price-quote-specialist-agent-from-a-workflow) | Wire a published agent into a workflow branch to generate and send price quotes (Optional) | ~10 min |
 
-The core allocations total 45 minutes and assume the prerequisites are complete. Connection or ownership repair is troubleshooting, not a required exercise when the imported workflow is already correctly configured.
+Use Cases #1–#3 total 30 minutes (15 + 8 + 7 minutes). Both extra-credit exercises are outside this allocation. CAT-led events prepare the prerequisites; self-guided learners complete setup before starting. Connection or ownership repair is troubleshooting, not a required exercise when the prepared workflow is already correctly configured.
 
 ---
 
@@ -659,10 +663,13 @@ You've confirmed that the workflow can generate a grounded response with M365 Co
 
 ---
 
-## 📦 Use Case #4: Build an Inline Agent for Inventory Management
+## 📦 Extra Credit: Build an Inline Agent for Inventory Management
+
+> [!NOTE]
+> **Optional - Extra Credit (~15 minutes):** This exercise is outside the 30-minute core lab. Complete Use Case #2 first so the Order Management Workflow is configured and published.
 
 > [!IMPORTANT]
-> **This use case needs the Warehouse MCP server already present in your environment.** It is a custom connector, not a platform tool, and nothing earlier in this lab creates it — if it is missing, the **Add tool** step below has nothing to select. Two minutes now saves the detour: [is it already loaded?](#check-whether-it-is-already-loaded) In most delivery tenants it ships with the environment. If not, [import it](#how-to-import-it) — the solution package is in this repo.
+> **Warehouse MCP must be available.** At a CAT-led event, it is prepared for you; ask your instructor if it is missing rather than importing another copy. For self-guided delivery, [check whether it is loaded](#check-whether-it-is-already-loaded) and [import it if needed](#how-to-import-it).
 
 Extend the **Supplier Delay** branch with an inline **Agent** that uses **MCP servers** to reason over the delay notice, check current stock, and create a follow-up **Dataverse Task**.
 
@@ -842,9 +849,9 @@ You've added a reasoning agent that enriches a supplier delay notice with wareho
 
 ---
 
-## 💰 Use Case #5 (Bonus): Call a Price Quote Specialist Agent from a Workflow
+## 💰 Extra Credit: Call a Price Quote Specialist Agent from a Workflow
 
-**Optional bonus — outside the core lab duration.** Connect the **Quote Request** branch to a reusable **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse account data**, and **Mail** to produce and send a professional quote. The agent ships inside the imported solution and may already be **Published**; inspect its state and publish any changes before using it.
+**Optional - Extra Credit (~10 minutes), outside the 30-minute core lab.** Complete Use Case #2 first, then connect the **Quote Request** branch to a reusable **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse account data**, and **Mail** to produce and send a professional quote. The agent ships inside the prepared solution and may already be **Published**; inspect its state and publish any changes before using it.
 
 **Summary of tasks**
 

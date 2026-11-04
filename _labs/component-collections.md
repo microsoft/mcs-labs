@@ -267,8 +267,6 @@ Create an agent, build a custom topic, and package components into a reusable co
 
 ---
 
----
-
 ## Use Case #2: Share Component Collections Across Agents
 
 Add a component collection to a new agent and verify that shared edits sync automatically across all connected agents.
@@ -371,8 +369,6 @@ Install a component collection in a new agent and verify that shared editing wor
 
 * Which of your existing agents share common topics or knowledge that could benefit from component collections?
 * How would you coordinate editing shared components across a team of makers?
-
----
 
 ---
 
