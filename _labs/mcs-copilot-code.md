@@ -1,6 +1,6 @@
 ---
 layout: lab
-title: "Copilot Code: build a managed app"
+title: "Copilot Code: build a simple web app"
 order: 116
 duration: 30
 difficulty: 100
@@ -10,7 +10,7 @@ journeys: ["business-user", "developer"]
 description: "Use Copilot Code to generate, test, and refine a multi-day Bootcamp Lab Tracker from a plain-language prompt and the published agenda."
 ---
 
-# Copilot Code: build a managed app
+# Copilot Code: build a simple web app
 
 Use Copilot Code to turn a plain-language specification and the published bootcamp agenda into a working Bootcamp Lab Tracker without writing code manually.
 
