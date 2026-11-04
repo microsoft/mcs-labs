@@ -165,11 +165,9 @@ A simple prompt gets a fast answer no matter what you select. A complex prompt t
 
 #### 1.4 Change the model
 
-Open the same selector to the right of **Work IQ**. Below the response modes you'll see the available AI models — alongside **GPT**, **Claude** is available for most tenants (subject to what your admin has enabled).
+Open the selector to the right of **Work IQ**. It contains both response modes and model providers. Select **Claude** (shown as Anthropic) to open its model submenu, then choose an available Claude model. Model names and availability depend on your tenant and admin settings.
 
-Select **Claude**, then choose a model (for example **Sonnet**).
-
-![Claude model selected in Microsoft 365 Copilot](../m365-copilot-frontier-agents/images/lab-m365copilot-claude-model.png)
+![Microsoft 365 Copilot response-mode and model picker with Claude and GPT providers visible](images/copilot-model-picker.png)
 
 Carry on with the lab. Optionally, try a question or two of your own to see how the models differ.
 

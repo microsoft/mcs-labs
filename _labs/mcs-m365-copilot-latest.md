@@ -104,7 +104,9 @@ Understand what Microsoft 365 Copilot does on its own, grounded in public web co
 
 1. Navigate to the Microsoft 365 Copilot home page: <https://m365.cloud.microsoft/>.
 
-2. Find the **Work IQ control at the top left of the chat**. Market data lives on the public web, so select **Work IQ** to cross it off. With Work IQ off, nothing from your files, mail, meetings or chats is in scope, and every fact in the answers that follow has to come from a public source Copilot can cite and you can open.
+2. In the prompt box, make sure **Chat** is selected, not **Cowork**. This exercise uses regular chat.
+
+3. Find the **Work IQ control at the top left of the chat**. Market data lives on the public web, so select **Work IQ** to cross it off. With Work IQ off, nothing from your files, mail, meetings or chats is in scope, and every fact in the answers that follow has to come from a public source Copilot can cite and you can open.
 
 ![Work IQ turned off in Microsoft 365 Copilot](../m365-copilot-frontier-agents/images/lab-m365copilot-workiq.png)
 
@@ -181,11 +183,9 @@ A simple prompt gets a fast answer no matter what you select. A complex prompt t
 
 #### 1.4 Change the model
 
-Open the same selector to the right of **Work IQ**. Below the response modes you'll see the available AI models — alongside **GPT**, **Claude** is available for most tenants (subject to what your admin has enabled).
+Open the selector to the right of **Work IQ**. It contains both response modes and model providers. Select **Claude** (shown as Anthropic) to open its model submenu, then choose an available Claude model. Model names and availability depend on your tenant and admin settings.
 
-Select **Claude**, then choose a model (for example **Sonnet**).
-
-![Claude model selected in Microsoft 365 Copilot](../m365-copilot-frontier-agents/images/lab-m365copilot-claude-model.png)
+![Microsoft 365 Copilot response-mode and model picker with Claude and GPT providers visible](../m365-copilot-chat-work-iq/images/copilot-model-picker.png)
 
 Carry on with the lab. Optionally, try a question or two of your own to see how the models differ.
 
