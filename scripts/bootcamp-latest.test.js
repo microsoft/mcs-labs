@@ -163,9 +163,30 @@ test('Bootcamp Latest Hooks pacing preserves the shared workshop lab duration', 
   assert.equal(readDocument('_labs', 'mcs-hooks').data.module, 'metadata-and-hooks-deep-dive');
 });
 
-test('Bootcamp Latest Workflows pacing preserves the shared workshop lab duration', () => {
-  assert.equal(readDocument('_labs', 'mcs-workflows').data.duration, 45);
-  assert.equal(readDocument('_labs', 'mcs-workflows-latest').data.duration, 30);
+test('Workflows labs share a 30-minute core with optional extra credit and CAT-prepared setup', () => {
+  for (const slug of ['mcs-workflows', 'mcs-workflows-latest']) {
+    const lab = readDocument('_labs', slug);
+    assert.equal(lab.data.duration, 30, `${slug}: core duration`);
+    const sources = [
+      lab.content,
+      fs.readFileSync(path.join(root, 'labs', slug, 'README.md'), 'utf8'),
+    ];
+    for (const content of sources) {
+      const coreCases = [...content.matchAll(/^## .*Use Case #(\d+):/gm)];
+      assert.deepEqual(coreCases.map((match) => Number(match[1])), [1, 2, 3],
+        `${slug}: only the first three use cases are core`);
+      const durations = [...content.matchAll(/^\| [1-3] \|.*\| (\d+) min \|$/gm)]
+        .map((match) => Number(match[1]));
+      assert.deepEqual(durations, [15, 8, 7], `${slug}: core allocations total 30 minutes`);
+      assert.equal([...content.matchAll(/^## .*Extra Credit: /gm)].length, 2,
+        `${slug}: both advanced exercises are optional`);
+      assert.ok(content.includes('Skip this entire Prerequisites section'),
+        `${slug}: CAT participants can skip setup`);
+      assert.ok(content.includes('### Self-guided setup (outside CAT-led events)'),
+        `${slug}: independent setup remains documented`);
+      assert.doesNotMatch(content, /45.minute|45 minutes|Use Case #4|Use Case #5/);
+    }
+  }
   assert.equal(readDocument('_modules', 'workflows').data.lab, 'mcs-workflows');
   assert.equal(readDocument('_modules', 'workflows-latest').data.lab, 'mcs-workflows-latest');
 });

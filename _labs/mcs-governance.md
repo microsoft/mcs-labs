@@ -438,8 +438,6 @@ Create a "Copilot Studio Advisor" agent in both the Green and Yellow zones, test
 
 ---
 
----
-
 ## Use Case #2: Red Zone — Full Access and MCP Integration
 
 Build an agent in the Red zone with unrestricted public website access, then explore how an MCP server adds governed quality on top of open access.

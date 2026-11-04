@@ -299,8 +299,6 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 ---
 
----
-
 ## Use Case #2: Create Product Information Child Agents
 
 Create child agents that allow the user, based on their market, to get the right product information.
@@ -449,8 +447,6 @@ Create two child agents that provide market-specific Surface product information
 
 * If the wrong child agent responds, verify the condition on the Advanced section matches the correct Market variable value.
 * If knowledge doesn't return results, confirm the Public Website knowledge source status shows a green check mark.
-
----
 
 ---
 
@@ -613,8 +609,6 @@ Confirm the environment is ready to host a connected agent for account and conta
 
 * If Dataverse search returns no results, verify the Quick Find views have the correct columns added and the view is saved and published.
 * If the agent can't find account data, check that Dataverse Search is enabled in the Power Platform admin center for your environment.
-
----
 
 ---
 

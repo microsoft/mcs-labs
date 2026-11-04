@@ -280,8 +280,6 @@ Create the parent agent base that will be needed to host all your tools, agents,
 
 ---
 
----
-
 ## 🔄 Use Case #2: Create Product Information Child Agents
 
 Create child agents that allow the user, based on their market, to get the right product information.
@@ -406,8 +404,6 @@ In this section, you'll learn how to create child agents to logically group know
 
 * If the wrong child agent responds, verify the condition on the Advanced section matches the correct Market variable value.
 * If knowledge doesn't return results, confirm the Public Website knowledge source status shows a green check mark.
-
----
 
 ---
 

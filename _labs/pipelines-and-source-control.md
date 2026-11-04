@@ -345,8 +345,6 @@ the agent. Tell the agent to "Provision a PROD environment".  You are limited to
 
 ---
 
----
-
 ## Use Case #3: Commit changes and understand source control structure
 
 Use Git integration to track deployment changes and understand how Power Platform solution components are organized in source control.

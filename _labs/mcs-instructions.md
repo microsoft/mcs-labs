@@ -340,10 +340,6 @@ Confirm the environment is ready and the sample connected agent is published.
 
 ---
 
----
-
----
-
 ## Use Case #2: See the Impact of Instructions and Descriptions on the Planner
 
 Walk through where **Instructions** and **Descriptions** live in the Account Data Lookup Agent, then run a series of test queries to observe how the generative orchestration planner uses them to pick the right child agent, tool, and inputs at each turn.
@@ -625,10 +621,6 @@ Open the **Account Data Lookup Agent** in Copilot Studio and walk through each o
 
 ---
 
----
-
----
-
 ## Use Case #3: New Orchestrator – Agentic Reasoning Loop
 
 Build a brand-new **Sales Account Assistant** in Copilot Studio's **New experience**, attach knowledge and a set of tools, and watch the **New Orchestrator** drive multi-step tasks with its **Agentic Reasoning Loop** — planning, calling a tool, observing the result, and iterating until the user's task is complete, all in a single turn.
@@ -832,8 +824,6 @@ Open the **Preview** tab. The New Orchestrator surfaces its work **inline in the
 **Challenge: Apply this to your own use case**
 
 * Identify a workflow in your organization that gathers information from multiple systems and then takes an action (compose an email, draft a document, file a ticket). Sketch the tools it would need and decide, for each, whether **Maker** or **User** authentication is correct — and why.
-
----
 
 ---
 

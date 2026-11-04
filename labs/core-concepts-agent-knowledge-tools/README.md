@@ -236,8 +236,6 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 ---
 
----
-
 ## 🔄 Use Case #2: Enhance Agent Intelligence with Knowledge Sources
 
 Upload custom documents and content to transform your agent from a generic assistant into a domain-specific expert.
@@ -379,8 +377,6 @@ The Use information from the web setting is available on the Generative AI setti
 * What documents exist in your organization that would make valuable knowledge sources?
 * How could you organize multiple knowledge sources for optimal agent performance?
 * What questions would your users ask that could be answered from your documents?
-
----
 
 ---
 
@@ -562,8 +558,6 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 * What external services or APIs would enhance your agent's capabilities?
 * What specialized analysis or processing would help your users?
 * How would you describe tool inputs to ensure the agent collects the right information?
-
----
 
 ---
 

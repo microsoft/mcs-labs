@@ -130,8 +130,11 @@ The copied labs reuse images and downloads from their original lab folders via
 relative links; those asset folders remain dependencies. Do not remove them
 when editing or retiring an original lab. Workflows also has a Bootcamp-only
 module, `workflows-latest`, to avoid changing the shared module's duration.
-The shared `mcs-workflows` lab remains 45 minutes for other workshops; the
-Bootcamp-only `mcs-workflows-latest` lab uses its own 30-minute slot.
+Both `mcs-workflows` and `mcs-workflows-latest` now have a 30-minute core
+(Use Cases 1–3). Inventory management and the price-quote specialist are
+optional extra credit outside that allocation. CAT-led events prepare the
+prerequisites; independent learners follow the self-guided setup in each lab.
+The shared and Bootcamp-only module durations remain separate from lab pacing.
 
 The six shared source modules retain their previous titles, durations, and
 companion associations. Bootcamp Latest uses `-latest` copies of those modules,

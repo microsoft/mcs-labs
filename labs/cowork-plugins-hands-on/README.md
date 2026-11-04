@@ -177,8 +177,6 @@ Use the Cowork agent to read the [Contoso Grand Hotel Performance Report](https:
 
 ---
 
----
-
 ## 🤝 Use Case #2: Build an interactive sales dashboard from SharePoint and draft the summary email
 
 Use Case #1 handed Cowork a file you uploaded and asked for one artifact. This one gives it neither. You don't say where the file is, and a single instruction has to carry Cowork across four surfaces — find, extract, build, draft.
@@ -289,8 +287,6 @@ Have Cowork find the sales tracker workbook in SharePoint without you naming its
 - Which spreadsheet do you manually chart and email on a schedule today?
 - If the tracker updated weekly, would you re-run this by hand — or is this a job for a scheduled agent you build yourself?
 - Where in your reporting would an interactive dashboard beat the static chart everyone currently pastes into a mail?
-
----
 
 ---
 
