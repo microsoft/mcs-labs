@@ -318,7 +318,14 @@ schedule:
     time: "14:45"
     duration: 15
 
+  - type: module
+    slug: copilot-agent-kit
+    label: "Module 17"
+    title: "Copilot Agent Kit"
+    time: "15:00"
+    duration: 30
+
   - type: break
     title: "General Q&A"
-    time: "15:00"
-    duration: 60
+    time: "15:30"
+    duration: 30

@@ -64,7 +64,7 @@ event URL redirects to the current event. Legacy module/lab context links also
 resolve to their current counterparts; old presentation download URLs remain
 retired.
 
-`bootcamp-latest.yml` is the source of truth for 16 modules and 11 labs. Its day
+`bootcamp-latest.yml` is the source of truth for 17 modules and 11 labs. Its day
 boundaries are 09:00-16:00, 09:00-18:00 (including the social), and 09:00-16:00.
 Module and lab titles and durations are mirrored into the linked entity files,
 except for the shared Skills and Hooks labs: Lab 6 uses `mcs-skills-authoring`
@@ -80,6 +80,9 @@ Keep the event's fallback
 `labs:` list in `_events/bootcamp-latest.md` in the same order as the agenda.
 Explicit lab rows are authoritative for hero counts and timing, so preceding
 companion-module rows use `lab: false`.
+
+Module 17, Copilot Agent Kit, runs on Day 3 at 15:00 for 30 minutes, followed
+by General Q&A at 15:30 for 30 minutes. It has no companion lab.
 
 ### Legacy event links
 
@@ -138,8 +141,9 @@ unchanged deck files.
 
 ### Presentations and placeholders
 
-Each active module links to its numbered `M01`-`M16` deck under
-`presentations/bootcamp-latest/`. Renaming a deck requires updating every active
+Modules 1-16 link to their numbered `M01`-`M16` decks under
+`presentations/bootcamp-latest/`. Module 17 retains the existing
+`Copilot Studio Kit.pptx` filename in that directory. Renaming a deck requires updating every active
 `slides:` reference, including other workshop agendas. Existing deck contents
 are preserved; renumbering does not rewrite the titles inside the slides.
 

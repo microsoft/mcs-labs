@@ -83,8 +83,13 @@ test('Bootcamp Latest deck numbering and all local presentation references resol
   for (const [index, item] of modules.entries()) {
     const slides = readDocument('_modules', item.slug).data.slides;
     assert.ok(slides.startsWith(`/presentations/${eventId}/`), `${item.label}: canonical deck folder`);
-    assert.ok(decodeURIComponent(slides).split('/').pop()
-      .startsWith(`M${String(index + 1).padStart(2, '0')}.`), `${item.label}: deck number`);
+    const filename = decodeURIComponent(slides).split('/').pop();
+    if (item.slug === 'copilot-agent-kit') {
+      assert.equal(filename, 'Copilot Studio Kit.pptx', `${item.label}: existing kit deck`);
+    } else {
+      assert.ok(filename.startsWith(`M${String(index + 1).padStart(2, '0')}.`),
+        `${item.label}: deck number`);
+    }
   }
 
   const references = [];
@@ -103,6 +108,22 @@ test('Bootcamp Latest deck numbering and all local presentation references resol
     const deck = path.join(root, ...decodeURIComponent(slides).slice(1).split('/'));
     assert.ok(fs.statSync(deck).isFile(), `${source}: deck exists`);
   }
+});
+
+test('Bootcamp Latest ends with Copilot Agent Kit and Q&A by 16:00', () => {
+  const agenda = readAgenda();
+  assert.equal(agenda.schedule.filter((item) => item.type === 'module').length, 17);
+  assert.deepEqual(agenda.schedule.slice(-2), [
+    { type: 'module', slug: 'copilot-agent-kit', label: 'Module 17',
+      title: 'Copilot Agent Kit', time: '15:00', duration: 30 },
+    { type: 'break', title: 'General Q&A', time: '15:30', duration: 30 },
+  ]);
+  const module = readDocument('_modules', 'copilot-agent-kit');
+  assert.equal(module.data.duration, 30);
+  assert.equal(module.data.lab, undefined);
+  assert.equal(module.data.slides,
+    '/presentations/bootcamp-latest/Copilot%20Studio%20Kit.pptx');
+  assert.ok(module.content.includes('https://github.com/microsoft/Power-CAT-Copilot-Studio-Kit'));
 });
 
 test('standalone module decks remain independent of Bootcamp Latest merges', () => {

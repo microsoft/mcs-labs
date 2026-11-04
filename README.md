@@ -51,7 +51,7 @@
 
 ## Architecture Bootcamp Latest
 
-The [Bootcamp Latest agenda](./_data/agendas/bootcamp-latest.yml) contains 16 modules and 11 labs.
+The [Bootcamp Latest agenda](./_data/agendas/bootcamp-latest.yml) contains 17 modules and 11 labs.
 Each lab uses `mcs-<module-slug>` except for Copilot Code, Instructions and Skills Authoring, and Hooks and Knowledge.
 Bootcamp-specific copies use `-latest` slugs where needed; the shared Skills and Hooks labs retain their existing content and associations with 30-minute Bootcamp slots.
 
@@ -71,7 +71,13 @@ Bootcamp-specific copies use `-latest` slugs where needed; the shared Skills and
 
 Slots are agenda allocations, not a promise that all retained reference exercises fit.
 See each lab's pacing or placeholder note, and the [dependency notes](./_data/agendas/README.md#bootcamp-latest).
-Active [presentation decks](./presentations/bootcamp-latest) follow module numbers M01-M16;
+Module 17, [Copilot Agent Kit](./_modules/copilot-agent-kit.md), runs on Day 3
+from 15:00 to 15:30, followed by General Q&A until 16:00. It introduces capabilities
+for developing, governing, and testing agents, validating AI-generated content,
+optimizing prompts, and tracking KPIs. See the [kit repository](https://github.com/microsoft/Power-CAT-Copilot-Studio-Kit).
+
+Active [presentation decks](./presentations/bootcamp-latest) follow module numbers M01-M16,
+with Module 17 using the existing `Copilot Studio Kit.pptx` filename;
 unused decks remain in the same folder and empty placeholders contain no slides.
 
 Legacy Bootcamp event URLs and event-context links forward to the latest agenda
