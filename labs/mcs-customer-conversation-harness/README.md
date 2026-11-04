@@ -1,4 +1,4 @@
-# Customer Conversation: Zava Coffee Subscription Assistant
+# Customer Conversation Harness
 
 Build a **Customer Assist Agent** on the Customer conversation harness: a voice-first primary agent that works out what a caller wants and routes it silently to a specialist sub-agent. You build the primary agent with a skill and voice guidance, add a **Subscription Cancellation** sub-agent, watch the routing in the **Activity map**, then test the same agent on a live **Voice Call**. As extra work, add three more specialists.
 
@@ -323,7 +323,10 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
     ### Error Handling
     If the subscription cannot be canceled immediately, explain the next available cancellation date and confirm acceptance.
     ### Demo Mode
-    This is a demo with no backend system. After the caller confirms, simulate a successful cancellation: give a confirmation code like ZC-12345 and say the final delivery ships within 3 business days.
+    This is a demo with no backend system. Finish the whole cancellation yourself before you return to the main conversation:
+    - Once you have the `subscriptionId` and the reason, ask the caller to confirm with yes or no, and wait for the answer.
+    - When the caller says yes, reply in the same turn with a simulated success: a confirmation code like ZC-12345 and that the final delivery ships within 3 business days.
+    - Return to the main conversation only after you have given the confirmation code, or when the caller asks about something other than cancellation.
     ```
 
     ![The Subscription Cancellation sub-agent with its description and instructions](images/cancellation-subagent.png)
@@ -384,7 +387,7 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
     ![Cancellation completed in Web Chat, with the routing in the Activity map](images/test-cancel-routed.png)
 
     > [!NOTE]
-    > While the sub-agent waits for your next answer, some steps can show a red icon with status **Cancelled**. That means the turn ended to wait for you, not that something failed.
+    > A red **Cancelled** status can indicate an interrupted step. Check the conversation and Activity map for errors rather than assuming the test succeeded or failed.
 
 1. Select **+** for a new conversation and send:
 
@@ -648,7 +651,7 @@ The delivery question that the primary agent answered itself in Use Case #2 now 
 
 | Problem | Fix |
 |---------|-----|
-| **TelephonyBadRequest** or a generic error message in the test pane | A known preview issue. Select **+** to start a new conversation and send the message again |
+| **TelephonyBadRequest**, another error, or no response in the test pane | Select **+** to start a new conversation and repeat the test. If the problem persists, record the error details |
 | **Escalate** tool shows a warning | It is pre-added and not configured. This lab doesn't use it; leave it |
 | The name is rejected or cut off | Names are limited to 42 characters and must be unique. Shorten your initials |
 | A request isn't routed | Check the sub-agent's name matches the routing rules exactly and its **Description** is saved |
