@@ -67,9 +67,10 @@ retired.
 `bootcamp-latest.yml` is the source of truth for 17 modules and 11 labs. Its day
 boundaries are 09:00-16:00, 09:00-18:00 (including the social), and 09:00-16:00.
 Module and lab titles and durations are mirrored into the linked entity files,
-except for the shared Skills and Hooks labs: Lab 6 uses `mcs-skills-authoring`
-and Lab 7 uses `mcs-hooks`, both with 30-minute event slots. The standalone
-labs remain 60 and 45 minutes, respectively.
+except for the shared Hooks lab: Lab 7 uses `mcs-hooks` with a 30-minute event
+slot while the standalone lab remains 45 minutes. Lab 6 uses
+`mcs-skills-authoring` with a 30-minute core lab; Skill creation is optional
+extra credit outside that timebox.
 
 Lab slugs follow `mcs-<module-slug>`. The standalone Copilot Code lab has no
 dedicated module row and uses `mcs-copilot-code`. The shared Skills and Hooks

@@ -142,12 +142,12 @@ test('standalone module decks remain independent of Bootcamp Latest merges', () 
     '/presentations/bootcamp/11.%20Multi%20Agent_CB.pptx', 'Original Bootcamp keeps its Multi-Agent deck');
 });
 
-test('Bootcamp Latest Skills pacing preserves the shared workshop lab duration', () => {
+test('Bootcamp Latest Skills pacing matches the simplified shared lab duration', () => {
   const lab = readAgenda().schedule.find((item) => item.label === 'Lab 6');
   assert.equal(lab.slug, 'mcs-skills-authoring');
   assert.equal(lab.time, '11:30');
   assert.equal(lab.duration, 30);
-  assert.equal(readDocument('_labs', 'mcs-skills-authoring').data.duration, 60);
+  assert.equal(readDocument('_labs', 'mcs-skills-authoring').data.duration, 30);
   assert.equal(readDocument('_labs', 'mcs-skills-authoring').data.module,
     'instructions-skills-runtime-and-sandbox');
   assert.equal(readDocument('_modules', 'instructions-and-skills').data.lab, lab.slug);
