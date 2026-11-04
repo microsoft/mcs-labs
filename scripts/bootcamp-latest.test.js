@@ -39,6 +39,7 @@ test('Bootcamp Latest agenda matches modules and both copies of each lab', () =>
   const agenda = readAgenda();
   const modules = agenda.schedule.filter((item) => item.type === 'module');
   const labs = agenda.schedule.filter((item) => item.type === 'lab');
+  const sharedLabs = new Set(['mcs-hooks', 'mcs-skills-authoring']);
   assert.ok(modules.length > 0 && labs.length > 0);
 
   for (const [items, type, folder] of [
@@ -49,7 +50,8 @@ test('Bootcamp Latest agenda matches modules and both copies of each lab', () =>
       const document = readDocument(folder, item.slug);
       assert.equal(item.label, `${type} ${index + 1}`, `${item.slug}: sequential label`);
       assert.equal(item.title, document.data.title, `${item.label}: title`);
-      assert.equal(item.duration, document.data.duration, `${item.label}: duration`);
+      assert.equal(item.duration, sharedLabs.has(item.slug) ? 30 : document.data.duration,
+        `${item.label}: duration`);
       if (type === 'Module') {
         if (labs.some((lab) => lab.slug === document.data.lab)) {
           assert.equal(item.lab, false, `${item.label}: explicit lab controls hero totals`);
@@ -61,7 +63,9 @@ test('Bootcamp Latest agenda matches modules and both copies of each lab', () =>
       assert.equal(document.content.match(/^# (.+)$/m)?.[1], item.title, `${item.label}: site heading`);
       assert.equal(readme.match(/^# (.+)$/m)?.[1], item.title, `${item.label}: GitHub heading`);
       if (document.data.module) {
-        assert.equal(item.slug, `mcs-${document.data.module}`, `${item.label}: lab naming`);
+        if (!sharedLabs.has(item.slug)) {
+          assert.equal(item.slug, `mcs-${document.data.module}`, `${item.label}: lab naming`);
+        }
         assert.equal(readDocument('_modules', document.data.module).data.lab, item.slug,
           `${item.label}: associated module`);
       } else {
@@ -79,8 +83,13 @@ test('Bootcamp Latest deck numbering and all local presentation references resol
   for (const [index, item] of modules.entries()) {
     const slides = readDocument('_modules', item.slug).data.slides;
     assert.ok(slides.startsWith(`/presentations/${eventId}/`), `${item.label}: canonical deck folder`);
-    assert.ok(decodeURIComponent(slides).split('/').pop()
-      .startsWith(`M${String(index + 1).padStart(2, '0')}.`), `${item.label}: deck number`);
+    const filename = decodeURIComponent(slides).split('/').pop();
+    if (item.slug === 'copilot-agent-kit') {
+      assert.equal(filename, 'Copilot Studio Kit.pptx', `${item.label}: existing kit deck`);
+    } else {
+      assert.ok(filename.startsWith(`M${String(index + 1).padStart(2, '0')}.`),
+        `${item.label}: deck number`);
+    }
   }
 
   const references = [];
@@ -101,6 +110,23 @@ test('Bootcamp Latest deck numbering and all local presentation references resol
   }
 });
 
+test('Bootcamp Latest ends with Copilot Agent Kit and Q&A by 16:00', () => {
+  const agenda = readAgenda();
+  assert.equal(agenda.schedule.filter((item) => item.type === 'module').length, 17);
+  assert.deepEqual(agenda.schedule.slice(-2), [
+    { type: 'module', slug: 'copilot-agent-kit', label: 'Module 17',
+      title: 'Copilot Agent Kit', time: '15:00', duration: 30 },
+    { type: 'break', title: 'General Q&A', time: '15:30', duration: 30 },
+  ]);
+  const module = readDocument('_modules', 'copilot-agent-kit');
+  assert.equal(module.data.duration, 30);
+  assert.equal(module.data.lab, undefined);
+  assert.equal(module.data.slides,
+    '/presentations/bootcamp-latest/Copilot%20Studio%20Kit.pptx');
+  const repositoryLink = module.content.match(/^- \[Copilot Agent Kit on GitHub\]\(([^)\s]+)\)$/m);
+  assert.equal(repositoryLink?.[1], 'https://github.com/microsoft/Power-CAT-Copilot-Studio-Kit');
+});
+
 test('standalone module decks remain independent of Bootcamp Latest merges', () => {
   for (const [slug, filename] of [
     ['agent-skills', 'M06. Deep Dive - Skills.pptx'],
@@ -114,6 +140,26 @@ test('standalone module decks remain independent of Bootcamp Latest merges', () 
 
   assert.equal(readDocument('_modules', 'multi-agent').data.slides,
     '/presentations/bootcamp/11.%20Multi%20Agent_CB.pptx', 'Original Bootcamp keeps its Multi-Agent deck');
+});
+
+test('Bootcamp Latest Skills pacing preserves the shared workshop lab duration', () => {
+  const lab = readAgenda().schedule.find((item) => item.label === 'Lab 6');
+  assert.equal(lab.slug, 'mcs-skills-authoring');
+  assert.equal(lab.time, '11:30');
+  assert.equal(lab.duration, 30);
+  assert.equal(readDocument('_labs', 'mcs-skills-authoring').data.duration, 60);
+  assert.equal(readDocument('_labs', 'mcs-skills-authoring').data.module,
+    'instructions-skills-runtime-and-sandbox');
+  assert.equal(readDocument('_modules', 'instructions-and-skills').data.lab, lab.slug);
+});
+
+test('Bootcamp Latest Hooks pacing preserves the shared workshop lab duration', () => {
+  const lab = readAgenda().schedule.find((item) => item.label === 'Lab 7');
+  assert.equal(lab.slug, 'mcs-hooks');
+  assert.equal(lab.time, '13:45');
+  assert.equal(lab.duration, 30);
+  assert.equal(readDocument('_labs', 'mcs-hooks').data.duration, 45);
+  assert.equal(readDocument('_labs', 'mcs-hooks').data.module, 'metadata-and-hooks-deep-dive');
 });
 
 test('Bootcamp Latest Workflows pacing preserves the shared workshop lab duration', () => {

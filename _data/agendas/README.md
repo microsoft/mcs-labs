@@ -64,22 +64,32 @@ event URL redirects to the current event. Legacy module/lab context links also
 resolve to their current counterparts; old presentation download URLs remain
 retired.
 
-`bootcamp-latest.yml` is the source of truth for 16 modules and 12 labs. Its day
+`bootcamp-latest.yml` is the source of truth for 17 modules and 11 labs. Its day
 boundaries are 09:00-16:00, 09:00-18:00 (including the social), and 09:00-16:00.
-Module and lab titles and durations are mirrored into the linked entity files;
-lab titles and slot durations also appear in their GitHub READMEs.
+Module and lab titles and durations are mirrored into the linked entity files,
+except for the shared Skills and Hooks labs: Lab 6 uses `mcs-skills-authoring`
+and Lab 7 uses `mcs-hooks`, both with 30-minute event slots. The standalone
+labs remain 60 and 45 minutes, respectively.
 
 Lab slugs follow `mcs-<module-slug>`. The standalone Copilot Code lab has no
-dedicated module row and uses `mcs-copilot-code`. Keep the event's fallback
+dedicated module row and uses `mcs-copilot-code`. The shared Skills and Hooks
+labs retain their `mcs-skills-authoring` and `mcs-hooks` slugs and their
+`instructions-skills-runtime-and-sandbox` and `metadata-and-hooks-deep-dive`
+module associations, respectively.
+Keep the event's fallback
 `labs:` list in `_events/bootcamp-latest.md` in the same order as the agenda.
 Explicit lab rows are authoritative for hero counts and timing, so preceding
 companion-module rows use `lab: false`.
+
+Module 17, Copilot Agent Kit, runs on Day 3 at 15:00 for 30 minutes, followed
+by General Q&A at 15:30 for 30 minutes. It has no companion lab.
 
 ### Legacy event links
 
 The [event alias definitions](../event-aliases.yml) map the former event ID and
 renamed module/lab slugs to the current curriculum. Instructions and Skills
-links resolve to the combined topic. Items no longer scheduled in the latest
+module links resolve to the combined topic, while lab links resolve to
+Instructions and Skills Authoring. Items no longer scheduled in the latest
 agenda resolve to the event overview instead of an unrelated replacement.
 
 Compatibility pages use the [redirect layout](../../_layouts/redirect.html)
@@ -131,8 +141,9 @@ unchanged deck files.
 
 ### Presentations and placeholders
 
-Each active module links to its numbered `M01`-`M16` deck under
-`presentations/bootcamp-latest/`. Renaming a deck requires updating every active
+Modules 1-16 link to their numbered `M01`-`M16` decks under
+`presentations/bootcamp-latest/`. Module 17 retains the existing
+`Copilot Studio Kit.pptx` filename in that directory. Renaming a deck requires updating every active
 `slides:` reference, including other workshop agendas. Existing deck contents
 are preserved; renumbering does not rewrite the titles inside the slides.
 

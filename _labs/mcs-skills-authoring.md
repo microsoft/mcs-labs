@@ -1,7 +1,7 @@
 ---
 layout: lab
 module: instructions-skills-runtime-and-sandbox
-title: "Skills and Skill Authoring"
+title: "Instructions and Skills Authoring"
 order: 297
 duration: 60
 difficulty: 300
@@ -11,7 +11,7 @@ journeys: ["developer"]
 description: "Start with a Skill-equipped agent, then choose your adventure: call it from a workflow or generate and test your own Skill in Preview or Cowork."
 
 ---
-# Skills and Skill Authoring
+# Instructions and Skills Authoring
 
 Start with a Skill-equipped agent, then choose your adventure: call it from a workflow or generate and test your own Skill in Preview or Cowork.
 

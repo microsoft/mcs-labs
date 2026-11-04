@@ -7,7 +7,7 @@ difficulty: 300
 section: intermediate_modules
 description: "Placeholder for the Instructions & Skills deep dive in Architecture Bootcamp Latest. Instructor content is coming soon."
 slides: "/presentations/bootcamp-latest/M07.%20Deep%20Dive%20-%20Instructions%20and%20Skills.pptx"
-lab: "mcs-instructions-and-skills"
+lab: "mcs-skills-authoring"
 ---
 
 ## Module placeholder
