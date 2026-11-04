@@ -123,7 +123,8 @@ test('Bootcamp Latest ends with Copilot Agent Kit and Q&A by 16:00', () => {
   assert.equal(module.data.lab, undefined);
   assert.equal(module.data.slides,
     '/presentations/bootcamp-latest/Copilot%20Studio%20Kit.pptx');
-  assert.ok(module.content.includes('https://github.com/microsoft/Power-CAT-Copilot-Studio-Kit'));
+  const repositoryLink = module.content.match(/^- \[Copilot Agent Kit on GitHub\]\(([^)\s]+)\)$/m);
+  assert.equal(repositoryLink?.[1], 'https://github.com/microsoft/Power-CAT-Copilot-Studio-Kit');
 });
 
 test('standalone module decks remain independent of Bootcamp Latest merges', () => {
