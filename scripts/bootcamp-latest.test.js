@@ -133,6 +133,7 @@ test('standalone module decks remain independent of Bootcamp Latest merges', () 
     ['creation-github-harness', 'M11. Creation GitHub Harness from UX and from Chat.pptx'],
     ['github-copilot-harness', 'M10. GitHub Copilot Harness Component Model.pptx'],
     ['instructions-and-descriptions', 'M05. Deep Dive - Instructions and Descriptions.pptx'],
+    ['governance-and-agent-365', 'M17. Governance Managed Environment and Agent 365.pptx'],
   ]) {
     assert.equal(decodeURIComponent(readDocument('_modules', slug).data.slides),
       `/presentations/shared/${filename}`, `${slug}: preserved standalone deck`);

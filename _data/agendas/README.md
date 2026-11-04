@@ -168,6 +168,7 @@ merging the Bootcamp Latest decks does not change other deliveries:
 | `agent-skills` | `M06. Deep Dive - Skills.pptx` |
 | `github-copilot-harness` | `M10. GitHub Copilot Harness Component Model.pptx` |
 | `creation-github-harness` | `M11. Creation GitHub Harness from UX and from Chat.pptx` |
+| `governance-and-agent-365` | `M17. Governance Managed Environment and Agent 365.pptx` |
 
 M06 uses the scheduled New Copilot Studio Harnesses deck; its two former
 GitHub Harness merge-source files have been removed. Keep the remaining Latest
@@ -177,8 +178,9 @@ sources or adopt a composite deck without an explicit content decision.
 
 The Latest Multi-Agent merge source has no active references. The shared
 `multi-agent` module, used by the original Bootcamp, keeps its original deck in
-`presentations/bootcamp/`. The Governance deck remains linked from its standalone
-module but is not scheduled in Bootcamp Latest.
+`presentations/bootcamp/`. The Governance deck has moved to
+`presentations/shared/` and remains linked from its standalone module, but is
+not scheduled in Bootcamp Latest.
 
 Placeholder module/lab pages explicitly state that content is coming soon.
 The Knowledge, Tools & Hooks lab currently carries the Tools/MCP exercises;
