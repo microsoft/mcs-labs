@@ -8,14 +8,12 @@ difficulty: 200
 lab_type: local
 section: intermediate_labs
 journeys: ["developer"]
-description: "Recreate a tracker from a screenshot in Copilot Studio Apps, then rehearse backend storage, saved progress, and publishing."
+description: "Build an app from the live bootcamp lab schedule in Copilot Studio Apps, with a focus on backend creation, connection, and saved progress."
 ---
 
 # Managed Apps
 
-From tracker prototype to managed app: recreate the Bootcamp Lab Tracker from a screenshot in Copilot Studio Apps, then rehearse backend storage, persistence checks, and publishing.
-
-> **Draft for author review:** Backend provisioning and publishing still need end-to-end rehearsal in a fresh training environment. The screenshots illustrate a SharePoint approval flow; they do not prove that storage was created or that completion persists. Do not treat those stages as verified learner instructions yet.
+Build a managed app from the live published bootcamp lab schedule in Copilot Studio Apps. Use a screenshot as a visual reference, with the main focus on creating backend storage, connecting the app, and verifying that saved progress is restored.
 
 ---
 
@@ -23,7 +21,7 @@ From tracker prototype to managed app: recreate the Bootcamp Lab Tracker from a 
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 200 | Maker | 30 minutes | Recreate an app from a visual reference, distinguish in-memory progress from backend storage, and verify persistence before publishing. |
+| 200 | Maker | 30 minutes | Create an app from the live lab schedule, provision and connect backend storage, and verify saved progress before publishing. |
 
 The 30-minute duration is a target to validate during rehearsal, not a confirmed completion time.
 
@@ -39,7 +37,7 @@ The 30-minute duration is a target to validate during rehearsal, not a confirmed
 - [Summary of Targets](#summary-of-targets)
 - [Use Case Covered](#use-case-covered)
 - [Instructions](#instructions)
-- [Use Case: From Image to Managed Tracker](#use-case-from-image-to-managed-tracker)
+- [Use Case: Build an App with a Persistent Backend](#use-case-build-an-app-with-a-persistent-backend)
 - [Summary of Learnings](#summary-of-learnings)
 - [Conclusions and Recommendations](#conclusions-and-recommendations)
 - [Architecture Bootcamp Latest](#architecture-bootcamp-latest)
@@ -50,11 +48,11 @@ The 30-minute duration is a target to validate during rehearsal, not a confirmed
 
 **Start simple, then choose the platform for the job.** In this bootcamp, **Copilot Code** is the approachable entry point for simple apps and quick prototypes. **Microsoft Copilot Studio (MCS)** is the platform to explore when you need more advanced agents, connections to business data and tools, and managed deployment and governance. This is a progression in solution needs, not a hard limit on either tool.
 
-This lab connects those ideas by taking a familiar prototype into Copilot Studio Apps and exploring managed data and publishing. The exercise focuses on the app and its saved progress; it does not build an advanced agent.
+This lab connects those ideas by creating an app from the live published lab schedule in Copilot Studio Apps. **The backend is the main learning focus:** creating storage, connecting the app to it, and verifying real reads and writes. The screenshot provides a familiar visual starting point; reproducing the UI is not the final goal. This exercise does not build an advanced agent.
 
 **A convincing preview is not the same as a working managed app.** A screenshot can communicate a design quickly, but it cannot specify where data is saved, who can access it, or what happens after a reload.
 
-This lab separates those questions. First, recreate a familiar interface using an image and a written behavior specification. Then test whether the environment can create supported backend storage, save real completion records, and deliver an app through a live link.
+This lab separates those questions. First, build the interface using an image and a written behavior specification, with data read from the live published schedule. Then create and connect supported backend storage, verify real completion records, and deliver the app through a live link.
 
 You will practice checking behavior rather than accepting a generated screen or an approval message as proof of success.
 
@@ -62,9 +60,9 @@ You will practice checking behavior rather than accepting a generated screen or 
 
 ## Introduction
 
-The earlier Copilot Code lab creates a Bootcamp Lab Tracker whose completion progress resets on reload. Here, you will use a screenshot of that tracker as the starting design for a new app in **Copilot Studio Apps**.
+In Lab 3, you create a simple app in Copilot Code whose completion progress resets on reload. Here, you will create a new app in **Copilot Studio Apps** using the **live published bootcamp lab schedule** as its data source and a screenshot as a visual reference.
 
-This is **not** an HTML import or a Code-to-Studio migration. The screenshot communicates the intended appearance; the prompt supplies the agenda URL and interaction requirements. A reference screenshot is included, so completing the earlier lab is not a prerequisite.
+This is **not** an HTML import or a Code-to-Studio migration. The screenshot communicates the intended appearance; the app's initial schedule data comes from reading the live agenda URL, not copying the screenshot's lab names, times, or totals. The prompt specifies the required behavior. A reference screenshot is included, so completing the earlier lab is not a prerequisite.
 
 The first prompt deliberately keeps completion in memory. The second asks the app-building experience to explain and provision supported backend storage in your current environment. No SharePoint list or prepared database is supplied in advance.
 
@@ -77,9 +75,9 @@ The first prompt deliberately keeps completion in memory. The second asks the ap
 | Concept | Why it matters |
 | ------- | -------------- |
 | **Image-based specification** | Communicates layout and appearance without importing the earlier app's code. |
-| **Behavior specification** | Defines the schedule, completion rules, and accessibility requirements that an image cannot convey. |
+| **Live schedule input** | Reads the current published agenda when building the app rather than hardcoding schedule data from the image. |
 | **In-memory progress** | Establishes a baseline that intentionally resets on reload. |
-| **Backend storage** | Saves completion outside the browser so it can be restored in a later session. |
+| **Backend storage and connection** | Creates supported storage and connects the app's reads and writes so completion can be restored in a later session. |
 | **Provisioning and approval** | Separates proposing a resource, approving its creation, and verifying that it actually exists. |
 | **Preview versus published app** | Distinguishes the authoring experience from the app learners will open through a live link. |
 
@@ -88,7 +86,7 @@ The first prompt deliberately keeps completion in memory. The second asks the ap
 ## Documentation and Additional Training Links
 
 - [Microsoft Copilot Studio documentation](https://learn.microsoft.com/microsoft-copilot-studio/) - general product reference; it does not establish that the Apps or storage capabilities are available in your tenant.
-- [Published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) - source of truth for the tracker's schedule.
+- [Live published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) - source of truth for the app's schedule data.
 
 Use your facilitator's environment-specific guidance for feature access and approved storage.
 
@@ -100,11 +98,11 @@ For an instructor-led bootcamp, use the provided account and designated environm
 
 - Access to **Copilot Studio Apps**, including image upload and app preview in your environment.
 - Permission for the app-building experience to read the published bootcamp agenda.
-- Either the [provided tracker screenshot](assets/actual-app.png) or a screenshot of your current Lab 3 tracker, saved locally for upload.
+- Either the [provided app screenshot](assets/actual-app.png) or a screenshot of your current Lab 3 app, saved locally for upload.
 - For the storage rehearsal, permission to create the proposed backend resources and connections in a designated training environment. If SharePoint is proposed, site and list creation may require additional permissions.
 - For the publishing rehearsal, access to the app's publishing controls and an approved audience.
 
-Do not use production sites or another learner's storage. No pre-existing SharePoint list or prepared database is required, and no VS Code setup is required for this draft.
+Do not use production sites or another learner's storage. No pre-existing SharePoint list or prepared database is required, and no VS Code setup is required for this lab.
 
 ---
 
@@ -112,10 +110,10 @@ Do not use production sites or another learner's storage. No pre-existing ShareP
 
 By the end of a successful rehearsal, you will be able to:
 
-- Build a tracker from the supplied image and written requirements.
+- Create an app whose schedule data comes from the live published agenda, using an image only as a visual reference.
 - Confirm that its labs and Lunch match the current published agenda rather than the screenshot's historical counts.
 - Explain the difference between in-memory completion and persistent backend records.
-- Identify the proposed storage, required permissions, and actual provisioning result.
+- Create supported backend storage, review its permissions, and verify the app's read and write connection.
 - Verify that completing and unchecking a lab both persist after a reload.
 - Publish only after persistence succeeds, then repeat the checks through the live app link.
 
@@ -125,7 +123,7 @@ By the end of a successful rehearsal, you will be able to:
 
 | Step | Use Case | Value added | Target effort |
 | ---- | -------- | ----------- | ------------- |
-| 1 | [From image to managed tracker](#use-case-from-image-to-managed-tracker) | Recreate the tracker, then add and verify backend persistence before publishing. | 30 min |
+| 1 | [Build an app with a persistent backend](#use-case-build-an-app-with-a-persistent-backend) | Use the live lab schedule to create an app, then provision, connect, and verify its backend before publishing. | 30 min |
 
 Complete the steps in order in the same app. Backend storage and publishing remain provisional until rehearsal confirms the environment supports them.
 
@@ -135,40 +133,40 @@ Complete the steps in order in the same app. Backend storage and publishing rema
 
 ---
 
-## Use Case: From Image to Managed Tracker
+## Use Case: Build an App with a Persistent Backend
 
-**Scenario:** You want the familiar tracker from the earlier lab, recreated from an image in Copilot Studio Apps and extended with saved progress rather than importing its source.
+**Scenario:** You want an app based on the live bootcamp lab schedule that saves completion to a backend. Use the provided image or your Lab 3 app screenshot as a design reference, not as the source of schedule data.
 
 ### Objective
 
-Create a working tracker from the supplied image and current agenda, then provision supported backend storage, verify saved completion, and publish the same app if rehearsal succeeds.
+Create an app from the live published agenda, provision supported backend storage, connect the app's reads and writes, verify saved completion, and publish the same app if rehearsal succeeds.
 
 ### Step-by-Step Instructions
 
 #### Save and Upload the Reference Image
 
-1. Choose your starting image: save the provided screenshot below, or take a screenshot of your current **Lab 3: Copilot Code** tracker. Either option works; you do not need to have completed Lab 3 to use the provided screenshot.
+1. Choose your starting image: save the provided screenshot below, or take a screenshot of your current **Lab 3: Copilot Code** app. Either option works; you do not need to have completed Lab 3 to use the provided screenshot.
 2. Open **Copilot Studio Apps** in your provided training environment and start a new app.
 3. Attach the screenshot to the app-building conversation before submitting the first prompt.
 
 [Open or save the reference screenshot](assets/actual-app.png)
 
-![Reference Bootcamp Lab Tracker with a dark theme, day tabs, timeline, lab cards, and an overall progress indicator](assets/actual-app.png)
+![Reference app with a dark theme, day tabs, timeline, lab cards, and an overall progress indicator](assets/actual-app.png)
 
-The image is a design reference, not the schedule source. Its lab numbers, times, and totals may differ from the current agenda. Do not hardcode the screenshot's total.
+The image is a design reference, not the schedule source. Its app title, lab numbers, times, and totals may differ from the app you create. Use the app name in the prompt and read the schedule from the live agenda; do not hardcode the screenshot's data.
 
-#### Prompt 1: Build from the Image
+#### Prompt 1: Build the App from the Live Schedule
 
 With the screenshot attached, submit this prompt exactly as written:
 
 ```text
-Build a managed app called "My Bootcamp Lab Tracker" using the
+Build a managed app called "My Bootcamp Lab App" using the
 attached screenshot as a visual reference.
 
 Reproduce its dark theme, square corners, day tabs, timeline,
 lab cards, completion checkboxes, and overall progress indicator.
 
-Fetch the schedule from:
+Fetch the current live published lab schedule from:
 https://microsoft.github.io/mcs-labs/events/bootcamp-latest/
 
 Include every day's scheduled "Lab N:" items and Lunch break.
@@ -191,7 +189,7 @@ Wait for the preview. If the agenda cannot be read, stop and tell your facilitat
 
 #### Check the In-Memory Preview
 
-- Compare every day's lab numbers, titles, and times with the published agenda. Include Lunch, but exclude other agenda items and optional labs.
+- Compare every day's lab numbers, titles, and times with the live published agenda, not the screenshot. Include Lunch, but exclude other agenda items and optional labs.
 - Confirm that all labs start unchecked and the overall total counts labs only.
 - Toggle a timeline lab button and then a card checkbox. Both controls, the day's count, and overall progress must stay synchronized.
 - Switch days and switch back. Completion should remain during the session.
@@ -208,7 +206,7 @@ Once the in-memory checks pass, continue in the same app-building conversation t
 In the same app-building conversation, submit:
 
 ```text
-Extend this tracker so completion is saved and restored after
+Extend this app so completion is saved and restored after
 reload, rather than held only in memory.
 
 Use persistent backend storage that this Copilot Studio Apps
@@ -231,11 +229,11 @@ The supplied screenshots show one possible **SharePoint** flow. Your environment
 
 1. If asked where the completion list should go, use only a location approved for this training exercise. For a fresh-environment rehearsal without an existing site, test **Yes, create a new site** only if you have permission to create it.
 
-<a href="assets/choose-site.png"><img src="assets/choose-site.png" alt="SharePoint storage location options for saving tracker completion" width="600" class="align-center"></a>
+<a href="assets/choose-site.png"><img src="assets/choose-site.png" alt="SharePoint storage location options for saving app completion" width="600" class="align-center"></a>
 
 2. If a **Create site** approval appears, review the site name, location, and full details. Approve only the intended training resource and only if authorized.
 
-<a href="assets/create-site.png"><img src="assets/create-site.png" alt="SharePoint Create site approval card showing the proposed Bootcamp Lab Tracker site" width="600" class="align-center"></a>
+<a href="assets/create-site.png"><img src="assets/create-site.png" alt="SharePoint Create site approval card showing the proposed training site" width="600" class="align-center"></a>
 
 3. If a **Create lists** approval appears, review the target site and proposed fields. The screenshot includes `Title`, `LabNumber`, `Completed`, and `CompletedOn`; it is an example, not a mandatory schema for every backend.
 
@@ -270,7 +268,7 @@ If provisioning fails, record the proposed backend, attempted action, and exact 
 
 ### Congratulations!
 
-Only after these checks pass have you demonstrated a tracker with backend persistence and a working published link. If either stage is blocked, the useful rehearsal result is the documented blocker, not a claim of successful completion.
+Only after these checks pass have you demonstrated an app based on the live published schedule, connected to a persistent backend, with a working published link. If either stage is blocked, the useful rehearsal result is the documented blocker, not a claim of successful completion.
 
 ### Test Your Understanding
 
@@ -285,8 +283,9 @@ Only after these checks pass have you demonstrated a tracker with backend persis
 ## Summary of Learnings
 
 - **Choose the platform by need:** Copilot Code offers an approachable start for simple prototypes; Copilot Studio supports the broader path toward advanced agents and managed solutions.
-- **Use images for design, not data:** the current agenda remains the schedule source.
-- **Establish a baseline:** verify the in-memory tracker before introducing a backend.
+- **Use the live schedule for data:** read the current published agenda; use the screenshot only for design.
+- **Make the backend the outcome:** create storage, connect the app, and verify real reads and writes rather than stopping at a convincing UI.
+- **Establish a baseline:** verify the in-memory app before introducing a backend.
 - **Review before approving:** understand what will be created and which permissions it needs.
 - **Verify the whole round trip:** write, inspect, reload, undo, and reload again.
 - **Separate preview from delivery:** test the live app after publishing rather than assuming preview success is enough.
@@ -294,8 +293,6 @@ Only after these checks pass have you demonstrated a tracker with backend persis
 ### Conclusions and Recommendations
 
 Keep the reference image and behavior requirements together. Rehearse provisioning in a fresh training environment before finalizing learner instructions. Confirm data isolation and permissions, preserve the working interface when adding storage, and report blockers explicitly.
-
-Before removing the draft warning, confirm the exact Apps entry point, supported backend, creation permissions, app connection, persistence behavior, publishing controls, live-link access, and realistic completion time.
 
 ---
 
