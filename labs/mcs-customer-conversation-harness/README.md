@@ -151,7 +151,7 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
 
 1. On **Create your Customer Assist Agent**, ignore the description box. Under **Start from scratch**, select **Create agent**.
 
-    ![Create your Customer Assist Agent page with the Start from scratch option](images/start-from-scratch.png)
+    ![The Start from scratch option with the Create agent button](images/start-from-scratch.png)
 
 1. In **Name your agent**, enter the name below followed by your initials, for example `Zava Coffee Subscription Assistant RS`, then select **Create**.
 
@@ -426,7 +426,7 @@ Cancel a subscription by voice and hear the **Voice** instructions at work.
 
 1. In **Preview**, select **Voice Call**. Put on your headset.
 
-    ![The Voice Call test panel with the call button, Live Transcript and Activity map](images/voice-call-panel.png)
+    ![The Voice Call test panel with the call button and Live Transcript](images/voice-call-panel.png)
 
 1. Select the green **call** button and allow microphone access if asked. Wait for the greeting.
 
