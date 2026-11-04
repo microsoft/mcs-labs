@@ -64,13 +64,16 @@ event URL redirects to the current event. Legacy module/lab context links also
 resolve to their current counterparts; old presentation download URLs remain
 retired.
 
-`bootcamp-latest.yml` is the source of truth for 16 modules and 12 labs. Its day
+`bootcamp-latest.yml` is the source of truth for 16 modules and 11 labs. Its day
 boundaries are 09:00-16:00, 09:00-18:00 (including the social), and 09:00-16:00.
-Module and lab titles and durations are mirrored into the linked entity files;
-lab titles and slot durations also appear in their GitHub READMEs.
+Module and lab titles and durations are mirrored into the linked entity files,
+except for the shared Hooks lab: Lab 7 uses `mcs-hooks` with a 30-minute event
+slot while the standalone lab remains 45 minutes.
 
 Lab slugs follow `mcs-<module-slug>`. The standalone Copilot Code lab has no
-dedicated module row and uses `mcs-copilot-code`. Keep the event's fallback
+dedicated module row and uses `mcs-copilot-code`; the shared Hooks lab retains
+its `mcs-hooks` slug and `metadata-and-hooks-deep-dive` module association.
+Keep the event's fallback
 `labs:` list in `_events/bootcamp-latest.md` in the same order as the agenda.
 Explicit lab rows are authoritative for hero counts and timing, so preceding
 companion-module rows use `lab: false`.

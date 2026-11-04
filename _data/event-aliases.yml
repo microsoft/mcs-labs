@@ -14,7 +14,8 @@ bootcamp-v3:
     cowork-hands-on: mcs-cowork-latest
     mcs-instructions: mcs-instructions-and-skills
     mcs-skills: mcs-instructions-and-skills
-    mcs-tools: mcs-knowledge-and-tools-deep-dive
+    mcs-tools: mcs-hooks
+    mcs-knowledge-and-tools-deep-dive: mcs-hooks
     copilot-harness-agent-builder: mcs-copilot-harness-latest
     standard-harness-component-model: mcs-standard-harness
     mcs-workflows: mcs-workflows-latest

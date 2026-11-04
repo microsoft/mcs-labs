@@ -159,14 +159,7 @@ schedule:
   - type: break
     title: "Coffee break / Q&A"
     time: "10:15"
-    duration: 15
-
-  - type: lab
-    slug: mcs-harnesses-and-component-models-latest
-    label: "Lab 6"
-    title: "Copilot Chat harness in Copilot Studio"
-    time: "10:30"
-    duration: 15
+    duration: 30
 
   - type: module
     slug: instructions-and-skills
@@ -178,7 +171,7 @@ schedule:
 
   - type: lab
     slug: mcs-instructions-and-skills
-    label: "Lab 7"
+    label: "Lab 6"
     title: "Deep Dive: Instructions & Skills"
     time: "11:30"
     duration: 30
@@ -197,9 +190,9 @@ schedule:
     duration: 45
 
   - type: lab
-    slug: mcs-knowledge-and-tools-deep-dive
-    label: "Lab 8"
-    title: "Deep Dive: Knowledge, Tools & Hooks"
+    slug: mcs-hooks
+    label: "Lab 7"
+    title: "Hooks and Knowledge: Travel Policy Agent"
     time: "13:45"
     duration: 30
 
@@ -218,7 +211,7 @@ schedule:
 
   - type: lab
     slug: mcs-customer-conversation-harness
-    label: "Lab 9"
+    label: "Lab 8"
     title: "Customer Conversation Harness"
     time: "15:00"
     duration: 30
@@ -233,7 +226,7 @@ schedule:
 
   - type: lab
     slug: mcs-managed-apps
-    label: "Lab 10"
+    label: "Lab 9"
     title: "Managed Apps"
     time: "16:00"
     duration: 30
@@ -267,7 +260,7 @@ schedule:
 
   - type: lab
     slug: mcs-workflows-latest
-    label: "Lab 11"
+    label: "Lab 10"
     title: "Workflows"
     time: "10:30"
     duration: 30
@@ -282,7 +275,7 @@ schedule:
 
   - type: lab
     slug: mcs-agent-integration
-    label: "Lab 12"
+    label: "Lab 11"
     title: "Agent integration"
     time: "11:30"
     duration: 30
