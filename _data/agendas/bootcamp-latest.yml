@@ -170,9 +170,9 @@ schedule:
     duration: 45
 
   - type: lab
-    slug: mcs-instructions-and-skills
+    slug: mcs-skills-authoring
     label: "Lab 6"
-    title: "Deep Dive: Instructions & Skills"
+    title: "Instructions and Skills Authoring"
     time: "11:30"
     duration: 30
 

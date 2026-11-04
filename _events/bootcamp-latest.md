@@ -14,7 +14,7 @@ labs:
     label: "Lab 4"
   - slug: mcs-standard-harness
     label: "Lab 5"
-  - slug: mcs-instructions-and-skills
+  - slug: mcs-skills-authoring
     label: "Lab 6"
   - slug: mcs-hooks
     label: "Lab 7"

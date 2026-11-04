@@ -39,6 +39,7 @@ test('Bootcamp Latest agenda matches modules and both copies of each lab', () =>
   const agenda = readAgenda();
   const modules = agenda.schedule.filter((item) => item.type === 'module');
   const labs = agenda.schedule.filter((item) => item.type === 'lab');
+  const sharedLabs = new Set(['mcs-hooks', 'mcs-skills-authoring']);
   assert.ok(modules.length > 0 && labs.length > 0);
 
   for (const [items, type, folder] of [
@@ -49,7 +50,7 @@ test('Bootcamp Latest agenda matches modules and both copies of each lab', () =>
       const document = readDocument(folder, item.slug);
       assert.equal(item.label, `${type} ${index + 1}`, `${item.slug}: sequential label`);
       assert.equal(item.title, document.data.title, `${item.label}: title`);
-      assert.equal(item.duration, item.slug === 'mcs-hooks' ? 30 : document.data.duration,
+      assert.equal(item.duration, sharedLabs.has(item.slug) ? 30 : document.data.duration,
         `${item.label}: duration`);
       if (type === 'Module') {
         if (labs.some((lab) => lab.slug === document.data.lab)) {
@@ -62,7 +63,7 @@ test('Bootcamp Latest agenda matches modules and both copies of each lab', () =>
       assert.equal(document.content.match(/^# (.+)$/m)?.[1], item.title, `${item.label}: site heading`);
       assert.equal(readme.match(/^# (.+)$/m)?.[1], item.title, `${item.label}: GitHub heading`);
       if (document.data.module) {
-        if (item.slug !== 'mcs-hooks') {
+        if (!sharedLabs.has(item.slug)) {
           assert.equal(item.slug, `mcs-${document.data.module}`, `${item.label}: lab naming`);
         }
         assert.equal(readDocument('_modules', document.data.module).data.lab, item.slug,
@@ -117,6 +118,17 @@ test('standalone module decks remain independent of Bootcamp Latest merges', () 
 
   assert.equal(readDocument('_modules', 'multi-agent').data.slides,
     '/presentations/bootcamp/11.%20Multi%20Agent_CB.pptx', 'Original Bootcamp keeps its Multi-Agent deck');
+});
+
+test('Bootcamp Latest Skills pacing preserves the shared workshop lab duration', () => {
+  const lab = readAgenda().schedule.find((item) => item.label === 'Lab 6');
+  assert.equal(lab.slug, 'mcs-skills-authoring');
+  assert.equal(lab.time, '11:30');
+  assert.equal(lab.duration, 30);
+  assert.equal(readDocument('_labs', 'mcs-skills-authoring').data.duration, 60);
+  assert.equal(readDocument('_labs', 'mcs-skills-authoring').data.module,
+    'instructions-skills-runtime-and-sandbox');
+  assert.equal(readDocument('_modules', 'instructions-and-skills').data.lab, lab.slug);
 });
 
 test('Bootcamp Latest Hooks pacing preserves the shared workshop lab duration', () => {

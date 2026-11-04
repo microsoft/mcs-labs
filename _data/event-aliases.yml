@@ -12,8 +12,9 @@ bootcamp-v3:
   labs:
     m365-copilot-frontier-agents: mcs-m365-copilot-latest
     cowork-hands-on: mcs-cowork-latest
-    mcs-instructions: mcs-instructions-and-skills
-    mcs-skills: mcs-instructions-and-skills
+    mcs-instructions: mcs-skills-authoring
+    mcs-skills: mcs-skills-authoring
+    mcs-instructions-and-skills: mcs-skills-authoring
     mcs-tools: mcs-hooks
     mcs-knowledge-and-tools-deep-dive: mcs-hooks
     copilot-harness-agent-builder: mcs-copilot-harness-latest
