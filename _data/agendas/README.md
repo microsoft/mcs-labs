@@ -110,7 +110,7 @@ Bootcamp-specific lab copies preserve the original shared Markdown files:
 
 | Original shared lab | Bootcamp Latest copy |
 | --- | --- |
-| `m365-copilot-frontier-agents` | `mcs-m365-copilot-latest` |
+| `m365-copilot-chat-work-iq` (derived from `m365-copilot-frontier-agents`; Researcher and Analyst as extra credit) | `mcs-m365-copilot-latest` |
 | `cowork-hands-on` | `mcs-cowork-latest` |
 | `mcs-tools` | `mcs-knowledge-and-tools-deep-dive` |
 | `mcs-workflows` | `mcs-workflows-latest` |

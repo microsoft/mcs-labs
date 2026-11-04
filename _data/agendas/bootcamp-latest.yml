@@ -68,7 +68,7 @@ schedule:
   - type: lab
     slug: mcs-m365-copilot-latest
     label: "Lab 1"
-    title: "M365 Copilot Chat"
+    title: "M365 Copilot Chat and Work IQ"
     time: "11:00"
     duration: 15
 
