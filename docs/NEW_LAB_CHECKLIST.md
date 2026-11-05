@@ -60,7 +60,17 @@ Check: the page renders, images resolve, the "Part of: <module>" link works, the
 | `journeys` | ✅ | Learning paths that surface the lab | `["business-user", "developer"]` |
 | `module` | ⚠️ Recommended | Slug of the parent module | `agent-skills` |
 | `lab_type` | ⚠️ Optional | `local` or `external` | `local` |
-| `layout` | ⚠️ Optional | Defaulted to `lab` by `_config.yml` | `lab` |
+| `layout` | ⚠️ Optional | Defaulted to `lab` by `_config.yml`. Leave it alone: the content feed strips `layout`, so the deployed site silently ignores a custom value even though `jekyll serve` honours it. Use `lab_format` to change how a lab renders | `lab` |
+| `lab_format` | ⚠️ Optional | `missions` renders the lab in the experimental mission-based format (`_includes/lab-missions.html`) inside the usual site header, event rail, and bottom nav. Omit it for the classic format. Consumers that don't know the key render the classic layout | `missions` |
+| `unlisted` | ⚠️ Preview only | Keeps the page out of the homepage, All Labs, the Events index, event navigation, and feed listings (manifests, bundles, index counts), and adds `noindex`. The URL remains public | `true` |
+
+Mark both an unlisted preview lab and its separate preview event with `unlisted: true`, `search: false`, and `sitemap: false` (search and sitemap are separate switches). Do not repoint an advertised event at draft content. An unlisted URL is not access-controlled.
+
+A preview event may also list existing, advertised labs so reviewers can compare formats with Previous and Next. Those labs stay unchanged for everyone else: the event-nav manifest emits an unlisted event only on unlisted pages and on the pages its agenda (or `labs:`) lists, and its rail appears only when the URL carries `?event=<preview-id>`, which the rail's own links pass along but session storage never remembers.
+
+An unlisted page still gets a per-item feed document (`feed/items/<collection>/<slug>.json`), because the deployed site is built from those documents. No manifest or bundle links to it, so feed subscribers never discover it, but the file is reachable by direct URL.
+
+The `missions` format is a preview. Its content is mock scenario data in `prototypes/lab-format-v2/lab.js`; the Markdown body is only shown when JavaScript is off.
 
 **Valid `section` values** (from the label map in `_layouts/lab.html`):
 

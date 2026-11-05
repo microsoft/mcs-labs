@@ -137,7 +137,7 @@ every per-item document inlined). Disable per feed with `bundle: false`.
 | `description` | string | May be empty. |
 | `url` | string | Canonical page on the **producing** site (informational). |
 | `content_url` | string | Absolute URL of this item's full document. |
-| `metadata` | object | The source front matter, **minus `layout`**, plus the resolved `content_last_updated` date for labs and modules when available. Drives rendering (`order`, `duration`, `difficulty`, `section`, `labs`, …). |
+| `metadata` | object | The source front matter, **minus `layout`**, plus the resolved `content_last_updated` date for labs and modules when available. Drives rendering (`order`, `duration`, `difficulty`, `section`, `labs`, …). Because `layout` is dropped, anything that must change how a page renders (for example `lab_format`) has to live in another key. |
 | `references.labs` | string[] | Lab slugs this item points at (derived from `labs:`/`lab:` front matter). Lets consumers reason about cross-references. |
 | `content_markdown` | string | Raw markdown body. Relative `images/…` refs are rewritten to **absolute** producer URLs so they resolve off-site. |
 | `images` | string[] | Every absolutized image URL found in the body. |

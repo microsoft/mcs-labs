@@ -7,7 +7,9 @@
         "http://localhost/about/index.html",
         "http://localhost/events/index.html",
         "http://localhost/bug-bash.html",
-        "http://localhost/labs/mcs-governance/index.html"
+        "http://localhost/labs/mcs-governance/index.html",
+        "http://localhost/events/bootcamp-preview/index.html",
+        "http://localhost/labs/mcs-cowork-preview/index.html?event=bootcamp-preview"
       ],
       "numberOfRuns": 1,
       "settings": {

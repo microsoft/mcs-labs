@@ -18,3 +18,10 @@
   } catch (e) {}
 })();
 </script>
+{%- comment -%} Trimmed tags: ordinary pages must render exactly as they did before these conditionals. {%- endcomment %}
+{%- if page.unlisted %}
+<meta name="robots" content="noindex, nofollow">
+{%- endif %}
+{%- if page.lab_format == "missions" %}
+<link rel="stylesheet" href="{{ '/prototypes/lab-format-v2/styles.css' | relative_url }}">
+{%- endif %}

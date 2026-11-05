@@ -1,0 +1,34 @@
+<!doctype html>
+<!--
+  DESIGN CONTRACT · Lab format v2 (prototype)
+  THESIS: A lab is four short missions on one ladder (Ask, Delegate, Connect, Build), not a manual. It refuses the
+  wall-of-steps-and-screenshots page every lab site ships.
+  OWN-WORLD: Cowork Demo Hub family. Deep navy ground, cyan-to-teal gradient used sparingly, pill controls, white
+  "product windows" that read as Microsoft 365, amber = predict, cyan = watch, lime = check, violet = remix.
+  STORY: Learners see what they will make, guess, do five lines of work, notice, reveal the idea, check it once, and
+  leave with a plan for Monday.
+  FIRST VIEWPORT: Title and promise on the left with one primary action; a 2x2 of the four artifacts on the right.
+  FORM: Guided read-and-do page with sticky mission rail; Explorer mode collapses steps behind the goal.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>From a question to a working app · Lab format v2 prototype</title>
+  <meta name="description" content="Prototype of a mission-based hands-on lab format for MCS Labs, with mock Copilot Cowork content.">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="lv2-standalone">
+  <div id="lab-v2-root" data-theme="dark" data-mode="guided" data-notes="off">
+    <div class="backdrop" aria-hidden="true"><span class="glow g1"></span><span class="glow g2"></span></div>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="site-header" id="site-header"></header>
+    <main id="main" tabindex="-1"></main>
+    <footer class="site-footer" id="site-footer"></footer>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </div>
+  <script src="lab.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

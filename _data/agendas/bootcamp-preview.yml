@@ -1,0 +1,35 @@
+event_id: bootcamp-preview
+
+schedule:
+  - type: session
+    title: "Cowork lab redesign preview"
+    description: "Step through classic-format labs and the new mission-based Cowork lab with Previous and Next, then share feedback on the format. All new-format scenario content is fictional."
+    label: "Preview"
+
+  # Classic labs are reused as-is so reviewers can compare formats side by
+  # side. Listing them here doesn't change the advertised events: the
+  # manifest only exposes this unlisted event on its own member pages, and
+  # the rail appears only when the URL carries ?event=bootcamp-preview.
+  - type: lab
+    slug: mcs-m365-copilot-latest
+    label: "Lab 1 · Classic format"
+    title: "M365 Copilot Chat"
+    duration: 15
+
+  - type: lab
+    slug: mcs-cowork-latest
+    label: "Lab 2 · Classic format"
+    title: "Cowork hands-on (current lab)"
+    duration: 30
+
+  - type: lab
+    slug: mcs-cowork-preview
+    label: "Lab 3 · New format"
+    title: "From a question to a working app"
+    duration: 30
+
+  - type: lab
+    slug: mcs-copilot-code
+    label: "Lab 4 · Classic format"
+    title: "Copilot Code: build a managed app"
+    duration: 30

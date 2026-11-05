@@ -17,6 +17,7 @@ on:
       - "events/**"
       - "labs/**"
       - "presentations/**"
+      - "prototypes/**"
       - "lighthouserc.json"
       - ".github/workflows/lighthouse.yml"
       - "Gemfile"

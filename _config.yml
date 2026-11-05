@@ -126,6 +126,11 @@ defaults:
       type: "pages"
     values:
       layout: "single"
+  # Static design prototypes carry no front matter (so they open straight from disk), so keep them out of sitemap.xml here.
+  - scope:
+      path: "prototypes"
+    values:
+      sitemap: false
 
 # Include favicon files
 include:
