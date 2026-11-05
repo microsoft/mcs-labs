@@ -2,9 +2,6 @@
 
 Build a **Travel Policy Agent** on the GitHub Copilot harness and use hooks to make it behave the same way in every conversation: load the traveler's profile when a session starts, redact personal data from every prompt, and ground answers in SharePoint travel policies filtered by their `Location` metadata. As an extra, block flight bookings with unapproved airlines before the tool runs.
 
-> [!IMPORTANT]
-> **Use your usual lab environment; you do not need to switch to a separate preview environment.** If the latest UI or hook options are not visible, open [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/) by adding `preview` to the hostname. Keep the same environment selected.
-
 ---
 
 ## 🧭 Lab Details
@@ -169,7 +166,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 
 #### Create a new agent
 
-1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) in your usual lab environment. If the latest UI or hook options are not visible, use [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/) and keep the same environment selected.
+1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) in your usual lab environment.
 
 1. Confirm **New experience** is enabled. Select **Agents** in the left navigation, then **New agent**. Use the default **GitHub Copilot harness** creation path, not **Build using standard orchestration** — hooks only exist on the GitHub Copilot harness.
 
