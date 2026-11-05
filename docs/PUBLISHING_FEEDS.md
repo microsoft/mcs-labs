@@ -96,6 +96,10 @@ Rules:
   and the build will refuse them.
 - `exclude` here is the **producer's** blocklist: content excluded from a feed
   never reaches any consumer of that feed. This is your hard outbound boundary.
+- A page with `unlisted: true` in its front matter is in **no** feed, whatever
+  `collections` or `include` say: it never appears in a manifest, bundle, or index
+  count. It still gets a per-item document, because this site's own build reads
+  those documents; use `exclude` instead when the content must not be published at all.
 
 See [FILTERING.md](FILTERING.md) for producer vs. consumer filtering in depth.
 
