@@ -163,7 +163,20 @@ test('Bootcamp Latest Hooks pacing preserves the shared workshop lab duration', 
   assert.equal(readDocument('_labs', 'mcs-hooks').data.module, 'metadata-and-hooks-deep-dive');
 });
 
-test('Workflows labs share a 30-minute core with optional extra credit and CAT-prepared setup', () => {
+test('Workflows labs share a 30-minute core with optional extra credit and event-prepared setup', () => {
+  // mcs-workflows-latest collapses setup into one alert: proctored attendees
+  // have nothing to do, and self-setup learners get the two solution packages.
+  const setupMarkers = {
+    'mcs-workflows': [
+      'Skip this entire Prerequisites section',
+      '### Self-guided setup (outside CAT-led events)',
+    ],
+    'mcs-workflows-latest': [
+      'Everything is already set up for you — there is nothing to do here.',
+      'assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip',
+      'assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip',
+    ],
+  };
   for (const slug of ['mcs-workflows', 'mcs-workflows-latest']) {
     const lab = readDocument('_labs', slug);
     assert.equal(lab.data.duration, 30, `${slug}: core duration`);
@@ -180,10 +193,14 @@ test('Workflows labs share a 30-minute core with optional extra credit and CAT-p
       assert.deepEqual(durations, [15, 8, 7], `${slug}: core allocations total 30 minutes`);
       assert.equal([...content.matchAll(/^## .*Extra Credit: /gm)].length, 2,
         `${slug}: both advanced exercises are optional`);
-      assert.ok(content.includes('Skip this entire Prerequisites section'),
-        `${slug}: CAT participants can skip setup`);
-      assert.ok(content.includes('### Self-guided setup (outside CAT-led events)'),
-        `${slug}: independent setup remains documented`);
+      for (const marker of setupMarkers[slug]) {
+        assert.ok(content.includes(marker), `${slug}: setup guidance includes ${marker}`);
+      }
+      if (slug === 'mcs-workflows-latest') {
+        // The Account Lookup solution is not a dependency of this lab, and
+        // prepared environments need no ownership or connection-reference repair.
+        assert.doesNotMatch(content, /Account Lookup Agent|Transfer ownership|Ownership is a prerequisite|Dataverse connection reference — do this first/);
+      }
       assert.doesNotMatch(content, /45.minute|45 minutes|Use Case #4|Use Case #5/);
     }
   }
