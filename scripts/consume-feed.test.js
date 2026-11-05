@@ -277,13 +277,23 @@ test('round-trip: self-only materialized bodies equal committed collection bodie
         // to `images/`, so normalize the committed side before comparing. Same for `assets/`,
         // which the producer absolutizes alongside images so feed consumers can fetch the
         // PDFs and solution packages labs link to.
-        const committed = matter(fs.readFileSync(path.join(srcDir, f), 'utf8')).content
+        const committedDoc = matter(fs.readFileSync(path.join(srcDir, f), 'utf8'));
+        const committed = committedDoc.content
           .replace(/\]\(\.\/(images|assets)\//g, ']($1/')
           .replace(/src=(["'])\.\/(images|assets)\//g, 'src=$1$2/');
         const materializedPath = path.join(out, `_${collection}`, f);
         assert.ok(fs.existsSync(materializedPath), `materialized ${collection}/${f} exists`);
-        const materialized = matter(fs.readFileSync(materializedPath, 'utf8')).content;
-        assert.equal(materialized.trim(), committed.trim(), `${collection}/${f} body round-trips`);
+        const materializedDoc = matter(fs.readFileSync(materializedPath, 'utf8'));
+        assert.equal(materializedDoc.content.trim(), committed.trim(), `${collection}/${f} body round-trips`);
+
+        // The deploy builds the site from these materialized docs, so any front matter key lost
+        // here silently changes the published page (e.g. `lab_format`, `unlisted`). `layout` is the
+        // one key the feed documents as stripped, which is why a page's rendering must never
+        // depend on it.
+        for (const [key, value] of Object.entries(committedDoc.data)) {
+          if (key === 'layout') continue;
+          assert.deepEqual(materializedDoc.data[key], value, `${collection}/${f} front matter \`${key}\` round-trips`);
+        }
       }
     }
   } finally {

@@ -185,7 +185,13 @@
   if (urlEventId) {
     activeEvent = findEvent(urlEventId);
     if (activeEvent && eventContainsItem(activeEvent, currentType, current.slug)) {
-      saveEventContext(urlEventId);
+      // An unlisted preview event is only active while ?event= is in the URL;
+      // remembering it would carry the preview rail onto unrelated pages.
+      if (activeEvent.unlisted) {
+        try { sessionStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      } else {
+        saveEventContext(urlEventId);
+      }
     } else {
       activeEvent = null; // URL param references an unknown event or an item
                           // not in that event — bail out silently.

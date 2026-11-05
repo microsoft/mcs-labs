@@ -17,6 +17,7 @@ on:
       - "events/**"
       - "labs/**"
       - "presentations/**"
+      - "prototypes/**"
       - ".pa11yci.json"
       - ".github/workflows/a11y.yml"
       - "Gemfile"

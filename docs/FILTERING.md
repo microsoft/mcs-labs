@@ -28,6 +28,8 @@ feeds:
 
 Resolution for a given item (see [`itemInFeed`](../scripts/build-feed.js)):
 
+0. If its front matter sets `unlisted: true` → **out** of every feed, before anything
+   below is consulted.
 1. If its slug is in `include` → **in** (highest priority).
 2. Else if its collection is in `collections` **and** its slug is not in
    `exclude` → **in**.
@@ -35,6 +37,11 @@ Resolution for a given item (see [`itemInFeed`](../scripts/build-feed.js)):
 
 Whatever lands "out" is simply **not written** to that feed's manifest, bundle, or
 per-item docs. A consumer literally cannot request it — there is no URL for it.
+
+The one exception is an unlisted page: it is in no manifest or bundle, but its
+per-item document is still written because this site's own build reads those
+documents. Nothing links to it, yet the file is reachable by direct URL, so use
+`exclude` rather than `unlisted` when content must not be published at all.
 
 You can also publish several feeds at different breadths from the same content — a
 public `all` feed and a narrower `partners` feed, for instance — and hand each

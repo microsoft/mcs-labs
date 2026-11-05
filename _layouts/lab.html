@@ -1,7 +1,7 @@
 ---
 layout: single
 ---
-
+{% if page.lab_format == "missions" %}{% include lab-missions.html %}{% else -%}
 <style>
 /* Lab layout: hide default title and meta — we render our own */
 #page-title, .page__title { display: none !important; }
@@ -107,3 +107,4 @@ layout: single
 {% include event-nav/script.html %}
 
 {% include back-to-top.html %}
+{%- endif %}

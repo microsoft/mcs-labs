@@ -50,7 +50,13 @@ function resolveConfig(raw = {}, { defaultBaseUrl = 'https://microsoft.github.io
 }
 module.exports.resolveConfig = resolveConfig;
 
+function isUnlisted(item) {
+  return item.metadata?.unlisted === true;
+}
+module.exports.isUnlisted = isUnlisted;
+
 function itemInFeed(item, feedDef) {
+  if (isUnlisted(item)) return false;
   if (feedDef.include.includes(item.slug)) return true;
   if (feedDef.collections.includes(item.collection) && !feedDef.exclude.includes(item.slug)) return true;
   return false;
@@ -72,6 +78,20 @@ function selectFeedItems(allItems, feedDef) {
   return orderItems(allItems.filter((it) => itemInFeed(it, feedDef)));
 }
 module.exports.selectFeedItems = selectFeedItems;
+
+// Items that get a per-item document. The site's own build materializes every
+// page from items/ (scripts/consume-feed.js reads the whole directory), so an
+// unlisted page that is in no feed still needs one or it would 404 once
+// deployed. It stays out of every manifest, bundle, and index count, and
+// consumers only discover items through manifests.
+function selectItemDocs(allItems, feedMembers) {
+  const byKey = new Map();
+  for (const item of [...Object.values(feedMembers).flat(), ...allItems.filter(isUnlisted)]) {
+    byKey.set(`${item.collection}/${item.slug}`, item);
+  }
+  return [...byKey.values()];
+}
+module.exports.selectItemDocs = selectItemDocs;
 
 // Lab-owned directories whose relative refs are absolutized for the feed. Feed
 // consumers serve this markdown from their own origin, so a bare `images/x.png`
@@ -301,22 +321,17 @@ if (require.main === module) {
     feedMembers[feedDef.name] = selectFeedItems(allItems, feedDef);
   }
 
-  // Per-item documents: every item published in ≥1 feed, written once (deduped).
-  const seenItem = new Set();
-  for (const members of Object.values(feedMembers)) {
-    for (const item of members) {
-      const key = `${item.collection}/${item.slug}`;
-      if (seenItem.has(key)) continue;
-      seenItem.add(key);
-      const dir = path.join(outDir, 'items', item.collection);
-      fs.mkdirSync(dir, { recursive: true });
-      fs.writeFileSync(
-        path.join(dir, `${item.slug}.json`),
-        JSON.stringify(buildPerItemDoc(item, { baseUrl: resolved.baseUrl, generated }), null, 2)
-      );
-    }
+  // Per-item documents: every item published in ≥1 feed plus unlisted pages, written once (deduped).
+  const itemDocs = selectItemDocs(allItems, feedMembers);
+  for (const item of itemDocs) {
+    const dir = path.join(outDir, 'items', item.collection);
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(
+      path.join(dir, `${item.slug}.json`),
+      JSON.stringify(buildPerItemDoc(item, { baseUrl: resolved.baseUrl, generated }), null, 2)
+    );
   }
-  console.log(`[build-feed] wrote ${seenItem.size} per-item documents`);
+  console.log(`[build-feed] wrote ${itemDocs.length} per-item documents`);
 
   const counts = {};
   for (const feedDef of Object.values(resolved.feeds)) {

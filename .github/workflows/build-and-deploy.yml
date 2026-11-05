@@ -30,6 +30,7 @@ on:
       - "events/**"
       - "labs/**"
       - "presentations/**"
+      - "prototypes/**"
       - "scripts/**"
       - "package.json"
       - ".github/workflows/build-and-deploy.yml"

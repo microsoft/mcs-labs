@@ -1,0 +1,33 @@
+{%- comment -%}
+  Mission-based lab format (experimental). _layouts/lab.html renders this in
+  place of the classic lab body when a lab sets `lab_format: missions`.
+  The site masthead, event rail and bottom nav stay, so the lab still feels
+  connected to the rest of the site. The theme's own page title and meta line
+  are hidden by prototypes/lab-format-v2/styles.css, since the hero is the title.
+{%- endcomment -%}
+
+{% include event-nav/manifest.html %}
+{% include event-nav/rail.html %}
+
+<div id="lab-v2-root" class="lab-v2-embedded" data-theme="dark" data-mode="guided" data-notes="off" data-site-theme-sync>
+  <div class="backdrop" aria-hidden="true"><span class="glow g1"></span><span class="glow g2"></span></div>
+  <a class="skip-link" href="#lab-main">Skip to lab content</a>
+  <header class="site-header" id="site-header"></header>
+  {%- comment -%} The site theme already owns id="main" and role="main", so this is a plain focus target. {%- endcomment %}
+  <div id="lab-main" tabindex="-1">
+    <noscript>
+      <h1>From a question to a working app</h1>
+      <p>This interactive preview needs JavaScript. The four mock missions are Ask, Delegate, Connect, and Build.</p>
+      {{ content }}
+    </noscript>
+  </div>
+  <footer class="site-footer" id="site-footer"></footer>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<script src="{{ '/prototypes/lab-format-v2/lab.js' | relative_url }}"></script>
+<script src="{{ '/prototypes/lab-format-v2/app.js' | relative_url }}"></script>
+
+{% include event-nav/nav-pair.html %}
+{% include event-nav/script.html %}
+{% include back-to-top.html %}
