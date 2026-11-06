@@ -112,7 +112,7 @@ Download these materials:
 
 **Suggested timeboxes:** main agent 6 minutes; internal specialist and connection 10 minutes; A2A connection 7 minutes; complete-team tests 7 minutes. External hosting and tenant preflight happen beforehand.
 
-If a prerequisite is unavailable, stop and ask the instructor. A recording is a demonstration fallback, not completion of the hands-on integration.
+If a prerequisite is unavailable, stop and ask the instructor.
 
 ---
 

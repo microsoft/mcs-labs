@@ -155,8 +155,6 @@ Create a multi-day tracker with a browser preview, refine its design and day nav
 
 Go to [Microsoft Copilot](https://copilot.cloud.microsoft), sign in with your workshop account, and select **Code**. Alternatively, open the Microsoft Copilot app and select **Code**.
 
-Open the designated working folder if you are using a local project.
-
 #### Prompt 1: Build the Basic Tracker
 
 Start a new conversation, paste **Prompt 1** below unchanged, and submit it. Allow file creation if prompted. Do not submit Prompts 2-4 yet.
