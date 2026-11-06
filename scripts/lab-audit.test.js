@@ -67,6 +67,21 @@ test('retired terms ignore URLs, link targets and lines that explain a rename', 
   assert.deepEqual(hits.map(h => [h.term.term, h.lines]), [['Power Virtual Agents', [1]], ['Azure Active Directory', [5]]]);
 });
 
+test('2026 Copilot names flag the product but not license SKUs', () => {
+  const hits = audit.findRetiredTerms([
+    'Open Microsoft 365 Copilot.',
+    'Ask Microsoft 365 Copilot Chat.',
+    'Assign Microsoft 365 Copilot (add-on) or Microsoft 365 Copilot Business licenses.',
+    'Use the GitHub Copilot harness.',
+    'Microsoft Copilot (formerly Microsoft 365 Copilot) is open.',
+  ], audit.loadTerms());
+  assert.deepEqual(hits.map(h => [h.term.term, h.term.replacement, h.lines]), [
+    ['Microsoft 365 Copilot', 'Microsoft Copilot', [1]],
+    ['Microsoft 365 Copilot Chat', 'Microsoft Copilot Chat', [2]],
+    ['GitHub Copilot harness', 'Microsoft Copilot harness', [4]],
+  ]);
+});
+
 test('copy comparison ignores README emoji, anchor dashes, indentation and site link style', () => {
   const site = [
     '## Lab Details', '- [Lab Details](#lab-details)', '    > [!NOTE]',

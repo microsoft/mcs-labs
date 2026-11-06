@@ -54,7 +54,12 @@ Work through `references/review-rubric.md`. In particular:
    meaningful. No instruction depends on color alone.
 6. **Missions labs.** Prompts verbatim across front matter, `_labs` body and README;
    reveals explain *why*; one correct option per check; optional missions marked; cleanup
-   stops anything recurring the lab created.
+   stops anything recurring the lab created. `help` reads as a complete click path,
+   because the layout opens it by default. Nothing in the lab contradicts the layout's
+   note that checkmarks, answers and the reflection stay in the browser until the learner
+   saves a PDF copy.
+7. **System of record.** When learners check results in a business app (a CRM, for
+   example), the prerequisites and Lab Details link it and say what to check there.
 
 Do not run the lab here. When a step needs proof in the product, recommend
 `lab-runthrough`, and say which mission or use case.
