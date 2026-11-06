@@ -17,7 +17,7 @@ node .github/skills/lab-runthrough/scripts/capture.cjs <command> [args] [options
 | Command | What it does |
 | --- | --- |
 | `launch [url]` | Starts the browser in a private window with a new temporary profile and DevTools on `--port`, and opens `url`. |
-| `pages` | Lists open tabs with the index `--tab` uses, URL and title. |
+| `pages` | Lists open tabs with the index `--tab` uses, URL and title. Indexes follow the order tabs were opened in and stay stable while the browser runs; a headless run keeps an `about:blank` tab at 1. |
 | `goto <url>` | Navigates the selected tab and waits for `domcontentloaded`. |
 | `newtab <url>` | Opens a tab in the selected tab's session (same sign-in), waits for sign-in redirects to settle, and prints its index. |
 | `login` | Signs in on the selected tab as the `LAB_CREDENTIALS` account (see [Signing in](#signing-in)). |

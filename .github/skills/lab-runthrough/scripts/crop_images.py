@@ -8,8 +8,9 @@ with the same box so both themes frame the same content, and writes
 width and height fields.
 
 --format webp (default) suits missions labs, which publish WebP light/dark
-pairs. Classic labs mostly use PNG: pass --format png, and match the name the
-lab already references so the Markdown does not change.
+pairs. Classic labs mostly use PNG and a single light image: pass --format png
+--light-only, and match the name the lab already references so the Markdown does
+not change. One `pair` capture can then feed both a classic and a missions lab.
 
 The spec is JSON mapping each name to [left, top, right, bottom] in capture
 pixels, or null to keep the whole capture:
@@ -52,6 +53,7 @@ def main():
     parser.add_argument("--format", choices=("webp", "png"), default="webp", help="output format (default webp)")
     parser.add_argument("--quality", type=int, default=88, help="WebP quality (default 88)")
     parser.add_argument("--sheets", type=Path, help="also write light-over-dark contact sheets here (outside the repository)")
+    parser.add_argument("--light-only", action="store_true", help="write only <name>.<ext> from <name>-light.png (classic labs)")
     args = parser.parse_args()
 
     spec = json.loads(args.spec.read_text(encoding="utf-8"))
@@ -63,6 +65,8 @@ def main():
     for name, box in spec.items():
         light, dark = args.src / f"{name}-light.png", args.src / f"{name}-dark.png"
         sources = {"": light, "-dark": dark} if light.exists() or dark.exists() else {"": args.src / f"{name}.png"}
+        if args.light_only:
+            sources = {"": light if light.exists() else args.src / f"{name}.png"}
         missing = [p.name for p in sources.values() if not p.exists()]
         if missing:
             print(f"{name}: missing {', '.join(missing)}", file=sys.stderr)

@@ -193,12 +193,14 @@ async function launch({ port, url = 'about:blank', browser, windowSize = DEFAULT
           // Off-the-record contexts outlive this connection and skip ambient single sign-on.
           const context = await connected.createBrowserContext();
           const page = await context.newPage();
+          rememberTab(port, page);
           await page.setViewport(viewport(windowSize));
           await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 }).catch(() => {});
-        } else if (url !== 'about:blank') {
-          // Managed devices can open a browser sign-in page instead of the URL; navigate past it.
+        } else {
           const [first] = (await connected.pages()).filter(p => !p.url().startsWith('devtools://'));
-          if (first && first.url() !== url) await first.goto(url, { waitUntil: 'domcontentloaded' }).catch(() => {});
+          if (first) rememberTab(port, first);
+          // Managed devices can open a browser sign-in page instead of the URL; navigate past it.
+          if (first && url !== 'about:blank' && first.url() !== url) await first.goto(url, { waitUntil: 'domcontentloaded' }).catch(() => {});
         }
       } finally {
         await connected.disconnect();
@@ -230,16 +232,43 @@ async function connectBrowser(port) {
   return loadPuppeteer().connect({ browserURL: `http://127.0.0.1:${port}`, defaultViewport: null, protocolTimeout: 120000 });
 }
 
-/** Tabs in "pages" order: off-the-record (headless) tabs first, browser pages left out. */
-async function listPages(browser) {
+// puppeteer keeps the DevTools target id here and has no public getter for it.
+const targetId = page => page.target()._targetId;
+
+/** Records a tab at the end of the "pages" order for this port. */
+function rememberTab(port, page) {
+  const state = readState(port);
+  const id = targetId(page);
+  if (!state || !id) return;
+  state.tabs = [...(state.tabs || []).filter(t => t !== id), id];
+  fs.writeFileSync(stateFile(port), JSON.stringify(state, null, 2));
+}
+
+/**
+ * Tabs in "pages" order, browser pages left out. browser.pages() returns a different order on
+ * each connection, so the order tabs were opened in is kept in the state file and --tab indexes
+ * stay stable. Tabs the state file does not know yet go last, off-the-record (headless) first.
+ */
+async function listPages(browser, port) {
   const pages = (await browser.pages()).filter(p => !/^(devtools|edge|chrome):\/\//.test(p.url()));
   const isDefault = p => p.browserContext() === browser.defaultBrowserContext();
-  return [...pages.filter(p => !isDefault(p)), ...pages.filter(isDefault)];
+  const state = port === undefined ? null : readState(port);
+  const order = (state && state.tabs) || [];
+  const rank = p => { const i = order.indexOf(targetId(p)); return i < 0 ? Infinity : i; };
+  const known = pages.filter(p => rank(p) !== Infinity).sort((a, b) => rank(a) - rank(b));
+  const unknown = pages.filter(p => rank(p) === Infinity);
+  const sorted = [...known, ...unknown.filter(p => !isDefault(p)), ...unknown.filter(isDefault)];
+  const ids = sorted.map(targetId);
+  if (state && ids.every(Boolean) && ids.join() !== order.join()) {
+    state.tabs = ids;
+    fs.writeFileSync(stateFile(port), JSON.stringify(state, null, 2));
+  }
+  return sorted;
 }
 
 async function connect({ port = DEFAULT_PORT, url, tab } = {}) {
   const browser = await connectBrowser(port);
-  const pages = await listPages(browser);
+  const pages = await listPages(browser, port);
   let page;
   if (tab !== undefined) page = pages[tab];
   else page = url ? pages.find(p => p.url().startsWith(url)) : pages[0];
@@ -261,6 +290,7 @@ async function connect({ port = DEFAULT_PORT, url, tab } = {}) {
 async function newTab(page, url, port) {
   // The new tab must share the selected tab's context, or a headless run loses its sign-in.
   const tab = await page.browserContext().newPage();
+  rememberTab(port, tab);
   const state = readState(port);
   if (state && state.headless) await tab.setViewport(viewport(state.windowSize));
   await tab.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 }).catch(() => {});
@@ -601,7 +631,7 @@ async function main(argv) {
   }
   if (command === 'pages') {
     const browser = await connectBrowser(opts.port);
-    for (const [i, p] of (await listPages(browser)).entries()) print(`${i}\t${p.url()}\t${await p.title()}`);
+    for (const [i, p] of (await listPages(browser, opts.port)).entries()) print(`${i}\t${p.url()}\t${await p.title()}`);
     await browser.disconnect();
     return;
   }
@@ -619,7 +649,7 @@ async function main(argv) {
         break;
       case 'newtab': {
         const tab = await newTab(page, need(args, 1, 'newtab <url>')[0], opts.port);
-        const index = (await listPages(browser)).indexOf(tab);
+        const index = (await listPages(browser, opts.port)).indexOf(tab);
         print(`${index}\t${tab.url()}${SIGN_IN_PAGE.test(tab.url()) ? '\t(sign-in page: run "login --tab ' + index + '")' : ''}`);
         break;
       }

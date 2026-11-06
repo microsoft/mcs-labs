@@ -125,8 +125,10 @@ against its stated minutes.
    python .github/skills/lab-runthrough/scripts/crop_images.py spec.json <raw folder> labs/<slug>/images --format webp --sheets <raw folder>/sheets
    ```
 
-   Use `--format png` for classic PNG images, and `--max-width` when the capture is wider
-   than the page needs.
+   Use `--format png --light-only` for classic PNG images, and `--max-width` when the
+   capture is wider than the page needs. When a lab has both a classic and a missions
+   version, capture each step once with `pair`, then crop it twice: `--light-only` PNG
+   for the classic lab and WebP pairs for the missions lab.
 4. Open the contact sheets and crops. Check: the step's subject is visible and legible,
    both themes frame the same content, no personal data outside the scenario.
 5. Note the printed width and height. Missions front matter needs `width` and `height` to
