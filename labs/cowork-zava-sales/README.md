@@ -51,7 +51,7 @@ Watch the visible search/tool activity. Look for Zava Sales business-data result
 2. Turn **Enable Microsoft Dataverse** on, then **Connect Microsoft Dataverse**.
 3. Enter `https://zavasalesdemo.crm.dynamics.com/`, select **Connect**, and confirm **Connected**. If already connected, leave it alone.
 
-![Dataverse connection dialog](images/dataverse-connection.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/dataverse-connection-dark.webp"><img src="images/dataverse-connection.webp" alt="Microsoft Dataverse enabled and Connected"></picture>
 
 4. Select **New → Cowork**. Leave **Auto / Medium** selected. Higher effort spends more time and credits. Standard Copilot Chat use is included with the Microsoft 365 Copilot license; Cowork uses metered Copilot Credits. Available models and tools depend on the tenant.
 
@@ -87,7 +87,9 @@ Just spoke with Riley at Northstar about the $250K renewal. They need a phased r
 
 Review the **$250K Northstar renewal**, recap, task owner and calendar date for **next Friday** before approving. Prefer one-time **Approve/Allow** while learning. Session-wide always-allow, if offered, reduces future prompts for that permission; it does not remove your responsibility to review.
 
-![Dataverse approval before creating the phone call](images/dataverse-approval.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/dataverse-approval-dark.webp"><img src="images/dataverse-approval.webp" alt="Cowork history after approval, with separate Dataverse actions and the saved phone-call and task details"></picture>
+
+This example shows the actions **after approval**, followed by the saved records and disclosed omissions.
 
 Creating the call, completing it and creating the task can need separate approvals. Verify the phone call is **Completed**, the task is assigned to you with the right date, and both records are linked to the renewal. If a write fails, read the error and check for an existing record before retrying.
 

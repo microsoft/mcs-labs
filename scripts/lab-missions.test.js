@@ -83,7 +83,9 @@ test('all mission screenshots exist and are discoverable by portable feed consum
     assert.equal(chunk, 'VP8 ', file);
     return [bytes.readUInt16LE(26) & 0x3fff, bytes.readUInt16LE(28) & 0x3fff];
   };
-  assert.ok(images.filter(image => image.src_dark).length >= 7, 'Light and dark pairs are in use');
+  // Only the cropped slide is theme-neutral; every product UI screenshot needs both captures.
+  assert.deepEqual([...new Set(images.filter(image => !image.src_dark).map(image => image.src))],
+    [`/labs/${slug}/images/pipeline-three-slides.webp`]);
   for (const image of images) {
     assert.ok(image.alt && image.caption);
     assert.ok(image.width > 0 && image.height > 0);
@@ -94,7 +96,11 @@ test('all mission screenshots exist and are discoverable by portable feed consum
       assert.deepEqual(webpSize(file), [image.width, image.height], `${src}: declared dimensions`);
       assert.ok(feed.images.includes(`https://microsoft.github.io/mcs-labs${src}`), `${src}: body reference`);
     }
-    if (image.src_dark) assert.ok(document.content.includes(`srcset="images/${path.posix.basename(image.src_dark)}"`), `${image.src_dark}: body picture`);
+    if (image.src_dark) {
+      assert.ok(document.content.includes(`srcset="images/${path.posix.basename(image.src_dark)}"`), `${image.src_dark}: body picture`);
+      assert.notDeepEqual(fs.readFileSync(path.join(root, ...image.src.split('/'))),
+        fs.readFileSync(path.join(root, ...image.src_dark.split('/'))), `${image.src}: distinct theme captures`);
+    }
   }
 });
 
@@ -107,6 +113,8 @@ test('paired screenshots follow the island theme and the hero stays a single pri
   assert.match(css, /\.visual figure a\.shot-light, &\[data-theme="light"\] \.visual figure a\.shot-dark \{ display: none; \}/);
   assert.match(css, /&\[data-theme="light"\] \.visual figure a\.shot-light \{ display: block; \}/);
   assert.equal(lab.hero_image.src_dark, undefined);
+  assert.equal(lab.hero_image.src, `/labs/${slug}/images/pipeline-three-slides.webp`,
+    'The single eager hero is document content, not dark application chrome');
 });
 
 test('prompts are copied in place rather than downloaded', () => {
