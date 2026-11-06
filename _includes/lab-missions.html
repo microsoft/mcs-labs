@@ -1,32 +1,156 @@
 {%- comment -%}
-  Mission-based lab format (experimental). _layouts/lab.html renders this in
-  place of the classic lab body when a lab sets `lab_format: missions`.
-  The site masthead, event rail and bottom nav stay, so the lab still feels
-  connected to the rest of the site. The theme's own page title and meta line
-  are hidden by prototypes/lab-format-v2/styles.css, since the hero is the title.
+  Opt-in only. Content is rendered on the server so prompts, help, screenshots
+  and navigation still work without JavaScript. Nested front matter travels
+  with the feed; the Markdown body remains the portable, readable lab copy.
 {%- endcomment -%}
-
 {% include event-nav/manifest.html %}
 {% include event-nav/rail.html %}
+{%- comment -%}Includes share Liquid variables; the manifest assigns its own lab.{%- endcomment -%}
+{% assign lab = page.mission_lab %}
+{% assign core_missions = lab.missions | where_exp: "mission", "mission.optional != true" %}
+{% assign optional_missions = lab.missions | where: "optional", true %}
 
-<div id="lab-v2-root" class="lab-v2-embedded" data-theme="dark" data-mode="guided" data-notes="off" data-site-theme-sync>
-  <div class="backdrop" aria-hidden="true"><span class="glow g1"></span><span class="glow g2"></span></div>
+{% if lab.missions.size > 0 %}
+<div id="lab-v2-root" class="lab-v2-embedded" data-lab-id="{{ page.slug | escape }}">
   <a class="skip-link" href="#lab-main">Skip to lab content</a>
-  <header class="site-header" id="site-header"></header>
-  {%- comment -%} The site theme already owns id="main" and role="main", so this is a plain focus target. {%- endcomment %}
+  <header class="lab-header">
+    <div class="wrap hdr">
+      <a class="brand" href="#lab-main">Your guided lab</a>
+      <a class="hdr-progress" href="#lab-route" data-progress aria-label="0 of {{ core_missions.size }} core missions complete">
+        <span class="progress-track" aria-hidden="true">{% for mission in core_missions %}<span data-progress-segment="{{ mission.id | escape }}"></span>{% endfor %}</span>
+        <span class="progress-label">0 / {{ core_missions.size }} core complete</span>
+      </a>
+      <button class="tool" type="button" data-action="reset" hidden>Reset progress</button>
+    </div>
+  </header>
+  {%- comment -%} The surrounding site already owns the main landmark. {%- endcomment %}
   <div id="lab-main" tabindex="-1">
-    <noscript>
-      <h1>From a question to a working app</h1>
-      <p>This interactive preview needs JavaScript. The four mock missions are Ask, Delegate, Connect, and Build.</p>
-      {{ content }}
-    </noscript>
-  </div>
-  <footer class="site-footer" id="site-footer"></footer>
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
-</div>
+    <section class="wrap hero" aria-labelledby="lab-title">
+      <div>
+        <h1 id="lab-title">{{ lab.headline | escape }} <em>{{ lab.headline_emphasis | escape }}</em></h1>
+        <p class="promise">{{ lab.promise | escape }}</p>
+        <ul class="facts">
+          <li>{{ page.duration }}-minute core</li>
+          <li>{{ core_missions.size }} guided missions{% if optional_missions.size > 0 %} + {{ optional_missions.size }} optional{% endif %}</li>
+          <li>Real training data</li>
+        </ul>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#lab-ready">Start the lab <span aria-hidden="true">&rarr;</span></a>
+          <button class="btn btn-ghost" type="button" data-action="download" hidden>Download prompts</button>
+        </div>
+      </div>
+      <figure class="hero-proof">
+        <a href="{{ lab.hero_image.src | relative_url }}" target="_blank" rel="noopener">
+          <img src="{{ lab.hero_image.src | relative_url }}" alt="{{ lab.hero_image.alt | escape }}" width="{{ lab.hero_image.width }}" height="{{ lab.hero_image.height }}" fetchpriority="high">
+          <span class="image-link">View full-size screenshot <span aria-hidden="true">&nearr;</span></span>
+        </a>
+        <figcaption>{{ lab.hero_image.caption | escape }}</figcaption>
+      </figure>
+    </section>
 
-<script src="{{ '/prototypes/lab-format-v2/lab.js' | relative_url }}"></script>
-<script src="{{ '/prototypes/lab-format-v2/app.js' | relative_url }}"></script>
+    <nav id="lab-route" class="wrap route" aria-label="Lab missions">
+      <ol>{% for mission in lab.missions %}
+        <li><a href="#{{ mission.id | escape }}" data-mission-link="{{ mission.id | escape }}"><span class="route-number">{{ forloop.index }}</span><span><strong>{{ mission.verb | escape }}</strong><small>{% if mission.optional %}Optional · {% endif %}{{ mission.minutes }} min</small></span></a></li>
+      {% endfor %}</ol>
+    </nav>
+
+    <div class="wrap lab-layout">
+      <nav class="lab-rail" aria-label="Your place in the lab">
+        <ol>
+          <li><a href="#lab-ready">Before you start</a></li>
+          {% for mission in lab.missions %}<li><a href="#{{ mission.id | escape }}" data-mission-link="{{ mission.id | escape }}"><span class="rail-number">{{ forloop.index }}</span><span>{{ mission.verb | escape }}<small>{% if mission.optional %}Optional · {% endif %}{{ mission.minutes }} minutes</small></span></a></li>{% endfor %}
+          <li><a href="#lab-finish">Take it with you</a></li>
+        </ol>
+      </nav>
+      <div class="lab-content">
+        <section id="lab-ready" class="ready" aria-labelledby="ready-title">
+          <h2 id="ready-title">Your next {{ page.duration }} minutes</h2>
+          <div class="lead">{{ lab.scenario | markdownify }}</div>
+          <ul class="ready-list">{% for item in lab.prerequisites %}<li><label class="step-check"><input type="checkbox" data-progress-id="ready-{{ forloop.index }}"><span>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</span></label></li>{% endfor %}</ul>
+          <p class="pacing">{{ lab.pacing | escape }}</p>
+          <p class="saving-note" data-saving-note>Progress stays in this browser when local storage is available. Nothing is sent to the lab site.</p>
+        </section>
+
+        {% for mission in lab.missions %}
+        {% assign mission_index = forloop.index %}
+        <section class="mission" id="{{ mission.id | escape }}" data-mission="{{ mission.id | escape }}" data-optional="{{ mission.optional | default: false }}" aria-labelledby="{{ mission.id | escape }}-title">
+          <header class="mission-heading">
+            <span class="mission-number" aria-hidden="true">{{ mission_index }}</span>
+            <div><h2 id="{{ mission.id | escape }}-title">{{ mission.title | escape }}</h2><p class="mission-meta">{% if mission.optional %}<strong>Optional mission</strong> <span aria-hidden="true">&middot;</span> {% endif %}{{ mission.minutes }} minutes <span aria-hidden="true">&middot;</span> {{ mission.tool | escape }}</p></div>
+          </header>
+          <p class="brief">{{ mission.brief | escape }}</p>
+          <p class="outcome"><strong>Your finish line</strong> {{ mission.outcome | escape }}</p>
+          <ol class="mission-steps">
+            {% for step in mission.steps %}
+            {% assign step_id = mission.id | append: '-' | append: forloop.index %}
+            <li class="mission-step">
+              <h3><label class="step-check"><input type="checkbox" data-progress-id="{{ step_id | escape }}"><span>{{ step.title | escape }}</span></label></h3>
+              <div class="step-content">
+                {{ step.instruction | markdownify }}
+                {% if step.prompt %}
+                <div class="prompt">
+                  <div class="prompt-heading"><span>{{ step.prompt_label | default: 'Copy into Copilot' | escape }}</span><button type="button" class="chip-btn" data-copy="{{ step_id | escape }}-prompt" aria-label="Copy prompt: {{ step.title | escape }}" hidden>Copy prompt</button></div>
+                  <pre id="{{ step_id | escape }}-prompt" data-prompt><code>{{ step.prompt | escape }}</code></pre>
+                </div>
+                {% endif %}
+                {% if step.help %}
+                <details class="step-help"><summary>Click-by-click help</summary><div>{{ step.help | markdownify }}</div></details>
+                {% endif %}
+                {% if step.screenshot %}{% include lab-missions-screenshot.html image=step.screenshot %}{% endif %}
+                {% if step.notice %}<div class="notice"><strong>Notice this</strong> {{ step.notice | markdownify }}</div>{% endif %}
+              </div>
+            </li>
+            {% endfor %}
+          </ol>
+          <details class="aha">
+            <summary><span>{{ mission.reveal.title | escape }}</span><small>Pause and reveal the idea</small></summary>
+            <div class="aha-content"><p class="aha-line">{{ mission.reveal.line | escape }}</p>{{ mission.reveal.explanation | markdownify }}<ol class="flow">{% for node in mission.reveal.flow %}<li>{{ node | escape }}</li>{% endfor %}</ol></div>
+          </details>
+          {% if mission.check %}
+          <fieldset class="knowledge-check" data-quiz="{{ mission.id | escape }}">
+            <legend>Quick check</legend>
+            <p class="question">{{ mission.check.question | escape }}</p>
+            {% for option in mission.check.options %}
+            <label class="quiz-option"><input type="radio" name="{{ mission.id | escape }}-check" value="{{ forloop.index0 }}" data-correct="{{ option.correct | default: false }}"><span>{{ option.text | escape }}</span></label>
+            <p class="quiz-feedback" data-feedback="{{ forloop.index0 }}" hidden><strong>{% if option.correct %}Exactly.{% else %}Not quite.{% endif %}</strong> {{ option.feedback | escape }}</p>
+            {% endfor %}
+            <noscript><details><summary>Reveal the answer</summary>{% for option in mission.check.options %}{% if option.correct %}<p>{{ option.text | escape }} {{ option.feedback | escape }}</p>{% endif %}{% endfor %}</details></noscript>
+            <p class="sr-only" data-quiz-announcement role="status"></p>
+          </fieldset>
+          {% endif %}
+          {% if mission.stuck %}
+          <details class="stuck"><summary>Something not matching?</summary><dl>{% for item in mission.stuck %}<dt>{{ item.problem | escape }}</dt><dd>{{ item.solution | markdownify }}</dd>{% endfor %}</dl></details>
+          {% endif %}
+          <footer class="mission-actions">
+            <button type="button" class="btn btn-primary" data-complete="{{ mission.id | escape }}" aria-pressed="false" hidden>Mark mission complete</button>
+            {% unless forloop.last %}
+              {% assign next_mission = lab.missions[forloop.index] %}
+              {% if next_mission.optional and mission.optional != true %}<a class="btn btn-ghost" href="#lab-finish">Finish the {{ page.duration }}-minute core <span aria-hidden="true">&rarr;</span></a>{% endif %}
+              <a class="btn btn-ghost" href="#{{ next_mission.id | escape }}">Next: {{ next_mission.verb | escape }}{% if next_mission.optional %} (optional){% endif %} <span aria-hidden="true">&rarr;</span></a>
+            {% else %}<a class="btn btn-ghost" href="#lab-finish">Take it with you <span aria-hidden="true">&rarr;</span></a>{% endunless %}
+          </footer>
+        </section>
+        {% endfor %}
+
+        <section class="finale" id="lab-finish" aria-labelledby="finish-title">
+          <h2 id="finish-title">{{ lab.finish.title | escape }}</h2>
+          <p class="brief">{{ lab.finish.message | escape }}</p>
+          {% if optional_missions.size > 0 %}<p>Want to go further? {% for mission in optional_missions %}<a href="#{{ mission.id | escape }}">{{ mission.title | escape }}</a> (optional, {{ mission.minutes }} minutes){% unless forloop.last %}, or {% endunless %}{% endfor %}.</p>{% endif %}
+          <dl class="takeaways">{% for item in lab.finish.takeaways %}<dt>{{ item.label | escape }}</dt><dd>{{ item.text | escape }}</dd>{% endfor %}</dl>
+          <div class="reflection"><label for="lab-reflection">{{ lab.finish.reflection | escape }}</label><textarea id="lab-reflection" rows="3" placeholder="I could delegate..."></textarea></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="https://aka.ms/CoworkDemoHub" target="_blank" rel="noopener">Explore the Cowork Demo Hub <span aria-hidden="true">&nearr;</span></a><button type="button" class="btn btn-ghost" data-action="download" hidden>Take my prompts with me</button></div>
+          {% if lab.finish.cleanup %}<div class="notice"><strong>Before you leave</strong>{{ lab.finish.cleanup | markdownify }}</div>{% endif %}
+          <details class="sources"><summary>Product guidance and further reading</summary><ul>{% for source in lab.sources %}<li><a href="{{ source.url | escape }}" target="_blank" rel="noopener">{{ source.title | escape }}</a></li>{% endfor %}</ul><p>Product UI and available capabilities can vary by tenant. Screenshots show the training experience, not a promise of identical generated output.</p></details>
+        </section>
+      </div>
+    </div>
+  </div>
+  <div class="toast" role="status" aria-live="polite"></div>
+</div>
+<script src="{{ '/assets/js/lab-missions.js' | relative_url }}" defer></script>
+{% else %}
+{{ content }}
+{% endif %}
 
 {% include event-nav/nav-pair.html %}
 {% include event-nav/script.html %}

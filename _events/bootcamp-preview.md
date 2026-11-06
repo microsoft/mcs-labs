@@ -1,7 +1,7 @@
 ---
 layout: event
 title: "Cowork Lab Design Preview"
-description: "An unlisted preview that mixes classic-format labs with the new mission-based Cowork lab, so you can compare the two. All customer names, documents, connected systems, and outputs in the new lab are mock content."
+description: "An unlisted comparison of classic-format labs and the guided Zava Sales lab. Use the prepared training tenant for the Zava Sales exercises."
 event_id: bootcamp-preview
 order: 999
 unlisted: true
@@ -12,10 +12,10 @@ labs:
     label: "Lab 1 · Classic format"
   - slug: mcs-cowork-latest
     label: "Lab 2 · Classic format"
-  - slug: mcs-cowork-preview
+  - slug: cowork-zava-sales
     label: "Lab 3 · New format"
   - slug: mcs-copilot-code
     label: "Lab 4 · Classic format"
 ---
 
-This preview is separate from the advertised bootcamp. Labs 1, 2 and 4 are existing labs in the classic format; Lab 3 is the new mission-based Cowork lab that would replace Lab 2. Use Previous and Next in any lab to move between formats, then share feedback on the format and the mock scenarios.
+This comparison event is separate from the advertised bootcamp. Labs 1, 2 and 4 retain the classic format; Lab 3 is the guided Zava Sales lab also used by Bootcamp Latest. Use Previous and Next to move between formats and share feedback. This event remains unlisted; the Zava Sales lab itself is published.

@@ -61,7 +61,8 @@ Check: the page renders, images resolve, the "Part of: <module>" link works, the
 | `module` | ⚠️ Recommended | Slug of the parent module | `agent-skills` |
 | `lab_type` | ⚠️ Optional | `local` or `external` | `local` |
 | `layout` | ⚠️ Optional | Defaulted to `lab` by `_config.yml`. Leave it alone: the content feed strips `layout`, so the deployed site silently ignores a custom value even though `jekyll serve` honours it. Use `lab_format` to change how a lab renders | `lab` |
-| `lab_format` | ⚠️ Optional | `missions` renders the lab in the experimental mission-based format (`_includes/lab-missions.html`) inside the usual site header, event rail, and bottom nav. Omit it for the classic format. Consumers that don't know the key render the classic layout | `missions` |
+| `lab_format` | ⚠️ Optional | `missions` renders guided missions inside the usual site header, event rail, and bottom nav. Omit it for the classic format. Consumers that don't know the key render the readable Markdown body | `missions` |
+| `mission_lab` | ⚠️ Required with `missions` | Structured mission content; see the authoring contract below and `_labs/cowork-zava-sales.md` | object |
 | `unlisted` | ⚠️ Preview only | Keeps the page out of the homepage, All Labs, the Events index, event navigation, and feed listings (manifests, bundles, index counts), and adds `noindex`. The URL remains public | `true` |
 
 Mark both an unlisted preview lab and its separate preview event with `unlisted: true`, `search: false`, and `sitemap: false` (search and sitemap are separate switches). Do not repoint an advertised event at draft content. An unlisted URL is not access-controlled.
@@ -70,7 +71,31 @@ A preview event may also list existing, advertised labs so reviewers can compare
 
 An unlisted page still gets a per-item feed document (`feed/items/<collection>/<slug>.json`), because the deployed site is built from those documents. No manifest or bundle links to it, so feed subscribers never discover it, but the file is reachable by direct URL.
 
-The `missions` format is a preview. Its content is mock scenario data in `prototypes/lab-format-v2/lab.js`; the Markdown body is only shown when JavaScript is off.
+### Authoring a guided mission lab
+
+Use `_labs/cowork-zava-sales.md` as the working example. Set `lab_format: missions`
+and supply `mission_lab` in front matter. The feed preserves both keys, including
+the nested content; do not put rendering-critical content in a separate data file.
+
+- `headline`, `headline_emphasis`, `promise`, `scenario`, `prerequisites` and `pacing` introduce the lab.
+- `hero_image` and a step's optional `screenshot` have `src`, `alt`, `width`, `height` and `caption`; step screenshots also have `title`. Use root-relative `/labs/<slug>/images/...` paths. The include applies the site's base URL. Reference every image in the Markdown body too, so the feed discovers and packages it.
+- Each entry in `missions` has a unique, stable `id`, `verb`, `title`, `minutes`, `tool`, `brief`, `outcome`, `steps` and `reveal`. Core mission minutes must sum to the lab's `duration`. Put extensions after the core and set `optional: true`; they are labeled separately and do not count toward core completion. Keep all prompts in the readable copies, including optional ones.
+- Each step has a `title` and Markdown `instruction`; optional `prompt`, `prompt_label`, `help`, `screenshot` and `notice` add progressive disclosure. Prompts stay visible by default. Use `|-` for multiline prompts to avoid an extra copied newline.
+- A `reveal` has `title`, `line`, Markdown `explanation` and a `flow` list. An optional `check` has a `question` and `options` (`text`, boolean `correct`, and `feedback`), with exactly one correct answer. Optional `stuck` entries have `problem` and Markdown `solution`.
+- `finish` contains `title`, `message`, `takeaways` (`label`, `text`) and `reflection`; optional Markdown `cleanup` explains how to stop lab-created recurring work. `sources` contains authoritative `title`/`url` links.
+
+The template renders the full experience on the server. JavaScript adds copying,
+progress, answer feedback and prompt downloads, but is not required to read the
+steps or open screenshots. CSS lives in `assets/css/lab-missions.css`; behavior
+lives in `assets/js/lab-missions.js`. Both are opt-in and scoped to the lab island.
+Do not add design-review controls or hide the core path behind an alternate mode.
+
+Maintain the full Markdown body and `labs/<slug>/README.md` alongside the structured
+content. Consumers without this renderer use that body. Keep every prompt verbatim
+across all three representations, and add a contract test like
+`scripts/lab-missions.test.js`. Check no-JavaScript rendering, light/dark/high-contrast
+themes, keyboard controls, storage/clipboard failure, mobile layout and event-context
+navigation in both a local build and a feed-consumed build.
 
 **Valid `section` values** (from the label map in `_layouts/lab.html`):
 

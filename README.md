@@ -17,6 +17,7 @@
 | Copilot Agent Ecosystem | [m365-copilot-frontier-agents](./labs/m365-copilot-frontier-agents) | Use Microsoft 365 Copilot chat, Work IQ, response modes, multiple AI models, and frontier agents to turn public and organizational information into decision-ready work. |
 | Cowork Hands-On | [cowork-hands-on](./labs/cowork-hands-on) | Delegate a document-grounded task to Copilot Cowork and have it draft real output in Microsoft 365 on your behalf. |
 | Cowork + Plugins Hands-On Lab | [cowork-plugins-hands-on](./labs/cowork-plugins-hands-on) | Use Copilot Cowork to draft emails and build a SharePoint sales dashboard, with optional exercises on reusable skills and shared plugins. |
+| Cowork: from insights to action | [cowork-zava-sales](./labs/cowork-zava-sales) | Four core missions plus two optional extensions: prepare a Zava Sales review, create slides and Outlook drafts, update CRM, and save a reusable, scheduled skill. |
 | Proactive Contract Alerts in Teams with Azure AI Search and Speech-to-Text | [contract-alerts-azure-ai](./labs/contract-alerts-azure-ai) | Configure Copilot Studio agents to proactively notify users when new files are added to Azure Blob Storage, connect Azure AI Search as a knowledge source, and integrate Azure Speech-to-Text services to transcribe audio files. |
 | Copilot Studio Agent Academy - Recruit Level | [Agent Academy](https://microsoft.github.io/agent-academy/recruit/) | Comprehensive 13-lesson curriculum covering agents, LLMs, declarative and custom agents, Topics, Adaptive Cards, Agent Flows, and deployment to Teams and Microsoft 365 Copilot. |
 | Build Intelligent Agents with Knowledge Sources, Tools, and Topics | [core-concepts-agent-knowledge-tools](./labs/core-concepts-agent-knowledge-tools) | Learn how to create an AI agent from scratch in Copilot Studio, enhance it with knowledge sources, extend its capabilities with tools, and build custom topics for structured conversations. |
@@ -52,13 +53,13 @@
 ## Architecture Bootcamp Latest
 
 The [Bootcamp Latest agenda](./_data/agendas/bootcamp-latest.yml) contains 17 modules and 11 labs.
-Each lab uses `mcs-<module-slug>` except for Copilot Code, Instructions and Skills Authoring, and Hooks and Knowledge.
+Each lab uses `mcs-<module-slug>` except for the scenario-specific Zava Sales lab, Copilot Code, Instructions and Skills Authoring, and Hooks and Knowledge.
 Bootcamp-specific copies use `-latest` slugs where needed; the shared Skills and Hooks labs retain their existing content and associations with 30-minute Bootcamp slots.
 
 | Lab | Title | Slot |
 | --- | ----- | ---- |
 | 1 | [M365 Copilot Chat and Work IQ](./labs/mcs-m365-copilot-latest) | 15 min |
-| 2 | [Cowork hands-on](./labs/mcs-cowork-latest) | 30 min |
+| 2 | [Cowork: from insights to action](./labs/cowork-zava-sales) | 30 min |
 | 3 | [Copilot Code: build a simple web app](./labs/mcs-copilot-code) | 30 min |
 | 4 | [Put a Cowork skill into a DA](./labs/mcs-copilot-harness-latest) | 30 min |
 | 5 | [Standard harness — Component Model](./labs/mcs-standard-harness) | 30 min |
@@ -70,6 +71,8 @@ Bootcamp-specific copies use `-latest` slugs where needed; the shared Skills and
 | 11 | [Agent integration](./labs/mcs-agent-integration) | 30 min |
 
 Slots are agenda allocations, not a promise that all retained reference exercises fit.
+The Zava Sales lab opts into the guided mission format; other labs keep their classic rendering.
+Its four core missions have a 30-minute working budget; two optional extensions cover the Friday feedback loop and Zava Sales plugin. Model and connector latency varies by run.
 See each lab's pacing or placeholder note, and the [dependency notes](./_data/agendas/README.md#bootcamp-latest).
 Module 17, [Copilot Agent Kit](./_modules/copilot-agent-kit.md), runs on Day 3
 from 15:00 to 15:30, followed by General Q&A until 16:00. It introduces capabilities

@@ -119,14 +119,22 @@ GitHub's raw/media hosts.
 
 Bootcamp-specific lab copies preserve the original shared Markdown files:
 
-| Original shared lab | Bootcamp Latest copy |
+| Original shared lab | Bootcamp Latest lab |
 | --- | --- |
 | `m365-copilot-chat-work-iq` (derived from `m365-copilot-frontier-agents`; Researcher and Analyst as extra credit) | `mcs-m365-copilot-latest` |
-| `cowork-hands-on` | `mcs-cowork-latest` |
+| `cowork-hands-on` | `cowork-zava-sales` (new scenario; the classic `mcs-cowork-latest` remains available) |
 | `mcs-tools` | `mcs-knowledge-and-tools-deep-dive` |
 | `mcs-workflows` | `mcs-workflows-latest` |
 
-The copied labs reuse images and downloads from their original lab folders via
+The Zava Sales lab has its own images and opts into guided missions; other labs
+retain their classic rendering. Before delivering it, verify that the assigned
+account can find the Northstar renewal through **Chat business-data search** and
+can connect the **Cowork Dataverse plugin** to the training CRM. These are separate
+capabilities: a working Dataverse connection does not establish Chat grounding.
+The optional Friday exercise needs real accessible feedback to demonstrate skill
+improvement; configuring a schedule alone is not evidence that it has run.
+
+The other copied labs reuse images and downloads from their original lab folders via
 relative links; those asset folders remain dependencies. Do not remove them
 when editing or retiring an original lab. Workflows also has a Bootcamp-only
 module, `workflows-latest`, to avoid changing the shared module's duration.

@@ -6,7 +6,7 @@ order: 2
 labs:
   - slug: mcs-m365-copilot-latest
     label: "Lab 1"
-  - slug: mcs-cowork-latest
+  - slug: cowork-zava-sales
     label: "Lab 2"
   - slug: mcs-copilot-code
     label: "Lab 3"

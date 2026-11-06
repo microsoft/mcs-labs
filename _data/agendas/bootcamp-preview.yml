@@ -3,7 +3,7 @@ event_id: bootcamp-preview
 schedule:
   - type: session
     title: "Cowork lab redesign preview"
-    description: "Step through classic-format labs and the new mission-based Cowork lab with Previous and Next, then share feedback on the format. All new-format scenario content is fictional."
+    description: "Compare classic-format labs with the guided Zava Sales lab using Previous and Next. The Zava Sales exercises use the prepared training tenant."
     label: "Preview"
 
   # Classic labs are reused as-is so reviewers can compare formats side by
@@ -19,13 +19,13 @@ schedule:
   - type: lab
     slug: mcs-cowork-latest
     label: "Lab 2 · Classic format"
-    title: "Cowork hands-on (current lab)"
+    title: "Cowork hands-on (classic lab)"
     duration: 30
 
   - type: lab
-    slug: mcs-cowork-preview
+    slug: cowork-zava-sales
     label: "Lab 3 · New format"
-    title: "From a question to a working app"
+    title: "Cowork: from insights to action"
     duration: 30
 
   - type: lab
