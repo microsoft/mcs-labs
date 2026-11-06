@@ -246,6 +246,27 @@
   .keep-copy p { margin: 0; max-width: 46ch; color: var(--muted); font-size: calc(14px * var(--font-scale, 1)); line-height: 1.45; }
   .keep-copy strong { color: var(--text); }
   .print-only { display: none; }
+  &.pdf-export {
+    position: relative;
+    width: 100%;
+    max-width: none;
+    overflow: visible !important;
+    background: #fff;
+    color: #0b2340;
+    --shadow: none;
+    color-scheme: light;
+  }
+  &.pdf-export .wrap { max-width: none; padding-right: 24px; padding-left: 24px; }
+  &.pdf-export .hero { display: block; padding: 28px 0 16px; }
+  &.pdf-export .hero h1 { font-size: 38px; }
+  &.pdf-export .promise { max-width: none; margin-top: 12px; font-size: 18px; }
+  &.pdf-export .lab-layout { display: block; padding-top: 10px; }
+  &.pdf-export .lab-content { max-width: none; }
+  &.pdf-export .print-only { display: block; }
+  &.pdf-export .mission { padding-top: 28px; }
+  &.pdf-export .mission-step { break-inside: auto; }
+  &.pdf-export .reflection-print { min-height: 3.2em; padding: 10px 12px; border: 1px solid var(--border-strong); border-radius: 8px; white-space: pre-wrap; overflow-wrap: anywhere; }
+  &.pdf-export .reflection-print:empty::before { content: "No note written."; color: var(--soft); }
   .sources { margin-top: 32px; color: var(--muted); font-size: 15px; }
   .sources ul { padding-left: 22px; margin: 18px 0; }
   .sources li { margin-bottom: 8px; }
