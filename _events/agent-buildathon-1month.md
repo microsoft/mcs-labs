@@ -2,6 +2,9 @@
 title: "Agent Buildathon (1 Month)"
 description: "Comprehensive month-long agent development program covering declarative agents, autonomous AI, and enterprise deployment patterns."
 event_id: agent-buildathon-1month
+unlisted: true
+search: false
+sitemap: false
 order: 5
 labs:
   - slug: agent-builder-m365

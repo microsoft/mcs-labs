@@ -2,6 +2,9 @@
 title: "MCS in a Day"
 description: "Full-day workshop covering progressive AI assistants and core Copilot Studio concepts including knowledge sources, tools, variables, multi-agent architectures, and analytics."
 event_id: mcs-in-a-day
+unlisted: true
+search: false
+sitemap: false
 order: 3
 labs:
   - slug: agent-builder-m365

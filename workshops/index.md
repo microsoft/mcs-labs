@@ -143,7 +143,7 @@ classes: wide
 .accent-orange { background: var(--color-journey-orange); }
 </style>
 
-{% assign all_workshops = site.workshops | sort: "order" %}
+{% assign all_workshops = site.workshops | where_exp: "ws", "ws.unlisted != true" | sort: "order" %}
 {% assign accent_colors = "accent-blue,accent-green,accent-purple,accent-orange" | split: "," %}
 {% assign internal_workshops = all_workshops | where_exp: "ws", "ws.external != true" %}
 {% assign external_workshops = all_workshops | where: "external", true %}
