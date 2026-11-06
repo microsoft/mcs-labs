@@ -190,7 +190,7 @@ header:
 
 {%- comment -%}
   Keep homepage counts aligned with the public catalogues: deprecated and
-  unlisted labs, plus unlisted events, are intentionally omitted there too.
+  unlisted labs, events and workshops are intentionally omitted there too.
 {%- endcomment -%}
 {% assign all_labs = site.labs | where_exp: "lab", "lab.deprecated != true and lab.unlisted != true" | sort: "order" %}
 {% assign total_duration = 0 %}
@@ -198,7 +198,7 @@ header:
 {% assign total_hours = total_duration | divided_by: 60.0 | round: 1 %}
 {% assign levels = all_labs | map: "difficulty" | uniq %}
 {% assign all_events = site.events | where_exp: "event", "event.unlisted != true" | sort: "order" %}
-{% assign all_workshops = site.workshops | sort: "order" %}
+{% assign all_workshops = site.workshops | where_exp: "ws", "ws.unlisted != true" | sort: "order" %}
 {% assign all_modules = site.modules | sort: "order" %}
 
 <div class="home-hero">

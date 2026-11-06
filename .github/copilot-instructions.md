@@ -250,7 +250,7 @@ Its running order comes from `_data/agendas/<event_id>.yml`, read by `_layouts/e
 
 Use the shared `.event-*` CSS classes for styling.
 
-**Unlisted previews** - to try an event or lab on the live site without advertising it, set `unlisted: true` (plus `search: false` and `sitemap: false`) in its front matter. It drops out of the homepage, All Labs, the Events index, event navigation and feed manifests, and gets `noindex`; `_events/bootcamp-preview.md` is the working example. The URL stays public (not access-controlled), and an unlisted page still gets a per-item feed document because the deployed site is built from those. See `docs/NEW_LAB_CHECKLIST.md`.
+**Unlisted pages** - to keep an event, workshop, or lab addressable without advertising it, set `unlisted: true` (plus `search: false` and `sitemap: false`) in its front matter. It drops out of the homepage, its catalogue, and feed manifests, and gets `noindex`; unlisted event and workshop navigation remains available in explicit URL context. `_events/bootcamp-preview.md` is a working example. The URL stays public (not access-controlled), and an unlisted page still gets a per-item feed document because the deployed site is built from those. See `docs/NEW_LAB_CHECKLIST.md`.
 
 ## 🚀 Common Workflows
 
