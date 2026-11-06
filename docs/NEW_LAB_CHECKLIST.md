@@ -71,9 +71,11 @@ It exits with 1 on errors. CI does not run it, so run it before opening the PR.
 | `layout` | ⚠️ Optional | Defaulted to `lab` by `_config.yml`. Leave it alone: the content feed strips `layout`, so the deployed site silently ignores a custom value even though `jekyll serve` honours it. Use `lab_format` to change how a lab renders | `lab` |
 | `lab_format` | ⚠️ Optional | `missions` renders guided missions inside the usual site header, event rail, and bottom nav. Omit it for the classic format. Consumers that don't know the key render the readable Markdown body | `missions` |
 | `mission_lab` | ⚠️ Required with `missions` | Structured mission content; see the authoring contract below and `_labs/cowork-zava-sales.md` | object |
-| `unlisted` | ⚠️ Preview only | Keeps the page out of the homepage, All Labs, the Events index, event navigation, and feed listings (manifests, bundles, index counts), and adds `noindex`. The URL remains public | `true` |
+| `unlisted` | ⚠️ Optional | Keeps a lab, event, or workshop out of the homepage, its catalogue, and feed listings (manifests, bundles, index counts), and adds `noindex`. Unlisted event and workshop navigation is available only in explicit URL context. The URL remains public | `true` |
 
 Mark both an unlisted preview lab and its separate preview event with `unlisted: true`, `search: false`, and `sitemap: false` (search and sitemap are separate switches). Do not repoint an advertised event at draft content. An unlisted URL is not access-controlled.
+
+Use the same three settings for an unlisted workshop; both internal and external workshops are excluded from the homepage and Workshops index.
 
 A preview event may also list existing, advertised labs so reviewers can compare formats with Previous and Next. Those labs stay unchanged for everyone else: the event-nav manifest emits an unlisted event only on unlisted pages and on the pages its agenda (or `labs:`) lists, and its rail appears only when the URL carries `?event=<preview-id>`, which the rail's own links pass along but session storage never remembers.
 
