@@ -105,7 +105,7 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 ## Prerequisites
 
 > [!IMPORTANT]
-> **Attending a proctored event? Everything is already set up for you — there is nothing to do here.** Your environment, solutions, connections, and sample data were prepared before the event. Go straight to [Use Case #1](#use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) and sign in with your lab account whenever you are prompted. If something looks missing, ask your proctor.
+> **Attending a CAT bootcamp or another proctored event? You can skip the prerequisite setup. Everything is already set up for you — there is nothing to do here.** Your environment, solutions, connections, and sample data were prepared before the event. Go straight to [Use Case #1](#use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) and sign in with your lab account whenever you are prompted. If something looks missing, ask your proctor.
 >
 > **Setting up your own environment?** You need Copilot Studio with **Workflows** enabled and a work account with **Outlook** and **Microsoft To Do**; use that same account for every connection in the lab. Import these solutions into a development or training environment (not production), signing in to each connection the import wizard lists:
 >

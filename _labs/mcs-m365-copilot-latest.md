@@ -299,10 +299,10 @@ Note also that Copilot respects permissions throughout. It sees only what the si
 
 2. Copilot Pages now renders on the right. You can make further edits, add information, and share the page with colleagues.
 
-3. Using the Microsoft 365 Copilot app on the left, turn this Copilot Page into a report-ready deliverable. Paste the following prompt and select **Send**:
+3. Using the Microsoft 365 Copilot app on the left, turn this Copilot Page into a Word deliverable. Paste the following prompt and select **Send**:
 
 ```text
-Turn this into a one-page pre-read for the Zava DIY quarterly business review:
+Turn this into a one-page Word pre-read for the Zava DIY quarterly business review:
 - Title
 - Three findings with evidence
 - Three recommended actions with owners left blank
@@ -362,7 +362,7 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
 
 2. Navigate to [Microsoft 365 Copilot](https://m365.cloud.microsoft/chat/?auth=2&home=1).
 
-3. In the right-side panel or the main chat area, look for the **Researcher** agent. You can find it by:
+3. In the left-side panel or the main chat area, look for the **Researcher** agent. You can find it by:
    - Selecting the agent picker (if available) and choosing **Researcher**
    - Or typing `@Researcher` in the chat input area
 
