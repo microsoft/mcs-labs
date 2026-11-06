@@ -1,9 +1,10 @@
 # Browser session reference
 
-`scripts/capture.cjs` drives a normal desktop Edge or Chrome window over the DevTools
-protocol. Each command connects, does one thing and disconnects, so the browser and the
-signed-in session survive between commands. It uses the `puppeteer` package that
-`npm ci` installs for pa11y-ci.
+`scripts/capture.cjs` drives Edge or Chrome over the DevTools protocol, in a private
+window with a new temporary profile, either in a desktop window or headless. Each command
+connects, does one thing and disconnects, so the browser and the signed-in session survive
+between commands. It uses the `puppeteer` package that `npm ci` installs for pa11y-ci, and
+puppeteer's Chrome for Testing build for headless runs.
 
 ## Commands
 
@@ -15,13 +16,18 @@ node .github/skills/lab-runthrough/scripts/capture.cjs <command> [args] [options
 
 | Command | What it does |
 | --- | --- |
-| `launch [url]` | Starts the browser with a new temporary profile and DevTools on `--port`, and opens `url`. |
-| `pages` | Lists open tabs (URL and title). |
+| `launch [url]` | Starts the browser in a private window with a new temporary profile and DevTools on `--port`, and opens `url`. |
+| `pages` | Lists open tabs with the index `--tab` uses, URL and title. |
 | `goto <url>` | Navigates the selected tab and waits for `domcontentloaded`. |
-| `controls [regex]` | Lists visible controls: role, label, text, title, state (`on`, `expanded`, `selected`, `disabled`) and box `x y w h` in CSS pixels. |
-| `text` | Prints the tab's visible text. Use it to compare UI wording with the lab. |
-| `click <name>` | Clicks the single visible control whose `aria-label`, text or title equals `name`. Fails if none or several match. |
+| `newtab <url>` | Opens a tab in the selected tab's session (same sign-in), waits for sign-in redirects to settle, and prints its index. |
+| `login` | Signs in on the selected tab as the `LAB_CREDENTIALS` account (see [Signing in](#signing-in)). |
+| `controls [regex]` | Lists visible controls in every frame: role, label, text, title, state (`on`, `expanded`, `selected`, `disabled`) and box `x y w h` in CSS pixels. Controls inside an iframe start with `[frame n]`. |
+| `text` | Prints the tab's visible text, including iframes. Use it to compare UI wording with the lab. |
+| `click <name>` | Clicks the single visible control, in any frame, whose `aria-label`, text or title equals `name`. Fails if none or several match, unless `--nth` picks one. |
 | `clickat <x> <y>` | Clicks a point, for controls without a usable name. |
+| `typeat <x> <y> <text\|->` | Clicks a point and types the text (or stdin) verbatim. `--clear` empties the field first; `--enter` presses Enter after. |
+| `press <key>` | Presses a key, for example `Enter`, `Escape` or `Tab`. |
+| `scroll <x> <y> <dy>` | Scrolls the element under a point, for panes that do not scroll with the page. |
 | `prompt <file\|->` | Types the prompt verbatim (line breaks kept) into the empty editor, clicks Send and waits until it is posted. |
 | `wait <text>` | Waits until the page shows `text`. |
 | `shot <name>` | Saves `<out>/<name>.png` and prints its size and the display scale. |
@@ -30,18 +36,65 @@ node .github/skills/lab-runthrough/scripts/capture.cjs <command> [args] [options
 
 | Option | Default | Notes |
 | --- | --- | --- |
-| `--port <n>` | 9334 or `LAB_CDP_PORT` | Use a different port per parallel run. |
+| `--port <n>` | 9334 or `LAB_CDP_PORT` | One port per browser. Use a different port for each parallel run. |
 | `--url <prefix>` | first tab | Selects the tab whose URL starts with the prefix. |
+| `--tab <n>` | | Selects a tab by its `pages` index. |
 | `--out <dir>` | `<temp>/lab-runthrough` | Must be outside the repository. |
 | `--settle <ms>` | 1500 | Wait after each theme switch in `pair`. |
 | `--scheme-attr <name>` | none | Makes `pair` check `<html name="light\|dark">`. Microsoft 365 Copilot uses `data-color-scheme`. |
 | `--send-label <name>` | `Send` | Accessible name of the send button. |
-| `--timeout <ms>` | 120000 for `prompt`, 300000 for `wait` | |
-| `--browser <path>` | Edge, then Chrome | |
-| `--window-size <w,h>` | 1600,1000 | Keep it stable across a lab so crops line up. |
-| `--headless` | off | Only for testing the script; nobody can sign in. |
+| `--timeout <ms>` | 120000 for `prompt` and `login`, 300000 for `wait` | |
+| `--nth <n>` | | `click`: use the nth match (from 0). |
+| `--clear`, `--enter` | off | `typeat` only. |
+| `--forbid <regex>` | `LAB_FORBID` | `login`: fail with exit code 4 and blank the tab if the page shows this text. Pass the host user's own name or alias. |
+| `--browser <name\|path>` | Edge, then Chrome; Chrome for Testing when headless | `edge`, `chrome` (Chrome for Testing if installed) or an executable path. |
+| `--window-size <w,h>` | 1600,1000 | Window size, or the viewport when headless. Keep it stable across a lab so crops line up. |
+| `--headless` | off | No window. The tab opens in an off-the-record session; sign in with `login`. |
 
-Exit codes: 0 success, 1 failure (message on stderr), 2 usage error.
+Exit codes: 0 success, 1 failure (message on stderr), 2 usage error, 3 a person is needed
+(MFA, password change, locked account), 4 wrong account.
+
+## Signing in
+
+There are two ways to get a signed-in session, and both keep the run out of the host
+user's own accounts.
+
+- **The person signs in.** `launch` without `--headless`, and ask them to sign in to the
+  training account in the window that opens. Use this when the tenant needs MFA or you have
+  no credentials.
+- **A provisioned training account.** Event and demo tenants hand out throwaway accounts
+  (see `training-accounts.md`). Save the credentials as JSON outside the repository, for
+  example `<temp>/<run>/account.json` with `username` and `password`, and point
+  `LAB_CREDENTIALS` at it. `login` types them into the Microsoft sign-in page, picks only
+  that account in **Pick an account**, answers **Stay signed in?**, and then keeps watching
+  for a few seconds because some apps send the tab back to sign-in once more.
+
+  ```powershell
+  $env:LAB_CREDENTIALS = "$env:TEMP\mcs-run\account.json"
+  node .github/skills/lab-runthrough/scripts/capture.cjs launch https://copilotstudio.microsoft.com --headless --port 9352
+  node .github/skills/lab-runthrough/scripts/capture.cjs login --port 9352 --forbid "<your name>|<your alias>"
+  ```
+
+  `login` stops with exit code 3 on MFA, **Update your password**, **More information
+  required** or a locked account. Finish that step in a windowed run (or ask the person
+  to), then run `login` again.
+
+While `LAB_CREDENTIALS` is set, every command masks the user name, its distinctive parts
+(provisioned display names often repeat them, such as "User AB12CD34"), every
+`*password*` value in the file and any `login_hint` in its output. Add a `redact` array to
+the file for other terms. Screenshots are not masked: crop or avoid the account menu.
+
+## Parallel runs
+
+Headless runs are independent: give each lab its own `--port` (for example 9352, 9353, …),
+its own `--out` folder and its own `close`. Each `launch` creates a separate temporary
+profile, so the sessions do not share cookies. Several runs can sign in as the same
+training account at once, but they share its data: avoid labs that edit the same agent,
+record or setting at the same time, and name what you create after the lab. Three or four
+concurrent browsers are comfortable on a 16 GB machine.
+
+Use `newtab` rather than `launch` for a second app in the same lab (for example Teams next
+to Copilot Studio): the tab shares the first one's sign-in.
 
 ## Library use
 
@@ -65,7 +118,8 @@ const cap = require('./.github/skills/lab-runthrough/scripts/capture.cjs');
 })();
 ```
 
-`launch({ port, url })` and `close({ port })` are exported too.
+`launch({ port, url, headless })`, `close({ port })`, `login(page, { username, password }, { forbid })`,
+`newTab(page, url, port)`, `typeAt`, `pageText` and `redact` are exported too.
 
 ## Screenshot workflow
 
@@ -104,6 +158,23 @@ a slide render.
 Classic labs reference `images/<file>` with the same relative path in both copies. Keep the
 file name and format so neither copy changes.
 
+## Browser and sign-in quirks
+
+Seen on a managed Windows device in November 2026.
+
+- **Headless Edge cannot sign in on a managed device.** Policies such as `BrowserSignin`
+  open `edge://force-signin/` and ignore `--inprivate` when headless, and the browser
+  exits during the Microsoft Entra sign-in. That is why `--headless` defaults to
+  puppeteer's Chrome for Testing. Windowed `--inprivate` Edge works.
+- **Single sign-on leaks the host account.** Device policies (Chrome `CloudAPAuthEnabled`,
+  Windows accounts in Edge) sign a normal profile in as the host user. `launch` always uses
+  a private window, and headless tabs open in an off-the-record context. **Pick an
+  account** can still list the host user's accounts: `login` only picks the training
+  account or **Use another account**, and `--forbid` is the backstop.
+- Headless pages need an explicit viewport; `launch`, `connect` and `newtab` set it from
+  `--window-size`.
+- Off-the-record contexts survive disconnects, but not `close`.
+
 ## Product quirks
 
 Seen in Microsoft 365 Copilot and Cowork in November 2026. Products change; update this list
@@ -127,6 +198,14 @@ when a run-through finds something new, and date it.
   log, and never approve a write the lab does not ask for.
 - A draft scheduled task stays inactive until you choose **Activate** (or **Activate and
   run now**). Check the Automations list after a reload.
+- Copilot Studio sends a new session back to sign-in once, a few seconds after the first
+  load (`sso_reload=true`). `login` waits for it; if you signed in by hand, sign in again.
+- Copilot Studio shows a one-time **Welcome from your admin** dialog to a new tenant user:
+  tick **I have read and agree to the Terms of use**, then **Close**. Next comes a **Find
+  your environments here** bubble: **Got it**. Labs should mention both in their first
+  sign-in step.
+- Copilot Studio follows the system theme by default, so `pair` works without changing a
+  setting.
 
 ## Troubleshooting
 
@@ -134,7 +213,12 @@ when a run-through finds something new, and date it.
 | --- | --- |
 | `No browser on port …` | Run `launch`, or pass the `--port` you launched with. |
 | `Expected one visible control named …, found 0` | Run `controls "<part of the name>"`; the label may have changed (log it as drift). |
-| `found 2` or more | Use `clickat` with the box of the right one. |
+| `found 2` or more | Pass `--nth`, or use `clickat` with the box of the right one. |
+| `Expected the prompt editor in one frame` | The editor is in a side panel or there are two: click it and use `typeat`. |
+| Exit code 3, `Sign-in needs a person` | MFA, password change or locked account: finish it in a windowed run, or ask the person. |
+| Exit code 4, `Wrong account` | The session reached the host user's own account. Stop, `close`, and relaunch. |
+| `edge://force-signin` or Edge exits while headless | Drop `--browser edge`; headless uses Chrome for Testing. |
+| `Still on the sign-in page` | Run `text` to read the error (wrong password, blocked account). |
 | `The prompt editor is not empty` | Clear the editor or start a new chat; the script never appends to a draft. |
 | `Light and dark captures are identical` | Set the product theme to System, or use `shot` for a theme-neutral image. |
 | `Keep raw captures outside the repository` | Pass an `--out` folder outside the repo. |
