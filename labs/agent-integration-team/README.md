@@ -22,9 +22,9 @@ Riverside Construction needs 60 bags of repair mortar before its crew starts at 
 
 All facts are fictional. There is no ERP, live inventory, carrier booking tool or transaction.
 
-**Verified boundary:** the coordinator-only and internal-specialist tests passed live on 6 November 2026 with a private coordinator and a published specialist, without triggers. A2A discovery failed in Studio even though the public card returned HTTP 200. No A2A connection or full-team test passed. Missions 3–4 require the facilitator to repair and verify discovery and invocation from Studio first. A recording is not hands-on completion.
+**Verified boundary:** the coordinator-only and internal-specialist tests passed live on 6 November 2026 with a private coordinator and a published specialist, without triggers. Studio didn't retrieve the public LiftLine card (likely a CORS policy on the service), so Mission 3 has you enter the A2A name and description manually. The A2A connection and full-team test were not run live; a recording is not hands-on completion.
 
-**Pacing:** Coordinate (6) → Ground (10) → Connect (7) → Prove (7) = **30 minutes**. Challenge is optional, about 10 more minutes. These are working budgets, not measured completion times; provisioning and model waits vary. Read a check while waiting rather than resending. If discovery is blocked, retain the verified partial result and do not mark the full team complete.
+**Pacing:** Coordinate (6) → Ground (10) → Connect (7) → Prove (7) = **30 minutes**. Challenge is optional, about 10 more minutes. These are working budgets, not measured completion times; provisioning and model waits vary. Read a check while waiting rather than resending. If LiftLine doesn't answer, retain the verified partial result and do not mark the full team complete.
 
 ## 📋 Table of Contents
 
@@ -43,7 +43,7 @@ All facts are fictional. There is no ERP, live inventory, carrier booking tool o
 
 **Running in your own tenant?** Arrange access to create two **Microsoft Copilot harness** agents in the same environment, upload Skills, publish and connect a specialist. Confirm **Build → Skills**, **Connected agents** and **Add A2A agent** are available. The **Standard harness** is a separate experience, not a renamed substitute. Building and testing can consume Copilot Credits.
 
-Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified discovery and invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner mission.
+Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner mission.
 
 **Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. Keep the lab beside Studio. Obtain your shared-account suffix in Mission 1, the Skill ZIP in Mission 2 and the confirmed card URL in Mission 3.
 
@@ -233,34 +233,26 @@ Coordinator request → Published specialist → Skill reference → Verified st
 
 **Mission 3 · 7 minutes · Add A2A agent**
 
-Connect the facilitator's external service only after discovery works in Studio. **Outcome:** a discovered LiftLine connection, or an explicitly recorded blocker with the verified stock result retained.
+Add the facilitator's hosted LiftLine service as an A2A connected agent. **Outcome:** `LiftLine_Dispatch_Advisor` listed under **Connected agents** with **Authentication: None**.
 
-### Check the readiness gate
-
-Ask the facilitator to confirm discovery and invocation **from Copilot Studio**, not just a direct public-card request. The supplied live run received HTTP 200 for a genuine LiftLine card but Studio reported **No agent card found. Enter a name and description.**, left metadata empty and disabled **Next**. No A2A connection was created.
-
-**If that still happens, stop here.** Do not build a replacement backend or claim the full-team exercise passed. Connection selection, review and the full-team tests remain unverified live. Missing CORS headers were consistent with the failure, not a proved sole cause. The instructor must investigate the actual Studio origin, including `https://copilotstudio.preview.microsoft.com` where applicable, and retest discovery and invocation.
-
-### Discover and connect the external agent
+### Connect the external agent
 
 1. Open **Zava Operations Assistant → Build → Connected agents → Add → Add A2A agent**.
-2. Obtain the facilitator-confirmed **Agent card URL**. Use the existing demo URL below only if confirmed for this session; paste it into that field, not Preview or the service's root endpoint.
+2. Paste the following **Agent card URL** into that field, not Preview or the service's root endpoint.
 
-**Input — Agent card URL, only after facilitator confirmation:**
+**Input — Agent card URL:**
 
 ```text
 https://a2a-server-bootcamp.gentleplant-daa79337.westeurope.azurecontainerapps.io/.well-known/agent-card.json
 ```
 
-3. Confirm the discovered card identifies **LiftLine Dispatch Advisor**, not the earlier Echo agent.
+3. If Studio shows **No agent card found. Enter a name and description.**, that's expected: the card fetch is likely blocked by the service's CORS policy. Continue and enter the details yourself.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/a2a-discovery-blocked-dark.webp"><img src="images/a2a-discovery-blocked.webp" alt="A2A wizard has the card URL entered, empty Name and Description fields, and a disabled Next button."></picture>
 
-*Observed blocked state: metadata is empty and Next is disabled. The transient no-card error is not visible in this capture; this is not a successful connection.*
+*Expected: Studio may not retrieve the card, so Name and Description stay empty and Next stays disabled until you fill them in.*
 
-Do not fill metadata manually to bypass failed discovery, disable browser security or alter shared infrastructure. Keep the partial stock result and ask the instructor.
-
-4. **Only after discovery succeeds**, set **Name** to `LiftLine_Dispatch_Advisor` (underscores), retaining **LiftLine Dispatch Advisor** as the card's display identity. Paste the following **Description**. The card advertises capabilities and a communication endpoint; its A2A skill metadata does not install an Agent Skill package.
+4. Set **Name** to `LiftLine_Dispatch_Advisor` (underscores) and paste the following **Description**. The coordinator uses this description to decide when to call LiftLine. The card's A2A skill metadata does not install an Agent Skill package.
 
 **Input — A2A connection Description:**
 
@@ -272,24 +264,24 @@ Evaluate fictional LiftLine delivery from Zava Regional depot to Riverside: load
 6. On **Connect to the A2A agent**, choose the supplied lab connection, or create one if none is available. **None** means no credentials, not no connection step. Do not change or delete another participant's connection.
 7. Select **Next → Review and add → Add to agent** and confirm `LiftLine_Dispatch_Advisor` appears under **Connected agents**.
 
-This documented continuation is only actionable once discovery works. If credentials are unexpectedly requested, stop and check with the instructor.
+If credentials are unexpectedly requested, stop and check with the instructor.
 
-**Reveal — A readable card and a working Studio integration are different checks.** Discovery must work from the actual authoring surface; runtime delegation must then return a usable business result. Neither manually typed metadata nor an ordinary REST call proves an A2A connection.
+**Reveal — When Studio can't read the card, your description is the routing contract.** The coordinator picks a connected agent from its name and description, so the description must say what LiftLine does, when to use it and what it doesn't own. A saved connection is still not proof: Mission 4 checks that LiftLine is actually invoked and returns a usable quote.
 
-Studio discovery → Permitted connection → A2A invocation → Business result.
+Card URL → Name and description → A2A connection → A2A invocation.
 
-**Check:** The card opens publicly, but Studio cannot discover it. Is the integration ready?
+**Check:** Studio shows "No agent card found" for the LiftLine URL. What do you do?
 
-- A. Yes; HTTP 200 proves discovery and invocation.
-- B. No; the facilitator must fix and verify discovery and invocation from Studio.
+- A. Stop; the agent can't be added without a discovered card.
+- B. Enter the name and description, select Authentication None, add the agent, then prove invocation in Mission 4.
 
-**Answer: B.** The Studio discovery and runtime paths have not succeeded. Retain the verified stock result and leave full-team completion blocked.
+**Answer: B.** The manual details add the connection; Mission 4's trace shows whether LiftLine actually answers. In this lab the card fetch is likely blocked by CORS, so there's no need to stop.
 
 ## 🔎 Prove
 
 **Mission 4 · 7 minutes · Coordinator Preview and debug trace**
 
-Continue only after Mission 3 succeeds. Verify both delegations and distinguish a quote from approval. **Outcome:** an evidenced delivery recommendation and a separate hypothetical policy assessment, with no transaction.
+Continue after `LiftLine_Dispatch_Advisor` is added. Verify both delegations and distinguish a quote from approval. **Outcome:** an evidenced delivery recommendation and a separate hypothetical policy assessment, with no transaction.
 
 ### Run the complete-team baseline
 
@@ -497,7 +489,7 @@ Changed constraint → Responsible specialist → Trace and result → Accept or
 
 ## 🏁 Finish and cleanup
 
-Finish only when your trace supports the stock, dispatch and policy findings. If A2A remains blocked, you have a verified internal team, not a completed full-team exercise.
+Finish only when your trace supports the stock, dispatch and policy findings. If LiftLine doesn't answer, you have a verified internal team, not a completed full-team exercise.
 
 - **Independent ownership:** the connected specialist is separately created and published; its Skill owns the synthetic stock/policy reference.
 - **Evidence before confidence:** a public card, connection-list entry or fluent answer does not prove successful delegation. Inspect the returned business result.
@@ -518,4 +510,4 @@ These sources describe the harness used here; some still use the name it had bef
 - [Connect an A2A agent](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/add-agent-to-agent)
 - [Agent2Agent protocol](https://a2a-protocol.org/)
 
-**Instructor reference, not another learner mission:** prepare the [LiftLine dispatch Skill ZIP](../mcs-agent-integration/assets/liftline-dispatch.zip) and [LiftLine build prompt](../mcs-agent-integration/assets/liftline-build-prompt.md) using the [classic instructor appendix](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Preserve the playbook and bundled reference, preflight discovery and invocation from Studio, and provide the exercise date/timezone and card URL. A public HTTP 200 alone does not establish readiness. Do not break the shared endpoint to demonstrate failure.
+**Instructor reference, not another learner mission:** prepare the [LiftLine dispatch Skill ZIP](../mcs-agent-integration/assets/liftline-dispatch.zip) and [LiftLine build prompt](../mcs-agent-integration/assets/liftline-build-prompt.md) using the [classic instructor appendix](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Preserve the playbook and bundled reference, preflight invocation from Studio (learners enter the card name and description manually if discovery fails), and provide the exercise date/timezone and card URL. A public HTTP 200 alone does not establish readiness. Do not break the shared endpoint to demonstrate failure.

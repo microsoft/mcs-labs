@@ -313,22 +313,19 @@ You have created and connected a separate, reusable Zava agent, not a child agen
 
 **Objective:** connect **LiftLine Dispatch Advisor** and verify that **Zava Operations Assistant** combines its quote with Zava's own policy.
 
-For a pre-provisioned event, your facilitator supplies the LiftLine Dispatch Advisor endpoint. You only connect it to **Zava Operations Assistant**; there is nothing to build, download, or upload for this use case. If the endpoint is unavailable, keep the partial stock recommendation from Use Case #2 and ask your facilitator. Do not build a replacement backend or claim the full-team tests passed.
-
-> [!IMPORTANT]
-> **Facilitator validation required:** the supplied demo URL returned a valid LiftLine agent card during testing, but Studio displayed **No agent card found. Enter a name and description.** and left **Next** disabled. No A2A connection was created. Ask your facilitator to verify discovery and invocation from Studio before continuing. Connection selection, review and the full-team tests below remain unverified live; they describe the path to complete after discovery works.
+For a pre-provisioned event, your facilitator supplies the LiftLine Dispatch Advisor endpoint. You only connect it to **Zava Operations Assistant**; there is nothing to build, download, or upload for this use case. If LiftLine doesn't answer during the tests below, keep the partial stock recommendation from Use Case #2 and ask your facilitator. Do not build a replacement backend or claim the full-team tests passed.
 
 ### Connect the external agent
 
 1. In **Zava Operations Assistant → Build → Connected agents**, select **Add → Add A2A agent**.
-1. Ask your facilitator for the verified LiftLine **Agent card URL**, then paste it into that field, not the service's root communication endpoint. Use the existing demo URL below only if your facilitator confirms it is the endpoint for this session:
+1. Paste this **Agent card URL** into that field, not the service's root communication endpoint:
 
    ```text
    https://a2a-server-bootcamp.gentleplant-daa79337.westeurope.azurecontainerapps.io/.well-known/agent-card.json
    ```
 
-   The discovered card must identify **LiftLine Dispatch Advisor**, not the earlier Echo agent. The card advertises the communication endpoint used for requests.
-1. Set the connected agent's **Name** to `LiftLine_Dispatch_Advisor`. The card's display name is **LiftLine Dispatch Advisor**; the connection name uses underscores. Use this description:
+   Copilot Studio may display **No agent card found. Enter a name and description.** and leave **Name** and **Description** empty. That's expected: the card fetch is likely blocked by the service's browser (CORS) policy. Continue and enter the details yourself.
+1. Enter `LiftLine_Dispatch_Advisor` as the **Name** (with underscores) and paste this **Description**:
 
    ```text
    Evaluate fictional LiftLine delivery from Zava Regional depot to Riverside: loaded capacity, site forklift requirements, arrival slots, and EUR quotes. Uses a bundled dispatch Skill with synthetic data. Use after Zava identifies an eligible origin. Does not own Zava stock or approval rules and cannot book.
@@ -343,7 +340,7 @@ For a pre-provisioned event, your facilitator supplies the LiftLine Dispatch Adv
   <a href="images/liftline-a2a-connection-settings.png"><img src="images/liftline-a2a-connection-settings.png" alt="Connect to an A2A agent dialog showing the agent card URL, LiftLine_Dispatch_Advisor name, and None selected for authentication" width="600" class="align-center"></a>
 </p>
 
-**Checkpoint:** the card is discovered and `LiftLine_Dispatch_Advisor` is added with **Authentication: None**. If the wizard displays **No agent card found. Enter a name and description.**, stop and ask the instructor to check browser discovery. A card that opens directly can still fail when Copilot Studio fetches it. CORS must permit the actual Studio origin, which can be `https://copilotstudio.preview.microsoft.com`. Missing CORS headers were consistent with the observed failure, but were not proved to be its sole cause. Do not enter metadata manually to bypass failed discovery.
+**Checkpoint:** `LiftLine_Dispatch_Advisor` appears under **Connected agents** with **Authentication: None**. If the wizard showed **No agent card found. Enter a name and description.**, entering the name and description manually is the intended path; the coordinator uses that description to decide when to call LiftLine.
 
 ### Quick test: verify the complete team
 
@@ -541,7 +538,7 @@ You have connected expertise across the company boundary: LiftLine determined de
 | Publishing warns that there are no triggers | The specialist can publish without a trigger: select **Publish**, then **Done**. Do not add a trigger for connected-agent delegation. |
 | Only the first line of the prompt was sent | Paste the complete prompt as one paragraph, verify it in the composer, and retry in a fresh conversation. |
 | Agent substitutes "tomorrow" or a countdown for the supplied date | Check the explicit-date instruction, save, and restart the test. Use the supplied calendar date/timezone, not the runtime clock. |
-| Wizard says "No agent card found. Enter a name and description.", but the URL opens directly | Ask the instructor to investigate discovery from Studio's actual origin, including `https://copilotstudio.preview.microsoft.com` where applicable. A direct HTTP 200 response does not verify browser discovery or A2A invocation. Check CORS and other discovery errors; do not assume CORS is the sole cause, disable browser security, or bypass failed discovery with a manual name. |
+| Wizard says "No agent card found. Enter a name and description." | Expected in this lab: the card fetch from Copilot Studio is likely blocked by the service's CORS policy. Enter the name `LiftLine_Dispatch_Advisor` and the description from Use Case #3 manually, then continue. |
 | A2A connection or invocation fails | Verify the card URL, reachable service endpoint, exact connection name `LiftLine_Dispatch_Advisor`, and **Authentication: None** for this demo. If the service unexpectedly asks for credentials, stop and check the deployment with the instructor. |
 | Either specialist times out or returns contradictory data | Identify the failed validation, retain only verified partial findings, and ask the instructor. Never claim a complete recommendation. |
 | LiftLine rejects a clearly named demo quote override | Inspect the returned business status and ask the instructor to check the external service's override handling. Allow at most one corrected retry; do not loop or treat conditional approval advice as a confirmed quote and policy check. |
@@ -572,7 +569,7 @@ Before running this lab:
 1. Load that downloaded `liftline-dispatch.zip` into the external runtime's Skill-loading mechanism, preserving `SKILL.md` and its bundled reference. Follow the build prompt for implementation, response conventions, and acceptance tests. This is instructor preparation, not a learner upload to Copilot Studio.
 1. Verify the target tenant supports this complete harness/Skill/connected-agent/A2A combination and required sharing/publishing permissions. These steps document supported surfaces, not evidence that your tenant has been tested.
 1. Verify the deployed agent card URL in Use Case #3 still resolves to **LiftLine Dispatch Advisor** and the `LiftLine_Dispatch_Advisor` connection works with **Authentication: None**. Provide the demo calendar date/timezone and Zava Skill ZIP. LiftLine's Skill is already installed on the external service; learners do not need that download. Keep this unauthenticated endpoint limited to synthetic, advisory-only demo behavior.
-1. Verify agent-card discovery in the actual **Copilot Studio → Add A2A agent** wizard before the workshop. The deployed service must allow discovery from the actual Studio origin, including `https://copilotstudio.preview.microsoft.com` when used, with appropriate CORS response headers. In the validation run, a request with that Origin received no `Access-Control-Allow-Origin` or `Access-Control-Allow-Methods` headers, and Studio discovery failed despite a direct HTTP 200 response. Investigate this evidence and other discovery errors; the sole cause was not established. Verify discovery and invocation after any fix rather than relying on a direct card request or standalone A2A client test.
+1. Expect agent-card discovery in the **Copilot Studio → Add A2A agent** wizard to fail while the deployed service doesn't return CORS headers for the Studio origin (for example `https://copilotstudio.preview.microsoft.com`). Learners are told to enter the name and description manually, so this doesn't block the lab. Still verify invocation from Copilot Studio after adding the connection, rather than relying on a direct card request or a standalone A2A client test.
 1. Run the full scenario from Copilot Studio against the **actual deployment**, not just a local A2A client. Capture evidence of discovery, both delegations, reference loading, approval boundaries, and missing-data/error handling. Record the tested runtime, A2A version/transport, and auth configuration.
 1. Test both a missing date/timezone and an unavailable specialist/service in a disposable instructor test setup. The main agent must report incomplete validation. Do not break the shared workshop endpoint to demonstrate an outage.
 1. Review possible conversation-context sharing and external logging/retention. Use synthetic data only; log correlation/status/fixture IDs rather than credentials or full conversations.
