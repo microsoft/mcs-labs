@@ -110,7 +110,7 @@ schedule:
   - type: lab
     slug: mcs-copilot-harness-latest
     label: "Lab 4"
-    title: "Put a Cowork skill into a DA"
+    title: "Reuse a Cowork skill in a declarative agent"
     time: "14:15"
     duration: 30
 
