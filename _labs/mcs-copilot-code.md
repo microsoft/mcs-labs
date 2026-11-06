@@ -110,7 +110,7 @@ These optional resources explain Copilot Code, where published apps run, and the
 ## Prerequisites
 
 > [!IMPORTANT]
-> **Taking part in a proctor-led event with a pre-provisioned user account? Skip this section.** Your lab account, environment, licences, connections and sample data are already set up. Go straight to [Use Case #1](#use-case-build-and-refine-your-tracker) and sign in with your lab account when prompted. If something looks missing, ask your facilitator.
+> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#use-case-build-and-refine-your-tracker) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
 
 **Running this lab in your own tenant?** Set this up first:
 

@@ -8,7 +8,7 @@ Build an RFP Response agent, inspect its reusable Skill, verify a proposal and c
 | --- | --- | --- | --- |
 | 300 | Maker | 30 minutes | A Skill-equipped RFP agent, reviewed proposal files, and a source-checked evaluation-weight chart |
 
-**Taking part in a proctor-led event with a pre-provisioned user account? Skip tenant setup.** Sign in with your provided lab account; your environment, licences, connections and sample data are already prepared. Ask your facilitator if anything is missing. Keep this lab beside [Copilot Studio](https://copilotstudio.microsoft.com/), use the assigned training identity rather than a personal or production account, and use only fictional materials. Download each file when its step needs it; no prior Skill-authoring experience is needed.
+**Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip tenant setup.** Sign in with your provided lab account; your environment, licences, connections and sample data are already prepared. Ask your facilitator if anything is missing. Keep this lab beside [Copilot Studio](https://copilotstudio.microsoft.com/), use the assigned training identity rather than a personal or production account, and use only fictional materials. Download each file when its step needs it; no prior Skill-authoring experience is needed.
 
 **Running in your own tenant?** Complete the [classic lab prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-skills-authoring/#prerequisites) separately, including harness access, permissions, credits, Work IQ, and sandbox capabilities. These are not attendee setup tasks.
 

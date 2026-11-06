@@ -10,6 +10,9 @@
 
 Use your assigned **training account**, not a personal or production account. %%WHAT_THE_FACILITATOR_PREPARED%%
 
+<!-- TEMPLATE NOTE (delete): keep the next paragraph when learners check results in a business app; otherwise delete it. Mirror it in the _labs copy. -->
+Keep [%%SYSTEM_OF_RECORD%%](%%SYSTEM_OF_RECORD_URL%%) open in another tab. It is the %%KIND_OF_APP%% in this scenario: %%WHAT_IT_IS%%. Use it to %%WHAT_TO_CHECK_THERE%%.
+
 Plan **%%DURATION%% minutes for the core missions**. %%OPTIONAL_MISSIONS%% are **optional extensions**. These are working budgets, not guaranteed run times.
 
 ## 📚 Table of Contents

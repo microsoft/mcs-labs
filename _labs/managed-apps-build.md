@@ -34,7 +34,7 @@ mission_lab:
 
     **Prerequisites for your own tenant**
 
-    **Taking part in a proctor-led event with a pre-provisioned user account? Skip this section.** Your account and environment access are prepared. Start at [Mission 1](#build); ask your facilitator if access is missing. You still download/upload the reference and create or verify your own connection and CSV during the missions. Those lab-specific artifacts are not assumed to be pre-created.
+    **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your account and environment access are prepared. Start at [Mission 1](#build); ask your facilitator if access is missing. You still download/upload the reference and create or verify your own connection and CSV during the missions. Those lab-specific artifacts are not assumed to be pre-created.
 
     **Running in your own tenant?** Arrange access to **Copilot Studio Apps**, image upload, preview, and reading the public agenda. You need your own OneDrive for Business with permission to read, create and update files, and permission to use or create a OneDrive for Business connection in the environment. No prepared CSV, SharePoint list, database or VS Code setup is required.
   prerequisites:
@@ -409,7 +409,7 @@ All five screenshot pairs below are genuine light/dark captures from that rehear
 
 ## Prerequisites
 
-> **Taking part in a proctor-led event with a pre-provisioned user account? Skip this section.** Your account and environment access are prepared. Start at [Build](#build); ask your facilitator if access is missing. You still download/upload the reference and create or verify your own connection and CSV in the missions. Those lab-specific artifacts are not assumed to be pre-created.
+> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your account and environment access are prepared. Start at [Build](#build); ask your facilitator if access is missing. You still download/upload the reference and create or verify your own connection and CSV in the missions. Those lab-specific artifacts are not assumed to be pre-created.
 
 **Running in your own tenant?** Arrange Copilot Studio Apps access, image upload, preview and permission to read the public agenda. You need your own OneDrive for Business with file read/create/update permission and permission to use or create its connection in the environment. No prepared CSV, SharePoint list, database or VS Code setup is needed.
 

@@ -27,7 +27,7 @@ mission_lab:
     caption: "Your finish line: a real chart checked against the RFP, not scores inferred from a proposal. This is a cropped result from the classic lab run."
   scenario: "You are a proposal maker for fictional **Aventra Software Group**. Equip an agent with the company's approved answer library, inspect why its Skill loads, and verify what it produces before anyone shares it with a customer."
   prerequisites:
-    - "Taking part in a **proctor-led event with a pre-provisioned user account**? Skip tenant setup. Sign in with the provided lab account; your environment, licences, connections and sample data are already prepared. Ask your facilitator if something is missing."
+    - "Attending a CAT bootcamp or another **proctor-led event with a pre-provisioned user account**? Skip tenant setup. Sign in with the provided lab account; your environment, licences, connections and sample data are already prepared. Ask your facilitator if something is missing."
     - "Keep this lab beside [Copilot Studio](https://copilotstudio.microsoft.com/). Use your assigned training account, not a personal or production account."
     - "Use only the fictional sample materials. Download each file at the step that uses it; no prior Skill-authoring experience is needed."
   pacing: "Plan 30 minutes for Configure (6) → Inspect (6) → Test (10) → Verify (8). Author (25), Explore (8), and Generate (10) are optional extensions after the core. These are working budgets, not execution guarantees; model, connection, and file-generation waits vary."
@@ -460,7 +460,7 @@ Build an RFP Response agent, inspect its reusable Skill, verify a proposal and c
 | --- | --- | --- | --- |
 | 300 | Maker | 30 minutes | A Skill-equipped RFP agent, reviewed proposal files, and a source-checked evaluation-weight chart |
 
-**Taking part in a proctor-led event with a pre-provisioned user account? Skip tenant setup.** Sign in with your provided lab account; your environment, licences, connections and sample data are already prepared. Ask your facilitator if anything is missing. Keep this lab beside [Copilot Studio](https://copilotstudio.microsoft.com/), use the assigned training identity rather than a personal or production account, and use only fictional materials. Download each file when its step needs it; no prior Skill-authoring experience is needed.
+**Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip tenant setup.** Sign in with your provided lab account; your environment, licences, connections and sample data are already prepared. Ask your facilitator if anything is missing. Keep this lab beside [Copilot Studio](https://copilotstudio.microsoft.com/), use the assigned training identity rather than a personal or production account, and use only fictional materials. Download each file when its step needs it; no prior Skill-authoring experience is needed.
 
 **Running in your own tenant?** Complete the [classic lab prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-skills-authoring/#prerequisites) separately, including harness access, permissions, credits, Work IQ, and sandbox capabilities. These are not attendee setup tasks.
 

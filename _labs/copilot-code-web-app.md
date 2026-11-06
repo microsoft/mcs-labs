@@ -27,7 +27,7 @@ mission_lab:
   scenario: |
     You are attending the bootcamp and need one place to see every day's labs and mark them complete. Build from the **published agenda**, not an invented schedule. Lunch belongs on the timeline but must never count toward progress.
 
-    **Taking part in a proctor-led event with a pre-provisioned user account? Skip tenant setup.** Your account and environment are already prepared. Sign in with the provided account; ask your facilitator if anything is missing.
+    **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip tenant setup.** Your account and environment are already prepared. Sign in with the provided account; ask your facilitator if anything is missing.
 
     **Using your own tenant instead?** Complete the [classic lab's prerequisite setup](https://microsoft.github.io/mcs-labs/labs/mcs-copilot-code/#prerequisites) separately before starting. Copilot Code is a Frontier preview in the browser; this exercise needs no local development toolchain.
   prerequisites:
@@ -394,7 +394,7 @@ Build, refine, and publish a Bootcamp Lab Tracker through four sequential prompt
 | --- | --- | --- | --- |
 | 100 | Maker | 30 minutes | A published tracker built from the agenda, with a dark design, emojis, accessible day tabs, and verified completion behavior. |
 
-**Taking part in a proctor-led event with a pre-provisioned user account? Skip tenant setup.** Your account and environment are already prepared. Sign in with the provided account; ask your facilitator if anything is missing.
+**Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip tenant setup.** Your account and environment are already prepared. Sign in with the provided account; ask your facilitator if anything is missing.
 
 - Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your provided **lab account** in a separate browser profile or private window, not a personal or production account.
 - Keep this lab beside Copilot and open the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) for comparison.

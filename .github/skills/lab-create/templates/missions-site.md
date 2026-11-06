@@ -33,6 +33,8 @@ mission_lab:
   prerequisites:
     - "Use your assigned **training account** in a separate browser profile or private window. Do not use your personal or production account."
     - "%%WHAT_THE_FACILITATOR_PREPARED%%"
+    # TEMPLATE NOTE (delete): keep the next line when learners check results in a business app (system of record); otherwise delete it.
+    - "In another tab, open [%%SYSTEM_OF_RECORD%%](%%SYSTEM_OF_RECORD_URL%%), the %%KIND_OF_APP%% in this scenario. %%WHAT_IT_IS_IN_ONE_SENTENCE%% Use it to %%WHAT_TO_CHECK_THERE%%."
   pacing: "Plan %%DURATION%% minutes for %%CORE_MISSION_VERBS_WITH_ARROWS%%. %%OPTIONAL_MISSIONS%% are optional extensions. These are working budgets, not guaranteed run times."
   missions:
     - id: %%MISSION_1_ID%%
@@ -103,6 +105,7 @@ mission_lab:
     takeaways:
       - label: %%CONCEPT%%
         text: "%%ONE_LINE_TAKEAWAY%%"
+    # The page stores the learner's answer only in their browser and offers Save a PDF copy.
     reflection: "%%QUESTION_THAT_TRANSFERS_THE_SKILL_TO_THEIR_WORK%%"
     cleanup: "%%HOW_TO_STOP_ANYTHING_RECURRING_THE_LAB_CREATED, or delete this key%%"
   sources:
@@ -121,6 +124,9 @@ mission_lab:
 | %%LEVEL%% | %%PERSONA%% | %%DURATION%% minutes | %%FINISH_LINE%% |
 
 Use your assigned **training account**, not a personal or production account. %%WHAT_THE_FACILITATOR_PREPARED%%
+
+<!-- TEMPLATE NOTE (delete): keep the next paragraph when learners check results in a business app; otherwise delete it. Mirror it in the README. -->
+Keep [%%SYSTEM_OF_RECORD%%](%%SYSTEM_OF_RECORD_URL%%) open in another tab. It is the %%KIND_OF_APP%% in this scenario: %%WHAT_IT_IS%%. Use it to %%WHAT_TO_CHECK_THERE%%.
 
 Plan **%%DURATION%% minutes for the core missions**. %%OPTIONAL_MISSIONS%% are **optional extensions**. These are working budgets, not guaranteed run times.
 

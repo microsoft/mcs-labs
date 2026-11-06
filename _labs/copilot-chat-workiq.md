@@ -293,6 +293,15 @@ mission_lab:
         - title: "Edit and review the page"
           instruction: "Edit the page directly to add information. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to."
           notice: "Asking chat beside an open page to rewrite it can report success without updating the page. For a later Copilot revision, request a new answer in chat and open that answer in Pages again; verify the page actually changed."
+        - title: "Create a Word version if time permits"
+          instruction: "In the same chat, turn the pre-read into a Word deliverable. Send the prompt, then open the Word file Copilot creates and check it against the page before sharing."
+          prompt_label: Same grounded Zava DIY chat
+          prompt: |-
+            Turn this into a one-page Word pre-read for the Zava DIY quarterly business review:
+            - Title
+            - Three findings with evidence
+            - Three recommended actions with owners left blank
+            - Open questions
       reveal:
         title: "What changed beyond the answer?"
         line: "You now have an editable artifact."
@@ -777,6 +786,16 @@ Asking chat beside an open page to rewrite it can report success without updatin
 <picture><img src="images/preread-excerpt.webp" alt="Excerpt of a Zava DIY quarterly business review pre-read with three findings and source references." width="970" height="490"></picture>
 
 An example of the optional Pages deliverable: findings with evidence, ready for your review. This is a document-content crop, not a fabricated dark-theme capture.
+
+4. In the same chat, turn the pre-read into a Word deliverable. Send the prompt, then open the Word file Copilot creates and check it against the page before sharing.
+
+```text
+Turn this into a one-page Word pre-read for the Zava DIY quarterly business review:
+- Title
+- Three findings with evidence
+- Three recommended actions with owners left blank
+- Open questions
+```
 
 <details>
 <summary>Reveal: What changed beyond the answer?</summary>

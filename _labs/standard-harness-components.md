@@ -455,7 +455,7 @@ mission_lab:
       url: https://learn.microsoft.com/microsoft-copilot-studio/authoring-variables
     - title: Add other agents
       url: https://learn.microsoft.com/microsoft-copilot-studio/authoring-add-other-agents
-    - title: Publish to Teams and Microsoft 365 Copilot
+    - title: Publish to Teams and Microsoft Copilot
       url: https://learn.microsoft.com/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams
 ---
 

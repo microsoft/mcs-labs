@@ -34,7 +34,7 @@ mission_lab:
 
     **Prerequisites for your own tenant**
 
-    **Taking part in a proctor-led event with a pre-provisioned user account? Skip this section.** Your account, environment, licences, connections and sample data are prepared. Go straight to [Mission 1](#inspect); ask your facilitator if something is missing.
+    **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your account, environment, licences, connections and sample data are prepared. Go straight to [Mission 1](#inspect); ask your facilitator if something is missing.
 
     **Running in your own tenant?** Arrange a Microsoft 365 Copilot account permitted to create agents in Agent Builder and add skills. Check **Agents & Skills > New agent > Configure** for **Skills**, following the linked licensing and skills documentation. For the optional extension, prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
 
@@ -369,7 +369,7 @@ You lead operations at **Contoso Grand Hotel**. Identify five urgent issues in t
 
 ## Prerequisites
 
-> **Taking part in a proctor-led event with a pre-provisioned user account? Skip this section.** Your account, environment, licences, connections and sample data are prepared. Go straight to Mission 1; ask your facilitator if something is missing.
+> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your account, environment, licences, connections and sample data are prepared. Go straight to Mission 1; ask your facilitator if something is missing.
 
 **Running in your own tenant?** Arrange a Microsoft 365 Copilot account permitted to create agents in Agent Builder and add skills. Check **Agents & Skills > New agent > Configure** for **Skills** and consult the licensing and skills sources below. Optional: prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
 

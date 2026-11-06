@@ -10,12 +10,20 @@ Prepare a Zava Sales pipeline review, create real slides and Outlook drafts, upd
 
 Use your assigned **training account**, not a personal or production account. Your facilitator prepares Cowork access, credits, Zava Sales data and plugins. Keep customer emails as **drafts**.
 
+Keep [Zava Sales Hub](https://aka.ms/ZavaSalesHub) open in another tab. It is the CRM in this scenario: a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data (accounts, contacts, leads, opportunities and activities). Use it to check what Copilot finds and to see the records you create.
+
 Plan **30 minutes for the four core missions**: Ask → Delegate → Act → Repeat. Improve and Specialize are **optional extensions, about 14 more minutes**; no scenario has been removed. These are working budgets, not guaranteed run times. Read ahead or try a quick check while Cowork works; do not start duplicate tasks.
+
+## ✅ Prerequisites
+
+> [!IMPORTANT]
+> **Attending a CAT bootcamp? You can skip the prerequisite setup: the CAT team has already prepared it for you.** Use your assigned lab account and follow the lab instructions. If anything is missing, ask your instructor. Independent learners must arrange Copilot access, Cowork credits, Zava Sales data, and plugins before starting.
 
 ## 📚 Table of Contents
 
+- [Prerequisites](#-prerequisites)
 - [Ask: find the deal](#-ask-find-the-deal)
-- [Delegate: make the review](#-delegate-make-the-review)
+- [Delegate: make the review](#️-delegate-make-the-review)
 - [Act: record the commitment](#-act-record-the-commitment)
 - [Repeat: save and schedule](#-repeat-save-and-schedule)
 - [Improve: learn from feedback (optional)](#-improve-learn-from-feedback)
@@ -26,7 +34,7 @@ Plan **30 minutes for the four core missions**: Ask → Delegate → Act → Rep
 
 **3 minutes · Copilot Chat**
 
-1. Open [Copilot Home](https://copilot.cloud.microsoft/home?auth=2) with your assigned training account.
+1. Open [Microsoft Copilot](https://copilot.cloud.microsoft/home?auth=2) with your assigned training account.
 2. Select **Chat**. Explore the model picker, then leave **Auto** selected. Quick response favors speed; Think deeper spends longer reasoning.
 3. Keep **Work IQ on**. It grounds answers in available work context within your permissions, including configured business data. It does not unlock all company data.
 4. Send:
@@ -53,7 +61,7 @@ Watch the visible search/tool activity. Look for Zava Sales business-data result
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/dataverse-connection-dark.webp"><img src="images/dataverse-connection.webp" alt="Connect Microsoft Dataverse dialog with https://zavasalesdemo.crm.dynamics.com/ in the environment URL field"></picture>
 
-4. Select **New → Cowork**. Leave **Auto / Medium** selected. Higher effort spends more time and credits. Standard Copilot Chat use is included with the Microsoft 365 Copilot license; Cowork uses metered Copilot Credits. Available models and tools depend on the tenant.
+4. Select **New → Cowork**. Leave **Auto / Medium** selected. Higher effort spends more time and credits. Standard chat is included with your Microsoft Copilot license; Cowork uses metered Copilot Credits. Available models and tools depend on the tenant.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/cowork-model-effort-dark.webp"><img src="images/cowork-model-effort.webp" alt="Cowork model and effort settings"></picture>
 
@@ -198,7 +206,7 @@ If asked, confirm the three requested records, your intended follow-up date and 
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/zava-created-records-dark.webp"><img src="images/zava-created-records.webp" alt="Readback of the saved Northstar note, Jamie Chen lead and introduction follow-up task"></picture>
 
-A plugin can combine **skills, connectors, or both**. It supplies business guidance as well as tools, without bypassing your permissions. Follow the **Zava Sales Hub** link if recommended: a purpose-built app can be the best place to manage the results.
+A plugin can combine **skills, connectors, or both**. It supplies business guidance as well as tools, without bypassing your permissions. Follow the **Zava Sales Hub** link if recommended, or open [Zava Sales Hub](https://aka.ms/ZavaSalesHub): a purpose-built app can be the best place to manage the results.
 
 If Zava Sales is missing from the catalog, ask your facilitator rather than installing a lookalike. Before rerunning the prompt, check for existing records to avoid duplicates.
 

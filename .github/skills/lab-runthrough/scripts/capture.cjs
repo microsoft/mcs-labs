@@ -61,7 +61,7 @@ Options
   --out <dir>           Capture folder outside the repository (default ${DEFAULT_OUT}).
   --settle <ms>         Wait after switching color scheme (default 1500).
   --scheme-attr <name>  Fail a pair unless <html name="light|dark"> follows the switch,
-                        for example data-color-scheme in Microsoft 365 Copilot.
+                        for example data-color-scheme in Microsoft Copilot.
   --send-label <name>   Accessible name of the send button (default Send).
   --timeout <ms>        Timeout for prompt, wait and login.
   --nth <n>             Click the nth match (from 0) when several controls share a name.

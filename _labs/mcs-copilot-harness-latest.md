@@ -64,11 +64,11 @@ By the end, you will be able to:
 ## Prerequisites
 
 > [!IMPORTANT]
-> **Taking part in a proctor-led event with a pre-provisioned user account? Skip this section.** Your lab account, environment, licences, connections and sample data are already set up. Go straight to [Use Case #1](#use-case-1-build-the-agent-in-agent-builder) and sign in with your lab account when prompted. If something looks missing, ask your facilitator.
+> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#use-case-1-build-the-agent-in-agent-builder) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
 
 **Running this lab in your own tenant?** Set this up first:
 
-- A Microsoft 365 account with Microsoft 365 Copilot that can create agents in Agent Builder and add skills to them. To check, open [Microsoft 365 Copilot](https://m365.cloud.microsoft), select **Agents & Skills > New agent**, and look for a **Skills** section on the **Configure** tab.
+- A Microsoft 365 account with Microsoft 365 Copilot that can create agents in Agent Builder and add skills to them. To check, open [Microsoft Copilot](https://m365.cloud.microsoft), select **Agents & Skills > New agent**, and look for a **Skills** section on the **Configure** tab.
 - For the optional pro-code exercise:
   - Visual Studio Code and a Microsoft 365 Agents Toolkit release that supports declarative agent skills.
   - A SharePoint or OneDrive location you can use for the hotel PDF.
@@ -134,10 +134,10 @@ The report is evidence, not a place to store agent instructions. The skill descr
 
 ### Step 2: Create Contoso Operations agent
 
-1. Open [Microsoft 365 Copilot](https://m365.cloud.microsoft) and sign in with your lab account.
+1. Open [Microsoft Copilot](https://m365.cloud.microsoft) and sign in with your lab account.
 2. In the left pane, select **Agents & Skills**, and then select **New agent**.
 
-   ![The Agents & Skills menu in Microsoft 365 Copilot, with New agent near the bottom](images/agents-skills-new-agent.png)
+   ![The Agents & Skills menu in Microsoft Copilot, with New agent near the bottom](images/agents-skills-new-agent.png)
 
 3. Select **Skip** to go straight to the **Configure** tab. You can also describe the agent in the creation conversation and then review it on **Configure**.
 4. If **What's new in Agent Builder** appears, select **Get started**. The dialog explains that new agents can use your OneDrive and SharePoint files, Outlook, Teams, and the web by default. You turn those off in Step 4.
@@ -278,7 +278,7 @@ The toolkit uses an unpacked folder, not the Agent Builder ZIP. Each agent has i
 
 1. Resolve manifest schema diagnostics and verify that the referenced skill folder is inside the app package.
 2. Use **Provision** in the toolkit's **Lifecycle** pane to upload the app.
-3. Open **Contoso Operations agent Pro-Code** in Microsoft 365 Copilot.
+3. Open **Contoso Operations agent Pro-Code** in Microsoft Copilot.
 4. Run the same accuracy and expected behavior checks from Step 6 of the core exercise.
 5. Change a harmless formatting instruction in your skill files, rebuild the app package, and run **Provision** again to upload the updated version. Verify that the agent's output reflects your change.
 6. Compare versioned source, packaging, knowledge configuration, and deployment with Agent Builder. The business scenario and expected behavior should remain unchanged.

@@ -1,5 +1,5 @@
 {
-  "$comment": "Product names that labs should no longer use. Read by scripts/lab-audit.js (code: term-retired). Add an entry only with an official source. Patterns are JavaScript regular expressions matched case-insensitively against each line, with URLs removed first. Lines that explain a rename (formerly, previously, renamed, now called, f.k.a.) are not reported.",
+  "$comment": "Product names that labs should no longer use. Read by scripts/lab-audit.js (code: term-retired). Add an entry only with an official source. Patterns are JavaScript regular expressions matched case-insensitively against each line, with URLs removed first. Lines that explain a rename (formerly, previously, renamed, now called, f.k.a.) are not reported. License SKU names such as Microsoft 365 Copilot (add-on) and Microsoft 365 Copilot Business are excluded on purpose because the price list still uses them.",
   "terms": [
     {
       "term": "Power Virtual Agents",
@@ -11,23 +11,44 @@
     {
       "term": "Copilot for Microsoft 365",
       "pattern": "\\b(?:Microsoft )?Copilot for Microsoft 365\\b",
-      "replacement": "Microsoft 365 Copilot",
+      "replacement": "Microsoft Copilot",
       "since": "2024-09",
       "source": "https://www.microsoft.com/en-us/copilot/blog/2024/01/15/expanding-copilot-for-microsoft-365-to-businesses-of-all-sizes/"
     },
     {
       "term": "Bing Chat Enterprise",
       "pattern": "\\bBing Chat Enterprise\\b",
-      "replacement": "Microsoft 365 Copilot Chat",
+      "replacement": "Microsoft Copilot Chat",
       "since": "2023-11-15",
       "source": "https://blogs.bing.com/search/2023/11/our-vision-to-bring-microsoft-copilot-to-everyone-and-more/"
     },
     {
       "term": "Copilot with commercial data protection",
       "pattern": "\\bCopilot with commercial data protection\\b",
-      "replacement": "Microsoft 365 Copilot Chat",
+      "replacement": "Microsoft Copilot Chat",
       "since": "2025-01",
       "source": "https://mc.merill.net/message/MC958903"
+    },
+    {
+      "term": "Microsoft 365 Copilot Chat",
+      "pattern": "\\bMicrosoft 365 Copilot Chat\\b",
+      "replacement": "Microsoft Copilot Chat",
+      "since": "2026-08",
+      "source": "https://learn.microsoft.com/en-us/copilot/manage/manage-copilot-chat"
+    },
+    {
+      "term": "Microsoft 365 Copilot",
+      "pattern": "\\bMicrosoft 365 Copilot\\b(?! Chat\\b| \\(add-on\\)| Business\\b)",
+      "replacement": "Microsoft Copilot",
+      "since": "2026-08",
+      "source": "https://learn.microsoft.com/en-us/copilot/plan/microsoft-copilot-requirements"
+    },
+    {
+      "term": "GitHub Copilot harness",
+      "pattern": "\\bGitHub Copilot harness\\b",
+      "replacement": "Microsoft Copilot harness",
+      "since": "2026-10-28",
+      "source": "https://www.microsoft.com/en-us/copilot/blog/copilot-studio/the-github-copilot-harness-in-copilot-studio-is-now-the-microsoft-copilot-harness/"
     },
     {
       "term": "Teams Toolkit",

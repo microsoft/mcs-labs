@@ -33,7 +33,7 @@ mission_lab:
 
     ### Prerequisites
 
-    > **Taking part in a proctor-led event with a pre-provisioned user account? Skip this section.** Your lab account, environment, licences, connections and sample data are already set up. Continue with the exercise inputs and sign in with your lab account when prompted. If anything is missing, ask your facilitator.
+    > **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your lab account, environment, licences, connections and sample data are already set up. Continue with the exercise inputs and sign in with your lab account when prompted. If anything is missing, ask your facilitator.
 
     **Running this lab in your own tenant?** Prepare these separately before the timed exercise:
 
@@ -567,7 +567,7 @@ Plan 30 minutes for Build (10) → Route (12) → Speak (8). Extend is optional 
 
 ## Prerequisites
 
-> **Taking part in a proctor-led event with a pre-provisioned user account? Skip this section.** Your lab account, environment, licences, connections and sample data are already set up. Continue with the exercise inputs and sign in with your lab account when prompted. If anything is missing, ask your facilitator.
+> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your lab account, environment, licences, connections and sample data are already set up. Continue with the exercise inputs and sign in with your lab account when prompted. If anything is missing, ask your facilitator.
 
 **Running this lab in your own tenant?** Prepare these separately before the timed exercise:
 

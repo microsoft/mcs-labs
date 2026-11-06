@@ -113,7 +113,7 @@ against its stated minutes.
 1. Find the screenshot's file name in both copies; reuse it so no Markdown changes.
 2. Missions labs publish light and dark WebP pairs (`src` and `src_dark`). Set the product
    theme to **System** first: `pair` emulates the operating-system color scheme, which an
-   explicit Light or Dark setting overrides. (Microsoft 365 Copilot, November 2026:
+   explicit Light or Dark setting overrides. (Microsoft Copilot, November 2026:
    bottom-left **Settings and more** gear > **Settings** > **General** > **Preferences** >
    **Theme**.) Then run `pair <name> --scheme-attr data-color-scheme`, and restore the
    person's theme afterwards. Classic labs use a single image, usually PNG: run

@@ -303,6 +303,16 @@ Asking chat beside an open page to rewrite it can report success without updatin
 
 An example of the optional Pages deliverable: findings with evidence, ready for your review. This is a document-content crop, not a fabricated dark-theme capture.
 
+4. In the same chat, turn the pre-read into a Word deliverable. Send the prompt, then open the Word file Copilot creates and check it against the page before sharing.
+
+```text
+Turn this into a one-page Word pre-read for the Zava DIY quarterly business review:
+- Title
+- Three findings with evidence
+- Three recommended actions with owners left blank
+- Open questions
+```
+
 <details>
 <summary>Reveal: What changed beyond the answer?</summary>
 

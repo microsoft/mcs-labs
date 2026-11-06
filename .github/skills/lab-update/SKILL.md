@@ -75,7 +75,13 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
 - **Missions labs.** Keep the contract: core `minutes` sum to `duration`, each check has
   exactly one correct option, optional missions are marked, and cleanup stops anything
   recurring. `npm test` enforces it.
-- **Retired names.** When a rename is confirmed, add it to `scripts/lab-audit-terms.json`
+- **Retired names.** Current names (check `scripts/lab-audit-terms.json` for the full
+  list): **Microsoft Copilot** and **Microsoft Copilot Chat** since August 2026 (formerly
+  Microsoft 365 Copilot and Microsoft 365 Copilot Chat), and the **Microsoft Copilot
+  harness** in Copilot Studio since October 2026 (formerly GitHub Copilot harness). Keep
+  license SKU names, such as Microsoft 365 Copilot (add-on), as the price list shows them,
+  and UI labels exactly as the product shows them.
+  When a rename is confirmed, add it to `scripts/lab-audit-terms.json`
   with `term`, `pattern` (JavaScript regular expression, case-insensitive), `replacement`,
   `since` and an official Microsoft `source` URL. Then run `npm run audit:labs -- --all
   --format markdown` and list other affected labs as follow-ups, or fix them in a separate

@@ -26,8 +26,10 @@ mission_lab:
   scenario: |
     You sell for **Zava**. Your manager wants a clear view of three accounts: **Northstar Teamwear, Coastal Performance Supply, and BluePeak Athletics**. Prepare the review, log a customer conversation, and make next week's preparation easier.
   prerequisites:
+    - "**Attending a CAT bootcamp? You can skip the prerequisite setup: the CAT team has already prepared it for you.** Use your assigned lab account and follow the lab instructions. If anything is missing, ask your instructor. Independent learners must arrange Copilot access, Cowork credits, Zava Sales data, and plugins before starting."
     - "Use your assigned **training account** in a separate browser profile or private window. Do not use your personal or production account."
-    - "Open [Copilot Home](https://copilot.cloud.microsoft/home?auth=2). Your facilitator has prepared Microsoft 365 Copilot, Cowork credits, the Zava Sales data, and the plugins."
+    - "Open [Microsoft Copilot](https://copilot.cloud.microsoft/home?auth=2). Your facilitator has prepared your Copilot access, Cowork credits, the Zava Sales data, and the plugins."
+    - "In another tab, open [Zava Sales Hub](https://aka.ms/ZavaSalesHub), the CRM in this scenario. It is a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data: accounts, contacts, leads, opportunities and activities. Use it to check what Copilot finds and to see the records you create."
     - "Keep this lab beside Copilot. All prompts are ready to copy; customer emails must stay **drafts**."
   pacing: "Plan 30 minutes for Ask → Delegate → Act → Repeat. Improve and Specialize are optional extensions (about 14 more minutes); every scenario remains available. These are working budgets, not guaranteed run times: model and connector waits vary. Read ahead or try a quick check while Cowork works, and do not start duplicate tasks."
   missions:
@@ -115,7 +117,7 @@ mission_lab:
             width: 760
             height: 410
             caption: "Higher effort spends more time and credits on the task. Medium is the lab default."
-          notice: "Watch Cowork form a plan, query Zava Sales, create the deck, and save follow-ups in **Outlook**. Standard Copilot Chat use is included with the Microsoft 365 Copilot license; **Cowork uses metered Copilot Credits**. Available frontier models and tools depend on your tenant."
+          notice: "Watch Cowork form a plan, query Zava Sales, create the deck, and save follow-ups in **Outlook**. Standard chat is included with your Microsoft Copilot license; **Cowork uses metered Copilot Credits**. Available frontier models and tools depend on your tenant."
         - title: "Steer before you trust"
           instruction: "As soon as a first deck appears, open it and inspect the proposed decisions. Send the correction below in the same task. If Cowork is still working, use **Queue**; it will handle the follow-up after the current work."
           prompt_label: Same Cowork task
@@ -427,10 +429,18 @@ Prepare a Zava Sales pipeline review, create real slides and Outlook drafts, upd
 
 Use your assigned **training account**, not a personal or production account. Your facilitator prepares Cowork access, credits, Zava Sales data and plugins. Keep customer emails as **drafts**.
 
+Keep [Zava Sales Hub](https://aka.ms/ZavaSalesHub) open in another tab. It is the CRM in this scenario: a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data (accounts, contacts, leads, opportunities and activities). Use it to check what Copilot finds and to see the records you create.
+
 Plan **30 minutes for the four core missions**: Ask → Delegate → Act → Repeat. Improve and Specialize are **optional extensions, about 14 more minutes**; no scenario has been removed. These are working budgets, not guaranteed run times. Read ahead or try a quick check while Cowork works; do not start duplicate tasks.
+
+## Prerequisites
+
+> [!IMPORTANT]
+> **Attending a CAT bootcamp? You can skip the prerequisite setup: the CAT team has already prepared it for you.** Use your assigned lab account and follow the lab instructions. If anything is missing, ask your instructor. Independent learners must arrange Copilot access, Cowork credits, Zava Sales data, and plugins before starting.
 
 ## Table of Contents
 
+- [Prerequisites](#prerequisites)
 - [Ask: find the deal](#ask-find-the-deal)
 - [Delegate: make the review](#delegate-make-the-review)
 - [Act: record the commitment](#act-record-the-commitment)
@@ -443,7 +453,7 @@ Plan **30 minutes for the four core missions**: Ask → Delegate → Act → Rep
 
 **3 minutes · Copilot Chat**
 
-1. Open [Copilot Home](https://copilot.cloud.microsoft/home?auth=2) with your assigned training account.
+1. Open [Microsoft Copilot](https://copilot.cloud.microsoft/home?auth=2) with your assigned training account.
 2. Select **Chat**. Explore the model picker, then leave **Auto** selected. Quick response favors speed; Think deeper spends longer reasoning.
 3. Keep **Work IQ on**. It grounds answers in available work context within your permissions, including configured business data. It does not unlock all company data.
 4. Send:
@@ -470,7 +480,7 @@ Watch the visible search/tool activity. Look for Zava Sales business-data result
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/dataverse-connection-dark.webp"><img src="images/dataverse-connection.webp" alt="Connect Microsoft Dataverse dialog with https://zavasalesdemo.crm.dynamics.com/ in the environment URL field"></picture>
 
-4. Select **New → Cowork**. Leave **Auto / Medium** selected. Higher effort spends more time and credits. Standard Copilot Chat use is included with the Microsoft 365 Copilot license; Cowork uses metered Copilot Credits. Available models and tools depend on the tenant.
+4. Select **New → Cowork**. Leave **Auto / Medium** selected. Higher effort spends more time and credits. Standard chat is included with your Microsoft Copilot license; Cowork uses metered Copilot Credits. Available models and tools depend on the tenant.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/cowork-model-effort-dark.webp"><img src="images/cowork-model-effort.webp" alt="Cowork model and effort settings"></picture>
 
@@ -615,7 +625,7 @@ If asked, confirm the three requested records, your intended follow-up date and 
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/zava-created-records-dark.webp"><img src="images/zava-created-records.webp" alt="Readback of the saved Northstar note, Jamie Chen lead and introduction follow-up task"></picture>
 
-A plugin can combine **skills, connectors, or both**. It supplies business guidance as well as tools, without bypassing your permissions. Follow the **Zava Sales Hub** link if recommended: a purpose-built app can be the best place to manage the results.
+A plugin can combine **skills, connectors, or both**. It supplies business guidance as well as tools, without bypassing your permissions. Follow the **Zava Sales Hub** link if recommended, or open [Zava Sales Hub](https://aka.ms/ZavaSalesHub): a purpose-built app can be the best place to manage the results.
 
 If Zava Sales is missing from the catalog, ask your facilitator rather than installing a lookalike. Before rerunning the prompt, check for existing records to avoid duplicates.
 
