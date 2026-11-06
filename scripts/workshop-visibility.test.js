@@ -2,9 +2,20 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
+const matter = require('gray-matter');
 
 const root = path.resolve(__dirname, '..');
 const read = (file) => fs.readFileSync(path.join(root, file), 'utf8');
+
+test('external Agent Academy workshops remain listed and searchable', () => {
+  for (const level of ['recruit', 'operative', 'commander']) {
+    const { data } = matter(read(`_workshops/agent-academy-${level}.md`));
+    assert.equal(data.external, true);
+    assert.notEqual(data.unlisted, true);
+    assert.notEqual(data.search, false);
+    assert.notEqual(data.sitemap, false);
+  }
+});
 
 test('workshop listings filter unlisted entries before counting or splitting them', () => {
   const homepage = read('index.md');
