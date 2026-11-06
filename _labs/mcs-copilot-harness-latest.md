@@ -8,7 +8,7 @@ difficulty: 200
 lab_type: local
 section: intermediate_labs
 journeys: ["developer"]
-description: "Draft: reuse a hotel-briefing skill in a shared Copilot agent, with a starter package and an optional code-based exercise."
+description: "Reuse a hotel-briefing skill in a shared Copilot agent, with a starter package and an optional code-based exercise."
 ---
 
 # Reuse a Cowork skill in a declarative agent
@@ -173,7 +173,7 @@ Configure the report once as agent knowledge so teammates can request briefings 
 
 ### Step 5: Run the briefing
 
-In **Preview**, enter:
+Select **Create** in the top right. Once the agent is ready and you have access to the chat, send the following prompt:
 
 ```text
 Prepare the hotel operations briefing using the annual report.
@@ -201,12 +201,11 @@ Run each check above and compare the agent's response with the expected behavior
 
 ### Step 7: Complete the team handoff
 
-1. Create the agent.
-2. Use the agent's sharing control to share with one instructor-approved teammate.
-3. Have that teammate open the agent in a fresh conversation and run **Prepare the hotel operations briefing using the annual report.** They should not need your Cowork conversation, a copied long prompt, or your personal task history.
-4. Ask the teammate to check one issue against the PDF. Confirm that they understand they must review and send the email themselves. Also confirm they can open the report: sharing an agent does not necessarily give access to its sources.
-5. Keep the agent name/link and review-ready result.
-6. Explain the difference from Lab 2: teammates can now open a shared agent and request the briefing using the skill in the agent and the report already added as knowledge.
+1. Use the agent's sharing control to share with one instructor-approved teammate.
+2. Have that teammate open the agent in a fresh conversation and run **Prepare the hotel operations briefing using the annual report.** They should not need your Cowork conversation, a copied long prompt, or your personal task history.
+3. Ask the teammate to check one issue against the PDF. Confirm that they understand they must review and send the email themselves. Also confirm they can open the report: sharing an agent does not necessarily give access to its sources.
+4. Keep the agent name/link and review-ready result.
+5. Explain the difference from Lab 2: teammates can now open a shared agent and request the briefing using the skill in the agent and the report already added as knowledge.
 
 ## Use Case 2: Optional Pro-Code Agent
 
