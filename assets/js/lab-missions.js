@@ -13,6 +13,7 @@
   const toast = root.querySelector('.toast');
   let toastTimer;
   let persistenceAvailable = true;
+  let pdfLibraryPromise;
 
   function announce(message) {
     clearTimeout(toastTimer);
@@ -90,7 +91,7 @@
     updatePrintStamp(coreDone);
   }
 
-  // The PDF copy is the only way to keep notes off this device, so it states when and how far.
+  // The PDF records when it was made and how much of the core the learner completed.
   function updatePrintStamp(coreDone = coreMissions.filter(mission => state.done.includes(mission.dataset.mission)).length) {
     const stamp = root.querySelector('[data-print-stamp]');
     if (!stamp) return;
@@ -108,7 +109,6 @@
   window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
 
   root.querySelectorAll('button[hidden], [data-requires-script]').forEach(element => { element.hidden = false; });
-  if (typeof window.print !== 'function') root.querySelectorAll('[data-action="print"]').forEach(button => { button.closest('.keep-copy').hidden = true; });
   root.querySelectorAll('[data-quiz]').forEach(quiz => showQuizAnswer(quiz, state.answers[quiz.dataset.quiz]));
   const reflection = root.querySelector('#lab-reflection');
   const reflectionPrint = root.querySelector('[data-reflection-print]');
@@ -159,6 +159,84 @@
     }
   }
 
+  function loadPdfLibrary(button) {
+    if (typeof window.html2pdf === 'function') return Promise.resolve();
+    if (pdfLibraryPromise) return pdfLibraryPromise;
+    if (!button.dataset.pdfLibrary) return Promise.reject(new Error('The PDF library URL is missing.'));
+
+    pdfLibraryPromise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = button.dataset.pdfLibrary;
+      script.onload = () => {
+        if (typeof window.html2pdf === 'function') resolve();
+        else reject(new Error('The PDF library loaded without exposing its API.'));
+      };
+      script.onerror = () => reject(new Error('The self-hosted PDF library could not be loaded.'));
+      document.head.append(script);
+    }).catch(error => {
+      pdfLibraryPromise = null;
+      throw error;
+    });
+    return pdfLibraryPromise;
+  }
+
+  async function downloadPdf(button) {
+    button.disabled = true;
+    button.setAttribute('aria-busy', 'true');
+    announce('Preparing your PDF download…');
+    let clone;
+    try {
+      await loadPdfLibrary(button);
+      updatePrintStamp();
+
+      clone = root.cloneNode(true);
+      clone.classList.add('pdf-export');
+      clone.dataset.theme = 'light';
+      clone.setAttribute('aria-hidden', 'true');
+      clone.inert = true;
+
+      const checkedInputs = [...root.querySelectorAll('input')].map(input => input.checked);
+      [...clone.querySelectorAll('input')].forEach((input, index) => {
+        input.checked = checkedInputs[index];
+        input.disabled = true;
+      });
+
+      clone.querySelectorAll('details').forEach(details => { details.open = true; });
+      clone.querySelectorAll('.lab-header, .route, .lab-rail, .hero-proof, .hero-actions, .mission-actions, .keep-copy, .saving-note, .local-only, .skip-link, .toast, .visual, .stuck, .chip-btn')
+        .forEach(element => element.remove());
+
+      const textarea = clone.querySelector('#lab-reflection');
+      const reflectionText = clone.querySelector('[data-reflection-print]');
+      if (textarea && reflectionText) {
+        reflectionText.textContent = reflection.value;
+        reflectionText.classList.remove('print-only');
+        textarea.remove();
+      }
+
+      const filename = `${(root.dataset.labId || 'lab').replace(/[^a-z0-9-]/gi, '-')}-lab-${new Date().toISOString().slice(0, 10)}.pdf`;
+      await document.fonts.ready;
+      await window.html2pdf().set({
+        margin: [12, 12, 16, 12],
+        filename,
+        image: { type: 'jpeg', quality: 0.9 },
+        html2canvas: { scale: 1.5, backgroundColor: '#ffffff', logging: false, windowWidth: 760, windowHeight: clone.scrollHeight },
+        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait', compress: true },
+        pagebreak: {
+          mode: ['css', 'legacy'],
+          avoid: ['.mission-heading', '.prompt', '.notice', '.aha', '.knowledge-check', '.quiz-option', '.reflection-print', '.sources li'],
+        },
+      }).from(clone).save();
+      announce('Your PDF has been downloaded. Your note remains only in this browser.');
+    } catch (error) {
+      console.error('Mission lab PDF could not be generated.', error);
+      announce('The PDF could not be downloaded. Try again or use your browser’s print menu.');
+    } finally {
+      clone?.remove();
+      button.disabled = false;
+      button.removeAttribute('aria-busy');
+    }
+  }
+
   root.addEventListener('click', event => {
     if (!(event.target instanceof Element)) return;
     const button = event.target.closest('button');
@@ -171,10 +249,10 @@
       save();
       renderProgress();
       announce(root.querySelector('[data-progress]').getAttribute('aria-label') + '.');
-    } else if (button.dataset.action === 'print') {
-      window.print();
+    } else if (button.dataset.action === 'download-pdf') {
+      void downloadPdf(button);
     } else if (button.dataset.action === 'reset') {
-      if (!window.confirm('Reset this lab’s checkmarks, quiz answers and note on this browser? They are stored only here, so save a PDF copy first if you want to keep them. Your Copilot work is not affected.')) return;
+      if (!window.confirm('Reset this lab’s checkmarks, quiz answers and note on this browser? They are stored only here, so download a PDF first if you want to keep them. Your Copilot work is not affected.')) return;
       state.done = [];
       state.steps = [];
       state.answers = {};

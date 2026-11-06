@@ -68,7 +68,7 @@
           <div class="lead">{{ lab.scenario | markdownify }}</div>
           <ul class="ready-list">{% for item in lab.prerequisites %}<li><label class="step-check"><input type="checkbox" data-progress-id="ready-{{ forloop.index }}"><span>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</span></label></li>{% endfor %}</ul>
           <p class="pacing">{{ lab.pacing | escape }}</p>
-          <p class="saving-note" data-saving-note="This browser can't store your progress, so checkmarks, quiz answers and notes last for this visit only. Use Save a PDF copy at the end to keep them.">Checkmarks, quiz answers and your notes are saved only in this browser's local storage. Nothing is sent to the lab site. To keep them, use <strong>Save a PDF copy</strong> at the end.</p>
+          <p class="saving-note" data-saving-note="This browser can't store your progress, so checkmarks, quiz answers and notes last for this visit only. Download a PDF at the end to keep them.">Checkmarks, quiz answers and your notes are saved only in this browser's local storage. Nothing is sent to the lab site. To keep them, <strong>download a PDF</strong> at the end.</p>
         </section>
 
         {% for mission in lab.missions %}
@@ -141,12 +141,12 @@
           <div class="reflection">
             <label for="lab-reflection">{{ lab.finish.reflection | escape }}</label>
             {%- comment -%} Notes never leave the device; say so where people type, not only at the top. {%- endcomment %}
-            <p class="local-only" id="lab-reflection-storage"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 8.5h18M8 21h8M12 18v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-saving-note="Not saved. This browser can't store your note, so it disappears when you leave the page. Save a PDF copy to keep it."><strong>Saved only in this browser.</strong> Your note stays in this browser's local storage on this device. It is not sent to the lab site or your Microsoft account, does not follow you to another browser or device, and is erased if you clear browsing data or reset progress. Save a PDF copy to keep it.</span></p>
+            <p class="local-only" id="lab-reflection-storage"><svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><rect x="3" y="4" width="18" height="14" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M3 8.5h18M8 21h8M12 18v3" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg><span data-saving-note="Not saved. This browser can't store your note, so it disappears when you leave the page. Download a PDF to keep it."><strong>Saved only in this browser.</strong> Your note stays in this browser's local storage on this device. It is not sent to the lab site or your Microsoft account, does not follow you to another browser or device, and is erased if you clear browsing data or reset progress. Download a PDF to keep it.</span></p>
             <textarea id="lab-reflection" rows="3" placeholder="I could delegate..." aria-describedby="lab-reflection-storage"></textarea>
             <div class="print-only reflection-print" data-reflection-print></div>
             <div class="keep-copy" data-requires-script hidden>
-              <button class="btn btn-ghost" type="button" data-action="print" aria-describedby="lab-keep-copy-hint"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 3h8l4 4v14H6z M14 3v4h4 M9 13l3 3 3-3 M12 9v7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Save a PDF copy</button>
-              <p id="lab-keep-copy-hint">Opens your browser's print dialog. Choose <strong>Save as PDF</strong> to keep your note, checked steps and quiz answers.</p>
+              <button class="btn btn-ghost" type="button" data-action="download-pdf" data-pdf-library="{{ '/assets/js/vendor/html2pdf.bundle.min.js' | relative_url }}" aria-describedby="lab-pdf-hint"><svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" focusable="false"><path d="M6 3h8l4 4v14H6z M14 3v4h4 M9 13l3 3 3-3 M12 9v7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>Download my lab PDF</button>
+              <p id="lab-pdf-hint">Downloads a copy of your prompts, progress and note to this device. Your note is not sent anywhere.</p>
             </div>
           </div>
           {%- comment -%} The Demo Hub call to action belongs to the Cowork scenario; other missions labs end without it. {%- endcomment %}

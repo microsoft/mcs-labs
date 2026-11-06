@@ -149,11 +149,21 @@ test('paired screenshots follow the island theme and the hero stays a single pri
     'The single eager hero is document content, not dark application chrome');
 });
 
-test('prompts are copied in place rather than downloaded', () => {
+test('prompts stay copyable in place while PDF export downloads locally', () => {
   const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
   const script = fs.readFileSync(path.join(root, 'assets', 'js', 'lab-missions.js'), 'utf8');
-  assert.doesNotMatch(template, /download|Take my prompts/i);
-  assert.doesNotMatch(script, /downloadPrompts|createObjectURL|\.download\s*=/);
+  assert.doesNotMatch(template, /Take my prompts/i);
+  assert.doesNotMatch(script, /downloadPrompts/);
+  assert.match(template, /data-action="download-pdf"[^>]*>[\s\S]*?Download my lab PDF<\/button>/);
+  assert.match(template, /data-pdf-library="\{\{ '[^']*html2pdf\.bundle\.min\.js' \| relative_url \}\}"/,
+    'Load the self-hosted PDF generator only when a learner requests an export');
+  assert.match(script, /dataset\.action === 'download-pdf'[\s\S]*?downloadPdf\(button\)/);
+  assert.match(script, /function loadPdfLibrary\(button\)/);
+  assert.match(script, /window\.html2pdf\(\)\.set\([\s\S]*?\.from\(clone\)\.save\(\)/);
+  assert.match(script, /reflectionText\.textContent = reflection\.value/);
+  assert.doesNotMatch(script, /window\.print\(\)/);
+  assert.ok(fs.statSync(path.join(root, 'assets', 'js', 'vendor', 'html2pdf.bundle.min.js')).size > 100_000);
+  assert.ok(fs.statSync(path.join(root, 'assets', 'js', 'vendor', 'html2pdf.bundle.min.js.LICENSE.txt')).isFile());
 });
 
 test('click-by-click help starts open because these labs depend on exact clicks and prompts', () => {
@@ -162,20 +172,21 @@ test('click-by-click help starts open because these labs depend on exact clicks 
   assert.ok(lab.missions.some(mission => mission.steps.some(step => step.help)), 'The lab uses step help');
 });
 
-test('notes say they stay in this browser and can be kept as a PDF copy', () => {
+test('notes say they stay in this browser and can be downloaded as a PDF', () => {
   const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
   const script = fs.readFileSync(path.join(root, 'assets', 'js', 'lab-missions.js'), 'utf8');
   const css = fs.readFileSync(path.join(root, 'assets', 'css', 'lab-missions.css'), 'utf8');
   assert.match(template, /class="saving-note"[^>]*>[^<]*local storage/);
   assert.match(template, /<p class="local-only" id="lab-reflection-storage">/);
   assert.match(template, /<textarea id="lab-reflection"[^>]*aria-describedby="lab-reflection-storage"/);
-  assert.match(template, /data-action="print"[^>]*>[\s\S]*?Save a PDF copy<\/button>/);
+  assert.match(template, /data-action="download-pdf"[^>]*>[\s\S]*?Download my lab PDF<\/button>/);
   assert.match(template, /data-reflection-print/);
   assert.match(template, /data-print-stamp/);
   // The PDF button needs script; without it the server-rendered page never shows a dead control.
   assert.match(template, /<div class="keep-copy" data-requires-script hidden>/);
   assert.equal([...template.matchAll(/data-saving-note="[^"]+"/g)].length, 2, 'Both storage notices have a fallback');
-  assert.match(script, /dataset\.action === 'print'[\s\S]*?window\.print\(\)/);
+  assert.match(script, /dataset\.action === 'download-pdf'[\s\S]*?downloadPdf\(button\)/);
+  assert.match(script, /window\.html2pdf\(\)\.set\([\s\S]*?\.from\(clone\)\.save\(\)/);
   assert.match(script, /'beforeprint'/);
   assert.match(script, /'afterprint'/);
   assert.match(css, /@media print \{/);

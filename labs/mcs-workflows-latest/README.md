@@ -458,7 +458,9 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
    > [!NOTE]
    > **A holding reply can be the correct result.** A training mailbox may have little relevant history. If the node cannot find evidence about warranty or MDM, it should acknowledge the question without inventing product details. Wording and generation time vary; assess grounding and accuracy, not an exact response.
 
-   ![The Copilot node showing the Customer question input from the email body](../mcs-workflows/images/customer-inquiry-m365-copilot-node.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/customer-inquiry-m365-copilot-node.png"><img src="../mcs-workflows/images/customer-inquiry-m365-copilot-node.png" alt="The Copilot node showing the Customer question input from the email body" width="313" class="align-center"></a>
+   </p>
 
 3. Select the **Human review** node and inspect its configuration carefully:
 
@@ -466,11 +468,15 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
    - Confirm delivery is **Outlook** and the reviewer is assigned to the incoming **From** value. With the trigger's sender restriction, this must resolve to your own lab account for this test.
    - Confirm the single **Yes/No** input is named **Approve**, with the question **Send proposed reply?**. The approver must see the proposed reply before choosing a response.
 
-   ![The Human review node showing the proposed M365 reply and approval options](../mcs-workflows/images/customer-inquiry-human-review-node.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/customer-inquiry-human-review-node.png"><img src="../mcs-workflows/images/customer-inquiry-human-review-node.png" alt="The Human review node showing the proposed M365 reply and approval options" width="313" class="align-center"></a>
+   </p>
 
 4. Select **If/Else** after **Human review** and confirm **Approve Equals Yes**. Inspect **Reply to email**: **Message Id** comes from the trigger, **To** is the incoming **From**, and **CC** and **BCC** are empty. The **If** branch replies; **Else** routes to **Flag email**. This exercise tests **Yes**, not the rejection path.
 
-   ![The If Else node routing Yes to reply and No to inbox flagging](../mcs-workflows/images/customer-inquiry-if-else-node.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/customer-inquiry-if-else-node.png"><img src="../mcs-workflows/images/customer-inquiry-if-else-node.png" alt="The If Else node routing Yes to reply and No to inbox flagging" width="517" class="align-center"></a>
+   </p>
 
 #### Run an end-to-end Customer Inquiry test
 
@@ -508,7 +514,9 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
 7. Wait until the run reaches the **Human review** node. The preceding **Copilot** node completes after drafting the response; **Human review** remains waiting until you submit a decision. Trigger pickup, drafting, and approval-email delivery are separate steps and may take several minutes. Refresh the run and your inbox rather than assuming that a pause is a failure.
 
-   ![The Human review node configuration for the approval request](../mcs-workflows/images/customer-inquiry-human-request-waiting.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/customer-inquiry-human-request-waiting.png"><img src="../mcs-workflows/images/customer-inquiry-human-request-waiting.png" alt="The Human review node configuration for the approval request" width="313" class="align-center"></a>
+   </p>
 
 8. Go to **Outlook** and open **Action Needed: Review Customer Enquiry Reply**. Read the proposed reply and check that it does not invent unsupported product details. Choose **Yes** under **Send proposed reply?**, then select **Submit**. Confirm **Your response has been successfully submitted**.
 
@@ -656,14 +664,18 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
    - `stock` (**Number**, JSON `number`) — *Current stock quantity from the warehouse for the SKU named*
    - `risk` (**Yes/No**, JSON `boolean`) — *True if current stock is zero*
 
-   ![The structured output configuration with sku stock and risk properties](../mcs-workflows/images/supplier-delay-structured-output.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/supplier-delay-structured-output.png"><img src="../mcs-workflows/images/supplier-delay-structured-output.png" alt="The structured output configuration with sku stock and risk properties" width="309" class="align-center"></a>
+   </p>
 
    > [!TIP]
    > **"Request human assistance when unsure":** Notice the button in the agent configuration panel. This feature sends a structured message to the connection owner when the agent encounters ambiguity or conflicting information — it dynamically generates questions based on the problem at hand, allowing human judgment for edge cases while keeping the automation running.
 
 8. Minimize the view, select **Save** and **Publish**, then enable your workflow for the Supplier Delay test.
 
-   ![The Order Management Workflow published with the Inventory Task Agent added](../mcs-workflows/images/supplier-delay-workflow-published.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/supplier-delay-workflow-published.png"><img src="../mcs-workflows/images/supplier-delay-workflow-published.png" alt="The Order Management Workflow published with the Inventory Task Agent added" width="519" class="align-center"></a>
+   </p>
 
 #### Test the Supplier Delay path
 
