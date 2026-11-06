@@ -96,13 +96,13 @@ mission_lab:
             4. Enter `https://zavasalesdemo.crm.dynamics.com/` and select **Connect**.
             5. Confirm the connection shows **Connected**. If it already does, do not reconnect.
           screenshot:
-            title: the connected Dataverse plugin
+            title: the Dataverse connection URL
             src: /labs/cowork-zava-sales/images/dataverse-connection.webp
             src_dark: /labs/cowork-zava-sales/images/dataverse-connection-dark.webp
-            alt: "Microsoft Dataverse plugin enabled, with its connection showing Connected."
-            width: 800
-            height: 435
-            caption: "Confirm Connected after using the supplied training environment, not a production CRM. Leave an existing connection in place."
+            alt: "Connect Microsoft Dataverse dialog with https://zavasalesdemo.crm.dynamics.com/ entered in the Dataverse environment URL field."
+            width: 480
+            height: 226
+            caption: "Enter https://zavasalesdemo.crm.dynamics.com/, select Connect, then confirm Connected. Use the supplied training environment, not a production CRM."
         - title: "Switch to Cowork and delegate"
           instruction: "Select **New**, then **Cowork** in the Home composer. Leave the model on **Auto** and effort on **Medium**. Keep this task for the remaining core missions; the optional Improve mission starts here before its separate Friday task."
           prompt_label: New Cowork task
@@ -468,7 +468,7 @@ Watch the visible search/tool activity. Look for Zava Sales business-data result
 2. Turn **Enable Microsoft Dataverse** on, then **Connect Microsoft Dataverse**.
 3. Enter `https://zavasalesdemo.crm.dynamics.com/`, select **Connect**, and confirm **Connected**. If already connected, leave it alone.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/dataverse-connection-dark.webp"><img src="images/dataverse-connection.webp" alt="Microsoft Dataverse enabled and Connected"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/dataverse-connection-dark.webp"><img src="images/dataverse-connection.webp" alt="Connect Microsoft Dataverse dialog with https://zavasalesdemo.crm.dynamics.com/ in the environment URL field"></picture>
 
 4. Select **New → Cowork**. Leave **Auto / Medium** selected. Higher effort spends more time and credits. Standard Copilot Chat use is included with the Microsoft 365 Copilot license; Cowork uses metered Copilot Credits. Available models and tools depend on the tenant.
 
