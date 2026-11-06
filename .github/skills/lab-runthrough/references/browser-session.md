@@ -174,8 +174,23 @@ Seen on a managed Windows device in November 2026.
   account** can still list the host user's accounts: `login` only picks the training
   account or **Use another account**, and `--forbid` is the backstop.
 - Headless pages need an explicit viewport; `launch`, `connect` and `newtab` set it from
-  `--window-size`.
+  `--window-size`. Every command reapplies it, so a narrow-screen check needs its own
+  `launch --window-size`, on another port.
 - Off-the-record contexts survive disconnects, but not `close`.
+- Apps that open on a landing page (Microsoft 365 Copilot, some Power Platform sites)
+  only redirect to sign-in after you choose **Sign in**. Click it, then run `login`.
+- `pair` can capture a frame before the theme repaints. Scroll or move the pointer first,
+  and open both images before cropping.
+- `controls` and `text` see only the top document: cross-origin iframes (embedded
+  designers, Pages, Word) and closed shadow roots are invisible. Take a `shot`, then use
+  `clickat` or `typeat` with coordinates read from it.
+- `prompt` refuses when the page has two editors (for example a chat next to a side
+  panel). Click the right one and use `typeat`, which types literal text only.
+- A finished reply shows **Copy** or **Copy Response**, and **Stop** disappears.
+  `controls "Copy Response|Stop"` tells you which state you are in.
+- File pickers: open the **+** or attach menu first, then `upload --click "<item>"`.
+- `pages` lists full URLs, which can carry the tenant id (sometimes base64-encoded).
+  Keep them out of run logs and PRs.
 
 ## Product quirks
 

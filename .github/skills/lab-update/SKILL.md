@@ -52,6 +52,8 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
   link text. Remove steps for UI that no longer exists (retired toggles, "new experience"
   switches) and add any new mandatory screen. When something cannot be reached live,
   check its current name on Microsoft Learn and say "unverified live" in the PR.
+- **Lists.** Indent a code block, image or note inside a numbered step by three spaces.
+  Kramdown otherwise ends the list and the site restarts numbering at 1.
 - **Prerequisites.** Event attendees must never start on tenant setup. Open the section
   with the `> [!IMPORTANT]` "Skip this section" callout from the `lab-create` classic
   templates, linking to the first use case in that copy, then list self-hosting
