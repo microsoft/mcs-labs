@@ -1,6 +1,6 @@
 # Hooks and knowledge: the right travel policy
 
-Know the traveler. Find the right policy. Leave with a **saved draft Travel Policy Agent**, a published session-start workflow and evidence that SharePoint retrieval selects the applicable policy. Redaction and a blocked booking-guard experiment follow as optional extensions.
+Know the traveler. Find the right policy. Leave with a **saved draft Travel Policy Agent**, a published session-start workflow and evidence that SharePoint retrieval selects the applicable policy. Redaction and a booking guard follow as optional extensions.
 
 > **Proctor-led event with a pre-provisioned user account? Skip tenant, licence and environment setup.** Use the provided account and environment and go straight to [Mission 1](#-mission-1-load-the-travelers-location). Ask your proctor if a connection or the **Travel Policies** folder is missing.
 
@@ -14,7 +14,7 @@ Know the traveler. Find the right policy. Leave with a **saved draft Travel Poli
 | --- | --- | --- | --- |
 | 200 | Maker | 30 minutes | Use a session-start hook for traveler context and verify Location-filtered SharePoint policy answers. |
 
-**Core:** Mission 1 (15 minutes) + Mission 2 (15 minutes) = **30 minutes**. Allow for response waits. Mission 3 (20 minutes) is optional. Mission 4 (15+ minutes) is an optional build-and-inspect extension with blocked live deny/allow verification, not part of core completion.
+**Core:** Mission 1 (15 minutes) + Mission 2 (15 minutes) = **30 minutes**. Allow for response waits. Mission 3 (20 minutes) is optional. Mission 4 (15 minutes) is an optional booking guard, not part of core completion.
 
 ## 📚 Table of Contents
 
@@ -22,7 +22,7 @@ Know the traveler. Find the right policy. Leave with a **saved draft Travel Poli
 - [Mission 1: Load the traveler's location](#-mission-1-load-the-travelers-location)
 - [Mission 2: Prove which policy supplied the answer](#-mission-2-prove-which-policy-supplied-the-answer)
 - [Mission 3: Redact personal data — optional](#-mission-3-redact-personal-data--optional)
-- [Mission 4: Explore a booking guard — optional and verification-blocked](#-mission-4-explore-a-booking-guard--optional-and-verification-blocked)
+- [Mission 4: Guard the booking tool — optional](#-mission-4-guard-the-booking-tool--optional)
 - [Finish and cleanup](#-finish-and-cleanup)
 - [Sources](#-sources)
 
@@ -32,7 +32,7 @@ Know the traveler. Find the right policy. Leave with a **saved draft Travel Poli
 
 **Self-paced, in your own tenant:** first arrange Copilot Studio access, permission to create agents and workflows, an Office 365 Users connection for your account, and a readable **Travel Policies** SharePoint folder with populated **Location** metadata (`France`, `Europe`, `USA`, `Global`). Follow the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-hooks/#prerequisites) separately from the event path.
 
-**Current-UI caveat:** the **Microsoft Copilot harness** was formerly the **GitHub Copilot harness**; documentation and rollout screens may retain the earlier name. **Standard harness** is distinct and has no hooks. Hooks are preview; labels and availability can change. Screenshots ending in **HK** show lab-owned assets, not a suffix you must copy.
+**Current-UI caveat:** the **Microsoft Copilot harness** was formerly the **GitHub Copilot harness**; documentation and rollout screens may retain the earlier name. **Standard harness** is distinct and has no hooks. Hooks are preview; labels and availability can change.
 
 **Save is not publish:** Preview tests the saved draft; the agent need not be published. Every hook workflow must be published again after changes. Creating a workflow may prompt **Save draft**. Editing through **Go to workflow** opens a new tab.
 
@@ -344,13 +344,11 @@ In `modifiedPrompt`, check `[PASSPORT NUMBER REDACTED]`, `[CARD NUMBER REDACTED]
 
 **Stuck?** For **The hook flow returned an error**, open **… → Hooks → … → Edit → Go to workflow** (new tab), then **Activity** and the run. Check Skipped response nodes, remove the generic edge, verify every category connection and `modifiedPrompt`, then **Publish** and retest. Do not infer success or failure from `isContinue` alone.
 
-## 🔬 Mission 4: Explore a booking guard — optional and verification-blocked
+## 🔬 Mission 4: Guard the booking tool — optional
 
-**15+ minutes · Pre tool use · simulated workflow tool**
+**15 minutes · Pre tool use · simulated workflow tool**
 
-Build and inspect a guard, but do not claim a denied or allowed booking until both tests really pass. **Outcome:** an understood Pre tool use contract and either recorded test evidence or a safely removed blocked hook.
-
-> **Verification boundary:** the latest run built, published and attached the hook, but **New chat** failed with **BotDefinitionOverride has unresolved references: 1 missing flow(s), 0 missing connection reference(s). Error code: InvalidContent.** Removing that hook cleared the error. Deny/allow tests below were **NOT run successfully** in that version. This is optional build-and-inspect material, not live-verified enforcement.
+Block bookings on unapproved airlines before the tool runs, then prove both paths in Preview. **Outcome:** a Pre tool use hook that denies Tailspin Airlines with alternatives and lets Contoso Air through, proven in the trace.
 
 ### Create the simulated booking tool
 
@@ -393,9 +391,9 @@ Keep all starter inputs and outputs. The event receives `toolName` and `paramete
 @{contains(createArray('contoso air','fabrikam airways','northwind airlines','woodgrove air'), toLower(trim(string(triggerBody()?['parameters']?['text']))))}
 ```
 
-`text` is the internal key of the first Text input, not its display name `airline`; subsequent inputs use `text_1`, `text_2` and so on. When the blocker is resolved, verify the actual proposed `parameters` in the trace. Trimming and lower-casing permit case/space variants, not different airline names.
+`text` is the internal key of the first Text input, not its display name `airline`; subsequent inputs use `text_1`, `text_2` and so on. Check the actual proposed `parameters` in the trace when you test. Trimming and lower-casing permit case/space variants, not different airline names.
 
-5. Rename the starter response **Allow tool call** and leave all outputs empty. Verify the connection starts at **Approved airline**. If it is a carried-over generic edge, delete it and reconnect from that branch. **This If/Else precaution was not verified live**; it is not the proven Classify fix.
+5. Rename the starter response **Allow tool call** and leave all outputs empty. Verify the connection starts at **Approved airline**. If it is a carried-over generic edge, delete it and reconnect from that branch.
 
 Right-click **Allow tool call → Copy**, then empty canvas → **Paste**; rename the copy **Deny tool call** and connect **Else** to it. Do not use **Duplicate**. Set these fields on Deny:
 
@@ -409,29 +407,33 @@ Leave `modifiedParameters` and `suppressOutput` empty. **Publish**, return to th
 
 ![Published Check approved airline canvas with If/Else branches to Allow tool call and Deny tool call](images/extra-pretool-workflow.webp)
 
-*Build-only evidence from the reviewed light capture. Preview subsequently failed; deny/allow execution is not proven by this canvas.*
+*The Approved airline branch allows the call; Else denies it with a reason and alternatives.*
 
-### Conditional tests — not currently verified
+### Test the guard
 
-6. Select **New chat**. If the missing-flow **InvalidContent** error appears, **STOP**: remove only **Check approved airline** from your own draft's **Hooks** list, **Save** and tell the proctor. Do not delete shared workflows or connections. If Preview opens, send:
+6. Select **New chat**. If Preview shows **BotDefinitionOverride has unresolved references: 1 missing flow(s), 0 missing connection reference(s). Error code: InvalidContent.**, the agent hasn't picked up the hook workflow yet: open **Check approved airline**, select **Publish**, return to the agent, **Save** it again, then select **New chat**. Send:
 
 ```text
 Book me a flight from Paris to New York on 12 May with Tailspin Airlines.
 ```
 
-Inspect **Executed hook: PreTool (Bookflight)**: require `permissionDecision: deny`, a reason and alternatives, with **no Book flight execution**. These are expected results, not current verified coverage.
+Expand **Executed hook: PreTool (Bookflight)**: expect `permissionDecision: deny`, the reason and the approved alternatives, with **no Book flight execution**.
 
-7. Continue only if the previous test actually denied the tool call:
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/extra-pretool-deny-dark.webp"><img src="images/extra-pretool-deny.webp" alt="Executed hook: PreTool (Bookflight) with permissionDecision deny, and the agent offering the four approved airlines instead of Tailspin Airlines."></picture>
+
+7. In the same conversation, send:
 
 ```text
 Use Contoso Air instead.
 ```
 
-Require a subsequent **Used tool: Book flight** and the simulated confirmation, never a real-reservation claim. Record what you observe; the latest live run could not reach this test. Do not use `isContinue` as a universal success indicator.
+Expect **Used tool: Book flight** after the hook and the simulated confirmation, never a real-reservation claim. Don't rely on `isContinue` alone; look for the tool call itself.
 
-[Microsoft Learn](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/hooks-overview) documents that hooks fail open on errors, timeouts or unreadable results. This failure behavior was not exercised here. Enforce business-critical rules in the booking backend too; this simulation is not a production security boundary.
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/extra-pretool-allow-dark.webp"><img src="images/extra-pretool-allow.webp" alt="Executed hook: PreTool (Bookflight) with isContinue true, followed by Used tool: Book flight and the simulated Contoso Air booking."></picture>
 
-**Reveal — what would prove that the guard worked?** An attached hook is build evidence; a blocked tool call needs execution evidence. Pre tool use can deny a proposed call with permissionDecision and provide a reason plus alternatives. The run only established creation and publishing before Preview failed. Keep that distinction, and do not infer enforcement from the workflow canvas.
+[Microsoft Learn](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/hooks-overview) documents that hooks fail open on errors, timeouts or unreadable results. This lab doesn't exercise that failure path. Enforce business-critical rules in the booking backend too; this simulation is not a production security boundary.
+
+**Reveal — what would prove that the guard worked?** An attached hook is build evidence; a blocked tool call needs execution evidence. Pre tool use can deny a proposed call with permissionDecision and provide a reason plus alternatives. The trace is the proof: the denied turn has no Book flight call and the allowed turn does. Never infer enforcement from the workflow canvas alone.
 
 **Flow:** Proposed tool parameters → Pre tool use decision → Verify deny without tool execution → Verify allow with simulated tool execution.
 
@@ -442,7 +444,7 @@ Require a subsequent **Used tool: Book flight** and the simulated confirmation, 
 
 ## 🏁 Finish and cleanup
 
-**A policy answer you can trace.** Core completion means a saved draft agent, a published Start workflow, and checked policy answers. Optional redaction has live success evidence after the wiring fix; optional booking enforcement remains blocked until both tests pass.
+**A policy answer you can trace.** Core completion means a saved draft agent, a published Start workflow, and checked policy answers. The optional missions add trace evidence that redaction and the booking guard really ran.
 
 - **Events versus choices:** hooks run when events occur; tools are chosen by the agent. Preserve the starter workflow contract.
 - **Evidence before confidence:** check Location filters, scoped URLs and citations. Instructions alone do not prove grounding.
@@ -453,7 +455,7 @@ Require a subsequent **Used tool: Book flight** and the simulated confirmation, 
 
 Keep your agent as an **unpublished draft** if you want to resume. These workflows use the on-demand **When an agent calls the flow** trigger, not unattended schedules. Leaving your own published workflows does not mean they are disabled; later agent calls can still invoke attached ones.
 
-The observed training state was **Travel Policy Agent HK**, saved draft with **Load traveler profile HK** and **Redact personal data HK** hooks. Four workflows remained **Published/Enabled**: those two, **Book flight HK**, and **Check approved airline HK** (unattached after removing the blocked hook). No unattended schedules were created and the test browser was closed.
+Your lab workflows (**Load traveler profile**, **Redact personal data**, **Book flight** and **Check approved airline**) stay **Published/Enabled** until you turn them off. They run only when your agent calls them; none runs on a schedule.
 
 If you do not need your work, optionally remove only your own hook attachments and lab-created agent/workflows after checking dependencies. Never delete shared assets, the Travel Policies folder, or another participant's connections. Do not claim all artifacts were disabled.
 

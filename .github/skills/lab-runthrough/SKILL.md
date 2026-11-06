@@ -77,7 +77,10 @@ far.
 To run a curriculum, give each lab its own `--port`, `--out` folder and log, and launch
 three or four at a time: each `launch` gets its own profile, so the sessions are
 independent. They can share one training account, but avoid running labs that change the
-same agent, record or setting together. If you hand labs to sub-agents, give each one its
+same agent, record or setting together. Create every asset with the exact name the lab
+gives: never add a test suffix or tag, because screenshots must match the instructions
+word for word. If two labs would create assets with the same name, run them one after the
+other instead. If you hand labs to sub-agents, give each one its
 port, its output folder, the credentials file path (not its contents), the `--forbid`
 text and these safety rules, and keep shared files (tests, agendas, issue templates) for
 yourself to edit afterwards.

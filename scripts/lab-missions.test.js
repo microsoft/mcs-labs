@@ -322,7 +322,7 @@ for (const [classic, modern, order] of bootcampLabs) {
 }
 
 test('the unlisted missions event changes only lab references in the original bootcamp schedule', () => {
-  const eventId = 'bootcamp-latest-missions';
+  const eventId = 'architecture-bootcamp';
   const classic = yaml.load(fs.readFileSync(path.join(root, '_data', 'agendas', 'bootcamp-latest.yml'), 'utf8'));
   const modern = yaml.load(fs.readFileSync(path.join(root, '_data', 'agendas', `${eventId}.yml`), 'utf8'));
   const replacements = new Map(bootcampLabs.map(([oldSlug, newSlug]) => [oldSlug, newSlug]));

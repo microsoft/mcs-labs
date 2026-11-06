@@ -227,7 +227,7 @@ schedule:
   - type: lab
     slug: mcs-managed-apps
     label: "Lab 9"
-    title: "Managed Apps"
+    title: "Apps on Microsoft Copilot Managed Runtime"
     time: "16:00"
     duration: 30
 

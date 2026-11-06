@@ -14,13 +14,13 @@ description: "Use Copilot Chat in the Microsoft Copilot app with Work IQ, respon
 
 # M365 Copilot Chat and Work IQ
 
-Use Microsoft 365 Copilot and its built-in Researcher and Analyst agents to turn information into decision-ready work. Start with the capabilities already available, and build only when the scenario requires something more.
+Use Microsoft Copilot and its built-in Researcher and Analyst agents to turn information into decision-ready work. Start with the capabilities already available, and build only when the scenario requires something more.
 
 ## Lab Details
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 100 | Business User | 15 minutes | After completing this lab, participants will be able to use Microsoft 365 Copilot with deliberate grounding, response-mode, and model choices, and ground answers in organizational content with Work IQ. As extra credit, they can use the built-in Researcher and Analyst agents for deeper synthesis and financial modelling. |
+| 100 | Business User | 15 minutes | After completing this lab, participants will be able to use Microsoft Copilot with deliberate grounding, response-mode, and model choices, and ground answers in organizational content with Work IQ. As extra credit, they can use the built-in Researcher and Analyst agents for deeper synthesis and financial modelling. |
 
 > **Bootcamp Latest pacing:** The scheduled slot is 15 minutes. The core use cases take about 20 minutes, so in the slot treat [1.3 Ask for deeper reasoning](#13-ask-for-deeper-reasoning) and [2.5 Turn the answer into a deliverable](#25-turn-the-answer-into-a-deliverable) as optional. The Researcher and Analyst extra credit sections are not included in the slot. The [shared lab](../m365-copilot-chat-work-iq/) remains available for other deliveries.
 
@@ -32,22 +32,22 @@ Use Microsoft 365 Copilot and its built-in Researcher and Analyst agents to turn
 - [Prerequisites](#prerequisites)
 - [Use Cases Covered](#use-cases-covered)
 - [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Getting started with Microsoft 365 Copilot](#use-case-1-getting-started-with-microsoft-365-copilot)
+  - [Use Case #1: Getting started with Microsoft Copilot](#use-case-1-getting-started-with-microsoft-copilot)
   - [Use Case #2: Grounding Copilot with Work IQ](#use-case-2-grounding-copilot-with-work-iq)
   - [Extra Credit #1: Deep analysis with the Researcher agent](#extra-credit-1-deep-analysis-with-the-researcher-agent)
   - [Extra Credit #2: Financial modeling with the Analyst agent](#extra-credit-2-financial-modeling-with-the-analyst-agent)
 
 ## Introduction
 
-Microsoft 365 Copilot combines public web grounding with organizational context through Work IQ. You use it in the **Microsoft Copilot** app at <https://copilot.cloud.microsoft/>. The app was called the Microsoft 365 Copilot app before, and the old `m365.cloud.microsoft` address still redirects there.
+Microsoft Copilot combines public web grounding with organizational context through Work IQ. You use it in the **Microsoft Copilot** app at <https://copilot.cloud.microsoft/>. The app was formerly called the Microsoft 365 Copilot app, and the old `m365.cloud.microsoft` address still redirects there.
 
-Microsoft 365 Copilot also includes built-in agents: **Researcher** performs multi-step research and synthesis, while **Analyst** extracts data and performs quantitative analysis. In this lab, you will use Copilot in **Chat** mode with public-web and Work IQ grounding, then, as extra credit, use both agents to extract insights from the same document.
+Microsoft Copilot also includes built-in agents: **Researcher** performs multi-step research and synthesis, while **Analyst** extracts data and performs quantitative analysis. In this lab, you will use Copilot in **Chat** mode with public-web and Work IQ grounding, then, as extra credit, use both agents to extract insights from the same document.
 
 ## Core Concepts Overview
 
 | Concept | Why it matters |
 | ------- | -------------- |
-| **Microsoft 365 Copilot** | Uses the latest AI models to help information workers search, summarize, reason over, and act on organizational and web information. You use it in the Microsoft Copilot app. |
+| **Microsoft Copilot** | Uses the latest AI models to help information workers search, summarize, reason over, and act on organizational and web information. |
 | **Work IQ** | Grounds Copilot in the files, mail, meetings and chats the signed-in user already has permission to access. |
 | **Researcher** | Multi-step research and synthesis across long or complex source material, with its reasoning visible. |
 | **Analyst** | Quantitative analysis — extracts data and computes new results such as NPV and IRR that the source does not contain. |
@@ -60,11 +60,11 @@ Microsoft 365 Copilot also includes built-in agents: **Researcher** performs mul
 ## Prerequisites
 
 > [!IMPORTANT]
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#use-case-1-getting-started-with-microsoft-365-copilot) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#use-case-1-getting-started-with-microsoft-copilot) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
 
 **Running this lab in your own tenant?** Set this up first:
 
-- A Microsoft 365 account with a Microsoft 365 Copilot licence
+- A Microsoft 365 account with a Microsoft Copilot licence
 - (Extra Credit) The **Researcher** and **Analyst** agents available in the Microsoft Copilot app (listed under **Agents & Plugins**)
 - For Use Case #2, upload these files to a OneDrive or SharePoint location the account can access, so Work IQ can find them:
   - [Zava DIY Markdown and Clearance Policy](../m365-copilot-frontier-agents/assets/sample-files/Zava_DIY_Markdown_and_Clearance_Policy.docx)
@@ -76,7 +76,7 @@ No prior Copilot experience is needed. The Extra Credit sample report is downloa
 
 | Step | Use Case | Value added | Effort |
 | ---- | -------- | ----------- | ------ |
-| 1 | [Getting started with Microsoft 365 Copilot](#use-case-1-getting-started-with-microsoft-365-copilot) | Learn how Work IQ, response modes and AI model choice shape an answer | 7 min |
+| 1 | [Getting started with Microsoft Copilot](#use-case-1-getting-started-with-microsoft-copilot) | Learn how Work IQ, response modes and AI model choice shape an answer | 7 min |
 | 2 | [Grounding Copilot with Work IQ](#use-case-2-grounding-copilot-with-work-iq) | Reference a file directly, apply it to a real decision, then let Work IQ find what you never named | 13 min |
 | EC1 | [Deep analysis with the Researcher agent](#extra-credit-1-deep-analysis-with-the-researcher-agent) | Use the Researcher agent to synthesize insights across a complex multi-section business report | 10 min |
 | EC2 | [Financial modeling with the Analyst agent](#extra-credit-2-financial-modeling-with-the-analyst-agent) | Use the Analyst agent to perform NPV/IRR financial modeling and investment prioritization from document data | 5 min |
@@ -85,11 +85,11 @@ No prior Copilot experience is needed. The Extra Credit sample report is downloa
 
 **Running scenario for Use Cases #1 and #2:** You've just joined **Zava DIY**, a home improvement retailer with seven stores across Washington State plus Zava Retail Online, as a retail operations analyst. The quarterly business review is in two days. You need the market context, the company's own numbers, and the merchandising rules that govern both.
 
-## Use Case #1: Getting started with Microsoft 365 Copilot
+## Use Case #1: Getting started with Microsoft Copilot
 
 | Use case | Value added | Estimated effort |
 |---|---|---|
-| Getting started with Microsoft 365 Copilot | Learn how Work IQ, response modes and AI model choice shape an answer | 7 minutes |
+| Getting started with Microsoft Copilot | Learn how Work IQ, response modes and AI model choice shape an answer | 7 minutes |
 
 **Summary of tasks:** You'll switch Work IQ off, research the home improvement market on the public web, compare response modes, and try another supported AI model.
 
@@ -97,7 +97,7 @@ No prior Copilot experience is needed. The Extra Credit sample report is downloa
 
 ### Objective
 
-Understand what Microsoft 365 Copilot does on its own, grounded in public web content, and learn to choose grounding, response mode, and AI model.
+Understand what Microsoft Copilot does on its own, grounded in public web content, and learn to choose grounding, response mode, and AI model.
 
 ### Step-by-step instructions
 
@@ -391,7 +391,7 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
    ![Agents and Plugins page with Researcher and Analyst listed under Added](images/lab-m365copilot-agents-plugins.png)
 
 > [!TIP]
-> The Researcher agent is one of the **built-in agents** in Microsoft Copilot — purpose-built AI agents that use advanced reasoning models. Researcher excels at deep document analysis, cross-referencing multiple sections, and synthesizing complex information. It's available to users with a Microsoft 365 Copilot license.
+> The Researcher agent is one of the **built-in agents** in Microsoft Copilot — purpose-built AI agents that use advanced reasoning models. Researcher excels at deep document analysis, cross-referencing multiple sections, and synthesizing complex information. It's available to users with a Microsoft Copilot license.
 
 4. Upload **Contoso_Grand_Hotel_Performance_Report.pdf**: select **+** in the prompt box, select **Upload images and files**, and choose the file from your local machine. Wait until the file shows in the prompt box before you send the prompt.
 
@@ -599,13 +599,13 @@ Copilot Chat, Work IQ and two built-in agents produced different kinds of value 
 
 **Response mode and AI model affect the result.** Auto is the safest default, Think deeper supports more demanding reasoning, and different supported models vary in voice, structure and response.
 
-**Commodity capability arrives ready.** Microsoft 365 Copilot, Researcher and Analyst needed no authoring and no environment. Microsoft owns their upkeep, and they improve without a release on your side.
+**Commodity capability arrives ready.** Microsoft Copilot, Researcher and Analyst needed no authoring and no environment. Microsoft owns their upkeep, and they improve without a release on your side.
 
 **The capability you select changes the answer.** Standard chat researched and drafted, Researcher synthesised the narrative, and Analyst produced numbers the report never contained.
 
 ## Conclusions & Recommendations
 
-**Check the commodity first.** Before scoping anything, ask what Microsoft 365 Copilot already does with the same material. When the answer is good enough, consuming it costs nothing to run and nothing to maintain.
+**Check the commodity first.** Before scoping anything, ask what Microsoft Copilot already does with the same material. When the answer is good enough, consuming it costs nothing to run and nothing to maintain.
 
 **Build when you need what the commodity cannot give you** — your own grounding, a repeatable process, a controlled response, or an action written back to a system of record. Those are real requirements, and they are exactly what the harnesses in this bootcamp exist to serve.
 

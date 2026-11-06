@@ -241,7 +241,7 @@ mission_lab:
           instruction: "Create a separate **Home → Agent** on the Microsoft Copilot harness named **Project Process Assistant**. On **Build**, leave **Instructions empty**; clear generated instructions if present. Do not add intake instructions, Skills, or connectors yet. Pre-attached **Work IQ** and **Search all websites** may stay."
           help: "Under **Model**, select a reasoning-capable model such as **Claude Opus 5.5**, if offered. Ask your facilitator which model to use if it is missing. In **Preview → New chat**, use **+ → Upload images and files** to attach only `project-intake-process-v2.docx`."
         - title: "Create the package, not the interview"
-          instruction: "Send the full block in **Preview chat**, alongside the document. Keep **Build → Instructions** empty. The prompt deliberately retains the old phrase **GitHub Copilot harness**, exactly as live-tested; it refers to the current **Microsoft Copilot harness**."
+          instruction: "Send the full block in **Preview chat**, alongside the document. Keep **Build → Instructions** empty. The harness was formerly named **GitHub Copilot harness**, and the prompt deliberately retains that phrase, exactly as live-tested; it refers to the current **Microsoft Copilot harness**."
           prompt_label: Blank agent · Preview chat
           prompt: |-
             Create a portable Agent Skill named project-intake-guide for a Copilot Studio agent powered by the GitHub Copilot harness.
@@ -646,7 +646,7 @@ Do not regenerate the proposal, install packages, call external services, or inv
 
 These are fictional source documents, not a ready-made Skill. The procedure collects **business goal, intended users, desired outcome, and target date**, reuses supplied answers, accepts unknowns, asks one missing question at a time, and requests confirmation. Skills can guide conversations like topics, but do not replace deterministic ordering, validation, or branching.
 
-6. Send the full block below in **Preview chat**, alongside the document. Keep **Build → Instructions** empty. The prompt deliberately retains the old phrase **GitHub Copilot harness**, exactly as live-tested; it refers to the current **Microsoft Copilot harness**.
+6. Send the full block below in **Preview chat**, alongside the document. Keep **Build → Instructions** empty. The harness was formerly named **GitHub Copilot harness**, and the prompt deliberately retains that phrase, exactly as live-tested; it refers to the current **Microsoft Copilot harness**.
 
 ```text
 Create a portable Agent Skill named project-intake-guide for a Copilot Studio agent powered by the GitHub Copilot harness.

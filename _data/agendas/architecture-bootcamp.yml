@@ -1,4 +1,4 @@
-event_id: bootcamp-latest-missions
+event_id: architecture-bootcamp
 
 # Architecture Bootcamp — Latest, missions edition — 3-day agenda.
 #
@@ -9,7 +9,7 @@ event_id: bootcamp-latest-missions
 #
 # Conventions: see bootcamp-latest.yml. Module rows keep `lab: false` so hero
 # stats count the explicit lab rows and their slot durations. While the event and
-# its new labs are in review, both stay unlisted (see _events/bootcamp-latest-missions.md).
+# its new labs are in review, both stay unlisted (see _events/architecture-bootcamp.md).
 schedule:
   # --- Day 1 — Personal productivity and the Copilot / Standard harnesses ---
   - type: day
@@ -210,7 +210,7 @@ schedule:
   - type: lab
     slug: managed-apps-build
     label: "Lab 9"
-    title: "Managed Apps"
+    title: "Apps on Microsoft Copilot Managed Runtime"
     time: "16:00"
     duration: 30
 

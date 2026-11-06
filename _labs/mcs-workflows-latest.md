@@ -110,8 +110,7 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 
 **Running this lab in your own tenant?** Set this up first:
 
-- Use a development or training environment, not production, with access to Copilot Studio **Workflows**, available Copilot Credits, and a work account with **Outlook**, **Microsoft To Do**, and access to **Microsoft 365 Copilot** for Use Case #3. Use that same account for every connection.
-- Arrange a starter **To Do Time Block** workflow for Use Case #1. Confirm it contains the Microsoft To Do trigger before starting; the instructions below configure an existing workflow rather than create one from scratch.
+- Use a development or training environment, not production, with access to Copilot Studio **Workflows**, available Copilot Credits, and a work account with **Outlook**, **Microsoft To Do**, and access to **Microsoft Copilot** for Use Case #3. Use that same account for every connection.
 - Import [LAB: Order Management Workflows](../mcs-workflows/assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip) for the **Order Management Workflow** and **Price Quote Agent**, used in Use Cases #2–#3 and the extra-credit exercises. Sign in to the connections requested during import.
 - For the inventory extra credit only, import [Enhanced Task Completion](../mcs-workflows/assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip) for **Warehouse MCP**, and ensure Dataverse MCP can create **Task** rows.
 - For the price-quote extra credit only, provide the SharePoint pricing guide and Dataverse account records for Adventure Works and Fabrikam. The packages above do not include these.
@@ -159,54 +158,60 @@ Use Cases #1–#3 total 30 minutes (15 + 8 + 7 minutes). Both extra-credit exerc
 
 Build a Workflow that watches a Microsoft To Do list and, whenever a task is added, lets an inline agent autonomously block focus time on your calendar and enrich the task.
 
-> [!IMPORTANT]
-> **This exercise requires the pre-created To Do Time Block workflow.** If it is missing, ask your facilitator for the starter. Until it is available, this use case is blocked; you can continue independently with [Use Case #2](#use-case-2-setting-up-the-order-management-workflow). Do not substitute another attendee's workflow or count the time-blocking exercise as completed.
-
 **Summary of tasks**
 
-In this section, you'll create a To Do list to watch, configure the pre-created To Do Time Block Workflow with a To Do trigger, add a non-deterministic inline agent with goal-oriented instructions and tools, publish it, and then trigger it with a real task and verify the results.
+In this section, you'll create the To Do Time Block Workflow with a To Do trigger on your **Tasks** list, add a non-deterministic inline agent with goal-oriented instructions and tools, publish it, and then trigger it with a real task and verify the results.
 
 **Scenario:** You capture work in Microsoft To Do but never actually reserve time to do it. You want an assistant that, the moment you jot down a task, finds an appropriate slot in your workday, books a calendar block, and updates the task with a due date, reminder, notes, and category — without you lifting a finger beyond adding the task.
 
 ### Objective
 
-Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a new task to an inline agent that schedules a calendar block within your working hours and updates the to-do — then run it end-to-end and confirm the calendar event and the enriched task.
+Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a new task to an inline agent that schedules a calendar block within your working hours and updates the to-do — then run it end-to-end and confirm the calendar event and the enriched task.
 
 ---
 
 ### Step-by-step instructions
 
-#### Create the To-Do list that drives the workflow
+#### Open Microsoft To Do
 
-1. Go to [Microsoft To Do](https://to-do.office.com/). The first time you open it, you need to **sign in** — use the **same account** you use for Copilot Studio.
+1. Go to [Microsoft To Do](https://to-do.office.com/). The first time you open it, **sign in** with the **same account** you use for Copilot Studio. The workflow watches your default **Tasks** list, so you don't need to create a new list.
 
    > [!TIP]
    > The workflow's trigger connects to *your* To Do, so the list and the workflow must live under one identity.
 
-2. In **Microsoft To Do**, select **New list** in the left sidebar, name it **Time Block**, and press **Enter** to create it. This is the list the workflow will watch — adding a task here is what triggers the automation.
+#### Create the workflow and configure its trigger
 
-   ![The new Time Block list created in Microsoft To Do](../mcs-workflows/images/create-time-block-list.png)
+2. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and sign in with your lab account. Select your assigned environment, select **Workflows** in the left navigation, then select **New workflow**.
 
-#### Open the workflow and configure its trigger
-
-3. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and sign in with your lab account. Select your assigned environment, then **Workflows** in the left navigation, open your pre-created **To Do Time Block** workflow, and select **Build**.
-
-   If a first-visit notice or environment tour appears, read it and dismiss it before continuing. If the assigned workflow is missing, ask your facilitator rather than editing another user's workflow.
+   If a first-visit notice or environment tour appears, read it and dismiss it before continuing.
 
    > [!TIP]
    > Workflows are the autonomous side of Copilot Studio — they run on a trigger instead of waiting for a user to chat. You'll find them in the left navigation next to **Agents**.
 
-4. Select the **When a new to-do in a specific folder is created** trigger. Under **Connection**, select **Create new connection** and sign in with your lab account if there isn't one. In **To-do list**, switch to **Select from list** and select **Time Block**. This makes the workflow fire automatically whenever a task lands in that list.
+   The new workflow opens as **Untitled workflow** with a **Draft** pill and a single **Start** node set to **Manual**.
+
+   ![A new Untitled workflow in Draft with a single Start node and the Manual trigger panel](images/uc1-new-workflow.webp)
+
+3. Rename the workflow **To Do Time Block**: select **Untitled workflow** in the designer header (tooltip *Click to rename*), type the new name in the **Workflow name** box, and press **Enter**.
+
+   ![The workflow name in the designer header being edited to To Do Time Block](images/uc1-rename-workflow.webp)
+
+4. Select the **Start** node. In **Trigger type**, switch from **Manual** to **Connector** (*Trigger from an external service*), then select **Select trigger...** in the node header. In **Search actions, triggers, and connectors**, search for `to-do` and, under **Microsoft To-Do (Business)**, select **When a new to-do in a specific folder is created**.
 
    > [!TIP]
-   > If the list picker initially appears empty, type **Time Block** and select the matching option or press **Enter** to commit the selection. Confirm the required-field/setup warning disappears before continuing.
+   > Search for `to-do` with the hyphen. The results include both **Microsoft To-Do (Consumer)** and **Microsoft To-Do (Business)**; pick the **Business** trigger for your work account.
+
+   ![Trigger search for to-do listing When a new to-do in a specific folder is created under Microsoft To-Do (Business)](images/uc1-trigger-connector-search.webp)
+
+5. Open the **Connection** dropdown, select **Create new connection**, then **Create**, and sign in with your lab account. In **To-do list**, select **Tasks**. The node's **Needs setup** badge clears, and the workflow now fires automatically whenever a task is added to that list.
+
+   > [!TIP]
+   > If the list picker initially appears empty, type **Tasks** and select the matching option or press **Enter** to commit the selection. Confirm the **Needs setup** badge disappears before continuing.
 
    > [!WARNING]
-   > In the connection account picker, double-check you pick *your lab account* — not a personal or other work account. The workflow will read and write *that* account's To Do and calendar.
+   > In the connection account picker, double-check you pick *your lab account* — not a personal or other work account. The workflow will read and write *that* account's To Do and calendar. Because **Tasks** is your default list, every task you add there while the workflow is enabled starts a run, so disable the workflow when you finish testing (step 15).
 
-   ![The To Do Time Block workflow with its trigger configured](../mcs-workflows/images/trigger-todo-time-block.png)
-
-5. Delete the **Scope** node — it isn't useful for this lab.
+   ![The To Do Time Block trigger set to When a new to-do in a specific folder is created, with To-do list set to Tasks](images/uc1-trigger-tasks-list.webp)
 
 #### Add and configure the inline agent
 
@@ -215,7 +220,7 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
    > [!TIP]
    > This is the heart of the lab: instead of hard-coded actions, the workflow hands the task to an agent that *reasons* about how to schedule it.
 
-   ![Agent node added with New agent for this workflow selected](../mcs-workflows/images/add-new-agent-node.png)
+   ![Agent node added after Start, with New agent for this workflow selected](images/uc1-agent-node.webp)
 
 7. In the **Instructions** box, give the agent its goal. Enter it in three parts so the agent receives the *actual* to-do title at run time:
 
@@ -225,7 +230,7 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
       Find a time that is appropriate for this task
       ```
 
-   2. Add a space after the text, then type **`/`** to open the dynamic-content picker and select **Title** (under *When a new to-do in a specific folder is created*). This inserts the to-do's title as a token. Copilot Studio automatically adds an **Apply to each** loop when this array-item token is inserted, so the agent runs once per new to-do; the loop need not appear when you first add the Agent node.
+   2. Add a space after the text, then type **`/`** to open the dynamic-content picker and select **Title** (under *When a new to-do in a specific folder is created*). This inserts the to-do's title as a token; the chip can display the expression `items('Apply_to_each')?['title']` rather than the word *Title*. Copilot Studio automatically adds an **Apply to each** loop when this array-item token is inserted, so the agent runs once per new to-do; the loop need not appear when you first add the Agent node.
 
    3. Continue typing the rest of the instruction right after the token:
 
@@ -236,7 +241,7 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
    > [!IMPORTANT]
    > The **`/Title`** token is what makes this dynamic — the agent receives each new task's real title, so its scheduling decision is grounded in the actual to-do rather than a fixed string. The final sentence constrains *when* the agent books focus time; without it, the agent may pick the first technically-free slot (even very early morning).
 
-   ![The completed agent instructions with the Title token inserted inline](../mcs-workflows/images/agent-instructions-filled.png)
+   ![The completed agent instructions with the Title token inserted inline](images/uc1-agent-instructions.webp)
 
 8. Give the agent the tools it needs to act. In the agent panel:
 
@@ -251,7 +256,7 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
    > [!TIP]
    > **Find meeting times** lets the agent read your free/busy and propose a slot; **Create event** books the focus block on your Outlook calendar; **Update to-do** writes the due date, notes, and reminder back onto the task. Granting the two calendar actions separately — rather than one broad calendar tool — gives the agent exactly the capabilities the goal needs and nothing more.
 
-   ![Agent configured with the Find meeting times and Create event Outlook tools, Update to-do, and Web search enabled](../mcs-workflows/images/agent-tools-web-search.png)
+   ![Agent configured with the Find meeting times and Create event Outlook tools, Update to-do, and Web search enabled](images/uc1-agent-tools.webp)
 
 #### Publish, then trigger the workflow
 
@@ -260,9 +265,9 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
    > [!WARNING]
    > **Publish and enable before testing.** A disabled workflow keeps its definition and run history but does not start new runs. Add the test to-do only after publishing and checking **Enabled**. Use **Activity** to inspect the run.
 
-   ![The published To Do Time Block workflow showing Trigger, Apply to each, and Agent nodes](../mcs-workflows/images/workflow-published.png)
+   ![The published To Do Time Block workflow showing Trigger, Apply to each, and Agent nodes](images/uc1-workflow-published.webp)
 
-10. Open **Microsoft To Do**, go to the **Time Block** list, and add a new task with the following title. Creating this task in the watched list is what fires the workflow's trigger.
+10. Open **Microsoft To Do**, go to the **Tasks** list, and add a new task with the following title. Creating this task in the watched list is what fires the workflow's trigger.
 
     ```
     Book Skull's Rainbow Room in Nashville for Next Friday
@@ -271,7 +276,7 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
     > [!TIP]
     > Use a task whose title implies a real-world commitment with a time and place — it gives the agent something concrete to reason about (find a slot, block the calendar, look up the venue).
 
-    ![The new task added to the Time Block list in Microsoft To Do](../mcs-workflows/images/add-todo-task.png)
+    ![The new task added to the Tasks list in Microsoft To Do](images/uc1-todo-task-added.webp)
 
 #### Watch the workflow run
 
@@ -280,31 +285,32 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
     > [!IMPORTANT]
     > Be patient — the To Do trigger polls on a schedule, so the run can take a **few minutes** to appear. Press **Refresh** in the Activity list a few times until it shows up.
 
-    ![The new run showing as Running in the Activity view](../mcs-workflows/images/activity-run-running.png)
-
-    ![The run executing, with the trigger succeeded and the Agent node in progress](../mcs-workflows/images/run-monitor-executing.png)
+    ![The To Do Time Block run in the Activity view with Trigger, Apply to each and Agent nodes](images/uc1-activity-run.webp)
 
 12. In the run details, select the **Agent** node to expand its details. You'll see the agent's own narration of what it did — checking your free/busy, choosing a time block *inside your working hours*, creating the calendar event, finding the to-do, and updating it. This is the *non-deterministic* part: the agent decided the specifics, they aren't hard-coded in the workflow.
 
     > [!TIP]
     > The Agent's **Outputs / Response** is a great teaching moment — it shows the model reasoning step-by-step and calling the Find meeting times, Create event, and Update to-do tools on its own.
 
-    ![The Agent node run details showing the agent's reasoning and tool actions](../mcs-workflows/images/agent-run-details.png)
+    ![The Agent node run details showing the agent's reasoning and tool actions](images/uc1-agent-run-details.webp)
 
 #### Verify the results
 
-13. Go back to **Microsoft To Do** and refresh the **Time Block** list. Open your task — it has been updated by the agent: a **due date** (a week out), a **reminder** set 2 days before the due date, and richly formatted **notes** (target date, the scheduled work block, and an action checklist).
+13. Go back to **Microsoft To Do** and refresh the **Tasks** list. Open your task — it has been updated by the agent: a **due date** (a week out), a **reminder** set 2 days before the due date, and richly formatted **notes** (target date, the scheduled work block, and an action checklist).
 
     > [!TIP]
     > Switch the list to **List** view and open the task to see the full notes the agent wrote — it even researched the venue with web search.
 
-    ![The to-do updated by the agent with due date, reminder, and formatted notes](../mcs-workflows/images/todo-updated-details.png)
+    ![The to-do updated by the agent with due date, reminder, and formatted notes](images/uc1-todo-updated.webp)
 
 14. Open **Outlook → Calendar**. The agent has added a **time block** event to reserve time to work on the task — on the next business day it found free and **within your 8:00 AM–5:00 PM working hours** — with a body summarizing the target date and venue. The workflow ran end-to-end with no further input from you.
 
-    ![The calendar time-block event the agent created in Outlook](../mcs-workflows/images/calendar-event-details.png)
+    ![The calendar time-block event the agent created in Outlook](images/uc1-calendar-event.webp)
 
-15. Return to **Workflows**, turn off **Enabled** for your **To Do Time Block** workflow, and reload the page to confirm it remains disabled. Do this before moving to Use Case #2; the later exercises do not need this trigger.
+15. Return to **Workflows**, turn off **Enabled** for your **To Do Time Block** workflow, and reload the page to confirm it remains disabled. Do this before moving to Use Case #2: otherwise every task you add to **Tasks** starts another run, and the later exercises do not need this trigger.
+
+    > [!TIP]
+    > If the switch shows *Couldn't change the enabled state*, open [Power Automate](https://make.powerautomate.com/) in the same environment, select **My flows**, then **More commands (…) → Turn off** on **To Do Time Block**. Reload to confirm the menu now offers **Turn on**. Copilot Studio may then list the workflow as **Draft**; that is expected.
 
 ---
 
@@ -338,7 +344,7 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 > [!IMPORTANT]
 > **Verify the connections first.** The workflow must have valid node connections before it can be published or tested. They may already be configured correctly — inspect them first.
 
-1. In **Copilot Studio**, navigate to **Workflows**, open the starter **Order Management Workflow**, and select **Build**. In the designer header, select **More options** > **Create a copy**. Give the copy a unique name, such as **Order Management WF**, then select **Open workflow** in the confirmation. The copy opens in a **new browser tab**. Continue only in that copy, leaving the original unchanged.
+1. In **Copilot Studio**, navigate to **Workflows**, open the starter **Order Management Workflow**, and select **Build**. In the designer header, select **More options** > **Create a copy**. Keep the default **Title**, **Order Management Workflow - Copy**, and select **Create**; if a confirmation offers **Open workflow**, select it. The copy opens in a **new browser tab**. Continue only in that copy, leaving the original unchanged.
 
    > [!NOTE]
    > Use the designer header menu, not the list row's **More actions** menu, which may offer only **Delete**. In the copy, you'll see **When a new email arrives**, **Classify**, and the category branches. References to the Order Management workflow below mean your copy.
@@ -347,7 +353,7 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 
 2. Open each node on the canvas so its connection can resolve. Start with **When a new email arrives** and, under **Connection**, wait for your lab-account connection to load. Check the **Copilot** and **Human review** nodes as well; these can also resolve automatically.
 
-   Reuse healthy lab-account connections. If **Human review** needs a connection, select **Create new connection**, give it a recognizable display name such as **WF Human review**, leave **Authentication Type** as **Default**, and select **Create**. This connection is marked **Premium**. Complete any sign-in with your lab account; do not replace working connections.
+   Reuse healthy lab-account connections. If **Human review** needs a connection, select **Create new connection**, give it a recognizable display name such as **Human review**, leave **Authentication Type** as **Default**, and select **Create**. This connection is marked **Premium**. Complete any sign-in with your lab account; do not replace working connections.
 
 #### Open and explore the Order Management Workflow
 
@@ -889,9 +895,9 @@ You've connected a workflow branch to a published agent that blends knowledge, d
 
 ## Clean Up
 
-1. On **Workflows**, turn off **Enabled** for each workflow you enabled: your Order Management copy and, only if you completed Use Case #1, your Time Block workflow. Reload and verify they remain off. Do not change the original starter or anyone else's workflow. If a disabled copy becomes **Draft**, leave it that way; to resume deliberately, open **Build** > **Publish** rather than relying on the list switch.
+1. On **Workflows**, turn off **Enabled** for each workflow you enabled: your Order Management copy and, only if you completed Use Case #1, your To Do Time Block workflow. Reload and verify they remain off. Do not change the original starter or anyone else's workflow. If a disabled copy becomes **Draft**, leave it that way; to resume deliberately, open **Build** > **Publish** rather than relying on the list switch.
 2. Inspect **Activity** for any runs still **Running** or **Waiting**. Disabling a trigger prevents new runs; it does not prove existing runs stopped. Finish your test approvals or cancel your unfinished runs before leaving. Ask your facilitator for help if a run cannot be stopped.
-3. Remove your test calendar block, To Do task/list, test emails, approval requests, and drafts when no longer needed. If you completed the inventory extra credit, remove only the Dataverse Task row created by your test.
+3. Remove your test calendar block, test To Do task, test emails, approval requests, and drafts when no longer needed. If you completed the inventory extra credit, remove only the Dataverse Task row created by your test.
 4. Leave shared starter workflows, agents, connections, MCP servers, knowledge, and sample records in place. Record **Credit usage (last 30 days)** from the **Workflows** page if available; this is a rolling total, not the cost of this individual test.
 
 ---

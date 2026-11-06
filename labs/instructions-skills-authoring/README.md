@@ -194,7 +194,7 @@ Do not regenerate the proposal, install packages, call external services, or inv
 
 These are fictional source documents, not a ready-made Skill. The procedure collects **business goal, intended users, desired outcome, and target date**, reuses supplied answers, accepts unknowns, asks one missing question at a time, and requests confirmation. Skills can guide conversations like topics, but do not replace deterministic ordering, validation, or branching.
 
-6. Send the full block below in **Preview chat**, alongside the document. Keep **Build → Instructions** empty. The prompt deliberately retains the old phrase **GitHub Copilot harness**, exactly as live-tested; it refers to the current **Microsoft Copilot harness**.
+6. Send the full block below in **Preview chat**, alongside the document. Keep **Build → Instructions** empty. The harness was formerly named **GitHub Copilot harness**, and the prompt deliberately retains that phrase, exactly as live-tested; it refers to the current **Microsoft Copilot harness**.
 
 ```text
 Create a portable Agent Skill named project-intake-guide for a Copilot Studio agent powered by the GitHub Copilot harness.

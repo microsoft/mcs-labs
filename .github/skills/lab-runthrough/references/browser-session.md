@@ -98,7 +98,9 @@ Headless runs are independent: give each lab its own `--port` (for example 9352,
 its own `--out` folder and its own `close`. Each `launch` creates a separate temporary
 profile, so the sessions do not share cookies. Several runs can sign in as the same
 training account at once, but they share its data: avoid labs that edit the same agent,
-record or setting at the same time, and name what you create after the lab. Three or four
+record or setting at the same time. Use the exact names the lab gives, with no test suffix
+or tag, so screenshots match the instructions; run labs that create same-named assets one
+after the other. Three or four
 concurrent browsers are comfortable on a 16 GB machine.
 
 Use `newtab` rather than `launch` for a second app in the same lab (for example Teams next
@@ -251,8 +253,8 @@ when a run-through finds something new, and date it.
 - The first agent **Save** can finish provisioning and return the page to **Build**.
   Wait for that navigation to settle before opening **Preview** or entering a test
   prompt; otherwise text can land in the instructions editor instead.
-- Copilot Studio's agent-name input currently limits names to 30 characters. Shorten a
-  shared-account test name before adding a suffix; verify that the saved name retained it.
+- Copilot Studio's agent-name input currently limits names to 30 characters. Verify that
+  the saved name matches the lab's name exactly.
 
 ## Troubleshooting
 

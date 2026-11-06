@@ -400,7 +400,7 @@ mission_lab:
         - title: "Publish before adding the channel"
           instruction: "Select **Publish**, then **Publish** in **Publish this agent**. Leave **Force newest version** cleared. Wait about 30 seconds and check **Published agent status** shows the publish time."
         - title: "Add Microsoft 365 and Teams"
-          instruction: "Select **Microsoft 365 and Microsoft Teams**. Review **Turn on Microsoft 365 → Make agent available in Microsoft 365 Copilot** and the name, icon and short description under **Agent preview**. Select **Add channel**, then confirm **The channel was added.**"
+          instruction: "Select **Microsoft 365 and Microsoft Teams**. Review **Turn on Microsoft 365 → Make agent available in Microsoft 365 Copilot** (the product was renamed Microsoft Copilot, but this panel still uses the old name) and the name, icon and short description under **Agent preview**. Select **Add channel**, then confirm **The channel was added.**"
           help: "If warned **You need to publish your agent before you can make it available to others**, use **Go to publish** first. After adding, **Edit details**, **Availability options**, **See agent in Microsoft 365** and **See agent in Teams** become available."
         - title: "Review display details and sharing"
           instruction: "Select **Edit details** and review **Name**, **Icon**, **Short description**, **Long description** and **Teams settings**. Change **Short description** to **Assist users building agents**, then select **Save**. Optionally inspect **Availability options** and return with the back arrow without broadening access."
@@ -799,7 +799,7 @@ Leave with a published agent, the Microsoft 365 and Microsoft Teams channel adde
 1. Select **+2** after **Evaluation → Channels**, or **Channels** directly in a wide window. Inspect **Published agent status**, **Microsoft channels** and **Customer engagement hub**.
 2. Review the **Microsoft authentication** banner: the available channels are **Microsoft 365 and Microsoft Teams** and **SharePoint**. Inspect handoff destinations such as **Dynamics 365 Contact Center**, **Telephony**, **Genesys**, **LivePerson**, **Salesforce**, **ServiceNow** and **Custom engagement hub**. Availability depends on authentication, licence and environment; do not change authentication to expose more channels.
 3. Select **Publish → Publish** in **Publish this agent**, leaving **Force newest version** cleared. Wait about 30 seconds and check the publish time in **Published agent status**.
-4. Select **Microsoft 365 and Microsoft Teams**. Review **Turn on Microsoft 365 → Make agent available in Microsoft 365 Copilot** and the **Agent preview** name, icon and short description. If warned to publish first, select **Go to publish** and do so.
+4. Select **Microsoft 365 and Microsoft Teams**. Review **Turn on Microsoft 365 → Make agent available in Microsoft 365 Copilot** (the product was renamed Microsoft Copilot, but this panel still uses the old name) and the **Agent preview** name, icon and short description. If warned to publish first, select **Go to publish** and do so.
 5. Select **Add channel** and confirm **The channel was added.** Check **Edit details**, **Availability options**, **See agent in Microsoft 365** and **See agent in Teams** are available.
 6. Select **Edit details** and review **Name**, **Icon**, **Short description**, **Long description** and **Teams settings**. Change **Short description** to **Assist users building agents**, then **Save**.
 7. Optionally inspect **Availability options**, then return with the back arrow without broadening access. **Validation limit:** the refreshed run opened Edit details but did not exercise saving those changes or Availability options. These are documented learner actions, not claimed validation. Ask the facilitator if controls differ.
@@ -843,7 +843,7 @@ Your finish line: a tool-backed analysis you can inspect. This light-only result
 - [Add tools to custom agents](https://learn.microsoft.com/microsoft-copilot-studio/advanced-plugin-actions)
 - [Use variables](https://learn.microsoft.com/microsoft-copilot-studio/authoring-variables)
 - [Add other agents](https://learn.microsoft.com/microsoft-copilot-studio/authoring-add-other-agents)
-- [Publish to Teams and Microsoft 365 Copilot](https://learn.microsoft.com/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams)
+- [Connect and configure an agent for Teams and Microsoft Copilot](https://learn.microsoft.com/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams)
 
 Product UI, models and generated answers vary by tenant. The refreshed classic walkthrough is the source for these missions; no new live run was performed for this format. All five images are lossless WebPs from approved classic screenshots with no account or app-sidebar data. Only reviewed light captures were available: no dark images were fabricated.
 

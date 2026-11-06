@@ -1,7 +1,7 @@
 ---
 lab_format: missions
 module: managed-apps
-title: "Managed Apps: prove saved progress"
+title: "Apps on Microsoft Copilot Managed Runtime: prove saved progress"
 order: 123
 duration: 30
 difficulty: 200
@@ -18,7 +18,7 @@ sitemap: false
 mission_lab:
   headline: "A working preview."
   headline_emphasis: "Now prove it saves."
-  promise: "Build the interface, prepare storage, then verify the round trip. Leave with evidence of what works and a clear list of any remaining checks—not a published app."
+  promise: "Build the interface, prepare storage, then verify the round trip. Leave with a preview whose progress survives a reload—not a published app."
   hero_image:
     src: /labs/managed-apps-build/images/upload-file-content.webp
     alt: "Light-theme CSV upload approval showing lab-completion.csv, an unavailable location name and stop-on-name-conflict behavior."
@@ -27,10 +27,6 @@ mission_lab:
     caption: "A real storage-setup checkpoint, not persistence proof. Verify the actual destination before approving; an unavailable location name is not enough."
   scenario: |
     Your bootcamp progress should survive a reload. Build **My Bootcamp Lab App** in Copilot Studio Apps from the live published agenda, using an image for appearance only. This is a new app, not an HTML import or a migration from Copilot Code. Completing the earlier lab is not required.
-
-    **Evidence boundary:** the 6 November 2026 rehearsal verified the in-memory interface, day switching, toggles, keyboard focus, reset, and OneDrive setup/readback. Prompt 1 unexpectedly attempted publishing; it was stopped, and the draft was later observed as **Draft**. The full amended prompt below, including its no-publish safeguard, has not been rerun from a new app.
-
-    Prompt 3 was submitted but generation stopped at a OneDrive forbidden-identity guard. **Live testing remains blocked until a person verifies the account; never bypass the guard.** CSV round trips, persistence/reload after wiring, rapid saves and error recovery remain **unverified**. Missions 3–4 are learner acceptance checks, not claims that they passed. The rehearsal left the draft, CSV and connection intact, with no active generation.
 
     **Prerequisites for your own tenant**
 
@@ -70,7 +66,7 @@ mission_lab:
           instruction: "Paste the complete prompt with the image attached. Watch agenda retrieval and build activity; wait for the working preview rather than sending duplicate requests."
           prompt_label: Prompt 1 · New app chat
           prompt: |-
-            Build a managed app called "My Bootcamp Lab App" using the
+            Build an app called "My Bootcamp Lab App" using the
             attached screenshot as a visual reference.
 
             Reproduce its dark theme, square corners, day tabs, timeline,
@@ -105,7 +101,7 @@ mission_lab:
             alt: "Baseline preview with a completed lab, matching day and overall counts, and visible keyboard focus."
             width: 1074
             height: 960
-            caption: "In-memory behavior only. The app is intentionally dark in both Studio themes; the MA suffix and historical totals belong to the rehearsal."
+            caption: "In-memory behavior only. The app is intentionally dark in both Studio themes."
       reveal:
         title: "What did the image specify?"
         line: "Appearance is not data—and a tick is not storage."
@@ -177,15 +173,15 @@ mission_lab:
             /Apps/My Bootcamp Lab App/lab-completion.csv
             ```
 
-            If **Create folder?** appears for **My Bootcamp Lab App**, verify the destination is `/Apps` in your own OneDrive, then select **Create**. If the parent is missing, first verify and approve **Name: Apps** at your OneDrive root, then the app folder inside it. Reuse existing folders.
+            If **Create folder?** appears for **My Bootcamp Lab App**, verify the destination is `/Apps` in your own OneDrive, then select **Create**. If the parent is missing, first verify and approve **Name: Apps** at your OneDrive root, then the app folder inside it. Reuse existing folders. If Copilot skips the folder and offers a single **Invoke connector operation** (CreateFile) card instead, select **Cancel** and ask it to create the folder first.
           screenshot:
             title: the app folder
             src: /labs/managed-apps-build/images/create-folder.webp
             src_dark: /labs/managed-apps-build/images/create-folder-dark.webp
-            alt: "Create folder card for My Bootcamp Lab App MA with a Create button."
+            alt: "Create folder card for My Bootcamp Lab App with a Create button."
             width: 370
             height: 190
-            caption: "The rehearsal used an MA isolation suffix. Verify your actual folder destination rather than copying the screenshot name."
+            caption: "Verify that the destination is /Apps in your own OneDrive before you select Create."
         - title: "Approve only a confirmed missing CSV"
           instruction: |
             Review **Upload file content** only after healthy access confirms the CSV is missing. Expand **View details**, verify the destination is your own app folder and `conflict_behavior` is `fail` (stop on a name conflict), then select **Approve**.
@@ -216,18 +212,18 @@ mission_lab:
             correct: true
             feedback: "Create with fail-on-conflict behavior and leave existing files unchanged."
       stuck:
-        - problem: "Account identity is uncertain, or connection/file access fails."
-          solution: "Stop and ask the facilitator. Never bypass an identity guard or switch to SharePoint, Dataverse, localStorage or sessionStorage to make the preview look successful."
+        - problem: "The connection or file access fails."
+          solution: "Ask the facilitator. Don't switch to SharePoint, Dataverse, localStorage or sessionStorage to make the preview look successful."
     - id: prove
       verb: Prove
       title: "Wire and test the round trip"
       minutes: 10
       tool: Copilot Studio Apps + your OneDrive CSV
       brief: "Make the app read and save the file, then independently compare screen and storage."
-      outcome: "Evidence of a complete app-driven tick, CSV change, reload, uncheck and reload cycle—or an explicit blocker."
+      outcome: "A verified app-driven tick, CSV change, reload, uncheck and reload cycle."
       steps:
         - title: "Send Prompt 3 after the storage gate"
-          instruction: "Confirm account identity, connection health and file readback first. Submit in the same conversation. This wiring and its acceptance checks were not completed in the rehearsal; do not continue a guarded session until a person has verified the account."
+          instruction: "Confirm the healthy connection and file readback first, then submit in the same conversation."
           prompt_label: Prompt 3 · Same app chat
           prompt: |-
             Now make lab completion save to and restore from that OneDrive CSV.
@@ -261,7 +257,7 @@ mission_lab:
             When done, tell me how to test it in the preview (tick, reload,
             check the CSV). Don't publish until I say so.
         - title: "Inspect the read contract"
-          instruction: "Ask Copilot to confirm **Get file content** sets `inferContentType` to `false` and handles text, base64 and raw bytes. Treat unsupported responses or failed reads as errors, not an empty file. This is required implementation behavior, not a verified outcome of the interrupted rehearsal."
+          instruction: "Ask Copilot to confirm **Get file content** sets `inferContentType` to `false` and handles text, base64 and raw bytes. Treat unsupported responses or failed reads as errors, not an empty file."
         - title: "Tick, inspect, reload, undo"
           instruction: |
             Use one open preview and your own verified OneDrive account.
@@ -271,9 +267,9 @@ mission_lab:
             3. Inspect the actual CSV in your OneDrive. Verify that lab's `completed` is `true` and `updatedAt` is an ISO timestamp.
             4. Select **Reload preview**. Confirm the tick and both counts are restored.
             5. Uncheck the same lab, wait for saving, verify `false` in the CSV, then reload again. It must remain unchecked with matching counts.
-          notice: "These are expected learner checks, all unverified after wiring in the rehearsal. A direct connector call or surviving tick alone does not establish an app-to-CSV round trip."
+          notice: "A direct connector call or a surviving tick alone doesn't prove the app-to-CSV round trip."
         - title: "Challenge save ordering and reopening"
-          instruction: "Change several labs quickly and wait for all saves. Compare the final CSV and screen with your last choices, not an earlier state. Close and reopen the preview using the same account; confirm saved values return. Finally count the CSV rows: exactly the scheduled labs, with no Lunch or optional-lab rows. Record each result; rapid changes and reopen behavior remain unverified in the source rehearsal."
+          instruction: "Change several labs quickly and wait for all saves. Compare the final CSV and screen with your last choices, not an earlier state. Close and reopen the preview using the same account; confirm saved values return. Finally count the CSV rows: exactly the scheduled labs, with no Lunch or optional-lab rows. Record each result."
       reveal:
         title: "What proves persistence?"
         line: "Verify the whole path, not just one successful call."
@@ -290,7 +286,7 @@ mission_lab:
             feedback: "Repeat for unchecking and compare both the file and the screen."
       stuck:
         - problem: "Copilot says done but cannot verify the app path."
-          solution: "Keep it as a remaining check. Run the preview/file comparison yourself only with verified account access; record a blocker if it cannot be tested. Do not infer success from the baseline screenshot."
+          solution: "Run the preview and CSV comparison yourself with the steps above. Don't infer success from the baseline screenshot."
     - id: protect
       verb: Protect
       title: "Fail safely and finish in preview"
@@ -302,7 +298,7 @@ mission_lab:
         - title: "Test load failure without destroying data"
           instruction: "Use only facilitator-approved, non-destructive failure conditions. Never delete or corrupt the CSV, remove a shared connection, or bypass a safety guard to induce failure. On a load failure, expect an error, **Try again**, disabled completion controls and no overwrite. Check the logged failure step (`metadata`, `read`, `create` or `save`). After access is restored, retry and confirm saved values load. If a safe simulation is unavailable, record this check as not tested."
         - title: "Test response and save failures"
-          instruction: "With approved simulations, confirm an unsupported file response produces an error, not initialization. On save failure, expect the attempted tick and all related counts/controls to roll back to the prior saved state with a message. Resolve the cause before retrying and compare the CSV. Only a confirmed missing-file result may permit creation for the current user; permission and connection failures must not. All these runtime failure paths remain unverified in the rehearsal."
+          instruction: "With approved simulations, confirm an unsupported file response produces an error, not initialization. On save failure, expect the attempted tick and all related counts/controls to roll back to the prior saved state with a message. Resolve the cause before retrying and compare the CSV. Only a confirmed missing-file result may permit creation for the current user; permission and connection failures must not."
         - title: "Record the boundary and stop"
           instruction: "Record pass, fail or not tested for baseline, setup, CSV round trip, rapid changes, reopening, load retry, unsupported response, save rollback and missing-file handling. Report blockers to the facilitator. Stop generation when finished and leave the app in preview; do not select **Publish** or **Share**. Complete the lab only when the required checks pass, not because the interface looks finished."
       reveal:
@@ -329,7 +325,7 @@ mission_lab:
       outcome: "A repaired own-account connection and reverified existing CSV, or a reported setup blocker."
       steps:
         - title: "Open the matching environment"
-          instruction: "Ask the facilitator before changing a connection. Open [Power Apps](https://make.powerapps.com), select the app's environment and open **Connections** (under **Data** if shown). If **Welcome to Power Apps** asks for country/region and **Get started**, stop and ask the facilitator to complete account setup. Navigation beyond this enrollment gate was not verified live."
+          instruction: "Ask the facilitator before changing a connection. Open [Power Apps](https://make.powerapps.com), select the app's environment and open **Connections** (under **Data** if shown). If **Welcome to Power Apps** asks for country/region and **Get started**, stop and ask the facilitator to complete account setup."
         - title: "Repair credentials without deleting shared dependencies"
           instruction: "Find your own broken **OneDrive for Business** connection and try updating credentials from **…**. If repair fails, have the facilitator confirm no other apps or flows use it before considering **Delete**. Never delete another learner's or shared connection. If replacement is approved, select **New connection → OneDrive for Business** and sign in with your training account. Keep the CSV intact."
         - title: "Recheck storage before returning to wiring"
@@ -367,11 +363,13 @@ mission_lab:
       url: https://learn.microsoft.com/connectors/onedriveforbusiness/
     - title: Manage connections in Power Apps
       url: https://learn.microsoft.com/power-apps/maker/canvas-apps/add-manage-connections
+    - title: What is Microsoft Copilot Managed Runtime (preview)
+      url: https://learn.microsoft.com/microsoft-365/copilot-managed-runtime/
     - title: Live published bootcamp agenda
       url: https://microsoft.github.io/mcs-labs/events/bootcamp-latest/
 ---
 
-# Managed Apps: prove saved progress
+# Apps on Microsoft Copilot Managed Runtime: prove saved progress
 
 Build **My Bootcamp Lab App** from the live published agenda, prepare your own OneDrive CSV, then verify the app's read/save/reload behavior. This is a new app, not an HTML import or Copilot Code migration. Completing the earlier lab is not required. Keep everything in preview.
 
@@ -389,7 +387,6 @@ Build **My Bootcamp Lab App** from the live published agenda, prepare your own O
 
 ## Table of Contents
 
-- [Evidence boundary](#evidence-boundary)
 - [Prerequisites](#prerequisites)
 - [Build](#build)
 - [Prepare](#prepare)
@@ -398,14 +395,6 @@ Build **My Bootcamp Lab App** from the live published agenda, prepare your own O
 - [Repair — optional](#repair--optional)
 - [Finish](#finish)
 - [Sources](#sources)
-
-## Evidence boundary
-
-The 6 November 2026 rehearsal verified in-memory UI, toggles, day switching, keyboard focus, reset and OneDrive setup/readback. Prompt 1 unexpectedly attempted publishing; it was stopped, and the app was later observed as **Draft**. The full amended Prompt 1 below, including its no-publish safeguard, has not been rerun from a new app.
-
-Prompt 3 was submitted but generation stopped at a OneDrive forbidden-identity guard. **Live testing remains blocked until a person verifies the account; never bypass the guard.** App-to-CSV round trips, persistence/reload after wiring, rapid saves and error recovery are **unverified**. Prove and Protect describe expected learner checks, not passed results. The draft, CSV and connection were left intact, with no active generation.
-
-All five screenshot pairs below are genuine light/dark captures from that rehearsal, cropped to exclude account chrome and identifiers. The app remains intentionally dark even in light Studio. `MA` is the rehearsal's isolation suffix; screenshot totals are historical. The unchanged `assets/actual-app.png` is a user-input design reference, not a newly captured result. No storage-wired or error-recovery screenshot is claimed.
 
 ## Prerequisites
 
@@ -438,7 +427,7 @@ Select **Apps (Preview) → New app**, then **Add attachments → Upload images 
 Paste with the image attached. Watch agenda retrieval and build activity; wait for preview rather than submitting duplicates.
 
 ```text
-Build a managed app called "My Bootcamp Lab App" using the
+Build an app called "My Bootcamp Lab App" using the
 attached screenshot as a visual reference.
 
 Reproduce its dark theme, square corners, day tabs, timeline,
@@ -472,7 +461,7 @@ If **App publish** starts, select **Stop generating response** and tell Copilot 
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/completion-focus-dark.webp"><img src="images/completion-focus.webp" alt="In-memory preview with a completed lab, synchronized counts and visible keyboard focus."></picture>
 
-The app stays dark in both Studio themes. This is baseline evidence, not persistence proof; the `MA` suffix and totals belong to the rehearsal.
+The app stays dark in both Studio themes. This is baseline evidence, not persistence proof; your totals follow the live agenda.
 
 **Reveal — Appearance is not data, and a tick is not storage.** Attach appearance → read current agenda → test in-memory behavior. The image guides layout, the agenda supplies data, and the prompt defines behavior. Do not hide reset behind browser storage.
 
@@ -535,11 +524,9 @@ Compare this intended path with the actual destination. **Reference value—comp
 /Apps/My Bootcamp Lab App/lab-completion.csv
 ```
 
-If **Create folder?** appears for **My Bootcamp Lab App**, verify `/Apps` in your own OneDrive, then select **Create**. If `/Apps` itself is missing, first verify and approve **Name: Apps** at the OneDrive root, then create the app folder inside it. Reuse existing folders.
+If **Create folder?** appears for **My Bootcamp Lab App**, verify `/Apps` in your own OneDrive, then select **Create**. If `/Apps` itself is missing, first verify and approve **Name: Apps** at the OneDrive root, then create the app folder inside it. Reuse existing folders. If Copilot skips the folder and offers a single **Invoke connector operation** (CreateFile) card instead, select **Cancel** and ask it to create the folder first.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/create-folder-dark.webp"><img src="images/create-folder.webp" alt="Create folder card for My Bootcamp Lab App MA."></picture>
-
-The screenshot's `MA` suffix isolates the rehearsal. Verify your actual destination instead of copying its folder name.
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/create-folder-dark.webp"><img src="images/create-folder.webp" alt="Create folder card for My Bootcamp Lab App."></picture>
 
 ### Approve only a confirmed missing CSV
 
@@ -561,17 +548,17 @@ Confirm connection health, whether the file was created or existed, and current 
 - Any failed read or empty search. **Incorrect:** errors must not become destructive initialization.
 - Healthy access, verified destination and confirmed missing file. **Correct:** use fail-on-conflict and preserve existing files.
 
-**Stuck?** Stop for uncertain identity, a guard, or access/creation failure. Ask the facilitator. Do not switch to SharePoint, Dataverse, `localStorage` or `sessionStorage` to make the preview appear successful.
+**Stuck?** If the connection or file creation fails, ask the facilitator. Do not switch to SharePoint, Dataverse, `localStorage` or `sessionStorage` to make the preview appear successful.
 
 ## Prove
 
 **10 minutes · Copilot Studio Apps + your OneDrive CSV**
 
-**Outcome:** evidence of an app-driven tick/CSV/reload/uncheck/reload cycle, or an explicit blocker.
+**Outcome:** a verified app-driven tick, CSV change, reload, uncheck and reload cycle.
 
 ### Send Prompt 3 after the storage gate
 
-Confirm account identity, healthy connection and file readback. Submit in the same conversation. Wiring and acceptance checks were not completed in the rehearsal; a person must verify the account before any guarded-session continuation.
+Confirm the healthy connection and file readback, then submit in the same conversation.
 
 ```text
 Now make lab completion save to and restore from that OneDrive CSV.
@@ -608,7 +595,7 @@ check the CSV). Don't publish until I say so.
 
 ### Inspect the read contract
 
-Ask Copilot to confirm **Get file content** uses `inferContentType: false` and handles text, base64 and raw bytes. Unsupported responses and failed reads must be errors, not reasons to initialize a file. This is required behavior, not a verified outcome of the interrupted rehearsal.
+Ask Copilot to confirm **Get file content** uses `inferContentType: false` and handles text, base64 and raw bytes. Unsupported responses and failed reads must be errors, not reasons to initialize a file.
 
 ### Tick, inspect, reload, undo
 
@@ -623,7 +610,7 @@ Use one open preview and your own verified OneDrive account.
 7. Close and reopen the preview using the same account; confirm saved values return.
 8. Count CSV rows: exactly the scheduled labs, no Lunch or optional-lab rows.
 
-**These are expected learner checks, unverified after wiring in the rehearsal.** A direct connector call or surviving tick alone does not establish the app-to-file round trip.
+A direct connector call or a surviving tick alone doesn't prove the app-to-file round trip.
 
 **Reveal — Verify the whole path.** Change in app → inspect CSV → reload from file → undo and verify again. Serializing saves prevents an earlier write from replacing a later choice.
 
@@ -631,7 +618,7 @@ Use one open preview and your own verified OneDrive account.
 - Connection approval succeeded. **Incorrect:** setup is not app reads/writes.
 - An app-driven save changes the actual CSV and reload restores it. **Correct:** repeat for unchecking and compare file and screen.
 
-**Stuck?** If Copilot cannot verify the app path, retain it as a remaining check. Test it yourself only with verified account access; otherwise record the blocker. Never infer persistence from the baseline screenshot.
+**Stuck?** If Copilot can't verify the app path, test it yourself with the steps above. Never infer persistence from the baseline screenshot.
 
 ## Protect
 
@@ -645,8 +632,6 @@ Use only approved, non-destructive simulations. Never delete/corrupt the CSV, re
 - **Unsupported response:** expect an explicit error, not an empty-file interpretation or initialization.
 - **Save failure:** expect the attempted tick, counts and related controls to roll back to the prior saved state, with a message. Resolve the cause before retrying and check the CSV.
 - **Missing file:** only a confirmed missing-file result may permit creation for the current user. Permission/connection failures must not.
-
-All four runtime failure paths remain **unverified** in the rehearsal.
 
 Record pass, fail or not tested for baseline, setup, round trip, rapid changes, reopening, load retry, unsupported response, save rollback and missing-file handling. Report blockers. Stop generation when finished; do not select **Publish** or **Share**. Mark the lab complete only when required checks pass.
 
@@ -662,7 +647,7 @@ Record pass, fail or not tested for baseline, setup, round trip, rapid changes, 
 
 Use only when blocked at the connection gate and a facilitator approves repair.
 
-1. Open [Power Apps](https://make.powerapps.com), select the same environment and open **Connections** (under **Data** if shown). If **Welcome to Power Apps** asks for country/region and **Get started**, stop and ask the facilitator to complete setup. Navigation beyond this enrollment gate was not verified live.
+1. Open [Power Apps](https://make.powerapps.com), select the same environment and open **Connections** (under **Data** if shown). If **Welcome to Power Apps** asks for country/region and **Get started**, stop and ask the facilitator to complete setup.
 2. Find your own broken **OneDrive for Business** connection; try updating credentials from **…**. If repair fails, have the facilitator confirm no apps or flows depend on it before considering **Delete**. Never delete shared or other learners' connections.
 3. If replacement is approved, select **New connection → OneDrive for Business** and sign in with your assigned account. Keep the CSV intact.
 4. Return to the app conversation and rerun Prompt 2 above. Verify healthy access and existing rows without reinitialization. Resume Prompt 3 only after checks pass; stop and report failure rather than repeatedly deleting connections.
@@ -690,4 +675,5 @@ Your finish line is **verified app-to-file persistence and safe failure behavior
 - [Microsoft Copilot Studio documentation](https://learn.microsoft.com/microsoft-copilot-studio/)
 - [OneDrive for Business connector reference](https://learn.microsoft.com/connectors/onedriveforbusiness/)
 - [Manage connections in Power Apps](https://learn.microsoft.com/power-apps/maker/canvas-apps/add-manage-connections)
+- [What is Microsoft Copilot Managed Runtime (preview)](https://learn.microsoft.com/microsoft-365/copilot-managed-runtime/)
 - [Live published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/)

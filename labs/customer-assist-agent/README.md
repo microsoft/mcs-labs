@@ -67,7 +67,7 @@ Customer Assist Agents are in preview. The tested accessible name is **Customer 
 
 ### 2. Create a distinctively named agent
 
-Leave the description box empty. Under **Start from scratch**, select **Create agent**. In the naming dialog, enter the name below plus your short initials, for example `Zava Coffee Subscription Assistant RS`. Select **Create** and wait until provisioning finishes and fields become editable.
+Leave the description box empty. Under **Start from scratch**, select **Create agent**. In the naming dialog, enter the name below. Add your initials only if an agent with this name already exists in your environment. Select **Create** and wait until provisioning finishes and fields become editable.
 
 **Agent name**
 
@@ -91,7 +91,7 @@ Acts as a concierge for Zava customers, helping them enroll in new coffee subscr
 
 ### 5. Set the cross-channel instructions
 
-Select **Expand instructions**. On **General**, paste the instructions below. They name four specialists, but you will initially create only cancellation. Do not add a backend or knowledge source.
+Select **Expand instructions**. On **General**, paste the instructions below; if the expanded editor opens blank, paste into the inline instructions box instead. They name four specialists, but you will initially create only cancellation. Do not add a backend or knowledge source.
 
 **Primary agent · General instructions**
 
@@ -715,7 +715,7 @@ Keep an unpublished Zava Coffee assistant with its cancellation specialist, and 
 
 **Reflect:** Which customer task in your work deserves a specialist, and what evidence would you require before replacing its simulated result with a real action?
 
-**Cleanup:** End any voice conversation and verify **Start voice conversation** returns. Leave your agent unpublished. The verified source run left **Zava Coffee Subscription Assistant CC** with **Subscription Cancellation**, two skills and **Human handoff** still **Needs setup**; it added no triggers, publication or backend. Your own draft uses your initials. Follow the facilitator’s retention guidance rather than deleting another attendee’s agent. Credits were not measured; do not assume testing was free.
+**Cleanup:** End any voice conversation and verify **Start voice conversation** returns. Leave your agent unpublished; this lab adds no triggers, publication or backend. Follow the facilitator’s retention guidance before deleting anything. Testing can consume Copilot Credits.
 
 ## 📖 Product guidance
 

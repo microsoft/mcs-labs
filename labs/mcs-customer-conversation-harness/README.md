@@ -165,14 +165,14 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
 
     ![The Start from scratch option with the Create agent button](images/start-from-scratch.png)
 
-1. In the naming dialog, enter the name below plus your initials, for example `Zava Coffee Subscription Assistant RS`. Select **Create**, then wait for provisioning and editable fields.
+1. In the naming dialog, enter the name below. Select **Create**, then wait for provisioning and editable fields.
 
     ```text
     Zava Coffee Subscription Assistant
     ```
 
     > [!NOTE]
-    > Use a distinctive name so you can find your own agent in a shared environment. Keep your initials short.
+    > If an agent with this name already exists in your environment, add your initials to the end of the name. Agent names are limited to 42 characters.
 
 1. On **Build**, open the primary agent's card. Leave **Human handoff** → **Handoff method** → **Needs setup** unchanged; human handoff is outside this lab.
 
@@ -186,7 +186,7 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
     Acts as a concierge for Zava customers, helping them enroll in new coffee subscriptions, manage account and billing details, adjust delivery preferences, or cancel subscriptions by routing each request to the right specialist.
     ```
 
-1. Select **Expand instructions** to open the full editor. On the **General** tab, paste:
+1. Select **Expand instructions** to open the full editor. On the **General** tab, paste the following. If the expanded editor opens blank, paste into the inline instructions box instead.
 
     ```text
     ## Purpose

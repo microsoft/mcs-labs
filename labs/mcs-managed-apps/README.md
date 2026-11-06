@@ -1,6 +1,6 @@
-# Managed Apps
+# Apps on Microsoft Copilot Managed Runtime
 
-Build a managed app from the live published bootcamp lab schedule in Copilot Studio Apps. Use a screenshot as a visual reference, then connect a CSV file in your own OneDrive and verify that saved progress is restored.
+Build an app on Microsoft Copilot Managed Runtime (preview) from the live published bootcamp lab schedule, using **Apps** in Copilot Studio. Use a screenshot as a visual reference, then connect a CSV file in your own OneDrive and verify that saved progress is restored.
 
 ---
 
@@ -77,6 +77,7 @@ OneDrive and CSV are this exercise's implementation choices. The transferable le
 - [Microsoft Copilot Studio documentation](https://learn.microsoft.com/microsoft-copilot-studio/) - general product reference.
 - [OneDrive for Business connector reference](https://learn.microsoft.com/connectors/onedriveforbusiness/) - connector actions and connection requirements.
 - [Manage connections in Power Apps](https://learn.microsoft.com/power-apps/maker/canvas-apps/add-manage-connections) - creating and deleting connections.
+- [What is Microsoft Copilot Managed Runtime (preview)](https://learn.microsoft.com/microsoft-365/copilot-managed-runtime/) - where these apps run and how they're governed.
 - [Live published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) - source of truth for the app's schedule data.
 
 Use your facilitator's environment-specific guidance for feature access and connector availability.
@@ -101,7 +102,7 @@ Use your own account and OneDrive, not another learner's connection or file. No 
 
 ## 🎯 Summary of Targets
 
-By the end of a successful rehearsal, you will be able to:
+By the end of this lab, you will be able to:
 
 - Create an app whose schedule data comes from the live published agenda, using an image only as a visual reference.
 - Confirm that its labs and Lunch match the current published agenda rather than the screenshot's historical counts.
@@ -157,7 +158,7 @@ The image is a design reference, not the schedule source. Its app title, lab num
 With the screenshot attached, submit this prompt exactly as written:
 
 ```text
-Build a managed app called "My Bootcamp Lab App" using the
+Build an app called "My Bootcamp Lab App" using the
 attached screenshot as a visual reference.
 
 Reproduce its dark theme, square corners, day tabs, timeline,
@@ -254,7 +255,7 @@ The CSV rows must match the labs read from the live agenda, not a fixed count or
 
    If the folder is missing and a **Create folder?** prompt appears, confirm the name is **My Bootcamp Lab App** and the destination is `/Apps` in your own OneDrive, then select **Create**.
 
-   If `/Apps` itself is missing, Copilot may first request **Create folder?** with **Name** set to `Apps`. Confirm it is creating that parent folder in your own OneDrive, then approve creation of the app folder inside it.
+   If `/Apps` itself is missing, Copilot may first request **Create folder?** with **Name** set to `Apps`. Confirm it is creating that parent folder in your own OneDrive, then approve creation of the app folder inside it. If Copilot skips the folder and offers a single **Invoke connector operation** (CreateFile) card instead, select **Cancel** and ask it to create the folder first.
 
    <a href="assets/create-folder.png"><img src="assets/create-folder.png" alt="OneDrive Create folder prompt for the lab app folder with a Create button" width="370" class="align-center"></a>
 

@@ -90,7 +90,7 @@ These resources cover agents and Skills powered by the **Microsoft Copilot harne
 
 **Microsoft Learn: Microsoft Copilot harness and Skills**
 
-* [Microsoft Copilot harness overview](https://learn.microsoft.com/microsoft-copilot-studio/harnesses-overview#github-copilot-harness) (Learn still titles this section "GitHub Copilot harness")
+* [Microsoft Copilot harness overview](https://learn.microsoft.com/microsoft-copilot-studio/harnesses-overview#github-copilot-harness) (the harness was formerly named "GitHub Copilot harness", and Learn still titles this section that way)
 * [Skills overview for agents (GitHub Copilot)](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/skills-overview)
 * [Add and manage an uploaded skill (GitHub Copilot)](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/skills-add-existing)
 * [Manage and delete skills in an agent (GitHub Copilot)](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/skills-manage)
@@ -166,7 +166,7 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
     The agent designer opens on the **Build** tab with a new, unsaved **Draft** agent.
 
     > [!TIP]
-    > You can also start from **Agents**: open the menu next to **New agent** (**More create options**) and choose the **Agent** option for the Microsoft Copilot harness (labelled **Agent, GitHub Copilot** before the rename). A one-time **New name, same harness** bubble may appear there to confirm that the GitHub Copilot harness is now the Microsoft Copilot harness. Avoid the plain **New agent** button for this lab, because it may not create an agent on the Microsoft Copilot harness. The **Agents** list shows each agent's harness in the **Agent harness** column.
+    > You can also start from **Agents**: open the menu next to **New agent** (**More create options**) and choose the **Agent** option for the Microsoft Copilot harness (labelled **Agent, GitHub Copilot** before the rename). A one-time **New name, same harness** bubble may appear there to confirm that the harness formerly named GitHub Copilot is now the Microsoft Copilot harness. Avoid the plain **New agent** button for this lab, because it may not create an agent on the Microsoft Copilot harness. The **Agents** list shows each agent's harness in the **Agent harness** column.
 
 1. Select the name field at the top and replace **Untitled Agent** with:
 
@@ -451,7 +451,7 @@ Use a new agent for this extra-credit exercise, not your RFP agent. You will fir
 
 1. Select the agent's **Preview** tab. In a **new chat**, select **+** (**Upload images and files**) and attach only `project-intake-process-v2.docx` from the extracted materials. Do not attach the ZIP file.
 
-1. Copy the entire block below into the **Preview** chat, alongside the attachment, then select **Send**. **This is a chat prompt, not agent instructions.** Keep **Build > Instructions** empty while generating the package. The prompt keeps the harness's former name, **GitHub Copilot harness**, exactly as used in our successful test run; it refers to the current **Microsoft Copilot harness**.
+1. Copy the entire block below into the **Preview** chat, alongside the attachment, then select **Send**. **This is a chat prompt, not agent instructions.** Keep **Build > Instructions** empty while generating the package. The harness was formerly named **GitHub Copilot harness**, and the prompt keeps that name exactly as used in our successful test run; it refers to the current **Microsoft Copilot harness**.
 
 ```text
 Create a portable Agent Skill named project-intake-guide for a Copilot Studio agent powered by the GitHub Copilot harness.

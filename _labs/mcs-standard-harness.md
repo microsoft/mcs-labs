@@ -100,7 +100,7 @@ In the 30-minute core lab, you will configure a single agent and add topics, kno
 - Access to Microsoft Copilot Studio with permission to create agents
 - A Copilot Studio environment you can build in
 - Permission to create a connection to the MSN Weather connector (Use Case #4)
-- For the channels extra credit: permission to publish agents and to add apps in Microsoft Teams and Microsoft 365 Copilot
+- For the channels extra credit: permission to publish agents and to add apps in Microsoft Teams and Microsoft Copilot
 
 No prior Copilot Studio experience is required.
 
@@ -1064,17 +1064,17 @@ Learn how to publish your agent, add it to the Microsoft 365 and Microsoft Teams
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Deploy Your Agent To Channels | Make your agent accessible via Teams and Microsoft 365 Copilot  | 10 minutes |
+| Deploy Your Agent To Channels | Make your agent accessible via Teams and Microsoft Copilot  | 10 minutes |
 
 **Summary of tasks**
 
-In this section, you'll learn how to navigate the Channels page, publish your agent, deploy it to Microsoft Teams and Microsoft 365 Copilot, and understand channel availability.
+In this section, you'll learn how to navigate the Channels page, publish your agent, deploy it to Microsoft Teams and Microsoft Copilot, and understand channel availability.
 
-**Scenario:** Your Copilot Studio Assistant is ready for users. You need to make it available for your company's users for easy access in Microsoft Teams and Microsoft 365 Copilot where most employees spend their day. 
+**Scenario:** Your Copilot Studio Assistant is ready for users. You need to make it available for your company's users for easy access in Microsoft Teams and Microsoft Copilot where most employees spend their day. 
 
 ### Objective
 
-Deploy your agent to Teams and Microsoft 365 Copilot channels with proper configuration.
+Deploy your agent to Teams and Microsoft Copilot channels with proper configuration.
 
 ---
 
@@ -1098,7 +1098,7 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
     > [!TIP]
     > Choose channels based on where your users already work. Don't force users to adopt new tools - bring the agent to their existing environment.
 
-#### Deploy to Microsoft Teams and Microsoft 365 Copilot
+#### Deploy to Microsoft Teams and Microsoft Copilot
 
 1. Before users can reach your agent in a channel, you must publish it. Select **Publish** at the top right of the page.
 
@@ -1108,7 +1108,7 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 1. On the Channels page, select **Microsoft 365 and Microsoft Teams**.
 
-1. Review the panel. **Make agent available in Microsoft 365 Copilot** is selected under **Turn on Microsoft 365**, and the **Agent preview** section shows the name, icon and short description users will see.
+1. Review the panel. **Make agent available in Microsoft 365 Copilot** (the product was renamed Microsoft Copilot, but this option still uses the old name) is selected under **Turn on Microsoft 365**, and the **Agent preview** section shows the name, icon and short description users will see.
 
     ![The Microsoft 365 and Microsoft Teams channel panel](images/ec-teams-channel-panel.png)
 

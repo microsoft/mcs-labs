@@ -41,7 +41,7 @@ mission_lab:
     Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner mission.
   prerequisites:
     - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment."
-    - "Keep the lab beside Studio. Obtain your shared-account suffix in Mission 1, the Skill ZIP in Mission 2, and the LiftLine card URL in Mission 3."
+    - "Keep the lab beside Studio. You download the Skill ZIP in Mission 2 and confirm the LiftLine card URL in Mission 3."
     - "Use synthetic requests only. Delegation can share conversation context with the external service; task-minimization instructions do not guarantee isolation. Never reserve, book, send or approve."
   pacing: "Plan 30 minutes: Coordinate (6) → Ground (10) → Connect (7) → Prove (7). Challenge is optional, about 10 more minutes. These are working budgets, not measured completion times; provisioning and model waits vary. Read the next check while waiting rather than resending. If LiftLine doesn't answer, retain the verified partial result and do not mark the full team complete."
   missions:
@@ -57,10 +57,10 @@ mission_lab:
           instruction: |
             Open [Copilot Studio](https://copilotstudio.microsoft.com/) and confirm your assigned environment. If **Welcome from your admin** appears, review the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss **Find your environments here** with **Got it** if shown.
 
-            If you use a shared account, obtain your account suffix from the facilitator. Every test uses the fixed demo date **November 12, 2026** and timezone **America/New_York (UTC-05:00)**, already written into the prompts; never substitute "tomorrow" or the runtime clock.
+            Every test uses the fixed demo date **November 12, 2026** and timezone **America/New_York (UTC-05:00)**, already written into the prompts; never substitute "tomorrow" or the runtime clock.
 
-            Select **Home → Agent**, described as **Create an agent to take actions and answer questions**. This opens the **Microsoft Copilot harness → Build**. Name it **Zava Operations Assistant**. Use **Edit name** (pencil), type the name and press **Enter** to commit a rename. In a shared account use your suffix, for example `Zava Operations Assistant AI`.
-          notice: "Display names have a 30-character limit. Shorten the specialist to Zava Stock & Policy AI when using that suffix; keep the role names in all prompts unchanged. If only the Standard harness is available, stop and ask the facilitator."
+            Select **Home → Agent**, described as **Create an agent to take actions and answer questions**. This opens the **Microsoft Copilot harness → Build**. Name it **Zava Operations Assistant**. Use **Edit name** (pencil), type the name and press **Enter** to commit a rename.
+          notice: "Use the agent names exactly as written; display names have a 30-character limit. If only the Standard harness is available, stop and ask the facilitator."
         - title: "Remove unrelated default attachments"
           instruction: "Under **Tools**, select **Remove Work IQ → Remove** if present. Under **Knowledge**, select the **X** beside **Search all websites** if present; that removes it without the same confirmation dialog. Remove only attachments on your new agent, never underlying connections or tenant settings. Do not add a dataset, Skill, knowledge source or business-data tool to the coordinator."
         - title: "Set the coordinator's instructions"
@@ -126,7 +126,7 @@ mission_lab:
       outcome: "A published specialist supplies a grounded stock decision to the still-private coordinator."
       steps:
         - title: "Create a separate specialist"
-          instruction: "Return to **Home → Agent** in the same environment. Create a second **Microsoft Copilot harness** agent, not a child of the coordinator. Name it **Zava Stock & Policy Specialist**, or shorten it for a shared suffix, for example `Zava Stock & Policy AI` (maximum 30 characters). Commit **Edit name** with **Enter**. Remove default **Work IQ** under **Tools** using **Remove Work IQ → Remove**, and **Search all websites** under **Knowledge** using its **X**. Leave underlying connections untouched."
+          instruction: "Return to **Home → Agent** in the same environment. Create a second **Microsoft Copilot harness** agent, not a child of the coordinator. Name it **Zava Stock & Policy Specialist**. Commit **Edit name** with **Enter**. Remove default **Work IQ** under **Tools** using **Remove Work IQ → Remove**, and **Search all websites** under **Knowledge** using its **X**. Leave underlying connections untouched."
         - title: "Point the specialist at its Skill"
           instruction: "Paste this block into the specialist's **Build → Instructions**. Keep the stock dataset out of the base instructions."
           prompt_label: Specialist · Instructions
@@ -141,10 +141,10 @@ mission_lab:
             title: the specialist and its uploaded Skill
             src: /labs/agent-integration-team/images/specialist-build.webp
             src_dark: /labs/agent-integration-team/images/specialist-build-dark.webp
-            alt: "Zava Stock and Policy AI instructions point to zava-stock-policy, which appears under Skills; Tools and Knowledge are empty."
+            alt: "Zava Stock and Policy Specialist instructions point to zava-stock-policy, which appears under Skills; Tools and Knowledge are empty."
             width: 1320
             height: 540
-            caption: "The specialist owns the dataset through its Skill. The example uses a shortened shared-account name; available models can differ."
+            caption: "The specialist owns the dataset through its Skill. Available models can differ."
         - title: "Test the specialist directly"
           instruction: "Select the specialist's **Preview → New chat** and send the following prompt."
           prompt_label: Specialist · Preview · new chat
@@ -164,7 +164,7 @@ mission_lab:
 
             In **Preview**, expand the response's activity details and inspect **Used skill: zava-stock-policy**. Check the calculation and fixture ID, not just a fluent answer. The supplied live run observed that Skill event, but did not inspect a separate reference-file-read trace. No carrier quote should be invented.
         - title: "Publish only the specialist"
-          instruction: "Save the specialist, select **Publish**, then **Publish → Done** in the **Publish agent** dialog. A no-triggers warning does not prevent publication; do not add a trigger to connect it. You must own it or have it shared with you. Intended users need separate access to the specialist; access to the coordinator does not grant that. Do not broaden permissions just for the test. The coordinator can remain private."
+          instruction: "Save the specialist and select **Publish**. The panel can note that the agent has no channel; that does not prevent publication. Select **Publish agent**, then **Done** when it confirms **Your agent is published**. Do not add a channel or trigger to connect it. You must own it or have it shared with you. Intended users need separate access to the specialist; access to the coordinator does not grant that. Do not broaden permissions just for the test. The coordinator can remain private."
         - title: "Describe when the coordinator should delegate"
           instruction: "Reopen your **Zava Operations Assistant → Build** and **Save** pending edits before opening **Connected agents**. Search for your own published specialist's display name, select it, and enter this connection description. Then select **Connect** and confirm it appears in the components panel. The connection saves automatically; **Save** can remain disabled."
           prompt_label: Connected specialist · Description
@@ -194,7 +194,7 @@ mission_lab:
             title: the actual stock-specialist invocation
             src: /labs/agent-integration-team/images/specialist-trace.webp
             src_dark: /labs/agent-integration-team/images/specialist-trace-dark.webp
-            alt: "Expanded Used tool entry for Zava Stock and Policy AI shows the delegated stock-check task."
+            alt: "Expanded Used tool entry for Zava Stock and Policy Specialist shows the delegated stock-check task."
             width: 805
             height: 440
             caption: "This crop proves an internal specialist invocation and shows its task, not the returned response or any LiftLine call. Expand and read the response before passing."
@@ -522,7 +522,7 @@ All facts are fictional. There is no ERP, live inventory, carrier booking tool o
 
 Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner mission.
 
-**Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. Keep the lab beside Studio. Obtain your shared-account suffix in Mission 1, the Skill ZIP in Mission 2 and the confirmed card URL in Mission 3.
+**Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. Keep the lab beside Studio. You download the Skill ZIP in Mission 2 and confirm the card URL in Mission 3.
 
 Use synthetic requests only. Delegation can share conversation context with the external service; task-minimization instructions do not guarantee isolation. Never reserve, book, send or approve.
 
@@ -537,9 +537,9 @@ Create the customer-facing agent without specialist data. **Outcome:** an adviso
 ### Create your own coordinator
 
 1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and confirm your assigned environment. If **Welcome from your admin** appears, review the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss **Find your environments here** with **Got it** if shown.
-2. If you use a shared account, obtain your account suffix from the facilitator. Every test uses the fixed demo date **November 12, 2026** and timezone **America/New_York (UTC-05:00)**, already written into the prompts; never substitute "tomorrow" or the runtime clock.
+2. Every test uses the fixed demo date **November 12, 2026** and timezone **America/New_York (UTC-05:00)**, already written into the prompts; never substitute "tomorrow" or the runtime clock.
 3. Select **Home → Agent**, described as **Create an agent to take actions and answer questions**. This opens the **Microsoft Copilot harness → Build**. Name it **Zava Operations Assistant**. To rename, select **Edit name** (pencil), type the name and press **Enter**.
-4. In a shared account use your suffix, for example `Zava Operations Assistant AI`. Display names have a **30-character limit**; shorten the specialist to `Zava Stock & Policy AI` when using that suffix. Keep the role names in all prompts unchanged. If only the Standard harness is available, stop and ask the facilitator.
+4. Use the agent names exactly as written; display names have a **30-character limit**. If only the Standard harness is available, stop and ask the facilitator.
 5. Under **Tools**, select **Remove Work IQ → Remove** if present. Under **Knowledge**, select the **X** beside **Search all websites** if present; that removes it without the same confirmation dialog. Remove only attachments on your new agent, never underlying connections or tenant settings.
 6. Paste the following into **Instructions**, not Preview. Do not add a dataset, Skill, knowledge source or business-data tool to this coordinator.
 
@@ -609,7 +609,7 @@ Give stock and policy one owner, verify its calculation, then reuse it through d
 ### Create and test the independent specialist
 
 1. Return to **Home → Agent** in the same environment. Create a second **Microsoft Copilot harness** agent, not a child of the coordinator.
-2. Name it **Zava Stock & Policy Specialist**, or shorten it for a shared suffix, for example `Zava Stock & Policy AI` (maximum 30 characters). Commit **Edit name** with **Enter**.
+2. Name it **Zava Stock & Policy Specialist**. Commit **Edit name** with **Enter**.
 3. Remove default **Work IQ** under **Tools** using **Remove Work IQ → Remove**, and **Search all websites** under **Knowledge** using its **X**. Leave underlying connections untouched.
 4. Paste this block into the specialist's **Build → Instructions**. Keep the stock dataset out of the base instructions.
 
@@ -626,9 +626,9 @@ Never reserve stock, book, grant approval, or change the synthetic snapshot.
 6. Select **Build → Add skill** (the **+** beside **Skills**) → **Upload a skill**, then upload the ZIP in the `.md`/`.zip` dialog. Confirm `zava-stock-policy` appears. It contains `SKILL.md` and `references/demo-data.md`; uploading only the Markdown playbook loses the dataset.
 7. Select **Save** and wait before opening **Preview**; use **Save and continue** if prompted.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/specialist-build-dark.webp"><img src="images/specialist-build.webp" alt="Zava Stock and Policy AI instructions point to zava-stock-policy, which appears under Skills; Tools and Knowledge are empty."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/specialist-build-dark.webp"><img src="images/specialist-build.webp" alt="Zava Stock and Policy Specialist instructions point to zava-stock-policy, which appears under Skills; Tools and Knowledge are empty."></picture>
 
-*The specialist owns the dataset through its Skill. The example uses a shortened shared-account name; available models can differ.*
+*The specialist owns the dataset through its Skill. Available models can differ.*
 
 Select the specialist's **Preview → New chat**.
 
@@ -652,7 +652,7 @@ Source: ZAVA-DEMO-v1. Advisory only; no stock has been reserved.
 
 ### Publish and connect the specialist
 
-1. Save the specialist, select **Publish**, then **Publish → Done** in the **Publish agent** dialog. A no-triggers warning does not prevent publication; do not add a trigger to connect it.
+1. Save the specialist and select **Publish**. The panel can note that the agent has no channel; that does not prevent publication. Select **Publish agent**, then **Done** when it confirms **Your agent is published**. Do not add a channel or trigger to connect it.
 2. Confirm you own it or have it shared with you. Intended users need separate access to the specialist; access to the coordinator does not grant that. Do not broaden permissions just for the test. The coordinator can remain private.
 3. Reopen your **Zava Operations Assistant → Build** and **Save** pending edits before opening **Connected agents**.
 4. Search for your own published specialist's display name, select it, and enter this description.
@@ -689,7 +689,7 @@ Nothing has been reserved, booked, or approved.
 
 Enable **Debug mode**, expand **Used tool** for your specialist's actual display name, and read the delegated task and returned `agent_response`. The verified live call returned `is_error: false`; also verify that its business facts match the recommendation. Debug labels can vary. A connection-list entry or an agent's claim that it consulted a specialist is not sufficient.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/specialist-trace-dark.webp"><img src="images/specialist-trace.webp" alt="Expanded Used tool entry for Zava Stock and Policy AI shows the delegated stock-check task."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/specialist-trace-dark.webp"><img src="images/specialist-trace.webp" alt="Expanded Used tool entry for Zava Stock and Policy Specialist shows the delegated stock-check task."></picture>
 
 *This crop proves an internal specialist invocation and shows its task, not the returned response or any LiftLine call. Expand and read the response before passing.*
 

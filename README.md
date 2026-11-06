@@ -75,10 +75,10 @@ The Zava Sales lab opts into the guided mission format; other labs keep their cl
 Its four core missions have a 30-minute working budget; two optional extensions cover the Friday feedback loop and Zava Sales plugin. Model and connector latency varies by run.
 See each lab's pacing or placeholder note, and the [dependency notes](./_data/agendas/README.md#bootcamp-latest).
 
-The separate [missions edition](./_events/bootcamp-latest-missions.md) is an
+The separate [missions edition](./_events/architecture-bootcamp.md) is an
 unlisted review curriculum: ten net-new guided labs plus the existing Zava Sales
 lab, with the same module schedule and lab slots. The advertised event continues
-to use the classic versions. See its [agenda](./_data/agendas/bootcamp-latest-missions.yml)
+to use the classic versions. See its [agenda](./_data/agendas/architecture-bootcamp.yml)
 for the complete lab mapping. Unlisted pages are public by direct URL, not access-controlled.
 Both editions distinguish proctor-led events with pre-provisioned user accounts
 (skip tenant setup) from self-paced setup. Lab-specific blockers and optional,

@@ -68,7 +68,7 @@ mission_lab:
             height: 550
             caption: Choose Customer conversation agent. The Standard and Microsoft Copilot options are different harnesses.
         - title: Create a distinctively named agent
-          instruction: 'Leave the description box empty. Under **Start from scratch**, select **Create agent**. In the naming dialog, enter the name below plus your short initials, for example `Zava Coffee Subscription Assistant RS`. Select **Create** and wait until provisioning finishes and fields become editable.'
+          instruction: 'Leave the description box empty. Under **Start from scratch**, select **Create agent**. In the naming dialog, enter the name below. Add your initials only if an agent with this name already exists in your environment. Select **Create** and wait until provisioning finishes and fields become editable.'
           prompt_label: Agent name
           prompt: Zava Coffee Subscription Assistant
         - title: Open the primary agent
@@ -78,7 +78,7 @@ mission_lab:
           prompt_label: Primary agent · Description
           prompt: 'Acts as a concierge for Zava customers, helping them enroll in new coffee subscriptions, manage account and billing details, adjust delivery preferences, or cancel subscriptions by routing each request to the right specialist.'
         - title: Set the cross-channel instructions
-          instruction: 'Select **Expand instructions**. On **General**, paste the instructions below. They name four specialists, but you will initially create only cancellation. Do not add a backend or knowledge source.'
+          instruction: 'Select **Expand instructions**. On **General**, paste the instructions below; if the expanded editor opens blank, paste into the inline instructions box instead. They name four specialists, but you will initially create only cancellation. Do not add a backend or knowledge source.'
           prompt_label: Primary agent · General instructions
           prompt: |-
             ## Purpose
@@ -519,7 +519,7 @@ mission_lab:
       - label: Keep the safety boundary
         text: 'Demo Mode is simulation. A code is not proof of a backend change, and no real payment details belong here.'
     reflection: 'Which customer task in your work deserves a specialist, and what evidence would you require before replacing its simulated result with a real action?'
-    cleanup: 'End any voice conversation and verify **Start voice conversation** returns. Leave your agent unpublished. The verified source run left **Zava Coffee Subscription Assistant CC** with **Subscription Cancellation**, two skills and **Human handoff** still **Needs setup**; it added no triggers, publication or backend. Your own draft uses your initials. Follow the facilitator’s retention guidance rather than deleting another attendee’s agent. Credits were not measured; do not assume testing was free.'
+    cleanup: 'End any voice conversation and verify **Start voice conversation** returns. Leave your agent unpublished; this lab adds no triggers, publication or backend. Follow the facilitator’s retention guidance before deleting anything. Testing can consume Copilot Credits.'
   sources:
     - title: Create an agent with the Customer Conversation harness
       url: 'https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/build-new-agent-customer-conversation'
@@ -603,7 +603,7 @@ Customer Assist Agents are in preview. The tested accessible name is **Customer 
 
 ### 2. Create a distinctively named agent
 
-Leave the description box empty. Under **Start from scratch**, select **Create agent**. In the naming dialog, enter the name below plus your short initials, for example `Zava Coffee Subscription Assistant RS`. Select **Create** and wait until provisioning finishes and fields become editable.
+Leave the description box empty. Under **Start from scratch**, select **Create agent**. In the naming dialog, enter the name below. Add your initials only if an agent with this name already exists in your environment. Select **Create** and wait until provisioning finishes and fields become editable.
 
 **Agent name**
 
@@ -627,7 +627,7 @@ Acts as a concierge for Zava customers, helping them enroll in new coffee subscr
 
 ### 5. Set the cross-channel instructions
 
-Select **Expand instructions**. On **General**, paste the instructions below. They name four specialists, but you will initially create only cancellation. Do not add a backend or knowledge source.
+Select **Expand instructions**. On **General**, paste the instructions below; if the expanded editor opens blank, paste into the inline instructions box instead. They name four specialists, but you will initially create only cancellation. Do not add a backend or knowledge source.
 
 **Primary agent · General instructions**
 
@@ -1251,7 +1251,7 @@ Keep an unpublished Zava Coffee assistant with its cancellation specialist, and 
 
 **Reflect:** Which customer task in your work deserves a specialist, and what evidence would you require before replacing its simulated result with a real action?
 
-**Cleanup:** End any voice conversation and verify **Start voice conversation** returns. Leave your agent unpublished. The verified source run left **Zava Coffee Subscription Assistant CC** with **Subscription Cancellation**, two skills and **Human handoff** still **Needs setup**; it added no triggers, publication or backend. Your own draft uses your initials. Follow the facilitator’s retention guidance rather than deleting another attendee’s agent. Credits were not measured; do not assume testing was free.
+**Cleanup:** End any voice conversation and verify **Start voice conversation** returns. Leave your agent unpublished; this lab adds no triggers, publication or backend. Follow the facilitator’s retention guidance before deleting anything. Testing can consume Copilot Credits.
 
 ## Product guidance
 

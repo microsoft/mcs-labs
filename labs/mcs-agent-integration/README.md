@@ -141,9 +141,7 @@ Complete each build, quick test, and closure before starting the next use case. 
 
 1. Open [Copilot Studio](https://copilotstudio.microsoft.com/), sign in with your lab account, and confirm your assigned environment. If **Welcome from your admin** appears, review the terms and select **I have read and agree to the Terms of use**, then **Close**. Dismiss **Find your environments here** with **Got it** if shown.
 1. On **Home**, select the **Agent** card, described as **Create an agent to take actions and answer questions**. This creates a **Microsoft Copilot harness** agent and opens **Build**. If your tenant only offers the classic/standard experience, stop rather than substituting it.
-1. Name the agent **Zava Operations Assistant**. To change a saved name, select the pencil (**Edit name**), type the name, and press **Enter** to commit it. In a shared account, use your assigned suffix, for example `Zava Operations Assistant AI`, and select only your own agents throughout the lab.
-
-   Agent display names have a **30-character limit**. Shorten the base name when needed to retain your suffix; the specialist example below uses `Zava Stock & Policy AI`. Keep the role names in all instructional prompts unchanged.
+1. Name the agent **Zava Operations Assistant**. To change a saved name, select the pencil (**Edit name**), type the name, and press **Enter** to commit it.
 
    ![Zava Operations Assistant on the Build tab, with the instructions editor and components panel showing Skills, Tools, Knowledge, and Connected agents](images/zava-operations-assistant-build.png)
 
@@ -172,7 +170,7 @@ Complete each build, quick test, and closure before starting the next use case. 
 
    ![Coordinator instructions with empty Tools, Knowledge and Connected agents sections](images/coordinator-build.webp)
 
-   *The coordinator has advisory-only instructions and no specialist connections yet. The example uses the shared-account suffix AI; available models can differ.*
+   *The coordinator has advisory-only instructions and no specialist connections yet. Available models can differ.*
 
 ### Quick test: verify Zava Operations Assistant
 
@@ -214,7 +212,7 @@ You have created a coordinator that knows what it needs to find out, rather than
 
 ### Build and verify Zava Stock & Policy Specialist
 
-1. Return to **Home → Agent** to create a **second, independent agent**, using the **Microsoft Copilot harness** in the same environment. Name it **Zava Stock & Policy Specialist** for an individual account. In a shared account, shorten it to retain your suffix within 30 characters, for example `Zava Stock & Policy AI`; simply appending ` AI` to the full name is too long. Use **Edit name**, then **Enter** to commit a rename. Do not create a child agent inside **Zava Operations Assistant**.
+1. Return to **Home → Agent** to create a **second, independent agent**, using the **Microsoft Copilot harness** in the same environment. Name it **Zava Stock & Policy Specialist**. Use **Edit name**, then **Enter** to commit a rename. Do not create a child agent inside **Zava Operations Assistant**.
 1. Remove **Work IQ** from this agent's **Tools** with **Remove Work IQ → Remove**, if present. Remove **Search all websites** using its **X** under **Knowledge**, if present. Keep the synthetic dataset in its Skill; do not add business-data tools or knowledge sources, or delete underlying connections.
 1. On **Build**, add these base instructions:
 
@@ -254,14 +252,14 @@ You have created a coordinator that knows what it needs to find out, rather than
 
    ![Specialist response shows depot eligibility, branch exclusion, 1200 kg product weight and source ZAVA-DEMO-v1](images/specialist-result.webp)
 
-   *The specialist returns the expected stock calculation and leaves quote-based approval unevaluated. This capture precedes the shared-account display-name shortening.*
+   *The specialist returns the expected stock calculation and leaves quote-based approval unevaluated.*
 
 1. In **Preview**, expand the response's activity details. Look for **Used skill: zava-stock-policy**. This confirms Skill invocation; a separate reference-file read event might not be exposed. Check the returned fixture ID and calculations too, but do not claim a file-read trace was shown if it was not. If the Skill is not invoked or reports missing data, check its instructions, re-upload the whole ZIP if needed, and retest.
 
 ### Publish Zava Stock & Policy Specialist and connect it to Zava Operations Assistant
 
-1. Save your specialist, then select **Publish**. The **Publish agent** dialog can warn that there are no triggers; publication is still allowed. Select **Publish**, then **Done**. Do not add a trigger just to connect the specialist. You must own it or have it shared with you; other intended users need their own access. Publishing Zava Operations Assistant does not grant access to the specialist. Do not broaden permissions just for this test.
-1. Reopen your **Zava Operations Assistant → Build** and save any pending changes **before** selecting **Connected agents**. In the picker, search for your specialist's display name, for example `Zava Stock & Policy AI`, select it, and use this connection description. If it is missing, check its published version, availability-to-connect, and sharing settings with the instructor.
+1. Save your specialist, then select **Publish**. The panel can note that the agent has no channel yet; publication is still allowed. Select **Publish agent**, then **Done** when it confirms **Your agent is published**. Do not add a channel or trigger just to connect the specialist. You must own it or have it shared with you; other intended users need their own access. Publishing Zava Operations Assistant does not grant access to the specialist. Do not broaden permissions just for this test.
+1. Reopen your **Zava Operations Assistant → Build** and save any pending changes **before** selecting **Connected agents**. In the picker, search for **Zava Stock & Policy Specialist**, select it, and use this connection description. If it is missing, check its published version, availability-to-connect, and sharing settings with the instructor.
 
    ```text
    Evaluate Zava demo repair-mortar stock, protected minimums, product weight, and delivery-charge approval using its bundled Skill. Use before dispatch to find an eligible origin, and after dispatch to evaluate the quoted charge. Does not provide carrier availability, transport prices, or bookings.
@@ -297,9 +295,9 @@ Nothing has been reserved, booked, or approved.
 
 **Pass:** Zava Operations Assistant delegates to Zava Stock & Policy Specialist and recommends the depot: releasing 60 bags leaves 80, above its floor of 50. It excludes the local branch, which would retain only 30 against its floor of 40, and reports `ZAVA-DEMO-v1`. Delivery and final quote-based approval remain unverified because LiftLine Dispatch Advisor is not connected. Confirm the specialist invocation in the available trace; its appearance in the connection list alone is not enough.
 
-With **Debug mode** enabled, expand the **Used tool** entry for your specialist's display name, for example **Used tool: Zava Stock & Policy AI**. Inspect the delegated task and returned `agent_response`: the observed successful call included `is_error: false`. Verify that the returned stock facts match the recommendation. Debug labels and response wrapping can vary by tenant; record the actual invocation and result, not just the agent's claim that it consulted a specialist.
+With **Debug mode** enabled, expand the **Used tool** entry for **Zava Stock & Policy Specialist**. Inspect the delegated task and returned `agent_response`: the observed successful call included `is_error: false`. Verify that the returned stock facts match the recommendation. Debug labels and response wrapping can vary by tenant; record the actual invocation and result, not just the agent's claim that it consulted a specialist.
 
-![Expanded Used tool entry identifies Zava Stock and Policy AI and shows the delegated stock-check task](images/specialist-trace.webp)
+![Expanded Used tool entry identifies Zava Stock and Policy Specialist and shows the delegated stock-check task](images/specialist-trace.webp)
 
 *The coordinator actually invokes the specialist. This crop shows the delegated task; expand and read the returned response as well before marking the test passed.*
 
@@ -533,9 +531,9 @@ You have connected expertise across the company boundary: LiftLine determined de
 | Skill appears but data cannot be read | Re-upload the whole ZIP with `SKILL.md` and its reference. Report unavailable data until it loads. |
 | Main agent invents facts or skips a specialist | Check connection descriptions, base instructions, and trace evidence; restart the test. Do not paste the datasets into the main agent as a workaround. |
 | Agent uses Microsoft 365 or web search | Remove Work IQ from **Tools** using **Remove Work IQ → Remove**; remove Search all websites with its **X** under **Knowledge**. Change only your own new agents, not shared connections. |
-| A suffixed agent name is rejected | Display names have a 30-character limit. Use a shorter base, such as `Zava Stock & Policy AI`; commit **Edit name** with **Enter**, then **Save**. Keep prompt role names unchanged. |
+| An agent name is rejected | Display names have a 30-character limit. Type the lab's name exactly, commit **Edit name** with **Enter**, then **Save**. |
 | Preview or Connected agents opens before the agent is ready | Finish **Save** first and wait for provisioning to return to **Build**. Choose **Save and continue** when prompted rather than discarding changes. |
-| Publishing warns that there are no triggers | The specialist can publish without a trigger: select **Publish**, then **Done**. Do not add a trigger for connected-agent delegation. |
+| Publishing notes that the agent has no channel | The specialist can publish without a channel or trigger: select **Publish agent**, then **Done**. Do not add one for connected-agent delegation. |
 | Only the first line of the prompt was sent | Paste the complete prompt as one paragraph, verify it in the composer, and retry in a fresh conversation. |
 | Agent substitutes "tomorrow" or a countdown for the supplied date | Check the explicit-date instruction, save, and restart the test. Use the supplied calendar date/timezone, not the runtime clock. |
 | Wizard says "No agent card found. Enter a name and description." | Expected in this lab: the card fetch from Copilot Studio is likely blocked by the service's CORS policy. Enter the name `LiftLine_Dispatch_Advisor` and the description from Use Case #3 manually, then continue. |

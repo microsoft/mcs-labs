@@ -68,7 +68,7 @@ By the end, you will be able to:
 
 **Running this lab in your own tenant?** Set this up first:
 
-- A Microsoft 365 account with Microsoft 365 Copilot that can create agents in Agent Builder and add skills to them. To check, open [Microsoft Copilot](https://m365.cloud.microsoft), select **Agents & Skills > New agent**, and look for a **Skills** section on the **Configure** tab.
+- A Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills to them. To check, open [Microsoft Copilot](https://m365.cloud.microsoft), select **Agents & Skills > New agent**, and look for a **Skills** section on the **Configure** tab.
 - For the optional pro-code exercise:
   - Visual Studio Code and a Microsoft 365 Agents Toolkit release that supports declarative agent skills.
   - A SharePoint or OneDrive location you can use for the hotel PDF.

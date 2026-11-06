@@ -28,11 +28,11 @@ mission_lab:
   scenario: |
     Your order desk receives unrelated promotions, customer questions, supplier delays, and quote requests. A workflow classifies the message; a grounded draft and human decision protect the customer-facing reply.
 
-    **Verified boundary:** the 6 November 2026 training run tested the original quote sample in **Run node**, archived the exact Other sample, and completed the exact Customer Inquiry sample through **Yes → Submit** to a received holding reply. The original starter was untouched and the copy was disabled after reload. The rejection branch, inventory MCP, and specialist quote delivery were not exercised. The **To Do Time Block** starter was absent, so time-blocking remains a conditional extension, not core completion.
+    **Verified boundary:** the 6 November 2026 training run tested the original quote sample in **Run node**, archived the exact Other sample, and completed the exact Customer Inquiry sample through **Yes → Submit** to a received holding reply. The original starter was untouched and the copy was disabled after reload. The rejection branch, inventory MCP, and specialist quote delivery were not exercised.
 
     **Proctor-led event with a pre-provisioned provided user account? Skip tenant, licence, and environment setup.** Use the provided account and environment; your proctor prepares the connections and assets. Start with Mission 1 and ask the proctor if an asset is missing. Do not import replacements or edit another attendee's workflow.
 
-    **Self-paced setup:** use a development/training environment with Copilot Studio **Workflows**, available Copilot Credits, Outlook, and Microsoft 365 Copilot access. Arrange the Order Management starter and connections before starting the timer. In Mission 1, use the linked solution only if it is not already provisioned. Optional extensions need their additional assets; none is a prerequisite for the core.
+    **Self-paced setup:** use a development/training environment with Copilot Studio **Workflows**, available Copilot Credits, Outlook, and Microsoft Copilot access. Arrange the Order Management starter and connections before starting the timer. In Mission 1, use the linked solution only if it is not already provisioned. Optional extensions need their additional assets; none is a prerequisite for the core.
 
     This is the **Microsoft Copilot harness** workflow experience. **Standard harness** remains a separate experience; it has not been renamed. Only the former GitHub Copilot harness name changed. Keep supplied working instructions unchanged.
   prerequisites:
@@ -56,14 +56,14 @@ mission_lab:
             With a provided event account, ask the proctor if the starter is missing. For self-paced setup only, import [LAB: Order Management Workflows](../mcs-workflows/assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip) and sign in to the requested connections before continuing. This includes the starter and Price Quote Agent, not the optional SharePoint pricing data.
         - title: "Create a copy from the designer header"
           instruction: |
-            Select the designer header's **More options → Create a copy**. Use a unique name, such as **Order Management WF**, with your assigned suffix if needed. Select **Open workflow**; it opens a **new browser tab**. Continue only in that copy.
+            Select the designer header's **More options → Create a copy**. Keep the default **Title**, **Order Management Workflow - Copy**, and select **Create**; if a confirmation offers **Open workflow**, select it. The copy opens in a **new browser tab**. Continue only in that copy.
 
             Do not use the list row's **More actions** menu, which may offer only **Delete**. Leave the original unchanged.
         - title: "Resolve connections without replacing healthy ones"
           instruction: |
             Open **When a new email arrives**, **Copilot**, and **Human review** and wait for each lab-account connection to resolve. Reuse healthy connections.
 
-            Only if Human review lacks a connection, select **Create new connection**, give it a recognizable display name such as **WF Human review**, leave **Authentication Type: Default**, and select **Create**. This connection is marked **Premium**. Complete any sign-in with your training account, not another identity.
+            Only if Human review lacks a connection, select **Create new connection**, give it a recognizable display name such as **Human review**, leave **Authentication Type: Default**, and select **Create**. This connection is marked **Premium**. Complete any sign-in with your training account, not another identity.
         - title: "Restrict the trigger to your own messages"
           instruction: |
             In **When a new email arrives**, retain the **Subject filter** token displayed as **string**. Hover to inspect `string('Order Management')`; do not replace it or assume an expression-mode switch.
@@ -271,23 +271,31 @@ mission_lab:
             feedback: "Verify the actual run states; do not infer them from the trigger switch."
     - id: time-block
       verb: Time-block
-      title: "Schedule a task only when the starter is provided"
+      title: "Time-block a new task with an inline agent"
       minutes: 15
       optional: true
       tool: Microsoft To Do · Inline Agent · Outlook Calendar
-      brief: "Conditional reference extension: use the prepared To Do Time Block workflow, never another attendee's asset."
-      outcome: "If provisioned, one verified personal calendar block and enriched task; otherwise record the extension as blocked."
+      brief: "Optional extension: create your own To Do Time Block workflow that watches your default Tasks list."
+      outcome: "One verified personal calendar block and enriched task, with the workflow disabled afterwards."
       steps:
-        - title: "Gate the extension on the supplied starter"
+        - title: "Open To Do and create the workflow"
           instruction: |
-            **Not live-validated:** the To Do Time Block starter was absent in the reviewed training run. Ask the proctor to provide your assigned starter with its Microsoft To Do trigger. For self-paced work, arrange that starter and Microsoft To Do access before attempting this extension. If absent, skip; do not mark it complete.
+            In [Microsoft To Do](https://to-do.office.com/), sign in with the same training account. The workflow watches your default **Tasks** list, so no new list is needed.
 
-            In [Microsoft To Do](https://to-do.office.com/), sign in with the same training account. Select **New list**, name it **Time Block**, and press **Enter**.
-        - title: "Configure the owned trigger and add an inline agent"
+            In Copilot Studio, select **Workflows → New workflow**. It opens as **Untitled workflow** in **Draft**. Rename it **To Do Time Block**: select the name in the designer header (*Click to rename*), type it, and press **Enter**.
+        - title: "Switch to a To Do trigger and add an inline agent"
           instruction: |
-            Open your assigned **To Do Time Block → Build**. Select **When a new to-do in a specific folder is created**. Reuse the healthy own-account connection; create one only if absent. In **To-do list**, use **Select from list → Time Block**. If initially empty, type the name and select/commit the match, then verify the setup warning disappears.
+            Select the **Start** node and switch **Trigger type** from **Manual** to **Connector**. Select **Select trigger...**, search `to-do`, and under **Microsoft To-Do (Business)** select **When a new to-do in a specific folder is created**. In **Connection**, select **Create new connection → Create** and sign in with your training account. In **To-do list**, select **Tasks**; the **Needs setup** badge clears.
 
-            Delete the unused **Scope** node only in your assigned workflow. Select **+ → Agent**, reuse the connected training identity, and retain **New agent for this workflow**.
+            Select **+ → Agent**, reuse the connected training identity, and retain **New agent for this workflow**.
+          screenshot:
+            title: the To Do trigger on your Tasks list
+            src: /labs/workflows-autonomous/images/uc1-trigger-tasks-list.webp
+            src_dark: /labs/workflows-autonomous/images/uc1-trigger-tasks-list-dark.webp
+            alt: "Trigger When a new to-do in a specific folder is created under Microsoft To-Do (Business), with To-do list set to Tasks."
+            width: 1240
+            height: 355
+            caption: "Pick the Business trigger; the Consumer one targets personal Microsoft accounts."
         - title: "Start the goal in Instructions"
           instruction: "Paste this first fragment into the inline agent's **Instructions**. Add a space, type **/**, and insert the trigger's **Title** dynamic token before the next fragment. An **Apply to each** loop can appear when this array-item token is inserted."
           prompt_label: Inline Agent · Instructions · Before Title token
@@ -298,35 +306,51 @@ mission_lab:
           prompt_label: Inline Agent · Instructions · After Title token
           prompt: |-
             on my calendar in the next couple of business days and block that time on my calendar to work on this task. Then update the to-do with a due date a week out from the time block we created. Add appropriate notes and suggestions in the notes on key things I might want to consider. Also set a reminder 2 days before the due date. Make sure that the format of the Calendar notes and To-Do are formatted properly for the user to be able to read them well. Only schedule the time block within my normal working hours of 8:00 AM to 5:00 PM.
+          screenshot:
+            title: the inline agent's instructions
+            src: /labs/workflows-autonomous/images/uc1-agent-instructions.webp
+            src_dark: /labs/workflows-autonomous/images/uc1-agent-instructions-dark.webp
+            alt: "Inline agent Instructions with the trigger Title token between the two fragments."
+            width: 1240
+            height: 465
+            caption: "The Title chip can display its expression instead of the word Title."
         - title: "Grant the specific tools and publish deliberately"
           instruction: |
             In **Tools → +**, add **Find meeting times** and **Create event** from **Office 365 Outlook**, plus **Update to-do** from **Microsoft To-Do (Business)**. Check connector names; similarly named Eventbrite actions are not calendar tools. Reuse healthy own-account connections. Enable **Web search**.
 
             Confirm calendar writes target only your own calendar, without attendees. **Save → Publish** and verify **Enabled** before adding the task. This test can create a real personal calendar event and consume credits.
+          screenshot:
+            title: the published To Do Time Block workflow
+            src: /labs/workflows-autonomous/images/uc1-workflow-published.webp
+            src_dark: /labs/workflows-autonomous/images/uc1-workflow-published-dark.webp
+            alt: "Published To Do Time Block workflow with Trigger, Apply to each and Agent nodes."
+            width: 1536
+            height: 820
+            caption: "Apply to each appears automatically when the Title token is inserted."
         - title: "Create the original sample task"
-          instruction: "In your **Time Block** list, add this task title. It requests a personal planning block, not a booking or invitation to a venue. Do not authorize external reservations or outreach."
-          prompt_label: Microsoft To Do · Time Block · Task title
+          instruction: "In your **Tasks** list, add this task title. It requests a personal planning block, not a booking or invitation to a venue. Do not authorize external reservations or outreach."
+          prompt_label: Microsoft To Do · Tasks · Task title
           prompt: |-
             Book Skull's Rainbow Room in Nashville for Next Friday
         - title: "Verify actual calendar and task writes, then stop"
           instruction: |
-            Refresh **Activity** until the polled trigger appears; inspect **Trigger → Apply to each → Agent**, tool calls, and output. The following are expected checks, not results from the reviewed run: a personal block within **8:00 AM–5:00 PM**, task due date one week after that block, reminder two days before the due date, and readable notes.
+            Refresh **Activity** until the polled trigger appears; inspect **Trigger → Apply to each → Agent**, tool calls, and output. Check for a personal block within **8:00 AM–5:00 PM**, a task due date one week after that block, a reminder two days before the due date, and readable notes.
 
-            Open the real task and Outlook Calendar to verify those fields and the event, not only the agent's narration. Disable your Time Block workflow and reload to verify it stays off. Inspect outstanding runs, then remove only your test event and task/list when no longer needed.
+            Open the real task and Outlook Calendar to verify those fields and the event, not only the agent's narration. Disable your To Do Time Block workflow and reload to verify it stays off; otherwise every new task in **Tasks** starts another run. If the switch reports *Couldn't change the enabled state*, use [Power Automate](https://make.powerautomate.com/) **My flows → More commands (…) → Turn off** in the same environment. Inspect outstanding runs, then remove only your test event and task when no longer needed.
       reveal:
         title: "Dynamic data turns a goal into a per-item action"
         line: "Title supplies the task; tools supply the capabilities; verification supplies the evidence."
-        explanation: "An inline agent can choose how to satisfy a goal rather than replay one fixed action. Calendar and task checks remain necessary, and a missing starter is a blocker, not proof of success."
+        explanation: "An inline agent can choose how to satisfy a goal rather than replay one fixed action. Calendar and task checks remain necessary."
         flow: ["New task → Title token", "Agent → calendar and task tools", "Verify writes → disable"]
       check:
-        question: "The To Do Time Block starter is missing. What should you do?"
+        question: "You finished testing To Do Time Block. Why disable it?"
         options:
-          - text: "Ask the proctor for the assigned starter and mark this optional extension blocked meanwhile."
+          - text: "It watches your default Tasks list, so every new task would start another run and consume credits."
             correct: true
-            feedback: "Correct. The independent Order Management core does not require this starter."
-          - text: "Edit another attendee's workflow and count the extension complete."
+            feedback: "Correct. Stop the trigger once you have checked the calendar block and the task."
+          - text: "Disabling deletes the run history you just inspected."
             correct: false
-            feedback: "Do not cross ownership boundaries or claim an unperformed test."
+            feedback: "A disabled workflow keeps its definition and run history; it only stops starting new runs."
     - id: inventory
       verb: Inventory
       title: "Turn a supplier delay into one verifiable Task"
@@ -537,7 +561,7 @@ mission_lab:
     cleanup: |
       Disable only workflows you enabled and reload to verify their off state. Inspect Running/Waiting tests and finish safe approvals or cancel your unfinished runs; ask the proctor if necessary. Disabling does not prove existing runs stopped.
 
-      Remove only your synthetic messages, approvals, drafts, optional calendar event/To Do task or list, and optional Dataverse Task when no longer needed. Preserve original starters, other attendees' work, shared connections, MCP servers, knowledge, and agents. Leave a Draft/disabled copy off; future testing may require Build → Publish. Rolling credit totals are not per-run cost measurements.
+      Remove only your synthetic messages, approvals, drafts, optional calendar event/To Do task, and optional Dataverse Task when no longer needed. Preserve original starters, other attendees' work, shared connections, MCP servers, knowledge, and agents. Leave a Draft/disabled copy off; future testing may require Build → Publish. Rolling credit totals are not per-run cost measurements.
   sources:
     - title: "Workflows in Microsoft Copilot Studio"
       url: https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview
@@ -567,7 +591,7 @@ One incoming email. A verified, human-approved action. Leave with your own disab
 
 **Scenario:** Your order desk receives unrelated promotions, customer questions, supplier delays, and quote requests. A workflow classifies the message; a grounded draft and human decision protect the customer-facing reply.
 
-**Verified boundary:** the 6 November 2026 training run tested the original quote sample in **Run node**, archived the exact Other sample, and completed the exact Customer Inquiry sample through **Yes → Submit** to a received holding reply. The original starter was untouched and the copy was disabled after reload. The rejection branch, inventory MCP, and specialist quote delivery were not exercised. The **To Do Time Block** starter was absent; time-blocking is a conditional extension, not core completion. Screenshots are genuine, privacy-reviewed light/dark captures of those three tested states, not proof of untested branches.
+**Verified boundary:** the 6 November 2026 training run tested the original quote sample in **Run node**, archived the exact Other sample, and completed the exact Customer Inquiry sample through **Yes → Submit** to a received holding reply. The original starter was untouched and the copy was disabled after reload. The rejection branch, inventory MCP, and specialist quote delivery were not exercised. Screenshots are genuine, privacy-reviewed light/dark captures of those three tested states, not proof of untested branches.
 
 This is the **Microsoft Copilot harness** workflow experience. **Standard harness** remains a separate experience; it has not been renamed. Only the former GitHub Copilot harness name changed. Supplied working instructions remain unchanged. The [classic Workflows lab](../mcs-workflows-latest/) remains available.
 
@@ -589,7 +613,7 @@ This is the **Microsoft Copilot harness** workflow experience. **Standard harnes
 
 > **Proctor-led event with a pre-provisioned provided user account? Skip tenant, licence, and environment setup.** Use the provided account and environment; the proctor prepares connections and assets. Start with Mission 1 and ask the proctor if an asset is missing. Do not import replacements or edit another attendee's workflow.
 
-**Self-paced setup:** use a development/training environment with Copilot Studio **Workflows**, available Copilot Credits, Outlook, and Microsoft 365 Copilot access. Arrange the Order Management starter and connections before starting the timer. Mission 1 links the solution for self-paced import only if needed. Optional extensions require their additional assets; none is a prerequisite for the core.
+**Self-paced setup:** use a development/training environment with Copilot Studio **Workflows**, available Copilot Credits, Outlook, and Microsoft Copilot access. Arrange the Order Management starter and connections before starting the timer. Mission 1 links the solution for self-paced import only if needed. Optional extensions require their additional assets; none is a prerequisite for the core.
 
 - Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account and select the assigned environment.
 - Open [Outlook](https://outlook.office.com/) with the same account. Keep Studio and this lab side by side.
@@ -602,8 +626,8 @@ This is the **Microsoft Copilot harness** workflow experience. **Standard harnes
 **Outcome:** an owned draft with healthy connections and a self-only sender filter; the starter is unchanged.
 
 1. Select **Workflows → Order Management Workflow → Build**. Review and dismiss any first-visit notice or environment tour. Event attendees ask the proctor if the starter is missing. For self-paced setup only, import [LAB: Order Management Workflows](../mcs-workflows/assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip) and sign in to requested connections. It includes the starter and Price Quote Agent, not optional SharePoint pricing data.
-2. Select the **designer header's More options → Create a copy**. Use a unique name, such as **Order Management WF**, with your assigned suffix if needed. **Open workflow** opens a **new browser tab**; continue only in that copy. The list row's **More actions** may offer only Delete; leave the original unchanged.
-3. Open **When a new email arrives**, **Copilot**, and **Human review**, waiting for each lab-account connection to resolve. Reuse healthy connections. Only if Human review lacks one, select **Create new connection**, name it (for example **WF Human review**), retain **Authentication Type: Default**, and **Create**. It is marked **Premium**; sign in with the training account.
+2. Select the **designer header's More options → Create a copy**. Keep the default **Title**, **Order Management Workflow - Copy**, and select **Create**; if offered, **Open workflow** opens a **new browser tab**; continue only in that copy. The list row's **More actions** may offer only Delete; leave the original unchanged.
+3. Open **When a new email arrives**, **Copilot**, and **Human review**, waiting for each lab-account connection to resolve. Reuse healthy connections. Only if Human review lacks one, select **Create new connection**, name it (for example **Human review**), retain **Authentication Type: Default**, and **Create**. It is marked **Premium**; sign in with the training account.
 4. In the trigger, retain **Subject filter → string**. Hover to inspect `string('Order Management')`; do not replace it or assume an expression-mode switch. Select **Add advanced parameter → From**, enter your training email in the people picker, and resolve it. Every test must come from you and contain **Order Management** in the subject. Do not publish yet.
 
 **Reveal — Isolation comes before automation:** A copy protects the starter; sender and recipient checks protect people. The subject selects the scenario, not the sender. Connections determine whose mailbox/data the nodes access. **Owned copy → own-account connections → subject and sender restriction.**
@@ -739,13 +763,13 @@ If approval is missing, inspect whether Copilot is drafting or Human review is w
 
 **15 additional minutes · Microsoft To Do / Inline Agent / Outlook Calendar**
 
-**Outcome:** if provisioned, one verified personal calendar block and enriched task; otherwise mark this extension blocked.
+**Outcome:** one verified personal calendar block and enriched task, with the workflow disabled afterwards.
 
-> **Not live-validated:** the To Do Time Block starter was absent. Ask the proctor for your assigned starter with its Microsoft To Do trigger. For self-paced work, arrange the starter and To Do access first. If absent, skip; never use another attendee's asset or count this as complete.
+1. In [Microsoft To Do](https://to-do.office.com/), sign in with the same training account. The workflow watches your default **Tasks** list; no new list is needed.
+2. In Copilot Studio, select **Workflows → New workflow**; it opens as **Untitled workflow** in **Draft**. Rename it **To Do Time Block**: select the name in the designer header (*Click to rename*), type it, and press **Enter**.
+3. In the **Start** node, switch **Trigger type** from **Manual** to **Connector**, select **Select trigger...**, search `to-do`, and under **Microsoft To-Do (Business)** select **When a new to-do in a specific folder is created**. **Connection → Create new connection → Create** with your training account, then **To-do list → Tasks**; the **Needs setup** badge clears. **+ → Agent**, reuse the training identity, and retain **New agent for this workflow**.
 
-1. In [Microsoft To Do](https://to-do.office.com/), use the same training account. **New list → Time Block → Enter**.
-2. Open your assigned **To Do Time Block → Build → When a new to-do in a specific folder is created**. Reuse a healthy own-account connection; create one only if absent. **To-do list → Select from list → Time Block**. If initially empty, type and commit the match, then verify the setup warning disappears.
-3. Delete the unused **Scope** only in your assigned workflow. **+ → Agent**, reuse the training identity, and retain **New agent for this workflow**.
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-trigger-tasks-list-dark.webp"><img src="images/uc1-trigger-tasks-list.webp" alt="Trigger When a new to-do in a specific folder is created under Microsoft To-Do (Business), with To-do list set to Tasks."></picture>
 4. Paste the first Instructions fragment, add a space, type **/** and insert trigger **Title**. An **Apply to each** can appear when this array-item token is inserted.
 
 **Inline Agent · Instructions · Before Title token**
@@ -762,23 +786,28 @@ Find a time that is appropriate for this task
 on my calendar in the next couple of business days and block that time on my calendar to work on this task. Then update the to-do with a due date a week out from the time block we created. Add appropriate notes and suggestions in the notes on key things I might want to consider. Also set a reminder 2 days before the due date. Make sure that the format of the Calendar notes and To-Do are formatted properly for the user to be able to read them well. Only schedule the time block within my normal working hours of 8:00 AM to 5:00 PM.
 ```
 
-6. Under **Tools → +**, add **Find meeting times** and **Create event** from **Office 365 Outlook**, plus **Update to-do** from **Microsoft To-Do (Business)**. Check connector names; Eventbrite look-alikes are wrong. Reuse healthy own-account connections and enable **Web search**. Confirm calendar writes target only your calendar with no attendees. **Save → Publish** and verify **Enabled** before creating the task.
-7. Add the original title to **Time Block**. It requests a personal planning block, not a reservation or invitation to a venue; do not authorize external booking/outreach.
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-agent-instructions-dark.webp"><img src="images/uc1-agent-instructions.webp" alt="Inline agent Instructions with the trigger Title token between the two fragments."></picture>
 
-**Microsoft To Do · Time Block · Task title**
+6. Under **Tools → +**, add **Find meeting times** and **Create event** from **Office 365 Outlook**, plus **Update to-do** from **Microsoft To-Do (Business)**. Check connector names; Eventbrite look-alikes are wrong. Reuse healthy own-account connections and enable **Web search**. Confirm calendar writes target only your calendar with no attendees. **Save → Publish** and verify **Enabled** before creating the task.
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-workflow-published-dark.webp"><img src="images/uc1-workflow-published.webp" alt="Published To Do Time Block workflow with Trigger, Apply to each and Agent nodes."></picture>
+
+7. Add the original title to **Tasks**. It requests a personal planning block, not a reservation or invitation to a venue; do not authorize external booking/outreach.
+
+**Microsoft To Do · Tasks · Task title**
 
 ```text
 Book Skull's Rainbow Room in Nashville for Next Friday
 ```
 
-8. Refresh **Activity** until the polled trigger appears; inspect **Trigger → Apply to each → Agent**, tool calls and output. Expected checks, **not reviewed-run results**: personal block within **8:00 AM–5:00 PM**, task due one week after that block, reminder two days before due, and readable notes. Open the real task and Outlook Calendar to verify, not just the narration.
-9. Disable your Time Block workflow, reload/still off, and inspect outstanding runs. Remove only your test event and task/list when no longer needed.
+8. Refresh **Activity** until the polled trigger appears; inspect **Trigger → Apply to each → Agent**, tool calls and output. Check for a personal block within **8:00 AM–5:00 PM**, task due one week after that block, reminder two days before due, and readable notes. Open the real task and Outlook Calendar to verify, not just the narration.
+9. Disable your To Do Time Block workflow, reload/still off, and inspect outstanding runs; otherwise every new task in **Tasks** starts another run. If the switch reports *Couldn't change the enabled state*, use [Power Automate](https://make.powerautomate.com/) **My flows → More commands (…) → Turn off** in the same environment. Remove only your test event and task when no longer needed.
 
-**Reveal — Dynamic data makes the goal per-item:** **New task → Title token → agent/tools → verify writes → disable.** A missing starter is a blocker, not success.
+**Reveal — Dynamic data makes the goal per-item:** **New task → Title token → agent/tools → verify writes → disable.**
 
-**Knowledge check:** What if the starter is missing?
-- **Correct:** Ask the proctor and mark this optional extension blocked meanwhile. The core is independent.
-- **Incorrect:** Edit someone else's workflow and count completion. Respect ownership and evidence.
+**Knowledge check:** Why disable To Do Time Block after testing?
+- **Correct:** It watches your default Tasks list, so every new task would start another run and consume credits.
+- **Incorrect:** Disabling deletes the run history. A disabled workflow keeps its definition and history; it only stops new runs.
 
 ## Optional: Inventory
 
@@ -965,7 +994,7 @@ We have received this customer email: []
 
 Disable only workflows you enabled and reload to verify they stay off. Inspect **Running/Waiting** tests; finish safe approvals or cancel unfinished runs, asking the proctor if necessary. Disabling does not prove existing runs stopped.
 
-Remove only your synthetic messages, approvals, drafts, optional calendar event/To Do task or list, and optional Dataverse Task when no longer needed. Preserve original starters, other attendees' work, shared connections, MCP servers, knowledge, and agents. Leave Draft/disabled copies off; future testing may require **Build → Publish**. Rolling credit totals are not per-run cost measurements.
+Remove only your synthetic messages, approvals, drafts, optional calendar event/To Do task, and optional Dataverse Task when no longer needed. Preserve original starters, other attendees' work, shared connections, MCP servers, knowledge, and agents. Leave Draft/disabled copies off; future testing may require **Build → Publish**. Rolling credit totals are not per-run cost measurements.
 
 ## Sources
 

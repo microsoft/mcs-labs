@@ -36,11 +36,11 @@ mission_lab:
 
     **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your account, environment, licences, connections and sample data are prepared. Go straight to [Mission 1](#inspect); ask your facilitator if something is missing.
 
-    **Running in your own tenant?** Arrange a Microsoft 365 Copilot account permitted to create agents in Agent Builder and add skills. Check **Agents & Skills > New agent > Configure** for **Skills**, following the linked licensing and skills documentation. For the optional extension, prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
+    **Running in your own tenant?** Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Agents & Skills > New agent > Configure** for **Skills**, following the linked licensing and skills documentation. For the optional extension, prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
 
-    This exercise uses Agent Builder for a declarative agent. The **Standard harness** remains separate; the former **GitHub Copilot harness** is now **Microsoft Copilot harness**. Do not substitute either Studio experience for these Agent Builder steps.
+    This exercise uses Agent Builder for a declarative agent. The **Standard harness** remains separate; the harness formerly named **GitHub Copilot** is now the **Microsoft Copilot harness**. Do not substitute either Studio experience for these Agent Builder steps.
   prerequisites:
-    - "Sign in to [Microsoft 365 Copilot](https://m365.cloud.microsoft) with your assigned training account in a separate browser profile or private window."
+    - "Sign in to [Microsoft Copilot](https://m365.cloud.microsoft) with your assigned training account in a separate browser profile or private window."
     - "Keep the lab beside Copilot and ask the facilitator if Skills or the assigned account is unavailable. Download the starter in Mission 1 and the report in Mission 3; do not skip those exercise inputs."
     - "Use only the supplied hotel scenario and an instructor-approved teammate. Keep the agent private until the targeted sharing exercise."
   pacing: "Plan 30 minutes: Inspect (3) → Build (9) → Ground (4) → Verify (11) → Share (3). Version is optional, about 25 additional minutes with tooling ready. Responses can take about two minutes; these are budgets, not measured completion times. Do not resend while waiting, and do not call a blocked teammate test complete."
@@ -88,7 +88,7 @@ mission_lab:
       steps:
         - title: "Open the configuration"
           instruction: |
-            Open [Microsoft 365 Copilot](https://m365.cloud.microsoft). Select **Agents & Skills > New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**.
+            Open [Microsoft Copilot](https://m365.cloud.microsoft). Select **Agents & Skills > New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**.
 
             The onboarding describes work content enabled by default. You will turn it off in Mission 3 before testing; do not assume the new agent is report-only.
           screenshot:
@@ -99,7 +99,7 @@ mission_lab:
             height: 357
             caption: "Reviewed classic light capture. Select New agent, then Skip."
         - title: "Name the agent and enter its description"
-          instruction: "Select the pencil next to **New Agent**. Name it **Contoso Operations agent**, using your facilitator's suffix if required, and paste this into the description field."
+          instruction: "Select the pencil next to **New Agent**. Name it **Contoso Operations agent**, and paste this into the description field."
           prompt_label: Agent Builder · Description
           prompt: |-
             Help the Contoso operations team complete a repeatable briefing workflow: use the annual report and reusable skill to prepare evidence-backed issues and an executive email for teammate review.
@@ -248,6 +248,7 @@ mission_lab:
           screenshot:
             title: Targeted sharing controls
             src: /labs/declarative-agent-skill-reuse/images/share-dialog.webp
+            src_dark: /labs/declarative-agent-skill-reuse/images/share-dialog-dark.webp
             alt: "Share dialog with a recipient field, org-wide chat sharing off and Copy chat link."
             width: 600
             height: 288
@@ -290,7 +291,7 @@ mission_lab:
         - title: "Scope cloud knowledge to the same report"
           instruction: "Place the hotel PDF in an approved SharePoint or OneDrive location and confirm your test account can open it. Configure `OneDriveAndSharePoint` with `items_by_url` scoped to that actual cloud file, following the linked knowledge-source and schema references. Do not use a local path, public GitHub URL, placeholder or empty scope. Keep web search and write actions out."
         - title: "Provision, test and update the separate copy"
-          instruction: "Resolve manifest diagnostics and confirm the skill folder is inside the app package. Use **Lifecycle > Provision**, open the pro-code agent in Microsoft 365 Copilot, and repeat Mission 4's checks. Change one harmless formatting instruction in the local skill, rebuild the package and **Provision** again; verify the new output. Compare source control, packaging, grounding and deployment with Agent Builder. Do not report deployment success unless these tests actually pass."
+          instruction: "Resolve manifest diagnostics and confirm the skill folder is inside the app package. Use **Lifecycle > Provision**, open the pro-code agent in Microsoft Copilot, and repeat Mission 4's checks. Change one harmless formatting instruction in the local skill, rebuild the package and **Provision** again; verify the new output. Compare source control, packaging, grounding and deployment with Agent Builder. Do not report deployment success unless these tests actually pass."
       reveal:
         title: "Does a local edit update both agents?"
         line: "Each deployed agent has its own skill copy."
@@ -371,9 +372,9 @@ You lead operations at **Contoso Grand Hotel**. Identify five urgent issues in t
 
 > **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your account, environment, licences, connections and sample data are prepared. Go straight to Mission 1; ask your facilitator if something is missing.
 
-**Running in your own tenant?** Arrange a Microsoft 365 Copilot account permitted to create agents in Agent Builder and add skills. Check **Agents & Skills > New agent > Configure** for **Skills** and consult the licensing and skills sources below. Optional: prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
+**Running in your own tenant?** Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Agents & Skills > New agent > Configure** for **Skills** and consult the licensing and skills sources below. Optional: prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
 
-This lab uses **Agent Builder** for a declarative agent. The **Standard harness** remains separate; the former **GitHub Copilot harness** is now **Microsoft Copilot harness**. Do not substitute either Studio experience for these steps.
+This lab uses **Agent Builder** for a declarative agent. The **Standard harness** remains separate; the harness formerly named **GitHub Copilot** is now the **Microsoft Copilot harness**. Do not substitute either Studio experience for these steps.
 
 ## Mission 1: Inspect
 
@@ -381,7 +382,7 @@ This lab uses **Agent Builder** for a declarative agent. The **Standard harness*
 
 **Outcome:** a compatible ZIP and an understood briefing contract.
 
-1. Sign in to [Microsoft 365 Copilot](https://m365.cloud.microsoft) with your assigned training account in a separate browser profile or private window. Keep this lab beside it. Ask the facilitator if the assigned account or Skills is unavailable.
+1. Sign in to [Microsoft Copilot](https://m365.cloud.microsoft) with your assigned training account in a separate browser profile or private window. Keep this lab beside it. Ask the facilitator if the assigned account or Skills is unavailable.
 2. Download the [starter ZIP](https://microsoft.github.io/mcs-labs/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing.zip), or use your compatible hotel skill from Cowork. If you did not export a skill, use the starter and compare it with your earlier workflow. Keep the ZIP intact for upload.
 3. Inspect [SKILL.md](https://github.com/microsoft/mcs-labs/blob/main/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing/SKILL.md) and [briefing-template.md](https://github.com/microsoft/mcs-labs/blob/main/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing/briefing-template.md). The starter name is `hotel-operations-briefing`; `SKILL.md` must be immediately visible at the ZIP root, not inside another folder.
 4. Identify the YAML name and description, report input, optional recipient, evidence extraction, prioritization and Section 16 mapping. The skill must distinguish reported facts from inference and return five supported issues, an evidence table and an email under 400 words for review.
@@ -405,7 +406,7 @@ This lab uses **Agent Builder** for a declarative agent. The **Standard harness*
 
 *Reviewed classic light capture. Select New agent, then Skip.*
 
-2. Select the pencil beside **New Agent**. Name it **Contoso Operations agent**, using the facilitator's suffix if required. Paste this into **Description**, not Preview:
+2. Select the pencil beside **New Agent**. Name it **Contoso Operations agent**. Paste this into **Description**, not Preview:
 
 ```text
 Help the Contoso operations team complete a repeatable briefing workflow: use the annual report and reusable skill to prepare evidence-backed issues and an executive email for teammate review.
@@ -512,7 +513,7 @@ Expect a refusal to send mail or create tasks. Any task list must remain proposa
 1. Select **Create**. Confirm the success dialog says the agent is **private**, available only to you. After this first save, use **Update** for later changes.
 2. Select **Share**. Enter one instructor-approved teammate in **Add a name, group, or email** and complete the share. Keep **Org-wide sharing for chat access** off. Use **Copy chat link** if needed.
 
-![Share dialog with a recipient field, org-wide chat sharing off and Copy chat link.](images/share-dialog.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/share-dialog-dark.webp"><img src="images/share-dialog.webp" alt="Share dialog with a recipient field, org-wide chat sharing off and Copy chat link."></picture>
 
 *Reviewed light capture with account details masked. The dialog was inspected; second-account sharing was not tested.*
 
@@ -540,7 +541,7 @@ Expect a refusal to send mail or create tasks. Any task list must remain proposa
 3. Use declarative agent schema **v1.9** and its matching `$schema` URL from the reference below. Add top-level `agent_skills` with one object whose `folder` is `./skills/hotel-operations-briefing`. JSON paths use forward slashes and are manifest-relative; do not point to the ZIP.
 4. Match the core name, description, instructions and conversation starter. Refer to the exact skill name. Each agent has its own copy: editing source updates neither deployment automatically.
 5. Place the same PDF in an approved SharePoint or OneDrive location and verify the test account can open it. Configure `OneDriveAndSharePoint` with `items_by_url` scoped to that actual cloud file using the linked references. Never use a local path, public GitHub PDF URL, placeholder or empty scope. Keep web search and write actions out.
-6. Resolve manifest diagnostics, verify the skill folder is packaged and select **Lifecycle > Provision**. Open the pro-code agent in Microsoft 365 Copilot and repeat Mission 4's accuracy and boundary tests.
+6. Resolve manifest diagnostics, verify the skill folder is packaged and select **Lifecycle > Provision**. Open the pro-code agent in Microsoft Copilot and repeat Mission 4's accuracy and boundary tests.
 7. Change one harmless formatting instruction locally, rebuild the package, then **Provision** again. Verify changed behavior. Compare source control, packaging, grounding and deployment with Agent Builder; the scenario and expected boundaries must stay the same.
 
 **Reveal — Each deployment owns a copy.** Edit source → package → upload or provision → verify. Agent Builder takes the ZIP; the toolkit packages an unpacked folder.

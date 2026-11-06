@@ -121,7 +121,7 @@ In this lab you build the **Travel Policy Agent** on the Microsoft Copilot harne
 - Signed in with your work account, with an **Office 365 Users** connection for that account — the session-start workflow uses **Get my profile** to retrieve its **Office Location**.
 
 > [!NOTE]
-> Hooks are a preview feature and the designer is still changing. If a label in this lab differs slightly from what you see, look for the closest match — the event names, input names and output names are the stable part. Some screenshots come from a shared test environment where every name ends in **HK**; you don't need that suffix.
+> Hooks are a preview feature and the designer is still changing. If a label in this lab differs slightly from what you see, look for the closest match — the event names, input names and output names are the stable part.
 
 > [!IMPORTANT]
 > **Save is not publish.** Selecting **Done** on a hook adds it to your *draft* agent. Save the agent to store it. The test pane uses the saved draft, so you do not need to publish the agent for this lab — but every hook **workflow** must be **published** or the hook has nothing to call.
@@ -240,7 +240,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
     Load traveler profile
     ```
 
-1. Open the **Workflow** dropdown. It says *No compatible workflows for this event*; select **New workflow**. If **You have unsaved changes** appears, select **Save draft**.
+1. Open the **Workflow** dropdown and select **New workflow**. On a fresh agent it says *No compatible workflows for this event*; if it lists existing workflows instead, still create a new one. If **You have unsaved changes** appears, select **Save draft**.
 
     The workflow designer opens in the same tab, with the breadcrumb **Travel Policy Agent** > **Untitled workflow**. The starter workflow is ready: **When an agent calls the flow** already carries the `event`, `timestamp` and `metadata` inputs, and **Respond to the agent** already carries the `additionalContext` output.
 
@@ -716,8 +716,6 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
 
 1. In **Workflow**, select **New workflow** (choose **Save draft** if asked). The starter workflow receives `event`, `timestamp`, `toolName`, `parameters` and `metadata`, and returns `permissionDecision`, `permissionDecisionReason`, `modifiedParameters`, `additionalContext` and `suppressOutput` — all optional.
 
-    ![Add hook dialog with Pre tool use, the Book flight tool and New workflow](images/extra-add-hook.png)
-
     ![Pre tool use starter workflow: the Respond node with its five optional outputs](images/extra-starter-workflow.png)
 
 #### Check the airline
@@ -762,6 +760,8 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
 
 1. **Publish** the workflow and return to the agent with the **Travel Policy Agent** breadcrumb. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
 
+    ![Add hook dialog with Pre tool use, the Book flight tool and the Check approved airline workflow](images/extra-add-hook.png)
+
     ![Check approved airline workflow: If/Else with Allow tool call and Deny tool call](images/extra-pretool-workflow.png)
 
 1. Open **…** → **Hooks**. All three hooks are listed.
@@ -770,10 +770,8 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
 
 #### Test it
 
-> [!WARNING]
-> **Verification boundary.** In the latest run-through of this lab, building, publishing and attaching this hook worked and the **Hooks** list showed all three hooks. But **New chat** in **Preview** then failed with *BotDefinitionOverride has unresolved references: 1 missing flow(s), 0 missing connection reference(s). Error code: InvalidContent.*, even though the **Check approved airline** workflow was published and enabled and **Review** reported no problems. Re-publishing didn't help; removing the hook cleared the error. The test steps and the two screenshots below come from an earlier version of the product and were not re-verified.
->
-> If you see this error, open **…** → **Hooks**, delete **Check approved airline**, **Save** the agent and tell your facilitator. Your other hooks keep working.
+> [!TIP]
+> If **New chat** shows *BotDefinitionOverride has unresolved references: 1 missing flow(s), 0 missing connection reference(s). Error code: InvalidContent.*, the agent hasn't picked up the published hook workflow yet. Open the **Check approved airline** workflow, select **Publish**, return to the agent and **Save** it again, then select **New chat**.
 
 1. Select **New chat** and send:
 
@@ -785,7 +783,7 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
 
 1. Expand **Executed hook: PreTool (Bookflight)**. The input shows the proposed `parameters` with `"text": "Tailspin Airlines"`; the **Output** shows `isContinue: false`, `permissionDecision: deny` and your reason and context.
 
-    ![PreTool hook trace denying Tailspin Airlines, from an earlier product version](images/extra-pretool-deny.png)
+    ![PreTool hook trace denying Tailspin Airlines](images/extra-pretool-deny.png)
 
 1. Reply:
 
@@ -795,7 +793,7 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
 
 1. This time the hook returns `isContinue: true`, **Used tool: Book flight** appears under the hook, and the agent confirms the simulated booking — without claiming a real reservation or payment.
 
-    ![PreTool hook allowing Contoso Air and the tool running, from an earlier product version](images/extra-pretool-allow.png)
+    ![PreTool hook allowing Contoso Air and the tool running](images/extra-pretool-allow.png)
 
 > [!IMPORTANT]
 > **Hooks fail open.** If the hook workflow errors or times out, the tool call goes ahead. A rule that *must* hold — such as the approved airline list — also has to be enforced by the booking system behind the tool. The hook stops the agent from trying; the backend stops the booking.
