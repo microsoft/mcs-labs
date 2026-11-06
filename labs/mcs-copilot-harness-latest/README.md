@@ -51,6 +51,9 @@ By the end, you will be able to:
 
 ## ✅ Prerequisites
 
+> [!IMPORTANT]
+> **Attending a CAT bootcamp? You can skip the prerequisite setup: the CAT team has already prepared it for you.** Use your assigned lab account and follow the lab instructions. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+
 For the core exercise:
 
 - Your provided Microsoft 365 lab account.

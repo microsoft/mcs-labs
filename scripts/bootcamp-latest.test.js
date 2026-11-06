@@ -82,6 +82,27 @@ test('Bootcamp Latest agenda matches modules and both copies of each lab', () =>
     labs.map(({ slug, label }) => ({ slug, label })));
 });
 
+test('Bootcamp Latest labs explain that CAT bootcamp prerequisite setup is already prepared', () => {
+  for (const lab of readAgenda().schedule.filter((item) => item.type === 'lab')) {
+    const document = readDocument('_labs', lab.slug);
+    const readme = fs.readFileSync(path.join(root, 'labs', lab.slug, 'README.md'), 'utf8');
+    for (const [source, content] of [['site', document.content], ['GitHub', readme]]) {
+      const section = content.match(/^## [^\n]*Prerequisites[^\n]*\r?\n([\s\S]*?)(?=^## |(?![\s\S]))/m)?.[1];
+      assert.ok(section, `${lab.slug}: ${source} prerequisite section exists`);
+      assert.match(section, /CAT.*bootcamp/, `${lab.slug}: ${source} identifies CAT bootcamps`);
+      assert.match(section, /can skip the prerequisite setup|do not need to complete these prerequisites/,
+        `${lab.slug}: ${source} exempts attendees from setup`);
+      assert.match(section, /already prepared|already set up/i,
+        `${lab.slug}: ${source} explains that setup is ready`);
+    }
+    if (document.data.lab_format === 'missions') {
+      const prerequisites = document.data.mission_lab.prerequisites.join('\n');
+      assert.match(prerequisites, /CAT bootcamp.*can skip the prerequisite setup/,
+        `${lab.slug}: mission view includes the prerequisite notice`);
+    }
+  }
+});
+
 test('Bootcamp Latest deck numbering and all local presentation references resolve', () => {
   const modules = readAgenda().schedule.filter((item) => item.type === 'module');
   for (const [index, item] of modules.entries()) {

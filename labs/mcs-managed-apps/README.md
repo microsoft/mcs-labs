@@ -85,7 +85,8 @@ Use your facilitator's environment-specific guidance for feature access and conn
 
 ## ✅ Prerequisites
 
-For an instructor-led bootcamp, use the provided account and designated environment. If working independently, confirm the following before starting:
+> [!IMPORTANT]
+> **Attending a CAT bootcamp? You can skip the prerequisite setup: the CAT team has already prepared it for you.** Use your assigned lab account and follow the lab instructions. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
 
 - Access to **Copilot Studio Apps**, including image upload and app preview in your environment.
 - Permission for the app-building experience to read the published bootcamp agenda.

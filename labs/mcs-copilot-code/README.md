@@ -94,7 +94,8 @@ These optional resources explain the web technologies and browser checks used in
 
 ## ✅ Prerequisites
 
-For an instructor-led bootcamp, use the provided environment and designated working folder. If completing the lab independently, arrange the following before starting:
+> [!IMPORTANT]
+> **Attending a CAT bootcamp? You can skip the prerequisite setup: the CAT team has already prepared it for you.** Use your assigned lab account and follow the lab instructions. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
 
 - Access to Copilot Code in your provided environment.
 - Copilot Code must be able to fetch the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) while generating the app.

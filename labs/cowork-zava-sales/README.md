@@ -14,8 +14,14 @@ Keep [Zava Sales Hub](https://aka.ms/ZavaSalesHub) open in another tab. It is th
 
 Plan **30 minutes for the four core missions**: Ask → Delegate → Act → Repeat. Improve and Specialize are **optional extensions, about 14 more minutes**; no scenario has been removed. These are working budgets, not guaranteed run times. Read ahead or try a quick check while Cowork works; do not start duplicate tasks.
 
+## ✅ Prerequisites
+
+> [!IMPORTANT]
+> **Attending a CAT bootcamp? You can skip the prerequisite setup: the CAT team has already prepared it for you.** Use your assigned lab account and follow the lab instructions. If anything is missing, ask your instructor. Independent learners must arrange Copilot access, Cowork credits, Zava Sales data, and plugins before starting.
+
 ## 📚 Table of Contents
 
+- [Prerequisites](#-prerequisites)
 - [Ask: find the deal](#-ask-find-the-deal)
 - [Delegate: make the review](#️-delegate-make-the-review)
 - [Act: record the commitment](#-act-record-the-commitment)
