@@ -7,6 +7,8 @@ Use after the audit. Mark each item **pass**, **issue** (with evidence) or **n/a
 - [ ] Product, feature and connector names match current Microsoft Learn pages.
 - [ ] UI labels in **bold** match the product today, or the review says they could not be verified.
 - [ ] License, credit, preview, region and admin prerequisites are current and complete.
+- [ ] Prerequisites open with the "Skip this section" callout for event attendees (classic), or list only attendee-ready items (missions); no self-hosting setup is presented as a first step.
+- [ ] Renamed or moved features are updated everywhere, including description, intro, tables, tips and troubleshooting, not just the steps.
 - [ ] Links resolve to the intended page (not a redirect to a generic landing page).
 - [ ] Statements about limits, costs or availability cite a source in the lab.
 

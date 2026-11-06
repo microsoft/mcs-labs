@@ -44,6 +44,10 @@ Apply `../lab-review/references/learning-design.md` while drafting. In short:
 - Every prompt sits alone in a `text` code fence so it can be copied.
 - Explain *why* after the learner has seen it work (the reveal), not before.
 - Mark what is optional. Budget minutes per section; they must add up to `duration`.
+- Attendees of a CAT-led event use a pre-set-up environment. Classic prerequisites open
+  with the template's "Skip this section" callout; missions `prerequisites:` list only
+  what the attendee does to get ready, never tenant setup. Put downloads in the step
+  that uses them.
 - Ground every product claim in a current Microsoft Learn page and cite it.
 
 ## 4. Scaffold the files
