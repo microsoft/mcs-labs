@@ -74,6 +74,16 @@ Slots are agenda allocations, not a promise that all retained reference exercise
 The Zava Sales lab opts into the guided mission format; other labs keep their classic rendering.
 Its four core missions have a 30-minute working budget; two optional extensions cover the Friday feedback loop and Zava Sales plugin. Model and connector latency varies by run.
 See each lab's pacing or placeholder note, and the [dependency notes](./_data/agendas/README.md#bootcamp-latest).
+
+The separate [missions edition](./_events/bootcamp-latest-missions.md) is an
+unlisted review curriculum: ten net-new guided labs plus the existing Zava Sales
+lab, with the same module schedule and lab slots. The advertised event continues
+to use the classic versions. See its [agenda](./_data/agendas/bootcamp-latest-missions.yml)
+for the complete lab mapping. Unlisted pages are public by direct URL, not access-controlled.
+Both editions distinguish proctor-led events with pre-provisioned user accounts
+(skip tenant setup) from self-paced setup. Lab-specific blockers and optional,
+unverified exercises are called out rather than presented as completed validation.
+
 Module 17, [Copilot Agent Kit](./_modules/copilot-agent-kit.md), runs on Day 3
 from 15:00 to 15:30, followed by General Q&A until 16:00. It introduces capabilities
 for developing, governing, and testing agents, validating AI-generated content,

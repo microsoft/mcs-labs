@@ -30,7 +30,7 @@ node .github/skills/lab-runthrough/scripts/capture.cjs <command> [args] [options
 | `scroll <x> <y> <dy>` | Scrolls the element under a point, for panes that do not scroll with the page. |
 | `prompt <file\|->` | Types the prompt verbatim (line breaks kept) into the empty editor, clicks Send and waits until it is posted. |
 | `upload <file...>` | Picks files for an upload step, for example a skill `.zip` or a knowledge file. With `--click <name>` or `--at <x,y>` it clicks the control and answers the file dialog it opens, which works headless; without either it sets the files on the page's `<input type="file">` (`--nth` picks one). Use files from the lab's repo folder or a download outside the repository. |
-| `wait <text>` | Waits until the page shows `text`. |
+| `wait <text>` | Waits until the top document shows `text`; it does not inspect iframe text. |
 | `shot <name>` | Saves `<out>/<name>.png` and prints its size and the display scale. |
 | `pair <name>` | Saves `<name>-light.png` and `<name>-dark.png` by emulating `prefers-color-scheme`, and fails if both are identical. |
 | `close` | Closes the browser and deletes the temporary profile. |
@@ -80,6 +80,12 @@ user's own accounts.
   `login` stops with exit code 3 on MFA, **Update your password**, **More information
   required** or a locked account. Finish that step in a windowed run (or ask the person
   to), then run `login` again.
+
+When each tool command starts a fresh PowerShell process, set `LAB_CREDENTIALS` again
+in every call before invoking the driver, including inspection and capture commands.
+An unset variable does not mean the credential file is missing or sign-in has failed:
+check file presence without displaying its contents, set the variable, and run `login`
+before reporting an authentication blocker.
 
 While `LAB_CREDENTIALS` is set, every command masks the user name, its distinctive parts
 (provisioned display names often repeat them, such as "User AB12CD34"), every
@@ -181,13 +187,32 @@ Seen on a managed Windows device in November 2026.
   only redirect to sign-in after you choose **Sign in**. Click it, then run `login`.
 - `pair` can capture a frame before the theme repaints. Scroll or move the pointer first,
   and open both images before cropping.
-- `controls` and `text` see only the top document: cross-origin iframes (embedded
-  designers, Pages, Word) and closed shadow roots are invisible. Take a `shot`, then use
-  `clickat` or `typeat` with coordinates read from it.
+- `controls` and `text` include accessible iframe documents, marked `[frame n]`.
+  Frame control boxes are relative to that frame, not the top viewport: prefer `click`
+  or `prompt` by label. For closed shadow roots or unavailable frame content, take a
+  `shot`, then use `clickat` or `typeat` with viewport coordinates read from it.
+- Listed controls can belong to offscreen panels or sit behind a dialog. Check their
+  viewport coordinates and dismiss the covering surface before clicking. A `button`
+  role is not necessarily a native `<button>`; inspect the element before writing a
+  tag-specific library selector.
+- Check both `disabled` and `aria-disabled="true"` before sending. A click on a disabled
+  control can return without submitting anything; verify the editor closes or clears
+  before recording success, and check delivery before retrying.
+- `wait` only checks the top document. A timeout does not prove that an embedded chat
+  failed: inspect `text`, or use the library with a wait scoped to the chat frame.
+  Customer Conversation child-agent turns may await the user's confirmation before
+  an **Execution summary** appears, so that summary is not a per-reply readiness signal.
 - `prompt` refuses when the page has two editors (for example a chat next to a side
-  panel). Click the right one and use `typeat`, which types literal text only.
-- A finished reply shows **Copy** or **Copy Response**, and **Stop** disappears.
-  `controls "Copy Response|Stop"` tells you which state you are in.
+  panel). Click the right one and use `typeat`; pass `-` to read multiline text from stdin.
+- In Microsoft Copilot chat, a finished reply shows **Copy** or **Copy Response**, and
+  **Stop** disappears. Other previews have different controls: inspect the actual reply
+  and activity rather than assuming these labels exist everywhere.
+- Teaching bubbles can appear after a menu opens. Dismiss them, reopen the menu if the
+  dismissal closed it, and verify the screenshot before closing the browser. Crop out
+  background account columns as well as account navigation.
+- Outlook can show delayed privacy notices, contact cards, and scheduling suggestions.
+  Resolve a typed recipient with **Check names** if it remains plain text, verify the
+  resolved address, and dismiss overlays before selecting **Send**.
 - File pickers: open the **+** or attach menu first, then `upload --click "<item>"`.
 - `pages` lists full URLs, which can carry the tenant id (sometimes base64-encoded).
   Keep them out of run logs and PRs.
@@ -223,6 +248,11 @@ when a run-through finds something new, and date it.
   sign-in step.
 - Copilot Studio follows the system theme by default, so `pair` works without changing a
   setting.
+- The first agent **Save** can finish provisioning and return the page to **Build**.
+  Wait for that navigation to settle before opening **Preview** or entering a test
+  prompt; otherwise text can land in the instructions editor instead.
+- Copilot Studio's agent-name input currently limits names to 30 characters. Shorten a
+  shared-account test name before adding a suffix; verify that the saved name retained it.
 
 ## Troubleshooting
 
@@ -233,7 +263,7 @@ when a run-through finds something new, and date it.
 | `found 2` or more | Pass `--nth`, or use `clickat` with the box of the right one. |
 | `Expected the prompt editor in one frame` | The editor is in a side panel or there are two: click it and use `typeat`. |
 | Exit code 3, `Sign-in needs a person` | MFA, password change or locked account: finish it in a windowed run, or ask the person. |
-| Exit code 4, `Wrong account` | The session reached the host user's own account. Stop, `close`, and relaunch. |
+| Exit code 4, `Wrong account` | Forbidden page text matched; this alone does not establish the authenticated identity. Stop and have a person verify the sign-in before continuing. Never weaken the guard to retry. |
 | `edge://force-signin` or Edge exits while headless | Drop `--browser edge`; headless uses Chrome for Testing. |
 | `Still on the sign-in page` | Run `text` to read the error (wrong password, blocked account). |
 | `The prompt editor is not empty` | Clear the editor or start a new chat; the script never appends to a draft. |

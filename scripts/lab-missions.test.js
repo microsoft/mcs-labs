@@ -4,6 +4,7 @@ const crypto = require('node:crypto');
 const fs = require('node:fs');
 const path = require('node:path');
 const matter = require('gray-matter');
+const yaml = require('js-yaml');
 const producer = require('./build-feed');
 const consumer = require('./consume-feed');
 
@@ -14,6 +15,50 @@ const readme = fs.readFileSync(path.join(root, 'labs', slug, 'README.md'), 'utf8
 const lab = document.data.mission_lab;
 const prompts = lab.missions.flatMap(mission => mission.steps.filter(step => step.prompt).map(step => step.prompt));
 const fencedPrompts = text => [...text.matchAll(/```text\r?\n([\s\S]*?)\r?\n```/g)].map(match => match[1].replace(/\r\n/g, '\n'));
+const bootcampLabs = [
+  ['mcs-m365-copilot-latest', 'copilot-chat-workiq', 108],
+  ['mcs-copilot-code', 'copilot-code-web-app', 121],
+  ['mcs-copilot-harness-latest', 'declarative-agent-skill-reuse', 127],
+  ['mcs-standard-harness', 'standard-harness-components', 136],
+  ['mcs-skills-authoring', 'instructions-skills-authoring', 298],
+  ['mcs-hooks', 'hooks-knowledge-travel-policy', 146],
+  ['mcs-customer-conversation-harness', 'customer-assist-agent', 122],
+  ['mcs-managed-apps', 'managed-apps-build', 123],
+  ['mcs-workflows-latest', 'workflows-autonomous', 342],
+  ['mcs-agent-integration', 'agent-integration-team', 124],
+];
+const bootcampAgenda = yaml.load(fs.readFileSync(path.join(root, '_data', 'agendas', 'bootcamp-latest.yml'), 'utf8'));
+const normalizeCopy = text => text.replace(/\r\n/g, '\n')
+  .replace(/^(#{1,6})\s+[\p{Extended_Pictographic}\uFE0F\u200D]+\s+/gmu, '$1 ')
+  .replace(/\]\(#[\uFE0F-]+/g, '](#').trim();
+const indentedBlocks = (text, language) => [...text.matchAll(
+  /^([ \t]*)```([^\r\n`]*)\r?\n([\s\S]*?)^\1```[ \t]*$/gm)]
+  .filter(([, , info]) => info.trim() === language)
+  .map(([, indent, , prompt]) => prompt.replace(/\r?\n$/, '').split(/\r?\n/)
+    .map(line => line.startsWith(indent) ? line.slice(indent.length) : line).join('\n'));
+const indentedPrompts = text => indentedBlocks(text, 'text');
+
+test('fence extraction distinguishes unlabelled samples from closing fences and prose', () => {
+  const markdown = ['```text', 'Input', '```', '', 'Explanation, not a sample.', '',
+    '  ```', '  Subject', '', '  Body', '  ```', '', '```output', 'Expected response', '```'].join('\r\n');
+  assert.deepEqual(indentedPrompts(markdown), ['Input']);
+  assert.deepEqual(indentedBlocks(markdown, ''), ['Subject\n\nBody']);
+  assert.deepEqual(indentedBlocks(markdown, 'output'), ['Expected response']);
+});
+
+// Reads canvas dimensions without introducing an image-processing test dependency.
+const webpSize = file => {
+  const bytes = fs.readFileSync(file);
+  assert.equal(bytes.toString('ascii', 0, 4) + bytes.toString('ascii', 8, 12), 'RIFFWEBP', file);
+  const chunk = bytes.toString('ascii', 12, 16);
+  if (chunk === 'VP8X') return [1 + bytes.readUIntLE(24, 3), 1 + bytes.readUIntLE(27, 3)];
+  if (chunk === 'VP8L') {
+    const bits = bytes.readUInt32LE(21);
+    return [(bits & 0x3fff) + 1, ((bits >>> 14) & 0x3fff) + 1];
+  }
+  assert.equal(chunk, 'VP8 ', file);
+  return [bytes.readUInt16LE(26) & 0x3fff, bytes.readUInt16LE(28) & 0x3fff];
+};
 
 test('Zava Sales preserves every supplied prompt verbatim in all reading surfaces', () => {
   // Independent fingerprints of the supplied prompts catch drift even if all copies change together.
@@ -70,19 +115,6 @@ test('all mission screenshots exist and are discoverable by portable feed consum
     collection: 'labs', slug, frontMatter: document.data, body: document.content,
     baseUrl: 'https://microsoft.github.io/mcs-labs',
   });
-  // Reads the canvas size from the WebP header so declared width/height (used to reserve layout space) cannot drift.
-  const webpSize = file => {
-    const bytes = fs.readFileSync(file);
-    assert.equal(bytes.toString('ascii', 0, 4) + bytes.toString('ascii', 8, 12), 'RIFFWEBP', file);
-    const chunk = bytes.toString('ascii', 12, 16);
-    if (chunk === 'VP8X') return [1 + bytes.readUIntLE(24, 3), 1 + bytes.readUIntLE(27, 3)];
-    if (chunk === 'VP8L') {
-      const bits = bytes.readUInt32LE(21);
-      return [(bits & 0x3fff) + 1, ((bits >>> 14) & 0x3fff) + 1];
-    }
-    assert.equal(chunk, 'VP8 ', file);
-    return [bytes.readUInt16LE(26) & 0x3fff, bytes.readUInt16LE(28) & 0x3fff];
-  };
   // Only the cropped slide is theme-neutral; every product UI screenshot needs both captures.
   assert.deepEqual([...new Set(images.filter(image => !image.src_dark).map(image => image.src))],
     [`/labs/${slug}/images/pipeline-three-slides.webp`]);
@@ -139,10 +171,10 @@ test('feed materialization retains mission data, exact prompts and the readable 
   assert.equal(demoHubLink?.[1], 'https://aka.ms/CoworkDemoHub');
 });
 
-test('only Zava Sales opts into missions and the retired prototype is absent', () => {
+test('only Zava Sales and the parallel bootcamp labs opt into missions; the retired prototype is absent', () => {
   const missionLabs = fs.readdirSync(path.join(root, '_labs')).filter(filename =>
     filename.endsWith('.md') && matter(fs.readFileSync(path.join(root, '_labs', filename), 'utf8')).data.lab_format === 'missions');
-  assert.deepEqual(missionLabs, [`${slug}.md`]);
+  assert.deepEqual(missionLabs.sort(), [slug, ...bootcampLabs.map(([, modern]) => modern)].map(name => `${name}.md`).sort());
   assert.equal(fs.existsSync(path.join(root, '_labs', 'mcs-cowork-preview.md')), false);
   assert.equal(fs.existsSync(path.join(root, 'labs', 'mcs-cowork-preview', 'README.md')), false);
   for (const filename of ['app.js', 'lab.js', 'styles.css', 'index.html']) {
@@ -154,12 +186,134 @@ test('only Zava Sales opts into missions and the retired prototype is absent', (
   }
 });
 
+for (const [classic, modern, order] of bootcampLabs) {
+  test(`${modern}: complete, unlisted missions preserve the classic lab and its prompts`, () => {
+    const page = matter(fs.readFileSync(path.join(root, '_labs', `${modern}.md`), 'utf8'));
+    const github = fs.readFileSync(path.join(root, 'labs', modern, 'README.md'), 'utf8');
+    const original = matter(fs.readFileSync(path.join(root, '_labs', `${classic}.md`), 'utf8'));
+    assert.ok(fs.existsSync(path.join(root, 'labs', classic, 'README.md')));
+    assert.notEqual(original.data.lab_format, 'missions', 'The classic version remains available');
+    assert.equal(page.data.lab_format, 'missions');
+    assert.equal(page.data.order, order);
+    // Shared classic labs can retain a longer workshop duration; this edition follows the Bootcamp slot.
+    assert.equal(page.data.duration, bootcampAgenda.schedule.find(row => row.type === 'lab' && row.slug === classic).duration);
+    assert.equal(page.data.unlisted, true);
+    assert.equal(page.data.search, false);
+    assert.equal(page.data.sitemap, false);
+    assert.equal(normalizeCopy(github), normalizeCopy(page.content));
+    const content = page.data.mission_lab;
+    for (const key of ['headline', 'headline_emphasis', 'promise', 'scenario', 'pacing']) {
+      assert.ok(content[key], `${modern}: ${key}`);
+    }
+    assert.ok(content.prerequisites.length > 0);
+    const eventSetupNotice = /proctor.led[\s\S]{0,160}pre.provisioned[\s\S]{0,160}skip/i;
+    assert.match(JSON.stringify([content.scenario, content.prerequisites, content.pacing]), eventSetupNotice,
+      'Event attendees must see skip-setup guidance in the rendered introduction, not only the fallback body');
+    assert.match(original.content, eventSetupNotice, 'The classic lab needs the same setup distinction');
+    assert.ok(content.hero_image?.src, `${modern}: required light/content hero`);
+    assert.equal(content.hero_image.src_dark, undefined, 'The eager hero uses one light/content image');
+    assert.ok(content.missions.length > 0);
+    assert.equal(new Set(content.missions.map(mission => mission.id)).size, content.missions.length);
+    assert.equal(content.missions.filter(mission => !mission.optional)
+      .reduce((sum, mission) => sum + mission.minutes, 0), page.data.duration);
+    const guidedPrompts = [];
+    const guidedOutputs = [];
+    for (const mission of content.missions) {
+      assert.match(mission.id, /^[a-z][a-z0-9-]*$/);
+      assert.ok(Number.isInteger(mission.minutes) && mission.minutes > 0, `${mission.id}: minutes`);
+      for (const key of ['verb', 'title', 'tool', 'brief', 'outcome']) assert.ok(mission[key], `${mission.id}: ${key}`);
+      assert.ok(mission.steps.length > 0);
+      assert.ok(mission.reveal.title && mission.reveal.line && mission.reveal.explanation);
+      assert.ok(mission.reveal.flow.length >= 2);
+      assert.ok(mission.check.question);
+      assert.equal(mission.check.options.filter(option => option.correct === true).length, 1);
+      for (const option of mission.check.options) {
+        assert.equal(typeof option.correct, 'boolean');
+        assert.ok(option.text && option.feedback);
+      }
+      for (const step of mission.steps) {
+        assert.ok(step.title && step.instruction);
+        if (step.prompt) guidedPrompts.push(step.prompt);
+        guidedOutputs.push(...indentedBlocks(step.instruction, 'output'));
+      }
+    }
+    assert.deepEqual(indentedPrompts(page.content), guidedPrompts);
+    assert.deepEqual(indentedPrompts(github), guidedPrompts);
+    assert.deepEqual(indentedBlocks(page.content, 'output'), guidedOutputs);
+    assert.deepEqual(indentedBlocks(github, 'output'), guidedOutputs);
+    // Classic fences also contain expected responses; preserve these as comparisons, not sendable prompts.
+    // Workflows uses unlabelled fences for its sample emails and expressions.
+    // Optional missions may move after the core, but every original block occurrence must remain.
+    const remainingBlocks = [...guidedPrompts, ...guidedOutputs];
+    for (const prompt of [...indentedPrompts(original.content), ...indentedBlocks(original.content, '')]) {
+      const index = remainingBlocks.indexOf(prompt);
+      assert.ok(index >= 0, `${modern}: missing or changed classic block: ${prompt.slice(0, 80)}`);
+      remainingBlocks.splice(index, 1);
+    }
+    assert.ok(content.finish.title && content.finish.message && content.finish.reflection);
+    assert.ok(content.finish.takeaways.length > 0);
+    for (const takeaway of content.finish.takeaways) assert.ok(takeaway.label && takeaway.text);
+    assert.ok(content.sources.length > 0);
+    for (const source of content.sources) {
+      assert.ok(source.title);
+      assert.match(source.url, /^https:\/\//);
+    }
+    const item = producer.buildItem({
+      collection: 'labs', slug: modern, frontMatter: page.data, body: page.content,
+      baseUrl: 'https://microsoft.github.io/mcs-labs',
+    });
+    const images = [content.hero_image, ...content.missions.flatMap(mission =>
+      mission.steps.map(step => step.screenshot))].filter(Boolean);
+    for (const image of images) {
+      assert.ok(image.alt && image.caption);
+      assert.ok(image.width > 0 && image.height > 0);
+      for (const src of [image.src, image.src_dark].filter(Boolean)) {
+        assert.ok(src.startsWith(`/labs/${modern}/images/`));
+        const file = path.join(root, ...src.split('/'));
+        assert.deepEqual(webpSize(file), [image.width, image.height], `${src}: declared dimensions`);
+        assert.ok(item.images.includes(`https://microsoft.github.io/mcs-labs${src}`), `${src}: portable body reference`);
+      }
+      if (image.src_dark) {
+        assert.ok(page.content.includes(`srcset="images/${path.posix.basename(image.src_dark)}"`));
+        assert.notDeepEqual(fs.readFileSync(path.join(root, ...image.src.split('/'))),
+          fs.readFileSync(path.join(root, ...image.src_dark.split('/'))), `${image.src}: distinct theme captures`);
+      }
+    }
+    const materialized = matter(consumer.materializeDoc(item, 'https://microsoft.github.io/mcs-labs'));
+    assert.deepEqual(materialized.data.mission_lab, content);
+    assert.equal(materialized.content.trim(), page.content.trim(), `${modern}: portable body round-trip`);
+    assert.deepEqual(indentedPrompts(materialized.content), guidedPrompts);
+    assert.deepEqual(indentedBlocks(materialized.content, 'output'), guidedOutputs);
+  });
+}
+
+test('the unlisted missions event changes only lab references in the original bootcamp schedule', () => {
+  const eventId = 'bootcamp-latest-missions';
+  const classic = yaml.load(fs.readFileSync(path.join(root, '_data', 'agendas', 'bootcamp-latest.yml'), 'utf8'));
+  const modern = yaml.load(fs.readFileSync(path.join(root, '_data', 'agendas', `${eventId}.yml`), 'utf8'));
+  const replacements = new Map(bootcampLabs.map(([oldSlug, newSlug]) => [oldSlug, newSlug]));
+  const schedule = classic.schedule.map(row => row.type === 'lab'
+    ? { ...row, slug: replacements.get(row.slug) || row.slug } : row);
+  assert.deepEqual(modern, { ...classic, event_id: eventId, schedule });
+  const labRows = modern.schedule.filter(row => row.type === 'lab');
+  assert.deepEqual(labRows.map(row => row.slug).sort(), [slug, ...replacements.values()].sort());
+  const event = matter(fs.readFileSync(path.join(root, '_events', `${eventId}.md`), 'utf8')).data;
+  assert.equal(event.event_id, eventId);
+  assert.equal(event.order, 998);
+  assert.equal(event.unlisted, true);
+  assert.equal(event.search, false);
+  assert.equal(event.sitemap, false);
+  assert.deepEqual(event.labs, labRows.map(({ slug: labSlug, label }) => ({ slug: labSlug, label })));
+});
+
 test('mission content is server rendered and enhanced without prototype controls', () => {
   const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
   assert.match(template, /step\.prompt \| escape/);
   assert.match(template, /step\.instruction \| markdownify/);
   assert.match(template, /include event-nav\/nav-pair\.html/);
   assert.match(template, /include event-nav\/rail\.html/);
+  assert.match(template, /\{% if page\.slug == 'cowork-zava-sales' %\}\s*<div class="hero-actions"><a[^>]+href="https:\/\/aka\.ms\/CoworkDemoHub"/,
+    'Only the Cowork lab should end with the Cowork-specific call to action');
   assert.ok(template.indexOf('assign lab = page.mission_lab') > template.indexOf('include event-nav/manifest.html'),
     'The manifest assigns lab in the shared Liquid scope; restore mission data afterwards');
   assert.doesNotMatch(template, /data-mode|data-notes|Design notes|Explorer|window\.LAB|prototypes\//);

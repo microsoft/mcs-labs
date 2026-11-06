@@ -54,7 +54,9 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
   check its current name on Microsoft Learn and say "unverified live" in the PR.
 - **Lists.** Indent a code block, image or note inside a numbered step by three spaces.
   Kramdown otherwise ends the list and the site restarts numbering at 1.
-- **Prerequisites.** Event attendees must never start on tenant setup. Open the section
+- **Prerequisites.** Attendees of a proctor-led event with pre-provisioned user accounts
+  must not repeat tenant setup. Keep the guidance cross-team, and do not imply that
+  attending any event is enough to skip setup. Open the section
   with the `> [!IMPORTANT]` "Skip this section" callout from the `lab-create` classic
   templates, linking to the first use case in that copy, then list self-hosting
   requirements under **Running this lab in your own tenant?** Replace older variants

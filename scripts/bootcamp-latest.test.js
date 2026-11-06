@@ -168,15 +168,14 @@ test('Bootcamp Latest Hooks pacing preserves the shared workshop lab duration', 
 });
 
 test('Workflows labs share a 30-minute core with optional extra credit and event-prepared setup', () => {
-  // mcs-workflows-latest collapses setup into one alert: proctored attendees
-  // have nothing to do, and self-setup learners get the two solution packages.
+  // Prepared attendees skip setup, while self-setup learners get both solution
+  // packages. Missing starter assets are a proctor issue, not tenant setup work.
   const setupMarkers = {
     'mcs-workflows': [
       'Skip this entire Prerequisites section',
       '### Self-guided setup (outside CAT-led events)',
     ],
     'mcs-workflows-latest': [
-      'Everything is already set up for you — there is nothing to do here.',
       'assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip',
       'assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip',
     ],
@@ -201,6 +200,7 @@ test('Workflows labs share a 30-minute core with optional extra credit and event
         assert.ok(content.includes(marker), `${slug}: setup guidance includes ${marker}`);
       }
       if (slug === 'mcs-workflows-latest') {
+        assert.match(content, /proctor.led[\s\S]{0,160}pre.provisioned[\s\S]{0,160}skip/i);
         // The Account Lookup solution is not a dependency of this lab, and
         // prepared environments need no ownership or connection-reference repair.
         assert.doesNotMatch(content, /Account Lookup Agent|Transfer ownership|Ownership is a prerequisite|Dataverse connection reference — do this first/);

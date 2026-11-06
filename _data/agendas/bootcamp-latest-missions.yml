@@ -1,0 +1,314 @@
+event_id: bootcamp-latest-missions
+
+# Architecture Bootcamp — Latest, missions edition — 3-day agenda.
+#
+# Same schedule, modules and slot durations as bootcamp-latest.yml. Every lab row
+# points at a guided missions-format lab (lab_format: missions) that rebuilds the
+# matching classic lab as a net-new page; cowork-zava-sales is shared with the
+# classic event because it already uses the missions format.
+#
+# Conventions: see bootcamp-latest.yml. Module rows keep `lab: false` so hero
+# stats count the explicit lab rows and their slot durations. While the event and
+# its new labs are in review, both stay unlisted (see _events/bootcamp-latest-missions.md).
+schedule:
+  # --- Day 1 — Personal productivity and the Copilot / Standard harnesses ---
+  - type: day
+    title: "Day 1 — Framing, On-ramp, Harnesses & Deep Dives"
+
+  - type: break
+    title: "Welcome"
+    time: "09:00"
+    duration: 15
+
+  - type: session
+    title: "Introduction to Hands-On Labs"
+    description: "Lab environment, tenant setup, and how the hands-on flow works across the three days."
+    label: "Intro"
+    time: "09:15"
+    duration: 15
+
+  - type: module
+    slug: agents-workflows-making-them-real-latest
+    label: "Module 1"
+    title: "Copilot Agent Ecosystem"
+    time: "09:30"
+    duration: 45
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "10:15"
+    duration: 15
+
+  - type: module
+    slug: m365-copilot-latest
+    label: "Module 2"
+    lab: false
+    title: "M365 Copilot Chat & Work IQ"
+    description: "Microsoft 365 Copilot as an agent surface — public-web grounding, Work IQ, response modes, multi-model support, frontier agents, and where it sits against the other surfaces."
+    time: "10:30"
+    duration: 30
+
+  - type: lab
+    slug: copilot-chat-workiq
+    label: "Lab 1"
+    title: "M365 Copilot Chat and Work IQ"
+    time: "11:00"
+    duration: 15
+
+  - type: module
+    slug: cowork-latest
+    label: "Module 3"
+    lab: false
+    title: "Cowork (+ skills, + plugins, + code)"
+    time: "11:15"
+    duration: 30
+
+  - type: lab
+    slug: cowork-zava-sales
+    label: "Lab 2"
+    title: "Cowork: from insights to action"
+    time: "11:45"
+    duration: 30
+
+  - type: break
+    title: "Lunch break"
+    time: "12:15"
+    duration: 60
+
+  - type: lab
+    slug: copilot-code-web-app
+    label: "Lab 3"
+    title: "Copilot Code: build a simple web app"
+    time: "13:15"
+    duration: 30
+
+  - type: module
+    slug: copilot-harness-latest
+    label: "Module 4"
+    lab: false
+    title: "Copilot harness — Agent Builder, pro-code DAs, DAs in MCS"
+    time: "13:45"
+    duration: 30
+
+  - type: lab
+    slug: declarative-agent-skill-reuse
+    label: "Lab 4"
+    title: "Reuse a Cowork skill in a declarative agent"
+    time: "14:15"
+    duration: 30
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "14:45"
+    duration: 15
+
+  - type: module
+    slug: standard-harness
+    label: "Module 5"
+    lab: false
+    title: "Standard harness — Component Model"
+    time: "15:00"
+    duration: 30
+
+  - type: lab
+    slug: standard-harness-components
+    label: "Lab 5"
+    title: "Standard harness — Component Model"
+    time: "15:30"
+    duration: 30
+
+  - type: break
+    title: "General Q&A"
+    time: "16:00"
+    duration: 60
+
+  # --- Day 2 — Copilot Studio deep dives and customer-facing experiences ---
+  - type: day
+    title: "Day 2 — Knowledge & Tools and the Dedicated Harnesses"
+
+  - type: break
+    title: "Re-Welcome / Re-cap"
+    time: "09:00"
+    duration: 15
+
+  - type: module
+    slug: harnesses-and-component-models-latest
+    label: "Module 6"
+    lab: false
+    title: "New Copilot Studio: Harnesses, Orchestration & Component Models"
+    time: "09:15"
+    duration: 60
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "10:15"
+    duration: 30
+
+  - type: module
+    slug: instructions-and-skills
+    label: "Module 7"
+    lab: false
+    title: "Deep Dive: Instructions & Skills"
+    time: "10:45"
+    duration: 45
+
+  - type: lab
+    slug: instructions-skills-authoring
+    label: "Lab 6"
+    title: "Instructions and Skills Authoring"
+    time: "11:30"
+    duration: 30
+
+  - type: break
+    title: "Lunch break"
+    time: "12:00"
+    duration: 60
+
+  - type: module
+    slug: knowledge-and-tools-deep-dive
+    label: "Module 8"
+    lab: false
+    title: "Deep Dive: Knowledge, Tools & Hooks"
+    time: "13:00"
+    duration: 45
+
+  - type: lab
+    slug: hooks-knowledge-travel-policy
+    label: "Lab 7"
+    title: "Hooks and Knowledge: Travel Policy Agent"
+    time: "13:45"
+    duration: 30
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "14:15"
+    duration: 15
+
+  - type: module
+    slug: customer-conversation-harness
+    label: "Module 9"
+    lab: false
+    title: "Customer Conversation Harness"
+    time: "14:30"
+    duration: 30
+
+  - type: lab
+    slug: customer-assist-agent
+    label: "Lab 8"
+    title: "Customer Conversation Harness"
+    time: "15:00"
+    duration: 30
+
+  - type: module
+    slug: managed-apps
+    label: "Module 10"
+    lab: false
+    title: "Managed Apps"
+    time: "15:30"
+    duration: 30
+
+  - type: lab
+    slug: managed-apps-build
+    label: "Lab 9"
+    title: "Managed Apps"
+    time: "16:00"
+    duration: 30
+
+  - type: break
+    title: "Social / Networking"
+    time: "16:30"
+    duration: 90
+
+  # --- Day 3 — Workflows & operations -------------------------------------
+  - type: day
+    title: "Day 3 — Workflows & Operations"
+
+  - type: break
+    title: "Re-Welcome / Re-cap / Quiz"
+    time: "09:00"
+    duration: 30
+
+  - type: module
+    slug: workflows-latest
+    label: "Module 11"
+    lab: false
+    title: "Workflows"
+    time: "09:30"
+    duration: 45
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "10:15"
+    duration: 15
+
+  - type: lab
+    slug: workflows-autonomous
+    label: "Lab 10"
+    title: "Workflows"
+    time: "10:30"
+    duration: 30
+
+  - type: module
+    slug: agent-integration
+    label: "Module 12"
+    lab: false
+    title: "Agent integration"
+    time: "11:00"
+    duration: 30
+
+  - type: lab
+    slug: agent-integration-team
+    label: "Lab 11"
+    title: "Agent integration"
+    time: "11:30"
+    duration: 30
+
+  - type: break
+    title: "Lunch break"
+    time: "12:00"
+    duration: 60
+
+  - type: module
+    slug: alm-and-analytics
+    label: "Module 13"
+    title: "ALM — Traditional, Component Collections + Reporting, Analytics & Evals"
+    time: "13:00"
+    duration: 30
+
+  - type: module
+    slug: coding-agents
+    label: "Module 14"
+    title: "Coding Agents — plugin, migration, new creation"
+    time: "13:30"
+    duration: 30
+
+  - type: break
+    title: "Coffee break / Q&A"
+    time: "14:00"
+    duration: 15
+
+  - type: module
+    slug: ai-finops
+    label: "Module 15"
+    title: "AI FinOps"
+    time: "14:15"
+    duration: 30
+
+  - type: module
+    slug: agent-identity
+    label: "Module 16"
+    title: "Agent Identity"
+    time: "14:45"
+    duration: 15
+
+  - type: module
+    slug: copilot-agent-kit
+    label: "Module 17"
+    title: "Copilot Agent Kit"
+    time: "15:00"
+    duration: 30
+
+  - type: break
+    title: "General Q&A"
+    time: "15:30"
+    duration: 30
