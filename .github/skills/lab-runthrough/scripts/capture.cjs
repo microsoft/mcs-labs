@@ -48,6 +48,8 @@ Commands
   press <key>           Press a key, for example Enter, Escape or Tab.
   scroll <x> <y> <dy>   Scroll the element under a point by dy pixels.
   prompt <file|->       Type the prompt from a file (or stdin) verbatim and press Send.
+  upload <file...>      Choose files for an upload: through the file dialog that --click or
+                        --at opens, or else straight into the page's file input (--nth).
   wait <text>           Wait until the tab shows <text> (default timeout 300000 ms).
   shot <name>           Save <out>/<name>.png.
   pair <name>           Save <out>/<name>-light.png and <name>-dark.png via prefers-color-scheme.
@@ -63,6 +65,8 @@ Options
   --send-label <name>   Accessible name of the send button (default Send).
   --timeout <ms>        Timeout for prompt, wait and login.
   --nth <n>             Click the nth match (from 0) when several controls share a name.
+  --click <name>        upload: the control that opens the file dialog.
+  --at <x,y>            upload: the point that opens the file dialog.
   --clear               typeat: select and delete the field's text first.
   --enter               typeat: press Enter after typing.
   --forbid <regex>      login: fail if the page shows this text, for example your own
@@ -382,6 +386,30 @@ async function click(page, name, nth) {
   }
 }
 
+// Headless browsers have no file dialog to click through, so files are handed to the
+// chooser the page opens, or set on its <input type="file"> when nothing opens one.
+async function upload(page, files, { click: name, at, nth, timeout = 15000 } = {}) {
+  const resolved = files.map(file => path.resolve(file));
+  for (const file of resolved) if (!fs.existsSync(file)) throw new UsageError(`No such file: ${file}`);
+  if (name !== undefined || at !== undefined) {
+    const chooser = page.waitForFileChooser({ timeout });
+    if (name !== undefined) await click(page, name, nth);
+    else { const [x, y] = String(at).split(',').map(Number); await page.mouse.click(x, y); }
+    await (await chooser).accept(resolved);
+    return 'file dialog';
+  }
+  const inputs = [];
+  for (const frame of page.frames()) inputs.push(...await frame.$$('input[type=file]').catch(() => []));
+  try {
+    const input = inputs[nth || 0];
+    if (!input) throw new Error(`Found ${inputs.length} file inputs. Pass --click or --at for the control that opens the file dialog.`);
+    await input.uploadFile(...resolved);
+    return `file input ${nth || 0} of ${inputs.length}`;
+  } finally {
+    await Promise.all(inputs.map(i => i.dispose().catch(() => {})));
+  }
+}
+
 async function clearField(page) {
   const modifier = process.platform === 'darwin' ? 'Meta' : 'Control';
   await page.keyboard.down(modifier);
@@ -583,7 +611,7 @@ function outDir(dir) {
 function parseArgs(argv) {
   const opts = { port: Number(process.env.LAB_CDP_PORT) || DEFAULT_PORT, out: DEFAULT_OUT, settle: 1500, forbid: process.env.LAB_FORBID };
   const flags = new Set(['headless', 'help', 'clear', 'enter']);
-  const valued = new Set(['port', 'url', 'tab', 'out', 'settle', 'scheme-attr', 'send-label', 'timeout', 'nth', 'forbid', 'browser', 'window-size']);
+  const valued = new Set(['port', 'url', 'tab', 'out', 'settle', 'scheme-attr', 'send-label', 'timeout', 'nth', 'forbid', 'browser', 'window-size', 'click', 'at']);
   const positional = [];
   for (let i = 0; i < argv.length; i++) {
     const match = /^--([a-z-]+)(?:=(.*))?$/.exec(argv[i]);
@@ -636,7 +664,7 @@ async function main(argv) {
     return;
   }
 
-  const known = new Set(['goto', 'newtab', 'login', 'controls', 'text', 'click', 'clickat', 'typeat', 'press', 'scroll', 'prompt', 'wait', 'shot', 'pair']);
+  const known = new Set(['goto', 'newtab', 'login', 'controls', 'text', 'click', 'clickat', 'typeat', 'press', 'scroll', 'prompt', 'upload', 'wait', 'shot', 'pair']);
   if (!known.has(command)) throw new UsageError(`Unknown command "${command}".`);
   const captures = ['shot', 'pair'].includes(command) ? outDir(opts.out) : null;
   const credentials = command === 'login' ? readCredentials(true) : null;
@@ -692,6 +720,11 @@ async function main(argv) {
         print(`Sent at ${new Date().toISOString()}: ${text.split('\n')[0]}`);
         break;
       }
+      case 'upload': {
+        const files = need(args, 1, 'upload <file...> [--click <name> | --at <x,y>]');
+        print(`Uploaded ${files.map(f => path.basename(f)).join(', ')} through the ${await upload(page, files, opts)}`);
+        break;
+      }
       case 'wait':
         await waitForText(page, need(args, 1, 'wait <text>')[0], opts.timeout);
         break;
@@ -721,4 +754,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { launch, close, connect, newTab, login, controls, pageText, click, typeAt, submitPrompt, waitForText, shot, pair, redact };
+module.exports = { launch, close, connect, newTab, login, controls, pageText, click, typeAt, submitPrompt, upload, waitForText, shot, pair, redact };

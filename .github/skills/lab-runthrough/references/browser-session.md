@@ -29,6 +29,7 @@ node .github/skills/lab-runthrough/scripts/capture.cjs <command> [args] [options
 | `press <key>` | Presses a key, for example `Enter`, `Escape` or `Tab`. |
 | `scroll <x> <y> <dy>` | Scrolls the element under a point, for panes that do not scroll with the page. |
 | `prompt <file\|->` | Types the prompt verbatim (line breaks kept) into the empty editor, clicks Send and waits until it is posted. |
+| `upload <file...>` | Picks files for an upload step, for example a skill `.zip` or a knowledge file. With `--click <name>` or `--at <x,y>` it clicks the control and answers the file dialog it opens, which works headless; without either it sets the files on the page's `<input type="file">` (`--nth` picks one). Use files from the lab's repo folder or a download outside the repository. |
 | `wait <text>` | Waits until the page shows `text`. |
 | `shot <name>` | Saves `<out>/<name>.png` and prints its size and the display scale. |
 | `pair <name>` | Saves `<name>-light.png` and `<name>-dark.png` by emulating `prefers-color-scheme`, and fails if both are identical. |
@@ -44,7 +45,8 @@ node .github/skills/lab-runthrough/scripts/capture.cjs <command> [args] [options
 | `--scheme-attr <name>` | none | Makes `pair` check `<html name="light\|dark">`. Microsoft 365 Copilot uses `data-color-scheme`. |
 | `--send-label <name>` | `Send` | Accessible name of the send button. |
 | `--timeout <ms>` | 120000 for `prompt` and `login`, 300000 for `wait` | |
-| `--nth <n>` | | `click`: use the nth match (from 0). |
+| `--nth <n>` | | `click`, `upload`: use the nth match (from 0). |
+| `--click <name>`, `--at <x,y>` | | `upload`: the control or point that opens the file dialog. |
 | `--clear`, `--enter` | off | `typeat` only. |
 | `--forbid <regex>` | `LAB_FORBID` | `login`: fail with exit code 4 and blank the tab if the page shows this text. Pass the host user's own name or alias. |
 | `--browser <name\|path>` | Edge, then Chrome; Chrome for Testing when headless | `edge`, `chrome` (Chrome for Testing if installed) or an executable path. |
