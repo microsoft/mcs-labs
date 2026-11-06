@@ -1,0 +1,68 @@
+{
+  "$comment": "Product names that labs should no longer use. Read by scripts/lab-audit.js (code: term-retired). Add an entry only with an official source. Patterns are JavaScript regular expressions matched case-insensitively against each line, with URLs removed first. Lines that explain a rename (formerly, previously, renamed, now called, f.k.a.) are not reported.",
+  "terms": [
+    {
+      "term": "Power Virtual Agents",
+      "pattern": "\\bPower Virtual Agents?\\b",
+      "replacement": "Microsoft Copilot Studio",
+      "since": "2023-11-15",
+      "source": "https://www.microsoft.com/en-us/copilot/blog/copilot-studio/microsoft-power-virtual-agents-now-part-of-microsoft-copilot-studio/"
+    },
+    {
+      "term": "Copilot for Microsoft 365",
+      "pattern": "\\b(?:Microsoft )?Copilot for Microsoft 365\\b",
+      "replacement": "Microsoft 365 Copilot",
+      "since": "2024-09",
+      "source": "https://www.microsoft.com/en-us/copilot/blog/2024/01/15/expanding-copilot-for-microsoft-365-to-businesses-of-all-sizes/"
+    },
+    {
+      "term": "Bing Chat Enterprise",
+      "pattern": "\\bBing Chat Enterprise\\b",
+      "replacement": "Microsoft 365 Copilot Chat",
+      "since": "2023-11-15",
+      "source": "https://blogs.bing.com/search/2023/11/our-vision-to-bring-microsoft-copilot-to-everyone-and-more/"
+    },
+    {
+      "term": "Copilot with commercial data protection",
+      "pattern": "\\bCopilot with commercial data protection\\b",
+      "replacement": "Microsoft 365 Copilot Chat",
+      "since": "2025-01",
+      "source": "https://mc.merill.net/message/MC958903"
+    },
+    {
+      "term": "Teams Toolkit",
+      "pattern": "\\bTeams Toolkit\\b",
+      "replacement": "Microsoft 365 Agents Toolkit",
+      "since": "2025-05-20",
+      "source": "https://devblogs.microsoft.com/microsoft365dev/introducing-the-microsoft-365-agents-toolkit/"
+    },
+    {
+      "term": "Azure AI Studio",
+      "pattern": "\\bAzure AI Studio\\b",
+      "replacement": "Microsoft Foundry",
+      "since": "2024-11-19",
+      "source": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/ignite-2024-streamlining-ai-development-with-an-enhanced-user-interface-accessib/4295859"
+    },
+    {
+      "term": "Azure AI Foundry",
+      "pattern": "\\bAzure AI Foundry\\b",
+      "replacement": "Microsoft Foundry",
+      "since": "2025-11",
+      "source": "https://techcommunity.microsoft.com/blog/marketplace-blog/microsoft-ignite-2025-ai-announcements-what-software-developers-need-to-know/4477320"
+    },
+    {
+      "term": "Azure Cognitive Search",
+      "pattern": "\\bAzure Cognitive Search\\b",
+      "replacement": "Azure AI Search",
+      "since": "2023-11-15",
+      "source": "https://techcommunity.microsoft.com/blog/azure-ai-foundry-blog/announcing-general-availability-of-vector-search-and-semantic-ranker-in-azure-ai/3978525"
+    },
+    {
+      "term": "Azure Active Directory",
+      "pattern": "\\bAzure (?:Active Directory|AD)\\b(?! B2C)",
+      "replacement": "Microsoft Entra ID",
+      "since": "2023-07-11",
+      "source": "https://learn.microsoft.com/entra/fundamentals/new-name"
+    }
+  ]
+}
