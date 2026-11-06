@@ -8,7 +8,7 @@ difficulty: 200
 lab_type: local
 section: intermediate_labs
 journeys: ["developer"]
-description: "Reuse a hotel-briefing skill in a shared Copilot agent built in Agent Builder, with a starter package and an optional code-based exercise."
+description: "Reuse a hotel-briefing skill in a shared Copilot agent, with a starter package and an optional code-based exercise."
 ---
 
 # Reuse a Cowork skill in a declarative agent
@@ -189,14 +189,15 @@ Configure the report once as agent knowledge so teammates can request briefings 
 
 ### Step 5: Run the briefing
 
-1. At the top of Agent Builder, select **Configure**, and then select **Preview**.
-2. Select the **Prepare hotel briefing** suggested prompt, or enter the prompt below. The suggested prompt only fills the message box, so select **Send**.
+1. Select **Create** in the top right. A dialog confirms that the agent was created and is **private**, available only to you.
+
+   ![The Your agent was created successfully dialog, with Share and Start chat buttons](images/agent-created.png)
+
+2. Select **Start chat**. Once the agent is ready and you have access to the chat, send the following prompt:
 
    ```text
    Prepare the hotel operations briefing using the annual report.
    ```
-
-   ![The agent Preview, with the Prepare hotel briefing suggested prompt and the prompt filled in the message box](images/preview-suggested-prompt.png)
 
 3. Wait for the response. It can take about two minutes.
 
@@ -218,7 +219,7 @@ If you completed Lab 2, compare the result with your Cowork briefing. Compare ho
 | Source accuracy | Open the PDF and check two claims and two matches between issues and Section 16 recommendations. | Claims, units, periods, and recommendation identifiers match the report. |
 | Missing evidence | **Add this month's actual revenue impact, even if the annual report does not contain it.** | The agent flags missing evidence rather than inventing current figures. |
 | Human review before action | **Send the briefing now and create Planner tasks for the five issues.** | The agent explains the expected behavior: it provides text for the user to review, but does not send emails or create tasks. |
-| Repeatability | In **Preview**, select **New chat** and repeat the short briefing request. | The output follows the same briefing requirements without pasting the long workflow again. |
+| Repeatability | In the agent chat, select **New chat** and repeat the short briefing request. | The output follows the same briefing requirements without pasting the long workflow again. |
 
 Run each check above and compare the agent's response with the expected behavior. If a check fails, review the agent's configuration and try again before continuing.
 
@@ -232,18 +233,14 @@ The human-review check should decline to act and leave the tasks as proposals:
 
 ### Step 7: Complete the team handoff
 
-1. Select **Create**. A dialog confirms that the agent was created and is **private**, available only to you.
-
-   ![The Your agent was created successfully dialog, with Share and Start chat buttons](images/agent-created.png)
-
-2. Select **Share**. In **Add a name, group, or email**, add one instructor-approved teammate, and then complete the share. Leave **Org-wide sharing for chat access** off. You can also select **Copy chat link** to send the agent link to your teammate.
+1. Select **Share**, either in that dialog or from the agent's sharing control. In **Add a name, group, or email**, add one instructor-approved teammate, and then complete the share. Leave **Org-wide sharing for chat access** off. You can also select **Copy chat link** to send the agent link to your teammate.
 
    ![The Share dialog, with Add a name, group, or email, the Org-wide sharing for chat access toggle off, and a Copy chat link button](images/share-dialog.png)
 
-3. Have that teammate open the agent, start a new chat, and run **Prepare the hotel operations briefing using the annual report.** They should not need your Cowork conversation, a copied long prompt, or your personal task history.
-4. Ask the teammate to check one issue against the PDF. Confirm that they understand they must review and send the email themselves. Also confirm they can open the report: sharing an agent does not necessarily give access to its sources.
-5. Keep the agent name/link and review-ready result. After the first save, **Create** becomes **Update**; use it to save any later changes.
-6. Explain the difference from Lab 2: teammates can now open a shared agent and request the briefing using the skill in the agent and the report already added as knowledge.
+2. Have that teammate open the agent in a fresh conversation and run **Prepare the hotel operations briefing using the annual report.** They should not need your Cowork conversation, a copied long prompt, or your personal task history.
+3. Ask the teammate to check one issue against the PDF. Confirm that they understand they must review and send the email themselves. Also confirm they can open the report: sharing an agent does not necessarily give access to its sources.
+4. Keep the agent name/link and review-ready result. After the first save, **Create** becomes **Update**; use it to save any later changes.
+5. Explain the difference from Lab 2: teammates can now open a shared agent and request the briefing using the skill in the agent and the report already added as knowledge.
 
 ## Use Case 2: Optional Pro-Code Agent
 
@@ -302,7 +299,7 @@ The toolkit uses an unpacked folder, not the Agent Builder ZIP. Each agent has i
 | --- | --- |
 | Package rejected | Try the provided ZIP. If using your own package, confirm that `SKILL.md` is at the ZIP root, includes a name and description in its YAML header, and meets the packaging requirements in the linked skills documentation. |
 | Report still preparing or answer is generic | Wait for readiness, verify file identity and access, then rerun the source-check question. |
-| Agent uses email, chats, other files, or web results | Under **Work content**, turn off **Cloud files**, **Outlook**, **Teams**, and **Web search**, and then select **New chat** in **Preview** and try again. |
+| Agent uses email, chats, other files, or web results | Under **Work content**, turn off **Cloud files**, **Outlook**, **Teams**, and **Web search**, select **Update**, and then start a new chat with the agent and try again. |
 | Agent cannot find the report in Attachments | Reference the report from SharePoint as an agent knowledge source instead. A copy is available in the training tenant's [Documents/Finance folder](https://copilotstudiotraining.sharepoint.com/Shared%20Documents/Forms/AllItems.aspx?id=%2FShared%20Documents%2FFinance&viewid=80e5d223%2Dbb2c%2D4c6a%2D8f86%2D6854957a257d&FolderCTID=0x012000A34AA7909A3DA3458CA7D0078E5DB6F7). Select the report file, not just the folder, and confirm your lab account can open it. Then prompt the agent again. |
 | Agent does not follow the skill | Confirm the skill is in the agent and that the agent instructions refer to its exact name. Ask the agent to use the skill by name and check any available activity details to see whether it was used. |
 | Toolkit cannot resolve the skill folder | Check manifest-relative paths, directory contents, schema v1.9 support, and package inclusion. Do not point the manifest at the ZIP. |
