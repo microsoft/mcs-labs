@@ -40,6 +40,8 @@ test('Bootcamp Latest agenda matches modules and both copies of each lab', () =>
   const modules = agenda.schedule.filter((item) => item.type === 'module');
   const labs = agenda.schedule.filter((item) => item.type === 'lab');
   const sharedLabs = new Set(['mcs-hooks', 'mcs-skills-authoring']);
+  // The scenario-specific Cowork lab replaces a prototype without renaming its shared module.
+  const namedLabs = new Map([['cowork-zava-sales', 'cowork-latest']]);
   assert.ok(modules.length > 0 && labs.length > 0);
 
   for (const [items, type, folder] of [
@@ -63,7 +65,9 @@ test('Bootcamp Latest agenda matches modules and both copies of each lab', () =>
       assert.equal(document.content.match(/^# (.+)$/m)?.[1], item.title, `${item.label}: site heading`);
       assert.equal(readme.match(/^# (.+)$/m)?.[1], item.title, `${item.label}: GitHub heading`);
       if (document.data.module) {
-        if (!sharedLabs.has(item.slug)) {
+        if (namedLabs.has(item.slug)) {
+          assert.equal(document.data.module, namedLabs.get(item.slug), `${item.label}: scenario lab module`);
+        } else if (!sharedLabs.has(item.slug)) {
           assert.equal(item.slug, `mcs-${document.data.module}`, `${item.label}: lab naming`);
         }
         assert.equal(readDocument('_modules', document.data.module).data.lab, item.slug,

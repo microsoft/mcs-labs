@@ -9,7 +9,7 @@
         "http://localhost/bug-bash.html",
         "http://localhost/labs/mcs-governance/index.html",
         "http://localhost/events/bootcamp-preview/index.html",
-        "http://localhost/labs/mcs-cowork-preview/index.html?event=bootcamp-preview"
+        "http://localhost/labs/cowork-zava-sales/index.html?event=bootcamp-latest"
       ],
       "numberOfRuns": 1,
       "settings": {

@@ -1,0 +1,10 @@
+<details class="visual">
+  <summary>Show me: {{ include.image.title | escape }}</summary>
+  <figure>
+    <a href="{{ include.image.src | relative_url }}" target="_blank" rel="noopener">
+      <img src="{{ include.image.src | relative_url }}" alt="{{ include.image.alt | escape }}" width="{{ include.image.width }}" height="{{ include.image.height }}" loading="lazy" decoding="async">
+      <span class="image-link">View full-size screenshot <span aria-hidden="true">&nearr;</span></span>
+    </a>
+    <figcaption>{{ include.image.caption | escape }}</figcaption>
+  </figure>
+</details>

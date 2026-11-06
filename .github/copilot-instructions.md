@@ -178,7 +178,7 @@ Site is served at `http://localhost:4000/mcs-labs/` - the `/mcs-labs/` baseurl i
 
 **Front matter drives the page** - `_layouts/lab.html` reads `page.title`, `page.description`, `page.module`, `page.section`, `page.difficulty`, `page.duration`, `page.order`, `page.journeys`. Metadata lives in the lab's front matter, not in a central config.
 
-**`lab_format: missions` selects the experimental mission-based lab layout** - `_layouts/lab.html` hands the page to `_includes/lab-missions.html`; omit the key for the classic layout. Never set `layout:` on a lab to change its look: the content feed strips `layout`, so the deployed site silently ignores it.
+**`lab_format: missions` selects the guided mission layout** - `_layouts/lab.html` hands the page to `_includes/lab-missions.html`; omit the key for the classic layout. Mission content lives in nested `mission_lab` front matter, which the feed preserves. Maintain the readable Markdown body and paired README too, with verbatim prompt parity. The server renders the steps without JavaScript; scoped CSS/JS live under `assets/`. See `docs/NEW_LAB_CHECKLIST.md` and `_labs/cowork-zava-sales.md`. Never set `layout:` on a lab to change its look: the content feed strips `layout`, so the deployed site silently ignores it.
 
 **Lab and module update dates are derived, not authored** -
 `_plugins/content_last_updated.rb` sets `page.content_last_updated`. Module pages

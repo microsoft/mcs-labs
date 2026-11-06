@@ -81,9 +81,9 @@ schedule:
     duration: 30
 
   - type: lab
-    slug: mcs-cowork-latest
+    slug: cowork-zava-sales
     label: "Lab 2"
-    title: "Cowork hands-on"
+    title: "Cowork: from insights to action"
     time: "11:45"
     duration: 30
 
