@@ -4,7 +4,7 @@ Use after the audit. Mark each item **pass**, **issue** (with evidence) or **n/a
 
 ## Product truth
 
-- [ ] Product, feature and connector names match current Microsoft Learn pages.
+- [ ] Product, feature and connector names match current Microsoft Learn pages. Since 2026: **Microsoft Copilot**, **Microsoft Copilot Chat** and the **Microsoft Copilot harness** (see `scripts/lab-audit-terms.json`); license SKU names stay as the price list shows them.
 - [ ] UI labels in **bold** match the product today, or the review says they could not be verified.
 - [ ] License, credit, preview, region and admin prerequisites are current and complete.
 - [ ] Links resolve to the intended page (not a redirect to a generic landing page).
@@ -18,6 +18,8 @@ Use after the audit. Mark each item **pass**, **issue** (with evidence) or **n/a
 - [ ] The learner can tell when a step succeeded (visible state, message or artifact).
 - [ ] Risky or costly actions (sending email, writing records, schedules, credits) are explicit and reversible.
 - [ ] Cleanup removes anything recurring or shared the lab created.
+- [ ] When learners check results in a business app (system of record), the lab links it in the prerequisites and Lab Details and says what to check there.
+- [ ] Learner notes are never described as saved to the site or an account. Missions labs keep the layout's local-storage note and **Save a PDF copy**.
 
 ## Copies and structure
 

@@ -34,7 +34,7 @@ node .github/skills/lab-runthrough/scripts/capture.cjs <command> [args] [options
 | `--url <prefix>` | first tab | Selects the tab whose URL starts with the prefix. |
 | `--out <dir>` | `<temp>/lab-runthrough` | Must be outside the repository. |
 | `--settle <ms>` | 1500 | Wait after each theme switch in `pair`. |
-| `--scheme-attr <name>` | none | Makes `pair` check `<html name="light\|dark">`. Microsoft 365 Copilot uses `data-color-scheme`. |
+| `--scheme-attr <name>` | none | Makes `pair` check `<html name="light\|dark">`. Microsoft Copilot uses `data-color-scheme`. |
 | `--send-label <name>` | `Send` | Accessible name of the send button. |
 | `--timeout <ms>` | 120000 for `prompt`, 300000 for `wait` | |
 | `--browser <path>` | Edge, then Chrome | |
@@ -106,7 +106,7 @@ file name and format so neither copy changes.
 
 ## Product quirks
 
-Seen in Microsoft 365 Copilot and Cowork in November 2026. Products change; update this list
+Seen in Microsoft Copilot and Cowork in November 2026. Products change; update this list
 when a run-through finds something new, and date it.
 
 - Managed Edge may open `edge://force-signin/` in a new profile. `launch` navigates the

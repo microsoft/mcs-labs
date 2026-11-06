@@ -202,7 +202,8 @@
   /* Paired screenshots match the island: light shows the light capture; dark, high contrast and no-JS (dark tokens) show the dark one. */
   .visual figure a.shot-light, &[data-theme="light"] .visual figure a.shot-dark { display: none; }
   &[data-theme="light"] .visual figure a.shot-light { display: block; }
-  .notice { margin-top: 16px; padding: 16px 18px; border: 1px solid var(--tint-border); background: var(--tint); color: var(--text); border-radius: 14px; font-size: calc(16px * var(--font-scale, 1)); }
+  /* The theme's notice mixin forces a 0.75em size with !important; restore the island's reading size and font. */
+  .notice { margin-top: 16px; padding: 16px 18px; border: 1px solid var(--tint-border); background: var(--tint); color: var(--text); border-radius: 14px; font-family: inherit; font-size: calc(16px * var(--font-scale, 1)) !important; }
   .notice > strong { display: block; color: var(--accent-text); font-size: 13px; margin-bottom: 4px; }
   .notice p { margin: 0; }
 
@@ -238,6 +239,13 @@
   .reflection label { display: block; font-size: 20px; font-weight: 600; margin-bottom: 14px; }
   .reflection textarea { width: 100%; padding: 14px 16px; border: 1px solid var(--border-strong); border-radius: 12px; background: var(--prompt-bg); resize: vertical; }
   .reflection textarea::placeholder { color: var(--soft); opacity: 1; }
+  .local-only { display: flex; gap: 12px; align-items: flex-start; max-width: none; margin: 0 0 12px; padding: 12px 16px; border: 1px solid var(--tint-border); border-radius: 12px; background: var(--tint); color: var(--muted); font-size: calc(15px * var(--font-scale, 1)); line-height: 1.5; }
+  .local-only svg { flex-shrink: 0; margin-top: 1px; color: var(--accent-text); }
+  .local-only strong { color: var(--text); }
+  .keep-copy { display: flex; flex-wrap: wrap; align-items: center; gap: 10px 16px; margin-top: 14px; }
+  .keep-copy p { margin: 0; max-width: 46ch; color: var(--muted); font-size: calc(14px * var(--font-scale, 1)); line-height: 1.45; }
+  .keep-copy strong { color: var(--text); }
+  .print-only { display: none; }
   .sources { margin-top: 32px; color: var(--muted); font-size: 15px; }
   .sources ul { padding-left: 22px; margin: 18px 0; }
   .sources li { margin-bottom: 8px; }
@@ -282,6 +290,67 @@
     .is-done :is(.route-number, .rail-number, .mission-number)::after { background: HighlightText; }
     .btn[aria-pressed="true"]::before { forced-color-adjust: none; background: ButtonText; }
   }
+  /*
+   * Save a PDF copy prints the learner's own record: steps, prompts, reveals,
+   * checked boxes, quiz answers and the note. It always uses the light palette
+   * on white, whatever theme is on screen, and leaves out screenshots,
+   * troubleshooting and controls. The light tokens are repeated on purpose.
+   */
+  @media print {
+    &, &[data-theme] {
+      --bg: #fff;
+      --bg2: #f3f7fc;
+      --card: #fff;
+      --card-grad: none;
+      --border: #d3e0ee;
+      --border-strong: #7897b6;
+      --text: #0b2340;
+      --muted: #3f5b7a;
+      --soft: #4f6b8a;
+      --accent: #0078d4;
+      --accent-text: #005a9e;
+      --success: #0b7363;
+      --success-bg: rgba(11, 115, 99, .08);
+      --on-success: #fff;
+      --error: #b4234a;
+      --tint: rgba(0, 120, 212, .06);
+      --tint-border: rgba(0, 120, 212, .38);
+      --prompt-bg: #f7fafd;
+      --btn-grad: none;
+      --shadow: none;
+      color-scheme: light;
+    }
+    & { background: #fff; font-size: 11pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    :is(.lab-header, .route, .lab-rail, .skip-link, .toast, .hero-proof, .hero .hero-actions, .saving-note,
+      .mission-actions, .chip-btn, .tool, .visual, .stuck, .local-only, .reflection textarea, .keep-copy) { display: none !important; }
+    .print-only { display: block; }
+    .wrap { max-width: none; padding: 0; }
+    .hero { display: block; padding: 0 0 12pt; }
+    .hero h1 { font-size: 26pt; }
+    .promise { max-width: none; margin-top: 10pt; font-size: 13pt; }
+    .print-stamp { margin: 12pt 0 0; color: var(--muted); font-size: 10pt; }
+    .lab-layout { display: block; padding-top: 12pt; }
+    .lab-content { max-width: none; }
+    & h2 { font-size: 18pt; break-after: avoid; }
+    & h3 { font-size: 12.5pt; break-after: avoid; }
+    .mission { padding-top: 20pt; }
+    .mission-number { width: 36pt; height: 36pt; border-radius: 10pt; font-size: 18pt; }
+    .brief { font-size: 12.5pt; }
+    .notice { font-size: 10.5pt !important; }
+    .mission-step { padding: 10pt 0; }
+    :is(.mission-heading, .prompt, .notice, .aha, .knowledge-check, .quiz-option, .reflection-print) { break-inside: avoid; }
+    .aha-content { animation: none; }
+    .aha-line { font-size: 16pt; }
+    .finale { margin-top: 24pt; padding: 18pt 0 0; }
+    .finale .btn { min-height: 0; padding: 0; border: 0; background: none; color: var(--accent-text); }
+    .reflection-print { min-height: 3.2em; padding: 10pt 12pt; border: 1px solid var(--border-strong); border-radius: 8pt; white-space: pre-wrap; overflow-wrap: anywhere; }
+    .reflection-print:empty::before { content: "No note written."; color: var(--soft); }
+  }
+}
+
+/* Outside the island, a printed missions lab drops the site's event navigation, floating controls and Lab Assistant. */
+@media print {
+  body:has(#lab-v2-root) :is(.event-rail, .event-navpair, .back-to-top, .skip-links, .wc-tag, .wc-nudge, .wc-overlay, .wc-panel) { display: none !important; }
 }
 
 /* The mission hero replaces only this opt-in page's theme-generated title. */

@@ -31,6 +31,9 @@ Ask for anything missing, one question at a time:
 - The **finish line**: the artifact the learner leaves with.
 - Prompts the requester supplied. Keep supplied prompts **verbatim**; never "improve" them.
 - Environment: tenant, accounts, licenses, connectors or plugins the facilitator prepares.
+- The **system of record**, if the scenario reads or writes business data (a CRM, a ticketing
+  app): its name, URL and what learners should check there. Zava Sales uses
+  [Zava Sales Hub](https://aka.ms/ZavaSalesHub).
 
 Confirm with the requester before adding a lab to an advertised (listed) event or
 replacing a lab in an existing agenda.
@@ -45,6 +48,14 @@ Apply `../lab-review/references/learning-design.md` while drafting. In short:
 - Explain *why* after the learner has seen it work (the reveal), not before.
 - Mark what is optional. Budget minutes per section; they must add up to `duration`.
 - Ground every product claim in a current Microsoft Learn page and cite it.
+- Use today's product names. `scripts/lab-audit-terms.json` lists retired ones; since
+  August 2026 it is **Microsoft Copilot** and **Microsoft Copilot Chat** (not Microsoft 365
+  Copilot), and since October 2026 the **Microsoft Copilot harness** (not GitHub Copilot
+  harness). Keep license SKU names, such as Microsoft 365 Copilot (add-on), as the price
+  list shows them, and UI labels exactly as the product shows them.
+- When there is a system of record, tell learners to open it in another tab, both in the
+  prerequisites and in Lab Details: say what it is and what to check there, so they can
+  confirm what Copilot found and see the records it creates.
 
 ## 4. Scaffold the files
 
@@ -84,6 +95,12 @@ Then:
    - `scripts/lab-missions.test.js` asserts which labs use missions. Add the new slug to
      that allowlist and add a contract test for the new lab modeled on the Zava Sales
      tests (prompts verbatim in all copies, copies in sync, mission contract).
+   - The layout opens each step's **Click-by-click help** by default, so write `help` as
+     the complete click path most learners will follow, not as an afterthought.
+   - The layout keeps checkmarks, quiz answers and the `reflection` note only in the
+     browser's local storage, says so next to the note, and offers **Save a PDF copy**
+     (the browser's print dialog) at the end. Do not promise elsewhere that notes are
+     saved, and do not add download buttons: prompts are copied in place.
 
 ## 5. Preview without touching the public site
 
