@@ -90,7 +90,8 @@ test('feed materialization retains mission data, exact prompts and the readable 
   assert.equal(materialized.data.lab_format, 'missions');
   assert.deepEqual(materialized.data.mission_lab, lab);
   assert.deepEqual(fencedPrompts(materialized.content), prompts);
-  assert.ok(materialized.content.includes('https://aka.ms/CoworkDemoHub'));
+  const demoHubLink = materialized.content.match(/\[Cowork Demo Hub\]\(([^)]+)\)/);
+  assert.equal(demoHubLink?.[1], 'https://aka.ms/CoworkDemoHub');
 });
 
 test('only Zava Sales opts into missions and the retired prototype is absent', () => {
