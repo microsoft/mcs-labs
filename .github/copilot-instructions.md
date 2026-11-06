@@ -178,6 +178,8 @@ Site is served at `http://localhost:4000/mcs-labs/` - the `/mcs-labs/` baseurl i
 
 **Front matter drives the page** - `_layouts/lab.html` reads `page.title`, `page.description`, `page.module`, `page.section`, `page.difficulty`, `page.duration`, `page.order`, `page.journeys`. Metadata lives in the lab's front matter, not in a central config.
 
+**`lab_format: missions` selects the guided mission layout** - `_layouts/lab.html` hands the page to `_includes/lab-missions.html`; omit the key for the classic layout. Mission content lives in nested `mission_lab` front matter, which the feed preserves. Maintain the readable Markdown body and paired README too, with verbatim prompt parity. The server renders the steps without JavaScript; scoped CSS/JS live under `assets/`. See `docs/NEW_LAB_CHECKLIST.md` and `_labs/cowork-zava-sales.md`. Never set `layout:` on a lab to change its look: the content feed strips `layout`, so the deployed site silently ignores it.
+
 **Lab and module update dates are derived, not authored** -
 `_plugins/content_last_updated.rb` sets `page.content_last_updated`. Module pages
 use their local `slides:` PowerPoint Git date and fall back to the module
@@ -243,6 +245,8 @@ Its running order comes from `_data/agendas/<event_id>.yml`, read by `_layouts/e
 > Several older events also have a page at `labs/<event-name>/index.md` (bootcamp, mcs-in-a-day, azure-ai-workshop and others). Those are legacy pages served under `/labs/`, **not** part of the events collection. Do not add new events there — a file in `labs/` never enters `site.events` and will not get the event layout, agenda rendering or `/events/` URL.
 
 Use the shared `.event-*` CSS classes for styling.
+
+**Unlisted previews** - to try an event or lab on the live site without advertising it, set `unlisted: true` (plus `search: false` and `sitemap: false`) in its front matter. It drops out of the homepage, All Labs, the Events index, event navigation and feed manifests, and gets `noindex`; `_events/bootcamp-preview.md` is the working example. The URL stays public (not access-controlled), and an unlisted page still gets a per-item feed document because the deployed site is built from those. See `docs/NEW_LAB_CHECKLIST.md`.
 
 ## 🚀 Common Workflows
 

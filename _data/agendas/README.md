@@ -64,22 +64,33 @@ event URL redirects to the current event. Legacy module/lab context links also
 resolve to their current counterparts; old presentation download URLs remain
 retired.
 
-`bootcamp-latest.yml` is the source of truth for 16 modules and 12 labs. Its day
+`bootcamp-latest.yml` is the source of truth for 17 modules and 11 labs. Its day
 boundaries are 09:00-16:00, 09:00-18:00 (including the social), and 09:00-16:00.
-Module and lab titles and durations are mirrored into the linked entity files;
-lab titles and slot durations also appear in their GitHub READMEs.
+Module and lab titles and durations are mirrored into the linked entity files,
+except for the shared Hooks lab: Lab 7 uses `mcs-hooks` with a 30-minute event
+slot while the standalone lab remains 45 minutes. Lab 6 uses
+`mcs-skills-authoring` with a 30-minute core lab; Skill creation is optional
+extra credit outside that timebox.
 
 Lab slugs follow `mcs-<module-slug>`. The standalone Copilot Code lab has no
-dedicated module row and uses `mcs-copilot-code`. Keep the event's fallback
+dedicated module row and uses `mcs-copilot-code`. The shared Skills and Hooks
+labs retain their `mcs-skills-authoring` and `mcs-hooks` slugs and their
+`instructions-skills-runtime-and-sandbox` and `metadata-and-hooks-deep-dive`
+module associations, respectively.
+Keep the event's fallback
 `labs:` list in `_events/bootcamp-latest.md` in the same order as the agenda.
 Explicit lab rows are authoritative for hero counts and timing, so preceding
 companion-module rows use `lab: false`.
+
+Module 17, Copilot Agent Kit, runs on Day 3 at 15:00 for 30 minutes, followed
+by General Q&A at 15:30 for 30 minutes. It has no companion lab.
 
 ### Legacy event links
 
 The [event alias definitions](../event-aliases.yml) map the former event ID and
 renamed module/lab slugs to the current curriculum. Instructions and Skills
-links resolve to the combined topic. Items no longer scheduled in the latest
+module links resolve to the combined topic, while lab links resolve to
+Instructions and Skills Authoring. Items no longer scheduled in the latest
 agenda resolve to the event overview instead of an unrelated replacement.
 
 Compatibility pages use the [redirect layout](../../_layouts/redirect.html)
@@ -108,19 +119,30 @@ GitHub's raw/media hosts.
 
 Bootcamp-specific lab copies preserve the original shared Markdown files:
 
-| Original shared lab | Bootcamp Latest copy |
+| Original shared lab | Bootcamp Latest lab |
 | --- | --- |
-| `m365-copilot-frontier-agents` | `mcs-m365-copilot-latest` |
-| `cowork-hands-on` | `mcs-cowork-latest` |
+| `m365-copilot-chat-work-iq` (derived from `m365-copilot-frontier-agents`; Researcher and Analyst as extra credit) | `mcs-m365-copilot-latest` |
+| `cowork-hands-on` | `cowork-zava-sales` (new scenario; the classic `mcs-cowork-latest` remains available) |
 | `mcs-tools` | `mcs-knowledge-and-tools-deep-dive` |
 | `mcs-workflows` | `mcs-workflows-latest` |
 
-The copied labs reuse images and downloads from their original lab folders via
+The Zava Sales lab has its own images and opts into guided missions; other labs
+retain their classic rendering. Before delivering it, verify that the assigned
+account can find the Northstar renewal through **Chat business-data search** and
+can connect the **Cowork Dataverse plugin** to the training CRM. These are separate
+capabilities: a working Dataverse connection does not establish Chat grounding.
+The optional Friday exercise needs real accessible feedback to demonstrate skill
+improvement; configuring a schedule alone is not evidence that it has run.
+
+The other copied labs reuse images and downloads from their original lab folders via
 relative links; those asset folders remain dependencies. Do not remove them
 when editing or retiring an original lab. Workflows also has a Bootcamp-only
 module, `workflows-latest`, to avoid changing the shared module's duration.
-The shared `mcs-workflows` lab remains 45 minutes for other workshops; the
-Bootcamp-only `mcs-workflows-latest` lab uses its own 30-minute slot.
+Both `mcs-workflows` and `mcs-workflows-latest` now have a 30-minute core
+(Use Cases 1–3). Inventory management and the price-quote specialist are
+optional extra credit outside that allocation. CAT-led events prepare the
+prerequisites; independent learners follow the self-guided setup in each lab.
+The shared and Bootcamp-only module durations remain separate from lab pacing.
 
 The six shared source modules retain their previous titles, durations, and
 companion associations. Bootcamp Latest uses `-latest` copies of those modules,
@@ -131,8 +153,9 @@ unchanged deck files.
 
 ### Presentations and placeholders
 
-Each active module links to its numbered `M01`-`M16` deck under
-`presentations/bootcamp-latest/`. Renaming a deck requires updating every active
+Modules 1-16 link to their numbered `M01`-`M16` decks under
+`presentations/bootcamp-latest/`. Module 17 retains the existing
+`Copilot Studio Kit.pptx` filename in that directory. Renaming a deck requires updating every active
 `slides:` reference, including other workshop agendas. Existing deck contents
 are preserved; renumbering does not rewrite the titles inside the slides.
 
@@ -156,16 +179,19 @@ merging the Bootcamp Latest decks does not change other deliveries:
 | `agent-skills` | `M06. Deep Dive - Skills.pptx` |
 | `github-copilot-harness` | `M10. GitHub Copilot Harness Component Model.pptx` |
 | `creation-github-harness` | `M11. Creation GitHub Harness from UX and from Chat.pptx` |
+| `governance-and-agent-365` | `M17. Governance Managed Environment and Agent 365.pptx` |
 
-Keep the Latest authoring sources in place for their planned merges: both
-GitHub Harness decks use `M06` and `TODO MERGE` filenames, Skills uses `M07`,
-and Multi-Agent uses `M12`. Standalone modules must not link to these working
-merge sources or adopt a composite deck without an explicit content decision.
+M06 uses the scheduled New Copilot Studio Harnesses deck; its two former
+GitHub Harness merge-source files have been removed. Keep the remaining Latest
+authoring sources in place for their planned merges: Skills uses `M07` and
+Multi-Agent uses `M12`. Standalone modules must not link to these working merge
+sources or adopt a composite deck without an explicit content decision.
 
 The Latest Multi-Agent merge source has no active references. The shared
 `multi-agent` module, used by the original Bootcamp, keeps its original deck in
-`presentations/bootcamp/`. The Governance deck remains linked from its standalone
-module but is not scheduled in Bootcamp Latest. The host deck is unchanged.
+`presentations/bootcamp/`. The Governance deck has moved to
+`presentations/shared/` and remains linked from its standalone module, but is
+not scheduled in Bootcamp Latest.
 
 Placeholder module/lab pages explicitly state that content is coming soon.
 The Knowledge, Tools & Hooks lab currently carries the Tools/MCP exercises;

@@ -385,8 +385,6 @@ Create a custom connector for the Free Dictionary API, add it as a tool in your 
 
 ---
 
----
-
 ## Use Case #2: Connect an MCP Server for Live Data Access
 
 Create a Copilot Agent that connects to the Dataverse MCP Server for real-time natural language access to business data.
@@ -513,8 +511,6 @@ Create and configure a Copilot Agent with Dataverse MCP Server integration that 
 * You must create your agent before adding MCP Servers as tools
 * Use Activity Map to debug and understand tool execution flow
 * Suggested prompts help guide users but don't appear in Copilot Studio testing
-
----
 
 ---
 
@@ -696,8 +692,6 @@ Create a Chit Chat Agent with a custom prompt tool that controls response behavi
 * Test with boundary cases to make sure the agent stays within its defined scope
 * GPT-4.1 mini is typically the most cost-effective choice for simple conversational scenarios
 * Disabling general knowledge helps validate that your prompt tool is handling responses correctly
-
----
 
 ---
 

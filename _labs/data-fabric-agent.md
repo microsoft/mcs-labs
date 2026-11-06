@@ -344,8 +344,6 @@ Create and configure a Fabric Data Agent that can intelligently query the e-comm
 
 ---
 
----
-
 ## Use Case #2: Connecting Fabric Agent to Copilot Studio
 
 Enable intelligent agent collaboration by connecting your Fabric Data Agent to Microsoft Copilot Studio.

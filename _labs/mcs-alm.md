@@ -237,8 +237,6 @@ Set up your development environment by creating a solution and custom publisher 
 
 ---
 
----
-
 ## Use Case #2: Create Environment Variables and Connection References
 
 Use reusable variables and connection abstractions for seamless multi-environment deployments.
@@ -323,8 +321,6 @@ Create environment variables and connection references that enable your solution
 * List the environment variables your agent needs (e.g., external API base URLs, system emails, etc.).
 * Define clear naming conventions to help your team manage them consistently.
 * Try creating a **Secret**-type environment variable that securely references a value in Azure Key Vault.
-
----
 
 ---
 

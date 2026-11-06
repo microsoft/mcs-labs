@@ -202,8 +202,6 @@ Configure a Copilot Studio agent for external access and integrate it with the P
 
 ---
 
----
-
 ## 🔄 Use Case #2: Execute and Analyze Test Results
 
 Run your configured tests and interpret the results to optimize agent performance and ensure quality.
@@ -278,8 +276,6 @@ In this section, you'll learn how to execute test runs, analyze detailed results
 * Set up a regular testing schedule that aligns with your agent development and deployment cycles
 * Create test scenarios that reflect your actual user conversations and business requirements
 * Establish key performance indicators (KPIs) based on test results that align with your business goals
-
----
 
 ---
 

@@ -120,7 +120,7 @@ classes: wide
 .accent-orange { background: var(--color-journey-orange); }
 </style>
 
-{% assign all_events = site.events | sort: "order" %}
+{% assign all_events = site.events | where_exp: "event", "event.unlisted != true" | sort: "order" %}
 {% assign accent_colors = "accent-blue,accent-green,accent-purple,accent-orange" | split: "," %}
 
 <ul class="ws-index-stats">

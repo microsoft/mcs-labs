@@ -47,6 +47,17 @@ test('itemInFeed: included when collection listed and slug not excluded', () => 
   assert.equal(feed.itemInFeed({ collection: 'modules', slug: 'a' }, def), false);
 });
 
+test('itemInFeed: unlisted items never enter public feeds, including explicit includes', () => {
+  const def = feed.resolveConfig({
+    feeds: { f: { collections: ['labs'], include: ['preview-lab'] } },
+  }).feeds.f;
+  assert.equal(feed.itemInFeed({
+    collection: 'labs',
+    slug: 'preview-lab',
+    metadata: { unlisted: true },
+  }, def), false);
+});
+
 test('itemInFeed: exclude blocks an item whose collection is included', () => {
   const def = feed.resolveConfig({ feeds: { f: { collections: ['labs'], exclude: ['a'] } } }).feeds.f;
   assert.equal(feed.itemInFeed({ collection: 'labs', slug: 'a' }, def), false);
@@ -93,6 +104,14 @@ test('selectFeedItems: returns only matching items, ordered', () => {
   ];
   const got = feed.selectFeedItems(items, def).map((i) => i.slug);
   assert.deepEqual(got, ['a', 'b']);
+});
+
+test('selectItemDocs: feed members plus unlisted pages, written once each', () => {
+  const listed = { collection: 'labs', slug: 'a', metadata: {} };
+  const preview = { collection: 'labs', slug: 'preview', metadata: { unlisted: true } };
+  const excluded = { collection: 'labs', slug: 'excluded', metadata: {} };
+  const got = feed.selectItemDocs([listed, preview, excluded], { f1: [listed], f2: [listed] }).map((i) => i.slug);
+  assert.deepEqual(got, ['a', 'preview']);
 });
 
 test('rewriteImages: rewrites markdown image refs and collects absolute URLs', () => {
@@ -160,6 +179,21 @@ test('rewriteImages: multiple parent segments normalize and unrelated relative l
   const { markdown, images } = feed.rewriteImages(md, 'https://x.test/mcs-labs', 'labs', 'bootcamp-copy');
   assert.equal(markdown, '![a](https://x.test/mcs-labs/labs/shared-lab/images/a.png) [overview](../shared-lab/) [notes](../shared-lab/notes.md)');
   assert.deepEqual(images, ['https://x.test/mcs-labs/labs/shared-lab/images/a.png']);
+});
+
+test('rewriteImages: absolutizes every srcset candidate and lists theme variants in the manifest', () => {
+  const md = '<picture><source media="(prefers-color-scheme: dark)" srcset="images/a-dark.webp"><img src="images/a.webp" alt="A"></picture> ' +
+    "<source srcset='./images/b.webp 1x, ../shared-lab/images/b@2x.webp 2x, https://cdn.test/c.webp 3x'>";
+  const { markdown, images } = feed.rewriteImages(md, 'https://x.test/mcs-labs', 'labs', 'demo');
+  assert.equal(markdown,
+    '<picture><source media="(prefers-color-scheme: dark)" srcset="https://x.test/mcs-labs/labs/demo/images/a-dark.webp"><img src="https://x.test/mcs-labs/labs/demo/images/a.webp" alt="A"></picture> ' +
+    "<source srcset='https://x.test/mcs-labs/labs/demo/images/b.webp 1x, https://x.test/mcs-labs/labs/shared-lab/images/b@2x.webp 2x, https://cdn.test/c.webp 3x'>");
+  assert.deepEqual(images.sort(), [
+    'https://x.test/mcs-labs/labs/demo/images/a-dark.webp',
+    'https://x.test/mcs-labs/labs/demo/images/a.webp',
+    'https://x.test/mcs-labs/labs/demo/images/b.webp',
+    'https://x.test/mcs-labs/labs/shared-lab/images/b@2x.webp',
+  ]);
 });
 
 test('contentHash: deterministic, prefixed, and content-sensitive', () => {
@@ -342,6 +376,30 @@ test('CLI: publishes resolved deck dates and Markdown fallbacks without changing
       const parsed = require('gray-matter')(consume.materializeDoc(item, 'https://consumer.test'));
       assert.equal(parsed.data.content_last_updated, item.metadata.content_last_updated);
     }
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('CLI: unlisted pages get a per-item document for the site build but never appear in a feed listing', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'mcs-feed-unlisted-'));
+  try {
+    fs.mkdirSync(path.join(root, '_events'));
+    fs.writeFileSync(path.join(root, '_events', 'listed.md'), '---\ntitle: Listed\n---\nListed body\n');
+    fs.writeFileSync(path.join(root, '_events', 'preview.md'), '---\ntitle: Preview\nunlisted: true\n---\nPreview body\n');
+
+    const out = path.join(root, 'published');
+    execFileSync(process.execPath, [path.join(__dirname, 'build-feed.js'), '--out', out], { cwd: root, stdio: 'pipe' });
+
+    const read = (...parts) => JSON.parse(fs.readFileSync(path.join(out, ...parts), 'utf8'));
+    const slugs = (doc) => doc.items.map((item) => item.slug);
+    assert.deepEqual(slugs(read('all.json')), ['listed']);
+    assert.deepEqual(slugs(read('all', 'manifest.json')), ['listed']);
+    assert.equal(read('index.json').feeds.find((f) => f.name === 'all').item_count, 1);
+
+    const doc = read('items', 'events', 'preview.json');
+    assert.equal(doc.item.content_markdown.trim(), 'Preview body');
+    assert.equal(doc.item.metadata.unlisted, true);
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

@@ -69,3 +69,30 @@ test('dedicated workshop modules preserve shared module and lab associations', (
     assert.equal(readDocument('_modules', module).data.lab, slug);
   }
 });
+
+test('Skills Authoring keeps one core use case and optional Skill-creation extra credit', () => {
+  const document = readDocument('_labs', 'mcs-skills-authoring');
+  const readme = fs.readFileSync(path.join(root, 'labs', 'mcs-skills-authoring', 'README.md'), 'utf8');
+  assert.equal(document.data.duration, 30);
+
+  for (const [source, content] of [['site', document.content], ['GitHub', readme]]) {
+    const headings = [...content.matchAll(/^## (.+)$/gm)].map((match) => match[1]);
+    const core = headings.filter((heading) => heading.includes('Use Case #'));
+    assert.equal(core.length, 1, `${source}: only one core use case`);
+    assert.ok(core[0].endsWith('Use Case #1: Leveraging Skills in Copilot Studio agents'));
+    const conclusions = headings.findIndex((heading) => heading.endsWith('Conclusions and recommendations'));
+    const authoring = headings.findIndex((heading) =>
+      heading.endsWith('Extra Credit: Create and test a Skill with Copilot Studio'));
+    assert.ok(conclusions >= 0 && authoring > conclusions, `${source}: authoring follows conclusions`);
+    assert.doesNotMatch(content, /Use Cases? #[234]|Use Case #\d.*workflows|Cowork|60.minute/i,
+      `${source}: removed routes and outdated pacing are absent`);
+    assert.match(content, /\| 300 \| Maker \| 30 minutes \|/, `${source}: core duration`);
+    assert.match(content, /Extra-credit exercises are outside the 30-minute duration/);
+    assert.match(content, /Optional extra credit\. Timebox: 25 minutes, outside the core lab/);
+    assert.match(content, /westbrook-evaluation-weights\.png/, `${source}: core sandbox exercise retained`);
+    assert.match(content, /##### Test 1: Complete missing intake details/);
+    assert.match(content, /##### Test 2: Correct a complete intake summary/);
+    assert.ok(headings.some((heading) => heading.endsWith('Extra Credit: Explore the agent harness')));
+    assert.ok(headings.some((heading) => heading.endsWith('Extra Credit: Generate with AI (preview)')));
+  }
+});

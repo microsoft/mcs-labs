@@ -1,0 +1,21 @@
+{%- comment -%}
+  Optional src_dark pairs a dark capture with the light src. Both variants are
+  rendered and CSS shows the one matching the island theme, so the screenshot
+  follows the site's theme toggle rather than only the OS setting. The hidden
+  variant is display:none and lazy, so it is neither announced nor downloaded.
+{%- endcomment -%}
+{%- assign shot_variants = "default" | split: "," -%}
+{%- if include.image.src_dark -%}{%- assign shot_variants = "light,dark" | split: "," -%}{%- endif -%}
+<details class="visual">
+  <summary>Show me: {{ include.image.title | escape }}</summary>
+  <figure>
+    {%- for variant in shot_variants %}
+    {%- if variant == "dark" -%}{%- assign shot_src = include.image.src_dark -%}{%- else -%}{%- assign shot_src = include.image.src -%}{%- endif %}
+    <a{% if variant != "default" %} class="shot-{{ variant }}"{% endif %} href="{{ shot_src | relative_url }}" target="_blank" rel="noopener">
+      <img src="{{ shot_src | relative_url }}" alt="{{ include.image.alt | escape }}" width="{{ include.image.width }}" height="{{ include.image.height }}" loading="lazy" decoding="async">
+      <span class="image-link">View full-size screenshot <span aria-hidden="true">&nearr;</span></span>
+    </a>
+    {%- endfor %}
+    <figcaption>{{ include.image.caption | escape }}</figcaption>
+  </figure>
+</details>

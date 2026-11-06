@@ -1,0 +1,32 @@
+{%- comment -%}
+  Overrides minimal-mistakes' _includes/post_pagination.html.
+
+  The theme links every document to its alphabetical neighbours in its
+  collection. An unlisted preview page would otherwise become the visible
+  Previous/Next of a live page, which advertises it and changes that page's
+  pager. So unlisted neighbours are stepped over, and an unlisted page shows no
+  generic pager of its own (event navigation covers moving between labs).
+  Everything else renders exactly as the theme does.
+{%- endcomment -%}
+{%- unless page.unlisted -%}
+{%- assign pager_previous = page.previous -%}
+{%- assign pager_next = page.next -%}
+{%- for step in (1..10) -%}
+  {%- if pager_previous.unlisted -%}{%- assign pager_previous = pager_previous.previous -%}{%- endif -%}
+  {%- if pager_next.unlisted -%}{%- assign pager_next = pager_next.next -%}{%- endif -%}
+{%- endfor -%}
+{% if pager_previous or pager_next %}
+  <nav class="pagination">
+    {% if pager_previous %}
+      <a href="{{ pager_previous.url | relative_url }}" class="pagination--pager" title="{{ pager_previous.title | markdownify | strip_html | strip}}">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
+    {% else %}
+      <a href="#" class="pagination--pager disabled">{{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</a>
+    {% endif %}
+    {% if pager_next %}
+      <a href="{{ pager_next.url | relative_url }}" class="pagination--pager" title="{{ pager_next.title | markdownify | strip_html | strip}}">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
+    {% else %}
+      <a href="#" class="pagination--pager disabled">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }}</a>
+    {% endif %}
+  </nav>
+{% endif %}
+{%- endunless %}

@@ -11,18 +11,49 @@
   Lab rows are enriched with the lab's title, URL, difficulty, and
   duration from site.labs so the IIFE can render the rail without
   additional lookups.
+
+  Unlisted (preview) events are emitted only on unlisted pages and on the
+  pages they list, so a preview can reuse advertised labs for side-by-side
+  comparison without the preview leaking into any other page's manifest.
 {%- endcomment -%}
 <script type="application/json" id="mcs-events-manifest">
 [
 {%- assign all_deliveries = site.events | concat: site.workshops -%}
+{%- if page.collection == "modules" -%}
+  {%- assign page_item_type = "module" -%}
+{%- else -%}
+  {%- assign page_item_type = "lab" -%}
+{%- endif -%}
 {%- assign event_sep = "" -%}
 {%- for event in all_deliveries -%}
+{%- assign include_event = true -%}
+{%- if event.unlisted == true and page.unlisted != true -%}
+  {%- assign include_event = false -%}
+  {%- assign member_agenda = site.data.agendas[event.event_id] -%}
+  {%- if member_agenda and member_agenda.schedule -%}
+    {%- for row in member_agenda.schedule -%}
+      {%- if row.slug and row.slug == page.slug and row.type == page_item_type -%}
+        {%- assign include_event = true -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- elsif page_item_type == "lab" -%}
+    {%- for entry in event.labs -%}
+      {%- if entry.slug and entry.slug == page.slug -%}
+        {%- assign include_event = true -%}
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+{%- endif -%}
+{%- if include_event -%}
 {{ event_sep }}
   {
     "event_id": {{ event.event_id | jsonify }},
     "title": {{ event.title | jsonify }},
     "url": {{ event.url | relative_url | jsonify }},
     "kind": {% if event.collection == "workshops" %}"workshop"{% else %}"event"{% endif %},
+    {%- if event.unlisted == true %}
+    "unlisted": true,
+    {%- endif %}
     "schedule": [
       {%- assign agenda = site.data.agendas[event.event_id] -%}
       {%- assign item_sep = "" -%}
@@ -113,6 +144,7 @@
     ]
   }
 {%- assign event_sep = "," -%}
+{%- endif -%}
 {%- endfor -%}
 ]
 </script>
