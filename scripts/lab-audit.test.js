@@ -15,6 +15,15 @@ test('heading ids follow kramdown GFM, including the emoji variation selector', 
   assert.equal(id('Use Case #1: Configure **Agent** `Tests`'), 'use-case-1-configure-agent-tests');
   assert.equal(id('See [the docs](https://learn.microsoft.com) ![icon](i.png)'), 'see-the-docs');
   assert.equal(id('snake_case and _emphasis_'), 'snake_case-and-emphasis');
+  assert.equal(id('Tags <<b>b> nest <i>here</i>'), 'tags-b-nest-here');
+  assert.ok(!audit.headingRawText('Tags <<b>b> and a < b').includes('<'), 'no tag opener survives');
+});
+
+test('proseLines drops HTML comments, including several per line and multi-line ones', () => {
+  const lines = ['a <!-- x --> b <!--y--> c', 'keep <!-- open', 'hidden', 'still --> after <!-- z --> end', '<!---->tail'];
+  assert.deepEqual(audit.proseLines(lines), [
+    { text: 'a  b  c', line: 1 }, { text: 'keep ', line: 2 }, { text: ' after  end', line: 4 }, { text: 'tail', line: 5 },
+  ]);
 });
 
 test('collectAnchors numbers duplicates, skips code fences and keeps explicit ids', () => {
@@ -254,12 +263,12 @@ test('the real Zava Sales missions lab meets the missions contract and stays in 
 test('formatters summarize counts and render a markdown table', () => {
   const result = {
     labs: ['x'],
-    findings: [{ slug: 'x', severity: 'warn', code: 'copy-drift', file: '_labs/x.md', line: 3, message: 'Drift | here.' }],
+    findings: [{ slug: 'x', severity: 'warn', code: 'copy-drift', file: '_labs/x.md', line: 3, message: 'Drift | here \\| too.' }],
     summary: { error: 0, warn: 1, info: 0 },
   };
   assert.match(audit.formatText(result), /x\n {2}warn {3}copy-drift {2}_labs\/x\.md:3 {2}Drift/);
   const markdown = audit.formatMarkdown(result);
   assert.match(markdown, /\| `x` \| 🟡 warn \| `copy-drift` \| `_labs\/x\.md:3` \|/);
-  assert.match(markdown, /Drift \\\| here\./, 'pipes in messages are escaped');
+  assert.ok(markdown.includes('Drift \\| here \\\\\\| too.'), 'backslashes and pipes in messages are escaped');
   assert.match(audit.formatText(result, { minSeverity: 'error' }), /Showing 0/);
 });

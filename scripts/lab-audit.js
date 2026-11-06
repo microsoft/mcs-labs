@@ -88,10 +88,18 @@ function proseLines(lines, start = 0) {
       text = text.slice(end + 3);
       comment = false;
     }
-    text = text.replace(/<!--[\s\S]*?-->/g, '');
-    const open = text.indexOf('<!--');
-    if (open >= 0) { text = text.slice(0, open); comment = true; }
-    out.push({ text, line: i + 1 });
+    // Scan instead of a regex replace so no comment opener can survive.
+    let kept = '';
+    let pos = 0;
+    for (;;) {
+      const open = text.indexOf('<!--', pos);
+      if (open < 0) { kept += text.slice(pos); break; }
+      kept += text.slice(pos, open);
+      const close = text.indexOf('-->', open + 4);
+      if (close < 0) { comment = true; break; }
+      pos = close + 3;
+    }
+    out.push({ text: kept, line: i + 1 });
   }
   return out;
 }
@@ -109,6 +117,8 @@ function headingRawText(text) {
     .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
     .replace(/\[([^\]]*)\]\[[^\]]*\]/g, '$1')
     .replace(/<[^>]+>/g, '')
+    // Ids drop '<' anyway; removing strays keeps nested tags from surviving.
+    .replace(/</g, '')
     .replace(/&(?:[a-z]+|#\d+|#x[0-9a-f]+);/gi, '')
     // Typographic -- and --- become dashes, which ids drop.
     .replace(/-{2,3}/g, '')
@@ -809,7 +819,7 @@ function formatText(result, { minSeverity = 'info' } = {}) {
 /** A table for issue and pull request bodies. */
 function formatMarkdown(result, { minSeverity = 'info' } = {}) {
   const shown = filterFindings(result.findings, minSeverity);
-  const cell = text => String(text).replace(/\|/g, '\\|').replace(/\r?\n/g, ' ');
+  const cell = text => String(text).replace(/\\/g, '\\\\').replace(/\|/g, '\\|').replace(/\r?\n/g, ' ');
   const icon = { error: '🔴 error', warn: '🟡 warn', info: '⚪ info' };
   const out = ['## Lab audit', '', summaryLine(result, shown.length), ''];
   if (shown.length) {
