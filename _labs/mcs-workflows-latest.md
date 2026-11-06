@@ -173,7 +173,9 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
 
 2. In **Microsoft To Do**, select **New list** in the left sidebar, name it **Time Block**, and press **Enter** to create it. This is the list the workflow will watch — adding a task here is what triggers the automation.
 
-   ![The new Time Block list created in Microsoft To Do](../mcs-workflows/images/create-time-block-list.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/create-time-block-list.png"><img src="../mcs-workflows/images/create-time-block-list.png" alt="The new Time Block list created in Microsoft To Do" width="577" class="align-center"></a>
+   </p>
 
 #### Open the workflow and configure its trigger
 
@@ -237,7 +239,9 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
    > [!TIP]
    > **Find meeting times** lets the agent read your free/busy and propose a slot; **Create event** books the focus block on your Outlook calendar; **Update to-do** writes the due date, notes, and reminder back onto the task. Granting the two calendar actions separately — rather than one broad calendar tool — gives the agent exactly the capabilities the goal needs and nothing more.
 
-   ![Agent configured with the Find meeting times and Create event Outlook tools, Update to-do, and Web search enabled](../mcs-workflows/images/agent-tools-web-search.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/agent-tools-web-search.png"><img src="../mcs-workflows/images/agent-tools-web-search.png" alt="Agent configured with the Find meeting times and Create event Outlook tools, Update to-do, and Web search enabled" width="321" class="align-center"></a>
+   </p>
 
 #### Publish, then trigger the workflow
 
@@ -257,7 +261,9 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
     > [!TIP]
     > Use a task whose title implies a real-world commitment with a time and place — it gives the agent something concrete to reason about (find a slot, block the calendar, look up the venue).
 
-    ![The new task added to the Time Block list in Microsoft To Do](../mcs-workflows/images/add-todo-task.png)
+    <p align="center">
+      <a href="../mcs-workflows/images/add-todo-task.png"><img src="../mcs-workflows/images/add-todo-task.png" alt="The new task added to the Time Block list in Microsoft To Do" width="577" class="align-center"></a>
+    </p>
 
 #### Watch the workflow run
 
@@ -266,16 +272,22 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
     > [!IMPORTANT]
     > Be patient — the To Do trigger polls on a schedule, so the run can take a **few minutes** to appear. Press **Refresh** in the Activity list a few times until it shows up.
 
-    ![The new run showing as Running in the Activity view](../mcs-workflows/images/activity-run-running.png)
+    <p align="center">
+      <a href="../mcs-workflows/images/activity-run-running.png"><img src="../mcs-workflows/images/activity-run-running.png" alt="The new run showing as Running in the Activity view" width="577" class="align-center"></a>
+    </p>
 
-    ![The run executing, with the trigger succeeded and the Agent node in progress](../mcs-workflows/images/run-monitor-executing.png)
+    <p align="center">
+      <a href="../mcs-workflows/images/run-monitor-executing.png"><img src="../mcs-workflows/images/run-monitor-executing.png" alt="The run executing, with the trigger succeeded and the Agent node in progress" width="577" class="align-center"></a>
+    </p>
 
 12. In the run details, select the **Agent** node to expand its details. You'll see the agent's own narration of what it did — checking your free/busy, choosing a time block *inside your working hours*, creating the calendar event, finding the to-do, and updating it. This is the *non-deterministic* part: the agent decided the specifics, they aren't hard-coded in the workflow.
 
     > [!TIP]
     > The Agent's **Outputs / Response** is a great teaching moment — it shows the model reasoning step-by-step and calling the Find meeting times, Create event, and Update to-do tools on its own.
 
-    ![The Agent node run details showing the agent's reasoning and tool actions](../mcs-workflows/images/agent-run-details.png)
+    <p align="center">
+      <a href="../mcs-workflows/images/agent-run-details.png"><img src="../mcs-workflows/images/agent-run-details.png" alt="The Agent node run details showing the agent's reasoning and tool actions" width="577" class="align-center"></a>
+    </p>
 
 #### Verify the results
 
@@ -284,11 +296,15 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
     > [!TIP]
     > Switch the list to **List** view and open the task to see the full notes the agent wrote — it even researched the venue with web search.
 
-    ![The to-do updated by the agent with due date, reminder, and formatted notes](../mcs-workflows/images/todo-updated-details.png)
+    <p align="center">
+      <a href="../mcs-workflows/images/todo-updated-details.png"><img src="../mcs-workflows/images/todo-updated-details.png" alt="The to-do updated by the agent with due date, reminder, and formatted notes" width="577" class="align-center"></a>
+    </p>
 
 14. Open **Outlook → Calendar**. The agent has added a **time block** event to reserve time to work on the task — on the next business day it found free and **within your 8:00 AM–5:00 PM working hours** — with a body summarizing the target date and venue. The workflow ran end-to-end with no further input from you.
 
-    ![The calendar time-block event the agent created in Outlook](../mcs-workflows/images/calendar-event-details.png)
+    <p align="center">
+      <a href="../mcs-workflows/images/calendar-event-details.png"><img src="../mcs-workflows/images/calendar-event-details.png" alt="The calendar time-block event the agent created in Outlook" width="577" class="align-center"></a>
+    </p>
 
 ---
 
@@ -340,7 +356,9 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
    > [!IMPORTANT]
    > Keep this filter in mind when testing: every test email you send **must include "Order Management" in the subject line**, or the workflow will not trigger. This is a common source of confusion when tests "don't seem to work."
 
-   ![The subject filter expression configured on the trigger](../mcs-workflows/images/subject-filter-expression.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/subject-filter-expression.png"><img src="../mcs-workflows/images/subject-filter-expression.png" alt="The subject filter expression configured on the trigger" width="313" class="align-center"></a>
+   </p>
 
 4. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the classification categories. **Three** are configured explicitly in the node, and the panel notes that *a "Default" category is automatically created for inputs that don't match any category* — that automatic category is what the canvas shows as the **Other** branch. Each configured category has a name and example text that the AI model uses to determine where an incoming email should be routed:
 
@@ -364,7 +382,9 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 
    Select **Run** and observe the predicted category — it should classify as **Quote Request**.
 
-   ![The classification test result showing Quote Request](../mcs-workflows/images/classify-test-result.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/classify-test-result.png"><img src="../mcs-workflows/images/classify-test-result.png" alt="The classification test result showing Quote Request" width="499" class="align-center"></a>
+   </p>
 
 6. Select **Save** (or press **Ctrl+S**). The **Publish** button becomes available after saving — select **Publish**.
 
@@ -448,7 +468,9 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
    > [!NOTE]
    > **Fresh lab accounts have no history to ground on:** Because this lab uses a freshly provisioned account with no prior emails or Teams messages, the M365 Copilot node won't find real substance to build its answer from — so expect a generic holding reply. This step is illustrative: in a real mailbox with genuine history, M365 Copilot would ground the draft in actual prior threads and context.
 
-   ![The Copilot node showing the Customer question input from the email body](../mcs-workflows/images/customer-inquiry-m365-copilot-node.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/customer-inquiry-m365-copilot-node.png"><img src="../mcs-workflows/images/customer-inquiry-m365-copilot-node.png" alt="The Copilot node showing the Customer question input from the email body" width="313" class="align-center"></a>
+   </p>
 
 3. Select the **Human review** node and inspect its configuration carefully:
 
@@ -456,11 +478,15 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
    - Notice that the review request is delivered over **Outlook** — observe how we use an Outlook email to ask a person to approve before the workflow continues.
    - The reviewer responds through a single **Yes/No** input named **Approve**, with the prompt **Send proposed reply?**. Select **+** to expand and see the other input types available — text, email, number, date, and more. You don't need to add any here, but it's worth understanding the variety of formatted inputs you can request and then reuse cleanly in downstream nodes.
 
-   ![The Human review node showing the proposed M365 reply and approval options](../mcs-workflows/images/customer-inquiry-human-review-node.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/customer-inquiry-human-review-node.png"><img src="../mcs-workflows/images/customer-inquiry-human-review-node.png" alt="The Human review node showing the proposed M365 reply and approval options" width="313" class="align-center"></a>
+   </p>
 
 4. Select the **If/Else** node after Human review and observe the decision logic. When the reviewer answers **Yes**, the workflow sends the proposed reply to the customer; otherwise, the original email is flagged in the inbox for manual follow-up.
 
-   ![The If Else node routing Yes to reply and No to inbox flagging](../mcs-workflows/images/customer-inquiry-if-else-node.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/customer-inquiry-if-else-node.png"><img src="../mcs-workflows/images/customer-inquiry-if-else-node.png" alt="The If Else node routing Yes to reply and No to inbox flagging" width="517" class="align-center"></a>
+   </p>
 
 #### Run an end-to-end Customer Inquiry test
 
@@ -498,7 +524,9 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
 7. Wait until the run reaches the **Human review** node. The preceding **Copilot** node completes after drafting the response; **Human review** remains waiting until you submit a decision. Trigger pickup, drafting, and approval-email delivery are separate steps and may take several minutes. Refresh the run and your inbox rather than assuming that a pause is a failure.
 
-   ![The Human review node configuration for the approval request](../mcs-workflows/images/customer-inquiry-human-request-waiting.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/customer-inquiry-human-request-waiting.png"><img src="../mcs-workflows/images/customer-inquiry-human-request-waiting.png" alt="The Human review node configuration for the approval request" width="313" class="align-center"></a>
+   </p>
 
 8. Go to **Outlook** and open the incoming approval email. It arrives from **Microsoft Power Automate** with the subject **"Action Needed: Review Customer Enquiry Reply"** and opens *"Dear reviewer, A customer inquiry has come in…"*. Review the proposed M365 Copilot reply, choose **Yes** under **Send proposed reply?**, and select **Submit**.
 
@@ -642,14 +670,18 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
    - `stock` (**Number**, JSON `number`) — *Current stock quantity from the warehouse for the SKU named*
    - `risk` (**Yes/No**, JSON `boolean`) — *True if current stock is zero*
 
-   ![The structured output configuration with sku stock and risk properties](../mcs-workflows/images/supplier-delay-structured-output.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/supplier-delay-structured-output.png"><img src="../mcs-workflows/images/supplier-delay-structured-output.png" alt="The structured output configuration with sku stock and risk properties" width="309" class="align-center"></a>
+   </p>
 
    > [!TIP]
    > **"Request human assistance when unsure":** Notice the button in the agent configuration panel. This feature sends a structured message to the connection owner when the agent encounters ambiguity or conflicting information — it dynamically generates questions based on the problem at hand, allowing human judgment for edge cases while keeping the automation running.
 
 8. Minimize the view, then select **Save** and **Publish** so the Supplier Delay branch is live with the new agent configuration.
 
-   ![The Order Management Workflow published with the Inventory Task Agent added](../mcs-workflows/images/supplier-delay-workflow-published.png)
+   <p align="center">
+     <a href="../mcs-workflows/images/supplier-delay-workflow-published.png"><img src="../mcs-workflows/images/supplier-delay-workflow-published.png" alt="The Order Management Workflow published with the Inventory Task Agent added" width="519" class="align-center"></a>
+   </p>
 
 #### Test the Supplier Delay path
 
