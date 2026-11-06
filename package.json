@@ -8,7 +8,8 @@
     "lighthouse": "lhci autorun",
     "test": "node --test scripts/*.test.js && ruby scripts/content_last_updated_test.rb",
     "build:feed": "node scripts/build-feed.js",
-    "consume:feed": "node scripts/consume-feed.js"
+    "consume:feed": "node scripts/consume-feed.js",
+    "audit:labs": "node scripts/lab-audit.js"
   },
   "devDependencies": {
     "@lhci/cli": "^0.15.1",

@@ -45,6 +45,14 @@ bash tools/run.sh
 
 Check: the page renders, images resolve, the "Part of: <module>" link works, the lab appears on the All Labs page and in each journey you listed, and every in-page TOC link scrolls somewhere.
 
+Then run the lab audit, which checks both copies, front matter, anchors, images, durations, retired product names and agenda references:
+
+```bash
+npm run audit:labs -- your-lab-name
+```
+
+It exits with 1 on errors. CI does not run it, so run it before opening the PR.
+
 ---
 
 ## 📋 Front Matter Reference
@@ -187,6 +195,27 @@ description: "Comprehensive 13-lesson curriculum…"
 ```
 
 External labs still need an `_labs/<slug>.md` stub — that file is what puts the card on the site — but no `labs/<slug>/` folder.
+
+## 🧰 Maintaining Labs with Agent Skills
+
+Products change faster than labs. Four agent skills in `.github/skills/` cover the lab lifecycle in both the classic and guided missions formats. Copilot and other agents that support skills load them when a request matches; you can also name one ("use the lab-review skill on mcs-tools").
+
+| Skill | Use it to | Changes files? |
+|-------|-----------|----------------|
+| `lab-create` | Scaffold a new lab from templates, wire its module and agendas, preview it unlisted | Yes |
+| `lab-review` | Audit a lab, an event or all labs, check product claims and learning design, write a report | No |
+| `lab-runthrough` | Run a lab in a training tenant as an attendee would, log drift, recapture screenshots (light and dark) | Captures only, outside the repo |
+| `lab-update` | Apply review or run-through findings to both copies and open a PR | Yes |
+
+All four rely on `scripts/lab-audit.js`:
+
+```bash
+npm run audit:labs -- <slug> [<slug> ...]       # one or more labs
+npm run audit:labs -- --changed                 # labs changed against origin/main
+npm run audit:labs -- --all --format markdown   # every lab and agenda
+```
+
+Codes and fixes are listed in `.github/skills/lab-review/references/audit-codes.md`. Retired product names live in `scripts/lab-audit-terms.json`; add one only with an official source.
 
 ## 🔍 Troubleshooting
 

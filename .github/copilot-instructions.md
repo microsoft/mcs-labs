@@ -202,7 +202,8 @@ generation requires Ruby and Git on PATH, but does not load the Jekyll gems.
 1. Create `labs/your-lab-name/` with `README.md` and `images/`
 2. Create `_labs/your-lab-name.md` with front matter and the site copy of the content
 3. Serve locally and verify the lab appears in its module and journey pages, prev/next navigation works, and images resolve
-4. See `docs/NEW_LAB_CHECKLIST.md` for the fuller checklist
+4. Run `npm run audit:labs -- your-lab-name` (anchors, images, front matter, copy drift, retired product names, agendas)
+5. See `docs/NEW_LAB_CHECKLIST.md` for the fuller checklist
 
 ### 3. `_data/lab-config.yml` is Legacy
 
@@ -218,8 +219,11 @@ This file is still committed and edited by hand in some PRs, but **no layout, in
 | `consume-feed.js` | Consume external feeds into the build (`npm run consume:feed`) |
 | `build-tracker-data.js` | Build data for the backlog tracker page |
 | `check-lab-sync.js` | PR guard for README ↔ `_labs` sync |
+| `lab-audit.js` | Static lab audit: front matter, anchors, images, copy drift, retired terms (`lab-audit-terms.json`), missions contract, agendas (`npm run audit:labs`) |
 
-Each has a colocated `*.test.js`; `npm test` runs them all with `node --test`.
+Each has a colocated `*.test.js`; `npm test` runs them all with `node --test`. CI does not run `npm test` or the lab audit, so run both locally before a PR.
+
+**Lab maintenance skills** (`.github/skills/`): `lab-create`, `lab-review` (read-only report), `lab-runthrough` (run a lab in a training tenant and recapture screenshots, raw captures outside the repo) and `lab-update` (fix both copies and open a PR). They support classic and missions labs and share `scripts/lab-audit.js`. `_config.yml` excludes `.github/`, so they are never published.
 
 **Workflows** (`.github/workflows/`): `build-and-deploy.yml` (Jekyll build → GitHub Pages), `lab-doc-sync.yml` (sync guard), `a11y.yml` (pa11y-ci), `lighthouse.yml`.
 
@@ -339,6 +343,8 @@ The repo supports macOS, Linux, and Windows. Give bash for the first two and Pow
 | Serve the site | `bash tools/run.sh` |
 | Serve on Windows | `.\tools\run.ps1` |
 | Run script tests | `npm test` |
+| Audit one lab | `npm run audit:labs -- <slug>` |
+| Audit labs changed on a branch | `npm run audit:labs -- --changed` |
 | Build the feed | `npm run build:feed` |
 | Restart container | `docker restart mcs-labs-review` |
 | View container logs | `docker logs -f mcs-labs-review` |
@@ -352,7 +358,8 @@ The repo supports macOS, Linux, and Windows. Give bash for the first two and Pow
 - CSS: `assets/css/main.scss`, `assets/css/_tokens.scss`
 - Layouts: `_layouts/*.html`
 - Node scripts: `scripts/*.js`
+- Lab maintenance skills: `.github/skills/lab-*/`
 
 ---
 
-**Last Updated**: August 2026
+**Last Updated**: November 2026
