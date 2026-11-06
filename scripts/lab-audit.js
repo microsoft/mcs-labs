@@ -107,18 +107,32 @@ function proseLines(lines, start = 0) {
 const stripCodeSpans = text => text.replace(/(`+)[\s\S]*?\1/g, '');
 
 /**
+ * Remove '<...>' tags with a scan rather than a regex replace, so no tag
+ * opener survives (a stray '<' is dropped too; heading ids drop it anyway).
+ */
+function stripTags(text) {
+  let out = '';
+  let pos = 0;
+  for (;;) {
+    const open = text.indexOf('<', pos);
+    if (open < 0) return out + text.slice(pos);
+    out += text.slice(pos, open);
+    const close = text.indexOf('>', open + 1);
+    if (close < 0) return out + text.slice(open + 1).split('<').join('');
+    pos = close + 1;
+  }
+}
+
+/**
  * The text kramdown uses for an automatic heading id (auto_id_stripping):
  * link text and code span content stay; images, HTML tags and markup go.
  */
 function headingRawText(text) {
   const codes = [];
   let s = text.replace(/(`+)([\s\S]*?)\1/g, (m, ticks, code) => { codes.push(code.trim()); return `\u0000${codes.length - 1}\u0000`; });
-  s = s.replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+  s = stripTags(s.replace(/!\[[^\]]*\]\([^)]*\)/g, '')
     .replace(/\[([^\]]*)\]\([^)]*\)/g, '$1')
-    .replace(/\[([^\]]*)\]\[[^\]]*\]/g, '$1')
-    .replace(/<[^>]+>/g, '')
-    // Ids drop '<' anyway; removing strays keeps nested tags from surviving.
-    .replace(/</g, '')
+    .replace(/\[([^\]]*)\]\[[^\]]*\]/g, '$1'))
     .replace(/&(?:[a-z]+|#\d+|#x[0-9a-f]+);/gi, '')
     // Typographic -- and --- become dashes, which ids drop.
     .replace(/-{2,3}/g, '')
