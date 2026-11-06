@@ -26,7 +26,7 @@
     if (!persistenceAvailable) return;
     persistenceAvailable = false;
     root.querySelector('[data-saving-note]').textContent =
-      'Progress cannot be saved in this browser. You can still use the whole lab and download its prompts.';
+      'Progress cannot be saved in this browser. You can still use the whole lab.';
     announce('Progress is available for this visit only. Browser storage is unavailable.');
   }
 
@@ -140,21 +140,6 @@
     }
   }
 
-  function downloadPrompts() {
-    const sections = missions.map(mission => {
-      const prompts = [...mission.querySelectorAll('[data-prompt]')].map(prompt => prompt.textContent);
-      return `## ${mission.querySelector('h2').textContent}${mission.dataset.optional === 'true' ? ' (optional)' : ''}\n\n${prompts.join('\n\n---\n\n')}`;
-    });
-    const text = `${document.title}\n\n${sections.join('\n\n')}\n\nMy next use case:\n${state.reflection}\n`;
-    const url = URL.createObjectURL(new Blob([text], { type: 'text/plain;charset=utf-8' }));
-    const link = document.createElement('a');
-    link.href = url;
-    link.download = `${root.dataset.labId}-prompts.txt`;
-    link.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-    announce('Your prompts and reflection have been downloaded.');
-  }
-
   root.addEventListener('click', event => {
     if (!(event.target instanceof Element)) return;
     const button = event.target.closest('button');
@@ -167,8 +152,6 @@
       save();
       renderProgress();
       announce(root.querySelector('[data-progress]').getAttribute('aria-label') + '.');
-    } else if (button.dataset.action === 'download') {
-      downloadPrompts();
     } else if (button.dataset.action === 'reset') {
       if (!window.confirm('Reset this lab’s checkmarks, quiz answers and reflection on this browser? Your Copilot work is not affected.')) return;
       state.done = [];

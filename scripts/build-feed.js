@@ -121,6 +121,11 @@ function rewriteImages(markdown, baseUrl, collection, slug) {
     out = out.replace(new RegExp('src="(' + prefix + dir + '/[^"]+)"', 'g'), (_m, rel) => `src="${abs(rel)}"`);
     // HTML src='<dir>/...'
     out = out.replace(new RegExp("src='(" + prefix + dir + "/[^']+)'", 'g'), (_m, rel) => `src='${abs(rel)}'`);
+    // <picture><source srcset="..."> carries theme variants (e.g. a dark
+    // screenshot). Rewrite every candidate URL, keeping width/density descriptors.
+    const candidate = new RegExp('(^\\s*|,\\s*)(' + prefix + dir + '/[^\\s,]+)', 'g');
+    out = out.replace(/\bsrcset=(["'])([^"']*)\1/g, (_m, quote, value) =>
+      `srcset=${quote}${value.replace(candidate, (_c, lead, rel) => `${lead}${abs(rel)}`)}${quote}`);
   }
   return { markdown: out, images: [...images] };
 }

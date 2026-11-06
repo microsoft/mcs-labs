@@ -83,12 +83,21 @@ function relativizeImages(markdown, ownBaseUrl, collection, slug) {
   // Restore shared sibling assets when consuming our own feed; partner URLs
   // stay absolute so they continue to resolve against the publishing site.
   const collectionPrefix = `${ownBaseUrl}/${collection}/`;
-  out = out.replace(/(\]\(|\bsrc=["'])(https?:\/\/[^"'()\s]+)/g, (match, lead, url) => {
-    if (!url.startsWith(collectionPrefix)) return match;
+  const siblingPath = (url) => {
+    if (!url.startsWith(collectionPrefix)) return null;
     const relative = url.slice(collectionPrefix.length);
-    if (!/^[A-Za-z0-9_-]+\/(?:images|assets)\//.test(relative)) return match;
-    return `${lead}../${relative}`;
+    return /^[A-Za-z0-9_-]+\/(?:images|assets)\//.test(relative) ? `../${relative}` : null;
+  };
+  out = out.replace(/(\]\(|\bsrc=["'])(https?:\/\/[^"'()\s]+)/g, (match, lead, url) => {
+    const relative = siblingPath(url);
+    return relative ? `${lead}${relative}` : match;
   });
+  // srcset lists several candidates; the producer absolutizes each one.
+  out = out.replace(/\bsrcset=(["'])([^"']*)\1/g, (_m, quote, value) =>
+    `srcset=${quote}${value.replace(/(^\s*|,\s*)(https?:\/\/[^\s,]+)/g, (match, lead, url) => {
+      const relative = siblingPath(url);
+      return relative ? `${lead}${relative}` : match;
+    })}${quote}`);
   return out;
 }
 

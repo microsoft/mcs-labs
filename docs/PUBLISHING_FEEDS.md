@@ -135,8 +135,8 @@ For each source doc `_<collection>/<slug>.md`, the producer emits an item with:
 - `title`, `description`, `url` (canonical page), `metadata` (front matter, minus
   `layout`), and `references` (lab slugs derived from `labs:`/`lab:`).
 - `content_markdown` — the **raw markdown body**, with relative `images/…` links
-  rewritten to **absolute** URLs (under `base_url`) so they load off-site. The list
-  of those URLs is in `images`.
+  (Markdown, `src` and every `srcset` candidate) rewritten to **absolute** URLs
+  (under `base_url`) so they load off-site. The list of those URLs is in `images`.
 - `last_modified` — the source file's last git commit time (ISO-8601), or `null`.
 - `metadata.content_last_updated` — for labs and modules, the resolved display
   date from the same resolver used by Jekyll: the linked local PowerPoint's
