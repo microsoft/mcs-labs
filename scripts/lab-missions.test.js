@@ -70,13 +70,58 @@ test('all mission screenshots exist and are discoverable by portable feed consum
     collection: 'labs', slug, frontMatter: document.data, body: document.content,
     baseUrl: 'https://microsoft.github.io/mcs-labs',
   });
+  // Reads the canvas size from the WebP header so declared width/height (used to reserve layout space) cannot drift.
+  const webpSize = file => {
+    const bytes = fs.readFileSync(file);
+    assert.equal(bytes.toString('ascii', 0, 4) + bytes.toString('ascii', 8, 12), 'RIFFWEBP', file);
+    const chunk = bytes.toString('ascii', 12, 16);
+    if (chunk === 'VP8X') return [1 + bytes.readUIntLE(24, 3), 1 + bytes.readUIntLE(27, 3)];
+    if (chunk === 'VP8L') {
+      const bits = bytes.readUInt32LE(21);
+      return [(bits & 0x3fff) + 1, ((bits >>> 14) & 0x3fff) + 1];
+    }
+    assert.equal(chunk, 'VP8 ', file);
+    return [bytes.readUInt16LE(26) & 0x3fff, bytes.readUInt16LE(28) & 0x3fff];
+  };
+  // Only the cropped slide is theme-neutral; every product UI screenshot needs both captures.
+  assert.deepEqual([...new Set(images.filter(image => !image.src_dark).map(image => image.src))],
+    [`/labs/${slug}/images/pipeline-three-slides.webp`]);
   for (const image of images) {
     assert.ok(image.alt && image.caption);
     assert.ok(image.width > 0 && image.height > 0);
-    assert.ok(image.src.startsWith(`/labs/${slug}/images/`));
-    assert.ok(fs.statSync(path.join(root, ...image.src.split('/'))).isFile(), image.src);
-    assert.ok(feed.images.includes(`https://microsoft.github.io/mcs-labs${image.src}`), `${image.src}: body reference`);
+    for (const src of [image.src, image.src_dark].filter(Boolean)) {
+      assert.ok(src.startsWith(`/labs/${slug}/images/`));
+      const file = path.join(root, ...src.split('/'));
+      assert.ok(fs.statSync(file).isFile(), src);
+      assert.deepEqual(webpSize(file), [image.width, image.height], `${src}: declared dimensions`);
+      assert.ok(feed.images.includes(`https://microsoft.github.io/mcs-labs${src}`), `${src}: body reference`);
+    }
+    if (image.src_dark) {
+      assert.ok(document.content.includes(`srcset="images/${path.posix.basename(image.src_dark)}"`), `${image.src_dark}: body picture`);
+      assert.notDeepEqual(fs.readFileSync(path.join(root, ...image.src.split('/'))),
+        fs.readFileSync(path.join(root, ...image.src_dark.split('/'))), `${image.src}: distinct theme captures`);
+    }
   }
+});
+
+test('paired screenshots follow the island theme and the hero stays a single priority image', () => {
+  const screenshot = fs.readFileSync(path.join(root, '_includes', 'lab-missions-screenshot.html'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'assets', 'css', 'lab-missions.css'), 'utf8');
+  assert.match(screenshot, /include\.image\.src_dark/);
+  assert.match(screenshot, /class="shot-\{\{ variant \}\}"/);
+  assert.match(screenshot, /loading="lazy"/, 'The hidden variant must not download');
+  assert.match(css, /\.visual figure a\.shot-light, &\[data-theme="light"\] \.visual figure a\.shot-dark \{ display: none; \}/);
+  assert.match(css, /&\[data-theme="light"\] \.visual figure a\.shot-light \{ display: block; \}/);
+  assert.equal(lab.hero_image.src_dark, undefined);
+  assert.equal(lab.hero_image.src, `/labs/${slug}/images/pipeline-three-slides.webp`,
+    'The single eager hero is document content, not dark application chrome');
+});
+
+test('prompts are copied in place rather than downloaded', () => {
+  const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
+  const script = fs.readFileSync(path.join(root, 'assets', 'js', 'lab-missions.js'), 'utf8');
+  assert.doesNotMatch(template, /download|Take my prompts/i);
+  assert.doesNotMatch(script, /downloadPrompts|createObjectURL|\.download\s*=/);
 });
 
 test('feed materialization retains mission data, exact prompts and the readable body', () => {

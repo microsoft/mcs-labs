@@ -36,7 +36,6 @@
         </ul>
         <div class="hero-actions">
           <a class="btn btn-primary" href="#lab-ready">Start the lab <span aria-hidden="true">&rarr;</span></a>
-          <button class="btn btn-ghost" type="button" data-action="download" hidden>Download prompts</button>
         </div>
       </div>
       <figure class="hero-proof">
@@ -138,7 +137,7 @@
           {% if optional_missions.size > 0 %}<p>Want to go further? {% for mission in optional_missions %}<a href="#{{ mission.id | escape }}">{{ mission.title | escape }}</a> (optional, {{ mission.minutes }} minutes){% unless forloop.last %}, or {% endunless %}{% endfor %}.</p>{% endif %}
           <dl class="takeaways">{% for item in lab.finish.takeaways %}<dt>{{ item.label | escape }}</dt><dd>{{ item.text | escape }}</dd>{% endfor %}</dl>
           <div class="reflection"><label for="lab-reflection">{{ lab.finish.reflection | escape }}</label><textarea id="lab-reflection" rows="3" placeholder="I could delegate..."></textarea></div>
-          <div class="hero-actions"><a class="btn btn-primary" href="https://aka.ms/CoworkDemoHub" target="_blank" rel="noopener">Explore the Cowork Demo Hub <span aria-hidden="true">&nearr;</span></a><button type="button" class="btn btn-ghost" data-action="download" hidden>Take my prompts with me</button></div>
+          <div class="hero-actions"><a class="btn btn-primary" href="https://aka.ms/CoworkDemoHub" target="_blank" rel="noopener">Explore the Cowork Demo Hub <span aria-hidden="true">&nearr;</span></a></div>
           {% if lab.finish.cleanup %}<div class="notice"><strong>Before you leave</strong>{{ lab.finish.cleanup | markdownify }}</div>{% endif %}
           <details class="sources"><summary>Product guidance and further reading</summary><ul>{% for source in lab.sources %}<li><a href="{{ source.url | escape }}" target="_blank" rel="noopener">{{ source.title | escape }}</a></li>{% endfor %}</ul><p>Product UI and available capabilities can vary by tenant. Screenshots show the training experience, not a promise of identical generated output.</p></details>
         </section>

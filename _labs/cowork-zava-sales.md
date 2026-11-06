@@ -48,9 +48,10 @@ mission_lab:
           screenshot:
             title: the Chat model picker
             src: /labs/cowork-zava-sales/images/chat-model-picker.webp
+            src_dark: /labs/cowork-zava-sales/images/chat-model-picker-dark.webp
             alt: "Copilot Chat model picker showing Auto, Quick response and Think deeper, with Work IQ enabled."
-            width: 1120
-            height: 700
+            width: 1203
+            height: 640
             caption: "Leave Auto selected for this lab. The models offered can vary by tenant."
           notice: "Work IQ connects the answer to work context you are allowed to access: files, email, meetings, Teams, and configured business data. It does **not** grant new permissions or guarantee that every source contains a match."
         - title: "Ask about the renewal"
@@ -95,12 +96,13 @@ mission_lab:
             4. Enter `https://zavasalesdemo.crm.dynamics.com/` and select **Connect**.
             5. Confirm the connection shows **Connected**. If it already does, do not reconnect.
           screenshot:
-            title: the Dataverse environment connection
+            title: the connected Dataverse plugin
             src: /labs/cowork-zava-sales/images/dataverse-connection.webp
-            alt: "Microsoft Dataverse plugin connection dialog with the Zava Sales training environment URL."
-            width: 815
-            height: 770
-            caption: "Use the supplied training environment, not a production CRM."
+            src_dark: /labs/cowork-zava-sales/images/dataverse-connection-dark.webp
+            alt: "Microsoft Dataverse plugin enabled, with its connection showing Connected."
+            width: 800
+            height: 435
+            caption: "Confirm Connected after using the supplied training environment, not a production CRM. Leave an existing connection in place."
         - title: "Switch to Cowork and delegate"
           instruction: "Select **New**, then **Cowork** in the Home composer. Leave the model on **Auto** and effort on **Medium**. Keep this task for the remaining core missions; the optional Improve mission starts here before its separate Friday task."
           prompt_label: New Cowork task
@@ -108,9 +110,10 @@ mission_lab:
           screenshot:
             title: model and effort settings
             src: /labs/cowork-zava-sales/images/cowork-model-effort.webp
+            src_dark: /labs/cowork-zava-sales/images/cowork-model-effort-dark.webp
             alt: "Cowork model and generation settings showing Auto and Medium, with the effort control ranging from faster to smarter."
             width: 760
-            height: 430
+            height: 410
             caption: "Higher effort spends more time and credits on the task. Medium is the lab default."
           notice: "Watch Cowork form a plan, query Zava Sales, create the deck, and save follow-ups in **Outlook**. Standard Copilot Chat use is included with the Microsoft 365 Copilot license; **Cowork uses metered Copilot Credits**. Available frontier models and tools depend on your tenant."
         - title: "Steer before you trust"
@@ -158,12 +161,13 @@ mission_lab:
           prompt_label: Same Cowork task
           prompt: "Just spoke with Riley at Northstar about the $250K renewal. They need a phased rollout plan before final approval, and I promised to send it by next Friday. Create a completed phone call with that recap and a task for me to send the plan. Link both to the renewal."
           screenshot:
-            title: the write approval
+            title: the approved CRM actions
             src: /labs/cowork-zava-sales/images/dataverse-approval.webp
-            alt: "Cowork asking for approval before creating a Dataverse phone call, showing its recap and relationship to the Northstar renewal."
-            width: 795
-            height: 510
-            caption: "Read the proposed write before approving. Creating the call, completing it and creating the task can require separate approvals."
+            src_dark: /labs/cowork-zava-sales/images/dataverse-approval-dark.webp
+            alt: "Cowork history showing approved Dataverse creation and update actions, followed by the saved phone call and task with disclosed omissions."
+            width: 792
+            height: 837
+            caption: "This example is already approved. Expand each action to check completion, then review the saved details and any disclosed omissions."
           notice: "Prefer the one-time **Approve/Allow** action while learning. A session-wide always-allow choice, if offered, reduces future prompts for that permission; it is not permission to stop reviewing what the task is doing."
         - title: "Verify the records, then refresh the outputs"
           instruction: "Check the returned records: the phone call is **Completed**; the task is assigned to you, has a due date, and both records point to the renewal. Then send the next prompt."
@@ -211,9 +215,10 @@ mission_lab:
           screenshot:
             title: your saved skill
             src: /labs/cowork-zava-sales/images/saved-skill.webp
+            src_dark: /labs/cowork-zava-sales/images/saved-skill-dark.webp
             alt: "The Cowork plugins catalog with the saved weekly-deal-review skill alongside the installed Zava Sales and Microsoft Dataverse plugins."
-            width: 1020
-            height: 375
+            width: 1000
+            height: 350
             caption: "Your skill can appear under its folder name, weekly-deal-review."
           notice: "A **skill is reusable instructions and a procedure**, not a newly trained model. Find it in **Plugins → Cowork**, sometimes displayed as **weekly-deal-review**. A new task discovers the saved skill; this task already has the conversation context."
         - title: "Set the time and review the schedule"
@@ -234,9 +239,10 @@ mission_lab:
           screenshot:
             title: the task usage summary
             src: /labs/cowork-zava-sales/images/task-cost.webp
+            src_dark: /labs/cowork-zava-sales/images/task-cost-dark.webp
             alt: "The /cost command returning cumulative credits used for the Cowork task, monthly usage and a View usage button."
-            width: 795
-            height: 225
+            width: 792
+            height: 230
             caption: "Example only: usage depends on the work, model, effort and retries. This is not a fixed lab cost."
           notice: "`/cost` reports approximate cumulative usage for this task; running the command is free. **One Copilot Credit is roughly US$0.01 at the standard pay-as-you-go rate**, not a guaranteed invoice amount. Pricing, discounts and tenant billing arrangements can differ."
       reveal:
@@ -288,9 +294,10 @@ mission_lab:
           screenshot:
             title: the two separate automations
             src: /labs/cowork-zava-sales/images/separate-automations.webp
+            src_dark: /labs/cowork-zava-sales/images/separate-automations-dark.webp
             alt: "Automations showing a Friday 4 p.m. skill-improvement schedule and a separate Monday 8:30 a.m. pipeline-review schedule."
-            width: 805
-            height: 328
+            width: 1008
+            height: 336
             caption: "Two jobs, two purposes. Check your chosen time zone and pause lab-created schedules before leaving."
       reveal:
         title: "What should it learn—and what should it leave alone?"
@@ -333,9 +340,10 @@ mission_lab:
           screenshot:
             title: the installed Zava Sales plugin
             src: /labs/cowork-zava-sales/images/zava-sales-plugin.webp
+            src_dark: /labs/cowork-zava-sales/images/zava-sales-plugin-dark.webp
             alt: "The enabled Zava Sales plugin showing its zava-sales and daily-crm-update skills."
-            width: 815
-            height: 435
+            width: 800
+            height: 485
             caption: "Inspect what the plugin adds. This one includes a sales playbook and a daily CRM-update skill."
         - title: "Catch up and log what only you know"
           instruction: "Send the full prompt. If asked, confirm the three requested records, your intended follow-up date and time zone. Review each proposed write, then inspect the saved records. Follow the **Zava Sales Hub** link if Cowork recommends it."
@@ -350,9 +358,10 @@ mission_lab:
           screenshot:
             title: the saved note, lead and task
             src: /labs/cowork-zava-sales/images/zava-created-records.webp
+            src_dark: /labs/cowork-zava-sales/images/zava-created-records-dark.webp
             alt: "Cowork's readback of the Northstar account note, Jamie Chen lead with unknown contact details omitted, and the introduction follow-up task."
-            width: 800
-            height: 580
+            width: 792
+            height: 581
             caption: "Three saved records, not just suggested text. Your record IDs and calendar dates will differ."
       reveal:
         title: "Why package this as a plugin?"
@@ -445,7 +454,7 @@ Help me prepare for a call about Northstar Teamwear’s $250K Pulse renewal. Whe
 
 Watch the visible search/tool activity. Look for Zava Sales business-data results and open a source. Separate deal facts from suggested questions.
 
-![Copilot Chat model picker](images/chat-model-picker.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/chat-model-picker-dark.webp"><img src="images/chat-model-picker.webp" alt="Copilot Chat model picker"></picture>
 
 **Quick check:** Does Work IQ unlock every company record? **No.** Source configuration, your permissions and available data still apply.
 
@@ -459,11 +468,11 @@ Watch the visible search/tool activity. Look for Zava Sales business-data result
 2. Turn **Enable Microsoft Dataverse** on, then **Connect Microsoft Dataverse**.
 3. Enter `https://zavasalesdemo.crm.dynamics.com/`, select **Connect**, and confirm **Connected**. If already connected, leave it alone.
 
-![Dataverse connection dialog](images/dataverse-connection.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/dataverse-connection-dark.webp"><img src="images/dataverse-connection.webp" alt="Microsoft Dataverse enabled and Connected"></picture>
 
 4. Select **New → Cowork**. Leave **Auto / Medium** selected. Higher effort spends more time and credits. Standard Copilot Chat use is included with the Microsoft 365 Copilot license; Cowork uses metered Copilot Credits. Available models and tools depend on the tenant.
 
-![Cowork model and effort settings](images/cowork-model-effort.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/cowork-model-effort-dark.webp"><img src="images/cowork-model-effort.webp" alt="Cowork model and effort settings"></picture>
 
 5. Send the following. Keep the **same Cowork task for the remaining core missions**. The optional Improve mission starts here before its separate Friday task:
 
@@ -495,7 +504,9 @@ Just spoke with Riley at Northstar about the $250K renewal. They need a phased r
 
 Review the **$250K Northstar renewal**, recap, task owner and calendar date for **next Friday** before approving. Prefer one-time **Approve/Allow** while learning. Session-wide always-allow, if offered, reduces future prompts for that permission; it does not remove your responsibility to review.
 
-![Dataverse approval before creating the phone call](images/dataverse-approval.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/dataverse-approval-dark.webp"><img src="images/dataverse-approval.webp" alt="Cowork history after approval, with separate Dataverse actions and the saved phone-call and task details"></picture>
+
+This example shows the actions **after approval**, followed by the saved records and disclosed omissions.
 
 Creating the call, completing it and creating the task can need separate approvals. Verify the phone call is **Completed**, the task is assigned to you with the right date, and both records are linked to the renewal. If a write fails, read the error and check for an existing record before retrying.
 
@@ -529,7 +540,7 @@ This is how I want to prepare for my pipeline reviews. Save it as a skill called
 
 Let skill creation finish. Inspect the saved instructions: the same three accounts, three slides, facts versus questions, and draft-only customer follow-ups. Find skills under **Plugins → Cowork**; this one may appear as **weekly-deal-review**. A skill is reusable instructions and a procedure, **not model retraining**.
 
-![The saved weekly-deal-review skill](images/saved-skill.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/saved-skill-dark.webp"><img src="images/saved-skill.webp" alt="The saved weekly-deal-review skill"></picture>
 
 ```text
 Run Weekly Deal Review every Monday at 8:30 a.m. and email me the slides. Keep the customer emails as drafts for me to review.
@@ -549,7 +560,7 @@ Return to the task and check its cost:
 
 The command is free and shows **approximate cumulative task usage**, not an invoice or advance estimate. One Copilot Credit is roughly **US$0.01 at the standard pay-as-you-go rate**; pricing, discounts and tenant arrangements vary.
 
-![Example cumulative task usage, not a fixed lab cost](images/task-cost.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/task-cost-dark.webp"><img src="images/task-cost.webp" alt="Example cumulative task usage, not a fixed lab cost"></picture>
 
 **Core lab complete.** [Take it with you](#take-it-with-you), or continue with the optional missions below.
 
@@ -577,7 +588,7 @@ This configures future work, not a demonstrated learning result. **No accessible
 
 Find **Weekly Deal Review** under **Plugins → Cowork** and the separate Monday and Friday schedules under **Automations**. Check the Friday instructions require a dated backup before edits and report missing or conflicting feedback. After a real feedback run, inspect the change recap, source links and saved previous version.
 
-![Separate Monday pipeline-review and Friday skill-improvement schedules](images/separate-automations.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/separate-automations-dark.webp"><img src="images/separate-automations.webp" alt="Separate Monday pipeline-review and Friday skill-improvement schedules"></picture>
 
 **Quick check:** If a transcript cannot be accessed, should Cowork infer the feedback? **No. Flag the gap and use only substantiated feedback.**
 
@@ -590,7 +601,7 @@ Find **Weekly Deal Review** under **Plugins → Cowork** and the separate Monday
 3. Start **New → Cowork** so the task discovers the plugin. Leave **Auto / Medium** selected.
 4. Send:
 
-![The enabled Zava Sales plugin and its two skills](images/zava-sales-plugin.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/zava-sales-plugin-dark.webp"><img src="images/zava-sales-plugin.webp" alt="The enabled Zava Sales plugin and its two skills"></picture>
 
 ```text
 Can you catch up on this week’s activity and help me get the CRM up to date?
@@ -602,7 +613,7 @@ She also mentioned her friend Jamie Chen, who runs purchasing at Summit Youth Sp
 
 If asked, confirm the three requested records, your intended follow-up date and time zone. Review each proposed write and inspect the saved account note, lead and task. The **20% growth** is attributed to Morgan; Jamie's email and phone stay unknown; the introduction follow-up is with **Morgan**.
 
-![Readback of the saved Northstar note, Jamie Chen lead and introduction follow-up task](images/zava-created-records.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/zava-created-records-dark.webp"><img src="images/zava-created-records.webp" alt="Readback of the saved Northstar note, Jamie Chen lead and introduction follow-up task"></picture>
 
 A plugin can combine **skills, connectors, or both**. It supplies business guidance as well as tools, without bypassing your permissions. Follow the **Zava Sales Hub** link if recommended: a purpose-built app can be the best place to manage the results.
 

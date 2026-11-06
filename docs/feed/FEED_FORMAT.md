@@ -139,7 +139,7 @@ every per-item document inlined). Disable per feed with `bundle: false`.
 | `content_url` | string | Absolute URL of this item's full document. |
 | `metadata` | object | The source front matter, **minus `layout`**, plus the resolved `content_last_updated` date for labs and modules when available. Drives rendering (`order`, `duration`, `difficulty`, `section`, `labs`, …). Because `layout` is dropped, anything that must change how a page renders (for example `lab_format`) has to live in another key. |
 | `references.labs` | string[] | Lab slugs this item points at (derived from `labs:`/`lab:` front matter). Lets consumers reason about cross-references. |
-| `content_markdown` | string | Raw markdown body. Relative `images/…` refs are rewritten to **absolute** producer URLs so they resolve off-site. |
+| `content_markdown` | string | Raw markdown body. Relative `images/…` refs (Markdown, `src` and every `srcset` candidate) are rewritten to **absolute** producer URLs so they resolve off-site. |
 | `images` | string[] | Every absolutized image URL found in the body. |
 | `last_modified` | string \| null | Last git commit time of the source file (ISO-8601), or `null` if unavailable. |
 | `content_hash` | string | `sha256:<hex>` of the **raw markdown body**. The change-detection primitive. |

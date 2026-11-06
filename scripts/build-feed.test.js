@@ -181,6 +181,21 @@ test('rewriteImages: multiple parent segments normalize and unrelated relative l
   assert.deepEqual(images, ['https://x.test/mcs-labs/labs/shared-lab/images/a.png']);
 });
 
+test('rewriteImages: absolutizes every srcset candidate and lists theme variants in the manifest', () => {
+  const md = '<picture><source media="(prefers-color-scheme: dark)" srcset="images/a-dark.webp"><img src="images/a.webp" alt="A"></picture> ' +
+    "<source srcset='./images/b.webp 1x, ../shared-lab/images/b@2x.webp 2x, https://cdn.test/c.webp 3x'>";
+  const { markdown, images } = feed.rewriteImages(md, 'https://x.test/mcs-labs', 'labs', 'demo');
+  assert.equal(markdown,
+    '<picture><source media="(prefers-color-scheme: dark)" srcset="https://x.test/mcs-labs/labs/demo/images/a-dark.webp"><img src="https://x.test/mcs-labs/labs/demo/images/a.webp" alt="A"></picture> ' +
+    "<source srcset='https://x.test/mcs-labs/labs/demo/images/b.webp 1x, https://x.test/mcs-labs/labs/shared-lab/images/b@2x.webp 2x, https://cdn.test/c.webp 3x'>");
+  assert.deepEqual(images.sort(), [
+    'https://x.test/mcs-labs/labs/demo/images/a-dark.webp',
+    'https://x.test/mcs-labs/labs/demo/images/a.webp',
+    'https://x.test/mcs-labs/labs/demo/images/b.webp',
+    'https://x.test/mcs-labs/labs/shared-lab/images/b@2x.webp',
+  ]);
+});
+
 test('contentHash: deterministic, prefixed, and content-sensitive', () => {
   const h1 = feed.contentHash('hello');
   const h2 = feed.contentHash('hello');

@@ -107,6 +107,14 @@ test('relativizeImages: sibling rewriting preserves other origins, collections, 
   assert.equal(consume.relativizeImages(null, 'https://x.test/mcs-labs', 'labs', 'demo'), '');
 });
 
+test('relativizeImages: every srcset candidate becomes relative for own and sibling images', () => {
+  const md = '<source srcset="https://x.test/mcs-labs/labs/demo/images/a-dark.webp"> ' +
+    "<source srcset='https://x.test/mcs-labs/labs/demo/images/b.webp 1x, https://x.test/mcs-labs/labs/shared-lab/images/b@2x.webp 2x, https://partner.test/c.webp 3x'>";
+  assert.equal(consume.relativizeImages(md, 'https://x.test/mcs-labs', 'labs', 'demo'),
+    '<source srcset="images/a-dark.webp"> ' +
+    "<source srcset='images/b.webp 1x, ../shared-lab/images/b@2x.webp 2x, https://partner.test/c.webp 3x'>");
+});
+
 const matter = require('gray-matter');
 
 test('materializeDoc: shared sibling media round-trips through the producer and consumer', () => {
@@ -119,6 +127,15 @@ test('materializeDoc: shared sibling media round-trips through the producer and 
     body,
     baseUrl: 'https://x.test/mcs-labs',
   });
+  assert.equal(matter(consume.materializeDoc(item, 'https://x.test/mcs-labs')).content.trim(), body);
+});
+
+test('materializeDoc: picture theme variants round-trip through the producer and consumer', () => {
+  const feed = require('./build-feed');
+  const body = '<picture><source media="(prefers-color-scheme: dark)" srcset="images/a-dark.webp"><img src="images/a.webp" alt="A"></picture> ' +
+    '<source srcset="../shared-lab/images/b.webp 1x, ../shared-lab/images/b@2x.webp 2x">';
+  const item = feed.buildItem({ collection: 'labs', slug: 'demo', frontMatter: { title: 'Demo' }, body, baseUrl: 'https://x.test/mcs-labs' });
+  assert.ok(item.images.some((url) => url === 'https://x.test/mcs-labs/labs/demo/images/a-dark.webp'));
   assert.equal(matter(consume.materializeDoc(item, 'https://x.test/mcs-labs')).content.trim(), body);
 });
 
