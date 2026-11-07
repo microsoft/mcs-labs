@@ -47,7 +47,7 @@ Plan **30 minutes for Build (11) → Style (4) → Label (3) → Navigate (4) �
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/code-new-session-dark.webp"><img src="images/code-new-session.webp" alt="Copilot Code with Code selected, New session in the left pane, and the Create anything box."></picture>
 
-Start in Create anything. This approved light-interface capture is shown in both site themes.
+Start in Create anything. Keep the same session for all four prompts.
 
 4. Paste **Prompt 1** unchanged into **Create anything**, including the agenda URL and final instructions, then select the send arrow. Do not send Prompts 2–4 yet.
 
@@ -79,7 +79,7 @@ Open the actual app, not just the generated-code summary. Copilot Code checks th
 1. Compare every day's lab numbers, titles, start/end times, and Lunch with the [published agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/). Confirm time order.
 2. Confirm modules, welcome/re-cap, coffee breaks, Q&A, social, and all optional labs are excluded.
 3. Count the included labs. Confirm the header starts at **0 of TOTAL**, using that count rather than a fixed number.
-4. Confirm neutral greys and square corners. Dark colors, emojis, and day tabs are not expected until the next three prompts.
+4. Confirm neutral greys and square corners. The initial app may follow your browser's light or dark theme; purple, green, amber, emojis, and day tabs come in the next three prompts.
 5. Click a lab's timeline bar. Check that its checkbox, styling, overall completion count, and progress bar update together.
 6. Toggle a card's checkbox and check that its timeline bar updates too.
 7. Uncheck a completed lab to reverse completion.
@@ -92,7 +92,7 @@ Open the actual app, not just the generated-code summary. Copilot Code checks th
 
 Your first milestone: a working tracker in neutral greys. The example has 11 labs; use the current agenda's total.
 
-Flag any failed check to your facilitator before refining. Once the basic tracker works, keep the same session for Prompts 2–4; do not start a new app.
+Fix failed checks before refining: describe the action, expected result, and actual result to Copilot Code in this same session. Ask it to preserve the original specification, correct the defect, and publish the correction. Select **Refresh** in **New version available**, then repeat the check. Ask your facilitator if it still fails. Only then continue to Prompts 2–4.
 
 **Reveal — What makes this more than a convincing screen?** A working app passes observable checks, including undo and reload. The prompt specifies content, interactions, and constraints. The agenda is the source of truth; synchronized state makes several controls reflect one completion value. A successful build alone does not establish that behavior.
 
@@ -114,7 +114,14 @@ Flag any failed check to your facilitator before refining. Once the basic tracke
 
 **If the link fails:** Ask Copilot Code for a working link before continuing. If it still fails, tell your facilitator. If the agenda cannot be fetched or contains no matching labs, stop and tell your facilitator; do not fabricate a schedule.
 
-**If a behavior check fails:** Report which action you took, what you expected, and what happened. Keep the initial specification as the reference; do not accept a good-looking screen as a passing test.
+<details>
+<summary>If a behavior or keyboard-focus check fails</summary>
+
+Report the action, expected result, and actual result in the same Code session. Ask for a focused correction without changing the agenda or in-memory progress, publish it, and select **Refresh** in the app's **New version available** notice. A browser reload alone may still open the previous version. Repeat the failed check before continuing; ask your facilitator if it still fails.
+
+If **Tab** and **Space** work but focus is invisible, ask Copilot Code to give timeline buttons and card checkboxes (or their enclosing labels) a clearly visible solid focus outline in both themes. Publish, load the notified version, and repeat **Tab** and **Space** on both control types. A successful build does not prove that the outline is visible.
+
+</details>
 
 ## 🎨 Style: Change the look, preserve the behavior
 
@@ -133,13 +140,13 @@ Update with a dark theme, keeping everything else the same.
 Keep focus outlines visible and respect prefers-reduced-motion.
 ```
 
-2. Wait about **1–2 minutes**, then inspect the **Preview** pane. Select its expand icon at the top if the app needs more room.
+2. Wait for Copilot Code to finish the update, then inspect the **Preview** pane beside the chat. The **Open in app** arrow opens the published app, not this live preview.
 3. Confirm incomplete labs are purple, completed labs green, and Lunch amber with dashed borders and stripes.
 4. Toggle a lab in both directions. Confirm its bar, card, counter, and progress bar still agree, and focus outlines remain visible.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/tracker-dark-theme-dark.webp"><img src="images/tracker-dark-theme.webp" alt="Preview of the dark tracker with purple lab outlines, one green completed lab, and amber striped Lunch bars."></picture>
 
-The tracker itself is now dark; the surrounding Copilot toolbar is still light. This is not a separate dark-interface capture.
+The tracker stays dark in both captures; the surrounding Copilot toolbar follows the light or dark interface theme.
 
 Prompts 2–4 change **Preview** only; the published link keeps the basic version until you publish at the end. Each update reloads the preview, so earlier ticks reset because progress is in memory only.
 
@@ -253,7 +260,7 @@ The sample's Day 3 count is green because all its labs are complete. Verify your
 1. Select **Publish** at the top of **Preview**. Wait about **1–2 minutes** while it shows **Publishing…**, until **Your app is published** appears with **Open app** and **Share**. You can also ask Copilot Code to publish.
 2. Return to the tracker browser tab and select **Refresh** in **New version available**. If the tab is closed, select **Open app**.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/published-new-version-dark.webp"><img src="images/published-new-version.webp" alt="The earlier neutral-grey published tracker showing New version available and a Refresh link."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/published-new-version-dark.webp"><img src="images/published-new-version.webp" alt="New version available notification with a Refresh button in the published app."></picture>
 
 Refresh loads the finished version; the notification is shown over the earlier published app. Run the remaining checks in the published app's tab, not just Preview.
 
@@ -269,13 +276,13 @@ Refresh loads the finished version; the notification is shown over the earlier p
 8. Hover over or focus a lab bar and confirm its full title remains available.
 9. Check with a screen reader that decorative emojis are not announced and each lab still has a meaningful name.
 10. Make the published app narrower than 480px. In browser DevTools, press **F12**, then **Ctrl+Shift+M**, and set device emulation to **400px** wide.
-11. Confirm timeline row labels show only emojis and day tabs remain usable. Test **below** 480px: some generated versions keep the full labels at exactly 480px.
+11. Confirm timeline row labels show only emojis and day tabs remain usable. Also test **480px**: Prompt 3 includes that boundary. At **481px**, the row text should be visible again. If 480px fails, ask for a focused correction and repeat the check; passing at 400px alone is not enough.
 12. Reload the page and confirm completion resets because there is no storage. This differs from switching tabs, which must keep ticks.
 13. Confirm square corners and the dark theme remain after all updates.
 
 <picture><img src="images/tracker-narrow-screen.webp" alt="Finished tracker at 400px wide with emoji-only timeline row labels and three usable equal-sized day tabs."></picture>
 
-Check at 400px rather than relying on the exact 480px boundary.
+Check usability at 400px, then verify the inclusive 480px boundary and the return of row text at 481px.
 
 **Reveal — When is the task really finished?** After you open and use the published app. Publishing moves the refinements beyond Preview. Repeating the original checks catches regressions; keyboard, screen-reader, and narrow-width checks test whether a polished layout remains usable.
 
@@ -295,7 +302,14 @@ Check at 400px rather than relying on the exact 480px boundary.
 
 **If the link shows an older version:** Prompts 2–4 changed Preview only. Select **Publish**, wait for **Your app is published**, then **Refresh** in the app tab. If the link still fails, ask Copilot Code for a working link and tell your facilitator.
 
-**If labels remain full length at 480px:** Test at 400px, below 480px. If row labels still do not become emoji-only, report the observed width and result to your facilitator.
+<details>
+<summary>If short labels are clipped or the 480px check fails</summary>
+
+If even **Lab N** is clipped on a short bar, or disappears when completed, ask Copilot Code to keep it readable before and after completion, including at 400px, without changing the agenda times or accessible name. A label beside a short bar can remain part of the same toggle button. Recheck the label, tooltip, and toggle after the correction.
+
+If row text remains visible at 480px, tell Copilot Code that Prompt 3 requires emoji-only row labels at **480px inclusive**, not just below it. Ask it to preserve screen-reader text and all other behavior, publish the correction, and load it with the app's **Refresh** notice. Recheck 400px, 480px, and 481px.
+
+</details>
 
 **If a final check fails:** Report your action, expected result, and actual result. Keep the initial specification available; do not add persistent storage or invent a new schedule to conceal a failure.
 
@@ -347,4 +361,11 @@ You built, refined, and checked a web app through four unchanged prompts. Your a
 - [Overview of DevTools (Microsoft Edge)](https://learn.microsoft.com/microsoft-edge/devtools/overview)
 - [Accessibility-testing features in Microsoft Edge DevTools](https://learn.microsoft.com/microsoft-edge/devtools/accessibility/reference)
 
-Product UI and available capabilities can vary by tenant. Screenshots are approved crops reused from the refreshed classic lab, converted to WebP without resizing. No valid paired dark-interface captures were available for this edition, so each image is honestly shown as a single capture in both themes. The tracker becomes dark because Prompt 2 changes the app's design; those images are not fabricated theme variants. Generated layouts and agenda totals will differ.
+<details>
+<summary>Run-through coverage and screenshot notes</summary>
+
+A fresh-account run completed the four unchanged prompts and three focused corrections: visible keyboard focus, clipped short labels, and the inclusive 480px boundary. The published app passed schedule, completion, reversal, all-complete, tab-retention, keyboard, reload-reset, and 400/480/481px checks. All 11 lab names and decorative-emoji handling were checked in the browser accessibility tree; spoken screen-reader output was not tested. Repairs can take the exercise beyond its planned time, so do not skip acceptance checks to stay on schedule.
+
+Screenshots are new native-high-resolution captures, cropped and converted to WebP without upscaling. Light/dark pairs show the real interface themes. After Prompt 2, the tracker itself stays dark in both; the narrow-app capture is shared between themes. Product UI, generated layouts, emoji choices, and agenda totals can differ.
+
+</details>

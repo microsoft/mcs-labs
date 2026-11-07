@@ -605,14 +605,14 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. Select **Add tool** to add another tool.
 
-1. In the **Add tool** dialog, select **Add new Prompt**. The prompt editor opens.
+1. In the **Add tool** dialog, select **Create new → Prompt** (**Add new Prompt** in some versions). The prompt editor opens.
 
 1. Select the current name, for example **Custom prompt** followed by the date and time, at the top left and change the name to **Prompt Analyzer**.
 
 1. In the **Instructions** section, add the following :
 
    ```
-   Analyze this prompt (replace with text) based upon the CARE Prompt Guidance to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
+   Analyze this prompt (replace with text) based upon the CARE Prompt Guidance (Context, Ask, Rules, Examples) to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
    ```
 1. In the instructions you just pasted, delete **(replace with text)**.
 

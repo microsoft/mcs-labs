@@ -100,7 +100,7 @@ Join Copilot Studio Mailing List. Let the user provide their email address, firs
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/topic-description-dark.webp"><img src="images/topic-description.webp" alt="Topic name and description entered in Add from description with Copilot."></picture>
 
-Generate a conversation from its purpose, then inspect the nodes.
+Generate a conversation from its purpose, then inspect the nodes. This dialog remains mostly light even in the product's dark theme.
 
 3. Review **The agent chooses** trigger and its description, questions saving email/first/last name to variables, and welcome/thank-you messages. Select **Save**. Identify **Trigger**, **Message**, **Question**, **Condition** and **Tool** node roles.
 4. Select **+** between nodes. Inspect **Send a message**, **Ask a question**, **Ask with adaptive card**, **Add a condition**, **Variable management**, **Topic management**, **Add a tool**, **Add an agent** and **Advanced**.
@@ -180,7 +180,7 @@ Leave with live weather using fixed units and a verified Prompt Analyzer call.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/weather-inputs-dark.webp"><img src="images/weather-inputs.webp" alt="Weather inputs with Location dynamically filled by AI and Units set to Custom value, offering Imperial and Metric."></picture>
 
-The user supplies location; the maker fixes units. Crop of the Inputs card.
+The user supplies location; choose Metric from the maker's Custom value menu for Units.
 
 5. Select **New test session** and send:
 
@@ -195,10 +195,10 @@ Orlando
 ```
 
 7. Review live weather and confirm it uses the configured units without asking the user to choose them.
-8. Select **Overview → Tools → Add tool → Add new Prompt**. Rename the dated **Custom prompt** at top left to **Prompt Analyzer**. Paste in **Instructions**:
+8. Select **Overview → Tools → Add tool → Create new → Prompt** (**Add new Prompt** in some versions). Rename the dated **Custom prompt** at top left to **Prompt Analyzer**. Paste in **Instructions**:
 
 ```text
-Analyze this prompt (replace with text) based upon the CARE Prompt Guidance to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
+Analyze this prompt (replace with text) based upon the CARE Prompt Guidance (Context, Ask, Rules, Examples) to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
 ```
 
 9. Delete **(replace with text)**. At that position type **/**, then **Input → Text**. Set **Name** to **PromptToAnalyze** and **Sample data** to:
@@ -346,9 +346,9 @@ Leave with a published agent, the Microsoft 365 and Microsoft Teams channel adde
 4. Select **Microsoft 365 and Microsoft Teams**. Review **Turn on Microsoft 365 → Make agent available in Microsoft 365 Copilot** (the product was renamed Microsoft Copilot, but this panel still uses the old name) and the **Agent preview** name, icon and short description. If warned to publish first, select **Go to publish** and do so.
 5. Select **Add channel** and confirm **The channel was added.** Check **Edit details**, **Availability options**, **See agent in Microsoft 365** and **See agent in Teams** are available.
 6. Select **Edit details** and review **Name**, **Icon**, **Short description**, **Long description** and **Teams settings**. Change **Short description** to **Assist users building agents**, then **Save**.
-7. Optionally inspect **Availability options**, then return with the back arrow without broadening access. **Validation limit:** the refreshed run opened Edit details but did not exercise saving those changes or Availability options. These are documented learner actions, not claimed validation. Ask the facilitator if controls differ.
+7. Optionally inspect **Availability options**, then return with the back arrow without broadening access. **Validation limit:** the fresh-account run saved the description and inspected Availability options without broadening access. Its Teams web launcher stalled, so an installed-app conversation and channel comparison remain unverified. Ask the facilitator if launch or sharing is blocked.
 8. Select **See agent in Teams**. If **Open Microsoft Teams?** appears, select **Cancel → Use the web app instead**. Dismiss welcome dialogs; return to Studio and select **See agent in Teams** again if needed.
-9. Review the agent dialog → **Add**. At **Added successfully!**, select **Open**. Teams may shorten a long agent name. The refreshed run used Teams web; desktop launch is an unexercised alternative, not required.
+9. Review the agent dialog → **Add**. At **Added successfully!**, select **Open**. Teams may shorten a long agent name. Desktop launch is an untested alternative. If the web launcher does not open Teams, record the blocker rather than claiming the channel test passed.
 10. Ask in Teams, then ask the same question in the Studio test pane:
 
 ```text

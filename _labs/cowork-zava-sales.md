@@ -20,8 +20,8 @@ mission_lab:
   hero_image:
     src: /labs/cowork-zava-sales/images/pipeline-three-slides.webp
     alt: "A Zava-branded slide from the verified three-slide pipeline review, separating CRM facts from questions for the deal owners."
-    width: 1904
-    height: 1130
+    width: 2688
+    height: 1512
     caption: "Your destination: a review you can use, not just an answer you can read."
   scenario: |-
     You sell for **Zava**. First, find an earlier **Northwind Trader** proposal for your boss. Then prepare for a **Northstar Teamwear** renewal call and capture a new lead. Finally, build a branded pipeline review covering **Northstar Teamwear, Coastal Performance Supply, and BluePeak Athletics**, and make next week's preparation easier.
@@ -122,8 +122,8 @@ mission_lab:
             src: /labs/cowork-zava-sales/images/lead-mcp-app.webp
             src_dark: /labs/cowork-zava-sales/images/lead-mcp-app-dark.webp
             alt: "The Zava Sales Hub MCP App inside the agent conversation, with John Doe, Northstar Teamwear and Denver suggested, and an Accept and save button."
-            width: 1860
-            height: 1455
+            width: 2232
+            height: 1905
             caption: "Review the suggested values and fill any missing known details before saving. Scroll inside the form to check the estimated value."
           notice: "Review **John Doe**, **$50,000**, **Denver**, and the Northstar context before saving. Keep unknown contact details unknown. The $50,000 lead is separate from the $250K renewal; do not overwrite the renewal amount. Check the saved lead before retrying to avoid duplicates."
       reveal:
@@ -167,8 +167,8 @@ mission_lab:
             src: /labs/cowork-zava-sales/images/dataverse-connection.webp
             src_dark: /labs/cowork-zava-sales/images/dataverse-connection-dark.webp
             alt: "Connect Microsoft Dataverse dialog with https://zavasalesdemo.crm.dynamics.com/ entered in the Dataverse environment URL field."
-            width: 1440
-            height: 678
+            width: 1500
+            height: 738
             caption: "Enter https://zavasalesdemo.crm.dynamics.com/, select Connect, then confirm Connected. Use the supplied training environment, not a production CRM."
         - title: "Enable the Zava PowerPoint plugin"
           instruction: "Still in **Agents & Plugins → Cowork**, open **Zava PowerPoint** and enable it. Inspect the company-branding guidance it supplies. If it is already enabled, leave it enabled; do not confuse it with the optional **Zava Sales** plugin."
@@ -177,8 +177,8 @@ mission_lab:
             src: /labs/cowork-zava-sales/images/zava-powerpoint-plugin.webp
             src_dark: /labs/cowork-zava-sales/images/zava-powerpoint-plugin-dark.webp
             alt: "The enabled Zava PowerPoint plugin supplies corporate branding and the zava-powerpoint-brand skill."
-            width: 2030
-            height: 1020
+            width: 2400
+            height: 1280
             caption: "The plugin supplies brand guidance and assets; Cowork combines it with presentation-authoring tools. It is separate from the Dataverse connection."
           notice: "Finish both plugin checks **before starting the new Cowork task**, so it can discover their capabilities. Missing Zava PowerPoint is a facilitator setup issue, not a reason to silently substitute a generic deck."
         - title: "Switch to Cowork and delegate"
@@ -202,8 +202,8 @@ mission_lab:
             title: the three-slide review
             src: /labs/cowork-zava-sales/images/pipeline-three-slides.webp
             alt: "Slide two of the Zava-branded three-slide review, showing CRM facts and questions for the owners of the Coastal, BluePeak and Northstar deals."
-            width: 1904
-            height: 1130
+            width: 2688
+            height: 1512
             caption: "A real result after the steering prompt, with Zava branding retained. Inspect your deck and the plugin activity; wording and CRM values will differ."
           notice: "Confirm the deck has **three slides** and follows the **Zava PowerPoint** branding guidance. The biggest open Northstar deal can differ from the $250K renewal in your call brief; inspect the record links rather than assuming they are the same. Open the output cards marked **Saved to drafts**: suggested email text in chat is not an Outlook draft. Do not send customer emails in this lab."
       reveal:
@@ -222,7 +222,7 @@ mission_lab:
             feedback: "You can delegate preparation without delegating the forecast decision."
       stuck:
         - problem: "The deck preview is blank or covered."
-          solution: "Wait for the file to finish loading and dismiss any first-run Office privacy notice. Use the output file's open action if the embedded preview is unavailable. Do not restart the entire Cowork task."
+          solution: "Wait for the file to finish loading and dismiss any first-run Office privacy notice. Select **Open in PowerPoint** if the embedded preview stays blank, then wait for each slide to finish rendering before judging its layout. Do not restart the entire Cowork task."
         - problem: "It is taking longer than the mission budget."
           solution: "Check whether Cowork is waiting for your approval. If it is actively working, read the next step or queue the correction once the first deck exists. Run time varies; generating a second task duplicates work and consumes more credits."
 
@@ -244,14 +244,16 @@ mission_lab:
           prompt: "This is how I want to prepare for my pipeline reviews. Save it as a skill called Weekly Deal Review: the same three accounts, three slides, clear separation between what we know and what we need to ask, and customer follow-up drafts for me to review."
           help: |
             If a **Copy file** approval appears, check that its destination is your Cowork folder's `skills/weekly-deal-review` before approving. In a scheduled task, **Always allow Copy artifact** grants ongoing copy permission to that task; do not approve unexpected destinations or overwrites.
+
+            Open **Agents & Plugins → Cowork → Manage all → weekly-deal-review**. If the tile is offscreen in the Added row, use its right arrow or **Manage all**. To inspect the actual instructions, open **OneDrive → My files → Documents → Cowork → skills → weekly-deal-review → SKILL.md** in the training account. An inventory entry alone does not verify the file contents.
           screenshot:
             title: your saved skill
             src: /labs/cowork-zava-sales/images/saved-skill.webp
             src_dark: /labs/cowork-zava-sales/images/saved-skill-dark.webp
-            alt: "The Cowork tab of Agents & Plugins with the saved weekly-deal-review skill alongside the added Microsoft Dataverse connector and Zava PowerPoint plugin."
-            width: 2976
-            height: 1128
-            caption: "Your skill can appear under its folder name, weekly-deal-review."
+            alt: "The saved weekly-deal-review skill in the Cowork Manage all list, with its description and more-actions menu."
+            width: 2400
+            height: 288
+            caption: "Manage all lists the saved skill under its folder name, weekly-deal-review. Open SKILL.md in OneDrive to inspect the instructions."
           notice: "A **skill is reusable instructions and a procedure**, not a newly trained model. Find it in **Agents & Plugins → Cowork**, sometimes displayed as **weekly-deal-review**. A new task discovers the saved skill; this task already has the conversation context."
         - title: "Set the time and review the schedule"
           instruction: "Send the scheduling prompt. Review the proposed changes, then confirm **Monday, 8:30 a.m., the intended time zone, your own email as the recipient, and customer emails as drafts**. Complete **Next → Review permissions → Approve** when offered. Leave only one Monday review schedule."
@@ -274,7 +276,7 @@ mission_lab:
             src_dark: /labs/cowork-zava-sales/images/task-cost-dark.webp
             alt: "The /cost command returning cumulative credits used for the Cowork task, monthly usage and a View usage button."
             width: 2370
-            height: 570
+            height: 360
             caption: "Example only: usage depends on the work, model, effort and retries. This is not a fixed lab cost."
           notice: "`/cost` reports approximate cumulative usage for this task; running the command is free. **One Copilot Credit is roughly US$0.01 at the standard pay-as-you-go rate**, not a guaranteed invoice amount. Pricing, discounts and tenant billing arrangements can differ."
       reveal:
@@ -296,6 +298,8 @@ mission_lab:
           solution: "Keep one schedule with the final 8:30 a.m. settings. Pause or remove only the duplicate you created for this lab; do not change unrelated automations."
         - problem: "The skill or schedule is still being prepared."
           solution: "Wait for its confirmation and inspect the saved item. Do not assume a conversational “I will” is proof that it was created or activated."
+        - problem: "The skill page says it could not verify SKILL.md in OneDrive."
+          solution: "Reload once, then inspect the existing file in OneDrive using the path above. In the training run, the file was present and readable despite this warning. Do not delete Cowork folders or create duplicate skills to clear it. If the file is absent or unreadable, ask your facilitator before continuing to skill reuse."
 
     - id: record
       verb: Record
@@ -323,7 +327,7 @@ mission_lab:
           instruction: "Check the returned records: the phone call is **Completed**; the task is assigned to you, has a due date, and both records point to the renewal. Then send the next prompt."
           prompt_label: Same Cowork task
           prompt: "Update my slides with what we learned from Riley, and change the draft email to her into a recap of our call. Mention that I’ll send the rollout plan by the deadline on my task."
-          notice: "Open the updated deck and Riley's draft. The rollout-plan deadline should match the **task's actual due date**, not a fresh guess about what “next Friday” means. Keep the email unsent."
+          notice: "Open the updated deck and Riley's draft. The rollout-plan deadline should match the **task's actual due date**, not a fresh guess about what “next Friday” means. CRM can display a different time zone from Cowork. If the earlier Northstar draft was for another contact and deal, Cowork may create a separate Riley draft rather than replace it. Check the recipient and keep both emails unsent."
       reveal:
         title: "What changed beyond the chat?"
         line: "The promise now has an owner and a date."
@@ -368,7 +372,7 @@ mission_lab:
             Update the skill automatically and send me a short recap of what changed, with links to the feedback behind it. Keep the previous version so we can undo changes. Leave the accounts, permissions, and recipients unchanged. If feedback conflicts or you can’t access a source, flag it rather than guessing.
           notice: "If asked about a manager or meeting that your training account does not have, say so. Ask it to report that gap and make no unsupported skill changes. Confirm a Friday afternoon time and time zone; **4:00 p.m. Europe/Paris** is one example, not a required default."
         - title: "Give Friday its own task"
-          instruction: "Review Cowork's generated handoff instructions, then copy them into **New → Cowork**. They should name **Weekly Deal Review** and your existing deck, require a backup before skill edits, keep customer emails as drafts, and send the recap only to you. Complete the Friday schedule confirmation. A handoff in the chat is not a saved schedule."
+          instruction: "Review Cowork's generated handoff instructions, then copy them into **New → Cowork**. They should name **Weekly Deal Review** and your existing deck, require a backup before skill edits, keep customer emails as drafts, and send the recap only to you. Complete the Friday schedule confirmation, clearing **Run once now** so it does not immediately execute. A handoff in the chat is not a saved schedule."
           notice: "This configures future work, not a demonstrated learning result. **No accessible feedback** is a valid result. Automatic updates depend on sources, permissions and successful runs. Skill-file changes may still wait for approval; a backup is needed before the first actual edit."
         - title: "Inspect what persists"
           instruction: "Find **Weekly Deal Review** under **Agents & Plugins → Cowork**, and review the separate Monday and Friday entries under **Automations**. Check the Friday instructions require a dated backup before edits and report missing or conflicting feedback. After a real feedback run, inspect the change recap, source links and saved previous version."
@@ -376,9 +380,9 @@ mission_lab:
             title: the two separate automations
             src: /labs/cowork-zava-sales/images/separate-automations.webp
             src_dark: /labs/cowork-zava-sales/images/separate-automations-dark.webp
-            alt: "Automations showing a Friday 3:30 p.m. skill-improvement schedule and a separate Monday 8:30 a.m. pipeline-review schedule."
-            width: 2976
-            height: 534
+            alt: "Automations showing separate Friday 3:00 p.m. feedback-review and Monday 8:30 a.m. pipeline-review schedules, both paused."
+            width: 3120
+            height: 820
             caption: "Two jobs, two purposes. Check your chosen time zone and pause lab-created schedules before leaving."
       reveal:
         title: "What should it learn—and what should it leave alone?"
@@ -423,8 +427,8 @@ mission_lab:
             src: /labs/cowork-zava-sales/images/zava-sales-plugin.webp
             src_dark: /labs/cowork-zava-sales/images/zava-sales-plugin-dark.webp
             alt: "The enabled Zava Sales plugin showing its zava-sales and daily-crm-update skills."
-            width: 800
-            height: 485
+            width: 2370
+            height: 1470
             caption: "Inspect what the plugin adds. This one includes a sales playbook and a daily CRM-update skill."
         - title: "Catch up and log what only you know"
           instruction: "Send the full prompt. If asked, confirm the three requested records, your intended follow-up date and time zone. Review each proposed write, then inspect the saved records. Follow the **Zava Sales Hub** link if Cowork recommends it."
@@ -441,8 +445,8 @@ mission_lab:
             src: /labs/cowork-zava-sales/images/zava-created-records.webp
             src_dark: /labs/cowork-zava-sales/images/zava-created-records-dark.webp
             alt: "Cowork's readback of the Northstar account note, Jamie Chen lead with unknown contact details omitted, and the introduction follow-up task."
-            width: 792
-            height: 581
+            width: 2355
+            height: 1518
             caption: "Three saved records, not just suggested text. Your record IDs and calendar dates will differ."
       reveal:
         title: "Why package this as a plugin?"
@@ -624,7 +628,7 @@ This is a good start, but you’re making a few calls I’d want to check with t
 
 ![Cowork and the three-slide pipeline review](images/pipeline-three-slides.webp)
 
-The image is a real result after the steering prompt, with Zava branding retained. Your wording and CRM values will differ. The biggest open Northstar deal can differ from the $250K renewal in your call brief; inspect the record links rather than assuming they are the same. Verify **three slides**, the **Zava PowerPoint branding guidance**, and actual output cards marked **Saved to drafts**, not just suggested email text. Customer emails stay unsent. If the preview is blank, dismiss a first-run Office notice or use the file's open action; do not restart the task.
+The image is a real result after the steering prompt, with Zava branding retained. Your wording and CRM values will differ. The biggest open Northstar deal can differ from the $250K renewal in your call brief; inspect the record links rather than assuming they are the same. Verify **three slides**, the **Zava PowerPoint branding guidance**, and actual output cards marked **Saved to drafts**, not just suggested email text. Customer emails stay unsent. If the preview is blank, dismiss a first-run Office notice or select **Open in PowerPoint**. Wait for each slide to finish rendering before judging its layout; do not restart the task.
 
 **Quick check:** Should a CRM-informed recommendation automatically change a forecast? **No.** Confirm assumptions with the owner. Delegate preparation, not unchecked business decisions.
 
@@ -647,6 +651,15 @@ This is how I want to prepare for my pipeline reviews. Save it as a skill called
 If a **Copy file** approval appears, check that its destination is your Cowork folder's `skills/weekly-deal-review` before approving. In a scheduled task, **Always allow Copy artifact** grants ongoing copy permission to that task; do not approve unexpected destinations or overwrites.
 
 Let skill creation finish. Inspect the saved instructions: the same three accounts, three slides, facts versus questions, Zava PowerPoint branding guidance, and draft-only customer follow-ups. Find skills under **Agents & Plugins → Cowork**; this one may appear as **weekly-deal-review**. A skill is reusable instructions and a procedure, **not model retraining**.
+
+<details>
+<summary>Help: find and inspect the saved skill</summary>
+
+Open **Agents & Plugins → Cowork → Manage all → weekly-deal-review**. If its tile is offscreen in the Added row, use the right arrow or **Manage all**. Inspect the actual instructions in **OneDrive → My files → Documents → Cowork → skills → weekly-deal-review → SKILL.md** in your training account.
+
+If the skill page says it could not verify `SKILL.md` in OneDrive, reload once, then check the existing file there. In the training run, the file was present and readable despite this warning. An inventory entry alone does not verify its contents. Do not delete Cowork folders or create duplicate skills to clear the warning. If the file is absent or unreadable, ask your facilitator before continuing to skill reuse.
+
+</details>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/saved-skill-dark.webp"><img src="images/saved-skill.webp" alt="The saved weekly-deal-review skill"></picture>
 
@@ -698,7 +711,7 @@ Then send:
 Update my slides with what we learned from Riley, and change the draft email to her into a recap of our call. Mention that I’ll send the rollout plan by the deadline on my task.
 ```
 
-Check the updated slides and Riley's unsent draft. The deadline must match the **saved task**, not a new interpretation of “next Friday.”
+Check the updated slides and Riley's unsent draft. The deadline must match the **saved task**, not a new interpretation of “next Friday.” CRM can display a different time zone from Cowork. If the earlier Northstar draft was for another contact and deal, Cowork may create a separate Riley draft rather than replace it. Check the recipient and keep both emails unsent.
 
 **Quick check:** What proves completion? **The returned records and their actual status, owner, due date and relationship**, not just an acknowledgment.
 
@@ -720,7 +733,7 @@ Update the skill automatically and send me a short recap of what changed, with l
 
 If asked, choose **Separate Friday task**. This experience supports one recurring schedule per task: keep Monday at 8:30 a.m., rather than replacing it or adding extra no-op runs. If your training account has no configured manager or review meeting, say so and require it to report the gap without unsupported skill changes. Confirm a Friday afternoon time and time zone; **4:00 p.m. Europe/Paris** is one example.
 
-Review Cowork's generated handoff, then copy it into **New → Cowork**. Check it names **Weekly Deal Review** and your existing deck, requires a backup before skill edits, preserves accounts and permissions, keeps customer emails as drafts, and sends the recap only to you. Complete the Friday schedule confirmation. Handoff text alone is not a saved schedule.
+Review Cowork's generated handoff, then copy it into **New → Cowork**. Check it names **Weekly Deal Review** and your existing deck, requires a backup before skill edits, preserves accounts and permissions, keeps customer emails as drafts, and sends the recap only to you. Complete the Friday schedule confirmation, clearing **Run once now** so it does not immediately execute. Handoff text alone is not a saved schedule.
 
 This configures future work, not a demonstrated learning result. **No accessible feedback** is valid; invented feedback is not. Automatic changes depend on available sources, permissions and successful runs. Skill-file changes may still wait for approval.
 

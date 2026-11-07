@@ -22,9 +22,9 @@ mission_lab:
   hero_image:
     src: /labs/hooks-knowledge-travel-policy/images/uc3-test-france.webp
     alt: "France policy answer citing TEP-310 with a 70 euro total daily per diem."
-    width: 780
-    height: 510
-    caption: "The finish line: a location-specific, cited answer. Reviewed light content crop from the successful run; generated wording varies."
+    width: 2400
+    height: 1140
+    caption: "The finish line: a location-specific, cited answer. Native light and dark captures from the successful run; generated wording varies."
   scenario: |-
     Finance needs a **Travel Policy Agent** that knows the traveler's location and answers from the applicable SharePoint policy, not a mixture of countries.
 
@@ -107,10 +107,11 @@ mission_lab:
           screenshot:
             title: the Office Location token in additionalContext
             src: /labs/hooks-knowledge-travel-policy/images/uc1-office-location-context.webp
-            alt: "Get my profile feeding Office Location into Return traveler profile with a Paris fallback."
-            width: 1350
-            height: 485
-            caption: "Reviewed light capture. Insert the dynamic token between the two supplied text segments."
+            src_dark: /labs/hooks-knowledge-travel-policy/images/uc1-office-location-context-dark.webp
+            alt: "Office Location dynamic token between the session-context segments in the response editor."
+            width: 3135
+            height: 830
+            caption: "Insert the dynamic token between the two supplied text segments. The editor truncates the additionalContext output label."
         - title: "Publish the workflow and save the draft"
           instruction: "Select **Publish** and wait for **Published**. Return through the **Travel Policy Agent** breadcrumb. Confirm the selected workflow, select **Done**, close **Hooks** and **Save** the agent."
           notice: "**Save is not publish.** Preview tests the saved draft; the agent need not be published. Every hook workflow must be published again after changes. **Go to workflow** opens a new tab when editing an existing hook."
@@ -119,12 +120,13 @@ mission_lab:
           prompt_label: Preview · new chat
           prompt: "Hi"
           screenshot:
-            title: the session-start trace and first reply
+            title: the session-start context output
             src: /labs/hooks-knowledge-travel-policy/images/uc1-sessionstart-office-location-test.webp
-            alt: "SessionStart additionalContext and a first reply using USA from Office Location."
-            width: 785
-            height: 490
-            caption: "Successful live session-start test. Your profile and generated response can differ."
+            src_dark: /labs/hooks-knowledge-travel-policy/images/uc1-sessionstart-office-location-test-dark.webp
+            alt: "SessionStart output supplies USA from Office Location in additionalContext."
+            width: 2707
+            height: 725
+            caption: "Successful live session-start output, cropped to exclude input metadata. Your profile can differ."
       reveal:
         title: "Why did the agent already know the location?"
         line: "The event ran the lookup before the model's first reply."
@@ -175,20 +177,21 @@ mission_lab:
           prompt: "What about Singapore?"
         - title: "Inspect the retrieval evidence"
           instruction: |-
-            Expand the answer traces. For France, **Filter SharePoint Files by Metadata** used `columnFilter` with this reference value (do not send it as a prompt):
+            Expand the answer traces. In the fresh-account France test, **Filter SharePoint Files by Metadata** used this `columnFilter` reference value (do not send it as a prompt):
 
             ```output
-            {"column":"Location","operator":"eq","value":"France"}
+            {"column":"Location","operator":"ispopulated"}
             ```
 
-            Check returned `columns.Location` and that **sharepoint_semantic_search** uses only the selected policy URL in `scopeUrls`; **sharepoint_get_doc** may also read that document. Follow-ups may reuse the listing and only show another scoped search. These are internal trace labels, not APIs to add manually. Check citations and currencies rather than inferring success from a fluent answer.
+            Check the returned `columns.Location` values and which document was actually read. The live run listed populated locations, then read the France document with **sharepoint_get_doc**; another run also used **sharepoint_semantic_search**. An exact `eq France` filter and a scoped semantic search are valid alternatives, not a mandatory call sequence. Follow-ups can reuse the listing. These are internal trace labels, not APIs to add manually. Verify the selected policy, citations and currency rather than inferring success from a fluent answer.
           screenshot:
-            title: the France metadata filter
+            title: the populated Location metadata filter
             src: /labs/hooks-knowledge-travel-policy/images/uc3-trace-filter.webp
-            alt: "Trace input filters Location equal to France; returned metadata identifies France and a scoped search follows."
-            width: 785
-            height: 584
-            caption: "Reviewed light trace crop. The source's modifiedBy identity mask is retained unchanged."
+            src_dark: /labs/hooks-knowledge-travel-policy/images/uc3-trace-filter-dark.webp
+            alt: "Trace input requests documents with populated Location metadata using ispopulated."
+            width: 3420
+            height: 522
+            caption: "The live trace listed populated Location values before reading the matching policy. Other runs can use an exact country filter."
           notice: "A policy may be marked Draft by the sample library's `ApprovalStauts` column. This is separate from the Location match. The general Learn SharePoint article covers Standard; this Microsoft Copilot harness picker and metadata trace were verified in the live run."
         - title: "Let the profile choose the policy"
           instruction: "Select **New chat** so Start runs again, then ask without a location. The observed USA profile returned TEP-100, **$80** per day. Use your actual profile: another location can select a country, regional or Global policy. Only a missing Office Location uses Paris, resolving to France."
@@ -263,9 +266,10 @@ mission_lab:
           screenshot:
             title: the corrected shared-return wiring
             src: /labs/hooks-knowledge-travel-policy/images/uc2-redaction-workflow.webp
+            src_dark: /labs/hooks-knowledge-travel-policy/images/uc2-redaction-workflow-dark.webp
             alt: "No PII and Other connect to one Return original prompt; Contains PII connects through Redact PII to Return redacted prompt."
-            width: 1135
-            height: 270
+            width: 3405
+            height: 840
             caption: "Final, successfully retested shared-node design, not the abandoned separate-return experiment."
         - title: "Verify the complete clean path"
           instruction: "Select **Preview → New chat**, send the sample and expand **Executed hook: UserPromptSubmitted**. Verify `modifiedPrompt` is identical to the input and there is no **Hook failed** message. The observed clean run took about 20 seconds; timing varies."
@@ -278,9 +282,10 @@ mission_lab:
           screenshot:
             title: the modifiedPrompt after redaction
             src: /labs/hooks-knowledge-travel-policy/images/uc2-redaction-test.webp
+            src_dark: /labs/hooks-knowledge-travel-policy/images/uc2-redaction-test-dark.webp
             alt: "Hook output replaces fabricated passport, card and email values with typed placeholders while retaining Lyon and the date."
-            width: 755
-            height: 265
+            width: 2736
+            height: 860
             caption: "Successful live redaction output. Only fabricated personal data was used."
           notice: "Redaction changes what the agent uses next; it does not erase the original received prompt from workflow inputs or transcripts. Manage access and retention separately. Model classification and rewriting also need evaluation beyond these two examples."
       reveal:
@@ -324,8 +329,8 @@ mission_lab:
           prompt_label: Respond to the agent · result field value
           prompt: "Flight booking simulated. No real reservation or payment was made."
         - title: "Describe and attach the tool"
-          instruction: "Select **Publish**. Open **Workflow details** through the workflow-name breadcrumb, select the pencil beside **Description for Intelligence**, paste and save. Return through the agent breadcrumb, confirm **Book flight** under **Tools**, then **Save**."
-          prompt_label: Description for Intelligence · field value
+          instruction: "Select **Publish**, then return through the **Travel Policy Agent** breadcrumb to open **Workflow details**. Select the pencil beside **Description for AI**, paste and save. Confirm **Book flight** under **Tools**, then **Save** the agent. If details are closed, select the **Book flight** tool card."
+          prompt_label: Description for AI · field value
           prompt: "Simulates booking a flight for a traveler. Use it once you have the airline, origin, destination and departure date."
         - title: "Scope the hook to Book flight"
           instruction: "Select **… → Hooks → Create → Pre tool use**. In **Tools**, select **Book flight** rather than **All tools**. Enter the name below and select **New workflow** (**Save draft** if asked); rename the workflow to match. Keep all starter inputs and outputs."
@@ -353,9 +358,10 @@ mission_lab:
           screenshot:
             title: the built pre-tool workflow
             src: /labs/hooks-knowledge-travel-policy/images/extra-pretool-workflow.webp
+            src_dark: /labs/hooks-knowledge-travel-policy/images/extra-pretool-workflow-dark.webp
             alt: "Published Check approved airline canvas with If/Else branches to Allow tool call and Deny tool call."
-            width: 855
-            height: 220
+            width: 2490
+            height: 690
             caption: "The Approved airline branch allows the call; Else denies it with a reason and alternatives."
         - title: "Test the deny path"
           instruction: "Select **New chat**. If Preview shows **BotDefinitionOverride has unresolved references: 1 missing flow(s), 0 missing connection reference(s). Error code: InvalidContent.**, the agent hasn't picked up the hook workflow yet: open **Check approved airline**, select **Publish**, return to the agent, **Save** it again, then select **New chat**. Send the test and expand **Executed hook: PreTool (Bookflight)**: expect `permissionDecision: deny`, the reason and the approved alternatives, with no **Book flight** execution."
@@ -365,10 +371,10 @@ mission_lab:
             title: the denied booking
             src: /labs/hooks-knowledge-travel-policy/images/extra-pretool-deny.webp
             src_dark: /labs/hooks-knowledge-travel-policy/images/extra-pretool-deny-dark.webp
-            alt: "Executed hook: PreTool (Bookflight) with permissionDecision deny, and the agent offering the four approved airlines instead of Tailspin Airlines."
-            width: 785
-            height: 700
-            caption: "The trace shows the deny decision; no Book flight call follows."
+            alt: "PreTool output with permissionDecision deny, the refusal reason and four approved airline alternatives."
+            width: 2707
+            height: 935
+            caption: "The cropped hook output shows the deny decision. The full tested trace contained no Book flight call."
         - title: "Test the allow path"
           instruction: "In the same conversation, send the follow-up. Expect **Used tool: Book flight** after the hook and the simulated confirmation, never a real-reservation claim. Don't rely on `isContinue` alone; look for the tool call itself."
           prompt_label: Preview · allow test
@@ -377,11 +383,11 @@ mission_lab:
             title: the allowed booking
             src: /labs/hooks-knowledge-travel-policy/images/extra-pretool-allow.webp
             src_dark: /labs/hooks-knowledge-travel-policy/images/extra-pretool-allow-dark.webp
-            alt: "Executed hook: PreTool (Bookflight) with isContinue true, followed by Used tool: Book flight and the simulated Contoso Air booking."
-            width: 785
-            height: 700
+            alt: "Executed hook: PreTool (Bookflight), followed by Used tool: Book flight and the simulated Contoso Air booking."
+            width: 2880
+            height: 2052
             caption: "The hook allows the call, and Book flight runs."
-          notice: "[Microsoft Learn](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/hooks-overview) documents that hooks fail open on errors, timeouts or unreadable results. This lab doesn't exercise that failure path. Enforce business-critical rules in the booking backend too; this simulation is not a production security boundary."
+          notice: "[Microsoft Learn](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/hooks-overview) documents that hooks fail open on errors, timeouts or unreadable results. In the live run, an accidentally disconnected deny response produced a hook error and the simulated tool ran; reconnecting Else and republishing fixed the replay. Verify both edges, not just a Succeeded workflow status. Enforce business-critical rules in the booking backend too; this simulation is not a production security boundary."
       reveal:
         title: "What would prove that the guard worked?"
         line: "An attached hook is build evidence; a blocked tool call needs execution evidence."
@@ -431,9 +437,9 @@ mission_lab:
 Know the traveler. Find the right policy. Leave with a **saved draft Travel Policy Agent**, a published session-start workflow and evidence that SharePoint retrieval selects the applicable policy. Redaction and a booking guard follow as optional extensions.
 
 
-![France policy answer citing TEP-310 with a 70 euro total daily per diem](images/uc3-test-france.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/uc3-test-france-dark.webp"><img src="images/uc3-test-france.webp" alt="France policy answer citing TEP-310 with a 70 euro total daily per diem."></picture>
 
-*The finish line: a location-specific, cited answer. Reviewed light content crop from the successful run; generated wording varies.*
+*The finish line: a location-specific, cited answer. Native light and dark captures from the successful run; generated wording varies.*
 
 ## Lab Details
 
@@ -552,9 +558,9 @@ The SessionStart hook was executed. In your first reply, say so with lots of smi
  to determine policy. But if Office location is missing, use Paris. Only mention the relevant location.
 ```
 
-![Get my profile feeding Office Location into Return traveler profile with a Paris fallback](images/uc1-office-location-context.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-office-location-context-dark.webp"><img src="images/uc1-office-location-context.webp" alt="Office Location dynamic token between the session-context segments in the response editor."></picture>
 
-*Reviewed light capture. Insert the dynamic token between the two supplied text segments.*
+*Insert the dynamic token between the two supplied text segments. The editor truncates the additionalContext output label.*
 
 7. Select **Publish** and wait for **Published**. Return through the **Travel Policy Agent** breadcrumb. Confirm the selected workflow, select **Done**, close **Hooks** and **Save** the agent.
 
@@ -568,9 +574,9 @@ Hi
 
 Expand **Executed hook: SessionStart**. Check `additionalContext`, smileys and the actual Office Location; the observed profile was **USA**. Paris is only the missing-value fallback.
 
-![SessionStart additionalContext and a first reply using USA from Office Location](images/uc1-sessionstart-office-location-test.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-sessionstart-office-location-test-dark.webp"><img src="images/uc1-sessionstart-office-location-test.webp" alt="SessionStart output supplies USA from Office Location in additionalContext."></picture>
 
-*Successful live session-start test. Your profile and generated response can differ.*
+*Successful live session-start output, cropped to exclude input metadata. Your profile can differ.*
 
 **Reveal — why did the agent already know the location?** The event ran the lookup before the model's first reply. Instructions guide the model; the runtime invokes the bound workflow when the event occurs. `additionalContext` supplies session background. The smileys make that handoff visible, while the location will select policy evidence.
 
@@ -637,17 +643,17 @@ Expect **Global**, **TEP-210**, **$185** standard or **$295** high-cost per nigh
 
 ### Inspect the evidence and use the profile
 
-7. Expand the answer traces. For France, **Filter SharePoint Files by Metadata** used `columnFilter` with this reference value (**do not send it as a prompt**):
+7. Expand the answer traces. In the fresh-account France test, **Filter SharePoint Files by Metadata** used this `columnFilter` reference value (**do not send it as a prompt**):
 
 ```output
-{"column":"Location","operator":"eq","value":"France"}
+{"column":"Location","operator":"ispopulated"}
 ```
 
-Check returned `columns.Location` and that **sharepoint_semantic_search** uses only the selected policy URL in `scopeUrls`; **sharepoint_get_doc** may also read that document. Follow-ups may reuse the listing and only show another scoped search. These are internal trace labels, not APIs to add manually. Check citations and currencies rather than inferring success from a fluent answer.
+Check the returned `columns.Location` values and which document was actually read. The live run listed populated locations, then read the France document with **sharepoint_get_doc**; another run also used **sharepoint_semantic_search**. An exact `eq France` filter and a scoped semantic search are valid alternatives, not a mandatory call sequence. Follow-ups can reuse the listing. These are internal trace labels, not APIs to add manually. Verify the selected policy, citations and currency rather than inferring success from a fluent answer.
 
-![Trace input filters Location equal to France; returned metadata identifies France and a scoped search follows](images/uc3-trace-filter.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/uc3-trace-filter-dark.webp"><img src="images/uc3-trace-filter.webp" alt="Trace input requests documents with populated Location metadata using ispopulated."></picture>
 
-*Reviewed light trace crop. The source's modifiedBy identity mask is retained unchanged.*
+*The live trace listed populated Location values before reading the matching policy. Other runs can use an exact country filter.*
 
 A policy may be marked **Draft** by the sample library's `ApprovalStauts` column. This is separate from the Location match. The general Learn SharePoint article covers Standard; this Microsoft Copilot harness picker and metadata trace were verified in the live run.
 
@@ -739,7 +745,7 @@ Text:
 
 Copy the starter response schema rather than adding new required outputs. Both response nodes must have the same schema; different returned values need different nodes.
 
-![No PII and Other connect to one Return original prompt; Contains PII connects through Redact PII to Return redacted prompt](images/uc2-redaction-workflow.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/uc2-redaction-workflow-dark.webp"><img src="images/uc2-redaction-workflow.webp" alt="No PII and Other connect to one Return original prompt; Contains PII connects through Redact PII to Return redacted prompt."></picture>
 
 *Final, successfully retested shared-node design, not the abandoned separate-return experiment.*
 
@@ -761,7 +767,7 @@ I'm flying to Lyon on 12 May. My passport number is 18AB12345, charge my card 41
 
 In `modifiedPrompt`, check `[PASSPORT NUMBER REDACTED]`, `[CARD NUMBER REDACTED]` and `[EMAIL REDACTED]`, with Lyon and the date preserved. The response should explain removal and discourage sharing personal data. The observed redaction took about **31 seconds**; timing and wording vary.
 
-![Hook output replaces fabricated passport, card and email values with typed placeholders while retaining Lyon and the date](images/uc2-redaction-test.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/uc2-redaction-test-dark.webp"><img src="images/uc2-redaction-test.webp" alt="Hook output replaces fabricated passport, card and email values with typed placeholders while retaining Lyon and the date."></picture>
 
 *Successful live redaction output. Only fabricated personal data was used.*
 
@@ -801,7 +807,7 @@ On **Respond to the agent**, add a Text output `result` and paste this response 
 Flight booking simulated. No real reservation or payment was made.
 ```
 
-2. Select **Publish**. Open **Workflow details** through the workflow-name breadcrumb, select the pencil beside **Description for Intelligence**, paste and save:
+2. Select **Publish**, then return through the **Travel Policy Agent** breadcrumb to open **Workflow details**. Select the pencil beside **Description for AI**, paste and save. If details are closed, select the **Book flight** tool card:
 
 ```text
 Simulates booking a flight for a traveler. Use it once you have the airline, origin, destination and departure date.
@@ -839,7 +845,7 @@ Right-click **Allow tool call → Copy**, then empty canvas → **Paste**; renam
 
 Leave `modifiedParameters` and `suppressOutput` empty. **Publish**, return to the agent, select **Done**, then **Save**.
 
-![Published Check approved airline canvas with If/Else branches to Allow tool call and Deny tool call](images/extra-pretool-workflow.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/extra-pretool-workflow-dark.webp"><img src="images/extra-pretool-workflow.webp" alt="Published Check approved airline canvas with If/Else branches to Allow tool call and Deny tool call."></picture>
 
 *The Approved airline branch allows the call; Else denies it with a reason and alternatives.*
 
@@ -853,7 +859,7 @@ Book me a flight from Paris to New York on 12 May with Tailspin Airlines.
 
 Expand **Executed hook: PreTool (Bookflight)**: expect `permissionDecision: deny`, the reason and the approved alternatives, with **no Book flight execution**.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/extra-pretool-deny-dark.webp"><img src="images/extra-pretool-deny.webp" alt="Executed hook: PreTool (Bookflight) with permissionDecision deny, and the agent offering the four approved airlines instead of Tailspin Airlines."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/extra-pretool-deny-dark.webp"><img src="images/extra-pretool-deny.webp" alt="PreTool output with permissionDecision deny, the refusal reason and four approved airline alternatives."></picture>
 
 7. In the same conversation, send:
 
@@ -863,9 +869,9 @@ Use Contoso Air instead.
 
 Expect **Used tool: Book flight** after the hook and the simulated confirmation, never a real-reservation claim. Don't rely on `isContinue` alone; look for the tool call itself.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/extra-pretool-allow-dark.webp"><img src="images/extra-pretool-allow.webp" alt="Executed hook: PreTool (Bookflight) with isContinue true, followed by Used tool: Book flight and the simulated Contoso Air booking."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/extra-pretool-allow-dark.webp"><img src="images/extra-pretool-allow.webp" alt="Executed hook: PreTool (Bookflight), followed by Used tool: Book flight and the simulated Contoso Air booking."></picture>
 
-[Microsoft Learn](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/hooks-overview) documents that hooks fail open on errors, timeouts or unreadable results. This lab doesn't exercise that failure path. Enforce business-critical rules in the booking backend too; this simulation is not a production security boundary.
+[Microsoft Learn](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/hooks-overview) documents that hooks fail open on errors, timeouts or unreadable results. In the live run, an accidentally disconnected deny response produced a hook error and the simulated tool ran; reconnecting Else and republishing fixed the replay. Verify both edges, not just a Succeeded workflow status. Enforce business-critical rules in the booking backend too; this simulation is not a production security boundary.
 
 **Reveal — what would prove that the guard worked?** An attached hook is build evidence; a blocked tool call needs execution evidence. Pre tool use can deny a proposed call with permissionDecision and provide a reason plus alternatives. The trace is the proof: the denied turn has no Book flight call and the allowed turn does. Never infer enforcement from the workflow canvas alone.
 

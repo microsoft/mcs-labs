@@ -22,8 +22,8 @@ mission_lab:
   hero_image:
     src: /labs/standard-harness-components/images/analysis-result.webp
     alt: "Prompt Analyzer result ending with an improved prompt example and an offer to refine it further."
-    width: 764
-    height: 246
+    width: 2244
+    height: 1380
     caption: "Your finish line: a tool-backed analysis you can inspect. This result excerpt is comparison material, not another prompt to send; generated wording will vary."
   scenario: |-
     Build a **Copilot Studio Assistant** for internal teams: answer product questions, collect mailing-list details without submitting them, cite a licensing guide and analyze prompts.
@@ -109,9 +109,9 @@ mission_lab:
             src: /labs/standard-harness-components/images/topic-description.webp
             src_dark: /labs/standard-harness-components/images/topic-description-dark.webp
             alt: "Topic name and description entered in Add from description with Copilot."
-            width: 2060
-            height: 1104
-            caption: "Generate a conversation from its purpose, then inspect the nodes."
+            width: 3030
+            height: 1185
+            caption: "Generate a conversation from its purpose, then inspect the nodes. This dialog remains mostly light even in the product's dark theme."
         - title: "Inspect the generated path and node menu"
           instruction: "Review **The agent chooses** trigger and its description, question nodes collecting email/first/last name into variables, and welcome/thank-you message nodes. Select **Save**. Identify **Trigger**, **Message**, **Question**, **Condition** and **Tool** node roles."
           help: "Select **+** between nodes and inspect **Send a message**, **Ask a question**, **Ask with adaptive card**, **Add a condition**, **Variable management**, **Topic management**, **Add a tool**, **Add an agent** and **Advanced**. Point to **Add a tool**: inspect **Basic tools**, **Connector** and **Tool** tabs, including **New Agent flow**, a connector action and **New prompt**. Close the menu without adding a backend action."
@@ -163,8 +163,8 @@ mission_lab:
             src: /labs/standard-harness-components/images/knowledge-web-search.webp
             src_dark: /labs/standard-harness-components/images/knowledge-web-search-dark.webp
             alt: "Knowledge card with Web Search disabled, Microsoft Learn ready and the licensing PDF still in progress."
-            width: 1514
-            height: 588
+            width: 2610
+            height: 960
             caption: "This capture shows an intermediate state: the PDF is still indexing. Wait for Ready before the licensing test."
         - title: "Add the CARE website"
           instruction: "Select **Overview → Knowledge → + Add knowledge → Public websites**. Enter the URL, select **Add**, then **Add to agent**, and wait for **Ready**."
@@ -216,9 +216,9 @@ mission_lab:
             src: /labs/standard-harness-components/images/weather-inputs.webp
             src_dark: /labs/standard-harness-components/images/weather-inputs-dark.webp
             alt: "Weather inputs with Location dynamically filled by AI and Units set to Custom value, offering Imperial and Metric."
-            width: 1298
-            height: 662
-            caption: "The user supplies location; the maker fixes units. Crop of the Inputs card."
+            width: 2280
+            height: 830
+            caption: "The user supplies location; choose Metric from the maker's Custom value menu for Units."
         - title: "Ask for weather"
           instruction: "Select **New test session** and send the question."
           prompt_label: Test your agent
@@ -228,9 +228,9 @@ mission_lab:
           prompt_label: Same test conversation
           prompt: "Orlando"
         - title: "Create the Prompt Analyzer"
-          instruction: "Select **Overview → Tools → Add tool → Add new Prompt**. Rename the dated **Custom prompt** at the top left to **Prompt Analyzer**. Paste the instructions below."
+          instruction: "Select **Overview → Tools → Add tool → Create new → Prompt** (**Add new Prompt** in some versions). Rename the dated **Custom prompt** at the top left to **Prompt Analyzer**. Paste the instructions below."
           prompt_label: Prompt editor Instructions
-          prompt: "Analyze this prompt (replace with text) based upon the CARE Prompt Guidance to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user."
+          prompt: "Analyze this prompt (replace with text) based upon the CARE Prompt Guidance (Context, Ask, Rules, Examples) to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user."
         - title: "Replace the placeholder with a typed input"
           instruction: "Delete **(replace with text)**. At that cursor position type **/**, then select **Input → Text**. Set **Name** to **PromptToAnalyze** and enter the sample data below. Select **Close** and confirm the named input appears in the instructions."
           prompt_label: Text input · Sample data
@@ -258,8 +258,8 @@ mission_lab:
             src: /labs/standard-harness-components/images/analyzer-activity.webp
             src_dark: /labs/standard-harness-components/images/analyzer-activity-dark.webp
             alt: "Activity map showing Prompt Analyzer input, tool execution, processed result and return to the parent."
-            width: 1448
-            height: 1030
+            width: 2700
+            height: 2100
             caption: "Check the actual tool call, not only the polished answer. Generated output is comparison material, not an instruction to send."
       reveal:
         title: "Why separate a tool input from agent instructions?"
@@ -406,10 +406,10 @@ mission_lab:
           help: "If warned **You need to publish your agent before you can make it available to others**, use **Go to publish** first. After adding, **Edit details**, **Availability options**, **See agent in Microsoft 365** and **See agent in Teams** become available."
         - title: "Review display details and sharing"
           instruction: "Select **Edit details** and review **Name**, **Icon**, **Short description**, **Long description** and **Teams settings**. Change **Short description** to **Assist users building agents**, then select **Save**. Optionally inspect **Availability options** and return with the back arrow without broadening access."
-          notice: "The refreshed run opened Edit details but did not exercise saving those changes or Availability options. These remain documented learner actions, not claimed validation. Ask the facilitator if controls differ or sharing is restricted."
+          notice: "The fresh-account run saved the description and inspected Availability options without broadening access. Its Teams web launcher stalled, so an installed-app conversation and channel comparison remain unverified. Ask the facilitator if launch or sharing is blocked."
         - title: "Open the agent in Teams web"
           instruction: "Select **See agent in Teams**. If **Open Microsoft Teams?** appears, select **Cancel**, then **Use the web app instead**. Dismiss first-visit welcome dialogs; return to Studio and select **See agent in Teams** again if needed."
-          help: "Review the agent dialog and select **Add**. When **Added successfully!** appears, select **Open**. A long name may be shortened in Teams. The refreshed run used Teams web; desktop launch is an unexercised alternative, not required for completion."
+          help: "Review the agent dialog and select **Add**. When **Added successfully!** appears, select **Open**. A long name may be shortened in Teams. Desktop launch is an untested alternative. If the web launcher does not open Teams, record the blocker rather than claiming the channel test passed."
         - title: "Compare the channel response"
           instruction: "Ask the question in Teams, then ask the same question in the Copilot Studio test pane. Compare the answer, authentication, UI and formatting. Also repeat earlier lab questions on the channel; republish after authoring changes you want users to see."
           prompt_label: Teams, then Copilot Studio test pane
@@ -563,7 +563,7 @@ Join Copilot Studio Mailing List. Let the user provide their email address, firs
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/topic-description-dark.webp"><img src="images/topic-description.webp" alt="Topic name and description entered in Add from description with Copilot."></picture>
 
-Generate a conversation from its purpose, then inspect the nodes.
+Generate a conversation from its purpose, then inspect the nodes. This dialog remains mostly light even in the product's dark theme.
 
 3. Review **The agent chooses** trigger and its description, questions saving email/first/last name to variables, and welcome/thank-you messages. Select **Save**. Identify **Trigger**, **Message**, **Question**, **Condition** and **Tool** node roles.
 4. Select **+** between nodes. Inspect **Send a message**, **Ask a question**, **Ask with adaptive card**, **Add a condition**, **Variable management**, **Topic management**, **Add a tool**, **Add an agent** and **Advanced**.
@@ -643,7 +643,7 @@ Leave with live weather using fixed units and a verified Prompt Analyzer call.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/weather-inputs-dark.webp"><img src="images/weather-inputs.webp" alt="Weather inputs with Location dynamically filled by AI and Units set to Custom value, offering Imperial and Metric."></picture>
 
-The user supplies location; the maker fixes units. Crop of the Inputs card.
+The user supplies location; choose Metric from the maker's Custom value menu for Units.
 
 5. Select **New test session** and send:
 
@@ -658,10 +658,10 @@ Orlando
 ```
 
 7. Review live weather and confirm it uses the configured units without asking the user to choose them.
-8. Select **Overview → Tools → Add tool → Add new Prompt**. Rename the dated **Custom prompt** at top left to **Prompt Analyzer**. Paste in **Instructions**:
+8. Select **Overview → Tools → Add tool → Create new → Prompt** (**Add new Prompt** in some versions). Rename the dated **Custom prompt** at top left to **Prompt Analyzer**. Paste in **Instructions**:
 
 ```text
-Analyze this prompt (replace with text) based upon the CARE Prompt Guidance to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
+Analyze this prompt (replace with text) based upon the CARE Prompt Guidance (Context, Ask, Rules, Examples) to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
 ```
 
 9. Delete **(replace with text)**. At that position type **/**, then **Input → Text**. Set **Name** to **PromptToAnalyze** and **Sample data** to:
@@ -809,9 +809,9 @@ Leave with a published agent, the Microsoft 365 and Microsoft Teams channel adde
 4. Select **Microsoft 365 and Microsoft Teams**. Review **Turn on Microsoft 365 → Make agent available in Microsoft 365 Copilot** (the product was renamed Microsoft Copilot, but this panel still uses the old name) and the **Agent preview** name, icon and short description. If warned to publish first, select **Go to publish** and do so.
 5. Select **Add channel** and confirm **The channel was added.** Check **Edit details**, **Availability options**, **See agent in Microsoft 365** and **See agent in Teams** are available.
 6. Select **Edit details** and review **Name**, **Icon**, **Short description**, **Long description** and **Teams settings**. Change **Short description** to **Assist users building agents**, then **Save**.
-7. Optionally inspect **Availability options**, then return with the back arrow without broadening access. **Validation limit:** the refreshed run opened Edit details but did not exercise saving those changes or Availability options. These are documented learner actions, not claimed validation. Ask the facilitator if controls differ.
+7. Optionally inspect **Availability options**, then return with the back arrow without broadening access. **Validation limit:** the fresh-account run saved the description and inspected Availability options without broadening access. Its Teams web launcher stalled, so an installed-app conversation and channel comparison remain unverified. Ask the facilitator if launch or sharing is blocked.
 8. Select **See agent in Teams**. If **Open Microsoft Teams?** appears, select **Cancel → Use the web app instead**. Dismiss welcome dialogs; return to Studio and select **See agent in Teams** again if needed.
-9. Review the agent dialog → **Add**. At **Added successfully!**, select **Open**. Teams may shorten a long agent name. The refreshed run used Teams web; desktop launch is an unexercised alternative, not required.
+9. Review the agent dialog → **Add**. At **Added successfully!**, select **Open**. Teams may shorten a long agent name. Desktop launch is an untested alternative. If the web launcher does not open Teams, record the blocker rather than claiming the channel test passed.
 10. Ask in Teams, then ask the same question in the Studio test pane:
 
 ```text

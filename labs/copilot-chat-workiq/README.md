@@ -124,7 +124,7 @@ After each bullet, cite the section it came from.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/policy-answer-dark.webp"><img src="images/policy-answer.webp" alt="Zava DIY policy answer with governing sections cited after the leadership-summary bullets." width="2364" height="2436"></picture>
 
-Inspect the cited sections rather than expecting identical wording. Light capture only.
+Inspect the cited sections rather than expecting identical wording.
 
 3. Select a citation, such as the document name after **From**. Read the source in the right-hand preview. Select **Open in Word** for the full file, or **X** to close the preview.
 4. Send the next prompt in the same conversation. Check each approval, lead-time and attachment requirement against its governing section, including whether next Tuesday is achievable:
@@ -298,7 +298,7 @@ Turn this into a one-page pre-read for the Zava DIY quarterly business review:
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/edit-in-pages-dark.webp"><img src="images/edit-in-pages.webp" alt="More options below a Copilot response with Edit in Pages available." width="2370" height="1116"></picture>
 
-Create the answer first, then open its menu. Light capture only.
+Create the answer first, then open its menu.
 
 3. Edit the page directly to add information. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to.
 
@@ -348,12 +348,12 @@ Complete the chat response → Edit in Pages → Verify the artifact.
 **Finish line:** A sourced executive briefing and a problem-to-recommendation gap analysis. You are now the regional vice president reviewing Contoso Grand Hotel & Resort.
 
 1. Download the [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Save it somewhere you can find for this mission and **Model**. It contains financial and operational tables across 18 sections.
-2. In [Microsoft Copilot](https://copilot.cloud.microsoft/), select **Agents & Plugins** → **Added** → **Researcher**, or type `@Researcher` in the prompt box and select it. Look for **What do you want to research today?**
+2. In [Microsoft Copilot](https://copilot.cloud.microsoft/), start a new chat, type `@Researcher` in the prompt box and select the **Researcher** suggestion. Look for **What do you want to research today?**
 3. Select **+** → **Upload images and files**, choose `Contoso_Grand_Hotel_Performance_Report.pdf`, and wait for the attachment to appear.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/upload-report-dark.webp"><img src="images/upload-report.webp" alt="Plus menu in the Researcher composer showing Upload images and files." width="2424" height="795"></picture>
 
-Wait for the report attachment before sending. Light capture only. Researcher and Analyst are **built-in agents**, not agents you need to create. Use the fictional sample only; uploading from your device sends a copy to OneDrive.
+Wait for the report attachment before sending. Researcher and Analyst are **built-in agents**, not agents you need to create. Use the fictional sample only; uploading from your device sends a copy to OneDrive.
 
 4. Send the prompt after the file is attached:
 
@@ -429,7 +429,7 @@ Attach one report → Connect sections → Check recommendation gaps.
 
 **Finish line:** A ranked ROI table and a financial approve, marginal or defer summary. As the hotel's CFO, go beyond simple payback using explicit cash-flow assumptions.
 
-1. Select **Agents & Plugins** → **Added** → **Analyst**, or type `@Analyst` and select it. Look for **What do you want to analyze today?**
+1. Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion. Look for **What do you want to analyze today?**
 2. Select **+** → **Upload images and files** and attach `Contoso_Grand_Hotel_Performance_Report.pdf` again. If you skipped Research, [download the same hotel report here](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Wait for the attachment. Uploading from your device sends a copy to OneDrive; use only the fictional sample.
 3. Send the prompt. Let Analyst extract Section 16's costs and returns and compute the requested model:
 
@@ -463,6 +463,8 @@ based purely on the financial analysis.
 
 The source provides simple payback. NPV, IRR and discounted payback here are computed results, not facts copied from the report. An undefined IRR needs explanation, not an invented number. Model generation can take a couple of minutes.
 
+For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. Check whether the five annual costs are paid in advance in Years 0–4 or alongside benefits in Years 1–5. Conventional IRR needs both negative and positive cash flows; a model with only positive net flows must not invent an IRR.
+
 5. Optionally send this follow-up in the same Analyst conversation if time permits:
 
 ```text
@@ -471,7 +473,7 @@ Now create a chart showing NPV vs. Investment Cost for all 10 recommendations, w
 
 If you see code or a file name instead of a rendered chart, try the answer's **Provide the chart as a downloadable PNG** suggestion if offered, or rely on the ranked table.
 
-6. Optionally send the second follow-up. Check the proposed combination, its total cost and total NPV against the ranked table and the cash-flow assumptions:
+6. Optionally send the second follow-up. Check the proposed combination, its total cost and total NPV against the ranked table and the cash-flow assumptions. Ask Analyst to state whether the budget covers initial funding or total five-year spending: R7/R10 recur and R5 has two installments. A first-year total does not include every later commitment.
 
 ```text
 Which combination of recommendations gives the highest total NPV while staying under a $1.5M total budget constraint?

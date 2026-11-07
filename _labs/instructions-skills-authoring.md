@@ -110,8 +110,8 @@ mission_lab:
             src: /labs/instructions-skills-authoring/images/skill-description.webp
             src_dark: /labs/instructions-skills-authoring/images/skill-description-dark.webp
             alt: "Read-only SKILL.md fields showing the rfp-response name, request-matching description, and RFP procedure."
-            width: 1156
-            height: 1332
+            width: 2640
+            height: 2400
             caption: "The description is the matching surface; uploaded fields are read-only."
         - title: "Read the references and locate replacement"
           instruction: "Select **references/answer-library.md** in the tree. Review the topic-key table for security, privacy, accessibility, hosting, SSO, SLAs, and pricing. Inspect how `references/`, `assets/`, and `scripts/` support `SKILL.md`. Open **...** (**More options**) to locate **Download** and **Replace**, then close the viewer with **X**."
@@ -144,7 +144,7 @@ mission_lab:
       steps:
         - title: "Attach the solicitation"
           instruction: "Select **Preview**. Notice the credits header, **New chat**, **History**, and **Debug mode** (on by default). Download [01-westbrook-permitting-portal.md](https://github.com/Dewain27/AgentDudeSamples/blob/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md). Select **+** (**Upload images and files**) beside the composer and attach this City of Westbrook permitting-portal RFP."
-          notice: "The sample's fixed submission date has passed. A deadline warning is careful behavior, not a failed run. Microsoft Copilot harness agents use metered Copilot Credits; the classic RFP conversation used about 115 credits, not a cost guarantee."
+          notice: "The sample's fixed submission date has passed. A deadline warning is careful behavior, not a failed run. Microsoft Copilot harness agents use metered Copilot Credits; the fresh-account proposal-and-chart conversation recorded 128.09 credits in History, not a cost guarantee."
         - title: "Request the proposal"
           instruction: "Send the prompt in **Preview chat** with the RFP attached. Do not tell the agent which Skill to use."
           prompt_label: Preview chat
@@ -152,12 +152,12 @@ mission_lab:
         - title: "Inspect the Skill-load trace"
           instruction: "Watch **Using skill: rfp-response** become **Used skill: rfp-response**. Expand the trace and inspect the matched description and **Input** (`skill: rfp-response`). Follow its reasoning about the offering, price, and gaps."
           screenshot:
-            title: the matched Skill and input
+            title: the matched Skill description
             src: /labs/instructions-skills-authoring/images/skill-load-trace.webp
             src_dark: /labs/instructions-skills-authoring/images/skill-load-trace-dark.webp
-            alt: "Expanded rfp-response Skill trace showing the matched description and input skill: rfp-response."
-            width: 1544
-            height: 694
+            alt: "Used skill: rfp-response with its expanded request-matching description."
+            width: 2400
+            height: 860
             caption: "The trace shows the playbook being selected without the prompt naming it; completed traces say Used skill."
           notice: "If the Skill does not load, inspect its activation description first. The intended procedure identifies the offering and reads the answer library, past performance, and pricing before drafting."
         - title: "Review and download the real artifacts"
@@ -398,7 +398,7 @@ mission_lab:
       steps:
         - title: "Check the menu and rollout"
           instruction: "In a separate test agent on the Microsoft Copilot harness, open **Build → Skills → + → Add skill**. Select **Generate with AI** if offered (it may say **Generate with AI (preview)**). If only **Upload a skill** and **Create from blank** appear, skip this extension or use the Author mission."
-          notice: "This option was absent during the earlier Skill-authoring run and later seen in Add skill during an Agent Integration run. Generation itself was **not executed or validated** in that later observation. Availability varies by environment."
+          notice: "The fresh-account run offered only **Upload a skill** and **Create from blank** in a separate test agent. An earlier Agent Integration run showed Generate with AI, but generation itself was **not executed or validated**. Availability varies by environment."
         - title: "Adapt the authoring request for the description box"
           instruction: "Use the project-intake authoring prompt in the Author mission as your starting point, then paste the text from `project-intake-process-v2.docx` into the same box. If needed, download the [Skill-generation materials](assets/skill-generation/skill-generation-materials-v3.zip) and extract outside OneDrive for Business. Remove instructions about attachments and downloadable ZIP packaging for this UI."
           notice: "The documented preview description box does not accept file attachments. This limit is separate from the agent's Preview chat, which accepts the process document. Do not assume the two authoring routes are interchangeable."
@@ -586,11 +586,11 @@ Uploading saves the agent: its URL changes from `/agents/new` to a permanent ID,
 We are bidding on this RFP. Draft our response.
 ```
 
-The sample's fixed submission date has passed; a deadline warning is careful behavior, not a failed run. Microsoft Copilot harness agents use metered Copilot Credits. The classic RFP conversation used about **115 credits**, not a cost guarantee.
+The sample's fixed submission date has passed; a deadline warning is careful behavior, not a failed run. Microsoft Copilot harness agents use metered Copilot Credits. The fresh-account proposal-and-chart conversation recorded **128.09 credits** in History, not a cost guarantee.
 
 4. Watch **Using skill: rfp-response** become **Used skill: rfp-response**. Expand it to inspect the matched description and **Input** (`skill: rfp-response`). Follow the reasoning about offering, price, and gaps. You did not name the Skill in the request.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/skill-load-trace-dark.webp"><img src="images/skill-load-trace.webp" alt="Expanded rfp-response Skill trace showing the matched description and input skill: rfp-response."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/skill-load-trace-dark.webp"><img src="images/skill-load-trace.webp" alt="Used skill: rfp-response with its expanded request-matching description."></picture>
 
 *Completed traces say Used skill. The intended procedure identifies the offering, then reads the answer library, past performance, and pricing before drafting.*
 
@@ -835,7 +835,7 @@ Download the JSON and Markdown exports. You may provide the report to an authori
 <details class="lab-validation" markdown="1">
 <summary>What was tested</summary>
 
-**Validation boundary:** This option was absent during the earlier Skill-authoring run and later seen in Add skill during an Agent Integration run. Generation itself was **not executed or validated** in that later observation. Availability varies by environment.
+**Validation boundary:** The fresh-account run offered only **Upload a skill** and **Create from blank** in a separate test agent. An earlier Agent Integration run showed Generate with AI, but generation itself was **not executed or validated**. Availability varies by environment.
 
 </details>
 

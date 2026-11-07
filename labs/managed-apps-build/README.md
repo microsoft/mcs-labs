@@ -168,7 +168,7 @@ If **Create folder?** appears for **My Bootcamp Lab App**, verify `/Apps` in you
 
 Review **Upload file content** only after healthy access confirms the CSV is missing. Expand **View details**, verify your own app-folder destination and `conflict_behavior: fail` (stop on name conflict), then select **Approve**.
 
-If **Location name unavailable** appears, request actual destination and missing-file proof first; stop if you cannot verify them. An empty search or failed read is not proof of absence. Never approve a new-file upload over an existing CSV.
+If **Location name unavailable** appears, select **Cancel** first: a question sent while approval is pending is queued until you answer the approval. Ask for the actual drive/folder mapping and missing-file proof, then request a fresh fail-on-name-conflict upload and compare its destination before approving. Stop if you cannot verify it. An empty search or failed read is not proof of absence. Never approve a new-file upload over an existing CSV.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/upload-file-content-dark.webp"><img src="images/upload-file-content.webp" alt="CSV upload approval with unavailable location name and stop-on-name-conflict behavior."></picture>
 

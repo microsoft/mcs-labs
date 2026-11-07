@@ -50,8 +50,8 @@ mission_lab:
             src: /labs/copilot-chat-workiq/images/chat-workiq-off.webp
             src_dark: /labs/copilot-chat-workiq/images/chat-workiq-off-dark.webp
             alt: "Chat selected in the composer, with Work IQ crossed out beside Auto."
-            width: 2535
-            height: 1020
+            width: 2810
+            height: 1555
             caption: "Check both controls before prompting."
         - title: "Ask the market question"
           instruction: "Leave **Auto** selected. Paste the prompt and select **Send**."
@@ -72,8 +72,8 @@ mission_lab:
             src: /labs/copilot-chat-workiq/images/model-picker.webp
             src_dark: /labs/copilot-chat-workiq/images/model-picker-dark.webp
             alt: "Response-mode menu and Claude submenu showing available model choices."
-            width: 1812
-            height: 1176
+            width: 2896
+            height: 1888
             caption: "The capture shows Think deeper selected during the optional exercise. Your available models may differ; light capture only."
           notice: "Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation."
       reveal:
@@ -120,9 +120,9 @@ mission_lab:
             src: /labs/copilot-chat-workiq/images/policy-answer.webp
             src_dark: /labs/copilot-chat-workiq/images/policy-answer-dark.webp
             alt: "Zava DIY policy answer with governing sections cited after the leadership-summary bullets."
-            width: 2364
-            height: 2436
-            caption: "Inspect the cited sections rather than expecting identical wording. Light capture only."
+            width: 2400
+            height: 1722
+            caption: "Inspect the cited sections rather than expecting identical wording."
         - title: "Verify a policy citation"
           instruction: "Select a citation, such as the document name after **From**. Read the source in the right-hand preview. Select **Open in Word** for the full file, or **X** to close the preview."
         - title: "Apply the rules to your proposal"
@@ -289,9 +289,9 @@ mission_lab:
             src: /labs/copilot-chat-workiq/images/edit-in-pages.webp
             src_dark: /labs/copilot-chat-workiq/images/edit-in-pages-dark.webp
             alt: "More options below a Copilot response with Edit in Pages available."
-            width: 2370
-            height: 1116
-            caption: "Create the answer first, then open its menu. Light capture only."
+            width: 2400
+            height: 930
+            caption: "Create the answer first, then open its menu."
         - title: "Edit and review the page"
           instruction: "Edit the page directly to add information. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to."
           notice: "Asking chat beside an open page to rewrite it can report success without updating the page. For a later Copilot revision, request a new answer in chat and open that answer in Pages again; verify the page actually changed."
@@ -334,15 +334,15 @@ mission_lab:
         - title: "Download the fictional report"
           instruction: "Download the [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Save it somewhere you can find for this mission and **Model**. It contains financial and operational tables across 18 sections."
         - title: "Open Researcher and attach the report"
-          instruction: "In [Microsoft Copilot](https://copilot.cloud.microsoft/), select **Agents & Plugins** → **Added** → **Researcher**, or type `@Researcher` in the prompt box and select it. Look for **What do you want to research today?** Select **+** → **Upload images and files**, choose `Contoso_Grand_Hotel_Performance_Report.pdf`, and wait for the attachment to appear."
+          instruction: "In [Microsoft Copilot](https://copilot.cloud.microsoft/), start a new chat, type `@Researcher` in the prompt box and select the **Researcher** suggestion. Look for **What do you want to research today?** Select **+** → **Upload images and files**, choose `Contoso_Grand_Hotel_Performance_Report.pdf`, and wait for the attachment to appear."
           screenshot:
             title: upload the report
             src: /labs/copilot-chat-workiq/images/upload-report.webp
             src_dark: /labs/copilot-chat-workiq/images/upload-report-dark.webp
             alt: "Plus menu in the Researcher composer showing Upload images and files."
-            width: 2424
-            height: 795
-            caption: "Wait for the report attachment before sending. Light capture only."
+            width: 2340
+            height: 1440
+            caption: "Wait for the report attachment before sending."
           notice: "Researcher and Analyst are built-in agents, not agents you need to create. Use the fictional sample only; uploading from your device sends a copy to OneDrive."
         - title: "Request the executive briefing"
           instruction: "Send the prompt after the file is attached."
@@ -391,7 +391,7 @@ mission_lab:
             correct: false
             feedback: "That would conceal a gap instead of demonstrating coverage."
       stuck:
-        - problem: "Researcher is missing under Added."
+        - problem: "Researcher is not offered when I type @Researcher."
           solution: "Ask the facilitator to check availability for the assigned account. Continue the core Chat missions; do not build a replacement agent."
         - problem: "Researcher pauses before starting."
           solution: "Read its clarification and answer it. Use the go ahead reply only when it is asking to proceed, not to bypass a missing attachment or permission."
@@ -406,7 +406,7 @@ mission_lab:
       outcome: "A ranked ROI table and a financial approve, marginal or defer summary."
       steps:
         - title: "Open Analyst and upload the same PDF"
-          instruction: "Select **Agents & Plugins** → **Added** → **Analyst**, or type `@Analyst` and select it. Look for **What do you want to analyze today?** Select **+** → **Upload images and files** and attach `Contoso_Grand_Hotel_Performance_Report.pdf` again."
+          instruction: "Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion. Look for **What do you want to analyze today?** Select **+** → **Upload images and files** and attach `Contoso_Grand_Hotel_Performance_Report.pdf` again."
           help: "If you skipped Research, [download the same hotel report here](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Wait for the attachment. Uploading from your device sends a copy to OneDrive; use only the fictional sample."
         - title: "Calculate and rank the investments"
           instruction: "Send the prompt. Let Analyst extract Section 16's costs and returns and compute the requested model."
@@ -437,6 +437,7 @@ mission_lab:
             based purely on the financial analysis.
         - title: "Verify the cash-flow assumptions"
           instruction: "Check that all ten recommendations appear, sorted by NPV. Compare extracted costs and annual returns with Section 16; inspect the 8% rate, five-year horizon, R5 timing and recurring R7/R10 costs before accepting the approve, marginal or defer summary."
+          help: "For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. Check whether the five annual costs are paid in advance in Years 0–4 or alongside benefits in Years 1–5. Conventional IRR needs both negative and positive cash flows; a model with only positive net flows must not invent an IRR."
           notice: "The source provides simple payback. NPV, IRR and discounted payback here are computed results, not facts copied from the report. An undefined IRR needs explanation, not an invented number. Model generation can take a couple of minutes."
         - title: "Explore a visualization if time permits"
           instruction: "Optionally send this follow-up in the same Analyst conversation."
@@ -445,6 +446,7 @@ mission_lab:
           notice: "If you see code or a file name instead of a rendered chart, try the answer's **Provide the chart as a downloadable PNG** suggestion if offered, or rely on the ranked table."
         - title: "Explore a budget constraint if time permits"
           instruction: "Optionally send the second follow-up. Check the proposed combination, its total cost and total NPV against the ranked table and the cash-flow assumptions."
+          help: "Check what the budget covers. Initial funding and total five-year spending are not the same: R7/R10 recur and R5 has two installments. Ask Analyst to state its budget basis before accepting a portfolio; a first-year total does not include every later commitment."
           prompt_label: Same Analyst conversation, optional
           prompt: "Which combination of recommendations gives the highest total NPV while staying under a $1.5M total budget constraint?"
       reveal:
@@ -611,7 +613,7 @@ After each bullet, cite the section it came from.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/policy-answer-dark.webp"><img src="images/policy-answer.webp" alt="Zava DIY policy answer with governing sections cited after the leadership-summary bullets." width="2364" height="2436"></picture>
 
-Inspect the cited sections rather than expecting identical wording. Light capture only.
+Inspect the cited sections rather than expecting identical wording.
 
 3. Select a citation, such as the document name after **From**. Read the source in the right-hand preview. Select **Open in Word** for the full file, or **X** to close the preview.
 4. Send the next prompt in the same conversation. Check each approval, lead-time and attachment requirement against its governing section, including whether next Tuesday is achievable:
@@ -785,7 +787,7 @@ Turn this into a one-page pre-read for the Zava DIY quarterly business review:
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/edit-in-pages-dark.webp"><img src="images/edit-in-pages.webp" alt="More options below a Copilot response with Edit in Pages available." width="2370" height="1116"></picture>
 
-Create the answer first, then open its menu. Light capture only.
+Create the answer first, then open its menu.
 
 3. Edit the page directly to add information. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to.
 
@@ -835,12 +837,12 @@ Complete the chat response → Edit in Pages → Verify the artifact.
 **Finish line:** A sourced executive briefing and a problem-to-recommendation gap analysis. You are now the regional vice president reviewing Contoso Grand Hotel & Resort.
 
 1. Download the [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Save it somewhere you can find for this mission and **Model**. It contains financial and operational tables across 18 sections.
-2. In [Microsoft Copilot](https://copilot.cloud.microsoft/), select **Agents & Plugins** → **Added** → **Researcher**, or type `@Researcher` in the prompt box and select it. Look for **What do you want to research today?**
+2. In [Microsoft Copilot](https://copilot.cloud.microsoft/), start a new chat, type `@Researcher` in the prompt box and select the **Researcher** suggestion. Look for **What do you want to research today?**
 3. Select **+** → **Upload images and files**, choose `Contoso_Grand_Hotel_Performance_Report.pdf`, and wait for the attachment to appear.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/upload-report-dark.webp"><img src="images/upload-report.webp" alt="Plus menu in the Researcher composer showing Upload images and files." width="2424" height="795"></picture>
 
-Wait for the report attachment before sending. Light capture only. Researcher and Analyst are **built-in agents**, not agents you need to create. Use the fictional sample only; uploading from your device sends a copy to OneDrive.
+Wait for the report attachment before sending. Researcher and Analyst are **built-in agents**, not agents you need to create. Use the fictional sample only; uploading from your device sends a copy to OneDrive.
 
 4. Send the prompt after the file is attached:
 
@@ -916,7 +918,7 @@ Attach one report → Connect sections → Check recommendation gaps.
 
 **Finish line:** A ranked ROI table and a financial approve, marginal or defer summary. As the hotel's CFO, go beyond simple payback using explicit cash-flow assumptions.
 
-1. Select **Agents & Plugins** → **Added** → **Analyst**, or type `@Analyst` and select it. Look for **What do you want to analyze today?**
+1. Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion. Look for **What do you want to analyze today?**
 2. Select **+** → **Upload images and files** and attach `Contoso_Grand_Hotel_Performance_Report.pdf` again. If you skipped Research, [download the same hotel report here](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Wait for the attachment. Uploading from your device sends a copy to OneDrive; use only the fictional sample.
 3. Send the prompt. Let Analyst extract Section 16's costs and returns and compute the requested model:
 
@@ -950,6 +952,8 @@ based purely on the financial analysis.
 
 The source provides simple payback. NPV, IRR and discounted payback here are computed results, not facts copied from the report. An undefined IRR needs explanation, not an invented number. Model generation can take a couple of minutes.
 
+For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. Check whether the five annual costs are paid in advance in Years 0–4 or alongside benefits in Years 1–5. Conventional IRR needs both negative and positive cash flows; a model with only positive net flows must not invent an IRR.
+
 5. Optionally send this follow-up in the same Analyst conversation if time permits:
 
 ```text
@@ -958,7 +962,7 @@ Now create a chart showing NPV vs. Investment Cost for all 10 recommendations, w
 
 If you see code or a file name instead of a rendered chart, try the answer's **Provide the chart as a downloadable PNG** suggestion if offered, or rely on the ranked table.
 
-6. Optionally send the second follow-up. Check the proposed combination, its total cost and total NPV against the ranked table and the cash-flow assumptions:
+6. Optionally send the second follow-up. Check the proposed combination, its total cost and total NPV against the ranked table and the cash-flow assumptions. Ask Analyst to state whether the budget covers initial funding or total five-year spending: R7/R10 recur and R5 has two installments. A first-year total does not include every later commitment.
 
 ```text
 Which combination of recommendations gives the highest total NPV while staying under a $1.5M total budget constraint?

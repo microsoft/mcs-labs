@@ -129,11 +129,11 @@ Uploading saves the agent: its URL changes from `/agents/new` to a permanent ID,
 We are bidding on this RFP. Draft our response.
 ```
 
-The sample's fixed submission date has passed; a deadline warning is careful behavior, not a failed run. Microsoft Copilot harness agents use metered Copilot Credits. The classic RFP conversation used about **115 credits**, not a cost guarantee.
+The sample's fixed submission date has passed; a deadline warning is careful behavior, not a failed run. Microsoft Copilot harness agents use metered Copilot Credits. The fresh-account proposal-and-chart conversation recorded **128.09 credits** in History, not a cost guarantee.
 
 4. Watch **Using skill: rfp-response** become **Used skill: rfp-response**. Expand it to inspect the matched description and **Input** (`skill: rfp-response`). Follow the reasoning about offering, price, and gaps. You did not name the Skill in the request.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/skill-load-trace-dark.webp"><img src="images/skill-load-trace.webp" alt="Expanded rfp-response Skill trace showing the matched description and input skill: rfp-response."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/skill-load-trace-dark.webp"><img src="images/skill-load-trace.webp" alt="Used skill: rfp-response with its expanded request-matching description."></picture>
 
 *Completed traces say Used skill. The intended procedure identifies the offering, then reads the answer library, past performance, and pricing before drafting.*
 
@@ -378,7 +378,7 @@ Download the JSON and Markdown exports. You may provide the report to an authori
 <details class="lab-validation" markdown="1">
 <summary>What was tested</summary>
 
-**Validation boundary:** This option was absent during the earlier Skill-authoring run and later seen in Add skill during an Agent Integration run. Generation itself was **not executed or validated** in that later observation. Availability varies by environment.
+**Validation boundary:** The fresh-account run offered only **Upload a skill** and **Create from blank** in a separate test agent. An earlier Agent Integration run showed Generate with AI, but generation itself was **not executed or validated**. Availability varies by environment.
 
 </details>
 

@@ -22,8 +22,8 @@ mission_lab:
   hero_image:
     src: /labs/managed-apps-build/images/upload-file-content.webp
     alt: "Light-theme CSV upload approval showing lab-completion.csv, an unavailable location name and stop-on-name-conflict behavior."
-    width: 370
-    height: 400
+    width: 2256
+    height: 2406
     caption: "A real storage-setup checkpoint, not persistence proof. Verify the actual destination before approving; an unavailable location name is not enough."
   scenario: |-
     Your bootcamp progress should survive a reload. Build **My Bootcamp Lab App** in Copilot Studio Apps from the live published agenda, using an image for appearance only. This is a new app, not an HTML import or a migration from Copilot Code. Completing the earlier lab is not required.
@@ -55,8 +55,8 @@ mission_lab:
             src: /labs/managed-apps-build/images/reference-attached.webp
             src_dark: /labs/managed-apps-build/images/reference-attached-dark.webp
             alt: "The reference image thumbnail is attached above the new app's chat input."
-            width: 730
-            height: 415
+            width: 3285
+            height: 1980
             caption: "Attach the image before sending Prompt 1. Both Studio themes were genuinely captured."
         - title: "Send Prompt 1 and watch the activity"
           instruction: "Paste the complete prompt with the image attached. Watch agenda retrieval and build activity; wait for the working preview rather than sending duplicate requests."
@@ -95,8 +95,8 @@ mission_lab:
             src: /labs/managed-apps-build/images/completion-focus.webp
             src_dark: /labs/managed-apps-build/images/completion-focus-dark.webp
             alt: "Baseline preview with a completed lab, matching day and overall counts, and visible keyboard focus."
-            width: 1074
-            height: 960
+            width: 3300
+            height: 2940
             caption: "In-memory behavior only. The app is intentionally dark in both Studio themes."
       reveal:
         title: "What did the image specify?"
@@ -158,8 +158,8 @@ mission_lab:
             src: /labs/managed-apps-build/images/onedrive-connection.webp
             src_dark: /labs/managed-apps-build/images/onedrive-connection-dark.webp
             alt: "Create connection card for Onedriveforbusiness with an Approve button."
-            width: 370
-            height: 338
+            width: 2256
+            height: 2172
             caption: "Approve only your own training connection. A card alone is not proof of working access."
         - title: "Verify or create the dedicated folders"
           instruction: |
@@ -175,21 +175,21 @@ mission_lab:
             src: /labs/managed-apps-build/images/create-folder.webp
             src_dark: /labs/managed-apps-build/images/create-folder-dark.webp
             alt: "Create folder card for My Bootcamp Lab App with a Create button."
-            width: 370
-            height: 190
+            width: 2256
+            height: 1152
             caption: "Verify that the destination is /Apps in your own OneDrive before you select Create."
         - title: "Approve only a confirmed missing CSV"
           instruction: |
             Review **Upload file content** only after healthy access confirms the CSV is missing. Expand **View details**, verify the destination is your own app folder and `conflict_behavior` is `fail` (stop on a name conflict), then select **Approve**.
 
-            If the card says **Location name unavailable**, request actual destination and missing-file proof before approving; stop if you cannot verify them. An empty search or failed read is not proof that the file is absent. Never approve a new-file upload over an existing CSV.
+            If the card says **Location name unavailable**, select **Cancel** first. A question sent while approval is pending is queued until you answer the approval. Ask for the actual drive/folder mapping and missing-file proof, then request a fresh fail-on-name-conflict upload and compare its destination before approving. Stop if you cannot verify it. An empty search or failed read is not proof that the file is absent. Never approve a new-file upload over an existing CSV.
           screenshot:
             title: the new-file safety gate
             src: /labs/managed-apps-build/images/upload-file-content.webp
             src_dark: /labs/managed-apps-build/images/upload-file-content-dark.webp
             alt: "CSV upload approval with Location name unavailable and stop-on-name-conflict behavior."
-            width: 370
-            height: 400
+            width: 2256
+            height: 2406
             caption: "The action label includes SharePoint and OneDrive; this exercise still targets only your own OneDrive. Verify the destination before approving."
         - title: "Read back the setup report"
           instruction: "Confirm the healthy connection, whether the CSV was created or already existed, and its current rows. Verify columns `labId`, `completed`, `updatedAt`: one `lab-N` row per scheduled lab, no Lunch or optional labs. Newly created rows must be `false` with ISO timestamps; preserve existing saved values. Confirm the app has the connection available but its behavior/code has not changed. Setup readback is not proof of app-driven persistence."
@@ -535,7 +535,7 @@ If **Create folder?** appears for **My Bootcamp Lab App**, verify `/Apps` in you
 
 Review **Upload file content** only after healthy access confirms the CSV is missing. Expand **View details**, verify your own app-folder destination and `conflict_behavior: fail` (stop on name conflict), then select **Approve**.
 
-If **Location name unavailable** appears, request actual destination and missing-file proof first; stop if you cannot verify them. An empty search or failed read is not proof of absence. Never approve a new-file upload over an existing CSV.
+If **Location name unavailable** appears, select **Cancel** first: a question sent while approval is pending is queued until you answer the approval. Ask for the actual drive/folder mapping and missing-file proof, then request a fresh fail-on-name-conflict upload and compare its destination before approving. Stop if you cannot verify it. An empty search or failed read is not proof of absence. Never approve a new-file upload over an existing CSV.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/upload-file-content-dark.webp"><img src="images/upload-file-content.webp" alt="CSV upload approval with unavailable location name and stop-on-name-conflict behavior."></picture>
 
