@@ -45,16 +45,18 @@ Microsoft Copilot also includes built-in agents: **Researcher** performs multi-s
 
 ## Prerequisites
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#use-case-1-getting-started-with-microsoft-copilot) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running this lab in your own tenant?** Set this up first:
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
 - A Microsoft 365 account with a Microsoft Copilot licence
 - (Extra Credit) The **Researcher** and **Analyst** agents available in the Microsoft Copilot app (listed under **Agents & Plugins**)
 - For Use Case #2, upload these files to a OneDrive or SharePoint location the account can access, so Work IQ can find them:
   - [Zava DIY Markdown and Clearance Policy](../m365-copilot-frontier-agents/assets/sample-files/Zava_DIY_Markdown_and_Clearance_Policy.docx)
   - [Zava DIY Q2 2026 Store Performance Report](../m365-copilot-frontier-agents/assets/sample-files/Zava_DIY_Q2_2026_Store_Performance_Report.pdf)
+
+</details>
 
 No prior Copilot experience is needed. The Extra Credit sample report is downloaded in [Extra Credit #1](#extra-credit-1-deep-analysis-with-the-researcher-agent).
 
@@ -300,7 +302,7 @@ Note also that Copilot respects permissions throughout. It sees only what the si
 
 3. After a few seconds, the pre-read opens as a Copilot Page on the right, and the chat confirms **Page created**. Edit the page directly to add information, then select the share icon at the top right of the page to share it with colleagues.
 
-   ![Quarterly business review pre-read open as a Copilot Page next to the chat](images/lab-m365copilot-pages-preread.png)
+   ![Quarterly business review pre-read open as a Copilot Page, showing the decision focus and three findings](images/lab-m365copilot-pages-preread.png)
 
 > [!NOTE]
 > Build the pre-read in the chat first, then open it in Pages. Asking the chat beside an open page to rewrite that page can report success without changing the page. If you want Copilot to change a page later, send the request in the chat and open the new answer in Pages again.

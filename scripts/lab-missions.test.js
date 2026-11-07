@@ -63,14 +63,16 @@ const webpSize = file => {
 test('Zava Sales preserves every supplied prompt verbatim in all reading surfaces', () => {
   // Independent fingerprints of the supplied prompts catch drift even if all copies change together.
   const expected = [
+    '4d0af0f096b4c991a0ab77a11941de0eaa43ac1571a82e673d9fa503dd8da99a',
     'ed36c3912c4f5521b0c1e2fef39e125f19278fa6edc55906fb2a12775c507689',
-    '162a6e7d7b8706342dd65b4e73f5eb7de3ed3ed25f602fc2f11f5b3765fe3041',
+    'fab671063146c9010565848119eb39e8e6fa3a05b06c641f8ce5e04b8f4c22a6',
+    '2b54b478899ac28a7cc32f6a4c49c215ab2ea2ccc1fabdbfaa73ad825ff6ab81',
     '2283c90484539ef5e5dbe28224a6d0c330fa429f0518f6ca9f0064593d4f83a1',
-    '8e6bccccae11603d1af43bc59819e732dfd48a018c9cca8ddd07766e75e34016',
-    'bff231b662979cee80b6bca1b3d5c6b0d836c2353466b4ab3c67cde3bc0df6b6',
     '70c82d4e401571297182d281f7411f2d716014b34c73fb21fb0d6378d4590a42',
     '299be9288a8ed4f599ea0de653764c87f07dddf5c91fc2bf8d73da3d8a7312b5',
     '3e8f8f61fc032c4988caf18ffc1a29bd61ea40f478ab12679d4bc147d23d85a1',
+    '8e6bccccae11603d1af43bc59819e732dfd48a018c9cca8ddd07766e75e34016',
+    'bff231b662979cee80b6bca1b3d5c6b0d836c2353466b4ab3c67cde3bc0df6b6',
     '8810ec18c154e5fb38210afe854a6f0230660df2a88771062b14c5943cb3c546',
     'f53b331abe5a626126cd76151b8dd28110d47d15ef56acc4cfb9fe87a470ba38',
   ];
@@ -92,10 +94,14 @@ test('mission IDs, guided steps and knowledge checks have a complete authoring c
   assert.equal(document.data.lab_format, 'missions');
   assert.equal(document.data.duration, 30);
   assert.equal(document.data.unlisted, undefined);
-  assert.equal(lab.missions.length, 6);
+  assert.equal(lab.missions.length, 7);
   assert.equal(new Set(lab.missions.map(mission => mission.id)).size, lab.missions.length);
   assert.equal(lab.missions.filter(mission => !mission.optional).reduce((sum, mission) => sum + mission.minutes, 0), 30);
-  assert.deepEqual(lab.missions.filter(mission => mission.optional).map(mission => mission.id), ['improve', 'specialize']);
+  assert.deepEqual(lab.missions.filter(mission => !mission.optional).map(mission => mission.id),
+    ['ask', 'agent', 'delegate', 'repeat']);
+  assert.deepEqual(lab.missions.filter(mission => mission.optional).map(mission => mission.id),
+    ['record', 'improve', 'specialize']);
+  assert.equal(lab.missions.filter(mission => mission.optional).reduce((sum, mission) => sum + mission.minutes, 0), 22);
   assert.ok(lab.missions.find(mission => mission.id === 'repeat').steps.some(step => step.prompt === '/cost'));
   for (const mission of lab.missions) {
     assert.match(mission.id, /^[a-z][a-z0-9-]*$/);
@@ -105,6 +111,38 @@ test('mission IDs, guided steps and knowledge checks have a complete authoring c
     assert.equal(mission.check.options.filter(option => option.correct === true).length, 1);
     for (const option of mission.check.options) assert.ok(option.text && option.feedback);
     for (const step of mission.steps) assert.ok(step.title && step.instruction);
+  }
+});
+
+test('Zava separates work-file Chat, the agent MCP App, and Cowork plugin setup', () => {
+  const [ask, agent, delegate, repeat] = lab.missions;
+  assert.match(ask.steps[0].instruction, /Chat/);
+  assert.match(ask.steps[1].instruction, /not Cowork/);
+  assert.match(agent.steps[0].instruction, /new Copilot Chat session/);
+  assert.match(agent.steps[1].instruction, /Try Zava Sales Hub/);
+  assert.match(agent.steps[1].instruction, /same renewal prompt/);
+  assert.match(agent.steps[1].notice, /Stop task/);
+  assert.match(agent.steps[2].instruction, /same Zava Sales Hub agent conversation/);
+  assert.match(agent.steps[2].instruction, /MCP App/);
+  assert.match(agent.steps[2].help, /enter `50000` without the currency symbol or comma/);
+  assert.match(agent.steps[2].notice, /do not overwrite the renewal amount/);
+  assert.match(delegate.steps[0].instruction, /Agents & Plugins → Cowork → Microsoft Dataverse/);
+  assert.match(delegate.steps[0].help, /https:\/\/zavasalesdemo\.crm\.dynamics\.com\//);
+  assert.match(delegate.steps[1].instruction, /Zava PowerPoint/);
+  assert.match(delegate.steps[2].instruction, /explicitly select \*\*Cowork/);
+  assert.match(delegate.steps[2].notice, /plugin\/skill activity/);
+  assert.match(repeat.steps[0].instruction, /Clear \*\*Run once now\*\*/);
+  assert.match(repeat.steps[1].help, /skills\/weekly-deal-review/);
+  assert.match(repeat.steps[1].help, /do not approve unexpected destinations or overwrites/);
+  assert.match(repeat.steps[2].help, /Compare \*\*Next run\*\* with the recurrence/);
+  for (const copy of [document.content, readme]) {
+    assert.match(copy, /assigned training account, then select \*\*Allow\*\*/);
+    assert.match(copy, /Stop task/);
+    assert.match(copy, /enter `50000` without the currency symbol or comma/);
+    assert.match(copy, /Clear \*\*Run once now\*\*/);
+    assert.match(copy, /30 minutes for the four core missions/);
+    assert.match(copy, /about 52 minutes for everything/);
+    assert.doesNotMatch(copy, /ΓÇ|[\u200B\u200C]/);
   }
 });
 
@@ -166,10 +204,35 @@ test('prompts stay copyable in place while PDF export downloads locally', () => 
   assert.ok(fs.statSync(path.join(root, 'assets', 'js', 'vendor', 'html2pdf.bundle.min.js.LICENSE.txt')).isFile());
 });
 
-test('click-by-click help starts open because these labs depend on exact clicks and prompts', () => {
+test('click-by-click help starts closed so the step instruction leads', () => {
   const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
-  assert.match(template, /<details class="step-help" open>/);
+  assert.match(template, /<details class="step-help">/);
+  assert.doesNotMatch(template, /<details class="step-help"[^>]*\bopen/);
   assert.ok(lab.missions.some(mission => mission.steps.some(step => step.help)), 'The lab uses step help');
+});
+
+test('lab identity leads the hero while setup and test history use native, closed disclosures', () => {
+  const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
+  const script = fs.readFileSync(path.join(root, 'assets', 'js', 'lab-missions.js'), 'utf8');
+  const css = fs.readFileSync(path.join(root, 'assets', 'css', 'lab-missions.css'), 'utf8');
+  assert.match(template, /<h1 id="lab-title">\{\{ page\.title \| escape \}\}<\/h1>/);
+  assert.match(template, /<p class="tagline">\{\{ lab\.headline \| escape \}\}/);
+  assert.ok(template.indexOf('id="lab-title"') < template.indexOf('class="tagline"'));
+  assert.match(template, /\{% if lab\.self_setup %\}[\s\S]*?<details class="lab-setup">/);
+  assert.match(template, /lab\.self_setup \| markdownify/);
+  assert.match(template, /\{% if lab\.validation %\}[\s\S]*?<details class="lab-validation">/);
+  assert.doesNotMatch(template, /<details[^>]*class="lab-(?:setup|validation)"[^>]*\bopen/);
+  assert.match(template, /class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account\?/);
+  assert.match(script, /clone\.querySelectorAll\('details'\)\.forEach\(details => \{ details\.open = true; \}\)/,
+    'Downloaded PDFs retain the collapsed setup and test-history content');
+  assert.match(script, /querySelectorAll\('details:not\(\[open\]\):not\(\.visual\):not\(\.stuck\)'\)/,
+    'Printing opens supplementary disclosures, then restores their state');
+  assert.match(css, /@media print \{[\s\S]*  :is\(\.lab-setup, \.lab-validation, \.step-help\):not\(\[open\]\) > :not\(summary\) \{ display: block; \}/,
+      'Setup, test history and help also print with JavaScript disabled');
+  assert.match(template, /data-progress-id="ready-\{\{ forloop\.index \}\}"/);
+  assert.equal(lab.prerequisites.length, 5, 'Moving setup out of the Cowork checklist must not shift saved readiness IDs');
+  assert.match(css, /\.lab-content \{ width: 100%; min-width: 0; max-width: 850px; \}/,
+    'Auto-centered grid content must not size itself beyond the mobile column and get clipped');
 });
 
 test('notes say they stay in this browser and can be downloaded as a PDF', () => {
@@ -231,6 +294,24 @@ test('only Zava Sales and the parallel bootcamp labs opt into missions; the reti
   }
 });
 
+test('Copilot Code escapes the switcher separator on every Markdown reading surface', () => {
+  for (const name of ['mcs-copilot-code', 'copilot-code-web-app']) {
+    const page = matter(fs.readFileSync(path.join(root, '_labs', `${name}.md`), 'utf8'));
+    const copies = {
+      body: page.content,
+      readme: fs.readFileSync(path.join(root, 'labs', name, 'README.md'), 'utf8'),
+    };
+    if (page.data.mission_lab) {
+      copies.instruction = page.data.mission_lab.missions.find(mission => mission.id === 'build').steps[0].instruction;
+    }
+    // Kramdown treats an unescaped pipe in a standalone instruction as a table.
+    for (const [surface, text] of Object.entries(copies)) {
+      assert.ok(text.includes('**Home &#124; Code**'), `${name}: ${surface} keeps the switcher label literal`);
+      assert.ok(!text.includes('**Home | Code**'), `${name}: ${surface} must not create a table`);
+    }
+  }
+});
+
 for (const [classic, modern, order] of bootcampLabs) {
   test(`${modern}: complete, unlisted missions preserve the classic lab and its prompts`, () => {
     const page = matter(fs.readFileSync(path.join(root, '_labs', `${modern}.md`), 'utf8'));
@@ -240,6 +321,11 @@ for (const [classic, modern, order] of bootcampLabs) {
     assert.notEqual(original.data.lab_format, 'missions', 'The classic version remains available');
     assert.equal(page.data.lab_format, 'missions');
     assert.equal(page.data.order, order);
+    const curriculumRow = yaml.load(fs.readFileSync(path.join(root, '_data', 'agendas', 'architecture-bootcamp.yml'), 'utf8'))
+      .schedule.find(row => row.type === 'lab' && row.slug === modern);
+    assert.equal(page.data.title, curriculumRow.title, `${modern}: page title matches the curriculum`);
+    assert.equal(page.content.match(/^# (.+)$/m)?.[1], curriculumRow.title);
+    assert.equal(github.match(/^# (.+)$/m)?.[1], curriculumRow.title);
     // Shared classic labs can retain a longer workshop duration; this edition follows the Bootcamp slot.
     assert.equal(page.data.duration, bootcampAgenda.schedule.find(row => row.type === 'lab' && row.slug === classic).duration);
     assert.equal(page.data.unlisted, true);
@@ -251,10 +337,20 @@ for (const [classic, modern, order] of bootcampLabs) {
       assert.ok(content[key], `${modern}: ${key}`);
     }
     assert.ok(content.prerequisites.length > 0);
-    const eventSetupNotice = /proctor.led[\s\S]{0,160}pre.provisioned[\s\S]{0,160}skip/i;
-    assert.match(JSON.stringify([content.scenario, content.prerequisites, content.pacing]), eventSetupNotice,
-      'Event attendees must see skip-setup guidance in the rendered introduction, not only the fallback body');
+    const eventSetupNotice = /proctor.led[\s\S]{0,160}provided, pre.provisioned[\s\S]{0,160}ready to start/i;
+    assert.ok(content.self_setup?.trim(), 'The shared renderer needs own-tenant setup, separate from the scenario');
+    assert.doesNotMatch(JSON.stringify([content.scenario, content.prerequisites]), /Skip tenant|Prerequisites for your own tenant|Own-tenant setup|Running (?:this lab )?in your own tenant/i,
+      'Scenario and readiness must not repeat the provisioning wall of text');
+    assert.doesNotMatch(content.scenario, /\*\*(?:Validation|Evidence|Verified) boundary:/,
+      'Historical test notes belong in the optional validation disclosure');
+    assert.match(page.content, eventSetupNotice);
     assert.match(original.content, eventSetupNotice, 'The classic lab needs the same setup distinction');
+    for (const copy of [page.content, github]) {
+      assert.equal((copy.match(/<details class="lab-setup" markdown="1">/g) || []).length, 1);
+      assert.equal((copy.match(/<p class="lab-setup-note">/g) || []).length, 1);
+    }
+    assert.doesNotMatch(JSON.stringify([content, page.content, github]), /CAT[\s-]+bootcamp|CAT team/i,
+      'Prerequisite guidance applies to any proctor-led event with provided, pre-provisioned accounts');
     assert.ok(content.hero_image?.src, `${modern}: required light/content hero`);
     assert.equal(content.hero_image.src_dark, undefined, 'The eager hero uses one light/content image');
     assert.ok(content.missions.length > 0);

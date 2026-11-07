@@ -27,7 +27,8 @@
   <div id="lab-main" tabindex="-1">
     <section class="wrap hero" aria-labelledby="lab-title">
       <div>
-        <h1 id="lab-title">{{ lab.headline | escape }} <em>{{ lab.headline_emphasis | escape }}</em></h1>
+        <h1 id="lab-title">{{ page.title | escape }}</h1>
+        <p class="tagline">{{ lab.headline | escape }} <em>{{ lab.headline_emphasis | escape }}</em></p>
         <p class="promise">{{ lab.promise | escape }}</p>
         <ul class="facts">
           <li>{{ page.duration }}-minute core</li>
@@ -66,8 +67,18 @@
         <section id="lab-ready" class="ready" aria-labelledby="ready-title">
           <h2 id="ready-title">Your next {{ page.duration }} minutes</h2>
           <div class="lead">{{ lab.scenario | markdownify }}</div>
+          {% if lab.self_setup %}
+          <p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
+          <details class="lab-setup">
+            <summary>Using your own tenant? View setup requirements</summary>
+            <div>{{ lab.self_setup | markdownify }}</div>
+          </details>
+          {% endif %}
           <ul class="ready-list">{% for item in lab.prerequisites %}<li><label class="step-check"><input type="checkbox" data-progress-id="ready-{{ forloop.index }}"><span>{{ item | markdownify | remove: '<p>' | remove: '</p>' }}</span></label></li>{% endfor %}</ul>
           <p class="pacing">{{ lab.pacing | escape }}</p>
+          {% if lab.validation %}
+          <details class="lab-validation"><summary>What was tested</summary><div>{{ lab.validation | markdownify }}</div></details>
+          {% endif %}
           <p class="saving-note" data-saving-note="This browser can't store your progress, so checkmarks, quiz answers and notes last for this visit only. Download a PDF at the end to keep them.">Checkmarks, quiz answers and your notes are saved only in this browser's local storage. Nothing is sent to the lab site. To keep them, <strong>download a PDF</strong> at the end.</p>
         </section>
 
@@ -94,8 +105,8 @@
                 </div>
                 {% endif %}
                 {% if step.help %}
-                {%- comment -%} Open by default: these labs depend on exact clicks and prompts, so guidance fades only when a learner closes it. {%- endcomment %}
-                <details class="step-help" open><summary>Click-by-click help</summary><div>{{ step.help | markdownify }}</div></details>
+                {%- comment -%} Closed by default: the instruction carries the step; help is the exact click path for learners who need it. {%- endcomment %}
+                <details class="step-help"><summary>Click-by-click help</summary><div>{{ step.help | markdownify }}</div></details>
                 {% endif %}
                 {% if step.screenshot %}{% include lab-missions-screenshot.html image=step.screenshot %}{% endif %}
                 {% if step.notice %}<div class="notice"><strong>Notice this</strong> {{ step.notice | markdownify }}</div>{% endif %}

@@ -580,6 +580,37 @@ p > code, li > code, td > code {
 }
 
 // ---------------------------------------------------------------------------
+// Compact setup disclosures in the portable lab copies.
+// The missions island uses the same names with its own scoped palette.
+.lab-setup-note {
+  color: var(--color-fg-muted);
+  font-size: 0.875em;
+  margin: 1em 0 0.25em;
+}
+details.lab-setup, details.lab-validation {
+  margin: 0 0 1em;
+
+  > summary {
+    color: var(--color-accent);
+    cursor: pointer;
+    font-weight: 600;
+    padding: 0.5em 0;
+  }
+
+  > summary:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+}
+
+@media print {
+  details.lab-setup::details-content,
+  details.lab-validation::details-content {
+    content-visibility: visible;
+  }
+}
+
+// ---------------------------------------------------------------------------
 // Lab header (rendered by _layouts/lab.html)
 // ---------------------------------------------------------------------------
 .lab-header {

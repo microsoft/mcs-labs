@@ -1,4 +1,4 @@
-# Copilot Code: from a brief to a web app
+# Copilot Code: build a simple web app
 
 Build, refine, and publish a Bootcamp Lab Tracker through four sequential prompts, checking its schedule, progress, and accessible day tabs.
 
@@ -8,15 +8,20 @@ Build, refine, and publish a Bootcamp Lab Tracker through four sequential prompt
 | --- | --- | --- | --- |
 | 100 | Maker | 30 minutes | A published tracker built from the agenda, with a dark design, emojis, accessible day tabs, and verified completion behavior. |
 
-**Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip tenant setup.** Your account and environment are already prepared. Sign in with the provided account; ask your facilitator if anything is missing.
+**Scenario:** You need one place to see every day's labs and mark them complete. Build from the published agenda, not an invented schedule. Lunch belongs on the timeline but must never count toward progress.
+
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
+
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+Complete the [classic lab's prerequisite setup](https://microsoft.github.io/mcs-labs/labs/mcs-copilot-code/#prerequisites) separately before starting. Copilot Code is a Frontier preview in the browser; this exercise needs no local development toolchain.
+
+</details>
 
 - Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your provided **lab account** in a separate browser profile or private window, not a personal or production account.
 - Keep this lab beside Copilot and open the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) for comparison.
 - Ask your facilitator if **Code** or the app link is unavailable; do not change tenant settings during the lab.
-
-**Using your own tenant instead?** Complete the [classic lab's prerequisite setup](https://microsoft.github.io/mcs-labs/labs/mcs-copilot-code/#prerequisites) separately before starting. Copilot Code is a Frontier preview in the browser; this exercise needs no local development toolchain.
-
-**Scenario:** You need one place to see every day's labs and mark them complete. Build from the published agenda, not an invented schedule. Lunch belongs on the timeline but must never count toward progress.
 
 Plan **30 minutes for Build (11) → Style (4) → Label (3) → Navigate (4) → Publish (8)**. Extend is an **optional 3-minute reflection**. Prompt 1 usually takes **5–7 minutes**; each update and final publishing take about **1–2 minutes**. These are working budgets, not guaranteed run times. Read ahead or answer a check while waiting; do not resend prompts, start duplicate sessions, or submit the remaining prompts together.
 
@@ -37,10 +42,10 @@ Plan **30 minutes for Build (11) → Style (4) → Label (3) → Navigate (4) �
 **Outcome:** A published neutral-grey tracker whose schedule and completion controls match the brief.
 
 1. Open [Microsoft Copilot](https://copilot.cloud.microsoft) and sign in with your lab account.
-2. Select **Code** in the **Home | Code** switcher at the top of the left pane, then **New session**.
+2. Select **Code** in the **Home &#124; Code** switcher at the top of the left pane, then **New session**.
 3. Find **Let's build something together.** and the **Create anything** box.
 
-<picture><img src="images/code-new-session.webp" alt="Copilot Code with Code selected, New session in the left pane, and the Create anything box."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/code-new-session-dark.webp"><img src="images/code-new-session.webp" alt="Copilot Code with Code selected, New session in the left pane, and the Create anything box."></picture>
 
 Start in Create anything. This approved light-interface capture is shown in both site themes.
 
@@ -65,7 +70,7 @@ Keep the bars, checkboxes, counter and progress bar in sync. Use neutral greys a
 5. Keep the tab open for about **5–7 minutes** while Copilot Code fetches the agenda, writes and checks the code, then publishes. If it asks for permission to continue, for example to search the web, review and approve that lab action.
 6. Select **Open** on the **My Bootcamp Lab Tracker** app card, or select its link, to open the tracker in a new browser tab. The same app also appears in the **Preview** pane beside the chat.
 
-<picture><img src="images/prompt1-app-card.webp" alt="My Bootcamp Lab Tracker app card with an Open button."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/prompt1-app-card-dark.webp"><img src="images/prompt1-app-card.webp" alt="My Bootcamp Lab Tracker app card with an Open button."></picture>
 
 Open the actual app, not just the generated-code summary. Copilot Code checks that the code builds and publishes, but it cannot click through the app itself in this flow. The behavior checks are yours.
 
@@ -83,7 +88,7 @@ Open the actual app, not just the generated-code summary. Copilot Code checks th
 10. Reload the page and confirm all labs reset to unchecked.
 11. Use **Tab** and **Space** to operate the controls and confirm visible keyboard focus.
 
-<picture><img src="images/tracker-basic-checked.webp" alt="Neutral-grey tracker with three DONE lab cards and a header showing 3 of 11 labs complete."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/tracker-basic-checked-dark.webp"><img src="images/tracker-basic-checked.webp" alt="Neutral-grey tracker with three DONE lab cards and a header showing 3 of 11 labs complete."></picture>
 
 Your first milestone: a working tracker in neutral greys. The example has 11 labs; use the current agenda's total.
 
@@ -132,7 +137,7 @@ Keep focus outlines visible and respect prefers-reduced-motion.
 3. Confirm incomplete labs are purple, completed labs green, and Lunch amber with dashed borders and stripes.
 4. Toggle a lab in both directions. Confirm its bar, card, counter, and progress bar still agree, and focus outlines remain visible.
 
-<picture><img src="images/tracker-dark-theme.webp" alt="Preview of the dark tracker with purple lab outlines, one green completed lab, and amber striped Lunch bars."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/tracker-dark-theme-dark.webp"><img src="images/tracker-dark-theme.webp" alt="Preview of the dark tracker with purple lab outlines, one green completed lab, and amber striped Lunch bars."></picture>
 
 The tracker itself is now dark; the surrounding Copilot toolbar is still light. This is not a separate dark-interface capture.
 
@@ -177,7 +182,7 @@ Lab bars should say "Lab N" instead of the title, which gets cut off. The full t
 4. Check **Lab N** on the bars and the full title in the tooltip, accessible name, and card.
 5. Confirm Lunch remains non-interactive. Save the narrow-screen check for the published tracker.
 
-<picture><img src="images/tracker-emojis-tooltip.webp" alt="Dark tracker with topic emojis, short Lab N bar labels, and a tooltip containing Lab 3's full title."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/tracker-emojis-tooltip-dark.webp"><img src="images/tracker-emojis-tooltip.webp" alt="Dark tracker with topic emojis, short Lab N bar labels, and a tooltip containing Lab 3's full title."></picture>
 
 Short visual labels must not remove the full title. Generated emoji choices can differ.
 
@@ -217,7 +222,7 @@ Make the tabs stand out: full-width, equal-size buttons with bold text. Unselect
 3. Confirm **Preview** shows equal-sized day buttons, a clearly highlighted selected tab, and only that day's timeline and cards.
 4. Complete a lab, switch days, then switch back: its tick must remain. Keep the session open for publishing.
 
-<picture><img src="images/tracker-day-tabs.webp" alt="Tracker Preview with three equal day tabs, per-day counts, a highlighted selected day, and Publish above the app."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/tracker-day-tabs-dark.webp"><img src="images/tracker-day-tabs.webp" alt="Tracker Preview with three equal day tabs, per-day counts, a highlighted selected day, and Publish above the app."></picture>
 
 The sample's Day 3 count is green because all its labs are complete. Verify your own counts.
 
@@ -248,7 +253,7 @@ The sample's Day 3 count is green because all its labs are complete. Verify your
 1. Select **Publish** at the top of **Preview**. Wait about **1–2 minutes** while it shows **Publishing…**, until **Your app is published** appears with **Open app** and **Share**. You can also ask Copilot Code to publish.
 2. Return to the tracker browser tab and select **Refresh** in **New version available**. If the tab is closed, select **Open app**.
 
-<picture><img src="images/published-new-version.webp" alt="The earlier neutral-grey published tracker showing New version available and a Refresh link."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/published-new-version-dark.webp"><img src="images/published-new-version.webp" alt="The earlier neutral-grey published tracker showing New version available and a Refresh link."></picture>
 
 Refresh loads the finished version; the notification is shown over the earlier published app. Run the remaining checks in the published app's tab, not just Preview.
 

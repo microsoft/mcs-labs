@@ -1,7 +1,7 @@
 ---
 lab_format: missions
 module: metadata-and-hooks-deep-dive
-title: "Hooks and knowledge: the right travel policy"
+title: "Hooks and Knowledge: Travel Policy Agent"
 order: 146
 duration: 30
 difficulty: 200
@@ -28,11 +28,9 @@ mission_lab:
   scenario: |-
     Finance needs a **Travel Policy Agent** that knows the traveler's location and answers from the applicable SharePoint policy, not a mixture of countries.
 
-    **Proctor-led event with a pre-provisioned user account? Skip tenant, licence and environment setup.** Use the provided account and environment and go straight to Mission 1. Ask your proctor if a connection or the **Travel Policies** folder is missing.
-
-    **Self-paced, in your own tenant:** first arrange Copilot Studio access, permission to create agents and workflows, an Office 365 Users connection for your account, and a readable **Travel Policies** SharePoint folder with populated **Location** metadata (`France`, `Europe`, `USA`, `Global`). Use the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-hooks/#prerequisites) separately from the event path.
-
     **Current-UI caveat:** the **Microsoft Copilot harness** was formerly the **GitHub Copilot harness**; documentation and rollout screens may retain the earlier name. **Standard harness** is distinct and has no hooks. Hooks are preview; labels and availability can change.
+  self_setup: |-
+    First arrange Copilot Studio access, permission to create agents and workflows, an Office 365 Users connection for your account, and a readable **Travel Policies** SharePoint folder with populated **Location** metadata (`France`, `Europe`, `USA`, `Global`). Use the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-hooks/#prerequisites) separately from the event path.
   prerequisites:
     - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your provided training account and select the assigned environment."
     - "Keep the proctor's SharePoint folder location handy. Ask for missing assets rather than changing tenant settings or another learner's connection."
@@ -428,11 +426,10 @@ mission_lab:
       url: https://learn.microsoft.com/microsoft-copilot-studio/agent-node-workflow?tabs=workflows
 ---
 
-# Hooks and knowledge: the right travel policy
+# Hooks and Knowledge: Travel Policy Agent
 
 Know the traveler. Find the right policy. Leave with a **saved draft Travel Policy Agent**, a published session-start workflow and evidence that SharePoint retrieval selects the applicable policy. Redaction and a booking guard follow as optional extensions.
 
-> **Proctor-led event with a pre-provisioned user account? Skip tenant, licence and environment setup.** Use the provided account and environment and go straight to [Mission 1](#mission-1-load-the-travelers-location). Ask your proctor if a connection or the **Travel Policies** folder is missing.
 
 ![France policy answer citing TEP-310 with a 70 euro total daily per diem](images/uc3-test-france.webp)
 
@@ -458,9 +455,16 @@ Know the traveler. Find the right policy. Leave with a **saved draft Travel Poli
 
 ## Prerequisites
 
-**Event attendees:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account, select the assigned environment and keep the proctor's SharePoint folder location handy. Ask for missing assets rather than changing tenant settings or another learner's connection. Use only the fabricated data supplied here. Building and testing can consume Copilot Credits.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Self-paced, in your own tenant:** first arrange Copilot Studio access, permission to create agents and workflows, an Office 365 Users connection for your account, and a readable **Travel Policies** SharePoint folder with populated **Location** metadata (`France`, `Europe`, `USA`, `Global`). Follow the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-hooks/#prerequisites) separately from the event path.
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+First arrange Copilot Studio access, permission to create agents and workflows, an Office 365 Users connection for your account, and a readable **Travel Policies** SharePoint folder with populated **Location** metadata (`France`, `Europe`, `USA`, `Global`). Follow the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-hooks/#prerequisites) separately from the event path.
+
+</details>
+
+**Event attendees:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account, select the assigned environment and keep the proctor's SharePoint folder location handy. Ask for missing assets rather than changing tenant settings or another learner's connection. Use only the fabricated data supplied here. Building and testing can consume Copilot Credits.
 
 **Current-UI caveat:** the **Microsoft Copilot harness** was formerly the **GitHub Copilot harness**; documentation and rollout screens may retain the earlier name. **Standard harness** is distinct and has no hooks. Hooks are preview; labels and availability can change.
 

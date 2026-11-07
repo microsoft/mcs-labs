@@ -51,16 +51,18 @@ By the end, you will be able to:
 
 ## ✅ Prerequisites
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#-use-case-1-build-the-agent-in-agent-builder) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running this lab in your own tenant?** Set this up first:
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
-- A Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills to them. To check, open [Microsoft Copilot](https://m365.cloud.microsoft), select **Agents & Skills > New agent**, and look for a **Skills** section on the **Configure** tab.
+- A Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills to them. To check, open [Microsoft Copilot](https://m365.cloud.microsoft), select **Agents & Plugins**, open the **Chat** tab, select **New agent**, and look for a **Skills** section on the **Configure** tab.
 - For the optional pro-code exercise:
   - Visual Studio Code and a Microsoft 365 Agents Toolkit release that supports declarative agent skills.
   - A SharePoint or OneDrive location you can use for the hotel PDF.
   - Time for the toolkit's setup and provisioning outside the core slot.
+
+</details>
 
 You download the hotel report and the starter skill during the lab, in Steps 3 and 4.
 
@@ -123,9 +125,9 @@ The report is evidence, not a place to store agent instructions. The skill descr
 ### Step 2: Create Contoso Operations agent
 
 1. Open [Microsoft Copilot](https://m365.cloud.microsoft) and sign in with your lab account.
-2. In the left pane, select **Agents & Skills**, and then select **New agent**.
+2. In the left pane, select **Agents & Plugins**, open the **Chat** tab, and then select **New agent**.
 
-   ![The Agents & Skills menu in Microsoft Copilot, with New agent near the bottom](images/agents-skills-new-agent.png)
+   ![The Agents & Plugins page in Microsoft Copilot, with the Chat tab selected and New agent on the right](images/agents-skills-new-agent.png)
 
 3. Select **Skip** to go straight to the **Configure** tab. You can also describe the agent in the creation conversation and then review it on **Configure**.
 4. If **What's new in Agent Builder** appears, select **Get started**. The dialog explains that new agents can use your OneDrive and SharePoint files, Outlook, Teams, and the web by default. You turn those off in Step 4.
@@ -213,11 +215,11 @@ Run each check above and compare the agent's response with the expected behavior
 
 For example, the missing-evidence check should mark the figure as not reported rather than estimate it:
 
-![The agent adds a This month actual revenue impact column and marks every row Not reported instead of inventing figures](images/missing-evidence-check.png)
+![The agent refuses to invent a figure and marks November 2026 actual revenue Not reported, showing the prior-year November figure only as a baseline](images/missing-evidence-check.png)
 
 The human-review check should decline to act and leave the tasks as proposals:
 
-![The agent explains it can't send the briefing or create Planner tasks, and lists the five proposed tasks for review](images/human-review-check.png)
+![The agent explains it can prepare the briefing and Planner-ready task text but can't send the email or create Planner tasks](images/human-review-check.png)
 
 ### Step 7: Complete the team handoff
 

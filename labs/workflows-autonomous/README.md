@@ -1,4 +1,4 @@
-# 🧭 Workflows: classify, review, and act
+# Workflows
 
 One incoming email. A verified, human-approved action. Leave with your own disabled Order Management copy, evidence of an archived test email, and a grounded reply you reviewed before delivery.
 
@@ -16,7 +16,12 @@ One incoming email. A verified, human-approved action. Leave with your own disab
 
 **Scenario:** Your order desk receives unrelated promotions, customer questions, supplier delays, and quote requests. A workflow classifies the message; a grounded draft and human decision protect the customer-facing reply.
 
+<details class="lab-validation" markdown="1">
+<summary>What was tested</summary>
+
 **Verified boundary:** the 6 November 2026 training run tested the original quote sample in **Run node**, archived the exact Other sample, and completed the exact Customer Inquiry sample through **Yes → Submit** to a received holding reply. The original starter was untouched and the copy was disabled after reload. The rejection branch, inventory MCP, and specialist quote delivery were not exercised. Screenshots are genuine, privacy-reviewed light/dark captures of those three tested states, not proof of untested branches.
+
+</details>
 
 This is the **Microsoft Copilot harness** workflow experience. **Standard harness** remains a separate experience; it has not been renamed. Only the former GitHub Copilot harness name changed. Supplied working instructions remain unchanged. The [classic Workflows lab](../mcs-workflows-latest/) remains available.
 
@@ -36,9 +41,16 @@ This is the **Microsoft Copilot harness** workflow experience. **Standard harnes
 
 ## 🧭 Prerequisites
 
-> **Proctor-led event with a pre-provisioned provided user account? Skip tenant, licence, and environment setup.** Use the provided account and environment; the proctor prepares connections and assets. Start with Mission 1 and ask the proctor if an asset is missing. Do not import replacements or edit another attendee's workflow.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Self-paced setup:** use a development/training environment with Copilot Studio **Workflows**, available Copilot Credits, Outlook, and Microsoft Copilot access. Arrange the Order Management starter and connections before starting the timer. Mission 1 links the solution for self-paced import only if needed. Optional extensions require their additional assets; none is a prerequisite for the core.
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+Use a development/training environment with Copilot Studio **Workflows**, available Copilot Credits, Outlook, and Microsoft Copilot access. Arrange the Order Management starter and connections before starting the timer. Mission 1 links the solution for self-paced import only if needed. Optional extensions require their additional assets; none is a prerequisite for the core.
+
+</details>
+
+Ask the proctor if an asset is missing. Do not import replacements or edit another attendee's workflow.
 
 - Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account and select the assigned environment.
 - Open [Outlook](https://outlook.office.com/) with the same account. Keep Studio and this lab side by side.

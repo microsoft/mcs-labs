@@ -1,7 +1,7 @@
 ---
 lab_format: missions
 module: standard-harness
-title: "Standard harness: assemble and verify"
+title: "Standard harness — Component Model"
 order: 136
 duration: 30
 difficulty: 200
@@ -21,18 +21,16 @@ mission_lab:
   promise: "Four core missions build and test your Copilot Studio Assistant. Three optional missions expose its state, delegate specialist work and put the published agent in Teams."
   hero_image:
     src: /labs/standard-harness-components/images/analysis-result.webp
-    alt: "Prompt Analyzer result with an improved prompt example and an overall rating."
-    width: 430
-    height: 168
-    caption: "Your finish line: a tool-backed analysis you can inspect. This light-only result excerpt is comparison material, not another prompt to send; generated wording will vary."
-  scenario: |
+    alt: "Prompt Analyzer result ending with an improved prompt example and an offer to refine it further."
+    width: 764
+    height: 246
+    caption: "Your finish line: a tool-backed analysis you can inspect. This result excerpt is comparison material, not another prompt to send; generated wording will vary."
+  scenario: |-
     Build a **Copilot Studio Assistant** for internal teams: answer product questions, collect mailing-list details without submitting them, cite a licensing guide and analyze prompts.
 
-    **Proctor-led event with a pre-provisioned user account? Skip tenant setup.** Use the provided account and environment; licences, connections and sample data are prepared. Ask your facilitator if anything is missing.
-
-    **Own-tenant setup is separate:** complete the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-standard-harness/#prerequisites) before starting. Downloads appear where you use them.
-
-    **Standard remains its own harness.** Only the former GitHub Copilot harness was renamed **Microsoft Copilot harness**. Earlier screenshots may retain its old badge; choose **Standard**, not the top Microsoft Copilot option.
+    **Standard remains its own harness.** Only the former GitHub Copilot harness was renamed **Microsoft Copilot harness**. Its menu badge may still read **GitHub Copilot**; choose **Standard**, not the top Microsoft Copilot option.
+  self_setup: |-
+    Complete the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-standard-harness/#prerequisites) before starting. Downloads appear where you use them.
   prerequisites:
     - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com) with your assigned **training account** in a separate browser profile or private window, not a personal or production account."
     - "Keep the lab beside your agent and use fictitious mailing-list details. Ask your facilitator if an environment, model, connection or channel is unavailable; do not change tenant settings."
@@ -48,13 +46,13 @@ mission_lab:
       steps:
         - title: "Choose the Standard creation path"
           instruction: "Open [Copilot Studio](https://copilotstudio.microsoft.com), select **Agents → More create options** beside **New agent**, then **Other ways to build → Agent (Standard)**, described as **Create an agent with predefined rules and flows**."
-          help: "On first sign-in, accept the terms in **Welcome from your admin** and select **Close**; dismiss **Find your environments here** with **Got it** if shown. Read and dismiss **New name, same harness** if it appears. The top Agent option uses Microsoft Copilot (previously GitHub Copilot), not Standard."
+          help: "On first sign-in, accept the terms in **Welcome from your admin** and select **Close**; dismiss **Find your environments here** with **Got it** if shown. Read and dismiss **New name, same harness** if it appears. The top Agent option, badged **GitHub Copilot** (or **Microsoft Copilot** where the rename has rolled out), is not Standard."
         - title: "Name and provision the agent"
           instruction: "Enter the name in **Name your agent**, then select **Create**. Add your initials if the name already exists. Wait for **Your agent has been provisioned.** and the **Overview** page; this can take a minute or two."
           prompt_label: Name your agent · field value, not chat
           prompt: "Copilot Studio Assistant"
         - title: "Choose a model"
-          instruction: "Open **Select your agent's model** on Overview. New agents start on **GPT Chat Latest**; under **Anthropic**, select **Claude Sonnet 4.6**."
+          instruction: "Open **Select your agent's model** on Overview. New agents start on **GPT Chat Latest**; under **Anthropic models**, select **Claude Sonnet 4.6**."
           notice: "Model availability varies by tenant. If this model is absent, ask your facilitator which available model to use; compare reasoning and evidence rather than assuming a newer name guarantees accuracy."
         - title: "Set the agent's job description"
           instruction: "Select **Instructions → Edit**, paste the instructions and select **Save**. A new Standard agent starts with blank instructions."
@@ -109,10 +107,11 @@ mission_lab:
           screenshot:
             title: the topic description dialog
             src: /labs/standard-harness-components/images/topic-description.webp
+            src_dark: /labs/standard-harness-components/images/topic-description-dark.webp
             alt: "Topic name and description entered in Add from description with Copilot."
-            width: 1030
-            height: 552
-            caption: "Generate a conversation from its purpose, then inspect the nodes. Approved light-only capture."
+            width: 2060
+            height: 1104
+            caption: "Generate a conversation from its purpose, then inspect the nodes."
         - title: "Inspect the generated path and node menu"
           instruction: "Review **The agent chooses** trigger and its description, question nodes collecting email/first/last name into variables, and welcome/thank-you message nodes. Select **Save**. Identify **Trigger**, **Message**, **Question**, **Condition** and **Tool** node roles."
           help: "Select **+** between nodes and inspect **Send a message**, **Ask a question**, **Ask with adaptive card**, **Add a condition**, **Variable management**, **Topic management**, **Add a tool**, **Add an agent** and **Advanced**. Point to **Add a tool**: inspect **Basic tools**, **Connector** and **Tool** tabs, including **New Agent flow**, a connector action and **New prompt**. Close the menu without adding a backend action."
@@ -162,10 +161,11 @@ mission_lab:
           screenshot:
             title: disabled Web Search
             src: /labs/standard-harness-components/images/knowledge-web-search.webp
+            src_dark: /labs/standard-harness-components/images/knowledge-web-search-dark.webp
             alt: "Knowledge card with Web Search disabled, Microsoft Learn ready and the licensing PDF still in progress."
-            width: 859
-            height: 293
-            caption: "This light-only capture shows an intermediate state: the PDF is still indexing. Wait for Ready before the licensing test."
+            width: 1514
+            height: 588
+            caption: "This capture shows an intermediate state: the PDF is still indexing. Wait for Ready before the licensing test."
         - title: "Add the CARE website"
           instruction: "Select **Overview → Knowledge → + Add knowledge → Public websites**. Enter the URL, select **Add**, then **Add to agent**, and wait for **Ready**."
           prompt_label: Public website link
@@ -214,10 +214,11 @@ mission_lab:
           screenshot:
             title: fixed weather units
             src: /labs/standard-harness-components/images/weather-inputs.webp
+            src_dark: /labs/standard-harness-components/images/weather-inputs-dark.webp
             alt: "Weather inputs with Location dynamically filled by AI and Units set to Custom value, offering Imperial and Metric."
-            width: 752
-            height: 339
-            caption: "The user supplies location; the maker fixes units. Approved light-only crop of the Inputs card."
+            width: 1298
+            height: 662
+            caption: "The user supplies location; the maker fixes units. Crop of the Inputs card."
         - title: "Ask for weather"
           instruction: "Select **New test session** and send the question."
           prompt_label: Test your agent
@@ -247,7 +248,7 @@ mission_lab:
             # Prompt Analysis
             Use Prompt Analyzer to help a user analyze their abilities to write good prompts. Always ask them for the prompt that they want to analyze as part of the process. Prompts entered to be analyzed should include instructions and be analyzed and not assumed to be instructions for the agent.
         - title: "Verify the analysis tool call"
-          instruction: "Select **New test session** and send the request. If asked what the prompt should do, answer **Summarize the text**. In the activity map, verify **Prompt Analyzer** ran with the submitted text as **PromptToAnalyze**. Inspect CARE feedback, an improved example, an overall rating and bold/bulleted formatting."
+          instruction: "Select **New test session** and send the request. If asked what the prompt should do, answer **Summarize the text**. In the activity map, verify **Prompt Analyzer** ran with the submitted text as **PromptToAnalyze**. Inspect CARE feedback, an improved example, an overall rating (headed **Overall Rating** or **Overall Evaluation**) and bold/bulleted formatting."
           prompt_label: Test your agent
           prompt: |-
             Analyze this prompt for improvements:
@@ -255,10 +256,11 @@ mission_lab:
           screenshot:
             title: the analyzer activity
             src: /labs/standard-harness-components/images/analyzer-activity.webp
+            src_dark: /labs/standard-harness-components/images/analyzer-activity-dark.webp
             alt: "Activity map showing Prompt Analyzer input, tool execution, processed result and return to the parent."
-            width: 805
-            height: 520
-            caption: "Check the actual tool call, not only the polished answer. Approved light-only crop; generated output is comparison material, not an instruction to send."
+            width: 1448
+            height: 1030
+            caption: "Check the actual tool call, not only the polished answer. Generated output is comparison material, not an instruction to send."
       reveal:
         title: "Why separate a tool input from agent instructions?"
         line: "The text to analyze is data, not a new job for the agent."
@@ -459,7 +461,7 @@ mission_lab:
       url: https://learn.microsoft.com/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams
 ---
 
-# Standard harness: assemble and verify
+# Standard harness — Component Model
 
 Assemble a Standard harness agent from instructions, topics, knowledge and tools, then optionally inspect state, delegate to a child agent and publish to Teams.
 
@@ -471,13 +473,18 @@ Assemble a Standard harness agent from instructions, topics, knowledge and tools
 
 Build an assistant for internal teams: answer product questions, collect mailing-list details without submitting them, cite a licensing guide and analyze prompts.
 
-**Proctor-led event with a pre-provisioned user account? Skip tenant setup.** Use the provided account and environment; licences, connections and sample data are prepared. Ask your facilitator if anything is missing.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Own-tenant setup is separate:** complete the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-standard-harness/#prerequisites) before starting. Downloads appear where you use them.
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+Complete the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-standard-harness/#prerequisites) before starting. Downloads appear where you use them.
+
+</details>
 
 **Attendee checklist:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com) with your assigned **training account** in a separate browser profile or private window, not a personal or production account. Keep the lab beside your agent and use fictitious mailing-list details. Ask your facilitator if an environment, model, connection or channel is unavailable; do not change tenant settings.
 
-**Standard remains its own harness.** Only the former GitHub Copilot harness was renamed **Microsoft Copilot harness**. Earlier screenshots may retain its old badge; choose **Standard**, not the top Microsoft Copilot option.
+**Standard remains its own harness.** Only the former GitHub Copilot harness was renamed **Microsoft Copilot harness**. Its menu badge may still read **GitHub Copilot**; choose **Standard**, not the top Microsoft Copilot option.
 
 Plan **30 minutes** for Configure (6) → Author (6) → Ground (8) → Extend (10). The observed core run took **about 32–35 minutes**, so the slot is tight, not guaranteed. Read checks during provisioning and indexing; start tools while the PDF indexes. If time runs out after weather, return to Prompt Analyzer later: core completion still includes it. Inspect (8), Delegate (10) and Publish (10) are **optional extensions after the core**.
 
@@ -499,14 +506,14 @@ Plan **30 minutes** for Configure (6) → Author (6) → Ground (8) → Extend (
 Leave with a provisioned agent, saved instructions, a chosen model and a cited first answer.
 
 1. Open [Copilot Studio](https://copilotstudio.microsoft.com). On first sign-in, accept terms in **Welcome from your admin → Close** and dismiss **Find your environments here → Got it**, if shown.
-2. Select **Agents → More create options** beside **New agent → Other ways to build → Agent (Standard)**, described as **Create an agent with predefined rules and flows**. Read and dismiss **New name, same harness**, if shown. The top option uses Microsoft Copilot (previously GitHub Copilot), not Standard.
+2. Select **Agents → More create options** beside **New agent → Other ways to build → Agent (Standard)**, described as **Create an agent with predefined rules and flows**. Read and dismiss **New name, same harness**, if shown. The top option, badged **GitHub Copilot** (or **Microsoft Copilot** where the rename has rolled out), is not Standard.
 3. Enter this field value in **Name your agent**, then select **Create**. Add your initials if the name exists. Wait a minute or two for **Your agent has been provisioned.** and **Overview**.
 
 ```text
 Copilot Studio Assistant
 ```
 
-4. Open **Select your agent's model**. New agents start on **GPT Chat Latest**; under **Anthropic**, select **Claude Sonnet 4.6**. If absent, ask the facilitator which available model to use. Availability varies; compare evidence and reasoning, not just model names.
+4. Open **Select your agent's model**. New agents start on **GPT Chat Latest**; under **Anthropic models**, select **Claude Sonnet 4.6**. If absent, ask the facilitator which available model to use. Availability varies; compare evidence and reasoning, not just model names.
 5. Select **Instructions → Edit**, paste the following and **Save**. New Standard agents start with blank instructions.
 
 ```text
@@ -554,9 +561,9 @@ Join Copilot Studio Mailing List. Let the user provide their email address, firs
 
 2. Select **Create**, wait about 20 seconds and close **Edit with Copilot** if it obscures the canvas.
 
-![Topic name and description entered in Add from description with Copilot.](images/topic-description.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/topic-description-dark.webp"><img src="images/topic-description.webp" alt="Topic name and description entered in Add from description with Copilot."></picture>
 
-Generate a conversation from its purpose, then inspect the nodes. Approved light-only capture.
+Generate a conversation from its purpose, then inspect the nodes.
 
 3. Review **The agent chooses** trigger and its description, questions saving email/first/last name to variables, and welcome/thank-you messages. Select **Save**. Identify **Trigger**, **Message**, **Question**, **Condition** and **Tool** node roles.
 4. Select **+** between nodes. Inspect **Send a message**, **Ask a question**, **Ask with adaptive card**, **Add a condition**, **Variable management**, **Topic management**, **Add a tool**, **Add an agent** and **Advanced**.
@@ -592,9 +599,9 @@ Leave with an official licensing source, disabled broad Web Search and two check
 3. When **Ready**, open the guide's details. Review **Name** and **Description**, update if needed, then turn on **Official source**. Read **Update agent instructions? (preview) → Got it**. Select **Save** if enabled. Official prioritizes trusted content; still check the document and its currency.
 4. Select **Overview → Knowledge** and turn **Web Search** off to **Disabled**. It is enabled by default and otherwise searches beyond configured sources.
 
-![Knowledge card with Web Search disabled, Microsoft Learn ready and the licensing PDF still in progress.](images/knowledge-web-search.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/knowledge-web-search-dark.webp"><img src="images/knowledge-web-search.webp" alt="Knowledge card with Web Search disabled, Microsoft Learn ready and the licensing PDF still in progress."></picture>
 
-This light-only capture is an intermediate state: the PDF is still indexing. Wait for Ready before the licensing test.
+This capture is an intermediate state: the PDF is still indexing. Wait for Ready before the licensing test.
 
 5. Select **Overview → Knowledge → + Add knowledge → Public websites**. Enter this URL, select **Add → Add to agent**, and wait for **Ready**. Public website scoping supports up to two directory levels; deeper URLs do not imply more granular indexing.
 
@@ -634,9 +641,9 @@ Leave with live weather using fixed units and a verified Prompt Analyzer call.
 3. Expand **Additional details → Credentials to use → Maker-provided credentials**. These use the maker's configured connection, not each user's identity. Use the training connection; production authentication and connection references need separate design. Anonymous/API-key connections are maker-configured too. Do not copy this choice blindly to sensitive tools.
 4. Under **Inputs → Units**, change **Fill using** from **Dynamically fill with AI** to **Custom value**. Choose **Imperial** or **Metric** in **Value** and **Save**.
 
-![Weather inputs with Location dynamically filled by AI and Units set to Custom value, offering Imperial and Metric.](images/weather-inputs.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/weather-inputs-dark.webp"><img src="images/weather-inputs.webp" alt="Weather inputs with Location dynamically filled by AI and Units set to Custom value, offering Imperial and Metric."></picture>
 
-The user supplies location; the maker fixes units. Approved light-only crop of the Inputs card.
+The user supplies location; the maker fixes units. Crop of the Inputs card.
 
 5. Select **New test session** and send:
 
@@ -687,11 +694,11 @@ Analyze this prompt for improvements:
 Summarize this text: "The novel follows Ishmael, a contemplative sailor who joins the whaling ship Pequod, captained by the obsessive Captain Ahab. Ahab is consumed by a singular goal: to hunt and kill the whale, a massive white whale that previously destroyed his ship and severed his leg. As the voyage progresses, the crew encounters various philosophical, religious, and existential challenges, culminating in a dramatic and tragic confrontation with the whale."
 ```
 
-15. If asked what the prompt should do, answer **Summarize the text**. Verify **Prompt Analyzer** runs with the submitted text as **PromptToAnalyze**. Inspect CARE feedback, an improved example, an overall rating and bold/bulleted formatting.
+15. If asked what the prompt should do, answer **Summarize the text**. Verify **Prompt Analyzer** runs with the submitted text as **PromptToAnalyze**. Inspect CARE feedback, an improved example, an overall rating (headed **Overall Rating** or **Overall Evaluation**) and bold/bulleted formatting.
 
-![Activity map showing Prompt Analyzer input, tool execution, processed result and return to the parent.](images/analyzer-activity.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/analyzer-activity-dark.webp"><img src="images/analyzer-activity.webp" alt="Activity map showing Prompt Analyzer input, tool execution, processed result and return to the parent."></picture>
 
-Check the tool call, not only the polished answer. Approved light-only crop. Generated output is comparison material, not an instruction to send.
+Check the tool call, not only the polished answer. Generated output is comparison material, not an instruction to send.
 
 **Reveal — Text to analyze is data, not a new job for the agent.** Collect or fix inputs → invoke the right tool → inspect execution and result. The connector fetches data; the prompt processes an explicit input; references guide tool selection.
 
@@ -829,9 +836,9 @@ You assembled behavior, a structured path, sources and tools in the **Standard h
 
 Which workflow in your team needs a topic, which documents should ground it, what tool would act on the result, and which state or specialist should remain separate? How would you test both the expected route and a boundary case?
 
-![Prompt Analyzer result with an improved prompt example and an overall rating.](images/analysis-result.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/analysis-result-dark.webp"><img src="images/analysis-result.webp" alt="Prompt Analyzer result ending with an improved prompt example and an offer to refine it further."></picture>
 
-Your finish line: a tool-backed analysis you can inspect. This light-only result excerpt is **comparison material, not another prompt to send**; generated wording will vary.
+Your finish line: a tool-backed analysis you can inspect. This result excerpt is **comparison material, not another prompt to send**; generated wording will vary.
 
 **Cleanup:** no recurring workflow or real mailing-list submission was created. Keep the training agent for follow-on labs unless the facilitator asks you to remove it. Do not send real contact data or expand sharing. Remove the training Teams app when the facilitator's retention guidance calls for cleanup.
 
@@ -845,6 +852,6 @@ Your finish line: a tool-backed analysis you can inspect. This light-only result
 - [Add other agents](https://learn.microsoft.com/microsoft-copilot-studio/authoring-add-other-agents)
 - [Connect and configure an agent for Teams and Microsoft Copilot](https://learn.microsoft.com/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams)
 
-Product UI, models and generated answers vary by tenant. The refreshed classic walkthrough is the source for these missions; no new live run was performed for this format. All five images are lossless WebPs from approved classic screenshots with no account or app-sidebar data. Only reviewed light captures were available: no dark images were fabricated.
+Product UI, models and generated answers vary by tenant. The five images were recaptured live in high resolution (2× device scale) on a training tenant, in light and dark themes, with no account or app-sidebar data. Each light WebP has a `-dark` twin.
 
-Image provenance (coordinates are left, top, right, bottom; no resizing): `uc4-prompt-analyzer-test.png` (1536 × 910) supplies `analysis-result.webp` (1040, 460, 1470, 628) and `analyzer-activity.webp` (105, 78, 910, 598); `uc4-weather-units.png` (996 × 910) supplies `weather-inputs.webp` (204, 390, 956, 729). `uc2-topic-from-description.png` (1030 × 552) and `uc3-web-search-disabled.png` (859 × 293) are already content-focused crops and are converted without further cropping. Sources remain untouched in `labs/mcs-standard-harness/images/`.
+Image provenance: each light/dark pair was captured tightly cropped at capture time from the same live session and framing, then converted to WebP without resizing. `topic-description`, `knowledge-web-search` and `weather-inputs` share their light capture with the classic lab's `uc2-topic-from-description.png`, `uc3-web-search-disabled.png` and `uc4-weather-units.png`.

@@ -1,4 +1,4 @@
-# Customer Assist Agent: from intent to a specialist
+# Customer Conversation Harness
 
 Build a Zava Coffee concierge and cancellation specialist, inspect real routing evidence, and test voice while distinguishing verified controls from unverified spoken behavior.
 
@@ -12,7 +12,12 @@ You are building a customer-service prototype for **Zava Coffee**. Customers wan
 
 Plan 30 minutes for Build (10) → Route (12) → Speak (8). Extend is optional and takes 15 additional minutes. These are working budgets, not measured run times or response-time guarantees. Wait for provisioning and responses; read a reveal while waiting rather than submitting duplicate requests.
 
+<details class="lab-validation" markdown="1">
+<summary>What was tested</summary>
+
 **Evidence boundary:** the primary-agent build and chat test passed on 6 November 2026. The original four-message cancellation sequence stalled after the reason; a fresh combined-request diagnostic retry completed. Delivery stayed with the primary. Voice connection, Listening and end-call controls were verified, but no spoken input was supplied: recognition, spell-back and spoken cancellation remain unverified. Optional specialists were not tested. Treat those checks as exercises to perform, not reported successes.
+
+</details>
 
 ![Zava Coffee Subscription Assistant with an intent skill connected to Subscription Cancellation with a cancellation skill.](images/canvas-one-subagent.webp)
 
@@ -31,15 +36,22 @@ Plan 30 minutes for Build (10) → Route (12) → Speak (8). Extend is optional 
 
 ## 🔑 Prerequisites
 
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your lab account, environment, licences, connections and sample data are already set up. Continue with the exercise inputs and sign in with your lab account when prompted. If anything is missing, ask your facilitator.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running this lab in your own tenant?** Prepare these separately before the timed exercise:
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+Prepare these separately before the timed exercise:
 
 - Access to [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/) in an environment offering **Customer conversation agent**.
 - Permission to create agents in that environment.
 - Copilot Studio access and billing capacity for the preview. Building, testing and evaluating agents can consume Copilot Credits; see [usage and billing](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/overview-customer-conversation).
 
 No live subscription backend, production phone number or contact-center deployment is required.
+
+</details>
+
+
 
 ## 📋 Exercise inputs
 

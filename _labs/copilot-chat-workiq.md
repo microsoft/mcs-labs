@@ -1,7 +1,7 @@
 ---
 lab_format: missions
 module: m365-copilot-latest
-title: "Copilot Chat: from sources to decisions"
+title: "M365 Copilot Chat and Work IQ"
 order: 108
 duration: 15
 difficulty: 100
@@ -22,15 +22,13 @@ mission_lab:
   hero_image:
     src: /labs/copilot-chat-workiq/images/preread-excerpt.webp
     alt: "Excerpt of a Zava DIY quarterly business review pre-read with three findings and source references."
-    width: 970
-    height: 490
+    width: 2814
+    height: 1566
     caption: "An example of the optional Pages deliverable: findings with evidence, ready for your review."
-  scenario: |
+  scenario: |-
     You have joined **Zava DIY**, a home improvement retailer with seven Washington State stores plus Zava Retail Online, as an operations analyst. The quarterly business review is in two days. Leave with a cited market summary, a policy decision and a store-performance table that makes missing evidence explicit.
-
-    **Proctor-led event with a pre-provisioned user account? Skip tenant setup.** Your account, environment, licences and sample data are already prepared. Sign in with the provided account and ask your facilitator if anything is missing.
-
-    **Own-tenant setup, separate from attendee readiness:** complete the [classic lab prerequisites](../mcs-m365-copilot-latest/#prerequisites) before starting. That section covers licensing, agent availability and placing the two Zava DIY files in accessible OneDrive or SharePoint content.
+  self_setup: |-
+    Complete the [classic lab prerequisites](../mcs-m365-copilot-latest/#prerequisites) before starting. That section covers licensing, agent availability and placing the two Zava DIY files in accessible OneDrive or SharePoint content.
   prerequisites:
     - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account** in a separate browser profile or private window, not a personal or production account."
     - "Keep this lab beside Copilot. If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant."
@@ -50,10 +48,11 @@ mission_lab:
           screenshot:
             title: Chat with Work IQ off
             src: /labs/copilot-chat-workiq/images/chat-workiq-off.webp
+            src_dark: /labs/copilot-chat-workiq/images/chat-workiq-off-dark.webp
             alt: "Chat selected in the composer, with Work IQ crossed out beside Auto."
-            width: 1044
-            height: 570
-            caption: "Check both controls before prompting. This reviewed capture is available in light theme only."
+            width: 2535
+            height: 1020
+            caption: "Check both controls before prompting."
         - title: "Ask the market question"
           instruction: "Leave **Auto** selected. Paste the prompt and select **Send**."
           prompt_label: Copilot Chat with Work IQ off
@@ -71,9 +70,10 @@ mission_lab:
           screenshot:
             title: response modes and models
             src: /labs/copilot-chat-workiq/images/model-picker.webp
+            src_dark: /labs/copilot-chat-workiq/images/model-picker-dark.webp
             alt: "Response-mode menu and Claude submenu showing available model choices."
-            width: 624
-            height: 390
+            width: 1812
+            height: 1176
             caption: "The capture shows Think deeper selected during the optional exercise. Your available models may differ; light capture only."
           notice: "Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation."
       reveal:
@@ -118,9 +118,10 @@ mission_lab:
           screenshot:
             title: a cited policy answer
             src: /labs/copilot-chat-workiq/images/policy-answer.webp
+            src_dark: /labs/copilot-chat-workiq/images/policy-answer-dark.webp
             alt: "Zava DIY policy answer with governing sections cited after the leadership-summary bullets."
-            width: 800
-            height: 732
+            width: 2364
+            height: 2436
             caption: "Inspect the cited sections rather than expecting identical wording. Light capture only."
         - title: "Verify a policy citation"
           instruction: "Select a citation, such as the document name after **From**. Read the source in the right-hand preview. Select **Open in Word** for the full file, or **X** to close the preview."
@@ -286,9 +287,10 @@ mission_lab:
           screenshot:
             title: Edit in Pages
             src: /labs/copilot-chat-workiq/images/edit-in-pages.webp
+            src_dark: /labs/copilot-chat-workiq/images/edit-in-pages-dark.webp
             alt: "More options below a Copilot response with Edit in Pages available."
-            width: 790
-            height: 670
+            width: 2370
+            height: 1116
             caption: "Create the answer first, then open its menu. Light capture only."
         - title: "Edit and review the page"
           instruction: "Edit the page directly to add information. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to."
@@ -336,9 +338,10 @@ mission_lab:
           screenshot:
             title: upload the report
             src: /labs/copilot-chat-workiq/images/upload-report.webp
+            src_dark: /labs/copilot-chat-workiq/images/upload-report-dark.webp
             alt: "Plus menu in the Researcher composer showing Upload images and files."
-            width: 810
-            height: 290
+            width: 2424
+            height: 795
             caption: "Wait for the report attachment before sending. Light capture only."
           notice: "Researcher and Analyst are built-in agents, not agents you need to create. Use the fictional sample only; uploading from your device sends a copy to OneDrive."
         - title: "Request the executive briefing"
@@ -482,7 +485,7 @@ mission_lab:
       url: https://learn.microsoft.com/copilot/manage/researcher-agent
 ---
 
-# Copilot Chat: from sources to decisions
+# M365 Copilot Chat and Work IQ
 
 Build a cited Zava DIY decision brief with Copilot Chat and Work IQ, then optionally explore deeper reasoning, Pages, Researcher and Analyst.
 
@@ -494,14 +497,19 @@ Build a cited Zava DIY decision brief with Copilot Chat and Work IQ, then option
 
 You have joined **Zava DIY**, a home improvement retailer with seven Washington State stores plus Zava Retail Online, as an operations analyst. The quarterly business review is in two days.
 
-**Proctor-led event with a pre-provisioned user account? Skip tenant setup.** Your account, environment, licences and sample data are already prepared. Sign in with the provided account and ask your facilitator if anything is missing.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
+
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+Complete the [classic lab prerequisites](../mcs-m365-copilot-latest/#prerequisites) before starting. That section covers licensing, agent availability and placing the two Zava DIY files in accessible OneDrive or SharePoint content.
+
+</details>
 
 **Attendee readiness**
 
 - Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account** in a separate browser profile or private window, not a personal or production account.
 - Keep this lab beside Copilot. If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant.
-
-> **Own-tenant setup, separate from attendee readiness:** complete the [classic lab prerequisites](../mcs-m365-copilot-latest/#prerequisites) before starting. That section covers licensing, agent availability and placing the two Zava DIY files in accessible OneDrive or SharePoint content.
 
 Plan **15 minutes for Ask (4) → Apply (5) → Verify (6)**. **Reason (3), Publish (2), Research (10) and Model (5)** are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes.
 
@@ -532,9 +540,9 @@ The old `m365.cloud.microsoft` bookmark redirects here. Cowork keeps Work IQ on;
 
 </details>
 
-<picture><img src="images/chat-workiq-off.webp" alt="Chat selected in the composer, with Work IQ crossed out beside Auto." width="1044" height="570"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/chat-workiq-off-dark.webp"><img src="images/chat-workiq-off.webp" alt="Chat selected in the composer, with Work IQ crossed out beside Auto." width="2535" height="1020"></picture>
 
-Check both controls before prompting. This reviewed capture is available in light theme only.
+Check both controls before prompting.
 
 3. Leave **Auto** selected. Paste the prompt and select **Send**:
 
@@ -555,7 +563,7 @@ Auto decides how long to think; Quick response favors speed for recall, rewritin
 
 </details>
 
-<picture><img src="images/model-picker.webp" alt="Response-mode menu and Claude submenu showing available model choices." width="624" height="390"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/model-picker-dark.webp"><img src="images/model-picker.webp" alt="Response-mode menu and Claude submenu showing available model choices." width="1812" height="1176"></picture>
 
 The capture shows Think deeper selected during the optional exercise. Your available models may differ; light capture only. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
 
@@ -601,7 +609,7 @@ have 60 seconds before the quarterly business review starts.
 After each bullet, cite the section it came from.
 ```
 
-<picture><img src="images/policy-answer.webp" alt="Zava DIY policy answer with governing sections cited after the leadership-summary bullets." width="800" height="732"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/policy-answer-dark.webp"><img src="images/policy-answer.webp" alt="Zava DIY policy answer with governing sections cited after the leadership-summary bullets." width="2364" height="2436"></picture>
 
 Inspect the cited sections rather than expecting identical wording. Light capture only.
 
@@ -775,7 +783,7 @@ Turn this into a one-page pre-read for the Zava DIY quarterly business review:
 
 2. At the bottom of that response, select **More options** (**...**) → **Edit in Pages**. Wait for the page to open on the right and the chat to confirm **Page created**.
 
-<picture><img src="images/edit-in-pages.webp" alt="More options below a Copilot response with Edit in Pages available." width="790" height="670"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/edit-in-pages-dark.webp"><img src="images/edit-in-pages.webp" alt="More options below a Copilot response with Edit in Pages available." width="2370" height="1116"></picture>
 
 Create the answer first, then open its menu. Light capture only.
 
@@ -783,7 +791,7 @@ Create the answer first, then open its menu. Light capture only.
 
 Asking chat beside an open page to rewrite it can report success without updating the page. For a later Copilot revision, request a new answer in chat and open that answer in Pages again; verify the page actually changed.
 
-<picture><img src="images/preread-excerpt.webp" alt="Excerpt of a Zava DIY quarterly business review pre-read with three findings and source references." width="970" height="490"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/preread-excerpt-dark.webp"><img src="images/preread-excerpt.webp" alt="Excerpt of a Zava DIY quarterly business review pre-read with three findings and source references." width="2814" height="1566"></picture>
 
 An example of the optional Pages deliverable: findings with evidence, ready for your review. This is a document-content crop, not a fabricated dark-theme capture.
 
@@ -830,7 +838,7 @@ Complete the chat response → Edit in Pages → Verify the artifact.
 2. In [Microsoft Copilot](https://copilot.cloud.microsoft/), select **Agents & Plugins** → **Added** → **Researcher**, or type `@Researcher` in the prompt box and select it. Look for **What do you want to research today?**
 3. Select **+** → **Upload images and files**, choose `Contoso_Grand_Hotel_Performance_Report.pdf`, and wait for the attachment to appear.
 
-<picture><img src="images/upload-report.webp" alt="Plus menu in the Researcher composer showing Upload images and files." width="810" height="290"></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/upload-report-dark.webp"><img src="images/upload-report.webp" alt="Plus menu in the Researcher composer showing Upload images and files." width="2424" height="795"></picture>
 
 Wait for the report attachment before sending. Light capture only. Researcher and Analyst are **built-in agents**, not agents you need to create. Use the fictional sample only; uploading from your device sends a copy to OneDrive.
 

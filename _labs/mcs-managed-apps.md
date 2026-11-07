@@ -99,15 +99,17 @@ Use your facilitator's environment-specific guidance for feature access and conn
 
 ## Prerequisites
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#use-case-build-an-app-with-a-persistent-backend) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running this lab in your own tenant?** Set this up first:
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
 - Access to **Copilot Studio Apps**, including image upload and app preview in your environment.
 - Permission for the app-building experience to read the published bootcamp agenda.
 - Your own OneDrive for Business and permission to read, create, and update files in it.
 - Access to the OneDrive for Business connector in your training environment, with permission to create a connection using your account if needed.
+
+</details>
 
 Use your own account and OneDrive, not another learner's connection or file. No pre-existing CSV file, SharePoint list, prepared database, or VS Code setup is required. Publishing is outside this exercise.
 

@@ -1,7 +1,7 @@
 ---
 lab_format: missions
 module: copilot-harness-latest
-title: "Declarative agents: reuse a briefing skill"
+title: "Reuse a Cowork skill in a declarative agent"
 order: 127
 duration: 30
 difficulty: 200
@@ -21,24 +21,20 @@ mission_lab:
   promise: "Turn a personal hotel-report workflow into an agent that prepares an evidence table and executive email text for human review. Nothing is sent."
   hero_image:
     src: /labs/declarative-agent-skill-reuse/images/briefing-evidence.webp
-    alt: "Hotel operations briefing excerpt with a source, reporting period and the first three evidence-table rows."
-    width: 865
-    height: 591
+    alt: "Hotel operations briefing excerpt with a source, reporting period and the first evidence-table row."
+    width: 2355
+    height: 1770
     caption: "A reviewed light-content excerpt, not the complete five-issue result. Check claims and recommendation identifiers against the report."
-  scenario: |
+  scenario: |-
     You lead operations at **Contoso Grand Hotel**. Your team needs the five most urgent issues in its annual performance report, each with a symptom, root cause, reported financial impact and matching Section 16 recommendation.
 
     Reuse your compatible skill from [Cowork hands-on](../mcs-cowork-latest/), or use the supplied starter in Mission 1. Leave with **Contoso Operations agent**, a checked briefing and an approved teammate's independent review. This is email **text**, not an Outlook draft; there are no sending or Planner actions.
 
-    **Validation boundary:** the refreshed classic run recorded 15 pass, 12 drift, 1 defect, 4 variance and 7 blocked checks. Agent creation, skill upload, report attachment and boundary responses were observed. Second-account sharing and the optional Visual Studio Code / Agents Toolkit deployment were not tested. Opening Share is not a completed handoff; mark unavailable tests blocked.
-
-    **Prerequisites for your own tenant**
-
-    **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your account, environment, licences, connections and sample data are prepared. Go straight to [Mission 1](#inspect); ask your facilitator if something is missing.
-
-    **Running in your own tenant?** Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Agents & Skills > New agent > Configure** for **Skills**, following the linked licensing and skills documentation. For the optional extension, prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
-
     This exercise uses Agent Builder for a declarative agent. The **Standard harness** remains separate; the harness formerly named **GitHub Copilot** is now the **Microsoft Copilot harness**. Do not substitute either Studio experience for these Agent Builder steps.
+  self_setup: |-
+    Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Agents & Plugins > Chat > New agent > Configure** for **Skills**, following the linked licensing and skills documentation. For the optional extension, prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
+  validation: |-
+    **Validation boundary:** the refreshed classic run recorded 15 pass, 12 drift, 1 defect, 4 variance and 7 blocked checks. Agent creation, skill upload, report attachment and boundary responses were observed. Second-account sharing and the optional Visual Studio Code / Agents Toolkit deployment were not tested. Opening Share is not a completed handoff; mark unavailable tests blocked.
   prerequisites:
     - "Sign in to [Microsoft Copilot](https://m365.cloud.microsoft) with your assigned training account in a separate browser profile or private window."
     - "Keep the lab beside Copilot and ask the facilitator if Skills or the assigned account is unavailable. Download the starter in Mission 1 and the report in Mission 3; do not skip those exercise inputs."
@@ -88,16 +84,17 @@ mission_lab:
       steps:
         - title: "Open the configuration"
           instruction: |
-            Open [Microsoft Copilot](https://m365.cloud.microsoft). Select **Agents & Skills > New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**.
+            Open [Microsoft Copilot](https://m365.cloud.microsoft). Select **Agents & Plugins**, open the **Chat** tab and select **New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**.
 
             The onboarding describes work content enabled by default. You will turn it off in Mission 3 before testing; do not assume the new agent is report-only.
           screenshot:
             title: Start a new Agent Builder agent
             src: /labs/declarative-agent-skill-reuse/images/agents-skills-new-agent.webp
-            alt: "Agents & Skills menu with New agent near the bottom."
-            width: 482
-            height: 357
-            caption: "Reviewed classic light capture. Select New agent, then Skip."
+            src_dark: /labs/declarative-agent-skill-reuse/images/agents-skills-new-agent-dark.webp
+            alt: "Agents & Plugins page with the Chat tab selected and New agent on the right."
+            width: 2020
+            height: 320
+            caption: "Select New agent on the Chat tab, then Skip."
         - title: "Name the agent and enter its description"
           instruction: "Select the pencil next to **New Agent**. Name it **Contoso Operations agent**, and paste this into the description field."
           prompt_label: Agent Builder · Description
@@ -120,10 +117,11 @@ mission_lab:
           screenshot:
             title: Upload the starter ZIP
             src: /labs/declarative-agent-skill-reuse/images/upload-skill-dialog.webp
+            src_dark: /labs/declarative-agent-skill-reuse/images/upload-skill-dialog-dark.webp
             alt: "Upload skill dialog with a browse area, YAML requirements and Upload button."
-            width: 600
-            height: 302
-            caption: "Reviewed light capture before file selection; choose the ZIP to enable Upload."
+            width: 1794
+            height: 900
+            caption: "Reviewed capture before file selection; choose the ZIP to enable Upload."
         - title: "Inspect what was uploaded"
           instruction: "Select the skill. Check its name, description and **Instructions**, then find `briefing-template.md` under **Files**. Select **Back**. A matching name is essential because the agent instructions refer to it."
       reveal:
@@ -159,10 +157,11 @@ mission_lab:
           screenshot:
             title: Report attached with work content off
             src: /labs/declarative-agent-skill-reuse/images/knowledge-work-content-off.webp
+            src_dark: /labs/declarative-agent-skill-reuse/images/knowledge-work-content-off-dark.webp
             alt: "Knowledge configuration with all five work-content switches off and the hotel PDF under Attachments."
-            width: 796
-            height: 675
-            caption: "Reviewed light capture of the intended source configuration; do not remove the hotel attachment."
+            width: 1592
+            height: 1344
+            caption: "Reviewed capture of the intended source configuration; do not remove the hotel attachment."
       reveal:
         title: "Why change the defaults?"
         line: "A controlled source makes a briefing checkable."
@@ -212,10 +211,11 @@ mission_lab:
           screenshot:
             title: Proposed tasks are not created tasks
             src: /labs/declarative-agent-skill-reuse/images/human-review-check.webp
-            alt: "Agent response says it cannot send the briefing or create Planner tasks and lists proposed tasks for human review."
-            width: 860
-            height: 463
-            caption: "Reviewed light example of the refusal boundary, not a record of sent mail or created tasks."
+            src_dark: /labs/declarative-agent-skill-reuse/images/human-review-check-dark.webp
+            alt: "Agent response says it can prepare the briefing and Planner-ready task text but cannot send the email or create Planner tasks."
+            width: 2355
+            height: 708
+            caption: "Reviewed example of the refusal boundary, not a record of sent mail or created tasks."
         - title: "Prove repeatability in a fresh chat"
           instruction: "In **Preview**, select **New chat** and repeat the short briefing request above without pasting the long workflow. Confirm the same output requirements. If any check failed, review the skill, instructions and source switches, then retry before sharing."
       reveal:
@@ -250,9 +250,9 @@ mission_lab:
             src: /labs/declarative-agent-skill-reuse/images/share-dialog.webp
             src_dark: /labs/declarative-agent-skill-reuse/images/share-dialog-dark.webp
             alt: "Share dialog with a recipient field, org-wide chat sharing off and Copy chat link."
-            width: 600
-            height: 288
-            caption: "Reviewed light capture with account details masked. The dialog was inspected; second-account sharing was not tested."
+            width: 1794
+            height: 858
+            caption: "Reviewed capture with account details masked. The dialog was inspected; second-account sharing was not tested."
           notice: "If no approved teammate or sharing permission is available, retain the private agent and mark the handoff blocked. An open Share dialog or copied link is not proof of access."
         - title: "Verify the teammate's independent review"
           instruction: "Have the teammate open the agent in a new chat and run **Prepare the hotel operations briefing using the annual report.** They must not borrow your Cowork history or paste the long procedure. Have them open the report and check one issue, then explain that they review and send the email themselves. Agent sharing does not necessarily grant source access. Keep the agent name/link and checked result; claim the handoff only after this test succeeds."
@@ -338,11 +338,11 @@ mission_lab:
       url: https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-manifest-1.9
 ---
 
-# Declarative agents: reuse a briefing skill
+# Reuse a Cowork skill in a declarative agent
 
 Turn a personal hotel-report workflow into **Contoso Operations agent**: an evidence table and an executive email for a teammate to review. This is **email text, not an Outlook draft**. Nothing is sent and no Planner tasks are created.
 
-![Hotel operations briefing excerpt with a source, reporting period and the first three evidence-table rows.](images/briefing-evidence.webp)
+![Hotel operations briefing excerpt with a source, reporting period and the first evidence-table row.](images/briefing-evidence.webp)
 
 *Reviewed light-content excerpt, not the complete five-issue result. Check claims and Section 16 identifiers against the report.*
 
@@ -354,7 +354,12 @@ Turn a personal hotel-report workflow into **Contoso Operations agent**: an evid
 
 You lead operations at **Contoso Grand Hotel**. Identify five urgent issues in the annual performance report, with symptom, cause, reported financial impact and matching Section 16 recommendation. Continue from [Cowork hands-on](../mcs-cowork-latest/) with a compatible hotel skill, or use the standalone starter below.
 
+<details class="lab-validation" markdown="1">
+<summary>What was tested</summary>
+
 **Validation boundary:** the refreshed classic run recorded 15 pass, 12 drift, 1 defect, 4 variance and 7 blocked checks. Creation, upload, attachment and boundary responses were observed. Second-account sharing and the optional Visual Studio Code / Agents Toolkit deployment were **not tested**. Opening Share is not a completed handoff; mark unavailable tests blocked.
+
+</details>
 
 ## Table of Contents
 
@@ -370,9 +375,14 @@ You lead operations at **Contoso Grand Hotel**. Identify five urgent issues in t
 
 ## Prerequisites
 
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your account, environment, licences, connections and sample data are prepared. Go straight to Mission 1; ask your facilitator if something is missing.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running in your own tenant?** Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Agents & Skills > New agent > Configure** for **Skills** and consult the licensing and skills sources below. Optional: prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Agents & Plugins > Chat > New agent > Configure** for **Skills** and consult the licensing and skills sources below. Optional: prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
+
+</details>
 
 This lab uses **Agent Builder** for a declarative agent. The **Standard harness** remains separate; the harness formerly named **GitHub Copilot** is now the **Microsoft Copilot harness**. Do not substitute either Studio experience for these steps.
 
@@ -400,9 +410,9 @@ This lab uses **Agent Builder** for a declarative agent. The **Standard harness*
 
 **Outcome:** a focused role and an uploaded skill.
 
-1. Select **Agents & Skills > New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**. Its work-content defaults are on; you turn them off in Mission 3 before testing.
+1. Select **Agents & Plugins**, open the **Chat** tab and select **New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**. Its work-content defaults are on; you turn them off in Mission 3 before testing.
 
-![Agents & Skills menu with New agent near the bottom.](images/agents-skills-new-agent.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/agents-skills-new-agent-dark.webp"><img src="images/agents-skills-new-agent.webp" alt="Agents & Plugins page with the Chat tab selected and New agent on the right."></picture>
 
 *Reviewed classic light capture. Select New agent, then Skip.*
 
@@ -426,7 +436,7 @@ Do not send messages, create Outlook drafts, or write Planner tasks. If asked to
 4. Under **Suggested prompts**, enter Title **Prepare hotel briefing** and Message **Prepare the hotel operations briefing using the annual report.** Delete empty rows using the trash icon. Do not add unrelated skills, sources or connectors.
 5. Under **Skills**, select **Add**. In **Upload skill**, select **Drop your file or click to browse**, choose the complete ZIP and select **Upload**. Do not upload SKILL.md alone: you need its template too.
 
-![Upload skill dialog with a browse area, YAML requirements and Upload button.](images/upload-skill-dialog.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/upload-skill-dialog-dark.webp"><img src="images/upload-skill-dialog.webp" alt="Upload skill dialog with a browse area, YAML requirements and Upload button."></picture>
 
 *Reviewed light capture before file selection; choose the ZIP to enable Upload.*
 
@@ -450,7 +460,7 @@ Do not send messages, create Outlook drafts, or write Planner tasks. If asked to
 2. Under **Knowledge**, select **Add knowledge** and upload the PDF, or drop it onto the **Knowledge** box. Confirm the correct file under **Attachments** and wait for processing.
 3. Under **Work content**, turn off **Cloud files**, **Outlook**, **Teams** and **Web search**. They start on by default. Leave **Copilot connectors** off. Check all five switches before testing.
 
-![Knowledge configuration with all five work-content switches off and the hotel PDF under Attachments.](images/knowledge-work-content-off.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/knowledge-work-content-off-dark.webp"><img src="images/knowledge-work-content-off.webp" alt="Knowledge configuration with all five work-content switches off and the hotel PDF under Attachments."></picture>
 
 *Reviewed light capture of the intended configuration; keep the hotel attachment.*
 
@@ -492,7 +502,7 @@ Send the briefing now and create Planner tasks for the five issues.
 
 Expect a refusal to send mail or create tasks. Any task list must remain proposals for human review. Do not add an action to make this request succeed.
 
-![Agent response says it cannot send the briefing or create Planner tasks and lists proposed tasks for human review.](images/human-review-check.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/human-review-check-dark.webp"><img src="images/human-review-check.webp" alt="Agent response says it can prepare the briefing and Planner-ready task text but cannot send the email or create Planner tasks."></picture>
 
 *Reviewed light example of the refusal boundary, not sent mail or created tasks.*
 

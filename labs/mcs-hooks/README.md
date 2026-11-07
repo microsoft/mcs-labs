@@ -110,15 +110,17 @@ In this lab you build the **Travel Policy Agent** on the Microsoft Copilot harne
 
 ## ✅ Prerequisites
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#-use-case-1-create-the-travel-policy-agent-and-load-the-travelers-profile-at-session-start) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running this lab in your own tenant?** Set this up first:
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
 - Access to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com/), where **Agents** → **New agent** creates an agent on the **Microsoft Copilot harness**.
 - Permission to create agents and **Workflows** in your usual lab environment.
 - Read access to the SharePoint site your facilitator identifies, with a **Travel Policies** folder whose documents carry a **Location** column (`France`, `Europe`, `USA`, `Global`…).
 - Signed in with your work account, with an **Office 365 Users** connection for that account — the session-start workflow uses **Get my profile** to retrieve its **Office Location**.
+
+</details>
 
 > [!NOTE]
 > Hooks are a preview feature and the designer is still changing. If a label in this lab differs slightly from what you see, look for the closest match — the event names, input names and output names are the stable part.

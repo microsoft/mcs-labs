@@ -95,15 +95,18 @@ These resources describe the Microsoft Copilot harness experience used in this l
 
 ## Prerequisites and Materials
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#use-case-1-create-zava-operations-assistant) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running this lab in your own tenant?** Set this up first:
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
 - Access to create two **Microsoft Copilot harness** agents in the **same environment**, upload Skills, publish, and connect agents. Building and testing can consume Copilot Credits.
 - Verify **Build → Skills** and **Build → Connected agents**, including **Add A2A agent**, are available in your tenant. Do not substitute the standard-harness designer.
 - Arrange a hosted LiftLine A2A demo agent with the bundled dispatch Skill and `LIFTLINE-DEMO-v1` data, following the instructor appendix. Confirm discovery and delegation from Copilot Studio before starting; a publicly reachable URL alone is not enough. This synthetic-data demo uses **Authentication: None**.
-- Demo calendar date: **November 12, 2026**. Timezone: **America/New_York (UTC-05:00)**. Use these values throughout, rather than relying on "tomorrow" or the service's clock.
+
+</details>
+
+Demo calendar date: **November 12, 2026**. Timezone: **America/New_York (UTC-05:00)**. Use these values throughout, rather than relying on "tomorrow" or the service's clock.
 
 This lab uses preview capabilities. Use synthetic requests only: delegation can share conversation context with connected agents, including the externally hosted service. Instructions to minimize task content do not guarantee platform-level context isolation.
 

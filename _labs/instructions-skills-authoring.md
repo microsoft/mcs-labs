@@ -22,12 +22,15 @@ mission_lab:
   hero_image:
     src: /labs/instructions-skills-authoring/images/evaluation-weights.webp
     alt: "City of Westbrook evaluation-weight chart: Technical approach 30, Relevant municipal experience 25, Cost 20, Project team 15, Timeline 10."
-    width: 1360
-    height: 650
+    width: 2332
+    height: 1146
     caption: "Your finish line: a real chart checked against the RFP, not scores inferred from a proposal. This is a cropped result from the classic lab run."
-  scenario: "You are a proposal maker for fictional **Aventra Software Group**. Equip an agent with the company's approved answer library, inspect why its Skill loads, and verify what it produces before anyone shares it with a customer."
+  scenario: |-
+    You are a proposal maker for fictional **Aventra Software Group**. Equip an agent with the company's approved answer library, inspect why its Skill loads, and verify what it produces before anyone shares it with a customer.
+  self_setup: |-
+    Complete the [classic lab prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-skills-authoring/#prerequisites) before starting, including harness access, permissions, credits, Work IQ, and sandbox capabilities.
   prerequisites:
-    - "Attending a CAT bootcamp or another **proctor-led event with a pre-provisioned user account**? Skip tenant setup. Sign in with the provided lab account; your environment, licences, connections and sample data are already prepared. Ask your facilitator if something is missing."
+    - "Sign in with the provided lab account; ask your proctor if an environment or connection is missing."
     - "Keep this lab beside [Copilot Studio](https://copilotstudio.microsoft.com/). Use your assigned training account, not a personal or production account."
     - "Use only the fictional sample materials. Download each file at the step that uses it; no prior Skill-authoring experience is needed."
   pacing: "Plan 30 minutes for Configure (6) → Inspect (6) → Test (10) → Verify (8). Author (25), Explore (8), and Generate (10) are optional extensions after the core. These are working budgets, not execution guarantees; model, connection, and file-generation waits vary."
@@ -105,10 +108,11 @@ mission_lab:
           screenshot:
             title: the read-only Skill description
             src: /labs/instructions-skills-authoring/images/skill-description.webp
+            src_dark: /labs/instructions-skills-authoring/images/skill-description-dark.webp
             alt: "Read-only SKILL.md fields showing the rfp-response name, request-matching description, and RFP procedure."
-            width: 590
-            height: 715
-            caption: "Approved classic content crop, shown in its captured light theme. The description is the matching surface; uploaded fields are read-only."
+            width: 1156
+            height: 1332
+            caption: "The description is the matching surface; uploaded fields are read-only."
         - title: "Read the references and locate replacement"
           instruction: "Select **references/answer-library.md** in the tree. Review the topic-key table for security, privacy, accessibility, hosting, SSO, SLAs, and pricing. Inspect how `references/`, `assets/`, and `scripts/` support `SKILL.md`. Open **...** (**More options**) to locate **Download** and **Replace**, then close the viewer with **X**."
           notice: "Uploaded Skills are **Read-only**: edit the downloaded package and use **Replace** to upload changes. A Skill made with **Create from blank** can be edited in place. You do not need to replace this sample."
@@ -150,10 +154,11 @@ mission_lab:
           screenshot:
             title: the matched Skill and input
             src: /labs/instructions-skills-authoring/images/skill-load-trace.webp
+            src_dark: /labs/instructions-skills-authoring/images/skill-load-trace-dark.webp
             alt: "Expanded rfp-response Skill trace showing the matched description and input skill: rfp-response."
-            width: 780
-            height: 407
-            caption: "Approved classic light capture. The trace shows the playbook being selected without the prompt naming it; current completed traces say Used skill."
+            width: 1544
+            height: 694
+            caption: "The trace shows the playbook being selected without the prompt naming it; completed traces say Used skill."
           notice: "If the Skill does not load, inspect its activation description first. The intended procedure identifies the offering and reads the answer library, past performance, and pricing before drafting."
         - title: "Review and download the real artifacts"
           instruction: "Let the run finish; the reference draft-plus-PDF run took about four minutes for a nine-page proposal. Review the matched offering, fee, duration, buyer-scoring structure, and numbered requests for your input. Select the Markdown and PDF file chips to download and open both proposals; filenames vary."
@@ -204,8 +209,8 @@ mission_lab:
             title: the verified evaluation weights
             src: /labs/instructions-skills-authoring/images/evaluation-weights.webp
             alt: "Five horizontal bars in RFP source order with weights 30, 25, 20, 15, and 10 and an Evaluation weight (points) axis."
-            width: 1360
-            height: 650
+            width: 2332
+            height: 1146
             caption: "Real classic-run result cropped to the chart, not a generated illustration. Your chart styling may differ; verify its data."
       reveal:
         title: "What did you actually verify?"
@@ -460,11 +465,18 @@ Build an RFP Response agent, inspect its reusable Skill, verify a proposal and c
 | --- | --- | --- | --- |
 | 300 | Maker | 30 minutes | A Skill-equipped RFP agent, reviewed proposal files, and a source-checked evaluation-weight chart |
 
-**Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip tenant setup.** Sign in with your provided lab account; your environment, licences, connections and sample data are already prepared. Ask your facilitator if anything is missing. Keep this lab beside [Copilot Studio](https://copilotstudio.microsoft.com/), use the assigned training identity rather than a personal or production account, and use only fictional materials. Download each file when its step needs it; no prior Skill-authoring experience is needed.
-
-**Running in your own tenant?** Complete the [classic lab prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-skills-authoring/#prerequisites) separately, including harness access, permissions, credits, Work IQ, and sandbox capabilities. These are not attendee setup tasks.
-
 You are a proposal maker for fictional **Aventra Software Group**. Your job is to give an agent approved material and verify its outputs before sharing them with a customer.
+
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
+
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+Complete the [classic lab prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-skills-authoring/#prerequisites) separately, including harness access, permissions, credits, Work IQ, and sandbox capabilities. These are not attendee setup tasks.
+
+</details>
+
+Sign in with your provided lab account. Keep this lab beside [Copilot Studio](https://copilotstudio.microsoft.com/), use the assigned training identity rather than a personal or production account, and use only fictional materials. Download each file when its step needs it; no prior Skill-authoring experience is needed.
 
 Plan **30 minutes: Configure (6) → Inspect (6) → Test (10) → Verify (8)**. **Author (25), Explore (8), and Generate (10)** are optional extensions after the core. These are working budgets, not execution guarantees; model, connection, and file-generation waits vary.
 
@@ -545,9 +557,9 @@ Uploading saves the agent: its URL changes from `/agents/new` to a permanent ID,
 
 3. Select the **rfp-response** chip. Inspect the package tree (16 files in the reference package), selected-file size, and `SKILL.md`. Read **Name**, **Description**, and **Instructions**. Notice phrases such as “respond to this RFP,” “draft our bid,” and “answer these vendor questions.”
 
-![Read-only SKILL.md fields showing the rfp-response name, request-matching description, and RFP procedure.](images/skill-description.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/skill-description-dark.webp"><img src="images/skill-description.webp" alt="Read-only SKILL.md fields showing the rfp-response name, request-matching description, and RFP procedure."></picture>
 
-*Approved classic content crop, shown in its captured light theme. The description is the matching surface; uploaded fields are read-only.*
+*The description is the matching surface; uploaded fields are read-only.*
 
 4. Select **references/answer-library.md**. Review its topic-key table for security, privacy, accessibility, hosting, SSO, SLAs, and pricing. Inspect how `references/`, `assets/`, and `scripts/` support `SKILL.md`.
 5. Open **...** (**More options**) to locate **Download** and **Replace**, then close the viewer with **X**. Uploaded Skills are **Read-only**: edit the downloaded package and replace it to change it. A Skill authored with **Create from blank** is editable in place. You do not need to replace this sample.
@@ -578,9 +590,9 @@ The sample's fixed submission date has passed; a deadline warning is careful beh
 
 4. Watch **Using skill: rfp-response** become **Used skill: rfp-response**. Expand it to inspect the matched description and **Input** (`skill: rfp-response`). Follow the reasoning about offering, price, and gaps. You did not name the Skill in the request.
 
-![Expanded rfp-response Skill trace showing the matched description and input skill: rfp-response.](images/skill-load-trace.webp)
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/skill-load-trace-dark.webp"><img src="images/skill-load-trace.webp" alt="Expanded rfp-response Skill trace showing the matched description and input skill: rfp-response."></picture>
 
-*Approved classic light capture. Current completed traces say Used skill. The intended procedure identifies the offering, then reads the answer library, past performance, and pricing before drafting.*
+*Completed traces say Used skill. The intended procedure identifies the offering, then reads the answer library, past performance, and pricing before drafting.*
 
 5. Let the run finish. The reference draft-plus-PDF run took about four minutes for a nine-page proposal. Read the summary: matched offering, fee, duration, buyer-scoring structure, and numbered requests for your input.
 6. Select the Markdown and PDF file chips to download and open both proposals. Names such as `westbrook-WB-2026-031-proposal.md` and `westbrook-WB-2026-031-proposal.pdf` vary by run.
@@ -820,7 +832,12 @@ Download the JSON and Markdown exports. You may provide the report to an authori
 
 1. In a separate test agent on the Microsoft Copilot harness, open **Build → Skills → + → Add skill** and select **Generate with AI**, if offered (it may say **Generate with AI (preview)**). If only **Upload a skill** and **Create from blank** appear, skip this extension or use the Author mission.
 
+<details class="lab-validation" markdown="1">
+<summary>What was tested</summary>
+
 **Validation boundary:** This option was absent during the earlier Skill-authoring run and later seen in Add skill during an Agent Integration run. Generation itself was **not executed or validated** in that later observation. Availability varies by environment.
+
+</details>
 
 2. Use the project-intake authoring prompt from the Author mission as your starting point, then paste the text from `project-intake-process-v2.docx` into the same description box. If needed, download the [Skill-generation materials](assets/skill-generation/skill-generation-materials-v3.zip) and extract outside OneDrive for Business. Remove instructions about attachments and downloadable ZIP packaging for this UI.
 3. Select **Build** and answer Copilot's questions. When ready, select **View** to review the Skill, then **Add to agent**.
@@ -858,4 +875,4 @@ The documented preview description box does **not** accept file attachments. Thi
 - [CAT: Agents Have Skills Now](https://microsoft.github.io/mcscatblog/posts/modern-mcs-agent-skills/)
 - [CAT: Turn Your Daily Digest Into a Podcast](https://microsoft.github.io/mcscatblog/posts/podcast-script-skill/)
 
-Product UI, models, and capabilities vary by environment; generated results differ. The three illustrations are lossless WebP conversions of reviewed classic-lab screenshots: `uc1-chart-weights.png` (content-only hero/result crop), `uc1-skill-contents.png` (description-only crop), and `uc1-skill-load-trace.png` (trace capture). They contain no account identity or navigation sidebar. Only genuine light captures were available for these states; no dark variants are fabricated.
+Product UI, models, and capabilities vary by environment; generated results differ. The three illustrations are live product captures from the reference RFP Response agent: the evaluation-weight chart (hero and result), the `SKILL.md` fields, and the expanded Skill trace. They contain no account identity or navigation sidebar. The Skill fields and trace have light and dark captures; the chart is a generated image that looks the same in both themes.

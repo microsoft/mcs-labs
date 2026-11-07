@@ -97,15 +97,17 @@ These optional resources explain Copilot Code, where published apps run, and the
 
 ## ✅ Prerequisites
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#-use-case-build-and-refine-your-tracker) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running this lab in your own tenant?** Set this up first:
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
 - A work account with a Microsoft Copilot licence and the **Code** view available in [Microsoft Copilot](https://copilot.cloud.microsoft).
 - Enrolment in the [Frontier program](https://adoption.microsoft.com/copilot/frontier-program/): Copilot Code, and building and publishing apps to Copilot Managed Runtime, are Frontier preview features.
 - Copilot Code must be able to fetch the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) while generating the app.
 - A browser that can open the app's link (`play.managedapps.cloud.microsoft`).
+
+</details>
 
 No coding experience is needed. Copilot Code is in preview, so labels and screens may differ slightly from the screenshots.
 
@@ -162,7 +164,7 @@ Create and publish a multi-day tracker, refine its design and day navigation, an
 #### Get Ready
 
 1. Go to [Microsoft Copilot](https://copilot.cloud.microsoft) and sign in with your lab account.
-1. In the **Home | Code** switcher at the top of the left pane, select **Code**.
+1. In the **Home &#124; Code** switcher at the top of the left pane, select **Code**.
 1. Select **New session**. The page shows **Let's build something together.** and a **Create anything** box.
 
 ![Copilot Code view with Code selected in the left pane, New session, and the Create anything box](images/code-new-session.png)

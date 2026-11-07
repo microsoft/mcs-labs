@@ -1,4 +1,4 @@
-# 🧭 Apps on Microsoft Copilot Managed Runtime: prove saved progress
+# Apps on Microsoft Copilot Managed Runtime
 
 Build **My Bootcamp Lab App** from the live published agenda, prepare your own OneDrive CSV, then verify the app's read/save/reload behavior. This is a new app, not an HTML import or Copilot Code migration. Completing the earlier lab is not required. Keep everything in preview.
 
@@ -27,9 +27,16 @@ Build **My Bootcamp Lab App** from the live published agenda, prepare your own O
 
 ## 🧭 Prerequisites
 
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your account and environment access are prepared. Start at [Build](#-build); ask your facilitator if access is missing. You still download/upload the reference and create or verify your own connection and CSV in the missions. Those lab-specific artifacts are not assumed to be pre-created.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running in your own tenant?** Arrange Copilot Studio Apps access, image upload, preview and permission to read the public agenda. You need your own OneDrive for Business with file read/create/update permission and permission to use or create its connection in the environment. No prepared CSV, SharePoint list, database or VS Code setup is needed.
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+Arrange Copilot Studio Apps access, image upload, preview and permission to read the public agenda. You need your own OneDrive for Business with file read/create/update permission and permission to use or create its connection in the environment. No prepared CSV, SharePoint list, database or VS Code setup is needed.
+
+</details>
+
+You still download/upload the reference and create or verify your own connection and CSV in the missions. Those lab-specific artifacts are not assumed to be pre-created.
 
 **Attendee readiness:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account in a separate browser profile/private window and select the assigned environment. Keep the [live agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) beside the app. Use only your own connection/file; stop if identity is uncertain. Ask about credit availability and safe failure-test conditions. Do not publish, deploy or share.
 

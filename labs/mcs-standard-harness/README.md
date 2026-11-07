@@ -77,15 +77,17 @@ In the 30-minute core lab, you will configure a single agent and add topics, kno
 
 ## ✅ Prerequisites
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#-use-case-1-create-and-configure-your-first-agent) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running this lab in your own tenant?** Set this up first:
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
 - Access to Microsoft Copilot Studio with permission to create agents
 - A Copilot Studio environment you can build in
 - Permission to create a connection to the MSN Weather connector (Use Case #4)
 - For the channels extra credit: permission to publish agents and to add apps in Microsoft Teams and Microsoft Copilot
+
+</details>
 
 No prior Copilot Studio experience is required.
 
@@ -174,9 +176,9 @@ Create a fully configured Copilot Studio agent with clear instructions, a knowle
 
 1. Wait for the **Your agent has been provisioned.** notification. It can take a minute or two. Your agent opens on its **Overview** page.
 
-1. In the **Select your agent's model** section, open the model dropdown. New agents start on **GPT Chat Latest**. Under **Anthropic**, select **Claude Sonnet 4.6**.
+1. In the **Select your agent's model** section, open the model dropdown. New agents start on **GPT Chat Latest**. Under **Anthropic models**, select **Claude Sonnet 4.6**.
 
-   ![The model dropdown with Claude Sonnet 4.6 under Anthropic](images/uc1-select-model.png)
+   ![The model dropdown with Claude Sonnet 4.6 under Anthropic models](images/uc1-select-model.png)
 
 1. In the **Instructions** section, select **Edit**, paste the following, and select **Save**:
 
@@ -677,7 +679,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
    ```
 1. If the agent asks what the prompt is meant to do, answer **Summarize the text**. Usually it calls the tool straight away.
 
-1. Review the agent's analysis. It should provide structured feedback on the prompt using the CARE framework, an improved prompt example, and an overall rating. The activity map shows **Prompt Analyzer** running with your prompt as its **PromptToAnalyze** input.
+1. Review the agent's analysis. It should provide structured feedback on the prompt using the CARE framework, an improved prompt example, and an overall rating headed **Overall Rating** or **Overall Evaluation**. The activity map shows **Prompt Analyzer** running with your prompt as its **PromptToAnalyze** input.
 
    ![The activity map showing the Prompt Analyzer tool and the agent's analysis](images/uc4-prompt-analyzer-test.png)
 
@@ -827,7 +829,7 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 1. On the **Test** tab of the **Variables** pane, review the current value of each variable. Notice how variables populate in real time as you progress through the conversation.
 
-    ![The Variables pane Test tab showing variable values during a test conversation](images/ec-variables-test-tab.png)
+    ![The Variables pane Test tab showing variable values during a test conversation, with training-account values redacted](images/ec-variables-test-tab.png)
 
 1. Optionally, select **Variables** in the test pane's toolbar for a quick list of the **Topic** and **System** variables in the conversation. The test pane's **…** (More commands) menu also has **Show activity map when testing**, which controls whether the activity map opens while you test.
 

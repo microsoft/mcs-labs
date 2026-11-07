@@ -91,16 +91,18 @@ These resources cover agents and Skills powered by the **Microsoft Copilot harne
 
 ## ✅ Prerequisites
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#-use-case-1-leveraging-skills-in-copilot-studio-agents) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running this lab in your own tenant?** Set this up first:
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
 - Access to Microsoft Copilot Studio with agents powered by the **Microsoft Copilot** harness (previously named the GitHub Copilot harness), and permission to create agents and add Skills in your environment
 - Copilot Credits available in the environment. Agents on the Microsoft Copilot harness use usage-based billing; the core lab's RFP conversation used about 115 credits in our test
 - Sandbox code execution with a charting library available, for the chart step in Use Case #1
 - An account that can connect to the **Work IQ** tool
 - **Optional Skill-creation extra credit only:** a reasoning-capable model, such as **Claude Opus 5.5** if it is offered in your environment, plus file attachments and sandbox ZIP-file generation and download in the agent's **Preview** chat. Model names and availability vary by environment
+
+</details>
 
 You download the sample Skill package, the test RFP and the extra-credit materials in the steps where you use them. No prior Skill-authoring experience is needed.
 
@@ -326,7 +328,7 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
     > Note what it flags instead of inventing: no named past experience with the City's systems (such as Esri ArcGIS, Tyler, or Okta) that its past-performance file does not show, and a hosting and support price marked **NEEDS SME INPUT** rather than a made-up figure. That restraint comes from the skill's guardrails and answer library - the vetted position the company can actually commit to.
 
 1. Both artifacts are attached to the message as file chips: a Markdown proposal and a PDF
-    proposal (for example `westbrook-WB-2026-031-proposal.md` and `westbrook-WB-2026-031-proposal.pdf`;
+    proposal (for example `Aventra_Proposal_WB-2026-031.md` and `Aventra_Proposal_WB-2026-031.pdf`;
     the file names vary). Select a chip to download it.
 
     ![The generated proposal Markdown and PDF attached to the agent's response](images/uc1-output-files.png)

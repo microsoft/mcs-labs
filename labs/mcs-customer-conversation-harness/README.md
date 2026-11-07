@@ -96,14 +96,16 @@ In this lab you build the **Zava Coffee Subscription Assistant** and its **Subsc
 
 ## ✅ Prerequisites
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#-use-case-1-create-the-primary-agent) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running this lab in your own tenant?** Set this up first:
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
 - Access to [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/) in an environment with the **Customer conversation agent** creation option.
 - Permission to create agents in that environment.
 - Copilot Studio access and billing capacity for this preview. Building, testing and evaluating agents can consume Copilot Credits; see [Customer Conversation harness usage and billing](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/overview-customer-conversation).
+
+</details>
 
 > [!NOTE]
 > This lab uses simulated data and does not require a live subscription backend or a contact-center deployment.

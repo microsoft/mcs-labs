@@ -1,4 +1,4 @@
-# 🤝 Agent integration: build an operations team
+# Agent integration
 
 **One customer request. Independently owned expertise.** Create a coordinator and a Skill-backed stock specialist, then connect a facilitator-prepared dispatch advisor. Your finish line is an evidenced recommendation, never a booking.
 
@@ -22,7 +22,12 @@ Riverside Construction needs 60 bags of repair mortar before its crew starts at 
 
 All facts are fictional. There is no ERP, live inventory, carrier booking tool or transaction.
 
+<details class="lab-validation" markdown="1">
+<summary>What was tested</summary>
+
 **Verified boundary:** the coordinator-only and internal-specialist tests passed live on 6 November 2026 with a private coordinator and a published specialist, without triggers. Studio didn't retrieve the public LiftLine card (likely a CORS policy on the service), so Mission 3 has you enter the A2A name and description manually. The A2A connection and full-team test were not run live; a recording is not hands-on completion.
+
+</details>
 
 **Pacing:** Coordinate (6) → Ground (10) → Connect (7) → Prove (7) = **30 minutes**. Challenge is optional, about 10 more minutes. These are working budgets, not measured completion times; provisioning and model waits vary. Read a check while waiting rather than resending. If LiftLine doesn't answer, retain the verified partial result and do not mark the full team complete.
 
@@ -39,11 +44,16 @@ All facts are fictional. There is no ERP, live inventory, carrier booking tool o
 
 ## 🔑 Prerequisites
 
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? Skip this section.** Your account, environment, licences, connections and sample data are prepared. Go straight to [Mission 1: Coordinate](#-coordinate); ask your facilitator if something is missing.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running in your own tenant?** Arrange access to create two **Microsoft Copilot harness** agents in the same environment, upload Skills, publish and connect a specialist. Confirm **Build → Skills**, **Connected agents** and **Add A2A agent** are available. The **Standard harness** is a separate experience, not a renamed substitute. Building and testing can consume Copilot Credits.
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+Arrange access to create two **Microsoft Copilot harness** agents in the same environment, upload Skills, publish and connect a specialist. Confirm **Build → Skills**, **Connected agents** and **Add A2A agent** are available. The **Standard harness** is a separate experience, not a renamed substitute. Building and testing can consume Copilot Credits.
 
 Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner mission.
+
+</details>
 
 **Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. Keep the lab beside Studio. You download the Skill ZIP in Mission 2 and confirm the card URL in Mission 3.
 

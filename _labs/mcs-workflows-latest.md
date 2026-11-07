@@ -105,15 +105,17 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 
 ## Prerequisites
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp or another proctor-led event with a pre-provisioned user account? You can skip the prerequisite setup: it is already prepared for you.** Your lab account, environment, licences, connections and sample data are ready. Go straight to [Use Case #1](#use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) and sign in with your lab account when prompted. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-**Running this lab in your own tenant?** Set this up first:
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
 - Use a development or training environment, not production, with access to Copilot Studio **Workflows**, available Copilot Credits, and a work account with **Outlook**, **Microsoft To Do**, and access to **Microsoft Copilot** for Use Case #3. Use that same account for every connection.
 - Import [LAB: Order Management Workflows](../mcs-workflows/assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip) for the **Order Management Workflow** and **Price Quote Agent**, used in Use Cases #2–#3 and the extra-credit exercises. Sign in to the connections requested during import.
 - For the inventory extra credit only, import [Enhanced Task Completion](../mcs-workflows/assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip) for **Warehouse MCP**, and ensure Dataverse MCP can create **Task** rows.
 - For the price-quote extra credit only, provide the SharePoint pricing guide and Dataverse account records for Adventure Works and Fabrikam. The packages above do not include these.
+
+</details>
 
 Workflows and standard-harness agent flows have different authoring experiences. The [workflow documentation](https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview) describes the experience used here; some Learn pages still use the earlier harness name.
 
