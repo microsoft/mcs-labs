@@ -1,6 +1,6 @@
 ---
 title: "Architecture Bootcamp - Latest"
-description: "Three-day architecture bootcamp with 17 modules and 11 labs covering the Copilot, Standard, and Customer Conversation harnesses, Cowork, managed apps, instructions, skills, knowledge, tools and hooks, workflows, and agent integration. Close with ALM, analytics, coding agents, AI FinOps, agent identity, and the Copilot Agent Kit."
+description: "Three-day architecture bootcamp with 17 modules and 11 labs covering the Copilot, Standard, and Customer Conversation harnesses, Cowork, apps on Microsoft Copilot Managed Runtime, instructions, skills, knowledge, tools and hooks, workflows, and agent integration. Close with ALM, analytics, coding agents, AI FinOps, agent identity, and the Copilot Agent Kit."
 event_id: bootcamp-latest
 order: 2
 labs:

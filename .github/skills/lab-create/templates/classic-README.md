@@ -72,8 +72,10 @@
 
 ## ✅ Prerequisites
 
-> [!NOTE]
-> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+> [!IMPORTANT]
+> **Taking part in a proctor-led event with a pre-provisioned user account? Skip this section.** Your lab account, environment, licences, connections and sample data are already set up. Go straight to [Use Case #1](#-use-case-1-%%USE_CASE_1_ANCHOR%%) and sign in with your lab account when prompted. If something looks missing, ask your facilitator.
+
+**Running this lab in your own tenant?** Set this up first:
 
 - %%PREREQUISITE_1%%
 

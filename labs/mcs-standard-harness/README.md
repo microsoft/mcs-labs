@@ -10,7 +10,7 @@ Build an agent in the Standard harness from its component parts — topics, know
 | ----- | ------- | -------- | ------- |
 | 200 | Maker | 30 minutes | After completing this lab, participants will be able to create and configure an agent in the Standard harness, author custom topics, ground it with knowledge sources, and extend it with tools. Optional extra credit explores variables, child agents, and channels. |
 
-> **Bootcamp Latest pacing:** Complete Use Cases #1–#4 in 30 minutes: agent configuration (6 minutes), topics (8 minutes), knowledge (8 minutes), and tools (8 minutes). Variables, child agents, and channels are optional extra credit outside this allocation.
+> **Bootcamp Latest pacing:** Complete Use Cases #1–#4 in 30 minutes: agent configuration (6 minutes), topics (6 minutes), knowledge (8 minutes), and tools (10 minutes). Agent provisioning and file indexing each take a minute or more, so start the file upload in Use Case #3 as soon as you reach it and keep working while it indexes. If you're short on time, add the MSN Weather tool in Use Case #4 and come back to the Prompt Analyzer prompt later. Variables, child agents, and channels are optional extra credit outside this allocation.
 
 ---
 
@@ -38,7 +38,7 @@ Build an agent in the Standard harness from its component parts — topics, know
 
 **The Standard harness is composed, not described.**
 
-In the Copilot harness you describe an outcome and the platform infers the rest. In the Standard harness you assemble the agent from named parts — topics, knowledge, tools, variables — and you decide how each behaves. That is more work, and it is what buys you control over the process.
+In the Microsoft Copilot harness (previously named the GitHub Copilot harness) you describe an outcome and the platform infers the rest. In the Standard harness you assemble the agent from named parts — topics, knowledge, tools, variables — and you decide how each behaves. That is more work, and it is what buys you control over the process.
 
 This lab builds one agent step by step, adding a component at each stage, so the shape of the model is visible rather than asserted. Every later harness in this bootcamp is a variation on these same pieces.
 
@@ -69,7 +69,7 @@ In the 30-minute core lab, you will configure a single agent and add topics, kno
 ## 📄 Documentation and Additional Training Links
 
 * [Microsoft Copilot Studio documentation](https://learn.microsoft.com/microsoft-copilot-studio/)
-* [Choose your harness before you build](https://learn.microsoft.com/microsoft-copilot-studio/harnesses-overview)
+* [Harnesses in Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/harnesses-overview)
 * [Create and edit topics](https://learn.microsoft.com/microsoft-copilot-studio/authoring-create-edit-topics)
 * [Knowledge sources overview](https://learn.microsoft.com/microsoft-copilot-studio/knowledge-copilot-studio)
 
@@ -77,12 +77,19 @@ In the 30-minute core lab, you will configure a single agent and add topics, kno
 
 ## ✅ Prerequisites
 
-> [!NOTE]
-> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
+
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
 - Access to Microsoft Copilot Studio with permission to create agents
 - A Copilot Studio environment you can build in
-- No prior Copilot Studio experience required
+- Permission to create a connection to the MSN Weather connector (Use Case #4)
+- For the channels extra credit: permission to publish agents and to add apps in Microsoft Teams and Microsoft Copilot
+
+</details>
+
+No prior Copilot Studio experience is required.
 
 ---
 
@@ -103,12 +110,12 @@ In this lab you'll assemble the Standard harness component model one piece at a 
 | Step | Use Case | Value added | Effort |
 | ---- | -------- | ----------- | ------ |
 | 1 | [Create and Configure Your First Agent](#-use-case-1-create-and-configure-your-first-agent) | Establish the agent and its instructions before any component is added | 6 min |
-| 2 | [Build Custom Topics for Structured Conversations](#-use-case-2-build-custom-topics-for-structured-conversations) | Author deterministic conversation paths for scenarios that must not vary | 8 min |
+| 2 | [Build Custom Topics for Structured Conversations](#-use-case-2-build-custom-topics-for-structured-conversations) | Author deterministic conversation paths for scenarios that must not vary | 6 min |
 | 3 | [Enhance Agent Intelligence with Knowledge Sources](#-use-case-3-enhance-agent-intelligence-with-knowledge-sources) | Ground responses in your own content so answers are sourced and citable | 8 min |
-| 4 | [Extend Your Agent with Tools](#-use-case-4-extend-your-agent-with-tools) | Give the agent the ability to act on external systems | 8 min |
-| EC | [Extra Credit: Work with Variables](#-extra-credit-work-with-variables) | Explore how variables carry state across turns and between components (Optional) | ~5 min |
-| EC | [Extra Credit: Create and Orchestrate Child Agents](#-extra-credit-create-and-orchestrate-child-agents) | Delegate scoped work to specialists rather than growing one agent indefinitely (Optional) | ~13 min |
-| EC | [Extra Credit: Deploy Your Agent Across Channels](#-extra-credit-deploy-your-agent-across-channels) | Make the agent reachable on the surfaces your users already use (Optional) | ~12 min |
+| 4 | [Extend Your Agent with Tools](#-use-case-4-extend-your-agent-with-tools) | Give the agent the ability to act on external systems | 10 min |
+| EC | [Extra Credit: Work with Variables](#-extra-credit-work-with-variables) | Explore how variables carry state across turns and between components (Optional) | ~8 min |
+| EC | [Extra Credit: Create and Orchestrate Child Agents](#-extra-credit-create-and-orchestrate-child-agents) | Delegate scoped work to specialists rather than growing one agent indefinitely (Optional) | ~10 min |
+| EC | [Extra Credit: Deploy Your Agent Across Channels](#-extra-credit-deploy-your-agent-across-channels) | Make the agent reachable on the surfaces your users already use (Optional) | ~10 min |
 
 > **Note on pacing:** the later *Deep Dive: Knowledge, Tools & Hooks* module and lab cover tools in more depth. Use Case #4 here is deliberately the component-level view — enough to place tools in the model, not the deep dive.
 
@@ -120,7 +127,7 @@ In this lab you'll assemble the Standard harness component model one piece at a 
 
 ## 🧱 Use Case #1: Create and Configure Your First Agent
 
-Build your first Copilot Studio agent with custom instructions, suggested prompts, and AI model configuration.
+Build your first Copilot Studio agent with custom instructions, a knowledge source, and AI model configuration.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
@@ -128,13 +135,13 @@ Build your first Copilot Studio agent with custom instructions, suggested prompt
 
 **Summary of tasks**
 
-In this section, you'll learn how to create a new agent, configure its instructions and behavior, add suggested prompts, and select the appropriate AI model.
+In this section, you'll learn how to create a new agent, configure its instructions and behavior, select the appropriate AI model, and add a knowledge source.
 
 **Scenario:** You're building a "Copilot Studio Assistant" to help internal teams learn about Copilot Studio features, write effective prompts, and navigate the platform. This agent will serve as a learning companion grounded in official Microsoft documentation.
 
 ### Objective
 
-Create a fully configured Copilot Studio agent with clear instructions, suggested prompts, and Claude Sonnet 4.6 model selection.
+Create a fully configured Copilot Studio agent with clear instructions, a knowledge source, and the Claude Sonnet 4.6 model.
 
 ---
 
@@ -144,12 +151,17 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 
 1. Navigate to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and sign in with your credentials.
 
+   > [!NOTE]
+   > On a first sign-in you may see one-time screens. If a **Welcome from your admin** dialog appears, accept the terms and select **Close**. If a **Find your environments here** tip appears, select **Got it**.
+
 1. In the left navigation, select **Agents**.
 
-1. Select the **More create options** chevron next to the **New agent** button, then choose **Agent (Standard)** — the rule-based conversational agent.
+1. Select the **More create options** chevron next to the **New agent** button. Under **Other ways to build**, choose **Agent** with the **Standard** label (*Create an agent with predefined rules and flows*). If a **New name, same harness** tip appears, read it and dismiss it.
+
+   ![The New agent menu with Agent (Standard) under Other ways to build](images/uc1-new-agent-options.png)
 
    > [!NOTE]
-   > **Agent (Standard)** opens the classic authoring canvas in a new tab. On a first sign-in you may see a one-time **Welcome to Microsoft Copilot Studio** consent dialog; select **Get Started** to dismiss it. This consent dialog can appear **stacked behind** the **Name your agent** dialog — if you don't see it, move or dismiss the name dialog first so you can select **Get Started**.
+   > The top option, **Agent**, creates an agent in the Microsoft Copilot harness, previously named the GitHub Copilot harness. Depending on how far the rename has rolled out in your tenant, its label reads **Microsoft Copilot** or, as in this screenshot, **GitHub Copilot**. This lab uses the **Standard** one.
 
 1. In the **Name your agent** dialog, enter the following name and select **Create**:
 
@@ -157,11 +169,18 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
    Copilot Studio Assistant
    ```
 
-1. Wait for the "Your agent has been provisioned." notification. Your agent opens on its **Overview** page.
+   ![The Name your agent dialog](images/uc1-name-your-agent.png)
 
-1. Confirm the agent's model is set to **Claude Sonnet 4.6** (the default for new classic agents).
+   > [!TIP]
+   > If an agent with this name already exists in your environment, add your initials to the end of the name.
 
-1. In the **Instructions** section, select **Edit**, paste the following, and save:
+1. Wait for the **Your agent has been provisioned.** notification. It can take a minute or two. Your agent opens on its **Overview** page.
+
+1. In the **Select your agent's model** section, open the model dropdown. New agents start on **GPT Chat Latest**. Under **Anthropic models**, select **Claude Sonnet 4.6**.
+
+   ![The model dropdown with Claude Sonnet 4.6 under Anthropic models](images/uc1-select-model.png)
+
+1. In the **Instructions** section, select **Edit**, paste the following, and select **Save**:
 
    ```
    You are the Copilot Studio Assistant. Your purpose is to help internal teams learn how to use Microsoft Copilot Studio and write effective prompts.
@@ -175,33 +194,35 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
    ```
 
    > [!NOTE]
-   > A new classic agent starts blank — earlier versions of this lab relied on a describe-driven flow that auto-generated these Instructions, so you now add them here.
+   > A new Standard agent starts with blank instructions, so you add them here.
 
    > [!TIP]
    > Clear, specific instructions help your agent understand its role and provide consistent responses. Think of instructions as the agent's job description.
 
-1. Scroll down to the **Knowledge** section and select **Add Knowledge**.
+1. Scroll down to the **Knowledge** section and select **Add knowledge**.
 
-1. Select Public website from the list of knowledge source options.
+1. In the **Add knowledge** dialog, select **Public websites**.
 
-1. Input the following URL and select **Add**
+   ![The Add knowledge dialog with the Public websites tile](images/uc1-add-knowledge.png)
+
+1. In **Public website link**, enter the following URL and select **Add**:
 
    ```
    https://learn.microsoft.com
    ```
 
-1. The website should appear in the list of links, select **Add to agent** to save the change.
+1. The website appears in the list of links. Select **Add to agent** to save the change.
 
 
 #### Test Your Agent
 
-1. In the test panel on the right side of the screen, enter the following question and select **Send**:
+1. In the **Test your agent** pane on the right side of the screen, enter the following question and select **Send**:
 
    ```
    How do I begin using Copilot Studio?
    ```
 
-1. Review the agent's response. Notice how it references the Microsoft Learn knowledge source you provided.
+1. Review the agent's response. Notice the references to Microsoft Learn pages, the knowledge source you provided. The activity map that opens next to the test pane lists the **Referenced sources**.
 
 1. Observe the response quality and how the agent leverages its instructions to provide helpful, contextual guidance.
 
@@ -216,14 +237,13 @@ Create a fully configured Copilot Studio agent with clear instructions, suggeste
 **Key takeaways:**
 
 * **Agent Instructions Define Behavior** – Clear, specific instructions act as your agent's job description and guide every interaction
-* **AI Model Selection Impacts Quality** – Claude Sonnet 4.6 offers superior reasoning and accuracy for production scenarios
+* **AI Model Selection Impacts Quality** – New agents start on GPT Chat Latest; choose the model that gives the reasoning and accuracy your scenario needs, as you did with Claude Sonnet 4.6
 * **Knowledge Sources Ground Responses** – Connecting external content (like Microsoft Learn) helps agents provide factual, verifiable answers
 
 **Lessons learned & troubleshooting tips:**
 
 * If your agent gives generic responses, review and refine your instructions to be more specific about its role and expertise
 * Knowledge source indexing can take 2-5 minutes - wait before testing knowledge-specific questions
-* Suggested prompts improve user adoption - customize them to match your most common use cases
 
 **Challenge: Apply this to your own use case**
 
@@ -239,7 +259,7 @@ Create structured conversation flows with triggers, nodes, and logic to handle s
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Build Custom Topics for Structured Conversations | Create structured conversation flows that handle specific user intents and workflows | 8 minutes |
+| Build Custom Topics for Structured Conversations | Create structured conversation flows that handle specific user intents and workflows | 6 minutes |
 
 **Summary of tasks**
 
@@ -257,26 +277,26 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
 
 #### Create a Topic with Description
 
-1. In your Copilot Studio agent, click **Topics** in the top navigation bar.
+1. In your Copilot Studio agent, select **Topics** in the top navigation bar.
 
-1. Select **+ Add a topic**.
+1. Select **+ Add a topic**, then select **Add from description with Copilot**.
 
-1. Select **Add from description with Copilot**.
+1. In **Name your topic**, enter **Join Copilot Studio Mailing List**.
 
-1. Input **Join Copilot Studio Mailing List** for the name of your topic.
-
-1. Input the following description in the **Create a topic to...**:
+1. Enter the following description in **Create a topic to...**:
 
    ```
    Join Copilot Studio Mailing List. Let the user provide their email address, first and last name to be added to the email mailing list for copilot studio announcements.
    ```
 
-1. Select **Create** to let Copilot Studio build the topic structure.
+   ![The Add from description with Copilot dialog](images/uc2-topic-from-description.png)
+
+1. Select **Create** to let Copilot Studio build the topic structure. It takes about 20 seconds, and an **Edit with Copilot** pane opens next to the canvas. You can close it.
 
 1. Review the generated topic. Notice how Copilot Studio creates:
-   - A trigger phrase
-   - Question nodes to collect email, first name, and last name
-   - Message nodes to confirm actions
+   - A trigger set to **The agent chooses**, with a description of when to use the topic
+   - Question nodes to collect email, first name, and last name, each saving the answer to a variable
+   - Message nodes to welcome and thank the user
 
    > [!TIP]
    > Creating topics from descriptions is the fastest way to build conversation flows. Copilot Studio uses AI to generate the structure based on your natural language description.
@@ -285,59 +305,63 @@ Create a custom topic that handles a specific user intent (mailing list signup) 
 
 
 1. Review the topic canvas and identify the different node types:
-   - **Trigger node**: Defines what phrases activate this topic
+   - **Trigger node**: Defines when this topic runs. With **The agent chooses**, the agent picks the topic by matching the user's message to the topic description
    - **Message nodes**: Display text to the user
    - **Question nodes**: Collect input from users
    - **Condition nodes**: Create branching logic
-   - **Action nodes**: Call flows, tools, or connectors
+   - **Tool nodes**: Call flows, prompts, or connectors
 
-1. Select the **+** button between nodes to see all available node options:
+1. Select the **+** button between two nodes to see all available node options:
    - Send a message
    - Ask a question
+   - Ask with adaptive card
    - Add a condition
-   - Call a tool
-   - Call a flow
-   - Set a variable
-   - End the conversation
+   - Variable management
+   - Topic management
+   - Add a tool
+   - Add an agent
+   - Advanced
+
+   ![The add node menu between two topic nodes](images/uc2-add-node-menu.png)
 
    > [!NOTE]
    > Understanding node types is essential for building sophisticated conversation flows. Each node type serves a specific purpose in the conversation logic.
 
-1. Notice that you could select:
-    - **Power Automate Flow** (to submit data to a backend system)
-    - **Connector** (to write directly to a database or service)
-    - **Tool** (to process the collected data)
+1. Point to **Add a tool** and notice its **Basic tools**, **Connector**, and **Tool** tabs. From here you could add:
+    - A **New Agent flow** (to submit data to a backend system)
+    - A **Connector** action (to write directly to a database or service)
+    - A **New prompt** (to process the collected data)
 
    > [!IMPORTANT]
    > For production scenarios, you would connect to a real backend system here. For this lab, we're demonstrating the concept without actual submission.
 
-1. Check your nodes and if you don't already have a node that thanks the user then select + after the last node and select a **Message** node.
+1. Close the menu, then select **+** below the last node and select **Send a message**.
 
-1. Input the following as the message
+1. Enter the following as the message:
    ```
    Thank you! Your information has been recorded. (In production, this would submit to the mailing list system.)
    ```
 
-1. Select **Save** to save your topic.
+1. Select **Save** to save your topic. **Topic Saved!** confirms it.
 
 #### Test the Mailing List Topic
 
-1. In the test panel, start a new conversation.
+1. In the test pane, select **New test session**.
 
-1. Enter the following trigger phrase:
+1. Enter the following message:
 
    ```
    I want to get notified when there is news about Copilot Studio.
    ```
 
-1. The agent should recognize this intent and activate your mailing list topic.
+1. The agent should recognize this intent and activate your mailing list topic. The activity map shows the topic running.
 
 1. Follow the conversation flow:
     - Provide an email address when asked
     - Provide your first name
     - Provide your last name
 
-1. Observe how the agent guides you through the structured flow and confirms the submission.
+1. Observe how the agent guides you through the structured flow and confirms the submission with both thank-you messages.
 
 
 
@@ -383,57 +407,61 @@ Add a document knowledge source to your agent and verify that it accurately answ
 
 #### Add Document Knowledge Source
 
-1. In your Copilot Studio agent, Select  **Knowledge** in the top navigation bar for the agent.
+1. Download the [Microsoft Copilot Studio Licensing Guide](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/ai/MicrosoftCopilotStudioLicensingGuide.pdf) PDF and save it on your computer.
 
-1. Download the [Copilot Studio Licensing Guide (June 2026)](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/bizapps/Microsoft-Copilot-Studio-Licensing-Guide-June-2026-PUB.pdf). Just make sure you have the file local on your computer.
+1. In your Copilot Studio agent, select **Knowledge** in the top navigation bar for the agent.
 
-1. Select **+Add Knowledge** and select **Upload files** and use the file dialog to locate and select your downloaded license guide file from your local computer.
+1. Select **+ Add knowledge**. In the **Upload file** area of the **Add knowledge** dialog, choose **select to browse**, then locate and select the licensing guide you downloaded.
 
    > [!TIP]
    > You can upload multiple file types including PDF, Word documents (.docx), PowerPoint (.pptx), and text files. Each file can be up to 512 MB.
 
-1. Select **Add to agent**.
+1. The **Upload files** dialog lists the file. Select **Add to agent**.
 
-1. The processing of the file will take a few minutes. While it processes select **Add knowledge** again and take a minute to review the other types of knowledge sources you can use. 
+1. The processing of the file will take a few minutes, and its status shows **In progress**. While it processes, select **Add knowledge** again and take a minute to review the other types of knowledge sources you can use.
 
-1. Select **Advanced** and review that list of sources as well. When you are done reviewing select **Cancel** to return to the list of your agents configured knowledge sources.
+1. Select **Advanced** and review that list of sources as well. When you are done reviewing select **Cancel** to return to the list of your agent's knowledge sources.
 
-1. Wait for the file to finish processing if not already done. You'll see a status indicator showing the indexing progress. When it is done it will say **Ready** in the Status column.
+1. Wait for the file to finish processing if not already done. When it is done the **Status** column says **Ready**.
 
    > [!NOTE]
    > Knowledge indexing typically takes 2-5 minutes depending on the document size. Larger documents or multiple files may take longer. If the status doesn't seem to update, try refreshing your browser — this can help it reflect the latest progress. You can continue with the next steps while the file is indexing, but make sure it finishes before testing any licensing questions.
 
 #### Configure Knowledge Source Settings
 
-1. Once the document is indexed, Select on the knowledge source to view its details.
+1. Once the document is indexed, select the licensing guide in the list on the **Knowledge** tab to view its details.
 
 1. Review the **Name** and **Description** fields. Update if needed to make the source easily identifiable.
 
-#### Check and disable Web Search 
-The Use information from the web setting is available on the Generative AI settings page or the Web Search setting in the Knowledge section of the agent's Overview page. This setting lets your agent access broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. For our scenario, we want to keep the use of knowledge focused on our provided resources and not the broader web.
-
-1. Navigate to the Overview tab, scroll down to the Knowledge section
-
-1. Select Disabled on the Web Search option.
-
 #### Set Knowledge Source as Official
 
-1. Navigate back to the **Overview** tab and scroll down to the **Knowledge** section.
+1. On the same details page, turn on the **Official source** toggle.
 
-1. Select the uploaded licensing guide file to open its details.
+1. The **Update agent instructions? (preview)** dialog explains the instruction the agent will follow for official sources. Select **Got it**.
 
-1. Set the source to **Official** and select **Save**.
+   ![The Update agent instructions dialog for an official source](images/uc3-official-source-dialog.png)
+
+1. The setting is applied as soon as you select **Got it**. If **Save** at the top of the page is enabled, select it.
 
    > [!NOTE]
    > Marking a knowledge source as **Official** in Copilot Studio tells the agent to treat that content as authoritative and trustworthy. When multiple knowledge sources are available, the agent will prioritize official sources over non-official ones when generating responses. This is especially useful for policy documents, licensing guides, and other content where accuracy is critical.
 
+#### Check and disable Web Search
+The **Web Search** setting in the **Knowledge** section of the agent's **Overview** page lets your agent search all public websites, giving it broad, real-time, and up-to-date information beyond what is available in predefined or enterprise-specific knowledge bases. It is enabled by default. For our scenario, we want to keep the use of knowledge focused on our provided resources and not the broader web.
+
+1. Navigate to the **Overview** tab and scroll down to the **Knowledge** section.
+
+1. Turn off the **Web Search** toggle so it shows **Disabled**.
+
+   ![The Knowledge section with Web Search disabled](images/uc3-web-search-disabled.png)
+
 #### Add Additional Knowledge Sources
 
-1. Return to the **Knowledge** panel on the **Overview** tab on the agent and click **+ Add Knowledge** again.
+1. In the **Knowledge** section of the **Overview** tab, select **+ Add knowledge** again.
 
 1. This time, select **Public websites** as the knowledge source type.
 
-1. Input the following URL and select **Add**.
+1. In **Public website link**, enter the following URL and select **Add**.
 
    ```
    https://www.nngroup.com/articles/careful-prompts/
@@ -444,20 +472,22 @@ The Use information from the web setting is available on the Generative AI setti
 
 1. Select **Add to agent**.
 
-1. Wait for the website content to be indexed.
+1. Wait for the website to show **Ready**.
 
-1. Test the agent with the following question:
+1. In the test pane, select **New test session**, then test the agent with the following question:
 
    ```
    Explain CAREful prompts to me?
    ```
+
+   The answer explains the CARE framework (Context, Ask, Rules, Examples) and cites the nngroup article.
 
 #### Test Licensing Knowledge
 
    > [!IMPORTANT]
    > Before completing this section, make sure the licensing guide file you uploaded earlier has finished indexing. The Status column should show **Ready** before proceeding. If you are still waiting for the file to index, you can skip ahead to Use Case 4 and come back to test this later.
 
-1. In the test panel on the right, click start a new conversation to ensure the agent uses the latest knowledge.
+1. In the test pane on the right, select **New test session** to ensure the agent uses the latest knowledge.
 
 1. Enter the following question to test the uploaded licensing guide and select **Send**:
 
@@ -467,10 +497,10 @@ The Use information from the web setting is available on the Generative AI setti
 
 1. Review the agent's response. It should reference specific licensing information from the licensing guide you uploaded earlier.
 
-1. Look for citations or references in the response that indicate which knowledge source was used.
+1. Look for the references under the response, and for **Referenced sources** in the activity map. The licensing guide PDF you uploaded should be one of them.
 
    > [!TIP]
-   > Agents typically show citations at the bottom of responses, indicating which knowledge sources contributed to the answer. This helps users verify information accuracy.
+   > Agents show references at the bottom of responses, indicating which knowledge sources contributed to the answer. This helps users verify information accuracy.
 
 ---
 
@@ -498,7 +528,7 @@ Build two different types of tools: a connector-based weather tool and a custom 
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Extend Your Agent with Tools | Connect your agent to external services and build custom analytical capabilities | 8 minutes |
+| Extend Your Agent with Tools | Connect your agent to external services and build custom analytical capabilities | 10 minutes |
 
 **Summary of tasks**
 
@@ -520,32 +550,36 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. Select **Tools** in the agent's top navigation bar.
 
-1. Select **Add a tool** and review the Tools page to understand the available options for creating new tools.
+1. Select **+ Add a tool**. The **Add tool** dialog lets you create a new tool (**Computer use**, **Workflows**, **Prompt**, or **MCP**) or pick an existing one, filtered by **Popular**, **Connector**, **Prompt**, **Workflows**, **REST API**, and **Model Context Protocol**. Take a moment to review the options.
 
-1. Select **Connector** as the tool type (or browse available connectors).
+   ![The Add tool dialog](images/uc4-add-tool-dialog.png)
 
-1. Search for and in the **MSN Weather** connector section select the **Get current weather** action.
+1. In the search box, enter **MSN Weather**. In the **MSN Weather** connector results, select the **Get current weather** action.
 
-1. For the Connection, select **Create new connection**.
+1. The connection shows **Not connected**. Open the **Connection** dropdown and select **Create new connection**.
 
-1. When prompted, select **Create** to create the connection.
+1. In **Connect to MSN Weather**, select **Create** to create the connection.
 
-1. Select **Add and configure** to add this tool to the agent.
+1. Select **Add and configure** to add this tool to the agent. The tool's page opens.
 
-1. Configure authentication by expanding the Additional details section and selecting **Maker-provided credentials** in the Credentials to use option.
+1. Configure authentication: expand **Additional details** and, under **Credentials to use**, select **Maker-provided credentials**.
+
+   ![Maker-provided credentials selected for the Get current weather tool](images/uc4-weather-credentials.png)
 
    > [!IMPORTANT]
    > Maker credentials mean the tool authenticates using YOUR account. This is suitable for testing and internal tools. For production scenarios with end users, use connection references. For anonymous APIs and APIs that use API keys, you should also set these to maker-provided credentials so the connection is configured by the maker rather than requiring end users to authenticate.
 
-1. In the **Inputs** section, find the **Units** input. Change it from **Dynamically fill with AI** to **Custom value**.
+1. In the **Inputs** section, find the **Units** input. Change **Fill using** from **Dynamically fill with AI** to **Custom value**.
 
-1. Click into the value field and select **Imperial** or **Metric** depending on your preference.
+1. Select the **Value** field and select **Imperial** or **Metric** depending on your preference.
 
-1. Review the tool configuration and click **Save**.
+   ![The Units input set to a custom value with Imperial and Metric options](images/uc4-weather-units.png)
+
+1. Review the tool configuration and select **Save**.
 
 #### Test the Weather Tool
 
-1. In the test panel on the right, start a new conversation by selecting the + icon in the upper right corner of the test panel.
+1. In the test pane on the right, select **New test session** (the icon in the upper-right corner of the test pane).
 
 1. Ask the following question:
 
@@ -567,30 +601,32 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. Select **Overview** in the agent's top navigation bar. 
 
-1. Scroll down to the **Tools** pane. This is the same list of tools from the agent's top navigation bar  **Tools** option.
+1. Scroll down to the **Tools** section. This is the same list of tools as the **Tools** tab in the agent's top navigation bar.
 
 1. Select **Add tool** to add another tool.
 
-1. In the **Create new** section, select **Prompt**.
+1. In the **Add tool** dialog, select **Add new Prompt**. The prompt editor opens.
 
-1. Select the current name e.g., **Custom prompt...** at the top left and change the name to **Prompt Analyzer**.
+1. Select the current name, for example **Custom prompt** followed by the date and time, at the top left and change the name to **Prompt Analyzer**.
 
 1. In the **Instructions** section, add the following :
 
    ```
    Analyze this prompt (replace with text) based upon the CARE Prompt Guidance to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
    ```
-1. In the instructions you just pasted select ** (replace with text)**.
+1. In the instructions you just pasted, delete **(replace with text)**.
 
-1. With ** (replace with text)** still selected, in the lower left of the dialog, select **Add content**
+1. With the cursor where that text was, type **/** (or select **+ Add content** in the lower left of the editor). Under **Input**, select **Text**.
 
-1. Select **Text** from the list of content types.
+   ![The prompt editor content menu with Text under Input](images/uc4-prompt-add-content.png)
 
-1. Input **PromptToAnalyze** for the name.
+1. Input **PromptToAnalyze** for the **Name**.
 
-1. Input **Summarize this text: "Text"** for the sample data.  This will be used to test the prompt.
+1. Input **Summarize this text: "Text"** for the **Sample data**.  This will be used to test the prompt.
 
-1. Select **Close**.
+1. Select **Close**. The input appears in the instructions as **PromptToAnalyze**.
+
+   ![The Text input named PromptToAnalyze in the instructions](images/uc4-prompt-text-input.png)
 
 1. Select the **Test** button to test the Prompt Analyzer prompt you just built.
 
@@ -598,7 +634,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. Select **Save** in the lower right to create the prompt tool.
 
-1. On the Add tool dialog, select **Add and configure**.
+1. On the **Add tool** dialog, select **Add and configure**.
 
 1. Update the **Description** of the Prompt Analyzer tool to the following:
 
@@ -612,7 +648,7 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 
 1. Select the **Overview** tab in the top navigation bar for the agent.
 
-1. In the Instructions pane, select **Edit**
+1. In the **Instructions** section, select **Edit**.
 
 1. Copy and paste the following at the end of the Instructions, after the existing Guidelines list.
 
@@ -624,14 +660,16 @@ Create and configure two tools that extend your agent's capabilities beyond simp
    > [!IMPORTANT]
    > Agent-level instructions help the agent understand context and avoid confusion - especially when tools might be misused or misinterpreted.
 
-1. In the text you just pasted, where select **Prompt Analyzer** after the **Use** at the beginning of what you just pasted, type / and it will bring up a dialog to select the **Prompt Analyzer** tool.
+1. In the text you just pasted, delete the words **Prompt Analyzer** after **Use**. Type **/** in their place and select **Prompt Analyzer** (**Tool**) from the **Suggestions** list. The tool now appears as a reference in the instructions.
+
+   ![The slash menu in the instructions editor listing topics and tools](images/uc4-instructions-slash-menu.png)
 
 1. Select **Save**.
 
 
 #### Test the Prompt Analyzer Tool
 
-1. In the test panel, select **Refresh** or start a new conversation to reload the agent with the new tool.
+1. In the test pane, select **New test session** to reload the agent with the new tool.
 
 1. Enter the following test request:
 
@@ -639,9 +677,11 @@ Create and configure two tools that extend your agent's capabilities beyond simp
    Analyze this prompt for improvements:
    Summarize this text: "The novel follows Ishmael, a contemplative sailor who joins the whaling ship Pequod, captained by the obsessive Captain Ahab. Ahab is consumed by a singular goal: to hunt and kill the whale, a massive white whale that previously destroyed his ship and severed his leg. As the voyage progresses, the crew encounters various philosophical, religious, and existential challenges, culminating in a dramatic and tragic confrontation with the whale."
    ```
-1. When asked for the intent input **Summarize the text**.
+1. If the agent asks what the prompt is meant to do, answer **Summarize the text**. Usually it calls the tool straight away.
 
-1. Review the agent's analysis. It should provide structured feedback on the prompt using the CARE framework.
+1. Review the agent's analysis. It should provide structured feedback on the prompt using the CARE framework, an improved prompt example, and an overall rating headed **Overall Rating** or **Overall Evaluation**. The activity map shows **Prompt Analyzer** running with your prompt as its **PromptToAnalyze** input.
+
+   ![The activity map showing the Prompt Analyzer tool and the agent's analysis](images/uc4-prompt-analyzer-test.png)
 
 1. Observe how the tool uses markdown formatting with bold text and bullets to make the response visually appealing.
 
@@ -676,13 +716,13 @@ Create and configure two tools that extend your agent's capabilities beyond simp
 ## 🧱 Extra Credit: Work with Variables
 
 > [!NOTE]
-> **Optional - Extra Credit (~5 minutes):** This use case is not included in the 30-minute lab time. Complete it after Use Case #2 if you have additional time to explore the variables in your mailing list topic.
+> **Optional - Extra Credit (~8 minutes):** This use case is not included in the 30-minute lab time. Complete it after Use Case #2 if you have additional time to explore the variables in your mailing list topic.
 
 Explore the variables interface in Copilot Studio to understand how conversation state is managed through topic-level and global variables.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Work with Variables | Understand how variables maintain conversation context and how to navigate the variables interface | 5 minutes |
+| Work with Variables | Understand how variables maintain conversation context and how to navigate the variables interface | 8 minutes |
 
 **Summary of tasks**
 
@@ -716,10 +756,9 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 #### Review Existing Variables
 
-1. Find the **Question** node where the user's email address is collected.
+1. Find the **Question** node where the user's email address is collected (**What is your email address?**).
 
-
-1. Look for the **Save response as**  section. Notice that Copilot Studio automatically created a variable to store the email address when the question node was built.
+1. Look for the **Save user response as** section. Notice that Copilot Studio automatically created a variable to store the email address when the question node was built.
 
 1. Note the variable name (likely something like `EmailAddress` or `userEmail`).
 
@@ -728,40 +767,44 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 #### Explore Variable Properties
 
-1. Select the variable name to open the variable properties panel.
+1. Select the variable name to open the **Variable properties** panel.
 
 1. Review the variable configuration — do not change any values:
-   - **Variable Name**: The variable identifier used in the topic
-   - **Type**: Data type (Text, Number, Boolean, etc.)
-   - **Usage**: Topic-level or Global
+   - **Variable name**: The variable identifier used in the topic
+   - **Type**: Data type (string, number, Boolean, and so on)
+   - **Reference**: The node that sets the variable, with **View all references** to see where it is used
+   - **Usage**: **Topic (limited scope)** or **Global (any topic can access)**
+   - **Sensitive data**: Whether the value is treated as sensitive
 
-1. Notice that this variable is **Topic-level** by default, meaning it only exists within this topic.
+    ![The Variable properties panel for the EmailAddress variable](images/ec-variable-properties.png)
+
+1. Notice that this variable is **Topic (limited scope)** by default, meaning it only exists within this topic. The **Receive values from other topics** and **Return values to original topics** options let a topic variable pass data between topics without making it global.
 
     > [!IMPORTANT]
     > **Topic-level variables** exist only within a single topic and reset when the topic ends. **Global variables** persist across all topics and the entire conversation. Global variables use a namespace like `Global.emailAddress`. Use global variables sparingly — only when you need to share data across multiple topics.
 
 #### View All Variables
 
-1. Select  **Variables** in the topics top right tool bar just above the Variable properties panel.
+1. Select **Variables** in the topic's toolbar at the top of the canvas. The **Variables** pane opens with **Browse** and **Test** tabs.
 
-1. Review the **Topic** section showing all variables in the current topic.
+1. On the **Browse** tab, review the **Topic** section showing all variables in the current topic.
 
 1. Review the **Global** section showing variables available across the entire agent.
 
 1. Review the **Environment** section showing environment variables that, in part, help support ALM to move agents from one environment to another.
 
     > [!NOTE]
-    > The Variables view gives you a centralized place to see all variables, their types, and their values during testing.
+    > The Variables pane gives you a centralized place to see all variables, their types, and, on the **Test** tab, their values during testing.
 
 #### Understand How Variables Are Used
 
 1. Return to your topic canvas and scroll through the nodes. Look for places where variables are referenced:
     - **Message nodes** may use curly braces like `{Topic.emailAddress}` to dynamically insert variable values into text
-    - **Set Variable nodes** can transform data using formulas like `"Text " & Topic.variableName` (the `&` operator concatenates strings)
+    - **Set a variable value** nodes can transform data using formulas like `"Text " & Topic.variableName` (the `&` operator concatenates strings)
     - **Condition nodes** can branch logic based on variable values
 
-1. Notice the **+** button between nodes. Select it to see the available node options (but do not add any nodes).
-    - **Set a variable value**: Modify variable values using text, other variables, or formulas
+1. Notice the **+** button between nodes. Select it to see the available node options (but do not add any nodes), then close the menu.
+    - **Variable management** > **Set a variable value**: Modify variable values using text, other variables, or formulas
     - **Ask a question**: Collect user input and automatically store it in a variable
     - **Add a condition**: Branch conversation logic based on variable values
 
@@ -770,26 +813,27 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 
 #### Observe Variables During Testing
 
-1. In the test panel, start a new conversation.
+1. Keep the **Variables** pane open and select its **Test** tab.
+
+1. In the test pane, select **New test session**.
 
 1. Trigger the mailing list topic by sending the following prompt to your agent:
 
     ```
     I want to join the mailing list.
     ```
-1. Select the agent response in the test chat. This action takes you to the topic and the node that sent the response. Nodes that fired have a colored checkmark and a colored bottom border.
 
-1. Follow the prompts and provide information when asked (email, name, etc.). As you continue the conversation within the active topic, notice that each node that fires is marked with the checkbox and bottom border, and centered on the canvas.
+1. If the activity map replaces the topic canvas, select **Topics** in the agent's top navigation bar and select **Join Copilot Studio Mailing List** again to reopen it. Nodes that fired have a check mark and a colored bottom border.
 
-1. While in the test conversation, open the test panel's **…** (More commands) menu in the test toolbar and turn **off** *Show activity map when testing*. This switches the test pane from the activity-map view to the variables view. (Turn it back **on** afterward to return to the activity map.)
+1. Follow the prompts and provide information when asked (email, name, etc.). As you continue the conversation within the active topic, notice that each node that fires is marked with the check mark and bottom border.
 
-    ![Turn off "Show activity map when testing" from the test panel's … menu](images/variables-show-activity-map-toggle.png)
+1. On the **Test** tab of the **Variables** pane, review the current value of each variable. Notice how variables populate in real time as you progress through the conversation.
 
-1. Select **Variables** in the test panel toolbar for the topic. If the topic is no longer showing, select **Topics** in the agents top navigation bar and select the Join **Copilot Studio Mailing List** again to reopen.
+    ![The Variables pane Test tab showing variable values during a test conversation, with training-account values redacted](images/ec-variables-test-tab.png)
 
-1. In the **Variables** panel, select the **Test** tab to see a list of the variables and their current values. 
+1. Optionally, select **Variables** in the test pane's toolbar for a quick list of the **Topic** and **System** variables in the conversation. The test pane's **…** (More commands) menu also has **Show activity map when testing**, which controls whether the activity map opens while you test.
 
-1. Review the current values of all variables in the conversation. Notice how variables populate in real-time as you progress through the conversation.
+    ![The test pane's More commands menu with Show activity map when testing](images/variables-show-activity-map-toggle.png)
 
     > [!TIP]
     > Monitoring variables during testing is essential for debugging complex conversation flows and understanding data flow. This is one of the most useful debugging tools in Copilot Studio.
@@ -827,13 +871,13 @@ Understand variable types, properties, scope, and behavior by exploring the exis
 ## 🧩 Extra Credit: Create and Orchestrate Child Agents
 
 > [!NOTE]
-> **Optional - Extra Credit (~13 minutes):** This use case is optional and not included in the 30-minute lab time. Complete it if you have additional time or want to see how a main agent delegates to specialists.
+> **Optional - Extra Credit (~10 minutes):** This use case is optional and not included in the 30-minute lab time. Complete it if you have additional time or want to see how a main agent delegates to specialists.
 
 Build specialized child agents with focused knowledge and instructions to create modular, scalable agent architectures.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create and Orchestrate Child Agents | Build specialized sub-agents with focused expertise to create modular, scalable solutions | 13 minutes |
+| Create and Orchestrate Child Agents | Build specialized sub-agents with focused expertise to create modular, scalable solutions | 10 minutes |
 
 **Summary of tasks**
 
@@ -851,13 +895,15 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 #### Create a Child Agent
 
-1. In your Copilot Studio Assistant agent, Select  **Agents**  in the agent top navigation bar.
+1. In your Copilot Studio Assistant agent, select **Agents** in the agent's top navigation bar.
 
-1. Select  **Add an agent**.
+1. Under **Add an agent**, select **+ Add**.
 
-1. In the **Create a child agent** section, Select **New child agent**.
+1. In **Choose how you want to extend your agent**, under **Create a child agent**, select **New child agent**.
 
-1. Enter  **CARE Prompt Guidance** in the **Name** field.
+    ![The Choose how you want to extend your agent dialog](images/ec-child-choose-extend.png)
+
+1. Enter **CARE Prompt Guidance** in the **Name** field. Leave **When will this be used?** set to **The agent chooses - Based on description**.
 
 1. Input the following for the **Description**
     ```
@@ -867,11 +913,9 @@ Create a specialized child agent and configure the parent agent to orchestrate c
     > [!NOTE]
     > The description helps the parent agent understand when to route conversations to this child agent. Be specific and clear.
 
-1. Select  **Save** to initialize the child agent.
-
 #### Configure Child Agent Instructions
 
-1. Once save of the child agent has completed, input the following into the **Instructions** section.
+1. On the same page, input the following into the **Instructions** section.
     ```
     This agent should help users with understanding information about the prompt guidance framework and how they can leverage it to make their agents better.
     ```
@@ -879,39 +923,41 @@ Create a specialized child agent and configure the parent agent to orchestrate c
     > [!TIP]
     > Child agent instructions should be focused and specific to their domain of expertise. Avoid generic instructions - be precise about what this agent knows and does.
 
-1. Select  **Save** to apply the instruction changes to the agent.
+1. Select **Save** at the top of the page to create the child agent with its details and instructions.
+
+    ![The child agent page with Details, Instructions, and Knowledge](images/ec-child-agent-details.png)
 
 #### Add Knowledge Sources to Child Agent
 
-1. In the child agent, scroll down to the **Knowledge** section or select **Knowledge** in the child agent left navigation. 
+1. Download the [CAREful Prompts Printable Guide (PDF)](https://media.nngroup.com/media/articles/attachments/CAREful_Prompts_-_Printable-2.pdf) and save it on your computer.
 
-1. Select  **+ Add knowledge** to add a knowledge source.
+1. In the child agent, scroll down to the **Knowledge** section (or select **Knowledge** in the child agent's left navigation).
 
-1. Select **Upload files** as the knowledge source type.
+1. Select **+ Add** to add a knowledge source.
 
-1. Download the [CAREful Prompts Printable Guide (PDF)](https://media.nngroup.com/media/articles/attachments/CAREful_Prompts_-_Printable-2.pdf) and upload it to the child agent as a knowledge source.
+1. In the **Upload file** area of the **Add knowledge** dialog, choose **select to browse** and select the CAREful Prompts PDF you downloaded. In the **Upload files** dialog, select **Add to agent**.
 
     > [!IMPORTANT]
     > Child agents can have their own dedicated knowledge sources. This keeps knowledge organized and prevents one agent from being overloaded with unrelated content.
 
-1. Wait for the knowledge source to be indexed.
+1. The file is added to the child agent's **Knowledge** section with the status **In progress**. Wait for it to be indexed (about 3 minutes); you can configure the parent agent in the meantime.
 
-1. Select  **Save** to finalize the child agent configuration.
+1. If **Save** at the top of the child agent page is enabled, select it to finalize the child agent configuration.
 
 #### Configure Parent Agent Orchestration
 
 1. Go to your **parent agent** (the main Copilot Studio Assistant) by selecting **Overview** in the top navigation bar.
 
-1. In the parent agent's **Instructions** field on the Overview page, select **Edit** in the upper right corner of the **Instructions** section.
+1. In the parent agent's **Instructions** section on the Overview page, select **Edit**.
 
-1. Add the following orchestration instructions just before the `# General Guidelines` paragraph of the instructions. Notice the `(replace this text)` placeholder — you'll replace it with a direct reference to the child agent in the next step.
+1. Add the following orchestration instructions just before the `Guidelines:` list of the instructions. Notice the `(replace this text)` placeholder — you'll replace it with a direct reference to the child agent in the next step.
 
     ```
     # Prompt Guidance
     Use (replace this text) when asked to provide just general guidance around prompt building. Never use it when asked to analyze a prompt.
     ```
 
-1. Select the **`(replace this text)`** placeholder in the paragraph you just added, then type `/` to open the dropdown menu. This lists your agent's available tools, topics, child agents, knowledge sources, and more. Select **CARE Prompt Guidance** from the list to create a direct reference to the child agent, replacing the placeholder text.
+1. Delete the **`(replace this text)`** placeholder in the paragraph you just added, then type `/` in its place to open the dropdown menu. This lists your agent's available tools, topics, child agents, and more. Select **CARE Prompt Guidance** from the list to create a direct reference to the child agent.
 
     > [!TIP]
     > Using `/` references in your agent instructions creates explicit links to specific items in your agent configuration. This ensures the agent knows exactly which tool, topic, or child agent you're referring to — rather than relying on plain text name matching.
@@ -925,7 +971,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 1. In the parent agent, select **Agents** in the top navigation bar for the parent agent.
 
-1. Verify that the **CARE Prompt Guidance** child agent appears in the list of available agents.
+1. Verify that the **CARE Prompt Guidance** child agent appears in the list of agents.
 
 1. Check that the child agent is **Enabled** (toggle should be on).
 
@@ -934,7 +980,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 
 #### Test the Child Agent
 
-1. In the parent agent's test panel, start a new conversation.
+1. Make sure the CAREful Prompts file shows **Ready** in the child agent's **Knowledge** section. In the parent agent's test pane, select **New test session**.
 
 1. Ask a question that should trigger the child agent:
 
@@ -945,9 +991,9 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 1. Observe the agent's response. It should:
     - Recognize that this is a general prompt guidance question
     - Route the conversation to the "CARE Prompt Guidance" child agent
-    - Provide an answer grounded in the CARE framework knowledge
+    - Provide an answer grounded in the CARE framework knowledge, with the CAREful Prompts PDF as a reference
 
-1. Look for indicators in the test panel showing which agent responded (some interfaces show "Responded by: CARE Prompt Guidance" or similar).
+1. In the activity map, look for **CARE Prompt Guidance**. The steps explain that the agent determined that invoking the CARE Prompt Guidance tool was required, show the **Inputs** it passed, and show the **Outputs** it returned.
 
 #### Test Orchestration Logic
 
@@ -957,7 +1003,7 @@ Create a specialized child agent and configure the parent agent to orchestrate c
     Analyze this prompt for improvements: Write a summary of the quarterly report.
     ```
 
-1. Verify that the parent agent uses the Prompt Analyzer tool from Use Case #4 instead of routing to the child agent.
+1. Verify in the activity map that the parent agent uses the **Prompt Analyzer** tool from Use Case #4 instead of routing to the child agent.
 
     > [!TIP]
     > This demonstrates proper orchestration - the parent agent understands the difference between "general prompt guidance" (child agent) and "analyze a specific prompt" (tool).
@@ -999,23 +1045,23 @@ Create a specialized child agent and configure the parent agent to orchestrate c
 ## 🚀 Extra Credit: Deploy Your Agent Across Channels
 
 > [!NOTE]
-> **Optional - Extra Credit (~12 minutes):** This use case is optional and not included in the 30-minute lab time. Complete it if you have additional time or want to publish your agent where users actually work.
+> **Optional - Extra Credit (~10 minutes):** This use case is optional and not included in the 30-minute lab time. Complete it if you have additional time or want to publish your agent where users actually work.
 
-Learn how to configure and deploy your agent to channels, understand channel-specific settings, and implement appropriate security controls.
+Learn how to publish your agent, add it to the Microsoft 365 and Microsoft Teams channel, and understand which channels are available.
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Deploy Your Agent To Channels | Make your agent accessible via Teams and Microsoft 365 Copilot  | 12 minutes |
+| Deploy Your Agent To Channels | Make your agent accessible via Teams and Microsoft Copilot  | 10 minutes |
 
 **Summary of tasks**
 
-In this section, you'll learn how to navigate the Channels interface, configure your agent to deploy to Microsoft Teams and Microsoft 365 Copilot, and understand channel capabilities and limitations.
+In this section, you'll learn how to navigate the Channels page, publish your agent, deploy it to Microsoft Teams and Microsoft Copilot, and understand channel availability.
 
-**Scenario:** Your Copilot Studio Assistant is ready for users. You need to make it available for your company's users for easy access in Microsoft Teams and Microsoft 365 Copilot where most employees spend their day. 
+**Scenario:** Your Copilot Studio Assistant is ready for users. You need to make it available for your company's users for easy access in Microsoft Teams and Microsoft Copilot where most employees spend their day. 
 
 ### Objective
 
-Deploy your agent to Teams and Microsoft 365 Copilot channels with proper configuration and security.
+Deploy your agent to Teams and Microsoft Copilot channels with proper configuration.
 
 ---
 
@@ -1023,73 +1069,65 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 #### Navigate to Channels
 
-1. In your Copilot Studio agent, select **Channels** in the top navigation bar.
+1. In your Copilot Studio agent's top navigation bar, select **+2** (the overflow tab after **Evaluation**) and then select **Channels**. If your window is wide enough, **Channels** may appear directly in the navigation bar.
 
-1. Review the Channels overview page to see available channel options:
-   - **Microsoft Teams**: Native Teams integration
-   - **Demo website**: Test website for quick agent testing
-   - **Custom website**: Embeddable web widget for your sites
-   - **Mobile app**: iOS and Android integration
-   - **Custom channel**: Direct Line API for custom applications
-   - Additional channels may include Facebook, Slack, etc.
+1. Review the Channels page:
+   - A banner explains that because the agent uses **Microsoft authentication**, only the Teams and Microsoft 365 and SharePoint channels are available. To use other channels, you would change the agent's authentication settings.
+   - **Published agent status** shows **Not published** until you publish the agent.
+   - **Microsoft channels** lists **Microsoft 365 and Microsoft Teams** and **SharePoint**.
+   - **Customer engagement hub** lists apps your agent can hand off a conversation to, such as **Dynamics 365 Contact Center**, **Telephony**, **Genesys**, **LivePerson**, **Salesforce**, **ServiceNow** and **Custom engagement hub**.
+
+    ![The Channels page with Microsoft channels and the Customer engagement hub](images/ec-channels-page.png)
 
     > [!NOTE]
-    > Available channels depend on your Copilot Studio license and environment settings. Some channels require additional configuration or premium licenses.
-
-
-#### Explore Channel Capabilities
-
-1. Review the description and capabilities of each channel type:
-   - **Teams**: Full authentication, rich adaptive cards, deep Microsoft 365 integration
-   - **Web**: Customizable appearance, flexible security, easy embedding
-   - **Mobile**: Native app experience with push notifications
-   - **Custom**: Full API control for advanced integrations
+    > Available channels depend on your agent's authentication settings, your Copilot Studio license and your environment settings.
 
     > [!TIP]
     > Choose channels based on where your users already work. Don't force users to adopt new tools - bring the agent to their existing environment.
 
-1. Consider the limitations of each channel:
-   - Some features (like certain adaptive cards) may not work on all channels
-   - Authentication requirements vary by channel
-   - Customization options differ across channels
+#### Deploy to Microsoft Teams and Microsoft Copilot
 
-#### Deploy to Microsoft Teams and Microsoft 365 Copilot
+1. Before users can reach your agent in a channel, you must publish it. Select **Publish** at the top right of the page.
 
-1. Before you can deploy to a channel, you must first publish your agent.  Select **Publish** from the top right corner of the screen.  Follow the prompts.
-1. Return to the Channels page and select **Teams and Microsoft 365 Copilot**.
+1. In the **Publish this agent** dialog, select **Publish**. Leave **Force newest version** cleared. Publishing takes about 30 seconds; **Published agent status** then shows when the agent was published.
 
-1. Review the **Agent preview** section that shows how users will see your agent.
-    - **App name**: How the agent appears in Teams
-    - **App icon**: Visual branding in Teams
-    - **Availability**: Who can access the agent
+    ![The Publish this agent dialog](images/ec-publish-dialog.png)
 
-1. Select **Add channel** in the bottom right corner of the panel to start activation of this channel.
+1. On the Channels page, select **Microsoft 365 and Microsoft Teams**.
 
-1. Select **Edit details** and make adjustments. For example, change the short description to something like **Assist users building agents**
+1. Review the panel. **Make agent available in Microsoft 365 Copilot** (the product was renamed Microsoft Copilot, but this option still uses the old name) is selected under **Turn on Microsoft 365**, and the **Agent preview** section shows the name, icon and short description users will see.
+
+    ![The Microsoft 365 and Microsoft Teams channel panel](images/ec-teams-channel-panel.png)
+
+    > [!NOTE]
+    > If the panel shows **You need to publish your agent before you can make it available to others**, select **Go to publish** and publish the agent first.
+
+1. Select **Add channel** at the bottom of the panel. A **The channel was added.** message appears, and **Edit details**, **Availability options**, **See agent in Microsoft 365** and **See agent in Teams** become available.
+
+1. Select **Edit details**. Review the **Name**, **Icon**, **Short description**, **Long description** and **Teams settings** fields, and change the **Short description** to something like **Assist users building agents**.
+
+    ![Edit details for the Microsoft 365 and Microsoft Teams channel](images/ec-channel-edit-details.png)
 
 1. Select **Save** to save your changes.
 
-1. Select **Publish** to publish your agent and make it available.
+1. Optionally, select **Availability options** to review how you can share the agent, then select the back arrow to return to the channel panel.
 
-1. Select **Turn on Teams** or **Enable** to activate the Teams channel.
+1. Select **See agent in Teams**. Teams opens in a new browser tab.
 
-1. Select **Availability options** and review what is available:
+1. If prompted to **Open Microsoft Teams?**, select **Cancel**, then select **Use the web app instead**.
 
-1. After reviewing the options select the back arrow to return to the prior panel.
+1. If this is your first visit to Teams, dismiss any welcome dialogs. You may have to go back to Copilot Studio and select **See agent in Teams** again.
 
-1. Select **See agent in Teams**, this will load a new browser tab with the Teams web application.
+1. Teams shows a dialog presenting your agent. After reviewing the details, select **Add**.
 
-1. If prompted to **Open Microsoft Teams?**, select **Cancel** and after the dialog closes select the **Use the web app instead**
+1. When **Added successfully!** appears, select **Open** to use your agent.
 
-1. If this is your first visit to Teams, you may be prompted with some other dialogs, after you dismiss them you may have to go back to Copilot Studio and re-select **See agent in Teams**
-
-1. You should now see a dialog presenting your agent for you to review before you add it to your Teams session. After reviewing the details, select **Add**
-
-1. You should next see a **Added successfully** message select **Open** to use your agent.
+    > [!NOTE]
+    > Teams may shorten a long agent name in the dialog and in the chat list.
 
 1. Once your agent loads, ask it a question like **How do I build a good prompt?**
 
-1. Compare the experience between Teams and the web demo site:
+1. Compare the answer with the one you get in the Copilot Studio test pane:
     - Notice how the UI differs
     - Test the same questions on the channel
 
@@ -1107,14 +1145,14 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 **Key takeaways:**
 
 * **Channels Enable Access** – Deploy to channels where your users already work to maximize adoption and minimize friction
-* **Security Settings Matter** – Always configure appropriate authentication and domain restrictions to protect data and ensure compliance
+* **Publish Before You Share** – Channels serve the published version of your agent, so publish again after every change you want users to see
+* **Authentication Shapes Your Options** – With Microsoft authentication, only the Microsoft 365 and Microsoft Teams and SharePoint channels are available
 * **Channel Capabilities Vary** – Test thoroughly on each channel and design agents that work within the limitations of your target platforms
-* **Demo Sites Accelerate Feedback** – Use demo websites for quick testing and stakeholder review before full production deployment
 
 **Lessons learned & troubleshooting tips:**
 
 * If your agent doesn't appear in Teams after deployment, check with your IT admin about app approval policies
-* Domain restrictions prevent unauthorized embedding - always configure allowed domains for production
+* If **See agent in Teams** is unavailable, check that the agent is published and the channel is added
 * Test authentication flows on each channel to ensure proper security enforcement
 * Some rich UI features may not work on all channels - design for compatibility
 
@@ -1144,4 +1182,4 @@ Deploy your agent to Teams and Microsoft 365 Copilot channels with proper config
 
 **The optional sections go further.** Variables reveal conversation state; child agents show delegation to specialists; channels make the agent reachable where people work. All three sit outside the timed 30 minutes.
 
-**Carry this model forward.** The GitHub Copilot harness rearranges these same concerns around instructions, skills, tools, knowledge and memory. Recognising the mapping is most of understanding the newer model.
+**Carry this model forward.** The Microsoft Copilot harness rearranges these same concerns around instructions, skills, tools, knowledge and memory. Recognising the mapping is most of understanding the newer model.

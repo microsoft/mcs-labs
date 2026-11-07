@@ -12,6 +12,7 @@ body:
         - agent-builder-m365
         - agent-builder-sharepoint
         - agent-builder-web
+        - agent-integration-team
         - ask-me-anything
         - autonomous-account-news
         - autonomous-cua
@@ -20,14 +21,21 @@ body:
         - bootcamp
         - component-collections
         - contract-alerts-azure-ai
+        - copilot-chat-workiq
+        - copilot-code-web-app
         - copilot-studio-kit
         - core-concepts-agent-knowledge-tools
         - core-concepts-analytics-evaluations
         - core-concepts-variables-agents-channels
+        - customer-assist-agent
         - data-fabric-agent
         - dataverse-mcp-connector
+        - declarative-agent-skill-reuse
         - guildhall-custom-mcp
+        - hooks-knowledge-travel-policy
         - human-in-the-loop
+        - instructions-skills-authoring
+        - managed-apps-build
         - mbr-prep-sharepoint-agent
         - mcp-qualify-lead
         - mcs-alm
@@ -38,7 +46,9 @@ body:
         - mcs-tools
         - pipelines-and-source-control
         - setup-for-success
+        - standard-harness-components
         - standard-orchestrator
+        - workflows-autonomous
     validations:
       required: true
   - type: textarea

@@ -45,6 +45,26 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
   do not rewrite a working section to taste.
 - **UI labels.** Use the label exactly as the product shows it, in bold, and quote it in
   the PR. When a label alternates between rollouts, name the destination or give both.
+- **Current product, everywhere.** The live product is the source of truth: labels, menu
+  paths, page and feature names, defaults, model names and URLs move and get renamed
+  often. Rename them throughout the lab, not only in the steps: front matter
+  `description`, intro, Lab Details, Use Cases table, targets, tips, troubleshooting and
+  link text. Remove steps for UI that no longer exists (retired toggles, "new experience"
+  switches) and add any new mandatory screen. When something cannot be reached live,
+  check its current name on Microsoft Learn and say "unverified live" in the PR.
+- **Lists.** Indent a code block, image or note inside a numbered step by three spaces.
+  Kramdown otherwise ends the list and the site restarts numbering at 1.
+- **Prerequisites.** Attendees of a proctor-led event with pre-provisioned user accounts
+  must not repeat tenant setup. Keep the guidance cross-team, and do not imply that
+  attending any event is enough to skip setup. Open the section
+  with the `> [!IMPORTANT]` "Skip this section" callout from the `lab-create` classic
+  templates, linking to the first use case in that copy, then list self-hosting
+  requirements under **Running this lab in your own tenant?** Replace older variants
+  (a `[!NOTE]` about CAT-led workshops, "For an instructor-led bootcamp…" sentences,
+  per-item "bootcamp: skip" bullets). Move anything an attendee still needs, such as a
+  download or a facilitator-provided value, into the step where it is first used. In
+  missions labs, `prerequisites:` is the attendee's ready checklist only; self-hosting
+  setup goes in the body, never in that list.
 - **Prompts.** Prompts are tested content. Change one only when the run-through shows it
   no longer works, and say why in the PR. In missions labs the prompt must stay identical
   in front matter, the `_labs` body and the README.

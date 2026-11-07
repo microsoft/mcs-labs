@@ -8,7 +8,7 @@ difficulty: 200
 lab_type: local
 section: intermediate_labs
 journeys: ["developer"]
-description: "Build the Zava Coffee Subscription Assistant as a Customer Assist Agent: a voice-first primary agent with a skill and voice instructions, a Subscription Cancellation sub-agent with visible routing in the Activity map, and a live voice call test."
+description: "Build the Zava Coffee Subscription Assistant as a Customer Assist Agent: a voice-first primary agent with a Generative skill and Voice instructions, a Subscription Cancellation sub-agent with visible routing in the Activity map, and a voice-call exercise."
 ---
 
 # Customer Conversation Harness
@@ -17,6 +17,9 @@ Build a **Customer Assist Agent** on the Customer conversation harness: a voice-
 
 > [!IMPORTANT]
 > Customer Assist Agents are in preview. Open [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/) and select the environment your facilitator gives you.
+
+> [!NOTE]
+> The tested preview uses **Voice**; Microsoft Learn calls this tab **Speech**. Follow the tested labels below. If **Customer conversation agent** is missing, ask your facilitator rather than substituting another agent type.
 
 ---
 
@@ -66,7 +69,7 @@ The Customer conversation harness gives you a **primary agent** that greets the 
 
 **Zava** sells coffee subscriptions. Its contact centre handles four kinds of requests: new subscriptions, account and billing changes, delivery changes, and cancellations. Zava wants a voice assistant that greets callers, works out what they need, collects the identifiers once, and passes the request to the right specialist without saying "transferring you to the cancellation department".
 
-In this lab you build the **Zava Coffee Subscription Assistant** and its **Subscription Cancellation** specialist, and test them in chat and by voice. There is no backend: each specialist runs in **Demo Mode** and simulates a successful result.
+In this lab you build the **Zava Coffee Subscription Assistant** and its **Subscription Cancellation** specialist, and test them in chat and by voice. There is no backend: each specialist runs in **Demo Mode** and simulates a successful result. Use fictional identifiers and payment details only; no real subscription is changed.
 
 **What You Will Learn**
 
@@ -86,7 +89,7 @@ In this lab you build the **Zava Coffee Subscription Assistant** and its **Subsc
 | **Customer Assist Agent** | An agent built for customer conversations. Chat and voice are available by default, and it can escalate to a human |
 | **Primary agent** | The agent that receives every conversation. It understands the request and decides whether to answer or route it |
 | **Sub-agent** | A specialist with its own description, instructions and skills. The primary agent routes to it based on its **description** |
-| **General and Voice instructions** | General applies to every channel. Voice is extra guidance for phone calls, layered on top of General |
+| **General and Voice instructions** | General applies to every channel. Voice is extra guidance for phone calls, layered on top of General; Chat provides separate text-channel guidance |
 | **Skill** | A named, reusable procedure (steps) that an agent follows for a task |
 | **Activity map** | The trace in the test pane. It shows when the agent decided to invoke a sub-agent, what task it passed, and when control returned |
 
@@ -96,20 +99,29 @@ In this lab you build the **Zava Coffee Subscription Assistant** and its **Subsc
 
 * [Microsoft Copilot Studio documentation](https://learn.microsoft.com/microsoft-copilot-studio/)
 * [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/)
+* [Create an agent with the Customer Conversation harness](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/build-new-agent-customer-conversation)
+* [Configure agent details and channel-specific instructions](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/authoring-instructions-customer-conversation)
+* [Create a Generative or Topic skill](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/skills-create-customer-conversation)
+* [Add a sub-agent](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/sub-agents-add-customer-conversation)
+* [Preview and test chat, voice and routing](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/preview-test-customer-conversation)
 
 ---
 
 ## Prerequisites
 
-> [!NOTE]
-> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-- Access to [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/) in an environment where **Customer Assist Agent** appears under **New agent**.
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+- Access to [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/) in an environment with the **Customer conversation agent** creation option.
 - Permission to create agents in that environment.
-- A microphone and speakers or a headset for the voice test. Allow microphone access when the browser asks.
+- Copilot Studio access and billing capacity for this preview. Building, testing and evaluating agents can consume Copilot Credits; see [Customer Conversation harness usage and billing](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/overview-customer-conversation).
+
+</details>
 
 > [!NOTE]
-> This is a preview experience and the designer changes often. If a label differs slightly from what you see, look for the closest match.
+> This lab uses simulated data and does not require a live subscription backend or a contact-center deployment.
 
 ---
 
@@ -120,7 +132,7 @@ By the end of this lab you will have:
 - Created the **Zava Coffee Subscription Assistant** with general and voice instructions and an **identify-caller-intent** skill
 - Added a **Subscription Cancellation** sub-agent with a **cancel-subscription-flow** skill
 - Seen in the Activity map that a cancellation is routed and a delivery question is not
-- Cancelled a subscription on a voice call
+- Simulated a subscription cancellation on a voice call
 - *(Extra)* Added the enrollment, billing and delivery specialists and tested their routing
 
 ---
@@ -133,6 +145,8 @@ By the end of this lab you will have:
 | 2 | [Add the Subscription Cancellation sub-agent](#use-case-2-add-the-subscription-cancellation-sub-agent) | A specialist that owns one job, with visible routing | 12 min |
 | 3 | [Test the same agent on a voice call](#use-case-3-test-the-same-agent-on-a-voice-call) | The same agent on the phone, with no extra build | 8 min |
 | Extra | [Add the enrollment, billing and delivery specialists](#extra-add-the-enrollment-billing-and-delivery-specialists) | A complete contact centre agent with four specialists | 15 min |
+
+The 30-minute lab covers Use Cases #1–#3. The extra specialists are optional and take about 15 additional minutes.
 
 ---
 
@@ -156,38 +170,38 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
 
 #### Create the agent
 
-1. Open [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/) and select your lab environment.
+1. Open [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/), sign in with your lab account, and select the environment your facilitator gives you. If a first-run notice or tour appears, review it and dismiss it before continuing. Ask your facilitator about any unexpected consent or access request.
 
-1. Select **Agents** in the left navigation. Select the **arrow** next to **New agent**, then select **Customer Assist Agent (Customer conversation)**.
+1. Select **Agents** → **More create options** (arrow beside **New agent**) → **Customer conversation agent**. Accessible name: **Customer conversation agent, uses Copilot Credits**. If missing, stop and ask your facilitator.
 
-    ![The New agent menu with Customer Assist Agent under Other ways to build](images/new-agent-menu.png)
+    ![More create options showing Customer conversation agent](images/new-agent-menu.png)
 
-1. On **Create your Customer Assist Agent**, ignore the description box. Under **Start from scratch**, select **Create agent**.
+1. Leave the description box empty. Under **Start from scratch**, select **Create agent**.
 
     ![The Start from scratch option with the Create agent button](images/start-from-scratch.png)
 
-1. In **Name your agent**, enter the name below followed by your initials, for example `Zava Coffee Subscription Assistant RS`, then select **Create**.
+1. In the naming dialog, enter the name below. Select **Create**, then wait for provisioning and editable fields.
 
     ```text
     Zava Coffee Subscription Assistant
     ```
 
     > [!NOTE]
-    > Agent names are limited to 42 characters and must be unique in the environment. Keep your initials short.
+    > If an agent with this name already exists in your environment, add your initials to the end of the name. Agent names are limited to 42 characters.
 
-1. The canvas opens with the primary agent's panel. A pre-added **Escalate** tool shows a warning icon. Leave it; this lab doesn't use it.
+1. On **Build**, open the primary agent's card. Leave **Human handoff** → **Handoff method** → **Needs setup** unchanged; human handoff is outside this lab.
 
     ![The primary agent panel with Description, Instructions, Skills, Tools and Knowledge](images/primary-agent-panel.png)
 
 #### Add the description and instructions
 
-1. In **Description**, paste:
+1. Select **Description**, paste the following, then select **Save** for that field:
 
     ```text
     Acts as a concierge for Zava customers, helping them enroll in new coffee subscriptions, manage account and billing details, adjust delivery preferences, or cancel subscriptions by routing each request to the right specialist.
     ```
 
-1. In **Instructions**, stay on the **General** tab and paste:
+1. Select **Expand instructions** to open the full editor. On the **General** tab, paste the following. If the expanded editor opens blank, paste into the inline instructions box instead.
 
     ```text
     ## Purpose
@@ -212,7 +226,7 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
     If a caller's request doesn't match any known intent, ask one clarifying question to determine whether it relates to subscription setup, account management, delivery, or cancellation before routing.
     ```
 
-1. Select the **Voice** tab. This text is extra guidance for phone calls, layered on top of General. Paste:
+1. Select the **Voice** tab. This text is extra guidance for phone calls, layered on top of **General**. Leave **Chat** unchanged. Paste:
 
     ```text
     ## Voice interaction guidelines
@@ -224,13 +238,13 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
     - Gracefully handle speech-recognition errors, silence, barge-in, and requests to repeat.
     ```
 
-    ![The Voice tab of the primary agent's instructions](images/voice-instructions.png)
+    ![The full instructions editor with the Voice tab selected](images/voice-instructions.png)
 
 1. Select **Save**.
 
 #### Add the identify-caller-intent skill
 
-1. Next to **Skills**, select **+**. In **Add skill**, keep the default skill type and enter:
+1. Next to **Skills**, select **+**. In the **Add skill** dialog, select **Generative** and enter:
 
     | Field | Value |
     |-------|-------|
@@ -254,7 +268,7 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
 
 #### Checkpoint: test before any specialist exists
 
-1. Select the **Preview** tab, then **Web Chat**. Voice Call is the default; switch it now.
+1. Save your changes, then select **Preview** → **Web Chat**; the tested preview initially selected **Voice Call**. Preview runs saved changes only.
 
 1. Send:
 
@@ -270,7 +284,7 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
     I want to cancel my subscription
     ```
 
-    The agent handles the request **itself** and asks for your subscription ID. Open the **Activity map**: there is no sub-agent step, because no specialist exists yet.
+    The agent handles the request **itself** and asks for your subscription ID and reason for cancellation. Open the **Activity map**: there is no sub-agent step, because no specialist exists yet.
 
     ![Web Chat where the primary agent handles a cancellation itself](images/test-cancel-no-subagent.png)
 
@@ -280,7 +294,7 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
 
 ### Test your understanding
 
-* Why are the voice guidelines on a separate tab and not in General?
+* Why are the voice guidelines on the Voice tab and not in General?
 * The routing rules name four specialists that don't exist yet. What does the agent do with those rules today?
 
 ---
@@ -301,9 +315,9 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
 
 #### Create the sub-agent
 
-1. Select the **Build** tab. On the canvas, select **Add a sub-agent**. A **New Sub-Agent** appears and its panel opens.
+1. On **Build**, select **Add a sub-agent**. Wait for the **New Sub-Agent** to finish provisioning and its fields to become editable.
 
-1. Select the title **New Sub-Agent**, rename it, and select the checkmark:
+1. Select the **New Sub-Agent** title, enter the name below, then select the checkmark labeled **Save name**:
 
     ```text
     Subscription Cancellation
@@ -312,13 +326,13 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
     > [!IMPORTANT]
     > Use exactly this name. The primary agent's routing rules refer to it.
 
-1. In **Description**, paste the following and select **Save**. The primary agent uses this description to decide when to route here.
+1. Select **Description**, paste the following, then select **Save** for that field. The primary agent uses this description to decide when to route here.
 
     ```text
     Handles cancellation requests; includes the `Cancel Subscription Flow` skill and uses coffee subscription policy knowledge.
     ```
 
-1. In **Instructions**, paste the following and select **Save**. The **Demo Mode** section stands in for a backend system.
+1. Open **Instructions**, paste the following, then select **Save** for that field. The **Demo Mode** section stands in for a backend system.
 
     ```text
     ### Purpose
@@ -346,7 +360,7 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
 
 #### Add the cancel-subscription-flow skill
 
-1. In the sub-agent's panel, next to **Skills**, select **+** and enter:
+1. In the sub-agent's panel, next to **Skills**, select **+**. In **Add skill**, select **Generative** and enter:
 
     | Field | Value |
     |-------|-------|
@@ -367,13 +381,13 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
 
     ![The Add skill dialog for cancel-subscription-flow](images/add-skill-cancel.png)
 
-1. Close the panel. The canvas shows the primary agent connected to **Subscription Cancellation**.
+1. Confirm each edited field is saved, then close the panel. The canvas shows the primary agent connected to **Subscription Cancellation**, with one sub-agent.
 
     ![The canvas with the primary agent and one sub-agent](images/canvas-one-subagent.png)
 
 #### Test the routing in Web Chat
 
-1. Select **Preview**, then **Web Chat**. Select **+** to start a new conversation.
+1. Select **Preview**, then **Web Chat**. Select **Start new test session** at the top right to clear the previous conversation.
 
 1. Send these messages one at a time and wait for each reply:
 
@@ -393,16 +407,21 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
     Yes, please cancel it
     ```
 
-    The agent confirms the cancellation with a code such as **ZC-10421** and says the final delivery ships within 3 business days.
-
-1. In the **Activity map**, find **Interpreting agent intent**: *The agent determined that invoking the Subscription Cancellation agent was required.* Below it, **Preparing agent inputs** shows the **Task** passed to the specialist, followed by **Executing agent** and, at the end, **Return To Main Conversation Tool**.
-
-    ![Cancellation completed in Web Chat, with the routing in the Activity map](images/test-cancel-routed.png)
+    Expect a simulated confirmation such as **ZC-10421** and final delivery within 3 business days. Wording and codes vary; no real subscription changes.
 
     > [!NOTE]
-    > A red **Cancelled** status can indicate an interrupted step. Check the conversation and Activity map for errors rather than assuming the test succeeded or failed.
+    > The live four-message test stalled after the reason. If chat stays silent for about two minutes, inspect the chat and **Activity map**, not just the main **Execution summary**. Select **Start new test session** and retry once with `I want to cancel my subscription. My subscription ID is SUB-1042, and I am moving abroad.` When asked, send `Yes, please cancel it`. This diagnostic retry passed. If it also stalls, stop and ask your facilitator.
 
-1. Select **+** for a new conversation and send:
+1. In **Activity map**, verify invocation of **Subscription Cancellation**, its inputs and the completed return. The diagnostic retry showed **Interpreting agent intent**, **Preparing agent inputs**, **Executing agent**, **Reviewing nested activity**, and **Return To Main Conversation Tool**.
+
+    ![Successful diagnostic retry using the combined cancellation prompt, with specialist routing in the Activity map](images/test-cancel-routed.png)
+
+    *Diagnostic retry, not the four-message sequence: the combined request produced ZC-12345 and a final delivery within 3 business days.*
+
+    > [!NOTE]
+    > The diagnostic retry included an intermediate **Cancelled** tool action followed by a **Completed** return. Check the conversation and final return status rather than treating an intermediate status alone as the test result.
+
+1. Select **Start new test session** for a new conversation and send:
 
     ```text
     Can I change my delivery date to next Friday?
@@ -431,17 +450,20 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
 
 ### Objective
 
-Cancel a subscription by voice and hear the **Voice** instructions at work.
+Simulate a subscription cancellation by voice and hear the **Voice** instructions at work.
+
+> [!NOTE]
+> Only connection and end-call controls were verified; no spoken input was supplied. Recognition, spell-back and spoken cancellation remain unverified. The completed-call image is an earlier example.
 
 ---
 
 ### Step-by-step instructions
 
-1. In **Preview**, select **Voice Call**. Put on your headset.
+1. Connect a microphone and speakers or a headset. In **Preview**, select **Voice Call**. If audio is unavailable, use **Web Chat** or watch the facilitator's call; this does not verify voice behavior.
 
-    ![The Voice Call test panel with the call button and Live Transcript](images/voice-call-panel.png)
+    ![The Voice Call panel with connection controls and Live Transcript](images/voice-call-panel.png)
 
-1. Select the green **call** button and allow microphone access if asked. Wait for the greeting.
+1. Select **Start voice conversation** and allow microphone access if asked. Confirm **Listening...** and **Voice call connected** in the **Live Transcript**, then wait for the greeting.
 
 1. Say:
 
@@ -451,14 +473,14 @@ Cancel a subscription by voice and hear the **Voice** instructions at work.
 
 1. Listen and watch the **Live Transcript** and **Activity map**:
 
-    - The agent fills the pause with a short phrase while it routes.
-    - It spells your subscription ID back **digit by digit**, as the Voice tab asks.
-    - It asks **one question at a time** and reads no markdown.
-    - It ends with a confirmation code.
+    - Check whether the agent handles pauses naturally without announcing internal routing.
+    - Check that critical identifiers and confirmation codes are spoken clearly, as the **Voice** guidance requests.
+    - Check that it asks **one question at a time** and reads no markdown.
+    - Confirm that it ends with a simulated confirmation code. Record any mismatch rather than assuming the instructions guarantee this behavior.
 
-    ![A completed voice cancellation with the transcript and Activity map](images/voice-call-done.png)
+    ![Earlier example of a completed voice cancellation; spoken behavior was not revalidated in this run](images/voice-call-done.png)
 
-1. End the call.
+1. Select **End conversation** and confirm the control returns to **Start voice conversation**. Leave the agent unpublished; this lab does not require a live phone number or a production channel.
 
 > [!TIP]
 > In a room without a microphone? Use Web Chat, or watch the facilitator's call on screen.
@@ -470,7 +492,7 @@ Cancel a subscription by voice and hear the **Voice** instructions at work.
 ### Test your understanding
 
 * Which behaviours on the call came from the Voice tab, and which from General?
-* What did you have to change to put the agent on the phone?
+* What did you have to change to test the agent by voice in Preview?
 
 ---
 
@@ -484,11 +506,14 @@ Cancel a subscription by voice and hear the **Voice** instructions at work.
 
 Add the three remaining sub-agents the routing rules refer to, then check that each request type lands on the right one.
 
+> [!NOTE]
+> Optional specialists and screenshots were not revalidated. Their routing results are outcomes to test, not verified results.
+
 ---
 
 ### Step-by-step instructions
 
-For each sub-agent below, repeat the steps from Use Case #2: on the **Build** canvas select **Add a sub-agent**, rename it to exactly the **Name**, save the **Description** and **Instructions**, then add the skill with **Skills** → **+**.
+Repeat Use Case #2 for each specialist: **Build** → **Add a sub-agent**; wait for provisioning; rename **New Sub-Agent** to exactly the **Name** below; select **Save name**. Save **Description** and **Instructions** separately. Select **+** beside **Skills** and add a **Generative** skill. Use only fictional contact and payment details.
 
 #### Subscription Enrollment & Setup
 
@@ -640,7 +665,7 @@ The canvas now shows four sub-agents.
 
 #### Test the routing
 
-In **Preview** → **Web Chat**, start a new conversation (**+**) for each line and check the **Activity map**:
+In **Preview** → **Web Chat**, select **Start new test session** before each line and check the **Activity map**:
 
 | Send | Routes to |
 |------|-----------|
@@ -664,9 +689,13 @@ The delivery question that the primary agent answered itself in Use Case #2 now 
 
 | Problem | Fix |
 |---------|-----|
-| **TelephonyBadRequest**, another error, or no response in the test pane | Select **+** to start a new conversation and repeat the test. If the problem persists, record the error details |
-| **Escalate** tool shows a warning | It is pre-added and not configured. This lab doesn't use it; leave it |
-| The name is rejected or cut off | Names are limited to 42 characters and must be unique. Shorten your initials |
+| **Customer conversation agent** is missing from **More create options** | Confirm the preview URL and the facilitator-provided environment. Ask the facilitator to verify feature access; do not substitute a different harness |
+| No cancellation reply after about two minutes | Check the chat and Activity map. Use the one diagnostic retry in Use Case #2; stop and ask your facilitator if it also stalls |
+| **TelephonyBadRequest** or another test-pane error | Record the error, select **Start new test session**, and retry once. If it persists, ask your facilitator |
+| **Handoff method** shows **Needs setup** under **Human handoff** | Leave it unchanged; this lab does not configure human handoff |
+| New agent or sub-agent fields are disabled | Wait for provisioning to finish before entering values |
+| The name is rejected or cut off | Use a shorter, distinctive name and follow the validation message. Keep the sub-agent names in this lab unchanged so they match the routing instructions |
+| Preview does not reflect an edit | Save each edited field, select **Start new test session**, and repeat the same scenario |
 | A request isn't routed | Check the sub-agent's name matches the routing rules exactly and its **Description** is saved |
 | No sound on the voice call | Allow microphone access in the browser and check your audio device, then call again |
 
@@ -677,7 +706,7 @@ The delivery question that the primary agent answered itself in Use Case #2 now 
 * **The primary agent decides; sub-agents specialise.** Each specialist owns its own instructions and skills, so you change one job without touching the others.
 * **Routing follows what exists.** Before a sub-agent existed, the primary handled the request itself. Once it existed, the same request was routed.
 * **The description drives the route.** The primary agent reads each sub-agent's description to decide where a request belongs.
-* **Voice is a layer, not a rebuild.** The Voice tab added spell-back and one-question-at-a-time on top of General. Nothing else changed to put the agent on the phone.
+* **Voice is a layer, not a rebuild.** The Voice tab adds spell-back and one-question-at-a-time guidance on top of General. Preview lets you test voice without deploying a production phone channel; a connected call alone does not verify spoken behavior.
 * **The Activity map shows the decision.** It shows which sub-agent was chosen, what task it received, and when control returned.
 
 ---
