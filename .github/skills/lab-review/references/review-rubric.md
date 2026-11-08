@@ -7,10 +7,11 @@ Use after the audit. Mark each item **pass**, **issue** (with evidence) or **n/a
 - [ ] Product, feature and connector names match current Microsoft Learn pages. Since 2026: **Microsoft Copilot**, **Microsoft Copilot Chat** and the **Microsoft Copilot harness** (see `scripts/lab-audit-terms.json`); license SKU names stay as the price list shows them.
 - [ ] UI labels in **bold** match the product today, or the review says they could not be verified.
 - [ ] License, credit, preview, region and admin prerequisites are current and complete.
-- [ ] Prerequisites open with the cross-team "Skip this section" callout for attendees of a proctor-led event with pre-provisioned user accounts (classic), or list only attendee-ready items (missions); no self-hosting setup is presented as a first step for those attendees.
+- [ ] Prerequisites use an organizer-neutral cue for attendees with pre-provisioned accounts; own-tenant setup is compact/collapsible where supported, while sign-in, downloads and safety actions remain visible.
 - [ ] Renamed or moved features are updated everywhere, including description, intro, tables, tips and troubleshooting, not just the steps.
 - [ ] Links resolve to the intended page (not a redirect to a generic landing page).
 - [ ] Statements about limits, costs or availability cite a source in the lab.
+- [ ] Literal pipes in Markdown prose are escaped (`&#124;`) where Kramdown could parse a table; generated HTML preserves the intended wording and list structure.
 
 ## Instructions
 
@@ -27,7 +28,7 @@ Use after the audit. Mark each item **pass**, **issue** (with evidence) or **n/a
 
 - [ ] README and `_labs` copies say the same thing (`copy-drift` clean, or the difference is intentional).
 - [ ] The table of contents matches the headings in both copies.
-- [ ] Classic labs keep the house sections; missions labs keep the contract in `docs/NEW_LAB_CHECKLIST.md`.
+- [ ] Classic labs keep the house sections; missions labs keep the contract in `docs/NEW_LAB_CHECKLIST.md`. Learner-critical guidance exists in rendered front matter fields, and closed details and lazy images are verified in the rendered page.
 
 ## Timing and delivery
 
@@ -42,8 +43,14 @@ Use after the audit. Mark each item **pass**, **issue** (with evidence) or **n/a
 - [ ] Link text makes sense out of context.
 - [ ] Nothing relies on color, position or icon shape alone.
 - [ ] Screenshots are legible at the published width; product UI has light and dark variants in missions labs.
+- [ ] Screenshots show the current state and exact asset name, contain required controls, use genuine theme captures, retain native pixel density and have alt text limited to the proven state; provenance and privacy checks are explicit.
+- [ ] Generated app checks cover source-data comparison, boundary values, keyboard/accessibility names, reduced motion, narrow width, persistence/undo and recovery as applicable. DOM checks are not described as spoken screen-reader verification.
 
 ## Learning design
 
 Score 0–2 for each principle in `learning-design.md` (0 absent, 1 partial, 2 clear) and
 report the three lowest with a concrete rewrite of one example step.
+
+For any live claims, identify the account/tenant boundary and distinguish passed, drift,
+defect, variance, blocked, untested and unverified. A report that did not run the lab must
+not imply product behavior was tested.

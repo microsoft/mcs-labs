@@ -27,6 +27,13 @@ All new images were checked for personal data outside the training scenario.
 - [ ] Served locally: changed sections, images in light and dark, table of contents, Previous and Next with `?event=`
 - [ ] Run through in the product (%%date, tenant type%%), or why not
 
+### Run-through coverage
+
+Core: %%passed/total%%; optional: %%passed/total%%. Status counts: passed %%n%%, drift
+%%n%%, defect %%n%%, variance %%n%%, blocked %%n%%, untested %%n%%, unverified %%n%%.
+State the independent outcome checks performed and what remains unverified; do not infer a
+pass from a completed run, chat claim, private share dialog or hidden tool trace.
+
 ### Not changed
 
 %%Prompts kept verbatim / timing unchanged / intentional differences between the README and site copies.%%

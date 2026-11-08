@@ -50,24 +50,26 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
   often. Rename them throughout the lab, not only in the steps: front matter
   `description`, intro, Lab Details, Use Cases table, targets, tips, troubleshooting and
   link text. Remove steps for UI that no longer exists (retired toggles, "new experience"
-  switches) and add any new mandatory screen. When something cannot be reached live,
-  check its current name on Microsoft Learn and say "unverified live" in the PR.
+  switches) and add any new mandatory screen. When something cannot be reached live, check
+  its current name on Microsoft Learn and say
+  "unverified live" in the PR.
 - **Lists.** Indent a code block, image or note inside a numbered step by three spaces.
   Kramdown otherwise ends the list and the site restarts numbering at 1.
-- **Prerequisites.** Attendees of a proctor-led event with pre-provisioned user accounts
-  must not repeat tenant setup. Keep the guidance cross-team, and do not imply that
-  attending any event is enough to skip setup. Open the section
-  with the `> [!IMPORTANT]` "Skip this section" callout from the `lab-create` classic
-  templates, linking to the first use case in that copy, then list self-hosting
-  requirements under **Running this lab in your own tenant?** Replace older variants
-  (a `[!NOTE]` about CAT-led workshops, "For an instructor-led bootcamp…" sentences,
-  per-item "bootcamp: skip" bullets). Move anything an attendee still needs, such as a
-  download or a facilitator-provided value, into the step where it is first used. In
-  missions labs, `prerequisites:` is the attendee's ready checklist only; self-hosting
-  setup goes in the body, never in that list.
+- **Prerequisites.** Attendees with pre-provisioned accounts must not repeat tenant
+  setup. Use the organizer-neutral template cue and do not imply that attending any event
+  is enough to skip setup. Keep sign-in, downloads and safety actions visible; compact or
+  collapse only self-hosting setup where supported. Replace older event-specific variants.
+  In missions labs, `prerequisites:` is an always-visible attendee readiness checklist.
+  Keep own-tenant setup concise and explicitly conditional ("in your own tenant only") so
+  event attendees do not repeat provisioning.
+- **Rendered Markdown.** Escape literal pipes in prose as `&#124;` where Kramdown could
+  make an accidental table. Build the page and inspect generated HTML; source-only review
+  will not catch every list or table parsing issue.
 - **Prompts.** Prompts are tested content. Change one only when the run-through shows it
   no longer works, and say why in the PR. In missions labs the prompt must stay identical
-  in front matter, the `_labs` body and the README.
+  in front matter, the `_labs` body and the README. If an unchanged supplied prompt has a
+  baseline retired-name warning, disclose it as pre-existing; do not rename the prompt to
+  silence the audit.
 - **Durations.** `duration`, the Lab Details row, use-case or mission minutes, and every
   agenda slot listing the lab (`agenda-usage`) must agree. Agenda changes affect an event,
   so name the event in the PR.
@@ -92,12 +94,16 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
 Use the captures and crop sizes from the `lab-runthrough` log. Keep the file name and
 format so neither copy's Markdown changes. For missions labs, update `width`, `height` and
 `alt` in the front matter, keep `src` and `src_dark` pairs together and keep the
-`<picture>` element in both bodies. Look at every new image before committing: subject
-legible, both themes framing the same content, no personal data outside the scenario.
+`<picture>` element in both bodies. Use genuine current product captures at native
+resolution; never retouch pixels to alter a name, result or product state. Recheck target
+position after each theme switch, and verify both crops contain the current response,
+whole filename and required controls. Inspect at full and rendered size, check EXIF/XMP
+and visually review OCR candidates. A single theme-neutral hero is valid; do not create an
+unused dark variant. Mark retained old images as not freshly verified.
 
-Delete an image only when the audit reports it as `image-orphan` and nothing else
-references it (`git grep <file name>`). Shared images (`image-shared`) belong to more than
-one lab.
+Compare the orphan scan with the baseline. Delete only images newly orphaned by this
+branch and only after checking references (`git grep <file name>`); never delete
+untouched-lab or shared assets (`image-shared`).
 
 ## 5. Validate
 
@@ -109,17 +115,34 @@ bash tools/run.sh                 # or .\tools\run.ps1; open /mcs-labs/labs/<slu
 
 In the browser check the changed sections, images in light and dark themes, the table of
 contents links, and Previous and Next with `?event=<id>` for each event that lists the
-lab. Compare the audit with `main` when the lab already had findings: the PR should not
-add any.
+lab. Verify the generated HTML, including literal pipes escaped as `&#124;`, rendered
+mission instructions/help, lazy image dimensions and baseurl/event-context links. Compare
+the audit with `main` when the lab already had findings: the PR should not add any.
 
 ## 6. Open the PR
 
-1. Commit both copies, images and any terms or agenda changes, with a message such as
+1. Review `git status` and stage only the intended files. Preserve concurrent edits;
+   never amend a commit unless the user explicitly asks. Use the configured GitHub
+   noreply commit identity rather than a private email, and do not put account identities
+   or tokens into this skill. Do not reset or discard upstream wording to resolve a
+   conflict; reconcile it with the requested change and retain a backup before resolving
+   dirty work.
+2. Commit both copies, images and any terms or agenda changes, with a message such as
    `fix(<slug>): update Cowork plugin steps for the new Agents & Plugins page`.
-2. Push the branch and open the PR against `microsoft/mcs-labs` `main` with `gh pr create`
-   and a body from `templates/pr-body.md`. Link the issue with `Fixes #<n>`.
-3. Check CI (`gh pr checks <n>`): Lab Doc Sync, Accessibility and Lighthouse.
-4. Never merge your own PR, and never push to `main`.
+3. Before pushing, verify the authenticated GitHub account, target repo, head repo and
+   branch. Push only after local validation. Open the PR against `microsoft/mcs-labs`
+   `main` with `gh pr create` and a current body from `templates/pr-body.md`; include
+   coverage qualifications and link the issue with `Fixes #<n>`.
+4. Check CI (`gh pr checks <n>`): Lab Doc Sync, Accessibility and Lighthouse. Verify that
+   the remote head matches the intended local commit and that the PR is open and unmerged
+   before changing its ready state. Push, readiness and content freshness are separate
+   gates; never describe an unpushed PR as current. Refresh the PR body with the latest
+   evidence and qualification before marking it ready.
+
+Check native command exit codes explicitly. In PowerShell, a semicolon or pipeline can
+leave a successful final command hiding a failed `git`/`npm` command; inspect `$LASTEXITCODE`
+or use a command runner that preserves it before reporting validation success.
+5. Never merge your own PR, and never push to `main`.
 
 ## Recurring maintenance
 

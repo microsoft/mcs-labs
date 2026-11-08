@@ -88,12 +88,15 @@ description: "%%ONE_SENTENCE_DESCRIPTION%%"
 
 ## Prerequisites
 
-> [!IMPORTANT]
-> **Taking part in a proctor-led event with a pre-provisioned user account? Skip this section.** Your lab account, environment, licences, connections and sample data are already set up. Go straight to [Use Case #1](#use-case-1-%%USE_CASE_1_ANCHOR%%) and sign in with your lab account when prompted. If something looks missing, ask your facilitator.
+> [!NOTE]
+> **Using a provided or pre-provisioned event account?** Sign in when prompted; ask the organizer if something is missing.
 
-**Running this lab in your own tenant?** Set this up first:
+<details>
+<summary>Running this lab in your own tenant? Set this up first.</summary>
 
 - %%PREREQUISITE_1%%
+
+</details>
 
 ---
 
