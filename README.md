@@ -50,36 +50,36 @@
 | Dataverse MCP Connector | [dataverse-mcp-connector](./labs/dataverse-mcp-connector) | Create and configure a Copilot Agent with Dataverse MCP Server integration to read and update account information from Dataverse using natural language queries. |
 | Model Context Protocol (MCP) & Copilot Studio | [MCS-MCP Lab](https://github.com/microsoft/mcsmcp) | Learn how to deploy an MCP Server and integrate it with Microsoft Copilot Studio for streamlined deployment and management. |
 
-## Architecture Bootcamp Latest
+## Architecture Bootcamp
 
-The [Bootcamp Latest agenda](./_data/agendas/bootcamp-latest.yml) contains 17 modules and 11 labs.
-Each lab uses `mcs-<module-slug>` except for the scenario-specific Zava Sales lab, Copilot Code, Instructions and Skills Authoring, and Hooks and Knowledge.
-Bootcamp-specific copies use `-latest` slugs where needed; the shared Skills and Hooks labs retain their existing content and associations with 30-minute Bootcamp slots.
+The advertised [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) contains 17 modules and 11 guided missions-format labs. Its [agenda](./_data/agendas/architecture-bootcamp.yml) is the source of truth for the three-day schedule.
 
 | Lab | Title | Slot |
 | --- | ----- | ---- |
-| 1 | [M365 Copilot Chat and Work IQ](./labs/mcs-m365-copilot-latest) | 15 min |
+| 1 | [Microsoft Copilot Chat and Work IQ](./labs/copilot-chat-workiq) | 15 min |
 | 2 | [Cowork: from insights to action](./labs/cowork-zava-sales) | 30 min |
-| 3 | [Copilot Code: build a simple web app](./labs/mcs-copilot-code) | 30 min |
-| 4 | [Put a Cowork skill into a DA](./labs/mcs-copilot-harness-latest) | 30 min |
-| 5 | [Standard harness — Component Model](./labs/mcs-standard-harness) | 30 min |
-| 6 | [Instructions and Skills Authoring](./labs/mcs-skills-authoring) | 30 min |
-| 7 | [Hooks and Knowledge: Travel Policy Agent](./labs/mcs-hooks) | 30 min |
-| 8 | [Customer Conversation Harness](./labs/mcs-customer-conversation-harness) | 30 min |
-| 9 | [Managed Apps](./labs/mcs-managed-apps) | 30 min |
-| 10 | [Workflows](./labs/mcs-workflows-latest) | 30 min |
-| 11 | [Agent integration](./labs/mcs-agent-integration) | 30 min |
+| 3 | [Copilot Code: build a simple web app](./labs/copilot-code-web-app) | 30 min |
+| 4 | [Reuse a Cowork skill in a declarative agent](./labs/declarative-agent-skill-reuse) | 30 min |
+| 5 | [Standard harness — Component Model](./labs/standard-harness-components) | 30 min |
+| 6 | [Instructions and Skills Authoring](./labs/instructions-skills-authoring) | 30 min |
+| 7 | [Hooks and Knowledge: Travel Policy Agent](./labs/hooks-knowledge-travel-policy) | 30 min |
+| 8 | [Customer Conversation Harness](./labs/customer-assist-agent) | 30 min |
+| 9 | [Apps on Microsoft Copilot Managed Runtime](./labs/managed-apps-build) | 30 min |
+| 10 | [Workflows](./labs/workflows-autonomous) | 30 min |
+| 11 | [Agent integration](./labs/agent-integration-team) | 30 min |
 
 Slots are agenda allocations, not a promise that all retained reference exercises fit.
-The Zava Sales lab opts into the guided mission format; other labs keep their classic rendering.
-Its four core missions have a 30-minute working budget; two optional extensions cover the Friday feedback loop and Zava Sales plugin. Model and connector latency varies by run.
-See each lab's pacing or placeholder note, and the [dependency notes](./_data/agendas/README.md#bootcamp-latest).
+All 11 labs use guided missions, including the shared Zava Sales lab. Model and
+connector latency varies by run. See each lab's pacing and optional extensions,
+and the [curriculum notes](./_data/agendas/README.md#architecture-bootcamp).
 
-The separate [missions edition](./_events/architecture-bootcamp.md) is an
-unlisted review curriculum: ten net-new guided labs plus the existing Zava Sales
-lab, with the same module schedule and lab slots. The advertised event continues
-to use the classic versions. See its [agenda](./_data/agendas/architecture-bootcamp.yml)
-for the complete lab mapping. Unlisted pages are public by direct URL, not access-controlled.
+The [classic-format edition](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/)
+and its labs remain available at their existing URLs. The classic event is unlisted
+and excluded from search and the sitemap, not access-controlled or deleted.
+Its module schedule and lab slots are unchanged. Module companion cards follow
+the active event, so modern attendees open modern labs and classic attendees
+retain their original exercises. External short links such as `aka.ms/MCSBootcamp`
+are managed separately; this repository change does not retarget them.
 Both editions distinguish proctor-led events with pre-provisioned user accounts
 (skip tenant setup) from self-paced setup. Lab-specific blockers and optional,
 unverified exercises are called out rather than presented as completed validation.
@@ -93,8 +93,8 @@ Active [presentation decks](./presentations/bootcamp-latest) follow module numbe
 with Module 17 using the existing `Copilot Studio Kit.pptx` filename;
 unused decks remain in the same folder and empty placeholders contain no slides.
 
-Legacy Bootcamp event URLs and event-context links forward to the latest agenda
-or corresponding current module/lab. Old presentation download URLs are not
+Legacy versioned Bootcamp event URLs and event-context links retain their classic
+destinations. Old presentation download URLs are not
 redirected; see the [compatibility notes](./_data/agendas/README.md#legacy-event-links).
 
 ## 📚 Documentation & Contributing

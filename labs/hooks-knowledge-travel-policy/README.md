@@ -1,5 +1,7 @@
 # Hooks and Knowledge: Travel Policy Agent
 
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+
 Know the traveler. Find the right policy. Leave with a **saved draft Travel Policy Agent**, a published session-start workflow and evidence that SharePoint retrieval selects the applicable policy. Redaction and a booking guard follow as optional extensions.
 
 

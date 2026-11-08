@@ -91,6 +91,34 @@
                 "duration": {{ item.duration | default: mod.duration | default: 0 }}
                 {%- if item.time %}, "time": {{ item.time | jsonify }}{% endif -%}
                 {%- comment -%}
+                  Companion cards are independent of lab:false, which suppresses
+                  automatic agenda/count entries, not the module's lab link.
+                {%- endcomment -%}
+                {%- if item.companion_lab == false -%}
+                  , "companion_lab": false
+                {%- else -%}
+                  {%- assign companion_slug = item.companion_lab | default: mod.lab -%}
+                  {%- assign companion = site.labs | where: "slug", companion_slug | first -%}
+                  {%- if companion -%}
+                    {%- assign companion_duration = companion.duration -%}
+                    {%- for companion_row in agenda.schedule -%}
+                      {%- if companion_row.type == "lab" and companion_row.slug == companion_slug -%}
+                        {%- assign companion_duration = companion_row.duration | default: companion.duration -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                    , "companion_lab": {
+                      "slug": {{ companion.slug | jsonify }},
+                      "url": {{ companion.url | relative_url | jsonify }},
+                      "title": {{ companion.title | jsonify }},
+                      "description": {{ companion.description | default: "" | strip_html | truncate: 180 | jsonify }},
+                      "difficulty": {{ companion.difficulty | default: 0 | jsonify }},
+                      "duration": {{ companion_duration | default: 0 | jsonify }}
+                    }
+                  {%- elsif item.companion_lab -%}
+                    , "companion_lab": null
+                  {%- endif -%}
+                {%- endif -%}
+                {%- comment -%}
                   An agenda row may point a module at a different deck than its own
                   front matter (V3 reuses the Workflows and Multi-Agent modules with
                   V3 decks). Emit the override already resolved through

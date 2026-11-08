@@ -1,5 +1,7 @@
 # Customer Conversation Harness
 
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+
 Build a Zava Coffee concierge and cancellation specialist, inspect real routing evidence, and test voice while distinguishing verified controls from unverified spoken behavior.
 
 You are building a customer-service prototype for **Zava Coffee**. Customers want to enroll, change billing, move deliveries or cancel. Build a **Customer Assist Agent** on the Customer conversation harness, then compare what the primary agent does before and after a cancellation specialist exists. **Demo Mode** simulates results; no real subscription changes.

@@ -5,7 +5,7 @@ order: 3150
 duration: 30
 difficulty: 200
 section: intermediate_modules
-description: "Develop, govern, and test custom agents with the Copilot Agent Kit: validate AI-generated content, optimize prompts, and track aggregated key performance indicators."
+description: "Develop, govern, and test Microsoft Copilot Studio agents with the Copilot Agent Kit: validate AI-generated content, optimize prompts, and track key performance indicators."
 slides: "/presentations/bootcamp-latest/Copilot%20Studio%20Kit.pptx"
 ---
 

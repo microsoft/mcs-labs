@@ -5,13 +5,13 @@ order: 3085
 duration: 30
 difficulty: 200
 section: intermediate_modules
-description: "Placeholder for the Agent Integration module in Architecture Bootcamp Latest. Instructor content is coming soon."
+description: "Connect agents in Microsoft Copilot Studio, delegate work to specialists, and integrate an external agent through Agent-to-Agent (A2A). Define clear responsibilities and approval boundaries."
 slides: "/presentations/bootcamp-latest/M12.%20Agent%20Integration.pptx"
 lab: "mcs-agent-integration"
 ---
 
-## Module placeholder
+## Topics covered
 
-This module is under development for Architecture Bootcamp Latest.
-
-Slides and instructor content are coming soon.
+- Agent connections and delegation to internal specialists.
+- Agent-to-Agent (A2A) integration with an externally hosted agent.
+- Tool ownership, approvals, and end-to-end team behavior.

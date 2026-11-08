@@ -12,9 +12,6 @@ description: "Assemble a Standard harness agent from instructions, topics, knowl
 classes: wide
 author_profile: false
 toc: false
-unlisted: true
-search: false
-sitemap: false
 mission_lab:
   headline: "One agent,"
   headline_emphasis: "parts you control."
@@ -462,6 +459,8 @@ mission_lab:
 ---
 
 # Standard harness — Component Model
+
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
 Assemble a Standard harness agent from instructions, topics, knowledge and tools, then optionally inspect state, delegate to a child agent and publish to Teams.
 

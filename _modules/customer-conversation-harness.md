@@ -1,17 +1,17 @@
 ---
 layout: module
-title: "Customer Conversation Harness"
+title: "Customer Conversation harness"
 order: 3055
 duration: 30
 difficulty: 200
 section: intermediate_modules
-description: "Placeholder for the Customer Conversation Harness module in Architecture Bootcamp Latest. Instructor content is coming soon."
+description: "Build Customer Assist agents in Microsoft Copilot Studio for customer-facing chat and voice. Explore instructions, knowledge, tools, specialist agents, and escalation."
 slides: "/presentations/bootcamp-latest/M09.%20Customer%20Assist%20Agent.pptx"
 lab: "mcs-customer-conversation-harness"
 ---
 
-## Module placeholder
+## Topics covered
 
-This module is under development for Architecture Bootcamp Latest.
-
-Slides and instructor content are coming soon.
+- The Customer Conversation harness and Customer Assist agent authoring.
+- Knowledge-grounded conversations and tool-backed actions.
+- Web chat, voice, specialist agents, and human escalation.

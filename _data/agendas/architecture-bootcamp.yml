@@ -1,6 +1,6 @@
 event_id: architecture-bootcamp
 
-# Architecture Bootcamp — Latest, missions edition — 3-day agenda.
+# Architecture Bootcamp — guided missions — 3-day agenda.
 #
 # Same schedule, modules and slot durations as bootcamp-latest.yml. Every lab row
 # points at a guided missions-format lab (lab_format: missions) that rebuilds the
@@ -8,8 +8,8 @@ event_id: architecture-bootcamp
 # classic event because it already uses the missions format.
 #
 # Conventions: see bootcamp-latest.yml. Module rows keep `lab: false` so hero
-# stats count the explicit lab rows and their slot durations. While the event and
-# its new labs are in review, both stay unlisted (see _events/architecture-bootcamp.md).
+# stats count the explicit lab rows and their slot durations. `companion_lab`
+# selects the module page's lab card without adding another agenda item.
 schedule:
   # --- Day 1 — Personal productivity and the Copilot / Standard harnesses ---
   - type: day
@@ -30,7 +30,7 @@ schedule:
   - type: module
     slug: agents-workflows-making-them-real-latest
     label: "Module 1"
-    title: "Copilot Agent Ecosystem"
+    title: "Microsoft Copilot agent ecosystem"
     time: "09:30"
     duration: 45
 
@@ -43,15 +43,16 @@ schedule:
     slug: m365-copilot-latest
     label: "Module 2"
     lab: false
-    title: "M365 Copilot Chat & Work IQ"
-    description: "Microsoft 365 Copilot as an agent surface — public-web grounding, Work IQ, response modes, multi-model support, frontier agents, and where it sits against the other surfaces."
+    companion_lab: copilot-chat-workiq
+    title: "Microsoft Copilot Chat and Work IQ"
+    description: "Explore Copilot Chat in Microsoft Copilot: public-web grounding, work-context retrieval with Work IQ, response modes, model selection, Researcher, and Analyst."
     time: "10:30"
     duration: 30
 
   - type: lab
     slug: copilot-chat-workiq
     label: "Lab 1"
-    title: "M365 Copilot Chat and Work IQ"
+    title: "Microsoft Copilot Chat and Work IQ"
     time: "11:00"
     duration: 15
 
@@ -59,7 +60,8 @@ schedule:
     slug: cowork-latest
     label: "Module 3"
     lab: false
-    title: "Cowork (+ skills, + plugins, + code)"
+    companion_lab: cowork-zava-sales
+    title: "Cowork: skills, plugins, and code"
     time: "11:15"
     duration: 30
 
@@ -86,7 +88,8 @@ schedule:
     slug: copilot-harness-latest
     label: "Module 4"
     lab: false
-    title: "Copilot harness — Agent Builder, pro-code DAs, DAs in MCS"
+    companion_lab: declarative-agent-skill-reuse
+    title: "Copilot Chat harness: declarative agents"
     time: "13:45"
     duration: 30
 
@@ -106,7 +109,8 @@ schedule:
     slug: standard-harness
     label: "Module 5"
     lab: false
-    title: "Standard harness — Component Model"
+    companion_lab: standard-harness-components
+    title: "Standard harness: component model"
     time: "15:00"
     duration: 30
 
@@ -135,7 +139,8 @@ schedule:
     slug: harnesses-and-component-models-latest
     label: "Module 6"
     lab: false
-    title: "New Copilot Studio: Harnesses, Orchestration & Component Models"
+    companion_lab: false
+    title: "Microsoft Copilot Studio: harnesses, orchestration, and component models"
     time: "09:15"
     duration: 60
 
@@ -148,7 +153,8 @@ schedule:
     slug: instructions-and-skills
     label: "Module 7"
     lab: false
-    title: "Deep Dive: Instructions & Skills"
+    companion_lab: instructions-skills-authoring
+    title: "Deep dive: instructions and skills"
     time: "10:45"
     duration: 45
 
@@ -168,7 +174,8 @@ schedule:
     slug: knowledge-and-tools-deep-dive
     label: "Module 8"
     lab: false
-    title: "Deep Dive: Knowledge, Tools & Hooks"
+    companion_lab: hooks-knowledge-travel-policy
+    title: "Deep dive: knowledge, tools, and hooks"
     time: "13:00"
     duration: 45
 
@@ -188,7 +195,8 @@ schedule:
     slug: customer-conversation-harness
     label: "Module 9"
     lab: false
-    title: "Customer Conversation Harness"
+    companion_lab: customer-assist-agent
+    title: "Customer Conversation harness"
     time: "14:30"
     duration: 30
 
@@ -203,7 +211,8 @@ schedule:
     slug: managed-apps
     label: "Module 10"
     lab: false
-    title: "Managed Apps"
+    companion_lab: managed-apps-build
+    title: "Apps on Microsoft Copilot Managed Runtime"
     time: "15:30"
     duration: 30
 
@@ -232,6 +241,7 @@ schedule:
     slug: workflows-latest
     label: "Module 11"
     lab: false
+    companion_lab: workflows-autonomous
     title: "Workflows"
     time: "09:30"
     duration: 45
@@ -252,6 +262,7 @@ schedule:
     slug: agent-integration
     label: "Module 12"
     lab: false
+    companion_lab: agent-integration-team
     title: "Agent integration"
     time: "11:00"
     duration: 30
@@ -271,14 +282,14 @@ schedule:
   - type: module
     slug: alm-and-analytics
     label: "Module 13"
-    title: "ALM — Traditional, Component Collections + Reporting, Analytics & Evals"
+    title: "Application lifecycle management, analytics, and evaluations"
     time: "13:00"
     duration: 30
 
   - type: module
     slug: coding-agents
     label: "Module 14"
-    title: "Coding Agents — plugin, migration, new creation"
+    title: "Coding agents: plugins, migration, and creation"
     time: "13:30"
     duration: 30
 
@@ -297,7 +308,7 @@ schedule:
   - type: module
     slug: agent-identity
     label: "Module 16"
-    title: "Agent Identity"
+    title: "Agent identity"
     time: "14:45"
     duration: 15
 

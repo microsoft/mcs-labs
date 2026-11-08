@@ -1,8 +1,11 @@
 ---
 title: "Architecture Bootcamp - Latest"
-description: "Three-day architecture bootcamp with 17 modules and 11 labs covering the Copilot, Standard, and Customer Conversation harnesses, Cowork, apps on Microsoft Copilot Managed Runtime, instructions, skills, knowledge, tools and hooks, workflows, and agent integration. Close with ALM, analytics, coding agents, AI FinOps, agent identity, and the Copilot Agent Kit."
+description: "Classic-format Architecture Bootcamp with 17 modules and 11 labs across Microsoft Copilot and Microsoft Copilot Studio. Retained for existing deliveries; use Architecture Bootcamp for the guided missions edition."
 event_id: bootcamp-latest
 order: 2
+unlisted: true
+search: false
+sitemap: false
 labs:
   - slug: mcs-m365-copilot-latest
     label: "Lab 1"
@@ -27,3 +30,5 @@ labs:
   - slug: mcs-agent-integration
     label: "Lab 11"
 ---
+
+This is the classic-format edition, retained for existing deliveries and direct links. For the current guided curriculum, use [Architecture Bootcamp]({{ '/events/architecture-bootcamp/' | relative_url }}).

@@ -1,17 +1,17 @@
 ---
 layout: module
-title: "Managed Apps"
+title: "Apps on Microsoft Copilot Managed Runtime"
 order: 3057
 duration: 30
 difficulty: 200
 section: intermediate_modules
-description: "Placeholder for the Managed Apps module in Architecture Bootcamp Latest. Instructor content is coming soon."
+description: "Build apps in Microsoft Copilot Studio for Microsoft Copilot Managed Runtime. Explore generated interfaces, connector-backed data, previews, and persistence."
 slides: "/presentations/bootcamp-latest/M10.%20Managed%20Apps.pptx"
 lab: "mcs-managed-apps"
 ---
 
-## Module placeholder
+## Topics covered
 
-This module is under development for Architecture Bootcamp Latest.
-
-Slides and instructor content are coming soon.
+- App creation and iteration in Microsoft Copilot Studio.
+- Connecting the interface to data rather than relying on in-memory state.
+- Checking save, reload, and error behavior before considering publication.

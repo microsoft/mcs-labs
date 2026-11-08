@@ -43,7 +43,7 @@ schedule:
 
 | `type`    | Required fields       | Optional fields                              | Notes |
 |-----------|-----------------------|----------------------------------------------|-------|
-| `module`  | `slug`, `label`       | `title`, `description`, `time`, `duration`, `slides`, `lab` | `slug` must match a file in `_modules/`. Set `lab: false` when the companion lab has its own explicit row or is not delivered. |
+| `module`  | `slug`, `label`       | `title`, `description`, `time`, `duration`, `slides`, `lab`, `companion_lab` | `slug` must match a file in `_modules/`. Set `lab: false` when the companion lab has its own explicit row or is not delivered. `companion_lab` selects the module page's event-specific lab card; `false` hides that card. |
 | `lab`     | `slug`, `label`       | `title`, `time`, `duration` (overrides the lab's own) | `slug` must match a file in `_labs/`. Links auto-resolve. |
 | `session` | `title`               | `description`, `speaker`, `time`, `duration` | Instructor-led content with no lab page. |
 | `break`   | `title`, `duration`   | `time`                                       | Coffee, lunch, stretch breaks. Visually lighter row. |
@@ -55,16 +55,54 @@ schedule:
 2. Create `_data/agendas/<event_id>.yml` with the full schedule, OR skip the agenda file and rely on the `labs:` fallback.
 3. Rebuild. The event detail page renders the timeline, and every lab in the event gets in-lab navigation automatically.
 
+`companion_lab` is a lab slug, not an extra scheduled activity. It must reference
+a lab in the same event. Keep `lab: false` when that lab already has an explicit
+row so the hero counts and timing are not duplicated. Omit `companion_lab` to
+retain the module's default `lab`; set it to `false` when no companion is delivered.
+With JavaScript enabled, the card's URL, title, description, and metadata follow
+the active event. Exit restores the standalone card. Without JavaScript, the
+module's default companion remains available and the event agenda has explicit
+links to the correct labs.
+
+## Architecture Bootcamp
+
+`architecture-bootcamp.yml` is the advertised three-day curriculum: 17 modules and
+11 missions-format labs. Its event and labs are listed, searchable, and included
+in the sitemap. The classic `bootcamp-latest` event is unlisted but its direct URL,
+lab pages, timetable, and explicit event navigation remain available.
+
+Both agendas use the same module entities and matching module titles. Keep
+product names explicit: **Microsoft Copilot**, **Microsoft Copilot Studio**,
+**Copilot Chat harness** for declarative agents, **Standard harness**, **Customer
+Conversation harness**, and **Microsoft Copilot Managed Runtime** for the apps
+module. The **Microsoft Copilot harness** used in the refreshed labs was formerly
+called **GitHub Copilot**; do not confuse it with the Copilot Chat harness.
+
+Naming reference: Microsoft's indexed Learn article was titled
+[Extend Microsoft Copilot with the Copilot chat harness](https://learn.microsoft.com/en-us/microsoft-copilot-studio/microsoft-365-copilot-extend-with-agents).
+As checked on November 8, 2026, that URL redirects to the broader harness overview,
+which still uses GitHub Copilot terminology. Keep this documentation transition
+distinct from the renamed UI observed in the lab runs.
+
+Set explicit `companion_lab` mappings for each edition. Module 6 has
+`companion_lab: false` because its old standalone placeholder lab is not part of
+either schedule. Module 8 points at the scheduled Hooks lab rather than the older
+Knowledge and Tools exercise. The modern Code and Managed Runtime app prompts
+fetch the modern agenda; classic prompts keep their original agenda URL.
+
+Do not rename module slugs or presentation paths as part of a naming cleanup.
+The external `aka.ms/MCSBootcamp` short link is managed outside this repository.
+
 ## Bootcamp Latest
 
-The canonical event ID, event document basename, agenda basename, and
-presentation directory use `bootcamp-latest`. Public links use
+The classic edition's event ID, event document basename, agenda basename, and
+presentation directory retain `bootcamp-latest`. Existing direct links use
 `/events/bootcamp-latest/` and `?event=bootcamp-latest`. The former versioned
 event URL redirects to the current event. Legacy module/lab context links also
 resolve to their current counterparts; old presentation download URLs remain
 retired.
 
-`bootcamp-latest.yml` is the source of truth for 17 modules and 11 labs. Its day
+`bootcamp-latest.yml` is the classic edition's source of truth for 17 modules and 11 labs. Its day
 boundaries are 09:00-16:00, 09:00-18:00 (including the social), and 09:00-16:00.
 Module and lab titles and durations are mirrored into the linked entity files,
 except for the shared Hooks lab: Lab 7 uses `mcs-hooks` with a 30-minute event

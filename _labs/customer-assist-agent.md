@@ -13,9 +13,6 @@ description: 'Build a Zava Coffee concierge and cancellation specialist, inspect
 classes: wide
 author_profile: false
 toc: false
-unlisted: true
-search: false
-sitemap: false
 mission_lab:
   headline: From customer intent
   headline_emphasis: to the right specialist.
@@ -531,6 +528,8 @@ mission_lab:
       url: 'https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/overview-customer-conversation'
 ---
 # Customer Conversation Harness
+
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
 Build a Zava Coffee concierge and cancellation specialist, inspect real routing evidence, and test voice while distinguishing verified controls from unverified spoken behavior.
 

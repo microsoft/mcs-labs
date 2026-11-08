@@ -7,7 +7,7 @@ search: false
 sitemap: false
 order: 1
 deprecated: true
-superseded_by: bootcamp-latest
+superseded_by: architecture-bootcamp
 labs:
   - slug: agent-builder-m365
     label: "Lab 1"

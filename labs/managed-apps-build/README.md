@@ -1,5 +1,7 @@
 # Apps on Microsoft Copilot Managed Runtime
 
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+
 Build **My Bootcamp Lab App** from the live published agenda, prepare your own OneDrive CSV, then verify the app's read/save/reload behavior. This is a new app, not an HTML import or Copilot Code migration. Completing the earlier lab is not required. Keep everything in preview.
 
 ![Light-theme CSV creation approval, not proof of app persistence](images/upload-file-content.webp)
@@ -38,7 +40,7 @@ Arrange Copilot Studio Apps access, image upload, preview and permission to read
 
 You still download/upload the reference and create or verify your own connection and CSV in the missions. Those lab-specific artifacts are not assumed to be pre-created.
 
-**Attendee readiness:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account in a separate browser profile/private window and select the assigned environment. Keep the [live agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) beside the app. Use only your own connection/file; stop if identity is uncertain. Ask about credit availability and safe failure-test conditions. Do not publish, deploy or share.
+**Attendee readiness:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account in a separate browser profile/private window and select the assigned environment. Keep the [live agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) beside the app. Use only your own connection/file; stop if identity is uncertain. Ask about credit availability and safe failure-test conditions. Do not publish, deploy or share.
 
 ## 🧭 Build
 
@@ -70,7 +72,7 @@ Reproduce its dark theme, square corners, day tabs, timeline,
 lab cards, completion checkboxes, and overall progress indicator.
 
 Fetch the current live published lab schedule from:
-https://microsoft.github.io/mcs-labs/events/bootcamp-latest/
+https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/
 
 Include every day's scheduled "Lab N:" items and Lunch break.
 Exclude other agenda items and optional labs. If you cannot read
@@ -312,4 +314,4 @@ Your finish line is **verified app-to-file persistence and safe failure behavior
 - [OneDrive for Business connector reference](https://learn.microsoft.com/connectors/onedriveforbusiness/)
 - [Manage connections in Power Apps](https://learn.microsoft.com/power-apps/maker/canvas-apps/add-manage-connections)
 - [What is Microsoft Copilot Managed Runtime (preview)](https://learn.microsoft.com/microsoft-365/copilot-managed-runtime/)
-- [Live published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/)
+- [Live published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/)

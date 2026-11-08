@@ -27,6 +27,7 @@ const redirectScript = scriptFrom(path.join('_layouts', 'redirect.html'));
 function eventFixtures(baseurl) {
   return [
     ['_events', currentId],
+    ['_events', 'architecture-bootcamp'],
     ['_workshops', 'agent-in-a-day-v3'],
     ['_workshops', 'ghcp-in-a-day'],
   ].map(([folder, slug]) => {
@@ -36,12 +37,25 @@ function eventFixtures(baseurl) {
       event_id: event.event_id,
       title: event.title,
       kind: folder === '_events' ? 'event' : 'workshop',
+      unlisted: event.unlisted === true,
       url: `${baseurl}/${folder === '_events' ? 'events' : 'workshops'}/${slug}/`,
       schedule: agenda.schedule.map((row) => {
         if (!['module', 'lab'].includes(row.type)) return { ...row };
         const collection = row.type === 'module' ? 'modules' : 'labs';
         const metadata = documentData(`_${collection}`, row.slug);
         const item = { ...row, title: row.title || metadata.title, url: `${baseurl}/${collection}/${row.slug}/` };
+        if (row.type === 'module' && row.companion_lab !== false) {
+          const companionSlug = row.companion_lab || metadata.lab;
+          if (companionSlug) {
+            const lab = documentData('_labs', companionSlug);
+            const labRow = agenda.schedule.find(entry => entry.type === 'lab' && entry.slug === companionSlug);
+            item.companion_lab = {
+              slug: companionSlug, title: lab.title, description: lab.description,
+              url: `${baseurl}/labs/${companionSlug}/`,
+              difficulty: lab.difficulty, duration: labRow?.duration || lab.duration,
+            };
+          }
+        }
         if (row.slides && row.slides.startsWith('/')) item.slides = baseurl + row.slides;
         return item;
       }),
@@ -51,6 +65,7 @@ function eventFixtures(baseurl) {
 
 function element() {
   const attributes = new Map();
+  const listeners = {};
   return {
     hidden: true,
     children: [],
@@ -59,9 +74,32 @@ function element() {
     setAttribute(name, value) { attributes.set(name, value); },
     getAttribute(name) { return attributes.get(name); },
     removeAttribute(name) { attributes.delete(name); },
-    addEventListener() {},
+    listeners,
+    addEventListener(name, callback) { listeners[name] = callback; },
     querySelector() { return null; },
   };
+}
+
+function moduleLabElement() {
+  const section = element();
+  section.hidden = false;
+  const fields = Object.fromEntries([
+    '.mod-lab-card', '.mod-lab-title', '.mod-lab-desc',
+    '[data-module-lab-level]', '[data-module-lab-level-text]', '[data-module-lab-duration]', '[data-module-lab-minutes]',
+  ].map(selector => [selector, element()]));
+  fields['.mod-lab-card'].href = '/labs/original/';
+  fields['.mod-lab-title'].textContent = 'Original companion';
+  fields['.mod-lab-desc'].textContent = 'Original description';
+  section.querySelector = selector => fields[selector] || null;
+  section.cloneNode = () => {
+    const clone = moduleLabElement();
+    clone.hidden = section.hidden;
+    for (const [selector, field] of Object.entries(fields)) {
+      Object.assign(clone.querySelector(selector), field);
+    }
+    return clone;
+  };
+  return section;
 }
 
 function runNavigation({ type = 'module', slug, query = `event=${legacyId}`, baseurl = '/mcs-labs',
@@ -82,10 +120,17 @@ function runNavigation({ type = 'module', slug, query = `event=${legacyId}`, bas
   nodes['mcs-lab-context'] = { textContent: JSON.stringify({ type, slug, title: slug }) };
   if (aliasText !== null) nodes['mcs-event-aliases'] = { textContent: aliasText };
   const download = element();
+  let moduleLab = type === 'module' ? moduleLabElement() : null;
+  if (moduleLab) moduleLab.parentNode = {
+    replaceChild(replacement) { moduleLab = replacement; },
+  };
   const document = {
     documentElement: { dataset: {} },
     getElementById(id) { return nodes[id] || null; },
-    querySelector(selector) { return selector === 'a.mod-button[download]' ? download : null; },
+    querySelector(selector) {
+      if (selector === 'a.mod-button[download]') return download;
+      return selector === '.mod-lab' ? moduleLab : null;
+    },
     createElement() { return element(); },
     createDocumentFragment() { return element(); },
     addEventListener() {},
@@ -104,7 +149,10 @@ function runNavigation({ type = 'module', slug, query = `event=${legacyId}`, bas
         if (blockedStorage) throw new Error('Storage disabled');
         storage.set(key, value);
       },
-      removeItem(key) { storage.delete(key); },
+      removeItem(key) {
+        if (blockedStorage) throw new Error('Storage disabled');
+        storage.delete(key);
+      },
     },
     console: { error(...args) { errors.push(args); }, warn(...args) { warnings.push(args); } },
   });
@@ -189,7 +237,7 @@ test('all renamed and merged context links resolve at root and project base URLs
         assert.equal(target.searchParams.get('source'), 'external');
         assert.deepEqual(target.searchParams.getAll('tag'), ['one', 'two']);
         assert.equal(target.hash, '#module-title');
-        assert.equal(result.storage.get(storageKey), currentId);
+        assert.equal(result.storage.get(storageKey), undefined, 'An unlisted classic event is not sticky');
         assert.equal(result.errors.length, 0);
       }
     }
@@ -205,7 +253,7 @@ test('unchanged legacy items rewrite history and activate canonical navigation',
   assert.equal(result.location.hash, '#module-title');
   assert.equal(result.document.documentElement.dataset.eventContext, currentId);
   assert.equal(result.nodes['event-rail'].hidden, false);
-  assert.equal(result.storage.get(storageKey), currentId);
+  assert.equal(result.storage.get(storageKey), undefined, 'An unlisted classic event is not sticky');
   assert.equal(result.errors.length, 0);
 });
 
@@ -248,12 +296,13 @@ test('canonical event links are not redirected again', () => {
   assert.equal(result.errors.length, 0);
 });
 
-test('saved legacy context is normalized for an item still in the latest agenda', () => {
+test('saved legacy context is cleared when its classic destination is now unlisted', () => {
   const result = runNavigation({ slug: 'standard-harness', query: '', sticky: legacyId });
   assert.equal(result.redirects.length, 0);
   assert.equal(result.historyUpdates.length, 0);
-  assert.equal(result.storage.get(storageKey), currentId);
-  assert.equal(result.document.documentElement.dataset.eventContext, currentId);
+  assert.equal(result.storage.get(storageKey), undefined);
+  assert.equal(result.document.documentElement.dataset.eventContext, undefined);
+  assert.equal(result.nodes['event-rail'].hidden, true);
 });
 
 test('saved legacy context never redirects unrelated standalone pages', () => {
@@ -300,4 +349,69 @@ test('event navigation remains compatible with pages without alias metadata', ()
   const result = runNavigation({ slug: 'standard-harness', query: 'event=agent-in-a-day-v3', aliasText: null });
   assert.equal(result.redirects.length, 0);
   assert.equal(result.errors.length, 0);
+});
+
+test('module companion cards use the active Bootcamp edition at root and project base URLs', () => {
+  for (const baseurl of ['', '/mcs-labs']) {
+    for (const eventId of ['architecture-bootcamp', currentId]) {
+      const event = eventFixtures(baseurl).find(item => item.event_id === eventId);
+      for (const row of event.schedule.filter(item => item.type === 'module' && item.companion_lab)) {
+        const result = runNavigation({ slug: row.slug, baseurl, query: `event=${eventId}` });
+        const section = result.document.querySelector('.mod-lab');
+        const href = new URL(section.querySelector('.mod-lab-card').href);
+        assert.equal(href.pathname, `${baseurl}/labs/${row.companion_lab.slug}/`);
+        assert.equal(href.searchParams.get('event'), eventId);
+        assert.equal(section.querySelector('.mod-lab-title').textContent, row.companion_lab.title);
+        assert.equal(section.querySelector('[data-module-lab-minutes]').textContent, row.companion_lab.duration);
+        assert.equal(section.hidden, false);
+        assert.equal(result.errors.length, 0);
+      }
+    }
+  }
+});
+
+test('an explicitly absent companion is hidden only inside the event', () => {
+  const styles = fs.readFileSync(path.join(root, 'assets', 'css', 'main.scss'), 'utf8');
+  assert.match(styles, /\.mod-lab\[hidden\]\s*\{\s*display:\s*none\s*;\s*\}/,
+    'The hidden companion section must override the theme section display rule.');
+  const result = runNavigation({
+    slug: 'harnesses-and-component-models-latest', query: 'event=architecture-bootcamp',
+  });
+  assert.equal(result.document.querySelector('.mod-lab').hidden, true);
+  result.nodes['event-rail-exit'].listeners.click();
+  assert.equal(result.document.querySelector('.mod-lab').hidden, false);
+  assert.equal(result.document.querySelector('.mod-lab').querySelector('.mod-lab-title').textContent, 'Original companion');
+  assert.equal(result.location.searchParams.has('event'), false);
+});
+
+test('Exit restores the standalone companion without leaving a modern-event URL behind', () => {
+  const result = runNavigation({ slug: 'standard-harness', query: 'event=architecture-bootcamp' });
+  assert.equal(result.storage.get(storageKey), 'architecture-bootcamp');
+  result.nodes['event-rail-exit'].listeners.click();
+  const section = result.document.querySelector('.mod-lab');
+  assert.equal(section.querySelector('.mod-lab-card').href, '/labs/original/');
+  assert.equal(section.querySelector('.mod-lab-title').textContent, 'Original companion');
+  assert.equal(section.querySelector('.mod-lab-desc').textContent, 'Original description');
+  assert.equal(result.storage.has(storageKey), false);
+});
+
+test('modern context persists while an unlisted classic context requires an explicit URL', () => {
+  const modern = runNavigation({ slug: 'standard-harness', query: '', sticky: 'architecture-bootcamp' });
+  assert.equal(modern.document.documentElement.dataset.eventContext, 'architecture-bootcamp');
+  const classic = runNavigation({ slug: 'standard-harness', query: '', sticky: currentId });
+  assert.equal(classic.nodes['event-rail'].hidden, true);
+  assert.equal(classic.storage.has(storageKey), false);
+  assert.equal(classic.document.querySelector('.mod-lab').querySelector('.mod-lab-title').textContent, 'Original companion');
+});
+
+test('invalid companion metadata fails closed instead of linking a different edition', () => {
+  for (const companion of [null, { title: 'Bad link', url: 'https://other.example/lab' },
+    { title: 'Bad link', url: 'javascript:alert(1)' }, { url: '/labs/example/' }]) {
+    const events = eventFixtures('/mcs-labs');
+    const event = events.find(item => item.event_id === 'architecture-bootcamp');
+    event.schedule.find(item => item.slug === 'standard-harness').companion_lab = companion;
+    const result = runNavigation({ slug: 'standard-harness', query: 'event=architecture-bootcamp', events });
+    assert.equal(result.document.querySelector('.mod-lab').hidden, true);
+    assert.equal(result.errors.length, 1);
+  }
 });

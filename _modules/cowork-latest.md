@@ -1,11 +1,11 @@
 ---
 layout: module
-title: "Cowork (+ skills, + plugins, + code)"
+title: "Cowork: skills, plugins, and code"
 order: 3021
 duration: 30
 difficulty: 100
 section: core_modules
-description: "Cowork at bootcamp altitude — what it is, where it fits against the other agent surfaces, and how skills and plugins extend it."
+description: "Explore Cowork in Microsoft Copilot, how it differs from Copilot Chat, and how skills, plugins, and code support multi-step work."
 slides: "/presentations/bootcamp-latest/M03.%20Cowork%20Skills%20Plugins%20and%20Code.pptx"
 lab: "cowork-zava-sales"
 ---
