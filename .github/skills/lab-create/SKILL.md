@@ -47,12 +47,16 @@ Apply `../lab-review/references/learning-design.md` while drafting. In short:
 - Every prompt sits alone in a `text` code fence so it can be copied.
 - Explain *why* after the learner has seen it work (the reveal), not before.
 - Mark what is optional. Budget minutes per section; they must add up to `duration`.
-- Attendees of a proctor-led event with pre-provisioned user accounts use a pre-set-up
-  environment. Classic prerequisites open with the template's "Skip this section"
-  callout, conditional on that provisioned account rather than the organizing team;
-  missions `prerequisites:` list only
-  what the attendee does to get ready, never tenant setup. Put downloads in the step
-  that uses them.
+- Attendees with provided or pre-provisioned event accounts use a pre-set-up
+  environment. Use the templates' short, organizer-neutral cue; do not imply that
+  attending any event is enough to skip setup. Keep attendee sign-in, downloads and safety
+  actions visible; put only self-hosting setup in a compact/collapsible section where
+  supported. The classic template has a collapsible own-tenant section; missions
+  prerequisites render as an always-visible checklist, so keep setup concise and label it
+  "in your own tenant only" instead of making event attendees repeat provisioning. Put
+  downloads in the step that uses them.
+- Keep literal `|` characters out of prose inside Markdown tables; use `&#124;` and
+  inspect generated HTML for Kramdown table/list rendering errors.
 - Ground every product claim in a current Microsoft Learn page and cite it.
 - Use today's product names. `scripts/lab-audit-terms.json` lists retired ones; since
   August 2026 it is **Microsoft Copilot** and **Microsoft Copilot Chat** (not Microsoft 365
@@ -101,8 +105,10 @@ Then:
    - `scripts/lab-missions.test.js` asserts which labs use missions. Add the new slug to
      that allowlist and add a contract test for the new lab modeled on the Zava Sales
      tests (prompts verbatim in all copies, copies in sync, mission contract).
-   - The layout opens each step's **Click-by-click help** by default, so write `help` as
-     the complete click path most learners will follow, not as an afterthought.
+   - The `instruction` must be enough on its own; `help` is supplementary regardless of
+     whether the current renderer opens or collapses it. The renderer reads missions from
+     `mission_lab` front matter, so learner-critical guidance in the Markdown body alone
+     may not appear on the page. Verify the rendered version and open each details panel.
    - The layout keeps checkmarks, quiz answers and the `reflection` note only in the
      browser's local storage, says so next to the note, and offers **Save a PDF copy**
      (the browser's print dialog) at the end. Do not promise elsewhere that notes are

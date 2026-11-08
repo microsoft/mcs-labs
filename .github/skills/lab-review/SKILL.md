@@ -54,8 +54,10 @@ Work through `references/review-rubric.md`. In particular:
    meaningful. No instruction depends on color alone.
 6. **Missions labs.** Prompts verbatim across front matter, `_labs` body and README;
    reveals explain *why*; one correct option per check; optional missions marked; cleanup
-   stops anything recurring the lab created. `help` reads as a complete click path,
-   because the layout opens it by default. Nothing in the lab contradicts the layout's
+   stops anything recurring the lab created. The main `instruction` is independently
+   actionable; `help` is supplementary regardless of renderer default. Verify guidance in
+   the supported rendered field, open collapsed help when checking its contents, and
+   inspect the actual built page. Nothing in the lab contradicts the layout's
    note that checkmarks, answers and the reflection stay in the browser until the learner
    saves a PDF copy.
 7. **System of record.** When learners check results in a business app (a CRM, for
@@ -75,6 +77,8 @@ Fill in `templates/review-report.md`. Rules:
   from **suggestions** (better learning design).
 - Group fixes into proposed PRs, one coherent change each, so `lab-update` can pick them up.
 - Name what you could not verify.
+- Separate static review from live-run evidence and identify core/optional coverage.
+  Never state that all checks passed if live behavior is untested or unverified.
 
 Save the report outside the repository, or paste it into the conversation or PR. Do not
 commit review reports.

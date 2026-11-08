@@ -13,19 +13,26 @@
 | Prerequisites checked | Licenses, plugins, connections, sample data |
 | Audit before run | `npm run audit:labs -- %%SLUG%%`: errors, warnings |
 
-**Verdict:** works as written / works with drift / broken. One sentence on why.
+**Coverage summary:** Core %%covered%%/%%total%% steps; optional %%covered%%/%%total%%.
+State incomplete coverage explicitly. Do not use an unconditional verdict when any core
+step is blocked, untested or unverified.
 
-**Counts:** pass %%n%%, drift %%n%%, defect %%n%%, variance %%n%%, blocked %%n%%.
+**Counts:** passed %%n%%, drift %%n%%, defect %%n%%, variance %%n%%, blocked %%n%%,
+untested %%n%%, unverified %%n%%.
+
+Use the status definitions and independent-verification checklist in
+`../references/runthrough-evidence.md`.
 
 ## Steps
 
 Use the lab's own numbering: use case and step, or mission and step. Quote UI text exactly.
 
-| # | Instruction (short) | Expected | Actual | Status | Evidence | Proposed fix |
+| # | Core/optional | Instruction (short) | Expected | Actual | Status | Evidence and independent check | Proposed fix |
 | --- | --- | --- | --- | --- | --- | --- |
-| 1.1 | | | | pass | | |
+| 1.1 | core | | | | passed | | |
 
-Status is one of pass, drift, defect, variance or blocked (see `SKILL.md`).
+Status is passed, drift, defect, variance, blocked, untested or unverified. Record what
+was actually checked; an agent's claim or hidden trace is not independent evidence.
 
 ## Timing
 
@@ -43,6 +50,16 @@ Status is one of pass, drift, defect, variance or blocked (see `SKILL.md`).
 
 Claims the run could not prove (limits, licensing, preview status) for `lab-review` to
 check against Microsoft Learn.
+
+## Independent outcomes
+
+| Outcome | Source checked | Required fields/state | Result |
+| --- | --- | --- | --- |
+| Generated file, record, draft, schedule or connected tool | | | passed / unverified / blocked / n/a |
+
+For records, include ownership, relationships and timezone where applicable. Distinguish
+actuals from projections; confirm drafts remain unsent and schedules are saved before
+reporting success.
 
 ## Cleanup
 

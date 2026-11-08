@@ -27,8 +27,8 @@ const EDITOR = '[contenteditable="true"][role="textbox"], textarea';
 const CLICKABLE = 'button,a,summary,[role=button],[role=link],[role=tab],[role=switch],[role=checkbox],[role=radio],[role=menuitem],[role=menuitemcheckbox],[role=menuitemradio],[role=option],[role=treeitem]';
 const CONTROLS = `${CLICKABLE},input,select,textarea,[contenteditable="true"],[role=combobox],[role=textbox]`;
 const SIGN_IN_PAGE = /^https:\/\/login\.(microsoftonline|microsoft|live)\.com\//;
-// Frames that only carry tokens or the Microsoft 365 header add noise to "text".
-const NOISE_FRAME = /webshell\.suite\.office\.com|TokenFactory|login\.microsoftonline\.com\/.*prompt=none/i;
+// Authentication and Microsoft 365 shell frames add private, irrelevant text to evidence.
+const NOISE_FRAME = /webshell\.suite\.office\.com|TokenFactory|^https:\/\/login\.(microsoftonline|microsoft|live)\.com\//i;
 
 const USAGE = `Usage: node capture.cjs <command> [args] [options]
 
@@ -51,7 +51,7 @@ Commands
   upload <file...>      Choose files for an upload: through the file dialog that --click or
                         --at opens, or else straight into the page's file input (--nth).
   wait <text>           Wait until the tab shows <text> (default timeout 300000 ms).
-  shot <name>           Save <out>/<name>.png.
+  shot <name>           Save <out>/<name>.png: the viewport, or a sharp crop with --element or --clip.
   pair <name>           Save <out>/<name>-light.png and <name>-dark.png via prefers-color-scheme.
 
 Options
@@ -75,6 +75,15 @@ Options
                         puppeteer's Chrome for Testing when headless.
   --window-size <w,h>   Window or headless viewport size for launch (default ${DEFAULT_WINDOW}).
   --headless            Launch without a window, in an off-the-record session.
+  --scale <n>           launch: device pixels per CSS pixel. Use 2 for publishable screenshots
+                        (headless default 1; windowed default: the display's scale).
+  --element <name>      shot/pair: crop to the visible element whose aria-label, title or text
+                        is exactly <name> (with --nth when several match).
+  --up <n>              shot/pair: crop to the element's nth ancestor, for example its card or dialog.
+  --clip <x,y,w,h>      shot/pair: crop to a box in CSS pixels (from "controls").
+  --pad <px>            shot/pair: margin around the crop in CSS pixels (default 12).
+  --zoom <n>            shot/pair: re-render the crop n times larger again (default 1). With
+                        --scale 2, --zoom 1.5 gives 3 device pixels per CSS pixel.
 
 Environment
   LAB_CREDENTIALS       JSON file outside the repository: {"username": "...", "password": "..."}.
@@ -84,9 +93,21 @@ Environment
 const wait = ms => new Promise(resolve => setTimeout(resolve, ms));
 const stateFile = port => path.join(os.tmpdir(), `lab-runthrough-${port}.json`);
 const isAlive = pid => { try { process.kill(pid, 0); return true; } catch { return false; } };
+const displayOrigin = value => {
+  try {
+    const url = new URL(value);
+    return url.origin === 'null' ? url.protocol : url.origin;
+  } catch {
+    return '(unknown origin)';
+  }
+};
+const ownsProfile = profile => {
+  const resolved = path.resolve(profile || '');
+  return path.dirname(resolved) === path.resolve(os.tmpdir()) && path.basename(resolved).startsWith(PROFILE_PREFIX);
+};
 const isEdge = exe => /msedge|microsoft[ -]edge/i.test(exe);
 const insideRepo = file => { const relative = path.relative(REPO_ROOT, path.resolve(file)); return !relative.startsWith('..') && !path.isAbsolute(relative); };
-const viewport = size => { const [width, height] = String(size || DEFAULT_WINDOW).split(',').map(Number); return { width, height, deviceScaleFactor: 1 }; };
+const viewport = (size, scale = 1) => { const [width, height] = String(size || DEFAULT_WINDOW).split(',').map(Number); return { width, height, deviceScaleFactor: Number(scale) || 1 }; };
 const escapeRe = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
 class UsageError extends Error {}
@@ -152,17 +173,20 @@ function readState(port) {
 /** Deletes a profile only if this script created it in the temp folder. */
 function removeProfile(profile) {
   const resolved = path.resolve(profile || '');
-  if (path.dirname(resolved) !== path.resolve(os.tmpdir()) || !path.basename(resolved).startsWith(PROFILE_PREFIX)) return false;
+  if (!ownsProfile(resolved)) return false;
   fs.rmSync(resolved, { recursive: true, force: true, maxRetries: 10, retryDelay: 500 });
   return true;
 }
 
-async function launch({ port, url = 'about:blank', browser, windowSize = DEFAULT_WINDOW, headless = false }) {
+async function launch({ port, url = 'about:blank', browser, windowSize = DEFAULT_WINDOW, headless = false, scale }) {
   const previous = readState(port);
   if (await endpointUp(port)) {
     throw new Error(`Something already listens on port ${port}. Run "close" or pick another --port.`);
   }
   if (previous) {
+    if (Number.isInteger(previous.pid) && isAlive(previous.pid)) {
+      throw new Error(`The previous browser process ${previous.pid} is still running without its DevTools endpoint. Run "close" before reusing port ${port}.`);
+    }
     removeProfile(previous.profile);
     fs.rmSync(stateFile(port), { force: true });
   }
@@ -184,11 +208,14 @@ async function launch({ port, url = 'about:blank', browser, windowSize = DEFAULT
     '--no-default-browser-check',
   ];
   // Headless ignores the private-window switch, so its tab opens below in an off-the-record context.
-  if (headless) args.push('--headless=new', '--force-device-scale-factor=1', 'about:blank');
+  // A scale of 2 renders every CSS pixel as 2x2 device pixels: the same layout, with sharp text.
+  // Windowed runs keep the display's own scale unless --scale is given.
+  if (headless || scale !== undefined) args.push(`--force-device-scale-factor=${scale || 1}`);
+  if (headless) args.push('--headless=new', 'about:blank');
   else args.push(url);
   const child = spawn(exe, args, { detached: true, stdio: 'ignore' });
   child.unref();
-  fs.writeFileSync(stateFile(port), JSON.stringify({ pid: child.pid, profile, exe, headless, windowSize, started: new Date().toISOString() }, null, 2));
+  fs.writeFileSync(stateFile(port), JSON.stringify({ pid: child.pid, profile, exe, headless, windowSize, scale, started: new Date().toISOString() }, null, 2));
   for (let i = 0; i < 80; i++) {
     if (await endpointUp(port)) {
       const connected = await loadPuppeteer().connect({ browserURL: `http://127.0.0.1:${port}`, defaultViewport: null, protocolTimeout: 30000 });
@@ -198,13 +225,23 @@ async function launch({ port, url = 'about:blank', browser, windowSize = DEFAULT
           const context = await connected.createBrowserContext();
           const page = await context.newPage();
           rememberTab(port, page);
-          await page.setViewport(viewport(windowSize));
-          await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 }).catch(() => {});
+          await page.setViewport(viewport(windowSize, scale));
+          await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
+          const state = readState(port);
+          state.captureScale = await page.evaluate(() => devicePixelRatio);
+          fs.writeFileSync(stateFile(port), JSON.stringify(state, null, 2));
         } else {
           const [first] = (await connected.pages()).filter(p => !p.url().startsWith('devtools://'));
-          if (first) rememberTab(port, first);
+          if (first) {
+            rememberTab(port, first);
+            const state = readState(port);
+            state.captureScale = scale === undefined ? await first.evaluate(() => devicePixelRatio) : Number(scale);
+            fs.writeFileSync(stateFile(port), JSON.stringify(state, null, 2));
+          }
           // Managed devices can open a browser sign-in page instead of the URL; navigate past it.
-          if (first && url !== 'about:blank' && first.url() !== url) await first.goto(url, { waitUntil: 'domcontentloaded' }).catch(() => {});
+          if (first && url !== 'about:blank' && first.url() !== url) {
+            await first.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
+          }
         }
       } finally {
         await connected.disconnect();
@@ -218,17 +255,45 @@ async function launch({ port, url = 'about:blank', browser, windowSize = DEFAULT
 
 async function close({ port }) {
   const state = readState(port);
-  if (await endpointUp(port)) {
-    const browser = await loadPuppeteer().connect({ browserURL: `http://127.0.0.1:${port}`, protocolTimeout: 30000 });
-    await browser.close().catch(() => {});
+  if (!state || !Number.isInteger(state.pid) || !ownsProfile(state.profile)) {
+    return { profileRemoved: false };
   }
-  if (!state) return { profileRemoved: false };
+  if (await endpointUp(port)) {
+    if (!isAlive(state.pid)) {
+      throw new Error(`Port ${port} is active but its recorded browser process is not. Refusing to close an unrelated browser.`);
+    }
+    const browser = await loadPuppeteer().connect({ browserURL: `http://127.0.0.1:${port}`, protocolTimeout: 30000 });
+    try {
+      await assertOwnedBrowser(browser, state.pid);
+    } catch (error) {
+      await browser.disconnect();
+      throw error;
+    }
+    await browser.close();
+  }
   for (let i = 0; i < 40 && isAlive(state.pid); i++) await wait(250);
-  if (isAlive(state.pid)) { try { process.kill(state.pid); } catch { /* already gone */ } }
-  await wait(500);
+  if (isAlive(state.pid)) {
+    throw new Error(`Browser process ${state.pid} did not exit. Its temporary profile was left in place.`);
+  }
   const profileRemoved = removeProfile(state.profile);
   fs.rmSync(stateFile(port), { force: true });
   return { profileRemoved, profile: state.profile };
+}
+
+async function assertOwnedBrowser(browser, expectedPid) {
+  const session = await browser.target().createCDPSession();
+  try {
+    const { processInfo } = await session.send('SystemInfo.getProcessInfo');
+    const actualPid = processInfo.find(process => process.type === 'browser')?.id;
+    if (actualPid !== expectedPid) {
+      throw new Error(`DevTools reported browser PID ${actualPid ?? 'unknown'}, expected ${expectedPid}. Refusing to close an unrelated browser.`);
+    }
+  } catch (error) {
+    if (error.message.includes('Refusing to close')) throw error;
+    throw new Error(`Could not verify the browser process on port; refusing to close it. ${error.message}`, { cause: error });
+  } finally {
+    await session.detach();
+  }
 }
 
 async function connectBrowser(port) {
@@ -284,7 +349,7 @@ async function connect({ port = DEFAULT_PORT, url, tab } = {}) {
   page.setDefaultTimeout(20000);
   const state = readState(port);
   // Viewport overrides end with the connection that set them; headless tabs need it every time.
-  if (state && state.headless) await page.setViewport(viewport(state.windowSize));
+  if (state && state.headless) await page.setViewport(viewport(state.windowSize, state.scale));
   const cdp = await page.createCDPSession();
   // An unfocused window closes menus and pauses some UI; emulating focus keeps captures stable.
   await cdp.send('Emulation.setFocusEmulationEnabled', { enabled: true });
@@ -296,8 +361,8 @@ async function newTab(page, url, port) {
   const tab = await page.browserContext().newPage();
   rememberTab(port, tab);
   const state = readState(port);
-  if (state && state.headless) await tab.setViewport(viewport(state.windowSize));
-  await tab.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 }).catch(() => {});
+  if (state && state.headless) await tab.setViewport(viewport(state.windowSize, state.scale));
+  await tab.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
   // A signed-in session usually passes through the sign-in page and back; wait for the URL to settle.
   let last = '';
   for (let i = 0; i < 30; i++) {
@@ -333,7 +398,7 @@ async function controls(page, pattern = '') {
             role: e.getAttribute('role') || e.tagName.toLowerCase() + (e.type ? `:${e.type}` : ''),
             label: e.getAttribute('aria-label') || e.getAttribute('placeholder') || '',
             // Never read a password field's value.
-            text: e.type === 'password' ? '' : (e.innerText || e.value || '').trim().replace(/\s+/g, ' ').slice(0, 100),
+            text: e.matches('input,textarea') ? '' : (e.innerText || '').trim().replace(/\s+/g, ' ').slice(0, 100),
             title: e.getAttribute('title') || '',
             state,
             box: [box.x, box.y, box.width, box.height].map(Math.round),
@@ -481,7 +546,13 @@ function redact(text) {
   let out = String(text == null ? '' : text);
   let credentials = null;
   try { credentials = readCredentials(); } catch { /* reported by the command that needs it */ }
-  if (!credentials) return out.replace(/([?&]login_hint=)[^&\s]+/gi, '$1[LAB_USER]');
+  const redactQuery = value => value.replace(
+    /([?&])([^=?&\s#]+)=([^&\s#]*)/gi,
+    (match, separator, name) => /^(?:sig|signature|x-amz-signature|x-goog-signature|token|access_token|id_token|auth_token|authorization|client_secret|secret|code|code_verifier|key|api_key|credential|capability)$/i.test(name)
+      ? `${separator}${name}=[REDACTED]`
+      : match,
+  );
+  if (!credentials) return redactQuery(out).replace(/([?&]login_hint=)[^&\s]+/gi, '$1[LAB_USER]');
   for (const secret of new Set(credentials.secrets)) {
     if (secret.length >= 4) out = out.replace(new RegExp(escapeRe(secret), 'g'), '[PASSWORD]');
   }
@@ -493,7 +564,7 @@ function redact(text) {
     .filter(term => term && term.length >= 6)
     .sort((a, b) => b.length - a.length);
   for (const term of new Set(terms)) out = out.replace(new RegExp(escapeRe(term), 'gi'), '[LAB_USER]');
-  return out.replace(/([?&]login_hint=)[^&\s]+/gi, '$1[LAB_USER]');
+  return redactQuery(out).replace(/([?&]login_hint=)[^&\s]+/gi, '$1[LAB_USER]');
 }
 
 async function fill(page, selector, value) {
@@ -556,7 +627,7 @@ async function login(page, { username, password }, { forbid, timeout = 120000 } 
       throw new WrongAccountError('Wrong account: the page showed the --forbid text. The tab was cleared; stop and check the sign-in.');
     }
   }
-  return page.url().split('?')[0];
+  return displayOrigin(page.url());
 }
 
 const pngSize = buffer => ({ width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) });
@@ -567,20 +638,136 @@ async function scaleNote(page) {
   return ratio === 1 ? 'Scale 1: control boxes are capture pixels.' : `Scale ${ratio}: multiply control boxes by ${ratio} for crop specs.`;
 }
 
-async function shot(cdp, file) {
+async function shot(cdp, file, clip, captureScale, { restoreMetrics = true } = {}) {
   fs.mkdirSync(path.dirname(file), { recursive: true });
-  const { data } = await cdp.send('Page.captureScreenshot', { format: 'png', fromSurface: true });
+  // CDP screenshot clips use CSS pixels; scale the clip itself to retain native pixels.
+  // Coordinates are in the document, so add the current viewport scroll offset.
+  const { result } = await cdp.send('Runtime.evaluate', {
+    expression: 'JSON.stringify([visualViewport.pageLeft, visualViewport.pageTop, innerWidth, innerHeight, devicePixelRatio])',
+    returnByValue: true,
+  });
+  const [left, top, width, height, dpr] = JSON.parse(result.value);
+  const scale = Number(captureScale) || dpr;
+  const source = clip
+    ? { ...clip, scale: clip.scale === undefined ? scale : clip.scale }
+    : { x: 0, y: 0, width, height, scale };
+  const params = {
+    format: 'png',
+    fromSurface: true,
+    captureBeyondViewport: false,
+    clip: { ...source, x: source.x + left, y: source.y + top },
+  };
+  let response;
+  try {
+    // Normalize DPR so CDP's clip scale produces the same pixel density on every capture.
+    await cdp.send('Emulation.setDeviceMetricsOverride', {
+      width,
+      height,
+      deviceScaleFactor: 1,
+      mobile: false,
+    });
+    response = await cdp.send('Page.captureScreenshot', params);
+  } finally {
+    if (restoreMetrics) {
+      await cdp.send('Emulation.setDeviceMetricsOverride', { width, height, deviceScaleFactor: dpr, mobile: false });
+    }
+  }
+  const { data } = response;
   const buffer = Buffer.from(data, 'base64');
   fs.writeFileSync(file, buffer);
   return { file, buffer, ...pngSize(buffer) };
 }
 
 /**
+ * Works out the clip for --clip x,y,w,h or --element <name> (CSS pixels, frames
+ * included), widened by --pad and kept inside the viewport. --up climbs to an
+ * ancestor, for example from a dialog's title to the whole dialog.
+ */
+async function region(page, { clip, element, nth, up = 0, pad = 12, zoom = 1, captureScale } = {}) {
+  if (clip === undefined && element === undefined) return null;
+  let box;
+  if (clip !== undefined) {
+    const [x, y, width, height] = String(clip).split(',').map(Number);
+    if (![x, y, width, height].every(Number.isFinite)) throw new UsageError('--clip needs x,y,w,h in CSS pixels.');
+    box = { x, y, width, height };
+  } else {
+    const matches = [];
+    for (const frame of page.frames()) {
+      const list = await frame.evaluateHandle((wanted, levels) => {
+        const norm = v => (v || '').trim().replace(/\s+/g, ' ');
+        const visible = e => { const b = e.getBoundingClientRect(); return b.width > 0 && b.height > 0 && getComputedStyle(e).visibility !== 'hidden'; };
+        // Exact label, title or own text; the innermost match wins so a name picks its own control.
+        const hits = [...document.querySelectorAll('body *')].filter(e => visible(e)
+          && [e.getAttribute('aria-label'), e.getAttribute('title'), e.innerText].some(v => norm(v) === wanted));
+        return hits.filter(e => !hits.some(other => other !== e && e.contains(other))).map(e => {
+          let target = e;
+          for (let i = 0; i < levels && target.parentElement; i++) target = target.parentElement;
+          return target;
+        });
+      }, element, Number(up)).catch(() => null);
+      if (!list) continue;
+      for (const property of (await list.getProperties()).values()) {
+        const handle = property.asElement();
+        if (handle) matches.push(handle); else await property.dispose();
+      }
+      await list.dispose();
+    }
+    try {
+      if (nth === undefined && matches.length !== 1) throw new Error(`Expected one visible element named "${element}", found ${matches.length}. Pass --nth, or use --clip.`);
+      const target = matches[nth || 0];
+      if (!target) throw new Error(`No match ${nth} for "${element}"; found ${matches.length}.`);
+      // Crops cannot reach past the viewport, so bring the element into view first.
+      await target.evaluate(e => e.scrollIntoView({ block: 'center', inline: 'center' }));
+      await wait(400);
+      box = await target.boundingBox();
+      if (!box) throw new Error(`"${element}" has no box on screen.`);
+    } finally {
+      await Promise.all(matches.map(m => m.dispose().catch(() => {})));
+    }
+  }
+  const view = await page.evaluate(() => ({ width: innerWidth, height: innerHeight, deviceScaleFactor: devicePixelRatio }));
+  const p = Number(pad);
+  const x = Math.max(0, box.x - p);
+  const y = Math.max(0, box.y - p);
+  const width = Math.min(view.width, box.x + box.width + p) - x;
+  const height = Math.min(view.height, box.y + box.height + p) - y;
+  return {
+    x: Math.round(x),
+    y: Math.round(y),
+    width: Math.round(width),
+    height: Math.round(height),
+    scale: (Number(captureScale) || view.deviceScaleFactor) * (Number(zoom) || 1),
+  };
+}
+
+async function restoreDeviceMetrics(page, cdp, metrics) {
+  await cdp.send('Emulation.setDeviceMetricsOverride', {
+    width: metrics.width,
+    height: metrics.height,
+    deviceScaleFactor: metrics.deviceScaleFactor,
+    mobile: false,
+  });
+}
+
+async function prepareCaptureScale(page, cdp, port) {
+  const metrics = await page.evaluate(() => ({ width: innerWidth, height: innerHeight, deviceScaleFactor: devicePixelRatio }));
+  const state = readState(port);
+  const scale = Number(state && state.captureScale) || metrics.deviceScaleFactor;
+  if (scale !== metrics.deviceScaleFactor) {
+    await restoreDeviceMetrics(page, cdp, { ...metrics, deviceScaleFactor: scale });
+  }
+  return scale;
+}
+
+/**
  * Captures the same state in both themes. The product must follow the system
  * theme (its own theme setting on "System") for prefers-color-scheme to apply.
  */
-async function pair(page, cdp, outDir, name, { settle = 1500, schemeAttr } = {}) {
+async function pair(page, cdp, outDir, name, { settle = 1500, schemeAttr, clip, regionOptions, captureScale } = {}) {
   const shots = [];
+  const metrics = await page.evaluate(() => ({ width: innerWidth, height: innerHeight, deviceScaleFactor: devicePixelRatio }));
+  const scale = Number(captureScale) || metrics.deviceScaleFactor;
+  await restoreDeviceMetrics(page, cdp, { ...metrics, deviceScaleFactor: 1 });
   try {
     for (const value of ['light', 'dark']) {
       await page.emulateMediaFeatures([{ name: 'prefers-color-scheme', value }]);
@@ -589,10 +776,13 @@ async function pair(page, cdp, outDir, name, { settle = 1500, schemeAttr } = {})
         const actual = await page.evaluate(attr => document.documentElement.getAttribute(attr), schemeAttr);
         if (actual !== value) throw new Error(`Expected <html ${schemeAttr}="${value}">, found "${actual}". Set the product theme to System, or omit --scheme-attr.`);
       }
-      shots.push(await shot(cdp, path.join(outDir, `${name}-${value}.png`)));
+      // Theme changes can reset scroll or move the target; remeasure element crops per theme.
+      const currentClip = regionOptions ? await region(page, { ...regionOptions, captureScale: scale }) : clip;
+      shots.push(await shot(cdp, path.join(outDir, `${name}-${value}.png`), currentClip, scale, { restoreMetrics: false }));
     }
   } finally {
     await page.emulateMediaFeatures([]);
+    await restoreDeviceMetrics(page, cdp, metrics);
   }
   if (shots[0].buffer.equals(shots[1].buffer)) {
     throw new Error('Light and dark captures are identical: the page ignores prefers-color-scheme. Set the product theme to System.');
@@ -611,7 +801,7 @@ function outDir(dir) {
 function parseArgs(argv) {
   const opts = { port: Number(process.env.LAB_CDP_PORT) || DEFAULT_PORT, out: DEFAULT_OUT, settle: 1500, forbid: process.env.LAB_FORBID };
   const flags = new Set(['headless', 'help', 'clear', 'enter']);
-  const valued = new Set(['port', 'url', 'tab', 'out', 'settle', 'scheme-attr', 'send-label', 'timeout', 'nth', 'forbid', 'browser', 'window-size', 'click', 'at']);
+  const valued = new Set(['port', 'url', 'tab', 'out', 'settle', 'scheme-attr', 'send-label', 'timeout', 'nth', 'forbid', 'browser', 'window-size', 'click', 'at', 'scale', 'clip', 'element', 'up', 'pad', 'zoom']);
   const positional = [];
   for (let i = 0; i < argv.length; i++) {
     const match = /^--([a-z-]+)(?:=(.*))?$/.exec(argv[i]);
@@ -624,7 +814,7 @@ function parseArgs(argv) {
     opts[key.replace(/-([a-z])/g, (_, c) => c.toUpperCase())] = value;
   }
   if (positional[0] === '-h') opts.help = true;
-  for (const key of ['port', 'tab', 'settle', 'timeout', 'nth']) {
+  for (const key of ['port', 'tab', 'settle', 'timeout', 'nth', 'scale', 'up', 'pad', 'zoom']) {
     if (opts[key] !== undefined && !Number.isFinite(Number(opts[key]))) throw new UsageError(`--${key} must be a number.`);
     if (opts[key] !== undefined) opts[key] = Number(opts[key]);
   }
@@ -659,7 +849,7 @@ async function main(argv) {
   }
   if (command === 'pages') {
     const browser = await connectBrowser(opts.port);
-    for (const [i, p] of (await listPages(browser, opts.port)).entries()) print(`${i}\t${p.url()}\t${await p.title()}`);
+    for (const [i, p] of (await listPages(browser, opts.port)).entries()) print(`${i}\t${displayOrigin(p.url())}\t${await p.title()}`);
     await browser.disconnect();
     return;
   }
@@ -673,12 +863,12 @@ async function main(argv) {
     switch (command) {
       case 'goto':
         await page.goto(need(args, 1, 'goto <url>')[0], { waitUntil: 'domcontentloaded', timeout: 90000 });
-        print(page.url());
+        print(displayOrigin(page.url()));
         break;
       case 'newtab': {
         const tab = await newTab(page, need(args, 1, 'newtab <url>')[0], opts.port);
         const index = (await listPages(browser, opts.port)).indexOf(tab);
-        print(`${index}\t${tab.url()}${SIGN_IN_PAGE.test(tab.url()) ? '\t(sign-in page: run "login --tab ' + index + '")' : ''}`);
+        print(`${index}\t${displayOrigin(tab.url())}${SIGN_IN_PAGE.test(tab.url()) ? '\t(sign-in page: run "login --tab ' + index + '")' : ''}`);
         break;
       }
       case 'login':
@@ -729,15 +919,24 @@ async function main(argv) {
         await waitForText(page, need(args, 1, 'wait <text>')[0], opts.timeout);
         break;
       case 'shot': {
-        const s = await shot(cdp, path.join(captures, `${need(args, 1, 'shot <name>')[0]}.png`));
+        const scale = await prepareCaptureScale(page, cdp, opts.port);
+        const s = await shot(
+          cdp,
+          path.join(captures, `${need(args, 1, 'shot <name>')[0]}.png`),
+          await region(page, { ...opts, captureScale: scale }),
+          scale,
+        );
         print(`${s.file}  ${s.width} x ${s.height}`);
         print(await scaleNote(page));
         break;
       }
-      case 'pair':
-        for (const s of await pair(page, cdp, captures, need(args, 1, 'pair <name>')[0], opts)) print(`${s.file}  ${s.width} x ${s.height}`);
+      case 'pair': {
+        const scale = await prepareCaptureScale(page, cdp, opts.port);
+        const regionOptions = opts.element === undefined && opts.clip === undefined ? null : { ...opts, captureScale: scale };
+        for (const s of await pair(page, cdp, captures, need(args, 1, 'pair <name>')[0], { ...opts, captureScale: scale, regionOptions })) print(`${s.file}  ${s.width} x ${s.height}`);
         print(await scaleNote(page));
         break;
+      }
     }
   } finally {
     await cdp.detach().catch(() => {});
@@ -754,4 +953,4 @@ if (require.main === module) {
   });
 }
 
-module.exports = { launch, close, connect, newTab, login, controls, pageText, click, typeAt, submitPrompt, upload, waitForText, shot, pair, redact };
+module.exports = { launch, close, connect, newTab, login, controls, pageText, click, typeAt, submitPrompt, upload, waitForText, shot, pair, region, redact, assertOwnedBrowser };

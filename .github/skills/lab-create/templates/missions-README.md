@@ -8,7 +8,9 @@
 | --- | --- | --- | --- |
 | %%LEVEL%% | %%PERSONA%% | %%DURATION%% minutes | %%FINISH_LINE%% |
 
-Use your assigned **training account**, not a personal or production account. %%WHAT_THE_FACILITATOR_PREPARED%%
+For an event, use the provided or pre-provisioned account and sign in when prompted; ask the organizer if anything is missing. Use a separate browser profile or private window; do not use a personal or production account.
+
+In your own tenant only: %%MINIMUM_REQUIRED_TENANT_SETUP%%
 
 <!-- TEMPLATE NOTE (delete): keep the next paragraph when learners check results in a business app; otherwise delete it. Mirror it in the _labs copy. -->
 Keep [%%SYSTEM_OF_RECORD%%](%%SYSTEM_OF_RECORD_URL%%) open in another tab. It is the %%KIND_OF_APP%% in this scenario: %%WHAT_IT_IS%%. Use it to %%WHAT_TO_CHECK_THERE%%.

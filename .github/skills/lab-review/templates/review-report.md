@@ -6,6 +6,14 @@
 | --- | --- | --- | --- | --- |
 | %%classic or missions%% | %%N%% min | %%EVENT_IDS_WITH_SLOT_MINUTES%% | %%YYYY-MM-DD%%, commit `%%SHORT_SHA%%` | %%E%% errors, %%W%% warnings, %%I%% info |
 
+## Verification boundary
+
+| Area | Status | Evidence / limitation |
+| --- | --- | --- |
+| Static structure and copies | %%passed / issue%% | %%audit output%% |
+| Current product behavior | %%unverified unless run-through evidence is attached%% | %%runthrough log or not live-tested%% |
+| Core / optional route coverage | %%covered / incomplete / not run%% | %%tested routes and gaps%% |
+
 ## Findings
 
 | # | Type | Severity | Location | Evidence | Proposed fix |
