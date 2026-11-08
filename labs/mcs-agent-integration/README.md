@@ -93,13 +93,7 @@ These resources describe the Microsoft Copilot harness experience used in this l
 
 </details>
 
-Demo calendar date: **November 12, 2026**. Timezone: **America/New_York (UTC-05:00)**. Use these values throughout, rather than relying on "tomorrow" or the service's clock.
-
-This lab uses preview capabilities. Use synthetic requests only: delegation can share conversation context with connected agents, including the externally hosted service. Instructions to minimize task content do not guarantee platform-level context isolation.
-
-**Suggested timeboxes:** main agent 6 minutes; internal specialist and connection 10 minutes; A2A connection 7 minutes; complete-team tests 7 minutes. External hosting and tenant preflight happen beforehand.
-
-If a prerequisite is unavailable, stop and ask the instructor.
+**Use synthetic requests only.** Delegation can share conversation context with the external service.
 
 ---
 
@@ -118,7 +112,7 @@ By the end of this lab, you will be able to:
 
 Complete the three use cases in order. Each ends with a quick test and a closure before you move on.
 
-**How to run the tests:** copy only the **Prompt to send** block into the named agent's **Preview**. The prompts already use the fixed demo date **November 12, 2026** and timezone **America/New_York (UTC-05:00)**. **Expected response (approximate)** blocks are illustrative examples to compare against, not messages to send or exact text to reproduce. Wording and structure can vary, but the facts and limitations must match the **Pass** criteria. Follow the fresh-conversation or follow-up instruction for each test.
+**How to run the tests:** copy only the **Prompt to send** block into the named agent's **Preview**. **Expected response (approximate)** blocks are illustrative examples to compare against, not messages to send or exact text to reproduce. Wording and structure can vary, but the facts and limitations must match the **Pass** criteria. Follow the fresh-conversation or follow-up instruction for each test.
 
 Paste the **entire prompt** into the chat composer and verify it before sending. If your browser submits at the first line break, join the lines into one paragraph and retry in a fresh conversation; do not evaluate a response to a truncated prompt.
 

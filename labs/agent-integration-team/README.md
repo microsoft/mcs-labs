@@ -29,8 +29,6 @@ All facts are fictional. There is no ERP, live inventory, carrier booking tool o
 
 </details>
 
-**Pacing:** Coordinate (6) → Ground (10) → Connect (7) → Prove (7) = **30 minutes**. Challenge is optional, about 10 more minutes. These are working budgets, not measured completion times; provisioning and model waits vary. Read a check while waiting rather than resending. If LiftLine doesn't answer, retain the verified partial result and do not mark the full team complete.
-
 ## 📋 Table of Contents
 
 - [Prerequisites](#-prerequisites)
@@ -57,9 +55,9 @@ Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, *
 
 **Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. Keep the lab beside Studio. You download the Skill ZIP in Mission 2 and confirm the card URL in Mission 3.
 
-Use synthetic requests only. Delegation can share conversation context with the external service; task-minimization instructions do not guarantee isolation. Never reserve, book, send or approve.
+**Use synthetic requests only.** Delegation can share conversation context with the external service. Never reserve, book, send or approve.
 
-**Reading the blocks:** copy each input only into its named field. Test requests already use the fixed demo date **November 12, 2026** and timezone **America/New_York (UTC-05:00)**. **Reference output** blocks are comparison material, never messages to send. Wording can vary; facts and limitations must match.
+**Reading the blocks:** copy each input only into its named field. **Reference output** blocks are comparison material, never messages to send. Wording can vary; facts and limitations must match.
 
 ## 🎯 Coordinate
 
@@ -70,11 +68,10 @@ Create the customer-facing agent without specialist data. **Outcome:** an adviso
 ### Create your own coordinator
 
 1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and confirm your assigned environment. If **Welcome from your admin** appears, review the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss **Find your environments here** with **Got it** if shown.
-2. Every test uses the fixed demo date **November 12, 2026** and timezone **America/New_York (UTC-05:00)**, already written into the prompts; never substitute "tomorrow" or the runtime clock.
-3. Select **Home → Agent**, described as **Create an agent to take actions and answer questions**. This opens the **Microsoft Copilot harness → Build**. Name it **Zava Operations Assistant**. To rename, select **Edit name** (pencil), type the name and press **Enter**.
-4. Use the agent names exactly as written; display names have a **30-character limit**. If only the Standard harness is available, stop and ask the facilitator.
-5. Under **Tools**, select **Remove Work IQ → Remove** if present. Under **Knowledge**, select the **X** beside **Search all websites** if present; that removes it without the same confirmation dialog. Remove only attachments on your new agent, never underlying connections or tenant settings.
-6. Paste the following into **Instructions**, not Preview. Do not add a dataset, Skill, knowledge source or business-data tool to this coordinator.
+2. Select **Home → Agent**, described as **Create an agent to take actions and answer questions**. This opens the **Microsoft Copilot harness → Build**. Name it **Zava Operations Assistant**. To rename, select **Edit name** (pencil), type the name and press **Enter**.
+3. Use the agent names exactly as written; display names have a **30-character limit**. If only the Standard harness is available, stop and ask the facilitator.
+4. Under **Tools**, select **Remove Work IQ → Remove** if present. Under **Knowledge**, select the **X** beside **Search all websites** if present; that removes it without the same confirmation dialog. Remove only attachments on your new agent, never underlying connections or tenant settings.
+5. Paste the following into **Instructions**, not Preview. Do not add a dataset, Skill, knowledge source or business-data tool to this coordinator.
 
 **Input — Coordinator Instructions:**
 
