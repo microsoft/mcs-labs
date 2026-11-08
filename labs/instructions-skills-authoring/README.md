@@ -1,5 +1,7 @@
 # Instructions and Skills Authoring
 
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+
 Build an RFP Response agent, inspect its reusable Skill, verify a proposal and chart against source data, then optionally author and test your own Skill.
 
 ## 🧭 Lab Details

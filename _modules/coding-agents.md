@@ -1,10 +1,10 @@
 ---
 layout: module
-title: "Coding Agents — plugin, migration, new creation"
+title: "Coding agents: plugins, migration, and creation"
 order: 3110
 duration: 30
 difficulty: 300
 section: specialized_modules
-description: "Coding agents against Copilot Studio: the plugin for GitHub Copilot CLI and Claude Code, migrating existing agents, and creating new ones from the terminal."
+description: "Use the Microsoft Copilot Studio plugin with GitHub Copilot CLI or Claude Code to migrate existing agents and create new agents from the terminal."
 slides: "/presentations/bootcamp-latest/M14.%20Coding%20Agents.pptx"
 ---

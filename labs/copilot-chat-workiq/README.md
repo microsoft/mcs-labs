@@ -1,4 +1,6 @@
-# M365 Copilot Chat and Work IQ
+# Microsoft Copilot Chat and Work IQ
+
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
 Build a cited Zava DIY decision brief with Copilot Chat and Work IQ, then optionally explore deeper reasoning, Pages, Researcher and Analyst.
 

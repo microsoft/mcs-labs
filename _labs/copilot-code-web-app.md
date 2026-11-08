@@ -11,9 +11,6 @@ description: "Build, refine, and publish a Bootcamp Lab Tracker through four seq
 classes: wide
 author_profile: false
 toc: false
-unlisted: true
-search: false
-sitemap: false
 mission_lab:
   headline: "From a clear brief"
   headline_emphasis: "to a working web app."
@@ -32,7 +29,7 @@ mission_lab:
     A fresh-account run completed the four unchanged prompts and three focused corrections: visible keyboard focus, clipped short labels, and the inclusive 480px boundary. The published app passed schedule, completion, reversal, all-complete, tab-retention, keyboard, reload-reset, and 400/480/481px checks. All 11 lab names and decorative-emoji handling were checked in the browser accessibility tree; spoken screen-reader output was not tested. Repairs can take the exercise beyond its planned time, so do not skip acceptance checks to stay on schedule.
   prerequisites:
     - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your provided **lab account** in a separate browser profile or private window, not a personal or production account."
-    - "Keep this lab beside Copilot and open the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) for comparison."
+    - "Keep this lab beside Copilot and open the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) for comparison."
     - "Ask your facilitator if **Code** or the app link is unavailable; do not change tenant settings during the lab."
   pacing: "Plan 30 minutes for Build (11) → Style (4) → Label (3) → Navigate (4) → Publish (8). Extend is an optional 3-minute reflection. Prompt 1 usually takes 5–7 minutes; each update and final publishing take about 1–2 minutes. These are working budgets, not guaranteed run times. Read ahead or answer a check while waiting; do not resend prompts, start duplicate sessions, or submit the remaining prompts together."
   missions:
@@ -60,7 +57,7 @@ mission_lab:
           prompt: |-
             Build an app called "My Bootcamp Lab Tracker". Progress is kept in memory only: it starts with every lab unchecked and resets on reload.
 
-            Fetch the agenda at https://microsoft.github.io/mcs-labs/events/bootcamp-latest/ and use every day's "Lab N:" items and "Lunch break" as the app's data (day, number, title, start, end). Skip everything else, including optional labs. If the page can't be fetched, stop and tell me.
+            Fetch the agenda at https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/ and use every day's "Lab N:" items and "Lunch break" as the app's data (day, number, title, start, end). Skip everything else, including optional labs. If the page can't be fetched, stop and tell me.
 
             Layout (max 720px, centered):
 
@@ -85,7 +82,7 @@ mission_lab:
           notice: "Copilot Code checks that the code builds and publishes, but it cannot click through the app itself in this flow. The behavior checks are yours."
         - title: "Check the schedule and starting state"
           instruction: |
-            1. Compare every day's lab numbers, titles, start/end times, and Lunch with the [published agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/). Confirm time order.
+            1. Compare every day's lab numbers, titles, start/end times, and Lunch with the [published agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/). Confirm time order.
             2. Confirm modules, welcome/re-cap, coffee breaks, Q&A, social, and all optional labs are excluded.
             3. Count the included labs. Confirm the header starts at **0 of TOTAL**, using that count rather than a fixed number.
             4. Confirm neutral greys and square corners. The initial app may follow your browser's light or dark theme; purple, green, amber, emojis, and day tabs come in the next three prompts.
@@ -397,6 +394,8 @@ mission_lab:
 
 # Copilot Code: build a simple web app
 
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+
 Build, refine, and publish a Bootcamp Lab Tracker through four sequential prompts, checking its schedule, progress, and accessible day tabs.
 
 ## Lab Details
@@ -417,7 +416,7 @@ Complete the [classic lab's prerequisite setup](https://microsoft.github.io/mcs-
 </details>
 
 - Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your provided **lab account** in a separate browser profile or private window, not a personal or production account.
-- Keep this lab beside Copilot and open the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) for comparison.
+- Keep this lab beside Copilot and open the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) for comparison.
 - Ask your facilitator if **Code** or the app link is unavailable; do not change tenant settings during the lab.
 
 Plan **30 minutes for Build (11) → Style (4) → Label (3) → Navigate (4) → Publish (8)**. Extend is an **optional 3-minute reflection**. Prompt 1 usually takes **5–7 minutes**; each update and final publishing take about **1–2 minutes**. These are working budgets, not guaranteed run times. Read ahead or answer a check while waiting; do not resend prompts, start duplicate sessions, or submit the remaining prompts together.
@@ -451,7 +450,7 @@ Start in Create anything. Keep the same session for all four prompts.
 ```text
 Build an app called "My Bootcamp Lab Tracker". Progress is kept in memory only: it starts with every lab unchecked and resets on reload.
 
-Fetch the agenda at https://microsoft.github.io/mcs-labs/events/bootcamp-latest/ and use every day's "Lab N:" items and "Lunch break" as the app's data (day, number, title, start, end). Skip everything else, including optional labs. If the page can't be fetched, stop and tell me.
+Fetch the agenda at https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/ and use every day's "Lab N:" items and "Lunch break" as the app's data (day, number, title, start, end). Skip everything else, including optional labs. If the page can't be fetched, stop and tell me.
 
 Layout (max 720px, centered):
 
@@ -473,7 +472,7 @@ Open the actual app, not just the generated-code summary. Copilot Code checks th
 
 ### Check the basic tracker
 
-1. Compare every day's lab numbers, titles, start/end times, and Lunch with the [published agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/). Confirm time order.
+1. Compare every day's lab numbers, titles, start/end times, and Lunch with the [published agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/). Confirm time order.
 2. Confirm modules, welcome/re-cap, coffee breaks, Q&A, social, and all optional labs are excluded.
 3. Count the included labs. Confirm the header starts at **0 of TOTAL**, using that count rather than a fixed number.
 4. Confirm neutral greys and square corners. The initial app may follow your browser's light or dark theme; purple, green, amber, emojis, and day tabs come in the next three prompts.

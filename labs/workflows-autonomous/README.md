@@ -1,5 +1,7 @@
 # Workflows
 
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+
 One incoming email. A verified, human-approved action. Leave with your own disabled Order Management copy, evidence of an archived test email, and a grounded reply you reviewed before delivery.
 
 ![Successful Copilot, Human review, If, and Reply to email steps; Flag email and Archive email are skipped.](images/inquiry-path-succeeded.webp)

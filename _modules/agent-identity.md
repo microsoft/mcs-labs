@@ -1,16 +1,16 @@
 ---
 layout: module
-title: "Agent Identity"
+title: "Agent identity"
 order: 3140
 duration: 15
 difficulty: 200
 section: intermediate_modules
-description: "Placeholder for the Agent Identity module in Architecture Bootcamp Latest. Instructor content is coming soon."
+description: "Understand agent identities, authentication, and access in Microsoft Copilot Studio. Distinguish the agent's identity from the user or connection used to access a resource."
 slides: "/presentations/bootcamp-latest/M16.%20Agent%20Identity.pptx"
 ---
 
-## Module placeholder
+## Topics covered
 
-This module is under development for Architecture Bootcamp Latest.
-
-Slides and instructor content are coming soon.
+- Agent identities and Microsoft Entra authentication.
+- User context, connection identity, and permissions.
+- Inventory and governance across the agent lifecycle.

@@ -12,9 +12,6 @@ description: "Build a Skill-backed stock specialist, verify connected-agent dele
 classes: wide
 author_profile: false
 toc: false
-unlisted: true
-search: false
-sitemap: false
 mission_lab:
   headline: "One customer request."
   headline_emphasis: "Independently owned expertise."
@@ -470,6 +467,8 @@ mission_lab:
 ---
 
 # Agent integration
+
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
 **One customer request. Independently owned expertise.** Create a coordinator and a Skill-backed stock specialist, then connect a facilitator-prepared dispatch advisor. Your finish line is an evidenced recommendation, never a booking.
 

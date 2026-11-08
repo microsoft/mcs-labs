@@ -12,9 +12,6 @@ description: "Safely copy an Order Management workflow, test email classificatio
 classes: wide
 author_profile: false
 toc: false
-unlisted: true
-search: false
-sitemap: false
 mission_lab:
   headline: "One incoming email."
   headline_emphasis: "A verified, human-approved action."
@@ -572,6 +569,8 @@ mission_lab:
 ---
 
 # Workflows
+
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
 One incoming email. A verified, human-approved action. Leave with your own disabled Order Management copy, evidence of an archived test email, and a grounded reply you reviewed before delivery.
 

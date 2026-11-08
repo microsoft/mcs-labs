@@ -313,7 +313,7 @@ test('Copilot Code escapes the switcher separator on every Markdown reading surf
 });
 
 for (const [classic, modern, order] of bootcampLabs) {
-  test(`${modern}: complete, unlisted missions preserve the classic lab and its prompts`, () => {
+  test(`${modern}: published missions preserve the classic lab and its prompts`, () => {
     const page = matter(fs.readFileSync(path.join(root, '_labs', `${modern}.md`), 'utf8'));
     const github = fs.readFileSync(path.join(root, 'labs', modern, 'README.md'), 'utf8');
     const original = matter(fs.readFileSync(path.join(root, '_labs', `${classic}.md`), 'utf8'));
@@ -328,9 +328,9 @@ for (const [classic, modern, order] of bootcampLabs) {
     assert.equal(github.match(/^# (.+)$/m)?.[1], curriculumRow.title);
     // Shared classic labs can retain a longer workshop duration; this edition follows the Bootcamp slot.
     assert.equal(page.data.duration, bootcampAgenda.schedule.find(row => row.type === 'lab' && row.slug === classic).duration);
-    assert.equal(page.data.unlisted, true);
-    assert.equal(page.data.search, false);
-    assert.equal(page.data.sitemap, false);
+    assert.notEqual(page.data.unlisted, true);
+    assert.notEqual(page.data.search, false);
+    assert.notEqual(page.data.sitemap, false);
     assert.equal(normalizeCopy(github), normalizeCopy(page.content));
     const content = page.data.mission_lab;
     for (const key of ['headline', 'headline_emphasis', 'promise', 'scenario', 'pacing']) {
@@ -387,7 +387,9 @@ for (const [classic, modern, order] of bootcampLabs) {
     // Optional missions may move after the core, but every original block occurrence must remain.
     const remainingBlocks = [...guidedPrompts, ...guidedOutputs];
     for (const prompt of [...indentedPrompts(original.content), ...indentedBlocks(original.content, '')]) {
-      const index = remainingBlocks.indexOf(prompt);
+      // Only the agenda source changes between editions; all other prompt text stays intact.
+      const editionPrompt = prompt.replaceAll('/events/bootcamp-latest/', '/events/architecture-bootcamp/');
+      const index = remainingBlocks.indexOf(editionPrompt);
       assert.ok(index >= 0, `${modern}: missing or changed classic block: ${prompt.slice(0, 80)}`);
       remainingBlocks.splice(index, 1);
     }
@@ -428,23 +430,50 @@ for (const [classic, modern, order] of bootcampLabs) {
   });
 }
 
-test('the unlisted missions event changes only lab references in the original bootcamp schedule', () => {
+test('the published missions event preserves the classic timetable and selects modern lab companions', () => {
   const eventId = 'architecture-bootcamp';
   const classic = yaml.load(fs.readFileSync(path.join(root, '_data', 'agendas', 'bootcamp-latest.yml'), 'utf8'));
   const modern = yaml.load(fs.readFileSync(path.join(root, '_data', 'agendas', `${eventId}.yml`), 'utf8'));
   const replacements = new Map(bootcampLabs.map(([oldSlug, newSlug]) => [oldSlug, newSlug]));
-  const schedule = classic.schedule.map(row => row.type === 'lab'
-    ? { ...row, slug: replacements.get(row.slug) || row.slug } : row);
+  const schedule = classic.schedule.map(row => {
+    if (row.type === 'lab') {
+      const labSlug = replacements.get(row.slug) || row.slug;
+      const page = matter(fs.readFileSync(path.join(root, '_labs', `${labSlug}.md`), 'utf8'));
+      return { ...row, slug: labSlug, title: page.data.title };
+    }
+    return row.companion_lab
+      ? { ...row, companion_lab: replacements.get(row.companion_lab) || row.companion_lab } : row;
+  });
   assert.deepEqual(modern, { ...classic, event_id: eventId, schedule });
   const labRows = modern.schedule.filter(row => row.type === 'lab');
   assert.deepEqual(labRows.map(row => row.slug).sort(), [slug, ...replacements.values()].sort());
   const event = matter(fs.readFileSync(path.join(root, '_events', `${eventId}.md`), 'utf8')).data;
   assert.equal(event.event_id, eventId);
-  assert.equal(event.order, 998);
-  assert.equal(event.unlisted, true);
-  assert.equal(event.search, false);
-  assert.equal(event.sitemap, false);
+  assert.equal(event.order, 2);
+  assert.notEqual(event.unlisted, true);
+  assert.notEqual(event.search, false);
+  assert.notEqual(event.sitemap, false);
   assert.deepEqual(event.labs, labRows.map(({ slug: labSlug, label }) => ({ slug: labSlug, label })));
+  const classicEvent = matter(fs.readFileSync(path.join(root, '_events', 'bootcamp-latest.md'), 'utf8')).data;
+  assert.equal(classicEvent.unlisted, true);
+  assert.equal(classicEvent.search, false);
+  assert.equal(classicEvent.sitemap, false);
+  const moduleRows = modern.schedule.filter(row => row.type === 'module');
+  assert.equal(moduleRows.length, 17);
+  assert.equal(labRows.length, 11);
+  for (const row of moduleRows) {
+    const module = matter(fs.readFileSync(path.join(root, '_modules', `${row.slug}.md`), 'utf8'));
+    assert.equal(row.title, module.data.title, `${row.label}: page and agenda naming agree`);
+    assert.doesNotMatch(module.data.title, /\b(?:MCS|DAs|M365|New Copilot Studio)\b/);
+    assert.doesNotMatch(module.data.description + module.content, /Module placeholder|Instructor content is coming soon/);
+    if (row.companion_lab) {
+      assert.equal(row.lab, false, `${row.label}: explicit labs control counts`);
+      assert.ok(labRows.some(lab => lab.slug === row.companion_lab), `${row.label}: scheduled modern companion`);
+    }
+  }
+  assert.equal(moduleRows.find(row => row.label === 'Module 4').title, 'Copilot Chat harness: declarative agents');
+  assert.equal(moduleRows.find(row => row.label === 'Module 6').companion_lab, false);
+  assert.equal(moduleRows.find(row => row.label === 'Module 8').companion_lab, 'hooks-knowledge-travel-policy');
 });
 
 test('mission content is server rendered and enhanced without prototype controls', () => {

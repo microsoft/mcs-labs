@@ -30,7 +30,7 @@ test('Bootcamp Latest canonical filenames and event identities agree', () => {
 
   assert.equal(readDocument('_events', eventId).data.event_id, eventId);
   assert.equal(readAgenda().event_id, eventId);
-  assert.equal(readDocument('_events', 'bootcamp').data.superseded_by, eventId);
+  assert.equal(readDocument('_events', 'bootcamp').data.superseded_by, 'architecture-bootcamp');
   assert.equal(readDocument('_workshops', 'agent-in-a-day-v3').data.event_id, 'agent-in-a-day-v3');
   assert.equal(readAgenda('agent-in-a-day-v3').event_id, 'agent-in-a-day-v3');
 });

@@ -1,5 +1,7 @@
 # Standard harness — Component Model
 
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+
 Assemble a Standard harness agent from instructions, topics, knowledge and tools, then optionally inspect state, delegate to a child agent and publish to Teams.
 
 ## 🧭 Lab Details

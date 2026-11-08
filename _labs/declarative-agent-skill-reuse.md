@@ -12,9 +12,6 @@ description: "Reuse a hotel-briefing skill in Agent Builder, ground it in the an
 classes: wide
 author_profile: false
 toc: false
-unlisted: true
-search: false
-sitemap: false
 mission_lab:
   headline: "One reusable skill."
   headline_emphasis: "A team briefing."
@@ -339,6 +336,8 @@ mission_lab:
 ---
 
 # Reuse a Cowork skill in a declarative agent
+
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
 Turn a personal hotel-report workflow into **Contoso Operations agent**: an evidence table and an executive email for a teammate to review. This is **email text, not an Outlook draft**. Nothing is sent and no Planner tasks are created.
 

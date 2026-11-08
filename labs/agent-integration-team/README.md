@@ -1,5 +1,7 @@
 # Agent integration
 
+Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+
 **One customer request. Independently owned expertise.** Create a coordinator and a Skill-backed stock specialist, then connect a facilitator-prepared dispatch advisor. Your finish line is an evidenced recommendation, never a booking.
 
 ![Synthetic stock decision: the depot retains 80 bags above its floor of 50; the branch retains 30 below its floor of 40.](images/stock-decision.webp)

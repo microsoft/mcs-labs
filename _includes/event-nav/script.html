@@ -77,7 +77,12 @@
 
   function saveEventContext(eventId) {
     try {
-      sessionStorage.setItem(STORAGE_KEY, eventId);
+      var event = findEvent(eventId);
+      if (event && event.unlisted) {
+        sessionStorage.removeItem(STORAGE_KEY);
+      } else {
+        sessionStorage.setItem(STORAGE_KEY, eventId);
+      }
     } catch (e) {
       console.warn('Unable to save event navigation context.', e);
     }
@@ -198,7 +203,7 @@
     }
   } else if (stickyEventId) {
     var stickyEvent = findEvent(stickyEventId);
-    if (stickyEvent && eventContainsItem(stickyEvent, currentType, current.slug)) {
+    if (stickyEvent && !stickyEvent.unlisted && eventContainsItem(stickyEvent, currentType, current.slug)) {
       activeEvent = stickyEvent;
       if (legacyStickyEvent) saveEventContext(stickyEventId);
     } else {
@@ -227,6 +232,38 @@
     if (eventSlides) {
       var slidesLink = document.querySelector('a.mod-button[download]');
       if (slidesLink) { slidesLink.href = eventSlides; }
+    }
+  }
+
+  // Shared module pages must keep learners in the active event's lab edition.
+  // Preserve the server-rendered standalone card so Exit can restore it exactly.
+  var moduleLab = currentType === 'module' ? document.querySelector('.mod-lab') : null;
+  var originalModuleLab = moduleLab ? moduleLab.cloneNode(true) : null;
+  var companionLab = itemsInEvent[currentIdx].companion_lab;
+  if (moduleLab && companionLab !== undefined) {
+    if (companionLab === false) {
+      moduleLab.hidden = true;
+    } else {
+      var companionUrl = companionLab && typeof companionLab.url === 'string'
+        ? buildItemUrl(companionLab.url, activeEvent.event_id) : null;
+      if (!companionUrl || typeof companionLab.title !== 'string') {
+        console.error('Module companion lab must have a title and a same-origin HTTP(S) URL.');
+        moduleLab.hidden = true;
+      } else {
+        moduleLab.hidden = false;
+        moduleLab.querySelector('.mod-lab-card').href = companionUrl.href;
+        moduleLab.querySelector('.mod-lab-title').textContent = companionLab.title;
+        var companionDescription = moduleLab.querySelector('.mod-lab-desc');
+        companionDescription.textContent = companionLab.description || '';
+        companionDescription.hidden = !companionLab.description;
+        var companionLevel = moduleLab.querySelector('[data-module-lab-level]');
+        companionLevel.hidden = !companionLab.difficulty;
+        var companionLevelText = moduleLab.querySelector('[data-module-lab-level-text]');
+        companionLevelText.className = 'mod-pill mod-pill-level-' + companionLab.difficulty;
+        companionLevelText.textContent = 'Level ' + companionLab.difficulty;
+        moduleLab.querySelector('[data-module-lab-duration]').hidden = !companionLab.duration;
+        moduleLab.querySelector('[data-module-lab-minutes]').textContent = companionLab.duration;
+      }
     }
   }
 
@@ -407,6 +444,9 @@
     rail.hidden = true;
     if (navpair) navpair.hidden = true;
     delete document.documentElement.dataset.eventContext;
+    if (moduleLab && originalModuleLab) {
+      moduleLab.parentNode.replaceChild(originalModuleLab, moduleLab);
+    }
     restoreBreadcrumb();
   });
 

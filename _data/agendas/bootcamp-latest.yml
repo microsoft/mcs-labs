@@ -47,7 +47,7 @@ schedule:
   - type: module
     slug: agents-workflows-making-them-real-latest
     label: "Module 1"
-    title: "Copilot Agent Ecosystem"
+    title: "Microsoft Copilot agent ecosystem"
     time: "09:30"
     duration: 45
 
@@ -60,8 +60,9 @@ schedule:
     slug: m365-copilot-latest
     label: "Module 2"
     lab: false
-    title: "M365 Copilot Chat & Work IQ"
-    description: "Microsoft 365 Copilot as an agent surface — public-web grounding, Work IQ, response modes, multi-model support, frontier agents, and where it sits against the other surfaces."
+    companion_lab: mcs-m365-copilot-latest
+    title: "Microsoft Copilot Chat and Work IQ"
+    description: "Explore Copilot Chat in Microsoft Copilot: public-web grounding, work-context retrieval with Work IQ, response modes, model selection, Researcher, and Analyst."
     time: "10:30"
     duration: 30
 
@@ -76,7 +77,8 @@ schedule:
     slug: cowork-latest
     label: "Module 3"
     lab: false
-    title: "Cowork (+ skills, + plugins, + code)"
+    companion_lab: cowork-zava-sales
+    title: "Cowork: skills, plugins, and code"
     time: "11:15"
     duration: 30
 
@@ -103,7 +105,8 @@ schedule:
     slug: copilot-harness-latest
     label: "Module 4"
     lab: false
-    title: "Copilot harness — Agent Builder, pro-code DAs, DAs in MCS"
+    companion_lab: mcs-copilot-harness-latest
+    title: "Copilot Chat harness: declarative agents"
     time: "13:45"
     duration: 30
 
@@ -123,7 +126,8 @@ schedule:
     slug: standard-harness
     label: "Module 5"
     lab: false
-    title: "Standard harness — Component Model"
+    companion_lab: mcs-standard-harness
+    title: "Standard harness: component model"
     time: "15:00"
     duration: 30
 
@@ -152,7 +156,8 @@ schedule:
     slug: harnesses-and-component-models-latest
     label: "Module 6"
     lab: false
-    title: "New Copilot Studio: Harnesses, Orchestration & Component Models"
+    companion_lab: false
+    title: "Microsoft Copilot Studio: harnesses, orchestration, and component models"
     time: "09:15"
     duration: 60
 
@@ -165,7 +170,8 @@ schedule:
     slug: instructions-and-skills
     label: "Module 7"
     lab: false
-    title: "Deep Dive: Instructions & Skills"
+    companion_lab: mcs-skills-authoring
+    title: "Deep dive: instructions and skills"
     time: "10:45"
     duration: 45
 
@@ -185,7 +191,8 @@ schedule:
     slug: knowledge-and-tools-deep-dive
     label: "Module 8"
     lab: false
-    title: "Deep Dive: Knowledge, Tools & Hooks"
+    companion_lab: mcs-hooks
+    title: "Deep dive: knowledge, tools, and hooks"
     time: "13:00"
     duration: 45
 
@@ -205,7 +212,8 @@ schedule:
     slug: customer-conversation-harness
     label: "Module 9"
     lab: false
-    title: "Customer Conversation Harness"
+    companion_lab: mcs-customer-conversation-harness
+    title: "Customer Conversation harness"
     time: "14:30"
     duration: 30
 
@@ -220,7 +228,8 @@ schedule:
     slug: managed-apps
     label: "Module 10"
     lab: false
-    title: "Managed Apps"
+    companion_lab: mcs-managed-apps
+    title: "Apps on Microsoft Copilot Managed Runtime"
     time: "15:30"
     duration: 30
 
@@ -249,6 +258,7 @@ schedule:
     slug: workflows-latest
     label: "Module 11"
     lab: false
+    companion_lab: mcs-workflows-latest
     title: "Workflows"
     time: "09:30"
     duration: 45
@@ -269,6 +279,7 @@ schedule:
     slug: agent-integration
     label: "Module 12"
     lab: false
+    companion_lab: mcs-agent-integration
     title: "Agent integration"
     time: "11:00"
     duration: 30
@@ -288,14 +299,14 @@ schedule:
   - type: module
     slug: alm-and-analytics
     label: "Module 13"
-    title: "ALM — Traditional, Component Collections + Reporting, Analytics & Evals"
+    title: "Application lifecycle management, analytics, and evaluations"
     time: "13:00"
     duration: 30
 
   - type: module
     slug: coding-agents
     label: "Module 14"
-    title: "Coding Agents — plugin, migration, new creation"
+    title: "Coding agents: plugins, migration, and creation"
     time: "13:30"
     duration: 30
 
@@ -314,7 +325,7 @@ schedule:
   - type: module
     slug: agent-identity
     label: "Module 16"
-    title: "Agent Identity"
+    title: "Agent identity"
     time: "14:45"
     duration: 15
 

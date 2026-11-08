@@ -329,27 +329,19 @@ layout: single
 {%- assign mod_body = content | strip -%}
 {% if mod_body != "" %}<div class="mod-content">{{ content }}</div>{% endif %}
 
-{% if linked_lab %}
-<section class="mod-lab" aria-labelledby="module-lab-heading">
+<section class="mod-lab" aria-labelledby="module-lab-heading"{% unless linked_lab %} hidden{% endunless %}>
   <h2 class="mod-section-heading" id="module-lab-heading">Hands-on Lab</h2>
-  <a class="mod-lab-card" href="{{ linked_lab.url | relative_url }}">
+  <a class="mod-lab-card" href="{% if linked_lab %}{{ linked_lab.url | relative_url }}{% else %}#{% endif %}">
     <div class="mod-lab-eyebrow">Associated Lab</div>
     <h3 class="mod-lab-title">{{ linked_lab.title }}</h3>
-    {% if linked_lab.description %}
-    <p class="mod-lab-desc">{{ linked_lab.description | strip_html | truncate: 180 }}</p>
-    {% endif %}
+    <p class="mod-lab-desc"{% unless linked_lab.description %} hidden{% endunless %}>{{ linked_lab.description | strip_html | truncate: 180 }}</p>
     <div class="mod-lab-meta">
-      {% if linked_lab.difficulty %}
-      <span class="mod-pill mod-pill-level-{{ linked_lab.difficulty }}">Level {{ linked_lab.difficulty }}</span>
-      {% endif %}
-      {% if linked_lab.duration %}
-      <span class="mod-pill"><strong>Duration</strong> {{ linked_lab.duration }} min</span>
-      {% endif %}
+      <span data-module-lab-level{% unless linked_lab.difficulty %} hidden{% endunless %}><span class="mod-pill mod-pill-level-{{ linked_lab.difficulty }}" data-module-lab-level-text>Level {{ linked_lab.difficulty }}</span></span>
+      <span data-module-lab-duration{% unless linked_lab.duration %} hidden{% endunless %}><span class="mod-pill"><strong>Duration</strong> <span data-module-lab-minutes>{{ linked_lab.duration }}</span> min</span></span>
     </div>
     <span class="mod-lab-link">Open lab →</span>
   </a>
 </section>
-{% endif %}
 
 {% include event-nav/nav-pair.html %}
 

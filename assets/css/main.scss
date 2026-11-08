@@ -762,6 +762,9 @@ details.lab-setup, details.lab-validation {
 // _includes/event-nav/script.html.
 // ---------------------------------------------------------------------------
 
+// The theme's section display rule otherwise overrides the native hidden state.
+.mod-lab[hidden] { display: none; }
+
 .event-rail {
   display: block;
   margin: 0 0 1.5em;
