@@ -1,6 +1,6 @@
 # Hooks and Knowledge: Travel Policy Agent
 
-Build a **Travel Policy Agent** on the GitHub Copilot harness and use hooks to make it behave the same way in every conversation: load the traveler's profile when a session starts, redact personal data from every prompt, and ground answers in SharePoint travel policies filtered by their `Location` metadata. As an extra, block flight bookings with unapproved airlines before the tool runs.
+Build a **Travel Policy Agent** on the Microsoft Copilot harness and use hooks to make it behave the same way in every conversation: load the traveler's profile when a session starts, redact personal data from every prompt, and ground answers in SharePoint travel policies filtered by their `Location` metadata. As an extra, block flight bookings with unapproved airlines before the tool runs.
 
 ---
 
@@ -9,6 +9,9 @@ Build a **Travel Policy Agent** on the GitHub Copilot harness and use hooks to m
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
 | 200 | Maker | 45 minutes | After completing this lab, participants will be able to attach workflows to agent lifecycle events with hooks, return the user's profile to the model at session start, rewrite a user's prompt with a classifier and an inline agent before the agent uses it further, ground an agent in SharePoint documents selected by metadata, and deny a tool call that breaks a business rule — and explain why each of these belongs in a hook, in knowledge or in instructions. |
+
+> [!TIP]
+> **Pacing:** the full lab takes about 45 minutes, plus 15 for the optional Extra. In a 30-minute event slot, such as the Architecture Bootcamp's, complete Use Cases #1 and #2, then do Use Case #3 and the Extra if you have time left, or after the session.
 
 ---
 
@@ -34,7 +37,7 @@ Build a **Travel Policy Agent** on the GitHub Copilot harness and use hooks to m
 
 ## 🤔 Why This Matters
 
-**Makers** — on the GitHub Copilot harness the agent decides how to approach a task and which tools to call. Instructions *guide* those decisions, but some steps must happen **every time** a particular event occurs, not only when the model judges them relevant.
+**Makers** — on the Microsoft Copilot harness the agent decides how to approach a task and which tools to call. Instructions *guide* those decisions, but some steps must happen **every time** a particular event occurs, not only when the model judges them relevant.
 
 That is what hooks are for. A hook binds a workflow to a moment in the agent's lifecycle — a session starting, a prompt arriving, a tool about to run — and the runtime calls it whether or not the model would have chosen to.
 
@@ -64,7 +67,10 @@ Finance wants an agent that answers these questions, and it has four concerns:
 3. **Keep personal data out of the agent's work.** Travelers paste passport numbers, card numbers and personal email addresses into the chat. The agent does not need them, so they must be redacted before the agent uses the message any further — in its reasoning, its replies or its tool calls.
 4. **Only book approved airlines.** When booking tools arrive, a flight with an airline that is not on the approved list must be stopped *before* it is booked — not politely discouraged in the instructions.
 
-In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness and address each concern in turn — two with hooks, one with knowledge — and, as an extra, a third hook that guards a simulated booking tool.
+In this lab you build the **Travel Policy Agent** on the Microsoft Copilot harness and address each concern in turn — two with hooks, one with knowledge — and, as an extra, a third hook that guards a simulated booking tool.
+
+> [!NOTE]
+> The Microsoft Copilot harness was previously called the **GitHub Copilot harness**. Copilot Studio announces the change as *New name, same harness*, and your agents still run on it. While the new name rolls out, some screens and documentation may still show the earlier label.
 
 **What You Will Learn**
 
@@ -93,7 +99,7 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 
 ## 📄 Documentation and Additional Training Links
 
-* [Hooks (GitHub Copilot) (preview)](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/hooks-overview)
+* [Hooks (preview)](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/hooks-overview)
 * [Blog: Hooks in Copilot Studio](https://microsoft.github.io/mcscatblog/posts/hooks-in-copilot-studio/)
 * [Add SharePoint as a knowledge source](https://learn.microsoft.com/microsoft-copilot-studio/knowledge-add-sharepoint)
 * [Workflows in Microsoft Copilot Studio](https://learn.microsoft.com/microsoft-copilot-studio/flows-overview)
@@ -104,14 +110,17 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 
 ## ✅ Prerequisites
 
-> [!NOTE]
-> If you are completing this lab as part of a CAT-led workshop or bootcamp, you do not need to complete these prerequisites: the CAT team has already prepared them in advance. These prerequisites apply only when completing the lab in a tenant that is not managed by CAT.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-- Access to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com/).
-- The **New experience** toggle on, so that **New agent** creates an agent on the **GitHub Copilot harness**.
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+- Access to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com/), where **Agents** → **New agent** creates an agent on the **Microsoft Copilot harness**.
 - Permission to create agents and **Workflows** in your usual lab environment.
 - Read access to the SharePoint site your facilitator identifies, with a **Travel Policies** folder whose documents carry a **Location** column (`France`, `Europe`, `USA`, `Global`…).
 - Signed in with your work account, with an **Office 365 Users** connection for that account — the session-start workflow uses **Get my profile** to retrieve its **Office Location**.
+
+</details>
 
 > [!NOTE]
 > Hooks are a preview feature and the designer is still changing. If a label in this lab differs slightly from what you see, look for the closest match — the event names, input names and output names are the stable part.
@@ -125,7 +134,7 @@ In this lab you build the **Travel Policy Agent** on the GitHub Copilot harness 
 
 By the end of this lab you will have:
 
-- Built the **Travel Policy Agent** on the GitHub Copilot harness
+- Built the **Travel Policy Agent** on the Microsoft Copilot harness
 - Added a **Start (pre-loop)** hook that retrieves your Office Location and supplies it to the model before its first reply
 - Grounded the agent in the **Travel Policies** SharePoint folder, filtered by its **Location** metadata
 - Added a **User prompt submitted** hook that classifies every prompt and redacts personal data with an inline agent
@@ -137,10 +146,10 @@ By the end of this lab you will have:
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Create the Travel Policy Agent and load the traveler's profile at session start](#-use-case-1-create-the-travel-policy-agent-and-load-the-travelers-profile-at-session-start) | An agent that knows who it is talking to, and where they are based, before the first turn | 10 min |
-| 2 | [Ground the agent in travel policies filtered by Location](#-use-case-2-ground-the-agent-in-travel-policies-filtered-by-location) | Answers from the one policy that applies, with a citation | 10 min |
-| 3 | [Redact personal data before the agent uses it further](#-use-case-3-redact-personal-data-before-the-agent-uses-it-further) | The agent only works with a redacted copy of personal and financial data | 10 min |
-| Extra | [Block unapproved airlines before the booking tool runs](#-extra-block-unapproved-airlines-before-the-booking-tool-runs) | A business rule the agent cannot talk its way around | 15 min |
+| 1 | [Create the Travel Policy Agent and load the traveler's profile at session start](#-use-case-1-create-the-travel-policy-agent-and-load-the-travelers-profile-at-session-start) | An agent that knows who it is talking to, and where they are based, before the first turn | 15 min |
+| 2 | [Ground the agent in travel policies filtered by Location](#-use-case-2-ground-the-agent-in-travel-policies-filtered-by-location) | Answers from the one policy that applies, with a citation | 15 min |
+| 3 | [Redact personal data before the agent uses it further](#-use-case-3-redact-personal-data-before-the-agent-uses-it-further) | The agent only works with a redacted copy of personal and financial data | 15 min |
+| Extra | [Block unapproved airlines before the booking tool runs](#-extra-block-unapproved-airlines-before-the-booking-tool-runs) | A business rule the agent cannot talk its way around | 15 min (optional) |
 
 ---
 
@@ -154,7 +163,7 @@ You are a maker on the finance team. First you create the agent the hooks will a
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Create the Travel Policy Agent and load the traveler's profile at session start | An agent that knows who it is talking to, and where they are based, before the first turn | 10 minutes |
+| Create the Travel Policy Agent and load the traveler's profile at session start | An agent that knows who it is talking to, and where they are based, before the first turn | 15 minutes |
 
 ### Objective
 
@@ -168,7 +177,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 
 1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) in your usual lab environment.
 
-1. Confirm **New experience** is enabled. Select **Agents** in the left navigation, then **New agent**. Use the default **GitHub Copilot harness** creation path, not **Build using standard orchestration** — hooks only exist on the GitHub Copilot harness.
+1. Select **Agents** in the left navigation, then **New agent**. The designer opens directly as **Untitled Agent** on the **Microsoft Copilot harness** — hooks only exist on this harness. Do not use **Build using standard orchestration**; that option creates an agent on the Standard harness, which has no hooks.
 
 1. Set the agent's name to:
 
@@ -176,7 +185,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
     Travel Policy Agent
     ```
 
-    Leave the model at the environment's default.
+    Leave the model at the environment's default. A new agent already has the **Work IQ** tool and **Search all websites** knowledge; you remove **Search all websites** in [Use Case #2](#-use-case-2-ground-the-agent-in-travel-policies-filtered-by-location).
 
 1. In the agent's **Instructions** field, paste:
 
@@ -221,30 +230,32 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 
 1. Select **Save**. Confirm you are in the new agent's designer and can see its component rail, including **Knowledge** and **Tools**. Keep this agent open for every remaining exercise; do not switch to another agent.
 
-    ![Travel Policy Agent saved with its instructions](images/uc1-agent-created.png)
+    ![Travel Policy Agent saved with its instructions, the default Work IQ tool and Search all websites knowledge](images/uc1-agent-created.png)
 
 #### Create the hook and its workflow
 
-1. On the top menu bar, next to **Monitor**, select the three dots (**…**) → **Hooks** → **Create**.
+1. At the top-right, to the left of **Review** and **Publish**, select the three dots (**…**) → **Hooks**. The **Hooks** dialog shows **Create your first hook**; select **Create**.
 
-1. Set **Event type** to **Start (pre-loop)** and **Name** to:
+1. On **Add hook**, keep **Event type** at **Start (pre-loop)** and replace the default **Name** (*On session start*) with:
 
     ```text
     Load traveler profile
     ```
 
-1. Open the **Workflow** dropdown and select **New workflow**. The designer opens with a starter workflow: **When an agent calls the flow** already carries the `event`, `timestamp` and `metadata` inputs, and **Respond to the agent** already carries the `additionalContext` output.
+1. Open the **Workflow** dropdown and select **New workflow**. On a fresh agent it says *No compatible workflows for this event*; if it lists existing workflows instead, still create a new one. If **You have unsaved changes** appears, select **Save draft**.
+
+    The workflow designer opens in the same tab, with the breadcrumb **Travel Policy Agent** > **Untitled workflow**. The starter workflow is ready: **When an agent calls the flow** already carries the `event`, `timestamp` and `metadata` inputs, and **Respond to the agent** already carries the `additionalContext` output.
 
     > [!TIP]
     > Keep the starter input and output names exactly as they are, and do not add outputs. If you rename, remove or add fields, the workflow no longer matches the event and disappears from the hook's **Workflow** list.
 
-1. Select the workflow title **Untitled workflow** and rename it to `Load traveler profile`.
+1. Select the workflow title **Untitled workflow** and, in **Workflow name**, rename it to `Load traveler profile`.
 
 1. Between **When an agent calls the flow** and **Respond to the agent**, click **+** to add a step.
 
     ![The plus button between the workflow's trigger and response nodes](images/uc1-add-profile-step.png)
 
-1. In the step search box, paste:
+1. In the **Search** box of the **Add** dialog, paste:
 
     ```text
     office 365 get my profile
@@ -255,7 +266,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
     ![Searching for office 365 get my profile and selecting Get my profile](images/uc1-search-get-my-profile.png)
 
     > [!IMPORTANT]
-    > If prompted, create or select an Office 365 Users connection signed in with your training account. **Get my profile** returns the profile of the connection's account. Use your own connection for this lab; a shared connection would return that account's location, not each participant's.
+    > Copilot Studio connects **Get my profile** with your signed-in account and shows **Connected to Get my profile**. If you are prompted instead, create or select an Office 365 Users connection signed in with your lab account. **Get my profile** returns the profile of the connection's account. Use your own connection for this lab; a shared connection would return that account's location, not each participant's.
 
 1. Select **Respond to the agent**, select its name at the top of the panel and rename it to `Return traveler profile`. Node names are only labels: renaming them does not affect whether the workflow fits the hook.
 
@@ -265,7 +276,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
     The SessionStart hook was executed. In your first reply, say so with lots of smileys. Use this
     ```
 
-1. With the cursor at the end of the text, add a space, type **`/`** to open the dynamic content picker, and select **Office Location** from **Get my profile**.
+1. With the cursor at the end of the text, add a space and type **`/`** to open **Insert dynamic content**. Under **Get my profile**, select **Office Location**; it is near the bottom of the list, so scroll or type `office` to filter.
 
 1. After **Office Location**, paste the following text, including the leading space:
 
@@ -275,22 +286,22 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 
     ![The Get my profile step and Return traveler profile output using Office Location with a Paris fallback](images/uc1-office-location-context.png)
 
-1. **Publish** the workflow.
+1. Select **Publish** at the top-right of the workflow designer and wait until it shows **Published**.
 
-1. Close the designer by clicking **Travel Policy Agent** at the top-left.
+1. Return to the agent by selecting **Travel Policy Agent** in the breadcrumb at the top-left.
 
     ![The Travel Policy Agent breadcrumb at the top-left of the published Load traveler profile workflow](images/uc1-return-to-travel-policy-agent.png)
 
-    You are back on **Add hook**, with **Load traveler profile** selected in **Workflow**. Select **Done**, then click **X** to close the **Hooks** section. Select **Save** at the top-right to save the agent.
+    You are back on **Add hook**, with **Load traveler profile** selected in **Workflow** and a **Go to workflow** link below it. Select **Done**, then click **X** to close the **Hooks** dialog. Select **Save** at the top-right to save the agent.
 
     ![Add hook dialog with the Load traveler profile workflow selected](images/uc1-add-hook.png)
 
     > [!IMPORTANT]
-    > Always select **Publish** at the top-right after adding a new workflow to your agent. Otherwise, the agent will encounter an error when the workflow runs.
+    > Always **Publish** a hook workflow after you create or change it. The hook calls the published version; an unpublished workflow makes the hook fail when it runs.
 
 #### Test it
 
-1. Open **Preview**, turn on **Debug mode**, select **New chat** — the hook only fires when a session begins — and send:
+1. Open **Preview**. **Debug mode** is on by default; if it is off, turn it on. Select **New chat** — the hook only fires when a session begins — and send:
 
     ```text
     Hi
@@ -342,7 +353,7 @@ The agent knows where the traveler is based from the Use Case #1 hook. Now it ne
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Ground the agent in travel policies filtered by Location | Answers from the one policy that applies, with a citation | 10 minutes |
+| Ground the agent in travel policies filtered by Location | Answers from the one policy that applies, with a citation | 15 minutes |
 
 ### Objective
 
@@ -364,15 +375,15 @@ The **Travel Policies** folder holds one policy per location:
 
 #### Add the existing SharePoint folder as knowledge
 
-1. On the agent's **Build** page, select **+** next to **Knowledge**, then **SharePoint**.
+1. On the agent's **Build** page, select **+** next to **Knowledge**. In the **Add knowledge** dialog, select **SharePoint**.
 
-1. Select **Browse items** and navigate to the SharePoint site and document library identified by your facilitator.
+1. Select **Browse items**. In the picker, navigate to the SharePoint site and document library identified by your facilitator.
 
-1. Locate the folder named **Travel Policies**. Select its checkbox — the folder itself, not the documents inside it — then **Confirm selection**.
+1. Locate the folder named **Travel Policies**. Select it — the folder itself, not the documents inside it — so the picker shows **1 selected**, then select **Confirm selection**.
 
     ![Travel Policies folder selected in the SharePoint browser](images/uc3-sharepoint-folder.png)
 
-1. **Name** is filled in as **Travel Policies**. Replace the default **Description** with:
+1. The selected folder is listed with its **Name**, **Travel Policies**. Replace the default **Description** with:
 
     ```text
     Travel policies. Select applicable documents using their SharePoint Location metadata. Exclude documents with no Location value.
@@ -382,7 +393,7 @@ The **Travel Policies** folder holds one policy per location:
 
 1. Confirm the source appears under the agent's **Knowledge** and points to **Travel Policies**, not an unrelated folder or the whole site.
 
-1. Remove **Search all websites** from the **Knowledge** section by selecting its **x**, then **Save** the agent.
+1. Remove **Search all websites** from the **Knowledge** section by selecting its **x** (**Remove Search all websites**), then **Save** the agent. Leave the default **Work IQ** tool in place.
 
     ![Travel Policies listed under Knowledge, without Search all websites](images/uc3-knowledge-added.png)
 
@@ -428,8 +439,8 @@ Run these four prompts in the **same Preview conversation** to test an exact loc
 
 1. Expand the execution trace for each answer and check:
 
-    - **Used tool: Filter SharePoint Files by Metadata** — its input asks for the `Location` column (`"column":"Location","operator":"ispopulated"`), so only documents with a Location value come back. The output lists each file with its `columns.Location`. The agent picks the matching document from that list: `France`, `Europe`, `USA` or `Global`, respectively.
-    - **Used tool: sharepoint_semantic_search** — its `scopeUrls` contains **only** the URL of the selected policy, so the search cannot pull text from other locations.
+    - **Used tool: Filter SharePoint Files by Metadata** — inspect `columns.Location` and which policy is subsequently read. A run can filter the resolved country with `eq`, or list populated locations with `{"column":"Location","operator":"ispopulated"}` before selecting the matching document. The fresh-account run used the latter and then **sharepoint_get_doc**; a semantic search is not required on every turn.
+    - **Used tool: sharepoint_semantic_search** — its `scopeUrls` contains **only** the URL of the selected policy, so the search cannot pull text from other locations. The agent may also call **sharepoint_get_doc** to read the selected document.
     - Each fallback follows the absence of a more specific matching policy, not a guess based on document names or text.
     - The response cites the selected policy (for example *Travel Policy - 310.docx*) and reports its recorded allowance and currency without combining values from other policies.
 
@@ -480,7 +491,7 @@ Travelers paste whatever they have to hand into the chat — a passport number, 
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Redact personal data before the agent uses it further | The agent only works with a redacted copy of personal and financial data | 10 minutes |
+| Redact personal data before the agent uses it further | The agent only works with a redacted copy of personal and financial data | 15 minutes |
 
 ### Objective
 
@@ -492,13 +503,13 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
 
 #### Create the hook and its workflow
 
-1. **…** → **Hooks** → **Create**. Set **Event type** to **User prompt submitted** and **Name** to:
+1. Select **…** → **Hooks** → **Create**. Set **Event type** to **User prompt submitted** and **Name** to:
 
     ```text
     Redact personal data
     ```
 
-1. In **Workflow**, select **New workflow**. The starter workflow receives `prompt` and returns `modifiedPrompt` and `suppressOutput`.
+1. In **Workflow**, select **New workflow** (choose **Save draft** if asked). The starter workflow receives `prompt` and returns `modifiedPrompt` and `suppressOutput`.
 
 #### Classify the prompt
 
@@ -537,7 +548,9 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
 
 1. Select the starter **Respond to the agent** node, select its name at the top of the panel and rename it to `Return original prompt`.
 
-1. Drag or delete connections as needed so that **No PII** and **Other** both connect to **Return original prompt**, matching the screenshot. Leave **Contains PII** for the redaction step below.
+1. Remove the leftover connection. When Classify was inserted, the old trigger → **Respond to the agent** connection stayed behind as a *generic* **Classify** → **Return original prompt** connection. It is drawn from the top branch, **No PII**, so it looks wired, but the workflow never follows it: **Return original prompt** is **Skipped** and the hook fails. Select that connection and press **Delete**. **Return original prompt** now shows **Not connected**.
+
+1. Drag from the **No PII** connection point to the input connection point of **Return original prompt**, then do the same from **Other**. You can also select a branch's connection point, then the node's input point. Both branches can share this one node. Leave **Contains PII** for the redaction step below.
 
     ![The No PII and Other branches connected to Return original prompt, with Contains PII not yet connected](images/uc2-clean-prompt-branches.png)
 
@@ -546,7 +559,7 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
     ![Return original prompt with the prompt dynamic value selected for modifiedPrompt](images/uc2-return-original-prompt.png)
 
     > [!IMPORTANT]
-    > Do not leave `modifiedPrompt` empty here, and wire **every** branch. If no Respond node runs, the workflow run can still show *Succeeded*, but the test pane shows *Hook failed: UserPromptSubmitted – The hook flow could not be executed.* When in doubt, open **…** → **Hooks**, select **More options** on the hook → **Edit** → **Go to workflow**, open the **Activity** tab, select the run and check which nodes were **Skipped**.
+    > Do not leave `modifiedPrompt` empty here, and wire **every** branch from its own category connection point. If no Respond node runs, the workflow run can still show *Succeeded*, but the test pane shows *Hook failed: UserPromptSubmitted - The hook flow returned an error.* To find out why, open **…** → **Hooks**, select **…** (**More options**) on the hook → **Edit** → **Go to workflow** (it opens in a new browser tab), open the **Activity** tab, select the run and check which nodes were **Skipped**.
 
 #### Redact with an inline agent
 
@@ -569,7 +582,7 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
 
     ![The Redact PII inline agent with its instructions and prompt dynamic value after Text](images/uc2-redact-pii-instructions.png)
 
-1. Right-click **Return original prompt**, then select **Copy**.
+1. Right-click **Return original prompt**, then select **Copy**. Use **Copy**, not **Duplicate**: **Duplicate** connects the copy straight after the original node.
 
     ![The Return original prompt node's context menu with Copy highlighted](images/uc2-copy-original-prompt.png)
 
@@ -592,12 +605,12 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
 
     ![Return redacted prompt with Agent Response selected for modifiedPrompt](images/uc2-return-redacted-agent-response.png)
 
-1. **Publish** the workflow and close the designer. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
+1. **Publish** the workflow and return to the agent with the **Travel Policy Agent** breadcrumb. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
 
     ![Redact personal data workflow: Classify branches, Redact PII, Return original prompt and Return redacted prompt](images/uc2-redaction-workflow.png)
 
     > [!IMPORTANT]
-    > Always select **Publish** at the top-right after adding a new workflow to your agent. Otherwise, the agent will encounter an error when the workflow runs.
+    > Always **Publish** a hook workflow after you create or change it. The hook calls the published version; an unpublished workflow makes the hook fail when it runs.
 
 #### Test it
 
@@ -607,7 +620,10 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
     I'm flying to Lyon next week for a customer workshop. What can I spend on dinner?
     ```
 
-    Expand **Executed hook: UserPromptSubmitted** — `modifiedPrompt` is identical to what you typed. The agent can use the travel-policy knowledge you connected in [Use Case #2](#-use-case-2-ground-the-agent-in-travel-policies-filtered-by-location) to answer the clean prompt.
+    Expand **Executed hook: UserPromptSubmitted** — `modifiedPrompt` is identical to what you typed. The agent can use the travel-policy knowledge you connected in [Use Case #2](#-use-case-2-ground-the-agent-in-travel-policies-filtered-by-location) to answer the clean prompt. The hook adds a noticeable delay, often 20–30 seconds, because the workflow runs a model step on every prompt.
+
+    > [!NOTE]
+    > The hook's **Output** shows `"isContinue": false` even when the hook succeeds. Check `modifiedPrompt` and the absence of a **Hook failed** message instead.
 
 1. Now send the prompt with personal data:
 
@@ -642,7 +658,7 @@ The instructions promised booking tools "for simulations only". Finance has one 
 
 | Use case | Value added | Estimated effort |
 |----------|-------------|------------------|
-| Block unapproved airlines before the booking tool runs | A business rule the agent cannot talk its way around | 15 minutes |
+| Block unapproved airlines before the booking tool runs | A business rule the agent cannot talk its way around | 15 minutes (optional) |
 
 ### Objective
 
@@ -656,11 +672,11 @@ Give the agent a simulated **Book flight** tool, then add a **Pre tool use** hoo
 
 A **Pre tool use** hook needs a tool call to intercept. The tool you add here is a simulation: it doesn't reach a real booking system and only returns a confirmation text. What matters is that the agent calls it with an airline, so the hook has something to check.
 
-1. On the agent's **Build** page, select **+** next to **Tools**. In **Add a tool**, select **Add** → **Workflow**. The workflow designer opens with a **When an agent calls the flow** trigger and a **Respond to the agent** node.
+1. On the agent's **Build** page, select **+** next to **Tools**. In the **Add a tool** dialog, select **+ Add** → **Workflow**. The workflow designer opens in the same tab with a **When an agent calls the flow** trigger and a **Respond to the agent** node.
 
-1. Rename the workflow to **Book flight**.
+1. Select the workflow title and rename it to **Book flight**.
 
-1. Select **When an agent calls the flow** and add these inputs with **+ Add an input**, in this order:
+1. Select **When an agent calls the flow** (the panel shows **When an agent calls the workflow** — *Trigger as a tool from an agent*) and add these inputs with **+ Add an input**, in this order. Choose the type from **Text**, **Number**, **Yes/No**, **Date**, **Email** or **File**:
 
     | Input | Type | Description |
     |-------|------|-------------|
@@ -678,7 +694,7 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
     Flight booking simulated. No real reservation or payment was made.
     ```
 
-1. **Publish** the workflow and close the designer. The **Workflow details** dialog opens. Select **Edit description** under **Description for Intelligence**, paste the text below and select **Save**:
+1. **Publish** the workflow, then return through the **Travel Policy Agent** breadcrumb to open **Workflow details**. Select the pencil next to **Description for AI**, paste the text below and save it. If details are closed, select the **Book flight** tool card:
 
     ```text
     Simulates booking a flight for a traveler. Use it once you have the airline, origin, destination and departure date.
@@ -686,23 +702,21 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
 
     ![Book flight workflow: four inputs and a Respond node returning the simulated booking](images/extra-tool-workflow.png)
 
-1. Confirm **Book flight** is listed under **Tools**, then **Save** the agent.
+1. Return to the agent with the **Travel Policy Agent** breadcrumb. Confirm **Book flight** is listed under **Tools**, then **Save** the agent.
 
 #### Create the hook and its workflow
 
-1. **…** → **Hooks** → **Create**. Set **Event type** to **Pre tool use**. A **Tools** field appears.
+1. Select **…** → **Hooks** → **Create**. Set **Event type** to **Pre tool use** (*Runs before a tool executes. Can allow, deny, or ask for confirmation.*). A **Tools** field appears, set to **All tools**.
 
-1. Open the **Tools** dropdown and check **Book flight**. The hook now fires only for that tool — leave it on **All tools** and it fires for every tool.
+1. Open the **Tools** dropdown and check **Book flight**. The hook now fires only for that tool; an empty **Tools** field (*Leave empty to apply this hook to all tools*) makes it fire for every tool.
 
-1. Set **Name** to:
+1. Replace the default **Name** (*Before a tool runs*) with:
 
     ```text
     Check approved airline
     ```
 
-1. In **Workflow**, select **New workflow**. The starter workflow receives `event`, `timestamp`, `toolName`, `parameters` and `metadata`, and returns `permissionDecision`, `permissionDecisionReason`, `modifiedParameters`, `additionalContext` and `suppressOutput` — all optional.
-
-    ![Add hook dialog with Pre tool use and the Book flight tool](images/extra-add-hook.png)
+1. In **Workflow**, select **New workflow** (choose **Save draft** if asked). The starter workflow receives `event`, `timestamp`, `toolName`, `parameters` and `metadata`, and returns `permissionDecision`, `permissionDecisionReason`, `modifiedParameters`, `additionalContext` and `suppressOutput` — all optional.
 
     ![Pre tool use starter workflow: the Respond node with its five optional outputs](images/extra-starter-workflow.png)
 
@@ -730,9 +744,11 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
 
 #### Return the decision
 
-1. The **Approved airline** branch already leads to the starter **Respond to the agent** node. Rename it to `Allow tool call` and leave **every output empty**. Empty means *allow*: the tool runs with its original parameters.
+1. Select the starter **Respond to the agent** node and rename it to `Allow tool call`. Leave **every output empty**. Empty means *allow*: the tool runs with its original parameters.
 
-1. Select **Allow tool call**, copy it (**Ctrl+C** / **Cmd+C**) and paste it (**Ctrl+V** / **Cmd+V**). Rename the copy, **Allow tool call 2**, to `Deny tool call` and drag the **Else** connection point of the If/Else onto it. As in Use Case #3, each decision gets its own Respond node because each returns different values.
+1. As in Use Case #3, make sure the connection to **Allow tool call** starts from the **Approved airline** connection point: select the connection that was carried over from the trigger, press **Delete**, then drag from **Approved airline** to the input connection point of **Allow tool call**.
+
+1. Right-click **Allow tool call** → **Copy**, then right-click an empty area of the canvas → **Paste**. Rename the copy, **Allow tool call 2**, to `Deny tool call` and drag the **Else** connection point of the If/Else onto it. As in Use Case #3, each decision gets its own Respond node because each returns different values.
 
 1. On **Deny tool call**, set:
 
@@ -744,7 +760,9 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
 
     Leave `modifiedParameters` and `suppressOutput` empty.
 
-1. **Publish** the workflow and close the designer. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
+1. **Publish** the workflow and return to the agent with the **Travel Policy Agent** breadcrumb. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
+
+    ![Add hook dialog with Pre tool use, the Book flight tool and the Check approved airline workflow](images/extra-add-hook.png)
 
     ![Check approved airline workflow: If/Else with Allow tool call and Deny tool call](images/extra-pretool-workflow.png)
 
@@ -753,6 +771,9 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
     ![Hooks list with the three hooks](images/extra-hooks-list.png)
 
 #### Test it
+
+> [!TIP]
+> If **New chat** shows *BotDefinitionOverride has unresolved references: 1 missing flow(s), 0 missing connection reference(s). Error code: InvalidContent.*, the agent hasn't picked up the published hook workflow yet. Open the **Check approved airline** workflow, select **Publish**, return to the agent and **Save** it again, then select **New chat**.
 
 1. Select **New chat** and send:
 

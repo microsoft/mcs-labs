@@ -1,77 +1,122 @@
 # Cowork: from insights to action
 
-Prepare a Zava Sales pipeline review, create real slides and Outlook drafts, update CRM, and turn the procedure into a reusable, scheduled skill.
+Find a proposal in Copilot Chat, prepare a live deal brief with the Zava Sales Hub agent, and create a lead in its MCP App. Then delegate a Zava-branded pipeline review to Cowork and turn the procedure into a reusable, scheduled skill.
 
 ## 🧭 Lab Details
 
 | Level | Persona | Duration | Finish line |
 | --- | --- | --- | --- |
-| 200 | Business user | 30 minutes | A reviewed deck, draft follow-ups, linked CRM records, a reusable skill and scheduled preparation. |
+| 200 | Business user | 30 minutes core; about 52 with all extensions | A cited proposal, an agent-assisted brief and lead, a branded deck, draft follow-ups, a reusable skill and scheduled preparation. |
 
-Use your assigned **training account**, not a personal or production account. Your facilitator prepares Cowork access, credits, Zava Sales data and plugins. Keep customer emails as **drafts**.
+Use your assigned **training account**, not a personal or production account. Your facilitator prepares Copilot access, credits, the sample Northwind proposal, Zava Sales data, the Zava Sales Hub agent and plugins. Start in **Chat, not Cowork**. Keep customer emails as **drafts**.
 
-Keep [Zava Sales Hub](https://aka.ms/ZavaSalesHub) open in another tab. It is the CRM in this scenario: a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data (accounts, contacts, leads, opportunities and activities). Use it to check what Copilot finds and to see the records you create.
+Keep [Zava Sales Hub](https://aka.ms/ZavaSalesHub) open in another tab. It is the CRM in this scenario: a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data (accounts, contacts, leads, opportunities and activities). On first use, check that the Microsoft Dataverse consent shows your assigned training account, then select **Allow**. Wait for **Live CRM** before checking what Copilot finds and the records you create.
 
-Plan **30 minutes for the four core missions**: Ask → Delegate → Act → Repeat. Improve and Specialize are **optional extensions, about 14 more minutes**; no scenario has been removed. These are working budgets, not guaranteed run times. Read ahead or try a quick check while Cowork works; do not start duplicate tasks.
+Plan **30 minutes for the four core missions**: Ask (3) → Act (7) → Delegate (11) → Repeat (9). The Riley call and CRM update, Friday feedback loop, and Zava Sales plugin exercise remain as **optional extensions: 8 + 6 + 8 minutes**, about 52 minutes for everything. These are working budgets, not guaranteed run times. At minute 21, move toward saving and scheduling the review; skip extensions, not approvals or output checks. Read ahead while Cowork works; do not start duplicate tasks.
 
 ## ✅ Prerequisites
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp? You can skip the prerequisite setup: the CAT team has already prepared it for you.** Use your assigned lab account and follow the lab instructions. If anything is missing, ask your instructor. Independent learners must arrange Copilot access, Cowork credits, Zava Sales data, and plugins before starting.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
+
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+Arrange Copilot access with Work IQ, the sample Northwind proposal, Cowork credits, and Zava Sales training data before starting. Make the **Zava Sales Hub agent with its lead-creation MCP App** available in Chat, and provide the **Microsoft Dataverse** and **Zava PowerPoint** plugins in Cowork. The separate **Zava Sales** Cowork plugin is needed only for the optional Specialize mission. These are demo assets to obtain from your facilitator, not built-in capabilities to recreate during this lab.
+
+</details>
+
+
 
 ## 📚 Table of Contents
 
 - [Prerequisites](#-prerequisites)
-- [Ask: find the deal](#-ask-find-the-deal)
+- [Ask: find the proposal](#-ask-find-the-proposal)
+- [Act: use the sales agent and MCP App](#-act-use-the-sales-agent-and-mcp-app)
 - [Delegate: make the review](#️-delegate-make-the-review)
-- [Act: record the commitment](#-act-record-the-commitment)
 - [Repeat: save and schedule](#-repeat-save-and-schedule)
+- [Record: log the call and commitment (optional)](#-record-log-the-call-and-commitment)
 - [Improve: learn from feedback (optional)](#-improve-learn-from-feedback)
 - [Specialize: use the Zava Sales plugin (optional)](#-specialize-use-the-zava-sales-plugin)
 - [Take it with you](#-take-it-with-you)
 
-## 🔎 Ask: find the deal
+## 🔎 Ask: find the proposal
 
 **3 minutes · Copilot Chat**
 
 1. Open [Microsoft Copilot](https://copilot.cloud.microsoft/home?auth=2) with your assigned training account.
-2. Select **Chat**. Explore the model picker, then leave **Auto** selected. Quick response favors speed; Think deeper spends longer reasoning.
-3. Keep **Work IQ on**. It grounds answers in available work context within your permissions, including configured business data. It does not unlock all company data.
+2. Select **Chat, not Cowork** in the Home composer. Explore the model picker, then leave **Auto** selected. Quick response favors speed; Think deeper spends longer reasoning.
+3. Keep **Work IQ on**. It uses work context such as files, email, meetings and Teams within your permissions. Finding a proposal does not prove that Chat can retrieve a live CRM deal.
 4. Send:
+
+```text
+Can you help me find and summarize the proposal we made to Northwind Trader a few month back? who was the economic buyer again, what was their decision criteria? my boss is asking...
+```
+
+Open the proposal citation and check the economic buyer and decision criteria against the document. The sample file is **Commercial_Proposal_Northwind_Traders**. A past proposal is not evidence of today's CRM status.
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/chat-model-picker-dark.webp"><img src="images/chat-model-picker.webp" alt="Copilot Chat model picker"></picture>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/proposal-answer-dark.webp"><img src="images/proposal-answer.webp" alt="Copilot Chat cites the Northwind proposal and summarizes its economic buyer and decision criteria"></picture>
+
+**Quick check:** Does Work IQ unlock every company record? **No.** Source configuration, your permissions and available data still apply.
+
+**If the proposal is missing:** check the assigned account and Work IQ, then ask the facilitator to check access to the sample file. Do not provision Dataverse or invent a buyer.
+
+## ✅ Act: use the sales agent and MCP App
+
+**7 minutes · Copilot Chat and Zava Sales Hub**
+
+Select **New**, then confirm **Chat**, not Cowork. Start this in a **new Copilot Chat session**, separate from the Northwind conversation:
 
 ```text
 Help me prepare for a call about Northstar Teamwear’s $250K Pulse renewal. Where does the deal stand, what needs my attention, and what are the three most important questions to ask on the call?
 ```
 
-Watch the visible search/tool activity. Look for Zava Sales business-data results and open a source. Separate deal facts from suggested questions.
+In this training experience, Chat may not retrieve the live deal and can recommend **Zava Sales Hub** instead. Select the recommendation to **Try Zava Sales Hub**. Check that the same prompt is carried into the agent conversation; send it if it is only prefilled. Confirm that you are now talking to **Zava Sales Hub**, then check the deal status, attention points and three call questions against its returned records.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/chat-model-picker-dark.webp"><img src="images/chat-model-picker.webp" alt="Copilot Chat model picker"></picture>
+The recommendation's wording can vary. If no card appears, open **Agents & Plugins → Chat**, find the facilitator-provided **Zava Sales Hub** agent, and paste the same prompt there. Some sessions shorten the sidebar label to **Plugins**. If Chat starts a research task instead, select **Stop task** on that task card before opening the agent; do not wait for a separate research run in this exercise. If Chat answers directly, inspect its sources, then open the agent for the next step anyway. The lab does not require making Chat fail, and this result does **not** establish that Dataverse is unavailable in every Copilot Chat tenant.
 
-**Quick check:** Does Work IQ unlock every company record? **No.** Source configuration, your permissions and available data still apply.
+In the **same Zava Sales Hub agent conversation**, follow up:
 
-**If the deal is missing:** check the account and Work IQ setting, then ask the facilitator to check Zava Sales business-data access. Do not treat a generic answer as a verified CRM result. The next mission's Dataverse connection is a separate capability.
+```text
+Thanks, btw can you help me create a new lead for them? John Doe mentioned a $50,000 project in the Denver area, details to be sent in a couple of weeks.
+```
+
+Confirm when prompted, then complete and review the embedded lead form. **This interactive form inside the agent is an MCP App**, not a switch to Cowork. Review **John Doe**, **$50,000**, **Denver**, and the Northstar context before saving. Keep unknown contact details unknown. This lead is separate from the **$250K renewal**; do not overwrite the renewal amount.
+
+In **Create new lead record**, complete **Lead Name** if blank, for example `Northstar Teamwear - Denver project`. Fill **Topic** with the known project details, including that more details are expected in a couple of weeks. Scroll **inside the form** to check **Estimated value: 50000**. If it is blank or the form warns that it could not fill `$50,000`, enter `50000` without the currency symbol or comma. A company-name string is not proof that the **Account** lookup is linked. Select **Accept and save** once, then look for **Your changes have been saved successfully** and **Update lead record**. Use **Open** to inspect the saved record if needed.
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/lead-mcp-app-dark.webp"><img src="images/lead-mcp-app.webp" alt="The interactive Zava Sales Hub lead form inside the agent, with John Doe, Northstar Teamwear and Denver suggested, and an Accept and save button"></picture>
+
+Check the saved lead before retrying to avoid duplicates. If the agent or form is missing, ask the proctor to check the deployment; do not install a lookalike or treat plain suggested field values as an interactive form.
+
+**Quick check:** Does seeing a lead form prove the record exists? **No. Review the fields, save once, and verify the resulting CRM record.**
 
 ## 🛠️ Delegate: make the review
 
-**10 minutes · Cowork**
+**11 minutes · Cowork, Microsoft Dataverse and Zava PowerPoint**
 
-1. Go to **Plugins → Cowork → Microsoft Dataverse**.
+1. Go to **Agents & Plugins → Cowork → Microsoft Dataverse**. Some sessions shorten the sidebar label to **Plugins**. This is Cowork's connection, separate from the Chat agent.
 2. Turn **Enable Microsoft Dataverse** on, then **Connect Microsoft Dataverse**.
 3. Enter `https://zavasalesdemo.crm.dynamics.com/`, select **Connect**, and confirm **Connected**. If already connected, leave it alone.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/dataverse-connection-dark.webp"><img src="images/dataverse-connection.webp" alt="Connect Microsoft Dataverse dialog with https://zavasalesdemo.crm.dynamics.com/ in the environment URL field"></picture>
+   <picture><source media="(prefers-color-scheme: dark)" srcset="images/dataverse-connection-dark.webp"><img src="images/dataverse-connection.webp" alt="Connect Microsoft Dataverse dialog with https://zavasalesdemo.crm.dynamics.com/ in the environment URL field"></picture>
 
-4. Select **New → Cowork**. Leave **Auto / Medium** selected. Higher effort spends more time and credits. Standard chat is included with your Microsoft Copilot license; Cowork uses metered Copilot Credits. Available models and tools depend on the tenant.
+4. Still in **Agents & Plugins → Cowork**, enable **Zava PowerPoint** and inspect its company-branding guidance. If already enabled, leave it enabled. This is not the optional **Zava Sales** plugin. Ask the facilitator if it is missing; do not silently substitute a generic deck.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/cowork-model-effort-dark.webp"><img src="images/cowork-model-effort.webp" alt="Cowork model and effort settings"></picture>
+   <picture><source media="(prefers-color-scheme: dark)" srcset="images/zava-powerpoint-plugin-dark.webp"><img src="images/zava-powerpoint-plugin.webp" alt="The enabled Zava PowerPoint plugin with its corporate-branding guidance and zava-powerpoint-brand skill"></picture>
 
-5. Send the following. Keep the **same Cowork task for the remaining core missions**. The optional Improve mission starts here before its separate Friday task:
+5. After both plugin checks, select **New → Cowork** explicitly. Leave **Auto / Medium** selected. Higher effort spends more time and credits. Cowork uses metered Copilot Credits; available models and tools depend on the tenant.
+
+   <picture><source media="(prefers-color-scheme: dark)" srcset="images/cowork-model-effort-dark.webp"><img src="images/cowork-model-effort.webp" alt="Cowork model and effort settings"></picture>
+
+6. Send the following. Keep the **same Cowork task for Repeat and the optional Riley call**. Improve starts here before its separate Friday task:
 
 ```text
-I’ve got a pipeline review with my manager tomorrow. Help me get ready to talk through our biggest open deals with Northstar Teamwear, Coastal Performance Supply, and BluePeak Athletics. Put together a few slides on where we stand and what we need to do to close them, and draft any customer follow-ups I should send.
+I've got a pipeline review with my manager at the office tomorrow. Build me a new Zava-branded PowerPoint deck covering our biggest open deals with Northstar Teamwear, Coastal Performance Supply and BluePeak Athletics: where each stands and what we need to do to close. Then draft the customer follow-up emails I should send.
 ```
 
-Watch the plan, data retrieval, PowerPoint creation and Outlook draft creation. As soon as a first deck exists, inspect it and send the correction below. If still working, use **Queue**:
+Watch Cowork discover and use **Zava PowerPoint** for the branded deck, query CRM through **Microsoft Dataverse**, and create Outlook drafts. Check the visible plugin/skill activity as well as the deck; saying “Zava” on a title slide is not proof of plugin use. As soon as a first deck exists, inspect it and send the correction below. If still working, use **Queue**:
 
 ```text
 This is a good start, but you’re making a few calls I’d want to check with the deal owners first. Don’t assume we need to push Coastal to Q1 or change anyone’s forecast. Make it clear what we know and what we still need to ask. And cut it to three slides—I’ve only got five minutes with my manager.
@@ -79,15 +124,68 @@ This is a good start, but you’re making a few calls I’d want to check with t
 
 ![Cowork and the three-slide pipeline review](images/pipeline-three-slides.webp)
 
-Verify **three slides** and actual output cards marked **Saved to drafts**, not just suggested email text. Customer emails stay unsent. If the preview is blank, dismiss a first-run Office notice or use the file's open action; do not restart the task.
+The image is a real result after the steering prompt, with Zava branding retained. Your wording and CRM values will differ. The biggest open Northstar deal can differ from the $250K renewal in your call brief; inspect the record links rather than assuming they are the same. Verify **three slides**, the **Zava PowerPoint branding guidance**, and actual output cards marked **Saved to drafts**, not just suggested email text. Customer emails stay unsent. If the preview is blank, dismiss a first-run Office notice or select **Open in PowerPoint**. Wait for each slide to finish rendering before judging its layout; do not restart the task.
 
 **Quick check:** Should a CRM-informed recommendation automatically change a forecast? **No.** Confirm assumptions with the owner. Delegate preparation, not unchecked business decisions.
 
-## ✅ Act: record the commitment
+## 🔁 Repeat: save and schedule
 
-**8 minutes · Dataverse, PowerPoint and Outlook**
+**9 minutes · Skills and Automations**
 
-Send in the same task:
+Send each prompt in order in the same task:
+
+```text
+Let’s make this my weekly pipeline review. Every Monday morning, refresh the three slides for these accounts, highlight what’s changed, and draft any follow-ups I should review.
+```
+
+If asked for a time zone, confirm the one you intend. If **Create recurring task** appears, review it. Clear **Run once now** unless you want an extra test run; it may be selected by default. Then select **Schedule** before continuing. The later prompt refines this same Monday job rather than creating a duplicate.
+
+```text
+This is how I want to prepare for my pipeline reviews. Save it as a skill called Weekly Deal Review: the same three accounts, three slides, clear separation between what we know and what we need to ask, and customer follow-up drafts for me to review.
+```
+
+If a **Copy file** approval appears, check that its destination is your Cowork folder's `skills/weekly-deal-review` before approving. In a scheduled task, **Always allow Copy artifact** grants ongoing copy permission to that task; do not approve unexpected destinations or overwrites.
+
+Let skill creation finish. Inspect the saved instructions: the same three accounts, three slides, facts versus questions, Zava PowerPoint branding guidance, and draft-only customer follow-ups. Find skills under **Agents & Plugins → Cowork**; this one may appear as **weekly-deal-review**. A skill is reusable instructions and a procedure, **not model retraining**.
+
+<details>
+<summary>Help: find and inspect the saved skill</summary>
+
+Open **Agents & Plugins → Cowork → Manage all → weekly-deal-review**. If its tile is offscreen in the Added row, use the right arrow or **Manage all**. Inspect the actual instructions in **OneDrive → My files → Documents → Cowork → skills → weekly-deal-review → SKILL.md** in your training account.
+
+If the skill page says it could not verify `SKILL.md` in OneDrive, reload once, then check the existing file there. In the training run, the file was present and readable despite this warning. An inventory entry alone does not verify its contents. Do not delete Cowork folders or create duplicate skills to clear the warning. If the file is absent or unreadable, ask your facilitator before continuing to skill reuse.
+
+</details>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/saved-skill-dark.webp"><img src="images/saved-skill.webp" alt="The saved weekly-deal-review skill"></picture>
+
+```text
+Run Weekly Deal Review every Monday at 8:30 a.m. and email me the slides. Keep the customer emails as drafts for me to review.
+```
+
+Review the schedule card or **Automations**. Check **Monday, 8:30 a.m., the intended time zone, your own email recipient, and customer emails kept as drafts**. Compare **Next run** with the recurrence; if they disagree, flag it with your facilitator before relying on delivery. For an update, complete **Next → Review permissions → Approve** when offered, with email permission limited to your account. A new schedule uses **Schedule**; some tenants show **Save** or **Activate** instead. Keep only one Monday review schedule.
+
+When offered, **Run once now**, **Activate and run now**, or a preview lets you test without waiting for Monday. Leave it off if you only want the scheduled run. Any test email goes only to your training account. Check **Automations → Runs** afterwards; setup is not proof of future execution.
+
+**Quick check:** Does saving a skill start a recurrence? **No. The skill is the how; an activated schedule is the when.**
+
+Return to the task and check its cost:
+
+```text
+/cost
+```
+
+The command is free and shows **approximate cumulative task usage**, not an invoice or advance estimate. One Copilot Credit is roughly **US$0.01 at the standard pay-as-you-go rate**; pricing, discounts and tenant arrangements vary.
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/task-cost-dark.webp"><img src="images/task-cost.webp" alt="Example cumulative task usage, not a fixed lab cost"></picture>
+
+**Core lab complete.** [Take it with you](#-take-it-with-you), or continue with the optional missions below.
+
+## 📝 Record: log the call and commitment
+
+**Optional · 8 minutes · Dataverse, PowerPoint and Outlook**
+
+Return to the **pipeline-review Cowork task**, not the Zava Sales Hub agent chat. Send:
 
 ```text
 Just spoke with Riley at Northstar about the $250K renewal. They need a phased rollout plan before final approval, and I promised to send it by next Friday. Create a completed phone call with that recap and a task for me to send the plan. Link both to the renewal.
@@ -109,51 +207,9 @@ Then send:
 Update my slides with what we learned from Riley, and change the draft email to her into a recap of our call. Mention that I’ll send the rollout plan by the deadline on my task.
 ```
 
-Check the updated slides and Riley's unsent draft. The deadline must match the **saved task**, not a new interpretation of “next Friday.”
+Check the updated slides and Riley's unsent draft. The deadline must match the **saved task**, not a new interpretation of “next Friday.” CRM can display a different time zone from Cowork. If the earlier Northstar draft was for another contact and deal, Cowork may create a separate Riley draft rather than replace it. Check the recipient and keep both emails unsent.
 
 **Quick check:** What proves completion? **The returned records and their actual status, owner, due date and relationship**, not just an acknowledgment.
-
-## 🔁 Repeat: save and schedule
-
-**9 minutes · Skills and Automations**
-
-Send each prompt in order in the same task:
-
-```text
-Let’s make this my weekly pipeline review. Every Monday morning, refresh the three slides for these accounts, highlight what’s changed, and draft any follow-ups I should review.
-```
-
-If asked for a time zone, confirm the one you intend. If **Create recurring task** appears, review it and select **Schedule** before continuing. Leave **Run once now** off unless you want an extra test run. The later prompt refines this same Monday job rather than creating a duplicate.
-
-```text
-This is how I want to prepare for my pipeline reviews. Save it as a skill called Weekly Deal Review: the same three accounts, three slides, clear separation between what we know and what we need to ask, and customer follow-up drafts for me to review.
-```
-
-Let skill creation finish. Inspect the saved instructions: the same three accounts, three slides, facts versus questions, and draft-only customer follow-ups. Find skills under **Plugins → Cowork**; this one may appear as **weekly-deal-review**. A skill is reusable instructions and a procedure, **not model retraining**.
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/saved-skill-dark.webp"><img src="images/saved-skill.webp" alt="The saved weekly-deal-review skill"></picture>
-
-```text
-Run Weekly Deal Review every Monday at 8:30 a.m. and email me the slides. Keep the customer emails as drafts for me to review.
-```
-
-Review the schedule card or **Automations**. Check **Monday, 8:30 a.m., the intended time zone, your own email recipient, and customer emails kept as drafts**. For an update, complete **Next → Review permissions → Approve** when offered, with email permission limited to your account. A new schedule uses **Schedule**; some tenants show **Save** or **Activate** instead. Keep only one Monday review schedule.
-
-When offered, **Run once now**, **Activate and run now**, or a preview lets you test without waiting for Monday. Leave it off if you only want the scheduled run. Any test email goes only to your training account. Check **Automations → Runs** afterwards; setup is not proof of future execution.
-
-**Quick check:** Does saving a skill start a recurrence? **No. The skill is the how; an activated schedule is the when.**
-
-Return to the task and check its cost:
-
-```text
-/cost
-```
-
-The command is free and shows **approximate cumulative task usage**, not an invoice or advance estimate. One Copilot Credit is roughly **US$0.01 at the standard pay-as-you-go rate**; pricing, discounts and tenant arrangements vary.
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/task-cost-dark.webp"><img src="images/task-cost.webp" alt="Example cumulative task usage, not a fixed lab cost"></picture>
-
-**Core lab complete.** [Take it with you](#-take-it-with-you), or continue with the optional missions below.
 
 ## 🧠 Improve: learn from feedback
 
@@ -173,11 +229,11 @@ Update the skill automatically and send me a short recap of what changed, with l
 
 If asked, choose **Separate Friday task**. This experience supports one recurring schedule per task: keep Monday at 8:30 a.m., rather than replacing it or adding extra no-op runs. If your training account has no configured manager or review meeting, say so and require it to report the gap without unsupported skill changes. Confirm a Friday afternoon time and time zone; **4:00 p.m. Europe/Paris** is one example.
 
-Review Cowork's generated handoff, then copy it into **New → Cowork**. Check it names **Weekly Deal Review** and your existing deck, requires a backup before skill edits, preserves accounts and permissions, keeps customer emails as drafts, and sends the recap only to you. Complete the Friday schedule confirmation. Handoff text alone is not a saved schedule.
+Review Cowork's generated handoff, then copy it into **New → Cowork**. Check it names **Weekly Deal Review** and your existing deck, requires a backup before skill edits, preserves accounts and permissions, keeps customer emails as drafts, and sends the recap only to you. Complete the Friday schedule confirmation, clearing **Run once now** so it does not immediately execute. Handoff text alone is not a saved schedule.
 
 This configures future work, not a demonstrated learning result. **No accessible feedback** is valid; invented feedback is not. Automatic changes depend on available sources, permissions and successful runs. Skill-file changes may still wait for approval.
 
-Find **Weekly Deal Review** under **Plugins → Cowork** and the separate Monday and Friday schedules under **Automations**. Check the Friday instructions require a dated backup before edits and report missing or conflicting feedback. After a real feedback run, inspect the change recap, source links and saved previous version.
+Find **Weekly Deal Review** under **Agents & Plugins → Cowork** and the separate Monday and Friday schedules under **Automations**. Check the Friday instructions require a dated backup before edits and report missing or conflicting feedback. After a real feedback run, inspect the change recap, source links and saved previous version.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/separate-automations-dark.webp"><img src="images/separate-automations.webp" alt="Separate Monday pipeline-review and Friday skill-improvement schedules"></picture>
 
@@ -187,7 +243,7 @@ Find **Weekly Deal Review** under **Plugins → Cowork** and the separate Monday
 
 **Optional · 8 minutes · New Cowork task**
 
-1. Open **Plugins → Cowork**, search for **Zava Sales**, and install/add it. If already installed, leave it enabled.
+1. Open **Agents & Plugins → Cowork**, search for **Zava Sales**, and install/add it if your facilitator has supplied it. If already installed, leave it enabled. This optional plugin is separate from the **Zava Sales Hub agent** and the **Zava PowerPoint plugin** already used.
 2. Review its skills and connections. Complete any requested connection only in the supplied training environment.
 3. Start **New → Cowork** so the task discovers the plugin. Leave **Auto / Medium** selected.
 4. Send:
@@ -208,13 +264,13 @@ If asked, confirm the three requested records, your intended follow-up date and 
 
 A plugin can combine **skills, connectors, or both**. It supplies business guidance as well as tools, without bypassing your permissions. Follow the **Zava Sales Hub** link if recommended, or open [Zava Sales Hub](https://aka.ms/ZavaSalesHub): a purpose-built app can be the best place to manage the results.
 
-If Zava Sales is missing from the catalog, ask your facilitator rather than installing a lookalike. Before rerunning the prompt, check for existing records to avoid duplicates.
+If Zava Sales is missing from the catalog, skip this optional extension and ask your facilitator rather than installing a lookalike. The core lab needs Zava Sales Hub, Microsoft Dataverse and Zava PowerPoint, not this additional plugin. Before rerunning the prompt, check for existing records to avoid duplicates.
 
 **Quick check:** Should Cowork generate a plausible email address for Jamie? **No. Unknown details remain unknown.**
 
 ## 🚀 Take it with you
 
-**Copilot Chat** helps you answer a focused question. **Cowork** coordinates work across files and tools. A **skill** saves the method, an **automation** schedules it, and a **plugin** packages connected capabilities and business guidance.
+**Copilot Chat** finds work-file evidence. A specialist **agent** provides business tools, and an **MCP App** lets you review and complete an action inside its conversation. **Cowork** coordinates work across files and tools. A **skill** saves the method, an **automation** schedules it, and a **plugin** supplies connected capabilities and guidance such as Zava's PowerPoint branding.
 
 Which recurring task in your own work deserves a playbook like this?
 

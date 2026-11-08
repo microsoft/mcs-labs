@@ -82,23 +82,24 @@ test('Bootcamp Latest agenda matches modules and both copies of each lab', () =>
     labs.map(({ slug, label }) => ({ slug, label })));
 });
 
-test('Bootcamp Latest labs explain that CAT bootcamp prerequisite setup is already prepared', () => {
+test('Bootcamp Latest labs exempt proctor-led events with provided, pre-provisioned accounts from setup', () => {
   for (const lab of readAgenda().schedule.filter((item) => item.type === 'lab')) {
     const document = readDocument('_labs', lab.slug);
     const readme = fs.readFileSync(path.join(root, 'labs', lab.slug, 'README.md'), 'utf8');
     for (const [source, content] of [['site', document.content], ['GitHub', readme]]) {
       const section = content.match(/^## [^\n]*Prerequisites[^\n]*\r?\n([\s\S]*?)(?=^## |(?![\s\S]))/m)?.[1];
       assert.ok(section, `${lab.slug}: ${source} prerequisite section exists`);
-      assert.match(section, /CAT.*bootcamp/, `${lab.slug}: ${source} identifies CAT bootcamps`);
-      assert.match(section, /can skip the prerequisite setup|do not need to complete these prerequisites/,
-        `${lab.slug}: ${source} exempts attendees from setup`);
-      assert.match(section, /already prepared|already set up/i,
-        `${lab.slug}: ${source} explains that setup is ready`);
+      assert.match(section, /proctor-led event with a provided, pre-provisioned account/i,
+        `${lab.slug}: ${source} identifies prepared attendees without naming an organizer`);
+      assert.doesNotMatch(content, /CAT[\s-]+bootcamp|CAT team/i,
+        `${lab.slug}: ${source} keeps prerequisite guidance event-neutral`);
+      assert.match(section, /You're ready to start/, `${lab.slug}: ${source} explains that setup is ready`);
+      assert.match(section, /<details class="lab-setup" markdown="1">\s*<summary>Using your own tenant\? View setup requirements<\/summary>/,
+        `${lab.slug}: ${source} collapses own-tenant requirements by default`);
     }
     if (document.data.lab_format === 'missions') {
-      const prerequisites = document.data.mission_lab.prerequisites.join('\n');
-      assert.match(prerequisites, /CAT bootcamp.*can skip the prerequisite setup/,
-        `${lab.slug}: mission view includes the prerequisite notice`);
+      assert.ok(document.data.mission_lab.self_setup, `${lab.slug}: mission view retains own-tenant requirements`);
+      assert.doesNotMatch(JSON.stringify(document.data.mission_lab), /CAT[\s-]+bootcamp|CAT team/i);
     }
   }
 });
@@ -189,15 +190,14 @@ test('Bootcamp Latest Hooks pacing preserves the shared workshop lab duration', 
 });
 
 test('Workflows labs share a 30-minute core with optional extra credit and event-prepared setup', () => {
-  // mcs-workflows-latest collapses setup into one alert: proctored attendees
-  // have nothing to do, and self-setup learners get the two solution packages.
+  // Prepared attendees skip setup, while self-setup learners get both solution
+  // packages. Missing starter assets are a proctor issue, not tenant setup work.
   const setupMarkers = {
     'mcs-workflows': [
       'Skip this entire Prerequisites section',
       '### Self-guided setup (outside CAT-led events)',
     ],
     'mcs-workflows-latest': [
-      'Everything is already set up for you — there is nothing to do here.',
       'assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip',
       'assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip',
     ],
@@ -222,6 +222,7 @@ test('Workflows labs share a 30-minute core with optional extra credit and event
         assert.ok(content.includes(marker), `${slug}: setup guidance includes ${marker}`);
       }
       if (slug === 'mcs-workflows-latest') {
+        assert.match(content, /proctor.led[\s\S]{0,160}pre.provisioned[\s\S]{0,160}ready to start/i);
         // The Account Lookup solution is not a dependency of this lab, and
         // prepared environments need no ownership or connection-reference repair.
         assert.doesNotMatch(content, /Account Lookup Agent|Transfer ownership|Ownership is a prerequisite|Dataverse connection reference — do this first/);

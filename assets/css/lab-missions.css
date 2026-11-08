@@ -91,7 +91,7 @@
     color: var(--text);
     /* Swap inherited and explicit theme colors together, not through the site's root transition. */
     transition: none;
-    font: calc(17px * var(--font-scale, 1))/1.6 var(--font);
+    font: calc(16px * var(--font-scale, 1))/1.6 var(--font);
     -webkit-font-smoothing: antialiased;
   }
   & a { color: var(--accent-text); text-underline-offset: .18em; }
@@ -102,8 +102,8 @@
   & img { display: block; max-width: 100%; height: auto; }
   & code { padding: .08em .3em; background: var(--tint); border-radius: 4px; font-size: .94em; overflow-wrap: anywhere; }
   & h1, & h2, & h3 { font-family: var(--font-display); color: var(--text); text-wrap: balance; }
-  & h2 { font-size: calc(clamp(29px, 3.2vw, 42px) * var(--font-scale, 1)); line-height: 1.12; letter-spacing: -.025em; margin: 0 0 .45em; }
-  & h3 { font-size: calc(21px * var(--font-scale, 1)); line-height: 1.35; margin: 0 0 .6em; }
+  & h2 { font-size: calc(clamp(25px, 2.5vw, 32px) * var(--font-scale, 1)); line-height: 1.2; letter-spacing: -.025em; margin: 0 0 .5em; }
+  & h3 { font-size: calc(18px * var(--font-scale, 1)); line-height: 1.4; margin: 0 0 .6em; }
   & summary { cursor: pointer; font-weight: 650; }
   & summary::marker { color: var(--accent-text); }
   /* Closed native disclosures can retain stale desktop layout after a viewport resize. */
@@ -135,9 +135,10 @@
   .progress-label { white-space: nowrap; font-variant-numeric: tabular-nums; }
 
   .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(32px, 5vw, 64px); align-items: center; padding-top: clamp(44px, 7vw, 84px); padding-bottom: 48px; }
-  .hero h1 { font-size: clamp(42px, 4.7vw, 66px); line-height: 1.02; letter-spacing: -.035em; font-weight: 700; margin: 0; }
-  .hero h1 em { display: block; font-style: normal; color: var(--accent-text); }
-  .promise { font-size: clamp(19px, 1.6vw, 22px); line-height: 1.5; color: var(--muted); max-width: 38ch; margin-top: 24px; margin-bottom: 0; }
+  .hero h1 { font-size: calc(clamp(32px, 3.4vw, 48px) * var(--font-scale, 1)); line-height: 1.1; letter-spacing: -.03em; font-weight: 700; margin: 0; }
+  .tagline { font-size: calc(clamp(20px, 1.9vw, 24px) * var(--font-scale, 1)); line-height: 1.4; color: var(--accent-text); margin: 16px 0 0; }
+  .tagline em { font-style: normal; }
+  .promise { font-size: calc(17px * var(--font-scale, 1)); line-height: 1.55; color: var(--muted); max-width: 45ch; margin-top: 12px; margin-bottom: 0; }
   .facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 24px 0 0; padding: 0; list-style: none; }
   .facts li { padding: 5px 12px; border: 1px solid var(--border); border-radius: 999px; background: var(--tint); font-size: 14px; }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
@@ -158,7 +159,7 @@
   .is-done :is(.route-number, .rail-number, .mission-number)::after { content: ""; position: absolute; inset: 0; background: var(--on-success); -webkit-mask: var(--check) center / 56% no-repeat; mask: var(--check) center / 56% no-repeat; }
 
   .lab-layout { display: grid; grid-template-columns: 190px minmax(0, 1fr); gap: clamp(32px, 5vw, 68px); align-items: start; padding-top: 52px; }
-  .lab-content { min-width: 0; max-width: 850px; }
+  .lab-content { width: 100%; min-width: 0; max-width: 850px; }
   .lab-rail { position: sticky; top: 100px; }
   .lab-rail ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
   .lab-rail a { display: flex; align-items: center; gap: 10px; color: var(--muted); text-decoration: none; font-size: 15px; line-height: 1.35; padding: 9px 6px; border-radius: 10px; }
@@ -166,7 +167,12 @@
   .lab-rail small { display: block; font-size: 12px; color: var(--soft); margin-top: 3px; }
   .lab-rail [aria-current="step"] { color: var(--accent-text); background: var(--tint); }
   .ready { padding-bottom: 12px; }
-  .lead { font-size: calc(19px * var(--font-scale, 1)); color: var(--muted); }
+  .lead { font-size: calc(17px * var(--font-scale, 1)); color: var(--muted); }
+  .lab-setup-note { font-size: calc(14px * var(--font-scale, 1)); color: var(--muted); margin: 20px 0 4px; }
+  .lab-setup, .lab-validation { margin: 0 0 16px; }
+  .lab-setup summary, .lab-validation summary { padding: 8px 0; color: var(--accent-text); font-size: calc(15px * var(--font-scale, 1)); }
+  .lab-setup > div, .lab-validation > div { padding: 8px 0 0; color: var(--muted); font-size: calc(15px * var(--font-scale, 1)); }
+  .lab-setup > div > :last-child, .lab-validation > div > :last-child { margin-bottom: 0; }
   .ready-list { padding: 0; margin: 24px 0; list-style: none; display: grid; gap: 12px; }
   .step-check { display: flex; gap: 12px; align-items: flex-start; cursor: pointer; }
   .step-check input { flex-shrink: 0; width: 21px; height: 21px; margin: .2em 0 0; accent-color: var(--accent); }
@@ -180,7 +186,7 @@
   .mission-heading h2 { margin: 2px 0 9px; }
   .mission-meta { color: var(--muted); font-size: 15px; margin: 0; }
   .mission-meta span { margin: 0 6px; }
-  .brief { font-size: calc(21px * var(--font-scale, 1)); line-height: 1.5; margin-top: 24px; }
+  .brief { font-size: calc(17px * var(--font-scale, 1)); line-height: 1.6; margin-top: 24px; }
   .outcome { color: var(--muted); font-size: calc(16px * var(--font-scale, 1)); }
   .outcome strong { display: block; color: var(--success); margin-bottom: 3px; font-size: 14px; }
   .mission-steps { list-style: none; margin: 32px 0 0; padding: 0; }
@@ -344,6 +350,8 @@
     & { background: #fff; font-size: 11pt; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
     :is(.lab-header, .route, .lab-rail, .skip-link, .toast, .hero-proof, .hero .hero-actions, .saving-note,
       .mission-actions, .chip-btn, .tool, .visual, .stuck, .local-only, .reflection textarea, .keep-copy) { display: none !important; }
+    /* Print setup and help even without the JavaScript that temporarily opens disclosures. */
+    :is(.lab-setup, .lab-validation, .step-help):not([open]) > :not(summary) { display: block; }
     .print-only { display: block; }
     .wrap { max-width: none; padding: 0; }
     .hero { display: block; padding: 0 0 12pt; }

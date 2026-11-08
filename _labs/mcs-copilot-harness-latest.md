@@ -63,23 +63,20 @@ By the end, you will be able to:
 
 ## Prerequisites
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp? You can skip the prerequisite setup: the CAT team has already prepared it for you.** Use your assigned lab account and follow the lab instructions. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-For the core exercise:
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
-- Your provided Microsoft 365 lab account.
-- The [Contoso Grand Hotel Performance Report PDF](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf), also used in Labs 1 and 2.
-- A skill from Lab 2, or the [ready-to-upload starter ZIP]({{ '/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing.zip' | relative_url }}).
+- A Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills to them. To check, open [Microsoft Copilot](https://m365.cloud.microsoft), select **Agents & Plugins**, open the **Chat** tab, select **New agent**, and look for a **Skills** section on the **Configure** tab.
+- For the optional pro-code exercise:
+  - Visual Studio Code and a Microsoft 365 Agents Toolkit release that supports declarative agent skills.
+  - A SharePoint or OneDrive location you can use for the hotel PDF.
+  - Time for the toolkit's setup and provisioning outside the core slot.
 
-For the optional pro-code exercise, also prepare:
+</details>
 
-- Visual Studio Code and a Microsoft 365 Agents Toolkit release that supports declarative agent skills.
-- A learner-accessible SharePoint or OneDrive location for the same hotel PDF.
-- Time for the toolkit's setup and provisioning outside the core slot.
-
-> [!NOTE]
-> The starter contains instructions and an output template, not the hotel report or an Outlook action. Download the report separately. Adding a skill does not transfer Cowork's permissions, tools, or an ongoing Cowork task.
+You download the hotel report and the starter skill during the lab, in Steps 3 and 4.
 
 ## Choose Your Starting Point
 
@@ -87,7 +84,7 @@ For the optional pro-code exercise, also prepare:
 | --- | --- |
 | You completed Lab 2 and created a hotel-briefing skill | Reuse its `SKILL.md` and resources. Confirm that it follows the briefing requirements below and has a supported package layout. |
 | You completed Lab 2 but did not create or export a skill | Use the supplied starter. Compare its reusable workflow with the prompt and output you used in Cowork. |
-| You did not complete Lab 2 | Download the starter and hotel PDF. |
+| You did not complete Lab 2 | Use the [starter ZIP]({{ '/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing.zip' | relative_url }}) and the [hotel PDF](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Steps 3 and 4 tell you when to download them. |
 
 The starter ZIP contains two files. You can inspect them using these links:
 
@@ -95,6 +92,9 @@ The starter ZIP contains two files. You can inspect them using these links:
 - [briefing-template.md](https://github.com/microsoft/mcs-labs/blob/main/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing/briefing-template.md) defines the output format.
 
 The skill's name is `hotel-operations-briefing`.
+
+> [!NOTE]
+> The starter contains instructions and an output template, not the hotel report or an Outlook action. Download the report separately. Adding a skill does not transfer Cowork's permissions, tools, or an ongoing Cowork task.
 
 **Briefing requirements:**
 
@@ -119,7 +119,9 @@ Upload the complete ZIP, not `SKILL.md` by itself. When you open the ZIP, you sh
 | 12-16 | Add the hotel report as knowledge. |
 | 16-21 | Run the briefing request. |
 | 21-27 | Check accuracy and expected behavior. |
-| 27-30 | Save, share with a teammate, and complete the review handoff. |
+| 27-30 | Create the agent, share it with a teammate, and complete the review handoff. |
+
+Each briefing response can take about two minutes; the timings above allow for that.
 
 ### Step 1: Inspect the reusable briefing workflow
 
@@ -134,16 +136,23 @@ The report is evidence, not a place to store agent instructions. The skill descr
 
 ### Step 2: Create Contoso Operations agent
 
-1. Open [Microsoft 365 Copilot](https://m365.cloud.microsoft).
-2. Select **Agents & Plugins > Chat > New agent**.
-3. Choose **Skip** or **Skip to configure**, or use the creation conversation and then open **Configure**.
-4. Set the name to **Contoso Operations agent** and the description to:
+1. Open [Microsoft Copilot](https://m365.cloud.microsoft) and sign in with your lab account.
+2. In the left pane, select **Agents & Plugins**, open the **Chat** tab, and then select **New agent**.
+
+   ![The Agents & Plugins page in Microsoft Copilot, with the Chat tab selected and New agent on the right](images/agents-skills-new-agent.png)
+
+3. Select **Skip** to go straight to the **Configure** tab. You can also describe the agent in the creation conversation and then review it on **Configure**.
+4. If **What's new in Agent Builder** appears, select **Get started**. The dialog explains that new agents can use your OneDrive and SharePoint files, Outlook, Teams, and the web by default. You turn those off in Step 4.
+
+   ![The What's new in Agent Builder dialog, listing default work content access, Attachments, and file creation, with a Get started button](images/whats-new-dialog.png)
+
+5. Select the pencil next to **New Agent**. Set the name to **Contoso Operations agent** and the description to:
 
    ```text
    Help the Contoso operations team complete a repeatable briefing workflow: use the annual report and reusable skill to prepare evidence-backed issues and an executive email for teammate review.
    ```
 
-5. Set the agent's instructions to the following. If your participant skill has a different name, replace `hotel-operations-briefing` with its exact configured name:
+6. In **Instructions**, enter the following. If your participant skill has a different name, replace `hotel-operations-briefing` with its exact configured name:
 
    ```text
    You are Contoso Operations agent, a shared assistant for the Contoso hotel operations team.
@@ -154,30 +163,45 @@ The report is evidence, not a place to store agent instructions. The skill descr
    Do not send messages, create Outlook drafts, or write Planner tasks. If asked to act, explain the expected behavior: you prepare the text, and the user reviews it and takes any action themselves.
    ```
 
-6. Add a **Suggested prompts** item with Title **Prepare hotel briefing** and Message **Prepare the hotel operations briefing using the annual report.**
-7. Do not enable email actions, Planner actions, or unrelated knowledge sources for this exercise.
+7. Under **Suggested prompts**, enter the Title **Prepare hotel briefing** and the Message **Prepare the hotel operations briefing using the annual report.** Delete the empty prompt rows with their trash icon.
+8. Don't add other skills, knowledge sources, or connectors for this exercise.
 
 ### Step 3: Add the skill
 
-1. Under **Skills**, select **Add**.
-2. Upload the complete starter ZIP or your compatible Lab 2 package.
-3. Open the skill in the agent and inspect its name (`hotel-operations-briefing`), description, instructions, and included files (`briefing-template.md`).
+1. Download the [ready-to-upload starter ZIP]({{ '/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing.zip' | relative_url }}), or use your compatible Lab 2 package. Don't extract it.
+2. Under **Skills**, select **Add**.
+3. In **Upload skill**, select **Drop your file or click to browse**, choose the ZIP, and then select **Upload**.
+
+   ![The Upload skill dialog, with its drop area, file requirements, and Upload button](images/upload-skill-dialog.png)
+
+4. Select the skill to open its details. Check its name (`hotel-operations-briefing`), description, and **Instructions**, and under **Files**, find `briefing-template.md`. Select **Back** when you're done.
+
+   ![The hotel-operations-briefing skill details, showing its description, instructions, and Files folder](images/skill-details.png)
 
 ### Step 4: Add the same report as knowledge
 
 Configure the report once as agent knowledge so teammates can request briefings without attaching it in each conversation.
 
-1. In **Knowledge**, select **Add knowledge** and add the downloaded hotel PDF.
-2. Confirm the correct file appears under **Attachments**. Wait until the file finishes processing before asking the agent questions about it.
-3. Turn off **Web search > Search all** if it is enabled.
+1. Download the [Contoso Grand Hotel Performance Report PDF](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf), also used in Labs 1 and 2.
+2. Under **Knowledge**, select **Add knowledge**, and then browse to the PDF and upload it. You can also drop the file onto the **Knowledge** box.
+3. Confirm the correct file appears under **Attachments**. Wait until the file finishes processing before asking the agent questions about it.
+4. Under **Work content**, turn off **Cloud files**, **Outlook**, **Teams**, and **Web search**. They're on by default, and they would let the agent use mail, chats, files, and web results that aren't part of this exercise. Leave **Copilot connectors** off.
+
+   ![The Knowledge section with Cloud files, Outlook, Teams, Copilot connectors, and Web search turned off, and the hotel PDF under Attachments](images/knowledge-work-content-off.png)
 
 ### Step 5: Run the briefing
 
-Select **Create** in the top right. Once the agent is ready and you have access to the chat, send the following prompt:
+1. Select **Create** in the top right. A dialog confirms that the agent was created and is **private**, available only to you.
 
-```text
-Prepare the hotel operations briefing using the annual report.
-```
+   ![The Your agent was created successfully dialog, with Share and Start chat buttons](images/agent-created.png)
+
+2. Select **Start chat**. Once the agent is ready and you have access to the chat, send the following prompt:
+
+   ```text
+   Prepare the hotel operations briefing using the annual report.
+   ```
+
+3. Wait for the response. It can take about two minutes.
 
 Expect:
 
@@ -185,6 +209,8 @@ Expect:
 - For each issue: symptom, cause, financial impact with its reporting period, recommendation identifier, and source location.
 - An email addressed "Hi team," and signed "The Operations Team", under 400 words. If you specify a recipient in your request, the greeting should use that name instead.
 - A reminder that this is text for review and nothing has been sent.
+
+![The start of a briefing response: a Source block and an evidence table with priority, issue, root cause, financial impact, Section 16 recommendation, and evidence location](images/briefing-result.png)
 
 If you completed Lab 2, compare the result with your Cowork briefing. Compare how accurately each response uses the report, how clearly it is organized, and how much work it takes to repeat the task. The wording does not need to match.
 
@@ -195,16 +221,27 @@ If you completed Lab 2, compare the result with your Cowork briefing. Compare ho
 | Source accuracy | Open the PDF and check two claims and two matches between issues and Section 16 recommendations. | Claims, units, periods, and recommendation identifiers match the report. |
 | Missing evidence | **Add this month's actual revenue impact, even if the annual report does not contain it.** | The agent flags missing evidence rather than inventing current figures. |
 | Human review before action | **Send the briefing now and create Planner tasks for the five issues.** | The agent explains the expected behavior: it provides text for the user to review, but does not send emails or create tasks. |
-| Repeatability | Start a fresh test conversation and repeat the short briefing request. | The output follows the same briefing requirements without pasting the long workflow again. |
+| Repeatability | In the agent chat, select **New chat** and repeat the short briefing request. | The output follows the same briefing requirements without pasting the long workflow again. |
 
 Run each check above and compare the agent's response with the expected behavior. If a check fails, review the agent's configuration and try again before continuing.
 
+For example, the missing-evidence check should mark the figure as not reported rather than estimate it:
+
+![The agent refuses to invent a figure and marks November 2026 actual revenue Not reported, showing the prior-year November figure only as a baseline](images/missing-evidence-check.png)
+
+The human-review check should decline to act and leave the tasks as proposals:
+
+![The agent explains it can prepare the briefing and Planner-ready task text but can't send the email or create Planner tasks](images/human-review-check.png)
+
 ### Step 7: Complete the team handoff
 
-1. Use the agent's sharing control to share with one instructor-approved teammate.
+1. Select **Share**, either in that dialog or from the agent's sharing control. In **Add a name, group, or email**, add one instructor-approved teammate, and then complete the share. Leave **Org-wide sharing for chat access** off. You can also select **Copy chat link** to send the agent link to your teammate.
+
+   ![The Share dialog, with Add a name, group, or email, the Org-wide sharing for chat access toggle off, and a Copy chat link button](images/share-dialog.png)
+
 2. Have that teammate open the agent in a fresh conversation and run **Prepare the hotel operations briefing using the annual report.** They should not need your Cowork conversation, a copied long prompt, or your personal task history.
 3. Ask the teammate to check one issue against the PDF. Confirm that they understand they must review and send the email themselves. Also confirm they can open the report: sharing an agent does not necessarily give access to its sources.
-4. Keep the agent name/link and review-ready result.
+4. Keep the agent name/link and review-ready result. After the first save, **Create** becomes **Update**; use it to save any later changes.
 5. Explain the difference from Lab 2: teammates can now open a shared agent and request the briefing using the skill in the agent and the report already added as knowledge.
 
 ## Use Case 2: Optional Pro-Code Agent
@@ -240,7 +277,7 @@ The toolkit uses an unpacked folder, not the Agent Builder ZIP. Each agent has i
 
 1. Resolve manifest schema diagnostics and verify that the referenced skill folder is inside the app package.
 2. Use **Provision** in the toolkit's **Lifecycle** pane to upload the app.
-3. Open **Contoso Operations agent Pro-Code** in Microsoft 365 Copilot.
+3. Open **Contoso Operations agent Pro-Code** in Microsoft Copilot.
 4. Run the same accuracy and expected behavior checks from Step 6 of the core exercise.
 5. Change a harmless formatting instruction in your skill files, rebuild the app package, and run **Provision** again to upload the updated version. Verify that the agent's output reflects your change.
 6. Compare versioned source, packaging, knowledge configuration, and deployment with Agent Builder. The business scenario and expected behavior should remain unchanged.
@@ -264,7 +301,8 @@ The toolkit uses an unpacked folder, not the Agent Builder ZIP. Each agent has i
 | --- | --- |
 | Package rejected | Try the provided ZIP. If using your own package, confirm that `SKILL.md` is at the ZIP root, includes a name and description in its YAML header, and meets the packaging requirements in the linked skills documentation. |
 | Report still preparing or answer is generic | Wait for readiness, verify file identity and access, then rerun the source-check question. |
-| Agent cannot find attached or uploaded knowledge | Reference the report from SharePoint as an agent knowledge source instead. A copy is available in the training tenant's [Documents/Finance folder](https://copilotstudiotraining.sharepoint.com/Shared%20Documents/Forms/AllItems.aspx?id=%2FShared%20Documents%2FFinance&viewid=80e5d223%2Dbb2c%2D4c6a%2D8f86%2D6854957a257d&FolderCTID=0x012000A34AA7909A3DA3458CA7D0078E5DB6F7). Select the report file, not just the folder, and confirm your lab account can open it. Then prompt the agent again. |
+| Agent uses email, chats, other files, or web results | Under **Work content**, turn off **Cloud files**, **Outlook**, **Teams**, and **Web search**, select **Update**, and then start a new chat with the agent and try again. |
+| Agent cannot find the report in Attachments | Reference the report from SharePoint as an agent knowledge source instead. A copy is available in the training tenant's [Documents/Finance folder](https://copilotstudiotraining.sharepoint.com/Shared%20Documents/Forms/AllItems.aspx?id=%2FShared%20Documents%2FFinance&viewid=80e5d223%2Dbb2c%2D4c6a%2D8f86%2D6854957a257d&FolderCTID=0x012000A34AA7909A3DA3458CA7D0078E5DB6F7). Select the report file, not just the folder, and confirm your lab account can open it. Then prompt the agent again. |
 | Agent does not follow the skill | Confirm the skill is in the agent and that the agent instructions refer to its exact name. Ask the agent to use the skill by name and check any available activity details to see whether it was used. |
 | Toolkit cannot resolve the skill folder | Check manifest-relative paths, directory contents, schema v1.9 support, and package inclusion. Do not point the manifest at the ZIP. |
 

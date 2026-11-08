@@ -7,8 +7,8 @@
 | Lab | `%%SLUG%%` (classic or missions) |
 | Copies | `labs/%%SLUG%%/README.md`, `_labs/%%SLUG%%.md` at commit `%%SHA%%` |
 | Date | %%YYYY-MM-DD%% |
-| Tenant and account | Training tenant, test user (no passwords here) |
-| Browser | Edge or Chrome version, window size, display scale |
+| Tenant and account | Training tenant, person's account or provisioned training account (no user names or passwords here) |
+| Browser | Edge or Chrome version, windowed or headless, `--port`, window size, display scale |
 | Start URL | %%URL%% |
 | Prerequisites checked | Licenses, plugins, connections, sample data |
 | Audit before run | `npm run audit:labs -- %%SLUG%%`: errors, warnings |
@@ -52,6 +52,7 @@ check against Microsoft Learn.
 - [ ] Product theme restored
 - [ ] `/cost` recorded: %%credits%%
 - [ ] `capture.cjs close` run; temporary profile deleted
+- [ ] Training-account credentials file deleted once no run needs it
 - [ ] Raw captures kept outside the repository
 
 ## Proposed PRs

@@ -93,6 +93,6 @@ test('Skills Authoring keeps one core use case and optional Skill-creation extra
     assert.match(content, /##### Test 1: Complete missing intake details/);
     assert.match(content, /##### Test 2: Correct a complete intake summary/);
     assert.ok(headings.some((heading) => heading.endsWith('Extra Credit: Explore the agent harness')));
-    assert.ok(headings.some((heading) => heading.endsWith('Extra Credit: Generate with AI (preview)')));
+    assert.ok(headings.some((heading) => heading.endsWith('Extra Credit: Generate with AI')));
   }
 });

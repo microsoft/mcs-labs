@@ -21,7 +21,7 @@
 - [Prerequisites and Materials](#-prerequisites-and-materials)
 - [Summary of Targets](#-summary-of-targets)
 - [Use Cases Covered](#-use-cases-covered)
-- [Instructions by Use Case](#-instructions-by-use-case)
+- [Instructions by Use Case](#️-instructions-by-use-case)
 - [Use Case #1: Create Zava Operations Assistant](#-use-case-1-create-zava-operations-assistant)
 - [Use Case #2: Create and Connect Zava Stock & Policy Specialist](#-use-case-2-create-and-connect-zava-stock--policy-specialist)
 - [Use Case #3: Connect LiftLine Dispatch Advisor over A2A](#-use-case-3-connect-liftline-dispatch-advisor-over-a2a)
@@ -71,7 +71,7 @@ Riverside Construction needs 60 bags of repair mortar before its renovation crew
 
 ## 📄 Documentation and Additional Training Links
 
-These resources describe the GitHub Copilot harness experience used in this lab.
+These resources describe the Microsoft Copilot harness experience used in this lab. It was formerly called GitHub Copilot harness, and some documentation still uses that name.
 
 - [Add and manage an uploaded Skill](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/skills-add-existing)
 - [Connect another Copilot Studio agent](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/add-agent-connected)
@@ -82,23 +82,20 @@ These resources describe the GitHub Copilot harness experience used in this lab.
 
 ## ✅ Prerequisites and Materials
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp? You can skip the prerequisite setup: the CAT team has already prepared it for you.** Use your assigned lab account and follow the lab instructions. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-This lab uses the **GitHub Copilot harness** in Copilot Studio, including preview capabilities. Do not mix these steps with the standard-harness agent designer.
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
-- Access to create two GitHub Copilot-harness agents in the **same environment**, upload Skills, publish, and connect agents. Building and testing can consume Copilot Credits.
-- The instructor has verified **Build → Skills** and **Build → Connected agents**, including **Add A2A agent**, in this tenant.
-- The pre-provisioned LiftLine A2A demo agent linked in Use Case #3. This synthetic-data demo uses **Authentication: None**; no API key or credential is needed.
-- Demo calendar date: **November 12, 2026**. Timezone: **America/New_York (UTC-05:00)**. Use these values throughout, rather than relying on "tomorrow" or the service's clock.
-- Use synthetic requests only. Delegation can share conversation context with connected agents, including the externally hosted service. Instructions to minimize task content do not guarantee platform-level context isolation.
+- Access to create two **Microsoft Copilot harness** agents in the **same environment**, upload Skills, publish, and connect agents. Building and testing can consume Copilot Credits.
+- Verify **Build → Skills** and **Build → Connected agents**, including **Add A2A agent**, are available in your tenant. Do not substitute the standard-harness designer.
+- Arrange a hosted LiftLine A2A demo agent with the bundled dispatch Skill and `LIFTLINE-DEMO-v1` data, following the instructor appendix. Confirm discovery and delegation from Copilot Studio before starting; a publicly reachable URL alone is not enough. This synthetic-data demo uses **Authentication: None**.
 
-Download these materials:
+</details>
 
-| Material | Use |
-| -------- | --- |
-| [Zava stock and policy Skill ZIP](assets/zava-stock-policy.zip) | Upload to your internal specialist; do not extract it first |
-| [Reviewable Skill source](https://github.com/microsoft/mcs-labs/tree/main/labs/mcs-agent-integration/assets) | Inspect the playbooks and their reference data |
+Demo calendar date: **November 12, 2026**. Timezone: **America/New_York (UTC-05:00)**. Use these values throughout, rather than relying on "tomorrow" or the service's clock.
+
+This lab uses preview capabilities. Use synthetic requests only: delegation can share conversation context with connected agents, including the externally hosted service. Instructions to minimize task content do not guarantee platform-level context isolation.
 
 **Suggested timeboxes:** main agent 6 minutes; internal specialist and connection 10 minutes; A2A connection 7 minutes; complete-team tests 7 minutes. External hosting and tenant preflight happen beforehand.
 
@@ -145,13 +142,14 @@ Complete each build, quick test, and closure before starting the next use case. 
 
 ### Build Zava Operations Assistant
 
-1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and confirm your assigned environment.
-1. Create a new agent using the **GitHub Copilot harness**. On **Build**, name it **Zava Operations Assistant**. If your tenant only offers the classic/standard experience, stop rather than substituting it.
+1. Open [Copilot Studio](https://copilotstudio.microsoft.com/), sign in with your lab account, and confirm your assigned environment. If **Welcome from your admin** appears, review the terms and select **I have read and agree to the Terms of use**, then **Close**. Dismiss **Find your environments here** with **Got it** if shown.
+1. On **Home**, select the **Agent** card, described as **Create an agent to take actions and answer questions**. This creates a **Microsoft Copilot harness** agent and opens **Build**. If your tenant only offers the classic/standard experience, stop rather than substituting it.
+1. Name the agent **Zava Operations Assistant**. To change a saved name, select the pencil (**Edit name**), type the name, and press **Enter** to commit it.
 
    ![Zava Operations Assistant on the Build tab, with the instructions editor and components panel showing Skills, Tools, Knowledge, and Connected agents](images/zava-operations-assistant-build.png)
 
-1. Inspect **Tools** in the components panel. New agents can include **Work IQ** and **Search all websites** automatically. If present, remove these tool attachments from this new agent so the demo cannot query Microsoft 365 or the web. Do not delete the underlying connections or change tenant settings.
-1. Paste these base instructions. Do not add a dataset, Skill, knowledge source, or business-data tool to this agent.
+1. In the components panel, remove **Work IQ** from **Tools** if present: select **Remove Work IQ**, then confirm **Remove**. Under **Knowledge**, select the **X** next to **Search all websites** if present; this removes it without the same confirmation dialog. Remove only attachments on your new agent, not underlying connections or tenant settings.
+1. Paste these base instructions into **Instructions**. Do not add a dataset, Skill, knowledge source, or business-data tool to this agent.
 
    ```text
    You are Zava Operations Assistant, an advisory-only corporate fulfilment coordinator. Understand the request and produce a concise decision brief. All requests in this lab use synthetic data.
@@ -171,9 +169,15 @@ Complete each build, quick test, and closure before starting the next use case. 
    Final brief: recommendation, stock calculation, product and loaded weights, service and EUR charge, date/timezone and slot, assumptions, exclusions, approval requirement, and source fixture IDs. End with the human next step and "Nothing has been reserved, booked, or approved."
    ```
 
+1. Select **Save** and wait for provisioning to finish; the first save can return you to **Build**. Then open **Preview**. If navigation shows **Save and continue**, use it rather than discarding your changes.
+
+   ![Coordinator instructions with empty Tools, Knowledge and Connected agents sections](images/coordinator-build.webp)
+
+   *The coordinator has advisory-only instructions and no specialist connections yet. Available models can differ.*
+
 ### Quick test: verify Zava Operations Assistant
 
-Open **Zava Operations Assistant → Preview** and start a **fresh conversation**.
+Open your **Zava Operations Assistant → Preview** and select **New chat** for a fresh conversation.
 
 **Prompt to send:**
 
@@ -193,6 +197,10 @@ Nothing has been reserved, booked, or approved.
 
 **Pass:** the main agent understands the shipment request, identifies missing specialist access, and does not invent stock balances, carrier prices, or approval decisions. It states that nothing has been reserved, booked, or approved. A complete-looking fulfilment plan at this stage is a failure, not a useful shortcut.
 
+![Coordinator identifies unavailable specialist facts and confirms nothing has been reserved, booked or approved](images/coordinator-boundary.webp)
+
+*Before connections are added, the coordinator leaves stock, delivery and approval unverified rather than inventing a complete plan.*
+
 Check that the requested date/timezone remain explicit. If the response adds "tomorrow" or a current-clock countdown, verify the date instruction above, save, and retest in a fresh conversation.
 
 ### Congratulations! You've completed Use Case #1!
@@ -207,11 +215,9 @@ You have created a coordinator that knows what it needs to find out, rather than
 
 ### Build and verify Zava Stock & Policy Specialist
 
-1. Create a **second, independent agent**, using the GitHub Copilot harness in the same environment. Name it **Zava Stock & Policy Specialist**.
-
-1. Inspect this agent's **Tools** as well. Remove **Work IQ** and **Search all websites** from this new agent.
-
-1. In the **Build** tab, add these base instructions:
+1. Return to **Home → Agent** to create a **second, independent agent**, using the **Microsoft Copilot harness** in the same environment. Name it **Zava Stock & Policy Specialist**. Use **Edit name**, then **Enter** to commit a rename. Do not create a child agent inside **Zava Operations Assistant**.
+1. Remove **Work IQ** from this agent's **Tools** with **Remove Work IQ → Remove**, if present. Remove **Search all websites** using its **X** under **Knowledge**, if present. Keep the synthetic dataset in its Skill; do not add business-data tools or knowledge sources, or delete underlying connections.
+1. On **Build**, add these base instructions:
 
    ```text
    You are Zava Stock & Policy Specialist.
@@ -220,12 +226,14 @@ You have created a coordinator that knows what it needs to find out, rather than
    Never reserve stock, book, grant approval, or change the synthetic snapshot.
    ```
 
-1. Locate the **[Zava stock and policy Skill ZIP](assets/zava-stock-policy.zip)** downloaded with the lab materials. If you have not downloaded it yet, use this link now. Keep `zava-stock-policy.zip` zipped; it includes both the playbook and demo dataset.
-1. Select **Skills → Upload a skill** and upload that downloaded `zava-stock-policy.zip`. Confirm the Skill appears. It contains `SKILL.md` and `references/demo-data.md`; uploading only `SKILL.md` would omit the dataset.
+1. Download the **[Zava stock and policy Skill ZIP](assets/zava-stock-policy.zip)** now. Keep `zava-stock-policy.zip` zipped; it includes both the playbook and demo dataset. The [reviewable Skill source](https://github.com/microsoft/mcs-labs/tree/main/labs/mcs-agent-integration/assets) is available if you want to inspect the files.
+1. On **Build**, select **Add skill** (the **+** beside **Skills**), then **Upload a skill** from the menu. In the `.md`/`.zip` upload dialog, upload `zava-stock-policy.zip`. Confirm the Skill appears in the components panel. It contains `SKILL.md` and `references/demo-data.md`; uploading only `SKILL.md` would omit the dataset.
 
    ![Uploaded zava-stock-policy Skill in Zava Stock & Policy Specialist, showing SKILL.md and references/demo-data.md alongside the Skill instructions](images/zava-stock-policy-uploaded-skill.png)
 
-1. Open **Zava Stock & Policy Specialist → Preview** and start a **fresh conversation**.
+   *The independent specialist owns the uploaded Skill; its base instructions point to the bundled reference rather than duplicating the data.*
+
+1. Select **Save** and wait for it to finish before opening your specialist's **Preview**. Select **New chat** for a fresh conversation. Use **Save and continue** if prompted during navigation.
 
    **Prompt to send:**
 
@@ -245,24 +253,30 @@ You have created a coordinator that knows what it needs to find out, rather than
 
    **Pass:** the calculations, eligibility, weight, and source ID match. The specialist does not invent a delivery quote.
 
-1. In **Preview** expand the response's activity details. Look for **Used skill: zava-stock-policy**. This confirms Skill invocation; a separate reference-file read event might not be exposed. Check the returned fixture ID and calculations too, but do not claim a file-read trace was shown if it was not. If the Skill is not invoked or reports missing data, check its instructions, re-upload the whole ZIP if needed, and retest.
+   ![Specialist response shows depot eligibility, branch exclusion, 1200 kg product weight and source ZAVA-DEMO-v1](images/specialist-result.webp)
+
+   *The specialist returns the expected stock calculation and leaves quote-based approval unevaluated.*
+
+1. In **Preview**, expand the response's activity details. Look for **Used skill: zava-stock-policy**. This confirms Skill invocation; a separate reference-file read event might not be exposed. Check the returned fixture ID and calculations too, but do not claim a file-read trace was shown if it was not. If the Skill is not invoked or reports missing data, check its instructions, re-upload the whole ZIP if needed, and retest.
 
 ### Publish Zava Stock & Policy Specialist and connect it to Zava Operations Assistant
 
-1. Save and **publish Zava Stock & Policy Specialist**. You must own it or have it shared with you; other intended users need their own access. Do not grant broader permissions just for this test. Publishing Zava Operations Assistant does not grant access to Zava Stock & Policy Specialist.
-1. Reopen **Zava Operations Assistant → Build → Connected agents**. Search for **Zava Stock & Policy Specialist**, select it, and use the description below. If it is missing, check its published version, availability-to-connect, and sharing settings with the instructor.
+1. Save your specialist, then select **Publish**. The panel can note that the agent has no channel yet; publication is still allowed. Select **Publish agent**, then **Done** when it confirms **Your agent is published**. Do not add a channel or trigger just to connect the specialist. You must own it or have it shared with you; other intended users need their own access. Publishing Zava Operations Assistant does not grant access to the specialist. Do not broaden permissions just for this test.
+1. Reopen your **Zava Operations Assistant → Build** and save any pending changes **before** selecting **Connected agents**. In the picker, search for **Zava Stock & Policy Specialist**, select it, and use this connection description. If it is missing, check its published version, availability-to-connect, and sharing settings with the instructor.
 
    ```text
    Evaluate Zava demo repair-mortar stock, protected minimums, product weight, and delivery-charge approval using its bundled Skill. Use before dispatch to find an eligible origin, and after dispatch to evaluate the quoted charge. Does not provide carrier availability, transport prices, or bookings.
    ```
 
-1. Select **Connect** and confirm the specialist appears in the components panel.
+1. Select **Connect** and confirm your specialist appears under **Connected agents** in the components panel. The connection saves automatically; **Save** can remain disabled when there are no other pending changes.
 
 ![Zava Operations Assistant with Zava Stock & Policy Specialist listed in the highlighted Connected agents panel](images/zava-stock-policy-connected-agent.png)
 
+*The published, independent specialist is connected to the coordinator. No trigger is needed for this delegation.*
+
 ### Quick test: verify Zava Operations Assistant delegates to Zava Stock & Policy Specialist
 
-Open **Zava Operations Assistant → Preview** and start a **fresh conversation**.
+Open your **Zava Operations Assistant → Preview** and select **New chat** for a fresh conversation.
 
 **Prompt to send:**
 
@@ -284,7 +298,11 @@ Nothing has been reserved, booked, or approved.
 
 **Pass:** Zava Operations Assistant delegates to Zava Stock & Policy Specialist and recommends the depot: releasing 60 bags leaves 80, above its floor of 50. It excludes the local branch, which would retain only 30 against its floor of 40, and reports `ZAVA-DEMO-v1`. Delivery and final quote-based approval remain unverified because LiftLine Dispatch Advisor is not connected. Confirm the specialist invocation in the available trace; its appearance in the connection list alone is not enough.
 
-With **Debug mode** enabled, expand **Used tool: Zava Stock & Policy Specialist**. Inspect the delegated task and returned response: the observed successful call included `is_error: false`. Verify that the returned stock facts match the recommendation. Debug labels and response wrapping can vary by tenant; record the actual invocation and result, not just the agent's claim that it consulted a specialist.
+With **Debug mode** enabled, expand the **Used tool** entry for **Zava Stock & Policy Specialist**. Inspect the delegated task and returned `agent_response`: the observed successful call included `is_error: false`. Verify that the returned stock facts match the recommendation. Debug labels and response wrapping can vary by tenant; record the actual invocation and result, not just the agent's claim that it consulted a specialist.
+
+![Expanded Used tool entry identifies Zava Stock and Policy Specialist and shows the delegated stock-check task](images/specialist-trace.webp)
+
+*The coordinator actually invokes the specialist. This crop shows the delegated task; expand and read the returned response as well before marking the test passed.*
 
 ### Congratulations! You've completed Use Case #2!
 
@@ -296,33 +314,34 @@ You have created and connected a separate, reusable Zava agent, not a child agen
 
 **Objective:** connect **LiftLine Dispatch Advisor** and verify that **Zava Operations Assistant** combines its quote with Zava's own policy.
 
-LiftLine Dispatch Advisor is pre-provisioned. You only connect it to **Zava Operations Assistant**; there is nothing to build, download, or upload for this use case.
+For a pre-provisioned event, your facilitator supplies the LiftLine Dispatch Advisor endpoint. You only connect it to **Zava Operations Assistant**; there is nothing to build, download, or upload for this use case. If LiftLine doesn't answer during the tests below, keep the partial stock recommendation from Use Case #2 and ask your facilitator. Do not build a replacement backend or claim the full-team tests passed.
 
 ### Connect the external agent
 
 1. In **Zava Operations Assistant → Build → Connected agents**, select **Add → Add A2A agent**.
-1. In **Agent card URL**, paste the following discovery URL, not the service's root communication endpoint:
+1. Paste this **Agent card URL** into that field, not the service's root communication endpoint:
 
    ```text
    https://a2a-server-bootcamp.gentleplant-daa79337.westeurope.azurecontainerapps.io/.well-known/agent-card.json
    ```
 
-   The discovered card must identify **LiftLine Dispatch Advisor**, not the earlier Echo agent. The card advertises the communication endpoint used for requests.
-1. Set the connected agent's **Name** to `LiftLine_Dispatch_Advisor`. The card's display name is **LiftLine Dispatch Advisor**; the connection name uses underscores. Use this description:
+   Copilot Studio may display **No agent card found. Enter a name and description.** and leave **Name** and **Description** empty. That's expected: the card fetch is likely blocked by the service's browser (CORS) policy. Continue and enter the details yourself.
+1. Enter `LiftLine_Dispatch_Advisor` as the **Name** (with underscores) and paste this **Description**:
 
    ```text
    Evaluate fictional LiftLine delivery from Zava Regional depot to Riverside: loaded capacity, site forklift requirements, arrival slots, and EUR quotes. Uses a bundled dispatch Skill with synthetic data. Use after Zava identifies an eligible origin. Does not own Zava stock or approval rules and cannot book.
    ```
 
-1. Under **Authentication**, select **None**. This pre-provisioned synthetic-data demo does not require credentials; do not create an API-key connection. Click Next.
-1. Create the connection when prompted.
-1. Continue to **Review and add → Add to agent**. Confirm `LiftLine_Dispatch_Advisor` appears under **Connected agents**.
+1. Under **Authentication**, select **None**. This pre-provisioned synthetic-data demo does not require credentials; do not create an API-key connection.
+1. Select **Next**. On **Connect to the A2A agent**, choose the connection supplied for this lab, or create one if none is available. **None** means no authentication credentials, not that the connection step is skipped. Do not change or delete another participant's connection.
+1. Select **Next**. On **Review and add**, review the details and select **Add to agent**. Confirm `LiftLine_Dispatch_Advisor` appears under **Connected agents**.
+
 
 <p align="center">
   <a href="images/liftline-a2a-connection-settings.png"><img src="images/liftline-a2a-connection-settings.png" alt="Connect to an A2A agent dialog showing the agent card URL, LiftLine_Dispatch_Advisor name, and None selected for authentication" width="600" class="align-center"></a>
 </p>
 
-**Checkpoint:** the card is discovered and `LiftLine_Dispatch_Advisor` is added with **Authentication: None**. If the wizard displays **No agent card found**, stop and ask the instructor to check browser discovery. A card that opens directly can still be blocked by CORS when Copilot Studio fetches it. Entering a name manually does not repair connectivity.
+**Checkpoint:** `LiftLine_Dispatch_Advisor` appears under **Connected agents** with **Authentication: None**. If the wizard showed **No agent card found. Enter a name and description.**, entering the name and description manually is the intended path; the coordinator uses that description to decide when to call LiftLine.
 
 ### Quick test: verify the complete team
 
@@ -502,20 +521,25 @@ Nothing has been reserved, booked, or approved.
 
 You have connected expertise across the company boundary: LiftLine determined delivery suitability and price, while Zava retained ownership of stock and approval rules. Your final plan uses both specialists' Skill data without business-system lookups. You have completed this use case when both delegations are evidenced, the baseline and hypothetical policy check match the expected outcomes, and no booking or approval is claimed.
 
+**Before you finish:** this lab needs no triggers, schedules, or outbound messages. If you enabled a trigger while exploring, turn it off and reload to confirm it remains off. Keep only your own agents for later practice, following your facilitator's retention guidance; leave shared connections, other participants' agents, and the LiftLine service unchanged.
+
 ---
 
 ## 🔧 Troubleshooting
 
 | Symptom | Action |
 | ------- | ------ |
-| Skills or A2A option missing | Check the GitHub Copilot harness, tenant availability, and policy with the instructor. Do not silently switch harnesses. |
+| Skills or A2A option missing | Check the Microsoft Copilot harness, tenant availability, and policy with the instructor. Do not silently switch harnesses. |
 | Zava specialist absent from the picker | Confirm same environment, published version, availability to connect, ownership/sharing, and intended-user access. |
 | Skill appears but data cannot be read | Re-upload the whole ZIP with `SKILL.md` and its reference. Report unavailable data until it loads. |
 | Main agent invents facts or skips a specialist | Check connection descriptions, base instructions, and trace evidence; restart the test. Do not paste the datasets into the main agent as a workaround. |
-| Agent uses Microsoft 365 or web search | Remove automatically added Work IQ and Search all websites attachments from both new agents; do not delete shared connections. |
+| Agent uses Microsoft 365 or web search | Remove Work IQ from **Tools** using **Remove Work IQ → Remove**; remove Search all websites with its **X** under **Knowledge**. Change only your own new agents, not shared connections. |
+| An agent name is rejected | Display names have a 30-character limit. Type the lab's name exactly, commit **Edit name** with **Enter**, then **Save**. |
+| Preview or Connected agents opens before the agent is ready | Finish **Save** first and wait for provisioning to return to **Build**. Choose **Save and continue** when prompted rather than discarding changes. |
+| Publishing notes that the agent has no channel | The specialist can publish without a channel or trigger: select **Publish agent**, then **Done**. Do not add one for connected-agent delegation. |
 | Only the first line of the prompt was sent | Paste the complete prompt as one paragraph, verify it in the composer, and retry in a fresh conversation. |
 | Agent substitutes "tomorrow" or a countdown for the supplied date | Check the explicit-date instruction, save, and restart the test. Use the supplied calendar date/timezone, not the runtime clock. |
-| Wizard says "No agent card found", but the URL opens directly | Ask the instructor to inspect the browser console for CORS errors. The service must allow card discovery from `https://copilotstudio.microsoft.com`; a successful direct HTTP request does not verify browser access. Do not disable browser security or bypass failed discovery with a manual name. |
+| Wizard says "No agent card found. Enter a name and description." | Expected in this lab: the card fetch from Copilot Studio is likely blocked by the service's CORS policy. Enter the name `LiftLine_Dispatch_Advisor` and the description from Use Case #3 manually, then continue. |
 | A2A connection or invocation fails | Verify the card URL, reachable service endpoint, exact connection name `LiftLine_Dispatch_Advisor`, and **Authentication: None** for this demo. If the service unexpectedly asks for credentials, stop and check the deployment with the instructor. |
 | Either specialist times out or returns contradictory data | Identify the failed validation, retain only verified partial findings, and ask the instructor. Never claim a complete recommendation. |
 | LiftLine rejects a clearly named demo quote override | Inspect the returned business status and ask the instructor to check the external service's override handling. Allow at most one corrected retry; do not loop or treat conditional approval advice as a confirmed quote and policy check. |
@@ -546,7 +570,7 @@ Before running this lab:
 1. Load that downloaded `liftline-dispatch.zip` into the external runtime's Skill-loading mechanism, preserving `SKILL.md` and its bundled reference. Follow the build prompt for implementation, response conventions, and acceptance tests. This is instructor preparation, not a learner upload to Copilot Studio.
 1. Verify the target tenant supports this complete harness/Skill/connected-agent/A2A combination and required sharing/publishing permissions. These steps document supported surfaces, not evidence that your tenant has been tested.
 1. Verify the deployed agent card URL in Use Case #3 still resolves to **LiftLine Dispatch Advisor** and the `LiftLine_Dispatch_Advisor` connection works with **Authentication: None**. Provide the demo calendar date/timezone and Zava Skill ZIP. LiftLine's Skill is already installed on the external service; learners do not need that download. Keep this unauthenticated endpoint limited to synthetic, advisory-only demo behavior.
-1. Verify agent-card discovery in the actual **Copilot Studio → Add A2A agent** wizard before the workshop. The deployed service must allow browser discovery from `https://copilotstudio.microsoft.com` with the appropriate CORS response headers. A successful direct card request or A2A client test does not cover this browser requirement.
+1. Expect agent-card discovery in the **Copilot Studio → Add A2A agent** wizard to fail while the deployed service doesn't return CORS headers for the Studio origin (for example `https://copilotstudio.preview.microsoft.com`). Learners are told to enter the name and description manually, so this doesn't block the lab. Still verify invocation from Copilot Studio after adding the connection, rather than relying on a direct card request or a standalone A2A client test.
 1. Run the full scenario from Copilot Studio against the **actual deployment**, not just a local A2A client. Capture evidence of discovery, both delegations, reference loading, approval boundaries, and missing-data/error handling. Record the tested runtime, A2A version/transport, and auth configuration.
 1. Test both a missing date/timezone and an unavailable specialist/service in a disposable instructor test setup. The main agent must report incomplete validation. Do not break the shared workshop endpoint to demonstrate an outage.
 1. Review possible conversation-context sharing and external logging/retention. Use synthetic data only; log correlation/status/fixture IDs rather than credentials or full conversations.

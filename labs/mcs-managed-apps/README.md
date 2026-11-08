@@ -1,6 +1,6 @@
-# Managed Apps
+# Apps on Microsoft Copilot Managed Runtime
 
-Build a managed app from the live published bootcamp lab schedule in Copilot Studio Apps. Use a screenshot as a visual reference, then connect a CSV file in your own OneDrive and verify that saved progress is restored.
+Build an app on Microsoft Copilot Managed Runtime (preview) from the live published bootcamp lab schedule, using **Apps** in Copilot Studio. Use a screenshot as a visual reference, then connect a CSV file in your own OneDrive and verify that saved progress is restored.
 
 ---
 
@@ -11,6 +11,8 @@ Build a managed app from the live published bootcamp lab schedule in Copilot Stu
 | 200 | Maker | 30 minutes | Create an app from the live lab schedule, connect a persistent backend, and verify saved progress and error handling in the preview. |
 
 The 30-minute duration is a target to validate during rehearsal, not a confirmed completion time.
+
+Allow for app generation and connection approvals. If your slot ends before the persistence or error checks finish, record them as remaining checks rather than claiming the app is complete.
 
 ---
 
@@ -33,27 +35,25 @@ The 30-minute duration is a target to validate during rehearsal, not a confirmed
 
 ## 🤔 Why This Matters
 
-**Start simple, then choose the platform for the job.** In this bootcamp, **Copilot Code** is the approachable entry point for simple apps and quick prototypes. **Microsoft Copilot Studio (MCS)** is the platform to explore when you need more advanced agents, connections to business data and tools, and managed deployment and governance. This is a progression in solution needs, not a hard limit on either tool.
+**Choose the platform for the job.** **Copilot Code** is this bootcamp's entry point for simple apps. **Microsoft Copilot Studio (MCS)** adds a path to advanced agents, business connections, and managed deployment and governance—not a hard limit on either tool.
 
-This lab connects those ideas by creating an app from the live published lab schedule in Copilot Studio Apps. **The backend is the main learning focus:** connecting the app to persistent data and verifying real reads and writes. The screenshot provides a familiar visual starting point; reproducing the UI is not the final goal. This exercise does not build an advanced agent.
+Here, you build an app from the live lab schedule in Copilot Studio Apps. **The backend is the learning focus:** verify real reads and writes, not just a convincing interface. This exercise does not build an advanced agent.
 
-**A convincing preview is not the same as a working managed app.** A screenshot can communicate a design quickly, but it cannot specify where data is saved, who can access it, or what happens after a reload.
+**A preview is not proof of persistence.** The screenshot specifies appearance, not storage, access, or reload behavior.
 
-This lab separates those questions. First, build the interface using an image and a written behavior specification, with data read from the live published schedule. Then create or reuse your OneDrive CSV file, verify saved completion, and check that connection, load, and save errors are surfaced rather than hidden. Keep the app in preview; do not publish during this exercise.
-
-You will practice checking behavior rather than accepting a generated screen or an approval message as proof of success.
+Build the interface, prepare your OneDrive CSV, then test saved completion and visible errors. Keep the app in preview; do not publish.
 
 ---
 
 ## 🌐 Introduction
 
-In Lab 3, you create a simple app in Copilot Code whose completion progress resets on reload. Here, you will create a new app in **Copilot Studio Apps** using the **live published bootcamp lab schedule** as its data source and a screenshot as a visual reference.
+Lab 3's Copilot Code app resets progress on reload. Here, build a new app in **Copilot Studio Apps** from the **live published bootcamp lab schedule**.
 
-This is **not** an HTML import or a Code-to-Studio migration. The screenshot communicates the intended appearance; the app's initial schedule data comes from reading the live agenda URL, not copying the screenshot's lab names, times, or totals. The prompt specifies the required behavior. A reference screenshot is included, so completing the earlier lab is not a prerequisite.
+This is **not** an HTML import or a Code-to-Studio migration. The included screenshot supplies appearance; the agenda supplies lab names, times, and totals. You do not need to complete Lab 3 first.
 
 Use three prompts in the same conversation. **Prompt 1** builds the app with in-memory completion. **Prompt 2** sets up the connection and CSV file without changing app code. **Prompt 3** wires the app to read and save that file, then checks persistence through the app itself. No prepared file or database is needed.
 
-OneDrive and CSV are implementation choices for this exercise, not the core concepts. The lesson is connecting an app to a persistent backend and verifying that data is saved and restored reliably.
+OneDrive and CSV are this exercise's implementation choices. The transferable lesson is verifying reliable storage and retrieval.
 
 **Connection health is the go/no-go test.** Before changing app code, confirm that the connection works and the file exists. If the connection is in an error state, stop before taking other actions and report it. A failed read must never cause an existing file to be overwritten. SharePoint, Dataverse, and browser storage are not alternatives for this exercise.
 
@@ -77,6 +77,7 @@ OneDrive and CSV are implementation choices for this exercise, not the core conc
 - [Microsoft Copilot Studio documentation](https://learn.microsoft.com/microsoft-copilot-studio/) - general product reference.
 - [OneDrive for Business connector reference](https://learn.microsoft.com/connectors/onedriveforbusiness/) - connector actions and connection requirements.
 - [Manage connections in Power Apps](https://learn.microsoft.com/power-apps/maker/canvas-apps/add-manage-connections) - creating and deleting connections.
+- [What is Microsoft Copilot Managed Runtime (preview)](https://learn.microsoft.com/microsoft-365/copilot-managed-runtime/) - where these apps run and how they're governed.
 - [Live published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) - source of truth for the app's schedule data.
 
 Use your facilitator's environment-specific guidance for feature access and connector availability.
@@ -85,14 +86,17 @@ Use your facilitator's environment-specific guidance for feature access and conn
 
 ## ✅ Prerequisites
 
-> [!IMPORTANT]
-> **Attending a CAT bootcamp? You can skip the prerequisite setup: the CAT team has already prepared it for you.** Use your assigned lab account and follow the lab instructions. If anything is missing, ask your instructor. The prerequisites below are for learners completing the lab independently.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
+
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
 
 - Access to **Copilot Studio Apps**, including image upload and app preview in your environment.
 - Permission for the app-building experience to read the published bootcamp agenda.
-- Either the [provided app screenshot](assets/actual-app.png) or a screenshot of your current Lab 3 app, saved locally for upload.
 - Your own OneDrive for Business and permission to read, create, and update files in it.
 - Access to the OneDrive for Business connector in your training environment, with permission to create a connection using your account if needed.
+
+</details>
 
 Use your own account and OneDrive, not another learner's connection or file. No pre-existing CSV file, SharePoint list, prepared database, or VS Code setup is required. Publishing is outside this exercise.
 
@@ -100,7 +104,7 @@ Use your own account and OneDrive, not another learner's connection or file. No 
 
 ## 🎯 Summary of Targets
 
-By the end of a successful rehearsal, you will be able to:
+By the end of this lab, you will be able to:
 
 - Create an app whose schedule data comes from the live published agenda, using an image only as a visual reference.
 - Confirm that its labs and Lunch match the current published agenda rather than the screenshot's historical counts.
@@ -139,8 +143,11 @@ Create an app from the live published agenda, connect its reads and writes to yo
 #### Save and Upload the Reference Image
 
 1. Choose your starting image: save the provided screenshot below, or take a screenshot of your current **Lab 3: Copilot Code** app. Either option works; you do not need to have completed Lab 3 to use the provided screenshot.
-2. Open **Copilot Studio Apps** in your provided training environment and start a new app.
-3. Attach the screenshot to the app-building conversation before submitting the first prompt.
+2. Open [Copilot Studio](https://copilotstudio.microsoft.com) and sign in with your lab account. Select your assigned environment. If **Welcome from your admin** appears, read the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss any teaching bubbles with **Got it**.
+3. Select **Apps (Preview)**, then **New app**.
+4. In the new app's chat, select **Add attachments**, then **Upload images and files**, and choose the reference image. Wait until its thumbnail appears above **Chat input** before sending Prompt 1.
+
+![Reference image attached in the new app conversation](assets/reference-attached.png)
 
 [Open or save the reference screenshot](assets/actual-app.png)
 
@@ -153,7 +160,7 @@ The image is a design reference, not the schedule source. Its app title, lab num
 With the screenshot attached, submit this prompt exactly as written:
 
 ```text
-Build a managed app called "My Bootcamp Lab App" using the
+Build an app called "My Bootcamp Lab App" using the
 attached screenshot as a visual reference.
 
 Reproduce its dark theme, square corners, day tabs, timeline,
@@ -171,7 +178,8 @@ progress synchronized. Lunch must never count toward completion.
 Support keyboard interaction and visible focus.
 
 For this first step, keep completion in memory. Do not add a
-connector or data store yet. Show me the working preview.
+connector or data store yet. Do not publish, deploy, or share
+the app. Show me the working preview.
 ```
 
 #### Watch the App Take Shape
@@ -179,6 +187,8 @@ connector or data store yet. Show me the working preview.
 While the app is being built, follow any visible progress updates, reasoning summaries, and tool activity. Look for how it interprets the screenshot, reads the agenda, and builds the interface. Expand activity details if available, and notice any questions or approval requests. These updates can help you spot misunderstandings early, but they do not replace checking the finished app.
 
 Wait for the preview. If the agenda cannot be read, stop and tell your facilitator; do not ask for an invented schedule.
+
+If activity starts **App publish** before you authorize publishing, select **Stop generating response** and tell Copilot to keep the app in preview only. Ask your facilitator to check the app's status: stopping an in-flight action does not guarantee that it made no changes.
 
 #### Check the In-Memory Preview
 
@@ -188,7 +198,11 @@ Wait for the preview. If the agenda cannot be read, stop and tell your facilitat
 - Switch days and switch back. Completion should remain during the session.
 - Confirm Lunch cannot be completed and never increases the completed count.
 - Use the keyboard to reach and operate the tabs and completion controls. Check that focus is visible.
-- Reload the preview. Completion must reset at this stage because no persistent store has been added.
+- Select **Reload preview** in the app toolbar. Completion must reset at this stage because no persistent store has been added.
+
+![App preview with a completed lab, synchronized day and overall counts, and visible keyboard focus on its timeline button](assets/completion-focus.png)
+
+The Studio shell is shown in light mode; the app itself uses the dark theme requested in Prompt 1. Your generated layout and current agenda totals may differ.
 
 Once the in-memory checks pass, continue in the same app-building conversation to add saved progress. If the preview copies outdated counts from the image or loses synchronization, correct that behavior before requesting storage.
 
@@ -231,23 +245,25 @@ The CSV rows must match the labs read from the live agenda, not a fixed count or
 
 1. Confirm the OneDrive for Business connection belongs to your account and works. If no connection exists, allow creation with your account. If an existing connection is in an error state, pause the app build, report it, and follow [Troubleshoot a Broken Connection](#troubleshoot-a-broken-connection) before continuing.
 
-For the **Create connection** prompt shown below, select **Approve** and sign in with your training account if requested. An existing working connection may be reused without another sign-in.
+   For the **Create connection** prompt shown below, confirm the service is OneDrive for Business (the card may display **Onedriveforbusiness**), then select **Approve** and sign in with your training account if requested. An existing working connection may be reused without another sign-in.
 
-<a href="assets/onedrive-connection.png"><img src="assets/onedrive-connection.png" alt="Create connection prompt for OneDrive for Business with an Approve button" width="600" class="align-center"></a>
+   <a href="assets/onedrive-connection.png"><img src="assets/onedrive-connection.png" alt="Create connection prompt for OneDrive for Business with an Approve button" width="370" class="align-center"></a>
 
 2. Confirm this file exists in your own OneDrive before the app code is changed:
 
-```text
-/Apps/My Bootcamp Lab App/lab-completion.csv
-```
+   ```text
+   /Apps/My Bootcamp Lab App/lab-completion.csv
+   ```
 
-If the folder is missing and a **Create folder?** prompt appears, confirm the name is **My Bootcamp Lab App** and the destination is `/Apps` in your own OneDrive, then select **Create**.
+   If the folder is missing and a **Create folder?** prompt appears, confirm the name is **My Bootcamp Lab App** and the destination is `/Apps` in your own OneDrive, then select **Create**.
 
-<a href="assets/create-folder.png"><img src="assets/create-folder.png" alt="OneDrive Create folder prompt for My Bootcamp Lab App with a Create button" width="600" class="align-center"></a>
+   If `/Apps` itself is missing, Copilot may first request **Create folder?** with **Name** set to `Apps`. Confirm it is creating that parent folder in your own OneDrive, then approve creation of the app folder inside it. If Copilot skips the folder and offers a single **Invoke connector operation** (CreateFile) card instead, select **Cancel** and ask it to create the folder first.
 
-For a confirmed missing CSV, review the **Upload file content** request for **lab-completion.csv**. Expand **View details**, confirm the destination is your own app folder, and check that a name conflict will **stop**, not overwrite an existing file. If the destination shows **Location name unavailable**, confirm the actual destination before selecting **Approve**; stop if you cannot verify it. Do not approve a new-file upload when the CSV already exists.
+   <a href="assets/create-folder.png"><img src="assets/create-folder.png" alt="OneDrive Create folder prompt for the lab app folder with a Create button" width="370" class="align-center"></a>
 
-<a href="assets/upload-file-content.png"><img src="assets/upload-file-content.png" alt="Upload file content approval for lab-completion.csv with name-conflict behavior set to stop" width="600" class="align-center"></a>
+   For a confirmed missing CSV, review the **Upload file content** request for **lab-completion.csv**. Expand **View details**, confirm the destination is your own app folder, and check that a name conflict will **stop**, not overwrite an existing file. If the destination shows **Location name unavailable**, confirm the actual destination before selecting **Approve**; stop if you cannot verify it. Do not approve a new-file upload when the CSV already exists.
+
+   <a href="assets/upload-file-content.png"><img src="assets/upload-file-content.png" alt="Upload file content approval for lab-completion.csv with name-conflict behavior set to stop" width="370" class="align-center"></a>
 
 3. For a newly created file, verify the columns are `labId`, `completed`, and `updatedAt`, with one row per scheduled lab, `false` completion values, and ISO timestamps. If a file already exists, preserve its saved values.
 4. Review the setup report: the connection state, whether the file was created or already existed, and its current rows. Confirm the app has the connection available and that its code has not been changed yet.
@@ -258,11 +274,12 @@ At this stage, storage is ready but the app still uses its in-memory behavior. C
 
 #### Troubleshoot a Broken Connection
 
-If the OneDrive for Business connection remains in an error state, delete and reconnect it on the **Power Apps** side before continuing:
+If the OneDrive for Business connection remains in an error state, ask your facilitator before changing it. Repair the connection on the **Power Apps** side; do not delete a shared connection to make this lab work:
 
 1. Open [Power Apps](https://make.powerapps.com), select the same environment used by your app, and open **Connections** (under **Data** if shown).
-2. Find your broken **OneDrive for Business** connection. Open its **…** menu and select **Delete**. Delete only the connection for this exercise; if other apps or flows use it, check with your facilitator first.
-3. Select **New connection**, choose **OneDrive for Business**, and reconnect with your own training account.
+   If **Welcome to Power Apps** asks for a country/region and **Get started**, ask your facilitator to complete the account setup before proceeding.
+2. Find your broken **OneDrive for Business** connection. Open its **…** menu and try updating its credentials. If repair fails, have your facilitator confirm that no other apps or flows use it before selecting **Delete**. Never delete another learner's connection.
+3. If a replacement is needed, select **New connection**, choose **OneDrive for Business**, and reconnect with your own training account.
 
 **Keep your CSV file intact.** Return to Copilot Studio Apps and rerun **Prompt 2** to connect the app to the working connection and confirm the existing file and rows. Continue with **Prompt 3** only after those checks pass. If reconnection fails, stop and report the error rather than repeatedly deleting connections.
 
