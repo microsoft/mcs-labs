@@ -26,14 +26,14 @@ Complete the [classic lab prerequisites](../mcs-m365-copilot-latest/#prerequisit
 - Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account** in a separate browser profile or private window, not a personal or production account.
 - If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant.
 
-Plan **15 minutes for Ask (4) → Apply (5) → Verify (6)**. **Reason (3), Publish (2), Research (10) and Model (5)** are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes.
+Plan **15 minutes for Ask (4) → Apply (5) → Verify (6)**. **Reason (4), Publish (2), Research (10) and Model (5)** are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes.
 
 ## 📚 Table of Contents
 
 - [Ask: Find the public market context](#-ask-find-the-public-market-context)
+- [Reason: Compare a deeper market analysis (optional)](#-reason-compare-a-deeper-market-analysis)
 - [Apply: Turn a policy into a decision](#-apply-turn-a-policy-into-a-decision)
 - [Verify: Make missing evidence visible](#-verify-make-missing-evidence-visible)
-- [Reason: Compare a deeper market analysis (optional)](#-reason-compare-a-deeper-market-analysis)
 - [Publish: Turn the checked answer into a pre-read (optional)](#-publish-turn-the-checked-answer-into-a-pre-read)
 - [Research: Connect the issues across a hotel report (optional)](#-research-connect-the-issues-across-a-hotel-report)
 - [Model: Calculate the financial case (optional)](#-model-calculate-the-financial-case)
@@ -69,19 +69,6 @@ Under 150 words, with a link for anything you state as a fact.
 ```
 
 4. Select a reference in the answer and check that its source supports the claim and is current enough for your briefing. No file or URL was supplied; public search can provide context, but an unsupported statement still needs verification.
-5. Open the selector beside **Work IQ**. Notice **Auto**, **Quick response** and **Think deeper**. Below them, point to **Claude** and choose an available model, such as **Sonnet 5.5**, or inspect **GPT**.
-
-<details>
-<summary>Choose a response mode and model</summary>
-
-Auto decides how long to think; Quick response favors speed for recall, rewriting and short lookups; Think deeper spends longer on multi-step reasoning. When unsure, use Auto. Model names and availability depend on tenant and admin settings. Optionally ask a fresh question of your own after switching models; do not ask it to assess an earlier model's web results.
-
-</details>
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/model-picker-dark.webp"><img src="images/model-picker.webp" alt="Response-mode menu and Claude submenu showing available model choices." width="1812" height="1176"></picture>
-
-The capture shows Think deeper selected during the optional exercise. Your available models may differ. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
-
 <details>
 <summary>Reveal: What made this a public-web answer?</summary>
 
@@ -104,6 +91,79 @@ Choose grounding → Ask a focused question → Open a reference.
 </details>
 
 **Stuck?** If Work IQ will not switch off, check that the composer is in Chat, not Cowork. If the picker offers different models, keep Auto or an available model; the goal is deliberate choice, not access to one model version.
+
+## 🧪 Reason: Compare a deeper market analysis
+
+**Optional · 4 minutes · Copilot Chat**
+
+**Finish line:** A comparison of evidence, calculations and uncertainty across two market answers.
+
+1. In the same market chat, select **Chat** if needed and confirm **Work IQ** is off. Open the response-mode selector and select **Think deeper**.
+2. Paste the prompt and select **Send**. Allow more time than for the short market question:
+
+```text
+I'm preparing a market briefing on the US home improvement retail sector
+for the quarter just ended.
+
+Research and cite, with a source and date for each:
+- Comparable-store sales at the large national home improvement retailers
+- US housing starts and existing home sales
+- The prevailing 30-year mortgage rate
+- Producer prices for lumber and building materials
+
+Prefer Washington State or Pacific Northwest figures where they exist,
+and say when you substituted national data.
+
+Then answer, showing your working:
+1. Is this market growing or shrinking in real terms once inflation is stripped out?
+   Show the arithmetic and say which inflation figure you applied.
+2. Which two indicators best predict next quarter's DIY demand,
+   and what are they saying right now? Say how far ahead each one leads.
+3. Where would you expect margin pressure to show up first, and why?
+   Argue against your own answer before you commit to it.
+
+Flag anything you could not source. Do not present an estimate as a fact.
+```
+
+3. Scroll to the first response. Select **Reasoned for**, when shown, to inspect the displayed reasoning details. Compare references, retrieved versus calculated numbers, named uncertainties and whether the conclusion argues against itself.
+
+The prompt changed as well as the response mode, so this is not a controlled model benchmark. Auto can also reason deeply on a complex question; leave Auto selected when unsure.
+
+4. Open the selector beside **Work IQ**. Notice **Auto**, **Quick response** and **Think deeper**. Below them, point to **Claude** and choose an available model, such as **Sonnet 5.5**, or inspect **GPT**.
+
+<details>
+<summary>Choose a response mode and model</summary>
+
+Auto decides how long to think; Quick response favors speed for recall, rewriting and short lookups; Think deeper spends longer on multi-step reasoning. When unsure, use Auto. Model names and availability depend on tenant and admin settings. Optionally ask a fresh question of your own after switching models; do not ask it to assess an earlier model's web results.
+
+</details>
+
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/model-picker-dark.webp"><img src="images/model-picker.webp" alt="Response-mode menu and Claude submenu showing available model choices." width="1812" height="1176"></picture>
+
+The capture shows Think deeper selected during the optional exercise. Your available models may differ. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
+
+<details>
+<summary>Reveal: Did the selector do all the work?</summary>
+
+**The question asks for the reasoning you need.** The detailed prompt requests dated sources, arithmetic, caveats and a counterargument. Think deeper makes the reasoning preference explicit, but you still have to inspect the evidence and calculations.
+
+Specify the analysis → Allow reasoning time → Compare evidence.
+
+</details>
+
+**Quick check:** Does Think deeper make every claim reliable?
+
+- A. Yes, longer reasoning replaces source checks.
+- B. No, I must check sources, dates and calculations.
+
+<details>
+<summary>Check your answer</summary>
+
+**B is correct:** reasoning depth is a choice, not a factual guarantee. More reasoning can still produce unsupported claims.
+
+</details>
+
+**Stuck?** If the response is still working, check whether it needs input, then wait or read the comparison criteria. Do not start a duplicate request just to meet the time budget.
 
 ## 📋 Apply: Turn a policy into a decision
 
@@ -219,66 +279,6 @@ Name the report → Check the cited PDF → Preserve missing evidence.
 </details>
 
 **Stuck?** If inventory numbers appear or the wrong document is cited, inspect the PDF and methodology appendix. Do not accept the numbers as verified; point out the source mismatch in chat or ask the facilitator. If the report cannot be found, confirm the training account and Work IQ on, then ask the facilitator to check file access. Switching Work IQ on does not grant new permissions.
-
-## 🧪 Reason: Compare a deeper market analysis
-
-**Optional · 3 minutes · Copilot Chat**
-
-**Finish line:** A comparison of evidence, calculations and uncertainty across two market answers.
-
-1. Reopen your first market chat, select **Chat** if needed and confirm **Work IQ** is off. Open the response-mode selector and select **Think deeper**.
-2. Paste the prompt and select **Send**. Allow more time than for the short market question:
-
-```text
-I'm preparing a market briefing on the US home improvement retail sector
-for the quarter just ended.
-
-Research and cite, with a source and date for each:
-- Comparable-store sales at the large national home improvement retailers
-- US housing starts and existing home sales
-- The prevailing 30-year mortgage rate
-- Producer prices for lumber and building materials
-
-Prefer Washington State or Pacific Northwest figures where they exist,
-and say when you substituted national data.
-
-Then answer, showing your working:
-1. Is this market growing or shrinking in real terms once inflation is stripped out?
-   Show the arithmetic and say which inflation figure you applied.
-2. Which two indicators best predict next quarter's DIY demand,
-   and what are they saying right now? Say how far ahead each one leads.
-3. Where would you expect margin pressure to show up first, and why?
-   Argue against your own answer before you commit to it.
-
-Flag anything you could not source. Do not present an estimate as a fact.
-```
-
-3. Scroll to the first response. Select **Reasoned for**, when shown, to inspect the displayed reasoning details. Compare references, retrieved versus calculated numbers, named uncertainties and whether the conclusion argues against itself.
-
-The prompt changed as well as the response mode, so this is not a controlled model benchmark. Auto can also reason deeply on a complex question; leave Auto selected when unsure.
-
-<details>
-<summary>Reveal: Did the selector do all the work?</summary>
-
-**The question asks for the reasoning you need.** The detailed prompt requests dated sources, arithmetic, caveats and a counterargument. Think deeper makes the reasoning preference explicit, but you still have to inspect the evidence and calculations.
-
-Specify the analysis → Allow reasoning time → Compare evidence.
-
-</details>
-
-**Quick check:** Does Think deeper make every claim reliable?
-
-- A. Yes, longer reasoning replaces source checks.
-- B. No, I must check sources, dates and calculations.
-
-<details>
-<summary>Check your answer</summary>
-
-**B is correct:** reasoning depth is a choice, not a factual guarantee. More reasoning can still produce unsupported claims.
-
-</details>
-
-**Stuck?** If the response is still working, check whether it needs input, then wait or read the comparison criteria. Do not start a duplicate request just to meet the time budget.
 
 ## 📄 Publish: Turn the checked answer into a pre-read
 

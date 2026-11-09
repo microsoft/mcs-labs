@@ -423,11 +423,12 @@ for (const [classic, modern, order] of bootcampLabs) {
     assert.deepEqual(indentedBlocks(github, 'output'), guidedOutputs);
     // Classic fences also contain expected responses; preserve these as comparisons, not sendable prompts.
     // Workflows uses unlabelled fences for its sample emails and expressions.
-    // Optional missions may move after the core, but every original block occurrence must remain.
+    // Preserve every original block occurrence; the sequence contract also covers optional missions.
     const remainingBlocks = [...guidedPrompts, ...guidedOutputs];
     for (const prompt of [...indentedPrompts(original.content), ...indentedBlocks(original.content, '')]) {
-      // Only the agenda source changes between editions; all other prompt text stays intact.
-      const editionPrompt = prompt.replaceAll('/events/bootcamp-latest/', '/events/architecture-bootcamp/');
+      // Retain the guided edition's agenda URL and the existing explicit export-format clarification.
+      const editionPrompt = prompt.replaceAll('/events/bootcamp-latest/', '/events/architecture-bootcamp/')
+        .replace(/^Export the latest snapshot\.$/, 'Export the latest snapshot as JSON and Markdown.');
       const index = remainingBlocks.indexOf(editionPrompt);
       assert.ok(index >= 0, `${modern}: missing or changed classic block: ${prompt.slice(0, 80)}`);
       remainingBlocks.splice(index, 1);

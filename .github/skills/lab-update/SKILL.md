@@ -43,6 +43,10 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
   checks every anchor.
 - **Voice and scope.** Fix what the evidence shows. Keep the lab's structure and voice;
   do not rewrite a working section to taste.
+  Preserve the creator's use-case and teaching-step order when adapting a lab.
+  Optional classification may fit the advertised time, but leave those sections
+  in their original position and provide a skip to the next required section.
+  Compare ordered steps and prompt occurrences, not only a set of retained prompts.
 - **Learner instructions are not a test report.** Keep run dates, coverage boundaries,
   failed automation attempts, account-specific workarounds, credit measurements and
   screenshot provenance in the run log and PR, not the lab, captions, notices or a

@@ -141,7 +141,15 @@
             <button type="button" class="btn btn-primary" data-complete="{{ mission.id | escape }}" aria-pressed="false" hidden>Mark mission complete</button>
             {% unless forloop.last %}
               {% assign next_mission = lab.missions[forloop.index] %}
-              {% if next_mission.optional and mission.optional != true %}<a class="btn btn-ghost" href="#lab-finish">Finish the {{ page.duration }}-minute core <span aria-hidden="true">&rarr;</span></a>{% endif %}
+              {% assign remaining_missions = lab.missions | slice: forloop.index, lab.missions.size %}
+              {% assign remaining_core = remaining_missions | where_exp: "item", "item.optional != true" %}
+              {% if next_mission.optional %}
+                {% if remaining_core.size > 0 %}
+                  <a class="btn btn-ghost" href="#{{ remaining_core.first.id | escape }}">Skip optional missions: {{ remaining_core.first.verb | escape }} <span aria-hidden="true">&rarr;</span></a>
+                {% elsif mission.optional != true %}
+                  <a class="btn btn-ghost" href="#lab-finish">Finish the {{ page.duration }}-minute core <span aria-hidden="true">&rarr;</span></a>
+                {% endif %}
+              {% endif %}
               <a class="btn btn-ghost" href="#{{ next_mission.id | escape }}">Next: {{ next_mission.verb | escape }}{% if next_mission.optional %} (optional){% endif %} <span aria-hidden="true">&rarr;</span></a>
             {% else %}<a class="btn btn-ghost" href="#lab-finish">Take it with you <span aria-hidden="true">&rarr;</span></a>{% endunless %}
           </footer>

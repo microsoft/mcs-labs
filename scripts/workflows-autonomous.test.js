@@ -35,10 +35,11 @@ test('prepared workflow opens directly without runner-specific setup gates', () 
   for (const copy of [...modern, classic, classicReadme]) {
     assert.doesNotMatch(copy, /Only the flow's owner|Create a copy|sender restriction|repeat all connection and dispatch checks/i);
   }
-  assert.equal(missions[0].steps.length, 2);
-  assert.match(missions[0].steps[0].instruction, /Workflows → Order Management Workflow → Build/);
-  assert.match(missions[0].steps[1].instruction, /Classify/);
-  assert.doesNotMatch(JSON.stringify(missions[0]), /owner|connection|restriction/i);
+  const explore = missions.find(mission => mission.id === 'isolate');
+  assert.equal(explore.steps.length, 2);
+  assert.match(explore.steps[0].instruction, /Workflows → Order Management Workflow → Build/);
+  assert.match(explore.steps[1].instruction, /Classify/);
+  assert.doesNotMatch(JSON.stringify(explore), /owner|connection|restriction/i);
   assert.match(document.data.mission_lab.self_setup, /Import/);
 });
 
