@@ -85,6 +85,6 @@ test('component lab retains timing and honest deployment boundaries', () => {
   assert.equal(page.data.duration, 30);
   for (const item of missions) assert.equal(item.check.options.filter(option => option.correct).length, 1);
   assert.equal(mission('publish').optional, true);
-  assert.match(mission('publish').steps[3].notice, /Teams web launcher stalled/);
-  assert.match(mission('publish').steps[3].notice, /remain unverified/);
+  assert.match(mission('publish').steps[3].notice, /Ask the facilitator if launch or sharing is blocked/);
+  assert.doesNotMatch(mission('publish').steps[3].notice, /fresh.account|launcher stalled|remain unverified/);
 });

@@ -24,13 +24,6 @@ Riverside Construction needs 60 bags of repair mortar before its crew starts at 
 
 All facts are fictional. There is no ERP, live inventory, carrier booking tool or transaction.
 
-<details class="lab-validation" markdown="1">
-<summary>What was tested</summary>
-
-**Verified boundary:** the fresh-account run on 9 November 2026 exercised the coordinator-only, direct Skill, internal delegation, real A2A, full-team and six optional tests. Stock/deadline recovery instructions were corrected and rechecked; the final baseline and EUR 230 follow-up passed with trace evidence. Manual card details and **Authentication: None** enabled invocation despite a browser `MissingAllowOriginHeader` discovery error. External service Skill-loading logs were not inspected; returned fixture IDs alone do not prove reference loading.
-
-</details>
-
 ## 📋 Table of Contents
 
 - [Prerequisites](#-prerequisites)
@@ -261,7 +254,7 @@ Add the facilitator's hosted LiftLine service as an A2A connected agent. **Outco
 https://a2a-server-bootcamp.gentleplant-daa79337.westeurope.azurecontainerapps.io/.well-known/agent-card.json
 ```
 
-3. If Studio shows **No agent card found. Enter a name and description.**, continue with the manual details below. The fresh run confirmed a browser CORS error (`MissingAllowOriginHeader`) for this endpoint; the message alone does not diagnose the cause. Prove runtime invocation separately in Mission 4.
+3. If Studio shows **No agent card found. Enter a name and description.**, continue with the manual details below.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/a2a-discovery-blocked-dark.webp"><img src="images/a2a-discovery-blocked.webp" alt="A2A wizard has the card URL entered, empty Name and Description fields, and a disabled Next button."></picture>
 
@@ -367,6 +360,8 @@ Zava stock check → LiftLine quote → Zava approval check → Human next step.
 **Answer: B.** Neither a new quote nor an approval was requested or granted. Zava owns the policy and the assessment is hypothetical.
 
 **Stuck?** Inspect the task and returned business status. This deployment rejected a destination containing the customer name and misread "no quote override" as a price-change request. Keep the site name alone and omit override wording unless supplied. Reuse only returned context/task IDs. Allow at most one corrected retry, including protocol errors, then report the blocker to the instructor; do not keep rephrasing or invent a plan.
+
+**Check your result:** Your trace contains returned Zava stock and policy results and a usable LiftLine quote—not just a connected card or plausible answer. The separate EUR 230 assessment requires approval, without changing the quote or granting approval; unresolved delegation remains a blocker.
 
 ## 🧪 Challenge
 

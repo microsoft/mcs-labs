@@ -33,6 +33,9 @@ Use the lab's own numbering: use case and step, or mission and step. Quote UI te
 
 Status is passed, drift, defect, variance, blocked, untested or unverified. Record what
 was actually checked; an agent's claim or hidden trace is not independent evidence.
+Give each attempt a distinct evidence filename before the next turn; retain failed
+attempts alongside retries. Separate the new reply/tool result from the source check,
+and record positive and rejected paths independently.
 
 ## Timing
 

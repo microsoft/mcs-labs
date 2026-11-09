@@ -271,7 +271,7 @@ In this lab, you'll build several autonomous Workflows that act on event-driven 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
 | 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 15 min |
-| 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Verify connections and publish a pre-built multi-branch classification workflow | 8 min |
+| 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Explore and publish a pre-built multi-branch classification workflow | 8 min |
 | 3 | [Use M365 Copilot and Add a Human-in-the-Loop](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: Copilot drafts a response, human approves, workflow replies | 7 min |
 | EC | [Extra Credit: Build an Inline Agent for Inventory Management](#-extra-credit-build-an-inline-agent-for-inventory-management) | Add an MCP-powered inline agent that checks warehouse stock and creates Dataverse tasks (Optional) | ~15 min |
 | EC | [Extra Credit: Call a Price Quote Specialist Agent from a Workflow](#-extra-credit-call-a-price-quote-specialist-agent-from-a-workflow) | Wire a published agent into a workflow branch to generate and send price quotes (Optional) | ~10 min |
@@ -346,7 +346,7 @@ Configure and publish the **To Do Time Block** Workflow: a To Do trigger feeds a
    1. Type the first line of text:
 
       ```
-      Find a time that is appropriate for this task 
+      Find a time that is appropriate for this task
       ```
 
    2. Type **`/`** to open the dynamic-content picker, then select **Title** (under *When a new to-do in a specific folder is created*). This inserts the to-do's title as a token. Copilot Studio automatically adds an **Apply to each** loop when this array-item token is inserted, so the agent runs once per new to-do; the loop need not appear when you first add the Agent node.
@@ -442,45 +442,35 @@ Configure and publish a pre-built **Order Management Workflow** that classifies 
 
 In this section, you'll open the workflow to verify its connections, explore the email classification categories, publish, and verify everything works by sending a test email that triggers the "Other" classification path.
 
-**Scenario:** The solution you imported in the prerequisites contains a pre-built Order Management Workflow that automatically classifies incoming emails with "Order Management" in the subject. It routes emails into one of four categories — **Quote Request**, **Supplier Delay**, **Customer Inquiry**, or **Other** — and takes different automated actions for each. Before the workflow can run, you need to verify its connections and publish it.
+**Scenario:** The solution you imported in the prerequisites contains a pre-built Order Management Workflow that automatically classifies incoming emails with "Order Management" in the subject. It routes emails into one of four categories — **Quote Request**, **Supplier Delay**, **Customer Inquiry**, or **Other** — and takes different automated actions for each. Before the workflow can run, you need to explore its branches and publish it.
 
 ### Objective
 
-Complete the setup of the **Order Management Workflow**: verify its connections, explore the classification categories, publish, and validate end-to-end by sending a test email through the "Other" path.
+Complete the setup of the **Order Management Workflow**: explore the classification categories, publish, and validate end-to-end by sending a test email through the "Other" path.
 
 > [!IMPORTANT]
-> This use case is the **foundation for all subsequent use cases** in this module. The connections and publishing you complete here are required for the Customer Inquiry, Quote Request, and Supplier Delay paths covered later. Take extra care during setup — if a connection is missed, later use cases will fail silently or with hard-to-diagnose errors.
+> This use case is the **foundation for all subsequent use cases** in this module. You will reuse this workflow for the Customer Inquiry, Quote Request, and Supplier Delay paths.
 
 ---
 
 ### Step-by-step instructions
 
-#### Open the workflow and verify its connections
+#### Open the prepared workflow
 
-> [!IMPORTANT]
-> **Verify the connections first.** The workflow must have valid node connections before it can be published or tested. Your import may already have configured these correctly — inspect them first.
-
-1. In **Copilot Studio**, navigate to **Workflows** and open the **Order Management Workflow**.
-
-   > [!NOTE]
-   > The workflow has been pre-built for your lab environment. You'll see a **trigger** node ("When a new email arrives"), a **Classify** node, and several branch paths — one for each email category.
+1. In **Copilot Studio → Workflows**, open **Order Management Workflow → Build**.
 
    ![The Order Management Workflow open in the canvas designer](images/order-management-workflow-overview.png)
 
-2. Open each node on the canvas so its connection can resolve. Start with **When a new email arrives** and, under **Connection**, wait for your lab-account connection to load. Check the **Copilot** and **Human review** nodes as well; these can also resolve automatically.
-
-   If a node remains disconnected or uses a different account, select **Create new connection** > **Create** and sign in with your lab account. Do not create duplicate connections when the existing connection is already correct.
-
 #### Open and explore the Order Management Workflow
 
-3. Select the **trigger** node ("When a new email arrives"). Next to **Subject filter**, select the code symbol **`</>`** (**Switch to expression mode**) to reveal the expression `@string('Order Management')`. This means the workflow only fires for emails whose subject contains "Order Management" — all other emails are ignored.
+2. Select the **trigger** node ("When a new email arrives"). Next to **Subject filter**, select the code symbol **`</>`** (**Switch to expression mode**) to reveal the expression `@string('Order Management')`. This means the workflow only fires for emails whose subject contains "Order Management" — all other emails are ignored.
 
    > [!IMPORTANT]
    > Keep this filter in mind when testing: every test email you send **must include "Order Management" in the subject line**, or the workflow will not trigger. This is a common source of confusion when tests "don't seem to work."
 
    ![The subject filter expression configured on the trigger](images/subject-filter-expression.png)
 
-4. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the classification categories. **Three** are configured explicitly in the node, and the panel notes that *a "Default" category is automatically created for inputs that don't match any category* — that automatic category is what the canvas shows as the **Other** branch. Each configured category has a name and example text that the AI model uses to determine where an incoming email should be routed:
+3. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the classification categories. **Three** are configured explicitly in the node, and the panel notes that *a "Default" category is automatically created for inputs that don't match any category* — that automatic category is what the canvas shows as the **Other** branch. Each configured category has a name and example text that the AI model uses to determine where an incoming email should be routed:
 
    - **Quote Request** — emails requesting pricing or quotes for products/services
    - **Supplier Delay** — notifications about delays from suppliers
@@ -494,7 +484,7 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 
 #### Test the classification
 
-5. Select the Classify node's **Run node** tab to test classification before sending a real email. In the **When a new email arrives** section, find **Body** (*The body of the message*), click into the box, and paste:
+4. Select the Classify node's **Run node** tab to test classification before sending a real email. In the **When a new email arrives** section, find **Body** (*The body of the message*), click into the box, and paste:
 
    ```
    Hi, I would like to request a quote for 500 units of Product A.
@@ -504,11 +494,11 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 
    ![The classification test result showing Quote Request](images/classify-test-result.png)
 
-6. Select **Save** (or press **Ctrl+S**). The **Publish** button becomes available after saving — select **Publish**.
+5. Select **Save** (or press **Ctrl+S**). The **Publish** button becomes available after saving — select **Publish**.
 
 #### Test the "Other" classification path end-to-end
 
-7. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and compose a new email **to your lab user account** with the following:
+6. Open **Outlook** ([outlook.office.com](https://outlook.office.com)) and compose a new email **to your lab user account** with the following:
 
    - **Subject:**
 
@@ -541,7 +531,7 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 
    ![The Other-path sample email in Outlook after automatic archiving](images/test-other-email-compose.png)
 
-8. Wait a **few seconds** for the workflow to trigger and process the email. Then navigate to your **Archive** folder in Outlook. You should see the test email has been automatically moved there — confirming the "Other" classification path is working correctly.
+7. Wait a **few seconds** for the workflow to trigger and process the email. Then navigate to your **Archive** folder in Outlook. You should see the test email has been automatically moved there — confirming the "Other" classification path is working correctly.
 
    > [!TIP]
    > If the email doesn't appear in the Archive folder, check the **Activity** tab in the workflow in Copilot Studio to see if the run triggered. If no run appears, verify the workflow is **Published** (not Draft) and that the email subject includes "Order Management."

@@ -41,6 +41,13 @@ handoff is absent, mark the learning/backup route untested rather than inferring
   the original context does not show that the saved instruction carries the behavior.
 - A private create/Share dialog is not a second-account handoff. A specialist receiving a
   request does not prove that the user saw a distinct confirmation or clean final output.
+- Verify positive and rejected paths separately: the executed branch and the persisted
+  mailbox/record effect must agree. A safe rejection is not the positive outcome. Check
+  suggested recovery against the same constraints; it must not reintroduce a refused action.
+- For agent integration, distinguish discovery/connection from runtime invocation and
+  the returned business result. Transport success can still contain `needs_information`.
+  A "Used skill" label and correct fixture answer do not prove external reference-file
+  reads; that claim needs service-side evidence. Record an unavailable boundary as unverified.
 
 ## Approval, ownership and recovery
 
@@ -48,6 +55,10 @@ handoff is absent, mark the learning/backup route untested rather than inferring
   the actual owner before publishing or executing. Repair only a copy you own with an
   authorized identity; otherwise record the path as blocked. Never delete or alter
   another runner's connection.
+- A list's **Owner** field does not prove designer authoring or publish permission.
+  Check the actual restriction before changing an asset. Use a copy only when the lab
+  offers that fallback and your identity is authorized; verify its connections separately.
+  A successful copy does not make the blocked original a pass or bypass another owner's rights.
 - For upload or create approvals, an unresolved destination is not approval. Cancel a
   pending card first if queued questions cannot be answered, verify the destination and
   evidence that the target file/record is absent, then request a fresh fail-on-conflict
@@ -79,3 +90,8 @@ Every result should say what was tested, what was observed, how it was verified 
 remains untested or unverified. Keep actual behavior separate from product claims and
 recommendations. Do not use "all passed" for a completed run with blocked, skipped or
 unverified coverage.
+
+Capture each attempt's reply, settled tool inputs/outputs and independent check before
+starting the next turn: virtualized traces can move or disappear. Use distinct evidence
+files per attempt, retaining failures alongside retries rather than overwriting them.
+Keep instructor/service provenance separate from actions the learner must perform.

@@ -269,6 +269,7 @@ mission_lab:
       tool: Copilot Chat + Pages
       brief: "Make a one-page quarterly review from the evidence you already checked."
       outcome: "An editable Copilot Page with evidence, actions and open questions."
+      result_check: "The open Page shows your corrections, source-backed findings and blank owners—not just a chat message claiming it changed. If you also created Word, its contents match the corrected pre-read."
       steps:
         - title: "Create the pre-read in chat first"
           instruction: "Return to the grounded Zava DIY conversation from **Verify**. Confirm **Work IQ** is on. Send the prompt and wait until the response is complete."
@@ -291,7 +292,7 @@ mission_lab:
             caption: "Create the answer first, then open its menu."
         - title: "Edit and review the page"
           instruction: "Check the new findings and open questions against the original sources, then edit the page directly to correct or add information. For example, the report does describe Spokane's competitive pressure and declining foot traffic; do not accept a claim that it gives no cause. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to."
-          notice: "Asking chat beside an open page to rewrite it can report success without updating the page. For a later Copilot revision, request a new answer in chat and open that answer in Pages again; verify the page actually changed."
+          notice: "For a later Copilot revision, request a new answer in chat and open that answer in Pages again."
         - title: "Create a Word version if time permits"
           instruction: "In the same chat, turn the pre-read into a Word deliverable. Send the prompt, then open the Word file Copilot creates and check it against the edited page and original sources before sharing. A Word version can reuse uncorrected chat text; edits to the page are not automatically carried into it."
           prompt_label: Same grounded Zava DIY chat
@@ -790,7 +791,7 @@ Create the answer first, then open its menu.
 
 3. Check the new findings and open questions against the original sources, then edit the page directly to correct or add information. For example, the report does describe Spokane's competitive pressure and declining foot traffic; do not accept a claim that it gives no cause. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to.
 
-Asking chat beside an open page to rewrite it can report success without updating the page. For a later Copilot revision, request a new answer in chat and open that answer in Pages again; verify the page actually changed.
+For a later Copilot revision, request a new answer in chat and open that answer in Pages again.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/preread-excerpt-dark.webp"><img src="images/preread-excerpt.webp" alt="Excerpt of a Zava DIY quarterly business review pre-read with three findings and source references." width="2814" height="1566"></picture>
 
@@ -828,6 +829,8 @@ Complete the chat response → Edit in Pages → Verify the artifact.
 </details>
 
 **Stuck?** If the page did not update after a chat request, generate the revised answer in chat and use its Edit in Pages action, or edit the page directly.
+
+**Check your result:** The open Page shows your corrections, source-backed findings and blank owners—not just a chat message claiming it changed. If you also created Word, its contents match the corrected pre-read.
 
 ## Research: Connect the issues across a hotel report
 

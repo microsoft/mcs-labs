@@ -30,8 +30,6 @@ mission_lab:
     This exercise uses Agent Builder for a declarative agent. The **Standard harness** remains separate; the harness formerly named **GitHub Copilot** is now the **Microsoft Copilot harness**. Do not substitute either Studio experience for these Agent Builder steps.
   self_setup: |-
     Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Plugins > Chat > New agent > Configure** for **Skills**, following the linked licensing and skills documentation. Some versions label the entry **Agents & Plugins**. For the optional extension, prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
-  validation: |-
-    **Sequential-run validation:** the hotel starter and template, report attachment, six disabled source switches, two Preview briefings and a saved-agent chat were checked. Each briefing had five issues and an email under 400 words; facts and Section 16 mappings, missing-evidence handling, no-action refusal and private saved configuration were verified. Preview repeated response content; inspect one complete email rather than concatenated copies. A claim of searching disabled sources was not independently established; all six switches were rechecked off. The saved chat's Sources panel listed two hotel-report entries under More and said there were no direct citations; the report opened for a Section 16 check, but this does not prove a retrieval trace. A separate unchanged Weekly Deal Review upload preserved its procedure, not a proven CRM or Outlook execution. No approved teammate or installed Agents Toolkit was available, so independent sharing and the optional deployment remain blocked.
   prerequisites:
     - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account in a separate browser profile or private window."
     - "Keep the lab beside Copilot and ask the facilitator if Skills or the assigned account is unavailable. Download the starter in Mission 1 and the report in Mission 3; do not skip those exercise inputs."
@@ -158,7 +156,7 @@ mission_lab:
             alt: "Knowledge configuration with all six work-content switches off and the hotel PDF under Attachments."
             width: 2340
             height: 2055
-            caption: "Report-only configuration from the fresh run, including the Dynamics 365 and Power Apps switch."
+            caption: "Report-only configuration, including the Dynamics 365 and Power Apps switch."
       reveal:
         title: "Why change the defaults?"
         line: "A controlled source makes a briefing checkable."
@@ -356,15 +354,6 @@ Turn a personal hotel-report workflow into **Contoso Operations agent**: an evid
 
 You lead operations at **Contoso Grand Hotel**. Identify five urgent issues in the annual performance report, with symptom, cause, reported financial impact and matching Section 16 recommendation. Use the starter below, or a compatible hotel skill from the separate [Cowork hands-on](../mcs-cowork-latest/) exercise. If you followed **Cowork: from insights to action** in this curriculum, use the hotel starter, not **Weekly Deal Review**.
 
-<details class="lab-validation" markdown="1">
-<summary>What was tested</summary>
-
-**Sequential-run validation:** the hotel starter and template, report attachment, six disabled source switches, two Preview briefings and a saved-agent chat were checked. Each briefing had five issues and an email under 400 words; facts and Section 16 mappings, missing-evidence handling, no-action refusal and private saved configuration were verified. Preview repeated response content; inspect one complete email rather than concatenated copies. A claim of searching disabled sources was not independently established; all six switches were rechecked off. The saved chat's Sources panel listed two hotel-report entries under More and said there were no direct citations; the report opened for a Section 16 check, but this does not prove a retrieval trace. A separate unchanged Weekly Deal Review upload preserved its procedure, not a proven CRM or Outlook execution. No approved teammate or installed Agents Toolkit was available, so independent sharing and the optional deployment remain blocked.
-
-Screenshots are retained native-HD examples from the earlier validation, not new captures from this sequential run. The sharing crop excludes the account row; it does not demonstrate a completed share.
-
-</details>
-
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
@@ -466,7 +455,7 @@ Do not send messages, create Outlook drafts, or write Planner tasks. If asked to
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/knowledge-work-content-off-dark.webp"><img src="images/knowledge-work-content-off.webp" alt="Knowledge configuration with all six work-content switches off and the hotel PDF under Attachments."></picture>
 
-*Report-only configuration from the fresh run, including the Dynamics 365 and Power Apps switch.*
+*Report-only configuration, including the Dynamics 365 and Power Apps switch.*
 
 **Reveal — A controlled source makes a briefing checkable.** Attach report → disable unrelated sources → check claims. The report supplies business evidence, not agent instructions. Configuration does not replace factual verification.
 

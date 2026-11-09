@@ -397,7 +397,7 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
     Expect a simulated confirmation such as **ZC-10421** and final delivery within 3 business days. Wording and codes vary; no real subscription changes.
 
     > [!NOTE]
-    > The fresh-account four-message retest completed: the specialist asked for confirmation and returned ZC-12345 with final delivery within 3 business days. An earlier run stalled after the reason. If yours stays silent for about two minutes, inspect chat and **Activity map**, start a new test session and retry once with `I want to cancel my subscription. My subscription ID is SUB-1042, and I am moving abroad.` Confirm only when asked. Record any retry separately; stop and ask your facilitator if it also stalls.
+    > If yours stays silent for about two minutes, inspect chat and **Activity map**, start a new test session and retry once with `I want to cancel my subscription. My subscription ID is SUB-1042, and I am moving abroad.` Confirm only when asked. Record any retry separately; stop and ask your facilitator if it also stalls.
 
 1. In **Activity map**, verify invocation of **Subscription Cancellation**, its inputs and the completed return. The diagnostic retry showed **Interpreting agent intent**, **Preparing agent inputs**, **Executing agent**, **Reviewing nested activity**, and **Return To Main Conversation Tool**.
 
@@ -494,7 +494,7 @@ Simulate a subscription cancellation by voice and hear the **Voice** instruction
 Add the three remaining sub-agents the routing rules refer to, then check that each request type lands on the right one.
 
 > [!NOTE]
-> Fresh-account tests invoked all three optional specialists and returned demo codes, but each skipped a separate final confirmation. An earlier delivery test also exposed internal JSON; the latest did not. Routing passed, not the complete procedure. The classic screenshots remain earlier examples. Keep all data fictional and do not approve offered email outreach.
+> Keep Demo Mode. Check that each specialist asks for confirmation and returns a clear response to the customer.
 
 ---
 

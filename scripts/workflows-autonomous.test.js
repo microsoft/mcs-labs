@@ -31,19 +31,15 @@ test('workflow portable copies and every mission prompt stay synchronized', () =
   }
 });
 
-test('ownership verification precedes the conditional copy fallback', () => {
-  // The list named the attendee as Owner, but the prepared designer blocked Publish.
+test('prepared workflow opens directly without runner-specific setup gates', () => {
   for (const copy of [...modern, classic, classicReadme]) {
-    assert.match(copy, /Only the flow's owner can publish or test this flow/);
-    assert.match(copy, /For your assigned starter only/);
-    assert.match(copy, /never edit, copy, or take ownership of another attendee's asset/i);
-    assert.match(copy, /repeat all connection and dispatch checks/);
-    assert.doesNotMatch(copy, /continue only in that copy|starter is unchanged|copy protects the starter/i);
+    assert.doesNotMatch(copy, /Only the flow's owner|Create a copy|sender restriction|repeat all connection and dispatch checks/i);
   }
-  for (const value of [
-    document.data.description, document.data.mission_lab.promise,
-    missions[0].title, missions[0].outcome,
-  ]) assert.doesNotMatch(value, /copy/i);
+  assert.equal(missions[0].steps.length, 2);
+  assert.match(missions[0].steps[0].instruction, /Workflows → Order Management Workflow → Build/);
+  assert.match(missions[0].steps[1].instruction, /Classify/);
+  assert.doesNotMatch(JSON.stringify(missions[0]), /owner|connection|restriction/i);
+  assert.match(document.data.mission_lab.self_setup, /Import/);
 });
 
 test('connections are reused and approval reflects the actual Outlook card', () => {
@@ -53,7 +49,6 @@ test('connections are reused and approval reflects the actual Outlook card', () 
     assert.match(copy, /\*\*Yes\*\* under \*\*Approve\*\*/);
     assert.match(copy, /\*\*No → Submit\*\*/);
     assert.match(copy, /Reply to email\*\* is skipped/);
-    assert.match(copy, /rejection does not complete the approved-reply outcome/i);
   }
   for (const slug of ['mcs-workflows-latest', 'mcs-workflows']) {
     for (const file of [`_labs/${slug}.md`, `labs/${slug}/README.md`]) {
@@ -65,29 +60,24 @@ test('connections are reused and approval reflects the actual Outlook card', () 
   }
 });
 
-test('the core preserves sender, reviewer, recipient, actual-output and cleanup gates', () => {
+test('the core teaches approval, outcomes and cleanup without tenant-warning checklists', () => {
   for (const copy of modern) {
-    assert.match(copy, /string\('Order Management'\)/);
-    assert.match(copy, /From/);
-    assert.match(copy, /reviewer/);
-    assert.match(copy, /To = From/);
-    assert.match(copy, /empty \*\*CC\/BCC\*\*/);
-    assert.match(copy, /node-only test does not execute/i);
+    assert.match(copy, /Subject filter/);
+    assert.match(copy, /Approve Equals Yes/);
+    assert.match(copy, /Run node/);
     assert.match(copy, /received reply/i);
     assert.match(copy, /Workflow disabled/);
     assert.match(copy, /reload/);
     assert.match(copy, /Running\/Waiting/);
     assert.match(copy, /other labs' workflows unchanged/);
+    assert.doesNotMatch(copy, /Check ownership|CC\/BCC|consume.*credits|self-only|sender restriction/i);
   }
 });
 
-test('validation distinguishes the blocked direct route from verified fallback and retained images', () => {
-  for (const copy of [document.data.mission_lab, document.content, readme].map(value =>
-    typeof value === 'string' ? value : JSON.stringify(value))) {
-    assert.match(copy, /Direct publication was blocked/);
-    assert.match(copy, /A copy was therefore required for this account/);
-    assert.match(copy, /Screenshots are retained earlier-run illustrations/);
-    assert.doesNotMatch(copy, /Not live-exercised|No\/rejection is not a validated fallback/);
+test('maintainer evidence stays out of learner-facing text', () => {
+  assert.equal(document.data.mission_lab.validation, undefined);
+  for (const copy of modern) {
+    assert.doesNotMatch(copy, /fresh.account|What was tested|earlier.run illustrations|verified run|tested card|credit totals/i);
   }
 });
 

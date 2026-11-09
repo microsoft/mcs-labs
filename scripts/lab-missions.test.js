@@ -204,6 +204,45 @@ test('prompts stay copyable in place while PDF export downloads locally', () => 
   assert.ok(fs.statSync(path.join(root, 'assets', 'js', 'vendor', 'html2pdf.bundle.min.js.LICENSE.txt')).isFile());
 });
 
+test('result checks are optional server-rendered guidance, not progress controls', () => {
+  const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
+  const block = template.match(/{% if mission\.result_check and mission\.result_check != empty %}([\s\S]*?){% endif %}/)?.[1];
+  assert.ok(block, 'Missing and empty fields must not add a result block');
+  assert.match(block, /<p class="result-check"><strong>Check your result<\/strong> {{ mission\.result_check \| escape }}<\/p>/);
+  assert.doesNotMatch(block, /input|button|data-progress|data-complete|hidden|tabindex=/);
+  assert.ok(template.indexOf('class="result-check"') < template.indexOf('<footer class="mission-actions">'),
+    'PDF export removes mission-actions; evidence guidance must remain outside it');
+  assert.match(template, /<p class="outcome"><strong>Your finish line<\/strong> {{ mission\.outcome \| escape }}/);
+});
+
+test('result checks mirror observable evidence in all three reading surfaces and the feed', () => {
+  const representatives = [
+    ['copilot-chat-workiq', 'publish', /open Page.*corrections/],
+    ['workflows-autonomous', 'review', /Outlook mailbox.*matching run/],
+    ['agent-integration-team', 'prove', /returned Zava.*usable LiftLine quote/],
+  ];
+  for (const [name, id, evidence] of representatives) {
+    const page = matter(fs.readFileSync(path.join(root, '_labs', `${name}.md`), 'utf8'));
+    const github = fs.readFileSync(path.join(root, 'labs', name, 'README.md'), 'utf8');
+    const mission = page.data.mission_lab.missions.find(item => item.id === id);
+    assert.equal(typeof mission.result_check, 'string');
+    assert.match(mission.result_check, evidence);
+    assert.notEqual(mission.result_check, mission.outcome, 'Evidence must add to the goal, not repeat it');
+    assert.ok(mission.result_check.split(/\s+/).length <= 55, 'Keep the result cue short');
+    for (const copy of [page.content, github]) {
+      assert.equal(copy.split(`**Check your result:** ${mission.result_check}`).length - 1, 1);
+    }
+    const item = producer.buildItem({
+      collection: 'labs', slug: name, frontMatter: page.data, body: page.content,
+      baseUrl: 'https://microsoft.github.io/mcs-labs',
+    });
+    const restored = matter(consumer.materializeDoc(item, 'https://microsoft.github.io/mcs-labs'));
+    assert.deepEqual(restored.data.mission_lab, page.data.mission_lab);
+    assert.ok(restored.data.mission_lab.missions.some(item => item.result_check === undefined),
+      'Other missions need no new field');
+  }
+});
+
 test('click-by-click help starts closed so the step instruction leads', () => {
   const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
   assert.match(template, /<details class="step-help">/);
@@ -341,8 +380,8 @@ for (const [classic, modern, order] of bootcampLabs) {
     assert.ok(content.self_setup?.trim(), 'The shared renderer needs own-tenant setup, separate from the scenario');
     assert.doesNotMatch(JSON.stringify([content.scenario, content.prerequisites]), /Skip tenant|Prerequisites for your own tenant|Own-tenant setup|Running (?:this lab )?in your own tenant/i,
       'Scenario and readiness must not repeat the provisioning wall of text');
-    assert.doesNotMatch(content.scenario, /\*\*(?:Validation|Evidence|Verified) boundary:/,
-      'Historical test notes belong in the optional validation disclosure');
+    assert.equal(content.validation, undefined, 'Historical test notes belong in maintainer logs and PRs, not labs');
+    assert.doesNotMatch(page.content, /<summary>What was tested<\/summary>/);
     assert.match(page.content, eventSetupNotice);
     assert.match(original.content, eventSetupNotice, 'The classic lab needs the same setup distinction');
     for (const copy of [page.content, github]) {

@@ -33,8 +33,6 @@ mission_lab:
     - Copilot Studio access and billing capacity for the preview. Building, testing and evaluating agents can consume Copilot Credits; see [usage and billing](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/overview-customer-conversation).
 
     No live subscription backend, production phone number or contact-center deployment is required.
-  validation: |-
-    **Evidence boundary:** the latest fresh-account run passed the primary-agent chat test and the original four-message cancellation sequence without a diagnostic retry, with the specialist invocation and return visible in **Activity map**. Before adding a delivery specialist, delivery stayed with the primary. Voice connected, showed **Listening...** and the agent greeting, and ended cleanly, but no scripted spoken input was supplied: recognition, spell-back and spoken cancellation remain unverified. All three optional specialists routed and returned to the primary, but each finalized its simulated change without a separate final confirmation. An earlier run also saw delivery expose internal JSON; the latest run did not. Those optional procedures are not complete end-to-end passes.
   prerequisites:
     - "Use your assigned **training account** in a separate browser profile or private window, not a personal or production account. Select the facilitator-provided environment in [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/)."
     - "Keep this lab beside the browser. The fictional subscription ID **SUB-1042** and all configuration text are supplied below. Use only fictional contact and payment details; there are no exercise downloads."
@@ -228,7 +226,7 @@ mission_lab:
           instruction: 'Select **Preview** → **Web Chat**, then **Start new test session** at the top right. Send this first message. Wait for each reply before the next message; do not paste all four together.'
           prompt_label: Web Chat · Original sequence 1 of 4
           prompt: I want to cancel my subscription
-          notice: 'The fresh-account run completed all four messages: the specialist requested confirmation, returned ZC-12345 and final delivery within 3 business days. An earlier run stalled after the reason, so retain the bounded recovery below if your run stalls.'
+          notice: 'Look for a confirmation request followed by a simulated cancellation code.'
         - title: Supply the subscription ID
           instruction: 'When asked for the subscription, send the fictional identifier below and wait for the next reply.'
           prompt_label: Web Chat · Original sequence 2 of 4
@@ -244,10 +242,10 @@ mission_lab:
           notice: '**Expected response example — comparison only, not text to send:** a simulated code such as **ZC-10421** and final delivery within **3 business days**. Codes and wording vary. No real subscription is changed.'
         - title: Use one diagnostic retry if the original stalls
           instruction: 'Inspect both the chat and **Activity map**, not just the main **Execution summary**. Select **Start new test session** and retry once with `I want to cancel my subscription. My subscription ID is SUB-1042, and I am moving abroad.` When asked, send `Yes, please cancel it`. If this also stalls, stop and ask your facilitator.'
-          notice: '**Earlier diagnostic result — comparison only:** the combined request completed a simulated cancellation. The fresh-account four-message run needed no retry. If you use this recovery, record it separately from your original conversation. The two-minute boundary is a troubleshooting limit, not a latency guarantee.'
+          notice: 'Use this recovery only if the conversation stalls.'
         - title: Read the complete trace
           instruction: 'In **Activity map**, inspect the invocation of **Subscription Cancellation**, its inputs and its return. Look for **Interpreting agent intent**, **Preparing agent inputs**, **Executing agent**, **Reviewing nested activity**, and **Return To Main Conversation Tool**. Compare the actual reply with the final return status.'
-          notice: While the specialist waits for your next reply, its rows in **Activity map** can show a red **Cancelled** status. In the latest run they changed to **Completed** after the confirmation turn, followed by an intermediate **Cancelled** return action and a final **Completed** return. Neither the intermediate status alone nor the top-level summary alone tells you whether the customer received a result.
+          notice: While the specialist waits for your next reply, its rows in **Activity map** can show a red **Cancelled** status. Read through to the final **Completed** return after the confirmation turn. Neither the intermediate status alone nor the top-level summary alone tells you whether the customer received a result.
           screenshot:
             title: the successful four-message cancellation
             src: /labs/customer-assist-agent/images/test-cancel-routed.webp
@@ -255,9 +253,9 @@ mission_lab:
             alt: Separate subscription ID, reason and confirmation turns produce simulated ZC-12345 while nested activity shows a Cancelled action followed by a Completed return.
             width: 4500
             height: 2625
-            caption: 'Fresh-account four-message sequence: the specialist asked for confirmation and returned ZC-12345 with final delivery within 3 business days. No backend was connected.'
+            caption: 'The cancellation specialist asks for confirmation and returns a simulated cancellation code.'
         - title: Compare with a delivery request
-          instruction: 'Select **Start new test session** and send the delivery question below. Inspect **Activity map** again. The verified run stayed with the primary, asked for a subscription ID and showed no specialist invocation because no delivery specialist existed.'
+          instruction: 'Select **Start new test session** and send the delivery question below. Inspect **Activity map** again. Without a delivery specialist, the primary handles this request.'
           prompt_label: Web Chat · Delivery without a specialist
           prompt: Can I change my delivery date to next Friday?
       reveal:
@@ -293,7 +291,6 @@ mission_lab:
       steps:
         - title: Prepare audio and select Voice Call
           instruction: 'Connect a microphone and speakers or a headset. In **Preview**, select **Voice Call**. Use a browser with microphone access permitted for the preview site. If audio is unavailable, use **Web Chat** or watch the facilitator; mark your own spoken checks unverified.'
-          notice: 'The latest run verified connection, **Listening...**, the agent greeting and the end-call controls. No scripted spoken input was supplied. The remaining steps teach what to test; they are not reported successes.'
           screenshot:
             title: the Voice Call panel before connection
             src: /labs/customer-assist-agent/images/voice-call-panel.webp
@@ -301,7 +298,7 @@ mission_lab:
             alt: Voice Call selected with the call control and an empty Live Transcript displaying Not connected.
             width: 4500
             height: 2625
-            caption: The captured panel is not connected. Connection and end-call controls were exercised separately; this image is not evidence of speech recognition or a completed cancellation.
+            caption: Select Start voice conversation to begin the call.
         - title: Connect and check the transcript
           instruction: 'Select **Start voice conversation** and allow microphone access if asked. Confirm **Listening...** and **Voice call connected** in **Live Transcript**, then wait a few seconds for the greeting under **Bot said:**. A connected call alone does not demonstrate recognition.'
         - title: Speak the cancellation request
@@ -310,7 +307,6 @@ mission_lab:
           instruction: 'When asked, say your subscription ID, for example **“S U B one zero four two”**, then a reason such as **“I’m moving abroad”**. Confirm when asked. Use only fictional identifiers and note any recognition errors.'
         - title: 'Check the spoken behavior, not just the connection'
           instruction: 'Listen and inspect **Live Transcript** and **Activity map**. Check pauses, silent internal routing, clear identifiers and confirmation codes, one question at a time, and no markdown read aloud. Check for a simulated confirmation code. Record each mismatch rather than assuming saved Voice instructions guarantee the behavior.'
-          notice: 'Recognition, spell-back, turn-taking, speech quality and spoken cancellation were not verified in the latest run. Do not mark them passed merely because chat worked or the call connected.'
         - title: End the call and leave a draft
           instruction: 'Select **End conversation** and verify that **Start voice conversation** returns. Leave the agent unpublished. Do not configure production channels, triggers, schedules or a backend for this lab.'
       reveal:
@@ -345,7 +341,7 @@ mission_lab:
       steps:
         - title: Reuse the specialist pattern
           instruction: 'Repeat **Build** → **Add a sub-agent** for each specialist below. Wait for provisioning, rename **New Sub-Agent** with the exact supplied name and select **Save name**. Save **Description** and **Instructions** separately, then use **+** beside **Skills** → **Generative**. Use only fictional contact and payment details.'
-          notice: 'All three optional specialists were created and invoked in fresh Web Chat tests. Each returned to the primary, but each finalized its simulated change without a separate confirmation. An earlier run also saw delivery expose internal JSON; the latest run did not. Treat these as behavioral defects, not complete end-to-end passes. Keep Demo Mode; no knowledge source or backend is connected by the descriptions.'
+          notice: 'Keep Demo Mode: these specialists simulate actions without a connected backend.'
         - title: Name the enrollment specialist
           instruction: 'Create the first optional sub-agent, enter this exact name and select **Save name**.'
           prompt_label: Enrollment · Name
@@ -476,7 +472,7 @@ mission_lab:
             | `I want to start a new coffee subscription. My email is alex@contoso.com, medium roast, every two weeks.` | Subscription Enrollment & Setup |
             | `I need to update my credit card. My customer ID is C-7781.` | Account & Billing Management |
 
-            Compare delivery with the core baseline: where the primary answered alone, the latest trace invoked **Delivery Scheduling & Adjustments**. Enrollment and billing also routed and returned demo codes, but all three skipped a separate final confirmation. Watch delivery replies for internal JSON, which an earlier run exposed, and check any date they state. Verify routing and confirmation separately. Do not approve any offered email or other outreach.
+            Compare delivery with the core baseline: does **Delivery Scheduling & Adjustments** now handle the request? Check that each specialist asks for confirmation and returns a clear response to the customer.
           notice: 'Any confirmation is still a simulated output for comparison, not proof of enrollment, payment or delivery changes in a real system.'
       reveal:
         title: What changed when the specialists became available?
@@ -542,13 +538,6 @@ You are building a customer-service prototype for **Zava Coffee**. Customers wan
 | 200 | Maker | 30 minutes | An unpublished primary agent, cancellation specialist, two skills and an honest test record. |
 
 Plan 30 minutes for Build (10) → Route (12) → Speak (8). Extend is optional and takes 15 additional minutes. These are working budgets, not measured run times or response-time guarantees. Wait for provisioning and responses; read a reveal while waiting rather than submitting duplicate requests.
-
-<details class="lab-validation" markdown="1">
-<summary>What was tested</summary>
-
-**Evidence boundary:** the latest fresh-account run passed the primary-agent chat test and the original four-message cancellation sequence without a diagnostic retry, with the specialist invocation and return visible in **Activity map**. Before adding a delivery specialist, delivery stayed with the primary. Voice connected, showed **Listening...** and the agent greeting, and ended cleanly, but no scripted spoken input was supplied: recognition, spell-back and spoken cancellation remain unverified. All three optional specialists routed and returned to the primary, but each finalized its simulated change without a separate final confirmation. An earlier run also saw delivery expose internal JSON; the latest run did not. Those optional procedures are not complete end-to-end passes.
-
-</details>
 
 ![Zava Coffee Subscription Assistant with an intent skill connected to Subscription Cancellation with a cancellation skill.](images/canvas-one-subagent.webp)
 
@@ -844,7 +833,7 @@ Select **Preview** → **Web Chat**, then **Start new test session** at the top 
 I want to cancel my subscription
 ```
 
-The fresh-account run completed all four messages: the specialist requested confirmation, returned ZC-12345 and final delivery within 3 business days. An earlier run stalled after the reason, so retain the bounded recovery below if your run stalls.
+Look for a confirmation request followed by a simulated cancellation code.
 
 ### 7. Supply the subscription ID
 
@@ -882,21 +871,21 @@ Yes, please cancel it
 
 Inspect both the chat and **Activity map**, not just the main **Execution summary**. Select **Start new test session** and retry once with `I want to cancel my subscription. My subscription ID is SUB-1042, and I am moving abroad.` When asked, send `Yes, please cancel it`. If this also stalls, stop and ask your facilitator.
 
-**Earlier diagnostic result — comparison only:** the combined request completed a simulated cancellation. The fresh-account four-message run needed no retry. If you use this recovery, record it separately from your original conversation. The two-minute boundary is a troubleshooting limit, not a latency guarantee.
+Use this recovery only if the conversation stalls.
 
 ### 11. Read the complete trace
 
 In **Activity map**, inspect the invocation of **Subscription Cancellation**, its inputs and its return. Look for **Interpreting agent intent**, **Preparing agent inputs**, **Executing agent**, **Reviewing nested activity**, and **Return To Main Conversation Tool**. Compare the actual reply with the final return status.
 
-While the specialist waits for your next reply, its rows in **Activity map** can show a red **Cancelled** status. In the latest run they changed to **Completed** after the confirmation turn, followed by an intermediate **Cancelled** return action and a final **Completed** return. Neither the intermediate status alone nor the top-level summary alone tells you whether the customer received a result.
+While the specialist waits for your next reply, its rows in **Activity map** can show a red **Cancelled** status. Read through to the final **Completed** return after the confirmation turn. Neither the intermediate status alone nor the top-level summary alone tells you whether the customer received a result.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/test-cancel-routed-dark.webp"><img src="images/test-cancel-routed.webp" alt="Separate subscription ID, reason and confirmation turns produce simulated ZC-12345 while nested activity shows a Cancelled action followed by a Completed return."></picture>
 
-*Fresh-account four-message sequence: the specialist asked for confirmation and returned ZC-12345 with final delivery within 3 business days. No backend was connected.*
+*The cancellation specialist asks for confirmation and returns a simulated cancellation code.*
 
 ### 12. Compare with a delivery request
 
-Select **Start new test session** and send the delivery question below. Inspect **Activity map** again. The verified run stayed with the primary, asked for a subscription ID and showed no specialist invocation because no delivery specialist existed.
+Select **Start new test session** and send the delivery question below. Inspect **Activity map** again. Without a delivery specialist, the primary handles this request.
 
 **Web Chat · Delivery without a specialist**
 
@@ -946,11 +935,9 @@ Use the same agent in Voice Call and separate connection controls from actual sp
 
 Connect a microphone and speakers or a headset. In **Preview**, select **Voice Call**. Use a browser with microphone access permitted for the preview site. If audio is unavailable, use **Web Chat** or watch the facilitator; mark your own spoken checks unverified.
 
-The latest run verified connection, **Listening...**, the agent greeting and the end-call controls. No scripted spoken input was supplied. The remaining steps teach what to test; they are not reported successes.
-
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/voice-call-panel-dark.webp"><img src="images/voice-call-panel.webp" alt="Voice Call selected with the call control and an empty Live Transcript displaying Not connected."></picture>
 
-*The captured panel is not connected. Connection and end-call controls were exercised separately; this image is not evidence of speech recognition or a completed cancellation.*
+*Select Start voice conversation to begin the call.*
 
 ### 2. Connect and check the transcript
 
@@ -967,8 +954,6 @@ When asked, say your subscription ID, for example **“S U B one zero four two�
 ### 5. Check the spoken behavior, not just the connection
 
 Listen and inspect **Live Transcript** and **Activity map**. Check pauses, silent internal routing, clear identifiers and confirmation codes, one question at a time, and no markdown read aloud. Check for a simulated confirmation code. Record each mismatch rather than assuming saved Voice instructions guarantee the behavior.
-
-Recognition, spell-back, turn-taking, speech quality and spoken cancellation were not verified in the latest run. Do not mark them passed merely because chat worked or the call connected.
 
 ### 6. End the call and leave a draft
 
@@ -1014,7 +999,7 @@ Extend the concierge to enrollment, billing and delivery using the same speciali
 
 Repeat **Build** → **Add a sub-agent** for each specialist below. Wait for provisioning, rename **New Sub-Agent** with the exact supplied name and select **Save name**. Save **Description** and **Instructions** separately, then use **+** beside **Skills** → **Generative**. Use only fictional contact and payment details.
 
-All three optional specialists were created and invoked in fresh Web Chat tests. Each returned to the primary, but each finalized its simulated change without a separate confirmation. An earlier run also saw delivery expose internal JSON; the latest run did not. Treat these as behavioral defects, not complete end-to-end passes. Keep Demo Mode; no knowledge source or backend is connected by the descriptions.
+Keep Demo Mode: these specialists simulate actions without a connected backend.
 
 ### 2. Name the enrollment specialist
 
@@ -1212,7 +1197,7 @@ Save all fields and close the panel. Check for four specialists including cancel
 | `I want to start a new coffee subscription. My email is alex@contoso.com, medium roast, every two weeks.` | Subscription Enrollment & Setup |
 | `I need to update my credit card. My customer ID is C-7781.` | Account & Billing Management |
 
-Compare delivery with the core baseline: where the primary answered alone, the latest trace invoked **Delivery Scheduling & Adjustments**. Enrollment and billing also routed and returned demo codes, but all three skipped a separate final confirmation. Watch delivery replies for internal JSON, which an earlier run exposed, and check any date they state. Verify routing and confirmation separately. Do not approve any offered email or other outreach.
+Compare delivery with the core baseline: does **Delivery Scheduling & Adjustments** now handle the request? Check that each specialist asks for confirmation and returns a clear response to the customer.
 
 Any confirmation is still a simulated output for comparison, not proof of enrollment, payment or delivery changes in a real system.
 

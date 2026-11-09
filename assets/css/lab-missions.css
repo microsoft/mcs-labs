@@ -187,8 +187,10 @@
   .mission-meta { color: var(--muted); font-size: 15px; margin: 0; }
   .mission-meta span { margin: 0 6px; }
   .brief { font-size: calc(17px * var(--font-scale, 1)); line-height: 1.6; margin-top: 24px; }
-  .outcome { color: var(--muted); font-size: calc(16px * var(--font-scale, 1)); }
+  .outcome, .result-check { color: var(--muted); font-size: calc(16px * var(--font-scale, 1)); }
   .outcome strong { display: block; color: var(--success); margin-bottom: 3px; font-size: 14px; }
+  .result-check { margin: 24px 0 0; break-inside: avoid; }
+  .result-check strong { display: block; color: var(--text); margin-bottom: 3px; }
   .mission-steps { list-style: none; margin: 32px 0 0; padding: 0; }
   .mission-step { margin: 0; padding: 26px 0; border-top: 1px solid var(--border); }
   .step-content { margin-left: 33px; }

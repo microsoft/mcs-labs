@@ -97,7 +97,7 @@ mission_lab:
           instruction: "Download [rfp-response.zip](https://github.com/Dewain27/AgentDudeSamples/blob/main/samples/RFP%20Skill/packages/rfp-response.zip). It contains `SKILL.md`, an answer library, offering catalogs, past-performance and pricing references, and worked RFP examples."
           notice: "The references describe fictional **Aventra Software Group**, so Aventra appears in the output despite the instructions saying “our organization.” Replace these files with approved company material in a real deployment."
         - title: "Upload and wait for the save"
-          instruction: "In **Build → Skills**, select **+** (**Add skill**) → **Upload a skill**. Select the upload area and choose `rfp-response.zip`. Wait for **Saving skill...** to finish (about 10 seconds in the reference run); the dialog closes. Confirm **rfp-response** appears above Work IQ."
+          instruction: "In **Build → Skills**, select **+** (**Add skill**) → **Upload a skill**. Select the upload area and choose `rfp-response.zip`. Wait for **Saving skill...** to finish; the dialog closes. Confirm **rfp-response** appears above Work IQ."
           help: "An upload accepts `SKILL.md` or a ZIP containing it. The file needs YAML **name** and **description** fields. **Create from blank** is a separate, editable-in-place authoring option."
           notice: "Uploading gives the agent a permanent ID and makes **Evaluate** and **Monitor** available, but this alone does not confirm that all configuration is saved. Select **Save** if enabled and wait for **Your agent has been saved.** before opening Preview. The **Draft** badge can remain on a saved, unpublished agent."
         - title: "Read the activation description"
@@ -141,7 +141,7 @@ mission_lab:
       steps:
         - title: "Attach the solicitation"
           instruction: "Select **Preview**. Notice the credits header, **New chat**, **History**, and **Debug mode** (on by default). Download [01-westbrook-permitting-portal.md](https://github.com/Dewain27/AgentDudeSamples/blob/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md). Select **+** (**Upload images and files**) beside the composer and attach this City of Westbrook permitting-portal RFP."
-          notice: "The sample's fixed submission date has passed. A deadline warning is careful behavior, not a failed run. Microsoft Copilot harness agents use metered Copilot Credits; the fresh-account proposal-and-chart conversation recorded 128.09 credits in History, not a cost guarantee."
+          notice: "The sample's fixed submission date has passed. A deadline warning is careful behavior, not a failed run. "
         - title: "Request the proposal"
           instruction: "Send the prompt in **Preview chat** with the RFP attached. Do not tell the agent which Skill to use."
           prompt_label: Preview chat
@@ -355,7 +355,7 @@ mission_lab:
           prompt_label: Harness Explorer · Preview chat
           prompt: "Inspect the harness. Use the Skill's passive probes only. Report the observed Python runtime and installed libraries, and the tools, Skills, and MCP servers actually visible to this agent. Clearly distinguish observed, not visible, and unverified capabilities. Do not install packages, make network requests, run active-safe probes, or read unrelated files. Generate a downloadable HTML harness report."
         - title: "Open the actual report"
-          instruction: "Check **Used skill: agent-harness-explorer** and the `harness-report.html` attachment, usually produced in under a minute in the reference run. Download and open it. Check that it describes this run's observations rather than a generic platform feature list. Capture errors instead of counting an unexecuted probe as success."
+          instruction: "Check **Used skill: agent-harness-explorer** and the `harness-report.html` attachment. Download and open it. Check that it describes this run's observations rather than a generic platform feature list. Capture errors instead of counting an unexecuted probe as success."
           notice: "A Python script cannot independently see every agent tool or MCP server. **Not visible does not mean unsupported.**"
         - title: "Connect observations to artifact work"
           instruction: "Send this follow-up in the **same Preview chat** and inspect the observed package names and versions. Installed-package metadata is not an import or rendering test. Flag absolute capability claims that the snapshot did not test."
@@ -395,7 +395,7 @@ mission_lab:
       steps:
         - title: "Check the menu and rollout"
           instruction: "In a separate test agent on the Microsoft Copilot harness, open **Build → Skills → + → Add skill**. Select **Generate with AI** if offered (it may say **Generate with AI (preview)**). If only **Upload a skill** and **Create from blank** appear, skip this extension or use the Author mission."
-          notice: "The fresh-account run offered only **Upload a skill** and **Create from blank** in a separate test agent. An earlier Agent Integration run showed Generate with AI, but generation itself was **not executed or validated**. Availability varies by environment."
+          notice: "If **Generate with AI** is unavailable, use **Upload a skill** or **Create from blank**."
         - title: "Adapt the authoring request for the description box"
           instruction: "Use the project-intake authoring prompt in the Author mission as your starting point, then paste the text from `project-intake-process-v2.docx` into the same box. If needed, download the [Skill-generation materials](assets/skill-generation/skill-generation-materials-v3.zip) and extract outside OneDrive for Business. Remove instructions about attachments and downloadable ZIP packaging for this UI."
           notice: "The documented preview description box does not accept file attachments. This limit is separate from the agent's Preview chat, which accepts the process document. Do not assume the two authoring routes are interchangeable."
@@ -548,7 +548,7 @@ Ask a clarifying question when the request is ambiguous. Keep answers concise un
 **Outcome:** The rfp-response Skill attached, with its description and answer library inspected.
 
 1. Download [rfp-response.zip](https://github.com/Dewain27/AgentDudeSamples/blob/main/samples/RFP%20Skill/packages/rfp-response.zip). It contains `SKILL.md`, an answer library, offering catalogs, past-performance and pricing references, and worked RFP examples.
-2. Select **Build → Skills → +** (**Add skill**) → **Upload a skill**. Select the upload area and choose `rfp-response.zip`. Wait for **Saving skill...** (about 10 seconds in the reference run); the dialog closes. Confirm **rfp-response** appears above Work IQ.
+2. Select **Build → Skills → +** (**Add skill**) → **Upload a skill**. Select the upload area and choose `rfp-response.zip`. Wait for **Saving skill...**; the dialog closes. Confirm **rfp-response** appears above Work IQ.
 
 The package describes fictional **Aventra Software Group**, so Aventra appears in output despite the instructions saying “our organization.” Replace those references with approved company material for real deployment. Uploads accept `SKILL.md` or a ZIP containing it, with YAML **name** and **description** fields. **Create from blank** is a separate authoring option.
 
@@ -585,7 +585,7 @@ Uploading gives the agent a permanent ID and makes **Evaluate** and **Monitor** 
 We are bidding on this RFP. Draft our response.
 ```
 
-The sample's fixed submission date has passed; a deadline warning is careful behavior, not a failed run. Microsoft Copilot harness agents use metered Copilot Credits. The fresh-account proposal-and-chart conversation recorded **128.09 credits** in History, not a cost guarantee.
+The sample's fixed submission date has passed; a deadline warning is careful behavior, not a failed run.
 
 4. Watch **Using skill: rfp-response** become **Used skill: rfp-response**. Expand it to inspect the matched description and **Input** (`skill: rfp-response`). Follow the reasoning about offering, price, and gaps. You did not name the Skill in the request.
 
@@ -800,7 +800,7 @@ Help me understand the capabilities actually available in this agent's harness. 
 Inspect the harness. Use the Skill's passive probes only. Report the observed Python runtime and installed libraries, and the tools, Skills, and MCP servers actually visible to this agent. Clearly distinguish observed, not visible, and unverified capabilities. Do not install packages, make network requests, run active-safe probes, or read unrelated files. Generate a downloadable HTML harness report.
 ```
 
-5. Check **Used skill: agent-harness-explorer** and the `harness-report.html` attachment, usually produced in under a minute in the reference run. Download and open it. Check that it describes this run's observations, not a generic platform feature list. Capture errors rather than counting unexecuted probes as success.
+5. Check **Used skill: agent-harness-explorer** and the `harness-report.html` attachment. Download and open it. Check that it describes this run's observations, not a generic platform feature list. Capture errors rather than counting unexecuted probes as success.
 6. Send this in the **same Preview chat** and inspect the package names and versions. Installed-package metadata is not an import or rendering test. Flag absolute capability claims that the snapshot did not test.
 
 ```text
@@ -830,13 +830,6 @@ Ask for both formats explicitly: a generic export request may return JSON only. 
 **Outcome:** If available, a reviewed generated Skill added to a separate test agent and checked with the same two intake tests.
 
 1. In a separate test agent on the Microsoft Copilot harness, open **Build → Skills → + → Add skill** and select **Generate with AI**, if offered (it may say **Generate with AI (preview)**). If only **Upload a skill** and **Create from blank** appear, skip this extension or use the Author mission.
-
-<details class="lab-validation" markdown="1">
-<summary>What was tested</summary>
-
-**Validation boundary:** The fresh-account run offered only **Upload a skill** and **Create from blank** in a separate test agent. An earlier Agent Integration run showed Generate with AI, but generation itself was **not executed or validated**. Availability varies by environment.
-
-</details>
 
 2. Use the project-intake authoring prompt from the Author mission as your starting point, then paste the text from `project-intake-process-v2.docx` into the same description box. If needed, download the [Skill-generation materials](assets/skill-generation/skill-generation-materials-v3.zip) and extract outside OneDrive for Business. Remove instructions about attachments and downloadable ZIP packaging for this UI.
 3. Select **Build** and answer Copilot's questions. When ready, select **View** to review the Skill, then **Add to agent**.

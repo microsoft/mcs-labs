@@ -25,8 +25,6 @@ mission_lab:
     You are attending the bootcamp and need one place to see every day's labs and mark them complete. Build from the **published agenda**, not an invented schedule. Lunch belongs on the timeline but must never count toward progress.
   self_setup: |-
     Complete the [classic lab's prerequisite setup](https://microsoft.github.io/mcs-labs/labs/mcs-copilot-code/#prerequisites) separately before starting. Copilot Code is a Frontier preview in the browser; this exercise needs no local development toolchain.
-  validation: |-
-    A fresh-account sequential run completed the four unchanged prompts and two focused repair requests covering clipped short labels, completed-day count styling, and the inclusive 480px boundary. The published app passed schedule, completion, reversal, all-complete, tab-retention, keyboard, reload-reset, and 400/480/481px checks. All 11 lab names and decorative-emoji handling were checked in the browser accessibility tree; spoken screen-reader output was not tested. Repairs can take the exercise beyond its planned time, so do not skip acceptance checks to stay on schedule.
   prerequisites:
     - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your provided **lab account** in a separate browser profile or private window, not a personal or production account."
     - "Keep this lab beside Copilot and open the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) for comparison."
@@ -759,12 +757,3 @@ You built, refined, and checked a web app through four unchanged prompts. Your a
 - [Get started with web development using Visual Studio Code](https://learn.microsoft.com/training/modules/get-started-with-web-development/)
 - [Overview of DevTools (Microsoft Edge)](https://learn.microsoft.com/microsoft-edge/devtools/overview)
 - [Accessibility-testing features in Microsoft Edge DevTools](https://learn.microsoft.com/microsoft-edge/devtools/accessibility/reference)
-
-<details>
-<summary>Run-through coverage and screenshot notes</summary>
-
-A fresh-account sequential run completed the four unchanged prompts and two focused repair requests covering clipped short labels, completed-day count styling, and the inclusive 480px boundary. The published app passed schedule, completion, reversal, all-complete, tab-retention, keyboard, reload-reset, and 400/480/481px checks. All 11 lab names and decorative-emoji handling were checked in the browser accessibility tree; spoken screen-reader output was not tested. Repairs can take the exercise beyond its planned time, so do not skip acceptance checks to stay on schedule.
-
-The existing screenshots remain valid examples and were retained in this run; they are not exact renderings of its generated app. Light/dark pairs show the real interface themes. After Prompt 2, the tracker itself stays dark in both; the narrow-app capture is shared between themes. Product UI, generated layouts, emoji choices, and agenda totals can differ.
-
-</details>

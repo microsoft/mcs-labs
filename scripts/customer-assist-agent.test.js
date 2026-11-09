@@ -88,17 +88,14 @@ test('the baseline and trace guidance match the latest observed behavior', () =>
   }
 });
 
-test('voice evidence separates connection from unverified spoken behavior', () => {
-  for (const text of [lab.validation, document.content, readme]) {
-    assert.match(text, /no scripted spoken input was supplied: recognition, spell-back and spoken cancellation remain unverified/);
-    assert.match(text, /An earlier run also saw delivery expose internal JSON; the latest run did not\./);
-  }
+test('voice instructions teach the exercise without the automated runners test history', () => {
+  assert.equal(lab.validation, undefined);
   const speak = missions.find(mission => mission.id === 'speak');
   const speakText = JSON.stringify(speak);
-  assert.doesNotMatch(speakText, /source run/);
+  assert.doesNotMatch(speakText, /source run|latest run|not reported successes/);
   assert.match(step('Connect and check the transcript').instruction,
     /greeting under \*\*Bot said:\*\*/);
-  assert.match(step('Check the spoken behavior, not just the connection').notice, /not verified in the latest run/);
+  assert.match(step('Check the spoken behavior, not just the connection').instruction, /Live Transcript/);
 });
 
 test('every mission screenshot exists in both themes with declared dimensions', () => {

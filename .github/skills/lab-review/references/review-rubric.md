@@ -7,7 +7,8 @@ Use after the audit. Mark each item **pass**, **issue** (with evidence) or **n/a
 - [ ] Product, feature and connector names match current Microsoft Learn pages. Since 2026: **Microsoft Copilot**, **Microsoft Copilot Chat** and the **Microsoft Copilot harness** (see `scripts/lab-audit-terms.json`); license SKU names stay as the price list shows them.
 - [ ] UI labels in **bold** match the product today, or the review says they could not be verified.
 - [ ] License, credit, preview, region and admin prerequisites are current and complete.
-- [ ] Prerequisites use an organizer-neutral cue for attendees with pre-provisioned accounts; own-tenant setup is compact/collapsible where supported, while sign-in, downloads and safety actions remain visible.
+- [ ] Prerequisites use an organizer-neutral cue for attendees with pre-provisioned accounts; own-tenant setup stays in the expandable section, while required sign-in and exercise downloads remain visible.
+- [ ] Learner copy contains no maintainer test reports, run dates, screenshot provenance, repeated tenant warnings, or runner-specific ownership/connection/sender checks. Keep these in run logs and PRs; report provisioning defects to organizers.
 - [ ] Renamed or moved features are updated everywhere, including description, intro, tables, tips and troubleshooting, not just the steps.
 - [ ] Links resolve to the intended page (not a redirect to a generic landing page).
 - [ ] Statements about limits, costs or availability cite a source in the lab.

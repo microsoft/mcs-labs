@@ -10,6 +10,13 @@ as an attendee would, write down what really happens, and leave the tenant as yo
 
 ## Safety rules
 
+These are rules for the automated runner, not steps to paste into a learner's lab.
+Keep run evidence, coverage limits, credit totals, screenshot provenance and
+account-specific troubleshooting in the run log and PR. Do not turn a runner's setup
+problem into a required attendee step or repeat warnings supplied by the training tenant.
+Hand off only necessary learner-facing corrections; independent-tenant setup belongs
+in the existing expandable setup section.
+
 - **Training or demo tenants only.** Never use a customer or production tenant, or your own
   work account, unless the owner explicitly says so.
 - **Credentials.** Either the person signs in themselves in the launched window, or you
@@ -42,6 +49,9 @@ as an attendee would, write down what really happens, and leave the tenant as yo
 ## 1. Prepare
 
 1. Run `npm run audit:labs -- <slug>` and fix nothing yet; note anything that already fails.
+   If modules/presentations are excluded, use the
+   [scoped validation guidance](../lab-update/SKILL.md#5-validate) instead: named slugs
+   alone do not prevent repository-wide audit scans.
 2. Read both copies: `labs/<slug>/README.md` and `_labs/<slug>.md`. For a missions lab, the
    front matter `missions` list holds the prompts, steps, checks and screenshots.
 3. List the prerequisites (licenses, tenant, plugins, connections, sample data) and confirm

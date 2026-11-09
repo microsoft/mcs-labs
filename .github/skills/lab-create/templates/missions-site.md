@@ -30,10 +30,11 @@ mission_lab:
     caption: "%%HERO_CAPTION: the finish line, in one sentence.%%"
   scenario: |
     %%SCENARIO: who the learner is and what they must deliver, in two or three sentences.%%
+  # TEMPLATE NOTE (delete): prepared accounts skip this expandable setup. Do not add runner checks or tenant warnings to learner steps. Test provenance belongs in logs/PRs, not lab.validation.
+  self_setup: |
+    %%INDEPENDENT_TENANT_SETUP_ONLY%%
   prerequisites:
     - "For an event, use the provided or pre-provisioned account; sign in when prompted and ask the organizer if anything is missing."
-    - "Use a separate browser profile or private window. Do not use a personal or production account."
-    - "In your own tenant only: %%MINIMUM_REQUIRED_TENANT_SETUP%%"
     # TEMPLATE NOTE (delete): keep the next line when learners check results in a business app (system of record); otherwise delete it.
     - "In another tab, open [%%SYSTEM_OF_RECORD%%](%%SYSTEM_OF_RECORD_URL%%), the %%KIND_OF_APP%% in this scenario. %%WHAT_IT_IS_IN_ONE_SENTENCE%% Use it to %%WHAT_TO_CHECK_THERE%%."
   pacing: "Plan %%DURATION%% minutes for %%CORE_MISSION_VERBS_WITH_ARROWS%%. %%OPTIONAL_MISSIONS%% are optional extensions. These are working budgets, not guaranteed run times."
@@ -45,6 +46,8 @@ mission_lab:
       tool: %%MISSION_1_TOOL%%
       brief: "%%WHY_THIS_MISSION_MATTERS_IN_ONE_SENTENCE%%"
       outcome: "%%WHAT_THE_LEARNER_HAS_AT_THE_END%%"
+      # TEMPLATE NOTE (delete): optional; omit when outcome suffices. Plain text, not steps or a completion gate. Mirror at the mission's end in both bodies.
+      result_check: "%%OBSERVABLE_RESULT_AND_WHERE_TO_VERIFY_IT%%"
       steps:
         - title: "%%STEP_TITLE%%"
           instruction: "%%VERB_FIRST_INSTRUCTION_WITH_BOLD_UI_LABELS%%"
@@ -157,6 +160,9 @@ Plan **%%DURATION%% minutes for the core missions**. %%OPTIONAL_MISSIONS%% are *
 **Quick check:** %%MISCONCEPTION_AS_A_QUESTION%% **%%ANSWER%%.** %%WHY%%
 
 **If %%LIKELY_PROBLEM%%:** %%WHAT_TO_DO%%
+
+<!-- TEMPLATE NOTE (delete): omit this paragraph if result_check is not used. -->
+**Check your result:** %%OBSERVABLE_RESULT_AND_WHERE_TO_VERIFY_IT%%
 
 ## %%MISSION_2_VERB%%: %%MISSION_2_SHORT%%
 

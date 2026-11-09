@@ -30,8 +30,6 @@ mission_lab:
     Arrange access to create two **Microsoft Copilot harness** agents in the same environment, upload Skills, publish and connect a specialist. Confirm **Build → Skills**, **Connected agents** and **Add A2A agent** are available. The **Standard harness** is a separate experience, not a renamed substitute. Building and testing can consume Copilot Credits.
 
     Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner mission.
-  validation: |-
-    **Verified boundary:** the fresh-account run on 9 November 2026 exercised the coordinator-only, direct Skill, internal delegation, real A2A, full-team and six optional tests. Stock/deadline recovery instructions were corrected and rechecked; the final baseline and EUR 230 follow-up passed with trace evidence. Manual card details and **Authentication: None** enabled invocation despite a browser `MissingAllowOriginHeader` discovery error. External service Skill-loading logs were not inspected; returned fixture IDs alone do not prove reference loading.
   prerequisites:
     - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment."
     - "Keep the lab beside Studio. You download the Skill ZIP in Mission 2 and confirm the LiftLine card URL in Mission 3."
@@ -233,7 +231,7 @@ mission_lab:
             width: 785
             height: 640
             caption: "Expected: Studio may not retrieve the card, so Name and Description stay empty and Next stays disabled until you fill them in."
-          notice: "If Studio shows **No agent card found. Enter a name and description.**, continue with the manual details below. The fresh run confirmed a browser CORS error (`MissingAllowOriginHeader`) for this endpoint; the message alone does not diagnose the cause. Prove runtime invocation separately in Mission 4."
+          notice: "If Studio shows **No agent card found. Enter a name and description.**, continue with the manual details below."
         - title: "Enter the name and description"
           instruction: "Set **Name** to `LiftLine_Dispatch_Advisor` (underscores) and paste the following **Description**. The coordinator uses this description to decide when to call LiftLine. The card's A2A skill metadata does not install an Agent Skill package."
           prompt_label: A2A connection · Description
@@ -262,6 +260,7 @@ mission_lab:
       tool: Coordinator Preview · debug trace
       brief: "After the external connection works, verify both delegations and distinguish a quote from approval."
       outcome: "An evidenced delivery recommendation and a separate hypothetical policy assessment, with no transaction."
+      result_check: "Your trace contains returned Zava stock and policy results and a usable LiftLine quote—not just a connected card or plausible answer. The separate EUR 230 assessment requires approval, without changing the quote or granting approval; unresolved delegation remains a blocker."
       steps:
         - title: "Run the complete-team baseline"
           instruction: "Open **Zava Operations Assistant → Preview → New chat** and send the full prompt. Verify your own calls and returned business results, not just the connection list."
@@ -500,13 +499,6 @@ Riverside Construction needs 60 bags of repair mortar before its crew starts at 
 
 All facts are fictional. There is no ERP, live inventory, carrier booking tool or transaction.
 
-<details class="lab-validation" markdown="1">
-<summary>What was tested</summary>
-
-**Verified boundary:** the fresh-account run on 9 November 2026 exercised the coordinator-only, direct Skill, internal delegation, real A2A, full-team and six optional tests. Stock/deadline recovery instructions were corrected and rechecked; the final baseline and EUR 230 follow-up passed with trace evidence. Manual card details and **Authentication: None** enabled invocation despite a browser `MissingAllowOriginHeader` discovery error. External service Skill-loading logs were not inspected; returned fixture IDs alone do not prove reference loading.
-
-</details>
-
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
@@ -737,7 +729,7 @@ Add the facilitator's hosted LiftLine service as an A2A connected agent. **Outco
 https://a2a-server-bootcamp.gentleplant-daa79337.westeurope.azurecontainerapps.io/.well-known/agent-card.json
 ```
 
-3. If Studio shows **No agent card found. Enter a name and description.**, continue with the manual details below. The fresh run confirmed a browser CORS error (`MissingAllowOriginHeader`) for this endpoint; the message alone does not diagnose the cause. Prove runtime invocation separately in Mission 4.
+3. If Studio shows **No agent card found. Enter a name and description.**, continue with the manual details below.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/a2a-discovery-blocked-dark.webp"><img src="images/a2a-discovery-blocked.webp" alt="A2A wizard has the card URL entered, empty Name and Description fields, and a disabled Next button."></picture>
 
@@ -843,6 +835,8 @@ Zava stock check → LiftLine quote → Zava approval check → Human next step.
 **Answer: B.** Neither a new quote nor an approval was requested or granted. Zava owns the policy and the assessment is hypothetical.
 
 **Stuck?** Inspect the task and returned business status. This deployment rejected a destination containing the customer name and misread "no quote override" as a price-change request. Keep the site name alone and omit override wording unless supplied. Reuse only returned context/task IDs. Allow at most one corrected retry, including protocol errors, then report the blocker to the instructor; do not keep rephrasing or invent a plan.
+
+**Check your result:** Your trace contains returned Zava stock and policy results and a usable LiftLine quote—not just a connected card or plausible answer. The separate EUR 230 assessment requires approval, without changing the quote or granting approval; unresolved delegation remains a blocker.
 
 ## Challenge
 
