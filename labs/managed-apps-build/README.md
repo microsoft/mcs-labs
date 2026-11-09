@@ -54,7 +54,7 @@ Save the [provided reference screenshot](assets/actual-app.png), or use a screen
 
 ![Design reference for the bootcamp tracker](images/design-reference.webp)
 
-Open Copilot Studio in your assigned environment. If **Welcome from your admin** appears, read the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss teaching bubbles with **Got it**.
+Open Copilot Studio in your assigned environment.
 
 Select **Apps (Preview) → New app**, then **Add attachments → Upload images and files**. Choose the reference and wait for its thumbnail above **Chat input**.
 

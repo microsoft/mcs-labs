@@ -151,12 +151,9 @@ Create a fully configured Copilot Studio agent with clear instructions, a knowle
 
 1. Navigate to [Microsoft Copilot Studio](https://copilotstudio.microsoft.com) and sign in with your credentials.
 
-   > [!NOTE]
-   > On a first sign-in you may see one-time screens. If a **Welcome from your admin** dialog appears, accept the terms and select **Close**. If a **Find your environments here** tip appears, select **Got it**.
-
 1. In the left navigation, select **Agents**.
 
-1. Select the **More create options** chevron next to the **New agent** button. Under **Other ways to build**, choose **Agent** with the **Standard** label (*Create an agent with predefined rules and flows*). If a **New name, same harness** tip appears, read it and dismiss it.
+1. Select the **More create options** chevron next to the **New agent** button. Under **Other ways to build**, choose **Agent** with the **Standard** label (*Create an agent with predefined rules and flows*).
 
    ![The New agent menu with Agent (Standard) under Other ways to build](images/uc1-new-agent-options.png)
 

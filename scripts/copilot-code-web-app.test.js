@@ -10,6 +10,15 @@ const page = matter(fs.readFileSync(labSourcePath(root, 'copilot-code-web-app'),
 const readme = fs.readFileSync(path.join(root, 'labs', 'copilot-code-web-app', 'README.md'), 'utf8');
 const mission = id => page.data.mission_lab.missions.find(item => item.id === id);
 
+test('Copilot Code uses the current bootcamp agenda in both editions', () => {
+  const classic = matter(fs.readFileSync(labSourcePath(root, 'mcs-copilot-code'), 'utf8'));
+  const classicReadme = fs.readFileSync(path.join(root, 'labs', 'mcs-copilot-code', 'README.md'), 'utf8');
+  for (const copy of [JSON.stringify(page.data.mission_lab), page.content, readme, classic.content, classicReadme]) {
+    assert.ok(copy.includes('https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/'));
+    assert.doesNotMatch(copy, /\/events\/bootcamp-latest\//);
+  }
+});
+
 test('Copilot Code distinguishes Preview from the published app and keeps the training identity', () => {
   const step = mission('build').steps.find(item => item.title === 'Open the published app');
   for (const copy of [step.instruction, page.content, readme]) {

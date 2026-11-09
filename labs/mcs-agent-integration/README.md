@@ -134,7 +134,7 @@ Complete each build, quick test, and closure before starting the next use case. 
 
 ### Build Zava Operations Assistant
 
-1. Open [Copilot Studio](https://copilotstudio.microsoft.com/), sign in with your lab account, and confirm your assigned environment. If **Welcome from your admin** appears, review the terms and select **I have read and agree to the Terms of use**, then **Close**. Dismiss **Find your environments here** with **Got it** if shown.
+1. Open [Copilot Studio](https://copilotstudio.microsoft.com/), sign in with your lab account, and confirm your assigned environment.
 1. On **Home**, select the **Agent** card, described as **Create an agent to take actions and answer questions**. This creates a **Microsoft Copilot harness** agent and opens **Build**. If your tenant only offers the classic/standard experience, stop rather than substituting it.
 1. Enter **Zava Operations Assistant** in **Name your agent**. To change a saved name, use **Rename agent** in the header (some versions show **Edit name**) and confirm the edit.
 

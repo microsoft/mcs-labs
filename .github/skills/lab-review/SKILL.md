@@ -62,7 +62,8 @@ Work through `references/review-rubric.md`. In particular:
    reveals explain *why*; one correct option per check; only trailing extensions optional.
    Omit attendee cleanup chores for organizer-disposed environments; keep necessary
    own-tenant cleanup expandable and runner cleanup in the run log. The main `instruction`
-   is independently actionable; `help` is supplementary regardless of renderer default. Verify guidance in
+   is independently actionable; `help` is supplementary regardless of renderer default. An action a later
+   step depends on, such as attaching a file the next prompt reads, is its own visible step. Verify guidance in
    the supported rendered field, open collapsed help when checking its contents, and
    inspect the actual built page. Nothing in the lab contradicts the layout's
    note that checkmarks, answers and the reflection stay in the browser until the learner

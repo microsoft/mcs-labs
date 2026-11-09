@@ -116,7 +116,7 @@ These optional resources explain Copilot Code, where published apps run, and the
 
 - A work account with a Microsoft Copilot licence and the **Code** view available in [Microsoft Copilot](https://copilot.cloud.microsoft).
 - Enrolment in the [Frontier program](https://adoption.microsoft.com/copilot/frontier-program/): Copilot Code, and building and publishing apps to Copilot Managed Runtime, are Frontier preview features.
-- Copilot Code must be able to fetch the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) while generating the app.
+- Copilot Code must be able to fetch the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) while generating the app.
 - A browser that can open the app's link (`play.managedapps.cloud.microsoft`).
 
 </details>
@@ -188,7 +188,7 @@ Paste **Prompt 1** below unchanged into the **Create anything** box, including t
 ```text
 Build an app called "My Bootcamp Lab Tracker". Progress is kept in memory only: it starts with every lab unchecked and resets on reload.
 
-Fetch the agenda at https://microsoft.github.io/mcs-labs/events/bootcamp-latest/ and use every day's "Lab N:" items and "Lunch break" as the app's data (day, number, title, start, end). Skip everything else, including optional labs. If the page can't be fetched, stop and tell me.
+Fetch the agenda at https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/ and use every day's "Lab N:" items and "Lunch break" as the app's data (day, number, title, start, end). Skip everything else, including optional labs. If the page can't be fetched, stop and tell me.
 
 Layout (max 720px, centered):
 
@@ -213,7 +213,7 @@ Copilot Code checks that the code builds and publishes, but it cannot click thro
 
 #### Check the Basic Tracker
 
-- Compare the tracker with the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/). Confirm every day's scheduled lab numbers, titles, times, and Lunch appear in time order.
+- Compare the tracker with the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/). Confirm every day's scheduled lab numbers, titles, times, and Lunch appear in time order.
 - Confirm that modules, welcome/re-cap, coffee breaks, Q&A, social, and all optional labs are excluded.
 - Count the included labs and confirm the overall counter starts at **0 of TOTAL**, using that count rather than a fixed number.
 - Click a lab's timeline bar. Its checkbox, styling, overall completion count, and progress bar should update together.
@@ -360,4 +360,4 @@ Prompt 1 builds the basic app. Prompts 2-4 add the dark theme, emojis and shorte
 
 ## Architecture Bootcamp Latest
 
-This lab is part of [Architecture Bootcamp - Latest](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/).
+This lab is part of [Architecture Bootcamp - Latest](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).

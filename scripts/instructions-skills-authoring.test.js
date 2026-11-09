@@ -37,13 +37,19 @@ test('skills lab separates skill upload, saving, and publication', () => {
   }
 });
 
-test('skills lab waits for first-save navigation before authoring in Preview', () => {
+test('skills lab waits for first save, then attaches the process in a new Preview chat', () => {
   for (const copy of copies(mission('author').steps[1].instruction)) {
     assert.match(copy, /first save finish/);
     assert.match(copy, /return you to \*\*Build\*\*/);
-    assert.match(copy, /Reopen \*\*Preview\*\* only after that navigation settles/);
   }
   assert.match(mission('author').steps[1].instruction, /Instructions empty/);
+  // The attachment is its own visible step, never only in collapsed help: the authoring prompt depends on it.
+  assert.equal(mission('author').steps[2].title, 'Attach the process to a new Preview chat');
+  for (const copy of copies(mission('author').steps[2].instruction)) {
+    assert.match(copy, /Once the save finishes and the page settles, open \*\*Preview\*\* and select \*\*New chat\*\*/);
+    assert.match(copy, /attach only `project-intake-process-v2\.docx` to this conversation/);
+  }
+  assert.match(mission('author').steps[3].instruction, /In the same \*\*Preview chat\*\*, with the document attached/);
 });
 
 test('skills lab checks proposal artifacts rather than relying on chat caveats', () => {
@@ -79,7 +85,7 @@ test('skills lab retains pacing, conditional repair, and safety boundaries', () 
   assert.equal(missions.filter(item => !item.optional).reduce((sum, item) => sum + item.minutes, 0), 30);
   assert.equal(page.data.duration, 30);
   for (const item of missions) assert.equal(item.check.options.filter(option => option.correct).length, 1);
-  assert.match(mission('author').steps[14].instruction, /If both tests pass, record the result and stop/);
+  assert.match(mission('author').steps[15].instruction, /If both tests pass, record the result and stop/);
   assert.match(mission('explore').steps[3].prompt, /Do not install packages, make network requests, run active-safe probes/);
   assert.match(page.data.mission_lab.finish.cleanup, /No publishing, scheduled jobs, or customer sends/);
 });

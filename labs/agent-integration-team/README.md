@@ -60,7 +60,7 @@ Create the customer-facing agent without specialist data. **Outcome:** an adviso
 
 ### Create your own coordinator
 
-1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and confirm your assigned environment. If **Welcome from your admin** appears, review the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss **Find your environments here** with **Got it** if shown.
+1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and confirm your assigned environment.
 2. Select **Home → Agent**, described as **Create an agent to take actions and answer questions**. This opens the **Microsoft Copilot harness → Build**. Enter **Zava Operations Assistant** in **Name your agent**. To change a saved name, use **Rename agent** in the header (some versions show **Edit name**) and confirm the edit.
 3. Use the agent names exactly as written; display names have a **30-character limit**. If only the Standard harness is available, stop and ask the facilitator.
 4. Under **Tools**, select **Remove Work IQ → Remove** if present. Under **Knowledge**, select the **X** beside **Search all websites** if present; that removes it without the same confirmation dialog. Remove only attachments on your new agent, never underlying connections or tenant settings.

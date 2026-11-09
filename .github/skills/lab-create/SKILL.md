@@ -136,7 +136,8 @@ Then:
      that allowlist and add a contract test for the new lab modeled on the Zava Sales
      tests (prompts verbatim in all copies, copies in sync, mission contract).
    - The `instruction` must be enough on its own; `help` is supplementary regardless of
-     whether the current renderer opens or collapses it. The renderer reads missions from
+     whether the current renderer opens or collapses it. An action a later step depends
+     on, such as attaching a file the next prompt reads, gets its own visible step. The renderer reads missions from
      `mission_lab` front matter, so learner-critical guidance in the Markdown body alone
      may not appear on the page. Verify the rendered version and open each details panel.
    - The layout keeps checkmarks, quiz answers and the `reflection` note only in the

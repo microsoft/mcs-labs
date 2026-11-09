@@ -45,7 +45,7 @@ mission_lab:
       steps:
         - title: "Choose the Standard creation path"
           instruction: "Open [Copilot Studio](https://copilotstudio.microsoft.com), select **Agents → More create options** beside **New agent**, then **Other ways to build → Agent (Standard)**, described as **Create an agent with predefined rules and flows**."
-          help: "On first sign-in, accept the terms in **Welcome from your admin** and select **Close**; dismiss **Find your environments here** with **Got it** if shown. Read and dismiss **New name, same harness** if it appears. The top Agent option, badged **GitHub Copilot** (or **Microsoft Copilot** where the rename has rolled out), is not Standard."
+          help: "The top Agent option, badged **GitHub Copilot** (or **Microsoft Copilot** where the rename has rolled out), is not Standard."
         - title: "Name and provision the agent"
           instruction: "Enter the name in **Name your agent**, then select **Create**. Add your initials if the name already exists. Wait for **Your agent has been provisioned.** and the **Overview** page; this can take a minute or two."
           prompt_label: Name your agent · field value, not chat
@@ -506,8 +506,8 @@ Configure, Author, Ground and Extend take about 30 minutes; Inspect, Delegate an
 
 Leave with a provisioned agent, saved instructions, a chosen model and a cited first answer.
 
-1. Open [Copilot Studio](https://copilotstudio.microsoft.com). On first sign-in, accept terms in **Welcome from your admin → Close** and dismiss **Find your environments here → Got it**, if shown.
-2. Select **Agents → More create options** beside **New agent → Other ways to build → Agent (Standard)**, described as **Create an agent with predefined rules and flows**. Read and dismiss **New name, same harness**, if shown. The top option, badged **GitHub Copilot** (or **Microsoft Copilot** where the rename has rolled out), is not Standard.
+1. Open [Copilot Studio](https://copilotstudio.microsoft.com).
+2. Select **Agents → More create options** beside **New agent → Other ways to build → Agent (Standard)**, described as **Create an agent with predefined rules and flows**. The top option, badged **GitHub Copilot** (or **Microsoft Copilot** where the rename has rolled out), is not Standard.
 3. Enter this field value in **Name your agent**, then select **Create**. Add your initials if the name exists. Wait a minute or two for **Your agent has been provisioned.** and **Overview**.
 
 ```text
