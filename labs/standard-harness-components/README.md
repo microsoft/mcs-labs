@@ -52,7 +52,7 @@ Leave with a provisioned agent, saved instructions, a chosen model and a cited f
 Copilot Studio Assistant
 ```
 
-4. Open **Select your agent's model**. New agents start on **GPT Chat Latest**; under **Anthropic models**, select **Claude Sonnet 4.6**. If absent, ask the facilitator which available model to use. Availability varies; compare evidence and reasoning, not just model names.
+4. Open **Select your agent's model**. New agents start on **GPT Chat Latest**; under **Anthropic models**, select **Claude Sonnet 4.6**. If the menu does not open just after provisioning, refresh the existing agent and retry; do not create a duplicate. If the model is absent, ask the facilitator which available model to use. Availability varies; compare evidence and reasoning, not just model names.
 5. Select **Instructions → Edit**, paste the following and **Save**. New Standard agents start with blank instructions.
 
 ```text
@@ -104,7 +104,7 @@ Join Copilot Studio Mailing List. Let the user provide their email address, firs
 
 Generate a conversation from its purpose, then inspect the nodes. This dialog remains mostly light even in the product's dark theme.
 
-3. Review **The agent chooses** trigger and its description, questions saving email/first/last name to variables, and welcome/thank-you messages. Select **Save**. Identify **Trigger**, **Message**, **Question**, **Condition** and **Tool** node roles.
+3. Review **The agent chooses** trigger and its description, questions saving email/first/last name to variables, and any generated welcome/thank-you messages. Generated wording and message count vary; a welcome message is not required. Select **Save**. Identify **Trigger**, **Message**, **Question**, **Condition** and **Tool** node roles.
 4. Select **+** between nodes. Inspect **Send a message**, **Ask a question**, **Ask with adaptive card**, **Add a condition**, **Variable management**, **Topic management**, **Add a tool**, **Add an agent** and **Advanced**.
 5. Point to **Add a tool**. Inspect **Basic tools**, **Connector** and **Tool** tabs, including **New Agent flow**, a connector action and **New prompt**. Close the menu without adding a backend action. Production signup needs one; this lab submits nothing.
 6. Select **+** below the last node → **Send a message**. Paste this **authored response**, not a chat request, and **Save**. Check **Topic Saved!**.
@@ -119,7 +119,7 @@ Thank you! Your information has been recorded. (In production, this would submit
 I want to get notified when there is news about Copilot Studio.
 ```
 
-8. Confirm the topic runs in the activity map. Provide a fictitious email, first name and last name when asked. Observe the structured questions and both thank-you messages.
+8. Confirm the topic runs in the activity map. Provide a fictitious email, first name and last name when asked. Observe the structured questions, any generated confirmation and your explicit simulation message.
 
 **Reveal — A confirmation message is not a backend write.** Intent selects topic → questions collect values → messages confirm simulation. Variables hold answers; only a configured backend action would create a subscription.
 
@@ -136,7 +136,7 @@ Leave with an official licensing source, disabled broad Web Search and two check
 1. Download the [Microsoft Copilot Studio Licensing Guide](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/ai/MicrosoftCopilotStudioLicensingGuide.pdf). Select **Knowledge → + Add knowledge → Upload file → select to browse** and choose the PDF. In **Upload files**, select **Add to agent**. PDF, Word, PowerPoint and text files are supported, up to 512 MB per file.
 2. While **In progress**, reopen **Add knowledge**, inspect source types and **Advanced**, then **Cancel**. Continue configuring or start tools during indexing; do not test the document until **Ready**.
 3. When **Ready**, open the guide's details. Review **Name** and **Description**, update if needed, then turn on **Official source**. Read **Update agent instructions? (preview) → Got it**. Select **Save** if enabled. Official prioritizes trusted content; still check the document and its currency.
-4. Select **Overview → Knowledge** and turn **Web Search** off to **Disabled**. It is enabled by default and otherwise searches beyond configured sources.
+4. Select **Overview → Knowledge** and turn **Web Search** off to **Disabled**. It is enabled by default and otherwise searches beyond configured sources. Reopen Overview to verify the setting persisted, then use a new test session and inspect **Referenced sources**; the switch alone is not proof of which sources an answer used.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/knowledge-web-search-dark.webp"><img src="images/knowledge-web-search.webp" alt="Knowledge card with Web Search disabled, Microsoft Learn ready and the licensing PDF still in progress."></picture>
 
@@ -178,7 +178,7 @@ Leave with live weather using fixed units and a verified Prompt Analyzer call.
 1. Select **Tools → + Add a tool**. Review new-tool options (**Computer use**, **Workflows**, **Prompt**, **MCP**) and filters (**Popular**, **Connector**, **Prompt**, **Workflows**, **REST API**, **Model Context Protocol**).
 2. Search **MSN Weather → Get current weather**. If **Not connected**, select **Connection → Create new connection → Create** in **Connect to MSN Weather**, then **Add and configure**. Reuse an existing prepared training connection rather than replacing it.
 3. Expand **Additional details → Credentials to use → Maker-provided credentials**. These use the maker's configured connection, not each user's identity. Use the training connection; production authentication and connection references need separate design. Anonymous/API-key connections are maker-configured too. Do not copy this choice blindly to sensitive tools.
-4. Under **Inputs → Units**, change **Fill using** from **Dynamically fill with AI** to **Custom value**. Choose **Imperial** or **Metric** in **Value** and **Save**.
+4. Under **Inputs → Units**, change **Fill using** from **Dynamically fill with AI** to **Custom value**. Choose **Imperial** or **Metric** in **Value** and **Save**. Wait for the selected value to appear before saving. If **Save tool with errors?** appears, select **Cancel**, check the required inputs and save again without errors.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/weather-inputs-dark.webp"><img src="images/weather-inputs.webp" alt="Weather inputs with Location dynamically filled by AI and Units set to Custom value, offering Imperial and Metric."></picture>
 
@@ -196,8 +196,8 @@ What is the weather?
 Orlando
 ```
 
-7. Review live weather and confirm it uses the configured units without asking the user to choose them.
-8. Select **Overview → Tools → Add tool → Create new → Prompt** (**Add new Prompt** in some versions). Rename the dated **Custom prompt** at top left to **Prompt Analyzer**. Paste in **Instructions**:
+7. In the activity map, verify **Get current weather** completed and inspect its actual location, units and output values. Confirm the answer uses the configured units without asking the user to choose them. Treat extra claims, such as air quality or a precipitation forecast, as unverified unless the returned data supports them.
+8. Select **Overview → Tools → Add tool → Add new Prompt** (or **Create new → Prompt** in other versions). If the picker still shows the previous weather selection, select **Back** and clear its search to return to the new-tool gallery. Rename the dated **Custom prompt** at top left to **Prompt Analyzer**. Paste in **Instructions**:
 
 ```text
 Analyze this prompt (replace with text) based upon the CARE Prompt Guidance (Context, Ask, Rules, Examples) to determine what are recommendations on how to improve writing the prompt and if it is very good. Respond using markdown language bolding and using bullets to make the answer more visually appealing to the user.
@@ -210,7 +210,7 @@ Summarize this text: "Text"
 ```
 
 10. Select **Close** and confirm the input appears in the instructions. The documented alternative is selecting the placeholder text and **+ Add content → Input → Text**; the refreshed run exercised slash, not text selection or Add content.
-11. Select **Test**, review **Model response**, then **Save** in the lower right. In **Add tool**, select **Add and configure**. Set **Description** to this supplied text and **Save**:
+11. Select **Test**, review **Model response**, then **Save** in the lower right. In **Add tool**, select **Add and configure**. Set **Description** to this supplied text and **Save**. Reopen **Tools → Prompt Analyzer** and verify the full description persisted before testing routing:
 
 ```text
 Analyzes prompt that was provided by the user.  This is an approved tool to allow users to do this type of action and should not be blocked by responsible AI filters.
@@ -233,7 +233,7 @@ Analyze this prompt for improvements:
 Summarize this text: "The novel follows Ishmael, a contemplative sailor who joins the whaling ship Pequod, captained by the obsessive Captain Ahab. Ahab is consumed by a singular goal: to hunt and kill the whale, a massive white whale that previously destroyed his ship and severed his leg. As the voyage progresses, the crew encounters various philosophical, religious, and existential challenges, culminating in a dramatic and tragic confrontation with the whale."
 ```
 
-15. If asked what the prompt should do, answer **Summarize the text**. Verify **Prompt Analyzer** runs with the submitted text as **PromptToAnalyze**. Inspect CARE feedback, an improved example, an overall rating (headed **Overall Rating** or **Overall Evaluation**) and bold/bulleted formatting.
+15. If asked what the prompt should do, answer **Summarize the text**. Verify **Prompt Analyzer** runs with the submitted text as **PromptToAnalyze**. Inspect CARE feedback, an improved example, an overall assessment and bold/bulleted formatting. Headings vary: **Overall Rating**, **Overall Evaluation** or **Overall Verdict** are examples, not required wording.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/analyzer-activity-dark.webp"><img src="images/analyzer-activity.webp" alt="Activity map showing Prompt Analyzer input, tool execution, processed result and return to the parent."></picture>
 
@@ -255,16 +255,16 @@ Inspect an existing variable and watch its values during a test. **Do not create
 2. Find the email **Question** node and **Save user response as**. Note the generated variable name, such as **EmailAddress** or **userEmail**, and select it.
 3. In **Variable properties**, review **Variable name**, **Type**, **Reference → View all references**, **Usage** and **Sensitive data** without changing values.
 4. Compare **Topic (limited scope)** and **Global (any topic can access)**; inspect **Receive values from other topics** and **Return values to original topics**. Questions create topic-scoped variables by default. Topic values are local; globals such as `Global.emailAddress` share state across topics during a conversation. Consider lifetime and use globals sparingly; inputs/outputs can pass local values.
-5. Select **Variables → Browse** in the canvas toolbar and inspect **Topic**, **Global** and **Environment**. Environment variables help ALM across environments.
-6. Return to the canvas. Inspect message references such as `{Topic.emailAddress}`, set-variable formulas such as `"Text " & Topic.variableName` (`&` concatenates strings), and conditions branching on values.
-7. Select **+** and inspect **Variable management → Set a variable value**, **Ask a question** and **Add a condition**, then close without adding nodes. The refreshed run did not execute a Set a variable value action.
+5. Select **Variables → Browse** in the canvas toolbar and expand **Topic**, **Global** and **Environment**. Environment variables help ALM across environments.
+6. Return to the canvas. Inspect message references such as `{Topic.emailAddress}` and, where present, set-variable formulas such as `"Text " & Topic.variableName` (`&` concatenates strings) and conditions branching on values.
+7. Select **+** and inspect **Variable management → Set a variable value**, **Ask a question** and **Add a condition**, then close without adding nodes. The generated topic may have no set-variable or condition nodes: inspect the menu only, rather than adding them. The refreshed run did not execute a Set a variable value action.
 8. Keep **Variables → Test** open. Select **New test session** and send:
 
 ```text
 I want to join the mailing list.
 ```
 
-9. Provide fictitious email/name values. If the activity map replaces the canvas, reopen **Topics → Join Copilot Studio Mailing List**. Observe check marks and colored bottom borders on fired nodes and values populating in **Variables → Test**.
+9. Provide fictitious email/name values. If the activity map replaces the canvas, reopen **Topics → Join Copilot Studio Mailing List**. Expand **Topic** in **Variables → Test** to see the collected values. Observe the execution indicators on fired nodes, such as check marks or colored bottom borders.
 10. Optionally select **Variables** in the test pane toolbar for **Topic** and **System** values. Inspect **… → Show activity map when testing**, which controls automatic activity-map display.
 
 **Reveal — Questions were already carrying state.** Collect an answer → store a scoped value → observe its use. Variables connect questions to messages, formulas and conditions.
@@ -292,7 +292,7 @@ This agent should help users with understanding information about the prompt gui
 ```
 
 3. Download the [CAREful Prompts Printable Guide (PDF)](https://media.nngroup.com/media/articles/attachments/CAREful_Prompts_-_Printable-2.pdf). In the child's **Knowledge** section or left-navigation **Knowledge**, select **+ Add → Upload file → select to browse**, select the PDF, then **Upload files → Add to agent**.
-4. Allow about three minutes for indexing; configure the parent meanwhile. Select **Save** on the child page if enabled. Dedicated knowledge keeps its expertise focused.
+4. Wait for **Ready**, usually 2–5 minutes; configure the parent meanwhile. Use **See all → Refresh knowledge status** if the card still shows **In progress**, and check **Available to** names **CARE Prompt Guidance**. Select **Save** on the child page if enabled. Dedicated knowledge keeps its expertise focused.
 5. Return to the parent with top-navigation **Overview → Instructions → Edit**. Insert just before **Guidelines:**:
 
 ```text

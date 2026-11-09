@@ -191,7 +191,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
    ![Trigger search for to-do listing When a new to-do in a specific folder is created under Microsoft To-Do (Business)](images/uc1-trigger-connector-search.webp)
 
-5. Open the **Connection** dropdown, select **Create new connection**, then **Create**, and sign in with your lab account. In **To-do list**, select **Tasks**. The node's **Needs setup** badge clears, and the workflow now fires automatically whenever a task is added to that list.
+5. In **Connection**, wait for your lab-account connection to resolve and reuse it. Only if it is missing or incorrect, select **Create new connection → Create** and sign in with your lab account. In **To-do list**, select **Tasks**. The node's **Needs setup** badge clears, and the published workflow fires automatically whenever a task is added to that list.
 
    > [!TIP]
    > If the list picker initially appears empty, type **Tasks** and select the matching option or press **Enter** to commit the selection. Confirm the **Needs setup** badge disappears before continuing.
@@ -332,10 +332,10 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 > [!IMPORTANT]
 > **Verify the connections first.** The workflow must have valid node connections before it can be published or tested. They may already be configured correctly — inspect them first.
 
-1. In **Copilot Studio**, navigate to **Workflows**, open the starter **Order Management Workflow**, and select **Build**. In the designer header, select **More options** > **Create a copy**. Keep the default **Title**, **Order Management Workflow - Copy**, and select **Create**; if a confirmation offers **Open workflow**, select it. The copy opens in a **new browser tab**. Continue only in that copy, leaving the original unchanged.
+1. In **Copilot Studio → Workflows**, confirm **Order Management Workflow** is assigned to you and its **Owner** is your signed-in lab account, then open **Build**. Start with that prepared workflow; do not copy by default. Inspect **Publish** without publishing. If it reports **Only the flow's owner can publish or test this flow**, stop direct testing even if the list names you as Owner. For your assigned starter only, use the designer header's **More options → Create a copy**, retain **Order Management Workflow - Copy**, and select **Create → Open workflow** if offered. Continue in the new tab and repeat all connection and dispatch checks. If ownership or assignment is uncertain, ask the proctor; never edit, copy, or take ownership of another attendee's asset.
 
    > [!NOTE]
-   > Use the designer header menu, not the list row's **More actions** menu, which may offer only **Delete**. In the copy, you'll see **When a new email arrives**, **Classify**, and the category branches. References to the Order Management workflow below mean your copy.
+   > The owner-only mismatch was reproduced in the 9 November fresh-account mission-lab run; this is a shared correction, not a full classic-lab rerun. The fallback uses the designer header, not the list row's **More actions**, which may offer only **Delete**. Leave an original that you copied disabled. References below mean the owned workflow you can author, whether prepared or copied.
 
    ![The Order Management Workflow open in the canvas designer](../mcs-workflows/images/order-management-workflow-overview.png)
 
@@ -347,7 +347,7 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 
 3. Select **When a new email arrives**. Keep the existing **Subject filter** token, displayed as **string**. Hover over it to inspect `string('Order Management')`: the subject must contain "Order Management".
 
-   Select **Add advanced parameter** > **From**. Enter your own signed-in lab account in the people picker and resolve the matching entry. This restricts the copy to test messages from you, rather than other people's email. Keep this sender restriction for all subsequent tests.
+   Select **Add advanced parameter** > **From**. Enter your own signed-in lab account in the people picker and resolve the matching entry. This restricts the workflow to test messages from you, rather than other people's email. Keep this sender restriction for all subsequent tests.
 
    > [!IMPORTANT]
    > Keep this filter in mind when testing: every test email you send **must include "Order Management" in the subject line**, or the workflow will not trigger. This is a common source of confusion when tests "don't seem to work."
@@ -376,7 +376,7 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 
    ![Classify Run node panel with the sample Body input and Quote Request output; downstream nodes have not executed](images/classify-quote-result.webp)
 
-6. Confirm the review and reply recipients resolve only to your lab account. Select **Save** (or press **Ctrl+S**), then **Publish**. Publishing enables the copy, so confirm its **Enabled** state on **Workflows** and send only the intended self-addressed tests.
+6. Confirm the review and reply recipients resolve only to your lab account. Select **Save** (or press **Ctrl+S**), then **Publish**. Wait for **Published**, then confirm **Enabled** on **Workflows** before sending only the intended self-addressed tests. A click or **Publishing…** is not completion.
 
 #### Test the "Other" classification path end-to-end
 
@@ -420,7 +420,7 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 
    ![Executed Other branch leading to a successful Archive email action](images/other-path-succeeded.webp)
 
-   The run diagram confirms the action executed; separately verify the actual email in **Archive**. If stopping here, disable your copy and reload to verify it stays off. Otherwise continue to Use Case #3.
+   The run diagram confirms the action executed; separately verify the actual email in **Archive**. If stopping here, disable your workflow and reload to verify it stays off. Otherwise continue to Use Case #3.
 
 ---
 
@@ -450,7 +450,7 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
 #### Inspect the Customer Inquiry branch
 
-1. In **Copilot Studio**, open your published Order Management copy and select **Classify**. Locate the **Customer Inquiry** branch and its draft-and-review sequence. If you previously disabled the copy and it now shows **Draft**, return to **Build** and **Publish** when ready to resume testing; the list switch alone may not re-enable it.
+1. In **Copilot Studio**, open your published Order Management workflow and select **Classify**. Locate the **Customer Inquiry** branch and its draft-and-review sequence. If you previously disabled the workflow and it now shows **Draft**, return to **Build** and **Publish** when ready to resume testing; the list switch alone may not re-enable it.
 
 2. Select the **Copilot** node in that branch. Review the prompt and confirm it uses the **Customer question** input based on the incoming email body. This is the grounded draft-generation step that prepares the proposed response for the reviewer. The prompt asks M365 Copilot to read the customer's question, search the existing email threads of the user that owns the node connection (you) for any prior context or earlier reply on the same topic, and then draft a complete, ready-to-send reply — answering clearly when it finds an answer, or writing a brief holding response when it can't (without inventing product facts), always addressed "Dear Customer," and signed off as "Contoso Electronics Order Management".
 
@@ -520,7 +520,7 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
      <a href="../mcs-workflows/images/customer-inquiry-human-request-waiting.png"><img src="../mcs-workflows/images/customer-inquiry-human-request-waiting.png" alt="The Human review node configuration for the approval request" width="313" class="align-center"></a>
    </p>
 
-8. Go to **Outlook** and open **Action Needed: Review Customer Enquiry Reply**. Read the proposed reply and check that it does not invent unsupported product details. Choose **Yes** under **Send proposed reply?**, then select **Submit**. Confirm **Your response has been successfully submitted**.
+8. Go to **Outlook** and open **Action Needed: Review Customer Enquiry Reply**. Read the proposed reply and check that it does not invent unsupported product details. Choose **Yes** under **Approve** (the configured question is **Send proposed reply?**), then select **Submit**. Confirm **Your response has been successfully submitted**. For an unsafe draft, choose **No → Submit**, verify the original is flagged and **Reply to email** is skipped, and ask the proctor to inspect it; rejection does not complete the approved-reply outcome.
 
    > [!NOTE]
    > The approval card is an **actionable message**, so Outlook renders the Yes/No choice and a **Submit** button inside the email itself — approving is two clicks (pick **Yes**, then **Submit**), not one. Outlook may also show a **Trust sender** prompt above the card; the card still works without actioning it.
@@ -539,7 +539,7 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
    Verify both the delivered email and the successful run. **Flag email** and **Archive email** are skipped on this approved path; that is expected, not a failure.
 
-10. Turn off **Enabled** for your Order Management copy and reload **Workflows** to confirm it remains off. It may now show **Draft**, an unchecked disabled switch, and **This workflow hasn't been published and can't be enabled from this list.** If intentionally resuming later, return to **Build** > **Publish** after checking the sender and recipient restrictions. Complete [Clean Up](#-clean-up).
+10. Turn off **Enabled** for your Order Management workflow, wait for **Workflow disabled**, and reload **Workflows** to confirm it remains off. It may now show **Draft**, an unchecked disabled switch, and **This workflow hasn't been published and can't be enabled from this list.** If intentionally resuming later, return to **Build** > **Publish** after checking the sender and recipient restrictions. Complete [Clean Up](#-clean-up).
 
 ---
 
@@ -776,8 +776,8 @@ Publish the **Price Quote Agent**, configure the **Quote Request** path to use i
 
 3. **Confirm each MCP tool lists its operations.** Open **Tools > Mail**, then **Tools > Microsoft Dataverse MCP Server**, and check each panel:
 
-   - **Connection** — if it shows **Not Connected**, select **Create new connection > Create** and **Confirm**, signing in with your lab account.
-   - **Tools / Inputs** — this must list the operations the server exposes. **Mail** should show operations such as **Add draft attachments**, **Update draft**, and **Send email with attachments**; **Microsoft Dataverse MCP Server** should show **Read query**, **Create record**, and **Update record** (operation identifiers `read_query`, `create_record`, and `update_record`).
+   - **Connection** — if it shows **Not Connected**, select **Create new connection > Create** and **Confirm**, signing in with your lab account. Wait for operations to load before choosing **Done**.
+   - **Tools / Inputs** — this must list the operations the server exposes. The current **Mail** tool includes **Send draft message**, **Reply to message**, and **Search messages**; labels can differ by connector version. **Microsoft Dataverse MCP Server** should show **Read query**, **Create record**, and **Update record** (operation identifiers `read_query`, `create_record`, and `update_record`).
 
    If both panels already list operations, keep the existing tools and connections. If either reads **"No tools found"**, remove only that tool from the agent's **Tools** list, choose **Add tool**, open **Model Context Protocol (MCP)**, pick the same server, then **Save and publish**. Reopen the tool to verify its operations before continuing.
 
@@ -895,7 +895,7 @@ You've connected a workflow branch to a published agent that blends knowledge, d
 
 ## 🧹 Clean Up
 
-1. On **Workflows**, turn off **Enabled** for each workflow you enabled: your Order Management copy and, only if you completed Use Case #1, your To Do Time Block workflow. Reload and verify they remain off. Do not change the original starter or anyone else's workflow. If a disabled copy becomes **Draft**, leave it that way; to resume deliberately, open **Build** > **Publish** rather than relying on the list switch.
+1. On **Workflows**, turn off **Enabled** only for workflows you enabled: your Order Management workflow and, only if you completed Use Case #1, your To Do Time Block workflow. Wait for **Workflow disabled**, reload, and verify they remain off. Leave any unused original, other labs' workflows, and anyone else's assets unchanged. If a disabled workflow becomes **Draft**, leave it that way; to resume deliberately, open **Build** > **Publish** rather than relying on the list switch.
 2. Inspect **Activity** for any runs still **Running** or **Waiting**. Disabling a trigger prevents new runs; it does not prove existing runs stopped. Finish your test approvals or cancel your unfinished runs before leaving. Ask your facilitator for help if a run cannot be stopped.
 3. Remove your test calendar block, test To Do task, test emails, approval requests, and drafts when no longer needed. If you completed the inventory extra credit, remove only the Dataverse Task row created by your test.
 4. Leave shared starter workflows, agents, connections, MCP servers, knowledge, and sample records in place. Record **Credit usage (last 30 days)** from the **Workflows** page if available; this is a rolling total, not the cost of this individual test.

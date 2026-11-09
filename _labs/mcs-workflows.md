@@ -652,7 +652,7 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
    ![The Human review node configuration for the approval request](images/customer-inquiry-human-request-waiting.png)
 
-8. Go to **Outlook** and open the incoming approval email. It arrives from **Microsoft Power Automate** with the subject **"Action Needed: Review Customer Enquiry Reply"** and opens *"Dear reviewer, A customer inquiry has come in…"*. Review the proposed M365 Copilot reply, choose **Yes** under **Send proposed reply?**, and select **Submit**.
+8. Go to **Outlook** and open the incoming approval email. It arrives from **Microsoft Power Automate** with the subject **"Action Needed: Review Customer Enquiry Reply"** and opens *"Dear reviewer, A customer inquiry has come in…"*. Review the proposed M365 Copilot reply, choose **Yes** under **Approve** (the configured question is **Send proposed reply?**), and select **Submit**.
 
    > [!NOTE]
    > The approval card is an **actionable message**, so Outlook renders the Yes/No choice and a **Submit** button inside the email itself — approving is two clicks (pick **Yes**, then **Submit**), not one. Outlook may also show a **Trust sender** prompt above the card; the card still works without actioning it.
@@ -898,8 +898,8 @@ Publish the **Price Quote Agent**, configure the **Quote Request** path to use i
 
 3. **Confirm each MCP tool lists its operations.** Open **Tools > Mail**, then **Tools > Microsoft Dataverse MCP Server**, and check each panel:
 
-   - **Connection** — if it shows **Not Connected**, select **Create new connection > Create** and **Confirm**, signing in with your lab account.
-   - **Tools / Inputs** — this must list the operations the server exposes. **Mail** should show operations such as **Add draft attachments**, **Update draft**, and **Send email with attachments**; **Microsoft Dataverse MCP Server** should show **Read query**, **Create record**, and **Update record** (operation identifiers `read_query`, `create_record`, and `update_record`).
+   - **Connection** — if it shows **Not Connected**, select **Create new connection > Create** and **Confirm**, signing in with your lab account. Wait for operations to load before choosing **Done**.
+   - **Tools / Inputs** — this must list the operations the server exposes. The current **Mail** tool includes **Send draft message**, **Reply to message**, and **Search messages**; labels can differ by connector version. **Microsoft Dataverse MCP Server** should show **Read query**, **Create record**, and **Update record** (operation identifiers `read_query`, `create_record`, and `update_record`).
 
    If both panels already list operations, keep the existing tools and connections. If either reads **"No tools found"**, first check the connection reference and tenant availability described below. If still unresolved, remove only that tool from the agent's **Tools** list, choose **Add tool**, open **Model Context Protocol (MCP)**, pick the same server, then **Save and publish**. Reopen the tool to verify its operations before continuing.
 

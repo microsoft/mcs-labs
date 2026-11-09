@@ -56,12 +56,12 @@ RFP Response Agent
 <details>
 <summary>Another route to the same agent</summary>
 
-Open **Agents → More create options** beside **New agent**, then choose the **Agent** option for the Microsoft Copilot harness. Avoid the plain **New agent** button for this lab. Check the **Agent harness** column in the list. Older badges can retain the former harness name; a **New name, same harness** notice explains the rename.
+Open **Agents → More create options** beside **New agent**, then choose the **Agent** option for the Microsoft Copilot harness. Avoid the plain **New agent** button for this lab. Check the **Agent harness** or **Powered by** column in the list. Older badges can retain the former harness name; a **New name, same harness** notice explains the rename.
 
 </details>
 
 3. Inspect the right-hand components panel: **Model**, **Channels**, **Skills**, **Tools**, **Knowledge**, **Connected agents**, and **Memory**. **Skills** sits above Tools and Knowledge: it carries the playbook for when and how those components are used. A new agent already has **Work IQ** and **Search all websites**; do not add extra connectors.
-4. Select **Work IQ** under **Tools**. In **Edit tool**, check the green connection check and review **SharePoint**, **OneDrive**, **Outlook mail**, **Teams**, **Calendar**, and **People**. If not connected, open **Connection** and sign in with your lab account. Select **Done**. Work IQ uses that identity's Microsoft 365 data; it does not grant new permissions.
+4. Select **Work IQ** under **Tools**. In **Edit tool**, check the green connection check and review **SharePoint**, **OneDrive**, **Outlook mail**, **Teams**, **Calendar**, and **People**. If not connected, open **Connection** and sign in with your lab account. Select **Done** when enabled. If you only inspected the existing connection and **Done** is disabled, use **Cancel**; discard only that unchanged tool review if prompted. Work IQ uses that identity's Microsoft 365 data; it does not grant new permissions.
 
 **If Work IQ is missing:** Select **+** beside **Tools**, search for `Work IQ`, select the **MCP** tab, then **Work IQ**. Ask your facilitator if access is missing; do not switch to a production identity.
 
@@ -98,7 +98,7 @@ Ask a clarifying question when the request is ambiguous. Keep answers concise un
 
 The package describes fictional **Aventra Software Group**, so Aventra appears in output despite the instructions saying “our organization.” Replace those references with approved company material for real deployment. Uploads accept `SKILL.md` or a ZIP containing it, with YAML **name** and **description** fields. **Create from blank** is a separate authoring option.
 
-Uploading saves the agent: its URL changes from `/agents/new` to a permanent ID, and **Evaluate** and **Monitor** become available. Use **Save** after later changes if needed.
+Uploading gives the agent a permanent ID and makes **Evaluate** and **Monitor** available, but this alone does not confirm that all configuration is saved. Select **Save** if enabled and wait for **Your agent has been saved.** before opening Preview. The **Draft** badge can remain on a saved, unpublished agent.
 
 3. Select the **rfp-response** chip. Inspect the package tree (16 files in the reference package), selected-file size, and `SKILL.md`. Read **Name**, **Description**, and **Instructions**. Notice phrases such as “respond to this RFP,” “draft our bid,” and “answer these vendor questions.”
 
@@ -141,7 +141,7 @@ The sample's fixed submission date has passed; a deadline warning is careful beh
 
 5. Let the run finish. The reference draft-plus-PDF run took about four minutes for a nine-page proposal. Read the summary: matched offering, fee, duration, buyer-scoring structure, and numbered requests for your input.
 6. Select the Markdown and PDF file chips to download and open both proposals. Names such as `westbrook-WB-2026-031-proposal.md` and `westbrook-WB-2026-031-proposal.pdf` vary by run.
-7. Check that unsupported experience with Esri ArcGIS, Tyler, or Okta is not invented, and unresolved hosting/support pricing is marked **NEEDS SME INPUT** instead of fabricated. Review certifications and commercial numbers before sharing. Wording, figures, page count, and timing can differ.
+7. Check that unsupported experience with Esri ArcGIS, Tyler, or Okta is not invented, and unresolved hosting/support pricing is marked **NEEDS SME INPUT** instead of fabricated. Review certifications, commercial numbers, submission-date placeholders, and internal section references in both files before sharing. A warning in chat does not fix a placeholder or broken reference inside the proposal. PDF rendering may use a different installed library and layout; inspect the actual file. Wording, figures, page count, and timing can differ.
 
 **Reveal — Why did the Skill load without being named?** The orchestrator matched the request to its description. The playbook directs it toward approved evidence and gaps; that is guidance, not a guarantee. A promised file is not an attachment, and confident wording is not a verified commitment.
 
@@ -199,7 +199,7 @@ Do not regenerate the proposal, install packages, call external services, or inv
 2. Create a separate **Home → Agent** on the **Microsoft Copilot harness** named **Project Process Assistant**. Do not reuse the RFP agent.
 3. Leave **Build → Instructions empty**; clear generated instructions if present. Do not add intake instructions, Skills, or connectors yet. Pre-attached **Work IQ** and **Search all websites** may stay.
 4. Under **Model**, select a reasoning-capable model such as **Claude Opus 5.5**, if offered. Ask your facilitator which model to use if it is missing.
-5. In **Preview → New chat**, use **+ → Upload images and files** to attach only `project-intake-process-v2.docx`.
+5. Select **Save** and let the first save finish; it can return you to **Build**. Reopen **Preview** only after that navigation settles. In **Preview → New chat**, use **+ → Upload images and files** to attach only `project-intake-process-v2.docx`, then enter the authoring prompt.
 
 These are fictional source documents, not a ready-made Skill. The procedure collects **business goal, intended users, desired outcome, and target date**, reuses supplied answers, accepts unknowns, asks one missing question at a time, and requests confirmation. Skills can guide conversations like topics, but do not replace deterministic ordering, validation, or branching.
 
@@ -347,7 +347,7 @@ Inspect the harness. Use the Skill's passive probes only. Report the observed Py
 ```
 
 5. Check **Used skill: agent-harness-explorer** and the `harness-report.html` attachment, usually produced in under a minute in the reference run. Download and open it. Check that it describes this run's observations, not a generic platform feature list. Capture errors rather than counting unexecuted probes as success.
-6. Send this in the **same Preview chat** and inspect the package names and versions:
+6. Send this in the **same Preview chat** and inspect the package names and versions. Installed-package metadata is not an import or rendering test. Flag absolute capability claims that the snapshot did not test.
 
 ```text
 Based on this snapshot, which installed libraries could create a chart like our RFP evaluation-weight chart, and which could help read documents or create PDFs? For each recommendation, give the observed package name and version, its purpose, and any unverified capability. Do not install or assume missing packages.
@@ -356,10 +356,10 @@ Based on this snapshot, which installed libraries could create a chart like our 
 7. Optionally send this in the same chat:
 
 ```text
-Export the latest snapshot.
+Export the latest snapshot as JSON and Markdown.
 ```
 
-Download the JSON and Markdown exports. You may provide the report to an authoring chat as supporting context; **do not share reports containing sensitive information**. It is a snapshot of this agent's observed runtime, not a guarantee about another agent, tenant, future session, or tool permission.
+Ask for both formats explicitly: a generic export request may return JSON only. Download the JSON and Markdown exports rather than assuming memory retained the snapshot; this agent may have no memory tool. You may provide the report to an authoring chat as supporting context; **do not share reports containing sensitive information**. It is a snapshot of this agent's observed runtime, not a guarantee about another agent, tenant, future session, or tool permission.
 
 **Reveal — Does a missing observation mean a missing feature?** Visibility and support are different questions. A Python probe cannot independently see every agent tool or MCP server. **Not visible does not mean unsupported.** Unobserved capabilities remain unverified.
 

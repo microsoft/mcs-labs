@@ -31,7 +31,7 @@ mission_lab:
   self_setup: |-
     Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Plugins > Chat > New agent > Configure** for **Skills**, following the linked licensing and skills documentation. Some versions label the entry **Agents & Plugins**. For the optional extension, prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
   validation: |-
-    **Fresh-account validation:** skill/template upload, report attachment, six disabled source switches, two five-issue briefings, checked facts and recommendation mappings, emails under 400 words, missing-evidence and no-action checks, and private creation passed. Preview repeated response content; inspect one complete email rather than concatenated copies. A claim of searching disabled sources was not independently established; all six switches were rechecked off. No approved teammate was available, so the independent handoff remains blocked. The optional Visual Studio Code / Agents Toolkit deployment was not tested.
+    **Sequential-run validation:** the hotel starter and template, report attachment, six disabled source switches, two Preview briefings and a saved-agent chat were checked. Each briefing had five issues and an email under 400 words; facts and Section 16 mappings, missing-evidence handling, no-action refusal and private saved configuration were verified. Preview repeated response content; inspect one complete email rather than concatenated copies. A claim of searching disabled sources was not independently established; all six switches were rechecked off. The saved chat's Sources panel listed two hotel-report entries under More and said there were no direct citations; the report opened for a Section 16 check, but this does not prove a retrieval trace. A separate unchanged Weekly Deal Review upload preserved its procedure, not a proven CRM or Outlook execution. No approved teammate or installed Agents Toolkit was available, so independent sharing and the optional deployment remain blocked.
   prerequisites:
     - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account in a separate browser profile or private window."
     - "Keep the lab beside Copilot and ask the facilitator if Skills or the assigned account is unavailable. Download the starter in Mission 1 and the report in Mission 3; do not skip those exercise inputs."
@@ -186,7 +186,7 @@ mission_lab:
       outcome: "A checked evidence table and unsent executive email, repeatable in a fresh chat."
       steps:
         - title: "Run the short request"
-          instruction: "At the top of Agent Builder, select **Configure**, then **Preview**. Select **Prepare hotel briefing** or paste the prompt. The suggestion only fills the box: select **Send**. Wait for the response, which can take about two minutes."
+          instruction: "At the top of Agent Builder, select **Configure**, then **Preview**. Select **Prepare hotel briefing** or paste the prompt. The suggestion only fills the box: wait until the complete request is visible in the message box, then select **Send**. If you see **Cannot send empty message.**, select the suggestion again and confirm the text before sending. Wait for the response, which can take about two minutes."
           prompt_label: Preview · briefing request
           prompt: |-
             Prepare the hotel operations briefing using the annual report.
@@ -200,19 +200,22 @@ mission_lab:
           prompt_label: Preview · missing-evidence test
           prompt: |-
             Add this month's actual revenue impact, even if the annual report does not contain it.
-        - title: "Test the human-review boundary"
-          instruction: "Send the boundary test below. Expect a refusal to send mail or create Planner tasks, with any task list clearly presented as proposals for review. Do not add an action to make this request succeed."
+        - title: "Confirm the draft-only boundary"
+          instruction: |
+            Send the boundary test below. This agent's instructions explicitly prohibit sending mail or creating Planner tasks, and no write actions are configured. Expect a refusal; any task list must remain proposals for human review.
+
+            This is an expected boundary test, not a failed email or Planner integration. Reusing a skill does not add authenticated tools. Do not add an action to make this request succeed.
           prompt_label: Preview · no-action test
           prompt: |-
             Send the briefing now and create Planner tasks for the five issues.
           screenshot:
-            title: Proposed tasks are not created tasks
+            title: "Expected result: draft-only behavior"
             src: /labs/declarative-agent-skill-reuse/images/human-review-check.webp
             src_dark: /labs/declarative-agent-skill-reuse/images/human-review-check-dark.webp
             alt: "Agent explicitly refuses to send the briefing or create Planner tasks because the workflow is review-only."
             width: 2595
             height: 180
-            caption: "Fresh-chat refusal excerpt. Proposed actions elsewhere in the answer are still text for human review."
+            caption: "Expected refusal from this lab's draft-only agent. The email and proposed tasks remain text for human review, not sent mail or saved Planner tasks."
         - title: "Prove repeatability in a fresh chat"
           instruction: "In **Preview**, select **New chat** and repeat the short briefing request above without pasting the long workflow. Confirm the same output requirements. If any check failed, review the skill, instructions and source switches, then retry before sharing."
       reveal:
@@ -239,7 +242,7 @@ mission_lab:
       outcome: "An independently checked teammate result, or an explicit blocked handoff."
       steps:
         - title: "Create the private agent"
-          instruction: "Select **Create**. Confirm the success dialog says the agent is **private**, available only to you. After this first save, use **Update** to save later edits."
+          instruction: "Select **Create**. Keep the window open until the success dialog says the agent is **private**, available only to you. After this first save, use **Update** to save later edits. If a browser reload returns you to **Build your own specialist agent**, open **My agents** and select **Contoso Operations agent**; do not create a duplicate."
         - title: "Share only with an approved teammate"
           instruction: "Select **Share**. In **Add a name, group, or email**, add one instructor-approved teammate and complete the share. Keep **Org-wide sharing for chat access** off. Use **Copy chat link** to provide the link if needed."
           screenshot:
@@ -356,9 +359,9 @@ You lead operations at **Contoso Grand Hotel**. Identify five urgent issues in t
 <details class="lab-validation" markdown="1">
 <summary>What was tested</summary>
 
-**Fresh-account validation:** skill/template upload, report attachment, six disabled source switches, two five-issue briefings, checked facts and recommendation mappings, emails under 400 words, missing-evidence and no-action checks, and private creation passed. Preview repeated response content; inspect one complete email rather than concatenated copies. A claim of searching disabled sources was not independently established; all six switches were rechecked off. No approved teammate was available, so the independent handoff remains blocked. The optional Visual Studio Code / Agents Toolkit deployment was not tested.
+**Sequential-run validation:** the hotel starter and template, report attachment, six disabled source switches, two Preview briefings and a saved-agent chat were checked. Each briefing had five issues and an email under 400 words; facts and Section 16 mappings, missing-evidence handling, no-action refusal and private saved configuration were verified. Preview repeated response content; inspect one complete email rather than concatenated copies. A claim of searching disabled sources was not independently established; all six switches were rechecked off. The saved chat's Sources panel listed two hotel-report entries under More and said there were no direct citations; the report opened for a Section 16 check, but this does not prove a retrieval trace. A separate unchanged Weekly Deal Review upload preserved its procedure, not a proven CRM or Outlook execution. No approved teammate or installed Agents Toolkit was available, so independent sharing and the optional deployment remain blocked.
 
-Screenshots are native-HD captures from this run, not enlarged older images. The sharing crop excludes the account row; it does not demonstrate a completed share.
+Screenshots are retained native-HD examples from the earlier validation, not new captures from this sequential run. The sharing crop excludes the account row; it does not demonstrate a completed share.
 
 </details>
 
@@ -479,7 +482,7 @@ Do not send messages, create Outlook drafts, or write Planner tasks. If asked to
 
 **Outcome:** a checked, unsent briefing that works in a fresh chat.
 
-1. Select **Configure > Preview**. Select **Prepare hotel briefing** or paste the short request below. The suggestion only fills the box: select **Send**. Responses can take about two minutes; do not resend while waiting.
+1. Select **Configure > Preview**. Select **Prepare hotel briefing** or paste the short request below. The suggestion only fills the box: wait until the complete request is visible in the message box, then select **Send**. If you see **Cannot send empty message.**, select the suggestion again and confirm the text before sending. Responses can take about two minutes; do not resend while waiting.
 
 ```text
 Prepare the hotel operations briefing using the annual report.
@@ -501,11 +504,13 @@ Expect an explicit missing-evidence statement, not an estimate or annual forecas
 Send the briefing now and create Planner tasks for the five issues.
 ```
 
-Expect a refusal to send mail or create tasks. Any task list must remain proposals for human review. Do not add an action to make this request succeed.
+This agent's instructions explicitly prohibit sending mail or creating Planner tasks, and no write actions are configured. Expect a refusal; any task list must remain proposals for human review.
+
+This is an expected boundary test, not a failed email or Planner integration. Reusing a skill does not add authenticated tools. Do not add an action to make this request succeed.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/human-review-check-dark.webp"><img src="images/human-review-check.webp" alt="Agent explicitly refuses to send the briefing or create Planner tasks because the workflow is review-only."></picture>
 
-*Fresh-chat refusal excerpt. Proposed actions elsewhere in the answer are still text for human review.*
+*Expected refusal from this lab's draft-only agent. The email and proposed tasks remain text for human review, not sent mail or saved Planner tasks.*
 
 6. Select **New chat** in **Preview** and repeat the short briefing request without the long workflow. Check the same output requirements. If any test fails, review the skill, role and source switches, then retry before sharing.
 
@@ -521,7 +526,7 @@ Expect a refusal to send mail or create tasks. Any task list must remain proposa
 
 **Outcome:** an independent teammate review, or an explicitly blocked handoff.
 
-1. Select **Create**. Confirm the success dialog says the agent is **private**, available only to you. After this first save, use **Update** for later changes.
+1. Select **Create**. Keep the window open until the success dialog says the agent is **private**, available only to you. After this first save, use **Update** for later changes. If a browser reload returns you to **Build your own specialist agent**, open **My agents** and select **Contoso Operations agent**; do not create a duplicate.
 2. Select **Share**. Enter one instructor-approved teammate in **Add a name, group, or email** and complete the share. Keep **Org-wide sharing for chat access** off. Use **Copy chat link** if needed.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/share-dialog-dark.webp"><img src="images/share-dialog.webp" alt="Share dialog with an empty recipient field and org-wide chat sharing off."></picture>

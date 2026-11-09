@@ -41,7 +41,7 @@ mission_lab:
       steps:
         - title: "Choose Chat and switch Work IQ off"
           instruction: "Open [Microsoft Copilot](https://copilot.cloud.microsoft/). In the prompt box, select **Chat**, not the default **Cowork**. Select **Work IQ**, next to **Auto**, so it is crossed out."
-          help: "The old `m365.cloud.microsoft` bookmark redirects here. Cowork keeps Work IQ on; this exercise uses regular Chat with public-web grounding. Work IQ off excludes work-context retrieval from your files, mail, meetings and chats."
+          help: "Close any first-run tour covering the controls before choosing Chat. The old `m365.cloud.microsoft` bookmark redirects here. Cowork keeps Work IQ on; this exercise uses regular Chat with public-web grounding. Work IQ off excludes work-context retrieval from your files, mail, meetings and chats."
           screenshot:
             title: Chat with Work IQ off
             src: /labs/copilot-chat-workiq/images/chat-workiq-off.webp
@@ -290,10 +290,10 @@ mission_lab:
             height: 930
             caption: "Create the answer first, then open its menu."
         - title: "Edit and review the page"
-          instruction: "Edit the page directly to add information. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to."
+          instruction: "Check the new findings and open questions against the original sources, then edit the page directly to correct or add information. For example, the report does describe Spokane's competitive pressure and declining foot traffic; do not accept a claim that it gives no cause. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to."
           notice: "Asking chat beside an open page to rewrite it can report success without updating the page. For a later Copilot revision, request a new answer in chat and open that answer in Pages again; verify the page actually changed."
         - title: "Create a Word version if time permits"
-          instruction: "In the same chat, turn the pre-read into a Word deliverable. Send the prompt, then open the Word file Copilot creates and check it against the page before sharing."
+          instruction: "In the same chat, turn the pre-read into a Word deliverable. Send the prompt, then open the Word file Copilot creates and check it against the edited page and original sources before sharing. A Word version can reuse uncorrected chat text; edits to the page are not automatically carried into it."
           prompt_label: Same grounded Zava DIY chat
           prompt: |-
             Turn this into a one-page Word pre-read for the Zava DIY quarterly business review:
@@ -360,7 +360,7 @@ mission_lab:
           instruction: "Review the **Research Plan** and **Thought process** when shown. Open the briefing full screen and check its **Sources**: connect housekeeping, WiFi, HVAC, F&B margins and elevator issues to root causes, financial impact and Section 16 recommendations."
           help: "The analysis connects occupancy (Section 3), housekeeping (6), satisfaction (8), online reviews (9), maintenance (12) and recommendations (16). Inspect rather than assume complete coverage. If offered, use Convert to for Word, PowerPoint, PDF or Infographic output."
         - title: "Look for unaddressed problems"
-          instruction: "Send the follow-up in the **same conversation** so it retains the report context."
+          instruction: "Send the follow-up in the **same conversation** so it retains the report context. First confirm the composer still shows **Research** or **Researcher**. If it has returned to **Message Copilot**, type `@Researcher` and select the suggestion again before pasting the prompt, particularly after returning from the full-screen briefing."
           prompt_label: Same Researcher conversation
           prompt: |-
             Identify every metric in this report that is trending in the wrong direction
@@ -370,7 +370,7 @@ mission_lab:
             Are there any gaps where a problem exists but no recommendation addresses it?
           notice: "Check KPI tables and recommendations R1–R10. Examples to verify include housekeeping SLA at 77% versus a 90% target and WiFi satisfaction at 3.60 versus 4.0; inspect linen costs, parking revenue and valet retrieval time for gaps. The follow-up may finish without another research plan."
         - title: "Challenge the recommendation if time permits"
-          instruction: "Optionally send this follow-up, then compare the counterargument with the report."
+          instruction: "Optionally send this follow-up with **Research** or **Researcher** still selected, then compare the counterargument with the report."
           prompt_label: Same Researcher conversation, optional
           prompt: "What's the strongest counterargument to your top recommendation?"
       reveal:
@@ -403,7 +403,7 @@ mission_lab:
       outcome: "A ranked ROI table and a financial approve, marginal or defer summary."
       steps:
         - title: "Open Analyst and upload the same PDF"
-          instruction: "Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion. Look for **What do you want to analyze today?** Select **+** → **Upload images and files** and attach `Contoso_Grand_Hotel_Performance_Report.pdf` again."
+          instruction: "Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion. Look for **What do you want to analyze?** and the **Analyze data** composer. Select **+** → **Upload images and files** and attach `Contoso_Grand_Hotel_Performance_Report.pdf` again."
           help: "If you skipped Research, [download the same hotel report here](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Wait for the attachment. Uploading from your device sends a copy to OneDrive; use only the fictional sample."
         - title: "Calculate and rank the investments"
           instruction: "Send the prompt. Let Analyst extract Section 16's costs and returns and compute the requested model."
@@ -434,8 +434,8 @@ mission_lab:
             based purely on the financial analysis.
         - title: "Verify the cash-flow assumptions"
           instruction: "Check that all ten recommendations appear, sorted by NPV. Compare extracted costs and annual returns with Section 16; inspect the 8% rate, five-year horizon, R5 timing and recurring R7/R10 costs before accepting the approve, marginal or defer summary."
-          help: "For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. Check whether the five annual costs are paid in advance in Years 0–4 or alongside benefits in Years 1–5. Conventional IRR needs both negative and positive cash flows; a model with only positive net flows must not invent an IRR."
-          notice: "The source provides simple payback. NPV, IRR and discounted payback here are computed results, not facts copied from the report. An undefined IRR needs explanation, not an invented number. Model generation can take a couple of minutes."
+          help: "For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. Check whether the five annual costs are paid in advance in Years 0–4 or alongside benefits in Years 1–5. Conventional IRR needs both negative and positive cash flows; a model with only positive net flows must not invent an IRR. With no initial outflow, annual cost divided by annual benefit is not a conventional project payback period; ask Analyst to reconcile any such figure with its cash flows."
+          notice: "The source provides simple payback. NPV, IRR and discounted payback here are computed results, not facts copied from the report. An undefined IRR needs explanation, not an invented number. If investment is not recovered within five years, label it accordingly; a longer payback requires an explicit assumption about returns beyond the model horizon. Model generation can take a couple of minutes."
         - title: "Explore a visualization if time permits"
           instruction: "Optionally send this follow-up in the same Analyst conversation."
           prompt_label: Same Analyst conversation, optional
@@ -537,7 +537,7 @@ Plan **15 minutes for Ask (4) → Apply (5) → Verify (6)**. **Reason (3), Publ
 <details>
 <summary>Why these controls?</summary>
 
-The old `m365.cloud.microsoft` bookmark redirects here. Cowork keeps Work IQ on; this exercise uses regular Chat with public-web grounding. Work IQ off excludes work-context retrieval from your files, mail, meetings and chats.
+Close any first-run tour covering the controls before choosing Chat. The old `m365.cloud.microsoft` bookmark redirects here. Cowork keeps Work IQ on; this exercise uses regular Chat with public-web grounding. Work IQ off excludes work-context retrieval from your files, mail, meetings and chats.
 
 </details>
 
@@ -788,7 +788,7 @@ Turn this into a one-page pre-read for the Zava DIY quarterly business review:
 
 Create the answer first, then open its menu.
 
-3. Edit the page directly to add information. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to.
+3. Check the new findings and open questions against the original sources, then edit the page directly to correct or add information. For example, the report does describe Spokane's competitive pressure and declining foot traffic; do not accept a claim that it gives no cause. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to.
 
 Asking chat beside an open page to rewrite it can report success without updating the page. For a later Copilot revision, request a new answer in chat and open that answer in Pages again; verify the page actually changed.
 
@@ -796,7 +796,7 @@ Asking chat beside an open page to rewrite it can report success without updatin
 
 An example of the optional Pages deliverable: findings with evidence, ready for your review. This is a document-content crop, not a fabricated dark-theme capture.
 
-4. In the same chat, turn the pre-read into a Word deliverable. Send the prompt, then open the Word file Copilot creates and check it against the page before sharing.
+4. In the same chat, turn the pre-read into a Word deliverable. Send the prompt, then open the Word file Copilot creates and check it against the edited page and original sources before sharing. A Word version can reuse uncorrected chat text; edits to the page are not automatically carried into it.
 
 ```text
 Turn this into a one-page Word pre-read for the Zava DIY quarterly business review:
@@ -870,7 +870,7 @@ The analysis connects occupancy (Section 3), housekeeping (6), satisfaction (8),
 
 </details>
 
-7. Send the follow-up in the **same conversation** so it retains the report context:
+7. Send the follow-up in the **same conversation** so it retains the report context. First confirm the composer still shows **Research** or **Researcher**. If it has returned to **Message Copilot**, type `@Researcher` and select the suggestion again before pasting the prompt, particularly after returning from the full-screen briefing:
 
 ```text
 Identify every metric in this report that is trending in the wrong direction
@@ -882,7 +882,7 @@ Are there any gaps where a problem exists but no recommendation addresses it?
 
 Check KPI tables and recommendations R1–R10. Examples to verify include housekeeping SLA at 77% versus a 90% target and WiFi satisfaction at 3.60 versus 4.0; inspect linen costs, parking revenue and valet retrieval time for gaps. The follow-up may finish without another research plan.
 
-8. Optionally send this follow-up if time permits, then compare the counterargument with the report:
+8. Optionally send this follow-up if time permits with **Research** or **Researcher** still selected, then compare the counterargument with the report:
 
 ```text
 What's the strongest counterargument to your top recommendation?
@@ -909,7 +909,7 @@ Attach one report → Connect sections → Check recommendation gaps.
 
 </details>
 
-**Stuck?** If Researcher is missing under Added, ask the facilitator to check availability for the assigned account. Continue the core Chat missions; do not build a replacement agent. If it pauses, read and answer its clarification; use the go ahead reply only when it asks to proceed, not to bypass a missing attachment or permission.
+**Stuck?** If Researcher is not offered when you type `@Researcher`, ask the facilitator to check availability for the assigned account. Continue the core Chat missions; do not build a replacement agent. If it pauses, read and answer its clarification; use the go ahead reply only when it asks to proceed, not to bypass a missing attachment or permission.
 
 ## Model: Calculate the financial case
 
@@ -917,7 +917,7 @@ Attach one report → Connect sections → Check recommendation gaps.
 
 **Finish line:** A ranked ROI table and a financial approve, marginal or defer summary. As the hotel's CFO, go beyond simple payback using explicit cash-flow assumptions.
 
-1. Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion. Look for **What do you want to analyze today?**
+1. Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion. Look for **What do you want to analyze?** and the **Analyze data** composer.
 2. Select **+** → **Upload images and files** and attach `Contoso_Grand_Hotel_Performance_Report.pdf` again. If you skipped Research, [download the same hotel report here](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Wait for the attachment. Uploading from your device sends a copy to OneDrive; use only the fictional sample.
 3. Send the prompt. Let Analyst extract Section 16's costs and returns and compute the requested model:
 
@@ -949,9 +949,9 @@ based purely on the financial analysis.
 
 4. Check that all ten recommendations appear, sorted by NPV. Compare extracted costs and annual returns with Section 16; inspect the 8% rate, five-year horizon, R5 timing and recurring R7/R10 costs before accepting the approve, marginal or defer summary.
 
-The source provides simple payback. NPV, IRR and discounted payback here are computed results, not facts copied from the report. An undefined IRR needs explanation, not an invented number. Model generation can take a couple of minutes.
+The source provides simple payback. NPV, IRR and discounted payback here are computed results, not facts copied from the report. An undefined IRR needs explanation, not an invented number. If investment is not recovered within five years, label it accordingly; a longer payback requires an explicit assumption about returns beyond the model horizon. Model generation can take a couple of minutes.
 
-For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. Check whether the five annual costs are paid in advance in Years 0–4 or alongside benefits in Years 1–5. Conventional IRR needs both negative and positive cash flows; a model with only positive net flows must not invent an IRR.
+For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. Check whether the five annual costs are paid in advance in Years 0–4 or alongside benefits in Years 1–5. Conventional IRR needs both negative and positive cash flows; a model with only positive net flows must not invent an IRR. With no initial outflow, annual cost divided by annual benefit is not a conventional project payback period; ask Analyst to reconcile any such figure with its cash flows.
 
 5. Optionally send this follow-up in the same Analyst conversation if time permits:
 

@@ -248,7 +248,7 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
 
     | Field | Value |
     |-------|-------|
-    | Name | `identify-caller-intent` |
+    | Skill name | `identify-caller-intent` |
     | Description | `Determines what the caller wants to do with their coffee subscription before routing.` |
 
 1. In **Instructions**, paste the following, then select **Add skill**:
@@ -284,7 +284,7 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
     I want to cancel my subscription
     ```
 
-    The agent handles the request **itself** and asks for your subscription ID and reason for cancellation. Open the **Activity map**: there is no sub-agent step, because no specialist exists yet.
+    The agent handles the request **itself** and asks for cancellation details, such as your subscription ID; it may ask for the reason now or later. Open the **Activity map**: there is no sub-agent step, because no specialist exists yet.
 
     ![Web Chat where the primary agent handles a cancellation itself](images/test-cancel-no-subagent.png)
 
@@ -364,7 +364,7 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
 
     | Field | Value |
     |-------|-------|
-    | Name | `cancel-subscription-flow` |
+    | Skill name | `cancel-subscription-flow` |
     | Description | `Guides callers through canceling their coffee subscription.` |
 
 1. In **Instructions**, paste the following, then select **Add skill**:
@@ -463,7 +463,7 @@ Simulate a subscription cancellation by voice and hear the **Voice** instruction
 
     ![The Voice Call panel with connection controls and Live Transcript](images/voice-call-panel.png)
 
-1. Select **Start voice conversation** and allow microphone access if asked. Confirm **Listening...** and **Voice call connected** in the **Live Transcript**, then wait for the greeting.
+1. Select **Start voice conversation** and allow microphone access if asked. Confirm **Listening...** and **Voice call connected** in the **Live Transcript**, then wait a few seconds for the greeting under **Bot said:**.
 
 1. Say:
 
@@ -507,7 +507,7 @@ Simulate a subscription cancellation by voice and hear the **Voice** instruction
 Add the three remaining sub-agents the routing rules refer to, then check that each request type lands on the right one.
 
 > [!NOTE]
-> Fresh-account tests invoked all three optional specialists and returned demo codes, but each skipped a separate final confirmation; delivery also exposed internal JSON. Routing passed, not the complete procedure. The classic screenshots remain earlier examples. Keep all data fictional and do not approve offered email outreach.
+> Fresh-account tests invoked all three optional specialists and returned demo codes, but each skipped a separate final confirmation. An earlier delivery test also exposed internal JSON; the latest did not. Routing passed, not the complete procedure. The classic screenshots remain earlier examples. Keep all data fictional and do not approve offered email outreach.
 
 ---
 

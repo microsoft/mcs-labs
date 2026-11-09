@@ -117,20 +117,20 @@ Use the connection for your lab account. **Get my profile** returns the connecti
 5. Rename **Respond to the agent** to **Return traveler profile**. Paste this first segment into `additionalContext`:
 
 ```text
-The SessionStart hook was executed. In your first reply, say so with lots of smileys. Use this
+The SessionStart hook was executed. In your first reply, say so with lots of smileys. The traveler's Office Location is
 ```
 
-6. Add a space, type **/** and choose **Get my profile → Office Location** in **Insert dynamic content**. Paste the second segment after the token, retaining its leading space:
+6. Add a space, select **Insert dynamic content** and choose **Get my profile → Office Location**. Paste the second segment immediately after the token. The profile is a default, not an instruction to override a named destination:
 
 ```text
- to determine policy. But if Office location is missing, use Paris. Only mention the relevant location.
+. Use it only when the user has not named a travel destination. A named destination takes precedence; resolve cities to their country. If Office Location is missing and no destination is named, use Paris. Only mention the relevant location.
 ```
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-office-location-context-dark.webp"><img src="images/uc1-office-location-context.webp" alt="Office Location dynamic token between the session-context segments in the response editor."></picture>
 
-*Insert the dynamic token between the two supplied text segments. The editor truncates the additionalContext output label.*
+*Expanded response editor: insert the dynamic token between the two supplied text segments. The editor truncates the additionalContext output label. Use **Expand to full screen** for this wider view.*
 
-7. Select **Publish** and wait for **Published**. Return through the **Travel Policy Agent** breadcrumb. Confirm the selected workflow, select **Done**, close **Hooks** and **Save** the agent.
+7. Select **Publish** and wait for **Published**. Return through the **Travel Policy Agent** breadcrumb. Confirm the selected workflow, select **Done**, close **Hooks** and **Save** the agent. Wait for **Your agent has been saved.** before opening Preview.
 
 ### Test a new session
 
@@ -155,7 +155,7 @@ Expand **Executed hook: SessionStart**. Check `additionalContext`, smileys and t
 - **additionalContext — correct.** It supplies context for the session before the first reply.
 - **modifiedPrompt — incorrect.** That replaces a message in a User prompt submitted hook.
 
-**Stuck?** If the hook is missing or the context does not change, check starter field names, **Publish** the workflow, select **Done**, **Save** the agent and use **New chat**. A Start hook does not rerun on every message.
+**Stuck?** If Preview reports a missing flow (**InvalidContent**) while the agent is saving, wait for **Your agent has been saved.**, then select **New chat**. If it persists, or the hook is missing or the context does not change, check starter field names, **Publish** the workflow, select **Done**, **Save** the agent, wait for the save to finish and use **New chat**. A Start hook does not rerun on every message.
 
 ## 🎯 Mission 2: Prove which policy supplied the answer
 
@@ -173,7 +173,7 @@ Travel policies. Select applicable documents using their SharePoint Location met
 
 Select **Add to agent**. Do not upload local copies: this exercise needs the live folder's **Location** column. If it is unavailable, ask the proctor.
 
-2. Confirm **Travel Policies** appears under **Knowledge**. Select **x → Remove Search all websites**, leave **Work IQ** in place, and **Save**.
+2. Confirm **Travel Policies** appears under **Knowledge**. Select **x → Remove Search all websites**. Leave **Work IQ** in place if it is already attached; you do not need to add it for this lab. **Save** the agent.
 
 ### Compare the policy selections
 
@@ -309,7 +309,7 @@ Return only the rewritten text and the note. No explanation, no quotes, no forma
 Text:
 ```
 
-8. Right-click **Return original prompt → Copy**, then right-click empty canvas → **Paste**. Do not use **Duplicate**, which auto-connects nodes. Connect **Redact PII** to the pasted node before choosing dynamic content. Rename it **Return redacted prompt** and set `modifiedPrompt` to **Redact PII → Agent Response**. Leave `suppressOutput` empty. **Publish**, return through the agent breadcrumb, select **Done**, then **Save**.
+8. Right-click **Return original prompt → Copy**, then right-click empty canvas → **Paste**. Do not use **Duplicate**, which auto-connects nodes. Connect **Redact PII** to the pasted node before choosing dynamic content. Rename it **Return redacted prompt** and set `modifiedPrompt` to **Redact PII → Agent Response**. Leave `suppressOutput` empty. **Publish**, return through the agent breadcrumb, select **Done**, then **Save** and wait for the save to finish.
 
 Copy the starter response schema rather than adding new required outputs. Both response nodes must have the same schema; different returned values need different nodes.
 
@@ -325,7 +325,7 @@ Copy the starter response schema rather than adding new required outputs. Both r
 I'm flying to Lyon next week for a customer workshop. What can I spend on dinner?
 ```
 
-Verify `modifiedPrompt` is identical to the input and there is no **Hook failed** message. The observed clean run took about **20 seconds**; timing varies.
+Verify `modifiedPrompt` is identical to the input and there is no **Hook failed** message. Also check that the answer cites France policy **TEP-310** for Lyon, not the profile's default policy. The observed clean run took about **20 seconds**; timing varies.
 
 10. Send the fabricated-data sample:
 
@@ -375,7 +375,7 @@ On **Respond to the agent**, add a Text output `result` and paste this response 
 Flight booking simulated. No real reservation or payment was made.
 ```
 
-2. Select **Publish**, then return through the **Travel Policy Agent** breadcrumb to open **Workflow details**. Select the pencil beside **Description for AI**, paste and save. If details are closed, select the **Book flight** tool card:
+2. Select **Publish**, then return through the **Travel Policy Agent** breadcrumb to open **Workflow details**. Select the pencil beside **Description for Intelligence**, paste and save. If details are closed, select the **Book flight** tool card:
 
 ```text
 Simulates booking a flight for a traveler. Use it once you have the airline, origin, destination and departure date.
@@ -419,7 +419,7 @@ Leave `modifiedParameters` and `suppressOutput` empty. **Publish**, return to th
 
 ### Test the guard
 
-6. Select **New chat**. If Preview shows **BotDefinitionOverride has unresolved references: 1 missing flow(s), 0 missing connection reference(s). Error code: InvalidContent.**, the agent hasn't picked up the hook workflow yet: open **Check approved airline**, select **Publish**, return to the agent, **Save** it again, then select **New chat**. Send:
+6. Select **New chat** after the agent finishes saving. If Preview shows **BotDefinitionOverride has unresolved references: 1 missing flow(s), 0 missing connection reference(s). Error code: InvalidContent.**, wait for the save to finish and select **New chat** again. If it persists, open **Check approved airline**, select **Publish**, return to the agent, **Save**, wait for the save to finish and select **New chat**. Send:
 
 ```text
 Book me a flight from Paris to New York on 12 May with Tailspin Airlines.

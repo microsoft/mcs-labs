@@ -284,21 +284,23 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 
 1. Select **Respond to the agent**, select its name at the top of the panel and rename it to `Return traveler profile`. Node names are only labels: renaming them does not affect whether the workflow fits the hook.
 
-1. On **Return traveler profile**, paste this into `additionalContext`:
+1. On **Return traveler profile**, paste this into `additionalContext`. Use **Expand to full screen** for a wider editor if needed:
 
     ```text
-    The SessionStart hook was executed. In your first reply, say so with lots of smileys. Use this
+    The SessionStart hook was executed. In your first reply, say so with lots of smileys. The traveler's Office Location is
     ```
 
-1. With the cursor at the end of the text, add a space and type **`/`** to open **Insert dynamic content**. Under **Get my profile**, select **Office Location**; it is near the bottom of the list, so scroll or type `office` to filter.
+1. With the cursor at the end of the text, add a space and select **Insert dynamic content**. Under **Get my profile**, select **Office Location**; it is near the bottom of the list, so scroll or type `office` to filter.
 
-1. After **Office Location**, paste the following text, including the leading space:
+1. Immediately after **Office Location**, paste the following text. The profile is a default, not an instruction to override a named destination:
 
     ```text
-     to determine policy. But if Office location is missing, use Paris. Only mention the relevant location.
+    . Use it only when the user has not named a travel destination. A named destination takes precedence; resolve cities to their country. If Office Location is missing and no destination is named, use Paris. Only mention the relevant location.
     ```
 
-    ![The Get my profile step and Return traveler profile output using Office Location with a Paris fallback](images/uc1-office-location-context.png)
+    <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-office-location-context-dark.webp"><img src="images/uc1-office-location-context.webp" alt="Office Location dynamic token between the session-context segments in the expanded response editor."></picture>
+
+    *The editor truncates the additionalContext output label. A named destination takes precedence over the profile default.*
 
 1. Select **Publish** at the top-right of the workflow designer and wait until it shows **Published**.
 
@@ -306,7 +308,7 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 
     ![The Travel Policy Agent breadcrumb at the top-left of the published Load traveler profile workflow](images/uc1-return-to-travel-policy-agent.png)
 
-    You are back on **Add hook**, with **Load traveler profile** selected in **Workflow** and a **Go to workflow** link below it. Select **Done**, then click **X** to close the **Hooks** dialog. Select **Save** at the top-right to save the agent.
+    You are back on **Add hook**, with **Load traveler profile** selected in **Workflow** and a **Go to workflow** link below it. Select **Done**, then click **X** to close the **Hooks** dialog. Select **Save** at the top-right to save the agent. Wait for **Your agent has been saved.** before opening Preview.
 
     ![Add hook dialog with the Load traveler profile workflow selected](images/uc1-add-hook.png)
 
@@ -325,7 +327,9 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 
 1. Expand **Executed hook: SessionStart** above the reply. You see the hook's input — including `metadata` — and the `additionalContext` it returned.
 
-    ![The SessionStart hook output and first reply using USA from the profile's Office Location](images/uc1-sessionstart-office-location-test.png)
+    <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-sessionstart-office-location-test-dark.webp"><img src="images/uc1-sessionstart-office-location-test.webp" alt="SessionStart output supplies USA from Office Location as a default while giving named destinations precedence."></picture>
+
+    *Successful session-start output, cropped to exclude input metadata. Your profile can differ.*
 
 > [!NOTE]
 > You did not tell the agent where you are based, and the instructions say nothing about smileys. The hook supplied both. The smileys are only there to make the hook visible; the office location is what the agent will use in [Use Case #2](#use-case-2-ground-the-agent-in-travel-policies-filtered-by-location) to pick the right policy when you ask *What is my per diem?*
