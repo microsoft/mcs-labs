@@ -4,6 +4,8 @@ Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-l
 
 Build, refine, and publish a Bootcamp Lab Tracker through four sequential prompts, checking its schedule, progress, and accessible day tabs.
 
+![Bootcamp Lab Tracker with day tabs, a timeline and completed lab cards](images/tracker-day-tabs.webp)
+
 ## 🧭 Lab Details
 
 | Level | Persona | Duration | Finish line |
@@ -150,7 +152,7 @@ Keep focus outlines visible and respect prefers-reduced-motion.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/tracker-dark-theme-dark.webp"><img src="images/tracker-dark-theme.webp" alt="Preview of the dark tracker with purple lab outlines, one green completed lab, and amber striped Lunch bars."></picture>
 
-The published tracker uses the dark appearance requested in the prompt.
+The preview shows the dark appearance requested in the prompt.
 
 Prompts 2–4 change **Preview** only; the published link keeps the basic version until you publish at the end. Each update reloads the preview, so earlier ticks reset because progress is in memory only.
 

@@ -48,10 +48,29 @@ test('the folder step explains where the parent location is shown', () => {
   for (const copy of [classic.content, classicReadme]) assert.match(copy, shared);
 });
 
-test('mission screenshots resolve to existing light and dark images', () => {
+test('the hero shows the app and the design step shows the supplied reference itself', () => {
+  const hero = document.data.mission_lab.hero_image;
+  assert.equal(hero.src, `/labs/${slug}/images/completion-focus.webp`);
+  assert.deepEqual([hero.width, hero.height], [3300, 2940]);
+  const reference = steps.find(item => item.title === 'Save and attach your design reference').screenshot;
+  assert.equal(reference.src, `/labs/${slug}/images/design-reference.webp`);
+  assert.equal(reference.src_dark, undefined, 'the supplied design reference is the same in either theme');
+  const png = fs.readFileSync(path.join(root, 'labs', slug, 'assets', 'actual-app.png'));
+  assert.deepEqual([reference.width, reference.height], [png.readUInt32BE(16), png.readUInt32BE(20)]);
+  for (const copy of [document.content, readme]) {
+    assert.match(copy, /!\[My Bootcamp Lab App preview[^\]]*\]\(images\/completion-focus\.webp\)/);
+    assert.match(copy, /!\[Design reference[^\]]*\]\(images\/design-reference\.webp\)/);
+    assert.match(copy, /\[provided reference screenshot\]\(assets\/actual-app\.png\)/);
+    assert.doesNotMatch(copy, /reference-attached/);
+  }
+});
+
+test('product UI screenshots retain theme pairs; the supplied reference stays theme-neutral', () => {
   for (const shot of steps.map(item => item.screenshot).filter(Boolean)) {
-    for (const src of [shot.src, shot.src_dark]) {
-      assert.ok(src, `${shot.title} needs light and dark images`);
+    if (shot.src !== `/labs/${slug}/images/design-reference.webp`) {
+      assert.ok(shot.src_dark, `${shot.title} needs light and dark images`);
+    }
+    for (const src of [shot.src, shot.src_dark].filter(Boolean)) {
       assert.ok(fs.existsSync(path.join(root, src)), src);
     }
   }

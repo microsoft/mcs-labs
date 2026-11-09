@@ -4,9 +4,9 @@ Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-l
 
 Build **My Bootcamp Lab App** from the live published agenda, prepare your own OneDrive CSV, then verify the app's read/save/reload behavior. This is a new app, not an HTML import or Copilot Code migration. Completing the earlier lab is not required. Keep everything in preview.
 
-![Light-theme CSV creation approval, not proof of app persistence](images/upload-file-content.webp)
+![My Bootcamp Lab App preview with day tabs, a timeline and completion tracking](images/completion-focus.webp)
 
-*A genuine storage-setup checkpoint. The unavailable location name must be resolved before approval.*
+*My Bootcamp Lab App: the agenda, day tabs and completion tracking in one interface.*
 
 ## 🧭 Lab Details
 
@@ -52,13 +52,11 @@ You still download/upload the reference and create or verify your own connection
 
 Save the [provided reference screenshot](assets/actual-app.png), or use a screenshot of your earlier Copilot Code app. Use the image for appearance and the live agenda for lab names and times.
 
-![Design reference for the bootcamp tracker](assets/actual-app.png)
+![Design reference for the bootcamp tracker](images/design-reference.webp)
 
 Open Copilot Studio in your assigned environment. If **Welcome from your admin** appears, read the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss teaching bubbles with **Got it**.
 
 Select **Apps (Preview) → New app**, then **Add attachments → Upload images and files**. Choose the reference and wait for its thumbnail above **Chat input**.
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/reference-attached-dark.webp"><img src="images/reference-attached.webp" alt="The reference thumbnail attached above the new app's chat input."></picture>
 
 ### 🧭 Send Prompt 1 and watch the activity
 

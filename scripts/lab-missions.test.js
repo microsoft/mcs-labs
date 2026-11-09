@@ -187,6 +187,39 @@ test('paired screenshots follow the island theme and the hero stays a single pri
     'The single eager hero is document content, not dark application chrome');
 });
 
+test('guided full-size image links do not join the theme-wide image carousel', () => {
+  for (const name of ['lab-missions.html', 'lab-missions-screenshot.html']) {
+    const template = fs.readFileSync(path.join(root, '_includes', name), 'utf8');
+    assert.match(template, /<picture><img [^>]+><\/picture>/);
+    assert.doesNotMatch(template, /<a\b[^>]*>\s*<img\b/);
+    assert.match(template, /target="_blank" rel="noopener"/);
+  }
+});
+
+test('guided image captions describe the product, not maintainer test history', () => {
+  for (const name of [slug, ...bootcampLabs.map(([, modern]) => modern)]) {
+    const content = matter(fs.readFileSync(path.join(root, '_labs', `${name}.md`), 'utf8')).data.mission_lab;
+    const images = [content.hero_image, ...content.missions.flatMap(mission =>
+      mission.steps.map(step => step.screenshot))].filter(Boolean);
+    for (const image of images) {
+      assert.doesNotMatch([image.title, image.alt, image.caption].join(' '),
+        /earlier[- ]run|classic[- ]run|verified baseline|fresh[- ]account run|repair proof|runner checkpoint|tested trace|successfully retested/i,
+        `${name}: image copy belongs to the learner's task`);
+    }
+  }
+});
+
+test('the Code hero shows the finished tracker and Chat labels the selected mode accurately', () => {
+  const code = matter(fs.readFileSync(path.join(root, '_labs', 'copilot-code-web-app.md'), 'utf8')).data.mission_lab;
+  assert.equal(code.hero_image.src, '/labs/copilot-code-web-app/images/tracker-day-tabs.webp');
+  assert.deepEqual([code.hero_image.width, code.hero_image.height], [2559, 2340]);
+  const chat = matter(fs.readFileSync(path.join(root, '_labs', 'copilot-chat-workiq.md'), 'utf8')).data.mission_lab;
+  const selector = chat.missions.flatMap(mission => mission.steps.map(step => step.screenshot))
+    .find(image => image?.alt.includes('Response-mode menu'));
+  assert.match(selector.caption, /Auto selected/);
+  assert.doesNotMatch(selector.caption, /Think deeper selected/);
+});
+
 test('prompts stay copyable in place while PDF export downloads locally', () => {
   const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
   const script = fs.readFileSync(path.join(root, 'assets', 'js', 'lab-missions.js'), 'utf8');

@@ -27,7 +27,7 @@ Plan **30 minutes: Configure (6) → Inspect (6) → Test (10) → Verify (8)**.
 
 ![City of Westbrook evaluation-weight chart: Technical approach 30, Relevant municipal experience 25, Cost 20, Project team 15, Timeline 10.](images/evaluation-weights.webp)
 
-*Your finish line: a real chart checked against the RFP, not scores inferred from a proposal. This content-only crop comes from the classic lab run.*
+*The RFP's five evaluation criteria shown as a chart, with weights totaling 100 points.*
 
 ## 📚 Table of Contents
 
@@ -175,7 +175,7 @@ Do not regenerate the proposal, install packages, call external services, or inv
 
 ![Five horizontal bars in RFP source order with weights 30, 25, 20, 15, and 10 and an Evaluation weight (points) axis.](images/evaluation-weights.webp)
 
-*Real classic-run result cropped to the chart, not an illustration. Your chart styling may differ; verify its data.*
+*Compare the five labels and weights with section 4 of the RFP.*
 
 **Reveal — What did you actually verify?** Artifact evidence and source agreement matter more than a confident claim. Sandbox capabilities must be observed, not assumed. Opening the image and comparing the table with the RFP verifies the result without confusing weights with vendor scores.
 

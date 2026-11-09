@@ -16,11 +16,11 @@ mission_lab:
   headline_emphasis: "to a working web app."
   promise: "Four prompts. Five core missions. Build a Bootcamp Lab Tracker, refine one thing at a time, and test the published result without writing code manually."
   hero_image:
-    src: /labs/copilot-code-web-app/images/tracker-basic-checked.webp
-    alt: "Neutral-grey tracker with three DONE lab cards and a header showing 3 of 11 labs complete."
-    width: 2205
-    height: 1860
-    caption: "Your first milestone: a working tracker in neutral greys. The example has 11 labs; use the current agenda's total."
+    src: /labs/copilot-code-web-app/images/tracker-day-tabs.webp
+    alt: "Bootcamp Lab Tracker with a dark design, day tabs, a timeline and green completed lab cards."
+    width: 2559
+    height: 2340
+    caption: "Your destination: a tracker with day tabs, a lab timeline and synchronized completion."
   scenario: |-
     You are attending the bootcamp and need one place to see every day's labs and mark them complete. Build from the **published agenda**, not an invented schedule. Lunch belongs on the timeline but must never count toward progress.
   self_setup: |-
@@ -154,7 +154,7 @@ mission_lab:
             alt: "Preview of the dark tracker with purple lab outlines, one green completed lab, and amber striped Lunch bars."
             width: 2559
             height: 2250
-            caption: "The published tracker uses the dark appearance requested in the prompt."
+            caption: "The preview shows the dark appearance requested in the prompt."
         - title: "Recheck the controls"
           instruction: "Toggle a lab in both directions. Confirm its bar, card, counter, and progress bar still agree, and focus outlines remain visible."
           notice: "Prompts 2–4 change **Preview** only; the published link keeps the basic version until you publish at the end. Each update reloads the preview, so earlier ticks reset because progress is in memory only."
@@ -397,6 +397,8 @@ Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-l
 
 Build, refine, and publish a Bootcamp Lab Tracker through four sequential prompts, checking its schedule, progress, and accessible day tabs.
 
+![Bootcamp Lab Tracker with day tabs, a timeline and completed lab cards](images/tracker-day-tabs.webp)
+
 ## Lab Details
 
 | Level | Persona | Duration | Finish line |
@@ -543,7 +545,7 @@ Keep focus outlines visible and respect prefers-reduced-motion.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/tracker-dark-theme-dark.webp"><img src="images/tracker-dark-theme.webp" alt="Preview of the dark tracker with purple lab outlines, one green completed lab, and amber striped Lunch bars."></picture>
 
-The published tracker uses the dark appearance requested in the prompt.
+The preview shows the dark appearance requested in the prompt.
 
 Prompts 2–4 change **Preview** only; the published link keeps the basic version until you publish at the end. Each update reloads the preview, so earlier ticks reset because progress is in memory only.
 
