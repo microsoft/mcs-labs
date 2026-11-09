@@ -755,6 +755,14 @@ details.lab-setup, details.lab-validation {
   }
 }
 
+// Share the existing event-catalogue badge with homepage cards. The compound
+// selector keeps the homepage's base pill colours from overriding this status.
+.journey-pill.ws-idx-pill-deprecated,
+.ws-idx-pill-deprecated {
+  background: #a32020;
+  color: #fff;
+}
+
 // ---------------------------------------------------------------------------
 // Event-aware navigation
 // Rail (below lab header) + bottom Previous/Next cards + popover agenda.

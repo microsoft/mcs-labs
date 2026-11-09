@@ -237,7 +237,7 @@ test('all renamed and merged context links resolve at root and project base URLs
         assert.equal(target.searchParams.get('source'), 'external');
         assert.deepEqual(target.searchParams.getAll('tag'), ['one', 'two']);
         assert.equal(target.hash, '#module-title');
-        assert.equal(result.storage.get(storageKey), undefined, 'An unlisted classic event is not sticky');
+        assert.equal(result.storage.get(storageKey), currentId, 'The listed classic event remains sticky');
         assert.equal(result.errors.length, 0);
       }
     }
@@ -253,7 +253,7 @@ test('unchanged legacy items rewrite history and activate canonical navigation',
   assert.equal(result.location.hash, '#module-title');
   assert.equal(result.document.documentElement.dataset.eventContext, currentId);
   assert.equal(result.nodes['event-rail'].hidden, false);
-  assert.equal(result.storage.get(storageKey), undefined, 'An unlisted classic event is not sticky');
+  assert.equal(result.storage.get(storageKey), currentId, 'The listed classic event remains sticky');
   assert.equal(result.errors.length, 0);
 });
 
@@ -296,10 +296,19 @@ test('canonical event links are not redirected again', () => {
   assert.equal(result.errors.length, 0);
 });
 
-test('saved legacy context is cleared when its classic destination is now unlisted', () => {
+test('saved legacy context resolves to the listed classic event', () => {
   const result = runNavigation({ slug: 'standard-harness', query: '', sticky: legacyId });
   assert.equal(result.redirects.length, 0);
   assert.equal(result.historyUpdates.length, 0);
+  assert.equal(result.storage.get(storageKey), currentId);
+  assert.equal(result.document.documentElement.dataset.eventContext, currentId);
+  assert.equal(result.nodes['event-rail'].hidden, false);
+});
+
+test('saved legacy context is cleared when its destination is unlisted', () => {
+  const events = eventFixtures('/mcs-labs');
+  events.find(event => event.event_id === currentId).unlisted = true;
+  const result = runNavigation({ slug: 'standard-harness', query: '', sticky: legacyId, events });
   assert.equal(result.storage.get(storageKey), undefined);
   assert.equal(result.document.documentElement.dataset.eventContext, undefined);
   assert.equal(result.nodes['event-rail'].hidden, true);
@@ -395,13 +404,25 @@ test('Exit restores the standalone companion without leaving a modern-event URL 
   assert.equal(result.storage.has(storageKey), false);
 });
 
-test('modern context persists while an unlisted classic context requires an explicit URL', () => {
-  const modern = runNavigation({ slug: 'standard-harness', query: '', sticky: 'architecture-bootcamp' });
-  assert.equal(modern.document.documentElement.dataset.eventContext, 'architecture-bootcamp');
-  const classic = runNavigation({ slug: 'standard-harness', query: '', sticky: currentId });
+test('both listed Bootcamp editions retain their own saved context', () => {
+  for (const eventId of ['architecture-bootcamp', currentId]) {
+    const result = runNavigation({ slug: 'standard-harness', query: '', sticky: eventId });
+    assert.equal(result.document.documentElement.dataset.eventContext, eventId);
+    assert.equal(result.storage.get(storageKey), eventId);
+    assert.equal(result.nodes['event-rail'].hidden, false);
+  }
+});
+
+test('an unlisted event still requires an explicit URL and is never remembered', () => {
+  const events = eventFixtures('/mcs-labs');
+  events.find(event => event.event_id === currentId).unlisted = true;
+  const classic = runNavigation({ slug: 'standard-harness', query: '', sticky: currentId, events });
   assert.equal(classic.nodes['event-rail'].hidden, true);
   assert.equal(classic.storage.has(storageKey), false);
   assert.equal(classic.document.querySelector('.mod-lab').querySelector('.mod-lab-title').textContent, 'Original companion');
+  const explicit = runNavigation({ slug: 'standard-harness', query: `event=${currentId}`, events });
+  assert.equal(explicit.nodes['event-rail'].hidden, false);
+  assert.equal(explicit.storage.has(storageKey), false);
 });
 
 test('invalid companion metadata fails closed instead of linking a different edition', () => {
