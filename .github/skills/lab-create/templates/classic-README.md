@@ -75,7 +75,7 @@
 > [!NOTE]
 > **Using a provided or pre-provisioned event account?** Sign in when prompted.
 
-<details>
+<details class="lab-setup" markdown="1">
 <summary>Running this lab in your own tenant? Set this up first.</summary>
 
 - %%PREREQUISITE_1%%

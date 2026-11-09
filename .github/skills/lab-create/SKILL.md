@@ -21,6 +21,11 @@ treat it as the source of truth. This skill adds the decisions and the order of 
 
 Missions is opt-in per lab and must not change other labs. Do not convert a shared lab
 in place: copy it to a new slug for the delivery that needs the new format.
+Preserve the creator's scenario, use-case and teaching-step order when converting. Keep
+the required path first and mark only trailing extensions optional; do not move an earlier
+exercise to make it optional. Compare ordered prompts, sample inputs and expected outputs,
+not just the topics covered. Follow the shared rules in
+`../lab-review/references/learning-design.md`.
 
 ## 2. Gather inputs before writing
 
@@ -31,6 +36,7 @@ Ask for anything missing, one question at a time:
 - Persona and level (100, 200 or 300), journeys, section, duration in minutes.
 - Parent module slug, and which events or agendas should list the lab.
 - The **finish line**: the artifact the learner leaves with.
+- For a conversion, the source lab and its ordered exercises, prompts and sample outputs.
 - Prompts the requester supplied. Keep supplied prompts **verbatim**; never "improve" them.
 - Environment: tenant, accounts, licenses, connectors or plugins the facilitator prepares.
 - The **system of record**, if the scenario reads or writes business data (a CRM, a ticketing
@@ -48,7 +54,8 @@ Apply `../lab-review/references/learning-design.md` while drafting. In short:
 - Steps start with a verb and name the exact UI label in **bold**.
 - Every prompt sits alone in a `text` code fence so it can be copied.
 - Explain *why* after the learner has seen it work (the reveal), not before.
-- Mark what is optional. Budget minutes per section; they must add up to `duration`.
+- Mark trailing extensions optional. Core minutes must add up to `duration`; preserve an
+  existing advertised duration unless the organizer approves a change.
 - Write for the learner only. No proctor or maintainer notes, no per-step minute
   arithmetic or "if time permits", and no account-hygiene boilerplate (separate
   profile or private window, ask the proctor if something is missing). State pacing as
@@ -56,12 +63,12 @@ Apply `../lab-review/references/learning-design.md` while drafting. In short:
   optional.
 - Attendees with provided or pre-provisioned event accounts use a pre-set-up
   environment. Use the templates' short, organizer-neutral cue; do not imply that
-  attending any event is enough to skip setup. Keep attendee sign-in, downloads and safety
-  actions visible; put only self-hosting setup in a compact/collapsible section where
-  supported. The classic template has a collapsible own-tenant section; missions
-  prerequisites render as an always-visible checklist, so keep setup concise and label it
-  "in your own tenant only" instead of making event attendees repeat provisioning. Put
-  downloads in the step that uses them.
+  attending any event is enough to skip setup. Keep required sign-in, downloads and
+  approvals that teach the exercise visible. Put own-tenant provisioning in
+  `mission_lab.self_setup` for missions and a closed setup disclosure in both readable
+  copies. `prerequisites` is an attendee readiness checklist, not provisioning. Do not
+  add runner checks, repeated tenant warnings, test reports or generic work-habit advice.
+  Put downloads in the step that uses them.
 - Keep literal `|` characters out of prose inside Markdown tables; use `&#124;` and
   inspect generated HTML for Kramdown table/list rendering errors.
 - Ground every product claim in a current Microsoft Learn page and cite it.
@@ -104,15 +111,27 @@ Then:
    name this lab when it is the companion lab.
 4. **Images.** Put them in `labs/<slug>/images/` and link them relatively
    (`images/name.webp`) from both copies. Capture product screenshots with the
-   `lab-runthrough` skill: WebP, with light and dark pairs for product UI.
+   `lab-runthrough` skill: WebP, with genuine light and dark pairs for product UI.
+   Follow the image-selection rules in `../lab-review/references/learning-design.md`;
+   a supplied reference or theme-neutral image needs no invented dark version.
 5. **Missions only.** Follow "Authoring a guided mission lab" in the checklist, and:
    - Core mission `minutes` must sum to `duration`; extensions get `optional: true`.
    - Each prompt appears identically in front matter, the `_labs` body and the README,
-     in order. Use `|-` for multiline prompts so YAML adds no trailing newline.
+     in order, including repeated occurrences. Preserve unlabelled sample input and
+     expression fences too. Expected responses belong in an `output` fence within
+     `instruction`, never in `prompt`; mirror them in both bodies. Use `|-` for multiline
+     prompts so YAML adds no trailing newline.
    - Each `check` has exactly one option with `correct: true`.
    - Each step screenshot has `title`, `alt`, `caption`, and `width` and `height` that
-     match the file; add `src_dark` for product UI and a `<picture>` element in both
-     bodies. The hero has no `src_dark`.
+     match the file; add `src_dark` for genuine matching product captures and a
+     `<picture>` element in both bodies. Reference hero and step images in the body so
+     the feed packages them. The hero has no `src_dark`.
+   - Use the curriculum name for `title` and both H1s; the creative headline is a
+     secondary tagline. Keep stable mission/step IDs and readiness order when converting
+     an existing guided page, so saved progress remains attached to the same actions.
+   - Omit cleanup missions and `finish.cleanup` for organizer-disposed environments.
+     Put necessary own-tenant cleanup in the setup disclosure; runner cleanup stays in
+     the run-through log.
    - `scripts/lab-missions.test.js` asserts which labs use missions. Add the new slug to
      that allowlist and add a contract test for the new lab modeled on the Zava Sales
      tests (prompts verbatim in all copies, copies in sync, mission contract).
@@ -138,6 +157,10 @@ Then:
 
 ## 6. Validate
 
+Check exclusions first. If modules or presentations are excluded, follow
+`../lab-update/SKILL.md#5-validate` instead of running the broad commands below, even
+with a named slug. Do not open excluded attachments to check a lab.
+
 ```bash
 npm run audit:labs -- <slug>      # no errors; read every warning and info line
 npm test                          # unit tests, including the missions contract tests
@@ -146,7 +169,9 @@ bash tools/run.sh                 # or .\tools\run.ps1; open /mcs-labs/labs/<slu
 
 In the browser, check images, the table of contents, Previous and Next with
 `?event=<id>`, and light and dark themes. For missions also check keyboard use, a mobile
-width and the page with JavaScript disabled. Then run the `lab-review` skill, and
+width, the page with JavaScript disabled, and full-size image links with the actual theme
+JavaScript loaded. Verify both readable copies and the rendered mission fields, not just
+front matter syntax. Then run the `lab-review` skill, and
 `lab-runthrough` when a training environment is available.
 
 ## 7. Hand off

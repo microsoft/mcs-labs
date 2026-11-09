@@ -17,11 +17,18 @@ Use after the audit. Mark each item **pass**, **issue** (with evidence) or **n/a
 ## Instructions
 
 - [ ] Steps are in the order the product requires; no step depends on a later one.
+- [ ] A conversion preserves the creator's scenario, use-case and teaching-step order,
+      exact names, and ordered prompt/input/output occurrences, including duplicates.
+      Only trailing extensions become optional; earlier exercises are not moved.
 - [ ] Each step has one action and starts with a verb.
 - [ ] Every value to type (URL, name, prompt) is in a code block or `code`.
 - [ ] The learner can tell when a step succeeded (visible state, message or artifact).
 - [ ] Risky or costly actions (sending email, writing records, schedules, credits) are explicit and reversible.
-- [ ] Cleanup removes anything recurring or shared the lab created.
+- [ ] Organizer-disposed environments have no attendee shutdown or cleanup chores.
+      Necessary own-tenant cleanup stays expandable; the runner's separate cleanup duty
+      remains in its run log.
+- [ ] Instructions do not prescribe window arrangements, headset/quiet-room habits or
+      maintainer reporting. Result cues are informative, not completion gates.
 - [ ] When learners check results in a business app (system of record), the lab links it in the prerequisites and Lab Details and says what to check there.
 - [ ] Learner notes are never described as saved to the site or an account. Missions labs keep the layout's local-storage note and **Save a PDF copy**.
 
@@ -30,12 +37,20 @@ Use after the audit. Mark each item **pass**, **issue** (with evidence) or **n/a
 - [ ] README and `_labs` copies say the same thing (`copy-drift` clean, or the difference is intentional).
 - [ ] The table of contents matches the headings in both copies.
 - [ ] Classic labs keep the house sections; missions labs keep the contract in `docs/NEW_LAB_CHECKLIST.md`. Learner-critical guidance exists in rendered front matter fields, and closed details and lazy images are verified in the rendered page.
+- [ ] Guided site filenames use `mission-` with pinned `slug` and `permalink`; README
+      folders, assets and canonical URLs keep the unprefixed slug. No duplicate site copy.
+- [ ] Own-tenant setup is in `mission_lab.self_setup` and matching closed disclosures in
+      both readable copies; attendee readiness and required downloads remain visible.
+- [ ] Mission/step IDs and readiness positions remain stable when refreshing a guided
+      page. The curriculum title is the H1; the scenario headline is a secondary tagline.
 
 ## Timing and delivery
 
 - [ ] `duration`, Lab Details and section or mission minutes agree.
 - [ ] Every agenda slot that lists the lab fits its duration.
 - [ ] Optional parts are labeled and excluded from the core time.
+- [ ] An existing advertised duration is unchanged unless explicitly approved; mission
+      minutes are pacing estimates, not measured completion-time claims.
 - [ ] Facilitator prerequisites (tenant, data, plugins, accounts) are named.
 
 ## Accessibility
@@ -44,7 +59,11 @@ Use after the audit. Mark each item **pass**, **issue** (with evidence) or **n/a
 - [ ] Link text makes sense out of context.
 - [ ] Nothing relies on color, position or icon shape alone.
 - [ ] Screenshots are legible at the published width; product UI has light and dark variants in missions labs.
-- [ ] Screenshots show the current state and exact asset name, contain required controls, use genuine theme captures, retain native pixel density and have alt text limited to the proven state; provenance and privacy checks are explicit.
+- [ ] Screenshots show the current state and exact asset name, contain required controls, use genuine theme captures, retain native pixel density and have alt text limited to the visible state. Provenance and privacy evidence stay in the maintainer report.
+- [ ] Heroes show the useful result; each **Show me** answers that step with one relevant
+      image. Supplied references show the actual reference, not an upload thumbnail.
+      Captions match visible state and selection. Theme-neutral/supplied images need no
+      fabricated dark variant. Full-size links show one picture with theme JavaScript loaded.
 - [ ] Generated app checks cover source-data comparison, boundary values, keyboard/accessibility names, reduced motion, narrow width, persistence/undo and recovery as applicable. DOM checks are not described as spoken screen-reader verification.
 
 ## Learning design
