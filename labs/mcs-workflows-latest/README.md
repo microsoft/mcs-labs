@@ -378,11 +378,9 @@ Complete the setup of the **Order Management Workflow**: explore the classificat
      ```
      Dear Order Manager,
 
-     Congratulations! Your order management team has been selected in our monthly
-     business draw and is entitled to claim an exclusive cash reward.
+     Congratulations! Your order management team has been selected in our monthly business draw and is entitled to claim an exclusive cash reward.
 
-     To release your reward, please reply with your full name and contact details,
-     and a small processing fee may apply.
+     To release your reward, please reply with your full name and contact details, and a small processing fee may apply.
 
      Act soon, as unclaimed rewards expire.
 
@@ -480,10 +478,7 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
      ```
      Hi team,
 
-     Quick question before we expand our last order. What is the standard warranty
-     period on the iPad Air (M2), and can the devices be enrolled in our mobile device
-     management (MDM)? I think we asked something similar a few months back but I can't
-     find the reply.
+     Quick question before we expand our last order. What is the standard warranty period on the iPad Air (M2), and can the devices be enrolled in our mobile device management (MDM)? I think we asked something similar a few months back but I can't find the reply.
 
      Thanks,
      Jordan Kim
@@ -679,9 +674,7 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
      ```
      Hello Contoso,
 
-     We're writing to let you know that the upcoming shipment of the LumiRead E-Reader
-     (16GB), SKU-LUMI, has been delayed and will not arrive on the originally planned
-     date.
+     We're writing to let you know that the upcoming shipment of the LumiRead E-Reader (16GB), SKU-LUMI, has been delayed and will not arrive on the originally planned date.
 
      We apologise for the inconvenience and will keep you updated.
 
@@ -828,8 +821,7 @@ Publish the **Price Quote Agent**, configure the **Quote Request** path to use i
       - 10 Sony WH-1000XM5 headphones
       - 5 iPad Air (M2, 256GB)
 
-      Delivery to our Santa Cruz, California office. Could you confirm your best price,
-      the payment terms, and the delivery estimate?
+      Delivery to our Santa Cruz, California office. Could you confirm your best price, the payment terms, and the delivery estimate?
 
       Thanks,
       Nancy Anderson

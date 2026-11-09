@@ -310,9 +310,7 @@ Your MCP server is running locally and accessible via Dev Tunnel. ✅
     - **Server description:**
 
       ```
-      A D&D-themed MCP server that manages guild operations including quests, 
-      adventuring parties, and treasury. Supports rank-based access control 
-      (Novice, Adept, Veteran, Mythic).
+      A D&D-themed MCP server that manages guild operations including quests, adventuring parties, and treasury. Supports rank-based access control (Novice, Adept, Veteran, Mythic).
       ```
     - **Server URL:** `https://your-tunnel-url-3000.devtunnels.ms/mcp`
       
@@ -942,9 +940,7 @@ You've mastered passing context via custom headers! ✅
     
     💰 **Treasury Balance:** 1,000 gold pieces
     
-    The vault stands ready to fund your most ambitious ventures, 
-    O champion! Shall we commission an adventuring party for a 
-    legendary quest?
+    The vault stands ready to fund your most ambitious ventures, O champion! Shall we commission an adventuring party for a legendary quest?
     ```
 
 58. Try hiring a party now that you have funds:

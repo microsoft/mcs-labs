@@ -95,8 +95,7 @@ mission_lab:
           instruction: "Paste the prompt and select **Send**. Allow more time than for the short market question."
           prompt_label: Market chat with Think deeper
           prompt: |-
-            I'm preparing a market briefing on the US home improvement retail sector
-            for the quarter just ended.
+            I'm preparing a market briefing on the US home improvement retail sector for the quarter just ended.
 
             Research and cite, with a source and date for each:
             - Comparable-store sales at the large national home improvement retailers
@@ -104,16 +103,12 @@ mission_lab:
             - The prevailing 30-year mortgage rate
             - Producer prices for lumber and building materials
 
-            Prefer Washington State or Pacific Northwest figures where they exist,
-            and say when you substituted national data.
+            Prefer Washington State or Pacific Northwest figures where they exist, and say when you substituted national data.
 
             Then answer, showing your working:
-            1. Is this market growing or shrinking in real terms once inflation is stripped out?
-               Show the arithmetic and say which inflation figure you applied.
-            2. Which two indicators best predict next quarter's DIY demand,
-               and what are they saying right now? Say how far ahead each one leads.
-            3. Where would you expect margin pressure to show up first, and why?
-               Argue against your own answer before you commit to it.
+            1. Is this market growing or shrinking in real terms once inflation is stripped out? Show the arithmetic and say which inflation figure you applied.
+            2. Which two indicators best predict next quarter's DIY demand, and what are they saying right now? Say how far ahead each one leads.
+            3. Where would you expect margin pressure to show up first, and why? Argue against your own answer before you commit to it.
 
             Flag anything you could not source. Do not present an estimate as a fact.
         - title: "Compare the two answers"
@@ -163,9 +158,7 @@ mission_lab:
           instruction: "Paste the prompt and select **Send**."
           prompt_label: New Copilot Chat with Work IQ on
           prompt: |-
-            Find the Zava DIY Markdown and Clearance Policy document, then summarize the
-            markdown clearance policy in five bullets for the Zava DIY leadership team, who
-            have 60 seconds before the quarterly business review starts.
+            Find the Zava DIY Markdown and Clearance Policy document, then summarize the markdown clearance policy in five bullets for the Zava DIY leadership team, who have 60 seconds before the quarterly business review starts.
             After each bullet, cite the section it came from.
           screenshot:
             title: a cited policy answer
@@ -182,8 +175,7 @@ mission_lab:
           prompt_label: Same grounded chat
           prompt: |-
             I'm the category manager for Garden & Outdoor.
-            I want to run a 17% markdown on patio furniture starting next Tuesday
-            to clear inventory before the season closes.
+            I want to run a 17% markdown on patio furniture starting next Tuesday to clear inventory before the season closes.
 
             Walk me through exactly what this policy requires:
             - Who has to approve it
@@ -191,8 +183,7 @@ mission_lab:
             - What I have to attach to the request
             - Whether next Tuesday is achievable at all
 
-            Quote the governing section for each requirement,
-            and tell me if any part of my plan isn't allowed.
+            Quote the governing section for each requirement, and tell me if any part of my plan isn't allowed.
       reveal:
         title: "Why ask twice?"
         line: "Summarizing a rule is not the same as applying it."
@@ -359,8 +350,7 @@ mission_lab:
           instruction: "Send the follow-up in the **same conversation** so it retains the report context. First confirm the composer still shows **Research** or **Researcher**. If it has returned to **Message Copilot**, type `@Researcher` and select the suggestion again before pasting the prompt, particularly after returning from the full-screen briefing."
           prompt_label: Same Researcher conversation
           prompt: |-
-            Identify every metric in this report that is trending in the wrong direction
-            or below target.
+            Identify every metric in this report that is trending in the wrong direction or below target.
 
             For each one, trace the root cause and map it to a specific recommendation.
             Are there any gaps where a problem exists but no recommendation addresses it?
@@ -404,29 +394,22 @@ mission_lab:
           instruction: "Send the prompt. Let Analyst extract Section 16's costs and returns and compute the requested model."
           prompt_label: Analyst with the hotel PDF attached
           prompt: |-
-            Using the recommendation data from Section 16 of this hotel performance report,
-            build a detailed ROI analysis for each of the 10 recommendations (R1 through R10).
+            Using the recommendation data from Section 16 of this hotel performance report, build a detailed ROI analysis for each of the 10 recommendations (R1 through R10).
 
-            For each recommendation, extract the investment cost and estimated annual ROI,
-            then calculate:
+            For each recommendation, extract the investment cost and estimated annual ROI, then calculate:
             1. Net Present Value (NPV) at an 8% discount rate over a 5-year horizon
             2. Internal Rate of Return (IRR)
             3. Payback period, both simple and discounted
             4. 5-year cumulative net benefit, total returns minus investment
 
             Assume annual ROI begins in Year 1 and remains constant over the 5-year period.
-            For the elevator modernization (R5), assume the $1.2M investment is split evenly
-            across Year 0 and Year 1, with returns beginning in Year 2.
-            For ongoing annual programs (R7, R10), treat the annual investment
-            as a recurring cost each year.
+            For the elevator modernization (R5), assume the $1.2M investment is split evenly across Year 0 and Year 1, with returns beginning in Year 2.
+            For ongoing annual programs (R7, R10), treat the annual investment as a recurring cost each year.
 
             Present the results in a ranked table sorted by NPV, highest to lowest.
-            Include a column indicating whether each recommendation creates or destroys value
-            at the 8% hurdle rate.
+            Include a column indicating whether each recommendation creates or destroys value at the 8% hurdle rate.
 
-            Then provide a summary recommendation on which investments should be approved,
-            which are marginal, and which should be deferred,
-            based purely on the financial analysis.
+            Then provide a summary recommendation on which investments should be approved, which are marginal, and which should be deferred, based purely on the financial analysis.
         - title: "Verify the cash-flow assumptions"
           instruction: "Check that all ten recommendations appear, sorted by NPV. Compare extracted costs and annual returns with Section 16; inspect the 8% rate, five-year horizon, R5 timing and recurring R7/R10 costs before accepting the approve, marginal or defer summary."
           help: "For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. Check whether the five annual costs are paid in advance in Years 0–4 or alongside benefits in Years 1–5. Conventional IRR needs both negative and positive cash flows; a model with only positive net flows must not invent an IRR. With no initial outflow, annual cost divided by annual benefit is not a conventional project payback period; ask Analyst to reconcile any such figure with its cash flows."
@@ -582,8 +565,7 @@ Choose grounding → Ask a focused question → Open a reference.
 2. Paste the prompt and select **Send**. Allow more time than for the short market question:
 
 ```text
-I'm preparing a market briefing on the US home improvement retail sector
-for the quarter just ended.
+I'm preparing a market briefing on the US home improvement retail sector for the quarter just ended.
 
 Research and cite, with a source and date for each:
 - Comparable-store sales at the large national home improvement retailers
@@ -591,16 +573,12 @@ Research and cite, with a source and date for each:
 - The prevailing 30-year mortgage rate
 - Producer prices for lumber and building materials
 
-Prefer Washington State or Pacific Northwest figures where they exist,
-and say when you substituted national data.
+Prefer Washington State or Pacific Northwest figures where they exist, and say when you substituted national data.
 
 Then answer, showing your working:
-1. Is this market growing or shrinking in real terms once inflation is stripped out?
-   Show the arithmetic and say which inflation figure you applied.
-2. Which two indicators best predict next quarter's DIY demand,
-   and what are they saying right now? Say how far ahead each one leads.
-3. Where would you expect margin pressure to show up first, and why?
-   Argue against your own answer before you commit to it.
+1. Is this market growing or shrinking in real terms once inflation is stripped out? Show the arithmetic and say which inflation figure you applied.
+2. Which two indicators best predict next quarter's DIY demand, and what are they saying right now? Say how far ahead each one leads.
+3. Where would you expect margin pressure to show up first, and why? Argue against your own answer before you commit to it.
 
 Flag anything you could not source. Do not present an estimate as a fact.
 ```
@@ -658,9 +636,7 @@ The training environment already contains the **Zava DIY Markdown and Clearance 
 2. Paste the prompt and select **Send**:
 
 ```text
-Find the Zava DIY Markdown and Clearance Policy document, then summarize the
-markdown clearance policy in five bullets for the Zava DIY leadership team, who
-have 60 seconds before the quarterly business review starts.
+Find the Zava DIY Markdown and Clearance Policy document, then summarize the markdown clearance policy in five bullets for the Zava DIY leadership team, who have 60 seconds before the quarterly business review starts.
 After each bullet, cite the section it came from.
 ```
 
@@ -673,8 +649,7 @@ Inspect the cited sections rather than expecting identical wording.
 
 ```text
 I'm the category manager for Garden & Outdoor.
-I want to run a 17% markdown on patio furniture starting next Tuesday
-to clear inventory before the season closes.
+I want to run a 17% markdown on patio furniture starting next Tuesday to clear inventory before the season closes.
 
 Walk me through exactly what this policy requires:
 - Who has to approve it
@@ -682,8 +657,7 @@ Walk me through exactly what this policy requires:
 - What I have to attach to the request
 - Whether next Tuesday is achievable at all
 
-Quote the governing section for each requirement,
-and tell me if any part of my plan isn't allowed.
+Quote the governing section for each requirement, and tell me if any part of my plan isn't allowed.
 ```
 
 <details>
@@ -869,8 +843,7 @@ The analysis connects occupancy (Section 3), housekeeping (6), satisfaction (8),
 7. Send the follow-up in the **same conversation** so it retains the report context. First confirm the composer still shows **Research** or **Researcher**. If it has returned to **Message Copilot**, type `@Researcher` and select the suggestion again before pasting the prompt, particularly after returning from the full-screen briefing:
 
 ```text
-Identify every metric in this report that is trending in the wrong direction
-or below target.
+Identify every metric in this report that is trending in the wrong direction or below target.
 
 For each one, trace the root cause and map it to a specific recommendation.
 Are there any gaps where a problem exists but no recommendation addresses it?
@@ -918,29 +891,22 @@ Attach one report → Connect sections → Check recommendation gaps.
 3. Send the prompt. Let Analyst extract Section 16's costs and returns and compute the requested model:
 
 ```text
-Using the recommendation data from Section 16 of this hotel performance report,
-build a detailed ROI analysis for each of the 10 recommendations (R1 through R10).
+Using the recommendation data from Section 16 of this hotel performance report, build a detailed ROI analysis for each of the 10 recommendations (R1 through R10).
 
-For each recommendation, extract the investment cost and estimated annual ROI,
-then calculate:
+For each recommendation, extract the investment cost and estimated annual ROI, then calculate:
 1. Net Present Value (NPV) at an 8% discount rate over a 5-year horizon
 2. Internal Rate of Return (IRR)
 3. Payback period, both simple and discounted
 4. 5-year cumulative net benefit, total returns minus investment
 
 Assume annual ROI begins in Year 1 and remains constant over the 5-year period.
-For the elevator modernization (R5), assume the $1.2M investment is split evenly
-across Year 0 and Year 1, with returns beginning in Year 2.
-For ongoing annual programs (R7, R10), treat the annual investment
-as a recurring cost each year.
+For the elevator modernization (R5), assume the $1.2M investment is split evenly across Year 0 and Year 1, with returns beginning in Year 2.
+For ongoing annual programs (R7, R10), treat the annual investment as a recurring cost each year.
 
 Present the results in a ranked table sorted by NPV, highest to lowest.
-Include a column indicating whether each recommendation creates or destroys value
-at the 8% hurdle rate.
+Include a column indicating whether each recommendation creates or destroys value at the 8% hurdle rate.
 
-Then provide a summary recommendation on which investments should be approved,
-which are marginal, and which should be deferred,
-based purely on the financial analysis.
+Then provide a summary recommendation on which investments should be approved, which are marginal, and which should be deferred, based purely on the financial analysis.
 ```
 
 4. Check that all ten recommendations appear, sorted by NPV. Compare extracted costs and annual returns with Section 16; inspect the 8% rate, five-year horizon, R5 timing and recurring R7/R10 costs before accepting the approve, marginal or defer summary.
