@@ -91,11 +91,6 @@ classes: wide
   letter-spacing: 0.02em;
   white-space: nowrap;
 }
-.ws-idx-pill-deprecated {
-  background: #a32020;
-  color: #fff;
-}
-
 .ws-idx-pill-labs {
   background: var(--color-pill-blue-bg);
   color: var(--color-pill-blue-fg);
@@ -146,7 +141,7 @@ classes: wide
     <div class="ws-card-title"><a href="{{ ws.url | relative_url }}">{{ ws.title }}</a></div>
     <div class="ws-card-desc">{{ ws.description | strip_html | truncate: 160 }}</div>
     <div class="ws-card-meta">
-      {% if ws.deprecated %}<span class="ws-idx-pill ws-idx-pill-deprecated">Deprecated</span>{% endif %}
+      {% if ws.deprecated %}<span class="ws-idx-pill ws-idx-pill-deprecated">{{ ws.deprecated_label | default: "Deprecated" }}</span>{% endif %}
       <span class="ws-idx-pill ws-idx-pill-labs">{{ ws.labs.size }} labs</span>
     </div>
   </li>

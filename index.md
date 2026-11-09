@@ -189,8 +189,8 @@ header:
 </style>
 
 {%- comment -%}
-  Keep homepage counts aligned with the public catalogues: deprecated and
-  unlisted labs, events and workshops are intentionally omitted there too.
+  Keep homepage counts aligned with the public catalogues: omit deprecated
+  labs and all unlisted items, but retain listed deprecated events with a badge.
 {%- endcomment -%}
 {% assign all_labs = site.labs | where_exp: "lab", "lab.deprecated != true and lab.unlisted != true" | sort: "order" %}
 {% assign total_duration = 0 %}
@@ -236,6 +236,7 @@ header:
     <h3><a href="{{ event.url | relative_url }}">{{ event.title }}</a></h3>
     <div class="journey-card-desc">{{ event.description | truncate: 120 }}</div>
     <div class="journey-card-meta">
+      {% if event.deprecated %}<span class="journey-pill ws-idx-pill-deprecated">{{ event.deprecated_label | default: "Deprecated" }}</span>{% endif %}
       <span class="journey-pill">{{ event.labs.size }} labs</span>
       {% if event.syndicated %}{% include syndicated-pill.html source=event.source %}{% endif %}
     </div>

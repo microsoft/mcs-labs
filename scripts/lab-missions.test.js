@@ -493,10 +493,6 @@ test('the published missions event preserves the classic timetable and selects m
   assert.notEqual(event.search, false);
   assert.notEqual(event.sitemap, false);
   assert.deepEqual(event.labs, labRows.map(({ slug: labSlug, label }) => ({ slug: labSlug, label })));
-  const classicEvent = matter(fs.readFileSync(path.join(root, '_events', 'bootcamp-latest.md'), 'utf8')).data;
-  assert.equal(classicEvent.unlisted, true);
-  assert.equal(classicEvent.search, false);
-  assert.equal(classicEvent.sitemap, false);
   const moduleRows = modern.schedule.filter(row => row.type === 'module');
   assert.equal(moduleRows.length, 17);
   assert.equal(labRows.length, 11);

@@ -368,7 +368,7 @@ layout: single
   {%- endcomment -%}
   {% if page.deprecated %}
     {%- assign successor = site.events | where: "event_id", page.superseded_by | first -%}
-    <p style="margin:0 0 0.9em;"><span style="display:inline-block; background:#a32020; color:#fff; font-size:0.68em; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:0.3em 0.7em; border-radius:3px;">Deprecated</span>
+    <p style="margin:0 0 0.9em;"><span style="display:inline-block; background:#a32020; color:#fff; font-size:0.68em; font-weight:700; letter-spacing:0.06em; text-transform:uppercase; padding:0.3em 0.7em; border-radius:3px;">{{ page.deprecated_label | default: "Deprecated" }}</span>
     {% if successor %}<span style="margin-left:0.7em; font-size:0.86em; opacity:0.85;">Superseded by <a href="{{ successor.url | relative_url }}" style="color:#fff; text-decoration:underline;">{{ successor.title }}</a></span>{% endif %}</p>
   {% endif %}
   <p>{{ page.description }}</p>
