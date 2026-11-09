@@ -2,7 +2,7 @@
 
 Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Build a cited Zava DIY decision brief with Copilot Chat and Work IQ, then optionally explore deeper reasoning, Pages, Researcher and Analyst.
+Build a cited Zava DIY decision brief with Copilot Chat, deeper reasoning and Work IQ, then optionally explore Pages, Researcher and Analyst.
 
 ## 🧭 Lab Details
 
@@ -26,12 +26,12 @@ Complete the [classic lab prerequisites](../mcs-m365-copilot-latest/#prerequisit
 - Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account** in a separate browser profile or private window, not a personal or production account.
 - If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant.
 
-Plan **15 minutes for Ask (4) → Apply (5) → Verify (6)**. **Reason (4), Publish (2), Research (10) and Model (5)** are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes.
+Plan **15 minutes for Ask (3) → Reason (3) → Apply (4) → Verify (5)**. **Publish (2), Research (10) and Model (5)** are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes.
 
 ## 📚 Table of Contents
 
 - [Ask: Find the public market context](#-ask-find-the-public-market-context)
-- [Reason: Compare a deeper market analysis (optional)](#-reason-compare-a-deeper-market-analysis)
+- [Reason: Compare a deeper market analysis](#-reason-compare-a-deeper-market-analysis)
 - [Apply: Turn a policy into a decision](#-apply-turn-a-policy-into-a-decision)
 - [Verify: Make missing evidence visible](#-verify-make-missing-evidence-visible)
 - [Publish: Turn the checked answer into a pre-read (optional)](#-publish-turn-the-checked-answer-into-a-pre-read)
@@ -41,7 +41,7 @@ Plan **15 minutes for Ask (4) → Apply (5) → Verify (6)**. **Reason (4), Publ
 
 ## 🔎 Ask: Find the public market context
 
-**4 minutes · Copilot Chat**
+**3 minutes · Copilot Chat**
 
 **Finish line:** A short market summary with a source you have opened.
 
@@ -94,7 +94,7 @@ Choose grounding → Ask a focused question → Open a reference.
 
 ## 🧪 Reason: Compare a deeper market analysis
 
-**Optional · 4 minutes · Copilot Chat**
+**3 minutes · Copilot Chat**
 
 **Finish line:** A comparison of evidence, calculations and uncertainty across two market answers.
 
@@ -140,7 +140,7 @@ Auto decides how long to think; Quick response favors speed for recall, rewritin
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/model-picker-dark.webp"><img src="images/model-picker.webp" alt="Response-mode menu and Claude submenu showing available model choices." width="1812" height="1176"></picture>
 
-The capture shows Think deeper selected during the optional exercise. Your available models may differ. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
+The capture shows Think deeper selected during the market-analysis exercise. Your available models may differ. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
 
 <details>
 <summary>Reveal: Did the selector do all the work?</summary>
@@ -167,7 +167,7 @@ Specify the analysis → Allow reasoning time → Compare evidence.
 
 ## 📋 Apply: Turn a policy into a decision
 
-**5 minutes · Copilot Chat + Work IQ**
+**4 minutes · Copilot Chat + Work IQ**
 
 **Finish line:** A cited policy summary and an approval, timing and evidence checklist for a 17% patio-furniture markdown.
 
@@ -231,7 +231,7 @@ Find the policy → Apply each requirement → Check the conclusion.
 
 ## 🔍 Verify: Make missing evidence visible
 
-**6 minutes · Copilot Chat + Work IQ**
+**5 minutes · Copilot Chat + Work IQ**
 
 **Finish line:** A physical-store performance table with explicit missing inventory values.
 
@@ -508,7 +508,7 @@ Extract report data → Apply explicit assumptions → Check computed results.
 
 ## 🎒 Take it with you
 
-Your core result is a cited market summary, policy decision checklist and checked store table. Optional missions add a deeper argument, an editable pre-read, a research briefing and a financial model.
+Your core result is a cited market summary, policy decision checklist and checked store table. Optional missions add an editable pre-read, a research briefing and a financial model.
 
 - **Grounding:** choose public-web or permitted work context before prompting; Work IQ does not widen access.
 - **Judgment:** open citations, preserve missing values, and distinguish a recommendation from an approval.

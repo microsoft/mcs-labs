@@ -61,18 +61,29 @@ test('connections are reused and approval reflects the actual Outlook card', () 
   }
 });
 
-test('the core teaches approval, outcomes and cleanup without tenant-warning checklists', () => {
+test('the core teaches approval and outcomes without training-environment cleanup chores', () => {
   for (const copy of modern) {
     assert.match(copy, /Subject filter/);
     assert.match(copy, /Approve Equals Yes/);
     assert.match(copy, /Run node/);
     assert.match(copy, /received reply/i);
-    assert.match(copy, /Workflow disabled/);
-    assert.match(copy, /reload/);
-    assert.match(copy, /Running\/Waiting/);
-    assert.match(copy, /other labs' workflows unchanged/);
-    assert.doesNotMatch(copy, /Check ownership|CC\/BCC|consume.*credits|self-only|sender restriction/i);
+    assert.doesNotMatch(copy, /Check ownership|CC\/BCC|consume.*credits|self-only|sender restriction|Workflow disabled|Disable\/reload|then disable|Running\/Waiting|Credit usage|with the workflow disabled afterwards/i);
   }
+  assert.ok(!missions.some(mission => mission.id === 'stop'));
+  assert.equal(document.data.mission_lab.finish.cleanup, undefined);
+});
+
+test('task planning starts the required core with clear action labels and unchanged total time', () => {
+  const core = missions.filter(mission => !mission.optional);
+  assert.equal(core[0].id, 'time-block');
+  assert.equal(core.reduce((sum, mission) => sum + mission.minutes, 0), 30);
+  assert.equal(document.data.duration, 30);
+  assert.deepEqual(missions.map(mission => mission.verb), [
+    'Automate tasks', 'Inspect routing', 'Classify email', 'Review replies',
+    'Handle inventory', 'Generate quotes',
+  ]);
+  assert.deepEqual(missions.filter(mission => mission.optional).map(mission => mission.id), ['inventory', 'specialist']);
+  assert.match(core[0].check.question, /Title token/);
 });
 
 test('maintainer evidence stays out of learner-facing text', () => {
@@ -82,7 +93,7 @@ test('maintainer evidence stays out of learner-facing text', () => {
   }
 });
 
-test('optional outputs require persisted records, genuine tool data and self-only dispatch', () => {
+test('workflow outputs require persisted records, genuine tool data and self-only dispatch', () => {
   for (const copy of modern) {
     assert.match(copy, /Next Friday/);
     assert.match(copy, /timezones/);

@@ -2,7 +2,7 @@
 
 Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-One incoming email. A verified, human-approved action. See how a workflow routes incoming email and pauses for your approval before sending an AI-drafted reply.
+Plan a task. Route an email. Build an inline agent that plans a task, then explore email routing and approve an AI-drafted reply.
 
 ![Successful Copilot, Human review, If, and Reply to email steps; Flag email and Archive email are skipped.](images/inquiry-path-succeeded.webp)
 
@@ -12,26 +12,25 @@ One incoming email. A verified, human-approved action. See how a workflow routes
 
 | Level | Persona | Duration | Finish line |
 | --- | --- | --- | --- |
-| 300 | Maker / Developer | 30 minutes core | Email classification, an archived message, and a reviewed reply |
+| 300 | Maker / Developer | 30 minutes core | A planned task, classified email, and a reviewed reply |
 
-**Pacing:** Explore (6) → Route (6) → Review (13) → Stop (5) = **30 minutes**. Optional exercises stay in sequence: Time-block (15) first, then Inventory (15) and Specialist (10) after Review. Finish with Stop.
+**Pacing:** Automate tasks (10) → Inspect routing (3) → Classify email (5) → Review replies (12) = **30 minutes**. Then, if time allows: Handle inventory (15) and Generate quotes (10). These are pacing estimates; response and trigger wait times vary.
 
-**Scenario:** Your order desk receives unrelated promotions, customer questions, supplier delays, and quote requests. A workflow classifies the message; a grounded draft and human decision protect the customer-facing reply.
+**Scenario:** First, automate planning a new To Do task. Then work with an order desk that receives unrelated promotions, customer questions, supplier delays, and quote requests. A workflow classifies the message; a grounded draft and human decision protect the customer-facing reply.
 
 This lab uses **Workflows** in the **Microsoft Copilot harness**. The [classic Workflows lab](../mcs-workflows-latest/) remains available.
 
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
-- [Optional: Time-block](#optional-time-block)
-- [Mission 1: Explore](#mission-1-explore)
-- [Mission 2: Route](#mission-2-route)
-- [Mission 3: Review](#mission-3-review)
-- [Optional: Inventory](#optional-inventory)
-- [Optional: Specialist](#optional-specialist)
-- [Mission 4: Stop](#mission-4-stop)
+- [Mission 1: Automate tasks](#mission-1-automate-tasks)
+- [Mission 2: Inspect routing](#mission-2-inspect-routing)
+- [Mission 3: Classify email](#mission-3-classify-email)
+- [Mission 4: Review replies](#mission-4-review-replies)
+- [Optional: Handle inventory](#optional-handle-inventory)
+- [Optional: Generate quotes](#optional-generate-quotes)
 - [Troubleshooting](#troubleshooting)
-- [Finish and Clean Up](#finish-and-clean-up)
+- [Finish](#finish)
 - [Sources](#sources)
 
 ## Prerequisites
@@ -45,18 +44,18 @@ Use a development environment with Copilot Studio **Workflows**, available Copil
 
 Import [LAB: Order Management Workflows](../mcs-workflows/assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip) and connect the requested services. The solution includes the Order Management Workflow and Price Quote Agent. Ensure you can edit and publish the workflow before starting.
 
-Optional extensions also need Microsoft To Do, [Warehouse MCP](../mcs-workflows/assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip), or the SharePoint pricing guide and Dataverse account records for the Price Quote Agent.
+Task planning also needs Microsoft To Do. Optional extensions need [Warehouse MCP](../mcs-workflows/assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip), or the SharePoint pricing guide and Dataverse account records for the Price Quote Agent.
 
 </details>
 
 - Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account and select the assigned environment.
 - Open [Outlook](https://outlook.office.com/) with the same account.
 
-## Optional: Time-block
+## Mission 1: Automate tasks
 
-**15 additional minutes · Microsoft To Do / Inline Agent / Outlook Calendar**
+**10 minutes · Microsoft To Do / Inline Agent / Outlook Calendar**
 
-**Outcome:** one verified personal calendar block and enriched task, with the workflow disabled afterwards.
+**Outcome:** a personal calendar block and a task with a due date, reminder, and useful notes.
 
 1. In [Microsoft To Do](https://to-do.office.com/), sign in with the same training account. The workflow watches your default **Tasks** list; no new list is needed.
 2. In Copilot Studio, select **Workflows → New workflow**; it opens as **Untitled workflow** in **Draft**. Rename it **To Do Time Block**: select the name in the designer header (*Click to rename*), type it, and press **Enter**.
@@ -94,17 +93,16 @@ Book Skull's Rainbow Room in Nashville for Next Friday
 ```
 
 8. Refresh **Activity** until the polled trigger appears; inspect **Trigger → Apply to each → Agent**, tool calls and output. Check for a personal block within **8:00 AM–5:00 PM**, task due one week after that block, reminder two days before due, and readable notes. Open the real task and Outlook Calendar to verify, not just the narration. Check displayed timezones and the actual date chosen for **Next Friday**; relative-date interpretation can vary.
-9. Disable your To Do Time Block workflow, reload/still off, and inspect outstanding runs; otherwise every new task in **Tasks** starts another run. If the switch reports *Couldn't change the enabled state*, use [Power Automate](https://make.powerautomate.com/) **My flows → More commands (…) → Turn off** in the same environment. Remove only your test event and task when no longer needed.
 
-**Reveal — Dynamic data makes the goal per-item:** **New task → Title token → agent/tools → verify writes → disable.**
+**Reveal — Dynamic data makes the goal per-item:** **New task → Title token → agent/tools → calendar block + updated task.**
 
-**Knowledge check:** Why disable To Do Time Block after testing?
-- **Correct:** It watches your default Tasks list, so every new task would start another run.
-- **Incorrect:** Disabling deletes the run history. A disabled workflow keeps its definition and history; it only stops new runs.
+**Knowledge check:** Why insert the trigger's Title token into the agent instructions?
+- **Correct:** It gives the agent the title of each new task to plan. Dynamic content makes the same workflow work with each incoming task.
+- **Incorrect:** It makes every run plan the same fixed task. A fixed task title would repeat the same request; the token supplies the current task.
 
-## Mission 1: Explore
+## Mission 2: Inspect routing
 
-**6 minutes · Copilot Studio / Workflows**
+**3 minutes · Copilot Studio / Workflows**
 
 **Outcome:** you can explain what starts the workflow and how it chooses an action.
 
@@ -117,9 +115,9 @@ Book Skull's Rainbow Room in Nashville for Next Friday
 - **Correct:** Classify selects a category from the email content. The trigger starts the workflow and Classify routes the message.
 - **Incorrect:** The subject filter runs every branch. The filter decides which emails start the workflow, not which branch runs.
 
-## Mission 2: Route
+## Mission 3: Classify email
 
-**6 minutes · Classify / Outlook / Activity**
+**5 minutes · Classify / Outlook / Activity**
 
 **Outcome:** Quote Request node output, plus a separate successful Other run and actual archived message.
 
@@ -177,9 +175,9 @@ MegaDraw Rewards
 - **Correct:** No; Run node tested classification only. Downstream delivery needs a separate verified test.
 - **Incorrect:** Yes; a category test executes every branch action. No specialist or quote dispatch ran here.
 
-## Mission 3: Review
+## Mission 4: Review replies
 
-**13 minutes · Copilot / Human review / Outlook**
+**12 minutes · Copilot / Human review / Outlook**
 
 **Outcome:** a reviewed answer or holding reply, a successful approved run, and its received email.
 
@@ -226,7 +224,7 @@ If approval is missing, inspect whether Copilot is drafting or Human review is w
 
 **Check your result:** Your Outlook mailbox contains the reviewed reply, and the matching run executed Reply to email. A safe rejection instead leaves the original flagged with no reply; it is not the approved-reply outcome.
 
-## Optional: Inventory
+## Optional: Handle inventory
 
 **15 additional minutes · Inline Agent / Warehouse MCP / Dataverse MCP**
 
@@ -234,7 +232,7 @@ If approval is missing, inspect whether Copilot is drafting or Human review is w
 
 > Event attendees use installed assets and ask the proctor if missing. Self-paced users import [Enhanced Task Completion](../mcs-workflows/assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip) for Warehouse MCP and ensure Dataverse MCP can create **Task** rows.
 
-1. In your disabled workflow, **Classify → Supplier Delay → + → Agent**. Keep **New agent for this workflow**, default available model, **Expand**, and name it **Inventory Task Agent**.
+1. In your Order Management workflow, **Classify → Supplier Delay → + → Agent**. Keep **New agent for this workflow**, default available model, **Expand**, and name it **Inventory Task Agent**.
 2. Under **Tools → Model Context Protocol (MCP servers)** add **Microsoft Dataverse MCP Server** and **Warehouse MCP Server** (detail title **Warehouse MCP**). Verify **Get restock date**, Dataverse operations, and Connection. Reuse working connections. Only for **No tools found**, remove the affected tool from this agent, re-add it, save/publish safely, and recheck. If still missing, stop and ask the proctor.
 3. Paste these exact instructions; replace its two input placeholders next.
 
@@ -310,7 +308,6 @@ LumiRead Supply Team
 
 8. Inspect **Activity → Classify → Supplier Delay → Inventory Task Agent**, warehouse lookup, Dataverse describe/create operations, and structured output. Expected sample values `sku = SKU-LUMI`, `stock = 0`, `risk = true` apply only if the actual lookup still returns zero. Preserve real tool data, not a manufactured expected result.
 9. In [Power Apps](https://make.powerapps.com/) / same environment, **Tables → Task**, find your new **Restock delay - LumiRead E-Reader (16GB) (SKU-LUMI)** row. Use Subject **Filter by** and **Created On** to distinguish duplicates; **+N more** exposes columns, not rows. Check Description against lookup, High priority only for zero stock, and **Due Date = trigger arrival + three days**, accounting for displayed timezone. A blank date or missing row is not a pass even if the run succeeded.
-10. Disable/reload your workflow, inspect outstanding runs, and remove only your verified test Task.
 
 **Reveal — Typed output is not proof of persistence:** **Exact SKU lookup → stock/urgency/typed output → create one Task → inspect fields.** Preserve stale-data limitations and keep review date separate.
 
@@ -318,7 +315,7 @@ LumiRead Supply Team
 - **Correct:** Trigger arrival plus three days, independent of shipment ETA.
 - **Incorrect:** An invented future shipment date when ETA is stale. Flag stale data instead.
 
-## Optional: Specialist
+## Optional: Generate quotes
 
 **10 additional minutes · Published Agent / SharePoint knowledge / Mail / Dataverse**
 
@@ -381,29 +378,12 @@ What are the iPad Air prices applicable to Fabrikam?
 We have received this customer email: []
 ```
 
-9. Disable/reload your workflow, inspect outstanding runs, and remove only your test messages/drafts when no longer needed. Keep shared agents and connections.
 
 **Reveal — Reuse the capability, verify the result:** **Published specialist + From/Body → account/pricing knowledge → quote → Mail → actual received message.** Publication exposes the agent; knowledge and tool results still need evidence.
 
 **Knowledge check:** Why might the assigned agent be absent from the selector?
 - **Correct:** Saved but not published. Verify publication.
 - **Incorrect:** Message contains dynamic data. From/Body tokens are intended and do not replace publication.
-
-## Mission 4: Stop
-
-**5 minutes · Workflows / Activity**
-
-**Outcome:** your workflow stays disabled after reload and has no unattended running/waiting test.
-
-1. On **Workflows**, turn off **Enabled** only for the Order Management workflow you enabled. Wait for **Workflow disabled**, then reload and verify it stays off. Leave any unused original and other labs' workflows unchanged. To resume an optional exercise, open **Build → Publish**.
-2. Inspect **Activity** for **Running/Waiting** tests. Disabling prevents new starts; it does not prove existing runs stopped. Finish safe approvals or cancel unfinished tests; ask the proctor if one cannot be stopped.
-3. Remove only your synthetic emails, approvals, replies, and drafts when no longer needed. Keep shared connections, agents, MCP servers, knowledge, and starters.
-
-**Reveal — Cleanup is observable:** **Disable own trigger → reload/still off → Activity/no unattended tests.** A completed run does not stop future pickup.
-
-**Knowledge check:** Does disabling prove a waiting approval stopped?
-- **Correct:** No; inspect Activity and finish or cancel outstanding tests.
-- **Incorrect:** Yes; the switch proves earlier runs are gone. Trigger state and existing runs are separate.
 
 ## Troubleshooting
 
@@ -412,22 +392,17 @@ We have received this customer email: []
 | Event workflow or optional asset missing | Ask the proctor. Do not import into the shared environment, edit another attendee's asset, or count blocked work complete. |
 | No email-triggered run | Check publication/Enabled, resolved From, subject token, identity, and existing Activity before resending. |
 | Inquiry paused | Distinguish Copilot drafting from Human review waiting; check reviewer/connection and Outlook. Safe approval requires Yes then Submit. |
-| Disabled workflow cannot enable from the list | The reviewed workflow became Draft. Resume only deliberately through Build → Publish after safety checks; disable/reload again afterwards. |
 
-## Finish and Clean Up
+## Finish
 
-**Core complete:** you explored email classification, archived a promotional message, and reviewed an AI-drafted reply. Optional extensions add calendar planning, inventory tasks, and a price-quote specialist.
+**Core complete:** you automated task planning, explored email classification, archived a promotional message, and reviewed an AI-drafted reply. Optional extensions add inventory tasks and a price-quote specialist.
 
 - **Route:** Classify picks a branch; its node-only test does not execute downstream actions.
 - **Review:** Read-only grounding and human authorization precede dispatch.
-- **Verify:** Check Activity and the actual mailbox/record, then disable and reload.
-- **Extend:** Inline agents, MCP tools, and published specialists have separate prerequisites and independently verified outcomes.
+- **Verify:** Check Activity and the resulting calendar event, task, mailbox, or record.
+- **Extend:** Use MCP tools and a published specialist to add inventory and price-quote capabilities.
 
 **Reflection:** Which action in your workflow needs a human decision, and what external evidence would prove it really happened?
-
-Disable only workflows you enabled and reload to verify they stay off. Inspect **Running/Waiting** tests; finish safe approvals or cancel unfinished runs, asking the proctor if necessary. Disabling does not prove existing runs stopped.
-
-Remove only your synthetic messages, approvals, drafts, optional calendar event/To Do task, and optional Dataverse Task when no longer needed. Preserve unused originals, other attendees' work, shared connections, MCP servers, knowledge, and agents. Leave your Draft/disabled workflow off; future testing may require **Build → Publish**.
 
 ## Sources
 

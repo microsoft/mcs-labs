@@ -44,8 +44,12 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
 - **Voice and scope.** Fix what the evidence shows. Keep the lab's structure and voice;
   do not rewrite a working section to taste.
   Preserve the creator's use-case and teaching-step order when adapting a lab.
-  Optional classification may fit the advertised time, but leave those sections
-  in their original position and provide a skip to the next required section.
+  Keep the required path first and mark only trailing extensions optional. Do not
+  move use cases to achieve that split; keep an earlier exercise required instead.
+  Keep advertised timings unless the organizer requests a change; section minutes
+  are pacing estimates, not measured completion times.
+  Use action-and-object labels such as "Automate tasks" or "Classify email", rather
+  than mixing a use-case name with vague lifecycle labels such as "Explore".
   Compare ordered steps and prompt occurrences, not only a set of retained prompts.
 - **Learner instructions are not a test report.** Keep run dates, coverage boundaries,
   failed automation attempts, account-specific workarounds, credit measurements and
@@ -60,7 +64,10 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
   runner needed them. Report provisioning defects to the organizer. Keep independent
   tenant setup in the existing expandable setup section, and do not repeat warnings
   already provided by the training tenant. Preserve approvals that teach the workflow's
-  behavior and concise cleanup, not maintainer safety checklists or generic coaching.
+  behavior, not maintainer safety checklists or generic coaching. When organizers
+  delete the training environments, omit end-of-lab shutdown, off-state verification,
+  test-data removal, and cleanup missions. Independent-tenant cleanup belongs in
+  that setup's expandable guidance only when needed.
   Tell learners which service to open, not how to arrange their windows. Avoid
   side-by-side, split-screen or keep-the-lab-beside-the-product instructions.
 - **UI labels.** Use the label exactly as the product shows it, in bold, and quote it in
