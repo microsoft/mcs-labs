@@ -229,7 +229,7 @@ For example, the missing-evidence check should mark the figure as not reported r
 
 ![The agent refuses to invent a figure and marks November 2026 actual revenue Not reported, showing the prior-year November figure only as a baseline](images/missing-evidence-check.png)
 
-The human-review check should decline to act and leave the tasks as proposals:
+The human-review check should decline to act and leave the tasks as proposals. This is an expected boundary test, not a failed email or Planner integration. No write actions are configured, and the instructions explicitly prohibit sending mail or creating tasks. Reusing a skill does not add authenticated tools.
 
 ![The agent explains it can prepare the briefing and Planner-ready task text but can't send the email or create Planner tasks](images/human-review-check.png)
 

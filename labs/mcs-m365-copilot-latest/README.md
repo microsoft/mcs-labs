@@ -300,7 +300,7 @@ Note also that Copilot respects permissions throughout. It sees only what the si
 
    ![More options menu under the Copilot response, showing Edit in Pages](images/lab-m365copilot-edit-pages.png)
 
-3. After a few seconds, the pre-read opens as a Copilot Page on the right, and the chat confirms **Page created**. Edit the page directly to add information, then select the share icon at the top right of the page to share it with colleagues.
+3. After a few seconds, the pre-read opens as a Copilot Page on the right, and the chat confirms **Page created**. Check new findings and open questions against the original sources, then edit the page directly to correct or add information. For example, the report does describe Spokane's competitive pressure and declining foot traffic; do not accept a claim that it gives no cause. Keep owners blank until agreed. Review recipients with the share icon at the top right; in this lab, share only if your facilitator directs you to.
 
    ![Quarterly business review pre-read open as a Copilot Page, showing the decision focus and three findings](images/lab-m365copilot-pages-preread.png)
 
@@ -317,7 +317,9 @@ Turn this into a one-page Word pre-read for the Zava DIY quarterly business revi
 - Open questions
 ```
 
-You reached a review-ready quarterly briefing within minutes, with no configuration and no code.
+Open the Word file and compare it with the edited page and original sources before sharing. A Word version can reuse uncorrected chat text; edits to the page are not automatically carried into it.
+
+You now have a quarterly briefing to review, with no configuration and no code.
 
 ### Test your understanding
 
@@ -417,7 +419,7 @@ Source every finding from this report.
 
 #### Prompt 2: Gap analysis — problems vs. recommendations
 
-7. In the **same conversation** (to maintain context), copy and paste this follow-up prompt and select **Send**:
+7. In the **same conversation** (to maintain context), confirm the composer still shows **Research** or **Researcher**. If it has returned to **Message Copilot**, type `@Researcher` and select the suggestion again, particularly after returning from the full-screen briefing. Then copy and paste this follow-up prompt and select **Send**:
 
 ```text
 Identify every metric in this report that is trending in the wrong direction
@@ -487,7 +489,7 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
    - Select **Agents & Plugins** in the left pane, then select **Analyst** under **Added**.
    - Or type `@Analyst` in the prompt box and choose it from the list.
 
-   The agent opens with the prompt **What do you want to analyze today?**
+   Look for **What do you want to analyze?** and the **Analyze data** composer.
 
 > [!TIP]
 > The Analyst agent is another **built-in agent** in Microsoft Copilot. While Researcher excels at reasoning and synthesis, Analyst is purpose-built for **data-heavy work** — extracting tables from documents, performing calculations, building models, generating visualizations, and producing structured outputs like Excel files. Think of Researcher as your strategic advisor and Analyst as your financial modeler.
@@ -543,6 +545,8 @@ based purely on the financial analysis.
 
 > [!IMPORTANT]
 > The report only includes **simple payback periods** (which ignore the time value of money). The Analyst agent produces **NPV and IRR** — the gold-standard financial metrics that CFOs actually use to evaluate capital projects. This is a powerful example of how the Analyst agent can *elevate* analysis beyond the source material.
+
+Check the extracted inputs against Section 16 and ask for a Year 0–5 cash-flow table if timing is unclear. For recurring R7/R10, distinguish costs paid in Years 0–4 from costs alongside benefits in Years 1–5. With no initial outflow and only positive net flows, conventional IRR and project payback are not meaningful; annual cost divided by annual benefit is not project payback. If investment is not recovered within five years, label it accordingly rather than silently extending the model horizon.
 
 #### Explore follow-up analysis (optional)
 

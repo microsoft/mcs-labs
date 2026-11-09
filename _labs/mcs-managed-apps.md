@@ -268,7 +268,7 @@ The CSV rows must match the labs read from the live agenda, not a fixed count or
    /Apps/My Bootcamp Lab App/lab-completion.csv
    ```
 
-   If the folder is missing and a **Create folder?** prompt appears, confirm the name is **My Bootcamp Lab App** and the destination is `/Apps` in your own OneDrive, then select **Create**.
+   If the folder is missing and a **Create folder?** prompt appears, confirm the name is **My Bootcamp Lab App** and the destination is `/Apps` in your own OneDrive, then select **Create**. The prompt shows only the folder name; check Copilot's message above it for the parent location.
 
    If `/Apps` itself is missing, Copilot may first request **Create folder?** with **Name** set to `Apps`. Confirm it is creating that parent folder in your own OneDrive, then approve creation of the app folder inside it. If Copilot skips the folder and offers a single **Invoke connector operation** (CreateFile) card instead, select **Cancel** and ask it to create the folder first.
 

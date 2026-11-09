@@ -113,7 +113,7 @@ mission_lab:
           prompt: "Thanks, btw can you help me create a new lead for them? John Doe mentioned a $50,000 project in the Denver area, details to be sent in a couple of weeks."
           help: |
             1. Review the confirmation: the target is the **Lead** table and the source text describes the new Northstar project. Select **Confirm**.
-            2. In **Create new lead record**, review **First name: John**, **Last name: Doe**, **Company name: Northstar Teamwear**, and **City: Denver**.
+            2. In the lead form, titled **Create new lead record** or **Create new record for Northstar Teamwear**, review **First name: John**, **Last name: Doe**, **Company name: Northstar Teamwear**, and **City: Denver**.
             3. Complete **Lead Name** if blank, for example `Northstar Teamwear - Denver project`. Fill **Topic** with the known project details, including that more details are expected in a couple of weeks.
             4. Scroll **inside the form** and check **Estimated value: 50000**. If it is blank or the form warns that it could not fill `$50,000`, enter `50000` without the currency symbol or comma. Leave unknown email, phone and other details empty; a company-name string is not proof that the **Account** lookup is linked.
             5. Select **Accept and save** once. Look for **Your changes have been saved successfully**; the form becomes **Update lead record**. Use **Open** to inspect the saved record if needed.
@@ -245,6 +245,8 @@ mission_lab:
           help: |
             If a **Copy file** approval appears, check that its destination is your Cowork folder's `skills/weekly-deal-review` before approving. In a scheduled task, **Always allow Copy artifact** grants ongoing copy permission to that task; do not approve unexpected destinations or overwrites.
 
+            If the first save proposes **Overwrite: Yes**, cancel that approval and inspect the destination in OneDrive. If the skill does not exist, ask Cowork to copy it with **overwrite disabled** and stop on a conflict. If it already exists, inspect it before deciding whether to reuse or revise it; do not delete it to make the approval succeed.
+
             Open **Agents & Plugins → Cowork → Manage all → weekly-deal-review**. If the tile is offscreen in the Added row, use its right arrow or **Manage all**. To inspect the actual instructions, open **OneDrive → My files → Documents → Cowork → skills → weekly-deal-review → SKILL.md** in the training account. An inventory entry alone does not verify the file contents.
           screenshot:
             title: your saved skill
@@ -372,7 +374,7 @@ mission_lab:
             Update the skill automatically and send me a short recap of what changed, with links to the feedback behind it. Keep the previous version so we can undo changes. Leave the accounts, permissions, and recipients unchanged. If feedback conflicts or you can’t access a source, flag it rather than guessing.
           notice: "If asked about a manager or meeting that your training account does not have, say so. Ask it to report that gap and make no unsupported skill changes. Confirm a Friday afternoon time and time zone; **4:00 p.m. Europe/Paris** is one example, not a required default."
         - title: "Give Friday its own task"
-          instruction: "Review Cowork's generated handoff instructions, then copy them into **New → Cowork**. They should name **Weekly Deal Review** and your existing deck, require a backup before skill edits, keep customer emails as drafts, and send the recap only to you. Complete the Friday schedule confirmation, clearing **Run once now** so it does not immediately execute. A handoff in the chat is not a saved schedule."
+          instruction: "Cowork may open **Create recurring task** directly with **Run in: New conversation**. Review that Friday job rather than creating another. If it provides handoff text instead, review it and copy it into **New → Cowork**. In either route, the instructions should name **Weekly Deal Review** and your existing deck, require a backup before skill edits, preserve accounts and permissions, keep customer emails as drafts, and send the recap only to you. Complete the Friday schedule confirmation, clearing **Run once now** so it does not immediately execute. A handoff in the chat is not a saved schedule."
           notice: "This configures future work, not a demonstrated learning result. **No accessible feedback** is a valid result. Automatic updates depend on sources, permissions and successful runs. Skill-file changes may still wait for approval; a backup is needed before the first actual edit."
         - title: "Inspect what persists"
           instruction: "Find **Weekly Deal Review** under **Agents & Plugins → Cowork**, and review the separate Monday and Friday entries under **Automations**. Check the Friday instructions require a dated backup before edits and report missing or conflicting feedback. After a real feedback run, inspect the change recap, source links and saved previous version."
@@ -414,12 +416,12 @@ mission_lab:
       outcome: "A Northstar account note, a Summit Youth Sports lead with unknown contact details left unknown, and an introduction follow-up task."
       steps:
         - title: "Install Zava Sales, then start a fresh task"
-          instruction: "Open **Agents & Plugins → Cowork**, search for **Zava Sales**, and install it if your facilitator has supplied it. This optional plugin is separate from the **Zava Sales Hub agent** and the **Zava PowerPoint plugin** already used. Start **New → Cowork** and leave Auto / Medium selected."
+          instruction: "Open **Agents & Plugins → Cowork**, search for **Zava Sales**, and install it if your facilitator has supplied it. This optional plugin is separate from the **Zava Sales Hub agent** and the **Zava PowerPoint plugin** already used. Install and connect its **Business apps (preview)** prerequisite as described below, then start **New → Cowork** and leave Auto / Medium selected."
           help: |
             1. Open **Agents & Plugins** and select the **Cowork** tab.
             2. Search the available plugins for **Zava Sales**.
             3. Open it, review the capabilities, and select **Install** or **Add** as offered. If it is already installed, leave it enabled.
-            4. Complete a connection only if the plugin asks for one, using the supplied training environment.
+            4. Check its prerequisites: the workshop plugin requires **Business apps (preview)**, published by **Microsoft Corporation**. Search for **Business apps**, install it if needed, and select **Connect** using your training identity. Verify **Connected** and leave it enabled. The **Microsoft Dataverse** connection from Delegate is separate and does not satisfy this dependency. Use only the supplied training environment and your own connection.
             5. Start a **new Cowork task**. Do not paste this into the pipeline-review task.
           notice: "A plugin can package **skills, connectors, or both**. Zava Sales adds business-specific instructions; it does not bypass your data permissions or approval requirements."
           screenshot:
@@ -588,7 +590,7 @@ Thanks, btw can you help me create a new lead for them? John Doe mentioned a $50
 
 Confirm when prompted, then complete and review the embedded lead form. **This interactive form inside the agent is an MCP App**, not a switch to Cowork. Review **John Doe**, **$50,000**, **Denver**, and the Northstar context before saving. Keep unknown contact details unknown. This lead is separate from the **$250K renewal**; do not overwrite the renewal amount.
 
-In **Create new lead record**, complete **Lead Name** if blank, for example `Northstar Teamwear - Denver project`. Fill **Topic** with the known project details, including that more details are expected in a couple of weeks. Scroll **inside the form** to check **Estimated value: 50000**. If it is blank or the form warns that it could not fill `$50,000`, enter `50000` without the currency symbol or comma. A company-name string is not proof that the **Account** lookup is linked. Select **Accept and save** once, then look for **Your changes have been saved successfully** and **Update lead record**. Use **Open** to inspect the saved record if needed.
+In the lead form, titled **Create new lead record** or **Create new record for Northstar Teamwear**, complete **Lead Name** if blank, for example `Northstar Teamwear - Denver project`. Fill **Topic** with the known project details, including that more details are expected in a couple of weeks. Scroll **inside the form** to check **Estimated value: 50000**. If it is blank or the form warns that it could not fill `$50,000`, enter `50000` without the currency symbol or comma. A company-name string is not proof that the **Account** lookup is linked. Select **Accept and save** once, then look for **Your changes have been saved successfully** and **Update lead record**. Use **Open** to inspect the saved record if needed.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/lead-mcp-app-dark.webp"><img src="images/lead-mcp-app.webp" alt="The interactive Zava Sales Hub lead form inside the agent, with John Doe, Northstar Teamwear and Denver suggested, and an Accept and save button"></picture>
 
@@ -649,6 +651,8 @@ This is how I want to prepare for my pipeline reviews. Save it as a skill called
 ```
 
 If a **Copy file** approval appears, check that its destination is your Cowork folder's `skills/weekly-deal-review` before approving. In a scheduled task, **Always allow Copy artifact** grants ongoing copy permission to that task; do not approve unexpected destinations or overwrites.
+
+If the first save proposes **Overwrite: Yes**, cancel that approval and inspect the destination in OneDrive. If the skill does not exist, ask Cowork to copy it with **overwrite disabled** and stop on a conflict. If it already exists, inspect it before deciding whether to reuse or revise it; do not delete it to make the approval succeed.
 
 Let skill creation finish. Inspect the saved instructions: the same three accounts, three slides, facts versus questions, Zava PowerPoint branding guidance, and draft-only customer follow-ups. Find skills under **Agents & Plugins → Cowork**; this one may appear as **weekly-deal-review**. A skill is reusable instructions and a procedure, **not model retraining**.
 
@@ -733,7 +737,7 @@ Update the skill automatically and send me a short recap of what changed, with l
 
 If asked, choose **Separate Friday task**. This experience supports one recurring schedule per task: keep Monday at 8:30 a.m., rather than replacing it or adding extra no-op runs. If your training account has no configured manager or review meeting, say so and require it to report the gap without unsupported skill changes. Confirm a Friday afternoon time and time zone; **4:00 p.m. Europe/Paris** is one example.
 
-Review Cowork's generated handoff, then copy it into **New → Cowork**. Check it names **Weekly Deal Review** and your existing deck, requires a backup before skill edits, preserves accounts and permissions, keeps customer emails as drafts, and sends the recap only to you. Complete the Friday schedule confirmation, clearing **Run once now** so it does not immediately execute. Handoff text alone is not a saved schedule.
+Cowork may open **Create recurring task** directly with **Run in: New conversation**. Review that Friday job rather than creating another. If it provides handoff text instead, review it and copy it into **New → Cowork**. In either route, check the instructions name **Weekly Deal Review** and your existing deck, require a backup before skill edits, preserve accounts and permissions, keep customer emails as drafts, and send the recap only to you. Complete the Friday schedule confirmation, clearing **Run once now** so it does not immediately execute. Handoff text alone is not a saved schedule.
 
 This configures future work, not a demonstrated learning result. **No accessible feedback** is valid; invented feedback is not. Automatic changes depend on available sources, permissions and successful runs. Skill-file changes may still wait for approval.
 
@@ -748,7 +752,7 @@ Find **Weekly Deal Review** under **Agents & Plugins → Cowork** and the separa
 **Optional · 8 minutes · New Cowork task**
 
 1. Open **Agents & Plugins → Cowork**, search for **Zava Sales**, and install/add it if your facilitator has supplied it. If already installed, leave it enabled. This optional plugin is separate from the **Zava Sales Hub agent** and the **Zava PowerPoint plugin** already used.
-2. Review its skills and connections. Complete any requested connection only in the supplied training environment.
+2. Review its skills, connections and prerequisites. The workshop plugin requires **Business apps (preview)**, published by **Microsoft Corporation**. Search for **Business apps**, install it if needed, and select **Connect** using your training identity. Verify **Connected** and leave it enabled. The **Microsoft Dataverse** connection from Delegate is separate and does not satisfy this dependency. Use only the supplied training environment and your own connection.
 3. Start **New → Cowork** so the task discovers the plugin. Leave **Auto / Medium** selected.
 4. Send:
 

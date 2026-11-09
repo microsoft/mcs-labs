@@ -162,7 +162,7 @@ Compare this intended path with the actual destination. **Reference value—comp
 /Apps/My Bootcamp Lab App/lab-completion.csv
 ```
 
-If **Create folder?** appears for **My Bootcamp Lab App**, verify `/Apps` in your own OneDrive, then select **Create**. If `/Apps` itself is missing, first verify and approve **Name: Apps** at the OneDrive root, then create the app folder inside it. Reuse existing folders. If Copilot skips the folder and offers a single **Invoke connector operation** (CreateFile) card instead, select **Cancel** and ask it to create the folder first.
+If **Create folder?** appears for **My Bootcamp Lab App**, verify `/Apps` in your own OneDrive, then select **Create**. The card shows only the folder name; check Copilot's message above it for the parent location. If `/Apps` itself is missing, first verify and approve **Name: Apps** at the OneDrive root, then create the app folder inside it. Reuse existing folders. If Copilot skips the folder and offers a single **Invoke connector operation** (CreateFile) card instead, select **Cancel** and ask it to create the folder first.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/create-folder-dark.webp"><img src="images/create-folder.webp" alt="Create folder card for My Bootcamp Lab App."></picture>
 
@@ -170,7 +170,7 @@ If **Create folder?** appears for **My Bootcamp Lab App**, verify `/Apps` in you
 
 Review **Upload file content** only after healthy access confirms the CSV is missing. Expand **View details**, verify your own app-folder destination and `conflict_behavior: fail` (stop on name conflict), then select **Approve**.
 
-If **Location name unavailable** appears, select **Cancel** first: a question sent while approval is pending is queued until you answer the approval. Ask for the actual drive/folder mapping and missing-file proof, then request a fresh fail-on-name-conflict upload and compare its destination before approving. Stop if you cannot verify it. An empty search or failed read is not proof of absence. Never approve a new-file upload over an existing CSV.
+If **Location name unavailable** appears, select **Cancel** first: a question sent while approval is pending is queued until you answer the approval. Ask for the actual drive/folder mapping and missing-file proof, and add "Don't request an upload yet" so Copilot answers in text. After you check its answer, request a fresh fail-on-name-conflict upload in a separate message and compare its destination before approving. Stop if you cannot verify it. An empty search or failed read is not proof of absence. Never approve a new-file upload over an existing CSV.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/upload-file-content-dark.webp"><img src="images/upload-file-content.webp" alt="CSV upload approval with unavailable location name and stop-on-name-conflict behavior."></picture>
 

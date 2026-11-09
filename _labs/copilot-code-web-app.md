@@ -26,7 +26,7 @@ mission_lab:
   self_setup: |-
     Complete the [classic lab's prerequisite setup](https://microsoft.github.io/mcs-labs/labs/mcs-copilot-code/#prerequisites) separately before starting. Copilot Code is a Frontier preview in the browser; this exercise needs no local development toolchain.
   validation: |-
-    A fresh-account run completed the four unchanged prompts and three focused corrections: visible keyboard focus, clipped short labels, and the inclusive 480px boundary. The published app passed schedule, completion, reversal, all-complete, tab-retention, keyboard, reload-reset, and 400/480/481px checks. All 11 lab names and decorative-emoji handling were checked in the browser accessibility tree; spoken screen-reader output was not tested. Repairs can take the exercise beyond its planned time, so do not skip acceptance checks to stay on schedule.
+    A fresh-account sequential run completed the four unchanged prompts and two focused repair requests covering clipped short labels, completed-day count styling, and the inclusive 480px boundary. The published app passed schedule, completion, reversal, all-complete, tab-retention, keyboard, reload-reset, and 400/480/481px checks. All 11 lab names and decorative-emoji handling were checked in the browser accessibility tree; spoken screen-reader output was not tested. Repairs can take the exercise beyond its planned time, so do not skip acceptance checks to stay on schedule.
   prerequisites:
     - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your provided **lab account** in a separate browser profile or private window, not a personal or production account."
     - "Keep this lab beside Copilot and open the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) for comparison."
@@ -70,7 +70,8 @@ mission_lab:
             Keep the bars, checkboxes, counter and progress bar in sync. Use neutral greys and square corners, with visible focus outlines. When done, give me a preview link I can open in my browser.
           notice: "Keep the tab open for about 5–7 minutes while Copilot Code fetches the agenda, writes and checks the code, then publishes. If it asks for permission to continue, for example to search the web, review and approve that lab action. If it cannot fetch the agenda or find labs, stop and tell your facilitator; do not invent a schedule."
         - title: "Open the published app"
-          instruction: "Select **Open** on the **My Bootcamp Lab Tracker** app card, or select its link, to open the tracker in a new browser tab. The same app also appears in the **Preview** pane beside the chat. If there is no working link, ask Copilot Code for one before continuing."
+          instruction: "Select **Open** on the **My Bootcamp Lab Tracker** app card to show **Preview** beside the chat. Then select the **Open in app** arrow in Preview's toolbar (accessible name: **Open My Bootcamp Lab Tracker in app**) to open the published tracker in a new browser tab. If there is no working link, ask Copilot Code for one before continuing."
+          help: "The app tab may ask you to sign in again. Use the same lab account. If an account picker also lists your personal or work account, choose the lab account or **Use another account**; do not select the account connected to your device."
           screenshot:
             title: the app card
             src: /labs/copilot-code-web-app/images/prompt1-app-card.webp
@@ -78,7 +79,7 @@ mission_lab:
             alt: "My Bootcamp Lab Tracker app card with an Open button."
             width: 1350
             height: 264
-            caption: "Open the actual app, not just the generated-code summary."
+            caption: "Open shows Preview; use its Open in app arrow for the published app."
           notice: "Copilot Code checks that the code builds and publishes, but it cannot click through the app itself in this flow. The behavior checks are yours."
         - title: "Check the schedule and starting state"
           instruction: |
@@ -278,7 +279,7 @@ mission_lab:
         - title: "Publish the finished tracker"
           instruction: "Select **Publish** at the top of **Preview**. Wait about 1–2 minutes while it shows **Publishing…**, until **Your app is published** appears with **Open app** and **Share**. You can also ask Copilot Code to publish."
         - title: "Load the published update"
-          instruction: "Return to the tracker browser tab. Select **Refresh** in **New version available**. If that tab is closed, select **Open app**. Run the remaining checks in the published app's tab, not just Preview."
+          instruction: "Return to the tracker browser tab. Select **Refresh** in **New version available**. If the notice is absent after publishing completes, reload the tab to check for it, then select the notice's **Refresh** button; a browser reload alone may retain the older version. If that tab is closed, select **Open app**. Run the remaining checks in the published app's tab, not just Preview."
           screenshot:
             title: the new version notification
             src: /labs/copilot-code-web-app/images/published-new-version.webp
@@ -292,7 +293,7 @@ mission_lab:
             1. Repeat the Build mission's schedule and completion checks: every day's numbers, titles, times, Lunch, exclusions, dynamic total, toggles, reversal, and **TOTAL of TOTAL** must still be correct.
             2. Complete a lab on one day, switch to another, and switch back. Confirm the tick remains and the header includes completions from all days.
             3. Compare each tab's **x/y** count with that day's completed and total labs.
-            4. Complete all labs on a day and confirm its count turns green; uncheck one and confirm complete-day styling reverses.
+            4. Complete all labs on a day and confirm its count turns green both while that tab is selected and after selecting another day; uncheck one and confirm complete-day styling reverses.
             5. Confirm bars, checkboxes, per-day counts, the overall counter, and progress bar stay synchronized. Lunch must never count.
         - title: "Test keyboard access and meaningful names"
           instruction: |
@@ -464,11 +465,13 @@ Keep the bars, checkboxes, counter and progress bar in sync. Use neutral greys a
 ```
 
 5. Keep the tab open for about **5–7 minutes** while Copilot Code fetches the agenda, writes and checks the code, then publishes. If it asks for permission to continue, for example to search the web, review and approve that lab action.
-6. Select **Open** on the **My Bootcamp Lab Tracker** app card, or select its link, to open the tracker in a new browser tab. The same app also appears in the **Preview** pane beside the chat.
+6. Select **Open** on the **My Bootcamp Lab Tracker** app card to show **Preview** beside the chat. Then select the **Open in app** arrow in Preview's toolbar (accessible name: **Open My Bootcamp Lab Tracker in app**) to open the published tracker in a new browser tab.
+
+   The app tab may ask you to sign in again. Use the same lab account. If an account picker also lists your personal or work account, choose the lab account or **Use another account**; do not select the account connected to your device.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/prompt1-app-card-dark.webp"><img src="images/prompt1-app-card.webp" alt="My Bootcamp Lab Tracker app card with an Open button."></picture>
 
-Open the actual app, not just the generated-code summary. Copilot Code checks that the code builds and publishes, but it cannot click through the app itself in this flow. The behavior checks are yours.
+Open shows Preview; use its Open in app arrow for the published app. Copilot Code checks that the code builds and publishes, but it cannot click through the app itself in this flow. The behavior checks are yours.
 
 ### Check the basic tracker
 
@@ -654,7 +657,7 @@ The sample's Day 3 count is green because all its labs are complete. Verify your
 **Outcome:** A published tracker checked against the original specification, not just its appearance.
 
 1. Select **Publish** at the top of **Preview**. Wait about **1–2 minutes** while it shows **Publishing…**, until **Your app is published** appears with **Open app** and **Share**. You can also ask Copilot Code to publish.
-2. Return to the tracker browser tab and select **Refresh** in **New version available**. If the tab is closed, select **Open app**.
+2. Return to the tracker browser tab and select **Refresh** in **New version available**. If the notice is absent after publishing completes, reload the tab to check for it, then select the notice's **Refresh** button; a browser reload alone may retain the older version. If the tab is closed, select **Open app**.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/published-new-version-dark.webp"><img src="images/published-new-version.webp" alt="New version available notification with a Refresh button in the published app."></picture>
 
@@ -665,7 +668,7 @@ Refresh loads the finished version; the notification is shown over the earlier p
 1. Repeat [Check the basic tracker](#check-the-basic-tracker): every day's numbers, titles, times, Lunch, exclusions, dynamic total, toggles, reversal, and **TOTAL of TOTAL** must still be correct.
 2. Complete a lab on one day, switch to another, and switch back. Confirm the tick remains and the header includes completions from all days.
 3. Compare each tab's **x/y** count with that day's completed and total labs.
-4. Complete all labs on a day and confirm its count turns green; uncheck one and confirm complete-day styling reverses.
+4. Complete all labs on a day and confirm its count turns green both while that tab is selected and after selecting another day; uncheck one and confirm complete-day styling reverses.
 5. Confirm bars, checkboxes, per-day counts, the overall counter, and progress bar stay synchronized. Lunch must never count.
 6. Use **Tab** to reach the day tabs and selected day's controls.
 7. Use arrow keys to navigate tabs; activate with **Enter** or **Space** if needed. Confirm visible focus.
@@ -760,8 +763,8 @@ You built, refined, and checked a web app through four unchanged prompts. Your a
 <details>
 <summary>Run-through coverage and screenshot notes</summary>
 
-A fresh-account run completed the four unchanged prompts and three focused corrections: visible keyboard focus, clipped short labels, and the inclusive 480px boundary. The published app passed schedule, completion, reversal, all-complete, tab-retention, keyboard, reload-reset, and 400/480/481px checks. All 11 lab names and decorative-emoji handling were checked in the browser accessibility tree; spoken screen-reader output was not tested. Repairs can take the exercise beyond its planned time, so do not skip acceptance checks to stay on schedule.
+A fresh-account sequential run completed the four unchanged prompts and two focused repair requests covering clipped short labels, completed-day count styling, and the inclusive 480px boundary. The published app passed schedule, completion, reversal, all-complete, tab-retention, keyboard, reload-reset, and 400/480/481px checks. All 11 lab names and decorative-emoji handling were checked in the browser accessibility tree; spoken screen-reader output was not tested. Repairs can take the exercise beyond its planned time, so do not skip acceptance checks to stay on schedule.
 
-Screenshots are new native-high-resolution captures, cropped and converted to WebP without upscaling. Light/dark pairs show the real interface themes. After Prompt 2, the tracker itself stays dark in both; the narrow-app capture is shared between themes. Product UI, generated layouts, emoji choices, and agenda totals can differ.
+The existing screenshots remain valid examples and were retained in this run; they are not exact renderings of its generated app. Light/dark pairs show the real interface themes. After Prompt 2, the tracker itself stays dark in both; the narrow-app capture is shared between themes. Product UI, generated layouts, emoji choices, and agenda totals can differ.
 
 </details>

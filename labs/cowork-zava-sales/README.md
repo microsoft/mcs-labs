@@ -84,7 +84,7 @@ Thanks, btw can you help me create a new lead for them? John Doe mentioned a $50
 
 Confirm when prompted, then complete and review the embedded lead form. **This interactive form inside the agent is an MCP App**, not a switch to Cowork. Review **John Doe**, **$50,000**, **Denver**, and the Northstar context before saving. Keep unknown contact details unknown. This lead is separate from the **$250K renewal**; do not overwrite the renewal amount.
 
-In **Create new lead record**, complete **Lead Name** if blank, for example `Northstar Teamwear - Denver project`. Fill **Topic** with the known project details, including that more details are expected in a couple of weeks. Scroll **inside the form** to check **Estimated value: 50000**. If it is blank or the form warns that it could not fill `$50,000`, enter `50000` without the currency symbol or comma. A company-name string is not proof that the **Account** lookup is linked. Select **Accept and save** once, then look for **Your changes have been saved successfully** and **Update lead record**. Use **Open** to inspect the saved record if needed.
+In the lead form, titled **Create new lead record** or **Create new record for Northstar Teamwear**, complete **Lead Name** if blank, for example `Northstar Teamwear - Denver project`. Fill **Topic** with the known project details, including that more details are expected in a couple of weeks. Scroll **inside the form** to check **Estimated value: 50000**. If it is blank or the form warns that it could not fill `$50,000`, enter `50000` without the currency symbol or comma. A company-name string is not proof that the **Account** lookup is linked. Select **Accept and save** once, then look for **Your changes have been saved successfully** and **Update lead record**. Use **Open** to inspect the saved record if needed.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/lead-mcp-app-dark.webp"><img src="images/lead-mcp-app.webp" alt="The interactive Zava Sales Hub lead form inside the agent, with John Doe, Northstar Teamwear and Denver suggested, and an Accept and save button"></picture>
 
@@ -145,6 +145,8 @@ This is how I want to prepare for my pipeline reviews. Save it as a skill called
 ```
 
 If a **Copy file** approval appears, check that its destination is your Cowork folder's `skills/weekly-deal-review` before approving. In a scheduled task, **Always allow Copy artifact** grants ongoing copy permission to that task; do not approve unexpected destinations or overwrites.
+
+If the first save proposes **Overwrite: Yes**, cancel that approval and inspect the destination in OneDrive. If the skill does not exist, ask Cowork to copy it with **overwrite disabled** and stop on a conflict. If it already exists, inspect it before deciding whether to reuse or revise it; do not delete it to make the approval succeed.
 
 Let skill creation finish. Inspect the saved instructions: the same three accounts, three slides, facts versus questions, Zava PowerPoint branding guidance, and draft-only customer follow-ups. Find skills under **Agents & Plugins → Cowork**; this one may appear as **weekly-deal-review**. A skill is reusable instructions and a procedure, **not model retraining**.
 
@@ -229,7 +231,7 @@ Update the skill automatically and send me a short recap of what changed, with l
 
 If asked, choose **Separate Friday task**. This experience supports one recurring schedule per task: keep Monday at 8:30 a.m., rather than replacing it or adding extra no-op runs. If your training account has no configured manager or review meeting, say so and require it to report the gap without unsupported skill changes. Confirm a Friday afternoon time and time zone; **4:00 p.m. Europe/Paris** is one example.
 
-Review Cowork's generated handoff, then copy it into **New → Cowork**. Check it names **Weekly Deal Review** and your existing deck, requires a backup before skill edits, preserves accounts and permissions, keeps customer emails as drafts, and sends the recap only to you. Complete the Friday schedule confirmation, clearing **Run once now** so it does not immediately execute. Handoff text alone is not a saved schedule.
+Cowork may open **Create recurring task** directly with **Run in: New conversation**. Review that Friday job rather than creating another. If it provides handoff text instead, review it and copy it into **New → Cowork**. In either route, check the instructions name **Weekly Deal Review** and your existing deck, require a backup before skill edits, preserve accounts and permissions, keep customer emails as drafts, and send the recap only to you. Complete the Friday schedule confirmation, clearing **Run once now** so it does not immediately execute. Handoff text alone is not a saved schedule.
 
 This configures future work, not a demonstrated learning result. **No accessible feedback** is valid; invented feedback is not. Automatic changes depend on available sources, permissions and successful runs. Skill-file changes may still wait for approval.
 
@@ -244,7 +246,7 @@ Find **Weekly Deal Review** under **Agents & Plugins → Cowork** and the separa
 **Optional · 8 minutes · New Cowork task**
 
 1. Open **Agents & Plugins → Cowork**, search for **Zava Sales**, and install/add it if your facilitator has supplied it. If already installed, leave it enabled. This optional plugin is separate from the **Zava Sales Hub agent** and the **Zava PowerPoint plugin** already used.
-2. Review its skills and connections. Complete any requested connection only in the supplied training environment.
+2. Review its skills, connections and prerequisites. The workshop plugin requires **Business apps (preview)**, published by **Microsoft Corporation**. Search for **Business apps**, install it if needed, and select **Connect** using your training identity. Verify **Connected** and leave it enabled. The **Microsoft Dataverse** connection from Delegate is separate and does not satisfy this dependency. Use only the supplied training environment and your own connection.
 3. Start **New → Cowork** so the task discovers the plugin. Leave **Auto / Medium** selected.
 4. Send:
 

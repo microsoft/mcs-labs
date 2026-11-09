@@ -17,7 +17,7 @@ Plan 30 minutes for Build (10) → Route (12) → Speak (8). Extend is optional 
 <details class="lab-validation" markdown="1">
 <summary>What was tested</summary>
 
-**Evidence boundary:** the fresh-account run passed the primary-agent chat test and the original four-message cancellation sequence without a diagnostic retry. Before adding a delivery specialist, delivery stayed with the primary. Voice connected and ended, but no spoken input was supplied: recognition, spell-back and spoken cancellation remain unverified. All three optional specialists routed successfully, but skipped separate final confirmation; delivery also exposed internal JSON. Those optional procedures are not complete end-to-end passes.
+**Evidence boundary:** the latest fresh-account run passed the primary-agent chat test and the original four-message cancellation sequence without a diagnostic retry, with the specialist invocation and return visible in **Activity map**. Before adding a delivery specialist, delivery stayed with the primary. Voice connected, showed **Listening...** and the agent greeting, and ended cleanly, but no scripted spoken input was supplied: recognition, spell-back and spoken cancellation remain unverified. All three optional specialists routed and returned to the primary, but each finalized its simulated change without a separate final confirmation. An earlier run also saw delivery expose internal JSON; the latest run did not. Those optional procedures are not complete end-to-end passes.
 
 </details>
 
@@ -81,7 +81,7 @@ Customer Assist Agents are in preview. The tested accessible name is **Customer 
 
 ### 2. Create a distinctively named agent
 
-Leave the description box empty. Under **Start from scratch**, select **Create agent**. In the naming dialog, enter the name below. Add your initials only if an agent with this name already exists in your environment. Select **Create** and wait until provisioning finishes and fields become editable.
+Leave the description box empty. Under **Start from scratch**, select **Create agent**, not **Create in Contact Center Intelligence**. In the naming dialog, enter the name below and leave **Agent settings (optional)** unchanged. Add your initials only if an agent with this name already exists in your environment. Select **Create** and wait until provisioning finishes and fields become editable.
 
 **Agent name**
 
@@ -156,7 +156,7 @@ The tested preview label is **Voice**; Microsoft Learn calls this tab **Speech**
 
 ### 7. Add the intent procedure
 
-Next to **Skills**, select **+**. In **Add skill**, select **Generative**. Set **Name** to `identify-caller-intent` and **Description** to `Determines what the caller wants to do with their coffee subscription before routing.` Paste the text below into **Instructions**, then select **Add skill**.
+Next to **Skills**, select **+**. In **Add skill**, select **Generative**. Set **Skill name** to `identify-caller-intent` and **Description** to `Determines what the caller wants to do with their coffee subscription before routing.` Paste the text below into **Instructions**, then select **Add skill**.
 
 **identify-caller-intent · Instructions**
 
@@ -183,7 +183,7 @@ Hi, I need help with my coffee subscription
 
 ### 9. Observe the primary without a specialist
 
-Send the cancellation request, then open **Activity map**. Look for the primary asking for your subscription ID and reason, with no sub-agent invocation. Record what you actually observe; the baseline is for comparison with the next mission.
+Send the cancellation request, then open **Activity map**. Look for the primary asking for cancellation details such as your subscription ID (it may ask for the reason now or later), with no sub-agent invocation. Record what you actually observe; the baseline is for comparison with the next mission.
 
 **Web Chat · Before the specialist**
 
@@ -199,7 +199,7 @@ I want to cancel my subscription
 
 **Instructions describe an intended route; the specialist must also exist.**
 
-The baseline asked for an ID and reason without invoking a sub-agent. **General** establishes the concierge role, **Voice** adds channel-specific guidance, and the **Generative skill** supplies a reusable procedure. They do not create the four specialists mentioned in the instructions.
+The baseline asked for cancellation details without invoking a sub-agent. **General** establishes the concierge role, **Voice** adds channel-specific guidance, and the **Generative skill** supplies a reusable procedure. They do not create the four specialists mentioned in the instructions.
 
 Customer request → Intent procedure → Primary response while no specialist exists
 
@@ -283,7 +283,7 @@ This is a demo with no backend system. Finish the whole cancellation yourself be
 
 ### 4. Add the cancellation skill
 
-In the specialist panel, select **+** beside **Skills**. In **Add skill**, select **Generative**. Set **Name** to `cancel-subscription-flow` and **Description** to `Guides callers through canceling their coffee subscription.` Paste the text into **Instructions**, then select **Add skill**.
+In the specialist panel, select **+** beside **Skills**. In **Add skill**, select **Generative**. Set **Skill name** to `cancel-subscription-flow` and **Description** to `Guides callers through canceling their coffee subscription.` Paste the text into **Instructions**, then select **Add skill**.
 
 **cancel-subscription-flow · Instructions**
 
@@ -299,7 +299,7 @@ Help callers cancel their subscription.
 
 ### 5. Check the saved build
 
-Confirm each edited field is saved, then close the panel. Find the primary connected to **Subscription Cancellation**, with one sub-agent and the two skills on their respective cards.
+Confirm each edited field is saved, then close the panel. Find the primary connected to **Subscription Cancellation**, with one sub-agent and the two skills on their respective cards. The cards display the skills as **Identify caller intent** and **Cancel subscription flow**.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/canvas-one-subagent-dark.webp"><img src="images/canvas-one-subagent.webp" alt="Zava Coffee Subscription Assistant with an intent skill connected to Subscription Cancellation with a cancellation skill."></picture>
 
@@ -359,7 +359,7 @@ Inspect both the chat and **Activity map**, not just the main **Execution summar
 
 In **Activity map**, inspect the invocation of **Subscription Cancellation**, its inputs and its return. Look for **Interpreting agent intent**, **Preparing agent inputs**, **Executing agent**, **Reviewing nested activity**, and **Return To Main Conversation Tool**. Compare the actual reply with the final return status.
 
-The successful four-message trace included an intermediate **Cancelled** tool action followed by a **Completed** return. Neither the intermediate status alone nor the top-level summary alone tells you whether the customer received a result.
+While the specialist waits for your next reply, its rows in **Activity map** can show a red **Cancelled** status. In the latest run they changed to **Completed** after the confirmation turn, followed by an intermediate **Cancelled** return action and a final **Completed** return. Neither the intermediate status alone nor the top-level summary alone tells you whether the customer received a result.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/test-cancel-routed-dark.webp"><img src="images/test-cancel-routed.webp" alt="Separate subscription ID, reason and confirmation turns produce simulated ZC-12345 while nested activity shows a Cancelled action followed by a Completed return."></picture>
 
@@ -417,7 +417,7 @@ Use the same agent in Voice Call and separate connection controls from actual sp
 
 Connect a microphone and speakers or a headset. In **Preview**, select **Voice Call**. Use a browser with microphone access permitted for the preview site. If audio is unavailable, use **Web Chat** or watch the facilitator; mark your own spoken checks unverified.
 
-Only connection, **Listening...**, and end-call controls were verified in the source run. No spoken input was supplied. The remaining steps teach what to test; they are not reported successes.
+The latest run verified connection, **Listening...**, the agent greeting and the end-call controls. No scripted spoken input was supplied. The remaining steps teach what to test; they are not reported successes.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/voice-call-panel-dark.webp"><img src="images/voice-call-panel.webp" alt="Voice Call selected with the call control and an empty Live Transcript displaying Not connected."></picture>
 
@@ -425,7 +425,7 @@ Only connection, **Listening...**, and end-call controls were verified in the so
 
 ### 2. Connect and check the transcript
 
-Select **Start voice conversation** and allow microphone access if asked. Confirm **Listening...** and **Voice call connected** in **Live Transcript**, then wait for the greeting. A connected call alone does not demonstrate recognition.
+Select **Start voice conversation** and allow microphone access if asked. Confirm **Listening...** and **Voice call connected** in **Live Transcript**, then wait a few seconds for the greeting under **Bot said:**. A connected call alone does not demonstrate recognition.
 
 ### 3. Speak the cancellation request
 
@@ -439,7 +439,7 @@ When asked, say your subscription ID, for example **“S U B one zero four two�
 
 Listen and inspect **Live Transcript** and **Activity map**. Check pauses, silent internal routing, clear identifiers and confirmation codes, one question at a time, and no markdown read aloud. Check for a simulated confirmation code. Record each mismatch rather than assuming saved Voice instructions guarantee the behavior.
 
-Recognition, spell-back, turn-taking, speech quality and spoken cancellation were not verified in the source run. Do not mark them passed merely because chat worked or the call connected.
+Recognition, spell-back, turn-taking, speech quality and spoken cancellation were not verified in the latest run. Do not mark them passed merely because chat worked or the call connected.
 
 ### 6. End the call and leave a draft
 
@@ -485,7 +485,7 @@ Extend the concierge to enrollment, billing and delivery using the same speciali
 
 Repeat **Build** → **Add a sub-agent** for each specialist below. Wait for provisioning, rename **New Sub-Agent** with the exact supplied name and select **Save name**. Save **Description** and **Instructions** separately, then use **+** beside **Skills** → **Generative**. Use only fictional contact and payment details.
 
-All three optional specialists were created and invoked in fresh Web Chat tests. Routing worked, but each finalized its simulated change without a separate confirmation; delivery also exposed internal JSON. Treat these as behavioral defects, not complete end-to-end passes. Keep Demo Mode; no knowledge source or backend is connected by the descriptions.
+All three optional specialists were created and invoked in fresh Web Chat tests. Each returned to the primary, but each finalized its simulated change without a separate confirmation. An earlier run also saw delivery expose internal JSON; the latest run did not. Treat these as behavioral defects, not complete end-to-end passes. Keep Demo Mode; no knowledge source or backend is connected by the descriptions.
 
 ### 2. Name the enrollment specialist
 
@@ -536,7 +536,7 @@ This is a demo with no backend system. After the caller confirms, simulate succe
 
 ### 5. Add the enrollment skill
 
-Select **+** beside **Skills** → **Generative**. Set **Name** to `create-new-subscription` and **Description** to `Guides callers through creating a new Zava coffee subscription.` Paste these **Instructions** and select **Add skill**.
+Select **+** beside **Skills** → **Generative**. Set **Skill name** to `create-new-subscription` and **Description** to `Guides callers through creating a new Zava coffee subscription.` Paste these **Instructions** and select **Add skill**.
 
 **create-new-subscription · Instructions**
 
@@ -598,7 +598,7 @@ This is a demo with no backend system. After the caller confirms, simulate succe
 
 ### 9. Add the payment-method skill
 
-Select **+** beside **Skills** → **Generative**. Set **Name** to `update-payment-method` and **Description** to `Helps callers update the payment method on their coffee subscription.` Paste these **Instructions** and select **Add skill**.
+Select **+** beside **Skills** → **Generative**. Set **Skill name** to `update-payment-method` and **Description** to `Helps callers update the payment method on their coffee subscription.` Paste these **Instructions** and select **Add skill**.
 
 **update-payment-method · Instructions**
 
@@ -659,7 +659,7 @@ This is a demo with no backend system. After the caller confirms, simulate succe
 
 ### 13. Add the delivery skill
 
-Select **+** beside **Skills** → **Generative**. Set **Name** to `modify-delivery-schedule` and **Description** to `Helps callers change, pause, or skip deliveries on their coffee subscription.` Paste these **Instructions** and select **Add skill**.
+Select **+** beside **Skills** → **Generative**. Set **Skill name** to `modify-delivery-schedule` and **Description** to `Helps callers change, pause, or skip deliveries on their coffee subscription.` Paste these **Instructions** and select **Add skill**.
 
 **modify-delivery-schedule · Instructions**
 
@@ -683,7 +683,7 @@ Save all fields and close the panel. Check for four specialists including cancel
 | `I want to start a new coffee subscription. My email is alex@contoso.com, medium roast, every two weeks.` | Subscription Enrollment & Setup |
 | `I need to update my credit card. My customer ID is C-7781.` | Account & Billing Management |
 
-Compare delivery with the core baseline: the fresh-account trace invoked its specialist. Enrollment and billing also routed and returned demo codes, but all three skipped a separate final confirmation; delivery exposed internal JSON. Verify routing and confirmation separately. Do not approve any offered email or other outreach.
+Compare delivery with the core baseline: where the primary answered alone, the latest trace invoked **Delivery Scheduling & Adjustments**. Enrollment and billing also routed and returned demo codes, but all three skipped a separate final confirmation. Watch delivery replies for internal JSON, which an earlier run exposed, and check any date they state. Verify routing and confirmation separately. Do not approve any offered email or other outreach.
 
 Any confirmation is still a simulated output for comparison, not proof of enrollment, payment or delivery changes in a real system.
 
