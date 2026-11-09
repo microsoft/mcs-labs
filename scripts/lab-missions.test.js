@@ -127,7 +127,7 @@ test('Zava separates work-file Chat, the agent MCP App, and Cowork plugin setup'
   assert.match(agent.steps[2].instruction, /MCP App/);
   assert.match(agent.steps[2].help, /enter `50000` without the currency symbol or comma/);
   assert.match(agent.steps[2].notice, /do not overwrite the renewal amount/);
-  assert.match(delegate.steps[0].instruction, /Agents & Plugins → Cowork → Microsoft Dataverse/);
+  assert.match(delegate.steps[0].instruction, /Plugins → Cowork → Microsoft Dataverse/);
   assert.match(delegate.steps[0].help, /https:\/\/zavasalesdemo\.crm\.dynamics\.com\//);
   assert.match(delegate.steps[1].instruction, /Zava PowerPoint/);
   assert.match(delegate.steps[2].instruction, /explicitly select \*\*Cowork/);

@@ -65,7 +65,7 @@ Microsoft Copilot also includes built-in agents: **Researcher** performs multi-s
 <summary>Using your own tenant? View setup requirements</summary>
 
 - A Microsoft 365 account with a Microsoft Copilot licence
-- (Extra Credit) The **Researcher** and **Analyst** agents available in the Microsoft Copilot app (listed under **Agents & Plugins**)
+- (Extra Credit) The **Researcher** and **Analyst** agents available in the Microsoft Copilot app (listed under **Plugins**)
 - For Use Case #2, upload these files to a OneDrive or SharePoint location the account can access, so Work IQ can find them:
   - [Zava DIY Markdown and Clearance Policy](../m365-copilot-frontier-agents/assets/sample-files/Zava_DIY_Markdown_and_Clearance_Policy.docx)
   - [Zava DIY Q2 2026 Store Performance Report](../m365-copilot-frontier-agents/assets/sample-files/Zava_DIY_Q2_2026_Store_Performance_Report.pdf)
@@ -378,12 +378,12 @@ Use the Researcher agent to perform two deep-analysis tasks on a complex PDF doc
 2. Navigate to the Microsoft Copilot app: <https://copilot.cloud.microsoft/>.
 
 3. Open the **Researcher** agent:
-   - Select **Agents & Plugins** in the left pane, then select **Researcher** under **Added**.
+   - Select **Plugins** in the left pane, then select **Researcher** under **Added**.
    - Or type `@Researcher` in the prompt box and choose it from the list.
 
    The agent opens with the prompt **What do you want to research today?**
 
-   ![Agents and Plugins page with Researcher and Analyst listed under Added](images/lab-m365copilot-agents-plugins.png)
+   ![Plugins page with Researcher and Analyst listed under Added](images/lab-m365copilot-agents-plugins.png)
 
 > [!TIP]
 > The Researcher agent is one of the **built-in agents** in Microsoft Copilot — purpose-built AI agents that use advanced reasoning models. Researcher excels at deep document analysis, cross-referencing multiple sections, and synthesizing complex information. It's available to users with a Microsoft Copilot license.
@@ -490,7 +490,7 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
 1. Navigate to the Microsoft Copilot app: <https://copilot.cloud.microsoft/>.
 
 2. Open the **Analyst** agent:
-   - Select **Agents & Plugins** in the left pane, then select **Analyst** under **Added**.
+   - Select **Plugins** in the left pane, then select **Analyst** under **Added**.
    - Or type `@Analyst` in the prompt box and choose it from the list.
 
 > [!TIP]

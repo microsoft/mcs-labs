@@ -312,8 +312,9 @@ when a run-through finds something new, and date it.
 - Wait for `domcontentloaded` plus a `wait` on visible text. Copilot keeps network
   connections open, so "network idle" never comes.
 - Slash commands such as `/cost` are only submitted by clicking Send, not by Enter.
-- The left navigation label alternates between **Plugins** and **Agents & Plugins**.
-  Labs should name the destination ("the plugins page") or show both.
+- The left navigation label and the page heading read **Plugins** (2026-11-09); earlier
+  runs showed **Agents & Plugins**. Labs use **Plugins** with no "also called" hedge.
+  Re-capture any older screenshot that still shows the old heading.
 - The Zava Sales plugin needs the **Microsoft Business apps (preview)** plugin enabled first.
 - Fluent switches report on/off through the `checked` property; `controls` shows `[on]`.
 - An unfocused window closes menus and pauses rendering. `connect` turns on focus

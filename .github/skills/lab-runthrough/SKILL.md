@@ -137,7 +137,7 @@ For each step or mission, in order:
 | Status | Meaning | Example |
 | --- | --- | --- |
 | passed | Works as written | Button and result match |
-| drift | The product changed; the lab is now wrong | "Plugins" is now "Agents & Plugins" |
+| drift | The product changed; the lab is now wrong | "Agents & Plugins" is now "Plugins" |
 | defect | The lab was wrong or unclear all along | Step skips a required toggle |
 | variance | AI output differs but meets the goal | Different wording, same three slides |
 | blocked | The environment stopped you | Missing license, plugin not installed |
