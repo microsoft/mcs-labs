@@ -8,14 +8,14 @@ difficulty: 100
 lab_type: local
 section: core_learning_path
 journeys: ["quick-start", "business-user"]
-description: "Build a cited Zava DIY decision brief with Copilot Chat and Work IQ, then optionally explore deeper reasoning, Pages, Researcher and Analyst."
+description: "Build a cited Zava DIY decision brief with Copilot Chat, deeper reasoning and Work IQ, then optionally explore Pages, Researcher and Analyst."
 classes: wide
 author_profile: false
 toc: false
 mission_lab:
   headline: "From sources"
   headline_emphasis: "to decisions."
-  promise: "Three core missions turn a market question, a policy and a performance report into evidence you can check. Four optional missions take the work further."
+  promise: "Four core missions turn a market question, a policy and a performance report into evidence you can check. Three optional missions take the work further."
   hero_image:
     src: /labs/copilot-chat-workiq/images/preread-excerpt.webp
     alt: "Excerpt of a Zava DIY quarterly business review pre-read with three findings and source references."
@@ -29,12 +29,12 @@ mission_lab:
   prerequisites:
     - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account** in a separate browser profile or private window, not a personal or production account."
     - "If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant."
-  pacing: "Plan 15 minutes for Ask (4) → Apply (5) → Verify (6). Reason (4), Publish (2), Research (10) and Model (5) are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes."
+  pacing: "Plan 15 minutes for Ask (3) → Reason (3) → Apply (4) → Verify (5). Publish (2), Research (10) and Model (5) are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes."
   missions:
     - id: ask
       verb: Ask
       title: "Find the public market context"
-      minutes: 4
+      minutes: 3
       tool: Copilot Chat
       brief: "Before you assess Zava DIY's quarter, find a public baseline and check where it came from."
       outcome: "A short market summary with a source you have opened."
@@ -83,8 +83,7 @@ mission_lab:
     - id: reason
       verb: Reason
       title: "Compare a deeper market analysis"
-      optional: true
-      minutes: 4
+      minutes: 3
       tool: Copilot Chat
       brief: "Return to the public-market conversation and ask for an argument, not just a summary."
       outcome: "A comparison of evidence, calculations and uncertainty across two market answers."
@@ -129,7 +128,7 @@ mission_lab:
             alt: "Response-mode menu and Claude submenu showing available model choices."
             width: 2896
             height: 1888
-            caption: "The capture shows Think deeper selected during the optional exercise. Your available models may differ."
+            caption: "The capture shows Think deeper selected during the market-analysis exercise. Your available models may differ."
           notice: "Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation."
       reveal:
         title: "Did the selector do all the work?"
@@ -151,7 +150,7 @@ mission_lab:
     - id: apply
       verb: Apply
       title: "Turn a policy into a decision"
-      minutes: 5
+      minutes: 4
       tool: Copilot Chat + Work IQ
       brief: "A 17% patio-furniture markdown sounds straightforward. Find what the policy actually requires."
       outcome: "A cited policy summary and an approval, timing and evidence checklist."
@@ -213,7 +212,7 @@ mission_lab:
     - id: verify
       verb: Verify
       title: "Make missing evidence visible"
-      minutes: 6
+      minutes: 5
       tool: Copilot Chat + Work IQ
       brief: "Let Work IQ find the performance report, then distinguish a reported number from an invented one."
       outcome: "A physical-store performance table with explicit missing inventory values."
@@ -460,7 +459,7 @@ mission_lab:
           solution: "Check the assigned account and wait for the upload to finish. Ask the facilitator about missing agent access; an attachment in Researcher is not automatically an attachment in Analyst."
   finish:
     title: "Keep the evidence, not just the answer"
-    message: "Your core result is a cited market summary, policy decision checklist and checked store table. Optional missions add a deeper argument, an editable pre-read, a research briefing and a financial model."
+    message: "Your core result is a cited market summary, policy decision checklist and checked store table. Optional missions add an editable pre-read, a research briefing and a financial model."
     takeaways:
       - label: Grounding
         text: "Choose public-web or permitted work context before prompting; Work IQ does not widen access."
@@ -483,7 +482,7 @@ mission_lab:
 
 Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Build a cited Zava DIY decision brief with Copilot Chat and Work IQ, then optionally explore deeper reasoning, Pages, Researcher and Analyst.
+Build a cited Zava DIY decision brief with Copilot Chat, deeper reasoning and Work IQ, then optionally explore Pages, Researcher and Analyst.
 
 ## Lab Details
 
@@ -507,12 +506,12 @@ Complete the [classic lab prerequisites](../mcs-m365-copilot-latest/#prerequisit
 - Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account** in a separate browser profile or private window, not a personal or production account.
 - If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant.
 
-Plan **15 minutes for Ask (4) → Apply (5) → Verify (6)**. **Reason (4), Publish (2), Research (10) and Model (5)** are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes.
+Plan **15 minutes for Ask (3) → Reason (3) → Apply (4) → Verify (5)**. **Publish (2), Research (10) and Model (5)** are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes.
 
 ## Table of Contents
 
 - [Ask: Find the public market context](#ask-find-the-public-market-context)
-- [Reason: Compare a deeper market analysis (optional)](#reason-compare-a-deeper-market-analysis)
+- [Reason: Compare a deeper market analysis](#reason-compare-a-deeper-market-analysis)
 - [Apply: Turn a policy into a decision](#apply-turn-a-policy-into-a-decision)
 - [Verify: Make missing evidence visible](#verify-make-missing-evidence-visible)
 - [Publish: Turn the checked answer into a pre-read (optional)](#publish-turn-the-checked-answer-into-a-pre-read)
@@ -522,7 +521,7 @@ Plan **15 minutes for Ask (4) → Apply (5) → Verify (6)**. **Reason (4), Publ
 
 ## Ask: Find the public market context
 
-**4 minutes · Copilot Chat**
+**3 minutes · Copilot Chat**
 
 **Finish line:** A short market summary with a source you have opened.
 
@@ -575,7 +574,7 @@ Choose grounding → Ask a focused question → Open a reference.
 
 ## Reason: Compare a deeper market analysis
 
-**Optional · 4 minutes · Copilot Chat**
+**3 minutes · Copilot Chat**
 
 **Finish line:** A comparison of evidence, calculations and uncertainty across two market answers.
 
@@ -621,7 +620,7 @@ Auto decides how long to think; Quick response favors speed for recall, rewritin
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/model-picker-dark.webp"><img src="images/model-picker.webp" alt="Response-mode menu and Claude submenu showing available model choices." width="1812" height="1176"></picture>
 
-The capture shows Think deeper selected during the optional exercise. Your available models may differ. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
+The capture shows Think deeper selected during the market-analysis exercise. Your available models may differ. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
 
 <details>
 <summary>Reveal: Did the selector do all the work?</summary>
@@ -648,7 +647,7 @@ Specify the analysis → Allow reasoning time → Compare evidence.
 
 ## Apply: Turn a policy into a decision
 
-**5 minutes · Copilot Chat + Work IQ**
+**4 minutes · Copilot Chat + Work IQ**
 
 **Finish line:** A cited policy summary and an approval, timing and evidence checklist for a 17% patio-furniture markdown.
 
@@ -712,7 +711,7 @@ Find the policy → Apply each requirement → Check the conclusion.
 
 ## Verify: Make missing evidence visible
 
-**6 minutes · Copilot Chat + Work IQ**
+**5 minutes · Copilot Chat + Work IQ**
 
 **Finish line:** A physical-store performance table with explicit missing inventory values.
 
@@ -989,7 +988,7 @@ Extract report data → Apply explicit assumptions → Check computed results.
 
 ## Take it with you
 
-Your core result is a cited market summary, policy decision checklist and checked store table. Optional missions add a deeper argument, an editable pre-read, a research briefing and a financial model.
+Your core result is a cited market summary, policy decision checklist and checked store table. Optional missions add an editable pre-read, a research briefing and a financial model.
 
 - **Grounding:** choose public-web or permitted work context before prompting; Work IQ does not widen access.
 - **Judgment:** open citations, preserve missing values, and distinguish a recommendation from an approval.

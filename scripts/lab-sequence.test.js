@@ -15,7 +15,7 @@ const pairs = [
   ['mcs-hooks', 'hooks-knowledge-travel-policy', ['profile', 'policy', 'redact', 'guard']],
   ['mcs-customer-conversation-harness', 'customer-assist-agent', ['build', 'route', 'speak', 'extend']],
   ['mcs-managed-apps', 'managed-apps-build', ['build', 'prepare', 'prove', 'protect', 'repair']],
-  ['mcs-workflows-latest', 'workflows-autonomous', ['time-block', 'isolate', 'route', 'review', 'inventory', 'specialist', 'stop']],
+  ['mcs-workflows-latest', 'workflows-autonomous', ['time-block', 'isolate', 'route', 'review', 'inventory', 'specialist']],
   ['mcs-agent-integration', 'agent-integration-team', ['coordinate', 'ground', 'connect', 'prove', 'challenge']],
 ];
 const blocks = text => [...text.matchAll(/^([ \t]*)```([^\n`]*)\n([\s\S]*?)^\1```[ \t]*$/gm)]
@@ -50,12 +50,22 @@ test('model selection follows deeper reasoning within the original public-web us
   assert.ok(!missions[0].steps.some(s => s.title === 'Inspect response modes and change the model'));
   const reason = missions.find(m => m.id === 'reason');
   assert.equal(reason.steps.at(-1).title, 'Inspect response modes and change the model');
-  assert.equal(reason.optional, true);
+  assert.notEqual(reason.optional, true);
 });
 
 test('shared Cowork keeps its established scenario sequence', () => {
   const missions = read('cowork-zava-sales').data.mission_lab.missions;
   assert.deepEqual(missions.map(m => m.id), ['ask', 'agent', 'delegate', 'repeat', 'record', 'improve', 'specialize']);
+});
+
+test('guided Bootcamp extensions follow all required missions', () => {
+  for (const slug of [...pairs.map(([, guided]) => guided), 'cowork-zava-sales']) {
+    let optionalStarted = false;
+    for (const mission of read(slug).data.mission_lab.missions) {
+      if (mission.optional) optionalStarted = true;
+      else assert.equal(optionalStarted, false, `${slug}: required ${mission.id} follows an optional mission`);
+    }
+  }
 });
 
 test('optional navigation checks for later required work before offering the finish', () => {
