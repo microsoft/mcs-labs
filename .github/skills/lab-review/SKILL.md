@@ -21,6 +21,10 @@ Add `--format markdown` for a report table or `--format json` for further proces
 The exit code is 1 when there are errors (or warnings with `--strict`). A slug can also
 be given as a path such as `_labs/<slug>.md`.
 
+Explicit exclusions override this command table: named slugs still build repository-wide
+audit context. For module/presentation-excluded work, use the
+[scoped validation guidance](../lab-update/SKILL.md#5-validate) and disclose omitted checks.
+
 ## 2. Read the audit
 
 `references/audit-codes.md` explains every code, why it matters and how to fix it.

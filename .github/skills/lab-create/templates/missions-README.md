@@ -42,6 +42,9 @@ Plan **%%DURATION%% minutes for the core missions**. %%OPTIONAL_MISSIONS%% are *
 
 **If %%LIKELY_PROBLEM%%:** %%WHAT_TO_DO%%
 
+<!-- TEMPLATE NOTE (delete): omit this paragraph if result_check is not used. -->
+**Check your result:** %%OBSERVABLE_RESULT_AND_WHERE_TO_VERIFY_IT%%
+
 ## 🧪 %%MISSION_2_VERB%%: %%MISSION_2_SHORT%%
 
 **Optional · %%MISSION_2_MINUTES%% minutes · %%MISSION_2_TOOL%%**

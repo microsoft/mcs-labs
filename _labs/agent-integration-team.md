@@ -262,6 +262,7 @@ mission_lab:
       tool: Coordinator Preview · debug trace
       brief: "After the external connection works, verify both delegations and distinguish a quote from approval."
       outcome: "An evidenced delivery recommendation and a separate hypothetical policy assessment, with no transaction."
+      result_check: "Your trace contains returned Zava stock and policy results and a usable LiftLine quote—not just a connected card or plausible answer. The separate EUR 230 assessment requires approval, without changing the quote or granting approval; unresolved delegation remains a blocker."
       steps:
         - title: "Run the complete-team baseline"
           instruction: "Open **Zava Operations Assistant → Preview → New chat** and send the full prompt. Verify your own calls and returned business results, not just the connection list."
@@ -843,6 +844,8 @@ Zava stock check → LiftLine quote → Zava approval check → Human next step.
 **Answer: B.** Neither a new quote nor an approval was requested or granted. Zava owns the policy and the assessment is hypothetical.
 
 **Stuck?** Inspect the task and returned business status. This deployment rejected a destination containing the customer name and misread "no quote override" as a price-change request. Keep the site name alone and omit override wording unless supplied. Reuse only returned context/task IDs. Allow at most one corrected retry, including protocol errors, then report the blocker to the instructor; do not keep rephrasing or invent a plan.
+
+**Check your result:** Your trace contains returned Zava stock and policy results and a usable LiftLine quote—not just a connected card or plausible answer. The separate EUR 230 assessment requires approval, without changing the quote or granting approval; unresolved delegation remains a blocker.
 
 ## Challenge
 

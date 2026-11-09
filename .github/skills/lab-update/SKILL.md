@@ -107,6 +107,14 @@ untouched-lab or shared assets (`image-shared`).
 
 ## 5. Validate
 
+Check the requested scope before choosing commands. If modules or presentations are
+excluded, do not run broad audits, feed/date resolution or full-site/test commands that
+scan them. The audit CLI builds repository-wide context even with explicit slugs. Instead,
+pass only the allowed documents to pure checks such as `auditMissions` and
+`collectAnchors`, run named tests, and render single documents with collection discovery
+and plugins disabled. Report omitted module/navigation/full-site checks; a scoped pass is
+not a full-suite pass.
+
 ```bash
 npm run audit:labs -- --changed   # no new errors or warnings in the labs you touched
 npm test                          # not run by CI; run it locally

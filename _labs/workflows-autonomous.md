@@ -166,6 +166,7 @@ mission_lab:
       tool: Copilot · Human review · Outlook
       brief: "Inspect the draft-and-approval path and send the exact Customer Inquiry sample to yourself."
       outcome: "A reviewed answer or holding reply, a successful approved run, and its received email."
+      result_check: "Your Outlook mailbox contains the reviewed reply, and the matching run executed Reply to email. A safe rejection instead leaves the original flagged with no reply; it is not the approved-reply outcome."
       steps:
         - title: "Inspect the grounded drafting step"
           instruction: |
@@ -755,6 +756,8 @@ If approval is missing, inspect whether Copilot is drafting or Human review is w
 **Knowledge check:** What is acceptable when the mailbox lacks warranty evidence?
 - **Correct:** A holding reply without invented warranty/MDM facts. Grounding matters more than specificity.
 - **Incorrect:** An invented warranty period to make the test complete. Never approve unsupported facts.
+
+**Check your result:** Your Outlook mailbox contains the reviewed reply, and the matching run executed Reply to email. A safe rejection instead leaves the original flagged with no reply; it is not the approved-reply outcome.
 
 ## Mission 4: Stop
 

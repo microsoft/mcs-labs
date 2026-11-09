@@ -304,7 +304,7 @@ Create the answer first, then open its menu.
 
 3. Check the new findings and open questions against the original sources, then edit the page directly to correct or add information. For example, the report does describe Spokane's competitive pressure and declining foot traffic; do not accept a claim that it gives no cause. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to.
 
-Asking chat beside an open page to rewrite it can report success without updating the page. For a later Copilot revision, request a new answer in chat and open that answer in Pages again; verify the page actually changed.
+For a later Copilot revision, request a new answer in chat and open that answer in Pages again.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/preread-excerpt-dark.webp"><img src="images/preread-excerpt.webp" alt="Excerpt of a Zava DIY quarterly business review pre-read with three findings and source references." width="2814" height="1566"></picture>
 
@@ -342,6 +342,8 @@ Complete the chat response → Edit in Pages → Verify the artifact.
 </details>
 
 **Stuck?** If the page did not update after a chat request, generate the revised answer in chat and use its Edit in Pages action, or edit the page directly.
+
+**Check your result:** The open Page shows your corrections, source-backed findings and blank owners—not just a chat message claiming it changed. If you also created Word, its contents match the corrected pre-read.
 
 ## 📖 Research: Connect the issues across a hotel report
 

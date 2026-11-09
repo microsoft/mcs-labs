@@ -42,6 +42,9 @@ as an attendee would, write down what really happens, and leave the tenant as yo
 ## 1. Prepare
 
 1. Run `npm run audit:labs -- <slug>` and fix nothing yet; note anything that already fails.
+   If modules/presentations are excluded, use the
+   [scoped validation guidance](../lab-update/SKILL.md#5-validate) instead: named slugs
+   alone do not prevent repository-wide audit scans.
 2. Read both copies: `labs/<slug>/README.md` and `_labs/<slug>.md`. For a missions lab, the
    front matter `missions` list holds the prompts, steps, checks and screenshots.
 3. List the prerequisites (licenses, tenant, plugins, connections, sample data) and confirm

@@ -133,6 +133,10 @@
           {% if mission.stuck %}
           <details class="stuck"><summary>Something not matching?</summary><dl>{% for item in mission.stuck %}<dt>{{ item.problem | escape }}</dt><dd>{{ item.solution | markdownify }}</dd>{% endfor %}</dl></details>
           {% endif %}
+          {% if mission.result_check and mission.result_check != empty %}
+          {%- comment -%} Keep evidence guidance outside the actions: it also belongs in the learner's PDF. {%- endcomment %}
+          <p class="result-check"><strong>Check your result</strong> {{ mission.result_check | escape }}</p>
+          {% endif %}
           <footer class="mission-actions">
             <button type="button" class="btn btn-primary" data-complete="{{ mission.id | escape }}" aria-pressed="false" hidden>Mark mission complete</button>
             {% unless forloop.last %}

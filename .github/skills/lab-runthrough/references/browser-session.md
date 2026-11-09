@@ -117,9 +117,19 @@ Use `newtab` rather than `launch` for a second app in the same lab (for example 
 to Copilot Studio): the tab shares the first one's sign-in.
 
 Streamed text or a disappearing **Processing** indicator may precede the settled reply.
-Wait for the product's actual completion state or stable reply controls/content before
-recording a response as observed; do not use a generic text dump or hidden tool trace as
-proof that a workflow completed.
+Before sending, record the current turn and confirm the composer and Send control are
+ready. Then require a new assistant turn and wait for any tool output for that prompt to settle.
+Cumulative credits or Copy-button counts can belong to earlier turns; they are not
+completion signals. Before retrying a timeout, inspect the original turn/run to avoid a
+duplicate submission. Preserve per-attempt evidence before virtualized traces move.
+
+If attachment stalls, use a bounded connection timeout and select the intended target
+from current URL/target metadata, including redirects. A custom CDP connection should
+filter to the required page and frames rather than attach every unrelated or frozen
+target; do not persist target IDs in reusable scripts. On every reconnect or new tab,
+apply the intended viewport/device scale and verify `window.devicePixelRatio` before
+interaction or capture. A launch-time scale alone does not prove the reattached page
+retained it. Keep unrelated browsers and profiles untouched.
 
 ## Library use
 

@@ -182,6 +182,8 @@ If approval is missing, inspect whether Copilot is drafting or Human review is w
 - **Correct:** A holding reply without invented warranty/MDM facts. Grounding matters more than specificity.
 - **Incorrect:** An invented warranty period to make the test complete. Never approve unsupported facts.
 
+**Check your result:** Your Outlook mailbox contains the reviewed reply, and the matching run executed Reply to email. A safe rejection instead leaves the original flagged with no reply; it is not the approved-reply outcome.
+
 ## 🧭 Mission 4: Stop
 
 **5 minutes · Workflows / Activity**

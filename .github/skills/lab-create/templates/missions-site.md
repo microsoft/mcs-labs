@@ -45,6 +45,8 @@ mission_lab:
       tool: %%MISSION_1_TOOL%%
       brief: "%%WHY_THIS_MISSION_MATTERS_IN_ONE_SENTENCE%%"
       outcome: "%%WHAT_THE_LEARNER_HAS_AT_THE_END%%"
+      # TEMPLATE NOTE (delete): optional; omit when outcome suffices. Plain text, not steps or a completion gate. Mirror at the mission's end in both bodies.
+      result_check: "%%OBSERVABLE_RESULT_AND_WHERE_TO_VERIFY_IT%%"
       steps:
         - title: "%%STEP_TITLE%%"
           instruction: "%%VERB_FIRST_INSTRUCTION_WITH_BOLD_UI_LABELS%%"
@@ -157,6 +159,9 @@ Plan **%%DURATION%% minutes for the core missions**. %%OPTIONAL_MISSIONS%% are *
 **Quick check:** %%MISCONCEPTION_AS_A_QUESTION%% **%%ANSWER%%.** %%WHY%%
 
 **If %%LIKELY_PROBLEM%%:** %%WHAT_TO_DO%%
+
+<!-- TEMPLATE NOTE (delete): omit this paragraph if result_check is not used. -->
+**Check your result:** %%OBSERVABLE_RESULT_AND_WHERE_TO_VERIFY_IT%%
 
 ## %%MISSION_2_VERB%%: %%MISSION_2_SHORT%%
 
