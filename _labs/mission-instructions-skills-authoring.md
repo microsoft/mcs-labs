@@ -1,4 +1,6 @@
 ---
+slug: instructions-skills-authoring
+permalink: /labs/instructions-skills-authoring/
 lab_format: missions
 module: instructions-skills-runtime-and-sandbox
 title: "Instructions and Skills Authoring"

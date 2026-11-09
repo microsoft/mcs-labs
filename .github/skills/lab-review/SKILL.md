@@ -19,7 +19,7 @@ audit, then add the judgment no script can make.
 
 Add `--format markdown` for a report table or `--format json` for further processing.
 The exit code is 1 when there are errors (or warnings with `--strict`). A slug can also
-be given as a path such as `_labs/<slug>.md`.
+be given as a path such as `_labs/<slug>.md` or `_labs/mission-<slug>.md`.
 
 Explicit exclusions override this command table: named slugs still build repository-wide
 audit context. For module/presentation-excluded work, use the

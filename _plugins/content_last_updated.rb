@@ -99,6 +99,10 @@ module McsLabs
       logger
     )
       source_path = repository_root.join("_#{collection_name}", "#{slug}.md")
+      if collection_name == "labs" && document.data["lab_format"] == "missions"
+        mission_path = repository_root.join("_labs", "mission-#{slug}.md")
+        source_path = mission_path if mission_path.file?
+      end
       feed_date = document.data["content_last_updated"] || document.data["last_modified"]
       return feed_date unless source_path.file?
 

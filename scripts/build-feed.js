@@ -1,6 +1,7 @@
 'use strict';
 
 const crypto = require('node:crypto');
+const { sourceSlug } = require('./lab-files');
 
 const ALL_COLLECTIONS = ['events', 'workshops', 'modules', 'labs'];
 const SCHEMA_VERSION = '1.1';
@@ -277,6 +278,7 @@ if (require.main === module) {
   };
 
   const allItems = [];
+  const itemKeys = new Set();
   for (const collection of ALL_COLLECTIONS) {
     const dir = path.join(root, `_${collection}`);
     let files = [];
@@ -286,9 +288,12 @@ if (require.main === module) {
       continue;
     }
     for (const file of files) {
-      const slug = file.replace(/\.md$/, '');
       const full = path.join(dir, file);
       const parsed = matter(fs.readFileSync(full, 'utf8'));
+      const slug = sourceSlug(collection, file, parsed.data);
+      const key = `${collection}/${slug}`;
+      if (itemKeys.has(key)) throw new Error(`Duplicate feed identity: ${key}`);
+      itemKeys.add(key);
       allItems.push(
         buildItem({
           collection,

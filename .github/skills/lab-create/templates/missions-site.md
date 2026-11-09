@@ -1,4 +1,6 @@
 ---
+slug: %%SLUG%%
+permalink: /labs/%%SLUG%%/
 layout: lab
 lab_format: missions
 module: %%MODULE_SLUG%%

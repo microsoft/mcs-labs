@@ -86,7 +86,7 @@ This document contains essential context for GitHub Copilot when working on the 
 
 **Lab content changes (REQUIRED):**
 
-- ✅ `labs/<slug>/README.md` and `_labs/<slug>.md` updated **together** in the same PR (CI enforces this - see Principle 2)
+- ✅ `labs/<slug>/README.md` and `_labs/<slug>.md` (`_labs/mission-<slug>.md` for a guided lab) updated **together** in the same PR (CI enforces this - see Principle 2)
 - ✅ In-page anchor links still resolve if headings changed
 - ✅ Images referenced by the lab exist under `labs/<slug>/images/`
 
@@ -171,20 +171,22 @@ Site is served at `http://localhost:4000/mcs-labs/` - the `/mcs-labs/` baseurl i
 | Path | Role |
 | ---- | ---- |
 | `labs/<slug>/README.md` | Lab as read on GitHub. Uses emoji section headings (house style). |
-| `_labs/<slug>.md` | Lab as published on the site. Jekyll front matter + **plain headings, no emoji**. |
+| `_labs/<slug>.md` | Lab as published on the site. Jekyll front matter + **plain headings, no emoji**. Guided labs use `_labs/mission-<slug>.md` (see below). |
 | `labs/<slug>/images/` | Images referenced by both. |
 
 **Both files must change in the same PR.** `.github/workflows/lab-doc-sync.yml` runs `scripts/check-lab-sync.js` on every PR: a changed README without a matching `_labs/` change **fails the build**; the reverse produces a warning.
 
 **Front matter drives the page** - `_layouts/lab.html` reads `page.title`, `page.description`, `page.module`, `page.section`, `page.difficulty`, `page.duration`, `page.order`, `page.journeys`. Metadata lives in the lab's front matter, not in a central config.
 
-**`lab_format: missions` selects the guided mission layout** - `_layouts/lab.html` hands the page to `_includes/lab-missions.html`; omit the key for the classic layout. Mission content lives in nested `mission_lab` front matter, which the feed preserves. Maintain the readable Markdown body and paired README too, with verbatim prompt parity. The server renders the steps without JavaScript; scoped CSS/JS live under `assets/`. See `docs/NEW_LAB_CHECKLIST.md` and `_labs/cowork-zava-sales.md`. Never set `layout:` on a lab to change its look: the content feed strips `layout`, so the deployed site silently ignores it.
+**`lab_format: missions` selects the guided mission layout** - `_layouts/lab.html` hands the page to `_includes/lab-missions.html`; omit the key for the classic layout. Mission content lives in nested `mission_lab` front matter, which the feed preserves. Maintain the readable Markdown body and paired README too, with verbatim prompt parity. The server renders the steps without JavaScript; scoped CSS/JS live under `assets/`. See `docs/NEW_LAB_CHECKLIST.md` and `_labs/mission-cowork-zava-sales.md`. Never set `layout:` on a lab to change its look: the content feed strips `layout`, so the deployed site silently ignores it.
+
+**Guided lab site copies are named `_labs/mission-<slug>.md`** so they stand out from classic labs. The prefix is only a file name: front matter must start with `slug: <slug>` and `permalink: /labs/<slug>/`, and the URL, the `labs/<slug>/` README folder, modules, agendas and the feed keep the unprefixed slug, so never start a slug with `mission-`. `scripts/lab-files.js` resolves either name; the audit and the feed build reject an unpinned `mission-` file or a lab with both files, and `npm test` checks that exactly the guided labs carry the prefix.
 
 **Lab and module update dates are derived, not authored** -
 `_plugins/content_last_updated.rb` sets `page.content_last_updated`. Module pages
 use their local `slides:` PowerPoint Git date and fall back to the module
 Markdown date; lab pages use the parent module's deck date and fall back to the
-`_labs/<slug>.md` Git date. Do not add manual update-date fields.
+Git date of their `_labs` site copy. Do not add manual update-date fields.
 Jekyll-building workflows require full Git history, and presentation-only
 changes must remain included in their path filters.
 The Node feed producer calls `scripts/resolve-content-dates.rb` once per build
@@ -200,7 +202,7 @@ generation requires Ruby and Git on PATH, but does not load the Jekyll gems.
 **When adding a NEW LAB:**
 
 1. Create `labs/your-lab-name/` with `README.md` and `images/`
-2. Create `_labs/your-lab-name.md` with front matter and the site copy of the content
+2. Create `_labs/your-lab-name.md` (`_labs/mission-your-lab-name.md` for a guided lab) with front matter and the site copy of the content
 3. Serve locally and verify the lab appears in its module and journey pages, prev/next navigation works, and images resolve
 4. Run `npm run audit:labs -- your-lab-name` (anchors, images, front matter, copy drift, retired product names, agendas)
 5. See `docs/NEW_LAB_CHECKLIST.md` for the fuller checklist
@@ -300,7 +302,8 @@ docker exec -it mcs-labs-review bash  # shell inside
 | ------- | --- |
 | Page 404s at `http://localhost:4000/` | Use the baseurl: `http://localhost:4000/mcs-labs/` |
 | Jekyll not picking up changes | Restart the server/container; check the terminal for a build error |
-| New lab missing from the site | Confirm `_labs/<slug>.md` exists with front matter - the README alone publishes nothing |
+| New lab missing from the site | Confirm `_labs/<slug>.md` (or `_labs/mission-<slug>.md`) exists with front matter - the README alone publishes nothing |
+| Guided lab served at `/labs/mission-<slug>/` | Add `slug: <slug>` and `permalink: /labs/<slug>/` to its front matter |
 | In-page TOC links go nowhere | Heading text changed; update the hand-written anchors (see Principle 2) |
 | CI "Lab Doc Sync" failure | You changed a README without mirroring into `_labs/` (or vice versa) |
 | Emoji showing in published headings | Emoji belong in `labs/*/README.md`, not `_labs/*.md` |

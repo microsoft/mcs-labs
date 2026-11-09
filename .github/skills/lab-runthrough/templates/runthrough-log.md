@@ -5,7 +5,7 @@
 | Field | Value |
 | --- | --- |
 | Lab | `%%SLUG%%` (classic or missions) |
-| Copies | `labs/%%SLUG%%/README.md`, `_labs/%%SLUG%%.md` at commit `%%SHA%%` |
+| Copies | `labs/%%SLUG%%/README.md`, `_labs/[mission-]%%SLUG%%.md` at commit `%%SHA%%` |
 | Date | %%YYYY-MM-DD%% |
 | Tenant and account | Training tenant, person's account or provisioned training account (no user names or passwords here) |
 | Browser | Edge or Chrome version, windowed or headless, `--port`, window size, display scale |
@@ -47,7 +47,7 @@ and record positive and rejected paths independently.
 
 | Image | Used at (both copies) | Why | New capture | Crop box | Size | Personal data checked |
 | --- | --- | --- | --- | --- | --- | --- |
-| `images/%%name%%.webp` | `_labs/%%SLUG%%.md:L`, `README.md:L` | Label changed | `%%name%%-light.png` | `[l, t, r, b]` | `W x H` | yes |
+| `images/%%name%%.webp` | `_labs/[mission-]%%SLUG%%.md:L`, `README.md:L` | Label changed | `%%name%%-light.png` | `[l, t, r, b]` | `W x H` | yes |
 
 ## Product claims to recheck
 

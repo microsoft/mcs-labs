@@ -1,4 +1,6 @@
 ---
+slug: hooks-knowledge-travel-policy
+permalink: /labs/hooks-knowledge-travel-policy/
 lab_format: missions
 module: metadata-and-hooks-deep-dive
 title: "Hooks and Knowledge: Travel Policy Agent"

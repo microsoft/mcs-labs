@@ -61,6 +61,18 @@ test('unrelated files are ignored', () => {
   assert.deepEqual(r.warnings, []);
 });
 
+test('guided lab: README and _labs/mission-<slug>.md changed together → clean', () => {
+  const r = findUnsyncedLabs(['labs/demo/README.md', '_labs/mission-demo.md'], { readmeSlugs: slugs(['demo']) });
+  assert.deepEqual(r.violations, []);
+  assert.deepEqual(r.warnings, []);
+});
+
+test('renaming a site copy to mission-<slug>.md alone → warning, no violation', () => {
+  const r = findUnsyncedLabs([`R100\t_labs/demo.md\t_labs/mission-demo.md`], { readmeSlugs: slugs(['demo']) });
+  assert.deepEqual(r.violations, []);
+  assert.deepEqual(r.warnings, ['demo']);
+});
+
 const { execFileSync } = require('node:child_process');
 
 function runCli(changedFiles) {
@@ -90,6 +102,17 @@ test('CLI: README + _labs changed together exits 0', () => {
 
 test('CLI: added README for existing lab exits 0', () => {
   const { code } = runCli([statusLine('A', 'labs/mcs-workflows/README.md')]);
+  assert.equal(code, 0);
+});
+
+test('CLI: README-only change for a guided lab names its mission- site copy', () => {
+  const { code, stdout } = runCli(['labs/cowork-zava-sales/README.md']);
+  assert.equal(code, 1);
+  assert.match(stdout, /_labs\/mission-cowork-zava-sales\.md was not/);
+});
+
+test('CLI: README + _labs/mission-<slug>.md changed together exits 0', () => {
+  const { code } = runCli(['labs/cowork-zava-sales/README.md', '_labs/mission-cowork-zava-sales.md']);
   assert.equal(code, 0);
 });
 

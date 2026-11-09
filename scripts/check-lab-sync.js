@@ -1,6 +1,7 @@
 'use strict';
 
 module.exports = {};
+const { labSlugFromSource, labSourcePath } = require('./lab-files');
 
 const README_RE = /^labs\/([^/]+)\/README\.md$/;
 const LABS_RE = /^_labs\/([^/]+)\.md$/;
@@ -30,7 +31,7 @@ function findUnsyncedLabs(changedFiles, { readmeSlugs } = {}) {
         continue;
       }
       const l = String(f).match(LABS_RE);
-      if (l) changedLabs.add(l[1]);
+      if (l) changedLabs.add(labSlugFromSource(`${l[1]}.md`));
     }
   }
   const violations = [];
@@ -65,14 +66,20 @@ if (require.main === module) {
 
   const { violations, warnings } = findUnsyncedLabs(changedFiles, { readmeSlugs });
 
+  // Name the file the author must edit: guided labs keep their site copy in _labs/mission-<slug>.md.
+  const siteCopy = (slug) => {
+    try { return labSourcePath('.', slug).split(path.sep).join('/'); } catch { return `_labs/${slug}.md`; }
+  };
+
   for (const slug of warnings) {
-    console.log(`::warning::⚠️ ${slug}: _labs/${slug}.md changed without labs/${slug}/README.md — the GitHub README may now be out of date.`);
+    console.log(`::warning::⚠️ ${slug}: ${siteCopy(slug)} changed without labs/${slug}/README.md — the GitHub README may now be out of date.`);
   }
   if (violations.length) {
     for (const slug of violations) {
-      console.error(`::error::❌ ${slug}: labs/${slug}/README.md changed but _labs/${slug}.md was not. The site renders from _labs/${slug}.md — update it so your change appears. (See docs/CONTENT_FEED.md.)`);
+      const site = siteCopy(slug);
+      console.error(`::error::❌ ${slug}: labs/${slug}/README.md changed but ${site} was not. The site renders from ${site} — update it so your change appears. (See docs/CONTENT_FEED.md.)`);
     }
-    console.error(`\nlab-doc-sync: ${violations.length} lab(s) need their _labs/<slug>.md updated.`);
+    console.error(`\nlab-doc-sync: ${violations.length} lab(s) need their site copy (_labs/<slug>.md, or _labs/mission-<slug>.md for a guided lab) updated.`);
     process.exit(1);
   }
   console.log(`lab-doc-sync: OK${warnings.length ? ` (${warnings.length} warning(s))` : ''}`);

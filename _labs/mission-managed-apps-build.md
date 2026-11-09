@@ -1,4 +1,6 @@
 ---
+slug: managed-apps-build
+permalink: /labs/managed-apps-build/
 lab_format: missions
 module: managed-apps
 title: "Apps on Microsoft Copilot Managed Runtime"

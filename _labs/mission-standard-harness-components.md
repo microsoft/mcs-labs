@@ -1,4 +1,6 @@
 ---
+slug: standard-harness-components
+permalink: /labs/standard-harness-components/
 lab_format: missions
 module: standard-harness
 title: "Standard harness — Component Model"

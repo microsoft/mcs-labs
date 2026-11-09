@@ -1,4 +1,6 @@
 ---
+slug: declarative-agent-skill-reuse
+permalink: /labs/declarative-agent-skill-reuse/
 lab_format: missions
 module: copilot-harness-latest
 title: "Reuse a Cowork skill in a declarative agent"

@@ -6,7 +6,8 @@ description: Create a new MCS Labs hands-on lab in the classic format (README pl
 # Create a lab
 
 A lab is two hand-written copies plus images. `labs/<slug>/README.md` is what GitHub
-readers see; `_labs/<slug>.md` is the published page and carries the front matter.
+readers see; `_labs/<slug>.md` is the published page and carries the front matter. A
+guided lab names it `_labs/mission-<slug>.md` (section 4).
 CI (`scripts/check-lab-sync.js`) fails a PR that changes the README without the
 `_labs` copy. The authoring contract is `docs/NEW_LAB_CHECKLIST.md`: read it first and
 treat it as the source of truth. This skill adds the decisions and the order of work.
@@ -25,7 +26,8 @@ in place: copy it to a new slug for the delivery that needs the new format.
 
 Ask for anything missing, one question at a time:
 
-- Slug (kebab-case, unique across `_labs/` and `labs/`), title, one-sentence description.
+- Slug (kebab-case, unique across `_labs/` and `labs/`, never starting with `mission-`),
+  title, one-sentence description.
 - Persona and level (100, 200 or 300), journeys, section, duration in minutes.
 - Parent module slug, and which events or agendas should list the lab.
 - The **finish line**: the artifact the learner leaves with.
@@ -70,13 +72,17 @@ Apply `../lab-review/references/learning-design.md` while drafting. In short:
 ## 4. Scaffold the files
 
 Templates are in `templates/`. Replace every `%%PLACEHOLDER%%` and delete every
-`TEMPLATE NOTE` comment; `grep -rnE '%%|TEMPLATE NOTE' labs/<slug> _labs/<slug>.md`
-must return nothing before you commit.
+`TEMPLATE NOTE` comment. This must return nothing before you commit (`-s` skips the
+site copy name the lab does not use):
 
-| Format | `labs/<slug>/README.md` | `_labs/<slug>.md` |
+```bash
+grep -rnsE '%%|TEMPLATE NOTE' labs/<slug> _labs/<slug>.md _labs/mission-<slug>.md
+```
+
+| Format | `labs/<slug>/README.md` | Site copy |
 | --- | --- | --- |
-| Classic | `templates/classic-README.md` | `templates/classic-site.md` |
-| Missions | `templates/missions-README.md` | `templates/missions-site.md` |
+| Classic | `templates/classic-README.md` | `templates/classic-site.md`, saved as `_labs/<slug>.md` |
+| Missions | `templates/missions-README.md` | `templates/missions-site.md`, saved as `_labs/mission-<slug>.md`; keep its `slug` and `permalink` lines |
 
 Then:
 

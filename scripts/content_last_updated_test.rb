@@ -81,6 +81,22 @@ class ContentLastUpdatedTest < Minitest::Test
     assert_equal ["_labs/demo.md"], @requested_paths
   end
 
+  def test_mission_lab_date_uses_prefixed_source_file
+    write("_labs/mission-guided.md")
+    # Jekyll keeps the file name as the basename but takes the slug from front matter.
+    lab = ContentUpdateDocument.new(
+      data: { "slug" => "guided", "lab_format" => "missions", "module" => "modern-agents" },
+      path: File.join(@root, "_labs", "mission-guided.md"),
+      basename_without_ext: "mission-guided"
+    )
+    mod = document("modern-agents", {}, "modules")
+
+    apply([lab], [mod], "_labs/mission-guided.md" => "2026-10-04T09:00:00Z")
+
+    assert_equal "2026-10-04T09:00:00Z", lab.data["content_last_updated"]
+    assert_equal ["_labs/mission-guided.md"], @requested_paths
+  end
+
   def test_missing_powerpoint_warns_and_falls_back_to_document_dates
     write("_labs/demo.md")
     write("_modules/modern-agents.md")

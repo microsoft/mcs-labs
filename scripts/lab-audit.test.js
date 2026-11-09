@@ -105,8 +105,8 @@ test('fenced prompts are de-indented and kept in order', () => {
 });
 
 test('parseArgs accepts slugs or either copy path and validates options', () => {
-  const opts = audit.parseArgs(['labs/mcs-hooks/README.md', '_labs/cowork-zava-sales.md', 'agent-builder-web', '--format', 'json', '--min-severity=error', '--strict']);
-  assert.deepEqual(opts.slugs, ['mcs-hooks', 'cowork-zava-sales', 'agent-builder-web']);
+  const opts = audit.parseArgs(['labs/mcs-hooks/README.md', '_labs/mission-cowork-zava-sales.md', '_labs/mcs-workflows.md', 'agent-builder-web', '--format', 'json', '--min-severity=error', '--strict']);
+  assert.deepEqual(opts.slugs, ['mcs-hooks', 'cowork-zava-sales', 'mcs-workflows', 'agent-builder-web']);
   assert.equal(opts.format, 'json');
   assert.equal(opts.minSeverity, 'error');
   assert.equal(opts.strict, true);
@@ -116,6 +116,31 @@ test('parseArgs accepts slugs or either copy path and validates options', () => 
   assert.equal(audit.parseArgs(['--changed=upstream/main']).changed, 'upstream/main');
   assert.equal(audit.parseArgs(['--format=xml', '--bogus']).errors.length, 2);
   assert.equal(audit.parseArgs(['--all', 'x']).errors.length, 1);
+});
+
+test('mission- site copies must pin their unprefixed identity, and a lab keeps one site copy', t => {
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'lab-audit-mission-'));
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  fs.mkdirSync(path.join(dir, '_labs'));
+  const write = (name, fields) => fs.writeFileSync(path.join(dir, '_labs', name), `---\ntitle: Lab\n${fields}\n---\n\n# Lab\n`);
+  write('mission-unpinned.md', 'lab_format: missions\nslug: mission-unpinned');
+  write('twice.md', 'module: m1');
+  write('mission-twice.md', 'lab_format: missions\nslug: twice\npermalink: /labs/twice/');
+
+  const result = audit.auditAll({ root: dir });
+  const error = (slug, code) => result.findings.find(f => f.slug === slug && f.severity === 'error' && f.code === code);
+
+  const identity = error('unpinned', 'fm-invalid');
+  assert.ok(identity, JSON.stringify(result.findings.filter(f => f.slug === 'unpinned'), null, 2));
+  assert.equal(identity.file, '_labs/mission-unpinned.md');
+  assert.equal(identity.line, 4, 'points at the slug line');
+  assert.match(identity.message, /slug: unpinned and permalink: \/labs\/unpinned\//);
+
+  const duplicate = error('twice', 'copy-duplicate');
+  assert.ok(duplicate, JSON.stringify(result.findings.filter(f => f.slug === 'twice'), null, 2));
+  assert.equal(duplicate.file, '_labs/mission-twice.md');
+  assert.match(duplicate.message, /Both _labs\/twice\.md and _labs\/mission-twice\.md exist/);
+  assert.equal(error('twice', 'fm-invalid'), undefined, 'the guided copy itself is pinned correctly');
 });
 
 // A throwaway repository with one instance of each failure class the skills rely on.

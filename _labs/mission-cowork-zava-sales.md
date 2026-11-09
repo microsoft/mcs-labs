@@ -1,4 +1,6 @@
 ---
+slug: cowork-zava-sales
+permalink: /labs/cowork-zava-sales/
 layout: lab
 lab_format: missions
 module: cowork-latest

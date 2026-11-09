@@ -111,7 +111,7 @@ npm install  # Reads package.json, installs exact compatible versions
 3. Generated files are available as downloadable artifacts from workflow runs
 
 ### Reviewing and Maintaining Labs
-1. Every published lab has two copies: `labs/<slug>/README.md` and `_labs/<slug>.md`. Change both in the same PR (the Lab Doc Sync check enforces this)
+1. Every published lab has two copies: `labs/<slug>/README.md` and `_labs/<slug>.md` (`_labs/mission-<slug>.md` for a guided lab). Change both in the same PR (the Lab Doc Sync check enforces this)
 2. Run `npm run audit:labs -- <slug>` (or `-- --changed`) before opening a PR. CI does not run it
 3. To create, review, run through or update a lab with an agent, use the skills in `.github/skills/` (`lab-create`, `lab-review`, `lab-runthrough`, `lab-update`). See `docs/NEW_LAB_CHECKLIST.md`
 

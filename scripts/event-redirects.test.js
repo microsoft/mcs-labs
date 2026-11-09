@@ -5,6 +5,7 @@ const path = require('node:path');
 const vm = require('node:vm');
 const matter = require('gray-matter');
 const yaml = require('js-yaml');
+const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
 const legacyId = 'bootcamp-v3';
@@ -13,7 +14,8 @@ const storageKey = 'mcs-labs.event-context.v1';
 const aliases = yaml.load(fs.readFileSync(path.join(root, '_data', 'event-aliases.yml'), 'utf8'));
 
 function documentData(folder, slug) {
-  return matter(fs.readFileSync(path.join(root, folder, `${slug}.md`), 'utf8')).data;
+  const file = folder === '_labs' ? labSourcePath(root, slug) : path.join(root, folder, `${slug}.md`);
+  return matter(fs.readFileSync(file, 'utf8')).data;
 }
 
 function scriptFrom(filename) {

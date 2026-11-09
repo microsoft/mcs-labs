@@ -25,7 +25,7 @@ depends on product UI and a training environment is available, run `lab-runthrou
 
 Agree the scope before editing when it is more than a fix: rewrites, a new format,
 different prompts or a new duration need the lab owner (`git log --format='%an' --
-labs/<slug> _labs/<slug>.md | sort | uniq -c | sort -rn`).
+labs/<slug> _labs/<slug>.md _labs/mission-<slug>.md | sort | uniq -c | sort -rn`).
 
 ## 2. Branch
 
@@ -35,8 +35,9 @@ script changes.
 
 ## 3. Edit both copies
 
-`labs/<slug>/README.md` (GitHub) and `_labs/<slug>.md` (site) change together, in the same
-commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site copy.
+`labs/<slug>/README.md` (GitHub) and the site copy (`_labs/<slug>.md`, or
+`_labs/mission-<slug>.md` for a guided lab) change together, in the same commit. CI
+(`Lab Doc Sync`) fails a PR that changes a README without its site copy.
 
 - **Headings.** README headings keep their emoji; `_labs` headings have none. When a
   heading changes, update the hand-written table of contents in both copies; the audit

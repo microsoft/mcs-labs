@@ -17,7 +17,7 @@ mkdir -p labs/your-lab-name/images
 
 ### Step 2: Create the published page
 
-Write `_labs/your-lab-name.md` — same content, plus Jekyll front matter, and **plain headings with no emoji**:
+Write `_labs/your-lab-name.md` (`_labs/mission-your-lab-name.md` for a [guided mission lab](#authoring-a-guided-mission-lab)) — same content, plus Jekyll front matter, and **plain headings with no emoji**:
 
 ```yaml
 ---
@@ -70,7 +70,9 @@ It exits with 1 on errors. CI does not run it, so run it before opening the PR.
 | `lab_type` | ⚠️ Optional | `local` or `external` | `local` |
 | `layout` | ⚠️ Optional | Defaulted to `lab` by `_config.yml`. Leave it alone: the content feed strips `layout`, so the deployed site silently ignores a custom value even though `jekyll serve` honours it. Use `lab_format` to change how a lab renders | `lab` |
 | `lab_format` | ⚠️ Optional | `missions` renders guided missions inside the usual site header, event rail, and bottom nav. Omit it for the classic format. Consumers that don't know the key render the readable Markdown body | `missions` |
-| `mission_lab` | ⚠️ Required with `missions` | Structured mission content; see the authoring contract below and `_labs/cowork-zava-sales.md` | object |
+| `mission_lab` | ⚠️ Required with `missions` | Structured mission content; see the authoring contract below and `_labs/mission-cowork-zava-sales.md` | object |
+| `slug` | ⚠️ Required in `mission-` files | The lab slug without the prefix, so the page keeps its URL | `cowork-zava-sales` |
+| `permalink` | ⚠️ Required in `mission-` files | `/labs/<slug>/`, matching `slug` | `/labs/cowork-zava-sales/` |
 | `unlisted` | ⚠️ Optional | Keeps a lab, event, or workshop out of the homepage, its catalogue, and feed listings (manifests, bundles, index counts), and adds `noindex`. Unlisted event and workshop navigation is available only in explicit URL context. The URL remains public | `true` |
 
 Mark both an unlisted preview lab and its separate preview event with `unlisted: true`, `search: false`, and `sitemap: false` (search and sitemap are separate switches). Do not repoint an advertised event at draft content. An unlisted URL is not access-controlled.
@@ -87,9 +89,16 @@ An unlisted page still gets a per-item feed document (`feed/items/<collection>/<
 
 ### Authoring a guided mission lab
 
-Use `_labs/cowork-zava-sales.md` as the working example. Set `lab_format: missions`
+Use `_labs/mission-cowork-zava-sales.md` as the working example. Set `lab_format: missions`
 and supply `mission_lab` in front matter. The feed preserves both keys, including
 the nested content; do not put rendering-critical content in a separate data file.
+
+Name the site copy `_labs/mission-<slug>.md` so guided labs stand out in the folder,
+and start its front matter with `slug: <slug>` and `permalink: /labs/<slug>/`. The
+prefix is only a file name: the URL, the README folder (`labs/<slug>/`), modules,
+agendas and the feed keep `<slug>`, so never start a slug with `mission-`. The audit
+and the feed build reject a `mission-` file without those keys, or a lab with both
+files, and `npm test` checks that exactly the guided labs carry the prefix.
 
 - Use the curriculum's lab name for `title` and the readable copies' H1. The renderer uses it as the primary heading; `headline` and `headline_emphasis` become a smaller scenario tagline underneath.
 - `promise`, `scenario`, `prerequisites` and `pacing` introduce the lab. Keep `scenario` about the learner's task, not provisioning or test-run statistics. When learners check results in a business app (the system of record, such as Zava Sales Hub), add a prerequisite that opens it in another tab and says what to check there, and mirror it in Lab Details in both readable copies.
@@ -162,12 +171,12 @@ derives its **Content last updated** value automatically:
 1. If the parent module has a local `slides:` PowerPoint path, the page uses the
    deck's latest Git commit date.
 2. If there is no local PowerPoint, the page uses the latest Git commit date of
-   `_labs/<slug>.md`.
+   its site copy (`_labs/<slug>.md` or `_labs/mission-<slug>.md`).
 3. If a linked deck is missing or cannot be resolved, the build emits a warning
    and falls back to the lab date.
 
 The public date changes after the relevant deck or lab file is committed. Keep
-the GitHub README and `_labs` copy synchronized as usual; `_labs/<slug>.md` is
+the GitHub README and `_labs` copy synchronized as usual; the `_labs` copy is
 the source used for the no-deck fallback.
 
 The parent module page displays the same deck date. If that module has no local
@@ -237,8 +246,9 @@ Codes and fixes are listed in `.github/skills/lab-review/references/audit-codes.
 
 | Symptom | Cause / Fix |
 |---------|-------------|
-| Lab doesn't appear on the site at all | You created the README but not `_labs/<slug>.md`. The README alone publishes nothing. |
-| CI job "Lab Doc Sync" failed | `labs/<slug>/README.md` and `_labs/<slug>.md` must change in the **same PR** (`scripts/check-lab-sync.js`). |
+| Lab doesn't appear on the site at all | You created the README but not its site copy (`_labs/<slug>.md`, or `_labs/mission-<slug>.md` for a guided lab). The README alone publishes nothing. |
+| Guided lab is served at `/labs/mission-<slug>/` | The `mission-` file is missing `slug: <slug>` and `permalink: /labs/<slug>/` in front matter. |
+| CI job "Lab Doc Sync" failed | `labs/<slug>/README.md` and its `_labs` copy must change in the **same PR** (`scripts/check-lab-sync.js`). |
 | Lab is in the wrong position | Check `order` against the sorted list above. |
 | Section header shows a raw string like `advanced` | `section` value isn't in the map — use one of the six listed values. |
 | No "Part of: …" link in the header | `module:` has no matching `_modules/<slug>.md`. |
@@ -250,7 +260,7 @@ Codes and fixes are listed in `.github/skills/lab-review/references/audit-codes.
 ```mermaid
 flowchart LR
     A["labs/&lt;slug&gt;/README.md<br/>(GitHub view, emoji headings)"]
-    B["_labs/&lt;slug&gt;.md<br/>(published page, front matter)"]
+    B["_labs/&lt;slug&gt;.md or<br/>_labs/mission-&lt;slug&gt;.md<br/>(published page, front matter)"]
     C["_modules/&lt;slug&gt;.md<br/>(parent module)"]
     D["_data/agendas/&lt;event&gt;.yml<br/>(event running order)"]
     E["Jekyll build"]

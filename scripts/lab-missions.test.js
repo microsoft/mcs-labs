@@ -7,10 +7,11 @@ const matter = require('gray-matter');
 const yaml = require('js-yaml');
 const producer = require('./build-feed');
 const consumer = require('./consume-feed');
+const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
 const slug = 'cowork-zava-sales';
-const document = matter(fs.readFileSync(path.join(root, '_labs', `${slug}.md`), 'utf8'));
+const document = matter(fs.readFileSync(labSourcePath(root, slug), 'utf8'));
 const readme = fs.readFileSync(path.join(root, 'labs', slug, 'README.md'), 'utf8');
 const lab = document.data.mission_lab;
 const prompts = lab.missions.flatMap(mission => mission.steps.filter(step => step.prompt).map(step => step.prompt));
@@ -198,7 +199,7 @@ test('guided full-size image links do not join the theme-wide image carousel', (
 
 test('guided image captions describe the product, not maintainer test history', () => {
   for (const name of [slug, ...bootcampLabs.map(([, modern]) => modern)]) {
-    const content = matter(fs.readFileSync(path.join(root, '_labs', `${name}.md`), 'utf8')).data.mission_lab;
+    const content = matter(fs.readFileSync(labSourcePath(root, name), 'utf8')).data.mission_lab;
     const images = [content.hero_image, ...content.missions.flatMap(mission =>
       mission.steps.map(step => step.screenshot))].filter(Boolean);
     for (const image of images) {
@@ -210,10 +211,10 @@ test('guided image captions describe the product, not maintainer test history', 
 });
 
 test('the Code hero shows the finished tracker and Chat labels the selected mode accurately', () => {
-  const code = matter(fs.readFileSync(path.join(root, '_labs', 'copilot-code-web-app.md'), 'utf8')).data.mission_lab;
+  const code = matter(fs.readFileSync(labSourcePath(root, 'copilot-code-web-app'), 'utf8')).data.mission_lab;
   assert.equal(code.hero_image.src, '/labs/copilot-code-web-app/images/tracker-day-tabs.webp');
   assert.deepEqual([code.hero_image.width, code.hero_image.height], [2559, 2340]);
-  const chat = matter(fs.readFileSync(path.join(root, '_labs', 'copilot-chat-workiq.md'), 'utf8')).data.mission_lab;
+  const chat = matter(fs.readFileSync(labSourcePath(root, 'copilot-chat-workiq'), 'utf8')).data.mission_lab;
   const selector = chat.missions.flatMap(mission => mission.steps.map(step => step.screenshot))
     .find(image => image?.alt.includes('Response-mode menu'));
   assert.match(selector.caption, /Auto selected/);
@@ -255,7 +256,7 @@ test('result checks mirror observable evidence in all three reading surfaces and
     ['agent-integration-team', 'prove', /returned Zava.*usable LiftLine quote/],
   ];
   for (const [name, id, evidence] of representatives) {
-    const page = matter(fs.readFileSync(path.join(root, '_labs', `${name}.md`), 'utf8'));
+    const page = matter(fs.readFileSync(labSourcePath(root, name), 'utf8'));
     const github = fs.readFileSync(path.join(root, 'labs', name, 'README.md'), 'utf8');
     const mission = page.data.mission_lab.missions.find(item => item.id === id);
     assert.equal(typeof mission.result_check, 'string');
@@ -354,7 +355,7 @@ test('feed materialization retains mission data, exact prompts and the readable 
 test('only Zava Sales and the parallel bootcamp labs opt into missions; the retired prototype is absent', () => {
   const missionLabs = fs.readdirSync(path.join(root, '_labs')).filter(filename =>
     filename.endsWith('.md') && matter(fs.readFileSync(path.join(root, '_labs', filename), 'utf8')).data.lab_format === 'missions');
-  assert.deepEqual(missionLabs.sort(), [slug, ...bootcampLabs.map(([, modern]) => modern)].map(name => `${name}.md`).sort());
+  assert.deepEqual(missionLabs.sort(), [slug, ...bootcampLabs.map(([, modern]) => modern)].map(name => `mission-${name}.md`).sort());
   assert.equal(fs.existsSync(path.join(root, '_labs', 'mcs-cowork-preview.md')), false);
   assert.equal(fs.existsSync(path.join(root, 'labs', 'mcs-cowork-preview', 'README.md')), false);
   for (const filename of ['app.js', 'lab.js', 'styles.css', 'index.html']) {
@@ -368,7 +369,7 @@ test('only Zava Sales and the parallel bootcamp labs opt into missions; the reti
 
 test('Copilot Code escapes the switcher separator on every Markdown reading surface', () => {
   for (const name of ['mcs-copilot-code', 'copilot-code-web-app']) {
-    const page = matter(fs.readFileSync(path.join(root, '_labs', `${name}.md`), 'utf8'));
+    const page = matter(fs.readFileSync(labSourcePath(root, name), 'utf8'));
     const copies = {
       body: page.content,
       readme: fs.readFileSync(path.join(root, 'labs', name, 'README.md'), 'utf8'),
@@ -386,9 +387,9 @@ test('Copilot Code escapes the switcher separator on every Markdown reading surf
 
 for (const [classic, modern, order] of bootcampLabs) {
   test(`${modern}: published missions preserve the classic lab and its prompts`, () => {
-    const page = matter(fs.readFileSync(path.join(root, '_labs', `${modern}.md`), 'utf8'));
+    const page = matter(fs.readFileSync(labSourcePath(root, modern), 'utf8'));
     const github = fs.readFileSync(path.join(root, 'labs', modern, 'README.md'), 'utf8');
-    const original = matter(fs.readFileSync(path.join(root, '_labs', `${classic}.md`), 'utf8'));
+    const original = matter(fs.readFileSync(labSourcePath(root, classic), 'utf8'));
     assert.ok(fs.existsSync(path.join(root, 'labs', classic, 'README.md')));
     assert.notEqual(original.data.lab_format, 'missions', 'The classic version remains available');
     assert.equal(page.data.lab_format, 'missions');
@@ -511,7 +512,7 @@ test('the published missions event preserves the classic timetable and selects m
   const schedule = classic.schedule.map(row => {
     if (row.type === 'lab') {
       const labSlug = replacements.get(row.slug) || row.slug;
-      const page = matter(fs.readFileSync(path.join(root, '_labs', `${labSlug}.md`), 'utf8'));
+      const page = matter(fs.readFileSync(labSourcePath(root, labSlug), 'utf8'));
       return { ...row, slug: labSlug, title: page.data.title };
     }
     return row.companion_lab
