@@ -129,8 +129,7 @@ The selector to the right of **Work IQ** (it shows **Auto**) sets the **response
 2. Paste the following into the prompt box and hit **Send**:
 
 ```text
-I'm preparing a market briefing on the US home improvement retail sector
-for the quarter just ended.
+I'm preparing a market briefing on the US home improvement retail sector for the quarter just ended.
 
 Research and cite, with a source and date for each:
 - Comparable-store sales at the large national home improvement retailers
@@ -138,16 +137,12 @@ Research and cite, with a source and date for each:
 - The prevailing 30-year mortgage rate
 - Producer prices for lumber and building materials
 
-Prefer Washington State or Pacific Northwest figures where they exist,
-and say when you substituted national data.
+Prefer Washington State or Pacific Northwest figures where they exist, and say when you substituted national data.
 
 Then answer, showing your working:
-1. Is this market growing or shrinking in real terms once inflation is stripped out?
-   Show the arithmetic and say which inflation figure you applied.
-2. Which two indicators best predict next quarter's DIY demand,
-   and what are they saying right now? Say how far ahead each one leads.
-3. Where would you expect margin pressure to show up first, and why?
-   Argue against your own answer before you commit to it.
+1. Is this market growing or shrinking in real terms once inflation is stripped out? Show the arithmetic and say which inflation figure you applied.
+2. Which two indicators best predict next quarter's DIY demand, and what are they saying right now? Say how far ahead each one leads.
+3. Where would you expect margin pressure to show up first, and why? Argue against your own answer before you commit to it.
 
 Flag anything you could not source. Do not present an estimate as a fact.
 ```
@@ -224,9 +219,7 @@ This use case works with two Zava DIY files, the **Zava DIY Markdown and Clearan
 Paste the following into the prompt box and hit **Send**:
 
 ```text
-Find the Zava DIY Markdown and Clearance Policy document, then summarize the
-markdown clearance policy in five bullets for the Zava DIY leadership team, who
-have 60 seconds before the quarterly business review starts.
+Find the Zava DIY Markdown and Clearance Policy document, then summarize the markdown clearance policy in five bullets for the Zava DIY leadership team, who have 60 seconds before the quarterly business review starts.
 After each bullet, cite the section it came from.
 ```
 
@@ -240,8 +233,7 @@ Paste the following into the prompt box and hit **Send**:
 
 ```text
 I'm the category manager for Garden & Outdoor.
-I want to run a 17% markdown on patio furniture starting next Tuesday
-to clear inventory before the season closes.
+I want to run a 17% markdown on patio furniture starting next Tuesday to clear inventory before the season closes.
 
 Walk me through exactly what this policy requires:
 - Who has to approve it
@@ -249,8 +241,7 @@ Walk me through exactly what this policy requires:
 - What I have to attach to the request
 - Whether next Tuesday is achievable at all
 
-Quote the governing section for each requirement,
-and tell me if any part of my plan isn't allowed.
+Quote the governing section for each requirement, and tell me if any part of my plan isn't allowed.
 ```
 
 Summarizing a policy is useful, but deciphering criteria across multiple sections to determine whether a proposal complies with the policy is more valuable.
@@ -422,8 +413,7 @@ Source every finding from this report.
 7. In the **same conversation** (to maintain context), confirm the composer still shows **Research** or **Researcher**. If it has returned to **Message Copilot**, type `@Researcher` and select the suggestion again, particularly after returning from the full-screen briefing. Then copy and paste this follow-up prompt and select **Send**:
 
 ```text
-Identify every metric in this report that is trending in the wrong direction
-or below target.
+Identify every metric in this report that is trending in the wrong direction or below target.
 
 For each one, trace the root cause and map it to a specific recommendation.
 Are there any gaps where a problem exists but no recommendation addresses it?
@@ -504,29 +494,22 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
 4. Copy and paste the following prompt and select **Send**:
 
 ```text
-Using the recommendation data from Section 16 of this hotel performance report,
-build a detailed ROI analysis for each of the 10 recommendations (R1 through R10).
+Using the recommendation data from Section 16 of this hotel performance report, build a detailed ROI analysis for each of the 10 recommendations (R1 through R10).
 
-For each recommendation, extract the investment cost and estimated annual ROI,
-then calculate:
+For each recommendation, extract the investment cost and estimated annual ROI, then calculate:
 1. Net Present Value (NPV) at an 8% discount rate over a 5-year horizon
 2. Internal Rate of Return (IRR)
 3. Payback period, both simple and discounted
 4. 5-year cumulative net benefit, total returns minus investment
 
 Assume annual ROI begins in Year 1 and remains constant over the 5-year period.
-For the elevator modernization (R5), assume the $1.2M investment is split evenly
-across Year 0 and Year 1, with returns beginning in Year 2.
-For ongoing annual programs (R7, R10), treat the annual investment
-as a recurring cost each year.
+For the elevator modernization (R5), assume the $1.2M investment is split evenly across Year 0 and Year 1, with returns beginning in Year 2.
+For ongoing annual programs (R7, R10), treat the annual investment as a recurring cost each year.
 
 Present the results in a ranked table sorted by NPV, highest to lowest.
-Include a column indicating whether each recommendation creates or destroys value
-at the 8% hurdle rate.
+Include a column indicating whether each recommendation creates or destroys value at the 8% hurdle rate.
 
-Then provide a summary recommendation on which investments should be approved,
-which are marginal, and which should be deferred,
-based purely on the financial analysis.
+Then provide a summary recommendation on which investments should be approved, which are marginal, and which should be deferred, based purely on the financial analysis.
 ```
 
 5. **Observe** how the Analyst agent:

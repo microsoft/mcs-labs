@@ -423,8 +423,7 @@ By the end of this module, your copilot will be able to **search**, **understand
 - **Description:**
 
      ```
-     This knowledge source provides access to customer contract agreements. Each 
-     contract file follows the format: Customer Contract Agreement - [Customer Name].docx 
+     This knowledge source provides access to customer contract agreements. Each contract file follows the format: Customer Contract Agreement - [Customer Name].docx
      
      Each contract contains essential details, including: 
      • Scope of Services: Defines the services provided  
