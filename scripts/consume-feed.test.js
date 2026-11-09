@@ -1,6 +1,7 @@
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const consume = require('./consume-feed');
+const { labSlugFromSource } = require('./lab-files');
 
 test('resolveSubscriptions: empty/missing config yields a single self subscription', () => {
   assert.deepEqual(consume.resolveSubscriptions({}), [
@@ -298,7 +299,9 @@ test('round-trip: self-only materialized bodies equal committed collection bodie
         const committed = committedDoc.content
           .replace(/\]\(\.\/(images|assets)\//g, ']($1/')
           .replace(/src=(["'])\.\/(images|assets)\//g, 'src=$1$2/');
-        const materializedPath = path.join(out, `_${collection}`, f);
+        // Guided labs are committed as _labs/mission-<slug>.md but published, so materialized, as <slug>.md.
+        const name = collection === 'labs' ? `${labSlugFromSource(f)}.md` : f;
+        const materializedPath = path.join(out, `_${collection}`, name);
         assert.ok(fs.existsSync(materializedPath), `materialized ${collection}/${f} exists`);
         const materializedDoc = matter(fs.readFileSync(materializedPath, 'utf8'));
         assert.equal(materializedDoc.content.trim(), committed.trim(), `${collection}/${f} body round-trips`);

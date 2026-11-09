@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const matter = require('gray-matter');
+const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
@@ -47,7 +48,7 @@ test('restoring the classic edition does not list the original or preview events
 test('guided lab links use the current display name without changing the route', () => {
   for (const { slug } of event('architecture-bootcamp').labs) {
     if (slug === 'cowork-zava-sales') continue; // Shared lab has no event-specific introduction.
-    for (const file of [path.join('_labs', `${slug}.md`), path.join('labs', slug, 'README.md')]) {
+    for (const file of [path.relative(root, labSourcePath(root, slug)), path.join('labs', slug, 'README.md')]) {
       assert.ok(read(file).includes('[Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/)'), file);
     }
   }

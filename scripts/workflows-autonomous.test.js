@@ -3,10 +3,11 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const matter = require('gray-matter');
+const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
-const document = matter(read('_labs/workflows-autonomous.md'));
+const document = matter(fs.readFileSync(labSourcePath(root, 'workflows-autonomous'), 'utf8'));
 const readme = read('labs/workflows-autonomous/README.md');
 const missions = document.data.mission_lab.missions;
 const steps = missions.flatMap(mission => mission.steps);

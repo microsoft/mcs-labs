@@ -1,4 +1,6 @@
 ---
+slug: workflows-autonomous
+permalink: /labs/workflows-autonomous/
 lab_format: missions
 module: workflows-latest
 title: "Workflows"

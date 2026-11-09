@@ -8,16 +8,17 @@ delivery; **warn** misleads learners or will break soon; **info** is context.
 
 | Code | Severity | Meaning | Fix |
 | --- | --- | --- | --- |
-| `lab-not-found` | error | No `_labs/<slug>.md` or `labs/<slug>/README.md`. | Check the slug: it is the file name without `.md`. |
-| `copy-missing-site` | warn | README only; nothing is published. | Create `_labs/<slug>.md` with front matter and the site copy. |
+| `lab-not-found` | error | No `_labs/<slug>.md`, `_labs/mission-<slug>.md` or `labs/<slug>/README.md`. | Check the slug: it is the file name without `.md` or the `mission-` prefix. |
+| `copy-missing-site` | warn | README only; nothing is published. | Create `_labs/<slug>.md`, or `_labs/mission-<slug>.md` for a guided lab, with front matter and the site copy. |
 | `copy-missing-readme` | warn | Site copy only (external labs excepted). GitHub readers see nothing, and CI cannot pair edits. | Create `labs/<slug>/README.md` mirroring the site copy, with emoji headings. |
 | `copy-drift` | warn | The copies differ after ignoring heading emoji, anchor prefixes, Liquid or absolute site URLs, indentation and blank lines. The message gives the first differing line in each file. | Port the newer text to the other copy. Confirm which is newer with `git log -p` before overwriting. |
+| `copy-duplicate` | error | Both `_labs/<slug>.md` and `_labs/mission-<slug>.md` exist; they would publish to the same URL. The audit reads the `mission-` copy. | Keep one: `_labs/mission-<slug>.md` for a guided lab, `_labs/<slug>.md` for a classic lab. |
 
 ## Front matter
 
 | Code | Severity | Meaning | Fix |
 | --- | --- | --- | --- |
-| `fm-invalid` | error / warn | YAML does not parse, or `journeys`, `difficulty`, `duration` or `lab_format` has an invalid value (error); `section` is unknown (warn: the badge shows the raw value). | Use the values in `docs/NEW_LAB_CHECKLIST.md`. |
+| `fm-invalid` | error / warn | YAML does not parse, `journeys`, `difficulty`, `duration` or `lab_format` has an invalid value, or a `mission-` file does not set `lab_format: missions`, `slug: <slug>` and `permalink: /labs/<slug>/` (error); `section` is unknown (warn: the badge shows the raw value). | Use the values in `docs/NEW_LAB_CHECKLIST.md`. |
 | `fm-missing` | error / warn | A required key is missing (error), or there is no `module` (warn). | Add the key. |
 | `module-missing` | error | `module:` names a module with no `_modules/<slug>.md`. | Fix the slug or create the module. |
 | `fm-layout` | warn | `layout` is not `lab`; the feed drops custom layouts. | Remove `layout`, or set it to `lab`; use `lab_format` to change rendering. |
@@ -56,7 +57,7 @@ All are errors unless noted.
 | Code | Severity | Meaning | Fix |
 | --- | --- | --- | --- |
 | `agenda-invalid` | error | An agenda YAML file does not parse. | Fix the YAML. |
-| `agenda-unknown-lab` | error | An agenda or event `labs:` list names a lab with no `_labs/<slug>.md`. | Fix the slug or restore the lab. |
+| `agenda-unknown-lab` | error | An agenda or event `labs:` list names a lab with no `_labs/<slug>.md` or `_labs/mission-<slug>.md`. | Fix the slug or restore the lab. |
 | `agenda-unknown-module` | error | An agenda row names a module with no `_modules/<slug>.md`. | Fix the slug. |
 | `agenda-unlisted-lab` | error | A listed (advertised) event sends attendees to an unlisted lab. | Publish the lab, or use it only in an unlisted preview event. |
 | `agenda-deprecated-lab` | warn | A listed event still uses a lab marked `deprecated: true`. | Swap in the replacement lab. |

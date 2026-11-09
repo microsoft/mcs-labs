@@ -4,11 +4,12 @@ const fs = require('node:fs');
 const path = require('node:path');
 const matter = require('gray-matter');
 const yaml = require('js-yaml');
+const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
 const slug = 'customer-assist-agent';
 const classicSlug = 'mcs-customer-conversation-harness';
-const document = matter(fs.readFileSync(path.join(root, '_labs', `${slug}.md`), 'utf8'));
+const document = matter(fs.readFileSync(labSourcePath(root, slug), 'utf8'));
 const readme = fs.readFileSync(path.join(root, 'labs', slug, 'README.md'), 'utf8');
 const classic = matter(fs.readFileSync(path.join(root, '_labs', `${classicSlug}.md`), 'utf8'));
 const classicReadme = fs.readFileSync(path.join(root, 'labs', classicSlug, 'README.md'), 'utf8');

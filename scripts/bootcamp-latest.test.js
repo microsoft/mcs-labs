@@ -4,13 +4,15 @@ const fs = require('node:fs');
 const path = require('node:path');
 const matter = require('gray-matter');
 const yaml = require('js-yaml');
+const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
 const eventId = 'bootcamp-latest';
 const retiredId = 'bootcamp-v3';
 
 function readDocument(folder, slug) {
-  return matter(fs.readFileSync(path.join(root, folder, `${slug}.md`), 'utf8'));
+  const file = folder === '_labs' ? labSourcePath(root, slug) : path.join(root, folder, `${slug}.md`);
+  return matter(fs.readFileSync(file, 'utf8'));
 }
 
 function readAgenda(slug = eventId) {

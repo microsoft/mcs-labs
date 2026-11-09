@@ -3,10 +3,11 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const matter = require('gray-matter');
+const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
 const slug = 'managed-apps-build';
-const document = matter(fs.readFileSync(path.join(root, '_labs', `${slug}.md`), 'utf8'));
+const document = matter(fs.readFileSync(labSourcePath(root, slug), 'utf8'));
 const readme = fs.readFileSync(path.join(root, 'labs', slug, 'README.md'), 'utf8');
 const missions = document.data.mission_lab.missions;
 const steps = missions.flatMap(mission => mission.steps);

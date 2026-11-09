@@ -52,8 +52,9 @@ in the existing expandable setup section.
    If modules/presentations are excluded, use the
    [scoped validation guidance](../lab-update/SKILL.md#5-validate) instead: named slugs
    alone do not prevent repository-wide audit scans.
-2. Read both copies: `labs/<slug>/README.md` and `_labs/<slug>.md`. For a missions lab, the
-   front matter `missions` list holds the prompts, steps, checks and screenshots.
+2. Read both copies: `labs/<slug>/README.md` and `_labs/<slug>.md`
+   (`_labs/mission-<slug>.md` for a missions lab). For a missions lab, the front matter
+   `missions` list holds the prompts, steps, checks and screenshots.
 3. List the prerequisites (licenses, tenant, plugins, connections, sample data) and confirm
    with the person which tenant and account to use. For an event tenant, use one training
    account for the whole dependent sequence (`references/training-accounts.md`). Separate

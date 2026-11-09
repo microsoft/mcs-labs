@@ -3,6 +3,7 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const matter = require('gray-matter');
+const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
 const slugs = [
@@ -34,7 +35,7 @@ test('all lab documents keep maintainer provenance and runner reports out of lea
 
 for (const slug of slugs) {
   test(`${slug}: learner copies exclude maintainer test reports`, () => {
-    const page = matter(fs.readFileSync(path.join(root, '_labs', `${slug}.md`), 'utf8'));
+    const page = matter(fs.readFileSync(labSourcePath(root, slug), 'utf8'));
     const readme = fs.readFileSync(path.join(root, 'labs', slug, 'README.md'), 'utf8');
     assert.equal(normalize(readme), normalize(page.content));
     assert.equal(page.data.mission_lab.validation, undefined);

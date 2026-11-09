@@ -1,4 +1,6 @@
 ---
+slug: agent-integration-team
+permalink: /labs/agent-integration-team/
 lab_format: missions
 module: agent-integration
 title: "Agent integration"

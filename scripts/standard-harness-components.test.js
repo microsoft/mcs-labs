@@ -3,10 +3,11 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const matter = require('gray-matter');
+const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(file, 'utf8').replace(/\r\n/g, '\n');
-const page = matter(read(path.join(root, '_labs', 'standard-harness-components.md')));
+const page = matter(read(labSourcePath(root, 'standard-harness-components')));
 const readme = read(path.join(root, 'labs', 'standard-harness-components', 'README.md'));
 const mission = id => page.data.mission_lab.missions.find(item => item.id === id);
 const copies = instruction => [instruction, page.content, readme];

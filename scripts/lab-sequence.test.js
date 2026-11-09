@@ -3,9 +3,10 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const matter = require('gray-matter');
+const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
-const read = slug => matter(fs.readFileSync(path.join(root, '_labs', `${slug}.md`), 'utf8').replace(/\r\n/g, '\n'));
+const read = slug => matter(fs.readFileSync(labSourcePath(root, slug), 'utf8').replace(/\r\n/g, '\n'));
 const pairs = [
   ['mcs-m365-copilot-latest', 'copilot-chat-workiq', ['ask', 'reason', 'apply', 'verify', 'publish', 'research', 'model']],
   ['mcs-copilot-code', 'copilot-code-web-app', ['build', 'style', 'label', 'navigate', 'publish', 'extend']],

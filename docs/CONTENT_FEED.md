@@ -199,6 +199,8 @@ and the self-feed round-trip gate.
 ## Lab content: README ↔ `_labs/`
 
 Each lab's content lives in two files: `labs/<slug>/README.md` (browsable on GitHub)
-and `_labs/<slug>.md` (the collection doc the **site renders from**). When you change a
-lab's `README.md`, you must update `_labs/<slug>.md` too, or the change won't appear on
-the live site. The **Lab Doc Sync** pull-request check enforces this.
+and `_labs/<slug>.md` (the collection doc the **site renders from**). A guided lab's
+site copy is `_labs/mission-<slug>.md`; it pins `slug: <slug>` in front matter, so the
+feed still publishes it as `<slug>`. When you change a lab's `README.md`, you must
+update its `_labs` copy too, or the change won't appear on the live site. The
+**Lab Doc Sync** pull-request check enforces this.

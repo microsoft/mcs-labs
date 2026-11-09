@@ -334,6 +334,11 @@ test('CLI: publishes resolved deck dates and Markdown fallbacks without changing
     fs.writeFileSync(path.join(root, '_labs', 'missing.md'), '---\nmodule: missing\n---\nMissing deck lab\n');
     fs.writeFileSync(path.join(root, '_modules', 'no-deck.md'), '---\ntitle: No deck\n---\nModule fallback\n');
     fs.writeFileSync(path.join(root, '_workshops', 'demo.md'), '---\ntitle: Workshop\n---\nWorkshop body\n');
+    // Guided labs are committed as _labs/mission-<slug>.md; their dates must come from that file and their module's deck.
+    fs.writeFileSync(path.join(root, '_labs', 'mission-guided.md'),
+      '---\nslug: guided\npermalink: /labs/guided/\nlab_format: missions\nmodule: shared\n---\nGuided body\n');
+    fs.writeFileSync(path.join(root, '_labs', 'mission-solo.md'),
+      '---\nslug: solo\npermalink: /labs/solo/\nlab_format: missions\n---\nGuided fallback body\n');
     execFileSync('git', ['init', '--quiet'], { cwd: root });
     const commit = (date, message) => {
       execFileSync('git', ['-c', 'core.autocrlf=false', 'add', '.'], { cwd: root });
@@ -361,6 +366,7 @@ test('CLI: publishes resolved deck dates and Markdown fallbacks without changing
       ['labs', 'demo', deckDate], ['modules', 'shared', deckDate],
       ['labs', 'no-deck', markdownDate], ['modules', 'no-deck', markdownDate],
       ['labs', 'missing', markdownDate], ['modules', 'missing', markdownDate],
+      ['labs', 'guided', deckDate], ['labs', 'solo', markdownDate],
     ]) {
       const item = find(collection, slug);
       assert.equal(Date.parse(item.metadata.content_last_updated), Date.parse(expected));
@@ -376,6 +382,24 @@ test('CLI: publishes resolved deck dates and Markdown fallbacks without changing
       const parsed = require('gray-matter')(consume.materializeDoc(item, 'https://consumer.test'));
       assert.equal(parsed.data.content_last_updated, item.metadata.content_last_updated);
     }
+  } finally {
+    fs.rmSync(root, { recursive: true, force: true });
+  }
+});
+
+test('CLI: refuses two site copies that publish the same lab', () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), 'mcs-feed-duplicate-'));
+  try {
+    fs.mkdirSync(path.join(root, '_labs'));
+    fs.writeFileSync(path.join(root, '_labs', 'guided.md'), '---\ntitle: Classic\n---\nClassic body\n');
+    fs.writeFileSync(path.join(root, '_labs', 'mission-guided.md'),
+      '---\nslug: guided\npermalink: /labs/guided/\nlab_format: missions\n---\nGuided body\n');
+    assert.throws(
+      () => execFileSync(process.execPath, [path.join(__dirname, 'build-feed.js'), '--out', path.join(root, 'published')], {
+        cwd: root, encoding: 'utf8', stdio: 'pipe',
+      }),
+      (error) => /Duplicate feed identity: labs\/guided/.test(error.stderr)
+    );
   } finally {
     fs.rmSync(root, { recursive: true, force: true });
   }

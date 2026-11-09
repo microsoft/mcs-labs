@@ -1,4 +1,6 @@
 ---
+slug: copilot-code-web-app
+permalink: /labs/copilot-code-web-app/
 lab_format: missions
 title: "Copilot Code: build a simple web app"
 order: 121

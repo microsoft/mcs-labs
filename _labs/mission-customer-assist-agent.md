@@ -1,4 +1,6 @@
 ---
+slug: customer-assist-agent
+permalink: /labs/customer-assist-agent/
 lab_format: missions
 module: customer-conversation-harness
 title: "Customer Conversation Harness"

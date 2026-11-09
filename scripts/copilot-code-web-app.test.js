@@ -3,9 +3,10 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const matter = require('gray-matter');
+const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
-const page = matter(fs.readFileSync(path.join(root, '_labs', 'copilot-code-web-app.md'), 'utf8'));
+const page = matter(fs.readFileSync(labSourcePath(root, 'copilot-code-web-app'), 'utf8'));
 const readme = fs.readFileSync(path.join(root, 'labs', 'copilot-code-web-app', 'README.md'), 'utf8');
 const mission = id => page.data.mission_lab.missions.find(item => item.id === id);
 

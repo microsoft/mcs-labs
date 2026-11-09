@@ -1,4 +1,6 @@
 ---
+slug: copilot-chat-workiq
+permalink: /labs/copilot-chat-workiq/
 lab_format: missions
 module: m365-copilot-latest
 title: "Microsoft Copilot Chat and Work IQ"

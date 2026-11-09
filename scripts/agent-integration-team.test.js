@@ -3,10 +3,11 @@ const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const matter = require('gray-matter');
+const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
-const document = matter(read('_labs/agent-integration-team.md'));
+const document = matter(fs.readFileSync(labSourcePath(root, 'agent-integration-team'), 'utf8'));
 const readme = read('labs/agent-integration-team/README.md');
 const classic = matter(read('_labs/mcs-agent-integration.md')).content;
 const classicReadme = read('labs/mcs-agent-integration/README.md');

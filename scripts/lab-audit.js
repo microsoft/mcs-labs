@@ -27,6 +27,7 @@ const path = require('node:path');
 const { execFileSync } = require('node:child_process');
 const matter = require('gray-matter');
 const yaml = require('js-yaml');
+const { MISSION_PREFIX, labSlugFromSource, labSourcePath, sourceSlug } = require('./lab-files');
 
 const ROOT = path.resolve(__dirname, '..');
 const TERMS_FILE = path.join(__dirname, 'lab-audit-terms.json');
@@ -291,7 +292,7 @@ function comparableLines(lines, start = 0) {
       .replace(/https?:\/\/microsoft\.github\.io\/mcs-labs(?=\/)/g, '')
       .replace(/\]\(\/mcs-labs(?=\/)/g, '](')
       // Cross-lab links: {% link _labs/x.md %}, ../x/README.md and /labs/x/ all mean lab x.
-      .replace(/\{%\s*link\s+_labs\/([\w.-]+?)\.md\s*%\}/g, 'lab:$1')
+      .replace(/\{%\s*link\s+_labs\/([\w.-]+?)\.md\s*%\}/g, (_match, name) => `lab:${labSlugFromSource(`${name}.md`)}`)
       .replace(/\]\(\.\.\/([\w.-]+)\/(?:README\.md)?(?=[)#])/g, '](lab:$1')
       .replace(/\]\(\/labs\/([\w.-]+)\/?(?=[)#?])/g, '](lab:$1')
       .trim();
@@ -333,7 +334,13 @@ function sectionLines(lines, headings, name) {
 
 function parseLab(root, slug) {
   const lab = { slug };
-  const siteFile = path.join(root, '_labs', `${slug}.md`);
+  let siteFile;
+  let duplicate = null;
+  try { siteFile = labSourcePath(root, slug); } catch (error) {
+    // Both _labs/<slug>.md and _labs/mission-<slug>.md exist: audit the guided copy and report the clash.
+    siteFile = path.join(root, '_labs', `${MISSION_PREFIX}${slug}.md`);
+    duplicate = error.message;
+  }
   const readmeFile = path.join(root, 'labs', slug, 'README.md');
   const siteRaw = readText(siteFile);
   const readmeRaw = readText(readmeFile);
@@ -341,8 +348,13 @@ function parseLab(root, slug) {
     const lines = siteRaw.split(/\r?\n/);
     let data = {};
     let parseError = null;
+    let identityError = null;
     try { data = matter(siteRaw).data; } catch (error) { parseError = error.message; }
-    lab.site = { file: siteFile, rel: toPosix(root, siteFile), raw: siteRaw, lines, start: bodyStartIndex(lines), data, parseError };
+    // A mission- file publishes under its unprefixed slug only when front matter pins it.
+    if (!parseError) {
+      try { sourceSlug('labs', path.basename(siteFile), data); } catch (error) { identityError = error.message; }
+    }
+    lab.site = { file: siteFile, rel: toPosix(root, siteFile), raw: siteRaw, lines, start: bodyStartIndex(lines), data, parseError, identityError, duplicate };
   }
   if (readmeRaw !== null) {
     const lines = readmeRaw.split(/\r?\n/);
@@ -364,7 +376,7 @@ const lineOf = (raw, regex) => {
  * have index.md) is not a lab.
  */
 function buildContext(root = ROOT, { termsFile = TERMS_FILE } = {}) {
-  const slugs = new Set(listDir(path.join(root, '_labs')).filter(f => f.endsWith('.md')).map(f => f.slice(0, -3)));
+  const slugs = new Set(listDir(path.join(root, '_labs')).filter(f => f.endsWith('.md')).map(labSlugFromSource));
   for (const dir of listDir(path.join(root, 'labs'))) if (isFile(path.join(root, 'labs', dir, 'README.md'))) slugs.add(dir);
   const labs = new Map([...slugs].sort().map(slug => [slug, parseLab(root, slug)]));
 
@@ -504,19 +516,21 @@ function auditLab(ctx, slug) {
   const add = (severity, code, file, line, message) => findings.push({ slug, severity, code, file: file || null, line: line || null, message });
   const lab = ctx.labs.get(slug);
   if (!lab) {
-    add('error', 'lab-not-found', null, null, `No _labs/${slug}.md or labs/${slug}/README.md.`);
+    add('error', 'lab-not-found', null, null, `No _labs/${slug}.md, _labs/mission-${slug}.md or labs/${slug}/README.md.`);
     return findings;
   }
   const { site, readme, data } = lab;
   const missions = data.lab_format === 'missions';
 
   // Front matter: the site copy is the only one Jekyll publishes.
+  if (site && site.duplicate) add('error', 'copy-duplicate', site.rel, null, site.duplicate);
   if (!site) {
-    add('warn', 'copy-missing-site', `labs/${slug}/README.md`, null, `README only: create _labs/${slug}.md (front matter plus the site copy) to publish this lab.`);
+    add('warn', 'copy-missing-site', `labs/${slug}/README.md`, null, `README only: create _labs/${slug}.md, or _labs/mission-${slug}.md for a guided lab (front matter plus the site copy), to publish this lab.`);
   } else if (site.parseError) {
     add('error', 'fm-invalid', site.rel, 1, `Front matter does not parse: ${preview(site.parseError, 120)}`);
   } else {
     const fmLine = key => lineOf(site.raw, new RegExp(`^${escapeRe(key)}:`)) || 1;
+    if (site.identityError) add('error', 'fm-invalid', site.rel, fmLine('slug'), site.identityError);
     for (const key of REQUIRED_KEYS) if (data[key] === undefined || data[key] === null || data[key] === '') add('error', 'fm-missing', site.rel, 1, `Missing required front matter: ${key}.`);
     if (data.journeys !== undefined) {
       const journeys = Array.isArray(data.journeys) ? data.journeys : [data.journeys];
@@ -777,7 +791,7 @@ function auditReferences(ctx, wanted) {
       continue;
     }
     const lab = ctx.labs.get(ref.slug);
-    if (!lab || !lab.site) add(ref.slug, 'error', 'agenda-unknown-lab', ref.file, ref.line, `${ref.eventId} references lab "${ref.slug}", which has no _labs/${ref.slug}.md.`);
+    if (!lab || !lab.site) add(ref.slug, 'error', 'agenda-unknown-lab', ref.file, ref.line, `${ref.eventId} references lab "${ref.slug}", which has no _labs/${ref.slug}.md or _labs/mission-${ref.slug}.md.`);
     else if (listed && lab.data.unlisted === true) add(ref.slug, 'error', 'agenda-unlisted-lab', ref.file, ref.line, `Listed event ${ref.eventId} sends attendees to unlisted lab "${ref.slug}". Publish the lab or use it only in an unlisted preview event.`);
     else if (listed && lab.data.deprecated === true) add(ref.slug, 'warn', 'agenda-deprecated-lab', ref.file, ref.line, `Listed event ${ref.eventId} still uses deprecated lab "${ref.slug}".`);
   }
@@ -785,7 +799,7 @@ function auditReferences(ctx, wanted) {
     const slug = module.data.lab;
     if (typeof slug !== 'string' || !include(slug)) continue;
     const lab = ctx.labs.get(slug);
-    if (!lab || !lab.site) add(slug, 'error', 'module-lab-missing', module.file, lineOf(module.raw, /^lab:/), `Module "${module.slug}" names companion lab "${slug}", which has no _labs/${slug}.md.`);
+    if (!lab || !lab.site) add(slug, 'error', 'module-lab-missing', module.file, lineOf(module.raw, /^lab:/), `Module "${module.slug}" names companion lab "${slug}", which has no _labs/${slug}.md or _labs/mission-${slug}.md.`);
   }
   return findings;
 }
@@ -874,9 +888,10 @@ function parseArgs(argv) {
     else if (flag === '--min-severity') opts.minSeverity = value();
     else if (flag.startsWith('-')) opts.errors.push(`Unknown option: ${arg}`);
     else {
-      // Accept a slug or a path to either copy (_labs/<slug>.md, labs/<slug>/README.md).
-      const fromPath = arg.match(/(?:^|[\\/])_labs[\\/]([^\\/]+?)\.md$/) || arg.match(/(?:^|[\\/])labs[\\/]([^\\/]+)/);
-      opts.slugs.push(fromPath ? fromPath[1] : arg.replace(/\.md$/, ''));
+      // Accept a slug or a path to either copy (_labs/<slug>.md or _labs/mission-<slug>.md, labs/<slug>/README.md).
+      const fromSite = arg.match(/(?:^|[\\/])_labs[\\/]([^\\/]+?)\.md$/);
+      const fromReadme = arg.match(/(?:^|[\\/])labs[\\/]([^\\/]+)/);
+      opts.slugs.push(fromSite ? labSlugFromSource(`${fromSite[1]}.md`) : fromReadme ? fromReadme[1] : arg.replace(/\.md$/, ''));
     }
   }
   if (!['text', 'json', 'markdown'].includes(opts.format)) opts.errors.push(`--format must be text, json or markdown; got ${opts.format}`);
@@ -893,9 +908,11 @@ function classifyChanges(root, files) {
   for (const file of files.map(f => f.replace(/\\/g, '/'))) {
     const site = file.match(/^_labs\/([^/]+)\.md$/);
     const folder = file.match(/^labs\/([^/]+)\/(.+)$/);
-    if (site) slugs.add(site[1]);
+    if (site) slugs.add(labSlugFromSource(`${site[1]}.md`));
     // labs/ also holds legacy event pages (index.md); only real lab folders count.
-    else if (folder && (folder[2] === 'README.md' || isFile(path.join(root, 'labs', folder[1], 'README.md')) || isFile(path.join(root, '_labs', `${folder[1]}.md`)))) slugs.add(folder[1]);
+    // Check both site copy names directly: labSourcePath throws on a duplicate, which parseLab reports as a finding.
+    else if (folder && (folder[2] === 'README.md' || isFile(path.join(root, 'labs', folder[1], 'README.md')) ||
+      [`${folder[1]}.md`, `${MISSION_PREFIX}${folder[1]}.md`].some(name => isFile(path.join(root, '_labs', name))))) slugs.add(folder[1]);
     if (/^(_data\/agendas|_events|_workshops|_modules)\//.test(file)) references = true;
   }
   return { slugs: [...slugs].sort(), references };
