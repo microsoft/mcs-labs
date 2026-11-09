@@ -199,11 +199,12 @@ Do not regenerate the proposal, install packages, call external services, or inv
 2. Create a separate **Home → Agent** on the **Microsoft Copilot harness** named **Project Process Assistant**. Do not reuse the RFP agent.
 3. Leave **Build → Instructions empty**; clear generated instructions if present. Do not add intake instructions, Skills, or connectors yet. Pre-attached **Work IQ** and **Search all websites** may stay.
 4. Under **Model**, select a reasoning-capable model such as **Claude Opus 5.5**, if offered. Ask your facilitator which model to use if it is missing.
-5. Select **Save** and let the first save finish; it can return you to **Build**. Reopen **Preview** only after that navigation settles. In **Preview → New chat**, use **+ → Upload images and files** to attach only `project-intake-process-v2.docx`, then enter the authoring prompt.
+5. Select **Save** and let the first save finish; it can return you to **Build**.
+6. Once the save finishes and the page settles, open **Preview** and select **New chat**. Select **+** (**Upload images and files**) beside the composer and attach only `project-intake-process-v2.docx` to this conversation. You send the authoring prompt in this same chat.
 
 These are fictional source documents, not a ready-made Skill. The procedure collects **business goal, intended users, desired outcome, and target date**, reuses supplied answers, accepts unknowns, asks one missing question at a time, and requests confirmation. Skills can guide conversations like topics, but do not replace deterministic ordering, validation, or branching.
 
-6. Send the full block below in **Preview chat**, alongside the document. Keep **Build → Instructions** empty. The harness was formerly named **GitHub Copilot harness**, and the prompt deliberately retains that phrase, exactly as live-tested; it refers to the current **Microsoft Copilot harness**.
+7. In the same **Preview chat**, with the document attached, send the full block below. Keep **Build → Instructions** empty. The harness was formerly named **GitHub Copilot harness**, and the prompt deliberately retains that phrase, exactly as live-tested; it refers to the current **Microsoft Copilot harness**.
 
 ```text
 Create a portable Agent Skill named project-intake-guide for a Copilot Studio agent powered by the GitHub Copilot harness.
@@ -217,7 +218,7 @@ Use your sandbox to create a real downloadable ZIP with SKILL.md at its root. SK
 Before packaging, check the procedure against an incomplete opening request and a request that supplies all four fields. Report limitations; this drafting check does not prove the uploaded Skill works. Provide the actual ZIP file, not just a description or a suggested script. If file generation fails, report the error rather than inventing a download.
 ```
 
-7. **Only if no downloadable Skill ZIP exists**, answer clarifying questions, then send this follow-up in the **same Preview chat** if you got only a draft or an intake interview. Skip it if the package already exists:
+8. **Only if no downloadable Skill ZIP exists**, answer clarifying questions, then send this follow-up in the **same Preview chat** if you got only a draft or an intake interview. Skip it if the package already exists:
 
 ```text
 Create the reusable Skill package from the process; do not run intake yet. Provide the downloadable ZIP.
