@@ -10,7 +10,7 @@ Delegate real work to Copilot Cowork — hand it a document, let it reason over 
 | ----- | ------- | -------- | ------- |
 | 200 | Business User | 30 minutes | After completing this lab, participants will be able to delegate a document-grounded task to Copilot Cowork, have it draft real output in Microsoft 365 on their behalf, and describe how the delegation loop differs from conversational chat. |
 
-> **Bootcamp Latest pacing:** The scheduled slot is 30 minutes; the retained reference exercises total 45 minutes. Prioritize Use Cases #1 and #2 (10 + 20 minutes); Use Case #3 is follow-up work. The [shared lab](../cowork-hands-on/) remains available for other deliveries.
+> Use Cases #1 and #2 take about 30 minutes; Use Case #3 is optional.
 
 ---
 

@@ -33,10 +33,10 @@ mission_lab:
   self_setup: |-
     Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Plugins > Chat > New agent > Configure** for **Skills**, following the linked licensing and skills documentation. Some versions label the entry **Agents & Plugins**. For the optional extension, prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
   prerequisites:
-    - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account in a separate browser profile or private window."
-    - "Ask the facilitator if Skills or the assigned account is unavailable. Download the starter in Mission 1 and the report in Mission 3; do not skip those exercise inputs."
+    - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account."
+    - "Download the starter in Mission 1 and the report in Mission 3; do not skip those exercise inputs."
     - "Use only the supplied hotel scenario and an instructor-approved teammate. Keep the agent private until the targeted sharing exercise."
-  pacing: "Plan 30 minutes: Inspect (3) → Build (9) → Ground (4) → Verify (11) → Share (3). Version is optional, about 25 additional minutes with tooling ready. Responses can take about two minutes; these are budgets, not measured completion times. Do not resend while waiting, and do not call a blocked teammate test complete."
+  pacing: "Inspect, Build, Ground, Verify and Share take about 30 minutes; Version is optional."
   missions:
     - id: inspect
       verb: Inspect
@@ -387,7 +387,7 @@ This lab uses **Agent Builder** for a declarative agent. The **Standard harness*
 
 **Outcome:** a compatible ZIP and an understood briefing contract.
 
-1. Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account in a separate browser profile or private window. Ask the facilitator if the assigned account or Skills is unavailable.
+1. Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account.
 2. Download the [starter ZIP](https://microsoft.github.io/mcs-labs/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing.zip), or use your compatible hotel skill from Cowork. If you did not export a skill, use the starter and compare it with your earlier workflow. Keep the ZIP intact for upload.
 3. Inspect [SKILL.md](https://github.com/microsoft/mcs-labs/blob/main/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing/SKILL.md) and [briefing-template.md](https://github.com/microsoft/mcs-labs/blob/main/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing/briefing-template.md). The starter name is `hotel-operations-briefing`; `SKILL.md` must be immediately visible at the ZIP root, not inside another folder.
 4. Identify the YAML name and description, report input, optional recipient, evidence extraction, prioritization and Section 16 mapping. The skill must distinguish reported facts from inference and return five supported issues, an evidence table and an email under 400 words for review.

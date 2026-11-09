@@ -50,8 +50,12 @@ script changes.
   Preserve the creator's use-case and teaching-step order when adapting a lab.
   Keep the required path first and mark only trailing extensions optional. Do not
   move use cases to achieve that split; keep an earlier exercise required instead.
-  Keep advertised timings unless the organizer requests a change; section minutes
-  are pacing estimates, not measured completion times.
+  Keep advertised timings unless the organizer requests a change.
+- **Write for the learner only.** No proctor or maintainer notes, no per-step minute
+  arithmetic or "if time permits", and no account-hygiene boilerplate (separate
+  profile or private window, ask the proctor if something is missing). State pacing as
+  at most one plain sentence saying which missions or use cases are core and which are
+  optional.
   Use action-and-object labels such as "Automate tasks" or "Classify email", rather
   than mixing a use-case name with vague lifecycle labels such as "Explore".
   Compare ordered steps and prompt occurrences, not only a set of retained prompts.

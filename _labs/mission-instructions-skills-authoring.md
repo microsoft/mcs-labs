@@ -29,10 +29,10 @@ mission_lab:
   self_setup: |-
     Complete the [classic lab prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-skills-authoring/#prerequisites) before starting, including harness access, permissions, credits, Work IQ, and sandbox capabilities.
   prerequisites:
-    - "Sign in with the provided lab account; ask your proctor if an environment or connection is missing."
-    - "Open [Copilot Studio](https://copilotstudio.microsoft.com/). Use your assigned training account, not a personal or production account."
+    - "Sign in with the provided lab account."
+    - "Open [Copilot Studio](https://copilotstudio.microsoft.com/)."
     - "Use only the fictional sample materials. Download each file at the step that uses it; no prior Skill-authoring experience is needed."
-  pacing: "Plan 30 minutes for Configure (6) → Inspect (6) → Test (10) → Verify (8). Author (25), Explore (8), and Generate (10) are optional extensions after the core. These are working budgets, not execution guarantees; model, connection, and file-generation waits vary."
+  pacing: "Configure, Inspect, Test and Verify take about 30 minutes; Author, Explore and Generate are optional."
   missions:
     - id: configure
       verb: Configure
@@ -477,9 +477,9 @@ Complete the [classic lab prerequisites](https://microsoft.github.io/mcs-labs/la
 
 </details>
 
-Sign in with your provided lab account. Open [Copilot Studio](https://copilotstudio.microsoft.com/), use the assigned training identity rather than a personal or production account, and use only fictional materials. Download each file when its step needs it; no prior Skill-authoring experience is needed.
+Sign in with your provided lab account. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and use only fictional materials. Download each file when its step needs it; no prior Skill-authoring experience is needed.
 
-Plan **30 minutes: Configure (6) → Inspect (6) → Test (10) → Verify (8)**. **Author (25), Explore (8), and Generate (10)** are optional extensions after the core. These are working budgets, not execution guarantees; model, connection, and file-generation waits vary.
+Configure, Inspect, Test and Verify take about 30 minutes; Author, Explore and Generate are optional.
 
 ![City of Westbrook evaluation-weight chart: Technical approach 30, Relevant municipal experience 25, Cost 20, Project team 15, Timeline 10.](images/evaluation-weights.webp)
 

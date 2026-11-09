@@ -29,9 +29,8 @@ mission_lab:
   self_setup: |-
     Complete the [classic lab prerequisites](../mcs-m365-copilot-latest/#prerequisites) before starting. That section covers licensing, agent availability and placing the two Zava DIY files in accessible OneDrive or SharePoint content.
   prerequisites:
-    - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account** in a separate browser profile or private window, not a personal or production account."
-    - "If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant."
-  pacing: "Plan 15 minutes for Ask (3) → Reason (3) → Apply (4) → Verify (5). Publish (2), Research (10) and Model (5) are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes."
+    - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account**."
+  pacing: "Ask, Reason, Apply and Verify take about 15 minutes; Publish, Research and Model are optional."
   missions:
     - id: ask
       verb: Ask
@@ -290,7 +289,7 @@ mission_lab:
         - title: "Edit and review the page"
           instruction: "Check the new findings and open questions against the original sources, then edit the page directly to correct or add information. For example, the report does describe Spokane's competitive pressure and declining foot traffic; do not accept a claim that it gives no cause. Keep owners blank until agreed. To share with colleagues, use the share icon at the top right and review recipients; in this lab, share only if your facilitator directs you to."
           notice: "For a later Copilot revision, request a new answer in chat and open that answer in Pages again."
-        - title: "Create a Word version if time permits"
+        - title: "Create a Word version"
           instruction: "In the same chat, turn the pre-read into a Word deliverable. Send the prompt, then open the Word file Copilot creates and check it against the edited page and original sources before sharing. A Word version can reuse uncorrected chat text; edits to the page are not automatically carried into it."
           prompt_label: Same grounded Zava DIY chat
           prompt: |-
@@ -366,7 +365,7 @@ mission_lab:
             For each one, trace the root cause and map it to a specific recommendation.
             Are there any gaps where a problem exists but no recommendation addresses it?
           notice: "Check KPI tables and recommendations R1–R10. Examples to verify include housekeeping SLA at 77% versus a 90% target and WiFi satisfaction at 3.60 versus 4.0; inspect linen costs, parking revenue and valet retrieval time for gaps. The follow-up may finish without another research plan."
-        - title: "Challenge the recommendation if time permits"
+        - title: "Challenge the recommendation"
           instruction: "Optionally send this follow-up with **Research** or **Researcher** still selected, then compare the counterargument with the report."
           prompt_label: Same Researcher conversation, optional
           prompt: "What's the strongest counterargument to your top recommendation?"
@@ -399,7 +398,7 @@ mission_lab:
       outcome: "A ranked ROI table and a financial approve, marginal or defer summary."
       steps:
         - title: "Open Analyst and upload the same PDF"
-          instruction: "Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion. Look for **What do you want to analyze?** and the **Analyze data** composer. Select **+** → **Upload images and files** and attach `Contoso_Grand_Hotel_Performance_Report.pdf` again."
+          instruction: "Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion. Select **+** → **Upload images and files** and attach `Contoso_Grand_Hotel_Performance_Report.pdf` again."
           help: "If you skipped Research, [download the same hotel report here](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Wait for the attachment. Uploading from your device sends a copy to OneDrive; use only the fictional sample."
         - title: "Calculate and rank the investments"
           instruction: "Send the prompt. Let Analyst extract Section 16's costs and returns and compute the requested model."
@@ -432,12 +431,12 @@ mission_lab:
           instruction: "Check that all ten recommendations appear, sorted by NPV. Compare extracted costs and annual returns with Section 16; inspect the 8% rate, five-year horizon, R5 timing and recurring R7/R10 costs before accepting the approve, marginal or defer summary."
           help: "For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. Check whether the five annual costs are paid in advance in Years 0–4 or alongside benefits in Years 1–5. Conventional IRR needs both negative and positive cash flows; a model with only positive net flows must not invent an IRR. With no initial outflow, annual cost divided by annual benefit is not a conventional project payback period; ask Analyst to reconcile any such figure with its cash flows."
           notice: "The source provides simple payback. NPV, IRR and discounted payback here are computed results, not facts copied from the report. An undefined IRR needs explanation, not an invented number. If investment is not recovered within five years, label it accordingly; a longer payback requires an explicit assumption about returns beyond the model horizon. Model generation can take a couple of minutes."
-        - title: "Explore a visualization if time permits"
+        - title: "Explore a visualization"
           instruction: "Optionally send this follow-up in the same Analyst conversation."
           prompt_label: Same Analyst conversation, optional
           prompt: "Now create a chart showing NPV vs. Investment Cost for all 10 recommendations, with bubble size representing IRR."
           notice: "If you see code or a file name instead of a rendered chart, try the answer's **Provide the chart as a downloadable PNG** suggestion if offered, or rely on the ranked table."
-        - title: "Explore a budget constraint if time permits"
+        - title: "Explore a budget constraint"
           instruction: "Optionally send the second follow-up. Check the proposed combination, its total cost and total NPV against the ranked table and the cash-flow assumptions."
           help: "Check what the budget covers. Initial funding and total five-year spending are not the same: R7/R10 recur and R5 has two installments. Ask Analyst to state its budget basis before accepting a portfolio; a first-year total does not include every later commitment."
           prompt_label: Same Analyst conversation, optional
@@ -505,10 +504,9 @@ Complete the [classic lab prerequisites](../mcs-m365-copilot-latest/#prerequisit
 
 **Attendee readiness**
 
-- Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account** in a separate browser profile or private window, not a personal or production account.
-- If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant.
+- Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account**.
 
-Plan **15 minutes for Ask (3) → Reason (3) → Apply (4) → Verify (5)**. **Publish (2), Research (10) and Model (5)** are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes.
+Ask, Reason, Apply and Verify take about 15 minutes; Publish, Research and Model are optional.
 
 ## Table of Contents
 
@@ -880,7 +878,7 @@ Are there any gaps where a problem exists but no recommendation addresses it?
 
 Check KPI tables and recommendations R1–R10. Examples to verify include housekeeping SLA at 77% versus a 90% target and WiFi satisfaction at 3.60 versus 4.0; inspect linen costs, parking revenue and valet retrieval time for gaps. The follow-up may finish without another research plan.
 
-8. Optionally send this follow-up if time permits with **Research** or **Researcher** still selected, then compare the counterargument with the report:
+8. Optionally send this follow-up with **Research** or **Researcher** still selected, then compare the counterargument with the report:
 
 ```text
 What's the strongest counterargument to your top recommendation?
@@ -915,7 +913,7 @@ Attach one report → Connect sections → Check recommendation gaps.
 
 **Finish line:** A ranked ROI table and a financial approve, marginal or defer summary. As the hotel's CFO, go beyond simple payback using explicit cash-flow assumptions.
 
-1. Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion. Look for **What do you want to analyze?** and the **Analyze data** composer.
+1. Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion.
 2. Select **+** → **Upload images and files** and attach `Contoso_Grand_Hotel_Performance_Report.pdf` again. If you skipped Research, [download the same hotel report here](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Wait for the attachment. Uploading from your device sends a copy to OneDrive; use only the fictional sample.
 3. Send the prompt. Let Analyst extract Section 16's costs and returns and compute the requested model:
 
@@ -951,7 +949,7 @@ The source provides simple payback. NPV, IRR and discounted payback here are com
 
 For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. Check whether the five annual costs are paid in advance in Years 0–4 or alongside benefits in Years 1–5. Conventional IRR needs both negative and positive cash flows; a model with only positive net flows must not invent an IRR. With no initial outflow, annual cost divided by annual benefit is not a conventional project payback period; ask Analyst to reconcile any such figure with its cash flows.
 
-5. Optionally send this follow-up in the same Analyst conversation if time permits:
+5. Optionally send this follow-up in the same Analyst conversation:
 
 ```text
 Now create a chart showing NPV vs. Investment Cost for all 10 recommendations, with bubble size representing IRR.

@@ -36,10 +36,10 @@ mission_lab:
   self_setup: |
     %%INDEPENDENT_TENANT_SETUP_ONLY%%
   prerequisites:
-    - "For an event, use the provided or pre-provisioned account; sign in when prompted and ask the organizer if anything is missing."
+    - "For an event, use the provided or pre-provisioned account and sign in when prompted."
     # TEMPLATE NOTE (delete): keep the next line when learners check results in a business app (system of record); otherwise delete it.
     - "In another tab, open [%%SYSTEM_OF_RECORD%%](%%SYSTEM_OF_RECORD_URL%%), the %%KIND_OF_APP%% in this scenario. %%WHAT_IT_IS_IN_ONE_SENTENCE%% Use it to %%WHAT_TO_CHECK_THERE%%."
-  pacing: "Plan %%DURATION%% minutes for %%CORE_MISSION_VERBS_WITH_ARROWS%%. %%OPTIONAL_MISSIONS%% are optional extensions."
+  pacing: "%%CORE_MISSIONS%% take about %%DURATION%% minutes; %%OPTIONAL_MISSIONS%% are optional."
   missions:
     # TEMPLATE NOTE (delete): preserve creator order; required exercises first, optional extensions last.
     - id: %%MISSION_1_ID%%
@@ -146,7 +146,7 @@ Sign in with the provided account when prompted.
 <!-- TEMPLATE NOTE (delete): keep the next paragraph when learners check results in a business app; otherwise delete it. Mirror it in the README. -->
 Keep [%%SYSTEM_OF_RECORD%%](%%SYSTEM_OF_RECORD_URL%%) open in another tab. It is the %%KIND_OF_APP%% in this scenario: %%WHAT_IT_IS%%. Use it to %%WHAT_TO_CHECK_THERE%%.
 
-Plan **%%DURATION%% minutes for the core missions**. %%OPTIONAL_MISSIONS%% are **optional extensions**.
+%%CORE_MISSIONS%% take about %%DURATION%% minutes; %%OPTIONAL_MISSIONS%% are optional.
 
 ## Table of Contents
 

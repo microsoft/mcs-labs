@@ -32,7 +32,9 @@ Apply these when creating, converting, updating or reviewing either lab format:
   order, exact asset names and ordered prompt occurrences. Mark only trailing extensions
   optional; keep an earlier exercise required rather than moving it. Preserve advertised
   duration unless the organizer approves a change. Mission minutes are pacing estimates,
-  not measured completion times.
+  not measured completion times. Learners see at most one plain pacing sentence naming
+  the core and optional missions: no minute arithmetic, "if time permits", or proctor and
+  account notes.
 - **Keep prepared and own-tenant paths separate.** Put own-tenant provisioning in
   `mission_lab.self_setup` and a closed setup disclosure in both readable copies.
   `prerequisites` contains attendee readiness, not another setup wall. Do not add copying,

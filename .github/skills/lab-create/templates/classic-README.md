@@ -73,7 +73,7 @@
 ## ✅ Prerequisites
 
 > [!NOTE]
-> **Using a provided or pre-provisioned event account?** Sign in when prompted; ask the organizer if something is missing.
+> **Using a provided or pre-provisioned event account?** Sign in when prompted.
 
 <details class="lab-setup" markdown="1">
 <summary>Running this lab in your own tenant? Set this up first.</summary>

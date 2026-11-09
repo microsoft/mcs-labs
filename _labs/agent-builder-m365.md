@@ -706,7 +706,7 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
 
 #### Explore follow-up analysis (optional)
 
-6. If time permits, try one or both of these follow-up prompts to explore Analyst's capabilities further:
+6. Try one or both of these follow-up prompts to explore Analyst's capabilities further:
 
 ```text
 Now create a chart showing NPV vs. Investment Cost for all 10 recommendations, with bubble size representing IRR.

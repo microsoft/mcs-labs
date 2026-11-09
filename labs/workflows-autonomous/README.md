@@ -14,7 +14,7 @@ Plan a task. Route an email. Build an inline agent that plans a task, then explo
 | --- | --- | --- | --- |
 | 300 | Maker / Developer | 30 minutes core | A planned task, classified email, and a reviewed reply |
 
-**Pacing:** Automate tasks (10) → Inspect routing (3) → Classify email (5) → Review replies (12) = **30 minutes**. Then, if time allows: Handle inventory (15) and Generate quotes (10). These are pacing estimates; response and trigger wait times vary.
+Automate tasks, Inspect routing, Classify email and Review replies take about 30 minutes; Handle inventory and Generate quotes are optional.
 
 **Scenario:** First, automate planning a new To Do task. Then work with an order desk that receives unrelated promotions, customer questions, supplier delays, and quote requests. A workflow classifies the message; a grounded draft and human decision protect the customer-facing reply.
 
@@ -230,7 +230,7 @@ If approval is missing, inspect whether Copilot is drafting or Human review is w
 
 **Outcome:** if prerequisites work, one verified Task with arrival-plus-three-days due date and matching structured output.
 
-> Event attendees use installed assets and ask the proctor if missing. Self-paced users import [Enhanced Task Completion](../mcs-workflows/assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip) for Warehouse MCP and ensure Dataverse MCP can create **Task** rows.
+> Event attendees use installed assets. Self-paced users import [Enhanced Task Completion](../mcs-workflows/assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip) for Warehouse MCP and ensure Dataverse MCP can create **Task** rows.
 
 1. In your Order Management workflow, **Classify → Supplier Delay → + → Agent**. Keep **New agent for this workflow**, default available model, **Expand**, and name it **Inventory Task Agent**.
 2. Under **Tools → Model Context Protocol (MCP servers)** add **Microsoft Dataverse MCP Server** and **Warehouse MCP Server** (detail title **Warehouse MCP**). Verify **Get restock date**, Dataverse operations, and Connection. Reuse working connections. Only for **No tools found**, remove the affected tool from this agent, re-add it, save/publish safely, and recheck. If still missing, stop and ask the proctor.

@@ -56,6 +56,11 @@ Apply `../lab-review/references/learning-design.md` while drafting. In short:
 - Explain *why* after the learner has seen it work (the reveal), not before.
 - Mark trailing extensions optional. Core minutes must add up to `duration`; preserve an
   existing advertised duration unless the organizer approves a change.
+- Write for the learner only. No proctor or maintainer notes, no per-step minute
+  arithmetic or "if time permits", and no account-hygiene boilerplate (separate
+  profile or private window, ask the proctor if something is missing). State pacing as
+  at most one plain sentence saying which missions or use cases are core and which are
+  optional.
 - Attendees with provided or pre-provisioned event accounts use a pre-set-up
   environment. Use the templates' short, organizer-neutral cue; do not imply that
   attending any event is enough to skip setup. Keep required sign-in, downloads and
