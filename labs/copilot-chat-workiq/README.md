@@ -24,7 +24,7 @@ Complete the [classic lab prerequisites](../mcs-m365-copilot-latest/#prerequisit
 **Attendee readiness**
 
 - Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account** in a separate browser profile or private window, not a personal or production account.
-- Keep this lab beside Copilot. If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant.
+- If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant.
 
 Plan **15 minutes for Ask (4) → Apply (5) → Verify (6)**. **Reason (3), Publish (2), Research (10) and Model (5)** are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes.
 
@@ -80,7 +80,7 @@ Auto decides how long to think; Quick response favors speed for recall, rewritin
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/model-picker-dark.webp"><img src="images/model-picker.webp" alt="Response-mode menu and Claude submenu showing available model choices." width="1812" height="1176"></picture>
 
-The capture shows Think deeper selected during the optional exercise. Your available models may differ; light capture only. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
+The capture shows Think deeper selected during the optional exercise. Your available models may differ. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
 
 <details>
 <summary>Reveal: What made this a public-web answer?</summary>
@@ -308,7 +308,7 @@ For a later Copilot revision, request a new answer in chat and open that answer 
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/preread-excerpt-dark.webp"><img src="images/preread-excerpt.webp" alt="Excerpt of a Zava DIY quarterly business review pre-read with three findings and source references." width="2814" height="1566"></picture>
 
-An example of the optional Pages deliverable: findings with evidence, ready for your review. This is a document-content crop, not a fabricated dark-theme capture.
+An example of the optional Pages deliverable: findings with evidence, ready for your review.
 
 4. In the same chat, turn the pre-read into a Word deliverable. Send the prompt, then open the Word file Copilot creates and check it against the edited page and original sources before sharing. A Word version can reuse uncorrected chat text; edits to the page are not automatically carried into it.
 
@@ -524,4 +524,4 @@ Your core result is a cited market summary, policy decision checklist and checke
 - [Microsoft Copilot documentation](https://learn.microsoft.com/copilot/)
 - [What is Researcher agent in Microsoft Copilot?](https://learn.microsoft.com/copilot/manage/researcher-agent)
 
-Product UI and available capabilities can vary by tenant. Generated results will differ. Screenshots reuse the refreshed classic lab's reviewed light captures; no verified dark captures were available for this edition.
+Product UI and available capabilities can vary by tenant. Generated results will differ.

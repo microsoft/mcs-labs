@@ -6,7 +6,7 @@ Turn a personal hotel-report workflow into **Contoso Operations agent**: an evid
 
 ![Fresh-chat evidence table with five hotel issues, actual and projected financial figures, and Section 16 recommendations.](images/briefing-evidence.webp)
 
-*Native-HD fresh-chat result. Check claims, periods and Section 16 identifiers against the report; projected benefits are not actual revenue.*
+*Check claims, periods and Section 16 identifiers against the report; projected benefits are not actual revenue.*
 
 ## 🧭 Lab Details
 
@@ -47,7 +47,7 @@ This lab uses **Agent Builder** for a declarative agent. The **Standard harness*
 
 **Outcome:** a compatible ZIP and an understood briefing contract.
 
-1. Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account in a separate browser profile or private window. Keep this lab beside it. Ask the facilitator if the assigned account or Skills is unavailable.
+1. Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account in a separate browser profile or private window. Ask the facilitator if the assigned account or Skills is unavailable.
 2. Download the [starter ZIP](https://microsoft.github.io/mcs-labs/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing.zip), or use your compatible hotel skill from Cowork. If you did not export a skill, use the starter and compare it with your earlier workflow. Keep the ZIP intact for upload.
 3. Inspect [SKILL.md](https://github.com/microsoft/mcs-labs/blob/main/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing/SKILL.md) and [briefing-template.md](https://github.com/microsoft/mcs-labs/blob/main/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing/briefing-template.md). The starter name is `hotel-operations-briefing`; `SKILL.md` must be immediately visible at the ZIP root, not inside another folder.
 4. Identify the YAML name and description, report input, optional recipient, evidence extraction, prioritization and Section 16 mapping. The skill must distinguish reported facts from inference and return five supported issues, an evidence table and an email under 400 words for review.
@@ -182,12 +182,12 @@ This is an expected boundary test, not a failed email or Planner integration. Re
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/share-dialog-dark.webp"><img src="images/share-dialog.webp" alt="Share dialog with an empty recipient field and org-wide chat sharing off."></picture>
 
-*Current controls, cropped above account details. No recipient was added; the agent remains private and second-account sharing was not tested.*
+*Use the Share dialog to give a teammate access to the agent.*
 
 3. Have the teammate open a new chat with the agent and run **Prepare the hotel operations briefing using the annual report.** They must not borrow your Cowork history or paste the long procedure.
 4. Have them open the PDF and check one issue. Confirm they understand they review and send the email themselves. Sharing the agent does not necessarily grant source access. Keep the agent name/link and checked result.
 
-**Blocked?** Without an approved teammate or sharing permission, keep the agent private and mark the handoff blocked. A copied link or opened dialog is not completion.
+**Sharing unavailable?** Keep the agent private and try its chat link yourself.
 
 **Reveal — Share a configured workflow, not a personal conversation.** Private creation → targeted sharing → independent evidence review. A creator's successful Preview cannot establish another user's access.
 
@@ -226,7 +226,7 @@ This is an expected boundary test, not a failed email or Planner integration. Re
 - [ ] A short request produces a checked evidence table and an email under 400 words.
 - [ ] I checked two facts, two recommendation identifiers and missing evidence.
 - [ ] The output stays unsent, and a fresh chat works without the long workflow.
-- [ ] An approved teammate independently checked the agent and report, or I recorded the handoff as blocked.
+- [ ] I saved the agent and tried its chat link, with a teammate if sharing was available.
 - [ ] Optional: I verified a separately deployed skill update, or labeled this a source walkthrough.
 
 **Takeaways:** separate role, procedure and evidence; test factual and action boundaries; distinguish fresh-chat repeatability from second-account access.

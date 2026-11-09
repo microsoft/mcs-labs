@@ -32,7 +32,7 @@ mission_lab:
     - "Use your assigned **training account** in a separate browser profile or private window. Do not use your personal or production account."
     - "Open [Microsoft Copilot](https://copilot.cloud.microsoft/home?auth=2). Start in **Chat, not Cowork**. You will explicitly switch to Cowork after the first two missions."
     - "In another tab, open [Zava Sales Hub](https://aka.ms/ZavaSalesHub), the CRM in this scenario. It is a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data: accounts, contacts, leads, opportunities and activities. On first use, check that the Microsoft Dataverse consent shows your assigned training account, then select **Allow**. Wait for **Live CRM** before checking records."
-    - "Keep this lab beside Copilot. All prompts are ready to copy; customer emails must stay **drafts**."
+    - "All prompts are ready to copy; customer emails must stay **drafts**."
   pacing: "The 30-minute core is Ask (3) → Act (7) → Delegate (11) → Repeat (9). The Riley call and CRM update, Friday feedback loop, and Zava Sales plugin exercise remain available as optional extensions: 8 + 6 + 8 minutes, about 52 minutes for everything. Budgets include reviewing results, but model and connector waits vary. At minute 21, move toward saving and scheduling the review; skip extensions, not approvals or output checks. Read ahead while Cowork works and do not start duplicate tasks."
   missions:
     - id: ask
@@ -193,7 +193,7 @@ mission_lab:
             width: 2046
             height: 726
             caption: "Higher effort spends more time and credits on the task. Medium is the lab default."
-          notice: "Watch Cowork discover and use **Zava PowerPoint** for the branded presentation, query CRM through **Microsoft Dataverse**, and save follow-ups in **Outlook**. Check the visible plugin/skill activity as well as the deck; saying “Zava” on a title slide is not proof of plugin use. **Cowork uses metered Copilot Credits**; available models and tools depend on your tenant."
+          notice: "Watch Cowork discover and use **Zava PowerPoint** for the branded presentation, query CRM through **Microsoft Dataverse**, and save follow-ups in **Outlook**. Check the visible plugin/skill activity as well as the deck; saying “Zava” on a title slide is not proof of plugin use."
         - title: "Steer before you trust"
           instruction: "As soon as a first deck appears, open it and inspect the proposed decisions. Send the correction below in the same task. If Cowork is still working, use **Queue**; it will handle the follow-up after the current work."
           prompt_label: Same Cowork task
@@ -224,7 +224,7 @@ mission_lab:
         - problem: "The deck preview is blank or covered."
           solution: "Wait for the file to finish loading and dismiss any first-run Office privacy notice. Select **Open in PowerPoint** if the embedded preview stays blank, then wait for each slide to finish rendering before judging its layout. Do not restart the entire Cowork task."
         - problem: "It is taking longer than the mission budget."
-          solution: "Check whether Cowork is waiting for your approval. If it is actively working, read the next step or queue the correction once the first deck exists. Run time varies; generating a second task duplicates work and consumes more credits."
+          solution: "Check whether Cowork is waiting for your approval. If it is actively working, read the next step or queue the correction once the first deck exists."
 
     - id: repeat
       verb: Repeat
@@ -301,7 +301,7 @@ mission_lab:
         - problem: "The skill or schedule is still being prepared."
           solution: "Wait for its confirmation and inspect the saved item. Do not assume a conversational “I will” is proof that it was created or activated."
         - problem: "The skill page says it could not verify SKILL.md in OneDrive."
-          solution: "Reload once, then inspect the existing file in OneDrive using the path above. In the training run, the file was present and readable despite this warning. Do not delete Cowork folders or create duplicate skills to clear it. If the file is absent or unreadable, ask your facilitator before continuing to skill reuse."
+          solution: "Reload once, then inspect the existing file in OneDrive using the path above. Do not delete Cowork folders or create duplicate skills to clear it. If the file is absent or unreadable, ask your facilitator before continuing to skill reuse."
 
     - id: record
       verb: Record
@@ -350,7 +350,7 @@ mission_lab:
         - problem: "A record creation fails."
           solution: "Read the reported error. Let Cowork correct a schema issue if it can, but do not grant wider permissions or switch environments. Check whether a record already exists before retrying so you do not create duplicates."
         - problem: "The call is saved but some fields are missing."
-          solution: "Check Cowork's disclosure and the actual record. In the training run, the call recap and renewal link were saved, but caller/recipient fields failed. A completed status does not mean every field was populated; ask your facilitator before treating omitted details as complete."
+          solution: "Check Cowork's disclosure and the actual record. A completed status does not mean every field was populated; ask your facilitator before treating omitted details as complete."
 
     - id: improve
       verb: Improve
@@ -516,7 +516,7 @@ Find a proposal in Copilot Chat, prepare a live deal brief with the Zava Sales H
 
 Use your assigned **training account**, not a personal or production account. Your facilitator prepares Copilot access, credits, the sample Northwind proposal, Zava Sales data, the Zava Sales Hub agent and plugins. Start in **Chat, not Cowork**. Keep customer emails as **drafts**.
 
-Keep [Zava Sales Hub](https://aka.ms/ZavaSalesHub) open in another tab. It is the CRM in this scenario: a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data (accounts, contacts, leads, opportunities and activities). On first use, check that the Microsoft Dataverse consent shows your assigned training account, then select **Allow**. Wait for **Live CRM** before checking what Copilot finds and the records you create.
+Open [Zava Sales Hub](https://aka.ms/ZavaSalesHub). It is the CRM in this scenario: a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data (accounts, contacts, leads, opportunities and activities). On first use, check that the Microsoft Dataverse consent shows your assigned training account, then select **Allow**. Wait for **Live CRM** before checking what Copilot finds and the records you create.
 
 Plan **30 minutes for the four core missions**: Ask (3) → Act (7) → Delegate (11) → Repeat (9). The Riley call and CRM update, Friday feedback loop, and Zava Sales plugin exercise remain as **optional extensions: 8 + 6 + 8 minutes**, about 52 minutes for everything. These are working budgets, not guaranteed run times. At minute 21, move toward saving and scheduling the review; skip extensions, not approvals or output checks. Read ahead while Cowork works; do not start duplicate tasks.
 
@@ -661,7 +661,7 @@ Let skill creation finish. Inspect the saved instructions: the same three accoun
 
 Open **Agents & Plugins → Cowork → Manage all → weekly-deal-review**. If its tile is offscreen in the Added row, use the right arrow or **Manage all**. Inspect the actual instructions in **OneDrive → My files → Documents → Cowork → skills → weekly-deal-review → SKILL.md** in your training account.
 
-If the skill page says it could not verify `SKILL.md` in OneDrive, reload once, then check the existing file there. In the training run, the file was present and readable despite this warning. An inventory entry alone does not verify its contents. Do not delete Cowork folders or create duplicate skills to clear the warning. If the file is absent or unreadable, ask your facilitator before continuing to skill reuse.
+If the skill page says it could not verify `SKILL.md` in OneDrive, reload once, then check the existing file there. An inventory entry alone does not verify its contents. Do not delete Cowork folders or create duplicate skills to clear the warning. If the file is absent or unreadable, ask your facilitator before continuing to skill reuse.
 
 </details>
 
@@ -707,7 +707,7 @@ This example shows the actions **after approval**, followed by the saved records
 
 Creating the call, completing it and creating the task can need separate approvals. Verify the phone call is **Completed**, the task is assigned to you with the right date, and both records are linked to the renewal. If a write fails, read the error and check for an existing record before retrying.
 
-Check any disclosed omissions too. In the training run, the call recap and renewal link were saved but caller/recipient fields failed. A completed status does not mean every field was populated; ask your facilitator before treating omitted details as complete.
+Check any disclosed omissions too. A completed status does not mean every field was populated; ask your facilitator before treating omitted details as complete.
 
 Then send:
 

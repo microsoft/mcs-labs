@@ -64,5 +64,5 @@ test('skill reuse keeps core timing, optional boundaries and one correct answer 
   assert.equal(mission('version').minutes, 25);
   assert.equal(mission('version').optional, true);
   for (const item of missions) assert.equal(item.check.options.filter(option => option.correct).length, 1);
-  assert.match(mission('share').steps[1].notice, /mark the handoff blocked/);
+  assert.match(mission('share').steps[1].notice, /keep the agent private and try its chat link yourself/);
 });

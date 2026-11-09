@@ -48,12 +48,17 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
   screenshot provenance in the run log and PR, not the lab, captions, notices or a
   "What was tested" disclosure. Translate evidence into a short action or expected
   result only when the learner needs it to complete the exercise.
+  Knowledge checks should teach the product concept, not quiz learners on the
+  runner's incomplete coverage. Do not require pass/fail logs or blocked-handoff
+  reports unless reporting is itself a learning objective.
 - **Prepared training path.** Start from the supplied working assets. Do not add owner
   checks, copy fallbacks, connection audits or sender restrictions because the automated
   runner needed them. Report provisioning defects to the organizer. Keep independent
   tenant setup in the existing expandable setup section, and do not repeat warnings
   already provided by the training tenant. Preserve approvals that teach the workflow's
   behavior and concise cleanup, not maintainer safety checklists or generic coaching.
+  Tell learners which service to open, not how to arrange their windows. Avoid
+  side-by-side, split-screen or keep-the-lab-beside-the-product instructions.
 - **UI labels.** Use the label exactly as the product shows it, in bold, and quote it in
   the PR. When a label alternates between rollouts, name the destination or give both.
 - **Current product, everywhere.** The live product is the source of truth: labels, menu

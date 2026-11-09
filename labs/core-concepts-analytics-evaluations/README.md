@@ -144,7 +144,7 @@ Access and interpret agent analytics to measure performance and identify optimiz
 ### Step-by-step instructions
 
 > [!IMPORTANT]
-> **Your analytics dashboard will be empty.** Analytics data requires 24-48 hours to populate after an agent starts receiving conversations. Since your agent was just created during this bootcamp, there is no analytics data available yet. There is currently no way to pre-provision or simulate analytics data in the platform — we are actively working with the Product Group to provide a way to visualize what populated analytics would look like for lab scenarios. For now, follow the steps below to familiarize yourself with the dashboard layout, available metrics, and where to find insights once data begins flowing.
+> **Your analytics dashboard will be empty.** Analytics data requires 24-48 hours to populate after an agent starts receiving conversations. Since your agent was just created during this bootcamp, there is no analytics data available yet. For now, follow the steps below to familiarize yourself with the dashboard layout, available metrics, and where to find insights once data begins flowing.
 
 #### Navigate to Analytics
 

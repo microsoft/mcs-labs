@@ -27,13 +27,12 @@ mission_lab:
 
     **Zava Operations Assistant** coordinates; **Zava Stock & Policy Specialist** owns stock and approval policy; **LiftLine Dispatch Advisor** owns delivery suitability. All facts are fictional. There is no ERP, live inventory, carrier booking tool, or transaction.
   self_setup: |-
-    Arrange access to create two **Microsoft Copilot harness** agents in the same environment, upload Skills, publish and connect a specialist. Confirm **Build → Skills**, **Connected agents** and **Add A2A agent** are available. The **Standard harness** is a separate experience, not a renamed substitute. Building and testing can consume Copilot Credits.
+    Arrange access to create two **Microsoft Copilot harness** agents in the same environment, upload Skills, publish and connect a specialist. Confirm **Build → Skills**, **Connected agents** and **Add A2A agent** are available. The **Standard harness** is a separate experience, not a renamed substitute.
 
     Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner mission.
   prerequisites:
     - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment."
-    - "Keep the lab beside Studio. You download the Skill ZIP in Mission 2 and confirm the LiftLine card URL in Mission 3."
-    - "Use synthetic requests only. Delegation can share conversation context with the external service. Never reserve, book, send or approve."
+    - "You download the Skill ZIP in Mission 2 and confirm the LiftLine card URL in Mission 3."
   pacing: "30 minutes; optional challenge if time allows."
   missions:
     - id: coordinate
@@ -155,7 +154,7 @@ mission_lab:
             Source: ZAVA-DEMO-v1. Advisory only; no stock has been reserved.
             ```
 
-            In **Preview**, expand the response's activity details and inspect **Used skill: zava-stock-policy**. Check the calculation and fixture ID, not just a fluent answer. The supplied live run observed that Skill event, but did not inspect a separate reference-file-read trace. No carrier quote should be invented.
+            In **Preview**, expand the response's activity details and inspect **Used skill: zava-stock-policy**. Check the calculation and fixture ID, not just a fluent answer. No carrier quote should be invented.
         - title: "Publish only the specialist"
           instruction: "Save the specialist and select **Publish**. The panel can note that the agent has no channel; that does not prevent publication. Select **Publish agent**, then **Done** when it confirms **Your agent is published**. Do not add a channel or trigger to connect it. You must own it or have it shared with you. Intended users need separate access to the specialist; access to the coordinator does not grant that. Do not broaden permissions just for the test. The coordinator can remain private."
         - title: "Describe when the coordinator should delegate"
@@ -517,15 +516,13 @@ All facts are fictional. There is no ERP, live inventory, carrier booking tool o
 <details class="lab-setup" markdown="1">
 <summary>Using your own tenant? View setup requirements</summary>
 
-Arrange access to create two **Microsoft Copilot harness** agents in the same environment, upload Skills, publish and connect a specialist. Confirm **Build → Skills**, **Connected agents** and **Add A2A agent** are available. The **Standard harness** is a separate experience, not a renamed substitute. Building and testing can consume Copilot Credits.
+Arrange access to create two **Microsoft Copilot harness** agents in the same environment, upload Skills, publish and connect a specialist. Confirm **Build → Skills**, **Connected agents** and **Add A2A agent** are available. The **Standard harness** is a separate experience, not a renamed substitute.
 
 Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner mission.
 
 </details>
 
-**Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. Keep the lab beside Studio. You download the Skill ZIP in Mission 2 and confirm the card URL in Mission 3.
-
-**Use synthetic requests only.** Delegation can share conversation context with the external service. Never reserve, book, send or approve.
+**Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. You download the Skill ZIP in Mission 2 and confirm the card URL in Mission 3.
 
 **Reading the blocks:** copy each input only into its named field. **Reference output** blocks are comparison material, never messages to send. Wording can vary; facts and limitations must match.
 
@@ -654,7 +651,7 @@ Approval: not evaluated because no delivery quote was provided.
 Source: ZAVA-DEMO-v1. Advisory only; no stock has been reserved.
 ```
 
-**Pass:** calculations, eligibility, weight and fixture ID match; no carrier quote is invented. In **Preview**, expand the response's activity details and inspect **Used skill: zava-stock-policy**. The supplied live run observed that Skill event, but did not inspect a separate reference-file-read trace.
+**Pass:** calculations, eligibility, weight and fixture ID match; no carrier quote is invented. In **Preview**, expand the response's activity details and inspect **Used skill: zava-stock-policy**.
 
 ### Publish and connect the specialist
 

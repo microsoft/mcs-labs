@@ -116,7 +116,7 @@ In this lab you build the **Zava Coffee Subscription Assistant** and its **Subsc
 
 - Access to [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/) in an environment with the **Customer conversation agent** creation option.
 - Permission to create agents in that environment.
-- Copilot Studio access and billing capacity for this preview. Building, testing and evaluating agents can consume Copilot Credits; see [Customer Conversation harness usage and billing](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/overview-customer-conversation).
+- Copilot Studio access and billing capacity for this preview.
 
 </details>
 
@@ -172,7 +172,7 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
 
 1. Open [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/), sign in with your lab account, and select the environment your facilitator gives you. If a first-run notice or tour appears, review it and dismiss it before continuing. Ask your facilitator about any unexpected consent or access request.
 
-1. Select **Agents** → **More create options** (arrow beside **New agent**) → **Customer conversation agent**. Accessible name: **Customer conversation agent, uses Copilot Credits**. If missing, stop and ask your facilitator.
+1. Select **Agents** → **More create options** (arrow beside **New agent**) → **Customer conversation agent**. If missing, stop and ask your facilitator.
 
     ![More create options showing Customer conversation agent](images/new-agent-menu.png)
 
@@ -451,9 +451,6 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
 ### Objective
 
 Simulate a subscription cancellation by voice and hear the **Voice** instructions at work.
-
-> [!NOTE]
-> Only connection and end-call controls were verified; no spoken input was supplied. Recognition, spell-back and spoken cancellation remain unverified. The completed-call image is an earlier example.
 
 ---
 

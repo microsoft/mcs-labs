@@ -42,15 +42,13 @@ All facts are fictional. There is no ERP, live inventory, carrier booking tool o
 <details class="lab-setup" markdown="1">
 <summary>Using your own tenant? View setup requirements</summary>
 
-Arrange access to create two **Microsoft Copilot harness** agents in the same environment, upload Skills, publish and connect a specialist. Confirm **Build → Skills**, **Connected agents** and **Add A2A agent** are available. The **Standard harness** is a separate experience, not a renamed substitute. Building and testing can consume Copilot Credits.
+Arrange access to create two **Microsoft Copilot harness** agents in the same environment, upload Skills, publish and connect a specialist. Confirm **Build → Skills**, **Connected agents** and **Add A2A agent** are available. The **Standard harness** is a separate experience, not a renamed substitute.
 
 Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner mission.
 
 </details>
 
-**Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. Keep the lab beside Studio. You download the Skill ZIP in Mission 2 and confirm the card URL in Mission 3.
-
-**Use synthetic requests only.** Delegation can share conversation context with the external service. Never reserve, book, send or approve.
+**Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. You download the Skill ZIP in Mission 2 and confirm the card URL in Mission 3.
 
 **Reading the blocks:** copy each input only into its named field. **Reference output** blocks are comparison material, never messages to send. Wording can vary; facts and limitations must match.
 
@@ -179,7 +177,7 @@ Approval: not evaluated because no delivery quote was provided.
 Source: ZAVA-DEMO-v1. Advisory only; no stock has been reserved.
 ```
 
-**Pass:** calculations, eligibility, weight and fixture ID match; no carrier quote is invented. In **Preview**, expand the response's activity details and inspect **Used skill: zava-stock-policy**. The supplied live run observed that Skill event, but did not inspect a separate reference-file-read trace.
+**Pass:** calculations, eligibility, weight and fixture ID match; no carrier quote is invented. In **Preview**, expand the response's activity details and inspect **Used skill: zava-stock-policy**.
 
 ### Publish and connect the specialist
 

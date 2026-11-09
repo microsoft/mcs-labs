@@ -54,8 +54,8 @@ test('skills lab checks proposal artifacts rather than relying on chat caveats',
 });
 
 test('skills lab distinguishes artifact verification from hidden execution', () => {
-  assert.match(mission('verify').steps[1].notice, /Without concrete execution evidence/);
-  assert.match(mission('verify').steps[1].notice, /\*\*unverified\*\*/);
+  assert.match(mission('verify').steps[1].notice, /Compare the chart with the extracted table and the RFP evaluation criteria/);
+  assert.doesNotMatch(mission('verify').steps[1].notice, /record it as|reference chart run/);
   assert.match(mission('explore').steps[4].notice, /Not visible does not mean unsupported/);
   assert.match(mission('generate').steps[2].notice, /not a claim that this generation path passed/);
   for (const copy of copies(mission('explore').steps[5].instruction)) {

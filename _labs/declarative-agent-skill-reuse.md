@@ -21,7 +21,7 @@ mission_lab:
     alt: "Fresh-chat evidence table with five hotel issues, actual and projected financial figures, and Section 16 recommendations."
     width: 2595
     height: 2358
-    caption: "Native-HD capture of the fresh-chat result. Check claims, periods and recommendation identifiers against the report; projected benefits are not actual revenue."
+    caption: "Check claims, periods and recommendation identifiers against the report; projected benefits are not actual revenue."
   scenario: |-
     You lead operations at **Contoso Grand Hotel**. Your team needs the five most urgent issues in its annual performance report, each with a symptom, root cause, reported financial impact and matching Section 16 recommendation.
 
@@ -32,7 +32,7 @@ mission_lab:
     Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Plugins > Chat > New agent > Configure** for **Skills**, following the linked licensing and skills documentation. Some versions label the entry **Agents & Plugins**. For the optional extension, prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
   prerequisites:
     - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account in a separate browser profile or private window."
-    - "Keep the lab beside Copilot and ask the facilitator if Skills or the assigned account is unavailable. Download the starter in Mission 1 and the report in Mission 3; do not skip those exercise inputs."
+    - "Ask the facilitator if Skills or the assigned account is unavailable. Download the starter in Mission 1 and the report in Mission 3; do not skip those exercise inputs."
     - "Use only the supplied hotel scenario and an instructor-approved teammate. Keep the agent private until the targeted sharing exercise."
   pacing: "Plan 30 minutes: Inspect (3) → Build (9) → Ground (4) → Verify (11) → Share (3). Version is optional, about 25 additional minutes with tooling ready. Responses can take about two minutes; these are budgets, not measured completion times. Do not resend while waiting, and do not call a blocked teammate test complete."
   missions:
@@ -237,7 +237,7 @@ mission_lab:
       minutes: 3
       tool: Agent Builder · Create and Share
       brief: "Save the agent privately, then test access with one approved teammate."
-      outcome: "An independently checked teammate result, or an explicit blocked handoff."
+      outcome: "A saved agent that a teammate can use in a fresh conversation."
       steps:
         - title: "Create the private agent"
           instruction: "Select **Create**. Keep the window open until the success dialog says the agent is **private**, available only to you. After this first save, use **Update** to save later edits. If a browser reload returns you to **Build your own specialist agent**, open **My agents** and select **Contoso Operations agent**; do not create a duplicate."
@@ -250,8 +250,8 @@ mission_lab:
             alt: "Share dialog with an empty recipient field and org-wide chat sharing off."
             width: 1800
             height: 480
-            caption: "Current controls, cropped above account details. No recipient was added; the agent remains private and second-account sharing was not tested."
-          notice: "If no approved teammate or sharing permission is available, retain the private agent and mark the handoff blocked. An open Share dialog or copied link is not proof of access."
+            caption: "Use the Share dialog to give a teammate access to the agent."
+          notice: "If sharing is unavailable, keep the agent private and try its chat link yourself."
         - title: "Verify the teammate's independent review"
           instruction: "Have the teammate open the agent in a new chat and run **Prepare the hotel operations briefing using the annual report.** They must not borrow your Cowork history or paste the long procedure. Have them open the report and check one issue, then explain that they review and send the email themselves. Agent sharing does not necessarily grant source access. Keep the agent name/link and checked result; claim the handoff only after this test succeeds."
       reveal:
@@ -267,7 +267,7 @@ mission_lab:
             feedback: "A link proves neither agent access nor permission to open the report."
           - text: "No; the teammate must run the workflow and check the report."
             correct: true
-            feedback: "Record the handoff as blocked until an independent test succeeds."
+            feedback: "The teammate needs access to both the agent and its source report."
 
     - id: version
       verb: Version
@@ -280,7 +280,7 @@ mission_lab:
       steps:
         - title: "Create a separate toolkit project"
           instruction: "In Visual Studio Code, open **Microsoft 365 Agents Toolkit > Create a New Agent/App > Declarative Agent > No Action**. Name it **Contoso Operations agent Pro-Code**. Locate the declarative agent JSON under `appPackage` referenced by the generated Microsoft 365 app manifest. Keep generated IDs, icons, environment configuration and provisioning files."
-          notice: "This optional path was not tested in the live run. Toolkit labels and support vary; unavailable skill-capable tooling means source walkthrough, not successful deployment."
+          notice: "This optional exercise requires Microsoft 365 Agents Toolkit with declarative agent skill support."
         - title: "Add the unpacked skill and manifest reference"
           instruction: |
             Extract the starter ZIP, or your compatible skill. Copy `SKILL.md` and resources into `appPackage\skills\hotel-operations-briefing`. Use declarative agent schema **v1.9** and the matching `$schema` URL from the [schema reference](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-manifest-1.9).
@@ -289,7 +289,7 @@ mission_lab:
         - title: "Scope cloud knowledge to the same report"
           instruction: "Place the hotel PDF in an approved SharePoint or OneDrive location and confirm your test account can open it. Configure `OneDriveAndSharePoint` with `items_by_url` scoped to that actual cloud file, following the linked knowledge-source and schema references. Do not use a local path, public GitHub URL, placeholder or empty scope. Keep web search and write actions out."
         - title: "Provision, test and update the separate copy"
-          instruction: "Resolve manifest diagnostics and confirm the skill folder is inside the app package. Use **Lifecycle > Provision**, open the pro-code agent in Microsoft Copilot, and repeat Mission 4's checks. Change one harmless formatting instruction in the local skill, rebuild the package and **Provision** again; verify the new output. Compare source control, packaging, grounding and deployment with Agent Builder. Do not report deployment success unless these tests actually pass."
+          instruction: "Resolve manifest diagnostics and confirm the skill folder is inside the app package. Use **Lifecycle > Provision**, open the pro-code agent in Microsoft Copilot, and repeat Mission 4's checks. Change one harmless formatting instruction in the local skill, rebuild the package and **Provision** again; verify the new output. Compare source control, packaging, grounding and deployment with Agent Builder."
       reveal:
         title: "Does a local edit update both agents?"
         line: "Each deployed agent has its own skill copy."
@@ -306,10 +306,10 @@ mission_lab:
             feedback: "Shared source does not mean a shared live deployment."
       stuck:
         - problem: "The toolkit cannot resolve the skill."
-          solution: "Check schema v1.9 support, manifest-relative paths and package inclusion. Point to the unpacked folder, not the ZIP; label unsupported tooling as a blocked extension."
+          solution: "Check schema v1.9 support, manifest-relative paths and package inclusion. Point to the unpacked folder, not the ZIP; ask the facilitator if the installed toolkit lacks skill support."
   finish:
     title: "A procedure the team can repeat"
-    message: "Keep the agent link, checked evidence table and review-ready email. Core completion includes the teammate's independent check; if that was unavailable, retain the private result and record a blocked handoff."
+    message: "Keep the agent link, checked evidence table and review-ready email. Your teammate can now reuse the procedure without your conversation history."
     takeaways:
       - label: Separate concerns
         text: "Role instructions select the workflow; the skill defines it; the report supplies evidence."
@@ -344,7 +344,7 @@ Turn a personal hotel-report workflow into **Contoso Operations agent**: an evid
 
 ![Fresh-chat evidence table with five hotel issues, actual and projected financial figures, and Section 16 recommendations.](images/briefing-evidence.webp)
 
-*Native-HD fresh-chat result. Check claims, periods and Section 16 identifiers against the report; projected benefits are not actual revenue.*
+*Check claims, periods and Section 16 identifiers against the report; projected benefits are not actual revenue.*
 
 ## Lab Details
 
@@ -385,7 +385,7 @@ This lab uses **Agent Builder** for a declarative agent. The **Standard harness*
 
 **Outcome:** a compatible ZIP and an understood briefing contract.
 
-1. Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account in a separate browser profile or private window. Keep this lab beside it. Ask the facilitator if the assigned account or Skills is unavailable.
+1. Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account in a separate browser profile or private window. Ask the facilitator if the assigned account or Skills is unavailable.
 2. Download the [starter ZIP](https://microsoft.github.io/mcs-labs/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing.zip), or use your compatible hotel skill from Cowork. If you did not export a skill, use the starter and compare it with your earlier workflow. Keep the ZIP intact for upload.
 3. Inspect [SKILL.md](https://github.com/microsoft/mcs-labs/blob/main/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing/SKILL.md) and [briefing-template.md](https://github.com/microsoft/mcs-labs/blob/main/labs/mcs-copilot-harness-latest/materials/hotel-operations-briefing/briefing-template.md). The starter name is `hotel-operations-briefing`; `SKILL.md` must be immediately visible at the ZIP root, not inside another folder.
 4. Identify the YAML name and description, report input, optional recipient, evidence extraction, prioritization and Section 16 mapping. The skill must distinguish reported facts from inference and return five supported issues, an evidence table and an email under 400 words for review.
@@ -520,12 +520,12 @@ This is an expected boundary test, not a failed email or Planner integration. Re
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/share-dialog-dark.webp"><img src="images/share-dialog.webp" alt="Share dialog with an empty recipient field and org-wide chat sharing off."></picture>
 
-*Current controls, cropped above account details. No recipient was added; the agent remains private and second-account sharing was not tested.*
+*Use the Share dialog to give a teammate access to the agent.*
 
 3. Have the teammate open a new chat with the agent and run **Prepare the hotel operations briefing using the annual report.** They must not borrow your Cowork history or paste the long procedure.
 4. Have them open the PDF and check one issue. Confirm they understand they review and send the email themselves. Sharing the agent does not necessarily grant source access. Keep the agent name/link and checked result.
 
-**Blocked?** Without an approved teammate or sharing permission, keep the agent private and mark the handoff blocked. A copied link or opened dialog is not completion.
+**Sharing unavailable?** Keep the agent private and try its chat link yourself.
 
 **Reveal — Share a configured workflow, not a personal conversation.** Private creation → targeted sharing → independent evidence review. A creator's successful Preview cannot establish another user's access.
 
@@ -564,7 +564,7 @@ This is an expected boundary test, not a failed email or Planner integration. Re
 - [ ] A short request produces a checked evidence table and an email under 400 words.
 - [ ] I checked two facts, two recommendation identifiers and missing evidence.
 - [ ] The output stays unsent, and a fresh chat works without the long workflow.
-- [ ] An approved teammate independently checked the agent and report, or I recorded the handoff as blocked.
+- [ ] I saved the agent and tried its chat link, with a teammate if sharing was available.
 - [ ] Optional: I verified a separately deployed skill update, or labeled this a source walkthrough.
 
 **Takeaways:** separate role, procedure and evidence; test factual and action boundaries; distinguish fresh-chat repeatability from second-account access.

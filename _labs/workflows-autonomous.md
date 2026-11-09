@@ -34,7 +34,7 @@ mission_lab:
     Optional extensions also need Microsoft To Do, [Warehouse MCP](../mcs-workflows/assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip), or the SharePoint pricing guide and Dataverse account records for the Price Quote Agent.
   prerequisites:
     - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your provided training account and select its assigned environment."
-    - "Open [Outlook](https://outlook.office.com/) with the same account. Keep Studio and this lab side by side."
+    - "Open [Outlook](https://outlook.office.com/) with the same account."
   pacing: "30-minute core: Explore (6) → Route (6) → Review (13) → Stop (5). Optional extensions: Time-block (15), Inventory (15), Specialist (10)."
   missions:
     - id: isolate
@@ -606,7 +606,7 @@ Optional extensions also need Microsoft To Do, [Warehouse MCP](../mcs-workflows/
 </details>
 
 - Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account and select the assigned environment.
-- Open [Outlook](https://outlook.office.com/) with the same account. Keep Studio and this lab side by side.
+- Open [Outlook](https://outlook.office.com/) with the same account.
 
 ## Mission 1: Explore
 
@@ -936,7 +936,7 @@ Nancy Anderson
 Procurement, Adventure Works
 ```
 
-6. Inspect **Activity → Classify → Quote Request → Agent**, actual tool calls, and output. Verify account/employee lookup, knowledge-backed tier/prices, quantities, line totals, subtotal, discounts, terms, lead time; no estimates or invented handbook facts. Confirm the actual quote in your Outlook inbox. Claimed sending or green status with missing operations is insufficient; record blockers honestly.
+6. Inspect **Activity → Classify → Quote Request → Agent**, actual tool calls, and output. Verify account/employee lookup, knowledge-backed tier/prices, quantities, line totals, subtotal, discounts, terms, lead time; no estimates or invented handbook facts. Confirm the actual quote in your Outlook inbox.
 7. Optional bonus: in the assigned agent's **Preview**, ask the original question. Inspect Dataverse `read_query` for Fabrikam employee count and SharePoint tier/discount evidence. The classic sample expects **Mid** tier, but verify current data. Keep tool recipients constrained; do not authorize mail to real customers.
 
 **Price Quote Agent · Preview · Pricing question**
