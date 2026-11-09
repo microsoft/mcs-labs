@@ -15,7 +15,8 @@ Keep run evidence, coverage limits, credit totals, screenshot provenance and
 account-specific troubleshooting in the run log and PR. Do not turn a runner's setup
 problem into a required attendee step or repeat warnings supplied by the training tenant.
 Hand off only necessary learner-facing corrections; independent-tenant setup belongs
-in the existing expandable setup section.
+in the existing expandable setup section. Use the same learner-facing rules as authors
+and reviewers in `../lab-review/references/learning-design.md`.
 
 - **Training or demo tenants only.** Never use a customer or production tenant, or your own
   work account, unless the owner explicitly says so.
@@ -29,6 +30,9 @@ in the existing expandable setup section.
   use an embedded or side-panel browser: it shares your session and the script cannot
   drive it. Pass `--forbid "<host user's name or alias>"` to `login` so a run that reaches
   the host user's own account stops at once.
+  Honor the requested browser and visibility: if desktop Edge was requested, use
+  windowed Edge with an isolated profile, not a silent switch to headless Chrome.
+  If that isolation cannot be provided, ask before using another browser or profile.
 - **No real outreach.** Keep customer emails as drafts. Do not send messages, invites or
   posts to anyone except the signed-in test user.
 - **Stop what you start.** Pause or delete scheduled tasks and automations the lab
@@ -61,7 +65,10 @@ in the existing expandable setup section.
    browser profiles isolate cookies only; they do not isolate backend records, plugins,
    agent memory, generated files, schedules or connections.
 4. Copy `templates/runthrough-log.md` to a folder outside the repository (for example the
-   session files folder) and fill in the header.
+   session files folder) and fill in the header, including exclusions and any reused
+   evidence. Match shared labs by instructions, prompts, assets, prerequisites and
+   outcomes, not their titles; reuse only the matching verified routes and retain every
+   blocker. See `references/runthrough-evidence.md`.
 5. Run `npm ci` once if `node_modules/puppeteer` is missing, and `pip install pillow` if you
    will crop screenshots.
 
@@ -76,7 +83,7 @@ node .github/skills/lab-runthrough/scripts/capture.cjs launch "<lab start URL>"
 Ask them to sign in to the training account in the window that opens, then confirm with
 `capture.cjs pages`.
 
-With a provisioned training account, headless:
+With a provisioned training account, when headless testing is permitted:
 
 ```powershell
 $env:LAB_CREDENTIALS = "<temp folder>\account.json"

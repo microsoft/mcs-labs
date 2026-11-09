@@ -7,6 +7,9 @@ description: Fix or refresh an existing MCS Labs hands-on lab (classic or guided
 
 Every update is evidence, then a small coherent change to both copies, then validation,
 then a PR someone else merges.
+Apply the shared learner-facing rules in
+`../lab-review/references/learning-design.md`, including when the update comes directly
+from a user rather than a review report.
 
 ## 1. Start from evidence
 
@@ -70,7 +73,8 @@ script changes.
   test-data removal, and cleanup missions. Independent-tenant cleanup belongs in
   that setup's expandable guidance only when needed.
   Tell learners which service to open, not how to arrange their windows. Avoid
-  side-by-side, split-screen or keep-the-lab-beside-the-product instructions.
+  side-by-side, split-screen or keep-the-lab-beside-the-product instructions, and generic
+  headset/quiet-room coaching.
 - **UI labels.** Use the label exactly as the product shows it, in bold, and quote it in
   the PR. When a label alternates between rollouts, name the destination or give both.
 - **Current product, everywhere.** The live product is the source of truth: labels, menu
@@ -88,8 +92,8 @@ script changes.
   is enough to skip setup. Keep required sign-in and exercise downloads visible; put
   independent-tenant provisioning in the expandable setup section. Replace older event-specific variants.
   In missions labs, `prerequisites:` is an always-visible attendee readiness checklist.
-  Keep own-tenant setup concise and explicitly conditional ("in your own tenant only") so
-  event attendees do not repeat provisioning.
+  Put own-tenant setup in `mission_lab.self_setup` and matching closed disclosures in both
+  readable copies, not in that checklist.
 - **Rendered Markdown.** Escape literal pipes in prose as `&#124;` where Kramdown could
   make an accidental table. Build the page and inspect generated HTML; source-only review
   will not catch every list or table parsing issue.
@@ -98,13 +102,17 @@ script changes.
   in front matter, the `_labs` body and the README. If an unchanged supplied prompt has a
   baseline retired-name warning, disclose it as pre-existing; do not rename the prompt to
   silence the audit.
+  Preserve sample emails, expressions and expected-output fences too, including unlabelled
+  ones and repeated occurrences. Expected output belongs in `instruction`, not `prompt`.
 - **Durations.** `duration`, the Lab Details row, use-case or mission minutes, and every
   agenda slot listing the lab (`agenda-usage`) must agree. Agenda changes affect an event,
   so name the event in the PR.
 - **Dates.** Do not add update dates; the site derives them from Git.
 - **Missions labs.** Keep the contract: core `minutes` sum to `duration`, each check has
-  exactly one correct option, optional missions are marked, and cleanup stops anything
-  recurring. `npm test` enforces it.
+  exactly one correct option, and only trailing extensions are optional. Preserve
+  mission/step IDs and readiness positions, and do not add result-check gates. Apply the
+  prepared-training cleanup rule above, not a blanket cleanup mission. `npm test` enforces
+  the content contracts.
 - **Retired names.** Current names (check `scripts/lab-audit-terms.json` for the full
   list): **Microsoft Copilot** and **Microsoft Copilot Chat** since August 2026 (formerly
   Microsoft 365 Copilot and Microsoft 365 Copilot Chat), and the **Microsoft Copilot
@@ -165,7 +173,10 @@ the audit with `main` when the lab already had findings: the PR should not add a
 
 ## 6. Open the PR
 
-1. Review `git status` and stage only the intended files. Preserve concurrent edits;
+1. Read the intended PR's live state before appending a commit, pushing to its head or
+   editing its description. If it has merged or closed, preserve pending work and start a
+   new focused PR from current main instead of treating the old PR as active.
+   Review `git status` and stage only the intended files. Preserve concurrent edits;
    never amend a commit unless the user explicitly asks. Use the configured GitHub
    noreply commit identity rather than a private email, and do not put account identities
    or tokens into this skill. Do not reset or discard upstream wording to resolve a
@@ -183,14 +194,17 @@ the audit with `main` when the lab already had findings: the PR should not add a
    gates; never describe an unpushed PR as current. Refresh the PR body with the latest
    evidence and qualification before marking it ready.
 
+5. Never merge your own PR, and never push to `main`.
+
 Check native command exit codes explicitly. In PowerShell, a semicolon or pipeline can
 leave a successful final command hiding a failed `git`/`npm` command; inspect `$LASTEXITCODE`
 or use a command runner that preserves it before reporting validation success.
-5. Never merge your own PR, and never push to `main`.
 
 ## Recurring maintenance
 
 When asked to keep labs current after a product release:
+
+Apply the scope/exclusions gate in section 5 before selecting any of these commands.
 
 1. `npm run audit:labs -- --all --format markdown` for the static picture.
 2. `lab-review` on labs about the changed product, checking claims on Microsoft Learn.

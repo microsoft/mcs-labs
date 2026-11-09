@@ -22,9 +22,13 @@ All new images were checked for personal data outside the training scenario.
 
 ### Validation
 
-- [ ] `npm run audit:labs -- --changed`: no new errors or warnings
-- [ ] `npm test`
-- [ ] Served locally: changed sections, images in light and dark, table of contents, Previous and Next with `?event=`
+<!-- Choose commands after checking scope. Named audit slugs still scan repository-wide
+     context. Do not run full audits/tests/builds when they access excluded modules or
+     presentations. List exact scoped checks and omissions; do not imply a full pass. -->
+
+- [ ] %%EXACT_AUDIT_OR_SCOPED_CHECKS%%: no new errors or warnings
+- [ ] %%EXACT_NAMED_TESTS_OR_FULL_SUITE_IF_ALLOWED%%: %%RESULT_AND_BASELINE_FAILURES%%
+- [ ] %%SCOPED_RENDER_OR_SITE_PREVIEW%%: changed sections, images, anchors and allowed navigation checks
 - [ ] Run through in the product (%%date, tenant type%%), or why not
 
 ### Run-through coverage
@@ -33,11 +37,15 @@ Core: %%passed/total%%; optional: %%passed/total%%. Status counts: passed %%n%%,
 %%n%%, defect %%n%%, variance %%n%%, blocked %%n%%, untested %%n%%, unverified %%n%%.
 State the independent outcome checks performed and what remains unverified; do not infer a
 pass from a completed run, chat claim, private share dialog or hidden tool trace.
+Identify any reused evidence by source lab and commit/date, and explain which routes are
+identical. Reuse does not turn earlier evidence into a fresh run or erase its blockers.
 
 ### Not changed
 
-%%Prompts kept verbatim / timing unchanged / intentional differences between the README and site copies.%%
+%%Creator scenario and ordered prompts/inputs/outputs preserved / timing unchanged /
+stable slugs and public URLs / intentional differences between the README and site copies.%%
 
 ### Follow-ups
 
-%%Pre-existing findings left for another PR, with audit codes.%%
+%%Pre-existing findings and blockers left for another PR, with evidence, affected route,
+next action and owner role (organizer, lab creator or product owner).%%
