@@ -46,7 +46,7 @@ mission_lab:
           instruction: |
             Save the [provided reference screenshot](assets/actual-app.png), or use a screenshot of your own earlier Copilot Code app. Use the image for appearance and the live agenda for lab names and times.
 
-            Open [Copilot Studio](https://copilotstudio.microsoft.com/) in your assigned environment. If **Welcome from your admin** appears, read the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss teaching bubbles with **Got it**.
+            Open [Copilot Studio](https://copilotstudio.microsoft.com/) in your assigned environment.
 
             Select **Apps (Preview) → New app**. Select **Add attachments → Upload images and files**, choose your saved reference, and wait for its thumbnail above **Chat input**.
           screenshot:
@@ -391,7 +391,7 @@ Save the [provided reference screenshot](assets/actual-app.png), or use a screen
 
 ![Design reference for the bootcamp tracker](images/design-reference.webp)
 
-Open Copilot Studio in your assigned environment. If **Welcome from your admin** appears, read the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss teaching bubbles with **Got it**.
+Open Copilot Studio in your assigned environment.
 
 Select **Apps (Preview) → New app**, then **Add attachments → Upload images and files**. Choose the reference and wait for its thumbnail above **Chat input**.
 

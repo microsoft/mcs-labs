@@ -21,6 +21,13 @@ const normalize = text => text.replace(/\r\n/g, '\n')
   .replace(/\]\(#[\uFE0F-]+/g, '](#').trim();
 const step = title => steps.find(item => item.title === title)?.instruction ?? '';
 
+test('managed apps use the current bootcamp agenda in both editions', () => {
+  for (const copy of [JSON.stringify(document.data.mission_lab), document.content, readme, classic.content, classicReadme]) {
+    assert.ok(copy.includes('https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/'));
+    assert.doesNotMatch(copy, /\/events\/bootcamp-latest\//);
+  }
+});
+
 test('managed apps portable copies and copyable prompts stay synchronized', () => {
   assert.equal(document.data.lab_format, 'missions');
   assert.equal(normalize(readme), normalize(document.content));

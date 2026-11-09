@@ -78,7 +78,7 @@ OneDrive and CSV are this exercise's implementation choices. The transferable le
 - [OneDrive for Business connector reference](https://learn.microsoft.com/connectors/onedriveforbusiness/) - connector actions and connection requirements.
 - [Manage connections in Power Apps](https://learn.microsoft.com/power-apps/maker/canvas-apps/add-manage-connections) - creating and deleting connections.
 - [What is Microsoft Copilot Managed Runtime (preview)](https://learn.microsoft.com/microsoft-365/copilot-managed-runtime/) - where these apps run and how they're governed.
-- [Live published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/) - source of truth for the app's schedule data.
+- [Live published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) - source of truth for the app's schedule data.
 
 Use your facilitator's environment-specific guidance for feature access and connector availability.
 
@@ -143,7 +143,7 @@ Create an app from the live published agenda, connect its reads and writes to yo
 #### Save and Upload the Reference Image
 
 1. Choose your starting image: save the provided screenshot below, or take a screenshot of your current **Lab 3: Copilot Code** app. Either option works; you do not need to have completed Lab 3 to use the provided screenshot.
-2. Open [Copilot Studio](https://copilotstudio.microsoft.com) and sign in with your lab account. Select your assigned environment. If **Welcome from your admin** appears, read the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss any teaching bubbles with **Got it**.
+2. Open [Copilot Studio](https://copilotstudio.microsoft.com) and sign in with your lab account. Select your assigned environment.
 3. Select **Apps (Preview)**, then **New app**.
 4. In the new app's chat, select **Add attachments**, then **Upload images and files**, and choose the reference image. Wait until its thumbnail appears above **Chat input** before sending Prompt 1.
 
@@ -165,7 +165,7 @@ Build an app called "My Bootcamp Lab App" using the attached screenshot as a vis
 Reproduce its dark theme, square corners, day tabs, timeline, lab cards, completion checkboxes, and overall progress indicator.
 
 Fetch the current live published lab schedule from:
-https://microsoft.github.io/mcs-labs/events/bootcamp-latest/
+https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/
 
 Include every day's scheduled "Lab N:" items and Lunch break.
 Exclude other agenda items and optional labs. If you cannot read the agenda, stop and tell me rather than inventing the schedule.
@@ -358,4 +358,4 @@ Keep the reference image and behavior requirements together. Use your own OneDri
 
 ## 🌐 Architecture Bootcamp Latest
 
-This lab is part of [Architecture Bootcamp Latest](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/).
+This lab is part of [Architecture Bootcamp Latest](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).

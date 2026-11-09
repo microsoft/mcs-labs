@@ -16,7 +16,7 @@ const normalize = text => text.replace(/\r\n/g, '\n')
   .replace(/^(#{1,6})\s+[\p{Extended_Pictographic}\uFE0F\u200D]+\s+/gmu, '$1 ')
   .replace(/\]\(#[\uFE0F-]+/g, '](#').trim();
 
-test('all lab documents keep maintainer provenance and runner reports out of learner copy', () => {
+test('all lab documents keep onboarding walkthroughs and maintainer reports out of learner copy', () => {
   // Limit discovery to lab Markdown: module and presentation content is not part of this contract.
   const siteFiles = fs.readdirSync(path.join(root, '_labs'))
     .filter(name => name.endsWith('.md')).map(name => path.join(root, '_labs', name));
@@ -25,6 +25,8 @@ test('all lab documents keep maintainer provenance and runner reports out of lea
     .map(entry => path.join(root, 'labs', entry.name, 'README.md')).filter(file => fs.existsSync(file));
   for (const file of [...siteFiles, ...readmes]) {
     const copy = fs.readFileSync(file, 'utf8');
+    assert.doesNotMatch(copy, /Welcome from your admin|Find your environments here|teaching bubbles/i,
+      path.relative(root, file));
     assert.doesNotMatch(copy, /Keep (?:Studio and this lab side by side|(?:this |the )lab beside)/i,
       path.relative(root, file));
     assert.doesNotMatch(copy,
