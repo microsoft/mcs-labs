@@ -48,7 +48,7 @@ Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, *
 
 </details>
 
-**Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. Keep the lab beside Studio. You download the Skill ZIP in Mission 2 and confirm the card URL in Mission 3.
+**Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. You download the Skill ZIP in Mission 2 and confirm the card URL in Mission 3.
 
 **Reading the blocks:** copy each input only into its named field. **Reference output** blocks are comparison material, never messages to send. Wording can vary; facts and limitations must match.
 

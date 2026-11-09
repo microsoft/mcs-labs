@@ -24,6 +24,8 @@ test('all lab documents keep maintainer provenance and runner reports out of lea
     .map(entry => path.join(root, 'labs', entry.name, 'README.md')).filter(file => fs.existsSync(file));
   for (const file of [...siteFiles, ...readmes]) {
     const copy = fs.readFileSync(file, 'utf8');
+    assert.doesNotMatch(copy, /Keep (?:Studio and this lab side by side|(?:this |the )lab beside)/i,
+      path.relative(root, file));
     assert.doesNotMatch(copy,
       /What was tested|Run-through coverage and screenshot notes|fresh.account (?:run|test)|(?:in|from|during) the (?:live|training) run|not tested in the live run|recaptured live|genuinely captured|no verified dark captures|Image provenance:|spoken cancellation remain unverified|mark the handoff blocked|128\.09 credits/i,
       path.relative(root, file));

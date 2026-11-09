@@ -21,7 +21,7 @@ Complete the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/m
 
 </details>
 
-**Attendee checklist:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com) with your assigned **training account** in a separate browser profile or private window, not a personal or production account. Keep the lab beside your agent and use fictitious mailing-list details. Ask your facilitator if an environment, model, connection or channel is unavailable; do not change tenant settings.
+**Attendee checklist:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com) with your assigned **training account** in a separate browser profile or private window, not a personal or production account. Use fictitious mailing-list details. Ask your facilitator if an environment, model, connection or channel is unavailable; do not change tenant settings.
 
 **Standard remains its own harness.** Only the former GitHub Copilot harness was renamed **Microsoft Copilot harness**. Its menu badge may still read **GitHub Copilot**; choose **Standard**, not the top Microsoft Copilot option.
 

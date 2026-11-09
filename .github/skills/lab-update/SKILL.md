@@ -57,6 +57,8 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
   tenant setup in the existing expandable setup section, and do not repeat warnings
   already provided by the training tenant. Preserve approvals that teach the workflow's
   behavior and concise cleanup, not maintainer safety checklists or generic coaching.
+  Tell learners which service to open, not how to arrange their windows. Avoid
+  side-by-side, split-screen or keep-the-lab-beside-the-product instructions.
 - **UI labels.** Use the label exactly as the product shows it, in bold, and quote it in
   the PR. When a label alternates between rollouts, name the destination or give both.
 - **Current product, everywhere.** The live product is the source of truth: labels, menu

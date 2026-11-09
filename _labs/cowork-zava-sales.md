@@ -32,7 +32,7 @@ mission_lab:
     - "Use your assigned **training account** in a separate browser profile or private window. Do not use your personal or production account."
     - "Open [Microsoft Copilot](https://copilot.cloud.microsoft/home?auth=2). Start in **Chat, not Cowork**. You will explicitly switch to Cowork after the first two missions."
     - "In another tab, open [Zava Sales Hub](https://aka.ms/ZavaSalesHub), the CRM in this scenario. It is a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data: accounts, contacts, leads, opportunities and activities. On first use, check that the Microsoft Dataverse consent shows your assigned training account, then select **Allow**. Wait for **Live CRM** before checking records."
-    - "Keep this lab beside Copilot. All prompts are ready to copy; customer emails must stay **drafts**."
+    - "All prompts are ready to copy; customer emails must stay **drafts**."
   pacing: "The 30-minute core is Ask (3) → Act (7) → Delegate (11) → Repeat (9). The Riley call and CRM update, Friday feedback loop, and Zava Sales plugin exercise remain available as optional extensions: 8 + 6 + 8 minutes, about 52 minutes for everything. Budgets include reviewing results, but model and connector waits vary. At minute 21, move toward saving and scheduling the review; skip extensions, not approvals or output checks. Read ahead while Cowork works and do not start duplicate tasks."
   missions:
     - id: ask
@@ -516,7 +516,7 @@ Find a proposal in Copilot Chat, prepare a live deal brief with the Zava Sales H
 
 Use your assigned **training account**, not a personal or production account. Your facilitator prepares Copilot access, credits, the sample Northwind proposal, Zava Sales data, the Zava Sales Hub agent and plugins. Start in **Chat, not Cowork**. Keep customer emails as **drafts**.
 
-Keep [Zava Sales Hub](https://aka.ms/ZavaSalesHub) open in another tab. It is the CRM in this scenario: a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data (accounts, contacts, leads, opportunities and activities). On first use, check that the Microsoft Dataverse consent shows your assigned training account, then select **Allow**. Wait for **Live CRM** before checking what Copilot finds and the records you create.
+Open [Zava Sales Hub](https://aka.ms/ZavaSalesHub). It is the CRM in this scenario: a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data (accounts, contacts, leads, opportunities and activities). On first use, check that the Microsoft Dataverse consent shows your assigned training account, then select **Allow**. Wait for **Live CRM** before checking what Copilot finds and the records you create.
 
 Plan **30 minutes for the four core missions**: Ask (3) → Act (7) → Delegate (11) → Repeat (9). The Riley call and CRM update, Friday feedback loop, and Zava Sales plugin exercise remain as **optional extensions: 8 + 6 + 8 minutes**, about 52 minutes for everything. These are working budgets, not guaranteed run times. At minute 21, move toward saving and scheduling the review; skip extensions, not approvals or output checks. Read ahead while Cowork works; do not start duplicate tasks.
 

@@ -24,7 +24,7 @@ Complete the [classic lab prerequisites](../mcs-m365-copilot-latest/#prerequisit
 **Attendee readiness**
 
 - Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account** in a separate browser profile or private window, not a personal or production account.
-- Keep this lab beside Copilot. If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant.
+- If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant.
 
 Plan **15 minutes for Ask (4) → Apply (5) → Verify (6)**. **Reason (3), Publish (2), Research (10) and Model (5)** are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes.
 

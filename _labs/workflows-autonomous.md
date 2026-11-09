@@ -34,7 +34,7 @@ mission_lab:
     Optional extensions also need Microsoft To Do, [Warehouse MCP](../mcs-workflows/assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip), or the SharePoint pricing guide and Dataverse account records for the Price Quote Agent.
   prerequisites:
     - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your provided training account and select its assigned environment."
-    - "Open [Outlook](https://outlook.office.com/) with the same account. Keep Studio and this lab side by side."
+    - "Open [Outlook](https://outlook.office.com/) with the same account."
   pacing: "30-minute core: Explore (6) → Route (6) → Review (13) → Stop (5). Optional extensions: Time-block (15), Inventory (15), Specialist (10)."
   missions:
     - id: isolate
@@ -606,7 +606,7 @@ Optional extensions also need Microsoft To Do, [Warehouse MCP](../mcs-workflows/
 </details>
 
 - Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account and select the assigned environment.
-- Open [Outlook](https://outlook.office.com/) with the same account. Keep Studio and this lab side by side.
+- Open [Outlook](https://outlook.office.com/) with the same account.
 
 ## Mission 1: Explore
 

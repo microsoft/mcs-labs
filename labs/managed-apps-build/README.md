@@ -40,7 +40,7 @@ Arrange Copilot Studio Apps access, image upload, preview and permission to read
 
 You still download/upload the reference and create or verify your own connection and CSV in the missions. Those lab-specific artifacts are not assumed to be pre-created.
 
-**Attendee readiness:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account in a separate browser profile/private window and select the assigned environment. Keep the [live agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) beside the app. Keep the app in preview.
+**Attendee readiness:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account in a separate browser profile/private window and select the assigned environment. Open the [live agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/). Keep the app in preview.
 
 ## 🧭 Build
 

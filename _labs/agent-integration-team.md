@@ -32,7 +32,7 @@ mission_lab:
     Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner mission.
   prerequisites:
     - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment."
-    - "Keep the lab beside Studio. You download the Skill ZIP in Mission 2 and confirm the LiftLine card URL in Mission 3."
+    - "You download the Skill ZIP in Mission 2 and confirm the LiftLine card URL in Mission 3."
   pacing: "30 minutes; optional challenge if time allows."
   missions:
     - id: coordinate
@@ -522,7 +522,7 @@ Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, *
 
 </details>
 
-**Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. Keep the lab beside Studio. You download the Skill ZIP in Mission 2 and confirm the card URL in Mission 3.
+**Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account in a separate browser profile or private window, and select the assigned environment. You download the Skill ZIP in Mission 2 and confirm the card URL in Mission 3.
 
 **Reading the blocks:** copy each input only into its named field. **Reference output** blocks are comparison material, never messages to send. Wording can vary; facts and limitations must match.
 

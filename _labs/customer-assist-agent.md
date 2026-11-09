@@ -35,7 +35,7 @@ mission_lab:
     No live subscription backend, production phone number or contact-center deployment is required.
   prerequisites:
     - "Use your assigned **training account** in a separate browser profile or private window, not a personal or production account. Select the facilitator-provided environment in [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/)."
-    - "Keep this lab beside the browser. The fictional subscription ID **SUB-1042** and all configuration text are supplied below. Use only fictional contact and payment details; there are no exercise downloads."
+    - "The fictional subscription ID **SUB-1042** and all configuration text are supplied below. Use only fictional contact and payment details; there are no exercise downloads."
     - "For the voice exercise, have a microphone and speakers or headset, and allow microphone access in the browser. If audio is unavailable, use Web Chat or watch the facilitator."
   pacing: 'Plan 30 minutes for Build (10) → Route (12) → Speak (8). Extend is optional and takes 15 additional minutes. These are working budgets, not measured run times or response-time guarantees. Wait for provisioning and responses; read a reveal while waiting rather than submitting duplicate requests.'
   missions:
@@ -576,7 +576,7 @@ No live subscription backend, production phone number or contact-center deployme
 ## Exercise inputs
 
 - Use your assigned **training account** in a separate browser profile or private window, not a personal or production account. Select the facilitator-provided environment in [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/).
-- Keep this lab beside the browser. The fictional subscription ID **SUB-1042** and all configuration text are supplied below. Use only fictional contact and payment details; there are no exercise downloads.
+- The fictional subscription ID **SUB-1042** and all configuration text are supplied below. Use only fictional contact and payment details; there are no exercise downloads.
 - For the voice exercise, have a microphone and speakers or headset, and allow microphone access in the browser. If audio is unavailable, use Web Chat or watch the facilitator.
 
 ## Build: Give the primary agent a clear job

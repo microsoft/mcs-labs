@@ -50,7 +50,7 @@ Optional extensions also need Microsoft To Do, [Warehouse MCP](../mcs-workflows/
 </details>
 
 - Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account and select the assigned environment.
-- Open [Outlook](https://outlook.office.com/) with the same account. Keep Studio and this lab side by side.
+- Open [Outlook](https://outlook.office.com/) with the same account.
 
 ## Mission 1: Explore
 
