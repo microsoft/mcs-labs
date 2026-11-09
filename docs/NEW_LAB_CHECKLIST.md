@@ -81,6 +81,8 @@ For an older event that should remain discoverable, use `deprecated: true` and `
 
 Retirement badges share red semantic theme tokens across event headers and listings. A display-name change need not change an event ID, agenda filename, or URL: Copilot & Agents Bootcamp keeps `architecture-bootcamp`, while the archived Architecture Bootcamp keeps `bootcamp-latest`.
 
+Set `latest: true` on a current event or workshop to show a green **LATEST** badge on its homepage card, collection listing, and page header. This is an explicit editorial flag, not a date or sort-order calculation. Deprecated/archived status takes precedence if both flags are present.
+
 A preview event may also list existing, advertised labs so reviewers can compare formats with Previous and Next. Those labs stay unchanged for everyone else: the event-nav manifest emits an unlisted event only on unlisted pages and on the pages its agenda (or `labs:`) lists, and its rail appears only when the URL carries `?event=<preview-id>`, which the rail's own links pass along but session storage never remembers.
 
 An unlisted page still gets a per-item feed document (`feed/items/<collection>/<slug>.json`), because the deployed site is built from those documents. No manifest or bundle links to it, so feed subscribers never discover it, but the file is reachable by direct URL.

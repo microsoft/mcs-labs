@@ -368,8 +368,10 @@ layout: single
   {%- endcomment -%}
   {% if page.deprecated %}
     {%- assign successor = site.events | where: "event_id", page.superseded_by | first -%}
-    <p style="margin:0 0 0.9em;"><span class="event-status-badge">{{ page.deprecated_label | default: "Deprecated" }}</span>
+    <p class="event-status"><span class="event-status-badge">{{ page.deprecated_label | default: "Deprecated" }}</span>
     {% if successor %}<span style="margin-left:0.7em; font-size:0.86em; opacity:0.85;">Superseded by <a href="{{ successor.url | relative_url }}" style="color:#fff; text-decoration:underline;">{{ successor.title }}</a></span>{% endif %}</p>
+  {% elsif page.latest %}
+    <p class="event-status"><span class="event-status-badge event-status-badge--latest">LATEST</span></p>
   {% endif %}
   <p>{{ page.description }}</p>
   {% unless page.syndicated %}<a href="https://github.com/microsoft/mcs-labs/issues/new?template=bug_report.yml&type=Bug&labels=lab&title=%5B{{ page.event_id }}%5D+&lab={{ page.event_id }}" target="_blank" rel="noopener" style="display: inline-block; margin-top: 1em; font-size: 0.78em; font-weight: 600; color: rgba(255,255,255,0.7); text-decoration: none; border: 1px solid rgba(255,255,255,0.25); padding: 0.3em 0.8em; border-radius: 4px;">Report an issue</a>{% endunless %}

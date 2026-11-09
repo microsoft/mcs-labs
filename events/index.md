@@ -142,6 +142,7 @@ classes: wide
     <div class="ws-card-desc">{{ ws.description | strip_html | truncate: 160 }}</div>
     <div class="ws-card-meta">
       {% if ws.deprecated %}<span class="ws-idx-pill ws-idx-pill-deprecated">{{ ws.deprecated_label | default: "Deprecated" }}</span>{% endif %}
+      {% if ws.latest and ws.deprecated != true %}<span class="ws-idx-pill ws-idx-pill-latest">LATEST</span>{% endif %}
       <span class="ws-idx-pill ws-idx-pill-labs">{{ ws.labs.size }} labs</span>
     </div>
   </li>
