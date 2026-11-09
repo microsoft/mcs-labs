@@ -6,7 +6,7 @@ Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-l
 
 ![Synthetic stock decision: the depot retains 80 bags above its floor of 50; the branch retains 30 below its floor of 40.](images/stock-decision.webp)
 
-*A verified intermediate result: grounded stock and product weight, with delivery-charge approval explicitly not evaluated. This is not a full-team delivery result.*
+*The stock specialist compares remaining stock with each location's minimum and calculates product weight.*
 
 ## 🧭 Lab Details
 
@@ -220,7 +220,7 @@ Enable **Debug mode**, expand **Used tool** for your specialist's actual display
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/specialist-trace-dark.webp"><img src="images/specialist-trace.webp" alt="Expanded Used tool entry for Zava Stock and Policy Specialist shows the delegated stock-check task."></picture>
 
-*This crop proves an internal specialist invocation and shows its task, not the returned response or any LiftLine call. Expand and read the response before passing.*
+*Expand the stock specialist's tool call to inspect the delegated task and its response.*
 
 **Reveal — The coordinator reused expertise without taking ownership of its data.** A connected agent is independently created and published, not an embedded child agent. Its uploaded Skill bundles the playbook and synthetic reference. The trace establishes delegation; the returned calculation establishes whether it helped.
 

@@ -186,7 +186,7 @@ I want to cancel my subscription
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/test-cancel-no-subagent-dark.webp"><img src="images/test-cancel-no-subagent.webp" alt="The primary agent requests subscription ID and cancellation reason while Activity map shows model response generation, not a sub-agent."></picture>
 
-*Verified baseline: the primary handles the request itself. A named routing rule cannot invoke a specialist that does not exist.*
+*Before you add the specialist, the primary agent handles the cancellation request itself.*
 
 ### Reveal: Why did the primary keep the request?
 

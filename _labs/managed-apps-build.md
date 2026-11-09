@@ -17,11 +17,11 @@ mission_lab:
   headline_emphasis: "Now prove it saves."
   promise: "Build the interface, prepare storage, then verify the round trip. Leave with a preview whose progress survives a reload—not a published app."
   hero_image:
-    src: /labs/managed-apps-build/images/upload-file-content.webp
-    alt: "Light-theme CSV upload approval showing lab-completion.csv, an unavailable location name and stop-on-name-conflict behavior."
-    width: 2256
-    height: 2406
-    caption: "Review the CSV file and its destination before approving the upload."
+    src: /labs/managed-apps-build/images/completion-focus.webp
+    alt: "My Bootcamp Lab App preview with day tabs, a lab timeline, completion checkboxes and a progress indicator."
+    width: 3300
+    height: 2940
+    caption: "My Bootcamp Lab App: the agenda, day tabs and completion tracking in one interface."
   scenario: |-
     Your bootcamp progress should survive a reload. Build **My Bootcamp Lab App** in Copilot Studio Apps from the live published agenda, using an image for appearance only. This is a new app, not an HTML import or a migration from Copilot Code. Completing the earlier lab is not required.
   self_setup: |-
@@ -48,13 +48,12 @@ mission_lab:
 
             Select **Apps (Preview) → New app**. Select **Add attachments → Upload images and files**, choose your saved reference, and wait for its thumbnail above **Chat input**.
           screenshot:
-            title: the attached reference
-            src: /labs/managed-apps-build/images/reference-attached.webp
-            src_dark: /labs/managed-apps-build/images/reference-attached-dark.webp
-            alt: "The reference image thumbnail is attached above the new app's chat input."
-            width: 3285
-            height: 1980
-            caption: "Attach the image before sending Prompt 1."
+            title: the design reference
+            src: /labs/managed-apps-build/images/design-reference.webp
+            alt: "Provided bootcamp tracker design reference with day tabs, a timeline, lab cards and completion checkboxes."
+            width: 1340
+            height: 1291
+            caption: "Save this reference image and attach it before sending Prompt 1."
         - title: "Send Prompt 1 and watch the activity"
           instruction: "Paste the complete prompt with the image attached. Watch agenda retrieval and build activity; wait for the working preview rather than sending duplicate requests."
           prompt_label: Prompt 1 · New app chat
@@ -368,9 +367,9 @@ Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-l
 
 Build **My Bootcamp Lab App** from the live published agenda, prepare your own OneDrive CSV, then verify the app's read/save/reload behavior. This is a new app, not an HTML import or Copilot Code migration. Completing the earlier lab is not required. Keep everything in preview.
 
-![Light-theme CSV creation approval, not proof of app persistence](images/upload-file-content.webp)
+![My Bootcamp Lab App preview with day tabs, a timeline and completion tracking](images/completion-focus.webp)
 
-*A genuine storage-setup checkpoint. The unavailable location name must be resolved before approval.*
+*My Bootcamp Lab App: the agenda, day tabs and completion tracking in one interface.*
 
 ## Lab Details
 
@@ -416,13 +415,11 @@ You still download/upload the reference and create or verify your own connection
 
 Save the [provided reference screenshot](assets/actual-app.png), or use a screenshot of your earlier Copilot Code app. Use the image for appearance and the live agenda for lab names and times.
 
-![Design reference for the bootcamp tracker](assets/actual-app.png)
+![Design reference for the bootcamp tracker](images/design-reference.webp)
 
 Open Copilot Studio in your assigned environment. If **Welcome from your admin** appears, read the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss teaching bubbles with **Got it**.
 
 Select **Apps (Preview) → New app**, then **Add attachments → Upload images and files**. Choose the reference and wait for its thumbnail above **Chat input**.
-
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/reference-attached-dark.webp"><img src="images/reference-attached.webp" alt="The reference thumbnail attached above the new app's chat input."></picture>
 
 ### Send Prompt 1 and watch the activity
 

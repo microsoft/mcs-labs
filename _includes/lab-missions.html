@@ -42,7 +42,8 @@
       </div>
       <figure class="hero-proof">
         <a href="{{ lab.hero_image.src | relative_url }}" target="_blank" rel="noopener">
-          <img src="{{ lab.hero_image.src | relative_url }}" alt="{{ lab.hero_image.alt | escape }}" width="{{ lab.hero_image.width }}" height="{{ lab.hero_image.height }}" fetchpriority="high">
+          {% comment %}Match the step screenshots: open this image alone, not the theme's page-wide gallery.{% endcomment %}
+          <picture><img src="{{ lab.hero_image.src | relative_url }}" alt="{{ lab.hero_image.alt | escape }}" width="{{ lab.hero_image.width }}" height="{{ lab.hero_image.height }}" fetchpriority="high"></picture>
           <span class="image-link">View full-size screenshot <span aria-hidden="true">&nearr;</span></span>
         </a>
         <figcaption>{{ lab.hero_image.caption | escape }}</figcaption>

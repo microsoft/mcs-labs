@@ -7,7 +7,7 @@ Know the traveler. Find the right policy. Leave with a **saved draft Travel Poli
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc3-test-france-dark.webp"><img src="images/uc3-test-france.webp" alt="France policy answer citing TEP-310 with a 70 euro total daily per diem."></picture>
 
-*The finish line: a location-specific, cited answer. Native light and dark captures from the successful run; generated wording varies.*
+*A location-specific answer with a citation to the France travel policy.*
 
 ## 🧭 Lab Details
 
@@ -144,7 +144,7 @@ Expand **Executed hook: SessionStart**. Check `additionalContext`, smileys and t
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-sessionstart-office-location-test-dark.webp"><img src="images/uc1-sessionstart-office-location-test.webp" alt="SessionStart output supplies USA from Office Location in additionalContext."></picture>
 
-*Successful live session-start output, cropped to exclude input metadata. Your profile can differ.*
+*The session-start hook passes Office Location to the agent in additionalContext.*
 
 **Reveal — why did the agent already know the location?** The event ran the lookup before the model's first reply. Instructions guide the model; the runtime invokes the bound workflow when the event occurs. `additionalContext` supplies session background. The smileys make that handoff visible, while the location will select policy evidence.
 
@@ -315,7 +315,7 @@ Copy the starter response schema rather than adding new required outputs. Both r
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc2-redaction-workflow-dark.webp"><img src="images/uc2-redaction-workflow.webp" alt="No PII and Other connect to one Return original prompt; Contains PII connects through Redact PII to Return redacted prompt."></picture>
 
-*Final, successfully retested shared-node design, not the abandoned separate-return experiment.*
+*No PII and Other return the original prompt; Contains PII returns the redacted prompt.*
 
 ### Verify both complete paths
 
@@ -337,7 +337,7 @@ In `modifiedPrompt`, check `[PASSPORT NUMBER REDACTED]`, `[CARD NUMBER REDACTED]
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc2-redaction-test-dark.webp"><img src="images/uc2-redaction-test.webp" alt="Hook output replaces fabricated passport, card and email values with typed placeholders while retaining Lyon and the date."></picture>
 
-*Successful live redaction output. Only fabricated personal data was used.*
+*The output replaces sensitive values with placeholders while preserving Lyon and the travel date.*
 
 **Redaction is not deletion.** It changes what the agent uses next; it does not erase the original received prompt from workflow inputs or transcripts. Manage access and retention separately. Model classification and rewriting also need evaluation beyond these two examples.
 
@@ -413,7 +413,7 @@ Right-click **Allow tool call → Copy**, then empty canvas → **Paste**; renam
 
 Leave `modifiedParameters` and `suppressOutput` empty. **Publish**, return to the agent, select **Done**, then **Save**.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/extra-pretool-workflow-dark.webp"><img src="images/extra-pretool-workflow.webp" alt="Published Check approved airline canvas with If/Else branches to Allow tool call and Deny tool call."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/extra-pretool-workflow-dark.webp"><img src="images/extra-pretool-workflow.webp" alt="Check approved airline canvas with If/Else branches to Allow tool call and Deny tool call."></picture>
 
 *The Approved airline branch allows the call; Else denies it with a reason and alternatives.*
 

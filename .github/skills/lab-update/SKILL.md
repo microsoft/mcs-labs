@@ -129,6 +129,13 @@ and visually review OCR candidates. A single theme-neutral hero is valid; do not
 unused dark variant. Record retained-image provenance in the run log and PR; learner
 captions describe what to notice in the product, not how or when the image was captured.
 
+Choose the hero for the learner's goal: show the app, agent or useful result, not a
+setup dialog, approval card or runner checkpoint. For each **Show me**, show one image
+that answers that step's question. A supplied design reference must display the actual
+reference, not an upload dialog with its thumbnail. Keep images out of page-wide
+carousels: the full-size link should open only that picture, including the selected
+theme variant. Check the rendered page with the site's theme JavaScript loaded.
+
 Compare the orphan scan with the baseline. Delete only images newly orphaned by this
 branch and only after checking references (`git grep <file name>`); never delete
 untouched-lab or shared assets (`image-shared`).
