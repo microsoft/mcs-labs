@@ -154,7 +154,7 @@ mission_lab:
             alt: "Preview of the dark tracker with purple lab outlines, one green completed lab, and amber striped Lunch bars."
             width: 2559
             height: 2250
-            caption: "The tracker stays dark in both captures; the surrounding Copilot toolbar follows the light or dark interface theme."
+            caption: "The published tracker uses the dark appearance requested in the prompt."
         - title: "Recheck the controls"
           instruction: "Toggle a lab in both directions. Confirm its bar, card, counter, and progress bar still agree, and focus outlines remain visible."
           notice: "Prompts 2–4 change **Preview** only; the published link keeps the basic version until you publish at the end. Each update reloads the preview, so earlier ticks reset because progress is in memory only."
@@ -543,7 +543,7 @@ Keep focus outlines visible and respect prefers-reduced-motion.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/tracker-dark-theme-dark.webp"><img src="images/tracker-dark-theme.webp" alt="Preview of the dark tracker with purple lab outlines, one green completed lab, and amber striped Lunch bars."></picture>
 
-The tracker stays dark in both captures; the surrounding Copilot toolbar follows the light or dark interface theme.
+The published tracker uses the dark appearance requested in the prompt.
 
 Prompts 2–4 change **Preview** only; the published link keeps the basic version until you publish at the end. Each update reloads the preview, so earlier ticks reset because progress is in memory only.
 

@@ -391,6 +391,4 @@ Your finish line: a tool-backed analysis you can inspect. This result excerpt is
 - [Add other agents](https://learn.microsoft.com/microsoft-copilot-studio/authoring-add-other-agents)
 - [Connect and configure an agent for Teams and Microsoft Copilot](https://learn.microsoft.com/microsoft-copilot-studio/publication-add-bot-to-microsoft-teams)
 
-Product UI, models and generated answers vary by tenant. The five images were recaptured live in high resolution (2× device scale) on a training tenant, in light and dark themes, with no account or app-sidebar data. Each light WebP has a `-dark` twin.
-
-Image provenance: each light/dark pair was captured tightly cropped at capture time from the same live session and framing, then converted to WebP without resizing. `topic-description`, `knowledge-web-search` and `weather-inputs` share their light capture with the classic lab's `uc2-topic-from-description.png`, `uc3-web-search-disabled.png` and `uc4-weather-units.png`.
+Product UI, models and generated answers can vary by tenant.

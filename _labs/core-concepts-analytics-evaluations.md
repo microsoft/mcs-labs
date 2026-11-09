@@ -164,7 +164,7 @@ Access and interpret agent analytics to measure performance and identify optimiz
 ### Step-by-step instructions
 
 > [!IMPORTANT]
-> **Your analytics dashboard will be empty until the agent is published.** Before any analytics sections render, your agent must be **published** (see the prerequisite at the top of this lab). Until publish, the Analytics page shows a *"Publish your agent to track performance"* empty-state panel with a single **Publish** button — none of the dashboard sections described below will be visible. Once published and receiving conversations through a deployed channel, analytics data still takes 24–48 hours to populate. There is currently no way to pre-provision or simulate analytics data in the platform — the Product Group is working on a way to visualize what populated analytics would look like for lab scenarios. For now, skim the descriptions below to know what to expect once data flows.
+> **Your analytics dashboard will be empty until the agent is published.** Before any analytics sections render, your agent must be **published** (see the prerequisite at the top of this lab). Until publish, the Analytics page shows a *"Publish your agent to track performance"* empty-state panel with a single **Publish** button — none of the dashboard sections described below will be visible. Once published and receiving conversations through a deployed channel, analytics data still takes 24–48 hours to populate. For now, skim the descriptions below to know what to expect once data flows.
 
 #### Navigate to Analytics
 

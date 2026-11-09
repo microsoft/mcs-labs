@@ -15,6 +15,21 @@ const normalize = text => text.replace(/\r\n/g, '\n')
   .replace(/^(#{1,6})\s+[\p{Extended_Pictographic}\uFE0F\u200D]+\s+/gmu, '$1 ')
   .replace(/\]\(#[\uFE0F-]+/g, '](#').trim();
 
+test('all lab documents keep maintainer provenance and runner reports out of learner copy', () => {
+  // Limit discovery to lab Markdown: module and presentation content is not part of this contract.
+  const siteFiles = fs.readdirSync(path.join(root, '_labs'))
+    .filter(name => name.endsWith('.md')).map(name => path.join(root, '_labs', name));
+  const readmes = fs.readdirSync(path.join(root, 'labs'), { withFileTypes: true })
+    .filter(entry => entry.isDirectory())
+    .map(entry => path.join(root, 'labs', entry.name, 'README.md')).filter(file => fs.existsSync(file));
+  for (const file of [...siteFiles, ...readmes]) {
+    const copy = fs.readFileSync(file, 'utf8');
+    assert.doesNotMatch(copy,
+      /What was tested|Run-through coverage and screenshot notes|fresh.account (?:run|test)|(?:in|from|during) the (?:live|training) run|not tested in the live run|recaptured live|genuinely captured|no verified dark captures|Image provenance:|spoken cancellation remain unverified|mark the handoff blocked|128\.09 credits/i,
+      path.relative(root, file));
+  }
+});
+
 for (const slug of slugs) {
   test(`${slug}: learner copies exclude maintainer test reports`, () => {
     const page = matter(fs.readFileSync(path.join(root, '_labs', `${slug}.md`), 'utf8'));

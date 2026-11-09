@@ -169,7 +169,7 @@ Check that there are five criteria and that their weights sum to 100. If the sou
 Do not regenerate the proposal, install packages, call external services, or invent data. If sandbox execution, the source file, or a usable charting library is unavailable, report that explicitly instead of claiming to have created a chart.
 ```
 
-2. Look for the attached PNG, extracted table, and named library/version. **Debug mode** may show reasoning bullets without individual sandbox calls. Without concrete evidence, record execution as **unverified**. The reference chart run usually finished in under a minute; actual waits vary.
+2. Look for the attached PNG, extracted table, and named library/version. **Debug mode** may show reasoning bullets without individual sandbox calls. Compare the chart with the extracted table and the RFP evaluation criteria.
 3. Open the inline chart preview and select **Download** to save `westbrook-evaluation-weights.png`.
 4. Compare the chart and table with **section 4 of the RFP**: Technical approach **30**, Relevant municipal experience **25**, Cost **20**, Project team **15**, Timeline **10**. Check source order, labels, five bars, and total **100**. These are evaluation weights, not scores awarded to Aventra.
 
@@ -413,4 +413,4 @@ The documented preview description box does **not** accept file attachments. Thi
 - [CAT: Agents Have Skills Now](https://microsoft.github.io/mcscatblog/posts/modern-mcs-agent-skills/)
 - [CAT: Turn Your Daily Digest Into a Podcast](https://microsoft.github.io/mcscatblog/posts/podcast-script-skill/)
 
-Product UI, models, and capabilities vary by environment; generated results differ. The three illustrations are live product captures from the reference RFP Response agent: the evaluation-weight chart (hero and result), the `SKILL.md` fields, and the expanded Skill trace. They contain no account identity or navigation sidebar. The Skill fields and trace have light and dark captures; the chart is a generated image that looks the same in both themes.
+Product UI, models, and capabilities vary by environment; generated results differ.

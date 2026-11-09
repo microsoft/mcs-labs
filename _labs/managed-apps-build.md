@@ -21,16 +21,16 @@ mission_lab:
     alt: "Light-theme CSV upload approval showing lab-completion.csv, an unavailable location name and stop-on-name-conflict behavior."
     width: 2256
     height: 2406
-    caption: "A real storage-setup checkpoint, not persistence proof. Verify the actual destination before approving; an unavailable location name is not enough."
+    caption: "Review the CSV file and its destination before approving the upload."
   scenario: |-
     Your bootcamp progress should survive a reload. Build **My Bootcamp Lab App** in Copilot Studio Apps from the live published agenda, using an image for appearance only. This is a new app, not an HTML import or a migration from Copilot Code. Completing the earlier lab is not required.
   self_setup: |-
     Arrange access to **Copilot Studio Apps**, image upload, preview, and reading the public agenda. You need your own OneDrive for Business with permission to read, create and update files, and permission to use or create a OneDrive for Business connection in the environment. No prepared CSV, SharePoint list, database or VS Code setup is required.
   prerequisites:
     - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account in a separate browser profile or private window, and select the assigned environment."
-    - "Keep the lab and [live agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) beside the app. Use only your own connection and file; stop if account identity is uncertain. Download/upload the reference and create or verify your own connection and CSV during the missions; those exercise artifacts are not pre-created."
-    - "Keep the app in preview. Do not publish, deploy or share. Ask the facilitator about credit availability and safe failure-test conditions."
-  pacing: "Plan 30 minutes: Build (8) → Prepare (8) → Prove (10) → Protect (4). Repair is optional, about 5 more minutes. These are working budgets, not validated completion times; generation and approvals vary. If blocked or out of time, record remaining checks instead of marking them complete."
+    - "Keep the lab and [live agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) beside the app. Download/upload the reference and create or verify your own connection and CSV during the missions; those exercise artifacts are not pre-created."
+    - "Keep the app in preview."
+  pacing: "Plan 30 minutes: Build (8) → Prepare (8) → Prove (10) → Protect (4). Repair is optional, about 5 more minutes. Generation and approvals can take additional time."
   missions:
     - id: build
       verb: Build
@@ -42,7 +42,7 @@ mission_lab:
       steps:
         - title: "Save and attach your design reference"
           instruction: |
-            Save the [provided reference screenshot](assets/actual-app.png), or use a screenshot of your own earlier Copilot Code app. This original input is unchanged and intentionally dark; it is not a new product capture. Its historical lab numbers and totals are not the schedule source.
+            Save the [provided reference screenshot](assets/actual-app.png), or use a screenshot of your own earlier Copilot Code app. Use the image for appearance and the live agenda for lab names and times.
 
             Open [Copilot Studio](https://copilotstudio.microsoft.com/) in your assigned environment. If **Welcome from your admin** appears, read the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss teaching bubbles with **Got it**.
 
@@ -54,7 +54,7 @@ mission_lab:
             alt: "The reference image thumbnail is attached above the new app's chat input."
             width: 3285
             height: 1980
-            caption: "Attach the image before sending Prompt 1. Both Studio themes were genuinely captured."
+            caption: "Attach the image before sending Prompt 1."
         - title: "Send Prompt 1 and watch the activity"
           instruction: "Paste the complete prompt with the image attached. Watch agenda retrieval and build activity; wait for the working preview rather than sending duplicate requests."
           prompt_label: Prompt 1 · New app chat
@@ -262,7 +262,7 @@ mission_lab:
             5. Uncheck the same lab, wait for saving, verify `false` in the CSV, then reload again. It must remain unchecked with matching counts.
           notice: "A direct connector call or a surviving tick alone doesn't prove the app-to-CSV round trip."
         - title: "Challenge save ordering and reopening"
-          instruction: "Change several labs quickly and wait for all saves. Compare the final CSV and screen with your last choices, not an earlier state. Close and reopen the preview using the same account; confirm saved values return. Finally count the CSV rows: exactly the scheduled labs, with no Lunch or optional-lab rows. Record each result."
+          instruction: "Change several labs quickly and wait for all saves. Compare the final CSV and screen with your last choices, not an earlier state. Close and reopen the preview using the same account; confirm saved values return. Finally count the CSV rows: exactly the scheduled labs, with no Lunch or optional-lab rows."
       reveal:
         title: "What proves persistence?"
         line: "Verify the whole path, not just one successful call."
@@ -284,20 +284,20 @@ mission_lab:
       verb: Protect
       title: "Fail safely and finish in preview"
       minutes: 4
-      tool: App preview + facilitator-approved test conditions
+      tool: App preview
       brief: "Check that failures protect existing progress rather than silently replacing it."
-      outcome: "Recorded load/retry and save/rollback results, or clearly identified remaining checks."
+      outcome: "An app that handles load failures with retry and save failures with rollback."
       steps:
         - title: "Test load failure without destroying data"
-          instruction: "Use only facilitator-approved, non-destructive failure conditions. Never delete or corrupt the CSV, remove a shared connection, or bypass a safety guard to induce failure. On a load failure, expect an error, **Try again**, disabled completion controls and no overwrite. Check the logged failure step (`metadata`, `read`, `create` or `save`). After access is restored, retry and confirm saved values load. If a safe simulation is unavailable, record this check as not tested."
+          instruction: "Use only facilitator-approved, non-destructive failure conditions. Never delete or corrupt the CSV, remove a shared connection, or bypass a safety guard to induce failure. On a load failure, expect an error, **Try again**, disabled completion controls and no overwrite. Check the logged failure step (`metadata`, `read`, `create` or `save`). After access is restored, retry and confirm saved values load. If simulation is unavailable, review the error-handling behavior with the facilitator."
         - title: "Test response and save failures"
           instruction: "With approved simulations, confirm an unsupported file response produces an error, not initialization. On save failure, expect the attempted tick and all related counts/controls to roll back to the prior saved state with a message. Resolve the cause before retrying and compare the CSV. Only a confirmed missing-file result may permit creation for the current user; permission and connection failures must not."
-        - title: "Record the boundary and stop"
-          instruction: "Record pass, fail or not tested for baseline, setup, CSV round trip, rapid changes, reopening, load retry, unsupported response, save rollback and missing-file handling. Report blockers to the facilitator. Stop generation when finished and leave the app in preview; do not select **Publish** or **Share**. Complete the lab only when the required checks pass, not because the interface looks finished."
+        - title: "Finish in preview"
+          instruction: "Leave the app in preview with saved progress restored after reload and clear error messages for failed operations. Stop generation when finished."
       reveal:
         title: "Why is an error better than a fresh file?"
         line: "Uncertainty must not erase saved work."
-        explanation: "Explicit retry and rollback preserve the user's last saved state. Initializing a CSV after a permissions error would hide the real failure and risk data loss. Honest remaining checks are part of the deliverable."
+        explanation: "Explicit retry and rollback preserve the user's last saved state. Initializing a CSV after a permissions error would hide the real failure and risk data loss."
         flow: ["Detect failure", "Preserve saved state", "Show recovery", "Verify after retry"]
       check:
         question: "What should a permission failure during load trigger?"
@@ -339,7 +339,7 @@ mission_lab:
             feedback: "That risks breaking shared apps and is outside this lab."
   finish:
     title: "Evidence beats a convincing preview"
-    message: "Your finish line is verified app-to-file persistence and safe failure behavior. Until those checks pass, keep the draft and a precise remaining-check list; do not claim a completed backend."
+    message: "Your app saves progress to OneDrive, restores it after reload, and preserves existing data when an operation fails."
     takeaways:
       - label: "Separate inputs"
         text: "Image for appearance, live agenda for data, prompts for behavior."
@@ -378,7 +378,7 @@ Build **My Bootcamp Lab App** from the live published agenda, prepare your own O
 | --- | --- | --- | --- |
 | 200 | Maker | 30 minutes | Build a preview and verify safe app-to-CSV persistence. |
 
-**Pacing:** Build (8) → Prepare (8) → Prove (10) → Protect (4) = **30 minutes**. Repair is optional, about 5 more minutes. These are working budgets, not validated completion times; generation and approvals vary. Record unfinished checks rather than claiming completion.
+**Pacing:** Build (8) → Prepare (8) → Prove (10) → Protect (4) = **30 minutes**. Repair is optional, about 5 more minutes. Generation and approvals can take additional time.
 
 ## Table of Contents
 
@@ -404,7 +404,7 @@ Arrange Copilot Studio Apps access, image upload, preview and permission to read
 
 You still download/upload the reference and create or verify your own connection and CSV in the missions. Those lab-specific artifacts are not assumed to be pre-created.
 
-**Attendee readiness:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account in a separate browser profile/private window and select the assigned environment. Keep the [live agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) beside the app. Use only your own connection/file; stop if identity is uncertain. Ask about credit availability and safe failure-test conditions. Do not publish, deploy or share.
+**Attendee readiness:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account in a separate browser profile/private window and select the assigned environment. Keep the [live agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) beside the app. Keep the app in preview.
 
 ## Build
 
@@ -414,9 +414,9 @@ You still download/upload the reference and create or verify your own connection
 
 ### Save and attach your design reference
 
-Save the [provided reference screenshot](assets/actual-app.png), or use a screenshot of your earlier Copilot Code app. The original is intentionally dark and unchanged; use it for appearance, not its historical lab numbers or totals.
+Save the [provided reference screenshot](assets/actual-app.png), or use a screenshot of your earlier Copilot Code app. Use the image for appearance and the live agenda for lab names and times.
 
-![Original user-input design reference, not a current app capture](assets/actual-app.png)
+![Design reference for the bootcamp tracker](assets/actual-app.png)
 
 Open Copilot Studio in your assigned environment. If **Welcome from your admin** appears, read the terms, select **I have read and agree to the Terms of use**, then **Close**. Dismiss teaching bubbles with **Got it**.
 
@@ -624,18 +624,18 @@ A direct connector call or a surviving tick alone doesn't prove the app-to-file 
 
 ## Protect
 
-**4 minutes · App preview + facilitator-approved test conditions**
+**4 minutes · App preview**
 
-**Outcome:** recorded failure/recovery results, or clearly marked remaining checks.
+**Outcome:** an app that handles load failures with retry and save failures with rollback.
 
-Use only approved, non-destructive simulations. Never delete/corrupt the CSV, remove a shared connection or bypass a guard to induce failure. If no safe simulation is available, mark the check **not tested**.
+Use only approved, non-destructive simulations. Never delete/corrupt the CSV, remove a shared connection or bypass a guard to induce failure. If simulation is unavailable, review the error-handling behavior with the facilitator.
 
 - **Load failure:** expect an error, **Try again**, disabled completion controls and no overwrite. Inspect the logged step (`metadata`, `read`, `create` or `save`). After access is restored, retry and verify saved values load.
 - **Unsupported response:** expect an explicit error, not an empty-file interpretation or initialization.
 - **Save failure:** expect the attempted tick, counts and related controls to roll back to the prior saved state, with a message. Resolve the cause before retrying and check the CSV.
 - **Missing file:** only a confirmed missing-file result may permit creation for the current user. Permission/connection failures must not.
 
-Record pass, fail or not tested for baseline, setup, round trip, rapid changes, reopening, load retry, unsupported response, save rollback and missing-file handling. Report blockers. Stop generation when finished; do not select **Publish** or **Share**. Mark the lab complete only when required checks pass.
+Leave the app in preview with saved progress restored after reload and clear error messages for failed operations. Stop generation when finished.
 
 **Reveal — Uncertainty must not erase saved work.** Detect failure → preserve saved state → show recovery → verify after retry. Initializing after a permission error hides the failure and risks data loss.
 

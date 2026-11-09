@@ -38,7 +38,7 @@ First arrange Copilot Studio access, permission to create agents and workflows, 
 
 </details>
 
-**Event attendees:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account, select the assigned environment and keep the proctor's SharePoint folder location handy. Ask for missing assets rather than changing tenant settings or another learner's connection. Use only the fabricated data supplied here. Building and testing can consume Copilot Credits.
+**Event attendees:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account, select the assigned environment and keep the proctor's SharePoint folder location handy. Ask for missing assets rather than changing tenant settings or another learner's connection.
 
 **Current-UI caveat:** the **Microsoft Copilot harness** was formerly the **GitHub Copilot harness**; documentation and rollout screens may retain the earlier name. **Standard harness** is distinct and has no hooks. Hooks are preview; labels and availability can change.
 
@@ -217,7 +217,7 @@ Expect **Global**, **TEP-210**, **$185** standard or **$295** high-cost per nigh
 {"column":"Location","operator":"ispopulated"}
 ```
 
-Check the returned `columns.Location` values and which document was actually read. The live run listed populated locations, then read the France document with **sharepoint_get_doc**; another run also used **sharepoint_semantic_search**. An exact `eq France` filter and a scoped semantic search are valid alternatives, not a mandatory call sequence. Follow-ups can reuse the listing. These are internal trace labels, not APIs to add manually. Verify the selected policy, citations and currency rather than inferring success from a fluent answer.
+Check the returned `columns.Location` values and which document was actually read. The trace may show **sharepoint_get_doc** or **sharepoint_semantic_search** reading the matching policy. An exact `eq France` filter and a scoped semantic search are valid alternatives, not a mandatory call sequence. Follow-ups can reuse the listing. These are internal trace labels, not APIs to add manually. Verify the selected policy, citations and currency rather than inferring success from a fluent answer.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc3-trace-filter-dark.webp"><img src="images/uc3-trace-filter.webp" alt="Trace input requests documents with populated Location metadata using ispopulated."></picture>
 
@@ -439,7 +439,7 @@ Expect **Used tool: Book flight** after the hook and the simulated confirmation,
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/extra-pretool-allow-dark.webp"><img src="images/extra-pretool-allow.webp" alt="Executed hook: PreTool (Bookflight), followed by Used tool: Book flight and the simulated Contoso Air booking."></picture>
 
-[Microsoft Learn](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/hooks-overview) documents that hooks fail open on errors, timeouts or unreadable results. In the live run, an accidentally disconnected deny response produced a hook error and the simulated tool ran; reconnecting Else and republishing fixed the replay. Verify both edges, not just a Succeeded workflow status. Enforce business-critical rules in the booking backend too; this simulation is not a production security boundary.
+[Microsoft Learn](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/hooks-overview) documents that hooks fail open on errors, timeouts or unreadable results. Verify both edges, not just a Succeeded workflow status. Enforce business-critical rules in the booking backend too; this simulation is not a production security boundary.
 
 **Reveal — what would prove that the guard worked?** An attached hook is build evidence; a blocked tool call needs execution evidence. Pre tool use can deny a proposed call with permissionDecision and provide a reason plus alternatives. The trace is the proof: the denied turn has no Book flight call and the allowed turn does. Never infer enforcement from the workflow canvas alone.
 

@@ -87,13 +87,11 @@ These resources describe the Microsoft Copilot harness experience used in this l
 <details class="lab-setup" markdown="1">
 <summary>Using your own tenant? View setup requirements</summary>
 
-- Access to create two **Microsoft Copilot harness** agents in the **same environment**, upload Skills, publish, and connect agents. Building and testing can consume Copilot Credits.
+- Access to create two **Microsoft Copilot harness** agents in the **same environment**, upload Skills, publish, and connect agents.
 - Verify **Build → Skills** and **Build → Connected agents**, including **Add A2A agent**, are available in your tenant. Do not substitute the standard-harness designer.
 - Arrange a hosted LiftLine A2A demo agent with the bundled dispatch Skill and `LIFTLINE-DEMO-v1` data, following the instructor appendix. Confirm discovery and delegation from Copilot Studio before starting; a publicly reachable URL alone is not enough. This synthetic-data demo uses **Authentication: None**.
 
 </details>
-
-**Use synthetic requests only.** Delegation can share conversation context with the external service.
 
 ---
 

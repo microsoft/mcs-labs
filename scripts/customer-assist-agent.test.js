@@ -92,10 +92,11 @@ test('voice instructions teach the exercise without the automated runners test h
   assert.equal(lab.validation, undefined);
   const speak = missions.find(mission => mission.id === 'speak');
   const speakText = JSON.stringify(speak);
-  assert.doesNotMatch(speakText, /source run|latest run|not reported successes/);
+  assert.doesNotMatch(speakText, /source run|latest run|not reported successes|remain unverified|Record connection separately/);
   assert.match(step('Connect and check the transcript').instruction,
     /greeting under \*\*Bot said:\*\*/);
-  assert.match(step('Check the spoken behavior, not just the connection').instruction, /Live Transcript/);
+  assert.match(step('Compare voice with chat').instruction, /Live Transcript/);
+  assert.match(speak.check.question, /Voice instructions/);
 });
 
 test('every mission screenshot exists in both themes with declared dimensions', () => {

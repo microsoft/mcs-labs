@@ -155,7 +155,7 @@ Let skill creation finish. Inspect the saved instructions: the same three accoun
 
 Open **Agents & Plugins → Cowork → Manage all → weekly-deal-review**. If its tile is offscreen in the Added row, use the right arrow or **Manage all**. Inspect the actual instructions in **OneDrive → My files → Documents → Cowork → skills → weekly-deal-review → SKILL.md** in your training account.
 
-If the skill page says it could not verify `SKILL.md` in OneDrive, reload once, then check the existing file there. In the training run, the file was present and readable despite this warning. An inventory entry alone does not verify its contents. Do not delete Cowork folders or create duplicate skills to clear the warning. If the file is absent or unreadable, ask your facilitator before continuing to skill reuse.
+If the skill page says it could not verify `SKILL.md` in OneDrive, reload once, then check the existing file there. An inventory entry alone does not verify its contents. Do not delete Cowork folders or create duplicate skills to clear the warning. If the file is absent or unreadable, ask your facilitator before continuing to skill reuse.
 
 </details>
 
@@ -201,7 +201,7 @@ This example shows the actions **after approval**, followed by the saved records
 
 Creating the call, completing it and creating the task can need separate approvals. Verify the phone call is **Completed**, the task is assigned to you with the right date, and both records are linked to the renewal. If a write fails, read the error and check for an existing record before retrying.
 
-Check any disclosed omissions too. In the training run, the call recap and renewal link were saved but caller/recipient fields failed. A completed status does not mean every field was populated; ask your facilitator before treating omitted details as complete.
+Check any disclosed omissions too. A completed status does not mean every field was populated; ask your facilitator before treating omitted details as complete.
 
 Then send:
 

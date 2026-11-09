@@ -2,7 +2,7 @@
 
 Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Build a Zava Coffee concierge and cancellation specialist, inspect real routing evidence, and test voice while distinguishing verified controls from unverified spoken behavior.
+Build a Zava Coffee concierge, connect a cancellation specialist, and try the conversation in chat and voice.
 
 You are building a customer-service prototype for **Zava Coffee**. Customers want to enroll, change billing, move deliveries or cancel. Build a **Customer Assist Agent** on the Customer conversation harness, then compare what the primary agent does before and after a cancellation specialist exists. **Demo Mode** simulates results; no real subscription changes.
 
@@ -10,13 +10,13 @@ You are building a customer-service prototype for **Zava Coffee**. Customers wan
 
 | Level | Persona | Duration | Finish line |
 | --- | --- | --- | --- |
-| 200 | Maker | 30 minutes | An unpublished primary agent, cancellation specialist, two skills and an honest test record. |
+| 200 | Maker | 30 minutes | A primary agent, cancellation specialist, two skills and a chat-and-voice conversation. |
 
 Plan 30 minutes for Build (10) → Route (12) → Speak (8). Extend is optional and takes 15 additional minutes. These are working budgets, not measured run times or response-time guarantees. Wait for provisioning and responses; read a reveal while waiting rather than submitting duplicate requests.
 
 ![Zava Coffee Subscription Assistant with an intent skill connected to Subscription Cancellation with a cancellation skill.](images/canvas-one-subagent.webp)
 
-*Your finish line: an unpublished Zava Coffee assistant with one cancellation specialist and a skill on each agent. This light build-canvas capture shows the artifact, not a production deployment.*
+*Your finish line: an unpublished Zava Coffee assistant with one cancellation specialist and a skill on each agent.*
 
 ## 📚 Table of Contents
 
@@ -24,7 +24,7 @@ Plan 30 minutes for Build (10) → Route (12) → Speak (8). Extend is optional 
 - [Exercise inputs](#-exercise-inputs)
 - [Build: Give the primary agent a clear job](#-build-give-the-primary-agent-a-clear-job)
 - [Route: Give cancellation to a specialist](#-route-give-cancellation-to-a-specialist)
-- [Speak: Test voice without overstating the result](#-speak-test-voice-without-overstating-the-result)
+- [Speak: Try the voice experience](#-speak-test-voice-without-overstating-the-result)
 - [Extend: Add three optional specialists (optional)](#-extend-add-three-optional-specialists-optional)
 - [Take it with you](#-take-it-with-you)
 - [Product guidance](#-product-guidance)
@@ -40,7 +40,7 @@ Prepare these separately before the timed exercise:
 
 - Access to [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/) in an environment offering **Customer conversation agent**.
 - Permission to create agents in that environment.
-- Copilot Studio access and billing capacity for the preview. Building, testing and evaluating agents can consume Copilot Credits; see [usage and billing](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/overview-customer-conversation).
+- Copilot Studio access and billing capacity for the preview.
 
 No live subscription backend, production phone number or contact-center deployment is required.
 
@@ -52,7 +52,7 @@ No live subscription backend, production phone number or contact-center deployme
 
 - Use your assigned **training account** in a separate browser profile or private window, not a personal or production account. Select the facilitator-provided environment in [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/).
 - Keep this lab beside the browser. The fictional subscription ID **SUB-1042** and all configuration text are supplied below. Use only fictional contact and payment details; there are no exercise downloads.
-- For the voice exercise, have a microphone and speakers or headset, and allow microphone access in the browser. Without audio, use Web Chat or watch the facilitator, and record spoken checks as unverified.
+- For the voice exercise, have a microphone and speakers or headset, and allow microphone access in the browser. If audio is unavailable, use Web Chat or watch the facilitator.
 
 ## 🔎 Build: Give the primary agent a clear job
 
@@ -66,7 +66,7 @@ Create a concierge, separate channel guidance, and observe a cancellation reques
 
 Open [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/), sign in with your lab account and select the assigned environment. Review and dismiss any first-run notice or tour. Select **Agents** → **More create options** (the arrow beside **New agent**) → **Customer conversation agent**.
 
-Customer Assist Agents are in preview. The tested accessible name is **Customer conversation agent, uses Copilot Credits**. If it is missing, ask your facilitator; do not substitute the separate Standard or Microsoft Copilot agent options. Ask about unexpected consent or access requests.
+Customer Assist Agents are in preview. Select **Customer conversation agent**. If it is missing, ask your facilitator; do not substitute the separate Standard or Microsoft Copilot agent options. Ask about unexpected consent or access requests.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/new-agent-menu-dark.webp"><img src="images/new-agent-menu.webp" alt="More create options offers Customer conversation agent separately from Microsoft Copilot agent and Agent Standard."></picture>
 
@@ -296,7 +296,7 @@ Confirm each edited field is saved, then close the panel. Find the primary conne
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/canvas-one-subagent-dark.webp"><img src="images/canvas-one-subagent.webp" alt="Zava Coffee Subscription Assistant with an intent skill connected to Subscription Cancellation with a cancellation skill."></picture>
 
-*The saved build: one primary agent and one specialist. These cards are configuration, not evidence that every conversation succeeds.*
+*The saved build contains the primary agent and its cancellation specialist.*
 
 ### 6. Begin the original four-message test
 
@@ -372,23 +372,23 @@ Can I change my delivery date to next Friday?
 
 **Read the customer reply and the specialist lifecycle together.**
 
-The saved **Description** helps the primary choose a specialist; **Activity map** shows the invocation and return. A simulated confirmation is not a backend write. A completed combined-request retry is also not a pass for the original four-message sequence. Keep those claims separate.
+The saved **Description** helps the primary choose a specialist; **Activity map** shows the invocation and return. A simulated confirmation is not a backend write.
 
 Intent and required inputs → Specialist invocation → Confirmation and simulated result → Return to primary
 
 ### Quick check
 
-The original sequence stalls, but the fresh combined-request retry returns a code. What can you conclude?
+How can you see which specialist handled a request?
 
-- The original four-message sequence passed and a real subscription was canceled.
+- The presence of a specialist on the build canvas shows it handled the request.
 
-- The diagnostic retry completed a simulated cancellation; the original sequence still needs investigation.
+- Activity map shows the specialist invocation and return.
 
 <details>
 <summary>Check your answer</summary>
 
-- **Not quite: The original four-message sequence passed and a real subscription was canceled.** Neither conclusion is supported. The original remained incomplete, and Demo Mode has no subscription backend.
-- **Correct: The diagnostic retry completed a simulated cancellation; the original sequence still needs investigation.** Correct. Preserve the distinction and inspect chat plus the final return, including any intermediate statuses.
+- **Not quite: The presence of a specialist on the build canvas shows it handled the request.** The build canvas shows the configuration, not the route taken by a conversation.
+- **Correct: Activity map shows the specialist invocation and return.** Correct. Read the specialist activity alongside the customer reply to understand the route.
 
 </details>
 
@@ -398,17 +398,17 @@ The original sequence stalls, but the fresh combined-request retry returns a cod
 
 - **The test pane reports TelephonyBadRequest or another error.** Record the error, select **Start new test session** and retry once. If it persists, ask your facilitator; do not infer a root cause from the error alone.
 
-## 🔎 Speak: Test voice without overstating the result
+## 🔎 Speak: Try the voice experience
 
 **8 minutes · Copilot Studio preview**
 
-Use the same agent in Voice Call and separate connection controls from actual speech checks.
+Try the same cancellation conversation in Voice Call and compare it with chat.
 
-**Outcome:** A voice-test record that distinguishes connection, recognition, spell-back and cancellation, followed by an ended call.
+**Outcome:** A spoken cancellation conversation with a visible transcript.
 
 ### 1. Prepare audio and select Voice Call
 
-Connect a microphone and speakers or a headset. In **Preview**, select **Voice Call**. Use a browser with microphone access permitted for the preview site. If audio is unavailable, use **Web Chat** or watch the facilitator; mark your own spoken checks unverified.
+Connect a microphone and speakers or a headset. In **Preview**, select **Voice Call**. Use a browser with microphone access permitted for the preview site. If audio is unavailable, use **Web Chat** or watch the facilitator.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/voice-call-panel-dark.webp"><img src="images/voice-call-panel.webp" alt="Voice Call selected with the call control and an empty Live Transcript displaying Not connected."></picture>
 
@@ -416,51 +416,51 @@ Connect a microphone and speakers or a headset. In **Preview**, select **Voice C
 
 ### 2. Connect and check the transcript
 
-Select **Start voice conversation** and allow microphone access if asked. Confirm **Listening...** and **Voice call connected** in **Live Transcript**, then wait a few seconds for the greeting under **Bot said:**. A connected call alone does not demonstrate recognition.
+Select **Start voice conversation** and allow microphone access if asked. Confirm **Listening...** and **Voice call connected** in **Live Transcript**, then wait a few seconds for the greeting under **Bot said:**.
 
 ### 3. Speak the cancellation request
 
-Say **“I want to cancel my subscription.”** Watch whether **Live Transcript** records what you said. Record recognition as unverified if you do not supply spoken input.
+Say **“I want to cancel my subscription.”** Watch whether **Live Transcript** records what you said.
 
 ### 4. Provide details and confirm
 
 When asked, say your subscription ID, for example **“S U B one zero four two”**, then a reason such as **“I’m moving abroad”**. Confirm when asked. Use only fictional identifiers and note any recognition errors.
 
-### 5. Check the spoken behavior, not just the connection
+### 5. Compare voice with chat
 
-Listen and inspect **Live Transcript** and **Activity map**. Check pauses, silent internal routing, clear identifiers and confirmation codes, one question at a time, and no markdown read aloud. Check for a simulated confirmation code. Record each mismatch rather than assuming saved Voice instructions guarantee the behavior.
+Listen and inspect **Live Transcript** and **Activity map**. Check pauses, silent internal routing, clear identifiers and confirmation codes, one question at a time, and no markdown read aloud. Check for a simulated confirmation code.
 
 ### 6. End the call and leave a draft
 
 Select **End conversation** and verify that **Start voice conversation** returns. Leave the agent unpublished. Do not configure production channels, triggers, schedules or a backend for this lab.
 
-### Reveal: Why is voice a separate test?
+### Reveal: How does Voice build on General instructions?
 
-**The build is shared; the channel still needs its own evidence.**
+**The task stays the same; the channel changes the delivery.**
 
-**Voice** layers speaking guidance over **General**. Preview lets you exercise that channel without deploying a production phone number. But a connected session proves only connection, not recognition or successful spoken cancellation.
+**Voice** layers speaking guidance over **General**. Pauses, clear identifiers and one question at a time make the same conversation easier to follow aloud.
 
 General instructions → Voice guidance → Spoken test and transcript → End conversation
 
 ### Quick check
 
-The call connects and shows Listening, but you say nothing. Which result is supported?
+What changes when you add Voice instructions?
 
-- The voice cancellation and spell-back checks passed.
+- Voice replaces the General instructions.
 
-- Connection worked; recognition and spoken cancellation remain unverified.
+- Voice adds speaking guidance to the same task.
 
 <details>
 <summary>Check your answer</summary>
 
-- **Not quite: The voice cancellation and spell-back checks passed.** No spoken scenario ran, so neither behavior was tested.
-- **Correct: Connection worked; recognition and spoken cancellation remain unverified.** Correct. Record connection separately, and end the call even when the spoken checks cannot be completed.
+- **Not quite: Voice replaces the General instructions.** Voice adds to General instructions rather than replacing them.
+- **Correct: Voice adds speaking guidance to the same task.** Correct. The cancellation procedure stays the same while its spoken delivery changes.
 
 </details>
 
 ### If you get stuck
 
-- **There is no sound or microphone input.** Check browser microphone permission and the selected audio device, then try the call again. If audio remains unavailable, use Web Chat or watch the facilitator, record voice checks as unverified and end any connected call.
+- **There is no sound or microphone input.** Check browser microphone permission and the selected audio device, then try the call again. If audio remains unavailable, end the call and use Web Chat or watch the facilitator.
 
 ## 🔎 Extend: Add three optional specialists (optional)
 
@@ -664,7 +664,7 @@ Help callers adjust their delivery schedule.
 
 ### 14. Test each optional route independently
 
-Save all fields and close the panel. Check for four specialists including cancellation. In **Preview** → **Web Chat**, select **Start new test session** before each test below. Supply fictional follow-up details when asked and inspect **Activity map**. Record the actual result separately for each.
+Save all fields and close the panel. Check for four specialists including cancellation. In **Preview** → **Web Chat**, select **Start new test session** before each test below. Supply fictional follow-up details when asked and inspect **Activity map**. Compare the route taken for each request.
 
 | Send | Expected specialist to verify |
 | --- | --- |
@@ -696,29 +696,29 @@ What should demonstrate that delivery now uses its specialist?
 <summary>Check your answer</summary>
 
 - **Not quite: The primary instructions mention the specialist’s name.** That name was present before the specialist existed. Instructions alone do not prove execution.
-- **Correct: A fresh delivery conversation and Activity map showing the specialist invocation and return.** Correct. Verify the actual trace and result, and label the optional test unverified if you do not run it.
+- **Correct: A fresh delivery conversation and Activity map showing the specialist invocation and return.** Correct. Activity map shows which specialist handled the request.
 
 </details>
 
 ### If you get stuck
 
-- **An optional request remains with the primary.** Verify the exact specialist name, save its **Description** and other edited fields, then start a fresh test session. Record unresolved behavior rather than claiming the optional route passed.
+- **An optional request remains with the primary.** Verify the exact specialist name, save its **Description** and other edited fields, then start a fresh test session. If the request still does not route, ask the facilitator.
 
 ## 🎒 Take it with you
 
-Keep an unpublished Zava Coffee assistant with its cancellation specialist, and a record of what you actually tested. A useful prototype includes both working paths and honest coverage gaps.
+You built a Zava Coffee assistant, connected its cancellation specialist, and explored chat and voice interactions. Keep the agent as a draft for further development.
 
 - **Separate responsibility:** The primary identifies intent; a specialist owns a bounded job and its skill.
 
 - **Inspect the route:** Use saved descriptions, the actual conversation, and the specialist invocation and return to explain behavior.
 
-- **Distinguish evidence:** Original sequence, diagnostic retry, voice connection and spoken behavior are separate test results.
+- **Adapt to the channel:** General instructions define the task; Voice instructions shape how the agent speaks and listens.
 
 - **Keep the safety boundary:** Demo Mode is simulation. A code is not proof of a backend change, and no real payment details belong here.
 
 **Reflect:** Which customer task in your work deserves a specialist, and what evidence would you require before replacing its simulated result with a real action?
 
-**Cleanup:** End any voice conversation and verify **Start voice conversation** returns. Leave your agent unpublished; this lab adds no triggers, publication or backend. Follow the facilitator’s retention guidance before deleting anything. Testing can consume Copilot Credits.
+**Cleanup:** End any voice conversation and verify **Start voice conversation** returns. Leave your agent unpublished; this lab adds no triggers, publication or backend. Follow the facilitator’s retention guidance before deleting anything.
 
 ## 📖 Product guidance
 
