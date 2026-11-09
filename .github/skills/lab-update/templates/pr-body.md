@@ -10,7 +10,7 @@
 
 | Where | Before | After | Evidence |
 | --- | --- | --- | --- |
-| %%Use case 2, step 4 (both copies)%% | %%"Plugins"%% | %%"Agents & Plugins"%% | %%run-through 2026-11-20 / Learn URL%% |
+| %%Use case 2, step 4 (both copies)%% | %%"Agents & Plugins"%% | %%"Plugins"%% | %%run-through 2026-11-20 / Learn URL%% |
 
 ### Screenshots
 

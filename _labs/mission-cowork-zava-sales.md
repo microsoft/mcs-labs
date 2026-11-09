@@ -107,7 +107,7 @@ mission_lab:
           notice: "In this training experience, Chat may not retrieve the live deal and can recommend **Zava Sales Hub** instead. That is the handoff to explore, not proof that Dataverse is unavailable in every Copilot Chat tenant. Do not accept a generic call plan as a verified CRM brief."
         - title: "Follow the Zava Sales Hub recommendation"
           instruction: "Select the recommendation to **Try Zava Sales Hub**. Check that the same renewal prompt is carried into the agent conversation; send it if it is only prefilled. Confirm that you are now talking to **Zava Sales Hub**, then review its deal status, attention points and three call questions against the returned records."
-          notice: "The recommendation's wording can vary. If no card appears, open **Agents & Plugins → Chat**, find the facilitator-provided **Zava Sales Hub** agent, and paste the same prompt there. Some sessions shorten the sidebar label to **Plugins**. If Chat starts a research task instead, select **Stop task** on that task card before opening the agent; do not wait for a separate research run in this exercise. If the agent is unavailable, ask the proctor; do not install a lookalike or invent the CRM answer."
+          notice: "The recommendation's wording can vary. If no card appears, open **Plugins → Chat**, find the facilitator-provided **Zava Sales Hub** agent, and paste the same prompt there. If Chat starts a research task instead, select **Stop task** on that task card before opening the agent; do not wait for a separate research run in this exercise. If the agent is unavailable, ask the proctor; do not install a lookalike or invent the CRM answer."
         - title: "Create a lead in the MCP App"
           instruction: "In the **same Zava Sales Hub agent conversation**, send the follow-up. Select **Confirm** when prompted, complete and review the embedded lead form, then select **Accept and save** once. This interactive form inside the agent is an **MCP App**, not a switch to Cowork."
           prompt_label: Follow-up in Zava Sales Hub
@@ -156,9 +156,9 @@ mission_lab:
       outcome: "A Zava-branded three-slide review separating known facts from open questions, plus real Outlook drafts."
       steps:
         - title: "Connect Microsoft Dataverse"
-          instruction: "Go to **Agents & Plugins → Cowork → Microsoft Dataverse**. Enable it and connect to the training CRM. This is Cowork's connection, separate from the Chat agent you just used; it gives Cowork tools to work with records when you approve."
+          instruction: "Go to **Plugins → Cowork → Microsoft Dataverse** and turn it on. Enabling is not enough: select **Connect Microsoft Dataverse**, enter the training CRM URL `https://zavasalesdemo.crm.dynamics.com/`, and confirm **Connected**. This is Cowork's connection, separate from the Chat agent you just used; it gives Cowork tools to work with records when you approve."
           help: |
-            1. Open **Agents & Plugins** (shown as **Plugins** in some sessions), then the **Cowork** tab.
+            1. Open **Plugins**, then the **Cowork** tab.
             2. Select **Microsoft Dataverse** and turn **Enable Microsoft Dataverse** on.
             3. Select **Connect Microsoft Dataverse**.
             4. Enter `https://zavasalesdemo.crm.dynamics.com/` and select **Connect**.
@@ -172,7 +172,7 @@ mission_lab:
             height: 738
             caption: "Enter https://zavasalesdemo.crm.dynamics.com/, select Connect, then confirm Connected. Use the supplied training environment, not a production CRM."
         - title: "Enable the Zava PowerPoint plugin"
-          instruction: "Still in **Agents & Plugins → Cowork**, open **Zava PowerPoint** and enable it. Inspect the company-branding guidance it supplies. If it is already enabled, leave it enabled; do not confuse it with the optional **Zava Sales** plugin."
+          instruction: "Still in **Plugins → Cowork**, open **Zava PowerPoint** and enable it. Inspect the company-branding guidance it supplies. If it is already enabled, leave it enabled; do not confuse it with the optional **Zava Sales** plugin."
           screenshot:
             title: the company-branding plugin
             src: /labs/cowork-zava-sales/images/zava-powerpoint-plugin.webp
@@ -248,7 +248,7 @@ mission_lab:
 
             If the first save proposes **Overwrite: Yes**, cancel that approval and inspect the destination in OneDrive. If the skill does not exist, ask Cowork to copy it with **overwrite disabled** and stop on a conflict. If it already exists, inspect it before deciding whether to reuse or revise it; do not delete it to make the approval succeed.
 
-            Open **Agents & Plugins → Cowork → Manage all → weekly-deal-review**. If the tile is offscreen in the Added row, use its right arrow or **Manage all**. To inspect the actual instructions, open **OneDrive → My files → Documents → Cowork → skills → weekly-deal-review → SKILL.md** in the training account. An inventory entry alone does not verify the file contents.
+            Open **Plugins → Cowork → Manage all → weekly-deal-review**. If the tile is offscreen in the Added row, use its right arrow or **Manage all**. To inspect the actual instructions, open **OneDrive → My files → Documents → Cowork → skills → weekly-deal-review → SKILL.md** in the training account. An inventory entry alone does not verify the file contents.
           screenshot:
             title: your saved skill
             src: /labs/cowork-zava-sales/images/saved-skill.webp
@@ -257,7 +257,7 @@ mission_lab:
             width: 2400
             height: 288
             caption: "Manage all lists the saved skill under its folder name, weekly-deal-review. Open SKILL.md in OneDrive to inspect the instructions."
-          notice: "A **skill is reusable instructions and a procedure**, not a newly trained model. Find it in **Agents & Plugins → Cowork**, sometimes displayed as **weekly-deal-review**. A new task discovers the saved skill; this task already has the conversation context."
+          notice: "A **skill is reusable instructions and a procedure**, not a newly trained model. Find it in **Plugins → Cowork**, sometimes displayed as **weekly-deal-review**. A new task discovers the saved skill; this task already has the conversation context."
         - title: "Set the time and review the schedule"
           instruction: "Send the scheduling prompt. Review the proposed changes, then confirm **Monday, 8:30 a.m., the intended time zone, your own email as the recipient, and customer emails as drafts**. Complete **Next → Review permissions → Approve** when offered. Leave only one Monday review schedule."
           prompt_label: Same Cowork task
@@ -378,7 +378,7 @@ mission_lab:
           instruction: "Cowork may open **Create recurring task** directly with **Run in: New conversation**. Review that Friday job rather than creating another. If it provides handoff text instead, review it and copy it into **New → Cowork**. In either route, the instructions should name **Weekly Deal Review** and your existing deck, require a backup before skill edits, preserve accounts and permissions, keep customer emails as drafts, and send the recap only to you. Complete the Friday schedule confirmation, clearing **Run once now** so it does not immediately execute. A handoff in the chat is not a saved schedule."
           notice: "This configures future work, not a demonstrated learning result. **No accessible feedback** is a valid result. Automatic updates depend on sources, permissions and successful runs. Skill-file changes may still wait for approval; a backup is needed before the first actual edit."
         - title: "Inspect what persists"
-          instruction: "Find **Weekly Deal Review** under **Agents & Plugins → Cowork**, and review the separate Monday and Friday entries under **Automations**. Check the Friday instructions require a dated backup before edits and report missing or conflicting feedback. After a real feedback run, inspect the change recap, source links and saved previous version."
+          instruction: "Find **Weekly Deal Review** under **Plugins → Cowork**, and review the separate Monday and Friday entries under **Automations**. Check the Friday instructions require a dated backup before edits and report missing or conflicting feedback. After a real feedback run, inspect the change recap, source links and saved previous version."
           screenshot:
             title: the two separate automations
             src: /labs/cowork-zava-sales/images/separate-automations.webp
@@ -417,9 +417,9 @@ mission_lab:
       outcome: "A Northstar account note, a Summit Youth Sports lead with unknown contact details left unknown, and an introduction follow-up task."
       steps:
         - title: "Install Zava Sales, then start a fresh task"
-          instruction: "Open **Agents & Plugins → Cowork**, search for **Zava Sales**, and install it if your facilitator has supplied it. This optional plugin is separate from the **Zava Sales Hub agent** and the **Zava PowerPoint plugin** already used. Install and connect its **Business apps (preview)** prerequisite as described below, then start **New → Cowork** and leave Auto / Medium selected."
+          instruction: "Open **Plugins → Cowork**, search for **Zava Sales**, and install it if your facilitator has supplied it. This optional plugin is separate from the **Zava Sales Hub agent** and the **Zava PowerPoint plugin** already used. Install and connect its **Business apps (preview)** prerequisite as described below, then start **New → Cowork** and leave Auto / Medium selected."
           help: |
-            1. Open **Agents & Plugins** and select the **Cowork** tab.
+            1. Open **Plugins** and select the **Cowork** tab.
             2. Search the available plugins for **Zava Sales**.
             3. Open it, review the capabilities, and select **Install** or **Add** as offered. If it is already installed, leave it enabled.
             4. Check its prerequisites: the workshop plugin requires **Business apps (preview)**, published by **Microsoft Corporation**. Search for **Business apps**, install it if needed, and select **Connect** using your training identity. Verify **Connected** and leave it enabled. The **Microsoft Dataverse** connection from Delegate is separate and does not satisfy this dependency. Use only the supplied training environment and your own connection.
@@ -581,7 +581,7 @@ Help me prepare for a call about Northstar Teamwear’s $250K Pulse renewal. Whe
 
 In this training experience, Chat may not retrieve the live deal and can recommend **Zava Sales Hub** instead. Select the recommendation to **Try Zava Sales Hub**. Check that the same prompt is carried into the agent conversation; send it if it is only prefilled. Confirm that you are now talking to **Zava Sales Hub**, then check the deal status, attention points and three call questions against its returned records.
 
-The recommendation's wording can vary. If no card appears, open **Agents & Plugins → Chat**, find the facilitator-provided **Zava Sales Hub** agent, and paste the same prompt there. Some sessions shorten the sidebar label to **Plugins**. If Chat starts a research task instead, select **Stop task** on that task card before opening the agent; do not wait for a separate research run in this exercise. If Chat answers directly, inspect its sources, then open the agent for the next step anyway. The lab does not require making Chat fail, and this result does **not** establish that Dataverse is unavailable in every Copilot Chat tenant.
+The recommendation's wording can vary. If no card appears, open **Plugins → Chat**, find the facilitator-provided **Zava Sales Hub** agent, and paste the same prompt there. If Chat starts a research task instead, select **Stop task** on that task card before opening the agent; do not wait for a separate research run in this exercise. If Chat answers directly, inspect its sources, then open the agent for the next step anyway. The lab does not require making Chat fail, and this result does **not** establish that Dataverse is unavailable in every Copilot Chat tenant.
 
 In the **same Zava Sales Hub agent conversation**, follow up:
 
@@ -603,13 +603,13 @@ Check the saved lead before retrying to avoid duplicates. If the agent or form i
 
 **11 minutes · Cowork, Microsoft Dataverse and Zava PowerPoint**
 
-1. Go to **Agents & Plugins → Cowork → Microsoft Dataverse**. Some sessions shorten the sidebar label to **Plugins**. This is Cowork's connection, separate from the Chat agent.
+1. Go to **Plugins → Cowork → Microsoft Dataverse**. This is Cowork's connection, separate from the Chat agent.
 2. Turn **Enable Microsoft Dataverse** on, then **Connect Microsoft Dataverse**.
 3. Enter `https://zavasalesdemo.crm.dynamics.com/`, select **Connect**, and confirm **Connected**. If already connected, leave it alone.
 
    <picture><source media="(prefers-color-scheme: dark)" srcset="images/dataverse-connection-dark.webp"><img src="images/dataverse-connection.webp" alt="Connect Microsoft Dataverse dialog with https://zavasalesdemo.crm.dynamics.com/ in the environment URL field"></picture>
 
-4. Still in **Agents & Plugins → Cowork**, enable **Zava PowerPoint** and inspect its company-branding guidance. If already enabled, leave it enabled. This is not the optional **Zava Sales** plugin. Ask the facilitator if it is missing; do not silently substitute a generic deck.
+4. Still in **Plugins → Cowork**, enable **Zava PowerPoint** and inspect its company-branding guidance. If already enabled, leave it enabled. This is not the optional **Zava Sales** plugin. Ask the facilitator if it is missing; do not silently substitute a generic deck.
 
    <picture><source media="(prefers-color-scheme: dark)" srcset="images/zava-powerpoint-plugin-dark.webp"><img src="images/zava-powerpoint-plugin.webp" alt="The enabled Zava PowerPoint plugin with its corporate-branding guidance and zava-powerpoint-brand skill"></picture>
 
@@ -655,12 +655,12 @@ If a **Copy file** approval appears, check that its destination is your Cowork f
 
 If the first save proposes **Overwrite: Yes**, cancel that approval and inspect the destination in OneDrive. If the skill does not exist, ask Cowork to copy it with **overwrite disabled** and stop on a conflict. If it already exists, inspect it before deciding whether to reuse or revise it; do not delete it to make the approval succeed.
 
-Let skill creation finish. Inspect the saved instructions: the same three accounts, three slides, facts versus questions, Zava PowerPoint branding guidance, and draft-only customer follow-ups. Find skills under **Agents & Plugins → Cowork**; this one may appear as **weekly-deal-review**. A skill is reusable instructions and a procedure, **not model retraining**.
+Let skill creation finish. Inspect the saved instructions: the same three accounts, three slides, facts versus questions, Zava PowerPoint branding guidance, and draft-only customer follow-ups. Find skills under **Plugins → Cowork**; this one may appear as **weekly-deal-review**. A skill is reusable instructions and a procedure, **not model retraining**.
 
 <details>
 <summary>Help: find and inspect the saved skill</summary>
 
-Open **Agents & Plugins → Cowork → Manage all → weekly-deal-review**. If its tile is offscreen in the Added row, use the right arrow or **Manage all**. Inspect the actual instructions in **OneDrive → My files → Documents → Cowork → skills → weekly-deal-review → SKILL.md** in your training account.
+Open **Plugins → Cowork → Manage all → weekly-deal-review**. If its tile is offscreen in the Added row, use the right arrow or **Manage all**. Inspect the actual instructions in **OneDrive → My files → Documents → Cowork → skills → weekly-deal-review → SKILL.md** in your training account.
 
 If the skill page says it could not verify `SKILL.md` in OneDrive, reload once, then check the existing file there. An inventory entry alone does not verify its contents. Do not delete Cowork folders or create duplicate skills to clear the warning. If the file is absent or unreadable, ask your facilitator before continuing to skill reuse.
 
@@ -742,7 +742,7 @@ Cowork may open **Create recurring task** directly with **Run in: New conversati
 
 This configures future work, not a demonstrated learning result. **No accessible feedback** is valid; invented feedback is not. Automatic changes depend on available sources, permissions and successful runs. Skill-file changes may still wait for approval.
 
-Find **Weekly Deal Review** under **Agents & Plugins → Cowork** and the separate Monday and Friday schedules under **Automations**. Check the Friday instructions require a dated backup before edits and report missing or conflicting feedback. After a real feedback run, inspect the change recap, source links and saved previous version.
+Find **Weekly Deal Review** under **Plugins → Cowork** and the separate Monday and Friday schedules under **Automations**. Check the Friday instructions require a dated backup before edits and report missing or conflicting feedback. After a real feedback run, inspect the change recap, source links and saved previous version.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/separate-automations-dark.webp"><img src="images/separate-automations.webp" alt="Separate Monday pipeline-review and Friday skill-improvement schedules"></picture>
 
@@ -752,7 +752,7 @@ Find **Weekly Deal Review** under **Agents & Plugins → Cowork** and the separa
 
 **Optional · 8 minutes · New Cowork task**
 
-1. Open **Agents & Plugins → Cowork**, search for **Zava Sales**, and install/add it if your facilitator has supplied it. If already installed, leave it enabled. This optional plugin is separate from the **Zava Sales Hub agent** and the **Zava PowerPoint plugin** already used.
+1. Open **Plugins → Cowork**, search for **Zava Sales**, and install/add it if your facilitator has supplied it. If already installed, leave it enabled. This optional plugin is separate from the **Zava Sales Hub agent** and the **Zava PowerPoint plugin** already used.
 2. Review its skills, connections and prerequisites. The workshop plugin requires **Business apps (preview)**, published by **Microsoft Corporation**. Search for **Business apps**, install it if needed, and select **Connect** using your training identity. Verify **Connected** and leave it enabled. The **Microsoft Dataverse** connection from Delegate is separate and does not satisfy this dependency. Use only the supplied training environment and your own connection.
 3. Start **New → Cowork** so the task discovers the plugin. Leave **Auto / Medium** selected.
 4. Send:

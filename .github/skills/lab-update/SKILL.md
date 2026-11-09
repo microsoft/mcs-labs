@@ -187,7 +187,7 @@ the audit with `main` when the lab already had findings: the PR should not add a
    conflict; reconcile it with the requested change and retain a backup before resolving
    dirty work.
 2. Commit both copies, images and any terms or agenda changes, with a message such as
-   `fix(<slug>): update Cowork plugin steps for the new Agents & Plugins page`.
+   `fix(<slug>): update Cowork plugin steps for the renamed Plugins page`.
 3. Before pushing, verify the authenticated GitHub account, target repo, head repo and
    branch. Push only after local validation. Open the PR against `microsoft/mcs-labs`
    `main` with `gh pr create` and a current body from `templates/pr-body.md`; include

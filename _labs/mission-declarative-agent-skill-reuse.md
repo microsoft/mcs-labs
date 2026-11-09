@@ -31,7 +31,7 @@ mission_lab:
 
     This exercise uses Agent Builder for a declarative agent. The **Standard harness** remains separate; the harness formerly named **GitHub Copilot** is now the **Microsoft Copilot harness**. Do not substitute either Studio experience for these Agent Builder steps.
   self_setup: |-
-    Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Plugins > Chat > New agent > Configure** for **Skills**, following the linked licensing and skills documentation. Some versions label the entry **Agents & Plugins**. For the optional extension, prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
+    Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Plugins > Chat > New agent > Configure** for **Skills**, following the linked licensing and skills documentation. For the optional extension, prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
   prerequisites:
     - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account."
     - "Download the starter in Mission 1 and the report in Mission 3; do not skip those exercise inputs."
@@ -81,7 +81,7 @@ mission_lab:
       steps:
         - title: "Open the configuration"
           instruction: |
-            Open [Microsoft Copilot](https://copilot.cloud.microsoft). Select **Plugins** (called **Agents & Plugins** in some versions), open the **Chat** tab and select **New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**. Dismiss any completion notifications covering the tabs.
+            Open [Microsoft Copilot](https://copilot.cloud.microsoft). Select **Plugins**, open the **Chat** tab and select **New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**. Dismiss any completion notifications covering the tabs.
 
             The onboarding describes work content enabled by default. You will turn it off in Mission 3 before testing; do not assume the new agent is report-only.
           screenshot:
@@ -375,7 +375,7 @@ You lead operations at **Contoso Grand Hotel**. Identify five urgent issues in t
 <details class="lab-setup" markdown="1">
 <summary>Using your own tenant? View setup requirements</summary>
 
-Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Plugins > Chat > New agent > Configure** for **Skills** and consult the licensing and skills sources below. Some versions label the entry **Agents & Plugins**. Optional: prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
+Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Plugins > Chat > New agent > Configure** for **Skills** and consult the licensing and skills sources below. Optional: prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
 
 </details>
 
@@ -405,7 +405,7 @@ This lab uses **Agent Builder** for a declarative agent. The **Standard harness*
 
 **Outcome:** a focused role and an uploaded skill.
 
-1. Select **Plugins** (called **Agents & Plugins** in some versions), open the **Chat** tab and select **New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**. Dismiss completion notifications covering the tabs. Work-content defaults are on; you turn them off in Mission 3 before testing.
+1. Select **Plugins**, open the **Chat** tab and select **New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**. Dismiss completion notifications covering the tabs. Work-content defaults are on; you turn them off in Mission 3 before testing.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/agents-skills-new-agent-dark.webp"><img src="images/agents-skills-new-agent.webp" alt="Plugins page with the Chat tab selected and New agent on the right."></picture>
 

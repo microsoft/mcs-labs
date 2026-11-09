@@ -56,7 +56,7 @@ By the end, you will be able to:
 <details class="lab-setup" markdown="1">
 <summary>Using your own tenant? View setup requirements</summary>
 
-- A Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills to them. To check, open [Microsoft Copilot](https://m365.cloud.microsoft), select **Agents & Plugins**, open the **Chat** tab, select **New agent**, and look for a **Skills** section on the **Configure** tab.
+- A Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills to them. To check, open [Microsoft Copilot](https://m365.cloud.microsoft), select **Plugins**, open the **Chat** tab, select **New agent**, and look for a **Skills** section on the **Configure** tab.
 - For the optional pro-code exercise:
   - Visual Studio Code and a Microsoft 365 Agents Toolkit release that supports declarative agent skills.
   - A SharePoint or OneDrive location you can use for the hotel PDF.
@@ -111,9 +111,9 @@ The report is evidence, not a place to store agent instructions. The skill descr
 ### Step 2: Create Contoso Operations agent
 
 1. Open [Microsoft Copilot](https://m365.cloud.microsoft) and sign in with your lab account.
-2. In the left pane, select **Agents & Plugins**, open the **Chat** tab, and then select **New agent**.
+2. In the left pane, select **Plugins**, open the **Chat** tab, and then select **New agent**.
 
-   ![The Agents & Plugins page in Microsoft Copilot, with the Chat tab selected and New agent on the right](images/agents-skills-new-agent.png)
+   ![The Plugins page in Microsoft Copilot, with the Chat tab selected and New agent on the right](images/agents-skills-new-agent.png)
 
 3. Select **Skip** to go straight to the **Configure** tab. You can also describe the agent in the creation conversation and then review it on **Configure**.
 4. If **What's new in Agent Builder** appears, select **Get started**. The dialog explains that new agents can use your OneDrive and SharePoint files, Outlook, Teams, and the web by default. You turn those off in Step 4.
