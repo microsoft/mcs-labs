@@ -31,9 +31,9 @@ mission_lab:
   self_setup: |-
     Complete the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-standard-harness/#prerequisites) before starting. Downloads appear where you use them.
   prerequisites:
-    - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com) with your assigned **training account** in a separate browser profile or private window, not a personal or production account."
-    - "Use fictitious mailing-list details. Ask your facilitator if an environment, model, connection or channel is unavailable; do not change tenant settings."
-  pacing: "Plan 30 minutes for Configure (6) → Author (6) → Ground (8) → Extend (10). The observed core run took about 32–35 minutes, so the 30-minute slot is tight, not a guarantee. Provisioning and indexing add waits: read checks while waiting and start tools while the PDF indexes. If time runs out after weather, return to Prompt Analyzer later; core completion still includes it. Inspect (8), Delegate (10) and Publish (10) are optional and follow the core."
+    - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com) with your assigned **training account**."
+    - "Use fictitious mailing-list details. Do not change tenant settings."
+  pacing: "Configure, Author, Ground and Extend take about 30 minutes; Inspect, Delegate and Publish are optional."
   missions:
     - id: configure
       verb: Configure
@@ -483,11 +483,11 @@ Complete the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/m
 
 </details>
 
-**Attendee checklist:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com) with your assigned **training account** in a separate browser profile or private window, not a personal or production account. Use fictitious mailing-list details. Ask your facilitator if an environment, model, connection or channel is unavailable; do not change tenant settings.
+**Attendee checklist:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com) with your assigned **training account**. Use fictitious mailing-list details. Do not change tenant settings.
 
 **Standard remains its own harness.** Only the former GitHub Copilot harness was renamed **Microsoft Copilot harness**. Its menu badge may still read **GitHub Copilot**; choose **Standard**, not the top Microsoft Copilot option.
 
-Plan **30 minutes** for Configure (6) → Author (6) → Ground (8) → Extend (10). The observed core run took **about 32–35 minutes**, so the slot is tight, not guaranteed. Read checks during provisioning and indexing; start tools while the PDF indexes. If time runs out after weather, return to Prompt Analyzer later: core completion still includes it. Inspect (8), Delegate (10) and Publish (10) are **optional extensions after the core**.
+Configure, Author, Ground and Extend take about 30 minutes; Inspect, Delegate and Publish are optional.
 
 ## Table of Contents
 

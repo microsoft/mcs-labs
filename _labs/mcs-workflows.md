@@ -63,7 +63,7 @@ Think of Workflows as the autonomous side of Copilot Studio:
 **The 30-minute core covers Use Cases #1–#3:** an inline agent that blocks focus time and enriches a task, and a multi-branch order-management workflow with human-in-the-loop approval. **Optional extra credit** adds an MCP-powered inventory agent and calls a published price-quote specialist agent.
 
 > [!IMPORTANT]
-> **At a CAT-led event, including the bootcamp, prerequisite setup is already prepared for you.** Start with Use Case #1 and sign in with your assigned lab account when prompted. For self-guided delivery, complete the setup in [Prerequisites](#prerequisites) before starting. The duration is a workshop target, not a measured completion guarantee; trigger pickup and human approval can add waiting time. Finish the core verification steps before attempting extra credit.
+> **At a CAT-led event, including the bootcamp, prerequisite setup is already prepared for you.** Start with Use Case #1 and sign in with your assigned lab account when prompted. For self-guided delivery, complete the setup in [Prerequisites](#prerequisites) before starting. Finish the core verification steps before attempting extra credit.
 
 ---
 

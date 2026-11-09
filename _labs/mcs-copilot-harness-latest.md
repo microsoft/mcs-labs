@@ -109,20 +109,6 @@ Upload the complete ZIP, not `SKILL.md` by itself. When you open the ZIP, you sh
 
 ## Use Case 1: Build the Agent in Agent Builder
 
-### Core pacing
-
-| Minutes | Activity |
-| --- | --- |
-| 0-3 | Choose and inspect the skill. |
-| 3-7 | Create the agent and configure its role. |
-| 7-12 | Add and inspect the skill package. |
-| 12-16 | Add the hotel report as knowledge. |
-| 16-21 | Run the briefing request. |
-| 21-27 | Check accuracy and expected behavior. |
-| 27-30 | Create the agent, share it with a teammate, and complete the review handoff. |
-
-Each briefing response can take about two minutes; the timings above allow for that.
-
 ### Step 1: Inspect the reusable briefing workflow
 
 Open the starter `SKILL.md`, or your Lab 2 equivalent. Identify:

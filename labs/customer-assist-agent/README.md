@@ -12,7 +12,7 @@ You are building a customer-service prototype for **Zava Coffee**. Customers wan
 | --- | --- | --- | --- |
 | 200 | Maker | 30 minutes | A primary agent, cancellation specialist, two skills and a chat-and-voice conversation. |
 
-Plan 30 minutes for Build (10) → Route (12) → Speak (8). Extend is optional and takes 15 additional minutes. These are working budgets, not measured run times or response-time guarantees. Wait for provisioning and responses; read a reveal while waiting rather than submitting duplicate requests.
+Plan 30 minutes for Build, Route and Speak; Extend is optional.
 
 ![Zava Coffee Subscription Assistant with an intent skill connected to Subscription Cancellation with a cancellation skill.](images/canvas-one-subagent.webp)
 
@@ -50,7 +50,7 @@ No live subscription backend, production phone number or contact-center deployme
 
 ## 📋 Exercise inputs
 
-- Use your assigned **training account** in a separate browser profile or private window, not a personal or production account. Select the facilitator-provided environment in [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/).
+- Use your assigned **training account**. Select the facilitator-provided environment in [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/).
 - The fictional subscription ID **SUB-1042** and all configuration text are supplied below. Use only fictional contact and payment details; there are no exercise downloads.
 - For the voice exercise, have a microphone and speakers or headset, and allow microphone access in the browser. If audio is unavailable, use Web Chat or watch the facilitator.
 
@@ -468,7 +468,7 @@ What changes when you add Voice instructions?
 
 Extend the concierge to enrollment, billing and delivery using the same specialist pattern.
 
-**Outcome:** Three additional draft specialists and a recorded routing test for each, if time permits.
+**Outcome:** Three additional draft specialists and a recorded routing test for each.
 
 ### 1. Reuse the specialist pattern
 

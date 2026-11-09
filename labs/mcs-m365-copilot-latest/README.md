@@ -8,7 +8,7 @@ Use Microsoft Copilot and its built-in Researcher and Analyst agents to turn inf
 | ----- | ------- | -------- | ------- |
 | 100 | Business User | 15 minutes | After completing this lab, participants will be able to use Microsoft Copilot with deliberate grounding, response-mode, and model choices, and ground answers in organizational content with Work IQ. As extra credit, they can use the built-in Researcher and Analyst agents for deeper synthesis and financial modelling. |
 
-> **Bootcamp Latest pacing:** The scheduled slot is 15 minutes. The core use cases take about 20 minutes, so in the slot treat [1.3 Ask for deeper reasoning](#13-ask-for-deeper-reasoning) and [2.5 Turn the answer into a deliverable](#25-turn-the-answer-into-a-deliverable) as optional. The Researcher and Analyst extra credit sections are not included in the slot. The [shared lab](../m365-copilot-chat-work-iq/) remains available for other deliveries.
+> [1.3 Ask for deeper reasoning](#13-ask-for-deeper-reasoning), [2.5 Turn the answer into a deliverable](#25-turn-the-answer-into-a-deliverable) and the Researcher and Analyst extra credit sections are optional.
 
 ## Table of Contents
 
@@ -489,8 +489,6 @@ Use the Analyst agent to perform a detailed ROI analysis with NPV, IRR, and disc
    - Select **Agents & Plugins** in the left pane, then select **Analyst** under **Added**.
    - Or type `@Analyst` in the prompt box and choose it from the list.
 
-   Look for **What do you want to analyze?** and the **Analyze data** composer.
-
 > [!TIP]
 > The Analyst agent is another **built-in agent** in Microsoft Copilot. While Researcher excels at reasoning and synthesis, Analyst is purpose-built for **data-heavy work** — extracting tables from documents, performing calculations, building models, generating visualizations, and producing structured outputs like Excel files. Think of Researcher as your strategic advisor and Analyst as your financial modeler.
 
@@ -550,7 +548,7 @@ Check the extracted inputs against Section 16 and ask for a Year 0–5 cash-flow
 
 #### Explore follow-up analysis (optional)
 
-6. If time permits, try one or both of these follow-up prompts to explore Analyst's capabilities further:
+6. Try one or both of these follow-up prompts to explore Analyst's capabilities further:
 
 ```text
 Now create a chart showing NPV vs. Investment Cost for all 10 recommendations, with bubble size representing IRR.

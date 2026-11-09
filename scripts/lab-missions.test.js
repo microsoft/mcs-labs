@@ -141,8 +141,8 @@ test('Zava separates work-file Chat, the agent MCP App, and Cowork plugin setup'
     assert.match(copy, /Stop task/);
     assert.match(copy, /enter `50000` without the currency symbol or comma/);
     assert.match(copy, /Clear \*\*Run once now\*\*/);
-    assert.match(copy, /30 minutes for the four core missions/);
-    assert.match(copy, /about 52 minutes for everything/);
+    assert.match(copy, /Ask, Act, Delegate and Repeat take about 30 minutes/);
+    assert.match(copy, /about 52 with all extensions/);
     assert.doesNotMatch(copy, /ΓÇ|[\u200B\u200C]/);
   }
 });
@@ -303,7 +303,7 @@ test('lab identity leads the hero while setup and test history use native, close
   assert.match(css, /@media print \{[\s\S]*  :is\(\.lab-setup, \.lab-validation, \.step-help\):not\(\[open\]\) > :not\(summary\) \{ display: block; \}/,
       'Setup, test history and help also print with JavaScript disabled');
   assert.match(template, /data-progress-id="ready-\{\{ forloop\.index \}\}"/);
-  assert.equal(lab.prerequisites.length, 5, 'Moving setup out of the Cowork checklist must not shift saved readiness IDs');
+  assert.equal(lab.prerequisites.length, 4, 'Moving setup out of the Cowork checklist must not shift saved readiness IDs');
   assert.match(css, /\.lab-content \{ width: 100%; min-width: 0; max-width: 850px; \}/,
     'Auto-centered grid content must not size itself beyond the mobile column and get clipped');
 });

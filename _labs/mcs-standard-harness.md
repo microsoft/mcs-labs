@@ -25,7 +25,7 @@ Build an agent in the Standard harness from its component parts — topics, know
 | ----- | ------- | -------- | ------- |
 | 200 | Maker | 30 minutes | After completing this lab, participants will be able to create and configure an agent in the Standard harness, author custom topics, ground it with knowledge sources, and extend it with tools. Optional extra credit explores variables, child agents, and channels. |
 
-> **Bootcamp Latest pacing:** Complete Use Cases #1–#4 in 30 minutes: agent configuration (6 minutes), topics (6 minutes), knowledge (8 minutes), and tools (10 minutes). Agent provisioning and file indexing each take a minute or more, so start the file upload in Use Case #3 as soon as you reach it and keep working while it indexes. If you're short on time, add the MSN Weather tool in Use Case #4 and come back to the Prompt Analyzer prompt later. Variables, child agents, and channels are optional extra credit outside this allocation.
+> Use Cases #1–#4 take about 30 minutes; variables, child agents and channels are optional extra credit.
 
 ---
 
@@ -132,7 +132,7 @@ In this lab you'll assemble the Standard harness component model one piece at a 
 | EC | [Extra Credit: Create and Orchestrate Child Agents](#extra-credit-create-and-orchestrate-child-agents) | Delegate scoped work to specialists rather than growing one agent indefinitely (Optional) | ~10 min |
 | EC | [Extra Credit: Deploy Your Agent Across Channels](#extra-credit-deploy-your-agent-across-channels) | Make the agent reachable on the surfaces your users already use (Optional) | ~10 min |
 
-> **Note on pacing:** the later *Deep Dive: Knowledge, Tools & Hooks* module and lab cover tools in more depth. Use Case #4 here is deliberately the component-level view — enough to place tools in the model, not the deep dive.
+> **Note:** the later *Deep Dive: Knowledge, Tools & Hooks* module and lab cover tools in more depth.
 
 ---
 

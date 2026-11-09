@@ -29,10 +29,10 @@ mission_lab:
   self_setup: |-
     Arrange access to **Copilot Studio Apps**, image upload, preview, and reading the public agenda. You need your own OneDrive for Business with permission to read, create and update files, and permission to use or create a OneDrive for Business connection in the environment. No prepared CSV, SharePoint list, database or VS Code setup is required.
   prerequisites:
-    - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account in a separate browser profile or private window, and select the assigned environment."
+    - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account, and select the assigned environment."
     - "Open the [live agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/). Download/upload the reference and create or verify your own connection and CSV during the missions; those exercise artifacts are not pre-created."
     - "Keep the app in preview."
-  pacing: "Plan 30 minutes: Build (8) → Prepare (8) → Prove (10) → Protect (4). Repair is optional, about 5 more minutes. Generation and approvals can take additional time."
+  pacing: "Build, Prepare, Prove and Protect take about 30 minutes; Repair is optional."
   missions:
     - id: build
       verb: Build
@@ -379,7 +379,7 @@ Build **My Bootcamp Lab App** from the live published agenda, prepare your own O
 | --- | --- | --- | --- |
 | 200 | Maker | 30 minutes | Build a preview and verify safe app-to-CSV persistence. |
 
-**Pacing:** Build (8) → Prepare (8) → Prove (10) → Protect (4) = **30 minutes**. Repair is optional, about 5 more minutes. Generation and approvals can take additional time.
+Build, Prepare, Prove and Protect take about 30 minutes; Repair is optional.
 
 ## Table of Contents
 
@@ -405,7 +405,7 @@ Arrange Copilot Studio Apps access, image upload, preview and permission to read
 
 You still download/upload the reference and create or verify your own connection and CSV in the missions. Those lab-specific artifacts are not assumed to be pre-created.
 
-**Attendee readiness:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account in a separate browser profile/private window and select the assigned environment. Open the [live agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/). Keep the app in preview.
+**Attendee readiness:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account and select the assigned environment. Open the [live agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/). Keep the app in preview.
 
 ## Build
 

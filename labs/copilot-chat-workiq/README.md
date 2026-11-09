@@ -23,10 +23,9 @@ Complete the [classic lab prerequisites](../mcs-m365-copilot-latest/#prerequisit
 
 **Attendee readiness**
 
-- Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account** in a separate browser profile or private window, not a personal or production account.
-- If your account, sample content or an optional agent is missing, **ask your facilitator** rather than setting up a tenant.
+- Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft/) with your provided **training account**.
 
-Plan **15 minutes for Ask (3) → Reason (3) → Apply (4) → Verify (5)**. **Publish (2), Research (10) and Model (5)** are optional extensions. These are working budgets, not guaranteed run times; read a reveal or check while a response finishes.
+Ask, Reason, Apply and Verify take about 15 minutes; Publish, Research and Model are optional.
 
 ## 📚 Table of Contents
 
@@ -398,7 +397,7 @@ Are there any gaps where a problem exists but no recommendation addresses it?
 
 Check KPI tables and recommendations R1–R10. Examples to verify include housekeeping SLA at 77% versus a 90% target and WiFi satisfaction at 3.60 versus 4.0; inspect linen costs, parking revenue and valet retrieval time for gaps. The follow-up may finish without another research plan.
 
-8. Optionally send this follow-up if time permits with **Research** or **Researcher** still selected, then compare the counterargument with the report:
+8. Optionally send this follow-up with **Research** or **Researcher** still selected, then compare the counterargument with the report:
 
 ```text
 What's the strongest counterargument to your top recommendation?
@@ -433,7 +432,7 @@ Attach one report → Connect sections → Check recommendation gaps.
 
 **Finish line:** A ranked ROI table and a financial approve, marginal or defer summary. As the hotel's CFO, go beyond simple payback using explicit cash-flow assumptions.
 
-1. Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion. Look for **What do you want to analyze?** and the **Analyze data** composer.
+1. Start a new chat, type `@Analyst` in the prompt box and select the **Analyst** suggestion.
 2. Select **+** → **Upload images and files** and attach `Contoso_Grand_Hotel_Performance_Report.pdf` again. If you skipped Research, [download the same hotel report here](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Wait for the attachment. Uploading from your device sends a copy to OneDrive; use only the fictional sample.
 3. Send the prompt. Let Analyst extract Section 16's costs and returns and compute the requested model:
 
@@ -469,7 +468,7 @@ The source provides simple payback. NPV, IRR and discounted payback here are com
 
 For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. Check whether the five annual costs are paid in advance in Years 0–4 or alongside benefits in Years 1–5. Conventional IRR needs both negative and positive cash flows; a model with only positive net flows must not invent an IRR. With no initial outflow, annual cost divided by annual benefit is not a conventional project payback period; ask Analyst to reconcile any such figure with its cash flows.
 
-5. Optionally send this follow-up in the same Analyst conversation if time permits:
+5. Optionally send this follow-up in the same Analyst conversation:
 
 ```text
 Now create a chart showing NPV vs. Investment Cost for all 10 recommendations, with bubble size representing IRR.

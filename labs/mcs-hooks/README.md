@@ -11,7 +11,7 @@ Build a **Travel Policy Agent** on the Microsoft Copilot harness and use hooks t
 | 200 | Maker | 45 minutes | After completing this lab, participants will be able to attach workflows to agent lifecycle events with hooks, return the user's profile to the model at session start, rewrite a user's prompt with a classifier and an inline agent before the agent uses it further, ground an agent in SharePoint documents selected by metadata, and deny a tool call that breaks a business rule — and explain why each of these belongs in a hook, in knowledge or in instructions. |
 
 > [!TIP]
-> **Pacing:** the full lab takes about 45 minutes, plus 15 for the optional Extra. In a 30-minute event slot, such as the Architecture Bootcamp's, complete Use Cases #1 and #2, then do Use Case #3 and the Extra if you have time left, or after the session.
+> Use Cases #1 and #2 take about 30 minutes; Use Case #3 and the Extra are optional.
 
 ---
 

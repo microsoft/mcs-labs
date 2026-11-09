@@ -15,7 +15,7 @@ Know the traveler. Find the right policy. Leave with a **saved draft Travel Poli
 | --- | --- | --- | --- |
 | 200 | Maker | 30 minutes | Use a session-start hook for traveler context and verify Location-filtered SharePoint policy answers. |
 
-**Core:** Mission 1 (15 minutes) + Mission 2 (15 minutes) = **30 minutes**. Allow for response waits. Mission 3 (20 minutes) is optional. Mission 4 (15 minutes) is an optional booking guard, not part of core completion.
+Missions 1 and 2 take about 30 minutes; Missions 3 and 4 are optional.
 
 ## 📚 Table of Contents
 
@@ -38,7 +38,7 @@ First arrange Copilot Studio access, permission to create agents and workflows, 
 
 </details>
 
-**Event attendees:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account, select the assigned environment and keep the proctor's SharePoint folder location handy. Ask for missing assets rather than changing tenant settings or another learner's connection.
+**Event attendees:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account, select the assigned environment and keep the proctor's SharePoint folder location handy. Do not change tenant settings or another learner's connection.
 
 **Current-UI caveat:** the **Microsoft Copilot harness** was formerly the **GitHub Copilot harness**; documentation and rollout screens may retain the earlier name. **Standard harness** is distinct and has no hooks. Hooks are preview; labels and availability can change.
 

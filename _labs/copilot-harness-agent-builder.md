@@ -504,9 +504,6 @@ Build a sophisticated Sales Revenue Analyst that integrates organizational data 
 
    ![Home Appliances sales chart generated directly in the chat](images/sales-data-analysis.png)
 
-   > [!NOTE]
-   > In a 30-minute bootcamp delivery, continue with the remaining steps in this subsection only if time permits.
-
 4. Select **Start a new chat** again, then enter this more complex, multi-part request:
 
    ```
