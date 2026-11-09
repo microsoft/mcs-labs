@@ -230,7 +230,7 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
 #### Add the RFP Response skill
 
 1. Download the skill package:
-    [rfp-response.zip](https://github.com/Dewain27/AgentDudeSamples/blob/main/samples/RFP%20Skill/packages/rfp-response.zip)
+    [rfp-response.zip](https://github.com/Dewain27/AgentDudeSamples/raw/refs/heads/main/samples/RFP%20Skill/packages/rfp-response.zip)
 
     The package contains a `SKILL.md` plus the reference material it draws on - an answer library,
     offering catalogs, past-performance and pricing references, and worked examples of RFP requests
@@ -294,7 +294,7 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
     **New chat**, **History**, and **Debug mode** (on by default, which keeps the reasoning trace visible).
 
 1. Download the sample solicitation:
-    [01-westbrook-permitting-portal.md](https://github.com/Dewain27/AgentDudeSamples/blob/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md)
+    [01-westbrook-permitting-portal.md](https://github.com/Dewain27/AgentDudeSamples/raw/refs/heads/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md)
     - a City of Westbrook RFP for an online permitting and licensing portal.
 
     > [!NOTE]

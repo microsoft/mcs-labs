@@ -96,7 +96,7 @@ mission_lab:
       outcome: "The rfp-response Skill attached, with its description and answer library inspected."
       steps:
         - title: "Download the sample Skill"
-          instruction: "Download [rfp-response.zip](https://github.com/Dewain27/AgentDudeSamples/blob/main/samples/RFP%20Skill/packages/rfp-response.zip). It contains `SKILL.md`, an answer library, offering catalogs, past-performance and pricing references, and worked RFP examples."
+          instruction: "Download [rfp-response.zip](https://github.com/Dewain27/AgentDudeSamples/raw/refs/heads/main/samples/RFP%20Skill/packages/rfp-response.zip). It contains `SKILL.md`, an answer library, offering catalogs, past-performance and pricing references, and worked RFP examples."
           notice: "The references describe fictional **Aventra Software Group**, so Aventra appears in the output despite the instructions saying “our organization.” Replace these files with approved company material in a real deployment."
         - title: "Upload and wait for the save"
           instruction: "In **Build → Skills**, select **+** (**Add skill**) → **Upload a skill**. Select the upload area and choose `rfp-response.zip`. Wait for **Saving skill...** to finish; the dialog closes. Confirm **rfp-response** appears above Work IQ."
@@ -142,7 +142,7 @@ mission_lab:
       outcome: "A source-grounded proposal, a visible Skill-load trace, and a list of claims needing human review."
       steps:
         - title: "Attach the solicitation"
-          instruction: "Select **Preview**. Notice the credits header, **New chat**, **History**, and **Debug mode** (on by default). Download [01-westbrook-permitting-portal.md](https://github.com/Dewain27/AgentDudeSamples/blob/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md). Select **+** (**Upload images and files**) beside the composer and attach this City of Westbrook permitting-portal RFP."
+          instruction: "Select **Preview**. Notice the credits header, **New chat**, **History**, and **Debug mode** (on by default). Download [01-westbrook-permitting-portal.md](https://github.com/Dewain27/AgentDudeSamples/raw/refs/heads/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md). Select **+** (**Upload images and files**) beside the composer and attach this City of Westbrook permitting-portal RFP."
           notice: "The sample's fixed submission date has passed. A deadline warning is careful behavior, not a failed run. "
         - title: "Request the proposal"
           instruction: "Send the prompt in **Preview chat** with the RFP attached. Do not tell the agent which Skill to use."
@@ -549,7 +549,7 @@ Ask a clarifying question when the request is ambiguous. Keep answers concise un
 
 **Outcome:** The rfp-response Skill attached, with its description and answer library inspected.
 
-1. Download [rfp-response.zip](https://github.com/Dewain27/AgentDudeSamples/blob/main/samples/RFP%20Skill/packages/rfp-response.zip). It contains `SKILL.md`, an answer library, offering catalogs, past-performance and pricing references, and worked RFP examples.
+1. Download [rfp-response.zip](https://github.com/Dewain27/AgentDudeSamples/raw/refs/heads/main/samples/RFP%20Skill/packages/rfp-response.zip). It contains `SKILL.md`, an answer library, offering catalogs, past-performance and pricing references, and worked RFP examples.
 2. Select **Build → Skills → +** (**Add skill**) → **Upload a skill**. Select the upload area and choose `rfp-response.zip`. Wait for **Saving skill...**; the dialog closes. Confirm **rfp-response** appears above Work IQ.
 
 The package describes fictional **Aventra Software Group**, so Aventra appears in output despite the instructions saying “our organization.” Replace those references with approved company material for real deployment. Uploads accept `SKILL.md` or a ZIP containing it, with YAML **name** and **description** fields. **Create from blank** is a separate authoring option.
@@ -580,7 +580,7 @@ Uploading gives the agent a permanent ID and makes **Evaluate** and **Monitor** 
 **Outcome:** A source-grounded proposal, a visible Skill-load trace, and claims identified for human review.
 
 1. Select **Preview**. Notice the credits header, **New chat**, **History**, and **Debug mode** (on by default).
-2. Download [01-westbrook-permitting-portal.md](https://github.com/Dewain27/AgentDudeSamples/blob/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md), a City of Westbrook permitting-portal RFP.
+2. Download [01-westbrook-permitting-portal.md](https://github.com/Dewain27/AgentDudeSamples/raw/refs/heads/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md), a City of Westbrook permitting-portal RFP.
 3. Select **+** (**Upload images and files**) beside the Preview composer and attach the RFP. Send:
 
 ```text
