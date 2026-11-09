@@ -755,12 +755,24 @@ details.lab-setup, details.lab-validation {
   }
 }
 
-// Share the existing event-catalogue badge with homepage cards. The compound
-// selector keeps the homepage's base pill colours from overriding this status.
+// Keep retirement status prominent on every surface, including when homepage
+// pill styles load later. Theme tokens preserve contrast in dark/high-contrast.
 .journey-pill.ws-idx-pill-deprecated,
-.ws-idx-pill-deprecated {
-  background: #a32020;
-  color: #fff;
+.ws-idx-pill.ws-idx-pill-deprecated,
+.event-status-badge {
+  background: var(--color-danger);
+  color: var(--color-on-danger);
+  border: 1px solid var(--color-danger-border);
+  font-weight: 700;
+}
+
+.event-status-badge {
+  display: inline-block;
+  font-size: 0.68em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 0.3em 0.7em;
+  border-radius: 3px;
 }
 
 // ---------------------------------------------------------------------------

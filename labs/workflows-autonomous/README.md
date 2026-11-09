@@ -1,6 +1,6 @@
 # Workflows
 
-Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
 One incoming email. A verified, human-approved action. See how a workflow routes incoming email and pauses for your approval before sending an AI-drafted reply.
 

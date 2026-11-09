@@ -364,7 +364,7 @@ mission_lab:
 
 # Apps on Microsoft Copilot Managed Runtime
 
-Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
 Build **My Bootcamp Lab App** from the live published agenda, prepare your own OneDrive CSV, then verify the app's read/save/reload behavior. This is a new app, not an HTML import or Copilot Code migration. Completing the earlier lab is not required. Keep everything in preview.
 

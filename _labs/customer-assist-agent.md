@@ -525,7 +525,7 @@ mission_lab:
 ---
 # Customer Conversation Harness
 
-Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
 Build a Zava Coffee concierge, connect a cancellation specialist, and try the conversation in chat and voice.
 

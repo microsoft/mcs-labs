@@ -79,6 +79,8 @@ Use the same three settings for an unlisted workshop; both internal and external
 
 For an older event that should remain discoverable, use `deprecated: true` and `superseded_by: <replacement-event-id>` instead of `unlisted`. The homepage and Events index show a Deprecated badge, and the event header links to its successor while retaining the agenda and URL. Set the optional `deprecated_label` to override the badge text for that event only (for example, `deprecated_label: "ARCHIVED"` on the classic Architecture Bootcamp); other events keep the default Deprecated label. Remove `search: false` and `sitemap: false` too when restoring normal discovery.
 
+Retirement badges share red semantic theme tokens across event headers and listings. A display-name change need not change an event ID, agenda filename, or URL: Copilot & Agents Bootcamp keeps `architecture-bootcamp`, while the archived Architecture Bootcamp keeps `bootcamp-latest`.
+
 A preview event may also list existing, advertised labs so reviewers can compare formats with Previous and Next. Those labs stay unchanged for everyone else: the event-nav manifest emits an unlisted event only on unlisted pages and on the pages its agenda (or `labs:`) lists, and its rail appears only when the URL carries `?event=<preview-id>`, which the rail's own links pass along but session storage never remembers.
 
 An unlisted page still gets a per-item feed document (`feed/items/<collection>/<slug>.json`), because the deployed site is built from those documents. No manifest or bundle links to it, so feed subscribers never discover it, but the file is reachable by direct URL.
