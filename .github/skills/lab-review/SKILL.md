@@ -5,8 +5,8 @@ description: Review an MCS Labs hands-on lab (classic README/_labs format or the
 
 # Review a lab
 
-Review is read-only. It ends with a report, not edits. Start with the deterministic
-audit, then add the judgment no script can make.
+Review is read-only. It ends with a report, not edits. Set the scope and exclusions
+first, then use the deterministic checks allowed by that scope and add human judgment.
 
 ## 1. Pick the scope
 
@@ -50,20 +50,26 @@ Work through `references/review-rubric.md`. In particular:
    Historical mentions ("formerly …") are allowed.
 3. **Learning design.** Score the lab with `references/learning-design.md`: outcome
    first, action within the first screen, verbs first, one idea per step, prompts
-   copyable, reveal after the experience, checks that target misconceptions.
+   copyable, reveal after the experience, checks that target misconceptions. Apply its
+   shared authoring rules too: creator order, trailing optional extensions, prepared-account
+   setup, contextual cleanup and relevant images must not depend on which skill ran.
 4. **Timing.** Compare `duration`, the Lab Details row, use-case or mission minutes and
    every agenda slot that lists the lab (`agenda-usage`). A 45-minute lab in a 30-minute
    slot is a delivery risk even if the files agree.
 5. **Accessibility.** Alt text describes the state shown, not "screenshot". Link text is
    meaningful. No instruction depends on color alone.
 6. **Missions labs.** Prompts verbatim across front matter, `_labs` body and README;
-   reveals explain *why*; one correct option per check; optional missions marked; cleanup
-   stops anything recurring the lab created. The main `instruction` is independently
-   actionable; `help` is supplementary regardless of renderer default. Verify guidance in
+   reveals explain *why*; one correct option per check; only trailing extensions optional.
+   Omit attendee cleanup chores for organizer-disposed environments; keep necessary
+   own-tenant cleanup expandable and runner cleanup in the run log. The main `instruction`
+   is independently actionable; `help` is supplementary regardless of renderer default. Verify guidance in
    the supported rendered field, open collapsed help when checking its contents, and
    inspect the actual built page. Nothing in the lab contradicts the layout's
    note that checkmarks, answers and the reflection stay in the browser until the learner
    saves a PDF copy.
+   Check prompt occurrences in order, including duplicates, sample inputs and
+   expected-output fences. Check that the `mission-` filename has a pinned canonical
+   `slug` and `permalink`, without changing the README folder or public URL.
 7. **System of record.** When learners check results in a business app (a CRM, for
    example), the prerequisites and Lab Details link it and say what to check there.
 

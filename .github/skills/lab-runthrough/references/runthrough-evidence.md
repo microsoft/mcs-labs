@@ -22,6 +22,20 @@ skill accompanied by a verification warning is not a verified or loaded plugin. 
 existing instructions at a user's request is not a fresh pass. If feedback or a manager
 handoff is absent, mark the learning/backup route untested rather than inferring success.
 
+## Reuse evidence without inventing coverage
+
+For another event or format, compare the actual scenario, ordered instructions and
+prompts, assets, prerequisites and expected outcomes. A matching title is not enough.
+Reuse evidence only for identical routes; record the source lab, commit/date, tested
+version and limitations. Differences need targeted checks, not another unconditional
+"passed" verdict. A classic copy receiving the same correction has not thereby received
+a fresh classic run.
+
+A fresh-account run establishes a new baseline; keep earlier illustrations and earlier
+passes labelled separately. Excluded artifacts or capabilities remain untested even if
+the agent claims to have produced them. For example, a no-presentation scope does not
+permit opening a generated deck simply to claim that its lab passed.
+
 ## Verify outcomes at their source
 
 - Read cited source documents and inspect generated files; do not rely only on a chat
@@ -44,6 +58,10 @@ handoff is absent, mark the learning/backup route untested rather than inferring
 - Verify positive and rejected paths separately: the executed branch and the persisted
   mailbox/record effect must agree. A safe rejection is not the positive outcome. Check
   suggested recovery against the same constraints; it must not reintroduce a refused action.
+- If refusal is the stated boundary test (for example a review-only agent without write
+  tools), the refusal is the expected result, not a broken integration. A reused Skill
+  does not add authenticated tools. Do not enable sending or writes to force that test
+  to "succeed", or generalize an intentionally limited agent into a product limitation.
 - For agent integration, distinguish discovery/connection from runtime invocation and
   the returned business result. Transport success can still contain `needs_information`.
   A "Used skill" label and correct fixture answer do not prove external reference-file
@@ -79,7 +97,9 @@ reduced motion; narrow-screen overflow; persistence, undo and rapid saves; and e
 recovery or rollback when relevant. A DOM accessibility check does not prove what a
 screen-reader user hears.
 
-Keep supplied prompts unchanged. If a repair is permitted, bound it to the same session,
+Keep supplied prompts unchanged. Record diagnostic retries and authorized repair prompts
+separately from the original run; do not silently replace the published exercise with a
+successful repair. If a repair is permitted, bound it to the same session,
 republish and test the actual published version. Embedded Preview and the deployed app can
 differ; publication alone may leave a stale app, where the user must select **New version
 available** and **Refresh**. State which version and routes were actually tested.
@@ -95,3 +115,7 @@ Capture each attempt's reply, settled tool inputs/outputs and independent check 
 starting the next turn: virtualized traces can move or disappear. Use distinct evidence
 files per attempt, retaining failures alongside retries rather than overwriting them.
 Keep instructor/service provenance separate from actions the learner must perform.
+For each blocker, name the affected route, observed symptom, evidence and next action for
+the organizer, lab creator or product owner. Distinguish provisioning defects from
+instruction fixes; a workaround available only to the runner does not become an attendee
+prerequisite.

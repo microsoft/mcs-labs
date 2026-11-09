@@ -37,8 +37,8 @@ delivery; **warn** misleads learners or will break soon; **info** is context.
 | `details-mismatch` | warn | The Lab Details table disagrees with front matter `duration` or `difficulty`. | Decide which is true (check the agendas), then align both copies and front matter. |
 | `term-retired` | warn | A retired product name from `scripts/lab-audit-terms.json`. Mentions such as "formerly …" are ignored. | Use the replacement, after checking that the step itself still applies. |
 | `size-words` | info | Classic lab whose reading time exceeds half its duration. | Trim explanations, move reference material to links, or consider the missions format for a new copy. |
-| `image-orphan` | info | Images in `labs/<slug>/images/` that nothing references. | Delete them in a cleanup PR after checking other labs and modules do not use them. |
-| `image-shared` | info | The lab uses images from another lab's folder. | Recapturing them changes the other lab too. |
+| `image-orphan` | info | Images in `labs/<slug>/images/` that nothing references. | Compare with the baseline. Delete only newly orphaned assets introduced by this change after checking references within the allowed scope; leave unrelated or shared assets alone. If references cannot be checked, retain the file. |
+| `image-shared` | info | The lab uses images from another lab's folder. | Do not overwrite a shared image for one lab's refresh. Save the replacement in the target lab's folder and update its copies, unless changing all consumers is explicitly in scope. |
 
 ## Missions format
 
@@ -47,7 +47,7 @@ All are errors unless noted.
 | Code | Meaning | Fix |
 | --- | --- | --- |
 | `missions-contract` | A required `mission_lab` key is missing, an id is not kebab-case or is duplicated, optional missions come before core ones, a reveal `flow` has fewer than two items, or a check does not have exactly one `correct: true`. Missing `sources` is a warn. | Follow "Authoring a guided mission lab" in `docs/NEW_LAB_CHECKLIST.md`. |
-| `missions-minutes` | Core mission minutes do not sum to `duration`. | Rebalance minutes, or mark extensions `optional: true`. |
+| `missions-minutes` | Core mission minutes do not sum to `duration`. | Keep the approved duration and creator order. Rebalance pacing estimates or mark trailing extensions optional; do not move earlier exercises or silently change the advertised time. |
 | `missions-prompt` | A front matter prompt is missing, different or out of order in a body's `text` fences. | Copy the front matter prompt into both bodies verbatim. Use `|-` for multiline prompts. |
 | `missions-image` | A screenshot lacks `title`, lives outside `/labs/<slug>/images/`, does not exist, has the wrong declared size, has `src_dark` equal to `src` (path or bytes), or is not referenced in a body; or the hero has `src_dark`. | Recapture, fix the dimensions from the file, or add the `<picture>` line to both bodies. |
 | `missions-test` (warn) | No `scripts/*.test.js` mentions the lab. | Add a contract test and update the missions allowlist in `scripts/lab-missions.test.js`. |

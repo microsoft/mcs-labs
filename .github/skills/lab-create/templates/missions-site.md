@@ -24,7 +24,7 @@ mission_lab:
   headline_emphasis: "%%HEADLINE_END%%"
   promise: "%%ONE_SENTENCE_PROMISE: how many missions, what the learner discovers.%%"
   hero_image:
-    # Theme-neutral content (a slide, a report), not dark product chrome. No src_dark.
+    # Show the useful result: theme-neutral content or a content-focused light capture. No src_dark.
     src: /labs/%%SLUG%%/images/%%HERO%%.webp
     alt: "%%HERO_ALT%%"
     width: %%HERO_WIDTH%%
@@ -39,8 +39,9 @@ mission_lab:
     - "For an event, use the provided or pre-provisioned account; sign in when prompted and ask the organizer if anything is missing."
     # TEMPLATE NOTE (delete): keep the next line when learners check results in a business app (system of record); otherwise delete it.
     - "In another tab, open [%%SYSTEM_OF_RECORD%%](%%SYSTEM_OF_RECORD_URL%%), the %%KIND_OF_APP%% in this scenario. %%WHAT_IT_IS_IN_ONE_SENTENCE%% Use it to %%WHAT_TO_CHECK_THERE%%."
-  pacing: "Plan %%DURATION%% minutes for %%CORE_MISSION_VERBS_WITH_ARROWS%%. %%OPTIONAL_MISSIONS%% are optional extensions. These are working budgets, not guaranteed run times."
+  pacing: "Plan %%DURATION%% minutes for %%CORE_MISSION_VERBS_WITH_ARROWS%%. %%OPTIONAL_MISSIONS%% are optional extensions."
   missions:
+    # TEMPLATE NOTE (delete): preserve creator order; required exercises first, optional extensions last.
     - id: %%MISSION_1_ID%%
       verb: %%MISSION_1_VERB%%
       title: "%%MISSION_1_TITLE%%"
@@ -113,7 +114,7 @@ mission_lab:
         text: "%%ONE_LINE_TAKEAWAY%%"
     # The page stores the learner's answer only in their browser and offers Save a PDF copy.
     reflection: "%%QUESTION_THAT_TRANSFERS_THE_SKILL_TO_THEIR_WORK%%"
-    cleanup: "%%HOW_TO_STOP_ANYTHING_RECURRING_THE_LAB_CREATED, or delete this key%%"
+    # TEMPLATE NOTE (delete): no cleanup chores for organizer-disposed environments. Necessary own-tenant cleanup belongs in self_setup.
   sources:
     - title: %%LEARN_PAGE_TITLE%%
       url: %%LEARN_PAGE_URL%%
@@ -129,14 +130,23 @@ mission_lab:
 | --- | --- | --- | --- |
 | %%LEVEL%% | %%PERSONA%% | %%DURATION%% minutes | %%FINISH_LINE%% |
 
-For an event, use the provided or pre-provisioned account and sign in when prompted; ask the organizer if anything is missing. Use a separate browser profile or private window; do not use a personal or production account.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-In your own tenant only: %%MINIMUM_REQUIRED_TENANT_SETUP%%
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+%%INDEPENDENT_TENANT_SETUP_ONLY%%
+
+</details>
+
+Sign in with the provided account when prompted.
+
+<!-- TEMPLATE NOTE (delete): no test-run diary, screenshot provenance or repeated tenant warnings in learner copy. Keep maintainer evidence in run logs and PRs. -->
 
 <!-- TEMPLATE NOTE (delete): keep the next paragraph when learners check results in a business app; otherwise delete it. Mirror it in the README. -->
 Keep [%%SYSTEM_OF_RECORD%%](%%SYSTEM_OF_RECORD_URL%%) open in another tab. It is the %%KIND_OF_APP%% in this scenario: %%WHAT_IT_IS%%. Use it to %%WHAT_TO_CHECK_THERE%%.
 
-Plan **%%DURATION%% minutes for the core missions**. %%OPTIONAL_MISSIONS%% are **optional extensions**. These are working budgets, not guaranteed run times.
+Plan **%%DURATION%% minutes for the core missions**. %%OPTIONAL_MISSIONS%% are **optional extensions**.
 
 ## Table of Contents
 

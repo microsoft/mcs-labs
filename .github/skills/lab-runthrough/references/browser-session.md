@@ -6,6 +6,10 @@ connects, does one thing and disconnects, so the browser and the signed-in sessi
 between commands. It uses the `puppeteer` package that `npm ci` installs for pa11y-ci, and
 puppeteer's Chrome for Testing build for headless runs.
 
+Use the browser/mode the person authorized. A request for visible desktop Edge is not
+permission to fall back to headless Chrome or the app's embedded browser. Keep an
+isolated test profile; if the requested combination cannot work, ask before switching.
+
 ## Commands
 
 Run from the repository root:
@@ -181,6 +185,14 @@ const cap = require('./.github/skills/lab-runthrough/scripts/capture.cjs');
    baseline and remove only images made orphan by this branch, never untouched/shared
    images. Then copy the verified dimensions into front matter.
 
+Choose the subject before capturing: outcome-focused hero, one relevant image per
+**Show me**, and the actual supplied reference rather than its upload thumbnail. Follow
+`../../lab-review/references/learning-design.md`. Check caption versus visible selection,
+Preview versus published state, and full-size links with the site's theme JavaScript
+loaded. Do not replay a write or disconnect a healthy connection merely to stage an image;
+prefer the existing connected state or completed action. Any explicitly authorized
+connection change must be restored afterward.
+
 ### High-resolution capture checklist
 
 - Aim for at least **2 native image pixels per displayed CSS pixel**. An image displayed
@@ -277,8 +289,8 @@ Seen on a managed Windows device in November 2026.
   Resolve a typed recipient with **Check names** if it remains plain text, verify the
   resolved address, and dismiss overlays before selecting **Send**.
 - File pickers: open the **+** or attach menu first, then `upload --click "<item>"`.
-- `pages` lists full URLs, which can carry the tenant id (sometimes base64-encoded).
-  Keep them out of run logs and PRs.
+- `pages` lists origins, not full URLs. Custom inspection can still expose tenant IDs or
+  signed URLs; keep those out of run logs and PRs.
 - Opening a lab locally requires the `/mcs-labs/` baseurl and event-context query where
   applicable; verify both in generated HTML, not only in Markdown source.
 - The missions renderer reads `mission_lab` front matter; a helpful sentence added only
@@ -317,8 +329,8 @@ when a run-through finds something new, and date it.
   load (`sso_reload=true`). `login` waits for it; if you signed in by hand, sign in again.
 - Copilot Studio shows a one-time **Welcome from your admin** dialog to a new tenant user:
   tick **I have read and agree to the Terms of use**, then **Close**. Next comes a **Find
-  your environments here** bubble: **Got it**. Labs should mention both in their first
-  sign-in step.
+  your environments here** bubble: **Got it**. Handle these during account onboarding;
+  include guidance only where a learner actually needs it, not in every lab.
 - Copilot Studio follows the system theme by default, so `pair` works without changing a
   setting.
 - The first agent **Save** can finish provisioning and return the page to **Build**.
@@ -340,7 +352,7 @@ when a run-through finds something new, and date it.
 | `Expected the prompt editor in one frame` | The editor is in a side panel or there are two: click it and use `typeat`. |
 | Exit code 3, `Sign-in needs a person` | MFA, password change or locked account: finish it in a windowed run, or ask the person. |
 | Exit code 4, `Wrong account` | Forbidden page text matched; this alone does not establish the authenticated identity. Stop and have a person verify the sign-in before continuing. Never weaken the guard to retry. |
-| `edge://force-signin` or Edge exits while headless | Drop `--browser edge`; headless uses Chrome for Testing. |
+| `edge://force-signin` or Edge exits while headless | Use windowed Edge when Edge is required. Only use headless Chrome for Testing if that mode/browser is authorized. |
 | `Still on the sign-in page` | Run `text` to read the error (wrong password, blocked account). |
 | `The prompt editor is not empty` | Clear the editor or start a new chat; the script never appends to a draft. |
 | `Light and dark captures are identical` | Set the product theme to System, or use `shot` for a theme-neutral image. |
