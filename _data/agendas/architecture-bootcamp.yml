@@ -308,18 +308,18 @@ schedule:
   - type: module
     slug: agent-identity
     label: "Module 16"
-    title: "Agent identity"
+    title: "Agent Account"
     time: "14:45"
-    duration: 15
+    duration: 30
 
   - type: module
     slug: copilot-agent-kit
     label: "Module 17"
     title: "Copilot Agent Kit"
-    time: "15:00"
+    time: "15:15"
     duration: 30
 
   - type: break
     title: "General Q&A"
-    time: "15:30"
-    duration: 30
+    time: "15:45"
+    duration: 15

@@ -1,8 +1,8 @@
 ---
 layout: module
-title: "Agent identity"
+title: "Agent Account"
 order: 3140
-duration: 15
+duration: 30
 difficulty: 200
 section: intermediate_modules
 description: "Understand agent identities, authentication, and access in Microsoft Copilot Studio. Distinguish the agent's identity from the user or connection used to access a resource."
