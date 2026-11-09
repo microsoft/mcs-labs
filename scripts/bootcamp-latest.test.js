@@ -139,10 +139,12 @@ test('Bootcamp Latest deck numbering and all local presentation references resol
 test('Bootcamp Latest ends with Copilot Agent Kit and Q&A by 16:00', () => {
   const agenda = readAgenda();
   assert.equal(agenda.schedule.filter((item) => item.type === 'module').length, 17);
-  assert.deepEqual(agenda.schedule.slice(-2), [
+  assert.deepEqual(agenda.schedule.slice(-3), [
+    { type: 'module', slug: 'agent-identity', label: 'Module 16',
+      title: 'Agent Account', time: '14:45', duration: 30 },
     { type: 'module', slug: 'copilot-agent-kit', label: 'Module 17',
-      title: 'Copilot Agent Kit', time: '15:00', duration: 30 },
-    { type: 'break', title: 'General Q&A', time: '15:30', duration: 30 },
+      title: 'Copilot Agent Kit', time: '15:15', duration: 30 },
+    { type: 'break', title: 'General Q&A', time: '15:45', duration: 15 },
   ]);
   const module = readDocument('_modules', 'copilot-agent-kit');
   assert.equal(module.data.duration, 30);
