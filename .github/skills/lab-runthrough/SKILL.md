@@ -10,6 +10,13 @@ as an attendee would, write down what really happens, and leave the tenant as yo
 
 ## Safety rules
 
+These are rules for the automated runner, not steps to paste into a learner's lab.
+Keep run evidence, coverage limits, credit totals, screenshot provenance and
+account-specific troubleshooting in the run log and PR. Do not turn a runner's setup
+problem into a required attendee step or repeat warnings supplied by the training tenant.
+Hand off only necessary learner-facing corrections; independent-tenant setup belongs
+in the existing expandable setup section.
+
 - **Training or demo tenants only.** Never use a customer or production tenant, or your own
   work account, unless the owner explicitly says so.
 - **Credentials.** Either the person signs in themselves in the launched window, or you

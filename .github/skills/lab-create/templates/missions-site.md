@@ -30,10 +30,11 @@ mission_lab:
     caption: "%%HERO_CAPTION: the finish line, in one sentence.%%"
   scenario: |
     %%SCENARIO: who the learner is and what they must deliver, in two or three sentences.%%
+  # TEMPLATE NOTE (delete): prepared accounts skip this expandable setup. Do not add runner checks or tenant warnings to learner steps. Test provenance belongs in logs/PRs, not lab.validation.
+  self_setup: |
+    %%INDEPENDENT_TENANT_SETUP_ONLY%%
   prerequisites:
     - "For an event, use the provided or pre-provisioned account; sign in when prompted and ask the organizer if anything is missing."
-    - "Use a separate browser profile or private window. Do not use a personal or production account."
-    - "In your own tenant only: %%MINIMUM_REQUIRED_TENANT_SETUP%%"
     # TEMPLATE NOTE (delete): keep the next line when learners check results in a business app (system of record); otherwise delete it.
     - "In another tab, open [%%SYSTEM_OF_RECORD%%](%%SYSTEM_OF_RECORD_URL%%), the %%KIND_OF_APP%% in this scenario. %%WHAT_IT_IS_IN_ONE_SENTENCE%% Use it to %%WHAT_TO_CHECK_THERE%%."
   pacing: "Plan %%DURATION%% minutes for %%CORE_MISSION_VERBS_WITH_ARROWS%%. %%OPTIONAL_MISSIONS%% are optional extensions. These are working budgets, not guaranteed run times."

@@ -380,8 +380,8 @@ for (const [classic, modern, order] of bootcampLabs) {
     assert.ok(content.self_setup?.trim(), 'The shared renderer needs own-tenant setup, separate from the scenario');
     assert.doesNotMatch(JSON.stringify([content.scenario, content.prerequisites]), /Skip tenant|Prerequisites for your own tenant|Own-tenant setup|Running (?:this lab )?in your own tenant/i,
       'Scenario and readiness must not repeat the provisioning wall of text');
-    assert.doesNotMatch(content.scenario, /\*\*(?:Validation|Evidence|Verified) boundary:/,
-      'Historical test notes belong in the optional validation disclosure');
+    assert.equal(content.validation, undefined, 'Historical test notes belong in maintainer logs and PRs, not labs');
+    assert.doesNotMatch(page.content, /<summary>What was tested<\/summary>/);
     assert.match(page.content, eventSetupNotice);
     assert.match(original.content, eventSetupNotice, 'The classic lab needs the same setup distinction');
     for (const copy of [page.content, github]) {

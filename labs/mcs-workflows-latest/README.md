@@ -124,7 +124,7 @@ In this lab, you'll build several autonomous Workflows that act on event-driven 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
 | 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 15 min |
-| 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Verify connections and publish a pre-built multi-branch classification workflow | 8 min |
+| 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Explore and publish a pre-built multi-branch classification workflow | 8 min |
 | 3 | [Use M365 Copilot and Add a Human-in-the-Loop](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: Copilot drafts a response, human approves, workflow replies | 7 min |
 | EC | [Extra Credit: Build an Inline Agent for Inventory Management](#-extra-credit-build-an-inline-agent-for-inventory-management) | Add an MCP-powered inline agent that checks warehouse stock and creates Dataverse tasks (Optional) | ~15 min |
 | EC | [Extra Credit: Call a Price Quote Specialist Agent from a Workflow](#-extra-credit-call-a-price-quote-specialist-agent-from-a-workflow) | Wire a published agent into a workflow branch to generate and send price quotes (Optional) | ~10 min |
@@ -135,10 +135,7 @@ Use Cases #1–#3 total 30 minutes (15 + 8 + 7 minutes). Both extra-credit exerc
 
 ## 🛠️ Instructions by Use Case
 
-> [!WARNING]
-> **Use only your assigned training artifacts and account.** Confirm which workflows belong to you before editing or publishing; do not modify another attendee's workflow or connection. Send test emails and approval requests only to your signed-in lab account. Check every reviewer and recipient field before enabling a workflow; keep any message intended for someone else as a draft. Calendar blocks are for your own calendar, without attendees. These tests can consume Copilot Credits.
->
-> Stop each workflow when its tests are finished, and always complete [Clean Up](#-clean-up) before leaving.
+Complete [Clean Up](#clean-up) when you finish the exercises.
 
 ---
 
@@ -314,45 +311,33 @@ Configure and publish a pre-built **Order Management Workflow** that classifies 
 
 In this section, you'll open the workflow to verify its connections, explore the email classification categories, publish, and verify everything works by sending a test email that triggers the "Other" classification path.
 
-**Scenario:** Your environment includes a pre-built Order Management Workflow that automatically classifies incoming emails with "Order Management" in the subject. It routes emails into one of four categories — **Quote Request**, **Supplier Delay**, **Customer Inquiry**, or **Other** — and takes different automated actions for each. Before the workflow can run, you need to verify its connections and publish it.
+**Scenario:** Your environment includes a pre-built Order Management Workflow that automatically classifies incoming emails with "Order Management" in the subject. It routes emails into one of four categories — **Quote Request**, **Supplier Delay**, **Customer Inquiry**, or **Other** — and takes different automated actions for each. Before the workflow can run, you need to explore its branches and publish it.
 
 ### Objective
 
-Complete the setup of the **Order Management Workflow**: verify its connections, explore the classification categories, publish, and validate end-to-end by sending a test email through the "Other" path.
+Complete the setup of the **Order Management Workflow**: explore the classification categories, publish, and validate end-to-end by sending a test email through the "Other" path.
 
 > [!IMPORTANT]
-> This use case is the **foundation for all subsequent use cases** in this module. The connections and publishing you complete here are required for the Customer Inquiry, Quote Request, and Supplier Delay paths covered later. Take extra care during setup — if a connection is missed, later use cases will fail silently or with hard-to-diagnose errors.
+> This use case is the **foundation for all subsequent use cases** in this module. You will reuse this workflow for the Customer Inquiry, Quote Request, and Supplier Delay paths.
 
 ---
 
 ### Step-by-step instructions
 
-#### Open the workflow and verify its connections
+#### Open the prepared workflow
 
-> [!IMPORTANT]
-> **Verify the connections first.** The workflow must have valid node connections before it can be published or tested. They may already be configured correctly — inspect them first.
-
-1. In **Copilot Studio → Workflows**, confirm **Order Management Workflow** is assigned to you and its **Owner** is your signed-in lab account, then open **Build**. Start with that prepared workflow; do not copy by default. Inspect **Publish** without publishing. If it reports **Only the flow's owner can publish or test this flow**, stop direct testing even if the list names you as Owner. For your assigned starter only, use the designer header's **More options → Create a copy**, retain **Order Management Workflow - Copy**, and select **Create → Open workflow** if offered. Continue in the new tab and repeat all connection and dispatch checks. If ownership or assignment is uncertain, ask the proctor; never edit, copy, or take ownership of another attendee's asset.
-
-   > [!NOTE]
-   > The owner-only mismatch was reproduced in the 9 November fresh-account mission-lab run; this is a shared correction, not a full classic-lab rerun. The fallback uses the designer header, not the list row's **More actions**, which may offer only **Delete**. Leave an original that you copied disabled. References below mean the owned workflow you can author, whether prepared or copied.
+1. In **Copilot Studio → Workflows**, open **Order Management Workflow → Build**.
 
    ![The Order Management Workflow open in the canvas designer](../mcs-workflows/images/order-management-workflow-overview.png)
 
-2. Open each node on the canvas so its connection can resolve. Start with **When a new email arrives** and, under **Connection**, wait for your lab-account connection to load. Check the **Copilot** and **Human review** nodes as well; these can also resolve automatically.
-
-   Reuse healthy lab-account connections. If **Human review** needs a connection, select **Create new connection**, give it a recognizable display name such as **Human review**, leave **Authentication Type** as **Default**, and select **Create**. This connection is marked **Premium**. Complete any sign-in with your lab account; do not replace working connections.
-
 #### Open and explore the Order Management Workflow
 
-3. Select **When a new email arrives**. Keep the existing **Subject filter** token, displayed as **string**. Hover over it to inspect `string('Order Management')`: the subject must contain "Order Management".
-
-   Select **Add advanced parameter** > **From**. Enter your own signed-in lab account in the people picker and resolve the matching entry. This restricts the workflow to test messages from you, rather than other people's email. Keep this sender restriction for all subsequent tests.
+2. Select **When a new email arrives**. Keep the existing **Subject filter** token, displayed as **string**. Hover over it to inspect `string('Order Management')`: the subject must contain "Order Management".
 
    > [!IMPORTANT]
    > Keep this filter in mind when testing: every test email you send **must include "Order Management" in the subject line**, or the workflow will not trigger. This is a common source of confusion when tests "don't seem to work."
 
-4. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the classification categories. **Three** are configured explicitly in the node, and the panel notes that *a "Default" category is automatically created for inputs that don't match any category* — that automatic category is what the canvas shows as the **Other** branch. Each configured category has a name and example text that the AI model uses to determine where an incoming email should be routed:
+3. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the classification categories. **Three** are configured explicitly in the node, and the panel notes that *a "Default" category is automatically created for inputs that don't match any category* — that automatic category is what the canvas shows as the **Other** branch. Each configured category has a name and example text that the AI model uses to determine where an incoming email should be routed:
 
    - **Quote Request** — emails requesting pricing or quotes for products/services
    - **Supplier Delay** — notifications about delays from suppliers
@@ -366,7 +351,7 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 
 #### Test the classification
 
-5. Select the Classify node's **Run node** tab to test classification before sending an email. In the inputs from **When a new email arrives**, find **Body** (*The body of the message*) and paste:
+4. Select the Classify node's **Run node** tab to test classification before sending an email. In the inputs from **When a new email arrives**, find **Body** (*The body of the message*) and paste:
 
    ```
    Hi, I would like to request a quote for 500 units of Product A.
@@ -376,11 +361,11 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 
    ![Classify Run node panel with the sample Body input and Quote Request output; downstream nodes have not executed](images/classify-quote-result.webp)
 
-6. Confirm the review and reply recipients resolve only to your lab account. Select **Save** (or press **Ctrl+S**), then **Publish**. Wait for **Published**, then confirm **Enabled** on **Workflows** before sending only the intended self-addressed tests. A click or **Publishing…** is not completion.
+5. Select **Save** (or press **Ctrl+S**), then **Publish**. Wait for **Published**, then confirm **Enabled** on **Workflows**.
 
 #### Test the "Other" classification path end-to-end
 
-7. Open **Outlook** ([outlook.office.com](https://outlook.office.com)). If the first-run **Your privacy matters** notice appears, read it and select **Continue**. Compose a new email **to your lab user account**; use **Check names** to resolve the recipient if needed. Enter:
+6. Open **Outlook** ([outlook.office.com](https://outlook.office.com)). If the first-run **Your privacy matters** notice appears, read it and select **Continue**. Compose a new email **to your lab user account**; use **Check names** to resolve the recipient if needed. Enter:
 
    - **Subject:**
 
@@ -413,7 +398,7 @@ Complete the setup of the **Order Management Workflow**: verify its connections,
 
    ![The Other-path sample email in Outlook after automatic archiving](../mcs-workflows/images/test-other-email-compose.png)
 
-8. Allow time for trigger pickup and classification, then check your **Archive** folder in Outlook. Confirm that the test email was moved there and that its run succeeded in **Activity**; delivery and processing can take several minutes.
+7. Allow time for trigger pickup and classification, then check your **Archive** folder in Outlook. Confirm that the test email was moved there and that its run succeeded in **Activity**; delivery and processing can take several minutes.
 
    > [!TIP]
    > If the email doesn't appear in **Archive**, check **Activity**. If no run appears, verify the workflow is published, **Enabled**, and that the test subject includes "Order Management." Check for an existing run before sending another test.
@@ -467,7 +452,7 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 3. Select the **Human review** node and inspect its configuration carefully:
 
    - In the message, confirm the proposed reply drafted by **M365 Copilot** is inserted for the reviewer to read.
-   - Confirm delivery is **Outlook** and the reviewer is assigned to the incoming **From** value. With the trigger's sender restriction, this must resolve to your own lab account for this test.
+   - Confirm delivery is **Outlook** and the reviewer is assigned to the incoming **From** value.
    - Confirm the single **Yes/No** input is named **Approve**, with the question **Send proposed reply?**. The approver must see the proposed reply before choosing a response.
 
    <p align="center">

@@ -8,9 +8,18 @@
 | --- | --- | --- | --- |
 | %%LEVEL%% | %%PERSONA%% | %%DURATION%% minutes | %%FINISH_LINE%% |
 
-For an event, use the provided or pre-provisioned account and sign in when prompted; ask the organizer if anything is missing. Use a separate browser profile or private window; do not use a personal or production account.
+<p class="lab-setup-note">At a proctor-led event with a provided, pre-provisioned account? <strong>You're ready to start.</strong></p>
 
-In your own tenant only: %%MINIMUM_REQUIRED_TENANT_SETUP%%
+<details class="lab-setup" markdown="1">
+<summary>Using your own tenant? View setup requirements</summary>
+
+%%INDEPENDENT_TENANT_SETUP_ONLY%%
+
+</details>
+
+Sign in with the provided account when prompted.
+
+<!-- TEMPLATE NOTE (delete): no test-run diary, screenshot provenance or repeated tenant warnings in learner copy. Keep maintainer evidence in run logs and PRs. -->
 
 <!-- TEMPLATE NOTE (delete): keep the next paragraph when learners check results in a business app; otherwise delete it. Mirror it in the _labs copy. -->
 Keep [%%SYSTEM_OF_RECORD%%](%%SYSTEM_OF_RECORD_URL%%) open in another tab. It is the %%KIND_OF_APP%% in this scenario: %%WHAT_IT_IS%%. Use it to %%WHAT_TO_CHECK_THERE%%.

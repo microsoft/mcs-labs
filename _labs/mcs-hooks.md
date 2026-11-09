@@ -457,7 +457,7 @@ Run these four prompts in the **same Preview conversation** to test an exact loc
 
 1. Expand the execution trace for each answer and check:
 
-    - **Used tool: Filter SharePoint Files by Metadata** — inspect `columns.Location` and which policy is subsequently read. A run can filter the resolved country with `eq`, or list populated locations with `{"column":"Location","operator":"ispopulated"}` before selecting the matching document. The fresh-account run used the latter and then **sharepoint_get_doc**; a semantic search is not required on every turn.
+    - **Used tool: Filter SharePoint Files by Metadata** — inspect `columns.Location` and which policy is subsequently read. A run can filter the resolved country with `eq`, or list populated locations with `{"column":"Location","operator":"ispopulated"}` before selecting the matching document. The matching document can be read with **sharepoint_get_doc**; a semantic search is not required on every turn.
     - **Used tool: sharepoint_semantic_search** — its `scopeUrls` contains **only** the URL of the selected policy, so the search cannot pull text from other locations. The agent may also call **sharepoint_get_doc** to read the selected document.
     - Each fallback follows the absence of a more specific matching policy, not a guess based on document names or text.
     - The response cites the selected policy (for example *Travel Policy - 310.docx*) and reports its recorded allowance and currency without combining values from other policies.

@@ -8,78 +8,65 @@ difficulty: 300
 lab_type: local
 section: advanced_labs
 journeys: ["autonomous-ai", "developer"]
-description: "Check ownership of an Order Management workflow, test email classification, approve a grounded reply, and verify both outcomes and cleanup."
+description: "Explore an Order Management workflow, classify incoming email, and approve an AI-drafted reply."
 classes: wide
 author_profile: false
 toc: false
 mission_lab:
   headline: "One incoming email."
   headline_emphasis: "A verified, human-approved action."
-  promise: "Leave with your own disabled Order Management workflow, evidence of an archived test email, and a grounded reply that you reviewed before delivery."
+  promise: "See how a workflow routes incoming email and pauses for your approval before sending an AI-drafted reply."
   hero_image:
     src: /labs/workflows-autonomous/images/inquiry-path-succeeded.webp
     alt: "Successful Copilot, Human review, If, and Reply to email steps; Flag email and Archive email are skipped."
     width: 875
     height: 160
-    caption: "A real approved Customer Inquiry run. The diagram proves the route executed; separately check the delivered email."
+    caption: "The Customer Inquiry path drafts a reply, waits for approval, and sends it."
   scenario: |-
     Your order desk receives unrelated promotions, customer questions, supplier delays, and quote requests. A workflow classifies the message; a grounded draft and human decision protect the customer-facing reply.
 
-    This is the **Microsoft Copilot harness** workflow experience. **Standard harness** remains a separate experience; it has not been renamed. Only the former GitHub Copilot harness name changed. Keep supplied working instructions unchanged.
+    This lab uses **Workflows** in the **Microsoft Copilot harness**.
   self_setup: |-
-    Use a development/training environment with Copilot Studio **Workflows**, available Copilot Credits, Outlook, and Microsoft Copilot access. Arrange the Order Management starter and connections before starting the timer. In Mission 1, use the linked solution only if it is not already provisioned. Optional extensions need their additional assets; none is a prerequisite for the core.
-  validation: |-
-    **Verified boundary:** the 9 November 2026 fresh-account run classified the original quote sample in **Run node** on the prepared workflow. Direct publication was blocked by **Only the flow's owner can publish or test this flow**, despite the list showing the training user as Owner. A copy was therefore required for this account, not assumed necessary for every attendee. On that fallback, the run verified an archived Other email, an approved and received holding reply, and a separate rejected inquiry flagged without a reply. Optional testing verified a personal calendar block and To Do update, an actual Dataverse restock Task, and a received quote matching the supplied guides. Screenshots are retained earlier-run illustrations, not fresh direct-workflow evidence.
+    Use a development environment with Copilot Studio **Workflows**, available Copilot Credits, Outlook, and Microsoft Copilot access.
+
+    Import [LAB: Order Management Workflows](../mcs-workflows/assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip) and connect the requested services. The solution includes the Order Management Workflow and Price Quote Agent. Ensure you can edit and publish the workflow before starting.
+
+    Optional extensions also need Microsoft To Do, [Warehouse MCP](../mcs-workflows/assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip), or the SharePoint pricing guide and Dataverse account records for the Price Quote Agent.
   prerequisites:
-    - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your provided training account and select its assigned environment. Ask the proctor if an asset is missing; do not import replacements or edit another attendee's workflow."
+    - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your provided training account and select its assigned environment."
     - "Open [Outlook](https://outlook.office.com/) with the same account. Keep Studio and this lab side by side."
-    - "Use synthetic self-addressed messages only. Check ownership, sender restriction, reviewer, To, CC, and BCC before publishing; publication can start a trigger and consume Copilot Credits."
-  pacing: "30-minute core: Isolate (6) → Route (6) → Review (13) → Stop (5). Optional extensions follow: Time-block (15), Inventory (15), Specialist (10). These are working budgets, not timing guarantees; trigger pickup, generation, and approvals vary. Inspect the existing run rather than sending duplicates."
+  pacing: "30-minute core: Explore (6) → Route (6) → Review (13) → Stop (5). Optional extensions: Time-block (15), Inventory (15), Specialist (10)."
   missions:
     - id: isolate
-      verb: Isolate
-      title: "Verify ownership and constrain the workflow's reach"
+      verb: Explore
+      title: "Explore the prepared workflow"
       minutes: 6
       tool: Copilot Studio · Workflows
-      brief: "Check your assigned workflow's ownership and authoring rights, then use healthy own-account connections and a self-only sender filter."
-      outcome: "An owned draft ready for a node-only classification test; other attendees' assets are unchanged."
+      brief: "Follow an incoming email from its trigger to the classification branches."
+      outcome: "You can explain what starts the workflow and how it chooses an action."
       steps:
         - title: "Open the assigned starter"
           instruction: |
-            Select **Workflows → Order Management Workflow → Build** in your assigned environment. Review and dismiss any first-visit notice or environment tour.
-
-            With a provided event account, ask the proctor if the starter is missing. For self-paced setup only, import [LAB: Order Management Workflows](../mcs-workflows/assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip) and sign in to the requested connections before continuing. This includes the starter and Price Quote Agent, not the optional SharePoint pricing data.
-        - title: "Check ownership before deciding whether a copy is needed"
+            Select **Workflows → Order Management Workflow → Build** in your assigned environment.
+        - title: "Follow the email through the workflow"
           instruction: |
-            Confirm the list's **Owner** is your signed-in training account and the workflow is assigned to you. Start with that prepared workflow; do not copy it just because a starter exists. Never edit, copy, or take ownership of another attendee's asset.
+            Open **When a new email arrives**. The **Subject filter** matches emails containing **Order Management**.
 
-            Inspect the designer's **Publish** control without publishing. If it reports **Only the flow's owner can publish or test this flow**, stop direct testing even if the list names you as Owner. This mismatch occurred in the fresh-account run. For your assigned starter only, use **More options → Create a copy**, retain **Order Management Workflow - Copy**, and select **Create → Open workflow** if offered. Continue in the new tab and repeat all connection and dispatch checks. If assignment or ownership is uncertain, ask the proctor instead.
-
-            The fallback is in the designer header, not the list row's **More actions** menu, which may offer only **Delete**. Leave an original that you copied disabled.
-        - title: "Resolve connections without replacing healthy ones"
-          instruction: |
-            Open **When a new email arrives**, **Copilot**, and **Human review** and wait for each lab-account connection to resolve. Reuse healthy connections.
-
-            Only if Human review lacks a connection, select **Create new connection**, give it a recognizable display name such as **Human review**, leave **Authentication Type: Default**, and select **Create**. This connection is marked **Premium**. Complete any sign-in with your training account, not another identity.
-        - title: "Restrict the trigger to your own messages"
-          instruction: |
-            In **When a new email arrives**, retain the **Subject filter** token displayed as **string**. Hover to inspect `string('Order Management')`; do not replace it or assume an expression-mode switch.
-
-            Select **Add advanced parameter → From**, enter your signed-in training email in the people picker, and resolve the matching entry. Every test must come from you and contain **Order Management** in its subject. Do not publish yet.
+            Follow the canvas to **Classify**, then explore the **Quote Request**, **Supplier Delay**, **Customer Inquiry**, and **Other** branches. Notice that each branch handles a different kind of email.
       reveal:
-        title: "Isolation comes before automation"
-        line: "Ownership and authoring rights choose the workspace; sender and recipient checks protect people."
-        explanation: "The subject filter selects the scenario, not the sender. Restricting From narrows the trigger to your synthetic tests. Connections determine whose mailbox and data the nodes can access."
-        flow: ["Owned workflow", "Healthy own-account connections", "Subject and sender restriction"]
+        title: "One trigger, different actions"
+        line: "The trigger starts the workflow; classification chooses the branch."
+        explanation: "The subject filter selects relevant messages. Classify uses the email content to choose what happens next."
+        flow: ["Incoming email", "Classify", "Selected branch"]
       check:
-        question: "Which setup is safe before any end-to-end test?"
+        question: "What decides which branch handles an incoming email?"
         options:
-          - text: "An owned workflow with authoring rights, retained subject token, resolved own-account From restriction, and checked recipients."
+          - text: "Classify selects a category from the email content."
             correct: true
-            feedback: "Correct. Isolation and all dispatch/reviewer checks must precede publication."
-          - text: "The original starter with only the Order Management subject filter."
+            feedback: "Correct. The trigger starts the workflow and Classify routes the message."
+          - text: "The subject filter runs every branch."
             correct: false
-            feedback: "A subject alone does not isolate senders or establish ownership and authoring rights."
+            feedback: "The filter decides which emails start the workflow, not which branch runs."
     - id: route
       verb: Route
       title: "Separate a node test from a real mailbox action"
@@ -103,12 +90,10 @@ mission_lab:
             alt: "Classify Run node panel with the original Body sample and Quote Request output."
             width: 1405
             height: 505
-            caption: "Genuine light/dark captures of the node test. No quote specialist or downstream delivery ran."
-        - title: "Check recipients before publication"
+            caption: "Run node returns the Quote Request category."
+        - title: "Publish the workflow"
           instruction: |
-            Inspect **Human review**: reviewer is incoming **From**, delivery is **Outlook**, and the proposed reply is visible. Inspect **Reply to email**: **Message Id** is from the trigger, **To** is incoming **From**, and **CC/BCC** are empty. With the sender restriction, both reviewer and recipient must resolve only to you. Leave untested branches alone.
-
-            Select **Save** (or **Ctrl+S**) then **Publish**. Wait for **Published**, then confirm **Enabled** on **Workflows** before sending a test. A click or a **Publishing…** message is not completion. If the owner-only restriction appears, use Mission 1's assigned-starter fallback and repeat the safety checks.
+            Select **Save** (or **Ctrl+S**) then **Publish**. Wait for **Published**, then return to **Workflows** and confirm **Enabled**.
         - title: "Address the Other test to yourself"
           instruction: |
             Open Outlook. If **Your privacy matters** appears, read it and select **Continue**. Compose a message to your own training account and use **Check names** if necessary. Paste this subject; do not send until the next step supplies the body.
@@ -116,7 +101,7 @@ mission_lab:
           prompt: |-
             Order Management - Congratulations! Your order desk has been selected
         - title: "Send the synthetic Other sample"
-          instruction: "Paste this body, recheck the resolved self-recipient, and **Send**. This is a deliberately irrelevant synthetic spam sample; do not follow its requests or send it to anyone else."
+          instruction: "Paste this sample promotional message and select **Send**."
           prompt_label: Outlook · Other test · Body
           prompt: |-
             Dear Order Manager,
@@ -136,7 +121,7 @@ mission_lab:
           instruction: |
             Open **Activity**, refresh, and inspect the new run. Expect **Other → Archive email** and **Succeeded**. Separately find the exact message in Outlook's **Archive**.
 
-            Trigger pickup and processing vary. If no run appears, check publication, Enabled, the sender restriction, and subject spelling. Inspect for an existing run before resending. If stopping here, disable your workflow and reload; otherwise continue to Review.
+            If no run appears, check **Enabled** and that the subject contains **Order Management**. Otherwise, continue to Review.
           screenshot:
             src: /labs/workflows-autonomous/images/other-path-succeeded.webp
             src_dark: /labs/workflows-autonomous/images/other-path-succeeded-dark.webp
@@ -144,7 +129,7 @@ mission_lab:
             alt: "Executed Other branch leading to a successful Archive email action."
             width: 420
             height: 90
-            caption: "Real run evidence, not a mailbox screenshot. The original run also had a separately verified archived email."
+            caption: "The Other branch archives the promotional email."
       reveal:
         title: "Classification is not delivery"
         line: "A node test proves routing output; an end-to-end test proves an action."
@@ -177,16 +162,14 @@ mission_lab:
           instruction: |
             In **Human review**, confirm the message includes the Copilot draft, delivery is **Outlook**, reviewer is incoming **From**, and the single **Yes/No** input is **Approve**, question **Send proposed reply?**.
 
-            In **If/Else**, confirm **Approve Equals Yes**. In **Reply to email**, confirm trigger **Message Id**, **To = From**, and empty **CC/BCC**. Yes replies; Else routes to **Flag email**. The core follows Yes; a separate fresh-account test also verified No → Flag email without a reply.
-
-            Save and publish any changes after checking the self-only restriction. If a previously disabled workflow is now **Draft**, deliberately resume through **Build → Publish**; the list switch alone may not re-enable it.
+            Follow **If/Else → Approve Equals Yes** to **Reply to email**. The Else branch leads to **Flag email** instead.
         - title: "Prepare the inquiry subject"
           instruction: "Compose a new Outlook message addressed only to your resolved training account. Paste this subject; add the body in the next step before sending."
           prompt_label: Outlook · Customer Inquiry · Subject
           prompt: |-
             Order Management - Question about iPad Air warranty and MDM
         - title: "Send the customer question to yourself"
-          instruction: "Paste this body and **Send** only after rechecking the recipient. The fictional signature is sample content, not permission to contact a real customer."
+          instruction: "Paste this body and select **Send**."
           prompt_label: Outlook · Customer Inquiry · Body
           prompt: |-
             Hi team,
@@ -203,12 +186,12 @@ mission_lab:
           instruction: |
             Open **Activity**, refresh, and select the new **Customer Inquiry** run. **Copilot** drafts first; **Human review** then waits for your response. Trigger pickup, drafting, and approval-email delivery are separate waits.
 
-            In Outlook, open **Action Needed: Review Customer Enquiry Reply**. Read the proposed response before choosing. A holding reply is valid when the mailbox lacks warranty/MDM evidence; do not approve invented product facts. The verified training run produced a grounded holding reply, not a factual warranty promise.
+            In Outlook, open **Action Needed: Review Customer Enquiry Reply** and read the proposed response. A holding reply is valid when the mailbox lacks warranty/MDM information.
 
-            If the draft is safe, choose **Yes** under **Approve** (the configured question is **Send proposed reply?**), then **Submit**. Confirm **Your response has been successfully submitted**. The tested card worked without actioning **Trust sender** or **Show content**. If the draft is unsafe, choose **No → Submit**, verify the original is flagged and **Reply to email** is skipped, and ask the proctor to inspect the draft. Rejection does not complete the approved-reply outcome.
+            Choose **Yes** under **Approve**, then **Submit** to send the reply. If it contains unsupported facts, choose **No → Submit** instead: the original email is flagged and **Reply to email** is skipped.
         - title: "Verify the reply and the completed route"
           instruction: |
-            Allow the workflow to resume. Verify the received reply in Outlook; the tested reply used subject **Your inquiry - Contoso Electronics** and opened **Dear Customer,**. Assess grounding and actual delivery, not exact generated wording or elapsed time.
+            Open the received reply in Outlook and compare it with the draft you approved.
 
             In **Activity**, confirm **Succeeded** and **Copilot → Human review → If → Reply to email** executed. **Flag email** and **Archive email** are skipped on this approved route; that is expected.
 
@@ -220,7 +203,7 @@ mission_lab:
             alt: "Successful Copilot, Human review, If, and Reply to email steps; Flag email and Archive email are skipped."
             width: 875
             height: 160
-            caption: "Retained light/dark captures of the earlier approved route, not the fresh run or its separate rejection test."
+            caption: "The approved inquiry follows the Reply to email branch."
       reveal:
         title: "Grounding and approval solve different problems"
         line: "Evidence constrains the draft; a person authorizes the send."
@@ -234,7 +217,7 @@ mission_lab:
             feedback: "Correct. Grounding matters more than a confident or specific answer."
           - text: "A specific warranty period invented to make the test look complete."
             correct: false
-            feedback: "Never approve unsupported facts. The verified run used a holding reply."
+            feedback: "A holding reply acknowledges the question without inventing an answer."
     - id: stop
       verb: Stop
       title: "Prove the trigger is off before leaving"
@@ -316,7 +299,7 @@ mission_lab:
           instruction: |
             In **Tools → +**, add **Find meeting times** and **Create event** from **Office 365 Outlook**, plus **Update to-do** from **Microsoft To-Do (Business)**. Check connector names; similarly named Eventbrite actions are not calendar tools. Reuse healthy own-account connections. Enable **Web search**.
 
-            Confirm calendar writes target only your own calendar, without attendees. **Save → Publish** and verify **Enabled** before adding the task. This test can create a real personal calendar event and consume credits.
+            Confirm calendar writes target only your own calendar, without attendees. **Save → Publish** and verify **Enabled** before adding the task.
           screenshot:
             title: the published To Do Time Block workflow
             src: /labs/workflows-autonomous/images/uc1-workflow-published.webp
@@ -343,7 +326,7 @@ mission_lab:
       check:
         question: "You finished testing To Do Time Block. Why disable it?"
         options:
-          - text: "It watches your default Tasks list, so every new task would start another run and consume credits."
+          - text: "It watches your default Tasks list, so every new task would start another run."
             correct: true
             feedback: "Correct. Stop the trigger once you have checked the calendar block and the task."
           - text: "Disabling deletes the run history you just inspected."
@@ -413,7 +396,7 @@ mission_lab:
             Set **Output → Structured output**: `sku` **Text** (the SKU named in the delay notice), `stock` **Number** (current warehouse stock for that SKU), and `risk` **Yes/No** (true if stock is zero). If offered, inspect **Request human assistance when unsure** as an ambiguity mechanism, not a substitute for tool verification.
         - title: "Prepare the supplier delay subject"
           instruction: |
-            Recheck self-only sender/reviewer/recipient restrictions, **Save → Publish**, and verify Enabled. In Outlook, address a new message only to yourself and paste this subject.
+            Select **Save → Publish** and confirm **Enabled**. In Outlook, address a new message only to yourself and paste this subject.
           prompt_label: Outlook · Supplier Delay · Subject
           prompt: |-
             Order Management - Shipment delay - LumiRead E-Reader
@@ -458,7 +441,7 @@ mission_lab:
       minutes: 10
       optional: true
       tool: Published Agent · SharePoint knowledge · Mail · Dataverse
-      brief: "Reuse the assigned specialist and prove knowledge-backed pricing and self-only delivery."
+      brief: "Use the price-quote specialist to prepare and send a quote."
       outcome: "If prerequisites work, a real quote received by your training account with traceable pricing and account lookup."
       steps:
         - title: "Inspect the assigned specialist, not another attendee's agent"
@@ -486,7 +469,7 @@ mission_lab:
           prompt: |-
             Order Management - Quote request - Adventure Works
         - title: "Send the original quote request"
-          instruction: "Paste the original fictional request and **Send** after verifying self-only recipients. Neither the sample signature nor its office location authorizes outreach elsewhere."
+          instruction: "Paste the request and select **Send**."
           prompt_label: Outlook · Quote Request · Body
           prompt: |-
             Hello Contoso team,
@@ -514,7 +497,7 @@ mission_lab:
             What are the iPad Air prices applicable to Fabrikam?
         - title: "Optionally reuse the sample email, then disable"
           instruction: |
-            This original template can invoke the sending skill. Only with self-only recipient scope verified, replace the brackets with the exact synthetic quote-test email above in Preview. Inspect whether **price-quote** loads and verify any real outcome; do not infer completion from narration.
+            This original template can invoke the sending skill. Replace the brackets with the sample quote request above in Preview. Inspect whether **price-quote** loads and verify any real outcome; do not infer completion from narration.
 
             Finish by disabling your workflow and reloading to confirm it stays off. Inspect outstanding runs; remove only your test messages/drafts when no longer needed, and retain shared agents/connections.
           prompt_label: Price Quote Agent · Preview · Customer email template
@@ -523,7 +506,7 @@ mission_lab:
       reveal:
         title: "Reuse the capability, verify the result"
         line: "Publication exposes the specialist; its knowledge and tools still need evidence."
-        explanation: "A reusable agent separates repeatable quote procedure from the workflow's routing. Its success criterion is a grounded calculation and received self-only email, not merely appearing in the selector or returning Succeeded."
+        explanation: "A reusable agent separates repeatable quote procedure from the workflow's routing. Its success criterion is a grounded calculation and received quote email, not merely appearing in the selector or returning Succeeded."
         flow: ["Published specialist → From/Body tokens", "Account + pricing knowledge → quote", "Mail action → actual received message"]
       check:
         question: "Why might the assigned Price Quote Agent be absent from the selector?"
@@ -535,19 +518,17 @@ mission_lab:
             correct: false
             feedback: "Dynamic From and Body tokens are intended; they do not replace the publication requirement."
   stuck:
-    - problem: "The event account lacks a workflow or optional asset."
-      solution: "Ask the proctor for the assigned asset. Do not import into the shared environment, edit another attendee's copy, or count a blocked extension as complete."
+    - problem: "A prepared workflow or optional asset is missing or inaccessible."
+      solution: "Ask the proctor to check the training environment."
     - problem: "No new email-triggered run appears."
-      solution: "Check Enabled/publication, the resolved From restriction, subject token, and connection identity. Inspect Activity for an existing run before resending."
+      solution: "Check Enabled and that the subject contains Order Management, then refresh Activity."
     - problem: "The inquiry appears paused."
       solution: "Inspect whether Copilot is drafting or Human review is waiting. Check reviewer/connection and Outlook; approve a safe draft with Yes then Submit. Never send duplicate tests just to bypass a waiting approval."
-    - problem: "Publish reports an owner-only restriction although the list names you as Owner."
-      solution: "This occurred on the fresh account. Do not bypass permissions. For your assigned starter only, use Mission 1's copy fallback and repeat connection/dispatch checks; otherwise ask the proctor."
     - problem: "The disabled workflow cannot be enabled from the list."
-      solution: "The reviewed workflow returned to Draft. Resume only deliberately through Build → Publish after rechecking sender and recipients, then disable/reload again after testing."
+      solution: "Open Build and select Publish to resume testing."
   finish:
     title: "A verified action is more than a green run"
-    message: "Core complete means an owned workflow with verified authoring rights, node-only classification evidence, an archived Other email, a reviewed and received inquiry reply, and a disabled workflow with settled runs. A copy is a conditional ownership-blocker fallback, not the learning goal. Optional extensions are separate; skipped or blocked work is not a pass."
+    message: "You explored email classification, archived a promotional message, and reviewed an AI-drafted reply. Optional extensions add calendar planning, inventory tasks, and a price-quote specialist."
     takeaways:
       - label: "Route"
         text: "Classify chooses a branch; its node-only test does not execute downstream actions."
@@ -561,7 +542,7 @@ mission_lab:
     cleanup: |
       Disable only workflows you enabled and reload to verify their off state. Inspect Running/Waiting tests and finish safe approvals or cancel your unfinished runs; ask the proctor if necessary. Disabling does not prove existing runs stopped.
 
-      Remove only your synthetic messages, approvals, drafts, optional calendar event/To Do task, and optional Dataverse Task when no longer needed. Preserve unused originals, other attendees' work, shared connections, MCP servers, knowledge, and agents. Leave your Draft/disabled workflow off; future testing may require Build → Publish. Rolling credit totals are not per-run cost measurements.
+      Remove only your synthetic messages, approvals, drafts, optional calendar event/To Do task, and optional Dataverse Task when no longer needed. Preserve unused originals, other attendees' work, shared connections, MCP servers, knowledge, and agents. Leave your Draft/disabled workflow off; future testing may require Build → Publish.
   sources:
     - title: "Workflows in Microsoft Copilot Studio"
       url: https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview
@@ -577,35 +558,28 @@ mission_lab:
 
 Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-One incoming email. A verified, human-approved action. Leave with your own disabled Order Management workflow, evidence of an archived test email, and a grounded reply you reviewed before delivery.
+One incoming email. A verified, human-approved action. See how a workflow routes incoming email and pauses for your approval before sending an AI-drafted reply.
 
 ![Successful Copilot, Human review, If, and Reply to email steps; Flag email and Archive email are skipped.](images/inquiry-path-succeeded.webp)
 
-*A real approved Customer Inquiry run. The diagram proves the route executed; separately check the delivered email.*
+*The Customer Inquiry path drafts a reply, waits for approval, and sends it.*
 
 ## Lab Details
 
 | Level | Persona | Duration | Finish line |
 | --- | --- | --- | --- |
-| 300 | Maker / Developer | 30 minutes core | An owned Order Management workflow, two verified mailbox outcomes, and durable disabled state |
+| 300 | Maker / Developer | 30 minutes core | Email classification, an archived message, and a reviewed reply |
 
-**Pacing:** Isolate (6) → Route (6) → Review (13) → Stop (5) = **30 minutes**. Optional extensions follow: Time-block (15), Inventory (15), Specialist (10). These are working budgets, not timing guarantees; trigger pickup, generation, and approvals vary. Inspect the existing run rather than sending duplicates.
+**Pacing:** Explore (6) → Route (6) → Review (13) → Stop (5) = **30 minutes**. Optional extensions: Time-block (15), Inventory (15), Specialist (10).
 
 **Scenario:** Your order desk receives unrelated promotions, customer questions, supplier delays, and quote requests. A workflow classifies the message; a grounded draft and human decision protect the customer-facing reply.
 
-<details class="lab-validation" markdown="1">
-<summary>What was tested</summary>
-
-**Verified boundary:** the 9 November 2026 fresh-account run classified the original quote sample in **Run node** on the prepared workflow. Direct publication was blocked by **Only the flow's owner can publish or test this flow**, despite the list showing the training user as Owner. A copy was therefore required for this account, not assumed necessary for every attendee. On that fallback, the run verified an archived Other email, an approved and received holding reply, and a separate rejected inquiry flagged without a reply. Optional testing verified a personal calendar block and To Do update, an actual Dataverse restock Task, and a received quote matching the supplied guides. Screenshots are retained earlier-run illustrations, not fresh direct-workflow evidence.
-
-</details>
-
-This is the **Microsoft Copilot harness** workflow experience. **Standard harness** remains a separate experience; it has not been renamed. Only the former GitHub Copilot harness name changed. Supplied working instructions remain unchanged. The [classic Workflows lab](../mcs-workflows-latest/) remains available.
+This lab uses **Workflows** in the **Microsoft Copilot harness**. The [classic Workflows lab](../mcs-workflows-latest/) remains available.
 
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
-- [Mission 1: Isolate](#mission-1-isolate)
+- [Mission 1: Explore](#mission-1-explore)
 - [Mission 2: Route](#mission-2-route)
 - [Mission 3: Review](#mission-3-review)
 - [Mission 4: Stop](#mission-4-stop)
@@ -623,32 +597,31 @@ This is the **Microsoft Copilot harness** workflow experience. **Standard harnes
 <details class="lab-setup" markdown="1">
 <summary>Using your own tenant? View setup requirements</summary>
 
-Use a development/training environment with Copilot Studio **Workflows**, available Copilot Credits, Outlook, and Microsoft Copilot access. Arrange the Order Management starter and connections before starting the timer. Mission 1 links the solution for self-paced import only if needed. Optional extensions require their additional assets; none is a prerequisite for the core.
+Use a development environment with Copilot Studio **Workflows**, available Copilot Credits, Outlook, and Microsoft Copilot access.
+
+Import [LAB: Order Management Workflows](../mcs-workflows/assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip) and connect the requested services. The solution includes the Order Management Workflow and Price Quote Agent. Ensure you can edit and publish the workflow before starting.
+
+Optional extensions also need Microsoft To Do, [Warehouse MCP](../mcs-workflows/assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip), or the SharePoint pricing guide and Dataverse account records for the Price Quote Agent.
 
 </details>
 
-Ask the proctor if an asset is missing. Do not import replacements or edit another attendee's workflow.
-
 - Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account and select the assigned environment.
 - Open [Outlook](https://outlook.office.com/) with the same account. Keep Studio and this lab side by side.
-- Use synthetic self-addressed messages only. Check ownership, sender restriction, reviewer, To, CC, and BCC before publishing. Publication can start a trigger and consume Copilot Credits.
 
-## Mission 1: Isolate
+## Mission 1: Explore
 
 **6 minutes · Copilot Studio / Workflows**
 
-**Outcome:** an owned draft with healthy connections and a self-only sender filter; other attendees' assets are unchanged.
+**Outcome:** you can explain what starts the workflow and how it chooses an action.
 
-1. Select **Workflows → Order Management Workflow → Build**. Review and dismiss any first-visit notice or environment tour. Event attendees ask the proctor if the starter is missing. For self-paced setup only, import [LAB: Order Management Workflows](../mcs-workflows/assets/solutions/LABOrderManagementWorkflows_1_0_0_8.zip) and sign in to requested connections. It includes the starter and Price Quote Agent, not optional SharePoint pricing data.
-2. Confirm the list's **Owner** is your signed-in training account and the workflow is assigned to you. Start with that prepared workflow; do not copy it just because a starter exists. Never edit, copy, or take ownership of another attendee's asset. Inspect **Publish** without publishing. If it reports **Only the flow's owner can publish or test this flow**, stop direct testing even if the list names you as Owner. For your assigned starter only, use the **designer header's More options → Create a copy**, retain **Order Management Workflow - Copy**, and select **Create → Open workflow** if offered. Continue in the new tab and repeat all connection and dispatch checks. The list row's **More actions** may offer only Delete. Leave an original that you copied disabled; if assignment or ownership is uncertain, ask the proctor instead.
-3. Open **When a new email arrives**, **Copilot**, and **Human review**, waiting for each lab-account connection to resolve. Reuse healthy connections. Only if Human review lacks one, select **Create new connection**, name it (for example **Human review**), retain **Authentication Type: Default**, and **Create**. It is marked **Premium**; sign in with the training account.
-4. In the trigger, retain **Subject filter → string**. Hover to inspect `string('Order Management')`; do not replace it or assume an expression-mode switch. Select **Add advanced parameter → From**, enter your training email in the people picker, and resolve it. Every test must come from you and contain **Order Management** in the subject. Do not publish yet.
+1. Select **Workflows → Order Management Workflow → Build** in your assigned environment.
+2. Open **When a new email arrives**. The **Subject filter** matches emails containing **Order Management**. Follow the canvas to **Classify**, then explore the **Quote Request**, **Supplier Delay**, **Customer Inquiry**, and **Other** branches. Notice that each branch handles a different kind of email.
 
-**Reveal — Isolation comes before automation:** Ownership and authoring rights choose the workspace; sender and recipient checks protect people. The subject selects the scenario, not the sender. Connections determine whose mailbox/data the nodes access. **Owned workflow → own-account connections → subject and sender restriction.**
+**Reveal — One trigger, different actions:** The trigger starts the workflow; classification chooses the branch. The subject filter selects relevant messages. Classify uses the email content to choose what happens next. **Incoming email → Classify → selected branch.**
 
-**Knowledge check:** Which setup is safe before an end-to-end test?
-- **Correct:** An owned workflow with authoring rights, retained subject token, resolved own-account From restriction, and checked recipients. These checks precede publication.
-- **Incorrect:** The original starter with only the subject filter. A subject alone does not isolate senders or establish ownership and authoring rights.
+**Knowledge check:** What decides which branch handles an incoming email?
+- **Correct:** Classify selects a category from the email content. The trigger starts the workflow and Classify routes the message.
+- **Incorrect:** The subject filter runs every branch. The filter decides which emails start the workflow, not which branch runs.
 
 ## Mission 2: Route
 
@@ -668,9 +641,9 @@ Expect **Quote Request**. This node-only test does not execute the downstream ag
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/classify-quote-result-dark.webp"><img src="images/classify-quote-result.webp" alt="Classify Run node panel with the original Body sample and Quote Request output."></picture>
 
-*Genuine light/dark node-test captures. No quote specialist or downstream delivery ran.*
+*Run node returns the Quote Request category.*
 
-2. Before publication, inspect **Human review**: reviewer is incoming **From**, delivery is **Outlook**, and the proposed reply is visible. Inspect **Reply to email**: trigger **Message Id**, **To = From**, empty **CC/BCC**. With the sender restriction, reviewer and recipient must resolve only to you. Leave untested branches alone. **Save** (or **Ctrl+S**) → **Publish**; wait for **Published**, then confirm **Enabled** on Workflows. A click or **Publishing…** is not completion. If the owner-only restriction appears, use Mission 1's assigned-starter fallback and repeat the safety checks.
+2. Select **Save** (or **Ctrl+S**) then **Publish**. Wait for **Published**, then return to **Workflows** and confirm **Enabled**.
 3. In Outlook, review **Your privacy matters → Continue** if shown. Compose to your training account, using **Check names** if needed. Paste the subject, then the body before sending.
 
 **Outlook · Other test · Subject**
@@ -697,12 +670,12 @@ Promotions Team
 MegaDraw Rewards
 ```
 
-4. Recheck the resolved self-recipient and **Send**. This is deliberately irrelevant synthetic spam; do not follow its requests or send it elsewhere.
-5. Refresh **Activity** and inspect the new run: expect **Other → Archive email**, **Succeeded**. Separately find the exact message in Outlook **Archive**. Processing varies; check publication, Enabled, sender restriction, subject, and existing runs before resending. If stopping here, disable/reload your workflow; otherwise continue.
+4. Select **Send**.
+5. Refresh **Activity** and inspect the new run: expect **Other → Archive email**, **Succeeded**. Find the message in Outlook **Archive**. If no run appears, check **Enabled** and that the subject contains **Order Management**. Otherwise, continue to Review.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/other-path-succeeded-dark.webp"><img src="images/other-path-succeeded.webp" alt="Executed Other branch leading to a successful Archive email action."></picture>
 
-*Real run evidence, not a mailbox screenshot. The original run also had a separately verified archived email.*
+*The Other branch archives the promotional email.*
 
 **Reveal — Classification is not delivery:** Node output proves a category; an end-to-end test proves an action. **Body → category; self-email → trigger → Other → Archive → mailbox verification.**
 
@@ -717,8 +690,8 @@ MegaDraw Rewards
 **Outcome:** a reviewed answer or holding reply, a successful approved run, and its received email.
 
 1. In your workflow, open **Classify → Customer Inquiry → Copilot**. Confirm **Customer question** uses trigger **Body**. Read the supplied prompt in place: search the connection owner's earlier email threads, answer when evidence exists, otherwise write a holding reply without invented facts, addressed **Dear Customer,** and signed **Contoso Electronics Order Management**. Keep the supplied prompt; this summary is not a replacement. Copilot retrieves/drafts read-only; the reply node dispatches.
-2. In **Human review**, confirm the message contains the draft, delivery is **Outlook**, reviewer is incoming **From**, and the single **Yes/No** input is **Approve**, question **Send proposed reply?**. Confirm **If/Else → Approve Equals Yes**. Check **Reply to email**: trigger **Message Id**, **To = From**, empty **CC/BCC**. Yes replies; Else flags. The core follows Yes; a separate fresh-account test also verified No → Flag email without a reply. Save/publish changes after checking self-only scope. If a previously disabled workflow is **Draft**, resume deliberately through **Build → Publish**, not the list switch alone.
-3. Compose to your resolved training account with this subject and body. The fictional signature is not authorization to contact a real customer.
+2. In **Human review**, inspect the Copilot draft, **Outlook** delivery, incoming **From** reviewer, and **Approve** question **Send proposed reply?**. Follow **If/Else → Approve Equals Yes** to **Reply to email**. The Else branch leads to **Flag email** instead.
+3. Compose a message to your training account with this subject and body.
 
 **Outlook · Customer Inquiry · Subject**
 
@@ -741,13 +714,13 @@ Jordan Kim
 IT, Alpine Ski House
 ```
 
-4. Recheck the recipient and **Send**. Refresh **Activity**, select the new **Customer Inquiry** run, and distinguish the waits: trigger pickup, **Copilot** drafting, then **Human review** waiting for your decision.
-5. In Outlook, open **Action Needed: Review Customer Enquiry Reply**. Read the draft. A holding reply is valid if the mailbox lacks warranty/MDM evidence; do not approve invented facts. The verified run produced a grounded holding reply, not a factual warranty promise. If safe, choose **Yes** under **Approve** (the configured question is **Send proposed reply?**), then **Submit**; confirm **Your response has been successfully submitted**. The tested card worked without actioning **Trust sender** or **Show content**. If unsafe, choose **No → Submit**, verify the original is flagged and **Reply to email** is skipped, and ask the proctor to inspect the draft. Rejection does not complete the approved-reply outcome.
-6. Allow resumption and verify the actual received reply. The tested email used **Your inquiry - Contoso Electronics** and **Dear Customer,**; assess grounding and delivery, not exact generated wording or elapsed time. Confirm **Succeeded** and **Copilot → Human review → If → Reply to email** in Activity. **Flag email** and **Archive email** are expected skipped nodes on this path.
+4. Select **Send**. Refresh **Activity** and select the new **Customer Inquiry** run. **Copilot** drafts first; **Human review** then waits for your response.
+5. In Outlook, open **Action Needed: Review Customer Enquiry Reply** and read the proposed response. A holding reply is valid when the mailbox lacks warranty/MDM information. Choose **Yes** under **Approve**, then **Submit** to send the reply. If it contains unsupported facts, choose **No → Submit** instead: the original email is flagged and **Reply to email** is skipped.
+6. Open the received reply in Outlook and compare it with the draft you approved. Confirm **Succeeded** and **Copilot → Human review → If → Reply to email** in Activity. **Flag email** and **Archive email** are expected skipped nodes on this path.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/inquiry-path-succeeded-dark.webp"><img src="images/inquiry-path-succeeded.webp" alt="Successful Copilot, Human review, If, and Reply to email steps; Flag email and Archive email are skipped."></picture>
 
-*Retained light/dark captures of the earlier approved route, not the fresh run or its separate rejection test.*
+*The approved inquiry follows the Reply to email branch.*
 
 If approval is missing, inspect whether Copilot is drafting or Human review is waiting, then check reviewer and Connection. Repair only an unresolved/incorrect connection and republish. Check the original run before resending to avoid duplicate approvals.
 
@@ -765,9 +738,9 @@ If approval is missing, inspect whether Copilot is drafting or Human review is w
 
 **Outcome:** your workflow stays disabled after reload and has no unattended running/waiting test.
 
-1. On **Workflows**, turn off **Enabled** only for the Order Management workflow you enabled. Wait for **Workflow disabled**, then reload and verify it stays off. Leave any unused original and other labs' workflows unchanged. The verified workflow returned to **Draft**, with an unchecked disabled switch and **This workflow hasn't been published and can't be enabled from this list.** Leave it disabled. Resume an optional test only intentionally through **Build → Publish** after rechecking restrictions.
+1. On **Workflows**, turn off **Enabled** only for the Order Management workflow you enabled. Wait for **Workflow disabled**, then reload and verify it stays off. Leave any unused original and other labs' workflows unchanged. To resume an optional exercise, open **Build → Publish**.
 2. Inspect **Activity** for **Running/Waiting** tests. Disabling prevents new starts; it does not prove existing runs stopped. Finish safe approvals or cancel unfinished tests; ask the proctor if one cannot be stopped.
-3. Remove only your synthetic emails, approvals, replies, and drafts when no longer needed. Keep shared connections, agents, MCP servers, knowledge, and starters. Record **Credit usage (last 30 days)** if available as a rolling total, not measured per-run cost.
+3. Remove only your synthetic emails, approvals, replies, and drafts when no longer needed. Keep shared connections, agents, MCP servers, knowledge, and starters.
 
 **Reveal — Cleanup is observable:** **Disable own trigger → reload/still off → Activity/no unattended tests.** A completed run does not stop future pickup.
 
@@ -822,7 +795,7 @@ Book Skull's Rainbow Room in Nashville for Next Friday
 **Reveal — Dynamic data makes the goal per-item:** **New task → Title token → agent/tools → verify writes → disable.**
 
 **Knowledge check:** Why disable To Do Time Block after testing?
-- **Correct:** It watches your default Tasks list, so every new task would start another run and consume credits.
+- **Correct:** It watches your default Tasks list, so every new task would start another run.
 - **Incorrect:** Disabling deletes the run history. A disabled workflow keeps its definition and history; it only stops new runs.
 
 ## Optional: Inventory
@@ -884,7 +857,7 @@ addDays(triggerOutputs()?['body/receivedDateTime'], 3)
 The Task due date is independent of shipment ETA. Flag a past tool-data ETA for reconfirmation; never invent future dates or locations.
 
 6. Set **Output → Structured output**: `sku` **Text** (SKU named in notice), `stock` **Number** (current warehouse stock for that SKU), `risk` **Yes/No** (true when zero stock). If offered, inspect **Request human assistance when unsure** as an ambiguity mechanism, not a substitute for tool verification.
-7. Recheck self-only sender/reviewer/recipients, **Save → Publish**, verify Enabled. In Outlook, address yourself and paste the subject/body. Send after checking the recipient; repeated tests can create duplicate Tasks.
+7. Select **Save → Publish** and confirm **Enabled**. In Outlook, address yourself and paste the subject/body. Send after checking the recipient; repeated tests can create duplicate Tasks.
 
 **Outlook · Supplier Delay · Subject**
 
@@ -972,7 +945,7 @@ Procurement, Adventure Works
 What are the iPad Air prices applicable to Fabrikam?
 ```
 
-8. This original template can invoke the sending skill. Only with self-only recipient scope verified, replace the brackets with the exact synthetic quote-test email above in Preview. Inspect whether **price-quote** loads and verify any real outcome; narration alone is insufficient.
+8. This original template can invoke the sending skill. Replace the brackets with the sample quote request above in Preview. Inspect whether **price-quote** loads and verify any real outcome; narration alone is insufficient.
 
 **Price Quote Agent · Preview · Customer email template**
 
@@ -995,12 +968,11 @@ We have received this customer email: []
 | Event workflow or optional asset missing | Ask the proctor. Do not import into the shared environment, edit another attendee's asset, or count blocked work complete. |
 | No email-triggered run | Check publication/Enabled, resolved From, subject token, identity, and existing Activity before resending. |
 | Inquiry paused | Distinguish Copilot drafting from Human review waiting; check reviewer/connection and Outlook. Safe approval requires Yes then Submit. |
-| Publish reports an owner-only restriction although the list names you as Owner | This occurred on the fresh account. Do not bypass permissions. For your assigned starter only, use Mission 1's copy fallback and repeat connection/dispatch checks; otherwise ask the proctor. |
 | Disabled workflow cannot enable from the list | The reviewed workflow became Draft. Resume only deliberately through Build → Publish after safety checks; disable/reload again afterwards. |
 
 ## Finish and Clean Up
 
-**Core complete:** an owned workflow with verified authoring rights, node-only classification evidence, archived Other email, reviewed and received inquiry reply, and a disabled workflow with settled runs. A copy is a conditional ownership-blocker fallback, not the learning goal. Optional extensions are separate; skipped or blocked work is not a pass.
+**Core complete:** you explored email classification, archived a promotional message, and reviewed an AI-drafted reply. Optional extensions add calendar planning, inventory tasks, and a price-quote specialist.
 
 - **Route:** Classify picks a branch; its node-only test does not execute downstream actions.
 - **Review:** Read-only grounding and human authorization precede dispatch.
@@ -1011,7 +983,7 @@ We have received this customer email: []
 
 Disable only workflows you enabled and reload to verify they stay off. Inspect **Running/Waiting** tests; finish safe approvals or cancel unfinished runs, asking the proctor if necessary. Disabling does not prove existing runs stopped.
 
-Remove only your synthetic messages, approvals, drafts, optional calendar event/To Do task, and optional Dataverse Task when no longer needed. Preserve unused originals, other attendees' work, shared connections, MCP servers, knowledge, and agents. Leave your Draft/disabled workflow off; future testing may require **Build → Publish**. Rolling credit totals are not per-run cost measurements.
+Remove only your synthetic messages, approvals, drafts, optional calendar event/To Do task, and optional Dataverse Task when no longer needed. Preserve unused originals, other attendees' work, shared connections, MCP servers, knowledge, and agents. Leave your Draft/disabled workflow off; future testing may require **Build → Publish**.
 
 ## Sources
 

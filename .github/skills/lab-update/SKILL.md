@@ -43,6 +43,17 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
   checks every anchor.
 - **Voice and scope.** Fix what the evidence shows. Keep the lab's structure and voice;
   do not rewrite a working section to taste.
+- **Learner instructions are not a test report.** Keep run dates, coverage boundaries,
+  failed automation attempts, account-specific workarounds, credit measurements and
+  screenshot provenance in the run log and PR, not the lab, captions, notices or a
+  "What was tested" disclosure. Translate evidence into a short action or expected
+  result only when the learner needs it to complete the exercise.
+- **Prepared training path.** Start from the supplied working assets. Do not add owner
+  checks, copy fallbacks, connection audits or sender restrictions because the automated
+  runner needed them. Report provisioning defects to the organizer. Keep independent
+  tenant setup in the existing expandable setup section, and do not repeat warnings
+  already provided by the training tenant. Preserve approvals that teach the workflow's
+  behavior and concise cleanup, not maintainer safety checklists or generic coaching.
 - **UI labels.** Use the label exactly as the product shows it, in bold, and quote it in
   the PR. When a label alternates between rollouts, name the destination or give both.
 - **Current product, everywhere.** The live product is the source of truth: labels, menu
@@ -57,8 +68,8 @@ commit. CI (`Lab Doc Sync`) fails a PR that changes a README without its site co
   Kramdown otherwise ends the list and the site restarts numbering at 1.
 - **Prerequisites.** Attendees with pre-provisioned accounts must not repeat tenant
   setup. Use the organizer-neutral template cue and do not imply that attending any event
-  is enough to skip setup. Keep sign-in, downloads and safety actions visible; compact or
-  collapse only self-hosting setup where supported. Replace older event-specific variants.
+  is enough to skip setup. Keep required sign-in and exercise downloads visible; put
+  independent-tenant provisioning in the expandable setup section. Replace older event-specific variants.
   In missions labs, `prerequisites:` is an always-visible attendee readiness checklist.
   Keep own-tenant setup concise and explicitly conditional ("in your own tenant only") so
   event attendees do not repeat provisioning.
@@ -99,7 +110,8 @@ resolution; never retouch pixels to alter a name, result or product state. Reche
 position after each theme switch, and verify both crops contain the current response,
 whole filename and required controls. Inspect at full and rendered size, check EXIF/XMP
 and visually review OCR candidates. A single theme-neutral hero is valid; do not create an
-unused dark variant. Mark retained old images as not freshly verified.
+unused dark variant. Record retained-image provenance in the run log and PR; learner
+captions describe what to notice in the product, not how or when the image was captured.
 
 Compare the orphan scan with the baseline. Delete only images newly orphaned by this
 branch and only after checking references (`git grep <file name>`); never delete

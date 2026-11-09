@@ -174,7 +174,7 @@ mission_lab:
           prompt: "What about Singapore?"
         - title: "Inspect the retrieval evidence"
           instruction: |-
-            Expand the answer traces. In the fresh-account France test, **Filter SharePoint Files by Metadata** used this `columnFilter` reference value (do not send it as a prompt):
+            Expand the answer traces. **Filter SharePoint Files by Metadata** can return this `columnFilter` reference value (do not send it as a prompt):
 
             ```output
             {"column":"Location","operator":"ispopulated"}
@@ -189,7 +189,7 @@ mission_lab:
             width: 3420
             height: 522
             caption: "The live trace listed populated Location values before reading the matching policy. Other runs can use an exact country filter."
-          notice: "A policy may be marked Draft by the sample library's `ApprovalStauts` column. This is separate from the Location match. The general Learn SharePoint article covers Standard; this Microsoft Copilot harness picker and metadata trace were verified in the live run."
+          notice: "A policy may be marked Draft by the sample library's `ApprovalStauts` column. This is separate from the Location match. The general Learn SharePoint article covers Standard; this lab uses the Microsoft Copilot harness."
         - title: "Let the profile choose the policy"
           instruction: "Select **New chat** so Start runs again, then ask without a location. The observed USA profile returned TEP-100, **$80** per day. Use your actual profile: another location can select a country, regional or Global policy. Only a missing Office Location uses Paris, resolving to France."
           prompt_label: Preview · new chat
@@ -642,7 +642,7 @@ Expect **Global**, **TEP-210**, **$185** standard or **$295** high-cost per nigh
 
 ### Inspect the evidence and use the profile
 
-7. Expand the answer traces. In the fresh-account France test, **Filter SharePoint Files by Metadata** used this `columnFilter` reference value (**do not send it as a prompt**):
+7. Expand the answer traces. **Filter SharePoint Files by Metadata** can return this `columnFilter` reference value (**do not send it as a prompt**):
 
 ```output
 {"column":"Location","operator":"ispopulated"}
@@ -654,7 +654,7 @@ Check the returned `columns.Location` values and which document was actually rea
 
 *The live trace listed populated Location values before reading the matching policy. Other runs can use an exact country filter.*
 
-A policy may be marked **Draft** by the sample library's `ApprovalStauts` column. This is separate from the Location match. The general Learn SharePoint article covers Standard; this Microsoft Copilot harness picker and metadata trace were verified in the live run.
+A policy may be marked **Draft** by the sample library's `ApprovalStauts` column. This is separate from the Location match. The general Learn SharePoint article covers Standard; this lab uses the Microsoft Copilot harness.
 
 8. Select **New chat** so Start runs again, then ask without a location:
 

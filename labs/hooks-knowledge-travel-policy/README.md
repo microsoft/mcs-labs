@@ -211,7 +211,7 @@ Expect **Global**, **TEP-210**, **$185** standard or **$295** high-cost per nigh
 
 ### Inspect the evidence and use the profile
 
-7. Expand the answer traces. In the fresh-account France test, **Filter SharePoint Files by Metadata** used this `columnFilter` reference value (**do not send it as a prompt**):
+7. Expand the answer traces. **Filter SharePoint Files by Metadata** can return this `columnFilter` reference value (**do not send it as a prompt**):
 
 ```output
 {"column":"Location","operator":"ispopulated"}
@@ -223,7 +223,7 @@ Check the returned `columns.Location` values and which document was actually rea
 
 *The live trace listed populated Location values before reading the matching policy. Other runs can use an exact country filter.*
 
-A policy may be marked **Draft** by the sample library's `ApprovalStauts` column. This is separate from the Location match. The general Learn SharePoint article covers Standard; this Microsoft Copilot harness picker and metadata trace were verified in the live run.
+A policy may be marked **Draft** by the sample library's `ApprovalStauts` column. This is separate from the Location match. The general Learn SharePoint article covers Standard; this lab uses the Microsoft Copilot harness.
 
 8. Select **New chat** so Start runs again, then ask without a location:
 

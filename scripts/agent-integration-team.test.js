@@ -56,9 +56,9 @@ test('agent-integration: A2A tasks preserve the site and only reuse returned pro
 
 test('agent-integration: discovery and runtime evidence remain distinct', () => {
   for (const copy of modern) {
-    assert.match(copy, /MissingAllowOriginHeader/);
-    assert.match(copy, /External service Skill-loading logs were not inspected/);
-    assert.match(copy, /returned fixture IDs alone do not prove reference loading/);
+    assert.match(copy, /No agent card found/);
+    assert.match(copy, /manual details/);
+    assert.doesNotMatch(copy, /External service Skill-loading logs were not inspected/);
     assert.match(copy, /If the baseline failed, do not claim a retained carrier price/);
     assert.doesNotMatch(copy, /full-team test were not run live|not executed in the supplied run/);
   }
