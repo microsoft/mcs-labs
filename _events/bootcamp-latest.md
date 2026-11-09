@@ -1,6 +1,6 @@
 ---
 title: "Architecture Bootcamp"
-description: "Classic-format Architecture Bootcamp with 17 modules and 11 labs across Microsoft Copilot and Microsoft Copilot Studio. Retained for existing deliveries; use Architecture Bootcamp for the guided missions edition."
+description: "Classic-format Architecture Bootcamp with 17 modules and 11 labs across Microsoft Copilot and Microsoft Copilot Studio. Retained for existing deliveries; use Copilot & Agents Bootcamp for the guided missions edition."
 event_id: bootcamp-latest
 order: 3
 deprecated: true
@@ -31,4 +31,4 @@ labs:
     label: "Lab 11"
 ---
 
-This is the archived classic-format edition, retained for existing deliveries and direct links. For the current guided curriculum, use [Architecture Bootcamp]({{ '/events/architecture-bootcamp/' | relative_url }}).
+This is the archived classic-format edition, retained for existing deliveries and direct links. For the current guided curriculum, use [Copilot & Agents Bootcamp]({{ '/events/architecture-bootcamp/' | relative_url }}).

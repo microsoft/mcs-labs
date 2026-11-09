@@ -515,7 +515,7 @@ mission_lab:
 
 # Workflows
 
-Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
 Plan a task. Route an email. Build an inline agent that plans a task, then explore email routing and approve an AI-drafted reply.
 

@@ -50,9 +50,9 @@
 | Dataverse MCP Connector | [dataverse-mcp-connector](./labs/dataverse-mcp-connector) | Create and configure a Copilot Agent with Dataverse MCP Server integration to read and update account information from Dataverse using natural language queries. |
 | Model Context Protocol (MCP) & Copilot Studio | [MCS-MCP Lab](https://github.com/microsoft/mcsmcp) | Learn how to deploy an MCP Server and integrate it with Microsoft Copilot Studio for streamlined deployment and management. |
 
-## Architecture Bootcamp
+## Copilot & Agents Bootcamp
 
-The advertised [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) contains 17 modules and 11 guided missions-format labs. Its [agenda](./_data/agendas/architecture-bootcamp.yml) is the source of truth for the three-day schedule.
+The advertised [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) contains 17 modules and 11 guided missions-format labs. Its [agenda](./_data/agendas/architecture-bootcamp.yml) is the source of truth for the three-day schedule.
 
 | Lab | Title | Slot |
 | --- | ----- | ---- |

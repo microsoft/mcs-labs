@@ -21,7 +21,7 @@ test('the classic Architecture Bootcamp is discoverable with an event-specific A
   assert.equal(classic.labs.length, 11);
 
   const current = event(classic.superseded_by);
-  assert.equal(current.title, 'Architecture Bootcamp');
+  assert.equal(current.title, 'Copilot & Agents Bootcamp');
   assert.equal(current.event_id, 'architecture-bootcamp');
   assert.notEqual(current.deprecated, true);
   assert.notEqual(current.unlisted, true);
@@ -30,6 +30,8 @@ test('the classic Architecture Bootcamp is discoverable with an event-specific A
   assert.equal(current.labs.length, 11);
   assert.notDeepEqual(classic.labs, current.labs);
   assert.ok(current.order < classic.order, 'The guided curriculum remains the first listed edition');
+  assert.match(classic.description, /use Copilot & Agents Bootcamp for the guided missions edition/);
+  assert.match(read(path.join('_events', 'bootcamp-latest.md')), /\[Copilot & Agents Bootcamp\]\({{ '\/events\/architecture-bootcamp\/' \| relative_url }}\)/);
 });
 
 test('restoring the classic edition does not list the original or preview events', () => {
@@ -39,6 +41,15 @@ test('restoring the classic edition does not list the original or preview events
     assert.equal(hidden.search, false, slug);
     assert.equal(hidden.sitemap, false, slug);
     assert.equal(hidden.deprecated_label, undefined, `${slug}: no unrelated badge override`);
+  }
+});
+
+test('guided lab links use the current display name without changing the route', () => {
+  for (const { slug } of event('architecture-bootcamp').labs) {
+    if (slug === 'cowork-zava-sales') continue; // Shared lab has no event-specific introduction.
+    for (const file of [path.join('_labs', `${slug}.md`), path.join('labs', slug, 'README.md')]) {
+      assert.ok(read(file).includes('[Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/)'), file);
+    }
   }
 });
 
@@ -52,12 +63,13 @@ test('homepage and Events index retain listed deprecated events and label their 
     assert.ok(source.includes(`{% if ${variable}.deprecated %}<span class="${pillClass} ws-idx-pill-deprecated">{{ ${variable}.deprecated_label | default: "Deprecated" }}</span>{% endif %}`));
   }
   const styles = read(path.join('assets', 'css', 'main.scss'));
-  assert.match(styles, /\.journey-pill\.ws-idx-pill-deprecated,\s*\.ws-idx-pill-deprecated\s*\{\s*background: #a32020;\s*color: #fff;\s*\}/);
+  assert.match(styles, /\.journey-pill\.ws-idx-pill-deprecated,\s*\.ws-idx-pill\.ws-idx-pill-deprecated,\s*\.event-status-badge\s*\{[^}]*background: var\(--color-danger\);[^}]*color: var\(--color-on-danger\);[^}]*font-weight: 700;/);
 });
 
 test('the event header keeps the existing deprecation badge and successor lookup', () => {
   const layout = read(path.join('_layouts', 'event.html'));
   assert.match(layout, /if page\.deprecated[\s\S]*?assign successor = site\.events \| where: "event_id", page\.superseded_by \| first/);
   assert.match(layout, /{{ page\.deprecated_label \| default: "Deprecated" }}<\/span>/);
+  assert.match(layout, /<span class="event-status-badge">{{ page\.deprecated_label/);
   assert.match(layout, /Superseded by <a href="{{ successor\.url \| relative_url }}"/);
 });

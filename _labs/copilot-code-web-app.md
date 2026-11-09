@@ -393,7 +393,7 @@ mission_lab:
 
 # Copilot Code: build a simple web app
 
-Follow this lab in [Architecture Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
 Build, refine, and publish a Bootcamp Lab Tracker through four sequential prompts, checking its schedule, progress, and accessible day tabs.
 
