@@ -2,6 +2,7 @@
 title: "Deep dive in modern agents"
 description: "A hands-on, full-day workshop focused on engineering enterprise agents with Cowork and the new GitHub Copilot harness in Copilot Studio. Explore its component model, including instructions, skills, knowledge, tools, memory, hooks, sandbox execution, and delegation."
 event_id: ghcp-in-a-day
+latest: true
 order: 6
 labs:
   - slug: cowork-plugins-hands-on

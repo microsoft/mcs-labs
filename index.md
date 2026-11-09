@@ -237,6 +237,7 @@ header:
     <div class="journey-card-desc">{{ event.description | truncate: 120 }}</div>
     <div class="journey-card-meta">
       {% if event.deprecated %}<span class="journey-pill ws-idx-pill-deprecated">{{ event.deprecated_label | default: "Deprecated" }}</span>{% endif %}
+      {% if event.latest and event.deprecated != true %}<span class="journey-pill ws-idx-pill-latest">LATEST</span>{% endif %}
       <span class="journey-pill">{{ event.labs.size }} labs</span>
       {% if event.syndicated %}{% include syndicated-pill.html source=event.source %}{% endif %}
     </div>
@@ -254,6 +255,7 @@ header:
 <h3><a href="{{ ws.url | relative_url }}">{{ ws.title }}</a></h3>
 <div class="journey-card-desc">{{ ws.description | truncate: 120 }}</div>
 <div class="journey-card-meta">
+{% if ws.latest and ws.deprecated != true %}<span class="journey-pill ws-idx-pill-latest">LATEST</span>{% endif %}
 <span class="journey-pill">{{ ws.labs.size }} labs</span>
 {% if ws.syndicated %}{% include syndicated-pill.html source=ws.source %}{% endif %}
 </div>
