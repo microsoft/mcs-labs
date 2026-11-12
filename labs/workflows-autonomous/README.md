@@ -12,9 +12,9 @@ Plan a task. Route an email. Build an inline agent that plans a task, then explo
 
 | Level | Persona | Duration | Finish line |
 | --- | --- | --- | --- |
-| 300 | Maker / Developer | 30 minutes core | A planned task, classified email, and a reviewed reply |
+| 300 | Maker / Developer | 45 minutes core | A planned task, classified email, and a reviewed reply |
 
-Automate tasks, Inspect routing, Classify email and Review replies take about 30 minutes; Handle inventory and Generate quotes are optional.
+Automate tasks, Inspect routing, Classify email and Review replies take about 45 minutes; Handle inventory and Generate quotes are optional.
 
 **Scenario:** First, automate planning a new To Do task. Then work with an order desk that receives unrelated promotions, customer questions, supplier delays, and quote requests. A workflow classifies the message; a grounded draft and human decision protect the customer-facing reply.
 
@@ -53,7 +53,7 @@ Task planning also needs Microsoft To Do. Optional extensions need [Warehouse MC
 
 ## Mission 1: Automate tasks
 
-**10 minutes · Microsoft To Do / Inline Agent / Outlook Calendar**
+**25 minutes · Microsoft To Do / Inline Agent / Outlook Calendar**
 
 **Outcome:** a personal calendar block and a task with a due date, reminder, and useful notes.
 
@@ -102,7 +102,7 @@ Book Skull's Rainbow Room in Nashville for Next Friday
 
 ## Mission 2: Inspect routing
 
-**3 minutes · Copilot Studio / Workflows**
+**5 minutes · Copilot Studio / Workflows**
 
 **Outcome:** you can explain what starts the workflow and how it chooses an action.
 
@@ -175,7 +175,7 @@ MegaDraw Rewards
 
 ## Mission 4: Review replies
 
-**12 minutes · Copilot / Human review / Outlook**
+**10 minutes · Copilot / Human review / Outlook**
 
 **Outcome:** a reviewed answer or holding reply, a successful approved run, and its received email.
 

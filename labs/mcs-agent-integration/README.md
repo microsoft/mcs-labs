@@ -112,7 +112,7 @@ Complete the three use cases in order. Each ends with a quick test and a closure
 
 **How to run the tests:** copy only the **Prompt to send** block into the named agent's **Preview**. **Expected response (approximate)** blocks are illustrative examples to compare against, not messages to send or exact text to reproduce. Wording and structure can vary, but the facts and limitations must match the **Pass** criteria. Follow the fresh-conversation or follow-up instruction for each test.
 
-Paste the **entire prompt** into the chat composer and verify it before sending. If your browser submits at the first line break, join the lines into one paragraph and retry in a fresh conversation; do not evaluate a response to a truncated prompt.
+Paste the **entire prompt** into the chat composer and send it.
 
 | Use case | Build | Success looks like |
 | -------- | ----- | ------------------ |
@@ -140,8 +140,8 @@ Complete each build, quick test, and closure before starting the next use case. 
 
    ![Zava Operations Assistant on the Build tab, with the instructions editor and components panel showing Skills, Tools, Knowledge, and Connected agents](images/zava-operations-assistant-build.png)
 
-1. In the components panel, remove **Work IQ** from **Tools** if present: select **Remove Work IQ**, then confirm **Remove**. Under **Knowledge**, select the **X** next to **Search all websites** if present; this removes it without the same confirmation dialog. Remove only attachments on your new agent, not underlying connections or tenant settings.
-1. Paste these base instructions into **Instructions**. Do not add a dataset, Skill, knowledge source, or business-data tool to this agent.
+1. Under **Tools**, select **Remove Work IQ → Remove**. Under **Knowledge**, select the **X** beside **Search all websites**. Do not add skill, knowledge source or tool to the coordinator.
+1. Paste these base instructions into **Instructions**.
 
    ```text
    You are Zava Operations Assistant, an advisory-only corporate fulfilment coordinator. Understand the request and produce a concise decision brief. All requests in this lab use synthetic data.
@@ -211,7 +211,7 @@ You have created a coordinator that knows what it needs to find out, rather than
 
 ### Build and verify Zava Stock & Policy Specialist
 
-1. Return to **Home → Agent** to create a **second, independent agent**, using the **Microsoft Copilot harness** in the same environment. Enter **Zava Stock & Policy Specialist** in **Name your agent**. Do not create a child agent inside **Zava Operations Assistant**. You own both Studio agents; independence means separate responsibilities and publication, not different Dataverse owners.
+1. Return to **Home → Agent** to create a **second, independent agent**, using the **Microsoft Copilot harness** in the same environment. Enter **Zava Stock & Policy Specialist** in **Name your agent**. You own both Studio agents; independence means separate responsibilities and publication, not different Dataverse owners.
 1. Remove **Work IQ** from this agent's **Tools** with **Remove Work IQ → Remove**, if present. Remove **Search all websites** using its **X** under **Knowledge**, if present. Keep the synthetic dataset in its Skill; do not add business-data tools or knowledge sources, or delete underlying connections.
 1. On **Build**, add these base instructions:
 

@@ -8,9 +8,9 @@ Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** �
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 30 minutes | After completing this lab, participants will be able to create a Workflow in Copilot Studio, fire it from an event-driven **trigger**, and embed a non-deterministic **inline agent** that reasons over the trigger's data and acts through tools (Outlook calendar, Microsoft To Do, and web search) — going beyond the classic, deterministic autonomous-agent model. |
+| 300 | Maker | 45 minutes | After completing this lab, participants will be able to create a Workflow in Copilot Studio, fire it from an event-driven **trigger**, and embed a non-deterministic **inline agent** that reasons over the trigger's data and acts through tools (Outlook calendar, Microsoft To Do, and web search) — going beyond the classic, deterministic autonomous-agent model. |
 
-> Use Cases #1–#3 take about 30 minutes; inventory management and the price-quote specialist are optional extra credit.
+> Use Cases #1–#3 take about 45 minutes; inventory management and the price-quote specialist are optional extra credit.
 
 ---
 
@@ -49,7 +49,7 @@ Think of Workflows as the autonomous side of Copilot Studio:
 - "My flows are rigid — I need a step that can reason about messy, real-world inputs and choose what to do."
 - "I want an agent that can read my calendar, book time, and update a task — on its own."
 
-**The 30-minute core covers Use Cases #1–#3:** an inline agent that blocks focus time and enriches a task, and a multi-branch order-management workflow with human-in-the-loop approval. **Optional extra credit** adds an MCP-powered inventory agent and calls a published price-quote specialist agent.
+**The 45-minute core covers Use Cases #1–#3:** an inline agent that blocks focus time and enriches a task, and a multi-branch order-management workflow with human-in-the-loop approval. **Optional extra credit** adds an MCP-powered inventory agent and calls a published price-quote specialist agent.
 
 > [!NOTE]
 > Finish the core verification and [cleanup](#-clean-up) before attempting extra credit.
@@ -123,13 +123,13 @@ In this lab, you'll build several autonomous Workflows that act on event-driven 
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 15 min |
-| 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Explore and publish a pre-built multi-branch classification workflow | 8 min |
-| 3 | [Use M365 Copilot and Add a Human-in-the-Loop](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: Copilot drafts a response, human approves, workflow replies | 7 min |
+| 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#-use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 25 min |
+| 2 | [Setting Up the Order Management Workflow](#-use-case-2-setting-up-the-order-management-workflow) | Explore and publish a pre-built multi-branch classification workflow | 10 min |
+| 3 | [Use M365 Copilot and Add a Human-in-the-Loop](#-use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: Copilot drafts a response, human approves, workflow replies | 10 min |
 | EC | [Extra Credit: Build an Inline Agent for Inventory Management](#-extra-credit-build-an-inline-agent-for-inventory-management) | Add an MCP-powered inline agent that checks warehouse stock and creates Dataverse tasks (Optional) | ~15 min |
 | EC | [Extra Credit: Call a Price Quote Specialist Agent from a Workflow](#-extra-credit-call-a-price-quote-specialist-agent-from-a-workflow) | Wire a published agent into a workflow branch to generate and send price quotes (Optional) | ~10 min |
 
-Use Cases #1–#3 total 30 minutes (15 + 8 + 7 minutes). Both extra-credit exercises are outside this allocation.
+Use Cases #1–#3 form the core lab; both extra-credit exercises are outside the 45-minute allocation.
 
 ---
 
@@ -532,7 +532,7 @@ You've confirmed that the workflow can generate a grounded response with M365 Co
 ## 📦 Extra Credit: Build an Inline Agent for Inventory Management
 
 > [!NOTE]
-> **Optional - Extra Credit (~15 minutes):** This exercise is outside the 30-minute core lab. Complete Use Case #2 first so the Order Management Workflow is configured and published.
+> **Optional - Extra Credit (~15 minutes):** This exercise is outside the 45-minute core lab. Complete Use Case #2 first so the Order Management Workflow is configured and published.
 
 > [!NOTE]
 > This exercise uses **Warehouse MCP**. With a pre-provisioned event account, use the installed server; if it is missing, ask your facilitator. For your own tenant, see [Prerequisites](#-prerequisites).
@@ -721,7 +721,7 @@ You've added a reasoning agent that enriches a supplier delay notice with wareho
 
 ## 💰 Extra Credit: Call a Price Quote Specialist Agent from a Workflow
 
-**Optional - Extra Credit (~10 minutes), outside the 30-minute core lab.** Complete Use Case #2 first, then connect the **Quote Request** branch to a reusable **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse account data**, and **Mail** to produce and send a professional quote. The agent ships inside the prepared solution and may already be **Published**; inspect its state and publish any changes before using it.
+**Optional - Extra Credit (~10 minutes), outside the 45-minute core lab.** Complete Use Case #2 first, then connect the **Quote Request** branch to a reusable **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse account data**, and **Mail** to produce and send a professional quote. The agent ships inside the prepared solution and may already be **Published**; inspect its state and publish any changes before using it.
 
 **Summary of tasks**
 

@@ -42,6 +42,12 @@ script changes.
 `_labs/mission-<slug>.md` for a guided lab) change together, in the same commit. CI
 (`Lab Doc Sync`) fails a PR that changes a README without its site copy.
 
+- **Corresponding editions.** When modifying a lab, find and update its corresponding
+  classic or missions edition in the same PR, even when it uses a different slug
+  (for example, `mcs-workflows-latest` and `workflows-autonomous`). Keep both editions'
+  READMEs and site copies, mission front matter and readable body, prompts, pacing,
+  affected event agendas, and timing tests consistent. Core mission minutes must sum
+  to the lab duration.
 - **Headings.** README headings keep their emoji; `_labs` headings have none. When a
   heading changes, update the hand-written table of contents in both copies; the audit
   checks every anchor.

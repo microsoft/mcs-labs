@@ -74,11 +74,21 @@ test('the core teaches approval and outcomes without training-environment cleanu
   assert.equal(document.data.mission_lab.finish.cleanup, undefined);
 });
 
-test('task planning starts the required core with clear action labels and unchanged total time', () => {
+test('task planning starts the required core with pacing aligned to the classic lab', () => {
   const core = missions.filter(mission => !mission.optional);
   assert.equal(core[0].id, 'time-block');
-  assert.equal(core.reduce((sum, mission) => sum + mission.minutes, 0), 30);
-  assert.equal(document.data.duration, 30);
+  assert.deepEqual(core.map(mission => mission.minutes), [25, 5, 5, 10]);
+  assert.equal(core.reduce((sum, mission) => sum + mission.minutes, 0), 45);
+  assert.equal(document.data.duration, 45);
+  assert.equal(document.data.duration, matter(read('_labs/mcs-workflows-latest.md')).data.duration);
+  assert.match(document.data.mission_lab.pacing, /45 minutes/);
+  for (const copy of [document.content, readme]) {
+    assert.match(copy, /\| 45 minutes core \|/);
+    assert.match(copy, /take about 45 minutes/);
+    const minutes = [...copy.matchAll(/^\*\*(\d+) minutes ·/gm)].map(match => Number(match[1]));
+    assert.deepEqual(minutes, core.map(mission => mission.minutes));
+    assert.doesNotMatch(copy, /30.minute|30 minutes/);
+  }
   assert.deepEqual(missions.map(mission => mission.verb), [
     'Automate tasks', 'Inspect routing', 'Classify email', 'Review replies',
     'Handle inventory', 'Generate quotes',

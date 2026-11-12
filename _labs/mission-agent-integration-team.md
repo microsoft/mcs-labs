@@ -52,7 +52,7 @@ mission_lab:
             Select **Home → Agent**, described as **Create an agent to take actions and answer questions**. This opens the **Microsoft Copilot harness → Build**. Enter **Zava Operations Assistant** in **Name your agent**. To change a saved name, use **Rename agent** in the header (some versions show **Edit name**) and confirm the edit.
           notice: "Use the agent names exactly as written; display names have a 30-character limit. If only the Standard harness is available, stop and ask the facilitator."
         - title: "Remove unrelated default attachments"
-          instruction: "Under **Tools**, select **Remove Work IQ → Remove** if present. Under **Knowledge**, select the **X** beside **Search all websites** if present; that removes it without the same confirmation dialog. Remove only attachments on your new agent, never underlying connections or tenant settings. Do not add a dataset, Skill, knowledge source or business-data tool to the coordinator."
+          instruction: "Under **Tools**, select **Remove Work IQ → Remove**. Under **Knowledge**, select the **X** beside **Search all websites**. Do not add skill, knowledge source or tool to the coordinator."
         - title: "Set the coordinator's instructions"
           instruction: "Paste the complete block into **Instructions**, not Preview. Select **Save**, wait for provisioning to return to **Build**, then open **Preview**. Choose **Save and continue** if prompted instead of discarding changes."
           prompt_label: Coordinator · Instructions
@@ -77,13 +77,13 @@ mission_lab:
 
             Final brief: recommendation, stock calculation, product and loaded weights, service and EUR charge, date/timezone and slot, assumptions, exclusions, approval requirement, and source fixture IDs. End with the human next step and "Nothing has been reserved, booked, or approved."
         - title: "Test without any specialists"
-          instruction: "Select **Zava Operations Assistant → Preview → New chat**. Paste the entire prompt and verify it before sending. If line breaks submit early, join the lines into one paragraph and retry in a fresh conversation; do not evaluate a truncated prompt."
+          instruction: "Select **Zava Operations Assistant → Preview → New chat**. Paste the entire prompt and send it."
           prompt_label: Coordinator · Preview · new chat
           prompt: |-
             Riverside Construction needs 60 bags of repair mortar (MORTAR-20) at the Riverside renovation site on November 12, 2026 before 10:00, in America/New_York. There is no forklift on site. Recommend a fulfilment location and delivery option that comply with Zava policy. Explain any approval needed. This is a demo recommendation; do not reserve or book anything.
         - title: "Compare the boundary response"
           instruction: |
-            Compare against this reference; **do not send it**. Wording can vary, but invented stock, prices or approval decisions fail the test.
+            Compare against this reference response below. Wording can vary, but invented stock, prices or approval decisions fail the test.
 
             ```output
             I understand the request for 60 bags delivered before 10:00 with no site forklift.
@@ -120,7 +120,7 @@ mission_lab:
       outcome: "A published specialist supplies a grounded stock decision to the still-private coordinator."
       steps:
         - title: "Create a separate specialist"
-          instruction: "Return to **Home → Agent** in the same environment. Create a second **Microsoft Copilot harness** agent, not a child of the coordinator. Enter **Zava Stock & Policy Specialist** in **Name your agent**. Remove default **Work IQ** under **Tools** using **Remove Work IQ → Remove**, and **Search all websites** under **Knowledge** using its **X**. Leave underlying connections untouched."
+          instruction: "Return to **Home → Agent** in the same environment. Create a second **Microsoft Copilot harness** agent. Enter **Zava Stock & Policy Specialist** in **Name your agent**. Remove default **Work IQ** under **Tools** using **Remove Work IQ → Remove**, and **Search all websites** under **Knowledge** using its **X**. Leave underlying connections untouched."
         - title: "Point the specialist at its Skill"
           instruction: "Paste this block into the specialist's **Build → Instructions**. Keep the stock dataset out of the base instructions."
           prompt_label: Specialist · Instructions
@@ -539,8 +539,8 @@ Create the customer-facing agent without specialist data. **Outcome:** an adviso
 1. Open [Copilot Studio](https://copilotstudio.microsoft.com/) and confirm your assigned environment.
 2. Select **Home → Agent**, described as **Create an agent to take actions and answer questions**. This opens the **Microsoft Copilot harness → Build**. Enter **Zava Operations Assistant** in **Name your agent**. To change a saved name, use **Rename agent** in the header (some versions show **Edit name**) and confirm the edit.
 3. Use the agent names exactly as written; display names have a **30-character limit**. If only the Standard harness is available, stop and ask the facilitator.
-4. Under **Tools**, select **Remove Work IQ → Remove** if present. Under **Knowledge**, select the **X** beside **Search all websites** if present; that removes it without the same confirmation dialog. Remove only attachments on your new agent, never underlying connections or tenant settings.
-5. Paste the following into **Instructions**, not Preview. Do not add a dataset, Skill, knowledge source or business-data tool to this coordinator.
+4. Under **Tools**, select **Remove Work IQ → Remove**. Under **Knowledge**, select the **X** beside **Search all websites**. Do not add skill, knowledge source or tool to the coordinator.
+5. Paste the following into **Instructions**, not Preview.
 
 **Input — Coordinator Instructions:**
 
@@ -570,7 +570,7 @@ Select **Save**, wait for provisioning to return to **Build**, then open **Previ
 
 ### Test without any specialists
 
-Select **Zava Operations Assistant → Preview → New chat**. Paste the entire prompt and verify it before sending. If line breaks submit early, join the lines into one paragraph and retry in a fresh conversation; do not evaluate a truncated prompt.
+Select **Zava Operations Assistant → Preview → New chat**. Paste the entire prompt and send it.
 
 **Prompt to send — Coordinator Preview:**
 
@@ -578,7 +578,7 @@ Select **Zava Operations Assistant → Preview → New chat**. Paste the entire 
 Riverside Construction needs 60 bags of repair mortar (MORTAR-20) at the Riverside renovation site on November 12, 2026 before 10:00, in America/New_York. There is no forklift on site. Recommend a fulfilment location and delivery option that comply with Zava policy. Explain any approval needed. This is a demo recommendation; do not reserve or book anything.
 ```
 
-**Reference output — compare, do not send:**
+Compare against this reference response below. Wording can vary, but invented stock, prices or approval decisions fail the test.
 
 ```output
 I understand the request for 60 bags delivered before 10:00 with no site forklift.
@@ -613,7 +613,7 @@ You own both Studio agents; independence here means separate responsibilities an
 
 ### Create and test the independent specialist
 
-1. Return to **Home → Agent** in the same environment. Create a second **Microsoft Copilot harness** agent, not a child of the coordinator.
+1. Return to **Home → Agent** in the same environment. Create a second **Microsoft Copilot harness** agent.
 2. Enter **Zava Stock & Policy Specialist** in **Name your agent**.
 3. Remove default **Work IQ** under **Tools** using **Remove Work IQ → Remove**, and **Search all websites** under **Knowledge** using its **X**. Leave underlying connections untouched.
 4. Paste this block into the specialist's **Build → Instructions**. Keep the stock dataset out of the base instructions.
