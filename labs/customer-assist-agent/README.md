@@ -51,7 +51,6 @@ No live subscription backend, production phone number or contact-center deployme
 ## 📋 Exercise inputs
 
 - Use your assigned **training account**. Select the facilitator-provided environment in [Copilot Studio preview](https://copilotstudio.preview.microsoft.com/).
-- The fictional subscription ID **SUB-1042** and all configuration text are supplied below. Use only fictional contact and payment details; there are no exercise downloads.
 - For the voice exercise, have a microphone and speakers or headset, and allow microphone access in the browser. If audio is unavailable, use Web Chat or watch the facilitator.
 
 ## 🔎 Build: Give the primary agent a clear job
