@@ -121,7 +121,9 @@ For each step or mission, in order:
    accessible name and `click "<name>"` to use it. If the label in the lab is not on screen,
    that is a finding: do not quietly use the new label.
 2. Enter prompts verbatim from the lab: save the prompt text to a file outside the repo and
-   run `prompt <file>`, then `wait "<text you expect>"`.
+   run `prompt <file>`, then `wait "<text you expect>"`. A prompt that pastes with a line
+   break mid-sentence, or a download link that opens a GitHub preview page instead of the
+   file, is a defect to log.
 3. Verify the learner-visible outcome, not just the prompt or chat claim. Download and
    inspect cited source documents and generated files; check business records in their
    system of record, including required fields, ownership, relationships and timezone.

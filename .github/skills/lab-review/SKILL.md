@@ -50,7 +50,8 @@ Work through `references/review-rubric.md`. In particular:
    Historical mentions ("formerly …") are allowed.
 3. **Learning design.** Score the lab with `references/learning-design.md`: outcome
    first, action within the first screen, verbs first, one idea per step, prompts
-   copyable, reveal after the experience, checks that target misconceptions. Apply its
+   copyable without mid-sentence wraps, downloads linked to the file rather than a
+   preview page, reveal after the experience, checks that target misconceptions. Apply its
    shared authoring rules too: creator order, trailing optional extensions, prepared-account
    setup, contextual cleanup and relevant images must not depend on which skill ran.
 4. **Timing.** Compare `duration`, the Lab Details row, use-case or mission minutes and
