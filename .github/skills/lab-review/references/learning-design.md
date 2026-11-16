@@ -63,6 +63,15 @@ Apply these when creating, converting, updating or reviewing either lab format:
 - Start each step with a verb: **Select**, **Open**, **Paste**, **Confirm**.
 - Use the product's exact current label, in **bold**. Do not describe icons by color only.
 - Keep prompts verbatim and copyable. Do not paraphrase a prompt in prose.
+- Do not hard-wrap a prompt mid-sentence. Learners paste it as typed, so a source line
+  break becomes a break in their prompt. Keep each sentence or paragraph on one line in
+  front matter and both bodies; keep the line structure of lists, signatures, trigger
+  phrases and expected output. `scripts/prompt-wrap.test.js` checks mission prompts only,
+  so check classic `text` fences by eye.
+- Link a file learners download or upload to the file itself, not a preview page. On
+  GitHub use `https://github.com/<owner>/<repo>/raw/refs/heads/main/<path>`, not
+  `/blob/`, with the same URL in every copy. Links for reading a file in place may stay
+  on `/blob/`.
 - Preserve sample emails, expressions and expected-output blocks too, including unlabelled
   fences. Keep expected output out of `prompt`; compare occurrence order and duplicates
   across mission front matter, site body and README, not only a set of prompt strings.

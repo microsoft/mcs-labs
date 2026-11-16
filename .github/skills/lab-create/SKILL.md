@@ -68,7 +68,8 @@ Apply `../lab-review/references/learning-design.md` while drafting. In short:
   `mission_lab.self_setup` for missions and a closed setup disclosure in both readable
   copies. `prerequisites` is an attendee readiness checklist, not provisioning. Do not
   add runner checks, repeated tenant warnings, test reports or generic work-habit advice.
-  Put downloads in the step that uses them.
+  Put downloads in the step that uses them, and link the file itself (GitHub `/raw/`
+  URL), not its `/blob/` preview page.
 - Keep literal `|` characters out of prose inside Markdown tables; use `&#124;` and
   inspect generated HTML for Kramdown table/list rendering errors.
 - Ground every product claim in a current Microsoft Learn page and cite it.
@@ -120,7 +121,8 @@ Then:
      in order, including repeated occurrences. Preserve unlabelled sample input and
      expression fences too. Expected responses belong in an `output` fence within
      `instruction`, never in `prompt`; mirror them in both bodies. Use `|-` for multiline
-     prompts so YAML adds no trailing newline.
+     prompts so YAML adds no trailing newline, and keep each sentence on one line:
+     `scripts/prompt-wrap.test.js` fails on mid-sentence wraps.
    - Each `check` has exactly one option with `correct: true`.
    - Each step screenshot has `title`, `alt`, `caption`, and `width` and `height` that
      match the file; add `src_dark` for genuine matching product captures and a

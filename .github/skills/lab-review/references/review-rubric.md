@@ -22,6 +22,10 @@ Use after the audit. Mark each item **pass**, **issue** (with evidence) or **n/a
       Only trailing extensions become optional; earlier exercises are not moved.
 - [ ] Each step has one action and starts with a verb.
 - [ ] Every value to type (URL, name, prompt) is in a code block or `code`.
+- [ ] Prompts are not hard-wrapped mid-sentence in any copy; lists, signatures and
+      expected output keep their intended line breaks.
+- [ ] Files to download or upload link to the file itself (GitHub `/raw/` URL), not a
+      `/blob/` preview page, with the same URL in every copy.
 - [ ] The learner can tell when a step succeeded (visible state, message or artifact).
 - [ ] Risky or costly actions (sending email, writing records, schedules, credits) are explicit and reversible.
 - [ ] Organizer-disposed environments have no attendee shutdown or cleanup chores.
