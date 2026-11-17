@@ -3,18 +3,18 @@ layout: lab
 module: workflows-latest
 title: "Workflows"
 order: 341
-duration: 30
+duration: 45
 difficulty: 300
 lab_type: local
 section: advanced_labs
 journeys: ["autonomous-ai", "developer"]
-description: "Build a workflow using the Microsoft Copilot harness in Copilot Studio, with an event-driven trigger and a non-deterministic inline agent that books calendar time and updates a to-do."
+description: "Build a workflow using the Microsoft Copilot harness in Copilot Studio, with an event-driven trigger and a non-deterministic agent that books calendar time and updates a to-do."
 
 ---
 
 # Workflows
 
-Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** — an agent that runs on a trigger instead of waiting for a chat, and hands real work to a non-deterministic inline agent.
+Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** — an agent that runs on a trigger instead of waiting for a chat, and hands real work to a non-deterministic agent.
 
 ---
 
@@ -22,9 +22,9 @@ Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** �
 
 | Level | Persona | Duration | Purpose |
 | ----- | ------- | -------- | ------- |
-| 300 | Maker | 30 minutes | After completing this lab, participants will be able to create a Workflow in Copilot Studio, fire it from an event-driven **trigger**, and embed a non-deterministic **inline agent** that reasons over the trigger's data and acts through tools (Outlook calendar, Microsoft To Do, and web search) — going beyond the classic, deterministic autonomous-agent model. |
+| 300 | Maker | 45 minutes | After completing this lab, participants will be able to create a Workflow in Copilot Studio, fire it from an event-driven **trigger**, and embed a non-deterministic **agent** that reasons over the trigger's data and acts through tools (Outlook calendar, Microsoft To Do, and web search) — going beyond the classic, deterministic autonomous-agent model. |
 
-> Use Cases #1–#3 take about 30 minutes; inventory management and the price-quote specialist are optional extra credit.
+> Use Cases #1–#3 take about 45 minutes, or up to 60 minutes if you are new to the workflow designer; inventory management and the price-quote specialist are optional extra credit.
 
 ---
 
@@ -38,10 +38,10 @@ Build an **autonomous agent** in Microsoft Copilot Studio using **Workflows** �
 - [Summary of Targets](#summary-of-targets)
 - [Use Cases Covered](#use-cases-covered)
 - [Instructions by Use Case](#instructions-by-use-case)
-  - [Use Case #1: Automate Task Time-Blocking with a Workflow and an Inline Agent](#use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent)
+  - [Use Case #1: Automate Task Time-Blocking with a Workflow and an Agent](#use-case-1-automate-task-time-blocking-with-a-workflow-and-an-agent)
   - [Use Case #2: Setting Up the Order Management Workflow](#use-case-2-setting-up-the-order-management-workflow)
   - [Use Case #3: Use M365 Copilot and Add a Human-in-the-Loop in Order Management](#use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management)
-  - [Extra Credit: Build an Inline Agent for Inventory Management](#extra-credit-build-an-inline-agent-for-inventory-management)
+  - [Extra Credit: Build an Agent for Inventory Management](#extra-credit-build-an-agent-for-inventory-management)
   - [Extra Credit: Call a Price Quote Specialist Agent from a Workflow](#extra-credit-call-a-price-quote-specialist-agent-from-a-workflow)
 - [Clean Up](#clean-up)
 - [Summary of Learnings](#summary-of-learnings)
@@ -63,7 +63,7 @@ Think of Workflows as the autonomous side of Copilot Studio:
 - "My flows are rigid — I need a step that can reason about messy, real-world inputs and choose what to do."
 - "I want an agent that can read my calendar, book time, and update a task — on its own."
 
-**The 30-minute core covers Use Cases #1–#3:** an inline agent that blocks focus time and enriches a task, and a multi-branch order-management workflow with human-in-the-loop approval. **Optional extra credit** adds an MCP-powered inventory agent and calls a published price-quote specialist agent.
+**The 45-minute core covers Use Cases #1–#3:** an agent that blocks focus time and enriches a task, and a multi-branch order-management workflow with human-in-the-loop approval. **Optional extra credit** adds an MCP-powered inventory agent and calls a published price-quote specialist agent.
 
 > [!NOTE]
 > Finish the core verification and [cleanup](#clean-up) before attempting extra credit.
@@ -72,11 +72,11 @@ Think of Workflows as the autonomous side of Copilot Studio:
 
 ## Introduction
 
-Workflows in Microsoft Copilot Studio combine a defined automation sequence with AI-powered steps. This lab uses the **Microsoft Copilot harness** workflow experience, not standard-harness agent flows. A workflow starts from a **trigger**, making it useful for "when X happens, do Y" automation across Microsoft 365 and connectors. Its **Agent** node can delegate a step to an inline, *non-deterministic* agent that reasons over the trigger's data and calls tools, while the surrounding workflow controls the sequence and branches.
+Workflows in Microsoft Copilot Studio combine a defined automation sequence with AI-powered steps. This lab uses the **Microsoft Copilot harness** workflow experience, not standard-harness agent flows. A workflow starts from a **trigger**, making it useful for "when X happens, do Y" automation across Microsoft 365 and connectors. Its **Agent** node can delegate a step to an agent that reasons over the trigger's data and calls tools, while the surrounding workflow controls the sequence and branches.
 
-**Real-world example:** You keep a running list of things you need to do, but you never actually block time to do them. In this lab you'll build a Workflow that watches a Microsoft To Do list. The moment you add a task, the Workflow's inline agent reads the task, checks your Outlook calendar for an appropriate slot within your working hours, books a focus block, and then updates the to-do with a due date, a reminder, helpful notes, and a category — all autonomously. You add one task; the agent does the planning.
+**Real-world example:** You keep a running list of things you need to do, but you never actually block time to do them. In this lab you'll build a Workflow that watches a Microsoft To Do list. The moment you add a task, the Workflow's agent reads the task, checks your Outlook calendar for an appropriate slot within your working hours, books a focus block, and then updates the to-do with a due date, a reminder, helpful notes, and a category — all autonomously. You add one task; the agent does the planning.
 
-This example is covered in **Use Case 1** of this lab. It establishes the foundation — trigger plus inline agent plus tools — that the later use cases build on.
+This example is covered in **Use Case 1** of this lab. It establishes the foundation — trigger plus agent plus tools — that the later use cases build on.
 
 ---
 
@@ -86,7 +86,7 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 |---------|----------------|
 | **Workflow** | The autonomous unit in Copilot Studio. It runs on a trigger instead of a chat turn, so work happens in the background without a user present. |
 | **Trigger** | What starts a Workflow. Triggers can be manual, scheduled (recurrence), or **connector-based** (an event in an external service, like a new Microsoft To Do task). |
-| **Inline agent (agent node)** | A *non-deterministic* agent embedded directly in a Workflow step. Instead of a fixed action, it reasons over the input and decides how to achieve the goal. |
+| **Agent (workflow node)** | A *non-deterministic* agent embedded directly in a Workflow step. Instead of a fixed action, it reasons over the input and decides how to achieve the goal. |
 | **Dynamic content / `/` token** | A reference to data produced earlier in the Workflow (e.g., the trigger's to-do **Title**), inserted into the agent's instructions so it acts on the *actual* item at run time. |
 | **Tools** | The capabilities you grant the agent so it can take action — here the **Find meeting times** and **Create event** actions (Office 365 Outlook), the **Update to-do** action, and **Web search**. |
 
@@ -95,9 +95,9 @@ This example is covered in **Use Case 1** of this lab. It establishes the founda
 ## Documentation and Additional Training Links
 
 * [Workflows in Microsoft Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview)
-* [Add an inline or published agent to a workflow](https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/agent-node-workflow)
+* [Add an new or published agent to a workflow](https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/agent-node-workflow)
 * [Workflow designer, testing, and run history](https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flow-designer)
-* [Add tools and MCP servers to an inline agent](https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/agent-node-workflow#tools)
+* [Add tools and MCP servers to an agent](https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/agent-node-workflow#tools)
 * [Event triggers for standard-harness agents (comparison)](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-triggers-about)
 * [Microsoft To Do](https://to-do.office.com/) · [Outlook Calendar](https://outlook.office.com/calendar/)
 
@@ -126,7 +126,7 @@ Workflows and standard-harness agent flows have different authoring experiences.
 In this lab, you'll build several autonomous Workflows that act on event-driven triggers and hand real work to inline and published agents. By the end, you will be able to:
 
 - Configure **connector-based triggers** and explain when manual or scheduled triggers would be appropriate.
-- Embed a **non-deterministic inline agent** in a workflow, give it goal-oriented instructions, and reference earlier data with the **`/` dynamic-content token**.
+- Embed a **non-deterministic agent** in a workflow, give it goal-oriented instructions, and reference earlier data with the **`/` dynamic-content token**.
 - Equip agents with Microsoft 365 **tools** (Office 365 Outlook's **Find meeting times** and **Create event**, Update to-do, web search) and use **M365 Copilot** inside a workflow; explore **Dataverse MCP** in optional extra credit.
 - Add a **human-in-the-loop approval** step so a person validates an AI-drafted action before the workflow continues.
 - **Publish, run, and monitor** workflows end-to-end; optionally call a separate **published agent** from a workflow branch in extra credit.
@@ -137,13 +137,13 @@ In this lab, you'll build several autonomous Workflows that act on event-driven 
 
 | Step | Use Case | Value added | Effort |
 |------|----------|-------------|--------|
-| 1 | [Automate Task Time-Blocking with a Workflow and an Inline Agent](#use-case-1-automate-task-time-blocking-with-a-workflow-and-an-inline-agent) | Build an autonomous, trigger-driven Workflow whose inline agent reasons over a task and acts across your calendar and to-do list | 15 min |
-| 2 | [Setting Up the Order Management Workflow](#use-case-2-setting-up-the-order-management-workflow) | Explore and publish a pre-built multi-branch classification workflow | 8 min |
-| 3 | [Use M365 Copilot and Add a Human-in-the-Loop](#use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: Copilot drafts a response, human approves, workflow replies | 7 min |
-| EC | [Extra Credit: Build an Inline Agent for Inventory Management](#extra-credit-build-an-inline-agent-for-inventory-management) | Add an MCP-powered inline agent that checks warehouse stock and creates Dataverse tasks (Optional) | ~15 min |
+| 1 | [Automate Task Time-Blocking with a Workflow and an Agent](#use-case-1-automate-task-time-blocking-with-a-workflow-and-an-agent) | Build an autonomous, trigger-driven Workflow whose agent reasons over a task and acts across your calendar and to-do list | 25 min |
+| 2 | [Setting Up the Order Management Workflow](#use-case-2-setting-up-the-order-management-workflow) | Explore and publish a pre-built multi-branch classification workflow | 10 min |
+| 3 | [Use M365 Copilot and Add a Human-in-the-Loop](#use-case-3-use-m365-copilot-and-add-a-human-in-the-loop-in-order-management) | Validate the Customer Inquiry path: Copilot drafts a response, human approves, workflow replies | 10 min |
+| EC | [Extra Credit: Build an Agent for Inventory Management](#extra-credit-build-an-agent-for-inventory-management) | Add an MCP-powered agent that checks warehouse stock and creates Dataverse tasks (Optional) | ~15 min |
 | EC | [Extra Credit: Call a Price Quote Specialist Agent from a Workflow](#extra-credit-call-a-price-quote-specialist-agent-from-a-workflow) | Wire a published agent into a workflow branch to generate and send price quotes (Optional) | ~10 min |
 
-Use Cases #1–#3 total 30 minutes (15 + 8 + 7 minutes). Both extra-credit exercises are outside this allocation.
+Use Cases #1–#3 form the core lab; both extra-credit exercises are outside the 45-minute allocation.
 
 ---
 
@@ -153,19 +153,19 @@ Complete [Clean Up](#clean-up) when you finish the exercises.
 
 ---
 
-## Use Case #1: Automate Task Time-Blocking with a Workflow and an Inline Agent
+## Use Case #1: Automate Task Time-Blocking with a Workflow and an Agent
 
-Build a Workflow that watches a Microsoft To Do list and, whenever a task is added, lets an inline agent autonomously block focus time on your calendar and enrich the task.
+Build a Workflow that watches a Microsoft To Do list and, whenever a task is added, lets an agent autonomously block focus time on your calendar and enrich the task.
 
 **Summary of tasks**
 
-In this section, you'll create the To Do Time Block Workflow with a To Do trigger on your **Tasks** list, add a non-deterministic inline agent with goal-oriented instructions and tools, publish it, and then trigger it with a real task and verify the results.
+In this section, you'll create the To Do Time Block Workflow with a To Do trigger on your **Tasks** list, add a non-deterministic agent with goal-oriented instructions and tools, publish it, and then trigger it with a real task and verify the results.
 
 **Scenario:** You capture work in Microsoft To Do but never actually reserve time to do it. You want an assistant that, the moment you jot down a task, finds an appropriate slot in your workday, books a calendar block, and updates the task with a due date, reminder, notes, and category — without you lifting a finger beyond adding the task.
 
 ### Objective
 
-Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a new task to an inline agent that schedules a calendar block within your working hours and updates the to-do — then run it end-to-end and confirm the calendar event and the enriched task.
+Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a new task to an agent that schedules a calendar block within your working hours and updates the to-do — then run it end-to-end and confirm the calendar event and the enriched task.
 
 ---
 
@@ -212,9 +212,9 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
    ![The To Do Time Block trigger set to When a new to-do in a specific folder is created, with To-do list set to Tasks](images/uc1-trigger-tasks-list.webp)
 
-#### Add and configure the inline agent
+#### Add and configure the agent
 
-6. Select the **+** after the trigger and choose **Agent** to add an agent node. Reuse the connected lab-account connection, or **Create new connection** if needed. Leave the **Agent** dropdown on **New agent for this workflow** — this creates a brand-new, *non-deterministic* agent dedicated to this workflow rather than reusing an existing one.
+6. Select the **+** after the trigger and choose **Agent**. Reuse the connected lab-account connection, or **Create new connection** if needed. In the **Agent** dropdown, choose the option to create a new agent in this workflow rather than reuse an existing one. Configure its **Instructions** and **Tools** in the agent settings.
 
    > [!TIP]
    > This is the heart of the lab: instead of hard-coded actions, the workflow hands the task to an agent that *reasons* about how to schedule it.
@@ -242,7 +242,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
    ![The completed agent instructions with the Title token inserted inline](images/uc1-agent-instructions.webp)
 
-8. Give the agent the tools it needs to act. In the agent panel:
+8. Select the **Agent** node on the workflow canvas to open its settings. Add the following tools inside the agent's **Tools** section, not as separate connector nodes using **+** on the workflow canvas. Check that all three appear in the agent's **Tools** list:
 
    - Under **Tools**, select **+** (Add tool), search for **Find meeting times**, and choose the result whose connector is **Office 365 Outlook** (*Find meeting time suggestions based on organizer, attendee availability, and time or location constraints*). Reuse your connected lab-account connection or select **Create new connection** if needed, then **Add**.
    - Add a second tool: **+** → search **Create event** → choose the **Office 365 Outlook** result (*This operation creates a new event in a calendar*) → **Add** (it reuses the Outlook connection you just created).
@@ -266,7 +266,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
    ![The published To Do Time Block workflow showing Trigger, Apply to each, and Agent nodes](images/uc1-workflow-published.webp)
 
-10. Open **Microsoft To Do**, go to the **Tasks** list, and add a new task with the following title. Creating this task in the watched list is what fires the workflow's trigger.
+10. Open the [Microsoft To Do app](https://to-do.office.com/), go to the **Tasks** list, and add a new task with the following title. Creating this task in the watched list is what fires the workflow's trigger.
 
     ```
     Book Skull's Rainbow Room in Nashville for Next Friday
@@ -279,14 +279,14 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
 #### Watch the workflow run
 
-11. Back in the workflow, open the **Activity** tab and select **Refresh** to look for the run. When the new run appears (status **Running**), select it to open the run details and watch the workflow execute node-by-node (trigger → **Apply to each** → **Agent**).
+11. In Copilot Studio, open **Workflows → To Do Time Block**, then select **Activity**. Select **Refresh** and open the run that started after you created the test task. The To Do trigger checks for new tasks periodically, so a run can take a few minutes to appear; wait and refresh rather than adding the task again. In the run diagram, follow **Trigger → Apply to each → Agent**.
 
     > [!IMPORTANT]
     > Be patient — the To Do trigger polls on a schedule, so the run can take a **few minutes** to appear. Press **Refresh** in the Activity list a few times until it shows up.
 
     ![The To Do Time Block run in the Activity view with Trigger, Apply to each and Agent nodes](images/uc1-activity-run.webp)
 
-12. In the run details, select the **Agent** node to expand its details. You'll see the agent's own narration of what it did — checking your free/busy, choosing a time block *inside your working hours*, creating the calendar event, finding the to-do, and updating it. This is the *non-deterministic* part: the agent decided the specifics, they aren't hard-coded in the workflow.
+12. In the run diagram, select the **Agent** node to read its tool calls and output. Look for **Find meeting times**, **Create event** and **Update to-do**. The next steps check the saved task and calendar event rather than relying only on the agent's summary.
 
     > [!TIP]
     > The Agent's **Outputs / Response** is a great teaching moment — it shows the model reasoning step-by-step and calling the Find meeting times, Create event, and Update to-do tools on its own.
@@ -313,7 +313,7 @@ Create and publish the **To Do Time Block** Workflow: a To Do trigger feeds a ne
 
 ---
 
-### Congratulations! You've built an autonomous Workflow with a reasoning inline agent.
+### Congratulations! You've built an autonomous Workflow with a reasoning agent.
 
 ---
 
@@ -342,11 +342,15 @@ Complete the setup of the **Order Management Workflow**: explore the classificat
 
 1. In **Copilot Studio → Workflows**, open **Order Management Workflow → Build**.
 
+   Select each node on the canvas, including nodes in every branch. Where a **Connection** field is shown, select a connection for your training account. Reuse an existing working connection; if none is available, select **Create new connection**, complete the setup and select the new connection.
+
+   The **Human review** connection is not created by default. Open that node and create its connection manually using **Create new connection** in **Connection**. Complete the setup, then select the new connection. If you already created it, reuse it. Resolve missing-connection warnings on all nodes before publishing; an unconnected node can block publication even if your next test uses another branch.
+
    ![The Order Management Workflow open in the canvas designer](../mcs-workflows/images/order-management-workflow-overview.png)
 
 #### Open and explore the Order Management Workflow
 
-2. Select **When a new email arrives**. Keep the existing **Subject filter** token, displayed as **string**. Hover over it to inspect `string('Order Management')`: the subject must contain "Order Management".
+2. Use **When a new email arrives** from **Office 365 Outlook**, not **Outlook.com**. Open the trigger and select its **Connection** for your training account. Keep the existing **Subject filter** token, displayed as **string**. Hover over it to inspect `string('Order Management')`: the subject must contain "Order Management".
 
    > [!IMPORTANT]
    > Keep this filter in mind when testing: every test email you send **must include "Order Management" in the subject line**, or the workflow will not trigger. This is a common source of confusion when tests "don't seem to work."
@@ -365,7 +369,13 @@ Complete the setup of the **Order Management Workflow**: explore the classificat
 
 #### Test the classification
 
-4. Select the Classify node's **Run node** tab to test classification before sending an email. In the inputs from **When a new email arrives**, find **Body** (*The body of the message*) and paste:
+4. In the **Classify** panel, select **Run node**, next to **Configure**. Under **When a new email arrives**, find the test **Body** field shown below. Do not paste the sample on **Configure** or replace its dynamic email input; the hard-coded text is for this test only.
+
+   <picture><source media="(prefers-color-scheme: dark)" srcset="../workflows-autonomous/images/classify-quote-result-dark.webp"><img src="../workflows-autonomous/images/classify-quote-result.webp" alt="Classify panel with Run node selected beside Configure, the sample in the Body test input, and Quote Request output." width="406" height="505" loading="lazy"></picture>
+
+   *Select Run node, not Configure. Paste the sample in Body under When a new email arrives, then select Run.*
+
+   Paste this into the test **Body** field:
 
    ```
    Hi, I would like to request a quote for 500 units of Product A.
@@ -375,7 +385,7 @@ Complete the setup of the **Order Management Workflow**: explore the classificat
 
    ![Classify Run node panel with the sample Body input and Quote Request output; downstream nodes have not executed](images/classify-quote-result.webp)
 
-5. Select **Save** (or press **Ctrl+S**), then **Publish**. Wait for **Published**, then confirm **Enabled** on **Workflows**.
+5. Confirm every node that requires a connection has one selected, including **Human review**. Select **Save** (or press **Ctrl+S**), then **Publish**. Wait for **Published**, then confirm **Enabled** on **Workflows**. If publishing reports a missing connection, open the named node, create or select its connection, then save and publish again.
 
 #### Test the "Other" classification path end-to-end
 
@@ -410,7 +420,7 @@ Complete the setup of the **Order Management Workflow**: explore the classificat
 
    ![The Other-path sample email in Outlook after automatic archiving](../mcs-workflows/images/test-other-email-compose.png)
 
-7. Allow time for trigger pickup and classification, then check your **Archive** folder in Outlook. Confirm that the test email was moved there and that its run succeeded in **Activity**; delivery and processing can take several minutes.
+7. In Copilot Studio, open **Workflows → Order Management Workflow**, then select **Activity**. Select **Refresh** and open the run that started after you sent the test email. If it has not appeared, wait a few minutes and refresh before sending another email. In the run diagram, follow **Classify → Other → Archive email** and check for **Succeeded**. Then open Outlook and check that the exact test message is in **Archive**.
 
    > [!TIP]
    > If the email doesn't appear in **Archive**, check **Activity**. If no run appears, verify the workflow is published, **Enabled**, and that the test subject includes "Order Management." Check for an existing run before sending another test.
@@ -463,6 +473,7 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
 3. Select the **Human review** node and inspect its configuration carefully:
 
+   - Confirm the connection you created earlier is selected. If it is missing, use **Connection → Create new connection**, complete the setup and select it before publishing.
    - In the message, confirm the proposed reply drafted by **M365 Copilot** is inserted for the reviewer to read.
    - Confirm delivery is **Outlook** and the reviewer is assigned to the incoming **From** value.
    - Confirm the single **Yes/No** input is named **Approve**, with the question **Send proposed reply?**. The approver must see the proposed reply before choosing a response.
@@ -501,7 +512,7 @@ Validate the **Customer Inquiry** path of the **Order Management Workflow**: con
 
    ![The customer inquiry test email being composed in Outlook](../mcs-workflows/images/customer-inquiry-test-email.png)
 
-6. Return to the workflow and open the **Activity** panel. Refresh until the new run appears, then open it and observe the path: **Classify → Customer Inquiry**.
+6. In Copilot Studio, open **Workflows → Order Management Workflow**, then select **Activity**. Select **Refresh** and open the run that started after you sent the test email. If it has not appeared, wait a few minutes and refresh before sending another email. In the run diagram, follow **Classify → Customer Inquiry**.
 
    > [!IMPORTANT]
    > This path pauses at the approval step. If the run seems to stop, that is expected — the workflow is waiting for the **Human review** action to be completed from Outlook.
@@ -543,15 +554,15 @@ You've confirmed that the workflow can generate a grounded response with M365 Co
 
 ---
 
-## Extra Credit: Build an Inline Agent for Inventory Management
+## Extra Credit: Build an Agent for Inventory Management
 
 > [!NOTE]
-> **Optional - Extra Credit (~15 minutes):** This exercise is outside the 30-minute core lab. Complete Use Case #2 first so the Order Management Workflow is configured and published.
+> **Optional - Extra Credit (~15 minutes):** This exercise is outside the 45-minute core lab. Complete Use Case #2 first so the Order Management Workflow is configured and published.
 
 > [!NOTE]
 > This exercise uses **Warehouse MCP**. With a pre-provisioned event account, use the installed server; if it is missing, ask your facilitator. For your own tenant, see [Prerequisites](#prerequisites).
 
-Extend the **Supplier Delay** branch with an inline **Agent** that uses **MCP servers** to reason over the delay notice, check current stock, and create a follow-up **Dataverse Task**.
+Extend the **Supplier Delay** branch with an **Agent** that uses **MCP servers** to reason over the delay notice, check current stock, and create a follow-up **Dataverse Task**.
 
 **Summary of tasks**
 
@@ -573,10 +584,10 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 
    ![The Supplier Delay category with the add action menu open to Agent](../mcs-workflows/images/supplier-delay-add-agent.png)
 
-2. In the new node, leave **Agent** set to **New agent for this workflow**. This creates an inline agent dedicated to this workflow path. Keep the default AI model.
+2. In the new node, leave **Agent** set to **New agent for this workflow**. This creates an agent dedicated to this workflow path. Keep the default AI model.
 
    > [!TIP]
-   > A strength of AI-native nodes in Workflows is that you can choose a **different model per node**. An example is an inline agent that runs on a **Claude** model for its reasoning, while the **Classify** node uses a lighter **GPT** model — a cost-optimization pattern. Matching the model to the work each node does keeps the workflow both capable and economical.
+   > A strength of AI-native nodes in Workflows is that you can choose a **different model per node**. An example is an agent that runs on a **Claude** model for its reasoning, while the **Classify** node uses a lighter **GPT** model — a cost-optimization pattern. Matching the model to the work each node does keeps the workflow both capable and economical.
 
 3. Select **Expand** (the two arrows next to **...**) so you can edit the full agent configuration, then rename the node title from **Agent** to **Inventory Task Agent**.
 
@@ -698,7 +709,7 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 
    ![The supplier delay test email received in the lab user's Outlook inbox](../mcs-workflows/images/supplier-delay-test-email.png)
 
-10. Return to the workflow's **Activity** panel, refresh until the run appears, and open it. Observe the path: **Classify → Supplier Delay → Inventory Task Agent**.
+10. In Copilot Studio, open **Workflows → Order Management Workflow**, then select **Activity**. Select **Refresh** and open the run that started after you sent the test email. If it has not appeared, wait a few minutes and refresh before sending another email. In the run diagram, select **Classify → Supplier Delay → Inventory Task Agent** to inspect the agent's tool calls and output.
 
     ![The Activity panel showing the Supplier Delay path and Inventory Task Agent run](../mcs-workflows/images/supplier-delay-activity-path.png)
 
@@ -727,7 +738,7 @@ Build and validate the **Supplier Delay** path of the **Order Management Workflo
 
 ---
 
-### Congratulations! The Supplier Delay path is now using an MCP-powered inline agent.
+### Congratulations! The Supplier Delay path is now using an MCP-powered agent.
 
 You've added a reasoning agent that enriches a supplier delay notice with warehouse tool data, creates a Dataverse task, and emits structured output for downstream visibility.
 
@@ -735,7 +746,7 @@ You've added a reasoning agent that enriches a supplier delay notice with wareho
 
 ## Extra Credit: Call a Price Quote Specialist Agent from a Workflow
 
-**Optional - Extra Credit (~10 minutes), outside the 30-minute core lab.** Complete Use Case #2 first, then connect the **Quote Request** branch to a reusable **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse account data**, and **Mail** to produce and send a professional quote. The agent ships inside the prepared solution and may already be **Published**; inspect its state and publish any changes before using it.
+**Optional - Extra Credit (~10 minutes), outside the 45-minute core lab.** Complete Use Case #2 first, then connect the **Quote Request** branch to a reusable **Price Quote Agent** that combines **SharePoint knowledge**, **Dataverse account data**, and **Mail** to produce and send a professional quote. The agent ships inside the prepared solution and may already be **Published**; inspect its state and publish any changes before using it.
 
 **Summary of tasks**
 
@@ -844,7 +855,7 @@ Publish the **Price Quote Agent**, configure the **Quote Request** path to use i
 
     ![The quote request test email being composed in Outlook](../mcs-workflows/images/quote-request-test-email.png)
 
-13. Return to the workflow's **Activity** panel, refresh until the run appears, and confirm the route **Classify → Quote Request → Agent completed**.
+13. In Copilot Studio, open **Workflows → Order Management Workflow**, then select **Activity**. Select **Refresh** and open the run that started after you sent the test email. If it has not appeared, wait a few minutes and refresh before sending another email. In the run diagram, follow **Classify → Quote Request → Agent**, then select **Agent** to inspect its tool calls and completion output.
 
     ![The Activity panel showing the Quote Request branch run completed](../mcs-workflows/images/quote-request-activity-path.png)
 
@@ -900,7 +911,7 @@ True learning comes from doing, questioning, and reflecting — so let's put you
 To get the most out of Workflows in Copilot Studio:
 
 * **Choose the right trigger** — workflows can start manually, on a schedule, or from a connector event. Pick the trigger that matches the "when" of your automation.
-* **Use an inline agent for the messy middle** — when a step needs judgment (which slot? how to phrase the notes?), the agent node lets the model reason and act, instead of forcing every decision into deterministic logic.
+* **Use an agent for the messy middle** — when a step needs judgment (which slot? how to phrase the notes?), the agent node lets the model reason and act, instead of forcing every decision into deterministic logic.
 * **Ground the agent with dynamic content** — the `/` token feeds the agent the *actual* trigger data (the to-do **Title**), so each run acts on the real item, not a fixed example.
 * **Tools are the agent's hands** — without the Find meeting times, Create event, and Update to-do tools (and web search), the agent could reason but not act. Grant exactly the tools the goal requires.
 * **Constrain behavior in the instructions** — small additions like "only within my 8:00 AM–5:00 PM working hours" meaningfully change the agent's choices. Iterate on the instructions, then **re-publish**.
@@ -919,7 +930,7 @@ To get the most out of Workflows in Copilot Studio:
 **Workflows golden rules:**
 
 * Match the **trigger** to the event that should start the work — manual for testing, recurrence for schedules, connector for "when something changes."
-* Reach for an **inline agent** when a step needs reasoning; keep deterministic actions for steps that must always behave identically.
+* Reach for an **agent** when a step needs reasoning; keep deterministic actions for steps that must always behave identically.
 * Reference trigger data with the **`/` dynamic-content token** so the agent acts on the real input every run.
 * Give the agent **only the tools it needs**, and state constraints (working hours, formatting, categories) explicitly in the instructions.
 * **Save → Publish** and check **Enabled** before an end-to-end trigger test. Use **Activity** and the **Agent** node's run details to inspect the outcome. Disable the workflow and verify its off state when finished.

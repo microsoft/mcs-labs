@@ -2,7 +2,9 @@
 
 Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Know the traveler. Find the right policy. Leave with a **saved draft Travel Policy Agent**, a published session-start workflow and evidence that SharePoint retrieval selects the applicable policy. Redaction and a booking guard follow as optional extensions.
+You'll create a Travel Policy Agent, add a workflow that loads the traveler's location when a session starts, and check its answers against the relevant SharePoint policy. Prompt redaction and checks on a simulated booking tool are optional.
+
+
 
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc3-test-france-dark.webp"><img src="images/uc3-test-france.webp" alt="France policy answer citing TEP-310 with a 70 euro total daily per diem."></picture>
@@ -15,15 +17,15 @@ Know the traveler. Find the right policy. Leave with a **saved draft Travel Poli
 | --- | --- | --- | --- |
 | 200 | Maker | 30 minutes | Use a session-start hook for traveler context and verify Location-filtered SharePoint policy answers. |
 
-Missions 1 and 2 take about 30 minutes; Missions 3 and 4 are optional.
+Exercises 1 and 2 take about 30 minutes; Exercises 3 and 4 are optional.
 
 ## 📚 Table of Contents
 
 - [Prerequisites](#-prerequisites)
-- [Mission 1: Load the traveler's location](#-mission-1-load-the-travelers-location)
-- [Mission 2: Prove which policy supplied the answer](#-mission-2-prove-which-policy-supplied-the-answer)
-- [Mission 3: Redact personal data — optional](#-mission-3-redact-personal-data--optional)
-- [Mission 4: Guard the booking tool — optional](#-mission-4-guard-the-booking-tool--optional)
+- [Exercise 1: Load the traveler's location](#-exercise-1-load-the-travelers-location)
+- [Exercise 2: Prove which policy supplied the answer](#-exercise-2-prove-which-policy-supplied-the-answer)
+- [Exercise 3: Redact personal data — optional](#-exercise-3-redact-personal-data--optional)
+- [Exercise 4: Guard the booking tool — optional](#-exercise-4-guard-the-booking-tool--optional)
 - [Finish and cleanup](#-finish-and-cleanup)
 - [Sources](#-sources)
 
@@ -42,13 +44,13 @@ First arrange Copilot Studio access, permission to create agents and workflows, 
 
 **Current-UI caveat:** the **Microsoft Copilot harness** was formerly the **GitHub Copilot harness**; documentation and rollout screens may retain the earlier name. **Standard harness** is distinct and has no hooks. Hooks are preview; labels and availability can change.
 
-**Save is not publish:** Preview tests the saved draft; the agent need not be published. Every hook workflow must be published again after changes. Creating a workflow may prompt **Save draft**. Editing through **Go to workflow** opens a new tab.
+**Save is not publish:** Publish each hook workflow, then save and publish the agent after adding the hook. If the agent was already published, publish it again; saving alone does not activate the hook. Publish the workflow again whenever you change it. Creating a workflow may prompt **Save draft**. Editing through **Go to workflow** opens a new tab.
 
-## 🎯 Mission 1: Load the traveler's location
+## 🎯 Exercise 1: Load the traveler's location
 
 **15 minutes · Copilot Studio · Microsoft Copilot harness · Start (pre-loop)**
 
-Create your own agent and give it profile context through an event, rather than hoping it chooses a lookup tool. **Outcome:** a saved draft whose first reply and trace show the session-start context.
+Create your own agent and give it profile context through an event, rather than hoping it chooses a lookup tool. **Outcome:** a published agent whose first reply and trace show the session-start context.
 
 ### Create the agent
 
@@ -114,23 +116,19 @@ office 365 get my profile
 
 Use the connection for your lab account. **Get my profile** returns the connection account's profile, not automatically the chatting user's. A shared maker connection would return the wrong traveler's location. Production lookups must identify the intended user.
 
-5. Rename **Respond to the agent** to **Return traveler profile**. Paste this first segment into `additionalContext`:
+5. Rename **Respond to the agent** to **Return traveler profile**. Paste the complete text below into `additionalContext`, including the placeholder. Use **Expand to full screen** for a wider editor if needed. You will replace the placeholder with a dynamic value in the next step:
 
 ```text
-The SessionStart hook was executed. In your first reply, say so with lots of smileys. The traveler's Office Location is
+The SessionStart hook was executed. In your first reply, say so with lots of smileys. The traveler's Office Location is [OFFICE_LOCATION]. Use it only when the user has not named a travel destination. A named destination takes precedence; resolve cities to their country. If Office Location is missing and no destination is named, use Paris. Only mention the relevant location.
 ```
 
-6. Add a space, select **Insert dynamic content** and choose **Get my profile → Office Location**. Paste the second segment immediately after the token. The profile is a default, not an instruction to override a named destination:
-
-```text
-. Use it only when the user has not named a travel destination. A named destination takes precedence; resolve cities to their country. If Office Location is missing and no destination is named, use Paris. Only mention the relevant location.
-```
+6. In `additionalContext`, select and delete only `[OFFICE_LOCATION]`, including the brackets. Leave the cursor there, select **Insert dynamic content** and choose **Get my profile → Office Location**. Keep the space before the token and the period after it. Insert the dynamic token rather than typing a location; it will use the profile returned when the workflow runs. The profile is a default, not an instruction to override a named destination.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-office-location-context-dark.webp"><img src="images/uc1-office-location-context.webp" alt="Office Location dynamic token between the session-context segments in the response editor."></picture>
 
-*Expanded response editor: insert the dynamic token between the two supplied text segments. The editor truncates the additionalContext output label. Use **Expand to full screen** for this wider view.*
+*Expanded response editor: replace [OFFICE_LOCATION] with the Office Location dynamic token, keeping the surrounding text. The editor truncates the additionalContext output label.*
 
-7. Select **Publish** and wait for **Published**. Return through the **Travel Policy Agent** breadcrumb. Confirm the selected workflow, select **Done**, close **Hooks** and **Save** the agent. Wait for **Your agent has been saved.** before opening Preview.
+7. Select **Publish** and wait for **Published**. Return through the **Travel Policy Agent** breadcrumb. Confirm the selected workflow, select **Done**, close **Hooks** and **Save** the agent. Wait for **Your agent has been saved.**, then select **Publish** on the agent and wait for publishing to finish before opening **Preview**.
 
 ### Test a new session
 
@@ -155,9 +153,9 @@ Expand **Executed hook: SessionStart**. Check `additionalContext`, smileys and t
 - **additionalContext — correct.** It supplies context for the session before the first reply.
 - **modifiedPrompt — incorrect.** That replaces a message in a User prompt submitted hook.
 
-**Stuck?** If Preview reports a missing flow (**InvalidContent**) while the agent is saving, wait for **Your agent has been saved.**, then select **New chat**. If it persists, or the hook is missing or the context does not change, check starter field names, **Publish** the workflow, select **Done**, **Save** the agent, wait for the save to finish and use **New chat**. A Start hook does not rerun on every message.
+**Stuck?** If Preview reports a missing flow (**InvalidContent**) while the agent is saving, wait for **Your agent has been saved.**, **Publish** the agent and wait for publishing to finish, then select **New chat**. If it persists, or the hook is missing or the context does not change, check starter field names, **Publish** the workflow, select **Done**, **Save** the agent, **Publish** the agent, wait for publishing to finish and use **New chat**. A Start hook does not rerun on every message.
 
-## 🎯 Mission 2: Prove which policy supplied the answer
+## 🎯 Exercise 2: Prove which policy supplied the answer
 
 **15 minutes · Copilot Studio · SharePoint knowledge**
 
@@ -244,9 +242,9 @@ The observed USA profile returned **TEP-100**, **$80** per day. Use your actual 
 
 **Stuck?** If an answer mixes locations or has no policy citation, check the selected folder and Location metadata, saved instructions and removal of **Search all websites**. Inspect the trace and retry in **New chat**. Ask the proctor about missing documents; do not edit shared policy data.
 
-**Core complete.** You can stop here after 30 minutes. The remaining missions are optional.
+**Core complete.** You can stop here after 30 minutes. The remaining exercises are optional.
 
-## 🔬 Mission 3: Redact personal data — optional
+## 🔬 Exercise 3: Redact personal data — optional
 
 **20 minutes · User prompt submitted · Classify · inline agent**
 
@@ -309,7 +307,7 @@ Return only the rewritten text and the note. No explanation, no quotes, no forma
 Text:
 ```
 
-8. Right-click **Return original prompt → Copy**, then right-click empty canvas → **Paste**. Do not use **Duplicate**, which auto-connects nodes. Connect **Redact PII** to the pasted node before choosing dynamic content. Rename it **Return redacted prompt** and set `modifiedPrompt` to **Redact PII → Agent Response**. Leave `suppressOutput` empty. **Publish**, return through the agent breadcrumb, select **Done**, then **Save** and wait for the save to finish.
+8. Right-click **Return original prompt → Copy**, then right-click empty canvas → **Paste**. Do not use **Duplicate**, which auto-connects nodes. Connect **Redact PII** to the pasted node before choosing dynamic content. Rename it **Return redacted prompt** and set `modifiedPrompt` to **Redact PII → Agent Response**. Leave `suppressOutput` empty. **Publish**, return through the agent breadcrumb, select **Done**, then **Save** and wait for the save to finish. Select **Publish** on the agent and wait for publishing to finish before testing the hook.
 
 Copy the starter response schema rather than adding new required outputs. Both response nodes must have the same schema; different returned values need different nodes.
 
@@ -352,7 +350,7 @@ In `modifiedPrompt`, check `[PASSPORT NUMBER REDACTED]`, `[CARD NUMBER REDACTED]
 
 **Stuck?** For **The hook flow returned an error**, open **… → Hooks → … → Edit → Go to workflow** (new tab), then **Activity** and the run. Check Skipped response nodes, remove the generic edge, verify every category connection and `modifiedPrompt`, then **Publish** and retest. Do not infer success or failure from `isContinue` alone.
 
-## 🔬 Mission 4: Guard the booking tool — optional
+## 🔬 Exercise 4: Guard the booking tool — optional
 
 **15 minutes · Pre tool use · simulated workflow tool**
 
@@ -411,7 +409,7 @@ Right-click **Allow tool call → Copy**, then empty canvas → **Paste**; renam
 | `permissionDecisionReason` | `This airline is not on the company's approved airline list, so the flight was not booked.` |
 | `additionalContext` | `Approved airlines: Contoso Air, Fabrikam Airways, Northwind Airlines, Woodgrove Air. Offer these to the user and ask which one to use instead.` |
 
-Leave `modifiedParameters` and `suppressOutput` empty. **Publish**, return to the agent, select **Done**, then **Save**.
+Leave `modifiedParameters` and `suppressOutput` empty. **Publish**, return to the agent, select **Done**, then **Save**. Select **Publish** on the agent and wait for publishing to finish before testing the hook.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/extra-pretool-workflow-dark.webp"><img src="images/extra-pretool-workflow.webp" alt="Check approved airline canvas with If/Else branches to Allow tool call and Deny tool call."></picture>
 
@@ -419,7 +417,7 @@ Leave `modifiedParameters` and `suppressOutput` empty. **Publish**, return to th
 
 ### Test the guard
 
-6. Select **New chat** after the agent finishes saving. If Preview shows **BotDefinitionOverride has unresolved references: 1 missing flow(s), 0 missing connection reference(s). Error code: InvalidContent.**, wait for the save to finish and select **New chat** again. If it persists, open **Check approved airline**, select **Publish**, return to the agent, **Save**, wait for the save to finish and select **New chat**. Send:
+6. Select **New chat** after the agent finishes publishing. If Preview shows **BotDefinitionOverride has unresolved references: 1 missing flow(s), 0 missing connection reference(s). Error code: InvalidContent.**, **Publish** the agent, wait for publishing to finish and select **New chat** again. If it persists, open **Check approved airline**, select **Publish**, return to the agent, **Save**, **Publish** the agent, wait for publishing to finish and select **New chat**. Send:
 
 ```text
 Book me a flight from Paris to New York on 12 May with Tailspin Airlines.
@@ -452,7 +450,7 @@ Expect **Used tool: Book flight** after the hook and the simulated confirmation,
 
 ## 🏁 Finish and cleanup
 
-**A policy answer you can trace.** Core completion means a saved draft agent, a published Start workflow, and checked policy answers. The optional missions add trace evidence that redaction and the booking guard really ran.
+**A policy answer you can trace.** Core completion means a published agent, a published Start workflow, and checked policy answers. The optional exercises add trace evidence that redaction and the booking guard really ran.
 
 - **Events versus choices:** hooks run when events occur; tools are chosen by the agent. Preserve the starter workflow contract.
 - **Evidence before confidence:** check Location filters, scoped URLs and citations. Instructions alone do not prove grounding.
@@ -461,7 +459,7 @@ Expect **Used tool: Book flight** after the hook and the simulated confirmation,
 
 **Reflection:** Which step in your own agent belongs on every event, and what trace evidence would distinguish a real safeguard from an instruction the model might ignore?
 
-Keep your agent as an **unpublished draft** if you want to resume. These workflows use the on-demand **When an agent calls the flow** trigger, not unattended schedules. Leaving your own published workflows does not mean they are disabled; later agent calls can still invoke attached ones.
+You can keep your published agent if you want to resume. These workflows use the on-demand **When an agent calls the flow** trigger, not unattended schedules. Leaving your own published workflows does not mean they are disabled; later agent calls can still invoke attached ones.
 
 Your lab workflows (**Load traveler profile**, **Redact personal data**, **Book flight** and **Check approved airline**) stay **Published/Enabled** until you turn them off. They run only when your agent calls them; none runs on a schedule.
 

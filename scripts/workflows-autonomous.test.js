@@ -32,7 +32,7 @@ test('workflow portable copies and every mission prompt stay synchronized', () =
   }
 });
 
-test('prepared workflow opens directly without runner-specific setup gates', () => {
+test('prepared workflow includes required connections without runner-specific setup gates', () => {
   for (const copy of [...modern, classic, classicReadme]) {
     assert.doesNotMatch(copy, /Only the flow's owner|Create a copy|sender restriction|repeat all connection and dispatch checks/i);
   }
@@ -40,8 +40,69 @@ test('prepared workflow opens directly without runner-specific setup gates', () 
   assert.equal(explore.steps.length, 2);
   assert.match(explore.steps[0].instruction, /Workflows → Order Management Workflow → Build/);
   assert.match(explore.steps[1].instruction, /Classify/);
-  assert.doesNotMatch(JSON.stringify(explore), /owner|connection|restriction/i);
+  assert.doesNotMatch(JSON.stringify(explore), /owner|restriction/i);
+  assert.match(explore.steps[0].instruction, /Select each node on the canvas, including nodes in every branch/);
+  assert.match(explore.steps[0].instruction, /Human review\*\* connection is not created by default/);
   assert.match(document.data.mission_lab.self_setup, /Import/);
+});
+
+test('email trigger and approval connections are configured before first publication', () => {
+  for (const copy of [...modern, classic, classicReadme]) {
+    assert.match(copy, /When a new email arrives\*\* from \*\*Office 365 Outlook\*\*, not \*\*Outlook\.com\*\*/);
+    assert.match(copy, /Where a \*\*Connection\*\* field is shown/);
+    assert.match(copy, /create its connection manually using \*\*Create new connection\*\* in \*\*Connection\*\*/);
+    assert.match(copy, /Resolve missing-connection warnings on all nodes before publishing/);
+    assert.match(copy, /an unconnected node can block publication even if your next test uses another branch/);
+    assert.match(copy, /If publishing reports a missing connection, open the named node, create or select its connection/);
+    assert.ok(copy.indexOf('create its connection manually') < copy.indexOf('Confirm every node that requires a connection'),
+      'Create the Human review connection before the first email workflow publication');
+  }
+});
+
+test('classification screenshot identifies the Run node test field without changing configuration', () => {
+  const sample = steps.find(step => step.title === 'Inspect categories and run the quote sample');
+  assert.match(sample.instruction, /select \*\*Run node\*\*, next to \*\*Configure\*\*/);
+  assert.equal(sample.screenshot.title, 'Run node tab and Body test input');
+  assert.deepEqual([sample.screenshot.width, sample.screenshot.height], [406, 505]);
+  assert.match(sample.screenshot.caption, /Select Run node, not Configure/);
+  for (const copy of [...modern, classic, classicReadme]) {
+    assert.match(copy, /Do not paste the sample on \*\*Configure\*\* or replace its dynamic email input/);
+    assert.match(copy, /test \*\*Body\*\* field/);
+  }
+  for (const copy of [document.content, readme, classic, classicReadme]) {
+    const sampleIndex = copy.indexOf('Hi, I would like to request a quote for 500 units of Product A.');
+    const screenshotIndex = copy.indexOf('srcset=', copy.indexOf('## Exercise 3:') >= 0
+      ? copy.indexOf('## Exercise 3:') : copy.indexOf('#### Test the classification'));
+    assert.ok(screenshotIndex >= 0 && screenshotIndex < sampleIndex, 'Show the input location before the copyable sample');
+  }
+  for (const src of [sample.screenshot.src, sample.screenshot.src_dark]) {
+    const bytes = fs.readFileSync(path.join(root, src));
+    assert.equal(bytes.toString('ascii', 12, 16), 'VP8L');
+    const dimensions = bytes.readUInt32LE(21);
+    assert.deepEqual([(dimensions & 0x3fff) + 1, ((dimensions >>> 14) & 0x3fff) + 1], [406, 505]);
+  }
+});
+
+test('workflow agent and tool instructions identify the correct editing surface', () => {
+  for (const copy of [...modern, classic, classicReadme]) {
+    assert.doesNotMatch(copy, /inline agent|Confirm calendar writes target/i);
+    assert.match(copy, /choose the option to create a new agent in this workflow/);
+    assert.match(copy, /agent's \*\*Tools\*\* (?:section|list)/);
+    assert.match(copy, /not (?:add them )?as separate connector nodes/);
+    assert.match(copy, /Open the \[Microsoft To Do app\]\(https:\/\/to-do\.office\.com\/\), (?:select your|go to the) \*\*Tasks\*\* list/);
+  }
+});
+
+test('activity guidance separates opening a workflow run from inspecting its diagram', () => {
+  for (const copy of [...modern, classic, classicReadme]) {
+    assert.match(copy, /Workflows → To Do Time Block\*\*, then select \*\*Activity\*\*/);
+    assert.match(copy, /open the run that started after you created the test task/);
+    assert.match(copy, /run can take a few minutes to appear/);
+    assert.match(copy, /In the run diagram, (?:follow|select) \*\*Trigger → Apply to each → Agent\*\*/);
+    assert.match(copy, /Workflows → Order Management Workflow\*\*, then select \*\*Activity\*\*/);
+    assert.match(copy, /open the run that started after you sent the test email/);
+    assert.doesNotMatch(copy, /\*\*Activity → Classify/);
+  }
 });
 
 test('connections are reused and approval reflects the actual Outlook card', () => {
@@ -74,11 +135,25 @@ test('the core teaches approval and outcomes without training-environment cleanu
   assert.equal(document.data.mission_lab.finish.cleanup, undefined);
 });
 
-test('task planning starts the required core with clear action labels and unchanged total time', () => {
+test('task planning starts the required core with pacing aligned to the classic lab', () => {
   const core = missions.filter(mission => !mission.optional);
   assert.equal(core[0].id, 'time-block');
-  assert.equal(core.reduce((sum, mission) => sum + mission.minutes, 0), 30);
-  assert.equal(document.data.duration, 30);
+  assert.deepEqual(core.map(mission => mission.minutes), [25, 5, 5, 10]);
+  assert.equal(core.reduce((sum, mission) => sum + mission.minutes, 0), 45);
+  assert.equal(document.data.duration, 45);
+  assert.equal(document.data.duration, matter(read('_labs/mcs-workflows-latest.md')).data.duration);
+  assert.match(document.data.mission_lab.pacing, /45 minutes/);
+  assert.match(document.data.mission_lab.pacing, /up to 60 minutes if you are new to the workflow designer/);
+  for (const copy of [classic, classicReadme]) {
+    assert.match(copy, /45 minutes, or up to 60 minutes if you are new to the workflow designer/);
+  }
+  for (const copy of [document.content, readme]) {
+    assert.match(copy, /\| 45 minutes core \|/);
+    assert.match(copy, /take about 45 minutes/);
+    const minutes = [...copy.matchAll(/^\*\*(\d+) minutes ·/gm)].map(match => Number(match[1]));
+    assert.deepEqual(minutes, core.map(mission => mission.minutes));
+    assert.doesNotMatch(copy, /30.minute|30 minutes/);
+  }
   assert.deepEqual(missions.map(mission => mission.verb), [
     'Automate tasks', 'Inspect routing', 'Classify email', 'Review replies',
     'Handle inventory', 'Generate quotes',

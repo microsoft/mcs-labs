@@ -67,7 +67,7 @@ links to the correct labs.
 ## Architecture Bootcamp
 
 `architecture-bootcamp.yml` is the advertised three-day curriculum: 17 modules and
-11 missions-format labs. Its event and labs are listed, searchable, and included
+11 guided exercise labs. Its event and labs are listed, searchable, and included
 in the sitemap. The classic `bootcamp-latest` event is unlisted but its direct URL,
 lab pages, timetable, and explicit event navigation remain available.
 
@@ -164,7 +164,7 @@ Bootcamp-specific lab copies preserve the original shared Markdown files:
 | `mcs-tools` | `mcs-knowledge-and-tools-deep-dive` |
 | `mcs-workflows` | `mcs-workflows-latest` |
 
-The Zava Sales lab has its own images and opts into guided missions; other labs
+The Zava Sales lab has its own images and opts into guided exercises; other labs
 retain their classic rendering. Before delivering it, verify that the assigned
 account can find the Northstar renewal through **Chat business-data search** and
 can connect the **Cowork Dataverse plugin** to the training CRM. These are separate
@@ -176,8 +176,8 @@ The other copied labs reuse images and downloads from their original lab folders
 relative links; those asset folders remain dependencies. Do not remove them
 when editing or retiring an original lab. Workflows also has a Bootcamp-only
 module, `workflows-latest`, to avoid changing the shared module's duration.
-Both `mcs-workflows` and `mcs-workflows-latest` now have a 30-minute core
-(Use Cases 1–3). Inventory management and the price-quote specialist are
+`mcs-workflows` has a 30-minute core, while `mcs-workflows-latest` has a
+45-minute core for Bootcamp Latest (Use Cases 1–3). Inventory management and the price-quote specialist are
 optional extra credit outside that allocation. CAT-led events prepare the
 prerequisites; independent learners follow the self-guided setup in each lab.
 The shared and Bootcamp-only module durations remain separate from lab pacing.

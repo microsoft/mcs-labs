@@ -1,6 +1,6 @@
 ---
 name: lab-create
-description: Create a new MCS Labs hands-on lab in the classic format (README plus _labs page with a long-form use-case walkthrough) or the guided missions format (lab_format missions with copyable prompts, reveals and knowledge checks), then wire it to its module and event agendas, preview it unlisted and validate it. Use when asked to create, add, draft or scaffold a lab, turn prompts or a demo script into a lab, convert a lab to missions, or add a new lab to a bootcamp or event. Not for fixing an existing lab (use lab-update) or auditing one (use lab-review).
+description: Create a new MCS Labs hands-on lab in the classic format (README plus _labs page with a long-form use-case walkthrough) or the guided exercise format (with copyable prompts, reveals and knowledge checks), then wire it to its module and event agendas, preview it unlisted and validate it. Use when asked to create, add, draft or scaffold a lab, turn prompts or a demo script into a lab, convert a lab to exercises, or add a new lab to a bootcamp or event. Not for fixing an existing lab (use lab-update) or auditing one (use lab-review).
 ---
 
 # Create a lab
@@ -11,15 +11,19 @@ guided lab names it `_labs/mission-<slug>.md` (section 4).
 CI (`scripts/check-lab-sync.js`) fails a PR that changes the README without the
 `_labs` copy. The authoring contract is `docs/NEW_LAB_CHECKLIST.md`: read it first and
 treat it as the source of truth. This skill adds the decisions and the order of work.
+Apply the shared writing rules and [learn from corrections](../lab-review/references/learning-design.md#learn-from-corrections)
+whenever the user corrects a draft or its parent module. Use **exercise** in learner
+copy and carry reusable lessons into the guidance and affected templates, not just
+the current draft.
 
 ## 1. Choose the format
 
 | Choose | When |
 | --- | --- |
-| **Missions** (`lab_format: missions`) | A product tour driven by prompts and UI choices, 20–45 minutes, where each section should end with a "why it worked" reveal and a quick check. The reference lab is `cowork-zava-sales`. |
+| **Exercises** (`lab_format: missions`) | A product tour driven by prompts and UI choices, 20–45 minutes, where each section should end with a "why it worked" reveal and a quick check. The reference lab is `cowork-zava-sales`. |
 | **Classic** (default) | Long builds with many configuration steps, code or large tables; labs that several deliveries share; external labs (front matter stub only). |
 
-Missions is opt-in per lab and must not change other labs. Do not convert a shared lab
+The guided exercise format is opt-in per lab and must not change other labs. Do not convert a shared lab
 in place: copy it to a new slug for the delivery that needs the new format.
 Preserve the creator's scenario, use-case and teaching-step order when converting. Keep
 the required path first and mark only trailing extensions optional; do not move an earlier
@@ -59,13 +63,13 @@ Apply `../lab-review/references/learning-design.md` while drafting. In short:
 - Write for the learner only. No proctor or maintainer notes, no per-step minute
   arithmetic or "if time permits", and no account-hygiene boilerplate (separate
   profile or private window, ask the proctor if something is missing). State pacing as
-  at most one plain sentence saying which missions or use cases are core and which are
+  at most one plain sentence saying which exercises or use cases are core and which are
   optional.
 - Attendees with provided or pre-provisioned event accounts use a pre-set-up
   environment. Use the templates' short, organizer-neutral cue; do not imply that
   attending any event is enough to skip setup. Keep required sign-in, downloads and
   approvals that teach the exercise visible. Put own-tenant provisioning in
-  `mission_lab.self_setup` for missions and a closed setup disclosure in both readable
+  `mission_lab.self_setup` for exercises and a closed setup disclosure in both readable
   copies. `prerequisites` is an attendee readiness checklist, not provisioning. Do not
   add runner checks, repeated tenant warnings, test reports or generic work-habit advice.
   Put downloads in the step that uses them, and link the file itself (GitHub `/raw/`
@@ -95,7 +99,7 @@ grep -rnsE '%%|TEMPLATE NOTE' labs/<slug> _labs/<slug>.md _labs/mission-<slug>.m
 | Format | `labs/<slug>/README.md` | Site copy |
 | --- | --- | --- |
 | Classic | `templates/classic-README.md` | `templates/classic-site.md`, saved as `_labs/<slug>.md` |
-| Missions | `templates/missions-README.md` | `templates/missions-site.md`, saved as `_labs/mission-<slug>.md`; keep its `slug` and `permalink` lines |
+| Exercises | `templates/missions-README.md` | `templates/missions-site.md`, saved as `_labs/mission-<slug>.md`; keep its `slug` and `permalink` lines |
 
 Then:
 
@@ -115,8 +119,8 @@ Then:
    `lab-runthrough` skill: WebP, with genuine light and dark pairs for product UI.
    Follow the image-selection rules in `../lab-review/references/learning-design.md`;
    a supplied reference or theme-neutral image needs no invented dark version.
-5. **Missions only.** Follow "Authoring a guided mission lab" in the checklist, and:
-   - Core mission `minutes` must sum to `duration`; extensions get `optional: true`.
+5. **Exercises only.** Follow "Authoring a guided exercise lab" in the checklist, and:
+   - Core exercise `minutes` must sum to `duration`; extensions get `optional: true`.
    - Each prompt appears identically in front matter, the `_labs` body and the README,
      in order, including repeated occurrences. Preserve unlabelled sample input and
      expression fences too. Expected responses belong in an `output` fence within
@@ -129,17 +133,17 @@ Then:
      `<picture>` element in both bodies. Reference hero and step images in the body so
      the feed packages them. The hero has no `src_dark`.
    - Use the curriculum name for `title` and both H1s; the creative headline is a
-     secondary tagline. Keep stable mission/step IDs and readiness order when converting
+     secondary tagline. Keep stable exercise/step IDs and readiness order when converting
      an existing guided page, so saved progress remains attached to the same actions.
-   - Omit cleanup missions and `finish.cleanup` for organizer-disposed environments.
+   - Omit cleanup exercises and `finish.cleanup` for organizer-disposed environments.
      Put necessary own-tenant cleanup in the setup disclosure; runner cleanup stays in
      the run-through log.
-   - `scripts/lab-missions.test.js` asserts which labs use missions. Add the new slug to
+   - `scripts/lab-missions.test.js` asserts which labs use exercises. Add the new slug to
      that allowlist and add a contract test for the new lab modeled on the Zava Sales
-     tests (prompts verbatim in all copies, copies in sync, mission contract).
+     tests (prompts verbatim in all copies, copies in sync, exercise contract).
    - The `instruction` must be enough on its own; `help` is supplementary regardless of
      whether the current renderer opens or collapses it. An action a later step depends
-     on, such as attaching a file the next prompt reads, gets its own visible step. The renderer reads missions from
+     on, such as attaching a file the next prompt reads, gets its own visible step. The renderer reads exercises from
      `mission_lab` front matter, so learner-critical guidance in the Markdown body alone
      may not appear on the page. Verify the rendered version and open each details panel.
    - The layout keeps checkmarks, quiz answers and the `reflection` note only in the
@@ -171,9 +175,9 @@ bash tools/run.sh                 # or .\tools\run.ps1; open /mcs-labs/labs/<slu
 ```
 
 In the browser, check images, the table of contents, Previous and Next with
-`?event=<id>`, and light and dark themes. For missions also check keyboard use, a mobile
+`?event=<id>`, and light and dark themes. For exercises also check keyboard use, a mobile
 width, the page with JavaScript disabled, and full-size image links with the actual theme
-JavaScript loaded. Verify both readable copies and the rendered mission fields, not just
+JavaScript loaded. Verify both readable copies and the rendered exercise fields, not just
 front matter syntax. Then run the `lab-review` skill, and
 `lab-runthrough` when a training environment is available.
 

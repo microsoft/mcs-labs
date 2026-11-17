@@ -215,7 +215,7 @@ connection change must be restored afterward.
 - Improve newly captured or deliberately replaced images. Do not recapture the existing
   library unless the user requests it.
 
-Missions screenshots are declared in front matter and rendered by the mission layout:
+Exercises screenshots are declared in front matter and rendered by the exercise layout:
 
 ```yaml
 screenshot:
@@ -293,8 +293,8 @@ Seen on a managed Windows device in November 2026.
   signed URLs; keep those out of run logs and PRs.
 - Opening a lab locally requires the `/mcs-labs/` baseurl and event-context query where
   applicable; verify both in generated HTML, not only in Markdown source.
-- The missions renderer reads `mission_lab` front matter; a helpful sentence added only
-  to the README/body may not appear in the rendered missions page. Put learner-critical
+- The exercises renderer reads `mission_lab` front matter; a helpful sentence added only
+  to the README/body may not appear in the rendered exercises page. Put learner-critical
   instructions in supported rendered fields. Open collapsed `<details>` to verify their
   contents because `innerText` can omit closed content. Decode the currently visible
   lazy-loaded image and compare natural dimensions with front matter; close it afterward.
@@ -339,7 +339,7 @@ when a run-through finds something new, and date it.
   prompt; otherwise text can land in the instructions editor instead.
 - Copilot Studio's agent-name input currently limits names to 30 characters. Verify that
   the saved name matches the lab's name exactly.
-- Missions help presentation can vary with the renderer version. The main `instruction`
+- Exercises help presentation can vary with the renderer version. The main `instruction`
   must be independently actionable; help is supplementary, and verify the actual rendered
   page rather than assuming whether `<details>` starts open or closed.
 

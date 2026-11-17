@@ -2,7 +2,9 @@
 
 Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Assemble a Standard harness agent from instructions, topics, knowledge and tools, then optionally inspect state, delegate to a child agent and publish to Teams.
+You'll build a Copilot Studio Assistant and test its instructions, topics, knowledge and tools. Optional exercises show how to inspect conversation state, add a child agent and publish the assistant to Teams.
+
+
 
 ## 🧭 Lab Details
 
@@ -25,7 +27,7 @@ Complete the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/m
 
 **Standard remains its own harness.** Only the former GitHub Copilot harness was renamed **Microsoft Copilot harness**. Its menu badge may still read **GitHub Copilot**; choose **Standard**, not the top Microsoft Copilot option.
 
-Configure, Author, Ground and Extend take about 30 minutes; Inspect, Delegate and Publish are optional.
+The Configure, Author, Ground and Extend exercises take about 30 minutes; Inspect, Delegate and Publish are optional.
 
 ## 📚 Table of Contents
 

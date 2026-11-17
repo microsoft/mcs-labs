@@ -14,5 +14,5 @@ lab: "cowork-zava-sales"
 
 Use the [Cowork + Plugins Hands-On Lab]({{ '/labs/cowork-plugins-hands-on/' | relative_url }}) for this workshop's Lab 1.
 Practice document-grounded email drafting and SharePoint sales dashboard creation in a 30-minute lab.
-The Bootcamp companion below uses the Zava Sales scenario and guided mission format.
+The Bootcamp companion below uses the Zava Sales scenario and guided exercise format.
 The [classic Cowork hands-on lab]({{ '/labs/mcs-cowork-latest/' | relative_url }}) remains available for other deliveries.

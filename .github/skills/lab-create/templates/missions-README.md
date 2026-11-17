@@ -1,6 +1,6 @@
 # %%TITLE%%
 
-%%ONE_SENTENCE_DESCRIPTION%%
+%%ONE_SENTENCE_DESCRIPTION: name the topic and what learners will learn in plain language.%%
 
 ## 🧭 Lab Details
 

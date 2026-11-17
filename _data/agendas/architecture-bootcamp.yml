@@ -233,9 +233,9 @@ schedule:
     title: "Day 3 — Workflows & Operations"
 
   - type: break
-    title: "Re-Welcome / Re-cap / Quiz"
+    title: "Re-Welcome / Re-cap"
     time: "09:00"
-    duration: 30
+    duration: 15
 
   - type: module
     slug: workflows-latest
@@ -243,20 +243,20 @@ schedule:
     lab: false
     companion_lab: workflows-autonomous
     title: "Workflows"
-    time: "09:30"
+    time: "09:15"
     duration: 45
 
   - type: break
     title: "Coffee break / Q&A"
-    time: "10:15"
+    time: "10:00"
     duration: 15
 
   - type: lab
     slug: workflows-autonomous
     label: "Lab 10"
     title: "Workflows"
-    time: "10:30"
-    duration: 30
+    time: "10:15"
+    duration: 45
 
   - type: module
     slug: agent-integration

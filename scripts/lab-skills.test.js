@@ -60,6 +60,44 @@ test('all four lab skills have valid metadata and use the shared learning-design
   }
 });
 
+test('corrections feed shared writing practices back into every skill workflow', () => {
+  const guidance = read('lab-review', 'references', 'learning-design.md');
+  assert.match(guidance, /Use \*\*exercise\*\* consistently/);
+  assert.match(guidance, /Remove AI filler/);
+  assert.match(guidance, /For every lab or module correction/);
+  assert.match(guidance, /Do not invent file names/);
+  assert.match(guidance, /one complete copyable block with a/);
+  assert.match(guidance, /distinctive placeholder, not separate fragments/);
+  assert.match(guidance, /Strengthen|clarify it when the correction exposes a gap/);
+  assert.match(guidance, /Read-only reviews and run-throughs propose/);
+  for (const name of skillNames) {
+    assert.ok(read(name, 'SKILL.md').includes('#learn-from-corrections'),
+      `${name}: follow the shared correction feedback workflow`);
+  }
+  const instructions = fs.readFileSync(path.join(root, '.github', 'copilot-instructions.md'), 'utf8');
+  assert.match(instructions, /Learn from every lab or module correction/);
+  const rubric = read('lab-review', 'references', 'review-rubric.md');
+  assert.match(rubric, /no AI filler/);
+  assert.match(rubric, /Each correction has been checked for a reusable lesson/);
+  assert.match(guidance, /like a teacher explaining the lesson/);
+  assert.match(rubric, /teacher's plain voice/);
+  assert.match(read('lab-create', 'templates', 'missions-site.md'), /what learners will do and learn/);
+});
+
+test('skill prose uses exercise terminology while technical references stay compatible', () => {
+  const files = fs.readdirSync(skills, { recursive: true })
+    .filter(file => file.endsWith('.md'));
+  assert.ok(files.length > 0);
+  for (const file of files) {
+    const prose = fs.readFileSync(path.join(skills, file), 'utf8')
+      .replace(/```[\s\S]*?```/g, '')
+      .replace(/`[^`]+`/g, '')
+      .replace(/^\s*(?:lab_format: missions|missions:)\s*$/gm, '');
+    assert.doesNotMatch(prose, /\bmissions?\b/i, `${file}: exercise terminology`);
+    assert.doesNotMatch(prose, /not \*\*exercise\*\*|a exercises|Exercises is/);
+  }
+});
+
 for (const format of ['classic', 'missions']) {
   test(`${format} templates scaffold matching readable copies and closed own-tenant setup`, () => {
     const page = matter(scaffold(`${format}-site.md`));

@@ -193,7 +193,7 @@ test('Bootcamp Latest Hooks pacing preserves the shared workshop lab duration', 
   assert.equal(readDocument('_labs', 'mcs-hooks').data.module, 'metadata-and-hooks-deep-dive');
 });
 
-test('Workflows labs share a 30-minute core with optional extra credit and event-prepared setup', () => {
+test('Workflows labs preserve edition-specific pacing with optional extra credit and event-prepared setup', () => {
   // Prepared attendees skip setup, while self-setup learners get both solution
   // packages. Missing starter assets are a proctor issue, not tenant setup work.
   const setupMarkers = {
@@ -208,7 +208,9 @@ test('Workflows labs share a 30-minute core with optional extra credit and event
   };
   for (const slug of ['mcs-workflows', 'mcs-workflows-latest']) {
     const lab = readDocument('_labs', slug);
-    assert.equal(lab.data.duration, 30, `${slug}: core duration`);
+    const duration = slug === 'mcs-workflows-latest' ? 45 : 30;
+    const allocations = slug === 'mcs-workflows-latest' ? [25, 10, 10] : [15, 8, 7];
+    assert.equal(lab.data.duration, duration, `${slug}: core duration`);
     const sources = [
       lab.content,
       fs.readFileSync(path.join(root, 'labs', slug, 'README.md'), 'utf8'),
@@ -219,19 +221,22 @@ test('Workflows labs share a 30-minute core with optional extra credit and event
         `${slug}: only the first three use cases are core`);
       const durations = [...content.matchAll(/^\| [1-3] \|.*\| (\d+) min \|$/gm)]
         .map((match) => Number(match[1]));
-      assert.deepEqual(durations, [15, 8, 7], `${slug}: core allocations total 30 minutes`);
+      assert.deepEqual(durations, allocations, `${slug}: core allocations`);
+      assert.equal(durations.reduce((total, minutes) => total + minutes, 0), duration);
       assert.equal([...content.matchAll(/^## .*Extra Credit: /gm)].length, 2,
         `${slug}: both advanced exercises are optional`);
       for (const marker of setupMarkers[slug]) {
         assert.ok(content.includes(marker), `${slug}: setup guidance includes ${marker}`);
       }
       if (slug === 'mcs-workflows-latest') {
+        assert.ok(content.includes(`| ${duration} minutes |`), `${slug}: Lab Details duration`);
         assert.match(content, /proctor.led[\s\S]{0,160}pre.provisioned[\s\S]{0,160}ready to start/i);
         // The Account Lookup solution is not a dependency of this lab, and
         // prepared environments need no ownership or connection-reference repair.
         assert.doesNotMatch(content, /Account Lookup Agent|Transfer ownership|Ownership is a prerequisite|Dataverse connection reference — do this first/);
       }
-      assert.doesNotMatch(content, /45.minute|45 minutes|Use Case #4|Use Case #5/);
+      assert.doesNotMatch(content, /Use Case #4|Use Case #5/);
+      assert.doesNotMatch(content, duration === 45 ? /30.minute|30 minutes/ : /45.minute|45 minutes/);
     }
   }
   assert.equal(readDocument('_modules', 'workflows').data.lab, 'mcs-workflows');

@@ -2,7 +2,9 @@
 
 Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Build a cited Zava DIY decision brief with Copilot Chat, deeper reasoning and Work IQ, then optionally explore Pages, Researcher and Analyst.
+You'll research a market question, apply a company policy and compare store results. You'll check the sources behind the answers. Optional exercises introduce Pages, Researcher and Analyst.
+
+
 
 ## 🧭 Lab Details
 
@@ -245,7 +247,7 @@ Do not estimate, calculate, or infer anything.
 
 Store-level inventory should read **not stated**. The report deliberately withholds it and says so in the methodology appendix. Category-level inventory is not store-level inventory.
 
-3. Keep this conversation for the optional **Publish** mission. You now have a market summary, policy decision checklist and checked performance table; do not turn missing values into estimates.
+3. Keep this conversation for the optional **Publish** exercise. You now have a market summary, policy decision checklist and checked performance table; do not turn missing values into estimates.
 
 <details>
 <summary>Reveal: Was the empty inventory column a failure?</summary>
@@ -341,7 +343,7 @@ Complete the chat response → Edit in Pages → Verify the artifact.
 
 **Finish line:** A sourced executive briefing and a problem-to-recommendation gap analysis. You are now the regional vice president reviewing Contoso Grand Hotel & Resort.
 
-1. Download the [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Save it somewhere you can find for this mission and **Model**. It contains financial and operational tables across 18 sections.
+1. Download the [Contoso Grand Hotel Performance Report](https://github.com/microsoft/mcs-labs/raw/main/labs/agent-builder-m365/Contoso_Grand_Hotel_Performance_Report.pdf). Save it somewhere you can find for this exercise and **Model**. It contains financial and operational tables across 18 sections.
 2. In [Microsoft Copilot](https://copilot.cloud.microsoft/), start a new chat, type `@Researcher` in the prompt box and select the **Researcher** suggestion. Look for **What do you want to research today?**
 3. Select **+** → **Upload images and files**, choose `Contoso_Grand_Hotel_Performance_Report.pdf`, and wait for the attachment to appear.
 
@@ -414,7 +416,7 @@ Attach one report → Connect sections → Check recommendation gaps.
 
 </details>
 
-**Stuck?** If Researcher is not offered when you type `@Researcher`, ask the facilitator to check availability for the assigned account. Continue the core Chat missions; do not build a replacement agent. If it pauses, read and answer its clarification; use the go ahead reply only when it asks to proceed, not to bypass a missing attachment or permission.
+**Stuck?** If Researcher is not offered when you type `@Researcher`, ask the facilitator to check availability for the assigned account. Continue the core Chat exercises; do not build a replacement agent. If it pauses, read and answer its clarification; use the go ahead reply only when it asks to proceed, not to bypass a missing attachment or permission.
 
 ## 📊 Model: Calculate the financial case
 
@@ -490,7 +492,7 @@ Extract report data → Apply explicit assumptions → Check computed results.
 
 ## 🎒 Take it with you
 
-Your core result is a cited market summary, policy decision checklist and checked store table. Optional missions add an editable pre-read, a research briefing and a financial model.
+Your core result is a cited market summary, policy decision checklist and checked store table. Optional exercises add an editable pre-read, a research briefing and a financial model.
 
 - **Grounding:** choose public-web or permitted work context before prompting; Work IQ does not widen access.
 - **Judgment:** open citations, preserve missing values, and distinguish a recommendation from an approval.

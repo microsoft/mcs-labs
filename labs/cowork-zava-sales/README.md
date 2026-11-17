@@ -1,6 +1,8 @@
 # Cowork: from insights to action
 
-Find a proposal in Copilot Chat, prepare a live deal brief with the Zava Sales Hub agent, and create a lead in its MCP App. Then delegate a Zava-branded pipeline review to Cowork and turn the procedure into a reusable, scheduled skill.
+You'll find a proposal, prepare for a customer call and create a lead with the Zava Sales Hub agent. Then you'll use Cowork to prepare a pipeline review and save the procedure as a reusable skill.
+
+
 
 ## 🧭 Lab Details
 
@@ -12,7 +14,7 @@ Use your assigned **training account**. Your facilitator prepares Copilot access
 
 Open [Zava Sales Hub](https://aka.ms/ZavaSalesHub). It is the CRM in this scenario: a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data (accounts, contacts, leads, opportunities and activities). On first use, check that the Microsoft Dataverse consent shows your assigned training account, then select **Allow**. Wait for **Live CRM** before checking what Copilot finds and the records you create.
 
-Ask, Act, Delegate and Repeat take about 30 minutes; the Riley call and CRM update, Friday feedback loop and Zava Sales plugin missions are optional.
+Ask, Act, Delegate and Repeat take about 30 minutes; the Riley call and CRM update, Friday feedback loop and Zava Sales plugin exercises are optional.
 
 ## ✅ Prerequisites
 
@@ -21,7 +23,7 @@ Ask, Act, Delegate and Repeat take about 30 minutes; the Riley call and CRM upda
 <details class="lab-setup" markdown="1">
 <summary>Using your own tenant? View setup requirements</summary>
 
-Arrange Copilot access with Work IQ, the sample Northwind proposal, Cowork credits, and Zava Sales training data before starting. Make the **Zava Sales Hub agent with its lead-creation MCP App** available in Chat, and provide the **Microsoft Dataverse** and **Zava PowerPoint** plugins in Cowork. The separate **Zava Sales** Cowork plugin is needed only for the optional Specialize mission. These are demo assets to obtain from your facilitator, not built-in capabilities to recreate during this lab.
+Arrange Copilot access with Work IQ, the sample Northwind proposal, Cowork credits, and Zava Sales training data before starting. Make the **Zava Sales Hub agent with its lead-creation MCP App** available in Chat, and provide the **Microsoft Dataverse** and **Zava PowerPoint** plugins in Cowork. The separate **Zava Sales** Cowork plugin is needed only for the optional Specialize exercise. These are demo assets to obtain from your facilitator, not built-in capabilities to recreate during this lab.
 
 </details>
 
@@ -181,7 +183,7 @@ The command is free and shows **approximate cumulative task usage**, not an invo
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/task-cost-dark.webp"><img src="images/task-cost.webp" alt="Example cumulative task usage, not a fixed lab cost"></picture>
 
-**Core lab complete.** [Take it with you](#-take-it-with-you), or continue with the optional missions below.
+**Core lab complete.** [Take it with you](#-take-it-with-you), or continue with the optional exercises below.
 
 ## 📝 Record: log the call and commitment
 

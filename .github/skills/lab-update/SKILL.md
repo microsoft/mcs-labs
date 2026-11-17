@@ -1,6 +1,6 @@
 ---
 name: lab-update
-description: Fix or refresh an existing MCS Labs hands-on lab (classic or guided missions format) and open a pull request. Applies findings from a lab-review report, a lab-runthrough log, a GitHub lab-update issue or a product change, keeps the README and _labs copies in sync, replaces drifted screenshots, keeps durations and agendas consistent, records confirmed product renames for the audit, validates, and opens a reviewable PR. Use when asked to fix, update, refresh, correct or modernize a lab, apply review findings, update screenshots, handle a product rename across labs, or open a PR for lab changes. Never merges.
+description: Fix or refresh an existing MCS Labs hands-on lab (classic or guided exercise format) and open a pull request. Applies findings from a lab-review report, a lab-runthrough log, a GitHub lab-update issue or a product change, keeps the README and _labs copies in sync, replaces drifted screenshots, keeps durations and agendas consistent, records confirmed product renames for the audit, validates, and opens a reviewable PR. Use when asked to fix, update, refresh, correct or modernize a lab, apply review findings, update screenshots, handle a product rename across labs, or open a PR for lab changes. Never merges.
 ---
 
 # Update a lab
@@ -10,6 +10,10 @@ then a PR someone else merges.
 Apply the shared learner-facing rules in
 `../lab-review/references/learning-design.md`, including when the update comes directly
 from a user rather than a review report.
+For every lab or module correction, follow [learn from corrections](../lab-review/references/learning-design.md#learn-from-corrections):
+apply the writing rules, capture missing reusable guidance and align affected
+templates, review checks and tests in the same change. Use **exercise**, not
+**exercise**, in learner-facing text; keep the internal format names unchanged.
 
 ## 1. Start from evidence
 
@@ -28,7 +32,7 @@ depends on product UI and a training environment is available, run `lab-runthrou
 
 Agree the scope before editing when it is more than a fix: rewrites, a new format,
 different prompts or a new duration need the lab owner (`git log --format='%an' --
-labs/<slug> _labs/<slug>.md _labs/mission-<slug>.md | sort | uniq -c | sort -rn`).
+labs/<slug> _labs/<slug>.md _labs/exercise-<slug>.md | sort | uniq -c | sort -rn`).
 
 ## 2. Branch
 
@@ -42,6 +46,12 @@ script changes.
 `_labs/mission-<slug>.md` for a guided lab) change together, in the same commit. CI
 (`Lab Doc Sync`) fails a PR that changes a README without its site copy.
 
+- **Corresponding editions.** When modifying a lab, find and update its corresponding
+  classic or guided edition in the same PR, even when it uses a different slug
+  (for example, `mcs-workflows-latest` and `workflows-autonomous`). Keep both editions'
+  READMEs and site copies, exercise front matter and readable body, prompts, pacing,
+  affected event agendas, and timing tests consistent. Core exercise minutes must sum
+  to the lab duration.
 - **Headings.** README headings keep their emoji; `_labs` headings have none. When a
   heading changes, update the hand-written table of contents in both copies; the audit
   checks every anchor.
@@ -54,7 +64,7 @@ script changes.
 - **Write for the learner only.** No proctor or maintainer notes, no per-step minute
   arithmetic or "if time permits", and no account-hygiene boilerplate (separate
   profile or private window, ask the proctor if something is missing). State pacing as
-  at most one plain sentence saying which missions or use cases are core and which are
+  at most one plain sentence saying which exercises or use cases are core and which are
   optional.
   Use action-and-object labels such as "Automate tasks" or "Classify email", rather
   than mixing a use-case name with vague lifecycle labels such as "Explore".
@@ -74,7 +84,7 @@ script changes.
   already provided by the training tenant. Preserve approvals that teach the workflow's
   behavior, not maintainer safety checklists or generic coaching. When organizers
   delete the training environments, omit end-of-lab shutdown, off-state verification,
-  test-data removal, and cleanup missions. Independent-tenant cleanup belongs in
+  test-data removal, and cleanup exercises. Independent-tenant cleanup belongs in
   that setup's expandable guidance only when needed.
   Tell learners which service to open, not how to arrange their windows. Avoid
   side-by-side, split-screen or keep-the-lab-beside-the-product instructions, and generic
@@ -96,14 +106,14 @@ script changes.
   is enough to skip setup. Keep required sign-in and exercise downloads visible, linking
   each download to the file itself (GitHub `/raw/` URL), not its `/blob/` preview; put
   independent-tenant provisioning in the expandable setup section. Replace older event-specific variants.
-  In missions labs, `prerequisites:` is an always-visible attendee readiness checklist.
+  In guided labs, `prerequisites:` is an always-visible attendee readiness checklist.
   Put own-tenant setup in `mission_lab.self_setup` and matching closed disclosures in both
   readable copies, not in that checklist.
 - **Rendered Markdown.** Escape literal pipes in prose as `&#124;` where Kramdown could
   make an accidental table. Build the page and inspect generated HTML; source-only review
   will not catch every list or table parsing issue.
 - **Prompts.** Prompts are tested content. Change one only when the run-through shows it
-  no longer works, and say why in the PR. In missions labs the prompt must stay identical
+  no longer works, and say why in the PR. In guided labs the prompt must stay identical
   in front matter, the `_labs` body and the README. If an unchanged supplied prompt has a
   baseline retired-name warning, disclose it as pre-existing; do not rename the prompt to
   silence the audit.
@@ -112,14 +122,14 @@ script changes.
   `node --test scripts/prompt-wrap.test.js`.
   Preserve sample emails, expressions and expected-output fences too, including unlabelled
   ones and repeated occurrences. Expected output belongs in `instruction`, not `prompt`.
-- **Durations.** `duration`, the Lab Details row, use-case or mission minutes, and every
+- **Durations.** `duration`, the Lab Details row, use-case or exercise minutes, and every
   agenda slot listing the lab (`agenda-usage`) must agree. Agenda changes affect an event,
   so name the event in the PR.
 - **Dates.** Do not add update dates; the site derives them from Git.
-- **Missions labs.** Keep the contract: core `minutes` sum to `duration`, each check has
+- **Guided labs.** Keep the contract: core `minutes` sum to `duration`, each check has
   exactly one correct option, and only trailing extensions are optional. Preserve
-  mission/step IDs and readiness positions, and do not add result-check gates. Apply the
-  prepared-training cleanup rule above, not a blanket cleanup mission. `npm test` enforces
+  exercise/step IDs and readiness positions, and do not add result-check gates. Apply the
+  prepared-training cleanup rule above, not a blanket cleanup exercise. `npm test` enforces
   the content contracts.
 - **Retired names.** Current names (check `scripts/lab-audit-terms.json` for the full
   list): **Microsoft Copilot** and **Microsoft Copilot Chat** since August 2026 (formerly
@@ -136,7 +146,7 @@ script changes.
 ## 4. Replace screenshots
 
 Use the captures and crop sizes from the `lab-runthrough` log. Keep the file name and
-format so neither copy's Markdown changes. For missions labs, update `width`, `height` and
+format so neither copy's Markdown changes. For guided labs, update `width`, `height` and
 `alt` in the front matter, keep `src` and `src_dark` pairs together and keep the
 `<picture>` element in both bodies. Use genuine current product captures at native
 resolution; never retouch pixels to alter a name, result or product state. Recheck target
@@ -176,7 +186,7 @@ bash tools/run.sh                 # or .\tools\run.ps1; open /mcs-labs/labs/<slu
 In the browser check the changed sections, images in light and dark themes, the table of
 contents links, and Previous and Next with `?event=<id>` for each event that lists the
 lab. Verify the generated HTML, including literal pipes escaped as `&#124;`, rendered
-mission instructions/help, lazy image dimensions and baseurl/event-context links. Compare
+exercise instructions/help, lazy image dimensions and baseurl/event-context links. Compare
 the audit with `main` when the lab already had findings: the PR should not add any.
 
 ## 6. Open the PR

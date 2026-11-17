@@ -121,6 +121,7 @@ This document contains essential context for GitHub Copilot when working on the 
 6. **Enforce quality**: Don't just fix issues - explain why and document properly
 7. **Verify CSS consistency**: When making UI changes, check all CSS files for consistent, generic naming (no event-specific class names)
 8. **BEFORE ANY COMMIT**: Proactively ask "Have we added documentation and comments for this change?"
+9. **Learn from every lab or module correction**: Apply the shared writing rules in `.github/skills/lab-review/references/learning-design.md` on every edit. Use **exercise**, not **mission**, in learner-facing text; write clear, direct instructions without AI filler. Before finishing a correction, capture any reusable lesson in that shared guidance and update affected skill instructions, templates, review checks and tests in the same change. Strengthen an existing rule rather than duplicating it; keep one-off scenario details out of the rules. Read-only reviews and run-throughs propose these updates in their handoff instead of editing files.
 
 **BLOCKING Actions (Stop User):**
 
@@ -175,6 +176,13 @@ Site is served at `http://localhost:4000/mcs-labs/` - the `/mcs-labs/` baseurl i
 | `labs/<slug>/images/` | Images referenced by both. |
 
 **Both files must change in the same PR.** `.github/workflows/lab-doc-sync.yml` runs `scripts/check-lab-sync.js` on every PR: a changed README without a matching `_labs/` change **fails the build**; the reverse produces a warning.
+
+**Keep corresponding classic and missions labs synchronized.** When modifying a lab,
+find its corresponding edition (the slugs can differ, for example
+`mcs-workflows-latest` and `workflows-autonomous`) and apply the relevant changes there
+in the same PR. Update each edition's README and site copy, including mission front
+matter, readable body, prompts, and pacing. Core mission minutes must sum to the lab
+duration; update all affected event agendas and timing tests too.
 
 **Front matter drives the page** - `_layouts/lab.html` reads `page.title`, `page.description`, `page.module`, `page.section`, `page.difficulty`, `page.duration`, `page.order`, `page.journeys`. Metadata lives in the lab's front matter, not in a central config.
 

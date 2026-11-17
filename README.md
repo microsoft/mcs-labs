@@ -17,7 +17,7 @@
 | Copilot Agent Ecosystem | [m365-copilot-frontier-agents](./labs/m365-copilot-frontier-agents) | Use Microsoft 365 Copilot chat, Work IQ, response modes, multiple AI models, and frontier agents to turn public and organizational information into decision-ready work. |
 | Cowork Hands-On | [cowork-hands-on](./labs/cowork-hands-on) | Delegate a document-grounded task to Copilot Cowork and have it draft real output in Microsoft 365 on your behalf. |
 | Cowork + Plugins Hands-On Lab | [cowork-plugins-hands-on](./labs/cowork-plugins-hands-on) | Use Copilot Cowork to draft emails and build a SharePoint sales dashboard, with optional exercises on reusable skills and shared plugins. |
-| Cowork: from insights to action | [cowork-zava-sales](./labs/cowork-zava-sales) | Four core missions plus two optional extensions: prepare a Zava Sales review, create slides and Outlook drafts, update CRM, and save a reusable, scheduled skill. |
+| Cowork: from insights to action | [cowork-zava-sales](./labs/cowork-zava-sales) | Four core exercises plus two optional extensions: prepare a Zava Sales review, create slides and Outlook drafts, update CRM, and save a reusable, scheduled skill. |
 | Proactive Contract Alerts in Teams with Azure AI Search and Speech-to-Text | [contract-alerts-azure-ai](./labs/contract-alerts-azure-ai) | Configure Copilot Studio agents to proactively notify users when new files are added to Azure Blob Storage, connect Azure AI Search as a knowledge source, and integrate Azure Speech-to-Text services to transcribe audio files. |
 | Copilot Studio Agent Academy - Recruit Level | [Agent Academy](https://microsoft.github.io/agent-academy/recruit/) | Comprehensive 13-lesson curriculum covering agents, LLMs, declarative and custom agents, Topics, Adaptive Cards, Agent Flows, and deployment to Teams and Microsoft 365 Copilot. |
 | Build Intelligent Agents with Knowledge Sources, Tools, and Topics | [core-concepts-agent-knowledge-tools](./labs/core-concepts-agent-knowledge-tools) | Learn how to create an AI agent from scratch in Copilot Studio, enhance it with knowledge sources, extend its capabilities with tools, and build custom topics for structured conversations. |
@@ -52,7 +52,7 @@
 
 ## Copilot & Agents Bootcamp
 
-The advertised [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) contains 17 modules and 11 guided missions-format labs. Its [agenda](./_data/agendas/architecture-bootcamp.yml) is the source of truth for the three-day schedule.
+The advertised [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) contains 17 modules and 11 guided exercise labs. Its [agenda](./_data/agendas/architecture-bootcamp.yml) is the source of truth for the three-day schedule.
 
 | Lab | Title | Slot |
 | --- | ----- | ---- |
@@ -69,7 +69,7 @@ The advertised [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/
 | 11 | [Agent integration](./labs/agent-integration-team) | 30 min |
 
 Slots are agenda allocations, not a promise that all retained reference exercises fit.
-All 11 labs use guided missions, including the shared Zava Sales lab. Model and
+All 11 labs use guided exercises, including the shared Zava Sales lab. Model and
 connector latency varies by run. See each lab's pacing and optional extensions,
 and the [curriculum notes](./_data/agendas/README.md#architecture-bootcamp).
 

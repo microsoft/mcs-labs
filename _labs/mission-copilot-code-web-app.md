@@ -9,14 +9,14 @@ difficulty: 100
 lab_type: local
 section: core_learning_path
 journeys: ["business-user", "developer"]
-description: "Build, refine, and publish a Bootcamp Lab Tracker through four sequential prompts, checking its schedule, progress, and accessible day tabs."
+description: "Learn to build and publish a web app with Copilot Code using a bootcamp lab tracker as the example."
 classes: wide
 author_profile: false
 toc: false
 mission_lab:
-  headline: "From a clear brief"
-  headline_emphasis: "to a working web app."
-  promise: "Four prompts. Five core missions. Build a Bootcamp Lab Tracker, refine one thing at a time, and test the published result without writing code manually."
+  headline: "Build a web app"
+  headline_emphasis: "with Copilot Code"
+  promise: "You'll use four prompts to build a Bootcamp Lab Tracker, improve its layout and controls, and publish it. You'll test the schedule, completion tracking and keyboard navigation without writing the code yourself."
   hero_image:
     src: /labs/copilot-code-web-app/images/tracker-day-tabs.webp
     alt: "Bootcamp Lab Tracker with a dark design, day tabs, a timeline and green completed lab cards."
@@ -24,14 +24,14 @@ mission_lab:
     height: 2340
     caption: "Your destination: a tracker with day tabs, a lab timeline and synchronized completion."
   scenario: |-
-    You are attending the bootcamp and need one place to see every day's labs and mark them complete. Build from the **published agenda**, not an invented schedule. Lunch belongs on the timeline but must never count toward progress.
+    You'll build a **Bootcamp Lab Tracker** that lists each day's labs and lets you mark them complete. Use the **published agenda** for lab names and times. The tracker should show lunch on the timeline without counting it as a completed lab.
   self_setup: |-
     Complete the [classic lab's prerequisite setup](https://microsoft.github.io/mcs-labs/labs/mcs-copilot-code/#prerequisites) separately before starting. Copilot Code is a Frontier preview in the browser; this exercise needs no local development toolchain.
   prerequisites:
     - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your provided **lab account**."
     - "Open the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) for comparison."
     - "Do not change tenant settings during the lab."
-  pacing: "Build, Style, Label, Navigate and Publish take about 30 minutes; Extend is optional."
+  pacing: "The Build, Style, Label, Navigate and Publish exercises take about 30 minutes; Extend is optional."
   missions:
     - id: build
       verb: Build
@@ -120,7 +120,7 @@ mission_lab:
             correct: true
             feedback: "The total must match the source data and the explicit exclusions."
       stuck:
-        - problem: "Generation is taking longer than the mission budget."
+        - problem: "Generation is taking longer than the exercise budget."
           solution: "Check whether Copilot Code is waiting for permission. If it is actively working, read ahead without submitting the next prompt. Do not resend Prompt 1 or start a second session. Ask your facilitator for help if generation or troubleshooting overruns."
         - problem: "The app link does not open, or the agenda cannot be fetched."
           solution: "Ask Copilot Code for a working link if publishing completed. If it still fails, or the agenda cannot be fetched or contains no matching labs, stop and tell your facilitator. Do not fabricate the agenda."
@@ -290,7 +290,7 @@ mission_lab:
             caption: "Use this Refresh button to load the newly published version."
         - title: "Repeat the schedule and completion checks"
           instruction: |
-            1. Repeat the Build mission's schedule and completion checks: every day's numbers, titles, times, Lunch, exclusions, dynamic total, toggles, reversal, and **TOTAL of TOTAL** must still be correct.
+            1. Repeat the Build exercise's schedule and completion checks: every day's numbers, titles, times, Lunch, exclusions, dynamic total, toggles, reversal, and **TOTAL of TOTAL** must still be correct.
             2. Complete a lab on one day, switch to another, and switch back. Confirm the tick remains and the header includes completions from all days.
             3. Compare each tab's **x/y** count with that day's completed and total labs.
             4. Complete all labs on a day and confirm its count turns green both while that tab is selected and after selecting another day; uncheck one and confirm complete-day styling reverses.
@@ -397,7 +397,9 @@ mission_lab:
 
 Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Build, refine, and publish a Bootcamp Lab Tracker through four sequential prompts, checking its schedule, progress, and accessible day tabs.
+You'll use four prompts to build a Bootcamp Lab Tracker, improve its layout and controls, and publish it. You'll test the schedule, completion tracking and keyboard navigation without writing the code yourself.
+
+
 
 ![Bootcamp Lab Tracker with day tabs, a timeline and completed lab cards](images/tracker-day-tabs.webp)
 
@@ -422,7 +424,7 @@ Complete the [classic lab's prerequisite setup](https://microsoft.github.io/mcs-
 - Open the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) for comparison.
 - Do not change tenant settings during the lab.
 
-Build, Style, Label, Navigate and Publish take about 30 minutes; Extend is optional.
+The Build, Style, Label, Navigate and Publish exercises take about 30 minutes; Extend is optional.
 
 ## Table of Contents
 

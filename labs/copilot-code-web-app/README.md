@@ -2,7 +2,9 @@
 
 Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Build, refine, and publish a Bootcamp Lab Tracker through four sequential prompts, checking its schedule, progress, and accessible day tabs.
+You'll use four prompts to build a Bootcamp Lab Tracker, improve its layout and controls, and publish it. You'll test the schedule, completion tracking and keyboard navigation without writing the code yourself.
+
+
 
 ![Bootcamp Lab Tracker with day tabs, a timeline and completed lab cards](images/tracker-day-tabs.webp)
 
@@ -27,7 +29,7 @@ Complete the [classic lab's prerequisite setup](https://microsoft.github.io/mcs-
 - Open the [published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) for comparison.
 - Do not change tenant settings during the lab.
 
-Build, Style, Label, Navigate and Publish take about 30 minutes; Extend is optional.
+The Build, Style, Label, Navigate and Publish exercises take about 30 minutes; Extend is optional.
 
 ## 📚 Table of Contents
 

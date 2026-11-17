@@ -31,7 +31,7 @@ test('the classic Architecture Bootcamp is discoverable with an event-specific A
   assert.equal(current.labs.length, 11);
   assert.notDeepEqual(classic.labs, current.labs);
   assert.ok(current.order < classic.order, 'The guided curriculum remains the first listed edition');
-  assert.match(classic.description, /use Copilot & Agents Bootcamp for the guided missions edition/);
+  assert.match(classic.description, /use Copilot & Agents Bootcamp for the guided exercise edition/);
   assert.match(read(path.join('_events', 'bootcamp-latest.md')), /\[Copilot & Agents Bootcamp\]\({{ '\/events\/architecture-bootcamp\/' \| relative_url }}\)/);
 });
 

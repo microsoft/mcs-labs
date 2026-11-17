@@ -4,7 +4,7 @@
 
 | Format | Duration | Events | Reviewed | Audit |
 | --- | --- | --- | --- | --- |
-| %%classic or missions%% | %%N%% min | %%EVENT_IDS_WITH_SLOT_MINUTES%% | %%YYYY-MM-DD%%, commit `%%SHORT_SHA%%` | %%E%% errors, %%W%% warnings, %%I%% info |
+| %%classic or exercises%% | %%N%% min | %%EVENT_IDS_WITH_SLOT_MINUTES%% | %%YYYY-MM-DD%%, commit `%%SHORT_SHA%%` | %%E%% errors, %%W%% warnings, %%I%% info |
 
 **Scope:** %%ALLOWED_CONTENT_AND_CHECKS; EXCLUSIONS_AND_OMITTED_CHECKS%%.
 Report a full audit only when it was allowed and run; otherwise name the scoped checks.

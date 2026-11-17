@@ -52,7 +52,7 @@ Think of a Skill as a playbook the orchestrator picks up only when it is relevan
 
 A Skill packages a named, self-contained playbook: a description that tells the orchestrator when the Skill applies, instructions describing the procedure, and the reference material the work depends on. Instead of cramming every rule into an agent's instructions, you hand the orchestrator something it can load only when a request matches.
 
-**Real-world example:** a proposal team answers RFPs. The rules are stable - match the request to an offering, answer from pre-approved language, never claim a certification the company does not hold. A Skill keeps that procedure and its reference material together, ready for the agent to load when someone attaches a solicitation.
+**Real-world example:** a proposal team answers RFPs. The rules are stable - match the request to an offering, answer from pre-approved language, never claim a certification the company does not hold. A Skill keeps that procedure and its reference material together, ready for the agent to load when someone attaches an RFP.
 
 Use Case #1 is the complete core lab: build an RFP Response agent with a sample Skill and watch it load. If you have extra time, the [optional Skill-creation exercise](#-extra-credit-create-and-test-a-skill-with-copilot-studio) shows how to create a guided project-intake Skill in an agent's **Preview** chat. It uses a separate agent so the procedures do not compete.
 
@@ -157,7 +157,7 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
     > [!TIP]
     > You can also start from **Agents**: open the menu next to **New agent** (**More create options**) and choose the **Agent** option for the Microsoft Copilot harness (labelled **Agent, GitHub Copilot** before the rename). A one-time **New name, same harness** bubble may appear there to confirm that the harness formerly named GitHub Copilot is now the Microsoft Copilot harness. Avoid the plain **New agent** button for this lab, because it may not create an agent on the Microsoft Copilot harness. The **Agents** list shows each agent's harness in the **Agent harness** column.
 
-1. Select the name field at the top and replace **Untitled Agent** with:
+    Select the name field at the top and replace **Untitled Agent** with:
 
    ```text
    RFP Response Agent
@@ -182,7 +182,7 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
     > [!TIP]
     > If **Work IQ** is not listed, select **+** next to **Tools**, search for `Work IQ`, select the **MCP** tab to narrow the results, then select **Work IQ**.
 
-1. The **Edit tool** dialog opens. Check that **Connection** shows a green check next to your account, and review the **Sources** the agent can use: **SharePoint**, **OneDrive**, **Outlook mail**, **Teams**, **Calendar**, and **People**. If the connection is not set, open the **Connection** list and sign in with the account you are using for this lab.
+    The **Edit tool** dialog opens. Check that **Connection** shows a green check next to your account, and review the **Sources** the agent can use: **SharePoint**, **OneDrive**, **Outlook mail**, **Teams**, **Calendar**, and **People**. If the connection is not set, open the **Connection** list and sign in with the account you are using for this lab.
 
     ![The Edit tool dialog for Work IQ showing the connection and the six Microsoft 365 sources](images/uc1-workiq-connection.png)
 
@@ -272,7 +272,7 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
     > This is what makes a Skill more than a long prompt. The instructions say *how to behave*; the bundled `references/` and `assets/` are the material it works from. Swap these files for your own catalog and answer library and the same skill drafts your proposals.
 
 1. Close the viewer with the **X** at the top right to return to the **Build** tab. The **...**
-    (**More options**) menu next to it has **Download**, to pull the package back out, and
+    menu next to it has **Download**, to pull the package back out, and
     **Replace**, to upload an edited version.
 
 #### Test the agent and watch the skill load
@@ -280,20 +280,20 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
 1. Select the **Preview** tab. The agent greets you, and the header shows the **credits** used,
     **New chat**, **History**, and **Debug mode** (on by default, which keeps the reasoning trace visible).
 
-1. Download the sample solicitation:
+1. Download the sample RFP:
     [01-westbrook-permitting-portal.md](https://github.com/Dewain27/AgentDudeSamples/raw/refs/heads/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md)
     - a City of Westbrook RFP for an online permitting and licensing portal.
 
     > [!NOTE]
-    > The sample solicitations carry fixed submission dates that have since passed, so the agent may open its response by flagging that the deadline is behind us. That is the skill being careful rather than a fault - read past it and judge the proposal itself.
+    > The sample RFPs have submission dates that have passed. The agent may flag the expired deadline; review the proposal content as part of this exercise.
 
-1. In the **Preview** chat, select **+** (**Upload images and files**) at the left of the composer and attach the RFP. Copy the block below into the chat composer, then select **Send**:
+1. In the **Preview** chat, use the **+** button at the left of the message box to attach the RFP. Copy the block below into the message box, then select **Send**:
 
    ```text
    We are bidding on this RFP. Draft our response.
    ```
 
-    ![The Preview composer with the RFP attached and the prompt typed](images/uc1-preview-attach.png)
+    ![The Preview message box with the RFP attached and the prompt typed](images/uc1-preview-attach.png)
 
 1. Watch the agent's turn. Before it writes anything, it notes that the rfp-response skill fits the
     request, and the trace shows **Using skill: rfp-response** (**Used skill: rfp-response** once
@@ -434,13 +434,13 @@ Use a new agent for this extra-credit exercise, not your RFP agent. You will fir
 
 1. In [Copilot Studio](https://copilotstudio.microsoft.com/), create a new agent the same way as in Use Case #1 (**Home** > **Agent**). Name it **Project Process Assistant**. Do not reuse your RFP agent.
 
-1. On **Build**, leave **Instructions empty** (only the placeholder text shows). If the new agent has generated instructions, clear them now. Do not add the intake instructions, a Skill, or connectors yet: the first conversation is for **creating a package**, not running intake. The **Work IQ** tool and **Search all websites** knowledge that come with a new agent can stay.
+    On **Build**, leave **Instructions empty** (only the placeholder text shows). If the new agent has generated instructions, clear them now. Do not add the intake instructions, a Skill, or connectors yet: the first conversation is for **creating a package**, not running intake. The **Work IQ** tool and **Search all websites** knowledge that come with a new agent can stay.
 
-1. In the components panel, check **Model** and select a **reasoning-capable model**, such as **Claude Opus 5.5 if it is offered in your environment**. Model names and availability vary; ask your facilitator or admin which reasoning model to use if it is not listed.
+    In the components panel, check **Model** and select a **reasoning-capable model**, such as **Claude Opus 5.5 if it is offered in your environment**. Model names and availability vary; ask your facilitator or admin which reasoning model to use if it is not listed.
 
-1. Select the agent's **Preview** tab. In a **new chat**, select **+** (**Upload images and files**) and attach only `project-intake-process-v2.docx` from the extracted materials. Do not attach the ZIP file.
+1. Select the agent's **Preview** tab. In a **new chat**, use the **+** button beside the message box to attach only `project-intake-process-v2.docx` from the extracted materials. Do not attach the ZIP file.
 
-1. Copy the entire block below into the **Preview** chat, alongside the attachment, then select **Send**. **This is a chat prompt, not agent instructions.** Keep **Build > Instructions** empty while generating the package. The harness was formerly named **GitHub Copilot harness**, and the prompt keeps that name exactly as used in our successful test run; it refers to the current **Microsoft Copilot harness**.
+    Copy the entire block below into the **Preview** chat, alongside the attachment, then select **Send**. **This is a chat prompt, not agent instructions.** Keep **Build > Instructions** empty while generating the package. The harness was formerly named **GitHub Copilot harness**, and the prompt keeps that name exactly as used in our successful test run; it refers to the current **Microsoft Copilot harness**.
 
 ```text
 Create a portable Agent Skill named project-intake-guide for a Copilot Studio agent powered by the GitHub Copilot harness.

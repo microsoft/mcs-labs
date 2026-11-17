@@ -10,14 +10,14 @@ difficulty: 200
 lab_type: local
 section: intermediate_labs
 journeys: ["developer"]
-description: "Reuse a hotel-briefing skill in Agent Builder, ground it in the annual report, and verify an evidence-backed team handoff."
+description: "Learn to reuse a Cowork skill in Agent Builder to summarize a hotel report and prepare email text for review."
 classes: wide
 author_profile: false
 toc: false
 mission_lab:
-  headline: "One reusable skill."
-  headline_emphasis: "A team briefing."
-  promise: "Turn a personal hotel-report workflow into an agent that prepares an evidence table and executive email text for human review. Nothing is sent."
+  headline: "Reuse a skill"
+  headline_emphasis: "in Agent Builder"
+  promise: "You'll add a hotel-report skill to a declarative agent, use it to identify issues in an annual report and check the results. You'll prepare an evidence table and email text for a teammate to review. The agent will not send the email or create Planner tasks."
   hero_image:
     src: /labs/declarative-agent-skill-reuse/images/briefing-evidence.webp
     alt: "Fresh-chat evidence table with five hotel issues, actual and projected financial figures, and Section 16 recommendations."
@@ -25,16 +25,16 @@ mission_lab:
     height: 2358
     caption: "Check claims, periods and recommendation identifiers against the report; projected benefits are not actual revenue."
   scenario: |-
-    You lead operations at **Contoso Grand Hotel**. Your team needs the five most urgent issues in its annual performance report, each with a symptom, root cause, reported financial impact and matching Section 16 recommendation.
+    This lab uses the annual performance report for **Contoso Grand Hotel**. You'll create **Contoso Operations agent** to identify five urgent issues, explain their symptoms and causes, report their financial impact and match them to recommendations in Section 16.
 
-    Use the supplied hotel starter in Mission 1, or a compatible hotel skill from the separate [Cowork hands-on](../mcs-cowork-latest/) exercise. If you followed **Cowork: from insights to action** in this curriculum, use the hotel starter, not **Weekly Deal Review**. Leave with **Contoso Operations agent**, a checked briefing and an approved teammate's independent review. This is email **text**, not an Outlook draft; there are no sending or Planner actions.
+    In step 1, you can use the supplied starter.zip or you can use the skill you built in the previous [Cowork hands-on](https://microsoft.github.io/mcs-labs/labs/mcs-cowork-latest/) lab or a similar skill. You'll check the briefing against the report and ask an approved teammate to review it. The output is email **text**, not an Outlook draft; the agent does not send email or create Planner tasks.
 
-    This exercise uses Agent Builder for a declarative agent. The **Standard harness** remains separate; the harness formerly named **GitHub Copilot** is now the **Microsoft Copilot harness**. Do not substitute either Studio experience for these Agent Builder steps.
+    Use **Agent Builder** for these steps, not either Copilot Studio harness. The **Standard harness** is separate from the **Microsoft Copilot harness**, which was formerly named **GitHub Copilot**.
   self_setup: |-
     Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in Agent Builder and add skills. Check **Plugins > Chat > New agent > Configure** for **Skills**, following the linked licensing and skills documentation. For the optional extension, prepare Visual Studio Code, a skill-capable Microsoft 365 Agents Toolkit release and an approved SharePoint or OneDrive location. Provisioning is outside the core slot.
   prerequisites:
     - "Sign in to [Microsoft Copilot](https://copilot.cloud.microsoft) with your assigned training account."
-    - "Download the starter in Mission 1 and the report in Mission 3; do not skip those exercise inputs."
+    - "Download the starter in Exercise 1 and the report in Exercise 3; do not skip those exercise inputs."
     - "Use only the supplied hotel scenario and an instructor-approved teammate. Keep the agent private until the targeted sharing exercise."
   pacing: "Inspect, Build, Ground, Verify and Share take about 30 minutes; Version is optional."
   missions:
@@ -57,8 +57,8 @@ mission_lab:
 
             Confirm the package includes its output template. It contains neither the report nor an Outlook action. Adapt any Cowork-only actions in your own skill; use the starter if repackaging would consume the lab.
       reveal:
-        title: "What travels with a skill?"
-        line: "A procedure travels; permissions and conversation history do not."
+        title: "What is included in a skill?"
+        line: "A procedure is included in the skill; permissions and conversation history are not."
         explanation: "The agent instructions decide when to use the skill. The skill carries the reusable workflow. The report supplies evidence. Reusing the files does not transfer Cowork tools or an ongoing task."
         flow: ["Agent role", "Reusable skill procedure", "Report evidence", "Human review"]
       check:
@@ -69,7 +69,7 @@ mission_lab:
             feedback: "You add the report separately and keep the output as review-ready text."
           - text: "The creator's Cowork session and permission to send mail."
             correct: false
-            feedback: "Neither personal history nor action permissions travel with this package."
+            feedback: "Neither personal history nor action permissions are included in this package."
 
     - id: build
       verb: Build
@@ -83,7 +83,7 @@ mission_lab:
           instruction: |
             Open [Microsoft Copilot](https://copilot.cloud.microsoft). Select **Plugins**, open the **Chat** tab and select **New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**. Dismiss any completion notifications covering the tabs.
 
-            The onboarding describes work content enabled by default. You will turn it off in Mission 3 before testing; do not assume the new agent is report-only.
+            The onboarding describes work content enabled by default. You will turn it off in Exercise 3 before testing; do not assume the new agent is report-only.
           screenshot:
             title: Start a new Agent Builder agent
             src: /labs/declarative-agent-skill-reuse/images/agents-skills-new-agent.webp
@@ -291,7 +291,7 @@ mission_lab:
         - title: "Scope cloud knowledge to the same report"
           instruction: "Place the hotel PDF in an approved SharePoint or OneDrive location and confirm your test account can open it. Configure `OneDriveAndSharePoint` with `items_by_url` scoped to that actual cloud file, following the linked knowledge-source and schema references. Do not use a local path, public GitHub URL, placeholder or empty scope. Keep web search and write actions out."
         - title: "Provision, test and update the separate copy"
-          instruction: "Resolve manifest diagnostics and confirm the skill folder is inside the app package. Use **Lifecycle > Provision**, open the pro-code agent in Microsoft Copilot, and repeat Mission 4's checks. Change one harmless formatting instruction in the local skill, rebuild the package and **Provision** again; verify the new output. Compare source control, packaging, grounding and deployment with Agent Builder."
+          instruction: "Resolve manifest diagnostics and confirm the skill folder is inside the app package. Use **Lifecycle > Provision**, open the pro-code agent in Microsoft Copilot, and repeat Exercise 4's checks. Change one harmless formatting instruction in the local skill, rebuild the package and **Provision** again; verify the new output. Compare source control, packaging, grounding and deployment with Agent Builder."
       reveal:
         title: "Does a local edit update both agents?"
         line: "Each deployed agent has its own skill copy."
@@ -342,7 +342,9 @@ mission_lab:
 
 Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Turn a personal hotel-report workflow into **Contoso Operations agent**: an evidence table and an executive email for a teammate to review. This is **email text, not an Outlook draft**. Nothing is sent and no Planner tasks are created.
+You'll add a hotel-report skill to a declarative agent, use it to identify issues in an annual report and check the results. You'll prepare an evidence table and email text for a teammate to review. The agent will not send the email or create Planner tasks.
+
+
 
 ![Fresh-chat evidence table with five hotel issues, actual and projected financial figures, and Section 16 recommendations.](images/briefing-evidence.webp)
 
@@ -354,17 +356,17 @@ Turn a personal hotel-report workflow into **Contoso Operations agent**: an evid
 | --- | --- | --- | --- |
 | 200 | Maker; Developer for optional extension | 30 minutes core; 25 minutes optional | Reuse a skill, check a grounded briefing and verify a team handoff. |
 
-You lead operations at **Contoso Grand Hotel**. Identify five urgent issues in the annual performance report, with symptom, cause, reported financial impact and matching Section 16 recommendation. Use the starter below, or a compatible hotel skill from the separate [Cowork hands-on](../mcs-cowork-latest/) exercise. If you followed **Cowork: from insights to action** in this curriculum, use the hotel starter, not **Weekly Deal Review**.
+You lead operations at **Contoso Grand Hotel**. Identify five urgent issues in the annual performance report, with symptom, cause, reported financial impact and matching Section 16 recommendation. In step 1, you can use the supplied starter.zip or you can use the skill you built in the previous [Cowork hands-on](https://microsoft.github.io/mcs-labs/labs/mcs-cowork-latest/) lab or a similar skill.
 
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
-- [Mission 1: Inspect](#mission-1-inspect)
-- [Mission 2: Build](#mission-2-build)
-- [Mission 3: Ground](#mission-3-ground)
-- [Mission 4: Verify](#mission-4-verify)
-- [Mission 5: Share](#mission-5-share)
-- [Optional Mission: Version](#optional-mission-version)
+- [Exercise 1: Inspect](#exercise-1-inspect)
+- [Exercise 2: Build](#exercise-2-build)
+- [Exercise 3: Ground](#exercise-3-ground)
+- [Exercise 4: Verify](#exercise-4-verify)
+- [Exercise 5: Share](#exercise-5-share)
+- [Optional Exercise: Version](#optional-exercise-version)
 - [Finish and Troubleshooting](#finish-and-troubleshooting)
 - [Sources](#sources)
 
@@ -381,7 +383,7 @@ Arrange a Microsoft 365 account with Microsoft Copilot that can create agents in
 
 This lab uses **Agent Builder** for a declarative agent. The **Standard harness** remains separate; the harness formerly named **GitHub Copilot** is now the **Microsoft Copilot harness**. Do not substitute either Studio experience for these steps.
 
-## Mission 1: Inspect
+## Exercise 1: Inspect
 
 **3 minutes · Skill package**
 
@@ -393,19 +395,19 @@ This lab uses **Agent Builder** for a declarative agent. The **Standard harness*
 4. Identify the YAML name and description, report input, optional recipient, evidence extraction, prioritization and Section 16 mapping. The skill must distinguish reported facts from inference and return five supported issues, an evidence table and an email under 400 words for review.
 5. Confirm the template is included. The ZIP contains neither the hotel report nor an Outlook action. Adapt Cowork-only actions in your own package, or use the starter if repackaging would consume the lab.
 
-**Reveal — A procedure travels; permissions and history do not.** Role → skill workflow → report evidence → human review. The agent instructions decide when to use the procedure; they do not carry the creator's Cowork task.
+**Reveal — What is included in a skill?** A procedure is included in the skill; permissions and conversation history are not. Role → skill workflow → report evidence → human review. The agent instructions decide when to use the procedure; they do not carry the creator's Cowork task.
 
 **Check:** What does uploading the starter provide?
 - **Correct:** The briefing procedure and template, not the report or sending permissions. Add evidence separately.
-- **Incorrect:** The creator's Cowork session and mail permissions. Neither travels with this package.
+- **Incorrect:** The creator's Cowork session and mail permissions. Neither is included in this package.
 
-## Mission 2: Build
+## Exercise 2: Build
 
 **9 minutes · Agent Builder**
 
 **Outcome:** a focused role and an uploaded skill.
 
-1. Select **Plugins**, open the **Chat** tab and select **New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**. Dismiss completion notifications covering the tabs. Work-content defaults are on; you turn them off in Mission 3 before testing.
+1. Select **Plugins**, open the **Chat** tab and select **New agent**, then **Skip** to open **Configure**. If **What's new in Agent Builder** appears, select **Get started**. Dismiss completion notifications covering the tabs. Work-content defaults are on; you turn them off in Exercise 3 before testing.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/agents-skills-new-agent-dark.webp"><img src="images/agents-skills-new-agent.webp" alt="Plugins page with the Chat tab selected and New agent on the right."></picture>
 
@@ -445,7 +447,7 @@ Do not send messages, create Outlook drafts, or write Planner tasks. If asked to
 
 **Stuck?** Try the supplied ZIP. Confirm SKILL.md is at the root and has a YAML name and description; check supported contents in the skills sources below.
 
-## Mission 3: Ground
+## Exercise 3: Ground
 
 **4 minutes · Agent Builder, Knowledge**
 
@@ -467,7 +469,7 @@ Do not send messages, create Outlook drafts, or write Planner tasks. If asked to
 
 **Stuck?** Wait for processing and verify file identity. If Attachments remains unreadable, add an instructor-approved SharePoint copy as a specific knowledge source and confirm access to that file. Do not turn on access to all cloud files. The training tenant has a copy in its [Documents/Finance folder](https://copilotstudiotraining.sharepoint.com/Shared%20Documents/Forms/AllItems.aspx?id=%2FShared%20Documents%2FFinance&viewid=80e5d223%2Dbb2c%2D4c6a%2D8f86%2D6854957a257d&FolderCTID=0x012000A34AA7909A3DA3458CA7D0078E5DB6F7); select the report, not the whole folder.
 
-## Mission 4: Verify
+## Exercise 4: Verify
 
 **11 minutes · Agent Builder, Preview**
 
@@ -511,7 +513,7 @@ This is an expected boundary test, not a failed email or Planner integration. Re
 - **Incorrect:** A plausible estimate labeled actual. Annual forecasts and guesses cannot fill the gap.
 - **Correct:** An explicit missing-evidence statement and unsent briefing. Human review remains necessary.
 
-## Mission 5: Share
+## Exercise 5: Share
 
 **3 minutes · Agent Builder, Create and Share**
 
@@ -535,7 +537,7 @@ This is an expected boundary test, not a failed email or Planner integration. Re
 - **Incorrect:** Yes; a link proves source access. It proves neither agent nor report permissions.
 - **Correct:** No; the teammate must run the workflow and check the report.
 
-## Optional Mission: Version
+## Optional Exercise: Version
 
 **25 additional minutes · Visual Studio Code, Microsoft 365 Agents Toolkit**
 
@@ -548,7 +550,7 @@ This is an expected boundary test, not a failed email or Planner integration. Re
 3. Use declarative agent schema **v1.9** and its matching `$schema` URL from the reference below. Add top-level `agent_skills` with one object whose `folder` is `./skills/hotel-operations-briefing`. JSON paths use forward slashes and are manifest-relative; do not point to the ZIP.
 4. Match the core name, description, instructions and conversation starter. Refer to the exact skill name. Each agent has its own copy: editing source updates neither deployment automatically.
 5. Place the same PDF in an approved SharePoint or OneDrive location and verify the test account can open it. Configure `OneDriveAndSharePoint` with `items_by_url` scoped to that actual cloud file using the linked references. Never use a local path, public GitHub PDF URL, placeholder or empty scope. Keep web search and write actions out.
-6. Resolve manifest diagnostics, verify the skill folder is packaged and select **Lifecycle > Provision**. Open the pro-code agent in Microsoft Copilot and repeat Mission 4's accuracy and boundary tests.
+6. Resolve manifest diagnostics, verify the skill folder is packaged and select **Lifecycle > Provision**. Open the pro-code agent in Microsoft Copilot and repeat Exercise 4's accuracy and boundary tests.
 7. Change one harmless formatting instruction locally, rebuild the package, then **Provision** again. Verify changed behavior. Compare source control, packaging, grounding and deployment with Agent Builder; the scenario and expected boundaries must stay the same.
 
 **Reveal — Each deployment owns a copy.** Edit source → package → upload or provision → verify. Agent Builder takes the ZIP; the toolkit packages an unpacked folder.

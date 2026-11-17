@@ -10,14 +10,14 @@ difficulty: 200
 lab_type: local
 section: core_learning_path
 journeys: ["business-user", "developer"]
-description: "Assemble a Standard harness agent from instructions, topics, knowledge and tools, then optionally inspect state, delegate to a child agent and publish to Teams."
+description: "Learn how instructions, topics, knowledge and tools work together in a Standard harness agent."
 classes: wide
 author_profile: false
 toc: false
 mission_lab:
-  headline: "One agent,"
-  headline_emphasis: "parts you control."
-  promise: "Four core missions build and test your Copilot Studio Assistant. Three optional missions expose its state, delegate specialist work and put the published agent in Teams."
+  headline: "Build an agent"
+  headline_emphasis: "with the Standard harness"
+  promise: "You'll build a Copilot Studio Assistant and test its instructions, topics, knowledge and tools. Optional exercises show how to inspect conversation state, add a child agent and publish the assistant to Teams."
   hero_image:
     src: /labs/standard-harness-components/images/analysis-result.webp
     alt: "Prompt Analyzer result ending with an improved prompt example and an offer to refine it further."
@@ -25,15 +25,15 @@ mission_lab:
     height: 1380
     caption: "Your finish line: a tool-backed analysis you can inspect. This result excerpt is comparison material, not another prompt to send; generated wording will vary."
   scenario: |-
-    Build a **Copilot Studio Assistant** for internal teams: answer product questions, collect mailing-list details without submitting them, cite a licensing guide and analyze prompts.
+    You'll build a **Copilot Studio Assistant** for internal teams. It will answer product questions, collect mailing-list details without submitting them, cite a licensing guide and analyze prompts.
 
-    **Standard remains its own harness.** Only the former GitHub Copilot harness was renamed **Microsoft Copilot harness**. Its menu badge may still read **GitHub Copilot**; choose **Standard**, not the top Microsoft Copilot option.
+    Choose the **Standard harness** for this lab. It is separate from the **Microsoft Copilot harness**, which was formerly named **GitHub Copilot**. Some screens may still show the earlier name for that other harness.
   self_setup: |-
     Complete the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/mcs-standard-harness/#prerequisites) before starting. Downloads appear where you use them.
   prerequisites:
     - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com) with your assigned **training account**."
     - "Use fictitious mailing-list details. Do not change tenant settings."
-  pacing: "Configure, Author, Ground and Extend take about 30 minutes; Inspect, Delegate and Publish are optional."
+  pacing: "The Configure, Author, Ground and Extend exercises take about 30 minutes; Inspect, Delegate and Publish are optional."
   missions:
     - id: configure
       verb: Configure
@@ -151,7 +151,7 @@ mission_lab:
       steps:
         - title: "Upload the licensing guide"
           instruction: "Download the [Microsoft Copilot Studio Licensing Guide](https://cdn-dynmedia-1.microsoft.com/is/content/microsoftcorp/microsoft/bade/documents/products-and-services/en-us/ai/MicrosoftCopilotStudioLicensingGuide.pdf). Select **Knowledge → + Add knowledge → Upload file → select to browse** and choose the PDF. In **Upload files**, select **Add to agent**."
-          help: "Uploads support PDF, Word, PowerPoint and text files, up to 512 MB per file. While status is **In progress**, reopen **Add knowledge**, inspect the source types and **Advanced**, then select **Cancel**. Continue configuring or start the tools mission while indexing; do not test the document until it is **Ready**."
+          help: "Uploads support PDF, Word, PowerPoint and text files, up to 512 MB per file. While status is **In progress**, reopen **Add knowledge**, inspect the source types and **Advanced**, then select **Cancel**. Continue configuring or start the tools exercise while indexing; do not test the document until it is **Ready**."
         - title: "Mark the indexed guide as official"
           instruction: "When **Status** is **Ready**, open the guide's details, review **Name** and **Description**, and update them if needed. Turn on **Official source**. Read **Update agent instructions? (preview)** and select **Got it**; select **Save** if enabled."
           notice: "Official marks trusted content for prioritization when multiple sources are available. It is not a substitute for checking the cited document or whether its pricing is current."
@@ -464,7 +464,9 @@ mission_lab:
 
 Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Assemble a Standard harness agent from instructions, topics, knowledge and tools, then optionally inspect state, delegate to a child agent and publish to Teams.
+You'll build a Copilot Studio Assistant and test its instructions, topics, knowledge and tools. Optional exercises show how to inspect conversation state, add a child agent and publish the assistant to Teams.
+
+
 
 ## Lab Details
 
@@ -487,7 +489,7 @@ Complete the [classic prerequisites](https://microsoft.github.io/mcs-labs/labs/m
 
 **Standard remains its own harness.** Only the former GitHub Copilot harness was renamed **Microsoft Copilot harness**. Its menu badge may still read **GitHub Copilot**; choose **Standard**, not the top Microsoft Copilot option.
 
-Configure, Author, Ground and Extend take about 30 minutes; Inspect, Delegate and Publish are optional.
+The Configure, Author, Ground and Extend exercises take about 30 minutes; Inspect, Delegate and Publish are optional.
 
 ## Table of Contents
 
