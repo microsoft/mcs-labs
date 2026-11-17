@@ -67,7 +67,7 @@ links to the correct labs.
 ## Architecture Bootcamp
 
 `architecture-bootcamp.yml` is the advertised three-day curriculum: 17 modules and
-11 missions-format labs. Its event and labs are listed, searchable, and included
+11 guided exercise labs. Its event and labs are listed, searchable, and included
 in the sitemap. The classic `bootcamp-latest` event is unlisted but its direct URL,
 lab pages, timetable, and explicit event navigation remain available.
 
@@ -164,7 +164,7 @@ Bootcamp-specific lab copies preserve the original shared Markdown files:
 | `mcs-tools` | `mcs-knowledge-and-tools-deep-dive` |
 | `mcs-workflows` | `mcs-workflows-latest` |
 
-The Zava Sales lab has its own images and opts into guided missions; other labs
+The Zava Sales lab has its own images and opts into guided exercises; other labs
 retain their classic rendering. Before delivering it, verify that the assigned
 account can find the Northstar renewal through **Chat business-data search** and
 can connect the **Cowork Dataverse plugin** to the training CRM. These are separate

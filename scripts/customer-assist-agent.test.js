@@ -54,6 +54,23 @@ test('customer assist copies and copyable prompts stay synchronized', () => {
   }
 });
 
+test('customer conversation steps use the corrected controls and explain where to act', () => {
+  for (const copy of [JSON.stringify(lab), document.content, readme, classic.content, classicReadme]) {
+    assert.doesNotMatch(copy, /Expand instructions|Start new test session|Save name|checkmark labeled/);
+    assert.match(copy, /Select \*\*Instructions\*\*\. On the \*\*General\*\* tab, paste the instructions below\./);
+    assert.match(copy, /In \*\*Build\*\*, on the agent designer surface, select \*\*Add a sub-agent\*\*\./);
+    assert.match(copy, /click the \*\*Save\*\* button/);
+    assert.match(copy, /Keep the (?:\*\*)?Demo Mode(?:\*\*)? section in the instructions/);
+    assert.match(copy, /\*\*New test session\*\*/);
+  }
+  assert.match(step('Observe the primary without a specialist').instruction,
+    /^Use the prompt below to send a cancellation request to the agent, then view \*\*Activity map\*\*\./);
+  assert.match(step('Begin the original four-message test').instruction,
+    /^Select \*\*Preview\*\* → \*\*Web Chat\*\*, then \*\*New test session\*\* at the top right\./);
+  assert.match(step('Compare with a delivery request').instruction,
+    /^Select \*\*New test session\*\* and send the delivery question below\./);
+});
+
 test('core mission minutes match the page and the Architecture Bootcamp slot', () => {
   const agenda = yaml.load(fs.readFileSync(path.join(root, '_data', 'agendas', 'architecture-bootcamp.yml'), 'utf8'));
   const row = agenda.schedule.find(entry => entry.type === 'lab' && entry.slug === slug);

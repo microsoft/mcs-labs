@@ -2,7 +2,7 @@
 
 <!-- Keep each section short. Delete a section that does not apply. -->
 
-**Lab:** [`%%SLUG%%`](https://microsoft.github.io/mcs-labs/labs/%%SLUG%%/) (classic / missions)
+**Lab:** [`%%SLUG%%`](https://microsoft.github.io/mcs-labs/labs/%%SLUG%%/) (classic / exercises)
 **Why:** %%product change, review finding or issue%%. Fixes #%%ISSUE%%
 **Events affected:** %%event ids from agenda-usage, or none%%
 

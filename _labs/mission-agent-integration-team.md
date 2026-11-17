@@ -10,14 +10,14 @@ difficulty: 200
 lab_type: local
 section: intermediate_labs
 journeys: ["developer"]
-description: "Build a Skill-backed stock specialist, verify connected-agent delegation, and connect an external A2A dispatch agent, and prove each delegation with trace evidence."
+description: "Learn how to connect agents so they can work together on a stock and delivery request."
 classes: wide
 author_profile: false
 toc: false
 mission_lab:
-  headline: "One customer request."
-  headline_emphasis: "Separate specialist responsibilities."
-  promise: "Create a coordinator and a Skill-backed stock specialist, then connect a facilitator-prepared dispatch advisor. Your finish line is an evidenced recommendation, never a booking."
+  headline: "Connect agents"
+  headline_emphasis: "for stock and delivery questions"
+  promise: "You'll build a stock specialist, connect it to a coordinating agent, and add an external delivery advisor. You'll use the activity trace to check which agent answered each part of the request."
   hero_image:
     src: /labs/agent-integration-team/images/stock-decision.webp
     alt: "Synthetic stock decision: the depot retains 80 bags above its floor of 50; the branch retains 30 below its floor of 40."
@@ -25,16 +25,16 @@ mission_lab:
     height: 545
     caption: "The stock specialist compares remaining stock with each location's minimum and calculates product weight."
   scenario: |-
-    Riverside Construction needs 60 bags of repair mortar before its crew starts at 10:00. The nearest branch cannot release them without breaching its protected stock floor. The cheapest carrier service needs a forklift the site does not have.
+    The example uses a fictional order from **Riverside Construction** for 60 bags of repair mortar needed before 10:00. You'll check which location has enough stock and which delivery service can unload at a site without a forklift.
 
-    **Zava Operations Assistant** coordinates; **Zava Stock & Policy Specialist** owns stock and approval policy; **LiftLine Dispatch Advisor** owns delivery suitability. All facts are fictional. There is no ERP, live inventory, carrier booking tool, or transaction.
+    **Zava Operations Assistant** coordinates the request, **Zava Stock & Policy Specialist** checks stock and approval rules, and **LiftLine Dispatch Advisor** checks delivery options. The data is fictional. The agents make a recommendation; they do not check live inventory, book a carrier or place an order.
   self_setup: |-
     Arrange access to create two **Microsoft Copilot harness** agents in the same environment, upload Skills, publish and connect a specialist. Confirm **Build → Skills**, **Connected agents** and **Add A2A agent** are available. The **Standard harness** is a separate experience, not a renamed substitute.
 
-    Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner mission.
+    Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner exercise.
   prerequisites:
     - "Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account, and select the assigned environment."
-    - "You download the Skill ZIP in Mission 2 and confirm the LiftLine card URL in Mission 3."
+    - "You download the Skill ZIP in Exercise 2 and confirm the LiftLine card URL in Exercise 3."
   pacing: "30 minutes, plus an optional challenge."
   missions:
     - id: coordinate
@@ -243,7 +243,7 @@ mission_lab:
       reveal:
         title: "Why does the description matter?"
         line: "When Studio can't read the card, your description is the routing contract."
-        explanation: "The coordinator picks a connected agent from its name and description, so the description must say what LiftLine does, when to use it and what it doesn't own. A saved connection is still not proof: Mission 4 checks that LiftLine is actually invoked and returns a usable quote."
+        explanation: "The coordinator picks a connected agent from its name and description, so the description must say what LiftLine does, when to use it and what it doesn't own. A saved connection is still not proof: Exercise 4 checks that LiftLine is actually invoked and returns a usable quote."
         flow: ["Card URL", "Name and description", "A2A connection", "A2A invocation"]
       check:
         question: "Studio shows \"No agent card found\" for the LiftLine URL. What do you do?"
@@ -251,9 +251,9 @@ mission_lab:
           - text: "Stop; the agent can't be added without a discovered card."
             correct: false
             feedback: "Manual details let you add this prepared agent without successful discovery. The error message alone does not prove a CORS cause or runtime availability."
-          - text: "Enter the name and description, select Authentication None, add the agent, then prove invocation in Mission 4."
+          - text: "Enter the name and description, select Authentication None, add the agent, then prove invocation in Exercise 4."
             correct: true
-            feedback: "The manual details add the connection; Mission 4's trace shows whether LiftLine actually answers."
+            feedback: "The manual details add the connection; Exercise 4's trace shows whether LiftLine actually answers."
     - id: prove
       verb: Prove
       title: "Keep policy ownership with Zava"
@@ -478,7 +478,9 @@ mission_lab:
 
 Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-**One customer request. Separate specialist responsibilities.** Create a coordinator and a Skill-backed stock specialist, then connect a facilitator-prepared dispatch advisor. Your finish line is an evidenced recommendation, never a booking.
+You'll build a stock specialist, connect it to a coordinating agent, and add an external delivery advisor. You'll use the activity trace to check which agent answered each part of the request.
+
+
 
 ![Synthetic stock decision: the depot retains 80 bags above its floor of 50; the branch retains 30 below its floor of 40.](images/stock-decision.webp)
 
@@ -520,17 +522,17 @@ All facts are fictional. There is no ERP, live inventory, carrier booking tool o
 
 Arrange access to create two **Microsoft Copilot harness** agents in the same environment, upload Skills, publish and connect a specialist. Confirm **Build → Skills**, **Connected agents** and **Add A2A agent** are available. The **Standard harness** is a separate experience, not a renamed substitute.
 
-Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner mission.
+Arrange the hosted LiftLine service with its bundled `LIFTLINE-DEMO-v1` Skill, **Authentication: None**, and verified invocation **from Studio** before the exercise. Follow the [instructor preparation reference](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Hosting is not a learner exercise.
 
 </details>
 
-**Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account, and select the assigned environment. You download the Skill ZIP in Mission 2 and confirm the card URL in Mission 3.
+**Exercise readiness for everyone:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned lab account, and select the assigned environment. You download the Skill ZIP in Exercise 2 and confirm the card URL in Exercise 3.
 
 **Reading the blocks:** copy each input only into its named field. **Reference output** blocks are comparison material, never messages to send. Wording can vary; facts and limitations must match.
 
 ## Coordinate
 
-**Mission 1 · 6 minutes · Copilot Studio, Microsoft Copilot harness**
+**Exercise 1 · 6 minutes · Copilot Studio, Microsoft Copilot harness**
 
 Create the customer-facing agent without specialist data. **Outcome:** an advisory-only coordinator that reports missing validation rather than inventing a plan.
 
@@ -605,7 +607,7 @@ Customer request → Missing specialist access → Explicit validation gap.
 
 ## Ground
 
-**Mission 2 · 10 minutes · Skills and Connected agents**
+**Exercise 2 · 10 minutes · Skills and Connected agents**
 
 Give stock and policy one owner, verify its calculation, then reuse it through delegation. **Outcome:** a published specialist supplies a grounded stock decision to the still-private coordinator.
 
@@ -713,7 +715,7 @@ Coordinator request → Published specialist → Skill reference → Verified st
 
 ## Connect
 
-**Mission 3 · 7 minutes · Add A2A agent**
+**Exercise 3 · 7 minutes · Add A2A agent**
 
 Add the facilitator's hosted LiftLine service as an A2A connected agent. **Outcome:** `LiftLine_Dispatch_Advisor` listed under **Connected agents** with **Authentication: None**.
 
@@ -748,20 +750,20 @@ Evaluate fictional LiftLine delivery from Zava Regional depot to Riverside: load
 
 If credentials are unexpectedly requested, stop and check with the instructor.
 
-**Reveal — When Studio can't read the card, your description is the routing contract.** The coordinator picks a connected agent from its name and description, so the description must say what LiftLine does, when to use it and what it doesn't own. A saved connection is still not proof: Mission 4 checks that LiftLine is actually invoked and returns a usable quote.
+**Reveal — When Studio can't read the card, your description is the routing contract.** The coordinator picks a connected agent from its name and description, so the description must say what LiftLine does, when to use it and what it doesn't own. A saved connection is still not proof: Exercise 4 checks that LiftLine is actually invoked and returns a usable quote.
 
 Card URL → Name and description → A2A connection → A2A invocation.
 
 **Check:** Studio shows "No agent card found" for the LiftLine URL. What do you do?
 
 - A. Stop; the agent can't be added without a discovered card.
-- B. Enter the name and description, select Authentication None, add the agent, then prove invocation in Mission 4.
+- B. Enter the name and description, select Authentication None, add the agent, then prove invocation in Exercise 4.
 
-**Answer: B.** The manual details add the connection; Mission 4's trace shows whether LiftLine actually answers. The error message alone does not prove a CORS cause or runtime availability.
+**Answer: B.** The manual details add the connection; Exercise 4's trace shows whether LiftLine actually answers. The error message alone does not prove a CORS cause or runtime availability.
 
 ## Prove
 
-**Mission 4 · 7 minutes · Coordinator Preview and debug trace**
+**Exercise 4 · 7 minutes · Coordinator Preview and debug trace**
 
 Continue after `LiftLine_Dispatch_Advisor` is added. Verify both delegations and distinguish a quote from approval. **Outcome:** an evidenced delivery recommendation and a separate hypothetical policy assessment, with no transaction.
 
@@ -998,4 +1000,4 @@ These sources describe the harness used here; some still use the name it had bef
 - [Connect an A2A agent](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/add-agent-to-agent)
 - [Agent2Agent protocol](https://a2a-protocol.org/)
 
-**Instructor reference, not another learner mission:** prepare the [LiftLine dispatch Skill ZIP](../mcs-agent-integration/assets/liftline-dispatch.zip) and [LiftLine build prompt](../mcs-agent-integration/assets/liftline-build-prompt.md) using the [classic instructor appendix](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Preserve the playbook and bundled reference, preflight invocation from Studio (learners enter the card name and description manually if discovery fails), and provide the exercise date/timezone and card URL. A public HTTP 200 alone does not establish readiness. Do not break the shared endpoint to demonstrate failure.
+**Instructor reference, not another learner exercise:** prepare the [LiftLine dispatch Skill ZIP](../mcs-agent-integration/assets/liftline-dispatch.zip) and [LiftLine build prompt](../mcs-agent-integration/assets/liftline-build-prompt.md) using the [classic instructor appendix](https://microsoft.github.io/mcs-labs/labs/mcs-agent-integration/#appendix-instructor-preparation-and-liftline-build-prompt). Preserve the playbook and bundled reference, preflight invocation from Studio (learners enter the card name and description manually if discovery fails), and provide the exercise date/timezone and card URL. A public HTTP 200 alone does not establish readiness. Do not break the shared endpoint to demonstrate failure.

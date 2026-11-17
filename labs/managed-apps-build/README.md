@@ -2,7 +2,9 @@
 
 Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Build **My Bootcamp Lab App** from the live published agenda, prepare your own OneDrive CSV, then verify the app's read/save/reload behavior. This is a new app, not an HTML import or Copilot Code migration. Completing the earlier lab is not required. Keep everything in preview.
+You'll build a bootcamp tracker, create a OneDrive CSV file for storage and connect the app to it. You'll test that completion changes remain after a reload and check how the app handles storage problems. The app stays in preview.
+
+
 
 ![My Bootcamp Lab App preview with day tabs, a timeline and completion tracking](images/completion-focus.webp)
 
@@ -38,7 +40,7 @@ Arrange Copilot Studio Apps access, image upload, preview and permission to read
 
 </details>
 
-You still download/upload the reference and create or verify your own connection and CSV in the missions. Those lab-specific artifacts are not assumed to be pre-created.
+You still download/upload the reference and create or verify your own connection and CSV in the exercises. Those lab-specific artifacts are not assumed to be pre-created.
 
 **Attendee readiness:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account and select the assigned environment. Open the [live agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/). Keep the app in preview.
 

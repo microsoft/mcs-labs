@@ -11,7 +11,7 @@ difficulty: %%LEVEL%%
 lab_type: local
 section: %%SECTION%%
 journeys: [%%JOURNEYS%%]
-description: "%%ONE_SENTENCE_DESCRIPTION%%"
+description: "%%ONE_SENTENCE_DESCRIPTION: name the topic and what learners will learn in plain language.%%"
 classes: wide
 author_profile: false
 toc: false
@@ -20,9 +20,10 @@ toc: false
 # search: false
 # sitemap: false
 mission_lab:
-  headline: "%%HEADLINE_START%%"
-  headline_emphasis: "%%HEADLINE_END%%"
-  promise: "%%ONE_SENTENCE_PROMISE: how many missions, what the learner discovers.%%"
+  # Explain the lesson like a teacher; avoid slogans, futuristic claims and forced role-play.
+  headline: "%%HEADLINE_START: name the activity.%%"
+  headline_emphasis: "%%HEADLINE_END: name its subject or tool.%%"
+  promise: "%%ONE_SENTENCE_PROMISE: explain what learners will do and learn, not how many exercises there are.%%"
   hero_image:
     # Show the useful result: theme-neutral content or a content-focused light capture. No src_dark.
     src: /labs/%%SLUG%%/images/%%HERO%%.webp
@@ -31,7 +32,7 @@ mission_lab:
     height: %%HERO_HEIGHT%%
     caption: "%%HERO_CAPTION: the finish line, in one sentence.%%"
   scenario: |
-    %%SCENARIO: who the learner is and what they must deliver, in two or three sentences.%%
+    %%SCENARIO: explain the example, necessary context and expected result in ordinary sentences.%%
   # TEMPLATE NOTE (delete): prepared accounts skip this expandable setup. Do not add runner checks or tenant warnings to learner steps. Test provenance belongs in logs/PRs, not lab.validation.
   self_setup: |
     %%INDEPENDENT_TENANT_SETUP_ONLY%%
@@ -49,7 +50,7 @@ mission_lab:
       tool: %%MISSION_1_TOOL%%
       brief: "%%WHY_THIS_MISSION_MATTERS_IN_ONE_SENTENCE%%"
       outcome: "%%WHAT_THE_LEARNER_HAS_AT_THE_END%%"
-      # TEMPLATE NOTE (delete): optional; omit when outcome suffices. Plain text, not steps or a completion gate. Mirror at the mission's end in both bodies.
+      # TEMPLATE NOTE (delete): optional; omit when outcome suffices. Plain text, not steps or a completion gate. Mirror at the exercise's end in both bodies.
       result_check: "%%OBSERVABLE_RESULT_AND_WHERE_TO_VERIFY_IT%%"
       steps:
         - title: "%%STEP_TITLE%%"
@@ -68,6 +69,7 @@ mission_lab:
           instruction: "Send the prompt. %%WHAT_TO_WATCH_WHILE_IT_WORKS%%"
           prompt_label: %%WHERE_TO_PASTE_IT%%
           prompt: "%%PROMPT_VERBATIM%%"
+          # For dynamic values, supply one complete prompt with a placeholder; explain its replacement in instruction.
           notice: "%%THE_ONE_THING_TO_NOTICE%%"
       reveal:
         title: "%%REVEAL_QUESTION%%"
@@ -122,7 +124,7 @@ mission_lab:
 
 # %%TITLE%%
 
-%%ONE_SENTENCE_DESCRIPTION%%
+%%ONE_SENTENCE_DESCRIPTION: name the topic and what learners will learn in plain language.%%
 
 ## Lab Details
 

@@ -16,7 +16,7 @@
   <header class="lab-header">
     <div class="wrap hdr">
       <a class="brand" href="#lab-main">Your guided lab</a>
-      <a class="hdr-progress" href="#lab-route" data-progress aria-label="0 of {{ core_missions.size }} core missions complete">
+      <a class="hdr-progress" href="#lab-route" data-progress aria-label="0 of {{ core_missions.size }} core exercises complete">
         <span class="progress-track" aria-hidden="true">{% for mission in core_missions %}<span data-progress-segment="{{ mission.id | escape }}"></span>{% endfor %}</span>
         <span class="progress-label">0 / {{ core_missions.size }} core complete</span>
       </a>
@@ -32,7 +32,7 @@
         <p class="promise">{{ lab.promise | escape }}</p>
         <ul class="facts">
           <li>{{ page.duration }}-minute core</li>
-          <li>{{ core_missions.size }} guided missions{% if optional_missions.size > 0 %} + {{ optional_missions.size }} optional{% endif %}</li>
+          <li>{{ core_missions.size }} guided exercises{% if optional_missions.size > 0 %} + {{ optional_missions.size }} optional{% endif %}</li>
           <li>Real training data</li>
         </ul>
         <p class="print-only print-stamp" data-print-stamp></p>
@@ -50,7 +50,7 @@
       </figure>
     </section>
 
-    <nav id="lab-route" class="wrap route" aria-label="Lab missions">
+    <nav id="lab-route" class="wrap route" aria-label="Lab exercises">
       <ol>{% for mission in lab.missions %}
         <li><a href="#{{ mission.id | escape }}" data-mission-link="{{ mission.id | escape }}"><span class="route-number">{{ forloop.index }}</span><span><strong>{{ mission.verb | escape }}</strong><small>{% if mission.optional %}Optional · {% endif %}{{ mission.minutes }} min</small></span></a></li>
       {% endfor %}</ol>
@@ -88,13 +88,14 @@
         <section class="mission" id="{{ mission.id | escape }}" data-mission="{{ mission.id | escape }}" data-optional="{{ mission.optional | default: false }}" aria-labelledby="{{ mission.id | escape }}-title">
           <header class="mission-heading">
             <span class="mission-number" aria-hidden="true">{{ mission_index }}</span>
-            <div><h2 id="{{ mission.id | escape }}-title">{{ mission.title | escape }}</h2><p class="mission-meta">{% if mission.optional %}<strong>Optional mission</strong> <span aria-hidden="true">&middot;</span> {% endif %}{{ mission.minutes }} minutes <span aria-hidden="true">&middot;</span> {{ mission.tool | escape }}</p></div>
+            <div><h2 id="{{ mission.id | escape }}-title">{{ mission.title | escape }}</h2><p class="mission-meta">{% if mission.optional %}<strong>Optional exercise</strong> <span aria-hidden="true">&middot;</span> {% endif %}{{ mission.minutes }} minutes <span aria-hidden="true">&middot;</span> {{ mission.tool | escape }}</p></div>
           </header>
           <p class="brief">{{ mission.brief | escape }}</p>
           <p class="outcome"><strong>Your finish line</strong> {{ mission.outcome | escape }}</p>
           <ol class="mission-steps">
             {% for step in mission.steps %}
             {% assign step_id = mission.id | append: '-' | append: forloop.index %}
+            {% assign step_id = step.id | default: step_id %}
             <li class="mission-step">
               <h3><label class="step-check"><input type="checkbox" data-progress-id="{{ step_id | escape }}"><span>{{ step.title | escape }}</span></label></h3>
               <div class="step-content">
@@ -139,14 +140,14 @@
           <p class="result-check"><strong>Check your result</strong> {{ mission.result_check | escape }}</p>
           {% endif %}
           <footer class="mission-actions">
-            <button type="button" class="btn btn-primary" data-complete="{{ mission.id | escape }}" aria-pressed="false" hidden>Mark mission complete</button>
+            <button type="button" class="btn btn-primary" data-complete="{{ mission.id | escape }}" aria-pressed="false" hidden>Mark exercise complete</button>
             {% unless forloop.last %}
               {% assign next_mission = lab.missions[forloop.index] %}
               {% assign remaining_missions = lab.missions | slice: forloop.index, lab.missions.size %}
               {% assign remaining_core = remaining_missions | where_exp: "item", "item.optional != true" %}
               {% if next_mission.optional %}
                 {% if remaining_core.size > 0 %}
-                  <a class="btn btn-ghost" href="#{{ remaining_core.first.id | escape }}">Skip optional missions: {{ remaining_core.first.verb | escape }} <span aria-hidden="true">&rarr;</span></a>
+                  <a class="btn btn-ghost" href="#{{ remaining_core.first.id | escape }}">Skip optional exercises: {{ remaining_core.first.verb | escape }} <span aria-hidden="true">&rarr;</span></a>
                 {% elsif mission.optional != true %}
                   <a class="btn btn-ghost" href="#lab-finish">Finish the {{ page.duration }}-minute core <span aria-hidden="true">&rarr;</span></a>
                 {% endif %}

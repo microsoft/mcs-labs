@@ -2,7 +2,9 @@
 
 Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Plan a task. Route an email. Build an inline agent that plans a task, then explore email routing and approve an AI-drafted reply.
+You'll start with a workflow that plans a To Do task. Then you'll classify email and review an AI-drafted reply before approving it to be sent.
+
+
 
 ![Successful Copilot, Human review, If, and Reply to email steps; Flag email and Archive email are skipped.](images/inquiry-path-succeeded.webp)
 
@@ -14,7 +16,7 @@ Plan a task. Route an email. Build an inline agent that plans a task, then explo
 | --- | --- | --- | --- |
 | 300 | Maker / Developer | 45 minutes core | A planned task, classified email, and a reviewed reply |
 
-Automate tasks, Inspect routing, Classify email and Review replies take about 45 minutes; Handle inventory and Generate quotes are optional.
+Automate tasks, Inspect routing, Classify email and Review replies take about 45 minutes, or up to 60 minutes if you are new to the workflow designer; Handle inventory and Generate quotes are optional.
 
 **Scenario:** First, automate planning a new To Do task. Then work with an order desk that receives unrelated promotions, customer questions, supplier delays, and quote requests. A workflow classifies the message; a grounded draft and human decision protect the customer-facing reply.
 
@@ -23,10 +25,10 @@ This lab uses **Workflows** in the **Microsoft Copilot harness**. The [classic W
 ## Table of Contents
 
 - [Prerequisites](#prerequisites)
-- [Mission 1: Automate tasks](#mission-1-automate-tasks)
-- [Mission 2: Inspect routing](#mission-2-inspect-routing)
-- [Mission 3: Classify email](#mission-3-classify-email)
-- [Mission 4: Review replies](#mission-4-review-replies)
+- [Exercise 1: Automate tasks](#exercise-1-automate-tasks)
+- [Exercise 2: Inspect routing](#exercise-2-inspect-routing)
+- [Exercise 3: Classify email](#exercise-3-classify-email)
+- [Exercise 4: Review replies](#exercise-4-review-replies)
 - [Optional: Handle inventory](#optional-handle-inventory)
 - [Optional: Generate quotes](#optional-generate-quotes)
 - [Troubleshooting](#troubleshooting)
@@ -51,20 +53,20 @@ Task planning also needs Microsoft To Do. Optional extensions need [Warehouse MC
 - Sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with the provided training account and select the assigned environment.
 - Open [Outlook](https://outlook.office.com/) with the same account.
 
-## Mission 1: Automate tasks
+## Exercise 1: Automate tasks
 
-**25 minutes · Microsoft To Do / Inline Agent / Outlook Calendar**
+**25 minutes · Microsoft To Do / Agent / Outlook Calendar**
 
 **Outcome:** a personal calendar block and a task with a due date, reminder, and useful notes.
 
 1. In [Microsoft To Do](https://to-do.office.com/), sign in with the same training account. The workflow watches your default **Tasks** list; no new list is needed.
 2. In Copilot Studio, select **Workflows → New workflow**; it opens as **Untitled workflow** in **Draft**. Rename it **To Do Time Block**: select the name in the designer header (*Click to rename*), type it, and press **Enter**.
-3. In the **Start** node, switch **Trigger type** from **Manual** to **Connector**, select **Select trigger...**, search `to-do`, and under **Microsoft To-Do (Business)** select **When a new to-do in a specific folder is created**. In **Connection**, wait for your training-account connection to resolve and reuse it. Only if it is missing or incorrect, select **Create new connection → Create** with your training account. Select **To-do list → Tasks**; the **Needs setup** badge clears. **+ → Agent**, reuse the training identity, and retain **New agent for this workflow**.
+3. In the **Start** node, switch **Trigger type** from **Manual** to **Connector**, select **Select trigger...**, search `to-do`, and under **Microsoft To-Do (Business)** select **When a new to-do in a specific folder is created**. In **Connection**, wait for your training-account connection to resolve and reuse it. Only if it is missing or incorrect, select **Create new connection → Create** with your training account. Select **To-do list → Tasks**; the **Needs setup** badge clears. Select **+ → Agent** after the trigger, reuse the training identity, and choose the option to create a new agent in this workflow. Configure its **Instructions** and **Tools** in the agent settings.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-trigger-tasks-list-dark.webp"><img src="images/uc1-trigger-tasks-list.webp" alt="Trigger When a new to-do in a specific folder is created under Microsoft To-Do (Business), with To-do list set to Tasks."></picture>
 4. Paste the first Instructions fragment, add a space, type **/** and insert trigger **Title**. An **Apply to each** can appear when this array-item token is inserted.
 
-**Inline Agent · Instructions · Before Title token**
+**Agent · Instructions · Before Title token**
 
 ```text
 Find a time that is appropriate for this task
@@ -72,19 +74,19 @@ Find a time that is appropriate for this task
 
 5. Add a separating space after the actual Title token, then paste the second fragment. Do not leave a literal placeholder.
 
-**Inline Agent · Instructions · After Title token**
+**Agent · Instructions · After Title token**
 
 ```text
 on my calendar in the next couple of business days and block that time on my calendar to work on this task. Then update the to-do with a due date a week out from the time block we created. Add appropriate notes and suggestions in the notes on key things I might want to consider. Also set a reminder 2 days before the due date. Make sure that the format of the Calendar notes and To-Do are formatted properly for the user to be able to read them well. Only schedule the time block within my normal working hours of 8:00 AM to 5:00 PM.
 ```
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-agent-instructions-dark.webp"><img src="images/uc1-agent-instructions.webp" alt="Inline agent Instructions with the trigger Title token between the two fragments."></picture>
+<picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-agent-instructions-dark.webp"><img src="images/uc1-agent-instructions.webp" alt="Agent Instructions with the trigger Title token between the two fragments."></picture>
 
-6. Under **Tools → +**, add **Find meeting times** and **Create event** from **Office 365 Outlook**, plus **Update to-do** from **Microsoft To-Do (Business)**. Check connector names; Eventbrite look-alikes are wrong. Reuse healthy own-account connections and enable **Web search**. Confirm calendar writes target only your calendar with no attendees. **Save → Publish** and verify **Enabled** before creating the task.
+6. Select the **Agent** node on the workflow canvas to open its settings. In that agent's **Tools** section, select **+** and add **Find meeting times** and **Create event** from **Office 365 Outlook**, plus **Update to-do** from **Microsoft To-Do (Business)**. These tools must appear in the agent's **Tools** list; do not add them as separate connector nodes on the workflow canvas. Check connector names; similarly named Eventbrite actions are not calendar tools. Reuse your training-account connections and enable **Web search** in the same agent settings. **Save → Publish** and verify **Enabled** before creating the task.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-workflow-published-dark.webp"><img src="images/uc1-workflow-published.webp" alt="Published To Do Time Block workflow with Trigger, Apply to each and Agent nodes."></picture>
 
-7. Add the original title to **Tasks**. It requests a personal planning block, not a reservation or invitation to a venue; do not authorize external booking/outreach.
+7. Open the [Microsoft To Do app](https://to-do.office.com/), select your **Tasks** list and add the task title below. It requests a personal planning block, not a reservation or invitation to a venue; do not authorize external booking/outreach.
 
 **Microsoft To Do · Tasks · Task title**
 
@@ -92,7 +94,11 @@ on my calendar in the next couple of business days and block that time on my cal
 Book Skull's Rainbow Room in Nashville for Next Friday
 ```
 
-8. Refresh **Activity** until the polled trigger appears; inspect **Trigger → Apply to each → Agent**, tool calls and output. Check for a personal block within **8:00 AM–5:00 PM**, task due one week after that block, reminder two days before due, and readable notes. Open the real task and Outlook Calendar to verify, not just the narration. Check displayed timezones and the actual date chosen for **Next Friday**; relative-date interpretation can vary.
+8. In Copilot Studio, open **Workflows → To Do Time Block**, then select **Activity**. Select **Refresh** and open the run that started after you created the test task. The To Do trigger checks for new tasks periodically, so a run can take a few minutes to appear; wait and refresh rather than adding the task again.
+
+In the run diagram, follow **Trigger → Apply to each → Agent**. Select the **Agent** node to read its tool calls and output. Look for **Find meeting times**, **Create event** and **Update to-do**.
+
+Open the task in [Microsoft To Do](https://to-do.office.com/) and the event in [Outlook Calendar](https://outlook.office.com/calendar/). Check for a calendar block within **8:00 AM–5:00 PM**, a task due date one week after that block, a reminder two days before the due date and readable notes. Check displayed timezones and the actual date chosen for **Next Friday**; relative-date interpretation can vary. Verify the saved task and event, not only what the agent says it did.
 
 **Reveal — Dynamic data makes the goal per-item:** **New task → Title token → agent/tools → calendar block + updated task.**
 
@@ -100,14 +106,19 @@ Book Skull's Rainbow Room in Nashville for Next Friday
 - **Correct:** It gives the agent the title of each new task to plan. Dynamic content makes the same workflow work with each incoming task.
 - **Incorrect:** It makes every run plan the same fixed task. A fixed task title would repeat the same request; the token supplies the current task.
 
-## Mission 2: Inspect routing
+## Exercise 2: Inspect routing
 
 **5 minutes · Copilot Studio / Workflows**
 
 **Outcome:** you can explain what starts the workflow and how it chooses an action.
 
 1. Select **Workflows → Order Management Workflow → Build** in your assigned environment.
-2. Open **When a new email arrives**. The **Subject filter** matches emails containing **Order Management**. Follow the canvas to **Classify**, then explore the **Quote Request**, **Supplier Delay**, **Customer Inquiry**, and **Other** branches. Notice that each branch handles a different kind of email.
+
+   Select each node on the canvas, including nodes in every branch. Where a **Connection** field is shown, select a connection for your training account. Reuse an existing working connection; if none is available, select **Create new connection**, complete the setup and select the new connection.
+
+   The **Human review** connection is not created by default. Open that node and create its connection manually using **Create new connection** in **Connection**. Complete the setup, then select the new connection. If you already created it, reuse it. Resolve missing-connection warnings on all nodes before publishing; an unconnected node can block publication even if your next test uses another branch.
+
+2. Use **When a new email arrives** from **Office 365 Outlook**, not **Outlook.com**. Open the trigger and select its **Connection** for your training account. Keep the **Subject filter** matching emails containing **Order Management**. Follow the canvas to **Classify**, then explore the **Quote Request**, **Supplier Delay**, **Customer Inquiry**, and **Other** branches. Notice that each branch handles a different kind of email.
 
 **Reveal — One trigger, different actions:** The trigger starts the workflow; classification chooses the branch. The subject filter selects relevant messages. Classify uses the email content to choose what happens next. **Incoming email → Classify → selected branch.**
 
@@ -115,13 +126,19 @@ Book Skull's Rainbow Room in Nashville for Next Friday
 - **Correct:** Classify selects a category from the email content. The trigger starts the workflow and Classify routes the message.
 - **Incorrect:** The subject filter runs every branch. The filter decides which emails start the workflow, not which branch runs.
 
-## Mission 3: Classify email
+## Exercise 3: Classify email
 
 **5 minutes · Classify / Outlook / Activity**
 
 **Outcome:** Quote Request node output, plus a separate successful Other run and actual archived message.
 
-1. Open **Classify**. Keep the current/default available model; replace one only if missing or flagged retired. Inspect **Quote Request**, **Supplier Delay**, and **Customer Inquiry**. **Other** is the automatic Default category, not a fourth configured category. Select **Run node**, paste into trigger **Body**, and select **Run**.
+1. Open **Classify**. Keep the current/default available model; replace one only if missing or flagged retired. Inspect **Quote Request**, **Supplier Delay**, and **Customer Inquiry**. **Other** is the automatic Default category, not a fourth configured category.
+
+   Select **Run node**, next to **Configure**. Under **When a new email arrives**, paste the sample below into the test **Body** field, then select **Run**. Do not paste the sample on **Configure** or replace its dynamic email input; the hard-coded text is for this test only.
+
+   <picture><source media="(prefers-color-scheme: dark)" srcset="images/classify-quote-result-dark.webp"><img src="images/classify-quote-result.webp" alt="Classify panel with Run node selected beside Configure, the sample in the Body test input, and Quote Request output." width="406" height="505" loading="lazy"></picture>
+
+   *Select Run node, not Configure. Paste the sample in Body under When a new email arrives, then select Run.*
 
 **Classify · Run node · Body**
 
@@ -131,11 +148,7 @@ Hi, I would like to request a quote for 500 units of Product A.
 
 Expect **Quote Request**. This node-only test does not execute the downstream agent or send a quote.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/classify-quote-result-dark.webp"><img src="images/classify-quote-result.webp" alt="Classify Run node panel with the original Body sample and Quote Request output."></picture>
-
-*Run node returns the Quote Request category.*
-
-2. Select **Save** (or **Ctrl+S**) then **Publish**. Wait for **Published**, then return to **Workflows** and confirm **Enabled**.
+2. Confirm every node that requires a connection has one selected, including **Human review**. Select **Save** (or **Ctrl+S**) then **Publish**. Wait for **Published**, then return to **Workflows** and confirm **Enabled**. If publishing reports a missing connection, open the named node, create or select its connection, then save and publish again.
 3. In Outlook, review **Your privacy matters → Continue** if shown. Compose to your training account, using **Check names** if needed. Paste the subject, then the body before sending.
 
 **Outlook · Other test · Subject**
@@ -161,7 +174,7 @@ MegaDraw Rewards
 ```
 
 4. Select **Send**.
-5. Refresh **Activity** and inspect the new run: expect **Other → Archive email**, **Succeeded**. Find the message in Outlook **Archive**. If no run appears, check **Enabled** and that the subject contains **Order Management**. Otherwise, continue to Review.
+5. In Copilot Studio, open **Workflows → Order Management Workflow**, then select **Activity**. Select **Refresh** and open the run that started after you sent the test email. If it has not appeared, wait a few minutes and refresh before sending another email. In the run diagram, follow **Classify → Other → Archive email** and check for **Succeeded**. Find the message in Outlook **Archive**. If no run appears, check **Enabled** and that the subject contains **Order Management**. Otherwise, continue to Review.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/other-path-succeeded-dark.webp"><img src="images/other-path-succeeded.webp" alt="Executed Other branch leading to a successful Archive email action."></picture>
 
@@ -173,14 +186,14 @@ MegaDraw Rewards
 - **Correct:** No; Run node tested classification only. Downstream delivery needs a separate verified test.
 - **Incorrect:** Yes; a category test executes every branch action. No specialist or quote dispatch ran here.
 
-## Mission 4: Review replies
+## Exercise 4: Review replies
 
 **10 minutes · Copilot / Human review / Outlook**
 
 **Outcome:** a reviewed answer or holding reply, a successful approved run, and its received email.
 
 1. In your workflow, open **Classify → Customer Inquiry → Copilot**. Confirm **Customer question** uses trigger **Body**. Read the supplied prompt in place: search the connection owner's earlier email threads, answer when evidence exists, otherwise write a holding reply without invented facts, addressed **Dear Customer,** and signed **Contoso Electronics Order Management**. Keep the supplied prompt; this summary is not a replacement. Copilot retrieves/drafts read-only; the reply node dispatches.
-2. In **Human review**, inspect the Copilot draft, **Outlook** delivery, incoming **From** reviewer, and **Approve** question **Send proposed reply?**. Follow **If/Else → Approve Equals Yes** to **Reply to email**. The Else branch leads to **Flag email** instead.
+2. In **Human review**, confirm the connection you created earlier is selected. If it is missing, use **Connection → Create new connection**, complete the setup and select it before publishing. Inspect the Copilot draft, **Outlook** delivery, incoming **From** reviewer, and **Approve** question **Send proposed reply?**. Follow **If/Else → Approve Equals Yes** to **Reply to email**. The Else branch leads to **Flag email** instead.
 3. Compose a message to your training account with this subject and body.
 
 **Outlook · Customer Inquiry · Subject**
@@ -201,9 +214,9 @@ Jordan Kim
 IT, Alpine Ski House
 ```
 
-4. Select **Send**. Refresh **Activity** and select the new **Customer Inquiry** run. **Copilot** drafts first; **Human review** then waits for your response.
+4. Select **Send**. In Copilot Studio, open **Workflows → Order Management Workflow**, then select **Activity**. Select **Refresh** and open the run that started after you sent the test email. If it has not appeared, wait a few minutes and refresh before sending another email. In the run diagram, follow **Classify → Customer Inquiry**. **Copilot** drafts first; **Human review** then waits for your response.
 5. In Outlook, open **Action Needed: Review Customer Enquiry Reply** and read the proposed response. A holding reply is valid when the mailbox lacks warranty/MDM information. Choose **Yes** under **Approve**, then **Submit** to send the reply. If it contains unsupported facts, choose **No → Submit** instead: the original email is flagged and **Reply to email** is skipped.
-6. Open the received reply in Outlook and compare it with the draft you approved. Confirm **Succeeded** and **Copilot → Human review → If → Reply to email** in Activity. **Flag email** and **Archive email** are expected skipped nodes on this path.
+6. Open the received reply in Outlook and compare it with the draft you approved. Return to the same run in **Order Management Workflow → Activity**. In the run diagram, confirm **Succeeded** and that **Copilot → Human review → If → Reply to email** executed. **Flag email** and **Archive email** are expected skipped nodes on this path.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/inquiry-path-succeeded-dark.webp"><img src="images/inquiry-path-succeeded.webp" alt="Successful Copilot, Human review, If, and Reply to email steps; Flag email and Archive email are skipped."></picture>
 
@@ -221,14 +234,14 @@ If approval is missing, inspect whether Copilot is drafting or Human review is w
 
 ## Optional: Handle inventory
 
-**15 additional minutes · Inline Agent / Warehouse MCP / Dataverse MCP**
+**15 additional minutes · Agent / Warehouse MCP / Dataverse MCP**
 
 **Outcome:** if prerequisites work, one verified Task with arrival-plus-three-days due date and matching structured output.
 
 > Event attendees use installed assets. Self-paced users import [Enhanced Task Completion](../mcs-workflows/assets/mcp-servers/EnhancedTaskCompletion_1_0_0_2.zip) for Warehouse MCP and ensure Dataverse MCP can create **Task** rows.
 
 1. In your Order Management workflow, **Classify → Supplier Delay → + → Agent**. Keep **New agent for this workflow**, default available model, **Expand**, and name it **Inventory Task Agent**.
-2. Under **Tools → Model Context Protocol (MCP servers)** add **Microsoft Dataverse MCP Server** and **Warehouse MCP Server** (detail title **Warehouse MCP**). Verify **Get restock date**, Dataverse operations, and Connection. Reuse working connections. Only for **No tools found**, remove the affected tool from this agent, re-add it, save/publish safely, and recheck. If still missing, stop and ask the proctor.
+2. In the **Inventory Task Agent** settings, under **Tools → Model Context Protocol (MCP servers)** add **Microsoft Dataverse MCP Server** and **Warehouse MCP Server** (detail title **Warehouse MCP**). Verify **Get restock date**, Dataverse operations, and Connection. Reuse working connections. Only for **No tools found**, remove the affected tool from this agent, re-add it, save/publish safely, and recheck. If still missing, stop and ask the proctor.
 3. Paste these exact instructions; replace its two input placeholders next.
 
 **Inventory Task Agent · Instructions**
@@ -299,7 +312,7 @@ Regards,
 LumiRead Supply Team
 ```
 
-8. Inspect **Activity → Classify → Supplier Delay → Inventory Task Agent**, warehouse lookup, Dataverse describe/create operations, and structured output. Expected sample values `sku = SKU-LUMI`, `stock = 0`, `risk = true` apply only if the actual lookup still returns zero. Preserve real tool data, not a manufactured expected result.
+8. In Copilot Studio, open **Workflows → Order Management Workflow**, then select **Activity**. Select **Refresh** and open the run that started after you sent the test email. If it has not appeared, wait a few minutes and refresh before sending another email. In the run diagram, select **Classify → Supplier Delay → Inventory Task Agent** and inspect warehouse lookup, Dataverse describe/create operations, and structured output. Expected sample values `sku = SKU-LUMI`, `stock = 0`, `risk = true` apply only if the actual lookup still returns zero. Preserve real tool data, not a manufactured expected result.
 9. In [Power Apps](https://make.powerapps.com/) / same environment, **Tables → Task**, find your new **Restock delay - LumiRead E-Reader (16GB) (SKU-LUMI)** row. Use Subject **Filter by** and **Created On** to distinguish duplicates; **+N more** exposes columns, not rows. Check Description against lookup, High priority only for zero stock, and **Due Date = trigger arrival + three days**, accounting for displayed timezone. A blank date or missing row is not a pass even if the run succeeded.
 
 **Reveal — Typed output is not proof of persistence:** **Exact SKU lookup → stock/urgency/typed output → create one Task → inspect fields.** Preserve stale-data limitations and keep review date separate.
@@ -353,7 +366,7 @@ Nancy Anderson
 Procurement, Adventure Works
 ```
 
-6. Inspect **Activity → Classify → Quote Request → Agent**, actual tool calls, and output. Verify account/employee lookup, knowledge-backed tier/prices, quantities, line totals, subtotal, discounts, terms, lead time; no estimates or invented handbook facts. Confirm the actual quote in your Outlook inbox.
+6. In Copilot Studio, open **Workflows → Order Management Workflow**, then select **Activity**. Select **Refresh** and open the run that started after you sent the test email. If it has not appeared, wait a few minutes and refresh before sending another email. In the run diagram, select **Classify → Quote Request → Agent** and inspect actual tool calls, and output. Verify account/employee lookup, knowledge-backed tier/prices, quantities, line totals, subtotal, discounts, terms, lead time; no estimates or invented handbook facts. Confirm the actual quote in your Outlook inbox.
 7. Optional bonus: in the assigned agent's **Preview**, ask the original question. Inspect Dataverse `read_query` for Fabrikam employee count and SharePoint tier/discount evidence. The classic sample expects **Mid** tier, but verify current data. Keep tool recipients constrained; do not authorize mail to real customers.
 
 **Price Quote Agent · Preview · Pricing question**
@@ -400,5 +413,5 @@ We have received this customer email: []
 
 - [Workflows in Microsoft Copilot Studio](https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flows-overview)
 - [Workflow designer, testing, and run history](https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/flow-designer)
-- [Add inline or published agents and tools to a workflow](https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/agent-node-workflow)
+- [Add new or published agents and tools to a workflow](https://learn.microsoft.com/en-us/microsoft-copilot-studio/workflows-experience/agent-node-workflow)
 - [Event triggers for Standard harness agents (comparison)](https://learn.microsoft.com/en-us/microsoft-copilot-studio/authoring-triggers-about)

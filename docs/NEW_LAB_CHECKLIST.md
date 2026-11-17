@@ -89,7 +89,7 @@ A preview event may also list existing, advertised labs so reviewers can compare
 
 An unlisted page still gets a per-item feed document (`feed/items/<collection>/<slug>.json`), because the deployed site is built from those documents. No manifest or bundle links to it, so feed subscribers never discover it, but the file is reachable by direct URL.
 
-### Authoring a guided mission lab
+### Authoring a guided exercise lab
 
 Use `_labs/mission-cowork-zava-sales.md` as the working example. Set `lab_format: missions`
 and supply `mission_lab` in front matter. The feed preserves both keys, including
@@ -103,6 +103,8 @@ and the feed build reject a `mission-` file without those keys, or a lab with bo
 files, and `npm test` checks that exactly the guided labs carry the prefix.
 
 - Use the curriculum's lab name for `title` and the readable copies' H1. The renderer uses it as the primary heading; `headline` and `headline_emphasis` become a smaller scenario tagline underneath.
+- Call each guided section an **exercise** in learner-facing text, including headings, pacing, cross-references and completion messages. Keep the existing `lab_format: missions`, `mission_lab`, `missions`, file names, IDs and storage keys unchanged; these are internal compatibility names, not learner terminology.
+- Group related clicks into one task-based step; keep separate conversation turns and conditional replies distinct. A step may set an explicit unique `id` (for example `configure-2`) to retain its existing progress and prompt IDs when steps are grouped or moved. Without `id`, the renderer uses the exercise ID and step position as before.
 - `promise`, `scenario`, `prerequisites` and `pacing` introduce the lab. Keep `scenario` about the learner's task, not provisioning or test-run statistics. When learners check results in a business app (the system of record, such as Zava Sales Hub), add a prerequisite that opens it in another tab and says what to check there, and mirror it in Lab Details in both readable copies.
 - Put own-tenant provisioning in optional Markdown `self_setup`. When present, the renderer shows a short, event-neutral note for provided, pre-provisioned accounts and a **Using your own tenant? View setup requirements** disclosure, closed by default. Mirror it in both readable copies with `<details class="lab-setup" markdown="1">`, without `open`. Keep required sign-in and exercise downloads visible. Start from the prepared assets; do not make attendees repeat ownership, connection or sender checks needed by an automated runner.
 - Keep test coverage, run dates, account-specific failures, credit measurements and screenshot provenance in maintainer run logs and PRs, not learner pages or a **What was tested** disclosure. Do not populate `validation` in new or refreshed labs. Captions describe the product state, not the capture history. Do not repeat warnings already supplied by the training tenant; retain approvals that teach the exercise. Cleanup follows the environment-specific `finish` rule below, not a blanket attendee checklist.
@@ -238,6 +240,11 @@ All four use the [shared learning-design rules](../.github/skills/lab-review/ref
 Keep these rules, the creation templates and the review rubric aligned when a lesson
 changes authoring guidance; updating only `lab-update` leaves other entry points behind.
 Template parity and scaffolding contracts are checked by `scripts/lab-skills.test.js`.
+For every lab or module correction, apply the shared writing rules and capture any
+missing reusable lesson in the skills in the same change. Strengthen existing guidance
+rather than duplicating it. Use **exercise** in learner copy, write clear and direct
+instructions without AI filler, and keep internal format names and IDs unchanged.
+Read-only reviews and run-throughs propose guidance updates in their handoff.
 
 All four rely on `scripts/lab-audit.js`:
 

@@ -1,6 +1,6 @@
 ---
 name: lab-runthrough
-description: Run an MCS Labs hands-on lab (classic or guided missions format) step by step in a real browser on a training or demo tenant, the way an attendee would, to find steps, UI labels, prompts and screenshots that no longer match the product. Logs each step with evidence and distinguishes passed, drift, defect, variance, blocked, untested and unverified outcomes; recaptures drifted screenshots, including light and dark pairs. Runs windowed or headless in an isolated private profile, signed in by the person or as a provisioned event training account. Use when asked to test, run, walk through, dry-run, validate or smoke-test a lab or event curriculum, check whether a lab still works after a product update, or refresh a lab's screenshots. Never writes credentials into the repo, logs or chat. Hand the log to lab-update for the fix PR.
+description: Run an MCS Labs hands-on lab (classic or guided exercise format) step by step in a real browser on a training or demo tenant, the way an attendee would, to find steps, UI labels, prompts and screenshots that no longer match the product. Logs each step with evidence and distinguishes passed, drift, defect, variance, blocked, untested and unverified outcomes; recaptures drifted screenshots, including light and dark pairs. Runs windowed or headless in an isolated private profile, signed in by the person or as a provisioned event training account. Use when asked to test, run, walk through, dry-run, validate or smoke-test a lab or event curriculum, check whether a lab still works after a product update, or refresh a lab's screenshots. Never writes credentials into the repo, logs or chat. Hand the log to lab-update for the fix PR.
 ---
 
 # Run through a lab
@@ -17,6 +17,10 @@ problem into a required attendee step or repeat warnings supplied by the trainin
 Hand off only necessary learner-facing corrections; independent-tenant setup belongs
 in the existing expandable setup section. Use the same learner-facing rules as authors
 and reviewers in `../lab-review/references/learning-design.md`.
+Follow [learn from corrections](../lab-review/references/learning-design.md#learn-from-corrections)
+for wording problems in labs or related modules: use **exercise** in learner-facing
+recommendations and hand reusable lessons to `lab-update`. Do not edit skill guidance
+or learner files during this read-only run-through.
 
 - **Training or demo tenants only.** Never use a customer or production tenant, or your own
   work account, unless the owner explicitly says so.
@@ -57,7 +61,7 @@ and reviewers in `../lab-review/references/learning-design.md`.
    [scoped validation guidance](../lab-update/SKILL.md#5-validate) instead: named slugs
    alone do not prevent repository-wide audit scans.
 2. Read both copies: `labs/<slug>/README.md` and `_labs/<slug>.md`
-   (`_labs/mission-<slug>.md` for a missions lab). For a missions lab, the front matter
+   (`_labs/mission-<slug>.md` for a guided lab). For a guided lab, the front matter
    `missions` list holds the prompts, steps, checks and screenshots.
 3. List the prerequisites (licenses, tenant, plugins, connections, sample data) and confirm
    with the person which tenant and account to use. For an event tenant, use one training
@@ -115,7 +119,7 @@ agendas, issue templates) with one editor.
 
 ## 3. Execute every step as written
 
-For each step or mission, in order:
+For each step or exercise, in order:
 
 1. Do exactly what the text says. Use `controls "<regex>"` to find a control by its
    accessible name and `click "<name>"` to use it. If the label in the lab is not on screen,
@@ -149,7 +153,7 @@ screenshot would mislead an attendee. Routing to a specialist does not prove a r
 confirmation or clean user-facing output. Voice without supplied speech is untested, not
 failed. Retained instructions at a user's request are not a fresh pass. Work around a
 blocked step only if the lab offers a path for it; otherwise log it and continue where
-possible. Time each mission or use case against its stated minutes. Test core and optional
+possible. Time each exercise or use case against its stated minutes. Test core and optional
 paths separately; an optional route failing must not erase a passing core route or support
 an unconditional overall verdict.
 
@@ -163,7 +167,7 @@ high-resolution checklist in `references/browser-session.md`. This guidance
 does not request a bulk recapture of existing screenshots.
 
 1. Find the screenshot's file name in both copies; reuse it so no Markdown changes.
-2. Missions labs publish light and dark WebP pairs (`src` and `src_dark`). Set the product
+2. Guided labs publish light and dark WebP pairs (`src` and `src_dark`). Set the product
    theme to **System** first: `pair` emulates the operating-system color scheme, which an
    explicit Light or Dark setting overrides. (Microsoft Copilot, November 2026:
    bottom-left **Settings and more** gear > **Settings** > **General** > **Preferences** >
@@ -179,16 +183,16 @@ does not request a bulk recapture of existing screenshots.
 
    Use `--format png --light-only` for classic PNG images. If using `--max-width`, keep
    at least twice the intended displayed width; do not downsample to the CSS width.
-   When a lab has both a classic and a missions
+   When a lab has both a classic and a guided
    version, capture each step once with `pair`, then crop it twice: `--light-only` PNG
-   for the classic lab and WebP pairs for the missions lab.
+   for the classic lab and WebP pairs for the exercises lab.
 4. After every theme switch, scroll the target back into view and recompute its bounds;
    theme changes can reset scroll. Open both crops at full resolution and at their actual
    size on the lab page, not just contact sheets. Check the current response, whole
    filename and all required controls are present in both crops; do not accept a previous
    response, table or hidden dialog. Retake from the product with the exact lab name rather
    than editing pixels to change names, results or product state.
-5. Note the printed width and height. Missions front matter needs `width` and `height` to
+5. Note the printed width and height. Exercises front matter needs `width` and `height` to
    match the file. Update `alt` when the state shown changed. OCR is only a way to find
    candidate sensitive text: inspect dark images, avatars and full-resolution crops
    visually, and check image metadata (EXIF/XMP). Cropping is not automatic masking.

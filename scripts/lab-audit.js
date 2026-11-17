@@ -677,6 +677,8 @@ function auditMissions(ctx, lab) {
 
   const missions = Array.isArray(ml.missions) ? ml.missions : [];
   const seen = new Set();
+  const progressIds = new Set((Array.isArray(ml.prerequisites) ? ml.prerequisites : [])
+    .map((_, index) => `ready-${index + 1}`));
   let optionalSeen = false;
   const images = [];
   const prompts = [];
@@ -698,6 +700,12 @@ function auditMissions(ctx, lab) {
 
     for (const [i, step] of (Array.isArray(mission.steps) ? mission.steps : []).entries()) {
       need(step, ['title', 'instruction'], `${where} step ${i + 1}`);
+      const progressId = step && step.id !== undefined ? step.id : `${mission.id}-${i + 1}`;
+      if (typeof progressId !== 'string' || !/^[a-z][a-z0-9-]*$/.test(progressId)) {
+        add('missions-contract', `${where} step ${i + 1}: id must be a kebab-case string.`);
+      }
+      if (progressIds.has(progressId)) add('missions-contract', `${where} step ${i + 1}: duplicate progress id "${progressId}".`);
+      progressIds.add(progressId);
       if (step && step.prompt) prompts.push(String(step.prompt));
       if (step && step.screenshot) {
         images.push({ image: step.screenshot, where: `${where} step ${i + 1} screenshot` });

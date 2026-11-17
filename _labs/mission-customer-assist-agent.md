@@ -11,14 +11,14 @@ lab_type: local
 section: intermediate_labs
 journeys:
   - developer
-description: 'Build a Zava Coffee concierge, connect a cancellation specialist, and try the conversation in chat and voice.'
+description: "Learn to build a customer-service agent, add a specialist and test conversations in chat and voice."
 classes: wide
 author_profile: false
 toc: false
 mission_lab:
-  headline: From customer intent
-  headline_emphasis: to the right specialist.
-  promise: 'Three core missions build a concierge, inspect cancellation routing and exercise voice. An optional mission adds enrollment, billing and delivery specialists.'
+  headline: "Build and test"
+  headline_emphasis: "a customer-service agent"
+  promise: "You'll build a Customer Assist Agent for a coffee subscription service, add a cancellation specialist and test how requests reach that specialist. You'll also try voice conversations. Adding other specialists is optional."
   hero_image:
     src: /labs/customer-assist-agent/images/canvas-one-subagent.webp
     alt: Zava Coffee Subscription Assistant with an intent skill connected to Subscription Cancellation with a cancellation skill.
@@ -26,7 +26,7 @@ mission_lab:
     height: 1640
     caption: 'Your finish line: an unpublished Zava Coffee assistant with one cancellation specialist and a skill on each agent.'
   scenario: |-
-    You are building a customer-service prototype for **Zava Coffee**. Customers want to enroll, change billing, move deliveries or cancel. Build a **Customer Assist Agent** on the Customer conversation harness, then compare what the primary agent does before and after a cancellation specialist exists. **Demo Mode** simulates results; no real subscription changes.
+    The example is a customer-service prototype for **Zava Coffee**. Customers ask to enroll, change billing details, move deliveries or cancel a subscription. You'll use the **Customer conversation harness** to build the main agent, then compare how it handles cancellation requests before and after you add a specialist. **Demo Mode** simulates the results; no real subscriptions are changed.
   self_setup: |-
     Prepare these separately before the timed exercise:
 
@@ -70,7 +70,7 @@ mission_lab:
           prompt_label: Primary agent · Description
           prompt: 'Acts as a concierge for Zava customers, helping them enroll in new coffee subscriptions, manage account and billing details, adjust delivery preferences, or cancel subscriptions by routing each request to the right specialist.'
         - title: Set the cross-channel instructions
-          instruction: 'Select **Expand instructions**. On **General**, paste the instructions below; if the expanded editor opens blank, paste into the inline instructions box instead. They name four specialists, but you will initially create only cancellation. Do not add a backend or knowledge source.'
+          instruction: 'Select **Instructions**. On the **General** tab, paste the instructions below. They name four specialists, but you will initially create only cancellation. Do not add a backend or knowledge source.'
           prompt_label: Primary agent · General instructions
           prompt: |-
             ## Purpose
@@ -130,7 +130,7 @@ mission_lab:
           prompt_label: Web Chat · Baseline greeting
           prompt: 'Hi, I need help with my coffee subscription'
         - title: Observe the primary without a specialist
-          instruction: 'Send the cancellation request, then open **Activity map**. Look for the primary asking for cancellation details such as your subscription ID (it may ask for the reason now or later), with no sub-agent invocation. Record what you actually observe; the baseline is for comparison with the next mission.'
+          instruction: 'Use the prompt below to send a cancellation request to the agent, then view **Activity map**. Look for the primary asking for cancellation details such as your subscription ID (it may ask for the reason now or later), with no sub-agent invocation. Record what you actually observe; the baseline is for comparison with the next exercise.'
           prompt_label: Web Chat · Before the specialist
           prompt: I want to cancel my subscription
           screenshot:
@@ -157,12 +157,12 @@ mission_lab:
             feedback: No. The baseline trace has no specialist invocation because you have not created a sub-agent.
           - text: No; add the sub-agent and save its description and instructions.
             correct: true
-            feedback: Correct. Routing needs an available specialist with an appropriate description; the next mission adds it.
+            feedback: Correct. Routing needs an available specialist with an appropriate description; the next exercise adds it.
       stuck:
         - problem: The creation option is missing or fields are disabled.
           solution: Confirm the preview URL and assigned environment. Wait for provisioning if fields are disabled. Ask the facilitator about missing access; do not change harnesses.
         - problem: Preview does not reflect an edit.
-          solution: 'Save each edited field, select **Start new test session** at the top right and repeat the same scenario. Preview uses saved changes.'
+          solution: 'Save each edited field, select **New test session** at the top right and repeat the same scenario. Preview uses saved changes.'
     - id: route
       verb: Route
       title: Give cancellation to a specialist
@@ -172,7 +172,7 @@ mission_lab:
       outcome: 'A cancellation specialist with its own skill, plus an Activity map comparison of cancellation and delivery requests.'
       steps:
         - title: Create and name the specialist
-          instruction: 'On **Build**, select **Add a sub-agent**. Wait for **New Sub-Agent** to finish provisioning. Select its title, enter the exact name below and select the checkmark labeled **Save name**. Keep this spelling: the primary routing rules refer to it.'
+          instruction: 'In **Build**, on the agent designer surface, select **Add a sub-agent**. Wait for **New Sub-Agent** to finish provisioning. Select its title, enter the exact name below and click the **Save** button. Keep this spelling: the primary routing rules refer to it.'
           prompt_label: Sub-agent name
           prompt: Subscription Cancellation
         - title: Describe when to route here
@@ -180,7 +180,7 @@ mission_lab:
           prompt_label: Subscription Cancellation · Description
           prompt: Handles cancellation requests; includes the `Cancel Subscription Flow` skill and uses coffee subscription policy knowledge.
         - title: Give the specialist a bounded procedure
-          instruction: 'Open **Instructions**, paste the text and select **Save** for that field. Keep **Demo Mode**: it asks for confirmation and simulates a result without connecting a backend.'
+          instruction: 'Open **Instructions**, paste the text and select **Save** for that field. Keep the **Demo Mode** section in the instructions: it asks for confirmation and simulates a result without connecting a backend.'
           prompt_label: Subscription Cancellation · Instructions
           prompt: |-
             ### Purpose
@@ -224,7 +224,7 @@ mission_lab:
             height: 1640
             caption: 'The saved build contains the primary agent and its cancellation specialist.'
         - title: Begin the original four-message test
-          instruction: 'Select **Preview** → **Web Chat**, then **Start new test session** at the top right. Send this first message. Wait for each reply before the next message; do not paste all four together.'
+          instruction: 'Select **Preview** → **Web Chat**, then **New test session** at the top right. Send this first message. Wait for each reply before the next message; do not paste all four together.'
           prompt_label: Web Chat · Original sequence 1 of 4
           prompt: I want to cancel my subscription
           notice: 'Look for a confirmation request followed by a simulated cancellation code.'
@@ -242,7 +242,7 @@ mission_lab:
           prompt: 'Yes, please cancel it'
           notice: '**Expected response example — comparison only, not text to send:** a simulated code such as **ZC-10421** and final delivery within **3 business days**. Codes and wording vary. No real subscription is changed.'
         - title: Use one diagnostic retry if the original stalls
-          instruction: 'Inspect both the chat and **Activity map**, not just the main **Execution summary**. Select **Start new test session** and retry once with `I want to cancel my subscription. My subscription ID is SUB-1042, and I am moving abroad.` When asked, send `Yes, please cancel it`. If this also stalls, stop and ask your facilitator.'
+          instruction: 'Inspect both the chat and **Activity map**, not just the main **Execution summary**. Select **New test session** and retry once with `I want to cancel my subscription. My subscription ID is SUB-1042, and I am moving abroad.` When asked, send `Yes, please cancel it`. If this also stalls, stop and ask your facilitator.'
           notice: 'Use this recovery only if the conversation stalls.'
         - title: Read the complete trace
           instruction: 'In **Activity map**, inspect the invocation of **Subscription Cancellation**, its inputs and its return. Look for **Interpreting agent intent**, **Preparing agent inputs**, **Executing agent**, **Reviewing nested activity**, and **Return To Main Conversation Tool**. Compare the actual reply with the final return status.'
@@ -256,7 +256,7 @@ mission_lab:
             height: 2625
             caption: 'The cancellation specialist asks for confirmation and returns a simulated cancellation code.'
         - title: Compare with a delivery request
-          instruction: 'Select **Start new test session** and send the delivery question below. Inspect **Activity map** again. Without a delivery specialist, the primary handles this request.'
+          instruction: 'Select **New test session** and send the delivery question below. Inspect **Activity map** again. Without a delivery specialist, the primary handles this request.'
           prompt_label: Web Chat · Delivery without a specialist
           prompt: Can I change my delivery date to next Friday?
       reveal:
@@ -281,7 +281,7 @@ mission_lab:
         - problem: The cancellation does not route.
           solution: 'Check the exact specialist name and saved **Description**. Save all edits and use a fresh test session. If the single diagnostic retry also stalls, stop and ask the facilitator.'
         - problem: The test pane reports TelephonyBadRequest or another error.
-          solution: 'Record the error, select **Start new test session** and retry once. If it persists, ask your facilitator; do not infer a root cause from the error alone.'
+          solution: 'Record the error, select **New test session** and retry once. If it persists, ask your facilitator; do not infer a root cause from the error alone.'
     - id: speak
       verb: Speak
       title: Try the voice experience
@@ -341,10 +341,10 @@ mission_lab:
       outcome: 'Three additional draft specialists and a recorded routing test for each.'
       steps:
         - title: Reuse the specialist pattern
-          instruction: 'Repeat **Build** → **Add a sub-agent** for each specialist below. Wait for provisioning, rename **New Sub-Agent** with the exact supplied name and select **Save name**. Save **Description** and **Instructions** separately, then use **+** beside **Skills** → **Generative**. Use only fictional contact and payment details.'
-          notice: 'Keep Demo Mode: these specialists simulate actions without a connected backend.'
+          instruction: 'Repeat **Build** → **Add a sub-agent** for each specialist below. Wait for provisioning, rename **New Sub-Agent** with the exact supplied name and select **Save**. Save **Description** and **Instructions** separately, then use **+** beside **Skills** → **Generative**. Use only fictional contact and payment details.'
+          notice: 'Keep the Demo Mode section in the instructions: these specialists simulate actions without a connected backend.'
         - title: Name the enrollment specialist
-          instruction: 'Create the first optional sub-agent, enter this exact name and select **Save name**.'
+          instruction: 'Create the first optional sub-agent, enter this exact name and select **Save**.'
           prompt_label: Enrollment · Name
           prompt: Subscription Enrollment & Setup
         - title: Describe enrollment requests
@@ -386,7 +386,7 @@ mission_lab:
             4. Review and confirm all information.
             5. Provide confirmation code and expected first delivery date.
         - title: Name the billing specialist
-          instruction: 'Create the second optional sub-agent, enter this exact name and select **Save name**.'
+          instruction: 'Create the second optional sub-agent, enter this exact name and select **Save**.'
           prompt_label: Billing · Name
           prompt: Account & Billing Management
         - title: Describe account and billing requests
@@ -425,7 +425,7 @@ mission_lab:
             3. Confirm accuracy and save changes.
             4. Notify the caller of the successful update.
         - title: Name the delivery specialist
-          instruction: 'Create the third optional sub-agent, enter this exact name and select **Save name**.'
+          instruction: 'Create the third optional sub-agent, enter this exact name and select **Save**.'
           prompt_label: Delivery · Name
           prompt: Delivery Scheduling & Adjustments
         - title: Describe delivery requests
@@ -465,7 +465,7 @@ mission_lab:
             4. Save and confirm the update.
         - title: Test each optional route independently
           instruction: |-
-            Save all fields and close the panel. Check for four specialists including cancellation. In **Preview** → **Web Chat**, select **Start new test session** before each test below. Supply fictional follow-up details when asked and inspect **Activity map**. Compare the route taken for each request.
+            Save all fields and close the panel. Check for four specialists including cancellation. In **Preview** → **Web Chat**, select **New test session** before each test below. Supply fictional follow-up details when asked and inspect **Activity map**. Compare the route taken for each request.
 
             | Send | Expected specialist to verify |
             | --- | --- |
@@ -528,9 +528,9 @@ mission_lab:
 
 Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
 
-Build a Zava Coffee concierge, connect a cancellation specialist, and try the conversation in chat and voice.
+You'll build a Customer Assist Agent for a coffee subscription service, add a cancellation specialist and test how requests reach that specialist. You'll also try voice conversations. Adding other specialists is optional.
 
-You are building a customer-service prototype for **Zava Coffee**. Customers want to enroll, change billing, move deliveries or cancel. Build a **Customer Assist Agent** on the Customer conversation harness, then compare what the primary agent does before and after a cancellation specialist exists. **Demo Mode** simulates results; no real subscription changes.
+
 
 ## Lab Details
 
@@ -623,7 +623,7 @@ Acts as a concierge for Zava customers, helping them enroll in new coffee subscr
 
 ### 5. Set the cross-channel instructions
 
-Select **Expand instructions**. On **General**, paste the instructions below; if the expanded editor opens blank, paste into the inline instructions box instead. They name four specialists, but you will initially create only cancellation. Do not add a backend or knowledge source.
+Select **Instructions**. On the **General** tab, paste the instructions below. They name four specialists, but you will initially create only cancellation. Do not add a backend or knowledge source.
 
 **Primary agent · General instructions**
 
@@ -701,7 +701,7 @@ Hi, I need help with my coffee subscription
 
 ### 9. Observe the primary without a specialist
 
-Send the cancellation request, then open **Activity map**. Look for the primary asking for cancellation details such as your subscription ID (it may ask for the reason now or later), with no sub-agent invocation. Record what you actually observe; the baseline is for comparison with the next mission.
+Use the prompt below to send a cancellation request to the agent, then view **Activity map**. Look for the primary asking for cancellation details such as your subscription ID (it may ask for the reason now or later), with no sub-agent invocation. Record what you actually observe; the baseline is for comparison with the next exercise.
 
 **Web Chat · Before the specialist**
 
@@ -733,7 +733,7 @@ Does naming Subscription Cancellation in General instructions create that specia
 <summary>Check your answer</summary>
 
 - **Not quite: Yes; the routing rules automatically create it.** No. The baseline trace has no specialist invocation because you have not created a sub-agent.
-- **Correct: No; add the sub-agent and save its description and instructions.** Correct. Routing needs an available specialist with an appropriate description; the next mission adds it.
+- **Correct: No; add the sub-agent and save its description and instructions.** Correct. Routing needs an available specialist with an appropriate description; the next exercise adds it.
 
 </details>
 
@@ -741,7 +741,7 @@ Does naming Subscription Cancellation in General instructions create that specia
 
 - **The creation option is missing or fields are disabled.** Confirm the preview URL and assigned environment. Wait for provisioning if fields are disabled. Ask the facilitator about missing access; do not change harnesses.
 
-- **Preview does not reflect an edit.** Save each edited field, select **Start new test session** at the top right and repeat the same scenario. Preview uses saved changes.
+- **Preview does not reflect an edit.** Save each edited field, select **New test session** at the top right and repeat the same scenario. Preview uses saved changes.
 
 ## Route: Give cancellation to a specialist
 
@@ -753,7 +753,7 @@ Add one specialist, test the four-message conversation, and inspect its invocati
 
 ### 1. Create and name the specialist
 
-On **Build**, select **Add a sub-agent**. Wait for **New Sub-Agent** to finish provisioning. Select its title, enter the exact name below and select the checkmark labeled **Save name**. Keep this spelling: the primary routing rules refer to it.
+In **Build**, on the agent designer surface, select **Add a sub-agent**. Wait for **New Sub-Agent** to finish provisioning. Select its title, enter the exact name below and click the **Save** button. Keep this spelling: the primary routing rules refer to it.
 
 **Sub-agent name**
 
@@ -773,7 +773,7 @@ Handles cancellation requests; includes the `Cancel Subscription Flow` skill and
 
 ### 3. Give the specialist a bounded procedure
 
-Open **Instructions**, paste the text and select **Save** for that field. Keep **Demo Mode**: it asks for confirmation and simulates a result without connecting a backend.
+Open **Instructions**, paste the text and select **Save** for that field. Keep the **Demo Mode** section in the instructions: it asks for confirmation and simulates a result without connecting a backend.
 
 **Subscription Cancellation · Instructions**
 
@@ -825,7 +825,7 @@ Confirm each edited field is saved, then close the panel. Find the primary conne
 
 ### 6. Begin the original four-message test
 
-Select **Preview** → **Web Chat**, then **Start new test session** at the top right. Send this first message. Wait for each reply before the next message; do not paste all four together.
+Select **Preview** → **Web Chat**, then **New test session** at the top right. Send this first message. Wait for each reply before the next message; do not paste all four together.
 
 **Web Chat · Original sequence 1 of 4**
 
@@ -869,7 +869,7 @@ Yes, please cancel it
 
 ### 10. Use one diagnostic retry if the original stalls
 
-Inspect both the chat and **Activity map**, not just the main **Execution summary**. Select **Start new test session** and retry once with `I want to cancel my subscription. My subscription ID is SUB-1042, and I am moving abroad.` When asked, send `Yes, please cancel it`. If this also stalls, stop and ask your facilitator.
+Inspect both the chat and **Activity map**, not just the main **Execution summary**. Select **New test session** and retry once with `I want to cancel my subscription. My subscription ID is SUB-1042, and I am moving abroad.` When asked, send `Yes, please cancel it`. If this also stalls, stop and ask your facilitator.
 
 Use this recovery only if the conversation stalls.
 
@@ -885,7 +885,7 @@ While the specialist waits for your next reply, its rows in **Activity map** can
 
 ### 12. Compare with a delivery request
 
-Select **Start new test session** and send the delivery question below. Inspect **Activity map** again. Without a delivery specialist, the primary handles this request.
+Select **New test session** and send the delivery question below. Inspect **Activity map** again. Without a delivery specialist, the primary handles this request.
 
 **Web Chat · Delivery without a specialist**
 
@@ -921,7 +921,7 @@ How can you see which specialist handled a request?
 
 - **The cancellation does not route.** Check the exact specialist name and saved **Description**. Save all edits and use a fresh test session. If the single diagnostic retry also stalls, stop and ask the facilitator.
 
-- **The test pane reports TelephonyBadRequest or another error.** Record the error, select **Start new test session** and retry once. If it persists, ask your facilitator; do not infer a root cause from the error alone.
+- **The test pane reports TelephonyBadRequest or another error.** Record the error, select **New test session** and retry once. If it persists, ask your facilitator; do not infer a root cause from the error alone.
 
 ## Speak: Try the voice experience
 
@@ -997,13 +997,13 @@ Extend the concierge to enrollment, billing and delivery using the same speciali
 
 ### 1. Reuse the specialist pattern
 
-Repeat **Build** → **Add a sub-agent** for each specialist below. Wait for provisioning, rename **New Sub-Agent** with the exact supplied name and select **Save name**. Save **Description** and **Instructions** separately, then use **+** beside **Skills** → **Generative**. Use only fictional contact and payment details.
+Repeat **Build** → **Add a sub-agent** for each specialist below. Wait for provisioning, rename **New Sub-Agent** with the exact supplied name and select **Save**. Save **Description** and **Instructions** separately, then use **+** beside **Skills** → **Generative**. Use only fictional contact and payment details.
 
-Keep Demo Mode: these specialists simulate actions without a connected backend.
+Keep the Demo Mode section in the instructions: these specialists simulate actions without a connected backend.
 
 ### 2. Name the enrollment specialist
 
-Create the first optional sub-agent, enter this exact name and select **Save name**.
+Create the first optional sub-agent, enter this exact name and select **Save**.
 
 **Enrollment · Name**
 
@@ -1067,7 +1067,7 @@ Help callers create a new Zava coffee subscription.
 
 ### 6. Name the billing specialist
 
-Create the second optional sub-agent, enter this exact name and select **Save name**.
+Create the second optional sub-agent, enter this exact name and select **Save**.
 
 **Billing · Name**
 
@@ -1128,7 +1128,7 @@ Assist callers in updating their payment method.
 
 ### 10. Name the delivery specialist
 
-Create the third optional sub-agent, enter this exact name and select **Save name**.
+Create the third optional sub-agent, enter this exact name and select **Save**.
 
 **Delivery · Name**
 
@@ -1189,7 +1189,7 @@ Help callers adjust their delivery schedule.
 
 ### 14. Test each optional route independently
 
-Save all fields and close the panel. Check for four specialists including cancellation. In **Preview** → **Web Chat**, select **Start new test session** before each test below. Supply fictional follow-up details when asked and inspect **Activity map**. Compare the route taken for each request.
+Save all fields and close the panel. Check for four specialists including cancellation. In **Preview** → **Web Chat**, select **New test session** before each test below. Supply fictional follow-up details when asked and inspect **Activity map**. Compare the route taken for each request.
 
 | Send | Expected specialist to verify |
 | --- | --- |

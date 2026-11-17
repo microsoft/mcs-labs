@@ -51,24 +51,56 @@ test('the shared classic context stays synchronized without changing its format'
 });
 
 test('session context gives named destinations precedence over the profile default', () => {
-  const first = steps.find(step => step.prompt_label === 'additionalContext · first text segment').prompt;
-  const second = steps.find(step => step.prompt_label === 'additionalContext · second text segment after Office Location').prompt;
-  assert.match(first, /The traveler's Office Location is$/);
-  assert.match(second, /^\. Use it only when the user has not named a travel destination\./);
-  assert.match(second, /A named destination takes precedence; resolve cities to their country\./);
-  assert.match(second, /If Office Location is missing and no destination is named, use Paris\./);
-  assert.doesNotMatch(`${first} ${second}`, /Use this .* to determine policy/);
+  const context = steps.filter(step => step.prompt_label?.startsWith('additionalContext'));
+  assert.equal(context.length, 1, 'Provide one complete copyable context');
+  const prompt = context[0].prompt;
+  assert.match(prompt, /The traveler's Office Location is \[OFFICE_LOCATION\]\. Use it only when the user has not named a travel destination\./);
+  assert.match(prompt, /A named destination takes precedence; resolve cities to their country\./);
+  assert.match(prompt, /If Office Location is missing and no destination is named, use Paris\./);
+  assert.doesNotMatch(prompt, /Use this .* to determine policy/);
+  for (const copy of [document.content, readme, classic.content, classicReadme]) {
+    assert.equal(indentedBlocks(copy, 'text').filter(block => block === prompt).length, 1);
+    assert.doesNotMatch(copy, /Paste this first segment|Paste the second segment/);
+    assert.match(copy, /select and delete only `\[OFFICE_LOCATION\]`, including the brackets/);
+    assert.match(copy, /Keep the space before the token and the period after it/);
+  }
   assert.match(missions[0].steps[1].prompt, /Use an explicitly requested location; otherwise use the Microsoft Entra ID profile/);
 });
 
 test('current hook authoring instructions preserve the dynamic token and wait for saved bindings', () => {
-  const context = steps.find(step => step.title === 'Insert Office Location and finish the context');
-  assert.match(context.instruction, /Add a space.*Insert dynamic content.*Get my profile → Office Location/);
-  assert.match(context.instruction, /second segment immediately after the token/);
-  assert.match(steps.find(step => step.title === 'Publish the workflow and save the draft').instruction,
+  const context = steps.find(step => step.title === 'Insert the Office Location dynamic value');
+  assert.match(context.instruction, /Leave the cursor there.*Insert dynamic content.*Get my profile → Office Location/);
+  assert.match(context.instruction, /Insert the dynamic token rather than typing a location/);
+  assert.equal(context.prompt, undefined, 'The replacement step needs no second copyable fragment');
+  assert.match(steps.find(step => step.title === 'Publish the workflow and agent').instruction,
     /Your agent has been saved\./);
   assert.match(steps.find(step => step.title === 'Remove broad web knowledge').instruction,
     /Work IQ.*if it is already attached; you do not need to add it/);
+});
+
+test('each new hook requires agent publication after the workflow is published and attached', () => {
+  for (const title of [
+    'Publish the workflow and agent',
+    'Return the redacted branch and publish',
+    'Return an allow or deny decision',
+  ]) {
+    const instruction = steps.find(step => step.title === title).instruction;
+    assert.match(instruction,
+      /\*\*Publish\*\*[\s\S]*\*\*Done\*\*[\s\S]*\*\*Save\*\*[\s\S]*\*\*Publish\*\* on the agent[\s\S]*publishing to finish/);
+  }
+  for (const copy of [document.content, readme]) {
+    assert.match(copy, /select \*\*Publish\*\* on the agent and wait for publishing to finish before opening \*\*Preview\*\*/);
+    assert.equal((copy.match(/Select \*\*Publish\*\* on the agent and wait for publishing to finish before testing the hook\./g) || []).length, 2);
+  }
+  for (const copy of [JSON.stringify(document.data.mission_lab), document.content, readme, classic.content, classicReadme]) {
+    assert.doesNotMatch(copy,
+      /agent need not be published|do not need to publish the agent|saved draft agent|saved draft whose|unpublished draft|Preview tests the saved draft/);
+    assert.match(copy, /saving alone does not activate the hook/);
+  }
+  for (const copy of [classic.content, classicReadme]) {
+    assert.equal((copy.match(/Select \*\*Publish\*\* on the agent and wait for publishing to finish before testing the hook\./g) || []).length, 2);
+    assert.match(copy, /\*\*Save\*\* it and select \*\*Publish\*\* on the agent\. Wait for publishing to finish, then select \*\*New chat\*\*/);
+  }
 });
 
 test('the simulated tool uses the observed Description for Intelligence field label', () => {

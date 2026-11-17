@@ -91,6 +91,59 @@ test('portable lab copies stay in sync apart from GitHub heading emojis and anch
   assert.equal(normalize(readme), normalize(document.content));
 });
 
+test('guided labs use exercise terminology while preserving mission schema names', () => {
+  function checkStrings(value, label) {
+    if (typeof value === 'string') {
+      assert.doesNotMatch(value, /\bmissions?\b/i, label);
+    } else if (Array.isArray(value)) {
+      value.forEach((item, index) => checkStrings(item, `${label}[${index}]`));
+    } else if (value && typeof value === 'object') {
+      for (const [key, item] of Object.entries(value)) checkStrings(item, `${label}.${key}`);
+    }
+  }
+  const files = fs.readdirSync(path.join(root, '_labs')).filter(name => name.endsWith('.md'));
+  let count = 0;
+  for (const file of files) {
+    const page = matter(fs.readFileSync(path.join(root, '_labs', file), 'utf8'));
+    if (page.data.lab_format !== 'missions') continue;
+    count++;
+    checkStrings(page.data.mission_lab, file);
+    assert.doesNotMatch(page.content, /\bmissions?\b/i, `${file}: portable body`);
+    const portable = fs.readFileSync(path.join(root, 'labs', page.data.slug, 'README.md'), 'utf8');
+    assert.doesNotMatch(portable, /\bmissions?\b/i, `${file}: README`);
+  }
+  assert.ok(count > 0, 'Discover guided labs from their existing schema');
+  const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
+  const script = fs.readFileSync(path.join(root, 'assets', 'js', 'lab-missions.js'), 'utf8');
+  for (const text of ['guided exercises', 'Lab exercises', 'Optional exercise', 'Mark exercise complete',
+    'Skip optional exercises', 'core exercises complete']) assert.ok(template.includes(text), text);
+  for (const text of ['Exercise complete — undo', 'Mark exercise complete', 'core exercises complete',
+    'optional exercises complete']) assert.ok(script.includes(text), text);
+  assert.doesNotMatch(template + script,
+    /Mark mission complete|Mission complete|Optional mission|Lab missions|guided missions|missions complete/);
+  assert.ok(script.includes('mcs-labs:missions:${root.dataset.labId}:v1'),
+    'Retain the storage key so existing progress is restored');
+});
+
+test('guided lab introductions match the readable copies and avoid the old slogans', () => {
+  const files = fs.readdirSync(path.join(root, '_labs')).filter(name => name.startsWith('mission-'));
+  for (const file of files) {
+    const page = matter(fs.readFileSync(path.join(root, '_labs', file), 'utf8'));
+    const github = fs.readFileSync(path.join(root, 'labs', page.data.slug, 'README.md'), 'utf8');
+    const opening = text => text.replace(/\r\n/g, '\n').split('\n## ')[0];
+    for (const copy of [opening(page.content), opening(github)]) {
+      assert.ok(copy.includes(page.data.mission_lab.promise), `${file}: mirror the introduction`);
+    }
+    const intro = [
+      page.data.description, page.data.mission_lab.headline, page.data.mission_lab.headline_emphasis,
+      page.data.mission_lab.promise, page.data.mission_lab.scenario,
+    ].join(' ');
+    assert.doesNotMatch(intro,
+      /From sources|From customer intent|Separate specialist responsibilities|Give the procedure a Skill|Now prove it saves|Your finish line|Leave with|unlock the power|embark on a journey/i,
+      `${file}: explain the lesson rather than using slogans`);
+  }
+});
+
 test('mission IDs, guided steps and knowledge checks have a complete authoring contract', () => {
   assert.equal(document.data.lab_format, 'missions');
   assert.equal(document.data.duration, 30);

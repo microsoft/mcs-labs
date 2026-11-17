@@ -140,7 +140,7 @@ In this lab you build the **Travel Policy Agent** on the Microsoft Copilot harne
 > Hooks are a preview feature and the designer is still changing. If a label in this lab differs slightly from what you see, look for the closest match — the event names, input names and output names are the stable part.
 
 > [!IMPORTANT]
-> **Save is not publish.** Selecting **Done** on a hook adds it to your *draft* agent. Save the agent to store it. The test pane uses the saved draft, so you do not need to publish the agent for this lab — but every hook **workflow** must be **published** or the hook has nothing to call.
+> **Save is not publish.** Selecting **Done** on a hook adds it to your *draft* agent. **Publish** the hook workflow, then **Save** and **Publish** the agent before testing. If the agent was already published, publish it again; saving alone does not activate the hook.
 
 ---
 
@@ -284,19 +284,13 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 
 1. Select **Respond to the agent**, select its name at the top of the panel and rename it to `Return traveler profile`. Node names are only labels: renaming them does not affect whether the workflow fits the hook.
 
-1. On **Return traveler profile**, paste this into `additionalContext`. Use **Expand to full screen** for a wider editor if needed:
+1. On **Return traveler profile**, paste the complete text below into `additionalContext`, including the placeholder. Use **Expand to full screen** for a wider editor if needed. You will replace the placeholder with a dynamic value in the next step:
 
     ```text
-    The SessionStart hook was executed. In your first reply, say so with lots of smileys. The traveler's Office Location is
+    The SessionStart hook was executed. In your first reply, say so with lots of smileys. The traveler's Office Location is [OFFICE_LOCATION]. Use it only when the user has not named a travel destination. A named destination takes precedence; resolve cities to their country. If Office Location is missing and no destination is named, use Paris. Only mention the relevant location.
     ```
 
-1. With the cursor at the end of the text, add a space and select **Insert dynamic content**. Under **Get my profile**, select **Office Location**; it is near the bottom of the list, so scroll or type `office` to filter.
-
-1. Immediately after **Office Location**, paste the following text. The profile is a default, not an instruction to override a named destination:
-
-    ```text
-    . Use it only when the user has not named a travel destination. A named destination takes precedence; resolve cities to their country. If Office Location is missing and no destination is named, use Paris. Only mention the relevant location.
-    ```
+1. In `additionalContext`, select and delete only `[OFFICE_LOCATION]`, including the brackets. Leave the cursor there, select **Insert dynamic content** and choose **Get my profile → Office Location**. Keep the space before the token and the period after it. Insert the dynamic token rather than typing a location; it will use the profile returned when the workflow runs. The profile is a default, not an instruction to override a named destination. If **Office Location** is not visible, scroll or type `office` to filter the dynamic content list.
 
     <picture><source media="(prefers-color-scheme: dark)" srcset="images/uc1-office-location-context-dark.webp"><img src="images/uc1-office-location-context.webp" alt="Office Location dynamic token between the session-context segments in the expanded response editor."></picture>
 
@@ -308,12 +302,12 @@ Create the **Travel Policy Agent** with its full instructions, then add a **Star
 
     ![The Travel Policy Agent breadcrumb at the top-left of the published Load traveler profile workflow](images/uc1-return-to-travel-policy-agent.png)
 
-    You are back on **Add hook**, with **Load traveler profile** selected in **Workflow** and a **Go to workflow** link below it. Select **Done**, then click **X** to close the **Hooks** dialog. Select **Save** at the top-right to save the agent. Wait for **Your agent has been saved.** before opening Preview.
+    You are back on **Add hook**, with **Load traveler profile** selected in **Workflow** and a **Go to workflow** link below it. Select **Done**, then click **X** to close the **Hooks** dialog. Select **Save** at the top-right to save the agent. Wait for **Your agent has been saved.**, then select **Publish** on the agent and wait for publishing to finish before opening **Preview**.
 
     ![Add hook dialog with the Load traveler profile workflow selected](images/uc1-add-hook.png)
 
     > [!IMPORTANT]
-    > Always **Publish** a hook workflow after you create or change it. The hook calls the published version; an unpublished workflow makes the hook fail when it runs.
+    > Always **Publish** a hook workflow after you create or change it. After adding the hook, **Save** and **Publish** the agent too, even if it was already published. Wait for publishing to finish before starting a new chat; saving alone does not activate the hook.
 
 #### Test it
 
@@ -623,12 +617,12 @@ Add a **User prompt submitted** hook whose workflow classifies every prompt. Pro
 
     ![Return redacted prompt with Agent Response selected for modifiedPrompt](images/uc2-return-redacted-agent-response.png)
 
-1. **Publish** the workflow and return to the agent with the **Travel Policy Agent** breadcrumb. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
+1. **Publish** the workflow and return to the agent with the **Travel Policy Agent** breadcrumb. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent. Select **Publish** on the agent and wait for publishing to finish before testing the hook.
 
     ![Redact personal data workflow: Classify branches, Redact PII, Return original prompt and Return redacted prompt](images/uc2-redaction-workflow.png)
 
     > [!IMPORTANT]
-    > Always **Publish** a hook workflow after you create or change it. The hook calls the published version; an unpublished workflow makes the hook fail when it runs.
+    > Always **Publish** a hook workflow after you create or change it. After adding the hook, **Save** and **Publish** the agent too, even if it was already published. Wait for publishing to finish before starting a new chat; saving alone does not activate the hook.
 
 #### Test it
 
@@ -778,7 +772,7 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
 
     Leave `modifiedParameters` and `suppressOutput` empty.
 
-1. **Publish** the workflow and return to the agent with the **Travel Policy Agent** breadcrumb. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent.
+1. **Publish** the workflow and return to the agent with the **Travel Policy Agent** breadcrumb. Select the workflow in **Workflow** if needed, select **Done**, then **Save** the agent. Select **Publish** on the agent and wait for publishing to finish before testing the hook.
 
     ![Add hook dialog with Pre tool use, the Book flight tool and the Check approved airline workflow](images/extra-add-hook.png)
 
@@ -791,7 +785,7 @@ A **Pre tool use** hook needs a tool call to intercept. The tool you add here is
 #### Test it
 
 > [!TIP]
-> If **New chat** shows *BotDefinitionOverride has unresolved references: 1 missing flow(s), 0 missing connection reference(s). Error code: InvalidContent.*, the agent hasn't picked up the published hook workflow yet. Open the **Check approved airline** workflow, select **Publish**, return to the agent and **Save** it again, then select **New chat**.
+> If **New chat** shows *BotDefinitionOverride has unresolved references: 1 missing flow(s), 0 missing connection reference(s). Error code: InvalidContent.*, the agent hasn't picked up the published hook workflow yet. Open the **Check approved airline** workflow, select **Publish**, return to the agent, **Save** it and select **Publish** on the agent. Wait for publishing to finish, then select **New chat**.
 
 1. Select **New chat** and send:
 

@@ -23,7 +23,7 @@
   }
 
   function storageError(error) {
-    console.warn('Mission lab progress could not be stored or restored.', error);
+    console.warn('Guided lab progress could not be stored or restored.', error);
     if (!persistenceAvailable) return;
     persistenceAvailable = false;
     // Each note carries its own fallback so the warning sits where people read or type.
@@ -73,7 +73,7 @@
       mission.classList.toggle('is-done', done);
       const button = mission.querySelector('[data-complete]');
       button.setAttribute('aria-pressed', String(done));
-      button.textContent = done ? 'Mission complete — undo' : 'Mark mission complete';
+      button.textContent = done ? 'Exercise complete — undo' : 'Mark exercise complete';
     });
     root.querySelectorAll('[data-mission-link]').forEach(link => {
       link.classList.toggle('is-done', state.done.includes(link.dataset.missionLink));
@@ -84,7 +84,7 @@
     const coreDone = coreMissions.filter(mission => state.done.includes(mission.dataset.mission)).length;
     root.querySelector('.progress-label').textContent = `${coreDone} / ${coreMissions.length} core complete`;
     root.querySelector('[data-progress]').setAttribute('aria-label',
-      `${coreDone} of ${coreMissions.length} core missions complete; ${state.done.length - coreDone} optional missions complete`);
+      `${coreDone} of ${coreMissions.length} core exercises complete; ${state.done.length - coreDone} optional exercises complete`);
     root.querySelectorAll('[data-progress-id]').forEach(input => {
       input.checked = state.steps.includes(input.dataset.progressId);
     });
@@ -96,7 +96,7 @@
     const stamp = root.querySelector('[data-print-stamp]');
     if (!stamp) return;
     const date = new Date().toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
-    stamp.textContent = `Your copy, saved ${date}. ${coreDone} of ${coreMissions.length} core missions complete.`;
+    stamp.textContent = `Your copy, saved ${date}. ${coreDone} of ${coreMissions.length} core exercises complete.`;
   }
 
   function applyTheme() {
@@ -149,7 +149,7 @@
       await navigator.clipboard.writeText(prompt.textContent);
       announce('Prompt copied. Paste it into your training task.');
     } catch (error) {
-      console.warn('Mission prompt could not be copied automatically.', error);
+      console.warn('Exercise prompt could not be copied automatically.', error);
       const range = document.createRange();
       range.selectNodeContents(prompt);
       const selection = window.getSelection();
@@ -228,7 +228,7 @@
       }).from(clone).save();
       announce('Your PDF has been downloaded. Your note remains only in this browser.');
     } catch (error) {
-      console.error('Mission lab PDF could not be generated.', error);
+      console.error('Guided lab PDF could not be generated.', error);
       announce('The PDF could not be downloaded. Try again or use your browser’s print menu.');
     } finally {
       clone?.remove();

@@ -6,9 +6,19 @@ const matter = require('gray-matter');
 const { labSourcePath } = require('./lab-files');
 
 const root = path.resolve(__dirname, '..');
-const page = matter(fs.readFileSync(labSourcePath(root, 'declarative-agent-skill-reuse'), 'utf8'));
-const readme = fs.readFileSync(path.join(root, 'labs', 'declarative-agent-skill-reuse', 'README.md'), 'utf8');
+const page = matter(fs.readFileSync(labSourcePath(root, 'declarative-agent-skill-reuse'), 'utf8').replace(/\r\n/g, '\n'));
+const readme = fs.readFileSync(path.join(root, 'labs', 'declarative-agent-skill-reuse', 'README.md'), 'utf8').replace(/\r\n/g, '\n');
 const mission = id => page.data.mission_lab.missions.find(item => item.id === id);
+
+test('skill reuse explains package contents with a literal reveal question', () => {
+  const reveal = mission('inspect').reveal;
+  assert.equal(reveal.title, 'What is included in a skill?');
+  for (const copy of [page.content, readme]) {
+    assert.ok(copy.includes(`**Reveal — ${reveal.title}**`));
+    assert.ok(copy.includes(reveal.line));
+    assert.doesNotMatch(copy, /What travels with a skill|A procedure travels/);
+  }
+});
 
 test('skill reuse waits for a populated Preview request before sending', () => {
   for (const copy of [mission('verify').steps[0].instruction, page.content, readme]) {

@@ -280,6 +280,34 @@ test('fixture repo: each seeded problem is reported once, with the right severit
   assert.ok(!mis.some(f => f.code === 'heading-emoji' || f.code === 'image-missing'));
 });
 
+for (const [id, message] of [
+  ['ask-2', /duplicate progress id "ask-2"/],
+  ['ready-1', /duplicate progress id "ready-1"/],
+  ['123', /id must be a kebab-case string/],
+]) {
+  test(`fixture repo: explicit step id ${id} cannot collide or use an invalid type`, t => {
+    const dir = fixtureRepo();
+    t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+    const file = path.join(dir, '_labs', 'mis.md');
+    fs.writeFileSync(file, fs.readFileSync(file, 'utf8')
+      .replace('          instruction: Paste the prompt.',
+        `          id: ${id}\n          instruction: Paste the prompt.`));
+    const result = audit.auditAll({ root: dir, slugs: ['mis'] });
+    assert.ok(result.findings.some(f => f.code === 'missions-contract' && message.test(f.message)));
+  });
+}
+
+test('fixture repo: an explicit step id preserves a non-sequential progress key', t => {
+  const dir = fixtureRepo();
+  t.after(() => fs.rmSync(dir, { recursive: true, force: true }));
+  const file = path.join(dir, '_labs', 'mis.md');
+  fs.writeFileSync(file, fs.readFileSync(file, 'utf8')
+    .replace('          instruction: Paste the prompt.',
+      '          id: ask-7\n          instruction: Paste the prompt.'));
+  const result = audit.auditAll({ root: dir, slugs: ['mis'] });
+  assert.ok(!result.findings.some(f => /progress id|id must be a kebab-case/.test(f.message)));
+});
+
 test('fixture repo: changed paths map to labs, and agenda edits widen the reference scope', t => {
   const dir = fixtureRepo();
   t.after(() => fs.rmSync(dir, { recursive: true, force: true }));

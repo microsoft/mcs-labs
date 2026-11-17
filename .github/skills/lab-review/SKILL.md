@@ -1,12 +1,16 @@
 ---
 name: lab-review
-description: Review an MCS Labs hands-on lab (classic README/_labs format or the guided missions format) for broken anchors and images, README and site copies drifting apart, invalid front matter, durations that disagree with Lab Details or event agendas, retired product names, out-of-date product claims, and wordy or hard-to-follow instructions. Produces a prioritized report with file and line evidence and proposed fixes. Use when asked to review, audit, check, QA, lint or health-check a lab, an event's labs, all labs, or a lab PR, or to find what needs updating after a product change. Read-only; hand fixes to lab-update and live testing to lab-runthrough.
+description: Review an MCS Labs hands-on lab (classic README/_labs format or the guided exercise format) for broken anchors and images, README and site copies drifting apart, invalid front matter, durations that disagree with Lab Details or event agendas, retired product names, out-of-date product claims, and wordy or hard-to-follow instructions. Produces a prioritized report with file and line evidence and proposed fixes. Use when asked to review, audit, check, QA, lint or health-check a lab, an event's labs, all labs, or a lab PR, or to find what needs updating after a product change. Read-only; hand fixes to lab-update and live testing to lab-runthrough.
 ---
 
 # Review a lab
 
 Review is read-only. It ends with a report, not edits. Set the scope and exclusions
 first, then use the deterministic checks allowed by that scope and add human judgment.
+Apply the shared writing rules to labs and related module text. Follow
+[learn from corrections](references/learning-design.md#learn-from-corrections):
+flag unclear wording, AI filler and inconsistent learner-facing exercise labels, and include
+any missing reusable rule in the handoff to `lab-update`. Remain read-only.
 
 ## 1. Pick the scope
 
@@ -54,12 +58,12 @@ Work through `references/review-rubric.md`. In particular:
    preview page, reveal after the experience, checks that target misconceptions. Apply its
    shared authoring rules too: creator order, trailing optional extensions, prepared-account
    setup, contextual cleanup and relevant images must not depend on which skill ran.
-4. **Timing.** Compare `duration`, the Lab Details row, use-case or mission minutes and
+4. **Timing.** Compare `duration`, the Lab Details row, use-case or exercise minutes and
    every agenda slot that lists the lab (`agenda-usage`). A 45-minute lab in a 30-minute
    slot is a delivery risk even if the files agree.
 5. **Accessibility.** Alt text describes the state shown, not "screenshot". Link text is
    meaningful. No instruction depends on color alone.
-6. **Missions labs.** Prompts verbatim across front matter, `_labs` body and README;
+6. **Guided labs.** Prompts verbatim across front matter, `_labs` body and README;
    reveals explain *why*; one correct option per check; only trailing extensions optional.
    Omit attendee cleanup chores for organizer-disposed environments; keep necessary
    own-tenant cleanup expandable and runner cleanup in the run log. The main `instruction`
@@ -76,7 +80,7 @@ Work through `references/review-rubric.md`. In particular:
    example), the prerequisites and Lab Details link it and say what to check there.
 
 Do not run the lab here. When a step needs proof in the product, recommend
-`lab-runthrough`, and say which mission or use case.
+`lab-runthrough`, and say which exercise or use case.
 
 ## 4. Report
 

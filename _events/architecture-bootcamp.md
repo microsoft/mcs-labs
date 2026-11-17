@@ -30,6 +30,6 @@ labs:
     label: "Lab 11"
 ---
 
-Explore Microsoft Copilot and Microsoft Copilot Studio through 17 modules and 11 hands-on labs. Every lab uses guided missions with copyable prompts, expected results, and quick checks. Follow the three-day agenda below; optional extensions sit outside the core lab timeboxes.
+Explore Microsoft Copilot and Microsoft Copilot Studio through 17 modules and 11 hands-on labs. Every lab uses guided exercises with copyable prompts, expected results, and quick checks. Follow the three-day agenda below; optional extensions sit outside the core lab timeboxes.
 
 The [classic-format edition]({{ '/events/bootcamp-latest/' | relative_url }}) remains available by direct link with the same module schedule.

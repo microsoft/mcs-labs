@@ -4,7 +4,7 @@
 
 | Field | Value |
 | --- | --- |
-| Lab | `%%SLUG%%` (classic or missions) |
+| Lab | `%%SLUG%%` (classic or exercises) |
 | Copies | `labs/%%SLUG%%/README.md`, `_labs/[mission-]%%SLUG%%.md` at commit `%%SHA%%` |
 | Date | %%YYYY-MM-DD%% |
 | Tenant and account | Training tenant, person's account or provisioned training account (no user names or passwords here) |
@@ -14,7 +14,7 @@
 | Prerequisites checked | Licenses, plugins, connections, sample data |
 | Checks before run | %%EXACT_ALLOWED_COMMANDS_AND_RESULTS; FULL_AUDIT_ONLY_IF_IN_SCOPE%% |
 
-<!-- Replace [mission-] with the actual filename. Keep credentials and signed URLs out of this log. -->
+<!-- Replace [exercise-] with the actual filename. Keep credentials and signed URLs out of this log. -->
 
 **Coverage summary:** Core %%covered%%/%%total%% steps; optional %%covered%%/%%total%%.
 State incomplete coverage explicitly. Do not use an unconditional verdict when any core
@@ -35,7 +35,7 @@ its event title changed; test meaningful differences and preserve blocked/untest
 
 ## Steps
 
-Use the lab's own numbering: use case and step, or mission and step. Quote UI text exactly.
+Use the lab's own numbering: use case and step, or exercise and step. Quote UI text exactly.
 
 | # | Core/optional | Instruction (short) | Expected | Actual | Status | Evidence and independent check | Proposed fix |
 | --- | --- | --- | --- | --- | --- | --- |

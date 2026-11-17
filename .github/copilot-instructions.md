@@ -121,6 +121,7 @@ This document contains essential context for GitHub Copilot when working on the 
 6. **Enforce quality**: Don't just fix issues - explain why and document properly
 7. **Verify CSS consistency**: When making UI changes, check all CSS files for consistent, generic naming (no event-specific class names)
 8. **BEFORE ANY COMMIT**: Proactively ask "Have we added documentation and comments for this change?"
+9. **Learn from every lab or module correction**: Apply the shared writing rules in `.github/skills/lab-review/references/learning-design.md` on every edit. Use **exercise**, not **mission**, in learner-facing text; write clear, direct instructions without AI filler. Before finishing a correction, capture any reusable lesson in that shared guidance and update affected skill instructions, templates, review checks and tests in the same change. Strengthen an existing rule rather than duplicating it; keep one-off scenario details out of the rules. Read-only reviews and run-throughs propose these updates in their handoff instead of editing files.
 
 **BLOCKING Actions (Stop User):**
 

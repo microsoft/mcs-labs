@@ -188,7 +188,7 @@ Create the **Zava Coffee Subscription Assistant** from scratch, give it general 
     Acts as a concierge for Zava customers, helping them enroll in new coffee subscriptions, manage account and billing details, adjust delivery preferences, or cancel subscriptions by routing each request to the right specialist.
     ```
 
-1. Select **Expand instructions** to open the full editor. On the **General** tab, paste the following. If the expanded editor opens blank, paste into the inline instructions box instead.
+1. Select **Instructions**. On the **General** tab, paste the instructions below.
 
     ```text
     ## Purpose
@@ -302,9 +302,9 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
 
 #### Create the sub-agent
 
-1. On **Build**, select **Add a sub-agent**. Wait for the **New Sub-Agent** to finish provisioning and its fields to become editable.
+1. In **Build**, on the agent designer surface, select **Add a sub-agent**. Wait for the **New Sub-Agent** to finish provisioning and its fields to become editable.
 
-1. Select the **New Sub-Agent** title, enter the name below, then select the checkmark labeled **Save name**:
+1. Select the **New Sub-Agent** title, enter the name below, then click the **Save** button:
 
     ```text
     Subscription Cancellation
@@ -374,7 +374,7 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
 
 #### Test the routing in Web Chat
 
-1. Select **Preview**, then **Web Chat**. Select **Start new test session** at the top right to clear the previous conversation.
+1. Select **Preview**, then **Web Chat**. Select **New test session** at the top right to clear the previous conversation.
 
 1. Send these messages one at a time and wait for each reply:
 
@@ -408,7 +408,7 @@ Add a **Subscription Cancellation** sub-agent with its own instructions and **ca
     > [!NOTE]
     > The diagnostic retry included an intermediate **Cancelled** tool action followed by a **Completed** return. Check the conversation and final return status rather than treating an intermediate status alone as the test result.
 
-1. Select **Start new test session** for a new conversation and send:
+1. Select **New test session** for a new conversation and send:
 
     ```text
     Can I change my delivery date to next Friday?
@@ -491,13 +491,13 @@ Simulate a subscription cancellation by voice and hear the **Voice** instruction
 Add the three remaining sub-agents the routing rules refer to, then check that each request type lands on the right one.
 
 > [!NOTE]
-> Keep Demo Mode. Check that each specialist asks for confirmation and returns a clear response to the customer.
+> Keep the Demo Mode section in the instructions. Check that each specialist asks for confirmation and returns a clear response to the customer.
 
 ---
 
 ### Step-by-step instructions
 
-Repeat Use Case #2 for each specialist: **Build** → **Add a sub-agent**; wait for provisioning; rename **New Sub-Agent** to exactly the **Name** below; select **Save name**. Save **Description** and **Instructions** separately. Select **+** beside **Skills** and add a **Generative** skill. Use only fictional contact and payment details.
+Repeat Use Case #2 for each specialist: **Build** → **Add a sub-agent**; wait for provisioning; rename **New Sub-Agent** to exactly the **Name** below; select **Save**. Save **Description** and **Instructions** separately. Select **+** beside **Skills** and add a **Generative** skill. Use only fictional contact and payment details.
 
 #### Subscription Enrollment & Setup
 
@@ -649,7 +649,7 @@ The canvas now shows four sub-agents.
 
 #### Test the routing
 
-In **Preview** → **Web Chat**, select **Start new test session** before each line and check the **Activity map**:
+In **Preview** → **Web Chat**, select **New test session** before each line and check the **Activity map**:
 
 | Send | Routes to |
 |------|-----------|
@@ -675,11 +675,11 @@ The delivery question that the primary agent answered itself in Use Case #2 now 
 |---------|-----|
 | **Customer conversation agent** is missing from **More create options** | Confirm the preview URL and the facilitator-provided environment. Ask the facilitator to verify feature access; do not substitute a different harness |
 | No cancellation reply after about two minutes | Check the chat and Activity map. Use the one diagnostic retry in Use Case #2; stop and ask your facilitator if it also stalls |
-| **TelephonyBadRequest** or another test-pane error | Record the error, select **Start new test session**, and retry once. If it persists, ask your facilitator |
+| **TelephonyBadRequest** or another test-pane error | Record the error, select **New test session**, and retry once. If it persists, ask your facilitator |
 | **Handoff method** shows **Needs setup** under **Human handoff** | Leave it unchanged; this lab does not configure human handoff |
 | New agent or sub-agent fields are disabled | Wait for provisioning to finish before entering values |
 | The name is rejected or cut off | Use a shorter, distinctive name and follow the validation message. Keep the sub-agent names in this lab unchanged so they match the routing instructions |
-| Preview does not reflect an edit | Save each edited field, select **Start new test session**, and repeat the same scenario |
+| Preview does not reflect an edit | Save each edited field, select **New test session**, and repeat the same scenario |
 | A request isn't routed | Check the sub-agent's name matches the routing rules exactly and its **Description** is saved |
 | No sound on the voice call | Allow microphone access in the browser and check your audio device, then call again |
 
