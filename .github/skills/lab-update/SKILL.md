@@ -99,7 +99,8 @@ script changes.
   Kramdown otherwise ends the list and the site restarts numbering at 1.
 - **Prerequisites.** Attendees with pre-provisioned accounts must not repeat tenant
   setup. Use the organizer-neutral template cue and do not imply that attending any event
-  is enough to skip setup. Keep required sign-in and exercise downloads visible; put
+  is enough to skip setup. Keep required sign-in and exercise downloads visible, linking
+  each download to the file itself (GitHub `/raw/` URL), not its `/blob/` preview; put
   independent-tenant provisioning in the expandable setup section. Replace older event-specific variants.
   In missions labs, `prerequisites:` is an always-visible attendee readiness checklist.
   Put own-tenant setup in `mission_lab.self_setup` and matching closed disclosures in both
@@ -112,6 +113,9 @@ script changes.
   in front matter, the `_labs` body and the README. If an unchanged supplied prompt has a
   baseline retired-name warning, disclose it as pre-existing; do not rename the prompt to
   silence the audit.
+  Joining a prompt that is hard-wrapped mid-sentence is not a wording change: join the
+  wrapped lines in every copy, keep intentional list and output line breaks, and run
+  `node --test scripts/prompt-wrap.test.js`.
   Preserve sample emails, expressions and expected-output fences too, including unlabelled
   ones and repeated occurrences. Expected output belongs in `instruction`, not `prompt`.
 - **Durations.** `duration`, the Lab Details row, use-case or mission minutes, and every
