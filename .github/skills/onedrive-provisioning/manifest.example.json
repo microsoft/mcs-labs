@@ -1,0 +1,5 @@
+{
+  "files": [
+    { "source": "Welcome.txt", "target": "Workshop/Welcome.txt" }
+  ]
+}

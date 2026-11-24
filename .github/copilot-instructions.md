@@ -237,6 +237,14 @@ Each has a colocated `*.test.js`; `npm test` runs them all with `node --test`. C
 
 **Workflows** (`.github/workflows/`): `build-and-deploy.yml` (Jekyll build → GitHub Pages), `lab-doc-sync.yml` (sync guard), `a11y.yml` (pa11y-ci), `lighthouse.yml`.
 
+**Workshop preparation skills** (`.github/skills/`): `solution-rollout`,
+`copilot-credit-allocation` and `onedrive-provisioning` are maintained here, even
+when used for Workshop Hub operations. See `docs/WORKSHOP_PREPARATION.md`.
+Keep runtime configuration, rosters, results and token caches outside Git and
+synced folders. Editing these skills does not authorize live operations.
+Restore each Node skill's dependencies, then run `npm run test:workshop-skills`
+for offline tests; their Node 22 requirement is separate from the site's toolchain.
+
 ### 5. Styling
 
 - **ALL styling** in `assets/css/` - `main.scss` plus `_tokens.scss` for design tokens; `tracker.css` for the tracker page

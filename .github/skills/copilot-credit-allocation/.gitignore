@@ -1,0 +1,9 @@
+# This skill is a procedure; tenant-bound batch scripts and snapshots belong outside Git.
+config.json
+envs.txt
+out/
+results/
+logs/
+*.log
+*.cache
+*.bin

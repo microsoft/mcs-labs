@@ -1,0 +1,24 @@
+{
+  "tenantId": "00000000-0000-0000-0000-000000000000",
+  "adminUpn": "admin@contoso.onmicrosoft.com",
+  "bootstrapOrigin": "https://org-any-env.crm.dynamics.com",
+  "environments": "envs.txt",
+  "outDir": "out",
+  "packages": [
+    "C:\\path\\to\\FirstSolution_1_0_0_1.zip",
+    { "path": "C:\\path\\to\\SecondSolution_1_0_0_3.zip", "sha256": "optional-hex-digest-to-pin-the-exact-file" }
+  ],
+  "owner": {
+    "source": "usedBy",
+    "upn": null,
+    "envNamePattern": "^DEV - (.+)$"
+  },
+  "import": {
+    "overwriteUnmanagedCustomizations": false,
+    "publishWorkflows": true,
+    "publishCustomizations": "auto"
+  },
+  "publish": "imported",
+  "assign": { "botComponentsByParent": true },
+  "heal": { "probePrefix": null }
+}

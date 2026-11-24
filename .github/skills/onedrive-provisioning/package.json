@@ -1,0 +1,11 @@
+{
+  "name": "workshop-onedrive-provisioning",
+  "private": true,
+  "description": "Create-only workshop OneDrive content provisioning with an approved recipient and file manifest.",
+  "engines": { "node": ">=22" },
+  "scripts": { "test": "node --test tests/*.test.cjs" },
+  "dependencies": {
+    "@azure/msal-node": "^7.1.1",
+    "@azure/msal-node-extensions": "^5.5.3"
+  }
+}
