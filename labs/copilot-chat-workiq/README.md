@@ -131,12 +131,13 @@ The prompt changed as well as the response mode, so this is not a controlled mod
 <summary>Choose a response mode and model</summary>
 
 Auto decides how long to think; Quick response favors speed for recall, rewriting and short lookups; Think deeper spends longer on multi-step reasoning. When unsure, use Auto. Model names and availability depend on tenant and admin settings. Optionally ask a fresh question of your own after switching models; do not ask it to assess an earlier model's web results.
+Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
 
 </details>
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/model-picker-dark.webp"><img src="images/model-picker.webp" alt="Response-mode menu and Claude submenu showing available model choices." width="1812" height="1176"></picture>
 
-The menu shows Auto selected and the available Claude models. Your available models may differ. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
+The menu shows Auto selected and the available Claude models. Your available models may differ.
 
 <details>
 <summary>Reveal: Did the selector do all the work?</summary>
