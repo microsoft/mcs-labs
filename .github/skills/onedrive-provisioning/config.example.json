@@ -1,0 +1,11 @@
+{
+  "tenantId": "00000000-0000-0000-0000-000000000000",
+  "adminUpn": "admin@contoso.onmicrosoft.com",
+  "clientId": "00000000-0000-0000-0000-000000000000",
+  "sharePointOrigin": "https://contoso-my.sharepoint.com",
+  "sharePointAdminOrigin": "https://contoso-admin.sharepoint.com",
+  "recipients": "recipients.json",
+  "manifest": "manifest.json",
+  "payloadRoot": "payload",
+  "outDir": "out"
+}

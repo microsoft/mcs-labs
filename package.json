@@ -7,6 +7,7 @@
     "a11y": "pa11y-ci --config .pa11yci.json",
     "lighthouse": "lhci autorun",
     "test": "node --test scripts/*.test.js && ruby scripts/content_last_updated_test.rb",
+    "test:workshop-skills": "npm --prefix .github/skills/solution-rollout test && npm --prefix .github/skills/onedrive-provisioning test",
     "build:feed": "node scripts/build-feed.js",
     "consume:feed": "node scripts/consume-feed.js",
     "audit:labs": "node scripts/lab-audit.js"

@@ -85,8 +85,10 @@ test('corrections feed shared writing practices back into every skill workflow',
 });
 
 test('skill prose uses exercise terminology while technical references stay compatible', () => {
-  const files = fs.readdirSync(skills, { recursive: true })
-    .filter(file => file.endsWith('.md'));
+  // Learner terminology applies to lab-authoring skills, not operator tooling or its dependencies.
+  const files = skillNames.flatMap(name => fs.readdirSync(path.join(skills, name), { recursive: true })
+    .filter(file => file.endsWith('.md') && !file.split(path.sep).includes('node_modules'))
+    .map(file => path.join(name, file)));
   assert.ok(files.length > 0);
   for (const file of files) {
     const prose = fs.readFileSync(path.join(skills, file), 'utf8')

@@ -1,0 +1,16 @@
+# One environment per line. Blank lines and "#" comments are ignored; duplicates are dropped.
+#
+# 1. Environment id only: the owner comes from the admin API (config.owner.source = usedBy | createdBy).
+de54d14e-012b-ea05-944c-3ab22d1bec0d
+bdd90fb4-32cf-e8de-acaa-4fd8df10be10
+
+# 2. Environment id with an explicit owner (UPN, Entra object id or systemuserid). Separators: , ; tab or space.
+4c0051eb-9f95-eee3-bb9c-1b78e6b0f819, student01@contoso.onmicrosoft.com
+
+# 3. Dataverse URL: skips the admin API, so give an owner here, with --owner, or in config.owner.upn.
+https://org-student02.crm.dynamics.com, student02@contoso.onmicrosoft.com
+
+# 4. A Markdown table pasted from a document or chat works as-is; pipes and separator rows are ignored.
+| 89428ea9-916d-e749-85cd-63e1fb684715 |
+| --- |
+| cd97ecea-3d53-e6fd-983a-e1f8784a2500 |
