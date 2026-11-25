@@ -1,8 +1,8 @@
 event_id: private-december
 
 # Independent delivery timetable using the guided Architecture Bootcamp labs.
-# Preserve shared slugs; close the omitted module's numbering gap in this event.
-# Lab numbers retain their curriculum references. Event-specific slot durations
+# Preserve shared slugs; close the omitted module and lab numbering gaps here.
+# Event-specific slot durations
 # do not change the shared labs' exercise plans. Keep lab: false on module rows
 # so explicit delivery slots determine lab totals.
 schedule:
@@ -153,7 +153,7 @@ schedule:
 
   - type: lab
     slug: instructions-skills-authoring
-    label: "Lab 6"
+    label: "Lab 5"
     title: "Instructions and Skills Authoring"
     time: "11:30"
     duration: 30
@@ -174,7 +174,7 @@ schedule:
 
   - type: lab
     slug: hooks-knowledge-travel-policy
-    label: "Lab 7"
+    label: "Lab 6"
     title: "Hooks and Knowledge: Travel Policy Agent"
     time: "13:45"
     duration: 30
@@ -195,7 +195,7 @@ schedule:
 
   - type: lab
     slug: customer-assist-agent
-    label: "Lab 8"
+    label: "Lab 7"
     title: "Customer Conversation Harness"
     time: "15:00"
     duration: 30
@@ -211,7 +211,7 @@ schedule:
 
   - type: lab
     slug: managed-apps-build
-    label: "Lab 9"
+    label: "Lab 8"
     title: "Apps on Microsoft Copilot Managed Runtime"
     time: "16:00"
     duration: 30
@@ -246,7 +246,7 @@ schedule:
 
   - type: lab
     slug: workflows-autonomous
-    label: "Lab 10"
+    label: "Lab 9"
     title: "Workflows"
     time: "10:30"
     duration: 30
@@ -262,7 +262,7 @@ schedule:
 
   - type: lab
     slug: agent-integration-team
-    label: "Lab 11"
+    label: "Lab 10"
     title: "Agent integration"
     time: "11:30"
     duration: 30

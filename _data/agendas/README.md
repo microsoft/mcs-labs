@@ -72,7 +72,8 @@ does not mean access-controlled. It reuses the guided labs without changing
 their content or shared durations. The source curriculum's Module 5 / Lab 5
 are not delivered. Event module labels close that gap: source Modules 6–17
 become Modules 5–16, with event Module 5 split into two 30-minute slots.
-Shared module slugs, presentation filenames and lab numbers are unchanged.
+Lab labels also close the gap: source Labs 6–11 become event Labs 5–10.
+Shared module and lab slugs, presentation filenames and lab content are unchanged.
 The 30-minute Workflows slot is a delivery timebox, not a shortened shared lab.
 Update only this agenda and `_events/private-december.md` for delivery changes.
 

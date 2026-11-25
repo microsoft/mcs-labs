@@ -41,11 +41,11 @@ test('private delivery slots match the three-day timetable without gaps or overl
   }
 });
 
-test('private event retains guided lab identities, numbering and valid companion links', () => {
+test('private lab labels are consecutive while guided identities and companion links stay intact', () => {
   const labs = agenda.schedule.filter(row => row.type === 'lab');
   const expectedLabs = original.schedule.filter(row => row.type === 'lab' && row.label !== 'Lab 5');
   assert.deepEqual(labs.map(({ slug, label }) => ({ slug, label })),
-    expectedLabs.map(({ slug, label }) => ({ slug, label })));
+    expectedLabs.map(({ slug }, index) => ({ slug, label: `Lab ${index + 1}` })));
   assert.deepEqual(event.data.labs, labs.map(({ slug, label }) => ({ slug, label })));
   assert.equal(labs.length, 10);
   for (const lab of labs) {
