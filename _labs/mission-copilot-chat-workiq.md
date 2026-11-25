@@ -113,7 +113,7 @@ mission_lab:
             Flag anything you could not source. Do not present an estimate as a fact.
         - title: "Compare the two answers"
           instruction: "Scroll to the first response. Select **Reasoned for**, when shown, to inspect the displayed reasoning details. Compare references, retrieved versus calculated numbers, named uncertainties and whether the conclusion argues against itself."
-          notice: "The prompt changed as well as the response mode, so this is not a controlled model benchmark. Auto can also reason deeply on a complex question; leave Auto selected when unsure."
+          notice: "The prompt changed as well as the response mode, so this is not a controlled model benchmark. Auto can also reason deeply on a complex question; leave Auto selected when unsure. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation."
         - title: "Inspect response modes and change the model"
           instruction: "Open the selector beside **Work IQ**. Notice **Auto**, **Quick response** and **Think deeper**. Below them, point to **Claude** and choose an available model, such as **Sonnet 5.5**, or inspect **GPT**."
           help: "Auto decides how long to think; Quick response favors speed for recall, rewriting and short lookups; Think deeper spends longer on multi-step reasoning. When unsure, use Auto. Model names and availability depend on tenant and admin settings. Optionally ask a fresh question of your own after switching models; do not ask it to assess an earlier model's web results."
@@ -125,7 +125,6 @@ mission_lab:
             width: 2896
             height: 1888
             caption: "The menu shows Auto selected and the available Claude models. Your available models may differ."
-          notice: "Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation."
       reveal:
         title: "Did the selector do all the work?"
         line: "The question asks for the reasoning you need."
@@ -587,7 +586,7 @@ Flag anything you could not source. Do not present an estimate as a fact.
 
 3. Scroll to the first response. Select **Reasoned for**, when shown, to inspect the displayed reasoning details. Compare references, retrieved versus calculated numbers, named uncertainties and whether the conclusion argues against itself.
 
-The prompt changed as well as the response mode, so this is not a controlled model benchmark. Auto can also reason deeply on a complex question; leave Auto selected when unsure.
+The prompt changed as well as the response mode, so this is not a controlled model benchmark. Auto can also reason deeply on a complex question; leave Auto selected when unsure. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
 
 4. Open the selector beside **Work IQ**. Notice **Auto**, **Quick response** and **Think deeper**. Below them, point to **Claude** and choose an available model, such as **Sonnet 5.5**, or inspect **GPT**.
 
@@ -600,7 +599,7 @@ Auto decides how long to think; Quick response favors speed for recall, rewritin
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/model-picker-dark.webp"><img src="images/model-picker.webp" alt="Response-mode menu and Claude submenu showing available model choices." width="1812" height="1176"></picture>
 
-The menu shows Auto selected and the available Claude models. Your available models may differ. Compare voice, structure and evidence, not just fluency. A different model can fail to recognize earlier web results in the same conversation.
+The menu shows Auto selected and the available Claude models. Your available models may differ.
 
 <details>
 <summary>Reveal: Did the selector do all the work?</summary>
