@@ -64,6 +64,18 @@ the active event. Exit restores the standalone card. Without JavaScript, the
 module's default companion remains available and the event agenda has explicit
 links to the correct labs.
 
+## Private December
+
+`private-december.yml` is an independent, unlisted delivery of the guided
+curriculum for 1–3 December. Its page is `/events/private-december/`; unlisted
+does not mean access-controlled. It reuses the guided labs without changing
+their content or shared durations. The source curriculum's Module 5 / Lab 5
+are not delivered. Event module labels close that gap: source Modules 6–17
+become Modules 5–16, with event Module 5 split into two 30-minute slots.
+Shared module slugs, presentation filenames and lab numbers are unchanged.
+The 30-minute Workflows slot is a delivery timebox, not a shortened shared lab.
+Update only this agenda and `_events/private-december.md` for delivery changes.
+
 ## Architecture Bootcamp
 
 `architecture-bootcamp.yml` is the advertised three-day curriculum: 17 modules and
