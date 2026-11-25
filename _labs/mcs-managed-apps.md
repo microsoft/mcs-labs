@@ -91,7 +91,7 @@ OneDrive and CSV are this exercise's implementation choices. The transferable le
 - [OneDrive for Business connector reference](https://learn.microsoft.com/connectors/onedriveforbusiness/) - connector actions and connection requirements.
 - [Manage connections in Power Apps](https://learn.microsoft.com/power-apps/maker/canvas-apps/add-manage-connections) - creating and deleting connections.
 - [What is Microsoft Copilot Managed Runtime (preview)](https://learn.microsoft.com/microsoft-365/copilot-managed-runtime/) - where these apps run and how they're governed.
-- [Live published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) - source of truth for the app's schedule data.
+- [Live published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/) - source of truth for the app's schedule data.
 
 Use your facilitator's environment-specific guidance for feature access and connector availability.
 
@@ -178,7 +178,7 @@ Build an app called "My Bootcamp Lab App" using the attached screenshot as a vis
 Reproduce its dark theme, square corners, day tabs, timeline, lab cards, completion checkboxes, and overall progress indicator.
 
 Fetch the current live published lab schedule from:
-https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/
+https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/
 
 Include every day's scheduled "Lab N:" items and Lunch break.
 Exclude other agenda items and optional labs. If you cannot read the agenda, stop and tell me rather than inventing the schedule.
@@ -371,4 +371,4 @@ Keep the reference image and behavior requirements together. Use your own OneDri
 
 ## Architecture Bootcamp Latest
 
-This lab is part of [Architecture Bootcamp Latest]({{ '/events/architecture-bootcamp/' | relative_url }}).
+This lab is part of [Architecture Bootcamp Latest]({{ '/events/copilot-agents-bootcamp/' | relative_url }}).

@@ -514,7 +514,7 @@ for (const [classic, modern, order] of bootcampLabs) {
     const remainingBlocks = [...guidedPrompts, ...guidedOutputs];
     for (const prompt of [...indentedPrompts(original.content), ...indentedBlocks(original.content, '')]) {
       // Retain the guided edition's agenda URL and the existing explicit export-format clarification.
-      const editionPrompt = prompt.replaceAll('/events/bootcamp-latest/', '/events/architecture-bootcamp/')
+      const editionPrompt = prompt.replaceAll('/events/architecture-bootcamp-classic/', '/events/copilot-agents-bootcamp/')
         .replace(/^Export the latest snapshot\.$/, 'Export the latest snapshot as JSON and Markdown.');
       const index = remainingBlocks.indexOf(editionPrompt);
       assert.ok(index >= 0, `${modern}: missing or changed classic block: ${prompt.slice(0, 80)}`);

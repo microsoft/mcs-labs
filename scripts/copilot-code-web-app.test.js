@@ -14,7 +14,7 @@ test('Copilot Code uses the current bootcamp agenda in both editions', () => {
   const classic = matter(fs.readFileSync(labSourcePath(root, 'mcs-copilot-code'), 'utf8'));
   const classicReadme = fs.readFileSync(path.join(root, 'labs', 'mcs-copilot-code', 'README.md'), 'utf8');
   for (const copy of [JSON.stringify(page.data.mission_lab), page.content, readme, classic.content, classicReadme]) {
-    assert.ok(copy.includes('https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/'));
+    assert.ok(copy.includes('https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/'));
     assert.doesNotMatch(copy, /\/events\/bootcamp-latest\//);
   }
 });

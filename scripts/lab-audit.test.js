@@ -85,12 +85,12 @@ test('2026 Copilot names flag the product but not license SKUs', () => {
 test('copy comparison ignores README emoji, anchor dashes, indentation and site link style', () => {
   const site = [
     '## Lab Details', '- [Lab Details](#lab-details)', '    > [!NOTE]',
-    "Part of [Bootcamp]({{ '/events/bootcamp-latest/' | relative_url }}).",
+    "Part of [Bootcamp]({{ '/events/architecture-bootcamp-classic/' | relative_url }}).",
     'Start with the [web lab]({% link _labs/agent-builder-web.md %}).',
   ];
   const readme = [
     '## 🧭 Lab Details', '- [🧭 Lab Details](#-lab-details)', '> [!NOTE]',
-    'Part of [Bootcamp](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/).',
+    'Part of [Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp-classic/).',
     'Start with the [web lab](../agent-builder-web/README.md).',
   ];
   assert.equal(audit.diffStats(audit.comparableLines(site), audit.comparableLines(readme)).changed, 0);

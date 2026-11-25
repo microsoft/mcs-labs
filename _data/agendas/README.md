@@ -96,8 +96,15 @@ The external `aka.ms/MCSBootcamp` short link is managed outside this repository.
 ## Bootcamp Latest
 
 The classic edition's event ID, event document basename, agenda basename, and
-presentation directory retain `bootcamp-latest`. Existing direct links use
-`/events/bootcamp-latest/` and `?event=bootcamp-latest`. The former versioned
+presentation directory retain `bootcamp-latest`. Its canonical URL is
+`/events/architecture-bootcamp-classic/`; the guided edition uses
+`/events/copilot-agents-bootcamp/`. Public URLs follow the edition's display name,
+not a changing "latest" status. The old `/events/bootcamp-latest/` and
+`/events/architecture-bootcamp/` URLs redirect to their original editions,
+preserving query strings and anchors when JavaScript is enabled.
+Event IDs remain `bootcamp-latest` and `architecture-bootcamp`, respectively,
+so existing `?event=` links and saved navigation contexts continue to work.
+The former versioned
 event URL redirects to the current event. Legacy module/lab context links also
 resolve to their current counterparts; old presentation download URLs remain
 retired.

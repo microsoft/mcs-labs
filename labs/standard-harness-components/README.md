@@ -1,6 +1,6 @@
 # Standard harness — Component Model
 
-Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/).
 
 You'll build a Copilot Studio Assistant and test its instructions, topics, knowledge and tools. Optional exercises show how to inspect conversation state, add a child agent and publish the assistant to Teams.
 

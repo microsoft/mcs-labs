@@ -40,7 +40,7 @@ function eventFixtures(baseurl) {
       title: event.title,
       kind: folder === '_events' ? 'event' : 'workshop',
       unlisted: event.unlisted === true,
-      url: `${baseurl}/${folder === '_events' ? 'events' : 'workshops'}/${slug}/`,
+      url: `${baseurl}${event.permalink || `/${folder === '_events' ? 'events' : 'workshops'}/${slug}/`}`,
       schedule: agenda.schedule.map((row) => {
         if (!['module', 'lab'].includes(row.type)) return { ...row };
         const collection = row.type === 'module' ? 'modules' : 'labs';
@@ -193,7 +193,7 @@ test('compatibility routes are pages rather than duplicate collection documents'
   const labPage = matter(fs.readFileSync(path.join(root, 'labs', 'standard-harness-component-model', 'index.html'), 'utf8')).data;
   assert.equal(eventPage.layout, 'redirect');
   assert.equal(eventPage.permalink, `/events/${legacyId}/`);
-  assert.equal(eventPage.redirect_to, `/events/${currentId}/`);
+  assert.equal(eventPage.redirect_to, documentData('_events', currentId).permalink);
   assert.equal(eventPage.sitemap, false);
   assert.equal(labPage.layout, 'redirect');
   assert.equal(labPage.permalink, '/labs/standard-harness-component-model/');
@@ -224,6 +224,34 @@ test('page redirects reject external, unsafe and self-referencing targets', () =
     const result = runPageRedirect(source, target);
     assert.equal(result.redirects.length, 0);
     assert.equal(result.errors.length, 1);
+  }
+});
+
+test('renamed Bootcamp routes preserve editions and navigation context', () => {
+  for (const [id, canonical] of [
+    ['architecture-bootcamp', '/events/copilot-agents-bootcamp/'],
+    ['bootcamp-latest', '/events/architecture-bootcamp-classic/'],
+  ]) {
+    const event = documentData('_events', id);
+    const redirect = matter(fs.readFileSync(path.join(root, 'events', `${id}.html`), 'utf8')).data;
+    assert.equal(event.event_id, id);
+    assert.equal(event.permalink, canonical);
+    assert.equal(redirect.permalink, `/events/${id}/`);
+    assert.equal(redirect.redirect_to, canonical);
+    assert.equal(redirect.layout, 'redirect');
+    assert.equal(redirect.search, false);
+    assert.equal(redirect.sitemap, false);
+    for (const baseurl of ['', '/mcs-labs']) {
+      const source = `https://example.test${baseurl}/events/${id}/?event=${id}&tag=one&tag=two#day-2`;
+      const result = runPageRedirect(source, `https://example.test${baseurl}${canonical}`);
+      assert.equal(result.redirects[0], `https://example.test${baseurl}${canonical}?event=${id}&tag=one&tag=two#day-2`);
+      const fixture = eventFixtures(baseurl).find(item => item.event_id === id);
+      const member = fixture.schedule.find(item => item.type === 'lab');
+      const navigation = runNavigation({ type: 'lab', slug: member.slug, query: `event=${id}`, baseurl });
+      assert.equal(navigation.redirects.length, 0);
+      assert.equal(navigation.nodes['event-rail-event'].href, `https://example.test${baseurl}${canonical}`);
+      assert.equal(navigation.storage.get(storageKey), id);
+    }
   }
 });
 
@@ -264,7 +292,7 @@ test('removed curriculum items land on the latest agenda', () => {
     ['module', 'multi-agent'], ['lab', 'mcs-github-harness']]) {
     const result = runNavigation({ type, slug });
     const target = new URL(result.redirects[0]);
-    assert.equal(target.pathname, `/mcs-labs/events/${currentId}/`);
+    assert.equal(target.pathname, `/mcs-labs${documentData('_events', currentId).permalink}`);
     assert.equal(target.searchParams.get('event'), currentId);
     assert.equal(target.hash, '#module-title');
     assert.equal(result.errors.length, 0);

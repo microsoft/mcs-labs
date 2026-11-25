@@ -243,6 +243,22 @@ test('buildItem: assembles a lab item with absolutized images and hash', () => {
   assert.equal(item.last_modified, '2026-05-01T00:00:00Z');
 });
 
+test('buildItem: canonical event permalinks retain stable feed identities', () => {
+  for (const [slug, permalink] of [
+    ['architecture-bootcamp', '/events/copilot-agents-bootcamp/'],
+    ['bootcamp-latest', '/events/architecture-bootcamp-classic/'],
+  ]) {
+    const item = feed.buildItem({
+      collection: 'events', slug, frontMatter: { permalink },
+      body: 'Agenda', baseUrl: 'https://x.test/mcs-labs',
+    });
+    assert.equal(item.url, `https://x.test/mcs-labs${permalink}`);
+    assert.equal(item.slug, slug);
+    assert.equal(item.content_url, `https://x.test/mcs-labs/feed/items/events/${slug}.json`);
+    assert.equal(item.metadata.permalink, permalink);
+  }
+});
+
 test('buildItem: module item carries lab reference and slug fallback title', () => {
   const item = feed.buildItem({
     collection: 'modules',
