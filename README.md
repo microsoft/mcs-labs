@@ -99,6 +99,13 @@ redirected; see the [compatibility notes](./_data/agendas/README.md#legacy-event
 
 ## 📚 Documentation & Contributing
 
+### Workshop preparation
+
+Administrator skills for solution rollout, Copilot Credit allocation and
+create-only OneDrive provisioning are maintained in `.github/skills/`.
+See the [operator guide](./docs/WORKSHOP_PREPARATION.md) for safe preparation,
+canaries, verification and attendee handoff. Runtime tenant data stays outside Git.
+
 ### 🎯 Navigation System
 
 This repository features a sophisticated lab navigation system:

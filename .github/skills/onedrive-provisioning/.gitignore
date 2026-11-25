@@ -1,0 +1,10 @@
+node_modules/
+config.json
+recipients.json
+manifest.json
+out/
+results/
+payload/
+*.cache
+*.bin
+*.log

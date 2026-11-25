@@ -1,0 +1,9 @@
+node_modules/
+out/
+results/
+logs/
+*.log
+config.json
+envs.txt
+*.cache
+*.bin
