@@ -1,0 +1,10 @@
+<botcomponent schemaname="zava_ZavaSalesCopilot.iqCapability.teams_OOO">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>teams</name>
+  <parentbotid>
+    <schemaname>zava_ZavaSalesCopilot</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

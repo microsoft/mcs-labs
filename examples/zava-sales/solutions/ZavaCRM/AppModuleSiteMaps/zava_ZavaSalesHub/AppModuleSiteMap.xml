@@ -1,0 +1,63 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModuleSiteMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <SiteMapUniqueName>zava_ZavaSalesHub</SiteMapUniqueName>
+  <EnableCollapsibleGroups>False</EnableCollapsibleGroups>
+  <ShowHome>True</ShowHome>
+  <ShowPinned>True</ShowPinned>
+  <ShowRecents>True</ShowRecents>
+  <SiteMap IntroducedVersion="7.0.0.0">
+    <Area Id="zava_sales" ShowGroups="true" IntroducedVersion="7.0.0.0">
+      <Titles>
+        <Title LCID="1033" Title="Sales" />
+      </Titles>
+      <Group Id="zava_my_work" IsProfile="false">
+        <Titles>
+          <Title LCID="1033" Title="My work" />
+        </Titles>
+        <SubArea Id="zava_dashboards" Url="/workplace/home_dashboards.aspx" DefaultDashboard="{8fc2ba92-4b58-57e3-b918-e98a741d8b8b}" Icon="$webresource:zava_/icons/dashboard.svg" VectorIcon="$webresource:zava_/icons/dashboard.svg" AvailableOffline="true" PassParams="false">
+          <Titles>
+            <Title LCID="1033" Title="Dashboards" />
+          </Titles>
+        </SubArea>
+        <SubArea Id="zava_activities" Entity="activitypointer" AvailableOffline="true" PassParams="false">
+          <Titles>
+            <Title LCID="1033" Title="Activities" />
+          </Titles>
+        </SubArea>
+      </Group>
+      <Group Id="zava_customers" IsProfile="false">
+        <Titles>
+          <Title LCID="1033" Title="Customers" />
+        </Titles>
+        <SubArea Id="zava_accounts" Entity="account" AvailableOffline="true" PassParams="false">
+          <Titles>
+            <Title LCID="1033" Title="Accounts" />
+          </Titles>
+        </SubArea>
+        <SubArea Id="zava_contacts" Entity="contact" AvailableOffline="true" PassParams="false">
+          <Titles>
+            <Title LCID="1033" Title="Contacts" />
+          </Titles>
+        </SubArea>
+      </Group>
+      <Group Id="zava_pipeline" IsProfile="false">
+        <Titles>
+          <Title LCID="1033" Title="Pipeline" />
+        </Titles>
+        <SubArea Id="zava_leads" Entity="zava_lead" Icon="$webresource:zava_/icons/lead.svg" VectorIcon="$webresource:zava_/icons/lead.svg" AvailableOffline="true" PassParams="false">
+          <Titles>
+            <Title LCID="1033" Title="Leads" />
+          </Titles>
+        </SubArea>
+        <SubArea Id="zava_opportunities" Entity="zava_opportunity" Icon="$webresource:zava_/icons/opportunity.svg" VectorIcon="$webresource:zava_/icons/opportunity.svg" AvailableOffline="true" PassParams="false">
+          <Titles>
+            <Title LCID="1033" Title="Opportunities" />
+          </Titles>
+        </SubArea>
+      </Group>
+    </Area>
+  </SiteMap>
+  <LocalizedNames>
+    <LocalizedName description="Zava Sales Hub" languagecode="1033" />
+  </LocalizedNames>
+</AppModuleSiteMap>

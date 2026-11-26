@@ -1,0 +1,300 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Dashboard xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <LocalizedNames>
+    <LocalizedName description="Zava sales overview" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Pipeline, forecast, hot leads and win/loss at a glance." languagecode="1033" />
+  </Descriptions>
+  <FormId>{8fc2ba92-4b58-57e3-b918-e98a741d8b8b}</FormId>
+  <IsCustomizable>1</IsCustomizable>
+  <IsDefault>0</IsDefault>
+  <FormXml>
+    <forms type="dashboard">
+      <form>
+        <tabs>
+          <tab showlabel="false" verticallayout="true" id="{3bf6d72b-468e-5d2e-a133-75e932f1f5b2}" locklevel="0" name="overview">
+            <labels>
+              <label description="Zava sales overview" languagecode="1033" />
+            </labels>
+            <columns>
+              <column width="100%">
+                <sections>
+                  <section showlabel="false" showbar="false" columns="111" id="{a49f33d7-1df6-5e51-a21f-e0c7384cc207}" locklevel="0" labelwidth="115" name="row_1">
+                    <labels>
+                      <label description="Row 1" languagecode="1033" />
+                    </labels>
+                    <rows>
+                      <row>
+                        <cell colspan="1" rowspan="12" showlabel="false" id="{20dfa159-af94-58dc-9bb4-49fdf5eaf542}" auto="false">
+                          <labels>
+                            <label description="Pipeline by sales stage" languagecode="1033" />
+                          </labels>
+                          <control id="Funnel" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{765d7177-0360-5a77-8173-f219fba272e2}">
+                            <parameters>
+                              <TargetEntityType>zava_opportunity</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>6</RecordsPerPage>
+                              <ViewId>{de670e12-c6b2-5f5a-8394-7a9aebcb14a7}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{77fb2351-1dd5-5951-ab61-b45e7253d6f9}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell colspan="1" rowspan="12" showlabel="false" id="{f5d1805c-29ed-5b47-85b6-c56b015d4f03}" auto="false">
+                          <labels>
+                            <label description="Pipeline by product line" languagecode="1033" />
+                          </labels>
+                          <control id="ProductLine" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{e1e91e22-8b2f-5e9a-8350-67daad1d56a5}">
+                            <parameters>
+                              <TargetEntityType>zava_opportunity</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>6</RecordsPerPage>
+                              <ViewId>{de670e12-c6b2-5f5a-8394-7a9aebcb14a7}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{b1c0ec7b-0d7e-5f30-b931-7139f9211d54}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell colspan="1" rowspan="12" showlabel="false" id="{28c37180-c49f-5dab-8906-dd8f48973da5}" auto="false">
+                          <labels>
+                            <label description="Pipeline by forecast category" languagecode="1033" />
+                          </labels>
+                          <control id="Forecast" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{8157d056-da08-5dfc-b51a-11ccf84c2029}">
+                            <parameters>
+                              <TargetEntityType>zava_opportunity</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>6</RecordsPerPage>
+                              <ViewId>{de670e12-c6b2-5f5a-8394-7a9aebcb14a7}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{24f37120-2c66-5faa-9667-0e8566d0ac8e}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                    </rows>
+                  </section>
+                  <section showlabel="false" showbar="false" columns="111" id="{0128ca71-c1fe-5a82-9c89-7b61f4eb3586}" locklevel="0" labelwidth="115" name="row_2">
+                    <labels>
+                      <label description="Row 2" languagecode="1033" />
+                    </labels>
+                    <rows>
+                      <row>
+                        <cell colspan="1" rowspan="12" showlabel="false" id="{7e87dbec-5c55-50ae-8be7-98c3a0daf6c2}" auto="false">
+                          <labels>
+                            <label description="Closing in next 90 days" languagecode="1033" />
+                          </labels>
+                          <control id="Closing" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{41b5957b-1625-506f-901a-3caf19d87678}">
+                            <parameters>
+                              <TargetEntityType>zava_opportunity</TargetEntityType>
+                              <ChartGridMode>Grid</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>6</RecordsPerPage>
+                              <ViewId>{5e3a8ff0-93cb-5dc4-8750-2ca361fb733a}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId />
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell colspan="1" rowspan="12" showlabel="false" id="{e93b4172-b768-558f-90cd-8b36027374fe}" auto="false">
+                          <labels>
+                            <label description="Pipeline by account executive" languagecode="1033" />
+                          </labels>
+                          <control id="Executives" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{f2d6c2ed-8e22-5429-abe7-793ab92b4dff}">
+                            <parameters>
+                              <TargetEntityType>zava_opportunity</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>6</RecordsPerPage>
+                              <ViewId>{de670e12-c6b2-5f5a-8394-7a9aebcb14a7}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{abaf0573-683d-523c-b808-71f7e2867c9c}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell colspan="1" rowspan="12" showlabel="false" id="{c541f8db-7077-5e67-9cb0-a92825e92a45}" auto="false">
+                          <labels>
+                            <label description="Hot leads" languagecode="1033" />
+                          </labels>
+                          <control id="HotLeads" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{7985d1da-676c-5464-803e-099f5fa8aee1}">
+                            <parameters>
+                              <TargetEntityType>zava_lead</TargetEntityType>
+                              <ChartGridMode>Grid</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>6</RecordsPerPage>
+                              <ViewId>{58b9b10d-0717-597a-b3a3-6f15b0b30b10}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId />
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                    </rows>
+                  </section>
+                  <section showlabel="false" showbar="false" columns="111" id="{d7add284-793f-5009-b87b-c6be7aa1c311}" locklevel="0" labelwidth="115" name="row_3">
+                    <labels>
+                      <label description="Row 3" languagecode="1033" />
+                    </labels>
+                    <rows>
+                      <row>
+                        <cell colspan="1" rowspan="12" showlabel="false" id="{2d2848a2-eb27-5422-9e16-e6597ce63dd3}" auto="false">
+                          <labels>
+                            <label description="Leads by source" languagecode="1033" />
+                          </labels>
+                          <control id="LeadSources" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{c70b5ece-515f-58b7-b0e1-178ad96c2d24}">
+                            <parameters>
+                              <TargetEntityType>zava_lead</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>6</RecordsPerPage>
+                              <ViewId>{39d2190a-7de7-55c8-a1f0-9a64d22d099e}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{fc8131a9-d9e1-55fe-b073-e5257f998384}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell colspan="1" rowspan="12" showlabel="false" id="{7fe968e3-22e1-519d-aedf-cce22eb7e3cb}" auto="false">
+                          <labels>
+                            <label description="Won revenue by product line" languagecode="1033" />
+                          </labels>
+                          <control id="WonProduct" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{a558cb5a-cd6a-5ccf-8f09-68985f13bfd8}">
+                            <parameters>
+                              <TargetEntityType>zava_opportunity</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>6</RecordsPerPage>
+                              <ViewId>{c73107b5-ad4a-5307-afd3-33fb0cf3fe2f}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{edbfc14a-bc6c-5322-b31b-0138be32ea74}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                        <cell colspan="1" rowspan="12" showlabel="false" id="{8ef2302b-9587-5de2-a3f2-f17b9786b56b}" auto="false">
+                          <labels>
+                            <label description="Lost deals by reason" languagecode="1033" />
+                          </labels>
+                          <control id="LossReasons" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}" uniqueid="{40f71d14-f755-56a5-85af-9e57bfaa8331}">
+                            <parameters>
+                              <TargetEntityType>zava_opportunity</TargetEntityType>
+                              <ChartGridMode>Chart</ChartGridMode>
+                              <EnableQuickFind>false</EnableQuickFind>
+                              <EnableViewPicker>false</EnableViewPicker>
+                              <EnableJumpBar>false</EnableJumpBar>
+                              <RecordsPerPage>6</RecordsPerPage>
+                              <ViewId>{67b6499a-87e7-5eaa-acff-e15c07945f4b}</ViewId>
+                              <IsUserView>false</IsUserView>
+                              <ViewIds />
+                              <AutoExpand>Fixed</AutoExpand>
+                              <VisualizationId>{bc6a02d9-e4f7-50ce-993f-5b2840afaf86}</VisualizationId>
+                              <IsUserChart>false</IsUserChart>
+                              <EnableChartPicker>false</EnableChartPicker>
+                              <RelationshipName />
+                            </parameters>
+                          </control>
+                        </cell>
+                      </row>
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                      <row />
+                    </rows>
+                  </section>
+                </sections>
+              </column>
+            </columns>
+          </tab>
+        </tabs>
+      </form>
+    </forms>
+  </FormXml>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsTabletEnabled>0</IsTabletEnabled>
+</Dashboard>

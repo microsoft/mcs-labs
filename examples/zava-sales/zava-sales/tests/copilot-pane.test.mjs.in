@@ -1,0 +1,209 @@
+import { test } from 'node:test'
+import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
+import { PANE_ORIGIN, PANE_URL, PANE_STATE_KEY, isLoginHint, paneInitMessage, paneNewChatMessage, paneThemeMessage, readPaneMessage, readPaneOpen, writePaneOpen } from '../src/paneProtocol.ts'
+import { CRM_MIN_WIDTH, PANE_MIN_WIDTH, PANE_WIDTH_KEY, PANE_WIDTH_VAR, applyPaneWidth, clampPaneWidth, keyedPaneWidth, paneLimits, readPaneWidth, writePaneWidth } from '../src/paneSize.ts'
+import { TENANT_ID } from '../src/domain.ts'
+
+const frame = {}
+const oid = 'aaaa0000-0000-4000-8000-000000000001'
+const message = (data, overrides = {}) => ({ origin: PANE_ORIGIN, source: frame, data, ...overrides })
+
+test('pane messages are accepted only from the exact chat origin and frame', () => {
+  assert.deepEqual(readPaneMessage(message({ type: 'zava-pane:ready', v: 1 }), frame), { type: 'ready', hostHeader: false })
+  assert.deepEqual(readPaneMessage(message({ type: 'zava-pane:close', v: 1 }), frame), { type: 'close' })
+  assert.equal(readPaneMessage(message({ type: 'zava-pane:ready', v: 1 }, { origin: 'https://evil.example' }), frame), undefined)
+  assert.equal(readPaneMessage(message({ type: 'zava-pane:ready', v: 1 }, { origin: `${PANE_ORIGIN}.evil.example` }), frame), undefined)
+  assert.equal(readPaneMessage(message({ type: 'zava-pane:ready', v: 1 }, { source: {} }), frame), undefined)
+  assert.equal(readPaneMessage(message({ type: 'zava-pane:ready', v: 1 }, { source: undefined }), undefined), undefined)
+  assert.equal(readPaneMessage(message({ type: 'zava-pane:ready', v: 2 }), frame), undefined)
+  assert.equal(readPaneMessage(message({ type: 'zava-pane:ready' }), frame), undefined)
+  assert.equal(readPaneMessage(message({ type: 'zava-pane:init', v: 1 }), frame), undefined)
+  assert.equal(readPaneMessage(message('zava-pane:ready'), frame), undefined)
+  assert.equal(readPaneMessage(message(['zava-pane:ready']), frame), undefined)
+  assert.equal(readPaneMessage(message(null), frame), undefined)
+})
+
+test('the chat can opt in to the app-drawn header and report only whether it is signed in', () => {
+  assert.deepEqual(readPaneMessage(message({ type: 'zava-pane:ready', v: 1, hostHeader: true }), frame), { type: 'ready', hostHeader: true })
+  assert.deepEqual(readPaneMessage(message({ type: 'zava-pane:ready', v: 1, hostHeader: 'yes' }), frame), { type: 'ready', hostHeader: false })
+  assert.deepEqual(readPaneMessage(message({ type: 'zava-pane:state', v: 1, signedIn: true }), frame), { type: 'state', signedIn: true })
+  assert.deepEqual(readPaneMessage(message({ type: 'zava-pane:state', v: 1, signedIn: false, username: 'someone@contoso.com' }), frame), { type: 'state', signedIn: false })
+  assert.equal(readPaneMessage(message({ type: 'zava-pane:state', v: 1 }), frame), undefined)
+  assert.equal(readPaneMessage(message({ type: 'zava-pane:state', v: 1, signedIn: 'true' }), frame), undefined)
+  assert.equal(readPaneMessage(message({ type: 'zava-pane:state', v: 1, signedIn: true }, { origin: 'https://evil.example' }), frame), undefined)
+  assert.equal(readPaneMessage(message({ type: 'zava-pane:state', v: 2, signedIn: true }), frame), undefined)
+  assert.deepEqual(paneNewChatMessage(), { type: 'zava-pane:new-chat', v: 1 })
+})
+
+test('init carries the training tenant, the app user and only a valid sign-in hint', () => {
+  const init = paneInitMessage({ objectId: oid, loginHint: 'seller@example.invalid' }, 'dark')
+  assert.deepEqual(init, {
+    type: 'zava-pane:init', v: 1, tenantId: TENANT_ID, objectId: oid.toLowerCase(),
+    loginHint: 'seller@example.invalid', theme: 'dark', hostHeader: true,
+  })
+  for (const loginHint of [undefined, '', 'no-at-sign', 'two words@contoso.com', 'a@b@contoso.com', '<x>@contoso.com', 'x@contoso_com']) {
+    const value = paneInitMessage({ objectId: oid, loginHint }, 'light')
+    assert.equal('loginHint' in value, false, String(loginHint))
+    assert.equal(value.theme, 'light')
+  }
+  assert.throws(() => paneInitMessage({ objectId: 'not-a-guid' }, 'light'))
+  assert.throws(() => paneInitMessage({ objectId: '' }, 'light'))
+  assert.deepEqual(paneThemeMessage('light'), { type: 'zava-pane:theme', v: 1, theme: 'light' })
+})
+
+test('host and chat share the origin, sign-in hint rule and app origin contract', () => {
+  const handshake = readFileSync(new URL('../../zava-copilot-pane/chat/src/handshake.ts', import.meta.url), 'utf8')
+  const config = readFileSync(new URL('../../zava-copilot-pane/chat/src/config.ts', import.meta.url), 'utf8')
+  const source = readFileSync(new URL('../src/paneProtocol.ts', import.meta.url), 'utf8')
+  const rule = /const LOGIN_HINT = (\/.+\/)/
+  assert.equal(source.match(rule)[1], handshake.match(rule)[1])
+  assert.ok(config.includes("ZAVA_APP_ORIGIN = '@@APP_ORIGIN@@'"))
+  assert.equal(PANE_URL, `${PANE_ORIGIN}/`)
+  assert.equal(isLoginHint('seller@example.invalid'), true)
+})
+
+test('pane open state survives a reload in this tab and tolerates blocked storage', () => {
+  const store = new Map()
+  const storage = { getItem: k => store.get(k) ?? null, setItem: (k, v) => store.set(k, v) }
+  assert.equal(readPaneOpen(storage), false)
+  writePaneOpen(storage, true)
+  assert.equal(store.get(PANE_STATE_KEY), 'open')
+  assert.equal(readPaneOpen(storage), true)
+  writePaneOpen(storage, false)
+  assert.equal(readPaneOpen(storage), false)
+  const blocked = { getItem() { throw new Error('blocked') }, setItem() { throw new Error('blocked') } }
+  assert.equal(readPaneOpen(blocked), false)
+  assert.doesNotThrow(() => writePaneOpen(blocked, true))
+  assert.equal(readPaneOpen(undefined), false)
+})
+
+test('the open pane is a grid column that pushes the CRM left, never an overlay', () => {
+  const css = readFileSync(new URL('../src/App.css', import.meta.url), 'utf8')
+  assert.match(css, /\.app-shell\.has-pane \{ grid-template-columns: 248px minmax\(0, 1fr\) var\(--pane-width\); \}/)
+  assert.match(css, /\.app-shell\.has-pane \{ grid-template-columns: minmax\(0, 1fr\) var\(--pane-width\); \}/)
+  assert.match(css, /\.copilot-pane\[hidden\] \{ display: none; \}/)
+  const paneRules = [...css.matchAll(/\.copilot-pane(?![-\w])[^{]*\{([^}]*)\}/g)].map(m => m[1])
+  assert.ok(paneRules.length > 0)
+  for (const rule of paneRules) assert.doesNotMatch(rule, /position:\s*(fixed|absolute)|z-index/)
+  assert.match(css, /\.copilot-pane \{ position: sticky; top: 0; height: 100dvh;/)
+  const app = readFileSync(new URL('../src/App.tsx', import.meta.url), 'utf8')
+  assert.ok(app.indexOf('<CopilotPane') > app.indexOf('</main>'), 'pane is the grid track after the CRM content')
+  assert.match(app, /className=\{`app-shell \$\{paneVisible \? 'has-pane' : ''\}`\}/)
+  assert.match(app, /aria-expanded=\{paneVisible\} aria-controls="copilot-pane"/)
+  const pane = readFileSync(new URL('../src/CopilotPane.tsx', import.meta.url), 'utf8')
+  assert.match(pane, /id="copilot-pane"/)
+  assert.match(pane, /sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"/)
+  assert.match(pane, /postMessage\(paneInitMessage\(.*PANE_ORIGIN\)/)
+  assert.doesNotMatch(pane, /postMessage\([^)]*['"]\*['"]\)/)
+})
+
+test('the app-drawn pane header lines up with the topbar and the CRM scrolls in its own column', () => {
+  const css = readFileSync(new URL('../src/App.css', import.meta.url), 'utf8')
+  assert.match(css, /\.app-shell \{ --bar-height: 73px;[^}]*grid-template-rows: minmax\(0, 1fr\); height: 100dvh; \}/)
+  assert.match(css, /\.main-shell \{[^}]*overflow-y: auto;/)
+  assert.match(css, /\.topbar \{[^}]*min-height: var\(--bar-height\);/)
+  assert.match(css, /\.copilot-pane-header \{[^}]*min-height: var\(--bar-height\);[^}]*border-bottom: 1px solid var\(--cp-border\);/)
+  const app = readFileSync(new URL('../src/App.tsx', import.meta.url), 'utf8')
+  assert.match(app, /<div ref=\{shellRef\} className="main-shell">/)
+  assert.match(app, /shellRef\.current\?\.scrollTo\(0, 0\)/)
+  const pane = readFileSync(new URL('../src/CopilotPane.tsx', import.meta.url), 'utf8')
+  assert.match(pane, /className="copilot-pane-header"/)
+  assert.match(pane, /aria-label="Close Zava Agent"/)
+  assert.match(pane, /postMessage\(paneNewChatMessage\(\), PANE_ORIGIN\)/)
+  assert.match(pane, /postMessage\(paneThemeMessage\(theme\), PANE_ORIGIN\)/)
+})
+
+test('the launcher, pane title and accessible names use Zava Agent', () => {
+  const app = readFileSync(new URL('../src/App.tsx', import.meta.url), 'utf8')
+  const pane = readFileSync(new URL('../src/CopilotPane.tsx', import.meta.url), 'utf8')
+  assert.match(app, /className="launcher-label">Ask Zava Agent</)
+  assert.match(app, /aria-label="Ask Zava Agent"/)
+  assert.match(pane, /<h2>Zava Agent<\/h2>/)
+  assert.match(pane, /title="Zava Agent chat"/)
+  assert.doesNotMatch(app + pane, /Zava Copilot|Ask Copilot|open Copilot/)
+  const header = pane.slice(pane.indexOf('<header className="copilot-pane-header">'), pane.indexOf('</header>'))
+  assert.ok(header.length > 0)
+  assert.doesNotMatch(header, /<p|loginHint/, 'the header shows only the agent name, not the signed-in account')
+})
+
+test('the pane width stays between its minimum and a 480px CRM, and moves like a window splitter', () => {
+  assert.equal(PANE_MIN_WIDTH, 320)
+  assert.equal(CRM_MIN_WIDTH, 480)
+  assert.deepEqual(paneLimits(1600), { min: 320, max: 1120 })
+  assert.deepEqual(paneLimits(1000.6), { min: 320, max: 520 })
+  assert.deepEqual(paneLimits(600), { min: 320, max: 320 })
+  const limits = { min: 320, max: 900 }
+  assert.equal(clampPaneWidth(100, limits), 320)
+  assert.equal(clampPaneWidth(5000, limits), 900)
+  assert.equal(clampPaneWidth(480.4, limits), 480)
+  assert.equal(keyedPaneWidth('ArrowLeft', false, 400, limits), 416)
+  assert.equal(keyedPaneWidth('ArrowRight', false, 400, limits), 384)
+  assert.equal(keyedPaneWidth('ArrowLeft', true, 400, limits), 464)
+  assert.equal(keyedPaneWidth('ArrowRight', true, 350, limits), 320)
+  assert.equal(keyedPaneWidth('ArrowLeft', true, 880, limits), 900)
+  assert.equal(keyedPaneWidth('Home', false, 600, limits), 320)
+  assert.equal(keyedPaneWidth('End', false, 600, limits), 900)
+  for (const key of ['ArrowUp', 'Enter', ' ', 'a']) assert.equal(keyedPaneWidth(key, false, 600, limits), undefined)
+})
+
+test('the chosen pane width persists on this device, can be reset and tolerates blocked storage', () => {
+  const store = new Map()
+  const storage = { getItem: k => store.get(k) ?? null, setItem: (k, v) => store.set(k, v), removeItem: k => store.delete(k) }
+  assert.equal(readPaneWidth(storage), undefined)
+  writePaneWidth(storage, 512.6)
+  assert.equal(store.get(PANE_WIDTH_KEY), '513')
+  assert.equal(readPaneWidth(storage), 513)
+  writePaneWidth(storage, undefined)
+  assert.equal(store.has(PANE_WIDTH_KEY), false)
+  for (const value of ['', 'wide', '319', '4001', '400.5', '-500']) {
+    store.set(PANE_WIDTH_KEY, value)
+    assert.equal(readPaneWidth(storage), undefined, value)
+  }
+  const blocked = { getItem() { throw new Error('blocked') }, setItem() { throw new Error('blocked') }, removeItem() { throw new Error('blocked') } }
+  assert.equal(readPaneWidth(blocked), undefined)
+  assert.doesNotThrow(() => writePaneWidth(blocked, 500))
+  assert.doesNotThrow(() => writePaneWidth(blocked, undefined))
+  assert.equal(readPaneWidth(undefined), undefined)
+
+  const props = new Map()
+  const target = { style: { setProperty: (k, v) => props.set(k, v), removeProperty: k => props.delete(k) } }
+  applyPaneWidth(target, 455.5)
+  assert.equal(props.get(PANE_WIDTH_VAR), '456px')
+  applyPaneWidth(target, undefined)
+  assert.equal(props.has(PANE_WIDTH_VAR), false)
+  assert.doesNotThrow(() => applyPaneWidth(null, 400))
+})
+
+test('dragging the pane edge resizes the grid track, keyboard and screen readers included', () => {
+  const css = readFileSync(new URL('../src/App.css', import.meta.url), 'utf8')
+  assert.match(css, /\.app-shell \{ --pane-width: clamp\(320px, var\(--pane-user-width, clamp\(340px, 30vw, 440px\)\), max\(320px, calc\(100vw - 728px\)\)\); \}/)
+  assert.match(css, /\.app-shell \{ --pane-width: clamp\(320px, var\(--pane-user-width, clamp\(340px, 30vw, 440px\)\), max\(320px, calc\(100vw - 480px\)\)\); \}/)
+  assert.match(css, /\.copilot-pane-resizer \{[^}]*cursor: col-resize;[^}]*touch-action: none;/)
+  assert.match(css, /\.is-resizing-pane iframe \{ pointer-events: none; \}/)
+  const pane = readFileSync(new URL('../src/CopilotPane.tsx', import.meta.url), 'utf8')
+  assert.match(pane, /className="copilot-pane-resizer" role="separator" aria-orientation="vertical" aria-label="Resize Zava Agent" aria-controls="copilot-pane"/)
+  assert.match(pane, /aria-valuenow=\{size\?\.now\} aria-valuemin=\{size\?\.min\} aria-valuemax=\{size\?\.max\} tabIndex=\{0\}/)
+  assert.match(pane, /onPointerDown=\{startResize\}[^\n]*onKeyDown=\{keyResize\} onDoubleClick=\{\(\) => onResize\(undefined, true\)\}/)
+  assert.match(pane, /setPointerCapture\(e\.pointerId\)/)
+  const app = readFileSync(new URL('../src/App.tsx', import.meta.url), 'utf8')
+  assert.match(app, /useState\(\(\) => readPaneWidth\(localStore\(\)\)\)/)
+  assert.match(app, /if \(done\) \{ setPaneWidth\(width\); writePaneWidth\(localStore\(\), width\) \}/)
+  assert.match(app, /crm=\{shellRef\} width=\{paneWidth\} onResize=\{resizePane\}/)
+})
+
+test('scrollbars are slim and themed like the Zava Agent chat, with no arrows or track', () => {
+  const css = readFileSync(new URL('../src/index.css', import.meta.url), 'utf8')
+  const chat = readFileSync(new URL('../../zava-copilot-pane/chat/src/styles.css', import.meta.url), 'utf8')
+  const token = name => [...css.matchAll(new RegExp(`${name}: (#[0-9a-f]{6});`, 'g'))].map(m => m[1])
+  const chatToken = name => [...chat.matchAll(new RegExp(`${name}: (#[0-9a-f]{6});`, 'g'))].map(m => m[1])
+  assert.deepEqual(token('--cp-scrollbar'), chatToken('--colorNeutralForeground5'), 'light and dark thumbs match the chat')
+  for (const sheet of [css, chat]) {
+    assert.match(sheet, /::-webkit-scrollbar, :hover::-webkit-scrollbar \{ width: 10px; height: 10px; \}/, 'hover redeclares the size so the thumb repaints')
+    assert.match(sheet, /::-webkit-scrollbar-button \{ display: none; \}/)
+    assert.match(sheet, /::-webkit-scrollbar-thumb \{ border: 3px solid transparent; border-radius: 10px; background: transparent padding-box; \}/)
+    // Chromium drops ::-webkit-scrollbar styling wherever scrollbar-width or scrollbar-color applies.
+    assert.doesNotMatch(sheet.replace(/\/\*[\s\S]*?\*\//g, '').replace(/@supports not selector\(::-webkit-scrollbar\) \{[^\n]*\n/, ''), /scrollbar-(width|color)/)
+  }
+  assert.doesNotMatch(readFileSync(new URL('../src/App.css', import.meta.url), 'utf8'), /scrollbar-(width|color)/)
+})

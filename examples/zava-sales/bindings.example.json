@@ -1,0 +1,15 @@
+{
+  "TENANT_ID": "",
+  "ENVIRONMENT_ID": "",
+  "RUNTIME_APP_ID": "",
+  "CONNECTION_REFERENCE_ID": "",
+  "MODEL_APP_ID": "",
+  "ACTIVITY_VIEW_ID": "",
+  "PANE_CLIENT_ID": "",
+  "DATAVERSE_ORIGIN": "",
+  "AGENT_API_ORIGIN": "",
+  "APP_ORIGIN": "",
+  "PANE_ORIGIN": "",
+  "SHELL_ORIGIN": "",
+  "APP_ROLE_IDS": []
+}

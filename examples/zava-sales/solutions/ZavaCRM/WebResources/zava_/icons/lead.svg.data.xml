@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{38a03ff5-f854-5103-b28d-379d27e52a0b}</WebResourceId>
+  <Name>zava_/icons/lead.svg</Name>
+  <DisplayName>Zava lead icon</DisplayName>
+  <Description>Zava Sales Hub icon</Description>
+  <WebResourceType>11</WebResourceType>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/zava_iconsleadsvg38A03FF5-F854-5103-B28D-379D27E52A0B</FileName>
+</WebResource>

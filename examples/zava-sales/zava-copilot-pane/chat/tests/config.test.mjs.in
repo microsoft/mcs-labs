@@ -1,0 +1,125 @@
+import assert from 'node:assert/strict'
+import { existsSync, readdirSync, readFileSync, statSync } from 'node:fs'
+import { join } from 'node:path'
+import { describe, it } from 'node:test'
+import { AGENT_API_ORIGIN, LOGIN_ORIGIN, PANE_ORIGIN, PARENT_ORIGINS, REDIRECT_PATH, RELAY_PATH } from '../src/config.ts'
+
+const chatRoot = join(import.meta.dirname, '..')
+const read = path => readFileSync(join(chatRoot, path), 'utf8')
+const config = JSON.parse(read('public/staticwebapp.config.json'))
+const placeholderConfig = JSON.parse(read('../public/staticwebapp.config.json'))
+const PAGES = ['index.html', 'redirect.html', 'relay.html']
+const SECRETS = /(deployment[_-]?token|apiKey|client[_-]?secret|Bearer\s+ey|access_token=)/i
+
+function parseCsp(header) {
+  return new Map(header.split(';').map(part => part.trim()).filter(Boolean).map(part => {
+    const [name, ...values] = part.split(/\s+/)
+    return [name, values]
+  }))
+}
+
+function files(dir) {
+  return readdirSync(dir).flatMap(name => {
+    const path = join(dir, name)
+    return statSync(path).isDirectory() ? files(path) : [path]
+  })
+}
+
+function assertExternalScriptsOnly(html, label, prefix) {
+  const scripts = [...html.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)]
+  assert.ok(scripts.length > 0, `${label} loads a script`)
+  for (const [, attributes, body] of scripts) {
+    assert.match(attributes, new RegExp(`\\ssrc="${prefix}`), `${label} script is external`)
+    assert.equal(body.trim(), '', `${label} script has no inline body`)
+  }
+  assert.doesNotMatch(html, /\son[a-z]+\s*=/i, `${label} has no inline event handlers`)
+  assert.doesNotMatch(html, /javascript:/i, `${label} has no javascript: URLs`)
+}
+
+const csp = parseCsp(config.globalHeaders['Content-Security-Policy'])
+
+describe('chat hosting config', () => {
+  it('only lets Zava Sales Hub frame the chat, exactly like the placeholder', () => {
+    const placeholder = parseCsp(placeholderConfig.globalHeaders['Content-Security-Policy'])
+    assert.deepEqual(csp.get('frame-ancestors'), placeholder.get('frame-ancestors'))
+    assert.deepEqual(csp.get('frame-ancestors'), ["'self'", ...PARENT_ORIGINS, '@@SHELL_ORIGIN@@'])
+  })
+
+  it('locks scripts and network calls to the pane, Entra sign-in and the Zava agent', () => {
+    assert.deepEqual(csp.get('default-src'), ["'none'"])
+    assert.deepEqual(csp.get('script-src'), ["'self'"])
+    assert.deepEqual(csp.get('connect-src'), ["'self'", LOGIN_ORIGIN, AGENT_API_ORIGIN])
+    assert.deepEqual(csp.get('frame-src'), ["'self'", LOGIN_ORIGIN])
+    assert.deepEqual(csp.get('style-src'), ["'self'", "'unsafe-inline'"])
+    assert.deepEqual(csp.get('img-src'), ["'self'", 'data:', 'blob:'])
+    assert.deepEqual(csp.get('font-src'), ["'self'"])
+    for (const directive of ['base-uri', 'form-action', 'object-src']) assert.deepEqual(csp.get(directive), ["'none'"], directive)
+  })
+
+  it('has no wildcards, eval or inline script allowances', () => {
+    const header = config.globalHeaders['Content-Security-Policy']
+    assert.doesNotMatch(header, /\*/)
+    assert.doesNotMatch(header, /unsafe-eval|wasm-unsafe-eval|strict-dynamic|'nonce-|'sha\d+-/)
+    assert.doesNotMatch(csp.get('script-src').join(' '), /unsafe-inline/)
+    assert.doesNotMatch(header, /http:/)
+  })
+
+  it('keeps the placeholder hardening headers and allows framing and popups', () => {
+    const headers = config.globalHeaders
+    assert.equal(headers['X-Content-Type-Options'], 'nosniff')
+    assert.equal(headers['Referrer-Policy'], placeholderConfig.globalHeaders['Referrer-Policy'])
+    assert.equal(headers['Permissions-Policy'], placeholderConfig.globalHeaders['Permissions-Policy'])
+    const names = Object.keys(headers).map(name => name.toLowerCase())
+    assert.ok(!names.includes('x-frame-options'), 'X-Frame-Options would block the pane iframe')
+    assert.ok(!names.includes('cross-origin-opener-policy'), 'COOP would break the sign-in popup')
+  })
+
+  it('never caches the sign-in bridge pages and keeps the 404 fallback', () => {
+    for (const path of [REDIRECT_PATH, RELAY_PATH]) {
+      const route = config.routes.find(entry => entry.route === path)
+      assert.equal(route?.headers?.['Cache-Control'], 'no-store', path)
+    }
+    assert.deepEqual(config.responseOverrides['404'], { rewrite: '/index.html', statusCode: 404 })
+  })
+
+  it('serves the sign-in bridge pages from the configured companion host', () => {
+    assert.equal(PANE_ORIGIN, '@@PANE_ORIGIN@@')
+    for (const page of PAGES) assert.ok(existsSync(join(chatRoot, page)), page)
+  })
+})
+
+describe('chat pages', () => {
+  for (const page of PAGES) {
+    it(`${page} loads only external module scripts`, () => {
+      assertExternalScriptsOnly(read(page), page, '/src/')
+    })
+  }
+
+  it('sign-in bridge pages do not leak the URL hash or query as a referrer', () => {
+    for (const page of ['redirect.html', 'relay.html']) assert.match(read(page), /<meta name="referrer" content="no-referrer"/, page)
+  })
+
+  it('contains no secrets or tokens in source, pages or public assets', () => {
+    const sources = [...PAGES.map(page => join(chatRoot, page)), ...files(join(chatRoot, 'src')), ...files(join(chatRoot, 'public'))]
+    for (const path of sources) assert.doesNotMatch(readFileSync(path, 'utf8'), SECRETS, path)
+  })
+})
+
+const dist = join(chatRoot, 'dist')
+describe('built chat (when dist exists)', { skip: !existsSync(dist) && 'run npm run build first' }, () => {
+  it('ships the hosting config and the three pages', () => {
+    assert.deepEqual(JSON.parse(readFileSync(join(dist, 'staticwebapp.config.json'), 'utf8')), config)
+    for (const page of PAGES) assertExternalScriptsOnly(readFileSync(join(dist, page), 'utf8'), `dist/${page}`, '/assets/')
+  })
+
+  // MSAL legitimately names the OAuth client_secret parameter, so look for real token values instead.
+  it('contains no eval, tokens or deployment secrets', () => {
+    for (const path of files(dist)) {
+      const text = readFileSync(path, 'utf8')
+      if (path.endsWith('.js')) {
+        assert.doesNotMatch(text, /\beval\(|new Function\b/, path)
+      }
+      assert.doesNotMatch(text, /(Bearer\s+ey|eyJ[\w-]{10,}\.eyJ[\w-]{10,}|deployment[_-]?token)/i, path)
+    }
+  })
+})

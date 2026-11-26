@@ -1,0 +1,48 @@
+import assert from 'node:assert/strict'
+import { readFile, readdir } from 'node:fs/promises'
+import test from 'node:test'
+
+const publicDir = new URL('../public/', import.meta.url)
+const config = JSON.parse(await readFile(new URL('staticwebapp.config.json', publicDir), 'utf8'))
+const headers = config.globalHeaders
+const csp = Object.fromEntries(headers['Content-Security-Policy'].split(';')
+  .map(part => part.trim().split(/\s+/)).filter(([name]) => name).map(([name, ...values]) => [name, values]))
+
+const zavaAppOrigin = '@@APP_ORIGIN@@'
+const managedAppsHost = '@@SHELL_ORIGIN@@'
+
+test('only the Zava Sales Hub app and its Managed Runtime host can frame the pane', () => {
+  assert.deepEqual(csp['frame-ancestors'], ["'self'", zavaAppOrigin, managedAppsHost])
+  for (const value of Object.values(csp).flat()) assert.doesNotMatch(value, /\*/)
+})
+
+test('scripts are self-hosted only and the page stays locked down', () => {
+  assert.deepEqual(csp['default-src'], ["'none'"])
+  assert.deepEqual(csp['script-src'], ["'self'"])
+  for (const directive of ['base-uri', 'form-action', 'object-src']) assert.deepEqual(csp[directive], ["'none'"], directive)
+  assert.equal(headers['X-Content-Type-Options'], 'nosniff')
+})
+
+test('no cross-origin isolation header that would break the sign-in redirect bridge', () => {
+  const names = Object.keys(headers).map(name => name.toLowerCase())
+  assert.ok(!names.includes('cross-origin-opener-policy'))
+  assert.ok(!names.includes('x-frame-options'))
+})
+
+test('pages use no inline scripts or inline event handlers', async () => {
+  const pages = (await readdir(publicDir)).filter(file => file.endsWith('.html'))
+  assert.ok(pages.length > 0)
+  for (const page of pages) {
+    const html = await readFile(new URL(page, publicDir), 'utf8')
+    for (const tag of html.match(/<script\b[^>]*>/gi) ?? []) assert.match(tag, /\ssrc="\/[^"]+"/, `${page}: ${tag}`)
+    assert.doesNotMatch(html, /<script\b[^>]*>\s*[^<\s]/i, page)
+    assert.doesNotMatch(html, /\son[a-z]+\s*=/i, page)
+  }
+})
+
+test('published files carry no secrets or tokens', async () => {
+  for (const file of await readdir(publicDir)) {
+    const source = await readFile(new URL(file, publicDir), 'utf8')
+    assert.doesNotMatch(source, /(deployment[_-]?token|apiKey|client[_-]?secret|Bearer\s+ey)/i, file)
+  }
+})

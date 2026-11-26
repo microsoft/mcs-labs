@@ -1,0 +1,10 @@
+<botcomponent schemaname="zava_ZavaSalesCopilot.iqCapability.calendar_2zm">
+  <componenttype>9</componenttype>
+  <iscustomizable>0</iscustomizable>
+  <name>calendar</name>
+  <parentbotid>
+    <schemaname>zava_ZavaSalesCopilot</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

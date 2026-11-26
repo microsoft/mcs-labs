@@ -1,0 +1,11 @@
+<botcomponent schemaname="zava_ZavaSalesCopilot.tool.WorkIQ_vR8">
+  <componenttype>9</componenttype>
+  <description>The Work IQ MCP Server exposes a set of tools for AI agents, IDEs, and CLIs. Learn more at https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/work-iq-api-overview</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Work IQ</name>
+  <parentbotid>
+    <schemaname>zava_ZavaSalesCopilot</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>
