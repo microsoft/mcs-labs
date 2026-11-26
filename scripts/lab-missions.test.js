@@ -66,7 +66,7 @@ test('Zava Sales preserves every supplied prompt verbatim in all reading surface
   const expected = [
     '4d0af0f096b4c991a0ab77a11941de0eaa43ac1571a82e673d9fa503dd8da99a',
     'ed36c3912c4f5521b0c1e2fef39e125f19278fa6edc55906fb2a12775c507689',
-    'fab671063146c9010565848119eb39e8e6fa3a05b06c641f8ce5e04b8f4c22a6',
+    '71240da6bf54ccc7c609c37ea36d1ab11bbc78eb8f45848cb83967029f00cafb',
     '2b54b478899ac28a7cc32f6a4c49c215ab2ea2ccc1fabdbfaa73ad825ff6ab81',
     '2283c90484539ef5e5dbe28224a6d0c330fa429f0518f6ca9f0064593d4f83a1',
     '70c82d4e401571297182d281f7411f2d716014b34c73fb21fb0d6378d4590a42',
@@ -168,18 +168,28 @@ test('mission IDs, guided steps and knowledge checks have a complete authoring c
   }
 });
 
-test('Zava separates work-file Chat, the agent MCP App, and Cowork plugin setup', () => {
+test('Zava keeps the sales agent mention in Chat and separates Cowork plugin setup', () => {
   const [ask, agent, delegate, repeat] = lab.missions;
   assert.match(ask.steps[0].instruction, /Chat/);
+  assert.match(ask.steps[0].instruction, /\*\*Auto\*\*/);
   assert.match(ask.steps[1].instruction, /not Cowork/);
   assert.match(agent.steps[0].instruction, /new Copilot Chat session/);
-  assert.match(agent.steps[1].instruction, /Try Zava Sales Hub/);
-  assert.match(agent.steps[1].instruction, /same renewal prompt/);
-  assert.match(agent.steps[1].notice, /Stop task/);
-  assert.match(agent.steps[2].instruction, /same Zava Sales Hub agent conversation/);
-  assert.match(agent.steps[2].instruction, /MCP App/);
-  assert.match(agent.steps[2].help, /enter `50000` without the currency symbol or comma/);
-  assert.match(agent.steps[2].notice, /do not overwrite the renewal amount/);
+  assert.match(agent.steps[0].instruction, /\*\*Quick response\*\*/);
+  assert.match(agent.steps[1].instruction, /same Copilot Chat session/);
+  assert.match(agent.steps[1].instruction, /type `@`.*select \*\*Zava Sales Agent \(MCS\)\*\*.*actual @mention/);
+  assert.match(agent.steps[1].instruction, /Do not just type the agent's name as plain text/);
+  assert.match(agent.steps[1].notice, /answer \*\*TBD\*\* or supply made-up details for this training exercise/);
+  assert.match(agent.steps[1].notice, /Leave any unverified \*\*Account\*\* link unset/);
+  assert.match(agent.steps[1].notice, /do not overwrite the renewal amount/);
+  assert.match(agent.steps[2].instruction, /Confirm the requested action/);
+  for (const text of [agent.steps[2].instruction, agent.steps[2].help, agent.stuck[1].solution]) {
+    assert.match(text, /\*\*TBD\*\* or (?:supply )?made-up details for this training exercise/);
+    assert.doesNotMatch(text, /using only the known details|Do not invent an email|with the supplied facts/);
+  }
+  assert.match(agent.steps[2].instruction, /Continue until \*\*Zava Sales Agent \(MCS\)\*\* confirms creation/);
+  assert.match(agent.steps[2].instruction, /Check for an existing lead before retrying/);
+  assert.deepEqual(agent.steps.map(step => step.id), ['agent-1', 'agent-3', 'agent-confirm']);
+  assert.doesNotMatch(JSON.stringify(agent), /MCP App|Accept and save|lead-mcp-app|Try Zava Sales Hub|interactive form/);
   assert.match(delegate.steps[0].instruction, /Plugins → Cowork → Microsoft Dataverse/);
   assert.match(delegate.steps[0].help, /https:\/\/zavasalesdemo\.crm\.dynamics\.com\//);
   assert.match(delegate.steps[1].instruction, /Zava PowerPoint/);
@@ -191,8 +201,13 @@ test('Zava separates work-file Chat, the agent MCP App, and Cowork plugin setup'
   assert.match(repeat.steps[2].help, /Compare \*\*Next run\*\* with the recurrence/);
   for (const copy of [document.content, readme]) {
     assert.match(copy, /assigned training account, then select \*\*Allow\*\*/);
-    assert.match(copy, /Stop task/);
-    assert.match(copy, /enter `50000` without the currency symbol or comma/);
+    assert.match(copy, /select \*\*Quick response\*\*/);
+    assert.match(copy, /same Copilot Chat session/);
+    assert.match(copy, /actual @mention/);
+    assert.match(copy, /answer \*\*TBD\*\* or supply made-up details for this training exercise/);
+    assert.match(copy, /Leave any unverified \*\*Account\*\* link unset/);
+    assert.match(copy, /Check its saved details.*existing lead before retrying/);
+    assert.doesNotMatch(copy, /MCP App|Accept and save|lead-mcp-app|Try Zava Sales Hub|interactive form/);
     assert.match(copy, /Clear \*\*Run once now\*\*/);
     assert.match(copy, /Ask, Act, Delegate and Repeat take about 30 minutes/);
     assert.match(copy, /about 52 with all extensions/);
