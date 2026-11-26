@@ -460,7 +460,7 @@ For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. C
 Now create a chart showing NPV vs. Investment Cost for all 10 recommendations, with bubble size representing IRR.
 ```
 
-If you see code or a file name instead of a rendered chart, try the answer's **Provide the chart as a downloadable PNG** suggestion if offered, or rely on the ranked table.
+If you see code or a file name instead of a chart, send a follow-up message: **Provide the chart as a downloadable PNG** or **Please show the chart inline**.
 
 6. Optionally send the second follow-up. Check the proposed combination, its total cost and total NPV against the ranked table and the cash-flow assumptions. Ask Analyst to state whether the budget covers initial funding or total five-year spending: R7/R10 recur and R5 has two installments. A first-year total does not include every later commitment.
 
