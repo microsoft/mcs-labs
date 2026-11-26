@@ -7,8 +7,8 @@
 | Lab | `%%SLUG%%` (classic or exercises) |
 | Copies | `labs/%%SLUG%%/README.md`, `_labs/[mission-]%%SLUG%%.md` at commit `%%SHA%%` |
 | Date | %%YYYY-MM-DD%% |
-| Tenant and account | Training tenant, person's account or provisioned training account (no user names or passwords here) |
-| Browser | Edge or Chrome version, windowed or headless, `--port`, window size, display scale |
+| Active account and environment | Product account-menu match or blocker; Studio environment match separately. No identifiers. |
+| Browser | Requested and observed browser/visibility, private context; for headless, process flag and CDP user-agent checks. No profile paths. |
 | Start URL | %%URL%% |
 | Scope and exclusions | %%ALLOWED_DOCUMENTS_AND_ROUTES; OMITTED_CONTENT_AND_CHECKS%% |
 | Prerequisites checked | Licenses, plugins, connections, sample data |

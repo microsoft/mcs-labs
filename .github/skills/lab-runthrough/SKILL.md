@@ -32,11 +32,9 @@ or learner files during this read-only run-through.
 - **Separate browser profile.** Use `scripts/capture.cjs launch`, which starts a fresh
   temporary Edge or Chrome profile in a private window, windowed or `--headless`. Do not
   use an embedded or side-panel browser: it shares your session and the script cannot
-  drive it. Pass `--forbid "<host user's name or alias>"` to `login` so a run that reaches
-  the host user's own account stops at once.
-  Honor the requested browser and visibility: if desktop Edge was requested, use
-  windowed Edge with an isolated profile, not a silent switch to headless Chrome.
-  If that isolation cannot be provided, ask before using another browser or profile.
+  drive it. Honor both the requested browser and visibility, including on retries.
+  A failed headless attachment is a browser blocker, not evidence of failed sign-in
+  or permission to open a desktop window. Verify the active product account, not the URL.
 - **No real outreach.** Keep customer emails as drafts. Do not send messages, invites or
   posts to anyone except the signed-in test user.
 - **Stop what you start.** Pause or delete scheduled tasks and automations the lab
@@ -84,22 +82,21 @@ With the person signing in:
 node .github/skills/lab-runthrough/scripts/capture.cjs launch "<lab start URL>"
 ```
 
-Ask them to sign in to the training account in the window that opens, then confirm with
-`capture.cjs pages`.
+Ask them to sign in to the training account in the window that opens, then verify its
+current UPN in the product's account menu. `pages` locates a tab; it does not identify a user.
 
-With a provisioned training account, when headless testing is permitted:
+With a provisioned account, when private headless Chrome for Testing is authorized:
 
 ```powershell
 $env:LAB_CREDENTIALS = "<temp folder>\account.json"
-node .github/skills/lab-runthrough/scripts/capture.cjs launch "<lab start URL>" --headless --port 9352
+node .github/skills/lab-runthrough/scripts/capture.cjs launch "<lab start URL>" --browser chrome-for-testing --headless --port 9352
 node .github/skills/lab-runthrough/scripts/capture.cjs login --port 9352 --forbid "<host user's name>|<alias>"
 ```
 
-Exit code 3 means a person is needed (MFA, password change); exit code 4 means the wrong
-account. Stop and tell the person either way. The first visit to a product can show
-one-time dialogs; accept them once (see the product quirks) before timing a lab.
-`references/browser-session.md` lists every command, the options and the quirks seen so
-far.
+Stop on a sign-in challenge (exit 3) or a confirmed wrong account (4). If identity
+is unverified (5), perform the [active account check](references/browser-session.md#active-account-check)
+in the same private tab before any lab action. Recheck on each product handoff; in Studio
+also verify the selected environment. Record match or blocker only, never the identifiers.
 
 ### Curriculum sequencing
 
@@ -125,7 +122,8 @@ For each step or exercise, in order:
    accessible name and `click "<name>"` to use it. If the label in the lab is not on screen,
    that is a finding: do not quietly use the new label.
 2. Enter prompts verbatim from the lab: save the prompt text to a file outside the repo and
-   run `prompt <file>`, then `wait "<text you expect>"`. A prompt that pastes with a line
+   run `prompt <file>`. Check the [new assistant turn](references/runthrough-evidence.md#verify-outcomes-at-their-source);
+   `wait` can match an earlier reply. A prompt that pastes with a line
    break mid-sentence, or a download link that opens a GitHub preview page instead of the
    file, is a defect to log.
 3. Verify the learner-visible outcome, not just the prompt or chat claim. Download and
