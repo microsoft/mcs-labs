@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>0</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{8ac58e3d-0a76-4bb2-a754-2c7c1c9626da}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="zava_name" select="1" icon="1" preview="1">
+        <row name="result" id="zava_opportunityid">
+          <cell name="zava_name" width="220" />
+          <cell name="zava_account" width="170" />
+          <cell name="zava_sales_stage" width="100" />
+          <cell name="zava_estimated_revenue" width="120" />
+          <cell name="zava_probability" width="90" />
+          <cell name="zava_estimated_close_date" width="120" />
+          <cell name="zava_forecast_category" width="120" />
+          <cell name="zava_account_executive" width="140" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>2</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+        <entity name="zava_opportunity">
+          <attribute name="zava_opportunityid" />
+          <attribute name="zava_name" />
+          <attribute name="zava_account" />
+          <attribute name="zava_sales_stage" />
+          <attribute name="zava_estimated_revenue" />
+          <attribute name="zava_probability" />
+          <attribute name="zava_estimated_close_date" />
+          <attribute name="zava_forecast_category" />
+          <attribute name="zava_account_executive" />
+          <order attribute="zava_name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Opportunity Associated View" languagecode="1033" />
+    </LocalizedNames>
+  </savedquery>
+</savedqueries>

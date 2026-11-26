@@ -1,0 +1,1326 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/copilot/plugin/v2.4/schema.json",
+  "schema_version": "v2.4",
+  "name_for_human": "Zava Sales Hub",
+  "description_for_human": "Zava's sales hub: accounts, contacts, leads, pipeline and forecast.",
+  "namespace": "ZavaSalesHub",
+  "functions": [
+    {
+      "name": "list_app_tables",
+      "description": "List all tables (entities) in the current app. Including the display names."
+    },
+    {
+      "name": "describe_app_table",
+      "description": "Get table schema with all field metadata for the table within the current app."
+    },
+    {
+      "name": "create_record",
+      "description": "Use this when you need to create a new record for a given table in the current app. The user may provide some content to guide the values to be set in the new record. This tool will show a form with the table's columns populated with values predicted from the content which the user can review and save. If content is not provided, this tool can still be used and instead an empty form will be shown."
+    },
+    {
+      "name": "_save_record",
+      "description": "Save a record with specified field values."
+    },
+    {
+      "name": "_delete_records",
+      "description": "Delete one or more existing records from a table. A single record uses a direct delete request; multiple records are sent as a batch. Per-record success and failure details are returned. Use with caution \u2014 this action is irreversible."
+    },
+    {
+      "name": "_refresh_record",
+      "description": "Fetch the latest typed field values and ETag version for an existing record. Returns recordId, recordVersion, and typed fields in _meta. Use to synchronize widget state after a save without re-rendering the form."
+    },
+    {
+      "name": "_get_widget_state",
+      "description": "Internal tool used by HITL widgets to read previously-persisted UI state for a (conversationId, widgetId) pair from the AppA Redis cache. Returns null when the entry is absent or expired. Required because BizChat's widgetState and the UCI Catalyst pane's localStorage do not bridge \u2014 server-side persistence is what gives the two hosts a shared view of post-save edit-mode state."
+    },
+    {
+      "name": "_set_widget_state",
+      "description": "Internal tool used by HITL widgets to persist UI state for a (conversationId, widgetId) pair. Field-level merge: the supplied state is merged over any existing state for the same pair (last-write-wins per field), so partial patches do not clobber fields the caller didn't include. Clients should fire this non-blocking after every host-native setWidgetState write."
+    },
+    {
+      "name": "view_record",
+      "description": "Use this when you need to view an existing record. This tool will show a form with the table's columns populated with the record's current values. The user may choose to update and save values using this form."
+    },
+    {
+      "name": "delete_record",
+      "description": "Use this when you need to delete an existing record. This tool will show a form with the table's default main form columns populated with the record's current values so the user can review the record before deletion."
+    },
+    {
+      "name": "edit_record",
+      "description": "Use this when you need to update values of an existing record. The user must provide some content to use for new values in the record. If no content is provided, prefer use of the view_record tool instead. This tool will show a form with the table's columns populated with existing values and values predicted from the content which the user can review and save. "
+    },
+    {
+      "name": "list_views",
+      "description": "List all views for a table within the current app."
+    },
+    {
+      "name": "describe_view",
+      "description": "Describes the given view for a table within the current app."
+    },
+    {
+      "name": "view_data",
+      "description": "Display data from a Dataverse table in a grid widget. The primary name attribute is always included. When a view is selected, its columns are displayed in the view's configured order. Optionally specify fields that should take priority over the view columns. Select the most inclusive view that covers the user's request. Apply natural language filtering if applicable."
+    },
+    {
+      "name": "view_map",
+      "description": "Display location data from a Dataverse table on an interactive map. Only available for tables with location/address fields. Pass the fetchXml from a prior View Data response to render its records as map markers."
+    },
+    {
+      "name": "load_data",
+      "description": "Load data from Dataverse using a FetchXML query string. The FetchXML is validated and executed directly. Returns records and a paging cookie in metadata for subsequent page requests."
+    },
+    {
+      "name": "load_chart_data",
+      "description": "Load aggregated chart data from Dataverse for a specific chart. Retrieves the chart definition, parses its DataDescription to build an aggregate query, and optionally merges grid filter FetchXML so the chart reflects current view filters."
+    },
+    {
+      "name": "log_telemetry",
+      "description": "Log telemetry events with custom level, message, and context. Accepts a single event (level + message) or a batch of events via the events array. Use this to record diagnostic information, errors, warnings, or informational messages with optional structured context data."
+    },
+    {
+      "name": "search_lookup_data",
+      "description": "Search a Dataverse entity.Search text and target entity are required to perform the search.Returns list of records."
+    },
+    {
+      "name": "get_row_summary",
+      "description": "Get an AI-generated summary for a single Dataverse record. Requires the record ID and entity logical name. Returns a natural language summary of the record."
+    },
+    {
+      "name": "assign_record",
+      "description": "Assign ownership of a Dataverse record to a specific user or team. Opens an assign dialog where the human selects the assignee. Optionally provide assignee_id or assignee_name to pre-fill the search field."
+    },
+    {
+      "name": "search_record_assignee",
+      "description": "Widget callback: searches for users and teams that can be assigned as record owners."
+    },
+    {
+      "name": "confirm_assign_record",
+      "description": "Widget callback: executes record ownership assignment after the human confirms the assignee. A single record uses a direct request; multiple records are sent as a batch. Per-record success and failure details are returned."
+    }
+  ],
+  "runtimes": [
+    {
+      "type": "RemoteMCPServer",
+      "spec": {
+        "url": "@@AGENT_API_ORIGIN@@/appagents/apps/@@MODEL_APP_ID@@/mcp",
+        "x-enable_dynamic_discovery": false,
+        "mcp_tool_description": {
+          "tools": [
+            {
+              "name": "list_app_tables",
+              "title": "List App Tables",
+              "description": "List all tables (entities) in the current app. Including the display names.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {}
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "fastmcp": {
+                  "tags": []
+                }
+              }
+            },
+            {
+              "name": "describe_app_table",
+              "title": "Describe App Table",
+              "description": "Get table schema with all field metadata for the table within the current app.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "table_name": {
+                    "description": "Dataverse table logical name within the current app (lowercase). Should be a value found within result of List App Tables tool result.",
+                    "examples": [
+                      "account",
+                      "contact"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "table_name"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "fastmcp": {
+                  "tags": []
+                }
+              }
+            },
+            {
+              "name": "create_record",
+              "title": "Create Record",
+              "description": "Use this when you need to create a new record for a given table in the current app. The user may provide some content to guide the values to be set in the new record. This tool will show a form with the table's columns populated with values predicted from the content which the user can review and save. If content is not provided, this tool can still be used and instead an empty form will be shown.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "table_name": {
+                    "description": "Dataverse table logical name (lowercase) to create a new record with. Use list_app_tables to find an appropriate valid table name if needed.",
+                    "examples": [
+                      "contact",
+                      "account",
+                      "xxxxx_asset"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "column_names": {
+                    "anyOf": [
+                      {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Optional list of Dataverse column logical names to predict values for and include in the form. Provide this parameter if the user indicates specific fields to include or the source_text appears relevant to certain fields. Use describe_app_table to find valid column names if needed.",
+                    "examples": [
+                      [
+                        "firstname",
+                        "lastname",
+                        "emailaddress1"
+                      ]
+                    ]
+                  },
+                  "source_text": {
+                    "default": "",
+                    "description": "Optional plain text to use as the source for column value prediction. This should include verbatim any information the user has provided about the new record to be created and left blank if none. Attached files should be parsed into markdown text and included here as well.",
+                    "examples": [
+                      "Please create a new contact for John Doe, john.doe@example.com"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "table_name"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "resourceUri": "ui://widget/edit_form.html",
+                  "visibility": [
+                    "model",
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "_save_record",
+              "title": "Save Record",
+              "description": "Save a record with specified field values.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "agent": {
+                    "type": "string"
+                  },
+                  "message": {
+                    "$ref": "#/$defs/ToolContext_dict_str__Any__"
+                  }
+                },
+                "required": [
+                  "agent",
+                  "message"
+                ],
+                "$defs": {
+                  "ToolContext_dict_str__Any__": {
+                    "properties": {
+                      "tool_output": {
+                        "anyOf": [
+                          {
+                            "additionalProperties": true,
+                            "type": "object"
+                          },
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null,
+                        "description": "Tool output content"
+                      },
+                      "tool_name": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null,
+                        "description": "Name of the tool that produced this output"
+                      },
+                      "intent": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null,
+                        "description": "Intent of the message that correlates with action_options"
+                      },
+                      "content": {
+                        "anyOf": [
+                          {
+                            "additionalProperties": true,
+                            "type": "object"
+                          },
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null,
+                        "description": "Message content"
+                      },
+                      "client_options": {
+                        "anyOf": [
+                          {},
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null,
+                        "description": "UX descriptor that specifies the contract of displaying the human in the loop UX."
+                      },
+                      "destination_id": {
+                        "anyOf": [
+                          {
+                            "type": "string"
+                          },
+                          {
+                            "type": "null"
+                          }
+                        ],
+                        "default": null,
+                        "description": "Destination agent identifier"
+                      }
+                    },
+                    "type": "object"
+                  }
+                }
+              },
+              "annotations": {
+                "read_only_hint": false,
+                "destructive_hint": false,
+                "idempotent_hint": false,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "_delete_records",
+              "title": "Delete Records",
+              "description": "Delete one or more existing records from a table. A single record uses a direct delete request; multiple records are sent as a batch. Per-record success and failure details are returned. Use with caution \u2014 this action is irreversible.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "table_name": {
+                    "description": "Dataverse table logical name (lowercase) the records to be deleted belong to. Use list_app_tables to find an appropriate valid table name if needed.",
+                    "examples": [
+                      "contact",
+                      "account",
+                      "xxxxx_asset"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "record_ids": {
+                    "description": "List of existing record GUIDs to delete. All records must belong to the specified table. Use Dataverse capabilities to find these if needed.",
+                    "examples": [
+                      [
+                        "00000000-0000-0000-0000-000000000000"
+                      ]
+                    ],
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "table_name",
+                  "record_ids"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": false,
+                "destructive_hint": true,
+                "idempotent_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "_refresh_record",
+              "title": "Refresh Record",
+              "description": "Fetch the latest typed field values and ETag version for an existing record. Returns recordId, recordVersion, and typed fields in _meta. Use to synchronize widget state after a save without re-rendering the form.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "table_name": {
+                    "description": "Dataverse table logical name (lowercase) the record belongs to.",
+                    "examples": [
+                      "contact",
+                      "account",
+                      "xxxxx_asset"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "record_id": {
+                    "description": "Existing record GUID to refresh.",
+                    "examples": [
+                      "00000000-0000-0000-0000-000000000000"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "fields": {
+                    "description": "Column logical names currently shown in the widget. Must not be empty.",
+                    "examples": [
+                      [
+                        "firstname",
+                        "lastname",
+                        "emailaddress1"
+                      ]
+                    ],
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "type": "array"
+                  }
+                },
+                "required": [
+                  "table_name",
+                  "record_id",
+                  "fields"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "_get_widget_state",
+              "title": "Get Widget State",
+              "description": "Internal tool used by HITL widgets to read previously-persisted UI state for a (conversationId, widgetId) pair from the AppA Redis cache. Returns null when the entry is absent or expired. Required because BizChat's widgetState and the UCI Catalyst pane's localStorage do not bridge \u2014 server-side persistence is what gives the two hosts a shared view of post-save edit-mode state.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "conversation_id": {
+                    "description": "Client conversation id this widget belongs to (already on tool output).",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "widget_id": {
+                    "description": "Stable widget identifier (formUUID for forms, viewUUID for grids).",
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "conversation_id",
+                  "widget_id"
+                ]
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "_set_widget_state",
+              "title": "Set Widget State",
+              "description": "Internal tool used by HITL widgets to persist UI state for a (conversationId, widgetId) pair. Field-level merge: the supplied state is merged over any existing state for the same pair (last-write-wins per field), so partial patches do not clobber fields the caller didn't include. Clients should fire this non-blocking after every host-native setWidgetState write.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "conversation_id": {
+                    "description": "Client conversation id this widget belongs to.",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "widget_id": {
+                    "description": "Stable widget identifier (formUUID for forms, viewUUID for grids).",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "state": {
+                    "additionalProperties": true,
+                    "description": "Widget state patch to persist. Field-level merged over any existing state for this (conversationId, widgetId) pair \u2014 fields not present in this patch are preserved; fields present overwrite their prior value.",
+                    "type": "object"
+                  }
+                },
+                "required": [
+                  "conversation_id",
+                  "widget_id",
+                  "state"
+                ]
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "view_record",
+              "title": "View Record",
+              "description": "Use this when you need to view an existing record. This tool will show a form with the table's columns populated with the record's current values. The user may choose to update and save values using this form.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "table_name": {
+                    "description": "Dataverse table logical name (lowercase) to view an existing record from. Use list_app_tables to find an appropriate valid table name if needed.",
+                    "examples": [
+                      "contact",
+                      "account",
+                      "xxxxx_asset"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "record_id": {
+                    "description": "Existing record GUID to view. Use Dataverse capabilities to find this if needed.",
+                    "examples": [
+                      "00000000-0000-0000-0000-000000000000"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "column_names": {
+                    "anyOf": [
+                      {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Optional list of Dataverse column logical names to ensure are included in the form. Provide this parameter if user indicates specific fields to include. Use describe_app_table to find valid column names if needed.",
+                    "examples": [
+                      [
+                        "firstname",
+                        "lastname",
+                        "emailaddress1"
+                      ]
+                    ]
+                  }
+                },
+                "required": [
+                  "table_name",
+                  "record_id"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "resourceUri": "ui://widget/edit_form.html",
+                  "visibility": [
+                    "model",
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "delete_record",
+              "title": "Delete Record",
+              "description": "Use this when you need to delete an existing record. This tool will show a form with the table's default main form columns populated with the record's current values so the user can review the record before deletion.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "table_name": {
+                    "description": "Dataverse table logical name (lowercase) to delete an existing record from. Use list_app_tables to find an appropriate valid table name if needed.",
+                    "examples": [
+                      "contact",
+                      "account",
+                      "xxxxx_asset"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "record_id": {
+                    "description": "Existing record GUID to delete. Use Dataverse capabilities to find this if needed.",
+                    "examples": [
+                      "00000000-0000-0000-0000-000000000000"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "table_name",
+                  "record_id"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "resourceUri": "ui://widget/edit_form.html",
+                  "visibility": [
+                    "model",
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "edit_record",
+              "title": "Edit Record",
+              "description": "Use this when you need to update values of an existing record. The user must provide some content to use for new values in the record. If no content is provided, prefer use of the view_record tool instead. This tool will show a form with the table's columns populated with existing values and values predicted from the content which the user can review and save. ",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "table_name": {
+                    "description": "Dataverse table logical name (lowercase) the record to be edited belongs to. Use list_app_tables to find an appropriate valid table name if needed.",
+                    "examples": [
+                      "contact",
+                      "account",
+                      "xxxxx_asset"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "record_id": {
+                    "description": "Existing record GUID to edit. Use Dataverse capabilities to find this if needed.",
+                    "examples": [
+                      "00000000-0000-0000-0000-000000000000"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "column_names": {
+                    "anyOf": [
+                      {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Optional list of Dataverse column logical names to include in the form and potentially predict values for. Provide this parameter if the user indicates specific fields to include or the source_text appears very relevant to certain fields. Use describe_app_table to find valid column names if needed.",
+                    "examples": [
+                      [
+                        "firstname",
+                        "lastname",
+                        "emailaddress1"
+                      ]
+                    ]
+                  },
+                  "source_text": {
+                    "default": "",
+                    "description": "Optional plain text to use as the source for column value prediction. This should include verbatim any information the user has provided about how to update the record to be edited and left blank if none. Attached files should be parsed into markdown text and included here as well.",
+                    "examples": [
+                      "Please update John Doe's contact info with the phone number 555-555-5555"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "table_name",
+                  "record_id"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "resourceUri": "ui://widget/edit_form.html",
+                  "visibility": [
+                    "model",
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "list_views",
+              "title": "List Views",
+              "description": "List all views for a table within the current app.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "table_name": {
+                    "description": "Dataverse table logical name (entity logical name, lowercase) within the current app.",
+                    "examples": [
+                      "account",
+                      "contact"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "table_name"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "fastmcp": {
+                  "tags": []
+                }
+              }
+            },
+            {
+              "name": "describe_view",
+              "title": "Describe View",
+              "description": "Describes the given view for a table within the current app.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "table_name": {
+                    "description": "Dataverse table logical name (entity logical name, lowercase) within the current app.",
+                    "examples": [
+                      "account",
+                      "contact"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "view_id": {
+                    "description": "Dataverse view id (GUID) for the selected table. Use list_views to discover view ids.",
+                    "examples": [
+                      "00000000-0000-0000-0000-000000000000"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "table_name",
+                  "view_id"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "fastmcp": {
+                  "tags": []
+                }
+              }
+            },
+            {
+              "name": "view_data",
+              "title": "View Data",
+              "description": "Display data from a Dataverse table in a grid widget. The primary name attribute is always included. When a view is selected, its columns are displayed in the view's configured order. Optionally specify fields that should take priority over the view columns. Select the most inclusive view that covers the user's request. Apply natural language filtering if applicable.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "table_name": {
+                    "description": "Dataverse table logical name (entity logical name, lowercase) within the current app.",
+                    "examples": [
+                      "account",
+                      "contact"
+                    ],
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "fields": {
+                    "anyOf": [
+                      {
+                        "items": {
+                          "type": "string"
+                        },
+                        "type": "array"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Optional column logical names to prioritize within the 4-column grid. The primary name attribute is always displayed first and occupies one column. Include columns the user explicitly mentioned. When omitted or when fewer than 4 columns are selected, remaining columns are taken from the selected view in its configured display order, or from table metadata when no view is selected.",
+                    "examples": [
+                      [
+                        "telephone1",
+                        "name",
+                        "address1_city",
+                        "revenue"
+                      ]
+                    ]
+                  },
+                  "view_id": {
+                    "default": "",
+                    "description": "Dataverse view id (GUID) for the selected table. Use list_views to discover view ids.",
+                    "examples": [
+                      "00000000-0000-0000-0000-000000000000"
+                    ],
+                    "type": "string"
+                  },
+                  "natural_language_filter": {
+                    "default": "",
+                    "description": "Optional natural language filter applied on top of the selected view. If view_id is provided, this further filters the view results. If no view_id is provided, this filter is applied directly to the table. Express filter intent in natural language \u2014 field name resolution is handled automatically.",
+                    "examples": [
+                      "accounts located in Seattle with revenue over 1 million"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "table_name"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "resourceUri": "ui://widget/one_grid.html",
+                  "visibility": [
+                    "model",
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "view_map",
+              "title": "View Map",
+              "description": "Display location data from a Dataverse table on an interactive map. Only available for tables with location/address fields. Pass the fetchXml from a prior View Data response to render its records as map markers.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "table_name": {
+                    "description": "Dataverse table logical name",
+                    "type": "string"
+                  },
+                  "fetchXml": {
+                    "description": "FetchXML query from a prior View Data response",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "table_name",
+                  "fetchXml"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "load_data",
+              "title": "Load Data",
+              "description": "Load data from Dataverse using a FetchXML query string. The FetchXML is validated and executed directly. Returns records and a paging cookie in metadata for subsequent page requests.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "fetchXml": {
+                    "description": "Complete FetchXML query string to execute. Must be well-formed XML with <fetch> as root element. Include paging attributes (count, page, paging-cookie) if requesting a specific page.",
+                    "minLength": 1,
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "fetchXml"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "load_chart_data",
+              "title": "Load Chart Data",
+              "description": "Load aggregated chart data from Dataverse for a specific chart. Retrieves the chart definition, parses its DataDescription to build an aggregate query, and optionally merges grid filter FetchXML so the chart reflects current view filters.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "chartId": {
+                    "description": "The ID of the chart to load data for (savedqueryvisualizationid or userqueryvisualizationid).",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "tableName": {
+                    "description": "The Dataverse table logical name associated with the chart.",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "fetchXml": {
+                    "anyOf": [
+                      {
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Optional FetchXML from the current grid view whose filters are merged into the chart aggregate query. This ensures the chart data reflects the user's active filters."
+                  }
+                },
+                "required": [
+                  "chartId",
+                  "tableName"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "log_telemetry",
+              "title": "Log Telemetry",
+              "description": "Log telemetry events with custom level, message, and context. Accepts a single event (level + message) or a batch of events via the events array. Use this to record diagnostic information, errors, warnings, or informational messages with optional structured context data.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "level": {
+                    "default": "",
+                    "description": "Log level as string: 'CRITICAL', 'FATAL', 'ERROR', 'WARNING', 'INFO', 'DEBUG'. Defaults to INFO for invalid values. Used for single-event mode; ignored when events is provided.",
+                    "examples": [
+                      "INFO",
+                      "ERROR",
+                      "WARNING",
+                      "DEBUG",
+                      "CRITICAL"
+                    ],
+                    "type": "string"
+                  },
+                  "message": {
+                    "default": "",
+                    "description": "The log message to record. Used for single-event mode; ignored when events is provided.",
+                    "examples": [
+                      "Operation completed successfully",
+                      "Failed to load data",
+                      "User interaction recorded"
+                    ],
+                    "type": "string"
+                  },
+                  "event_context": {
+                    "anyOf": [
+                      {
+                        "additionalProperties": true,
+                        "type": "object"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Additional context as JSON (table name, view ID, user actions, etc.). Used for single-event mode; ignored when events is provided."
+                  },
+                  "events": {
+                    "anyOf": [
+                      {
+                        "items": {
+                          "additionalProperties": true,
+                          "type": "object"
+                        },
+                        "type": "array"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Batched telemetry events. Each element may contain 'level' (defaults to INFO), 'message' (defaults to empty string), and 'event_context'. When provided, the individual level/message/event_context parameters are ignored.",
+                    "examples": [
+                      [
+                        {
+                          "event_context": {
+                            "action": "click"
+                          },
+                          "level": "INFO",
+                          "message": "Widget/User/Action"
+                        },
+                        {
+                          "event_context": {
+                            "errorCode": 500
+                          },
+                          "level": "ERROR",
+                          "message": "Widget/Data/LoadFailed"
+                        }
+                      ]
+                    ]
+                  }
+                }
+              },
+              "annotations": {
+                "read_only_hint": false,
+                "destructive_hint": false,
+                "idempotent_hint": false,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "search_lookup_data",
+              "title": "Search lookup",
+              "description": "Search a Dataverse entity.Search text and target entity are required to perform the search.Returns list of records.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "targetEntity": {
+                    "description": "The target entity for the search.",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "columnName": {
+                    "default": "",
+                    "description": "The column of the target entity to search on.",
+                    "type": "string"
+                  },
+                  "searchText": {
+                    "default": "",
+                    "description": "Optional text to search for. If not provided, returns all records.",
+                    "type": "string"
+                  },
+                  "filter": {
+                    "default": "",
+                    "description": "Optional filter string to apply to the search results.",
+                    "type": "string"
+                  },
+                  "recordIds": {
+                    "default": [],
+                    "description": "List of IDs of records from the target entity. If provided, only these records will be searched.",
+                    "items": {
+                      "type": "string"
+                    },
+                    "type": "array"
+                  },
+                  "fuzzy": {
+                    "default": false,
+                    "description": "When true, enables fuzzy/approximate matching. Useful when the exact spelling of the search term is uncertain.",
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "targetEntity"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "get_row_summary",
+              "title": "Get Row Summary",
+              "description": "Get an AI-generated summary for a single Dataverse record. Requires the record ID and entity logical name. Returns a natural language summary of the record.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "recordId": {
+                    "description": "The primary key (GUID) of the Dataverse record to summarize.",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "entityName": {
+                    "description": "The logical name of the Dataverse entity (e.g. 'account', 'contact').",
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "modelId": {
+                    "default": "",
+                    "description": "Optional AI model GUID from the view_data features.rowSummaryModelId response. When provided, skips the EntityDefinitions and aiskillconfig lookups for faster execution.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "recordId",
+                  "entityName"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "assign_record",
+              "title": "Assign Record",
+              "description": "Assign ownership of a Dataverse record to a specific user or team. Opens an assign dialog where the human selects the assignee. Optionally provide assignee_id or assignee_name to pre-fill the search field.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "entity_logical_name": {
+                    "description": "Logical name of the Dataverse entity (e.g., 'account', 'incident').",
+                    "type": "string"
+                  },
+                  "record_id": {
+                    "description": "GUID of the record to assign.",
+                    "type": "string"
+                  },
+                  "assignee_id": {
+                    "default": "",
+                    "description": "Optional GUID of the assignee. Takes precedence over assignee_name when provided. Use assignee_type to specify whether this is a systemuser or team.",
+                    "type": "string"
+                  },
+                  "assignee_type": {
+                    "anyOf": [
+                      {
+                        "enum": [
+                          "systemuser",
+                          "team"
+                        ],
+                        "type": "string"
+                      },
+                      {
+                        "type": "null"
+                      }
+                    ],
+                    "default": null,
+                    "description": "Type of the assignee. Valid values are 'systemuser' or 'team'."
+                  },
+                  "assignee_name": {
+                    "default": "",
+                    "description": "Optional name hint to pre-fill the assignee search field.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "entity_logical_name",
+                  "record_id"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "resourceUri": "ui://widget/assign-record.html",
+                  "visibility": [
+                    "model",
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "search_record_assignee",
+              "title": "Search Record Assignee",
+              "description": "Widget callback: searches for users and teams that can be assigned as record owners.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "search_query": {
+                    "description": "Search text to match against user and team names.",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "search_query"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            },
+            {
+              "name": "confirm_assign_record",
+              "title": "Confirm Assign Record",
+              "description": "Widget callback: executes record ownership assignment after the human confirms the assignee. A single record uses a direct request; multiple records are sent as a batch. Per-record success and failure details are returned.",
+              "inputSchema": {
+                "type": "object",
+                "properties": {
+                  "entity_logical_name": {
+                    "description": "Logical name of the Dataverse entity.",
+                    "type": "string"
+                  },
+                  "record_ids": {
+                    "description": "List of record GUIDs to assign. All records must belong to the specified entity.",
+                    "examples": [
+                      [
+                        "00000000-0000-0000-0000-000000000000"
+                      ]
+                    ],
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "type": "array"
+                  },
+                  "assignee_id": {
+                    "description": "GUID of the assignee (user or team).",
+                    "type": "string"
+                  },
+                  "assignee_type": {
+                    "default": "systemuser",
+                    "description": "Whether the assignee is a user or team.",
+                    "enum": [
+                      "systemuser",
+                      "team"
+                    ],
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "entity_logical_name",
+                  "record_ids",
+                  "assignee_id"
+                ]
+              },
+              "annotations": {
+                "read_only_hint": false,
+                "destructive_hint": false,
+                "idempotent_hint": true,
+                "open_world_hint": false
+              },
+              "_meta": {
+                "ui": {
+                  "visibility": [
+                    "app"
+                  ]
+                }
+              }
+            }
+          ]
+        }
+      },
+      "run_for_functions": [
+        "_delete_records",
+        "_get_widget_state",
+        "_refresh_record",
+        "_save_record",
+        "_set_widget_state",
+        "assign_record",
+        "confirm_assign_record",
+        "create_record",
+        "delete_record",
+        "describe_app_table",
+        "describe_view",
+        "edit_record",
+        "get_row_summary",
+        "list_app_tables",
+        "list_views",
+        "load_chart_data",
+        "load_data",
+        "log_telemetry",
+        "search_lookup_data",
+        "search_record_assignee",
+        "view_data",
+        "view_map",
+        "view_record"
+      ]
+    }
+  ]
+}

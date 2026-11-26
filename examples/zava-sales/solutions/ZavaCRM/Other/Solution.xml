@@ -1,0 +1,197 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml version="9.2.26103.175" SolutionPackageVersion="9.2" languagecode="1033" generatedBy="CrmLive" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26103.175" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26103.00175">
+  <SolutionManifest>
+    <UniqueName>ZavaCRM</UniqueName>
+    <LocalizedNames>
+      <LocalizedName description="Zava CRM" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions />
+    <Version>1.0.0.0</Version>
+    <Managed>0</Managed>
+    <Publisher>
+      <UniqueName>Zava</UniqueName>
+      <LocalizedNames>
+        <LocalizedName description="zava" languagecode="1033" />
+      </LocalizedNames>
+      <Descriptions>
+        <Description description="zava" languagecode="1033" />
+      </Descriptions>
+      <EMailAddress xsi:nil="true"></EMailAddress>
+      <SupportingWebsiteUrl xsi:nil="true"></SupportingWebsiteUrl>
+      <CustomizationPrefix>zava</CustomizationPrefix>
+      <CustomizationOptionValuePrefix>55750</CustomizationOptionValuePrefix>
+      <Addresses>
+        <Address>
+          <AddressNumber>1</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+        <Address>
+          <AddressNumber>2</AddressNumber>
+          <AddressTypeCode>1</AddressTypeCode>
+          <City xsi:nil="true"></City>
+          <County xsi:nil="true"></County>
+          <Country xsi:nil="true"></Country>
+          <Fax xsi:nil="true"></Fax>
+          <FreightTermsCode xsi:nil="true"></FreightTermsCode>
+          <ImportSequenceNumber xsi:nil="true"></ImportSequenceNumber>
+          <Latitude xsi:nil="true"></Latitude>
+          <Line1 xsi:nil="true"></Line1>
+          <Line2 xsi:nil="true"></Line2>
+          <Line3 xsi:nil="true"></Line3>
+          <Longitude xsi:nil="true"></Longitude>
+          <Name xsi:nil="true"></Name>
+          <PostalCode xsi:nil="true"></PostalCode>
+          <PostOfficeBox xsi:nil="true"></PostOfficeBox>
+          <PrimaryContactName xsi:nil="true"></PrimaryContactName>
+          <ShippingMethodCode>1</ShippingMethodCode>
+          <StateOrProvince xsi:nil="true"></StateOrProvince>
+          <Telephone1 xsi:nil="true"></Telephone1>
+          <Telephone2 xsi:nil="true"></Telephone2>
+          <Telephone3 xsi:nil="true"></Telephone3>
+          <TimeZoneRuleVersionNumber xsi:nil="true"></TimeZoneRuleVersionNumber>
+          <UPSZone xsi:nil="true"></UPSZone>
+          <UTCOffset xsi:nil="true"></UTCOffset>
+          <UTCConversionTimeZoneCode xsi:nil="true"></UTCConversionTimeZoneCode>
+        </Address>
+      </Addresses>
+    </Publisher>
+    <RootComponents>
+      <RootComponent type="1" schemaName="account" behavior="1" />
+      <RootComponent type="1" schemaName="appointment" behavior="1" />
+      <RootComponent type="1" schemaName="contact" behavior="1" />
+      <RootComponent type="1" schemaName="zava_lead" behavior="0" />
+      <RootComponent type="1" schemaName="zava_opportunity" behavior="0" />
+      <RootComponent type="20" id="{17fb9e33-8eb0-5ed0-abe3-16468bf4fcb8}" behavior="0" />
+      <RootComponent type="60" id="{8fc2ba92-4b58-57e3-b918-e98a741d8b8b}" behavior="0" />
+      <RootComponent type="61" schemaName="zava_/icons/app.svg" behavior="0" />
+      <RootComponent type="61" schemaName="zava_/icons/dashboard.svg" behavior="0" />
+      <RootComponent type="61" schemaName="zava_/icons/lead.svg" behavior="0" />
+      <RootComponent type="61" schemaName="zava_/icons/opportunity.svg" behavior="0" />
+      <RootComponent type="61" schemaName="zava_/theme/theme.xml" behavior="0" />
+      <RootComponent type="62" schemaName="zava_ZavaSalesHub" behavior="0" />
+      <RootComponent type="80" schemaName="zava_ZavaSalesHub" behavior="0" />
+    </RootComponents>
+    <MissingDependencies>
+      <MissingDependency>
+        <Required type="60" displayName="Account Reference Panel" parentDisplayName="Account" solution="msdynce_AppCommon (9.0.4.0066)" id="{098ae145-1567-41ec-8398-86dbaac70c9b}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="account contact card" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{29de27bc-a257-4f29-99cf-bab4a84e688f}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Live Persona Card Form" parentDisplayName="Contact" solution="msdynce_AppCommonPatch201904 (9.0.26103.10002)" id="{449faa0e-f471-48ec-87d0-4719909546d2}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Contact Quick Create" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Account Hierarchy Tile Form" parentDisplayName="Account" solution="msdynce_AppCommon (9.0.4.0066)" id="{69cff312-cfb6-4289-9631-249ab85d2c62}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="contact card" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{707fc57b-c5e6-471b-a180-e37ed28a38e2}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="account card" parentDisplayName="Account" solution="msdynce_AppCommon (9.0.4.0066)" id="{b028db32-3619-48a5-ac51-cf3f947b0ef3}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Contact Card form" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{bc0f68dd-a4b1-4a8f-bed3-c8f5db2f89cf}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Contact Quick Form" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{bdb0ae1c-32fa-4374-b637-8dafe107bc44}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Account Quick Create" parentDisplayName="Account" solution="msdynce_AppCommon (9.0.4.0066)" id="{c9e7ec2d-efca-4e4c-b3e3-f63c4bba5e4b}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Account Card form" parentDisplayName="Account" solution="msdynce_AppCommon (9.0.4.0066)" id="{cccff382-2b92-467e-bf1b-3db179512af8}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Contact Reference Panel" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{d880c3cf-80e2-42f3-82f9-24d040d09f17}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="60" displayName="Recent Cases and Entitlements" parentDisplayName="Contact" solution="msdynce_AppCommon (9.0.4.0066)" id="{f3b707fb-3b5f-45f9-9c6b-5e573bb5d19e}">
+          <package appName="msdynce_AppCommon" version="9.0.26103.10002">msdynce_AppCommonAnchor (9.0.26103.10002)</package>
+        </Required>
+        <Dependent type="80" schemaName="zava_ZavaSalesHub" displayName="Zava Sales Hub" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="AppChannel" solution="msdyn_AppFrameworkInfraExtensions (1.0.0.28)" id.uniquename="AppChannel">
+          <package appName="PowerAppsAppFramework Package" version="1.0.0.30">PowerAppsAppFramework_Anchor (1.0.0.30)</package>
+        </Required>
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=zava_ZavaSalesHub,settingdefinitionid.uniquename=AppChannel" id.parentappmoduleid.uniquename="zava_ZavaSalesHub" id.settingdefinitionid.uniquename="AppChannel" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="CustomThemeDefinition" solution="msdyn_PowerAppsThemingSettings (1.0.0.13)" id.uniquename="CustomThemeDefinition">
+          <package appName="PowerAppsThemingApp Package" version="1.0.0.12">PowerAppsThemingApp_Anchor (1.0.0.12)</package>
+        </Required>
+        <Dependent type="AppSetting" displayName="parentappmoduleid.uniquename=zava_ZavaSalesHub,settingdefinitionid.uniquename=CustomThemeDefinition" id.parentappmoduleid.uniquename="zava_ZavaSalesHub" id.settingdefinitionid.uniquename="CustomThemeDefinition" />
+      </MissingDependency>
+      <MissingDependency>
+        <Required type="SettingDefinition" displayName="CustomThemeDefinition" solution="msdyn_PowerAppsThemingSettings (1.0.0.13)" id.uniquename="CustomThemeDefinition">
+          <package appName="PowerAppsThemingApp Package" version="1.0.0.12">PowerAppsThemingApp_Anchor (1.0.0.12)</package>
+        </Required>
+        <Dependent type="SettingDefinition" displayName="CustomThemeDefinition" id.uniquename="CustomThemeDefinition" />
+      </MissingDependency>
+    </MissingDependencies>
+  </SolutionManifest>
+</ImportExportXml>

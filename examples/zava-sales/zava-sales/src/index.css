@@ -1,0 +1,132 @@
+:root {
+  color-scheme: light;
+  --cp-bg: #f6f7fb;
+  --cp-bg-elevated: #ffffff;
+  --cp-surface: #ffffff;
+  --cp-surface-soft: #f0f2f8;
+  --cp-border: #e1e5ef;
+  --cp-border-strong: #8791a7;
+  --cp-text: #17213a;
+  --cp-text-muted: #535f75;
+  --cp-text-soft: #626d83;
+  --cp-scrollbar: #6b7489;
+  --cp-accent: #4f46e5;
+  --cp-accent-hover: #4338ca;
+  --cp-accent-soft: #eeedff;
+  --cp-accent-fg: #ffffff;
+  --cp-action: #4f46e5;
+  --cp-action-hover: #4338ca;
+  --cp-action-fg: #ffffff;
+  --cp-lead: #0b7d73;
+  --cp-lead-soft: #e7f8f5;
+  --cp-stage-qualify: #0d9488;
+  --cp-stage-develop: #0e7490;
+  --cp-stage-propose: #2563eb;
+  --cp-stage-close: #4f46e5;
+  --cp-series-1: #4f46e5;
+  --cp-series-2: #0d9488;
+  --cp-series-3: #0369a1;
+  --cp-series-4: #8b5cf6;
+  --cp-series-5: #b45309;
+  --cp-series-6: #b4537a;
+  --cp-series-none: #8791a7;
+  --cp-meeting: #4f46e5;
+  --cp-task: #0d9488;
+  --cp-close: #d97706;
+  --cp-success: #15803d;
+  --cp-danger: #dc2626;
+  --cp-warning: #f59e0b;
+  --cp-link: #4338ca;
+  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.12);
+  --cp-overlay: rgba(255, 255, 255, 0.8);
+  --cp-panel: rgba(255, 255, 255, 0.86);
+  --cp-panel-strong: rgba(255, 255, 255, 0.96);
+  --cp-sheen: rgba(255, 255, 255, 0.55);
+  --cp-highlight: rgba(79, 70, 229, 0.12);
+  --cp-brand-teal: #14b8a6;
+  --cp-brand-indigo: #4f46e5;
+  --cp-brand-speed: #fde047;
+  --cp-brand-white: #ffffff;
+  --cp-hero-bg: #3730a3;
+  --cp-hero-gradient: linear-gradient(115deg, #3730a3 0%, #4f46e5 63%, #087f75 100%);
+  --cp-hero-fg: #ffffff;
+  --cp-hero-soft: #f5f7ff;
+  --cp-hero-emphasis: #99f6e4;
+  --cp-hero-action-fg: #27245c;
+  --cp-hero-action-hover: #fef08a;
+}
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --cp-bg: #101321;
+  --cp-bg-elevated: #151a2c;
+  --cp-surface: #1b2034;
+  --cp-surface-soft: #252b43;
+  --cp-border: #343c55;
+  --cp-border-strong: #707d9b;
+  --cp-text: #f0f2fa;
+  --cp-text-muted: #b7bfd6;
+  --cp-text-soft: #a0acc7;
+  --cp-scrollbar: #8e9aba;
+  --cp-accent: #a5b4fc;
+  --cp-accent-hover: #c7d2fe;
+  --cp-accent-soft: #2d3055;
+  --cp-accent-fg: #171d3a;
+  --cp-lead: #2dd4bf;
+  --cp-lead-soft: #173b3d;
+  --cp-stage-qualify: #2dd4bf;
+  --cp-stage-develop: #22d3ee;
+  --cp-stage-propose: #60a5fa;
+  --cp-stage-close: #818cf8;
+  --cp-series-1: #818cf8;
+  --cp-series-2: #2dd4bf;
+  --cp-series-3: #38bdf8;
+  --cp-series-4: #a78bfa;
+  --cp-series-5: #fbbf24;
+  --cp-series-6: #f0a3c4;
+  --cp-series-none: #707d9b;
+  --cp-meeting: #818cf8;
+  --cp-task: #2dd4bf;
+  --cp-close: #fbbf24;
+  --cp-success: #4ade80;
+  --cp-danger: #f87171;
+  --cp-warning: #fbbf24;
+  --cp-link: #a5b4fc;
+  --cp-shadow: 0 18px 48px rgba(0, 0, 0, 0.32);
+  --cp-overlay: rgba(16, 19, 33, 0.88);
+  --cp-panel: rgba(27, 32, 52, 0.72);
+  --cp-panel-strong: rgba(27, 32, 52, 0.96);
+  --cp-sheen: rgba(255, 255, 255, 0.04);
+  --cp-highlight: rgba(165, 180, 252, 0.14);
+}
+* { box-sizing: border-box; }
+body { margin: 0; min-width: 320px; background: var(--cp-bg); color: var(--cp-text); font-family: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif; font-size: 15px; line-height: 1.5; -webkit-font-smoothing: antialiased; }
+button, input, select, textarea { font: inherit; }
+button, a, input, select, textarea { -webkit-tap-highlight-color: transparent; }
+button { cursor: pointer; color: inherit; }
+button:disabled { cursor: wait; opacity: .55; }
+button, a { touch-action: manipulation; }
+button { border: 0; }
+a { color: inherit; text-decoration: none; }
+button:focus-visible, a:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 3px; }
+::selection { background: var(--cp-highlight); }
+svg { flex-shrink: 0; vertical-align: middle; }
+/* Scrollbars match the Zava Agent chat (WebChat Fluent): no arrows or track, and a slim thumb that appears while the
+   pointer is over the scrolling area and widens under it, so the CRM and the pane read as one surface.
+   Chromium ignores these once scrollbar-width or scrollbar-color is set, so those are only a fallback for other engines. */
+/* Redeclaring the size on hover makes Chromium repaint the thumb when hover changes. */
+::-webkit-scrollbar, :hover::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-button { display: none; }
+::-webkit-scrollbar-thumb { border: 3px solid transparent; border-radius: 10px; background: transparent padding-box; }
+:hover::-webkit-scrollbar-thumb { background-color: var(--cp-scrollbar); }
+:hover::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:active { border-width: 1px; background-color: var(--cp-scrollbar); }
+@supports not selector(::-webkit-scrollbar) { * { scrollbar-width: thin; scrollbar-color: var(--cp-scrollbar) transparent; } }
+h1, h2, h3, p { margin: 0; }
+input, select, textarea { border: 1px solid var(--cp-border); background: var(--cp-surface); color: var(--cp-text); border-radius: 10px; padding: 10px 12px; min-width: 0; }
+input::placeholder, textarea::placeholder { color: var(--cp-text-soft); }
+select { cursor: pointer; }
+textarea { resize: vertical; }
+fieldset { padding: 0; border: 0; margin: 0; min-width: 0; }
+small { font-size: 13px; }
+button { transition: background .16s ease, border-color .16s ease, transform .16s ease, color .16s ease; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { animation: none !important; transition: none !important; scroll-behavior: auto !important; } }

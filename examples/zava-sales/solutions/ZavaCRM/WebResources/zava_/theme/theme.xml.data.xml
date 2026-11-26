@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{d01cac8b-c4d8-f111-a05d-000d3a34d653}</WebResourceId>
+  <Name>zava_/theme/theme.xml</Name>
+  <DisplayName>Zava Modern Theme</DisplayName>
+  <LanguageCode>0</LanguageCode>
+  <WebResourceType>4</WebResourceType>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/zava_themethemexmlD01CAC8B-C4D8-F111-A05D-000D3A34D653</FileName>
+</WebResource>

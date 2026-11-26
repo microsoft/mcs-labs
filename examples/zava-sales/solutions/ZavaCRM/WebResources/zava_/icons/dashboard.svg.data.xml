@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<WebResource xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WebResourceId>{9d585f73-bf01-5291-9216-dc7547d647db}</WebResourceId>
+  <Name>zava_/icons/dashboard.svg</Name>
+  <DisplayName>Zava dashboard icon</DisplayName>
+  <Description>Zava Sales Hub icon</Description>
+  <WebResourceType>11</WebResourceType>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <IsEnabledForMobileClient>0</IsEnabledForMobileClient>
+  <IsAvailableForMobileOffline>0</IsAvailableForMobileOffline>
+  <IsCustomizable>1</IsCustomizable>
+  <CanBeDeleted>1</CanBeDeleted>
+  <IsHidden>0</IsHidden>
+  <FileName>/WebResources/zava_iconsdashboardsvg9D585F73-BF01-5291-9216-DC7547D647DB</FileName>
+</WebResource>
