@@ -120,7 +120,10 @@ For each step or exercise, in order:
 
 1. Do exactly what the text says. Use `controls "<regex>"` to find a control by its
    accessible name and `click "<name>"` to use it. If the label in the lab is not on screen,
-   that is a finding: do not quietly use the new label.
+   that is a finding: do not quietly use the new label. If you needed prior product
+   knowledge to choose between two menus or reach the named screen, log where the text
+   stopped helping and what visible cue resolved it. Recommend the missing direction
+   or a focused **Show me**; a successful automation click can still hide a learner's wrong turn.
 2. Enter prompts verbatim from the lab: save the prompt text to a file outside the repo and
    run `prompt <file>`. Check the [new assistant turn](references/runthrough-evidence.md#verify-outcomes-at-their-source);
    `wait` can match an earlier reply. A prompt that pastes with a line

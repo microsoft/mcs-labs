@@ -52,7 +52,8 @@ replacing a lab in an existing agenda.
 
 ## 3. Design for doing, not reading
 
-Apply `../lab-review/references/learning-design.md` while drafting. In short:
+Apply the [shared learning-design guidance](../lab-review/references/learning-design.md)
+while drafting, especially on a business user's first visit to each product. In short:
 
 - One outcome per section, stated up front; the learner acts within the first screen.
 - Steps start with a verb and name the exact UI label in **bold**.
