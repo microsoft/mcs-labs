@@ -1,0 +1,390 @@
+/* Zava Sales Hub tokens (mirrors zava-sales/src/index.css) plus Fluent overrides for WebChat. */
+:root {
+  color-scheme: light;
+  --cp-bg: #f6f7fb;
+  --cp-bg-elevated: #ffffff;
+  --cp-surface: #ffffff;
+  --cp-surface-soft: #f0f2f8;
+  --cp-border: #e1e5ef;
+  --cp-text: #17213a;
+  --cp-text-muted: #535f75;
+  --cp-text-soft: #626d83;
+  --cp-accent: #4f46e5;
+  --cp-accent-soft: #eeedff;
+  --cp-action: #4f46e5;
+  --cp-action-hover: #4338ca;
+  --cp-action-fg: #ffffff;
+  --cp-lead: #0b7d73;
+  --cp-danger: #dc2626;
+  --cp-danger-soft: #fef2f2;
+  --cp-danger-border: #fecaca;
+  --cp-highlight: rgba(79, 70, 229, 0.12);
+  --cp-brand-teal: #14b8a6;
+  --cp-brand-indigo: #4f46e5;
+  --cp-brand-speed: #fde047;
+  --cp-hero-gradient: linear-gradient(115deg, #3730a3 0%, #4f46e5 63%, #087f75 100%);
+  --cp-hero-fg: #ffffff;
+  --cp-hero-soft: #f5f7ff;
+  --cp-hero-emphasis: #99f6e4;
+  --cp-dot-1: #4f46e5;
+  --cp-dot-2: #0d9488;
+  --cp-dot-3: #0369a1;
+  --cp-dot-4: #b45309;
+
+  --fontFamilyBase: "Segoe UI", Aptos, Calibri, -apple-system, BlinkMacSystemFont, sans-serif;
+  --colorBrandBackground: #4f46e5;
+  --colorBrandBackgroundHover: #4338ca;
+  --colorBrandBackgroundPressed: #3730a3;
+  --colorBrandBackground2: #eeedff;
+  --colorBrandBackground2Hover: #e0e7ff;
+  --colorBrandBackground2Pressed: #c7d2fe;
+  --colorBrandForeground1: #4338ca;
+  --colorBrandForeground2Hover: #3730a3;
+  --colorBrandForeground2Pressed: #312e81;
+  --colorBrandForegroundLink: #4338ca;
+  --colorBrandForegroundLinkHover: #3730a3;
+  --colorBrandForegroundLinkPressed: #312e81;
+  --colorBrandForegroundLinkSelected: #4338ca;
+  --colorBrandStroke2: #c7d2fe;
+  --colorBrandStroke2Pressed: #3730a3;
+  --colorCompoundBrandForeground1Hover: #4338ca;
+  --colorNeutralForeground2BrandHover: #4338ca;
+  --colorNeutralForeground2BrandPressed: #3730a3;
+  --colorNeutralForeground2BrandSelected: #4338ca;
+  --colorNeutralForegroundOnBrand: #ffffff;
+  --colorNeutralBackground1: #ffffff;
+  --colorNeutralBackground1Hover: #f0f2f8;
+  --colorNeutralBackground1Pressed: #e1e5ef;
+  --colorNeutralBackground3: #f6f7fb;
+  --colorNeutralBackground4: #f0f2f8;
+  --colorNeutralBackground5: #eceff6;
+  --colorNeutralBackground6: #e6e9f2;
+  --colorNeutralBackgroundDisabled: #f0f2f8;
+  --colorNeutralForeground1: #17213a;
+  --colorNeutralForeground1Hover: #17213a;
+  --colorNeutralForeground1Pressed: #17213a;
+  --colorNeutralForeground2: #36415a;
+  --colorNeutralForeground3: #535f75;
+  --colorNeutralForeground4: #626d83;
+  --colorNeutralForeground5: #6b7489;
+  --colorNeutralForegroundDisabled: #a6aec0;
+  --colorNeutralStroke1: #d3d8e4;
+  --colorNeutralStroke1Hover: #c2c8d8;
+  --colorNeutralStroke1Pressed: #aeb6ca;
+  --colorNeutralStroke1Selected: #b8bfd1;
+  --colorNeutralStroke2: #e1e5ef;
+  --colorNeutralStrokeDisabled: #e1e5ef;
+  --colorNeutralStencil1: #e6e9f2;
+  --colorNeutralStencil2: #f6f7fb;
+  --colorStrokeFocus2: #4f46e5;
+  --colorStatusDangerForeground1: #b91c1c;
+}
+
+html[data-theme="dark"] {
+  color-scheme: dark;
+  --cp-bg: #101321;
+  --cp-bg-elevated: #151a2c;
+  --cp-surface: #1b2034;
+  --cp-surface-soft: #252b43;
+  --cp-border: #343c55;
+  --cp-text: #f0f2fa;
+  --cp-text-muted: #b7bfd6;
+  --cp-text-soft: #a0acc7;
+  --cp-accent: #a5b4fc;
+  --cp-accent-soft: #2d3055;
+  --cp-lead: #2dd4bf;
+  --cp-danger: #f87171;
+  --cp-danger-soft: #3a1d26;
+  --cp-danger-border: #7f2a35;
+  --cp-highlight: rgba(165, 180, 252, 0.14);
+  --cp-dot-1: #818cf8;
+  --cp-dot-2: #2dd4bf;
+  --cp-dot-3: #38bdf8;
+  --cp-dot-4: #fbbf24;
+
+  --colorBrandBackground2: #2d3055;
+  --colorBrandBackground2Hover: #363a66;
+  --colorBrandBackground2Pressed: #40457a;
+  --colorBrandForeground1: #a5b4fc;
+  --colorBrandForeground2Hover: #c7d2fe;
+  --colorBrandForeground2Pressed: #e0e7ff;
+  --colorBrandForegroundLink: #a5b4fc;
+  --colorBrandForegroundLinkHover: #c7d2fe;
+  --colorBrandForegroundLinkPressed: #e0e7ff;
+  --colorBrandForegroundLinkSelected: #a5b4fc;
+  --colorBrandStroke2: #4b5294;
+  --colorBrandStroke2Pressed: #a5b4fc;
+  --colorCompoundBrandForeground1Hover: #c7d2fe;
+  --colorNeutralForeground2BrandHover: #c7d2fe;
+  --colorNeutralForeground2BrandPressed: #e0e7ff;
+  --colorNeutralForeground2BrandSelected: #a5b4fc;
+  --colorNeutralBackground1: #1b2034;
+  --colorNeutralBackground1Hover: #252b43;
+  --colorNeutralBackground1Pressed: #2c3350;
+  --colorNeutralBackground3: #151a2c;
+  --colorNeutralBackground4: #252b43;
+  --colorNeutralBackground5: #2c3350;
+  --colorNeutralBackground6: #343c55;
+  --colorNeutralBackgroundDisabled: #252b43;
+  --colorNeutralForeground1: #f0f2fa;
+  --colorNeutralForeground1Hover: #f0f2fa;
+  --colorNeutralForeground1Pressed: #f0f2fa;
+  --colorNeutralForeground2: #d5dbea;
+  --colorNeutralForeground3: #b7bfd6;
+  --colorNeutralForeground4: #a0acc7;
+  --colorNeutralForeground5: #8e9aba;
+  --colorNeutralForegroundDisabled: #6b7493;
+  --colorNeutralStroke1: #4a5372;
+  --colorNeutralStroke1Hover: #5b6585;
+  --colorNeutralStroke1Pressed: #707d9b;
+  --colorNeutralStroke1Selected: #646f8f;
+  --colorNeutralStroke2: #343c55;
+  --colorNeutralStrokeDisabled: #343c55;
+  --colorNeutralStencil1: #252b43;
+  --colorNeutralStencil2: #1b2034;
+  --colorNeutralShadowAmbient: rgba(0, 0, 0, 0.32);
+  --colorNeutralShadowKey: rgba(0, 0, 0, 0.4);
+  --colorStrokeFocus2: #a5b4fc;
+  --colorStatusDangerForeground1: #f87171;
+}
+
+* { box-sizing: border-box; }
+html, body, #root { height: 100%; }
+body {
+  margin: 0;
+  min-width: 280px;
+  background: var(--cp-bg-elevated);
+  color: var(--cp-text);
+  font-family: var(--fontFamilyBase);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+h1, h2, h3, p, ul { margin: 0; }
+ul { padding: 0; list-style: none; }
+button { font: inherit; color: inherit; border: 0; cursor: pointer; }
+button:disabled { cursor: default; opacity: .55; }
+button:focus-visible { outline: 3px solid var(--cp-accent); outline-offset: 2px; }
+::selection { background: var(--cp-highlight); }
+/* Scrollers outside WebChat's own (the intro, markdown tables) copy its Fluent scrollbar; the Zava Sales app does too. */
+::-webkit-scrollbar, :hover::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track, ::-webkit-scrollbar-corner { background: transparent; }
+::-webkit-scrollbar-button { display: none; }
+::-webkit-scrollbar-thumb { border: 3px solid transparent; border-radius: 10px; background: transparent padding-box; }
+:hover::-webkit-scrollbar-thumb { background-color: var(--colorNeutralForeground5); }
+:hover::-webkit-scrollbar-thumb:hover, ::-webkit-scrollbar-thumb:active { border-width: 1px; background-color: var(--colorNeutralForeground5); }
+@supports not selector(::-webkit-scrollbar) { * { scrollbar-width: thin; scrollbar-color: var(--colorNeutralForeground5) transparent; } }
+
+.pane {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: var(--cp-bg-elevated);
+}
+
+.pane__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 13px 10px 11px 14px;
+  border-bottom: 1px solid var(--cp-border);
+  background: var(--cp-bg-elevated);
+}
+.pane__mark { flex: none; border-radius: 9px; }
+.pane__title { flex: 1; min-width: 0; }
+.pane__title h1 { font-size: 15px; font-weight: 650; line-height: 1.25; }
+.pane__title p {
+  overflow: hidden;
+  color: var(--cp-text-muted);
+  font-size: 12.5px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.pane__actions { display: flex; gap: 2px; }
+
+.icon-button {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--cp-text-muted);
+  transition: background .16s ease, color .16s ease;
+}
+.icon-button:hover { background: var(--cp-surface-soft); color: var(--cp-text); }
+
+.pane__body {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-height: 0;
+  background: var(--cp-bg-elevated);
+}
+
+.intro {
+  display: grid;
+  grid-auto-rows: max-content;
+  align-content: start;
+  gap: 16px;
+  padding: 16px;
+  overflow-y: auto;
+}
+
+.hero {
+  position: relative;
+  display: grid;
+  gap: 6px;
+  padding: 18px 18px 20px;
+  overflow: hidden;
+  border-radius: 16px;
+  background: var(--cp-hero-gradient);
+  color: var(--cp-hero-fg);
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  width: 44px;
+  height: 22px;
+  background:
+    linear-gradient(var(--cp-brand-speed), var(--cp-brand-speed)) right 0 top 0 / 28px 3px no-repeat,
+    linear-gradient(var(--cp-brand-speed), var(--cp-brand-speed)) right 0 top 9px / 44px 3px no-repeat,
+    linear-gradient(var(--cp-brand-speed), var(--cp-brand-speed)) right 0 top 18px / 20px 3px no-repeat;
+  opacity: .9;
+}
+.hero h2 { font-size: 20px; font-weight: 650; line-height: 1.25; }
+.hero p:last-child { max-width: 34ch; padding-right: 28px; color: var(--cp-hero-soft); font-size: 13.5px; }
+
+.capabilities {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+.capabilities li {
+  display: grid;
+  gap: 2px;
+  padding: 10px 12px;
+  border: 1px solid var(--cp-border);
+  border-radius: 12px;
+  background: var(--cp-surface);
+}
+.capabilities strong {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13.5px;
+  font-weight: 600;
+}
+.capabilities strong::before {
+  content: "";
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--cp-dot-1);
+}
+.capabilities li:nth-child(2) strong::before { background: var(--cp-dot-2); }
+.capabilities li:nth-child(3) strong::before { background: var(--cp-dot-3); }
+.capabilities li:nth-child(4) strong::before { background: var(--cp-dot-4); }
+.capabilities span { color: var(--cp-text-muted); font-size: 12.5px; line-height: 1.4; }
+
+.examples { display: grid; gap: 8px; }
+.examples h3 {
+  color: var(--cp-text-muted);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+}
+.examples ul { display: grid; gap: 6px; }
+.examples li {
+  padding: 9px 12px;
+  border: 1px solid var(--colorBrandStroke2);
+  border-radius: 12px;
+  background: var(--cp-accent-soft);
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+.intro__footer { display: grid; gap: 10px; padding-top: 4px; }
+
+.button {
+  min-height: 40px;
+  padding: 0 20px;
+  border-radius: 999px;
+  font-weight: 600;
+  transition: background .16s ease;
+}
+.button--primary { background: var(--cp-action); color: var(--cp-action-fg); }
+.button--primary:hover { background: var(--cp-action-hover); }
+
+.notice {
+  padding: 10px 12px;
+  border: 1px solid var(--cp-border);
+  border-radius: 10px;
+  background: var(--cp-surface);
+  font-size: 13.5px;
+}
+.notice--error { border-color: var(--cp-danger-border); background: var(--cp-danger-soft); }
+
+.status {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  color: var(--cp-text-muted);
+  font-size: 13.5px;
+  text-align: center;
+}
+.fine-print { color: var(--cp-text-muted); font-size: 12.5px; text-align: center; }
+
+.spinner {
+  flex: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid var(--cp-border);
+  border-top-color: var(--cp-accent);
+  border-radius: 50%;
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+.chat { display: flex; flex: 1; flex-direction: column; min-height: 0; }
+/* Transparent, so the chat sits on the same column colour as the app-drawn header. */
+.chat__surface { flex: 1; min-height: 0; background: transparent; }
+.chat__surface > .webchat-fluent { height: 100%; }
+/* WebChat leaves markdown tables unstyled, so narrow bubbles broke cells letter by letter. */
+.chat__surface :is([class*="render-markdown"], .webchat__text-content__markdown) table {
+  display: block;
+  max-width: 100%;
+  margin: 8px 0;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 12.5px;
+  line-height: 1.4;
+}
+.chat__surface :is([class*="render-markdown"], .webchat__text-content__markdown) :is(th, td) {
+  min-width: 9ch;
+  max-width: 28ch;
+  padding: 6px 8px;
+  border-bottom: 1px solid var(--cp-border);
+  text-align: left;
+  vertical-align: top;
+  overflow-wrap: normal;
+  word-break: normal;
+  hyphens: none;
+}
+.chat__surface :is([class*="render-markdown"], .webchat__text-content__markdown) th {
+  color: var(--cp-text-muted);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.chat__problem { display: grid; gap: 8px; margin: 12px; }
+.chat__problem .button { justify-self: start; }
+.chat__loading { display: flex; gap: 8px; align-items: center; margin: auto; color: var(--cp-text-muted); }
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}

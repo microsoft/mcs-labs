@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ImportExportXml xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" OrganizationVersion="9.2.26103.175" OrganizationSchemaType="Standard" CRMServerServiceabilityVersion="9.2.26103.00175">
+  <Entities />
+  <Roles />
+  <Workflows />
+  <FieldSecurityProfiles />
+  <Templates />
+  <EntityMaps />
+  <EntityRelationships />
+  <OrganizationSettings />
+  <optionsets />
+  <Dashboards />
+  <WebResources />
+  <CustomControls />
+  <AppModuleSiteMaps />
+  <AppModules />
+  <EntityDataProviders />
+  <connectionreferences>
+    <connectionreference connectionreferencelogicalname="new_sharedcommondataserviceforapps_21aab8f5">
+      <connectionreferencedisplayname>Microsoft Dataverse MCP Server</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="new_sharedworkiqmcp_c26b178f">
+      <connectionreferencedisplayname>Work IQ MCP Server</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_workiqmcp</connectorid>
+      <iscustomizable>1</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="zava_ZavaSalesCopilot.cr.shared_commondataserviceforapps.d3cfe1a9-6098-42af-9db0-70559d2b88a8">
+      <connectionreferencedisplayname>zava_ZavaSalesCopilot.cr.shared_commondataserviceforapps.d3cfe1a9-6098-42af-9db0-70559d2b88a8</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps</connectorid>
+      <iscustomizable>0</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+    <connectionreference connectionreferencelogicalname="zava_ZavaSalesCopilot.cr.shared_workiqmcp">
+      <connectionreferencedisplayname>zava_ZavaSalesCopilot.cr.shared_workiqmcp</connectionreferencedisplayname>
+      <connectorid>/providers/Microsoft.PowerApps/apis/shared_workiqmcp</connectorid>
+      <iscustomizable>0</iscustomizable>
+      <promptingbehavior>0</promptingbehavior>
+      <statecode>0</statecode>
+      <statuscode>1</statuscode>
+    </connectionreference>
+  </connectionreferences>
+  <Languages>
+    <Language>1033</Language>
+  </Languages>
+</ImportExportXml>

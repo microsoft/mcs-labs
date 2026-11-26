@@ -1,0 +1,363 @@
+import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
+import { describe, it } from 'node:test'
+import { configuredClientId, PARENT_ORIGINS, TENANT_ID, ZAVA_APP_ORIGIN } from '../src/config.ts'
+import { closeMessage, HANDSHAKE_TIMEOUT_MS, parseParentMessage, PROTOCOL, readyMessage, resolveParentOrigin, stateMessage, subscribeToParentMessages } from '../src/handshake.ts'
+import { identityProblem, needsRefresh } from '../src/identity.ts'
+import { firstName, INTRO_PROMPTS, STARTER_PROMPTS, starterPromptMiddleware, WELCOME_ID, welcomeActivity, welcomeMiddleware, welcomeText } from '../src/welcome.ts'
+
+const OBJECT_ID = 'aaaa0000-0000-4000-8000-000000000001'
+const parentWindow = {}
+const parent = { origin: ZAVA_APP_ORIGIN, window: parentWindow }
+const message = (data, overrides = {}) => ({ origin: ZAVA_APP_ORIGIN, source: parentWindow, data, ...overrides })
+const init = (fields = {}) => ({ type: 'zava-pane:init', v: PROTOCOL, tenantId: TENANT_ID, objectId: OBJECT_ID, ...fields })
+
+describe('display name', () => {
+  it('uses Zava Agent across chat, sign-in, recovery and accessible labels', () => {
+    for (const file of ['index.html', 'redirect.html', 'relay.html', 'src/App.tsx',
+      'src/Chat.tsx', 'src/auth.ts', 'src/redirect.ts', 'src/relay.ts', 'src/welcome.ts']) {
+      const source = readFileSync(new URL(`../${file}`, import.meta.url), 'utf8')
+      assert.match(source, /Zava Agent/, file)
+      assert.doesNotMatch(source, /Zava(?: Sales)? Copilot|sales copilot|Copilot Studio training account/i, file)
+    }
+  })
+})
+
+describe('configuredClientId', () => {
+  it('accepts only GUIDs and normalises case', () => {
+    assert.equal(configuredClientId(undefined), undefined)
+    assert.equal(configuredClientId(''), undefined)
+    assert.equal(configuredClientId('not-a-guid'), undefined)
+    assert.equal(configuredClientId(`${OBJECT_ID}x`), undefined)
+    assert.equal(configuredClientId(OBJECT_ID.toUpperCase()), OBJECT_ID)
+  })
+})
+
+describe('resolveParentOrigin', () => {
+  it('uses the immediate ancestor when it is allowed', () => {
+    assert.equal(resolveParentOrigin([ZAVA_APP_ORIGIN, '@@SHELL_ORIGIN@@'], '', PARENT_ORIGINS), ZAVA_APP_ORIGIN)
+  })
+
+  it('rejects an unknown immediate ancestor even if the referrer is allowed', () => {
+    assert.equal(resolveParentOrigin(['https://evil.example'], `${ZAVA_APP_ORIGIN}/`, PARENT_ORIGINS), undefined)
+  })
+
+  it('falls back to an https referrer origin', () => {
+    assert.equal(resolveParentOrigin(undefined, `${ZAVA_APP_ORIGIN}/some/page?x=1`, PARENT_ORIGINS), ZAVA_APP_ORIGIN)
+    assert.equal(resolveParentOrigin([], `${ZAVA_APP_ORIGIN}/`, PARENT_ORIGINS), ZAVA_APP_ORIGIN)
+  })
+
+  it('rejects missing, malformed, non-https and unlisted referrers', () => {
+    assert.equal(resolveParentOrigin(undefined, '', PARENT_ORIGINS), undefined)
+    assert.equal(resolveParentOrigin(undefined, 'not a url', PARENT_ORIGINS), undefined)
+    assert.equal(resolveParentOrigin(undefined, ZAVA_APP_ORIGIN.replace('https:', 'http:'), PARENT_ORIGINS), undefined)
+    assert.equal(resolveParentOrigin(undefined, '@@SHELL_ORIGIN@@/', PARENT_ORIGINS), undefined)
+  })
+})
+
+describe('parseParentMessage', () => {
+  it('accepts a valid init and normalises identifiers', () => {
+    const parsed = parseParentMessage(message(init({
+      tenantId: TENANT_ID.toUpperCase(),
+      objectId: OBJECT_ID.toUpperCase(),
+      loginHint: 'seller@example.invalid',
+      theme: 'dark',
+    })), parent, TENANT_ID)
+    assert.deepEqual(parsed, {
+      type: 'init',
+      init: { tenantId: TENANT_ID, objectId: OBJECT_ID, loginHint: 'seller@example.invalid', theme: 'dark' },
+    })
+  })
+
+  it('requires tenant and user identity but not optional hints, and drops unknown fields', () => {
+    assert.deepEqual(parseParentMessage(message(init({ extra: 'ignored' })), parent, TENANT_ID), { type: 'init', init: { tenantId: TENANT_ID, objectId: OBJECT_ID } })
+  })
+
+  it('keeps the host-header opt-in only when it is true', () => {
+    assert.deepEqual(parseParentMessage(message(init({ hostHeader: true })), parent, TENANT_ID), { type: 'init', init: { tenantId: TENANT_ID, objectId: OBJECT_ID, hostHeader: true } })
+    assert.deepEqual(parseParentMessage(message(init({ hostHeader: false })), parent, TENANT_ID), { type: 'init', init: { tenantId: TENANT_ID, objectId: OBJECT_ID } })
+  })
+
+  it('accepts new-chat requests and ignores any extra fields on them', () => {
+    assert.deepEqual(parseParentMessage(message({ type: 'zava-pane:new-chat', v: PROTOCOL, prompt: 'ignored' }), parent, TENANT_ID), { type: 'new-chat' })
+    assert.equal(parseParentMessage(message({ type: 'zava-pane:new-chat', v: PROTOCOL }, { origin: 'https://evil.example' }), parent, TENANT_ID), undefined)
+  })
+
+  it('accepts theme updates', () => {
+    assert.deepEqual(parseParentMessage(message({ type: 'zava-pane:theme', v: PROTOCOL, theme: 'light' }), parent, TENANT_ID), { type: 'theme', theme: 'light' })
+    assert.equal(parseParentMessage(message({ type: 'zava-pane:theme', v: PROTOCOL, theme: 'neon' }), parent, TENANT_ID), undefined)
+  })
+
+  const rejected = {
+    'another origin': message(init(), { origin: 'https://evil.example' }),
+    'another window': message(init(), { source: {} }),
+    'no version': message({ ...init(), v: undefined }),
+    'a future version': message(init({ v: PROTOCOL + 1 })),
+    'an unknown type': message(init({ type: 'zava-pane:token' })),
+    'another tenant': message(init({ tenantId: '00000000-0000-0000-0000-000000000000' })),
+    'a malformed tenant': message(init({ tenantId: 'common' })),
+    'a missing object id': message(init({ objectId: undefined })),
+    'a malformed object id': message(init({ objectId: 'seller' })),
+    'a malformed login hint': message(init({ loginHint: '<img src=x>@example.com' })),
+    'a login hint without a domain': message(init({ loginHint: 'seller' })),
+    'an unknown theme': message(init({ theme: 'neon' })),
+    'a non-boolean host header': message(init({ hostHeader: 'yes' })),
+    'non-object data': message('zava-pane:init'),
+    'array data': message([init()]),
+    'null data': message(null),
+  }
+  for (const [label, event] of Object.entries(rejected)) {
+    it(`rejects ${label}`, () => {
+      assert.equal(parseParentMessage(event, parent, TENANT_ID), undefined)
+    })
+  }
+})
+
+describe('parent handshake lifecycle', () => {
+  function listen(t) {
+    t.mock.timers.enable({ apis: ['setTimeout'] })
+    const listeners = new Set()
+    const events = []
+    const target = {
+      addEventListener: (type, listener) => { assert.equal(type, 'message'); listeners.add(listener) },
+      removeEventListener: (type, listener) => { assert.equal(type, 'message'); listeners.delete(listener) },
+    }
+    const stop = subscribeToParentMessages(target, parent, TENANT_ID, {
+      onInit: value => events.push({ type: 'init', init: value }),
+      onTheme: theme => events.push({ type: 'theme', theme }),
+      onNewChat: () => events.push({ type: 'new-chat' }),
+      onTimeout: () => events.push({ type: 'timeout' }),
+    })
+    t.after(stop)
+    return { events, stop, emit: event => { for (const listener of listeners) listener(event) } }
+  }
+
+  const accepted = { type: 'init', init: { tenantId: TENANT_ID, objectId: OBJECT_ID } }
+
+  it('reports a missing identity at the deadline without accepting an init', t => {
+    const host = listen(t)
+    t.mock.timers.tick(HANDSHAKE_TIMEOUT_MS - 1)
+    assert.deepEqual(host.events, [])
+    t.mock.timers.tick(1)
+    assert.deepEqual(host.events, [{ type: 'timeout' }])
+    t.mock.timers.tick(HANDSHAKE_TIMEOUT_MS)
+    assert.deepEqual(host.events, [{ type: 'timeout' }])
+  })
+
+  it('accepts a valid identity and cancels the timeout', t => {
+    const host = listen(t)
+    host.emit(message(init()))
+    t.mock.timers.tick(HANDSHAKE_TIMEOUT_MS)
+    assert.deepEqual(host.events, [accepted])
+  })
+
+  it('accepts a valid late identity instead of permanently discarding it', t => {
+    const host = listen(t)
+    t.mock.timers.tick(HANDSHAKE_TIMEOUT_MS)
+    host.emit(message(init()))
+    assert.deepEqual(host.events, [{ type: 'timeout' }, accepted])
+  })
+
+  it('rejects missing or untrusted identity both before and after the deadline', t => {
+    const host = listen(t)
+    const rejected = [
+      message(init({ objectId: undefined })),
+      message(init({ tenantId: '11111111-1111-1111-1111-111111111111' })),
+      message(init(), { origin: 'https://evil.example' }),
+      message(init(), { source: {} }),
+    ]
+    for (const event of rejected) host.emit(event)
+    t.mock.timers.tick(HANDSHAKE_TIMEOUT_MS)
+    for (const event of rejected) host.emit(event)
+    assert.deepEqual(host.events, [{ type: 'timeout' }])
+  })
+
+  it('does not switch identity after the first valid init', t => {
+    const host = listen(t)
+    host.emit(message(init()))
+    host.emit(message(init({ objectId: '11111111-1111-1111-1111-111111111111' })))
+    assert.deepEqual(host.events, [accepted])
+  })
+
+  it('applies themes without using them as identity or ending the handshake', t => {
+    const host = listen(t)
+    host.emit(message({ type: 'zava-pane:theme', v: PROTOCOL, theme: 'dark' }))
+    t.mock.timers.tick(HANDSHAKE_TIMEOUT_MS)
+    host.emit(message(init({ theme: 'light' })))
+    host.emit(message({ type: 'zava-pane:theme', v: PROTOCOL, theme: 'dark' }))
+    assert.deepEqual(host.events, [
+      { type: 'theme', theme: 'dark' },
+      { type: 'timeout' },
+      { type: 'init', init: { ...accepted.init, theme: 'light' } },
+      { type: 'theme', theme: 'light' },
+      { type: 'theme', theme: 'dark' },
+    ])
+  })
+
+  it('starts a new chat only after the host has identified the user', t => {
+    const host = listen(t)
+    const newChat = message({ type: 'zava-pane:new-chat', v: PROTOCOL })
+    host.emit(newChat)
+    host.emit(message(init()))
+    host.emit(newChat)
+    host.emit(message(newChat.data, { source: {} }))
+    assert.deepEqual(host.events, [accepted, { type: 'new-chat' }])
+  })
+
+  it('removes its listener and timer when the pane unmounts', t => {
+    const host = listen(t)
+    host.stop()
+    host.emit(message(init()))
+    t.mock.timers.tick(HANDSHAKE_TIMEOUT_MS)
+    assert.deepEqual(host.events, [])
+  })
+})
+
+describe('pane messages', () => {
+  it('are versioned and carry no identity data', () => {
+    assert.deepEqual(readyMessage(), { type: 'zava-pane:ready', v: PROTOCOL, hostHeader: true })
+    assert.deepEqual(closeMessage(), { type: 'zava-pane:close', v: PROTOCOL })
+    assert.deepEqual(stateMessage(true), { type: 'zava-pane:state', v: PROTOCOL, signedIn: true })
+    assert.deepEqual(stateMessage(false), { type: 'zava-pane:state', v: PROTOCOL, signedIn: false })
+  })
+})
+
+describe('identityProblem', () => {
+  it('requires the training tenant', () => {
+    assert.equal(identityProblem(undefined, { tenantId: TENANT_ID }), 'tenant')
+    assert.equal(identityProblem({ tid: 'aaaa0000-0000-4000-8000-000000000002' }, { tenantId: TENANT_ID }), 'tenant')
+    assert.equal(identityProblem({ tid: TENANT_ID.toUpperCase() }, { tenantId: TENANT_ID }), undefined)
+  })
+
+  it('requires the app user when the host supplied one', () => {
+    const expected = { tenantId: TENANT_ID, objectId: OBJECT_ID }
+    assert.equal(identityProblem({ tid: TENANT_ID }, expected), 'user')
+    assert.equal(identityProblem({ tid: TENANT_ID, oid: '11111111-1111-1111-1111-111111111111' }, expected), 'user')
+    assert.equal(identityProblem({ tid: TENANT_ID, oid: OBJECT_ID.toUpperCase() }, expected), undefined)
+  })
+})
+
+describe('needsRefresh', () => {
+  const now = new Date('2026-11-05T12:00:00Z')
+  const inMinutes = minutes => new Date(now.getTime() + minutes * 60_000)
+
+  it('refreshes unknown or short-lived tokens', () => {
+    assert.equal(needsRefresh(null, now), true)
+    assert.equal(needsRefresh(undefined, now), true)
+    assert.equal(needsRefresh(inMinutes(-1), now), true)
+    assert.equal(needsRefresh(inMinutes(30), now), true)
+  })
+
+  it('keeps tokens with most of their lifetime left', () => {
+    assert.equal(needsRefresh(inMinutes(46), now), false)
+    assert.equal(needsRefresh(inMinutes(10), now, 5 * 60_000), false)
+  })
+})
+
+describe('welcome', () => {
+  it('uses a safe first name only', () => {
+    assert.equal(firstName('Alex Example'), 'Alex')
+    assert.equal(firstName('  Zoë  Martin '), 'Zoë')
+    assert.equal(firstName("O'Neil-Smith"), "O'Neil-Smith")
+    assert.equal(firstName(''), undefined)
+    assert.equal(firstName(undefined), undefined)
+    assert.equal(firstName('<b>Alex</b>'), undefined)
+    assert.equal(firstName('seller@example.invalid'), undefined)
+  })
+
+  it('invites pipeline, lead, Work IQ and record questions and promises confirmation', () => {
+    const text = welcomeText('Alex Example')
+    assert.match(text, /^Hi Alex!/)
+    assert.match(welcomeText(), /^Hi there!/)
+    for (const topic of ['pipeline', 'leads', 'Work IQ', 'create and update CRM records']) assert.ok(text.includes(topic), topic)
+    assert.match(text, /ask before I save/)
+  })
+
+  it('starter prompts cover pipeline, leads and record creation', () => {
+    assert.equal(STARTER_PROMPTS.length, 6)
+    const prompts = STARTER_PROMPTS.map(starter => starter.prompt).join(' ')
+    assert.match(prompts, /pipeline/i)
+    assert.match(prompts, /leads?/i)
+    assert.match(prompts, /create a new lead/i)
+    assert.match(prompts, /calendar/i)
+    for (const starter of STARTER_PROMPTS) {
+      assert.ok(starter.title.length <= 24, starter.title)
+      assert.ok(starter.subtitle.length <= 40, starter.subtitle)
+    }
+  })
+
+  it('shows one pipeline, one leads and one create prompt before sign-in', () => {
+    assert.equal(INTRO_PROMPTS.length, 3)
+    const [pipeline, leads, create] = INTRO_PROMPTS.map(starter => starter.prompt)
+    assert.match(pipeline, /pipeline/i)
+    assert.match(leads, /leads/i)
+    assert.match(create, /create a new lead/i)
+  })
+
+  it('builds a WebChat pre-chat message with clickable starters', () => {
+    const now = new Date('2026-11-05T12:00:00Z')
+    const activity = welcomeActivity({ name: 'Alex Example', now })
+    assert.equal(activity.id, WELCOME_ID)
+    assert.equal(activity.from.role, 'bot')
+    assert.equal(activity.from.name, 'Zava Agent')
+    assert.equal(activity.entities[0].name, 'Zava Agent')
+    assert.equal(activity.timestamp, now.toISOString())
+    assert.equal(activity.channelData['webchat:sequence-id'], -1)
+    assert.deepEqual(activity.entities[0].keywords, ['PreChatMessage'])
+    assert.match(activity.entities[0].image, /^data:image\/svg\+xml,/)
+    assert.equal(activity.suggestedActions.actions.length, STARTER_PROMPTS.length)
+    activity.suggestedActions.actions.forEach((action, index) => {
+      assert.equal(action.type, 'messageBack')
+      assert.equal(action.title, STARTER_PROMPTS[index].title)
+      assert.equal(action.displayText, STARTER_PROMPTS[index].prompt)
+    })
+  })
+
+  it('middleware passes actions through and shows the welcome once after connect', () => {
+    const dispatched = []
+    const seen = []
+    const middleware = welcomeMiddleware(() => ({ id: WELCOME_ID }))
+    const handle = middleware({ dispatch: action => dispatched.push(action) })(action => { seen.push(action); return `handled ${action?.type}` })
+
+    assert.equal(handle({ type: 'DIRECT_LINE/CONNECT' }), 'handled DIRECT_LINE/CONNECT')
+    assert.equal(dispatched.length, 0)
+    assert.equal(handle({ type: 'DIRECT_LINE/CONNECT_FULFILLED' }), 'handled DIRECT_LINE/CONNECT_FULFILLED')
+    handle({ type: 'DIRECT_LINE/CONNECT_FULFILLED' })
+    handle(undefined)
+    assert.deepEqual(dispatched, [{ type: 'DIRECT_LINE/INCOMING_ACTIVITY', payload: { activity: { id: WELCOME_ID } } }])
+    assert.equal(seen.length, 4)
+  })
+
+  it('sends a starter prompt as soon as its card fills the send box', () => {
+    const order = []
+    const middleware = starterPromptMiddleware()
+    const handle = middleware({ dispatch: action => order.push(`dispatch ${action.type}`) })(action => { order.push(`next ${action?.type}`); return 'handled' })
+
+    assert.equal(handle({ type: 'WEB_CHAT/SET_SEND_BOX', payload: { text: STARTER_PROMPTS[1].prompt } }), 'handled')
+    assert.deepEqual(order, ['next WEB_CHAT/SET_SEND_BOX', 'dispatch WEB_CHAT/SUBMIT_SEND_BOX'])
+    const submitted = []
+    starterPromptMiddleware()({ dispatch: action => submitted.push(action) })(() => undefined)({ type: 'WEB_CHAT/SET_SEND_BOX', payload: { text: STARTER_PROMPTS[5].prompt } })
+    assert.deepEqual(submitted, [{ type: 'WEB_CHAT/SUBMIT_SEND_BOX', payload: { method: 'keyboard' } }])
+  })
+
+  it('leaves typed text, other actions and unknown prompts in the send box', () => {
+    const dispatched = []
+    const seen = []
+    const handle = starterPromptMiddleware([{ title: 'T', subtitle: 'S', prompt: 'Only this' }])({ dispatch: action => dispatched.push(action) })(action => { seen.push(action); return 'handled' })
+
+    for (const action of [
+      { type: 'WEB_CHAT/SET_SEND_BOX', payload: { text: 'Only thi' } },
+      { type: 'WEB_CHAT/SET_SEND_BOX', payload: { text: STARTER_PROMPTS[0].prompt } },
+      { type: 'WEB_CHAT/SET_SEND_BOX', payload: { text: ' Only this' } },
+      { type: 'WEB_CHAT/SET_SEND_BOX', payload: {} },
+      { type: 'WEB_CHAT/SET_SEND_BOX' },
+      { type: 'WEB_CHAT/SEND_MESSAGE', payload: { text: 'Only this' } },
+      { type: 'DIRECT_LINE/CONNECT_FULFILLED' },
+      undefined,
+    ]) assert.equal(handle(action), 'handled')
+    assert.equal(dispatched.length, 0)
+    assert.equal(seen.length, 8)
+    handle({ type: 'WEB_CHAT/SET_SEND_BOX', payload: { text: 'Only this' } })
+    assert.equal(dispatched.length, 1)
+  })
+})

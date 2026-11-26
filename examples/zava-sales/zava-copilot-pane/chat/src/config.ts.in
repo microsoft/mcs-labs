@@ -1,0 +1,26 @@
+// Fixed, non-secret identifiers for the training-tenant Zava Sales agent.
+export const TENANT_ID = '@@TENANT_ID@@'
+export const ENVIRONMENT_ID = '@@ENVIRONMENT_ID@@'
+export const AGENT_SCHEMA = 'zava_ZavaSalesCopilot'
+export const AGENT_API_ORIGIN = '@@AGENT_API_ORIGIN@@'
+export const AGENT_SCOPE = 'https://api.powerplatform.com/.default'
+
+export const LOGIN_ORIGIN = 'https://login.microsoftonline.com'
+export const AUTHORITY = `${LOGIN_ORIGIN}/${TENANT_ID}`
+
+export const PANE_ORIGIN = '@@PANE_ORIGIN@@'
+export const REDIRECT_PATH = '/redirect.html'
+export const RELAY_PATH = '/relay.html'
+
+export const ZAVA_APP_ORIGIN = '@@APP_ORIGIN@@'
+export const PARENT_ORIGINS: readonly string[] = [ZAVA_APP_ORIGIN]
+
+export const GUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+export function isGuid(value: unknown): value is string {
+  return typeof value === 'string' && GUID.test(value)
+}
+
+export function configuredClientId(value: unknown): string | undefined {
+  return isGuid(value) ? value.toLowerCase() : undefined
+}

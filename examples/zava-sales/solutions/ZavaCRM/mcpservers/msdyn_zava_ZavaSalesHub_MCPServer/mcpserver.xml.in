@@ -1,0 +1,10 @@
+<mcpserver name="msdyn_zava_ZavaSalesHub_MCPServer">
+  <description>MCP Server for app Zava Sales Hub</description>
+  <displayname>Zava Sales Hub MCP Server</displayname>
+  <iscustom>0</iscustom>
+  <iscustomizable>1</iscustomizable>
+  <isremote>0</isremote>
+  <serverurl>https://agent365.svc.cloud.microsoft/mcp/environments/@@ENVIRONMENT_ID@@/servers/msdyn_zava_ZavaSalesHub_MCPServer</serverurl>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</mcpserver>

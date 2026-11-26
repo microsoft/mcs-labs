@@ -1,0 +1,11 @@
+<dvtablesearch dvtablesearchid="a0409c10-edd7-f111-a05b-70a8a59cece6">
+  <appmoduleuniquename>zava_ZavaSalesHub</appmoduleuniquename>
+  <iscustomizable>1</iscustomizable>
+  <m365appmoduleid>
+    <uniquename>zava_ZavaSalesHub</uniquename>
+  </m365appmoduleid>
+  <name>M365_Primary_model_zava_ZavaSalesHub</name>
+  <searchtype>0</searchtype>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</dvtablesearch>

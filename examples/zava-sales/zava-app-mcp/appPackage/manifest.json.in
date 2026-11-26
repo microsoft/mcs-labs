@@ -1,0 +1,39 @@
+{
+  "$schema": "https://developer.microsoft.com/en-us/json-schemas/teams/v1.24/MicrosoftTeams.schema.json",
+  "manifestVersion": "1.24",
+  "version": "1.22.0",
+  "id": "@@MODEL_APP_ID@@",
+  "developer": {
+    "name": "Zava workshop demo",
+    "websiteUrl": "@@DATAVERSE_ORIGIN@@/main.aspx?appid=@@MODEL_APP_ID@@",
+    "privacyUrl": "https://privacy.microsoft.com/en-us/privacystatement",
+    "termsOfUseUrl": "https://www.microsoft.com/en-us/servicesagreement"
+  },
+  "icons": {
+    "color": "color.png",
+    "outline": "outline.png"
+  },
+  "name": {
+    "short": "Zava Sales Hub",
+    "full": "Zava Sales Hub"
+  },
+  "description": {
+    "short": "Zava's sales hub: accounts, contacts, leads, pipeline and forecast.",
+    "full": "Work with the Zava Sales Hub CRM in Microsoft 365 Copilot. Browse accounts, contacts, leads and the open pipeline in interactive grids, open records in forms, create leads and log activities, and get answers grounded in Zava's CRM data. The agent uses your own Zava Sales Hub permissions, and nothing is created, changed, deleted or reassigned until you confirm it."
+  },
+  "accentColor": "#14B8A6",
+  "composeExtensions": [],
+  "copilotAgents": {
+    "declarativeAgents": [
+      {
+        "id": "declarativeAgentPowerApps",
+        "file": "declarativeAgent.json"
+      }
+    ]
+  },
+  "permissions": [
+    "identity",
+    "messageTeamMembers"
+  ],
+  "validDomains": []
+}
