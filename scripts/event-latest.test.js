@@ -48,6 +48,6 @@ test('syndication preserves the opt-in flag and stable curriculum identifiers', 
     const item = buildItem({ collection, slug, frontMatter: doc.data, body: doc.content, baseUrl: 'https://example.test' });
     assert.equal(item.metadata.latest, true);
     assert.equal(item.metadata.event_id, slug);
-    assert.equal(item.url, `https://example.test/${collection}/${slug}/`);
+    assert.equal(item.url, `https://example.test${doc.data.permalink || `/${collection}/${slug}/`}`);
   }
 });

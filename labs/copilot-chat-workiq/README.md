@@ -1,6 +1,6 @@
 # Microsoft Copilot Chat and Work IQ
 
-Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/).
 
 You'll research a market question, apply a company policy and compare store results. You'll check the sources behind the answers. Optional exercises introduce Pages, Researcher and Analyst.
 

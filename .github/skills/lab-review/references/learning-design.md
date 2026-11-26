@@ -30,6 +30,8 @@ Apply these when creating, converting, updating or reviewing either lab format:
   classic copies use `_labs/<slug>.md`. Keep `labs/<slug>/README.md`, asset folders,
   agenda references and public URLs unprefixed. Never start the canonical slug with
   `mission-` or keep both site copies. A display-name refresh does not rename URLs.
+  When an event URL is explicitly renamed, update agenda links in both lab copies
+  and every prompt occurrence; preserve the old route and stable event context IDs.
 - **Preserve the creator's walkthrough.** Keep the scenario, use-case and teaching-step
   order, exact asset names and ordered prompt occurrences. Mark only trailing extensions
   optional; keep an earlier exercise required rather than moving it. Preserve advertised

@@ -24,7 +24,7 @@ const blocks = text => [...text.matchAll(/^([ \t]*)```([^\n`]*)\n([\s\S]*?)^\1``
     language: info.trim(),
     text: block.replace(/\n$/, '').split('\n').map(line => line.startsWith(indent) ? line.slice(indent.length) : line).join('\n'),
   }));
-const normalize = text => text.replaceAll('/events/bootcamp-latest/', '/events/architecture-bootcamp/')
+const normalize = text => text.replaceAll('/events/architecture-bootcamp-classic/', '/events/copilot-agents-bootcamp/')
   // The guided lab already explicitly requests both formats after the live-run fix.
   .replace(/^Export the latest snapshot\.$/, 'Export the latest snapshot as JSON and Markdown.');
 

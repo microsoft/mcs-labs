@@ -302,4 +302,4 @@ The toolkit uses an unpacked folder, not the Agent Builder ZIP. Each agent has i
 - [Create a declarative agent with Agents Toolkit](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/build-declarative-agents)
 - [Declarative agent schema v1.9, including agent skills](https://learn.microsoft.com/en-us/microsoft-365/copilot/extensibility/declarative-agent-manifest-1.9)
 
-Continue the learning path in [Architecture Bootcamp Latest]({{ '/events/bootcamp-latest/' | relative_url }}).
+Continue the learning path in [Architecture Bootcamp Latest]({{ '/events/architecture-bootcamp-classic/' | relative_url }}).

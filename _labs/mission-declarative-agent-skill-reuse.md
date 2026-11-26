@@ -340,7 +340,7 @@ mission_lab:
 
 # Reuse a Cowork skill in a declarative agent
 
-Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/).
 
 You'll add a hotel-report skill to a declarative agent, use it to identify issues in an annual report and check the results. You'll prepare an evidence table and email text for a teammate to review. The agent will not send the email or create Planner tasks.
 

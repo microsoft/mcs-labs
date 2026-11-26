@@ -513,7 +513,7 @@ mission_lab:
 
 # Workflows
 
-Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/).
 
 You'll start with a workflow that plans a To Do task. Then you'll classify email and review an AI-drafted reply before approving it to be sent.
 

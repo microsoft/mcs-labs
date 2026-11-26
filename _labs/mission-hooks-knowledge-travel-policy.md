@@ -430,7 +430,7 @@ mission_lab:
 
 # Hooks and Knowledge: Travel Policy Agent
 
-Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/).
 
 You'll create a Travel Policy Agent, add a workflow that loads the traveler's location when a session starts, and check its answers against the relevant SharePoint policy. Prompt redaction and checks on a simulated booking tool are optional.
 

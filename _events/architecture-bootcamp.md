@@ -3,6 +3,7 @@ layout: event
 title: "Copilot & Agents Bootcamp"
 description: "Three days, 17 modules, and 11 guided labs across Microsoft Copilot and Microsoft Copilot Studio: Copilot Chat, Work IQ, Cowork, declarative agents, harnesses, skills, knowledge, tools, apps, workflows, and agent integration. Close with lifecycle management, analytics, coding agents, AI FinOps, agent identity, and the Copilot Agent Kit."
 event_id: architecture-bootcamp
+permalink: /events/copilot-agents-bootcamp/
 latest: true
 order: 2
 labs:
@@ -32,4 +33,4 @@ labs:
 
 Explore Microsoft Copilot and Microsoft Copilot Studio through 17 modules and 11 hands-on labs. Every lab uses guided exercises with copyable prompts, expected results, and quick checks. Follow the three-day agenda below; optional extensions sit outside the core lab timeboxes.
 
-The [classic-format edition]({{ '/events/bootcamp-latest/' | relative_url }}) remains available by direct link with the same module schedule.
+The [classic-format edition]({{ '/events/architecture-bootcamp-classic/' | relative_url }}) remains available by direct link with the same module schedule.

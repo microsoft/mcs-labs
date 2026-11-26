@@ -1,6 +1,6 @@
 # Instructions and Skills Authoring
 
-Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/).
 
 You'll build an RFP Response agent, inspect its skill and use it to prepare a proposal and chart. You'll check both against the supplied source material. Optional exercises cover writing your own skill, inspecting the runtime and using a skill generator.
 
