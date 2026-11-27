@@ -103,8 +103,10 @@ Apply these when creating, converting, updating or reviewing either lab format:
   the control is visible on that tab's card or panel. In a designer, say whether the
   learner is changing an existing item or adding another; check which item changed.
   When an icon has no verified text label, identify its symbol, location and purpose
-  rather than inventing a tooltip or menu label. Distinguish instruction sections
-  from UI controls, name the tab or designer surface when needed to locate a control,
+  rather than inventing a tooltip or menu label. Give the complete in-app action before
+  pointing to a screenshot. A **Show me** or help label is not a product control. If a
+  pointer helps, put it in a separate sentence: "For a screenshot, expand **Show me**
+  on this lab page." Name the tab or designer surface when needed to locate a control,
   and apply corrected labels to repeated steps and troubleshooting too.
   Distinguish tools added inside an agent from connector nodes added to a workflow.
   For run inspection, give the workflow, Activity tab, run selection and node to
