@@ -147,7 +147,9 @@
   .hero-proof img { width: 100%; }
   .image-link { display: flex; align-items: center; justify-content: space-between; padding: 9px 14px; background: var(--bg2); font-size: 14px; font-weight: 600; }
   & figcaption { margin-top: 12px; color: var(--muted); font-size: 14px; line-height: 1.5; }
-  .route ol { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); padding: 18px 0; margin: 0; list-style: none; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+  .exercise-group, .homework-label { display: block; color: var(--accent-text); font: 650 1em/1.4 var(--font); letter-spacing: normal; }
+  .exercise-group { margin: 14px 0 0; padding-top: 12px; border-top: 1px solid var(--border); }
+  .route ol { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); padding: 0; margin: 0; list-style: none; }
   .route a { display: flex; gap: 10px; align-items: center; padding: 12px 6px; text-decoration: none; color: var(--text); border-radius: 10px; }
   .route a:hover { background: var(--tint); }
   .route-number, .rail-number { display: grid; place-items: center; width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; border: 1px solid var(--border-strong); color: var(--accent-text); font-size: 14px; }
@@ -164,6 +166,7 @@
   .lab-rail ol { list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
   .lab-rail a { display: flex; align-items: center; gap: 10px; color: var(--muted); text-decoration: none; font-size: 15px; line-height: 1.35; padding: 9px 6px; border-radius: 10px; }
   .lab-rail a:hover { color: var(--text); background: var(--tint); }
+  .lab-rail a strong { font-weight: inherit; }
   .lab-rail small { display: block; font-size: 12px; color: var(--soft); margin-top: 3px; }
   .lab-rail [aria-current="step"] { color: var(--accent-text); background: var(--tint); }
   .ready { padding-bottom: 12px; }
@@ -184,6 +187,7 @@
   .mission-heading { display: flex; gap: 20px; align-items: flex-start; }
   .mission-number { display: grid; place-items: center; width: 58px; height: 58px; flex-shrink: 0; border: 1px solid var(--tint-border); border-radius: 17px; background: var(--tint); color: var(--accent-text); font: 700 28px/1 var(--font-display); }
   .mission-heading h2 { margin: 2px 0 9px; }
+  .homework-label { margin-bottom: 4px; font-size: calc(16px * var(--font-scale, 1)); }
   .mission-meta { color: var(--muted); font-size: 15px; margin: 0; }
   .mission-meta span { margin: 0 6px; }
   .brief { font-size: calc(17px * var(--font-scale, 1)); line-height: 1.6; margin-top: 24px; }
@@ -240,6 +244,9 @@
   .stuck dd { margin: 4px 0 16px; color: var(--muted); font-size: calc(16px * var(--font-scale, 1)); }
   .stuck dd:last-child p { margin-bottom: 0; }
   .mission-actions { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; margin-top: 28px; padding-top: 24px; border-top: 1px dashed var(--border); }
+  .homework-stop { flex: 0 0 100%; padding: clamp(16px, 3vw, 28px); border: 2px solid var(--accent); border-top-width: 6px; border-radius: var(--radius); background: var(--card); }
+  .homework-stop h3 { font-size: calc(clamp(22px, 2.5vw, 28px) * var(--font-scale, 1)); line-height: 1.2; }
+  .homework-stop .btn { margin: 4px 6px 4px 0; }
   .finale { margin-top: 72px; border-top: 1px solid var(--border); padding: 56px 0 72px; }
   .takeaways { display: grid; grid-template-columns: 150px minmax(0, 1fr); gap: 12px 20px; margin: 32px 0; font-size: 1em; }
   .takeaways dt { font-weight: 650; color: var(--accent-text); }
