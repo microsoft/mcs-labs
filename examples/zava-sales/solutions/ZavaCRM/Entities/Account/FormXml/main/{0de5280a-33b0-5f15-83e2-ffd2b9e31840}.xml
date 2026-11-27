@@ -1,0 +1,385 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{0de5280a-33b0-5f15-83e2-ffd2b9e31840}</formid>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <FormPresentation>0</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form showImage="true">
+      <tabs>
+        <tab name="SUMMARY" id="{971ff135-ce4e-5ca0-b4fd-6210f5a51d48}" IsUserDefined="0" showlabel="true" expanded="true" verticallayout="true" locklevel="0">
+          <labels>
+            <label description="Summary" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="33%">
+              <sections>
+                <section name="account" showlabel="true" showbar="false" locklevel="0" id="{231929f0-e3a4-5f4e-8787-bb4dfdefeaa7}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Account" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{54b605d8-fcad-52b8-a492-56d111cd81e4}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Account Name" languagecode="1033" />
+                        </labels>
+                        <control id="name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="name" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{18a324d9-7e45-5519-900d-9c1680bdeed2}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Account Number" languagecode="1033" />
+                        </labels>
+                        <control id="accountnumber" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="accountnumber" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8822c700-4a4d-526a-bda9-6f8350b94f22}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Main Phone" languagecode="1033" />
+                        </labels>
+                        <control id="telephone1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone1" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d8b25b02-394f-55e0-8659-abb25785addd}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Website" languagecode="1033" />
+                        </labels>
+                        <control id="websiteurl" classid="{71716B6C-711E-476c-8AB8-5D11542BFB47}" datafieldname="websiteurl" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1b6bbde3-06b6-555c-99c0-0e193690a3e5}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Primary Contact" languagecode="1033" />
+                        </labels>
+                        <control id="primarycontactid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="primarycontactid" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="segmentation" showlabel="true" showbar="false" locklevel="0" id="{5ca09263-1a0c-564d-9ffa-4e6789bb88e7}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Segmentation" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{103a743b-6a7f-5548-b0bb-9ab8be9f4c67}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Segment" languagecode="1033" />
+                        </labels>
+                        <control id="account_segment" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="account_segment" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{20058ed4-bf0e-5958-8c59-c357fbc096be}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Sales region" languagecode="1033" />
+                        </labels>
+                        <control id="account_sales_region" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="account_sales_region" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{3b3ba1f0-bd7c-5e85-b841-2230c9f32b01}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Account tier" languagecode="1033" />
+                        </labels>
+                        <control id="account_account_tier" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="account_account_tier" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2b8b2a2a-2a1b-5356-bb1f-671a504bf3c2}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Account executive" languagecode="1033" />
+                        </labels>
+                        <control id="account_account_executive" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="account_account_executive" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="about" showlabel="true" showbar="false" locklevel="0" id="{6ae5636c-6036-5170-9bdb-406f375da442}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="About" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{a4a50e60-c84b-5b09-9c85-739951fd4c7c}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Description" languagecode="1033" />
+                        </labels>
+                        <control id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="34%">
+              <sections>
+                <section name="timeline_section" showlabel="false" showbar="false" locklevel="0" id="{a6ea4a8b-e573-5399-aa77-ce891facc26e}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Timeline" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{46576283-672f-59e2-90c9-35c20198e236}" showlabel="false" rowspan="23" colspan="1" auto="false">
+                        <labels>
+                          <label description="Timeline" languagecode="1033" />
+                        </labels>
+                        <control id="notescontrol" classid="{06375649-c143-495e-a496-c962e5b4488e}" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section name="contacts" showlabel="true" showbar="false" locklevel="0" id="{dd35f9fd-4337-5760-8d7b-615191c7face}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Contacts" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{9115141f-8cab-595e-b296-86b0d608e3ed}" showlabel="true" rowspan="10" colspan="1" auto="false">
+                        <labels>
+                          <label description="Contacts" languagecode="1033" />
+                        </labels>
+                        <control id="Contacts" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+                          <parameters>
+                            <ViewId>{eef5b833-f629-5a3c-b41d-cf0671a6bc8d}</ViewId>
+                            <IsUserView>false</IsUserView>
+                            <RelationshipName>contact_customer_accounts</RelationshipName>
+                            <TargetEntityType>contact</TargetEntityType>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <ViewIds />
+                            <EnableJumpBar>false</EnableJumpBar>
+                            <ChartGridMode>Grid</ChartGridMode>
+                            <VisualizationId />
+                            <IsUserChart>false</IsUserChart>
+                            <EnableChartPicker>false</EnableChartPicker>
+                            <RecordsPerPage>8</RecordsPerPage>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+        <tab name="PIPELINE" id="{0caa03e5-cd59-594a-b664-0f790947e0a6}" IsUserDefined="0" showlabel="true" expanded="true" verticallayout="true" locklevel="0">
+          <labels>
+            <label description="Pipeline" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="50%">
+              <sections>
+                <section name="open_deals" showlabel="true" showbar="false" locklevel="0" id="{22f18ee9-0d8d-5785-9d80-a79e759d5311}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Open opportunities" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{5c748dc8-b2c3-5e25-a48a-746062901303}" showlabel="true" rowspan="8" colspan="1" auto="false">
+                        <labels>
+                          <label description="Open opportunities" languagecode="1033" />
+                        </labels>
+                        <control id="OpenOpportunities" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+                          <parameters>
+                            <ViewId>{de670e12-c6b2-5f5a-8394-7a9aebcb14a7}</ViewId>
+                            <IsUserView>false</IsUserView>
+                            <RelationshipName>zava_account_Account_zava_opportunity</RelationshipName>
+                            <TargetEntityType>zava_opportunity</TargetEntityType>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <ViewIds />
+                            <EnableJumpBar>false</EnableJumpBar>
+                            <ChartGridMode>Grid</ChartGridMode>
+                            <VisualizationId />
+                            <IsUserChart>false</IsUserChart>
+                            <EnableChartPicker>false</EnableChartPicker>
+                            <RecordsPerPage>6</RecordsPerPage>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+                <section name="won_deals" showlabel="true" showbar="false" locklevel="0" id="{e5260aae-beda-5970-83c6-7086c2798c4c}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Won deals" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{cd407d97-de77-59bb-9501-196211269b1b}" showlabel="true" rowspan="7" colspan="1" auto="false">
+                        <labels>
+                          <label description="Won deals" languagecode="1033" />
+                        </labels>
+                        <control id="WonOpportunities" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+                          <parameters>
+                            <ViewId>{c73107b5-ad4a-5307-afd3-33fb0cf3fe2f}</ViewId>
+                            <IsUserView>false</IsUserView>
+                            <RelationshipName>zava_account_Account_zava_opportunity</RelationshipName>
+                            <TargetEntityType>zava_opportunity</TargetEntityType>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <ViewIds />
+                            <EnableJumpBar>false</EnableJumpBar>
+                            <ChartGridMode>Grid</ChartGridMode>
+                            <VisualizationId />
+                            <IsUserChart>false</IsUserChart>
+                            <EnableChartPicker>false</EnableChartPicker>
+                            <RecordsPerPage>5</RecordsPerPage>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="50%">
+              <sections>
+                <section name="leads" showlabel="true" showbar="false" locklevel="0" id="{8e945b3f-0bdd-56c1-856d-df86352b51aa}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Leads" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{76f1994f-ba2e-5833-8ce3-743e06eda657}" showlabel="true" rowspan="10" colspan="1" auto="false">
+                        <labels>
+                          <label description="Leads" languagecode="1033" />
+                        </labels>
+                        <control id="Leads" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+                          <parameters>
+                            <ViewId>{85d0e645-6d84-4aad-946c-baaf1ae21859}</ViewId>
+                            <IsUserView>false</IsUserView>
+                            <RelationshipName>account_zava_lead_zava_AccountId</RelationshipName>
+                            <TargetEntityType>zava_lead</TargetEntityType>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <ViewIds />
+                            <EnableJumpBar>false</EnableJumpBar>
+                            <ChartGridMode>Grid</ChartGridMode>
+                            <VisualizationId />
+                            <IsUserChart>false</IsUserChart>
+                            <EnableChartPicker>false</EnableChartPicker>
+                            <RecordsPerPage>8</RecordsPerPage>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{f7861822-e2c0-5fce-a68c-4f5c2ff7c3cc}" celllabelposition="Top" columns="1111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{3150439f-cc19-5982-b589-42c99639493c}" showlabel="true">
+              <labels>
+                <label description="Account tier" languagecode="1033" />
+              </labels>
+              <control id="header_account_account_tier" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="account_account_tier" disabled="false" />
+            </cell>
+            <cell id="{41366a2e-2f46-5fbf-8b0d-91f18dc1f0c7}" showlabel="true">
+              <labels>
+                <label description="Segment" languagecode="1033" />
+              </labels>
+              <control id="header_account_segment" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="account_segment" disabled="false" />
+            </cell>
+            <cell id="{4804e0a1-51c8-5067-ae0d-3caef38404d2}" showlabel="true">
+              <labels>
+                <label description="Account executive" languagecode="1033" />
+              </labels>
+              <control id="header_account_account_executive" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="account_account_executive" disabled="false" />
+            </cell>
+            <cell id="{f5509a56-b92c-5d9c-b301-13f2a7264795}" showlabel="true">
+              <labels>
+                <label description="Owner" languagecode="1033" />
+              </labels>
+              <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <DisplayConditions Order="1" FallbackForm="false">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Zava Account" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Zava account form: segmentation, contacts, pipeline and timeline." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

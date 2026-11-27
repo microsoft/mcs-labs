@@ -1,0 +1,11 @@
+kind: McpTool
+authMode: Invoker
+connectionReference: zava_ZavaSalesCopilot.cr.shared_commondataserviceforapps.d3cfe1a9-6098-42af-9db0-70559d2b88a8
+connectorId: /providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps
+operationId: InvokeMCP
+allowedTools:
+  - read_query
+  - create_record
+  - update_record
+  - search
+  - describe

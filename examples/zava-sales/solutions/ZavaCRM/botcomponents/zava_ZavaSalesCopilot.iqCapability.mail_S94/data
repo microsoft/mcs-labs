@@ -1,0 +1,3 @@
+kind: IQCapability
+capability: mail
+access: Read

@@ -1,0 +1,3 @@
+kind: IQCapability
+capability: people
+access: Read

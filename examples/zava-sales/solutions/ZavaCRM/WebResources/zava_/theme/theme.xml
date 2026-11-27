@@ -1,0 +1,12 @@
+<CustomTheme basePaletteColor="#0F766E" lockPrimary="false">
+  <AppHeaderColors
+    background="#163C42"
+    foreground="#FFFFFF"
+    backgroundHover="#245158"
+    foregroundHover="#FFFFFF"
+    backgroundPressed="#102E33"
+    foregroundPressed="#FFFFFF"
+    backgroundSelected="#2C5D64"
+    foregroundSelected="#FFFFFF"
+  />
+</CustomTheme>

@@ -1,0 +1,71 @@
+import { TENANT_ID } from './domain.ts'
+
+// Zava Agent chat, hosted separately; zava-copilot-pane/ holds its source and contract.
+export const PANE_ORIGIN = '@@PANE_ORIGIN@@'
+export const PANE_URL = `${PANE_ORIGIN}/`
+export const PANE_PROTOCOL = 1
+export const PANE_READY_TIMEOUT_MS = 15000
+export const PANE_STATE_KEY = 'zava-copilot-pane'
+
+export type PaneTheme = 'light' | 'dark'
+// hostHeader on ready: the chat can hide its own header and report its sign-in state.
+export type PaneEvent =
+  | { type: 'ready'; hostHeader: boolean }
+  | { type: 'close' }
+  | { type: 'state'; signedIn: boolean }
+
+export interface PaneMessageLike {
+  origin: string
+  data: unknown
+  source: unknown
+}
+
+// Must stay in step with the pane's isLoginHint: an invalid hint makes the pane reject the whole init.
+const LOGIN_HINT = /^[^\s@<>"'`]{1,128}@[A-Za-z0-9.-]{1,190}$/
+const GUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i
+
+export function isLoginHint(value: unknown): value is string {
+  return typeof value === 'string' && LOGIN_HINT.test(value)
+}
+
+// Accept only versioned messages from the pane's exact origin and its own frame window.
+export function readPaneMessage(event: PaneMessageLike, frame: unknown): PaneEvent | undefined {
+  if (!frame || event.origin !== PANE_ORIGIN || event.source !== frame) return undefined
+  const data = event.data
+  if (!data || typeof data !== 'object' || Array.isArray(data)) return undefined
+  const message = data as Record<string, unknown>
+  if (message.v !== PANE_PROTOCOL) return undefined
+  if (message.type === 'zava-pane:ready') return { type: 'ready', hostHeader: message.hostHeader === true }
+  if (message.type === 'zava-pane:close') return { type: 'close' }
+  if (message.type === 'zava-pane:state' && typeof message.signedIn === 'boolean') return { type: 'state', signedIn: message.signedIn }
+  return undefined
+}
+
+export function paneInitMessage(identity: { objectId: string; loginHint?: string }, theme: PaneTheme) {
+  if (!GUID.test(identity.objectId)) throw new Error('The signed-in user has no valid object ID.')
+  return {
+    type: 'zava-pane:init', v: PANE_PROTOCOL, tenantId: TENANT_ID, objectId: identity.objectId.toLowerCase(),
+    ...(isLoginHint(identity.loginHint) ? { loginHint: identity.loginHint } : {}),
+    theme, hostHeader: true,
+  } as const
+}
+
+export function paneThemeMessage(theme: PaneTheme) {
+  return { type: 'zava-pane:theme', v: PANE_PROTOCOL, theme } as const
+}
+
+export function paneNewChatMessage() {
+  return { type: 'zava-pane:new-chat', v: PANE_PROTOCOL } as const
+}
+
+export function readPaneOpen(storage: Pick<Storage, 'getItem'> | undefined): boolean {
+  try { return storage?.getItem(PANE_STATE_KEY) === 'open' } catch { return false }
+}
+
+export function writePaneOpen(storage: Pick<Storage, 'setItem'> | undefined, open: boolean): void {
+  try { storage?.setItem(PANE_STATE_KEY, open ? 'open' : 'closed') } catch { /* Storage can be blocked; the pane still works for this visit. */ }
+}
+
+export function sessionStore(): Storage | undefined {
+  try { return window.sessionStorage } catch { return undefined }
+}

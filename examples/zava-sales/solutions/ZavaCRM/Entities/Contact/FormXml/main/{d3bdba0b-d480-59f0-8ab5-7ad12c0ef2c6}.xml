@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{d3bdba0b-d480-59f0-8ab5-7ad12c0ef2c6}</formid>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <FormPresentation>0</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form showImage="true">
+      <tabs>
+        <tab name="SUMMARY" id="{c6f64247-1925-50da-bef4-16961041464e}" IsUserDefined="0" showlabel="true" expanded="true" verticallayout="true" locklevel="0">
+          <labels>
+            <label description="Summary" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="33%">
+              <sections>
+                <section name="contact" showlabel="true" showbar="false" locklevel="0" id="{440d89b2-3187-583f-a78f-9b8fb97d3396}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Contact" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{4e08487e-327e-5432-94d6-272741929747}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="First Name" languagecode="1033" />
+                        </labels>
+                        <control id="firstname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="firstname" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{8d0d90fe-c6ea-5bc7-ad49-792a4f8a6bac}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Last Name" languagecode="1033" />
+                        </labels>
+                        <control id="lastname" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="lastname" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{2a220a77-53ca-59ce-af5e-627433f56fe7}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Job Title" languagecode="1033" />
+                        </labels>
+                        <control id="jobtitle" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="jobtitle" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{12ce25d5-493c-526e-ac34-90d5b305723a}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Company Name" languagecode="1033" />
+                        </labels>
+                        <control id="parentcustomerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="parentcustomerid" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="reach" showlabel="true" showbar="false" locklevel="0" id="{367b9a0f-350c-5c10-b9a4-f5a27ed350a9}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Reach" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{4af29e9a-0f5a-59c1-95ea-20fab08a288d}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Email" languagecode="1033" />
+                        </labels>
+                        <control id="emailaddress1" classid="{ADA2203E-B4CD-49be-9DDF-234642B43B52}" datafieldname="emailaddress1" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{7bf35055-1b97-58f0-a27c-d31b9772874c}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Business Phone" languagecode="1033" />
+                        </labels>
+                        <control id="telephone1" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="telephone1" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{191e8e28-215a-594f-8ede-09e011e33799}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Mobile Phone" languagecode="1033" />
+                        </labels>
+                        <control id="mobilephone" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="mobilephone" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="about" showlabel="true" showbar="false" locklevel="0" id="{cc8a8015-ca8a-518a-9ac9-d5c5584cc6a5}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="About" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{d41ceda8-53c1-55cb-8760-6cbcb8e8304f}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Buying role" languagecode="1033" />
+                        </labels>
+                        <control id="contact_buying_role" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="contact_buying_role" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{389d04a6-b458-5ab8-8d93-de8936b86c44}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Description" languagecode="1033" />
+                        </labels>
+                        <control id="description" classid="{E0DECE4B-6FC8-4a8f-A065-082708572369}" datafieldname="description" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="34%">
+              <sections>
+                <section name="timeline_section" showlabel="false" showbar="false" locklevel="0" id="{7889a9fa-48b2-5074-a415-197626564ec7}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Timeline" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{208e01dc-b8f8-5172-8e59-d2afc6d3f2c0}" showlabel="false" rowspan="23" colspan="1" auto="false">
+                        <labels>
+                          <label description="Timeline" languagecode="1033" />
+                        </labels>
+                        <control id="notescontrol" classid="{06375649-c143-495e-a496-c962e5b4488e}" disabled="false" />
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+            <column width="33%">
+              <sections>
+                <section name="opportunities" showlabel="true" showbar="false" locklevel="0" id="{8acc886b-e733-507c-8ed7-78c07d65d2b6}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Opportunities" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{3d0009b3-7091-54b2-97f8-904461d1a080}" showlabel="true" rowspan="10" colspan="1" auto="false">
+                        <labels>
+                          <label description="Opportunities" languagecode="1033" />
+                        </labels>
+                        <control id="Opportunities" classid="{E7A81278-8635-4d9e-8D4D-59480B391C5B}">
+                          <parameters>
+                            <ViewId>{8ad50cc9-a241-4c4f-8c73-5a55f40fe7b3}</ViewId>
+                            <IsUserView>false</IsUserView>
+                            <RelationshipName>zava_contact_Primary_contact_zava_opportunity</RelationshipName>
+                            <TargetEntityType>zava_opportunity</TargetEntityType>
+                            <AutoExpand>Fixed</AutoExpand>
+                            <EnableQuickFind>false</EnableQuickFind>
+                            <EnableViewPicker>false</EnableViewPicker>
+                            <ViewIds />
+                            <EnableJumpBar>false</EnableJumpBar>
+                            <ChartGridMode>Grid</ChartGridMode>
+                            <VisualizationId />
+                            <IsUserChart>false</IsUserChart>
+                            <EnableChartPicker>false</EnableChartPicker>
+                            <RecordsPerPage>8</RecordsPerPage>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                    <row />
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+      <header id="{7d46c9c9-57f3-5992-a0c0-d31100b56624}" celllabelposition="Top" columns="1111" labelwidth="115" celllabelalignment="Left">
+        <rows>
+          <row>
+            <cell id="{819381fa-2bee-576d-aab9-69fb67a91e98}" showlabel="true">
+              <labels>
+                <label description="Job Title" languagecode="1033" />
+              </labels>
+              <control id="header_jobtitle" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="jobtitle" disabled="false" />
+            </cell>
+            <cell id="{5c849580-0886-5c38-9dbd-dcda9b5c453d}" showlabel="true">
+              <labels>
+                <label description="Company Name" languagecode="1033" />
+              </labels>
+              <control id="header_parentcustomerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="parentcustomerid" disabled="false" />
+            </cell>
+            <cell id="{c2dcfc1c-9863-5886-ac7a-c648ff206cd3}" showlabel="true">
+              <labels>
+                <label description="Buying role" languagecode="1033" />
+              </labels>
+              <control id="header_contact_buying_role" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="contact_buying_role" disabled="false" />
+            </cell>
+            <cell id="{fd1b43ad-e439-5409-a769-6ca335ce9920}" showlabel="true">
+              <labels>
+                <label description="Owner" languagecode="1033" />
+              </labels>
+              <control id="header_ownerid" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="ownerid" disabled="false" />
+            </cell>
+          </row>
+        </rows>
+      </header>
+      <DisplayConditions Order="1" FallbackForm="false">
+        <Everyone />
+      </DisplayConditions>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Zava Contact" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Zava contact form: reach, buying role, deals and timeline." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>

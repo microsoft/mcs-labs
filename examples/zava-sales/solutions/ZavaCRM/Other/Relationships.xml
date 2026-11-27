@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<EntityRelationships xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <EntityRelationship Name="account_zava_lead_zava_AccountId" />
+  <EntityRelationship Name="business_unit_zava_lead" />
+  <EntityRelationship Name="business_unit_zava_opportunity" />
+  <EntityRelationship Name="lk_zava_lead_createdby" />
+  <EntityRelationship Name="lk_zava_lead_modifiedby" />
+  <EntityRelationship Name="lk_zava_opportunity_createdby" />
+  <EntityRelationship Name="lk_zava_opportunity_modifiedby" />
+  <EntityRelationship Name="owner_zava_lead" />
+  <EntityRelationship Name="owner_zava_opportunity" />
+  <EntityRelationship Name="team_zava_lead" />
+  <EntityRelationship Name="team_zava_opportunity" />
+  <EntityRelationship Name="TransactionCurrency_zava_lead" />
+  <EntityRelationship Name="TransactionCurrency_zava_opportunity" />
+  <EntityRelationship Name="user_zava_lead" />
+  <EntityRelationship Name="user_zava_opportunity" />
+  <EntityRelationship Name="zava_account_Account_zava_opportunity" />
+  <EntityRelationship Name="zava_contact_Primary_contact_zava_opportunity" />
+  <EntityRelationship Name="zava_zava_lead_Originating_lead_zava_opportunity" />
+</EntityRelationships>

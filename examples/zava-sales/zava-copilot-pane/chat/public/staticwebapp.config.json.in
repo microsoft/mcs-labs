@@ -1,0 +1,15 @@
+{
+  "globalHeaders": {
+    "Content-Security-Policy": "default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self' https://login.microsoftonline.com @@AGENT_API_ORIGIN@@; frame-src 'self' https://login.microsoftonline.com; frame-ancestors 'self' @@APP_ORIGIN@@ @@SHELL_ORIGIN@@; base-uri 'none'; form-action 'none'; object-src 'none'",
+    "X-Content-Type-Options": "nosniff",
+    "Referrer-Policy": "strict-origin-when-cross-origin",
+    "Permissions-Policy": "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+  },
+  "routes": [
+    { "route": "/redirect.html", "headers": { "Cache-Control": "no-store" } },
+    { "route": "/relay.html", "headers": { "Cache-Control": "no-store" } }
+  ],
+  "responseOverrides": {
+    "404": { "rewrite": "/index.html", "statusCode": 404 }
+  }
+}

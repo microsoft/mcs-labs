@@ -1,0 +1,132 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<forms xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <systemform>
+    <formid>{430b4794-15c4-4071-a55a-5a743a71e27a}</formid>
+    <IntroducedVersion>1.0</IntroducedVersion>
+    <FormPresentation>1</FormPresentation>
+    <FormActivationState>1</FormActivationState>
+    <form showImage="false">
+      <tabs>
+        <tab name="QUICK" id="{9fde2e3f-51fa-515a-af0c-abd589fc0880}" IsUserDefined="0" showlabel="false" expanded="true" verticallayout="true" locklevel="0">
+          <labels>
+            <label description="Opportunity" languagecode="1033" />
+          </labels>
+          <columns>
+            <column width="100%">
+              <sections>
+                <section name="deal" showlabel="true" showbar="false" locklevel="0" id="{caec4b2c-8bb9-5d15-ab80-2d1e335e1752}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Deal" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{51ff0377-4d8a-5fb5-ba9b-cbed76318474}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Opportunity Name" languagecode="1033" />
+                        </labels>
+                        <control id="zava_name" classid="{4273EDBD-AC1D-40d3-9FB2-095C621B552D}" datafieldname="zava_name" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{d0047ace-d078-53f1-85f3-ba3cfcfb6a74}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Account" languagecode="1033" />
+                        </labels>
+                        <control id="zava_account" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="zava_account" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{fb10f013-d5d8-5f97-8f3b-e6ec7ea2ee6e}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Primary contact" languagecode="1033" />
+                        </labels>
+                        <control id="zava_primary_contact" classid="{270BD3DB-D9AF-4782-9025-509E298DEC0A}" datafieldname="zava_primary_contact" disabled="false">
+                          <parameters>
+                            <FilterRelationshipName>contact_customer_accounts</FilterRelationshipName>
+                            <DependentAttributeName>zava_account</DependentAttributeName>
+                            <DependentAttributeType>account</DependentAttributeType>
+                            <AllowFilterOff>true</AllowFilterOff>
+                          </parameters>
+                        </control>
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="forecast" showlabel="true" showbar="false" locklevel="0" id="{c411bf91-791a-54a7-b867-63709418bb77}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Forecast" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{7bdbcab9-0e03-5335-8bf8-8138387563c1}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Estimated revenue" languagecode="1033" />
+                        </labels>
+                        <control id="zava_estimated_revenue" classid="{533B9E00-756B-4312-95A0-DC888637AC78}" datafieldname="zava_estimated_revenue" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{1254b8f5-4e27-5ada-a1e5-711d5cde9914}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Estimated close date" languagecode="1033" />
+                        </labels>
+                        <control id="zava_estimated_close_date" classid="{5B773807-9FB2-42db-97C3-7A91EFF8ADFF}" datafieldname="zava_estimated_close_date" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{a64f1b94-42a2-55dd-a2e5-d88978ffe822}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Probability" languagecode="1033" />
+                        </labels>
+                        <control id="zava_probability" classid="{C6D124CA-7EDA-4a60-AEA9-7FB8D318B68F}" datafieldname="zava_probability" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+                <section name="shape" showlabel="true" showbar="false" locklevel="0" id="{bd594a2d-7208-5d19-90b7-dc9ab5a2db07}" IsUserDefined="0" layout="varwidth" columns="1" labelwidth="115" celllabelalignment="Left" celllabelposition="Left">
+                  <labels>
+                    <label description="Shape" languagecode="1033" />
+                  </labels>
+                  <rows>
+                    <row>
+                      <cell id="{fc7c01e3-3647-5036-809c-241c96d8376f}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Sales stage" languagecode="1033" />
+                        </labels>
+                        <control id="zava_sales_stage" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="zava_sales_stage" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{b5cf840a-e8ba-5c35-bad8-dd2e204dde92}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Product line" languagecode="1033" />
+                        </labels>
+                        <control id="zava_product_line" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="zava_product_line" disabled="false" />
+                      </cell>
+                    </row>
+                    <row>
+                      <cell id="{061df48b-6b86-5f4a-b7f2-6be5bfd47793}" showlabel="true" locklevel="0">
+                        <labels>
+                          <label description="Account executive" languagecode="1033" />
+                        </labels>
+                        <control id="zava_account_executive" classid="{3EF39988-22BB-4f0b-BBBE-64B5A3748AEE}" datafieldname="zava_account_executive" disabled="false" />
+                      </cell>
+                    </row>
+                  </rows>
+                </section>
+              </sections>
+            </column>
+          </columns>
+        </tab>
+      </tabs>
+    </form>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <LocalizedNames>
+      <LocalizedName description="Opportunity quick create" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Log a new deal in seconds." languagecode="1033" />
+    </Descriptions>
+  </systemform>
+</forms>
