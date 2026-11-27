@@ -99,8 +99,9 @@ Apply these when creating, converting, updating or reviewing either lab format:
 - Use the product's exact current label, in **bold**. Do not describe icons by color only.
   If two controls have the same label, name the one the learner needs: for example,
   "Under the answer, select **More options**, then **Edit in Pages**." The file card
-  has its own **More options** menu. A label without its location would send some
-  learners to the wrong menu even though both labels are correct.
+  has its own **More options** menu. In a tabbed view, verify the tab is selected and
+  the control is visible on that tab's card or panel. In a designer, say whether the
+  learner is changing an existing item or adding another; check which item changed.
   When an icon has no verified text label, identify its symbol, location and purpose
   rather than inventing a tooltip or menu label. Distinguish instruction sections
   from UI controls, name the tab or designer surface when needed to locate a control,
