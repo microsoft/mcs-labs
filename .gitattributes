@@ -1,1 +1,4 @@
 *.pptx filter=lfs diff=lfs merge=lfs -text
+
+# Preserve the downloadable skill's text bytes across checkouts.
+labs/instructions-skills-authoring/assets/rfp-response/** text=auto eol=lf

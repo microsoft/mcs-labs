@@ -103,7 +103,9 @@ Apply these when creating, converting, updating or reviewing either lab format:
   Distinguish tools added inside an agent from connector nodes added to a workflow.
   For run inspection, give the workflow, Activity tab, run selection and node to
   open separately; do not present a run diagram's path as a navigation menu.
-  Put checks where the result can actually be observed, not before it exists.
+  Put checks where the result can actually be observed, not before it exists. If a
+  trace label and the returned result can differ, name what each shows and tell
+  learners how to check the actual result.
   Distinguish temporary **Run node** test inputs from **Configure** values that must
   retain dynamic bindings. When learners confuse them, show the selected tab and
   exact test field in a focused screenshot and explicitly preserve the configuration.
