@@ -554,7 +554,7 @@ You created two independently managed Zava agents, reused the internal specialis
 
 The main agent combined the answers, but did not take ownership of another team's rules. In production, authentication, deterministic checks, authorization, real data freshness, and human approval would need separate implementation; this unauthenticated synthetic-data demo and its instructions are not production security controls.
 
-This lab is part of [Architecture Bootcamp Latest](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/).
+This lab is part of [Architecture Bootcamp Latest](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp-classic/).
 
 ---
 

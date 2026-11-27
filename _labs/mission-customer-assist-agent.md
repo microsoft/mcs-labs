@@ -526,7 +526,7 @@ mission_lab:
 ---
 # Customer Conversation Harness
 
-Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/).
 
 You'll build a Customer Assist Agent for a coffee subscription service, add a cancellation specialist and test how requests reach that specialist. You'll also try voice conversations. Adding other specialists is optional.
 

@@ -559,7 +559,7 @@ Which combination of recommendations gives the highest total NPV while staying u
 > The second follow-up prompt is a **knapsack optimization problem** — the Analyst agent must find the combination of investments that maximizes value within a budget constraint. This is a sophisticated analytical task that would typically require a spreadsheet model to solve manually. It makes for a compelling demonstration of the Analyst agent's capabilities.
 
 > [!NOTE]
-> Chart rendering can vary. If you see a file name or chart code instead of a chart, try a suggestion under the answer such as **Provide the chart as a downloadable PNG**, or rely on the ranked table.
+> If you see code or a file name instead of a chart, send a follow-up message: **Provide the chart as a downloadable PNG** or **Please show the chart inline**.
 
 ### Congratulations! You've used the Analyst agent for financial modeling!
 

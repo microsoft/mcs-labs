@@ -64,6 +64,19 @@ the active event. Exit restores the standalone card. Without JavaScript, the
 module's default companion remains available and the event agenda has explicit
 links to the correct labs.
 
+## Private December
+
+`private-december.yml` is an independent, unlisted delivery of the guided
+curriculum for 1–3 December. Its page is `/events/private-december/`; unlisted
+does not mean access-controlled. It reuses the guided labs without changing
+their content or shared durations. The source curriculum's Module 5 / Lab 5
+are not delivered. Event module labels close that gap: source Modules 6–17
+become Modules 5–16, with event Module 5 split into two 30-minute slots.
+Lab labels also close the gap: source Labs 6–11 become event Labs 5–10.
+Shared module and lab slugs, presentation filenames and lab content are unchanged.
+The 30-minute Workflows slot is a delivery timebox, not a shortened shared lab.
+Update only this agenda and `_events/private-december.md` for delivery changes.
+
 ## Architecture Bootcamp
 
 `architecture-bootcamp.yml` is the advertised three-day curriculum: 17 modules and
@@ -96,8 +109,15 @@ The external `aka.ms/MCSBootcamp` short link is managed outside this repository.
 ## Bootcamp Latest
 
 The classic edition's event ID, event document basename, agenda basename, and
-presentation directory retain `bootcamp-latest`. Existing direct links use
-`/events/bootcamp-latest/` and `?event=bootcamp-latest`. The former versioned
+presentation directory retain `bootcamp-latest`. Its canonical URL is
+`/events/architecture-bootcamp-classic/`; the guided edition uses
+`/events/copilot-agents-bootcamp/`. Public URLs follow the edition's display name,
+not a changing "latest" status. The old `/events/bootcamp-latest/` and
+`/events/architecture-bootcamp/` URLs redirect to their original editions,
+preserving query strings and anchors when JavaScript is enabled.
+Event IDs remain `bootcamp-latest` and `architecture-bootcamp`, respectively,
+so existing `?event=` links and saved navigation contexts continue to work.
+The former versioned
 event URL redirects to the current event. Legacy module/lab context links also
 resolve to their current counterparts; old presentation download URLs remain
 retired.

@@ -1,6 +1,6 @@
 # Agent integration
 
-Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/).
 
 You'll build a stock specialist, connect it to a coordinating agent, and add an external delivery advisor. You'll use the activity trace to check which agent answered each part of the request.
 

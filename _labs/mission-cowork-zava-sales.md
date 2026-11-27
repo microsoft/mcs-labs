@@ -18,7 +18,7 @@ toc: false
 mission_lab:
   headline: "Use Copilot and Cowork"
   headline_emphasis: "for sales tasks"
-  promise: "You'll find a proposal, prepare for a customer call and create a lead with the Zava Sales Hub agent. Then you'll use Cowork to prepare a pipeline review and save the procedure as a reusable skill."
+  promise: "You'll find a proposal, prepare for a customer call in Copilot Chat and create a lead with Zava Sales Agent (MCS). Then you'll use Cowork to prepare a pipeline review and save the procedure as a reusable skill."
   hero_image:
     src: /labs/cowork-zava-sales/images/pipeline-three-slides.webp
     alt: "A Zava-branded slide from the verified three-slide pipeline review, separating CRM facts from questions for the deal owners."
@@ -28,11 +28,11 @@ mission_lab:
   scenario: |-
     This lab follows several sales tasks at **Zava**. You'll find a previous **Northwind Trader** proposal, prepare for a **Northstar Teamwear** renewal call and record a new lead. You'll then prepare a pipeline review for **Northstar Teamwear, Coastal Performance Supply, and BluePeak Athletics**, and save the procedure so you can use it again.
   self_setup: |-
-    Arrange Copilot access with Work IQ, the sample Northwind proposal, Cowork credits, and Zava Sales training data before starting. Make the **Zava Sales Hub agent with its lead-creation MCP App** available in Chat, and provide the **Microsoft Dataverse** and **Zava PowerPoint** plugins in Cowork. The separate **Zava Sales** Cowork plugin is needed only for the optional Specialize exercise. These are demo assets to obtain from your facilitator, not built-in capabilities to recreate during this lab.
+    Arrange Copilot access with Work IQ, the sample Northwind proposal, Cowork credits, and Zava Sales training data before starting. Make **Zava Sales Agent (MCS)** available to mention in Copilot Chat, and provide the **Microsoft Dataverse** and **Zava PowerPoint** plugins in Cowork. The separate **Zava Sales** Cowork plugin is needed only for the optional Specialize exercise. These are demo assets to obtain from your facilitator, not built-in capabilities to recreate during this lab.
   prerequisites:
     - "Use your assigned **training account**."
     - "Open [Microsoft Copilot](https://copilot.cloud.microsoft/home?auth=2). Start in **Chat, not Cowork**. You will explicitly switch to Cowork after the first two exercises."
-    - "In another tab, open [Zava Sales Hub](https://aka.ms/ZavaSalesHub), the CRM in this scenario. It is a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data: accounts, contacts, leads, opportunities and activities. On first use, check that the Microsoft Dataverse consent shows your assigned training account, then select **Allow**. Wait for **Live CRM** before checking records."
+    - "Open [Zava Sales Hub](https://aka.ms/ZavaSalesHub), the CRM app in this scenario, built on Dataverse sample sales data: accounts, contacts, leads, opportunities and activities. It is separate from **Zava Sales Agent (MCS)**, which you'll mention in Copilot Chat. On first use, check that the Microsoft Dataverse consent shows your assigned training account, then select **Allow**. Wait for **Live CRM** before checking records."
     - "Customer emails must stay **drafts**."
   pacing: "Ask, Act, Delegate and Repeat take about 30 minutes; the Riley call and CRM update, Friday feedback loop and Zava Sales plugin exercises are optional."
   missions:
@@ -57,7 +57,7 @@ mission_lab:
             alt: "Copilot Chat model picker showing Auto, Quick response and Think deeper, with Work IQ enabled."
             width: 1032
             height: 1146
-            caption: "Leave Auto selected for this lab. The models offered can vary by tenant."
+            caption: "Leave Auto selected for the proposal exercise. The models offered can vary by tenant."
           notice: "Work IQ connects the answer to work context you are allowed to access, such as files, email, meetings and Teams. It does **not** grant new permissions. Finding a proposal does not prove that Chat can retrieve a live CRM deal."
         - title: "Find the Northwind proposal"
           instruction: "Send the prompt in **Copilot Chat**, not Cowork or an agent conversation. Open the proposal citation and check the economic buyer and decision criteria against the document."
@@ -96,56 +96,48 @@ mission_lab:
       verb: Act
       title: "Let the sales agent finish the job"
       minutes: 7
-      tool: Copilot Chat + Zava Sales Hub
-      brief: "A work-file answer and a live CRM brief are different jobs. Watch Chat hand off to a specialist agent, then use an interactive form inside that conversation."
-      outcome: "A grounded Northstar call brief and a reviewed John Doe lead created through the agent's MCP App."
+      tool: Copilot Chat + Zava Sales Agent (MCS)
+      brief: "Prepare for the renewal call in Copilot Chat, then mention a specialist agent in the same chat to create a lead."
+      outcome: "A Northstar call brief with checked sources and a reviewed John Doe lead created by Zava Sales Agent (MCS)."
       steps:
-        - title: "Start a new Chat for the renewal"
-          instruction: "Select **New**, then confirm **Chat**, not Cowork. This is a **new Copilot Chat session**, separate from the Northwind proposal conversation. Send the prompt and inspect what Chat can substantiate."
+        - id: agent-1
+          title: "Start a new Chat for the renewal"
+          instruction: "Select **New**, then confirm **Chat**, not Cowork. In this **new Copilot Chat session**, separate from the Northwind proposal conversation, open the model picker and select **Quick response**. Send the prompt, then check the deal status, attention points and three call questions against the cited sources."
           prompt_label: New Copilot Chat session
           prompt: "Help me prepare for a call about Northstar Teamwear’s $250K Pulse renewal. Where does the deal stand, what needs my attention, and what are the three most important questions to ask on the call?"
-          notice: "In this training experience, Chat may not retrieve the live deal and can recommend **Zava Sales Hub** instead. That is the handoff to explore, not proof that Dataverse is unavailable in every Copilot Chat tenant. Do not accept a generic call plan as a verified CRM brief."
-        - title: "Follow the Zava Sales Hub recommendation"
-          instruction: "Select the recommendation to **Try Zava Sales Hub**. Check that the same renewal prompt is carried into the agent conversation; send it if it is only prefilled. Confirm that you are now talking to **Zava Sales Hub**, then review its deal status, attention points and three call questions against the returned records."
-          notice: "The recommendation's wording can vary. If no card appears, open **Plugins → Chat**, find the facilitator-provided **Zava Sales Hub** agent, and paste the same prompt there. If Chat starts a research task instead, select **Stop task** on that task card before opening the agent; do not wait for a separate research run in this exercise. If the agent is unavailable, ask the proctor; do not install a lookalike or invent the CRM answer."
-        - title: "Create a lead in the MCP App"
-          instruction: "In the **same Zava Sales Hub agent conversation**, send the follow-up. Select **Confirm** when prompted, complete and review the embedded lead form, then select **Accept and save** once. This interactive form inside the agent is an **MCP App**, not a switch to Cowork."
-          prompt_label: Follow-up in Zava Sales Hub
-          prompt: "Thanks, btw can you help me create a new lead for them? John Doe mentioned a $50,000 project in the Denver area, details to be sent in a couple of weeks."
+          notice: "Keep this chat for the next step. A generic call plan is not a verified CRM brief; distinguish supported facts from gaps in the available sources."
+        - id: agent-3
+          title: "Mention the sales agent and request a lead"
+          instruction: "In the **same Copilot Chat session**, type `@` in the message box and select **Zava Sales Agent (MCS)** from the suggestions to insert an actual @mention. Add the follow-up below after the mention and send it. Do not just type the agent's name as plain text or start a separate conversation."
+          prompt_label: Follow-up after mentioning Zava Sales Agent (MCS)
+          prompt: "Thanks. By the way, can you help me create a new lead for them? John Doe mentioned a $50000 project in the Denver area. Details to be sent in a couple weeks so everything else is TBD."
+          notice: "Review **John Doe**, **Denver**, **$50,000 USD**, and the Northstar context in the agent's proposed details. For missing details, answer **TBD** or supply made-up details for this training exercise. Leave any unverified **Account** link unset. The $50,000 lead is separate from the $250K renewal; do not overwrite the renewal amount."
+        - id: agent-confirm
+          title: "Confirm the lead creation and check the record"
+          instruction: "Confirm the requested action when the agent asks. Answer necessary follow-up questions with **TBD** or made-up details for this training exercise. Continue until **Zava Sales Agent (MCS)** confirms creation, then inspect the lead in **Zava Sales Hub**. Check for an existing lead before retrying to avoid duplicates."
           help: |
-            1. Review the confirmation: the target is the **Lead** table and the source text describes the new Northstar project. Select **Confirm**.
-            2. In the lead form, titled **Create new lead record** or **Create new record for Northstar Teamwear**, review **First name: John**, **Last name: Doe**, **Company name: Northstar Teamwear**, and **City: Denver**.
-            3. Complete **Lead Name** if blank, for example `Northstar Teamwear - Denver project`. Fill **Topic** with the known project details, including that more details are expected in a couple of weeks.
-            4. Scroll **inside the form** and check **Estimated value: 50000**. If it is blank or the form warns that it could not fill `$50,000`, enter `50000` without the currency symbol or comma. Leave unknown email, phone and other details empty; a company-name string is not proof that the **Account** lookup is linked.
-            5. Select **Accept and save** once. Look for **Your changes have been saved successfully**; the form becomes **Update lead record**. Use **Open** to inspect the saved record if needed.
-          screenshot:
-            title: the interactive lead form
-            src: /labs/cowork-zava-sales/images/lead-mcp-app.webp
-            src_dark: /labs/cowork-zava-sales/images/lead-mcp-app-dark.webp
-            alt: "The Zava Sales Hub MCP App inside the agent conversation, with John Doe, Northstar Teamwear and Denver suggested, and an Accept and save button."
-            width: 2232
-            height: 1905
-            caption: "Review the suggested values and fill any missing known details before saving. Scroll inside the form to check the estimated value."
-          notice: "Review **John Doe**, **$50,000**, **Denver**, and the Northstar context before saving. Keep unknown contact details unknown. The $50,000 lead is separate from the $250K renewal; do not overwrite the renewal amount. Check the saved lead before retrying to avoid duplicates."
+            1. Confirm creation of a **Lead** for **John Doe**, a **Denver** project worth **$50,000 USD**, with more details expected in a couple of weeks.
+            2. If the agent asks for missing information, answer **TBD** or supply made-up details for this training exercise. Leave any unverified **Account** link unset.
+            3. Wait for the agent's creation confirmation, then open the returned record link or find the lead in **Zava Sales Hub**. Check its saved details before making another creation request.
       reveal:
-        title: "Why did switching conversations help?"
-        line: "The specialist supplies the tools. The MCP App supplies the form."
-        explanation: "Copilot Chat can locate a useful agent without having that agent's CRM capabilities itself. The Zava Sales Hub agent provides the business context and connected tools; its MCP App lets you inspect and complete an action in the conversation. Your permissions and approvals still apply."
-        flow: ["Chat recommendation", "Grounded agent brief", "Reviewed MCP App action"]
+        title: "What did mentioning the agent add?"
+        line: "The specialist supplies business tools within the chat."
+        explanation: "Copilot Chat prepares the call brief. An actual @mention directs the follow-up to Zava Sales Agent (MCS), which supplies connected business tools for the lead action. Keep proposed details separate from a saved record, and confirm only what you know. Your permissions and approvals still apply."
+        flow: ["Copilot Chat brief", "Mention the specialist", "Confirm and inspect the lead"]
       check:
-        question: "The agent shows a lead form. What proves the new lead is ready?"
+        question: "The agent proposes lead details. What proves the new lead exists?"
         options:
-          - text: "The form appeared, so the record must already be saved."
+          - text: "The agent listed the fields, so the record must already be saved."
             correct: false
-            feedback: "An interactive form is not a save confirmation. Inspect the proposed fields and the resulting record."
-          - text: "I reviewed the fields, saved once, and checked the resulting lead."
+            feedback: "Proposed details are not a creation confirmation. Confirm the action and inspect the resulting record."
+          - text: "I confirmed the action, received creation confirmation, and checked the resulting lead."
             correct: true
             feedback: "Verify the effect in CRM, including the distinction between the new lead and the existing renewal."
       stuck:
-        - problem: "Chat answers directly instead of recommending an agent."
-          solution: "Check its sources, then open the provided Zava Sales Hub agent explicitly for the MCP App step. The exercise does not require making Chat fail; routing and data access can differ by tenant."
-        - problem: "The agent does not show the interactive form."
-          solution: "Confirm the conversation is with Zava Sales Hub, not standard Chat or Cowork. Ask the facilitator to check the agent's MCP App deployment. Plain suggested field values are not the interactive-form experience."
+        - problem: "The follow-up is answered by Chat rather than the sales agent."
+          solution: "Check that you selected **Zava Sales Agent (MCS)** from the `@` suggestions, rather than typing its name as plain text. Keep the follow-up in the same chat."
+        - problem: "The agent asks for details I do not have or creation is not confirmed."
+          solution: "Answer necessary follow-up questions with **TBD** or made-up details for this training exercise, then confirm the requested action. Leave any unverified **Account** link unset. If creation fails, check **Zava Sales Hub** for an existing lead before retrying."
 
     - id: delegate
       verb: Delegate
@@ -314,7 +306,7 @@ mission_lab:
       outcome: "A completed phone call and an owned follow-up task linked to the renewal, reflected in the slides and draft."
       steps:
         - title: "Log the call and the promise"
-          instruction: "Return to the **pipeline-review Cowork task**, not the Zava Sales Hub agent chat. Review the proposed record details before approving: the **$250K Northstar renewal**, the call recap, the task owner, and the calendar date chosen for **next Friday**."
+          instruction: "Return to the **pipeline-review Cowork task**, not the Copilot Chat session with Zava Sales Agent (MCS). Review the proposed record details before approving: the **$250K Northstar renewal**, the call recap, the task owner, and the calendar date chosen for **next Friday**."
           prompt_label: Same Cowork task
           prompt: "Just spoke with Riley at Northstar about the $250K renewal. They need a phased rollout plan before final approval, and I promised to send it by next Friday. Create a completed phone call with that recap and a task for me to send the plan. Link both to the renewal."
           screenshot:
@@ -417,7 +409,7 @@ mission_lab:
       outcome: "A Northstar account note, a Summit Youth Sports lead with unknown contact details left unknown, and an introduction follow-up task."
       steps:
         - title: "Install Zava Sales, then start a fresh task"
-          instruction: "Open **Plugins → Cowork**, search for **Zava Sales**, and install it if your facilitator has supplied it. This optional plugin is separate from the **Zava Sales Hub agent** and the **Zava PowerPoint plugin** already used. Install and connect its **Business apps (preview)** prerequisite as described below, then start **New → Cowork** and leave Auto / Medium selected."
+          instruction: "Open **Plugins → Cowork**, search for **Zava Sales**, and install it if your facilitator has supplied it. This optional plugin is separate from **Zava Sales Agent (MCS)** and the **Zava PowerPoint plugin** already used. Install and connect its **Business apps (preview)** prerequisite as described below, then start **New → Cowork** and leave Auto / Medium selected."
           help: |
             1. Open **Plugins** and select the **Cowork** tab.
             2. Search the available plugins for **Zava Sales**.
@@ -467,7 +459,7 @@ mission_lab:
             feedback: "The task to ask Morgan for an introduction is how you close the information gap."
       stuck:
         - problem: "Zava Sales is not in the plugin catalog."
-          solution: "Skip this optional extension and ask your facilitator to check deployment. The core lab needs Zava Sales Hub, Microsoft Dataverse and Zava PowerPoint, not this additional plugin. Do not install an unrelated plugin with a similar name."
+          solution: "Skip this optional extension and ask your facilitator to check deployment. The core lab needs Zava Sales Agent (MCS), the Zava Sales Hub CRM app, Microsoft Dataverse and Zava PowerPoint, not this additional plugin. Do not install an unrelated plugin with a similar name."
         - problem: "I need to rerun this prompt."
           solution: "First inspect whether the note, lead or task already exists. Ask Cowork to reuse the existing records rather than making duplicates."
   finish:
@@ -476,8 +468,8 @@ mission_lab:
     takeaways:
       - label: Copilot Chat
         text: "Find work-file evidence; do not assume that also proves live CRM access."
-      - label: Agent + MCP App
-        text: "Use specialist business tools and an interactive form without leaving the agent conversation."
+      - label: Sales agent
+        text: "Mention a specialist for business actions in the same chat, then confirm and inspect the saved records."
       - label: Cowork
         text: "Delegate an outcome across files and tools, then steer and verify it."
       - label: Skill
@@ -507,7 +499,7 @@ mission_lab:
 
 # Cowork: from insights to action
 
-You'll find a proposal, prepare for a customer call and create a lead with the Zava Sales Hub agent. Then you'll use Cowork to prepare a pipeline review and save the procedure as a reusable skill.
+You'll find a proposal, prepare for a customer call in Copilot Chat and create a lead with Zava Sales Agent (MCS). Then you'll use Cowork to prepare a pipeline review and save the procedure as a reusable skill.
 
 
 
@@ -517,9 +509,9 @@ You'll find a proposal, prepare for a customer call and create a lead with the Z
 | --- | --- | --- | --- |
 | 200 | Business user | 30 minutes core; about 52 with all extensions | A cited proposal, an agent-assisted brief and lead, a branded deck, draft follow-ups, a reusable skill and scheduled preparation. |
 
-Use your assigned **training account**. Your facilitator prepares Copilot access, credits, the sample Northwind proposal, Zava Sales data, the Zava Sales Hub agent and plugins. Start in **Chat, not Cowork**. Keep customer emails as **drafts**.
+Use your assigned **training account**. Your facilitator prepares Copilot access, credits, the sample Northwind proposal, Zava Sales data, Zava Sales Agent (MCS) and plugins. Start in **Chat, not Cowork**. Keep customer emails as **drafts**.
 
-Open [Zava Sales Hub](https://aka.ms/ZavaSalesHub). It is the CRM in this scenario: a Copilot Managed Runtime app and Copilot Studio agent built on Dataverse sample sales data (accounts, contacts, leads, opportunities and activities). On first use, check that the Microsoft Dataverse consent shows your assigned training account, then select **Allow**. Wait for **Live CRM** before checking what Copilot finds and the records you create.
+Open [Zava Sales Hub](https://aka.ms/ZavaSalesHub). It is the CRM app in this scenario, built on Dataverse sample sales data (accounts, contacts, leads, opportunities and activities). It is separate from **Zava Sales Agent (MCS)**, which you'll mention in Copilot Chat. On first use, check that the Microsoft Dataverse consent shows your assigned training account, then select **Allow**. Wait for **Live CRM** before checking what Copilot finds and the records you create.
 
 Ask, Act, Delegate and Repeat take about 30 minutes; the Riley call and CRM update, Friday feedback loop and Zava Sales plugin exercises are optional.
 
@@ -530,7 +522,7 @@ Ask, Act, Delegate and Repeat take about 30 minutes; the Riley call and CRM upda
 <details class="lab-setup" markdown="1">
 <summary>Using your own tenant? View setup requirements</summary>
 
-Arrange Copilot access with Work IQ, the sample Northwind proposal, Cowork credits, and Zava Sales training data before starting. Make the **Zava Sales Hub agent with its lead-creation MCP App** available in Chat, and provide the **Microsoft Dataverse** and **Zava PowerPoint** plugins in Cowork. The separate **Zava Sales** Cowork plugin is needed only for the optional Specialize exercise. These are demo assets to obtain from your facilitator, not built-in capabilities to recreate during this lab.
+Arrange Copilot access with Work IQ, the sample Northwind proposal, Cowork credits, and Zava Sales training data before starting. Make **Zava Sales Agent (MCS)** available to mention in Copilot Chat, and provide the **Microsoft Dataverse** and **Zava PowerPoint** plugins in Cowork. The separate **Zava Sales** Cowork plugin is needed only for the optional Specialize exercise. These are demo assets to obtain from your facilitator, not built-in capabilities to recreate during this lab.
 
 </details>
 
@@ -540,7 +532,7 @@ Arrange Copilot access with Work IQ, the sample Northwind proposal, Cowork credi
 
 - [Prerequisites](#prerequisites)
 - [Ask: find the proposal](#ask-find-the-proposal)
-- [Act: use the sales agent and MCP App](#act-use-the-sales-agent-and-mcp-app)
+- [Act: mention the sales agent](#act-mention-the-sales-agent)
 - [Delegate: make the review](#delegate-make-the-review)
 - [Repeat: save and schedule](#repeat-save-and-schedule)
 - [Record: log the call and commitment (optional)](#record-log-the-call-and-commitment)
@@ -571,35 +563,31 @@ Open the proposal citation and check the economic buyer and decision criteria ag
 
 **If the proposal is missing:** check the assigned account and Work IQ, then ask the facilitator to check access to the sample file. Do not provision Dataverse or invent a buyer.
 
-## Act: use the sales agent and MCP App
+## Act: mention the sales agent
 
-**7 minutes · Copilot Chat and Zava Sales Hub**
+**7 minutes · Copilot Chat and Zava Sales Agent (MCS)**
 
-Select **New**, then confirm **Chat**, not Cowork. Start this in a **new Copilot Chat session**, separate from the Northwind conversation:
+Select **New**, then confirm **Chat**, not Cowork. In this **new Copilot Chat session**, separate from the Northwind proposal conversation, open the model picker and select **Quick response**. Send:
 
 ```text
 Help me prepare for a call about Northstar Teamwear’s $250K Pulse renewal. Where does the deal stand, what needs my attention, and what are the three most important questions to ask on the call?
 ```
 
-In this training experience, Chat may not retrieve the live deal and can recommend **Zava Sales Hub** instead. Select the recommendation to **Try Zava Sales Hub**. Check that the same prompt is carried into the agent conversation; send it if it is only prefilled. Confirm that you are now talking to **Zava Sales Hub**, then check the deal status, attention points and three call questions against its returned records.
+Check the deal status, attention points and three call questions against the cited sources. A generic call plan is not a verified CRM brief; distinguish supported facts from gaps in the available sources. Keep this chat for the next step.
 
-The recommendation's wording can vary. If no card appears, open **Plugins → Chat**, find the facilitator-provided **Zava Sales Hub** agent, and paste the same prompt there. If Chat starts a research task instead, select **Stop task** on that task card before opening the agent; do not wait for a separate research run in this exercise. If Chat answers directly, inspect its sources, then open the agent for the next step anyway. The lab does not require making Chat fail, and this result does **not** establish that Dataverse is unavailable in every Copilot Chat tenant.
-
-In the **same Zava Sales Hub agent conversation**, follow up:
+In the **same Copilot Chat session**, type `@` in the message box and select **Zava Sales Agent (MCS)** from the suggestions to insert an actual @mention. Add the follow-up below after the mention and send it. Do not just type the agent's name as plain text or start a separate conversation:
 
 ```text
-Thanks, btw can you help me create a new lead for them? John Doe mentioned a $50,000 project in the Denver area, details to be sent in a couple of weeks.
+Thanks. By the way, can you help me create a new lead for them? John Doe mentioned a $50000 project in the Denver area. Details to be sent in a couple weeks so everything else is TBD.
 ```
 
-Confirm when prompted, then complete and review the embedded lead form. **This interactive form inside the agent is an MCP App**, not a switch to Cowork. Review **John Doe**, **$50,000**, **Denver**, and the Northstar context before saving. Keep unknown contact details unknown. This lead is separate from the **$250K renewal**; do not overwrite the renewal amount.
+Review **John Doe**, **Denver**, **$50,000 USD**, and the Northstar context in the agent's proposed details. For missing details, answer **TBD** or supply made-up details for this training exercise. Leave any unverified **Account** link unset. The $50,000 lead is separate from the $250K renewal; do not overwrite the renewal amount.
 
-In the lead form, titled **Create new lead record** or **Create new record for Northstar Teamwear**, complete **Lead Name** if blank, for example `Northstar Teamwear - Denver project`. Fill **Topic** with the known project details, including that more details are expected in a couple of weeks. Scroll **inside the form** to check **Estimated value: 50000**. If it is blank or the form warns that it could not fill `$50,000`, enter `50000` without the currency symbol or comma. A company-name string is not proof that the **Account** lookup is linked. Select **Accept and save** once, then look for **Your changes have been saved successfully** and **Update lead record**. Use **Open** to inspect the saved record if needed.
+Confirm the requested action when the agent asks. Answer necessary follow-up questions with **TBD** or made-up details for this training exercise. Continue until **Zava Sales Agent (MCS)** confirms creation, then open the returned record link or find the lead in **Zava Sales Hub**. Check its saved details and check for an existing lead before retrying to avoid duplicates.
 
-<picture><source media="(prefers-color-scheme: dark)" srcset="images/lead-mcp-app-dark.webp"><img src="images/lead-mcp-app.webp" alt="The interactive Zava Sales Hub lead form inside the agent, with John Doe, Northstar Teamwear and Denver suggested, and an Accept and save button"></picture>
+If Chat answers rather than the agent, check that you selected **Zava Sales Agent (MCS)** from the `@` suggestions instead of typing its name as plain text. If the agent asks for missing information, answer **TBD** or supply made-up details for this training exercise. Leave any unverified **Account** link unset.
 
-Check the saved lead before retrying to avoid duplicates. If the agent or form is missing, ask the proctor to check the deployment; do not install a lookalike or treat plain suggested field values as an interactive form.
-
-**Quick check:** Does seeing a lead form prove the record exists? **No. Review the fields, save once, and verify the resulting CRM record.**
+**Quick check:** Do proposed lead details prove the record exists? **No. Confirm the action, receive creation confirmation, and verify the resulting CRM record.**
 
 ## Delegate: make the review
 
@@ -696,7 +684,7 @@ The command is free and shows **approximate cumulative task usage**, not an invo
 
 **Optional · 8 minutes · Dataverse, PowerPoint and Outlook**
 
-Return to the **pipeline-review Cowork task**, not the Zava Sales Hub agent chat. Send:
+Return to the **pipeline-review Cowork task**, not the Copilot Chat session with Zava Sales Agent (MCS). Send:
 
 ```text
 Just spoke with Riley at Northstar about the $250K renewal. They need a phased rollout plan before final approval, and I promised to send it by next Friday. Create a completed phone call with that recap and a task for me to send the plan. Link both to the renewal.
@@ -754,7 +742,7 @@ Find **Weekly Deal Review** under **Plugins → Cowork** and the separate Monday
 
 **Optional · 8 minutes · New Cowork task**
 
-1. Open **Plugins → Cowork**, search for **Zava Sales**, and install/add it if your facilitator has supplied it. If already installed, leave it enabled. This optional plugin is separate from the **Zava Sales Hub agent** and the **Zava PowerPoint plugin** already used.
+1. Open **Plugins → Cowork**, search for **Zava Sales**, and install/add it if your facilitator has supplied it. If already installed, leave it enabled. This optional plugin is separate from **Zava Sales Agent (MCS)** and the **Zava PowerPoint plugin** already used.
 2. Review its skills, connections and prerequisites. The workshop plugin requires **Business apps (preview)**, published by **Microsoft Corporation**. Search for **Business apps**, install it if needed, and select **Connect** using your training identity. Verify **Connected** and leave it enabled. The **Microsoft Dataverse** connection from Delegate is separate and does not satisfy this dependency. Use only the supplied training environment and your own connection.
 3. Start **New → Cowork** so the task discovers the plugin. Leave **Auto / Medium** selected.
 4. Send:
@@ -775,13 +763,13 @@ If asked, confirm the three requested records, your intended follow-up date and 
 
 A plugin can combine **skills, connectors, or both**. It supplies business guidance as well as tools, without bypassing your permissions. Follow the **Zava Sales Hub** link if recommended, or open [Zava Sales Hub](https://aka.ms/ZavaSalesHub): a purpose-built app can be the best place to manage the results.
 
-If Zava Sales is missing from the catalog, skip this optional extension and ask your facilitator rather than installing a lookalike. The core lab needs Zava Sales Hub, Microsoft Dataverse and Zava PowerPoint, not this additional plugin. Before rerunning the prompt, check for existing records to avoid duplicates.
+If Zava Sales is missing from the catalog, skip this optional extension and ask your facilitator rather than installing a lookalike. The core lab needs Zava Sales Agent (MCS), the Zava Sales Hub CRM app, Microsoft Dataverse and Zava PowerPoint, not this additional plugin. Before rerunning the prompt, check for existing records to avoid duplicates.
 
 **Quick check:** Should Cowork generate a plausible email address for Jamie? **No. Unknown details remain unknown.**
 
 ## Take it with you
 
-**Copilot Chat** finds work-file evidence. A specialist **agent** provides business tools, and an **MCP App** lets you review and complete an action inside its conversation. **Cowork** coordinates work across files and tools. A **skill** saves the method, an **automation** schedules it, and a **plugin** supplies connected capabilities and guidance such as Zava's PowerPoint branding.
+**Copilot Chat** finds work-file evidence and prepares a call brief. Mention a specialist **agent** for business actions in the same chat, then confirm and inspect the saved records. **Cowork** coordinates work across files and tools. A **skill** saves the method, an **automation** schedules it, and a **plugin** supplies connected capabilities and guidance such as Zava's PowerPoint branding.
 
 Which recurring task in your own work deserves a playbook like this?
 

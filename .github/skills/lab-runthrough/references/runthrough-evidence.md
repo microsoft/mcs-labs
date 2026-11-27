@@ -38,8 +38,18 @@ permit opening a generated deck simply to claim that its lab passed.
 
 ## Verify outcomes at their source
 
+- Before sending, identify the last assistant turn and check that the intended mode,
+  source switch, composer and Send control are ready. After submission, require a **new
+  assistant reply to that prompt** and wait for its content and tool activity to settle.
+  The submitted prompt, earlier replies, cumulative page text, a **Copy** button, or a
+  disappearing **Processing** indicator alone cannot prove completion. Inspect that
+  turn before retrying a timeout so the same action is not submitted twice.
 - Read cited source documents and inspect generated files; do not rely only on a chat
   summary or a link the model claims it created.
+- When a prompt gives a cloud tool a public data source, open the exact URL from
+  the copied prompt, separately from the lab's event navigation or local preview.
+  Compare the returned dataset with what the exercise expects (for example, the item
+  count and a named entry). HTTP 200 alone does not tell you it is the right dataset.
 - Verify business records in the system of record. Check required fields, owner,
   relationships and timezone. Distinguish actuals from projections, record known-missing
   values and identify fields or writes that failed.

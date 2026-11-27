@@ -23,4 +23,4 @@ This lab is under development. Hands-on instructions and prerequisites are comin
 
 ## Architecture Bootcamp Latest
 
-This lab is part of [Architecture Bootcamp Latest]({{ '/events/bootcamp-latest/' | relative_url }}).
+This lab is part of [Architecture Bootcamp Latest]({{ '/events/architecture-bootcamp-classic/' | relative_url }}).

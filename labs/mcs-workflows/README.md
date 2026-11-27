@@ -470,12 +470,17 @@ Complete the setup of the **Order Management Workflow**: explore the classificat
 
    ![The subject filter expression configured on the trigger](images/subject-filter-expression.png)
 
-3. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the classification categories. **Three** are configured explicitly in the node, and the panel notes that *a "Default" category is automatically created for inputs that don't match any category* — that automatic category is what the canvas shows as the **Other** branch. Each configured category has a name and example text that the AI model uses to determine where an incoming email should be routed:
+3. On the workflow canvas, select the existing **Classify** node. In the panel on the right, open **Configure**. Next to **Input to classify**, choose **GPT 6 Sol** from the model dropdown. If it isn't listed, choose another available model. Leave the **Body** token in place. It supplies the text of each incoming email.
+
+   <picture><source media="(prefers-color-scheme: dark)" srcset="../workflows-autonomous/images/classify-model-dark.webp"><img src="../workflows-autonomous/images/classify-model.webp" alt="Input to classify with GPT 6 Sol selected and the Body token in the field below." width="712" height="280" loading="lazy"></picture>
+
+   Under **Categories**, you'll see three named routes:
 
    - **Quote Request** — emails requesting pricing or quotes for products/services
    - **Supplier Delay** — notifications about delays from suppliers
    - **Customer Inquiry** — general questions from customers about orders, shipping, etc.
-   - **Other** — the automatic **Default** category: anything that doesn't match the three above (spam, promotions, irrelevant). You will not find it in the **Categories** list, because the Classify node creates it for you.
+
+   On the canvas, **Other** handles messages that don't match any of the three. You don't need to add it to **Categories**.
 
    ![The Classify node categories, with the three configured categories listed](images/classify-categories-all.png)
 
@@ -484,17 +489,19 @@ Complete the setup of the **Order Management Workflow**: explore the classificat
 
 #### Test the classification
 
-4. Select the Classify node's **Run node** tab to test classification before sending a real email. In the **When a new email arrives** section, find **Body** (*The body of the message*), click into the box, and paste:
+4. At the top of the same **Classify** panel, switch from **Configure** to **Run node**. Under **When a new email arrives**, paste the sample below into **Body** and select **Run**.
 
    ```
    Hi, I would like to request a quote for 500 units of Product A.
    ```
 
-   Select **Run** and observe the predicted category — it should classify as **Quote Request**.
+   Under **Output**, look for **category: Quote Request**. Only **Classify** ran; no email was sent.
 
    ![The classification test result showing Quote Request](images/classify-test-result.png)
 
-5. Select **Save** (or press **Ctrl+S**). The **Publish** button becomes available after saving — select **Publish**.
+5. Select **Save** (or press **Ctrl+S**), then **Publish**. Wait for **Published**, then return to **Workflows** and confirm **Enabled**.
+
+   If **Publish** is unavailable after the node test, open **Classify** → **Configure**. Reselect an available model next to **Input to classify**, then **Save** and try **Publish** again.
 
 #### Test the "Other" classification path end-to-end
 

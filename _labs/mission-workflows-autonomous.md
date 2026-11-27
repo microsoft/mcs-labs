@@ -162,32 +162,51 @@ mission_lab:
       brief: "Classify a quote without dispatching it, then prove the Other branch archives one test."
       outcome: "Quote Request node output plus a separate successful Other run and actual archived message."
       steps:
-        - title: "Inspect categories and run the quote sample"
+        - id: route-configure
+          title: "Choose the model for Classify"
           instruction: |
-            Select **Classify**. Keep the current/default available model; replace a model only if missing or flagged as retired. Inspect the three configured categories: **Quote Request**, **Supplier Delay**, and **Customer Inquiry**. **Other** is the automatically created Default category, not a fourth configured category.
+            On the workflow canvas, select the existing **Classify** node. In the panel on the right, open **Configure**. Next to **Input to classify**, choose **GPT 6 Sol** from the model dropdown. If it isn't listed, choose another available model.
 
-            In the **Classify** panel, select **Run node**, next to **Configure**. Under **When a new email arrives**, paste the sample into the test **Body** field, then select **Run**. Do not paste the sample on **Configure** or replace its dynamic email input; the hard-coded text is for this test only. Use **Show me: Run node tab and Body test input** below to locate the field. Expect **Quote Request**. This does not execute the downstream agent or send a quote.
+            Leave the **Body** token in place. It supplies the text of each incoming email. Under **Categories**, you'll see **Quote Request**, **Supplier Delay**, and **Customer Inquiry**. On the canvas, **Other** handles messages that don't match any of the three.
+          screenshot:
+            src: /labs/workflows-autonomous/images/classify-model.webp
+            src_dark: /labs/workflows-autonomous/images/classify-model-dark.webp
+            title: "Model and email input on Configure"
+            alt: "Input to classify with GPT 6 Sol selected in the model dropdown and the Body token in the field below."
+            width: 712
+            height: 280
+            caption: "On Configure, the dropdown selects the model. The Body token below it supplies the email text."
+        - id: route-1
+          title: "Test a quote request"
+          instruction: |
+            At the top of the same **Classify** panel, switch from **Configure** to **Run node**. Under **When a new email arrives**, paste the sample below into **Body** and select **Run**.
+
+            Under **Output**, look for **category: Quote Request**. Only **Classify** ran; no email was sent.
           prompt_label: Classify · Run node · Body
           prompt: |-
             Hi, I would like to request a quote for 500 units of Product A.
           screenshot:
             src: /labs/workflows-autonomous/images/classify-quote-result.webp
             src_dark: /labs/workflows-autonomous/images/classify-quote-result-dark.webp
-            title: "Run node tab and Body test input"
+            title: "Test input and output on Run node"
             alt: "Classify panel with Run node selected beside Configure, the sample in the Body test input, and Quote Request output."
             width: 406
             height: 505
-            caption: "Select Run node, not Configure. Paste the sample in Body under When a new email arrives, then select Run."
-        - title: "Publish the workflow"
+            caption: "On Run node, Body holds the sample email. Output shows the predicted category: Quote Request."
+        - id: route-2
+          title: "Publish the workflow"
           instruction: |
             Confirm every node that requires a connection has one selected, including **Human review**. Select **Save** (or **Ctrl+S**) then **Publish**. Wait for **Published**, then return to **Workflows** and confirm **Enabled**. If publishing reports a missing connection, open the named node, create or select its connection, then save and publish again.
-        - title: "Address the Other test to yourself"
+          help: "If **Publish** is unavailable after the node test, open **Classify** → **Configure**. Reselect an available model next to **Input to classify**, then **Save** and try **Publish** again."
+        - id: route-3
+          title: "Address the Other test to yourself"
           instruction: |
             Open Outlook. If **Your privacy matters** appears, read it and select **Continue**. Compose a message to your own training account and use **Check names** if necessary. Paste this subject; do not send until the next step supplies the body.
           prompt_label: Outlook · Other test · Subject
           prompt: |-
             Order Management - Congratulations! Your order desk has been selected
-        - title: "Send the synthetic Other sample"
+        - id: route-4
+          title: "Send the synthetic Other sample"
           instruction: "Paste this sample promotional message and select **Send**."
           prompt_label: Outlook · Other test · Body
           prompt: |-
@@ -202,7 +221,8 @@ mission_lab:
             Regards,
             Promotions Team
             MegaDraw Rewards
-        - title: "Verify both Activity and Archive"
+        - id: route-5
+          title: "Verify both Activity and Archive"
           instruction: |
             In Copilot Studio, open **Workflows → Order Management Workflow**, then select **Activity**. Select **Refresh** and open the run that started after you sent the test email. If it has not appeared, wait a few minutes and refresh before sending another email. In the run diagram, follow **Classify → Other → Archive email** and check for **Succeeded**. Separately find the exact message in Outlook's **Archive**.
 
@@ -513,7 +533,7 @@ mission_lab:
 
 # Workflows
 
-Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/).
 
 You'll start with a workflow that plans a To Do task. Then you'll classify email and review an AI-drafted reply before approving it to be sent.
 
@@ -645,49 +665,59 @@ Open the task in [Microsoft To Do](https://to-do.office.com/) and the event in [
 
 **Outcome:** Quote Request node output, plus a separate successful Other run and actual archived message.
 
-1. Open **Classify**. Keep the current/default available model; replace one only if missing or flagged retired. Inspect **Quote Request**, **Supplier Delay**, and **Customer Inquiry**. **Other** is the automatic Default category, not a fourth configured category.
+1. On the workflow canvas, select the existing **Classify** node. In the panel on the right, open **Configure**. Next to **Input to classify**, choose **GPT 6 Sol** from the model dropdown. If it isn't listed, choose another available model.
 
-   Select **Run node**, next to **Configure**. Under **When a new email arrives**, paste the sample below into the test **Body** field, then select **Run**. Do not paste the sample on **Configure** or replace its dynamic email input; the hard-coded text is for this test only.
+   Leave the **Body** token in place. It supplies the text of each incoming email. Under **Categories**, you'll see **Quote Request**, **Supplier Delay**, and **Customer Inquiry**. On the canvas, **Other** handles messages that don't match any of the three.
+
+   <picture><source media="(prefers-color-scheme: dark)" srcset="images/classify-model-dark.webp"><img src="images/classify-model.webp" alt="Input to classify with GPT 6 Sol selected in the model dropdown and the Body token in the field below." width="712" height="280" loading="lazy"></picture>
+
+   *On Configure, the dropdown selects the model. The Body token below it supplies the email text.*
+
+2. At the top of the same **Classify** panel, switch from **Configure** to **Run node**. Under **When a new email arrives**, paste the sample below into **Body** and select **Run**.
 
    <picture><source media="(prefers-color-scheme: dark)" srcset="images/classify-quote-result-dark.webp"><img src="images/classify-quote-result.webp" alt="Classify panel with Run node selected beside Configure, the sample in the Body test input, and Quote Request output." width="406" height="505" loading="lazy"></picture>
 
-   *Select Run node, not Configure. Paste the sample in Body under When a new email arrives, then select Run.*
+   *On Run node, Body holds the sample email. Output shows the predicted category: Quote Request.*
 
-**Classify · Run node · Body**
+   **Classify · Run node · Body**
 
-```text
-Hi, I would like to request a quote for 500 units of Product A.
-```
+   ```text
+   Hi, I would like to request a quote for 500 units of Product A.
+   ```
 
-Expect **Quote Request**. This node-only test does not execute the downstream agent or send a quote.
+   Under **Output**, look for **category: Quote Request**. Only **Classify** ran; no email was sent.
 
-2. Confirm every node that requires a connection has one selected, including **Human review**. Select **Save** (or **Ctrl+S**) then **Publish**. Wait for **Published**, then return to **Workflows** and confirm **Enabled**. If publishing reports a missing connection, open the named node, create or select its connection, then save and publish again.
-3. In Outlook, review **Your privacy matters → Continue** if shown. Compose to your training account, using **Check names** if needed. Paste the subject, then the body before sending.
+3. Confirm every node that requires a connection has one selected, including **Human review**. Select **Save** (or **Ctrl+S**) then **Publish**. Wait for **Published**, then return to **Workflows** and confirm **Enabled**. If publishing reports a missing connection, open the named node, create or select its connection, then save and publish again.
 
-**Outlook · Other test · Subject**
+   If **Publish** is unavailable after the node test, open **Classify** → **Configure**. Reselect an available model next to **Input to classify**, then **Save** and try **Publish** again.
 
-```text
-Order Management - Congratulations! Your order desk has been selected
-```
+4. In Outlook, review **Your privacy matters → Continue** if shown. Compose to your training account, using **Check names** if needed. Paste the subject, then the body before sending.
 
-**Outlook · Other test · Body**
+   **Outlook · Other test · Subject**
 
-```text
-Dear Order Manager,
+   ```text
+   Order Management - Congratulations! Your order desk has been selected
+   ```
 
-Congratulations! Your order management team has been selected in our monthly business draw and is entitled to claim an exclusive cash reward.
+5. Paste the sample below into the email body and select **Send**.
 
-To release your reward, please reply with your full name and contact details, and a small processing fee may apply.
+   **Outlook · Other test · Body**
 
-Act soon, as unclaimed rewards expire.
+   ```text
+   Dear Order Manager,
 
-Regards,
-Promotions Team
-MegaDraw Rewards
-```
+   Congratulations! Your order management team has been selected in our monthly business draw and is entitled to claim an exclusive cash reward.
 
-4. Select **Send**.
-5. In Copilot Studio, open **Workflows → Order Management Workflow**, then select **Activity**. Select **Refresh** and open the run that started after you sent the test email. If it has not appeared, wait a few minutes and refresh before sending another email. In the run diagram, follow **Classify → Other → Archive email** and check for **Succeeded**. Find the message in Outlook **Archive**. If no run appears, check **Enabled** and that the subject contains **Order Management**. Otherwise, continue to Review.
+   To release your reward, please reply with your full name and contact details, and a small processing fee may apply.
+
+   Act soon, as unclaimed rewards expire.
+
+   Regards,
+   Promotions Team
+   MegaDraw Rewards
+   ```
+
+6. In Copilot Studio, open **Workflows → Order Management Workflow**, then select **Activity**. Select **Refresh** and open the run that started after you sent the test email. If it has not appeared, wait a few minutes and refresh before sending another email. In the run diagram, follow **Classify → Other → Archive email** and check for **Succeeded**. Find the message in Outlook **Archive**. If no run appears, check **Enabled** and that the subject contains **Order Management**. Otherwise, continue to Review.
 
 <picture><source media="(prefers-color-scheme: dark)" srcset="images/other-path-succeeded-dark.webp"><img src="images/other-path-succeeded.webp" alt="Executed Other branch leading to a successful Archive email action."></picture>
 

@@ -1,6 +1,6 @@
 # Apps on Microsoft Copilot Managed Runtime
 
-Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/).
 
 You'll build a bootcamp tracker, create a OneDrive CSV file for storage and connect the app to it. You'll test that completion changes remain after a reload and check how the app handles storage problems. The app stays in preview.
 
@@ -42,7 +42,7 @@ Arrange Copilot Studio Apps access, image upload, preview and permission to read
 
 You still download/upload the reference and create or verify your own connection and CSV in the exercises. Those lab-specific artifacts are not assumed to be pre-created.
 
-**Attendee readiness:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account and select the assigned environment. Open the [live agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/). Keep the app in preview.
+**Attendee readiness:** sign in to [Copilot Studio](https://copilotstudio.microsoft.com/) with your assigned training account and select the assigned environment. Open the [live agenda](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/). Keep the app in preview.
 
 ## 🧭 Build
 
@@ -70,7 +70,7 @@ Build an app called "My Bootcamp Lab App" using the attached screenshot as a vis
 Reproduce its dark theme, square corners, day tabs, timeline, lab cards, completion checkboxes, and overall progress indicator.
 
 Fetch the current live published lab schedule from:
-https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/
+https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/
 
 Include every day's scheduled "Lab N:" items and Lunch break.
 Exclude other agenda items and optional labs. If you cannot read the agenda, stop and tell me rather than inventing the schedule.
@@ -286,4 +286,4 @@ Your finish line is **verified app-to-file persistence and safe failure behavior
 - [OneDrive for Business connector reference](https://learn.microsoft.com/connectors/onedriveforbusiness/)
 - [Manage connections in Power Apps](https://learn.microsoft.com/power-apps/maker/canvas-apps/add-manage-connections)
 - [What is Microsoft Copilot Managed Runtime (preview)](https://learn.microsoft.com/microsoft-365/copilot-managed-runtime/)
-- [Live published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/)
+- [Live published bootcamp agenda](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/)

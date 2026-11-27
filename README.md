@@ -52,7 +52,7 @@
 
 ## Copilot & Agents Bootcamp
 
-The advertised [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/) contains 17 modules and 11 guided exercise labs. Its [agenda](./_data/agendas/architecture-bootcamp.yml) is the source of truth for the three-day schedule.
+The advertised [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/) contains 17 modules and 11 guided exercise labs. Its [agenda](./_data/agendas/architecture-bootcamp.yml) is the source of truth for the three-day schedule.
 
 | Lab | Title | Slot |
 | --- | ----- | ---- |
@@ -73,7 +73,7 @@ All 11 labs use guided exercises, including the shared Zava Sales lab. Model and
 connector latency varies by run. See each lab's pacing and optional extensions,
 and the [curriculum notes](./_data/agendas/README.md#architecture-bootcamp).
 
-The [classic-format edition](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/)
+The [classic-format edition](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp-classic/)
 and its labs remain available at their existing URLs. The classic event is unlisted
 and excluded from search and the sitemap, not access-controlled or deleted.
 Its module schedule and lab slots are unchanged. Module companion cards follow

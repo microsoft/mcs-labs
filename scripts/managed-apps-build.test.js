@@ -23,7 +23,7 @@ const step = title => steps.find(item => item.title === title)?.instruction ?? '
 
 test('managed apps use the current bootcamp agenda in both editions', () => {
   for (const copy of [JSON.stringify(document.data.mission_lab), document.content, readme, classic.content, classicReadme]) {
-    assert.ok(copy.includes('https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/'));
+    assert.ok(copy.includes('https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/'));
     assert.doesNotMatch(copy, /\/events\/bootcamp-latest\//);
   }
 });

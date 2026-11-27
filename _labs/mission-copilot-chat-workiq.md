@@ -116,7 +116,7 @@ mission_lab:
           notice: "Compare the answers' sources, calculations and conclusions. The prompt and response mode both changed, so this isn't a controlled model benchmark. Auto can also reason deeply on a complex question."
         - title: "Inspect response modes and change the model"
           instruction: "Open the selector beside **Work IQ**. Notice **Auto**, **Quick response** and **Think deeper**. Below them, point to **Claude** and choose an available model, such as **Sonnet 5.5**, or inspect **GPT**."
-          help: "Auto decides how long to think; Quick response favors speed for recall, rewriting and short lookups; Think deeper spends longer on multi-step reasoning. When unsure, use Auto. Model names and availability depend on tenant and admin settings. If you switch models, ask a fresh question: the new model may not recognize the earlier model's web results."
+          help: "Auto decides how long to think; Quick response favors speed for recall, rewriting and short lookups; Think deeper spends longer on multi-step reasoning. When unsure, use Auto. Model names and availability depend on tenant and admin settings. If you switch models, ask a fresh question rather than relying on earlier web results, which the new model might not recognize."
           screenshot:
             title: response modes and models
             src: /labs/copilot-chat-workiq/images/model-picker.webp
@@ -417,7 +417,7 @@ mission_lab:
           instruction: "Optionally send this follow-up in the same Analyst conversation."
           prompt_label: Same Analyst conversation, optional
           prompt: "Now create a chart showing NPV vs. Investment Cost for all 10 recommendations, with bubble size representing IRR."
-          notice: "If you see code or a file name instead of a rendered chart, try the answer's **Provide the chart as a downloadable PNG** suggestion if offered, or rely on the ranked table."
+          notice: "If you see code or a file name instead of a chart, send a follow-up message: **Provide the chart as a downloadable PNG** or **Please show the chart inline**."
         - title: "Explore a budget constraint"
           instruction: "Optionally send the second follow-up. Check the proposed combination, its total cost and total NPV against the ranked table and the cash-flow assumptions."
           help: "Check what the budget covers. Initial funding and total five-year spending are not the same: R7/R10 recur and R5 has two installments. Ask Analyst to state its budget basis before accepting a portfolio; a first-year total does not include every later commitment."
@@ -463,7 +463,7 @@ mission_lab:
 
 # Microsoft Copilot Chat and Work IQ
 
-Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/).
+Follow this lab in [Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/).
 
 You'll research a market question, apply a company policy and compare store results. You'll check the sources behind the answers. Optional exercises introduce Pages, Researcher and Analyst.
 
@@ -593,7 +593,7 @@ Compare the answers' sources, calculations and conclusions. The prompt and respo
 <details>
 <summary>Choose a response mode and model</summary>
 
-Auto decides how long to think; Quick response favors speed for recall, rewriting and short lookups; Think deeper spends longer on multi-step reasoning. When unsure, use Auto. Model names and availability depend on tenant and admin settings. If you switch models, ask a fresh question: the new model may not recognize the earlier model's web results.
+Auto decides how long to think; Quick response favors speed for recall, rewriting and short lookups; Think deeper spends longer on multi-step reasoning. When unsure, use Auto. Model names and availability depend on tenant and admin settings. If you switch models, ask a fresh question rather than relying on earlier web results, which the new model might not recognize.
 
 </details>
 
@@ -922,7 +922,7 @@ For R7/R10, ask for a Year 0–5 cash-flow table if payment timing is unclear. C
 Now create a chart showing NPV vs. Investment Cost for all 10 recommendations, with bubble size representing IRR.
 ```
 
-If you see code or a file name instead of a rendered chart, try the answer's **Provide the chart as a downloadable PNG** suggestion if offered, or rely on the ranked table.
+If you see code or a file name instead of a chart, send a follow-up message: **Provide the chart as a downloadable PNG** or **Please show the chart inline**.
 
 6. Optionally send the second follow-up. Check the proposed combination, its total cost and total NPV against the ranked table and the cash-flow assumptions. Ask Analyst to state whether the budget covers initial funding or total five-year spending: R7/R10 recur and R5 has two installments. A first-year total does not include every later commitment.
 

@@ -126,6 +126,8 @@ script changes.
   agenda slot listing the lab (`agenda-usage`) must agree. Agenda changes affect an event,
   so name the event in the PR.
 - **Dates.** Do not add update dates; the site derives them from Git.
+- **Event URLs.** For an explicitly requested route rename, update links in both
+  lab copies and every prompt occurrence, and preserve old routes and event IDs.
 - **Guided labs.** Keep the contract: core `minutes` sum to `duration`, each check has
   exactly one correct option, and only trailing extensions are optional. Preserve
   exercise/step IDs and readiness positions, and do not add result-check gates. Apply the

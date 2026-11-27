@@ -32,7 +32,7 @@ test('the classic Architecture Bootcamp is discoverable with an event-specific A
   assert.notDeepEqual(classic.labs, current.labs);
   assert.ok(current.order < classic.order, 'The guided curriculum remains the first listed edition');
   assert.match(classic.description, /use Copilot & Agents Bootcamp for the guided exercise edition/);
-  assert.match(read(path.join('_events', 'bootcamp-latest.md')), /\[Copilot & Agents Bootcamp\]\({{ '\/events\/architecture-bootcamp\/' \| relative_url }}\)/);
+  assert.match(read(path.join('_events', 'bootcamp-latest.md')), /\[Copilot & Agents Bootcamp\]\({{ '\/events\/copilot-agents-bootcamp\/' \| relative_url }}\)/);
 });
 
 test('restoring the classic edition does not list the original or preview events', () => {
@@ -45,11 +45,12 @@ test('restoring the classic edition does not list the original or preview events
   }
 });
 
-test('guided lab links use the current display name without changing the route', () => {
+test('guided lab links use the current display name and the published agenda route for Copilot Code', () => {
   for (const { slug } of event('architecture-bootcamp').labs) {
     if (slug === 'cowork-zava-sales') continue; // Shared lab has no event-specific introduction.
+    const route = slug === 'copilot-code-web-app' ? 'architecture-bootcamp' : 'copilot-agents-bootcamp';
     for (const file of [path.relative(root, labSourcePath(root, slug)), path.join('labs', slug, 'README.md')]) {
-      assert.ok(read(file).includes('[Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/)'), file);
+      assert.ok(read(file).includes(`[Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/${route}/)`), file);
     }
   }
 });

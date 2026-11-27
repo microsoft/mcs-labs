@@ -27,7 +27,6 @@ Build and test an RFP Response agent with an existing Skill, inspect its package
 - [Conclusions and recommendations](#-conclusions-and-recommendations)
 - [Extra Credit: Create and test a Skill with Copilot Studio](#-extra-credit-create-and-test-a-skill-with-copilot-studio)
 - [Extra Credit: Explore the agent harness](#-extra-credit-explore-the-agent-harness)
-- [Extra Credit: Generate with AI](#-extra-credit-generate-with-ai)
 
 ---
 
@@ -64,9 +63,9 @@ Use Case #1 is the complete core lab: build an RFP Response agent with a sample 
 |---------|----------------|
 | **Skill** | A named playbook - description, instructions, and bundled reference files - that the orchestrator loads only when a request matches it, keeping base instructions short and behaviour consistent |
 | **Skill description** | The text the orchestrator matches a user request against. It is the single most common reason a Skill does or does not fire |
-| **Skill generation and refinement** | Give an authoring assistant a process and examples, review its generated Skill, then test it in the target agent. Generation is a starting point, not proof that the Skill works |
+| **Skill generation and testing** | Give an authoring assistant a process and examples, review its generated Skill, then test it in the target agent. Generation is a starting point, not proof that the Skill works |
 | **Bundled references and scripts** | The `references/`, `assets/` and `scripts/` folders that travel with `SKILL.md`, so the Skill answers from vetted material and can run its own helpers rather than improvising |
-| **Agent sandbox** | The runtime where the agent can execute code, analyze supplied files, and generate artifacts such as charts and PDFs; available libraries and tools must be observed rather than assumed |
+| **Agent sandbox** | Where the agent runs code, analyzes files, and creates outputs such as charts and PDFs. Check which tools and libraries are available. |
 | **Skill guidance versus validation** | A Skill guides model behavior but does not guarantee exact question ordering, field validation, or branching. Test the behavior and use deterministic validation when guarantees are required |
 
 ---
@@ -217,11 +216,11 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
 #### Add the RFP Response skill
 
 1. Download the skill package:
-    [rfp-response.zip](https://github.com/Dewain27/AgentDudeSamples/raw/refs/heads/main/samples/RFP%20Skill/packages/rfp-response.zip)
+    [rfp-response.zip](../instructions-skills-authoring/assets/rfp-response.zip?raw=true)
 
     The package contains a `SKILL.md` plus the reference material it draws on - an answer library,
     offering catalogs, past-performance and pricing references, and worked examples of RFP requests
-    and responses.
+    and responses. It also contains a Python checker.
 
     > [!NOTE]
     > The sample skill is written for a fictional company, **Aventra Software Group**. Its answers are grounded in that company's catalog, past performance, and pricing, so Aventra will appear in the agent's output even though the agent instructions say "our organization". In a real deployment you would swap the bundled references for your own.
@@ -250,11 +249,11 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
 
 1. In the **Skills** section of the rail, select the **rfp-response** chip to open the skill.
 
-1. The viewer shows the whole package: **16 files** in a tree, with the size of the selected file
+1. The viewer shows the package in a file tree, with the size of the selected file
     at the top right. `SKILL.md` opens first - its **Name** and **Description** come from the YAML
     frontmatter, and **Instructions** is the body.
 
-    ![The rfp-response skill viewer showing the bundle file tree alongside the SKILL.md name, description, and instructions](images/uc1-skill-contents.png)
+    ![The rfp-response Skill viewer showing its description, answer library, checker script, and menu beside the close button.](../instructions-skills-authoring/images/skill-description.webp)
 
     > [!NOTE]
     > These fields are **Read-only**. An uploaded skill is changed by editing the package and re-uploading it, not in the portal. A skill authored with **Create from blank** is editable in place.
@@ -265,8 +264,6 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
 1. In the tree, select **references/answer-library.md**. This is the pre-approved answer library
     the skill reuses instead of composing new prose - a topic-key table covering security, data
     privacy, accessibility, hosting, SSO, SLAs, and pricing.
-
-    ![The answer-library.md reference open in the skill viewer, showing the topic-key table](images/uc1-skill-answer-library.png)
 
     > [!TIP]
     > This is what makes a Skill more than a long prompt. The instructions say *how to behave*; the bundled `references/` and `assets/` are the material it works from. Swap these files for your own catalog and answer library and the same skill drafts your proposals.
@@ -281,7 +278,7 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
     **New chat**, **History**, and **Debug mode** (on by default, which keeps the reasoning trace visible).
 
 1. Download the sample RFP:
-    [01-westbrook-permitting-portal.md](https://github.com/Dewain27/AgentDudeSamples/raw/refs/heads/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md)
+    [01-westbrook-permitting-portal.md](../instructions-skills-authoring/assets/01-westbrook-permitting-portal.md?raw=true)
     - a City of Westbrook RFP for an online permitting and licensing portal.
 
     > [!NOTE]
@@ -295,43 +292,36 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
 
     ![The Preview message box with the RFP attached and the prompt typed](images/uc1-preview-attach.png)
 
-1. Watch the agent's turn. Before it writes anything, it notes that the rfp-response skill fits the
-    request, and the trace shows **Using skill: rfp-response** (**Used skill: rfp-response** once
-    loaded), followed by its reasoning about the offering, price, and gaps.
+1. Look for the `rfp-response` card in the activity trace.
 
     ![The orchestrator using the rfp-response skill, with its reasoning about deadline, price and gaps](images/uc1-skill-loading.png)
 
-    > [!IMPORTANT]
-    > **This is the whole point of the lab.** You never told the agent to use the skill. The orchestrator matched your request against the skill's **description**, decided it applied, and loaded it - then followed the skill's procedure: identify the matching offering, read `answer-library.md`, `past-performance.md` and `pricing.md`, and only then draft.
+    You didn't name the skill in the prompt. The agent selected it by matching your request to its description.
 
-1. Select **Using skill: rfp-response** to expand it. The trace shows the skill **description**
-    the orchestrator matched against, and the **Input** it passed: `skill: rfp-response`.
+1. Expand the `rfp-response` card in the activity trace. Look for `skill: rfp-response` under
+    **Input**. It shows which skill the agent selected.
 
-    ![The expanded skill-load trace showing the matched description and the input skill: rfp-response](images/uc1-skill-load-trace.png)
-
-    > [!TIP]
-    > This is the diagnostic to reach for when a skill does *not* fire. If the description does not contain the language a user would actually use, the orchestrator never matches it - and nothing in the transcript tells you the skill exists.
-
-1. Let the run finish. The agent drafts the proposal, then uses the tools available to it to
-    render it as a PDF.
-
-    > [!NOTE]
-    > The full draft-plus-PDF run takes several minutes (about 4 minutes in our test) - it is writing a nine-page proposal and then rendering it. The reasoning trace updates as it works and is worth reading; the agent has not hung.
-
-1. Review the summary. It reports the matched offering, the fee and duration, how the proposal is
-    structured against the buyer's scoring criteria, and a numbered list of items that need your
-    input before submission. The exact wording and figures vary from run to run.
-
-    ![The agent's closing summary with the deadline flag, the matched offering, fee and duration, and the proposal structure](images/uc1-output-summary.png)
+    ![Expanded Using skill: rfp-response trace showing the matched description and skill input.](../instructions-skills-authoring/images/skill-load-trace.webp)
 
     > [!TIP]
-    > Note what it flags instead of inventing: no named past experience with the City's systems (such as Esri ArcGIS, Tyler, or Okta) that its past-performance file does not show, and a hosting and support price marked **NEEDS SME INPUT** rather than a made-up figure. That restraint comes from the skill's guardrails and answer library - the vetted position the company can actually commit to.
+    > If the card doesn't appear, check the skill's description.
 
-1. Both artifacts are attached to the message as file chips: a Markdown proposal and a PDF
-    proposal (for example `Aventra_Proposal_WB-2026-031.md` and `Aventra_Proposal_WB-2026-031.pdf`;
-    the file names vary). Select a chip to download it.
+1. Read the summary for the proposed approach and anything the agent needs from you.
 
-    ![The generated proposal Markdown and PDF attached to the agent's response](images/uc1-output-files.png)
+1. Download and open the Markdown proposal, the PDF, and `proposal-checks.csv`. Check that the
+   proposed fee is the same in the PDF and the Markdown. If the CSV lists a line number, find
+   that line in the Markdown.
+
+   ![Preview reply listing the Markdown proposal, PDF proposal, and CSV checklist, with download cards for all three.](../instructions-skills-authoring/images/uc1-output-files.webp)
+
+    > [!TIP]
+    > **If the CSV is missing:** Ask the agent to run the bundled checker on the existing Markdown proposal and attach the CSV.
+    >
+    > **If the PDF is missing:** Ask the agent to make and attach a PDF from the Markdown it already created.
+
+1. Pick one claim in the Markdown, such as a certification, and check it against the approved references.
+
+   The CSV points to gaps. It doesn't verify claims.
 
 #### Use the sandbox to chart the evaluation weights
 
@@ -349,15 +339,16 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
 
 1. Watch the run. It usually finishes in under a minute. Debug mode shows the agent's reasoning as
     bullets, but it may not show the individual sandbox tool calls. Look for concrete evidence that
-    code ran: the attached PNG, the extracted table, and the library and version it names. A claim
+    code ran: the attached PNG, the table in the agent's reply, and the library and version it names. A claim
     that code ran is not evidence on its own; if you see no such evidence, record execution as
     **unverified**.
 
 1. The chart appears in the response as an image. Select it to open the preview, then select
-    **Download** to save `westbrook-evaluation-weights.png`. Compare the chart and extracted table
-    with **section 4 of the RFP**: Technical approach **30**, Relevant municipal experience **25**,
-    Cost **20**, Project team **15**, and Timeline **10**. These are evaluation weights, not scores
-    awarded to Aventra. Check the labels, all five bars, and the total of **100**.
+    **Download** to save `westbrook-evaluation-weights.png`. In the **City of Westbrook RFP**
+    document you attached, open **4. Evaluation criteria**. Use that table to check the chart
+    and the table in the agent's reply: Technical approach **30**, Relevant municipal experience
+    **25**, Cost **20**, Project team **15**, and Timeline **10**. These are evaluation weights,
+    not scores awarded to Aventra. Check the labels, all five bars, and the total of **100**.
 
     ![The chart preview showing the five evaluation criteria and their weights, with Download and Close](images/uc1-chart-weights.png)
 
@@ -379,7 +370,7 @@ You have completed the core lab. Continue to the [conclusions and recommendation
 - **Ground answers in files you control.** An answer library the business has approved is what lets a Skill decline to claim a certification instead of quietly implying it
 - **Check generated artifacts against their sources.** Open the proposal and chart, verify the facts and evaluation weights, and do not treat a claimed file or tool run as proof of execution
 - **Review before sharing.** A human should review the proposal's facts, certification gaps, and commercial numbers before it reaches a customer
-- **Generate, test, and refine.** Check behavior against examples and bring concrete failures back to the authoring tool. A generated package or a confident self-review is not evidence that it works in the target agent
+- **Test the installed Skill.** Check its behavior in fresh conversations. A generated package or a self-review does not show that the Skill works in the target agent
 
 ---
 
@@ -542,38 +533,9 @@ Yes, that summary is accurate.
 
 **Check:** only the audience changes; the goal, FAQ outcome, and unknown date remain. It should request confirmation without restarting or claiming approval.
 
-After both tests, use the refinement steps below if needed. If a test failed, keep its prompt and output for troubleshooting.
-
-### Refine the intake Skill in Copilot Studio
-
-**If both tests pass, you are done.** Record the result and continue to the conclusions. If a test fails, revise the Skill and test it again.
-
-There is **no automatic synchronization** between the authoring chat and the uploaded Skill. Every revision needs a new ZIP and a manual replacement in Copilot Studio. Never share credentials or real customer data. A [Harness Explorer report](#-extra-credit-explore-the-agent-harness) can provide extra context, but is optional.
-
-1. Create a separate blank agent with **Instructions empty** and a reasoning model. In its **Preview**, attach the intake process and latest Skill ZIP. Keep **Project Process Assistant** unchanged as your test agent.
-
-1. Fill in the placeholders below with what actually happened, then send the completed block in the blank agent's **Preview**, not the intake test conversation:
-
-   ```text
-   Revise the Skill, not the test input or expected result.
-   Test prompt: [paste]
-   Expected behavior: [paste]
-   Actual output or exact error: [paste]
-   Skill loaded in the reasoning trace: [yes/no/not visible]
-   Fix the procedure or activation description responsible for the mismatch.
-   Keep the existing guardrails and provide a new downloadable ZIP.
-   ```
-
-1. Download the revised package. In **Project Process Assistant > Build > Skills**, open the uploaded Skill's menu and select **Replace**, then upload the new ZIP. See [Replace an uploaded skill](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/skills-add-existing#replace-an-uploaded-skill). Start new Preview conversations and rerun both intake tests to check for regressions.
-
-1. If both tests pass, record the result; do not invent a failure to force another loop. Extra revisions and an out-of-scope prompt to check that the Skill does not activate unnecessarily are optional follow-on work.
-
-> [!TIP]
-> **Keep the 25-minute extra-credit timebox:** aim for one package, one upload, and two short tests. If generation or a repair runs longer, record the next change and continue later. An authoring self-check is not a substitute for testing the uploaded Skill.
-
 ### 🏅 Congratulations! You've completed the Skill-creation extra credit!
 
-You created a project-intake Skill in an agent's **Preview** chat, uploaded it, and checked it in two conversations. Record the results; no further exercises are required.
+You created a project-intake Skill in an agent's **Preview** chat, uploaded it, and checked it in two conversations.
 
 ---
 
@@ -602,7 +564,7 @@ You created a project-intake Skill in an agent's **Preview** chat, uploaded it, 
 1. Copy this follow-up into the **same Preview chat**, then select **Send**:
 
    ```text
-   Based on this snapshot, which installed libraries could create a chart like our RFP evaluation-weight chart, and which could help read documents or create PDFs? For each recommendation, give the observed package name and version, its purpose, and any unverified capability. Do not install or assume missing packages.
+   Based on this snapshot, which installed libraries could create a chart like our RFP evaluation-weight chart, and which could help read documents? For each recommendation, give the observed package name and version, its purpose, and any unverified capability. Do not install or assume missing packages.
    ```
 
 1. Optionally copy this block into the **same Preview chat** and select **Send**:
@@ -612,23 +574,3 @@ You created a project-intake Skill in an agent's **Preview** chat, uploaded it, 
    ```
 
     Download the JSON and Markdown exports. You can provide the report to your chosen authoring chat as supporting context when refining a Skill. Treat it as a snapshot of **this agent's observed runtime**, not a guarantee about another agent, tenant, future session, or tool permissions. Do not share reports containing sensitive information.
-
----
-
-## 🧪 Extra Credit: Generate with AI
-
-Copilot Studio also offers in-product Skill generation. **Generate with AI might not be available yet in your environment.** If the **Add skill** dialog shows only **Upload a skill** and **Create from blank**, skip this extra credit or try the [Preview-based Skill-creation exercise](#-extra-credit-create-and-test-a-skill-with-copilot-studio). This optional **Skills** menu is separate from the free-form **Preview** chat that generates a ZIP for you to upload.
-
-![The Generate with AI dialog, shown here with its earlier "(preview)" title, with the text description box and Build button](images/uc3-generate-with-ai-preview.png)
-
-> [!NOTE]
-> **The preview shown here does not accept file attachments.** Paste text from your source documents into its description box rather than trying to upload them. This limitation concerns Skill generation, not the agent's Preview chat where you test with documents.
-
-To try it when available:
-
-1. On the **Build** tab of a separate test agent, select **+** next to **Skills**, then in **Add skill** select **Generate with AI** (it may be labelled **Generate with AI (preview)**).
-1. Use the project-intake authoring prompt from the [Skill-creation extra credit](#-extra-credit-create-and-test-a-skill-with-copilot-studio), then copy the text from `project-intake-process-v2.docx` into the same box. Remove the instructions about attachments and downloadable ZIP packaging.
-1. Select **Build** and answer the questions Copilot asks. When the Skill is ready, select **View** to review it, then select **Add to agent**.
-1. Run the same two tests in the agent's Preview chat. Generating a Skill does not validate its behavior.
-
-See [Create a skill for an agent, including Generate with AI](https://learn.microsoft.com/microsoft-copilot-studio/agents-experience/skills-create).

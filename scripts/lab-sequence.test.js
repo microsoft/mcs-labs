@@ -12,7 +12,7 @@ const pairs = [
   ['mcs-copilot-code', 'copilot-code-web-app', ['build', 'style', 'label', 'navigate', 'publish', 'extend']],
   ['mcs-copilot-harness-latest', 'declarative-agent-skill-reuse', ['inspect', 'build', 'ground', 'verify', 'share', 'version']],
   ['mcs-standard-harness', 'standard-harness-components', ['configure', 'author', 'ground', 'extend', 'inspect', 'delegate', 'publish']],
-  ['mcs-skills-authoring', 'instructions-skills-authoring', ['configure', 'inspect', 'test', 'verify', 'author', 'explore', 'generate']],
+  ['mcs-skills-authoring', 'instructions-skills-authoring', ['configure', 'inspect', 'test', 'verify', 'author', 'explore']],
   ['mcs-hooks', 'hooks-knowledge-travel-policy', ['profile', 'policy', 'redact', 'guard']],
   ['mcs-customer-conversation-harness', 'customer-assist-agent', ['build', 'route', 'speak', 'extend']],
   ['mcs-managed-apps', 'managed-apps-build', ['build', 'prepare', 'prove', 'protect', 'repair']],
@@ -24,7 +24,7 @@ const blocks = text => [...text.matchAll(/^([ \t]*)```([^\n`]*)\n([\s\S]*?)^\1``
     language: info.trim(),
     text: block.replace(/\n$/, '').split('\n').map(line => line.startsWith(indent) ? line.slice(indent.length) : line).join('\n'),
   }));
-const normalize = text => text.replaceAll('/events/bootcamp-latest/', '/events/architecture-bootcamp/')
+const normalize = text => text.replaceAll('/events/architecture-bootcamp-classic/', '/events/copilot-agents-bootcamp/')
   // The guided lab already explicitly requests both formats after the live-run fix.
   .replace(/^Export the latest snapshot\.$/, 'Export the latest snapshot as JSON and Markdown.');
 
@@ -67,11 +67,4 @@ test('guided Bootcamp extensions follow all required missions', () => {
       else assert.equal(optionalStarted, false, `${slug}: required ${mission.id} follows an optional mission`);
     }
   }
-});
-
-test('optional navigation checks for later required work before offering the finish', () => {
-  const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
-  assert.match(template, /remaining_missions = lab\.missions \| slice: forloop\.index, lab\.missions\.size/);
-  assert.match(template, /remaining_core = remaining_missions \| where_exp: "item", "item\.optional != true"/);
-  assert.match(template, /if remaining_core\.size > 0[\s\S]*href="#{{ remaining_core\.first\.id \| escape }}"[\s\S]*elsif mission\.optional != true[\s\S]*href="#lab-finish"/);
 });

@@ -10,4 +10,4 @@ This lab is under development. Hands-on instructions and prerequisites are comin
 
 ## Architecture Bootcamp Latest
 
-This lab is part of [Architecture Bootcamp Latest](https://microsoft.github.io/mcs-labs/events/bootcamp-latest/).
+This lab is part of [Architecture Bootcamp Latest](https://microsoft.github.io/mcs-labs/events/architecture-bootcamp-classic/).

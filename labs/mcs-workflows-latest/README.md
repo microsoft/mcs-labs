@@ -341,12 +341,17 @@ Complete the setup of the **Order Management Workflow**: explore the classificat
    > [!IMPORTANT]
    > Keep this filter in mind when testing: every test email you send **must include "Order Management" in the subject line**, or the workflow will not trigger. This is a common source of confusion when tests "don't seem to work."
 
-3. Select the **Classify** node. If no AI model is already selected or the model chosen is flagged as "retired" in a warning message, choose the default. Review the classification categories. **Three** are configured explicitly in the node, and the panel notes that *a "Default" category is automatically created for inputs that don't match any category* — that automatic category is what the canvas shows as the **Other** branch. Each configured category has a name and example text that the AI model uses to determine where an incoming email should be routed:
+3. On the workflow canvas, select the existing **Classify** node. In the panel on the right, open **Configure**. Next to **Input to classify**, choose **GPT 6 Sol** from the model dropdown. If it isn't listed, choose another available model. Leave the **Body** token in place. It supplies the text of each incoming email.
+
+   <picture><source media="(prefers-color-scheme: dark)" srcset="../workflows-autonomous/images/classify-model-dark.webp"><img src="../workflows-autonomous/images/classify-model.webp" alt="Input to classify with GPT 6 Sol selected and the Body token in the field below." width="712" height="280" loading="lazy"></picture>
+
+   Under **Categories**, you'll see three named routes:
 
    - **Quote Request** — emails requesting pricing or quotes for products/services
    - **Supplier Delay** — notifications about delays from suppliers
    - **Customer Inquiry** — general questions from customers about orders, shipping, etc.
-   - **Other** — the automatic **Default** category: anything that doesn't match the three above (spam, promotions, irrelevant). You will not find it in the **Categories** list, because the Classify node creates it for you.
+
+   On the canvas, **Other** handles messages that don't match any of the three. You don't need to add it to **Categories**.
 
    ![The Classify node categories, with the three configured categories listed](../mcs-workflows/images/classify-categories-all.png)
 
@@ -355,23 +360,23 @@ Complete the setup of the **Order Management Workflow**: explore the classificat
 
 #### Test the classification
 
-4. In the **Classify** panel, select **Run node**, next to **Configure**. Under **When a new email arrives**, find the test **Body** field shown below. Do not paste the sample on **Configure** or replace its dynamic email input; the hard-coded text is for this test only.
+4. At the top of the same **Classify** panel, switch from **Configure** to **Run node**. Under **When a new email arrives**, paste the sample below into **Body** and select **Run**.
 
    <picture><source media="(prefers-color-scheme: dark)" srcset="../workflows-autonomous/images/classify-quote-result-dark.webp"><img src="../workflows-autonomous/images/classify-quote-result.webp" alt="Classify panel with Run node selected beside Configure, the sample in the Body test input, and Quote Request output." width="406" height="505" loading="lazy"></picture>
 
-   *Select Run node, not Configure. Paste the sample in Body under When a new email arrives, then select Run.*
-
-   Paste this into the test **Body** field:
+   *On Run node, Body holds the sample email. Output shows the predicted category: Quote Request.*
 
    ```
    Hi, I would like to request a quote for 500 units of Product A.
    ```
 
-   Select **Run** and inspect the output — it should classify as **Quote Request**. This node-only test does not run the downstream quote branch or send a quote.
+   Under **Output**, look for **category: Quote Request**. Only **Classify** ran; no email was sent.
 
    ![Classify Run node panel with the sample Body input and Quote Request output; downstream nodes have not executed](images/classify-quote-result.webp)
 
 5. Confirm every node that requires a connection has one selected, including **Human review**. Select **Save** (or press **Ctrl+S**), then **Publish**. Wait for **Published**, then confirm **Enabled** on **Workflows**. If publishing reports a missing connection, open the named node, create or select its connection, then save and publish again.
+
+   If **Publish** is unavailable after the node test, open **Classify** → **Configure**. Reselect an available model next to **Input to classify**, then **Save** and try **Publish** again.
 
 #### Test the "Other" classification path end-to-end
 

@@ -1,0 +1,13 @@
+{%- comment -%}Group adjacent exercises without reordering or renumbering links, even in a mixed feed.{%- endcomment -%}
+{% for mission in lab.missions %}
+  {% assign homework = mission.optional | default: false %}
+  {% if forloop.first or homework != previous_homework %}
+    {% unless forloop.first %}</ol>{% endunless %}
+    {% capture group_id %}{{ include.variant }}-group-{{ forloop.index }}{% endcapture %}
+    <h2 class="exercise-group" id="{{ group_id }}">{% if homework %}Homework (optional){% else %}Main exercises{% endif %}</h2>
+    <ol start="{{ forloop.index }}" aria-labelledby="{{ group_id }}">
+  {% endif %}
+  <li><a href="#{{ mission.id | escape }}" data-mission-link="{{ mission.id | escape }}"><span class="{{ include.variant }}-number">{{ forloop.index }}</span><span><strong>{{ mission.verb | escape }}</strong><small>{{ mission.minutes }} min</small></span></a></li>
+  {% assign previous_homework = homework %}
+  {% if forloop.last %}</ol>{% endif %}
+{% endfor %}
