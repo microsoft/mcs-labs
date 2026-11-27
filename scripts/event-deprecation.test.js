@@ -45,11 +45,12 @@ test('restoring the classic edition does not list the original or preview events
   }
 });
 
-test('guided lab links use the current display name and canonical route', () => {
+test('guided lab links use the current display name and the published agenda route for Copilot Code', () => {
   for (const { slug } of event('architecture-bootcamp').labs) {
     if (slug === 'cowork-zava-sales') continue; // Shared lab has no event-specific introduction.
+    const route = slug === 'copilot-code-web-app' ? 'architecture-bootcamp' : 'copilot-agents-bootcamp';
     for (const file of [path.relative(root, labSourcePath(root, slug)), path.join('labs', slug, 'README.md')]) {
-      assert.ok(read(file).includes('[Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/)'), file);
+      assert.ok(read(file).includes(`[Copilot & Agents Bootcamp](https://microsoft.github.io/mcs-labs/events/${route}/)`), file);
     }
   }
 });
