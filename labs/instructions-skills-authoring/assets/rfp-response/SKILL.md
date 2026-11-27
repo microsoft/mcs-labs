@@ -167,11 +167,20 @@ are mandated, omit the option; the report will mark that check as skipped.
 Use the bundled code, not a rewritten checker or a CSV composed in chat. It needs no
 package installs, browser, or network access. The CSV lists review items with draft
 line numbers where applicable. It checks markers and heading presence, not factual
-accuracy, section order, or compliance. Attach both the Markdown draft and the actual
-`proposal-checks.csv`. If the script cannot run, report the error and attach the draft
-without claiming a checklist was created.
+accuracy, section order, or compliance.
 
-### 6. Report back
+### 6. Create the PDF and attach the files
+
+Use the host's built-in PDF generation to render that same saved Markdown as a PDF.
+Keep the headings, pricing tables, and unresolved markers. Do not write a second
+proposal, change figures, install packages, launch a browser, or call an external
+service. Open the PDF to check that it is readable.
+
+Attach the Markdown proposal, PDF proposal, and `proposal-checks.csv` to the reply.
+If you cannot create or attach one of the files, say which one is missing and why.
+Still attach the files that are available. Do not claim that a missing file exists.
+
+### 7. Report back
 
 Close with a short summary: which offering you matched and why, the fee and
 duration, where the files are, and — most importantly — **every gap you flagged

@@ -133,11 +133,11 @@ mission_lab:
       minutes: 10
       tool: Copilot Studio · Preview
       brief: "Ask for a proposal without naming the Skill, then inspect activation and the actual files."
-      outcome: "A Markdown proposal and a CSV review checklist from the bundled script."
+      outcome: "A proposal in Markdown and PDF, plus a CSV checklist from the bundled script."
       steps:
         - title: "Attach the RFP and request a proposal"
           id: test-2
-          instruction: "Download the [City of Westbrook RFP](https://github.com/Dewain27/AgentDudeSamples/raw/refs/heads/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md). Open **Preview** and use the **+** button beside the message box to attach it. Leave **Debug mode** on, then send the prompt below without naming the Skill."
+          instruction: "Download the [City of Westbrook RFP](assets/01-westbrook-permitting-portal.md?raw=true). Open **Preview** and use the **+** button beside the message box to attach it. Leave **Debug mode** on, then send the prompt below without naming the Skill."
           prompt_label: Preview chat
           prompt: "We are bidding on this RFP. Draft our response."
           notice: "The sample's fixed submission date has passed. A deadline warning is careful behavior, not a failed run. "
@@ -151,22 +151,22 @@ mission_lab:
             width: 967
             height: 445
             caption: "The expanded trace shows the matched description and the Skill input."
-        - title: "Review the summary, proposal, and checklist"
+        - title: "Download and check the proposal files"
           id: test-4
           instruction: |-
-            Read the agent's summary to see what it proposes and what needs your input.
+            Read the summary for the proposed approach and anything the agent needs from you.
 
-            Open the Markdown proposal and `proposal-checks.csv` attached to the reply. If the CSV lists a line number, find that line in the draft.
+            Download and open the Markdown proposal, the PDF, and `proposal-checks.csv`. Check that the proposed fee is the same in the PDF and the Markdown. If the CSV lists a line number, find that line in the Markdown.
 
-            Check one claim in the draft, such as a certification, against the approved references.
-          notice: "The CSV flags gaps to review. It does not verify claims."
+            Pick one claim in the Markdown, such as a certification, and check it against the approved references.
+          notice: "The CSV points to gaps. It doesn't verify claims."
           screenshot:
-            title: the proposal and checklist downloads
+            title: the three file downloads
             src: /labs/instructions-skills-authoring/images/uc1-output-files.webp
-            alt: "Preview reply listing the Markdown proposal and proposal-checks.csv, with download chips for both."
-            width: 393
-            height: 259
-            caption: "Open the Markdown draft and the CSV from the file chips in the reply."
+            alt: "Preview reply listing the Markdown proposal, PDF proposal, and CSV checklist, with download cards for all three."
+            width: 366
+            height: 369
+            caption: "Use the file cards to download the Markdown proposal, PDF, and CSV checklist."
       reveal:
         title: "Why did the agent select the Skill without being told to?"
         line: "The orchestrator matched your request to its description."
@@ -186,6 +186,8 @@ mission_lab:
           solution: "Inspect its description first."
         - problem: "The CSV is missing."
           solution: "Ask the agent to run the bundled checker on the existing Markdown proposal and attach the CSV."
+        - problem: "The PDF is missing."
+          solution: "Ask the agent to make and attach a PDF from the Markdown it already created."
 
     - id: verify
       verb: Verify
@@ -434,7 +436,7 @@ You'll build an RFP Response agent, inspect its skill and use it to prepare a pr
 
 | Level | Persona | Duration | Finish line |
 | --- | --- | --- | --- |
-| 300 | Maker | 30 minutes | An RFP agent, a Markdown proposal with a CSV review checklist, and a source-checked evaluation-weight chart |
+| 300 | Maker | 30 minutes | An RFP agent, a proposal in Markdown and PDF, a CSV checklist, and a chart checked against the RFP |
 
 You are a proposal maker for fictional **Aventra Software Group**. Your job is to give an agent approved material and verify its outputs before sharing them with a customer.
 
@@ -542,9 +544,9 @@ Uploading gives the agent a permanent ID and makes **Evaluate** and **Monitor** 
 
 **10 minutes · Copilot Studio · Preview**
 
-**Outcome:** A Markdown proposal and a CSV review checklist from the bundled script.
+**Outcome:** A proposal in Markdown and PDF, plus a CSV checklist from the bundled script.
 
-1. Download the [City of Westbrook RFP](https://github.com/Dewain27/AgentDudeSamples/raw/refs/heads/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md). Open **Preview** and use the **+** button beside the message box to attach it. Leave **Debug mode** on, then send:
+1. Download the [City of Westbrook RFP](assets/01-westbrook-permitting-portal.md?raw=true). Open **Preview** and use the **+** button beside the message box to attach it. Leave **Debug mode** on, then send:
 
 ```text
 We are bidding on this RFP. Draft our response.
@@ -556,14 +558,14 @@ The sample's fixed submission date has passed; a deadline warning is careful beh
 
    <picture><img src="images/skill-load-trace.webp" alt="Expanded Using skill: rfp-response trace showing the matched description and skill input."></picture>
 
-3. Read the agent's summary to see what it proposes and what needs your input.
-4. Open the Markdown proposal and `proposal-checks.csv` attached to the reply. If the CSV lists a line number, find that line in the draft.
+3. Read the summary for the proposed approach and anything the agent needs from you.
+4. Download and open the Markdown proposal, the PDF, and `proposal-checks.csv`. Check that the proposed fee is the same in the PDF and the Markdown. If the CSV lists a line number, find that line in the Markdown.
 
-   <picture><img src="images/uc1-output-files.webp" alt="Preview reply listing the Markdown proposal and proposal-checks.csv, with download chips for both."></picture>
+   <picture><img src="images/uc1-output-files.webp" alt="Preview reply listing the Markdown proposal, PDF proposal, and CSV checklist, with download cards for all three."></picture>
 
-5. Check one claim in the draft, such as a certification, against the approved references.
+5. Pick one claim in the Markdown, such as a certification, and check it against the approved references.
 
-   The CSV flags gaps to review. It does not verify claims.
+   The CSV points to gaps. It doesn't verify claims.
 
 **Reveal — Why did the agent select the Skill without being told to?** The orchestrator matched the request to its description. The playbook directs it toward approved evidence and gaps; that is guidance, not a guarantee. A promised file is not an attachment, and confident wording is not a verified commitment.
 
@@ -572,6 +574,8 @@ The sample's fixed submission date has passed; a deadline warning is careful beh
 - The answer sounds professional. — Polished wording does not establish that the Skill loaded or facts are supported.
 
 **If the Skill does not load:** Inspect its description first. **If the CSV is missing:** Ask the agent to run the bundled checker on the existing Markdown proposal and attach the CSV.
+
+**If the PDF is missing:** Ask the agent to make and attach a PDF from the Markdown it already created.
 
 ## Verify: Turn source weights into evidence
 
