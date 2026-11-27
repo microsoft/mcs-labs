@@ -28,10 +28,10 @@ test('skills lab names the RFP consistently and describes the attachment button 
 test('skills lab groups related clicks without merging conversation turns or renumbering retained progress', () => {
   const expected = {
     configure: [2, 4, 5], inspect: [2, 4], test: [2, 3, 4], verify: [1, 3],
-    author: [2, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17],
-    explore: [1, 2, 4, 5, 6, 7], generate: [2, 3],
+    author: [2, 4, 5, 7, 8, 9, 10, 11, 12, 13, 14, 15],
+    explore: [1, 2, 4, 5, 6, 7],
   };
-  assert.equal(page.data.mission_lab.missions.reduce((sum, item) => sum + item.steps.length, 0), 32);
+  assert.equal(page.data.mission_lab.missions.reduce((sum, item) => sum + item.steps.length, 0), 28);
   for (const [id, indexes] of Object.entries(expected)) {
     assert.deepEqual(mission(id).steps.map(item => item.id), indexes.map(index => `${id}-${index}`));
   }
@@ -43,7 +43,7 @@ test('skills lab groups related clicks without merging conversation turns or ren
 
 test('skills lab preserves exact prompts in both readable copies', () => {
   const prompts = page.data.mission_lab.missions.flatMap(item => item.steps.filter(step => step.prompt).map(step => step.prompt));
-  assert.equal(prompts.length, 20);
+  assert.equal(prompts.length, 19);
   for (const prompt of prompts) {
     for (const copy of [page.content, readme]) {
       assert.ok(copy.includes('```text\n' + prompt + '\n```'), `Missing exact prompt: ${prompt.slice(0, 70)}`);
@@ -81,19 +81,45 @@ test('skills lab waits for first save, then attaches the process in a new Previe
   assert.match(step('author', 4).instruction, /In the same \*\*Preview chat\*\*, with the document attached/);
 });
 
-test('skills lab checks proposal artifacts rather than relying on chat caveats', () => {
-  for (const copy of copies(step('test', 4).notice)) {
-    assert.match(copy, /submission-date placeholders, and internal section references in both files/);
-    assert.match(copy, /warning in chat does not fix/);
-    assert.match(copy, /different installed library and layout/);
+test('skills lab uses a shared package and checks actual proposal artifacts in both editions', () => {
+  const download = /\]\((?:\.\.\/instructions-skills-authoring\/)?assets\/rfp-response\.zip\?raw=true\)/;
+  assert.match(step('inspect', 2).instruction, download);
+  const bodies = [
+    page.content, readme,
+    read(path.join(root, '_labs', 'mcs-skills-authoring.md')),
+    read(path.join(root, 'labs', 'mcs-skills-authoring', 'README.md')),
+  ];
+  const trace = /`skill: rfp-response` under \*\*Input\*\*\. It shows which skill the agent selected\./;
+  assert.match(step('test', 3).instruction, trace);
+  assert.doesNotMatch(JSON.stringify(step('test', 3)), /Skill incomplete/);
+  for (const copy of bodies) {
+    assert.match(copy, download);
+    assert.doesNotMatch(copy, /\bpdfs?\b/i);
+    assert.match(copy.replace(/\s+/g, ' '), trace);
+    assert.doesNotMatch(copy, /Skill incomplete/);
+    assert.doesNotMatch(copy, /\*\*Used skill: rfp-response\*\*/);
   }
+  for (const text of [step('test', 4).instruction, ...bodies]) {
+    const copy = text.replace(/\s+/g, ' ');
+    assert.match(copy, /Read the agent's summary/);
+    assert.match(copy, /Open the Markdown proposal and `proposal-checks\.csv` attached to the reply/);
+    assert.match(copy, /If the CSV lists a line number, find that line in the draft/);
+    assert.match(copy, /Check one claim in the draft.*against the approved references/);
+    assert.doesNotMatch(copy, /If execution details are shown/);
+  }
+  for (const copy of copies(step('test', 4).notice)) {
+    assert.match(copy, /It does not verify claims/);
+  }
+  assert.doesNotMatch(JSON.stringify(page.data.mission_lab), /\bpdfs?\b/i);
+  assert.doesNotMatch(read(path.join(root, 'labs', 'instructions-skills-authoring', 'assets', 'rfp-response', 'SKILL.md')), /\bpdfs?\b/i);
 });
 
 test('skills lab distinguishes artifact verification from hidden execution', () => {
-  assert.match(step('verify', 3).notice, /Compare the chart with the extracted table and the RFP evaluation criteria/);
-  assert.doesNotMatch(step('verify', 3).notice, /record it as|reference chart run/);
+  for (const copy of copies(step('verify', 3).instruction)) {
+    assert.match(copy, /In the \*\*City of Westbrook RFP\*\* document you attached, open \*\*4\. Evaluation criteria\*\*/);
+    assert.match(copy, /Use that table to check the chart and the table in the agent's reply/);
+  }
   assert.match(step('explore', 5).notice, /Not visible does not mean unsupported/);
-  assert.match(step('generate', 3).notice, /not a claim that this generation path passed/);
   for (const copy of copies(step('explore', 6).instruction)) {
     assert.match(copy, /Installed-package metadata is not an import or rendering test/);
     assert.match(copy, /Flag absolute capability claims that the snapshot did not test/);
@@ -108,13 +134,12 @@ test('skills lab explicitly requests both snapshot formats and verifies durable 
   }
 });
 
-test('skills lab retains pacing, conditional repair, and safety boundaries', () => {
+test('skills lab retains pacing and safety boundaries', () => {
   const missions = page.data.mission_lab.missions;
-  assert.deepEqual(missions.map(item => item.id), ['configure', 'inspect', 'test', 'verify', 'author', 'explore', 'generate']);
+  assert.deepEqual(missions.map(item => item.id), ['configure', 'inspect', 'test', 'verify', 'author', 'explore']);
   assert.equal(missions.filter(item => !item.optional).reduce((sum, item) => sum + item.minutes, 0), 30);
   assert.equal(page.data.duration, 30);
   for (const item of missions) assert.equal(item.check.options.filter(option => option.correct).length, 1);
-  assert.match(step('author', 16).instruction, /If both tests pass, record the result and stop/);
   assert.match(step('explore', 4).prompt, /Do not install packages, make network requests, run active-safe probes/);
   assert.match(page.data.mission_lab.finish.cleanup, /No publishing, scheduled jobs, or customer sends/);
 });

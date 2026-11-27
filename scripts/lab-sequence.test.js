@@ -12,7 +12,7 @@ const pairs = [
   ['mcs-copilot-code', 'copilot-code-web-app', ['build', 'style', 'label', 'navigate', 'publish', 'extend']],
   ['mcs-copilot-harness-latest', 'declarative-agent-skill-reuse', ['inspect', 'build', 'ground', 'verify', 'share', 'version']],
   ['mcs-standard-harness', 'standard-harness-components', ['configure', 'author', 'ground', 'extend', 'inspect', 'delegate', 'publish']],
-  ['mcs-skills-authoring', 'instructions-skills-authoring', ['configure', 'inspect', 'test', 'verify', 'author', 'explore', 'generate']],
+  ['mcs-skills-authoring', 'instructions-skills-authoring', ['configure', 'inspect', 'test', 'verify', 'author', 'explore']],
   ['mcs-hooks', 'hooks-knowledge-travel-policy', ['profile', 'policy', 'redact', 'guard']],
   ['mcs-customer-conversation-harness', 'customer-assist-agent', ['build', 'route', 'speak', 'extend']],
   ['mcs-managed-apps', 'managed-apps-build', ['build', 'prepare', 'prove', 'protect', 'repair']],
