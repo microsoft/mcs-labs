@@ -4,6 +4,7 @@ const fs = require('node:fs');
 const path = require('node:path');
 const matter = require('gray-matter');
 const { labSourcePath } = require('./lab-files');
+const { fencedPrompts } = require('./lab-audit');
 
 const root = path.resolve(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
@@ -18,8 +19,7 @@ const classicReadme = read('labs/mcs-workflows-latest/README.md');
 const normalize = text => text.replace(/\r\n/g, '\n')
   .replace(/^(#{1,6})\s+[\p{Extended_Pictographic}\uFE0F\u200D]+\s+/gmu, '$1 ')
   .replace(/\]\(#[\uFE0F-]+/g, '](#').trim();
-const fences = text => [...text.matchAll(/```text\r?\n([\s\S]*?)\r?\n```/g)]
-  .map(match => match[1].replace(/\r\n/g, '\n').trim());
+const fences = text => fencedPrompts(text.split(/\r?\n/)).map(prompt => prompt.trim());
 
 test('workflow portable copies and every mission prompt stay synchronized', () => {
   assert.equal(document.data.lab_format, 'missions');
@@ -59,27 +59,30 @@ test('email trigger and approval connections are configured before first publica
   }
 });
 
-test('classification screenshot identifies the Run node test field without changing configuration', () => {
-  const sample = steps.find(step => step.title === 'Inspect categories and run the quote sample');
-  assert.match(sample.instruction, /select \*\*Run node\*\*, next to \*\*Configure\*\*/);
-  assert.equal(sample.screenshot.title, 'Run node tab and Body test input');
-  assert.deepEqual([sample.screenshot.width, sample.screenshot.height], [406, 505]);
-  assert.match(sample.screenshot.caption, /Select Run node, not Configure/);
-  for (const copy of [...modern, classic, classicReadme]) {
-    assert.match(copy, /Do not paste the sample on \*\*Configure\*\* or replace its dynamic email input/);
-    assert.match(copy, /test \*\*Body\*\* field/);
+test('model configuration, sample test and publication keep distinct controls and progress IDs', () => {
+  const route = missions.find(mission => mission.id === 'route');
+  const [configure, sample, publish] = route.steps;
+  assert.deepEqual(route.steps.map(step => step.id), ['route-configure', 'route-1', 'route-2', 'route-3', 'route-4', 'route-5']);
+  assert.equal(configure.prompt, undefined);
+  assert.match(sample.prompt, /500 units of Product A/);
+  assert.doesNotMatch(configure.instruction + sample.instruction, /Show me/i);
+  assert.match(configure.screenshot.alt, /GPT 6 Sol.*Body token/);
+  assert.match(sample.screenshot.alt, /Run node.*Body test input.*Quote Request/);
+  assert.match(publish.instruction, /Save.*Publish.*Enabled/s);
+  for (const copy of [configure.instruction + sample.instruction, document.content, readme, classic, classicReadme,
+    read('_labs/mcs-workflows.md'), read('labs/mcs-workflows/README.md')]) {
+    assert.match(copy, /Configure\*\*.*Input to classify\*\*.*GPT 6 Sol\*\*.*Leave the \*\*Body\*\* token/s);
+    assert.match(copy, /Run node\*\*\. Under \*\*When a new email arrives\*\*.*paste.*\*\*Body\*\*.*\*\*Run\*\*/);
+    assert.match(copy, /Output\*\*.*Quote Request\*\*.*no email was sent/);
   }
-  for (const copy of [document.content, readme, classic, classicReadme]) {
-    const sampleIndex = copy.indexOf('Hi, I would like to request a quote for 500 units of Product A.');
-    const screenshotIndex = copy.indexOf('srcset=', copy.indexOf('## Exercise 3:') >= 0
-      ? copy.indexOf('## Exercise 3:') : copy.indexOf('#### Test the classification'));
-    assert.ok(screenshotIndex >= 0 && screenshotIndex < sampleIndex, 'Show the input location before the copyable sample');
-  }
-  for (const src of [sample.screenshot.src, sample.screenshot.src_dark]) {
-    const bytes = fs.readFileSync(path.join(root, src));
-    assert.equal(bytes.toString('ascii', 12, 16), 'VP8L');
-    const dimensions = bytes.readUInt32LE(21);
-    assert.deepEqual([(dimensions & 0x3fff) + 1, ((dimensions >>> 14) & 0x3fff) + 1], [406, 505]);
+  for (const { screenshot } of [configure, sample]) {
+    for (const src of [screenshot.src, screenshot.src_dark]) {
+      const bytes = fs.readFileSync(path.join(root, src));
+      assert.equal(bytes.toString('ascii', 12, 16), 'VP8L');
+      const dimensions = bytes.readUInt32LE(21);
+      assert.deepEqual([(dimensions & 0x3fff) + 1, ((dimensions >>> 14) & 0x3fff) + 1],
+        [screenshot.width, screenshot.height]);
+    }
   }
 });
 
