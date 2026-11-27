@@ -6,9 +6,10 @@ connects, does one thing and disconnects, so the browser and the signed-in sessi
 between commands. It uses the `puppeteer` package that `npm ci` installs for pa11y-ci, and
 puppeteer's Chrome for Testing build for headless runs.
 
-Use the browser/mode the person authorized. A request for visible desktop Edge is not
-permission to fall back to headless Chrome or the app's embedded browser. Keep an
-isolated test profile; if the requested combination cannot work, ask before switching.
+Use the browser and visibility the person authorized. Keep a headless request headless
+and a desktop request windowed. If an isolated launch or attachment fails, check the
+process, DevTools port and selected private tab before diagnosing authentication.
+Ask before switching browser or visibility; never attach to an existing personal session.
 
 ## Commands
 
@@ -21,7 +22,7 @@ node .github/skills/lab-runthrough/scripts/capture.cjs <command> [args] [options
 | Command | What it does |
 | --- | --- |
 | `launch [url]` | Starts the browser in a private window with a new temporary profile and DevTools on `--port`, and opens `url`. |
-| `pages` | Lists open tabs with the index `--tab` uses, origin and title; it omits paths and query strings so signed preview URLs are not copied into evidence. Indexes follow the order tabs were opened in and stay stable while the browser runs; a headless run keeps an `about:blank` tab at 1. |
+| `pages` | Lists open tabs with the index `--tab` uses, origin and title; it omits paths and query strings so signed preview URLs are not copied into evidence. Headless runs list only tabs in the verified private context, not the browser's default tab. |
 | `goto <url>` | Navigates the selected tab and waits for `domcontentloaded`. |
 | `newtab <url>` | Opens a tab in the selected tab's session (same sign-in), waits for sign-in redirects to settle, and prints its index. |
 | `login` | Signs in on the selected tab as the `LAB_CREDENTIALS` account (see [Signing in](#signing-in)). |
@@ -52,8 +53,8 @@ node .github/skills/lab-runthrough/scripts/capture.cjs <command> [args] [options
 | `--nth <n>` | | `click`, `upload`: use the nth match (from 0). |
 | `--click <name>`, `--at <x,y>` | | `upload`: the control or point that opens the file dialog. |
 | `--clear`, `--enter` | off | `typeat` only. |
-| `--forbid <regex>` | `LAB_FORBID` | `login`: fail with exit code 4 and blank the tab if the page shows this text. Pass the host user's own name or alias. |
-| `--browser <name\|path>` | Edge, then Chrome; Chrome for Testing when headless | `edge`, `chrome` (Chrome for Testing if installed) or an executable path. |
+| `--forbid <regex>` | `LAB_FORBID` | `login`: an extra stop for a forbidden name/alias on the active account control, not a search of the page or a substitute for an exact UPN match. |
+| `--browser <name\|path>` | Edge or Chrome windowed; Chrome for Testing when headless | `edge`, `chrome`, `chrome-for-testing` (requires the bundled build; no fallback), or an executable path. |
 | `--window-size <w,h>` | 1600,1000 | Window size, or the viewport when headless. Keep it stable across a lab so crops line up. |
 | `--headless` | off | No window. The tab opens in an off-the-record session; sign in with `login`. |
 | `--scale <n>` | 1 headless, display scale windowed | `launch`: device scale factor, kept across reconnects and new tabs. Use 2 for screenshots. |
@@ -64,7 +65,7 @@ node .github/skills/lab-runthrough/scripts/capture.cjs <command> [args] [options
 | `--zoom <n>` | 1 | Re-renders the crop at n times the device scale (not an upscale), for small widgets. |
 
 Exit codes: 0 success, 1 failure (message on stderr), 2 usage error, 3 a person is needed
-(MFA, password change, locked account), 4 wrong account.
+(MFA, password change, locked account), 4 wrong account, 5 identity unverified.
 
 ## Signing in
 
@@ -83,13 +84,38 @@ user's own accounts.
 
   ```powershell
   $env:LAB_CREDENTIALS = "$env:TEMP\mcs-run\account.json"
-  node .github/skills/lab-runthrough/scripts/capture.cjs launch https://copilotstudio.microsoft.com --headless --port 9352
+  node .github/skills/lab-runthrough/scripts/capture.cjs launch https://copilotstudio.microsoft.com --browser chrome-for-testing --headless --port 9352
   node .github/skills/lab-runthrough/scripts/capture.cjs login --port 9352 --forbid "<your name>|<your alias>"
   ```
 
   `login` stops with exit code 3 on MFA, **Update your password**, **More information
-  required** or a locked account. Finish that step in a windowed run (or ask the person
-  to), then run `login` again.
+  required** or a locked account. Stop for the person; a challenge does not authorize
+  a desktop retry. For headless runs, the launch checks the actual process flag
+  `--headless=new`, the DevTools `HeadlessChrome` user agent and a non-default browser
+  context before opening the lab URL. Record these checks, not a command line or profile path.
+
+### Active account check
+
+Verify the selected product's **current** work-account UPN against the assigned UPN
+privately. A product redirect, remembered account tile, chat participant, document author,
+or host name in the sidebar is not evidence of who is signed in.
+
+- **Microsoft Copilot:** open the bottom-left **User …, Work account** control by role
+  and accessible name; it can be a `div[role=button]`. **Settings and more** is a different
+  menu. Pages may collapse the sidebar; expand it or leave the Word preview to restore
+  the control. In the opened account popover (with **Sign out**), compare the current
+  UPN, not a display alias or an account offered for switching. Close the popover without
+  signing out. If Back returns to Home, reopen the named recent chat rather than resending.
+- **Standard Copilot Studio:** check the current user in the account menu, then check
+  the current environment label separately against the assigned DEV environment.
+  Neither proves the other.
+
+`login` verifies automatically only when a recognized active Copilot account control
+exposes the full UPN. An alias alone, missing control, or unsupported shell returns 5.
+Use the account-menu check above in the same private session. If wrong, stop; if still
+ambiguous, leave the route blocked. Do not search page text, dump the menu or sign-in
+screen, change accounts for convenience, or use an administrator/API shortcut.
+Record only the surface checked and whether it matched.
 
 When each tool command starts a fresh PowerShell process, set `LAB_CREDENTIALS` again
 in every call before invoking the driver, including inspection and capture commands.
@@ -120,15 +146,14 @@ lab names and prompts, with no test suffixes or tags.
 Use `newtab` rather than `launch` for a second app in the same lab (for example Teams next
 to Copilot Studio): the tab shares the first one's sign-in.
 
-Streamed text or a disappearing **Processing** indicator may precede the settled reply.
-Before sending, record the current turn and confirm the composer and Send control are
-ready. Then require a new assistant turn and wait for any tool output for that prompt to settle.
-Cumulative credits or Copy-button counts can belong to earlier turns; they are not
-completion signals. Before retrying a timeout, inspect the original turn/run to avoid a
-duplicate submission. Preserve per-attempt evidence before virtualized traces move.
+For chat readiness and completion, use the
+[turn and source checks](runthrough-evidence.md#verify-outcomes-at-their-source).
 
 If attachment stalls, use a bounded connection timeout and select the intended target
-from current URL/target metadata, including redirects. A custom CDP connection should
+from current URL/target metadata, including redirects. Driver commands reconnect only
+to their recorded launch PID, and headless commands select only that launch's private
+context. Close and relaunch an older headless session without a recorded context.
+A custom CDP connection should
 filter to the required page and frames rather than attach every unrelated or frozen
 target; do not persist target IDs in reusable scripts. On every reconnect or new tab,
 apply the intended viewport/device scale and verify `window.devicePixelRatio` before
@@ -240,10 +265,10 @@ file name and format so neither copy changes.
 
 Seen on a managed Windows device in November 2026.
 
-- **Headless Edge cannot sign in on a managed device.** Policies such as `BrowserSignin`
+- **Managed Edge can block a private headless launch.** Policies such as `BrowserSignin` can
   open `edge://force-signin/` and ignore `--inprivate` when headless, and the browser
-  exits during the Microsoft Entra sign-in. That is why `--headless` defaults to
-  puppeteer's Chrome for Testing. Windowed `--inprivate` Edge works.
+  may exit during Microsoft Entra sign-in. That is why `--headless` defaults to
+  puppeteer's Chrome for Testing; do not infer an authentication failure from a lost attachment.
 - **Single sign-on leaks the host account.** Device policies (Chrome `CloudAPAuthEnabled`,
   Windows accounts in Edge) sign a normal profile in as the host user. `launch` always uses
   a private window, and headless tabs open in an off-the-record context. **Pick an
@@ -277,11 +302,10 @@ Seen on a managed Windows device in November 2026.
   an **Execution summary** appears, so that summary is not a per-reply readiness signal.
 - `prompt` refuses when the page has two editors (for example a chat next to a side
   panel). Click the right one and use `typeat`; pass `-` to read multiline text from stdin.
-- In Microsoft Copilot chat, a finished reply shows **Copy** or **Copy Response**, and
-  **Stop** disappears. Other previews have different controls: inspect the actual reply
-  and activity rather than assuming these labels exist everywhere.
-- Streamed text or disappearance of **Processing** can precede a settled response. Wait
-  for the product-specific settled reply control/content before recording completion.
+- In Microsoft Copilot, a first-run tour backdrop can intercept an apparently successful
+  click. Dismiss it with the tour's own **Close**, then check the **Chat** radio and
+  **Work IQ** switch (`checked`/`aria-checked`) against the exercise before sending.
+  Do not remove or click through the backdrop.
 - Teaching bubbles can appear after a menu opens. Dismiss them, reopen the menu if the
   dismissal closed it, and verify the screenshot before closing the browser. Crop out
   background account columns as well as account navigation.
@@ -345,16 +369,20 @@ when a run-through finds something new, and date it.
 
 ## Troubleshooting
 
+Maintainers can exercise the headless and active-account guards without signing in:
+`node --test .github/skills/lab-runthrough/scripts/session-fixture.test.cjs` uses the
+bundled Chrome for Testing and serves synthetic pages entirely from memory.
+
 | Symptom | Fix |
 | --- | --- |
 | `No browser on port …` | Run `launch`, or pass the `--port` you launched with. |
 | `Expected one visible control named …, found 0` | Run `controls "<part of the name>"`; the label may have changed (log it as drift). |
 | `found 2` or more | Pass `--nth`, or use `clickat` with the box of the right one. |
 | `Expected the prompt editor in one frame` | The editor is in a side panel or there are two: click it and use `typeat`. |
-| Exit code 3, `Sign-in needs a person` | MFA, password change or locked account: finish it in a windowed run, or ask the person. |
-| Exit code 4, `Wrong account` | Forbidden page text matched; this alone does not establish the authenticated identity. Stop and have a person verify the sign-in before continuing. Never weaken the guard to retry. |
-| `edge://force-signin` or Edge exits while headless | Use windowed Edge when Edge is required. Only use headless Chrome for Testing if that mode/browser is authorized. |
-| `Still on the sign-in page` | Run `text` to read the error (wrong password, blocked account). |
+| Exit code 3, `Sign-in needs a person` | Stop for the person. Do not change visibility without approval. |
+| Exit code 4 or 5 | Follow the [active account check](#active-account-check). Do not weaken the guard to retry. |
+| `edge://force-signin` or Edge exits while headless | Report the browser blocker; use a different browser or mode only if authorized. |
+| `Sign-in did not settle` | Inspect the state in the private tab; do not log the sign-in screen. |
 | `The prompt editor is not empty` | Clear the editor or start a new chat; the script never appends to a draft. |
 | `Light and dark captures are identical` | Set the product theme to System, or use `shot` for a theme-neutral image. |
 | `Keep raw captures outside the repository` | Pass an `--out` folder outside the repo. |

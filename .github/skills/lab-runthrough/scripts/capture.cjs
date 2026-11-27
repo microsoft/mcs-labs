@@ -69,10 +69,10 @@ Options
   --at <x,y>            upload: the point that opens the file dialog.
   --clear               typeat: select and delete the field's text first.
   --enter               typeat: press Enter after typing.
-  --forbid <regex>      login: fail if the page shows this text, for example your own
-                        name or alias (or LAB_FORBID).
-  --browser <name|path> edge, chrome or an executable. Default: Edge or Chrome windowed;
-                        puppeteer's Chrome for Testing when headless.
+  --forbid <regex>      login: stop if the active account label matches (or LAB_FORBID).
+                        Absence of a match does not verify the assigned account.
+  --browser <name|path> edge, chrome, chrome-for-testing or an executable. Default:
+                        Edge or Chrome windowed; Chrome for Testing when headless.
   --window-size <w,h>   Window or headless viewport size for launch (default ${DEFAULT_WINDOW}).
   --headless            Launch without a window, in an off-the-record session.
   --scale <n>           launch: device pixels per CSS pixel. Use 2 for publishable screenshots
@@ -113,6 +113,7 @@ const escapeRe = value => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 class UsageError extends Error {}
 class NeedsPersonError extends Error {}
 class WrongAccountError extends Error {}
+class UnverifiedAccountError extends Error {}
 
 function loadPuppeteer() {
   try {
@@ -147,13 +148,11 @@ function bundledChrome() {
 }
 
 function resolveBrowser(browser, headless) {
+  if (browser === 'chrome-for-testing' || (!browser && headless)) return bundledChrome();
   if (browser && !['edge', 'chrome'].includes(browser)) return browser;
   const installed = browserCandidates().filter(candidate => fs.existsSync(candidate));
   if (browser === 'edge') return installed.find(isEdge);
   if (browser === 'chrome') return bundledChrome() || installed.find(candidate => !isEdge(candidate));
-  // Managed devices can force headless Edge to a browser sign-in page (BrowserSignin policy),
-  // and it then exits during the Microsoft Entra sign-in. Chrome for Testing is not affected.
-  if (headless) return bundledChrome() || installed[0];
   return installed[0];
 }
 
@@ -191,7 +190,7 @@ async function launch({ port, url = 'about:blank', browser, windowSize = DEFAULT
     fs.rmSync(stateFile(port), { force: true });
   }
   const exe = resolveBrowser(browser, headless);
-  if (!exe) throw new Error('No Edge or Chrome found. Run "npm ci" or pass --browser <path>.');
+  if (!exe) throw new Error('The selected browser is not installed. Install it or agree on a different browser before retrying.');
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), PROFILE_PREFIX));
   // A separate profile keeps the learner's personal sign-ins, extensions and history out of the run.
   const args = [
@@ -211,7 +210,7 @@ async function launch({ port, url = 'about:blank', browser, windowSize = DEFAULT
   // A scale of 2 renders every CSS pixel as 2x2 device pixels: the same layout, with sharp text.
   // Windowed runs keep the display's own scale unless --scale is given.
   if (headless || scale !== undefined) args.push(`--force-device-scale-factor=${scale || 1}`);
-  if (headless) args.push('--headless=new', 'about:blank');
+  if (headless) args.push('--enable-automation', '--headless=new', 'about:blank');
   else args.push(url);
   const child = spawn(exe, args, { detached: true, stdio: 'ignore' });
   child.unref();
@@ -222,12 +221,15 @@ async function launch({ port, url = 'about:blank', browser, windowSize = DEFAULT
       try {
         if (headless) {
           // Off-the-record contexts outlive this connection and skip ambient single sign-on.
+          await assertOwnedBrowser(connected, child.pid, 'use');
           const context = await connected.createBrowserContext();
           const page = await context.newPage();
+          await verifyHeadlessSession(connected, page);
           rememberTab(port, page);
           await page.setViewport(viewport(windowSize, scale));
-          await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
           const state = readState(port);
+          state.contextId = context.id;
+          await page.goto(url, { waitUntil: 'domcontentloaded', timeout: 90000 });
           state.captureScale = await page.evaluate(() => devicePixelRatio);
           fs.writeFileSync(stateFile(port), JSON.stringify(state, null, 2));
         } else {
@@ -251,6 +253,21 @@ async function launch({ port, url = 'about:blank', browser, windowSize = DEFAULT
     await wait(250);
   }
   throw new Error(`The browser did not open DevTools on port ${port}. Run "close" to clean up.`);
+}
+
+async function verifyHeadlessSession(browser, page) {
+  const session = await browser.target().createCDPSession();
+  try {
+    // Read the running process, not our launch options. Never print its command line.
+    const { arguments: args } = await session.send('Browser.getBrowserCommandLine');
+    const { userAgent } = await session.send('Browser.getVersion');
+    if (!args.includes('--headless=new') || !/\bHeadlessChrome\//.test(userAgent)
+        || !page.browserContext().id || page.browserContext() === browser.defaultBrowserContext()) {
+      throw new Error('Cannot verify private headless mode. Stop and clean up this launch; do not switch to a desktop window.');
+    }
+  } finally {
+    await session.detach();
+  }
 }
 
 async function close({ port }) {
@@ -280,25 +297,36 @@ async function close({ port }) {
   return { profileRemoved, profile: state.profile };
 }
 
-async function assertOwnedBrowser(browser, expectedPid) {
+async function assertOwnedBrowser(browser, expectedPid, action = 'close') {
   const session = await browser.target().createCDPSession();
+  let actualPid;
   try {
     const { processInfo } = await session.send('SystemInfo.getProcessInfo');
-    const actualPid = processInfo.find(process => process.type === 'browser')?.id;
-    if (actualPid !== expectedPid) {
-      throw new Error(`DevTools reported browser PID ${actualPid ?? 'unknown'}, expected ${expectedPid}. Refusing to close an unrelated browser.`);
-    }
+    actualPid = processInfo.find(process => process.type === 'browser')?.id;
   } catch (error) {
-    if (error.message.includes('Refusing to close')) throw error;
-    throw new Error(`Could not verify the browser process on port; refusing to close it. ${error.message}`, { cause: error });
+    throw new Error(`Could not verify the browser process on port; refusing to ${action} it.`, { cause: error });
   } finally {
     await session.detach();
+  }
+  if (actualPid !== expectedPid) {
+    throw new Error(`DevTools reported browser PID ${actualPid ?? 'unknown'}, expected ${expectedPid}. Refusing to ${action} an unrelated browser.`);
   }
 }
 
 async function connectBrowser(port) {
+  const state = readState(port);
+  if (!state || !Number.isInteger(state.pid) || !ownsProfile(state.profile)) {
+    throw new Error(`No owned launch recorded for port ${port}. Check the port instead of attaching to another browser.`);
+  }
   if (!(await endpointUp(port))) throw new Error(`No browser on port ${port}. Run "launch" first.`);
-  return loadPuppeteer().connect({ browserURL: `http://127.0.0.1:${port}`, defaultViewport: null, protocolTimeout: 120000 });
+  const browser = await loadPuppeteer().connect({ browserURL: `http://127.0.0.1:${port}`, defaultViewport: null, protocolTimeout: 120000 });
+  try {
+    await assertOwnedBrowser(browser, state.pid, 'use');
+    return browser;
+  } catch (error) {
+    await browser.disconnect();
+    throw error;
+  }
 }
 
 // puppeteer keeps the DevTools target id here and has no public getter for it.
@@ -319,9 +347,10 @@ function rememberTab(port, page) {
  * stay stable. Tabs the state file does not know yet go last, off-the-record (headless) first.
  */
 async function listPages(browser, port) {
-  const pages = (await browser.pages()).filter(p => !/^(devtools|edge|chrome):\/\//.test(p.url()));
-  const isDefault = p => p.browserContext() === browser.defaultBrowserContext();
   const state = port === undefined ? null : readState(port);
+  const pages = (await browser.pages()).filter(p => !/^(devtools|edge|chrome):\/\//.test(p.url())
+    && (!state?.headless || (state.contextId && p.browserContext().id === state.contextId)));
+  const isDefault = p => p.browserContext() === browser.defaultBrowserContext();
   const order = (state && state.tabs) || [];
   const rank = p => { const i = order.indexOf(targetId(p)); return i < 0 ? Infinity : i; };
   const known = pages.filter(p => rank(p) !== Infinity).sort((a, b) => rank(a) - rank(b));
@@ -342,9 +371,8 @@ async function connect({ port = DEFAULT_PORT, url, tab } = {}) {
   if (tab !== undefined) page = pages[tab];
   else page = url ? pages.find(p => p.url().startsWith(url)) : pages[0];
   if (!page) {
-    const open = pages.map(p => p.url()).join(', ') || 'none';
     await browser.disconnect();
-    throw new Error(url || tab !== undefined ? `No such tab. Open tabs: ${open}` : 'No open tab.');
+    throw new Error('No matching tab in this browser session. Check the launch, port and tab selection before diagnosing sign-in.');
   }
   page.setDefaultTimeout(20000);
   const state = readState(port);
@@ -575,6 +603,33 @@ async function fill(page, selector, value) {
   await page.keyboard.press('Enter');
 }
 
+/** Only the active product account control is evidence; chat and document text are not. */
+async function verifyActiveAccount(page, username, forbid) {
+  const accounts = await page.evaluate(() => {
+    if (!['https://copilot.cloud.microsoft', 'https://m365.cloud.microsoft', 'https://copilot.microsoft.com'].includes(location.origin)) return [];
+    const controls = document.querySelectorAll(':is(nav,aside,header,[role=navigation],[role=banner]) :is(button,[role=button])[aria-label]');
+    return [...controls].filter(e => {
+      const box = e.getBoundingClientRect();
+      return box.width > 0 && box.height > 0 && e.checkVisibility({ visibilityProperty: true, opacityProperty: true })
+        && !e.closest('main,article,[role=main],[role=document],[role=article],[contenteditable=true],[aria-hidden=true],[inert]');
+    })
+      .map(e => /^User (.+), Work account$/i.exec(e.getAttribute('aria-label'))?.[1].trim())
+      .filter(Boolean);
+  });
+  if (accounts.length === 1) {
+    const [account] = accounts;
+    const isUpn = /^[^@\s]+@[^@\s]+$/.test(account);
+    if ((forbid && new RegExp(forbid, 'i').test(account)) || (isUpn && account.toLowerCase() !== username.toLowerCase())) {
+      await page.goto('about:blank');
+      throw new WrongAccountError('Wrong active account. The tab was cleared; stop and check the sign-in.');
+    }
+    if (isUpn) return;
+  }
+  // An alias is not a UPN. Unknown shells and unlabelled popover fields need an
+  // independent check rather than a guess at which visible address is current.
+  throw new UnverifiedAccountError('Active account unverified. Stop before lab actions. Compare the current UPN in the product account menu with the assignment; never use page text or a redirect as proof.');
+}
+
 /**
  * Completes a Microsoft Entra sign-in on the selected tab as the training account.
  * Stops for a person on MFA, password change or a locked account. Some apps
@@ -603,7 +658,7 @@ async function login(page, { username, password }, { forbid, timeout = 120000 } 
       if (/Pick an account/i.test(text)) {
         // Only ever choose the training account; anything else may be the host user's own sign-in.
         const tiles = [...document.querySelectorAll('[role=button],[role=listitem] *,div.table')];
-        const own = tiles.find(e => (e.innerText || '').toLowerCase().includes(user.toLowerCase())
+        const own = tiles.find(e => (e.innerText || '').split(/\s+/).some(word => word.toLowerCase() === user.toLowerCase())
           && e.getBoundingClientRect().height > 20 && e.getBoundingClientRect().height < 140);
         const other = [...document.querySelectorAll('[role=button],div,a,button')]
           .find(e => (e.innerText || '').trim() === 'Use another account' && e.getBoundingClientRect().height > 0);
@@ -612,21 +667,15 @@ async function login(page, { username, password }, { forbid, timeout = 120000 } 
       return 'waiting';
     }, username).catch(() => 'waiting');
     if (state.startsWith('person:')) {
-      throw new NeedsPersonError(`Sign-in needs a person ("${state.slice(7)}"). Finish it in a windowed run, then run "login" again.`);
+      throw new NeedsPersonError(`Sign-in needs a person ("${state.slice(7)}"). Stop; get approval before changing browser or visibility.`);
     }
     if (state === 'email') await fill(page, 'input[type=email]', username);
     else if (state === 'password') await fill(page, 'input[type=password]', password);
     else if (state === 'stay') await page.click('#idSIButton9').catch(() => {});
     await wait(3000);
   }
-  if (SIGN_IN_PAGE.test(page.url())) throw new Error('Still on the sign-in page. Run "text" to see why.');
-  if (forbid) {
-    const re = new RegExp(forbid, 'i');
-    if (re.test(await pageText(page))) {
-      await page.goto('about:blank').catch(() => {});
-      throw new WrongAccountError('Wrong account: the page showed the --forbid text. The tab was cleared; stop and check the sign-in.');
-    }
-  }
+  if (SIGN_IN_PAGE.test(page.url()) || settled < 3) throw new Error('Sign-in did not settle. Inspect the sign-in state without logging page content.');
+  await verifyActiveAccount(page, username, forbid);
   return displayOrigin(page.url());
 }
 
@@ -835,16 +884,16 @@ async function main(argv) {
   if (!command || opts.help) { process.stdout.write(USAGE); return; }
 
   if (command === 'launch') {
-    const { pid, profile, exe } = await launch({ ...opts, url: args[0] });
-    print(`${path.basename(exe)} ${pid} on port ${opts.port}${opts.headless ? ' (headless)' : ''}, temporary profile ${profile}`);
+    const { pid, exe } = await launch({ ...opts, url: args[0] });
+    print(`${path.basename(exe)} ${pid} on port ${opts.port}${opts.headless ? ' (verified --headless=new, HeadlessChrome, off-the-record tab)' : ' (windowed)'}`);
     print(opts.headless
       ? 'Run "login" with LAB_CREDENTIALS set to sign in. Run "close" when done.'
       : 'Sign in to the training tenant in that window (or run "login"), then continue. Run "close" when done.');
     return;
   }
   if (command === 'close') {
-    const { profileRemoved, profile } = await close(opts);
-    print(profileRemoved ? `Closed and deleted ${profile}` : 'Closed. No temporary profile recorded for this port.');
+    const { profileRemoved } = await close(opts);
+    print(profileRemoved ? 'Closed browser and deleted its temporary profile.' : 'No owned browser closed for this port.');
     return;
   }
   if (command === 'pages') {
@@ -907,7 +956,7 @@ async function main(argv) {
       case 'prompt': {
         const text = readInput(need(args, 1, 'prompt <file|->')[0]);
         await submitPrompt(page, text, { sendLabel: opts.sendLabel, timeout: opts.timeout });
-        print(`Sent at ${new Date().toISOString()}: ${text.split('\n')[0]}`);
+        print(`Submitted at ${new Date().toISOString()} (reply not yet verified).`);
         break;
       }
       case 'upload': {
@@ -949,8 +998,9 @@ if (require.main === module) {
     console.error(redact(error.message));
     process.exitCode = error instanceof UsageError ? 2
       : error instanceof NeedsPersonError ? 3
-        : error instanceof WrongAccountError ? 4 : 1;
+        : error instanceof WrongAccountError ? 4
+          : error instanceof UnverifiedAccountError ? 5 : 1;
   });
 }
 
-module.exports = { launch, close, connect, newTab, login, controls, pageText, click, typeAt, submitPrompt, upload, waitForText, shot, pair, region, redact, assertOwnedBrowser };
+module.exports = { launch, close, connect, newTab, login, controls, pageText, click, typeAt, submitPrompt, upload, waitForText, shot, pair, region, redact, assertOwnedBrowser, verifyActiveAccount, verifyHeadlessSession };

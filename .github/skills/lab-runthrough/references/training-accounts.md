@@ -55,9 +55,7 @@ screen and update this page.
 - Copilot Studio's first visit shows **Welcome from your admin** (accept the terms, then
   **Close**) and a **Find your environments here** bubble (**Got it**). Accept them once,
   windowed or headless; they do not come back.
-- From then on, runs can sign in with `capture.cjs login` in the authorized browser/mode
-  (see `browser-session.md`). Do not switch a requested desktop Edge run to headless.
-  Pass `--forbid` with the host user's own name or alias so a run
-  that lands in the wrong account stops at once.
-- If sign-in starts asking for MFA, stop and hand the window to the person: do not register
-  an authenticator yourself.
+- From then on, use `capture.cjs login` in the authorized browser/mode and follow the
+  [active account check](browser-session.md#active-account-check) at each product handoff.
+- If sign-in asks for MFA, stop for the person. Do not register an authenticator or
+  silently change a headless run to a windowed one.

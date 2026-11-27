@@ -14,7 +14,7 @@ Apply the writing rules to module descriptions, overviews and lab handoffs too.
 | **Recognize the result** | Learners distinguish generated claims from work that actually exists. | Where that distinction caused friction, optional `result_check` names observable evidence near completion (an opened artifact, persisted record or returned delegation). Reuse existing verification text; no extra checkbox, quiz gate or generic coaching. Test-run provenance belongs in maintainer logs and PRs, never in the published lab. |
 | **One task per step** (segmenting) | Task-sized steps reduce cognitive load without turning every click into a checkpoint. | Group short actions toward one result. Split unrelated tasks, separate conversation turns and conditional replies. |
 | **Signal, don't narrate** (signaling, coherence) | Highlight the essential and cut the decorative. | UI labels are **bold**, prompts are in their own code block, and every sentence would be missed if deleted. |
-| **Guidance that fades** (worked example, then practice) | Novices need the exact path; experienced learners need room. | Default steps are complete. Extra detail sits in `help`, "Show me" screenshots or a `<details>` block, not in the main step. The exercises `instruction` must carry the step even when help is open; help is supplementary regardless of renderer default. An optional "try it yourself" follows the guided path. |
+| **Guidance that fades** (worked example, then practice) | Write for a business user opening Copilot, Copilot Studio or Cowork for the first time. | At the first visit to a product or a new screen, name where to start, how to get there and what the learner will see when they arrive. Keep that route in the main instruction. Use `help`, **Show me** or `<details>` for extra click-by-click detail; once learners know a route, don't reteach it on every visit. |
 | **Experience before explanation** | Explanations stick when they answer a question the learner now has. | The "why it worked" reveal follows the result it explains. |
 | **Retrieval and misconceptions** | Answering a question strengthens memory more than rereading does. | A short check targets a likely misconception, with feedback for each option. |
 | **Recover from errors** | Learners stall when the product does something unexpected. | Each risky step has a "stuck?" note: symptom, likely cause, safe next action. |
@@ -59,8 +59,11 @@ Apply these when creating, converting, updating or reviewing either lab format:
   instructions. Put any necessary own-tenant cleanup in the expandable setup guidance.
   Automated runners still stop their own schedules and protect shared assets under
   `lab-runthrough`; that operational duty is not an extra learner exercise.
-- **Choose images for the step.** The hero shows the app, agent or useful result, not a
-  setup/approval checkpoint. Each **Show me** shows one relevant image; a design reference
+- **Choose images for the step.** Where a learner could reasonably pick the wrong control,
+  show the decision in context: crop to the control **and what it belongs to**, not just
+  the icon or the whole window. One useful **Show me** at that choice beats an image of
+  every click. The hero shows the app, agent or useful result, not a setup/approval
+  checkpoint. Each **Show me** shows one relevant image; a design reference
   means the actual supplied reference, not its upload thumbnail. Captions describe the
   visible state, including Preview versus published and the selected option. Full-size
   links open one picture, not a page-wide carousel.
@@ -96,9 +99,16 @@ Apply these when creating, converting, updating or reviewing either lab format:
   If grouping guided steps changes their positions, preserve retained progress IDs
   with explicit step `id` values.
 - Use the product's exact current label, in **bold**. Do not describe icons by color only.
+  If two controls have the same label, name the one the learner needs: for example,
+  "Under the answer, select **More options**, then **Edit in Pages**." The file card
+  has its own **More options** menu. In a tabbed view, verify the tab is selected and
+  the control is visible on that tab's card or panel. In a designer, say whether the
+  learner is changing an existing item or adding another; check which item changed.
   When an icon has no verified text label, identify its symbol, location and purpose
-  rather than inventing a tooltip or menu label. Distinguish instruction sections
-  from UI controls, name the tab or designer surface when needed to locate a control,
+  rather than inventing a tooltip or menu label. Give the complete in-app action before
+  pointing to a screenshot. A **Show me** or help label is not a product control. If a
+  pointer helps, put it in a separate sentence: "For a screenshot, expand **Show me**
+  on this lab page." Name the tab or designer surface when needed to locate a control,
   and apply corrected labels to repeated steps and troubleshooting too.
   Distinguish tools added inside an agent from connector nodes added to a workflow.
   For run inspection, give the workflow, Activity tab, run selection and node to
@@ -134,7 +144,6 @@ Apply these when creating, converting, updating or reviewing either lab format:
   fences. Keep expected output out of `prompt`; compare occurrence order and duplicates
   across exercise front matter, site body and README, not only a set of prompt strings.
 - State time honestly. Budgets are for the median learner, including waiting for AI output.
-- Prefer one good screenshot of the decisive state over many screenshots of every click.
 - Alt text describes the state that matters ("Dataverse connected to zavasalesdemo"), not
   the image type ("screenshot of settings").
 - Put product facts in sources the learner can open, and recheck them when the product ships.
