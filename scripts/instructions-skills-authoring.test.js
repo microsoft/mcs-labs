@@ -14,14 +14,21 @@ const step = (id, index) => mission(id).steps.find(item => item.id === `${id}-${
 const copies = instruction => [instruction, page.content, readme];
 
 test('skills lab names the RFP consistently and describes the attachment button without an invented label', () => {
+  const asset = 'assets/01-westbrook-permitting-portal.md';
+  const downloads = [`(${asset}?raw=true)`, `(../instructions-skills-authoring/${asset}?raw=true)`];
+  assert.ok(fs.existsSync(path.join(root, 'labs', 'instructions-skills-authoring', asset)));
   assert.equal(step('test', 2).title, 'Attach the RFP and request a proposal');
-  for (const copy of [
-    JSON.stringify(page.data.mission_lab), page.content, readme,
+  const bodies = [
+    page.content, readme,
     read(path.join(root, '_labs', 'mcs-skills-authoring.md')),
     read(path.join(root, 'labs', 'mcs-skills-authoring', 'README.md')),
-  ]) {
+  ];
+  for (const copy of [JSON.stringify(page.data.mission_lab), ...bodies]) {
     assert.doesNotMatch(copy, /sollic?itation|Upload images and files|More options|composer/i);
     assert.match(copy, /\*\*\+\*\* button/);
+  }
+  for (const copy of [step('test', 2).instruction, ...bodies]) {
+    assert.ok(downloads.some(link => copy.includes(link)));
   }
 });
 
@@ -94,24 +101,31 @@ test('skills lab uses a shared package and checks actual proposal artifacts in b
   assert.doesNotMatch(JSON.stringify(step('test', 3)), /Skill incomplete/);
   for (const copy of bodies) {
     assert.match(copy, download);
-    assert.doesNotMatch(copy, /\bpdfs?\b/i);
     assert.match(copy.replace(/\s+/g, ' '), trace);
     assert.doesNotMatch(copy, /Skill incomplete/);
     assert.doesNotMatch(copy, /\*\*Used skill: rfp-response\*\*/);
   }
   for (const text of [step('test', 4).instruction, ...bodies]) {
     const copy = text.replace(/\s+/g, ' ');
-    assert.match(copy, /Read the agent's summary/);
-    assert.match(copy, /Open the Markdown proposal and `proposal-checks\.csv` attached to the reply/);
-    assert.match(copy, /If the CSV lists a line number, find that line in the draft/);
-    assert.match(copy, /Check one claim in the draft.*against the approved references/);
+    assert.match(copy, /Download and open the Markdown proposal, the PDF, and `proposal-checks\.csv`/);
+    assert.match(copy, /Check that the proposed fee is the same in the PDF and the Markdown/);
+    assert.match(copy, /If the CSV lists a line number, find that line in the Markdown/);
+    assert.match(copy, /Pick one claim in the Markdown.*check it against the approved references/);
     assert.doesNotMatch(copy, /If execution details are shown/);
   }
-  for (const copy of copies(step('test', 4).notice)) {
-    assert.match(copy, /It does not verify claims/);
+  for (const copy of [step('test', 4).notice, ...bodies]) {
+    assert.match(copy, /doesn't verify claims/);
   }
-  assert.doesNotMatch(JSON.stringify(page.data.mission_lab), /\bpdfs?\b/i);
-  assert.doesNotMatch(read(path.join(root, 'labs', 'instructions-skills-authoring', 'assets', 'rfp-response', 'SKILL.md')), /\bpdfs?\b/i);
+});
+
+test('proposal skill uses its bundled checker for CSV and host generation for PDF', () => {
+  const skill = path.join(root, 'labs', 'instructions-skills-authoring', 'assets', 'rfp-response');
+  const instructions = read(path.join(skill, 'SKILL.md')).replace(/\s+/g, ' ');
+  assert.match(instructions, /python scripts\/check_proposal\.py proposal\.md -o proposal-checks\.csv/);
+  assert.match(instructions, /Use the host's built-in PDF generation to render that same saved Markdown as a PDF/);
+  assert.match(instructions, /Attach the Markdown proposal, PDF proposal, and `proposal-checks\.csv`/);
+  assert.doesNotMatch(instructions, /\b(?:md_to_pdf\.py|playwright|chromium)\b/i);
+  assert.deepEqual(fs.readdirSync(path.join(skill, 'scripts')), ['check_proposal.py']);
 });
 
 test('skills lab distinguishes artifact verification from hidden execution', () => {

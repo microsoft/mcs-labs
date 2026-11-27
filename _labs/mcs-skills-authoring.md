@@ -78,7 +78,7 @@ Use Case #1 is the complete core lab: build an RFP Response agent with a sample 
 | **Skill description** | The text the orchestrator matches a user request against. It is the single most common reason a Skill does or does not fire |
 | **Skill generation and testing** | Give an authoring assistant a process and examples, review its generated Skill, then test it in the target agent. Generation is a starting point, not proof that the Skill works |
 | **Bundled references and scripts** | The `references/`, `assets/` and `scripts/` folders that travel with `SKILL.md`, so the Skill answers from vetted material and can run its own helpers rather than improvising |
-| **Agent sandbox** | The runtime where the agent can execute code, analyze supplied files, and generate artifacts such as charts; available libraries and tools must be observed rather than assumed |
+| **Agent sandbox** | Where the agent runs code, analyzes files, and creates outputs such as charts and PDFs. Check which tools and libraries are available. |
 | **Skill guidance versus validation** | A Skill guides model behavior but does not guarantee exact question ordering, field validation, or branching. Test the behavior and use deterministic validation when guarantees are required |
 
 ---
@@ -291,7 +291,7 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
     **New chat**, **History**, and **Debug mode** (on by default, which keeps the reasoning trace visible).
 
 1. Download the sample RFP:
-    [01-westbrook-permitting-portal.md](https://github.com/Dewain27/AgentDudeSamples/raw/refs/heads/main/samples/RFP%20Skill/test-rfps/01-westbrook-permitting-portal.md)
+    [01-westbrook-permitting-portal.md](../instructions-skills-authoring/assets/01-westbrook-permitting-portal.md?raw=true)
     - a City of Westbrook RFP for an online permitting and licensing portal.
 
     > [!NOTE]
@@ -319,19 +319,22 @@ These are planning timeboxes for a prepared tenant, not measured execution guara
     > [!TIP]
     > If the card doesn't appear, check the skill's description.
 
-1. Read the agent's summary to see what it proposes and what needs your input.
+1. Read the summary for the proposed approach and anything the agent needs from you.
 
-1. Open the Markdown proposal and `proposal-checks.csv` attached to the reply. If the CSV lists a
-    line number, find that line in the draft.
+1. Download and open the Markdown proposal, the PDF, and `proposal-checks.csv`. Check that the
+   proposed fee is the same in the PDF and the Markdown. If the CSV lists a line number, find
+   that line in the Markdown.
 
-    ![Preview reply listing the Markdown proposal and proposal-checks.csv, with download chips for both.](../instructions-skills-authoring/images/uc1-output-files.webp)
+   ![Preview reply listing the Markdown proposal, PDF proposal, and CSV checklist, with download cards for all three.](../instructions-skills-authoring/images/uc1-output-files.webp)
 
     > [!TIP]
-    > If the CSV is missing, ask the agent to run the bundled checker on the existing Markdown proposal and attach the CSV.
+    > **If the CSV is missing:** Ask the agent to run the bundled checker on the existing Markdown proposal and attach the CSV.
+    >
+    > **If the PDF is missing:** Ask the agent to make and attach a PDF from the Markdown it already created.
 
-1. Check one claim in the draft, such as a certification, against the approved references.
+1. Pick one claim in the Markdown, such as a certification, and check it against the approved references.
 
-    The CSV flags gaps to review. It does not verify claims.
+   The CSV points to gaps. It doesn't verify claims.
 
 #### Use the sandbox to chart the evaluation weights
 
