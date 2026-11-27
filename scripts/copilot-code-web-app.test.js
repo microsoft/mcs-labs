@@ -10,12 +10,14 @@ const page = matter(fs.readFileSync(labSourcePath(root, 'copilot-code-web-app'),
 const readme = fs.readFileSync(path.join(root, 'labs', 'copilot-code-web-app', 'README.md'), 'utf8');
 const mission = id => page.data.mission_lab.missions.find(item => item.id === id);
 
-test('Copilot Code uses the current bootcamp agenda in both editions', () => {
+test('Copilot Code prompts and learner links use the published agenda in both editions', () => {
+  const agenda = 'https://microsoft.github.io/mcs-labs/events/architecture-bootcamp/';
   const classic = matter(fs.readFileSync(labSourcePath(root, 'mcs-copilot-code'), 'utf8'));
   const classicReadme = fs.readFileSync(path.join(root, 'labs', 'mcs-copilot-code', 'README.md'), 'utf8');
   for (const copy of [JSON.stringify(page.data.mission_lab), page.content, readme, classic.content, classicReadme]) {
-    assert.ok(copy.includes('https://microsoft.github.io/mcs-labs/events/copilot-agents-bootcamp/'));
-    assert.doesNotMatch(copy, /\/events\/bootcamp-latest\//);
+    assert.ok(copy.includes(`Fetch the agenda at ${agenda}`));
+    assert.ok(copy.includes(`[published bootcamp agenda](${agenda})`));
+    assert.doesNotMatch(copy, /\/events\/(?:copilot-agents-bootcamp|bootcamp-latest)\//);
   }
 });
 
