@@ -115,7 +115,7 @@ test('guided labs use exercise terminology while preserving mission schema names
   assert.ok(count > 0, 'Discover guided labs from their existing schema');
   const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
   const script = fs.readFileSync(path.join(root, 'assets', 'js', 'lab-missions.js'), 'utf8');
-  for (const text of ['guided exercises', 'Lab exercises', 'Optional exercise', 'Mark exercise complete',
+  for (const text of ['guided exercises', 'Lab exercises', 'Homework (optional)', 'Mark exercise complete',
     'Skip optional exercises', 'core exercises complete']) assert.ok(template.includes(text), text);
   for (const text of ['Exercise complete — undo', 'Mark exercise complete', 'core exercises complete',
     'optional exercises complete']) assert.ok(script.includes(text), text);

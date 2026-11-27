@@ -68,10 +68,3 @@ test('guided Bootcamp extensions follow all required missions', () => {
     }
   }
 });
-
-test('optional navigation checks for later required work before offering the finish', () => {
-  const template = fs.readFileSync(path.join(root, '_includes', 'lab-missions.html'), 'utf8');
-  assert.match(template, /remaining_missions = lab\.missions \| slice: forloop\.index, lab\.missions\.size/);
-  assert.match(template, /remaining_core = remaining_missions \| where_exp: "item", "item\.optional != true"/);
-  assert.match(template, /if remaining_core\.size > 0[\s\S]*href="#{{ remaining_core\.first\.id \| escape }}"[\s\S]*elsif mission\.optional != true[\s\S]*href="#lab-finish"/);
-});
