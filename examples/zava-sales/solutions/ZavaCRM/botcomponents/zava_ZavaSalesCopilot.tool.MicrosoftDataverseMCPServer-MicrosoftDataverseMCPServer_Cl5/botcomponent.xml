@@ -1,0 +1,11 @@
+<botcomponent schemaname="zava_ZavaSalesCopilot.tool.MicrosoftDataverseMCPServer-MicrosoftDataverseMCPServer_Cl5">
+  <componenttype>9</componenttype>
+  <description>Provides Remote MCP Server access to Dataverse</description>
+  <iscustomizable>0</iscustomizable>
+  <name>Microsoft Dataverse MCP Server — Microsoft Dataverse MCP Server</name>
+  <parentbotid>
+    <schemaname>zava_ZavaSalesCopilot</schemaname>
+  </parentbotid>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+</botcomponent>

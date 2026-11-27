@@ -1,0 +1,8 @@
+<botcomponent_connectionreferenceset>
+  <botcomponent_connectionreference botcomponentid.schemaname="zava_ZavaSalesCopilot.tool.MicrosoftDataverseMCPServer-MicrosoftDataverseMCPServer_Cl5" connectionreferenceid.connectionreferencelogicalname="zava_ZavaSalesCopilot.cr.shared_commondataserviceforapps.d3cfe1a9-6098-42af-9db0-70559d2b88a8">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+  <botcomponent_connectionreference botcomponentid.schemaname="zava_ZavaSalesCopilot.tool.WorkIQ_vR8" connectionreferenceid.connectionreferencelogicalname="zava_ZavaSalesCopilot.cr.shared_workiqmcp">
+    <iscustomizable>1</iscustomizable>
+  </botcomponent_connectionreference>
+</botcomponent_connectionreferenceset>

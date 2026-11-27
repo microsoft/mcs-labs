@@ -1,0 +1,305 @@
+export const ENVIRONMENT_ID = '@@ENVIRONMENT_ID@@'
+export const TENANT_ID = '@@TENANT_ID@@'
+export const ORG = '@@DATAVERSE_ORIGIN@@'
+export const LEGACY_APP_URL = `${ORG}/main.aspx?appid=@@MODEL_APP_ID@@`
+export const CHOICE = 100000000
+export const choices = {
+  stage: ['Qualify', 'Develop', 'Propose', 'Close'],
+  status: ['New', 'Contacted', 'Nurturing', 'Qualified', 'Disqualified'],
+  rating: ['Hot', 'Warm', 'Cold'],
+  executive: ['Maya Chen', 'Ethan Brooks', 'Daniel Okafor', 'Sofia Marino', 'Lukas Weber', 'Priya Nair'],
+  source: ['Website', 'Trade show', 'Referral', 'Partner', 'Webinar', 'Outbound prospecting', 'Social media'],
+  product: ['Smart apparel (Pulse)', 'Smart footwear (Stride)', 'Compression & recovery (Flex)', 'Outerwear (Shield)', 'Custom team kits', 'Zava Insights platform'],
+  segment: ['Sporting goods retail', 'Fitness & gym chains', 'Teams & leagues', 'Universities & schools', 'Corporate wellness', 'Distributors & e-commerce'],
+  reason: ['No budget', 'No response', 'Bad timing', 'Chose a competitor', 'Not a fit'],
+  meeting: ['Discovery call', 'Product demo', 'Proposal review', 'Negotiation', 'Account review (QBR)', 'Onboarding'],
+}
+export type Row = Record<string, unknown>
+export type Page = 'today' | 'pipeline' | 'leads' | 'accounts' | 'activity'
+export type ActivityKind = 'task' | 'appointment' | 'note'
+export type RecordKind = 'lead' | 'deal' | 'account'
+export interface BaseRecord { id: string; name: string; etag: string }
+export interface Lead extends BaseRecord {
+  firstName: string; lastName: string; company: string; job: string; email: string; phone: string
+  topic: string; description: string; status: number | null; rating: number | null; score: number | null
+  value: number; baseValue: number; currencyId: string; source: number | null; product: number | null
+  segment: number | null; accountId: string; reason: number | null; closedOn: string; created: string
+}
+export interface Deal extends BaseRecord {
+  accountId: string; accountName: string; contactId: string; stage: number | null; executive: number | null
+  status: number | null; forecast: string; product: string; type: string
+  value: number; actualValue: number; probability: number; closeDate: string; lastActivity: string
+  stageEntered: string; pushes: number; nextStep: string; description: string; competitor: string
+}
+export interface Account extends BaseRecord {
+  segment: string; region: string; tier: string; executive: number | null
+  phone: string; website: string; description: string; number: string
+}
+export interface Contact extends BaseRecord {
+  accountId: string; role: string; job: string; email: string; phone: string
+}
+export interface Activity extends BaseRecord {
+  kind: ActivityKind; description: string; start: string; end: string; created: string
+  parentId: string; parentKind: 'lead' | 'deal' | null; parentName: string; state: number; status: number; meetingType: number | null
+}
+export interface Currency { id: string; code: string }
+export interface Identity { name: string; id: string; objectId: string; upn?: string }
+export interface SalesData {
+  accounts: Account[]; contacts: Contact[]; deals: Deal[]; leads: Lead[]; activities: Activity[]
+  currencies: Currency[]; issues: { resource: string; message: string }[]
+}
+export const emptyData: SalesData = { accounts: [], contacts: [], deals: [], leads: [], activities: [], currencies: [], issues: [] }
+export const isRecord = (x: unknown): x is Row => typeof x === 'object' && x !== null && !Array.isArray(x)
+export const text = (r: Row, key: string) => typeof r[key] === 'string' ? r[key] as string : ''
+export const num = (r: Row, key: string) => typeof r[key] === 'number' && Number.isFinite(r[key]) ? r[key] as number : null
+export const formatted = (r: Row, key: string) => text(r, `${key}@OData.Community.Display.V1.FormattedValue`)
+export const isGuid = (s: string) => /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(s)
+export const label = (options: string[], value: number | null, fallback = 'Not set') => value === null ? fallback : options[value - CHOICE] ?? fallback
+export const initials = (name: string) => name.trim().split(/\s+/).slice(0, 2).map(s => s[0]).join('').toUpperCase() || 'Z'
+export const money = (value: number, compact = true, currency = 'USD') => new Intl.NumberFormat('en-US', { style: 'currency', currency, maximumFractionDigits: compact ? 1 : 0, notation: compact ? 'compact' : 'standard' }).format(value)
+export function dateLabel(value: string, time = false) {
+  if (!value) return 'No date'
+  const date = time ? new Date(value) : new Date(`${value.slice(0, 10)}T12:00:00`)
+  return Number.isNaN(date.getTime()) ? 'No date' : date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', ...(time ? { hour: 'numeric', minute: '2-digit' } : { year: 'numeric' }) })
+}
+export const localInput = (iso: string) => {
+  const d = iso ? new Date(iso) : new Date()
+  return new Date(d.getTime() - d.getTimezoneOffset() * 60000).toISOString().slice(0, 16)
+}
+export const dateOnly = (d = new Date()) => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
+export const daysSince = (value: string, now = new Date()) => value ? Math.floor((now.getTime() - new Date(value).getTime()) / 86400000) : Infinity
+export const isPendingActivity = (a: Pick<Activity, 'kind' | 'state'>) =>
+  a.kind === 'task' ? a.state === 0 : a.kind === 'appointment' && (a.state === 0 || a.state === 3)
+export function attention(deal: Deal, now = new Date()) {
+  if (deal.status !== CHOICE) return []
+  const reasons: string[] = []
+  if (deal.closeDate && deal.closeDate.slice(0, 10) < dateOnly(now)) reasons.push('Close date passed')
+  if (deal.pushes > 0) reasons.push(`Close date pushed ${deal.pushes}×`)
+  if (daysSince(deal.lastActivity, now) >= 14) reasons.push(deal.lastActivity ? 'Quiet for 14+ days' : 'No activity recorded')
+  if (daysSince(deal.stageEntered, now) >= 30 && deal.stageEntered) reasons.push('30+ days in stage')
+  return reasons
+}
+export function pipelineMetrics(deals: Deal[]) {
+  const open = deals.filter(d => d.status === CHOICE)
+  return {
+    open,
+    total: open.reduce((sum, d) => sum + d.value, 0),
+    weighted: open.reduce((sum, d) => sum + weightedValue(d), 0),
+    won: deals.filter(d => d.status === CHOICE + 1).reduce((sum, d) => sum + d.actualValue, 0),
+  }
+}
+export const weightedValue = (deal: Pick<Deal, 'value' | 'probability'>) => deal.value * Math.min(100, Math.max(0, deal.probability)) / 100
+export function greeting(now = new Date()) {
+  const hour = now.getHours()
+  return hour < 12 ? 'Good morning' : hour < 18 ? 'Good afternoon' : 'Good evening'
+}
+export function hashString(value: string) {
+  let hash = 0x811c9dc5
+  for (let i = 0; i < value.length; i++) { hash ^= value.charCodeAt(i); hash = Math.imul(hash, 0x01000193) }
+  return hash >>> 0
+}
+export type LogoMotif = 'mountain' | 'wave' | 'tree' | 'star' | 'sun' | 'arrow' | 'shield' | 'hex' | 'monogram'
+const motifRules: [LogoMotif, RegExp][] = [
+  ['mountain', /peak|summit|crest|pinnacle|apex|ridge|alpine/],
+  ['wave', /coast|harbor|bluefin|lake|bay\b|marine|wave/],
+  ['tree', /wood|green|cedar|oak\b|pine|forest/],
+  ['star', /star|north|orion/],
+  ['sun', /horizon|bright|prairie|sun/],
+  ['arrow', /stride|run|velocity|momentum|trail|west|motion/],
+  ['shield', /field|league|team|school|universit|campus/],
+  ['hex', /fit|gym|training|network/],
+]
+export const logoMotif = (name: string): LogoMotif => motifRules.find(([, rule]) => rule.test(name.toLowerCase()))?.[0] ?? 'monogram'
+export function dealTitle(deal: Pick<Deal, 'name' | 'accountName'>) {
+  const code = /\(([A-Z]+(?:-[A-Z]+)*-\d+)\)\s*$/.exec(deal.name)?.[1] ?? ''
+  let title = code ? deal.name.slice(0, deal.name.lastIndexOf(`(${code})`)).trim() : deal.name.trim()
+  if (deal.accountName && title.endsWith(` - ${deal.accountName}`)) title = title.slice(0, -(deal.accountName.length + 3)).trim()
+  return { title: title || deal.name, code }
+}
+export function activityTitle(name: string, accountName = '') {
+  let title = name.replace(/\s*\([A-Z]+(?:-[A-Z]+)*-\d+\)\s*$/, '').trim()
+  const tail = / - ([^-]+)$/.exec(title)
+  if (tail && (/^opportunity \d+$/i.test(tail[1].trim()) || (!!accountName && tail[1].trim() === accountName))) title = title.slice(0, tail.index).trim()
+  return title || name
+}
+export type Dimension = 'stage' | 'forecast' | 'product' | 'type' | 'executive'
+export const dimensions: { id: Dimension; label: string; categories: string[] }[] = [
+  { id: 'stage', label: 'Stage', categories: choices.stage },
+  { id: 'forecast', label: 'Forecast', categories: ['Committed', 'Best case', 'Pipeline', 'Omitted'] },
+  { id: 'product', label: 'Product', categories: choices.product },
+  { id: 'type', label: 'Deal type', categories: ['New business', 'Expansion', 'Renewal'] },
+  { id: 'executive', label: 'Seller', categories: choices.executive },
+]
+export function dealCategory(deal: Deal, dimension: Dimension) {
+  if (dimension === 'stage') return label(choices.stage, deal.stage)
+  if (dimension === 'executive') return label(choices.executive, deal.executive)
+  return (dimension === 'product' ? deal.product : dimension === 'forecast' ? deal.forecast : deal.type) || 'Not set'
+}
+export interface OutlookBucket { key: string; label: string; year: number; total: number; segments: number[]; deals: Deal[] }
+export function monthlyOutlook(deals: Deal[], dimension: Dimension, { months = 12, now = new Date(), weighted = false } = {}) {
+  const known = dimensions.find(d => d.id === dimension)?.categories ?? []
+  const open = deals.filter(d => d.status === CHOICE && /^\d{4}-\d{2}-\d{2}/.test(d.closeDate))
+  const categories = open.some(d => !known.includes(dealCategory(d, dimension))) ? [...known, 'Not set'] : [...known]
+  const bucket = (key: string, name: string, year: number): OutlookBucket => ({ key, label: name, year, total: 0, segments: categories.map(() => 0), deals: [] })
+  const overdue = bucket('overdue', 'Overdue', now.getFullYear())
+  const calendar = Array.from({ length: months }, (_, i) => {
+    const month = new Date(now.getFullYear(), now.getMonth() + i, 1)
+    return bucket(dateOnly(month).slice(0, 7), month.toLocaleDateString('en-US', { month: 'short' }), month.getFullYear())
+  })
+  const later = bucket('later', 'Later', 0)
+  const today = dateOnly(now)
+  for (const deal of open) {
+    const date = deal.closeDate.slice(0, 10)
+    const target = date < today ? overdue : calendar.find(m => m.key === date.slice(0, 7)) ?? later
+    const amount = weighted ? weightedValue(deal) : deal.value
+    const index = categories.indexOf(dealCategory(deal, dimension))
+    target.segments[index] += amount
+    target.total += amount
+    target.deals.push(deal)
+  }
+  const buckets = [...(overdue.deals.length ? [overdue] : []), ...calendar, ...(later.deals.length ? [later] : [])]
+  for (const b of buckets) b.deals.sort((a, c) => c.value - a.value)
+  return { categories, buckets, max: Math.max(0, ...buckets.map(b => b.total)), total: buckets.reduce((s, b) => s + b.total, 0) }
+}
+export function niceScale(max: number, steps = 4) {
+  if (!(max > 0)) return { top: 1, ticks: [0, 1] }
+  const raw = max / steps
+  const magnitude = 10 ** Math.floor(Math.log10(raw))
+  const step = [1, 2, 2.5, 5, 10].map(m => m * magnitude).find(s => s >= raw) ?? 10 * magnitude
+  const top = Math.ceil(max / step) * step
+  return { top, ticks: Array.from({ length: Math.round(top / step) + 1 }, (_, i) => i * step) }
+}
+export interface TimelineItem {
+  key: string; kind: 'appointment' | 'task' | 'close'; title: string; when: string; late: boolean
+  parentKind: 'lead' | 'deal' | null; parentId: string; parentName: string; activity?: Activity; deal?: Deal
+}
+export interface TimelineWeek { start: string; label: string; range: string; items: TimelineItem[] }
+const shortDay = (d: Date, withMonth = true) => d.toLocaleDateString('en-US', withMonth ? { month: 'short', day: 'numeric' } : { day: 'numeric' })
+export function sellerTimeline(activities: Activity[], deals: Deal[], { now = new Date(), weeks = 4, dealIds }: { now?: Date; weeks?: number; dealIds?: Set<string> } = {}) {
+  const monday = new Date(now.getFullYear(), now.getMonth(), now.getDate() - (now.getDay() + 6) % 7)
+  const today = dateOnly(now)
+  const items: TimelineItem[] = [
+    ...activities.filter(a => a.kind !== 'note' && isPendingActivity(a) && (!dealIds || a.parentKind !== 'deal' || dealIds.has(a.parentId))).map(a => {
+      const when = a.kind === 'appointment' ? a.start : a.end
+      return { key: `${a.kind}:${a.id}`, kind: a.kind as 'appointment' | 'task', title: a.name, when, late: a.kind === 'task' && !!when && new Date(when) < now, parentKind: a.parentKind, parentId: a.parentId, parentName: a.parentName, activity: a }
+    }),
+    ...deals.filter(d => d.status === CHOICE && /^\d{4}-\d{2}-\d{2}/.test(d.closeDate)).map(d => ({ key: `close:${d.id}`, kind: 'close' as const, title: dealTitle(d).title, when: `${d.closeDate.slice(0, 10)}T12:00:00`, late: d.closeDate.slice(0, 10) < today, parentKind: 'deal' as const, parentId: d.id, parentName: d.accountName, deal: d })),
+  ].filter(i => i.when && !Number.isNaN(new Date(i.when).getTime())).sort((a, b) => new Date(a.when).getTime() - new Date(b.when).getTime())
+  const result: TimelineWeek[] = Array.from({ length: weeks }, (_, i) => {
+    const start = new Date(monday.getFullYear(), monday.getMonth(), monday.getDate() + i * 7)
+    const next = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 7)
+    const last = new Date(next.getFullYear(), next.getMonth(), next.getDate() - 1)
+    const range = `${shortDay(start)} – ${shortDay(last, start.getMonth() !== last.getMonth())}`
+    return { start: dateOnly(start), label: i === 0 ? 'This week' : i === 1 ? 'Next week' : range, range, items: items.filter(item => { const t = new Date(item.when); return t >= start && t < next }) }
+  })
+  const overdue = activities.filter(a => a.kind === 'task' && a.state === 0 && a.end && new Date(a.end) < monday).length
+  return { weeks: result, overdue }
+}
+function base(r: Row, idKey: string, nameKey: string): BaseRecord {
+  const id = text(r, idKey)
+  if (!isGuid(id)) throw new Error(`Dataverse returned an invalid ${idKey}.`)
+  return { id, name: text(r, nameKey) || 'Untitled', etag: text(r, '@odata.etag') }
+}
+export function parseLead(r: Row): Lead {
+  return { ...base(r, 'zava_leadid', 'zava_name'), firstName: text(r, 'zava_first_name'), lastName: text(r, 'zava_last_name'), company: text(r, 'zava_company_name'), job: text(r, 'zava_job_title'), email: text(r, 'zava_email'), phone: text(r, 'zava_business_phone'), topic: text(r, 'zava_topic'), description: text(r, 'zava_description'), status: num(r, 'zava_lead_status'), rating: num(r, 'zava_rating'), score: num(r, 'zava_lead_score'), value: num(r, 'zava_estimated_value') ?? 0, baseValue: num(r, 'zava_estimated_value_base') ?? 0, currencyId: text(r, '_transactioncurrencyid_value'), source: num(r, 'zava_lead_source'), product: num(r, 'zava_product_interest'), segment: num(r, 'zava_segment'), accountId: text(r, '_zava_accountid_value'), reason: num(r, 'zava_disqualify_reason'), closedOn: text(r, 'zava_closed_on'), created: text(r, 'createdon') }
+}
+export function parseDeal(r: Row): Deal {
+  return { ...base(r, 'zava_opportunityid', 'zava_name'), accountId: text(r, '_zava_account_value'), accountName: formatted(r, '_zava_account_value'), contactId: text(r, '_zava_primary_contact_value'), stage: num(r, 'zava_sales_stage'), executive: num(r, 'zava_account_executive'), status: num(r, 'zava_deal_status'), forecast: formatted(r, 'zava_forecast_category'), product: formatted(r, 'zava_product_line'), type: formatted(r, 'zava_deal_type'), value: num(r, 'zava_estimated_revenue_base') ?? 0, actualValue: num(r, 'zava_actual_revenue_base') ?? 0, probability: num(r, 'zava_probability') ?? 0, closeDate: text(r, 'zava_estimated_close_date'), lastActivity: text(r, 'zava_last_activity_on'), stageEntered: text(r, 'zava_stage_entered_on'), pushes: num(r, 'zava_close_date_pushes') ?? 0, nextStep: text(r, 'zava_next_step'), description: text(r, 'zava_description'), competitor: formatted(r, 'zava_primary_competitor') }
+}
+export function parseAccount(r: Row): Account {
+  return { ...base(r, 'accountid', 'name'), segment: formatted(r, 'account_segment'), region: formatted(r, 'account_sales_region'), tier: formatted(r, 'account_account_tier'), executive: num(r, 'account_account_executive'), phone: text(r, 'telephone1'), website: text(r, 'websiteurl'), description: text(r, 'description'), number: text(r, 'accountnumber') }
+}
+export function parseContact(r: Row): Contact {
+  return { ...base(r, 'contactid', 'fullname'), accountId: text(r, '_parentcustomerid_value'), role: formatted(r, 'contact_buying_role'), job: text(r, 'jobtitle'), email: text(r, 'emailaddress1'), phone: text(r, 'telephone1') }
+}
+export function parseActivity(r: Row, kind: ActivityKind): Activity {
+  const parentKey = kind === 'note' ? '_objectid_value' : '_regardingobjectid_value'
+  const parentType = text(r, `${parentKey}@Microsoft.Dynamics.CRM.lookuplogicalname`)
+  return { ...base(r, kind === 'note' ? 'annotationid' : 'activityid', 'subject'), kind, description: text(r, kind === 'note' ? 'notetext' : 'description'), start: text(r, 'scheduledstart'), end: text(r, 'scheduledend'), created: text(r, 'createdon'), parentId: text(r, parentKey), parentKind: parentType === 'zava_lead' ? 'lead' : parentType === 'zava_opportunity' ? 'deal' : null, parentName: formatted(r, parentKey), state: num(r, 'statecode') ?? 0, status: num(r, 'statuscode') ?? 0, meetingType: num(r, 'zava_meeting_type') }
+}
+export function nextToken(data: Row, sdkToken: string | undefined, entitySet: string) {
+  if (sdkToken) return sdkToken
+  const link = data['@odata.nextLink']
+  if (link === undefined) return undefined
+  if (typeof link !== 'string') throw new Error('Invalid Dataverse continuation.')
+  const url = new URL(link)
+  if (url.origin !== ORG || url.pathname !== `/api/data/v9.2/${entitySet}`) throw new Error('Unexpected Dataverse continuation target.')
+  const token = url.searchParams.get('$skiptoken')
+  if (!token) throw new Error('Missing Dataverse continuation token.')
+  return token
+}
+export function route(hash: string): { page: Page; id?: string } {
+  const [p, id] = hash.replace(/^#\/?/, '').split('/')
+  const pages: Page[] = ['today', 'pipeline', 'leads', 'accounts', 'activity']
+  const page = pages.find(x => x === p) ?? 'today'
+  return { page, id: id && isGuid(id) ? id : undefined }
+}
+export function safeWebsite(value: string) {
+  try { const u = new URL(value); return ['https:', 'http:'].includes(u.protocol) ? u.href : undefined } catch { return undefined }
+}
+export interface LeadDraft {
+  firstName: string; lastName: string; company: string; job: string; email: string; phone: string
+  topic: string; description: string; status: string; rating: string; score: string; value: string
+  source: string; product: string; segment: string; accountId: string; reason: string; currencyId: string
+}
+function selected(value: string, options: string[], required = false) {
+  if (!value && !required) return null
+  const number = Number(value)
+  if (!value || !Number.isInteger(number) || !options[number - CHOICE]) throw new Error('Choose a valid option.')
+  return number
+}
+export function leadPayload(d: LeadDraft, previous?: Lead, now = new Date()): Row {
+  if (!d.firstName.trim() || !d.lastName.trim() || !d.company.trim() || !d.topic.trim()) throw new Error('Add a first name, last name, company and conversation topic.')
+  if (d.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(d.email.trim())) throw new Error('Enter a valid email address.')
+  if (!isGuid(d.currencyId)) throw new Error('Choose a currency before saving.')
+  const value = Number(d.value)
+  const score = d.score === '' ? null : Number(d.score)
+  if (!Number.isFinite(value) || value < 0 || value > 100000000000) throw new Error('Estimated value must be between 0 and 100 billion.')
+  if (score !== null && (!Number.isInteger(score) || score < 0 || score > 100)) throw new Error('Lead score must be a whole number from 0 to 100.')
+  const status = selected(d.status, choices.status, true)
+  const disqualified = status === CHOICE + 4
+  const closed = status === CHOICE + 3 || disqualified
+  const fullName = `${d.firstName.trim()} ${d.lastName.trim()} - ${d.company.trim()}`
+  if (fullName.length > 100) throw new Error('Name and company together must be 100 characters or fewer.')
+  if (d.accountId && !isGuid(d.accountId)) throw new Error('Choose a valid account.')
+  return {
+    zava_name: fullName, zava_first_name: d.firstName.trim(), zava_last_name: d.lastName.trim(),
+    zava_company_name: d.company.trim(), zava_job_title: d.job.trim(), zava_email: d.email.trim(),
+    zava_business_phone: d.phone.trim(), zava_topic: d.topic.trim(), zava_description: d.description.trim(),
+    zava_estimated_value: value, zava_lead_score: score, zava_lead_status: status,
+    zava_rating: selected(d.rating, choices.rating), zava_lead_source: selected(d.source, choices.source),
+    zava_product_interest: selected(d.product, choices.product), zava_segment: selected(d.segment, choices.segment),
+    zava_disqualify_reason: disqualified ? selected(d.reason, choices.reason, true) : null,
+    zava_closed_on: closed ? (previous?.status === status && previous.closedOn ? previous.closedOn.slice(0, 10) : dateOnly(now)) : null,
+    'transactioncurrencyid@odata.bind': `/transactioncurrencies(${d.currencyId})`,
+    ...(d.accountId ? { 'zava_AccountId@odata.bind': `/accounts(${d.accountId})` } : previous?.accountId ? { zava_AccountId: null } : {}),
+  }
+}
+export interface ActivityDraft {
+  kind: ActivityKind; subject: string; description: string; start: string; end: string
+  parent: string; meetingType: string; completed: boolean
+}
+export function activityPayload(d: ActivityDraft, previous?: Activity): Row {
+  if (!d.subject.trim()) throw new Error('Give this activity a title.')
+  const [parentKind, parentId] = d.parent.split(':')
+  if (!['lead', 'deal'].includes(parentKind) || !isGuid(parentId)) throw new Error('Link this to a lead or opportunity.')
+  const entity = parentKind === 'lead' ? 'zava_lead' : 'zava_opportunity'
+  const entitySet = parentKind === 'lead' ? 'zava_leads' : 'zava_opportunities'
+  const binding = d.kind === 'note' ? `objectid_${entity}@odata.bind` : `regardingobjectid_${entity}_${d.kind}@odata.bind`
+  const item: Row = { subject: d.subject.trim(), [binding]: `/${entitySet}(${parentId})` }
+  if (d.kind === 'note') return { ...item, notetext: d.description.trim() }
+  const end = new Date(d.end)
+  if (!d.end || Number.isNaN(end.getTime())) throw new Error('Choose a valid due date.')
+  item.description = d.description.trim()
+  item.scheduledend = end.toISOString()
+  if (d.kind === 'appointment') {
+    const start = new Date(d.start)
+    if (!d.start || Number.isNaN(start.getTime()) || start >= end) throw new Error('The meeting must end after it starts.')
+    item.scheduledstart = start.toISOString()
+    item.zava_meeting_type = selected(d.meetingType, choices.meeting)
+  }
+  const unchangedState = previous && (previous.state === 1) === d.completed
+  item.statecode = unchangedState ? previous.state : d.completed ? 1 : d.kind === 'appointment' ? 3 : 0
+  item.statuscode = unchangedState ? previous.status : d.kind === 'task' ? (d.completed ? 5 : 2) : (d.completed ? 3 : 5)
+  return item
+}

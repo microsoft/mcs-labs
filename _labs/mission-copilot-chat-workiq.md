@@ -113,7 +113,7 @@ mission_lab:
             Flag anything you could not source. Do not present an estimate as a fact.
         - title: "Compare the two answers"
           instruction: "Scroll to the first response. Select **Reasoned for**, when shown, to inspect the displayed reasoning details. Compare references, retrieved versus calculated numbers, named uncertainties and whether the conclusion argues against itself."
-          notice: "The prompt changed as well as the response mode, so this is not a controlled model benchmark. Auto can also reason deeply on a complex question; leave Auto selected when unsure. Compare voice, structure and evidence, not just fluency."
+          notice: "Compare the answers' sources, calculations and conclusions. The prompt and response mode both changed, so this isn't a controlled model benchmark. Auto can also reason deeply on a complex question."
         - title: "Inspect response modes and change the model"
           instruction: "Open the selector beside **Work IQ**. Notice **Auto**, **Quick response** and **Think deeper**. Below them, point to **Claude** and choose an available model, such as **Sonnet 5.5**, or inspect **GPT**."
           help: "Auto decides how long to think; Quick response favors speed for recall, rewriting and short lookups; Think deeper spends longer on multi-step reasoning. When unsure, use Auto. Model names and availability depend on tenant and admin settings. If you switch models, ask a fresh question rather than relying on earlier web results, which the new model might not recognize."
@@ -586,7 +586,7 @@ Flag anything you could not source. Do not present an estimate as a fact.
 
 3. Scroll to the first response. Select **Reasoned for**, when shown, to inspect the displayed reasoning details. Compare references, retrieved versus calculated numbers, named uncertainties and whether the conclusion argues against itself.
 
-The prompt changed as well as the response mode, so this is not a controlled model benchmark. Auto can also reason deeply on a complex question; leave Auto selected when unsure. Compare voice, structure and evidence, not just fluency.
+Compare the answers' sources, calculations and conclusions. The prompt and response mode both changed, so this isn't a controlled model benchmark. Auto can also reason deeply on a complex question.
 
 4. Open the selector beside **Work IQ**. Notice **Auto**, **Quick response** and **Think deeper**. Below them, point to **Claude** and choose an available model, such as **Sonnet 5.5**, or inspect **GPT**.
 

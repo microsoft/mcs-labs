@@ -1,0 +1,5 @@
+kind: McpTool
+authMode: Invoker
+connectionReference: zava_ZavaSalesCopilot.cr.shared_workiqmcp
+connectorId: /providers/Microsoft.PowerApps/apis/shared_workiqmcp
+operationId: InvokeWorkIQMCP

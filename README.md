@@ -99,6 +99,10 @@ redirected; see the [compatibility notes](./_data/agendas/README.md#legacy-event
 
 ## 📚 Documentation & Contributing
 
+### Zava Sales source
+
+The [Zava Sales example](./examples/zava-sales/) contains the editable Managed Runtime app, companion chat, Microsoft 365 declarative agent and Dataverse solution. Deployment settings and built packages stay local.
+
 ### Workshop preparation
 
 Administrator skills for solution rollout, Copilot Credit allocation and

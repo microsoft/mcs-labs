@@ -1,0 +1,23 @@
+.local/
+.env
+.env.*
+*.zip
+node_modules/
+dist/
+__pycache__/
+
+# Never stage an SDK export or a rendered sibling of a tracked template.
+/zava-sales/.ms/
+/zava-sales/ms.config.json
+/zava-sales/src/domain.ts
+/zava-sales/src/paneProtocol.ts
+/zava-sales/tests/copilot-pane.test.mjs
+/zava-copilot-pane/**/staticwebapp.config.json
+/zava-copilot-pane/chat/src/config.ts
+/zava-copilot-pane/**/tests/config.test.mjs
+/zava-copilot-pane/chat/tests/logic.test.mjs
+/zava-app-mcp/appPackage/*.json
+/solutions/ZavaCRM/AppModules/zava_ZavaSalesHub/AppModule.xml
+/solutions/ZavaCRM/bots/zava_ZavaSalesCopilot/configuration.json
+/solutions/ZavaCRM/dvtablesearchs/9e409c10-edd7-f111-a05b-70a8a59cece6/dvtablesearch.xml
+/solutions/ZavaCRM/mcpservers/msdyn_zava_ZavaSalesHub_MCPServer/mcpserver.xml

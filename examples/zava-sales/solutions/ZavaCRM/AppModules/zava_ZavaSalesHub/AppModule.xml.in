@@ -1,0 +1,91 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppModule>
+  <UniqueName>zava_ZavaSalesHub</UniqueName>
+  <IntroducedVersion>1.0.0.0</IntroducedVersion>
+  <WebResourceId>7cc919fa-8aae-5521-91f9-98c7e69ca3bc</WebResourceId>
+  <OptimizedFor></OptimizedFor>
+  <statecode>0</statecode>
+  <statuscode>1</statuscode>
+  <FormFactor>1</FormFactor>
+  <ClientType>4</ClientType>
+  <NavigationType>0</NavigationType>
+  <AppModuleComponents>
+    <AppModuleComponent type="1" schemaName="account" />
+    <AppModuleComponent type="1" schemaName="activitypointer" />
+    <AppModuleComponent type="1" schemaName="appointment" />
+    <AppModuleComponent type="1" schemaName="contact" />
+    <AppModuleComponent type="1" schemaName="task" />
+    <AppModuleComponent type="1" schemaName="zava_lead" />
+    <AppModuleComponent type="1" schemaName="zava_opportunity" />
+    <AppModuleComponent type="26" id="{00000000-0000-0000-00aa-000010001001}" />
+    <AppModuleComponent type="26" id="{00000000-0000-0000-00aa-000010001002}" />
+    <AppModuleComponent type="26" id="{00000000-0000-0000-00aa-000010001003}" />
+    <AppModuleComponent type="26" id="{00000000-0000-0000-00aa-000010001004}" />
+    <AppModuleComponent type="26" id="{5e3a8ff0-93cb-5dc4-8750-2ca361fb733a}" />
+    <AppModuleComponent type="26" id="{c73107b5-ad4a-5307-afd3-33fb0cf3fe2f}" />
+    <AppModuleComponent type="26" id="{8ad50cc9-a241-4c4f-8c73-5a55f40fe7b3}" />
+    <AppModuleComponent type="26" id="{74af4880-3406-538e-8efa-61a004b13b09}" />
+    <AppModuleComponent type="26" id="{c82827df-82d6-5c4e-85b4-675ac984c368}" />
+    <AppModuleComponent type="26" id="{58b9b10d-0717-597a-b3a3-6f15b0b30b10}" />
+    <AppModuleComponent type="26" id="{de670e12-c6b2-5f5a-8394-7a9aebcb14a7}" />
+    <AppModuleComponent type="26" id="{a060d465-f737-5829-a95b-840b81fd12d1}" />
+    <AppModuleComponent type="26" id="{39d2190a-7de7-55c8-a1f0-9a64d22d099e}" />
+    <AppModuleComponent type="26" id="{4f738364-650d-5897-8634-b3db223cc840}" />
+    <AppModuleComponent type="26" id="{85d0e645-6d84-4aad-946c-baaf1ae21859}" />
+    <AppModuleComponent type="26" id="{eef5b833-f629-5a3c-b41d-cf0671a6bc8d}" />
+    <AppModuleComponent type="26" id="{ccfdc2a3-2677-59b3-814d-d41cab9e4d3f}" />
+    <AppModuleComponent type="26" id="{67b6499a-87e7-5eaa-acff-e15c07945f4b}" />
+    <AppModuleComponent type="59" id="{edbfc14a-bc6c-5322-b31b-0138be32ea74}" />
+    <AppModuleComponent type="59" id="{7bf31ac9-c817-5520-a3c7-0795d1e93371}" />
+    <AppModuleComponent type="59" id="{24f37120-2c66-5faa-9667-0e8566d0ac8e}" />
+    <AppModuleComponent type="59" id="{99fd46fa-68c8-53fb-9b68-286a8f901f96}" />
+    <AppModuleComponent type="59" id="{bc6a02d9-e4f7-50ce-993f-5b2840afaf86}" />
+    <AppModuleComponent type="59" id="{b1c0ec7b-0d7e-5f30-b931-7139f9211d54}" />
+    <AppModuleComponent type="59" id="{abaf0573-683d-523c-b808-71f7e2867c9c}" />
+    <AppModuleComponent type="59" id="{77fb2351-1dd5-5951-ab61-b45e7253d6f9}" />
+    <AppModuleComponent type="59" id="{3fc13566-ac75-5767-949a-dc686305455f}" />
+    <AppModuleComponent type="59" id="{fc8131a9-d9e1-55fe-b073-e5257f998384}" />
+    <AppModuleComponent type="60" id="{69cff312-cfb6-4289-9631-249ab85d2c62}" />
+    <AppModuleComponent type="60" id="{d880c3cf-80e2-42f3-82f9-24d040d09f17}" />
+    <AppModuleComponent type="60" id="{cccff382-2b92-467e-bf1b-3db179512af8}" />
+    <AppModuleComponent type="60" id="{449faa0e-f471-48ec-87d0-4719909546d2}" />
+    <AppModuleComponent type="60" id="{430b4794-15c4-4071-a55a-5a743a71e27a}" />
+    <AppModuleComponent type="60" id="{661157fe-2fc9-4eaa-835f-5bfa2f7b64f7}" />
+    <AppModuleComponent type="60" id="{f3b707fb-3b5f-45f9-9c6b-5e573bb5d19e}" />
+    <AppModuleComponent type="60" id="{776cda18-6eb4-4dc5-a791-6353414908e8}" />
+    <AppModuleComponent type="60" id="{964a8714-b70d-486f-a98f-6a8f1412d353}" />
+    <AppModuleComponent type="60" id="{dd7925c0-9a6f-4dbd-b728-6c84b1e38dcf}" />
+    <AppModuleComponent type="60" id="{d3bdba0b-d480-59f0-8ab5-7ad12c0ef2c6}" />
+    <AppModuleComponent type="60" id="{098ae145-1567-41ec-8398-86dbaac70c9b}" />
+    <AppModuleComponent type="60" id="{54b4dca5-9dea-48f9-b92d-8cdd4be851f2}" />
+    <AppModuleComponent type="60" id="{bdb0ae1c-32fa-4374-b637-8dafe107bc44}" />
+    <AppModuleComponent type="60" id="{a1558a96-5f58-432e-bd39-95cfaf3c7bde}" />
+    <AppModuleComponent type="60" id="{29de27bc-a257-4f29-99cf-bab4a84e688f}" />
+    <AppModuleComponent type="60" id="{bc0f68dd-a4b1-4a8f-bed3-c8f5db2f89cf}" />
+    <AppModuleComponent type="60" id="{b028db32-3619-48a5-ac51-cf3f947b0ef3}" />
+    <AppModuleComponent type="60" id="{707fc57b-c5e6-471b-a180-e37ed28a38e2}" />
+    <AppModuleComponent type="60" id="{8fc2ba92-4b58-57e3-b918-e98a741d8b8b}" />
+    <AppModuleComponent type="60" id="{c9e7ec2d-efca-4e4c-b3e3-f63c4bba5e4b}" />
+    <AppModuleComponent type="60" id="{0de5280a-33b0-5f15-83e2-ffd2b9e31840}" />
+    <AppModuleComponent type="62" schemaName="zava_ZavaSalesHub" />
+  </AppModuleComponents>
+  <AppModuleRoleMaps>
+    @@APP_ROLE_MAP@@
+  </AppModuleRoleMaps>
+  <LocalizedNames>
+    <LocalizedName description="Zava Sales Hub" languagecode="1033" />
+  </LocalizedNames>
+  <Descriptions>
+    <Description description="Zava's sales hub: accounts, contacts, leads, pipeline and forecast." languagecode="1033" />
+  </Descriptions>
+  <appsettings>
+    <appsetting settingdefinitionid.uniquename="AppChannel">
+      <iscustomizable>1</iscustomizable>
+      <value>1</value>
+    </appsetting>
+    <appsetting settingdefinitionid.uniquename="CustomThemeDefinition">
+      <iscustomizable>1</iscustomizable>
+      <value>zava_/theme/theme.xml</value>
+    </appsetting>
+  </appsettings>
+</AppModule>

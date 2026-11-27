@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<savedqueries xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <savedquery>
+    <IsCustomizable>1</IsCustomizable>
+    <CanBeDeleted>1</CanBeDeleted>
+    <isquickfindquery>0</isquickfindquery>
+    <isprivate>0</isprivate>
+    <isdefault>1</isdefault>
+    <savedqueryid>{74af4880-3406-538e-8efa-61a004b13b09}</savedqueryid>
+    <layoutxml>
+      <grid name="resultset" jump="name" select="1" icon="1" preview="1">
+        <row name="result" id="accountid">
+          <cell name="name" width="200" />
+          <cell name="account_segment" width="170" />
+          <cell name="account_account_tier" width="90" />
+          <cell name="account_sales_region" width="110" />
+          <cell name="account_account_executive" width="140" />
+          <cell name="telephone1" width="130" />
+          <cell name="websiteurl" width="200" />
+        </row>
+      </grid>
+    </layoutxml>
+    <querytype>0</querytype>
+    <fetchxml>
+      <fetch version="1.0" output-format="xml-platform" mapping="logical" distinct="false">
+        <entity name="account">
+          <attribute name="accountid" />
+          <attribute name="name" />
+          <attribute name="account_segment" />
+          <attribute name="account_account_tier" />
+          <attribute name="account_sales_region" />
+          <attribute name="account_account_executive" />
+          <attribute name="telephone1" />
+          <attribute name="websiteurl" />
+          <order attribute="name" descending="false" />
+          <filter type="and">
+            <condition attribute="statecode" operator="eq" value="0" />
+          </filter>
+        </entity>
+      </fetch>
+    </fetchxml>
+    <IntroducedVersion>1.0.0.0</IntroducedVersion>
+    <LocalizedNames>
+      <LocalizedName description="Zava accounts" languagecode="1033" />
+    </LocalizedNames>
+    <Descriptions>
+      <Description description="Active accounts with segment, tier and executive." languagecode="1033" />
+    </Descriptions>
+  </savedquery>
+</savedqueries>

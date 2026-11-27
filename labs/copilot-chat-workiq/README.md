@@ -123,7 +123,7 @@ Flag anything you could not source. Do not present an estimate as a fact.
 
 3. Scroll to the first response. Select **Reasoned for**, when shown, to inspect the displayed reasoning details. Compare references, retrieved versus calculated numbers, named uncertainties and whether the conclusion argues against itself.
 
-The prompt changed as well as the response mode, so this is not a controlled model benchmark. Auto can also reason deeply on a complex question; leave Auto selected when unsure. Compare voice, structure and evidence, not just fluency.
+Compare the answers' sources, calculations and conclusions. The prompt and response mode both changed, so this isn't a controlled model benchmark. Auto can also reason deeply on a complex question.
 
 4. Open the selector beside **Work IQ**. Notice **Auto**, **Quick response** and **Think deeper**. Below them, point to **Claude** and choose an available model, such as **Sonnet 5.5**, or inspect **GPT**.
 

@@ -1,0 +1,27 @@
+{
+  "$schema": "https://raw.githubusercontent.com/microsoft/Managed-Apps/main/schemas/ms.config.schema.json",
+  "version": "0.0",
+  "appId": "@@RUNTIME_APP_ID@@",
+  "appDisplayName": "Zava Sales Hub",
+  "environmentId": "@@ENVIRONMENT_ID@@",
+  "repoType": "none",
+  "cloud": "public",
+  "buildPath": "./dist",
+  "buildCommand": "npm run build",
+  "buildEntryPoint": "index.html",
+  "iconPath": "branding/app-icon.png",
+  "appSettings": {
+    "showHeader": false
+  },
+  "connectionReferences": {
+    "@@CONNECTION_REFERENCE_ID@@": {
+      "id": "/providers/Microsoft.PowerApps/apis/shared_commondataserviceforapps",
+      "displayName": "Microsoft Dataverse",
+      "dataSources": [
+        "commondataserviceforapps"
+      ],
+      "authenticationType": "Oauth",
+      "dataSets": {}
+    }
+  }
+}

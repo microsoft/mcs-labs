@@ -140,6 +140,7 @@ include:
 exclude:
   - .github/
   - .feed-build/
+  - examples/zava-sales/
   - README.md
   - LICENSE
   - SECURITY.md
